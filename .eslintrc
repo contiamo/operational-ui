@@ -1,0 +1,8 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": ["jest", "flowtype"],
+  "env": {
+    "jest/globals": true
+  }
+}
