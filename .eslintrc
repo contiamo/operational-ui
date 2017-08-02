@@ -4,5 +4,8 @@
   "plugins": ["jest", "flowtype"],
   "env": {
     "jest/globals": true
+  },
+  "globals": {
+    "HTMLElement": true,
   }
 }

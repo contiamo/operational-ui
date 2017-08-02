@@ -13,5 +13,6 @@ module.exports = webpackMerge(config, {
   devServer: {
     contentBase: './dist',
     hot: true,
+    historyApiFallback: true,
   },
 });
