@@ -1,6 +1,9 @@
 import React from 'react';
 import glamorous from 'glamorous';
 
+import NavigationHeader from './Header/NavigationHeader';
+import NavigationSection from './Section/NavigationSection';
+
 import NAVIGATION_STYLE from './Navigation.style';
 
 type MenuItem = {
@@ -15,14 +18,14 @@ type props = {
 
 const Navigation = ({ className, menuItems }: props) =>
   (<div className={className}>
-    <header>Contiamo</header>
-    <ul>
+    <NavigationHeader />
+    <div>
       {menuItems.map(item =>
-        (<li key={item.key}>
+        (<NavigationSection key={item.key}>
           {item.label}
-        </li>),
+        </NavigationSection>),
       )}
-    </ul>
+    </div>
   </div>);
 
 export default glamorous(Navigation)(NAVIGATION_STYLE);

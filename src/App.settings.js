@@ -29,10 +29,10 @@ export const APP_GREYS: {} = {
 
 export const APP_FONTS: {} = {
   main: 'Montserrat',
-  defaultSize: '13px',
+  defaultSize: 13,
 };
 
-export const APP_SPACING: string = '16px';
+export const APP_SPACING: number = 16;
 
 type MenuItem = {
   key: number,
@@ -44,16 +44,16 @@ export const MENU: Array<MenuItem> = [
   {
     key: 0,
     route: '/header',
-    label: 'Header',
+    label: 'Data Entry',
   },
   {
     key: 1,
     route: '/header',
-    label: 'Header',
+    label: 'Feedback',
   },
   {
     key: 2,
     route: '/header',
-    label: 'Header',
+    label: 'Cards',
   },
 ];

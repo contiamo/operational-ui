@@ -1,9 +1,8 @@
-import { APP_COLORS, APP_GREYS, APP_SPACING } from '../App.settings';
+import { APP_GREYS } from '../App.settings';
 
 export default {
-  width: '250px',
+  width: 250,
   height: '100vh',
-  padding: APP_SPACING,
-  backgroundColor: APP_COLORS.primary,
+  backgroundColor: APP_GREYS[20],
   color: APP_GREYS.white,
 };

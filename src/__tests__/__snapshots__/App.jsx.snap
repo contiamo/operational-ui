@@ -2,25 +2,33 @@
 
 exports[`App starts 1`] = `
 <div
-  className="css-dx97x4"
+  className="css-ecv88s"
 >
   <div
-    className="css-1k1i11x"
+    className="css-vtsme6"
   >
-    <header>
+    <div
+      className="css-1t01u4m"
+    >
       Contiamo
-    </header>
-    <ul>
-      <li>
-        Header
-      </li>
-      <li>
-        Header
-      </li>
-      <li>
-        Header
-      </li>
-    </ul>
+    </div>
+    <div>
+      <div
+        className="css-ny1sk"
+      >
+        Data Entry
+      </div>
+      <div
+        className="css-ny1sk"
+      >
+        Feedback
+      </div>
+      <div
+        className="css-ny1sk"
+      >
+        Cards
+      </div>
+    </div>
   </div>
   <div
     className="css-nil"
