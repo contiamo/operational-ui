@@ -1,24 +1,26 @@
 // @flow
 import React from 'react';
-import glamorous from 'glamorous';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import glamorous, { ThemeProvider } from 'glamorous';
 
-import { APP_COLORS, APP_GREYS, APP_FONTS, MENU } from './App.settings';
 import Navigation from './Navigation/Navigation';
 import Canvas from './Canvas/Canvas';
+import DEFAULT_THEME from './App.theme';
 
 const App = ({ className, match }: { className: string }) =>
   (<Router>
-    <div className={className}>
-      <Navigation menuItems={MENU} />
-      <Canvas>//Put Routes in Here</Canvas>
-    </div>
+    <ThemeProvider theme={DEFAULT_THEME}>
+      <div className={className}>
+        <Navigation />
+        <Canvas>//Put Routes in Here</Canvas>
+      </div>
+    </ThemeProvider>
   </Router>);
 
-const styles = {
-  fontFamily: APP_FONTS.main,
-  fontSize: APP_FONTS.defaultSize,
+const styles: {} = {
   display: 'flex',
+  fontSize: DEFAULT_THEME.fonts.defaultSize,
+  fontFamily: DEFAULT_THEME.fonts.main,
 };
 
 export default glamorous(App)(styles);

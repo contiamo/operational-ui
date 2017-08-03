@@ -2,10 +2,10 @@
 
 exports[`App starts 1`] = `
 <div
-  className="css-ecv88s"
+  className="css-wh8quo"
 >
   <div
-    className="css-vtsme6"
+    className="css-1kh6hce"
   >
     <div
       className="css-1t01u4m"
@@ -14,19 +14,70 @@ exports[`App starts 1`] = `
     </div>
     <div>
       <div
-        className="css-ny1sk"
+        className="css-1g911ti"
+        onClick={[Function]}
       >
-        Data Entry
+        <div
+          className="css-nil"
+        >
+          Data Entry
+        </div>
+        
       </div>
       <div
-        className="css-ny1sk"
+        className="css-1g911ti"
+        onClick={[Function]}
       >
-        Feedback
+        <div
+          className="css-nil"
+        >
+          Feedback
+        </div>
+        
       </div>
       <div
-        className="css-ny1sk"
+        className="css-1g911ti"
+        onClick={[Function]}
       >
-        Cards
+        <div
+          className="css-nil"
+        >
+          Cards
+        </div>
+        
+      </div>
+      <div
+        className="css-1g911ti"
+        onClick={[Function]}
+      >
+        <div
+          className="css-nil"
+        >
+          Navigation
+        </div>
+        
+      </div>
+      <div
+        className="css-1g911ti"
+        onClick={[Function]}
+      >
+        <div
+          className="css-nil"
+        >
+          Resources
+        </div>
+        
+      </div>
+      <div
+        className="css-1g911ti"
+        onClick={[Function]}
+      >
+        <div
+          className="css-nil"
+        >
+          Icons
+        </div>
+        
       </div>
     </div>
   </div>

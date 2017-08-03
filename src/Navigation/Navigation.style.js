@@ -1,8 +1,8 @@
-import { APP_GREYS } from '../App.settings';
-
-export default {
+// @flow
+export default (props: void, theme: THEME): {} => ({
   width: 250,
   height: '100vh',
-  backgroundColor: APP_GREYS[20],
-  color: APP_GREYS.white,
-};
+  overflow: 'auto',
+  backgroundColor: theme.greys[20],
+  color: theme.greys.white,
+});

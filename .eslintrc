@@ -7,5 +7,7 @@
   },
   "globals": {
     "HTMLElement": true,
+    "React$Element": true,
+    "THEME": true,
   }
 }

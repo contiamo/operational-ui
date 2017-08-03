@@ -1,12 +1,60 @@
-import React from 'react';
-import glamorous from 'glamorous';
+// @flow
+import React, { Component } from 'react';
+import glamorous, { Div } from 'glamorous';
 
-import { APP_SPACING, APP_COLORS, APP_GREYS } from '../../App.settings';
 import style from './NavigationSection.style';
 
-const NavigationSection = ({ className, children }: { className: string, children: string }) =>
-  (<div className={className}>
-    {children}
-  </div>);
+class NavigationSection extends Component {
+  state: {
+    open: boolean,
+  };
+
+  props: {
+    label: string,
+    className: string,
+    children?: string,
+  };
+
+  static defaultProps = {
+    section: {},
+    className: 'navigation-section',
+  };
+
+  constructor(props): void {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
+
+  toggleSection() {
+    this.setState(prevState => ({
+      open: !prevState.open,
+    }));
+  }
+
+  render() {
+    return (
+      <Div
+        css={
+          this.state.open
+            ? (props, theme) => ({
+              color: 'white',
+              ':hover': { ...theme.gradients.secondaryToTertiary },
+              ...theme.gradients.secondaryToTertiary,
+            })
+            : {}
+        }
+        onClick={() => this.toggleSection()}
+        className={this.props.className}
+      >
+        <Div css={this.state.open ? (props, theme) => ({ marginBottom: theme.spacing }) : {}}>
+          {this.props.label}
+        </Div>
+        {this.state.open ? this.props.children : ''}
+      </Div>
+    );
+  }
+}
 
 export default glamorous(NavigationSection)(style);

@@ -1,31 +1,28 @@
+// @flow
 import React from 'react';
 import glamorous from 'glamorous';
 
 import NavigationHeader from './Header/NavigationHeader';
 import NavigationSection from './Section/NavigationSection';
+import NavigationLink from './Link/NavigationLink';
 
-import NAVIGATION_STYLE from './Navigation.style';
+import style from './Navigation.style';
+import MENU from './Navigation.menu';
 
-type MenuItem = {
-  route: string,
-  label: string,
-};
-
-type props = {
-  className: string,
-  menuItems: Array<MenuItem>,
-};
-
-const Navigation = ({ className, menuItems }: props) =>
+const Navigation = ({ className }: { className: string }): React$Element<*> =>
   (<div className={className}>
     <NavigationHeader />
     <div>
-      {menuItems.map(item =>
-        (<NavigationSection key={item.key}>
-          {item.label}
+      {MENU.map(section =>
+        (<NavigationSection key={section.key} label={section.label}>
+          {section.items.map(item =>
+            (<NavigationLink key={item.key} to={item.route}>
+              {item.label}
+            </NavigationLink>),
+          )}
         </NavigationSection>),
       )}
     </div>
   </div>);
 
-export default glamorous(Navigation)(NAVIGATION_STYLE);
+export default glamorous(Navigation)(style);
