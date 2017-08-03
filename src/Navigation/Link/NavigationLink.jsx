@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import glamorous, { Div } from 'glamorous';
+import glamorous from 'glamorous';
 import { Link } from 'react-router-dom';
 
 // First style the link component that we'll use in the menu item.
@@ -23,11 +23,11 @@ const NavigationLink = ({
   to: string,
   children: string,
 }) =>
-  (<Div>
+  (<div>
     <StyledLink className={className} to={to}>
       &rsaquo; {children}
     </StyledLink>
-  </Div>);
+  </div>);
 
 const navigationLinkStyle = (props: {}, theme: THEME) => ({
   display: 'block',
