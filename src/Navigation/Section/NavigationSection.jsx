@@ -27,13 +27,13 @@ class NavigationSection extends Component {
     };
   }
 
-  toggleSection() {
+  toggleSection(): void {
     this.setState(prevState => ({
       open: !prevState.open,
     }));
   }
 
-  render() {
+  render(): React$Element<*> {
     return (
       <Div
         css={

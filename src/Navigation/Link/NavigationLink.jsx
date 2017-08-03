@@ -23,7 +23,7 @@ const NavigationLink = ({
   to: string,
   children: string,
 }) =>
-  (<div>
+  (<div onClick={e => e.stopPropagation()}>
     <StyledLink className={className} to={to}>
       &rsaquo; {children}
     </StyledLink>
