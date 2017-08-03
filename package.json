@@ -31,6 +31,7 @@
     "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
+    "file-loader": "^0.11.2",
     "flow-bin": "^0.52.0",
     "glamor": "^2.20.38",
     "html-webpack-plugin": "^2.30.1",
@@ -48,8 +49,14 @@
     "glamorous": "^3.25.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-feather": "^1.0.6",
     "react-intl": "^2.3.0",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
+    }
   }
 }

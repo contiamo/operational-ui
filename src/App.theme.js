@@ -37,7 +37,7 @@ if (THEME_COLORS.accent) {
     ...DEFAULT_THEME.gradients,
     primaryToAccent: {
       backgroundImage: `linear-gradient(135deg, ${THEME_COLORS.primary} 0%, ${THEME_COLORS.accent} 100%)`,
-    }
+    },
   };
 }
 
@@ -46,7 +46,7 @@ if (THEME_COLORS.accent && THEME_COLORS.secondary) {
     ...DEFAULT_THEME.gradients,
     accentToSecondary: {
       backgroundImage: `linear-gradient(135deg, ${THEME_COLORS.accent} 0%, ${THEME_COLORS.secondary} 100%)`,
-    }
+    },
   };
 }
 
@@ -55,7 +55,7 @@ if (THEME_COLORS.secondary && THEME_COLORS.tertiary) {
     ...DEFAULT_THEME.gradients,
     secondaryToTertiary: {
       backgroundImage: `linear-gradient(135deg, ${THEME_COLORS.secondary} 0%, ${THEME_COLORS.tertiary} 100%)`,
-    }
+    },
   };
 }
 
