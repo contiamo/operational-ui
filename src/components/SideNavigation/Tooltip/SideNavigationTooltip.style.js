@@ -1,5 +1,5 @@
 // @flow
-export default (props: { position?: string }, theme: THEME): {} => {
+export default (props: { theme: THEME, position?: string }): {} => {
   const tooltipCaretSize = 10;
   const tooltipPosition = {};
   const tooltipCaretPosition = {};
@@ -9,7 +9,7 @@ export default (props: { position?: string }, theme: THEME): {} => {
     case 'bottom':
       tooltipPosition.bottom = 0;
 
-      tooltipCaretPosition.bottom = theme.spacing;
+      tooltipCaretPosition.bottom = props.theme.spacing;
       tooltipCaretPosition.transform = 'rotate(45deg)';
       break;
     default:
@@ -20,13 +20,13 @@ export default (props: { position?: string }, theme: THEME): {} => {
 
   return {
     position: 'absolute',
-    left: `calc(100% + ${theme.spacing / 2}px)`,
-    padding: theme.spacing / 2,
+    left: `calc(100% + ${props.theme.spacing / 2}px)`,
+    padding: props.theme.spacing / 2,
     borderRadius: 4,
     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
     transition: '.15s opacity ease, .3s transform ease',
-    background: theme.greys[90],
-    color: theme.greys.white,
+    background: props.theme.greys[90],
+    color: props.theme.greys.white,
     ...tooltipPosition,
 
     // This pseudo-friend extends the clickable area of the far-away tooltip.
@@ -47,7 +47,7 @@ export default (props: { position?: string }, theme: THEME): {} => {
       width: tooltipCaretSize,
       height: tooltipCaretSize,
       zIndex: 0,
-      background: theme.greys[90],
+      background: props.theme.greys[90],
       ...tooltipCaretPosition,
     },
   };

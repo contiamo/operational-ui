@@ -6,25 +6,25 @@ import SideNavigationItem from './Item/SideNavigationItem';
 import SideNavigationLink from './Link/SideNavigationLink';
 import SideNavigationTooltip from './Tooltip/SideNavigationTooltip';
 
-const SideNavigation = ({
-  className,
-  children,
-  }: {
+type props = {
   className: string,
   children: mixed,
-}): React$Element<*> =>
+  theme: THEME,
+};
+
+const SideNavigation = ({ className, children }: props): React$Element<*> =>
   (<div className={className}>
     {children}
   </div>);
 
-const style = (props: void, theme: THEME): {} => ({
+const style = (props: props): {} => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   width: 60,
   height: '100vh',
-  paddingBottom: theme.spacing,
-  backgroundColor: theme.greys['100'],
+  paddingBottom: props.theme.spacing,
+  backgroundColor: props.theme.greys['100'],
 });
 
 export default glamorous(SideNavigation)(style);

@@ -2,44 +2,43 @@
 import React from 'react';
 import glamorous from 'glamorous';
 
-const CoreNavigationLink = ({
-  className,
-  children,
-  onClick,
-  }: {
+type props = {
   className: string,
   children: mixed,
   onClick: void,
-}): React$Element<*> =>
+  theme: THEME,
+};
+
+const CoreNavigationLink = ({ className, children, onClick }: props): React$Element<*> =>
   (<div className={className} onClick={onClick}>
     {children}
   </div>);
 
-const style = (props: {}, theme: THEME): {} => ({
+const style = (props: props): {} => ({
   position: 'relative',
   zIndex: 2,
-  margin: `0 ${theme.spacing * -0.5}px`,
-  padding: `${theme.spacing}px`,
+  margin: `0 ${props.theme.spacing * -0.5}px`,
+  padding: `${props.theme.spacing}px`,
   minWidth: 200,
   borderRadius: 2,
   transition: '.1s background-color ease',
-  backgroundColor: theme.greys[90],
-  color: theme.greys.white,
+  backgroundColor: props.theme.greys[90],
+  color: props.theme.greys.white,
 
   '& + &': {
-    borderTop: `1px solid ${theme.greys['100']}`,
+    borderTop: `1px solid ${props.theme.greys['100']}`,
   },
 
   ':hover': {
-    backgroundColor: theme.greys['100'],
+    backgroundColor: props.theme.greys['100'],
   },
 
   ':first-child': {
-    marginTop: `${theme.spacing * -0.5}px`,
+    marginTop: `${props.theme.spacing * -0.5}px`,
   },
 
   ':last-child': {
-    marginBottom: `${theme.spacing * -0.5}px`,
+    marginBottom: `${props.theme.spacing * -0.5}px`,
   },
 });
 

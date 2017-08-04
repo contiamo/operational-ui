@@ -1197,9 +1197,9 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
-brcast@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/brcast/-/brcast-2.0.2.tgz#2db16de44140e418dc37fab10beec0369e78dcef"
+brcast@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/brcast/-/brcast-3.0.0.tgz#40b80dbb75086f0a32b2c2752dbecbbb34d8b197"
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -2712,7 +2712,7 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-glamor@^2.20.24, glamor@^2.20.38:
+glamor@^2.20.24:
   version "2.20.38"
   resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.38.tgz#5aa908fc044891588ed05bdbeda59c5328a615a4"
   dependencies:
@@ -2722,13 +2722,25 @@ glamor@^2.20.24, glamor@^2.20.38:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@^3.25.0:
-  version "3.25.0"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-3.25.0.tgz#d6d66c3dfffdc194761469adcbd996d4b70222e1"
+glamor@^2.20.39:
+  version "2.20.39"
+  resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.39.tgz#f2496b5bd252c4337eadae8c6233ce4ea2a81596"
   dependencies:
-    brcast "^2.0.0"
+    fbjs "^0.8.12"
+    inline-style-prefixer "^3.0.6"
+    object-assign "^4.1.1"
+    prop-types "^15.5.10"
+    through "^2.3.8"
+
+glamorous@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.1.0.tgz#6fb308c55cfeee48912af65469715f5a8973ffec"
+  dependencies:
+    brcast "^3.0.0"
     fast-memoize "^2.2.7"
     html-tag-names "^1.1.1"
+    is-function "^1.0.1"
+    is-plain-object "^2.0.4"
     react-html-attributes "^1.3.0"
     svg-tag-names "^1.1.0"
 
@@ -3236,6 +3248,10 @@ is-fullwidth-code-point@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f"
 
+is-function@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-function/-/is-function-1.0.1.tgz#12cfb98b65b57dd3d193a3121f5f6e2f437602b5"
+
 is-glob@^2.0.0, is-glob@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-2.0.1.tgz#d096f926a3ded5600f3fdfd91198cb0888c2d863"
@@ -3279,6 +3295,12 @@ is-path-inside@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-path-inside/-/is-path-inside-1.0.0.tgz#fc06e5a1683fbda13de667aff717bbc10a48f37f"
   dependencies:
     path-is-inside "^1.0.1"
+
+is-plain-object@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
+  dependencies:
+    isobject "^3.0.1"
 
 is-posix-bracket@^0.1.0:
   version "0.1.1"
@@ -3337,6 +3359,10 @@ isobject@^2.0.0:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
   dependencies:
     isarray "1.0.0"
+
+isobject@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
 isomorphic-fetch@^2.1.1:
   version "2.2.1"

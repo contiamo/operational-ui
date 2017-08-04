@@ -2,18 +2,18 @@
 import React, { Component } from 'react';
 import glamorous, { Img } from 'glamorous';
 
-const SideNavigationItem = ({
-  className,
-  children,
-  }: {
+type props = {
   className: string,
   children: mixed,
-}): React$Element<*> =>
+  theme: THEME,
+};
+
+const SideNavigationItem = ({ className, children }: props): React$Element<*> =>
   (<div className={className}>
     {children}
   </div>);
 
-const style = (props: {}, theme: THEME): {} => {
+const style = (props: props): {} => {
   let width = 20,
     height = 20;
 
@@ -32,7 +32,7 @@ const style = (props: {}, theme: THEME): {} => {
     cursor: 'pointer',
 
     ':first-child': {
-      marginBottom: theme.spacing,
+      marginBottom: props.theme.spacing,
     },
 
     '& > .tooltip': {
