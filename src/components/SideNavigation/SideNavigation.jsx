@@ -6,7 +6,7 @@ import SideNavigationItem from './Item/SideNavigationItem';
 import SideNavigationLink from './Link/SideNavigationLink';
 import SideNavigationTooltip from './Tooltip/SideNavigationTooltip';
 
-const CoreNavigation = ({
+const SideNavigation = ({
   className,
   children,
   }: {
@@ -27,5 +27,5 @@ const style = (props: void, theme: THEME): {} => ({
   backgroundColor: theme.greys['100'],
 });
 
-export default glamorous(CoreNavigation)(style);
+export default glamorous(SideNavigation)(style);
 export { SideNavigationItem, SideNavigationLink, SideNavigationTooltip };
