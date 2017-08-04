@@ -153,7 +153,7 @@ import {
   SideNavigation,
   SideNavigationItem,
   SideNavigationTooltip,
-  SideNavigationLink,
+  SideNavigationLink
 } from 'ui-components';
 
 const myComponent = () => (
