@@ -5,6 +5,7 @@ import glamorous, { Img } from 'glamorous';
 type props = {
   className: string,
   children: mixed,
+  size?: number,
   theme: THEME,
 };
 
@@ -13,40 +14,24 @@ const SideNavigationItem = ({ className, children }: props): React$Element<*> =>
     {children}
   </div>);
 
-const style = (props: props): {} => {
-  let width = 20,
-    height = 20;
+const style = (props: props): {} => ({
+  position: 'relative',
+  width: props.size || 30,
+  height: props.size || 30,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 2,
+  cursor: 'pointer',
 
-  if (props.main) {
-    width = 40;
-    height = 40;
-  }
+  ':first-child': {
+    marginBottom: props.theme.spacing,
+  },
 
-  return {
-    position: 'relative',
-    width,
-    height,
-    display: 'flex',
-    alignItems: 'center',
-    borderRadius: 2,
-    cursor: 'pointer',
-
-    ':first-child': {
-      marginBottom: props.theme.spacing,
-    },
-
-    '& > .tooltip': {
-      opacity: 0,
-      transform: 'translateX(-10px)',
-      pointerEvents: 'none',
-    },
-
-    ':hover > .tooltip': {
-      opacity: 1,
-      transform: 'none',
-      pointerEvents: 'all',
-    },
-  };
-};
+  ':hover > .tooltip': {
+    '--offsetLeft': 0,
+    opacity: 1,
+  },
+});
 
 export default glamorous(SideNavigationItem)(style);

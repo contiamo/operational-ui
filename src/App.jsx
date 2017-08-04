@@ -20,20 +20,20 @@ const App = ({ className, match }: { className: string }) =>
     <ThemeProvider theme={DEFAULT_THEME}>
       <div className={className}>
         <SideNavigation>
-          <SideNavigationItem main>
+          <SideNavigationItem size={60}>
             <Img css={{ maxWidth: '100%' }} alt="Contiamo" src={logo} />
             <SideNavigationTooltip>Contiamo</SideNavigationTooltip>
           </SideNavigationItem>
 
           <SideNavigationItem>
-            <Box color="white" size={20} />
+            <Box color="white" size={30} />
             <SideNavigationTooltip>Components</SideNavigationTooltip>
           </SideNavigationItem>
 
           {/* A simple separator */}
           <Div css={{ flexGrow: 1, height: '100%' }} />
 
-          <SideNavigationItem main>
+          <SideNavigationItem size={40}>
             <Img
               css={{ maxWidth: '100%' }}
               alt="Avatar"

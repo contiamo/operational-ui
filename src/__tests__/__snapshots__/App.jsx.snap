@@ -8,7 +8,7 @@ exports[`App starts 1`] = `
     className="css-7cmi9a"
   >
     <div
-      className="css-92jo3k"
+      className="css-eaekyz"
     >
       <img
         alt="Contiamo"
@@ -16,18 +16,18 @@ exports[`App starts 1`] = `
         src=""
       />
       <div
-        className="css-ief7i8 tooltip"
+        className="css-1rzpg72 tooltip"
       >
         Contiamo
       </div>
     </div>
     <div
-      className="css-1p6ihe6"
+      className="css-1vta3py"
     >
       <svg
-        height={20}
+        height={30}
         viewBox="0 0 24 24"
-        width={20}
+        width={30}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -59,7 +59,7 @@ exports[`App starts 1`] = `
         />
       </svg>
       <div
-        className="css-ief7i8 tooltip"
+        className="css-1rzpg72 tooltip"
       >
         Components
       </div>
@@ -68,7 +68,7 @@ exports[`App starts 1`] = `
       className="css-1c5lpzn"
     />
     <div
-      className="css-92jo3k"
+      className="css-188agp3"
     >
       <img
         alt="Avatar"
@@ -76,7 +76,7 @@ exports[`App starts 1`] = `
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
       <div
-        className="css-1dzydnb tooltip"
+        className="css-o86jju tooltip"
       >
         <div
           className="css-1iqwf3n"

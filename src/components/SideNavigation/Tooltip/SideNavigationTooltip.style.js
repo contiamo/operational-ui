@@ -8,23 +8,30 @@ export default (props: { theme: THEME, position?: string }): {} => {
   switch (props.position) {
     case 'bottom':
       tooltipPosition.bottom = 0;
+      tooltipPosition.transform = 'translateX(var(--offsetLeft))';
 
       tooltipCaretPosition.bottom = props.theme.spacing;
       tooltipCaretPosition.transform = 'rotate(45deg)';
       break;
     default:
+      tooltipPosition.top = '50%';
+      tooltipPosition.transform = 'translateX(var(--offsetLeft)) translateY(-50%)';
+
       tooltipCaretPosition.top = '50%';
       tooltipCaretPosition.transform = 'translateY(-50%) rotate(45deg)';
       break;
   }
 
   return {
+    '--offsetLeft': '-10px',
+
     position: 'absolute',
     left: `calc(100% + ${props.theme.spacing / 2}px)`,
     padding: props.theme.spacing / 2,
     borderRadius: 4,
     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
     transition: '.15s opacity ease, .3s transform ease',
+    opacity: 0,
     background: props.theme.greys[90],
     color: props.theme.greys.white,
     ...tooltipPosition,

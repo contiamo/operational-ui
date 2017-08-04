@@ -4,4 +4,14 @@ import SideNavigation, {
   SideNavigationTooltip,
 } from './src/components/SideNavigation/SideNavigation';
 
-export { SideNavigation, SideNavigationItem, SideNavigationLink, SideNavigationTooltip };
+import contiamoTheme from './src/App.theme';
+import { ThemeProvider } from 'glamorous';
+
+export {
+  SideNavigation,
+  SideNavigationItem,
+  SideNavigationLink,
+  SideNavigationTooltip,
+  contiamoTheme,
+  ThemeProvider,
+};
