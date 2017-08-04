@@ -9,9 +9,11 @@ module.exports = webpackMerge(config, {
   plugins: [
     new HtmlWebpackPlugin({ template: path.resolve('src', 'App.html') }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
   ],
   devServer: {
     contentBase: './dist',
     hot: true,
+    historyApiFallback: true,
   },
 });
