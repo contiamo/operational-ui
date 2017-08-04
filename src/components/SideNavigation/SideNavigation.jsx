@@ -1,10 +1,12 @@
+// @flow
 import React from 'react';
 import glamorous from 'glamorous';
 
-import Icon from './Icon/CoreNavigationIcon';
-import Link from './Link/CoreNavigationLink';
+import SideNavigationItem from './Item/SideNavigationItem';
+import SideNavigationLink from './Link/SideNavigationLink';
+import SideNavigationTooltip from './Tooltip/SideNavigationTooltip';
 
-const CoreNavigation: React$Element<*> = ({
+const CoreNavigation = ({
   className,
   children,
   }: {
@@ -22,9 +24,8 @@ const style = (props: void, theme: THEME): {} => ({
   width: 60,
   height: '100vh',
   paddingBottom: theme.spacing,
-  backgroundColor: theme.greys[100],
+  backgroundColor: theme.greys['100'],
 });
 
 export default glamorous(CoreNavigation)(style);
-export const CoreNavigationIcon = Icon;
-export const CoreNavigationLink = Link;
+export { SideNavigationItem, SideNavigationLink, SideNavigationTooltip };

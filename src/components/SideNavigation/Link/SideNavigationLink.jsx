@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import glamorous from 'glamorous';
 
@@ -8,13 +9,15 @@ const CoreNavigationLink = ({
   }: {
   className: string,
   children: mixed,
-  onClick?: {},
+  onClick: void,
 }): React$Element<*> =>
   (<div className={className} onClick={onClick}>
     {children}
   </div>);
 
 const style = (props: {}, theme: THEME): {} => ({
+  position: 'relative',
+  zIndex: 2,
   margin: `0 ${theme.spacing * -0.5}px`,
   padding: `${theme.spacing}px`,
   minWidth: 200,
@@ -24,11 +27,11 @@ const style = (props: {}, theme: THEME): {} => ({
   color: theme.greys.white,
 
   '& + &': {
-    borderTop: `1px solid ${theme.greys[100]}`,
+    borderTop: `1px solid ${theme.greys['100']}`,
   },
 
   ':hover': {
-    backgroundColor: theme.greys[100],
+    backgroundColor: theme.greys['100'],
   },
 
   ':first-child': {

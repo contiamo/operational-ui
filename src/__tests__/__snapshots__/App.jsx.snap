@@ -8,22 +8,21 @@ exports[`App starts 1`] = `
     className="css-7cmi9a"
   >
     <div
-      className="css-3d3ent"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="css-92jo3k"
     >
-      
-      
+      <img
+        alt="Contiamo"
+        className="css-1mjw833"
+        src=""
+      />
       <div
-        className="css-yee4a9"
+        className="css-ief7i8 tooltip"
       >
         Contiamo
       </div>
     </div>
     <div
-      className="css-bnx8rn"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="css-1p6ihe6"
     >
       <svg
         height={20}
@@ -60,7 +59,7 @@ exports[`App starts 1`] = `
         />
       </svg>
       <div
-        className="css-yee4a9"
+        className="css-ief7i8 tooltip"
       >
         Components
       </div>
@@ -69,33 +68,30 @@ exports[`App starts 1`] = `
       className="css-1c5lpzn"
     />
     <div
-      className="css-3d3ent"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="css-92jo3k"
     >
       <img
-        alt={undefined}
+        alt="Avatar"
         className="css-1mjw833"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
-      
       <div
-        className="css-s39o9e"
+        className="css-1dzydnb tooltip"
       >
         <div
-          className="css-13xaao6"
+          className="css-1iqwf3n"
           onClick={undefined}
         >
           My Account
         </div>
         <div
-          className="css-13xaao6"
+          className="css-1iqwf3n"
           onClick={undefined}
         >
           Feedback
         </div>
         <div
-          className="css-13xaao6"
+          className="css-1iqwf3n"
           onClick={undefined}
         >
           Logout
