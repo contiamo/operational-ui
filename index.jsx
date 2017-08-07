@@ -1,25 +1,19 @@
-import 'react-hot-loader/patch';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import glamorous, { ThemeProvider } from 'glamorous';
-import { AppContainer } from 'react-hot-loader';
+// Simple imports n' exports for consumers of the library.
 
-import App from './src/App';
+import SideNavigation, {
+  SideNavigationItem,
+  SideNavigationLink,
+  SideNavigationTooltip,
+} from './src/components/SideNavigation/SideNavigation';
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <App />
-    </AppContainer>,
-    document.querySelector('#app'),
-  );
+import contiamoTheme from './src/App.theme';
+import { ThemeProvider } from 'glamorous';
+
+export {
+  SideNavigation,
+  SideNavigationItem,
+  SideNavigationLink,
+  SideNavigationTooltip,
+  contiamoTheme,
+  ThemeProvider,
 };
-
-render(App);
-
-if (module.hot) {
-  module.hot.accept('./src/App', () => {
-    const NextAppContainer = require('./src/App');
-    render(NextAppContainer);
-  });
-}

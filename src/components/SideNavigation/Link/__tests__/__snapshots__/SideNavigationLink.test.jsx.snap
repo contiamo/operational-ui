@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavigationLink component renders 1`] = `
+<div
+  className="css-nf2u8q"
+  onClick={undefined}
+>
+  Hi, I'm a Link
+</div>
+`;
