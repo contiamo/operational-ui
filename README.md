@@ -189,10 +189,32 @@ The header component consists of 3 subcomponents: A title, an "item", and a sepa
 |--------|----------|---------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | color  | No       | white   | string | This can be either a hex value (`#f00b4f`) or a named color from the theme supplied to `ThemeProvider` at app initialization. `color="primary"` would work just as well as `color="#feb901`". |
 
+```javascript
+import React from 'react';
+import { Header, HeaderTitle, HeaderItem, HeaderSeparator } from 'ui-components';
+
+const MyHeader = () => (<Header color="primary">
+  <HeaderTitle>Contiamo</HeaderTitle>
+  <HeaderItem>
+    <Camera /> Gallery
+  </HeaderItem>
+  <HeaderItem>
+    <Box /> Components
+  </HeaderItem>
+  <HeaderSeparator />
+  <HeaderItem>Logout</HeaderItem>
+</Header>);
+
+export default MyHeader;
+
+```
+
 #### HeaderTitle
 A title that displays at the beginning of the header.
 
 ![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Title.png)
+
+`<HeaderTitle>Contiamo</HeaderTitle>`
 
 #### HeaderItem
 A point on the header menu. This supports click behavior.
@@ -204,10 +226,14 @@ A point on the header menu. This supports click behavior.
 | onClick | No       | void    | Function | What happens when this item is clicked                  |
 | active  | No       | false   | Boolean  | Marks the item as active with a darker background color |
 
+`<HeaderItem onClick={() => foo}>Contiamo</HeaderItem>`
+
 #### HeaderSeparator
 A simple separator to be placed between header items.
 
 ![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Separator.png)
+
+`<HeaderSeparator />`
 
 **Documentation per-component to be added.**
 **Documentation refinements welcome.**
