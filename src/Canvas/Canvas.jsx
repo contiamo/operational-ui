@@ -8,7 +8,8 @@ const Canvas = ({ className, children }: { className: string, children: HTMLElem
   </div>);
 
 const styles = ({ theme }: { theme: THEME }): {} => ({
-  width: '100vw',
+  flexGrow: 1,
+  padding: theme.spacing,
   backgroundColor: theme.greys && theme.greys['10'],
 });
 

@@ -31,6 +31,7 @@ const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   ':hover > .tooltip': {
     '--offsetLeft': 0,
     opacity: 1,
+    pointerEvents: 'all',
   },
 });
 

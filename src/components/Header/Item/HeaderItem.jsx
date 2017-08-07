@@ -5,11 +5,13 @@ import glamorous from 'glamorous';
 const HeaderItem = ({
   className,
   children,
+  onClick,
   }: {
   className: string,
   children: mixed,
+  onClick?: void,
 }): React$Element<*> =>
-  (<div className={className}>
+  (<div onClick={onClick} className={className}>
     {children}
   </div>);
 
@@ -17,13 +19,14 @@ const style = ({ theme }: { theme: THEME }): {} => {
   const opacity = 0.1;
 
   return {
-    display: 'inline-block',
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: `${theme.spacing && theme.spacing / 2}px ${theme.spacing && theme.spacing}px`,
     borderRadius: 2,
     cursor: 'pointer',
     transition: '.1s background-color ease, .05s transform ease',
     userSelect: 'none',
-    color: theme.greys && theme.greys.white,
 
     ':hover': {
       backgroundColor: `rgba(0, 0, 0, ${opacity})`,
@@ -39,7 +42,12 @@ const style = ({ theme }: { theme: THEME }): {} => {
     },
 
     '& + &': {
-      marginLeft: theme.spacing / 2,
+      marginLeft: theme.spacing && theme.spacing / 2,
+    },
+
+    '& > svg': {
+      width: 16,
+      marginRight: theme.spacing && theme.spacing / 2,
     },
   };
 };

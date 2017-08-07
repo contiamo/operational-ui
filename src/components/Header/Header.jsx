@@ -1,8 +1,10 @@
 // @flow
 import React from 'react';
 import glamorous from 'glamorous';
+import colorCalculator from 'tinycolor2';
 
 import HeaderItem from './Item/HeaderItem';
+import HeaderTitle from './Title/HeaderTitle';
 import HeaderSeparator from './Separator/HeaderSeparator';
 
 const Header = ({
@@ -27,14 +29,16 @@ const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
 
   const backgroundColor = isColorACodeOrHex ? color : theme.colors && theme.colors[color];
 
+  const textColor = colorCalculator.mostReadable(backgroundColor, ['black', 'white']).toHexString();
+
   return {
     display: 'flex',
     alignItems: 'center',
     padding: `${theme.spacing / 2}px ${theme.spacing}px`,
     backgroundColor,
-    color: theme.greys && theme.greys.white,
+    color: textColor,
   };
 };
 
 export default glamorous(Header)(style);
-export { HeaderItem, HeaderSeparator };
+export { HeaderItem, HeaderSeparator, HeaderTitle };

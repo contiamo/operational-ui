@@ -9,13 +9,13 @@ import SideNavigation, {
   SideNavigationTooltip,
 } from './components/SideNavigation/SideNavigation';
 
-import Header, { HeaderItem, HeaderSeparator } from './components/Header/Header';
+import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './components/Header/Header';
 
 import Canvas from './Canvas/Canvas';
 import DEFAULT_THEME from './App.theme';
 
 import logo from './img/logo/outline.png';
-import { Box } from 'react-feather';
+import { Box, Camera } from 'react-feather';
 
 const App = ({ className, match }: { className: string }) =>
   (<Router>
@@ -49,14 +49,16 @@ const App = ({ className, match }: { className: string }) =>
           </SideNavigationItem>
         </SideNavigation>
 
-        <Canvas>
-          <Header color="accent">
-            <HeaderItem>Hi</HeaderItem>
-            <HeaderSeparator />
-            <HeaderItem className="active">Hi</HeaderItem>
+        <Div css={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
+          <Header color="primary">
+            <HeaderTitle>Holamundo</HeaderTitle>
+            <HeaderItem>
+              <Camera /> Hi
+            </HeaderItem>
           </Header>
-          //Put Routes in Here
-        </Canvas>
+
+          <Canvas>//Put Routes in Here</Canvas>
+        </Div>
       </div>
     </ThemeProvider>
   </Router>);

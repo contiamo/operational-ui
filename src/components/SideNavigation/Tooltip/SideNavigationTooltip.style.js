@@ -32,6 +32,7 @@ export default ({ theme, position }: { theme: THEME, position?: string }): {} =>
     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
     transition: '.15s opacity ease, .3s transform ease',
     opacity: 0,
+    pointerEvents: 'none',
     background: theme.greys && theme.greys[90],
     color: theme.greys && theme.greys.white,
     ...tooltipPosition,

@@ -25,6 +25,8 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-flowtype": "^2.35.0",
@@ -38,6 +40,7 @@
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "jest-enzyme": "^3.6.1",
     "jest-glamor-react": "^3.1.0",
     "react-hot-loader": "next",
     "react-test-renderer": "^15.6.1",
@@ -60,11 +63,18 @@
     "react-feather": "^1.0.6",
     "react-intl": "^2.3.0",
     "react-router": "^4.1.2",
-    "react-router-dom": "^4.1.2"
+    "react-router-dom": "^4.1.2",
+    "tinycolor2": "^1.4.1"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
-    }
+    },
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

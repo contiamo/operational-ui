@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderItem component renders 1`] = `
+<HeaderItem
+  className="css-zfxdpy"
+>
+  My name is Ed
+</HeaderItem>
+`;

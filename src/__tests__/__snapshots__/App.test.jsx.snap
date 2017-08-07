@@ -8,7 +8,7 @@ exports[`App starts 1`] = `
     className="css-7cmi9a"
   >
     <div
-      className="css-eaekyz"
+      className="css-5iw65c"
     >
       <img
         alt="Contiamo"
@@ -16,13 +16,13 @@ exports[`App starts 1`] = `
         src=""
       />
       <div
-        className="css-1rzpg72 tooltip"
+        className="css-43u5h0 tooltip"
       >
         Contiamo
       </div>
     </div>
     <div
-      className="css-1vta3py"
+      className="css-1dnjcrw"
     >
       <svg
         height={30}
@@ -59,7 +59,7 @@ exports[`App starts 1`] = `
         />
       </svg>
       <div
-        className="css-1rzpg72 tooltip"
+        className="css-43u5h0 tooltip"
       >
         Components
       </div>
@@ -68,7 +68,7 @@ exports[`App starts 1`] = `
       className="css-1c5lpzn"
     />
     <div
-      className="css-188agp3"
+      className="css-csqynm"
     >
       <img
         alt="Avatar"
@@ -76,7 +76,7 @@ exports[`App starts 1`] = `
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
       <div
-        className="css-o86jju tooltip"
+        className="css-c07too tooltip"
       >
         <div
           className="css-1iqwf3n"
@@ -100,26 +100,48 @@ exports[`App starts 1`] = `
     </div>
   </div>
   <div
-    className="css-nil"
+    className="css-1ouw5ql"
   >
     <div
-      className="css-1sxzus0"
+      className="css-12obpfi"
     >
       <div
-        className="css-w3udz6"
+        className="css-1911pn3"
       >
-        Hi
+        Holamundo
       </div>
       <div
-        className="css-1krlqp9"
-      />
-      <div
-        className="css-w3udz6 active"
+        className="css-1fvudc1"
+        onClick={undefined}
       >
-        Hi
+        <svg
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+          />
+          <circle
+            cx="12"
+            cy="13"
+            r="4"
+          />
+        </svg>
+         Hi
       </div>
     </div>
-    //Put Routes in Here
+    <div
+      className="css-1c5srwg"
+    >
+      //Put Routes in Here
+    </div>
   </div>
 </div>
 `;
