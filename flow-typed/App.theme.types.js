@@ -1,4 +1,10 @@
-// @flow
+/** @flow
+
+  Strongly type the themes in order to create a relatable theming API since our apps rely on properties such as theme.colors.primary, theme.fonts.main, etc. throughout the app.
+
+  We really want these properties to be defined and valid. :)
+*/
+
 export type COLORS = {
   primary: string,
   accent?: string,

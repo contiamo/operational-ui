@@ -9,7 +9,7 @@ type props = {
   theme: THEME,
 };
 
-const CoreNavigationLink = ({ className, children, onClick }: props): React$Element<*> =>
+const SideNavigationLink = ({ className, children, onClick }: props): React$Element<*> =>
   (<div className={className} onClick={onClick}>
     {children}
   </div>);
@@ -42,4 +42,4 @@ const style = (props: props): {} => ({
   },
 });
 
-export default glamorous(CoreNavigationLink)(style);
+export default glamorous(SideNavigationLink)(style);

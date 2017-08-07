@@ -1,3 +1,5 @@
+// Simple imports n' exports for consumers of the library.
+
 import SideNavigation, {
   SideNavigationItem,
   SideNavigationLink,
