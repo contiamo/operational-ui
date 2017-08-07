@@ -25,5 +25,5 @@ export default {
     flow(),
   ],
   external: ['react', 'react-dom', 'react-router', 'react-router-dom', 'jest'],
-  dest: './dist/bundle.js', // equivalent to --output
+  dest: './lib/components.js', // equivalent to --output
 };

@@ -2,7 +2,7 @@
   "name": "ui-components",
   "version": "1.0.0",
   "description": "A collection of UI Components that we use at Contiamo.",
-  "main": "./dist/bundle.js",
+  "main": "./lib/components.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar",
   "license": "MIT",
@@ -73,10 +73,6 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ]
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
   }
 }
