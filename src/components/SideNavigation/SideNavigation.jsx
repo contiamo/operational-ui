@@ -24,7 +24,7 @@ const style = (props: props): {} => ({
   width: 60,
   height: '100vh',
   paddingBottom: props.theme.spacing,
-  backgroundColor: props.theme.greys['100'],
+  backgroundColor: props.theme.greys && props.theme.greys['100'],
 });
 
 export default glamorous(SideNavigation)(style);

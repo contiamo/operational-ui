@@ -22,15 +22,15 @@ const style = (props: props): {} => ({
   minWidth: 200,
   borderRadius: 2,
   transition: '.1s background-color ease',
-  backgroundColor: props.theme.greys[90],
-  color: props.theme.greys.white,
+  backgroundColor: props.theme.greys && props.theme.greys[90],
+  color: props.theme.greys && props.theme.greys.white,
 
   '& + &': {
-    borderTop: `1px solid ${props.theme.greys['100']}`,
+    borderTop: `1px solid ${props.theme.greys && props.theme.greys['100']}`,
   },
 
   ':hover': {
-    backgroundColor: props.theme.greys['100'],
+    backgroundColor: props.theme.greys && props.theme.greys['100'],
   },
 
   ':first-child': {

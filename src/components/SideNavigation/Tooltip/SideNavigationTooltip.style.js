@@ -27,13 +27,13 @@ export default (props: { theme: THEME, position?: string }): {} => {
 
     position: 'absolute',
     left: `calc(100% + ${props.theme.spacing / 2}px)`,
-    padding: props.theme.spacing / 2,
+    padding: (props.theme.spacing || 16) / 2,
     borderRadius: 4,
     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
     transition: '.15s opacity ease, .3s transform ease',
     opacity: 0,
-    background: props.theme.greys[90],
-    color: props.theme.greys.white,
+    background: props.theme.greys && props.theme.greys[90],
+    color: props.theme.greys && props.theme.greys.white,
     ...tooltipPosition,
 
     // This pseudo-friend extends the clickable area of the far-away tooltip.
@@ -54,7 +54,7 @@ export default (props: { theme: THEME, position?: string }): {} => {
       width: tooltipCaretSize,
       height: tooltipCaretSize,
       zIndex: 0,
-      background: props.theme.greys[90],
+      background: props.theme.greys && props.theme.greys[90],
       ...tooltipCaretPosition,
     },
   };
