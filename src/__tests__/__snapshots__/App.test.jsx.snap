@@ -5,7 +5,7 @@ exports[`App starts 1`] = `
   className="css-wh8quo"
 >
   <div
-    className="css-7cmi9a"
+    className="css-jl0wyp"
   >
     <div
       className="css-5iw65c"
@@ -16,13 +16,13 @@ exports[`App starts 1`] = `
         src=""
       />
       <div
-        className="css-43u5h0 tooltip"
+        className="css-7h9ail tooltip"
       >
         Contiamo
       </div>
     </div>
     <div
-      className="css-1dnjcrw"
+      className="css-12t0ai7"
     >
       <svg
         height={30}
@@ -59,7 +59,7 @@ exports[`App starts 1`] = `
         />
       </svg>
       <div
-        className="css-43u5h0 tooltip"
+        className="css-7h9ail tooltip"
       >
         Components
       </div>
@@ -76,22 +76,22 @@ exports[`App starts 1`] = `
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
       <div
-        className="css-c07too tooltip"
+        className="css-13qwgc4 tooltip"
       >
         <div
-          className="css-1iqwf3n"
+          className="css-45hmt0"
           onClick={undefined}
         >
           My Account
         </div>
         <div
-          className="css-1iqwf3n"
+          className="css-45hmt0"
           onClick={undefined}
         >
           Feedback
         </div>
         <div
-          className="css-1iqwf3n"
+          className="css-45hmt0"
           onClick={undefined}
         >
           Logout
@@ -103,7 +103,7 @@ exports[`App starts 1`] = `
     className="css-1ouw5ql"
   >
     <div
-      className="css-3m60su"
+      className="css-iruz6i"
     >
       <div
         className="css-1911pn3"
@@ -111,7 +111,7 @@ exports[`App starts 1`] = `
         Contiamo
       </div>
       <div
-        className="css-1fvudc1"
+        className="css-11lzgch"
         onClick={undefined}
       >
         <svg
@@ -137,7 +137,7 @@ exports[`App starts 1`] = `
          Gallery
       </div>
       <div
-        className="css-1fvudc1"
+        className="css-11lzgch"
         onClick={undefined}
       >
         <svg
@@ -180,7 +180,7 @@ exports[`App starts 1`] = `
         className="css-1krlqp9"
       />
       <div
-        className="css-1fvudc1"
+        className="css-11lzgch"
         onClick={undefined}
       >
         Logout

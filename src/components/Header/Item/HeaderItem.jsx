@@ -6,7 +6,7 @@ const HeaderItem = ({
   className,
   children,
   onClick,
-  }: {
+}: {
   className: string,
   children: mixed,
   onClick?: void,
@@ -15,8 +15,9 @@ const HeaderItem = ({
     {children}
   </div>);
 
-const style = ({ theme }: { theme: THEME }): {} => {
+const style = ({ theme, active }: { theme: THEME, active?: boolean }): {} => {
   const opacity = 0.1;
+  const activeBackground = `rgba(0, 0, 0, ${opacity * 2})`;
 
   return {
     display: 'flex',
@@ -27,6 +28,7 @@ const style = ({ theme }: { theme: THEME }): {} => {
     cursor: 'pointer',
     transition: '.1s background-color ease, .05s transform ease',
     userSelect: 'none',
+    backgroundColor: active ? activeBackground : 'transparent',
 
     ':hover': {
       backgroundColor: `rgba(0, 0, 0, ${opacity})`,
@@ -38,7 +40,7 @@ const style = ({ theme }: { theme: THEME }): {} => {
     },
 
     '&.active': {
-      backgroundColor: `rgba(0, 0, 0, ${opacity * 2})`,
+      backgroundColor: activeBackground,
     },
 
     '& + &': {

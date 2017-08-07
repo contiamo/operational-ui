@@ -2,7 +2,7 @@
 
 exports[`SideNavigationLink component renders 1`] = `
 <div
-  className="css-nf2u8q"
+  className="css-iv0ydw"
   onClick={undefined}
 >
   Hi, I'm a Link

@@ -42,6 +42,7 @@
     "jest": "^20.0.4",
     "jest-enzyme": "^3.6.1",
     "jest-glamor-react": "^3.1.0",
+    "prop-types": "^15.5.10",
     "react-hot-loader": "next",
     "react-test-renderer": "^15.6.1",
     "rollup": "^0.45.2",

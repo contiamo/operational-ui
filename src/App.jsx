@@ -21,7 +21,7 @@ const App = ({ className, match }: { className: string }) =>
   (<Router>
     <ThemeProvider theme={DEFAULT_THEME}>
       <div className={className}>
-        <SideNavigation>
+        <SideNavigation color="#445873">
           <SideNavigationItem size={60}>
             <Img css={{ maxWidth: '100%' }} alt="Contiamo" src={logo} />
             <SideNavigationTooltip>Contiamo</SideNavigationTooltip>
@@ -50,7 +50,7 @@ const App = ({ className, match }: { className: string }) =>
         </SideNavigation>
 
         <Div css={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
-          <Header color="secondary">
+          <Header color="#445873">
             <HeaderTitle>Contiamo</HeaderTitle>
             <HeaderItem>
               <Camera /> Gallery

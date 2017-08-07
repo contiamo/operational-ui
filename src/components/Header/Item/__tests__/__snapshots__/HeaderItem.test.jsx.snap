@@ -2,7 +2,7 @@
 
 exports[`HeaderItem component renders 1`] = `
 <HeaderItem
-  className="css-zfxdpy"
+  className="css-47jvj5"
 >
   My name is Ed
 </HeaderItem>

@@ -1,8 +1,21 @@
 // @flow
-export default ({ theme, position }: { theme: THEME, position?: string }): {} => {
+import { hexOrColor, readableTextColor } from '../../../utils/color';
+
+export default ({
+  theme,
+  position,
+  color,
+}: {
+  theme: THEME,
+  position?: string,
+  color?: string,
+}): {} => {
   const tooltipCaretSize = 10;
   const tooltipPosition = {};
   const tooltipCaretPosition = {};
+  const backgroundColor = color
+    ? hexOrColor(color)(theme.colors[color])
+    : theme.greys && theme.greys['100'];
 
   // Where do we put the caret and anchor the tooltip?
   switch (position) {
@@ -33,8 +46,8 @@ export default ({ theme, position }: { theme: THEME, position?: string }): {} =>
     transition: '.15s opacity ease, .3s transform ease',
     opacity: 0,
     pointerEvents: 'none',
-    background: theme.greys && theme.greys[90],
-    color: theme.greys && theme.greys.white,
+    backgroundColor,
+    color: readableTextColor(backgroundColor)(['black', 'white']),
     ...tooltipPosition,
 
     // This pseudo-friend extends the clickable area of the far-away tooltip.
@@ -55,7 +68,7 @@ export default ({ theme, position }: { theme: THEME, position?: string }): {} =>
       width: tooltipCaretSize,
       height: tooltipCaretSize,
       zIndex: 0,
-      background: theme.greys && theme.greys[90],
+      background: 'inherit',
       ...tooltipCaretPosition,
     },
   };

@@ -16,8 +16,8 @@ const SideNavigationItem = ({ className, children }: props): React$Element<*> =>
 
 const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   position: 'relative',
-  width: size || 30,
-  height: size || 30,
+  width: size || 20,
+  height: size || 20,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
