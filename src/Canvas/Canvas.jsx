@@ -7,6 +7,9 @@ const Canvas = ({ className, children }: { className: string, children: HTMLElem
     {children}
   </div>);
 
-const styles = {};
+const styles = ({ theme }: { theme: THEME }): {} => ({
+  width: '100vw',
+  backgroundColor: theme.greys && theme.greys['10'],
+});
 
 export default glamorous(Canvas)(styles);
