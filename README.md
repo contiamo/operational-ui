@@ -1,6 +1,6 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+# Contiamo UI Components
+
+This repository encapsulates all of the UI components we use across our products: our intelligence platform and decision tools.
 
 - [Contiamo UI Components](#contiamo-ui-components)
   - [Setup](#setup)
@@ -19,12 +19,6 @@
       - [HeaderTitle](#headertitle)
       - [HeaderItem](#headeritem)
       - [HeaderSeparator](#headerseparator)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Contiamo UI Components
-
-This repository encapsulates all of the UI components we use across our products: our intelligence platform and decision tools.
 
 ## Setup
 
