@@ -14,10 +14,10 @@ const SideNavigationItem = ({ className, children }: props): React$Element<*> =>
     {children}
   </div>);
 
-const style = (props: props): {} => ({
+const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   position: 'relative',
-  width: props.size || 30,
-  height: props.size || 30,
+  width: size || 30,
+  height: size || 30,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -25,7 +25,7 @@ const style = (props: props): {} => ({
   cursor: 'pointer',
 
   ':first-child': {
-    marginBottom: props.theme.spacing,
+    marginBottom: theme.spacing,
   },
 
   ':hover > .tooltip': {

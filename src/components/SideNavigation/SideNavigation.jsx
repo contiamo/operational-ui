@@ -17,14 +17,14 @@ const SideNavigation = ({ className, children }: props): React$Element<*> =>
     {children}
   </div>);
 
-const style = (props: props): {} => ({
+const style = ({ theme }: { theme: THEME }): {} => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   width: 60,
   height: '100vh',
-  paddingBottom: props.theme.spacing,
-  backgroundColor: props.theme.greys && props.theme.greys['100'],
+  paddingBottom: theme.spacing,
+  backgroundColor: theme.greys && theme.greys['100'],
 });
 
 export default glamorous(SideNavigation)(style);

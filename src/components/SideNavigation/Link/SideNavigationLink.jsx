@@ -14,31 +14,31 @@ const SideNavigationLink = ({ className, children, onClick }: props): React$Elem
     {children}
   </div>);
 
-const style = (props: props): {} => ({
+const style = ({ theme }: { theme: THEME }): {} => ({
   position: 'relative',
   zIndex: 2,
-  margin: `0 ${props.theme.spacing * -0.5}px`,
-  padding: `${props.theme.spacing}px`,
+  margin: `0 ${theme.spacing * -0.5}px`,
+  padding: `${theme.spacing}px`,
   minWidth: 200,
   borderRadius: 2,
   transition: '.1s background-color ease',
-  backgroundColor: props.theme.greys && props.theme.greys[90],
-  color: props.theme.greys && props.theme.greys.white,
+  backgroundColor: theme.greys && theme.greys[90],
+  color: theme.greys && theme.greys.white,
 
   '& + &': {
-    borderTop: `1px solid ${props.theme.greys && props.theme.greys['100']}`,
+    borderTop: `1px solid ${theme.greys && theme.greys['100']}`,
   },
 
   ':hover': {
-    backgroundColor: props.theme.greys && props.theme.greys['100'],
+    backgroundColor: theme.greys && theme.greys['100'],
   },
 
   ':first-child': {
-    marginTop: `${props.theme.spacing * -0.5}px`,
+    marginTop: `${theme.spacing * -0.5}px`,
   },
 
   ':last-child': {
-    marginBottom: `${props.theme.spacing * -0.5}px`,
+    marginBottom: `${theme.spacing * -0.5}px`,
   },
 });
 
