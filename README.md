@@ -199,9 +199,10 @@ A point on the header menu. This supports click behavior.
 
 ![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Item.png)
 
-| Option  | Required | Default | Type     | Description                        |
-|---------|----------|---------|----------|------------------------------------|
-| onClick | No       | void    | Function | What happens on click of the item? |
+| Option  | Required | Default | Type     | Description                                             |
+|---------|----------|---------|----------|---------------------------------------------------------|
+| onClick | No       | void    | Function | What happens when this item is clicked                  |
+| active  | No       | false   | Boolean  | Marks the item as active with a darker background color |
 
 #### HeaderSeparator
 A simple separator to be placed between header items.
