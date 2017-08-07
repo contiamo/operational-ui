@@ -9,6 +9,8 @@ import SideNavigation, {
   SideNavigationTooltip,
 } from './components/SideNavigation/SideNavigation';
 
+import Header, { HeaderItem, HeaderSeparator } from './components/Header/Header';
+
 import Canvas from './Canvas/Canvas';
 import DEFAULT_THEME from './App.theme';
 
@@ -47,7 +49,14 @@ const App = ({ className, match }: { className: string }) =>
           </SideNavigationItem>
         </SideNavigation>
 
-        <Canvas>//Put Routes in Here</Canvas>
+        <Canvas>
+          <Header color="accent">
+            <HeaderItem>Hi</HeaderItem>
+            <HeaderSeparator />
+            <HeaderItem className="active">Hi</HeaderItem>
+          </Header>
+          //Put Routes in Here
+        </Canvas>
       </div>
     </ThemeProvider>
   </Router>);

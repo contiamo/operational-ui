@@ -102,6 +102,23 @@ exports[`App starts 1`] = `
   <div
     className="css-nil"
   >
+    <div
+      className="css-1sxzus0"
+    >
+      <div
+        className="css-w3udz6"
+      >
+        Hi
+      </div>
+      <div
+        className="css-1krlqp9"
+      />
+      <div
+        className="css-w3udz6 active"
+      >
+        Hi
+      </div>
+    </div>
     //Put Routes in Here
   </div>
 </div>
