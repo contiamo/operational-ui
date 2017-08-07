@@ -1,3 +1,27 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Contiamo UI Components](#contiamo-ui-components)
+  - [Setup](#setup)
+  - [Bootstrapping and Theme Setup](#bootstrapping-and-theme-setup)
+  - [Components](#components)
+    - [SideNavigation](#sidenavigation)
+      - [SideNavigationItem](#sidenavigationitem)
+        - [Options](#options)
+        - [Example](#example)
+      - [SideNavigationTooltip](#sidenavigationtooltip)
+        - [Options](#options-1)
+        - [Example](#example-1)
+      - [SideNavigationLink](#sidenavigationlink)
+        - [Example](#example-2)
+    - [Header](#header)
+      - [HeaderTitle](#headertitle)
+      - [HeaderItem](#headeritem)
+      - [HeaderSeparator](#headerseparator)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Contiamo UI Components
 
 This repository encapsulates all of the UI components we use across our products: our intelligence platform and decision tools.
