@@ -36,7 +36,9 @@ render(<App />, document.querySelector('#app'));
 ## Components
 
 ### SideNavigation
-This is a thick sidebar that is responsible for the core navigation of your app or website. It is invoked as below.
+This is a thick sidebar that is responsible for the core navigation of your app or website.
+
+![SideNavigation](https://contiamo.github.io/ui-components/assets/screenshots/SideNavigation/SideNavigation.gif)
 
 ```javascript
 // nav.js
@@ -74,12 +76,15 @@ Okay – that's cool, but now you literally have *just a sidebar*. The SideNavi
 #### SideNavigationItem
 This could be literally anything. The most common use case for this is icons.
 
+![SideNavigation](https://contiamo.github.io/ui-components/assets/screenshots/SideNavigation/Item.png)
+
 ##### Options
 This component supports one option:
 
-| Option | Description                                      | Optional |
-|--------|--------------------------------------------------|----------|
-| size   | How many pixels wide and high the item should be | ✅        |
+| Option  | Required | Default | Type     | Description                                      |
+|---------|----------|---------|----------|--------------------------------------------------|
+| size    | No       | 20      | number   | How many pixels wide and high the item should be |
+| onClick | No       | void    | Function | What happens on click of this item?              |
 
 ##### Example
 ```javascript
@@ -107,12 +112,14 @@ export default myComponent;
 #### SideNavigationTooltip
 Each item can have a Tooltip, that displays on hover of the item.
 
+![SideNavigation](https://contiamo.github.io/ui-components/assets/screenshots/SideNavigation/Tooltip.png)
+
 ##### Options
 This component supports one option:
 
-| Option   | Description                                               | Optional | Default |
-|----------|-----------------------------------------------------------|----------|---------|
-| position | Anchor the tooltip at the bottom or middle of its parent? | ✅        | middle  |
+| Option   | Required | Default | Type                     | Description                           |
+|----------|----------|---------|--------------------------|---------------------------------------|
+| position | No       | middle  | ENUM('middle', 'bottom') | Where should the tooltip be anchored? |
 
 ##### Example
 ```javascript
@@ -141,9 +148,11 @@ export default myComponent;
 #### SideNavigationLink
 These components go inside `SideNavigationTooltip` and allow you to create stackable pull-out menus that are toggled on hover of the `SideNavigationItem` that they are contained by.
 
-| Option  | Description                                  | Optional | Default | Type     |
-|---------|----------------------------------------------|----------|---------|----------|
-| onClick | Action to trigger on click of this component | ✅        |         | Function |
+![SideNavigation](https://contiamo.github.io/ui-components/assets/screenshots/SideNavigation/Link.png)
+
+| Option  | Required | Default | Type     | Description                        |
+|---------|----------|---------|----------|------------------------------------|
+| onClick | No       | void    | Function | What happens on click of the link? |
 
 ##### Example
 ```javascript
@@ -170,6 +179,34 @@ const myComponent = () => (
 
 export default myComponent;
 ```
+
+### Header
+The header component consists of 3 subcomponents: A title, an "item", and a separator. The header component itself can take on any color you give it. Child components use alpha blending to work with whatever color this component is given.
+
+![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Header.gif)
+
+| Option | Required | Default | Type   | Description                                                                                                                                                                                   |
+|--------|----------|---------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| color  | No       | white   | string | This can be either a hex value (`#f00b4f`) or a named color from the theme supplied to `ThemeProvider` at app initialization. `color="primary"` would work just as well as `color="#feb901`". |
+
+#### HeaderTitle
+A title that displays at the beginning of the header.
+
+![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Title.png)
+
+#### HeaderItem
+A point on the header menu. This supports click behavior.
+
+![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Item.png)
+
+| Option  | Required | Default | Type     | Description                        |
+|---------|----------|---------|----------|------------------------------------|
+| onClick | No       | void    | Function | What happens on click of the item? |
+
+#### HeaderSeparator
+A simple separator to be placed between header items.
+
+![Header](https://contiamo.github.io/ui-components/assets/screenshots/Header/Separator.png)
 
 **Documentation per-component to be added.**
 **Documentation refinements welcome.**

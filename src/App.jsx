@@ -50,11 +50,16 @@ const App = ({ className, match }: { className: string }) =>
         </SideNavigation>
 
         <Div css={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
-          <Header color="primary">
-            <HeaderTitle>Holamundo</HeaderTitle>
+          <Header color="secondary">
+            <HeaderTitle>Contiamo</HeaderTitle>
             <HeaderItem>
-              <Camera /> Hi
+              <Camera /> Gallery
             </HeaderItem>
+            <HeaderItem>
+              <Box /> Components
+            </HeaderItem>
+            <HeaderSeparator />
+            <HeaderItem>Logout</HeaderItem>
           </Header>
 
           <Canvas>//Put Routes in Here</Canvas>

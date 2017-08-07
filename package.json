@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "glamorous": "^4.1.0",
+    "global": "^4.3.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-feather": "^1.0.6",
