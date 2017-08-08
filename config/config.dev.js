@@ -17,11 +17,5 @@ module.exports = webpackMerge(config, {
     contentBase: './dist',
     hot: true,
     historyApiFallback: true,
-    proxy: {
-      '/api': {
-        target: 'https://app.contiamo.com',
-        secure: false,
-      },
-    },
   },
 });

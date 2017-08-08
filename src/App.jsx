@@ -19,6 +19,8 @@ import DEFAULT_THEME from './App.theme';
 import logo from './img/logo/outline.png';
 import { Box, Camera } from 'react-feather';
 
+/* @todo remove this after the sidebar is proper.
+This just generates some sidebar items to play with. */
 const getItems = [...Array(100)];
 
 const App = ({ className, match }: { className: string }) =>
@@ -69,6 +71,7 @@ const App = ({ className, match }: { className: string }) =>
           <Canvas>
             <Route default>
               <Sidebar>
+                {/* It's play time! See line 22 */}
                 {getItems.map((item, index) =>
                   (<SidebarItem key={index} title="My">
                     <SidebarItem title="Name">

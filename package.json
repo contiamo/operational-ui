@@ -76,6 +76,7 @@
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-enzyme"
     ],
@@ -86,5 +87,8 @@
       "enzyme",
       "jest-enzyme"
     ]
+=======
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
+>>>>>>> WIP: Housekeeping on the rough sidebar component so far
   }
 }
