@@ -6,11 +6,12 @@ type props = {
   className: string,
   children: mixed,
   size?: number,
+  onClick?: void,
   theme: THEME,
 };
 
-const SideNavigationItem = ({ className, children }: props): React$Element<*> =>
-  (<div className={className}>
+const SideNavigationItem = ({ className, children, onClick }: props): React$Element<*> =>
+  (<div className={className} onClick={onClick}>
     {children}
   </div>);
 

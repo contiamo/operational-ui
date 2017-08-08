@@ -8,7 +8,8 @@ exports[`App starts 1`] = `
     className="css-jl0wyp"
   >
     <div
-      className="css-5iw65c"
+      className="css-eaekyz"
+      onClick={undefined}
     >
       <img
         alt="Contiamo"
@@ -21,8 +22,9 @@ exports[`App starts 1`] = `
         Contiamo
       </div>
     </div>
-    <div
-      className="css-12t0ai7"
+    <di
+      className="css-1vta3py"
+      onClick={undefined}
     >
       <svg
         height={30}
@@ -68,7 +70,8 @@ exports[`App starts 1`] = `
       className="css-1c5lpzn"
     />
     <div
-      className="css-csqynm"
+      className="css-188agp3"
+      onClick={undefined}
     >
       <img
         alt="Avatar"
