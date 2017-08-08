@@ -27,6 +27,8 @@ const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
     : theme.colors && theme.colors.primary;
   return {
     '--SideNavigationColor': backgroundColor,
+    position: 'relative',
+    zIndex: 1000,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
