@@ -24,6 +24,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
 
   return {
     display: 'flex',
+    minHeight: 50,
     alignItems: 'center',
     padding: `${theme.spacing / 2}px ${theme.spacing}px`,
     backgroundColor,
