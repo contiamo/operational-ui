@@ -75,9 +75,12 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
+<<<<<<< HEAD
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-enzyme"
     ],
+=======
+>>>>>>> WIP: Created a messy mock sidebar as a rough draft in order to shape up the actual component
     "unmockedModulePathPatterns": [
       "react",
       "enzyme",

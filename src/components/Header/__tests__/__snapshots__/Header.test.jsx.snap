@@ -2,7 +2,7 @@
 
 exports[`Header component renders 1`] = `
 <div
-  className="css-h30ei8"
+  className="css-8jsded"
 >
   Hello
 </div>

@@ -11,11 +11,15 @@ import SideNavigation, {
 
 import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './components/Header/Header';
 
+import Sidebar, { SidebarItem } from './components/Sidebar/Sidebar';
+
 import Canvas from './Canvas/Canvas';
 import DEFAULT_THEME from './App.theme';
 
 import logo from './img/logo/outline.png';
 import { Box, Camera } from 'react-feather';
+
+const getItems = [...Array(100)];
 
 const App = ({ className, match }: { className: string }) =>
   (<Router>
@@ -49,7 +53,7 @@ const App = ({ className, match }: { className: string }) =>
           </SideNavigationItem>
         </SideNavigation>
 
-        <Div css={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
+        <Div css={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh' }}>
           <Header color="#445873">
             <HeaderTitle>Contiamo</HeaderTitle>
             <HeaderItem>
@@ -62,7 +66,37 @@ const App = ({ className, match }: { className: string }) =>
             <HeaderItem>Logout</HeaderItem>
           </Header>
 
-          <Canvas>//Put Routes in Here</Canvas>
+          <Canvas>
+            <Route default>
+              <Sidebar>
+                {getItems.map((item, index) =>
+                  (<SidebarItem key={index} title="My">
+                    <SidebarItem title="Name">
+                      <SidebarItem title="What" />
+                    </SidebarItem>
+                    <SidebarItem title="Name">
+                      <SidebarItem title="Name" />
+                      <SidebarItem title="Name" />
+                      <SidebarItem title="Name" />
+                      <SidebarItem title="Name">
+                        <SidebarItem title="Name" />
+                        <SidebarItem title="Name" />
+                        <SidebarItem title="Name" />
+                        <SidebarItem title="Name">
+                          <SidebarItem title="Name" />
+                          <SidebarItem title="Name" />
+                          <SidebarItem title="Name" />
+                        </SidebarItem>
+                      </SidebarItem>
+                    </SidebarItem>
+
+                    <SidebarItem title="Name" />
+                    <SidebarItem title="Name" />
+                  </SidebarItem>),
+                )}
+              </Sidebar>
+            </Route>
+          </Canvas>
         </Div>
       </div>
     </ThemeProvider>
