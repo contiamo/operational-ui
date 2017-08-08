@@ -5,7 +5,7 @@ exports[`App starts 1`] = `
   className="css-wh8quo"
 >
   <div
-    className="css-7cmi9a"
+    className="css-jl0wyp"
   >
     <div
       className="css-eaekyz"
@@ -17,12 +17,12 @@ exports[`App starts 1`] = `
         src=""
       />
       <div
-        className="css-1rzpg72 tooltip"
+        className="css-7h9ail tooltip"
       >
         Contiamo
       </div>
     </div>
-    <div
+    <di
       className="css-1vta3py"
       onClick={undefined}
     >
@@ -61,7 +61,7 @@ exports[`App starts 1`] = `
         />
       </svg>
       <div
-        className="css-1rzpg72 tooltip"
+        className="css-7h9ail tooltip"
       >
         Components
       </div>
@@ -79,22 +79,22 @@ exports[`App starts 1`] = `
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
       <div
-        className="css-o86jju tooltip"
+        className="css-13qwgc4 tooltip"
       >
         <div
-          className="css-1iqwf3n"
+          className="css-45hmt0"
           onClick={undefined}
         >
           My Account
         </div>
         <div
-          className="css-1iqwf3n"
+          className="css-45hmt0"
           onClick={undefined}
         >
           Feedback
         </div>
         <div
-          className="css-1iqwf3n"
+          className="css-45hmt0"
           onClick={undefined}
         >
           Logout
@@ -103,9 +103,97 @@ exports[`App starts 1`] = `
     </div>
   </div>
   <div
-    className="css-nil"
+    className="css-1ouw5ql"
   >
-    //Put Routes in Here
+    <div
+      className="css-iruz6i"
+    >
+      <div
+        className="css-1911pn3"
+      >
+        Contiamo
+      </div>
+      <div
+        className="css-11lzgch"
+        onClick={undefined}
+      >
+        <svg
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+          />
+          <circle
+            cx="12"
+            cy="13"
+            r="4"
+          />
+        </svg>
+         Gallery
+      </div>
+      <div
+        className="css-11lzgch"
+        onClick={undefined}
+      >
+        <svg
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <polyline
+            fill="none"
+            points="2.32 6.16 12 11 21.68 6.16"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            x1="12"
+            x2="12"
+            y1="22.76"
+            y2="11"
+          />
+        </svg>
+         Components
+      </div>
+      <div
+        className="css-1krlqp9"
+      />
+      <div
+        className="css-11lzgch"
+        onClick={undefined}
+      >
+        Logout
+      </div>
+    </div>
+    <div
+      className="css-1c5srwg"
+    >
+      //Put Routes in Here
+    </div>
   </div>
 </div>
 `;

@@ -7,6 +7,10 @@ const Canvas = ({ className, children }: { className: string, children: HTMLElem
     {children}
   </div>);
 
-const styles = {};
+const styles = ({ theme }: { theme: THEME }): {} => ({
+  flexGrow: 1,
+  padding: theme.spacing,
+  backgroundColor: theme.greys && theme.greys['10'],
+});
 
 export default glamorous(Canvas)(styles);

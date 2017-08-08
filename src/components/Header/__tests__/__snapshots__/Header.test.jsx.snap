@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component renders 1`] = `
+<div
+  className="css-h30ei8"
+>
+  Hello
+</div>
+`;

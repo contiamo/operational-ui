@@ -9,17 +9,19 @@ import SideNavigation, {
   SideNavigationTooltip,
 } from './components/SideNavigation/SideNavigation';
 
+import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './components/Header/Header';
+
 import Canvas from './Canvas/Canvas';
 import DEFAULT_THEME from './App.theme';
 
 import logo from './img/logo/outline.png';
-import { Box } from 'react-feather';
+import { Box, Camera } from 'react-feather';
 
 const App = ({ className, match }: { className: string }) =>
   (<Router>
     <ThemeProvider theme={DEFAULT_THEME}>
       <div className={className}>
-        <SideNavigation>
+        <SideNavigation color="#445873">
           <SideNavigationItem size={60}>
             <Img css={{ maxWidth: '100%' }} alt="Contiamo" src={logo} />
             <SideNavigationTooltip>Contiamo</SideNavigationTooltip>
@@ -47,7 +49,21 @@ const App = ({ className, match }: { className: string }) =>
           </SideNavigationItem>
         </SideNavigation>
 
-        <Canvas>//Put Routes in Here</Canvas>
+        <Div css={{ display: 'flex', flexDirection: 'column', width: '100vw' }}>
+          <Header color="#445873">
+            <HeaderTitle>Contiamo</HeaderTitle>
+            <HeaderItem>
+              <Camera /> Gallery
+            </HeaderItem>
+            <HeaderItem>
+              <Box /> Components
+            </HeaderItem>
+            <HeaderSeparator />
+            <HeaderItem>Logout</HeaderItem>
+          </Header>
+
+          <Canvas>//Put Routes in Here</Canvas>
+        </Div>
       </div>
     </ThemeProvider>
   </Router>);
