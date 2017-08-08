@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNavigationItem component renders 1`] = `
-<div
+<SideNavigationItem
   className="css-r62b6o"
 >
   Hi, I'm an Item
-</div>
+</SideNavigationItem>
 `;
