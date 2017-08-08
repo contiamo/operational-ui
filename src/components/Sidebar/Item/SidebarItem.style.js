@@ -1,7 +1,7 @@
 // @flow
 import { css } from 'glamor';
 
-export default ({ theme }: { theme: THEME }): {} => {
+export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
   const spin: string = css.keyframes({
     from: {
       transform: 'rotate(0deg)',
@@ -10,34 +10,38 @@ export default ({ theme }: { theme: THEME }): {} => {
       transform: 'rotate(359deg)',
     },
   });
+
+  const caret: {} = children
+    ? {
+      '> .header::after': {
+        content: "''",
+        position: 'absolute',
+        top: 12,
+        right: theme.spacing / 2,
+        display: 'block',
+        width: 0,
+        height: 0,
+        border: '4px solid transparent',
+        borderLeftColor: theme.greys && theme.greys['30'],
+        transition: '.15s transform ease',
+      },
+    }
+    : {};
+
   return {
     '> .header': {
       position: 'relative',
       padding: theme.spacing / 2,
       paddingRight: theme.spacing,
       cursor: 'pointer',
+      borderTop: `1px solid ${theme.greys && theme.greys['20']}`,
     },
 
     '> .header:hover': {
       backgroundColor: theme.greys && theme.greys['10'],
     },
 
-    '& + &': {
-      borderTop: `1px solid ${theme.greys && theme.greys['20']}`,
-    },
-
-    '> .header::after': {
-      content: "''",
-      position: 'absolute',
-      top: 12,
-      right: theme.spacing / 2,
-      display: 'block',
-      width: 0,
-      height: 0,
-      border: '4px solid transparent',
-      borderLeftColor: theme.greys && theme.greys['30'],
-      transition: '.15s transform ease',
-    },
+    ...caret,
 
     '&.open > .header': {
       borderBottom: `1px solid ${theme.greys && theme.greys['30']}`,

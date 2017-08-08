@@ -20,6 +20,8 @@ class SidebarItem extends Component {
 
   static defaultProps = {
     children: '',
+    open: false,
+    onClick: () => true,
   };
 
   constructor(props) {
@@ -34,6 +36,9 @@ class SidebarItem extends Component {
     this.setState(() => ({ updating: true }));
     if (this.props.onClick && !this.state.open) {
       await this.props.onClick();
+    }
+    if (!this.props.children) {
+      return;
     }
     this.setState(prevState => ({
       open: !prevState.open,
