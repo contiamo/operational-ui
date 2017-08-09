@@ -18,9 +18,11 @@ const SidebarLink = ({
   onClick: void,
   symbol: string,
 }) => {
-  let Component = Div;
+  let Component = Div; // By default, use a standard div.
+
+  // if this is expected to work with react-router,
   if (to) {
-    Component = Link;
+    Component = Link; // use a <Link /> since it supports props.to.
   }
 
   return (
@@ -36,14 +38,19 @@ const SidebarLink = ({
 };
 
 const style = ({ theme, color }: { theme: THEME, color: string }) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.primary;
+  const backgroundColor = color
+    ? hexOrColor(color)(theme.colors && theme.colors[color])
+    : theme.colors && theme.colors.primary;
   const textColor = readableTextColor(backgroundColor)(['black', 'white']);
   return {
     display: 'flex',
     padding: theme.spacing / 2,
     transition: 'background-color .1s ease',
     cursor: 'pointer',
+
+    // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: 'none',
+
     backgroundColor,
     color: textColor,
 
@@ -51,6 +58,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
       backgroundColor: darken(backgroundColor)(5),
 
       // The text color needs to change too if it gets too dark 😁
+      // Also, here's a prime benefit of functional JS: function composition!
       color: readableTextColor(darken(backgroundColor)(5))(['black', 'white']),
     },
     '& > .symbol': {
