@@ -17,13 +17,9 @@ exports[`App starts 1`] = `
         src=""
       />
       <div
-        className="css-1jepcq5 tooltip"
+        className="css-16h3ud6 tooltip"
       >
-        <div
-          className="tooltip__content"
-        >
-          Contiamo
-        </div>
+        Contiamo
       </div>
     </div>
     <div
@@ -65,13 +61,9 @@ exports[`App starts 1`] = `
         />
       </svg>
       <div
-        className="css-1jepcq5 tooltip"
+        className="css-16h3ud6 tooltip"
       >
-        <div
-          className="tooltip__content"
-        >
-          Components
-        </div>
+        Components
       </div>
     </div>
     <div
@@ -87,29 +79,25 @@ exports[`App starts 1`] = `
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
       <div
-        className="css-1dw3tux tooltip"
+        className="css-1aee63b tooltip"
       >
         <div
-          className="tooltip__content"
+          className="css-45hmt0"
+          onClick={undefined}
         >
-          <div
-            className="css-45hmt0"
-            onClick={undefined}
-          >
-            My Account
-          </div>
-          <div
-            className="css-45hmt0"
-            onClick={undefined}
-          >
-            Feedback
-          </div>
-          <div
-            className="css-45hmt0"
-            onClick={undefined}
-          >
-            Logout
-          </div>
+          My Account
+        </div>
+        <div
+          className="css-45hmt0"
+          onClick={undefined}
+        >
+          Feedback
+        </div>
+        <div
+          className="css-45hmt0"
+          onClick={undefined}
+        >
+          Logout
         </div>
       </div>
     </div>
@@ -214,13 +202,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -247,13 +231,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -280,13 +260,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -313,13 +289,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -346,13 +318,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -379,13 +347,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -412,13 +376,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -445,13 +405,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -478,13 +434,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -511,13 +463,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -544,13 +492,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -577,13 +521,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -610,13 +550,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -643,13 +579,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -676,13 +608,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -709,13 +637,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -742,13 +666,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -775,13 +695,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -808,13 +724,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -841,13 +753,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -874,13 +782,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -907,13 +811,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -940,13 +840,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -973,13 +869,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1006,13 +898,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1039,13 +927,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1072,13 +956,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1105,13 +985,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1138,13 +1014,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1171,13 +1043,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1204,13 +1072,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1237,13 +1101,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1270,13 +1130,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1303,13 +1159,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1336,13 +1188,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1369,13 +1217,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1402,13 +1246,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1435,13 +1275,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1468,13 +1304,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1501,13 +1333,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1534,13 +1362,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1567,13 +1391,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1600,13 +1420,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1633,13 +1449,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1666,13 +1478,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1699,13 +1507,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1732,13 +1536,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1765,13 +1565,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1798,13 +1594,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1831,13 +1623,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1864,13 +1652,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1897,13 +1681,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1930,13 +1710,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1963,13 +1739,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -1996,13 +1768,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2029,13 +1797,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2062,13 +1826,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2095,13 +1855,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2128,13 +1884,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2161,13 +1913,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2194,13 +1942,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2227,13 +1971,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2260,13 +2000,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2293,13 +2029,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2326,13 +2058,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2359,13 +2087,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2392,13 +2116,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2425,13 +2145,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2458,13 +2174,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2491,13 +2203,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2524,13 +2232,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2557,13 +2261,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2590,13 +2290,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2623,13 +2319,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2656,13 +2348,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2689,13 +2377,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2722,13 +2406,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2755,13 +2435,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2788,13 +2464,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2821,13 +2493,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2854,13 +2522,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2887,13 +2551,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2920,13 +2580,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2953,13 +2609,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -2986,13 +2638,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3019,13 +2667,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3052,13 +2696,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3085,13 +2725,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3118,13 +2754,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3151,13 +2783,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3184,13 +2812,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3217,13 +2841,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3250,13 +2870,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3283,13 +2899,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3316,13 +2928,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3349,13 +2957,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3382,13 +2986,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3415,13 +3015,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3448,13 +3044,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
@@ -3481,13 +3073,9 @@ exports[`App starts 1`] = `
           >
             Hola Compadre
             <div
-              className="css-8399xv tooltip"
+              className="css-3wa2g1 tooltip"
             >
-              <div
-                className="tooltip__content"
-              >
-                This says hi, friend in Spanish
-              </div>
+              This says hi, friend in Spanish
             </div>
             <div
               className="symbol"
