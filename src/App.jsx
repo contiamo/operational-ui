@@ -2,6 +2,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import glamorous, { Img, Div, ThemeProvider } from 'glamorous';
+import { Box, Camera } from 'react-feather';
+
+import { darken } from './utils/color';
 
 import SideNavigation, {
   SideNavigationItem,
@@ -11,13 +14,13 @@ import SideNavigation, {
 
 import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './components/Header/Header';
 
-import Sidebar, { SidebarItem } from './components/Sidebar/Sidebar';
+import Sidebar, { SidebarItem, SidebarLink } from './components/Sidebar/Sidebar';
 
 import Canvas from './Canvas/Canvas';
-import DEFAULT_THEME from './App.theme';
 
 import logo from './img/logo/outline.png';
-import { Box, Camera } from 'react-feather';
+
+import DEFAULT_THEME from './App.theme';
 
 /* @todo remove this after the sidebar is proper.
 This just generates some sidebar items to play with. */
@@ -75,7 +78,7 @@ const App = ({ className, match }: { className: string }) =>
                 {getItems.map((item, index) =>
                   (<SidebarItem key={index} title="My">
                     <SidebarItem title="Name">
-                      <SidebarItem title="What" />
+                      <SidebarLink symbol="%">Hola Compadre</SidebarLink>
                     </SidebarItem>
                     <SidebarItem title="Name">
                       <SidebarItem title="Name" />
