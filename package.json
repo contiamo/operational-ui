@@ -61,6 +61,7 @@
     "rollup-plugin-jsx": "^1.0.3",
     "rollup-plugin-node-resolve": "^3.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "webpack": "^3.5.2",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.7.1",
@@ -69,6 +70,11 @@
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.7.0",
 >>>>>>> Updated dependencies
+=======
+    "webpack": "^3.5.2",
+    "webpack-dashboard": "^0.4.0",
+    "webpack-dev-server": "^2.7.1",
+>>>>>>> WIP: Abstracted tooltip to its own core component
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {

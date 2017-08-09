@@ -14,7 +14,7 @@ import SideNavigation, {
 
 import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './components/Header/Header';
 
-import Sidebar, { SidebarItem, SidebarLink } from './components/Sidebar/Sidebar';
+import Sidebar, { SidebarItem, SidebarLink, SidebarTooltip } from './components/Sidebar/Sidebar';
 
 import Canvas from './Canvas/Canvas';
 
@@ -76,14 +76,22 @@ const App = ({ className, match }: { className: string }) =>
               <Sidebar>
                 {/* It's play time! See line 22 */}
                 {getItems.map((item, index) =>
-                  (<SidebarItem key={index} title="My">
-                    <SidebarItem title="Name">
-                      <SidebarLink symbol="%">Hola Compadre</SidebarLink>
-                    </SidebarItem>
-                    <SidebarItem title="Name">
-                      <SidebarItem title="Name" />
-                      <SidebarItem title="Name" />
-                      <SidebarItem title="Name" />
+                  (<div key={index}>
+                    <SidebarLink color="#fff" symbol="%">
+                      Hola Compadre
+                      <SidebarTooltip>This says hi, friend in Spanish</SidebarTooltip>
+                    </SidebarLink>
+                    <SidebarItem title="My">
+                      <SidebarLink symbol="%">
+                        Hola Compadre
+                        <SidebarTooltip>This says hi, friend in Spanish</SidebarTooltip>
+                      </SidebarLink>
+                      <SidebarItem title="Name">
+                        <SidebarLink symbol="%">
+                          Hola Compadre
+                          <SidebarTooltip>This says hi, friend in Spanish</SidebarTooltip>
+                        </SidebarLink>
+                      </SidebarItem>
                       <SidebarItem title="Name">
                         <SidebarItem title="Name" />
                         <SidebarItem title="Name" />
@@ -92,13 +100,18 @@ const App = ({ className, match }: { className: string }) =>
                           <SidebarItem title="Name" />
                           <SidebarItem title="Name" />
                           <SidebarItem title="Name" />
+                          <SidebarItem title="Name">
+                            <SidebarItem title="Name" />
+                            <SidebarItem title="Name" />
+                            <SidebarItem title="Name" />
+                          </SidebarItem>
                         </SidebarItem>
                       </SidebarItem>
-                    </SidebarItem>
 
-                    <SidebarItem title="Name" />
-                    <SidebarItem title="Name" />
-                  </SidebarItem>),
+                      <SidebarItem title="Name" />
+                      <SidebarItem title="Name" />
+                    </SidebarItem>
+                  </div>),
                 )}
               </Sidebar>
             </Route>

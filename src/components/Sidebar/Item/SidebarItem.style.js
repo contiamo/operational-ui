@@ -1,5 +1,6 @@
 // @flow
 import { css } from 'glamor';
+import { TOOLTIP_CONTAINER_STYLE } from '../../Tooltip/Tooltip';
 
 export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
   const spin: string = css.keyframes({
@@ -41,8 +42,6 @@ export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
       backgroundColor: theme.greys && theme.greys['10'],
     },
 
-    ...caret,
-
     '&.open > .header': {
       borderBottom: `1px solid ${theme.greys && theme.greys['30']}`,
     },
@@ -76,6 +75,11 @@ export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
       height: '100%',
       borderRight: `1px solid ${theme.greys && theme.greys['30']}`,
       backgroundColor: theme.greys && theme.greys['10'],
+    },
+
+    ...caret,
+    ':hover > .tooltip': {
+      ...TOOLTIP_CONTAINER_STYLE,
     },
   };
 };

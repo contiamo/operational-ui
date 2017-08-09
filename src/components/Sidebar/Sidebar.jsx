@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 
 import SidebarItem from './Item/SidebarItem';
 import SidebarLink from './Link/SidebarLink';
+import SidebarTooltip from './Tooltip/SidebarTooltip';
 
 const Sidebar = ({ className, children }: { className: string, children: mixed }) =>
   (<div className={className}>
@@ -22,4 +23,4 @@ const style = ({ theme }: { theme: THEME }): {} => ({
 });
 
 export default glamorous(Sidebar)(style);
-export { SidebarItem, SidebarLink };
+export { SidebarItem, SidebarLink, SidebarTooltip };

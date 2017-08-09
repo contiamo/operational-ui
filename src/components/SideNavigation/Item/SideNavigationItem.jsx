@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import glamorous, { Img } from 'glamorous';
+import { TOOLTIP_CONTAINER_STYLE } from '../../Tooltip/Tooltip';
 
 type props = {
   className: string,
@@ -30,9 +31,7 @@ const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   },
 
   ':hover > .tooltip': {
-    '--offsetLeft': 0,
-    opacity: 1,
-    pointerEvents: 'all',
+    ...TOOLTIP_CONTAINER_STYLE,
   },
 });
 
