@@ -2,7 +2,7 @@
 
 exports[`SideNavigationItem component renders 1`] = `
 <SideNavigationItem
-  className="css-8jobry"
+  className="css-n21ovj"
 >
   Hi, I'm an Item
 </SideNavigationItem>

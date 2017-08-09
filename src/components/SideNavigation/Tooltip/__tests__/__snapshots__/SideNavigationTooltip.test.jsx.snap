@@ -2,8 +2,12 @@
 
 exports[`SideNavigationTooltip component renders 1`] = `
 <div
-  className="css-tsnx5z tooltip"
+  className="css-1620a7n tooltip"
 >
-  Hi, I'm a Link
+  <div
+    className="tooltip__content"
+  >
+    Hi, I'm a Link
+  </div>
 </div>
 `;

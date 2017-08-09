@@ -3,6 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import glamorous, { Div } from 'glamorous';
 
+import { TOOLTIP_CONTAINER_STYLE } from '../../Tooltip/Tooltip';
+
 import { hexOrColor, readableTextColor, darken } from '../../../utils/color';
 
 const SidebarLink = ({
@@ -42,6 +44,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
     ? hexOrColor(color)(theme.colors && theme.colors[color])
     : theme.colors && theme.colors.primary;
   const textColor = readableTextColor(backgroundColor)(['black', 'white']);
+
   return {
     display: 'flex',
     padding: theme.spacing / 2,
@@ -63,6 +66,9 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
     },
     '& > .symbol': {
       marginLeft: 'auto',
+    },
+    ':hover > .tooltip': {
+      ...TOOLTIP_CONTAINER_STYLE,
     },
   };
 };
