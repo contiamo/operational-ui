@@ -13,9 +13,7 @@ const Tooltip = ({
   position?: string,
 }): React$Element<*> =>
   (<div className={`${className} tooltip`}>
-    <div className="tooltip__content">
-      {children}
-    </div>
+    {children}
   </div>);
 
 const TOOLTIP_CONTAINER_STYLE = {
