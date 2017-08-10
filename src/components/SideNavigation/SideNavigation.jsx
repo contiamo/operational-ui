@@ -5,7 +5,6 @@ import glamorous from 'glamorous';
 
 import SideNavigationItem from './Item/SideNavigationItem';
 import SideNavigationLink from './Link/SideNavigationLink';
-import SideNavigationTooltip from './Tooltip/SideNavigationTooltip';
 
 import { hexOrColor, readableTextColor } from '../../utils/color';
 
@@ -28,7 +27,7 @@ const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
   return {
     '--SideNavigationColor': backgroundColor,
     position: 'relative',
-    zIndex: 1000,
+    zIndex: (theme.baseZIndex || 0) + 100,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -41,4 +40,4 @@ const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
 };
 
 export default glamorous(SideNavigation)(style);
-export { SideNavigationItem, SideNavigationLink, SideNavigationTooltip };
+export { SideNavigationItem, SideNavigationLink };

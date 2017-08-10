@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`SideNavigationTooltip component renders 1`] = `
-<div
-  className="css-1pu0sm6 tooltip"
->
-  Hi, I'm a Link
-</div>
-`;

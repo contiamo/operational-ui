@@ -1,63 +1,59 @@
 // @flow
-import { css } from 'glamor';
-import { TOOLTIP_CONTAINER_STYLE } from '../../Tooltip/Tooltip';
+import spin from '../../../utils/animations/spin';
 
 export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
-  const spin: string = css.keyframes({
-    from: {
-      transform: 'rotate(0deg)',
-    },
-    to: {
-      transform: 'rotate(359deg)',
-    },
-  });
-
+  // If we have children, style a caret.
   const caret: {} = children
     ? {
-      '> .header::after': {
-        content: "''",
-        position: 'absolute',
-        top: 12,
-        right: theme.spacing / 2,
-        display: 'block',
-        width: 0,
-        height: 0,
-        border: '4px solid transparent',
-        borderLeftColor: theme.greys && theme.greys['30'],
-        transition: '.15s transform ease',
-      },
+      content: '""',
+      display: 'block',
+      width: 0,
+      height: 0,
+      marginLeft: 'auto',
+      border: '4px solid transparent',
+      borderLeftColor: theme.greys && theme.greys['30'],
+      transition: '.15s transform ease',
     }
     : {};
 
   return {
-    '> .header': {
+    position: 'relative',
+
+    '& .header': {
       position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
       padding: theme.spacing / 2,
-      paddingRight: theme.spacing,
-      cursor: 'pointer',
       borderTop: `1px solid ${theme.greys && theme.greys['20']}`,
+      cursor: 'pointer',
     },
 
-    '> .header:hover': {
+    '& .header:hover': {
       backgroundColor: theme.greys && theme.greys['10'],
     },
 
-    '&.open > .header': {
+    '&.open .header': {
       borderBottom: `1px solid ${theme.greys && theme.greys['30']}`,
     },
 
-    '&.open > .header::after': {
+    // Caret styles begin here.
+    '& .header::after': {
+      ...caret,
+    },
+
+    '&.open .header::after': {
+      // rotate the caret to face down when an item is open.
       transform: 'translateX(-2px) rotate(90deg)',
     },
 
-    '&.updating > .header::after': {
-      top: 9,
+    // Spinner for async items replaces a caret.
+    '&.updating .header::after': {
       width: 16,
       height: 16,
+      border: 0,
       borderRadius: '50%',
       boxShadow: `1px 0px 0px 0px ${theme.greys && theme.greys['70']} inset`,
       animation: `.7s ${spin} linear infinite`,
-      border: 0,
     },
 
     '& .content': {
@@ -65,7 +61,8 @@ export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
       paddingLeft: theme.spacing,
     },
 
-    '& .content::before': {
+    // This pseudo-element creates a visible indent for structure clarity.
+    '& .content::after': {
       content: "''",
       position: 'absolute',
       top: 0,
@@ -75,11 +72,6 @@ export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
       height: '100%',
       borderRight: `1px solid ${theme.greys && theme.greys['30']}`,
       backgroundColor: theme.greys && theme.greys['10'],
-    },
-
-    ...caret,
-    ':hover > .tooltip': {
-      ...TOOLTIP_CONTAINER_STYLE,
     },
   };
 };

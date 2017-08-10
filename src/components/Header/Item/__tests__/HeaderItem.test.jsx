@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 
 import HeaderItem from '../HeaderItem';
 
 test('HeaderItem component renders', () => {
   const output = shallow(<HeaderItem>My name is Ed</HeaderItem>);
-  expect(toJson(output)).toMatchSnapshot();
+  expect(output).toMatchSnapshot();
 });
 
 test('HeaderItem handles click', () => {
