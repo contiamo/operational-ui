@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withTooltip Higher-Order Component Should return a component 1`] = `
+<div
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <glamorous.Div
+    tooltipAnchor="top"
+  />
+</div>
+`;

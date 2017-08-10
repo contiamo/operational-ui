@@ -29,6 +29,7 @@ const DEFAULT_THEME: THEME = {
     defaultSize: 13,
   },
   spacing: 16,
+  baseZIndex: 0,
 };
 
 // Specific gradient creation for Contiamo, according to the style guide.

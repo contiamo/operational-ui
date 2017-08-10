@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import glamorous, { Img } from 'glamorous';
-import { TOOLTIP_CONTAINER_STYLE } from '../../Tooltip/Tooltip';
+
+import withTooltip from '../../Tooltip/withTooltip';
 
 type props = {
   className: string,
@@ -29,10 +30,6 @@ const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   ':first-child': {
     marginBottom: theme.spacing,
   },
-
-  ':hover > .tooltip': {
-    ...TOOLTIP_CONTAINER_STYLE,
-  },
 });
 
-export default glamorous(SideNavigationItem)(style);
+export default glamorous(withTooltip(SideNavigationItem))(style);

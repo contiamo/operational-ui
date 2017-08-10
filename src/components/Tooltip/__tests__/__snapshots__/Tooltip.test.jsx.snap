@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip Component Should intialize without problems 1`] = `
+<div
+  className="test "
+  style={Object {}}
+>
+  Hello
+</div>
+`;

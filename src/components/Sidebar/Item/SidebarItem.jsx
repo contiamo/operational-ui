@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 
 import style from './SidebarItem.style';
+import withTooltip from '../../Tooltip/withTooltip';
 
 class SidebarItem extends Component {
   props: {
@@ -10,35 +11,38 @@ class SidebarItem extends Component {
     title: mixed,
     children?: mixed,
     open?: boolean,
-    onClick?: Function,
+    onClick?: void,
+    tooltip?: string,
   };
 
   state: {
     open: boolean,
-    updating: boolean,
+    updating: boolean, // async, woo!
   };
 
   static defaultProps = {
     children: '',
     open: false,
-    onClick: () => true,
+    onClick: () => false,
+    tooltip: '',
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      open: props.open || false,
+      open: props.open,
       updating: false,
     };
   }
 
   async toggle() {
     this.setState(() => ({ updating: true }));
-    if (this.props.onClick && !this.state.open) {
-      await this.props.onClick();
-    }
     if (!this.props.children) {
       return;
+    }
+    // If it is closed,
+    if (this.props.onClick && !this.state.open) {
+      await this.props.onClick(); // wait for the promise to resolve first.
     }
     this.setState(prevState => ({
       open: !prevState.open,
@@ -47,6 +51,12 @@ class SidebarItem extends Component {
   }
 
   render() {
+    /**
+      Only the header should have a tooltip, else the tooltip will show
+      even when the cursor is over the children... who may also have their
+      own tooltips.
+    */
+    const HeaderWithTooltip = withTooltip(Div);
     return (
       <div
         className={`${this.props.className} ${this.state.updating ? 'updating' : ''} ${this.state
@@ -54,9 +64,13 @@ class SidebarItem extends Component {
           ? 'open'
           : ''}`}
       >
-        <div className="header" onClick={() => this.toggle()}>
+        <HeaderWithTooltip
+          className="header"
+          tooltip={this.props.tooltip}
+          onClick={() => this.toggle()}
+        >
           {this.props.title}
-        </div>
+        </HeaderWithTooltip>
         {this.state.open || this.props.open
           ? <div className="content">
             {this.props.children}

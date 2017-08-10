@@ -3,9 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import glamorous, { Div } from 'glamorous';
 
-import { TOOLTIP_CONTAINER_STYLE } from '../../Tooltip/Tooltip';
-
 import { hexOrColor, readableTextColor, darken } from '../../../utils/color';
+
+import withTooltip from '../../Tooltip/withTooltip';
 
 const SidebarLink = ({
   className,
@@ -16,11 +16,11 @@ const SidebarLink = ({
 }: {
   className: string,
   children: mixed,
-  to: string,
-  onClick: void,
-  symbol: string,
+  to?: string,
+  onClick?: void,
+  symbol?: string,
 }) => {
-  let Component = Div; // By default, use a standard div.
+  let Component = Div; // By default, use a standard styled div.
 
   // if this is expected to work with react-router,
   if (to) {
@@ -46,6 +46,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
   const textColor = readableTextColor(backgroundColor)(['black', 'white']);
 
   return {
+    position: 'relative',
     display: 'flex',
     padding: theme.spacing / 2,
     transition: 'background-color .1s ease',
@@ -64,13 +65,11 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
       // Also, here's a prime benefit of functional JS: function composition!
       color: readableTextColor(darken(backgroundColor)(5))(['black', 'white']),
     },
+    // Symbol goes on the right.
     '& > .symbol': {
       marginLeft: 'auto',
-    },
-    ':hover > .tooltip': {
-      ...TOOLTIP_CONTAINER_STYLE,
     },
   };
 };
 
-export default glamorous(SidebarLink)(style);
+export default glamorous(withTooltip(SidebarLink))(style);
