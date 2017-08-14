@@ -7,7 +7,7 @@ import { hexOrColor, readableTextColor, darken } from '../../../utils/color';
 type props = {
   className: string,
   children: mixed,
-  onClick?: void,
+  onClick?: any,
   theme?: THEME,
 };
 

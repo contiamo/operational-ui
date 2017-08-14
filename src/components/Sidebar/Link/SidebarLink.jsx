@@ -73,3 +73,4 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
 };
 
 export default glamorous(withTooltip(SidebarLink))(style);
+export { SidebarLink, style };

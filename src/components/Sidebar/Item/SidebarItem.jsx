@@ -10,7 +10,7 @@ class SidebarItem extends Component {
     className: string,
     title: mixed,
     children?: mixed,
-    open?: boolean,
+    open: boolean,
     onClick?: void,
     tooltip?: string,
   };
@@ -18,28 +18,22 @@ class SidebarItem extends Component {
   state: {
     open: boolean,
     updating: boolean, // async, woo!
+  } = {
+    open: this.props && this.props.open,
+    updating: false,
   };
 
   static defaultProps = {
     children: '',
     open: false,
-    onClick: () => false,
     tooltip: '',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: props.open,
-      updating: false,
-    };
-  }
-
   async toggle() {
-    this.setState(() => ({ updating: true }));
     if (!this.props.children) {
-      return;
+      return false;
     }
+    this.setState(() => ({ updating: true }));
     // If it is closed,
     if (this.props.onClick && !this.state.open) {
       await this.props.onClick(); // wait for the promise to resolve first.
@@ -82,3 +76,4 @@ class SidebarItem extends Component {
 }
 
 export default glamorous(SidebarItem)(style);
+export { SidebarItem };

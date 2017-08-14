@@ -22,4 +22,4 @@ const style = ({ theme }: { theme: THEME }): {} => ({
 });
 
 export default glamorous(Sidebar)(style);
-export { SidebarItem, SidebarLink };
+export { Sidebar, SidebarItem, SidebarLink };

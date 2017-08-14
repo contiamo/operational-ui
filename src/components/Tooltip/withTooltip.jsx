@@ -15,7 +15,7 @@ import Tooltip from './Tooltip';
   />
 */
 
-const withTooltip = (InputComponent): React$Component =>
+const withTooltip = InputComponent =>
   class extends Component {
     props: {
       children: mixed,
