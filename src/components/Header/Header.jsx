@@ -20,9 +20,9 @@ const Header = ({
   </div>);
 
 const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
-  const backgroundColor = color
-    ? hexOrColor(color)(theme.colors ? theme.colors[color] : 'white')
-    : theme.colors && theme.colors.primary;
+  const backgroundColor = hexOrColor(color)(
+    theme.colors ? theme.colors[color] : theme.colors.primary,
+  );
 
   return {
     display: 'flex',
@@ -35,4 +35,4 @@ const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
 };
 
 export default glamorous(Header)(style);
-export { HeaderItem, HeaderSeparator, HeaderTitle };
+export { Header, HeaderItem, HeaderSeparator, HeaderTitle, style };

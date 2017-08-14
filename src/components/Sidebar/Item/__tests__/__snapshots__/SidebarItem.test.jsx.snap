@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidebarItem Should initialize 1`] = `
+<div
+  className="undefined  "
+>
+  <_class
+    className="header"
+    onClick={[Function]}
+    tooltip=""
+    tooltipAnchor="top"
+  />
+</div>
+`;

@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SideNavigationLink Should render properly 1`] = `
+exports[`SideNavigationLink Should properly respond to clicks 1`] = `
+<div
+  className="hi"
+  onClick={[Function]}
+>
+  Hi, I'm a Link
+</div>
+`;
+
+exports[`SideNavigationLink Should render 1`] = `
 <div
   className="hi"
 >

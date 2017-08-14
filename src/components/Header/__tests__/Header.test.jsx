@@ -1,11 +1,17 @@
 // @flow
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
-import Header from '../Header';
+import { Header, style } from '../Header';
 
-test('Header component renders', () => {
-  const output: Object = renderer.create(<Header>Hello</Header>);
-  const tree: {} = output.toJSON();
-  expect(tree).toMatchSnapshot();
+import { contiamoTheme as theme } from '../../../../index';
+
+describe('Header', () => {
+  it('Header component renders', () => {
+    const output = shallow(<Header className="hi">Hello</Header>);
+    expect(output).toMatchSnapshot();
+  });
+  it('Should receive proper styles', () => {
+    expect(style({ theme, color: '#fff' })).toMatchObject({});
+  });
 });
