@@ -59,7 +59,7 @@ class SidebarItem extends Component {
           : ''}`}
       >
         <HeaderWithTooltip
-          className="header"
+          className={`header ${this.state.open || this.props.open ? 'open' : ''}`}
           tooltip={this.props.tooltip}
           onClick={() => this.toggle()}
         >

@@ -41,7 +41,7 @@ export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
       ...caret,
     },
 
-    '&.open > .header::after': {
+    '&.open .header.open::after': {
       // rotate the caret to face down when an item is open.
       transform: 'translateX(-2px) rotate(90deg)',
     },
