@@ -28,6 +28,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
     width: 16,
     height: 16,
     border: '1px solid',
+    cursor: 'pointer',
     color: borderColor,
 
     '& + &': {
