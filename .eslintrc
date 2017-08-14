@@ -9,5 +9,8 @@
     "HTMLElement": true,
     "React$Element": true,
     "THEME": true,
+  },
+  "rules": {
+    "jsx-a11y/href-no-hash": "off"
   }
 }
