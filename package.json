@@ -27,28 +27,14 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "enzyme": "^2.9.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "enzyme-to-json": "^1.5.1",
->>>>>>> Updated dependencies
-=======
->>>>>>> Finalized the Tooltip and withTooltip (Higher-Order) component into its own thing, removed other SpecificTooltip components, perfected the placement of them, using refs now instead of ReactDOM
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "eslint-plugin-react": "^7.2.0",
-=======
-    "eslint-plugin-react": "^7.1.0",
->>>>>>> Updated dependencies
-=======
-    "eslint-plugin-react": "^7.2.0",
->>>>>>> Finalized the Tooltip and withTooltip (Higher-Order) component into its own thing, removed other SpecificTooltip components, perfected the placement of them, using refs now instead of ReactDOM
     "file-loader": "^0.11.2",
     "flow-bin": "^0.52.0",
     "html-webpack-plugin": "^2.30.1",
@@ -60,28 +46,16 @@
     "prop-types": "^15.5.10",
     "react-hot-loader": "next",
     "react-test-renderer": "^15.6.1",
-    "rollup": "^0.45.2",
+    "rollup": "^0.47.4",
     "rollup-plugin-babel": "^3.0.1",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-image": "^1.0.2",
     "rollup-plugin-jsx": "^1.0.3",
     "rollup-plugin-node-resolve": "^3.0.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "webpack": "^3.5.2",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.7.1",
-=======
-    "webpack": "^3.5.1",
-    "webpack-dashboard": "^0.4.0",
-    "webpack-dev-server": "^2.7.0",
->>>>>>> Updated dependencies
-=======
-    "webpack": "^3.5.2",
-    "webpack-dashboard": "^0.4.0",
-    "webpack-dev-server": "^2.7.1",
->>>>>>> WIP: Abstracted tooltip to its own core component
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
@@ -103,32 +77,13 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-enzyme"
     ],
-=======
->>>>>>> WIP: Created a messy mock sidebar as a rough draft in order to shape up the actual component
-=======
->>>>>>> Updated dependencies
-=======
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
->>>>>>> Finalized the Tooltip and withTooltip (Higher-Order) component into its own thing, removed other SpecificTooltip components, perfected the placement of them, using refs now instead of ReactDOM
     "unmockedModulePathPatterns": [
       "react",
       "enzyme",
       "jest-enzyme"
     ]
-<<<<<<< HEAD
-=======
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
->>>>>>> WIP: Housekeeping on the rough sidebar component so far
-=======
->>>>>>> Updated dependencies
   }
 }
