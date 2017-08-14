@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stat Should render 1`] = `
+<Stat
+  className="css-pytre3"
+  label="Country"
+>
+  DE
+</Stat>
+`;
