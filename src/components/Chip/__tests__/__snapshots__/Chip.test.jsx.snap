@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip Should render 1`] = `
+<div>
+  Hi
+  <div
+    className="action"
+  >
+    ×
+  </div>
+</div>
+`;
