@@ -7,9 +7,9 @@ const HeaderItem = ({
   children,
   onClick,
 }: {
-  className: string,
+  className?: string,
   children: mixed,
-  onClick?: void,
+  onClick?: any,
 }): React$Element<*> =>
   (<div onClick={onClick} className={className}>
     {children}
@@ -55,3 +55,4 @@ const style = ({ theme, active }: { theme: THEME, active?: boolean }): {} => {
 };
 
 export default glamorous(HeaderItem)(style);
+export { HeaderItem };

@@ -1,9 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SideNavigationLink component renders 1`] = `
+exports[`SideNavigationLink Should properly respond to clicks 1`] = `
 <div
-  className="css-iv0ydw"
-  onClick={undefined}
+  className="hi"
+  onClick={[Function]}
+>
+  Hi, I'm a Link
+</div>
+`;
+
+exports[`SideNavigationLink Should render 1`] = `
+<div
+  className="hi"
 >
   Hi, I'm a Link
 </div>

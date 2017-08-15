@@ -36,4 +36,5 @@ export type THEME = {
     defaultSize: number,
   },
   spacing: number,
+  baseZIndex: number,
 };
