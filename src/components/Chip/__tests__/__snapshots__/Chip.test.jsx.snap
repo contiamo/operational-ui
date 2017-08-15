@@ -6,7 +6,7 @@ exports[`Chip Should render 1`] = `
   <div
     className="action"
   >
-    ×
+    <GoX />
   </div>
 </div>
 `;

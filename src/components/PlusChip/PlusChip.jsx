@@ -1,5 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
+import GoPlus from 'react-icons/lib/go/plus';
 
 import { hexOrColor } from '../../utils/color';
 
@@ -13,7 +14,7 @@ const PlusChip = ({
   onClick?: any,
 }) =>
   (<div className={className} onClick={onClick}>
-    {children}
+    {children || <GoPlus />}
   </div>);
 
 const style = ({ theme, color }: { theme: THEME, color: string }) => {
@@ -25,8 +26,8 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 16,
-    height: 16,
+    width: 15,
+    height: 15,
     border: '1px solid',
     cursor: 'pointer',
     color: borderColor,
