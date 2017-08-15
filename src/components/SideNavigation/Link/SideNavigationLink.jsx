@@ -7,8 +7,8 @@ import { hexOrColor, readableTextColor, darken } from '../../../utils/color';
 type props = {
   className: string,
   children: mixed,
-  onClick?: void,
-  theme: THEME,
+  onClick?: any,
+  theme?: THEME,
 };
 
 const SideNavigationLink = ({ className, children, onClick }: props): React$Element<*> =>
@@ -23,7 +23,7 @@ const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
 
   return {
     position: 'relative',
-    zIndex: 2,
+    zIndex: (theme.baseZIndex || 0) + 1,
     margin: `0 ${theme.spacing * -0.5}px`,
     padding: `${theme.spacing}px`,
     minWidth: 200,
@@ -51,3 +51,4 @@ const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
 };
 
 export default glamorous(SideNavigationLink)(style);
+export { SideNavigationLink, style }; // for testing.

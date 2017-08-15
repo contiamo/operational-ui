@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import glamorous, { Img } from 'glamorous';
 
+import withTooltip from '../../Tooltip/withTooltip';
+
 type props = {
   className: string,
   children: mixed,
@@ -28,12 +30,6 @@ const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   ':first-child': {
     marginBottom: theme.spacing,
   },
-
-  ':hover > .tooltip': {
-    '--offsetLeft': 0,
-    opacity: 1,
-    pointerEvents: 'all',
-  },
 });
 
-export default glamorous(SideNavigationItem)(style);
+export default glamorous(withTooltip(SideNavigationItem))(style);

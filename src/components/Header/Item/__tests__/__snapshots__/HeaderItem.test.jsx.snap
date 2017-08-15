@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HeaderItem component renders 1`] = `
-<HeaderItem
-  className="css-47jvj5"
->
+exports[`HeaderItem Looks different when active 1`] = `
+<div>
   My name is Ed
-</HeaderItem>
+</div>
+`;
+
+exports[`HeaderItem Renders 1`] = `
+<div>
+  My name is Ed
+</div>
 `;

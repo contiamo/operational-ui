@@ -20,10 +20,13 @@ const Header = ({
   </div>);
 
 const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
-  const backgroundColor = hexOrColor(color)(theme.colors ? theme.colors[color] : 'white');
+  const backgroundColor = hexOrColor(color)(
+    theme.colors ? theme.colors[color] : theme.colors.primary,
+  );
 
   return {
     display: 'flex',
+    minHeight: 50,
     alignItems: 'center',
     padding: `${theme.spacing / 2}px ${theme.spacing}px`,
     backgroundColor,
@@ -32,4 +35,4 @@ const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
 };
 
 export default glamorous(Header)(style);
-export { HeaderItem, HeaderSeparator, HeaderTitle };
+export { Header, HeaderItem, HeaderSeparator, HeaderTitle, style };
