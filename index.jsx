@@ -8,10 +8,10 @@ import SideNavigation, {
   SideNavigationTooltip,
 } from './src/components/SideNavigation/SideNavigation';
 
-import { Chip } from './src/components/Chip/Chip';
-import { PlusChip } from './src/components/PlusChip/PlusChip';
-import { Card } from './src/components/Card/Card';
-import { Stat } from './src/components/Stat/Stat';
+import Chip from './src/components/Chip/Chip';
+import PlusChip from './src/components/PlusChip/PlusChip';
+import Card from './src/components/Card/Card';
+import Stat from './src/components/Stat/Stat';
 
 import contiamoTheme from './src/App.theme';
 
