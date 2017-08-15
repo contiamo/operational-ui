@@ -5,7 +5,6 @@ import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './src/componen
 import SideNavigation, {
   SideNavigationItem,
   SideNavigationLink,
-  SideNavigationTooltip,
 } from './src/components/SideNavigation/SideNavigation';
 
 import Chip from './src/components/Chip/Chip';
@@ -25,7 +24,6 @@ export {
   SideNavigation,
   SideNavigationItem,
   SideNavigationLink,
-  SideNavigationTooltip,
   Chip,
   PlusChip,
   Card,
