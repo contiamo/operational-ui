@@ -1,5 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
+import GoX from 'react-icons/lib/go/x';
 
 import { hexOrColor, readableTextColor } from '../../utils/color';
 
@@ -17,7 +18,7 @@ const Chip = ({
   (<div className={className}>
     {children}
     <div className="action" onClick={onClick}>
-      {symbol || '×'}
+      {symbol || <GoX />}
     </div>
   </div>);
 
