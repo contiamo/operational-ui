@@ -7,6 +7,10 @@ import SideNavigation, {
   SideNavigationLink,
 } from './src/components/SideNavigation/SideNavigation';
 
+import Tooltip from './src/components/Tooltip/Tooltip';
+
+import withTooltip from './src/components/Tooltip/withTooltip';
+
 import Chip from './src/components/Chip/Chip';
 import PlusChip from './src/components/PlusChip/PlusChip';
 import Card from './src/components/Card/Card';
@@ -18,12 +22,15 @@ import { ThemeProvider } from 'glamorous';
 
 export {
   Header,
+  open,
   HeaderItem,
   HeaderSeparator,
   HeaderTitle,
   SideNavigation,
   SideNavigationItem,
   SideNavigationLink,
+  Tooltip,
+  withTooltip,
   Chip,
   PlusChip,
   Card,
