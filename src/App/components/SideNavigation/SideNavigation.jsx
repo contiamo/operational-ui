@@ -1,16 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Div, Img } from 'glamorous';
 import { Box } from 'react-feather';
 
 import SideNavigation, {
   SideNavigationItem,
   SideNavigationLink,
-} from '../../components/SideNavigation/SideNavigation';
+} from '../../../components/SideNavigation/SideNavigation';
 
 export default () =>
   (<SideNavigation color="#445873">
     <SideNavigationItem tooltip="Contiamo" size={60}>
-      <Img css={{ maxWidth: '100%' }} alt="Contiamo" src="/img/logo/outline.png" />
+      <Link to="/">
+        <Img css={{ maxWidth: '100%' }} alt="Contiamo" src="/img/logo/outline.png" />
+      </Link>
     </SideNavigationItem>
 
     <SideNavigationItem tooltip="Components">

@@ -61,6 +61,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "component-playground": "^2.0.0",
     "glamor": "^2.20.39",
     "glamorous": "^4.1.0",
     "lodash": "^4.17.4",
