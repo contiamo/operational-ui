@@ -9,8 +9,9 @@ const Canvas = ({ className, children }: { className: string, children: HTMLElem
 
 const styles = ({ theme }: { theme: THEME }): {} => ({
   display: 'flex',
-  padding: theme.spacing,
-  backgroundColor: theme.greys && theme.greys['10'],
+  alignItems: 'flex-start',
+  height: '100%',
 });
 
 export default glamorous(Canvas)(styles);
+export { Canvas };

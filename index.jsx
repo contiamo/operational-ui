@@ -16,13 +16,12 @@ import PlusChip from './src/components/PlusChip/PlusChip';
 import Card from './src/components/Card/Card';
 import Stat from './src/components/Stat/Stat';
 
-import contiamoTheme from './src/App.theme';
+import contiamoTheme from './src/theme';
 
 import { ThemeProvider } from 'glamorous';
 
 export {
   Header,
-  open,
   HeaderItem,
   HeaderSeparator,
   HeaderTitle,

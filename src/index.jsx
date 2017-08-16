@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import glamorous, { ThemeProvider } from 'glamorous';
 import { AppContainer } from 'react-hot-loader';
 
-import App from './src/App';
+import App from './App/App';
 
 const render = (Component) => {
   ReactDOM.render(
@@ -18,8 +18,8 @@ const render = (Component) => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./src/App', () => {
-    const NextAppContainer = require('./src/App');
+  module.hot.accept('./App/App', () => {
+    const NextAppContainer = require('./App/App');
     render(NextAppContainer);
   });
 }

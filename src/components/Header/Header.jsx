@@ -20,9 +20,9 @@ const Header = ({
   </div>);
 
 const style = ({ theme, color }: { theme: THEME, color: string }): {} => {
-  const backgroundColor = hexOrColor(color)(
-    theme.colors ? theme.colors[color] : theme.colors.primary,
-  );
+  const backgroundColor = color
+    ? hexOrColor(color)(theme.colors ? theme.colors[color] : 'white')
+    : 'white';
 
   return {
     display: 'flex',
