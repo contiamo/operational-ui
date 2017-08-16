@@ -21,33 +21,35 @@ const PropsTable = ({ className, props }: { className?: string, props: Array<pro
       </tr>
     </thead>
     <tbody>
-      {props.map(({ name, description, defaultValue, type, optional }, index) =>
-        (<tr key={index}>
-          <td>
-            {name}
-          </td>
-          <td>
-            {description}
-          </td>
-          <td>
-            {defaultValue}
-          </td>
-          <td>
-            {type}
-          </td>
-          <td>
-            {optional ? '✅' : '🚫'}
-          </td>
-        </tr>),
-      )}
+      {/* I do [...props].map below to make sure we're ACTUALLY working with an array. */}
+      {props &&
+        [...props].map(({ name, description, defaultValue, type, optional }, index) =>
+          (<tr key={index}>
+            <td>
+              {name}
+            </td>
+            <td>
+              {description}
+            </td>
+            <td>
+              {defaultValue}
+            </td>
+            <td>
+              {type}
+            </td>
+            <td>
+              {optional ? '✅' : '🚫'}
+            </td>
+          </tr>),
+        )}
     </tbody>
   </table>);
 
 const style = ({ theme }: { theme: THEME }) => ({
-  textAlign: 'left',
-  backgroundColor: 'white',
   border: 0,
   borderCollapse: 'collapse',
+  textAlign: 'left',
+  backgroundColor: 'white',
   '& th': {
     border: `1px solid ${theme.greys ? theme.greys[10] : '#eee'}`,
   },

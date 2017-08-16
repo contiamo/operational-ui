@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Table from '../PropsTable';
+import { PropsTable } from '../PropsTable';
 
 const sampleProps = {
   name: 'Hello',
@@ -9,10 +9,10 @@ const sampleProps = {
 };
 
 describe('PropsTable', () => {
-  it('Should render correctly', () => {
-    expect(shallow(<Table />)).toMatchSnapshot();
+  it('Should render correctly without props', () => {
+    expect(shallow(<PropsTable />)).toMatchSnapshot();
   });
   it('Should render correctly with props', () => {
-    expect(shallow(<Table props={sampleProps} />)).toMatchSnapshot();
+    expect(shallow(<PropsTable props={sampleProps} />)).toMatchSnapshot();
   });
 });

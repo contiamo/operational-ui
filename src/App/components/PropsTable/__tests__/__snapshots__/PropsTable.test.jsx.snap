@@ -1,19 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PropsTable Should render correctly 1`] = `
-<PropsTable
-  className="css-16kddqz"
-/>
+exports[`PropsTable Should render correctly with props 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Default Value
+      </th>
+      <th>
+        Type
+      </th>
+      <th>
+        Optional?
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
 `;
 
-exports[`PropsTable Should render correctly with props 1`] = `
-<PropsTable
-  className="css-16kddqz"
-  props={
-    Object {
-      "defaultValue": "false",
-      "name": "Hello",
-    }
-  }
-/>
+exports[`PropsTable Should render correctly without props 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Default Value
+      </th>
+      <th>
+        Type
+      </th>
+      <th>
+        Optional?
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
 `;
