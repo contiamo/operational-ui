@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App starts 1`] = `
+<div
+  className="css-jovpjy"
+>
+  <div
+    className="css-tacsng"
+  >
+    <div
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-f02nqw"
+        onClick={undefined}
+      >
+        <img
+          alt="Contiamo"
+          className="css-1mjw833"
+          src="/img/logo/outline.png"
+        />
+        
+      </div>
+    </div>
+    <div
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-1uw152a"
+        onClick={undefined}
+      >
+        <svg
+          height={30}
+          viewBox="0 0 24 24"
+          width={30}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"
+            fill="none"
+            stroke="white"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <polyline
+            fill="none"
+            points="2.32 6.16 12 11 21.68 6.16"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            x1="12"
+            x2="12"
+            y1="22.76"
+            y2="11"
+          />
+        </svg>
+        
+      </div>
+    </div>
+    <div
+      className="css-1c5lpzn"
+    />
+    <div
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-owk2pz"
+        onClick={undefined}
+      >
+        <img
+          alt="Avatar"
+          className="css-1mjw833"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
+        />
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-19imckl"
+  >
+    <div
+      className="css-czadd6"
+    >
+      <div
+        className="css-1911pn3"
+      >
+        Contiamo
+      </div>
+      <div
+        className="css-11lzgch"
+        onClick={undefined}
+      >
+        <svg
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+          />
+          <circle
+            cx="12"
+            cy="13"
+            r="4"
+          />
+        </svg>
+         Gallery
+      </div>
+      <div
+        className="css-11lzgch"
+        onClick={undefined}
+      >
+        <svg
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <polyline
+            fill="none"
+            points="2.32 6.16 12 11 21.68 6.16"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            x1="12"
+            x2="12"
+            y1="22.76"
+            y2="11"
+          />
+        </svg>
+         Components
+      </div>
+      <div
+        className="css-1krlqp9"
+      />
+      <div
+        className="css-11lzgch"
+        onClick={undefined}
+      >
+        Logout
+      </div>
+    </div>
+    <div
+      className="css-z79p0e"
+    >
+      <div
+        className="css-1u55ha5"
+      >
+        <div
+          className="css-55mlrr  "
+        >
+          <div
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="css-5ohi6e header"
+              onClick={[Function]}
+            >
+              Data Entry
+              
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="css-55mlrr  "
+        >
+          <div
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="css-5ohi6e header"
+              onClick={[Function]}
+            >
+              Feedback
+              
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="css-55mlrr  "
+        >
+          <div
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="css-5ohi6e header"
+              onClick={[Function]}
+            >
+              UI Elements
+              
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="css-55mlrr  "
+        >
+          <div
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="css-5ohi6e header"
+              onClick={[Function]}
+            >
+              Navigation
+              
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="css-55mlrr  "
+        >
+          <div
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="css-5ohi6e header"
+              onClick={[Function]}
+            >
+              Resources
+              
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="css-55mlrr  "
+        >
+          <div
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="css-5ohi6e header"
+              onClick={[Function]}
+            >
+              Icons
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div
+        className="css-wrhe3t"
+      />
+    </div>
+  </div>
+</div>
+`;

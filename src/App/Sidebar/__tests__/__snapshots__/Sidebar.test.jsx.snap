@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Showcase: Sidebar Should render correctly 1`] = `
+<glamorous(Sidebar)>
+  <glamorous(SidebarItem)
+    title="Data Entry"
+  >
+    <glamorous(_class)>
+      Buttons
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Form Fields
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Date Picker
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Color Picker
+    </glamorous(_class)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    title="Feedback"
+  >
+    <glamorous(_class)>
+      Modals
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Notifications
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Alerts
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Messages
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Progress
+    </glamorous(_class)>
+    <glamorous(_class)
+      tooltip="Like this."
+    >
+      Tooltips
+    </glamorous(_class)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    title="UI Elements"
+  >
+    <glamorous(_class)>
+      Cards
+    </glamorous(_class)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    title="Navigation"
+  >
+    <glamorous(_class)>
+      Side Navigation
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Tabs
+    </glamorous(_class)>
+    <glamorous(_class)>
+      Pagination
+    </glamorous(_class)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    title="Resources"
+  >
+    <glamorous(_class)>
+      Grid
+    </glamorous(_class)>
+    <glamorous(_class)>
+      List
+    </glamorous(_class)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    title="Icons"
+  >
+    <glamorous(_class)>
+      Feather Icons
+    </glamorous(_class)>
+  </glamorous(SidebarItem)>
+</glamorous(Sidebar)>
+`;

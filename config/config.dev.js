@@ -8,13 +8,13 @@ const config = require('./config.base');
 
 module.exports = webpackMerge(config, {
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve('src', 'App.html') }),
+    new HtmlWebpackPlugin({ template: path.resolve('public', 'index.html') }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new DashboardPlugin(),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     hot: true,
     historyApiFallback: true,
   },
