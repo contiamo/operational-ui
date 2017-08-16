@@ -22,8 +22,8 @@ const PropsTable = ({ className, props }: { className?: string, props: Array<pro
     </thead>
     <tbody>
       {/* I do [...props].map below to make sure we're ACTUALLY working with an array. */}
-      {props &&
-        [...props].map(({ name, description, defaultValue, type, optional }, index) =>
+      {props
+        ? [...props].map(({ name, description, defaultValue, type, optional }, index) =>
           (<tr key={index}>
             <td>
               {name}
@@ -41,10 +41,12 @@ const PropsTable = ({ className, props }: { className?: string, props: Array<pro
               {optional ? '✅' : '🚫'}
             </td>
           </tr>),
-        )}
+        )
+        : <tr>
+          <td colSpan="5">There seem to be no props. 😿</td>
+        </tr>}
     </tbody>
   </table>);
-
 const style = ({ theme }: { theme: THEME }) => ({
   border: 0,
   borderCollapse: 'collapse',
@@ -60,9 +62,8 @@ const style = ({ theme }: { theme: THEME }) => ({
     padding: (theme.spacing || 0) / 2,
   },
   '& tr:nth-child(even)': {
-    backgroundColor: theme.greys ? theme.greys[20] : '#eee',
+    backgroundColor: theme.greys ? theme.greys[10] : '#eee',
   },
 });
-
 export default glamorous(PropsTable)(style);
 export { PropsTable };
