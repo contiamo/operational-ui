@@ -13,6 +13,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint ./src/*/** --fix",
+    "preadd": "yarn package",
     "precommit": "flow && npm run test && npm run lint"
   },
   "devDependencies": {

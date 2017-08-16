@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import glamorous, { Div, ThemeProvider } from 'glamorous';
 
 import SideNavigation from './SideNavigation/SideNavigation';
@@ -19,9 +19,7 @@ const App = ({ className }: { className: string }) =>
           <Header />
           <Div css={{ display: 'flex', padding: 16, width: '100%', height: '100vh' }}>
             <Sidebar />
-            <AppCanvas css={{ marginLeft: 16, flexBasis: '100%' }}>
-              <Route default />
-            </AppCanvas>
+            <AppCanvas css={{ marginLeft: 16, flexBasis: '100%' }} />
           </Div>
         </Div>
       </div>
@@ -30,9 +28,8 @@ const App = ({ className }: { className: string }) =>
 
 const styles: {} = {
   display: 'flex',
-  fontSize: DEFAULT_THEME.fonts.defaultSize,
-  fontFamily: DEFAULT_THEME.fonts.main,
   backgroundColor: DEFAULT_THEME.greys && DEFAULT_THEME.greys['10'],
+  ...DEFAULT_THEME.fonts,
 };
 
 export default glamorous(App)(styles);

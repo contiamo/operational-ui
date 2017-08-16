@@ -40,7 +40,7 @@ const style = ({ theme, color }: { theme: THEME, color?: string }) => {
     },
 
     '& .label': {
-      fontSize: 11,
+      fontSize: '.8rem',
       color: readableTextColor(backgroundColor)([
         theme.greys && theme.greys['60'],
         theme.greys && theme.greys['10'],

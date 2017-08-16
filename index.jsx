@@ -22,7 +22,6 @@ import { ThemeProvider } from 'glamorous';
 
 export {
   Header,
-  open,
   HeaderItem,
   HeaderSeparator,
   HeaderTitle,

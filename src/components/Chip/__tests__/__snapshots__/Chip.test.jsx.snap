@@ -3,10 +3,5 @@
 exports[`Chip Should render 1`] = `
 <div>
   Hi
-  <div
-    className="action"
-  >
-    <GoX />
-  </div>
 </div>
 `;

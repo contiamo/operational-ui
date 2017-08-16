@@ -17,21 +17,53 @@ const Chip = ({
 }) =>
   (<div className={className}>
     {children}
-    <div className="action" onClick={onClick}>
-      {symbol || <GoX />}
-    </div>
+    {onClick &&
+      <div className="action" onClick={onClick}>
+        {symbol || <GoX />}
+      </div>}
   </div>);
 
-const style = ({ theme, color }: { theme: THEME, color?: string }) => {
+const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClick: any }) => {
   const backgroundColor = hexOrColor(color)(theme.colors.primary);
+  const actionStyles = onClick
+    ? {
+      '& .action': {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        width: 16,
+        opacity: 0,
+        transform: 'translateX(10px)',
+        transition: '.3s transform ease, .3s opacity ease',
+        backgroundColor,
+      },
+
+      '& .action::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: '-100%',
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`,
+      },
+    }
+    : {};
+
   return {
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
     width: 'fit-content',
     padding: theme.spacing / 4,
+    cursor: 'pointer',
     overflow: 'hidden',
-    fontSize: 11,
+    fontSize: '.8rem',
     backgroundColor,
     color: readableTextColor(backgroundColor)(['black', 'white']),
 
@@ -40,33 +72,7 @@ const style = ({ theme, color }: { theme: THEME, color?: string }) => {
       transform: 'none',
     },
 
-    '& .action': {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100%',
-      width: 16,
-      opacity: 0,
-      transform: 'translateX(10px)',
-      transition: '.3s transform ease, .3s opacity ease',
-      cursor: 'pointer',
-      fontSize: 24,
-      backgroundColor,
-    },
-
-    '& .action::before': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: '-100%',
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`,
-    },
+    ...actionStyles,
   };
 };
 

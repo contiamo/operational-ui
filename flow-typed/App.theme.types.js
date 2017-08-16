@@ -32,8 +32,10 @@ export type THEME = {
   greys: GREYS,
   gradients?: {},
   fonts: {
-    main: string,
-    defaultSize: number,
+    fontFamily: string,
+    fontSize: number,
+    WebkitFontSmoothing?: string,
+    textRendering?: string,
   },
   spacing: number,
   baseZIndex: number,
