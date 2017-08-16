@@ -21,6 +21,7 @@ const withTooltip = InputComponent =>
       children: mixed,
       tooltip: string,
       tooltipAnchor?: string,
+      tooltipColor?: string,
     };
 
     state: {
@@ -47,7 +48,7 @@ const withTooltip = InputComponent =>
           <InputComponent {...this.props}>
             {this.props.children ? this.props.children : ''}
             {this.props.tooltip && this.state.isTooltipActive
-              ? <Tooltip active anchor={this.props.tooltipAnchor}>
+              ? <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
                 {this.props.tooltip}
               </Tooltip>
               : ''}

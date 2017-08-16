@@ -2,6 +2,8 @@ import React from 'react';
 
 import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar';
 
+const feedbackPaths = ['/tooltips'];
+
 export default ({ location }) =>
   (<Sidebar>
     <SidebarItem title="Data Entry">
@@ -10,13 +12,15 @@ export default ({ location }) =>
       <SidebarLink>Date Picker</SidebarLink>
       <SidebarLink>Color Picker</SidebarLink>
     </SidebarItem>
-    <SidebarItem title="Feedback">
+    <SidebarItem open={location && feedbackPaths.includes(location.pathname)} title="Feedback">
       <SidebarLink>Modals</SidebarLink>
       <SidebarLink>Notifications</SidebarLink>
       <SidebarLink>Alerts</SidebarLink>
       <SidebarLink>Messages</SidebarLink>
       <SidebarLink>Progress</SidebarLink>
-      <SidebarLink tooltip="Like this.">Tooltips</SidebarLink>
+      <SidebarLink to="/tooltips" tooltip="Like this.">
+        Tooltips
+      </SidebarLink>
     </SidebarItem>
     <SidebarItem open={location && location.pathname === '/cards'} title="UI Elements">
       <SidebarLink to="/cards">Cards</SidebarLink>

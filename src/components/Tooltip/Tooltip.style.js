@@ -54,7 +54,7 @@ export default ({
   anchor?: string,
 }): {} => {
   const backgroundColor: string = color
-    ? hexOrColor(color)(theme.colors[color])
+    ? hexOrColor(color)(theme.colors && theme.colors[color])
     : theme.greys && theme.greys['100'];
 
   return {
@@ -66,7 +66,7 @@ export default ({
     maxWidth: 200,
     opacity: 0, // Initially, they're hidden...
     transition: '.07s opacity ease', // ...for 0.07 seconds.
-    padding: theme.spacing && theme.spacing / 2,
+    padding: theme.spacing ? theme.spacing / 2 : 8,
     borderRadius: 4,
     wordWrap: 'break-word',
     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',

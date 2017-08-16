@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Playground from 'component-playground';
-import ReactDOM from 'react-dom';
 
 import Table from '../../components/PropsTable/PropsTable';
 import DemoCard from '../../../components/Card/Card';
@@ -39,7 +38,7 @@ export default () =>
     </DemoCard>
 
     <h2>Usage</h2>
-    <Playground codeText={snippet} scope={{ React, ReactDOM, Card: DemoCard }} />
+    <Playground codeText={snippet} scope={{ React, Card: DemoCard }} />
 
     <h2>Props</h2>
     <Table props={propDescription} />

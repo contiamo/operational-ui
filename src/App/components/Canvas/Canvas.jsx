@@ -11,6 +11,7 @@ const styles = ({ theme }: { theme: THEME }): {} => ({
   display: 'flex',
   alignItems: 'flex-start',
   height: '100%',
+  maxWidth: 768,
   overflow: 'auto',
   WebkitOverflowScrolling: 'touch',
 
