@@ -28,6 +28,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "eslint": "^4.4.1",
@@ -78,7 +79,13 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

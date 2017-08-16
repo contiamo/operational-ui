@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   // We use babel-polyfill for async/await
@@ -16,10 +17,16 @@ module.exports = {
       },
       {
         test: /\.png$/,
-        use: 'file-loader',
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          },
+        },
       },
     ],
   },
+  plugins: [new HtmlWebpackPlugin({ template: path.resolve('public', 'index.html') })],
   resolve: {
     extensions: ['.jsx', '.js'],
   },
