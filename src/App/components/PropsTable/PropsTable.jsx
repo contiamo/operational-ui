@@ -15,7 +15,7 @@ const PropsTable = ({ className, props }: { className?: string, props: Array<pro
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Default Value</th>
+        <th>Default</th>
         <th>Type</th>
         <th>Optional?</th>
       </tr>

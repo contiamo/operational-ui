@@ -44,6 +44,7 @@ class Tooltip extends Component {
     children?: mixed,
     active?: boolean,
     anchor?: string,
+    color?: string,
   };
 
   state: {
