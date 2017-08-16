@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropsTable Should render correctly with props 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Default Value
+      </th>
+      <th>
+        Type
+      </th>
+      <th>
+        Optional?
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
+`;
+
+exports[`PropsTable Should render correctly without props 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Default Value
+      </th>
+      <th>
+        Type
+      </th>
+      <th>
+        Optional?
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td
+        colSpan="5"
+      >
+        There seem to be no props. 😿
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

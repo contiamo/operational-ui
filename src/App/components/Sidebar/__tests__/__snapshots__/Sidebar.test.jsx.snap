@@ -45,7 +45,9 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
   <glamorous(SidebarItem)
     title="UI Elements"
   >
-    <glamorous(_class)>
+    <glamorous(_class)
+      to="/cards"
+    >
       Cards
     </glamorous(_class)>
   </glamorous(SidebarItem)>

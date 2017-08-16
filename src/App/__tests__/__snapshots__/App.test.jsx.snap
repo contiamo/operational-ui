@@ -15,11 +15,16 @@ exports[`App starts 1`] = `
         className="css-f02nqw"
         onClick={undefined}
       >
-        <img
-          alt="Contiamo"
-          className="css-1mjw833"
-          src="/img/logo/outline.png"
-        />
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Contiamo"
+            className="css-1mjw833"
+            src="/img/logo/outline.png"
+          />
+        </a>
         
       </div>
     </div>
@@ -285,7 +290,7 @@ exports[`App starts 1`] = `
         </div>
       </div>
       <div
-        className="css-96mvw7"
+        className="css-m0ae41"
       />
     </div>
   </div>

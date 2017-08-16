@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Sidebar, { SidebarItem, SidebarLink } from '../../components/Sidebar/Sidebar';
+import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar';
 
-export default () =>
+export default ({ location }) =>
   (<Sidebar>
     <SidebarItem title="Data Entry">
       <SidebarLink>Buttons</SidebarLink>
@@ -18,8 +18,8 @@ export default () =>
       <SidebarLink>Progress</SidebarLink>
       <SidebarLink tooltip="Like this.">Tooltips</SidebarLink>
     </SidebarItem>
-    <SidebarItem title="UI Elements">
-      <SidebarLink>Cards</SidebarLink>
+    <SidebarItem open={location && location.pathname === '/cards'} title="UI Elements">
+      <SidebarLink to="/cards">Cards</SidebarLink>
     </SidebarItem>
     <SidebarItem title="Navigation">
       <SidebarLink>Side Navigation</SidebarLink>
