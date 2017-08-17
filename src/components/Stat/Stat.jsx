@@ -40,6 +40,7 @@ const style = ({ theme, color }: { theme: THEME, color?: string }) => {
     },
 
     '& .Stat__label': {
+      marginBottom: 3,
       fontSize: '.6rem',
       fontWeight: 600,
       color: readableTextColor(backgroundColor)([
