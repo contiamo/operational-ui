@@ -16,12 +16,22 @@ const styles = ({ theme }: { theme: THEME }): {} => ({
   overflow: 'auto',
   WebkitOverflowScrolling: 'touch',
 
+  '& a:link, & a:visited': {
+    color: theme.colors.primary,
+  },
+
+  '& a:hover': {
+    color: theme.colors.secondary,
+  },
+
   '& .Canvas__body': {
     maxWidth: 768,
   },
 
   '& .playground': {
     display: 'flex',
+    width: '80vw',
+    maxWidth: 1500,
   },
 
   '& .playgroundCode, & .playgroundPreview': {
@@ -29,6 +39,9 @@ const styles = ({ theme }: { theme: THEME }): {} => ({
   },
   '& .playgroundPreview': {
     marginLeft: 16,
+  },
+  '& .CodeMirror-wrap.CodeMirror': {
+    minHeight: 480,
   },
 });
 

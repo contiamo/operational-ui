@@ -19,7 +19,7 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
             "maxWidth": "100%",
           }
         }
-        src="/img/logo/outline.png"
+        src="img/logo/outline.png"
       />
     </Link>
   </glamorous(_class)>

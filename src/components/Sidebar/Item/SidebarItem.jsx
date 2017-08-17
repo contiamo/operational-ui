@@ -8,7 +8,7 @@ import withTooltip from '../../Tooltip/withTooltip';
 class SidebarItem extends Component {
   props: {
     className: string,
-    title: mixed,
+    label: mixed,
     children?: mixed,
     open: boolean,
     onClick?: void,
@@ -63,7 +63,7 @@ class SidebarItem extends Component {
           tooltip={this.props.tooltip}
           onClick={() => this.toggle()}
         >
-          {this.props.title}
+          {this.props.label}
         </HeaderWithTooltip>
         {this.state.open
           ? <div className="content">

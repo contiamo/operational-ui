@@ -42,21 +42,25 @@ const SidebarLink = ({
 const style = ({ theme, color }: { theme: THEME, color: string }) => {
   const backgroundColor = color
     ? hexOrColor(color)(theme.colors && theme.colors[color])
-    : theme.colors && theme.colors.primary;
+    : theme.colors ? theme.colors.primary : '#22205F';
   const textColor = readableTextColor(backgroundColor)(['black', 'white']);
 
   return {
     position: 'relative',
     display: 'flex',
-    padding: theme.spacing / 2,
+    padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
     transition: 'background-color .1s ease',
     cursor: 'pointer',
 
     // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: 'none',
 
-    backgroundColor,
     color: textColor,
+    backgroundColor,
+
+    '&:link, &:visited': {
+      color: textColor,
+    },
 
     ':hover': {
       backgroundColor: darken(backgroundColor)(5),

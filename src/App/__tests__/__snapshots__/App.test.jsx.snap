@@ -22,7 +22,7 @@ exports[`App starts 1`] = `
           <img
             alt="Contiamo"
             className="css-1mjw833"
-            src="/img/logo/outline.png"
+            src="img/logo/outline.png"
           />
         </a>
         
@@ -187,7 +187,7 @@ exports[`App starts 1`] = `
         className="css-1u55ha5"
       >
         <div
-          className="css-55mlrr  "
+          className="css-pp57kh  "
         >
           <div
             onMouseEnter={[Function]}
@@ -204,7 +204,7 @@ exports[`App starts 1`] = `
           
         </div>
         <div
-          className="css-55mlrr  "
+          className="css-pp57kh  "
         >
           <div
             onMouseEnter={[Function]}
@@ -221,7 +221,7 @@ exports[`App starts 1`] = `
           
         </div>
         <div
-          className="css-55mlrr  "
+          className="css-pp57kh  "
         >
           <div
             onMouseEnter={[Function]}
@@ -238,7 +238,7 @@ exports[`App starts 1`] = `
           
         </div>
         <div
-          className="css-55mlrr  "
+          className="css-pp57kh  "
         >
           <div
             onMouseEnter={[Function]}
@@ -255,7 +255,7 @@ exports[`App starts 1`] = `
           
         </div>
         <div
-          className="css-55mlrr  "
+          className="css-pp57kh  "
         >
           <div
             onMouseEnter={[Function]}
@@ -272,7 +272,7 @@ exports[`App starts 1`] = `
           
         </div>
         <div
-          className="css-55mlrr  "
+          className="css-pp57kh  "
         >
           <div
             onMouseEnter={[Function]}
@@ -290,7 +290,7 @@ exports[`App starts 1`] = `
         </div>
       </div>
       <div
-        className="css-161kxdi"
+        className="css-1sjzxut"
       >
         <div
           className="Canvas__body"
