@@ -147,5 +147,142 @@ exports[`Cards Page Should render correctly 1`] = `
       </tr>
     </tbody>
   </table>
+  <div
+    style="margin-bottom:32px;"
+  />
+  <h1>
+    PlusChip
+  </h1>
+  <h2>
+    A PlusChip is a specialized chip that bears no label, but simply takes an action and displays a symbol prompting the action.
+  </h2>
+  <p>
+    These chips can either contain their own symbol, or simply have a plus if no symbol is specified.
+  </p>
+  <h2>
+    Usage
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div style={{display: 'flex'}}&gt;
+          
+            &lt;PlusChip
+              color="#f0f"
+              size={31}
+              onClick={() =&gt; window.alert('Ouch!')}
+            /&gt;
+          
+            &lt;PlusChip
+              color="#f00"
+              size={31}
+              onClick={() =&gt; window.alert('Smiling is healthy!')}
+            &gt;
+              😁
+            &lt;/PlusChip&gt;
+          
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          What color of chip would you like? It can be a hex value or a named theme color.
+        </td>
+        <td>
+          Black
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          size
+        </td>
+        <td>
+          The size of the chip in pixels. This can vary for obvious reasons.
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          number
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          A function that will be called on click of the PlusChip.
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 `;

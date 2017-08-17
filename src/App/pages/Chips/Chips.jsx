@@ -5,6 +5,8 @@ import Playground from 'component-playground';
 
 import Table from '../../components/PropsTable/PropsTable';
 import DemoChip from '../../../components/Chip/Chip';
+import DemoPlusChip from '../../../components/PlusChip/PlusChip';
+
 import snippet from './snippet';
 import propDescription from './propDescription';
 
@@ -29,8 +31,28 @@ export default () =>
     </div>
 
     <h2>Usage</h2>
-    <Playground codeText={snippet} scope={{ React, Chip: DemoChip }} />
+    <Playground codeText={snippet.chip} scope={{ React, Chip: DemoChip }} />
 
     <h2>Props</h2>
-    <Table props={propDescription} />
+    <Table props={propDescription.chip} />
+
+    <div style={{ marginBottom: 32 }} />
+
+    <h1>PlusChip</h1>
+
+    <h2>
+      A PlusChip is a specialized chip that bears no label, but simply takes an action and displays
+      a symbol prompting the action.
+    </h2>
+
+    <p>
+      These chips can either contain their own symbol, or simply have a plus if no symbol is
+      specified.
+    </p>
+
+    <h2>Usage</h2>
+    <Playground codeText={snippet.plusChip} scope={{ React, PlusChip: DemoPlusChip }} />
+
+    <h2>Props</h2>
+    <Table props={propDescription.plusChip} />
   </div>);
