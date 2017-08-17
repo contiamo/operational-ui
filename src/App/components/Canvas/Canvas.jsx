@@ -4,16 +4,21 @@ import glamorous from 'glamorous';
 
 const Canvas = ({ className, children }: { className: string, children: HTMLElement }) =>
   (<div className={className}>
-    {children}
+    <div className="Canvas__body">
+      {children}
+    </div>
   </div>);
 
 const styles = ({ theme }: { theme: THEME }): {} => ({
   display: 'flex',
   alignItems: 'flex-start',
   height: '100%',
-  maxWidth: 768,
   overflow: 'auto',
   WebkitOverflowScrolling: 'touch',
+
+  '& .Canvas__body': {
+    maxWidth: 768,
+  },
 
   '& .playground': {
     display: 'flex',
