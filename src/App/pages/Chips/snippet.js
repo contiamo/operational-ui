@@ -1,4 +1,5 @@
-export default `
+export default {
+  chip: `
 <div style={{display: 'flex'}}>
 
   {/* These work well in a flex-ed parent */}
@@ -15,4 +16,24 @@ export default `
   {/* onClick can do literally anything you want it to */}
 
 </div>
-`;
+`,
+  plusChip: `
+<div style={{display: 'flex'}}>
+
+  <PlusChip
+    color="#f0f"
+    size={31}
+    onClick={() => window.alert('Ouch!')}
+  />
+
+  <PlusChip
+    color="#f00"
+    size={31}
+    onClick={() => window.alert('Smiling is healthy!')}
+  >
+    😁
+  </PlusChip>
+
+</div>
+`,
+};
