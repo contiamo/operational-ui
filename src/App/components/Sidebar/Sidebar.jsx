@@ -3,7 +3,7 @@ import React from 'react';
 import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar';
 
 const feedbackPaths = ['/tooltips'];
-const uiElementPaths = ['/chips', '/cards'];
+const uiElementPaths = ['/chips', '/cards', '/stats'];
 
 export default ({ location }) =>
   (<Sidebar>
@@ -24,8 +24,9 @@ export default ({ location }) =>
       </SidebarLink>
     </SidebarItem>
     <SidebarItem open={location && uiElementPaths.includes(location.pathname)} title="UI Elements">
-      <SidebarLink to="/chips">Chips</SidebarLink>
       <SidebarLink to="/cards">Cards</SidebarLink>
+      <SidebarLink to="/chips">Chips</SidebarLink>
+      <SidebarLink to="/stats">Stats</SidebarLink>
     </SidebarItem>
     <SidebarItem title="Navigation">
       <SidebarLink>Side Navigation</SidebarLink>

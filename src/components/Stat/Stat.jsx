@@ -12,11 +12,11 @@ const Stat = ({
   label: string,
   children: mixed,
 }) =>
-  (<div className={className}>
-    <small className="label">
+  (<div className={`${className} Stat`}>
+    <small className="Stat__label">
       {label}
     </small>
-    <span className="value">
+    <span className="Stat__value">
       {children}
     </span>
   </div>);
@@ -30,20 +30,21 @@ const style = ({ theme, color }: { theme: THEME, color?: string }) => {
     display: 'flex',
     flexDirection: 'column',
     width: 'fit-content',
-    padding: theme.spacing && theme.spacing / 2,
+    padding: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
     backgroundColor,
     color: readableTextColor(backgroundColor)(['black', 'white']),
 
-    '& + &': {
+    '&.Stat + .Stat': {
       borderLeft: '1px solid',
       borderLeftColor: darken(backgroundColor)(10),
     },
 
-    '& .label': {
-      fontSize: '.8rem',
+    '& .Stat__label': {
+      fontSize: '.6rem',
+      fontWeight: 600,
       color: readableTextColor(backgroundColor)([
-        theme.greys && theme.greys['60'],
-        theme.greys && theme.greys['10'],
+        theme.greys ? theme.greys['60'] : '#eee',
+        theme.greys ? theme.greys['10'] : '#aaa',
       ]),
     },
   };

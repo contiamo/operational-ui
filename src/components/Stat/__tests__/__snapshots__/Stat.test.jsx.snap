@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Stat Should render 1`] = `
-<div>
+<div
+  className="undefined Stat"
+>
   <small
-    className="label"
+    className="Stat__label"
   >
     Country
   </small>
   <span
-    className="value"
+    className="Stat__value"
   >
     DE
   </span>
