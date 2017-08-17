@@ -44,7 +44,6 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    open={false}
     title="UI Elements"
   >
     <glamorous(_class)

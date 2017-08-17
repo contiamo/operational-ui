@@ -23,10 +23,7 @@ export default ({ location }) =>
         Tooltips
       </SidebarLink>
     </SidebarItem>
-    <SidebarItem
-      open={!!(location && uiElementPaths.includes(location.pathname))}
-      title="UI Elements"
-    >
+    <SidebarItem open={location && uiElementPaths.includes(location.pathname)} title="UI Elements">
       <SidebarLink to="/chips">Chips</SidebarLink>
       <SidebarLink to="/cards">Cards</SidebarLink>
     </SidebarItem>
