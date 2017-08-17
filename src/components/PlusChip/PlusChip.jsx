@@ -6,12 +6,12 @@ import { hexOrColor } from '../../utils/color';
 
 const PlusChip = ({
   className,
-  size = 16,
+  size = 15,
   children,
   onClick,
 }: {
   className?: string,
-  size: number,
+  size?: number,
   children?: string,
   onClick?: any,
 }) =>
@@ -19,7 +19,7 @@ const PlusChip = ({
     {children || <GoPlus />}
   </div>);
 
-const style = ({ theme, color, size }: { theme: THEME, color: string, size?: number }) => {
+const style = ({ theme, color, size }: { theme: THEME, color?: string, size?: number }) => {
   const borderColor = color
     ? hexOrColor(color)((theme.colors && theme.colors[color]) || 'white')
     : 'black';
@@ -28,14 +28,14 @@ const style = ({ theme, color, size }: { theme: THEME, color: string, size?: num
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: size || 15,
-    height: size || 15,
+    width: size,
+    height: size,
     border: '1px solid',
     cursor: 'pointer',
     color: borderColor,
 
     '&.plus-chip + .plus-chip': {
-      marginLeft: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 4,
+      marginLeft: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
     },
   };
 };
