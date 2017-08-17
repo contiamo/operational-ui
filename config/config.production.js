@@ -4,6 +4,9 @@ const baseConfig = require('./config.base');
 
 module.exports = webpackMerge(baseConfig, {
   plugins: [
-    new CopyWebpackPlugin([{ from: ['public/img', 'public/fonts'], to: ['img', 'fonts'] }]),
+    new CopyWebpackPlugin([
+      { from: 'public/img', to: 'img' },
+      { from: 'public/fonts', to: 'fonts' },
+    ]),
   ],
 });
