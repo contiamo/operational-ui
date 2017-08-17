@@ -15,7 +15,7 @@ const Chip = ({
   onClick?: any,
   symbol?: string,
 }) =>
-  (<div className={className}>
+  (<div className={`${className} chip`}>
     {children}
     {onClick &&
       <div className="action" onClick={onClick}>
@@ -24,7 +24,9 @@ const Chip = ({
   </div>);
 
 const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClick: any }) => {
-  const backgroundColor = hexOrColor(color)(theme.colors.primary);
+  const backgroundColor = hexOrColor(color)(
+    theme.colors ? theme.colors[color] || theme.colors.primary : 'black',
+  );
   const actionStyles = onClick
     ? {
       '& .action': {
@@ -35,7 +37,8 @@ const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClic
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        width: 16,
+        padding: `0 ${theme.spacing >= 0 ? theme.spacing / 4 : 4}px`,
+        width: 'fit-content',
         opacity: 0,
         transform: 'translateX(10px)',
         transition: '.3s transform ease, .3s opacity ease',
@@ -60,12 +63,16 @@ const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClic
     display: 'flex',
     alignItems: 'center',
     width: 'fit-content',
-    padding: theme.spacing / 4,
+    padding: theme.spacing >= 0 ? theme.spacing / 4 : 4,
     cursor: 'pointer',
     overflow: 'hidden',
     fontSize: '.8rem',
     backgroundColor,
     color: readableTextColor(backgroundColor)(['black', 'white']),
+
+    '&.chip + .chip': {
+      marginLeft: theme.spacing >= 0 ? theme.spacing / 4 : 4,
+    },
 
     ':hover .action': {
       opacity: 1,

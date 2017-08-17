@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cards Page Should render correctly 1`] = `
+<div>
+  <h1>
+    Chips
+  </h1>
+  <h2>
+    Most commonly used for filters, these elements represent small bits of information that give a sense of context to the user.
+  </h2>
+  <p>
+    Chips can be interactive, or simply informative. They can take on any color passed through \`props\`, along with a symbol for the button that will be displayed if click behavior is detected.
+  </p>
+  <div
+    style="display:flex;"
+  >
+    <div
+      class="css-zc8bn2 chip"
+    >
+      Chip 1
+    </div>
+    <div
+      class="css-zc8bn2 chip"
+    >
+      Chip 2
+    </div>
+  </div>
+  <h2>
+    Usage
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div style={{display: 'flex'}}&gt;
+          
+            {/* These work well in a flex-ed parent */}
+            &lt;Chip color="#006847"&gt;Hola&lt;/Chip&gt;
+            &lt;Chip color="#fff"&gt;Compadre&lt;/Chip&gt;
+          
+            &lt;Chip
+              color="#CE1126"
+              symbol="!"
+              onClick={() =&gt; window.alert('Muy bien!')}
+            &gt;
+              Como estas?
+            &lt;/Chip&gt;
+            {/* onClick can do literally anything you want it to */}
+          
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          What color of chip would you like? It can be a hex value or a named theme color.
+        </td>
+        <td>
+          The \`primary\` color of your theme.
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          symbol
+        </td>
+        <td>
+          The symbol that is shown on mouse over of a clickable chip.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          Is this interactive? If yes, what happens when the chip is clicked? This is commonly used to delete a filter in a list of filters.
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

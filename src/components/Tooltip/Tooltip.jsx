@@ -41,7 +41,7 @@ type rect = {
 class Tooltip extends Component {
   props: {
     className: string,
-    children?: mixed,
+    children?: any,
     active?: boolean,
     anchor?: string,
     color?: string,

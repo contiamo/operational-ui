@@ -53,14 +53,14 @@ exports[`App starts 1`] = `
           <polyline
             fill="none"
             points="2.32 6.16 12 11 21.68 6.16"
-            stroke="currentColor"
+            stroke="white"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
           />
           <line
             fill="none"
-            stroke="currentColor"
+            stroke="white"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
