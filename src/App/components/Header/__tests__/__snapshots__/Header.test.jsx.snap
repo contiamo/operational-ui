@@ -1,29 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: Header Should render correctly 1`] = `
-<glamorous(Header)
+<glamorous(bound )
   color="#445873"
 >
-  <glamorous(HeaderTitle)>
+  <glamorous(bound )>
     Contiamo
-  </glamorous(HeaderTitle)>
-  <glamorous(HeaderItem)>
+  </glamorous(bound )>
+  <glamorous(bound )>
     <Camera
       color="currentColor"
       size="24"
     />
      Gallery
-  </glamorous(HeaderItem)>
-  <glamorous(HeaderItem)>
+  </glamorous(bound )>
+  <glamorous(bound )>
     <Box
       color="currentColor"
       size="24"
     />
      Components
-  </glamorous(HeaderItem)>
-  <glamorous(HeaderSeparator) />
-  <glamorous(HeaderItem)>
+  </glamorous(bound )>
+  <glamorous(bound ) />
+  <glamorous(bound )>
     Logout
-  </glamorous(HeaderItem)>
-</glamorous(Header)>
+  </glamorous(bound )>
+</glamorous(bound )>
 `;
