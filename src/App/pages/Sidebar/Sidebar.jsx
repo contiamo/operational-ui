@@ -35,7 +35,6 @@ export default () =>
 
     <h2>Usage</h2>
     <Playground
-      className="stacked"
       codeText={snippet}
       scope={{ React, Sidebar: DemoSidebar, SidebarItem, SidebarLink, fetch }}
     />
