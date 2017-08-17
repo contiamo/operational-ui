@@ -17,15 +17,14 @@
     "precommit": "flow && npm run test && npm run lint"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.1",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-polyfill": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-jest": "^20.0.3",
-    "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1",
@@ -39,7 +38,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.2.0",
     "file-loader": "^0.11.2",
-    "flow-bin": "^0.52.0",
+    "flow-bin": "0.52.0",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
@@ -48,14 +47,14 @@
     "jest-serializer-enzyme": "^1.0.0",
     "react-hot-loader": "next",
     "react-test-renderer": "^15.6.1",
-    "rollup": "^0.47.4",
-    "rollup-plugin-babel": "^3.0.1",
+    "rollup": "^0.47.6",
+    "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-image": "^1.0.2",
     "rollup-plugin-jsx": "^1.0.3",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "webpack": "^3.5.2",
+    "webpack": "^3.5.5",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.7.1",
     "webpack-merge": "^4.1.0"
@@ -63,12 +62,12 @@
   "dependencies": {
     "component-playground": "^2.0.0",
     "glamor": "^2.20.39",
-    "glamorous": "^4.1.0",
+    "glamorous": "^4.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-feather": "^1.0.6",
+    "react-feather": "^1.0.7",
     "react-icons": "^2.2.5",
     "react-intl": "^2.3.0",
     "react-router": "^4.1.2",
@@ -81,13 +80,7 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ]
+    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
   }
 }

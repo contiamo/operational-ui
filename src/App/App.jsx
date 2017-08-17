@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import AppCanvas from './components/Canvas/Canvas';
 
 import CardsPage from './pages/Cards/Cards';
+import ChipsPage from './pages/Chips/Chips';
 import TooltipsPage from './pages/Tooltips/Tooltips';
 
 import DEFAULT_THEME from '../theme';
@@ -40,6 +41,7 @@ const App = ({ className }: { className: string }) =>
             <SidebarWithRouter />
             <AppCanvas css={{ marginLeft: 16, flexBasis: '100%' }}>
               <Route path="/cards" component={CardsPage} />
+              <Route path="/chips" component={ChipsPage} />
               <Route path="/tooltips" component={TooltipsPage} />
             </AppCanvas>
           </Div>
