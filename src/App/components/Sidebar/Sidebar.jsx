@@ -2,18 +2,21 @@ import React from 'react';
 
 import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar';
 
-const feedbackPaths = ['/tooltips'];
-const uiElementPaths = ['/chips', '/cards', '/stats'];
+const paths = {
+  feedback: ['/tooltips'],
+  uiElements: ['/chips', '/cards', '/stats'],
+  navigation: ['/sidebar'],
+};
 
 export default ({ location }) =>
   (<Sidebar>
-    <SidebarItem title="Data Entry">
+    <SidebarItem label="Data Entry">
       <SidebarLink>Buttons</SidebarLink>
       <SidebarLink>Form Fields</SidebarLink>
       <SidebarLink>Date Picker</SidebarLink>
       <SidebarLink>Color Picker</SidebarLink>
     </SidebarItem>
-    <SidebarItem open={location && feedbackPaths.includes(location.pathname)} title="Feedback">
+    <SidebarItem open={location && paths.feedback.includes(location.pathname)} label="Feedback">
       <SidebarLink>Modals</SidebarLink>
       <SidebarLink>Notifications</SidebarLink>
       <SidebarLink>Alerts</SidebarLink>
@@ -23,21 +26,25 @@ export default ({ location }) =>
         Tooltips
       </SidebarLink>
     </SidebarItem>
-    <SidebarItem open={location && uiElementPaths.includes(location.pathname)} title="UI Elements">
+    <SidebarItem
+      open={location && paths.uiElements.includes(location.pathname)}
+      label="UI Elements"
+    >
       <SidebarLink to="/cards">Cards</SidebarLink>
       <SidebarLink to="/chips">Chips</SidebarLink>
       <SidebarLink to="/stats">Stats</SidebarLink>
     </SidebarItem>
-    <SidebarItem title="Navigation">
-      <SidebarLink>Side Navigation</SidebarLink>
+    <SidebarItem open={location && paths.navigation.includes(location.pathname)} label="Navigation">
+      <SidebarLink to="/sidebar">Sidebar</SidebarLink>
+      <SidebarLink to="/side-navigation">Side Navigation</SidebarLink>
       <SidebarLink>Tabs</SidebarLink>
       <SidebarLink>Pagination</SidebarLink>
     </SidebarItem>
-    <SidebarItem title="Resources">
+    <SidebarItem label="Resources">
       <SidebarLink>Grid</SidebarLink>
       <SidebarLink>List</SidebarLink>
     </SidebarItem>
-    <SidebarItem title="Icons">
+    <SidebarItem label="Icons">
       <SidebarLink>Feather Icons</SidebarLink>
     </SidebarItem>
   </Sidebar>);

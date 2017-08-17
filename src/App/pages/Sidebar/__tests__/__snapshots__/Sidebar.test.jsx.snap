@@ -1,0 +1,307 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar Page Should render correctly 1`] = `
+<div>
+  <h1>
+    Sidebar
+  </h1>
+  <h2>
+    The sidebar is a dynamic list-style navigational element to be used in cases with a large number of list-style actionable items.
+  </h2>
+  <div>
+    <p>
+      This component involves composition of two constituent elements. Namely,
+    </p>
+    <ul>
+      <li>
+        <a
+          href="#sidebar-item"
+        >
+          SidebarItem
+        </a>
+      </li>
+      <li>
+        <a
+          href="#sidebar-link"
+        >
+          SidebarLink
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style="margin-bottom:32px;"
+  />
+  <h2>
+    Usage
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;Sidebar&gt;
+          
+            &lt;SidebarItem label="Links"&gt;
+              &lt;SidebarLink
+                onClick={() =&gt; window.open('https://www.contiamo.com')}
+                symbol="&rarr;"
+              &gt;
+                Link 1
+              &lt;/SidebarLink&gt;
+              &lt;SidebarLink&gt;Link 2&lt;/SidebarLink&gt;
+            &lt;/SidebarItem&gt;
+          
+            &lt;SidebarItem
+              label="Deutschlandliebe 🇩🇪"
+              tooltip="Click for async fun!"
+              onClick={() =&gt; fetch('SOME URL')}
+            &gt;
+              &lt;SidebarLink color="#000"&gt;
+                You should
+              &lt;/SidebarLink&gt;
+              &lt;SidebarLink
+                color="#f00"
+                tooltip="Notice how the text is always readable. 😉"
+              &gt;
+                only see me
+              &lt;/SidebarLink&gt;
+              &lt;SidebarLink color="#ff0"&gt;
+                after fetch.
+              &lt;/SidebarLink&gt;
+            &lt;/SidebarItem&gt;
+          
+          &lt;/Sidebar&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    style="margin-bottom:32px;"
+  />
+  <h1
+    id="sidebar-item"
+  >
+    SidebarItem
+  </h1>
+  <h2>
+    An expandable group of SidebarLinks, with added asynchronous functionality.
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          label
+        </td>
+        <td>
+          The label of the SidebarItem.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          open
+        </td>
+        <td>
+          Is the item open or closed by default?
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          A function to pass to the item that executes before the item expands. If a function returning a Promise is passed in, the item only expands after the Promise resolves.
+        </td>
+        <td>
+          <pre>
+            () =&gt; this.open = !this.open
+          </pre>
+        </td>
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p
+    style="margin-top:16px;margin-bottom:32px;"
+  >
+    <strong>
+      Note: This component is wrapped with 
+      <a
+        href="/tooltips"
+      >
+        withTooltip
+      </a>
+       and thus exposes all of the props that such components do.
+    </strong>
+  </p>
+  <h1
+    id="sidebar-link"
+  >
+    SidebarLink
+  </h1>
+  <h2>
+    A link, but with onClick instead of href.
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          to
+        </td>
+        <td>
+          Created to work with react-router, this wraps the children in a &lt;Link&gt; to your route.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          A function called on click of this component, to be used instead of the \`to\` prop to do more than just navigate.
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          symbol
+        </td>
+        <td>
+          A symbol to display at the right-hand side of the link, such as a \`%\` sign to suggest a unit of measure.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          Different links can have different colors to communicate different use-cases or purposes. This can be a hex value, or a named color in your theme.
+        </td>
+        <td>
+          The primary color of your theme.
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p
+    style="margin-top:16px;margin-bottom:32px;"
+  >
+    <strong>
+      Note: This component is wrapped with 
+      <a
+        href="/tooltips"
+      >
+        withTooltip
+      </a>
+       and thus exposes all of the props that such components do.
+    </strong>
+  </p>
+</div>
+`;

@@ -55,7 +55,7 @@ export default ({
 }): {} => {
   const backgroundColor: string = color
     ? hexOrColor(color)(theme.colors && theme.colors[color])
-    : theme.greys && theme.greys['100'];
+    : 'black';
 
   return {
     position: 'absolute',

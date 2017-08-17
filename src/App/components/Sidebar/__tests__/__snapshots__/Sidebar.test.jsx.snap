@@ -3,7 +3,7 @@
 exports[`App Showcase: Sidebar Should render correctly 1`] = `
 <glamorous(bound )>
   <glamorous(SidebarItem)
-    title="Data Entry"
+    label="Data Entry"
   >
     <glamorous(_class)>
       Buttons
@@ -19,7 +19,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    title="Feedback"
+    label="Feedback"
   >
     <glamorous(_class)>
       Modals
@@ -44,7 +44,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    title="UI Elements"
+    label="UI Elements"
   >
     <glamorous(_class)
       to="/cards"
@@ -63,9 +63,16 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    title="Navigation"
+    label="Navigation"
   >
-    <glamorous(_class)>
+    <glamorous(_class)
+      to="/sidebar"
+    >
+      Sidebar
+    </glamorous(_class)>
+    <glamorous(_class)
+      to="/side-navigation"
+    >
       Side Navigation
     </glamorous(_class)>
     <glamorous(_class)>
@@ -76,7 +83,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    title="Resources"
+    label="Resources"
   >
     <glamorous(_class)>
       Grid
@@ -86,7 +93,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    title="Icons"
+    label="Icons"
   >
     <glamorous(_class)>
       Feather Icons

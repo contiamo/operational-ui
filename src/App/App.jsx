@@ -12,6 +12,7 @@ import CardsPage from './pages/Cards/Cards';
 import ChipsPage from './pages/Chips/Chips';
 import TooltipsPage from './pages/Tooltips/Tooltips';
 import StatsPage from './pages/Stats/Stats';
+import SidebarPage from './pages/Sidebar/Sidebar';
 
 import DEFAULT_THEME from '../theme';
 
@@ -45,6 +46,7 @@ const App = ({ className }: { className: string }) =>
               <Route path="/chips" component={ChipsPage} />
               <Route path="/tooltips" component={TooltipsPage} />
               <Route path="/stats" component={StatsPage} />
+              <Route path="/sidebar" component={SidebarPage} />
             </AppCanvas>
           </Div>
         </Div>

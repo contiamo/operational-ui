@@ -12,7 +12,7 @@ export default () =>
   (<SideNavigation color="#445873">
     <SideNavigationItem tooltip="Contiamo" size={60}>
       <Link to="/">
-        <Img css={{ maxWidth: '100%' }} alt="Contiamo" src="/img/logo/outline.png" />
+        <Img css={{ maxWidth: '100%' }} alt="Contiamo" src="img/logo/outline.png" />
       </Link>
     </SideNavigationItem>
 
