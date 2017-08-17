@@ -290,8 +290,12 @@ exports[`App starts 1`] = `
         </div>
       </div>
       <div
-        className="css-kvi7qe"
-      />
+        className="css-161kxdi"
+      >
+        <div
+          className="Canvas__body"
+        />
+      </div>
     </div>
   </div>
 </div>

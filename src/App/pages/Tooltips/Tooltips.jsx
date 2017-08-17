@@ -37,12 +37,14 @@ export default () =>
     <h2>Props</h2>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
 
-    <h2>withTooltip</h2>
-    <p>
+    <h1>withTooltip</h1>
+    <h2>
       Tooltips come with an additional higher-order component (or HOC) called `withTooltip`. This
       component wraps any pre-existing React component that you may have and gives it a tooltip,
       which you can pass as a prop.
-    </p>
+    </h2>
+
+    <div style={{ marginBottom: 32 }} />
 
     <h2>Usage</h2>
     <SyntaxHighlighter language="javascript">

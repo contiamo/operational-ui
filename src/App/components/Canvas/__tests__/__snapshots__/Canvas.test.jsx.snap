@@ -2,6 +2,10 @@
 
 exports[`App Showcase: Canvas Should render correctly 1`] = `
 <div>
-  hi
+  <div
+    className="Canvas__body"
+  >
+    hi
+  </div>
 </div>
 `;

@@ -54,18 +54,18 @@ class SidebarItem extends Component {
     return (
       <div
         className={`${this.props.className} ${this.state.updating ? 'updating' : ''} ${this.state
-          .open || this.props.open
+          .open
           ? 'open'
           : ''}`}
       >
         <HeaderWithTooltip
-          className={`header ${this.state.open || this.props.open ? 'open' : ''}`}
+          className={`header ${this.state.open ? 'open' : ''}`}
           tooltip={this.props.tooltip}
           onClick={() => this.toggle()}
         >
           {this.props.title}
         </HeaderWithTooltip>
-        {this.state.open || this.props.open
+        {this.state.open
           ? <div className="content">
             {this.props.children}
           </div>
