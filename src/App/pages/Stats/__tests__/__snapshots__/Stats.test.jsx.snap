@@ -15,7 +15,7 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-8ypf21 Stat"
+      class="css-mrit36 Stat"
     >
       <small
         class="Stat__label"
@@ -29,7 +29,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-8ypf21 Stat"
+      class="css-mrit36 Stat"
     >
       <small
         class="Stat__label"
@@ -43,7 +43,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-8ypf21 Stat"
+      class="css-mrit36 Stat"
     >
       <small
         class="Stat__label"

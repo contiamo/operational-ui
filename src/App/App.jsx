@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import glamorous, { Div, ThemeProvider } from 'glamorous';
+import { css } from 'glamor';
 
 import SideNavigation from './components/SideNavigation/SideNavigation';
 import Header from './components/Header/Header';
@@ -53,6 +54,30 @@ const App = ({ className }: { className: string }) =>
       </div>
     </ThemeProvider>
   </Router>);
+
+css.fontFace({
+  fontFamily: 'Proxima Nova',
+  fontStyle: 'normal',
+  fontWeight: 300,
+  src:
+    "local('Proxima Nova'), local('ProximaNova'), url('/fonts/proximanova/300/300.woff2'), url('/fonts/proximanova/300/300.woff'), url('/fonts/proximanova/300/300.eot'), url('/fonts/proximanova/300/300.svg'), url('/fonts/proximanova/300/300.ttf')",
+});
+
+css.fontFace({
+  fontFamily: 'Proxima Nova',
+  fontStyle: 'normal',
+  fontWeight: 400,
+  src:
+    "local('Proxima Nova'), local('ProximaNova'), url('/fonts/proximanova/400/400.woff2'), url('/fonts/proximanova/400/400.woff'), url('/fonts/proximanova/400/400.eot'), url('/fonts/proximanova/400/400.svg'), url('/fonts/proximanova/400/400.ttf')",
+});
+
+css.fontFace({
+  fontFamily: 'Proxima Nova',
+  fontStyle: 'normal',
+  fontWeight: 400,
+  src:
+    "local('Proxima Nova'), local('ProximaNova'), url('/fonts/proximanova/600/600.woff2'), url('/fonts/proximanova/600/600.woff'), url('/fonts/proximanova/600/600.eot'), url('/fonts/proximanova/600/600.svg'), url('/fonts/proximanova/600/600.ttf')",
+});
 
 const styles: {} = {
   display: 'flex',
