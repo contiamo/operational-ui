@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: SideNavigation Should render correctly 1`] = `
-<glamorous(SideNavigation)
+<glamorous(bound )
   color="#445873"
 >
   <glamorous(_class)
@@ -43,15 +43,15 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
     size={40}
     tooltip={
       <div>
-        <glamorous(SideNavigationLink)>
+        <glamorous(bound )>
           My Account
-        </glamorous(SideNavigationLink)>
-        <glamorous(SideNavigationLink)>
+        </glamorous(bound )>
+        <glamorous(bound )>
           Feedback
-        </glamorous(SideNavigationLink)>
-        <glamorous(SideNavigationLink)>
+        </glamorous(bound )>
+        <glamorous(bound )>
           Logout
-        </glamorous(SideNavigationLink)>
+        </glamorous(bound )>
       </div>
     }
     tooltipAnchor="bottom"
@@ -66,5 +66,5 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
     />
   </glamorous(_class)>
-</glamorous(SideNavigation)>
+</glamorous(bound )>
 `;

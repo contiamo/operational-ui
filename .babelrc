@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "latest",
+      "env",
       {
         "es2015": {
           "modules": false
@@ -14,7 +14,7 @@
   "plugins": ["react-hot-loader/babel"],
   "env": {
     "test": {
-      "presets": ["latest", "react", "stage-0"]
+      "presets": [["env", { "spec": true }], "react", "stage-0"]
     }
   }
 }
