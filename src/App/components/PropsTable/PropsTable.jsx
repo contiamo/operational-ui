@@ -1,5 +1,5 @@
-import React from 'react';
-import glamorous from 'glamorous';
+import React from 'react'
+import glamorous from 'glamorous'
 
 type props = {
   name: string,
@@ -7,7 +7,7 @@ type props = {
   defaultValue: mixed,
   type: string,
   optional: boolean,
-};
+}
 
 const PropsTable = ({ className, props }: { className?: string, props: Array<props> }) =>
   (<table className={className}>
@@ -46,7 +46,7 @@ const PropsTable = ({ className, props }: { className?: string, props: Array<pro
           <td colSpan="5">There seem to be no props. 😿</td>
         </tr>}
     </tbody>
-  </table>);
+  </table>)
 const style = ({ theme }: { theme: THEME }) => ({
   border: 0,
   borderCollapse: 'collapse',
@@ -64,6 +64,6 @@ const style = ({ theme }: { theme: THEME }) => ({
   '& tr:nth-child(even)': {
     backgroundColor: theme.greys ? theme.greys[10] : '#eee',
   },
-});
-export default glamorous(PropsTable)(style);
-export { PropsTable };
+})
+export default glamorous(PropsTable)(style)
+export { PropsTable }

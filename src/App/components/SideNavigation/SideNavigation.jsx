@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Div, Img } from 'glamorous';
-import { Box } from 'react-feather';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Div, Img } from 'glamorous'
+import { Box } from 'react-feather'
 
 import SideNavigation, {
   SideNavigationItem,
   SideNavigationLink,
-} from '../../../components/SideNavigation/SideNavigation';
+} from '../../../components/SideNavigation/SideNavigation'
 
 export default () =>
   (<SideNavigation color="#445873">
@@ -40,4 +40,4 @@ export default () =>
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
       />
     </SideNavigationItem>
-  </SideNavigation>);
+  </SideNavigation>)

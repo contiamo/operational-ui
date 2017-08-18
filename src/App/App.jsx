@@ -1,88 +1,72 @@
 // @flow
-import React from 'react';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
-import glamorous, { Div, ThemeProvider } from 'glamorous';
-import { css } from 'glamor';
+import React from "react"
+import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
+import glamorous, { Div, ThemeProvider } from "glamorous"
+import { css } from "glamor"
 
-import SideNavigation from './components/SideNavigation/SideNavigation';
-import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar/Sidebar';
-import AppCanvas from './components/Canvas/Canvas';
+import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 
-import CardsPage from './pages/Cards/Cards';
-import ChipsPage from './pages/Chips/Chips';
-import TooltipsPage from './pages/Tooltips/Tooltips';
-import StatsPage from './pages/Stats/Stats';
-import SidebarPage from './pages/Sidebar/Sidebar';
+import SideNavigation from "./components/SideNavigation/SideNavigation"
+import Header from "./components/Header/Header"
+import Sidebar from "./components/Sidebar/Sidebar"
+import AppCanvas from "./components/Canvas/Canvas"
 
-import DEFAULT_THEME from '../theme';
+import CardsPage from "./pages/Cards/Cards"
+import ChipsPage from "./pages/Chips/Chips"
+import TooltipsPage from "./pages/Tooltips/Tooltips"
+import StatsPage from "./pages/Stats/Stats"
+import SidebarPage from "./pages/Sidebar/Sidebar"
 
-const SidebarWithRouter = withRouter(Sidebar);
+import DEFAULT_THEME from "../theme"
 
-const App = ({ className }: { className: string }) =>
-  (<Router>
-    <ThemeProvider theme={DEFAULT_THEME}>
-      <div className={className}>
-        <SideNavigation />
-        <Div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100vw',
-            height: '100vh',
-          }}
-        >
-          <Header />
+const SidebarWithRouter = withRouter(Sidebar),
+  App = ({ className }: { className: string }) =>
+    <Router>
+      <ThemeProvider theme={DEFAULT_THEME}>
+        <div className={className}>
+          <SideNavigation />
           <Div
             css={{
-              display: 'flex',
-              padding: 16,
-              width: '100%',
-              height: '100vh',
+              display: "flex",
+              flexDirection: "column",
+              width: "100vw",
+              height: "100vh"
             }}
           >
-            <SidebarWithRouter />
-            <AppCanvas css={{ marginLeft: 16, flexBasis: '100%' }}>
-              <Route path="/cards" component={CardsPage} />
-              <Route path="/chips" component={ChipsPage} />
-              <Route path="/tooltips" component={TooltipsPage} />
-              <Route path="/stats" component={StatsPage} />
-              <Route path="/sidebar" component={SidebarPage} />
-            </AppCanvas>
+            <Header />
+            <Div
+              css={{
+                display: "flex",
+                padding: 16,
+                width: "100%",
+                height: "100vh"
+              }}
+            >
+              <SidebarWithRouter />
+              <AppCanvas css={{ marginLeft: 16, flexBasis: "100%" }}>
+                <Route path="/cards" component={CardsPage} />
+                <Route path="/chips" component={ChipsPage} />
+                <Route path="/tooltips" component={TooltipsPage} />
+                <Route path="/stats" component={StatsPage} />
+                <Route path="/sidebar" component={SidebarPage} />
+              </AppCanvas>
+            </Div>
           </Div>
-        </Div>
-      </div>
-    </ThemeProvider>
-  </Router>);
+        </div>
+      </ThemeProvider>
+    </Router>,
+  styles: {} = {
+    display: "flex",
+    backgroundColor: DEFAULT_THEME.greys["10"],
+    ...DEFAULT_THEME.fonts
+  }
 
-css.fontFace({
-  fontFamily: 'Proxima Nova',
-  fontStyle: 'normal',
-  fontWeight: 300,
-  src:
-    "local('Proxima Nova'), local('ProximaNova'), url('/fonts/proximanova/300/300.woff2'), url('/fonts/proximanova/300/300.woff'), url('/fonts/proximanova/300/300.eot'), url('/fonts/proximanova/300/300.svg'), url('/fonts/proximanova/300/300.ttf')",
-});
+appFontWeights.forEach((fontWeight: number) => {
+  css.fontFace({
+    ...appFontFace,
+    ...getFontSrcString(fontWeight)()(),
+    fontWeight
+  })
+})
 
-css.fontFace({
-  fontFamily: 'Proxima Nova',
-  fontStyle: 'normal',
-  fontWeight: 400,
-  src:
-    "local('Proxima Nova'), local('ProximaNova'), url('/fonts/proximanova/400/400.woff2'), url('/fonts/proximanova/400/400.woff'), url('/fonts/proximanova/400/400.eot'), url('/fonts/proximanova/400/400.svg'), url('/fonts/proximanova/400/400.ttf')",
-});
-
-css.fontFace({
-  fontFamily: 'Proxima Nova',
-  fontStyle: 'normal',
-  fontWeight: 400,
-  src:
-    "local('Proxima Nova'), local('ProximaNova'), url('/fonts/proximanova/600/600.woff2'), url('/fonts/proximanova/600/600.woff'), url('/fonts/proximanova/600/600.eot'), url('/fonts/proximanova/600/600.svg'), url('/fonts/proximanova/600/600.ttf')",
-});
-
-const styles: {} = {
-  display: 'flex',
-  backgroundColor: DEFAULT_THEME.greys['10'],
-  ...DEFAULT_THEME.fonts,
-};
-
-export default glamorous(App)(styles);
+export default glamorous(App)(styles)

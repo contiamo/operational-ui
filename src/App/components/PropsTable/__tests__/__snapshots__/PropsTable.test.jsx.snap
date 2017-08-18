@@ -23,7 +23,7 @@ exports[`PropsTable Should render correctly with props 1`] = `
   </thead>
   <tbody />
 </table>
-`;
+`
 
 exports[`PropsTable Should render correctly without props 1`] = `
 <table>
@@ -56,4 +56,4 @@ exports[`PropsTable Should render correctly without props 1`] = `
     </tr>
   </tbody>
 </table>
-`;
+`

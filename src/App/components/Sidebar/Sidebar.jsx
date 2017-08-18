@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar';
+import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar'
 
 const paths = {
   feedback: ['/tooltips'],
   uiElements: ['/chips', '/cards', '/stats'],
   navigation: ['/sidebar'],
-};
+}
 
 export default ({ location }) =>
   (<Sidebar>
@@ -47,4 +47,4 @@ export default ({ location }) =>
     <SidebarItem label="Icons">
       <SidebarLink>Feather Icons</SidebarLink>
     </SidebarItem>
-  </Sidebar>);
+  </Sidebar>)

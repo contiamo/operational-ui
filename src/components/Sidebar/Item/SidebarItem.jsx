@@ -1,9 +1,9 @@
 // @flow
-import React, { Component } from 'react';
-import glamorous, { Div } from 'glamorous';
+import React, { Component } from 'react'
+import glamorous, { Div } from 'glamorous'
 
-import style from './SidebarItem.style';
-import withTooltip from '../../Tooltip/withTooltip';
+import style from './SidebarItem.style'
+import withTooltip from '../../Tooltip/withTooltip'
 
 class SidebarItem extends Component {
   props: {
@@ -13,7 +13,7 @@ class SidebarItem extends Component {
     open: boolean,
     onClick?: void,
     tooltip?: string,
-  };
+  }
 
   state: {
     open: boolean,
@@ -21,27 +21,27 @@ class SidebarItem extends Component {
   } = {
     open: this.props && this.props.open,
     updating: false,
-  };
+  }
 
   static defaultProps = {
     children: '',
     open: false,
     tooltip: '',
-  };
+  }
 
   async toggle() {
     if (!this.props.children) {
-      return false;
+      return false
     }
-    this.setState(() => ({ updating: true }));
+    this.setState(() => ({ updating: true }))
     // If it is closed,
     if (this.props.onClick && !this.state.open) {
-      await this.props.onClick(); // wait for the promise to resolve first.
+      await this.props.onClick() // wait for the promise to resolve first.
     }
     this.setState(prevState => ({
       open: !prevState.open,
       updating: false,
-    }));
+    }))
   }
 
   render() {
@@ -50,7 +50,7 @@ class SidebarItem extends Component {
       even when the cursor is over the children... who may also have their
       own tooltips.
     */
-    const HeaderWithTooltip = withTooltip(Div);
+    const HeaderWithTooltip = withTooltip(Div)
     return (
       <div
         className={`${this.props.className} ${this.state.updating ? 'updating' : ''} ${this.state
@@ -71,9 +71,9 @@ class SidebarItem extends Component {
           </div>
           : ''}
       </div>
-    );
+    )
   }
 }
 
-export default glamorous(SidebarItem)(style);
-export { SidebarItem };
+export default glamorous(SidebarItem)(style)
+export { SidebarItem }

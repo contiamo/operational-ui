@@ -1,8 +1,8 @@
-import React from 'react';
-import glamorous from 'glamorous';
-import GoX from 'react-icons/lib/go/x';
+import React from 'react'
+import glamorous from 'glamorous'
+import GoX from 'react-icons/lib/go/x'
 
-import { hexOrColor, readableTextColor } from '../../utils/color';
+import { hexOrColor, readableTextColor } from '../../utils/color'
 
 const Chip = ({
   className,
@@ -21,12 +21,12 @@ const Chip = ({
       <div className="action" onClick={onClick}>
         {symbol || <GoX />}
       </div>}
-  </div>);
+  </div>)
 
 const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClick: any }) => {
   const backgroundColor = hexOrColor(color)(
     theme.colors ? theme.colors[color] || theme.colors.primary : 'black',
-  );
+  )
   const actionStyles = onClick
     ? {
       '& .action': {
@@ -56,7 +56,7 @@ const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClic
         backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`,
       },
     }
-    : {};
+    : {}
 
   return {
     position: 'relative',
@@ -80,8 +80,8 @@ const style = ({ theme, color, onClick }: { theme: THEME, color?: string, onClic
     },
 
     ...actionStyles,
-  };
-};
+  }
+}
 
-export default glamorous(Chip)(style);
-export { Chip };
+export default glamorous(Chip)(style)
+export { Chip }

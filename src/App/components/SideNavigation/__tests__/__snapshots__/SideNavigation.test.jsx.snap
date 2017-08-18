@@ -67,4 +67,4 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
     />
   </glamorous(_class)>
 </glamorous(bound )>
-`;
+`

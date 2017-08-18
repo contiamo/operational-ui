@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default [
   {
@@ -31,4 +31,4 @@ export default [
     type: 'string',
     optional: false,
   },
-];
+]

@@ -4,10 +4,10 @@ exports[`HeaderItem Looks different when active 1`] = `
 <div>
   My name is Ed
 </div>
-`;
+`
 
 exports[`HeaderItem Renders 1`] = `
 <div>
   My name is Ed
 </div>
-`;
+`

@@ -1,14 +1,14 @@
 // @flow
-import React from 'react';
+import React from 'react'
 
-import Playground from 'component-playground';
+import Playground from 'component-playground'
 
-import Table from '../../components/PropsTable/PropsTable';
-import DemoChip from '../../../components/Chip/Chip';
-import DemoPlusChip from '../../../components/PlusChip/PlusChip';
+import Table from '../../components/PropsTable/PropsTable'
+import DemoChip from '../../../components/Chip/Chip'
+import DemoPlusChip from '../../../components/PlusChip/PlusChip'
 
-import snippet from './snippet';
-import propDescription from './propDescription';
+import snippet from './snippet'
+import propDescription from './propDescription'
 
 export default () =>
   (<div>
@@ -55,4 +55,4 @@ export default () =>
 
     <h2>Props</h2>
     <Table props={propDescription.plusChip} />
-  </div>);
+  </div>)

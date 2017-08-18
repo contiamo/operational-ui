@@ -1,8 +1,8 @@
-import React from 'react';
-import glamorous from 'glamorous';
-import GoPlus from 'react-icons/lib/go/plus';
+import React from 'react'
+import glamorous from 'glamorous'
+import GoPlus from 'react-icons/lib/go/plus'
 
-import { hexOrColor } from '../../utils/color';
+import { hexOrColor } from '../../utils/color'
 
 const PlusChip = ({
   className,
@@ -17,12 +17,12 @@ const PlusChip = ({
 }) =>
   (<div className={`${className} plus-chip`} onClick={onClick}>
     {children || <GoPlus />}
-  </div>);
+  </div>)
 
 const style = ({ theme, color, size }: { theme: THEME, color?: string, size?: number }) => {
   const borderColor = color
     ? hexOrColor(color)((theme.colors && theme.colors[color]) || 'white')
-    : 'black';
+    : 'black'
 
   return {
     display: 'flex',
@@ -37,8 +37,8 @@ const style = ({ theme, color, size }: { theme: THEME, color?: string, size?: nu
     '&.plus-chip + .plus-chip': {
       marginLeft: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
     },
-  };
-};
+  }
+}
 
-export default glamorous(PlusChip)(style);
-export { PlusChip };
+export default glamorous(PlusChip)(style)
+export { PlusChip }

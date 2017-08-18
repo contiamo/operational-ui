@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import glamorous from 'glamorous';
+import React from 'react'
+import glamorous from 'glamorous'
 
 const HeaderTitle = ({
   className,
@@ -11,12 +11,12 @@ const HeaderTitle = ({
 }): React$Element<*> =>
   (<div className={className}>
     {children}
-  </div>);
+  </div>)
 
 const style = ({ theme, color }: { theme: THEME, color: string }): {} => ({
   marginRight: theme.spacing,
   fontSize: '1.7rem',
   fontWeight: 600,
-});
+})
 
-export default glamorous(HeaderTitle)(style);
+export default glamorous(HeaderTitle)(style)

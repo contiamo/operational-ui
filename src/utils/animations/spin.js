@@ -1,12 +1,12 @@
-import { css } from 'glamor';
+import { css } from "glamor"
 
 const spin: string = css.keyframes({
   from: {
-    transform: 'rotate(0deg)',
+    transform: "rotate(0deg)"
   },
   to: {
-    transform: 'rotate(359deg)',
-  },
-});
+    transform: "rotate(359deg)"
+  }
+})
 
-export default spin;
+export default spin

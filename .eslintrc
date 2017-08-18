@@ -1,16 +1,12 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["jest", "flowtype"],
-  "env": {
-    "jest/globals": true
-  },
-  "globals": {
-    "HTMLElement": true,
-    "React$Element": true,
-    "THEME": true,
-  },
+  "extends": "fbjs/strict",
   "rules": {
-    "jsx-a11y/href-no-hash": "off"
+      "semi": 0,
+      "indent": ["error", 2],
+      "space-before-function-paren": ["error", {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "never"
+    }],
   }
 }

@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import Playground from 'component-playground';
+import Playground from 'component-playground'
 
-import Table from '../../components/PropsTable/PropsTable';
-import DemoCard from '../../../components/Card/Card';
-import snippet from './snippet';
-import propDescription from './propDescription';
+import Table from '../../components/PropsTable/PropsTable'
+import DemoCard from '../../../components/Card/Card'
+import snippet from './snippet'
+import propDescription from './propDescription'
 
 export default () =>
   (<div>
@@ -42,4 +42,4 @@ export default () =>
 
     <h2>Props</h2>
     <Table props={propDescription} />
-  </div>);
+  </div>)

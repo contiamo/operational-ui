@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import Playground from 'component-playground';
+import Playground from 'component-playground'
 
-import Table from '../../components/PropsTable/PropsTable';
-import DemoSidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar';
-import snippet from './snippet';
-import propDescription from './propDescription';
+import Table from '../../components/PropsTable/PropsTable'
+import DemoSidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar'
+import snippet from './snippet'
+import propDescription from './propDescription'
 
-const fetch = () => new Promise(resolve => setTimeout(() => resolve(), 2000));
+const fetch = () => new Promise(resolve => setTimeout(() => resolve(), 2000))
 
 export default () =>
   (<div>
@@ -62,4 +62,4 @@ export default () =>
         exposes all of the props that such components do.
       </strong>
     </p>
-  </div>);
+  </div>)

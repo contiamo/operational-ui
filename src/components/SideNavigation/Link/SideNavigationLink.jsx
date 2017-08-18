@@ -1,25 +1,25 @@
 // @flow
-import React from 'react';
-import glamorous from 'glamorous';
+import React from 'react'
+import glamorous from 'glamorous'
 
-import { hexOrColor, readableTextColor, darken } from '../../../utils/color';
+import { hexOrColor, readableTextColor, darken } from '../../../utils/color'
 
 type props = {
   className: string,
   children: mixed,
   onClick?: any,
   theme?: THEME,
-};
+}
 
 const SideNavigationLink = ({ className, children, onClick }: props): React$Element<*> =>
   (<div className={className} onClick={onClick}>
     {children}
-  </div>);
+  </div>)
 
 const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
   const backgroundColor = color
     ? hexOrColor(color)(theme.colors[color])
-    : theme.greys && theme.greys['100'];
+    : theme.greys && theme.greys['100']
 
   return {
     position: 'relative',
@@ -47,8 +47,8 @@ const style = ({ theme, color }: { theme: THEME, color?: string }): {} => {
     ':last-child': {
       marginBottom: `${theme.spacing * -0.5}px`,
     },
-  };
-};
+  }
+}
 
-export default glamorous(SideNavigationLink)(style);
-export { SideNavigationLink, style }; // for testing.
+export default glamorous(SideNavigationLink)(style)
+export { SideNavigationLink, style } // for testing.

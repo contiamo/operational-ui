@@ -1,22 +1,22 @@
-import React from 'react';
-import glamorous from 'glamorous';
-import Playground from 'component-playground';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import React from 'react'
+import glamorous from 'glamorous'
+import Playground from 'component-playground'
+import SyntaxHighlighter from 'react-syntax-highlighter'
 
-import Table from '../../components/PropsTable/PropsTable';
-import DemoTooltip from '../../../components/Tooltip/Tooltip';
+import Table from '../../components/PropsTable/PropsTable'
+import DemoTooltip from '../../../components/Tooltip/Tooltip'
 
-import { hexOrColor, readableTextColor } from '../../../utils/color';
+import { hexOrColor, readableTextColor } from '../../../utils/color'
 
-import snippet from './snippet';
-import propDescription from './propDescription';
+import snippet from './snippet'
+import propDescription from './propDescription'
 
 const StickyTooltip = glamorous(DemoTooltip)({
   position: 'relative',
   top: 0,
   left: 0,
   transform: 'none',
-});
+})
 
 export default () =>
   (<div>
@@ -56,4 +56,4 @@ export default () =>
         `tooltip` in order not to override any similar props on your component.
       </strong>
     </p>
-  </div>);
+  </div>)

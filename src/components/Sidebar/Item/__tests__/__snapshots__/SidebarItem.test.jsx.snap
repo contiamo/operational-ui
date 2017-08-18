@@ -11,4 +11,4 @@ exports[`SidebarItem Should initialize 1`] = `
     tooltipAnchor="top"
   />
 </div>
-`;
+`

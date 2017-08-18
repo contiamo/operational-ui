@@ -38,17 +38,17 @@ By default, we expose the `contiamoTheme` for convenience.
 
 ```javascript
 // app.js
-import React from 'react';
-import { render } from 'react-dom';
-import { ThemeProvider, contiamoTheme } from 'ui-components';
+import React from 'react'
+import { render } from 'react-dom'
+import { ThemeProvider, contiamoTheme } from 'ui-components'
 
 const App = () => (
   <ThemeProvider theme={contiamoTheme}>
     <div>Hi, I am the app</div>
   </ThemeProvider>
-);
+)
 
-render(<App />, document.querySelector('#app'));
+render(<App />, document.querySelector('#app'))
 ```
 
 ## Components
@@ -60,12 +60,12 @@ This is a thick sidebar that is responsible for the core navigation of your app 
 
 ```javascript
 // nav.js
-import React from 'react';
-import { SideNavigation } from 'ui-components';
+import React from 'react'
+import { SideNavigation } from 'ui-components'
 
 const myComponent = () => <SideNavigation />
 
-export default myComponent;
+export default myComponent
 ```
 
 Then, to use this component in your app, simply import it and use it.
@@ -73,20 +73,20 @@ Your file will look something like this:
 
 ```javascript
 // app.js
-import React from 'react';
-import { render } from 'react-dom';
-import { ThemeProvider, contiamoTheme } from 'ui-components';
+import React from 'react'
+import { render } from 'react-dom'
+import { ThemeProvider, contiamoTheme } from 'ui-components'
 
-import myComp from './nav.js';
+import myComp from './nav.js'
 
 const App = () => (
   <ThemeProvider theme={contiamoTheme}>
     <myComp />
     <div>Hi, I am the app</div>
   </ThemeProvider>
-);
+)
 
-render(<App />, document.querySelector('#app'));
+render(<App />, document.querySelector('#app'))
 ```
 
 Okay – that's cool, but now you literally have *just a sidebar*. The SideNavigation component also exposes subcomponents that you can compose into it in order to construct a *proper* side navigation. These components are as follows.
@@ -107,11 +107,11 @@ This component supports one option:
 ##### Example
 ```javascript
 // nav.js
-import React from 'react';
+import React from 'react'
 import {
   SideNavigation,
   SideNavigationItem
-} from 'ui-components';
+} from 'ui-components'
 
 const myComponent = () => (
   <SideNavigation>
@@ -122,9 +122,9 @@ const myComponent = () => (
       <img alt="Icon2" src="https://iconlib.io/icon2.svg" />
     </SideNavigationItem>
   </SideNavigation>
-);
+)
 
-export default myComponent;
+export default myComponent
 ```
 
 #### SideNavigationTooltip
@@ -142,12 +142,12 @@ This component supports one option:
 ##### Example
 ```javascript
 // nav.js
-import React from 'react';
+import React from 'react'
 import {
   SideNavigation,
   SideNavigationItem,
   SideNavigationTooltip,
-} from 'ui-components';
+} from 'ui-components'
 
 const myComponent = () => (
   <SideNavigation>
@@ -158,9 +158,9 @@ const myComponent = () => (
       </SideNavigationTooltip>
     </SideNavigationItem>
   </SideNavigation>
-);
+)
 
-export default myComponent;
+export default myComponent
 ```
 
 #### SideNavigationLink
@@ -175,13 +175,13 @@ These components go inside `SideNavigationTooltip` and allow you to create stack
 ##### Example
 ```javascript
 // nav.js
-import React from 'react';
+import React from 'react'
 import {
   SideNavigation,
   SideNavigationItem,
   SideNavigationTooltip,
   SideNavigationLink
-} from 'ui-components';
+} from 'ui-components'
 
 const myComponent = () => (
   <SideNavigation>
@@ -193,9 +193,9 @@ const myComponent = () => (
       </SideNavigationTooltip>
     </SideNavigationItem>
   </SideNavigation>
-);
+)
 
-export default myComponent;
+export default myComponent
 ```
 
 ### Header
@@ -208,8 +208,8 @@ The header component consists of 3 subcomponents: A title, an "item", and a sepa
 | color  | No       | white   | string | This can be either a hex value (`#f00b4f`) or a named color from the theme supplied to `ThemeProvider` at app initialization. `color="primary"` would work just as well as `color="#feb901`". |
 
 ```javascript
-import React from 'react';
-import { Header, HeaderTitle, HeaderItem, HeaderSeparator } from 'ui-components';
+import React from 'react'
+import { Header, HeaderTitle, HeaderItem, HeaderSeparator } from 'ui-components'
 
 const MyHeader = () => (<Header color="primary">
   <HeaderTitle>Contiamo</HeaderTitle>
@@ -221,9 +221,9 @@ const MyHeader = () => (<Header color="primary">
   </HeaderItem>
   <HeaderSeparator />
   <HeaderItem>Logout</HeaderItem>
-</Header>);
+</Header>)
 
-export default MyHeader;
+export default MyHeader
 
 ```
 
