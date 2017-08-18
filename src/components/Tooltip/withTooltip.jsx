@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Tooltip from './Tooltip';
+import Tooltip from './Tooltip'
 
 /**
   A simple Higher-Order Component (HOC) that you can wrap with any custom
   component in order to make it Tooltippable. This should JustWork™.
 
   USAGE:
-  import withTooltip from './withTooltip';
-  const MyComponentWithTooltip = withTooltip(MyComponent);
+  import withTooltip from './withTooltip'
+  const MyComponentWithTooltip = withTooltip(MyComponent)
   <MyComponentWithTooltip
     tooltip={<div>ANYTHING</div>}
     tooltipAnchor={'top'||'bottom'}
@@ -22,24 +22,24 @@ const withTooltip = InputComponent =>
       tooltip: string,
       tooltipAnchor?: string,
       tooltipColor?: string,
-    };
+    }
 
     state: {
       isTooltipActive: boolean,
     } = {
       isTooltipActive: false,
-    };
+    }
 
     static defaultProps = {
       tooltipAnchor: 'top',
-    };
+    }
 
     showTooltip() {
-      this.setState(() => ({ isTooltipActive: true }));
+      this.setState(() => ({ isTooltipActive: true }))
     }
 
     hideTooltip() {
-      this.setState(() => ({ isTooltipActive: false }));
+      this.setState(() => ({ isTooltipActive: false }))
     }
 
     render() {
@@ -54,8 +54,8 @@ const withTooltip = InputComponent =>
               : ''}
           </InputComponent>
         </div>
-      );
+      )
     }
-  };
+  }
 
-export default withTooltip;
+export default withTooltip

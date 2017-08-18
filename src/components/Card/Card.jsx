@@ -1,10 +1,10 @@
-import React from 'react';
-import glamorous from 'glamorous';
+import React from 'react'
+import glamorous from 'glamorous'
 
 const Card = ({ className, children }: { className?: string, children: mixed }) =>
   (<div className={className}>
     {children}
-  </div>);
+  </div>)
 
 const style = ({ theme, width, padding }: { theme: THEME, width?: number, padding?: number }) => ({
   width,
@@ -15,7 +15,7 @@ const style = ({ theme, width, padding }: { theme: THEME, width?: number, paddin
   '& > img': {
     maxWidth: '100%',
   },
-});
+})
 
-export default glamorous(Card)(style);
-export { Card };
+export default glamorous(Card)(style)
+export { Card }

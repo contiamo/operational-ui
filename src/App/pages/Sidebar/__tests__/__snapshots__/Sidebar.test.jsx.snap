@@ -54,7 +54,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
             &lt;SidebarItem label="Links"&gt;
               &lt;SidebarLink
                 onClick={() =&gt; window.open('https://www.contiamo.com')}
-                symbol="&rarr;"
+                symbol="&rarr"
               &gt;
                 Link 1
               &lt;/SidebarLink&gt;

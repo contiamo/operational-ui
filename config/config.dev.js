@@ -1,9 +1,9 @@
-const webpackMerge = require('webpack-merge');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const webpack = require('webpack');
-const path = require('path');
+const webpackMerge = require('webpack-merge')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const webpack = require('webpack')
+const path = require('path')
 
-const config = require('./config.base');
+const config = require('./config.base')
 
 module.exports = webpackMerge(config, {
   plugins: [
@@ -16,4 +16,4 @@ module.exports = webpackMerge(config, {
     hot: true,
     historyApiFallback: true,
   },
-});
+})

@@ -6,8 +6,8 @@ export default {
 
 `,
   withTooltip: `
-  const MyDiv = () => (<div>Hover for Spanish!</div>);
-  const MyDivWithTooltip = withTooltip(MyDiv);
+  const MyDiv = () => (<div>Hover for Spanish!</div>)
+  const MyDivWithTooltip = withTooltip(MyDiv)
 
   ReactDOM.render(
     <MyDivWithTooltip
@@ -18,6 +18,6 @@ export default {
       Hover for Spanish
     </MyDivWithTooltip>,
     document.querySelector('#app)
-  );
-`,
-};
+  )
+`
+}

@@ -5,4 +5,4 @@ export default `
   <Stat color="#009de8" label="Cool Factor">
     > 10
   </Stat>
-</div>`;
+</div>`

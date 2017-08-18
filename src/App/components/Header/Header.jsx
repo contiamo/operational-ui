@@ -1,11 +1,11 @@
-import React from 'react';
-import { Box, Camera } from 'react-feather';
+import React from 'react'
+import { Box, Camera } from 'react-feather'
 
 import Header, {
   HeaderItem,
   HeaderSeparator,
   HeaderTitle,
-} from '../../../components/Header/Header';
+} from '../../../components/Header/Header'
 
 export default () =>
   (<Header color="#445873">
@@ -18,4 +18,4 @@ export default () =>
     </HeaderItem>
     <HeaderSeparator />
     <HeaderItem>Logout</HeaderItem>
-  </Header>);
+  </Header>)

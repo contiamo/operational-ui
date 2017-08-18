@@ -1,8 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { render } from 'enzyme';
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { render } from 'enzyme'
 
-import SidebarPage from '../Sidebar';
+import SidebarPage from '../Sidebar'
 
 describe('Sidebar Page', () => {
   it('Should render correctly', () => {
@@ -12,6 +12,6 @@ describe('Sidebar Page', () => {
           <SidebarPage />
         </Router>,
       ),
-    ).toMatchSnapshot();
-  });
-});
+    ).toMatchSnapshot()
+  })
+})

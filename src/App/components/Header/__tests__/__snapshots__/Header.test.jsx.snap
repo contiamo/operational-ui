@@ -26,4 +26,4 @@ exports[`App Showcase: Header Should render correctly 1`] = `
     Logout
   </glamorous(bound )>
 </glamorous(bound )>
-`;
+`

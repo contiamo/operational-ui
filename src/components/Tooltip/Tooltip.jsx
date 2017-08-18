@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react';
-import glamorous from 'glamorous';
+import React, { Component } from 'react'
+import glamorous from 'glamorous'
 
-import style from './Tooltip.style';
+import style from './Tooltip.style'
 
 /**
   The <Tooltip /> component.
@@ -28,7 +28,7 @@ import style from './Tooltip.style';
   top?: number,
   left?: number,
   bottom?: number | string,
-};
+}
 
 type rect = {
   top: number,
@@ -37,7 +37,7 @@ type rect = {
   right: number,
   width: number,
   height: number,
-};
+}
 class Tooltip extends Component {
   props: {
     className: string,
@@ -45,28 +45,28 @@ class Tooltip extends Component {
     active?: boolean,
     anchor?: string,
     color?: string,
-  };
+  }
 
   state: {
     position: tooltipPosition,
-  } = { position: {} };
+  } = { position: {} }
 
-  tooltip: HTMLDivElement;
+  tooltip: HTMLDivElement
 
   static defaultProps = {
     anchor: 'top',
     active: false,
-  };
+  }
 
   componentDidMount() {
-    const position = this.getPosition();
+    const position = this.getPosition()
     this.setState(() => ({
       position,
-    }));
+    }))
   }
   getPosition() {
-    const rect: rect = this.tooltip.getBoundingClientRect();
-    const top: number = rect.top;
+    const rect: rect = this.tooltip.getBoundingClientRect()
+    const top: number = rect.top
 
     /**
       The following style properties can only properly be set
@@ -79,12 +79,12 @@ class Tooltip extends Component {
       transform: 'none',
       top,
       left: (rect && rect.left) || 0,
-    };
+    }
 
     if (this.props.anchor === 'bottom') {
-      position.bottom = 'auto';
+      position.bottom = 'auto'
     }
-    return position;
+    return position
   }
   render() {
     return (
@@ -95,8 +95,8 @@ class Tooltip extends Component {
       >
         {this.props.children ? this.props.children : ''}
       </div>
-    );
+    )
   }
 }
-export default glamorous(Tooltip)(style);
-export { Tooltip, style }; // for testing.
+export default glamorous(Tooltip)(style)
+export { Tooltip, style } // for testing.

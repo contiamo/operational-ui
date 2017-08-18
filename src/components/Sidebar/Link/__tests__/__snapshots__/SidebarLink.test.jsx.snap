@@ -9,7 +9,7 @@ exports[`SidebarLink Should display a symbol to the right 1`] = `
     % s  
   </div>
 </glamorous.Div>
-`;
+`
 
 exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`] = `
 <Link
@@ -18,10 +18,10 @@ exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`
 >
   sup
 </Link>
-`;
+`
 
 exports[`SidebarLink Should render correctly 1`] = `
 <glamorous.Div>
   sup
 </glamorous.Div>
-`;
+`

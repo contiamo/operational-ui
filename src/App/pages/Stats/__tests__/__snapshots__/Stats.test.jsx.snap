@@ -53,7 +53,7 @@ exports[`Cards Page Should render correctly 1`] = `
       <span
         class="Stat__value"
       >
-        €2M
+        &euro2M
       </span>
     </div>
   </div>

@@ -6,4 +6,4 @@ exports[`Plus Chip Should correctly render 1`] = `
 >
   <GoPlus />
 </div>
-`;
+`

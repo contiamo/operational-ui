@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default {
   sidebarItem: [
@@ -59,4 +59,4 @@ export default {
       optional: true,
     },
   ],
-};
+}

@@ -194,14 +194,14 @@ exports[`Tooltips Page Should render correctly 1`] = `
           &gt;
         </span>
       </span>
-      );
+      )
         
       <span
         style="font-weight:bold;"
       >
         const
       </span>
-       MyDivWithTooltip = withTooltip(MyDiv);
+       MyDivWithTooltip = withTooltip(MyDiv)
       
         ReactDOM.render(
           
@@ -274,7 +274,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
         style="color:#880000;"
       >
         '#app)
-          );
+          )
         
       </span>
     </code>

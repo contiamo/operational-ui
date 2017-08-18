@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
-import { Link } from 'react-router-dom';
-import glamorous, { Div } from 'glamorous';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import glamorous, { Div } from 'glamorous'
 
-import { hexOrColor, readableTextColor, darken } from '../../../utils/color';
+import { hexOrColor, readableTextColor, darken } from '../../../utils/color'
 
-import withTooltip from '../../Tooltip/withTooltip';
+import withTooltip from '../../Tooltip/withTooltip'
 
 const SidebarLink = ({
   className,
@@ -20,11 +20,11 @@ const SidebarLink = ({
   onClick?: void,
   symbol?: string,
 }) => {
-  let Component = Div; // By default, use a standard styled div.
+  let Component = Div // By default, use a standard styled div.
 
   // if this is expected to work with react-router,
   if (to) {
-    Component = Link; // use a <Link /> since it supports props.to.
+    Component = Link // use a <Link /> since it supports props.to.
   }
 
   return (
@@ -36,14 +36,14 @@ const SidebarLink = ({
         </div>
         : ''}
     </Component>
-  );
-};
+  )
+}
 
 const style = ({ theme, color }: { theme: THEME, color: string }) => {
   const backgroundColor = color
     ? hexOrColor(color)(theme.colors && theme.colors[color])
-    : theme.colors ? theme.colors.primary : '#22205F';
-  const textColor = readableTextColor(backgroundColor)(['black', 'white']);
+    : theme.colors ? theme.colors.primary : '#22205F'
+  const textColor = readableTextColor(backgroundColor)(['black', 'white'])
 
   return {
     position: 'relative',
@@ -73,8 +73,8 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
     '& > .symbol': {
       marginLeft: 'auto',
     },
-  };
-};
+  }
+}
 
-export default glamorous(withTooltip(SidebarLink))(style);
-export { SidebarLink, style };
+export default glamorous(withTooltip(SidebarLink))(style)
+export { SidebarLink, style }

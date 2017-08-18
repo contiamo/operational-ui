@@ -1,24 +1,24 @@
 // Simple imports n' exports for consumers of the library.
 
-import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './src/components/Header/Header';
+import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from './src/components/Header/Header'
 
 import SideNavigation, {
   SideNavigationItem,
   SideNavigationLink,
-} from './src/components/SideNavigation/SideNavigation';
+} from './src/components/SideNavigation/SideNavigation'
 
-import Tooltip from './src/components/Tooltip/Tooltip';
+import Tooltip from './src/components/Tooltip/Tooltip'
 
-import withTooltip from './src/components/Tooltip/withTooltip';
+import withTooltip from './src/components/Tooltip/withTooltip'
 
-import Chip from './src/components/Chip/Chip';
-import PlusChip from './src/components/PlusChip/PlusChip';
-import Card from './src/components/Card/Card';
-import Stat from './src/components/Stat/Stat';
+import Chip from './src/components/Chip/Chip'
+import PlusChip from './src/components/PlusChip/PlusChip'
+import Card from './src/components/Card/Card'
+import Stat from './src/components/Stat/Stat'
 
-import contiamoTheme from './src/theme';
+import contiamoTheme from './src/theme'
 
-import { ThemeProvider } from 'glamorous';
+import { ThemeProvider } from 'glamorous'
 
 export {
   Header,
@@ -36,4 +36,4 @@ export {
   Stat,
   contiamoTheme,
   ThemeProvider,
-};
+}

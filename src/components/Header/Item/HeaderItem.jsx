@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import glamorous from 'glamorous';
+import React from 'react'
+import glamorous from 'glamorous'
 
 const HeaderItem = ({
   className,
@@ -13,11 +13,11 @@ const HeaderItem = ({
 }): React$Element<*> =>
   (<div onClick={onClick} className={className}>
     {children}
-  </div>);
+  </div>)
 
 const style = ({ theme, active }: { theme: THEME, active?: boolean }): {} => {
-  const opacity = 0.1;
-  const activeBackground = `rgba(0, 0, 0, ${opacity * 2})`;
+  const opacity = 0.1
+  const activeBackground = `rgba(0, 0, 0, ${opacity * 2})`
 
   return {
     display: 'flex',
@@ -51,8 +51,8 @@ const style = ({ theme, active }: { theme: THEME, active?: boolean }): {} => {
       width: 16,
       marginRight: theme.spacing && theme.spacing / 2,
     },
-  };
-};
+  }
+}
 
-export default glamorous(HeaderItem)(style);
-export { HeaderItem };
+export default glamorous(HeaderItem)(style)
+export { HeaderItem }

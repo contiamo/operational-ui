@@ -1,13 +1,13 @@
 // @flow
-import React from 'react';
-import glamorous from 'glamorous';
+import React from 'react'
+import glamorous from 'glamorous'
 
 const Canvas = ({ className, children }: { className: string, children: HTMLElement }) =>
   (<div className={className}>
     <div className="Canvas__body">
       {children}
     </div>
-  </div>);
+  </div>)
 
 const styles = ({ theme }: { theme: THEME }): {} => ({
   display: 'flex',
@@ -43,7 +43,7 @@ const styles = ({ theme }: { theme: THEME }): {} => ({
   '& .CodeMirror-wrap.CodeMirror': {
     minHeight: 480,
   },
-});
+})
 
-export default glamorous(Canvas)(styles);
-export { Canvas };
+export default glamorous(Canvas)(styles)
+export { Canvas }
