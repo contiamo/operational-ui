@@ -39,7 +39,7 @@ const style: {} = ({
     padding: theme.spacing ? theme.spacing / 2 : 8,
     border: "1px solid rgba(0, 0, 0, .2)",
     cursor: "pointer",
-    boxShadow: active ? activeBoxShadow : "",
+    boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     color: textColor,
 
