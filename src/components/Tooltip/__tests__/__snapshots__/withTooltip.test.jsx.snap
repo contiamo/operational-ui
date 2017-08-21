@@ -2,6 +2,7 @@
 
 exports[`withTooltip Higher-Order Component Should return a component 1`] = `
 <div
+  className="undefined_has-tooltip"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
@@ -9,4 +10,4 @@ exports[`withTooltip Higher-Order Component Should return a component 1`] = `
     tooltipAnchor="top"
   />
 </div>
-`
+`;

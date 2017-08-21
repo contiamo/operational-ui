@@ -49,6 +49,11 @@ const SidebarWithRouter = withRouter(Sidebar),
                 <Route path="/tooltips" component={TooltipsPage} />
                 <Route path="/stats" component={StatsPage} />
                 <Route path="/sidebar" component={SidebarPage} />
+                <Route
+                  path="/demo"
+                  render={() =>
+                    <img style={{ maxWidth: "175%" }} src="/screen.png" />}
+                />
               </AppCanvas>
             </Div>
           </Div>

@@ -1,70 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: SideNavigation Should render correctly 1`] = `
-<glamorous(bound )
-  color="#445873"
->
-  <glamorous(_class)
-    size={60}
-    tooltip="Contiamo"
-  >
-    <Link
-      replace={false}
-      to="/"
-    >
-      <glamorous.Img
-        alt="Contiamo"
-        css={
-          Object {
-            "maxWidth": "100%",
-          }
-        }
-        src="img/logo/outline.png"
-      />
-    </Link>
-  </glamorous(_class)>
-  <glamorous(_class)
-    tooltip="Components"
-  >
-    <Box
-      color="white"
-      size={30}
-    />
-  </glamorous(_class)>
-  <glamorous.Div
-    css={
-      Object {
-        "flexGrow": 1,
-        "height": "100%",
-      }
-    }
-  />
-  <glamorous(_class)
-    size={40}
-    tooltip={
-      <div>
-        <glamorous(bound )>
-          My Account
-        </glamorous(bound )>
-        <glamorous(bound )>
-          Feedback
-        </glamorous(bound )>
-        <glamorous(bound )>
-          Logout
-        </glamorous(bound )>
-      </div>
-    }
-    tooltipAnchor="bottom"
-  >
-    <glamorous.Img
-      alt="Avatar"
-      css={
-        Object {
-          "maxWidth": "100%",
-        }
-      }
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
-    />
-  </glamorous(_class)>
-</glamorous(bound )>
-`
+<bound 
+  className="css-1utb1x6"
+/>
+`;

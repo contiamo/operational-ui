@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react'
-import glamorous, { Img } from 'glamorous'
+import React, { Component } from "react"
+import glamorous, { Img } from "glamorous"
 
-import withTooltip from '../../Tooltip/withTooltip'
+import withTooltip from "../../Tooltip/withTooltip"
 
 type props = {
   className: string,
@@ -12,24 +12,33 @@ type props = {
   theme: THEME,
 }
 
-const SideNavigationItem = ({ className, children, onClick }: props): React$Element<*> =>
-  (<div className={className} onClick={onClick}>
+const SideNavigationItem = ({
+  className,
+  children,
+  onClick
+}: props): React$Element<*> =>
+  <div className={`${className} SideNavigationItem`} onClick={onClick}>
     {children}
-  </div>)
+  </div>
 
 const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
-  position: 'relative',
+  position: "relative",
   width: size || 20,
   height: size || 20,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   borderRadius: 2,
-  cursor: 'pointer',
+  cursor: "pointer",
 
-  ':first-child': {
-    marginBottom: theme.spacing,
+  "&_has-tooltip + &_has-tooltip ": {
+    marginTop: theme.spacing ? theme.spacing * 2 : 16
   },
+
+  ":first-child": {
+    marginTop: 0,
+    marginBottom: theme.spacing ? theme.spacing * 2 : 16
+  }
 })
 
 export default glamorous(withTooltip(SideNavigationItem))(style)

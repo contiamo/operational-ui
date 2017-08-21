@@ -1,18 +1,18 @@
 // @flow
-import React from 'react'
-import { Link } from 'react-router-dom'
-import glamorous, { Div } from 'glamorous'
+import React from "react"
+import { Link } from "react-router-dom"
+import glamorous, { Div } from "glamorous"
 
-import { hexOrColor, readableTextColor, darken } from '../../../utils/color'
+import { hexOrColor, readableTextColor, darken } from "../../../utils/color"
 
-import withTooltip from '../../Tooltip/withTooltip'
+import withTooltip from "../../Tooltip/withTooltip"
 
 const SidebarLink = ({
   className,
   children,
   to,
   onClick,
-  symbol,
+  symbol
 }: {
   className: string,
   children: mixed,
@@ -28,53 +28,60 @@ const SidebarLink = ({
   }
 
   return (
-    <Component to={to} onClick={onClick} className={className}>
+    <Component
+      to={to}
+      onClick={onClick}
+      className={`${className} SideNavigationLink`}
+    >
       {children}
       {symbol
         ? <div className="symbol">
           {symbol}
         </div>
-        : ''}
+        : ""}
     </Component>
   )
 }
 
 const style = ({ theme, color }: { theme: THEME, color: string }) => {
   const backgroundColor = color
-    ? hexOrColor(color)(theme.colors && theme.colors[color])
-    : theme.colors ? theme.colors.primary : '#22205F'
-  const textColor = readableTextColor(backgroundColor)(['black', 'white'])
+      ? hexOrColor(color)(theme.colors && theme.colors[color])
+      : "#fff",
+    textColor = readableTextColor(backgroundColor)(["black", "white"])
 
   return {
-    position: 'relative',
-    display: 'flex',
+    position: "relative",
+    display: "flex",
     padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
-    transition: 'background-color .1s ease',
-    cursor: 'pointer',
+    transition: "background-color .1s ease",
+    cursor: "pointer",
 
     // react-router <Link /> wraps an <a> which can be underlined by default so
-    textDecoration: 'none',
+    textDecoration: "none",
 
     color: textColor,
     backgroundColor,
 
-    '&:link, &:visited': {
-      color: textColor,
+    "&:link, &:visited": {
+      color: textColor
     },
 
-    ':hover': {
+    "&.SideNavigationLink + .SideNavigationLink": {
+      borderTop: "1px solid #eee"
+    },
+
+    ":hover": {
       backgroundColor: darken(backgroundColor)(5),
 
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
-      color: readableTextColor(darken(backgroundColor)(5))(['black', 'white']),
+      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
     },
     // Symbol goes on the right.
-    '& > .symbol': {
-      marginLeft: 'auto',
-    },
+    "& > .symbol": {
+      marginLeft: "auto"
+    }
   }
 }
-
 export default glamorous(withTooltip(SidebarLink))(style)
 export { SidebarLink, style }
