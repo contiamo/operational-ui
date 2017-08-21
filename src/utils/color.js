@@ -15,15 +15,12 @@ const hexOrColor = (color: string) => {
   readableTextColor = (background: string) => (
     backgroundColors: Array<string> | string
   ): string => {
-    let workingColors: Array<string>
+    let workingColors =
+      backgroundColors.constructor !== Array
+        ? [...arguments]
+        : [...backgroundColors]
 
-    backgroundColors.constructor !== Array
-      ? workingColors = [...arguments]
-      : workingColors = [...backgroundColors]
-
-    return colorCalculator
-      .mostReadable(background, backgroundColors)
-      .toHexString()
+    return colorCalculator.mostReadable(background, workingColors).toHexString()
   },
   darken = (color: string) => (percentage: number): string =>
     colorCalculator(color).darken(percentage).toString()
