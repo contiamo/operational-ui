@@ -9,7 +9,7 @@
   "scripts": {
     "package": "rollup -c",
     "build": "webpack -p",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --public --host 0.0.0.0",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint ./src/*/** --fix",
