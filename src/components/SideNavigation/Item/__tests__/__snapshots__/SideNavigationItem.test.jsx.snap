@@ -2,9 +2,9 @@
 
 exports[`SideNavigationItem component renders 1`] = `
 <_class
-  className="css-1m6oy2l"
+  className="css-1jalutp"
   tooltipAnchor="top"
 >
   Hi, I'm an Item
 </_class>
-`
+`;

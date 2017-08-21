@@ -42,7 +42,7 @@ const SidebarWithRouter = withRouter(Sidebar),
                 height: "100vh"
               }}
             >
-              {/* <SidebarWithRouter /> */}
+              <SidebarWithRouter />
               <AppCanvas css={{ marginLeft: 16, flexBasis: "100%" }}>
                 <Route path="/cards" component={CardsPage} />
                 <Route path="/chips" component={ChipsPage} />

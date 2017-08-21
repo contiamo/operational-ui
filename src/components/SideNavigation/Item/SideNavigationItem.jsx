@@ -30,14 +30,14 @@ const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
   justifyContent: "center",
   borderRadius: 2,
   cursor: "pointer",
-  marginTop: theme.spacing ? theme.spacing : 16,
 
-  "&.SideNavigationItem + .SideNavigationItem": {
-    marginTop: theme.spacing ? theme.spacing / 2 : 8
+  "&_has-tooltip + &_has-tooltip ": {
+    marginTop: theme.spacing ? theme.spacing * 2 : 16
   },
 
   ":first-child": {
-    marginBottom: theme.spacing
+    marginTop: 0,
+    marginBottom: theme.spacing ? theme.spacing * 2 : 16
   }
 })
 

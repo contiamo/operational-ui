@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 
-import Tooltip from './Tooltip'
+import Tooltip from "./Tooltip"
 
 /**
   A simple Higher-Order Component (HOC) that you can wrap with any custom
@@ -27,11 +27,11 @@ const withTooltip = InputComponent =>
     state: {
       isTooltipActive: boolean,
     } = {
-      isTooltipActive: false,
+      isTooltipActive: false
     }
 
     static defaultProps = {
-      tooltipAnchor: 'top',
+      tooltipAnchor: "top"
     }
 
     showTooltip() {
@@ -43,15 +43,27 @@ const withTooltip = InputComponent =>
     }
 
     render() {
+      const splitClassNames = this.props.className
+        ? [...this.props.className.split(" ")]
+        : []
+      const lastClassName = splitClassNames[splitClassNames.length - 1]
       return (
-        <div onMouseEnter={() => this.showTooltip()} onMouseLeave={() => this.hideTooltip()}>
+        <div
+          className={`${lastClassName}_has-tooltip`}
+          onMouseEnter={() => this.showTooltip()}
+          onMouseLeave={() => this.hideTooltip()}
+        >
           <InputComponent {...this.props}>
-            {this.props.children ? this.props.children : ''}
+            {this.props.children ? this.props.children : ""}
             {this.props.tooltip && this.state.isTooltipActive
-              ? <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
+              ? <Tooltip
+                active
+                color={this.props.tooltipColor}
+                anchor={this.props.tooltipAnchor}
+              >
                 {this.props.tooltip}
               </Tooltip>
-              : ''}
+              : ""}
           </InputComponent>
         </div>
       )

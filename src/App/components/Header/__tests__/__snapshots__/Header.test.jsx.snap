@@ -1,29 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: Header Should render correctly 1`] = `
-<glamorous(bound )
-  color="#445873"
->
-  <glamorous(bound )>
-    Contiamo
-  </glamorous(bound )>
-  <glamorous(bound )>
-    <Camera
-      color="currentColor"
-      size="24"
-    />
-     Gallery
-  </glamorous(bound )>
-  <glamorous(bound )>
-    <Box
-      color="currentColor"
-      size="24"
-    />
-     Components
-  </glamorous(bound )>
-  <glamorous(bound ) />
-  <glamorous(bound )>
-    Logout
-  </glamorous(bound )>
-</glamorous(bound )>
-`
+<bound 
+  className="css-uamldc"
+/>
+`;
