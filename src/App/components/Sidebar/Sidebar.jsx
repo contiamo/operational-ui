@@ -6,6 +6,7 @@ import Sidebar, {
 } from "../../../components/Sidebar/Sidebar"
 
 const paths = {
+  dataEntry: ["/buttons"],
   feedback: ["/tooltips"],
   uiElements: ["/chips", "/cards", "/stats"],
   navigation: ["/sidebar"]
@@ -13,7 +14,10 @@ const paths = {
 
 export default ({ location }) =>
   <Sidebar>
-    <SidebarItem label="Data Entry">
+    <SidebarItem
+      open={location && paths.dataEntry.includes(location.pathname)}
+      label="Data Entry"
+    >
       <SidebarLink to="/buttons">Buttons</SidebarLink>
       <SidebarLink>Form Fields</SidebarLink>
       <SidebarLink>Date Picker</SidebarLink>

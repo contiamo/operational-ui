@@ -20,9 +20,7 @@ import SidebarPage from "./pages/Sidebar/Sidebar"
 
 import DEFAULT_THEME from "../theme"
 
-const SidebarWithRouter = glamorous(withRouter(Sidebar))({
-    display: "none"
-  }),
+const SidebarWithRouter = withRouter(Sidebar),
   App = ({ className }: { className: string }) =>
     <Router>
       <ThemeProvider theme={DEFAULT_THEME}>
