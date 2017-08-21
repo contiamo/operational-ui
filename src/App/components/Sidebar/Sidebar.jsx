@@ -1,22 +1,28 @@
-import React from 'react'
+import React from "react"
 
-import Sidebar, { SidebarItem, SidebarLink } from '../../../components/Sidebar/Sidebar'
+import Sidebar, {
+  SidebarItem,
+  SidebarLink
+} from "../../../components/Sidebar/Sidebar"
 
 const paths = {
-  feedback: ['/tooltips'],
-  uiElements: ['/chips', '/cards', '/stats'],
-  navigation: ['/sidebar'],
+  feedback: ["/tooltips"],
+  uiElements: ["/chips", "/cards", "/stats"],
+  navigation: ["/sidebar"]
 }
 
 export default ({ location }) =>
-  (<Sidebar>
+  <Sidebar>
     <SidebarItem label="Data Entry">
-      <SidebarLink>Buttons</SidebarLink>
+      <SidebarLink to="/buttons">Buttons</SidebarLink>
       <SidebarLink>Form Fields</SidebarLink>
       <SidebarLink>Date Picker</SidebarLink>
       <SidebarLink>Color Picker</SidebarLink>
     </SidebarItem>
-    <SidebarItem open={location && paths.feedback.includes(location.pathname)} label="Feedback">
+    <SidebarItem
+      open={location && paths.feedback.includes(location.pathname)}
+      label="Feedback"
+    >
       <SidebarLink>Modals</SidebarLink>
       <SidebarLink>Notifications</SidebarLink>
       <SidebarLink>Alerts</SidebarLink>
@@ -34,7 +40,10 @@ export default ({ location }) =>
       <SidebarLink to="/chips">Chips</SidebarLink>
       <SidebarLink to="/stats">Stats</SidebarLink>
     </SidebarItem>
-    <SidebarItem open={location && paths.navigation.includes(location.pathname)} label="Navigation">
+    <SidebarItem
+      open={location && paths.navigation.includes(location.pathname)}
+      label="Navigation"
+    >
       <SidebarLink to="/sidebar">Sidebar</SidebarLink>
       <SidebarLink to="/side-navigation">Side Navigation</SidebarLink>
       <SidebarLink>Tabs</SidebarLink>
@@ -47,4 +56,4 @@ export default ({ location }) =>
     <SidebarItem label="Icons">
       <SidebarLink>Feather Icons</SidebarLink>
     </SidebarItem>
-  </Sidebar>)
+  </Sidebar>

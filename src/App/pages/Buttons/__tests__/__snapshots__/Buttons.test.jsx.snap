@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Buttons Page Should render correctly 1`] = `
+<div>
+  <h1>
+    Buttons
+  </h1>
+  <h2>
+    Buttons clearly indicate a point of interaction that allow users to perform actions in applications.
+  </h2>
+  <p>
+    On Contiamo, buttons exist independently, and in groups. These buttons can also take on any number of colors required.
+  </p>
+  <h2>
+    Usage
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div style={{display: 'flex', marginTop: 16 }}&gt;
+            &lt;Button color="#5F8E2C"&gt;Button 1&lt;/Button&gt;
+            &lt;Button className="Button_space"&gt;Button 2&lt;/Button&gt;
+            &lt;Button className="Button_space"&gt;Group 1&lt;/Button&gt;
+            &lt;Button active className="Button_group"&gt;Group 2&lt;/Button&gt;
+            &lt;Button className="Button_group"&gt;Group 3&lt;/Button&gt;
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          What color of button would you like? It can be a hex value or a named theme color.
+        </td>
+        <td>
+          white
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          What happens when the button is clicked?
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

@@ -5,7 +5,9 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
   <glamorous(SidebarItem)
     label="Data Entry"
   >
-    <glamorous(_class)>
+    <glamorous(_class)
+      to="/buttons"
+    >
       Buttons
     </glamorous(_class)>
     <glamorous(_class)>
@@ -100,4 +102,4 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(_class)>
   </glamorous(SidebarItem)>
 </glamorous(bound )>
-`
+`;

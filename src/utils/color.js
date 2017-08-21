@@ -13,9 +13,18 @@ const hexOrColor = (color: string) => {
     return (fallback: string): string => isColorACodeOrHex ? color : fallback
   },
   readableTextColor = (background: string) => (
-    backgroundColors: Array<string>
-  ): string =>
-    colorCalculator.mostReadable(background, backgroundColors).toHexString(),
+    backgroundColors: Array<string> | string
+  ): string => {
+    let workingColors: Array<string>
+
+    backgroundColors.constructor !== Array
+      ? workingColors = [...arguments]
+      : workingColors = [...backgroundColors]
+
+    return colorCalculator
+      .mostReadable(background, backgroundColors)
+      .toHexString()
+  },
   darken = (color: string) => (percentage: number): string =>
     colorCalculator(color).darken(percentage).toString()
 

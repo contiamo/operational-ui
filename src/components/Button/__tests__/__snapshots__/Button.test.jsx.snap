@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Shoud initialize properly 1`] = `
+<div
+  className=" Button"
+>
+  hi
+</div>
+`;
