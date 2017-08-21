@@ -44,7 +44,8 @@ const style: {} = ({
     color: textColor,
 
     ":hover": {
-      backgroundColor: activeBackgroundColor
+      backgroundColor: activeBackgroundColor,
+      color: readableTextColor(activeBackgroundColor)(["white", "black"])
     },
 
     ":active": {

@@ -5,10 +5,10 @@ import { shallow } from "enzyme"
 import { Button } from "../Button"
 
 describe("Button Component", () => {
-  it("Shoud initialize properly", () => {
+  it("Should initialize properly", () => {
     expect(shallow(<Button>hi</Button>)).toMatchSnapshot()
   })
-  it("Shoud respond to clicks", () => {
+  it("Should respond to clicks", () => {
     const myFunc = jest.fn()
     const button = shallow(<Button onClick={() => myFunc()}>Click me</Button>)
 

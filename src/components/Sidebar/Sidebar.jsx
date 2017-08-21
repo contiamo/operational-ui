@@ -23,7 +23,7 @@ const style = ({ theme }: { theme: THEME }): {} => ({
   borderRadius: 2,
   boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
   overflow: "auto",
-  WebkitOverflowScrolling: "touch",
+  scrollBehavior: "smooth", // future-proof
   backgroundColor: theme.greys && theme.greys.white
 })
 
