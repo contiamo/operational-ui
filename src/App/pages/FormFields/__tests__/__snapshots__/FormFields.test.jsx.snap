@@ -3,7 +3,7 @@
 exports[`FormFieldsPage Should render correctly 1`] = `
 <div>
   <div
-    class="css-1bje4be Select"
+    class="css-s6fwca Select"
     role="listbox"
     tabindex="-2"
   >
