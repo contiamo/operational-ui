@@ -41,6 +41,8 @@ class Select extends Component<{}, Props, State> {
     filter: ""
   }
 
+  container: HTMLDivElement | null = null
+
   handleEsc = (e: SyntheticEvent) => {
     //escape.
     if (e.keyCode === 27) {
@@ -48,11 +50,36 @@ class Select extends Component<{}, Props, State> {
     }
   }
 
+  // This implements "click outside to close" behavior
+  handleClick = (e: SyntheticEvent) => {
+    const el = this.container
+
+    // if the container is somehow null, or if the component didn't mount
+    if (el === null) {
+      return
+    }
+
+    // if we're somehow not working with a DOM node (flowtype is fun!)
+    if (!(e.target instanceof Node)) {
+      return
+    }
+
+    // if we're clicking on the Select itself,
+    if (el.contains(e.target)) {
+      return
+    }
+
+    // if we're clicking outside,
+    this.close()
+  }
+
   componentDidMount() {
+    window.addEventListener("click", this.handleClick, true)
     window.addEventListener("keyup", this.handleEsc, true)
   }
 
   componentWillUnmount() {
+    window.removeEventListener("click", this.handleClick, true)
     window.removeEventListener("keyup", this.handleEsc, true)
   }
 
@@ -156,13 +183,13 @@ class Select extends Component<{}, Props, State> {
   render() {
     return (
       <div
+        ref={container => this.container = container}
         className={`${this.props.className} Select${this.state.open
           ? " Select_open"
           : ""}${this.state.updating ? " Select_updating" : ""}`}
         role="listbox"
         tabIndex="-2"
         onClick={() => this.toggle()}
-        onBlur={() => this.close()}
       >
         <div className="Select__value">
           {this.getValue() || this.props.placeholder}

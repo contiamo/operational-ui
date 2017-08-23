@@ -3,7 +3,6 @@
 exports[`Select Should render correctly 1`] = `
 <div
   className="undefined Select"
-  onBlur={[Function]}
   onClick={[Function]}
   role="listbox"
   tabIndex="-2"
