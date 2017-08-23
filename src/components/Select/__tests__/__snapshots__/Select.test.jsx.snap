@@ -2,10 +2,11 @@
 
 exports[`Select Should render correctly 1`] = `
 <div
-  className=" Select"
+  className="undefined Select"
+  onBlur={[Function]}
   onClick={[Function]}
   role="listbox"
-  tabIndex="-1"
+  tabIndex="-2"
 >
   <div
     className="Select__value"

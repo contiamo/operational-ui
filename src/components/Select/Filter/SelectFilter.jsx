@@ -1,23 +1,30 @@
+// @flow
 import React from "react"
 import glamorous from "glamorous"
 
-import { darken } from "../../../utils/color"
+import { hexOrColor, darken } from "../../../utils/color"
 
 const SelectFilter = ({
   className,
+  placeholder,
   onChange
 }: {
-  className: string,
-  onChange: any,
+  className?: string,
+  placeholder?: string,
+  onChange?: void,
 }) =>
-  <div className={`${className}`}>
+  <div className={className}>
     <input
       onClick={e => e.stopPropagation()}
       onChange={onChange}
       className="Select__filter"
-      placeholder="Filter..."
+      placeholder={placeholder}
     />
   </div>
+
+SelectFilter.defaultProps = {
+  placeholder: "Filter..."
+}
 
 const style = ({ theme, color }: { theme: THEME, color: string }) => {
   const backgroundColor =

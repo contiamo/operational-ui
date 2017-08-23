@@ -5,7 +5,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
   <div
     class="css-1mhh6f5 Select"
     role="listbox"
-    tabindex="-1"
+    tabindex="-2"
   >
     <div
       class="Select__value"

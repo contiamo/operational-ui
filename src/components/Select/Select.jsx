@@ -2,9 +2,7 @@
 import React, { Component } from "react"
 import glamorous from "glamorous"
 
-import spin from "../../utils/animations/spin"
-import fadeIn from "../../utils/animations/fade-in"
-import resetTransform from "../../utils/animations/reset-transform"
+import { spin, fadeIn, resetTransform } from "../../utils/animations"
 import { hexOrColor, readableTextColor } from "../../utils/color"
 
 import SelectOption from "./Option/SelectOption"
@@ -32,14 +30,8 @@ type State = {
 
 class Select extends Component<{}, Props, State> {
   static defaultProps = {
-    className: "",
-    placeholder: "",
-    options: [],
-    filterable: false,
     disabled: false,
-    multiple: false,
-    onClick: () => true,
-    onFilter: () => new Promise(resolve => setTimeout(resolve, 1000))
+    options: []
   }
 
   state = {
@@ -47,22 +39,6 @@ class Select extends Component<{}, Props, State> {
     updating: false,
     value: this.getInitialValueIfNone(),
     filter: ""
-  }
-
-  container: HTMLDivElement | null = null
-
-  // This implements "click outside to close" behavior
-  handleClick = (e: SyntheticEvent) => {
-    const el: HTMLDivElement | null = this.container
-    if (el === null) {
-      return
-    }
-
-    if (e.target instanceof Node && el.contains(e.target)) {
-      return
-    }
-
-    this.close()
   }
 
   handleEsc = (e: SyntheticEvent) => {
@@ -73,12 +49,10 @@ class Select extends Component<{}, Props, State> {
   }
 
   componentDidMount() {
-    window.addEventListener("click", this.handleClick, true)
     window.addEventListener("keyup", this.handleEsc, true)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("click", this.handleClick, true)
     window.removeEventListener("keyup", this.handleEsc, true)
   }
 
@@ -99,7 +73,7 @@ class Select extends Component<{}, Props, State> {
 
     if (!(this.state.value instanceof Array)) {
       throw new Error(
-        "Strings are not allowed to be values of a <Select> component with the multiple attribute"
+        "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
       )
     }
 
@@ -116,7 +90,7 @@ class Select extends Component<{}, Props, State> {
 
     if (!(this.state.value instanceof Array)) {
       throw new Error(
-        "Strings are not allowed to be values of a <Select> component with the multiple attribute"
+        "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
       )
     }
 
@@ -166,7 +140,7 @@ class Select extends Component<{}, Props, State> {
   }
 
   async toggle() {
-    if (!this.state.open) {
+    if (!this.state.open && this.props.onClick) {
       this.setState(() => ({ updating: true }))
       await this.props.onClick()
     }
@@ -182,13 +156,13 @@ class Select extends Component<{}, Props, State> {
   render() {
     return (
       <div
-        ref={container => this.container = container}
-        role="listbox"
-        tabIndex="-1"
-        onClick={() => this.toggle()}
         className={`${this.props.className} Select${this.state.open
           ? " Select_open"
           : ""}${this.state.updating ? " Select_updating" : ""}`}
+        role="listbox"
+        tabIndex="-2"
+        onClick={() => this.toggle()}
+        onBlur={() => this.close()}
       >
         <div className="Select__value">
           {this.getValue() || this.props.placeholder}
@@ -217,15 +191,17 @@ class Select extends Component<{}, Props, State> {
   }
 }
 
-const style = ({
-  theme,
-  color,
-  disabled
-}: {
-  theme: THEME,
-  color?: string,
-  disabled?: boolean,
-}) => {
+const style = (
+  {
+    theme,
+    color,
+    disabled
+  }: {
+    theme: THEME,
+    color?: string,
+    disabled?: boolean,
+  } = {}
+) => {
   const backgroundColor =
     color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
 

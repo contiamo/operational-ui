@@ -30,8 +30,8 @@ class Input extends Component<{}, Props, State> {
   render() {
     return (
       <input
-        name={this.props.name}
         className={this.props.className}
+        name={this.props.name}
         placeholder={this.props.placeholder}
         value={this.state.value}
         onChange={e => this.updateValue(e)}
