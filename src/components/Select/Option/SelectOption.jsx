@@ -13,7 +13,7 @@ const SelectOption = ({
 }: {
   className: string,
   selected?: boolean,
-  onClick?: void,
+  onClick?: () => mixed,
   children?: Children,
 }) =>
   <div

@@ -11,7 +11,7 @@ const SelectFilter = ({
 }: {
   className?: string,
   placeholder?: string,
-  onChange?: void,
+  onChange?: () => mixed,
 }) =>
   <div className={className}>
     <input

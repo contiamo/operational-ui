@@ -17,34 +17,35 @@ type Props = {
   filterable: boolean,
   disabled: boolean,
   multiple: boolean,
-  onClick: any,
-  onFilter: any,
+  onClick: () => mixed,
+  onFilter: () => mixed,
 }
 
 type State = {
   open: boolean,
   updating: boolean,
   value: option | Array<option> | string,
-  filter: string | RegExp,
+  filter: RegExp,
 }
 
 class Select extends Component<{}, Props, State> {
   static defaultProps = {
+    filterable: false,
     disabled: false,
+    multiple: false,
     options: []
   }
 
   state = {
     open: false,
     updating: false,
-    value: this.getInitialValueIfNone(),
-    filter: ""
+    value: this.getInitialValue(),
+    filter: new RegExp(/./g)
   }
 
   container: HTMLDivElement | null = null
 
   handleEsc = (e: SyntheticEvent) => {
-    //escape.
     if (e.keyCode === 27) {
       this.close()
     }
@@ -83,7 +84,7 @@ class Select extends Component<{}, Props, State> {
     window.removeEventListener("keyup", this.handleEsc, true)
   }
 
-  getInitialValueIfNone() {
+  getInitialValue() {
     if (this.props.multiple) {
       return []
     }
@@ -201,7 +202,7 @@ class Select extends Component<{}, Props, State> {
             <div className="Select__options_list">
               {this.props.options.map(
                 (option: option) =>
-                  option.label.match(new RegExp(this.state.filter)) &&
+                  option.label.match(new RegExp(this.state.filter, "i")) &&
                     <SelectOption
                       key={option.id}
                       onClick={() => this.selectOption(option)}
