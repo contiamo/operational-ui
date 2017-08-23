@@ -6,7 +6,7 @@ import Sidebar, {
 } from "../../../components/Sidebar/Sidebar"
 
 const paths = {
-  dataEntry: ["/buttons"],
+  dataEntry: ["/buttons", "/form-fields"],
   feedback: ["/tooltips"],
   uiElements: ["/chips", "/cards", "/stats"],
   navigation: ["/sidebar"]
@@ -19,7 +19,7 @@ export default ({ location }) =>
       label="Data Entry"
     >
       <SidebarLink to="/buttons">Buttons</SidebarLink>
-      <SidebarLink>Form Fields</SidebarLink>
+      <SidebarLink to="/form-fields">Form Fields</SidebarLink>
       <SidebarLink>Date Picker</SidebarLink>
       <SidebarLink>Color Picker</SidebarLink>
     </SidebarItem>

@@ -12,6 +12,7 @@ import Sidebar from "./components/Sidebar/Sidebar"
 import AppCanvas from "./components/Canvas/Canvas"
 
 import ButtonsPage from "./pages/Buttons/Buttons"
+import FormFieldsPage from "./pages/FormFields/FormFields"
 import CardsPage from "./pages/Cards/Cards"
 import ChipsPage from "./pages/Chips/Chips"
 import TooltipsPage from "./pages/Tooltips/Tooltips"
@@ -46,6 +47,7 @@ const SidebarWithRouter = withRouter(Sidebar),
               <SidebarWithRouter />
               <AppCanvas css={{ marginLeft: 16, flexBasis: "100%" }}>
                 <Route path="/buttons" component={ButtonsPage} />
+                <Route path="/form-fields" component={FormFieldsPage} />
                 <Route path="/cards" component={CardsPage} />
                 <Route path="/chips" component={ChipsPage} />
                 <Route path="/tooltips" component={TooltipsPage} />

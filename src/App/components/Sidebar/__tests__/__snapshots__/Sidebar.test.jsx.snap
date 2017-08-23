@@ -10,7 +10,9 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     >
       Buttons
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      to="/form-fields"
+    >
       Form Fields
     </glamorous(_class)>
     <glamorous(_class)>

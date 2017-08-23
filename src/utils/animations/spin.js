@@ -1,3 +1,4 @@
+// @flow
 import { css } from "glamor"
 
 const spin: string = css.keyframes({
