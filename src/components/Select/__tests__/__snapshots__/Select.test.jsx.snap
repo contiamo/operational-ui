@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Should render correctly 1`] = `
+<div
+  className=" Select"
+  onClick={[Function]}
+  role="listbox"
+  tabIndex="-1"
+>
+  <div
+    className="Select__value"
+  />
+</div>
+`;

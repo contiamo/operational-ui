@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormFieldsPage Should render correctly 1`] = `
+<div>
+  <div
+    class="css-1mhh6f5 Select"
+    role="listbox"
+    tabindex="-1"
+  >
+    <div
+      class="Select__value"
+    >
+      SUP DAWG
+    </div>
+  </div>
+  <h1>
+    Form Fields
+  </h1>
+  <h2>
+    Our applications tend to be composed of a myriad of form controls. This page seeks to document the vast majority of these controls.
+  </h2>
+  <h1>
+    Input
+  </h1>
+  <h2>
+    Usage
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div&gt;
+            &lt;TextInput
+              css={{ marginBottom: 16 }}
+              placeholder="Spanish only plz"
+            &gt;
+              Hola Compadre, como?
+            &lt;/TextInput&gt;
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          What color of chip would you like? It can be a hex value or a named theme color.
+        </td>
+        <td>
+          The \`primary\` color of your theme.
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          symbol
+        </td>
+        <td>
+          The symbol that is shown on mouse over of a clickable chip.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          Is this interactive? If yes, what happens when the chip is clicked? This is commonly used to delete a filter in a list of filters.
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
