@@ -2,20 +2,28 @@
 import React, { Component } from "react"
 import glamorous from "glamorous"
 
-class Input extends Component {
-  props: {
-    className: string,
-    placeholder?: string,
-    name?: string,
-    children?: string,
+type Props = {
+  className?: string,
+  placeholder?: string,
+  name?: string,
+  children?: string,
+}
+
+type State = {
+  value: string,
+}
+
+class Input extends Component<{}, Props, State> {
+  state = {
+    value: this.props.children || ""
   }
 
-  state: {
-    value: string,
-  } = { value: this.props.children || "" }
+  static defaultProps = {
+    className: ""
+  }
 
   updateValue = (e: SyntheticEvent) => {
-    const el = { ...e.currentTarget }
+    const el = { ...e.target }
     this.setState(() => ({ value: el.value }))
   }
 
