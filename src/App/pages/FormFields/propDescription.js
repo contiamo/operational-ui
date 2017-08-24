@@ -2,50 +2,70 @@
 export default {
   Input: [
     {
-      name: "color",
-      description:
-        "What color of chip would you like? It can be a hex value or a named theme color.",
-      defaultValue: "The `primary` color of your theme.",
+      name: "placeholder",
+      description: "Text displayed when the input field has no value.",
+      defaultValue: "\"\"",
       type: "string",
       optional: true
     },
     {
-      name: "symbol",
-      description:
-        "The symbol that is shown on mouse over of a clickable chip.",
+      name: "name",
+      description: "The name used to refer to the input, for forms.",
       defaultValue: "",
       type: "string",
-      optional: true
-    },
-    {
-      name: "onClick",
-      description:
-        "Is this interactive? If yes, what happens when the chip is clicked? This is commonly used to delete a filter in a list of filters.",
-      defaultValue: "",
-      type: "func",
       optional: true
     }
   ],
-  plusChip: [
+  Select: [
     {
-      name: "color",
+      name: "options",
       description:
-        "What color of chip would you like? It can be a hex value or a named theme color.",
-      defaultValue: "Black",
+        "An array of options to present to the user. This can be an empty array that is later populated onClick of the Select component using the onClick prop (described below) to fetch options beforehand.",
+      defaultValue: "[]",
+      type: "Array",
+      optional: false
+    },
+    {
+      name: "onClick",
+      description:
+        "A function that is called before the Select component opens. Useful for retrieving options to present to the user.",
+      defaultValue: "",
+      type: "func",
+      optional: true
+    },
+    {
+      name: "placeholder",
+      description: "A string displayed to the user when nothing is selected",
+      defaultValue: "",
       type: "string",
       optional: true
     },
     {
-      name: "size",
-      description:
-        "The size of the chip in pixels. This can vary for obvious reasons.",
-      defaultValue: "16",
-      type: "number",
+      name: "disabled",
+      description: "Is the select box disabled?",
+      defaultValue: "false",
+      type: "boolean",
       optional: true
     },
     {
-      name: "onClick",
-      description: "A function that will be called on click of the PlusChip.",
+      name: "multiple",
+      description:
+        "Is it possible to select more than one option? This turns the `value` of the Select component into an array of Options instead of a single Option object",
+      defaultValue: "false",
+      type: "boolean",
+      optional: true
+    },
+    {
+      name: "filterable",
+      description: "Can the options be filtered?",
+      defaultValue: "false",
+      type: "boolean",
+      optional: true
+    },
+    {
+      name: "onFilter",
+      description:
+        "A function that is invoked before the options are filtered. Useful to fetch new options based on the filter.",
       defaultValue: "",
       type: "func",
       optional: true

@@ -92,9 +92,12 @@ class Select extends Component<{}, Props, State> {
 
   getDisplayValue(): string {
     if (!this.props.multiple) {
-      return this.state.value.label instanceof String
-        ? this.state.value.label
-        : ""
+      // Ugh, flowtype...
+      if (typeof this.state.value.label === "string") {
+        return this.state.value.label
+      } else {
+        return this.props.placeholder || ""
+      }
     }
 
     if (!(this.state.value instanceof Array)) {
