@@ -1,0 +1,378 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormFieldsPage Should render correctly 1`] = `
+<div>
+  <h1>
+    Form Fields
+  </h1>
+  <h2>
+    Our applications tend to be composed of a myriad of form controls. This page seeks to document the vast majority of these controls.
+  </h2>
+  <hr />
+  <h1>
+    Input
+  </h1>
+  <h2>
+    This component lives up to its name, allowing a user to input text, numbers, or other data.
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div&gt;
+            &lt;Input
+              css={{ marginBottom: 16 }}
+              placeholder="Name here"
+              name="forForms"
+            /&gt;
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          placeholder
+        </td>
+        <td>
+          Text displayed when the input field has no value.
+        </td>
+        <td>
+          ""
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          name
+        </td>
+        <td>
+          The name used to refer to the input, for forms.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr />
+  <h1>
+    Select
+  </h1>
+  <h2>
+    The Select component presents users with a list of information with single-choice or multiple-choice options.
+  </h2>
+  <p>
+    Select elements can have options filled onClick, and also support filters.
+  </p>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div&gt;
+            {/* Uncomment the attributes to see them in action */}
+            &lt;Select
+              //filterable
+              multiple
+              //disabled
+              //onClick={() =&gt; window.alert('Hi!')}
+              //onFilter={() =&gt; console.log('Filtering!')}
+              placeholder="Choose an option!"
+              options={[
+                { id: 1, label: "Option 1", value: "one" },
+                { id: 2, label: "Option 2", value: "two" },
+                { id: 3, label: "Option 3", value: "three" }
+              ]}
+            /&gt;
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Return Value
+  </h2>
+  <p>
+    The Select component holds its value in its \`state\`. The value is either an \`Option\` object, or an Array of \`Option\` objects, depending on the \`multiple\` prop.
+  </p>
+  <p>
+    The shape of an Option object is described below.
+  </p>
+  <pre
+    style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444;"
+  >
+    <code>
+      
+      Option {
+          
+      <span>
+        id
+      </span>
+      : 
+      <span
+        style="color:#880000;"
+      >
+        1
+      </span>
+      , 
+      <span
+        style="color:#888888;"
+      >
+        // a number that is passed as a \`key\` in the React iterator,
+      </span>
+      
+          label: 
+      <span
+        style="color:#880000;"
+      >
+        "Any string"
+      </span>
+      ,
+          
+      <span>
+        value
+      </span>
+      : (
+      <span>
+        <span>
+          &lt;
+          <span
+            style="font-weight:bold;"
+          >
+            div
+          </span>
+          &gt;
+        </span>
+        Literally anything can go here
+        <span>
+          &lt;/
+          <span
+            style="font-weight:bold;"
+          >
+            div
+          </span>
+          &gt;
+        </span>
+      </span>
+      )
+      }
+    </code>
+  </pre>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          options
+        </td>
+        <td>
+          An array of options to present to the user. This can be an empty array that is later populated onClick of the Select component using the onClick prop (described below) to fetch options beforehand.
+        </td>
+        <td>
+          []
+        </td>
+        <td>
+          Array
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onClick
+        </td>
+        <td>
+          A function that is called before the Select component opens. Useful for retrieving options to present to the user.
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          placeholder
+        </td>
+        <td>
+          A string displayed to the user when nothing is selected
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          disabled
+        </td>
+        <td>
+          Is the select box disabled?
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          multiple
+        </td>
+        <td>
+          Is it possible to select more than one option? This turns the \`value\` of the Select component into an array of Options instead of a single Option object
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          filterable
+        </td>
+        <td>
+          Can the options be filtered?
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onFilter
+        </td>
+        <td>
+          A function that is invoked before the options are filtered. Useful to fetch new options based on the filter.
+        </td>
+        <td />
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

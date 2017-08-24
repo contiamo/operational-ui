@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Should render correctly 1`] = `
+<Select
+  className=""
+  disabled={true}
+  filterable={true}
+  multiple={true}
+  options={
+    Array [
+      Object {
+        "id": 1,
+        "label": "John",
+        "value": -10,
+      },
+      Object {
+        "id": 2,
+        "label": "Joey",
+        "value": "Nein",
+      },
+      Object {
+        "id": 3,
+        "label": "Tupac",
+        "value": true,
+      },
+      Object {
+        "id": 4,
+        "label": "Chandler",
+        "value": Array [
+          Object {
+            "alive": true,
+          },
+        ],
+      },
+    ]
+  }
+  placeholder="Select me"
+>
+  <div
+    className=" Select"
+    onClick={[Function]}
+    role="listbox"
+    tabIndex="-2"
+  >
+    <div
+      className="Select__value"
+    >
+      Select me
+    </div>
+  </div>
+</Select>
+`;

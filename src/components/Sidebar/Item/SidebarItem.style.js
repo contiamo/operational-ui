@@ -1,5 +1,5 @@
 // @flow
-import spin from "../../../utils/animations/spin"
+import { spin } from "../../../utils/animations"
 
 export default ({ theme, children }: { theme: THEME, children: mixed }): {} => {
   // If we have children, style a caret.

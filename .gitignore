@@ -5,3 +5,4 @@ node_modules
 flow-typed/npm
 dist
 coverage
+fonts
