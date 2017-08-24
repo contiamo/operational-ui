@@ -14,7 +14,6 @@ export default () =>
   <div>
     <DemoSelect
       filterable
-      multiple
       placeholder="SUP DAWG"
       options={[
         {

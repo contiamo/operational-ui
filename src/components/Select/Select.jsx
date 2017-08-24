@@ -7,15 +7,15 @@ import SelectFilter from "./Filter/SelectFilter"
 
 import style from "./Select.style"
 
-type option = { id: number, label: string, value: any }
+export type option = { label: string, id?: number, value?: any }
 
 type Props = {
   className: string,
-  placeholder: string,
+  placeholder?: ?string,
   options: Array<option>,
-  filterable: boolean,
-  disabled: boolean,
-  multiple: boolean,
+  filterable?: boolean,
+  disabled?: boolean,
+  multiple?: boolean,
   onClick: () => mixed,
   onFilter: () => mixed,
 }
@@ -23,12 +23,13 @@ type Props = {
 type State = {
   open: boolean,
   updating: boolean,
-  value: option | Array<option> | string,
+  value: option | Array<option>,
   filter: RegExp,
 }
 
 class Select extends Component<{}, Props, State> {
   static defaultProps = {
+    className: "",
     filterable: false,
     disabled: false,
     multiple: false,
@@ -42,7 +43,8 @@ class Select extends Component<{}, Props, State> {
     filter: new RegExp(/./g)
   }
 
-  container: HTMLDivElement | null = null
+  // flow complains if this isn't initialized sooo...
+  container: HTMLDivElement = React.createElement("div")
 
   handleEsc = (e: SyntheticEvent) => {
     if (e.keyCode === 27) {
@@ -53,11 +55,6 @@ class Select extends Component<{}, Props, State> {
   // This implements "click outside to close" behavior
   handleClick = (e: SyntheticEvent) => {
     const el = this.container
-
-    // if the container is somehow null, or if the component didn't mount
-    if (el === null) {
-      return
-    }
 
     // if we're somehow not working with a DOM node (flowtype is fun!)
     if (!(e.target instanceof Node)) {
@@ -83,19 +80,21 @@ class Select extends Component<{}, Props, State> {
     window.removeEventListener("keyup", this.handleEsc, true)
   }
 
-  getInitialValue() {
-    if (this.props.multiple) {
-      return []
+  getInitialValue(): option | Array<option> {
+    if (!this.props.multiple) {
+      return this.props.placeholder
+        ? { label: this.props.placeholder }
+        : { label: "" }
     }
 
-    return this.props.options[0]
-      ? this.props.options[0]
-      : this.props.placeholder
+    return []
   }
 
-  getValue() {
+  getDisplayValue(): string {
     if (!this.props.multiple) {
-      return this.state.value
+      return this.state.value.label instanceof String
+        ? this.state.value.label
+        : ""
     }
 
     if (!(this.state.value instanceof Array)) {
@@ -163,7 +162,7 @@ class Select extends Component<{}, Props, State> {
       )
     }
 
-    const filter = event.target.value
+    const filter = new RegExp(event.target.value, "i")
     this.setState(() => ({ updating: false, filter }))
   }
 
@@ -193,7 +192,7 @@ class Select extends Component<{}, Props, State> {
         onClick={() => this.toggle()}
       >
         <div className="Select__value">
-          {this.getValue() || this.props.placeholder}
+          {this.getDisplayValue() || this.props.placeholder}
         </div>
         {this.props.options.length && this.state.open
           ? <div className="Select__options">
@@ -202,7 +201,7 @@ class Select extends Component<{}, Props, State> {
             <div className="Select__options_list">
               {this.props.options.map(
                 (option: option) =>
-                  option.label.match(new RegExp(this.state.filter, "i")) &&
+                  option.label.match(this.state.filter) &&
                     <SelectOption
                       key={option.id}
                       onClick={() => this.selectOption(option)}
