@@ -138,7 +138,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
             {/* Uncomment the attributes to see them in action */}
             &lt;Select
               //filterable
-              //multiple
+              multiple
               //disabled
               //onClick={() =&gt; window.alert('Hi!')}
               //onFilter={() =&gt; console.log('Filtering!')}

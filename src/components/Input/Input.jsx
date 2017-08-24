@@ -23,8 +23,8 @@ class Input extends Component<{}, Props, State> {
   }
 
   updateValue = (e: SyntheticEvent) => {
-    const el = { ...e.target }
-    this.setState(() => ({ value: el.value }))
+    const { value } = { ...e.target }
+    this.setState(() => ({ value }))
   }
 
   render() {

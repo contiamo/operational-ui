@@ -14,7 +14,7 @@ export default {
   {/* Uncomment the attributes to see them in action */}
   <Select
     //filterable
-    //multiple
+    multiple
     //disabled
     //onClick={() => window.alert('Hi!')}
     //onFilter={() => console.log('Filtering!')}

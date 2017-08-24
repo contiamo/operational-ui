@@ -3,7 +3,8 @@ import { shallow, mount, render } from "enzyme"
 import { jsdom } from "jsdom"
 
 import { Select } from "../Select"
-import { SelectOption } from "../Option/SelectOption"
+import style from "../Select.style"
+
 import { options } from "../__mocks__/Select.mock"
 
 /*
@@ -26,12 +27,17 @@ describe("Select", () => {
   })
 
   it("Should render correctly", () => {
-    expect(comp).toMatchSnapshot()
-    expect(mount(<Select />)).toMatchSnapshot()
-    expect(mount(<Select options={options} disabled />)).toMatchSnapshot()
-    expect(mount(<Select placeholder="Select me" />)).toMatchSnapshot()
-    expect(mount(<Select options={options} filterable />)).toMatchSnapshot()
-    expect(mount(<Select options={options} multiple />)).toMatchSnapshot()
+    expect(
+      mount(
+        <Select
+          options={options}
+          disabled
+          filterable
+          multiple
+          placeholder="Select me"
+        />
+      )
+    ).toMatchSnapshot()
   })
 
   it("Should be toggled on click", () => {
@@ -44,9 +50,11 @@ describe("Select", () => {
 
   it("Should support asynchronous toggle hooks", async() => {
     const myFunc = () => new Promise(resolve => setTimeout(resolve, 10))
-    comp = mount(<Select options={options} onClick={myFunc} filterable />)
+
+    comp = mount(<Select options={options} onClick={myFunc} />)
     comp.simulate("click")
     expect(comp.state().updating).toEqual(true)
+
     await myFunc()
     expect(comp.state().open).toEqual(true)
     expect(comp.state().updating).toEqual(false)
@@ -54,6 +62,7 @@ describe("Select", () => {
 
   it("Should close on press of Esc", () => {
     const pressEsc = new KeyboardEvent("keyup", { keyCode: 27 })
+
     comp.simulate("click")
     expect(comp.state().open).toBe(true)
 
@@ -72,9 +81,13 @@ describe("Select", () => {
   })
 
   it("Should select options", () => {
+    // Default option is an empty string if no placeholder.
     expect(comp.state().value).toMatchObject({ label: "" })
+
     comp.simulate("click")
+
     comp.find(".Select__option").last().simulate("click")
+
     expect(comp.state().value).toMatchObject({
       id: 4,
       label: "Chandler",
@@ -84,17 +97,29 @@ describe("Select", () => {
 
   it("Should multi-select options", () => {
     comp = mount(<Select options={options} multiple />)
-    expect(comp.state().value).toEqual([])
+
+    // Initial value is an empty array for multi-select boxes.
+    expect(comp.state().value).toEqual([{ label: "", placeholder: true }])
+
+    // Open and select one open.
     comp.simulate("click")
     comp.find(".Select__option").first().simulate("click")
+
+    // Open and select another option.
     comp.simulate("click")
     comp.find(".Select__option").last().simulate("click")
+
+    // Expect two options to be selected.
     expect(comp.state().value).toMatchObject([
       { id: 1, label: "John", value: -10 },
       { id: 4, label: "Chandler", value: [{ alive: true }] }
     ])
+
+    // Open and unselect one option.
     comp.simulate("click")
     comp.find(".Select__option").last().simulate("click")
+
+    // Expect one less option to be selected.
     expect(comp.state().value).toMatchObject([
       { id: 1, label: "John", value: -10 }
     ])
@@ -102,22 +127,29 @@ describe("Select", () => {
 
   it("Should filter options", () => {
     comp = mount(<Select options={options} filterable />)
-    comp.simulate("click")
+    comp.simulate("click") // open it.
+
     const filterInput = comp.find(".Select__filter")
     filterInput.node.value = "hi"
     filterInput.simulate("change")
+
     expect(comp.state().filter).toEqual(/hi/i)
   })
 
   it("Should support asynchronous pre-filter hooks", async() => {
     const myFunc = () => new Promise(resolve => setTimeout(resolve, 10))
+
     comp = mount(<Select options={options} onFilter={myFunc} filterable />)
     comp.simulate("click")
+
     const filterInput = comp.find(".Select__filter")
     filterInput.node.value = "hi"
     filterInput.simulate("change")
+
     expect(comp.state().updating).toEqual(true)
+
     await myFunc()
+
     expect(comp.state().filter).toEqual(/hi/i)
     expect(comp.state().open).toEqual(true)
     expect(comp.state().updating).toEqual(false)
@@ -125,5 +157,9 @@ describe("Select", () => {
 
   it("Should gracefully unmount", () => {
     expect(comp.unmount().component.state.mount).toBe(false)
+  })
+
+  it("Should receive proper styles", () => {
+    expect(style({ theme: {} })).toMatchObject({})
   })
 })

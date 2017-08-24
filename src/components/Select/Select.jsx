@@ -40,17 +40,11 @@ class Select extends Component<{}, Props, State> {
     open: false,
     updating: false,
     value: this.getInitialValue(),
-    filter: new RegExp(/./g)
+    filter: new RegExp(/./)
   }
 
   // flow complains if this isn't initialized sooo...
   container: HTMLDivElement = React.createElement("div")
-
-  handleEsc = (e: SyntheticEvent) => {
-    if (e.keyCode === 27) {
-      this.close()
-    }
-  }
 
   // This implements "click outside to close" behavior
   handleClick = (e: SyntheticEvent) => {
@@ -70,6 +64,12 @@ class Select extends Component<{}, Props, State> {
     this.close()
   }
 
+  handleEsc = (e: SyntheticEvent) => {
+    if (e.keyCode === 27) {
+      this.close()
+    }
+  }
+
   componentDidMount() {
     window.addEventListener("click", this.handleClick, true)
     window.addEventListener("keyup", this.handleEsc, true)
@@ -87,7 +87,11 @@ class Select extends Component<{}, Props, State> {
         : { label: "" }
     }
 
-    return []
+    return [
+      this.props.placeholder
+        ? { placeholder: true, label: this.props.placeholder }
+        : { placeholder: true, label: "" }
+    ]
   }
 
   getDisplayValue(): string {
@@ -106,9 +110,7 @@ class Select extends Component<{}, Props, State> {
       )
     }
 
-    const displayedValue = []
-    this.state.value.map(option => displayedValue.push(option.label))
-    return displayedValue.join(", ")
+    return [...this.state.value.map(option => option.label)].join(", ")
   }
 
   selectOption(option: option) {
@@ -126,7 +128,9 @@ class Select extends Component<{}, Props, State> {
     const optionIndex: number = this.state.value.indexOf(option)
 
     if (optionIndex < 0) {
-      this.setState(prevState => ({ value: [...prevState.value, option] }))
+      this.setState(prevState => ({
+        value: [...prevState.value, option].filter(item => !item.placeholder)
+      }))
     } else {
       this.setState(prevState => ({
         value: [

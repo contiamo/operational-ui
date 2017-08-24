@@ -3,197 +3,8 @@
 exports[`Select Should render correctly 1`] = `
 <Select
   className=""
-  disabled={false}
-  filterable={false}
-  multiple={false}
-  options={
-    Array [
-      Object {
-        "id": 1,
-        "label": "John",
-        "value": -10,
-      },
-      Object {
-        "id": 2,
-        "label": "Joey",
-        "value": "Nein",
-      },
-      Object {
-        "id": 3,
-        "label": "Tupac",
-        "value": true,
-      },
-      Object {
-        "id": 4,
-        "label": "Chandler",
-        "value": Array [
-          Object {
-            "alive": true,
-          },
-        ],
-      },
-    ]
-  }
->
-  <div
-    className=" Select"
-    onClick={[Function]}
-    role="listbox"
-    tabIndex="-2"
-  >
-    <div
-      className="Select__value"
-    />
-  </div>
-</Select>
-`;
-
-exports[`Select Should render correctly 2`] = `
-<Select
-  className=""
-  disabled={false}
-  filterable={false}
-  multiple={false}
-  options={Array []}
->
-  <div
-    className=" Select"
-    onClick={[Function]}
-    role="listbox"
-    tabIndex="-2"
-  >
-    <div
-      className="Select__value"
-    />
-  </div>
-</Select>
-`;
-
-exports[`Select Should render correctly 3`] = `
-<Select
-  className=""
   disabled={true}
-  filterable={false}
-  multiple={false}
-  options={
-    Array [
-      Object {
-        "id": 1,
-        "label": "John",
-        "value": -10,
-      },
-      Object {
-        "id": 2,
-        "label": "Joey",
-        "value": "Nein",
-      },
-      Object {
-        "id": 3,
-        "label": "Tupac",
-        "value": true,
-      },
-      Object {
-        "id": 4,
-        "label": "Chandler",
-        "value": Array [
-          Object {
-            "alive": true,
-          },
-        ],
-      },
-    ]
-  }
->
-  <div
-    className=" Select"
-    onClick={[Function]}
-    role="listbox"
-    tabIndex="-2"
-  >
-    <div
-      className="Select__value"
-    />
-  </div>
-</Select>
-`;
-
-exports[`Select Should render correctly 4`] = `
-<Select
-  className=""
-  disabled={false}
-  filterable={false}
-  multiple={false}
-  options={Array []}
-  placeholder="Select me"
->
-  <div
-    className=" Select"
-    onClick={[Function]}
-    role="listbox"
-    tabIndex="-2"
-  >
-    <div
-      className="Select__value"
-    >
-      Select me
-    </div>
-  </div>
-</Select>
-`;
-
-exports[`Select Should render correctly 5`] = `
-<Select
-  className=""
-  disabled={false}
   filterable={true}
-  multiple={false}
-  options={
-    Array [
-      Object {
-        "id": 1,
-        "label": "John",
-        "value": -10,
-      },
-      Object {
-        "id": 2,
-        "label": "Joey",
-        "value": "Nein",
-      },
-      Object {
-        "id": 3,
-        "label": "Tupac",
-        "value": true,
-      },
-      Object {
-        "id": 4,
-        "label": "Chandler",
-        "value": Array [
-          Object {
-            "alive": true,
-          },
-        ],
-      },
-    ]
-  }
->
-  <div
-    className=" Select"
-    onClick={[Function]}
-    role="listbox"
-    tabIndex="-2"
-  >
-    <div
-      className="Select__value"
-    />
-  </div>
-</Select>
-`;
-
-exports[`Select Should render correctly 6`] = `
-<Select
-  className=""
-  disabled={false}
-  filterable={false}
   multiple={true}
   options={
     Array [
@@ -223,6 +34,7 @@ exports[`Select Should render correctly 6`] = `
       },
     ]
   }
+  placeholder="Select me"
 >
   <div
     className=" Select"
@@ -232,7 +44,9 @@ exports[`Select Should render correctly 6`] = `
   >
     <div
       className="Select__value"
-    />
+    >
+      Select me
+    </div>
   </div>
 </Select>
 `;

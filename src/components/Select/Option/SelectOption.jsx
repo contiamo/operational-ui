@@ -22,7 +22,6 @@ const SelectOption = ({
       : ""}`}
     tabIndex="-2"
     role="option"
-    aria-selected={selected}
     onClick={onClick}
   >
     {children}
