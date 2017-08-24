@@ -158,15 +158,15 @@ class Select extends Component<{}, Props, State> {
   async updateFilter(event: SyntheticEvent) {
     event.persist()
 
-    if (this.props.onFilter) {
-      this.setState(() => ({ updating: true }))
-      await this.props.onFilter()
-    }
-
     if (!(event.target instanceof HTMLInputElement)) {
       throw new Error(
         "<Select>: Your filter field is _not_ an input element and therefore has an unreadable value."
       )
+    }
+
+    if (this.props.onFilter) {
+      this.setState(() => ({ updating: true }))
+      await this.props.onFilter()
     }
 
     const filter = new RegExp(event.target.value, "i")
