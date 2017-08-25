@@ -36,6 +36,8 @@ const style = ({
   color,
   fix,
   expandOnHover,
+
+  // for some reason, glamorous doesn't get the defaultProps...
   expandedWidth = 280,
   width = 64
 }: Props): {} => {
