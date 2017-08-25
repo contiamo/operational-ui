@@ -32,7 +32,8 @@ const SidebarWithRouter = withRouter(Sidebar),
               display: "flex",
               flexDirection: "column",
               width: "100vw",
-              height: "100vh"
+              height: "100vh",
+              marginLeft: 64
             }}
           >
             <Header />

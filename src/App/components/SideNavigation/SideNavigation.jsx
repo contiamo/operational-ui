@@ -12,7 +12,7 @@ import SideNavigation, {
 import Select from "../../../components/Select/Select"
 
 const AppSideNavigation = ({ className }: { className: string }) =>
-  <SideNavigation expandOnHover className={className} color="#0c0c1b">
+  <SideNavigation expandOnHover fix className={className} color="#0c0c1b">
     <SideNavigationItem css={{ marginLeft: -6 }} tooltip="Contiamo" size={24}>
       <Link to="/">
         <Img
