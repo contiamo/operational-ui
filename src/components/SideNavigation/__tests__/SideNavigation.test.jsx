@@ -1,11 +1,9 @@
 // @flow
-import React from 'react'
-import renderer from 'react-test-renderer'
+import React from "react"
+import { shallow } from "enzyme"
 
-import SideNavigation from '../SideNavigation'
+import SideNavigation from "../SideNavigation"
 
-test('SideNavigation component renders', () => {
-  const output: Object = renderer.create(<SideNavigation />)
-  const tree: {} = output.toJSON()
-  expect(tree).toMatchSnapshot()
+test("SideNavigation component renders", () => {
+  expect(shallow(<SideNavigation />)).toMatchSnapshot()
 })

@@ -30,6 +30,7 @@ export default (
     cursor: "pointer",
     backgroundColor,
     color: readableTextColor(backgroundColor)(["black", "white"]),
+    outline: "none",
     pointerEvents: disabled ? "none" : "all",
 
     // downward caret.
