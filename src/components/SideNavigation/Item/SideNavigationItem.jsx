@@ -4,7 +4,7 @@ import glamorous, { Img } from "glamorous"
 
 import withTooltip from "../../Tooltip/withTooltip"
 
-type props = {
+type Props = {
   className: string,
   children: mixed,
   size?: number,
@@ -16,15 +16,13 @@ const SideNavigationItem = ({
   className,
   children,
   onClick
-}: props): React$Element<*> =>
+}: Props): React$Element<*> =>
   <div className={`${className} SideNavigationItem`} onClick={onClick}>
     {children}
   </div>
 
-const style = ({ theme, size }: { theme: THEME, size: number }): {} => ({
+const style = ({ theme, size }: Props): {} => ({
   position: "relative",
-  width: size || 20,
-  height: size || 20,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

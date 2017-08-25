@@ -2,9 +2,9 @@
 
 exports[`Tooltip Component Should intialize without problems 1`] = `
 <div
-  className="test "
+  className="test Tooltip"
   style={Object {}}
 >
   Hello
 </div>
-`
+`;

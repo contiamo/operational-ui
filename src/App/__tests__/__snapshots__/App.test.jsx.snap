@@ -5,15 +5,15 @@ exports[`App starts 1`] = `
   className="css-1mop140"
 >
   <div
-    className="css-z38itm"
+    className="css-11es8ni"
   >
     <div
-      className="css-joj8un_has-tooltip"
+      className="css-13i3zlm_has-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="css-joj8un SideNavigationItem"
+        className="css-13i3zlm SideNavigationItem"
         onClick={undefined}
       >
         <a
@@ -22,32 +22,45 @@ exports[`App starts 1`] = `
         >
           <img
             alt="Contiamo"
-            className="css-1mjw833"
+            className="css-nil"
             src="https://www.contiamo.com/assets/favicon/favicon-32x32.png"
           />
         </a>
+        <div
+          className="css-1jxo28z Select"
+          onClick={[Function]}
+          role="listbox"
+          tabIndex="-2"
+        >
+          <div
+            className="Select__value"
+          >
+            Project
+          </div>
+          
+        </div>
         
       </div>
     </div>
     <div
-      className="css-1l1mqk5_has-tooltip"
+      className="css-d9blfh_has-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="css-1l1mqk5 SideNavigationItem"
+        className="css-d9blfh SideNavigationItem"
         onClick={undefined}
       >
         <svg
-          height={30}
+          height={20}
           viewBox="0 0 24 24"
-          width={30}
+          width={20}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"
             fill="none"
-            stroke="#aaa"
+            stroke="#67C283"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
@@ -55,14 +68,14 @@ exports[`App starts 1`] = `
           <polyline
             fill="none"
             points="2.32 6.16 12 11 21.68 6.16"
-            stroke="#aaa"
+            stroke="#67C283"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
           />
           <line
             fill="none"
-            stroke="#aaa"
+            stroke="#67C283"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
@@ -72,50 +85,123 @@ exports[`App starts 1`] = `
             y2="11"
           />
         </svg>
+        <div
+          className="SideNavigationItem__label"
+        >
+          Components
+        </div>
         
       </div>
     </div>
     <div
-      className="css-1l1mqk5_has-tooltip"
+      className="css-d9blfh_has-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="css-1l1mqk5 SideNavigationItem"
+        className="css-d9blfh SideNavigationItem"
         onClick={undefined}
       >
         <svg
-          height={30}
+          height={20}
           viewBox="0 0 24 24"
-          width={30}
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="none"
+            height="7"
+            stroke="#aaa"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            width="7"
+            x="3"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="7"
+            stroke="#aaa"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            width="7"
+            x="14"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="7"
+            stroke="#aaa"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            width="7"
+            x="14"
+            y="14"
+          />
+          <rect
+            fill="none"
+            height="7"
+            stroke="#aaa"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            width="7"
+            x="3"
+            y="14"
+          />
+        </svg>
+        <div
+          className="SideNavigationItem__label"
+        >
+          Composed
+        </div>
+        
+      </div>
+    </div>
+    <div
+      className="css-d9blfh_has-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-d9blfh SideNavigationItem"
+        onClick={undefined}
+      >
+        <svg
+          height={20}
+          viewBox="0 0 24 24"
+          width={20}
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect
             fill="none"
             height="18"
-            stroke="#67C283"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            width="4"
-            x="18"
-            y="3"
-          />
-          <rect
-            fill="none"
-            height="13"
-            stroke="#67C283"
+            stroke="#aaa"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             width="4"
             x="10"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="13"
+            stroke="#aaa"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            width="4"
+            x="18"
             y="8"
           />
           <rect
             fill="none"
             height="8"
-            stroke="#67C283"
+            stroke="#aaa"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
@@ -124,126 +210,17 @@ exports[`App starts 1`] = `
             y="13"
           />
         </svg>
-        
-      </div>
-    </div>
-    <div
-      className="css-1l1mqk5_has-tooltip"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-1l1mqk5 SideNavigationItem"
-        onClick={undefined}
-      >
-        <svg
-          height={30}
-          viewBox="0 0 24 24"
-          width={30}
-          xmlns="http://www.w3.org/2000/svg"
+        <div
+          className="SideNavigationItem__label"
         >
-          <rect
-            fill="none"
-            height="18"
-            rx="2"
-            ry="2"
-            stroke="#aaa"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            width="18"
-            x="3"
-            y="3"
-          />
-          <line
-            fill="none"
-            stroke="#aaa"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            x1="9"
-            x2="9"
-            y1="3"
-            y2="21"
-          />
-        </svg>
-        
-      </div>
-    </div>
-    <div
-      className="css-1l1mqk5_has-tooltip"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-1l1mqk5 SideNavigationItem"
-        onClick={undefined}
-      >
-        <svg
-          fill="none"
-          height={30}
-          stroke="#aaa"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          width={30}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polygon
-            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-          />
-        </svg>
-        
-      </div>
-    </div>
-    <div
-      className="css-1l1mqk5_has-tooltip"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-1l1mqk5 SideNavigationItem"
-        onClick={undefined}
-      >
-        <svg
-          fill="none"
-          height={30}
-          stroke="#aaa"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          width={30}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polygon
-            points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-          />
-        </svg>
+          Visualizations
+        </div>
         
       </div>
     </div>
     <div
       className="css-1c5lpzn"
     />
-    <div
-      className="css-wncw3n_has-tooltip"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-wncw3n SideNavigationItem"
-        onClick={undefined}
-      >
-        <img
-          alt="Avatar"
-          className="css-1mjw833"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0K2M10ttKd6aRHT-7LUhVB3rW2rVZ16N3yJux4pRFXd9jdWNi4eczg"
-        />
-        
-      </div>
-    </div>
   </div>
   <div
     className="css-19imckl"

@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react'
-import glamorous from 'glamorous'
+import React, { Component } from "react"
+import glamorous from "glamorous"
 
-import style from './Tooltip.style'
+import style from "./Tooltip.style"
 
 /**
   The <Tooltip /> component.
@@ -29,7 +29,6 @@ import style from './Tooltip.style'
   left?: number,
   bottom?: number | string,
 }
-
 type rect = {
   top: number,
   left: number,
@@ -46,28 +45,23 @@ class Tooltip extends Component {
     anchor?: string,
     color?: string,
   }
-
   state: {
     position: tooltipPosition,
   } = { position: {} }
-
   tooltip: HTMLDivElement
-
   static defaultProps = {
-    anchor: 'top',
-    active: false,
+    anchor: "top",
+    active: false
   }
-
   componentDidMount() {
     const position = this.getPosition()
     this.setState(() => ({
-      position,
+      position
     }))
   }
   getPosition() {
     const rect: rect = this.tooltip.getBoundingClientRect()
     const top: number = rect.top
-
     /**
       The following style properties can only properly be set
       after the component mounts.
@@ -75,25 +69,26 @@ class Tooltip extends Component {
       Please read the description of this component at the top of the file
       if you haven't already to find out why.
     */ const position: tooltipPosition = {
-      position: 'fixed',
-      transform: 'none',
+      position: "fixed",
+      transform: "none",
       top,
-      left: (rect && rect.left) || 0,
+      left: rect && rect.left || 0
     }
-
-    if (this.props.anchor === 'bottom') {
-      position.bottom = 'auto'
+    if (this.props.anchor === "bottom") {
+      position.bottom = "auto"
     }
     return position
   }
   render() {
     return (
       <div
-        ref={tooltip => (this.tooltip = tooltip)}
-        className={`${this.props.className} ${this.props.active ? 'active' : ''}`}
+        ref={tooltip => this.tooltip = tooltip}
+        className={`${this.props.className} Tooltip${this.props.active
+          ? " active"
+          : ""}`}
         style={this.state.position}
       >
-        {this.props.children ? this.props.children : ''}
+        {this.props.children ? this.props.children : ""}
       </div>
     )
   }

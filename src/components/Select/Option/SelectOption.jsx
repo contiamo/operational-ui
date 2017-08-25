@@ -39,6 +39,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
     padding: theme.spacing ? theme.spacing / 2 : 8,
     backgroundColor,
     color: readableTextColor(backgroundColor)(["black", "white"]),
+    outline: "none",
 
     ":hover": {
       backgroundColor: darken(backgroundColor)(5),
