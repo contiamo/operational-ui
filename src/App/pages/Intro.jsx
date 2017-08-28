@@ -44,7 +44,7 @@ const myCard = ({ className }: { className: string }) =>
       transition: ".3s transform ease",
       cursor: "pointer"
     },
-    "& a": {
+    "& .card a": {
       textDecoration: "none"
     },
     "& .card.card_disabled": {

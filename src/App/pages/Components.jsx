@@ -49,7 +49,7 @@ export default () =>
     <AppCanvas
       css={{ position: "relative", marginLeft: 16, flexBasis: "100%" }}
     >
-      <Route exact path="/components" component={StyledDefaultPage} />
+      <Route exact path="/components" component={StyledInfoTooltip} />
       <Route path="/components/buttons" component={ButtonsPage} />
       <Route path="/components/form-fields" component={FormFieldsPage} />
       <Route path="/components/cards" component={CardsPage} />

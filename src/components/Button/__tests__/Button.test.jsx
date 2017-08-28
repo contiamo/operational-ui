@@ -1,8 +1,7 @@
-// @flow
 import React from "react"
 import { shallow } from "enzyme"
 
-import { Button } from "../Button"
+import { Button, style } from "../Button"
 
 describe("Button Component", () => {
   it("Should initialize properly", () => {
@@ -15,5 +14,8 @@ describe("Button Component", () => {
     button.simulate("click")
 
     expect(myFunc).toHaveBeenCalled()
+  })
+  it("Should receive proper styles", () => {
+    expect(style({ theme: {} })).toMatchObject({})
   })
 })

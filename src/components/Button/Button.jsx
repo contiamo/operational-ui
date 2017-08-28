@@ -17,7 +17,7 @@ const Button = ({
     {children}
   </div>
 
-const style: {} = ({
+export const style = ({
   theme,
   color,
   active
@@ -25,7 +25,7 @@ const style: {} = ({
   theme: THEME,
   color?: string,
   active?: boolean,
-}) => {
+}): {} => {
   const backgroundColor: string = color
     ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white")
     : "white"

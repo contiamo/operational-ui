@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComponentsPage Should render correctly 1`] = `
+<div
+  class="css-z79p0e"
+>
+  <div
+    class="css-17pa2mx"
+  >
+    <div
+      class="css-1ozkm5  "
+    >
+      <div
+        class="_has-tooltip"
+      >
+        <div
+          class="css-5ohi6e header"
+        >
+          Data Entry
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1ozkm5  "
+    >
+      <div
+        class="_has-tooltip"
+      >
+        <div
+          class="css-5ohi6e header"
+        >
+          Feedback
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1ozkm5  "
+    >
+      <div
+        class="_has-tooltip"
+      >
+        <div
+          class="css-5ohi6e header"
+        >
+          UI Elements
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1ozkm5  "
+    >
+      <div
+        class="_has-tooltip"
+      >
+        <div
+          class="css-5ohi6e header"
+        >
+          Navigation
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1ozkm5  "
+    >
+      <div
+        class="_has-tooltip"
+      >
+        <div
+          class="css-5ohi6e header"
+        >
+          Resources
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1ozkm5  "
+    >
+      <div
+        class="_has-tooltip"
+      >
+        <div
+          class="css-5ohi6e header"
+        >
+          Icons
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="css-1m3jp0r"
+  >
+    <div
+      class="Canvas__body"
+    />
+  </div>
+</div>
+`;
