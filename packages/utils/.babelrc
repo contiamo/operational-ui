@@ -1,0 +1,21 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ],
+    "flow"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "env",
+        {
+          "spec": true
+        }
+      ]
+    }
+  }
+}
