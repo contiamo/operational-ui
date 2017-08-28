@@ -15,10 +15,10 @@ import SidebarPage from "./Sidebar/Sidebar"
 
 const SidebarWithRouter = withRouter(Sidebar)
 
-const defaultPage = ({ className }) =>
+const InfoTooltip = ({ className }) =>
   <div className={className}>Choose a Component to Get Started</div>
 
-const StyledDefaultPage = glamorous(defaultPage)({
+const StyledInfoTooltip = glamorous(InfoTooltip)({
   position: "fixed",
   top: 80,
   background: "black",
