@@ -43,11 +43,20 @@ const SidebarLink = ({
   )
 }
 
-const style = ({ theme, color }: { theme: THEME, color: string }) => {
+const style = ({
+  theme,
+  color,
+  disabled
+}: {
+  theme: THEME,
+  color: string,
+  disabled: boolean,
+}) => {
   const backgroundColor = color
       ? hexOrColor(color)(theme.colors && theme.colors[color])
       : "#fff",
-    textColor = readableTextColor(backgroundColor)(["black", "white"])
+    textColor = readableTextColor(backgroundColor)(["black", "white"]),
+    disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
     position: "relative",
@@ -61,6 +70,7 @@ const style = ({ theme, color }: { theme: THEME, color: string }) => {
 
     color: textColor,
     backgroundColor,
+    ...disabledStyle,
 
     "&:link, &:visited": {
       color: textColor
