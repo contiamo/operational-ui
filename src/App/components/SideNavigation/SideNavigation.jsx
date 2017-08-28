@@ -9,10 +9,21 @@ import SideNavigation, {
   SideNavigationLink
 } from "../../../components/SideNavigation/SideNavigation"
 
+<<<<<<< HEAD
 import Select from "../../../components/Select/Select"
 
 const AppSideNavigation = ({ className }: { className: string }) =>
   <SideNavigation expandOnHover fix className={className} color="#0c0c1b">
+=======
+const AppSideNavigation = ({
+  className,
+  location
+}: {
+  className: string,
+  location: {},
+}) =>
+  <SideNavigation fix expandOnHover className={className} color="#0c0c1b">
+>>>>>>> Moved around some components and added some styled pages for a better user experience
     <SideNavigationItem css={{ marginLeft: -6 }} tooltip="Contiamo" size={24}>
       <Link to="/">
         <Img
@@ -20,20 +31,16 @@ const AppSideNavigation = ({ className }: { className: string }) =>
           src="https://www.contiamo.com/assets/favicon/favicon-32x32.png"
         />
       </Link>
-      <Select
-        css={{ marginLeft: 26 }}
-        placeholder="Project"
-        options={[
-          { id: 1, label: "Contiamo" },
-          { id: 2, label: "Frontiamo" },
-          { id: 3, label: "Metriamo" }
-        ]}
-      />
     </SideNavigationItem>
 
     <SideNavigationItem tooltip="Components">
-      <Box color="#67C283" size={20} />
-      <div className="SideNavigationItem__label">Components</div>
+      <Link to="/components">
+        <Box
+          color={location.pathname.match(/\/components/) ? "#67C283" : "#aaa"}
+          size={20}
+        />
+        <div className="SideNavigationItem__label">Components</div>
+      </Link>
     </SideNavigationItem>
     <SideNavigationItem tooltip="Composed">
       <Grid color="#aaa" size={20} />
@@ -48,6 +55,12 @@ const AppSideNavigation = ({ className }: { className: string }) =>
 
 const style: {} = ({ theme }) => ({
   boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
+  "& a": {
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+    color: "white"
+  },
   "& .SideNavigationItem__label": {
     marginLeft: theme.spacing ? theme.spacing * 2 : 32
   }

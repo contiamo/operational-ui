@@ -8,24 +8,18 @@ import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 
 import SideNavigation from "./components/SideNavigation/SideNavigation"
 import Header from "./components/Header/Header"
-import Sidebar from "./components/Sidebar/Sidebar"
-import AppCanvas from "./components/Canvas/Canvas"
 
-import ButtonsPage from "./pages/Buttons/Buttons"
-import FormFieldsPage from "./pages/FormFields/FormFields"
-import CardsPage from "./pages/Cards/Cards"
-import ChipsPage from "./pages/Chips/Chips"
-import TooltipsPage from "./pages/Tooltips/Tooltips"
-import StatsPage from "./pages/Stats/Stats"
-import SidebarPage from "./pages/Sidebar/Sidebar"
+import IntroPage from "./pages/Intro"
+import ComponentsPage from "./pages/Components"
 
 import DEFAULT_THEME from "../theme"
 
-const SidebarWithRouter = withRouter(Sidebar),
+const SideNavigationWithRouter = withRouter(SideNavigation),
   App = ({ className }: { className: string }) =>
     <Router>
       <ThemeProvider theme={DEFAULT_THEME}>
         <div className={className}>
+<<<<<<< HEAD
           <SideNavigation />
           <Div
             css={{
@@ -36,31 +30,13 @@ const SidebarWithRouter = withRouter(Sidebar),
               marginLeft: 64
             }}
           >
+=======
+          <SideNavigationWithRouter />
+          <Div className="app">
+>>>>>>> Moved around some components and added some styled pages for a better user experience
             <Header />
-            <Div
-              css={{
-                display: "flex",
-                padding: 16,
-                width: "100%",
-                height: "100vh"
-              }}
-            >
-              <SidebarWithRouter />
-              <AppCanvas css={{ marginLeft: 16, flexBasis: "100%" }}>
-                <Route path="/buttons" component={ButtonsPage} />
-                <Route path="/form-fields" component={FormFieldsPage} />
-                <Route path="/cards" component={CardsPage} />
-                <Route path="/chips" component={ChipsPage} />
-                <Route path="/tooltips" component={TooltipsPage} />
-                <Route path="/stats" component={StatsPage} />
-                <Route path="/sidebar" component={SidebarPage} />
-                <Route
-                  path="/demo"
-                  render={() =>
-                    <img style={{ maxWidth: "175%" }} src="/screen.png" />}
-                />
-              </AppCanvas>
-            </Div>
+            <Route exact path="/" component={IntroPage} />
+            <Route path="/components" component={ComponentsPage} />
           </Div>
         </div>
       </ThemeProvider>
@@ -74,6 +50,13 @@ const SidebarWithRouter = withRouter(Sidebar),
       height: 1,
       border: 0,
       backgroundColor: "rgba(0, 0, 0, 0.14)"
+    },
+    "& .app": {
+      display: "flex",
+      flexDirection: "column",
+      width: "100vw",
+      height: "100vh",
+      marginLeft: 64
     }
   }
 

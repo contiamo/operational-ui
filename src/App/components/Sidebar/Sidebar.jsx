@@ -18,8 +18,8 @@ export default ({ location }) =>
       open={location && paths.dataEntry.includes(location.pathname)}
       label="Data Entry"
     >
-      <SidebarLink to="/buttons">Buttons</SidebarLink>
-      <SidebarLink to="/form-fields">Form Fields</SidebarLink>
+      <SidebarLink to="/components/buttons">Buttons</SidebarLink>
+      <SidebarLink to="/components/form-fields">Form Fields</SidebarLink>
       <SidebarLink>Date Picker</SidebarLink>
       <SidebarLink>Color Picker</SidebarLink>
     </SidebarItem>
@@ -40,16 +40,18 @@ export default ({ location }) =>
       open={location && paths.uiElements.includes(location.pathname)}
       label="UI Elements"
     >
-      <SidebarLink to="/cards">Cards</SidebarLink>
-      <SidebarLink to="/chips">Chips</SidebarLink>
-      <SidebarLink to="/stats">Stats</SidebarLink>
+      <SidebarLink to="/components/cards">Cards</SidebarLink>
+      <SidebarLink to="/components/chips">Chips</SidebarLink>
+      <SidebarLink to="/components/stats">Stats</SidebarLink>
     </SidebarItem>
     <SidebarItem
       open={location && paths.navigation.includes(location.pathname)}
       label="Navigation"
     >
-      <SidebarLink to="/sidebar">Sidebar</SidebarLink>
-      <SidebarLink to="/side-navigation">Side Navigation</SidebarLink>
+      <SidebarLink to="/components/sidebar">Sidebar</SidebarLink>
+      <SidebarLink to="/components/side-navigation">
+        Side Navigation
+      </SidebarLink>
       <SidebarLink>Tabs</SidebarLink>
       <SidebarLink>Pagination</SidebarLink>
     </SidebarItem>
