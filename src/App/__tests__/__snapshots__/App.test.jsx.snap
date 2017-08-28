@@ -5,11 +5,7 @@ exports[`App starts 1`] = `
   className="css-qvp3ck"
 >
   <div
-<<<<<<< HEAD
-    className="css-7889fa"
-=======
     className="css-1n6wvic"
->>>>>>> Moved around some components and added some styled pages for a better user experience
   >
     <div
       className="css-13i3zlm_has-tooltip"
@@ -219,11 +215,7 @@ exports[`App starts 1`] = `
     />
   </div>
   <div
-<<<<<<< HEAD
-    className="css-fvuhij"
-=======
     className="css-nil app"
->>>>>>> Moved around some components and added some styled pages for a better user experience
   >
     <div
       className="css-pl8kj3"

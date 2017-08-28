@@ -19,21 +19,8 @@ const SideNavigationWithRouter = withRouter(SideNavigation),
     <Router>
       <ThemeProvider theme={DEFAULT_THEME}>
         <div className={className}>
-<<<<<<< HEAD
-          <SideNavigation />
-          <Div
-            css={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100vw",
-              height: "100vh",
-              marginLeft: 64
-            }}
-          >
-=======
           <SideNavigationWithRouter />
           <Div className="app">
->>>>>>> Moved around some components and added some styled pages for a better user experience
             <Header />
             <Route exact path="/" component={IntroPage} />
             <Route path="/components" component={ComponentsPage} />
