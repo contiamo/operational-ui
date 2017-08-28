@@ -12,21 +12,21 @@ export default `
   </SidebarItem>
 
   <SidebarItem
-    label="Deutschlandliebe 🇩🇪"
+    label="Fetch data first"
     tooltip="Click for async fun!"
     onClick={() => fetch('SOME URL')}
   >
-    <SidebarLink color="#000">
-      You should
+    <SidebarLink color="#eee">
+      This could have been
     </SidebarLink>
     <SidebarLink
-      color="#f00"
+      color="#777"
       tooltip="Notice how the text is always readable. 😉"
     >
-      only see me
+      fetched from an
     </SidebarLink>
-    <SidebarLink color="#ff0">
-      after fetch.
+    <SidebarLink>
+      external resource.
     </SidebarLink>
   </SidebarItem>
 

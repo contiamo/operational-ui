@@ -62,21 +62,21 @@ exports[`Sidebar Page Should render correctly 1`] = `
             &lt;/SidebarItem&gt;
           
             &lt;SidebarItem
-              label="Deutschlandliebe 🇩🇪"
+              label="Fetch data first"
               tooltip="Click for async fun!"
               onClick={() =&gt; fetch('SOME URL')}
             &gt;
-              &lt;SidebarLink color="#000"&gt;
-                You should
+              &lt;SidebarLink color="#eee"&gt;
+                This could have been
               &lt;/SidebarLink&gt;
               &lt;SidebarLink
-                color="#f00"
+                color="#777"
                 tooltip="Notice how the text is always readable. 😉"
               &gt;
-                only see me
+                fetched from an
               &lt;/SidebarLink&gt;
-              &lt;SidebarLink color="#ff0"&gt;
-                after fetch.
+              &lt;SidebarLink&gt;
+                external resource.
               &lt;/SidebarLink&gt;
             &lt;/SidebarItem&gt;
           

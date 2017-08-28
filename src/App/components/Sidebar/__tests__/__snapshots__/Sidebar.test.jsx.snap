@@ -15,29 +15,43 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     >
       Form Fields
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Date Picker
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Color Picker
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Feedback"
   >
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Modals
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Notifications
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Alerts
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Messages
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Progress
     </glamorous(_class)>
     <glamorous(_class)
@@ -79,27 +93,37 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     >
       Side Navigation
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Tabs
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Pagination
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Resources"
   >
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Grid
     </glamorous(_class)>
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       List
     </glamorous(_class)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Icons"
   >
-    <glamorous(_class)>
+    <glamorous(_class)
+      disabled={true}
+    >
       Feather Icons
     </glamorous(_class)>
   </glamorous(SidebarItem)>

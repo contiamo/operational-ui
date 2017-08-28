@@ -20,18 +20,18 @@ export default ({ location }) =>
     >
       <SidebarLink to="/components/buttons">Buttons</SidebarLink>
       <SidebarLink to="/components/form-fields">Form Fields</SidebarLink>
-      <SidebarLink>Date Picker</SidebarLink>
-      <SidebarLink>Color Picker</SidebarLink>
+      <SidebarLink disabled>Date Picker</SidebarLink>
+      <SidebarLink disabled>Color Picker</SidebarLink>
     </SidebarItem>
     <SidebarItem
       open={location && paths.feedback.includes(location.pathname)}
       label="Feedback"
     >
-      <SidebarLink>Modals</SidebarLink>
-      <SidebarLink>Notifications</SidebarLink>
-      <SidebarLink>Alerts</SidebarLink>
-      <SidebarLink>Messages</SidebarLink>
-      <SidebarLink>Progress</SidebarLink>
+      <SidebarLink disabled>Modals</SidebarLink>
+      <SidebarLink disabled>Notifications</SidebarLink>
+      <SidebarLink disabled>Alerts</SidebarLink>
+      <SidebarLink disabled>Messages</SidebarLink>
+      <SidebarLink disabled>Progress</SidebarLink>
       <SidebarLink to="/components/tooltips" tooltip="Like this.">
         Tooltips
       </SidebarLink>
@@ -52,14 +52,14 @@ export default ({ location }) =>
       <SidebarLink to="/components/side-navigation">
         Side Navigation
       </SidebarLink>
-      <SidebarLink>Tabs</SidebarLink>
-      <SidebarLink>Pagination</SidebarLink>
+      <SidebarLink disabled>Tabs</SidebarLink>
+      <SidebarLink disabled>Pagination</SidebarLink>
     </SidebarItem>
     <SidebarItem label="Resources">
-      <SidebarLink>Grid</SidebarLink>
-      <SidebarLink>List</SidebarLink>
+      <SidebarLink disabled>Grid</SidebarLink>
+      <SidebarLink disabled>List</SidebarLink>
     </SidebarItem>
     <SidebarItem label="Icons">
-      <SidebarLink>Feather Icons</SidebarLink>
+      <SidebarLink disabled>Feather Icons</SidebarLink>
     </SidebarItem>
   </Sidebar>
