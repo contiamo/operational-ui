@@ -32,7 +32,7 @@ export default ({ location }) =>
       <SidebarLink>Alerts</SidebarLink>
       <SidebarLink>Messages</SidebarLink>
       <SidebarLink>Progress</SidebarLink>
-      <SidebarLink to="/tooltips" tooltip="Like this.">
+      <SidebarLink to="/components/tooltips" tooltip="Like this.">
         Tooltips
       </SidebarLink>
     </SidebarItem>

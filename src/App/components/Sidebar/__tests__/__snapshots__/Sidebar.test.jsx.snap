@@ -41,7 +41,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Progress
     </glamorous(_class)>
     <glamorous(_class)
-      to="/tooltips"
+      to="/components/tooltips"
       tooltip="Like this."
     >
       Tooltips
