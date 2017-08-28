@@ -2,6 +2,7 @@
 import React from "react"
 import glamorous from "glamorous"
 import { Box, Camera } from "react-feather"
+import { Route } from "react-router-dom"
 
 import Header, {
   HeaderItem,
@@ -11,14 +12,14 @@ import Header, {
 
 const AppHeader = ({ className }: { className: string }) =>
   <Header className={className} color="#fff">
-    Telekom /&nbsp;<strong>Dashboards</strong>
-    <HeaderSeparator />
-    <HeaderItem>
-      <Camera /> Charts
-    </HeaderItem>
-    <HeaderItem>
-      <Box /> Presentations
-    </HeaderItem>
+    Contiamo UI
+    <Route
+      path="/components"
+      render={() =>
+        <div>
+          &nbsp;/&nbsp;<strong>Components</strong>
+        </div>}
+    />
   </Header>
 
 const style: {} = {

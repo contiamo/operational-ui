@@ -1,48 +1,54 @@
 // @flow
-import React from 'react'
-import glamorous from 'glamorous'
+import React from "react"
+import glamorous from "glamorous"
 
-const Canvas = ({ className, children }: { className: string, children: HTMLElement }) =>
-  (<div className={className}>
+const Canvas = ({
+  className,
+  children
+}: {
+  className: string,
+  children: HTMLElement,
+}) =>
+  <div className={className}>
     <div className="Canvas__body">
       {children}
     </div>
-  </div>)
+  </div>
 
 const styles = ({ theme }: { theme: THEME }): {} => ({
-  display: 'flex',
-  alignItems: 'flex-start',
-  height: '100%',
-  overflow: 'auto',
-  WebkitOverflowScrolling: 'touch',
+  display: "flex",
+  alignItems: "flex-start",
+  height: "100%",
+  overflow: "auto",
+  WebkitOverflowScrolling: "touch",
 
-  '& a:link, & a:visited': {
-    color: theme.colors.primary,
-  },
-
-  '& a:hover': {
-    color: theme.colors.secondary,
+  "& a:link, & a:visited": {
+    color: theme.colors ? theme.colors.primary : "blue"
   },
 
-  '& .Canvas__body': {
-    maxWidth: 768,
+  "& a:hover": {
+    color: theme.colors ? theme.colors.secondary : "green"
   },
 
-  '& .playground': {
-    display: 'flex',
-    width: '80vw',
-    maxWidth: 1500,
+  "& .Canvas__body": {
+    maxWidth: 768
   },
 
-  '& .playgroundCode, & .playgroundPreview': {
-    flex: '1 1 50%',
+  "& .playground": {
+    display: "flex",
+    width: "80vw",
+    maxWidth: 1500
   },
-  '& .playgroundPreview': {
-    marginLeft: 16,
+
+  "& .playgroundCode, & .playgroundPreview": {
+    flex: "1 1 50%"
   },
-  '& .CodeMirror-wrap.CodeMirror': {
-    minHeight: 480,
+  "& .playgroundPreview": {
+    marginLeft: 16
   },
+  "& .CodeMirror-wrap.CodeMirror": {
+    minHeight: 480
+  }
 })
 
 export default glamorous(Canvas)(styles)

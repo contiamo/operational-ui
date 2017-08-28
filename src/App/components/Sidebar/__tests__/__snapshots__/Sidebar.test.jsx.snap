@@ -6,12 +6,12 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     label="Data Entry"
   >
     <glamorous(_class)
-      to="/buttons"
+      to="/components/buttons"
     >
       Buttons
     </glamorous(_class)>
     <glamorous(_class)
-      to="/form-fields"
+      to="/components/form-fields"
     >
       Form Fields
     </glamorous(_class)>
@@ -51,17 +51,17 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     label="UI Elements"
   >
     <glamorous(_class)
-      to="/cards"
+      to="/components/cards"
     >
       Cards
     </glamorous(_class)>
     <glamorous(_class)
-      to="/chips"
+      to="/components/chips"
     >
       Chips
     </glamorous(_class)>
     <glamorous(_class)
-      to="/stats"
+      to="/components/stats"
     >
       Stats
     </glamorous(_class)>
@@ -70,12 +70,12 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     label="Navigation"
   >
     <glamorous(_class)
-      to="/sidebar"
+      to="/components/sidebar"
     >
       Sidebar
     </glamorous(_class)>
     <glamorous(_class)
-      to="/side-navigation"
+      to="/components/side-navigation"
     >
       Side Navigation
     </glamorous(_class)>
