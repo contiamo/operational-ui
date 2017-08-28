@@ -10,14 +10,21 @@ import {
   SideNavigationLink
 } from "contiamo-ui-components"
 
-const AppSideNavigation = ({
-  className,
-  location
-}: {
-  className: string,
-  location: {},
-}) =>
-  <SideNavigation fix expandOnHover className={className} color="#0c0c1b">
+const style: {} = ({ theme }) => ({
+  boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
+  "& a": {
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+    color: "white"
+  },
+  "& .SideNavigationItem__label": {
+    marginLeft: theme.spacing ? theme.spacing * 2 : 32
+  }
+})
+
+const AppSideNavigation = ({ location }: { location: {} }) =>
+  <SideNavigation css={style} fix expandOnHover color="#0c0c1b">
     <SideNavigationItem css={{ marginLeft: -6 }} tooltip="Contiamo" size={24}>
       <Link to="/">
         <Img
@@ -47,17 +54,4 @@ const AppSideNavigation = ({
     <Div css={{ flexGrow: 1, height: "100%" }} />
   </SideNavigation>
 
-const style: {} = ({ theme }) => ({
-  boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-  "& a": {
-    display: "flex",
-    alignItems: "center",
-    textDecoration: "none",
-    color: "white"
-  },
-  "& .SideNavigationItem__label": {
-    marginLeft: theme.spacing ? theme.spacing * 2 : 32
-  }
-})
-
-export default glamorous(AppSideNavigation)(style)
+export default AppSideNavigation

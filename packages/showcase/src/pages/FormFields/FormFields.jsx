@@ -5,8 +5,8 @@ import Playground from "component-playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Table from "../../components/PropsTable/PropsTable"
-import DemoInput from "contiamo-ui-components"
-import DemoSelect from "contiamo-ui-components"
+import { Input as DemoInput } from "contiamo-ui-components"
+import { Select as DemoSelect } from "contiamo-ui-components"
 
 import snippet from "./snippet"
 import propDescription from "./propDescription"

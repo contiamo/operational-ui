@@ -58,6 +58,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-icons": "^2.2.5",
+    "react-router-dom": "^4.2.2",
     "tinycolor2": "^1.4.1"
   },
   "jest": {
@@ -65,7 +66,13 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

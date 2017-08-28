@@ -1694,11 +1694,11 @@ content-type@~1.0.2:
     babel-preset-react "^6.24.1"
     babel-preset-stage-0 "^6.24.1"
     contiamo-ui-utils "file:../utils"
-    glamor "^2.20.39"
     glamorous "^4.4.0"
     prop-types "^15.5.10"
     react "^15.6.1"
     react-icons "^2.2.5"
+    react-router-dom "^4.2.2"
     tinycolor2 "^1.4.1"
 
 "contiamo-ui-utils@file:../utils":
@@ -1707,7 +1707,6 @@ content-type@~1.0.2:
     babel-cli "^6.26.0"
     babel-preset-env "^1.6.0"
     babel-preset-stage-0 "^6.24.1"
-    glamor "^2.20.39"
     react "^15.6.1"
     tinycolor2 "^1.4.1"
 
@@ -3149,7 +3148,7 @@ github-url-from-git@^1.4.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/github-url-from-git/-/github-url-from-git-1.5.0.tgz#f985fedcc0a9aa579dc88d7aff068d55cc6251a0"
 
-glamor@^2.20.24, glamor@^2.20.39:
+glamor@^2.20.24:
   version "2.20.40"
   resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.40.tgz#f606660357b7cf18dface731ad1a2cfa93817f05"
   dependencies:
@@ -5625,7 +5624,7 @@ react-proxy@^3.0.0-alpha.0:
   dependencies:
     lodash "^4.6.1"
 
-react-router-dom@^4.2.0:
+react-router-dom@^4.2.0, react-router-dom@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.2.2.tgz#c8a81df3adc58bba8a76782e946cbd4eae649b8d"
   dependencies:

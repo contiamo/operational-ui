@@ -1,6 +1,6 @@
 import React from "react"
 
-import Sidebar, { SidebarItem, SidebarLink } from "contiamo-ui-components"
+import { Sidebar, SidebarItem, SidebarLink } from "contiamo-ui-components"
 
 const paths = {
   dataEntry: ["/buttons", "/form-fields"],

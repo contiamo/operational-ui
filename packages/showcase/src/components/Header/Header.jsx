@@ -4,14 +4,20 @@ import glamorous from "glamorous"
 import { Box, Camera } from "react-feather"
 import { Route } from "react-router-dom"
 
-import Header, {
+import {
+  Header,
   HeaderItem,
   HeaderSeparator,
   HeaderTitle
 } from "contiamo-ui-components"
 
-const AppHeader = ({ className }: { className: string }) =>
-  <Header className={className} color="#fff">
+const style: {} = {
+  boxShadow: "0px 1px 2px #d3d1d1",
+  backgroundColor: "#fff"
+}
+
+const AppHeader = () =>
+  <Header css={style} color="#fff">
     Contiamo UI
     <Route
       path="/components"
@@ -22,9 +28,4 @@ const AppHeader = ({ className }: { className: string }) =>
     />
   </Header>
 
-const style: {} = {
-  boxShadow: "0px 1px 2px #d3d1d1",
-  backgroundColor: "#fff"
-}
-
-export default glamorous(AppHeader)(style)
+export default AppHeader

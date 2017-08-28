@@ -4,7 +4,11 @@ import { Link } from "react-router-dom"
 import Playground from "component-playground"
 
 import Table from "../../components/PropsTable/PropsTable"
-import DemoSidebar, { SidebarItem, SidebarLink } from "contiamo-ui-components"
+import {
+  Sidebar as DemoSidebar,
+  SidebarItem,
+  SidebarLink
+} from "contiamo-ui-components"
 import snippet from "./snippet"
 import propDescription from "./propDescription"
 

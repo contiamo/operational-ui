@@ -11,6 +11,10 @@ import SideNavigation, {
   SideNavigationLink
 } from "./src/SideNavigation/SideNavigation"
 
+import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
+
+import Button from "./src/Button/Button"
+
 import Tooltip from "./src/Tooltip/Tooltip"
 
 import withTooltip from "./src/Tooltip/withTooltip"
@@ -35,6 +39,10 @@ export {
   SideNavigation,
   SideNavigationItem,
   SideNavigationLink,
+  Sidebar,
+  SidebarItem,
+  SidebarLink,
+  Button,
   Tooltip,
   withTooltip,
   Chip,
