@@ -12,7 +12,7 @@ type Props = {
   theme: THEME,
 }
 
-const SideNavigationItem = ({ className, children, onClick }: Props): React$Element<*> =>
+const SideNavigationItem = ({ className, children, onClick }: Props): Node =>
     <div className={`${className} SideNavigationItem`} onClick={onClick} role="button" tabIndex="-1">
       {children}
     </div>,

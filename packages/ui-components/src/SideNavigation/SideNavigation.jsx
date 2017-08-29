@@ -3,6 +3,7 @@ import React from "react"
 import type { Node } from "react"
 import glamorous from "glamorous"
 
+import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"
 import SideNavigationLink from "./Link/SideNavigationLink"
 
@@ -73,4 +74,4 @@ SideNavigation.defaultProps = {
 }
 
 export default glamorous(SideNavigation)(style)
-export { SideNavigationItem, SideNavigationLink }
+export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }
