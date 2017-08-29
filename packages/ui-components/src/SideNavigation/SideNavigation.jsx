@@ -3,6 +3,7 @@ import React from "react"
 import propTypes from "prop-types"
 import glamorous from "glamorous"
 
+import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"
 import SideNavigationLink from "./Link/SideNavigationLink"
 
@@ -38,7 +39,7 @@ const style = ({
   expandOnHover,
 
   // for some reason, glamorous doesn't get the defaultProps...
-  expandedWidth = 280,
+  expandedWidth = 200,
   width = 64
 }: Props): {} => {
   const backgroundColor = color
@@ -66,7 +67,7 @@ const style = ({
     width,
     height: "100vh",
     overflow: "hidden",
-    padding: theme.spacing * 1.3 || 0,
+    boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
     backgroundColor,
     color: readableTextColor(backgroundColor)(["black", "white"]),
     ...hoverWidth
@@ -74,4 +75,4 @@ const style = ({
 }
 
 export default glamorous(SideNavigation)(style)
-export { SideNavigationItem, SideNavigationLink }
+export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }

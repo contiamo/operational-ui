@@ -7,6 +7,7 @@ import Header, {
 } from "./src/Header/Header"
 
 import SideNavigation, {
+  SideNavigationHeader,
   SideNavigationItem,
   SideNavigationLink
 } from "./src/SideNavigation/SideNavigation"
@@ -37,6 +38,7 @@ export {
   HeaderSeparator,
   HeaderTitle,
   SideNavigation,
+  SideNavigationHeader,
   SideNavigationItem,
   SideNavigationLink,
   Sidebar,

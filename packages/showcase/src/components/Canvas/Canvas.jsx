@@ -2,6 +2,8 @@
 import React from "react"
 import glamorous from "glamorous"
 
+import { Card } from "contiamo-ui-components"
+
 const Canvas = ({
   className,
   children
@@ -9,15 +11,17 @@ const Canvas = ({
   className: string,
   children: HTMLElement,
 }) =>
-  <div className={className}>
+  <Card padding={16} css={styles}>
     <div className="Canvas__body">
       {children}
     </div>
-  </div>
+  </Card>
 
 const styles = ({ theme }: { theme: THEME }): {} => ({
   display: "flex",
   alignItems: "flex-start",
+  marginLeft: 16,
+  width: "100%",
   height: "100%",
   overflow: "auto",
   WebkitOverflowScrolling: "touch",

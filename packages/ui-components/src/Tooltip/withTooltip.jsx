@@ -48,24 +48,22 @@ const withTooltip = InputComponent =>
         : []
       const lastClassName = splitClassNames[splitClassNames.length - 1]
       return (
-        <div
-          className={`${lastClassName}_has-tooltip`}
+        <InputComponent
+          {...this.props}
           onMouseEnter={() => this.showTooltip()}
           onMouseLeave={() => this.hideTooltip()}
         >
-          <InputComponent {...this.props}>
-            {this.props.children ? this.props.children : ""}
-            {this.props.tooltip && this.state.isTooltipActive
-              ? <Tooltip
-                active
-                color={this.props.tooltipColor}
-                anchor={this.props.tooltipAnchor}
-              >
-                {this.props.tooltip}
-              </Tooltip>
-              : ""}
-          </InputComponent>
-        </div>
+          {this.props.children ? this.props.children : ""}
+          {this.props.tooltip && this.state.isTooltipActive
+            ? <Tooltip
+              active
+              color={this.props.tooltipColor}
+              anchor={this.props.tooltipAnchor}
+            >
+              {this.props.tooltip}
+            </Tooltip>
+            : ""}
+        </InputComponent>
       )
     }
   }
