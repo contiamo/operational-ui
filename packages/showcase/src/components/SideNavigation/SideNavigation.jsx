@@ -28,7 +28,12 @@ const style: {} = ({ theme }) => ({
 const AppSideNavigation = ({ location }: { location: {} }) =>
   <SideNavigation css={style} fix expandOnHover color="#4E5665">
     <SideNavigationHeader tooltip="Contiamo" size={24}>
-      <Img css={{ maxWidth: 32 }} alt="Contiamo" src="/img/logo/outline.png" />
+      <Img
+        css={{ maxWidth: 32, marginRight: 16 }}
+        alt="Contiamo"
+        src="/img/logo/outline.png"
+      />
+      Contiamo
     </SideNavigationHeader>
 
     <SideNavigationItem active={location.pathname.match(/\/components/)} tooltip="Components">

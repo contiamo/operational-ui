@@ -10,7 +10,6 @@
     "flow",
     "stage-0"
   ],
-  "plugins": ["transform-class-properties"],
   "env": {
     "test": {
       "presets": [
