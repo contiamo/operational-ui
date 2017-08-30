@@ -47,12 +47,18 @@ const style = ({
       : theme.colors && theme.colors.primary,
     hoverWidth = expandOnHover
       ? {
-        transition: ".3s width ease",
+        transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
         willChange: "width",
         "&:hover": {
           width: expandedWidth
         },
         "&:hover .Tooltip": {
+          display: "none"
+        },
+        "&:not(:hover) .SideNavigationHeader::after": {
+          content: "none"
+        },
+        "&:not(:hover) .SideNavigationHeader__options": {
           display: "none"
         }
       }

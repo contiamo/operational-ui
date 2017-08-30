@@ -15,6 +15,7 @@ export default {
     }),
     image(),
     babel({
+      plugins: ["external-helpers"],
       exclude: "node_modules/**" // only transpile our source code
     }),
     jsx({

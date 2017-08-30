@@ -9,6 +9,5 @@
     "react",
     "flow",
     "stage-0"
-  ],
-  "plugins": ["external-helpers"]
+  ]
 }
