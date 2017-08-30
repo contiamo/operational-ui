@@ -10,7 +10,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "lerna bootstrap && webpack",
     "start": "webpack-dev-server"
   },
   "dependencies": {
