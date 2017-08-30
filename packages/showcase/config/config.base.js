@@ -44,6 +44,24 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: [".jsx", ".js"]
+    extensions: [".jsx", ".js"],
+    alias: {
+      "contiamo-ui-components": resolve(
+        __dirname,
+        "..",
+        "..",
+        "ui-components",
+        "dist",
+        "components.js"
+      ),
+      "contiamo-ui-utils": resolve(
+        __dirname,
+        "..",
+        "..",
+        "utils",
+        "dist",
+        "utils.js"
+      )
+    }
   }
 }

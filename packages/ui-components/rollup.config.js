@@ -4,10 +4,21 @@ import image from "rollup-plugin-image"
 import babel from "rollup-plugin-babel"
 import jsx from "rollup-plugin-jsx"
 import flow from "rollup-plugin-flow"
+import alias from "rollup-plugin-alias"
+import path from "path"
 
 export default {
   input: "./index.js",
   plugins: [
+    alias({
+      "contiamo-ui-utils": path.resolve(
+        __dirname,
+        "..",
+        "utils",
+        "dist",
+        "utils.js"
+      )
+    }),
     resolve({ extensions: [".js", ".jsx"], jsnext: true, main: true }),
     commonjs({
       esnext: true,

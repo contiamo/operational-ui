@@ -48,6 +48,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-stage-0": "^6.24.1",
     "react": "^15.6.1",
     "tinycolor2": "^1.4.1"
@@ -57,7 +58,13 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

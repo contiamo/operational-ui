@@ -6,7 +6,8 @@
         "modules": false
       }
     ],
-    "flow"
+    "flow",
+    "es2015-rollup"
   ],
   "env": {
     "test": {
