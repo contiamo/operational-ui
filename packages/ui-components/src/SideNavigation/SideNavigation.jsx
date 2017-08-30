@@ -52,7 +52,7 @@ const style = ({
         "&:hover": {
           width: expandedWidth
         },
-        "&:hover .Tooltip": {
+        "& .Tooltip": {
           display: "none"
         },
         "&:not(:hover) .SideNavigationHeader::after": {
