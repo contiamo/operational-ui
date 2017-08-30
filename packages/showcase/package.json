@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --hot --public --host 0.0.0.0",
+    "build": "webpack -p",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint ./src/*/** --fix",
@@ -17,6 +18,7 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-jest": "^20.0.3",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
@@ -45,6 +47,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "component-playground": "^2.0.0",
     "contiamo-ui-components": "file:../ui-components",
     "contiamo-ui-utils": "file:../utils",
@@ -60,6 +63,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.0",
     "react-syntax-highlighter": "^5.7.0",
+    "regenerator-runtime": "^0.11.0",
     "webpack": "^3.5.5",
     "webpack-merge": "^4.1.0"
   },

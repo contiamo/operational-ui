@@ -3,6 +3,5 @@ node_modules
 .idea
 *.log
 flow-typed/npm
-dist
 coverage
 fonts

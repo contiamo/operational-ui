@@ -11,8 +11,11 @@
     "react",
     "stage-0"
   ],
-  "plugins": ["react-hot-loader/babel"],
+  "plugins": ["transform-runtime"],
   "env": {
+    "development": {
+      "plugins": ["transform-runtime","react-hot-loader/babel"],
+    },
     "test": {
       "presets": [["env", { "spec": true }], "react", "stage-0"]
     }

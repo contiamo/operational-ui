@@ -8,7 +8,22 @@
     ],
     "react",
     "flow",
-    "stage-0"
+    "stage-0",
+    "es2015-rollup"
   ],
-  "plugins": ["external-helpers"]
+  "plugins": ["transform-class-properties"],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "spec": true
+          }
+        ],
+        "react",
+        "stage-0"
+      ]
+    }
+  }
 }
