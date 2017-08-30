@@ -4,7 +4,7 @@ const webpack = require("webpack")
 const path = require("path")
 
 const config = require("./config.base")
-console.log("hi", __dirname)
+
 module.exports = webpackMerge(config, {
   plugins: [new webpack.NamedModulesPlugin(), new DashboardPlugin()],
   devServer: {

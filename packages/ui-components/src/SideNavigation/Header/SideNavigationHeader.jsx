@@ -73,9 +73,10 @@ class SideNavigationHeader<Props, State> extends Component {
         onClick={() => this.toggle()}
       >
         {this.props.children}
-        <div className="SideNavigationHeader__value">
-          {this.state.value && this.state.value.label}
-        </div>
+        {this.state.value &&
+          <div className="SideNavigationHeader__value">
+            {this.state.value.label}
+          </div>}
         {this.props.options.length > 0 && this.state.open && this.getDropdown()}
       </div>
     )
