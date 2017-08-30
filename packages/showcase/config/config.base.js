@@ -1,12 +1,12 @@
-const path = require("path"),
+const { resolve } = require("path"),
   webpack = require("webpack"),
   HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   // We use babel-polyfill for async/await
-  entry: ["babel-polyfill", path.resolve("./index.jsx")],
+  entry: ["regenerator-runtime/runtime", resolve(__dirname, "..", "index.jsx")],
   output: {
-    path: path.resolve("dist"),
+    path: resolve(__dirname, "..", "dist"),
     filename: "[name].js"
   },
   module: {
@@ -28,7 +28,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve("public", "index.html") }),
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, "..", "public", "index.html")
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       minChunks: function(module) {

@@ -6,6 +6,16 @@
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^2.1.0"
+    "lerna": "^2.1.0",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "webpack": "^3.5.5"
   }
 }
