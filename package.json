@@ -12,7 +12,7 @@
     "flow": "lerna run flow",
     "lint": "lerna run lint",
     "test": "lerna run test",
-    "precommit": "npm run flow && npm run lint && npm run test && npm run package"
+    "precommit": "npm run flow && npm run lint && npm run test"
   },
   "devDependencies": {
     "husky": "^0.14.3",
