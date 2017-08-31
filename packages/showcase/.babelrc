@@ -3,21 +3,41 @@
     [
       "env",
       {
-        "es2015": {
-          "modules": false
-        },
-      },
+        "modules": false
+      }
     ],
     "react",
+    "flow",
     "stage-0"
   ],
   "plugins": ["transform-runtime"],
   "env": {
-    "development": {
-      "plugins": ["transform-runtime","react-hot-loader/babel"],
-    },
     "test": {
-      "presets": [["env", { "spec": true }], "react", "stage-0"]
+      "presets": [
+        [
+          "env",
+          {
+            "spec": true
+          }
+        ],
+        "react",
+        "stage-0"
+      ],
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "contiamo-ui-components": "../ui-components/dist/components.js",
+              "contiamo-ui-utils": "../utils/dist/utils.js"
+            }
+          }
+        ]
+      ]
+    },
+    "development": {
+      "plugins": ["transform-runtime", "react-hot-loader/babel"]
     }
   }
 }

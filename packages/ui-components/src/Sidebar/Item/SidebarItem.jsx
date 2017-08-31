@@ -1,32 +1,35 @@
 // @flow
-import React, { Component } from 'react'
-import glamorous, { Div } from 'glamorous'
+import React, { Component } from "react"
+import type { Node } from "react"
+import glamorous, { Div } from "glamorous"
 
-import style from './SidebarItem.style'
-import withTooltip from '../../Tooltip/withTooltip'
+import style from "./SidebarItem.style"
+import withTooltip from "../../Tooltip/withTooltip"
 
-class SidebarItem extends Component {
-  props: {
-    className: string,
-    label: mixed,
-    children?: mixed,
-    open: boolean,
-    onClick?: void,
-    tooltip?: string,
-  }
+type Props = {
+  className: string,
+  label: mixed,
+  children?: Node,
+  open: boolean,
+  onClick?: void,
+  tooltip: any,
+}
 
-  state: {
-    open: boolean,
-    updating: boolean, // async, woo!
-  } = {
-    open: this.props && this.props.open,
-    updating: false,
-  }
+type State = {
+  open: boolean,
+  updating: boolean, // async, woo!
+}
 
+class SidebarItem extends Component<Props, State> {
   static defaultProps = {
-    children: '',
+    children: "",
     open: false,
-    tooltip: '',
+    tooltip: false
+  }
+
+  state = {
+    open: this.props && this.props.open,
+    updating: false
   }
 
   async toggle() {
@@ -40,8 +43,9 @@ class SidebarItem extends Component {
     }
     this.setState(prevState => ({
       open: !prevState.open,
-      updating: false,
+      updating: false
     }))
+    return true
   }
 
   render() {
@@ -53,13 +57,10 @@ class SidebarItem extends Component {
     const HeaderWithTooltip = withTooltip(Div)
     return (
       <div
-        className={`${this.props.className} ${this.state.updating ? 'updating' : ''} ${this.state
-          .open
-          ? 'open'
-          : ''}`}
+        className={`${this.props.className} ${this.state.updating ? "updating" : ""} ${this.state.open ? "open" : ""}`}
       >
         <HeaderWithTooltip
-          className={`header ${this.state.open ? 'open' : ''}`}
+          className={`header ${this.state.open ? "open" : ""}`}
           tooltip={this.props.tooltip}
           onClick={() => this.toggle()}
         >
@@ -69,7 +70,7 @@ class SidebarItem extends Component {
           ? <div className="content">
             {this.props.children}
           </div>
-          : ''}
+          : ""}
       </div>
     )
   }

@@ -2,8 +2,8 @@
 
 exports[`HeaderTitle component renders 1`] = `
 <div
-  className="css-16fd2cv"
+  className="hi"
 >
-  Hola Mundo
+  hi
 </div>
-`
+`;

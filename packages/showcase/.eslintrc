@@ -1,12 +1,21 @@
 {
-  "extends": "fbjs/strict",
+  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype"
+  ],
+  "extends": [
+    "fbjs/strict",
+    "plugin:flowtype/recommended"
+  ],
   "rules": {
-      "semi": 0,
-      "indent": ["error", 2],
-      "space-before-function-paren": ["error", {
-        "anonymous": "never",
-        "named": "never",
-        "asyncArrow": "never"
+    "max-len": ["error", 120],
+    "semi": 0,
+    "indent": ["error", 2],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "never"
     }],
+    "flowtype/define-flow-type": 1
   }
 }

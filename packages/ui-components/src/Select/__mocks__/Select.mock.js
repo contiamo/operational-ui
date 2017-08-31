@@ -1,3 +1,4 @@
+//@flow
 import type { option } from "../Select"
 
 export const options: Array<option> = [

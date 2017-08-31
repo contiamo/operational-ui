@@ -1,4 +1,6 @@
+// @flow
 import React, { Component } from "react"
+import type { ComponentType } from "react"
 
 import Tooltip from "./Tooltip"
 
@@ -14,24 +16,22 @@ import Tooltip from "./Tooltip"
     tooltipAnchor={'top'||'bottom'}
   />
 */
-
-const withTooltip = InputComponent =>
-  class extends Component {
-    props: {
-      children: mixed,
-      tooltip: string,
-      tooltipAnchor?: string,
-      tooltipColor?: string,
-    }
-
-    state: {
-      isTooltipActive: boolean,
-    } = {
-      isTooltipActive: false
-    }
-
+type Props = {
+  children: mixed,
+  tooltip: any,
+  tooltipAnchor?: string,
+  tooltipColor?: string,
+}
+type State = {
+  isTooltipActive: boolean,
+}
+const withTooltip = (InputComponent: ComponentType<any>) =>
+  class extends Component<Props, State> {
     static defaultProps = {
       tooltipAnchor: "top"
+    }
+    state = {
+      isTooltipActive: false
     }
 
     showTooltip() {
@@ -43,29 +43,21 @@ const withTooltip = InputComponent =>
     }
 
     render() {
-      const splitClassNames = this.props.className
-        ? [...this.props.className.split(" ")]
-        : []
-      const lastClassName = splitClassNames[splitClassNames.length - 1]
       return (
-        <div
-          className={`${lastClassName}_has-tooltip`}
+        <InputComponent
+          {...this.props}
           onMouseEnter={() => this.showTooltip()}
           onMouseLeave={() => this.hideTooltip()}
+          role={this.props.role || "status"}
+          tabIndex={this.props.tabIndex || -1}
         >
-          <InputComponent {...this.props}>
-            {this.props.children ? this.props.children : ""}
-            {this.props.tooltip && this.state.isTooltipActive
-              ? <Tooltip
-                active
-                color={this.props.tooltipColor}
-                anchor={this.props.tooltipAnchor}
-              >
-                {this.props.tooltip}
-              </Tooltip>
-              : ""}
-          </InputComponent>
-        </div>
+          {this.props.children ? this.props.children : ""}
+          {this.props.tooltip && this.state.isTooltipActive
+            ? <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
+              {this.props.tooltip}
+            </Tooltip>
+            : ""}
+        </InputComponent>
       )
     }
   }

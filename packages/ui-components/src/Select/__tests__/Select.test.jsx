@@ -1,5 +1,5 @@
 import React from "react"
-import { shallow, mount, render } from "enzyme"
+import { mount } from "enzyme"
 import { jsdom } from "jsdom"
 
 import { Select } from "../Select"
@@ -13,9 +13,7 @@ import { options } from "../__mocks__/Select.mock"
   - Press escape to close
   - Filters
 */
-global.document = jsdom(
-  "<!doctype html><html><body><div id=\"root\"></div></body></html>"
-)
+global.document = jsdom("<!doctype html><html><body><div id=\"root\"></div></body></html>")
 global.window = document.parentWindow
 
 describe("Select", () => {
@@ -27,17 +25,7 @@ describe("Select", () => {
   })
 
   it("Should render correctly", () => {
-    expect(
-      mount(
-        <Select
-          options={options}
-          disabled
-          filterable
-          multiple
-          placeholder="Select me"
-        />
-      )
-    ).toMatchSnapshot()
+    expect(mount(<Select options={options} disabled filterable multiple placeholder="Select me" />)).toMatchSnapshot()
   })
 
   it("Should be toggled on click", () => {
@@ -120,9 +108,7 @@ describe("Select", () => {
     comp.find(".Select__option").last().simulate("click")
 
     // Expect one less option to be selected.
-    expect(comp.state().value).toMatchObject([
-      { id: 1, label: "John", value: -10 }
-    ])
+    expect(comp.state().value).toMatchObject([{ id: 1, label: "John", value: -10 }])
   })
 
   it("Should filter options", () => {
@@ -138,11 +124,11 @@ describe("Select", () => {
 
   it("Should support asynchronous pre-filter hooks", async() => {
     const myFunc = () => new Promise(resolve => setTimeout(resolve, 10))
+    let filterInput
 
     comp = mount(<Select options={options} onFilter={myFunc} filterable />)
     comp.simulate("click")
-
-    const filterInput = comp.find(".Select__filter")
+    filterInput = comp.find(".Select__filter")
     filterInput.node.value = "hi"
     filterInput.simulate("change")
 

@@ -6,16 +6,18 @@
         "modules": false
       }
     ],
-    "flow",
-    "es2015-rollup"
+    "flow"
   ],
   "env": {
     "test": {
       "presets": [
-        "env",
-        {
-          "spec": true
-        }
+        [
+          "env",
+          {
+            "spec": true
+          }
+        ],
+        "stage-0"
       ]
     }
   }

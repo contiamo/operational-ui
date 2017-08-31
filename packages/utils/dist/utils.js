@@ -8,7 +8,6 @@ object-assign
 @license MIT
 */
 
-'use strict';
 /* eslint-disable no-unused-vars */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -94,8 +93,6 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
 };
 
 var sheet = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -328,8 +325,6 @@ function StyleSheet() {
 });
 });
 
-"use strict";
-
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -360,21 +355,6 @@ function camelize(string) {
 
 var camelize_1 = camelize;
 
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @typechecks
- */
-
-'use strict';
-
-
-
 var msPattern = /^-ms-/;
 
 /**
@@ -401,8 +381,6 @@ function camelizeStyleName(string) {
 var camelizeStyleName_1 = camelizeStyleName;
 
 var CSSProperty_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -557,8 +535,6 @@ var CSSProperty = {
 exports.default = CSSProperty;
 });
 
-"use strict";
-
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -595,20 +571,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 var emptyFunction_1 = emptyFunction;
-
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-'use strict';
-
-
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -662,8 +624,6 @@ if (process.env.NODE_ENV !== 'production') {
 var warning_1 = warning;
 
 var dangerousStyleValue_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -754,8 +714,6 @@ function dangerousStyleValue(name, value, component) {
 exports.default = dangerousStyleValue;
 });
 
-'use strict';
-
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -786,21 +744,6 @@ function hyphenate(string) {
 }
 
 var hyphenate_1 = hyphenate;
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @typechecks
- */
-
-'use strict';
-
-
 
 var msPattern$1 = /^ms-/;
 
@@ -838,8 +781,6 @@ var hyphenateStyleName_1 = hyphenateStyleName;
  * @typechecks static-only
  */
 
-'use strict';
-
 /**
  * Memoizes the return value of a function that accepts one string argument.
  */
@@ -857,8 +798,6 @@ function memoizeStringOnly(callback) {
 var memoizeStringOnly_1 = memoizeStringOnly;
 
 var CSSPropertyOperations = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1022,8 +961,6 @@ function createMarkupForStyles(styles, component) {
 });
 
 var clean_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1079,8 +1016,6 @@ function clean(input) {
 });
 
 var staticData = createCommonjsModule(function (module, exports) {
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1100,8 +1035,6 @@ module.exports = exports["default"];
 });
 
 var capitalizeString_1 = createCommonjsModule(function (module, exports) {
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1113,8 +1046,6 @@ module.exports = exports["default"];
 });
 
 var prefixProperty_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1138,8 +1069,6 @@ module.exports = exports['default'];
 });
 
 var prefixValue_1 = createCommonjsModule(function (module, exports) {
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1159,8 +1088,6 @@ module.exports = exports["default"];
 });
 
 var cursor_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1185,8 +1112,6 @@ module.exports = exports['default'];
 });
 
 var isPrefixedValue_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1201,8 +1126,6 @@ module.exports = exports['default'];
 });
 
 var crossFade_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1227,8 +1150,6 @@ module.exports = exports['default'];
 });
 
 var filter_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1253,8 +1174,6 @@ module.exports = exports['default'];
 });
 
 var flex_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1273,8 +1192,6 @@ module.exports = exports['default'];
 });
 
 var flexboxOld_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1315,8 +1232,6 @@ module.exports = exports['default'];
 });
 
 var gradient_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1343,8 +1258,6 @@ module.exports = exports['default'];
 });
 
 var imageSet_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1369,8 +1282,6 @@ module.exports = exports['default'];
 });
 
 var position_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1384,8 +1295,6 @@ module.exports = exports['default'];
 });
 
 var sizing_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1419,8 +1328,6 @@ function sizing(property, value) {
 module.exports = exports['default'];
 });
 
-'use strict';
-
 var uppercasePattern = /[A-Z]/g;
 var msPattern$2 = /^ms-/;
 var cache = {};
@@ -1437,8 +1344,6 @@ function hyphenateStyleName$1(string) {
 var hyphenateStyleName_1$2 = hyphenateStyleName$1;
 
 var hyphenateProperty_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1457,8 +1362,6 @@ module.exports = exports['default'];
 });
 
 var transition_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1553,8 +1456,6 @@ module.exports = exports['default'];
 });
 
 var prefixer_1 = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1637,8 +1538,6 @@ function prefixer(style) {
 });
 
 var plugins = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1746,8 +1645,6 @@ function prefixes(node) {
 });
 
 var hash = createCommonjsModule(function (module, exports) {
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1819,8 +1716,6 @@ function Umul32(n, m) {
 });
 
 var lib = createCommonjsModule(function (module, exports) {
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });

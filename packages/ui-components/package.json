@@ -10,12 +10,13 @@
     "package": "rollup -c",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint ./src/*/** --fix",
+    "lint": "eslint ./src/**/* --ext .js,.jsx --fix",
     "precommit": "flow && npm run test && npm run lint"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
+    "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-flow": "^6.23.0",
@@ -28,16 +29,15 @@
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.3.0",
-    "eslint-plugin-relay": "^0.0.15",
-    "flow-bin": "0.52.0",
+    "eslint-plugin-relay": "^0.0.17",
+    "flow-bin": "^0.53.1",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
-    "jest-enzyme": "^3.8.0",
+    "jest-enzyme": "^3.8.1",
     "jest-glamor-react": "^3.1.0",
     "jest-serializer-enzyme": "^1.0.0",
-    "lerna": "^2.1.0",
     "react-test-renderer": "^15.6.1",
-    "rollup": "^0.49.1",
+    "rollup": "^0.49.2",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-flow": "^1.1.1",
@@ -53,9 +53,10 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "glamorous": "^4.4.0",
+    "glamorous": "^4.6.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-icons": "^2.2.5",
     "react-router-dom": "^4.2.2",
     "rollup-plugin-alias": "^1.3.1",
@@ -66,7 +67,13 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

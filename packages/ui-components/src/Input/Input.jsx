@@ -13,7 +13,7 @@ type State = {
   value: string,
 }
 
-class Input extends Component<{}, Props, State> {
+class Input extends Component<Props, State> {
   state = {
     value: this.props.children || ""
   }
@@ -22,7 +22,7 @@ class Input extends Component<{}, Props, State> {
     className: ""
   }
 
-  updateValue = (e: SyntheticEvent) => {
+  updateValue = (e: SyntheticEvent<HTMLInputElement>) => {
     const { value } = { ...e.target }
     this.setState(() => ({ value }))
   }

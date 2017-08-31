@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: Sidebar Should render correctly 1`] = `
-<glamorous(bound )>
+<glamorous(Sidebar)>
   <glamorous(SidebarItem)
     label="Data Entry"
   >
@@ -127,5 +127,5 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Feather Icons
     </glamorous(_class)>
   </glamorous(SidebarItem)>
-</glamorous(bound )>
+</glamorous(Sidebar)>
 `;

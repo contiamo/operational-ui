@@ -2,7 +2,8 @@
 
 exports[`SidebarLink Should display a symbol to the right 1`] = `
 <glamorous.Div
-  className="undefined SideNavigationLink"
+  className="hi SideNavigationLink"
+  to=""
 >
   sup
   <div
@@ -15,7 +16,7 @@ exports[`SidebarLink Should display a symbol to the right 1`] = `
 
 exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`] = `
 <Link
-  className="undefined SideNavigationLink"
+  className="hi SideNavigationLink"
   replace={false}
   to="/route"
 >
@@ -25,7 +26,8 @@ exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`
 
 exports[`SidebarLink Should render correctly 1`] = `
 <glamorous.Div
-  className="undefined SideNavigationLink"
+  className="hi SideNavigationLink"
+  to=""
 >
   sup
 </glamorous.Div>

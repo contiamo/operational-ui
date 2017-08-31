@@ -1,7 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: SideNavigation Should render correctly 1`] = `
-<bound 
-  className="css-194y7vl"
-/>
+<glamorous(SideNavigation)
+  color="#0c0c1b"
+  css={[Function]}
+  expandOnHover={true}
+  fix={true}
+>
+  <glamorous(_class)
+    css={
+      Object {
+        "marginLeft": -6,
+      }
+    }
+    size={24}
+    tooltip="Contiamo"
+  >
+    <Link
+      replace={false}
+      to="/"
+    >
+      <glamorous.Img
+        alt="Contiamo"
+        src="https://www.contiamo.com/assets/favicon/favicon-32x32.png"
+      />
+    </Link>
+  </glamorous(_class)>
+  <glamorous(_class)
+    tooltip="Components"
+  >
+    <Link
+      replace={false}
+      to="/components"
+    >
+      <Box
+        color="#aaa"
+        size={20}
+      />
+      <div
+        className="SideNavigationItem__label"
+      >
+        Components
+      </div>
+    </Link>
+  </glamorous(_class)>
+  <glamorous(_class)
+    tooltip="Composed"
+  >
+    <Grid
+      color="#aaa"
+      size={20}
+    />
+    <div
+      className="SideNavigationItem__label"
+    >
+      Composed
+    </div>
+  </glamorous(_class)>
+  <glamorous(_class)
+    tooltip="Visualizations"
+  >
+    <BarChart2
+      color="#aaa"
+      size={20}
+    />
+    <div
+      className="SideNavigationItem__label"
+    >
+      Visualizations
+    </div>
+  </glamorous(_class)>
+  <glamorous.Div
+    css={
+      Object {
+        "flexGrow": 1,
+        "height": "100%",
+      }
+    }
+  />
+</glamorous(SideNavigation)>
 `;
