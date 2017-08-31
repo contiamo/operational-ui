@@ -2,7 +2,6 @@ node_modules
 .DS_Store
 .idea
 *.log
-flow-typed/npm
 dist
 coverage
 fonts
