@@ -9,7 +9,6 @@
     "build": "lerna bootstrap && webpack",
     "start": "webpack-dev-server",
     "lint": "eslint packages/**/* --ext .js,.jsx",
-    "precommit": "npm run lint"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -20,7 +19,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-relay": "0.0.8",
-    "husky": "^0.14.3",
     "lerna": "^2.1.0",
     "webpack-dev-server": "^2.7.1"
   },
