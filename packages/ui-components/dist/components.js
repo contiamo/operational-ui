@@ -1,4 +1,11 @@
-import React, { Component } from 'react';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = require('react');
+var React__default = _interopDefault(React);
 
 function unwrapExports$1 (x) {
 	return x && x.__esModule ? x['default'] : x;
@@ -14,6 +21,7 @@ object-assign
 @license MIT
 */
 
+'use strict';
 /* eslint-disable no-unused-vars */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -99,6 +107,8 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
 };
 
 var sheet = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -333,6 +343,8 @@ function StyleSheet() {
 
 unwrapExports$1(sheet);
 
+"use strict";
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -363,6 +375,21 @@ function camelize(string) {
 
 var camelize_1 = camelize;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
+
+'use strict';
+
+
+
 var msPattern = /^-ms-/;
 
 /**
@@ -389,6 +416,8 @@ function camelizeStyleName(string) {
 var camelizeStyleName_1 = camelizeStyleName;
 
 var CSSProperty_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -545,6 +574,8 @@ exports.default = CSSProperty;
 
 unwrapExports$1(CSSProperty_1);
 
+"use strict";
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -581,6 +612,20 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 var emptyFunction_1 = emptyFunction;
+
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+'use strict';
+
+
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -634,6 +679,8 @@ if (process.env.NODE_ENV !== 'production') {
 var warning_1$1 = warning;
 
 var dangerousStyleValue_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -726,6 +773,8 @@ exports.default = dangerousStyleValue;
 
 unwrapExports$1(dangerousStyleValue_1);
 
+'use strict';
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -756,6 +805,21 @@ function hyphenate(string) {
 }
 
 var hyphenate_1 = hyphenate;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
+
+'use strict';
+
+
 
 var msPattern$1 = /^ms-/;
 
@@ -793,6 +857,8 @@ var hyphenateStyleName_1 = hyphenateStyleName;
  * @typechecks static-only
  */
 
+'use strict';
+
 /**
  * Memoizes the return value of a function that accepts one string argument.
  */
@@ -810,6 +876,8 @@ function memoizeStringOnly(callback) {
 var memoizeStringOnly_1 = memoizeStringOnly;
 
 var CSSPropertyOperations = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -975,6 +1043,8 @@ function createMarkupForStyles(styles, component) {
 unwrapExports$1(CSSPropertyOperations);
 
 var clean_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1032,6 +1102,8 @@ function clean(input) {
 unwrapExports$1(clean_1);
 
 var staticData = createCommonjsModule$1(function (module, exports) {
+"use strict";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1053,6 +1125,8 @@ module.exports = exports["default"];
 unwrapExports$1(staticData);
 
 var capitalizeString_1 = createCommonjsModule$1(function (module, exports) {
+"use strict";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1066,6 +1140,8 @@ module.exports = exports["default"];
 unwrapExports$1(capitalizeString_1);
 
 var prefixProperty_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1091,6 +1167,8 @@ module.exports = exports['default'];
 unwrapExports$1(prefixProperty_1);
 
 var prefixValue_1 = createCommonjsModule$1(function (module, exports) {
+"use strict";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1112,6 +1190,8 @@ module.exports = exports["default"];
 unwrapExports$1(prefixValue_1);
 
 var cursor_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1138,6 +1218,8 @@ module.exports = exports['default'];
 unwrapExports$1(cursor_1);
 
 var isPrefixedValue_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1154,6 +1236,8 @@ module.exports = exports['default'];
 unwrapExports$1(isPrefixedValue_1);
 
 var crossFade_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1180,6 +1264,8 @@ module.exports = exports['default'];
 unwrapExports$1(crossFade_1);
 
 var filter_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1206,6 +1292,8 @@ module.exports = exports['default'];
 unwrapExports$1(filter_1);
 
 var flex_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1226,6 +1314,8 @@ module.exports = exports['default'];
 unwrapExports$1(flex_1);
 
 var flexboxOld_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1268,6 +1358,8 @@ module.exports = exports['default'];
 unwrapExports$1(flexboxOld_1);
 
 var gradient_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1296,6 +1388,8 @@ module.exports = exports['default'];
 unwrapExports$1(gradient_1);
 
 var imageSet_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1322,6 +1416,8 @@ module.exports = exports['default'];
 unwrapExports$1(imageSet_1);
 
 var position_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1337,6 +1433,8 @@ module.exports = exports['default'];
 unwrapExports$1(position_1);
 
 var sizing_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1372,6 +1470,8 @@ module.exports = exports['default'];
 
 unwrapExports$1(sizing_1);
 
+'use strict';
+
 var uppercasePattern = /[A-Z]/g;
 var msPattern$2 = /^ms-/;
 var cache = {};
@@ -1388,6 +1488,8 @@ function hyphenateStyleName$1(string) {
 var hyphenateStyleName_1$2 = hyphenateStyleName$1;
 
 var hyphenateProperty_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1408,6 +1510,8 @@ module.exports = exports['default'];
 unwrapExports$1(hyphenateProperty_1);
 
 var transition_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1504,6 +1608,8 @@ module.exports = exports['default'];
 unwrapExports$1(transition_1);
 
 var prefixer_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1588,6 +1694,8 @@ function prefixer(style) {
 unwrapExports$1(prefixer_1);
 
 var plugins = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1697,6 +1805,8 @@ function prefixes(node) {
 unwrapExports$1(plugins);
 
 var hash = createCommonjsModule$1(function (module, exports) {
+"use strict";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1770,6 +1880,8 @@ function Umul32(n, m) {
 unwrapExports$1(hash);
 
 var lib = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -3043,7 +3155,7 @@ var CHANNEL = '__glamorous__';
 var PropTypes = void 0;
 
 /* istanbul ignore next */
-if (parseFloat(React.version.slice(0, 4)) >= 15.5) {
+if (parseFloat(React__default.version.slice(0, 4)) >= 15.5) {
   /* istanbul ignore next */
   try {
     PropTypes = require('prop-types');
@@ -3053,7 +3165,7 @@ if (parseFloat(React.version.slice(0, 4)) >= 15.5) {
   }
 }
 /* istanbul ignore next */
-PropTypes = PropTypes || React.PropTypes;
+PropTypes = PropTypes || React__default.PropTypes;
 
 
 
@@ -3275,7 +3387,7 @@ function withTheme(ComponentToTheme) {
       key: 'render',
       value: function render() {
         if (createElement) {
-          return React.createElement(ComponentToTheme, _extends({}, this.props, this.state));
+          return React__default.createElement(ComponentToTheme, _extends({}, this.props, this.state));
         } else {
           // this allows us to effectively use the GlamorousComponent
           // as our `render` method without going through lifecycle hooks.
@@ -3287,7 +3399,7 @@ function withTheme(ComponentToTheme) {
       }
     }]);
     return ThemedComponent;
-  }(Component);
+  }(React.Component);
 
   ThemedComponent.propTypes = {
     theme: PropTypes.object
@@ -3493,11 +3605,11 @@ var ThemeProvider = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return this.props.children ? React.Children.only(this.props.children) : null;
+      return this.props.children ? React__default.Children.only(this.props.children) : null;
     }
   }]);
   return ThemeProvider;
-}(Component);
+}(React.Component);
 
 ThemeProvider.childContextTypes = defineProperty({}, CHANNEL, PropTypes.object.isRequired);
 
@@ -3633,6 +3745,8 @@ function createGlamorous$1(splitProps) {
     var rootEl = config.rootEl,
         displayName = config.displayName,
         shouldClassNameUpdate = config.shouldClassNameUpdate,
+        _config$filterProps = config.filterProps,
+        filterProps = _config$filterProps === undefined ? [] : _config$filterProps,
         _config$forwardProps = config.forwardProps,
         forwardProps = _config$forwardProps === undefined ? [] : _config$forwardProps,
         _config$propsAreCssOv = config.propsAreCssOverrides,
@@ -3689,7 +3803,7 @@ function createGlamorous$1(splitProps) {
           displayName: GlamorousComponent.displayName
         }) : this.className;
 
-        return React.createElement(GlamorousComponent.comp, _extends({
+        return React__default.createElement(GlamorousComponent.comp, _extends({
           ref: props.innerRef
         }, toForward, {
           className: this.className
@@ -3705,14 +3819,16 @@ function createGlamorous$1(splitProps) {
 
       function withComponent(newComp) {
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var fp = GlamorousComponent.forwardProps,
-            componentProperties = objectWithoutProperties(GlamorousComponent, ['forwardProps']);
+        var fwp = GlamorousComponent.forwardProps,
+            flp = GlamorousComponent.filterProps,
+            componentProperties = objectWithoutProperties(GlamorousComponent, ['forwardProps', 'filterProps']);
 
         return glamorous(_extends({}, componentProperties, {
           comp: newComp
         }), _extends({
-          // allows the forwardProps to be overridden
-          forwardProps: fp
+          // allows the forwardProps and filterProps to be overridden
+          forwardProps: fwp,
+          filterProps: flp
         }, options))();
       }
 
@@ -3745,6 +3861,7 @@ function createGlamorous$1(splitProps) {
         comp: comp,
         styles: styles,
         rootEl: rootEl,
+        filterProps: filterProps,
         forwardProps: forwardProps,
         displayName: displayName,
         propsToApply: basePropsToApply
@@ -3763,6 +3880,7 @@ function createGlamorous$1(splitProps) {
     var comp = _ref.comp,
         styles = _ref.styles,
         rootEl = _ref.rootEl,
+        filterProps = _ref.filterProps,
         forwardProps = _ref.forwardProps,
         displayName = _ref.displayName,
         basePropsToApply = _ref.propsToApply;
@@ -3778,8 +3896,10 @@ function createGlamorous$1(splitProps) {
       // component in glamorous
       comp: componentsComp,
       rootEl: rootEl || componentsComp,
-      // join forwardProps (for anyone doing: glamorous(glamorous.a({}), {}))
+      // join forwardProps and filterProps
+      // (for anyone doing: glamorous(glamorous.a({}), {}))
       forwardProps: when(comp.forwardProps, forwardProps),
+      filterProps: when(comp.filterProps, filterProps),
       // set the displayName to something that's slightly more
       // helpful than `GlamorousComponent` :)
       displayName: displayName || 'glamorous(' + getDisplayName(comp) + ')',
@@ -4178,6 +4298,8 @@ var reactHtmlAttributes$1 = Object.freeze({
 var reactHtmlAttributes$2 = ( reactHtmlAttributes$1 && reactHtmlAttributes ) || reactHtmlAttributes$1;
 
 var index$6 = createCommonjsModule(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -4266,6 +4388,7 @@ var shouldForwardProperty$1 = index$5(shouldForwardProperty);
 function splitProps(_ref, _ref2) {
   var propsAreCssOverrides = _ref2.propsAreCssOverrides,
       rootEl = _ref2.rootEl,
+      filterProps = _ref2.filterProps,
       forwardProps = _ref2.forwardProps;
   var cssProp = _ref.css,
       theme = _ref.theme,
@@ -4276,15 +4399,17 @@ function splitProps(_ref, _ref2) {
 
   var returnValue = { toForward: {}, cssProp: cssProp, cssOverrides: {} };
   if (!propsAreCssOverrides) {
-    if (typeof rootEl !== 'string') {
-      // if it's not a string, then we can forward everything
-      // (because it's a component)
+    if (typeof rootEl !== 'string' && filterProps.length === 0) {
+      // if it's not a string and filterProps is empty,
+      // then we can forward everything (because it's a component)
       returnValue.toForward = rest;
       return returnValue;
     }
   }
   return Object.keys(rest).reduce(function (split, propName) {
-    if (forwardProps.indexOf(propName) !== -1 || shouldForwardProperty$1(rootEl, propName)) {
+    if (filterProps.indexOf(propName) !== -1) {
+      return split;
+    } else if (forwardProps.indexOf(propName) !== -1 || shouldForwardProperty$1(rootEl, propName)) {
       split.toForward[propName] = rest[propName];
     } else if (propsAreCssOverrides) {
       split.cssOverrides[propName] = rest[propName];
@@ -4344,133 +4469,19 @@ glamorous.default = glamorous;
 
 var Div = glamorous['Div'];
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-
-
-
-
-var asyncGenerator = function () {
-  function AwaitValue(value) {
-    this.value = value;
-  }
-
-  function AsyncGenerator(gen) {
-    var front, back;
-
-    function send(key, arg) {
-      return new Promise(function (resolve, reject) {
-        var request = {
-          key: key,
-          arg: arg,
-          resolve: resolve,
-          reject: reject,
-          next: null
-        };
-
-        if (back) {
-          back = back.next = request;
-        } else {
-          front = back = request;
-          resume(key, arg);
-        }
-      });
-    }
-
-    function resume(key, arg) {
-      try {
-        var result = gen[key](arg);
-        var value = result.value;
-
-        if (value instanceof AwaitValue) {
-          Promise.resolve(value.value).then(function (arg) {
-            resume("next", arg);
-          }, function (arg) {
-            resume("throw", arg);
-          });
-        } else {
-          settle(result.done ? "return" : "normal", result.value);
-        }
-      } catch (err) {
-        settle("throw", err);
-      }
-    }
-
-    function settle(type, value) {
-      switch (type) {
-        case "return":
-          front.resolve({
-            value: value,
-            done: true
-          });
-          break;
-
-        case "throw":
-          front.reject(value);
-          break;
-
-        default:
-          front.resolve({
-            value: value,
-            done: false
-          });
-          break;
-      }
-
-      front = front.next;
-
-      if (front) {
-        resume(front.key, front.arg);
-      } else {
-        back = null;
-      }
-    }
-
-    this._invoke = send;
-
-    if (typeof gen.return !== "function") {
-      this.return = undefined;
-    }
-  }
-
-  if (typeof Symbol === "function" && Symbol.asyncIterator) {
-    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-      return this;
-    };
-  }
-
-  AsyncGenerator.prototype.next = function (arg) {
-    return this._invoke("next", arg);
-  };
-
-  AsyncGenerator.prototype.throw = function (arg) {
-    return this._invoke("throw", arg);
-  };
-
-  AsyncGenerator.prototype.return = function (arg) {
-    return this._invoke("return", arg);
-  };
-
-  return {
-    wrap: function (fn) {
-      return function () {
-        return new AsyncGenerator(fn.apply(this, arguments));
-      };
-    },
-    await: function (value) {
-      return new AwaitValue(value);
-    }
-  };
-}();
+var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function createCommonjsModule$2(fn, module) {
   return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
 /* eslint-disable no-unused-vars */
 var getOwnPropertySymbols$1 = Object.getOwnPropertySymbols;
 var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
@@ -4555,6 +4566,8 @@ var objectAssign$2 = shouldUseNative$1() ? Object.assign : function (target, sou
 };
 
 var sheet$2 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -4795,6 +4808,8 @@ var sheet$2 = createCommonjsModule$2(function (module, exports) {
   });
 });
 
+"use strict";
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -4825,6 +4840,19 @@ function camelize$2(string) {
 
 var camelize_1$2 = camelize$2;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
+
+'use strict';
+
 var msPattern$3 = /^-ms-/;
 
 /**
@@ -4851,6 +4879,8 @@ function camelizeStyleName$1(string) {
 var camelizeStyleName_1$2 = camelizeStyleName$1;
 
 var CSSProperty_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5005,6 +5035,8 @@ var CSSProperty_1$1 = createCommonjsModule$2(function (module, exports) {
   exports.default = CSSProperty;
 });
 
+"use strict";
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -5041,6 +5073,18 @@ emptyFunction$2.thatReturnsArgument = function (arg) {
 };
 
 var emptyFunction_1$2 = emptyFunction$2;
+
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+'use strict';
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -5094,6 +5138,8 @@ if (process.env.NODE_ENV !== 'production') {
 var warning_1$3 = warning$1;
 
 var dangerousStyleValue_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5182,6 +5228,8 @@ var dangerousStyleValue_1$1 = createCommonjsModule$2(function (module, exports) 
   exports.default = dangerousStyleValue;
 });
 
+'use strict';
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -5213,6 +5261,19 @@ function hyphenate$2(string) {
 
 var hyphenate_1$2 = hyphenate$2;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
+
+'use strict';
+
 var msPattern$1$1 = /^ms-/;
 
 /**
@@ -5238,6 +5299,20 @@ function hyphenateStyleName$2(string) {
 var hyphenateStyleName_1$4 = hyphenateStyleName$2;
 
 /**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ *
+ * @typechecks static-only
+ */
+
+'use strict';
+
+/**
  * Memoizes the return value of a function that accepts one string argument.
  */
 
@@ -5254,6 +5329,8 @@ function memoizeStringOnly$1(callback) {
 var memoizeStringOnly_1$2 = memoizeStringOnly$1;
 
 var CSSPropertyOperations$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5409,25 +5486,27 @@ var CSSPropertyOperations$1 = createCommonjsModule$2(function (module, exports) 
 });
 
 var clean_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
 
-  var _typeof$$1 = typeof Symbol === "function" && _typeof(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === 'undefined' ? 'undefined' : _typeof(obj);
+  var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
   } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof(obj);
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof2(obj);
   };
 
   exports.default = clean;
   // Returns true for null, false, undefined and {}
   function isFalsy(value) {
-    return value === null || value === undefined || value === false || (typeof value === 'undefined' ? 'undefined' : _typeof$$1(value)) === 'object' && Object.keys(value).length === 0;
+    return value === null || value === undefined || value === false || (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && Object.keys(value).length === 0;
   }
 
   function cleanObject(object) {
     if (isFalsy(object)) return null;
-    if ((typeof object === 'undefined' ? 'undefined' : _typeof$$1(object)) !== 'object') return object;
+    if ((typeof object === 'undefined' ? 'undefined' : _typeof(object)) !== 'object') return object;
 
     var acc = {},
         keys = Object.keys(object),
@@ -5468,6 +5547,8 @@ var clean_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var staticData$2 = createCommonjsModule$2(function (module, exports) {
+  "use strict";
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5487,6 +5568,8 @@ var staticData$2 = createCommonjsModule$2(function (module, exports) {
 });
 
 var capitalizeString_1$1 = createCommonjsModule$2(function (module, exports) {
+  "use strict";
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5498,6 +5581,8 @@ var capitalizeString_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var prefixProperty_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5521,6 +5606,8 @@ var prefixProperty_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var prefixValue_1$1 = createCommonjsModule$2(function (module, exports) {
+  "use strict";
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5540,6 +5627,8 @@ var prefixValue_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var cursor_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5564,6 +5653,8 @@ var cursor_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var isPrefixedValue_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5578,6 +5669,8 @@ var isPrefixedValue_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var crossFade_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5602,6 +5695,8 @@ var crossFade_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var filter_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5626,6 +5721,8 @@ var filter_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var flex_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5644,6 +5741,8 @@ var flex_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var flexboxOld_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5684,6 +5783,8 @@ var flexboxOld_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var gradient_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5710,6 +5811,8 @@ var gradient_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var imageSet_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5734,6 +5837,8 @@ var imageSet_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var position_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5747,6 +5852,8 @@ var position_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var sizing_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5780,6 +5887,8 @@ var sizing_1$1 = createCommonjsModule$2(function (module, exports) {
   module.exports = exports['default'];
 });
 
+'use strict';
+
 var uppercasePattern$1 = /[A-Z]/g;
 var msPattern$2$1 = /^ms-/;
 var cache$1 = {};
@@ -5791,6 +5900,8 @@ function hyphenateStyleName$1$1(string) {
 var hyphenateStyleName_1$2$1 = hyphenateStyleName$1$1;
 
 var hyphenateProperty_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5809,6 +5920,8 @@ var hyphenateProperty_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var transition_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5898,6 +6011,8 @@ var transition_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var prefixer_1$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -5956,6 +6071,8 @@ var prefixer_1$1 = createCommonjsModule$2(function (module, exports) {
 });
 
 var plugins$2 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -6067,6 +6184,8 @@ var plugins$2 = createCommonjsModule$2(function (module, exports) {
 });
 
 var hash$2 = createCommonjsModule$2(function (module, exports) {
+  "use strict";
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -6138,6 +6257,8 @@ var hash$2 = createCommonjsModule$2(function (module, exports) {
 });
 
 var lib$1 = createCommonjsModule$2(function (module, exports) {
+  'use strict';
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
@@ -7447,7 +7568,7 @@ var tinycolor = createCommonjsModule$2(function (module) {
     // If input is an object, force 1 into "1.0" to handle ratios properly
     // String input requires "1.0" as input, so 1 will be treated as 1
     tinycolor.fromRatio = function (color, opts) {
-      if ((typeof color === 'undefined' ? 'undefined' : _typeof(color)) == "object") {
+      if ((typeof color === 'undefined' ? 'undefined' : _typeof2(color)) == "object") {
         var newColor = {};
         for (var i in color) {
           if (color.hasOwnProperty(i)) {
@@ -7493,7 +7614,7 @@ var tinycolor = createCommonjsModule$2(function (module) {
         color = stringInputToObject(color);
       }
 
-      if ((typeof color === 'undefined' ? 'undefined' : _typeof(color)) == "object") {
+      if ((typeof color === 'undefined' ? 'undefined' : _typeof2(color)) == "object") {
         if (isValidCSSUnit(color.r) && isValidCSSUnit(color.g) && isValidCSSUnit(color.b)) {
           rgb = rgbToRgb(color.r, color.g, color.b);
           ok = true;
@@ -8379,19 +8500,18 @@ var HeaderItem = function HeaderItem(_ref) {
   var className = _ref.className,
       children = _ref.children,
       onClick = _ref.onClick;
-  return React.createElement(
+  return React__default.createElement(
     "div",
-    { onClick: onClick, className: className },
+    { tabIndex: "-1", role: "button", onClick: onClick, className: className },
     children
   );
 };
-
 var style$2 = function style(_ref2) {
   var theme = _ref2.theme,
       active = _ref2.active;
 
-  var opacity = 0.1;
-  var activeBackground = "rgba(0, 0, 0, " + opacity * 2 + ")";
+  var opacity = 0.1,
+      activeBackground = "rgba(0, 0, 0, " + opacity * 2 + ")";
 
   return {
     display: "flex",
@@ -8434,18 +8554,17 @@ var HeaderItem$1 = glamorous(HeaderItem)(style$2);
 var HeaderTitle = function HeaderTitle(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React.createElement(
-    'div',
+  return React__default.createElement(
+    "div",
     { className: className },
     children
   );
 };
-
 var style$3 = function style(_ref2) {
   var theme = _ref2.theme;
   return {
     marginRight: theme.spacing,
-    fontSize: '1.7rem',
+    fontSize: "1.7rem",
     fontWeight: 600
   };
 };
@@ -8454,17 +8573,16 @@ var HeaderTitle$1 = glamorous(HeaderTitle)(style$3);
 
 var HeaderSeparator = function HeaderSeparator(_ref) {
   var className = _ref.className;
-  return React.createElement('div', { className: className });
+  return React__default.createElement("div", { className: className });
 };
-
 var style$4 = function style(_ref2) {
   var theme = _ref2.theme;
   return {
     width: 5,
     height: 5,
-    margin: '0 ' + theme.spacing + 'px',
-    borderRadius: '50%',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+    margin: "0 " + theme.spacing + "px",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0, 0, 0, 0.2)"
   };
 };
 
@@ -8473,13 +8591,12 @@ var HeaderSeparator$1 = glamorous(HeaderSeparator)(style$4);
 var Header = function Header(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React.createElement(
+  return React__default.createElement(
     "div",
     { className: className },
     children
   );
 };
-
 var style = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color;
@@ -8498,6 +8615,703 @@ var style = function style(_ref2) {
 
 var Header$1 = glamorous(Header)(style);
 
+var _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var getTooltipPosition = function getTooltipPosition(anchor) {
+  var position = {};
+  switch (anchor) {
+    case "bottom":
+      position.bottom = 0;
+      break;
+    default:
+      position.top = "50%";
+      position.transform = "translateY(-50%)";
+      break;
+  }
+  return position;
+};
+var getCaretPosition = function getCaretPosition(anchor) {
+  return function (theme) {
+    var size = 5,
+        caret = { left: size * -2, borderWidth: size };
+
+    switch (anchor) {
+      case "bottom":
+        caret.bottom = theme.spacing;
+        break;
+      case "middle":
+      default:
+        caret.top = "50%";
+        caret.transform = "translateY(-50%)";
+        break;
+    }
+    return caret;
+  };
+};
+
+var style$7 = (function (_ref) {
+  var theme = _ref.theme,
+      color = _ref.color,
+      anchor = _ref.anchor;
+
+  var backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "black";
+
+  return _extends$3({
+    position: "absolute"
+  }, getTooltipPosition(anchor), {
+    left: "calc(100% + " + (theme.spacing || 0) + "px)",
+    zIndex: (theme.baseZIndex || 0) + 1000,
+    width: "fit-content",
+    maxWidth: 200,
+    opacity: 0, // Initially, they're hidden...
+    transition: ".07s opacity ease", // ...for 0.07 seconds.
+    padding: theme.spacing ? theme.spacing / 2 : 8,
+    borderRadius: 4,
+    wordWrap: "break-word",
+    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
+    backgroundColor: backgroundColor,
+    color: readableTextColor(backgroundColor)(["black", "white"]),
+
+    // This pseudo-element extends the clickable area of the far-away tooltip.
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: theme.spacing && theme.spacing * -2,
+      display: "block",
+      width: theme.spacing && theme.spacing * 2,
+      height: "100%"
+    },
+
+    // They say behind every great tooltip is a great caret.
+    "&::before": _extends$3({
+      content: "''",
+      position: "absolute"
+    }, getCaretPosition(anchor || "top")(theme), {
+      zIndex: (theme.baseZIndex || 0) * -1,
+      width: 0,
+      height: 0,
+      borderColor: "transparent",
+      borderStyle: "solid",
+      borderRightColor: backgroundColor
+    }),
+
+    "&.active": {
+      opacity: 1
+    }
+  });
+});
+
+var _createClass$1 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn$1(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+  The <Tooltip /> component.
+
+  The problem:
+  Say you have a container with `overflow: hidden`.
+  Say this container has items that need to show tooltips, that appear
+  _outside_ of page flow, and are not clipped by the overflow.
+
+  The solution is to use `position: fixed`, with dynamically calculated
+  positions at the time of mounting, but React makes this a little
+  tricky, especially if you want a simple API.
+
+  This solution:
+  A tooltip is placed in an absolute position, relative to its parent,
+  even risking getting cut off to overflow.
+
+  At the time of mounting, this _perfect_ position of the tooltip is captured
+  relative to `document`. These coordinates are then set as CSS properties
+  on the tooltip, along with `position: fixed` and all is well with the
+  world. 🌈
+*/
+var Tooltip = function (_Component) {
+  _inherits$1(Tooltip, _Component);
+
+  function Tooltip() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck$1(this, Tooltip);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn$1(this, (_ref = Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call.apply(_ref, [this].concat(args))), _this), _this.state = { position: {} }, _temp), _possibleConstructorReturn$1(_this, _ret);
+  }
+
+  _createClass$1(Tooltip, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var position = this.getPosition();
+      this.setState(function () {
+        return {
+          position: position
+        };
+      });
+    }
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      var rect = this.tooltip.getBoundingClientRect(),
+          top = rect.top,
+
+      /**
+      The following style properties can only properly be set
+      after the component mounts.
+       Please read the description of this component at the top of the file
+      if you haven't already to find out why.
+      */position = {
+        position: "fixed",
+        transform: "none",
+        top: top,
+        left: rect && rect.left || 0
+      };
+      if (this.props.anchor === "bottom") {
+        position.bottom = "auto";
+      }
+      return position;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return React__default.createElement(
+        "div",
+        {
+          ref: function ref(tooltip) {
+            return _this2.tooltip = tooltip || document.createElement("div");
+          },
+          className: this.props.className + " Tooltip" + (this.props.active ? " active" : ""),
+          style: this.state.position
+        },
+        this.props.children ? this.props.children : ""
+      );
+    }
+  }]);
+
+  return Tooltip;
+}(React.Component);
+
+Tooltip.defaultProps = {
+  anchor: "top",
+  active: false
+};
+
+var Tooltip$1 = glamorous(Tooltip)(style$7);
+ // for testing.
+
+var _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+  A simple Higher-Order Component (HOC) that you can wrap with any custom
+  component in order to make it Tooltippable. This should JustWork™.
+
+  USAGE:
+  import withTooltip from './withTooltip'
+  const MyComponentWithTooltip = withTooltip(MyComponent)
+  <MyComponentWithTooltip
+    tooltip={<div>ANYTHING</div>}
+    tooltipAnchor={'top'||'bottom'}
+  />
+*/
+
+var withTooltip = function withTooltip(InputComponent) {
+  var _class, _temp2;
+
+  return _temp2 = _class = function (_Component) {
+    _inherits(_class, _Component);
+
+    function _class() {
+      var _ref;
+
+      var _temp, _this, _ret;
+
+      _classCallCheck(this, _class);
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = _class.__proto__ || Object.getPrototypeOf(_class)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+        isTooltipActive: false
+      }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(_class, [{
+      key: "showTooltip",
+      value: function showTooltip() {
+        this.setState(function () {
+          return { isTooltipActive: true };
+        });
+      }
+    }, {
+      key: "hideTooltip",
+      value: function hideTooltip() {
+        this.setState(function () {
+          return { isTooltipActive: false };
+        });
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this2 = this;
+
+        return React__default.createElement(
+          InputComponent,
+          _extends$2({}, this.props, {
+            onMouseEnter: function onMouseEnter() {
+              return _this2.showTooltip();
+            },
+            onMouseLeave: function onMouseLeave() {
+              return _this2.hideTooltip();
+            },
+            role: this.props.role || "status",
+            tabIndex: this.props.tabIndex || -1
+          }),
+          this.props.children ? this.props.children : "",
+          this.props.tooltip && this.state.isTooltipActive ? React__default.createElement(
+            Tooltip$1,
+            { active: true, color: this.props.tooltipColor, anchor: this.props.tooltipAnchor },
+            this.props.tooltip
+          ) : ""
+        );
+      }
+    }]);
+
+    return _class;
+  }(React.Component), _class.defaultProps = {
+    tooltipAnchor: "top"
+  }, _temp2;
+};
+
+var SideNavigationItem = function SideNavigationItem(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      onClick = _ref.onClick;
+  return React__default.createElement(
+    "div",
+    { className: className + " SideNavigationItem", onClick: onClick, role: "button", tabIndex: "-1" },
+    children
+  );
+};
+var style$6 = function style(_ref2) {
+  var theme = _ref2.theme;
+  return {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 2,
+    cursor: "pointer",
+
+    "&_has-tooltip + &_has-tooltip ": {
+      marginTop: theme.spacing ? theme.spacing * 2 : 16
+    },
+
+    ":first-child": {
+      marginTop: 0,
+      marginBottom: theme.spacing ? theme.spacing * 2 : 16
+    }
+  };
+};
+
+var SideNavigationItem$1 = glamorous(withTooltip(SideNavigationItem))(style$6);
+
+var SideNavigationLink = function SideNavigationLink(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      onClick = _ref.onClick;
+  return React__default.createElement(
+    "div",
+    { className: className, onClick: onClick, role: "button", tabIndex: "-1" },
+    children
+  );
+};
+var style$8 = function style(_ref2) {
+  var theme = _ref2.theme,
+      color = _ref2.color;
+
+  var backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.greys && theme.greys["100"];
+
+  return {
+    position: "relative",
+    zIndex: (theme.baseZIndex || 0) + 1,
+    margin: "0 " + theme.spacing * -0.5 + "px",
+    padding: theme.spacing + "px",
+    minWidth: 200,
+    borderRadius: 2,
+    transition: ".1s background-color ease",
+    backgroundColor: backgroundColor,
+    color: readableTextColor(backgroundColor)(["black", "white"]),
+
+    "& + &": {
+      borderTop: "1px solid " + (theme.greys && theme.greys["100"])
+    },
+
+    ":hover": {
+      backgroundColor: darken(backgroundColor)(10)
+    },
+
+    ":first-child": {
+      marginTop: theme.spacing * -0.5 + "px"
+    },
+
+    ":last-child": {
+      marginBottom: theme.spacing * -0.5 + "px"
+    }
+  };
+};
+
+var SideNavigationLink$1 = glamorous(SideNavigationLink)(style$8);
+ // for testing.
+
+var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var SideNavigation = function SideNavigation(_ref) {
+  var className = _ref.className,
+      children = _ref.children;
+  return React__default.createElement(
+    "div",
+    { className: className },
+    children
+  );
+};
+var style$5 = function style(_ref2) {
+  var theme = _ref2.theme,
+      color = _ref2.color,
+      fix = _ref2.fix,
+      expandOnHover = _ref2.expandOnHover,
+      _ref2$expandedWidth = _ref2.expandedWidth,
+      expandedWidth = _ref2$expandedWidth === undefined ? 280 : _ref2$expandedWidth,
+      _ref2$width = _ref2.width,
+      width = _ref2$width === undefined ? 64 : _ref2$width;
+
+  var backgroundColor = color ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") : theme.colors && theme.colors.primary,
+      hoverWidth = expandOnHover ? {
+    transition: ".3s width ease",
+    willChange: "width",
+    "&:hover": {
+      width: expandedWidth
+    },
+    "&:hover .Tooltip": {
+      display: "none"
+    }
+  } : {};
+
+  return _extends$1({
+    position: fix ? "fixed" : "relative",
+    zIndex: (theme.baseZIndex || 0) + 100,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: width,
+    height: "100vh",
+    overflow: "hidden",
+    padding: theme.spacing * 1.3 || 0,
+    backgroundColor: backgroundColor,
+    color: readableTextColor(backgroundColor)(["black", "white"])
+  }, hoverWidth);
+};
+
+SideNavigation.defaultProps = {
+  expandOnHover: false,
+  expandedWidth: 280,
+  width: 64,
+  fix: false
+};
+
+var SideNavigation$1 = glamorous(SideNavigation)(style$5);
+
+var _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var style$10 = (function (_ref) {
+  var theme = _ref.theme,
+      children = _ref.children;
+
+  // If we have children, style a caret.
+  var caret = children ? {
+    content: "\"\"",
+    display: "block",
+    width: 0,
+    height: 0,
+    marginLeft: "auto",
+    border: "4px solid transparent",
+    borderLeftColor: theme.greys ? theme.greys["30"] : "#ccc",
+    transition: ".15s transform ease"
+  } : {};
+
+  return {
+    position: "relative",
+
+    "& .header": {
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
+      borderTop: "1px solid",
+      borderTopColor: theme.greys ? theme.greys["20"] : "#eee",
+      cursor: "pointer",
+      backgroundColor: theme.greys ? theme.greys.white : "white"
+    },
+
+    "& .header:hover": {
+      backgroundColor: theme.greys && theme.greys["10"]
+    },
+
+    "&.open .header": {
+      borderBottom: "1px solid",
+      borderBottomColor: theme.greys ? theme.greys["30"] : "#ccc"
+    },
+
+    // Caret styles begin here.
+    "& .header::after": _extends$4({}, caret),
+
+    "&.open .header.open::after": {
+      // rotate the caret to face down when an item is open.
+      transform: "translateX(-2px) rotate(90deg)"
+    },
+
+    // Spinner for async items replaces a caret.
+    "&.updating .header::after": {
+      width: 16,
+      height: 16,
+      border: 0,
+      borderRadius: "50%",
+      boxShadow: "1px 0px 0px 0px " + (theme.greys ? theme.greys["70"] : "#666") + " inset",
+      animation: ".7s " + spin + " linear infinite"
+    },
+
+    "& .content": {
+      position: "relative",
+      paddingLeft: theme.spacing
+    },
+
+    // This pseudo-element creates a visible indent for structure clarity.
+    "& .content::after": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      display: "block",
+      width: theme.spacing,
+      height: "100%",
+      borderRight: "1px solid " + (theme.greys ? theme.greys["30"] : "#ccc"),
+      backgroundColor: theme.greys ? theme.greys["10"] : "#eee"
+    }
+  };
+});
+
+var _createClass$2 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck$2(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn$2(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SidebarItem = function (_Component) {
+  _inherits$2(SidebarItem, _Component);
+
+  function SidebarItem() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck$2(this, SidebarItem);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn$2(this, (_ref = SidebarItem.__proto__ || Object.getPrototypeOf(SidebarItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      open: _this.props && _this.props.open,
+      updating: false
+    }, _temp), _possibleConstructorReturn$2(_this, _ret);
+  }
+
+  _createClass$2(SidebarItem, [{
+    key: "toggle",
+    value: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (this.props.children) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return", false);
+
+              case 2:
+                this.setState(function () {
+                  return { updating: true };
+                });
+                // If it is closed,
+
+                if (!(this.props.onClick && !this.state.open)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 6;
+                return this.props.onClick();
+
+              case 6:
+                this.setState(function (prevState) {
+                  return {
+                    open: !prevState.open,
+                    updating: false
+                  };
+                });
+                return _context.abrupt("return", true);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function toggle() {
+        return _ref2.apply(this, arguments);
+      }
+
+      return toggle;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      /**
+        Only the header should have a tooltip, else the tooltip will show
+        even when the cursor is over the children... who may also have their
+        own tooltips.
+      */
+      var HeaderWithTooltip = withTooltip(Div);
+      return React__default.createElement(
+        "div",
+        {
+          className: this.props.className + " " + (this.state.updating ? "updating" : "") + " " + (this.state.open ? "open" : "")
+        },
+        React__default.createElement(
+          HeaderWithTooltip,
+          {
+            className: "header " + (this.state.open ? "open" : ""),
+            tooltip: this.props.tooltip,
+            onClick: function onClick() {
+              return _this2.toggle();
+            }
+          },
+          this.props.label
+        ),
+        this.state.open ? React__default.createElement(
+          "div",
+          { className: "content" },
+          this.props.children
+        ) : ""
+      );
+    }
+  }]);
+
+  return SidebarItem;
+}(React.Component);
+
+SidebarItem.defaultProps = {
+  children: "",
+  open: false,
+  tooltip: false
+};
+
+
+var SidebarItem$1 = glamorous(SidebarItem)(style$10);
+
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var __DEV__ = process.env.NODE_ENV !== 'production';
+
+var warning$2 = function() {};
+
+if (__DEV__) {
+  warning$2 = function(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error(
+        '`warning(condition, format, ...args)` requires a warning ' +
+        'message argument'
+      );
+    }
+
+    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+      throw new Error(
+        'The warning format should be able to uniquely identify this ' +
+        'warning. Please, use a more descriptive format than: ' + format
+      );
+    }
+
+    if (!condition) {
+      var argIndex = 0;
+      var message = 'Warning: ' +
+        format.replace(/%s/g, function() {
+          return args[argIndex++];
+        });
+      if (typeof console !== 'undefined') {
+        console.error(message);
+      }
+      try {
+        // This error was thrown as a convenience so that you can use this stack
+        // to find the callsite that caused this warning to fire.
+        throw new Error(message);
+      } catch(x) {}
+    }
+  };
+}
+
+var warning_1$4 = warning$2;
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -8507,6 +9321,8 @@ var Header$1 = glamorous(Header)(style);
  * of patent rights can be found in the PATENTS file in the same directory.
  *
  */
+
+'use strict';
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -8561,13 +9377,26 @@ var invariant_1$1 = invariant;
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+'use strict';
+
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
 if (process.env.NODE_ENV !== 'production') {
   var invariant$1 = invariant_1$1;
-  var warning$2 = warning_1$1;
+  var warning$4 = warning_1$1;
   var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
   var loggedTypeFailures = {};
 }
@@ -8599,7 +9428,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         } catch (ex) {
           error = ex;
         }
-        warning$2(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        warning$4(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
         if (error instanceof Error && !(error.message in loggedTypeFailures)) {
           // Only monitor this failure once because there tends to be a lot of the
           // same error.
@@ -8607,7 +9436,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
           var stack = getStack ? getStack() : '';
 
-          warning$2(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+          warning$4(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
         }
       }
     }
@@ -8615,6 +9444,24 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 var checkPropTypes_1 = checkPropTypes;
+
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+
+
+
+
+
+
 
 var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -9111,6 +9958,21 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+
+
+
+
 var factoryWithThrowingShims = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
     if (secret === ReactPropTypesSecret_1) {
@@ -9189,711 +10051,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 });
 
-var _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var getTooltipPosition = function getTooltipPosition(anchor) {
-  var position = {};
-  switch (anchor) {
-    case "bottom":
-      position.bottom = 0;
-      break;
-    default:
-      position.top = "50%";
-      position.transform = "translateY(-50%)";
-      break;
-  }
-  return position;
-};
-var getCaretPosition = function getCaretPosition(anchor) {
-  return function (theme) {
-    var size = 5,
-        caret = { left: size * -2, borderWidth: size };
-
-    switch (anchor) {
-      case "bottom":
-        caret.bottom = theme.spacing;
-        break;
-      case "middle":
-      default:
-        caret.top = "50%";
-        caret.transform = "translateY(-50%)";
-        break;
-    }
-    return caret;
-  };
-};
-
-var style$7 = (function (_ref) {
-  var theme = _ref.theme,
-      color = _ref.color,
-      anchor = _ref.anchor;
-
-  var backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "black";
-
-  return _extends$3({
-    position: "absolute"
-  }, getTooltipPosition(anchor), {
-    left: "calc(100% + " + (theme.spacing || 0) + "px)",
-    zIndex: (theme.baseZIndex || 0) + 1000,
-    width: "fit-content",
-    maxWidth: 200,
-    opacity: 0, // Initially, they're hidden...
-    transition: ".07s opacity ease", // ...for 0.07 seconds.
-    padding: theme.spacing ? theme.spacing / 2 : 8,
-    borderRadius: 4,
-    wordWrap: "break-word",
-    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
-    backgroundColor: backgroundColor,
-    color: readableTextColor(backgroundColor)(["black", "white"]),
-
-    // This pseudo-element extends the clickable area of the far-away tooltip.
-    "&::after": {
-      content: "''",
-      position: "absolute",
-      top: 0,
-      left: theme.spacing && theme.spacing * -2,
-      display: "block",
-      width: theme.spacing && theme.spacing * 2,
-      height: "100%"
-    },
-
-    // They say behind every great tooltip is a great caret.
-    "&::before": _extends$3({
-      content: "''",
-      position: "absolute"
-    }, getCaretPosition(anchor || "top")(theme), {
-      zIndex: (theme.baseZIndex || 0) * -1,
-      width: 0,
-      height: 0,
-      borderColor: "transparent",
-      borderStyle: "solid",
-      borderRightColor: backgroundColor
-    }),
-
-    "&.active": {
-      opacity: 1
-    }
-  });
-});
-
-var _createClass$1 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn$1(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
-  The <Tooltip /> component.
-
-  The problem:
-  Say you have a container with `overflow: hidden`.
-  Say this container has items that need to show tooltips, that appear
-  _outside_ of page flow, and are not clipped by the overflow.
-
-  The solution is to use `position: fixed`, with dynamically calculated
-  positions at the time of mounting, but React makes this a little
-  tricky, especially if you want a simple API.
-
-  This solution:
-  A tooltip is placed in an absolute position, relative to its parent,
-  even risking getting cut off to overflow.
-
-  At the time of mounting, this _perfect_ position of the tooltip is captured
-  relative to `document`. These coordinates are then set as CSS properties
-  on the tooltip, along with `position: fixed` and all is well with the
-  world. 🌈
-*/
-var Tooltip = function (_Component) {
-  _inherits$1(Tooltip, _Component);
-
-  function Tooltip() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck$1(this, Tooltip);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn$1(this, (_ref = Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call.apply(_ref, [this].concat(args))), _this), _this.state = { position: {} }, _temp), _possibleConstructorReturn$1(_this, _ret);
-  }
-
-  _createClass$1(Tooltip, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var position = this.getPosition();
-      this.setState(function () {
-        return {
-          position: position
-        };
-      });
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      var rect = this.tooltip.getBoundingClientRect();
-      var top = rect.top;
-      /**
-        The following style properties can only properly be set
-        after the component mounts.
-         Please read the description of this component at the top of the file
-        if you haven't already to find out why.
-      */var position = {
-        position: "fixed",
-        transform: "none",
-        top: top,
-        left: rect && rect.left || 0
-      };
-      if (this.props.anchor === "bottom") {
-        position.bottom = "auto";
-      }
-      return position;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return React.createElement(
-        "div",
-        {
-          ref: function ref(tooltip) {
-            return _this2.tooltip = tooltip;
-          },
-          className: this.props.className + " Tooltip" + (this.props.active ? " active" : ""),
-          style: this.state.position
-        },
-        this.props.children ? this.props.children : ""
-      );
-    }
-  }]);
-
-  return Tooltip;
-}(Component);
-
-Tooltip.defaultProps = {
-  anchor: "top",
-  active: false
-};
-
-var Tooltip$1 = glamorous(Tooltip)(style$7);
- // for testing.
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
-  A simple Higher-Order Component (HOC) that you can wrap with any custom
-  component in order to make it Tooltippable. This should JustWork™.
-
-  USAGE:
-  import withTooltip from './withTooltip'
-  const MyComponentWithTooltip = withTooltip(MyComponent)
-  <MyComponentWithTooltip
-    tooltip={<div>ANYTHING</div>}
-    tooltipAnchor={'top'||'bottom'}
-  />
-*/
-
-var withTooltip = function withTooltip(InputComponent) {
-  var _class, _temp2;
-
-  return _temp2 = _class = function (_Component) {
-    _inherits(_class, _Component);
-
-    function _class() {
-      var _ref;
-
-      var _temp, _this, _ret;
-
-      _classCallCheck(this, _class);
-
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = _class.__proto__ || Object.getPrototypeOf(_class)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-        isTooltipActive: false
-      }, _temp), _possibleConstructorReturn(_this, _ret);
-    }
-
-    _createClass(_class, [{
-      key: "showTooltip",
-      value: function showTooltip() {
-        this.setState(function () {
-          return { isTooltipActive: true };
-        });
-      }
-    }, {
-      key: "hideTooltip",
-      value: function hideTooltip() {
-        this.setState(function () {
-          return { isTooltipActive: false };
-        });
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this2 = this;
-
-        var splitClassNames = this.props.className ? [].concat(_toConsumableArray(this.props.className.split(" "))) : [];
-        var lastClassName = splitClassNames[splitClassNames.length - 1];
-        return React.createElement(
-          "div",
-          {
-            className: lastClassName + "_has-tooltip",
-            onMouseEnter: function onMouseEnter() {
-              return _this2.showTooltip();
-            },
-            onMouseLeave: function onMouseLeave() {
-              return _this2.hideTooltip();
-            }
-          },
-          React.createElement(
-            InputComponent,
-            this.props,
-            this.props.children ? this.props.children : "",
-            this.props.tooltip && this.state.isTooltipActive ? React.createElement(
-              Tooltip$1,
-              {
-                active: true,
-                color: this.props.tooltipColor,
-                anchor: this.props.tooltipAnchor
-              },
-              this.props.tooltip
-            ) : ""
-          )
-        );
-      }
-    }]);
-
-    return _class;
-  }(Component), _class.defaultProps = {
-    tooltipAnchor: "top"
-  }, _temp2;
-};
-
-var SideNavigationItem = function SideNavigationItem(_ref) {
-  var className = _ref.className,
-      children = _ref.children,
-      onClick = _ref.onClick;
-  return React.createElement(
-    "div",
-    { className: className + " SideNavigationItem", onClick: onClick },
-    children
-  );
-};
-
-var style$6 = function style(_ref2) {
-  var theme = _ref2.theme;
-  return {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    cursor: "pointer",
-
-    "&_has-tooltip + &_has-tooltip ": {
-      marginTop: theme.spacing ? theme.spacing * 2 : 16
-    },
-
-    ":first-child": {
-      marginTop: 0,
-      marginBottom: theme.spacing ? theme.spacing * 2 : 16
-    }
-  };
-};
-
-var SideNavigationItem$1 = glamorous(withTooltip(SideNavigationItem))(style$6);
-
-var SideNavigationLink = function SideNavigationLink(_ref) {
-  var className = _ref.className,
-      children = _ref.children,
-      onClick = _ref.onClick;
-  return React.createElement(
-    'div',
-    { className: className, onClick: onClick },
-    children
-  );
-};
-
-var style$8 = function style(_ref2) {
-  var theme = _ref2.theme,
-      color = _ref2.color;
-
-  var backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.greys && theme.greys['100'];
-
-  return {
-    position: 'relative',
-    zIndex: (theme.baseZIndex || 0) + 1,
-    margin: '0 ' + theme.spacing * -0.5 + 'px',
-    padding: theme.spacing + 'px',
-    minWidth: 200,
-    borderRadius: 2,
-    transition: '.1s background-color ease',
-    backgroundColor: backgroundColor,
-    color: readableTextColor(backgroundColor)(['black', 'white']),
-
-    '& + &': {
-      borderTop: '1px solid ' + (theme.greys && theme.greys['100'])
-    },
-
-    ':hover': {
-      backgroundColor: darken(backgroundColor)(10)
-    },
-
-    ':first-child': {
-      marginTop: theme.spacing * -0.5 + 'px'
-    },
-
-    ':last-child': {
-      marginBottom: theme.spacing * -0.5 + 'px'
-    }
-  };
-};
-
-var SideNavigationLink$1 = glamorous(SideNavigationLink)(style$8);
- // for testing.
-
-var _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var SideNavigation = function SideNavigation(_ref) {
-  var className = _ref.className,
-      children = _ref.children;
-  return React.createElement(
-    "div",
-    { className: className },
-    children
-  );
-};
-
-SideNavigation.defaultProps = {
-  expandOnHover: false,
-  expandedWidth: 280,
-  width: 64,
-  fix: false
-};
-
-var style$5 = function style(_ref2) {
-  var theme = _ref2.theme,
-      color = _ref2.color,
-      fix = _ref2.fix,
-      expandOnHover = _ref2.expandOnHover,
-      _ref2$expandedWidth = _ref2.expandedWidth,
-      expandedWidth = _ref2$expandedWidth === undefined ? 280 : _ref2$expandedWidth,
-      _ref2$width = _ref2.width,
-      width = _ref2$width === undefined ? 64 : _ref2$width;
-
-  var backgroundColor = color ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") : theme.colors && theme.colors.primary,
-      hoverWidth = expandOnHover ? {
-    transition: ".3s width ease",
-    willChange: "width",
-    "&:hover": {
-      width: expandedWidth
-    },
-    "&:hover .Tooltip": {
-      display: "none"
-    }
-  } : {};
-
-  return _extends$2({
-    position: fix ? "fixed" : "relative",
-    zIndex: (theme.baseZIndex || 0) + 100,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    width: width,
-    height: "100vh",
-    overflow: "hidden",
-    padding: theme.spacing * 1.3 || 0,
-    backgroundColor: backgroundColor,
-    color: readableTextColor(backgroundColor)(["black", "white"])
-  }, hoverWidth);
-};
-
-var SideNavigation$1 = glamorous(SideNavigation)(style$5);
-
-var _extends$4 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var style$10 = (function (_ref) {
-  var theme = _ref.theme,
-      children = _ref.children;
-
-  // If we have children, style a caret.
-  var caret = children ? {
-    content: "\"\"",
-    display: "block",
-    width: 0,
-    height: 0,
-    marginLeft: "auto",
-    border: "4px solid transparent",
-    borderLeftColor: theme.greys ? theme.greys["30"] : "#ccc",
-    transition: ".15s transform ease"
-  } : {};
-
-  return {
-    position: "relative",
-
-    "& .header": {
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
-      borderTop: "1px solid",
-      borderTopColor: theme.greys ? theme.greys["20"] : "#eee",
-      cursor: "pointer",
-      backgroundColor: theme.greys ? theme.greys.white : "white"
-    },
-
-    "& .header:hover": {
-      backgroundColor: theme.greys && theme.greys["10"]
-    },
-
-    "&.open .header": {
-      borderBottom: "1px solid",
-      borderBottomColor: theme.greys ? theme.greys["30"] : "#ccc"
-    },
-
-    // Caret styles begin here.
-    "& .header::after": _extends$4({}, caret),
-
-    "&.open .header.open::after": {
-      // rotate the caret to face down when an item is open.
-      transform: "translateX(-2px) rotate(90deg)"
-    },
-
-    // Spinner for async items replaces a caret.
-    "&.updating .header::after": {
-      width: 16,
-      height: 16,
-      border: 0,
-      borderRadius: "50%",
-      boxShadow: "1px 0px 0px 0px " + (theme.greys ? theme.greys["70"] : "#666") + " inset",
-      animation: ".7s " + spin + " linear infinite"
-    },
-
-    "& .content": {
-      position: "relative",
-      paddingLeft: theme.spacing
-    },
-
-    // This pseudo-element creates a visible indent for structure clarity.
-    "& .content::after": {
-      content: "''",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      display: "block",
-      width: theme.spacing,
-      height: "100%",
-      borderRight: "1px solid " + (theme.greys ? theme.greys["30"] : "#ccc"),
-      backgroundColor: theme.greys ? theme.greys["10"] : "#eee"
-    }
-  };
-});
-
-var _createClass$2 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _classCallCheck$2(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn$2(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SidebarItem = function (_Component) {
-  _inherits$2(SidebarItem, _Component);
-
-  function SidebarItem() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck$2(this, SidebarItem);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn$2(this, (_ref = SidebarItem.__proto__ || Object.getPrototypeOf(SidebarItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      open: _this.props && _this.props.open,
-      updating: false
-    }, _temp), _possibleConstructorReturn$2(_this, _ret);
-  }
-
-  _createClass$2(SidebarItem, [{
-    key: 'toggle',
-    value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (this.props.children) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt('return', false);
-
-              case 2:
-                this.setState(function () {
-                  return { updating: true };
-                });
-                // If it is closed,
-
-                if (!(this.props.onClick && !this.state.open)) {
-                  _context.next = 6;
-                  break;
-                }
-
-                _context.next = 6;
-                return this.props.onClick();
-
-              case 6:
-                this.setState(function (prevState) {
-                  return {
-                    open: !prevState.open,
-                    updating: false
-                  };
-                });
-
-              case 7:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function toggle() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return toggle;
-    }()
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      /**
-        Only the header should have a tooltip, else the tooltip will show
-        even when the cursor is over the children... who may also have their
-        own tooltips.
-      */
-      var HeaderWithTooltip = withTooltip(Div);
-      return React.createElement(
-        'div',
-        {
-          className: this.props.className + ' ' + (this.state.updating ? 'updating' : '') + ' ' + (this.state.open ? 'open' : '')
-        },
-        React.createElement(
-          HeaderWithTooltip,
-          {
-            className: 'header ' + (this.state.open ? 'open' : ''),
-            tooltip: this.props.tooltip,
-            onClick: function onClick() {
-              return _this2.toggle();
-            }
-          },
-          this.props.label
-        ),
-        this.state.open ? React.createElement(
-          'div',
-          { className: 'content' },
-          this.props.children
-        ) : ''
-      );
-    }
-  }]);
-
-  return SidebarItem;
-}(Component);
-
-SidebarItem.defaultProps = {
-  children: '',
-  open: false,
-  tooltip: ''
-};
-
-
-var SidebarItem$1 = glamorous(SidebarItem)(style$10);
-
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var __DEV__ = process.env.NODE_ENV !== 'production';
-
-var warning$3 = function() {};
-
-if (__DEV__) {
-  warning$3 = function(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error(
-        '`warning(condition, format, ...args)` requires a warning ' +
-        'message argument'
-      );
-    }
-
-    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-      throw new Error(
-        'The warning format should be able to uniquely identify this ' +
-        'warning. Please, use a more descriptive format than: ' + format
-      );
-    }
-
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' +
-        format.replace(/%s/g, function() {
-          return args[argIndex++];
-        });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch(x) {}
-    }
-  };
-}
-
-var warning_1$4 = warning$3;
-
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -9902,6 +10059,8 @@ var warning_1$4 = warning$3;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  */
+
+'use strict';
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -10021,7 +10180,7 @@ var resolvePathname$2 = Object.freeze({
 	default: resolvePathname
 });
 
-var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function valueEqual(a, b) {
   if (a === b) return true;
@@ -10034,8 +10193,8 @@ function valueEqual(a, b) {
     });
   }
 
-  var aType = typeof a === 'undefined' ? 'undefined' : _typeof$1(a);
-  var bType = typeof b === 'undefined' ? 'undefined' : _typeof$1(b);
+  var aType = typeof a === 'undefined' ? 'undefined' : _typeof(a);
+  var bType = typeof b === 'undefined' ? 'undefined' : _typeof(b);
 
   if (aType !== bType) return false;
 
@@ -10065,6 +10224,8 @@ var valueEqual$2 = Object.freeze({
 });
 
 var PathUtils$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 var addLeadingSlash = exports.addLeadingSlash = function addLeadingSlash(path) {
   return path.charAt(0) === '/' ? path : '/' + path;
@@ -10136,6 +10297,8 @@ var _resolvePathname = ( resolvePathname$2 && resolvePathname ) || resolvePathna
 var _valueEqual = ( valueEqual$2 && valueEqual ) || valueEqual$2;
 
 var LocationUtils = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 exports.locationsAreEqual = exports.createLocation = undefined;
 
@@ -10217,6 +10380,8 @@ var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a
 unwrapExports$1(LocationUtils);
 
 var createTransitionManager_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 
 
@@ -10305,6 +10470,8 @@ exports.default = createTransitionManager;
 unwrapExports$1(createTransitionManager_1);
 
 var DOMUtils = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 var canUseDOM = exports.canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -10363,6 +10530,8 @@ var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isE
 unwrapExports$1(DOMUtils);
 
 var createBrowserHistory_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -10730,7 +10899,7 @@ var Router$1 = function (_React$Component) {
         history = _props.history;
 
 
-    invariant_1$3(children == null || React.Children.count(children) === 1, 'A <Router> may have only one child element');
+    invariant_1$3(children == null || React__default.Children.count(children) === 1, 'A <Router> may have only one child element');
 
     // Do this here so we can setState when a <Redirect> changes the
     // location in componentWillMount. This happens e.g. when doing
@@ -10753,11 +10922,11 @@ var Router$1 = function (_React$Component) {
   Router.prototype.render = function render() {
     var children = this.props.children;
 
-    return children ? React.Children.only(children) : null;
+    return children ? React__default.Children.only(children) : null;
   };
 
   return Router;
-}(React.Component);
+}(React__default.Component);
 
 Router$1.propTypes = {
   history: propTypes.object.isRequired,
@@ -10802,11 +10971,11 @@ var BrowserRouter = function (_React$Component) {
   };
 
   BrowserRouter.prototype.render = function render() {
-    return React.createElement(Router$1, { history: this.history, children: this.props.children });
+    return React__default.createElement(Router$1, { history: this.history, children: this.props.children });
   };
 
   return BrowserRouter;
-}(React.Component);
+}(React__default.Component);
 
 BrowserRouter.propTypes = {
   basename: propTypes.string,
@@ -10817,6 +10986,8 @@ BrowserRouter.propTypes = {
 };
 
 var createHashHistory_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -11173,11 +11344,11 @@ var HashRouter = function (_React$Component) {
   };
 
   HashRouter.prototype.render = function render() {
-    return React.createElement(Router$1, { history: this.history, children: this.props.children });
+    return React__default.createElement(Router$1, { history: this.history, children: this.props.children });
   };
 
   return HashRouter;
-}(React.Component);
+}(React__default.Component);
 
 HashRouter.propTypes = {
   basename: propTypes.string,
@@ -11252,11 +11423,11 @@ var Link$1 = function (_React$Component) {
 
     var href = this.context.router.history.createHref(typeof to === 'string' ? { pathname: to } : to);
 
-    return React.createElement('a', _extends$7({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
+    return React__default.createElement('a', _extends$7({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
   };
 
   return Link;
-}(React.Component);
+}(React__default.Component);
 
 Link$1.propTypes = {
   onClick: propTypes.func,
@@ -11279,6 +11450,8 @@ Link$1.contextTypes = {
 };
 
 var createMemoryHistory_1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -11481,11 +11654,11 @@ var MemoryRouter$1 = function (_React$Component) {
   };
 
   MemoryRouter.prototype.render = function render() {
-    return React.createElement(Router$1, { history: this.history, children: this.props.children });
+    return React__default.createElement(Router$1, { history: this.history, children: this.props.children });
   };
 
   return MemoryRouter;
-}(React.Component);
+}(React__default.Component);
 
 MemoryRouter$1.propTypes = {
   initialEntries: propTypes.array,
@@ -12006,7 +12179,7 @@ function _possibleConstructorReturn$8(self, call) { if (!self) { throw new Refer
 function _inherits$8(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var isEmptyChildren = function isEmptyChildren(children) {
-  return React.Children.count(children) === 0;
+  return React__default.Children.count(children) === 0;
 };
 
 /**
@@ -12093,13 +12266,13 @@ var Route$1 = function (_React$Component) {
     var props = { match: match, location: location, history: history, staticContext: staticContext };
 
     return component ? // component prop gets first priority, only called if there's a match
-    match ? React.createElement(component, props) : null : render ? // render prop is next, only called if there's a match
+    match ? React__default.createElement(component, props) : null : render ? // render prop is next, only called if there's a match
     match ? render(props) : null : children ? // children come last, always called
-    typeof children === 'function' ? children(props) : !isEmptyChildren(children) ? React.Children.only(children) : null : null;
+    typeof children === 'function' ? children(props) : !isEmptyChildren(children) ? React__default.Children.only(children) : null : null;
   };
 
   return Route;
-}(React.Component);
+}(React__default.Component);
 
 Route$1.propTypes = {
   computedMatch: propTypes.object, // private, from <Switch>
@@ -12127,7 +12300,7 @@ Route$1.childContextTypes = {
 
 var _extends$8 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _typeof$2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function _objectWithoutProperties$1(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -12147,8 +12320,8 @@ var NavLink = function NavLink(_ref) {
       ariaCurrent = _ref.ariaCurrent,
       rest = _objectWithoutProperties$1(_ref, ['to', 'exact', 'strict', 'location', 'activeClassName', 'className', 'activeStyle', 'style', 'isActive', 'ariaCurrent']);
 
-  return React.createElement(Route$1, {
-    path: (typeof to === 'undefined' ? 'undefined' : _typeof$2(to)) === 'object' ? to.pathname : to,
+  return React__default.createElement(Route$1, {
+    path: (typeof to === 'undefined' ? 'undefined' : _typeof$1(to)) === 'object' ? to.pathname : to,
     exact: exact,
     strict: strict,
     location: location,
@@ -12158,7 +12331,7 @@ var NavLink = function NavLink(_ref) {
 
       var isActive = !!(getIsActive ? getIsActive(match, location) : match);
 
-      return React.createElement(Link$1, _extends$8({
+      return React__default.createElement(Link$1, _extends$8({
         to: to,
         className: isActive ? [className, activeClassName].filter(function (i) {
           return i;
@@ -12244,7 +12417,7 @@ var Prompt$1 = function (_React$Component) {
   };
 
   return Prompt;
-}(React.Component);
+}(React__default.Component);
 
 Prompt$1.propTypes = {
   when: propTypes.bool,
@@ -12442,7 +12615,7 @@ var Redirect$1 = function (_React$Component) {
   };
 
   return Redirect;
-}(React.Component);
+}(React__default.Component);
 
 Redirect$1.propTypes = {
   push: propTypes.bool,
@@ -12602,11 +12775,11 @@ var StaticRouter$1 = function (_React$Component) {
       block: this.handleBlock
     };
 
-    return React.createElement(Router$1, _extends$14({}, props, { history: history }));
+    return React__default.createElement(Router$1, _extends$14({}, props, { history: history }));
   };
 
   return StaticRouter;
-}(React.Component);
+}(React__default.Component);
 
 StaticRouter$1.propTypes = {
   basename: propTypes.string,
@@ -12660,8 +12833,8 @@ var Switch$2 = function (_React$Component) {
 
     var match = void 0,
         child = void 0;
-    React.Children.forEach(children, function (element) {
-      if (!React.isValidElement(element)) return;
+    React__default.Children.forEach(children, function (element) {
+      if (!React__default.isValidElement(element)) return;
 
       var _element$props = element.props,
           pathProp = _element$props.path,
@@ -12678,11 +12851,11 @@ var Switch$2 = function (_React$Component) {
       }
     });
 
-    return match ? React.cloneElement(child, { location: location, computedMatch: match }) : null;
+    return match ? React__default.cloneElement(child, { location: location, computedMatch: match }) : null;
   };
 
   return Switch;
-}(React.Component);
+}(React__default.Component);
 
 Switch$2.contextTypes = {
   router: propTypes.shape({
@@ -12702,6 +12875,7 @@ Switch$2.propTypes = {
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
+'use strict';
 
 // Written in this round about way for babel-transform-imports
 
@@ -12721,22 +12895,17 @@ var SidebarLink = function SidebarLink(_ref) {
     Component$$1 = Link$1; // use a <Link /> since it supports props.to.
   }
 
-  return React.createElement(
+  return React__default.createElement(
     Component$$1,
-    {
-      to: to,
-      onClick: onClick,
-      className: className + " SideNavigationLink"
-    },
+    { to: to ? to : "", onClick: onClick, className: className + " SideNavigationLink" },
     children,
-    symbol ? React.createElement(
+    symbol ? React__default.createElement(
       "div",
       { className: "symbol" },
       symbol
     ) : ""
   );
 };
-
 var style$11 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color,
@@ -12786,13 +12955,12 @@ var SidebarLink$1 = glamorous(withTooltip(SidebarLink))(style$11);
 var Sidebar = function Sidebar(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React.createElement(
+  return React__default.createElement(
     "div",
     { className: className },
     children
   );
 };
-
 var style$9 = function style(_ref2) {
   var theme = _ref2.theme;
   return {
@@ -12814,23 +12982,21 @@ var Button$1 = function Button$$1(_ref) {
       className = _ref$className === undefined ? "" : _ref$className,
       onClick = _ref.onClick,
       children = _ref.children;
-  return React.createElement(
+  return React__default.createElement(
     "div",
-    { className: className + " Button", onClick: onClick },
+    { tabIndex: "-1", role: "button", className: className + " Button", onClick: onClick },
     children
   );
 };
-
 var style$12 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color,
       active = _ref2.active;
 
-  var backgroundColor = color ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") : "white";
-
-  var activeBackgroundColor = darken(backgroundColor)(5);
-  var textColor = readableTextColor(backgroundColor)(["black", "white"]);
-  var activeBoxShadow = "2px 2px 4px rgba(0, 0, 0, 0.14) inset";
+  var backgroundColor = color ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") : "white",
+      activeBackgroundColor = darken(backgroundColor)(5),
+      textColor = readableTextColor(backgroundColor)(["black", "white"]),
+      activeBoxShadow = "2px 2px 4px rgba(0, 0, 0, 0.14) inset";
 
   return {
     display: "inline-block",
@@ -12863,6 +13029,8 @@ var style$12 = function style(_ref2) {
 var Button$2 = glamorous(Button$1)(style$12);
 
 var lib$2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12871,7 +13039,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-var _react2 = _interopRequireDefault(React);
+var _react2 = _interopRequireDefault(React__default);
 
 
 
@@ -12924,6 +13092,8 @@ module.exports = exports['default'];
 unwrapExports$1(lib$2);
 
 var x = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -12932,7 +13102,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-var _react2 = _interopRequireDefault(React);
+var _react2 = _interopRequireDefault(React__default);
 
 
 
@@ -12965,25 +13135,24 @@ var Chip = function Chip(_ref) {
       children = _ref.children,
       onClick = _ref.onClick,
       symbol = _ref.symbol;
-  return React.createElement(
+  return React__default.createElement(
     "div",
     { className: className + " chip" },
     children,
-    onClick && React.createElement(
+    onClick && React__default.createElement(
       "div",
-      { className: "action", onClick: onClick },
-      symbol || React.createElement(GoX, null)
+      { tabIndex: "-1", role: "button", className: "action", onClick: onClick },
+      symbol || React__default.createElement(GoX, null)
     )
   );
 };
-
 var style$13 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color,
       onClick = _ref2.onClick;
 
-  var backgroundColor = hexOrColor(color)(theme.colors ? theme.colors[color] || theme.colors.primary : "black");
-  var actionStyles = onClick ? {
+  var backgroundColor = hexOrColor(color)(theme.colors ? theme.colors[color] || theme.colors.primary : "black"),
+      actionStyles = onClick ? {
     "& .action": {
       position: "absolute",
       top: 0,
@@ -13039,6 +13208,8 @@ var style$13 = function style(_ref2) {
 var Chip$1 = glamorous(Chip)(style$13);
 
 var plus = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -13047,7 +13218,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-var _react2 = _interopRequireDefault(React);
+var _react2 = _interopRequireDefault(React__default);
 
 
 
@@ -13075,17 +13246,14 @@ var GoPlus = unwrapExports$1(plus);
 
 var PlusChip = function PlusChip(_ref) {
   var className = _ref.className,
-      _ref$size = _ref.size,
-      size = _ref$size === undefined ? 15 : _ref$size,
       children = _ref.children,
       onClick = _ref.onClick;
-  return React.createElement(
+  return React__default.createElement(
     "div",
-    { className: className + " plus-chip", onClick: onClick },
-    children || React.createElement(GoPlus, null)
+    { className: className + " plus-chip", onClick: onClick, tabIndex: "-1", role: "button" },
+    children || React__default.createElement(GoPlus, null)
   );
 };
-
 var style$14 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color,
@@ -13109,30 +13277,32 @@ var style$14 = function style(_ref2) {
   };
 };
 
+PlusChip.defaultProps = {
+  size: 15
+};
+
 var PlusChip$1 = glamorous(PlusChip)(style$14);
 
 var Card = function Card(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React.createElement(
-    'div',
+  return React__default.createElement(
+    "div",
     { className: className },
     children
   );
 };
-
 var style$15 = function style(_ref2) {
-  var theme = _ref2.theme,
-      width = _ref2.width,
+  var width = _ref2.width,
       padding = _ref2.padding;
   return {
     width: width,
     padding: padding,
-    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.14)',
-    backgroundColor: 'white',
+    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
+    backgroundColor: "white",
 
-    '& > img': {
-      maxWidth: '100%'
+    "& > img": {
+      maxWidth: "100%"
     }
   };
 };
@@ -13140,51 +13310,50 @@ var style$15 = function style(_ref2) {
 var Card$1 = glamorous(Card)(style$15);
 
 var Stat = function Stat(_ref) {
-    var className = _ref.className,
-        label = _ref.label,
-        children = _ref.children;
-    return React.createElement(
-        "div",
-        { className: className + " Stat" },
-        React.createElement(
-            "small",
-            { className: "Stat__label" },
-            label
-        ),
-        React.createElement(
-            "span",
-            { className: "Stat__value" },
-            children
-        )
-    );
+  var className = _ref.className,
+      label = _ref.label,
+      children = _ref.children;
+  return React__default.createElement(
+    "div",
+    { className: className + " Stat" },
+    React__default.createElement(
+      "small",
+      { className: "Stat__label" },
+      label
+    ),
+    React__default.createElement(
+      "span",
+      { className: "Stat__value" },
+      children
+    )
+  );
 };
-
 var style$16 = function style(_ref2) {
-    var theme = _ref2.theme,
-        color = _ref2.color;
+  var theme = _ref2.theme,
+      color = _ref2.color;
 
-    var backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color] || "white") : "white";
+  var backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color] || "white") : "white";
 
-    return {
-        display: "flex",
-        flexDirection: "column",
-        width: "fit-content",
-        padding: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
-        backgroundColor: backgroundColor,
-        color: readableTextColor(backgroundColor)(["black", "white"]),
+  return {
+    display: "flex",
+    flexDirection: "column",
+    width: "fit-content",
+    padding: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
+    backgroundColor: backgroundColor,
+    color: readableTextColor(backgroundColor)(["black", "white"]),
 
-        "&.Stat + .Stat": {
-            borderLeft: "1px solid",
-            borderLeftColor: darken(backgroundColor)(10)
-        },
+    "&.Stat + .Stat": {
+      borderLeft: "1px solid",
+      borderLeftColor: darken(backgroundColor)(10)
+    },
 
-        "& .Stat__label": {
-            marginBottom: 3,
-            fontSize: ".6rem",
-            fontWeight: 600,
-            color: readableTextColor(backgroundColor)([theme.greys ? theme.greys["60"] : "#eee", theme.greys ? theme.greys["10"] : "#aaa"])
-        }
-    };
+    "& .Stat__label": {
+      marginBottom: 3,
+      fontSize: ".6rem",
+      fontWeight: 600,
+      color: readableTextColor(backgroundColor)([theme.greys ? theme.greys["60"] : "#eee", theme.greys ? theme.greys["10"] : "#aaa"])
+    }
+  };
 };
 
 var Stat$1 = glamorous(Stat)(style$16);
@@ -13230,7 +13399,7 @@ var Input$1 = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return React.createElement("input", {
+      return React__default.createElement("input", {
         className: this.props.className,
         name: this.props.name,
         placeholder: this.props.placeholder,
@@ -13243,7 +13412,7 @@ var Input$1 = function (_Component) {
   }]);
 
   return Input$$1;
-}(Component);
+}(React.Component);
 
 Input$1.defaultProps = {
   className: ""
@@ -13268,22 +13437,18 @@ var SelectOption = function SelectOption(_ref) {
       selected = _ref.selected,
       onClick = _ref.onClick,
       children = _ref.children;
-  return React.createElement(
+  return React__default.createElement(
     "div",
     {
       className: className + " Select__option" + (selected ? " Select__option_selected" : ""),
       tabIndex: "-2",
       role: "option",
+      "aria-selected": selected,
       onClick: onClick
     },
     children
   );
 };
-
-SelectOption.defaultProps = {
-  selected: false
-};
-
 var style$18 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color;
@@ -13312,16 +13477,20 @@ var style$18 = function style(_ref2) {
   };
 };
 
+SelectOption.defaultProps = {
+  selected: false
+};
+
 var SelectOption$1 = glamorous(SelectOption)(style$18);
 
 var SelectFilter = function SelectFilter(_ref) {
   var className = _ref.className,
       placeholder = _ref.placeholder,
       onChange = _ref.onChange;
-  return React.createElement(
+  return React__default.createElement(
     "div",
     { className: className },
-    React.createElement("input", {
+    React__default.createElement("input", {
       onClick: function onClick(e) {
         return e.stopPropagation();
       },
@@ -13331,11 +13500,6 @@ var SelectFilter = function SelectFilter(_ref) {
     })
   );
 };
-
-SelectFilter.defaultProps = {
-  placeholder: "Filter..."
-};
-
 var style$19 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color;
@@ -13355,6 +13519,10 @@ var style$19 = function style(_ref2) {
       font: "inherit"
     }
   };
+};
+
+SelectFilter.defaultProps = {
+  placeholder: "Filter..."
 };
 
 var SelectFilter$1 = glamorous(SelectFilter)(style$19);
@@ -13430,7 +13598,7 @@ var _createClass$4 = function () { function defineProperties(target, props) { fo
 
 function _asyncToGenerator$1(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-function _toConsumableArray$1(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck$14(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -13459,16 +13627,15 @@ var Select$1 = function (_Component) {
       filter: new RegExp(/./)
 
       // flow complains if this isn't initialized sooo...
-    }, _this.container = React.createElement("div"), _this.handleClick = function (e) {
+    }, _this.handleClick = function (e) {
       var el = _this.container;
 
       // if we're somehow not working with a DOM node (flowtype is fun!)
       if (!(e.target instanceof Node)) {
         return;
       }
-
       // if we're clicking on the Select itself,
-      if (el.contains(e.target)) {
+      if (el && el.contains(e.target)) {
         return;
       }
 
@@ -13521,7 +13688,7 @@ var Select$1 = function (_Component) {
         throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
       }
 
-      return [].concat(_toConsumableArray$1(this.state.value.map(function (option) {
+      return [].concat(_toConsumableArray(this.state.value.map(function (option) {
         return option.label;
       }))).join(", ");
     }
@@ -13543,17 +13710,25 @@ var Select$1 = function (_Component) {
 
       if (optionIndex < 0) {
         this.setState(function (prevState) {
-          return {
-            value: [].concat(_toConsumableArray$1(prevState.value), [option]).filter(function (item) {
-              return !item.placeholder;
-            })
-          };
+          if (prevState instanceof Object) {
+            return {
+              value: [].concat(_toConsumableArray(prevState.value), [option]).filter(function (item) {
+                return !item.placeholder;
+              })
+            };
+          } else {
+            throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
+          }
         });
       } else {
         this.setState(function (prevState) {
-          return {
-            value: [].concat(_toConsumableArray$1(prevState.value.slice(0, optionIndex)), _toConsumableArray$1(prevState.value.slice(optionIndex + 1)))
-          };
+          if (prevState instanceof Object) {
+            return {
+              value: [].concat(_toConsumableArray(prevState.value.slice(0, optionIndex)), _toConsumableArray(prevState.value.slice(optionIndex + 1)))
+            };
+          } else {
+            throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
+          }
         });
       }
     }
@@ -13673,7 +13848,7 @@ var Select$1 = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return React.createElement(
+      return React__default.createElement(
         "div",
         {
           ref: function ref(container) {
@@ -13686,22 +13861,22 @@ var Select$1 = function (_Component) {
             return _this2.toggle();
           }
         },
-        React.createElement(
+        React__default.createElement(
           "div",
           { className: "Select__value" },
           this.getDisplayValue() || this.props.placeholder
         ),
-        this.props.options.length && this.state.open ? React.createElement(
+        this.props.options.length && this.state.open ? React__default.createElement(
           "div",
           { className: "Select__options" },
-          this.props.filterable && React.createElement(SelectFilter$1, { onChange: function onChange(e) {
+          this.props.filterable && React__default.createElement(SelectFilter$1, { onChange: function onChange(e) {
               return _this2.updateFilter(e);
             } }),
-          React.createElement(
+          React__default.createElement(
             "div",
             { className: "Select__options_list" },
             this.props.options.map(function (option) {
-              return option.label.match(_this2.state.filter) && React.createElement(
+              return option.label.match(_this2.state.filter) && React__default.createElement(
                 SelectOption$1,
                 {
                   key: option.id,
@@ -13720,7 +13895,7 @@ var Select$1 = function (_Component) {
   }]);
 
   return Select$$1;
-}(Component);
+}(React.Component);
 
 Select$1.defaultProps = {
   className: "",
@@ -13770,4 +13945,24 @@ var DEFAULT_THEME = {
 
 // Simple imports n' exports for consumers of the library.
 
-export { Header$1 as Header, HeaderItem$1 as HeaderItem, HeaderSeparator$1 as HeaderSeparator, HeaderTitle$1 as HeaderTitle, SideNavigation$1 as SideNavigation, SideNavigationItem$1 as SideNavigationItem, SideNavigationLink$1 as SideNavigationLink, Sidebar$1 as Sidebar, SidebarItem$1 as SidebarItem, SidebarLink$1 as SidebarLink, Button$2 as Button, Tooltip$1 as Tooltip, withTooltip, Chip$1 as Chip, PlusChip$1 as PlusChip, Card$1 as Card, Stat$1 as Stat, Input$2 as Input, Select$2 as Select, DEFAULT_THEME as contiamoTheme, ThemeProvider };
+exports.Header = Header$1;
+exports.HeaderItem = HeaderItem$1;
+exports.HeaderSeparator = HeaderSeparator$1;
+exports.HeaderTitle = HeaderTitle$1;
+exports.SideNavigation = SideNavigation$1;
+exports.SideNavigationItem = SideNavigationItem$1;
+exports.SideNavigationLink = SideNavigationLink$1;
+exports.Sidebar = Sidebar$1;
+exports.SidebarItem = SidebarItem$1;
+exports.SidebarLink = SidebarLink$1;
+exports.Button = Button$2;
+exports.Tooltip = Tooltip$1;
+exports.withTooltip = withTooltip;
+exports.Chip = Chip$1;
+exports.PlusChip = PlusChip$1;
+exports.Card = Card$1;
+exports.Stat = Stat$1;
+exports.Input = Input$2;
+exports.Select = Select$2;
+exports.contiamoTheme = DEFAULT_THEME;
+exports.ThemeProvider = ThemeProvider;

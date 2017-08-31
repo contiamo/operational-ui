@@ -11,78 +11,66 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-1ozkm5  "
     >
       <div
-        class="_has-tooltip"
+        class="css-10bcezx header"
+        role="status"
+        tabindex="-1"
       >
-        <div
-          class="css-5ohi6e header"
-        >
-          Data Entry
-        </div>
+        Data Entry
       </div>
     </div>
     <div
       class="css-1ozkm5  "
     >
       <div
-        class="_has-tooltip"
+        class="css-10bcezx header"
+        role="status"
+        tabindex="-1"
       >
-        <div
-          class="css-5ohi6e header"
-        >
-          Feedback
-        </div>
+        Feedback
       </div>
     </div>
     <div
       class="css-1ozkm5  "
     >
       <div
-        class="_has-tooltip"
+        class="css-10bcezx header"
+        role="status"
+        tabindex="-1"
       >
-        <div
-          class="css-5ohi6e header"
-        >
-          UI Elements
-        </div>
+        UI Elements
       </div>
     </div>
     <div
       class="css-1ozkm5  "
     >
       <div
-        class="_has-tooltip"
+        class="css-10bcezx header"
+        role="status"
+        tabindex="-1"
       >
-        <div
-          class="css-5ohi6e header"
-        >
-          Navigation
-        </div>
+        Navigation
       </div>
     </div>
     <div
       class="css-1ozkm5  "
     >
       <div
-        class="_has-tooltip"
+        class="css-10bcezx header"
+        role="status"
+        tabindex="-1"
       >
-        <div
-          class="css-5ohi6e header"
-        >
-          Resources
-        </div>
+        Resources
       </div>
     </div>
     <div
       class="css-1ozkm5  "
     >
       <div
-        class="_has-tooltip"
+        class="css-10bcezx header"
+        role="status"
+        tabindex="-1"
       >
-        <div
-          class="css-5ohi6e header"
-        >
-          Icons
-        </div>
+        Icons
       </div>
     </div>
   </div>

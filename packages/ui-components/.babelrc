@@ -22,17 +22,6 @@
         ],
         "react",
         "stage-0"
-      ],
-      "plugins": [
-        [
-          "module-resolver",
-          {
-            "root": ["./"],
-            "alias": {
-              "contiamo-ui-utils": "../utils/dist/utils.js"
-            }
-          }
-        ]
       ]
     }
   }

@@ -9,6 +9,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --public --host 0.0.0.0",
     "build": "webpack -p",
+    "flow": "flow",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint ./src/**/* --ext .js,.jsx --fix",
@@ -38,6 +39,8 @@
     "jest-glamor-react": "^3.1.0",
     "jest-serializer-enzyme": "^1.0.0",
     "webpack-dashboard": "^1.0.0-5",
+    "contiamo-ui-components": "^1.0.0",
+    "contiamo-ui-utils": "^1.0.0",
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
@@ -53,6 +56,7 @@
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "html-webpack-plugin": "^2.30.1",
+    "jest-cli": "^20.0.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -71,13 +75,7 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ]
+    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
   }
 }

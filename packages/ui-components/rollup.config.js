@@ -10,15 +10,6 @@ import path from "path"
 export default {
   input: "./index.js",
   plugins: [
-    alias({
-      "contiamo-ui-utils": path.resolve(
-        __dirname,
-        "..",
-        "utils",
-        "dist",
-        "utils.js"
-      )
-    }),
     resolve({ extensions: [".js", ".jsx"], jsnext: true, main: true }),
     commonjs({
       esnext: true,
@@ -35,7 +26,7 @@ export default {
   ],
   external: ["react", "jest"],
   output: {
-    format: "es",
+    format: "cjs",
     file: "./dist/components.js" // equivalent to --output
   }
 }

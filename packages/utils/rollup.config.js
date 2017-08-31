@@ -20,7 +20,7 @@ export default {
   ],
   external: ["jest"],
   output: {
-    format: "es",
+    format: "cjs",
     file: "./dist/utils.js" // equivalent to --output
   }
 }
