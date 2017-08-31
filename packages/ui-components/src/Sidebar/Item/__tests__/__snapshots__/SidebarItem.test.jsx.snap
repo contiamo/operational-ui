@@ -7,8 +7,8 @@ exports[`SidebarItem Should initialize 1`] = `
   <_class
     className="header "
     onClick={[Function]}
-    tooltip=""
+    tooltip={false}
     tooltipAnchor="top"
   />
 </div>
-`
+`;

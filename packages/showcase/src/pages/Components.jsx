@@ -13,28 +13,25 @@ import TooltipsPage from "./Tooltips/Tooltips"
 import StatsPage from "./Stats/Stats"
 import SidebarPage from "./Sidebar/Sidebar"
 
-const SidebarWithRouter = withRouter(Sidebar)
-
-const InfoTooltip = ({ className }) =>
-  <div className={className}>Choose a Component to Get Started</div>
-
-const StyledInfoTooltip = glamorous(InfoTooltip)({
-  position: "fixed",
-  top: 80,
-  background: "black",
-  color: "white",
-  padding: 8,
-  "&::after": {
-    content: "''",
-    position: "absolute",
-    top: 8,
-    left: -12,
-    width: 0,
-    height: 0,
-    border: "6px solid transparent",
-    borderRight: "6px solid black"
-  }
-})
+const SidebarWithRouter = withRouter(Sidebar),
+  InfoTooltip = ({ className }) => <div className={className}>Choose a Component to Get Started</div>,
+  StyledInfoTooltip = glamorous(InfoTooltip)({
+    position: "fixed",
+    top: 80,
+    background: "black",
+    color: "white",
+    padding: 8,
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: 8,
+      left: -12,
+      width: 0,
+      height: 0,
+      border: "6px solid transparent",
+      borderRight: "6px solid black"
+    }
+  })
 
 export default () =>
   <Div
@@ -46,9 +43,7 @@ export default () =>
     }}
   >
     <SidebarWithRouter />
-    <AppCanvas
-      css={{ position: "relative", marginLeft: 16, flexBasis: "100%" }}
-    >
+    <AppCanvas css={{ position: "relative", marginLeft: 16, flexBasis: "100%" }}>
       <Route exact path="/components" component={StyledInfoTooltip} />
       <Route path="/components/buttons" component={ButtonsPage} />
       <Route path="/components/form-fields" component={FormFieldsPage} />
@@ -57,9 +52,6 @@ export default () =>
       <Route path="/components/tooltips" component={TooltipsPage} />
       <Route path="/components/stats" component={StatsPage} />
       <Route path="/components/sidebar" component={SidebarPage} />
-      <Route
-        path="/demo"
-        render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />}
-      />
+      <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>

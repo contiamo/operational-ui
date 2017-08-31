@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from "react"
+import type { Node } from "react"
 import glamorous from "glamorous"
 
 import style from "./Tooltip.style"
@@ -29,7 +30,7 @@ import style from "./Tooltip.style"
   left?: number,
   bottom?: number | string,
 }
-type rect = {
+type rectCoords = {
   top: number,
   left: number,
   bottom: number,
@@ -37,22 +38,23 @@ type rect = {
   width: number,
   height: number,
 }
-class Tooltip extends Component {
-  props: {
-    className: string,
-    children?: mixed,
-    active?: boolean,
-    anchor?: string,
-    color?: string,
-  }
-  state: {
-    position: tooltipPosition,
-  } = { position: {} }
-  tooltip: HTMLDivElement
+type Props = {
+  className: string,
+  children?: Node,
+  active?: boolean,
+  anchor?: string,
+  color?: string,
+}
+type State = {
+  position: tooltipPosition,
+}
+class Tooltip extends Component<Props, State> {
   static defaultProps = {
     anchor: "top",
     active: false
   }
+  state = { position: {} }
+  tooltip: HTMLDivElement
   componentDidMount() {
     const position = this.getPosition()
     this.setState(() => ({
@@ -60,20 +62,20 @@ class Tooltip extends Component {
     }))
   }
   getPosition() {
-    const rect: rect = this.tooltip.getBoundingClientRect()
-    const top: number = rect.top
-    /**
+    const rect: rectCoords = this.tooltip.getBoundingClientRect(),
+      top: number = rect.top,
+      /**
       The following style properties can only properly be set
       after the component mounts.
 
       Please read the description of this component at the top of the file
       if you haven't already to find out why.
-    */ const position: tooltipPosition = {
-      position: "fixed",
-      transform: "none",
-      top,
-      left: rect && rect.left || 0
-    }
+    */ position: tooltipPosition = {
+        position: "fixed",
+        transform: "none",
+        top,
+        left: rect && rect.left || 0
+      }
     if (this.props.anchor === "bottom") {
       position.bottom = "auto"
     }
@@ -82,10 +84,8 @@ class Tooltip extends Component {
   render() {
     return (
       <div
-        ref={tooltip => this.tooltip = tooltip}
-        className={`${this.props.className} Tooltip${this.props.active
-          ? " active"
-          : ""}`}
+        ref={tooltip => this.tooltip = tooltip || document.createElement("div")}
+        className={`${this.props.className} Tooltip${this.props.active ? " active" : ""}`}
         style={this.state.position}
       >
         {this.props.children ? this.props.children : ""}

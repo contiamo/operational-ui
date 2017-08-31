@@ -27,7 +27,7 @@ type State = {
   filter: RegExp,
 }
 
-class Select extends Component<{}, Props, State> {
+class Select extends Component<Props, State> {
   static defaultProps = {
     className: "",
     filterable: false,
@@ -44,19 +44,18 @@ class Select extends Component<{}, Props, State> {
   }
 
   // flow complains if this isn't initialized sooo...
-  container: HTMLDivElement = React.createElement("div")
+  container: HTMLDivElement | null
 
   // This implements "click outside to close" behavior
-  handleClick = (e: SyntheticEvent) => {
+  handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
     const el = this.container
 
     // if we're somehow not working with a DOM node (flowtype is fun!)
     if (!(e.target instanceof Node)) {
       return
     }
-
     // if we're clicking on the Select itself,
-    if (el.contains(e.target)) {
+    if (el && el.contains(e.target)) {
       return
     }
 
@@ -64,7 +63,7 @@ class Select extends Component<{}, Props, State> {
     this.close()
   }
 
-  handleEsc = (e: SyntheticEvent) => {
+  handleEsc = (e: SyntheticEvent<HTMLDivElement>) => {
     if (e.keyCode === 27) {
       this.close()
     }
@@ -82,15 +81,11 @@ class Select extends Component<{}, Props, State> {
 
   getInitialValue(): option | Array<option> {
     if (!this.props.multiple) {
-      return this.props.placeholder
-        ? { label: this.props.placeholder }
-        : { label: "" }
+      return this.props.placeholder ? { label: this.props.placeholder } : { label: "" }
     }
 
     return [
-      this.props.placeholder
-        ? { placeholder: true, label: this.props.placeholder }
-        : { placeholder: true, label: "" }
+      this.props.placeholder ? { placeholder: true, label: this.props.placeholder } : { placeholder: true, label: "" }
     ]
   }
 
@@ -128,16 +123,29 @@ class Select extends Component<{}, Props, State> {
     const optionIndex: number = this.state.value.indexOf(option)
 
     if (optionIndex < 0) {
-      this.setState(prevState => ({
-        value: [...prevState.value, option].filter(item => !item.placeholder)
-      }))
+      this.setState((prevState: State) => {
+        if (prevState instanceof Object) {
+          return {
+            value: [...prevState.value, option].filter(item => !item.placeholder)
+          }
+        } else {
+          throw new Error(
+            "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
+          )
+        }
+      })
     } else {
-      this.setState(prevState => ({
-        value: [
-          ...prevState.value.slice(0, optionIndex),
-          ...prevState.value.slice(optionIndex + 1)
-        ]
-      }))
+      this.setState(prevState => {
+        if (prevState instanceof Object) {
+          return {
+            value: [...prevState.value.slice(0, optionIndex), ...prevState.value.slice(optionIndex + 1)]
+          }
+        } else {
+          throw new Error(
+            "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
+          )
+        }
+      })
     }
   }
 
@@ -155,13 +163,11 @@ class Select extends Component<{}, Props, State> {
     return this.state.value.indexOf(option) > -1
   }
 
-  async updateFilter(event: SyntheticEvent) {
+  async updateFilter(event: SyntheticEvent<HTMLDivElement>) {
     event.persist()
 
     if (!(event.target instanceof HTMLInputElement)) {
-      throw new Error(
-        "<Select>: Your filter field is _not_ an input element and therefore has an unreadable value."
-      )
+      throw new Error("<Select>: Your filter field is _not_ an input element and therefore has an unreadable value.")
     }
 
     if (this.props.onFilter) {
@@ -191,9 +197,9 @@ class Select extends Component<{}, Props, State> {
     return (
       <div
         ref={container => this.container = container}
-        className={`${this.props.className} Select${this.state.open
-          ? " Select_open"
-          : ""}${this.state.updating ? " Select_updating" : ""}`}
+        className={`${this.props.className} Select${this.state.open ? " Select_open" : ""}${this.state.updating
+          ? " Select_updating"
+          : ""}`}
         role="listbox"
         tabIndex="-2"
         onClick={() => this.toggle()}
@@ -203,8 +209,7 @@ class Select extends Component<{}, Props, State> {
         </div>
         {this.props.options.length && this.state.open
           ? <div className="Select__options">
-            {this.props.filterable &&
-                <SelectFilter onChange={e => this.updateFilter(e)} />}
+            {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
             <div className="Select__options_list">
               {this.props.options.map(
                 (option: option) =>

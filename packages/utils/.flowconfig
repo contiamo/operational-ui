@@ -1,0 +1,9 @@
+[ignore]
+.*/node_modules/conventional-changelog-core/.*
+[include]
+
+[libs]
+
+[lints]
+
+[options]

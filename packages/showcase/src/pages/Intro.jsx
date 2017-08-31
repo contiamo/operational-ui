@@ -1,5 +1,6 @@
+// @flow
 import React from "react"
-import glamorous, { Div } from "glamorous"
+import glamorous from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, Grid, BarChart2 } from "react-feather"
 
@@ -8,10 +9,7 @@ import { Card as IntroCard } from "contiamo-ui-components"
 const myCard = ({ className }: { className: string }) =>
     <div className={className} style={{ padding: 32, maxWidth: 700 }}>
       <h1>Contiamo UI</h1>
-      <h2>
-        A single collection of UI components that compose to create Contiamo
-        products.
-      </h2>
+      <h2>A single collection of UI components that compose to create Contiamo products.</h2>
 
       <div className="grid">
         <Link to="/components">
@@ -30,7 +28,7 @@ const myCard = ({ className }: { className: string }) =>
         </IntroCard>
       </div>
     </div>,
-  style = ({ theme }: { theme: THEME }) => ({
+  style = () => ({
     "& .grid": {
       display: "grid",
       gridTemplateColumns: "repeat(2, 1fr)",

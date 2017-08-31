@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from "react"
 import glamorous from "glamorous"
 import { fadeIn } from "contiamo-ui-utils"
@@ -11,8 +12,9 @@ type option = {
 type Props = {
   className: string,
   children: any,
-  options?: Array<option>,
+  options: Array<option>,
   onChange?: () => mixed,
+  theme: THEME,
 }
 
 type State = {
@@ -20,24 +22,19 @@ type State = {
   value: option,
 }
 
-class SideNavigationHeader<Props, State> extends Component {
+class SideNavigationHeader extends Component<Props, State> {
   static defaultProps = {
     options: []
   }
   state = {
-    open: false
+    open: false,
+    value: { id: -1, label: "" }
   }
   componentDidMount() {
     this.setState(() => ({ value: this.getDefaultValue() }))
   }
   getDefaultValue() {
-    if (this.props.options.length === 0) {
-      return
-    }
-    return (
-      this.props.options.find(option => option.default === true) ||
-      this.props.options[0]
-    )
+    return this.props.options.find(option => option.default === true) || this.props.options[0]
   }
   toggle() {
     if (this.props.options.length === 0) {
@@ -45,7 +42,7 @@ class SideNavigationHeader<Props, State> extends Component {
     }
     this.setState(prevState => ({ open: !prevState.open }))
   }
-  async onChange(option) {
+  async onChange(option: option) {
     if (this.props.onChange) {
       await this.props.onChange()
     }
@@ -59,6 +56,9 @@ class SideNavigationHeader<Props, State> extends Component {
             key={option.id}
             className="SideNavigationHeader__option"
             onClick={() => this.onChange(option)}
+            tabIndex={option.id * -1}
+            aria-selected={this.state.value === option}
+            role="option"
           >
             {option.label}
           </div>
@@ -71,6 +71,8 @@ class SideNavigationHeader<Props, State> extends Component {
       <div
         className={`${this.props.className} SideNavigationHeader`}
         onClick={() => this.toggle()}
+        tabIndex="-1"
+        role="listbox"
       >
         {this.props.children}
         {this.state.value &&

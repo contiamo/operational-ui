@@ -8,8 +8,8 @@ describe("Button Component", () => {
     expect(shallow(<Button>hi</Button>)).toMatchSnapshot()
   })
   it("Should respond to clicks", () => {
-    const myFunc = jest.fn()
-    const button = shallow(<Button onClick={() => myFunc()}>Click me</Button>)
+    const myFunc = jest.fn(),
+      button = shallow(<Button onClick={() => myFunc()}>Click me</Button>)
 
     button.simulate("click")
 

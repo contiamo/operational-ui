@@ -1,7 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: Header Should render correctly 1`] = `
-<bound 
-  className="css-uamldc"
-/>
+<glamorous(Header)
+  color="#fff"
+  css={
+    Object {
+      "backgroundColor": "#fff",
+      "boxShadow": "0px 1px 2px #d3d1d1",
+    }
+  }
+>
+  Contiamo UI
+  <Route
+    path="/components"
+    render={[Function]}
+  />
+</glamorous(Header)>
 `;
