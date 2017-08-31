@@ -6,3 +6,4 @@ flow-typed/npm
 dist
 coverage
 fonts
+!public/fonts
