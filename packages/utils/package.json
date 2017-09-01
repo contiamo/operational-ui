@@ -2,7 +2,7 @@
   "name": "contiamo-ui-utils",
   "version": "1.0.0",
   "description": "A collection of utilities used within the Contiamo UI suite",
-  "main": "dist/utils.js",
+  "main": "./lib/utils.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",

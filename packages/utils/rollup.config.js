@@ -21,6 +21,6 @@ export default {
   external: ["jest"],
   output: {
     format: "cjs",
-    file: "./dist/utils.js" // equivalent to --output
+    file: "./lib/utils.js" // equivalent to --output
   }
 }

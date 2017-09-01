@@ -4,11 +4,11 @@ const webpackMerge = require("webpack-merge"),
   { resolve } = require("path")
 
 const config = require("./config.base")
-
 module.exports = webpackMerge(config, {
   plugins: [new webpack.NamedModulesPlugin(), new DashboardPlugin()],
   devServer: {
     contentBase: resolve(__dirname, "..", "public"),
-    historyApiFallback: true
+    historyApiFallback: true,
+    publicPath: "/"
   }
 })
