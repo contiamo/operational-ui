@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, withRouter } from "react-router-dom"
-import glamorous, { Div } from "glamorous"
+import { Div } from "glamorous"
 
 import Sidebar from "../components/Sidebar/Sidebar"
 import AppCanvas from "../components/Canvas/Canvas"
@@ -15,8 +15,7 @@ import SidebarPage from "./Sidebar/Sidebar"
 import Icons from "./Icons/Icons"
 
 const SidebarWithRouter = withRouter(Sidebar),
-  InfoTooltip = ({ className }) => <div className={className}>Choose a Component to Get Started</div>,
-  StyledInfoTooltip = glamorous(InfoTooltip)({
+  style = {
     position: "fixed",
     top: 80,
     background: "black",
@@ -32,7 +31,8 @@ const SidebarWithRouter = withRouter(Sidebar),
       border: "6px solid transparent",
       borderRight: "6px solid black"
     }
-  })
+  },
+  InfoTooltip = () => <Div css={style}>Choose a Component to Get Started</Div>
 
 export default () =>
   <Div
@@ -45,7 +45,7 @@ export default () =>
   >
     <SidebarWithRouter />
     <AppCanvas css={{ position: "relative", marginLeft: 16, flexBasis: "100%" }}>
-      <Route exact path="/components" component={StyledInfoTooltip} />
+      <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={ButtonsPage} />
       <Route path="/components/form-fields" component={FormFieldsPage} />
       <Route path="/components/cards" component={CardsPage} />

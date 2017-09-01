@@ -1,4 +1,4 @@
-// flow-typed signature: 69026a884a9891a34907e28922d21fdb
+// flow-typed signature: 93e42eb54daa8599dd0a3fc914470497
 // flow-typed version: <<STUB>>/contiamo-ui-utils_v^1.0.0/flow_v0.53.1
 
 /**
@@ -22,7 +22,7 @@ declare module 'contiamo-ui-utils' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'contiamo-ui-utils/dist/utils' {
+declare module 'contiamo-ui-utils/flow-typed/contiamo' {
   declare module.exports: any;
 }
 
@@ -154,6 +154,10 @@ declare module 'contiamo-ui-utils/flow-typed/npm/tinycolor2_vx.x.x' {
   declare module.exports: any;
 }
 
+declare module 'contiamo-ui-utils/lib/utils' {
+  declare module.exports: any;
+}
+
 declare module 'contiamo-ui-utils/rollup.config' {
   declare module.exports: any;
 }
@@ -167,8 +171,8 @@ declare module 'contiamo-ui-utils/src/color' {
 }
 
 // Filename aliases
-declare module 'contiamo-ui-utils/dist/utils.js' {
-  declare module.exports: $Exports<'contiamo-ui-utils/dist/utils'>;
+declare module 'contiamo-ui-utils/flow-typed/contiamo.js' {
+  declare module.exports: $Exports<'contiamo-ui-utils/flow-typed/contiamo'>;
 }
 declare module 'contiamo-ui-utils/flow-typed/npm/babel-cli_vx.x.x.js' {
   declare module.exports: $Exports<'contiamo-ui-utils/flow-typed/npm/babel-cli_vx.x.x'>;
@@ -271,6 +275,9 @@ declare module 'contiamo-ui-utils/index' {
 }
 declare module 'contiamo-ui-utils/index.js' {
   declare module.exports: $Exports<'contiamo-ui-utils'>;
+}
+declare module 'contiamo-ui-utils/lib/utils.js' {
+  declare module.exports: $Exports<'contiamo-ui-utils/lib/utils'>;
 }
 declare module 'contiamo-ui-utils/rollup.config.js' {
   declare module.exports: $Exports<'contiamo-ui-utils/rollup.config'>;

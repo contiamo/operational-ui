@@ -65,6 +65,11 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     label="UI Elements"
   >
     <glamorous(_class)
+      disabled={true}
+    >
+      Context Menu
+    </glamorous(_class)>
+    <glamorous(_class)
       to="/components/cards"
     >
       Cards

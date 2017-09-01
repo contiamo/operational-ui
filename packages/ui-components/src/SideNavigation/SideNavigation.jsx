@@ -39,12 +39,18 @@ const SideNavigation = ({ className, children }: Props): React$Element<*> =>
         : theme.colors && theme.colors.primary,
       hoverWidth = expandOnHover
         ? {
-          transition: ".3s width ease",
+          transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
           willChange: "width",
           "&:hover": {
             width: expandedWidth
           },
-          "&:hover .Tooltip": {
+          "& .Tooltip": {
+            display: "none"
+          },
+          "&:not(:hover) .SideNavigationHeader::after": {
+            content: "none"
+          },
+          "&:not(:hover) .SideNavigationHeader__options": {
             display: "none"
           }
         }
@@ -59,7 +65,7 @@ const SideNavigation = ({ className, children }: Props): React$Element<*> =>
       width,
       height: "100vh",
       overflow: "hidden",
-      padding: theme.spacing * 1.3 || 0,
+      boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
       backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
       ...hoverWidth
