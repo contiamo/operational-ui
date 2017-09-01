@@ -6,6 +6,7 @@ module.exports = {
   // We use babel-polyfill for async/await
   entry: ["regenerator-runtime/runtime", resolve(__dirname, "..", "index.jsx")],
   output: {
+    publicPath: "/",
     path: resolve(__dirname, "..", "dist"),
     filename: "[name].js"
   },

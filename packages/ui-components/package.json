@@ -2,7 +2,7 @@
   "name": "contiamo-ui-components",
   "version": "1.0.0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
-  "main": "dist/components.js",
+  "main": "./lib/components.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",

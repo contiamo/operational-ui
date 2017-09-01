@@ -22,7 +22,7 @@ const appFontFace: {
     let cssUrl: string = `local('${fontFamily}')`
 
     extensions.forEach((extension: string): string => {
-      cssUrl += `, url('${path}/${weight}/${weight}.${extension}')`
+      cssUrl += `, url('${path}/${weight}.${extension}')`
       return cssUrl
     })
 

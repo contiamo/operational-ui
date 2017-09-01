@@ -27,6 +27,6 @@ export default {
   external: ["react", "jest"],
   output: {
     format: "cjs",
-    file: "./dist/components.js" // equivalent to --output
+    file: "./lib/components.js" // equivalent to --output
   }
 }
