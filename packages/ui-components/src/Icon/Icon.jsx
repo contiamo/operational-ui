@@ -1,6 +1,7 @@
 // @flow
 import React from "react"
-import { Play, Pause } from "react-feather"
+import type { Node } from "react"
+import * as ReactFeather from "react-feather"
 
 const sizeFactors = {
   small: 0.5,
@@ -8,45 +9,28 @@ const sizeFactors = {
   large: 2
 }
 
-type IconName = "play" | "pause"
+type IconName = string
 type IconSize = $Keys<typeof sizeFactors> // any key from sizeFactors object
 
-const Icon = ({
-    name = "play",
-    size = "medium",
-    sizeOverride,
-    theme
-  }: {
-    name: IconName,
-    size?: IconSize,
-    sizeOverride?: number,
-    theme: THEME
-  }): React$Element<*> => {
-    // Theme is not defined in the showcase package.
-    // TODO: find better solution here.
-    const themeSpacing = theme ? theme.spacing : 16
+type Props = {
+  name: IconName,
+  size?: IconSize,
+  sizeOverride?: number,
+  theme: THEME
+}
 
-    const pixelSize = sizeOverride || themeSpacing * sizeFactors[size]
+const Icon = ({ name = "Play", size = "medium", sizeOverride, theme }: Props): Node => {
+  const themeSpacing = theme ? theme.spacing : 16
 
-    // Separate react-feather props to facilitate mixing with other
-    // icon types later on.
-    const reactFeatherProps = {
-      size: pixelSize
-    }
+  const pixelSize = sizeOverride || themeSpacing * sizeFactors[size]
 
-    switch(name) {
-      case "play":
-        return <Play {...reactFeatherProps} />
-      case "pause":
-        return <Pause {...reactFeatherProps} />
-      default:
-        // eslint-disable-next-line
-        (name: empty)
-        // Return dummy SVG to make Flow happy, but this part of the code is
-        // never reached in a typechecked environment.
-        return <svg />
-    }
+  const props = {
+    size: pixelSize
   }
 
+  const Comp = ReactFeather[name]
+
+  return <Comp {...props} />
+}
 export default Icon
 export { Icon }

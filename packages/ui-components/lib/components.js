@@ -31379,50 +31379,519 @@ exports.ZoomIn = _zoomIn2.default;
 exports.ZoomOut = _zoomOut2.default;
 });
 
-unwrapExports$1(dist);
+var index$3$1 = unwrapExports$1(dist);
+var dist_1 = dist.ZoomOut;
+var dist_2 = dist.ZoomIn;
+var dist_3 = dist.Zap;
+var dist_4 = dist.X;
+var dist_5 = dist.XSquare;
+var dist_6 = dist.XCircle;
+var dist_7 = dist.Wind;
+var dist_8 = dist.Wifi;
+var dist_9 = dist.WifiOff;
+var dist_10 = dist.Watch;
+var dist_11 = dist.Volume;
+var dist_12 = dist.VolumeX;
+var dist_13 = dist.Volume2;
+var dist_14 = dist.Volume1;
+var dist_15 = dist.Voicemail;
+var dist_16 = dist.Video;
+var dist_17 = dist.VideoOff;
+var dist_18 = dist.Users;
+var dist_19 = dist.User;
+var dist_20 = dist.UserX;
+var dist_21 = dist.UserPlus;
+var dist_22 = dist.UserMinus;
+var dist_23 = dist.UserCheck;
+var dist_24 = dist.Upload;
+var dist_25 = dist.UploadCloud;
+var dist_26 = dist.Unlock;
+var dist_27 = dist.Underline;
+var dist_28 = dist.Umbrella;
+var dist_29 = dist.Type;
+var dist_30 = dist.Twitter;
+var dist_31 = dist.Tv;
+var dist_32 = dist.Triangle;
+var dist_33 = dist.TrendingUp;
+var dist_34 = dist.TrendingDown;
+var dist_35 = dist.Trash;
+var dist_36 = dist.Trash2;
+var dist_37 = dist.ToggleRight;
+var dist_38 = dist.ToggleLeft;
+var dist_39 = dist.ThumbsUp;
+var dist_40 = dist.ThumbsDown;
+var dist_41 = dist.Thermometer;
+var dist_42 = dist.Target;
+var dist_43 = dist.Tag;
+var dist_44 = dist.Tablet;
+var dist_45 = dist.Sunset;
+var dist_46 = dist.Sunrise;
+var dist_47 = dist.Sun;
+var dist_48 = dist.StopCircle;
+var dist_49 = dist.Star;
+var dist_50 = dist.Square;
+var dist_51 = dist.Speaker;
+var dist_52 = dist.Smartphone;
+var dist_53 = dist.Sliders;
+var dist_54 = dist.Slash;
+var dist_55 = dist.Slack;
+var dist_56 = dist.SkipForward;
+var dist_57 = dist.SkipBack;
+var dist_58 = dist.Sidebar;
+var dist_59 = dist.Shuffle;
+var dist_60 = dist.ShoppingCart;
+var dist_61 = dist.Shield;
+var dist_62 = dist.Share;
+var dist_63 = dist.Share2;
+var dist_64 = dist.Settings;
+var dist_65 = dist.Server;
+var dist_66 = dist.Search;
+var dist_67 = dist.Scissors;
+var dist_68 = dist.Save;
+var dist_69 = dist.RotateCw;
+var dist_70 = dist.RotateCcw;
+var dist_71 = dist.Rewind;
+var dist_72 = dist.Repeat;
+var dist_73 = dist.RefreshCw;
+var dist_74 = dist.RefreshCcw;
+var dist_75 = dist.Radio;
+var dist_76 = dist.Printer;
+var dist_77 = dist.Power;
+var dist_78 = dist.Pocket;
+var dist_79 = dist.Plus;
+var dist_80 = dist.PlusSquare;
+var dist_81 = dist.PlusCircle;
 var dist_82 = dist.Play;
+var dist_83 = dist.PlayCircle;
+var dist_84 = dist.PieChart;
+var dist_85 = dist.Phone;
+var dist_86 = dist.PhoneOutgoing;
+var dist_87 = dist.PhoneOff;
+var dist_88 = dist.PhoneMissed;
+var dist_89 = dist.PhoneIncoming;
+var dist_90 = dist.PhoneForwarded;
+var dist_91 = dist.PhoneCall;
+var dist_92 = dist.Percent;
 var dist_93 = dist.Pause;
+var dist_94 = dist.PauseCircle;
+var dist_95 = dist.Paperclip;
+var dist_96 = dist.Package;
+var dist_97 = dist.Octagon;
+var dist_98 = dist.Navigation;
+var dist_99 = dist.Navigation2;
+var dist_100 = dist.Music;
+var dist_101 = dist.Move;
+var dist_102 = dist.MoreVertical;
+var dist_103 = dist.MoreHorizontal;
+var dist_104 = dist.Moon;
+var dist_105 = dist.Monitor;
+var dist_106 = dist.Minus;
+var dist_107 = dist.MinusSquare;
+var dist_108 = dist.MinusCircle;
+var dist_109 = dist.Minimize;
+var dist_110 = dist.Minimize2;
+var dist_111 = dist.Mic;
+var dist_112 = dist.MicOff;
+var dist_113 = dist.MessageSquare;
+var dist_114 = dist.MessageCircle;
+var dist_115 = dist.Menu;
+var dist_116 = dist.Maximize;
+var dist_117 = dist.Maximize2;
+var dist_118 = dist.Map;
+var dist_119 = dist.MapPin;
+var dist_120 = dist.Mail;
+var dist_121 = dist.LogOut;
+var dist_122 = dist.LogIn;
+var dist_123 = dist.Lock;
+var dist_124 = dist.Loader;
+var dist_125 = dist.List;
+var dist_126 = dist.Link;
+var dist_127 = dist.Link2;
+var dist_128 = dist.LifeBuoy;
+var dist_129 = dist.Layout;
+var dist_130 = dist.Layers;
+var dist_131 = dist.Italic;
+var dist_132 = dist.Instagram;
+var dist_133 = dist.Info;
+var dist_134 = dist.Inbox;
+var dist_135 = dist.Image;
+var dist_136 = dist.Home;
+var dist_137 = dist.HelpCircle;
+var dist_138 = dist.Heart;
+var dist_139 = dist.Headphones;
+var dist_140 = dist.Hash;
+var dist_141 = dist.Grid;
+var dist_142 = dist.Globe;
+var dist_143 = dist.Gitlab;
+var dist_144 = dist.Github;
+var dist_145 = dist.Folder;
+var dist_146 = dist.Flag;
+var dist_147 = dist.Filter;
+var dist_148 = dist.Film;
+var dist_149 = dist.File;
+var dist_150 = dist.FileText;
+var dist_151 = dist.FilePlus;
+var dist_152 = dist.FileMinus;
+var dist_153 = dist.Feather;
+var dist_154 = dist.FastForward;
+var dist_155 = dist.Facebook;
+var dist_156 = dist.Eye;
+var dist_157 = dist.EyeOff;
+var dist_158 = dist.ExternalLink;
+var dist_159 = dist.Edit;
+var dist_160 = dist.Edit3;
+var dist_161 = dist.Edit2;
+var dist_162 = dist.Droplet;
+var dist_163 = dist.Download;
+var dist_164 = dist.DownloadCloud;
+var dist_165 = dist.Disc;
+var dist_166 = dist.Delete;
+var dist_167 = dist.Crosshair;
+var dist_168 = dist.Crop;
+var dist_169 = dist.CreditCard;
+var dist_170 = dist.Cpu;
+var dist_171 = dist.CornerUpRight;
+var dist_172 = dist.CornerUpLeft;
+var dist_173 = dist.CornerRightUp;
+var dist_174 = dist.CornerRightDown;
+var dist_175 = dist.CornerLeftUp;
+var dist_176 = dist.CornerLeftDown;
+var dist_177 = dist.CornerDownRight;
+var dist_178 = dist.CornerDownLeft;
+var dist_179 = dist.Copy;
+var dist_180 = dist.Compass;
+var dist_181 = dist.Command;
+var dist_182 = dist.Codepen;
+var dist_183 = dist.Cloud;
+var dist_184 = dist.CloudSnow;
+var dist_185 = dist.CloudRain;
+var dist_186 = dist.CloudOff;
+var dist_187 = dist.CloudLightning;
+var dist_188 = dist.CloudDrizzle;
+var dist_189 = dist.Clock;
+var dist_190 = dist.Clipboard;
+var dist_191 = dist.Circle;
+var dist_192 = dist.Chrome;
+var dist_193 = dist.ChevronsUp;
+var dist_194 = dist.ChevronsRight;
+var dist_195 = dist.ChevronsLeft;
+var dist_196 = dist.ChevronsDown;
+var dist_197 = dist.ChevronUp;
+var dist_198 = dist.ChevronRight;
+var dist_199 = dist.ChevronLeft;
+var dist_200 = dist.ChevronDown;
+var dist_201 = dist.Check;
+var dist_202 = dist.CheckSquare;
+var dist_203 = dist.CheckCircle;
+var dist_204 = dist.Cast;
+var dist_205 = dist.Camera;
+var dist_206 = dist.CameraOff;
+var dist_207 = dist.Calendar;
+var dist_208 = dist.Briefcase;
+var dist_209 = dist.Box;
+var dist_210 = dist.Bookmark;
+var dist_211 = dist.Book;
+var dist_212 = dist.Bold;
+var dist_213 = dist.Bluetooth;
+var dist_214 = dist.Bell;
+var dist_215 = dist.BellOff;
+var dist_216 = dist.Battery;
+var dist_217 = dist.BatteryCharging;
+var dist_218 = dist.BarChart;
+var dist_219 = dist.BarChart2;
+var dist_220 = dist.Award;
+var dist_221 = dist.AtSign;
+var dist_222 = dist.ArrowUp;
+var dist_223 = dist.ArrowUpRight;
+var dist_224 = dist.ArrowUpLeft;
+var dist_225 = dist.ArrowRight;
+var dist_226 = dist.ArrowLeft;
+var dist_227 = dist.ArrowDown;
+var dist_228 = dist.ArrowDownRight;
+var dist_229 = dist.ArrowDownLeft;
+var dist_230 = dist.Aperture;
+var dist_231 = dist.Anchor;
+var dist_232 = dist.AlignRight;
+var dist_233 = dist.AlignLeft;
+var dist_234 = dist.AlignJustify;
+var dist_235 = dist.AlignCenter;
+var dist_236 = dist.AlertTriangle;
+var dist_237 = dist.AlertOctagon;
+var dist_238 = dist.AlertCircle;
+var dist_239 = dist.Airplay;
+var dist_240 = dist.Activity;
+
+
+var ReactFeather = Object.freeze({
+	default: index$3$1,
+	__moduleExports: dist,
+	ZoomOut: dist_1,
+	ZoomIn: dist_2,
+	Zap: dist_3,
+	X: dist_4,
+	XSquare: dist_5,
+	XCircle: dist_6,
+	Wind: dist_7,
+	Wifi: dist_8,
+	WifiOff: dist_9,
+	Watch: dist_10,
+	Volume: dist_11,
+	VolumeX: dist_12,
+	Volume2: dist_13,
+	Volume1: dist_14,
+	Voicemail: dist_15,
+	Video: dist_16,
+	VideoOff: dist_17,
+	Users: dist_18,
+	User: dist_19,
+	UserX: dist_20,
+	UserPlus: dist_21,
+	UserMinus: dist_22,
+	UserCheck: dist_23,
+	Upload: dist_24,
+	UploadCloud: dist_25,
+	Unlock: dist_26,
+	Underline: dist_27,
+	Umbrella: dist_28,
+	Type: dist_29,
+	Twitter: dist_30,
+	Tv: dist_31,
+	Triangle: dist_32,
+	TrendingUp: dist_33,
+	TrendingDown: dist_34,
+	Trash: dist_35,
+	Trash2: dist_36,
+	ToggleRight: dist_37,
+	ToggleLeft: dist_38,
+	ThumbsUp: dist_39,
+	ThumbsDown: dist_40,
+	Thermometer: dist_41,
+	Target: dist_42,
+	Tag: dist_43,
+	Tablet: dist_44,
+	Sunset: dist_45,
+	Sunrise: dist_46,
+	Sun: dist_47,
+	StopCircle: dist_48,
+	Star: dist_49,
+	Square: dist_50,
+	Speaker: dist_51,
+	Smartphone: dist_52,
+	Sliders: dist_53,
+	Slash: dist_54,
+	Slack: dist_55,
+	SkipForward: dist_56,
+	SkipBack: dist_57,
+	Sidebar: dist_58,
+	Shuffle: dist_59,
+	ShoppingCart: dist_60,
+	Shield: dist_61,
+	Share: dist_62,
+	Share2: dist_63,
+	Settings: dist_64,
+	Server: dist_65,
+	Search: dist_66,
+	Scissors: dist_67,
+	Save: dist_68,
+	RotateCw: dist_69,
+	RotateCcw: dist_70,
+	Rewind: dist_71,
+	Repeat: dist_72,
+	RefreshCw: dist_73,
+	RefreshCcw: dist_74,
+	Radio: dist_75,
+	Printer: dist_76,
+	Power: dist_77,
+	Pocket: dist_78,
+	Plus: dist_79,
+	PlusSquare: dist_80,
+	PlusCircle: dist_81,
+	Play: dist_82,
+	PlayCircle: dist_83,
+	PieChart: dist_84,
+	Phone: dist_85,
+	PhoneOutgoing: dist_86,
+	PhoneOff: dist_87,
+	PhoneMissed: dist_88,
+	PhoneIncoming: dist_89,
+	PhoneForwarded: dist_90,
+	PhoneCall: dist_91,
+	Percent: dist_92,
+	Pause: dist_93,
+	PauseCircle: dist_94,
+	Paperclip: dist_95,
+	Package: dist_96,
+	Octagon: dist_97,
+	Navigation: dist_98,
+	Navigation2: dist_99,
+	Music: dist_100,
+	Move: dist_101,
+	MoreVertical: dist_102,
+	MoreHorizontal: dist_103,
+	Moon: dist_104,
+	Monitor: dist_105,
+	Minus: dist_106,
+	MinusSquare: dist_107,
+	MinusCircle: dist_108,
+	Minimize: dist_109,
+	Minimize2: dist_110,
+	Mic: dist_111,
+	MicOff: dist_112,
+	MessageSquare: dist_113,
+	MessageCircle: dist_114,
+	Menu: dist_115,
+	Maximize: dist_116,
+	Maximize2: dist_117,
+	Map: dist_118,
+	MapPin: dist_119,
+	Mail: dist_120,
+	LogOut: dist_121,
+	LogIn: dist_122,
+	Lock: dist_123,
+	Loader: dist_124,
+	List: dist_125,
+	Link: dist_126,
+	Link2: dist_127,
+	LifeBuoy: dist_128,
+	Layout: dist_129,
+	Layers: dist_130,
+	Italic: dist_131,
+	Instagram: dist_132,
+	Info: dist_133,
+	Inbox: dist_134,
+	Image: dist_135,
+	Home: dist_136,
+	HelpCircle: dist_137,
+	Heart: dist_138,
+	Headphones: dist_139,
+	Hash: dist_140,
+	Grid: dist_141,
+	Globe: dist_142,
+	Gitlab: dist_143,
+	Github: dist_144,
+	Folder: dist_145,
+	Flag: dist_146,
+	Filter: dist_147,
+	Film: dist_148,
+	File: dist_149,
+	FileText: dist_150,
+	FilePlus: dist_151,
+	FileMinus: dist_152,
+	Feather: dist_153,
+	FastForward: dist_154,
+	Facebook: dist_155,
+	Eye: dist_156,
+	EyeOff: dist_157,
+	ExternalLink: dist_158,
+	Edit: dist_159,
+	Edit3: dist_160,
+	Edit2: dist_161,
+	Droplet: dist_162,
+	Download: dist_163,
+	DownloadCloud: dist_164,
+	Disc: dist_165,
+	Delete: dist_166,
+	Crosshair: dist_167,
+	Crop: dist_168,
+	CreditCard: dist_169,
+	Cpu: dist_170,
+	CornerUpRight: dist_171,
+	CornerUpLeft: dist_172,
+	CornerRightUp: dist_173,
+	CornerRightDown: dist_174,
+	CornerLeftUp: dist_175,
+	CornerLeftDown: dist_176,
+	CornerDownRight: dist_177,
+	CornerDownLeft: dist_178,
+	Copy: dist_179,
+	Compass: dist_180,
+	Command: dist_181,
+	Codepen: dist_182,
+	Cloud: dist_183,
+	CloudSnow: dist_184,
+	CloudRain: dist_185,
+	CloudOff: dist_186,
+	CloudLightning: dist_187,
+	CloudDrizzle: dist_188,
+	Clock: dist_189,
+	Clipboard: dist_190,
+	Circle: dist_191,
+	Chrome: dist_192,
+	ChevronsUp: dist_193,
+	ChevronsRight: dist_194,
+	ChevronsLeft: dist_195,
+	ChevronsDown: dist_196,
+	ChevronUp: dist_197,
+	ChevronRight: dist_198,
+	ChevronLeft: dist_199,
+	ChevronDown: dist_200,
+	Check: dist_201,
+	CheckSquare: dist_202,
+	CheckCircle: dist_203,
+	Cast: dist_204,
+	Camera: dist_205,
+	CameraOff: dist_206,
+	Calendar: dist_207,
+	Briefcase: dist_208,
+	Box: dist_209,
+	Bookmark: dist_210,
+	Book: dist_211,
+	Bold: dist_212,
+	Bluetooth: dist_213,
+	Bell: dist_214,
+	BellOff: dist_215,
+	Battery: dist_216,
+	BatteryCharging: dist_217,
+	BarChart: dist_218,
+	BarChart2: dist_219,
+	Award: dist_220,
+	AtSign: dist_221,
+	ArrowUp: dist_222,
+	ArrowUpRight: dist_223,
+	ArrowUpLeft: dist_224,
+	ArrowRight: dist_225,
+	ArrowLeft: dist_226,
+	ArrowDown: dist_227,
+	ArrowDownRight: dist_228,
+	ArrowDownLeft: dist_229,
+	Aperture: dist_230,
+	Anchor: dist_231,
+	AlignRight: dist_232,
+	AlignLeft: dist_233,
+	AlignJustify: dist_234,
+	AlignCenter: dist_235,
+	AlertTriangle: dist_236,
+	AlertOctagon: dist_237,
+	AlertCircle: dist_238,
+	Airplay: dist_239,
+	Activity: dist_240
+});
 
 var sizeFactors = {
   small: 0.5,
   medium: 1,
   large: 2
-};
-
-// any key from sizeFactors object
+}; // any key from sizeFactors object
 
 var Icon = function Icon(_ref) {
   var _ref$name = _ref.name,
-      name = _ref$name === undefined ? "play" : _ref$name,
+      name = _ref$name === undefined ? "Play" : _ref$name,
       _ref$size = _ref.size,
       size = _ref$size === undefined ? "medium" : _ref$size,
       sizeOverride = _ref.sizeOverride,
       theme = _ref.theme;
 
-  // Theme is not defined in the showcase package.
-  // TODO: find better solution here.
   var themeSpacing = theme ? theme.spacing : 16;
 
   var pixelSize = sizeOverride || themeSpacing * sizeFactors[size];
 
-  // Separate react-feather props to facilitate mixing with other
-  // icon types later on.
-  var reactFeatherProps = {
+  var props = {
     size: pixelSize
   };
 
-  switch (name) {
-    case "play":
-      return _react__default.createElement(dist_82, reactFeatherProps);
-    case "pause":
-      return _react__default.createElement(dist_93, reactFeatherProps);
-    default:
-      // eslint-disable-next-line
-      name;
-      // Return dummy SVG to make Flow happy, but this part of the code is
-      // never reached in a typechecked environment.
-      return _react__default.createElement("svg", null);
-  }
+  var Comp = ReactFeather[name];
+
+  return _react__default.createElement(Comp, props);
 };
 
 var _extends$17 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };

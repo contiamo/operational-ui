@@ -27,7 +27,8 @@ exports[`Icons Page Should render correctly 1`] = `
           
           &lt;div style={{display: 'flex', marginTop: 16 }}&gt;
             &lt;Icon name="play" /&gt;
-            &lt;Icon name="pause" /&gt;
+            &lt;Icon name="pause" size="large" /&gt;
+            &lt;Icon name="pause" sizeOverride={17} /&gt;
           &lt;/div&gt;
           
         </textarea>
@@ -84,6 +85,38 @@ exports[`Icons Page Should render correctly 1`] = `
         </td>
         <td>
           🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          size
+        </td>
+        <td>
+          Size as pre-defined strings.
+        </td>
+        <td>
+          medium
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          sizeOverride
+        </td>
+        <td>
+          Override the size to a single number.
+        </td>
+        <td />
+        <td>
+          number
+        </td>
+        <td>
+          ✅
         </td>
       </tr>
     </tbody>
