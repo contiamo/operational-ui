@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icons Page Should render correctly 1`] = `
+<div>
+  <h1>
+    Icons
+  </h1>
+  <h2>
+    Contiamo's SVG icon set as a single component. It abstracts over different types of icons (react-feather, custom shapes, SVG sprites) to provide a consistent API as the icon set evolves.
+  </h2>
+  <h2>
+    Usage
+  </h2>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          
+          
+          &lt;div style={{display: 'flex', marginTop: 16 }}&gt;
+            &lt;Icon name="play" /&gt;
+            &lt;Icon name="pause" /&gt;
+          &lt;/div&gt;
+          
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h2>
+    Props
+  </h2>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          name
+        </td>
+        <td>
+          Prop name.
+        </td>
+        <td>
+          play
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

@@ -4,8 +4,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var React = require('react');
-var React__default = _interopDefault(React);
+var _react = require('react');
+var _react__default = _interopDefault(_react);
 
 function unwrapExports$1 (x) {
 	return x && x.__esModule ? x['default'] : x;
@@ -375,6 +375,17 @@ function camelize(string) {
 
 var camelize_1 = camelize;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
+
 'use strict';
 
 
@@ -602,6 +613,16 @@ emptyFunction.thatReturnsArgument = function (arg) {
 
 var emptyFunction_1 = emptyFunction;
 
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
 'use strict';
 
 
@@ -784,6 +805,17 @@ function hyphenate(string) {
 }
 
 var hyphenate_1 = hyphenate;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
 
 'use strict';
 
@@ -3123,7 +3155,7 @@ var CHANNEL = '__glamorous__';
 var PropTypes = void 0;
 
 /* istanbul ignore next */
-if (parseFloat(React__default.version.slice(0, 4)) >= 15.5) {
+if (parseFloat(_react__default.version.slice(0, 4)) >= 15.5) {
   /* istanbul ignore next */
   try {
     PropTypes = require('prop-types');
@@ -3133,7 +3165,7 @@ if (parseFloat(React__default.version.slice(0, 4)) >= 15.5) {
   }
 }
 /* istanbul ignore next */
-PropTypes = PropTypes || React__default.PropTypes;
+PropTypes = PropTypes || _react__default.PropTypes;
 
 
 
@@ -3355,7 +3387,7 @@ function withTheme(ComponentToTheme) {
       key: 'render',
       value: function render() {
         if (createElement) {
-          return React__default.createElement(ComponentToTheme, _extends({}, this.props, this.state));
+          return _react__default.createElement(ComponentToTheme, _extends({}, this.props, this.state));
         } else {
           // this allows us to effectively use the GlamorousComponent
           // as our `render` method without going through lifecycle hooks.
@@ -3367,7 +3399,7 @@ function withTheme(ComponentToTheme) {
       }
     }]);
     return ThemedComponent;
-  }(React.Component);
+  }(_react.Component);
 
   ThemedComponent.propTypes = {
     theme: PropTypes.object
@@ -3573,11 +3605,11 @@ var ThemeProvider = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return this.props.children ? React__default.Children.only(this.props.children) : null;
+      return this.props.children ? _react__default.Children.only(this.props.children) : null;
     }
   }]);
   return ThemeProvider;
-}(React.Component);
+}(_react.Component);
 
 ThemeProvider.childContextTypes = defineProperty({}, CHANNEL, PropTypes.object.isRequired);
 
@@ -3771,7 +3803,7 @@ function createGlamorous$1(splitProps) {
           displayName: GlamorousComponent.displayName
         }) : this.className;
 
-        return React__default.createElement(GlamorousComponent.comp, _extends({
+        return _react__default.createElement(GlamorousComponent.comp, _extends({
           ref: props.innerRef
         }, toForward, {
           className: this.className
@@ -4435,8 +4467,6 @@ function capitalize(s) {
  */
 glamorous.default = glamorous;
 
-// these exports below are generated
-// and will be tree-shaken if you're using Webpack 2 or Rollup
 var Div = glamorous['Div'];
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -8491,7 +8521,7 @@ var HeaderItem = function HeaderItem(_ref) {
   var className = _ref.className,
       children = _ref.children,
       onClick = _ref.onClick;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { tabIndex: "-1", role: "button", onClick: onClick, className: className },
     children
@@ -8545,7 +8575,7 @@ var HeaderItem$1 = glamorous(HeaderItem)(style$2);
 var HeaderTitle = function HeaderTitle(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className },
     children
@@ -8564,7 +8594,7 @@ var HeaderTitle$1 = glamorous(HeaderTitle)(style$3);
 
 var HeaderSeparator = function HeaderSeparator(_ref) {
   var className = _ref.className;
-  return React__default.createElement("div", { className: className });
+  return _react__default.createElement("div", { className: className });
 };
 var style$4 = function style(_ref2) {
   var theme = _ref2.theme;
@@ -8582,7 +8612,7 @@ var HeaderSeparator$1 = glamorous(HeaderSeparator)(style$4);
 var Header = function Header(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className },
     children
@@ -8701,6 +8731,27 @@ function _possibleConstructorReturn$1(self, call) { if (!self) { throw new Refer
 
 function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+  The <Tooltip /> component.
+
+  The problem:
+  Say you have a container with `overflow: hidden`.
+  Say this container has items that need to show tooltips, that appear
+  _outside_ of page flow, and are not clipped by the overflow.
+
+  The solution is to use `position: fixed`, with dynamically calculated
+  positions at the time of mounting, but React makes this a little
+  tricky, especially if you want a simple API.
+
+  This solution:
+  A tooltip is placed in an absolute position, relative to its parent,
+  even risking getting cut off to overflow.
+
+  At the time of mounting, this _perfect_ position of the tooltip is captured
+  relative to `document`. These coordinates are then set as CSS properties
+  on the tooltip, along with `position: fixed` and all is well with the
+  world. 🌈
+*/
 var Tooltip = function (_Component) {
   _inherits$1(Tooltip, _Component);
 
@@ -8755,7 +8806,7 @@ var Tooltip = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return React__default.createElement(
+      return _react__default.createElement(
         "div",
         {
           ref: function ref(tooltip) {
@@ -8770,7 +8821,7 @@ var Tooltip = function (_Component) {
   }]);
 
   return Tooltip;
-}(React.Component);
+}(_react.Component);
 
 Tooltip.defaultProps = {
   anchor: "top",
@@ -8789,6 +8840,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+  A simple Higher-Order Component (HOC) that you can wrap with any custom
+  component in order to make it Tooltippable. This should JustWork™.
+
+  USAGE:
+  import withTooltip from './withTooltip'
+  const MyComponentWithTooltip = withTooltip(MyComponent)
+  <MyComponentWithTooltip
+    tooltip={<div>ANYTHING</div>}
+    tooltipAnchor={'top'||'bottom'}
+  />
+*/
 
 var withTooltip = function withTooltip(InputComponent) {
   var _class, _temp2;
@@ -8831,7 +8895,7 @@ var withTooltip = function withTooltip(InputComponent) {
       value: function render() {
         var _this2 = this;
 
-        return React__default.createElement(
+        return _react__default.createElement(
           InputComponent,
           _extends$2({}, this.props, {
             onMouseEnter: function onMouseEnter() {
@@ -8844,7 +8908,7 @@ var withTooltip = function withTooltip(InputComponent) {
             tabIndex: this.props.tabIndex || -1
           }),
           this.props.children ? this.props.children : "",
-          this.props.tooltip && this.state.isTooltipActive ? React__default.createElement(
+          this.props.tooltip && this.state.isTooltipActive ? _react__default.createElement(
             Tooltip$1,
             { active: true, color: this.props.tooltipColor, anchor: this.props.tooltipAnchor },
             this.props.tooltip
@@ -8854,7 +8918,7 @@ var withTooltip = function withTooltip(InputComponent) {
     }]);
 
     return _class;
-  }(React.Component), _class.defaultProps = {
+  }(_react.Component), _class.defaultProps = {
     tooltipAnchor: "top"
   }, _temp2;
 };
@@ -8863,7 +8927,7 @@ var SideNavigationItem = function SideNavigationItem(_ref) {
   var className = _ref.className,
       children = _ref.children,
       onClick = _ref.onClick;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className + " SideNavigationItem", onClick: onClick, role: "button", tabIndex: "-1" },
     children
@@ -8896,7 +8960,7 @@ var SideNavigationLink = function SideNavigationLink(_ref) {
   var className = _ref.className,
       children = _ref.children,
       onClick = _ref.onClick;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className, onClick: onClick, role: "button", tabIndex: "-1" },
     children
@@ -8945,7 +9009,7 @@ var _extends$1 = Object.assign || function (target) { for (var i = 1; i < argume
 var SideNavigation = function SideNavigation(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className },
     children
@@ -9169,12 +9233,12 @@ var SidebarItem = function (_Component) {
         own tooltips.
       */
       var HeaderWithTooltip = withTooltip(Div);
-      return React__default.createElement(
+      return _react__default.createElement(
         "div",
         {
           className: this.props.className + " " + (this.state.updating ? "updating" : "") + " " + (this.state.open ? "open" : "")
         },
-        React__default.createElement(
+        _react__default.createElement(
           HeaderWithTooltip,
           {
             className: "header " + (this.state.open ? "open" : ""),
@@ -9185,7 +9249,7 @@ var SidebarItem = function (_Component) {
           },
           this.props.label
         ),
-        this.state.open ? React__default.createElement(
+        this.state.open ? _react__default.createElement(
           "div",
           { className: "content" },
           this.props.children
@@ -9195,7 +9259,7 @@ var SidebarItem = function (_Component) {
   }]);
 
   return SidebarItem;
-}(React.Component);
+}(_react.Component);
 
 SidebarItem.defaultProps = {
   children: "",
@@ -9340,6 +9404,15 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -9392,6 +9465,15 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 var checkPropTypes_1 = checkPropTypes;
+
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
 
 'use strict';
 
@@ -9896,6 +9978,15 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
 
   return ReactPropTypes;
 };
+
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
 
 'use strict';
 
@@ -10779,6 +10870,10 @@ function _possibleConstructorReturn$4(self, call) { if (!self) { throw new Refer
 
 function _inherits$4(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * The public API for putting history on context.
+ */
+
 var Router$1 = function (_React$Component) {
   _inherits$4(Router, _React$Component);
 
@@ -10825,7 +10920,7 @@ var Router$1 = function (_React$Component) {
         history = _props.history;
 
 
-    invariant_1$3(children == null || React__default.Children.count(children) === 1, 'A <Router> may have only one child element');
+    invariant_1$3(children == null || _react__default.Children.count(children) === 1, 'A <Router> may have only one child element');
 
     // Do this here so we can setState when a <Redirect> changes the
     // location in componentWillMount. This happens e.g. when doing
@@ -10848,11 +10943,11 @@ var Router$1 = function (_React$Component) {
   Router.prototype.render = function render() {
     var children = this.props.children;
 
-    return children ? React__default.Children.only(children) : null;
+    return children ? _react__default.Children.only(children) : null;
   };
 
   return Router;
-}(React__default.Component);
+}(_react__default.Component);
 
 Router$1.propTypes = {
   history: propTypes.object.isRequired,
@@ -10872,6 +10967,10 @@ function _classCallCheck$3(instance, Constructor) { if (!(instance instanceof Co
 function _possibleConstructorReturn$3(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits$3(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * The public API for a <Router> that uses HTML5 history.
+ */
 
 var BrowserRouter = function (_React$Component) {
   _inherits$3(BrowserRouter, _React$Component);
@@ -10893,11 +10992,11 @@ var BrowserRouter = function (_React$Component) {
   };
 
   BrowserRouter.prototype.render = function render() {
-    return React__default.createElement(Router$1, { history: this.history, children: this.props.children });
+    return _react__default.createElement(Router$1, { history: this.history, children: this.props.children });
   };
 
   return BrowserRouter;
-}(React__default.Component);
+}(_react__default.Component);
 
 BrowserRouter.propTypes = {
   basename: propTypes.string,
@@ -11242,6 +11341,10 @@ function _possibleConstructorReturn$5(self, call) { if (!self) { throw new Refer
 
 function _inherits$5(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * The public API for a <Router> that uses window.location.hash.
+ */
+
 var HashRouter = function (_React$Component) {
   _inherits$5(HashRouter, _React$Component);
 
@@ -11262,11 +11365,11 @@ var HashRouter = function (_React$Component) {
   };
 
   HashRouter.prototype.render = function render() {
-    return React__default.createElement(Router$1, { history: this.history, children: this.props.children });
+    return _react__default.createElement(Router$1, { history: this.history, children: this.props.children });
   };
 
   return HashRouter;
-}(React__default.Component);
+}(_react__default.Component);
 
 HashRouter.propTypes = {
   basename: propTypes.string,
@@ -11341,11 +11444,11 @@ var Link$1 = function (_React$Component) {
 
     var href = this.context.router.history.createHref(typeof to === 'string' ? { pathname: to } : to);
 
-    return React__default.createElement('a', _extends$7({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
+    return _react__default.createElement('a', _extends$7({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
   };
 
   return Link;
-}(React__default.Component);
+}(_react__default.Component);
 
 Link$1.propTypes = {
   onClick: propTypes.func,
@@ -11548,6 +11651,10 @@ function _possibleConstructorReturn$7(self, call) { if (!self) { throw new Refer
 
 function _inherits$7(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * The public API for a <Router> that stores location in memory.
+ */
+
 var MemoryRouter$1 = function (_React$Component) {
   _inherits$7(MemoryRouter, _React$Component);
 
@@ -11568,11 +11675,11 @@ var MemoryRouter$1 = function (_React$Component) {
   };
 
   MemoryRouter.prototype.render = function render() {
-    return React__default.createElement(Router$1, { history: this.history, children: this.props.children });
+    return _react__default.createElement(Router$1, { history: this.history, children: this.props.children });
   };
 
   return MemoryRouter;
-}(React__default.Component);
+}(_react__default.Component);
 
 MemoryRouter$1.propTypes = {
   initialEntries: propTypes.array,
@@ -11588,6 +11695,9 @@ var isarray = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
+/**
+ * Expose `pathToRegexp`.
+ */
 var pathToRegexp_1$1 = pathToRegexp;
 var parse_1 = parse;
 var compile_1 = compile;
@@ -12090,7 +12200,7 @@ function _possibleConstructorReturn$8(self, call) { if (!self) { throw new Refer
 function _inherits$8(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var isEmptyChildren = function isEmptyChildren(children) {
-  return React__default.Children.count(children) === 0;
+  return _react__default.Children.count(children) === 0;
 };
 
 /**
@@ -12177,13 +12287,13 @@ var Route$1 = function (_React$Component) {
     var props = { match: match, location: location, history: history, staticContext: staticContext };
 
     return component ? // component prop gets first priority, only called if there's a match
-    match ? React__default.createElement(component, props) : null : render ? // render prop is next, only called if there's a match
+    match ? _react__default.createElement(component, props) : null : render ? // render prop is next, only called if there's a match
     match ? render(props) : null : children ? // children come last, always called
-    typeof children === 'function' ? children(props) : !isEmptyChildren(children) ? React__default.Children.only(children) : null : null;
+    typeof children === 'function' ? children(props) : !isEmptyChildren(children) ? _react__default.Children.only(children) : null : null;
   };
 
   return Route;
-}(React__default.Component);
+}(_react__default.Component);
 
 Route$1.propTypes = {
   computedMatch: propTypes.object, // private, from <Switch>
@@ -12215,6 +12325,9 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
 
 function _objectWithoutProperties$1(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
+/**
+ * A <Link> wrapper that knows if it's "active" or not.
+ */
 var NavLink = function NavLink(_ref) {
   var to = _ref.to,
       exact = _ref.exact,
@@ -12228,7 +12341,7 @@ var NavLink = function NavLink(_ref) {
       ariaCurrent = _ref.ariaCurrent,
       rest = _objectWithoutProperties$1(_ref, ['to', 'exact', 'strict', 'location', 'activeClassName', 'className', 'activeStyle', 'style', 'isActive', 'ariaCurrent']);
 
-  return React__default.createElement(Route$1, {
+  return _react__default.createElement(Route$1, {
     path: (typeof to === 'undefined' ? 'undefined' : _typeof$1(to)) === 'object' ? to.pathname : to,
     exact: exact,
     strict: strict,
@@ -12239,7 +12352,7 @@ var NavLink = function NavLink(_ref) {
 
       var isActive = !!(getIsActive ? getIsActive(match, location) : match);
 
-      return React__default.createElement(Link$1, _extends$8({
+      return _react__default.createElement(Link$1, _extends$8({
         to: to,
         className: isActive ? [className, activeClassName].filter(function (i) {
           return i;
@@ -12274,6 +12387,11 @@ function _classCallCheck$9(instance, Constructor) { if (!(instance instanceof Co
 function _possibleConstructorReturn$9(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits$9(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * The public API for prompting the user before navigating away
+ * from a screen with a component.
+ */
 
 var Prompt$1 = function (_React$Component) {
   _inherits$9(Prompt, _React$Component);
@@ -12320,7 +12438,7 @@ var Prompt$1 = function (_React$Component) {
   };
 
   return Prompt;
-}(React__default.Component);
+}(_react__default.Component);
 
 Prompt$1.propTypes = {
   when: propTypes.bool,
@@ -12459,6 +12577,11 @@ function _possibleConstructorReturn$10(self, call) { if (!self) { throw new Refe
 
 function _inherits$10(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * The public API for updating the location programmatically
+ * with a component.
+ */
+
 var Redirect$1 = function (_React$Component) {
   _inherits$10(Redirect, _React$Component);
 
@@ -12513,7 +12636,7 @@ var Redirect$1 = function (_React$Component) {
   };
 
   return Redirect;
-}(React__default.Component);
+}(_react__default.Component);
 
 Redirect$1.propTypes = {
   push: propTypes.bool,
@@ -12673,11 +12796,11 @@ var StaticRouter$1 = function (_React$Component) {
       block: this.handleBlock
     };
 
-    return React__default.createElement(Router$1, _extends$14({}, props, { history: history }));
+    return _react__default.createElement(Router$1, _extends$14({}, props, { history: history }));
   };
 
   return StaticRouter;
-}(React__default.Component);
+}(_react__default.Component);
 
 StaticRouter$1.propTypes = {
   basename: propTypes.string,
@@ -12699,6 +12822,10 @@ function _classCallCheck$12(instance, Constructor) { if (!(instance instanceof C
 function _possibleConstructorReturn$12(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits$12(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * The public API for rendering the first <Route> that matches.
+ */
 
 var Switch$2 = function (_React$Component) {
   _inherits$12(Switch, _React$Component);
@@ -12727,8 +12854,8 @@ var Switch$2 = function (_React$Component) {
 
     var match = void 0,
         child = void 0;
-    React__default.Children.forEach(children, function (element) {
-      if (!React__default.isValidElement(element)) return;
+    _react__default.Children.forEach(children, function (element) {
+      if (!_react__default.isValidElement(element)) return;
 
       var _element$props = element.props,
           pathProp = _element$props.path,
@@ -12745,11 +12872,11 @@ var Switch$2 = function (_React$Component) {
       }
     });
 
-    return match ? React__default.cloneElement(child, { location: location, computedMatch: match }) : null;
+    return match ? _react__default.cloneElement(child, { location: location, computedMatch: match }) : null;
   };
 
   return Switch;
-}(React__default.Component);
+}(_react__default.Component);
 
 Switch$2.contextTypes = {
   router: propTypes.shape({
@@ -12789,11 +12916,11 @@ var SidebarLink = function SidebarLink(_ref) {
     Component$$1 = Link$1; // use a <Link /> since it supports props.to.
   }
 
-  return React__default.createElement(
+  return _react__default.createElement(
     Component$$1,
     { to: to ? to : "", onClick: onClick, className: className + " SideNavigationLink" },
     children,
-    symbol ? React__default.createElement(
+    symbol ? _react__default.createElement(
       "div",
       { className: "symbol" },
       symbol
@@ -12849,7 +12976,7 @@ var SidebarLink$1 = glamorous(withTooltip(SidebarLink))(style$11);
 var Sidebar = function Sidebar(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className },
     children
@@ -12878,13 +13005,13 @@ var Button$1 = function Button$$1(_ref) {
       children = _ref.children,
       _ref$modifiers = _ref.modifiers,
       modifiers = _ref$modifiers === undefined ? [] : _ref$modifiers;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     {
       tabIndex: "-1",
       role: "button",
-      className: className + " Button " + modifiers.map(function (mod) {
-        return "Button_" + mod;
+      className: className + " Button" + modifiers.map(function (mod) {
+        return (modifiers.length > 0 ? " " : "") + "Button_" + mod;
       }).join(" "),
       onClick: onClick
     },
@@ -12946,6 +13073,15 @@ var ReactPropTypesSecret$3 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 var ReactPropTypesSecret_1$2 = ReactPropTypesSecret$3;
 
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -12998,6 +13134,15 @@ function checkPropTypes$2(typeSpecs, values, location, componentName, getStack) 
 }
 
 var checkPropTypes_1$2 = checkPropTypes$2;
+
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
 
 'use strict';
 
@@ -13469,6 +13614,15 @@ var factoryWithTypeCheckers$2 = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
 'use strict';
 
 
@@ -13559,7 +13713,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-var _react2 = _interopRequireDefault(React__default);
+var _react2 = _interopRequireDefault(_react__default);
 
 
 
@@ -13622,7 +13776,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-var _react2 = _interopRequireDefault(React__default);
+var _react2 = _interopRequireDefault(_react__default);
 
 
 
@@ -13655,14 +13809,14 @@ var Chip = function Chip(_ref) {
       children = _ref.children,
       onClick = _ref.onClick,
       symbol = _ref.symbol;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className + " chip" },
     children,
-    onClick && React__default.createElement(
+    onClick && _react__default.createElement(
       "div",
       { tabIndex: "-1", role: "button", className: "action", onClick: onClick },
-      symbol || React__default.createElement(GoX, null)
+      symbol || _react__default.createElement(GoX, null)
     )
   );
 };
@@ -13738,7 +13892,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-var _react2 = _interopRequireDefault(React__default);
+var _react2 = _interopRequireDefault(_react__default);
 
 
 
@@ -13768,10 +13922,10 @@ var PlusChip = function PlusChip(_ref) {
   var className = _ref.className,
       children = _ref.children,
       onClick = _ref.onClick;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className + " plus-chip", onClick: onClick, tabIndex: "-1", role: "button" },
-    children || React__default.createElement(GoPlus, null)
+    children || _react__default.createElement(GoPlus, null)
   );
 };
 var style$14 = function style(_ref2) {
@@ -13806,7 +13960,7 @@ var PlusChip$1 = glamorous(PlusChip)(style$14);
 var Card = function Card(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className },
     children
@@ -13833,15 +13987,15 @@ var Stat = function Stat(_ref) {
   var className = _ref.className,
       label = _ref.label,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className + " Stat" },
-    React__default.createElement(
+    _react__default.createElement(
       "small",
       { className: "Stat__label" },
       label
     ),
-    React__default.createElement(
+    _react__default.createElement(
       "span",
       { className: "Stat__value" },
       children
@@ -13877,6 +14031,17399 @@ var style$16 = function style(_ref2) {
 };
 
 var Stat$1 = glamorous(Stat)(style$16);
+
+var activity = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Activity = function Activity(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '22 12 18 12 15 21 9 3 6 12 2 12' })
+  );
+};
+
+Activity.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Activity.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Activity;
+});
+
+unwrapExports$1(activity);
+
+var airplay = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Airplay = function Airplay(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1' }),
+    _react2.default.createElement('polygon', { points: '12 15 17 21 7 21 12 15' })
+  );
+};
+
+Airplay.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Airplay.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Airplay;
+});
+
+unwrapExports$1(airplay);
+
+var alertCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlertCircle = function AlertCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '12', y1: '8', x2: '12', y2: '12' }),
+    _react2.default.createElement('line', { x1: '12', y1: '16', x2: '12', y2: '16' })
+  );
+};
+
+AlertCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlertCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlertCircle;
+});
+
+unwrapExports$1(alertCircle);
+
+var alertOctagon = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlertOctagon = function AlertOctagon(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2' }),
+    _react2.default.createElement('line', { x1: '12', y1: '8', x2: '12', y2: '12' }),
+    _react2.default.createElement('line', { x1: '12', y1: '16', x2: '12', y2: '16' })
+  );
+};
+
+AlertOctagon.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlertOctagon.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlertOctagon;
+});
+
+unwrapExports$1(alertOctagon);
+
+var alertTriangle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlertTriangle = function AlertTriangle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z' }),
+    _react2.default.createElement('line', { x1: '12', y1: '9', x2: '12', y2: '13' }),
+    _react2.default.createElement('line', { x1: '12', y1: '17', x2: '12', y2: '17' })
+  );
+};
+
+AlertTriangle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlertTriangle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlertTriangle;
+});
+
+unwrapExports$1(alertTriangle);
+
+var alignCenter = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlignCenter = function AlignCenter(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '18', y1: '10', x2: '6', y2: '10' }),
+    _react2.default.createElement('line', { x1: '21', y1: '6', x2: '3', y2: '6' }),
+    _react2.default.createElement('line', { x1: '21', y1: '14', x2: '3', y2: '14' }),
+    _react2.default.createElement('line', { x1: '18', y1: '18', x2: '6', y2: '18' })
+  );
+};
+
+AlignCenter.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlignCenter.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlignCenter;
+});
+
+unwrapExports$1(alignCenter);
+
+var alignJustify = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlignJustify = function AlignJustify(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '21', y1: '10', x2: '3', y2: '10' }),
+    _react2.default.createElement('line', { x1: '21', y1: '6', x2: '3', y2: '6' }),
+    _react2.default.createElement('line', { x1: '21', y1: '14', x2: '3', y2: '14' }),
+    _react2.default.createElement('line', { x1: '21', y1: '18', x2: '3', y2: '18' })
+  );
+};
+
+AlignJustify.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlignJustify.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlignJustify;
+});
+
+unwrapExports$1(alignJustify);
+
+var alignLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlignLeft = function AlignLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '17', y1: '10', x2: '3', y2: '10' }),
+    _react2.default.createElement('line', { x1: '21', y1: '6', x2: '3', y2: '6' }),
+    _react2.default.createElement('line', { x1: '21', y1: '14', x2: '3', y2: '14' }),
+    _react2.default.createElement('line', { x1: '17', y1: '18', x2: '3', y2: '18' })
+  );
+};
+
+AlignLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlignLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlignLeft;
+});
+
+unwrapExports$1(alignLeft);
+
+var alignRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AlignRight = function AlignRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '21', y1: '10', x2: '7', y2: '10' }),
+    _react2.default.createElement('line', { x1: '21', y1: '6', x2: '3', y2: '6' }),
+    _react2.default.createElement('line', { x1: '21', y1: '14', x2: '3', y2: '14' }),
+    _react2.default.createElement('line', { x1: '21', y1: '18', x2: '7', y2: '18' })
+  );
+};
+
+AlignRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AlignRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AlignRight;
+});
+
+unwrapExports$1(alignRight);
+
+var anchor = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Anchor = function Anchor(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '5', r: '3' }),
+    _react2.default.createElement('line', { x1: '12', y1: '22', x2: '12', y2: '8' }),
+    _react2.default.createElement('path', { d: 'M5 12H2a10 10 0 0 0 20 0h-3' })
+  );
+};
+
+Anchor.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Anchor.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Anchor;
+});
+
+unwrapExports$1(anchor);
+
+var aperture = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Aperture = function Aperture(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '14.31', y1: '8', x2: '20.05', y2: '17.94' }),
+    _react2.default.createElement('line', { x1: '9.69', y1: '8', x2: '21.17', y2: '8' }),
+    _react2.default.createElement('line', { x1: '7.38', y1: '12', x2: '13.12', y2: '2.06' }),
+    _react2.default.createElement('line', { x1: '9.69', y1: '16', x2: '3.95', y2: '6.06' }),
+    _react2.default.createElement('line', { x1: '14.31', y1: '16', x2: '2.83', y2: '16' }),
+    _react2.default.createElement('line', { x1: '16.62', y1: '12', x2: '10.88', y2: '21.94' })
+  );
+};
+
+Aperture.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Aperture.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Aperture;
+});
+
+unwrapExports$1(aperture);
+
+var arrowDownLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowDownLeft = function ArrowDownLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '18',
+      y1: '6',
+      x2: '6',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '15 18 6 18 6 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ArrowDownLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowDownLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowDownLeft;
+});
+
+unwrapExports$1(arrowDownLeft);
+
+var arrowDownRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowDownRight = function ArrowDownRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '6',
+      y1: '6',
+      x2: '18',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '9 18 18 18 18 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ArrowDownRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowDownRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowDownRight;
+});
+
+unwrapExports$1(arrowDownRight);
+
+var arrowDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowDown = function ArrowDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '12', y1: '4', x2: '12', y2: '20' }),
+    _react2.default.createElement('polyline', { points: '18 14 12 20 6 14' })
+  );
+};
+
+ArrowDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowDown;
+});
+
+unwrapExports$1(arrowDown);
+
+var arrowLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowLeft = function ArrowLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '20', y1: '12', x2: '4', y2: '12' }),
+    _react2.default.createElement('polyline', { points: '10 18 4 12 10 6' })
+  );
+};
+
+ArrowLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowLeft;
+});
+
+unwrapExports$1(arrowLeft);
+
+var arrowRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowRight = function ArrowRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '4', y1: '12', x2: '20', y2: '12' }),
+    _react2.default.createElement('polyline', { points: '14 6 20 12 14 18' })
+  );
+};
+
+ArrowRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowRight;
+});
+
+unwrapExports$1(arrowRight);
+
+var arrowUpLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowUpLeft = function ArrowUpLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '18',
+      y1: '18',
+      x2: '6',
+      y2: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '15 6 6 6 6 15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ArrowUpLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowUpLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowUpLeft;
+});
+
+unwrapExports$1(arrowUpLeft);
+
+var arrowUpRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowUpRight = function ArrowUpRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '6',
+      y1: '18',
+      x2: '18',
+      y2: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '9 6 18 6 18 15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ArrowUpRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowUpRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowUpRight;
+});
+
+unwrapExports$1(arrowUpRight);
+
+var arrowUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ArrowUp = function ArrowUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '12', y1: '20', x2: '12', y2: '4' }),
+    _react2.default.createElement('polyline', { points: '6 10 12 4 18 10' })
+  );
+};
+
+ArrowUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ArrowUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ArrowUp;
+});
+
+unwrapExports$1(arrowUp);
+
+var atSign = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var AtSign = function AtSign(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '4' }),
+    _react2.default.createElement('path', { d: 'M16 12v1a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94' })
+  );
+};
+
+AtSign.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+AtSign.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = AtSign;
+});
+
+unwrapExports$1(atSign);
+
+var award = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Award = function Award(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '8', r: '7' }),
+    _react2.default.createElement('polyline', { points: '8.21 13.89 7 23 12 20 17 23 15.79 13.88' })
+  );
+};
+
+Award.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Award.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Award;
+});
+
+unwrapExports$1(award);
+
+var barChart2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var BarChart2 = function BarChart2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '10',
+      y: '3',
+      width: '4',
+      height: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '18',
+      y: '8',
+      width: '4',
+      height: '13',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '2',
+      y: '13',
+      width: '4',
+      height: '8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+BarChart2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+BarChart2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = BarChart2;
+});
+
+unwrapExports$1(barChart2);
+
+var barChart = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var BarChart = function BarChart(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '18',
+      y: '3',
+      width: '4',
+      height: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '10',
+      y: '8',
+      width: '4',
+      height: '13',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '2',
+      y: '13',
+      width: '4',
+      height: '8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+BarChart.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+BarChart.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = BarChart;
+});
+
+unwrapExports$1(barChart);
+
+var batteryCharging = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var BatteryCharging = function BatteryCharging(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '23',
+      y1: '13',
+      x2: '23',
+      y2: '11',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '11 6 7 12 13 12 9 18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+BatteryCharging.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+BatteryCharging.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = BatteryCharging;
+});
+
+unwrapExports$1(batteryCharging);
+
+var battery = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Battery = function Battery(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '1', y: '6', width: '18', height: '12', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '23', y1: '13', x2: '23', y2: '11' })
+  );
+};
+
+Battery.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Battery.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Battery;
+});
+
+unwrapExports$1(battery);
+
+var bellOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var BellOff = function BellOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M8.56 2.9A7 7 0 0 1 19 9v4m-2 4H2a3 3 0 0 0 3-3V9a7 7 0 0 1 .78-3.22M13.73 21a2 2 0 0 1-3.46 0' }),
+    _react2.default.createElement('line', { x1: '1', y1: '1', x2: '23', y2: '23' })
+  );
+};
+
+BellOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+BellOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = BellOff;
+});
+
+unwrapExports$1(bellOff);
+
+var bell = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Bell = function Bell(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0' })
+  );
+};
+
+Bell.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Bell.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Bell;
+});
+
+unwrapExports$1(bell);
+
+var bluetooth = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Bluetooth = function Bluetooth(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5' })
+  );
+};
+
+Bluetooth.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Bluetooth.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Bluetooth;
+});
+
+unwrapExports$1(bluetooth);
+
+var bold = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Bold = function Bold(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M6,4h8a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M6,12h9a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Bold.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Bold.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Bold;
+});
+
+unwrapExports$1(bold);
+
+var book = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Book = function Book(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20' }),
+    _react2.default.createElement('path', { d: 'M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z' })
+  );
+};
+
+Book.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Book.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Book;
+});
+
+unwrapExports$1(book);
+
+var bookmark = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Bookmark = function Bookmark(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z' })
+  );
+};
+
+Bookmark.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Bookmark.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Bookmark;
+});
+
+unwrapExports$1(bookmark);
+
+var box = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Box = function Box(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '2.32 6.16 12 11 21.68 6.16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '22.76',
+      x2: '12',
+      y2: '11',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Box.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Box.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Box;
+});
+
+unwrapExports$1(box);
+
+var briefcase = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Briefcase = function Briefcase(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '2', y: '7', width: '20', height: '14', rx: '2', ry: '2' }),
+    _react2.default.createElement('path', { d: 'M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16' })
+  );
+};
+
+Briefcase.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Briefcase.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Briefcase;
+});
+
+unwrapExports$1(briefcase);
+
+var calendar = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Calendar = function Calendar(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '4', width: '18', height: '18', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '16', y1: '2', x2: '16', y2: '6' }),
+    _react2.default.createElement('line', { x1: '8', y1: '2', x2: '8', y2: '6' }),
+    _react2.default.createElement('line', { x1: '3', y1: '10', x2: '21', y2: '10' })
+  );
+};
+
+Calendar.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Calendar.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Calendar;
+});
+
+unwrapExports$1(calendar);
+
+var cameraOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CameraOff = function CameraOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '1', y1: '1', x2: '23', y2: '23' }),
+    _react2.default.createElement('path', { d: 'M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3m3-3h6l2 3h4a2 2 0 0 1 2 2v9.34m-7.72-2.06a4 4 0 1 1-5.56-5.56' })
+  );
+};
+
+CameraOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CameraOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CameraOff;
+});
+
+unwrapExports$1(cameraOff);
+
+var camera = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Camera = function Camera(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '13', r: '4' })
+  );
+};
+
+Camera.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Camera.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Camera;
+});
+
+unwrapExports$1(camera);
+
+var cast = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Cast = function Cast(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '2',
+      y1: '20',
+      x2: '2',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Cast.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Cast.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Cast;
+});
+
+unwrapExports$1(cast);
+
+var checkCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CheckCircle = function CheckCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M22 11.07V12a10 10 0 1 1-5.93-9.14' }),
+    _react2.default.createElement('polyline', { points: '23 3 12 14 9 11' })
+  );
+};
+
+CheckCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CheckCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CheckCircle;
+});
+
+unwrapExports$1(checkCircle);
+
+var checkSquare = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CheckSquare = function CheckSquare(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '9 11 12 14 23 3' }),
+    _react2.default.createElement('path', { d: 'M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11' })
+  );
+};
+
+CheckSquare.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CheckSquare.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CheckSquare;
+});
+
+unwrapExports$1(checkSquare);
+
+var check = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Check = function Check(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '20 6 9 17 4 12' })
+  );
+};
+
+Check.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Check.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Check;
+});
+
+unwrapExports$1(check);
+
+var chevronDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronDown = function ChevronDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '6 9 12 15 18 9' })
+  );
+};
+
+ChevronDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronDown;
+});
+
+unwrapExports$1(chevronDown);
+
+var chevronLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronLeft = function ChevronLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '15 18 9 12 15 6' })
+  );
+};
+
+ChevronLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronLeft;
+});
+
+unwrapExports$1(chevronLeft);
+
+var chevronRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronRight = function ChevronRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '9 18 15 12 9 6' })
+  );
+};
+
+ChevronRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronRight;
+});
+
+unwrapExports$1(chevronRight);
+
+var chevronUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronUp = function ChevronUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '18 15 12 9 6 15' })
+  );
+};
+
+ChevronUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronUp;
+});
+
+unwrapExports$1(chevronUp);
+
+var chevronsDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronsDown = function ChevronsDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '7 13 12 18 17 13',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '7 6 12 11 17 6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ChevronsDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronsDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronsDown;
+});
+
+unwrapExports$1(chevronsDown);
+
+var chevronsLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronsLeft = function ChevronsLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '11 17 6 12 11 7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '18 17 13 12 18 7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ChevronsLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronsLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronsLeft;
+});
+
+unwrapExports$1(chevronsLeft);
+
+var chevronsRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronsRight = function ChevronsRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '13 17 18 12 13 7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '6 17 11 12 6 7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ChevronsRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronsRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronsRight;
+});
+
+unwrapExports$1(chevronsRight);
+
+var chevronsUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ChevronsUp = function ChevronsUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '17 11 12 6 7 11',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 18 12 13 7 18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ChevronsUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ChevronsUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ChevronsUp;
+});
+
+unwrapExports$1(chevronsUp);
+
+var chrome = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Chrome = function Chrome(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '4' }),
+    _react2.default.createElement('line', { x1: '21.17', y1: '8', x2: '12', y2: '8' }),
+    _react2.default.createElement('line', { x1: '3.95', y1: '6.06', x2: '8.54', y2: '14' }),
+    _react2.default.createElement('line', { x1: '10.88', y1: '21.94', x2: '15.46', y2: '14' })
+  );
+};
+
+Chrome.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Chrome.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Chrome;
+});
+
+unwrapExports$1(chrome);
+
+var circle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Circle = function Circle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' })
+  );
+};
+
+Circle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Circle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Circle;
+});
+
+unwrapExports$1(circle);
+
+var clipboard = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Clipboard = function Clipboard(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2' }),
+    _react2.default.createElement('rect', { x: '8', y: '2', width: '8', height: '4', rx: '1', ry: '1' })
+  );
+};
+
+Clipboard.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Clipboard.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Clipboard;
+});
+
+unwrapExports$1(clipboard);
+
+var clock = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Clock = function Clock(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('polyline', { points: '12 6 12 12 15 15' })
+  );
+};
+
+Clock.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Clock.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Clock;
+});
+
+unwrapExports$1(clock);
+
+var cloudDrizzle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CloudDrizzle = function CloudDrizzle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '19',
+      x2: '8',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '13',
+      x2: '8',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '19',
+      x2: '16',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '13',
+      x2: '16',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '21',
+      x2: '12',
+      y2: '23',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '15',
+      x2: '12',
+      y2: '17',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CloudDrizzle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CloudDrizzle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CloudDrizzle;
+});
+
+unwrapExports$1(cloudDrizzle);
+
+var cloudLightning = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CloudLightning = function CloudLightning(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '13 11 9 17 15 17 11 23',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CloudLightning.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CloudLightning.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CloudLightning;
+});
+
+unwrapExports$1(cloudLightning);
+
+var cloudOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CloudOff = function CloudOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M22.61 16.95A5 5 0 0 0 18 10h-1.26a8 8 0 0 0-7.05-6M5 5a8 8 0 0 0 4 15h9a5 5 0 0 0 1.7-.3' }),
+    _react2.default.createElement('line', { x1: '1', y1: '1', x2: '23', y2: '23' })
+  );
+};
+
+CloudOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CloudOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CloudOff;
+});
+
+unwrapExports$1(cloudOff);
+
+var cloudRain = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CloudRain = function CloudRain(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '13',
+      x2: '16',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '13',
+      x2: '8',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '15',
+      x2: '12',
+      y2: '23',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CloudRain.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CloudRain.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CloudRain;
+});
+
+unwrapExports$1(cloudRain);
+
+var cloudSnow = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CloudSnow = function CloudSnow(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '16',
+      x2: '8',
+      y2: '16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '20',
+      x2: '8',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '18',
+      x2: '12',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '22',
+      x2: '12',
+      y2: '22',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '16',
+      x2: '16',
+      y2: '16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '20',
+      x2: '16',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CloudSnow.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CloudSnow.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CloudSnow;
+});
+
+unwrapExports$1(cloudSnow);
+
+var cloud = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Cloud = function Cloud(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z' })
+  );
+};
+
+Cloud.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Cloud.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Cloud;
+});
+
+unwrapExports$1(cloud);
+
+var codepen = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Codepen = function Codepen(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '22',
+      x2: '12',
+      y2: '15.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '22 8.5 12 15.5 2 8.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '2 15.5 12 8.5 22 15.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '2',
+      x2: '12',
+      y2: '8.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Codepen.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Codepen.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Codepen;
+});
+
+unwrapExports$1(codepen);
+
+var command = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Command = function Command(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z' })
+  );
+};
+
+Command.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Command.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Command;
+});
+
+unwrapExports$1(command);
+
+var compass = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Compass = function Compass(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '12',
+      r: '10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polygon', {
+      points: '16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Compass.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Compass.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Compass;
+});
+
+unwrapExports$1(compass);
+
+var copy = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Copy = function Copy(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '9',
+      y: '9',
+      width: '13',
+      height: '13',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Copy.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Copy.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Copy;
+});
+
+unwrapExports$1(copy);
+
+var cornerDownLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerDownLeft = function CornerDownLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '9 10 4 15 9 20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20 4v7a4 4 0 0 1-4 4H4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerDownLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerDownLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerDownLeft;
+});
+
+unwrapExports$1(cornerDownLeft);
+
+var cornerDownRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerDownRight = function CornerDownRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '15 10 20 15 15 20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M4 4v7a4 4 0 0 0 4 4h12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerDownRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerDownRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerDownRight;
+});
+
+unwrapExports$1(cornerDownRight);
+
+var cornerLeftDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerLeftDown = function CornerLeftDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '14 15 9 20 4 15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20 4h-7a4 4 0 0 0-4 4v12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerLeftDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerLeftDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerLeftDown;
+});
+
+unwrapExports$1(cornerLeftDown);
+
+var cornerLeftUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerLeftUp = function CornerLeftUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '14 9 9 4 4 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20 20h-7a4 4 0 0 1-4-4V4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerLeftUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerLeftUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerLeftUp;
+});
+
+unwrapExports$1(cornerLeftUp);
+
+var cornerRightDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerRightDown = function CornerRightDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '10 15 15 20 20 15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M4 4h7a4 4 0 0 1 4 4v12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerRightDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerRightDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerRightDown;
+});
+
+unwrapExports$1(cornerRightDown);
+
+var cornerRightUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerRightUp = function CornerRightUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '10 9 15 4 20 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M4 20h7a4 4 0 0 0 4-4V4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerRightUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerRightUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerRightUp;
+});
+
+unwrapExports$1(cornerRightUp);
+
+var cornerUpLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerUpLeft = function CornerUpLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '9 14 4 9 9 4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20 20v-7a4 4 0 0 0-4-4H4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerUpLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerUpLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerUpLeft;
+});
+
+unwrapExports$1(cornerUpLeft);
+
+var cornerUpRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CornerUpRight = function CornerUpRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '15 14 20 9 15 4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M4 20v-7a4 4 0 0 1 4-4h12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CornerUpRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CornerUpRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CornerUpRight;
+});
+
+unwrapExports$1(cornerUpRight);
+
+var cpu = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Cpu = function Cpu(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '4', y: '4', width: '16', height: '16', rx: '2', ry: '2' }),
+    _react2.default.createElement('rect', { x: '9', y: '9', width: '6', height: '6' }),
+    _react2.default.createElement('line', { x1: '9', y1: '1', x2: '9', y2: '4' }),
+    _react2.default.createElement('line', { x1: '15', y1: '1', x2: '15', y2: '4' }),
+    _react2.default.createElement('line', { x1: '9', y1: '20', x2: '9', y2: '23' }),
+    _react2.default.createElement('line', { x1: '15', y1: '20', x2: '15', y2: '23' }),
+    _react2.default.createElement('line', { x1: '20', y1: '9', x2: '23', y2: '9' }),
+    _react2.default.createElement('line', { x1: '20', y1: '14', x2: '23', y2: '14' }),
+    _react2.default.createElement('line', { x1: '1', y1: '9', x2: '4', y2: '9' }),
+    _react2.default.createElement('line', { x1: '1', y1: '14', x2: '4', y2: '14' })
+  );
+};
+
+Cpu.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Cpu.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Cpu;
+});
+
+unwrapExports$1(cpu);
+
+var creditCard = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var CreditCard = function CreditCard(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '1',
+      y: '4',
+      width: '22',
+      height: '16',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '1',
+      y1: '10',
+      x2: '23',
+      y2: '10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+CreditCard.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+CreditCard.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = CreditCard;
+});
+
+unwrapExports$1(creditCard);
+
+var crop = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Crop = function Crop(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M6.13,1,6,16a2,2,0,0,0,2,2H23',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M1,6.13,16,6a2,2,0,0,1,2,2V23',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Crop.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Crop.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Crop;
+});
+
+unwrapExports$1(crop);
+
+var crosshair = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Crosshair = function Crosshair(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '22', y1: '12', x2: '18', y2: '12' }),
+    _react2.default.createElement('line', { x1: '6', y1: '12', x2: '2', y2: '12' }),
+    _react2.default.createElement('line', { x1: '12', y1: '6', x2: '12', y2: '2' }),
+    _react2.default.createElement('line', { x1: '12', y1: '22', x2: '12', y2: '18' })
+  );
+};
+
+Crosshair.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Crosshair.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Crosshair;
+});
+
+unwrapExports$1(crosshair);
+
+var _delete = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Delete = function Delete(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z' }),
+    _react2.default.createElement('line', { x1: '18', y1: '9', x2: '12', y2: '15' }),
+    _react2.default.createElement('line', { x1: '12', y1: '9', x2: '18', y2: '15' })
+  );
+};
+
+Delete.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Delete.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Delete;
+});
+
+unwrapExports$1(_delete);
+
+var disc = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Disc = function Disc(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '3' })
+  );
+};
+
+Disc.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Disc.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Disc;
+});
+
+unwrapExports$1(disc);
+
+var downloadCloud = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var DownloadCloud = function DownloadCloud(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '8 17 12 21 16 17' }),
+    _react2.default.createElement('line', { x1: '12', y1: '12', x2: '12', y2: '21' }),
+    _react2.default.createElement('path', { d: 'M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29' })
+  );
+};
+
+DownloadCloud.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+DownloadCloud.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = DownloadCloud;
+});
+
+unwrapExports$1(downloadCloud);
+
+var download = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Download = function Download(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3' }),
+    _react2.default.createElement('polyline', { points: '8 12 12 16 16 12' }),
+    _react2.default.createElement('line', { x1: '12', y1: '2', x2: '12', y2: '16' })
+  );
+};
+
+Download.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Download.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Download;
+});
+
+unwrapExports$1(download);
+
+var droplet = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Droplet = function Droplet(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z',
+      fill: 'none',
+      stroke: color,
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Droplet.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Droplet.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Droplet;
+});
+
+unwrapExports$1(droplet);
+
+var edit2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Edit2 = function Edit2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '16 3 21 8 8 21 3 21 3 16 16 3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Edit2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Edit2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Edit2;
+});
+
+unwrapExports$1(edit2);
+
+var edit3 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Edit3 = function Edit3(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '14 2 18 6 7 17 3 17 3 13 14 2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '3',
+      y1: '22',
+      x2: '21',
+      y2: '22',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Edit3.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Edit3.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Edit3;
+});
+
+unwrapExports$1(edit3);
+
+var edit = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Edit = function Edit(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34' }),
+    _react2.default.createElement('polygon', { points: '18 2 22 6 12 16 8 16 8 12 18 2' })
+  );
+};
+
+Edit.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Edit.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Edit;
+});
+
+unwrapExports$1(edit);
+
+var externalLink = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ExternalLink = function ExternalLink(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' }),
+    _react2.default.createElement('polyline', { points: '15 3 21 3 21 9' }),
+    _react2.default.createElement('line', { x1: '10', y1: '14', x2: '21', y2: '3' })
+  );
+};
+
+ExternalLink.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ExternalLink.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ExternalLink;
+});
+
+unwrapExports$1(externalLink);
+
+var eyeOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var EyeOff = function EyeOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24' }),
+    _react2.default.createElement('line', { x1: '1', y1: '1', x2: '23', y2: '23' })
+  );
+};
+
+EyeOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+EyeOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = EyeOff;
+});
+
+unwrapExports$1(eyeOff);
+
+var eye = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Eye = function Eye(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '3' })
+  );
+};
+
+Eye.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Eye.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Eye;
+});
+
+unwrapExports$1(eye);
+
+var facebook = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Facebook = function Facebook(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' })
+  );
+};
+
+Facebook.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Facebook.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Facebook;
+});
+
+unwrapExports$1(facebook);
+
+var fastForward = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var FastForward = function FastForward(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '13 19 22 12 13 5 13 19' }),
+    _react2.default.createElement('polygon', { points: '2 19 11 12 2 5 2 19' })
+  );
+};
+
+FastForward.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+FastForward.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = FastForward;
+});
+
+unwrapExports$1(fastForward);
+
+var feather = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Feather = function Feather(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z' }),
+    _react2.default.createElement('line', { x1: '16', y1: '8', x2: '2', y2: '22' }),
+    _react2.default.createElement('line', { x1: '17', y1: '15', x2: '9', y2: '15' })
+  );
+};
+
+Feather.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Feather.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Feather;
+});
+
+unwrapExports$1(feather);
+
+var fileMinus = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var FileMinus = function FileMinus(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '14 2 14 8 20 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '9',
+      y1: '15',
+      x2: '15',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+FileMinus.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+FileMinus.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = FileMinus;
+});
+
+unwrapExports$1(fileMinus);
+
+var filePlus = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var FilePlus = function FilePlus(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '14 2 14 8 20 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '18',
+      x2: '12',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '9',
+      y1: '15',
+      x2: '15',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+FilePlus.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+FilePlus.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = FilePlus;
+});
+
+unwrapExports$1(filePlus);
+
+var fileText = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var FileText = function FileText(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '14 2 14 8 20 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '13',
+      x2: '8',
+      y2: '13',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16',
+      y1: '17',
+      x2: '8',
+      y2: '17',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '10 9 9 9 8 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+FileText.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+FileText.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = FileText;
+});
+
+unwrapExports$1(fileText);
+
+var file = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var File = function File(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z' }),
+    _react2.default.createElement('polyline', { points: '13 2 13 9 20 9' })
+  );
+};
+
+File.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+File.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = File;
+});
+
+unwrapExports$1(file);
+
+var film = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Film = function Film(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '2',
+      y: '2',
+      width: '20',
+      height: '20',
+      rx: '2.18',
+      ry: '2.18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '7',
+      y1: '2',
+      x2: '7',
+      y2: '22',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '17',
+      y1: '2',
+      x2: '17',
+      y2: '22',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '2',
+      y1: '12',
+      x2: '22',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '2',
+      y1: '7',
+      x2: '7',
+      y2: '7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '2',
+      y1: '17',
+      x2: '7',
+      y2: '17',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '17',
+      y1: '17',
+      x2: '22',
+      y2: '17',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '17',
+      y1: '7',
+      x2: '22',
+      y2: '7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Film.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Film.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Film;
+});
+
+unwrapExports$1(film);
+
+var filter$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Filter = function Filter(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3' })
+  );
+};
+
+Filter.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Filter.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Filter;
+});
+
+unwrapExports$1(filter$1);
+
+var flag = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Flag = function Flag(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z' }),
+    _react2.default.createElement('line', { x1: '4', y1: '22', x2: '4', y2: '15' })
+  );
+};
+
+Flag.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Flag.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Flag;
+});
+
+unwrapExports$1(flag);
+
+var folder = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Folder = function Folder(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z' })
+  );
+};
+
+Folder.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Folder.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Folder;
+});
+
+unwrapExports$1(folder);
+
+var github = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Github = function Github(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Github.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Github.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Github;
+});
+
+unwrapExports$1(github);
+
+var gitlab = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Gitlab = function Gitlab(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M22.65,14.39,12,22.13,1.35,14.39a.84.84,0,0,1-.3-.94L2.27,9.67,4.71,2.16A.42.42,0,0,1,4.82,2,.43.43,0,0,1,5.4,2a.42.42,0,0,1,.11.18L7.95,9.67h8.1l2.44-7.51A.42.42,0,0,1,18.6,2a.43.43,0,0,1,.58,0,.42.42,0,0,1,.11.18l2.44,7.51L23,13.45A.84.84,0,0,1,22.65,14.39Z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Gitlab.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Gitlab.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Gitlab;
+});
+
+unwrapExports$1(gitlab);
+
+var globe = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Globe = function Globe(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '2', y1: '12', x2: '22', y2: '12' }),
+    _react2.default.createElement('path', { d: 'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z' })
+  );
+};
+
+Globe.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Globe.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Globe;
+});
+
+unwrapExports$1(globe);
+
+var grid = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Grid = function Grid(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '3',
+      y: '3',
+      width: '7',
+      height: '7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '14',
+      y: '3',
+      width: '7',
+      height: '7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '14',
+      y: '14',
+      width: '7',
+      height: '7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '3',
+      y: '14',
+      width: '7',
+      height: '7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Grid.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Grid.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Grid;
+});
+
+unwrapExports$1(grid);
+
+var hash$2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Hash = function Hash(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '4', y1: '9', x2: '20', y2: '9' }),
+    _react2.default.createElement('line', { x1: '4', y1: '15', x2: '20', y2: '15' }),
+    _react2.default.createElement('line', { x1: '10', y1: '3', x2: '8', y2: '21' }),
+    _react2.default.createElement('line', { x1: '16', y1: '3', x2: '14', y2: '21' })
+  );
+};
+
+Hash.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Hash.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Hash;
+});
+
+unwrapExports$1(hash$2);
+
+var headphones = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Headphones = function Headphones(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M3 18v-6a9 9 0 0 1 18 0v6' }),
+    _react2.default.createElement('path', { d: 'M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z' })
+  );
+};
+
+Headphones.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Headphones.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Headphones;
+});
+
+unwrapExports$1(headphones);
+
+var heart = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Heart = function Heart(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' })
+  );
+};
+
+Heart.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Heart.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Heart;
+});
+
+unwrapExports$1(heart);
+
+var helpCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var HelpCircle = function HelpCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M9.09,9a3,3,0,0,1,5.83,1c0,2-3,3-3,3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '12',
+      r: '10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '17',
+      x2: '12',
+      y2: '17',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+HelpCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+HelpCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = HelpCircle;
+});
+
+unwrapExports$1(helpCircle);
+
+var home = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Home = function Home(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' }),
+    _react2.default.createElement('polyline', { points: '9 22 9 12 15 12 15 22' })
+  );
+};
+
+Home.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Home.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Home;
+});
+
+unwrapExports$1(home);
+
+var image = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Image = function Image(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
+    _react2.default.createElement('circle', { cx: '8.5', cy: '8.5', r: '1.5' }),
+    _react2.default.createElement('polyline', { points: '21 15 16 10 5 21' })
+  );
+};
+
+Image.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Image.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Image;
+});
+
+unwrapExports$1(image);
+
+var inbox = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Inbox = function Inbox(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '22 13 16 13 14 16 10 16 8 13 2 13' }),
+    _react2.default.createElement('path', { d: 'M5.47 5.19L2 13v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5l-3.47-7.81A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.83 1.19z' })
+  );
+};
+
+Inbox.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Inbox.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Inbox;
+});
+
+unwrapExports$1(inbox);
+
+var info = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Info = function Info(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '12', y1: '16', x2: '12', y2: '12' }),
+    _react2.default.createElement('line', { x1: '12', y1: '8', x2: '12', y2: '8' })
+  );
+};
+
+Info.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Info.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Info;
+});
+
+unwrapExports$1(info);
+
+var instagram = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Instagram = function Instagram(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '2', y: '2', width: '20', height: '20', rx: '5', ry: '5' }),
+    _react2.default.createElement('path', { d: 'M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z' }),
+    _react2.default.createElement('line', { x1: '17.5', y1: '6.5', x2: '17.5', y2: '6.5' })
+  );
+};
+
+Instagram.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Instagram.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Instagram;
+});
+
+unwrapExports$1(instagram);
+
+var italic = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Italic = function Italic(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '19',
+      y1: '4',
+      x2: '10',
+      y2: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '14',
+      y1: '20',
+      x2: '5',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '15',
+      y1: '4',
+      x2: '9',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Italic.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Italic.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Italic;
+});
+
+unwrapExports$1(italic);
+
+var layers = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Layers = function Layers(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '12 2 2 7 12 12 22 7 12 2' }),
+    _react2.default.createElement('polyline', { points: '2 17 12 22 22 17' }),
+    _react2.default.createElement('polyline', { points: '2 12 12 17 22 12' })
+  );
+};
+
+Layers.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Layers.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Layers;
+});
+
+unwrapExports$1(layers);
+
+var layout = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Layout = function Layout(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '3', y1: '9', x2: '21', y2: '9' }),
+    _react2.default.createElement('line', { x1: '9', y1: '21', x2: '9', y2: '9' })
+  );
+};
+
+Layout.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Layout.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Layout;
+});
+
+unwrapExports$1(layout);
+
+var lifeBuoy = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var LifeBuoy = function LifeBuoy(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '4' }),
+    _react2.default.createElement('line', { x1: '4.93', y1: '4.93', x2: '9.17', y2: '9.17' }),
+    _react2.default.createElement('line', { x1: '14.83', y1: '14.83', x2: '19.07', y2: '19.07' }),
+    _react2.default.createElement('line', { x1: '14.83', y1: '9.17', x2: '19.07', y2: '4.93' }),
+    _react2.default.createElement('line', { x1: '14.83', y1: '9.17', x2: '18.36', y2: '5.64' }),
+    _react2.default.createElement('line', { x1: '4.93', y1: '19.07', x2: '9.17', y2: '14.83' })
+  );
+};
+
+LifeBuoy.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+LifeBuoy.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = LifeBuoy;
+});
+
+unwrapExports$1(lifeBuoy);
+
+var link2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Link2 = function Link2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '12',
+      x2: '16',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Link2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Link2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Link2;
+});
+
+unwrapExports$1(link2);
+
+var link$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Link = function Link(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Link.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Link.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Link;
+});
+
+unwrapExports$1(link$1);
+
+var list = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var List = function List(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '6',
+      x2: '21',
+      y2: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '12',
+      x2: '21',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8',
+      y1: '18',
+      x2: '21',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '3',
+      y1: '6',
+      x2: '3',
+      y2: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '3',
+      y1: '12',
+      x2: '3',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '3',
+      y1: '18',
+      x2: '3',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+List.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+List.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = List;
+});
+
+unwrapExports$1(list);
+
+var loader = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Loader = function Loader(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '12', y1: '2', x2: '12', y2: '6' }),
+    _react2.default.createElement('line', { x1: '12', y1: '18', x2: '12', y2: '22' }),
+    _react2.default.createElement('line', { x1: '4.93', y1: '4.93', x2: '7.76', y2: '7.76' }),
+    _react2.default.createElement('line', { x1: '16.24', y1: '16.24', x2: '19.07', y2: '19.07' }),
+    _react2.default.createElement('line', { x1: '2', y1: '12', x2: '6', y2: '12' }),
+    _react2.default.createElement('line', { x1: '18', y1: '12', x2: '22', y2: '12' }),
+    _react2.default.createElement('line', { x1: '4.93', y1: '19.07', x2: '7.76', y2: '16.24' }),
+    _react2.default.createElement('line', { x1: '16.24', y1: '7.76', x2: '19.07', y2: '4.93' })
+  );
+};
+
+Loader.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Loader.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Loader;
+});
+
+unwrapExports$1(loader);
+
+var lock = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Lock = function Lock(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '11', width: '18', height: '11', rx: '2', ry: '2' }),
+    _react2.default.createElement('path', { d: 'M7 11V7a5 5 0 0 1 10 0v4' })
+  );
+};
+
+Lock.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Lock.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Lock;
+});
+
+unwrapExports$1(lock);
+
+var logIn = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var LogIn = function LogIn(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M14 22h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '11 16 15 12 11 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '15',
+      y1: '12',
+      x2: '3',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+LogIn.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+LogIn.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = LogIn;
+});
+
+unwrapExports$1(logIn);
+
+var logOut = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var LogOut = function LogOut(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M10 22H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 16 21 12 17 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '21',
+      y1: '12',
+      x2: '9',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+LogOut.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+LogOut.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = LogOut;
+});
+
+unwrapExports$1(logOut);
+
+var mail = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Mail = function Mail(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }),
+    _react2.default.createElement('polyline', { points: '22,6 12,13 2,6' })
+  );
+};
+
+Mail.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Mail.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Mail;
+});
+
+unwrapExports$1(mail);
+
+var mapPin = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MapPin = function MapPin(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '10', r: '3' })
+  );
+};
+
+MapPin.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MapPin.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MapPin;
+});
+
+unwrapExports$1(mapPin);
+
+var map$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Map = function Map(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6' }),
+    _react2.default.createElement('line', { x1: '8', y1: '2', x2: '8', y2: '18' }),
+    _react2.default.createElement('line', { x1: '16', y1: '6', x2: '16', y2: '22' })
+  );
+};
+
+Map.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Map.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Map;
+});
+
+unwrapExports$1(map$1);
+
+var maximize2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Maximize2 = function Maximize2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '15 3 21 3 21 9' }),
+    _react2.default.createElement('polyline', { points: '9 21 3 21 3 15' }),
+    _react2.default.createElement('line', { x1: '21', y1: '3', x2: '14', y2: '10' }),
+    _react2.default.createElement('line', { x1: '3', y1: '21', x2: '10', y2: '14' })
+  );
+};
+
+Maximize2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Maximize2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Maximize2;
+});
+
+unwrapExports$1(maximize2);
+
+var maximize = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Maximize = function Maximize(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3' })
+  );
+};
+
+Maximize.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Maximize.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Maximize;
+});
+
+unwrapExports$1(maximize);
+
+var menu = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Menu = function Menu(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '3', y1: '12', x2: '21', y2: '12' }),
+    _react2.default.createElement('line', { x1: '3', y1: '6', x2: '21', y2: '6' }),
+    _react2.default.createElement('line', { x1: '3', y1: '18', x2: '21', y2: '18' })
+  );
+};
+
+Menu.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Menu.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Menu;
+});
+
+unwrapExports$1(menu);
+
+var messageCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MessageCircle = function MessageCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z' })
+  );
+};
+
+MessageCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MessageCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MessageCircle;
+});
+
+unwrapExports$1(messageCircle);
+
+var messageSquare = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MessageSquare = function MessageSquare(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' })
+  );
+};
+
+MessageSquare.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MessageSquare.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MessageSquare;
+});
+
+unwrapExports$1(messageSquare);
+
+var micOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MicOff = function MicOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '1', y1: '1', x2: '23', y2: '23' }),
+    _react2.default.createElement('path', { d: 'M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6' }),
+    _react2.default.createElement('path', { d: 'M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23' }),
+    _react2.default.createElement('line', { x1: '12', y1: '19', x2: '12', y2: '23' }),
+    _react2.default.createElement('line', { x1: '8', y1: '23', x2: '16', y2: '23' })
+  );
+};
+
+MicOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MicOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MicOff;
+});
+
+unwrapExports$1(micOff);
+
+var mic = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Mic = function Mic(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z' }),
+    _react2.default.createElement('path', { d: 'M19 10v2a7 7 0 0 1-14 0v-2' }),
+    _react2.default.createElement('line', { x1: '12', y1: '19', x2: '12', y2: '23' }),
+    _react2.default.createElement('line', { x1: '8', y1: '23', x2: '16', y2: '23' })
+  );
+};
+
+Mic.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Mic.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Mic;
+});
+
+unwrapExports$1(mic);
+
+var minimize2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Minimize2 = function Minimize2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '4 14 10 14 10 20' }),
+    _react2.default.createElement('polyline', { points: '20 10 14 10 14 4' }),
+    _react2.default.createElement('line', { x1: '14', y1: '10', x2: '21', y2: '3' }),
+    _react2.default.createElement('line', { x1: '3', y1: '21', x2: '10', y2: '14' })
+  );
+};
+
+Minimize2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Minimize2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Minimize2;
+});
+
+unwrapExports$1(minimize2);
+
+var minimize = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Minimize = function Minimize(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3' })
+  );
+};
+
+Minimize.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Minimize.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Minimize;
+});
+
+unwrapExports$1(minimize);
+
+var minusCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MinusCircle = function MinusCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '8', y1: '12', x2: '16', y2: '12' })
+  );
+};
+
+MinusCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MinusCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MinusCircle;
+});
+
+unwrapExports$1(minusCircle);
+
+var minusSquare = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MinusSquare = function MinusSquare(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '8', y1: '12', x2: '16', y2: '12' })
+  );
+};
+
+MinusSquare.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MinusSquare.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MinusSquare;
+});
+
+unwrapExports$1(minusSquare);
+
+var minus = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Minus = function Minus(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '5', y1: '12', x2: '19', y2: '12' })
+  );
+};
+
+Minus.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Minus.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Minus;
+});
+
+unwrapExports$1(minus);
+
+var monitor = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Monitor = function Monitor(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '2', y: '3', width: '20', height: '14', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '8', y1: '21', x2: '16', y2: '21' }),
+    _react2.default.createElement('line', { x1: '12', y1: '17', x2: '12', y2: '21' })
+  );
+};
+
+Monitor.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Monitor.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Monitor;
+});
+
+unwrapExports$1(monitor);
+
+var moon = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Moon = function Moon(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' })
+  );
+};
+
+Moon.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Moon.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Moon;
+});
+
+unwrapExports$1(moon);
+
+var moreHorizontal = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MoreHorizontal = function MoreHorizontal(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '2' }),
+    _react2.default.createElement('circle', { cx: '20', cy: '12', r: '2' }),
+    _react2.default.createElement('circle', { cx: '4', cy: '12', r: '2' })
+  );
+};
+
+MoreHorizontal.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MoreHorizontal.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MoreHorizontal;
+});
+
+unwrapExports$1(moreHorizontal);
+
+var moreVertical = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var MoreVertical = function MoreVertical(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '2' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '4', r: '2' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '20', r: '2' })
+  );
+};
+
+MoreVertical.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+MoreVertical.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = MoreVertical;
+});
+
+unwrapExports$1(moreVertical);
+
+var move = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Move = function Move(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '5 9 2 12 5 15' }),
+    _react2.default.createElement('polyline', { points: '9 5 12 2 15 5' }),
+    _react2.default.createElement('polyline', { points: '15 19 12 22 9 19' }),
+    _react2.default.createElement('polyline', { points: '19 9 22 12 19 15' }),
+    _react2.default.createElement('line', { x1: '2', y1: '12', x2: '22', y2: '12' }),
+    _react2.default.createElement('line', { x1: '12', y1: '2', x2: '12', y2: '22' })
+  );
+};
+
+Move.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Move.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Move;
+});
+
+unwrapExports$1(move);
+
+var music = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Music = function Music(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M9 17H5a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm12-2h-4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z' }),
+    _react2.default.createElement('polyline', { points: '9 17 9 5 21 3 21 15' })
+  );
+};
+
+Music.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Music.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Music;
+});
+
+unwrapExports$1(music);
+
+var navigation2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Navigation2 = function Navigation2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '12 2 19 21 12 17 5 21 12 2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Navigation2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Navigation2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Navigation2;
+});
+
+unwrapExports$1(navigation2);
+
+var navigation = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Navigation = function Navigation(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '3 11 22 2 13 21 11 13 3 11',
+      fill: 'none',
+      stroke: color,
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Navigation.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Navigation.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Navigation;
+});
+
+unwrapExports$1(navigation);
+
+var octagon = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Octagon = function Octagon(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2' })
+  );
+};
+
+Octagon.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Octagon.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Octagon;
+});
+
+unwrapExports$1(octagon);
+
+var _package = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Package = function Package(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '2.32 6.16 12 11 21.68 6.16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '22.76',
+      x2: '12',
+      y2: '11',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '7',
+      y1: '3.5',
+      x2: '17',
+      y2: '8.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Package.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Package.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Package;
+});
+
+unwrapExports$1(_package);
+
+var paperclip = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Paperclip = function Paperclip(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M21.44,11.05l-9.19,9.19a6,6,0,0,1-8.49-8.49l9.19-9.19a4,4,0,0,1,5.66,5.66L9.41,17.41a2,2,0,0,1-2.83-2.83L15.07,6.1',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Paperclip.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Paperclip.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Paperclip;
+});
+
+unwrapExports$1(paperclip);
+
+var pauseCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PauseCircle = function PauseCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '12',
+      r: '10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '10',
+      y1: '15',
+      x2: '10',
+      y2: '9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '14',
+      y1: '15',
+      x2: '14',
+      y2: '9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+PauseCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PauseCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PauseCircle;
+});
+
+unwrapExports$1(pauseCircle);
+
+var pause = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Pause = function Pause(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '6',
+      y: '4',
+      width: '4',
+      height: '16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '14',
+      y: '4',
+      width: '4',
+      height: '16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Pause.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Pause.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Pause;
+});
+
+unwrapExports$1(pause);
+
+var percent = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Percent = function Percent(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '19',
+      y1: '5',
+      x2: '5',
+      y2: '19',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '6.5',
+      cy: '6.5',
+      r: '2.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '17.5',
+      cy: '17.5',
+      r: '2.5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Percent.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Percent.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Percent;
+});
+
+unwrapExports$1(percent);
+
+var phoneCall = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PhoneCall = function PhoneCall(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+  );
+};
+
+PhoneCall.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PhoneCall.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PhoneCall;
+});
+
+unwrapExports$1(phoneCall);
+
+var phoneForwarded = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PhoneForwarded = function PhoneForwarded(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '19 1 23 5 19 9' }),
+    _react2.default.createElement('line', { x1: '15', y1: '5', x2: '23', y2: '5' }),
+    _react2.default.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+  );
+};
+
+PhoneForwarded.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PhoneForwarded.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PhoneForwarded;
+});
+
+unwrapExports$1(phoneForwarded);
+
+var phoneIncoming = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PhoneIncoming = function PhoneIncoming(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '16 2 16 8 22 8' }),
+    _react2.default.createElement('line', { x1: '23', y1: '1', x2: '16', y2: '8' }),
+    _react2.default.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+  );
+};
+
+PhoneIncoming.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PhoneIncoming.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PhoneIncoming;
+});
+
+unwrapExports$1(phoneIncoming);
+
+var phoneMissed = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PhoneMissed = function PhoneMissed(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '23', y1: '1', x2: '17', y2: '7' }),
+    _react2.default.createElement('line', { x1: '17', y1: '1', x2: '23', y2: '7' }),
+    _react2.default.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+  );
+};
+
+PhoneMissed.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PhoneMissed.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PhoneMissed;
+});
+
+unwrapExports$1(phoneMissed);
+
+var phoneOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PhoneOff = function PhoneOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91' }),
+    _react2.default.createElement('line', { x1: '23', y1: '1', x2: '1', y2: '23' })
+  );
+};
+
+PhoneOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PhoneOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PhoneOff;
+});
+
+unwrapExports$1(phoneOff);
+
+var phoneOutgoing = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PhoneOutgoing = function PhoneOutgoing(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '23 7 23 1 17 1' }),
+    _react2.default.createElement('line', { x1: '16', y1: '8', x2: '23', y2: '1' }),
+    _react2.default.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+  );
+};
+
+PhoneOutgoing.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PhoneOutgoing.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PhoneOutgoing;
+});
+
+unwrapExports$1(phoneOutgoing);
+
+var phone = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Phone = function Phone(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+  );
+};
+
+Phone.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Phone.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Phone;
+});
+
+unwrapExports$1(phone);
+
+var pieChart = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PieChart = function PieChart(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M21.21 15.89A10 10 0 1 1 8 2.83',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M22 12A10 10 0 0 0 12 2v10z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+PieChart.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PieChart.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PieChart;
+});
+
+unwrapExports$1(pieChart);
+
+var playCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PlayCircle = function PlayCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '12',
+      r: '10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polygon', {
+      points: '10 8 16 12 10 16 10 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+PlayCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PlayCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PlayCircle;
+});
+
+unwrapExports$1(playCircle);
+
+var play = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Play = function Play(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '5 3 19 12 5 21 5 3' })
+  );
+};
+
+Play.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Play.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Play;
+});
+
+unwrapExports$1(play);
+
+var plusCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PlusCircle = function PlusCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '12', y1: '8', x2: '12', y2: '16' }),
+    _react2.default.createElement('line', { x1: '8', y1: '12', x2: '16', y2: '12' })
+  );
+};
+
+PlusCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PlusCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PlusCircle;
+});
+
+unwrapExports$1(plusCircle);
+
+var plusSquare = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var PlusSquare = function PlusSquare(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '12', y1: '8', x2: '12', y2: '16' }),
+    _react2.default.createElement('line', { x1: '8', y1: '12', x2: '16', y2: '12' })
+  );
+};
+
+PlusSquare.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+PlusSquare.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = PlusSquare;
+});
+
+unwrapExports$1(plusSquare);
+
+var plus$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Plus = function Plus(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '12', y1: '5', x2: '12', y2: '19' }),
+    _react2.default.createElement('line', { x1: '5', y1: '12', x2: '19', y2: '12' })
+  );
+};
+
+Plus.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Plus.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Plus;
+});
+
+unwrapExports$1(plus$1);
+
+var pocket = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Pocket = function Pocket(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M4 3h16a2 2 0 0 1 2 2v6a10 10 0 0 1-10 10A10 10 0 0 1 2 11V5a2 2 0 0 1 2-2z' }),
+    _react2.default.createElement('polyline', { points: '8 10 12 14 16 10' })
+  );
+};
+
+Pocket.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Pocket.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Pocket;
+});
+
+unwrapExports$1(pocket);
+
+var power = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Power = function Power(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M18.36 6.64a9 9 0 1 1-12.73 0' }),
+    _react2.default.createElement('line', { x1: '12', y1: '2', x2: '12', y2: '12' })
+  );
+};
+
+Power.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Power.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Power;
+});
+
+unwrapExports$1(power);
+
+var printer = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Printer = function Printer(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '6 9 6 2 18 2 18 9' }),
+    _react2.default.createElement('path', { d: 'M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2' }),
+    _react2.default.createElement('rect', { x: '6', y: '14', width: '12', height: '8' })
+  );
+};
+
+Printer.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Printer.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Printer;
+});
+
+unwrapExports$1(printer);
+
+var radio = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Radio = function Radio(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '2' }),
+    _react2.default.createElement('path', { d: 'M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14' })
+  );
+};
+
+Radio.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Radio.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Radio;
+});
+
+unwrapExports$1(radio);
+
+var refreshCcw = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var RefreshCcw = function RefreshCcw(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '1 4 1 10 7 10' }),
+    _react2.default.createElement('polyline', { points: '23 20 23 14 17 14' }),
+    _react2.default.createElement('path', { d: 'M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15' })
+  );
+};
+
+RefreshCcw.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+RefreshCcw.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = RefreshCcw;
+});
+
+unwrapExports$1(refreshCcw);
+
+var refreshCw = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var RefreshCw = function RefreshCw(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '23 4 23 10 17 10' }),
+    _react2.default.createElement('polyline', { points: '1 20 1 14 7 14' }),
+    _react2.default.createElement('path', { d: 'M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15' })
+  );
+};
+
+RefreshCw.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+RefreshCw.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = RefreshCw;
+});
+
+unwrapExports$1(refreshCw);
+
+var repeat = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Repeat = function Repeat(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '17 1 21 5 17 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M3 11V9a4 4 0 0 1 4-4h14',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '7 23 3 19 7 15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M21 13v2a4 4 0 0 1-4 4H3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Repeat.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Repeat.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Repeat;
+});
+
+unwrapExports$1(repeat);
+
+var rewind = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Rewind = function Rewind(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '11 19 2 12 11 5 11 19' }),
+    _react2.default.createElement('polygon', { points: '22 19 13 12 22 5 22 19' })
+  );
+};
+
+Rewind.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Rewind.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Rewind;
+});
+
+unwrapExports$1(rewind);
+
+var rotateCcw = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var RotateCcw = function RotateCcw(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '1 4 1 10 7 10' }),
+    _react2.default.createElement('path', { d: 'M3.51 15a9 9 0 1 0 2.13-9.36L1 10' })
+  );
+};
+
+RotateCcw.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+RotateCcw.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = RotateCcw;
+});
+
+unwrapExports$1(rotateCcw);
+
+var rotateCw = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var RotateCw = function RotateCw(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '23 4 23 10 17 10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M20.49 15a9 9 0 1 1-2.12-9.36L23 10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+RotateCw.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+RotateCw.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = RotateCw;
+});
+
+unwrapExports$1(rotateCw);
+
+var save = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Save = function Save(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 21 17 13 7 13 7 21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '7 3 7 8 15 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Save.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Save.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Save;
+});
+
+unwrapExports$1(save);
+
+var scissors = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Scissors = function Scissors(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '6',
+      cy: '6',
+      r: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '6',
+      cy: '18',
+      r: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '20',
+      y1: '4',
+      x2: '8.12',
+      y2: '15.88',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '14.47',
+      y1: '14.48',
+      x2: '20',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '8.12',
+      y1: '8.12',
+      x2: '12',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Scissors.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Scissors.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Scissors;
+});
+
+unwrapExports$1(scissors);
+
+var search = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Search = function Search(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '10.5', cy: '10.5', r: '7.5' }),
+    _react2.default.createElement('line', { x1: '21', y1: '21', x2: '15.8', y2: '15.8' })
+  );
+};
+
+Search.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Search.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Search;
+});
+
+unwrapExports$1(search);
+
+var server = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Server = function Server(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '2',
+      y: '2',
+      width: '20',
+      height: '8',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '2',
+      y: '14',
+      width: '20',
+      height: '8',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '6',
+      y1: '6',
+      x2: '6',
+      y2: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '6',
+      y1: '18',
+      x2: '6',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Server.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Server.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Server;
+});
+
+unwrapExports$1(server);
+
+var settings = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Settings = function Settings(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '12',
+      r: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z',
+      fill: 'none',
+      stroke: color,
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Settings.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Settings.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Settings;
+});
+
+unwrapExports$1(settings);
+
+var share2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Share2 = function Share2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '18', cy: '5', r: '3' }),
+    _react2.default.createElement('circle', { cx: '6', cy: '12', r: '3' }),
+    _react2.default.createElement('circle', { cx: '18', cy: '19', r: '3' }),
+    _react2.default.createElement('line', { x1: '8.59', y1: '13.51', x2: '15.42', y2: '17.49' }),
+    _react2.default.createElement('line', { x1: '15.41', y1: '6.51', x2: '8.59', y2: '10.49' })
+  );
+};
+
+Share2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Share2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Share2;
+});
+
+unwrapExports$1(share2);
+
+var share = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Share = function Share(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '16 6 12 2 8 6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '2',
+      x2: '12',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Share.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Share.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Share;
+});
+
+unwrapExports$1(share);
+
+var shield = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Shield = function Shield(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M12 22s8-4 8-10V4l-8-2-8 2v8c0 6 8 10 8 10z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Shield.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Shield.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Shield;
+});
+
+unwrapExports$1(shield);
+
+var shoppingCart = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ShoppingCart = function ShoppingCart(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '8',
+      cy: '21',
+      r: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '20',
+      cy: '21',
+      r: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M5.67,6H23l-1.68,8.39a2,2,0,0,1-2,1.61H8.75a2,2,0,0,1-2-1.74L5.23,2.74A2,2,0,0,0,3.25,1H1',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+ShoppingCart.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ShoppingCart.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ShoppingCart;
+});
+
+unwrapExports$1(shoppingCart);
+
+var shuffle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Shuffle = function Shuffle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '16 3 21 3 21 8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '4',
+      y1: '20',
+      x2: '21',
+      y2: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '21 16 21 21 16 21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '15',
+      y1: '15',
+      x2: '21',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '4',
+      y1: '4',
+      x2: '9',
+      y2: '9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Shuffle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Shuffle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Shuffle;
+});
+
+unwrapExports$1(shuffle);
+
+var sidebar = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Sidebar = function Sidebar(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '3',
+      y: '3',
+      width: '18',
+      height: '18',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '9',
+      y1: '3',
+      x2: '9',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Sidebar.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Sidebar.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Sidebar;
+});
+
+unwrapExports$1(sidebar);
+
+var skipBack = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var SkipBack = function SkipBack(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '19 20 9 12 19 4 19 20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '5',
+      y1: '19',
+      x2: '5',
+      y2: '5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+SkipBack.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+SkipBack.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = SkipBack;
+});
+
+unwrapExports$1(skipBack);
+
+var skipForward = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var SkipForward = function SkipForward(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '5 4 15 12 5 20 5 4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '19',
+      y1: '5',
+      x2: '19',
+      y2: '19',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+SkipForward.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+SkipForward.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = SkipForward;
+});
+
+unwrapExports$1(skipForward);
+
+var slack = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Slack = function Slack(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M22.08 9C19.81 1.41 16.54-.35 9 1.92S-.35 7.46 1.92 15 7.46 24.35 15 22.08 24.35 16.54 22.08 9z',
+      fill: 'none',
+      stroke: color,
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12.57',
+      y1: '5.99',
+      x2: '16.15',
+      y2: '16.39',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '7.85',
+      y1: '7.61',
+      x2: '11.43',
+      y2: '18.01',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '16.39',
+      y1: '7.85',
+      x2: '5.99',
+      y2: '11.43',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '18.01',
+      y1: '12.57',
+      x2: '7.61',
+      y2: '16.15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Slack.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Slack.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Slack;
+});
+
+unwrapExports$1(slack);
+
+var slash = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Slash = function Slash(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '4.93', y1: '4.93', x2: '19.07', y2: '19.07' })
+  );
+};
+
+Slash.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Slash.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Slash;
+});
+
+unwrapExports$1(slash);
+
+var sliders = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Sliders = function Sliders(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '4',
+      y1: '21',
+      x2: '4',
+      y2: '14',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '4',
+      y1: '10',
+      x2: '4',
+      y2: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '21',
+      x2: '12',
+      y2: '12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '8',
+      x2: '12',
+      y2: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '20',
+      y1: '21',
+      x2: '20',
+      y2: '16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '20',
+      y1: '12',
+      x2: '20',
+      y2: '3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '1',
+      y1: '14',
+      x2: '7',
+      y2: '14',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '9',
+      y1: '8',
+      x2: '15',
+      y2: '8',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '17',
+      y1: '16',
+      x2: '23',
+      y2: '16',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Sliders.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Sliders.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Sliders;
+});
+
+unwrapExports$1(sliders);
+
+var smartphone = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Smartphone = function Smartphone(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '5',
+      y: '2',
+      width: '14',
+      height: '20',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '18',
+      x2: '12',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Smartphone.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Smartphone.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Smartphone;
+});
+
+unwrapExports$1(smartphone);
+
+var speaker = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Speaker = function Speaker(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '4',
+      y: '2',
+      width: '16',
+      height: '20',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '14',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '6',
+      x2: '12',
+      y2: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Speaker.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Speaker.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Speaker;
+});
+
+unwrapExports$1(speaker);
+
+var square = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Square = function Square(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' })
+  );
+};
+
+Square.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Square.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Square;
+});
+
+unwrapExports$1(square);
+
+var star = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Star = function Star(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' })
+  );
+};
+
+Star.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Star.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Star;
+});
+
+unwrapExports$1(star);
+
+var stopCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var StopCircle = function StopCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '12',
+      r: '10',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('rect', {
+      x: '9',
+      y: '9',
+      width: '6',
+      height: '6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+StopCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+StopCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = StopCircle;
+});
+
+unwrapExports$1(stopCircle);
+
+var sun = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Sun = function Sun(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '5' }),
+    _react2.default.createElement('line', { x1: '12', y1: '1', x2: '12', y2: '3' }),
+    _react2.default.createElement('line', { x1: '12', y1: '21', x2: '12', y2: '23' }),
+    _react2.default.createElement('line', { x1: '4.22', y1: '4.22', x2: '5.64', y2: '5.64' }),
+    _react2.default.createElement('line', { x1: '18.36', y1: '18.36', x2: '19.78', y2: '19.78' }),
+    _react2.default.createElement('line', { x1: '1', y1: '12', x2: '3', y2: '12' }),
+    _react2.default.createElement('line', { x1: '21', y1: '12', x2: '23', y2: '12' }),
+    _react2.default.createElement('line', { x1: '4.22', y1: '19.78', x2: '5.64', y2: '18.36' }),
+    _react2.default.createElement('line', { x1: '18.36', y1: '5.64', x2: '19.78', y2: '4.22' })
+  );
+};
+
+Sun.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Sun.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Sun;
+});
+
+unwrapExports$1(sun);
+
+var sunrise = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Sunrise = function Sunrise(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M17 18a5 5 0 0 0-10 0' }),
+    _react2.default.createElement('line', { x1: '12', y1: '2', x2: '12', y2: '9' }),
+    _react2.default.createElement('line', { x1: '4.22', y1: '10.22', x2: '5.64', y2: '11.64' }),
+    _react2.default.createElement('line', { x1: '1', y1: '18', x2: '3', y2: '18' }),
+    _react2.default.createElement('line', { x1: '21', y1: '18', x2: '23', y2: '18' }),
+    _react2.default.createElement('line', { x1: '18.36', y1: '11.64', x2: '19.78', y2: '10.22' }),
+    _react2.default.createElement('line', { x1: '23', y1: '22', x2: '1', y2: '22' }),
+    _react2.default.createElement('polyline', { points: '8 6 12 2 16 6' })
+  );
+};
+
+Sunrise.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Sunrise.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Sunrise;
+});
+
+unwrapExports$1(sunrise);
+
+var sunset = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Sunset = function Sunset(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M17 18a5 5 0 0 0-10 0' }),
+    _react2.default.createElement('line', { x1: '12', y1: '9', x2: '12', y2: '2' }),
+    _react2.default.createElement('line', { x1: '4.22', y1: '10.22', x2: '5.64', y2: '11.64' }),
+    _react2.default.createElement('line', { x1: '1', y1: '18', x2: '3', y2: '18' }),
+    _react2.default.createElement('line', { x1: '21', y1: '18', x2: '23', y2: '18' }),
+    _react2.default.createElement('line', { x1: '18.36', y1: '11.64', x2: '19.78', y2: '10.22' }),
+    _react2.default.createElement('line', { x1: '23', y1: '22', x2: '1', y2: '22' }),
+    _react2.default.createElement('polyline', { points: '16 5 12 9 8 5' })
+  );
+};
+
+Sunset.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Sunset.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Sunset;
+});
+
+unwrapExports$1(sunset);
+
+var tablet = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Tablet = function Tablet(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '4',
+      y: '2',
+      width: '16',
+      height: '20',
+      rx: '2',
+      ry: '2',
+      transform: 'rotate(180 12 12)',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '18',
+      x2: '12',
+      y2: '18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Tablet.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Tablet.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Tablet;
+});
+
+unwrapExports$1(tablet);
+
+var tag = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Tag = function Tag(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z' }),
+    _react2.default.createElement('line', { x1: '7', y1: '7', x2: '7', y2: '7' })
+  );
+};
+
+Tag.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Tag.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Tag;
+});
+
+unwrapExports$1(tag);
+
+var target = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Target = function Target(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '6' }),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '2' })
+  );
+};
+
+Target.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Target.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Target;
+});
+
+unwrapExports$1(target);
+
+var thermometer = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Thermometer = function Thermometer(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z' })
+  );
+};
+
+Thermometer.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Thermometer.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Thermometer;
+});
+
+unwrapExports$1(thermometer);
+
+var thumbsDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ThumbsDown = function ThumbsDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17' })
+  );
+};
+
+ThumbsDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ThumbsDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ThumbsDown;
+});
+
+unwrapExports$1(thumbsDown);
+
+var thumbsUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ThumbsUp = function ThumbsUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3' })
+  );
+};
+
+ThumbsUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ThumbsUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ThumbsUp;
+});
+
+unwrapExports$1(thumbsUp);
+
+var toggleLeft = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ToggleLeft = function ToggleLeft(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '1', y: '5', width: '22', height: '14', rx: '7', ry: '7' }),
+    _react2.default.createElement('circle', { cx: '8', cy: '12', r: '3' })
+  );
+};
+
+ToggleLeft.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ToggleLeft.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ToggleLeft;
+});
+
+unwrapExports$1(toggleLeft);
+
+var toggleRight = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ToggleRight = function ToggleRight(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '1', y: '5', width: '22', height: '14', rx: '7', ry: '7' }),
+    _react2.default.createElement('circle', { cx: '16', cy: '12', r: '3' })
+  );
+};
+
+ToggleRight.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ToggleRight.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ToggleRight;
+});
+
+unwrapExports$1(toggleRight);
+
+var trash2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Trash2 = function Trash2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '3 6 5 6 21 6' }),
+    _react2.default.createElement('path', { d: 'M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2' }),
+    _react2.default.createElement('line', { x1: '10', y1: '11', x2: '10', y2: '17' }),
+    _react2.default.createElement('line', { x1: '14', y1: '11', x2: '14', y2: '17' })
+  );
+};
+
+Trash2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Trash2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Trash2;
+});
+
+unwrapExports$1(trash2);
+
+var trash = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Trash = function Trash(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '3 6 5 6 21 6' }),
+    _react2.default.createElement('path', { d: 'M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2' })
+  );
+};
+
+Trash.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Trash.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Trash;
+});
+
+unwrapExports$1(trash);
+
+var trendingDown = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var TrendingDown = function TrendingDown(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '23 18 13.5 8.5 8.5 13.5 1 6',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 18 23 18 23 12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+TrendingDown.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+TrendingDown.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = TrendingDown;
+});
+
+unwrapExports$1(trendingDown);
+
+var trendingUp = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var TrendingUp = function TrendingUp(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '23 6 13.5 15.5 8.5 10.5 1 18',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 6 23 6 23 12',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+TrendingUp.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+TrendingUp.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = TrendingUp;
+});
+
+unwrapExports$1(trendingUp);
+
+var triangle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Triangle = function Triangle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z' })
+  );
+};
+
+Triangle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Triangle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Triangle;
+});
+
+unwrapExports$1(triangle);
+
+var tv = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Tv = function Tv(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('rect', {
+      x: '2',
+      y: '7',
+      width: '20',
+      height: '15',
+      rx: '2',
+      ry: '2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 2 12 7 7 2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Tv.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Tv.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Tv;
+});
+
+unwrapExports$1(tv);
+
+var twitter = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Twitter = function Twitter(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Twitter.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Twitter.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Twitter;
+});
+
+unwrapExports$1(twitter);
+
+var type = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Type = function Type(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polyline', {
+      points: '4 7 4 4 20 4 20 7',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '9',
+      y1: '20',
+      x2: '15',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '4',
+      x2: '12',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Type.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Type.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Type;
+});
+
+unwrapExports$1(type);
+
+var umbrella = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Umbrella = function Umbrella(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7' })
+  );
+};
+
+Umbrella.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Umbrella.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Umbrella;
+});
+
+unwrapExports$1(umbrella);
+
+var underline = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Underline = function Underline(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M6,3v7a6,6,0,0,0,6,6h0a6,6,0,0,0,6-6V3',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '4',
+      y1: '21',
+      x2: '20',
+      y2: '21',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Underline.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Underline.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Underline;
+});
+
+unwrapExports$1(underline);
+
+var unlock = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Unlock = function Unlock(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '11', width: '18', height: '11', rx: '2', ry: '2' }),
+    _react2.default.createElement('path', { d: 'M7 11V7a5 5 0 0 1 9.9-1' })
+  );
+};
+
+Unlock.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Unlock.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Unlock;
+});
+
+unwrapExports$1(unlock);
+
+var uploadCloud = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var UploadCloud = function UploadCloud(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polyline', { points: '16 16 12 12 8 16' }),
+    _react2.default.createElement('line', { x1: '12', y1: '12', x2: '12', y2: '21' }),
+    _react2.default.createElement('path', { d: 'M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3' }),
+    _react2.default.createElement('polyline', { points: '16 16 12 12 8 16' })
+  );
+};
+
+UploadCloud.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+UploadCloud.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = UploadCloud;
+});
+
+unwrapExports$1(uploadCloud);
+
+var upload = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Upload = function Upload(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3' }),
+    _react2.default.createElement('polyline', { points: '16 6 12 2 8 6' }),
+    _react2.default.createElement('line', { x1: '12', y1: '2', x2: '12', y2: '16' })
+  );
+};
+
+Upload.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Upload.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Upload;
+});
+
+unwrapExports$1(upload);
+
+var userCheck = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var UserCheck = function UserCheck(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '8.5',
+      cy: '7',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('polyline', {
+      points: '17 11 19 13 23 9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+UserCheck.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+UserCheck.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = UserCheck;
+});
+
+unwrapExports$1(userCheck);
+
+var userMinus = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var UserMinus = function UserMinus(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '8.5',
+      cy: '7',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '23',
+      y1: '11',
+      x2: '17',
+      y2: '11',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+UserMinus.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+UserMinus.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = UserMinus;
+});
+
+unwrapExports$1(userMinus);
+
+var userPlus = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var UserPlus = function UserPlus(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '8.5',
+      cy: '7',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '20',
+      y1: '8',
+      x2: '20',
+      y2: '14',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '23',
+      y1: '11',
+      x2: '17',
+      y2: '11',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+UserPlus.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+UserPlus.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = UserPlus;
+});
+
+unwrapExports$1(userPlus);
+
+var userX = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var UserX = function UserX(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '8.5',
+      cy: '7',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '18',
+      y1: '8',
+      x2: '23',
+      y2: '13',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '23',
+      y1: '8',
+      x2: '18',
+      y2: '13',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+UserX.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+UserX.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = UserX;
+});
+
+unwrapExports$1(userX);
+
+var user = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var User = function User(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '12',
+      cy: '7',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+User.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+User.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = User;
+});
+
+unwrapExports$1(user);
+
+var users = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Users = function Users(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '9',
+      cy: '7',
+      r: '4',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M23 21v-2a4 4 0 0 0-3-3.87',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M16 3.13a4 4 0 0 1 0 7.75',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Users.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Users.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Users;
+});
+
+unwrapExports$1(users);
+
+var videoOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var VideoOff = function VideoOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2m5.66 0H14a2 2 0 0 1 2 2v3.34l1 1L23 7v10' }),
+    _react2.default.createElement('line', { x1: '1', y1: '1', x2: '23', y2: '23' })
+  );
+};
+
+VideoOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+VideoOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = VideoOff;
+});
+
+unwrapExports$1(videoOff);
+
+var video$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Video = function Video(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '23 7 16 12 23 17 23 7' }),
+    _react2.default.createElement('rect', { x: '1', y: '5', width: '15', height: '14', rx: '2', ry: '2' })
+  );
+};
+
+Video.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Video.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Video;
+});
+
+unwrapExports$1(video$1);
+
+var voicemail = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Voicemail = function Voicemail(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('circle', {
+      cx: '5.5',
+      cy: '11.5',
+      r: '4.5',
+      fill: 'none',
+      stroke: color,
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('circle', {
+      cx: '18.5',
+      cy: '11.5',
+      r: '4.5',
+      fill: 'none',
+      stroke: color,
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '5.5',
+      y1: '16',
+      x2: '18.5',
+      y2: '16',
+      fill: 'none',
+      stroke: color,
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Voicemail.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Voicemail.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Voicemail;
+});
+
+unwrapExports$1(voicemail);
+
+var volume1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Volume1 = function Volume1(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '11 5 6 9 2 9 2 15 6 15 11 19 11 5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M15.54 8.46a5 5 0 0 1 0 7.07',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Volume1.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Volume1.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Volume1;
+});
+
+unwrapExports$1(volume1);
+
+var volume2 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Volume2 = function Volume2(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '11 5 6 9 2 9 2 15 6 15 11 19 11 5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Volume2.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Volume2.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Volume2;
+});
+
+unwrapExports$1(volume2);
+
+var volumeX = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var VolumeX = function VolumeX(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '11 5 6 9 2 9 2 15 6 15 11 19 11 5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '23',
+      y1: '9',
+      x2: '17',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '17',
+      y1: '9',
+      x2: '23',
+      y2: '15',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+VolumeX.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+VolumeX.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = VolumeX;
+});
+
+unwrapExports$1(volumeX);
+
+var volume = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Volume = function Volume(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('polygon', {
+      points: '11 5 6 9 2 9 2 15 6 15 11 19 11 5',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Volume.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Volume.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Volume;
+});
+
+unwrapExports$1(volume);
+
+var watch = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Watch = function Watch(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '7' }),
+    _react2.default.createElement('polyline', { points: '12 9 12 12 13.5 13.5' }),
+    _react2.default.createElement('path', { d: 'M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83' })
+  );
+};
+
+Watch.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Watch.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Watch;
+});
+
+unwrapExports$1(watch);
+
+var wifiOff = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var WifiOff = function WifiOff(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('line', {
+      x1: '1',
+      y1: '1',
+      x2: '23',
+      y2: '23',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M16.72,11.06A10.94,10.94,0,0,1,19,12.55',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M5,12.55a10.94,10.94,0,0,1,5.17-2.39',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M10.71,5.05A16,16,0,0,1,22.58,9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M1.42,9a15.91,15.91,0,0,1,4.7-2.88',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M8.53,16.11a6,6,0,0,1,6.95,0',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '20',
+      x2: '12',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+WifiOff.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+WifiOff.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = WifiOff;
+});
+
+unwrapExports$1(wifiOff);
+
+var wifi = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Wifi = function Wifi(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24'
+    }, otherProps),
+    _react2.default.createElement('path', {
+      d: 'M5,12.55a11,11,0,0,1,14.08,0',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M1.42,9A16,16,0,0,1,22.58,9',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('path', {
+      d: 'M8.53,16.11a6,6,0,0,1,6.95,0',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    }),
+    _react2.default.createElement('line', {
+      x1: '12',
+      y1: '20',
+      x2: '12',
+      y2: '20',
+      fill: 'none',
+      stroke: color,
+      strokeLinecap: 'round',
+      strokeMiterlimit: '10',
+      strokeWidth: '2'
+    })
+  );
+};
+
+Wifi.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Wifi.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Wifi;
+});
+
+unwrapExports$1(wifi);
+
+var wind = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Wind = function Wind(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('path', { d: 'M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2' })
+  );
+};
+
+Wind.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Wind.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Wind;
+});
+
+unwrapExports$1(wind);
+
+var xCircle = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var XCircle = function XCircle(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+    _react2.default.createElement('line', { x1: '15', y1: '9', x2: '9', y2: '15' }),
+    _react2.default.createElement('line', { x1: '9', y1: '9', x2: '15', y2: '15' })
+  );
+};
+
+XCircle.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+XCircle.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = XCircle;
+});
+
+unwrapExports$1(xCircle);
+
+var xSquare = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var XSquare = function XSquare(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
+    _react2.default.createElement('line', { x1: '9', y1: '9', x2: '15', y2: '15' }),
+    _react2.default.createElement('line', { x1: '15', y1: '9', x2: '9', y2: '15' })
+  );
+};
+
+XSquare.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+XSquare.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = XSquare;
+});
+
+unwrapExports$1(xSquare);
+
+var x$1 = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var X = function X(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('line', { x1: '18', y1: '6', x2: '6', y2: '18' }),
+    _react2.default.createElement('line', { x1: '6', y1: '6', x2: '18', y2: '18' })
+  );
+};
+
+X.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+X.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = X;
+});
+
+unwrapExports$1(x$1);
+
+var zap = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Zap = function Zap(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('polygon', { points: '13 2 3 14 12 14 11 22 21 10 12 10 13 2' })
+  );
+};
+
+Zap.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+Zap.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = Zap;
+});
+
+unwrapExports$1(zap);
+
+var zoomIn = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ZoomIn = function ZoomIn(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '11', cy: '11', r: '8' }),
+    _react2.default.createElement('line', { x1: '21', y1: '21', x2: '16.65', y2: '16.65' }),
+    _react2.default.createElement('line', { x1: '11', y1: '8', x2: '11', y2: '14' }),
+    _react2.default.createElement('line', { x1: '8', y1: '11', x2: '14', y2: '11' })
+  );
+};
+
+ZoomIn.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ZoomIn.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ZoomIn;
+});
+
+unwrapExports$1(zoomIn);
+
+var zoomOut = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+var _react2 = _interopRequireDefault(_react__default);
+
+
+
+var _propTypes2 = _interopRequireDefault(propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var ZoomOut = function ZoomOut(props) {
+  var color = props.color,
+      size = props.size,
+      otherProps = _objectWithoutProperties(props, ['color', 'size']);
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: '2',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
+    }, otherProps),
+    _react2.default.createElement('circle', { cx: '11', cy: '11', r: '8' }),
+    _react2.default.createElement('line', { x1: '21', y1: '21', x2: '16.65', y2: '16.65' }),
+    _react2.default.createElement('line', { x1: '8', y1: '11', x2: '14', y2: '11' })
+  );
+};
+
+ZoomOut.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
+
+ZoomOut.defaultProps = {
+  color: 'currentColor',
+  size: '24'
+};
+
+exports.default = ZoomOut;
+});
+
+unwrapExports$1(zoomOut);
+
+var dist = createCommonjsModule$1(function (module, exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ZoomOut = exports.ZoomIn = exports.Zap = exports.X = exports.XSquare = exports.XCircle = exports.Wind = exports.Wifi = exports.WifiOff = exports.Watch = exports.Volume = exports.VolumeX = exports.Volume2 = exports.Volume1 = exports.Voicemail = exports.Video = exports.VideoOff = exports.Users = exports.User = exports.UserX = exports.UserPlus = exports.UserMinus = exports.UserCheck = exports.Upload = exports.UploadCloud = exports.Unlock = exports.Underline = exports.Umbrella = exports.Type = exports.Twitter = exports.Tv = exports.Triangle = exports.TrendingUp = exports.TrendingDown = exports.Trash = exports.Trash2 = exports.ToggleRight = exports.ToggleLeft = exports.ThumbsUp = exports.ThumbsDown = undefined;
+exports.Thermometer = exports.Target = exports.Tag = exports.Tablet = exports.Sunset = exports.Sunrise = exports.Sun = exports.StopCircle = exports.Star = exports.Square = exports.Speaker = exports.Smartphone = exports.Sliders = exports.Slash = exports.Slack = exports.SkipForward = exports.SkipBack = exports.Sidebar = exports.Shuffle = exports.ShoppingCart = exports.Shield = exports.Share = exports.Share2 = exports.Settings = exports.Server = exports.Search = exports.Scissors = exports.Save = exports.RotateCw = exports.RotateCcw = exports.Rewind = exports.Repeat = exports.RefreshCw = exports.RefreshCcw = exports.Radio = exports.Printer = exports.Power = exports.Pocket = exports.Plus = exports.PlusSquare = exports.PlusCircle = exports.Play = exports.PlayCircle = exports.PieChart = exports.Phone = exports.PhoneOutgoing = exports.PhoneOff = exports.PhoneMissed = exports.PhoneIncoming = exports.PhoneForwarded = exports.PhoneCall = exports.Percent = exports.Pause = exports.PauseCircle = exports.Paperclip = exports.Package = exports.Octagon = exports.Navigation = exports.Navigation2 = exports.Music = exports.Move = exports.MoreVertical = exports.MoreHorizontal = exports.Moon = exports.Monitor = exports.Minus = exports.MinusSquare = exports.MinusCircle = exports.Minimize = exports.Minimize2 = exports.Mic = exports.MicOff = exports.MessageSquare = exports.MessageCircle = exports.Menu = exports.Maximize = exports.Maximize2 = exports.Map = exports.MapPin = exports.Mail = exports.LogOut = exports.LogIn = exports.Lock = exports.Loader = exports.List = exports.Link = exports.Link2 = exports.LifeBuoy = exports.Layout = exports.Layers = exports.Italic = exports.Instagram = exports.Info = exports.Inbox = exports.Image = exports.Home = exports.HelpCircle = exports.Heart = exports.Headphones = exports.Hash = undefined;
+exports.Grid = exports.Globe = exports.Gitlab = exports.Github = exports.Folder = exports.Flag = exports.Filter = exports.Film = exports.File = exports.FileText = exports.FilePlus = exports.FileMinus = exports.Feather = exports.FastForward = exports.Facebook = exports.Eye = exports.EyeOff = exports.ExternalLink = exports.Edit = exports.Edit3 = exports.Edit2 = exports.Droplet = exports.Download = exports.DownloadCloud = exports.Disc = exports.Delete = exports.Crosshair = exports.Crop = exports.CreditCard = exports.Cpu = exports.CornerUpRight = exports.CornerUpLeft = exports.CornerRightUp = exports.CornerRightDown = exports.CornerLeftUp = exports.CornerLeftDown = exports.CornerDownRight = exports.CornerDownLeft = exports.Copy = exports.Compass = exports.Command = exports.Codepen = exports.Cloud = exports.CloudSnow = exports.CloudRain = exports.CloudOff = exports.CloudLightning = exports.CloudDrizzle = exports.Clock = exports.Clipboard = exports.Circle = exports.Chrome = exports.ChevronsUp = exports.ChevronsRight = exports.ChevronsLeft = exports.ChevronsDown = exports.ChevronUp = exports.ChevronRight = exports.ChevronLeft = exports.ChevronDown = exports.Check = exports.CheckSquare = exports.CheckCircle = exports.Cast = exports.Camera = exports.CameraOff = exports.Calendar = exports.Briefcase = exports.Box = exports.Bookmark = exports.Book = exports.Bold = exports.Bluetooth = exports.Bell = exports.BellOff = exports.Battery = exports.BatteryCharging = exports.BarChart = exports.BarChart2 = exports.Award = exports.AtSign = exports.ArrowUp = exports.ArrowUpRight = exports.ArrowUpLeft = exports.ArrowRight = exports.ArrowLeft = exports.ArrowDown = exports.ArrowDownRight = exports.ArrowDownLeft = exports.Aperture = exports.Anchor = exports.AlignRight = exports.AlignLeft = exports.AlignJustify = exports.AlignCenter = exports.AlertTriangle = exports.AlertOctagon = exports.AlertCircle = exports.Airplay = exports.Activity = undefined;
+
+
+
+var _activity2 = _interopRequireDefault(activity);
+
+
+
+var _airplay2 = _interopRequireDefault(airplay);
+
+
+
+var _alertCircle2 = _interopRequireDefault(alertCircle);
+
+
+
+var _alertOctagon2 = _interopRequireDefault(alertOctagon);
+
+
+
+var _alertTriangle2 = _interopRequireDefault(alertTriangle);
+
+
+
+var _alignCenter2 = _interopRequireDefault(alignCenter);
+
+
+
+var _alignJustify2 = _interopRequireDefault(alignJustify);
+
+
+
+var _alignLeft2 = _interopRequireDefault(alignLeft);
+
+
+
+var _alignRight2 = _interopRequireDefault(alignRight);
+
+
+
+var _anchor2 = _interopRequireDefault(anchor);
+
+
+
+var _aperture2 = _interopRequireDefault(aperture);
+
+
+
+var _arrowDownLeft2 = _interopRequireDefault(arrowDownLeft);
+
+
+
+var _arrowDownRight2 = _interopRequireDefault(arrowDownRight);
+
+
+
+var _arrowDown2 = _interopRequireDefault(arrowDown);
+
+
+
+var _arrowLeft2 = _interopRequireDefault(arrowLeft);
+
+
+
+var _arrowRight2 = _interopRequireDefault(arrowRight);
+
+
+
+var _arrowUpLeft2 = _interopRequireDefault(arrowUpLeft);
+
+
+
+var _arrowUpRight2 = _interopRequireDefault(arrowUpRight);
+
+
+
+var _arrowUp2 = _interopRequireDefault(arrowUp);
+
+
+
+var _atSign2 = _interopRequireDefault(atSign);
+
+
+
+var _award2 = _interopRequireDefault(award);
+
+
+
+var _barChart2 = _interopRequireDefault(barChart2);
+
+
+
+var _barChart4 = _interopRequireDefault(barChart);
+
+
+
+var _batteryCharging2 = _interopRequireDefault(batteryCharging);
+
+
+
+var _battery2 = _interopRequireDefault(battery);
+
+
+
+var _bellOff2 = _interopRequireDefault(bellOff);
+
+
+
+var _bell2 = _interopRequireDefault(bell);
+
+
+
+var _bluetooth2 = _interopRequireDefault(bluetooth);
+
+
+
+var _bold2 = _interopRequireDefault(bold);
+
+
+
+var _book2 = _interopRequireDefault(book);
+
+
+
+var _bookmark2 = _interopRequireDefault(bookmark);
+
+
+
+var _box2 = _interopRequireDefault(box);
+
+
+
+var _briefcase2 = _interopRequireDefault(briefcase);
+
+
+
+var _calendar2 = _interopRequireDefault(calendar);
+
+
+
+var _cameraOff2 = _interopRequireDefault(cameraOff);
+
+
+
+var _camera2 = _interopRequireDefault(camera);
+
+
+
+var _cast2 = _interopRequireDefault(cast);
+
+
+
+var _checkCircle2 = _interopRequireDefault(checkCircle);
+
+
+
+var _checkSquare2 = _interopRequireDefault(checkSquare);
+
+
+
+var _check2 = _interopRequireDefault(check);
+
+
+
+var _chevronDown2 = _interopRequireDefault(chevronDown);
+
+
+
+var _chevronLeft2 = _interopRequireDefault(chevronLeft);
+
+
+
+var _chevronRight2 = _interopRequireDefault(chevronRight);
+
+
+
+var _chevronUp2 = _interopRequireDefault(chevronUp);
+
+
+
+var _chevronsDown2 = _interopRequireDefault(chevronsDown);
+
+
+
+var _chevronsLeft2 = _interopRequireDefault(chevronsLeft);
+
+
+
+var _chevronsRight2 = _interopRequireDefault(chevronsRight);
+
+
+
+var _chevronsUp2 = _interopRequireDefault(chevronsUp);
+
+
+
+var _chrome2 = _interopRequireDefault(chrome);
+
+
+
+var _circle2 = _interopRequireDefault(circle);
+
+
+
+var _clipboard2 = _interopRequireDefault(clipboard);
+
+
+
+var _clock2 = _interopRequireDefault(clock);
+
+
+
+var _cloudDrizzle2 = _interopRequireDefault(cloudDrizzle);
+
+
+
+var _cloudLightning2 = _interopRequireDefault(cloudLightning);
+
+
+
+var _cloudOff2 = _interopRequireDefault(cloudOff);
+
+
+
+var _cloudRain2 = _interopRequireDefault(cloudRain);
+
+
+
+var _cloudSnow2 = _interopRequireDefault(cloudSnow);
+
+
+
+var _cloud2 = _interopRequireDefault(cloud);
+
+
+
+var _codepen2 = _interopRequireDefault(codepen);
+
+
+
+var _command2 = _interopRequireDefault(command);
+
+
+
+var _compass2 = _interopRequireDefault(compass);
+
+
+
+var _copy2 = _interopRequireDefault(copy);
+
+
+
+var _cornerDownLeft2 = _interopRequireDefault(cornerDownLeft);
+
+
+
+var _cornerDownRight2 = _interopRequireDefault(cornerDownRight);
+
+
+
+var _cornerLeftDown2 = _interopRequireDefault(cornerLeftDown);
+
+
+
+var _cornerLeftUp2 = _interopRequireDefault(cornerLeftUp);
+
+
+
+var _cornerRightDown2 = _interopRequireDefault(cornerRightDown);
+
+
+
+var _cornerRightUp2 = _interopRequireDefault(cornerRightUp);
+
+
+
+var _cornerUpLeft2 = _interopRequireDefault(cornerUpLeft);
+
+
+
+var _cornerUpRight2 = _interopRequireDefault(cornerUpRight);
+
+
+
+var _cpu2 = _interopRequireDefault(cpu);
+
+
+
+var _creditCard2 = _interopRequireDefault(creditCard);
+
+
+
+var _crop2 = _interopRequireDefault(crop);
+
+
+
+var _crosshair2 = _interopRequireDefault(crosshair);
+
+
+
+var _delete2 = _interopRequireDefault(_delete);
+
+
+
+var _disc2 = _interopRequireDefault(disc);
+
+
+
+var _downloadCloud2 = _interopRequireDefault(downloadCloud);
+
+
+
+var _download2 = _interopRequireDefault(download);
+
+
+
+var _droplet2 = _interopRequireDefault(droplet);
+
+
+
+var _edit2 = _interopRequireDefault(edit2);
+
+
+
+var _edit4 = _interopRequireDefault(edit3);
+
+
+
+var _edit6 = _interopRequireDefault(edit);
+
+
+
+var _externalLink2 = _interopRequireDefault(externalLink);
+
+
+
+var _eyeOff2 = _interopRequireDefault(eyeOff);
+
+
+
+var _eye2 = _interopRequireDefault(eye);
+
+
+
+var _facebook2 = _interopRequireDefault(facebook);
+
+
+
+var _fastForward2 = _interopRequireDefault(fastForward);
+
+
+
+var _feather2 = _interopRequireDefault(feather);
+
+
+
+var _fileMinus2 = _interopRequireDefault(fileMinus);
+
+
+
+var _filePlus2 = _interopRequireDefault(filePlus);
+
+
+
+var _fileText2 = _interopRequireDefault(fileText);
+
+
+
+var _file2 = _interopRequireDefault(file);
+
+
+
+var _film2 = _interopRequireDefault(film);
+
+
+
+var _filter2 = _interopRequireDefault(filter$1);
+
+
+
+var _flag2 = _interopRequireDefault(flag);
+
+
+
+var _folder2 = _interopRequireDefault(folder);
+
+
+
+var _github2 = _interopRequireDefault(github);
+
+
+
+var _gitlab2 = _interopRequireDefault(gitlab);
+
+
+
+var _globe2 = _interopRequireDefault(globe);
+
+
+
+var _grid2 = _interopRequireDefault(grid);
+
+
+
+var _hash2 = _interopRequireDefault(hash$2);
+
+
+
+var _headphones2 = _interopRequireDefault(headphones);
+
+
+
+var _heart2 = _interopRequireDefault(heart);
+
+
+
+var _helpCircle2 = _interopRequireDefault(helpCircle);
+
+
+
+var _home2 = _interopRequireDefault(home);
+
+
+
+var _image2 = _interopRequireDefault(image);
+
+
+
+var _inbox2 = _interopRequireDefault(inbox);
+
+
+
+var _info2 = _interopRequireDefault(info);
+
+
+
+var _instagram2 = _interopRequireDefault(instagram);
+
+
+
+var _italic2 = _interopRequireDefault(italic);
+
+
+
+var _layers2 = _interopRequireDefault(layers);
+
+
+
+var _layout2 = _interopRequireDefault(layout);
+
+
+
+var _lifeBuoy2 = _interopRequireDefault(lifeBuoy);
+
+
+
+var _link2 = _interopRequireDefault(link2);
+
+
+
+var _link4 = _interopRequireDefault(link$1);
+
+
+
+var _list2 = _interopRequireDefault(list);
+
+
+
+var _loader2 = _interopRequireDefault(loader);
+
+
+
+var _lock2 = _interopRequireDefault(lock);
+
+
+
+var _logIn2 = _interopRequireDefault(logIn);
+
+
+
+var _logOut2 = _interopRequireDefault(logOut);
+
+
+
+var _mail2 = _interopRequireDefault(mail);
+
+
+
+var _mapPin2 = _interopRequireDefault(mapPin);
+
+
+
+var _map2 = _interopRequireDefault(map$1);
+
+
+
+var _maximize2 = _interopRequireDefault(maximize2);
+
+
+
+var _maximize4 = _interopRequireDefault(maximize);
+
+
+
+var _menu2 = _interopRequireDefault(menu);
+
+
+
+var _messageCircle2 = _interopRequireDefault(messageCircle);
+
+
+
+var _messageSquare2 = _interopRequireDefault(messageSquare);
+
+
+
+var _micOff2 = _interopRequireDefault(micOff);
+
+
+
+var _mic2 = _interopRequireDefault(mic);
+
+
+
+var _minimize2 = _interopRequireDefault(minimize2);
+
+
+
+var _minimize4 = _interopRequireDefault(minimize);
+
+
+
+var _minusCircle2 = _interopRequireDefault(minusCircle);
+
+
+
+var _minusSquare2 = _interopRequireDefault(minusSquare);
+
+
+
+var _minus2 = _interopRequireDefault(minus);
+
+
+
+var _monitor2 = _interopRequireDefault(monitor);
+
+
+
+var _moon2 = _interopRequireDefault(moon);
+
+
+
+var _moreHorizontal2 = _interopRequireDefault(moreHorizontal);
+
+
+
+var _moreVertical2 = _interopRequireDefault(moreVertical);
+
+
+
+var _move2 = _interopRequireDefault(move);
+
+
+
+var _music2 = _interopRequireDefault(music);
+
+
+
+var _navigation2 = _interopRequireDefault(navigation2);
+
+
+
+var _navigation4 = _interopRequireDefault(navigation);
+
+
+
+var _octagon2 = _interopRequireDefault(octagon);
+
+
+
+var _package2 = _interopRequireDefault(_package);
+
+
+
+var _paperclip2 = _interopRequireDefault(paperclip);
+
+
+
+var _pauseCircle2 = _interopRequireDefault(pauseCircle);
+
+
+
+var _pause2 = _interopRequireDefault(pause);
+
+
+
+var _percent2 = _interopRequireDefault(percent);
+
+
+
+var _phoneCall2 = _interopRequireDefault(phoneCall);
+
+
+
+var _phoneForwarded2 = _interopRequireDefault(phoneForwarded);
+
+
+
+var _phoneIncoming2 = _interopRequireDefault(phoneIncoming);
+
+
+
+var _phoneMissed2 = _interopRequireDefault(phoneMissed);
+
+
+
+var _phoneOff2 = _interopRequireDefault(phoneOff);
+
+
+
+var _phoneOutgoing2 = _interopRequireDefault(phoneOutgoing);
+
+
+
+var _phone2 = _interopRequireDefault(phone);
+
+
+
+var _pieChart2 = _interopRequireDefault(pieChart);
+
+
+
+var _playCircle2 = _interopRequireDefault(playCircle);
+
+
+
+var _play2 = _interopRequireDefault(play);
+
+
+
+var _plusCircle2 = _interopRequireDefault(plusCircle);
+
+
+
+var _plusSquare2 = _interopRequireDefault(plusSquare);
+
+
+
+var _plus2 = _interopRequireDefault(plus$1);
+
+
+
+var _pocket2 = _interopRequireDefault(pocket);
+
+
+
+var _power2 = _interopRequireDefault(power);
+
+
+
+var _printer2 = _interopRequireDefault(printer);
+
+
+
+var _radio2 = _interopRequireDefault(radio);
+
+
+
+var _refreshCcw2 = _interopRequireDefault(refreshCcw);
+
+
+
+var _refreshCw2 = _interopRequireDefault(refreshCw);
+
+
+
+var _repeat2 = _interopRequireDefault(repeat);
+
+
+
+var _rewind2 = _interopRequireDefault(rewind);
+
+
+
+var _rotateCcw2 = _interopRequireDefault(rotateCcw);
+
+
+
+var _rotateCw2 = _interopRequireDefault(rotateCw);
+
+
+
+var _save2 = _interopRequireDefault(save);
+
+
+
+var _scissors2 = _interopRequireDefault(scissors);
+
+
+
+var _search2 = _interopRequireDefault(search);
+
+
+
+var _server2 = _interopRequireDefault(server);
+
+
+
+var _settings2 = _interopRequireDefault(settings);
+
+
+
+var _share2 = _interopRequireDefault(share2);
+
+
+
+var _share4 = _interopRequireDefault(share);
+
+
+
+var _shield2 = _interopRequireDefault(shield);
+
+
+
+var _shoppingCart2 = _interopRequireDefault(shoppingCart);
+
+
+
+var _shuffle2 = _interopRequireDefault(shuffle);
+
+
+
+var _sidebar2 = _interopRequireDefault(sidebar);
+
+
+
+var _skipBack2 = _interopRequireDefault(skipBack);
+
+
+
+var _skipForward2 = _interopRequireDefault(skipForward);
+
+
+
+var _slack2 = _interopRequireDefault(slack);
+
+
+
+var _slash2 = _interopRequireDefault(slash);
+
+
+
+var _sliders2 = _interopRequireDefault(sliders);
+
+
+
+var _smartphone2 = _interopRequireDefault(smartphone);
+
+
+
+var _speaker2 = _interopRequireDefault(speaker);
+
+
+
+var _square2 = _interopRequireDefault(square);
+
+
+
+var _star2 = _interopRequireDefault(star);
+
+
+
+var _stopCircle2 = _interopRequireDefault(stopCircle);
+
+
+
+var _sun2 = _interopRequireDefault(sun);
+
+
+
+var _sunrise2 = _interopRequireDefault(sunrise);
+
+
+
+var _sunset2 = _interopRequireDefault(sunset);
+
+
+
+var _tablet2 = _interopRequireDefault(tablet);
+
+
+
+var _tag2 = _interopRequireDefault(tag);
+
+
+
+var _target2 = _interopRequireDefault(target);
+
+
+
+var _thermometer2 = _interopRequireDefault(thermometer);
+
+
+
+var _thumbsDown2 = _interopRequireDefault(thumbsDown);
+
+
+
+var _thumbsUp2 = _interopRequireDefault(thumbsUp);
+
+
+
+var _toggleLeft2 = _interopRequireDefault(toggleLeft);
+
+
+
+var _toggleRight2 = _interopRequireDefault(toggleRight);
+
+
+
+var _trash2 = _interopRequireDefault(trash2);
+
+
+
+var _trash4 = _interopRequireDefault(trash);
+
+
+
+var _trendingDown2 = _interopRequireDefault(trendingDown);
+
+
+
+var _trendingUp2 = _interopRequireDefault(trendingUp);
+
+
+
+var _triangle2 = _interopRequireDefault(triangle);
+
+
+
+var _tv2 = _interopRequireDefault(tv);
+
+
+
+var _twitter2 = _interopRequireDefault(twitter);
+
+
+
+var _type2 = _interopRequireDefault(type);
+
+
+
+var _umbrella2 = _interopRequireDefault(umbrella);
+
+
+
+var _underline2 = _interopRequireDefault(underline);
+
+
+
+var _unlock2 = _interopRequireDefault(unlock);
+
+
+
+var _uploadCloud2 = _interopRequireDefault(uploadCloud);
+
+
+
+var _upload2 = _interopRequireDefault(upload);
+
+
+
+var _userCheck2 = _interopRequireDefault(userCheck);
+
+
+
+var _userMinus2 = _interopRequireDefault(userMinus);
+
+
+
+var _userPlus2 = _interopRequireDefault(userPlus);
+
+
+
+var _userX2 = _interopRequireDefault(userX);
+
+
+
+var _user2 = _interopRequireDefault(user);
+
+
+
+var _users2 = _interopRequireDefault(users);
+
+
+
+var _videoOff2 = _interopRequireDefault(videoOff);
+
+
+
+var _video2 = _interopRequireDefault(video$1);
+
+
+
+var _voicemail2 = _interopRequireDefault(voicemail);
+
+
+
+var _volume2 = _interopRequireDefault(volume1);
+
+
+
+var _volume4 = _interopRequireDefault(volume2);
+
+
+
+var _volumeX2 = _interopRequireDefault(volumeX);
+
+
+
+var _volume6 = _interopRequireDefault(volume);
+
+
+
+var _watch2 = _interopRequireDefault(watch);
+
+
+
+var _wifiOff2 = _interopRequireDefault(wifiOff);
+
+
+
+var _wifi2 = _interopRequireDefault(wifi);
+
+
+
+var _wind2 = _interopRequireDefault(wind);
+
+
+
+var _xCircle2 = _interopRequireDefault(xCircle);
+
+
+
+var _xSquare2 = _interopRequireDefault(xSquare);
+
+
+
+var _x2 = _interopRequireDefault(x$1);
+
+
+
+var _zap2 = _interopRequireDefault(zap);
+
+
+
+var _zoomIn2 = _interopRequireDefault(zoomIn);
+
+
+
+var _zoomOut2 = _interopRequireDefault(zoomOut);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Activity = _activity2.default;
+exports.Airplay = _airplay2.default;
+exports.AlertCircle = _alertCircle2.default;
+exports.AlertOctagon = _alertOctagon2.default;
+exports.AlertTriangle = _alertTriangle2.default;
+exports.AlignCenter = _alignCenter2.default;
+exports.AlignJustify = _alignJustify2.default;
+exports.AlignLeft = _alignLeft2.default;
+exports.AlignRight = _alignRight2.default;
+exports.Anchor = _anchor2.default;
+exports.Aperture = _aperture2.default;
+exports.ArrowDownLeft = _arrowDownLeft2.default;
+exports.ArrowDownRight = _arrowDownRight2.default;
+exports.ArrowDown = _arrowDown2.default;
+exports.ArrowLeft = _arrowLeft2.default;
+exports.ArrowRight = _arrowRight2.default;
+exports.ArrowUpLeft = _arrowUpLeft2.default;
+exports.ArrowUpRight = _arrowUpRight2.default;
+exports.ArrowUp = _arrowUp2.default;
+exports.AtSign = _atSign2.default;
+exports.Award = _award2.default;
+exports.BarChart2 = _barChart2.default;
+exports.BarChart = _barChart4.default;
+exports.BatteryCharging = _batteryCharging2.default;
+exports.Battery = _battery2.default;
+exports.BellOff = _bellOff2.default;
+exports.Bell = _bell2.default;
+exports.Bluetooth = _bluetooth2.default;
+exports.Bold = _bold2.default;
+exports.Book = _book2.default;
+exports.Bookmark = _bookmark2.default;
+exports.Box = _box2.default;
+exports.Briefcase = _briefcase2.default;
+exports.Calendar = _calendar2.default;
+exports.CameraOff = _cameraOff2.default;
+exports.Camera = _camera2.default;
+exports.Cast = _cast2.default;
+exports.CheckCircle = _checkCircle2.default;
+exports.CheckSquare = _checkSquare2.default;
+exports.Check = _check2.default;
+exports.ChevronDown = _chevronDown2.default;
+exports.ChevronLeft = _chevronLeft2.default;
+exports.ChevronRight = _chevronRight2.default;
+exports.ChevronUp = _chevronUp2.default;
+exports.ChevronsDown = _chevronsDown2.default;
+exports.ChevronsLeft = _chevronsLeft2.default;
+exports.ChevronsRight = _chevronsRight2.default;
+exports.ChevronsUp = _chevronsUp2.default;
+exports.Chrome = _chrome2.default;
+exports.Circle = _circle2.default;
+exports.Clipboard = _clipboard2.default;
+exports.Clock = _clock2.default;
+exports.CloudDrizzle = _cloudDrizzle2.default;
+exports.CloudLightning = _cloudLightning2.default;
+exports.CloudOff = _cloudOff2.default;
+exports.CloudRain = _cloudRain2.default;
+exports.CloudSnow = _cloudSnow2.default;
+exports.Cloud = _cloud2.default;
+exports.Codepen = _codepen2.default;
+exports.Command = _command2.default;
+exports.Compass = _compass2.default;
+exports.Copy = _copy2.default;
+exports.CornerDownLeft = _cornerDownLeft2.default;
+exports.CornerDownRight = _cornerDownRight2.default;
+exports.CornerLeftDown = _cornerLeftDown2.default;
+exports.CornerLeftUp = _cornerLeftUp2.default;
+exports.CornerRightDown = _cornerRightDown2.default;
+exports.CornerRightUp = _cornerRightUp2.default;
+exports.CornerUpLeft = _cornerUpLeft2.default;
+exports.CornerUpRight = _cornerUpRight2.default;
+exports.Cpu = _cpu2.default;
+exports.CreditCard = _creditCard2.default;
+exports.Crop = _crop2.default;
+exports.Crosshair = _crosshair2.default;
+exports.Delete = _delete2.default;
+exports.Disc = _disc2.default;
+exports.DownloadCloud = _downloadCloud2.default;
+exports.Download = _download2.default;
+exports.Droplet = _droplet2.default;
+exports.Edit2 = _edit2.default;
+exports.Edit3 = _edit4.default;
+exports.Edit = _edit6.default;
+exports.ExternalLink = _externalLink2.default;
+exports.EyeOff = _eyeOff2.default;
+exports.Eye = _eye2.default;
+exports.Facebook = _facebook2.default;
+exports.FastForward = _fastForward2.default;
+exports.Feather = _feather2.default;
+exports.FileMinus = _fileMinus2.default;
+exports.FilePlus = _filePlus2.default;
+exports.FileText = _fileText2.default;
+exports.File = _file2.default;
+exports.Film = _film2.default;
+exports.Filter = _filter2.default;
+exports.Flag = _flag2.default;
+exports.Folder = _folder2.default;
+exports.Github = _github2.default;
+exports.Gitlab = _gitlab2.default;
+exports.Globe = _globe2.default;
+exports.Grid = _grid2.default;
+exports.Hash = _hash2.default;
+exports.Headphones = _headphones2.default;
+exports.Heart = _heart2.default;
+exports.HelpCircle = _helpCircle2.default;
+exports.Home = _home2.default;
+exports.Image = _image2.default;
+exports.Inbox = _inbox2.default;
+exports.Info = _info2.default;
+exports.Instagram = _instagram2.default;
+exports.Italic = _italic2.default;
+exports.Layers = _layers2.default;
+exports.Layout = _layout2.default;
+exports.LifeBuoy = _lifeBuoy2.default;
+exports.Link2 = _link2.default;
+exports.Link = _link4.default;
+exports.List = _list2.default;
+exports.Loader = _loader2.default;
+exports.Lock = _lock2.default;
+exports.LogIn = _logIn2.default;
+exports.LogOut = _logOut2.default;
+exports.Mail = _mail2.default;
+exports.MapPin = _mapPin2.default;
+exports.Map = _map2.default;
+exports.Maximize2 = _maximize2.default;
+exports.Maximize = _maximize4.default;
+exports.Menu = _menu2.default;
+exports.MessageCircle = _messageCircle2.default;
+exports.MessageSquare = _messageSquare2.default;
+exports.MicOff = _micOff2.default;
+exports.Mic = _mic2.default;
+exports.Minimize2 = _minimize2.default;
+exports.Minimize = _minimize4.default;
+exports.MinusCircle = _minusCircle2.default;
+exports.MinusSquare = _minusSquare2.default;
+exports.Minus = _minus2.default;
+exports.Monitor = _monitor2.default;
+exports.Moon = _moon2.default;
+exports.MoreHorizontal = _moreHorizontal2.default;
+exports.MoreVertical = _moreVertical2.default;
+exports.Move = _move2.default;
+exports.Music = _music2.default;
+exports.Navigation2 = _navigation2.default;
+exports.Navigation = _navigation4.default;
+exports.Octagon = _octagon2.default;
+exports.Package = _package2.default;
+exports.Paperclip = _paperclip2.default;
+exports.PauseCircle = _pauseCircle2.default;
+exports.Pause = _pause2.default;
+exports.Percent = _percent2.default;
+exports.PhoneCall = _phoneCall2.default;
+exports.PhoneForwarded = _phoneForwarded2.default;
+exports.PhoneIncoming = _phoneIncoming2.default;
+exports.PhoneMissed = _phoneMissed2.default;
+exports.PhoneOff = _phoneOff2.default;
+exports.PhoneOutgoing = _phoneOutgoing2.default;
+exports.Phone = _phone2.default;
+exports.PieChart = _pieChart2.default;
+exports.PlayCircle = _playCircle2.default;
+exports.Play = _play2.default;
+exports.PlusCircle = _plusCircle2.default;
+exports.PlusSquare = _plusSquare2.default;
+exports.Plus = _plus2.default;
+exports.Pocket = _pocket2.default;
+exports.Power = _power2.default;
+exports.Printer = _printer2.default;
+exports.Radio = _radio2.default;
+exports.RefreshCcw = _refreshCcw2.default;
+exports.RefreshCw = _refreshCw2.default;
+exports.Repeat = _repeat2.default;
+exports.Rewind = _rewind2.default;
+exports.RotateCcw = _rotateCcw2.default;
+exports.RotateCw = _rotateCw2.default;
+exports.Save = _save2.default;
+exports.Scissors = _scissors2.default;
+exports.Search = _search2.default;
+exports.Server = _server2.default;
+exports.Settings = _settings2.default;
+exports.Share2 = _share2.default;
+exports.Share = _share4.default;
+exports.Shield = _shield2.default;
+exports.ShoppingCart = _shoppingCart2.default;
+exports.Shuffle = _shuffle2.default;
+exports.Sidebar = _sidebar2.default;
+exports.SkipBack = _skipBack2.default;
+exports.SkipForward = _skipForward2.default;
+exports.Slack = _slack2.default;
+exports.Slash = _slash2.default;
+exports.Sliders = _sliders2.default;
+exports.Smartphone = _smartphone2.default;
+exports.Speaker = _speaker2.default;
+exports.Square = _square2.default;
+exports.Star = _star2.default;
+exports.StopCircle = _stopCircle2.default;
+exports.Sun = _sun2.default;
+exports.Sunrise = _sunrise2.default;
+exports.Sunset = _sunset2.default;
+exports.Tablet = _tablet2.default;
+exports.Tag = _tag2.default;
+exports.Target = _target2.default;
+exports.Thermometer = _thermometer2.default;
+exports.ThumbsDown = _thumbsDown2.default;
+exports.ThumbsUp = _thumbsUp2.default;
+exports.ToggleLeft = _toggleLeft2.default;
+exports.ToggleRight = _toggleRight2.default;
+exports.Trash2 = _trash2.default;
+exports.Trash = _trash4.default;
+exports.TrendingDown = _trendingDown2.default;
+exports.TrendingUp = _trendingUp2.default;
+exports.Triangle = _triangle2.default;
+exports.Tv = _tv2.default;
+exports.Twitter = _twitter2.default;
+exports.Type = _type2.default;
+exports.Umbrella = _umbrella2.default;
+exports.Underline = _underline2.default;
+exports.Unlock = _unlock2.default;
+exports.UploadCloud = _uploadCloud2.default;
+exports.Upload = _upload2.default;
+exports.UserCheck = _userCheck2.default;
+exports.UserMinus = _userMinus2.default;
+exports.UserPlus = _userPlus2.default;
+exports.UserX = _userX2.default;
+exports.User = _user2.default;
+exports.Users = _users2.default;
+exports.VideoOff = _videoOff2.default;
+exports.Video = _video2.default;
+exports.Voicemail = _voicemail2.default;
+exports.Volume1 = _volume2.default;
+exports.Volume2 = _volume4.default;
+exports.VolumeX = _volumeX2.default;
+exports.Volume = _volume6.default;
+exports.Watch = _watch2.default;
+exports.WifiOff = _wifiOff2.default;
+exports.Wifi = _wifi2.default;
+exports.Wind = _wind2.default;
+exports.XCircle = _xCircle2.default;
+exports.XSquare = _xSquare2.default;
+exports.X = _x2.default;
+exports.Zap = _zap2.default;
+exports.ZoomIn = _zoomIn2.default;
+exports.ZoomOut = _zoomOut2.default;
+});
+
+unwrapExports$1(dist);
+var dist_82 = dist.Play;
+var dist_93 = dist.Pause;
+
+var sizeFactors = {
+  small: 0.5,
+  medium: 1,
+  large: 2
+};
+
+// any key from sizeFactors object
+
+var Icon = function Icon(_ref) {
+  var _ref$name = _ref.name,
+      name = _ref$name === undefined ? "play" : _ref$name,
+      _ref$size = _ref.size,
+      size = _ref$size === undefined ? "medium" : _ref$size,
+      sizeOverride = _ref.sizeOverride,
+      theme = _ref.theme;
+
+  // Theme is not defined in the showcase package.
+  // TODO: find better solution here.
+  var themeSpacing = theme ? theme.spacing : 16;
+
+  var pixelSize = sizeOverride || themeSpacing * sizeFactors[size];
+
+  // Separate react-feather props to facilitate mixing with other
+  // icon types later on.
+  var reactFeatherProps = {
+    size: pixelSize
+  };
+
+  switch (name) {
+    case "play":
+      return _react__default.createElement(dist_82, reactFeatherProps);
+    case "pause":
+      return _react__default.createElement(dist_93, reactFeatherProps);
+    default:
+      // eslint-disable-next-line
+      name;
+      // Return dummy SVG to make Flow happy, but this part of the code is
+      // never reached in a typechecked environment.
+      return _react__default.createElement("svg", null);
+  }
+};
 
 var _extends$17 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -13919,7 +31466,7 @@ var Input$1 = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return React__default.createElement("input", {
+      return _react__default.createElement("input", {
         className: this.props.className,
         name: this.props.name,
         placeholder: this.props.placeholder,
@@ -13932,7 +31479,7 @@ var Input$1 = function (_Component) {
   }]);
 
   return Input$$1;
-}(React.Component);
+}(_react.Component);
 
 Input$1.defaultProps = {
   className: ""
@@ -13957,7 +31504,7 @@ var SelectOption = function SelectOption(_ref) {
       selected = _ref.selected,
       onClick = _ref.onClick,
       children = _ref.children;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     {
       className: className + " Select__option" + (selected ? " Select__option_selected" : ""),
@@ -14007,10 +31554,10 @@ var SelectFilter = function SelectFilter(_ref) {
   var className = _ref.className,
       placeholder = _ref.placeholder,
       onChange = _ref.onChange;
-  return React__default.createElement(
+  return _react__default.createElement(
     "div",
     { className: className },
-    React__default.createElement("input", {
+    _react__default.createElement("input", {
       onClick: function onClick(e) {
         return e.stopPropagation();
       },
@@ -14368,7 +31915,7 @@ var Select$1 = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return React__default.createElement(
+      return _react__default.createElement(
         "div",
         {
           ref: function ref(container) {
@@ -14381,22 +31928,22 @@ var Select$1 = function (_Component) {
             return _this2.toggle();
           }
         },
-        React__default.createElement(
+        _react__default.createElement(
           "div",
           { className: "Select__value" },
           this.getDisplayValue() || this.props.placeholder
         ),
-        this.props.options.length && this.state.open ? React__default.createElement(
+        this.props.options.length && this.state.open ? _react__default.createElement(
           "div",
           { className: "Select__options" },
-          this.props.filterable && React__default.createElement(SelectFilter$1, { onChange: function onChange(e) {
+          this.props.filterable && _react__default.createElement(SelectFilter$1, { onChange: function onChange(e) {
               return _this2.updateFilter(e);
             } }),
-          React__default.createElement(
+          _react__default.createElement(
             "div",
             { className: "Select__options_list" },
             this.props.options.map(function (option) {
-              return option.label.match(_this2.state.filter) && React__default.createElement(
+              return option.label.match(_this2.state.filter) && _react__default.createElement(
                 SelectOption$1,
                 {
                   key: option.id,
@@ -14415,7 +31962,7 @@ var Select$1 = function (_Component) {
   }]);
 
   return Select$$1;
-}(React.Component);
+}(_react.Component);
 
 Select$1.defaultProps = {
   className: "",
@@ -14483,6 +32030,7 @@ exports.PlusChip = PlusChip$1;
 exports.Card = Card$1;
 exports.Stat = Stat$1;
 exports.Input = Input$2;
+exports.Icon = Icon;
 exports.Select = Select$2;
 exports.contiamoTheme = DEFAULT_THEME;
 exports.ThemeProvider = ThemeProvider;
