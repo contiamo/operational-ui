@@ -74,7 +74,6 @@
   "jest": {
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "moduleNameMapper": {
-      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js",
       "\\.snippet.(js|jsx)$": "<rootDir>/flow/raw-import.js"
     },
     "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],

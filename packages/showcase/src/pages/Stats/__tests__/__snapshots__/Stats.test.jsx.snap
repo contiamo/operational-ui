@@ -71,17 +71,7 @@ exports[`Cards Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;div style={{display:'flex'}}&gt;
-            &lt;Stat label="Use Cases"&gt;Infinite&lt;/Stat&gt;
-            &lt;Stat label="Potential"&gt;Unlimited&lt;/Stat&gt;
-            &lt;Stat color="#009de8" label="Cool Factor"&gt;
-              &gt; 10
-            &lt;/Stat&gt;
-          &lt;/div&gt;
-        </textarea>
+        />
       </div>
     </div>
     <div

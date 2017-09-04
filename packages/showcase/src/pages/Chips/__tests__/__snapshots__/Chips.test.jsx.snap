@@ -39,27 +39,7 @@ exports[`Cards Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;div style={{display: 'flex'}}&gt;
-          
-            {/* These work well in a flex-ed parent */}
-            &lt;Chip color="#006847"&gt;Hola&lt;/Chip&gt;
-            &lt;Chip color="#fff"&gt;Compadre&lt;/Chip&gt;
-          
-            &lt;Chip
-              color="#CE1126"
-              symbol="!"
-              onClick={() =&gt; window.alert('Muy bien!')}
-            &gt;
-              Como estas?
-            &lt;/Chip&gt;
-            {/* onClick can do literally anything you want it to */}
-          
-          &lt;/div&gt;
-          
-        </textarea>
+        />
       </div>
     </div>
     <div
@@ -173,28 +153,7 @@ exports[`Cards Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;div style={{display: 'flex'}}&gt;
-          
-            &lt;PlusChip
-              color="#f0f"
-              size={31}
-              onClick={() =&gt; window.alert('Ouch!')}
-            /&gt;
-          
-            &lt;PlusChip
-              color="#f00"
-              size={31}
-              onClick={() =&gt; window.alert('Smiling is healthy!')}
-            &gt;
-              😁
-            &lt;/PlusChip&gt;
-          
-          &lt;/div&gt;
-          
-        </textarea>
+        />
       </div>
     </div>
     <div

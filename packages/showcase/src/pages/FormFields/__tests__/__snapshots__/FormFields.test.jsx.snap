@@ -26,18 +26,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;div&gt;
-            &lt;Input
-              css={{ marginBottom: 16 }}
-              placeholder="Name here"
-              name="forForms"
-            /&gt;
-          &lt;/div&gt;
-          
-        </textarea>
+        />
       </div>
     </div>
     <div
@@ -131,27 +120,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;div&gt;
-            {/* Uncomment the attributes to see them in action */}
-            &lt;Select
-              //filterable
-              multiple
-              //disabled
-              //onClick={() =&gt; window.alert('Hi!')}
-              //onFilter={() =&gt; console.log('Filtering!')}
-              placeholder="Choose an option!"
-              options={[
-                { id: 1, label: "Option 1", value: "one" },
-                { id: 2, label: "Option 2", value: "two" },
-                { id: 3, label: "Option 3", value: "three" }
-              ]}
-            /&gt;
-          &lt;/div&gt;
-          
-        </textarea>
+        />
       </div>
     </div>
     <div
@@ -231,6 +200,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       </span>
       )
       }
+      
     </code>
   </pre>
   <h2>

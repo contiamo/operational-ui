@@ -4,31 +4,24 @@ import Playground from "component-playground"
 
 import Table from "../../components/PropsTable/PropsTable"
 import { Card as DemoCard } from "contiamo-ui-components"
-import snippet from "./snippet"
+import snippet from "./snippets/basic.snippet"
 import propDescription from "./propDescription"
+import { toReactPlayground } from "../../utils/snippet"
 
 export default () =>
   <div>
     <h1>Cards</h1>
-    <h2>
-      These elements make up the UI. They accept any type of children and
-      elegantly wrap them.
-    </h2>
+    <h2>These elements make up the UI. They accept any type of children and elegantly wrap them.</h2>
 
     <DemoCard css={{ marginBottom: 16 }} width={400} padding={16}>
-      Hello, I am a card. And I can contain <em>many</em> different kinds of
-      content.
+      Hello, I am a card. And I can contain <em>many</em> different kinds of content.
     </DemoCard>
 
     <div style={{ display: "flex" }}>
       <DemoCard css={{ marginBottom: 16 }} width={320} padding={16}>
         Hello, we are cards.<br />
       </DemoCard>
-      <DemoCard
-        css={{ marginLeft: 16, marginBottom: 16 }}
-        width={320}
-        padding={16}
-      >
+      <DemoCard css={{ marginLeft: 16, marginBottom: 16 }} width={320} padding={16}>
         Indeed, we are.<br />
         Indeed, we can.<br />
         <br />
@@ -44,7 +37,7 @@ export default () =>
     </DemoCard>
 
     <h2>Usage</h2>
-    <Playground codeText={snippet} scope={{ React, Card: DemoCard }} />
+    <Playground codeText={toReactPlayground(snippet)} scope={{ React, Card: DemoCard }} />
 
     <h2>Props</h2>
     <Table props={propDescription} />

@@ -46,43 +46,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;Sidebar&gt;
-          
-            &lt;SidebarItem label="Links"&gt;
-              &lt;SidebarLink
-                onClick={() =&gt; window.open('https://www.contiamo.com')}
-                symbol="&rarr"
-              &gt;
-                Link 1
-              &lt;/SidebarLink&gt;
-              &lt;SidebarLink&gt;Link 2&lt;/SidebarLink&gt;
-            &lt;/SidebarItem&gt;
-          
-            &lt;SidebarItem
-              label="Fetch data first"
-              tooltip="Click for async fun!"
-              onClick={() =&gt; fetch('SOME URL')}
-            &gt;
-              &lt;SidebarLink color="#eee"&gt;
-                This could have been
-              &lt;/SidebarLink&gt;
-              &lt;SidebarLink
-                color="#777"
-                tooltip="Notice how the text is always readable. 😉"
-              &gt;
-                fetched from an
-              &lt;/SidebarLink&gt;
-              &lt;SidebarLink&gt;
-                external resource.
-              &lt;/SidebarLink&gt;
-            &lt;/SidebarItem&gt;
-          
-          &lt;/Sidebar&gt;
-          
-        </textarea>
+        />
       </div>
     </div>
     <div
