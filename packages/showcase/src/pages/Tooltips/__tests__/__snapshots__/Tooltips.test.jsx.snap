@@ -25,15 +25,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;Tooltip active color="#00f"&gt;
-            Hi, I try to be helpful.
-          &lt;/Tooltip&gt;
-          
-          
-        </textarea>
+        />
       </div>
     </div>
     <div
@@ -159,7 +151,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
   >
     <code>
       
-        
+      
       <span
         style="font-weight:bold;"
       >
@@ -195,7 +187,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
         </span>
       </span>
       )
-        
+      
       <span
         style="font-weight:bold;"
       >
@@ -203,8 +195,8 @@ exports[`Tooltips Page Should render correctly 1`] = `
       </span>
        MyDivWithTooltip = withTooltip(MyDiv)
       
-        ReactDOM.render(
-          
+      ReactDOM.render(
+        
       <span>
         <span>
           &lt;
@@ -214,7 +206,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
             MyDivWithTooltip
           </span>
           
-                
+              
           <span>
             tooltip
           </span>
@@ -225,7 +217,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
             "Hola, compadre!"
           </span>
           
-                
+              
           <span>
             tooltipColor
           </span>
@@ -236,7 +228,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
             "#f00"
           </span>
           
-                
+              
           <span>
             tooltipAnchor
           </span>
@@ -247,11 +239,11 @@ exports[`Tooltips Page Should render correctly 1`] = `
             "bottom"
           </span>
           
-              &gt;
+            &gt;
         </span>
         
-              Hover for Spanish
-            
+            Hover for Spanish
+          
         <span>
           &lt;/
           <span
@@ -263,7 +255,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
         </span>
       </span>
       ,
-          
+        
       <span
         style="color:#397300;"
       >
@@ -274,7 +266,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
         style="color:#880000;"
       >
         '#app)
-          )
+        )
         
       </span>
     </code>

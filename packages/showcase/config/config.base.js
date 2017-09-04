@@ -14,8 +14,19 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)/,
-        use: ["babel-loader"],
-        exclude: /node_modules\/(?!(contiamo-ui-components)\/).*/
+        oneOf: [
+          // Documentation snippets
+          {
+            test: /\.snippet/,
+            loader: "raw-loader"
+          },
+          // All other JS
+          {
+            test: /.*/,
+            loader: "babel-loader",
+            exclude: /node_modules/
+          }
+        ]
       },
       {
         test: /\.(png|eot|svg|ttf|woff|woff2)$/,

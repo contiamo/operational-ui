@@ -1,15 +1,9 @@
-export default {
-  Input: `
-<div>
-  <Input
-    css={{ marginBottom: 16 }}
-    placeholder="Name here"
-    name="forForms"
-  />
-</div>
-`,
+// @flow
+import React from "react"
 
-  Select: `
+import { Select } from "contiamo-ui-components"
+
+export default
 <div>
   {/* Uncomment the attributes to see them in action */}
   <Select
@@ -26,12 +20,3 @@ export default {
     ]}
   />
 </div>
-`,
-
-  Option: `
-Option {
-    id: 1, // a number that is passed as a \`key\` in the React iterator,
-    label: "Any string",
-    value: (<div>Literally anything can go here</div>)
-}`
-}

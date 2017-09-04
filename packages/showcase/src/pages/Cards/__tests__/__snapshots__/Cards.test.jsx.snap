@@ -63,13 +63,7 @@ exports[`Cards Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          &lt;Card padding={32} width={260}&gt;
-            &lt;h1&gt;Edit me! I am interactive!&lt;/h1&gt;
-            &lt;h2&gt;What is the internet without cats?&lt;/h2&gt;
-            &lt;img src="https://media.giphy.com/media/Nm8ZPAGOwZUQM/giphy-downsized.gif" /&gt;
-          &lt;/Card&gt;
-        </textarea>
+        />
       </div>
     </div>
     <div

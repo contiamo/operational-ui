@@ -26,9 +26,9 @@ exports[`Icons Page Should render correctly 1`] = `
           
           
           &lt;div style={{display: 'flex', marginTop: 16 }}&gt;
-            &lt;Icon name="play" /&gt;
-            &lt;Icon name="pause" size="large" /&gt;
-            &lt;Icon name="pause" sizeOverride={17} /&gt;
+            &lt;Icon name="Play" /&gt;
+            &lt;Icon name="Pause" size="large" /&gt;
+            &lt;Icon name="Pause" sizeOverride={17} /&gt;
           &lt;/div&gt;
           
         </textarea>
@@ -75,10 +75,10 @@ exports[`Icons Page Should render correctly 1`] = `
           name
         </td>
         <td>
-          Prop name.
+          Icon name, see https://feathericons.com/ (convert name to PascalCase).
         </td>
         <td>
-          play
+          Play
         </td>
         <td>
           string

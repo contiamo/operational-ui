@@ -25,18 +25,7 @@ exports[`Buttons Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        >
-          
-          
-          &lt;div style={{display: 'flex', marginTop: 16 }}&gt;
-            &lt;Button color="#5F8E2C"&gt;Button 1&lt;/Button&gt;
-            &lt;Button&gt;Button 2&lt;/Button&gt;
-            &lt;Button modifiers={["space"]}&gt;Group 1&lt;/Button&gt;
-            &lt;Button active modifiers={["group"]}&gt;Group 2&lt;/Button&gt;
-            &lt;Button modifiers={["group"]}&gt;Group 3&lt;/Button&gt;
-          &lt;/div&gt;
-          
-        </textarea>
+        />
       </div>
     </div>
     <div
