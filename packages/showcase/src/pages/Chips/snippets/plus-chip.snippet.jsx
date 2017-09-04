@@ -1,5 +1,6 @@
+// @flow
 import React from "react"
-import PlusChip from "contiamo-ui-components"
+import { PlusChip } from "contiamo-ui-components"
 
 export default
 <div style={{ display: "flex" }}>

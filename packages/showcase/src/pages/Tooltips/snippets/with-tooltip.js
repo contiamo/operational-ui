@@ -1,3 +1,4 @@
+// @flow
 export default `
 const MyDiv = () => (<div>Hover for Spanish!</div>)
 const MyDivWithTooltip = withTooltip(MyDiv)

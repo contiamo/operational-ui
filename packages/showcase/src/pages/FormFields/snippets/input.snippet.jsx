@@ -1,6 +1,6 @@
+// @flow
 import React from "react"
-
-import Input from "contiamo-ui-components"
+import { Input } from "contiamo-ui-components"
 
 export default
 <div>

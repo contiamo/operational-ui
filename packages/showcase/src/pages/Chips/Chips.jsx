@@ -12,7 +12,7 @@ import plusSnippet from "./snippets/plus-chip.snippet"
 import { toReactPlayground } from "../../utils/snippet"
 import propDescription from "./propDescription"
 
-export default () =>
+export default () => 
   <div>
     <h1>Chips</h1>
 

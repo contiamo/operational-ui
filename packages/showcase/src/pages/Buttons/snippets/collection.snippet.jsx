@@ -1,5 +1,6 @@
+// @flow
 import React from "react"
-import Button from "contiamo-ui-components"
+import { Button } from "contiamo-ui-components"
 
 export default
 <div style={{ display: "flex", marginTop: 16 }}>

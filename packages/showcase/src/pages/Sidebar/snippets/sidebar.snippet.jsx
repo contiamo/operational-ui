@@ -1,3 +1,4 @@
+// @flow
 import React from "react"
 import { Sidebar, SidebarItem, SidebarLink } from "contiamo-ui-components"
 

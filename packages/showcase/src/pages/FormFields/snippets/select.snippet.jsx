@@ -1,8 +1,9 @@
+// @flow
 import React from "react"
 
-import Select from "contiamo-ui-components"
+import { Select } from "contiamo-ui-components"
 
-export default 
+export default
 <div>
   {/* Uncomment the attributes to see them in action */}
   <Select

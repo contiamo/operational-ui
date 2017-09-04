@@ -1,7 +1,8 @@
+// @flow
 import React from "react"
-import Chip from "contiamo-ui-components"
+import { Chip } from "contiamo-ui-components"
 
-export default 
+export default
 <div style={{ display: "flex" }}>
   {/* These work well in a flex-ed parent */}
   <Chip color="#006847">Hola</Chip>

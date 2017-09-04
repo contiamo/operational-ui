@@ -1,5 +1,6 @@
+// @flow
 import React from "react"
-import Tooltip from "contiamo-ui-components"
+import { Tooltip } from "contiamo-ui-components"
 
 export default
 <Tooltip active color="#00f">

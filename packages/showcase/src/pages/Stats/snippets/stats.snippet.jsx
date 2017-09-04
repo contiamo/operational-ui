@@ -1,5 +1,6 @@
+// @flow
 import React from "react"
-import Stat from "contiamo-ui-components"
+import { Stat } from "contiamo-ui-components"
 
 export default
 <div style={{ display: "flex" }}>
