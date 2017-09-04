@@ -2,19 +2,24 @@
 
 exports[`FormFieldsPage Should render correctly 1`] = `
 <div>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Form Fields
-  </h1>
-  <h2>
-    Our applications tend to be composed of a myriad of form controls. This page seeks to document the vast majority of these controls.
-  </h2>
-  <hr />
-  <h1>
+  </div>
+  <p>
+    Our applications tend to be composed of a myriad of form controls.
+    <br />
+    This page seeks to document the vast majority of these controls.
+  </p>
+  <div
+    class="css-by30gj"
+  >
     Input
-  </h1>
-  <h2>
+  </div>
+  <p>
     This component lives up to its name, allowing a user to input text, numbers, or other data.
-  </h2>
+  </p>
   <div
     class="playground"
   >
@@ -39,9 +44,9 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >
@@ -99,15 +104,13 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       </tr>
     </tbody>
   </table>
-  <hr />
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Select
-  </h1>
-  <h2>
-    The Select component presents users with a list of information with single-choice or multiple-choice options.
-  </h2>
+  </div>
   <p>
-    Select elements can have options filled onClick, and also support filters.
+    The Select component presents users with a list of information with single-choice or multiple-choice options. Select elements can have options filled onClick, and also support filters.
   </p>
   <div
     class="playground"
@@ -133,14 +136,11 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Return Value
-  </h2>
+  </h4>
   <p>
-    The Select component holds its value in its \`state\`. The value is either an \`Option\` object, or an Array of \`Option\` objects, depending on the \`multiple\` prop.
-  </p>
-  <p>
-    The shape of an Option object is described below.
+    The Select component holds its value in its \`state\`. The value is either an \`Option\` object, or an Array of \`Option\` objects, depending on the \`multiple\` prop. The shape of an Option object is described below.
   </p>
   <pre
     style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444;"
@@ -203,9 +203,9 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       
     </code>
   </pre>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >

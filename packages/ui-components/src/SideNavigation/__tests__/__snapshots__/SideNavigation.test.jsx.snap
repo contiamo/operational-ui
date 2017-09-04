@@ -2,7 +2,7 @@
 
 exports[`SideNavigation component renders 1`] = `
 <bound 
-  className="css-i67pzc"
+  className="css-14z6lhj"
   expandOnHover={false}
   expandedWidth={280}
   fix={false}

@@ -3,7 +3,6 @@
 exports[`App Showcase: Canvas Should render correctly 1`] = `
 <glamorous(Card)
   css={[Function]}
-  padding={16}
 >
   <div
     className="Canvas__body"

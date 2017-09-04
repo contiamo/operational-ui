@@ -64,7 +64,6 @@ const Chip = ({
       padding: theme.spacing >= 0 ? theme.spacing / 4 : 4,
       cursor: "pointer",
       overflow: "hidden",
-      fontSize: ".8rem",
       backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
 

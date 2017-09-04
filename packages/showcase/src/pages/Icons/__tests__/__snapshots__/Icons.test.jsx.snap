@@ -2,15 +2,17 @@
 
 exports[`Icons Page Should render correctly 1`] = `
 <div>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Icons
-  </h1>
-  <h2>
+  </div>
+  <p>
     Contiamo's SVG icon set as a single component. It abstracts over different types of icons (react-feather, custom shapes, SVG sprites) to provide a consistent API as the icon set evolves.
-  </h2>
-  <h2>
+  </p>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <div
     class="playground"
   >
@@ -44,9 +46,9 @@ exports[`Icons Page Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >

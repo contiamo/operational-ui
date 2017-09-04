@@ -20,7 +20,7 @@ type Props = {
   theme: THEME,
 }
 
-const SideNavigation = ({ className, children }: Props): React$Element<*> =>
+const SideNavigation = ({ className, children }: Props): Node =>
     <div className={className}>
       {children}
     </div>,
@@ -31,8 +31,8 @@ const SideNavigation = ({ className, children }: Props): React$Element<*> =>
     expandOnHover,
 
     // for some reason, glamorous doesn't get the defaultProps...
-    expandedWidth = 280,
-    width = 64
+    expandedWidth = 240,
+    width = 60
   }: Props): {} => {
     const backgroundColor = color
         ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white")

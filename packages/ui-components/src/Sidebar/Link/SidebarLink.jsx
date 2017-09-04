@@ -42,7 +42,7 @@ const SidebarLink = ({
   },
   style = ({ theme, color, disabled }: { theme: THEME, color?: string, disabled?: boolean }) => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff",
-      textColor = readableTextColor(backgroundColor)(["black", "white"]),
+      textColor = readableTextColor(backgroundColor)([theme.greys ? theme.greys["80"] : "#747474", "white"]),
       disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
     return {
@@ -51,10 +51,9 @@ const SidebarLink = ({
       padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
       transition: "background-color .1s ease",
       cursor: "pointer",
-
+      fontSize: ".9rem",
       // react-router <Link /> wraps an <a> which can be underlined by default so
       textDecoration: "none",
-
       color: textColor,
       backgroundColor,
       ...disabledStyle,
@@ -64,7 +63,8 @@ const SidebarLink = ({
       },
 
       "&.SideNavigationLink + .SideNavigationLink": {
-        borderTop: "1px solid #eee"
+        borderTop: "1px solid",
+        borderColor: theme.greys ? theme.greys["10"] : "#F5F5F5"
       },
 
       ":hover": {

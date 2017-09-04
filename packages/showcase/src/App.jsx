@@ -3,6 +3,7 @@ import React from "react"
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
 import glamorous, { Div, ThemeProvider } from "glamorous"
 import { css } from "glamor"
+import { contiamoTheme } from "contiamo-ui-components"
 
 import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 
@@ -12,12 +13,10 @@ import Header from "./components/Header/Header"
 import IntroPage from "./pages/Intro"
 import ComponentsPage from "./pages/Components"
 
-import DEFAULT_THEME from "./App.theme"
-
 const SideNavigationWithRouter = withRouter(SideNavigation),
   App = ({ className }: { className: string }) =>
     <Router>
-      <ThemeProvider theme={DEFAULT_THEME}>
+      <ThemeProvider theme={contiamoTheme}>
         <div className={className}>
           <SideNavigationWithRouter />
           <Div className="app">
@@ -30,10 +29,10 @@ const SideNavigationWithRouter = withRouter(SideNavigation),
     </Router>,
   styles: {} = {
     display: "flex",
-    backgroundColor: DEFAULT_THEME.greys["10"],
-    ...DEFAULT_THEME.fonts,
+    ...contiamoTheme.fonts,
+    backgroundColor: contiamoTheme.greys["20"],
     "& hr": {
-      margin: `${DEFAULT_THEME.spacing * 3}px 0 ${DEFAULT_THEME.spacing * 2}px`,
+      margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
       height: 1,
       border: 0,
       backgroundColor: "rgba(0, 0, 0, 0.14)"
@@ -43,7 +42,7 @@ const SideNavigationWithRouter = withRouter(SideNavigation),
       flexDirection: "column",
       width: "100vw",
       height: "100vh",
-      marginLeft: 64
+      marginLeft: 60
     },
     "& h1": {
       margin: 0,
@@ -65,5 +64,7 @@ appFontWeights.forEach((fontWeight: number) => {
     fontWeight
   })
 })
+
+css.global({ fontSize: 13 })
 
 export default glamorous(App)(styles)

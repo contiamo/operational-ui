@@ -2,20 +2,19 @@
 
 exports[`Cards Page Should render correctly 1`] = `
 <div>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Stats
-  </h1>
-  <h2>
-    Stats are little pieces of information that contain a descriptor and a value of the descriptor.
-  </h2>
+  </div>
   <p>
-    These elements are commonly used to represent KPI data, with strong key-value pairings.
+    Stats are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
   </p>
   <div
     style="display:flex;"
   >
     <div
-      class="css-mrit36 Stat"
+      class="css-yywsv7 Stat"
     >
       <small
         class="Stat__label"
@@ -29,7 +28,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-mrit36 Stat"
+      class="css-yywsv7 Stat"
     >
       <small
         class="Stat__label"
@@ -43,7 +42,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-mrit36 Stat"
+      class="css-yywsv7 Stat"
     >
       <small
         class="Stat__label"
@@ -53,13 +52,13 @@ exports[`Cards Page Should render correctly 1`] = `
       <span
         class="Stat__value"
       >
-        &euro2M
+        €2M
       </span>
     </div>
   </div>
-  <h2>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <div
     class="playground"
   >
@@ -84,9 +83,9 @@ exports[`Cards Page Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >

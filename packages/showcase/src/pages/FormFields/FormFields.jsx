@@ -5,8 +5,7 @@ import Playground from "component-playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Table from "../../components/PropsTable/PropsTable"
-import { Input as DemoInput } from "contiamo-ui-components"
-import { Select as DemoSelect } from "contiamo-ui-components"
+import { Input as DemoInput, Select as DemoSelect, CardHeader } from "contiamo-ui-components"
 
 import inputSnippet from "./snippets/input.snippet"
 import selectSnippet from "./snippets/select.snippet"
@@ -16,42 +15,38 @@ import { toReactPlayground } from "../../utils/snippet"
 
 export default () =>
   <div>
-    <h1>Form Fields</h1>
+    <CardHeader>Form Fields</CardHeader>
 
-    <h2>
-      Our applications tend to be composed of a myriad of form controls. This page seeks to document the vast majority
-      of these controls.
-    </h2>
+    <p>
+      Our applications tend to be composed of a myriad of form controls.<br />This page seeks to document the vast
+      majority of these controls.
+    </p>
 
-    <hr />
-
-    <h1>Input</h1>
-    <h2>This component lives up to its name, allowing a user to input text, numbers, or other data.</h2>
+    <CardHeader>Input</CardHeader>
+    <p>This component lives up to its name, allowing a user to input text, numbers, or other data.</p>
 
     <Playground codeText={toReactPlayground(inputSnippet)} scope={{ React, Input: DemoInput }} />
 
-    <h2>Props</h2>
+    <h4>Props</h4>
     <Table props={propDescription.Input} />
 
-    <hr />
-
-    <h1>Select</h1>
-    <h2>
+    <CardHeader>Select</CardHeader>
+    <p>
       The Select component presents users with a list of information with single-choice or multiple-choice options.
-    </h2>
-
-    <p>Select elements can have options filled onClick, and also support filters.</p>
+      Select elements can have options filled onClick, and also support filters.
+    </p>
 
     <Playground codeText={toReactPlayground(selectSnippet)} scope={{ React, Select: DemoSelect }} />
 
-    <h2>Return Value</h2>
+    <h4>Return Value</h4>
     <p>
       The Select component holds its value in its `state`. The value is either an `Option` object, or an Array of
-      `Option` objects, depending on the `multiple` prop.
+      `Option` objects, depending on the `multiple` prop. The shape of an Option object is described below.
     </p>
-    <p>The shape of an Option object is described below.</p>
-    <SyntaxHighlighter language="javascript">{optionSnippet}</SyntaxHighlighter>
+    <SyntaxHighlighter language="javascript">
+      {optionSnippet}
+    </SyntaxHighlighter>
 
-    <h2>Props</h2>
+    <h4>Props</h4>
     <Table props={propDescription.Select} />
   </div>

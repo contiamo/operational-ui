@@ -2,13 +2,13 @@
 
 exports[`ComponentsPage Should render correctly 1`] = `
 <div
-  class="css-z79p0e"
+  class="css-10t383z"
 >
   <div
-    class="css-17pa2mx"
+    class="css-1kdwnkd"
   >
     <div
-      class="css-1ozkm5  "
+      class="css-th6ypm  "
     >
       <div
         class="css-10bcezx header"
@@ -19,7 +19,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       </div>
     </div>
     <div
-      class="css-1ozkm5  "
+      class="css-th6ypm  "
     >
       <div
         class="css-10bcezx header"
@@ -30,7 +30,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       </div>
     </div>
     <div
-      class="css-1ozkm5  "
+      class="css-th6ypm  "
     >
       <div
         class="css-10bcezx header"
@@ -41,7 +41,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       </div>
     </div>
     <div
-      class="css-1ozkm5  "
+      class="css-th6ypm  "
     >
       <div
         class="css-10bcezx header"
@@ -52,7 +52,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       </div>
     </div>
     <div
-      class="css-1ozkm5  "
+      class="css-th6ypm  "
     >
       <div
         class="css-10bcezx header"
@@ -63,7 +63,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       </div>
     </div>
     <div
-      class="css-1ozkm5  "
+      class="css-th6ypm  "
     >
       <div
         class="css-10bcezx header"
@@ -75,7 +75,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
     </div>
   </div>
   <div
-    class="css-sjyfyk"
+    class="css-1cej20w"
   >
     <div
       class="Canvas__body"

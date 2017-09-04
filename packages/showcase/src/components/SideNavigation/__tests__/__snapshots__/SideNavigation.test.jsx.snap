@@ -11,17 +11,22 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
     size={24}
     tooltip="Contiamo"
   >
-    <glamorous.Img
-      alt="Contiamo"
-      css={
-        Object {
-          "marginRight": 16,
-          "maxWidth": 32,
+    <Link
+      replace={false}
+      to="/"
+    >
+      <glamorous.Img
+        alt="Contiamo"
+        css={
+          Object {
+            "marginRight": 16,
+            "maxWidth": 32,
+          }
         }
-      }
-      src="/img/logo/outline.png"
-    />
-    Contiamo
+        src="/img/logo/outline.png"
+      />
+      Contiamo
+    </Link>
   </glamorous(SideNavigationHeader)>
   <glamorous(_class)
     tooltip="Components"

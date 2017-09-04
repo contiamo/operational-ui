@@ -21,7 +21,7 @@ const style: {} = (): {} => ({
     color: "white"
   },
   "& .SideNavigationItem__label": {
-    marginLeft: 25
+    marginLeft: 20
   }
 }),
   //expandedShadow => 3px 0 11px rgba(0, 0, 0, 0.19)
@@ -35,8 +35,10 @@ const style: {} = (): {} => ({
   AppSideNavigation = ({ location }: Props) =>
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader tooltip="Contiamo" size={24}>
-        <Img css={{ maxWidth: 32, marginRight: 16 }} alt="Contiamo" src="/img/logo/outline.png" />
-        Contiamo
+        <Link to="/">
+          <Img css={{ maxWidth: 32, marginRight: 16 }} alt="Contiamo" src="/img/logo/outline.png" />
+          Contiamo
+        </Link>
       </SideNavigationHeader>
 
       <SideNavigationItem active={location && location.pathname.match(/\/components/)} tooltip="Components">

@@ -375,17 +375,6 @@ function camelize(string) {
 
 var camelize_1 = camelize;
 
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @typechecks
- */
-
 'use strict';
 
 
@@ -613,16 +602,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 
 var emptyFunction_1 = emptyFunction;
 
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
 'use strict';
 
 
@@ -805,17 +784,6 @@ function hyphenate(string) {
 }
 
 var hyphenate_1 = hyphenate;
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @typechecks
- */
 
 'use strict';
 
@@ -4467,6 +4435,8 @@ function capitalize(s) {
  */
 glamorous.default = glamorous;
 
+// these exports below are generated
+// and will be tree-shaken if you're using Webpack 2 or Rollup
 var Div = glamorous['Div'];
 
 var babelHelpers = {};
@@ -9184,27 +9154,6 @@ var style$8 = (function (_ref) {
   });
 });
 
-/**
-  The <Tooltip /> component.
-
-  The problem:
-  Say you have a container with `overflow: hidden`.
-  Say this container has items that need to show tooltips, that appear
-  _outside_ of page flow, and are not clipped by the overflow.
-
-  The solution is to use `position: fixed`, with dynamically calculated
-  positions at the time of mounting, but React makes this a little
-  tricky, especially if you want a simple API.
-
-  This solution:
-  A tooltip is placed in an absolute position, relative to its parent,
-  even risking getting cut off to overflow.
-
-  At the time of mounting, this _perfect_ position of the tooltip is captured
-  relative to `document`. These coordinates are then set as CSS properties
-  on the tooltip, along with `position: fixed` and all is well with the
-  world. 🌈
-*/
 var Tooltip = function (_Component) {
   inherits$1(Tooltip, _Component);
 
@@ -9281,19 +9230,6 @@ Tooltip.defaultProps = {
 };
 
 var Tooltip$1 = glamorous(Tooltip)(style$8);
-
-/**
-  A simple Higher-Order Component (HOC) that you can wrap with any custom
-  component in order to make it Tooltippable. This should JustWork™.
-
-  USAGE:
-  import withTooltip from './withTooltip'
-  const MyComponentWithTooltip = withTooltip(MyComponent)
-  <MyComponentWithTooltip
-    tooltip={<div>ANYTHING</div>}
-    tooltipAnchor={'top'||'bottom'}
-  />
-*/
 
 var withTooltip = function withTooltip(InputComponent) {
   var _class, _temp2;
@@ -9374,24 +9310,28 @@ var SideNavigationItem = function SideNavigationItem(_ref) {
   );
 };
 var style$7 = function style(_ref2) {
-  var theme = _ref2.theme;
+  var theme = _ref2.theme,
+      active = _ref2.active;
+
+  var activeBackgroundColor = "rgba(0, 0, 0, 0.2)";
   return {
     position: "relative",
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: theme.spacing / 2 + "px " + theme.spacing * 1.3 + "px",
+    padding: theme.spacing / 2 + "px " + theme.spacing * 1.7 + "px",
     borderRadius: 2,
     width: "100%",
     minHeight: 40,
     cursor: "pointer",
+    backgroundColor: active ? activeBackgroundColor : "transparent",
 
     ":hover": {
       backgroundColor: "rgba(255, 255, 255, 0.07)"
     },
 
     "&.SideNavigationItem_active": {
-      backgroundColor: "rgba(0, 0, 0, 0.2)"
+      backgroundColor: activeBackgroundColor
     },
 
     ":first-child": {
@@ -9466,9 +9406,9 @@ var style$5 = function style(_ref2) {
       fix = _ref2.fix,
       expandOnHover = _ref2.expandOnHover,
       _ref2$expandedWidth = _ref2.expandedWidth,
-      expandedWidth = _ref2$expandedWidth === undefined ? 280 : _ref2$expandedWidth,
+      expandedWidth = _ref2$expandedWidth === undefined ? 240 : _ref2$expandedWidth,
       _ref2$width = _ref2.width,
-      width = _ref2$width === undefined ? 64 : _ref2$width;
+      width = _ref2$width === undefined ? 60 : _ref2$width;
 
   var backgroundColor = color ? utils_4(color)(theme.colors ? theme.colors[color] : "white") : theme.colors && theme.colors.primary,
       hoverWidth = expandOnHover ? {
@@ -9524,7 +9464,7 @@ var style$11 = (function (_ref) {
     height: 0,
     marginLeft: "auto",
     border: "4px solid transparent",
-    borderLeftColor: theme.greys ? theme.greys["30"] : "#ccc",
+    borderLeftColor: theme.greys ? theme.greys["20"] : "#ccc",
     transition: ".15s transform ease"
   } : {};
 
@@ -9537,8 +9477,9 @@ var style$11 = (function (_ref) {
       alignItems: "center",
       padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
       borderTop: "1px solid",
-      borderTopColor: theme.greys ? theme.greys["20"] : "#eee",
+      borderTopColor: theme.greys ? theme.greys["10"] : "#eee",
       cursor: "pointer",
+      outline: "none",
       backgroundColor: theme.greys ? theme.greys.white : "white"
     },
 
@@ -9548,15 +9489,22 @@ var style$11 = (function (_ref) {
 
     "&.open .header": {
       borderBottom: "1px solid",
-      borderBottomColor: theme.greys ? theme.greys["30"] : "#ccc"
+      borderBottomColor: theme.greys ? theme.greys["20"] : "#f5f5f5",
+      fontWeight: 600,
+      backgroundColor: theme.greys && theme.greys["10"]
     },
 
     // Caret styles begin here.
     "& .header::after": _extends$1({}, caret),
 
+    "&:hover .header::after": {
+      borderLeftColor: theme.greys ? theme.greys["80"] : "#ccc"
+    },
+
     "&.open .header.open::after": {
       // rotate the caret to face down when an item is open.
-      transform: "translateX(-2px) rotate(90deg)"
+      transform: "translateX(-2px) rotate(90deg)",
+      borderLeftColor: theme.greys ? theme.greys["80"] : "#ccc"
     },
 
     // Spinner for async items replaces a caret.
@@ -9572,19 +9520,6 @@ var style$11 = (function (_ref) {
     "& .content": {
       position: "relative",
       paddingLeft: theme.spacing
-    },
-
-    // This pseudo-element creates a visible indent for structure clarity.
-    "& .content::after": {
-      content: "''",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      display: "block",
-      width: theme.spacing,
-      height: "100%",
-      borderRight: "1px solid " + (theme.greys ? theme.greys["30"] : "#ccc"),
-      backgroundColor: theme.greys ? theme.greys["10"] : "#eee"
     }
   };
 });
@@ -9842,15 +9777,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -9903,15 +9829,6 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 var checkPropTypes_1 = checkPropTypes;
-
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
 
 'use strict';
 
@@ -10416,15 +10333,6 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
 
   return ReactPropTypes;
 };
-
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
 
 'use strict';
 
@@ -11308,10 +11216,6 @@ function _possibleConstructorReturn$1(self, call) { if (!self) { throw new Refer
 
 function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * The public API for putting history on context.
- */
-
 var Router$1 = function (_React$Component) {
   _inherits$1(Router, _React$Component);
 
@@ -11405,10 +11309,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * The public API for a <Router> that uses HTML5 history.
- */
 
 var BrowserRouter = function (_React$Component) {
   _inherits(BrowserRouter, _React$Component);
@@ -11779,10 +11679,6 @@ function _possibleConstructorReturn$2(self, call) { if (!self) { throw new Refer
 
 function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * The public API for a <Router> that uses window.location.hash.
- */
-
 var HashRouter = function (_React$Component) {
   _inherits$2(HashRouter, _React$Component);
 
@@ -12089,10 +11985,6 @@ function _possibleConstructorReturn$4(self, call) { if (!self) { throw new Refer
 
 function _inherits$4(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * The public API for a <Router> that stores location in memory.
- */
-
 var MemoryRouter$1 = function (_React$Component) {
   _inherits$4(MemoryRouter, _React$Component);
 
@@ -12133,9 +12025,6 @@ var isarray = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-/**
- * Expose `pathToRegexp`.
- */
 var pathToRegexp_1$1 = pathToRegexp;
 var parse_1 = parse;
 var compile_1 = compile;
@@ -12763,9 +12652,6 @@ var _typeof$2 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
 
 function _objectWithoutProperties$1(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-/**
- * A <Link> wrapper that knows if it's "active" or not.
- */
 var NavLink = function NavLink(_ref) {
   var to = _ref.to,
       exact = _ref.exact,
@@ -12825,11 +12711,6 @@ function _classCallCheck$6(instance, Constructor) { if (!(instance instanceof Co
 function _possibleConstructorReturn$6(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits$6(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * The public API for prompting the user before navigating away
- * from a screen with a component.
- */
 
 var Prompt$1 = function (_React$Component) {
   _inherits$6(Prompt, _React$Component);
@@ -13014,11 +12895,6 @@ function _classCallCheck$7(instance, Constructor) { if (!(instance instanceof Co
 function _possibleConstructorReturn$7(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits$7(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * The public API for updating the location programmatically
- * with a component.
- */
 
 var Redirect$1 = function (_React$Component) {
   _inherits$7(Redirect, _React$Component);
@@ -13261,10 +13137,6 @@ function _possibleConstructorReturn$9(self, call) { if (!self) { throw new Refer
 
 function _inherits$9(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * The public API for rendering the first <Route> that matches.
- */
-
 var Switch$2 = function (_React$Component) {
   _inherits$9(Switch, _React$Component);
 
@@ -13369,7 +13241,7 @@ var style$12 = function style(_ref2) {
       disabled = _ref2.disabled;
 
   var backgroundColor = color ? utils_4(color)(theme.colors && theme.colors[color]) : "#fff",
-      textColor = utils_5(backgroundColor)(["black", "white"]),
+      textColor = utils_5(backgroundColor)([theme.greys ? theme.greys["80"] : "#747474", "white"]),
       disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
 
   return _extends$1({
@@ -13378,10 +13250,9 @@ var style$12 = function style(_ref2) {
     padding: theme.spacing >= 0 ? theme.spacing / 2 : 8,
     transition: "background-color .1s ease",
     cursor: "pointer",
-
+    fontSize: ".9rem",
     // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: "none",
-
     color: textColor,
     backgroundColor: backgroundColor
   }, disabledStyle, {
@@ -13391,7 +13262,8 @@ var style$12 = function style(_ref2) {
     },
 
     "&.SideNavigationLink + .SideNavigationLink": {
-      borderTop: "1px solid #eee"
+      borderTop: "1px solid",
+      borderColor: theme.greys ? theme.greys["10"] : "#F5F5F5"
     },
 
     ":hover": {
@@ -13428,7 +13300,9 @@ var style$10 = function style(_ref2) {
     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
     overflow: "auto",
     scrollBehavior: "smooth", // future-proof
-    backgroundColor: theme.greys && theme.greys.white
+    fontWeight: 300,
+    backgroundColor: theme.greys && theme.greys.white,
+    color: theme.greys ? theme.greys["80"] : "#747474"
   };
 };
 
@@ -13509,15 +13383,6 @@ var ReactPropTypesSecret$3 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 var ReactPropTypesSecret_1$2 = ReactPropTypesSecret$3;
 
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -13570,15 +13435,6 @@ function checkPropTypes$2(typeSpecs, values, location, componentName, getStack) 
 }
 
 var checkPropTypes_1$2 = checkPropTypes$2;
-
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
 
 'use strict';
 
@@ -14050,15 +13906,6 @@ var factoryWithTypeCheckers$2 = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 'use strict';
 
 
@@ -14297,7 +14144,6 @@ var style$14 = function style(_ref2) {
     padding: theme.spacing >= 0 ? theme.spacing / 4 : 4,
     cursor: "pointer",
     overflow: "hidden",
-    fontSize: ".8rem",
     backgroundColor: backgroundColor,
     color: utils_5(backgroundColor)(["black", "white"]),
 
@@ -14391,6 +14237,34 @@ PlusChip.defaultProps = {
 
 var PlusChip$1 = glamorous(PlusChip)(style$15);
 
+var CardHeader = function CardHeader(_ref) {
+  var className = _ref.className,
+      children = _ref.children;
+  return _react__default.createElement(
+    "div",
+    { className: className },
+    children
+  );
+};
+var style$17 = function style(_ref2) {
+  var theme = _ref2.theme;
+  return {
+    margin: theme.spacing ? theme.spacing * -1 : -16,
+    marginBottom: 16,
+    padding: theme.spacing ? theme.spacing : 16,
+    borderBottom: "1px solid",
+    borderColor: theme.greys ? theme.greys["10"] : "#f5f5f5",
+    fontWeight: 700,
+    lineHeight: 1,
+
+    "* + &": {
+      marginTop: theme.spacing ? theme.spacing : 16
+    }
+  };
+};
+
+var CardHeader$1 = glamorous(CardHeader)(style$17);
+
 var Card = function Card(_ref) {
   var className = _ref.className,
       children = _ref.children;
@@ -14401,14 +14275,17 @@ var Card = function Card(_ref) {
   );
 };
 var style$16 = function style(_ref2) {
-  var width = _ref2.width,
+  var theme = _ref2.theme,
+      width = _ref2.width,
       padding = _ref2.padding;
   return {
     width: width,
-    padding: padding,
+    padding: padding ? padding : theme.spacing ? theme.spacing : 16,
     boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
     backgroundColor: "white",
-
+    "& p": {
+      lineHeight: "20px"
+    },
     "& > img": {
       maxWidth: "100%"
     }
@@ -14436,7 +14313,7 @@ var Stat = function Stat(_ref) {
     )
   );
 };
-var style$17 = function style(_ref2) {
+var style$18 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color;
 
@@ -14457,14 +14334,14 @@ var style$17 = function style(_ref2) {
 
     "& .Stat__label": {
       marginBottom: 3,
-      fontSize: ".6rem",
+      fontSize: ".8rem",
       fontWeight: 600,
       color: utils_5(backgroundColor)([theme.greys ? theme.greys["60"] : "#eee", theme.greys ? theme.greys["10"] : "#aaa"])
     }
   };
 };
 
-var Stat$1 = glamorous(Stat)(style$17);
+var Stat$1 = glamorous(Stat)(style$18);
 
 var activity = createCommonjsModule$1(function (module, exports) {
 'use strict';
@@ -32378,7 +32255,7 @@ Input$1.defaultProps = {
 };
 
 
-var style$18 = function style(_ref2) {
+var style$19 = function style(_ref2) {
   var theme = _ref2.theme;
   return {
     padding: theme.spacing ? theme.spacing / 2 : 8,
@@ -32389,7 +32266,7 @@ var style$18 = function style(_ref2) {
   };
 };
 
-var Input$2 = glamorous(Input$1)(style$18);
+var Input$2 = glamorous(Input$1)(style$19);
 
 var SelectOption = function SelectOption(_ref) {
   var className = _ref.className,
@@ -32408,7 +32285,7 @@ var SelectOption = function SelectOption(_ref) {
     children
   );
 };
-var style$19 = function style(_ref2) {
+var style$20 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color;
 
@@ -32440,7 +32317,7 @@ SelectOption.defaultProps = {
   selected: false
 };
 
-var SelectOption$1 = glamorous(SelectOption)(style$19);
+var SelectOption$1 = glamorous(SelectOption)(style$20);
 
 var SelectFilter = function SelectFilter(_ref) {
   var className = _ref.className,
@@ -32459,7 +32336,7 @@ var SelectFilter = function SelectFilter(_ref) {
     })
   );
 };
-var style$20 = function style(_ref2) {
+var style$21 = function style(_ref2) {
   var theme = _ref2.theme,
       color = _ref2.color;
 
@@ -32484,9 +32361,9 @@ SelectFilter.defaultProps = {
   placeholder: "Filter..."
 };
 
-var SelectFilter$1 = glamorous(SelectFilter)(style$20);
+var SelectFilter$1 = glamorous(SelectFilter)(style$21);
 
-var style$21 = (function () {
+var style$22 = (function () {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       theme = _ref.theme,
       color = _ref.color,
@@ -32852,7 +32729,7 @@ Select$1.defaultProps = {
 };
 
 
-var Select$2 = glamorous(Select$1)(style$21);
+var Select$2 = glamorous(Select$1)(style$22);
 
 var THEME_COLORS = {
   primary: "#22205F",
@@ -32863,14 +32740,14 @@ var THEME_COLORS = {
 };
 
 var THEME_GREYS = {
-  "10": "#EFF1F5",
-  "20": "#DFE5EC",
+  "10": "#F5F5F5",
+  "20": "#F1F1F1",
   "30": "#D0D9E5",
   "40": "#C6D1E1",
   "50": "#BBCADC",
-  "60": "#A1B3CA",
+  "60": "#999999",
   "70": "#8092B0",
-  "80": "#67809F",
+  "80": "#747474",
   "90": "#445873",
   "100": "#2D3842",
   white: "#FFFFFF"
@@ -32885,7 +32762,7 @@ var DEFAULT_THEME = {
     WebkitFontSmoothing: "subpixel-antialiased",
     textRendering: "optimizeLegibility"
   },
-  spacing: 16,
+  spacing: 12,
   baseZIndex: 0
 };
 
@@ -32908,6 +32785,7 @@ exports.withTooltip = withTooltip;
 exports.Chip = Chip$1;
 exports.PlusChip = PlusChip$1;
 exports.Card = Card$1;
+exports.CardHeader = CardHeader$1;
 exports.Stat = Stat$1;
 exports.Input = Input$2;
 exports.Icon = Icon;

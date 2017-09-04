@@ -2,39 +2,36 @@
 
 exports[`Sidebar Page Should render correctly 1`] = `
 <div>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Sidebar
-  </h1>
-  <h2>
-    The sidebar is a dynamic list-style navigational element to be used in cases with a large number of list-style actionable items.
-  </h2>
-  <div>
-    <p>
-      This component involves composition of two constituent elements. Namely,
-    </p>
-    <ul>
-      <li>
-        <a
-          href="#sidebar-item"
-        >
-          SidebarItem
-        </a>
-      </li>
-      <li>
-        <a
-          href="#sidebar-link"
-        >
-          SidebarLink
-        </a>
-      </li>
-    </ul>
   </div>
+  <p>
+    The sidebar is a dynamic list-style navigational element to be used in cases with a large number of list-style actionable items. This component involves composition of two constituent elements. Namely,
+  </p>
+  <ul>
+    <li>
+      <a
+        href="#sidebar-item"
+      >
+        SidebarItem
+      </a>
+    </li>
+    <li>
+      <a
+        href="#sidebar-link"
+      >
+        SidebarLink
+      </a>
+    </li>
+  </ul>
   <div
     style="margin-bottom:32px;"
   />
-  <h2>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <div
     class="playground"
   >
@@ -62,14 +59,14 @@ exports[`Sidebar Page Should render correctly 1`] = `
   <div
     style="margin-bottom:32px;"
   />
-  <h1
-    id="sidebar-item"
+  <div
+    class="css-by30gj"
   >
     SidebarItem
-  </h1>
-  <h2>
+  </div>
+  <h4>
     An expandable group of SidebarLinks, with added asynchronous functionality.
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >
@@ -159,14 +156,14 @@ exports[`Sidebar Page Should render correctly 1`] = `
        and thus exposes all of the props that such components do.
     </strong>
   </p>
-  <h1
-    id="sidebar-link"
+  <div
+    class="css-by30gj"
   >
     SidebarLink
-  </h1>
-  <h2>
+  </div>
+  <p>
     A link, but with onClick instead of href.
-  </h2>
+  </p>
   <table
     class="css-81lp1j"
   >

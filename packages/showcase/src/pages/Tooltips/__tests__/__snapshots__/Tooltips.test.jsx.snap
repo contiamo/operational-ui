@@ -2,18 +2,17 @@
 
 exports[`Tooltips Page Should render correctly 1`] = `
 <div>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Tooltips
-  </h1>
-  <h2>
-    These elements give helpful hints about actions an end-user can perform. They are designed to be reusable, elegant and unobtrusive.
-  </h2>
+  </div>
   <p>
-    Tooltips are great for UX. They can (and in many cases should) be used along with, and in, other components. For this reason, we took a highly versatile approach to our tooltips.
+    These elements give helpful hints about actions an end-user can perform. They are designed to be reusable, elegant and unobtrusive. Tooltips are great for UX. They can (and in many cases should) be used along with, and in, other components. For this reason, we took a highly versatile approach to our tooltips.
   </p>
-  <h2>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <div
     class="playground"
   >
@@ -38,9 +37,9 @@ exports[`Tooltips Page Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-1kfhvsj"
   >
@@ -134,18 +133,20 @@ exports[`Tooltips Page Should render correctly 1`] = `
       </tr>
     </tbody>
   </table>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     withTooltip
-  </h1>
-  <h2>
+  </div>
+  <p>
     Tooltips come with an additional higher-order component (or HOC) called \`withTooltip\`. This component wraps any pre-existing React component that you may have and gives it a tooltip, which you can pass as a prop.
-  </h2>
+  </p>
   <div
     style="margin-bottom:32px;"
   />
-  <h2>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <pre
     style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444;"
   >

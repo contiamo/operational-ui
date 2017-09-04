@@ -94,6 +94,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Sidebar
     </glamorous(_class)>
     <glamorous(_class)
+      disabled={true}
       to="/components/side-navigation"
     >
       Side Navigation
