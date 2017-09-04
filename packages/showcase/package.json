@@ -73,7 +73,6 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
-    "moduleNameMapper": {},
     "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
     "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
   }
