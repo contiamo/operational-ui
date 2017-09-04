@@ -1,19 +1,28 @@
 // @flow
 import React from "react"
+import type { Node } from "react"
 import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-const Button = ({
-    className = "",
-    onClick,
-    children
-  }: {
-    className?: string,
-    onClick?: any,
-    children?: any,
-  }): React$Element<*> =>
-    <div tabIndex="-1" role="button" className={`${className} Button`} onClick={onClick}>
+type Modifier = "group" | "space"
+
+type Props = {
+  className?: string,
+  onClick?: any,
+  children?: any,
+  modifiers?: Array<Modifier>
+}
+
+const Button = ({ className = "", onClick, children, modifiers = [] }: Props): Node =>
+    <div
+      tabIndex="-1"
+      role="button"
+      className={`${className} Button${modifiers
+        .map(mod => `${modifiers.length > 0 ? " " : ""}Button_${mod}`)
+        .join(" ")}`}
+      onClick={onClick}
+    >
       {children}
     </div>,
   style = ({ theme, color, active }: { theme: THEME, color?: string, active?: boolean }): {} => {
