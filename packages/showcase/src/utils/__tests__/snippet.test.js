@@ -1,6 +1,7 @@
+// @flow
 import { toReactPlayground } from "../snippet"
 
-const testSnippet: String = `
+const testSnippet: string = `
 import X from 'Y'
 import React from 'react'
 
@@ -8,9 +9,8 @@ export default
 <div>
   <h1>Hello!</h1>
 </div>
-`
-
-const trimmedTestSnippet: String = `<div>
+`,
+  trimmedTestSnippet: string = `<div>
   <h1>Hello!</h1>
 </div>
 `
