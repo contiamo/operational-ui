@@ -12,6 +12,7 @@ import ChipsPage from "./Chips/Chips"
 import TooltipsPage from "./Tooltips/Tooltips"
 import StatsPage from "./Stats/Stats"
 import SidebarPage from "./Sidebar/Sidebar"
+import Icons from "./Icons/Icons"
 
 const SidebarWithRouter = withRouter(Sidebar),
   InfoTooltip = ({ className }) => <div className={className}>Choose a Component to Get Started</div>,
@@ -52,6 +53,7 @@ export default () =>
       <Route path="/components/tooltips" component={TooltipsPage} />
       <Route path="/components/stats" component={StatsPage} />
       <Route path="/components/sidebar" component={SidebarPage} />
+      <Route path="/components/icons" component={Icons} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>

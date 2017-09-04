@@ -11,19 +11,13 @@ const paths = {
 
 export default ({ location }) =>
   <Sidebar>
-    <SidebarItem
-      open={location && paths.dataEntry.includes(location.pathname)}
-      label="Data Entry"
-    >
+    <SidebarItem open={location && paths.dataEntry.includes(location.pathname)} label="Data Entry">
       <SidebarLink to="/components/buttons">Buttons</SidebarLink>
       <SidebarLink to="/components/form-fields">Form Fields</SidebarLink>
       <SidebarLink disabled>Date Picker</SidebarLink>
       <SidebarLink disabled>Color Picker</SidebarLink>
     </SidebarItem>
-    <SidebarItem
-      open={location && paths.feedback.includes(location.pathname)}
-      label="Feedback"
-    >
+    <SidebarItem open={location && paths.feedback.includes(location.pathname)} label="Feedback">
       <SidebarLink disabled>Modals</SidebarLink>
       <SidebarLink disabled>Notifications</SidebarLink>
       <SidebarLink disabled>Alerts</SidebarLink>
@@ -33,22 +27,14 @@ export default ({ location }) =>
         Tooltips
       </SidebarLink>
     </SidebarItem>
-    <SidebarItem
-      open={location && paths.uiElements.includes(location.pathname)}
-      label="UI Elements"
-    >
+    <SidebarItem open={location && paths.uiElements.includes(location.pathname)} label="UI Elements">
       <SidebarLink to="/components/cards">Cards</SidebarLink>
       <SidebarLink to="/components/chips">Chips</SidebarLink>
       <SidebarLink to="/components/stats">Stats</SidebarLink>
     </SidebarItem>
-    <SidebarItem
-      open={location && paths.navigation.includes(location.pathname)}
-      label="Navigation"
-    >
+    <SidebarItem open={location && paths.navigation.includes(location.pathname)} label="Navigation">
       <SidebarLink to="/components/sidebar">Sidebar</SidebarLink>
-      <SidebarLink to="/components/side-navigation">
-        Side Navigation
-      </SidebarLink>
+      <SidebarLink to="/components/side-navigation">Side Navigation</SidebarLink>
       <SidebarLink disabled>Tabs</SidebarLink>
       <SidebarLink disabled>Pagination</SidebarLink>
     </SidebarItem>
@@ -57,6 +43,6 @@ export default ({ location }) =>
       <SidebarLink disabled>List</SidebarLink>
     </SidebarItem>
     <SidebarItem label="Icons">
-      <SidebarLink disabled>Feather Icons</SidebarLink>
+      <SidebarLink to="/components/icons">Icons</SidebarLink>
     </SidebarItem>
   </Sidebar>

@@ -23,6 +23,7 @@ import Chip from "./src/Chip/Chip"
 import PlusChip from "./src/PlusChip/PlusChip"
 import Card from "./src/Card/Card"
 import Stat from "./src/Stat/Stat"
+import Icon from "./src/Icon/Icon"
 
 import Input from "./src/Input/Input"
 import Select from "./src/Select/Select"
@@ -50,6 +51,7 @@ export {
   Card,
   Stat,
   Input,
+  Icon,
   Select,
   contiamoTheme,
   ThemeProvider
