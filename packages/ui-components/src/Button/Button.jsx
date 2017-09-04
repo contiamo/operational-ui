@@ -11,7 +11,7 @@ type Props = {
   className?: string,
   onClick?: any,
   children?: any,
-  modifiers: Array<Modifier>
+  modifiers?: Array<Modifier>
 }
 
 const Button = ({ className = "", onClick, children, modifiers = [] }: Props): Node =>
