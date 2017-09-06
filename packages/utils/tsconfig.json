@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "ES5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noImplicitAny": true
+  },
+  "include": ["./src/**/*.ts", "./index.ts", "./typings/index.d.ts"],
+  "exclude": ["node_modules"]
+}
