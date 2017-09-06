@@ -2,13 +2,14 @@
   "name": "contiamo-ui-utils",
   "version": "1.0.0",
   "description": "A collection of utilities used within the Contiamo UI suite",
-  "main": "./lib/utils.js",
+  "main": "./lib/index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "package": "tsc",
-    "package:watch": "tsc -w",
+    "clean": "rm -rf lib && mkdir lib",
+    "package": "npm run clean && tsc",
+    "package:watch": "npm run clean && tsc -w",
     "test": "jest",
     "flow": "flow",
     "test:watch": "jest --watch",
@@ -19,14 +20,12 @@
     "@types/tinycolor2": "^1.4.0",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
-    "jest-glamor-react": "^3.1.0",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.2.1",
     "typescript": "^2.5.2"
   },
   "dependencies": {
     "glamor": "^2.20.39",
-    "react": "^15.6.1",
     "tinycolor2": "^1.4.1"
   }
 }
