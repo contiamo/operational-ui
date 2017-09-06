@@ -1,5 +1,4 @@
-// @flow
-import colorCalculator from "tinycolor2"
+import * as colorCalculator from "tinycolor2"
 
 const hexOrColor = (color: string) => {
     /*
@@ -10,14 +9,14 @@ const hexOrColor = (color: string) => {
     const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i,
       isColorACodeOrHex = hexRegEx.test(color)
 
-    return (fallback: string): string => isColorACodeOrHex ? color : fallback
+    return (fallback: string): string => (isColorACodeOrHex ? color : fallback)
   },
-  readableTextColor = (background: string) => (
-    workingColors: Array<string>
-  ): string => {
+  readableTextColor = (background: string) => (workingColors: string[]): string => {
     return colorCalculator.mostReadable(background, workingColors).toHexString()
   },
   darken = (color: string) => (percentage: number): string =>
-    colorCalculator(color).darken(percentage).toString()
+    colorCalculator(color)
+      .darken(percentage)
+      .toString()
 
 export { hexOrColor, readableTextColor, darken }
