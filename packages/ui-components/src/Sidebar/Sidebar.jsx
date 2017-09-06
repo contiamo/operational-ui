@@ -18,7 +18,9 @@ const Sidebar = ({ className, children }: { className: string, children: Node })
     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
     overflow: "auto",
     scrollBehavior: "smooth", // future-proof
-    backgroundColor: theme.greys && theme.greys.white
+    fontWeight: 300,
+    backgroundColor: theme.greys && theme.greys.white,
+    color: theme.greys ? theme.greys["80"] : "#747474"
   })
 
 export default glamorous(Sidebar)(style)

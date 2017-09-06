@@ -2,32 +2,31 @@
 
 exports[`Cards Page Should render correctly 1`] = `
 <div>
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     Chips
-  </h1>
-  <h2>
-    Most commonly used for filters, these elements represent small bits of information that give a sense of context to the user.
-  </h2>
+  </div>
   <p>
-    Chips can be interactive, or simply informative. They can take on any color passed through \`props\`, along with a symbol for the button that will be displayed if click behavior is detected.
+    Most commonly used for filters, these elements represent small bits of information that give a sense of context to the user. Chips can be interactive, or simply informative. They can take on any color passed through \`props\`, along with a symbol for the button that will be displayed if click behavior is detected.
   </p>
   <div
     style="display:flex;"
   >
     <div
-      class="css-zc8bn2 chip"
+      class="css-8x0nsr chip"
     >
       Chip 1
     </div>
     <div
-      class="css-zc8bn2 chip"
+      class="css-8x0nsr chip"
     >
       Chip 2
     </div>
   </div>
-  <h2>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <div
     class="playground"
   >
@@ -52,9 +51,9 @@ exports[`Cards Page Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >
@@ -130,18 +129,17 @@ exports[`Cards Page Should render correctly 1`] = `
   <div
     style="margin-bottom:32px;"
   />
-  <h1>
+  <div
+    class="css-by30gj"
+  >
     PlusChip
-  </h1>
-  <h2>
-    A PlusChip is a specialized chip that bears no label, but simply takes an action and displays a symbol prompting the action.
-  </h2>
+  </div>
   <p>
-    These chips can either contain their own symbol, or simply have a plus if no symbol is specified.
+    A PlusChip is a specialized chip that bears no label, but simply takes an action and displays a symbol prompting the action. These chips can either contain their own symbol, or simply have a plus if no symbol is specified.
   </p>
-  <h2>
+  <h4>
     Usage
-  </h2>
+  </h4>
   <div
     class="playground"
   >
@@ -166,9 +164,9 @@ exports[`Cards Page Should render correctly 1`] = `
       </div>
     </div>
   </div>
-  <h2>
+  <h4>
     Props
-  </h2>
+  </h4>
   <table
     class="css-81lp1j"
   >

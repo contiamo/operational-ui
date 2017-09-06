@@ -5,7 +5,7 @@ import { Sidebar, SidebarItem, SidebarLink } from "contiamo-ui-components"
 export default
 <Sidebar>
   <SidebarItem label="Links">
-    <SidebarLink onClick={() => window.open("https://www.contiamo.com")} symbol="&rarr">
+    <SidebarLink onClick={() => window.open("https://www.contiamo.com")} symbol="&rarr;">
         Link 1
     </SidebarLink>
     <SidebarLink>Link 2</SidebarLink>

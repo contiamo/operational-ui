@@ -2,17 +2,12 @@
 
 exports[`App Showcase: SideNavigation Should render correctly 1`] = `
 <glamorous(SideNavigation)
-  color="#0c0c1b"
+  color="#4E5665"
   css={[Function]}
   expandOnHover={true}
   fix={true}
 >
-  <glamorous(_class)
-    css={
-      Object {
-        "marginLeft": -6,
-      }
-    }
+  <glamorous(SideNavigationHeader)
     size={24}
     tooltip="Contiamo"
   >
@@ -22,10 +17,17 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
     >
       <glamorous.Img
         alt="Contiamo"
-        src="https://www.contiamo.com/assets/favicon/favicon-32x32.png"
+        css={
+          Object {
+            "marginRight": 16,
+            "maxWidth": 32,
+          }
+        }
+        src="/img/logo/outline.png"
       />
+      Contiamo
     </Link>
-  </glamorous(_class)>
+  </glamorous(SideNavigationHeader)>
   <glamorous(_class)
     tooltip="Components"
   >
@@ -34,41 +36,56 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
       to="/components"
     >
       <Box
-        color="#aaa"
+        color="#fff"
         size={20}
       />
-      <div
+      <glamorous.Div
         className="SideNavigationItem__label"
+        css={
+          Object {
+            "color": "#fff",
+          }
+        }
       >
         Components
-      </div>
+      </glamorous.Div>
     </Link>
   </glamorous(_class)>
   <glamorous(_class)
     tooltip="Composed"
   >
-    <Grid
-      color="#aaa"
-      size={20}
-    />
-    <div
-      className="SideNavigationItem__label"
+    <Link
+      replace={false}
+      to="#"
     >
-      Composed
-    </div>
+      <Grid
+        color="#fff"
+        size={20}
+      />
+      <div
+        className="SideNavigationItem__label"
+      >
+        Composed
+      </div>
+    </Link>
   </glamorous(_class)>
   <glamorous(_class)
     tooltip="Visualizations"
   >
-    <BarChart2
-      color="#aaa"
-      size={20}
-    />
-    <div
-      className="SideNavigationItem__label"
+    <Link
+      replace={false}
+      to="#"
     >
-      Visualizations
-    </div>
+      <BarChart2
+        color="#fff"
+        size={20}
+      />
+      <div
+        className="SideNavigationItem__label"
+      >
+        Visualizations
+      </div>
+    </Link>
   </glamorous(_class)>
   <glamorous.Div
     css={

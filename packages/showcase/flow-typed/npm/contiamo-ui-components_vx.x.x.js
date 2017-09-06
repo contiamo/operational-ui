@@ -1,4 +1,4 @@
-// flow-typed signature: 494cf49bb740938ebd2ebae547551d18
+// flow-typed signature: 24f90086d42a650edb22520b9a3765e8
 // flow-typed version: <<STUB>>/contiamo-ui-components_v^1.0.0/flow_v0.53.1
 
 /**
@@ -22,10 +22,6 @@ declare module 'contiamo-ui-components' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'contiamo-ui-components/dist/components' {
-  declare module.exports: any;
-}
-
 declare module 'contiamo-ui-components/flow-typed/App.theme.type' {
   declare module.exports: any;
 }
@@ -190,6 +186,10 @@ declare module 'contiamo-ui-components/flow-typed/npm/tinycolor2_vx.x.x' {
   declare module.exports: any;
 }
 
+declare module 'contiamo-ui-components/lib/components' {
+  declare module.exports: any;
+}
+
 declare module 'contiamo-ui-components/rollup.config' {
   declare module.exports: any;
 }
@@ -322,6 +322,10 @@ declare module 'contiamo-ui-components/src/SideNavigation/__tests__/SideNavigati
   declare module.exports: any;
 }
 
+declare module 'contiamo-ui-components/src/SideNavigation/Header/__tests__/SideNavigationHeader.test' {
+  declare module.exports: any;
+}
+
 declare module 'contiamo-ui-components/src/SideNavigation/Header/SideNavigationHeader' {
   declare module.exports: any;
 }
@@ -379,9 +383,6 @@ declare module 'contiamo-ui-components/src/Tooltip/withTooltip' {
 }
 
 // Filename aliases
-declare module 'contiamo-ui-components/dist/components.js' {
-  declare module.exports: $Exports<'contiamo-ui-components/dist/components'>;
-}
 declare module 'contiamo-ui-components/flow-typed/App.theme.type.js' {
   declare module.exports: $Exports<'contiamo-ui-components/flow-typed/App.theme.type'>;
 }
@@ -511,6 +512,9 @@ declare module 'contiamo-ui-components/index' {
 declare module 'contiamo-ui-components/index.js' {
   declare module.exports: $Exports<'contiamo-ui-components'>;
 }
+declare module 'contiamo-ui-components/lib/components.js' {
+  declare module.exports: $Exports<'contiamo-ui-components/lib/components'>;
+}
 declare module 'contiamo-ui-components/rollup.config.js' {
   declare module.exports: $Exports<'contiamo-ui-components/rollup.config'>;
 }
@@ -609,6 +613,9 @@ declare module 'contiamo-ui-components/src/Sidebar/Sidebar.jsx' {
 }
 declare module 'contiamo-ui-components/src/SideNavigation/__tests__/SideNavigation.test.jsx' {
   declare module.exports: $Exports<'contiamo-ui-components/src/SideNavigation/__tests__/SideNavigation.test'>;
+}
+declare module 'contiamo-ui-components/src/SideNavigation/Header/__tests__/SideNavigationHeader.test.jsx' {
+  declare module.exports: $Exports<'contiamo-ui-components/src/SideNavigation/Header/__tests__/SideNavigationHeader.test'>;
 }
 declare module 'contiamo-ui-components/src/SideNavigation/Header/SideNavigationHeader.jsx' {
   declare module.exports: $Exports<'contiamo-ui-components/src/SideNavigation/Header/SideNavigationHeader'>;

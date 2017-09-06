@@ -3,15 +3,15 @@ import React from "react"
 import Playground from "component-playground"
 
 import Table from "../../components/PropsTable/PropsTable"
-import { Card as DemoCard } from "contiamo-ui-components"
+import { Card as DemoCard, CardHeader } from "contiamo-ui-components"
 import snippet from "./snippets/basic.snippet"
 import propDescription from "./propDescription"
 import { toReactPlayground } from "../../utils/snippet"
 
 export default () =>
   <div>
-    <h1>Cards</h1>
-    <h2>These elements make up the UI. They accept any type of children and elegantly wrap them.</h2>
+    <CardHeader>Cards</CardHeader>
+    <p>These elements make up the UI. They accept any type of children and elegantly wrap them.</p>
 
     <DemoCard css={{ marginBottom: 16 }} width={400} padding={16}>
       Hello, I am a card. And I can contain <em>many</em> different kinds of content.
@@ -36,9 +36,9 @@ export default () =>
       Hello, I am a <em>also</em> card.
     </DemoCard>
 
-    <h2>Usage</h2>
+    <h4>Usage</h4>
     <Playground codeText={toReactPlayground(snippet)} scope={{ React, Card: DemoCard }} />
 
-    <h2>Props</h2>
+    <h4>Props</h4>
     <Table props={propDescription} />
   </div>

@@ -100,10 +100,12 @@ const style = ({ theme, options }: Props) => {
     "&::after": {
       content: options && options.length ? "\"\"" : "none",
       position: "absolute",
+      top: "50%",
       right: theme.spacing ? theme.spacing : 16,
       width: 0,
       height: 0,
       opacity: 0,
+      transform: "translateY(-50%)",
       animation: `${fadeIn} .3s .3s ease forwards`,
       border: "4px solid transparent",
       borderTopColor: "white"

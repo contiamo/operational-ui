@@ -4,7 +4,7 @@ export default `
   <SidebarItem label="Links">
     <SidebarLink
       onClick={() => window.open('https://www.contiamo.com')}
-      symbol="&rarr"
+      symbol="&rarr;"
     >
       Link 1
     </SidebarLink>

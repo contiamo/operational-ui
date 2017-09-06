@@ -3,8 +3,8 @@ import glamorous from "glamorous"
 import Playground from "component-playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
+import { Tooltip as DemoTooltip, CardHeader } from "contiamo-ui-components"
 import Table from "../../components/PropsTable/PropsTable"
-import { Tooltip as DemoTooltip } from "contiamo-ui-components"
 
 import basicSnippet from "./snippets/basic.snippet"
 import withTooltipSnippet from "./snippets/with-tooltip"
@@ -20,33 +20,31 @@ const StickyTooltip = glamorous(DemoTooltip)({
 
 export default () =>
   <div>
-    <h1>Tooltips</h1>
-    <h2>
-      These elements give helpful hints about actions an end-user can perform. They are designed to be reusable, elegant
-      and unobtrusive.
-    </h2>
-
+    <CardHeader>Tooltips</CardHeader>
     <p>
-      Tooltips are great for UX. They can (and in many cases should) be used along with, and in, other components. For
-      this reason, we took a highly versatile approach to our tooltips.
+      These elements give helpful hints about actions an end-user can perform. They are designed to be reusable, elegant
+      and unobtrusive. Tooltips are great for UX. They can (and in many cases should) be used along with, and in, other
+      components. For this reason, we took a highly versatile approach to our tooltips.
     </p>
 
-    <h2>Usage</h2>
+    <h4>Usage</h4>
     <Playground codeText={toReactPlayground(basicSnippet)} scope={{ React, Tooltip: StickyTooltip }} />
 
-    <h2>Props</h2>
+    <h4>Props</h4>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
 
-    <h1>withTooltip</h1>
-    <h2>
+    <CardHeader>withTooltip</CardHeader>
+    <p>
       Tooltips come with an additional higher-order component (or HOC) called `withTooltip`. This component wraps any
       pre-existing React component that you may have and gives it a tooltip, which you can pass as a prop.
-    </h2>
+    </p>
 
     <div style={{ marginBottom: 32 }} />
 
-    <h2>Usage</h2>
-    <SyntaxHighlighter language="javascript">{withTooltipSnippet}</SyntaxHighlighter>
+    <h4>Usage</h4>
+    <SyntaxHighlighter language="javascript">
+      {withTooltipSnippet}
+    </SyntaxHighlighter>
     <p>
       <strong>
         Note: The `color` and `anchor` props are still available, but prepended with the word `tooltip` in order not to

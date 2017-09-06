@@ -1,6 +1,13 @@
+// @flow
 import React from "react"
-
 import { Sidebar, SidebarItem, SidebarLink } from "contiamo-ui-components"
+
+type Props = {
+  location: {
+    pathname: string,
+  },
+  css: {},
+}
 
 const paths = {
   dataEntry: ["/buttons", "/form-fields"],
@@ -9,8 +16,8 @@ const paths = {
   navigation: ["/sidebar"]
 }
 
-export default ({ location }) =>
-  <Sidebar>
+export default ({ location, css }: Props) =>
+  <Sidebar css={css}>
     <SidebarItem open={location && paths.dataEntry.includes(location.pathname)} label="Data Entry">
       <SidebarLink to="/components/buttons">Buttons</SidebarLink>
       <SidebarLink to="/components/form-fields">Form Fields</SidebarLink>
@@ -28,13 +35,16 @@ export default ({ location }) =>
       </SidebarLink>
     </SidebarItem>
     <SidebarItem open={location && paths.uiElements.includes(location.pathname)} label="UI Elements">
+      <SidebarLink disabled>Context Menu</SidebarLink>
       <SidebarLink to="/components/cards">Cards</SidebarLink>
       <SidebarLink to="/components/chips">Chips</SidebarLink>
       <SidebarLink to="/components/stats">Stats</SidebarLink>
     </SidebarItem>
     <SidebarItem open={location && paths.navigation.includes(location.pathname)} label="Navigation">
       <SidebarLink to="/components/sidebar">Sidebar</SidebarLink>
-      <SidebarLink to="/components/side-navigation">Side Navigation</SidebarLink>
+      <SidebarLink disabled to="/components/side-navigation">
+        Side Navigation
+      </SidebarLink>
       <SidebarLink disabled>Tabs</SidebarLink>
       <SidebarLink disabled>Pagination</SidebarLink>
     </SidebarItem>

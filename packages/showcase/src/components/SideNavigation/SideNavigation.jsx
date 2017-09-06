@@ -4,10 +4,16 @@ import { Link } from "react-router-dom"
 import { Div, Img } from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 
-import { SideNavigation, SideNavigationItem } from "contiamo-ui-components"
+import { SideNavigation, SideNavigationHeader, SideNavigationItem } from "contiamo-ui-components"
 
-const style: {} = ({ theme }) => ({
-  boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
+type Props = {
+  location?: {
+    pathname: string,
+  },
+  theme?: THEME,
+}
+
+const style: {} = (): {} => ({
   "& a": {
     display: "flex",
     alignItems: "center",
@@ -15,30 +21,50 @@ const style: {} = ({ theme }) => ({
     color: "white"
   },
   "& .SideNavigationItem__label": {
-    marginLeft: theme.spacing ? theme.spacing * 2 : 32
+    marginLeft: 20
   }
 }),
-  AppSideNavigation = ({ location }: { location?: { pathname: string } }) =>
-    <SideNavigation css={style} fix expandOnHover color="#0c0c1b">
-      <SideNavigationItem css={{ marginLeft: -6 }} tooltip="Contiamo" size={24}>
-        <Link to="/">
-          <Img alt="Contiamo" src="https://www.contiamo.com/assets/favicon/favicon-32x32.png" />
-        </Link>
-      </SideNavigationItem>
+  //expandedShadow => 3px 0 11px rgba(0, 0, 0, 0.19)
+  // tooltip => 222
+  // card headers
+  //lineheight 20, color #747474, fontsize: 13, proximanova400
+  // card tabs (tabs)
+  // buttons, 2px radius, bordercolor #e2e2e2, no shadow, inherit color <- copy shadows
+  //cliuckable things have  a 2px borderraduus
 
-      <SideNavigationItem tooltip="Components">
+  AppSideNavigation = ({ location }: Props) =>
+    <SideNavigation css={style} fix expandOnHover color="#4E5665">
+      <SideNavigationHeader tooltip="Contiamo" size={24}>
+        <Link to="/">
+          <Img css={{ maxWidth: 32, marginRight: 16 }} alt="Contiamo" src="/img/logo/outline.png" />
+          Contiamo
+        </Link>
+      </SideNavigationHeader>
+
+      <SideNavigationItem active={location && location.pathname.match(/\/components/)} tooltip="Components">
         <Link to="/components">
-          <Box color={location && location.pathname.match(/\/components/) ? "#67C283" : "#aaa"} size={20} />
-          <div className="SideNavigationItem__label">Components</div>
+          <Box color={location && location.pathname.match(/\/components/) ? "#67FFAA" : "#fff"} size={20} />
+          <Div
+            css={{
+              color: location && location.pathname.match(/\/components/) ? "#67FFAA" : "#fff"
+            }}
+            className="SideNavigationItem__label"
+          >
+            Components
+          </Div>
         </Link>
       </SideNavigationItem>
       <SideNavigationItem tooltip="Composed">
-        <Grid color="#aaa" size={20} />
-        <div className="SideNavigationItem__label">Composed</div>
+        <Link to="#">
+          <Grid color="#fff" size={20} />
+          <div className="SideNavigationItem__label">Composed</div>
+        </Link>
       </SideNavigationItem>
       <SideNavigationItem tooltip="Visualizations">
-        <BarChart2 color="#aaa" size={20} />
-        <div className="SideNavigationItem__label">Visualizations</div>
+        <Link to="#">
+          <BarChart2 color="#fff" size={20} />
+          <div className="SideNavigationItem__label">Visualizations</div>
+        </Link>
       </SideNavigationItem>
       <Div css={{ flexGrow: 1, height: "100%" }} />
     </SideNavigation>

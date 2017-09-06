@@ -8,14 +8,14 @@ const THEME_COLORS: COLORS = {
 }
 
 const THEME_GREYS: GREYS = {
-  "10": "#EFF1F5",
-  "20": "#DFE5EC",
+  "10": "#F5F5F5",
+  "20": "#F1F1F1",
   "30": "#D0D9E5",
   "40": "#C6D1E1",
   "50": "#BBCADC",
-  "60": "#A1B3CA",
+  "60": "#999999",
   "70": "#8092B0",
-  "80": "#67809F",
+  "80": "#747474",
   "90": "#445873",
   "100": "#2D3842",
   white: "#FFFFFF"
@@ -30,7 +30,7 @@ const DEFAULT_THEME: THEME = {
     WebkitFontSmoothing: "subpixel-antialiased",
     textRendering: "optimizeLegibility"
   },
-  spacing: 16,
+  spacing: 12,
   baseZIndex: 0
 }
 

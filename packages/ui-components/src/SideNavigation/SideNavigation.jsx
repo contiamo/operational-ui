@@ -3,6 +3,7 @@ import React from "react"
 import type { Node } from "react"
 import glamorous from "glamorous"
 
+import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"
 import SideNavigationLink from "./Link/SideNavigationLink"
 
@@ -19,7 +20,7 @@ type Props = {
   theme: THEME,
 }
 
-const SideNavigation = ({ className, children }: Props): React$Element<*> =>
+const SideNavigation = ({ className, children }: Props): Node =>
     <div className={className}>
       {children}
     </div>,
@@ -30,20 +31,26 @@ const SideNavigation = ({ className, children }: Props): React$Element<*> =>
     expandOnHover,
 
     // for some reason, glamorous doesn't get the defaultProps...
-    expandedWidth = 280,
-    width = 64
+    expandedWidth = 240,
+    width = 60
   }: Props): {} => {
     const backgroundColor = color
         ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white")
         : theme.colors && theme.colors.primary,
       hoverWidth = expandOnHover
         ? {
-          transition: ".3s width ease",
+          transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
           willChange: "width",
           "&:hover": {
             width: expandedWidth
           },
-          "&:hover .Tooltip": {
+          "& .Tooltip": {
+            display: "none"
+          },
+          "&:not(:hover) .SideNavigationHeader::after": {
+            content: "none"
+          },
+          "&:not(:hover) .SideNavigationHeader__options": {
             display: "none"
           }
         }
@@ -58,7 +65,7 @@ const SideNavigation = ({ className, children }: Props): React$Element<*> =>
       width,
       height: "100vh",
       overflow: "hidden",
-      padding: theme.spacing * 1.3 || 0,
+      boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
       backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
       ...hoverWidth
@@ -73,4 +80,4 @@ SideNavigation.defaultProps = {
 }
 
 export default glamorous(SideNavigation)(style)
-export { SideNavigationItem, SideNavigationLink }
+export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }

@@ -32,7 +32,7 @@ const Stat = ({ className, label, children }: { className: string, label: string
 
       "& .Stat__label": {
         marginBottom: 3,
-        fontSize: ".6rem",
+        fontSize: ".8rem",
         fontWeight: 600,
         color: readableTextColor(backgroundColor)([
           theme.greys ? theme.greys["60"] : "#eee",
