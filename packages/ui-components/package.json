@@ -3,17 +3,15 @@
   "version": "1.0.0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/components.js",
+  "types": "./types/main.d.ts",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "package": "rollup -c",
-    "package:watch": "rollup -c -w",
-    "flow": "flow",
+    "package": "tsc",
+    "package:watch": "tsc --watch",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint ./src/**/* --ext .js,.jsx --fix",
-    "precommit": "flow && npm run test && npm run lint"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -45,12 +43,16 @@
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-image": "^1.0.2",
     "rollup-plugin-jsx": "^1.0.3",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "typescript": "^2.5.2"
   },
   "peerDependencies": {
     "glamor": "^2.20.39"
   },
   "dependencies": {
+    "@types/react-icons": "^2.2.2",
+    "@types/react-router-dom": "^4.0.7",
+    "@types/tinycolor2": "^1.4.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
