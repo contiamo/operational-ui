@@ -2,20 +2,19 @@
   "name": "contiamo-ui-components",
   "version": "1.0.0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
-  "main": "./lib/components.js",
+  "main": "./lib/index.js",
+  "types": "./types/main.d.ts",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "package": "rollup -c",
-    "package:watch": "rollup -c -w",
-    "flow": "flow",
+    "package": "rm -rf lib && tsc",
+    "package:watch": "webpack-dev-server",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint ./src/**/* --ext .js,.jsx --fix",
-    "precommit": "flow && npm run test && npm run lint"
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^3.2.3",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-plugin-module-resolver": "^2.7.1",
@@ -45,18 +44,24 @@
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-image": "^1.0.2",
     "rollup-plugin-jsx": "^1.0.3",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "typescript": "latest"
   },
   "peerDependencies": {
     "glamor": "^2.20.39"
   },
   "dependencies": {
+    "@types/node": "^8.0.27",
+    "@types/react-icons": "^2.2.2",
+    "@types/react-router-dom": "^4.0.7",
+    "@types/tinycolor2": "^1.4.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "contiamo-ui-utils": "^1.0.0",
+    "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -72,13 +77,7 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ]
+    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
   }
 }

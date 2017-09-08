@@ -1,16 +1,19 @@
 import { css } from "glamor"
 
-const fadeIn: string = css.keyframes({
+// @todo -> type this better
+const x = css as any
+
+const fadeIn = x.keyframes({
     to: {
       opacity: 1,
     },
   }),
-  resetTransform: string = css.keyframes({
+  resetTransform = x.keyframes({
     to: {
       transform: "none",
     },
   }),
-  spin: string = css.keyframes({
+  spin = x.keyframes({
     from: {
       transform: "rotate(0deg)",
     },

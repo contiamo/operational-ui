@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "ES5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "jsx": "react",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost"]
+  },
+  "include": ["types/**/*", "index.ts"],
+  "exclude": ["./node_modules"]
+}

@@ -4,7 +4,7 @@ const { resolve } = require("path"),
 
 module.exports = {
   // We use babel-polyfill for async/await
-  entry: ["regenerator-runtime/runtime", resolve(__dirname, "..", "index.jsx")],
+  entry: ["regenerator-runtime/runtime", resolve(__dirname, "..", "index.tsx")],
   output: {
     publicPath: "/",
     path: resolve(__dirname, "..", "dist"),
@@ -12,6 +12,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)/,
+        loader: "awesome-typescript-loader"
+      },
       {
         test: /\.(js|jsx)/,
         oneOf: [
@@ -23,8 +27,7 @@ module.exports = {
           // All other JS
           {
             test: /.*/,
-            loader: "babel-loader",
-            exclude: /node_modules/
+            loader: "babel-loader"
           }
         ]
       },
@@ -56,6 +59,6 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: [".jsx", ".js"]
+    extensions: [".jsx", ".js", ".tsx", ".ts"]
   }
 }
