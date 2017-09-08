@@ -1,7 +1,7 @@
 import * as React from "react"
 import { SFC } from "react"
 import glamorous from "glamorous"
-import Theme from "types/theme"
+
 
 type Props = { className: string, theme: Theme, children: React.ReactNode }
 

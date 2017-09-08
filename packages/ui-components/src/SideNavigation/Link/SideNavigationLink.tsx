@@ -1,6 +1,6 @@
 import * as React from "react"
 import { SFC } from "react"
-import Theme from "types/theme"
+
 import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"

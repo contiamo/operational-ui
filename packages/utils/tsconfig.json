@@ -4,7 +4,8 @@
     "target": "ES5",
     "module": "commonjs",
     "sourceMap": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "lib": ["ES6", "DOM"]
   },
   "include": ["./src/**/*.ts", "./index.ts", "./typings/index.d.ts"],
   "exclude": ["node_modules"]

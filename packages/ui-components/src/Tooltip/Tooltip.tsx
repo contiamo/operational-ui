@@ -41,7 +41,7 @@ type rectCoords = {
 }
 type Props = {
   className?: string
-  children?: Node
+  children?: React.ReactNode
   active?: boolean
   anchor?: string
   color?: string
@@ -92,8 +92,11 @@ class Tooltip extends React.Component<Props, State> {
   render() {
     return (
       <div
-        ref={tooltip => (this.tooltip = tooltip || document.createElement("div"))}
-        className={`${this.props.className} Tooltip${this.props.active ? " active" : ""}`}
+        ref={tooltip =>
+          (this.tooltip = tooltip || document.createElement("div"))}
+        className={`${this.props.className} Tooltip${this.props.active
+          ? " active"
+          : ""}`}
         style={this.state.style}
       >
         {this.props.children ? this.props.children : ""}

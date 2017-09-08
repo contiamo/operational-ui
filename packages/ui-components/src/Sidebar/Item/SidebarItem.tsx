@@ -1,18 +1,19 @@
 import * as React from "react"
 import { SFC } from "react"
-import Theme from "types/theme"
-import glamorous, { Div } from "glamorous"
+
+import glamorous, { Div, GlamorousComponent } from "glamorous"
 
 import style from "./SidebarItem.style"
 import withTooltip from "../../Tooltip/withTooltip"
+import SidebarLink from "../Link/SidebarLink"
 
 type Props = {
-  className: string
+  className?: string
   label: string
-  children?: Node
-  open: boolean
-  onClick?: () => Promise<void>
-  tooltip: any
+  children?: any
+  open?: boolean
+  onClick?: () => Promise<any>
+  tooltip?: string
 }
 
 type State = {
@@ -23,7 +24,6 @@ type State = {
 class SidebarItem extends React.Component<Props, State> {
   static defaultProps = {
     open: false,
-    tooltip: false,
   }
 
   constructor(props: Props) {
@@ -40,7 +40,7 @@ class SidebarItem extends React.Component<Props, State> {
     }
     this.setState(() => ({ updating: true }))
     // If it is closed,
-    if (this.props.onClick && !this.state.open) {
+    if (typeof this.props.onClick === "function" && !this.state.open) {
       await this.props.onClick() // wait for the promise to resolve first.
     }
     this.setState(prevState => ({
@@ -56,18 +56,19 @@ class SidebarItem extends React.Component<Props, State> {
       even when the cursor is over the children... who may also have their
       own tooltips.
     */
-    const HeaderWithTooltip = withTooltip(Div)
+    const HeaderWithTooltip = Div
     return (
       <div
-        className={`${this.props.className} ${this.state.updating ? "updating" : ""} ${this.state.open ? "open" : ""}`}
+        className={`${this.props.className} ${this.state.updating
+          ? "updating"
+          : ""} ${this.state.open ? "open" : ""}`}
       >
-        <HeaderWithTooltip
+        <div
           className={`header ${this.state.open ? "open" : ""}`}
-          tooltip={this.props.tooltip}
           onClick={() => this.toggle()}
         >
           {this.props.label}
-        </HeaderWithTooltip>
+        </div>
         {this.state.open
           ? <div className="content">
               {this.props.children}

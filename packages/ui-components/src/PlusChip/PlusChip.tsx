@@ -1,26 +1,31 @@
 import * as React from "react"
 import { SFC } from "react"
 import glamorous from "glamorous"
-import Theme from "types/theme"
-import GoPlus from "react-icons/go/plus"
 
 import { hexOrColor } from "contiamo-ui-utils"
 
 type Props = {
-  className: string
+  className?: string
   size?: number
-  children?: string
-  onClick?: any
-  theme: Theme
+  children?: React.ReactNode
+  onClick?: () => void
+  theme?: Theme
   color?: string
 }
 
-const PlusChip: SFC = ({ className, children, onClick }: Props) =>
-    <div className={`${className} plus-chip`} onClick={onClick} tabIndex={-1} role="button">
-      {children || <GoPlus />}
+const PlusChip: SFC<Props> = ({ className, children, onClick }: Props) =>
+    <div
+      className={`${className} PlusChip`}
+      onClick={onClick}
+      tabIndex={-1}
+      role="button"
+    >
+      {children || "+"}
     </div>,
   style: {} = ({ theme, color, size }: Props) => {
-    const borderColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "black"
+    const borderColor = color
+      ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white")
+      : "black"
 
     return {
       display: "flex",

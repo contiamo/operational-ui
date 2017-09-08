@@ -1,5 +1,5 @@
 import { spin } from "contiamo-ui-utils"
-import Theme from "types/theme"
+
 type Props = { theme: Theme, children?: Node }
 export default ({ theme, children }: Props): {} => {
   // If we have children, style a caret.

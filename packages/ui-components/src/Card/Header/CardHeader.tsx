@@ -1,16 +1,17 @@
 import * as React from "react"
 import { SFC } from "react"
-import Theme from "types/theme"
+
 import glamorous from "glamorous"
 
 type Props = {
-  className: string
-  children?: Node
-  theme: Theme
+  className?: string
+  children: React.ReactNode
+  theme?: Theme
+  id?: string
 }
 
-const CardHeader: SFC<Props> = ({ className, children }: Props) =>
-    <div className={className}>
+const CardHeader: SFC<Props> = ({ className, children, id }: Props) =>
+    <div id={id} className={className}>
       {children}
     </div>,
   style: {} = ({ theme }: Props) => ({

@@ -1,12 +1,14 @@
 import * as React from "react"
 import { SFC } from "react"
 import glamorous from "glamorous"
-import Theme from "types/theme"
 
 import SidebarItem from "./Item/SidebarItem"
 import SidebarLink from "./Link/SidebarLink"
 
-type Props = { className: string, children: Node }
+type Props = {
+  className?: string
+  children: JSX.Element[]
+}
 
 const Sidebar = ({ className, children }: Props) =>
     <div className={className}>
@@ -22,7 +24,7 @@ const Sidebar = ({ className, children }: Props) =>
     scrollBehavior: "smooth", // future-proof
     fontWeight: 300,
     backgroundColor: theme.greys && theme.greys.white,
-    color: theme.greys ? theme.greys["80"] : "#747474"
+    color: theme.greys ? theme.greys["80"] : "#747474",
   })
 
 export default glamorous(Sidebar)(style)

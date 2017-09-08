@@ -1,7 +1,7 @@
 import * as React from "react"
 import { SFC } from "react"
 import { Link } from "react-router-dom"
-import Theme from "types/theme"
+
 import glamorous, { Div } from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
@@ -9,14 +9,15 @@ import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 import withTooltip from "../../Tooltip/withTooltip"
 
 type Props = {
-  className: string
-  children: Node
+  className?: string
+  children: React.ReactNode
   to?: string
   onClick?: () => void
   symbol?: string
-  theme: Theme
+  theme?: Theme
   color?: string
   disabled?: boolean
+  tooltip?: string
 }
 
 const SidebarLink: SFC<Props> = ({
@@ -99,5 +100,5 @@ const SidebarLink: SFC<Props> = ({
       },
     }
   }
-export default glamorous(withTooltip(SidebarLink))(style)
+export default glamorous(SidebarLink)(style)
 export { SidebarLink, style }

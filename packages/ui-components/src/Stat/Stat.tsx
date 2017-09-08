@@ -1,11 +1,16 @@
 import * as React from "react"
 import { SFC } from "react"
 import glamorous from "glamorous"
-import Theme from "types/theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-type Props = { className: string, label: string, children: Node, theme: Theme, color?: string }
+type Props = {
+  className?: string
+  label?: string
+  children: React.ReactNode
+  theme?: Theme
+  color?: string
+}
 
 const Stat = ({ className, label, children }: Props) =>
     <div className={`${className} Stat`}>
@@ -17,7 +22,9 @@ const Stat = ({ className, label, children }: Props) =>
       </span>
     </div>,
   style: {} = ({ theme, color }: Props) => {
-    const backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color] || "white") : "white"
+    const backgroundColor = color
+      ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white")
+      : "white"
 
     return {
       display: "flex",
@@ -29,7 +36,7 @@ const Stat = ({ className, label, children }: Props) =>
 
       "&.Stat + .Stat": {
         borderLeft: "1px solid",
-        borderLeftColor: darken(backgroundColor)(10)
+        borderLeftColor: darken(backgroundColor)(10),
       },
 
       "& .Stat__label": {
@@ -38,9 +45,9 @@ const Stat = ({ className, label, children }: Props) =>
         fontWeight: 600,
         color: readableTextColor(backgroundColor)([
           theme.greys ? theme.greys["60"] : "#eee",
-          theme.greys ? theme.greys["10"] : "#aaa"
-        ])
-      }
+          theme.greys ? theme.greys["10"] : "#aaa",
+        ]),
+      },
     }
   }
 

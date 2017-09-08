@@ -1,7 +1,7 @@
+// @todo -> type this better
 import * as React from "react"
 import { SFC } from "react"
 import * as ReactFeather from "react-feather"
-import Theme from "types/theme"
 
 type SizeFactors = {
   [key: string]: number
@@ -23,16 +23,20 @@ type Props = {
   theme: Theme
 }
 
-const Icon: SFC<Props> = ({ name = "Play", size = "medium", sizeOverride, theme }: Props) => {
-  const themeSpacing = theme ? theme.spacing : 16
+const Icon: SFC<Props> = ({
+  name = "Play",
+  size = "medium",
+  sizeOverride,
+  theme,
+}: Props) => {
+  const themeSpacing = theme ? theme.spacing : 16,
+    pixelSize = sizeOverride || themeSpacing * sizeFactors[size],
+    props = {
+      size: pixelSize,
+    },
+    IconLib = ReactFeather as any
 
-  const pixelSize = sizeOverride || themeSpacing * sizeFactors[size]
-
-  const props = {
-    size: pixelSize,
-  }
-
-  const Comp = ReactFeather[name]
+  const Comp = IconLib[name]
 
   return <Comp {...props} />
 }

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { SFC } from "react"
-import Theme from "types/theme"
+
 import glamorous from "glamorous"
 
 import SideNavigationHeader from "./Header/SideNavigationHeader"
@@ -10,14 +10,15 @@ import SideNavigationLink from "./Link/SideNavigationLink"
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
 type Props = {
-  className: string
-  children: Node
+  className?: string
+  css?: {}
+  children: React.ReactNode
   color?: string
-  expandOnHover: boolean
-  expandedWidth: number
-  width: number
-  fix: boolean
-  theme: Theme
+  expandOnHover?: boolean
+  expandedWidth?: number
+  width?: number
+  fix?: boolean
+  theme?: Theme
 }
 
 const SideNavigation: SFC<Props> = ({ className, children }: Props) =>

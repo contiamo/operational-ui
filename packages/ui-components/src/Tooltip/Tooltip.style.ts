@@ -1,4 +1,4 @@
-import Theme from "types/theme"
+
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
 type tooltipPosition = {

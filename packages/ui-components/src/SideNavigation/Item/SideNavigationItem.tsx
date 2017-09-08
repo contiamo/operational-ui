@@ -1,20 +1,29 @@
 import * as React from "react"
 import { SFC } from "react"
-import Theme from "types/theme"
+
 import glamorous from "glamorous"
 
 import withTooltip from "../../Tooltip/withTooltip"
 
 type Props = {
-  className: string
-  children: Node
+  className?: string
+  children: React.ReactNode
   onClick?: () => void
   theme: Theme
-  active?: boolean
+  active?: RegExpMatchArray | boolean
 }
 
-const SideNavigationItem: SFC<Props> = ({ className, children, onClick }: Props) =>
-    <div className={`${className} SideNavigationItem`} onClick={onClick} role="button" tabIndex={-1}>
+const SideNavigationItem: SFC<Props> = ({
+    className,
+    children,
+    onClick,
+  }: Props) =>
+    <div
+      className={`${className} SideNavigationItem`}
+      onClick={onClick}
+      role="button"
+      tabIndex={-1}
+    >
       {children}
     </div>,
   style = ({ theme, active }: Props): {} => {

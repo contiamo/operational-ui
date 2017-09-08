@@ -1,36 +1,29 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import GoX from "react-icons/go/x"
-import Theme from "types/theme"
 
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
 type Props = {
-  theme: Theme
-  color: string
-  onClick: any
+  theme?: Theme
+  color?: string
+  onClick?: () => void
+  className?: string
+  children: React.ReactNode
+  symbol?: string
 }
 
-const Chip = ({
-    className,
-    children,
-    onClick,
-    symbol,
-  }: {
-    className: string
-    children?: string
-    onClick?: any
-    symbol?: string
-  }) =>
+const Chip = ({ className, children, onClick, symbol }: Props) =>
     <div className={`${className} chip`}>
       {children}
       {onClick &&
         <div tabIndex={-1} role="button" className="action" onClick={onClick}>
-          {symbol || <GoX />}
+          {symbol || "x"}
         </div>}
     </div>,
   style: {} = ({ theme, color, onClick }: Props) => {
-    const backgroundColor = hexOrColor(color)(theme.colors ? theme.colors[color] || theme.colors.primary : "black"),
+    const backgroundColor = hexOrColor(color)(
+        theme.colors ? theme.colors[color] || theme.colors.primary : "black"
+      ),
       actionStyles = onClick
         ? {
             "& .action": {

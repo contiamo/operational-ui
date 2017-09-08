@@ -1,13 +1,12 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import Theme from "types/theme"
 
 type Props = {
   className?: string
   placeholder?: string
   name?: string
   children?: string
-  theme: Theme
+  theme?: Theme
 }
 
 type State = {

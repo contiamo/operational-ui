@@ -1,5 +1,5 @@
 import * as React from "react"
-import Theme from "types/theme"
+
 import glamorous from "glamorous"
 import { fadeIn } from "contiamo-ui-utils"
 
@@ -14,7 +14,7 @@ type Props = {
   children: React.ReactNode
   options?: Array<option>
   onChange?: () => void
-  theme: Theme
+  theme?: Theme
 }
 
 type State = {
@@ -37,7 +37,10 @@ class SideNavigationHeader extends React.Component<Props, State> {
     this.setState(() => ({ value: this.getDefaultValue() }))
   }
   getDefaultValue() {
-    return this.props.options.find(option => option.default === true) || this.props.options[0]
+    return (
+      this.props.options.find(option => option.default === true) ||
+      this.props.options[0]
+    )
   }
   toggle() {
     if (this.props.options.length === 0) {
