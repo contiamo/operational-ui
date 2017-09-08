@@ -1,4 +1,3 @@
-/* eslint max-len: 0 */
 import * as React from "react"
 
 export default [
