@@ -7,10 +7,7 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
   expandOnHover={true}
   fix={true}
 >
-  <glamorous(SideNavigationHeader)
-    size={24}
-    tooltip="Contiamo"
-  >
+  <glamorous(SideNavigationHeader)>
     <Link
       replace={false}
       to="/"
@@ -28,7 +25,7 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
       Contiamo
     </Link>
   </glamorous(SideNavigationHeader)>
-  <glamorous(_class)
+  <glamorous(class_1)
     tooltip="Components"
   >
     <Link
@@ -50,8 +47,8 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
         Components
       </glamorous.Div>
     </Link>
-  </glamorous(_class)>
-  <glamorous(_class)
+  </glamorous(class_1)>
+  <glamorous(class_1)
     tooltip="Composed"
   >
     <Link
@@ -68,8 +65,8 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
         Composed
       </div>
     </Link>
-  </glamorous(_class)>
-  <glamorous(_class)
+  </glamorous(class_1)>
+  <glamorous(class_1)
     tooltip="Visualizations"
   >
     <Link
@@ -86,7 +83,7 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
         Visualizations
       </div>
     </Link>
-  </glamorous(_class)>
+  </glamorous(class_1)>
   <glamorous.Div
     css={
       Object {

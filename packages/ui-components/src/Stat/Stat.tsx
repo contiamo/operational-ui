@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
@@ -12,7 +11,7 @@ type Props = {
   color?: string
 }
 
-const Stat = ({ className, label, children }: Props) =>
+const Stat: React.SFC<Props> = ({ className, label, children }: Props) =>
     <div className={`${className} Stat`}>
       <small className="Stat__label">
         {label}
@@ -22,16 +21,14 @@ const Stat = ({ className, label, children }: Props) =>
       </span>
     </div>,
   style: {} = ({ theme, color }: Props) => {
-    const backgroundColor = color
-      ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white")
-      : "white"
+    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
 
     return {
+      backgroundColor,
       display: "flex",
       flexDirection: "column",
       width: "fit-content",
       padding: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
-      backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
 
       "&.Stat + .Stat": {

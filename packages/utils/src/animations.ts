@@ -1,25 +1,22 @@
 import { css } from "glamor"
 
-// @todo -> type this better
-const x = css as any
-
-const fadeIn = x.keyframes({
+const fadeIn = css.keyframes({
     to: {
-      opacity: 1,
-    },
+      opacity: 1
+    }
   }),
-  resetTransform = x.keyframes({
+  resetTransform = css.keyframes({
     to: {
-      transform: "none",
-    },
+      transform: "none"
+    }
   }),
-  spin = x.keyframes({
+  spin = css.keyframes({
     from: {
-      transform: "rotate(0deg)",
+      transform: "rotate(0deg)"
     },
     to: {
-      transform: "rotate(359deg)",
-    },
+      transform: "rotate(359deg)"
+    }
   })
 
 export { fadeIn, resetTransform, spin }

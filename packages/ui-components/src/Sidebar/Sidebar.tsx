@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import SidebarItem from "./Item/SidebarItem"
@@ -10,7 +9,7 @@ type Props = {
   children: JSX.Element[]
 }
 
-const Sidebar = ({ className, children }: Props) =>
+const Sidebar: React.SFC<Props> = ({ className, children }: Props) =>
     <div className={className}>
       {children}
     </div>,

@@ -65,7 +65,9 @@ exports[`Cards Page Should render correctly 1`] = `
       >
         <textarea
           autocomplete="off"
-        />
+        >
+          t]
+        </textarea>
       </div>
     </div>
     <div

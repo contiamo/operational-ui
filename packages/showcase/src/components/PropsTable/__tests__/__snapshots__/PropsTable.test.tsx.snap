@@ -21,9 +21,23 @@ exports[`PropsTable Should render correctly with props 1`] = `
       </th>
     </tr>
   </thead>
-  <tbody />
+  <tbody>
+    <tr>
+      <td>
+        Hello
+      </td>
+      <td />
+      <td>
+        false
+      </td>
+      <td />
+      <td>
+        🚫
+      </td>
+    </tr>
+  </tbody>
 </table>
-`
+`;
 
 exports[`PropsTable Should render correctly without props 1`] = `
 <table>
@@ -49,11 +63,11 @@ exports[`PropsTable Should render correctly without props 1`] = `
   <tbody>
     <tr>
       <td
-        colSpan="5"
+        colSpan={5}
       >
         There seem to be no props. 😿
       </td>
     </tr>
   </tbody>
 </table>
-`
+`;

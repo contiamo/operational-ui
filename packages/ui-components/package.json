@@ -11,7 +11,9 @@
     "package": "rm -rf lib && tsc",
     "package:watch": "webpack-dev-server",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "tslint ./src/**/* ./index.ts --fix",
+    "precommit": "npm run test && npm run lint"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.3",
@@ -45,6 +47,7 @@
     "rollup-plugin-image": "^1.0.2",
     "rollup-plugin-jsx": "^1.0.3",
     "rollup-plugin-node-resolve": "^3.0.0",
+    "tslint-config-prettier": "^1.5.0",
     "typescript": "latest"
   },
   "peerDependencies": {
@@ -74,11 +77,7 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
@@ -87,13 +86,7 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": [
-      "../../node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ]
+    "snapshotSerializers": ["../../node_modules/jest-serializer-enzyme"],
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
   }
 }

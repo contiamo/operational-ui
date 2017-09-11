@@ -1,6 +1,5 @@
 // @todo -> type this better
 import * as React from "react"
-import { SFC } from "react"
 import * as ReactFeather from "react-feather"
 
 type SizeFactors = {
@@ -20,15 +19,10 @@ type Props = {
   name: IconName
   size?: IconSize
   sizeOverride?: number
-  theme: Theme
+  theme?: Theme
 }
 
-const Icon: SFC<Props> = ({
-  name = "Play",
-  size = "medium",
-  sizeOverride,
-  theme,
-}: Props) => {
+const Icon: React.SFC<Props> = ({ name = "Play", size = "medium", sizeOverride, theme }: Props) => {
   const themeSpacing = theme ? theme.spacing : 16,
     pixelSize = sizeOverride || themeSpacing * sizeFactors[size],
     props = {

@@ -5,7 +5,7 @@ import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/H
 import SideNavigation, {
   SideNavigationHeader,
   SideNavigationItem,
-  SideNavigationLink
+  SideNavigationLink,
 } from "./src/SideNavigation/SideNavigation"
 
 import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
@@ -25,7 +25,7 @@ import Icon from "./src/Icon/Icon"
 import Input from "./src/Input/Input"
 import Select from "./src/Select/Select"
 
-import contiamoTheme from "./src/theme"
+import theme from "./src/theme"
 
 import { ThemeProvider } from "glamorous"
 
@@ -52,6 +52,6 @@ export {
   Input,
   Icon,
   Select,
-  contiamoTheme,
-  ThemeProvider
+  theme as contiamoTheme,
+  ThemeProvider,
 }

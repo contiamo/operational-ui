@@ -5,133 +5,133 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
   <glamorous(SidebarItem)
     label="Data Entry"
   >
-    <glamorous(_class)
+    <glamorous(SidebarLink)
       to="/components/buttons"
     >
       Buttons
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       to="/components/form-fields"
     >
       Form Fields
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Date Picker
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Color Picker
-    </glamorous(_class)>
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Feedback"
   >
-    <glamorous(_class)
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Modals
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Notifications
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Alerts
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Messages
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Progress
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       to="/components/tooltips"
       tooltip="Like this."
     >
       Tooltips
-    </glamorous(_class)>
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="UI Elements"
   >
-    <glamorous(_class)
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Context Menu
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       to="/components/cards"
     >
       Cards
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       to="/components/chips"
     >
       Chips
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       to="/components/stats"
     >
       Stats
-    </glamorous(_class)>
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Navigation"
   >
-    <glamorous(_class)
+    <glamorous(SidebarLink)
       to="/components/sidebar"
     >
       Sidebar
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
       to="/components/side-navigation"
     >
       Side Navigation
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Tabs
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Pagination
-    </glamorous(_class)>
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Resources"
   >
-    <glamorous(_class)
+    <glamorous(SidebarLink)
       disabled={true}
     >
       Grid
-    </glamorous(_class)>
-    <glamorous(_class)
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       disabled={true}
     >
       List
-    </glamorous(_class)>
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="Icons"
   >
-    <glamorous(_class)
+    <glamorous(SidebarLink)
       to="/components/icons"
     >
       Icons
-    </glamorous(_class)>
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
 </glamorous(Sidebar)>
 `;

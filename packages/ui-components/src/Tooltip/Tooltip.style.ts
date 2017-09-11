@@ -1,4 +1,3 @@
-
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
 type tooltipPosition = {
@@ -49,6 +48,7 @@ export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor
   const backgroundColor: string = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "black"
 
   return {
+    backgroundColor,
     position: "absolute",
     ...getTooltipPosition(anchor),
     left: `calc(100% + ${theme.spacing || 0}px)`,
@@ -61,7 +61,6 @@ export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor
     borderRadius: 4,
     wordWrap: "break-word",
     boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
-    backgroundColor,
     color: readableTextColor(backgroundColor)(["black", "white"]),
 
     // This pseudo-element extends the clickable area of the far-away tooltip.

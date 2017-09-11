@@ -2,7 +2,7 @@
 
 exports[`SideNavigation component renders 1`] = `
 <SideNavigation
-  className="css-14z6lhj"
+  className="css-nughly"
   expandOnHover={false}
   expandedWidth={280}
   fix={false}

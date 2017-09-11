@@ -21,12 +21,11 @@ const Chip = ({ className, children, onClick, symbol }: Props) =>
         </div>}
     </div>,
   style: {} = ({ theme, color, onClick }: Props) => {
-    const backgroundColor = hexOrColor(color)(
-        theme.colors ? theme.colors[color] || theme.colors.primary : "black"
-      ),
+    const backgroundColor = hexOrColor(color)(theme.colors ? theme.colors[color] || theme.colors.primary : "black"),
       actionStyles = onClick
         ? {
             "& .action": {
+              backgroundColor,
               position: "absolute",
               top: 0,
               right: 0,
@@ -39,11 +38,10 @@ const Chip = ({ className, children, onClick, symbol }: Props) =>
               opacity: 0,
               transform: "translateX(10px)",
               transition: ".3s transform ease, .3s opacity ease",
-              backgroundColor,
             },
 
             "& .action::before": {
-              content: '""',
+              content: "\"\"",
               position: "absolute",
               top: 0,
               left: "-100%",
@@ -56,6 +54,7 @@ const Chip = ({ className, children, onClick, symbol }: Props) =>
         : {}
 
     return {
+      backgroundColor,
       position: "relative",
       display: "flex",
       alignItems: "center",
@@ -63,7 +62,6 @@ const Chip = ({ className, children, onClick, symbol }: Props) =>
       padding: theme.spacing >= 0 ? theme.spacing / 4 : 4,
       cursor: "pointer",
       overflow: "hidden",
-      backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
 
       "&.chip + .chip": {

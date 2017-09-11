@@ -6,11 +6,11 @@ type Props = {
   placeholder?: string
   name?: string
   children?: string
-  theme?: Theme
+  theme?: Theme,
 }
 
 type State = {
-  value: string
+  value: string,
 }
 
 class Input extends React.Component<Props, State> {

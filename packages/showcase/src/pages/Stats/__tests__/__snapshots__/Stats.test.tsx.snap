@@ -1,15 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icons Page Should render correctly 1`] = `
+exports[`Cards Page Should render correctly 1`] = `
 <div>
   <div
     class="css-by30gj"
   >
-    Icons
+    Stats
   </div>
   <p>
-    Contiamo's SVG icon set as a single component. It abstracts over different types of icons (react-feather, custom shapes, SVG sprites) to provide a consistent API as the icon set evolves.
+    Stats are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
   </p>
+  <div
+    style="display:flex;"
+  >
+    <div
+      class="css-yywsv7 Stat"
+    >
+      <small
+        class="Stat__label"
+      >
+        Components
+      </small>
+      <span
+        class="Stat__value"
+      >
+        200,000
+      </span>
+    </div>
+    <div
+      class="css-yywsv7 Stat"
+    >
+      <small
+        class="Stat__label"
+      >
+        Reusability
+      </small>
+      <span
+        class="Stat__value"
+      >
+        High
+      </span>
+    </div>
+    <div
+      class="css-yywsv7 Stat"
+    >
+      <small
+        class="Stat__label"
+      >
+        Potential Added Value
+      </small>
+      <span
+        class="Stat__value"
+      >
+        €2M
+      </span>
+    </div>
+  </div>
   <h4>
     Usage
   </h4>
@@ -25,14 +71,7 @@ exports[`Icons Page Should render correctly 1`] = `
         <textarea
           autocomplete="off"
         >
-          
-          
-          &lt;div style={{display: 'flex', marginTop: 16 }}&gt;
-            &lt;Icon name="Play" /&gt;
-            &lt;Icon name="Pause" size="large" /&gt;
-            &lt;Icon name="Pause" sizeOverride={17} /&gt;
-          &lt;/div&gt;
-          
+          t]
         </textarea>
       </div>
     </div>
@@ -74,14 +113,12 @@ exports[`Icons Page Should render correctly 1`] = `
     <tbody>
       <tr>
         <td>
-          name
+          label
         </td>
         <td>
-          Icon name, see https://feathericons.com/ (convert name to PascalCase).
+          What is the key in the key-value pairing? This is the description of the statistic itself.
         </td>
-        <td>
-          Play
-        </td>
+        <td />
         <td>
           string
         </td>
@@ -91,31 +128,16 @@ exports[`Icons Page Should render correctly 1`] = `
       </tr>
       <tr>
         <td>
-          size
+          color
         </td>
         <td>
-          Size as pre-defined strings.
+          See above. A stat can have its own background color. This can be a hex code, or a named color from your theme.
         </td>
         <td>
-          medium
+          white
         </td>
         <td>
           string
-        </td>
-        <td>
-          ✅
-        </td>
-      </tr>
-      <tr>
-        <td>
-          sizeOverride
-        </td>
-        <td>
-          Override the size to a single number.
-        </td>
-        <td />
-        <td>
-          number
         </td>
         <td>
           ✅

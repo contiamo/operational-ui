@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -11,18 +10,13 @@ type Props = {
   className?: string
   onClick?: any
   children?: any
-  modifiers?: Array<Modifier>
+  modifiers?: Modifier[]
   theme?: Theme
   color?: string
   active?: boolean
 }
 
-const Button: SFC<Props> = ({
-    className = "",
-    onClick,
-    children,
-    modifiers = [],
-  }) =>
+const Button: React.SFC<Props> = ({ className = "", onClick, children, modifiers = [] }) =>
     <div
       tabIndex={-1}
       role="button"
@@ -35,7 +29,7 @@ const Button: SFC<Props> = ({
     </div>,
   style = ({ theme, color, active }: Props): {} => {
     const backgroundColor: string = color
-        ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white")
+        ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") as string
         : "white",
       activeBackgroundColor: string = darken(backgroundColor)(5),
       textColor = readableTextColor(backgroundColor)(["black", "white"]),

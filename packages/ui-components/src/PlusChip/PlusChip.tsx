@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import { hexOrColor } from "contiamo-ui-utils"
@@ -13,19 +12,12 @@ type Props = {
   color?: string
 }
 
-const PlusChip: SFC<Props> = ({ className, children, onClick }: Props) =>
-    <div
-      className={`${className} PlusChip`}
-      onClick={onClick}
-      tabIndex={-1}
-      role="button"
-    >
+const PlusChip: React.SFC<Props> = ({ className, children, onClick }: Props) =>
+    <div className={`${className} PlusChip`} onClick={onClick} tabIndex={-1} role="button">
       {children || "+"}
     </div>,
   style: {} = ({ theme, color, size }: Props) => {
-    const borderColor = color
-      ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white")
-      : "black"
+    const borderColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "black"
 
     return {
       display: "flex",

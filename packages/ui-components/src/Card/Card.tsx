@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import CardHeader from "./Header/CardHeader"
@@ -12,7 +11,7 @@ type Props = {
   padding?: number
 }
 
-const Card: SFC<Props> = ({ className, children }: Props) =>
+const Card: React.SFC<Props> = ({ className, children }: Props) =>
     <div className={className}>
       {children}
     </div>,

@@ -11,9 +11,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-th6ypm  "
     >
       <div
-        class="css-10bcezx header"
-        role="status"
-        tabindex="-1"
+        class="header "
       >
         Data Entry
       </div>
@@ -22,9 +20,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-th6ypm  "
     >
       <div
-        class="css-10bcezx header"
-        role="status"
-        tabindex="-1"
+        class="header "
       >
         Feedback
       </div>
@@ -33,9 +29,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-th6ypm  "
     >
       <div
-        class="css-10bcezx header"
-        role="status"
-        tabindex="-1"
+        class="header "
       >
         UI Elements
       </div>
@@ -44,9 +38,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-th6ypm  "
     >
       <div
-        class="css-10bcezx header"
-        role="status"
-        tabindex="-1"
+        class="header "
       >
         Navigation
       </div>
@@ -55,9 +47,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-th6ypm  "
     >
       <div
-        class="css-10bcezx header"
-        role="status"
-        tabindex="-1"
+        class="header "
       >
         Resources
       </div>
@@ -66,9 +56,7 @@ exports[`ComponentsPage Should render correctly 1`] = `
       class="css-th6ypm  "
     >
       <div
-        class="css-10bcezx header"
-        role="status"
-        tabindex="-1"
+        class="header "
       >
         Icons
       </div>

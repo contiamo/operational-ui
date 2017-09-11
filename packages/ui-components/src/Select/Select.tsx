@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 import SelectOption from "./Option/SelectOption"
 import SelectFilter from "./Filter/SelectFilter"
 
-import style from "./Select.style"
+import SelectStyle from "./Select.style"
 
 export interface option {
   label: string
@@ -16,7 +16,7 @@ export interface option {
 type Props = {
   className?: string
   placeholder?: string | boolean
-  options: Array<option>
+  options: option[]
   filterable?: boolean
   disabled?: boolean
   multiple?: boolean
@@ -27,7 +27,7 @@ type Props = {
 type State = {
   open: boolean
   updating: boolean
-  value: option | Array<option>
+  value: option | option[]
   filter: RegExp
 }
 
@@ -87,9 +87,7 @@ class Select extends React.Component<Props, State> {
 
   getInitialValue(): option | option[] {
     if (!this.props.multiple) {
-      return typeof this.props.placeholder === "string"
-        ? { label: this.props.placeholder }
-        : { label: "" }
+      return typeof this.props.placeholder === "string" ? { label: this.props.placeholder } : { label: "" }
     }
 
     return typeof this.props.placeholder === "string"
@@ -99,15 +97,10 @@ class Select extends React.Component<Props, State> {
 
   getDisplayValue(): string {
     if (!this.props.multiple) {
-      if (
-        !Array.isArray(this.state.value) &&
-        typeof this.state.value.label === "string"
-      ) {
+      if (!Array.isArray(this.state.value) && typeof this.state.value.label === "string") {
         return this.state.value.label
       } else {
-        return typeof this.props.placeholder === "string"
-          ? this.props.placeholder
-          : ""
+        return typeof this.props.placeholder === "string" ? this.props.placeholder : ""
       }
     }
 
@@ -138,9 +131,7 @@ class Select extends React.Component<Props, State> {
       this.setState((prevState: State) => {
         if (Array.isArray(prevState.value)) {
           return {
-            value: [...prevState.value, option].filter(
-              item => !item.placeholder
-            ),
+            value: [...prevState.value, option].filter(item => !item.placeholder),
           }
         } else {
           throw new Error(
@@ -152,10 +143,7 @@ class Select extends React.Component<Props, State> {
       this.setState(prevState => {
         if (Array.isArray(prevState.value)) {
           return {
-            value: [
-              ...prevState.value.slice(0, optionIndex),
-              ...prevState.value.slice(optionIndex + 1),
-            ],
+            value: [...prevState.value.slice(0, optionIndex), ...prevState.value.slice(optionIndex + 1)],
           }
         } else {
           throw new Error(
@@ -184,9 +172,7 @@ class Select extends React.Component<Props, State> {
     event.persist()
 
     if (!(event.target instanceof HTMLInputElement)) {
-      throw new Error(
-        "<Select>: Your filter field is _not_ an input element and therefore has an unreadable value."
-      )
+      throw new Error("<Select>: Your filter field is _not_ an input element and therefore has an unreadable value.")
     }
 
     if (this.props.onFilter) {
@@ -195,7 +181,7 @@ class Select extends React.Component<Props, State> {
     }
 
     const filter = new RegExp(event.target.value, "i")
-    this.setState(() => ({ updating: false, filter }))
+    this.setState(() => ({ filter, updating: false }))
   }
 
   async toggle() {
@@ -216,9 +202,9 @@ class Select extends React.Component<Props, State> {
     return (
       <div
         ref={container => (this.container = container)}
-        className={`${this.props.className} Select${this.state.open
-          ? " Select_open"
-          : ""}${this.state.updating ? " Select_updating" : ""}`}
+        className={`${this.props.className} Select${this.state.open ? " Select_open" : ""}${this.state.updating
+          ? " Select_updating"
+          : ""}`}
         role="listbox"
         tabIndex={-2}
         onClick={() => this.toggle()}
@@ -228,8 +214,7 @@ class Select extends React.Component<Props, State> {
         </div>
         {this.props.options.length && this.state.open
           ? <div className="Select__options">
-              {this.props.filterable &&
-                <SelectFilter onChange={e => this.updateFilter(e)} />}
+              {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
               <div className="Select__options_list">
                 {this.props.options.map(
                   (option: option) =>
@@ -250,5 +235,5 @@ class Select extends React.Component<Props, State> {
   }
 }
 
-export default glamorous(Select)(style)
+export default glamorous(Select)(SelectStyle)
 export { Select }
