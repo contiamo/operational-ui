@@ -7,6 +7,6 @@
     "noImplicitAny": true,
     "lib": ["ES6", "DOM"]
   },
-  "include": ["./src/**/*.ts", "./index.ts", "./typings/index.d.ts"],
+  "include": ["./index.ts", "./types/**/*"],
   "exclude": ["node_modules"]
 }

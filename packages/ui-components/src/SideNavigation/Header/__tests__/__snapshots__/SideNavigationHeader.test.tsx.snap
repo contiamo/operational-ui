@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavigationHeader Should render correctly 1`] = `
+<div
+  className="undefined SideNavigationHeader"
+  onClick={[Function]}
+  role="listbox"
+  tabIndex={-1}
+>
+  hi
+  <div
+    className="SideNavigationHeader__value"
+  />
+</div>
+`;

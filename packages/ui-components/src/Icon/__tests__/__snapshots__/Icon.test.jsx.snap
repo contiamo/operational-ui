@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Icon Component Renders an <svg> tag 1`] = `
-<undefined
-  size={16}
-/>
-`;

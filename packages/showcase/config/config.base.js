@@ -14,20 +14,18 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)/,
-        loader: "awesome-typescript-loader"
-      },
-      {
-        test: /\.(js|jsx)/,
         oneOf: [
           // Documentation snippets
           {
             test: /\.snippet/,
-            loader: "raw-loader"
+            loader: "raw-loader",
+            exclude: /node_modules/
           },
-          // All other JS
+          // All other TS
           {
             test: /.*/,
-            loader: "babel-loader"
+            loader: "awesome-typescript-loader",
+            exclude: /node_modules/
           }
         ]
       },

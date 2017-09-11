@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
@@ -15,21 +14,19 @@ type Props = {
   color: string
 }
 
-const Header: SFC<Props> = ({ className, children }) =>
+const Header: React.SFC<Props> = ({ className, children }) =>
     <div className={className}>
       {children}
     </div>,
   style: {} = ({ theme, color }: Props) => {
-    const backgroundColor = color
-      ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white")
-      : "white"
+    const backgroundColor = color ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") : "white"
 
     return {
+      backgroundColor,
       display: "flex",
       minHeight: 50,
       alignItems: "center",
       padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-      backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
     }
   }

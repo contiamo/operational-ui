@@ -5,7 +5,7 @@ import { Stat as DemoStat, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 
-import snippet from "./snippets/stats.snippet"
+import * as snippet from "./snippets/stats.snippet"
 import propDescription from "./propDescription"
 import { toReactPlayground } from "../../utils/snippet"
 
@@ -25,7 +25,7 @@ export default () =>
     </div>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(snippet)} scope={{ React, Stat: DemoStat }} />
+    <Playground codeText={toReactPlayground(String(snippet))} scope={{ React, Stat: DemoStat }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />

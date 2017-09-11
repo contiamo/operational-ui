@@ -1,8 +1,7 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
-import style from "./Tooltip.style"
+import TooltipStyle from "./Tooltip.style"
 
 /**
   The <Tooltip /> component.
@@ -78,10 +77,10 @@ class Tooltip extends React.Component<Props, State> {
 
       Please read the description of this component at the top of the file
       if you haven't already to find out why.
-    */ position: tooltipPosition = {
+      */ position: tooltipPosition = {
+        top,
         position: "fixed",
         transform: "none",
-        top,
         left: (rect && rect.left) || 0,
       }
     if (this.props.anchor === "bottom") {
@@ -92,11 +91,8 @@ class Tooltip extends React.Component<Props, State> {
   render() {
     return (
       <div
-        ref={tooltip =>
-          (this.tooltip = tooltip || document.createElement("div"))}
-        className={`${this.props.className} Tooltip${this.props.active
-          ? " active"
-          : ""}`}
+        ref={tooltip => (this.tooltip = tooltip || document.createElement("div"))}
+        className={`${this.props.className} Tooltip${this.props.active ? " active" : ""}`}
         style={this.state.style}
       >
         {this.props.children ? this.props.children : ""}
@@ -104,5 +100,5 @@ class Tooltip extends React.Component<Props, State> {
     )
   }
 }
-export default glamorous(Tooltip)(style)
-export { Tooltip, style } // for testing.
+export default glamorous(Tooltip)(TooltipStyle)
+export { Tooltip, TooltipStyle as style } // for testing.

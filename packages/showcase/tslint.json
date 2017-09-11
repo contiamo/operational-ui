@@ -3,6 +3,8 @@
   "rules": {
     "one-variable-per-declaration": false,
     "semicolon": false,
-    "quotemark": "double"
+    "quotemark": "double",
+    "variable-name": ["allow-pascal-case"],
+    "indent": false
   }
 }

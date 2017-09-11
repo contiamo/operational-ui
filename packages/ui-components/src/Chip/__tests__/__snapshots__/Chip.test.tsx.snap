@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip Should render 1`] = `
+<div
+  className="undefined chip"
+>
+  Hi
+</div>
+`;

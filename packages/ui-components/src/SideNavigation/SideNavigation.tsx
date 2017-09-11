@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -21,7 +20,7 @@ type Props = {
   theme?: Theme
 }
 
-const SideNavigation: SFC<Props> = ({ className, children }: Props) =>
+const SideNavigation: React.SFC<Props> = ({ className, children }: Props) =>
     <div className={className}>
       {children}
     </div>,
@@ -58,16 +57,16 @@ const SideNavigation: SFC<Props> = ({ className, children }: Props) =>
         : {}
 
     return {
+      width,
+      backgroundColor,
       position: fix ? "fixed" : "relative",
       zIndex: (theme.baseZIndex || 0) + 100,
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
-      width,
       height: "100vh",
       overflow: "hidden",
       boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-      backgroundColor,
       color: readableTextColor(backgroundColor)(["black", "white"]),
       ...hoverWidth,
     }

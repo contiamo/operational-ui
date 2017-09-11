@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cards Page Should render correctly 1`] = `
+<div>
+  <div
+    class="css-by30gj"
+  >
+    Stats
+  </div>
+  <p>
+    Stats are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
+  </p>
+  <div
+    style="display:flex;"
+  >
+    <div
+      class="css-yywsv7 Stat"
+    >
+      <small
+        class="Stat__label"
+      >
+        Components
+      </small>
+      <span
+        class="Stat__value"
+      >
+        200,000
+      </span>
+    </div>
+    <div
+      class="css-yywsv7 Stat"
+    >
+      <small
+        class="Stat__label"
+      >
+        Reusability
+      </small>
+      <span
+        class="Stat__value"
+      >
+        High
+      </span>
+    </div>
+    <div
+      class="css-yywsv7 Stat"
+    >
+      <small
+        class="Stat__label"
+      >
+        Potential Added Value
+      </small>
+      <span
+        class="Stat__value"
+      >
+        €2M
+      </span>
+    </div>
+  </div>
+  <h4>
+    Usage
+  </h4>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          t]
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          label
+        </td>
+        <td>
+          What is the key in the key-value pairing? This is the description of the statistic itself.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          See above. A stat can have its own background color. This can be a hex code, or a named color from your theme.
+        </td>
+        <td>
+          white
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

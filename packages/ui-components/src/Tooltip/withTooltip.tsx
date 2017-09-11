@@ -1,5 +1,4 @@
 import * as React from "react"
-import { ComponentType } from "react"
 
 import Tooltip from "./Tooltip"
 
@@ -29,10 +28,7 @@ interface State {
   isTooltipActive: boolean
 }
 function withTooltip<InputProps, InputState, S>(InputComponent: any) {
-  return class extends React.Component<
-    Props & InputProps & React.HTMLProps<HTMLDivElement> & InputState,
-    State
-  > {
+  return class extends React.Component<Props & InputProps & React.HTMLProps<HTMLDivElement> & InputState, State> {
     static defaultProps = {
       tooltipAnchor: "top",
       role: "status",
@@ -52,18 +48,10 @@ function withTooltip<InputProps, InputState, S>(InputComponent: any) {
 
     render() {
       return (
-        <InputComponent
-          onMouseEnter={() => this.showTooltip()}
-          onMouseLeave={() => this.hideTooltip()}
-          {...this.props}
-        >
+        <InputComponent onMouseEnter={() => this.showTooltip()} onMouseLeave={() => this.hideTooltip()} {...this.props}>
           {this.props.children ? this.props.children : ""}
           {this.props.tooltip && this.state.isTooltipActive
-            ? <Tooltip
-                active
-                color={this.props.tooltipColor}
-                anchor={this.props.tooltipAnchor}
-              >
+            ? <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
                 {this.props.tooltip}
               </Tooltip>
             : ""}

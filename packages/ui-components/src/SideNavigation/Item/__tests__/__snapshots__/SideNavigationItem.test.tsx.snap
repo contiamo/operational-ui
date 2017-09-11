@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavigationItem component renders 1`] = `
+<class_1
+  className="css-1imo18j"
+  role="status"
+  tabIndex={-1}
+  tooltipAnchor="top"
+>
+  Hi, I'm an Item
+</class_1>
+`;

@@ -1,24 +1,23 @@
-
 const appFontFace: {
-    fontFamily: string,
-    fontStyle: string,
-    path: string,
-  } = {
-    fontFamily: "Proxima Nova",
-    fontStyle: "normal",
-    path: "/fonts/proximanova"
-  },
-  appFontWeights: Array<number> = [300, 400, 600],
-  appFontExtensions: Array<string> = ["woff2", "woff", "eot", "svg", "ttf"],
+  fontFamily: string
+  fontStyle: string
+  path: string,
+} = {
+  fontFamily: "Proxima Nova",
+  fontStyle: "normal",
+  path: "/fonts/proximanova",
+},
+  appFontWeights: number[] = [300, 400, 600],
+  appFontExtensions: string[] = ["woff2", "woff", "eot", "svg", "ttf"],
   getFontSrcString = (weight: number) => (
     {
       fontFamily,
-      path
+      path,
     }: {
-      fontFamily: string,
+      fontFamily: string
       path: string,
-    } = appFontFace
-  ) => (extensions: Array<string> = appFontExtensions) => {
+    } = appFontFace,
+  ) => (extensions: string[] = appFontExtensions) => {
     let cssUrl: string = `local('${fontFamily}')`
 
     extensions.forEach((extension: string): string => {

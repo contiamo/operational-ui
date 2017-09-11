@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidebarLink Should display a symbol to the right 1`] = `
+<div
+  className="hi SideNavigationLink"
+>
+  sup
+  <div
+    className="symbol"
+  >
+    % s  
+  </div>
+</div>
+`;
+
+exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`] = `
+<Link
+  className="hi SideNavigationLink"
+  replace={false}
+  to="/route"
+>
+  sup
+</Link>
+`;
+
+exports[`SidebarLink Should render correctly 1`] = `
+<div
+  className="hi SideNavigationLink"
+>
+  sup
+</div>
+`;

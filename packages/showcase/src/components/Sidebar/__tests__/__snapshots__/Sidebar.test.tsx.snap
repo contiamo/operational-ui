@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Showcase: Sidebar Should render correctly 1`] = `
+<glamorous(Sidebar)>
+  <glamorous(SidebarItem)
+    label="Data Entry"
+  >
+    <glamorous(SidebarLink)
+      to="/components/buttons"
+    >
+      Buttons
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      to="/components/form-fields"
+    >
+      Form Fields
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Date Picker
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Color Picker
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    label="Feedback"
+  >
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Modals
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Notifications
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Alerts
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Messages
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Progress
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      to="/components/tooltips"
+      tooltip="Like this."
+    >
+      Tooltips
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    label="UI Elements"
+  >
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Context Menu
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      to="/components/cards"
+    >
+      Cards
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      to="/components/chips"
+    >
+      Chips
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      to="/components/stats"
+    >
+      Stats
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    label="Navigation"
+  >
+    <glamorous(SidebarLink)
+      to="/components/sidebar"
+    >
+      Sidebar
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+      to="/components/side-navigation"
+    >
+      Side Navigation
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Tabs
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Pagination
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    label="Resources"
+  >
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      Grid
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={true}
+    >
+      List
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    label="Icons"
+  >
+    <glamorous(SidebarLink)
+      to="/components/icons"
+    >
+      Icons
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+</glamorous(Sidebar)>
+`;

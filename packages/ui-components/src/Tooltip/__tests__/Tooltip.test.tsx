@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import { shallow, mount } from "enzyme"
 
@@ -7,9 +6,8 @@ import theme from "../../theme"
 
 describe("Tooltip Component", () => {
   it("Should intialize without problems", () => {
-    // We use .first().shallow() because it's a wrapped glamorous component.
     const output = shallow(<Tooltip className="test">Hello</Tooltip>)
-    expect(output.state().position).toEqual({})
+    expect(output.state().style).toEqual({position:'relative'})
     expect(output).toMatchSnapshot()
   })
   it("Should have a position on mount", () => {

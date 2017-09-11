@@ -1,6 +1,5 @@
 import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "contiamo-ui-utils"
 
-
 type Props = {
   theme: Theme
   color?: string
@@ -11,6 +10,7 @@ export default ({ theme, color, disabled }: Props): {} => {
   const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
 
   return {
+    backgroundColor,
     position: "relative",
     display: "flex",
     alignItems: "center",
@@ -22,7 +22,6 @@ export default ({ theme, color, disabled }: Props): {} => {
     borderColor: theme.greys ? theme.greys[30] : "#ccc",
     opacity: disabled ? 0.5 : 1,
     cursor: "pointer",
-    backgroundColor,
     color: readableTextColor(backgroundColor)(["black", "white"]),
     outline: "none",
     pointerEvents: disabled ? "none" : "all",

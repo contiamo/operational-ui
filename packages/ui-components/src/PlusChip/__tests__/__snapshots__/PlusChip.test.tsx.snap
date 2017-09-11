@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plus Chip Should correctly render 1`] = `
+<div
+  className="undefined PlusChip"
+  role="button"
+  tabIndex={-1}
+>
+  +
+</div>
+`;

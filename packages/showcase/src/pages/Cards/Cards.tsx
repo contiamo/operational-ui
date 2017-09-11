@@ -4,7 +4,7 @@ import Playground from "component-playground"
 
 import Table from "../../components/PropsTable/PropsTable"
 import { Card as DemoCard, CardHeader } from "contiamo-ui-components"
-import snippet from "./snippets/basic.snippet"
+import * as snippet from "./snippets/basic.snippet"
 import propDescription from "./propDescription"
 import { toReactPlayground } from "../../utils/snippet"
 
@@ -37,7 +37,7 @@ export default () =>
     </DemoCard>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(snippet)} scope={{ React, Card: DemoCard }} />
+    <Playground codeText={toReactPlayground(String(snippet))} scope={{ React, Card: DemoCard }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />

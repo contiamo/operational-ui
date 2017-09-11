@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavigation component renders 1`] = `
+<SideNavigation
+  className="css-nughly"
+  expandOnHover={false}
+  expandedWidth={280}
+  fix={false}
+  width={64}
+/>
+`;

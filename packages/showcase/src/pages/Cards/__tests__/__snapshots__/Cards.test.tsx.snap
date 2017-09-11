@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cards Page Should render correctly 1`] = `
+<div>
+  <div
+    class="css-by30gj"
+  >
+    Cards
+  </div>
+  <p>
+    These elements make up the UI. They accept any type of children and elegantly wrap them.
+  </p>
+  <div
+    class="css-er2abz"
+  >
+    Hello, I am a card. And I can contain 
+    <em>
+      many
+    </em>
+     different kinds of content.
+  </div>
+  <div
+    style="display:flex;"
+  >
+    <div
+      class="css-e9dar8"
+    >
+      Hello, we are cards.
+      <br />
+    </div>
+    <div
+      class="css-1di34ln"
+    >
+      Indeed, we are.
+      <br />
+      Indeed, we can.
+      <br />
+      <br />
+      <img
+        alt="Image"
+        src="http://1.bp.blogspot.com/-TMQ0popcxJ0/Tdk9o2tS4fI/AAAAAAAAVjk/HF7UhI-M4Hs/s1600/Hey+%253B+%2529.png"
+      />
+    </div>
+  </div>
+  <div
+    class="css-1wg5beq"
+  >
+    Hello, I am a 
+    <em>
+      also
+    </em>
+     card.
+  </div>
+  <h4>
+    Usage
+  </h4>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          t]
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          width
+        </td>
+        <td>
+          How wide would you like your card to be?
+        </td>
+        <td>
+          100%
+        </td>
+        <td>
+          number
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          padding
+        </td>
+        <td>
+          How much space do we apply to the inside of the card?
+        </td>
+        <td>
+          0
+        </td>
+        <td>
+          number
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

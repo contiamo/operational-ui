@@ -3,16 +3,16 @@ import { Route, withRouter } from "react-router-dom"
 import { Div } from "glamorous"
 
 import Sidebar from "../components/Sidebar/Sidebar"
-import AppCanvas from "../components/Canvas/Canvas"
+import { default as AppCanvas } from "../components/Canvas/Canvas"
 
-import ButtonsPage from "./Buttons/Buttons"
-import FormFieldsPage from "./FormFields/FormFields"
-import CardsPage from "./Cards/Cards"
-import ChipsPage from "./Chips/Chips"
-import TooltipsPage from "./Tooltips/Tooltips"
-import StatsPage from "./Stats/Stats"
-import SidebarPage from "./Sidebar/Sidebar"
-import Icons from "./Icons/Icons"
+import { default as ButtonsPage } from "./Buttons/Buttons"
+import { default as FormFieldsPage } from "./FormFields/FormFields"
+import { default as CardsPage } from "./Cards/Cards"
+import { default as ChipsPage } from "./Chips/Chips"
+import { default as TooltipsPage } from "./Tooltips/Tooltips"
+import { default as StatsPage } from "./Stats/Stats"
+import { default as SidebarPage } from "./Sidebar/Sidebar"
+import { default as Icons } from "./Icons/Icons"
 
 const SidebarWithRouter = withRouter(Sidebar),
   InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
@@ -24,7 +24,7 @@ export default () =>
       alignItems: "flex-start",
       padding: 16,
       width: "100%",
-      height: "100vh"
+      height: "100vh",
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />
