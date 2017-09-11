@@ -6,7 +6,7 @@ import Table from "../../components/PropsTable/PropsTable"
 import { Button as DemoButton, CardHeader } from "contiamo-ui-components"
 
 import { toReactPlayground } from "../../utils/snippet"
-import collectionSnippet from "./snippets/collection.snippet"
+import * as collectionSnippet from "./snippets/collection.snippet.jsx"
 import propDescription from "./propDescription"
 
 export default () =>
@@ -19,7 +19,7 @@ export default () =>
     </p>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(collectionSnippet)} scope={{ React, Button: DemoButton }} />
+    <Playground codeText={toReactPlayground(String(collectionSnippet))} scope={{ React, Button: DemoButton }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />

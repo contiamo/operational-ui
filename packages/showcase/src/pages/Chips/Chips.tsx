@@ -5,8 +5,8 @@ import Playground from "component-playground"
 import Table from "../../components/PropsTable/PropsTable"
 import { Chip as DemoChip, PlusChip as DemoPlusChip, CardHeader } from "contiamo-ui-components"
 
-import simpleSnippet from "./snippets/simple-chip.snippet"
-import plusSnippet from "./snippets/plus-chip.snippet"
+import * as simpleSnippet from "./snippets/simple-chip.snippet"
+import * as plusSnippet from "./snippets/plus-chip.snippet"
 import { toReactPlayground } from "../../utils/snippet"
 import propDescription from "./propDescription"
 
@@ -26,7 +26,7 @@ export default () =>
     </div>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(simpleSnippet)} scope={{ React, Chip: DemoChip }} />
+    <Playground codeText={toReactPlayground(String(simpleSnippet))} scope={{ React, Chip: DemoChip }} />
 
     <h4>Props</h4>
     <Table props={propDescription.chip} />
@@ -41,7 +41,7 @@ export default () =>
     </p>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(plusSnippet)} scope={{ React, PlusChip: DemoPlusChip }} />
+    <Playground codeText={toReactPlayground(String(plusSnippet))} scope={{ React, PlusChip: DemoPlusChip }} />
 
     <h4>Props</h4>
     <Table props={propDescription.plusChip} />

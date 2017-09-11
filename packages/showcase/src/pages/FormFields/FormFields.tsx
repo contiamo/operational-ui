@@ -6,8 +6,8 @@ import SyntaxHighlighter from "react-syntax-highlighter"
 import Table from "../../components/PropsTable/PropsTable"
 import { Input as DemoInput, Select as DemoSelect, CardHeader } from "contiamo-ui-components"
 
-import inputSnippet from "./snippets/input.snippet"
-import selectSnippet from "./snippets/select.snippet"
+import * as inputSnippet from "./snippets/input.snippet"
+import * as selectSnippet from "./snippets/select.snippet"
 import optionSnippet from "./snippets/option"
 import propDescription from "./propDescription"
 import { toReactPlayground } from "../../utils/snippet"
@@ -24,7 +24,7 @@ export default () =>
     <CardHeader>Input</CardHeader>
     <p>This component lives up to its name, allowing a user to input text, numbers, or other data.</p>
 
-    <Playground codeText={toReactPlayground(inputSnippet)} scope={{ React, Input: DemoInput }} />
+    <Playground codeText={toReactPlayground(String(inputSnippet))} scope={{ React, Input: DemoInput }} />
 
     <h4>Props</h4>
     <Table props={propDescription.Input} />
@@ -35,16 +35,14 @@ export default () =>
       Select elements can have options filled onClick, and also support filters.
     </p>
 
-    <Playground codeText={toReactPlayground(selectSnippet)} scope={{ React, Select: DemoSelect }} />
+    <Playground codeText={toReactPlayground(String(selectSnippet))} scope={{ React, Select: DemoSelect }} />
 
     <h4>Return Value</h4>
     <p>
       The Select component holds its value in its `state`. The value is either an `Option` object, or an Array of
       `Option` objects, depending on the `multiple` prop. The shape of an Option object is described below.
     </p>
-    <SyntaxHighlighter language="javascript">
-      {optionSnippet}
-    </SyntaxHighlighter>
+    <SyntaxHighlighter language="javascript">{optionSnippet}</SyntaxHighlighter>
 
     <h4>Props</h4>
     <Table props={propDescription.Select} />

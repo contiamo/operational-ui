@@ -11,10 +11,9 @@
     "package": "npm run clean && tsc",
     "package:watch": "npm run clean && tsc -w",
     "test": "jest",
-    "flow": "flow",
     "test:watch": "jest --watch",
     "lint": "tslint ./src/**/* --fix && tslint index.ts --fix",
-    "precommit": "npm run test && npm run lint"
+    "precommit": "npm run lint"
   },
   "devDependencies": {
     "@types/tinycolor2": "^1.4.0",

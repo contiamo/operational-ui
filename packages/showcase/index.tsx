@@ -11,7 +11,7 @@ const render = (Component: React.ComponentType) => {
     <AppContainer>
       <App />
     </AppContainer>,
-    document.querySelector("#app")
+    document.querySelector("#app"),
   )
   return true
 }

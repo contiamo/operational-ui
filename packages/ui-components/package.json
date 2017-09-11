@@ -10,8 +10,8 @@
   "scripts": {
     "package": "rm -rf lib && tsc",
     "package:watch": "webpack-dev-server",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "echo 'Add test script here.'",
+    "test:watch": "echo 'Add test watch script here.'"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.3",
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@types/node": "^8.0.27",
+    "@types/react": "^16.0.5",
     "@types/react-icons": "^2.2.2",
     "@types/react-router-dom": "^4.0.7",
     "@types/tinycolor2": "^1.4.0",

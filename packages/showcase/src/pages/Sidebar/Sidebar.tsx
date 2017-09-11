@@ -5,7 +5,7 @@ import Playground from "component-playground"
 import { Sidebar as DemoSidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
-import snippet from "./snippets/sidebar.snippet"
+import * as snippet from "./snippets/sidebar.snippet"
 import propDescription from "./propDescription"
 import { toReactPlayground } from "../../utils/snippet"
 
@@ -32,7 +32,7 @@ export default () =>
 
     <h4>Usage</h4>
     <Playground
-      codeText={toReactPlayground(snippet)}
+      codeText={toReactPlayground(String(snippet))}
       scope={{ React, Sidebar: DemoSidebar, SidebarItem, SidebarLink, fetch }}
     />
 

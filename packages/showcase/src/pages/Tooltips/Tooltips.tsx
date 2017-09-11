@@ -6,7 +6,7 @@ import SyntaxHighlighter from "react-syntax-highlighter"
 import { Tooltip as DemoTooltip, CardHeader } from "contiamo-ui-components"
 import Table from "../../components/PropsTable/PropsTable"
 
-import basicSnippet from "./snippets/basic.snippet"
+import * as basicSnippet from "./snippets/basic.snippet"
 import withTooltipSnippet from "./snippets/with-tooltip"
 import propDescription from "./propDescription"
 import { toReactPlayground } from "../../utils/snippet"
@@ -28,7 +28,7 @@ export default () =>
     </p>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(basicSnippet)} scope={{ React, Tooltip: StickyTooltip }} />
+    <Playground codeText={toReactPlayground(String(basicSnippet))} scope={{ React, Tooltip: StickyTooltip }} />
 
     <h4>Props</h4>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
@@ -42,9 +42,7 @@ export default () =>
     <div style={{ marginBottom: 32 }} />
 
     <h4>Usage</h4>
-    <SyntaxHighlighter language="javascript">
-      {withTooltipSnippet}
-    </SyntaxHighlighter>
+    <SyntaxHighlighter language="javascript">{withTooltipSnippet}</SyntaxHighlighter>
     <p>
       <strong>
         Note: The `color` and `anchor` props are still available, but prepended with the word `tooltip` in order not to

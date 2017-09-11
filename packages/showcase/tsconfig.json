@@ -4,6 +4,7 @@
     "target": "ES5",
     "module": "commonjs",
     "sourceMap": true,
+    "allowJs": true,
     "noImplicitAny": true,
     "jsx": "react",
     "baseUrl": ".",
