@@ -14,7 +14,8 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)/,
-        loader: "awesome-typescript-loader"
+        loader: "awesome-typescript-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.(js|jsx)/,
@@ -22,12 +23,14 @@ module.exports = {
           // Documentation snippets
           {
             test: /\.snippet/,
-            loader: "raw-loader"
+            loader: "raw-loader",
+            exclude: /node_modules/,
           },
           // All other JS
           {
             test: /.*/,
-            loader: "babel-loader"
+            loader: "babel-loader",
+            exclude: /node_modules/,
           }
         ]
       },
