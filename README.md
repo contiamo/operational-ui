@@ -1,5 +1,5 @@
 # [Contiamo UI](https://ui.contiamo.com)
-## A UI library for data-driven applications.
+### A UI library for data-driven applications.
 
 This is a [monorepo](https://danluu.com/monorepo/) consisting of three interdependent, independent packages.
 1. [UI Components](https://github.com/Contiamo/ui-components/tree/master/packages/ui-components)
