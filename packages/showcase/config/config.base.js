@@ -2,8 +2,6 @@ const { resolve } = require("path"),
   webpack = require("webpack"),
   HtmlWebpackPlugin = require("html-webpack-plugin")
 
-console.log("using this config")
-
 module.exports = {
   // We use babel-polyfill for async/await
   entry: ["regenerator-runtime/runtime", resolve(__dirname, "..", "index.tsx")],

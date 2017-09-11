@@ -1,6 +1,5 @@
 declare module "*.snippet.jsx" {
   const content: any
-  export const a: string
   export default content
 }
 
