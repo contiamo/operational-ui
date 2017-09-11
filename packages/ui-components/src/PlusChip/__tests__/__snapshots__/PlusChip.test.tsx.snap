@@ -2,10 +2,10 @@
 
 exports[`Plus Chip Should correctly render 1`] = `
 <div
-  className="undefined plus-chip"
+  className="undefined PlusChip"
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
-  <GoPlus />
+  +
 </div>
 `;

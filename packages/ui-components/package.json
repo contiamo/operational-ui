@@ -10,8 +10,8 @@
   "scripts": {
     "package": "rm -rf lib && tsc",
     "package:watch": "webpack-dev-server",
-    "test": "echo 'Add test script here.'",
-    "test:watch": "echo 'Add test watch script here.'"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.3",
@@ -74,11 +74,26 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "setupTestFrameworkScriptFile": "../../node_modules/jest-enzyme/lib/index.js",
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"]
+    "snapshotSerializers": [
+      "../../node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

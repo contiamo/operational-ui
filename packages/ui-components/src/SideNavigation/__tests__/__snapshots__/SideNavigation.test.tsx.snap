@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNavigation component renders 1`] = `
-<bound 
+<SideNavigation
   className="css-14z6lhj"
   expandOnHover={false}
   expandedWidth={280}

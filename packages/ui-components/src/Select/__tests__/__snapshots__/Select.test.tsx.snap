@@ -40,7 +40,7 @@ exports[`Select Should render correctly 1`] = `
     className=" Select"
     onClick={[Function]}
     role="listbox"
-    tabIndex="-2"
+    tabIndex={-2}
   >
     <div
       className="Select__value"

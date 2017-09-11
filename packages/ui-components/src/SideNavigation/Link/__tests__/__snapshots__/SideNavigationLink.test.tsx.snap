@@ -5,7 +5,7 @@ exports[`SideNavigationLink Should properly respond to clicks 1`] = `
   className="hi"
   onClick={[Function]}
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   Hi, I'm a Link
 </div>
@@ -15,7 +15,7 @@ exports[`SideNavigationLink Should render 1`] = `
 <div
   className="hi"
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   Hi, I'm a Link
 </div>

@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SidebarLink Should display a symbol to the right 1`] = `
-<glamorous.Div
+<div
   className="hi SideNavigationLink"
-  to=""
 >
   sup
   <div
@@ -11,7 +10,7 @@ exports[`SidebarLink Should display a symbol to the right 1`] = `
   >
     % s  
   </div>
-</glamorous.Div>
+</div>
 `;
 
 exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`] = `
@@ -25,10 +24,9 @@ exports[`SidebarLink Should render a react-router link if given a \`to\` prop 1`
 `;
 
 exports[`SidebarLink Should render correctly 1`] = `
-<glamorous.Div
+<div
   className="hi SideNavigationLink"
-  to=""
 >
   sup
-</glamorous.Div>
+</div>
 `;

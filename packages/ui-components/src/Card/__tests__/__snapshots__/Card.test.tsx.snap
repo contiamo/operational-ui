@@ -4,4 +4,4 @@ exports[`Card Should render 1`] = `
 <div>
   hi
 </div>
-`
+`;

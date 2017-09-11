@@ -6,4 +6,4 @@ exports[`Header Header component renders 1`] = `
 >
   Hello
 </div>
-`
+`;

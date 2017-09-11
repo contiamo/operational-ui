@@ -4,7 +4,7 @@ exports[`Button Component Should initialize properly 1`] = `
 <div
   className=" Button"
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   hi
 </div>

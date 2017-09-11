@@ -5,7 +5,7 @@ exports[`SideNavigationHeader Should render correctly 1`] = `
   className="undefined SideNavigationHeader"
   onClick={[Function]}
   role="listbox"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   hi
   <div

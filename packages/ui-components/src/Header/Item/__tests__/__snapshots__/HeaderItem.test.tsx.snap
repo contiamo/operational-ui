@@ -3,7 +3,7 @@
 exports[`HeaderItem Looks different when active 1`] = `
 <div
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   My name is Ed
 </div>
@@ -12,7 +12,7 @@ exports[`HeaderItem Looks different when active 1`] = `
 exports[`HeaderItem Renders 1`] = `
 <div
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   My name is Ed
 </div>

@@ -34,11 +34,15 @@ const Icon: SFC<Props> = ({
     props = {
       size: pixelSize,
     },
+    // @todo -> this, better
     IconLib = ReactFeather as any
 
-  const Comp = IconLib[name]
-
-  return <Comp {...props} />
+  if (IconLib.hasOwnProperty(name)) {
+    const Comp = IconLib[name]
+    return <Comp {...props} />
+  } else {
+    return <div>Icon doesn't exist</div>
+  }
 }
 export default Icon
 export { Icon }
