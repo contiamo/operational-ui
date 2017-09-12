@@ -1,35 +1,23 @@
 {
   "name": "contiamo-ui",
   "version": "1.0.0",
-  "description": "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
+  "description":
+    "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
   "repository": "git@github.com:Contiamo/ui-components.git",
-  "private": "true",
+  "private": true,
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
+    "bootstrap": "lerna bootstrap",
+    "postinstall": "lerna bootstrap",
     "package": "lerna run package",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "precommit": "npm run lint && npm run test"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "enzyme": "^2.9.1",
     "husky": "^0.14.3",
-    "jest": "^21.0.2",
-    "jest-enzyme": "^3.8.2",
-    "jest-serializer-enzyme": "^1.0.0",
-    "lerna": "^2.1.2",
-    "ts-jest": "^21.0.0",
-    "typescript": "^2.5.2",
-    "webpack-dev-server": "^2.7.1"
-  },
-  "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "regenerator-runtime": "^0.11.0",
-    "webpack": "^3.5.5"
+    "lerna": "^2.1.2"
   },
   "workspaces": ["packages/*"]
 }
