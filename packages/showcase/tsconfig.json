@@ -11,8 +11,9 @@
     "paths": {
       "types": ["types"]
     },
-    "lib": ["dom", "es6", "es2016", "dom.iterable", "scripthost"]
+    "lib": ["dom", "es6", "es2016", "dom.iterable", "scripthost"],
+    "allowJs": true
   },
-  "include": ["./index.tsx", "./types/**/*"],
+  "include": ["./index.tsx", "./types/**/*", "../../shared-types/**/*"],
   "exclude": ["./node_modules"]
 }

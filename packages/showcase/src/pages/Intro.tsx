@@ -21,7 +21,7 @@ const myCard = ({ className }: { className?: string }) => (
           <Grid color="#777" size={30} />
           <h2>Composed</h2>
         </IntroCard>
-        <Link to="./visualizations">
+        <Link to="/visualizations">
           <IntroCard className="card">
             <BarChart2 color="#777" size={30} />
             <h2>Visualizations</h2>
