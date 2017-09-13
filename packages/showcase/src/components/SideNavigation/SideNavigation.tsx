@@ -59,10 +59,17 @@ const style: {} = (): {} => ({
           <div className="SideNavigationItem__label">Composed</div>
         </Link>
       </SideNavigationItem>
-      <SideNavigationItem tooltip="Visualizations">
-        <Link to="#">
-          <BarChart2 color="#fff" size={20} />
-          <div className="SideNavigationItem__label">Visualizations</div>
+      <SideNavigationItem active={location && location.pathname.match(/\/visualizations/)} tooltip="Visualizations">
+        <Link to="/visualizations">
+          <BarChart2 color={location && location.pathname.match(/\/visualizations/) ? "#67FFAA" : "#fff"} size={20} />
+          <Div
+            css={{
+              color: location && location.pathname.match(/\/visualizations/) ? "#67FFAA" : "#fff",
+            }}
+            className="SideNavigationItem__label"
+          >
+            Visualizations
+          </Div>
         </Link>
       </SideNavigationItem>
       <Div css={{ flexGrow: 1, height: "100%" }} />

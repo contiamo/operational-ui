@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Showcase: Sidebar Should render correctly 1`] = `
+<glamorous(Sidebar)>
+  <glamorous(SidebarItem)
+    label="Process Flow"
+  >
+    <glamorous(SidebarLink)
+      to="/visualizations/processFlow/case01"
+    >
+      Case 1
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
+    label="Bar chart"
+  />
+</glamorous(Sidebar)>
+`;

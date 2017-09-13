@@ -10,12 +10,13 @@ import SideNavigation from "./components/SideNavigation/SideNavigation"
 import Header from "./components/Header/Header"
 
 import IntroPage from "./pages/Intro"
-import ComponentsPage from "./pages/Components"
+import ComponentsPage from "./pages/components/Components"
+import VisualizationsPage from "./pages/visualizations/Visualizations"
 
 type Props = { className?: string }
 
 const SideNavigationWithRouter = withRouter(SideNavigation),
-  App = ({ className }: Props) =>
+  App = ({ className }: Props) => (
     <Router>
       <ThemeProvider theme={contiamoTheme}>
         <div className={className}>
@@ -24,10 +25,12 @@ const SideNavigationWithRouter = withRouter(SideNavigation),
             <Header />
             <Route exact path="/" component={IntroPage} />
             <Route path="/components" component={ComponentsPage} />
+            <Route path="/visualizations" component={VisualizationsPage} />
           </Div>
         </div>
       </ThemeProvider>
-    </Router>,
+    </Router>
+  ),
   styles: {} = {
     display: "flex",
     ...contiamoTheme.fonts,

@@ -2,8 +2,8 @@ import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
 import { Div } from "glamorous"
 
-import Sidebar from "../components/Sidebar/Sidebar"
-import { default as AppCanvas } from "../components/Canvas/Canvas"
+import Sidebar from "../../components/Sidebar/Sidebar"
+import AppCanvas from "../../components/Canvas/Canvas"
 
 import { default as ButtonsPage } from "./Buttons/Buttons"
 import { default as FormFieldsPage } from "./FormFields/FormFields"
@@ -24,7 +24,7 @@ export default () =>
       alignItems: "flex-start",
       padding: 16,
       width: "100%",
-      height: "100vh",
+      height: "100vh"
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />

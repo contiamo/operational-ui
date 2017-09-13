@@ -4,12 +4,12 @@ import Playground from "component-playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import { Tooltip as DemoTooltip, CardHeader } from "contiamo-ui-components"
-import Table from "../../components/PropsTable/PropsTable"
+import Table from "../../../components/PropsTable/PropsTable"
 
 import * as basicSnippet from "./snippets/basic.snippet"
 import withTooltipSnippet from "./snippets/with-tooltip"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
+import { toReactPlayground } from "../../../utils/snippet"
 
 const StickyTooltip = glamorous(DemoTooltip)({
   position: "relative",

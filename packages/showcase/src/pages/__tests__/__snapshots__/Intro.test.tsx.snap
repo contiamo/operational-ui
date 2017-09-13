@@ -117,53 +117,57 @@ exports[`IntroPage Should render correctly 1`] = `
         Composed
       </h2>
     </div>
-    <div
-      class="css-13my6zf card card_disabled"
+    <a
+      href="/visualizations"
     >
-      <svg
-        height="30"
-        viewbox="0 0 24 24"
-        width="30"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="css-13my6zf card"
       >
-        <rect
-          fill="none"
-          height="18"
-          stroke="#777"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          width="4"
-          x="10"
-          y="3"
-        />
-        <rect
-          fill="none"
-          height="13"
-          stroke="#777"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          width="4"
-          x="18"
-          y="8"
-        />
-        <rect
-          fill="none"
-          height="8"
-          stroke="#777"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          width="4"
-          x="2"
-          y="13"
-        />
-      </svg>
-      <h2>
-        Visualizations
-      </h2>
-    </div>
+        <svg
+          height="30"
+          viewbox="0 0 24 24"
+          width="30"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="none"
+            height="18"
+            stroke="#777"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="4"
+            x="10"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="13"
+            stroke="#777"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="4"
+            x="18"
+            y="8"
+          />
+          <rect
+            fill="none"
+            height="8"
+            stroke="#777"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="4"
+            x="2"
+            y="13"
+          />
+        </svg>
+        <h2>
+          Visualizations
+        </h2>
+      </div>
+    </a>
   </div>
 </div>
 `;

@@ -2,12 +2,12 @@ import * as React from "react"
 
 import Playground from "component-playground"
 
-import Table from "../../components/PropsTable/PropsTable"
+import Table from "../../../components/PropsTable/PropsTable"
 import { Chip as DemoChip, PlusChip as DemoPlusChip, CardHeader } from "contiamo-ui-components"
 
-import * as simpleSnippet from "./snippets/simple-chip.snippet"
-import * as plusSnippet from "./snippets/plus-chip.snippet"
-import { toReactPlayground } from "../../utils/snippet"
+import simpleSnippet from "./snippets/simple-chip.snippet"
+import plusSnippet from "./snippets/plus-chip.snippet"
+import { toReactPlayground } from "../../../utils/snippet"
 import propDescription from "./propDescription"
 
 export default () =>

@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 import { BrowserRouter as Router } from "react-router-dom"
 
-import ComponentsPage from "../Components"
+import ComponentsPage from "../components/Components"
 
 describe("ComponentsPage", () => {
   it("Should render correctly", () => {
@@ -10,8 +10,8 @@ describe("ComponentsPage", () => {
       render(
         <Router>
           <ComponentsPage />
-        </Router>
-      )
+        </Router>,
+      ),
     ).toMatchSnapshot()
   })
 })

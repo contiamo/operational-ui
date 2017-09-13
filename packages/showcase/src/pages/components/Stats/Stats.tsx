@@ -3,11 +3,11 @@ import * as React from "react"
 import Playground from "component-playground"
 import { Stat as DemoStat, CardHeader } from "contiamo-ui-components"
 
-import Table from "../../components/PropsTable/PropsTable"
+import Table from "../../../components/PropsTable/PropsTable"
 
 import * as snippet from "./snippets/stats.snippet"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
+import { toReactPlayground } from "../../../utils/snippet"
 
 export default () =>
   <div>

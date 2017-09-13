@@ -71,17 +71,22 @@ exports[`App Showcase: SideNavigation Should render correctly 1`] = `
   >
     <Link
       replace={false}
-      to="#"
+      to="/visualizations"
     >
       <BarChart2
         color="#fff"
         size={20}
       />
-      <div
+      <glamorous.Div
         className="SideNavigationItem__label"
+        css={
+          Object {
+            "color": "#fff",
+          }
+        }
       >
         Visualizations
-      </div>
+      </glamorous.Div>
     </Link>
   </glamorous(class_1)>
   <glamorous.Div

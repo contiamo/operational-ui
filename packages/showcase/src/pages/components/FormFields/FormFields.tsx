@@ -3,14 +3,14 @@ import * as React from "react"
 import Playground from "component-playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
-import Table from "../../components/PropsTable/PropsTable"
+import Table from "../../../components/PropsTable/PropsTable"
 import { Input as DemoInput, Select as DemoSelect, CardHeader } from "contiamo-ui-components"
 
 import * as inputSnippet from "./snippets/input.snippet"
 import * as selectSnippet from "./snippets/select.snippet"
 import optionSnippet from "./snippets/option"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
+import { toReactPlayground } from "../../../utils/snippet"
 
 export default () =>
   <div>

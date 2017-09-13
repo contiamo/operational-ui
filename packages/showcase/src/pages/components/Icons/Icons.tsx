@@ -2,11 +2,11 @@ import * as React from "react"
 
 import Playground from "component-playground"
 
-import Table from "../../components/PropsTable/PropsTable"
+import Table from "../../../components/PropsTable/PropsTable"
 import { Icon as DemoIcon, CardHeader } from "contiamo-ui-components"
 
 import * as snippet from "./snippets/collection.snippet"
-import { toReactPlayground } from "../../utils/snippet"
+import { toReactPlayground } from "../../../utils/snippet"
 import propDescription from "./propDescription"
 
 export default () =>

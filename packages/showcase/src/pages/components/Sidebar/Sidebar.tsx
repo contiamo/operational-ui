@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"
 import Playground from "component-playground"
 import { Sidebar as DemoSidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
 
-import Table from "../../components/PropsTable/PropsTable"
-import * as snippet from "./snippets/sidebar.snippet"
+import Table from "../../../components/PropsTable/PropsTable"
+import snippet from "./snippets/sidebar.snippet"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
+import { toReactPlayground } from "../../../utils/snippet"
 
 export const fetch = (text: any) => new Promise(resolve => setTimeout(() => resolve(text), 2000))
 
