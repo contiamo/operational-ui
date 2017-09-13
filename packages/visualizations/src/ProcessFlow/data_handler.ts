@@ -1,7 +1,7 @@
-import node from "./node"
-import nodeAccessors from "./node_accessors"
-import link from "./link"
-import linkAccessors from "./link_accessors"
+import Node from "./node"
+import NodeAccessors from "./node_accessors"
+import Link from "./link"
+import LinkAccessors from "./link_accessors"
 import { bind, map, forEach, find, times, extend } from "lodash/fp"
 import { TNode, TLink, TJourney, TData, TInputData, TLinkAttrs, TAccessors } from "./typings"
 
@@ -9,7 +9,7 @@ class DataHandler {
   journeys: TJourney[]
   nodes: TNode[]
   links: TLink[]
-  nodeAccessors: TAccessors
+  nodeAccessors: TAccessorsf
   linkAccessors: TAccessors
 
   prepareData(data: TInputData): TData {
@@ -40,13 +40,13 @@ class DataHandler {
   }
 
   setNodeAccessors(accessors: TAccessors) {
-    this.nodeAccessors = new nodeAccessors()
+    this.nodeAccessors = new NodeAccessors()
     this.nodeAccessors.setAccessors(accessors)
   }
 
   addNode(attrs: {}): TNode {
     extend.convert({ immutable: false })(attrs, { size: 0 })
-    return new node(attrs, this.nodeAccessors.accessors)
+    return new Node(attrs, this.nodeAccessors.accessors)
   }
 
   calculateNodeSizes(): void {
@@ -72,12 +72,12 @@ class DataHandler {
   }
 
   setLinkAccessors(accessors: TAccessors): void {
-    this.linkAccessors = new linkAccessors()
+    this.linkAccessors = new LinkAccessors()
     this.linkAccessors.setAccessors(accessors)
   }
 
   addLink(attrs: TLinkAttrs): TLink {
-    return new link(attrs, this.linkAccessors.accessors)
+    return new Link(attrs, this.linkAccessors.accessors)
   }
 
   computeLinks(): void {
