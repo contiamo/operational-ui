@@ -3,5 +3,4 @@ node_modules
 .idea
 *.log
 coverage
-fonts
 !public/fonts
