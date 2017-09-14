@@ -8,7 +8,6 @@
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "preinstall": "node ./scripts/preinstall",
     "bootstrap": "lerna bootstrap",
     "postbootstrap": "node ./scripts/postbootstrap",
     "postinstall": "node ./scripts/postinstall",
