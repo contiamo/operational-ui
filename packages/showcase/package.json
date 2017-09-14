@@ -12,7 +12,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint ./src/**/* ./index.tsx --fix",
-    "precommit": "npm run test && npm run lint"
+    "precommit": "npm run test && npm run lint",
+    "preversion": "npm run test && npm run lint",
+    "version": "npm run build --production && git add -A dist"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.43",
