@@ -8,7 +8,11 @@
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
+    "preinstall": "node ./scripts/preinstall",
     "bootstrap": "lerna bootstrap",
+    "postbootstrap": "node ./scripts/postbootstrap",
+    "postinstall": "node ./scripts/postinstall",
+    "start": "cd packages/showcase && npm run start",
     "package": "lerna run package",
     "lint": "lerna run lint",
     "test": "lerna run test",
