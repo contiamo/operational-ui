@@ -9,7 +9,6 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "postinstall": "lerna bootstrap",
     "package": "lerna run package",
     "lint": "lerna run lint",
     "test": "lerna run test",
