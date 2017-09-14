@@ -4,4 +4,3 @@ node_modules
 *.log
 flow-typed/npm
 coverage
-fonts
