@@ -10,6 +10,19 @@ The utilities are the most basic package, providing helper functions to both `sh
 
 ## Getting Started
 
+### Dev Setup
+We like yarn, but you're welcome to substitute npm's counterparts if you wish. To get set up,
+
+`git clone git@github.com:Contiamo/ui-components.git`
+`cd ui-components`
+`yarn install` (you'll start getting instructions post-install)
+`yarn bootstrap`👢
+`yarn start`✈️ 
+
+From that point, you'll be ready to go. Any changes you make in `packages/ui-components` or `packages/utils` will be reflected in the showcase, which should now be running at `http://localhost:8080/`. Happy coding! 🎉
+
+### Consuming Components
+
 Ideally, you would only use `ui-components` in your project, and let the `showcase` serve as [_living documentation_](https://ui.contiamo.com). `ui-components` depends on `utils`, which will be installed for you automatically.
 
 So, getting started is as simple as `yarn add contiamo-ui-components`, or `npm install contiamo-ui-components`.
@@ -18,7 +31,7 @@ Once installed, you will be able to import any component you require and use wha
 
 Please see the [full documentation](https://ui.contiamo.com) for more details.
 
-## Example
+#### Example
 ```javascript
 import React from "react"
 import { render } from "react-dom"
