@@ -13,11 +13,11 @@ The utilities are the most basic package, providing helper functions to both `sh
 ### Dev Setup
 We like yarn, but you're welcome to substitute npm's counterparts if you wish. To get set up,
 
-`git clone git@github.com:Contiamo/ui-components.git`
-`cd ui-components`
-`yarn install` (you'll start getting instructions post-install)
-`yarn bootstrap`👢
-`yarn start`✈️ 
+- `git clone git@github.com:Contiamo/ui-components.git`
+- `cd ui-components`
+- `yarn install` (you'll start getting instructions post-install)
+- `yarn bootstrap`👢
+- `yarn start`✈️ 
 
 From that point, you'll be ready to go. Any changes you make in `packages/ui-components` or `packages/utils` will be reflected in the showcase, which should now be running at `http://localhost:8080/`. Happy coding! 🎉
 
