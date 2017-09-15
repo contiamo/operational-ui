@@ -20,15 +20,13 @@ type Props = StyleProps & {
 }
 
 const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps): any => {
-  const backgroundColor: string = color
-    ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") as string
-    : "white"
+  const backgroundColor: string = color ? hexOrColor(color)(theme.colors[color] || "white") as string : "white"
   const activeBackgroundColor: string = darken(backgroundColor)(5)
   const textColor = readableTextColor(backgroundColor)(["black", "white"])
   const activeBoxShadow = "2px 2px 4px rgba(0, 0, 0, 0.14) inset"
   const isGroup = modifiers && modifiers.indexOf("group") > -1
   const isSpace = modifiers && modifiers.indexOf("space") > -1
-  const spacing = theme.spacing || 16
+  const spacing = theme.spacing
 
   return {
     display: "inline-block",

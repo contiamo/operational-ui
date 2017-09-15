@@ -1,4 +1,4 @@
-import { toReactPlayground } from "../snippet"
+import transformSnippet from "../transform-snippet"
 
 const testSnippet: string = `
 import X from 'Y'
@@ -8,14 +8,15 @@ export default
 <div>
   <h1>Hello!</h1>
 </div>
-`,
-  trimmedTestSnippet: string = `<div>
+`
+
+const transformedTestSnippet: string = `<div>
   <h1>Hello!</h1>
 </div>
 `
 
 describe("ToReactPlayground snippet", () => {
   it("trims", () => {
-    expect(toReactPlayground(testSnippet)).toBe(trimmedTestSnippet)
+    expect(transformSnippet(testSnippet)).toBe(transformedTestSnippet)
   })
 })

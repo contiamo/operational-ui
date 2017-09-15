@@ -17,14 +17,14 @@ import { default as Icons } from "./Icons/Icons"
 const SidebarWithRouter = withRouter(Sidebar),
   InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
 
-export default () =>
+export default () => (
   <Div
     css={{
       display: "flex",
       alignItems: "flex-start",
       padding: 16,
       width: "100%",
-      height: "100vh",
+      height: "100vh"
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />
@@ -41,3 +41,4 @@ export default () =>
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>
+)

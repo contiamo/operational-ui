@@ -1,24 +1,23 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import Playground from "component-playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
-import { Tooltip as DemoTooltip, CardHeader } from "contiamo-ui-components"
+import Playground from "../../components/Playground/Playground"
+import { Tooltip, CardHeader } from "contiamo-ui-components"
 import Table from "../../components/PropsTable/PropsTable"
 
 import * as basicSnippet from "./snippets/basic.snippet"
 import withTooltipSnippet from "./snippets/with-tooltip"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
 
-const StickyTooltip = glamorous(DemoTooltip)({
+const StickyTooltip = glamorous(Tooltip)({
   position: "relative",
   top: 0,
   left: 0,
   transform: "none"
 })
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Tooltips</CardHeader>
     <p>
@@ -28,7 +27,7 @@ export default () =>
     </p>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(String(basicSnippet))} scope={{ React, Tooltip: StickyTooltip }} />
+    <Playground snippet={String(basicSnippet)} components={{ Tooltip }} />
 
     <h4>Props</h4>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
@@ -50,3 +49,4 @@ export default () =>
       </strong>
     </p>
   </div>
+)

@@ -1,18 +1,17 @@
 import * as React from "react"
 
-import Playground from "component-playground"
+import Playground from "../../components/Playground/Playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Table from "../../components/PropsTable/PropsTable"
-import { Input as DemoInput, Select as DemoSelect, CardHeader } from "contiamo-ui-components"
+import { Input, Select, CardHeader } from "contiamo-ui-components"
 
 import * as inputSnippet from "./snippets/input.snippet"
 import * as selectSnippet from "./snippets/select.snippet"
 import optionSnippet from "./snippets/option"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Form Fields</CardHeader>
 
@@ -24,7 +23,7 @@ export default () =>
     <CardHeader>Input</CardHeader>
     <p>This component lives up to its name, allowing a user to input text, numbers, or other data.</p>
 
-    <Playground codeText={toReactPlayground(String(inputSnippet))} scope={{ React, Input: DemoInput }} />
+    <Playground snippet={String(inputSnippet)} components={{ Input }} />
 
     <h4>Props</h4>
     <Table props={propDescription.Input} />
@@ -35,7 +34,7 @@ export default () =>
       Select elements can have options filled onClick, and also support filters.
     </p>
 
-    <Playground codeText={toReactPlayground(String(selectSnippet))} scope={{ React, Select: DemoSelect }} />
+    <Playground snippet={String(selectSnippet)} components={{ Select }} />
 
     <h4>Return Value</h4>
     <p>
@@ -47,3 +46,4 @@ export default () =>
     <h4>Props</h4>
     <Table props={propDescription.Select} />
   </div>
+)

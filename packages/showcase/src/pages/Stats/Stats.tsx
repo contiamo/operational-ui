@@ -1,15 +1,14 @@
 import * as React from "react"
 
-import Playground from "component-playground"
-import { Stat as DemoStat, CardHeader } from "contiamo-ui-components"
+import Playground from "../../components/Playground/Playground"
+import { Stat, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 
 import * as snippet from "./snippets/stats.snippet"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Stats</CardHeader>
 
@@ -19,14 +18,15 @@ export default () =>
     </p>
 
     <div style={{ display: "flex" }}>
-      <DemoStat label="Components">200,000</DemoStat>
-      <DemoStat label="Reusability">High</DemoStat>
-      <DemoStat label="Potential Added Value">&euro;2M</DemoStat>
+      <Stat label="Components">200,000</Stat>
+      <Stat label="Reusability">High</Stat>
+      <Stat label="Potential Added Value">&euro;2M</Stat>
     </div>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(String(snippet))} scope={{ React, Stat: DemoStat }} />
+    <Playground snippet={String(snippet)} components={{ Stat }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />
   </div>
+)
