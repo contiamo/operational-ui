@@ -11,22 +11,20 @@ type Props = {
   padding?: number
 }
 
-const Card: React.SFC<Props> = ({ className, children }: Props) =>
-    <div className={className}>
-      {children}
-    </div>,
-  style = ({ theme, width, padding }: Props) => ({
-    width,
-    padding: padding ? padding : theme.spacing ? theme.spacing : 16,
-    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
-    backgroundColor: "white",
-    "& p": {
-      lineHeight: "20px",
-    },
-    "& > img": {
-      maxWidth: "100%",
-    },
-  })
+const style = ({ theme, width, padding }: Props) => ({
+  width,
+  padding: padding ? padding : theme.spacing,
+  boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
+  backgroundColor: "white",
+  "& p": {
+    lineHeight: "20px"
+  },
+  "& > img": {
+    maxWidth: "100%"
+  }
+})
+
+const Card: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>
 
 export default glamorous(Card)(style)
-export { Card, CardHeader }
+export { CardHeader }

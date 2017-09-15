@@ -2,7 +2,7 @@
 
 exports[`Chip Should render 1`] = `
 <div
-  className="undefined chip"
+  class="css-112eohk chip"
 >
   Hi
 </div>

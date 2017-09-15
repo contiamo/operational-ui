@@ -13,7 +13,7 @@ import { options } from "../__mocks__/Select.mock"
   - Press escape to close
   - Filters
 */
-global.document = jsdom("<!doctype html><html><body><div id=\"root\"></div></body></html>")
+global.document = jsdom('<!doctype html><html><body><div id="root"></div></body></html>')
 global.window = document.parentWindow
 
 describe("Select", () => {
@@ -36,7 +36,7 @@ describe("Select", () => {
     expect(comp.state().open).toBe(false)
   })
 
-  it("Should support asynchronous toggle hooks", async() => {
+  it("Should support asynchronous toggle hooks", async () => {
     const myFunc = () => new Promise(resolve => setTimeout(resolve, 10))
 
     comp = mount(<Select options={options} onClick={myFunc} />)
@@ -74,7 +74,10 @@ describe("Select", () => {
 
     comp.simulate("click")
 
-    comp.find(".Select__option").last().simulate("click")
+    comp
+      .find(".Select__option")
+      .last()
+      .simulate("click")
 
     expect(comp.state().value).toMatchObject({
       id: 4,
@@ -91,11 +94,17 @@ describe("Select", () => {
 
     // Open and select one open.
     comp.simulate("click")
-    comp.find(".Select__option").first().simulate("click")
+    comp
+      .find(".Select__option")
+      .first()
+      .simulate("click")
 
     // Open and select another option.
     comp.simulate("click")
-    comp.find(".Select__option").last().simulate("click")
+    comp
+      .find(".Select__option")
+      .last()
+      .simulate("click")
 
     // Expect two options to be selected.
     expect(comp.state().value).toMatchObject([
@@ -105,7 +114,10 @@ describe("Select", () => {
 
     // Open and unselect one option.
     comp.simulate("click")
-    comp.find(".Select__option").last().simulate("click")
+    comp
+      .find(".Select__option")
+      .last()
+      .simulate("click")
 
     // Expect one less option to be selected.
     expect(comp.state().value).toMatchObject([{ id: 1, label: "John", value: -10 }])
@@ -122,7 +134,7 @@ describe("Select", () => {
     expect(comp.state().filter).toEqual(/hi/i)
   })
 
-  it("Should support asynchronous pre-filter hooks", async() => {
+  it("Should support asynchronous pre-filter hooks", async () => {
     const myFunc = () => new Promise(resolve => setTimeout(resolve, 10))
     let filterInput
 
@@ -143,9 +155,5 @@ describe("Select", () => {
 
   it("Should gracefully unmount", () => {
     expect(comp.unmount().component.state.mount).toBe(false)
-  })
-
-  it("Should receive proper styles", () => {
-    expect(style({ theme: {} })).toMatchObject({})
   })
 })

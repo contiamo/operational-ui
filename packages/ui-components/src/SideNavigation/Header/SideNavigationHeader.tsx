@@ -24,23 +24,20 @@ type State = {
 
 class SideNavigationHeader extends React.Component<Props, State> {
   static defaultProps: { options: option[] } = {
-    options: [],
+    options: []
   }
   constructor(props: Props) {
     super(props)
     this.state = {
       open: false,
-      value: { id: -1, label: "" },
+      value: { id: -1, label: "" }
     }
   }
   componentDidMount() {
     this.setState(() => ({ value: this.getDefaultValue() }))
   }
   getDefaultValue() {
-    return (
-      this.props.options.find(option => option.default === true) ||
-      this.props.options[0]
-    )
+    return this.props.options.find(option => option.default === true) || this.props.options[0]
   }
   toggle() {
     if (this.props.options.length === 0) {
@@ -57,7 +54,7 @@ class SideNavigationHeader extends React.Component<Props, State> {
   getDropdown() {
     return (
       <div className="SideNavigationHeader__options">
-        {this.props.options.map(option =>
+        {this.props.options.map(option => (
           <div
             key={option.id}
             className="SideNavigationHeader__option"
@@ -68,7 +65,7 @@ class SideNavigationHeader extends React.Component<Props, State> {
           >
             {option.label}
           </div>
-        )}
+        ))}
       </div>
     )
   }
@@ -81,10 +78,7 @@ class SideNavigationHeader extends React.Component<Props, State> {
         role="listbox"
       >
         {this.props.children}
-        {this.state.value &&
-          <div className="SideNavigationHeader__value">
-            {this.state.value.label}
-          </div>}
+        {this.state.value && <div className="SideNavigationHeader__value">{this.state.value.label}</div>}
         {this.props.options.length > 0 && this.state.open && this.getDropdown()}
       </div>
     )
@@ -98,7 +92,7 @@ const style: {} = ({ theme, options }: Props) => {
     alignItems: "center",
     width: "100%",
     borderBottom: "1px solid rgba(255, 255, 255, .1)",
-    padding: theme.spacing ? theme.spacing : 16,
+    padding: theme.spacing,
     cursor: options && options.length ? "pointer" : "default",
     backgroundColor: "inherit",
 
@@ -107,42 +101,42 @@ const style: {} = ({ theme, options }: Props) => {
       content: options && options.length ? '""' : "none",
       position: "absolute",
       top: "50%",
-      right: theme.spacing ? theme.spacing : 16,
+      right: theme.spacing,
       width: 0,
       height: 0,
       opacity: 0,
       transform: "translateY(-50%)",
       animation: `${fadeIn} .3s .3s ease forwards`,
       border: "4px solid transparent",
-      borderTopColor: "white",
+      borderTopColor: "white"
     },
 
     "& .SideNavigationHeader__value": {
       width: "fit-content",
-      whiteSpace: "pre",
+      whiteSpace: "pre"
     },
 
     "& .SideNavigationHeader__options": {
       position: "absolute",
       top: "100%",
       left: 0,
-      zIndex: theme.baseZIndex ? theme.baseZIndex * 1000 : 1000,
+      zIndex: theme.baseZIndex * 1000,
       width: "100%",
       minWidth: "fit-content",
       boxShadow: "0 6px 18px -3px rgba(0, 0, 0, .5)",
-      backgroundColor: "inherit",
+      backgroundColor: "inherit"
     },
 
     "& .SideNavigationHeader__option": {
-      padding: theme.spacing ? theme.spacing : 16,
+      padding: theme.spacing,
       minWidth: "fit-content",
       whiteSpace: "pre",
-      cursor: "pointer",
+      cursor: "pointer"
     },
 
     "& .SideNavigationHeader__option:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.07)",
-    },
+      backgroundColor: "rgba(255, 255, 255, 0.07)"
+    }
   }
 }
 

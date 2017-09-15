@@ -1,11 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNavigation component renders 1`] = `
-<SideNavigation
-  className="css-nughly"
-  expandOnHover={false}
-  expandedWidth={280}
-  fix={false}
-  width={64}
-/>
+<ThemeProvider
+  theme={
+    Object {
+      "baseZIndex": 0,
+      "colors": Object {
+        "accent": "#3333FF",
+        "primary": "#22205F",
+        "secondary": "#00CB98",
+        "tertiary": "#FFFF98",
+        "warn": "#DE1A1A",
+      },
+      "fonts": Object {
+        "WebkitFontSmoothing": "subpixel-antialiased",
+        "fontFamily": "Proxima Nova",
+        "fontSize": 13,
+        "textRendering": "optimizeLegibility",
+      },
+      "greys": Object {
+        "10": "#F5F5F5",
+        "100": "#2D3842",
+        "20": "#F1F1F1",
+        "30": "#D0D9E5",
+        "40": "#C6D1E1",
+        "50": "#BBCADC",
+        "60": "#999999",
+        "70": "#8092B0",
+        "80": "#747474",
+        "90": "#445873",
+        "white": "#FFFFFF",
+      },
+      "spacing": 12,
+    }
+  }
+>
+  <glamorous(SideNavigation) />
+</ThemeProvider>
 `;

@@ -3,7 +3,7 @@
 exports[`Sidebar Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Sidebar
   </div>
@@ -62,7 +62,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
     style="margin-bottom:32px;"
   />
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
     id="sidebar-item"
   >
     SidebarItem
@@ -71,7 +71,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
     An expandable group of SidebarLinks, with added asynchronous functionality.
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>
@@ -160,7 +160,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
     </strong>
   </p>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
     id="sidebar-link"
   >
     SidebarLink
@@ -169,7 +169,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
     A link, but with onClick instead of href.
   </p>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>

@@ -3,7 +3,7 @@
 exports[`Buttons Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Buttons
   </div>
@@ -43,7 +43,7 @@ exports[`Buttons Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>

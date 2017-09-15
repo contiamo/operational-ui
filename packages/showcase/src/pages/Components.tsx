@@ -24,7 +24,7 @@ export default () => (
       alignItems: "flex-start",
       padding: 16,
       width: "100%",
-      height: "100vh"
+      height: "100vh",
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />

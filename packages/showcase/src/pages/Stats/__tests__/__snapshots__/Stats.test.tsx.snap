@@ -3,7 +3,7 @@
 exports[`Cards Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Stats
   </div>
@@ -14,7 +14,7 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-17czskn Stat"
+      class="css-ty11jn Stat"
     >
       <small
         class="Stat__label"
@@ -28,7 +28,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-17czskn Stat"
+      class="css-ty11jn Stat"
     >
       <small
         class="Stat__label"
@@ -42,7 +42,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-17czskn Stat"
+      class="css-ty11jn Stat"
     >
       <small
         class="Stat__label"
@@ -89,7 +89,7 @@ exports[`Cards Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>

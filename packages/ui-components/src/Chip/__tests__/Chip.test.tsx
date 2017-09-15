@@ -1,16 +1,19 @@
 import * as React from "react"
-import { shallow } from "enzyme"
+import { render, mount } from "enzyme"
 
-import { Chip } from "../Chip"
+import ThemelessChip from "../Chip"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+
+const Chip = wrapDefaultTheme(ThemelessChip)
 
 describe("Chip", () => {
   it("Should render", () => {
-    const renderedComponent = shallow(<Chip>Hi</Chip>)
+    const renderedComponent = render(<Chip>Hi</Chip>)
     expect(renderedComponent).toMatchSnapshot()
   })
   it("Should respond to click events", () => {
-    const fn = jest.fn(),
-      renderedComponent = shallow(<Chip onClick={fn}>Hi</Chip>).children(".action").shallow()
+    const fn = jest.fn()
+    const renderedComponent = mount(<Chip onClick={fn}>Hi</Chip>).children(".action")
     renderedComponent.simulate("click")
     expect(fn).toHaveBeenCalled()
   })

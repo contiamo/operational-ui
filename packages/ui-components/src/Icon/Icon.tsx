@@ -1,6 +1,7 @@
 // @todo -> type this better
 import * as React from "react"
 import * as ReactFeather from "react-feather"
+import { withTheme } from "glamorous"
 
 type SizeFactors = {
   [key: string]: number
@@ -9,7 +10,7 @@ type SizeFactors = {
 const sizeFactors: SizeFactors = {
   small: 0.5,
   medium: 1,
-  large: 2,
+  large: 2
 }
 
 type IconName = string
@@ -19,17 +20,17 @@ type Props = {
   name: IconName
   size?: IconSize
   sizeOverride?: number
-  theme?: Theme
+  theme: Theme
 }
 
 const Icon: React.SFC<Props> = ({ name = "Play", size = "medium", sizeOverride, theme }: Props) => {
-  const themeSpacing = theme ? theme.spacing : 16,
-    pixelSize = sizeOverride || themeSpacing * sizeFactors[size],
-    props = {
-      size: pixelSize,
-    },
-    // @todo -> this, better
-    IconLib = ReactFeather as any
+  const pixelSize = sizeOverride || theme.spacing * sizeFactors[size]
+  const props = {
+    size: pixelSize
+  }
+
+  // @todo -> this, better
+  const IconLib = ReactFeather as any
 
   if (IconLib.hasOwnProperty(name)) {
     const Comp = IconLib[name]
@@ -38,5 +39,5 @@ const Icon: React.SFC<Props> = ({ name = "Play", size = "medium", sizeOverride, 
     return <div>Icon doesn't exist</div>
   }
 }
-export default Icon
-export { Icon }
+
+export default withTheme(Icon)

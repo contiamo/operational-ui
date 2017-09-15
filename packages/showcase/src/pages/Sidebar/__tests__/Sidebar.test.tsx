@@ -2,7 +2,10 @@ import * as React from "react"
 import { BrowserRouter as Router } from "react-router-dom"
 import { render } from "enzyme"
 
-import SidebarPage, { fetch } from "../Sidebar"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import ThemelessSidebarPage, { fetch } from "../Sidebar"
+
+const SidebarPage = wrapDefaultTheme(ThemelessSidebarPage)
 
 describe("Sidebar Page", () => {
   it("Should render correctly", () => {
@@ -15,7 +18,7 @@ describe("Sidebar Page", () => {
     ).toMatchSnapshot()
   })
 
-  it("Should have a proper timeout for the async test", async() => {
+  it("Should have a proper timeout for the async test", async () => {
     const fetchedVal = await fetch("hi")
     expect(fetchedVal).toBe("hi")
   })

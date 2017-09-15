@@ -45,19 +45,19 @@ const getTooltipPosition = (anchor: string): tooltipPosition => {
   }
 
 export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor?: string }): {} => {
-  const backgroundColor: string = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "black"
+  const backgroundColor: string = color ? hexOrColor(color)(theme.colors[color]) : "black"
 
   return {
     backgroundColor,
     position: "absolute",
     ...getTooltipPosition(anchor),
-    left: `calc(100% + ${theme.spacing || 0}px)`,
-    zIndex: (theme.baseZIndex || 0) + 1000,
+    left: `calc(100% + ${theme.spacing}px)`,
+    zIndex: theme.baseZIndex + 1000,
     width: "fit-content",
     maxWidth: 200,
     opacity: 0, // Initially, they're hidden...
     transition: ".07s opacity ease", // ...for 0.07 seconds.
-    padding: theme.spacing ? theme.spacing / 2 : 8,
+    padding: theme.spacing / 2,
     borderRadius: 4,
     wordWrap: "break-word",
     boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
@@ -68,10 +68,10 @@ export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor
       content: "''",
       position: "absolute",
       top: 0,
-      left: theme.spacing && theme.spacing * -2,
+      left: theme.spacing * -2,
       display: "block",
-      width: theme.spacing && theme.spacing * 2,
-      height: "100%",
+      width: theme.spacing * 2,
+      height: "100%"
     },
 
     // They say behind every great tooltip is a great caret.
@@ -79,16 +79,16 @@ export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor
       content: "''",
       position: "absolute",
       ...getCaretPosition(anchor || "top")(theme),
-      zIndex: (theme.baseZIndex || 0) * -1,
+      zIndex: theme.baseZIndex * -1,
       width: 0,
       height: 0,
       borderColor: "transparent",
       borderStyle: "solid",
-      borderRightColor: backgroundColor,
+      borderRightColor: backgroundColor
     },
 
     "&.active": {
-      opacity: 1,
-    },
+      opacity: 1
+    }
   }
 }

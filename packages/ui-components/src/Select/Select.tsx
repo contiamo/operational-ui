@@ -36,7 +36,7 @@ class Select extends React.Component<Props, State> {
     className: "",
     filterable: false,
     disabled: false,
-    multiple: false,
+    multiple: false
   }
 
   constructor(props: Props) {
@@ -45,7 +45,7 @@ class Select extends React.Component<Props, State> {
       open: false,
       updating: false,
       value: this.getInitialValue(),
-      filter: new RegExp(/./),
+      filter: new RegExp(/./)
     }
   }
 
@@ -131,7 +131,7 @@ class Select extends React.Component<Props, State> {
       this.setState((prevState: State) => {
         if (Array.isArray(prevState.value)) {
           return {
-            value: [...prevState.value, option].filter(item => !item.placeholder),
+            value: [...prevState.value, option].filter(item => !item.placeholder)
           }
         } else {
           throw new Error(
@@ -143,7 +143,7 @@ class Select extends React.Component<Props, State> {
       this.setState(prevState => {
         if (Array.isArray(prevState.value)) {
           return {
-            value: [...prevState.value.slice(0, optionIndex), ...prevState.value.slice(optionIndex + 1)],
+            value: [...prevState.value.slice(0, optionIndex), ...prevState.value.slice(optionIndex + 1)]
           }
         } else {
           throw new Error(
@@ -194,7 +194,7 @@ class Select extends React.Component<Props, State> {
 
   close() {
     this.setState(() => ({
-      open: false,
+      open: false
     }))
   }
 
@@ -209,16 +209,14 @@ class Select extends React.Component<Props, State> {
         tabIndex={-2}
         onClick={() => this.toggle()}
       >
-        <div className="Select__value">
-          {this.getDisplayValue() || this.props.placeholder}
-        </div>
-        {this.props.options.length && this.state.open
-          ? <div className="Select__options">
-              {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
-              <div className="Select__options_list">
-                {this.props.options.map(
-                  (option: option) =>
-                    option.label.match(this.state.filter) &&
+        <div className="Select__value">{this.getDisplayValue() || this.props.placeholder}</div>
+        {this.props.options.length && this.state.open ? (
+          <div className="Select__options">
+            {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
+            <div className="Select__options_list">
+              {this.props.options.map(
+                (option: option) =>
+                  option.label.match(this.state.filter) && (
                     <SelectOption
                       key={option.id}
                       onClick={() => this.selectOption(option)}
@@ -226,10 +224,13 @@ class Select extends React.Component<Props, State> {
                     >
                       {option.label}
                     </SelectOption>
-                )}
-              </div>
+                  )
+              )}
             </div>
-          : ""}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     )
   }

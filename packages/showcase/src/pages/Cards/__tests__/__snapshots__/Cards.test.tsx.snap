@@ -3,7 +3,7 @@
 exports[`Cards Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Cards
   </div>
@@ -43,7 +43,7 @@ exports[`Cards Page Should render correctly 1`] = `
     </div>
   </div>
   <div
-    class="css-1wg5beq"
+    class="css-1bp7grg"
   >
     Hello, I am a 
     <em>
@@ -84,7 +84,7 @@ exports[`Cards Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>

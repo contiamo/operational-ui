@@ -11,42 +11,37 @@ type Props = {
   color?: string
 }
 
-const Stat: React.SFC<Props> = ({ className, label, children }: Props) =>
-    <div className={`${className} Stat`}>
-      <small className="Stat__label">
-        {label}
-      </small>
-      <span className="Stat__value">
-        {children}
-      </span>
-    </div>,
-  style: {} = ({ theme, color }: Props) => {
-    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
+const style: {} = ({ theme, color }: Props) => {
+  const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
 
-    return {
-      backgroundColor,
-      display: "flex",
-      flexDirection: "column",
-      width: "fit-content",
-      padding: theme.spacing >= 0 ? theme.spacing && theme.spacing / 2 : 8,
-      color: readableTextColor(backgroundColor)(["black", "white"]),
+  return {
+    backgroundColor,
+    display: "flex",
+    flexDirection: "column",
+    width: "fit-content",
+    padding: theme.spacing / 2,
+    color: readableTextColor(backgroundColor)(["black", "white"]),
 
-      "&.Stat + .Stat": {
-        borderLeft: "1px solid",
-        borderLeftColor: darken(backgroundColor)(10),
-      },
+    "&.Stat + .Stat": {
+      borderLeft: "1px solid",
+      borderLeftColor: darken(backgroundColor)(10)
+    },
 
-      "& .Stat__label": {
-        marginBottom: 3,
-        fontSize: ".8rem",
-        fontWeight: 600,
-        color: readableTextColor(backgroundColor)([
-          theme.greys ? theme.greys["60"] : "#eee",
-          theme.greys ? theme.greys["10"] : "#aaa",
-        ]),
-      },
+    "& .Stat__label": {
+      marginBottom: 3,
+      fontSize: ".8rem",
+      fontWeight: 600,
+      color: readableTextColor(backgroundColor)([theme.greys["60"], theme.greys["10"]])
     }
   }
+}
+
+const Stat: React.SFC<Props> = ({ className, label, children }: Props) => (
+  <div className={`${className} Stat`}>
+    <small className="Stat__label">{label}</small>
+    <span className="Stat__value">{children}</span>
+  </div>
+)
 
 export default glamorous(Stat)(style)
 export { Stat }

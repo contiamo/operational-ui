@@ -8,14 +8,15 @@ type Props = {
   theme: Theme
 }
 
-const HeaderSeparator: SFC<Props> = ({ className }: Props) => <div className={className} />,
-  style: {} = ({ theme }: Props) => ({
-    width: 5,
-    height: 5,
-    margin: `0 ${theme.spacing}px`,
-    borderRadius: "50%",
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
-  })
+const style: {} = ({ theme }: Props) => ({
+  width: 5,
+  height: 5,
+  margin: `0 ${theme.spacing}px`,
+  borderRadius: "50%",
+  backgroundColor: "rgba(0, 0, 0, 0.2)"
+})
+
+const HeaderSeparator: SFC<Props> = ({ className }: Props) => <div className={className} />
 
 export default glamorous(HeaderSeparator)(style)
 export { HeaderSeparator }
