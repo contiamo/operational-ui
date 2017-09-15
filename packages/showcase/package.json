@@ -99,6 +99,7 @@
       "react",
       "enzyme",
       "jest-enzyme"
-    ]
+    ],
+    "mapCoverage": true
   }
 }

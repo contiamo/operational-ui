@@ -12,6 +12,7 @@ import { default as ChipsPage } from "./Chips/Chips"
 import { default as TooltipsPage } from "./Tooltips/Tooltips"
 import { default as StatsPage } from "./Stats/Stats"
 import { default as SidebarPage } from "./Sidebar/Sidebar"
+import { default as ColorPickerPage } from "./ColorPicker/ColorPicker"
 import { default as Icons } from "./Icons/Icons"
 
 const SidebarWithRouter = withRouter(Sidebar),
@@ -24,7 +25,7 @@ export default () => (
       alignItems: "flex-start",
       padding: 16,
       width: "100%",
-      height: "100vh"
+      height: "100vh",
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />
@@ -32,6 +33,7 @@ export default () => (
       <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={ButtonsPage} />
       <Route path="/components/form-fields" component={FormFieldsPage} />
+      <Route path="/components/color-picker" component={ColorPickerPage} />
       <Route path="/components/cards" component={CardsPage} />
       <Route path="/components/chips" component={ChipsPage} />
       <Route path="/components/tooltips" component={TooltipsPage} />
