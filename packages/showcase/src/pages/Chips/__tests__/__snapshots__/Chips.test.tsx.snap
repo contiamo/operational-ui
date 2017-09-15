@@ -39,7 +39,7 @@ exports[`Cards Page Should render correctly 1`] = `
         <textarea
           autocomplete="off"
         >
-          t]
+          [object Object]
         </textarea>
       </div>
     </div>
@@ -154,7 +154,7 @@ exports[`Cards Page Should render correctly 1`] = `
         <textarea
           autocomplete="off"
         >
-          t]
+          [object Object]
         </textarea>
       </div>
     </div>

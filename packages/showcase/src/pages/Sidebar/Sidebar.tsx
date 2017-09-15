@@ -1,17 +1,16 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
 
-import Playground from "component-playground"
-import { Sidebar as DemoSidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
+import Playground from "../../components/Playground/Playground"
+import { Sidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 import * as snippet from "./snippets/sidebar.snippet"
 import propDescription from "./propDescription"
-import { toReactPlayground } from "../../utils/snippet"
 
 export const fetch = (text: any) => new Promise(resolve => setTimeout(() => resolve(text), 2000))
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Sidebar</CardHeader>
 
@@ -31,10 +30,7 @@ export default () =>
     <div style={{ marginBottom: 32 }} />
 
     <h4>Usage</h4>
-    <Playground
-      codeText={toReactPlayground(String(snippet))}
-      scope={{ React, Sidebar: DemoSidebar, SidebarItem, SidebarLink, fetch }}
-    />
+    <Playground snippet={String(snippet)} components={{ Sidebar, SidebarItem, SidebarLink }} scope={{ fetch }} />
 
     <div style={{ marginBottom: 32 }} />
 
@@ -60,3 +56,4 @@ export default () =>
       </strong>
     </p>
   </div>
+)

@@ -1,15 +1,13 @@
 import * as React from "react"
 
-import Playground from "component-playground"
-
 import Table from "../../components/PropsTable/PropsTable"
-import { Button as DemoButton, CardHeader } from "contiamo-ui-components"
+import Playground from "../../components/Playground/Playground"
+import { Button, CardHeader } from "contiamo-ui-components"
 
-import { toReactPlayground } from "../../utils/snippet"
 import * as collectionSnippet from "./snippets/collection.snippet"
 import propDescription from "./propDescription"
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Buttons</CardHeader>
 
@@ -19,8 +17,9 @@ export default () =>
     </p>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(String(collectionSnippet))} scope={{ React, Button: DemoButton }} />
+    <Playground snippet={String(collectionSnippet)} components={{ Button }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />
   </div>
+)

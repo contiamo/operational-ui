@@ -1,16 +1,14 @@
 import * as React from "react"
 
-import Playground from "component-playground"
-
+import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { Chip as DemoChip, PlusChip as DemoPlusChip, CardHeader } from "contiamo-ui-components"
+import { Chip, PlusChip, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/simple-chip.snippet"
 import * as plusSnippet from "./snippets/plus-chip.snippet"
-import { toReactPlayground } from "../../utils/snippet"
 import propDescription from "./propDescription"
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Chips</CardHeader>
 
@@ -21,12 +19,12 @@ export default () =>
     </p>
 
     <div style={{ display: "flex" }}>
-      <DemoChip css={{ marginBottom: 16 }}>Chip 1</DemoChip>
-      <DemoChip css={{ marginBottom: 16 }}>Chip 2</DemoChip>
+      <Chip css={{ marginBottom: 16 }}>Chip 1</Chip>
+      <Chip css={{ marginBottom: 16 }}>Chip 2</Chip>
     </div>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(String(simpleSnippet))} scope={{ React, Chip: DemoChip }} />
+    <Playground snippet={String(simpleSnippet)} components={{ Chip }} />
 
     <h4>Props</h4>
     <Table props={propDescription.chip} />
@@ -41,8 +39,9 @@ export default () =>
     </p>
 
     <h4>Usage</h4>
-    <Playground codeText={toReactPlayground(String(plusSnippet))} scope={{ React, PlusChip: DemoPlusChip }} />
+    <Playground snippet={String(plusSnippet)} components={{ PlusChip }} />
 
     <h4>Props</h4>
     <Table props={propDescription.plusChip} />
   </div>
+)
