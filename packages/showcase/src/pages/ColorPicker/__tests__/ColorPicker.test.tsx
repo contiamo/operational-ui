@@ -5,8 +5,6 @@ import { contiamoTheme } from "contiamo-ui-components"
 
 import ColorPickerPage from "../ColorPicker"
 
-import ColorPicker from "../ColorPicker"
-
 /*
   We need a DOM in order to test:
   - colorChange event handling
@@ -14,7 +12,7 @@ import ColorPicker from "../ColorPicker"
 global.document = jsdom('<!doctype html><html><body><div id="root"></div></body></html>')
 global.window = document.parentWindow
 
-describe("ColorPicker Page", () => {
+describe("ColorPickerPage", () => {
   let comp
   beforeEach(() => {
     comp = mount(<ColorPickerPage theme={contiamoTheme} />, {

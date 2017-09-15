@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ColorPicker Page Should render correctly 1`] = `
+exports[`ColorPickerPage Should render correctly 1`] = `
 <div
   style="color:#222;"
 >

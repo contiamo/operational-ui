@@ -38,15 +38,17 @@ const ColorSquare = glamorous.div(
 type PickerContainerProps = {
   top: number
   left: number
+  theme: Theme
 }
 
 const PickerContainer = glamorous.div(
   {
     position: "fixed",
   },
-  ({ top, left }: PickerContainerProps) => ({
+  ({ top, left, theme }: PickerContainerProps) => ({
     top: top + 8,
     left: left + 8,
+    zIndex: (theme.baseZIndex || 1) * 1000,
   })
 )
 
@@ -75,7 +77,7 @@ class ColorPicker extends React.Component<Props, State> {
     if (!(e.target instanceof Node)) {
       return
     }
-    // if we're clicking on the Select itself,
+    // if we're clicking on the ColorPicker itself,
     if (el && el.contains(e.target)) {
       return
     }
