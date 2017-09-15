@@ -6,62 +6,52 @@ import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 type Modifier = "group" | "space"
 
-type Props = {
-  className?: string
-  onClick?: any
-  children?: any
-  modifiers?: Modifier[]
+type StyleProps = {
   theme?: Theme
   color?: string
   active?: boolean
+  modifiers?: Modifier[]
 }
 
-const Button: React.SFC<Props> = ({ className = "", onClick, children, modifiers = [] }) =>
-    <div
-      tabIndex={-1}
-      role="button"
-      className={`${className} Button${modifiers
-        .map(mod => `${modifiers.length > 0 ? " " : ""}Button_${mod}`)
-        .join(" ")}`}
-      onClick={onClick}
-    >
-      {children}
-    </div>,
-  style = ({ theme, color, active }: Props): {} => {
-    const backgroundColor: string = color
-        ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") as string
-        : "white",
-      activeBackgroundColor: string = darken(backgroundColor)(5),
-      textColor = readableTextColor(backgroundColor)(["black", "white"]),
-      activeBoxShadow = "2px 2px 4px rgba(0, 0, 0, 0.14) inset"
+type Props = StyleProps & {
+  className?: string
+  onClick?: any
+  children?: any
+}
 
-    return {
-      display: "inline-block",
-      padding: theme.spacing ? theme.spacing / 2 : 8,
-      border: "1px solid rgba(0, 0, 0, .2)",
-      cursor: "pointer",
-      boxShadow: active ? activeBoxShadow : "none",
-      backgroundColor: active ? activeBackgroundColor : backgroundColor,
-      color: textColor,
+const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps): any => {
+  const backgroundColor: string = color
+    ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") as string
+    : "white"
+  const activeBackgroundColor: string = darken(backgroundColor)(5)
+  const textColor = readableTextColor(backgroundColor)(["black", "white"])
+  const activeBoxShadow = "2px 2px 4px rgba(0, 0, 0, 0.14) inset"
+  const isGroup = modifiers && modifiers.indexOf("group") > -1
+  const isSpace = modifiers && modifiers.indexOf("space") > -1
+  const spacing = theme.spacing || 16
 
-      ":hover": {
-        backgroundColor: activeBackgroundColor,
-        color: readableTextColor(activeBackgroundColor)(["white", "black"]),
-      },
+  return {
+    display: "inline-block",
+    padding: spacing / 2,
+    border: "1px solid rgba(0, 0, 0, .2)",
+    cursor: "pointer",
+    boxShadow: active ? activeBoxShadow : "none",
+    backgroundColor: active ? activeBackgroundColor : backgroundColor,
+    color: textColor,
 
-      ":active": {
-        boxShadow: activeBoxShadow,
-      },
+    ":hover": {
+      backgroundColor: activeBackgroundColor,
+      color: readableTextColor(activeBackgroundColor)(["white", "black"])
+    },
 
-      "&.Button_group": {
-        marginLeft: -1,
-      },
+    ":active": {
+      boxShadow: activeBoxShadow
+    },
 
-      "&.Button_space": {
-        marginLeft: theme.spacing ? theme.spacing / 2 : 8,
-      },
-    }
+    marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0"
   }
+})
 
-export default glamorous(Button)(style)
-export { Button, style }
+const Button: React.SFC<Props> = props => <Container tabIndex={-1} role="button" {...props} />
+
+export default Button

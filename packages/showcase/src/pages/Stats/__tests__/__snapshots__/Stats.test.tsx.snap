@@ -14,7 +14,7 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-yywsv7 Stat"
+      class="css-17czskn Stat"
     >
       <small
         class="Stat__label"
@@ -28,7 +28,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-yywsv7 Stat"
+      class="css-17czskn Stat"
     >
       <small
         class="Stat__label"
@@ -42,7 +42,7 @@ exports[`Cards Page Should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="css-yywsv7 Stat"
+      class="css-17czskn Stat"
     >
       <small
         class="Stat__label"
