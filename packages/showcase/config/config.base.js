@@ -42,6 +42,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      hash: true,
       template: resolve(__dirname, "..", "public", "index.html")
     }),
     new webpack.optimize.CommonsChunkPlugin({
