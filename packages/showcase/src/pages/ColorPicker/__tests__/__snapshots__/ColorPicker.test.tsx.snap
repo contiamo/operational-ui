@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorPickerPage Should render correctly 1`] = `
+<div
+  style="color:#222;"
+>
+  <div
+    class="css-by30gj"
+  >
+    Color Picker
+  </div>
+  <p>
+    Colors are an important part of any user interface. This calls for a reasonable control that allows a user to choose a color from a canvas. Our component library exposes such a control, as seen below.
+  </p>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-81lp1j"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          color
+        </td>
+        <td>
+          The starting color of the component
+        </td>
+        <td>
+          blue
+        </td>
+        <td>
+          string&lt;hex&gt;
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          size
+        </td>
+        <td>
+          The size of the color picker.
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          number
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onChange
+        </td>
+        <td>
+          A function that is called when the color changes. It is passed a color object as the first argument.
+        </td>
+        <td>
+          void
+        </td>
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

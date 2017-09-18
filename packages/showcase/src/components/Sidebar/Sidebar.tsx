@@ -17,13 +17,13 @@ const paths: {
   navigation: ["/sidebar"],
 }
 
-export default ({ location, css }: Props) =>
+export default ({ location, css }: Props) => (
   <Sidebar css={css}>
     <SidebarItem open={location && paths.dataEntry.includes(location.pathname)} label="Data Entry">
       <SidebarLink to="/components/buttons">Buttons</SidebarLink>
       <SidebarLink to="/components/form-fields">Form Fields</SidebarLink>
+      <SidebarLink to="/components/color-picker">Color Picker</SidebarLink>
       <SidebarLink disabled>Date Picker</SidebarLink>
-      <SidebarLink disabled>Color Picker</SidebarLink>
     </SidebarItem>
     <SidebarItem open={location && paths.feedback.includes(location.pathname)} label="Feedback">
       <SidebarLink disabled>Modals</SidebarLink>
@@ -57,3 +57,4 @@ export default ({ location, css }: Props) =>
       <SidebarLink to="/components/icons">Icons</SidebarLink>
     </SidebarItem>
   </Sidebar>
+)

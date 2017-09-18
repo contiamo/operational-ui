@@ -16,14 +16,14 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Form Fields
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
-      disabled={true}
+      to="/components/color-picker"
     >
-      Date Picker
+      Color Picker
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
     >
-      Color Picker
+      Date Picker
     </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)

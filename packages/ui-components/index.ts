@@ -24,6 +24,7 @@ import Icon from "./src/Icon/Icon"
 
 import Input from "./src/Input/Input"
 import Select from "./src/Select/Select"
+import ColorPicker from "./src/ColorPicker/ColorPicker"
 
 import theme from "./src/theme"
 
@@ -52,6 +53,7 @@ export {
   Input,
   Icon,
   Select,
+  ColorPicker,
   theme as contiamoTheme,
   ThemeProvider,
 }
