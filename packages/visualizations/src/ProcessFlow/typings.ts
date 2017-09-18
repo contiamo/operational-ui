@@ -37,9 +37,8 @@ interface TNodeAttrs {
 }
 
 interface TInputData {
-  journeys: TJourney[]
-  nodes: any[]
-  links: any[]
+  journeys?: TJourney[]
+  nodes?: any[]
   nodeAccessors?: any
   linkAccessors?: any
 }

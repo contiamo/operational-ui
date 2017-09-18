@@ -4,7 +4,8 @@ import "d3-transition"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import Layout from "./layout"
-import { TNode, TLink, TData, TProps } from "./typings"
+import DataHandler from "./data_handler"
+import { TNode, TLink, TInputData, TProps } from "./typings"
 
 const MINNODESIZE: number = 100,
   MINLINKWIDTH: number = 2,
@@ -46,17 +47,27 @@ type Scale = (size: number) => number
 
 class Renderer {
   props: TProps
-  data: TData
+  data: TInputData
   // Type of selected element(s), type of datum, type of parent element, type of datum of parent
-  svg: d3.Selection<Element, {}, HTMLElement, undefined>
+  svg: d3.Selection<d3.BaseType, {}, null, undefined>
   layout: Layout
+  dataHandler: DataHandler
+  config: any
+  context: HTMLElement
 
-  constructor(data: TData, props: TProps, context: HTMLElement) {
-    this.props = props
-    this.data = data
-    this.svg = d3.select(context).select("svg")
+  constructor(context: HTMLElement) {
+    this.context = context
+    this.svg = d3.select(this.context).append("svg")
     this.layout = new Layout()
     this.defineMarker()
+  }
+
+  setData(data: TInputData): void {
+    this.data = data
+  }
+
+  setConfig(config: any): void {
+    this.config = config
   }
 
   defineMarker(): void {
@@ -72,15 +83,28 @@ class Renderer {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M-5,-5L5,0L-5,5")
-      .attr("fill", this.props.arrowFill)
-      .attr("stroke", this.props.linkStroke)
   }
 
-  updateDraw(): void {
-    this.layout.computeLayout(this.data)
+  draw(data: any): any {
+    this.setSVGDimensions()
+    this.configureMarkers()
+    this.layout.computeLayout(data)
     this.positionNodes()
-    this.updateTLink()
+    this.updateLinks()
     this.updateNodes()
+    return this.context
+  }
+
+  setSVGDimensions(): void {
+    this.svg
+      .attr("width", this.config.width)
+      .attr("height", this.config.height)
+  }
+
+  configureMarkers(): void {
+    this.svg.select("marker#arrow")
+      .attr("fill", this.config.arrowFill)
+      .attr("stroke", this.config.linkStroke)
   }
 
   positionNodes(): void {
@@ -90,8 +114,8 @@ class Renderer {
         return node.x
       })(this.layout.nodes),
       maxX: number = Math.max(...xValues),
-      xGridSpacing: number = this.props.width / (maxX + 1),
-      yGridSpacing: number = this.props.height / (rows.length + 1)
+      xGridSpacing: number = this.config.width / (maxX + 1),
+      yGridSpacing: number = this.config.height / (rows.length + 1)
 
     // Assign y values
     forEach(function(node: TNode): void {
@@ -115,7 +139,7 @@ class Renderer {
     })(this.layout.nodes)
     return d3ScaleLinear()
       .domain([0, Math.max(...nodeSizes)])
-      .range([MINNODESIZE, this.props.maxNodeSize])
+      .range([MINNODESIZE, this.config.maxNodeSize])
   }
 
   linkSizeScale(): Scale {
@@ -124,12 +148,12 @@ class Renderer {
     })(this.layout.links)
     return d3ScaleLinear()
       .domain([0, Math.max(...linkSizes)])
-      .range([MINLINKWIDTH, this.props.maxLinkWidth])
+      .range([MINLINKWIDTH, this.config.maxLinkWidth])
   }
 
-  updateTLink(): void {
+  updateLinks(): void {
     const scale: Scale = this.linkSizeScale(),
-      links: d3.Selection<d3.BaseType, TLink, Element, {}> = this.svg
+      links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}> = this.svg
         .selectAll("path.link")
         .data(this.layout.links, function(link: TLink): string {
           return link.sourceId() + ";" + link.targetId()
@@ -156,6 +180,7 @@ class Renderer {
       .attr("stroke-dasharray", function(d: TLink): number {
         return d.dash()
       })
+      .attr("marker-mid", "url(#arrow)")
   }
 
   linkStartPath(link: TLink): string {
@@ -175,7 +200,7 @@ class Renderer {
   }
 
   updateNodes(): void {
-    let nodeGroups: d3.Selection<d3.BaseType, TNode, Element, {}> = this.svg
+    let nodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = this.svg
       .selectAll("g.node-group")
       .data(this.layout.nodes, function(node: TNode): string {
         return node.id()
@@ -183,7 +208,7 @@ class Renderer {
 
     nodeGroups.exit().remove()
 
-    let enterNodes: d3.Selection<d3.BaseType, TNode, Element, {}> = nodeGroups
+    let enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = nodeGroups
       .enter()
       .append("g")
       .attr("class", "node-group")
@@ -206,7 +231,7 @@ class Renderer {
     }
   }
 
-  updateNodeShapes(enterNodes: d3.Selection<d3.BaseType, TNode, Element, {}>): void {
+  updateNodeShapes(enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
     const scale: Scale = this.nodeSizeScale(),
       that: Renderer = this
     let n: number = 0
@@ -255,16 +280,16 @@ class Renderer {
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).width / 2 + this.props.labelOffset
+    const offset: number = this.getNodeBBox(el).width / 2 + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).height / 2 + this.props.labelOffset
+    const offset: number = this.getNodeBBox(el).height / 2 + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(enterNodes: d3.Selection<d3.BaseType, TNode, Element, {}>): void {
+  updateNodeLabels(enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
     const that: any = this
     enterNodes
       .append("text")

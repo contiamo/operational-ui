@@ -9,11 +9,13 @@ class DataHandler {
   journeys: TJourney[]
   nodes: TNode[]
   links: TLink[]
-  nodeAccessors: TAccessorsf
+  nodeAccessors: TAccessors
   linkAccessors: TAccessors
 
-  prepareData(data: TInputData): TData {
+  prepareData(data: any, accessors: any): TData {
     this.journeys = data.journeys
+    this.setNodeAccessors(accessors.node)
+    this.setLinkAccessors(accessors.link)
     this.initializeNodes(data)
     this.initializeLinks(data)
     return {
@@ -24,7 +26,6 @@ class DataHandler {
   }
 
   initializeNodes(data: TInputData): void {
-    this.setNodeAccessors(data.nodeAccessors)
     this.nodes = map(bind(this.addNode, this))(data.nodes)
     forEach(function(node: TNode): void {
       node.sourceLinks = []
@@ -59,7 +60,6 @@ class DataHandler {
   }
 
   initializeLinks(data: TInputData): void {
-    this.setLinkAccessors(data.linkAccessors)
     this.computeLinks()
   }
 
