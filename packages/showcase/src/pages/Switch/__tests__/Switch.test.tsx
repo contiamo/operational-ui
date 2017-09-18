@@ -6,7 +6,7 @@ import ThemelessSwitchPage from "../Switch"
 
 const SwitchPage = wrapDefaultTheme(ThemelessSwitchPage)
 
-describe("Cards Page", () => {
+describe("Switch Page", () => {
   it("Should render correctly", () => {
     expect(render(<SwitchPage />)).toMatchSnapshot()
   })

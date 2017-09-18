@@ -4,7 +4,6 @@ import glamorous, { GlamorousComponent } from "glamorous"
 type Props = {
   on: boolean
   onChange: (on: boolean) => void
-  children?: any
 }
 
 type StyleProps = {
@@ -33,14 +32,13 @@ const Button = glamorous.div(
     content: " ",
     width: height,
     height: height,
-    borderRadius: "50%",
-    backgroundColor: "#444444",
-    zIndex: 2
+    borderRadius: "50%"
   },
   ({ on, theme }: StyleProps) => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
     backgroundColor: theme.greys.white,
-    border: `1px solid ${theme.greys["80"]}`
+    border: `1px solid ${theme.greys["80"]}`,
+    zIndex: theme.baseZIndex + 2
   })
 )
 
@@ -53,8 +51,7 @@ const Rail = glamorous.div(
     top: (height - railHeight) / 2,
     left: railOffset,
     borderRadius: railHeight / 2,
-    overflow: "hidden",
-    zIndex: 1
+    overflow: "hidden"
   },
   ({ on, theme }: StyleProps) => ({
     backgroundColor: theme.greys["60"],
@@ -67,7 +64,8 @@ const Rail = glamorous.div(
       left: 0,
       backgroundColor: theme.colors.secondary,
       transition: "transform .3s",
-      transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`
+      transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
+      zIndex: theme.baseZIndex + 1
     }
   })
 )

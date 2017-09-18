@@ -2,7 +2,7 @@ import * as React from "react"
 import { Switch } from "contiamo-ui-components"
 
 export default (function() {
-  class StatefulSwitch extends React.Component {
+  class ComponentWithSwitch extends React.Component {
     state = {
       on: true
     }
@@ -11,9 +11,9 @@ export default (function() {
       return (
         <Switch
           on={this.state.on}
-          onChange={on => {
+          onChange={newOnState => {
             this.setState(prevState => ({
-              on: on
+              on: newOnState
             }))
           }}
         />
@@ -23,7 +23,7 @@ export default (function() {
 
   return (
     <div style={{ display: "flex" }}>
-      <StatefulSwitch />
+      <ComponentWithSwitch />
     </div>
   )
 })()
