@@ -1,4 +1,5 @@
 import State from "./state"
+import { isEmpty } from "lodash/fp"
 
 type ChartState = {
   current: State
@@ -35,6 +36,10 @@ class StateHandler {
   computed(path: string | string[], value?: any) {
     if (!value) return this.state.current.get(["computed"].concat(path))
     return this.state.current.set(["computed"].concat(path), value)
+  }
+
+  hasData(): boolean {
+    return isEmpty(this.data())
   }
 }
 

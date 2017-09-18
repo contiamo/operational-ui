@@ -1,19 +1,13 @@
-import AbstractChart from "../utils/abstract_chart"
-import EventHandler from "../utils/event_handler"
-import StateHandler from "../utils/state_handler"
+import AbstractFacade from "../utils/abstract_facade"
 import DataHandler from "./data_handler"
 import Canvas from "./canvas"
-import { TInputData } from "./typings"
 import Renderer from "./renderer"
-import { forEach } from "lodash/fp"
 
-class Facade extends AbstractChart {
+class Facade extends AbstractFacade {
   dataHandler: DataHandler
 
-  constructor(context: any) {
-    super(context)
-    this.events = new EventHandler()
-    this.state = new StateHandler({
+  defaultConfig(): any {
+    return {
       data: {},
       config: {
         width: 500,
@@ -22,56 +16,38 @@ class Facade extends AbstractChart {
         maxLinkWidth: 15,
         labelOffset: 5,
         linkStroke: "#aaa",
-        arrowFill: "#ccc"
+        arrowFill: "#ccc",
       },
       accessors: {
         journeys: {
-          data: (d: any) => d.journeys
+          data: (d: any) => d.journeys,
         },
         nodes: {
           data: (d: any) => d.nodes,
-          color: (d: any) => d.color
-        }
+          color: (d: any) => d.color,
+        },
       },
-      computed: {}
-    })
-
-    this.components = {
-      dataHandler: new DataHandler(),
-      renderer: new Renderer(this.context)
     }
   }
 
-  data(data?: TInputData) {
-    return this.state.data(data)
+  initializeComponents(): void {
+    this.components = {
+      dataHandler: new DataHandler(),
+      renderer: new Renderer(this.context),
+    }
   }
 
-  config(config?: Object) {
-    return this.state.config(config)
-  }
-
-  accessors(type: string, accessors: Object) {
-    return this.state.accessors(type, accessors)
-  }
-
-  draw() {
-    // @TODO only update if something has changed?
+  draw(): any {
     const accessors = {
       node: this.state.accessors("node"),
-      link: this.state.accessors("link")
+      link: this.state.accessors("link"),
     }
     let computed: any = this.components.dataHandler.prepareData(this.state.data(), accessors)
     this.components.renderer.setData(computed)
     this.components.renderer.setConfig(this.state.config())
+    this.drawn = true
+    this.dirty = false
     return this.components.renderer.draw(computed)
-  }
-
-  on(event: string, handler: any) {
-    this.events.on(event, handler)
-  }
-
-  off(event: string, handler: any) {
-    this.events.off(event, handler)
   }
 }
 
