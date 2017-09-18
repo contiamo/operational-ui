@@ -74,6 +74,36 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     <tbody>
       <tr>
         <td>
+          value
+        </td>
+        <td>
+          The current value of the input field. You must always supply this from the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components.
+        </td>
+        <td />
+        <td>
+          string
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onChange
+        </td>
+        <td>
+          Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components.
+        </td>
+        <td />
+        <td>
+          Func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
           placeholder
         </td>
         <td>

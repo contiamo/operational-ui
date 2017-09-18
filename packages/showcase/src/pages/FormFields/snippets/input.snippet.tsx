@@ -1,8 +1,29 @@
 import * as React from "react"
 import { Input } from "contiamo-ui-components"
 
-export default (
-  <div>
-    <Input css={{ marginBottom: 16 }} placeholder="Name here" name="forForms" />
-  </div>
-)
+export default (function() {
+  class StatefulInput extends React.Component {
+    state = {
+      value: ""
+    }
+
+    render() {
+      return (
+        <Input
+          placeholder="Name here"
+          name="forForms"
+          value={this.state.value}
+          onChange={value => {
+            this.setState(prevState => ({ value }))
+          }}
+        />
+      )
+    }
+  }
+
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <StatefulInput />
+    </div>
+  )
+})()

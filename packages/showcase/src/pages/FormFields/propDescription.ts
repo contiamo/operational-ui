@@ -1,9 +1,25 @@
 export default {
   Input: [
     {
+      name: "value",
+      description:
+        "The current value of the input field. You must always supply this from the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components.",
+      defaultValue: "",
+      type: "string",
+      optional: false
+    },
+    {
+      name: "onChange",
+      description:
+        "Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components.",
+      defaultValue: "",
+      type: "Func",
+      optional: true
+    },
+    {
       name: "placeholder",
       description: "Text displayed when the input field has no value.",
-      defaultValue: "\"\"",
+      defaultValue: '""',
       type: "string",
       optional: true
     },
