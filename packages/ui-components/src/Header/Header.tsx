@@ -14,22 +14,20 @@ type Props = {
   color: string
 }
 
-const Header: React.SFC<Props> = ({ className, children }) =>
-    <div className={className}>
-      {children}
-    </div>,
-  style: {} = ({ theme, color }: Props) => {
-    const backgroundColor = color ? hexOrColor(color)(theme.colors ? theme.colors[color] : "white") : "white"
+const style: {} = ({ theme, color }: Props) => {
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color] || "white") : "white"
 
-    return {
-      backgroundColor,
-      display: "flex",
-      minHeight: 50,
-      alignItems: "center",
-      padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-      color: readableTextColor(backgroundColor)(["black", "white"]),
-    }
+  return {
+    backgroundColor,
+    display: "flex",
+    minHeight: 50,
+    alignItems: "center",
+    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+    color: readableTextColor(backgroundColor)(["black", "white"])
   }
+}
+
+const Header: React.SFC<Props> = ({ className, children }) => <div className={className}>{children}</div>
 
 export default glamorous(Header)(style)
-export { Header, HeaderItem, HeaderSeparator, HeaderTitle, style }
+export { HeaderItem, HeaderSeparator, HeaderTitle, style }

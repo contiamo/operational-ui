@@ -1,7 +1,10 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import TooltipsPage from "../Tooltips"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import ThemelessTooltipsPage from "../Tooltips"
+
+const TooltipsPage = wrapDefaultTheme(ThemelessTooltipsPage)
 
 describe("Tooltips Page", () => {
   it("Should render correctly", () => {

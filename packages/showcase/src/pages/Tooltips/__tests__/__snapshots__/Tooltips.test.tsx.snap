@@ -3,7 +3,7 @@
 exports[`Tooltips Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Tooltips
   </div>
@@ -43,7 +43,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-1kfhvsj"
+    class="css-mpx3qv"
   >
     <thead>
       <tr>
@@ -136,7 +136,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </tbody>
   </table>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     withTooltip
   </div>

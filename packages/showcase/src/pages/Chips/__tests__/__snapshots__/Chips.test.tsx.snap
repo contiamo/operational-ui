@@ -3,7 +3,7 @@
 exports[`Cards Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Chips
   </div>
@@ -14,12 +14,12 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-10834mi chip"
+      class="css-1m8lit7 chip"
     >
       Chip 1
     </div>
     <div
-      class="css-10834mi chip"
+      class="css-1m8lit7 chip"
     >
       Chip 2
     </div>
@@ -57,7 +57,7 @@ exports[`Cards Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>
@@ -132,7 +132,7 @@ exports[`Cards Page Should render correctly 1`] = `
     style="margin-bottom:32px;"
   />
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     PlusChip
   </div>
@@ -172,7 +172,7 @@ exports[`Cards Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>

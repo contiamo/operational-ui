@@ -1,7 +1,10 @@
 import * as React from "react"
 import { render, mount } from "enzyme"
 
-import Button from "../Button"
+import ThemelessButton from "../Button"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+
+const Button = wrapDefaultTheme(ThemelessButton)
 
 describe("Button Component", () => {
   it("Should initialize properly", () => {

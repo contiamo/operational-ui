@@ -13,19 +13,11 @@ type Props = {
   active?: RegExpMatchArray | boolean
 }
 
-const SideNavigationItem: SFC<Props> = ({
-    className,
-    children,
-    onClick,
-  }: Props) =>
-    <div
-      className={`${className} SideNavigationItem`}
-      onClick={onClick}
-      role="button"
-      tabIndex={-1}
-    >
+const SideNavigationItem: SFC<Props> = ({ className, children, onClick }: Props) => (
+    <div className={`${className} SideNavigationItem`} onClick={onClick} role="button" tabIndex={-1}>
       {children}
-    </div>,
+    </div>
+  ),
   style = ({ theme, active }: Props): {} => {
     const activeBackgroundColor = "rgba(0, 0, 0, 0.2)"
     return {
@@ -41,17 +33,17 @@ const SideNavigationItem: SFC<Props> = ({
       backgroundColor: active ? activeBackgroundColor : "transparent",
 
       ":hover": {
-        backgroundColor: "rgba(255, 255, 255, 0.07)",
+        backgroundColor: "rgba(255, 255, 255, 0.07)"
       },
 
       "&.SideNavigationItem_active": {
-        backgroundColor: activeBackgroundColor,
+        backgroundColor: activeBackgroundColor
       },
 
       ":first-child": {
         marginTop: 0,
-        marginBottom: theme.spacing ? theme.spacing * 2 : 16,
-      },
+        marginBottom: theme.spacing * 2
+      }
     }
   }
 

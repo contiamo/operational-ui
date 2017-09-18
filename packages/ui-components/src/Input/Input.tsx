@@ -6,20 +6,20 @@ type Props = {
   placeholder?: string
   name?: string
   children?: string
-  theme?: Theme,
+  theme?: Theme
 }
 
 type State = {
-  value: string,
+  value: string
 }
 
 class Input extends React.Component<Props, State> {
   state = {
-    value: this.props.children || "",
+    value: this.props.children || ""
   }
 
   static defaultProps = {
-    className: "",
+    className: ""
   }
 
   updateValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -41,11 +41,11 @@ class Input extends React.Component<Props, State> {
 }
 
 const style = ({ theme }: Props) => ({
-  padding: theme.spacing ? theme.spacing / 2 : 8,
+  padding: theme.spacing / 2,
   border: "1px solid",
-  borderColor: theme.greys ? theme.greys[30] : "#ccc",
+  borderColor: theme.greys["30"] || "#ccc",
   font: "inherit",
-  WebkitAppearance: "none",
+  WebkitAppearance: "none"
 })
 
 export default glamorous(Input)(style)

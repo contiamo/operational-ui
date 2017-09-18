@@ -3,7 +3,7 @@
 exports[`FormFieldsPage Should render correctly 1`] = `
 <div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Form Fields
   </div>
@@ -13,7 +13,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     This page seeks to document the vast majority of these controls.
   </p>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Input
   </div>
@@ -50,7 +50,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>
@@ -107,7 +107,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     </tbody>
   </table>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Select
   </div>
@@ -211,7 +211,7 @@ Option {
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>
