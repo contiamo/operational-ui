@@ -5,6 +5,7 @@
     "semicolon": false,
     "quotemark": "double",
     "variable-name": ["allow-pascal-case"],
-    "indent": false
+    "indent": false,
+    "import-name": false
   }
 }
