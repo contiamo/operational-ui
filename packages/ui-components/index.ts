@@ -5,7 +5,7 @@ import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/H
 import SideNavigation, {
   SideNavigationHeader,
   SideNavigationItem,
-  SideNavigationLink,
+  SideNavigationLink
 } from "./src/SideNavigation/SideNavigation"
 
 import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
@@ -20,6 +20,7 @@ import Chip from "./src/Chip/Chip"
 import PlusChip from "./src/PlusChip/PlusChip"
 import Card, { CardHeader } from "./src/Card/Card"
 import Stat from "./src/Stat/Stat"
+import Switch from "./src/Switch/Switch"
 import Icon from "./src/Icon/Icon"
 
 import Input from "./src/Input/Input"
@@ -50,10 +51,11 @@ export {
   Card,
   CardHeader,
   Stat,
+  Switch,
   Input,
   Icon,
   Select,
   ColorPicker,
   theme as contiamoTheme,
-  ThemeProvider,
+  ThemeProvider
 }

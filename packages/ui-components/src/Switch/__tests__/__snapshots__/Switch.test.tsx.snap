@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch Should render 1`] = `
+<div
+  class="css-v82pkr"
+>
+  <div
+    class="css-g47fn9"
+  />
+  <div
+    class="css-1gv3e6d"
+  />
+</div>
+`;

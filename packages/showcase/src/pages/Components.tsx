@@ -13,6 +13,7 @@ import { default as TooltipsPage } from "./Tooltips/Tooltips"
 import { default as StatsPage } from "./Stats/Stats"
 import { default as SidebarPage } from "./Sidebar/Sidebar"
 import { default as ColorPickerPage } from "./ColorPicker/ColorPicker"
+import { default as SwitchPage } from "./Switch/Switch"
 import { default as Icons } from "./Icons/Icons"
 
 const SidebarWithRouter = withRouter(Sidebar),
@@ -25,7 +26,7 @@ export default () => (
       alignItems: "flex-start",
       padding: 16,
       width: "100%",
-      height: "100vh",
+      height: "100vh"
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />
@@ -40,6 +41,7 @@ export default () => (
       <Route path="/components/stats" component={StatsPage} />
       <Route path="/components/sidebar" component={SidebarPage} />
       <Route path="/components/icons" component={Icons} />
+      <Route path="/components/switch" component={SwitchPage} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>
