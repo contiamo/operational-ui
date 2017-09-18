@@ -4,4 +4,3 @@ node_modules
 *.log
 coverage
 fonts
-lib
