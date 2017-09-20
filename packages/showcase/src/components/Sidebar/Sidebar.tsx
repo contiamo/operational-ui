@@ -14,13 +14,14 @@ const paths: {
   dataEntry: ["/buttons", "/form-fields"],
   feedback: ["/tooltips"],
   uiElements: ["/chips", "/cards", "/stats"],
-  navigation: ["/sidebar"],
+  navigation: ["/sidebar"]
 }
 
 export default ({ location, css }: Props) => (
   <Sidebar css={css}>
     <SidebarItem open={location && paths.dataEntry.includes(location.pathname)} label="Data Entry">
       <SidebarLink to="/components/buttons">Buttons</SidebarLink>
+      <SidebarLink to="/components/switch">Switch</SidebarLink>
       <SidebarLink to="/components/form-fields">Form Fields</SidebarLink>
       <SidebarLink to="/components/color-picker">Color Picker</SidebarLink>
       <SidebarLink disabled>Date Picker</SidebarLink>

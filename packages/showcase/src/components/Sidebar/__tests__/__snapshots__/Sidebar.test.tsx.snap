@@ -11,6 +11,11 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Buttons
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      to="/components/switch"
+    >
+      Switch
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
       to="/components/form-fields"
     >
       Form Fields
