@@ -38,6 +38,7 @@ export default ({ location, css }: Props) => (
     </SidebarItem>
     <SidebarItem open={location && paths.uiElements.includes(location.pathname)} label="UI Elements">
       <SidebarLink disabled>Context Menu</SidebarLink>
+      <SidebarLink to="/components/typography">Typography</SidebarLink>
       <SidebarLink to="/components/cards">Cards</SidebarLink>
       <SidebarLink to="/components/chips">Chips</SidebarLink>
       <SidebarLink to="/components/stats">Stats</SidebarLink>

@@ -15,6 +15,7 @@ import { default as SidebarPage } from "./Sidebar/Sidebar"
 import { default as ColorPickerPage } from "./ColorPicker/ColorPicker"
 import { default as SwitchPage } from "./Switch/Switch"
 import { default as Icons } from "./Icons/Icons"
+import { default as Typography } from "./Typography/Typography"
 
 const SidebarWithRouter = withRouter(Sidebar),
   InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
@@ -42,6 +43,7 @@ export default () => (
       <Route path="/components/sidebar" component={SidebarPage} />
       <Route path="/components/icons" component={Icons} />
       <Route path="/components/switch" component={SwitchPage} />
+      <Route path="/components/typography" component={Typography} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>
