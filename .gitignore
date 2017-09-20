@@ -4,3 +4,7 @@ node_modules
 *.log
 flow-typed/npm
 coverage
+packages/*
+!packages/utils
+!packages/ui-components
+!packages/ui-showcase

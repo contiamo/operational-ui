@@ -25,13 +25,13 @@ const Container = glamorous.div({
 
 const Button = glamorous.div(
   {
+    height,
     transition: "transform .3s",
     position: "absolute",
     top: 0,
     left: 0,
     content: " ",
     width: height,
-    height: height,
     borderRadius: "50%"
   },
   ({ on, theme }: StyleProps) => ({
