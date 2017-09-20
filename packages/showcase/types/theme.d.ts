@@ -21,9 +21,26 @@ interface ThemeGreys {
   white: string
 }
 
+interface ThemeTypographyElement {
+  fontSize: number
+  fontWeight: number
+  textTransform: string
+  opacity: number
+  letterSpacing: number
+  lineHeight: string
+}
+
+interface ThemeTypography {
+  heading1: ThemeTypographyElement
+  heading2: ThemeTypographyElement
+  body: ThemeTypographyElement
+  small: ThemeTypographyElement
+}
+
 interface Theme {
   colors: ThemeColors
   greys: ThemeGreys
+  typography: ThemeTypography
   fonts: {
     fontFamily: string
     fontSize: number
