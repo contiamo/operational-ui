@@ -4,15 +4,17 @@ const testSnippet: string = `
 import X from 'Y'
 import React from 'react'
 
-export default
-<div>
-  <h1>Hello!</h1>
-</div>
+export default (
+  <div>
+    <h1>Hello!</h1>
+  </div>
+)
 `
 
-const transformedTestSnippet: string = `<div>
-  <h1>Hello!</h1>
-</div>
+const transformedTestSnippet: string = `(  <div>
+    <h1>Hello!</h1>
+  </div>
+)
 `
 
 describe("ToReactPlayground snippet", () => {

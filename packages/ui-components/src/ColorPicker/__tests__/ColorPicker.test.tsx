@@ -1,10 +1,11 @@
 import * as React from "react"
 import { shallow, mount } from "enzyme"
 import { jsdom } from "jsdom"
-import { ThemeProvider } from "glamorous"
-import theme from "../../theme"
 
-import ColorPicker from "../ColorPicker"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import ThemelessColorPicker from "../ColorPicker"
+
+const ColorPicker = wrapDefaultTheme(ThemelessColorPicker)
 
 /*
   We need a DOM in order to test:
@@ -17,8 +18,8 @@ global.window = document.parentWindow
 describe("ColorPicker", () => {
   let comp
   beforeEach(() => {
-    comp = mount(<ColorPicker theme={theme} />, {
-      attachTo: document.getElementById("root"),
+    comp = mount(<ColorPicker />, {
+      attachTo: global.document.getElementById("root")
     })
   })
   it("Should initialize properly", () => {

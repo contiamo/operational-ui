@@ -6,12 +6,11 @@ type Props = {
   color?: string
   size?: number
   theme?: Theme
-  onChange?: (color: { hex: string; rgb: RGBColor }) => any
+  onChange?: (color: string) => any
 }
 
 type State = {
   isPickerOpen: boolean
-  color?: string
   position: { top?: number; left?: number }
 }
 
@@ -25,13 +24,13 @@ const ColorSquare = glamorous.div(
   {
     border: `3px solid white`,
     borderRadius: 2,
-    cursor: "pointer",
+    cursor: "pointer"
   },
   ({ color, size, theme }: ColorSquareProps) => ({
     width: size,
     height: size,
     boxShadow: `0 0 0 1px ${theme.greys["30"]}`,
-    backgroundColor: color,
+    backgroundColor: color
   })
 )
 
@@ -43,28 +42,27 @@ type PickerContainerProps = {
 
 const PickerContainer = glamorous.div(
   {
-    position: "fixed",
+    position: "fixed"
   },
   ({ top, left, theme }: PickerContainerProps) => ({
     top: top + 8,
     left: left + 8,
-    zIndex: (theme.baseZIndex || 1) * 1000,
+    zIndex: (theme.baseZIndex || 1) * 1000
   })
 )
 
 class ColorPicker extends React.Component<Props, State> {
   static defaultProps = {
     color: "#03f",
-    size: 16,
+    size: 16
   }
 
   state = {
     isPickerOpen: false,
-    color: this.props.color,
     position: {
       top: 0,
-      left: 0,
-    },
+      left: 0
+    }
   }
 
   containerEl: HTMLDivElement | null = null
@@ -111,25 +109,24 @@ class ColorPicker extends React.Component<Props, State> {
     this.setState(() => ({ isPickerOpen: false }))
   }
 
-  async onColorChange(color: { hex: string; rgb: RGBColor }) {
+  onColorChange(color: { hex: string; rgb: RGBColor }) {
     if (this.props.onChange) {
-      await this.props.onChange(color)
+      this.props.onChange(color.hex)
     }
-    this.setState(() => ({ color: `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})` }))
   }
 
   render() {
     const { size, theme, color } = this.props
     return (
       <div ref={containerEl => (this.containerEl = containerEl)} onClick={() => this.togglePicker()}>
-        <ColorSquare size={size} theme={theme} color={this.state.color} />
+        <ColorSquare size={size} theme={theme} color={this.props.color} />
         {this.state.isPickerOpen && (
           <PickerContainer
             top={this.state.position.top}
             left={this.state.position.left}
             onClick={(e: React.SyntheticEvent<HTMLDivElement>) => e.stopPropagation()}
           >
-            <SketchPicker color={this.state.color} onChangeComplete={color => this.onColorChange(color)} />
+            <SketchPicker color={this.props.color} onChangeComplete={color => this.onColorChange(color)} />
           </PickerContainer>
         )}
       </div>
