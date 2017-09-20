@@ -1,6 +1,6 @@
 import transformSnippet from "../transform-snippet"
 
-const regulartestSnippet: string = `
+const regularTestSnippet: string = `
 import X from 'Y'
 import React from 'react'
 
@@ -35,7 +35,7 @@ const iifeTestSnippetTransformed: string = `(function() {
 
 describe("ToReactPlayground snippet", () => {
   it("trims a regular snippet", () => {
-    expect(transformSnippet(regulartestSnippet)).toBe(regularTestSnippetTransformed)
+    expect(transformSnippet(regularTestSnippet)).toBe(regularTestSnippetTransformed)
   })
 
   it("trims an iife snippet", () => {
