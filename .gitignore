@@ -7,4 +7,7 @@ coverage
 packages/*
 !packages/utils
 !packages/ui-components
+<<<<<<< HEAD
 !packages/showcase
+=======
+>>>>>>> Add first pass at implementing Paginator component

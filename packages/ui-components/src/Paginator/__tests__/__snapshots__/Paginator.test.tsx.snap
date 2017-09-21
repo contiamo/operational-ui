@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Paginator Component Should initialize properly 1`] = `
+<ul
+  class="css-jofydv"
+>
+  <li
+    class="control first disabled"
+  >
+    <svg
+      height="17"
+      viewbox="0 0 24 24"
+      width="17"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        fill="none"
+        points="11 17 6 12 11 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+      <polyline
+        fill="none"
+        points="18 17 13 12 18 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+    </svg>
+  </li>
+  <li
+    class="control previous disabled"
+  >
+    <svg
+      fill="none"
+      height="17"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewbox="0 0 24 24"
+      width="17"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points="15 18 9 12 15 6"
+      />
+    </svg>
+  </li>
+  <li
+    class="page active"
+  >
+    1
+  </li>
+  <li
+    class="page "
+  >
+    2
+  </li>
+  <li
+    class="page "
+  >
+    3
+  </li>
+  <li
+    class="page "
+  >
+    4
+  </li>
+  <li
+    class="page "
+  >
+    5
+  </li>
+  <li
+    class="control next "
+  >
+    <svg
+      fill="none"
+      height="17"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewbox="0 0 24 24"
+      width="17"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points="9 18 15 12 9 6"
+      />
+    </svg>
+  </li>
+  <li
+    class="control last "
+  >
+    <svg
+      height="17"
+      viewbox="0 0 24 24"
+      width="17"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        fill="none"
+        points="13 17 18 12 13 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+      <polyline
+        fill="none"
+        points="6 17 11 12 6 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+    </svg>
+  </li>
+</ul>
+`;
