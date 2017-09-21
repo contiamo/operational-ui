@@ -14,50 +14,53 @@ import ComponentsPage from "./pages/Components"
 
 type Props = { className?: string }
 
-const SideNavigationWithRouter = withRouter(SideNavigation),
-  App = ({ className }: Props) => (
-    <Router>
-      <ThemeProvider theme={contiamoTheme}>
-        <div className={className}>
-          <SideNavigationWithRouter />
-          <Div className="app">
-            <Header />
-            <Route exact path="/" component={IntroPage} />
-            <Route path="/components" component={ComponentsPage} />
-          </Div>
-        </div>
-      </ThemeProvider>
-    </Router>
-  ),
-  styles: {} = {
-    display: "flex",
-    ...contiamoTheme.fonts,
-    backgroundColor: contiamoTheme.colors.grey20,
-    "& hr": {
-      margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
-      height: 1,
-      border: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.14)"
-    },
-    "& .app": {
-      display: "flex",
-      flexDirection: "column",
-      width: "100vw",
-      height: "100vh",
-      marginLeft: 60
-    },
-    "& h1": {
-      margin: 0,
-      fontSize: "2rem"
-    },
-    "& h2": {
-      fontSize: "1.3rem"
-    },
-    "& p": {
-      margin: 0,
-      marginBottom: 16
-    }
+const Container = glamorous.div({
+  display: "flex",
+  flexDirection: "column",
+  width: "100vw",
+  height: "100vh",
+  marginLeft: 60
+})
+
+const styles: {} = {
+  display: "flex",
+  ...contiamoTheme.fonts,
+  backgroundColor: contiamoTheme.colors.grey20,
+  "& hr": {
+    margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
+    height: 1,
+    border: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.14)"
+  },
+  "& h1": {
+    margin: 0,
+    fontSize: "2rem"
+  },
+  "& h2": {
+    fontSize: "1.3rem"
+  },
+  "& p": {
+    margin: 0,
+    marginBottom: contiamoTheme.spacing
   }
+}
+
+const SideNavigationWithRouter = withRouter(SideNavigation)
+
+const App = ({ className }: Props) => (
+  <Router>
+    <ThemeProvider theme={contiamoTheme}>
+      <div className={className}>
+        <SideNavigationWithRouter />
+        <Container>
+          <Header />
+          <Route exact path="/" component={IntroPage} />
+          <Route path="/components" component={ComponentsPage} />
+        </Container>
+      </div>
+    </ThemeProvider>
+  </Router>
+)
 
 // @todo -> type this better
 const x = css as any

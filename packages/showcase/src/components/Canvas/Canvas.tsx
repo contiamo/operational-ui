@@ -14,6 +14,10 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   overflow: "auto",
   WebkitOverflowScrolling: "touch",
 
+  "& > *": {
+    maxWidth: 768
+  },
+
   "& a:link, & a:visited": {
     color: theme.colors.info
   },
@@ -40,13 +44,9 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const Body = glamorous.div({
-  maxWidth: 768
-})
-
 const Canvas = ({ children }: Props) => (
   <Container>
-    <Body>{children}</Body>
+    <Card>{children}</Card>
   </Container>
 )
 

@@ -2,13 +2,13 @@ import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { ColorPicker, Card, CardHeader } from "contiamo-ui-components"
+import { ColorPicker, CardHeader } from "contiamo-ui-components"
 
 import * as snippet from "./snippets/ColorPicker.snippet"
 import propDescription from "./propDescription"
 
 const ColorPickerPage = () => (
-  <Card>
+  <div>
     <CardHeader>Color Picker</CardHeader>
     <p>
       Colors are an important part of any user interface. This calls for a reasonable control that allows a user to
@@ -18,7 +18,7 @@ const ColorPickerPage = () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </Card>
+  </div>
 )
 
 export default ColorPickerPage

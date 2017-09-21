@@ -2,12 +2,12 @@ import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { contiamoTheme, CardHeader, Card } from "contiamo-ui-components"
+import { contiamoTheme, CardHeader } from "contiamo-ui-components"
 
 import * as snippet from "./snippets/Typography.snippet"
 
 export default () => (
-  <Card>
+  <div>
     <CardHeader>Typography</CardHeader>
 
     <p>
@@ -16,5 +16,5 @@ export default () => (
     </p>
 
     <Playground snippet={String(snippet)} components={{}} scope={{ theme: contiamoTheme }} />
-  </Card>
+  </div>
 )

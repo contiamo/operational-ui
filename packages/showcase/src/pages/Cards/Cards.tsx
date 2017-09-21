@@ -7,7 +7,7 @@ import * as snippet from "./snippets/basic.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <Card>
+  <div>
     <CardHeader>Cards</CardHeader>
     <p>These elements make up the UI. They accept any type of children and elegantly wrap them.</p>
 
@@ -39,5 +39,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </Card>
+  </div>
 )

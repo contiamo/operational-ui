@@ -4,7 +4,7 @@ import Playground from "../../components/Playground/Playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Table from "../../components/PropsTable/PropsTable"
-import { Input, Select, Card, CardHeader } from "contiamo-ui-components"
+import { Input, Select, CardHeader } from "contiamo-ui-components"
 
 import * as inputSnippet from "./snippets/input.snippet"
 import * as selectSnippet from "./snippets/select.snippet"
@@ -12,7 +12,7 @@ import optionSnippet from "./snippets/option"
 import propDescription from "./propDescription"
 
 export default () => (
-  <Card>
+  <div>
     <CardHeader>Form Fields</CardHeader>
 
     <p>
@@ -45,5 +45,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription.Select} />
-  </Card>
+  </div>
 )

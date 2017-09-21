@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { contiamoTheme, CardHeader, Card } from "contiamo-ui-components"
+import { contiamoTheme, CardHeader } from "contiamo-ui-components"
 
 import * as snippet from "./snippets/Colors.snippet"
 
@@ -25,7 +25,7 @@ const ColorBox = glamorous.div(
 )
 
 export default () => (
-  <Card>
+  <div>
     <CardHeader>Colors</CardHeader>
 
     <p>The library provides a set of basic colors, as well as a range of grays.</p>
@@ -38,5 +38,5 @@ export default () => (
     ))}
 
     <Playground snippet={String(snippet)} components={{}} scope={{ theme: contiamoTheme }} />
-  </Card>
+  </div>
 )
