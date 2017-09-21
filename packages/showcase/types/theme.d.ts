@@ -23,7 +23,7 @@ interface ThemeGreys {
 
 interface ThemeTypographyElement {
   fontSize: number
-  fontWeight: number
+  fontWeight: 100 | 300 | 400 | 600 | 700
   textTransform: string
   opacity: number
   letterSpacing: number
