@@ -1,7 +1,8 @@
 {
   "name": "contiamo-ui",
-  "version": "0.4.2",
-  "description": "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
+  "version": "0.0.0",
+  "description":
+    "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "private": true,
   "author": "Tejas Kumar <tejas@contiamo.com>",
@@ -22,7 +23,5 @@
     "husky": "^0.14.3",
     "lerna": "^2.1.2"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
