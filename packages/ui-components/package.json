@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-components",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./types/main.d.ts",
@@ -52,7 +52,11 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
@@ -61,8 +65,14 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["../../node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"],
+    "snapshotSerializers": [
+      "../../node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ],
     "mapCoverage": true
   }
 }
