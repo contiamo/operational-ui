@@ -19,7 +19,7 @@ export default ({ theme, color, disabled }: Props): {} => {
     width: "fit-content",
     minHeight: 20,
     border: "1px solid",
-    borderColor: theme.greys["30"] || "#ccc",
+    borderColor: theme.colors.grey30,
     opacity: disabled ? 0.5 : 1,
     cursor: "pointer",
     color: readableTextColor(backgroundColor)(["black", "white"]),
@@ -35,7 +35,7 @@ export default ({ theme, color, disabled }: Props): {} => {
       width: 0,
       height: 0,
       border: "4px solid transparent",
-      borderTopColor: theme.greys["70"] || "#888",
+      borderTopColor: theme.colors.grey70,
       transform: "translateY(calc(-50% + 2px))"
     },
 
@@ -46,7 +46,7 @@ export default ({ theme, color, disabled }: Props): {} => {
       height: 16,
       border: 0,
       borderRadius: "50%",
-      boxShadow: `1px 0px 0px 0px ${theme.greys["70"] || "#666"} inset`,
+      boxShadow: `1px 0px 0px 0px ${theme.colors.grey70} inset`,
       animation: `.7s ${spin} linear infinite`
     },
 

@@ -1,23 +1,19 @@
-const THEME_COLORS = {
-  primary: "#22205F",
-  accent: "#3333FF",
-  secondary: "#00CB98",
-  tertiary: "#FFFF98",
-  warn: "#DE1A1A"
-}
-
-const THEME_GREYS = {
-  10: "#F5F5F5",
-  20: "#F1F1F1",
-  30: "#D0D9E5",
-  40: "#C6D1E1",
-  50: "#BBCADC",
-  60: "#999999",
-  70: "#8092B0",
-  80: "#747474",
-  90: "#445873",
-  100: "#2D3842",
-  white: "#FFFFFF"
+const THEME_COLORS: ThemeColors = {
+  info: "#1499CE",
+  success: "#689F2C",
+  warning: "#FFAE00",
+  error: "#DE1A1A",
+  white: "#FFFFFF",
+  black: "#000000",
+  grey10: "#F5F5F5",
+  grey20: "#F1F1F1",
+  grey30: "#D0D9E5",
+  grey40: "#C6D1E1",
+  grey50: "#BBCADC",
+  grey60: "#999999",
+  grey70: "#8092B0",
+  grey80: "#747474",
+  grey90: "#445873"
 }
 
 const baseTypography = {
@@ -55,7 +51,6 @@ const DEFAULT_TYPOGRAPHY: ThemeTypography = {
 
 const DEFAULT_THEME: Theme = {
   colors: THEME_COLORS,
-  greys: THEME_GREYS,
   typography: DEFAULT_TYPOGRAPHY,
   fonts: {
     fontFamily: "Proxima Nova",

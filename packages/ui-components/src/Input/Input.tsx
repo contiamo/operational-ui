@@ -17,7 +17,7 @@ type StyleProps = {
 const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   padding: theme.spacing / 2,
   border: "1px solid",
-  borderColor: theme.greys["30"],
+  borderColor: theme.colors.grey30,
   font: "inherit",
   WebkitAppearance: "none"
 }))

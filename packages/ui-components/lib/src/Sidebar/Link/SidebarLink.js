@@ -14,14 +14,14 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff", textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.greys["80"] || "#747474", "white"]), disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff", textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.grey80, "white"]), disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
     return __assign({ position: "relative", display: "flex", padding: theme.spacing / 2, transition: "background-color .1s ease", cursor: "pointer", fontSize: ".9rem", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor, backgroundColor: backgroundColor }, disabledStyle, { "&:link, &:visited": {
             color: textColor
         }, "&.SideNavigationLink + .SideNavigationLink": {
             borderTop: "1px solid",
-            borderColor: theme.greys["10"] || "#F5F5F5"
+            borderColor: theme.colors.grey10
         }, ":hover": {
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(5),
             // The text color needs to change too if it gets too dark 😁

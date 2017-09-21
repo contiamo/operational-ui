@@ -3,24 +3,44 @@
 exports[`App Showcase: Sidebar Should render correctly 1`] = `
 <glamorous(Sidebar)>
   <glamorous(SidebarItem)
+    label="Basics"
+  >
+    <glamorous(SidebarLink)
+      disabled={false}
+      to="/components/colors"
+    >
+      Colors
+    </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={false}
+      to="/components/typography"
+    >
+      Typography
+    </glamorous(SidebarLink)>
+  </glamorous(SidebarItem)>
+  <glamorous(SidebarItem)
     label="Data Entry"
   >
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/buttons"
     >
       Buttons
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/switch"
     >
       Switch
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/form-fields"
     >
       Form Fields
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/color-picker"
     >
       Color Picker
@@ -60,8 +80,8 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Progress
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/tooltips"
-      tooltip="Like this."
     >
       Tooltips
     </glamorous(SidebarLink)>
@@ -75,16 +95,19 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Context Menu
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/cards"
     >
       Cards
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/chips"
     >
       Chips
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/stats"
     >
       Stats
@@ -94,13 +117,13 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     label="Navigation"
   >
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/sidebar"
     >
       Sidebar
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/side-navigation"
     >
       Side Navigation
     </glamorous(SidebarLink)>
@@ -116,7 +139,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
-    label="Resources"
+    label="Layout"
   >
     <glamorous(SidebarLink)
       disabled={true}
@@ -127,15 +150,6 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       disabled={true}
     >
       List
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-  <glamorous(SidebarItem)
-    label="Icons"
-  >
-    <glamorous(SidebarLink)
-      to="/components/icons"
-    >
-      Icons
     </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
 </glamorous(Sidebar)>

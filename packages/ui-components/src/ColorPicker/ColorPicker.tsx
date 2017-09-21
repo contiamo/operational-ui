@@ -5,7 +5,6 @@ import glamorous from "glamorous"
 type Props = {
   color?: string
   size?: number
-  theme?: Theme
   onChange?: (color: string) => any
 }
 
@@ -17,8 +16,10 @@ type State = {
 type ColorSquareProps = {
   color: string
   size: number
-  theme: Theme
+  theme?: Theme
 }
+
+const hasTheme = (theme: any): boolean => theme && Object.keys(theme).length > 0
 
 const ColorSquare = glamorous.div(
   {
@@ -26,29 +27,39 @@ const ColorSquare = glamorous.div(
     borderRadius: 2,
     cursor: "pointer"
   },
-  ({ color, size, theme }: ColorSquareProps) => ({
-    width: size,
-    height: size,
-    boxShadow: `0 0 0 1px ${theme.greys["30"]}`,
-    backgroundColor: color
-  })
+  ({ color, size, theme }: ColorSquareProps) =>
+    // Need to check this because the tests run without a ThemeProvider
+    // Otherwise, tests could not access the state of ColorPicker.
+    hasTheme(theme)
+      ? {
+          width: size,
+          height: size,
+          boxShadow: `0 0 0 1px ${theme.colors.grey30}`,
+          backgroundColor: color
+        }
+      : {}
 )
 
 type PickerContainerProps = {
   top: number
   left: number
-  theme: Theme
+  theme?: Theme
 }
 
 const PickerContainer = glamorous.div(
   {
     position: "fixed"
   },
-  ({ top, left, theme }: PickerContainerProps) => ({
-    top: top + 8,
-    left: left + 8,
-    zIndex: (theme.baseZIndex || 1) * 1000
-  })
+  ({ top, left, theme }: PickerContainerProps) =>
+    // Need to check this because the tests run without a ThemeProvider
+    // Otherwise, tests could not access the state of ColorPicker.
+    hasTheme(theme)
+      ? {
+          top: top + 8,
+          left: left + 8,
+          zIndex: theme.baseZIndex * 1000
+        }
+      : {}
 )
 
 class ColorPicker extends React.Component<Props, State> {
@@ -116,10 +127,10 @@ class ColorPicker extends React.Component<Props, State> {
   }
 
   render() {
-    const { size, theme, color } = this.props
+    const { size, color } = this.props
     return (
       <div ref={containerEl => (this.containerEl = containerEl)} onClick={() => this.togglePicker()}>
-        <ColorSquare size={size} theme={theme} color={this.props.color} />
+        <ColorSquare size={size} color={this.props.color} />
         {this.state.isPickerOpen && (
           <PickerContainer
             top={this.state.position.top}

@@ -13,6 +13,15 @@ exports[`ComponentsPage Should render correctly 1`] = `
       <div
         class="header "
       >
+        Basics
+      </div>
+    </div>
+    <div
+      class="css-1jua26i  "
+    >
+      <div
+        class="header "
+      >
         Data Entry
       </div>
     </div>
@@ -49,24 +58,15 @@ exports[`ComponentsPage Should render correctly 1`] = `
       <div
         class="header "
       >
-        Resources
-      </div>
-    </div>
-    <div
-      class="css-1jua26i  "
-    >
-      <div
-        class="header "
-      >
-        Icons
+        Layout
       </div>
     </div>
   </div>
   <div
-    class="css-37sslk"
+    class="css-oohcsy"
   >
     <div
-      class="Canvas__body"
+      class="css-1wumrn4"
     />
   </div>
 </div>

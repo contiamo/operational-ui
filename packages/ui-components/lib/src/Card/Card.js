@@ -8,9 +8,9 @@ var style = function (_a) {
     var theme = _a.theme, width = _a.width, padding = _a.padding;
     return ({
         width: width,
-        padding: padding ? padding : theme.spacing,
+        padding: padding || theme.spacing,
         boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
-        backgroundColor: "white",
+        backgroundColor: theme.colors.white,
         "& p": {
             lineHeight: "20px"
         },

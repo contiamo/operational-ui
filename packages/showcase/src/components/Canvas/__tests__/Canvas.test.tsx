@@ -1,10 +1,13 @@
 import * as React from "react"
-import { shallow } from "enzyme"
+import { render } from "enzyme"
 
-import { Canvas } from "../Canvas"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import ThemelessCanvas from "../Canvas"
+
+const Canvas = wrapDefaultTheme(ThemelessCanvas)
 
 describe("App Showcase: Canvas", () => {
   it("Should render correctly", () => {
-    expect(shallow(<Canvas>hi</Canvas>)).toMatchSnapshot()
+    expect(render(<Canvas>hi</Canvas>)).toMatchSnapshot()
   })
 })

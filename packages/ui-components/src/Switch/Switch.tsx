@@ -29,15 +29,15 @@ const Button = glamorous.div(
     transition: "transform .3s",
     position: "absolute",
     top: 0,
-    left: 0,
+    left: 1,
     content: " ",
     width: height,
     borderRadius: "50%"
   },
   ({ on, theme }: StyleProps) => ({
-    transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
-    backgroundColor: theme.greys.white,
-    border: `1px solid ${theme.greys["80"]}`,
+    transform: `translate3d(${on ? width - height - 2 : 0}px, 0, 0)`,
+    backgroundColor: theme.colors.white,
+    border: `1px solid ${theme.colors.grey70}`,
     zIndex: theme.baseZIndex + 2
   })
 )
@@ -54,7 +54,7 @@ const Rail = glamorous.div(
     overflow: "hidden"
   },
   ({ on, theme }: StyleProps) => ({
-    backgroundColor: theme.greys["60"],
+    backgroundColor: theme.colors.grey60,
     "&:after": {
       content: " ",
       position: "absolute",
@@ -62,7 +62,7 @@ const Rail = glamorous.div(
       height: "100%",
       top: 0,
       left: 0,
-      backgroundColor: theme.colors.secondary,
+      backgroundColor: theme.colors.success,
       transition: "transform .3s",
       transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
       zIndex: theme.baseZIndex + 1

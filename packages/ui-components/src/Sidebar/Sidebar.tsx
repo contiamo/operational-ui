@@ -18,8 +18,8 @@ const style: {} = ({ theme }: { theme: Theme }) => ({
   overflow: "auto",
   scrollBehavior: "smooth", // future-proof
   fontWeight: 300,
-  backgroundColor: theme.greys.white,
-  color: theme.greys["80"] || "#747474"
+  backgroundColor: theme.colors.white,
+  color: theme.colors.grey80
 })
 
 const Sidebar: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>

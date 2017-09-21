@@ -3,51 +3,51 @@ import glamorous from "glamorous"
 
 import { Card } from "contiamo-ui-components"
 
-type Props = { className?: string, children: React.ReactNode }
+type Props = { className?: string; children: React.ReactNode }
 
-const Canvas = ({ children }: Props) =>
-    <Card css={styles}>
-      <div className="Canvas__body">
-        {children}
-      </div>
-    </Card>,
-  styles: {} = ({ theme }: { theme: Theme }) => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  display: "flex",
+  alignItems: "flex-start",
+  flexBasis: "100%",
+  marginLeft: theme.spacing,
+  maxHeight: "100%",
+  overflow: "auto",
+  WebkitOverflowScrolling: "touch",
+
+  "& > *": {
+    maxWidth: 768
+  },
+
+  "& a:link, & a:visited": {
+    color: theme.colors.info
+  },
+
+  "& a:hover": {
+    color: theme.colors.success
+  },
+
+  "& .playground": {
     display: "flex",
-    alignItems: "flex-start",
-    marginLeft: theme.spacing,
-    maxHeight: "100%",
-    overflow: "auto",
-    WebkitOverflowScrolling: "touch",
+    width: "80vw",
+    maxWidth: 850,
+    maxHeight: 320
+  },
 
-    "& a:link, & a:visited": {
-      color: theme.colors ? theme.colors.primary : "blue"
-    },
+  "& .playgroundCode, & .playgroundPreview": {
+    flex: "1 1 50%"
+  },
+  "& .playgroundPreview": {
+    marginLeft: 16
+  },
+  "& .CodeMirror-wrap.CodeMirror": {
+    minHeight: 320
+  }
+}))
 
-    "& a:hover": {
-      color: theme.colors ? theme.colors.secondary : "green"
-    },
+const Canvas = ({ children }: Props) => (
+  <Container>
+    <Card>{children}</Card>
+  </Container>
+)
 
-    "& .Canvas__body": {
-      maxWidth: 768
-    },
-
-    "& .playground": {
-      display: "flex",
-      width: "80vw",
-      maxWidth: 850,
-      maxHeight: 320
-    },
-
-    "& .playgroundCode, & .playgroundPreview": {
-      flex: "1 1 50%"
-    },
-    "& .playgroundPreview": {
-      marginLeft: 16
-    },
-    "& .CodeMirror-wrap.CodeMirror": {
-      minHeight: 320
-    }
-  })
-
-export default glamorous(Canvas)(styles)
-export { Canvas }
+export default Canvas

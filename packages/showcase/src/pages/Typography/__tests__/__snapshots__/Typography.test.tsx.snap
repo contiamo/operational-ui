@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltips Page Should render correctly 1`] = `
+<div>
+  <div
+    class="css-1kznpaj"
+  >
+    Typography
+  </div>
+  <p>
+    <em>
+      contiamo-ui-components
+    </em>
+     keeps typography styles: by default, there are two font sizes and weights, organized in 4 typography styles, as follows:
+  </p>
+  <div
+    class="playground"
+  >
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        >
+          [object Object]
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

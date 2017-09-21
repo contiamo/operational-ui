@@ -1,29 +1,42 @@
+type ThemeColorName =
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "white"
+  | "black"
+  | "grey10"
+  | "grey20"
+  | "grey30"
+  | "grey40"
+  | "grey50"
+  | "grey60"
+  | "grey70"
+  | "grey80"
+  | "grey90"
+
 interface ThemeColors {
   [key: string]: string
-  primary: string
-  accent: string
-  secondary: string
-  tertiary: string
-  warn: string
-}
-
-interface ThemeGreys {
-  "10": string
-  "20": string
-  "30": string
-  "40": string
-  "50": string
-  "60": string
-  "70": string
-  "80": string
-  "90": string
-  "100": string
+  info: string
+  success: string
+  warning: string
+  error: string
   white: string
+  black: string
+  grey10: string
+  grey20: string
+  grey30: string
+  grey40: string
+  grey50: string
+  grey60: string
+  grey70: string
+  grey80: string
+  grey90: string
 }
 
 interface ThemeTypographyElement {
   fontSize: number
-  fontWeight: 100 | 300 | 400 | 600 | 700
+  fontWeight: 100 | 300 | 400 | 600 | 700 | "normal" | "bold" | "bolder" | "lighter" | "initial" | "inherit"
   textTransform: string
   opacity: number
   letterSpacing: number
@@ -39,7 +52,6 @@ interface ThemeTypography {
 
 interface Theme {
   colors: ThemeColors
-  greys: ThemeGreys
   typography: ThemeTypography
   fonts: {
     fontFamily: string

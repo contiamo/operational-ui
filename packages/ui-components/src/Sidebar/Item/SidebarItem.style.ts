@@ -11,7 +11,7 @@ export default ({ theme, children }: Props): {} => {
         height: 0,
         marginLeft: "auto",
         border: "4px solid transparent",
-        borderLeftColor: theme.greys["20"],
+        borderLeftColor: theme.colors.grey20,
         transition: ".15s transform ease"
       }
     : {}
@@ -25,21 +25,21 @@ export default ({ theme, children }: Props): {} => {
       alignItems: "center",
       padding: theme.spacing / 2,
       borderTop: "1px solid",
-      borderTopColor: theme.greys["10"],
+      borderTopColor: theme.colors.grey10,
       cursor: "pointer",
       outline: "none",
-      backgroundColor: theme.greys.white
+      backgroundColor: theme.colors.white
     },
 
     "& .header:hover": {
-      backgroundColor: theme.greys["10"]
+      backgroundColor: theme.colors.grey10
     },
 
     "&.open .header": {
       borderBottom: "1px solid",
-      borderBottomColor: theme.greys["20"],
+      borderBottomColor: theme.colors.grey20,
       fontWeight: 600,
-      backgroundColor: theme.greys["10"]
+      backgroundColor: theme.colors.grey10
     },
 
     // Caret styles begin here.
@@ -48,13 +48,13 @@ export default ({ theme, children }: Props): {} => {
     },
 
     "&:hover .header::after": {
-      borderLeftColor: theme.greys["80"]
+      borderLeftColor: theme.colors.grey80
     },
 
     "&.open .header.open::after": {
       // rotate the caret to face down when an item is open.
       transform: "translateX(-2px) rotate(90deg)",
-      borderLeftColor: theme.greys["80"]
+      borderLeftColor: theme.colors.grey80
     },
 
     // Spinner for async items replaces a caret.
@@ -63,7 +63,7 @@ export default ({ theme, children }: Props): {} => {
       height: 16,
       border: 0,
       borderRadius: "50%",
-      boxShadow: `1px 0px 0px 0px ${theme.greys["70"]} inset`,
+      boxShadow: `1px 0px 0px 0px ${theme.colors.grey70} inset`,
       animation: `.7s ${spin} linear infinite`
     },
 

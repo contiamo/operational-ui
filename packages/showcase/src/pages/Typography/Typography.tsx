@@ -6,8 +6,6 @@ import { contiamoTheme, CardHeader } from "contiamo-ui-components"
 
 import * as snippet from "./snippets/Typography.snippet"
 
-console.log(contiamoTheme)
-
 export default () => (
   <div>
     <CardHeader>Typography</CardHeader>

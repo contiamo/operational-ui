@@ -21,7 +21,7 @@ var style = function (_a) {
             marginBottom: 3,
             fontSize: ".8rem",
             fontWeight: 600,
-            color: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.greys["60"], theme.greys["10"]])
+            color: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.grey60, theme.colors.grey10])
         }
     };
 };

@@ -1,40 +1,213 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App starts 1`] = `
-<ThemeProvider
-  theme={
-    Object {
-      "baseZIndex": 0,
-      "colors": Object {
-        "accent": "#3333FF",
-        "primary": "#22205F",
-        "secondary": "#00CB98",
-        "tertiary": "#FFFF98",
-        "warn": "#DE1A1A",
-      },
-      "fonts": Object {
-        "WebkitFontSmoothing": "subpixel-antialiased",
-        "fontFamily": "Proxima Nova",
-        "fontSize": 13,
-        "textRendering": "optimizeLegibility",
-      },
-      "greys": Object {
-        "10": "#F5F5F5",
-        "100": "#2D3842",
-        "20": "#F1F1F1",
-        "30": "#D0D9E5",
-        "40": "#C6D1E1",
-        "50": "#BBCADC",
-        "60": "#999999",
-        "70": "#8092B0",
-        "80": "#747474",
-        "90": "#445873",
-        "white": "#FFFFFF",
-      },
-      "spacing": 12,
-    }
-  }
+<div
+  class="css-1yt7k4d"
 >
-  <glamorous(App) />
-</ThemeProvider>
+  <div
+    class="css-1808qq5"
+  >
+    <div
+      class="css-1403f8j SideNavigationHeader"
+      role="listbox"
+      tabindex="-1"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="Contiamo"
+          class="css-bvxqw"
+          src="/img/logo/outline.png"
+        />
+        Contiamo
+      </a>
+      <div
+        class="SideNavigationHeader__value"
+      />
+    </div>
+    <div
+      class="css-1o7yu73 SideNavigationItem"
+      role="button"
+      tabindex="-1"
+    >
+      <a
+        href="/components"
+      >
+        <svg
+          height="20"
+          viewbox="0 0 24 24"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.79 0l-8-4a2 2 0 0 1-1.1-1.8V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"
+            fill="none"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <polyline
+            fill="none"
+            points="2.32 6.16 12 11 21.68 6.16"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <line
+            fill="none"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            x1="12"
+            x2="12"
+            y1="22.76"
+            y2="11"
+          />
+        </svg>
+        <div
+          class="css-j9z7vu SideNavigationItem__label"
+        >
+          Components
+        </div>
+      </a>
+    </div>
+    <div
+      class="css-1o7yu73 SideNavigationItem"
+      role="button"
+      tabindex="-1"
+    >
+      <a
+        href="#"
+      >
+        <svg
+          height="20"
+          viewbox="0 0 24 24"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="none"
+            height="7"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="7"
+            x="3"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="7"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="7"
+            x="14"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="7"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="7"
+            x="14"
+            y="14"
+          />
+          <rect
+            fill="none"
+            height="7"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="7"
+            x="3"
+            y="14"
+          />
+        </svg>
+        <div
+          class="SideNavigationItem__label"
+        >
+          Composed
+        </div>
+      </a>
+    </div>
+    <div
+      class="css-1o7yu73 SideNavigationItem"
+      role="button"
+      tabindex="-1"
+    >
+      <a
+        href="#"
+      >
+        <svg
+          height="20"
+          viewbox="0 0 24 24"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="none"
+            height="18"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="4"
+            x="10"
+            y="3"
+          />
+          <rect
+            fill="none"
+            height="13"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="4"
+            x="18"
+            y="8"
+          />
+          <rect
+            fill="none"
+            height="8"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            width="4"
+            x="2"
+            y="13"
+          />
+        </svg>
+        <div
+          class="SideNavigationItem__label"
+        >
+          Visualizations
+        </div>
+      </a>
+    </div>
+    <div
+      class="css-1c5lpzn"
+    />
+  </div>
+  <div
+    class="css-lbx5g2"
+  >
+    <div
+      class="css-t9hfxf"
+    >
+      Contiamo UI
+    </div>
+  </div>
+</div>
 `;

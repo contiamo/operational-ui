@@ -13,7 +13,7 @@ type Props = {
 }
 
 const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.greys["100"]
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.grey90
 
   return {
     position: "relative",
@@ -27,7 +27,7 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
     color: readableTextColor(backgroundColor)(["black", "white"]),
 
     "& + &": {
-      borderTop: `1px solid ${theme.greys["100"]}`
+      borderTop: `1px solid ${theme.colors.grey90}`
     },
 
     ":hover": {

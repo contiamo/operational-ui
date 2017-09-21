@@ -9,11 +9,11 @@ var style = function (_a) {
         marginBottom: 16,
         padding: theme.spacing,
         borderBottom: "1px solid",
-        borderColor: theme.greys["10"] || "#f5f5f5",
+        borderColor: theme.colors.grey10,
         fontWeight: 700,
         lineHeight: 1,
         "* + &": {
-            marginTop: theme.spacing ? theme.spacing : 16
+            marginTop: theme.spacing
         }
     });
 };

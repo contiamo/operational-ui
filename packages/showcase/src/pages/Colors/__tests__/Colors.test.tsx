@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import ThemelessTypography from "../Typography"
+import ThemelessColors from "../Colors"
+
 import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
-const Typography = wrapDefaultTheme(ThemelessTypography)
+const Colors = wrapDefaultTheme(ThemelessColors)
 
 describe("Tooltips Page", () => {
   it("Should render correctly", () => {
-    expect(render(<Typography />)).toMatchSnapshot()
+    expect(render(<Colors />)).toMatchSnapshot()
   })
 })
