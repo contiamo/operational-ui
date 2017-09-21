@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColorPickerPage Should render correctly 1`] = `
-<div
-  style="color:#222;"
->
+<div>
   <div
-    class="css-by30gj"
+    class="css-1kznpaj"
   >
     Color Picker
   </div>
@@ -16,7 +14,7 @@ exports[`ColorPickerPage Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-81lp1j"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>
