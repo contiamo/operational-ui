@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "react-router-dom"
 
 import Playground from "../../components/Playground/Playground"
-import { Sidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
+import { Sidebar, SidebarItem, SidebarLink, Card, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 import * as snippet from "./snippets/sidebar.snippet"
@@ -11,7 +11,7 @@ import propDescription from "./propDescription"
 export const fetch = (text: any) => new Promise(resolve => setTimeout(() => resolve(text), 2000))
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Sidebar</CardHeader>
 
     <p>
@@ -55,5 +55,5 @@ export default () => (
         that such components do.
       </strong>
     </p>
-  </div>
+  </Card>
 )

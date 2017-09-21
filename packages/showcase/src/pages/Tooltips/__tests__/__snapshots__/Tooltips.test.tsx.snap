@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tooltips Page Should render correctly 1`] = `
-<div>
+<div
+  class="css-1wumrn4"
+>
   <div
     class="css-1kznpaj"
   >
@@ -43,7 +45,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     Props
   </h4>
   <table
-    class="css-mpx3qv"
+    class="css-xa6ngs"
   >
     <thead>
       <tr>

@@ -1,11 +1,11 @@
 import * as React from "react"
-import { shallow, mount } from "enzyme"
+import { mount } from "enzyme"
 import { jsdom } from "jsdom"
 
 import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 import ThemelessColorPicker from "../ColorPicker"
 
-const ColorPicker = wrapDefaultTheme(ThemelessColorPicker)
+const ColorPicker = ThemelessColorPicker
 
 /*
   We need a DOM in order to test:
@@ -19,7 +19,7 @@ describe("ColorPicker", () => {
   let comp
   beforeEach(() => {
     comp = mount(<ColorPicker />, {
-      attachTo: global.document.getElementById("root")
+      attachTo: document.getElementById("root")
     })
   })
   it("Should initialize properly", () => {

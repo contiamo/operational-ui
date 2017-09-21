@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Cards Page Should render correctly 1`] = `
-<div>
+<div
+  class="css-1wumrn4"
+>
   <div
     class="css-1kznpaj"
   >
@@ -14,12 +16,12 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-1m8lit7 chip"
+      class="css-1kcm2xa chip"
     >
       Chip 1
     </div>
     <div
-      class="css-1m8lit7 chip"
+      class="css-1kcm2xa chip"
     >
       Chip 2
     </div>

@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
-import { Stat, CardHeader } from "contiamo-ui-components"
+import { Stat, Card, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 
@@ -9,7 +9,7 @@ import * as snippet from "./snippets/stats.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Stats</CardHeader>
 
     <p>
@@ -28,5 +28,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </div>
+  </Card>
 )

@@ -15,7 +15,7 @@ import ComponentsPage from "./pages/Components"
 type Props = { className?: string }
 
 const SideNavigationWithRouter = withRouter(SideNavigation),
-  App = ({ className }: Props) =>
+  App = ({ className }: Props) => (
     <Router>
       <ThemeProvider theme={contiamoTheme}>
         <div className={className}>
@@ -27,35 +27,36 @@ const SideNavigationWithRouter = withRouter(SideNavigation),
           </Div>
         </div>
       </ThemeProvider>
-    </Router>,
+    </Router>
+  ),
   styles: {} = {
     display: "flex",
     ...contiamoTheme.fonts,
-    backgroundColor: contiamoTheme.greys["20"],
+    backgroundColor: contiamoTheme.colors.grey20,
     "& hr": {
       margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
       height: 1,
       border: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.14)",
+      backgroundColor: "rgba(0, 0, 0, 0.14)"
     },
     "& .app": {
       display: "flex",
       flexDirection: "column",
       width: "100vw",
       height: "100vh",
-      marginLeft: 60,
+      marginLeft: 60
     },
     "& h1": {
       margin: 0,
-      fontSize: "2rem",
+      fontSize: "2rem"
     },
     "& h2": {
-      fontSize: "1.3rem",
+      fontSize: "1.3rem"
     },
     "& p": {
       margin: 0,
-      marginBottom: 16,
-    },
+      marginBottom: 16
+    }
   }
 
 // @todo -> type this better
@@ -64,7 +65,7 @@ appFontWeights.forEach((fontWeight: number) => {
   x.fontFace({
     ...appFontFace,
     ...getFontSrcString(fontWeight)()(),
-    fontWeight,
+    fontWeight
   })
 })
 

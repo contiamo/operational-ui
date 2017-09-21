@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Cards Page Should render correctly 1`] = `
-<div>
+<div
+  class="css-1wumrn4"
+>
   <div
     class="css-1kznpaj"
   >
@@ -11,7 +13,7 @@ exports[`Cards Page Should render correctly 1`] = `
     These elements make up the UI. They accept any type of children and elegantly wrap them.
   </p>
   <div
-    class="css-er2abz"
+    class="css-1bt59o0"
   >
     Hello, I am a card. And I can contain 
     <em>
@@ -23,13 +25,13 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-e9dar8"
+      class="css-1ci5bnd"
     >
       Hello, we are cards.
       <br />
     </div>
     <div
-      class="css-1di34ln"
+      class="css-e6qh8p"
     >
       Indeed, we are.
       <br />
@@ -43,7 +45,7 @@ exports[`Cards Page Should render correctly 1`] = `
     </div>
   </div>
   <div
-    class="css-1bp7grg"
+    class="css-1mvpz62"
   >
     Hello, I am a 
     <em>

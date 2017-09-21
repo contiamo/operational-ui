@@ -13,7 +13,8 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, onClick = _a.onClick;
-    var backgroundColor = contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.primary), actionStyles = onClick
+    var backgroundColor = contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]);
+    var actionStyles = onClick
         ? {
             "& .action": {
                 backgroundColor: backgroundColor,

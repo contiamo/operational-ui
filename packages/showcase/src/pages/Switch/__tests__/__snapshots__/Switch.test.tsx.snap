@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Switch Page Should render correctly 1`] = `
-<div>
+<div
+  class="css-1wumrn4"
+>
   <div
     class="css-1kznpaj"
   >

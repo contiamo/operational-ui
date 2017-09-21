@@ -22,7 +22,7 @@ type Props = {
 
 const style: {} = ({ theme, color, disabled }: Props) => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff",
-    textColor = readableTextColor(backgroundColor)([theme.greys["80"] || "#747474", "white"]),
+    textColor = readableTextColor(backgroundColor)([theme.colors.grey80, "white"]),
     disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
@@ -44,7 +44,7 @@ const style: {} = ({ theme, color, disabled }: Props) => {
 
     "&.SideNavigationLink + .SideNavigationLink": {
       borderTop: "1px solid",
-      borderColor: theme.greys["10"] || "#F5F5F5"
+      borderColor: theme.colors.grey10
     },
 
     ":hover": {

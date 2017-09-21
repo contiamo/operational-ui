@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: Canvas Should render correctly 1`] = `
-<glamorous(Card)
-  css={[Function]}
+<div
+  class="css-l4qw59"
 >
   <div
-    className="Canvas__body"
+    class="css-1j4qlts"
   >
     hi
   </div>
-</glamorous(Card)>
+</div>
 `;

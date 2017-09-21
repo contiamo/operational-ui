@@ -17,8 +17,8 @@ var style = function (_a) {
         overflow: "auto",
         scrollBehavior: "smooth",
         fontWeight: 300,
-        backgroundColor: theme.greys.white,
-        color: theme.greys["80"] || "#747474"
+        backgroundColor: theme.colors.white,
+        color: theme.colors.grey80
     });
 };
 var Sidebar = function (_a) {

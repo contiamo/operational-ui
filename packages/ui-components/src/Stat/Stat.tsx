@@ -31,7 +31,7 @@ const style: {} = ({ theme, color }: Props) => {
       marginBottom: 3,
       fontSize: ".8rem",
       fontWeight: 600,
-      color: readableTextColor(backgroundColor)([theme.greys["60"], theme.greys["10"]])
+      color: readableTextColor(backgroundColor)([theme.colors.grey60, theme.colors.grey10])
     }
   }
 }

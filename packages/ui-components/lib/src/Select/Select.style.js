@@ -14,7 +14,7 @@ exports.default = function (_a) {
         width: "fit-content",
         minHeight: 20,
         border: "1px solid",
-        borderColor: theme.greys["30"] || "#ccc",
+        borderColor: theme.colors.grey30,
         opacity: disabled ? 0.5 : 1,
         cursor: "pointer",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
@@ -29,7 +29,7 @@ exports.default = function (_a) {
             width: 0,
             height: 0,
             border: "4px solid transparent",
-            borderTopColor: theme.greys["70"] || "#888",
+            borderTopColor: theme.colors.grey70,
             transform: "translateY(calc(-50% + 2px))"
         },
         // spinner when loading.
@@ -39,7 +39,7 @@ exports.default = function (_a) {
             height: 16,
             border: 0,
             borderRadius: "50%",
-            boxShadow: "1px 0px 0px 0px " + (theme.greys["70"] || "#666") + " inset",
+            boxShadow: "1px 0px 0px 0px " + theme.colors.grey70 + " inset",
             animation: ".7s " + contiamo_ui_utils_1.spin + " linear infinite"
         },
         "& .Select__options": {

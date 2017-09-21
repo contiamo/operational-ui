@@ -13,37 +13,37 @@ type Props = {
 }
 
 const style: {} = ({ theme, color, onClick }: Props) => {
-  const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.primary),
-    actionStyles = onClick
-      ? {
-          "& .action": {
-            backgroundColor,
-            position: "absolute",
-            top: 0,
-            right: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100%",
-            padding: `0 ${theme.spacing / 4}px`,
-            width: "fit-content",
-            opacity: 0,
-            transform: "translateX(10px)",
-            transition: ".3s transform ease, .3s opacity ease"
-          },
+  const backgroundColor = hexOrColor(color)(theme.colors[color])
+  const actionStyles = onClick
+    ? {
+        "& .action": {
+          backgroundColor,
+          position: "absolute",
+          top: 0,
+          right: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          padding: `0 ${theme.spacing / 4}px`,
+          width: "fit-content",
+          opacity: 0,
+          transform: "translateX(10px)",
+          transition: ".3s transform ease, .3s opacity ease"
+        },
 
-          "& .action::before": {
-            content: "\"\"",
-            position: "absolute",
-            top: 0,
-            left: "-100%",
-            display: "block",
-            width: "100%",
-            height: "100%",
-            backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`
-          }
+        "& .action::before": {
+          content: "\"\"",
+          position: "absolute",
+          top: 0,
+          left: "-100%",
+          display: "block",
+          width: "100%",
+          height: "100%",
+          backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`
         }
-      : {}
+      }
+    : {}
 
   return {
     backgroundColor,

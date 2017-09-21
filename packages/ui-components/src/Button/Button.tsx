@@ -9,6 +9,7 @@ type Modifier = "group" | "space"
 type StyleProps = {
   theme?: Theme
   color?: string
+  colorOverride?: string
   active?: boolean
   modifiers?: Modifier[]
 }

@@ -1,7 +1,10 @@
 import * as React from "react"
 import { shallow } from "enzyme"
 
-import { PropsTable } from "../PropsTable"
+import ThemelessPropsTable from "../PropsTable"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+
+const PropsTable = wrapDefaultTheme(ThemelessPropsTable)
 
 const sampleProps = [
   {

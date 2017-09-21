@@ -1,73 +1,150 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PropsTable Should render correctly with props 1`] = `
-<table>
-  <thead>
-    <tr>
-      <th>
-        Name
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Default
-      </th>
-      <th>
-        Type
-      </th>
-      <th>
-        Optional?
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Hello
-      </td>
-      <td />
-      <td>
-        false
-      </td>
-      <td />
-      <td>
-        🚫
-      </td>
-    </tr>
-  </tbody>
-</table>
+<ThemeProvider
+  theme={
+    Object {
+      "baseZIndex": 0,
+      "colors": Object {
+        "black": "#000000",
+        "error": "#DE1A1A",
+        "grey10": "#F5F5F5",
+        "grey20": "#F1F1F1",
+        "grey30": "#D0D9E5",
+        "grey40": "#C6D1E1",
+        "grey50": "#BBCADC",
+        "grey60": "#999999",
+        "grey70": "#8092B0",
+        "grey80": "#747474",
+        "grey90": "#445873",
+        "info": "#1499CE",
+        "success": "#689F2C",
+        "warning": "#FFAE00",
+        "white": "#FFFFFF",
+      },
+      "fonts": Object {
+        "WebkitFontSmoothing": "subpixel-antialiased",
+        "fontFamily": "Proxima Nova",
+        "fontSize": 13,
+        "textRendering": "optimizeLegibility",
+      },
+      "spacing": 12,
+      "typography": Object {
+        "body": Object {
+          "fontSize": 13,
+          "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "heading1": Object {
+          "fontSize": 13,
+          "fontWeight": 700,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "heading2": Object {
+          "fontSize": 13,
+          "fontWeight": 700,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 0.6,
+          "textTransform": "none",
+        },
+        "small": Object {
+          "fontSize": 12,
+          "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+      },
+    }
+  }
+>
+  <PropsTable
+    props={
+      Array [
+        Object {
+          "defaultValue": "false",
+          "name": "Hello",
+        },
+      ]
+    }
+  />
+</ThemeProvider>
 `;
 
 exports[`PropsTable Should render correctly without props 1`] = `
-<table>
-  <thead>
-    <tr>
-      <th>
-        Name
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Default
-      </th>
-      <th>
-        Type
-      </th>
-      <th>
-        Optional?
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td
-        colSpan={5}
-      >
-        There seem to be no props. 😿
-      </td>
-    </tr>
-  </tbody>
-</table>
+<ThemeProvider
+  theme={
+    Object {
+      "baseZIndex": 0,
+      "colors": Object {
+        "black": "#000000",
+        "error": "#DE1A1A",
+        "grey10": "#F5F5F5",
+        "grey20": "#F1F1F1",
+        "grey30": "#D0D9E5",
+        "grey40": "#C6D1E1",
+        "grey50": "#BBCADC",
+        "grey60": "#999999",
+        "grey70": "#8092B0",
+        "grey80": "#747474",
+        "grey90": "#445873",
+        "info": "#1499CE",
+        "success": "#689F2C",
+        "warning": "#FFAE00",
+        "white": "#FFFFFF",
+      },
+      "fonts": Object {
+        "WebkitFontSmoothing": "subpixel-antialiased",
+        "fontFamily": "Proxima Nova",
+        "fontSize": 13,
+        "textRendering": "optimizeLegibility",
+      },
+      "spacing": 12,
+      "typography": Object {
+        "body": Object {
+          "fontSize": 13,
+          "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "heading1": Object {
+          "fontSize": 13,
+          "fontWeight": 700,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "heading2": Object {
+          "fontSize": 13,
+          "fontWeight": 700,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 0.6,
+          "textTransform": "none",
+        },
+        "small": Object {
+          "fontSize": 12,
+          "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+      },
+    }
+  }
+>
+  <PropsTable />
+</ThemeProvider>
 `;

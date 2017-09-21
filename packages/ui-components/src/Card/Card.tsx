@@ -13,9 +13,9 @@ type Props = {
 
 const style = ({ theme, width, padding }: Props) => ({
   width,
-  padding: padding ? padding : theme.spacing,
+  padding: padding || theme.spacing,
   boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
-  backgroundColor: "white",
+  backgroundColor: theme.colors.white,
   "& p": {
     lineHeight: "20px"
   },

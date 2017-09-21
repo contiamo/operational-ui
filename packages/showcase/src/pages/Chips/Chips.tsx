@@ -2,14 +2,14 @@ import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { Chip, PlusChip, CardHeader } from "contiamo-ui-components"
+import { Chip, PlusChip, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/simple-chip.snippet"
 import * as plusSnippet from "./snippets/plus-chip.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Chips</CardHeader>
 
     <p>
@@ -43,5 +43,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription.plusChip} />
-  </div>
+  </Card>
 )
