@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-showcase",
-  "version": "0.1.0",
+  "version": "0.0.1-0",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
@@ -30,8 +30,8 @@
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-jest": "^20.0.3",
-    "contiamo-ui-components": "0.1.0",
-    "contiamo-ui-utils": "0.1.0",
+    "contiamo-ui-components": "^0.0.1-0",
+    "contiamo-ui-utils": "^0.0.1-0",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "file-loader": "^0.11.2",
@@ -78,7 +78,12 @@
     "webpack-merge": "^4.1.0"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
@@ -87,8 +92,14 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["../../node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"],
+    "snapshotSerializers": [
+      "../../node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ],
     "mapCoverage": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-components",
-  "version": "0.1.0",
+  "version": "0.0.1-0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./types/main.d.ts",
@@ -41,7 +41,7 @@
     "@types/react-icons": "^2.2.2",
     "@types/react-router-dom": "^4.0.7",
     "@types/tinycolor2": "^1.4.0",
-    "contiamo-ui-utils": "0.1.0",
+    "contiamo-ui-utils": "^0.0.1-0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "prop-types": "^15.5.10",
@@ -54,7 +54,11 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
@@ -63,8 +67,14 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["../../node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"],
+    "snapshotSerializers": [
+      "../../node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ],
     "mapCoverage": true
   }
 }
