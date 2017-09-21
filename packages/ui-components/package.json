@@ -13,7 +13,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint ./src/**/* ./index.ts --fix",
-    "precommit": "npm run test && npm run lint"
+    "precommit": "npm run test && npm run lint",
+    "preversion": "npm run precommit",
+    "version": "npm run package && git add lib"
   },
   "devDependencies": {
     "@types/react-color": "^2.13.0",
