@@ -7,4 +7,4 @@ coverage
 packages/*
 !packages/utils
 !packages/ui-components
-!packages/ui-showcase
+!packages/showcase
