@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-utils",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A collection of utilities used within the Contiamo UI suite",
   "main": "./lib/index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
@@ -28,11 +28,7 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
