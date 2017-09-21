@@ -1,23 +1,23 @@
 import * as React from "react"
-import { shallow } from "enzyme"
+import { render, mount } from "enzyme"
 
-import { Input } from "../Input"
+import ThemelessInput from "../Input"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+
+const Input = wrapDefaultTheme(ThemelessInput)
 
 describe("Input", () => {
-  let comp
-
-  comp = shallow(
-    <Input className="hi" placeholder="hello" name="bienvenue">
-      How are you?
-    </Input>
-  )
-
   it("Should initialize", () => {
-    expect(comp).toMatchSnapshot()
+    const input = render(<Input className="hi" value="How are you?" placeholder="hello" name="bienvenue" />)
+    expect(input).toMatchSnapshot()
   })
 
-  it("Should update value based on state", () => {
-    comp.simulate("change", { target: { value: "Hello!" } })
-    expect(comp.state().value).toBe("Hello!")
+  it("Should respond to change", () => {
+    const myFunc = jest.fn()
+    const input = mount(
+      <Input className="hi" value="How are you?" placeholder="hello" name="bienvenue" onChange={myFunc} />
+    )
+    input.simulate("change", { target: { value: "Hello!" } })
+    expect(myFunc).toHaveBeenCalledWith("Hello!")
   })
 })

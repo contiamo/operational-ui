@@ -5,48 +5,35 @@ type Props = {
   className?: string
   placeholder?: string
   name?: string
-  children?: string
-  theme?: Theme
-}
-
-type State = {
   value: string
+  onChange?: (newVal: string) => void
+  children?: string
 }
 
-class Input extends React.Component<Props, State> {
-  state = {
-    value: this.props.children || ""
-  }
-
-  static defaultProps = {
-    className: ""
-  }
-
-  updateValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement
-    this.setState(() => ({ value }))
-  }
-
-  render() {
-    return (
-      <input
-        className={this.props.className}
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        value={this.state.value}
-        onChange={e => this.updateValue(e)}
-      />
-    )
-  }
+type StyleProps = {
+  theme: Theme
 }
 
-const style = ({ theme }: Props) => ({
+const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   padding: theme.spacing / 2,
   border: "1px solid",
-  borderColor: theme.greys["30"] || "#ccc",
+  borderColor: theme.greys["30"],
   font: "inherit",
   WebkitAppearance: "none"
-})
+}))
 
-export default glamorous(Input)(style)
-export { Input }
+const Input: React.SFC<Props> = ({ className, name, placeholder, value, onChange }) => {
+  return (
+    <StyledInput
+      className={className}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={(e: any) => {
+        onChange(e.target.value)
+      }}
+    />
+  )
+}
+
+export default Input
