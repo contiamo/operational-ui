@@ -9,3 +9,4 @@ package.json
 tsconfig.json
 tslint.json
 *.log
+!lib/*
