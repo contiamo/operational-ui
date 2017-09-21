@@ -47,7 +47,6 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/date-picker"
     >
       Date Picker
     </glamorous(SidebarLink)>
@@ -57,31 +56,26 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
   >
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/modals"
     >
       Modals
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/notifications"
     >
       Notifications
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/alerts"
     >
       Alerts
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/messages"
     >
       Messages
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/progress"
     >
       Progress
     </glamorous(SidebarLink)>
@@ -97,7 +91,6 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
   >
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/context-menu"
     >
       Context Menu
     </glamorous(SidebarLink)>
@@ -131,19 +124,16 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/side-navigation"
     >
       Side Navigation
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/tabs"
     >
       Tabs
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/pagination"
     >
       Pagination
     </glamorous(SidebarLink)>
@@ -153,13 +143,11 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
   >
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/grid"
     >
       Grid
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={true}
-      to="/components/list"
     >
       List
     </glamorous(SidebarLink)>
