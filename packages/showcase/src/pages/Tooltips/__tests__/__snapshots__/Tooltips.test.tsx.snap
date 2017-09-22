@@ -149,131 +149,32 @@ exports[`Tooltips Page Should render correctly 1`] = `
   <h4>
     Usage
   </h4>
-  <pre
-    style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444;"
+  <div
+    class="playground"
   >
-    <code>
-      
-
-      <span
-        style="font-weight:bold;"
+    <div
+      class="playgroundCode"
+    >
+      <div
+        class="ReactCodeMirror playgroundStage"
       >
-        const
-      </span>
-       MyDiv = 
-      <span>
-        <span>
-          ()
-        </span>
-         =&gt;
-      </span>
-       (
-      <span>
-        <span>
-          &lt;
-          <span
-            style="font-weight:bold;"
-          >
-            div
-          </span>
-          &gt;
-        </span>
-        Hover for Spanish!
-        <span>
-          &lt;/
-          <span
-            style="font-weight:bold;"
-          >
-            div
-          </span>
-          &gt;
-        </span>
-      </span>
-      )
-
-      <span
-        style="font-weight:bold;"
-      >
-        const
-      </span>
-       MyDivWithTooltip = withTooltip(MyDiv)
-
-ReactDOM.render(
-  
-      <span>
-        <span>
-          &lt;
-          <span
-            style="font-weight:bold;"
-          >
-            MyDivWithTooltip
-          </span>
-          
-    
-          <span>
-            tooltip
-          </span>
-          =
-          <span
-            style="color:#880000;"
-          >
-            "Hola, compadre!"
-          </span>
-          
-    
-          <span>
-            tooltipColor
-          </span>
-          =
-          <span
-            style="color:#880000;"
-          >
-            "#f00"
-          </span>
-          
-    
-          <span>
-            tooltipAnchor
-          </span>
-          =
-          <span
-            style="color:#880000;"
-          >
-            "bottom"
-          </span>
-          
-  &gt;
-        </span>
-        
-    Hover for Spanish
-  
-        <span>
-          &lt;/
-          <span
-            style="font-weight:bold;"
-          >
-            MyDivWithTooltip
-          </span>
-          &gt;
-        </span>
-      </span>
-      ,
-  
-      <span
-        style="color:#397300;"
-      >
-        document
-      </span>
-      .querySelector(
-      <span
-        style="color:#880000;"
-      >
-        '#app)
-)
-
-      </span>
-    </code>
-  </pre>
+        <textarea
+          autocomplete="off"
+        >
+          [object Object]
+        </textarea>
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
+    </div>
+  </div>
   <p>
     <strong>
       Note: The \`color\` and \`anchor\` props are still available, but prepended with the word \`tooltip\` in order not to override any similar props on your component.

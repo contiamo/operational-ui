@@ -3,11 +3,11 @@ import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Playground from "../../components/Playground/Playground"
-import { Tooltip, CardHeader } from "contiamo-ui-components"
+import { withTooltip, Tooltip, CardHeader } from "contiamo-ui-components"
 import Table from "../../components/PropsTable/PropsTable"
 
-import * as basicSnippet from "./snippets/basic.snippet"
-import withTooltipSnippet from "./snippets/with-tooltip"
+import * as simpleSnippet from "./snippets/Tooltips.simple.snippet"
+import * as wrapperSnippet from "./snippets/Tooltips.wrapper.snippet"
 import propDescription from "./propDescription"
 
 const StickyTooltip = glamorous(Tooltip)({
@@ -27,7 +27,7 @@ export default () => (
     </p>
 
     <h4>Usage</h4>
-    <Playground snippet={String(basicSnippet)} components={{ Tooltip }} />
+    <Playground snippet={String(simpleSnippet)} components={{ Tooltip }} />
 
     <h4>Props</h4>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
@@ -41,7 +41,7 @@ export default () => (
     <div style={{ marginBottom: 32 }} />
 
     <h4>Usage</h4>
-    <SyntaxHighlighter language="javascript">{withTooltipSnippet}</SyntaxHighlighter>
+    <Playground snippet={String(wrapperSnippet)} components={{ Tooltip }} scope={{ withTooltip }} />
     <p>
       <strong>
         Note: The `color` and `anchor` props are still available, but prepended with the word `tooltip` in order not to
