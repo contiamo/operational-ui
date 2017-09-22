@@ -54,7 +54,7 @@ export default ({ theme, color, disabled }: Props): {} => {
       position: "absolute",
       top: "calc(100% + 1px)",
       left: 0,
-      zIndex: theme.baseZIndex * 1000,
+      zIndex: theme.baseZIndex + 100,
       width: "100%",
       boxShadow: "0 2px 7px 2px rgba(0, 0, 0, .14)",
       opacity: 0,

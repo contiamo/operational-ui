@@ -38,7 +38,7 @@ var getTooltipPosition = function (anchor) {
 exports.default = function (_a) {
     var theme = _a.theme, color = _a.color, anchor = _a.anchor;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : "black";
-    return __assign({ backgroundColor: backgroundColor, position: "absolute" }, getTooltipPosition(anchor), { left: "calc(100% + " + theme.spacing + "px)", zIndex: theme.baseZIndex + 1000, width: "fit-content", maxWidth: 200, opacity: 0, transition: ".07s opacity ease", padding: theme.spacing / 2, borderRadius: 4, wordWrap: "break-word", boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)", color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]), 
+    return __assign({ backgroundColor: backgroundColor, position: "absolute" }, getTooltipPosition(anchor), { left: "calc(100% + " + theme.spacing + "px)", zIndex: theme.baseZIndex + 101, width: "fit-content", maxWidth: 200, opacity: 0, transition: ".07s opacity ease", padding: theme.spacing / 2, borderRadius: 4, wordWrap: "break-word", boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)", color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]), 
         // This pseudo-element extends the clickable area of the far-away tooltip.
         "&::after": {
             content: "''",
@@ -50,7 +50,7 @@ exports.default = function (_a) {
             height: "100%"
         }, 
         // They say behind every great tooltip is a great caret.
-        "&::before": __assign({ content: "''", position: "absolute" }, getCaretPosition(anchor || "top")(theme), { zIndex: theme.baseZIndex * -1, width: 0, height: 0, borderColor: "transparent", borderStyle: "solid", borderRightColor: backgroundColor }), "&.active": {
+        "&::before": __assign({ content: "''", position: "absolute" }, getCaretPosition(anchor || "top")(theme), { zIndex: theme.baseZIndex - 1, width: 0, height: 0, borderColor: "transparent", borderStyle: "solid", borderRightColor: backgroundColor }), "&.active": {
             opacity: 1
         } });
 };

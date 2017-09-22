@@ -52,7 +52,7 @@ export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor
     position: "absolute",
     ...getTooltipPosition(anchor),
     left: `calc(100% + ${theme.spacing}px)`,
-    zIndex: theme.baseZIndex + 1000,
+    zIndex: theme.baseZIndex + 101,
     width: "fit-content",
     maxWidth: 200,
     opacity: 0, // Initially, they're hidden...
@@ -79,7 +79,7 @@ export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor
       content: "''",
       position: "absolute",
       ...getCaretPosition(anchor || "top")(theme),
-      zIndex: theme.baseZIndex * -1,
+      zIndex: theme.baseZIndex - 1,
       width: 0,
       height: 0,
       borderColor: "transparent",

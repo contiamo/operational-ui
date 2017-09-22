@@ -8,7 +8,7 @@ var style = function (_a) {
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.grey90;
     return {
         position: "relative",
-        zIndex: (theme.baseZIndex || 0) + 1,
+        zIndex: theme.baseZIndex + 1,
         margin: "0 " + theme.spacing * -0.5 + "px",
         padding: theme.spacing + "px",
         minWidth: 200,
