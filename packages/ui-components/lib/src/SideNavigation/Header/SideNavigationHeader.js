@@ -146,7 +146,7 @@ var style = function (_a) {
             position: "absolute",
             top: "100%",
             left: 0,
-            zIndex: theme.baseZIndex * 1000,
+            zIndex: theme.baseZIndex + 100,
             width: "100%",
             minWidth: "fit-content",
             boxShadow: "0 6px 18px -3px rgba(0, 0, 0, .5)",

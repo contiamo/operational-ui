@@ -41,7 +41,7 @@ var PickerContainer = glamorous_1.default.div({
         ? {
             top: top + 8,
             left: left + 8,
-            zIndex: theme.baseZIndex * 1000
+            zIndex: theme.baseZIndex + 100
         }
         : {};
 });
