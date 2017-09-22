@@ -45,7 +45,7 @@ const links: Link[] = [
       { label: "Context Menu" },
       { url: "/components/cards", label: "Cards" },
       { url: "/components/chips", label: "Chips" },
-      { url: "/components/stats", label: "Stats" }
+      { url: "/components/info-tiles", label: "InfoTiles" }
     ]
   },
   {

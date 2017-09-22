@@ -10,7 +10,7 @@ import FormFields from "./FormFields/FormFields"
 import Cards from "./Cards/Cards"
 import Chips from "./Chips/Chips"
 import Tooltips from "./Tooltips/Tooltips"
-import Stats from "./Stats/Stats"
+import InfoTiles from "./InfoTiles/InfoTiles"
 import SidebarPage from "./Sidebar/Sidebar"
 import ColorPicker from "./ColorPicker/ColorPicker"
 import Switch from "./Switch/Switch"
@@ -40,7 +40,7 @@ export default () => (
       <Route path="/components/cards" component={Cards} />
       <Route path="/components/chips" component={Chips} />
       <Route path="/components/tooltips" component={Tooltips} />
-      <Route path="/components/stats" component={Stats} />
+      <Route path="/components/info-tiles" component={InfoTiles} />
       <Route path="/components/sidebar" component={SidebarPage} />
       <Route path="/components/icons" component={Icons} />
       <Route path="/components/switch" component={Switch} />

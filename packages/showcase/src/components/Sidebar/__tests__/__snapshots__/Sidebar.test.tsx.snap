@@ -108,9 +108,9 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
       disabled={false}
-      to="/components/stats"
+      to="/components/info-tiles"
     >
-      Stats
+      InfoTiles
     </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)

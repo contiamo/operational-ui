@@ -5,53 +5,47 @@ exports[`Cards Page Should render correctly 1`] = `
   <div
     class="css-1kznpaj"
   >
-    Stats
+    InfoTiles
   </div>
   <p>
-    Stats are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
+    InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
   </p>
   <div
     style="display:flex;"
   >
     <div
-      class="css-ty11jn Stat"
+      class="css-i1aiqw undefined"
     >
       <small
-        class="Stat__label"
+        class="css-ncaqe7"
       >
         Components
       </small>
-      <span
-        class="Stat__value"
-      >
+      <span>
         200,000
       </span>
     </div>
     <div
-      class="css-ty11jn Stat"
+      class="css-i1aiqw undefined"
     >
       <small
-        class="Stat__label"
+        class="css-ncaqe7"
       >
         Reusability
       </small>
-      <span
-        class="Stat__value"
-      >
+      <span>
         High
       </span>
     </div>
     <div
-      class="css-ty11jn Stat"
+      class="css-i1aiqw undefined"
     >
       <small
-        class="Stat__label"
+        class="css-ncaqe7"
       >
         Potential Added Value
       </small>
-      <span
-        class="Stat__value"
-      >
+      <span>
         €2M
       </span>
     </div>

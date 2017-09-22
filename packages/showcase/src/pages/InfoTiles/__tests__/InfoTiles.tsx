@@ -2,12 +2,12 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessStatsPage from "../Stats"
+import ThemelessInfoTilesPage from "../InfoTiles"
 
-const StatsPage = wrapDefaultTheme(ThemelessStatsPage)
+const InfoTilesPage = wrapDefaultTheme(ThemelessInfoTilesPage)
 
 describe("Cards Page", () => {
   it("Should render correctly", () => {
-    expect(render(<StatsPage />)).toMatchSnapshot()
+    expect(render(<InfoTilesPage />)).toMatchSnapshot()
   })
 })
