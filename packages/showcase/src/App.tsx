@@ -24,7 +24,6 @@ const Container = glamorous.div({
 
 const styles: {} = {
   display: "flex",
-  ...contiamoTheme.fonts,
   backgroundColor: contiamoTheme.colors.grey20,
   "& hr": {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,

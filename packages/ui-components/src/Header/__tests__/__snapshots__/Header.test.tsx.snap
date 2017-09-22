@@ -22,12 +22,6 @@ exports[`Header Header component renders 1`] = `
         "warning": "#FFAE00",
         "white": "#FFFFFF",
       },
-      "fonts": Object {
-        "WebkitFontSmoothing": "subpixel-antialiased",
-        "fontFamily": "Proxima Nova",
-        "fontSize": 13,
-        "textRendering": "optimizeLegibility",
-      },
       "spacing": 12,
       "typography": Object {
         "body": Object {

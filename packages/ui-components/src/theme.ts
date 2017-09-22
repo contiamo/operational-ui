@@ -52,12 +52,6 @@ const DEFAULT_TYPOGRAPHY: ThemeTypography = {
 const DEFAULT_THEME: Theme = {
   colors: THEME_COLORS,
   typography: DEFAULT_TYPOGRAPHY,
-  fonts: {
-    fontFamily: "Proxima Nova",
-    fontSize: 13,
-    WebkitFontSmoothing: "subpixel-antialiased",
-    textRendering: "optimizeLegibility"
-  },
   spacing: 12,
   baseZIndex: 0
 }
