@@ -22,12 +22,6 @@ exports[`PropsTable Should render correctly with props 1`] = `
         "warning": "#FFAE00",
         "white": "#FFFFFF",
       },
-      "fonts": Object {
-        "WebkitFontSmoothing": "subpixel-antialiased",
-        "fontFamily": "Proxima Nova",
-        "fontSize": 13,
-        "textRendering": "optimizeLegibility",
-      },
       "spacing": 12,
       "typography": Object {
         "body": Object {
@@ -100,12 +94,6 @@ exports[`PropsTable Should render correctly without props 1`] = `
         "success": "#689F2C",
         "warning": "#FFAE00",
         "white": "#FFFFFF",
-      },
-      "fonts": Object {
-        "WebkitFontSmoothing": "subpixel-antialiased",
-        "fontFamily": "Proxima Nova",
-        "fontSize": 13,
-        "textRendering": "optimizeLegibility",
       },
       "spacing": 12,
       "typography": Object {

@@ -53,12 +53,6 @@ interface ThemeTypography {
 interface Theme {
   colors: ThemeColors
   typography: ThemeTypography
-  fonts: {
-    fontFamily: string
-    fontSize: number
-    WebkitFontSmoothing?: string
-    textRendering?: string
-  }
   spacing: number
   baseZIndex: number
 }
