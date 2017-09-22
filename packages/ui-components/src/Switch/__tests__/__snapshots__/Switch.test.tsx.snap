@@ -5,11 +5,7 @@ exports[`Switch Should render 1`] = `
   class="css-v82pkr"
 >
   <div
-<<<<<<< HEAD
     class="css-nvy231"
-=======
-    class="css-1i59sqf"
->>>>>>> Add first pass at implementing Paginator component
   />
   <div
     class="css-bhjoni"

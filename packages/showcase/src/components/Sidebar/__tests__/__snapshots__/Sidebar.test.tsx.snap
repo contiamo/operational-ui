@@ -134,6 +134,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Tabs
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
+      disabled={false}
       to="/components/paginator"
     >
       Pagination
