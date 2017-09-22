@@ -75,7 +75,8 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
       Messages
     </glamorous(SidebarLink)>
     <glamorous(SidebarLink)
-      disabled={true}
+      disabled={false}
+      to="/components/progress"
     >
       Progress
     </glamorous(SidebarLink)>

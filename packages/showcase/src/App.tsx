@@ -24,6 +24,7 @@ const Container = glamorous.div({
 
 const styles: {} = {
   display: "flex",
+  fontFamily: "'Proxima Nova', sans-serif",
   backgroundColor: contiamoTheme.colors.grey20,
   "& hr": {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
@@ -44,6 +45,10 @@ const styles: {} = {
   },
   "& .CodeMirror-code": {
     fontFamily: "monospace"
+  },
+  "& .CodeMirror-code pre": {
+    fontSize: 13,
+    lineHeight: 1.3
   }
 }
 

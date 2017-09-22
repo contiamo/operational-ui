@@ -11,6 +11,7 @@ import Icon from "./src/Icon/Icon"
 import InfoTile from "./src/InfoTile/InfoTile"
 import Input from "./src/Input/Input"
 import PlusChip from "./src/PlusChip/PlusChip"
+import Progress from "./src/Progress/Progress"
 import Select from "./src/Select/Select"
 import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
 import SideNavigation, {
@@ -36,6 +37,7 @@ export {
   InfoTile,
   Input,
   PlusChip,
+  Progress,
   Select,
   SideNavigation,
   SideNavigationHeader,
