@@ -32,10 +32,10 @@ function withTooltip<InputProps, InputState, S>(InputComponent: any) {
     static defaultProps = {
       tooltipAnchor: "top",
       role: "status",
-      tabIndex: -1,
+      tabIndex: -1
     }
     state = {
-      isTooltipActive: false,
+      isTooltipActive: false
     }
 
     showTooltip() {
@@ -50,11 +50,13 @@ function withTooltip<InputProps, InputState, S>(InputComponent: any) {
       return (
         <InputComponent onMouseEnter={() => this.showTooltip()} onMouseLeave={() => this.hideTooltip()} {...this.props}>
           {this.props.children ? this.props.children : ""}
-          {this.props.tooltip && this.state.isTooltipActive
-            ? <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
-                {this.props.tooltip}
-              </Tooltip>
-            : ""}
+          {this.props.tooltip && this.state.isTooltipActive ? (
+            <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
+              {this.props.tooltip}
+            </Tooltip>
+          ) : (
+            ""
+          )}
         </InputComponent>
       )
     }

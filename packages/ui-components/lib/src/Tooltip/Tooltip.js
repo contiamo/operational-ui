@@ -20,15 +20,15 @@ var Tooltip = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             style: {
-                position: "relative",
-            },
+                position: "relative"
+            }
         };
         return _this;
     }
     Tooltip.prototype.componentDidMount = function () {
         var position = this.getPosition();
         this.setState(function () { return ({
-            position: position,
+            position: position
         }); });
     };
     Tooltip.prototype.getPosition = function () {
@@ -43,7 +43,7 @@ var Tooltip = /** @class */ (function (_super) {
             top: top,
             position: "fixed",
             transform: "none",
-            left: (rect && rect.left) || 0,
+            left: (rect && rect.left) || 0
         };
         if (this.props.anchor === "bottom") {
             position.bottom = "auto";
@@ -56,7 +56,7 @@ var Tooltip = /** @class */ (function (_super) {
     };
     Tooltip.defaultProps = {
         anchor: "top",
-        active: false,
+        active: false
     };
     return Tooltip;
 }(React.Component));

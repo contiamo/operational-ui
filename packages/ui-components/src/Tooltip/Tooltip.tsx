@@ -51,21 +51,21 @@ type State = {
 class Tooltip extends React.Component<Props, State> {
   static defaultProps = {
     anchor: "top",
-    active: false,
+    active: false
   }
   constructor(props: Props) {
     super(props)
     this.state = {
       style: {
-        position: "relative",
-      },
+        position: "relative"
+      }
     }
   }
   tooltip: HTMLDivElement
   componentDidMount() {
     const position = this.getPosition()
     this.setState(() => ({
-      position,
+      position
     }))
   }
   getPosition() {
@@ -81,7 +81,7 @@ class Tooltip extends React.Component<Props, State> {
         top,
         position: "fixed",
         transform: "none",
-        left: (rect && rect.left) || 0,
+        left: (rect && rect.left) || 0
       }
     if (this.props.anchor === "bottom") {
       position.bottom = "auto"
