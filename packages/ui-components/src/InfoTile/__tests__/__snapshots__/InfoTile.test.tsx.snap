@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoTile Should render 1`] = `
+<div
+  class="css-i1aiqw undefined"
+>
+  <small
+    class="css-ncaqe7"
+  >
+    Country
+  </small>
+  <span>
+    DE
+  </span>
+</div>
+`;

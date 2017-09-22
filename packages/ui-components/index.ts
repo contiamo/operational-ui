@@ -1,41 +1,43 @@
 // Simple imports n' exports for consumers of the library.
 
-import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/Header"
+import { ThemeProvider } from "glamorous"
 
+import Button from "./src/Button/Button"
+import Card, { CardHeader } from "./src/Card/Card"
+import Chip from "./src/Chip/Chip"
+import ColorPicker from "./src/ColorPicker/ColorPicker"
+import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/Header"
+import Icon from "./src/Icon/Icon"
+import InfoTile from "./src/InfoTile/InfoTile"
+import Input from "./src/Input/Input"
+import PlusChip from "./src/PlusChip/PlusChip"
+import Select from "./src/Select/Select"
+import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
 import SideNavigation, {
   SideNavigationHeader,
   SideNavigationItem,
   SideNavigationLink
 } from "./src/SideNavigation/SideNavigation"
-
-import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
-
-import Button from "./src/Button/Button"
-
-import Tooltip from "./src/Tooltip/Tooltip"
-
-import withTooltip from "./src/Tooltip/withTooltip"
-
-import Chip from "./src/Chip/Chip"
-import PlusChip from "./src/PlusChip/PlusChip"
-import Card, { CardHeader } from "./src/Card/Card"
-import Stat from "./src/Stat/Stat"
 import Switch from "./src/Switch/Switch"
-import Icon from "./src/Icon/Icon"
-
-import Input from "./src/Input/Input"
-import Select from "./src/Select/Select"
-import ColorPicker from "./src/ColorPicker/ColorPicker"
-
+import Tooltip from "./src/Tooltip/Tooltip"
+import withTooltip from "./src/Tooltip/withTooltip"
 import theme from "./src/theme"
 
-import { ThemeProvider } from "glamorous"
-
 export {
+  Button,
+  Card,
+  CardHeader,
+  Chip,
+  ColorPicker,
   Header,
   HeaderItem,
   HeaderSeparator,
   HeaderTitle,
+  Icon,
+  InfoTile,
+  Input,
+  PlusChip,
+  Select,
   SideNavigation,
   SideNavigationHeader,
   SideNavigationItem,
@@ -43,19 +45,9 @@ export {
   Sidebar,
   SidebarItem,
   SidebarLink,
-  Button,
+  Switch,
   Tooltip,
   withTooltip,
-  Chip,
-  PlusChip,
-  Card,
-  CardHeader,
-  Stat,
-  Switch,
-  Input,
-  Icon,
-  Select,
-  ColorPicker,
   theme as contiamoTheme,
   ThemeProvider
 }
