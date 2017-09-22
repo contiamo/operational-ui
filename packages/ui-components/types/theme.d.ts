@@ -44,6 +44,7 @@ interface ThemeTypographyElement {
 }
 
 interface ThemeTypography {
+  title: ThemeTypographyElement
   heading1: ThemeTypographyElement
   heading2: ThemeTypographyElement
   body: ThemeTypographyElement

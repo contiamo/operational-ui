@@ -56,6 +56,14 @@ exports[`PropsTable Should render correctly with props 1`] = `
           "opacity": 1,
           "textTransform": "none",
         },
+        "title": Object {
+          "fontSize": 22,
+          "fontWeight": 600,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
       },
     }
   }
@@ -124,6 +132,14 @@ exports[`PropsTable Should render correctly without props 1`] = `
         "small": Object {
           "fontSize": 12,
           "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "title": Object {
+          "fontSize": 22,
+          "fontWeight": 600,
           "letterSpacing": 0.2,
           "lineHeight": "1.5",
           "opacity": 1,

@@ -23,6 +23,12 @@ const baseTypography = {
 }
 
 const DEFAULT_TYPOGRAPHY: ThemeTypography = {
+  title: {
+    ...baseTypography,
+    fontSize: 22,
+    fontWeight: 600,
+    opacity: 1
+  },
   heading1: {
     ...baseTypography,
     fontSize: 13,
