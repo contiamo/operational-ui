@@ -12,8 +12,8 @@
     "package:watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "tslint ./src/**/* ./index.ts --fix",
-    "prettier": "prettier index.ts --write && prettier src/**/*.tsx --write && prettier src/**/*.ts --write",
+    "lint": "tslint ./index.ts --fix && tslint ./src/**/*.{ts,tsx} --fix",
+    "prettier": "prettier ./index.ts --write && prettier ./src/**/*.{ts,tsx} --write",
     "precommit": "npm run test && npm run lint && npm run prettier",
     "preversion": "npm run precommit",
     "version": "npm run package && git add lib"
