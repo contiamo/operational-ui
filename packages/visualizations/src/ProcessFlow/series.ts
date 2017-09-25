@@ -12,7 +12,6 @@ class Series {
   drawn: boolean
   el: any
   renderer: Renderer
-  svg: any
 
   constructor(options: any = {}) {
     this.dataHandler = new DataHandler()
@@ -43,14 +42,12 @@ class Series {
 
   initialDraw(computed: any, config: any): void {
     this.el = computed.el
-    this.svg = this.el.append("svg")
     this.updateDraw(computed, config)
     this.drawn = true
   }
 
   updateDraw(computed: any, config: any): void {
-    this.svg.attr("width", config.width).attr("height", config.height)
-    computed.svg = this.svg
+    this.el.attr("width", config.width).attr("height", config.height)
     computed.el = this.el
     this.renderer.draw(computed, config)
   }

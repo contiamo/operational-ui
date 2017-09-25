@@ -29,8 +29,8 @@ class Renderer {
     this.config = config
     this.layout.computeLayout(computed.data)
     this.positionNodes()
-    this.links.draw(computed.svg, config, this.layout.links)
-    this.nodes.draw(computed.svg, config, this.layout.nodes)
+    this.links.draw(computed.el, config, this.layout.links)
+    this.nodes.draw(computed.el, config, this.layout.nodes)
   }
 
   positionNodes(): void {
