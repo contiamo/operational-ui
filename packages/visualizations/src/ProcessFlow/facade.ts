@@ -2,9 +2,11 @@ import AbstractFacade from "../utils/abstract_facade"
 import DataHandler from "./data_handler"
 import Canvas from "./canvas"
 import Renderer from "./renderer"
+import Series from "./series"
 
 class Facade extends AbstractFacade {
   dataHandler: DataHandler
+  series: Series
 
   defaultConfig(): any {
     return {
@@ -16,6 +18,7 @@ class Facade extends AbstractFacade {
         maxLinkWidth: 15,
         labelOffset: 5,
         linkStroke: "#aaa",
+        visualizationName: "processflow",
         arrowFill: "#ccc",
       },
       accessors: {
@@ -30,24 +33,28 @@ class Facade extends AbstractFacade {
     }
   }
 
+  initializeSeries(): void {
+    this.series = new Series()
+  }
+
   initializeComponents(): void {
     this.components = {
-      dataHandler: new DataHandler(),
-      renderer: new Renderer(this.context),
+      canvas: new Canvas(this.context, this.state.state),
     }
   }
 
-  draw(): any {
+  draw(): HTMLElement {
     const accessors = {
       node: this.state.accessors("node"),
       link: this.state.accessors("link"),
     }
-    let computed: any = this.components.dataHandler.prepareData(this.state.data(), accessors)
-    this.components.renderer.setData(computed)
-    this.components.renderer.setConfig(this.state.config())
+    let computed: any = {}
+    this.series.setData(computed, this.state.data(), accessors)
+    this.components.canvas.draw(computed)
+    this.series.draw(computed, this.state.config())
     this.drawn = true
     this.dirty = false
-    return this.components.renderer.draw(computed)
+    return computed.el.node()
   }
 }
 

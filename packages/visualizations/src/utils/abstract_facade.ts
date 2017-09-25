@@ -15,10 +15,13 @@ abstract class AbstractChart {
     this.context = context
     this.state = new StateHandler(this.defaultConfig())
     this.events = new EventHandler()
+    this.initializeSeries()
     this.initializeComponents()
   }
 
   abstract defaultConfig(): any
+
+  abstract initializeSeries(): void
 
   initializeComponents(): void {}
 

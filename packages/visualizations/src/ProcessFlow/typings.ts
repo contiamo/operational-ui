@@ -8,6 +8,9 @@ type TLink = Link
 //@TODO
 type TAccessors = any
 
+// @TODO How do I import the d3 scale types?
+type TScale = (size: number) => number
+
 interface TJourney {
   size: number
   path: string[]
@@ -41,6 +44,7 @@ interface TInputData {
   nodes?: any[]
   nodeAccessors?: any
   linkAccessors?: any
+  el?: any
 }
 
 interface TData {
@@ -59,4 +63,4 @@ interface TProps {
   arrowFill: string
 }
 
-export { TAccessors, TData, TInputData, TJourney, TLink, TLinkAttrs, TNode, TNodeAttrs, TProps }
+export { TAccessors, TScale, TData, TInputData, TJourney, TLink, TLinkAttrs, TNode, TNodeAttrs, TProps }
