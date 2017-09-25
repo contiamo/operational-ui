@@ -49,17 +49,29 @@ class Nodes extends AbstractRenderer {
         return node.id()
       })
 
-    nodeGroups.exit().remove()
+    this.exit(nodeGroups.exit())
+    this.enterAndUpdate(nodeGroups.enter())
+  }
 
-    let enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = nodeGroups
-      .enter()
+  exit(exitNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
+    exitNodes.selectAll("text.label").remove()
+    exitNodes
+      .selectAll("path.node")
+      .transition()
+      .duration(this.config.duration)
+      .style("opacity", 0)
+      .remove()
+  }
+
+  enterAndUpdate(enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
+    let enterNodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = enterNodes
       .append("g")
       .attr("class", "node-group")
       .attr("transform", function(node: TNode): string {
         return "translate(" + node.x + "," + node.y + ")"
       })
 
-    this.updateNodeShapes(enterNodes)
+    this.updateNodes(enterNodeGroups)
   }
 
   // @TODO How do I import the d3 symbol types?
@@ -74,11 +86,11 @@ class Nodes extends AbstractRenderer {
     }
   }
 
-  updateNodeShapes(enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
+  updateNodes(enterNodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
     const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize]),
       that: Nodes = this
     let n: number = 0
-    enterNodes
+    enterNodeGroups
       .append("path")
       .attr("class", "node")
       .attr(
@@ -93,9 +105,9 @@ class Nodes extends AbstractRenderer {
       .attr("stroke", function(d: TNode): string {
         return d.stroke()
       })
-      .merge(enterNodes)
+      .merge(enterNodeGroups)
       .transition()
-      .duration(1e3)
+      .duration(this.config.duration)
       .attr(
         "d",
         d3Symbol()
@@ -109,7 +121,7 @@ class Nodes extends AbstractRenderer {
       })
       .on("end", function(): void {
         if (!--n) {
-          that.updateNodeLabels(enterNodes)
+          that.updateNodeLabels(enterNodeGroups)
         }
       })
   }
