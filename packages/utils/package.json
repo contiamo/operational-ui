@@ -11,8 +11,9 @@
     "package:watch": "npm run clean && tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "tslint ./src/**/* ./index.ts --fix",
-    "precommit": "npm run test && npm run lint",
+    "lint": "tslint ./index.ts --fix && tslint ./src/**/*.{ts,tsx} --fix",
+    "prettier": "prettier ./index.ts --write && prettier ./src/**/*.{ts,tsx} --write",
+    "precommit": "npm run test && npm run lint && npm run prettier",
     "preversion": "npm run precommit",
     "version": "npm run package && git add ."
   },
@@ -20,9 +21,11 @@
     "@types/tinycolor2": "^1.4.0",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "prettier": "^1.7.0",
     "ts-jest": "^21.0.1",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.2.1",
+    "tslint-config-prettier": "^1.5.0",
     "typescript": "^2.5.2"
   },
   "dependencies": {
@@ -30,11 +33,7 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },

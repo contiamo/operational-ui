@@ -12,8 +12,9 @@
     "package:watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "tslint ./src/**/* ./index.ts --fix",
-    "precommit": "npm run test && npm run lint",
+    "lint": "tslint ./index.ts --fix && tslint ./src/**/*.{ts,tsx} --fix",
+    "prettier": "prettier ./index.ts --write && prettier ./src/**/*.{ts,tsx} --write",
+    "precommit": "npm run test && npm run lint && npm run prettier",
     "preversion": "npm run precommit",
     "version": "npm run package && git add lib"
   },
@@ -28,7 +29,10 @@
     "jest-enzyme": "^3.8.1",
     "jest-glamor-react": "^3.1.0",
     "jest-serializer-enzyme": "^1.0.0",
+    "prettier": "^1.7.0",
     "react-test-renderer": "^15.6.1",
+    "tslint": "^5.7.0",
+    "tslint-config-airbnb": "^5.3.0",
     "tslint-config-prettier": "^1.5.0",
     "typescript": "latest"
   },
@@ -54,11 +58,7 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
@@ -67,14 +67,8 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": [
-      "../../node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ],
+    "snapshotSerializers": ["../../node_modules/jest-serializer-enzyme"],
+    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"],
     "mapCoverage": true
   }
 }

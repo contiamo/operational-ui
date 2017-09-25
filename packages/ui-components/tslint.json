@@ -4,7 +4,8 @@
     "one-variable-per-declaration": false,
     "semicolon": false,
     "quotemark": "double",
-    "max-line-length": [true, 120],
-    "variable-name": [true, "allow-pascal-case"]
+    "variable-name": ["allow-pascal-case"],
+    "indent": false,
+    "import-name": false
   }
 }

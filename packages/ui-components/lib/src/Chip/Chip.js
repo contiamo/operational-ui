@@ -32,7 +32,7 @@ var style = function (_a) {
                 transition: ".3s transform ease, .3s opacity ease"
             },
             "& .action::before": {
-                content: "\"\"",
+                content: "' '",
                 position: "absolute",
                 top: 0,
                 left: "-100%",
