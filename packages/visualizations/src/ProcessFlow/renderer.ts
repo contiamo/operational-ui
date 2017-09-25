@@ -13,10 +13,9 @@ import Links from "./renderers/links"
 class Renderer {
   computed: any
   config: any
-  dataHandler: DataHandler
   layout: Layout
-  nodes: Nodes
   links: Links
+  nodes: Nodes
 
   constructor() {
     this.layout = new Layout()

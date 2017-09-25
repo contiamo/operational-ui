@@ -9,15 +9,26 @@ const MINLINKWIDTH: number = 2
 
 class Links extends AbstractRenderer {
   updateDraw(svg: any): void {
-    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth]),
-      links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}> = svg
-        .selectAll("path.link")
-        .data(this.data, function(link: TLink): string {
-          return link.sourceId() + ";" + link.targetId()
-        })
+    const links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}> = svg
+      .selectAll("path.link")
+      .data(this.data, function(link: TLink): string {
+        return link.sourceId() + ";" + link.targetId()
+      })
 
-    links.exit().remove()
+    this.exit(links.exit())
+    this.enterAndUpdate(links)
+  }
 
+  exit(exitLinks: any): void {
+    exitLinks
+      .transition()
+      .duration(this.config.duration)
+      .style("opacity", 0)
+      .remove()
+  }
+
+  enterAndUpdate(links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}>): void {
+    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
     links
       .enter()
       .append("path")

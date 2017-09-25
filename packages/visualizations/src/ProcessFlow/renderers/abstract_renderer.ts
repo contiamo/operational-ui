@@ -19,6 +19,10 @@ abstract class AbstractRenderer {
 
   abstract updateDraw(svg: any): void
 
+  abstract exit(exitEls: any): void
+
+  abstract enterAndUpdate(enterEls: any): void
+
   sizeScale(range: [number, number]): TScale {
     const sizes: number[] = map((el: TLink | TNode): number => {
       return el.size()
