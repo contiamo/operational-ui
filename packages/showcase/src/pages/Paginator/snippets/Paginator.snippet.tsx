@@ -15,6 +15,7 @@ export default (() => {
       return (
         <Paginator
           pageCount={10}
+          maxVisible={5}
           selected={this.state.page}
           onChange={page => this.handleChange(page)}
         />

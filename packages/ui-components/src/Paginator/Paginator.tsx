@@ -1,7 +1,13 @@
 import * as React from "react"
+import * as Icon from "react-feather"
 import glamorous from "glamorous"
-import Icon from "../Icon/Icon"
-import { darken } from "contiamo-ui-utils"
+
+type Props = {
+  pageCount: number
+  maxVisible?: number
+  onChange: (selected: number) => void
+  selected?: number
+}
 
 type ControlProps = {
   type: "first" | "previous" | "next" | "last"
@@ -10,6 +16,15 @@ type ControlProps = {
   onChange: (selected: number) => void
   children: any
 }
+
+const Control = glamorous.li(
+  {
+    listStyle: "none"
+  },
+  ({ disabled = false, theme }: { disabled?: boolean, theme: Theme }) => ({
+    cursor: disabled ? "not-allowed" : "pointer"
+  })
+)
 
 const PaginatorControl = ({ type, pageCount, selected, onChange, children }: ControlProps) => {
   const handleFirst = (): void => {
@@ -34,8 +49,8 @@ const PaginatorControl = ({ type, pageCount, selected, onChange, children }: Con
   }
 
   const isDisabled = (type === "previous" || type === "first")
-    ? !!(selected === 1)
-    : !!(selected === pageCount)
+    ? selected === 1
+    : selected === pageCount
 
   const handler = (() => {
     switch (type) {
@@ -51,23 +66,31 @@ const PaginatorControl = ({ type, pageCount, selected, onChange, children }: Con
   })()
 
   return (
-    <li
+    <Control
       onClick={handler}
-      className={`control ${type} ${isDisabled ? "disabled" : ""}`}
+      disabled={isDisabled}
     >
       {children}
-    </li>
+    </Control>
   )
 }
 
-type ViewProps = {
-  pageCount: number
-  maxVisible: number
-  selected: number
-  onChange: (selected: number) => void
-}
+const PageLink = glamorous.li(
+  {
+    listStyle: "none",
+    width: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+    userSelect: "none"
+  },
+  ({ active = false, theme }: { active?: boolean, theme: Theme }) => ({
+    color: active ? theme.colors.success : ""
+  })
+)
 
-const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: ViewProps) => {
+const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Props) => {
   const skip = (() => {
     if (selected > maxVisible - 1 && selected < pageCount) {
       return selected - maxVisible + 1
@@ -78,68 +101,52 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: View
     }
   })()
 
+  // Creates an array of numbers (positive/negative) progressing from `start` up to `end`
+  const range = (start: number, end: number, acc: number[] = []): number[] =>
+    start > end ? acc : range(start + 1, end, [...acc, start])
+
   return (
-    Array(maxVisible).fill(null).map((_, i) => skip + i + 1).map(pageNumber => (
-      <li
+    range(skip + 1, maxVisible + skip).map(pageNumber => (
+      <PageLink
         key={pageNumber}
-        className={`page ${pageNumber === selected ? "active" : ""}`}
         onClick={() => { onChange(pageNumber) }}
+        active={pageNumber === selected}
       >
         {pageNumber}
-      </li>
+      </PageLink>
     ))
   )
 }
 
-type Props = {
-  pageCount: number
-  maxVisible?: number
-  onChange: (selected: number) => void
-  selected?: number
-}
-
-const Ul = glamorous.ul(({ theme }: {theme: Theme}): any => ({
+const Container = glamorous.ul({
   display: "flex",
-  padding: "0",
-  "& li": {
-    listStyle: "none",
-    width: "30px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    userSelect: "none"
-  },
-  "& li.page.active": {
-    color: darken(theme.colors.secondary)(5),
-    borderRadius: "50%"
-  },
-  "& li.control": {
-    color: theme.colors.primary
-  },
-  "& li.disabled": {
-    cursor: "not-allowed"
-  }
-}))
+  padding: "0"
+})
 
 const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, onChange }: Props) => {
   const controlProps = { pageCount, selected, onChange }
+  const hasEnoughPages = pageCount > maxVisible
+  maxVisible = hasEnoughPages ? maxVisible : pageCount
   return (
-    <Ul>
-      <PaginatorControl type="first" { ...controlProps } >
-        <Icon name="ChevronsLeft" sizeOverride={17} />
-      </PaginatorControl>
+    <Container>
+      {hasEnoughPages ? (
+        <PaginatorControl type="first" { ...controlProps } >
+          <Icon.ChevronsLeft size="17" />
+        </PaginatorControl>
+      ): null}
       <PaginatorControl type="previous" { ...controlProps } >
-        <Icon name="ChevronLeft" sizeOverride={17} />
+        <Icon.ChevronLeft size="17" />
       </PaginatorControl>
       {createPagesFragment({ pageCount, maxVisible, selected, onChange })}
       <PaginatorControl type="next" { ...controlProps } >
-        <Icon name="ChevronRight" sizeOverride={17} />
+        <Icon.ChevronRight size="17" />
       </PaginatorControl>
-      <PaginatorControl type="last" { ...controlProps } >
-        <Icon name="ChevronsRight" sizeOverride={17} />
-      </PaginatorControl>
-    </Ul>
+      {hasEnoughPages ? (
+        <PaginatorControl type="last" { ...controlProps } >
+          <Icon.ChevronsRight size="17" />
+        </PaginatorControl>
+      ): null}
+    </Container>
   )
 }
 

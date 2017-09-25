@@ -2,10 +2,10 @@
 
 exports[`Paginator Component Should initialize properly 1`] = `
 <ul
-  class="css-178w6g3"
+  class="css-kvawx5"
 >
   <li
-    class="control first disabled"
+    class="css-1p15y6p"
   >
     <svg
       height="17"
@@ -32,7 +32,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </li>
   <li
-    class="control previous disabled"
+    class="css-1p15y6p"
   >
     <svg
       fill="none"
@@ -51,32 +51,32 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </li>
   <li
-    class="page active"
+    class="css-1fqhmte"
   >
     1
   </li>
   <li
-    class="page "
+    class="css-1hbkp3c"
   >
     2
   </li>
   <li
-    class="page "
+    class="css-1hbkp3c"
   >
     3
   </li>
   <li
-    class="page "
+    class="css-1hbkp3c"
   >
     4
   </li>
   <li
-    class="page "
+    class="css-1hbkp3c"
   >
     5
   </li>
   <li
-    class="control next "
+    class="css-1j7ndtv"
   >
     <svg
       fill="none"
@@ -95,7 +95,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </li>
   <li
-    class="control last "
+    class="css-1j7ndtv"
   >
     <svg
       height="17"
