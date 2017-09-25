@@ -9,6 +9,6 @@
     "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost"],
     "allowJs": true
   },
-  "include": ["types/**/*", "index.ts"],
+  "include": ["index.ts", "../../shared-types/**/*"],
   "exclude": ["./node_modules"]
 }

@@ -155,6 +155,17 @@ declare namespace fp {
     uniqueId: any
     indexOf: any
     uniq: any
+    invoke: any
+    isMatch: any
+    isDate: any
+    isFinite: any
+    pluck: any
+    compact: any
+    flatten: any
+    size: any
+    all: any
+    any: any
+    isObject: any
   }
 }
 
