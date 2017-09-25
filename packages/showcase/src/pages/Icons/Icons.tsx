@@ -5,7 +5,7 @@ import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
 import { Icon, CardHeader } from "contiamo-ui-components"
 
-import * as snippet from "./snippets/collection.snippet"
+import * as snippet from "./snippets/Icons.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
