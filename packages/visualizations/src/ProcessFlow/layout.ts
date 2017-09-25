@@ -114,10 +114,10 @@ class Layout {
   computeNodeXPositions(): void {
     const that: Layout = this,
       rows: number[] = uniq(
-        sortBy(function(y) {
+        sortBy(function(y: number): number {
           return y
         })(
-          map(function(node: TNode) {
+          map(function(node: TNode): number {
             return node.y
           })(that.nodes),
         ),

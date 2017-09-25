@@ -1,19 +1,36 @@
-import AbstractComponent from "../utils/abstract_component"
-import StateHandler from "../utils/state_handler"
+import AbstractCanvas from "../utils/abstract_canvas"
+import State from "../utils/state"
 import EventHandler from "../utils/event_handler"
+import * as d3 from "d3-selection"
 
-class Canvas extends AbstractComponent {
-  constructor(state: StateHandler, events: EventHandler) {
-    super()
-    this.state = state
-    this.events = events
+class Canvas extends AbstractCanvas {
+  createEl(): d3.Selection<Element, null, Window, undefined> {
+    return d3.select(document.createElementNS(d3.namespaces["xhtml"], "div"))
   }
 
-  compute(): void {
-    const getConfig = this.state.config()
-    const getSomethingComputed = this.state.computed(["axes", "x"])
-    this.state.computed(["canvas"], { width: 100 })
+  createInitialElements(): void {
+    this.defineMarker()
   }
+
+  defineMarker(): void {
+    // Add arrow marker definition for link paths
+    this.el
+      .append("defs")
+      .append("marker")
+      .attr("id", "arrow")
+      .attr("viewBox", "-7 -6 14 12")
+      .attr("markerWidth", 16)
+      .attr("markerHeight", 12)
+      .attr("markerUnits", "userSpaceOnUse")
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M-5,-5L5,0L-5,5")
+  }
+  //
+  // mouseOverElement(): d3.Selection<Node> {
+  //   return this.el
+  // }
+  //
 }
 
 export default Canvas

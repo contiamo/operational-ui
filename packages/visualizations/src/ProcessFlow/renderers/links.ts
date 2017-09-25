@@ -1,0 +1,60 @@
+import AbstractRenderer from "./abstract_renderer"
+import { map } from "lodash/fp"
+import * as d3 from "d3-selection"
+import "d3-transition"
+import { scaleLinear as d3ScaleLinear } from "d3-scale"
+import { TLink, TScale } from "../typings"
+
+const MINLINKWIDTH: number = 2
+
+class Links extends AbstractRenderer {
+  updateDraw(svg: any): void {
+    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth]),
+      links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}> = svg
+        .selectAll("path.link")
+        .data(this.data, function(link: TLink): string {
+          return link.sourceId() + ";" + link.targetId()
+        })
+
+    links.exit().remove()
+
+    links
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("d", this.linkStartPath.bind(this))
+      .attr("stroke-width", "0px")
+      .merge(links)
+      .transition()
+      .duration(1e3)
+      .attr("d", this.linkPath.bind(this))
+      .attr("stroke", function(d: TLink): string {
+        return d.stroke()
+      })
+      .attr("stroke-width", function(d: TLink): string {
+        return scale(d.size()) + "px"
+      })
+      .attr("stroke-dasharray", function(d: TLink): number {
+        return d.dash()
+      })
+      .attr("marker-mid", "url(#arrow)")
+  }
+
+  linkStartPath(link: TLink): string {
+    const xStart: number = link.source().x,
+      yStart: number = link.source().y
+    return "M" + xStart + "," + yStart + "L" + xStart + "," + yStart
+  }
+
+  linkPath(link: TLink): string {
+    const xStart: number = link.source().x,
+      yStart: number = link.source().y,
+      xEnd: number = link.target().x,
+      yEnd: number = link.target().y,
+      xMid: number = (xStart + xEnd) / 2,
+      yMid = (yStart + yEnd) / 2
+    return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
+  }
+}
+
+export default Links
