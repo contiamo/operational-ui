@@ -18,7 +18,7 @@ import Icons from "./Icons/Icons"
 import Typography from "./Typography/Typography"
 import Colors from "./Colors/Colors"
 <<<<<<< HEAD
-import Paginator from './Paginator/Paginator'
+import Paginator from "./Paginator/Paginator"
 import Progress from "./Progress/Progress"
 =======
 import Paginator from "./Paginator/Paginator"

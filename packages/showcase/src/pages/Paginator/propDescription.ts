@@ -23,8 +23,8 @@ export default [
   {
     name: "onChange",
     description: "Function to be executed after changing page. Receives a single argument which represents the new page number",
-    defaultValue: null,
+    defaultValue: '() => {}',
     type: "function",
-    optional: false
+    optional: true
   }
 ]

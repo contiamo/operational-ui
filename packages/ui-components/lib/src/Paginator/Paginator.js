@@ -44,18 +44,20 @@ var PaginatorControl = function (_a) {
     var isDisabled = (type === "previous" || type === "first")
         ? selected === 1
         : selected === pageCount;
-    var handler = (function () {
-        switch (type) {
-            case "previous":
-                return handlePrevious;
-            case "first":
-                return handleFirst;
-            case "next":
-                return handleNext;
-            default:
-                return handleLast;
-        }
-    })();
+    var handler;
+    switch (type) {
+        case "previous":
+            handler = handlePrevious;
+            break;
+        case "first":
+            handler = handleFirst;
+            break;
+        case "next":
+            handler = handleNext;
+            break;
+        default:
+            handler = handleLast;
+    }
     return (React.createElement(Control, { onClick: handler, disabled: isDisabled }, children));
 };
 var PageLink = glamorous_1.default.li({
@@ -74,21 +76,20 @@ var PageLink = glamorous_1.default.li({
 });
 var createPagesFragment = function (_a) {
     var pageCount = _a.pageCount, maxVisible = _a.maxVisible, selected = _a.selected, onChange = _a.onChange;
-    var skip = (function () {
-        if (selected > maxVisible - 1 && selected < pageCount) {
-            return selected - maxVisible + 1;
-        }
-        else if (selected === pageCount) {
-            return selected - maxVisible;
-        }
-        else {
-            return 0;
-        }
-    })();
+    var skip;
+    if (selected > maxVisible - 1 && selected < pageCount) {
+        skip = selected - maxVisible + 1;
+    }
+    else if (selected === pageCount) {
+        skip = selected - maxVisible;
+    }
+    else {
+        skip = 0;
+    }
     // Creates an array of numbers (positive/negative) progressing from `start` up to `end`
-    var range = function (start, end, _acc) {
-        if (_acc === void 0) { _acc = []; }
-        return start > end ? _acc : range(start + 1, end, _acc.concat([start]));
+    var range = function (start, end, acc) {
+        if (acc === void 0) { acc = []; }
+        return start > end ? acc : range(start + 1, end, acc.concat([start]));
     };
     return (range(skip + 1, maxVisible + skip).map(function (pageNumber) { return (React.createElement(PageLink, { key: pageNumber, onClick: function () { onChange(pageNumber); }, active: pageNumber === selected }, pageNumber)); }));
 };
@@ -97,7 +98,7 @@ var Container = glamorous_1.default.ul({
     padding: "0"
 });
 var Paginator = function (_a) {
-    var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.selected, selected = _c === void 0 ? 1 : _c, onChange = _a.onChange;
+    var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.selected, selected = _c === void 0 ? 1 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d;
     var controlProps = { pageCount: pageCount, selected: selected, onChange: onChange };
     var hasEnoughPages = pageCount > maxVisible;
     maxVisible = hasEnoughPages ? maxVisible : pageCount;

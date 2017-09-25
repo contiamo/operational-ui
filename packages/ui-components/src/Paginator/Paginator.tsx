@@ -52,18 +52,20 @@ const PaginatorControl = ({ type, pageCount, selected, onChange, children }: Con
     ? selected === 1
     : selected === pageCount
 
-  const handler = (() => {
-    switch (type) {
-    case "previous":
-      return handlePrevious
-    case "first":
-      return handleFirst
-    case "next":
-      return handleNext
-    default:
-      return handleLast
-    }
-  })()
+  let handler
+  switch (type) {
+  case "previous":
+    handler = handlePrevious
+    break
+  case "first":
+    handler = handleFirst
+    break
+  case "next":
+    handler = handleNext
+    break
+  default:
+    handler = handleLast
+  }
 
   return (
     <Control
@@ -91,15 +93,14 @@ const PageLink = glamorous.li(
 )
 
 const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Props) => {
-  const skip = (() => {
-    if (selected > maxVisible - 1 && selected < pageCount) {
-      return selected - maxVisible + 1
-    } else if (selected === pageCount) {
-      return selected - maxVisible
-    } else {
-      return 0
-    }
-  })()
+  let skip
+  if (selected > maxVisible - 1 && selected < pageCount) {
+    skip = selected - maxVisible + 1
+  } else if (selected === pageCount) {
+    skip = selected - maxVisible
+  } else {
+    skip = 0
+  }
 
   // Creates an array of numbers (positive/negative) progressing from `start` up to `end`
   const range = (start: number, end: number, acc: number[] = []): number[] =>
@@ -123,7 +124,7 @@ const Container = glamorous.ul({
   padding: "0"
 })
 
-const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, onChange }: Props) => {
+const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, onChange = () => {} }: Props) => {
   const controlProps = { pageCount, selected, onChange }
   const hasEnoughPages = pageCount > maxVisible
   maxVisible = hasEnoughPages ? maxVisible : pageCount
