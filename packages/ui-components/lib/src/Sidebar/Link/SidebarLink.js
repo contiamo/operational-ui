@@ -15,7 +15,7 @@ var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff", textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.grey80, "white"]), disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
-    return __assign({ position: "relative", display: "flex", padding: theme.spacing / 2, transition: "background-color .1s ease", cursor: "pointer", fontSize: ".9rem", 
+    return __assign({}, theme.typography.body, { position: "relative", display: "flex", padding: theme.spacing / 2, transition: "background-color .1s ease", cursor: "pointer", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor, backgroundColor: backgroundColor }, disabledStyle, { "&:link, &:visited": {
             color: textColor

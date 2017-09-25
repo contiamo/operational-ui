@@ -56,6 +56,14 @@ exports[`Header Header component renders 1`] = `
           "opacity": 1,
           "textTransform": "none",
         },
+        "title": Object {
+          "fontSize": 22,
+          "fontWeight": 600,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
       },
     }
   }

@@ -26,12 +26,12 @@ const style: {} = ({ theme, color, disabled }: Props) => {
     disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
+    ...theme.typography.body,
     position: "relative",
     display: "flex",
     padding: theme.spacing / 2,
     transition: "background-color .1s ease",
     cursor: "pointer",
-    fontSize: ".9rem",
     // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: "none",
     color: textColor,

@@ -31,6 +31,7 @@ var baseTypography = {
     letterSpacing: 0.2
 };
 var DEFAULT_TYPOGRAPHY = {
+    title: __assign({}, baseTypography, { fontSize: 22, fontWeight: 600, opacity: 1 }),
     heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, opacity: 1 }),
     heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, opacity: 0.6 }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400, opacity: 1 }),

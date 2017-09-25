@@ -14,8 +14,8 @@ type Props = {
 const Label = glamorous.small(({ color, theme }: Props): any => {
   const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
   return {
+    ...theme.typography.small,
     marginBottom: 3,
-    fontSize: ".8rem",
     fontWeight: 600,
     color: readableTextColor(backgroundColor)([theme.colors.grey60, theme.colors.grey10])
   }

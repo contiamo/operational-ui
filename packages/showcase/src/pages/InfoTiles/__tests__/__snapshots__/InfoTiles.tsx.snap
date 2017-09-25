@@ -17,7 +17,7 @@ exports[`Cards Page Should render correctly 1`] = `
       class="css-i1aiqw undefined"
     >
       <small
-        class="css-ncaqe7"
+        class="css-p41l92"
       >
         Components
       </small>
@@ -29,7 +29,7 @@ exports[`Cards Page Should render correctly 1`] = `
       class="css-i1aiqw undefined"
     >
       <small
-        class="css-ncaqe7"
+        class="css-p41l92"
       >
         Reusability
       </small>
@@ -41,7 +41,7 @@ exports[`Cards Page Should render correctly 1`] = `
       class="css-i1aiqw undefined"
     >
       <small
-        class="css-ncaqe7"
+        class="css-p41l92"
       >
         Potential Added Value
       </small>
