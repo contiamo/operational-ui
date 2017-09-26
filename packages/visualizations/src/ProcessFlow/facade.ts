@@ -1,7 +1,6 @@
 import AbstractFacade from "../utils/abstract_facade"
 import DataHandler from "./data_handler"
 import Canvas from "./canvas"
-import Renderer from "./renderer"
 import Series from "./series"
 
 class Facade extends AbstractFacade {

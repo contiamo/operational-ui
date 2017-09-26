@@ -1,8 +1,8 @@
-import node from "./node"
-import dataHandler from "./data_handler"
+import Node from "./node"
+import DataHandler from "./data_handler"
 
 test("setNodeAccessors", () => {
-  const handler = new dataHandler()
+  const handler = new DataHandler()
   const accessors = {
     color: node => (node.id === "2" ? "green" : "purple"),
     colorGroup: node => "group " + node.id,
@@ -12,7 +12,7 @@ test("setNodeAccessors", () => {
     stroke: node => "blue",
   }
   handler.setNodeAccessors(accessors)
-  let testNode = new node({ id: "1" }, accessors)
+  let testNode = new Node({ id: "1" }, accessors)
   expect(testNode.color()).toBe("purple")
   expect(testNode.colorGroup()).toBe("group 1")
   expect(testNode.id()).toBe("node1")
