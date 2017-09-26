@@ -45,7 +45,7 @@ class Nodes extends AbstractRenderer {
   updateDraw(svg: any): void {
     let nodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = svg
       .selectAll("g.node-group")
-      .data(this.data, function(node: TNode): string {
+      .data(this.data, (node: TNode): string => {
         return node.id()
       })
 
@@ -67,7 +67,7 @@ class Nodes extends AbstractRenderer {
     let enterNodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = enterNodes
       .append("g")
       .attr("class", "node-group")
-      .attr("transform", function(node: TNode): string {
+      .attr("transform", (node: TNode): string => {
         return "translate(" + node.x + "," + node.y + ")"
       })
 
@@ -87,8 +87,7 @@ class Nodes extends AbstractRenderer {
   }
 
   updateNodes(enterNodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
-    const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize]),
-      that: Nodes = this
+    const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize])
     let n: number = 0
     enterNodeGroups
       .append("path")
@@ -99,10 +98,10 @@ class Nodes extends AbstractRenderer {
           .type(this.getNodeShape)
           .size(0),
       )
-      .attr("fill", function(d: TNode): string {
+      .attr("fill", (d: TNode): string => {
         return d.color()
       })
-      .attr("stroke", function(d: TNode): string {
+      .attr("stroke", (d: TNode): string => {
         return d.stroke()
       })
       .merge(enterNodeGroups)
@@ -112,16 +111,16 @@ class Nodes extends AbstractRenderer {
         "d",
         d3Symbol()
           .type(this.getNodeShape)
-          .size(function(d: TNode): number {
+          .size((d: TNode): number => {
             return scale(d.size())
           }),
       )
-      .each(function(): void {
+      .each((): void => {
         ++n
       })
-      .on("end", function(): void {
+      .on("end", (): void => {
         if (!--n) {
-          that.updateNodeLabels(enterNodeGroups)
+          this.updateNodeLabels(enterNodeGroups)
         }
       })
   }
@@ -150,7 +149,7 @@ class Nodes extends AbstractRenderer {
       .append("text")
       .attr("class", "label")
       .merge(enterNodes)
-      .text(function(node: TNode): string {
+      .text((node: TNode): string => {
         return node.label()
       })
       .attr("x", function(d: TNode): number {
@@ -159,10 +158,10 @@ class Nodes extends AbstractRenderer {
       .attr("y", function(d: TNode): number {
         return that.getNodeLabelY(d, this)
       })
-      .attr("dy", function(d: TNode): number {
+      .attr("dy", (d: TNode): number => {
         return nodeLabelOptions[d.labelPosition()].dy
       })
-      .attr("text-anchor", function(d: TNode): string {
+      .attr("text-anchor", (d: TNode): string => {
         return nodeLabelOptions[d.labelPosition()].textAnchor
       })
   }

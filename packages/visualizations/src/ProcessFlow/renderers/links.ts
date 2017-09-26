@@ -11,7 +11,7 @@ class Links extends AbstractRenderer {
   updateDraw(svg: any): void {
     const links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}> = svg
       .selectAll("path.link")
-      .data(this.data, function(link: TLink): string {
+      .data(this.data, (link: TLink): string => {
         return link.sourceId() + ";" + link.targetId()
       })
 
@@ -39,13 +39,13 @@ class Links extends AbstractRenderer {
       .transition()
       .duration(1e3)
       .attr("d", this.linkPath.bind(this))
-      .attr("stroke", function(d: TLink): string {
+      .attr("stroke", (d: TLink): string => {
         return d.stroke()
       })
-      .attr("stroke-width", function(d: TLink): string {
+      .attr("stroke-width", (d: TLink): string => {
         return scale(d.size()) + "px"
       })
-      .attr("stroke-dasharray", function(d: TLink): number {
+      .attr("stroke-dasharray", (d: TLink): number => {
         return d.dash()
       })
       .attr("marker-mid", "url(#arrow)")
