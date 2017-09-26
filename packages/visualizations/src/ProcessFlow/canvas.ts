@@ -3,7 +3,8 @@ import * as d3 from "d3-selection"
 
 class Canvas extends AbstractCanvas {
   createEl(): d3.Selection<Element, null, Window, undefined> {
-    return d3.select(document.createElementNS(d3.namespaces["svg"], "svg"))
+    const el: any = d3.select(document.createElementNS(d3.namespaces["svg"], "svg")).attr("class", "processflow")
+    return el
   }
 
   createInitialElements(): void {

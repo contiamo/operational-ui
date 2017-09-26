@@ -29,7 +29,10 @@ class Facade extends AbstractFacade {
           color: (d: any) => d.color,
         },
       },
-      computed: {},
+      computed: {
+        series: {},
+        canvas: {},
+      },
     }
   }
 
@@ -49,7 +52,7 @@ class Facade extends AbstractFacade {
     this.series.draw()
     this.drawn = true
     this.dirty = false
-    return this.state.computed("el").node()
+    return this.state.computed(["canvas", "el"]).node()
   }
 }
 

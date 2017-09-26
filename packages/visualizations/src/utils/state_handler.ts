@@ -55,7 +55,7 @@ class StateHandler {
   writer(path: string[]) {
     return (propertyPath: string | string[], value: any): void => {
       const fullPath = path.concat(propertyPath)
-      this.setComputed(propertyPath, value)
+      this.setComputed(fullPath, value)
     }
   }
 }
