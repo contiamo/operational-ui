@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimelineItem Should render properly 1`] = `
+<li
+  class="css-itb4w7"
+>
+  <div
+    class="css-1kat016"
+  />
+  <div
+    class="css-qkwlz7"
+  />
+  <div
+    class="css-3jx98m"
+  >
+    Test
+  </div>
+</li>
+`;

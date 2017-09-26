@@ -17,12 +17,9 @@ import Switch from "./Switch/Switch"
 import Icons from "./Icons/Icons"
 import Typography from "./Typography/Typography"
 import Colors from "./Colors/Colors"
-<<<<<<< HEAD
 import Paginator from "./Paginator/Paginator"
 import Progress from "./Progress/Progress"
-=======
-import Paginator from "./Paginator/Paginator"
->>>>>>> Fix merge conflicts
+import Timeline from "./Timeline/Timeline"
 
 const SidebarWithRouter = withRouter(Sidebar)
 const InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
@@ -54,6 +51,7 @@ export default () => (
       <Route path="/components/colors" component={Colors} />
       <Route path="/components/paginator" component={Paginator} />
       <Route path="/components/progress" component={Progress} />
+      <Route path="/components/timeline" component={Timeline} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>

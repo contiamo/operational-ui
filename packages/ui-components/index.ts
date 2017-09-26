@@ -22,6 +22,7 @@ import SideNavigation, {
 } from "./src/SideNavigation/SideNavigation"
 import Switch from "./src/Switch/Switch"
 import Tooltip from "./src/Tooltip/Tooltip"
+import Timeline, { TimelineItem } from "./src/Timeline/Timeline"
 import theme from "./src/theme"
 
 export {
@@ -49,7 +50,9 @@ export {
   SidebarItem,
   SidebarLink,
   Switch,
+  Timeline,
+  TimelineItem,
   Tooltip,
   theme as contiamoTheme,
-  ThemeProvider
+  ThemeProvider,
 }
