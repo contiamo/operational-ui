@@ -47,6 +47,7 @@ type Props = {
   active?: boolean
   anchor?: string
   color?: string
+  betaFixOverflow?: boolean
 }
 
 type State = {
@@ -65,15 +66,17 @@ class Tooltip extends React.Component<Props, State> {
   }
   tooltip: HTMLDivElement
   componentDidMount() {
-    const position = this.getPosition()
-    this.setState(() => ({
-      style: position
-    }))
+    if (this.props.betaFixOverflow) {
+      const position = this.getPosition()
+      this.setState(() => ({
+        style: position
+      }))
+    }
   }
   getPosition(): TooltipPosition {
     const rect: RectCoords = this.tooltip.getBoundingClientRect()
     const top: number = rect.top
-      /**
+    /**
       The following style properties can only properly be set
       after the component mounts.
 

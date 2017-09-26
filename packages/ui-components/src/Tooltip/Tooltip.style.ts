@@ -15,34 +15,35 @@ type caretPosition = {
 }
 
 const getTooltipPosition = (anchor: string): tooltipPosition => {
-    const position: tooltipPosition = {}
-    switch (anchor) {
-      case "bottom":
-        position.bottom = 0
-        break
-      default:
-        position.top = "50%"
-        position.transform = "translateY(-50%)"
-        break
-    }
-    return position
-  },
-  getCaretPosition = (anchor: string) => (theme: Theme): caretPosition => {
-    const size: number = 5,
-      caret: caretPosition = { left: size * -2, borderWidth: size }
-
-    switch (anchor) {
-      case "bottom":
-        caret.bottom = theme.spacing
-        break
-      case "middle":
-      default:
-        caret.top = "50%"
-        caret.transform = "translateY(-50%)"
-        break
-    }
-    return caret
+  const position: tooltipPosition = {}
+  switch (anchor) {
+    case "bottom":
+      position.bottom = 0
+      break
+    default:
+      position.top = "50%"
+      position.transform = "translateY(-50%)"
+      break
   }
+  return position
+}
+
+const getCaretPosition = (anchor: string) => (theme: Theme): caretPosition => {
+  const size: number = 5,
+    caret: caretPosition = { left: size * -2, borderWidth: size }
+
+  switch (anchor) {
+    case "bottom":
+      caret.bottom = theme.spacing
+      break
+    case "middle":
+    default:
+      caret.top = "50%"
+      caret.transform = "translateY(-50%)"
+      break
+  }
+  return caret
+}
 
 export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor?: string }): {} => {
   const backgroundColor: string = color ? hexOrColor(color)(theme.colors[color]) : "black"

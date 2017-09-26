@@ -68,8 +68,8 @@ exports[`SideNavigationItem component renders 1`] = `
     }
   }
 >
-  <glamorous(class_1)>
+  <SideNavigationItem>
     Hi, I'm an Item
-  </glamorous(class_1)>
+  </SideNavigationItem>
 </ThemeProvider>
 `;

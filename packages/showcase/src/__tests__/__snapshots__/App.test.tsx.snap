@@ -27,7 +27,7 @@ exports[`App starts 1`] = `
       />
     </div>
     <div
-      class="css-1o7yu73 SideNavigationItem"
+      class="css-tw1nwy undefined"
       role="button"
       tabindex="-1"
     >
@@ -76,7 +76,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1o7yu73 SideNavigationItem"
+      class="css-tw1nwy undefined"
       role="button"
       tabindex="-1"
     >
@@ -142,7 +142,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1o7yu73 SideNavigationItem"
+      class="css-tw1nwy undefined"
       role="button"
       tabindex="-1"
     >

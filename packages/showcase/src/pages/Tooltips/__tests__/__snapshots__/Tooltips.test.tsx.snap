@@ -118,9 +118,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
       </tr>
       <tr>
         <td>
-          <em>
-            children
-          </em>
+          *children*
         </td>
         <td>
           What would you like to say in the tooltip?
@@ -133,52 +131,24 @@ exports[`Tooltips Page Should render correctly 1`] = `
           🚫
         </td>
       </tr>
+      <tr>
+        <td>
+          betaFixOverflow
+        </td>
+        <td>
+          If enabled, the component rerenders with fixed positioning so that the tooltip is visible even if the parent has an overflow: hidden set. Note that this will only look good if the tooltip's element is small and disappears on mouse leave. Currently, \`mouseenter\` and \`mouseleave\` logic is up to the library user.
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
     </tbody>
   </table>
-  <div
-    class="css-1kznpaj"
-  >
-    withTooltip
-  </div>
-  <p>
-    Tooltips come with an additional higher-order component (or HOC) called \`withTooltip\`. This component wraps any pre-existing React component that you may have and gives it a tooltip, which you can pass as a prop.
-  </p>
-  <div
-    style="margin-bottom:32px;"
-  />
-  <h4>
-    Usage
-  </h4>
-  <div
-    class="playground"
-  >
-    <div
-      class="playgroundCode"
-    >
-      <div
-        class="ReactCodeMirror playgroundStage"
-      >
-        <textarea
-          autocomplete="off"
-        >
-          [object Object]
-        </textarea>
-      </div>
-    </div>
-    <div
-      class="playgroundPreview"
-    >
-      <div>
-        <div
-          class="previewArea"
-        />
-      </div>
-    </div>
-  </div>
-  <p>
-    <strong>
-      Note: The \`color\` and \`anchor\` props are still available, but prepended with the word \`tooltip\` in order not to override any similar props on your component.
-    </strong>
-  </p>
 </div>
 `;

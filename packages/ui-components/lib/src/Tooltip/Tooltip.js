@@ -26,21 +26,23 @@ var Tooltip = /** @class */ (function (_super) {
         return _this;
     }
     Tooltip.prototype.componentDidMount = function () {
-        var position = this.getPosition();
-        this.setState(function () { return ({
-            style: position
-        }); });
+        if (this.props.betaFixOverflow) {
+            var position_1 = this.getPosition();
+            this.setState(function () { return ({
+                style: position_1
+            }); });
+        }
     };
     Tooltip.prototype.getPosition = function () {
         var rect = this.tooltip.getBoundingClientRect();
         var top = rect.top;
         /**
-        The following style properties can only properly be set
-        after the component mounts.
-  
-        Please read the description of this component at the top of the file
-        if you haven't already to find out why.
-        */
+          The following style properties can only properly be set
+          after the component mounts.
+    
+          Please read the description of this component at the top of the file
+          if you haven't already to find out why.
+          */
         var position = {
             top: top,
             position: "fixed",

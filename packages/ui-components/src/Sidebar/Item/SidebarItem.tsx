@@ -4,7 +4,6 @@ import { SFC } from "react"
 import glamorous, { Div, GlamorousComponent } from "glamorous"
 
 import style from "./SidebarItem.style"
-import withTooltip from "../../Tooltip/withTooltip"
 import SidebarLink from "../Link/SidebarLink"
 
 type Props = {

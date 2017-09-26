@@ -19,7 +19,10 @@ const Playground: React.SFC<Props> = ({ snippet, components, scope }) => {
     wrappedComponents[key] = wrapDefaultTheme(comps[key])
   }
   return (
-    <ComponentPlayground codeText={transformSnippet(snippet)} scope={{ React, ...wrappedComponents, ...scope || {} }} />
+    <ComponentPlayground
+      codeText={transformSnippet(snippet)}
+      scope={{ React, ...wrappedComponents, ...(scope || {}) }}
+    />
   )
 }
 
