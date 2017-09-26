@@ -34,12 +34,12 @@ class Facade extends AbstractFacade {
   }
 
   initializeSeries(): void {
-    this.series = new Series(this.state)
+    this.series = new Series(this.state.readOnly(), this.state.writer(["series"]))
   }
 
   initializeComponents(): void {
     this.components = {
-      canvas: new Canvas(this.state, this.context),
+      canvas: new Canvas(this.state.readOnly(), this.state.writer(["canvas"]), this.context),
     }
   }
 

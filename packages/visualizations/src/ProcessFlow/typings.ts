@@ -1,11 +1,10 @@
+import { TState, TStateWriter } from "../utils/typings"
 // Type definitions for the Contiamo Process Flow visualization
 import Nodes from "./node"
 import Link from "./link"
-import StateHandler from "../utils/state_handler"
 
 type TNode = Nodes
 type TLink = Link
-type TState = StateHandler
 
 //@TODO
 type TAccessors = any
@@ -65,4 +64,17 @@ interface TProps {
   arrowFill: string
 }
 
-export { TAccessors, TScale, TData, TInputData, TJourney, TLink, TLinkAttrs, TNode, TNodeAttrs, TProps, TState }
+export {
+  TAccessors,
+  TScale,
+  TData,
+  TInputData,
+  TJourney,
+  TLink,
+  TLinkAttrs,
+  TNode,
+  TNodeAttrs,
+  TProps,
+  TState,
+  TStateWriter,
+}
