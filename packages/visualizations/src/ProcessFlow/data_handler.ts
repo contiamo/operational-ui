@@ -33,7 +33,7 @@ class DataHandler {
 
   initializeNodes(data: TInputData): void {
     this.nodes = map(bind(this.addNode, this))(data.nodes)
-    forEach(function(node: TNode): void {
+    forEach((node: TNode): void => {
       node.sourceLinks = []
       node.targetLinks = []
     })(this.nodes)
@@ -41,7 +41,7 @@ class DataHandler {
   }
 
   findNode(nodeId: string): TNode {
-    return find(function(node: TNode): boolean {
+    return find((node: TNode): boolean => {
       return node.id() === nodeId
     })(this.nodes)
   }
@@ -57,10 +57,9 @@ class DataHandler {
   }
 
   calculateNodeSizes(): void {
-    const that: DataHandler = this
-    forEach(function(journey: TJourney): void {
-      forEach(function(nodeId: string): void {
-        that.findNode(nodeId).attributes.size += journey.size
+    forEach((journey: TJourney): void => {
+      forEach((nodeId: string): void => {
+        this.findNode(nodeId).attributes.size += journey.size
       })(journey.path)
     })(this.journeys)
   }
@@ -71,7 +70,7 @@ class DataHandler {
 
   // @TODO why is there a type error if the method output has type TLink?
   findLink(sourceId: string, targetId: string): any {
-    const checkIds: any = function(link: TLink): boolean {
+    const checkIds: any = (link: TLink): boolean => {
       return link.sourceId() === sourceId && link.targetId() === targetId
     }
     return find(checkIds)(this.links)
@@ -88,16 +87,15 @@ class DataHandler {
 
   computeLinks(): void {
     this.links = []
-    const that: DataHandler = this
-    forEach(function(journey: TJourney): void {
+    forEach((journey: TJourney): void => {
       const path: string[] = journey.path
-      const computeLink: any = function(i: number): void {
+      const computeLink: any = (i: number): void => {
         const sourceId: string = path[i]
         const targetId: string = path[i + 1]
-        const sourceNode: TNode = that.findNode(sourceId)
-        const targetNode: TNode = that.findNode(targetId)
+        const sourceNode: TNode = this.findNode(sourceId)
+        const targetNode: TNode = this.findNode(targetId)
 
-        const existingLink: TLink = that.findLink(sourceId, targetId)
+        const existingLink: TLink = this.findLink(sourceId, targetId)
         if (existingLink) {
           existingLink.attributes.size += journey.size
         } else {
@@ -108,8 +106,8 @@ class DataHandler {
             targetId: targetNode.id(),
             size: journey.size,
           }
-          const newLink: TLink = that.addLink(linkAttrs)
-          that.links.push(newLink)
+          const newLink: TLink = this.addLink(linkAttrs)
+          this.links.push(newLink)
           sourceNode.sourceLinks.push(newLink)
           targetNode.targetLinks.push(newLink)
         }

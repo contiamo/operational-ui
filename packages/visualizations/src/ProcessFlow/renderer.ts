@@ -35,7 +35,7 @@ class Renderer {
   positionNodes(): void {
     let nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
     const rows: string[] = Object.keys(nodesByRow),
-      xValues: number[] = map(function(node: TNode): number {
+      xValues: number[] = map((node: TNode): number => {
         return node.x
       })(this.layout.nodes),
       maxX: number = Math.max(...xValues),
@@ -44,15 +44,15 @@ class Renderer {
       yGridSpacing: number = config.height / (rows.length + 1)
 
     // Assign y values
-    forEach(function(node: TNode): void {
+    forEach((node: TNode): void => {
       node.y = (node.y + 1) * yGridSpacing
     })(this.layout.nodes)
-    forEach(function(row: string): void {
+    forEach((row: string): void => {
       flow(
-        sortBy(function(node: TNode): number {
+        sortBy((node: TNode): number => {
           return node.x
         }),
-        forEach(function(node: TNode): void {
+        forEach((node: TNode): void => {
           node.x *= xGridSpacing
         }),
       )(nodesByRow[parseInt(row, 10)])
