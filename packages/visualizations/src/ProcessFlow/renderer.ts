@@ -34,7 +34,7 @@ class Renderer {
         return node.x
       })(this.layout.nodes),
       maxX: number = Math.max(...xValues),
-      config: any = this.state.config(),
+      config: any = this.state.current.config,
       xGridSpacing: number = config.width / (maxX + 1),
       yGridSpacing: number = config.height / (rows.length + 1)
 

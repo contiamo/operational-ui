@@ -8,14 +8,14 @@ abstract class AbstractRenderer {
   data: TNode[] | TLink[]
   state: TState
 
-  constructor(state: any) {
+  constructor(state: TState) {
     this.state = state
   }
 
   draw(data: TNode[] | TLink[]): void {
     this.data = data
-    this.config = this.state.config()
-    this.updateDraw(this.state.computed("el"))
+    this.config = this.state.current.config
+    this.updateDraw(this.state.current.computed.el)
   }
 
   abstract updateDraw(svg: any): void

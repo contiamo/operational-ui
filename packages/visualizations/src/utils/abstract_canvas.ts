@@ -1,21 +1,18 @@
-import StateHandler from "./state_handler"
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
-
-type ChartState = {
-  current: any
-  previous: any
-}
+import { TState, TStateWriter } from "./typings"
 
 abstract class AbstractCanvas {
   container: d3.Selection<Element, null, Window, undefined>
   el: d3.Selection<Element, null, Window, undefined>
   protected elements: any = {}
-  protected state: StateHandler
+  protected state: TState
+  stateWriter: TStateWriter
 
-  constructor(state: StateHandler, context: any) {
+  constructor(state: TState, stateWriter: TStateWriter, context: any) {
     this.state = state
+    this.stateWriter = stateWriter
     this.container = d3.select(context)
     this.el = this.createEl()
     this.el.attr("class", "processflow")
@@ -111,7 +108,7 @@ abstract class AbstractCanvas {
   // }
 
   draw(): void {
-    const config = this.state.state.current.state.config
+    const config = this.state.current.config
     this.container.style("width", config.width + "px").style("height", config.height + "px")
 
     this.el.style("width", config.width + "px").style("height", config.height + "px")
@@ -121,7 +118,7 @@ abstract class AbstractCanvas {
       .attr("fill", config.arrowFill)
       .attr("stroke", config.linkStroke)
 
-    this.state.computed("el", this.el)
+    this.stateWriter("el", this.el)
   }
 
   margin(side: string): number {

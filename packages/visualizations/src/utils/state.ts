@@ -39,7 +39,7 @@ const mergePath = (obj: Object, path: string[], value: Object) => {
 class State {
   state: any
 
-  constructor(obj: Object = {}) {
+  constructor(obj: any = {}) {
     this.state = cloneDeep(obj)
   }
 

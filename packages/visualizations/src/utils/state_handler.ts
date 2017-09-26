@@ -33,13 +33,30 @@ class StateHandler {
     return this.state.current.merge(["accessors", type], accessors)
   }
 
-  computed(path: string | string[], value?: any) {
-    if (!value) return this.state.current.get(["computed"].concat(path))
-    return this.state.current.set(["computed"].concat(path), value)
+  computed(path: string | string[]) {
+    return this.state.current.get(["computed"].concat(path))
   }
 
   hasData(): boolean {
     return isEmpty(this.data())
+  }
+
+  readOnly(): any {
+    return {
+      current: this.state.current.state,
+      previous: this.state.previous.state,
+    }
+  }
+
+  private setComputed(path: string | string[], value?: any) {
+    return this.state.current.set(["computed"].concat(path), value)
+  }
+
+  writer(path: string[]) {
+    return (propertyPath: string | string[], value: any): void => {
+      const fullPath = path.concat(propertyPath)
+      this.setComputed(propertyPath, value)
+    }
   }
 }
 
