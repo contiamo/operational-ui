@@ -54,9 +54,7 @@ function withTooltip<InputProps, InputState, S>(InputComponent: any) {
             <Tooltip active color={this.props.tooltipColor} anchor={this.props.tooltipAnchor}>
               {this.props.tooltip}
             </Tooltip>
-          ) : (
-            ""
-          )}
+          ) : null}
         </InputComponent>
       )
     }

@@ -40,7 +40,7 @@ function withTooltip(InputComponent) {
                 var _this = this;
                 return (React.createElement(InputComponent, __assign({ onMouseEnter: function () { return _this.showTooltip(); }, onMouseLeave: function () { return _this.hideTooltip(); } }, this.props),
                     this.props.children ? this.props.children : "",
-                    this.props.tooltip && this.state.isTooltipActive ? (React.createElement(Tooltip_1.default, { active: true, color: this.props.tooltipColor, anchor: this.props.tooltipAnchor }, this.props.tooltip)) : ("")));
+                    this.props.tooltip && this.state.isTooltipActive ? (React.createElement(Tooltip_1.default, { active: true, color: this.props.tooltipColor, anchor: this.props.tooltipAnchor }, this.props.tooltip)) : null));
             };
             return class_1;
         }(React.Component)),

@@ -41,6 +41,9 @@ const styles: {} = {
   "& p": {
     margin: 0,
     marginBottom: contiamoTheme.spacing
+  },
+  '& .CodeMirror-code': {
+    fontFamily: 'monospace'
   }
 }
 
