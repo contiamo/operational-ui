@@ -43,7 +43,7 @@ class Series {
   }
 
   initialDraw(): void {
-    this.el = this.state.current.computed.el
+    this.el = this.state.current.computed.canvas.el
     this.updateDraw()
     this.drawn = true
   }

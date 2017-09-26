@@ -15,7 +15,7 @@ abstract class AbstractRenderer {
   draw(data: TNode[] | TLink[]): void {
     this.data = data
     this.config = this.state.current.config
-    this.updateDraw(this.state.current.computed.el)
+    this.updateDraw(this.state.current.computed.canvas.el)
   }
 
   abstract updateDraw(svg: any): void

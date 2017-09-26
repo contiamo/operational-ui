@@ -4,7 +4,7 @@ import { reduce, isArray } from "lodash/fp"
 import { TState, TStateWriter } from "./typings"
 
 abstract class AbstractCanvas {
-  container: d3.Selection<Element, null, Window, undefined>
+  container: d3.Selection<Element, {}, null, undefined>
   el: d3.Selection<Element, null, Window, undefined>
   protected elements: any = {}
   protected state: TState
@@ -13,9 +13,7 @@ abstract class AbstractCanvas {
   constructor(state: TState, stateWriter: TStateWriter, context: any) {
     this.state = state
     this.stateWriter = stateWriter
-    this.container = d3.select(context)
-    this.el = this.createEl()
-    this.el.attr("class", "processflow")
+    this.insertContainer(context)
     this.insertEl()
     this.createInitialElements()
     // this.listenToMouseOver()
@@ -23,7 +21,15 @@ abstract class AbstractCanvas {
 
   abstract createEl(): d3.Selection<Element, null, Window, undefined>
 
+  insertContainer(context: any): void {
+    this.container = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", "chart-container clearfix")
+    context.appendChild(this.container.node())
+  }
+
   insertEl(): void {
+    this.el = this.createEl()
     this.container.node().appendChild(this.el.node())
   }
 
