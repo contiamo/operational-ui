@@ -1,6 +1,4 @@
 import AbstractCanvas from "../utils/abstract_canvas"
-import State from "../utils/state"
-import EventHandler from "../utils/event_handler"
 import * as d3 from "d3-selection"
 
 class Canvas extends AbstractCanvas {

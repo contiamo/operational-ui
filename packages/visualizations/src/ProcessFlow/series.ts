@@ -1,9 +1,6 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
-import Events from "../utils/event_catalog"
-import { invoke, map, find, isMatch, filter, keys } from "lodash/fp"
-import * as $ from "jquery"
-import * as d3 from "d3-selection"
+import { invoke } from "lodash/fp"
 import { TState } from "./typings"
 
 class Series {

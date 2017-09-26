@@ -1,9 +1,5 @@
 import { map } from "lodash/fp"
-import * as d3 from "d3-selection"
-import * as $ from "jquery"
-import "d3-transition"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
-import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { TNode, TLink, TScale, TState } from "../typings"
 
 abstract class AbstractRenderer {

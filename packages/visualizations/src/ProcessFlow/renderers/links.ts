@@ -1,8 +1,6 @@
 import AbstractRenderer from "./abstract_renderer"
-import { map } from "lodash/fp"
 import * as d3 from "d3-selection"
 import "d3-transition"
-import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { TLink, TScale } from "../typings"
 
 const MINLINKWIDTH: number = 2
