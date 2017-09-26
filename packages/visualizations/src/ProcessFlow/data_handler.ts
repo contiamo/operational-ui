@@ -3,7 +3,7 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import { bind, map, forEach, find, times, extend } from "lodash/fp"
-import { TNode, TLink, TJourney, TData, TInputData, TLinkAttrs, TAccessors } from "./typings"
+import { TNode, TLink, TJourney, TData, TInputData, TLinkAttrs, TAccessors, TState } from "./typings"
 
 class DataHandler {
   journeys: TJourney[]
@@ -11,11 +11,17 @@ class DataHandler {
   links: TLink[]
   nodeAccessors: TAccessors
   linkAccessors: TAccessors
+  state: TState
 
-  prepareData(data: any, accessors: any): TData {
+  constructor(state: TState) {
+    this.state = state
+  }
+
+  prepareData(): TData {
+    const data = this.state.data()
     this.journeys = data.journeys
-    this.setNodeAccessors(accessors.node)
-    this.setLinkAccessors(accessors.link)
+    this.setNodeAccessors(this.state.accessors("node"))
+    this.setLinkAccessors(this.state.accessors("link"))
     this.initializeNodes(data)
     this.initializeLinks(data)
     return {

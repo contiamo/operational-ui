@@ -30,31 +30,27 @@ class Facade extends AbstractFacade {
           color: (d: any) => d.color,
         },
       },
+      computed: {},
     }
   }
 
   initializeSeries(): void {
-    this.series = new Series()
+    this.series = new Series(this.state)
   }
 
   initializeComponents(): void {
     this.components = {
-      canvas: new Canvas(this.context, this.state.state),
+      canvas: new Canvas(this.state, this.context),
     }
   }
 
-  draw(): HTMLElement {
-    const accessors = {
-      node: this.state.accessors("node"),
-      link: this.state.accessors("link"),
-    }
-    let computed: any = {}
-    this.series.setData(computed, this.state.data(), accessors)
-    this.components.canvas.draw(computed)
-    this.series.draw(computed, this.state.config())
+  draw(): Element {
+    this.series.prepareData()
+    this.components.canvas.draw()
+    this.series.draw()
     this.drawn = true
     this.dirty = false
-    return computed.el.node()
+    return this.state.computed("el").node()
   }
 }
 

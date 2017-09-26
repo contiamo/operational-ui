@@ -6,9 +6,9 @@ import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import Layout from "./layout"
 import DataHandler from "./data_handler"
-import { TNode, TLink, TInputData, TProps } from "./typings"
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
+import { TNode, TState } from "./typings"
 
 class Renderer {
   computed: any
@@ -16,20 +16,20 @@ class Renderer {
   layout: Layout
   links: Links
   nodes: Nodes
+  state: TState
 
-  constructor() {
-    this.layout = new Layout()
-    this.links = new Links()
-    this.nodes = new Nodes()
+  constructor(state: TState) {
+    this.state = state
+    this.layout = new Layout(state)
+    this.links = new Links(state)
+    this.nodes = new Nodes(state)
   }
 
-  draw(computed: any, config: any): void {
-    this.computed = computed
-    this.config = config
-    this.layout.computeLayout(computed.data)
+  draw(): void {
+    this.layout.computeLayout()
     this.positionNodes()
-    this.links.draw(computed.el, config, this.layout.links)
-    this.nodes.draw(computed.el, config, this.layout.nodes)
+    this.links.draw(this.layout.links)
+    this.nodes.draw(this.layout.nodes)
   }
 
   positionNodes(): void {
@@ -39,8 +39,9 @@ class Renderer {
         return node.x
       })(this.layout.nodes),
       maxX: number = Math.max(...xValues),
-      xGridSpacing: number = this.config.width / (maxX + 1),
-      yGridSpacing: number = this.config.height / (rows.length + 1)
+      config: any = this.state.config(),
+      xGridSpacing: number = config.width / (maxX + 1),
+      yGridSpacing: number = config.height / (rows.length + 1)
 
     // Assign y values
     forEach(function(node: TNode): void {

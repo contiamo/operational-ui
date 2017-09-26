@@ -4,6 +4,7 @@ import Events from "../utils/event_catalog"
 import { invoke, map, find, isMatch, filter, keys } from "lodash/fp"
 import * as $ from "jquery"
 import * as d3 from "d3-selection"
+import { TState } from "./typings"
 
 class Series {
   data: any
@@ -12,44 +13,47 @@ class Series {
   drawn: boolean
   el: any
   renderer: Renderer
+  state: TState
 
-  constructor(options: any = {}) {
-    this.dataHandler = new DataHandler()
-    this.renderer = new Renderer()
+  constructor(state: TState, options: any = {}) {
+    this.state = state
+    this.dataHandler = new DataHandler(state)
+    this.renderer = new Renderer(state)
     this.drawn = false
   }
 
-  setData(computed: any, data: any, accessors: any): void {
-    this.data = this.dataHandler.prepareData(data, accessors)
-    computed.data = this.data
+  prepareData(): void {
+    this.data = this.dataHandler.prepareData(this.state)
+    this.state.computed("data", this.data)
   }
 
   hasData(): boolean {
     return this.data.nodes != null && this.data.nodes.length > 0
   }
 
-  draw(computed: any, config: any): void {
+  draw(): void {
     if (!this.hasData()) {
       this.renderer.close()
     } else {
-      this.prepareDraw(computed, config)
+      this.prepareDraw()
     }
   }
 
-  prepareDraw(computed: any, config: any): void {
-    this.drawn ? this.updateDraw(computed, config) : this.initialDraw(computed, config)
+  prepareDraw(): void {
+    this.drawn ? this.updateDraw() : this.initialDraw()
   }
 
-  initialDraw(computed: any, config: any): void {
-    this.el = computed.el
-    this.updateDraw(computed, config)
+  initialDraw(): void {
+    this.el = this.state.computed("el")
+    this.updateDraw()
     this.drawn = true
   }
 
-  updateDraw(computed: any, config: any): void {
+  updateDraw(): void {
+    const config = this.state.config()
     this.el.attr("width", config.width).attr("height", config.height)
-    computed.el = this.el
-    this.renderer.draw(computed, config)
+    this.state.computed("el", this.el)
+    this.renderer.draw()
   }
   //
   // resize(): void {
