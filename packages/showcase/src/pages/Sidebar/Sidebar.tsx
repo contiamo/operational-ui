@@ -5,7 +5,7 @@ import Playground from "../../components/Playground/Playground"
 import { Sidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
-import * as snippet from "./snippets/sidebar.snippet"
+import * as simpleSnippet from "./snippets/Sidebar.simple.snippet"
 import propDescription from "./propDescription"
 
 export const fetch = (text: any) => new Promise(resolve => setTimeout(() => resolve(text), 2000))
@@ -30,7 +30,7 @@ export default () => (
     <div style={{ marginBottom: 32 }} />
 
     <h4>Usage</h4>
-    <Playground snippet={String(snippet)} components={{ Sidebar, SidebarItem, SidebarLink }} scope={{ fetch }} />
+    <Playground snippet={String(simpleSnippet)} components={{ Sidebar, SidebarItem, SidebarLink }} scope={{ fetch }} />
 
     <div style={{ marginBottom: 32 }} />
 

@@ -3,7 +3,7 @@ import * as React from "react"
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
 import { Card, CardHeader } from "contiamo-ui-components"
-import * as snippet from "./snippets/basic.snippet"
+import * as simpleSnippet from "./snippets/Cards.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
@@ -35,7 +35,7 @@ export default () => (
     </Card>
 
     <h4>Usage</h4>
-    <Playground snippet={String(snippet)} components={{ Card }} />
+    <Playground snippet={String(simpleSnippet)} components={{ Card }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />
