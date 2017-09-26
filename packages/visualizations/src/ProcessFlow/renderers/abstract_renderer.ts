@@ -4,17 +4,22 @@ import * as $ from "jquery"
 import "d3-transition"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
-import { TNode, TLink, TScale } from "../typings"
+import { TNode, TLink, TScale, TState } from "../typings"
 
 abstract class AbstractRenderer {
   computed: any
   config: any
   data: TNode[] | TLink[]
+  state: TState
 
-  draw(svg: any, config: any, data: TNode[] | TLink[]): void {
+  constructor(state: any) {
+    this.state = state
+  }
+
+  draw(data: TNode[] | TLink[]): void {
     this.data = data
-    this.config = config
-    this.updateDraw(svg)
+    this.config = this.state.config()
+    this.updateDraw(this.state.computed("el"))
   }
 
   abstract updateDraw(svg: any): void
