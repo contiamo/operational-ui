@@ -6,8 +6,6 @@ import glamorous, { Div } from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-import withTooltip from "../../Tooltip/withTooltip"
-
 type Props = {
   className?: string
   children: React.ReactNode

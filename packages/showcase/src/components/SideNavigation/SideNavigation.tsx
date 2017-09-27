@@ -1,4 +1,5 @@
 import * as React from "react"
+import glamorous from "glamorous"
 import { Link } from "react-router-dom"
 import { Div, Img } from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
@@ -13,25 +14,26 @@ type Props = {
 }
 
 const style: {} = (): {} => ({
-    "& a": {
-      display: "flex",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "white",
-    },
-    "& .SideNavigationItem__label": {
-      marginLeft: 20,
-    },
-  }),
-  //expandedShadow => 3px 0 11px rgba(0, 0, 0, 0.19)
-  // tooltip => 222
-  // card headers
-  //lineheight 20, color #747474, fontsize: 13, proximanova400
-  // card tabs (tabs)
-  // buttons, 2px radius, bordercolor #e2e2e2, no shadow, inherit color <- copy shadows
-  //cliuckable things have  a 2px borderraduus
+  "& a": {
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+    color: "white"
+  },
+  "& .SideNavigationItem__label": {
+    marginLeft: 20
+  }
+})
 
-  AppSideNavigation = ({ location }: Props) =>
+const AppSideNavigation = ({ location }: Props) => {
+  const routeMatch = !!(
+    location &&
+    location.pathname &&
+    location.pathname.match(/\/components/) &&
+    location.pathname.match(/\/components/).length > 0
+  )
+
+  return (
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader>
         <Link to="/">
@@ -40,12 +42,12 @@ const style: {} = (): {} => ({
         </Link>
       </SideNavigationHeader>
 
-      <SideNavigationItem active={location && location.pathname.match(/\/components/)} tooltip="Components">
+      <SideNavigationItem active={routeMatch}>
         <Link to="/components">
-          <Box color={location && location.pathname.match(/\/components/) ? "#67FFAA" : "#fff"} size={20} />
+          <Box color={routeMatch ? "#67FFAA" : "#fff"} size={20} />
           <Div
             css={{
-              color: location && location.pathname.match(/\/components/) ? "#67FFAA" : "#fff",
+              color: routeMatch ? "#67FFAA" : "#fff"
             }}
             className="SideNavigationItem__label"
           >
@@ -53,13 +55,13 @@ const style: {} = (): {} => ({
           </Div>
         </Link>
       </SideNavigationItem>
-      <SideNavigationItem tooltip="Composed">
+      <SideNavigationItem>
         <Link to="#">
           <Grid color="#fff" size={20} />
           <div className="SideNavigationItem__label">Composed</div>
         </Link>
       </SideNavigationItem>
-      <SideNavigationItem tooltip="Visualizations">
+      <SideNavigationItem>
         <Link to="#">
           <BarChart2 color="#fff" size={20} />
           <div className="SideNavigationItem__label">Visualizations</div>
@@ -67,5 +69,7 @@ const style: {} = (): {} => ({
       </SideNavigationItem>
       <Div css={{ flexGrow: 1, height: "100%" }} />
     </SideNavigation>
+  )
+}
 
-export default AppSideNavigation
+export default glamorous(AppSideNavigation)(style)

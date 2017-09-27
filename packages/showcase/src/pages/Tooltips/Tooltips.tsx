@@ -6,8 +6,7 @@ import Playground from "../../components/Playground/Playground"
 import { Tooltip, CardHeader } from "contiamo-ui-components"
 import Table from "../../components/PropsTable/PropsTable"
 
-import * as basicSnippet from "./snippets/basic.snippet"
-import withTooltipSnippet from "./snippets/with-tooltip"
+import * as simpleSnippet from "./snippets/Tooltips.simple.snippet"
 import propDescription from "./propDescription"
 
 const StickyTooltip = glamorous(Tooltip)({
@@ -27,26 +26,9 @@ export default () => (
     </p>
 
     <h4>Usage</h4>
-    <Playground snippet={String(basicSnippet)} components={{ Tooltip }} />
+    <Playground snippet={String(simpleSnippet)} components={{ Tooltip }} />
 
     <h4>Props</h4>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
-
-    <CardHeader>withTooltip</CardHeader>
-    <p>
-      Tooltips come with an additional higher-order component (or HOC) called `withTooltip`. This component wraps any
-      pre-existing React component that you may have and gives it a tooltip, which you can pass as a prop.
-    </p>
-
-    <div style={{ marginBottom: 32 }} />
-
-    <h4>Usage</h4>
-    <SyntaxHighlighter language="javascript">{withTooltipSnippet}</SyntaxHighlighter>
-    <p>
-      <strong>
-        Note: The `color` and `anchor` props are still available, but prepended with the word `tooltip` in order not to
-        override any similar props on your component.
-      </strong>
-    </p>
   </div>
 )

@@ -118,9 +118,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
       </tr>
       <tr>
         <td>
-          <em>
-            children
-          </em>
+          *children*
         </td>
         <td>
           What would you like to say in the tooltip?
@@ -133,151 +131,24 @@ exports[`Tooltips Page Should render correctly 1`] = `
           🚫
         </td>
       </tr>
+      <tr>
+        <td>
+          betaFixOverflow
+        </td>
+        <td>
+          If enabled, the component rerenders with fixed positioning so that the tooltip is visible even if the parent has an overflow: hidden set. Note that this will only look good if the tooltip's element is small and disappears on mouse leave. Currently, \`mouseenter\` and \`mouseleave\` logic is up to the library user.
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
     </tbody>
   </table>
-  <div
-    class="css-1kznpaj"
-  >
-    withTooltip
-  </div>
-  <p>
-    Tooltips come with an additional higher-order component (or HOC) called \`withTooltip\`. This component wraps any pre-existing React component that you may have and gives it a tooltip, which you can pass as a prop.
-  </p>
-  <div
-    style="margin-bottom:32px;"
-  />
-  <h4>
-    Usage
-  </h4>
-  <pre
-    style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444;"
-  >
-    <code>
-      
-
-      <span
-        style="font-weight:bold;"
-      >
-        const
-      </span>
-       MyDiv = 
-      <span>
-        <span>
-          ()
-        </span>
-         =&gt;
-      </span>
-       (
-      <span>
-        <span>
-          &lt;
-          <span
-            style="font-weight:bold;"
-          >
-            div
-          </span>
-          &gt;
-        </span>
-        Hover for Spanish!
-        <span>
-          &lt;/
-          <span
-            style="font-weight:bold;"
-          >
-            div
-          </span>
-          &gt;
-        </span>
-      </span>
-      )
-
-      <span
-        style="font-weight:bold;"
-      >
-        const
-      </span>
-       MyDivWithTooltip = withTooltip(MyDiv)
-
-ReactDOM.render(
-  
-      <span>
-        <span>
-          &lt;
-          <span
-            style="font-weight:bold;"
-          >
-            MyDivWithTooltip
-          </span>
-          
-    
-          <span>
-            tooltip
-          </span>
-          =
-          <span
-            style="color:#880000;"
-          >
-            "Hola, compadre!"
-          </span>
-          
-    
-          <span>
-            tooltipColor
-          </span>
-          =
-          <span
-            style="color:#880000;"
-          >
-            "#f00"
-          </span>
-          
-    
-          <span>
-            tooltipAnchor
-          </span>
-          =
-          <span
-            style="color:#880000;"
-          >
-            "bottom"
-          </span>
-          
-  &gt;
-        </span>
-        
-    Hover for Spanish
-  
-        <span>
-          &lt;/
-          <span
-            style="font-weight:bold;"
-          >
-            MyDivWithTooltip
-          </span>
-          &gt;
-        </span>
-      </span>
-      ,
-  
-      <span
-        style="color:#397300;"
-      >
-        document
-      </span>
-      .querySelector(
-      <span
-        style="color:#880000;"
-      >
-        '#app)
-)
-
-      </span>
-    </code>
-  </pre>
-  <p>
-    <strong>
-      Note: The \`color\` and \`anchor\` props are still available, but prepended with the word \`tooltip\` in order not to override any similar props on your component.
-    </strong>
-  </p>
 </div>
 `;

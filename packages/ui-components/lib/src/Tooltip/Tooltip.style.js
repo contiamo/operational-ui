@@ -21,7 +21,8 @@ var getTooltipPosition = function (anchor) {
             break;
     }
     return position;
-}, getCaretPosition = function (anchor) { return function (theme) {
+};
+var getCaretPosition = function (anchor) { return function (theme) {
     var size = 5, caret = { left: size * -2, borderWidth: size };
     switch (anchor) {
         case "bottom":

@@ -5,7 +5,7 @@ exports[`Tooltip Component Should intialize without problems 1`] = `
   className="test Tooltip"
   style={
     Object {
-      "position": "relative",
+      "position": "absolute",
     }
   }
 >

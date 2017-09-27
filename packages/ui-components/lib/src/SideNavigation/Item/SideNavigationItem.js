@@ -2,11 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var withTooltip_1 = require("../../Tooltip/withTooltip");
-var SideNavigationItem = function (_a) {
-    var className = _a.className, children = _a.children, onClick = _a.onClick;
-    return (React.createElement("div", { className: className + " SideNavigationItem", onClick: onClick, role: "button", tabIndex: -1 }, children));
-}, style = function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, active = _a.active;
     var activeBackgroundColor = "rgba(0, 0, 0, 0.2)";
     return {
@@ -23,14 +19,15 @@ var SideNavigationItem = function (_a) {
         ":hover": {
             backgroundColor: "rgba(255, 255, 255, 0.07)"
         },
-        "&.SideNavigationItem_active": {
-            backgroundColor: activeBackgroundColor
-        },
         ":first-child": {
             marginTop: 0,
             marginBottom: theme.spacing * 2
         }
     };
+});
+var SideNavigationItem = function (_a) {
+    var className = _a.className, children = _a.children, onClick = _a.onClick, active = _a.active;
+    return (React.createElement(Container, { className: "" + className, active: !!active, onClick: onClick, role: "button", tabIndex: -1 }, children));
 };
-exports.default = glamorous_1.default(withTooltip_1.default(SideNavigationItem))(style);
+exports.default = SideNavigationItem;
 //# sourceMappingURL=SideNavigationItem.js.map

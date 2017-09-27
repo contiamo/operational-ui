@@ -16,43 +16,45 @@ var Tooltip_style_1 = require("./Tooltip.style");
 exports.style = Tooltip_style_1.default;
 var Tooltip = /** @class */ (function (_super) {
     __extends(Tooltip, _super);
-    function Tooltip(props) {
-        var _this = _super.call(this, props) || this;
+    function Tooltip() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
             style: {
-                position: "relative"
+                position: "absolute"
             }
         };
         return _this;
     }
     Tooltip.prototype.componentDidMount = function () {
-        var position = this.getPosition();
-        this.setState(function () { return ({
-            position: position
-        }); });
+        if (this.props.betaFixOverflow) {
+            var position_1 = this.getPosition();
+            this.setState(function () { return ({
+                style: position_1
+            }); });
+        }
     };
     Tooltip.prototype.getPosition = function () {
-        var rect = this.tooltip.getBoundingClientRect(), top = rect.top, 
+        var rect = this.tooltip.getBoundingClientRect();
+        var top = rect.top;
         /**
-        The following style properties can only properly be set
-        after the component mounts.
-  
-        Please read the description of this component at the top of the file
-        if you haven't already to find out why.
-        */ position = {
+          The following style properties can only properly be set
+          after the component mounts.
+    
+          Please read the description of this component at the top of the file
+          if you haven't already to find out why.
+          */
+        var position = {
             top: top,
             position: "fixed",
             transform: "none",
+            bottom: this.props.anchor === "bottom" ? "auto" : null,
             left: (rect && rect.left) || 0
         };
-        if (this.props.anchor === "bottom") {
-            position.bottom = "auto";
-        }
         return position;
     };
     Tooltip.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { ref: function (tooltip) { return (_this.tooltip = tooltip || document.createElement("div")); }, className: this.props.className + " Tooltip" + (this.props.active ? " active" : ""), style: this.state.style }, this.props.children ? this.props.children : ""));
+        return (React.createElement("div", { ref: function (tooltip) { return (_this.tooltip = tooltip || document.createElement("div")); }, className: this.props.className + " Tooltip" + (this.props.active ? " active" : ""), style: this.state.style }, this.props.children));
     };
     Tooltip.defaultProps = {
         anchor: "top",

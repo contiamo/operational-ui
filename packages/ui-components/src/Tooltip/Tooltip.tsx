@@ -23,14 +23,16 @@ import TooltipStyle from "./Tooltip.style"
   relative to `document`. These coordinates are then set as CSS properties
   on the tooltip, along with `position: fixed` and all is well with the
   world. 🌈
-*/ type tooltipPosition = {
-  position: "relative" | "fixed"
+*/
+interface TooltipPosition extends React.CSSProperties {
+  position: "absolute" | "fixed"
   transform?: string
   top?: number
   left?: number
   bottom?: number | string
 }
-type rectCoords = {
+
+type RectCoords = {
   top: number
   left: number
   bottom: number
@@ -38,54 +40,57 @@ type rectCoords = {
   width: number
   height: number
 }
+
 type Props = {
   className?: string
   children?: React.ReactNode
   active?: boolean
   anchor?: string
   color?: string
+  betaFixOverflow?: boolean
 }
+
 type State = {
-  style: tooltipPosition
+  style: TooltipPosition
 }
+
 class Tooltip extends React.Component<Props, State> {
   static defaultProps = {
     anchor: "top",
     active: false
   }
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      style: {
-        position: "relative"
-      }
+  state: State = {
+    style: {
+      position: "absolute"
     }
   }
   tooltip: HTMLDivElement
   componentDidMount() {
-    const position = this.getPosition()
-    this.setState(() => ({
-      position
-    }))
+    if (this.props.betaFixOverflow) {
+      const position = this.getPosition()
+      this.setState(() => ({
+        style: position
+      }))
+    }
   }
-  getPosition() {
-    const rect: rectCoords = this.tooltip.getBoundingClientRect(),
-      top: number = rect.top,
-      /**
+  getPosition(): TooltipPosition {
+    const rect: RectCoords = this.tooltip.getBoundingClientRect()
+    const top: number = rect.top
+    /**
       The following style properties can only properly be set
       after the component mounts.
 
       Please read the description of this component at the top of the file
       if you haven't already to find out why.
-      */ position: tooltipPosition = {
-        top,
-        position: "fixed",
-        transform: "none",
-        left: (rect && rect.left) || 0
-      }
-    if (this.props.anchor === "bottom") {
-      position.bottom = "auto"
+      */
+    const position: TooltipPosition = {
+      top,
+      position: "fixed",
+      transform: "none",
+      bottom: this.props.anchor === "bottom" ? "auto" : null,
+      left: (rect && rect.left) || 0
     }
+
     return position
   }
   render() {
@@ -95,10 +100,11 @@ class Tooltip extends React.Component<Props, State> {
         className={`${this.props.className} Tooltip${this.props.active ? " active" : ""}`}
         style={this.state.style}
       >
-        {this.props.children ? this.props.children : ""}
+        {this.props.children}
       </div>
     )
   }
 }
+
 export default glamorous(Tooltip)(TooltipStyle)
 export { Tooltip, TooltipStyle as style } // for testing.
