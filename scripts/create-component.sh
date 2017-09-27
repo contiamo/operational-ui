@@ -63,7 +63,7 @@ const $1 = wrapDefaultTheme(Themeless$1)
 
 describe("$1", () => {
   it("Should render", () => {
-    const renderedComponent = render(<$1 value="SomeValue"></$1>)
+    const renderedComponent = render(<$1 value="SomeValue" />)
     expect(renderedComponent).toMatchSnapshot()
   })
 })
@@ -128,7 +128,7 @@ import { TestComp } from "contiamo-ui-components"
 
 // Run any code inside the IIFE, as long as a React element is returned
 // (you do not need the IIFE, but it is useful to define simple state containers for stateless components)
-export default (function() {
+export default (() => {
   const value = "Hello"
 
   return (
