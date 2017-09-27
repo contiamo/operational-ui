@@ -1,5 +1,5 @@
 import * as React from "react"
-import { render, mount } from "enzyme"
+import { render } from "enzyme"
 
 import ThemelessProgress from "../Progress"
 import wrapDefaultTheme from "../../../utils/wrap-default-theme"

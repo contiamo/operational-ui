@@ -1,16 +1,16 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 
-type Props = {
+interface Props {
   paused?: boolean
   complete?: boolean
 }
 
-type State = {
+interface State {
   fillRatio: number
 }
 
-type StyleProps = {
+interface StyleProps {
   on: boolean
   theme: Theme
 }
@@ -69,7 +69,7 @@ class Progress extends React.Component<Props, State> {
     fillRatio: 0
   }
 
-  tick(): void {
+  tick = (): void => {
     this.setState(prevState => ({
       fillRatio: prevState.fillRatio + 0.01
     }))
@@ -82,13 +82,13 @@ class Progress extends React.Component<Props, State> {
 
   componentDidMount() {
     if (this.shouldTick()) {
-      window.requestAnimationFrame(this.tick.bind(this))
+      window.requestAnimationFrame(this.tick)
     }
   }
 
   componentDidUpdate() {
     if (this.shouldTick()) {
-      window.requestAnimationFrame(this.tick.bind(this))
+      window.requestAnimationFrame(this.tick)
     }
   }
 

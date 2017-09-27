@@ -63,25 +63,25 @@ var Progress = /** @class */ (function (_super) {
         _this.state = {
             fillRatio: 0
         };
+        _this.tick = function () {
+            _this.setState(function (prevState) { return ({
+                fillRatio: prevState.fillRatio + 0.01
+            }); });
+        };
         return _this;
     }
-    Progress.prototype.tick = function () {
-        this.setState(function (prevState) { return ({
-            fillRatio: prevState.fillRatio + 0.01
-        }); });
-    };
     Progress.prototype.shouldTick = function () {
         var maxFillRatio = this.props.complete ? 1 : 0.8;
         return !this.props.paused && this.state.fillRatio <= maxFillRatio;
     };
     Progress.prototype.componentDidMount = function () {
         if (this.shouldTick()) {
-            window.requestAnimationFrame(this.tick.bind(this));
+            window.requestAnimationFrame(this.tick);
         }
     };
     Progress.prototype.componentDidUpdate = function () {
         if (this.shouldTick()) {
-            window.requestAnimationFrame(this.tick.bind(this));
+            window.requestAnimationFrame(this.tick);
         }
     };
     Progress.prototype.render = function () {
