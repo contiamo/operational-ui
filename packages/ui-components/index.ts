@@ -10,6 +10,7 @@ import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/H
 import Icon from "./src/Icon/Icon"
 import InfoTile from "./src/InfoTile/InfoTile"
 import Input from "./src/Input/Input"
+import Paginator from "./src/Paginator/Paginator"
 import PlusChip from "./src/PlusChip/PlusChip"
 import Progress from "./src/Progress/Progress"
 import Select from "./src/Select/Select"
@@ -36,6 +37,7 @@ export {
   Icon,
   InfoTile,
   Input,
+  Paginator,
   PlusChip,
   Progress,
   Select,
