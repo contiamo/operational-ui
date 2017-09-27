@@ -17,6 +17,7 @@ import Switch from "./Switch/Switch"
 import Icons from "./Icons/Icons"
 import Typography from "./Typography/Typography"
 import Colors from "./Colors/Colors"
+import Progress from "./Progress/Progress"
 
 const SidebarWithRouter = withRouter(Sidebar)
 const InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
@@ -46,6 +47,7 @@ export default () => (
       <Route path="/components/switch" component={Switch} />
       <Route path="/components/typography" component={Typography} />
       <Route path="/components/colors" component={Colors} />
+      <Route path="/components/progress" component={Progress} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </AppCanvas>
   </Div>

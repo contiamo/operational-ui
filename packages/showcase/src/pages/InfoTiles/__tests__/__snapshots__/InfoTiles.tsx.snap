@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Cards Page Should render correctly 1`] = `
+exports[`InfoTiles Page Should render correctly 1`] = `
 <div>
   <div
     class="css-1kznpaj"

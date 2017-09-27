@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress Component Should initialize properly 1`] = `
+<div
+  class="css-16d4xg9"
+>
+  <div
+    class="css-1fyf18v"
+  >
+    <div
+      class="css-1m5dh88"
+    >
+      <div
+        class="css-mm3v"
+        style="transform:translateX(-100%);"
+      />
+    </div>
+  </div>
+</div>
+`;
