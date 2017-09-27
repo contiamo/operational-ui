@@ -15,7 +15,7 @@ var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Line = glamorous_1.default.div({
     position: "absolute",
     left: 7,
-    top: "0",
+    top: 2,
     height: "100%"
 }, function (_a) {
     var theme = _a.theme;
@@ -28,6 +28,7 @@ var StatusContainer = glamorous_1.default.div({
     borderRadius: "100px",
     height: 16,
     position: "absolute",
+    top: 2,
     width: 16,
     "& > svg": {
         height: 18,
@@ -52,7 +53,6 @@ var StatusContainer = glamorous_1.default.div({
         : {}));
 });
 var Content = glamorous_1.default.div({
-    fontSize: 14,
     padding: "0 0 5px 26px",
     position: "relative",
     top: 0,
@@ -62,6 +62,9 @@ var Content = glamorous_1.default.div({
     "& p": {
         marginBottom: 0
     }
+}, function (_a) {
+    var theme = _a.theme;
+    return (__assign({}, theme.typography.body));
 });
 var Container = glamorous_1.default.li({
     listStyle: "none",

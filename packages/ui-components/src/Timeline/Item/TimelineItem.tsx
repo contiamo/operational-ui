@@ -16,7 +16,7 @@ const Line = glamorous.div(
   {
     position: "absolute",
     left: 7,
-    top: "0",
+    top: 2,
     height: "100%"
   },
   ({ theme }: { theme: Theme }) => ({
@@ -30,6 +30,7 @@ const StatusContainer = glamorous.div(
     borderRadius: "100px",
     height: 16,
     position: "absolute",
+    top: 2,
     width: 16,
     "& > svg": {
       height: 18,
@@ -58,18 +59,22 @@ const StatusContainer = glamorous.div(
   })
 )
 
-const Content = glamorous.div({
-  fontSize: 14,
-  padding: "0 0 5px 26px",
-  position: "relative",
-  top: 0,
-  "& > *": {
-    margin: 0
+const Content = glamorous.div(
+  {
+    padding: "0 0 5px 26px",
+    position: "relative",
+    top: 0,
+    "& > *": {
+      margin: 0
+    },
+    "& p": {
+      marginBottom: 0
+    }
   },
-  "& p": {
-    marginBottom: 0
-  }
-})
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.body
+  })
+)
 
 const Container = glamorous.li({
   listStyle: "none",
