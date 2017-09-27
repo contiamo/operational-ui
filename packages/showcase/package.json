@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-showcase",
-  "version": "0.0.1-6",
+  "version": "0.0.1-7",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
