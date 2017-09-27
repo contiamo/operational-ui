@@ -5,7 +5,7 @@ import { Switch, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 
-import * as snippet from "./snippets/Switch.snippet"
+import * as snippet from "./snippets/Switches.snippet"
 import propDescription from "./propDescription"
 
 export default () => (

@@ -3,12 +3,12 @@ import { render } from "enzyme"
 
 import { wrapTheme } from "contiamo-ui-utils"
 import { contiamoTheme } from "contiamo-ui-components"
-import ThemelessCards from "../Cards"
+import ThemelessColorPickers from "../ColorPickers"
 
-const Cards = wrapTheme(contiamoTheme)(ThemelessCards)
+const ColorPickers = wrapTheme(contiamoTheme)(ThemelessColorPickers)
 
-describe("Cards Page", () => {
+describe("ColorPickersPage", () => {
   it("Should render correctly", () => {
-    expect(render(<Cards />)).toMatchSnapshot()
+    expect(render(<ColorPickers />)).toMatchSnapshot()
   })
 })

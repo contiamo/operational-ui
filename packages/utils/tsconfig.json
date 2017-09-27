@@ -5,8 +5,10 @@
     "module": "commonjs",
     "sourceMap": true,
     "noImplicitAny": true,
-    "lib": ["ES6", "DOM"]
+    "jsx": "react",
+    "lib": ["ES6", "DOM", "DOM.Iterable", "ScriptHost"],
+    "moduleResolution": "node"
   },
   "include": ["./index.ts", "./types/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules"]
 }

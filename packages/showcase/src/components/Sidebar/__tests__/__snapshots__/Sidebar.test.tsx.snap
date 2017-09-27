@@ -1,164 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Showcase: Sidebar Should render correctly 1`] = `
-<glamorous(Sidebar)>
-  <glamorous(SidebarItem)
-    label="Basics"
-  >
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/colors"
-    >
-      Colors
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/typography"
-    >
-      Typography
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-  <glamorous(SidebarItem)
-    label="Data Entry"
-  >
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/buttons"
-    >
-      Buttons
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/switch"
-    >
-      Switch
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/form-fields"
-    >
-      Form Fields
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/color-picker"
-    >
-      Color Picker
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Date Picker
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-  <glamorous(SidebarItem)
-    label="Feedback"
-  >
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Modals
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Notifications
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Alerts
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Messages
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/progress"
-    >
-      Progress
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/tooltips"
-    >
-      Tooltips
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/timeline"
-    >
-      Timeline
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-  <glamorous(SidebarItem)
-    label="UI Elements"
-  >
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Context Menu
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/cards"
-    >
-      Cards
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/chips"
-    >
-      Chips
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/info-tiles"
-    >
-      InfoTiles
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-  <glamorous(SidebarItem)
-    label="Navigation"
-  >
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/sidebar"
-    >
-      Sidebar
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Side Navigation
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Tabs
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={false}
-      to="/components/paginator"
-    >
-      Pagination
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-  <glamorous(SidebarItem)
-    label="Layout"
-  >
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      Grid
-    </glamorous(SidebarLink)>
-    <glamorous(SidebarLink)
-      disabled={true}
-    >
-      List
-    </glamorous(SidebarLink)>
-  </glamorous(SidebarItem)>
-</glamorous(Sidebar)>
+<ThemeProvider
+  theme={
+    Object {
+      "baseZIndex": 0,
+      "colors": Object {
+        "black": "#000000",
+        "error": "#DE1A1A",
+        "grey10": "#F5F5F5",
+        "grey20": "#F1F1F1",
+        "grey30": "#D0D9E5",
+        "grey40": "#C6D1E1",
+        "grey50": "#BBCADC",
+        "grey60": "#999999",
+        "grey70": "#8092B0",
+        "grey80": "#747474",
+        "grey90": "#445873",
+        "info": "#1499CE",
+        "success": "#689F2C",
+        "warning": "#FFAE00",
+        "white": "#FFFFFF",
+      },
+      "spacing": 12,
+      "typography": Object {
+        "body": Object {
+          "fontSize": 13,
+          "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "heading1": Object {
+          "fontSize": 13,
+          "fontWeight": 700,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "heading2": Object {
+          "fontSize": 13,
+          "fontWeight": 700,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 0.6,
+          "textTransform": "none",
+        },
+        "small": Object {
+          "fontSize": 12,
+          "fontWeight": 400,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+        "title": Object {
+          "fontSize": 22,
+          "fontWeight": 600,
+          "letterSpacing": 0.2,
+          "lineHeight": "1.5",
+          "opacity": 1,
+          "textTransform": "none",
+        },
+      },
+    }
+  }
+>
+  <Component />
+</ThemeProvider>
 `;

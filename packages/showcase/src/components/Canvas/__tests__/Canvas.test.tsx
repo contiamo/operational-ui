@@ -1,10 +1,11 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
 import ThemelessCanvas from "../Canvas"
 
-const Canvas = wrapDefaultTheme(ThemelessCanvas)
+const Canvas = wrapTheme(contiamoTheme)(ThemelessCanvas)
 
 describe("App Showcase: Canvas", () => {
   it("Should render correctly", () => {

@@ -2,10 +2,11 @@ import * as React from "react"
 import { render } from "enzyme"
 import { BrowserRouter as Router } from "react-router-dom"
 
-import wrapDefaultTheme from "../../utils/wrap-default-theme"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
 import ThemelessComponentsPage from "../Components"
 
-const ComponentsPage = wrapDefaultTheme(ThemelessComponentsPage)
+const ComponentsPage = wrapTheme(contiamoTheme)(ThemelessComponentsPage)
 
 describe("ComponentsPage", () => {
   it("Should render correctly", () => {

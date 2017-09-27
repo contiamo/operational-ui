@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessButtonsPage from "../Buttons"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessButtons from "../Buttons"
 
-const ButtonsPage = wrapDefaultTheme(ThemelessButtonsPage)
+const Buttons = wrapTheme(contiamoTheme)(ThemelessButtons)
 
 describe("Buttons Page", () => {
   it("Should render correctly", () => {
-    expect(render(<ButtonsPage />)).toMatchSnapshot()
+    expect(render(<Buttons />)).toMatchSnapshot()
   })
 })

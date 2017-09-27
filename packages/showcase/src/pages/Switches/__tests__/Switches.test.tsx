@@ -3,12 +3,12 @@ import { render } from "enzyme"
 
 import { wrapTheme } from "contiamo-ui-utils"
 import { contiamoTheme } from "contiamo-ui-components"
-import ThemelessCards from "../Cards"
+import ThemelessSwitches from "../Switches"
 
-const Cards = wrapTheme(contiamoTheme)(ThemelessCards)
+const Switches = wrapTheme(contiamoTheme)(ThemelessSwitches)
 
-describe("Cards Page", () => {
+describe("Switches Page", () => {
   it("Should render correctly", () => {
-    expect(render(<Cards />)).toMatchSnapshot()
+    expect(render(<Switches />)).toMatchSnapshot()
   })
 })

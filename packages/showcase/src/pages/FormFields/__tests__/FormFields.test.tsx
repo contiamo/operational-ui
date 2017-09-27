@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessFormFieldsPage from "../FormFields"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessFormFields from "../FormFields"
 
-const FormFieldsPage = wrapDefaultTheme(ThemelessFormFieldsPage)
+const FormFields = wrapTheme(contiamoTheme)(ThemelessFormFields)
 
 describe("FormFieldsPage", () => {
   it("Should render correctly", () => {
-    expect(render(<FormFieldsPage />)).toMatchSnapshot()
+    expect(render(<FormFields />)).toMatchSnapshot()
   })
 })
