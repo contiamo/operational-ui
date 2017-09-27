@@ -13,5 +13,19 @@ export default [
     defaultValue: "white",
     type: "string",
     optional: true
+  },
+  {
+    name: "icon",
+    description: "React Feather icon name. See `Icon` component.",
+    defaultValue: "",
+    type: "string",
+    optional: true
+  },
+  {
+    name: "onIconClick",
+    description: "Method triggered when the icon is clicked.",
+    defaultValue: "",
+    type: "function",
+    optional: true
   }
 ]
