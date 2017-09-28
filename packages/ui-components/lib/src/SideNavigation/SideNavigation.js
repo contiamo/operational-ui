@@ -42,7 +42,7 @@ var style = function (_a) {
         }
         : {};
     return __assign({ width: width,
-        backgroundColor: backgroundColor, position: fix ? "fixed" : "relative", zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflow: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: backgroundColor ? contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]) : theme.grey80 }, hoverWidth);
+        backgroundColor: backgroundColor, position: fix ? "fixed" : "relative", zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflow: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: backgroundColor ? contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]) : theme.colors.grey80 }, hoverWidth);
 };
 var SideNavigation = function (_a) {
     var className = _a.className, children = _a.children;
