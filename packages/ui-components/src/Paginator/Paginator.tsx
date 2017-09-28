@@ -21,10 +21,10 @@ interface ControlProps {
 
 const Control = glamorous.li(
   {
-    listStyle: "none",
+    listStyle: "none"
   },
   ({ disabled = false, theme }: { disabled?: boolean; theme?: Theme }) => ({
-    cursor: disabled ? "not-allowed" : "pointer",
+    cursor: disabled ? "not-allowed" : "pointer"
   })
 )
 
@@ -82,10 +82,10 @@ const PageLink = glamorous.li(
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
-    userSelect: "none",
+    userSelect: "none"
   },
   ({ active = false, theme }: { active?: boolean; theme?: Theme }) => ({
-    color: active ? theme.colors.success : "",
+    color: active ? theme.colors.success : ""
   })
 )
 
@@ -119,11 +119,11 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Prop
 const Container = glamorous.ul(
   {
     display: "flex",
-    padding: "0",
+    padding: "0"
   },
   ({ disabled }: { disabled?: boolean; theme?: Theme }): {} => ({
     pointerEvents: disabled ? "none" : "all",
-    opacity: disabled ? 0.4 : 1,
+    opacity: disabled ? 0.4 : 1
   })
 )
 

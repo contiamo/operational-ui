@@ -23,7 +23,6 @@ var Container = glamorous_1.default.div(function (_a) {
         },
         ":first-child": {
             marginTop: 0,
-            marginBottom: theme.spacing * 2,
         },
     };
 });

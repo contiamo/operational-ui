@@ -34,7 +34,6 @@ const Container = glamorous.div(({ theme, active }: Props): {} => {
 
     ":first-child": {
       marginTop: 0,
-      marginBottom: theme.spacing * 2,
     },
   }
 })

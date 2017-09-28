@@ -96,6 +96,12 @@ var createPagesFragment = function (_a) {
 var Container = glamorous_1.default.ul({
     display: "flex",
     padding: "0"
+}, function (_a) {
+    var disabled = _a.disabled;
+    return ({
+        pointerEvents: disabled ? "none" : "all",
+        opacity: disabled ? 0.4 : 1
+    });
 });
 var Paginator = function (_a) {
     var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.selected, selected = _c === void 0 ? 1 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d;
