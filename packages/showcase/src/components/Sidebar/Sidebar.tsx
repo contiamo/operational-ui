@@ -55,7 +55,7 @@ const links: Link[] = [
       { url: "/components/paginator", label: "Pagination" },
       { url: "/components/sidebar", label: "Sidebar" },
       { label: "Side Navigation" },
-      { label: "Tabs" }
+      { url: "/components/tabs", label: "Tabs" }
     ]
   },
   {

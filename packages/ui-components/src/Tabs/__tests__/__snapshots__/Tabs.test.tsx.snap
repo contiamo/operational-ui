@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs Should render 1`] = `
+<div
+  class="css-nil"
+>
+  <ul
+    class="css-17ljjie"
+  >
+    <li
+      class="css-1543rm5"
+    >
+      test
+    </li>
+  </ul>
+  <div
+    class="css-10id2qb"
+  >
+    <div
+      class="css-nil"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
