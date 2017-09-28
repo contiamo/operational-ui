@@ -61,7 +61,7 @@ const style = ({
     height: "100vh",
     overflow: "hidden",
     boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-    color: backgroundColor ? readableTextColor(backgroundColor)(["black", "white"]) : theme.grey80,
+    color: backgroundColor ? readableTextColor(backgroundColor)(["black", "white"]) : theme.colors.grey80,
     ...hoverWidth,
   }
 }
