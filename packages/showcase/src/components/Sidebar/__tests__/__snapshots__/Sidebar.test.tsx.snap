@@ -86,6 +86,12 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
     >
       Tooltips
     </glamorous(SidebarLink)>
+    <glamorous(SidebarLink)
+      disabled={false}
+      to="/components/timeline"
+    >
+      Timeline
+    </glamorous(SidebarLink)>
   </glamorous(SidebarItem)>
   <glamorous(SidebarItem)
     label="UI Elements"

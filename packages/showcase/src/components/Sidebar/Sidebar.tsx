@@ -36,7 +36,8 @@ const links: Link[] = [
       { label: "Alerts" },
       { label: "Messages" },
       { url: "/components/progress", label: "Progress" },
-      { url: "/components/tooltips", label: "Tooltips" }
+      { url: "/components/tooltips", label: "Tooltips" },
+      { url: "/components/timeline", label: "Timeline" }
     ]
   },
   {
