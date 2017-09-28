@@ -1,0 +1,35 @@
+{
+  "name": "devserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prettier": "prettier --write site.tsx"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.2.3",
+    "prettier": "^1.7.2",
+    "raw-loader": "^0.5.1",
+    "tslint": "^5.7.0",
+    "tslint-config-airbnb": "^5.3.0",
+    "tslint-config-prettier": "^1.5.0",
+    "typescript": "^2.5.3",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "dependencies": {
+    "@types/core-js": "^0.9.43",
+    "@types/jest": "^20.0.8",
+    "@types/react": "^16.0.5",
+    "@types/react-dom": "^15.5.4",
+    "@types/react-hot-loader": "^3.0.4",
+    "@types/react-syntax-highlighter": "^0.0.3",
+    "@types/webpack-env": "^1.13.1",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.9.7",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
