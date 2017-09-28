@@ -1,18 +1,21 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
-import { TState, TStateWriter } from "./typings"
+import { TState, TStateWriter, TEvents } from "./typings"
 
 abstract class AbstractCanvas {
   container: d3.Selection<Element, {}, null, undefined>
   el: d3.Selection<Element, null, Window, undefined>
+  events: TEvents
+  focusEl: any
   protected elements: any = {}
   protected state: TState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, context: any) {
+  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, context: any) {
     this.state = state
     this.stateWriter = stateWriter
+    this.events = events
     this.insertContainer(context)
     this.insertEl()
     this.createInitialElements()
@@ -30,13 +33,27 @@ abstract class AbstractCanvas {
 
   insertEl(): void {
     this.el = this.createEl()
+    // this.stateWriter("el", this.el)
     this.container.node().appendChild(this.el.node())
+  }
+
+  insertFocusLabel(): void {
+    this.focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "focus-legend")
+    // this.stateWriter("focusEl", this.focusEl)
+    this.container.node().appendChild(this.focusEl.node())
   }
 
   createInitialElements(): void {
     return
   }
 
+  elementFor(component: string): any {
+    const elMap: any = {
+      series: this.el,
+      focus: this.focusEl,
+    }
+    return elMap[component]
+  }
   // prefixedId(id: string): string {
   //   return this.state.uid + id
   // }
@@ -123,8 +140,6 @@ abstract class AbstractCanvas {
       .select("marker#arrow")
       .attr("fill", config.arrowFill)
       .attr("stroke", config.linkStroke)
-
-    this.stateWriter("el", this.el)
   }
 
   margin(side: string): number {

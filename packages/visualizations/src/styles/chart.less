@@ -1,0 +1,1083 @@
+/* ALL CHARTS */
+.chart-container {
+  position: relative;
+  .drawing-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .chart-background {
+    fill: #fff;
+  }
+  .legend {
+    font-size: 11px;
+    position: relative;
+    overflow: hidden;
+  }
+  .series-legend,
+  .comparison-legend {
+    .clearfix();
+    padding: 1px 3px 0 3px;
+    line-height: 14px;
+    .color {
+      width: 6px;
+      height: 6px;
+      // border: 1px solid transparent;
+      margin: 2px 3px 0 0;
+      float: left;
+    }
+    .name {
+      float: left;
+    }
+    .line {
+      width: 4px;
+      height: 0px;
+      border: 1px solid #747474;
+      margin: 5px 3px 3px 3px;
+      float: left;
+    }
+  }
+  .legend-top,
+  .legend-bottom {
+    .clearfix();
+    padding: 0 7px;
+    margin: 3px 0;
+    .series-legend,
+    .comparison-legend {
+      float: left;
+    }
+  }
+  .legend-axis {
+    .tick line {
+      stroke: #9c9c9c;
+      stroke-width: 1;
+      shape-rendering: crispedges;
+    }
+    .tick text {
+      fill: #7c7c7c;
+    }
+  }
+  .legend-right {
+    .clearfix();
+    font-size: 12px;
+    .color-bar {
+      opacity: 0.8;
+      padding: 5px;
+      overflow: visible;
+    }
+    .legend-circles circle {
+      fill: none;
+      stroke: #666;
+    }
+    .legend-circles text {
+      fill: #7c7c7c;
+    }
+    .color-legend {
+      padding-bottom: 10px;
+    }
+  }
+  .legend-top {
+    margin-bottom: 3px;
+    margin-top: 2px;
+  }
+  .legend-bottom {
+    margin-top: 3px;
+    margin-bottom: 2px;
+  }
+  .focus-legend {
+    .user-select(none);
+    pointer-events: none;
+    .box-shadow(0px 1px 2px @boxShadow);
+    .border-radius(2px);
+    padding: 7px;
+    border: 1px solid #cdcdcd;
+    position: absolute;
+    background-color: #fff;
+    ul {
+      list-style: none;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      &.secondary {
+        margin-top: 4px;
+      }
+      .title {
+        font-family: @sansFontFamilyBold;
+        color: @gray;
+      }
+      .total {
+        font-family: @sansFontFamily;
+        color: #747474;
+      }
+      .percentage {
+        color: #999;
+      }
+      li {
+        .clearfix();
+      }
+      .stacked-total {
+        margin-top: 7px;
+        color: @gray;
+      }
+      .series-color {
+        float: left;
+        width: 6px;
+        height: 6px;
+        margin: 5px 4px 5px 1px;
+        // border: 1px solid transparent;
+      }
+      .series-name {
+        float: left;
+        margin-right: 5px;
+      }
+      .series-value {
+        float: left;
+        font-family: @sansFontFamilyBold;
+        color: @gray;
+        margin-right: 5px;
+      }
+      .series-percentage {
+        float: left;
+      }
+    }
+  }
+  .focus-legend-component {
+    pointer-events: all;
+    background-color: rgba(190, 255, 255, 0.1);
+    border-radius: 3px;
+    border: 1px solid #dcf1ff;
+    padding: 0;
+    cursor: pointer;
+  }
+  .focus-legend-event-flag {
+    ul {
+      .name {
+        font-family: @sansFontFamilyBold;
+        color: @gray;
+      }
+      .description {
+        line-height: 1em;
+        padding-top: 5px;
+      }
+    }
+  }
+}
+//
+// /* CHART */
+// .chart {
+//   font-size: 11px;
+//   .axis {
+//     .tick {
+//       fill: #9c9c9c;
+//       &.weekend {
+//         fill: #9d261d;
+//       }
+//       &.now {
+//         fill: #71a934;
+//         font-family: @sansFontFamilyBold;
+//       }
+//     }
+//     .border {
+//       stroke: #eee;
+//       stroke-width: 1;
+//       shape-rendering: crispedges;
+//     }
+//     rect {
+//       fill: #fff;
+//     }
+//     &.ord-axis {
+//       .tick {
+//         font-size: 11px;
+//       }
+//     }
+//   }
+//   .axis-rules {
+//     .rule {
+//       stroke: #eee;
+//       stroke-width: 1;
+//       shape-rendering: crispedges;
+//       &.zero {
+//         stroke-width: 2;
+//       }
+//       &.now {
+//         stroke: #71a934;
+//         stroke-dasharray: 2, 4;
+//       }
+//     }
+//   }
+//   .area path {
+//     opacity: 0.6;
+//   }
+//   .range {
+//     .range-area {
+//       fill-opacity: 0.4;
+//     }
+//     .range-border {
+//       fill: none;
+//       stroke-width: 2;
+//       stroke-dasharray: 2, 4;
+//     }
+//   }
+//   .line {
+//     path {
+//       stroke-width: 2;
+//       fill: none;
+//       &.hover {
+//         stroke-width: 4;
+//       }
+//     }
+//     &.dashed path {
+//       stroke-dasharray: 6, 4;
+//     }
+//   }
+//   .points circle {
+//     stroke-width: 1.5;
+//     stroke: #fff;
+//   }
+//   .bars rect,
+//   .bar_line rect {
+//     opacity: 0.8;
+//     fill: none;
+//     shape-rendering: crispedges;
+//     &.hover {
+//       opacity: 1;
+//     }
+//   }
+//   .stacked_bars rect {
+//     opacity: 0.8;
+//     &.hover {
+//       opacity: 1;
+//     }
+//   }
+//   .textlabels {
+//     text {
+//       font-size: 10px;
+//       fill: #333;
+//       font-family: @sansFontFamilyBold;
+//     }
+//   }
+//   .focus-label {
+//     pointer-events: none;
+//     line {
+//       stroke: darken(#cdcdcd, 5%);
+//       stroke-width: 1.5;
+//       shape-rendering: crispedges;
+//     }
+//     circle {
+//       stroke-width: 1.5;
+//       stroke: #fff;
+//     }
+//   }
+//   .event_flag {
+//     line {
+//       stroke-dasharray: 5px 2px;
+//     }
+//     text {
+//       font-size: 11px;
+//     }
+//     path.hover-flag {
+//       cursor: pointer;
+//       shape-rendering: crispedges;
+//     }
+//     .hover {
+//       stroke-width: 2px;
+//     }
+//   }
+// }
+//
+// /* Waterfall */
+// .waterfall {
+//   font-size: 11px;
+//   .axis {
+//     .tick {
+//       fill: #9c9c9c;
+//     }
+//     .border {
+//       stroke: #eee;
+//       stroke-width: 1;
+//       shape-rendering: crispedges;
+//     }
+//     &.category {
+//       .tick {
+//         font-family: @sansFontFamilyBold;
+//       }
+//     }
+//     rect {
+//       fill: #fff;
+//     }
+//   }
+//   .axis-rules {
+//     .rule {
+//       stroke: #eee;
+//       stroke-width: 1;
+//       shape-rendering: crispedges;
+//       &.zero {
+//         stroke-width: 2;
+//         stroke: #aaa;
+//       }
+//       &.category {
+//         stroke: #ddd;
+//       }
+//     }
+//   }
+//   .waterfall rect {
+//     opacity: 0.8;
+//     &:hover {
+//       opacity: 1;
+//     }
+//   }
+//   .textlabels {
+//     text {
+//       font-size: 10px;
+//       fill: #333;
+//     }
+//   }
+// }
+//
+// /* Bubbles */
+// .bubbles {
+//   font-size: 11px;
+//   .axis {
+//     .tick {
+//       fill: #9c9c9c;
+//       &.weekend {
+//         fill: #9d261d;
+//       }
+//       &.now {
+//         fill: #71a934;
+//         font-family: @sansFontFamilyBold;
+//       }
+//     }
+//     .border {
+//       stroke: #eee;
+//       stroke-width: 1;
+//       shape-rendering: crispedges;
+//     }
+//     rect {
+//       fill: #fff;
+//     }
+//   }
+//   .axis-rules {
+//     .rule {
+//       stroke: #eee;
+//       stroke-width: 1;
+//       shape-rendering: crispedges;
+//       &.zero {
+//         stroke-width: 2;
+//       }
+//       &.now {
+//         stroke: #71a934;
+//         stroke-dasharray: 2, 4;
+//       }
+//     }
+//   }
+//   .points circle {
+//     stroke-width: 1.5;
+//     stroke: #fff;
+//     opacity: 0.8;
+//     &:hover {
+//       stroke-width: 2px;
+//       stroke: #eee;
+//       opacity: 1;
+//     }
+//   }
+//   .category-labels {
+//     pointer-events: none;
+//     cursor: default;
+//     font-size: 9px;
+//   }
+// }
+//
+// /* BARCHART COUNTER */
+// .barchart-counter {
+//   margin: 0 5%;
+//   .series-title,
+//   .series-comparison {
+//     font-size: 13px;
+//     line-height: 1.4;
+//   }
+//   .series-title {
+//     float: left;
+//     text-align: center;
+//     width: 100%;
+//   }
+//   .series-body {
+//     .clearfix();
+//     float: left;
+//   }
+//   .series-bars {
+//     float: top;
+//     // padding: 10px 30px 0 30px;
+//     rect {
+//       opacity: 0.8;
+//       shape-rendering: crispedges;
+//       &:hover {
+//         opacity: 1;
+//       }
+//     }
+//   }
+//   .series-values {
+//     .clearfix();
+//     float: bottom;
+//     color: #747474;
+//     .value,
+//     .change,
+//     .percentage {
+//       font-family: @sansFontFamilyBold;
+//     }
+//     .series-comparison {
+//       .arrow {
+//         padding-right: 3px;
+//         path {
+//           shape-rendering: geometricprecision;
+//         }
+//       }
+//     }
+//   }
+//   .series-value {
+//     font-family: @sansFontFamilyLight;
+//     font-size: 28px;
+//     text-align: left;
+//     line-height: 1;
+//     color: #333;
+//     float: left;
+//     // padding: 0 0 0 30px;
+//   }
+//   .series-comparison {
+//     text-align: right;
+//     font-size: 14px;
+//     float: right;
+//     .value {
+//       color: #545454;
+//     }
+//     path {
+//       shape-rendering: crispedges;
+//     }
+//   }
+//   &.small {
+//     .series-title,
+//     .series-comparison {
+//       font-size: 12px;
+//     }
+//     .series-comparison {
+//       .text,
+//       .name,
+//       .value {
+//         display: none;
+//       }
+//     }
+//     .series-value {
+//       font-size: 18px;
+//     }
+//   }
+// }
+//
+// /* COUNTER */
+// .counter {
+//   margin: 0 2px 4px 2px;
+//   position: relative;
+//
+//   .series-title,
+//   .series-target,
+//   .series-comparison {
+//     text-align: center;
+//     font-size: 13px;
+//     line-height: 1.4;
+//     width: 100%;
+//   }
+//   .series-value {
+//     width: 100%;
+//     font-family: @sansFontFamilyLight;
+//     font-size: 28px;
+//     text-align: center;
+//     line-height: 1;
+//     color: #333;
+//   }
+//   .series-context {
+//     padding-top: 4px;
+//     border-top: 1px solid #e2e2e2;
+//     color: #747474;
+//     .value {
+//       color: #545454;
+//     }
+//     .value,
+//     .change,
+//     .percentage {
+//       font-family: @sansFontFamilyBold;
+//     }
+//     .series-comparison {
+//       .arrow {
+//         padding-right: 5px;
+//         path {
+//           shape-rendering: geometricprecision;
+//         }
+//       }
+//     }
+//   }
+//
+//   &.small {
+//     .series-title,
+//     .series-target,
+//     .series-comparison {
+//       font-size: 12px;
+//     }
+//   }
+// }
+//
+// /* SEGMENT */
+// .segment {
+//   .reference-box rect {
+//     fill: #fff;
+//     stroke: #e2e2e2;
+//     shape-rendering: crispedges;
+//     stroke-width: 2;
+//   }
+//   .series-box rect {
+//     fill: #f8f8f8;
+//     stroke: #c5c5c5;
+//     stroke-width: 1;
+//     shape-rendering: crispedges;
+//     stroke-dasharray: 4, 3;
+//   }
+//   .series-legend {
+//     line.legend-line {
+//       stroke: #666;
+//       stroke-width: 1.5;
+//     }
+//     tspan {
+//       font-size: 12px;
+//       &.series-title {
+//         font-family: @sansFontFamilyLight;
+//         fill: #333;
+//       }
+//       &.series-details {
+//         fill: #999;
+//       }
+//     }
+//     .numbers-background,
+//     .axis-background,
+//     .arrow-background {
+//       fill: #fff;
+//     }
+//     .axis-legend,
+//     .arrow {
+//       font-size: 12px;
+//       fill: #c9c9c9;
+//     }
+//   }
+// }
+//
+// /* COHORTS */
+// .cohorts {
+//   font-size: 11px;
+//   .clearfix();
+//   float: left;
+//   .panel {
+//     float: left;
+//     padding: 10px;
+//     position: relative;
+//     .title {
+//       float: left;
+//     }
+//   }
+//   .title {
+//     font-family: @sansFontFamilyBold;
+//     padding-left: 11px;
+//   }
+//   table {
+//     border-collapse: separate;
+//     border-spacing: 0;
+//     font-size: 11px;
+//     font-family: Verdana, Helvetica;
+//     color: #333;
+//   }
+//   &.stretch table {
+//     width: 100%;
+//     height: 100%;
+//   }
+//   th {
+//     .user-select(none);
+//     white-space: nowrap;
+//     font-family: @sansFontFamilyBold;
+//     font-weight: inherit;
+//     font-size: 12px;
+//     vertical-align: bottom;
+//     text-align: center;
+//     line-height: 21px;
+//     border-right: 1px solid #eee;
+//     border-bottom: 1px solid #eee;
+//     &.cohortTitle {
+//       text-align: left;
+//       padding: 0 11px;
+//     }
+//     &.cohortSizeTitle {
+//       text-align: right;
+//       padding: 0 10px;
+//     }
+//     &.timestepTitle {
+//       text-align: left;
+//       padding-left: 10px;
+//       border-bottom: none;
+//       border-left: 1px solid #eee;
+//       border-right: none;
+//     }
+//     &.empty {
+//       border: none;
+//     }
+//   }
+//   td {
+//     white-space: nowrap;
+//     font-family: @sansFontFamilyBold;
+//     font-weight: inherit;
+//     line-height: 16px;
+//     padding: 3px;
+//     border-right: 1px solid #eee;
+//     border-bottom: 1px solid #eee;
+//     cursor: default;
+//     &.cohort {
+//       text-align: left;
+//       padding: 0 7px;
+//       width: 1px;
+//       border-left: 4px solid transparent;
+//       &.hover-row {
+//         border-left-color: #699d30;
+//       }
+//     }
+//     &.size {
+//       text-align: right;
+//       border-right: 3px solid #dadada;
+//       padding: 0 7px;
+//       width: 1px;
+//     }
+//     &.datapoint {
+//       text-align: center;
+//       &.hover {
+//         box-shadow: inset 0 0 0 3px #dadada;
+//       }
+//       &:hover {
+//         box-shadow: inset 0 0 0 3px #777;
+//       }
+//       &.hover-column {
+//         box-shadow: inset -3px 0 0 0 #dadada, inset 3px 0 0 0 #dadada;
+//       }
+//     }
+//     .unit {
+//       color: #999999;
+//       font-size: 9px;
+//     }
+//   }
+//   .focus-legend-row {
+//     .border-radius(0px);
+//     border: none;
+//     border-bottom: 1px solid #eee;
+//     padding: 0;
+//     fill: none;
+//     stroke: #dcdcdc;
+//     stroke-width: 1;
+//     .focus-rules line {
+//       shape-rendering: crispedges;
+//       stroke: #f3f3f3;
+//     }
+//     .mean-cohort-line {
+//       stroke: #4d4d4d;
+//       stroke-dasharray: 4px 2px;
+//       stroke-width: 1px;
+//     }
+//     .focus-cohort {
+//       stroke-width: 2px;
+//     }
+//     .cohort-legend text {
+//       font-family: @sansFontFamily;
+//       fill: #747474;
+//       stroke: none;
+//     }
+//     .cohort-ticks text {
+//       font-family: @sansFontFamily;
+//       fill: #9c9c9c;
+//       stroke: none;
+//     }
+//     .cohort-ticks line {
+//       stroke: #9c9c9c;
+//       shape-rendering: crispedges;
+//     }
+//   }
+// }
+//
+// /* PIE CHART */
+// .pie-chart,
+// .polar,
+// .gauge {
+//   .arc {
+//     path {
+//       stroke: #fff;
+//       stroke-width: 1;
+//       opacity: 0.8;
+//     }
+//     text {
+//       fill: #333;
+//       font-size: 12px;
+//       font-family: @sansFontFamily;
+//     }
+//   }
+//   .total {
+//     text {
+//       fill: #4c4c4c;
+//       font-family: @sansFontFamilyLight;
+//     }
+//   }
+// }
+// .gauge {
+//   .arc {
+//     path {
+//       stroke: #aaa;
+//     }
+//   }
+//   .comparison {
+//     path {
+//       stroke: #747474;
+//       stroke-width: 2;
+//       stroke-dasharray: 6 4;
+//     }
+//   }
+// }
+//
+// /* KEY FIGURE */
+// .key-figure {
+//   .key-figure-text {
+//     float: left;
+//     .text-container {
+//       text-align: center;
+//     }
+//     .current {
+//       .title {
+//         font-size: 15px;
+//         font-family: @sansFontFamilyLight;
+//       }
+//       .value {
+//         margin-top: 14px;
+//         font-size: 36px;
+//       }
+//     }
+//     .comparison {
+//       border-top: 1px solid #e2e2e2;
+//       margin-top: 27px;
+//       .vs {
+//         margin: -11px 0 21px 0;
+//         span {
+//           background-color: #fff;
+//           padding: 5px;
+//         }
+//       }
+//       .value {
+//         font-size: 25px;
+//       }
+//       .title {
+//         margin-top: 7px;
+//       }
+//     }
+//   }
+//   .key-figure-chart {
+//     float: left;
+//   }
+// }
+//
+// /* NETWORK */
+// .network {
+//   marker {
+//     stroke: #aaa;
+//     stroke-width: 1;
+//     stroke-opacity: 0.8;
+//   }
+//   .link {
+//     cursor: pointer;
+//     fill: none;
+//     path {
+//       stroke-opacity: 0.6;
+//     }
+//     &.hover {
+//       path {
+//         stroke: #aaa;
+//         stroke-opacity: 1;
+//       }
+//     }
+//     text {
+//       .user-select(none);
+//       fill: #747474;
+//       font-size: 10px;
+//       &.hover {
+//         font-family: @sansFontFamilyBold;
+//       }
+//       dy: 0.35em;
+//       dx: 0;
+//       pointer-events: none;
+//     }
+//   }
+//   .node {
+//     cursor: -webkit-grab;
+//     cursor: -moz-grab;
+//     &:active {
+//       cursor: -webkit-grabbing;
+//       cursor: -moz-grabbing;
+//     }
+//     .shape {
+//       stroke-width: 2;
+//     }
+//     .zoom-icon {
+//       stroke: #747474;
+//       fill: #fff;
+//     }
+//     text {
+//       .user-select(none);
+//       font-size: 12px;
+//       fill: #747474;
+//       dx: 0;
+//       dy: 0.35em;
+//     }
+//     text.node-value {
+//       font-family: @sansFontFamilyBold;
+//     }
+//     rect {
+//       rx: 5px;
+//       ry: 5px;
+//     }
+//     &.hover {
+//       .shape {
+//         stroke: #9c9c9c;
+//         stroke-width: 3;
+//       }
+//       text {
+//         font-family: @sansFontFamilyBold;
+//       }
+//     }
+//   }
+//   .container {
+//     cursor: -webkit-grab;
+//     cursor: -moz-grab;
+//     &:active {
+//       cursor: -webkit-grabbing;
+//       cursor: -moz-grabbing;
+//     }
+//     opacity: 0.2;
+//     stroke-width: 40;
+//     stroke-linejoin: round;
+//   }
+// }
+
+// /* PANELLED */
+// .panelled {
+//   font-size: 11px;
+//   &.horizontal {
+//     float: left;
+//     margin-left: 10px;
+//     .panel {
+//       width: 100%;
+//       padding: 14px 0;
+//       position: relative;
+//       .title {
+//         float: left;
+//       }
+//       .hover-legend {
+//         padding-left: 14px;
+//         float: right;
+//       }
+//       .drawing-container {
+//         float: left;
+//       }
+//       .rank  {
+//         float: right;
+//         text-align: centre;
+//         span.rank {
+//           float: right;
+//           text-align: right;
+//           font-weight: bold;
+//           font-size: 12px;
+//           padding-right: 3px;
+//         }
+//         span.fraction {
+//           float: right;
+//           text-align: left;
+//         }
+//       }
+//     }
+//   }
+//   &.vertical {
+//     .clearfix();
+//     .panel {
+//       height: 100%;
+//       float: left;
+//       box-sizing: border-box;
+//       padding: 0 10px;
+//       .rank {
+//         text-align: center;
+//         span.rank {
+//           font-weight: bold;
+//           font-size: 12px;
+//         }
+//       }
+//       .series-legend {
+//         padding: 5px 3px 0 0;
+//       }
+//     }
+//   }
+//   .quant-axis {
+//     .tick {
+//       fill: #9c9c9c;
+//       font-family: @sansFontFamilyBold;
+//     }
+//     .axis {
+//       stroke: #acacac;
+//       shape-rendering: crispedges;
+//     }
+//   }
+//   .title {
+//     line-height: 14px;
+//     font-family: @sansFontFamilyBold;
+//   }
+//   .barchart .bar {
+//     cursor: default;
+//     text {
+//       visibility: hidden;
+//       font-size: 10px;
+//       fill: #333;
+//     }
+//     &.selected,
+//     &.hover {
+//       text {
+//         visibility: visible;
+//       }
+//     }
+//     &.hover {
+//       rect {
+//         opacity: 1;
+//       }
+//     }
+//     rect {
+//       opacity: 0.8;
+//       shape-rendering: geometricprecision;
+//     }
+//   }
+// }
+// .rank-panelled {
+//   &.vertical {
+//     margin: 0 7px;
+//     .rank-panel {
+//       height: 100%;
+//       float: left;
+//     }
+//   }
+//   &.horizontal {
+//     .rank-panel {
+//       width: 100%;
+//       text-align: end;
+//     }
+//     .rank-panel span {
+//       position: absolute;
+//       bottom: 0;
+//       right: 0;
+//     }
+//     float: right;
+//   }
+// }
+//
+// /* TREEMAP */
+// .navigation-bar {
+//   line-height: 16px;
+//   text {
+//     font-family: @sansFontFamily;
+//     font-size: 12px;
+//     cursor: pointer;
+//     &:hover {
+//       font-family: @sansFontFamilyBold;
+//     }
+//   }
+// }
+// rect.treemap-color-bar {
+//   fill-opacity: 0.6;
+// }
+// .legend-title {
+//   padding-left: 10px;
+//   font-family: @sansFontFamily;
+//   font-size: 12px;
+//   line-height: 16px;
+// }
+// .treemap {
+//   cursor: default;
+//   font-size: 11px;
+//   color: #333;
+//   .parent {
+//     fill: transparent;
+//     stroke: white;
+//     stroke-width: 6;
+//   }
+//   .children {
+//     cursor: pointer;
+//     &:hover,
+//     &.hover {
+//       rect.leaf {
+//         fill-opacity: 0.8;
+//         &:hover,
+//         &.hover {
+//           fill-opacity: 1;
+//         }
+//       }
+//     }
+//   }
+//   .leaf {
+//     position: absolute;
+//     .box-shadow(inset 0px 0px 0px 1px #ffffff);
+//     fill: #ccc;
+//     fill-opacity: 0.6;
+//     stroke: #ddd;
+//     .labels {
+//       padding: 0 4;
+//     }
+//   }
+// }
+//
+// .sankey {
+//   .panel {
+//     min-height: 100px;
+//     padding-bottom: 7%;
+//     .title {
+//       border-bottom: 1px solid #aaa;
+//     }
+//     .drawing-container {
+//       overflow: visible;
+//     }
+//     .sankey {
+//       overflow: visible;
+//       box-sizing: border-box;
+//       padding-top: 10px;
+//       height: 100%;
+//     }
+//   }
+//   .node rect {
+//     cursor: -webkit-grab;
+//     cursor: -moz-grab;
+//     fill-opacity: 0.9;
+//     shape-rendering: crispEdges;
+//   }
+//   .node rect:active {
+//     cursor: -webkit-grabbing;
+//     cursor: -moz-grabbing;
+//   }
+//   .node text {
+//     pointer-events: none;
+//     text-shadow: 0 1px 0 #fff;
+//   }
+//   .link {
+//     fill: none;
+//     stroke: #000;
+//     stroke-opacity: 0.2;
+//   }
+//   .link:hover {
+//     stroke-opacity: 0.5;
+//   }
+//
+//   .node-color {
+//     width: 10px;
+//     height: 10px;
+//     float: left;
+//     margin: 4px 4px 0 0;
+//     opacity: 0.8;
+//   }
+// }

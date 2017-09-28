@@ -8,6 +8,7 @@ class Canvas extends AbstractCanvas {
   }
 
   createInitialElements(): void {
+    this.insertFocusLabel()
     this.defineMarker()
   }
 

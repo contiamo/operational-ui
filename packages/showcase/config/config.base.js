@@ -8,7 +8,7 @@ module.exports = {
   output: {
     publicPath: "/",
     path: resolve(__dirname, "..", "dist"),
-    filename: "[name].js"
+    filename: "[name].js",
   },
   module: {
     rules: [
@@ -19,31 +19,45 @@ module.exports = {
           {
             test: /\.snippet/,
             loader: "raw-loader",
-            exclude: /node_modules/
+            exclude: /node_modules/,
           },
           // All other TS
           {
             test: /.*/,
             loader: "awesome-typescript-loader",
-            exclude: /node_modules/
-          }
-        ]
+            exclude: /node_modules/,
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: "style-loader", // creates style nodes from JS strings
+          },
+          // {
+          //   loader: "css-loader", // translates CSS into CommonJS
+          // },
+          {
+            loader: "less-loader", // compiles Less to CSS
+          },
+        ],
       },
       {
         test: /\.(png|eot|svg|ttf|woff|woff2)$/,
         use: {
           loader: "file-loader",
           options: {
-            name: "[path][name].[ext]"
-          }
-        }
-      }
-    ]
+            name: "[path][name].[ext]",
+          },
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
-      template: resolve(__dirname, "..", "public", "index.html")
+      template: resolve(__dirname, "..", "public", "index.html"),
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
@@ -54,10 +68,10 @@ module.exports = {
           return false
         }
         return module.context && module.context.indexOf("node_modules") !== -1
-      }
-    })
+      },
+    }),
   ],
   resolve: {
-    extensions: [".jsx", ".js", ".tsx", ".ts"]
-  }
+    extensions: [".jsx", ".js", ".tsx", ".ts"],
+  },
 }

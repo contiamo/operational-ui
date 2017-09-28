@@ -32,8 +32,12 @@
     "start": "react-scripts start"
   },
   "devDependencies": {
+    "css-loader": "^0.28.7",
     "eslint-plugin-jsx-a11y": "^6.0.2",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
     "rollup-plugin-jsx": "^1.0.3",
+    "style-loader": "^0.18.2",
     "typescript": "^2.5.2",
     "webpack-dev-server": "^2.7.1"
   }
