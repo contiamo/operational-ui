@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-showcase",
-  "version": "0.0.1-7",
+  "version": "0.0.1-8",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
@@ -30,8 +30,8 @@
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-jest": "^20.0.3",
-    "contiamo-ui-components": "^0.0.1-6",
-    "contiamo-ui-utils": "^0.0.1-6",
+    "contiamo-ui-components": "^0.0.1-8",
+    "contiamo-ui-utils": "^0.0.1-8",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "file-loader": "^0.11.2",
@@ -76,7 +76,7 @@
     "react-router-dom": "^4.2.0",
     "react-syntax-highlighter": "^5.7.0",
     "regenerator-runtime": "^0.11.0",
-    "webpack": "^3.5.5",
+    "webpack": "^3.6.0",
     "webpack-merge": "^4.1.0"
   },
   "jest": {

@@ -41,9 +41,7 @@ var PaginatorControl = function (_a) {
             onChange(pageCount);
         }
     };
-    var isDisabled = (type === "previous" || type === "first")
-        ? selected === 1
-        : selected === pageCount;
+    var isDisabled = type === "previous" || type === "first" ? selected === 1 : selected === pageCount;
     var handler;
     switch (type) {
         case "previous":
@@ -91,7 +89,9 @@ var createPagesFragment = function (_a) {
         if (acc === void 0) { acc = []; }
         return start > end ? acc : range(start + 1, end, acc.concat([start]));
     };
-    return (range(skip + 1, maxVisible + skip).map(function (pageNumber) { return (React.createElement(PageLink, { key: pageNumber, onClick: function () { onChange(pageNumber); }, active: pageNumber === selected }, pageNumber)); }));
+    return range(skip + 1, maxVisible + skip).map(function (pageNumber) { return (React.createElement(PageLink, { key: pageNumber, onClick: function () {
+            onChange(pageNumber);
+        }, active: pageNumber === selected }, pageNumber)); });
 };
 var Container = glamorous_1.default.ul({
     display: "flex",
