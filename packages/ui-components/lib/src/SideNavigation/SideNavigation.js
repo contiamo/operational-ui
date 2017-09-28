@@ -23,7 +23,7 @@ var style = function (_a) {
     _b = _a.expandedWidth, 
     // for some reason, glamorous doesn't get the defaultProps...
     expandedWidth = _b === void 0 ? 240 : _b, _c = _a.width, width = _c === void 0 ? 60 : _c;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.primary, hoverWidth = expandOnHover
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.grey80, hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
             willChange: "width",
@@ -42,7 +42,7 @@ var style = function (_a) {
         }
         : {};
     return __assign({ width: width,
-        backgroundColor: backgroundColor, position: fix ? "fixed" : "relative", zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflow: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: backgroundColor ? contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]) : theme.colors.grey80 }, hoverWidth);
+        backgroundColor: backgroundColor, position: fix ? "fixed" : "relative", zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflow: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]) }, hoverWidth);
 };
 var SideNavigation = function (_a) {
     var className = _a.className, children = _a.children;
