@@ -30,7 +30,7 @@ const style = ({
   expandedWidth = 240,
   width = 60,
 }: Props): {} => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.primary,
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.grey80,
     hoverWidth = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
@@ -61,7 +61,7 @@ const style = ({
     height: "100vh",
     overflow: "hidden",
     boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-    color: backgroundColor ? readableTextColor(backgroundColor)(["black", "white"]) : theme.colors.grey80,
+    color: readableTextColor(backgroundColor)(["black", "white"]),
     ...hoverWidth,
   }
 }
