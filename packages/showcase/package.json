@@ -76,7 +76,7 @@
     "react-router-dom": "^4.2.0",
     "react-syntax-highlighter": "^5.7.0",
     "regenerator-runtime": "^0.11.0",
-    "webpack": "^3.5.5",
+    "webpack": "^3.6.0",
     "webpack-merge": "^4.1.0"
   },
   "jest": {
