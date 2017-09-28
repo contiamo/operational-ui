@@ -12,22 +12,24 @@ var Container = glamorous_1.default.div(function (_a) {
         justifyContent: "flex-start",
         padding: theme.spacing / 2 + "px " + theme.spacing * 1.7 + "px",
         borderRadius: 2,
-        width: "100%",
+        width: "fit-content",
         minHeight: 40,
         cursor: "pointer",
         backgroundColor: active ? activeBackgroundColor : "transparent",
+        minWidth: "100%",
+        whiteSpace: "pre",
         ":hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.07)"
+            backgroundColor: "rgba(255, 255, 255, 0.07)",
         },
         ":first-child": {
             marginTop: 0,
-            marginBottom: theme.spacing * 2
-        }
+            marginBottom: theme.spacing * 2,
+        },
     };
 });
 var SideNavigationItem = function (_a) {
-    var className = _a.className, children = _a.children, onClick = _a.onClick, active = _a.active;
-    return (React.createElement(Container, { className: "" + className, active: !!active, onClick: onClick, role: "button", tabIndex: -1 }, children));
+    var className = _a.className, css = _a.css, children = _a.children, onClick = _a.onClick, active = _a.active;
+    return (React.createElement(Container, { css: css, className: "" + className, active: !!active, onClick: onClick, role: "button", tabIndex: -1 }, children));
 };
 exports.default = SideNavigationItem;
 //# sourceMappingURL=SideNavigationItem.js.map

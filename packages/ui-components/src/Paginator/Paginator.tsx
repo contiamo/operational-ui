@@ -21,7 +21,7 @@ const Control = glamorous.li(
   {
     listStyle: "none"
   },
-  ({ disabled = false, theme }: { disabled?: boolean, theme: Theme }) => ({
+  ({ disabled = false, theme }: { disabled?: boolean; theme: Theme }) => ({
     cursor: disabled ? "not-allowed" : "pointer"
   })
 )
@@ -48,30 +48,25 @@ const PaginatorControl = ({ type, pageCount, selected, onChange, children }: Con
     }
   }
 
-  const isDisabled = (type === "previous" || type === "first")
-    ? selected === 1
-    : selected === pageCount
+  const isDisabled = type === "previous" || type === "first" ? selected === 1 : selected === pageCount
 
   let handler
   switch (type) {
-  case "previous":
-    handler = handlePrevious
-    break
-  case "first":
-    handler = handleFirst
-    break
-  case "next":
-    handler = handleNext
-    break
-  default:
-    handler = handleLast
+    case "previous":
+      handler = handlePrevious
+      break
+    case "first":
+      handler = handleFirst
+      break
+    case "next":
+      handler = handleNext
+      break
+    default:
+      handler = handleLast
   }
 
   return (
-    <Control
-      onClick={handler}
-      disabled={isDisabled}
-    >
+    <Control onClick={handler} disabled={isDisabled}>
       {children}
     </Control>
   )
@@ -87,7 +82,7 @@ const PageLink = glamorous.li(
     cursor: "pointer",
     userSelect: "none"
   },
-  ({ active = false, theme }: { active?: boolean, theme: Theme }) => ({
+  ({ active = false, theme }: { active?: boolean; theme: Theme }) => ({
     color: active ? theme.colors.success : ""
   })
 )
@@ -106,17 +101,17 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Prop
   const range = (start: number, end: number, acc: number[] = []): number[] =>
     start > end ? acc : range(start + 1, end, [...acc, start])
 
-  return (
-    range(skip + 1, maxVisible + skip).map(pageNumber => (
-      <PageLink
-        key={pageNumber}
-        onClick={() => { onChange(pageNumber) }}
-        active={pageNumber === selected}
-      >
-        {pageNumber}
-      </PageLink>
-    ))
-  )
+  return range(skip + 1, maxVisible + skip).map(pageNumber => (
+    <PageLink
+      key={pageNumber}
+      onClick={() => {
+        onChange(pageNumber)
+      }}
+      active={pageNumber === selected}
+    >
+      {pageNumber}
+    </PageLink>
+  ))
 }
 
 const Container = glamorous.ul({
@@ -131,22 +126,22 @@ const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, 
   return (
     <Container>
       {hasEnoughPages ? (
-        <PaginatorControl type="first" { ...controlProps } >
+        <PaginatorControl type="first" {...controlProps}>
           <Icon.ChevronsLeft size="17" />
         </PaginatorControl>
-      ): null}
-      <PaginatorControl type="previous" { ...controlProps } >
+      ) : null}
+      <PaginatorControl type="previous" {...controlProps}>
         <Icon.ChevronLeft size="17" />
       </PaginatorControl>
       {createPagesFragment({ pageCount, maxVisible, selected, onChange })}
-      <PaginatorControl type="next" { ...controlProps } >
+      <PaginatorControl type="next" {...controlProps}>
         <Icon.ChevronRight size="17" />
       </PaginatorControl>
       {hasEnoughPages ? (
-        <PaginatorControl type="last" { ...controlProps } >
+        <PaginatorControl type="last" {...controlProps}>
           <Icon.ChevronsRight size="17" />
         </PaginatorControl>
-      ): null}
+      ) : null}
     </Container>
   )
 }
