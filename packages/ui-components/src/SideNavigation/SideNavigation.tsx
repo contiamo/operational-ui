@@ -28,7 +28,7 @@ const style = ({
 
   // for some reason, glamorous doesn't get the defaultProps...
   expandedWidth = 240,
-  width = 60
+  width = 60,
 }: Props): {} => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.primary,
     hoverWidth = expandOnHover
@@ -36,17 +36,17 @@ const style = ({
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
           willChange: "width",
           "&:hover": {
-            width: expandedWidth
+            width: expandedWidth,
           },
           "& .Tooltip": {
-            display: "none"
+            display: "none",
           },
           "&:not(:hover) .SideNavigationHeader::after": {
-            content: "none"
+            content: "none",
           },
           "&:not(:hover) .SideNavigationHeader__options": {
-            display: "none"
-          }
+            display: "none",
+          },
         }
       : {}
 
@@ -61,8 +61,8 @@ const style = ({
     height: "100vh",
     overflow: "hidden",
     boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-    color: readableTextColor(backgroundColor)(["black", "white"]),
-    ...hoverWidth
+    color: backgroundColor ? readableTextColor(backgroundColor)(["black", "white"]) : theme.grey80,
+    ...hoverWidth,
   }
 }
 
@@ -72,7 +72,7 @@ SideNavigation.defaultProps = {
   expandOnHover: false,
   expandedWidth: 280,
   width: 64,
-  fix: false
+  fix: false,
 }
 
 export default glamorous(SideNavigation)(style)

@@ -54,5 +54,5 @@ export {
   TimelineItem,
   Tooltip,
   theme as contiamoTheme,
-  ThemeProvider,
+  ThemeProvider
 }
