@@ -2,14 +2,16 @@ import * as React from "react"
 import * as Icon from "react-feather"
 import glamorous from "glamorous"
 
-type Props = {
+interface Props {
   pageCount: number
   maxVisible?: number
   onChange: (selected: number) => void
   selected?: number
+  disabled?: boolean
+  theme?: Theme
 }
 
-type ControlProps = {
+interface ControlProps {
   type: "first" | "previous" | "next" | "last"
   pageCount: number
   selected: number
@@ -19,10 +21,10 @@ type ControlProps = {
 
 const Control = glamorous.li(
   {
-    listStyle: "none"
+    listStyle: "none",
   },
-  ({ disabled = false, theme }: { disabled?: boolean; theme: Theme }) => ({
-    cursor: disabled ? "not-allowed" : "pointer"
+  ({ disabled = false, theme }: { disabled?: boolean; theme?: Theme }) => ({
+    cursor: disabled ? "not-allowed" : "pointer",
   })
 )
 
@@ -80,10 +82,10 @@ const PageLink = glamorous.li(
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
-    userSelect: "none"
+    userSelect: "none",
   },
-  ({ active = false, theme }: { active?: boolean; theme: Theme }) => ({
-    color: active ? theme.colors.success : ""
+  ({ active = false, theme }: { active?: boolean; theme?: Theme }) => ({
+    color: active ? theme.colors.success : "",
   })
 )
 
@@ -114,10 +116,16 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Prop
   ))
 }
 
-const Container = glamorous.ul({
-  display: "flex",
-  padding: "0"
-})
+const Container = glamorous.ul(
+  {
+    display: "flex",
+    padding: "0",
+  },
+  ({ disabled }: { disabled?: boolean; theme?: Theme }): {} => ({
+    pointerEvents: disabled ? "none" : "all",
+    opacity: disabled ? 0.4 : 1,
+  })
+)
 
 const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, onChange = () => {} }: Props) => {
   const controlProps = { pageCount, selected, onChange }
