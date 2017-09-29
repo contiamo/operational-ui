@@ -28,10 +28,10 @@ const Container = glamorous.div(
     left: 0,
     display: "flex",
     position: "absolute",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(255, 255, 255, 0.8)"
   },
   ({ theme }: { theme?: Theme }) => ({
-    zIndex: theme.baseZIndex + 300,
+    zIndex: theme.baseZIndex + 300
   })
 )
 
@@ -41,37 +41,37 @@ const Box = glamorous.div({
   padding,
   margin: "auto",
   boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#FFFFFF"
 })
 
 const BarContainer = glamorous.div(
   {
     width: "100%",
     height: "100%",
-    overflow: "hidden",
+    overflow: "hidden"
   },
   ({ theme }: { theme?: Theme }) => ({
     backgroundColor: theme.colors.grey50,
-    border: `1px solid ${theme.colors.grey20}`,
+    border: `1px solid ${theme.colors.grey20}`
   })
 )
 
 const fillProgress = css.keyframes({
   from: {
-    transform: "translateX(-100%)",
+    transform: "translateX(-100%)"
   },
   to: {
-    transform: "none",
-  },
+    transform: "none"
+  }
 })
 
 const Bar = glamorous.div(
   {
-    height: "100%",
+    height: "100%"
   },
   ({ theme }: { theme?: Theme }) => ({
     animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 30s`,
-    backgroundColor: theme.colors.success,
+    backgroundColor: theme.colors.success
   })
 )
 
