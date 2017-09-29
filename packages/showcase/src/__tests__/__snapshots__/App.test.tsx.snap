@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App starts 1`] = `
-<div
-  class="css-wdhe9z"
->
+<div>
   <div
     class="css-1808qq5"
   >

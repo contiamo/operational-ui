@@ -3,7 +3,9 @@ import { render } from "react-dom"
 import { contiamoTheme } from "contiamo-ui-components"
 import { ThemeProvider } from "glamorous"
 
-import(`../../packages/showcase/src/pages/${PAGE_NAME}/${PAGE_NAME}`).then(({ default: Comp }) => {
+const pageName = PAGE_NAME
+
+import(`../../packages/showcase/src/pages/${pageName}/${pageName}`).then(({ default: Comp }) => {
   render(
     <ThemeProvider theme={contiamoTheme}>
       <Comp />

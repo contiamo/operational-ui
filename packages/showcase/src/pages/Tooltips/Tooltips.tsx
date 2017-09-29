@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Playground from "../../components/Playground/Playground"
-import { Tooltip, CardHeader } from "contiamo-ui-components"
+import { Tooltip, Card, CardHeader } from "contiamo-ui-components"
 import Table from "../../components/PropsTable/PropsTable"
 
 import * as simpleSnippet from "./snippets/Tooltips.simple.snippet"
@@ -17,7 +17,7 @@ const StickyTooltip = glamorous(Tooltip)({
 })
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Tooltips</CardHeader>
     <p>
       These elements give helpful hints about actions an end-user can perform. They are designed to be reusable, elegant
@@ -30,5 +30,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table css={{ marginBottom: 32 }} props={propDescription} />
-  </div>
+  </Card>
 )

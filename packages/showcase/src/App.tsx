@@ -12,8 +12,6 @@ import Header from "./components/Header/Header"
 import IntroPage from "./pages/Intro"
 import ComponentsPage from "./pages/Components"
 
-type Props = { className?: string }
-
 const Container = glamorous.div({
   display: "flex",
   flexDirection: "column",
@@ -54,10 +52,10 @@ const styles: {} = {
 
 const SideNavigationWithRouter = withRouter(SideNavigation)
 
-const App = ({ className }: Props) => (
+const App = () => (
   <Router>
     <ThemeProvider theme={contiamoTheme}>
-      <div className={className}>
+      <div>
         <SideNavigationWithRouter />
         <Container>
           <Header />
