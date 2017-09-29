@@ -61,7 +61,7 @@ import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
 const $1 = wrapDefaultTheme(Themeless$1)
 
-describe("$1", () => {
+describe("$1 Component", () => {
   it("Should render", () => {
     const renderedComponent = render(<$1 value="SomeValue" />)
     expect(renderedComponent).toMatchSnapshot()
@@ -148,14 +148,15 @@ cat > packages/showcase/src/pages/$1s/__tests__/$1s.test.tsx << EOL
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import Themeless$1sPage from "../$1s"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import Themeless$1s from "../$1s"
 
-const ButtonsPage = wrapDefaultTheme(Themeless$1sPage)
+const $1s = wrapTheme(contiamoTheme)(Themeless$1s)
 
-describe("$1s Page", () => {
+describe("$1s Showcase Page", () => {
   it("Should render correctly", () => {
-    expect(render(<$1sPage />)).toMatchSnapshot()
+    expect(render(<$1s />)).toMatchSnapshot()
   })
 })
 EOL
