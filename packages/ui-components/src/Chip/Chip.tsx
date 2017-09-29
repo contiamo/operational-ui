@@ -13,7 +13,7 @@ type Props = {
 }
 
 const style: {} = ({ theme, color, onClick }: Props) => {
-  const backgroundColor = hexOrColor(color)(theme.colors[color])
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.info
   const actionStyles = onClick
     ? {
         "& .action": {
@@ -29,7 +29,7 @@ const style: {} = ({ theme, color, onClick }: Props) => {
           width: "fit-content",
           opacity: 0,
           transform: "translateX(10px)",
-          transition: ".3s transform ease, .3s opacity ease"
+          transition: ".3s transform ease, .3s opacity ease",
         },
 
         "& .action::before": {
@@ -40,8 +40,8 @@ const style: {} = ({ theme, color, onClick }: Props) => {
           display: "block",
           width: "100%",
           height: "100%",
-          backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`
-        }
+          backgroundImage: `linear-gradient(90deg, transparent 0%, ${backgroundColor} 100%)`,
+        },
       }
     : {}
 
@@ -57,15 +57,15 @@ const style: {} = ({ theme, color, onClick }: Props) => {
     color: readableTextColor(backgroundColor)(["black", "white"]),
 
     "&.chip + .chip": {
-      marginLeft: theme.spacing / 4
+      marginLeft: theme.spacing / 4,
     },
 
     ":hover .action": {
       opacity: 1,
-      transform: "none"
+      transform: "none",
     },
 
-    ...actionStyles
+    ...actionStyles,
   }
 }
 
