@@ -14,12 +14,12 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-1kcm2xa chip"
+      class="css-c6pmm2 chip"
     >
       Chip 1
     </div>
     <div
-      class="css-1kcm2xa chip"
+      class="css-c6pmm2 chip"
     >
       Chip 2
     </div>
