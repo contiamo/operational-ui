@@ -13,11 +13,11 @@ var Container = glamorous_1.default.div({
     left: 0,
     display: "flex",
     position: "absolute",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(255, 255, 255, 0.8)"
 }, function (_a) {
     var theme = _a.theme;
     return ({
-        zIndex: theme.baseZIndex + 300,
+        zIndex: theme.baseZIndex + 300
     });
 });
 var Box = glamorous_1.default.div({
@@ -26,34 +26,34 @@ var Box = glamorous_1.default.div({
     padding: padding,
     margin: "auto",
     boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFFFF"
 });
 var BarContainer = glamorous_1.default.div({
     width: "100%",
     height: "100%",
-    overflow: "hidden",
+    overflow: "hidden"
 }, function (_a) {
     var theme = _a.theme;
     return ({
         backgroundColor: theme.colors.grey50,
-        border: "1px solid " + theme.colors.grey20,
+        border: "1px solid " + theme.colors.grey20
     });
 });
 var fillProgress = glamor_1.css.keyframes({
     from: {
-        transform: "translateX(-100%)",
+        transform: "translateX(-100%)"
     },
     to: {
-        transform: "none",
-    },
+        transform: "none"
+    }
 });
 var Bar = glamorous_1.default.div({
-    height: "100%",
+    height: "100%"
 }, function (_a) {
     var theme = _a.theme;
     return ({
         animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 30s",
-        backgroundColor: theme.colors.success,
+        backgroundColor: theme.colors.success
     });
 });
 var Progress = function () { return (React.createElement(Container, null,
