@@ -4,7 +4,7 @@ import Playground from "../../components/Playground/Playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Table from "../../components/PropsTable/PropsTable"
-import { Input, Select, CardHeader } from "contiamo-ui-components"
+import { Input, Select, CardHeader } from "@contiamo/ui"
 
 import * as inputSnippet from "./snippets/FormFields.input.snippet"
 import * as selectSnippet from "./snippets/FormFields.select.snippet"

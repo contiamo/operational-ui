@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Progress } from "contiamo-ui-components"
+import { Progress } from "@contiamo/ui"
 
 export default (
   <div style={{ width: 300, height: 240, border: "1px solid #adadad", padding: 20, position: "relative" }}>

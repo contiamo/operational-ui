@@ -1,5 +1,5 @@
 import * as React from "react"
-import { contiamoTheme as theme } from "contiamo-ui-components"
+import { contiamoTheme as theme } from "@contiamo/ui"
 
 export default (
   <div>

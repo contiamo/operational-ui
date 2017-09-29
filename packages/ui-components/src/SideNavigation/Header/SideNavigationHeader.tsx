@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import glamorous from "glamorous"
-import { fadeIn } from "contiamo-ui-utils"
+import { fadeIn } from "@contiamo/ui-utils"
 
 type option = {
   id: number

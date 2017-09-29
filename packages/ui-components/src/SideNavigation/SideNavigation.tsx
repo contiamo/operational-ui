@@ -6,7 +6,7 @@ import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"
 import SideNavigationLink from "./Link/SideNavigationLink"
 
-import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor } from "@contiamo/ui-utils"
 
 type Props = {
   className?: string

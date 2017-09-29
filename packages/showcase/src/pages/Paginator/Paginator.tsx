@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Table from "../../components/PropsTable/PropsTable"
 import Playground from "../../components/Playground/Playground"
-import { Paginator, CardHeader } from "contiamo-ui-components"
+import { Paginator, CardHeader } from "@contiamo/ui"
 
 import * as PaginatorSnippet from "./snippets/Paginator.snippet"
 import propDescription from "./propDescription"

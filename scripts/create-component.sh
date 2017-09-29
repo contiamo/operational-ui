@@ -79,7 +79,7 @@ import * as React from "react"
 
 import Table from "../../components/PropsTable/PropsTable"
 import Playground from "../../components/Playground/Playground"
-import { $1, CardHeader } from "contiamo-ui-components"
+import { $1, CardHeader } from "@contiamo/ui"
 
 import * as simpleSnippet from "./snippets/$1s.simple.snippet"
 import propDescription from "./propDescription"
@@ -124,7 +124,7 @@ touch packages/showcase/src/pages/$1s/snippets/$1s.simple.snippet.tsx
 
 cat > packages/showcase/src/pages/$1s/snippets/$1s.simple.snippet.tsx << EOL
 import * as React from "react"
-import { TestComp } from "contiamo-ui-components"
+import { TestComp } from "@contiamo/ui"
 
 // Run any code inside the IIFE, as long as a React element is returned
 // (you do not need the IIFE, but it is useful to define simple state containers for stateless components)
@@ -148,8 +148,8 @@ cat > packages/showcase/src/pages/$1s/__tests__/$1s.test.tsx << EOL
 import * as React from "react"
 import { render } from "enzyme"
 
-import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-components"
+import { wrapTheme } from "@contiamo/ui-utils"
+import { contiamoTheme } from "@contiamo/ui"
 import Themeless$1s from "../$1s"
 
 const $1s = wrapTheme(contiamoTheme)(Themeless$1s)

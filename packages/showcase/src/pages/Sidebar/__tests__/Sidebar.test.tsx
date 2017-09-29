@@ -2,8 +2,8 @@ import * as React from "react"
 import { BrowserRouter as Router } from "react-router-dom"
 import { render } from "enzyme"
 
-import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-components"
+import { wrapTheme } from "@contiamo/ui-utils"
+import { contiamoTheme } from "@contiamo/ui"
 import ThemelessSidebar, { fetch } from "../Sidebar"
 
 const Sidebar = wrapTheme(contiamoTheme)(ThemelessSidebar)

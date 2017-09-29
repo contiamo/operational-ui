@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var ReactFeather = require("react-feather");
 var glamorous_1 = require("glamorous");
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var contiamo_ui_utils_1 = require("@contiamo/ui-utils");
 var Container = glamorous_1.default.div({
     "&:not(:first-child)": {
         borderLeftWidth: 1,

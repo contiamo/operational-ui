@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
-import { Switch, CardHeader } from "contiamo-ui-components"
+import { Switch, CardHeader } from "@contiamo/ui"
 
 import Table from "../../components/PropsTable/PropsTable"
 

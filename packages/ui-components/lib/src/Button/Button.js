@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var contiamo_ui_utils_1 = require("@contiamo/ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, modifiers = _a.modifiers;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color] || "white") : "white";

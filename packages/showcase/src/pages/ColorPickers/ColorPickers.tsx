@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { ColorPicker, CardHeader } from "contiamo-ui-components"
+import { ColorPicker, CardHeader } from "@contiamo/ui"
 
 import * as simpleSnippet from "./snippets/ColorPickers.simple.snippet"
 import propDescription from "./propDescription"

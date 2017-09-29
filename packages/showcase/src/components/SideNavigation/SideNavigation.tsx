@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { Div, Img } from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 
-import { SideNavigation, SideNavigationHeader, SideNavigationItem } from "contiamo-ui-components"
+import { SideNavigation, SideNavigationHeader, SideNavigationItem } from "@contiamo/ui"
 
 type Props = {
   location?: {

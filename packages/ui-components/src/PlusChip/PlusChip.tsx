@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { hexOrColor } from "contiamo-ui-utils"
+import { hexOrColor } from "@contiamo/ui-utils"
 
 type Props = {
   className?: string

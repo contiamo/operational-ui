@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 import glamorous, { Div } from "glamorous"
 
-import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor, darken } from "@contiamo/ui-utils"
 
 type Props = {
   className?: string

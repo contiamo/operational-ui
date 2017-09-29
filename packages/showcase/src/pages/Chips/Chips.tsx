@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
-import { Chip, PlusChip, CardHeader } from "contiamo-ui-components"
+import { Chip, PlusChip, CardHeader } from "@contiamo/ui"
 
 import * as simpleSnippet from "./snippets/Chips.simple.snippet"
 import * as plusSnippet from "./snippets/Chips.plus.snippet"

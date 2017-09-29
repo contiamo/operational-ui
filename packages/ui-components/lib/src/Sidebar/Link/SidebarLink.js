@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var react_router_dom_1 = require("react-router-dom");
 var glamorous_1 = require("glamorous");
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var contiamo_ui_utils_1 = require("@contiamo/ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff", textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.grey80, "white"]), disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
