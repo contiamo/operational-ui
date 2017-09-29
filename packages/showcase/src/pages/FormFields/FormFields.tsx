@@ -6,9 +6,8 @@ import SyntaxHighlighter from "react-syntax-highlighter"
 import Table from "../../components/PropsTable/PropsTable"
 import { Input, Select, CardHeader } from "contiamo-ui-components"
 
-import * as inputSnippet from "./snippets/input.snippet"
-import * as selectSnippet from "./snippets/select.snippet"
-import optionSnippet from "./snippets/option"
+import * as inputSnippet from "./snippets/FormFields.input.snippet"
+import * as selectSnippet from "./snippets/FormFields.select.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
@@ -41,7 +40,15 @@ export default () => (
       The Select component holds its value in its `state`. The value is either an `Option` object, or an Array of
       `Option` objects, depending on the `multiple` prop. The shape of an Option object is described below.
     </p>
-    <SyntaxHighlighter language="javascript">{optionSnippet}</SyntaxHighlighter>
+
+    {/* TODO: clean up inlining once markdown is introduced. */}
+    <SyntaxHighlighter language="javascript">{`
+Option {
+  id: 1, // a number that is passed as a \`key\` in the React iterator,
+  label: "Any string",
+  value: (<div>Literally anything can go here</div>)
+}
+    `}</SyntaxHighlighter>
 
     <h4>Props</h4>
     <Table props={propDescription.Select} />

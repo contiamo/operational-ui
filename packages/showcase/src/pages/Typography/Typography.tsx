@@ -4,7 +4,7 @@ import Playground from "../../components/Playground/Playground"
 import Table from "../../components/PropsTable/PropsTable"
 import { contiamoTheme, CardHeader } from "contiamo-ui-components"
 
-import * as snippet from "./snippets/Typography.snippet"
+import * as simpleSnippet from "./snippets/Typography.simple.snippet"
 
 export default () => (
   <div>
@@ -15,6 +15,6 @@ export default () => (
       organized in 4 typography styles, as follows:
     </p>
 
-    <Playground snippet={String(snippet)} components={{}} scope={{ theme: contiamoTheme }} />
+    <Playground snippet={String(simpleSnippet)} components={{}} scope={{ theme: contiamoTheme }} />
   </div>
 )

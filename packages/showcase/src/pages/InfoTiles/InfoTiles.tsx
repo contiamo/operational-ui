@@ -5,7 +5,7 @@ import { InfoTile, CardHeader } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 
-import * as snippet from "./snippets/InfoTiles.snippet"
+import * as snippet from "./snippets/InfoTiles.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (

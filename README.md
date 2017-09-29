@@ -17,9 +17,13 @@ We like yarn, but you're welcome to substitute npm's counterparts if you wish. T
 - `cd ui-components`
 - `yarn install` (you'll start getting instructions post-install)
 - `yarn bootstrap`👢
-- `yarn start`✈️ 
+- `yarn start`✈️
 
 From that point, you'll be ready to go. Any changes you make in `packages/ui-components` or `packages/utils` will be reflected in the showcase, which should now be running at `http://localhost:8080/`. Happy coding! 🎉
+
+### Creating a new component
+
+Simply run `./scripts/create-component.sh ComponentName`. This will generate all the boilerplate, files like `ComponentName.tsx` and `ComponentName.test.tsx`, and points to a few remaining manual wiring steps to get your component, its tests and its showcase page in place. The boilerplate also tries to guide towards consistent practices around code style, state management and styling. Please ask if anything is unclear.
 
 ### Consuming Components
 
