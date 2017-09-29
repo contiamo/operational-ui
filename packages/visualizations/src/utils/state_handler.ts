@@ -12,7 +12,7 @@ interface ChartStateObj {
 
 type Partial<T> = { [P in keyof T]?: T[P] }
 
-type ChartState<T> = {
+interface IChartState<T> {
   current: State<T>
   previous: State<T>
 }
@@ -30,7 +30,7 @@ const defaultChartStateObj: ChartStateObj = {
 }
 
 class StateHandler {
-  state: ChartState<ChartStateObj>
+  state: IChartState<ChartStateObj>
 
   constructor(obj: Partial<ChartStateObj> = {}) {
     const initial = new State<ChartStateObj>({ ...defaultChartStateObj, ...obj })
