@@ -13,9 +13,9 @@ export class State<T> {
     this.state = cloneDeep(obj)
   }
 
-  get(path: TPath): any {
+  get = (path: TPath): any => {
     return this.getPath([].concat(path))
-  }
+  };
 
   set(path: TPath, value: any) {
     return this.setPath([].concat(path), value)
@@ -26,9 +26,7 @@ export class State<T> {
   }
 
   readOnly(): IReadOnlyState<T> {
-    return {
-      get: this.get.bind(this)
-    }
+    return { get: this.get }
   }
 
   clone(): State<T> {
@@ -37,9 +35,9 @@ export class State<T> {
   }
 
   private getPath(path: string[]) {
-    return path.reduce((current: any, property: string) => {
-      if (current !== null && typeof current === "object") {
-        return current[property]
+    return path.reduce((currentStateChunk: any, currentPath: string) => {
+      if (currentStateChunk !== null && typeof currentStateChunk === "object") {
+        return currentStateChunk[currentPath]
       } else {
         throw new Error(`Path [${path.join(", ")}] not found in object`)
       }
@@ -47,12 +45,12 @@ export class State<T> {
   }
 
   private setPath(path: string[], value: any) {
-    path.reduce((current: any, property: string, index: number) => {
-      if (current !== null && typeof current === "object") {
+    path.reduce((currentStateChunk: any, currentPath: string, index: number) => {
+      if (currentStateChunk !== null && typeof currentStateChunk === "object") {
         if (index === path.length - 1) {
-          current[property] = value
+          currentStateChunk[currentPath] = value
         }
-        return current[property]
+        return currentStateChunk[currentPath]
       } else {
         throw new Error(`Path [${path.join(", ")}] not found in object`)
       }
@@ -60,12 +58,12 @@ export class State<T> {
   }
 
   private mergePath(path: string[], value: Object) {
-    return path.reduce((current: any, property: string, index: number) => {
-      if (current !== null && typeof current === "object") {
+    return path.reduce((currentStateChunk: any, currentPath: string, index: number) => {
+      if (currentStateChunk !== null && typeof currentStateChunk === "object") {
         if (index === path.length - 1) {
-          current[property] = { ...current[property], ...value }
+          currentStateChunk[currentPath] = { ...currentStateChunk[currentPath], ...value }
         }
-        return current[property]
+        return currentStateChunk[currentPath]
       } else {
         throw new Error(`Path [${path.join(", ")}] not found in object`)
       }
