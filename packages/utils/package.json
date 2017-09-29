@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "package": "rm -rf lib && tsc",
-    "package:watch": "npm run clean && tsc -w",
+    "package:watch": "rm -rf lib && tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint ./index.ts --fix && tslint ./src/**/*.{ts,tsx} --fix",

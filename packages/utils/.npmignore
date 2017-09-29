@@ -1,1 +1,9 @@
 src
+node_modules
+.DS_Store
+.gitignore
+.prettierrc
+package.json
+tsconfig.json
+tslint.json
+index.ts
