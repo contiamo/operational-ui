@@ -6,10 +6,9 @@ var style = function (_a) {
     var theme = _a.theme;
     return ({
         margin: theme.spacing * -1,
-        marginBottom: 16,
-        padding: theme.spacing,
-        borderBottom: "1px solid",
-        borderColor: theme.colors.grey10,
+        marginBottom: theme.spacing * 4 / 3,
+        padding: theme.spacing + "px " + theme.spacing + "px " + theme.spacing * 5 / 6 + "px",
+        borderBottom: "1px solid #f2f2f2",
         fontWeight: 700,
         lineHeight: 1,
         "* + &": {

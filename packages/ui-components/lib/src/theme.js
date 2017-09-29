@@ -28,7 +28,7 @@ var THEME_COLORS = {
 var baseTypography = {
     lineHeight: "1.5",
     textTransform: "none",
-    letterSpacing: 0.2
+    letterSpacing: "normal"
 };
 var DEFAULT_TYPOGRAPHY = {
     title: __assign({}, baseTypography, { fontSize: 22, fontWeight: 600, opacity: 1 }),

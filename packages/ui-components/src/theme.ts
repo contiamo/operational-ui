@@ -16,10 +16,10 @@ const THEME_COLORS: ThemeColors = {
   grey90: "#445873"
 }
 
-const baseTypography = {
+const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
   lineHeight: "1.5",
   textTransform: "none",
-  letterSpacing: 0.2
+  letterSpacing: "normal"
 }
 
 const DEFAULT_TYPOGRAPHY: ThemeTypography = {

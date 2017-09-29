@@ -39,7 +39,7 @@ interface ThemeTypographyElement {
   fontWeight: 100 | 300 | 400 | 600 | 700 | "normal" | "bold" | "bolder" | "lighter" | "initial" | "inherit"
   textTransform: string
   opacity: number
-  letterSpacing: number
+  letterSpacing: number | "normal"
   lineHeight: string
 }
 

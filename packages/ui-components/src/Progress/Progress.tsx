@@ -40,7 +40,7 @@ const Box = glamorous.div({
   height,
   padding,
   margin: "auto",
-  boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
+  boxShadow: "0px 1px 2px #d3d1d1",
   backgroundColor: "#FFFFFF"
 })
 

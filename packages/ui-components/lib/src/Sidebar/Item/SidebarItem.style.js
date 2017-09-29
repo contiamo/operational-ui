@@ -30,7 +30,7 @@ exports.default = function (_a) {
             position: "relative",
             display: "flex",
             alignItems: "center",
-            padding: theme.spacing / 2,
+            padding: theme.spacing / 2 + "px " + theme.spacing + "px",
             borderTop: "1px solid",
             borderTopColor: theme.colors.grey10,
             cursor: "pointer",
@@ -53,7 +53,7 @@ exports.default = function (_a) {
         },
         "&.open .header.open::after": {
             // rotate the caret to face down when an item is open.
-            transform: "translateX(-2px) rotate(90deg)",
+            transform: "translate3d(-2px, 2px, 0) rotate(90deg)",
             borderLeftColor: theme.colors.grey80
         },
         // Spinner for async items replaces a caret.
