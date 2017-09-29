@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Chip } from "contiamo-ui-components"
+import { Chip } from "@contiamo/ui"
 
 export default (
   <div style={{ display: "flex" }}>

@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Card } from "contiamo-ui-components"
+import { Card } from "@contiamo/ui"
 
 type Props = { className?: string; children: React.ReactNode }
 

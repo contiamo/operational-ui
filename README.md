@@ -39,7 +39,7 @@ Please see the [full documentation](https://ui.contiamo.com) for more details.
 ```javascript
 import React from "react"
 import { render } from "react-dom"
-import { Button } from "contiamo-ui-components"
+import { Button } from "@contiamo/ui"
 
 const myButton = (props) => <Button onClick={() => window.alert('Hello World!')}>{props.children}</Button>,
       myContainer = document.querySelector("#button-container")

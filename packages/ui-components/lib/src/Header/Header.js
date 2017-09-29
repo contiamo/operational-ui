@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var contiamo_ui_utils_1 = require("@contiamo/ui-utils");
 var HeaderItem_1 = require("./Item/HeaderItem");
 exports.HeaderItem = HeaderItem_1.default;
 var HeaderTitle_1 = require("./Title/HeaderTitle");

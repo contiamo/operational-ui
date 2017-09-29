@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ColorPicker } from "contiamo-ui-components"
+import { ColorPicker } from "@contiamo/ui"
 
 export default (function() {
   class CompWithColorPicker extends React.Component {

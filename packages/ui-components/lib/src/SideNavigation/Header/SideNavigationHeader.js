@@ -55,7 +55,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var contiamo_ui_utils_1 = require("@contiamo/ui-utils");
 var SideNavigationHeader = /** @class */ (function (_super) {
     __extends(SideNavigationHeader, _super);
     function SideNavigationHeader(props) {

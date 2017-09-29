@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Playground from "../../components/Playground/Playground"
-import { Tooltip, CardHeader } from "contiamo-ui-components"
+import { Tooltip, CardHeader } from "@contiamo/ui"
 import Table from "../../components/PropsTable/PropsTable"
 
 import * as simpleSnippet from "./snippets/Tooltips.simple.snippet"

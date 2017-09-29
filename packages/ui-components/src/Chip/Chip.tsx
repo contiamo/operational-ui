@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor } from "@contiamo/ui-utils"
 
 type Props = {
   theme?: Theme

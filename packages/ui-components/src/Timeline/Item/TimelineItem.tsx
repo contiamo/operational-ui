@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import glamorous, { withTheme } from "glamorous"
-import { hexOrColor } from "contiamo-ui-utils"
+import { hexOrColor } from "@contiamo/ui-utils"
 
 type CustomColor = ThemeColorName | string
 

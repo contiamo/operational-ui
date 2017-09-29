@@ -1,5 +1,5 @@
 {
-  "name": "contiamo-ui-components",
+  "name": "@contiamo/ui",
   "version": "0.0.1-13",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "lib/index.js",
@@ -45,7 +45,7 @@
     "@types/react-icons": "^2.2.2",
     "@types/react-router-dom": "^4.0.7",
     "@types/tinycolor2": "^1.4.0",
-    "contiamo-ui-utils": "^0.0.1-0.0.1-8.0",
+    "@contiamo/ui-utils": "^0.0.1-0.0.1-8.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "prop-types": "^15.5.10",

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Select } from "contiamo-ui-components"
+import { Select } from "@contiamo/ui"
 
 export default (
   <div>

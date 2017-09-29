@@ -16,7 +16,7 @@ var SideNavigationItem_1 = require("./Item/SideNavigationItem");
 exports.SideNavigationItem = SideNavigationItem_1.default;
 var SideNavigationLink_1 = require("./Link/SideNavigationLink");
 exports.SideNavigationLink = SideNavigationLink_1.default;
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var contiamo_ui_utils_1 = require("@contiamo/ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, 
     // for some reason, glamorous doesn't get the defaultProps...

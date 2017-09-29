@@ -3,8 +3,8 @@ import { ReactElement } from "react"
 import { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
-import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-components"
+import { wrapTheme } from "@contiamo/ui-utils"
+import { contiamoTheme } from "@contiamo/ui"
 import transformSnippet from "./transform-snippet"
 
 type Props = {

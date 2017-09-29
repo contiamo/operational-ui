@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, Grid, BarChart2 } from "react-feather"
 
-import { Card as IntroCard } from "contiamo-ui-components"
+import { Card as IntroCard } from "@contiamo/ui"
 
 const myCard = ({ className }: { className?: string }) => (
     <div className={className} style={{ padding: 32, maxWidth: 700 }}>

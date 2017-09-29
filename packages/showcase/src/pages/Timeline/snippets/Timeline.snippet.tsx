@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Timeline, TimelineItem } from "contiamo-ui-components"
+import { Timeline, TimelineItem } from "@contiamo/ui"
 import glamorous from "glamorous"
 
 export default (() => {

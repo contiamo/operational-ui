@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Button } from "contiamo-ui-components"
+import { Button } from "@contiamo/ui"
 
 export default (
   <div>

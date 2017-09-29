@@ -1,4 +1,4 @@
-import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "@contiamo/ui-utils"
 
 type Props = {
   theme: Theme

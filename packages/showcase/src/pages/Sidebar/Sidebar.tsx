@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "react-router-dom"
 
 import Playground from "../../components/Playground/Playground"
-import { Sidebar, SidebarItem, SidebarLink, CardHeader } from "contiamo-ui-components"
+import { Sidebar, SidebarItem, SidebarLink, CardHeader } from "@contiamo/ui"
 
 import Table from "../../components/PropsTable/PropsTable"
 import * as simpleSnippet from "./snippets/Sidebar.simple.snippet"

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Route } from "react-router-dom"
 
-import { Header } from "contiamo-ui-components"
+import { Header } from "@contiamo/ui"
 
 const style: {} = {
     boxShadow: "0px 1px 2px #d3d1d1",

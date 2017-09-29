@@ -2,7 +2,7 @@ import * as React from "react"
 import * as ReactFeather from "react-feather"
 import glamorous from "glamorous"
 
-import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor, darken } from "@contiamo/ui-utils"
 
 interface Props {
   className?: string

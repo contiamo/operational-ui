@@ -3,7 +3,7 @@ import { SFC } from "react"
 
 import glamorous from "glamorous"
 
-import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor, darken } from "@contiamo/ui-utils"
 
 type Props = {
   className: string

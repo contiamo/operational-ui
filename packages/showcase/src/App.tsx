@@ -2,7 +2,7 @@ import * as React from "react"
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
 import glamorous, { Div, ThemeProvider } from "glamorous"
 import { css } from "glamor"
-import { contiamoTheme } from "contiamo-ui-components"
+import { contiamoTheme } from "@contiamo/ui"
 
 import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 

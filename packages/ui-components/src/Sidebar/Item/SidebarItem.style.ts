@@ -1,4 +1,4 @@
-import { spin } from "contiamo-ui-utils"
+import { spin } from "@contiamo/ui-utils"
 
 type Props = { theme: Theme; children?: Node }
 export default ({ theme, children }: Props): {} => {
