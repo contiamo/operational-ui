@@ -7,3 +7,4 @@ package.json
 tsconfig.json
 tslint.json
 index.ts
+!lib/src
