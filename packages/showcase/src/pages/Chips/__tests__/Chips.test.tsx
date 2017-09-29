@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessChipsPage from "../Chips"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessChips from "../Chips"
 
-const ChipsPage = wrapDefaultTheme(ThemelessChipsPage)
+const Chips = wrapTheme(contiamoTheme)(ThemelessChips)
 
 describe("Cards Page", () => {
   it("Should render correctly", () => {
-    expect(render(<ChipsPage />)).toMatchSnapshot()
+    expect(render(<Chips />)).toMatchSnapshot()
   })
 })

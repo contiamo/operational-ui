@@ -3,7 +3,8 @@ import { ReactElement } from "react"
 import { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
-import wrapDefaultTheme from "../../utils/wrap-default-theme"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
 import transformSnippet from "./transform-snippet"
 
 type Props = {
@@ -16,7 +17,7 @@ const Playground: React.SFC<Props> = ({ snippet, components, scope }) => {
   const wrappedComponents: { [id: string]: any } = {}
   const comps = components || {}
   for (const key in comps) {
-    wrappedComponents[key] = wrapDefaultTheme(comps[key])
+    wrappedComponents[key] = wrapTheme(contiamoTheme)(comps[key])
   }
   return (
     <ComponentPlayground

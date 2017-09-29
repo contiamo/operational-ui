@@ -1,10 +1,11 @@
 import * as React from "react"
-import { shallow } from "enzyme"
+import { render } from "enzyme"
 
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
 import ThemelessPropsTable from "../PropsTable"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
-const PropsTable = wrapDefaultTheme(ThemelessPropsTable)
+const PropsTable = wrapTheme(contiamoTheme)(ThemelessPropsTable)
 
 const sampleProps = [
   {
@@ -15,9 +16,9 @@ const sampleProps = [
 
 describe("PropsTable", () => {
   it("Should render correctly without props", () => {
-    expect(shallow(<PropsTable />)).toMatchSnapshot()
+    expect(render(<PropsTable />)).toMatchSnapshot()
   })
   it("Should render correctly with props", () => {
-    expect(shallow(<PropsTable props={sampleProps} />)).toMatchSnapshot()
+    expect(render(<PropsTable props={sampleProps} />)).toMatchSnapshot()
   })
 })

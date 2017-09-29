@@ -1,10 +1,11 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../utils/wrap-default-theme"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
 import ThemelessApp from "../App"
 
-const App = wrapDefaultTheme(ThemelessApp)
+const App = wrapTheme(contiamoTheme)(ThemelessApp)
 
 test("App starts", () => {
   expect(render(<App />)).toMatchSnapshot()

@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessIconsPage from "../Icons"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessIcons from "../Icons"
 
-const IconsPage = wrapDefaultTheme(ThemelessIconsPage)
+const Icons = wrapTheme(contiamoTheme)(ThemelessIcons)
 
 describe("Icons Page", () => {
   it("Should render correctly", () => {
-    expect(render(<IconsPage />)).toMatchSnapshot()
+    expect(render(<Icons />)).toMatchSnapshot()
   })
 })

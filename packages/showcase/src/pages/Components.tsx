@@ -12,8 +12,8 @@ import Chips from "./Chips/Chips"
 import Tooltips from "./Tooltips/Tooltips"
 import InfoTiles from "./InfoTiles/InfoTiles"
 import SidebarPage from "./Sidebar/Sidebar"
-import ColorPicker from "./ColorPicker/ColorPicker"
-import Switch from "./Switch/Switch"
+import ColorPickers from "./ColorPickers/ColorPickers"
+import Switches from "./Switches/Switches"
 import Icons from "./Icons/Icons"
 import Typography from "./Typography/Typography"
 import Colors from "./Colors/Colors"
@@ -39,14 +39,14 @@ export default () => (
       <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={Buttons} />
       <Route path="/components/form-fields" component={FormFields} />
-      <Route path="/components/color-picker" component={ColorPicker} />
+      <Route path="/components/color-picker" component={ColorPickers} />
       <Route path="/components/cards" component={Cards} />
       <Route path="/components/chips" component={Chips} />
       <Route path="/components/tooltips" component={Tooltips} />
       <Route path="/components/info-tiles" component={InfoTiles} />
       <Route path="/components/sidebar" component={SidebarPage} />
       <Route path="/components/icons" component={Icons} />
-      <Route path="/components/switch" component={Switch} />
+      <Route path="/components/switch" component={Switches} />
       <Route path="/components/typography" component={Typography} />
       <Route path="/components/colors" component={Colors} />
       <Route path="/components/paginator" component={Paginator} />

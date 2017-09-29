@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessProgressPage from "../Progress"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessProgress from "../Progress"
 
-const ProgressPage = wrapDefaultTheme(ThemelessProgressPage)
+const Progress = wrapTheme(contiamoTheme)(ThemelessProgress)
 
 describe("Progress Page", () => {
   it("Should render correctly", () => {
-    expect(render(<ProgressPage />)).toMatchSnapshot()
+    expect(render(<Progress />)).toMatchSnapshot()
   })
 })

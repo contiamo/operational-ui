@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessInfoTilesPage from "../InfoTiles"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessInfoTiles from "../InfoTiles"
 
-const InfoTilesPage = wrapDefaultTheme(ThemelessInfoTilesPage)
+const InfoTiles = wrapTheme(contiamoTheme)(ThemelessInfoTiles)
 
 describe("InfoTiles Page", () => {
   it("Should render correctly", () => {
-    expect(render(<InfoTilesPage />)).toMatchSnapshot()
+    expect(render(<InfoTiles />)).toMatchSnapshot()
   })
 })

@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessTooltipsPage from "../Tooltips"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessTooltips from "../Tooltips"
 
-const TooltipsPage = wrapDefaultTheme(ThemelessTooltipsPage)
+const Tooltips = wrapTheme(contiamoTheme)(ThemelessTooltips)
 
 describe("Tooltips Page", () => {
   it("Should render correctly", () => {
-    expect(render(<TooltipsPage />)).toMatchSnapshot()
+    expect(render(<Tooltips />)).toMatchSnapshot()
   })
 })

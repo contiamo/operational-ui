@@ -1,7 +1,11 @@
 import * as React from "react"
 import { shallow } from "enzyme"
 
-import Header from "../Header"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessHeader from "../Header"
+
+const Header = wrapTheme(contiamoTheme)(ThemelessHeader)
 
 describe("App Showcase: Header", () => {
   it("Should render correctly", () => {

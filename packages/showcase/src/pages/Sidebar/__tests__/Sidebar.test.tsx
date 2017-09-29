@@ -2,17 +2,18 @@ import * as React from "react"
 import { BrowserRouter as Router } from "react-router-dom"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
-import ThemelessSidebarPage, { fetch } from "../Sidebar"
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
+import ThemelessSidebar, { fetch } from "../Sidebar"
 
-const SidebarPage = wrapDefaultTheme(ThemelessSidebarPage)
+const Sidebar = wrapTheme(contiamoTheme)(ThemelessSidebar)
 
 describe("Sidebar Page", () => {
   it("Should render correctly", () => {
     expect(
       render(
         <Router>
-          <SidebarPage />
+          <Sidebar />
         </Router>
       )
     ).toMatchSnapshot()

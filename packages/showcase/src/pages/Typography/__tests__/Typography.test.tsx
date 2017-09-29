@@ -1,10 +1,11 @@
 import * as React from "react"
 import { render } from "enzyme"
 
+import { wrapTheme } from "contiamo-ui-utils"
+import { contiamoTheme } from "contiamo-ui-components"
 import ThemelessTypography from "../Typography"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
-const Typography = wrapDefaultTheme(ThemelessTypography)
+const Typography = wrapTheme(contiamoTheme)(ThemelessTypography)
 
 describe("Tooltips Page", () => {
   it("Should render correctly", () => {

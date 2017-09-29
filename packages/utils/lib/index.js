@@ -8,4 +8,6 @@ var color_1 = require("./src/color");
 exports.hexOrColor = color_1.hexOrColor;
 exports.readableTextColor = color_1.readableTextColor;
 exports.darken = color_1.darken;
+var theme_1 = require("./src/theme");
+exports.wrapTheme = theme_1.wrapTheme;
 //# sourceMappingURL=index.js.map
