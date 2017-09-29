@@ -11,8 +11,7 @@ exports[`Progress Component Should initialize properly 1`] = `
       class="css-1m5dh88"
     >
       <div
-        class="css-mm3v"
-        style="transform:translateX(-100%);"
+        class="css-dvid1s"
       />
     </div>
   </div>
