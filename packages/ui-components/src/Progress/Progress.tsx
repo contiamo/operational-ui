@@ -1,5 +1,6 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
+import { css } from "glamor"
 
 interface Props {
   paused?: boolean
@@ -27,10 +28,10 @@ const Container = glamorous.div(
     left: 0,
     display: "flex",
     position: "absolute",
-    backgroundColor: "rgba(255, 255, 255, 0.8)"
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
-  ({ theme }: { theme: Theme }) => ({
-    zIndex: theme.baseZIndex + 300
+  ({ theme }: { theme?: Theme }) => ({
+    zIndex: theme.baseZIndex + 300,
   })
 )
 
@@ -40,69 +41,48 @@ const Box = glamorous.div({
   padding,
   margin: "auto",
   boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
-  backgroundColor: "#FFFFFF"
+  backgroundColor: "#FFFFFF",
 })
 
 const BarContainer = glamorous.div(
   {
     width: "100%",
     height: "100%",
-    overflow: "hidden"
+    overflow: "hidden",
   },
-  ({ theme }: { theme: Theme }) => ({
+  ({ theme }: { theme?: Theme }) => ({
     backgroundColor: theme.colors.grey50,
-    border: `1px solid ${theme.colors.grey20}`
+    border: `1px solid ${theme.colors.grey20}`,
   })
 )
+
+const fillProgress = css.keyframes({
+  from: {
+    transform: "translateX(-100%)",
+  },
+  to: {
+    transform: "none",
+  },
+})
 
 const Bar = glamorous.div(
   {
-    height: "100%"
+    height: "100%",
   },
-  ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.success
+  ({ theme }: { theme?: Theme }) => ({
+    animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 30s`,
+    backgroundColor: theme.colors.success,
   })
 )
 
-class Progress extends React.Component<Props, State> {
-  state = {
-    fillRatio: 0
-  }
-
-  tick = (): void => {
-    this.setState(prevState => ({
-      fillRatio: prevState.fillRatio + 0.01
-    }))
-  }
-
-  shouldTick(): boolean {
-    const maxFillRatio = this.props.complete ? 1 : 0.8
-    return !this.props.paused && this.state.fillRatio <= maxFillRatio
-  }
-
-  componentDidMount() {
-    if (this.shouldTick()) {
-      window.requestAnimationFrame(this.tick)
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.shouldTick()) {
-      window.requestAnimationFrame(this.tick)
-    }
-  }
-
-  render() {
-    return (
-      <Container>
-        <Box>
-          <BarContainer>
-            <Bar style={{ transform: `translateX(${-100 * (1 - this.state.fillRatio)}%)` }} />
-          </BarContainer>
-        </Box>
-      </Container>
-    )
-  }
-}
+const Progress = () => (
+  <Container>
+    <Box>
+      <BarContainer>
+        <Bar />
+      </BarContainer>
+    </Box>
+  </Container>
+)
 
 export default Progress
