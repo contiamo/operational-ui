@@ -22,6 +22,15 @@ exports[`ComponentsPage Should render correctly 1`] = `
       <div
         class="header "
       >
+        UI Elements
+      </div>
+    </div>
+    <div
+      class="css-1jua26i  "
+    >
+      <div
+        class="header "
+      >
         Data Entry
       </div>
     </div>
@@ -32,15 +41,6 @@ exports[`ComponentsPage Should render correctly 1`] = `
         class="header "
       >
         Feedback
-      </div>
-    </div>
-    <div
-      class="css-1jua26i  "
-    >
-      <div
-        class="header "
-      >
-        UI Elements
       </div>
     </div>
     <div
