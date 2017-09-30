@@ -21,33 +21,35 @@ type Props = StyleProps & {
 }
 
 const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps): any => {
-  const backgroundColor: string = color ? hexOrColor(color)(theme.colors[color] || "white") as string : "white"
+  const backgroundColor: string = color ? hexOrColor(color)(theme.colors.palette[color] || "white") as string : "white"
   const activeBackgroundColor: string = darken(backgroundColor)(5)
-  const textColor = readableTextColor(backgroundColor)(["black", "white"])
-  const activeBoxShadow = "2px 2px 4px rgba(0, 0, 0, 0.14) inset"
+  const textColor = readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"])
+  const activeBoxShadow = theme.shadows.pressed
   const isGroup = modifiers && modifiers.indexOf("group") > -1
   const isSpace = modifiers && modifiers.indexOf("space") > -1
   const spacing = theme.spacing
 
   return {
     display: "inline-block",
-    padding: spacing / 2,
+    padding: `${spacing * 2 / 3}px ${spacing}px`,
     border: "1px solid rgba(0, 0, 0, .2)",
+    borderRadius: 2,
     cursor: "pointer",
     boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     color: textColor,
+    outline: "none",
 
     ":hover": {
       backgroundColor: activeBackgroundColor,
-      color: readableTextColor(activeBackgroundColor)(["white", "black"])
+      color: readableTextColor(activeBackgroundColor)(["white", "#222"]),
     },
 
     ":active": {
-      boxShadow: activeBoxShadow
+      boxShadow: activeBoxShadow,
     },
 
-    marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0"
+    marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0",
   }
 })
 

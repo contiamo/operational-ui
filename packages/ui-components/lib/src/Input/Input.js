@@ -7,9 +7,9 @@ var StyledInput = glamorous_1.default.input(function (_a) {
     return ({
         padding: theme.spacing / 2,
         border: "1px solid",
-        borderColor: theme.colors.grey30,
+        borderColor: theme.colors.palette.grey30,
         font: "inherit",
-        WebkitAppearance: "none"
+        WebkitAppearance: "none",
     });
 });
 var Input = function (_a) {

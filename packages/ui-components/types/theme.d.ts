@@ -15,7 +15,7 @@ type ThemeColorName =
   | "grey80"
   | "grey90"
 
-interface ThemeColors {
+interface Palette {
   [key: string]: string
   info: string
   success: string
@@ -34,11 +34,20 @@ interface ThemeColors {
   grey90: string
 }
 
+interface Usage {
+  contentSeparatorLine: string
+  contentBorder: string
+}
+
+interface ThemeColors {
+  palette: Palette
+  usage?: Usage
+}
+
 interface ThemeTypographyElement {
   fontSize: number
   fontWeight: 100 | 300 | 400 | 600 | 700 | "normal" | "bold" | "bolder" | "lighter" | "initial" | "inherit"
   textTransform: string
-  opacity: number
   letterSpacing: number | "normal"
   lineHeight: string
 }

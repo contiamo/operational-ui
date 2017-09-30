@@ -16,46 +16,46 @@ type Props = {
   color?: string
   disabled?: boolean
   tooltip?: string
+  active?: boolean
 }
 
-const style: {} = ({ theme, color, disabled }: Props) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff",
-    textColor = readableTextColor(backgroundColor)([theme.colors.grey80, "white"]),
+const style: {} = ({ theme, color, disabled, active }: Props) => {
+  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff",
+    textColor = readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]),
     disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
-    ...theme.typography.body,
     position: "relative",
     display: "flex",
-    padding: theme.spacing / 2,
+    padding: `${theme.spacing / 1.5}px ${theme.spacing}px`,
     transition: "background-color .1s ease",
     cursor: "pointer",
     // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: "none",
-    color: textColor,
+    color: active ? theme.colors.palette.primary : textColor,
     backgroundColor,
     ...disabledStyle,
 
     "&:link, &:visited": {
-      color: textColor
+      color: textColor,
     },
 
     "&.SideNavigationLink + .SideNavigationLink": {
       borderTop: "1px solid",
-      borderColor: theme.colors.grey10
+      borderColor: theme.colors.usage.subContentSeparatorLine,
     },
 
     ":hover": {
-      backgroundColor: darken(backgroundColor)(5),
+      backgroundColor: darken(backgroundColor)(2),
 
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
-      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
+      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"]),
     },
     // Symbol goes on the right.
     "& > .symbol": {
-      marginLeft: "auto"
-    }
+      marginLeft: "auto",
+    },
   }
 }
 

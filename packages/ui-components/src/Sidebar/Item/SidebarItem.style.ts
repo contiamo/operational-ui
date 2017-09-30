@@ -11,50 +11,51 @@ export default ({ theme, children }: Props): {} => {
         height: 0,
         marginLeft: "auto",
         border: "4px solid transparent",
-        borderLeftColor: theme.colors.grey20,
-        transition: ".15s transform ease"
+        borderLeftColor: theme.colors.palette.grey20,
+        transition: ".15s transform ease",
       }
     : {}
 
   return {
     position: "relative",
+    color: theme.colors.usage.emphasizedText,
 
     "& .header": {
       position: "relative",
       display: "flex",
       alignItems: "center",
-      padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+      padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
       borderTop: "1px solid",
-      borderTopColor: theme.colors.grey10,
+      borderTopColor: theme.colors.palette.grey10,
       cursor: "pointer",
       outline: "none",
-      backgroundColor: theme.colors.white
+      backgroundColor: theme.colors.palette.white,
     },
 
     "& .header:hover": {
-      backgroundColor: theme.colors.grey10
+      backgroundColor: theme.colors.palette.grey10,
     },
 
     "&.open .header": {
       borderBottom: "1px solid",
-      borderBottomColor: theme.colors.grey20,
+      borderBottomColor: theme.colors.usage.contentSeparatorLine,
       fontWeight: 600,
-      backgroundColor: theme.colors.grey10
+      backgroundColor: theme.colors.palette.grey10,
     },
 
     // Caret styles begin here.
     "& .header::after": {
-      ...caret
+      ...caret,
     },
 
     "&:hover .header::after": {
-      borderLeftColor: theme.colors.grey80
+      borderLeftColor: theme.colors.palette.grey80,
     },
 
     "&.open .header.open::after": {
       // rotate the caret to face down when an item is open.
       transform: "translate3d(-2px, 2px, 0) rotate(90deg)",
-      borderLeftColor: theme.colors.grey80
+      borderLeftColor: theme.colors.palette.grey80,
     },
 
     // Spinner for async items replaces a caret.
@@ -63,13 +64,13 @@ export default ({ theme, children }: Props): {} => {
       height: 16,
       border: 0,
       borderRadius: "50%",
-      boxShadow: `1px 0px 0px 0px ${theme.colors.grey70} inset`,
-      animation: `.7s ${spin} linear infinite`
+      boxShadow: `1px 0px 0px 0px ${theme.colors.palette.grey70} inset`,
+      animation: `.7s ${spin} linear infinite`,
     },
 
     "& .content": {
       position: "relative",
-      paddingLeft: theme.spacing
-    }
+      paddingLeft: theme.spacing,
+    },
   }
 }

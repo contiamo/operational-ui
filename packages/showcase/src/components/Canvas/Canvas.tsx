@@ -11,37 +11,35 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   flexBasis: "100%",
   marginLeft: theme.spacing * 4 / 3,
   maxHeight: "100%",
-  overflow: "auto",
-  WebkitOverflowScrolling: "touch",
 
   "& > *": {
-    maxWidth: 768
+    maxWidth: 670,
   },
 
   "& a:link, & a:visited": {
-    color: theme.colors.info
+    color: theme.colors.info,
   },
 
   "& a:hover": {
-    color: theme.colors.success
+    color: theme.colors.success,
   },
 
   "& .playground": {
     display: "flex",
     width: "80vw",
     maxWidth: 850,
-    maxHeight: 320
+    maxHeight: 320,
   },
 
   "& .playgroundCode, & .playgroundPreview": {
-    flex: "1 1 50%"
+    flex: "1 1 50%",
   },
   "& .playgroundPreview": {
-    marginLeft: 16
+    marginLeft: 16,
   },
   "& .CodeMirror-wrap.CodeMirror": {
-    minHeight: 320
-  }
+    minHeight: 320,
+  },
 }))
 
 const Canvas = ({ children }: Props) => (
