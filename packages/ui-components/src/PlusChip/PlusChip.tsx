@@ -13,7 +13,7 @@ type Props = {
 }
 
 const style: {} = ({ theme, color, size }: Props) => {
-  const borderColor = color ? hexOrColor(color)(theme.colors[color] || "white") : "black"
+  const borderColor = color ? hexOrColor(color)(theme.colors.palette[color] || "white") : "black"
 
   return {
     display: "flex",

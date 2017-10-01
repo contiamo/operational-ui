@@ -19,7 +19,7 @@ var Container = glamorous_1.default.div({
     }
 }, function (_a) {
     var theme = _a.theme, color = _a.color, withIcon = _a.withIcon;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
     return {
         backgroundColor: backgroundColor,
         position: "relative",
@@ -34,8 +34,8 @@ var Container = glamorous_1.default.div({
 });
 var Label = glamorous_1.default.small(function (_a) {
     var color = _a.color, theme = _a.theme;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
-    return __assign({}, theme.typography.small, { marginBottom: 3, fontWeight: 600, color: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.grey60, theme.colors.grey10]) });
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
+    return __assign({}, theme.typography.small, { marginBottom: 3, fontWeight: 600, color: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey60, theme.colors.palette.grey10]) });
 });
 var IconContainer = glamorous_1.default.div({
     width: 20,
@@ -46,11 +46,11 @@ var IconContainer = glamorous_1.default.div({
     transform: "translateY(-50%)"
 }, function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
     return {
         right: theme.spacing / 2,
         "& svg": {
-            stroke: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.white, theme.colors.black])
+            stroke: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
         }
     };
 });

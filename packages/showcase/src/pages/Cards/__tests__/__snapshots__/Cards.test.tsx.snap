@@ -3,7 +3,7 @@
 exports[`Cards Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
   >
     Cards
   </div>
@@ -11,7 +11,7 @@ exports[`Cards Page Should render correctly 1`] = `
     These elements make up the UI. They accept any type of children and elegantly wrap them.
   </p>
   <div
-    class="css-1gehase"
+    class="css-1x87vqw"
   >
     Hello, I am a card. And I can contain 
     <em>
@@ -23,13 +23,13 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-1oaahyi"
+      class="css-x8kytd"
     >
       Hello, we are cards.
       <br />
     </div>
     <div
-      class="css-1afn8ez"
+      class="css-101umti"
     >
       Indeed, we are.
       <br />
@@ -43,7 +43,7 @@ exports[`Cards Page Should render correctly 1`] = `
     </div>
   </div>
   <div
-    class="css-dwbjzo"
+    class="css-1em598v"
   >
     Hello, I am a 
     <em>

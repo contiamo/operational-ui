@@ -5,7 +5,7 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color && theme.colors ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : "white";
+    var backgroundColor = color && theme.colors ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
     return {
         padding: theme.spacing / 2,
         backgroundColor: backgroundColor,

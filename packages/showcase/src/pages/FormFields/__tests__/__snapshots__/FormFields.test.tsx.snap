@@ -3,7 +3,7 @@
 exports[`FormFieldsPage Should render correctly 1`] = `
 <div>
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
   >
     Form Fields
   </div>
@@ -13,7 +13,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     This page seeks to document the vast majority of these controls.
   </p>
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
   >
     Input
   </div>
@@ -137,7 +137,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     </tbody>
   </table>
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
   >
     Select
   </div>

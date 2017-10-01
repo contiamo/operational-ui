@@ -17,11 +17,11 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   },
 
   "& a:link, & a:visited": {
-    color: theme.colors.info,
+    color: theme.colors.palette.info,
   },
 
   "& a:hover": {
-    color: theme.colors.success,
+    color: theme.colors.palette.success,
   },
 
   "& .playground": {

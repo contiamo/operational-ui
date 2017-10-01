@@ -20,7 +20,7 @@ var Line = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme;
     return ({
-        borderLeft: "2px solid " + theme.colors.grey30
+        borderLeft: "2px solid " + theme.colors.palette.grey30
     });
 });
 var StatusContainer = glamorous_1.default.div({
@@ -36,7 +36,7 @@ var StatusContainer = glamorous_1.default.div({
     }
 }, function (_a) {
     var theme = _a.theme, color = _a.color, children = _a.children;
-    return (__assign({ backgroundColor: "" + theme.colors.white, borderColor: "" + color, color: "" + color }, children
+    return (__assign({ backgroundColor: "" + theme.colors.palette.white, borderColor: "" + color, color: "" + color }, children
         ? {
             border: 0,
             borderRadius: 0,
@@ -80,7 +80,7 @@ var TimelineItem = function (_a) {
     var IconLib = ReactFeather;
     var isValidIcon = IconLib.hasOwnProperty(icon);
     var Icon = IconLib[icon];
-    color = contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
+    color = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
     return (React.createElement(Container, null,
         React.createElement(Line, null),
         React.createElement(StatusContainer, { color: color }, isValidIcon ? React.createElement(Icon, { color: color }) : null),

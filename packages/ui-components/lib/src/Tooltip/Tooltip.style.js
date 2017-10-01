@@ -38,7 +38,7 @@ var getCaretPosition = function (anchor) { return function (theme) {
 }; };
 exports.default = function (_a) {
     var theme = _a.theme, color = _a.color, anchor = _a.anchor;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : "black";
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "black";
     return __assign({ backgroundColor: backgroundColor, position: "absolute" }, getTooltipPosition(anchor), { left: "calc(100% + " + theme.spacing + "px)", zIndex: theme.baseZIndex + 101, width: "fit-content", maxWidth: 200, opacity: 0, transition: ".07s opacity ease", padding: theme.spacing / 2, borderRadius: 4, wordWrap: "break-word", boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)", color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]), 
         // This pseudo-element extends the clickable area of the far-away tooltip.
         "&::after": {

@@ -69,7 +69,7 @@ var PageLink = glamorous_1.default.li({
 }, function (_a) {
     var _b = _a.active, active = _b === void 0 ? false : _b, theme = _a.theme;
     return ({
-        color: active ? theme.colors.success : ""
+        color: active ? theme.colors.palette.success : ""
     });
 });
 var createPagesFragment = function (_a) {

@@ -18,7 +18,7 @@ exports[`IntroPage Should render correctly 1`] = `
       href="/components"
     >
       <div
-        class="css-1f5l56b card"
+        class="css-1dkvbfz card"
       >
         <svg
           height="30"
@@ -60,7 +60,7 @@ exports[`IntroPage Should render correctly 1`] = `
       </div>
     </a>
     <div
-      class="css-1f5l56b card card_disabled"
+      class="css-1dkvbfz card card_disabled"
     >
       <svg
         height="30"
@@ -118,7 +118,7 @@ exports[`IntroPage Should render correctly 1`] = `
       </h2>
     </div>
     <div
-      class="css-1f5l56b card card_disabled"
+      class="css-1dkvbfz card card_disabled"
     >
       <svg
         height="30"

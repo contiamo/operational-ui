@@ -15,7 +15,7 @@ type Props = {
 }
 
 const style: {} = ({ theme, color }: Props) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color] || "white") : "white"
+  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color] || "white") : "white"
 
   return {
     backgroundColor,

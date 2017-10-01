@@ -30,7 +30,7 @@ const style = ({
   expandedWidth = 240,
   width = 60
 }: Props): {} => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.grey80,
+  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80,
     hoverWidth = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",

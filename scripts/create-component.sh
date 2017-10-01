@@ -34,7 +34,7 @@ const Content = glamorous.div(
     color: 'green'
   }, ({ theme, active }: { theme: Theme, active: boolean }): any => ({
   // Local prop-dependent styling (see active prop assignment in component definition below)
-  backgroundColor: active ? theme.colors.info : "green"
+  backgroundColor: active ? theme.colors.palette.info : "green"
   })
 )
 

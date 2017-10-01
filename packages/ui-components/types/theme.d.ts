@@ -35,13 +35,24 @@ interface Palette {
 }
 
 interface Usage {
-  contentSeparatorLine: string
-  contentBorder: string
+  bodyText: string,
+  lightText: string,
+  emphasizedText: string,
+  contentBorder: string,
+  bodyBackground: string,
+  cardBackground: string,
+  contentSeparatorLine: string,
+  subContentSeparatorLine: string,
 }
 
 interface ThemeColors {
   palette: Palette
   usage?: Usage
+}
+
+interface ThemeShadows {
+  pressed: string,
+  card: string
 }
 
 interface ThemeTypographyElement {
@@ -50,6 +61,8 @@ interface ThemeTypographyElement {
   textTransform: string
   letterSpacing: number | "normal"
   lineHeight: string
+  color?: string
+  "&::before"?: { content: string }
 }
 
 interface ThemeTypography {
@@ -65,4 +78,5 @@ interface Theme {
   typography: ThemeTypography
   spacing: number
   baseZIndex: number
+  shadows?: ThemeShadows
 }

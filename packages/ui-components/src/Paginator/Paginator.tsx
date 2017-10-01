@@ -85,7 +85,7 @@ const PageLink = glamorous.li(
     userSelect: "none"
   },
   ({ active = false, theme }: { active?: boolean; theme?: Theme }) => ({
-    color: active ? theme.colors.success : ""
+    color: active ? theme.colors.palette.success : ""
   })
 )
 

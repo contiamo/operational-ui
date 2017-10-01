@@ -23,7 +23,7 @@ var style = function (_a) {
     _b = _a.expandedWidth, 
     // for some reason, glamorous doesn't get the defaultProps...
     expandedWidth = _b === void 0 ? 240 : _b, _c = _a.width, width = _c === void 0 ? 60 : _c;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.grey80, hoverWidth = expandOnHover
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80, hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
             willChange: "width",

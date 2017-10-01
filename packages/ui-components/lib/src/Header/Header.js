@@ -11,7 +11,7 @@ var HeaderSeparator_1 = require("./Separator/HeaderSeparator");
 exports.HeaderSeparator = HeaderSeparator_1.default;
 var style = function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color] || "white") : "white";
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "white";
     return {
         backgroundColor: backgroundColor,
         display: "flex",
