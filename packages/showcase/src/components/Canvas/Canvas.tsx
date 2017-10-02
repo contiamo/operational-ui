@@ -23,23 +23,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
 
   "& a:hover": {
     color: theme.colors.palette.success
-  },
-
-  "& .playground": {
-    display: "flex",
-    width: "80vw",
-    maxWidth: 850,
-    maxHeight: 320
-  },
-
-  "& .playgroundCode, & .playgroundPreview": {
-    flex: "1 1 50%"
-  },
-  "& .playgroundPreview": {
-    marginLeft: 16
-  },
-  "& .CodeMirror-wrap.CodeMirror": {
-    minHeight: 320
   }
 }))
 

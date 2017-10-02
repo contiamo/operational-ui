@@ -16,6 +16,7 @@ const Container = glamorous.div({
   display: "flex",
   flexDirection: "column",
   width: "100vw",
+  backgroundColor: contiamoTheme.colors.usage.bodyBackground,
   height: "100vh",
   marginLeft: 60
 })
@@ -23,7 +24,6 @@ const Container = glamorous.div({
 const styles: {} = {
   display: "flex",
   fontFamily: "'Proxima Nova', sans-serif",
-  backgroundColor: contiamoTheme.colors.usage.bodyBackground,
   "& hr": {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
     height: 1,
@@ -41,13 +41,6 @@ const styles: {} = {
     margin: 0,
     marginBottom: contiamoTheme.spacing
   },
-  "& .CodeMirror-code": {
-    fontFamily: "monospace"
-  },
-  "& .CodeMirror-code pre": {
-    fontSize: 13,
-    lineHeight: 1.3
-  }
 }
 
 const SideNavigationWithRouter = withRouter(SideNavigation)
