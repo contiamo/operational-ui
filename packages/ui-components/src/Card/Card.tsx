@@ -19,14 +19,14 @@ const style = ({ theme, width, padding }: Props) => ({
   color: theme.colors.usage.bodyText,
 
   "& p": {
-    lineHeight: "20px",
+    lineHeight: "20px"
   },
   "& > img": {
-    maxWidth: "100%",
+    maxWidth: "100%"
   },
   "& .CardHeader:not(:first-child)": {
-    borderBottomStyle: "dashed",
-  },
+    borderBottomStyle: "dashed"
+  }
 })
 
 const Card: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>

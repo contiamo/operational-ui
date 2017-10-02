@@ -98,7 +98,7 @@ const style: {} = ({ theme, options }: Props) => {
 
     // Caret
     "&::after": {
-      content: options && options.length ? "\"\"" : "none",
+      content: options && options.length ? '""' : "none",
       position: "absolute",
       top: "50%",
       right: theme.spacing,

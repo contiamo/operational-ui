@@ -19,7 +19,7 @@ export default {
     {
       name: "placeholder",
       description: "Text displayed when the input field has no value.",
-      defaultValue: "\"\"",
+      defaultValue: '""',
       type: "string",
       optional: true
     },

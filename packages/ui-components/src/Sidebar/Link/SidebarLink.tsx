@@ -37,12 +37,12 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
     ...disabledStyle,
 
     "&:link, &:visited": {
-      color: textColor,
+      color: textColor
     },
 
     "&.SideNavigationLink + .SideNavigationLink": {
       borderTop: "1px solid",
-      borderColor: theme.colors.usage.subContentSeparatorLine,
+      borderColor: theme.colors.usage.subContentSeparatorLine
     },
 
     ":hover": {
@@ -50,12 +50,12 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
 
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
-      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"]),
+      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
     },
     // Symbol goes on the right.
     "& > .symbol": {
-      marginLeft: "auto",
-    },
+      marginLeft: "auto"
+    }
   }
 }
 

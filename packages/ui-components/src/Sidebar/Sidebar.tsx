@@ -18,7 +18,7 @@ const style: {} = ({ theme }: { theme: Theme }) => ({
   scrollBehavior: "smooth", // future-proof
   fontWeight: 300,
   backgroundColor: theme.colors.usage.cardBackground,
-  color: theme.colors.palette.grey80,
+  color: theme.colors.palette.grey80
 })
 
 const Sidebar: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>

@@ -19,8 +19,8 @@ const style: {} = ({ theme }: Props) => ({
   color: theme.colors.usage.emphasizedText,
 
   "* + &": {
-    marginTop: theme.spacing,
-  },
+    marginTop: theme.spacing
+  }
 })
 
 const CardHeader: React.SFC<Props> = ({ className, children, id }: Props) => (

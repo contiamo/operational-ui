@@ -13,7 +13,7 @@ import { options } from "../__mocks__/Select.mock"
   - Press escape to close
   - Filters
 */
-global.document = jsdom("<!doctype html><html><body><div id=\"root\"></div></body></html>")
+global.document = jsdom('<!doctype html><html><body><div id="root"></div></body></html>')
 global.window = document.parentWindow
 
 describe("Select", () => {
