@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import Table from "../../../components/PropsTable/PropsTable"
-import Playground from "../../../components/Playground/Playground"
-import { Button, Card, CardHeader } from "contiamo-ui-components"
+import Table from "../../components/PropsTable/PropsTable"
+import Playground from "../../components/Playground/Playground"
+import { Button, ButtonGroup, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/Buttons.simple.snippet"
 import propDescription from "./propDescription"
@@ -17,7 +17,7 @@ export default () => (
     </p>
 
     <h4>Usage</h4>
-    <Playground snippet={String(simpleSnippet)} components={{ Button }} />
+    <Playground snippet={String(simpleSnippet)} components={{ Button, ButtonGroup }} />
 
     <h4>Props</h4>
     <Table props={propDescription} />
