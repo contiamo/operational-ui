@@ -26,10 +26,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const Canvas = ({ children }: Props) => (
-  <Container>
-    {children}
-  </Container>
-)
+const Canvas = ({ children }: Props) => <Container>{children}</Container>
 
 export default Canvas

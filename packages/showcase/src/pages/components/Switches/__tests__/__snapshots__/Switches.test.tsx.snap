@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switches Page Should render correctly 1`] = `
+<div
+  class="css-1dkvbfz"
+>
+  <div
+    class="css-imab3e"
+  >
+    Switch
+  </div>
+  <p>
+    A switch is a simple toggle indicating whether a specific functionality is enabled or disabled.
+  </p>
+  <h4>
+    Usage
+  </h4>
+  <div
+    class="css-1w8lcxk"
+  >
+    <div
+      class="playground"
+    >
+      <div
+        class="playgroundCode"
+      >
+        <div
+          class="ReactCodeMirror playgroundStage"
+        >
+          <textarea
+            autocomplete="off"
+          >
+            [object Object]
+          </textarea>
+        </div>
+      </div>
+      <div
+        class="playgroundPreview"
+      >
+        <div>
+          <div
+            class="previewArea"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-xa6ngs"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          on
+        </td>
+        <td>
+          Is the switch on?
+        </td>
+        <td />
+        <td>
+          boolean
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onChange
+        </td>
+        <td>
+          A change handler. Passes the new \`on\` boolean.
+        </td>
+        <td>
+          void
+        </td>
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

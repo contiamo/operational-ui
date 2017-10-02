@@ -60,10 +60,17 @@ const AppSideNavigation = ({ location }: Props) => {
           <div className="SideNavigationItem__label">Composed</div>
         </Link>
       </SideNavigationItem>
-      <SideNavigationItem>
-        <Link to="#">
+      <SideNavigationItem active={routeMatch}>
+        <Link to="/visualizations">
           <BarChart2 color="#fff" size={20} />
-          <div className="SideNavigationItem__label">Visualizations</div>
+          <Div
+            css={{
+              color: routeMatch ? "#67FFAA" : "#fff"
+            }}
+            className="SideNavigationItem__label"
+          >
+            Visualizations
+          </Div>
         </Link>
       </SideNavigationItem>
       <Div css={{ flexGrow: 1, height: "100%" }} />

@@ -10,7 +10,8 @@ import SideNavigation from "./components/SideNavigation/SideNavigation"
 import Header from "./components/Header/Header"
 
 import IntroPage from "./pages/Intro"
-import ComponentsPage from "./pages/Components"
+import ComponentsPage from "./pages/components/Components"
+import VisualizationsPage from "./pages/visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
@@ -40,7 +41,7 @@ const styles: {} = {
   "& p": {
     margin: 0,
     marginBottom: contiamoTheme.spacing
-  },
+  }
 }
 
 const SideNavigationWithRouter = withRouter(SideNavigation)
@@ -54,6 +55,7 @@ const App = () => (
           <Header />
           <Route exact path="/" component={IntroPage} />
           <Route path="/components" component={ComponentsPage} />
+          <Route path="/visualizations" component={VisualizationsPage} />
         </Container>
       </div>
     </ThemeProvider>

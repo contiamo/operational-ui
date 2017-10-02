@@ -2,26 +2,30 @@
 
 exports[`Playground Component Should initialize properly 1`] = `
 <div
-  class="playground"
+  class="css-1w8lcxk"
 >
   <div
-    class="playgroundCode"
+    class="playground"
   >
     <div
-      class="ReactCodeMirror playgroundStage"
+      class="playgroundCode"
     >
-      <textarea
-        autocomplete="off"
-      />
-    </div>
-  </div>
-  <div
-    class="playgroundPreview"
-  >
-    <div>
       <div
-        class="previewArea"
-      />
+        class="ReactCodeMirror playgroundStage"
+      >
+        <textarea
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <div
+      class="playgroundPreview"
+    >
+      <div>
+        <div
+          class="previewArea"
+        />
+      </div>
     </div>
   </div>
 </div>
