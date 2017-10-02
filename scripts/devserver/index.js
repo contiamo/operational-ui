@@ -40,7 +40,8 @@ const config = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       'contiamo-ui-components': path.resolve(__dirname, '../../packages/ui-components/index.ts'),
-      'contiamo-ui-utils': path.resolve(__dirname, '../../packages/utils/index.ts')
+      'contiamo-ui-utils': path.resolve(__dirname, '../../packages/utils/index.ts'),
+      'react': path.resolve(__dirname, 'node_modules', 'react')
     }
   },
   plugins: [

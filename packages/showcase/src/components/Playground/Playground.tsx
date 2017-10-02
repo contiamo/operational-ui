@@ -48,7 +48,6 @@ const Playground: React.SFC<Props> = ({ snippet, components, scope }) => {
   for (const key in comps) {
     wrappedComponents[key] = wrapTheme(contiamoTheme)(comps[key])
   }
-  console.log(components)
   return (
     <Container>
       <ComponentPlayground
