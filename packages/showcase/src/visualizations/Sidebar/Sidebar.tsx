@@ -16,7 +16,7 @@ type Link = {
 const links: Link[] = [
   {
     label: "Process Flow",
-    links: [{ url: "/visualizations/processFlow/case01", label: "Case 1" }]
+    links: [{ url: "/visualizations/process-flow/case01", label: "Case 1" }]
   },
   {
     label: "Bar chart",
