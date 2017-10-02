@@ -39,7 +39,7 @@ class Series {
       return
     }
 
-    const config = this.state.current.config
+    const config = this.state.current.get("config")
     this.el.attr("width", config.width).attr("height", config.height)
     this.renderer.draw()
     this.drawn = true

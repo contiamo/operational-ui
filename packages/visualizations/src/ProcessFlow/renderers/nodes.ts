@@ -134,12 +134,12 @@ class Nodes extends AbstractRenderer {
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).width / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBBox(el).width / 2 // + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).height / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBBox(el).height / 2 // + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
@@ -172,10 +172,10 @@ class Nodes extends AbstractRenderer {
     }
     const nodeBBox = this.getNodeBBox(element.node())
     return {
-      offset: nodeBBox.width,
+      offset: nodeBBox.width / 2,
       type: "node",
-      x: d.x + nodeBBox.width / 2,
-      y: d.y + nodeBBox.height / 2,
+      x: d.x,
+      y: d.y,
       id: d.id(),
     }
   }

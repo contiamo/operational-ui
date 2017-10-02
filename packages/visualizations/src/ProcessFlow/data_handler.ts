@@ -18,10 +18,10 @@ class DataHandler {
   }
 
   prepareData(): TData {
-    const data = this.state.current.data
+    const data = this.state.current.get("data")
     this.journeys = data.journeys
-    this.setNodeAccessors(this.state.current.accessors.node)
-    this.setLinkAccessors(this.state.current.accessors.link)
+    this.setNodeAccessors(this.state.current.get("accessors").node)
+    this.setLinkAccessors(this.state.current.get("accessors").link)
     this.initializeNodes(data)
     this.initializeLinks(data)
     return {

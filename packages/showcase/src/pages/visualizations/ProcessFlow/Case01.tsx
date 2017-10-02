@@ -1,8 +1,12 @@
 import * as React from "react"
 import { Component } from "react"
-import { ProcessFlow } from "contiamo-visualizations"
+import * as Viz from "contiamo-visualizations"
+// @TODO Fix this!
+// import { ProcessFlow } from "contiamo-visualizations"
 import { CardHeader } from "contiamo-ui-components"
 import Wrapper from "../react_wrapper"
+
+const ProcessFlow: any = (Viz as any)["contiamo-visualizations"].ProcessFlow
 
 const data = {
     journeys: [
@@ -14,7 +18,7 @@ const data = {
       { path: ["1", "2", "3", "6", "11"], size: 130 },
       { path: ["1", "2", "3", "4", "10"], size: 290 },
       { path: ["1", "2", "3", "12", "10"], size: 120 },
-      { path: ["1", "2", "3", "4", "13"], size: 620 }
+      { path: ["1", "2", "3", "4", "13"], size: 620 },
     ],
     nodes: [
       { id: "1", group: "start" },
@@ -29,11 +33,11 @@ const data = {
       { id: "10", group: "end" },
       { id: "11", group: "end" },
       { id: "12" },
-      { id: "13", group: "end" }
-    ]
+      { id: "13", group: "end" },
+    ],
   },
   config = {
-    arrowFill: "none"
+    arrowFill: "none",
   },
   accessors = {
     node: {
@@ -46,13 +50,13 @@ const data = {
       },
       label: (node: any) => "Node " + node.id,
       labelPosition: (node: any) => "top",
-      shape: (node: any) => node.group === "start" ? "square" : node.group === "end" ? "circle" : "diamond",
-      size: (node: any) => node.group === "start" ? 50 : 20,
+      shape: (node: any) => (node.group === "start" ? "square" : node.group === "end" ? "circle" : "diamond"),
+      // size: (node: any) => (node.group === "start" ? 50 : 20),
       stroke: (node: any) => {
         if (node.group) {
           return "none"
         }
-      }
+      },
     },
     link: {
       stroke: (link: any) => {
@@ -61,12 +65,13 @@ const data = {
         } else if (link.target.attributes.group === "end") {
           return "lightcoral"
         }
-      }
-    }
+      },
+    },
   }
 
-export default () =>
+export default () => (
   <div>
     <CardHeader>Process Flow Visualization</CardHeader>
-    <Wrapper facade={ProcessFlow} data={data} accessors={accessors} config={config}></Wrapper>
+    <Wrapper facade={ProcessFlow} data={data} accessors={accessors} config={config} />
   </div>
+)

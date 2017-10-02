@@ -17,27 +17,24 @@ let FocusUtils: any = {
   // Initial, hidden rendering of the focus label.
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
-  drawHidden: (labelEl: Element, canvasEl: any, type: string): any => {
-    let label: any = d3
-      .select(labelEl)
-      .attr("class", "focus-legend focus-legend-" + type)
-      .style("visibility", "hidden")
+  drawHidden: (canvasEl: any, type: string): any => {
+    let label: any = canvasEl.attr("class", "focus-legend focus-legend-" + type).style("visibility", "hidden")
 
-    canvasEl.node().appendChild(label.node())
+    // canvasEl.node().appendChild(label.node())
     return label
   },
 
   // Move the focus label to the desired position and make it visible.
-  drawVisible: (label: any, labelPlacement: { top: number; left: number }): void => {
-    label
+  drawVisible: (focusEl: any, labelPlacement: { top: number; left: number }): void => {
+    focusEl
       .style("top", labelPlacement.top + "px")
       .style("left", labelPlacement.left + "px")
       .style("visibility", "visible")
   },
 
   // Return dimensions of focus label, including width of any margins or borders.
-  labelDimensions: (labelEl: any): { height: number; width: number } => {
-    let $label: any = $(labelEl)
+  labelDimensions: (focusEl: any): { height: number; width: number } => {
+    let $label: any = $(focusEl.node())
     return {
       height: $label.outerHeight(true),
       width: $label.outerWidth(true),

@@ -21,6 +21,8 @@ abstract class AbstractChart {
     this.initializeSeries()
   }
 
+  abstract visualizationName(): string
+
   abstract defaultConfig(): any
 
   abstract insertCanvas(): void

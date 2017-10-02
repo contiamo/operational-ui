@@ -16,10 +16,8 @@ abstract class AbstractFocus {
   }
 
   remove(): void {
-    if (this.focus) {
-      this.focus.remove()
-    }
-    this.focus = null
+    this.el.node().innerHTML = ""
+    this.el.style("visibility", "hidden")
     this.events.emit(Events.FOCUS.CLEAR)
   }
 

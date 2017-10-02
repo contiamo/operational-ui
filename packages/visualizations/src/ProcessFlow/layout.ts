@@ -11,7 +11,7 @@ class Layout {
   }
 
   computeLayout(): void {
-    const data = this.state.current.computed.series.data
+    const data = this.state.current.get("computed").series.data
     this.nodes = data.nodes
     this.links = data.links
     this.computeNodeYPositions()

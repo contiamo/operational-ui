@@ -77,7 +77,7 @@ class Links extends AbstractRenderer {
     return {
       offset: scale(d.size()) / 2,
       type: "link",
-      x: d.source().x,
+      x: (d.source().x + d.target().x) / 2,
       y: (d.source().y + d.target().y) / 2,
       id: d.sourceId() + "->" + d.targetId(),
     }

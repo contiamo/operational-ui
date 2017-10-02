@@ -6,7 +6,6 @@ import { all, uniqueId } from "lodash/fp"
 
 // There can only be an element focus in sankey diagrams
 class Focus extends AbstractFocus {
-  label: any
   uid: string
 
   onElementHover(ctx: any): (payload: { focusPoint: any; d: any }) => void {
@@ -17,7 +16,7 @@ class Focus extends AbstractFocus {
       ctx.remove()
 
       const isNode: boolean = focusPoint.type === "node",
-        config: any = ctx.state.current.config
+        config: any = ctx.state.current.get("config")
       // All conditions must be true to render focus label.
       let condition: boolean = isNode ? config.showNodeFocusLabels : config.showLinkFocusLabels
 
@@ -27,15 +26,12 @@ class Focus extends AbstractFocus {
 
       ctx.uid = uniqueId("elFocusLabel")
 
-      // Focus Label (hidden initially)
-      let labelEl: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
-      ctx.label = FocusUtils.drawHidden(labelEl, ctx.el, "element").style("pointer-events", "none")
-
-      let content: any = ctx.label.append("xhtml:ul")
+      FocusUtils.drawHidden(ctx.el, "element").style("pointer-events", "none")
+      let content: any = ctx.el.append("xhtml:ul")
 
       content
         .append("xhtml:li")
-        .attr("class", "title")
+        .attr("class", "title clearfix")
         .text(datum.label())
 
       // let valueFormatter: any = ctx.state.current.config.labelFormatter
@@ -46,11 +42,11 @@ class Focus extends AbstractFocus {
 
       content
         .append("xhtml:li")
-        .attr("class", "series")
+        .attr("class", "series clearfix")
         .html(
           '<span class="value">' +
             // valueFormatter(datum.value) +
-            datum.value +
+            datum.size() +
             "</span>",
           //   '</span> \
           // <span class="percentage">' +
@@ -59,9 +55,10 @@ class Focus extends AbstractFocus {
         )
 
       // Get label dimensions (has to be actually rendered in the page to do ctx)
-      let labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(labelEl)
+      let labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(ctx.el)
 
-      const drawingContainer: ClientRect = ctx.el.node().getBoundingClientRect()
+      const drawingContainer: ClientRect = ctx.state.current.get("computed").canvas.elRect
+
       // const panelContainer: ClientRect = ctx.state.current.computed.series[focusPoint.sid].sankey
       //   .node()
       //   .getBoundingClientRect()
@@ -71,15 +68,15 @@ class Focus extends AbstractFocus {
       // )
 
       let drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = {
-        xMax: drawingContainer.left + drawingContainer.width,
+        xMax: drawingContainer.left + config.width,
         xMin: drawingContainer.left,
-        yMax: drawingContainer.top + drawingContainer.height,
+        yMax: drawingContainer.top + config.height,
         yMin: drawingContainer.top,
       }
-
       let offset: number = focusPoint.offset + config.labelPadding
+      // focusPoint.x -= focusPoint.offset
 
-      FocusUtils.positionLabel(ctx.label, focusPoint, labelDimensions, drawingDimensions, offset)
+      FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
   }
 
@@ -91,18 +88,14 @@ class Focus extends AbstractFocus {
   //   this.removeElementFocus()
   // }
   //
-  removeElementFocus(): void {
-    if (this.label) {
-      this.label.remove()
-    }
-    this.label = undefined
-    this.events.emit(Events.FOCUS.CLEAR)
-  }
+  // removeElementFocus(): void {
+  //   this.events.emit(Events.FOCUS.CLEAR)
+  // }
 
-  // Remove focus (necessary when data changed or chart is resized)
-  refresh(): void {
-    this.removeElementFocus()
-  }
+  // // Remove focus (necessary when data changed or chart is resized)
+  // refresh(): void {
+  //   this.removeElementFocus()
+  // }
 }
 
 export default Focus

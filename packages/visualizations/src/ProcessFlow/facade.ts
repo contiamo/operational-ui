@@ -3,8 +3,9 @@ import DataHandler from "./data_handler"
 import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
+import { uniqueId } from "lodash/fp"
 
-class Facade extends AbstractFacade {
+class ProcessFlow extends AbstractFacade {
   dataHandler: DataHandler
   series: Series
   canvas: Canvas
@@ -20,8 +21,9 @@ class Facade extends AbstractFacade {
         labelOffset: 5,
         labelPadding: 5,
         linkStroke: "#aaa",
-        visualizationName: "processflow",
+        visualizationName: this.visualizationName(),
         arrowFill: "#ccc",
+        uid: uniqueId(this.visualizationName()),
       },
       accessors: {
         journeys: {
@@ -39,15 +41,19 @@ class Facade extends AbstractFacade {
     }
   }
 
+  visualizationName(): string {
+    return "processflow"
+  }
+
   insertCanvas(): void {
-    this.canvas = new Canvas(this.state.readOnly(), this.state.writer(["canvas"]), this.events, this.context)
+    this.canvas = new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
   initializeComponents(): void {
     this.components = {
       focus: new Focus(
         this.state.readOnly(),
-        this.state.writer(["focus"]),
+        this.state.computedWriter(["focus"]),
         this.events,
         this.canvas.elementFor("focus"),
       ),
@@ -57,7 +63,7 @@ class Facade extends AbstractFacade {
   initializeSeries(): void {
     this.series = new Series(
       this.state.readOnly(),
-      this.state.writer(["series"]),
+      this.state.computedWriter(["series"]),
       this.events,
       this.canvas.elementFor("series"),
     )
@@ -73,4 +79,4 @@ class Facade extends AbstractFacade {
   }
 }
 
-export default Facade
+export default ProcessFlow

@@ -5,14 +5,14 @@ class Wrapper extends React.Component {
   viz: any
   containerNode: HTMLElement
   props: {
-    facade: any,
-    accessors?: any,
-    data?: any,
+    facade: any
+    accessors?: any
+    data?: any
     config?: any
   }
 
   render() {
-    return <div className="Visualization" ref={containerNode => this.containerNode = containerNode} />
+    return <div className="Visualization" ref={containerNode => (this.containerNode = containerNode)} />
   }
 
   componentDidMount() {

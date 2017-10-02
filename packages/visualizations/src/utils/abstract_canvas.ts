@@ -33,13 +33,14 @@ abstract class AbstractCanvas {
 
   insertEl(): void {
     this.el = this.createEl()
-    // this.stateWriter("el", this.el)
     this.container.node().appendChild(this.el.node())
   }
 
   insertFocusLabel(): void {
-    this.focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "focus-legend")
-    // this.stateWriter("focusEl", this.focusEl)
+    this.focusEl = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", "focus-legend clearfix")
+      .style("visibility", "hidden")
     this.container.node().appendChild(this.focusEl.node())
   }
 
@@ -54,10 +55,11 @@ abstract class AbstractCanvas {
     }
     return elMap[component]
   }
-  // prefixedId(id: string): string {
-  //   return this.state.uid + id
-  // }
-  //
+
+  prefixedId(id: string): string {
+    return this.state.current.get("config").uid + id
+  }
+
   // listenToMouseOver(): void {
   //   let el: d3.Selection<Node> = this.mouseOverElement()
   //   if (el) {
@@ -131,7 +133,7 @@ abstract class AbstractCanvas {
   // }
 
   draw(): void {
-    const config = this.state.current.config
+    const config = this.state.current.get("config")
     this.container.style("width", config.width + "px").style("height", config.height + "px")
 
     this.el.style("width", config.width + "px").style("height", config.height + "px")

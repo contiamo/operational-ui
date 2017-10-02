@@ -41,7 +41,7 @@ abstract class AbstractRenderer {
 
   draw(data: TNode[] | TLink[]): void {
     this.data = data
-    this.config = this.state.current.config
+    this.config = this.state.current.get("config")
     this.updateDraw()
   }
 
