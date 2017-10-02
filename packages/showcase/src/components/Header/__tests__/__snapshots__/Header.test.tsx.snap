@@ -27,7 +27,7 @@ exports[`App Showcase: Header Should render correctly 1`] = `
         "body": Object {
           "fontSize": 13,
           "fontWeight": 400,
-          "letterSpacing": 0.2,
+          "letterSpacing": "normal",
           "lineHeight": "1.5",
           "opacity": 1,
           "textTransform": "none",
@@ -35,7 +35,7 @@ exports[`App Showcase: Header Should render correctly 1`] = `
         "heading1": Object {
           "fontSize": 13,
           "fontWeight": 700,
-          "letterSpacing": 0.2,
+          "letterSpacing": "normal",
           "lineHeight": "1.5",
           "opacity": 1,
           "textTransform": "none",
@@ -43,7 +43,7 @@ exports[`App Showcase: Header Should render correctly 1`] = `
         "heading2": Object {
           "fontSize": 13,
           "fontWeight": 700,
-          "letterSpacing": 0.2,
+          "letterSpacing": "normal",
           "lineHeight": "1.5",
           "opacity": 0.6,
           "textTransform": "none",
@@ -51,7 +51,7 @@ exports[`App Showcase: Header Should render correctly 1`] = `
         "small": Object {
           "fontSize": 12,
           "fontWeight": 400,
-          "letterSpacing": 0.2,
+          "letterSpacing": "normal",
           "lineHeight": "1.5",
           "opacity": 1,
           "textTransform": "none",
@@ -59,7 +59,7 @@ exports[`App Showcase: Header Should render correctly 1`] = `
         "title": Object {
           "fontSize": 22,
           "fontWeight": 600,
-          "letterSpacing": 0.2,
+          "letterSpacing": "normal",
           "lineHeight": "1.5",
           "opacity": 1,
           "textTransform": "none",

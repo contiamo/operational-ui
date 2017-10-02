@@ -3,7 +3,7 @@
 exports[`InfoTiles Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-1kznpaj"
+    class="css-1g2bats"
   >
     InfoTiles
   </div>
@@ -17,7 +17,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
       class="css-farlai"
     >
       <small
-        class="css-p41l92"
+        class="css-rweu9i"
       >
         Components
       </small>
@@ -29,7 +29,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
       class="css-farlai"
     >
       <small
-        class="css-p41l92"
+        class="css-rweu9i"
       >
         Reusability
       </small>
@@ -41,7 +41,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
       class="css-farlai"
     >
       <small
-        class="css-p41l92"
+        class="css-rweu9i"
       >
         Potential Added Value
       </small>

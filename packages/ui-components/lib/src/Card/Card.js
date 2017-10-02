@@ -9,7 +9,7 @@ var style = function (_a) {
     return ({
         width: width,
         padding: padding || theme.spacing,
-        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.14)",
+        boxShadow: "0px 1px 2px #d3d1d1",
         backgroundColor: theme.colors.white,
         "& p": {
             lineHeight: "20px"
