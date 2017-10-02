@@ -13,13 +13,12 @@ const style: {} = ({ theme }: { theme: Theme }) => ({
   width: "100%",
   maxWidth: 280,
   maxHeight: "100%",
-  borderRadius: 2,
-  boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
+  boxShadow: theme.shadows.card,
   overflow: "auto",
   scrollBehavior: "smooth", // future-proof
   fontWeight: 300,
-  backgroundColor: theme.colors.white,
-  color: theme.colors.grey80
+  backgroundColor: theme.colors.usage.cardBackground,
+  color: theme.colors.palette.grey80,
 })
 
 const Sidebar: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>

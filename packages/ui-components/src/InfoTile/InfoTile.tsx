@@ -21,7 +21,7 @@ const Container = glamorous.div(
     }
   },
   ({ theme, color, withIcon }: { color?: string; theme: Theme; withIcon: boolean }): any => {
-    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
+    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white"
 
     return {
       backgroundColor,
@@ -38,12 +38,12 @@ const Container = glamorous.div(
 )
 
 const Label = glamorous.small(({ color, theme }: { color?: string; theme: Theme }): any => {
-  const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
+  const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white"
   return {
     ...theme.typography.small,
     marginBottom: 3,
     fontWeight: 600,
-    color: readableTextColor(backgroundColor)([theme.colors.grey60, theme.colors.grey10])
+    color: readableTextColor(backgroundColor)([theme.colors.palette.grey60, theme.colors.palette.grey10])
   }
 })
 
@@ -57,12 +57,12 @@ const IconContainer = glamorous.div(
     transform: "translateY(-50%)"
   },
   ({ theme, color }: { theme: Theme; color?: string }) => {
-    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white"
+    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white"
 
     return {
       right: theme.spacing / 2,
       "& svg": {
-        stroke: readableTextColor(backgroundColor)([theme.colors.white, theme.colors.black])
+        stroke: readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
       }
     }
   }

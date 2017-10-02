@@ -3,7 +3,7 @@
 exports[`InfoTiles Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
   >
     InfoTiles
   </div>
@@ -17,7 +17,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
       class="css-farlai"
     >
       <small
-        class="css-rweu9i"
+        class="css-11y8e93"
       >
         Components
       </small>
@@ -29,7 +29,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
       class="css-farlai"
     >
       <small
-        class="css-rweu9i"
+        class="css-11y8e93"
       >
         Reusability
       </small>
@@ -41,7 +41,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
       class="css-farlai"
     >
       <small
-        class="css-rweu9i"
+        class="css-11y8e93"
       >
         Potential Added Value
       </small>

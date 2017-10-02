@@ -5,7 +5,7 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.grey90;
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey90;
     return {
         position: "relative",
         zIndex: theme.baseZIndex + 1,
@@ -17,7 +17,7 @@ var style = function (_a) {
         backgroundColor: backgroundColor,
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         "& + &": {
-            borderTop: "1px solid " + theme.colors.grey90
+            borderTop: "1px solid " + theme.colors.palette.grey90
         },
         ":hover": {
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(10)

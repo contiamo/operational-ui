@@ -1,6 +1,6 @@
-const THEME_COLORS: ThemeColors = {
+const palette: Palette = {
   info: "#1499CE",
-  success: "#689F2C",
+  success: "#00b34d",
   warning: "#FFAE00",
   error: "#DE1A1A",
   white: "#FFFFFF",
@@ -13,53 +13,76 @@ const THEME_COLORS: ThemeColors = {
   grey60: "#999999",
   grey70: "#8092B0",
   grey80: "#747474",
-  grey90: "#445873"
+  grey90: "#445873",
+}
+
+const usageColors: UsageColors = {
+  bodyText: "#555f61",
+  lightText: "#969696",
+  emphasizedText: "#373d3f",
+  contentBorder: "#dadada",
+  bodyBackground: palette.grey20,
+  cardBackground: palette.white,
+  contentSeparatorLine: "#f2f2f2",
+  subContentSeparatorLine: "#f8f8f8",
+}
+
+const colors: ThemeColors = {
+  palette,
+  usage: usageColors
 }
 
 const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
   lineHeight: "1.5",
   textTransform: "none",
-  letterSpacing: "normal"
+  letterSpacing: "normal",
 }
 
-const DEFAULT_TYPOGRAPHY: ThemeTypography = {
+const typography: ThemeTypography = {
   title: {
     ...baseTypography,
     fontSize: 22,
     fontWeight: 600,
-    opacity: 1
   },
   heading1: {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 700,
-    opacity: 1
+    color: usageColors.emphasizedText,
   },
   heading2: {
     ...baseTypography,
     fontSize: 13,
-    fontWeight: 700,
-    opacity: 0.6
+    fontWeight: 600,
+    textTransform: "uppercase",
+    color: usageColors.lightText,
+    "&::before": {
+      content: "» ",
+    },
   },
   body: {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 400,
-    opacity: 1
   },
   small: {
     ...baseTypography,
     fontSize: 12,
     fontWeight: 400,
-    opacity: 1
-  }
+  },
 }
 
-const DEFAULT_THEME: Theme = {
-  colors: THEME_COLORS,
-  typography: DEFAULT_TYPOGRAPHY,
+const shadows = {
+  pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
+  card: "0px 1px 2px #d3d1d1",
+}
+
+const defaultTheme: Theme = {
+  typography,
+  shadows,
+  colors,
   spacing: 12,
-  baseZIndex: 0
+  baseZIndex: 0,
 }
 
-export default DEFAULT_THEME
+export default defaultTheme

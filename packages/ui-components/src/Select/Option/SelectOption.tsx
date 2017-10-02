@@ -15,7 +15,7 @@ type Props = {
 }
 
 const style = ({ theme, color }: Props) => {
-  const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
+  const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
   return {
     padding: theme.spacing / 2,

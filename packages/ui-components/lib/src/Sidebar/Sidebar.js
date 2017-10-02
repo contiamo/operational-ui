@@ -12,13 +12,12 @@ var style = function (_a) {
         width: "100%",
         maxWidth: 280,
         maxHeight: "100%",
-        borderRadius: 2,
-        boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
+        boxShadow: theme.shadows.card,
         overflow: "auto",
         scrollBehavior: "smooth",
         fontWeight: 300,
-        backgroundColor: theme.colors.white,
-        color: theme.colors.grey80
+        backgroundColor: theme.colors.usage.cardBackground,
+        color: theme.colors.palette.grey80,
     });
 };
 var Sidebar = function (_a) {

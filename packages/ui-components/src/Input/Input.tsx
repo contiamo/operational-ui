@@ -17,9 +17,9 @@ type StyleProps = {
 const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   padding: theme.spacing / 2,
   border: "1px solid",
-  borderColor: theme.colors.grey30,
+  borderColor: theme.colors.palette.grey30,
   font: "inherit",
-  WebkitAppearance: "none"
+  WebkitAppearance: "none",
 }))
 
 const Input: React.SFC<Props> = ({ className, name, placeholder, value, onChange }) => {

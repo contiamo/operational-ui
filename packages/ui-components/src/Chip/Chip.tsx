@@ -13,7 +13,7 @@ type Props = {
 }
 
 const style: {} = ({ theme, color, onClick }: Props) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.info
+  const backgroundColor = hexOrColor(color)(theme.colors.palette[color])
   const actionStyles = onClick
     ? {
         "& .action": {

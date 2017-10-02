@@ -3,7 +3,7 @@
 exports[`Timeline Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
   >
     Timeline
   </div>
@@ -49,7 +49,7 @@ exports[`Timeline Page Should render correctly 1`] = `
     style="margin-bottom:32px;"
   />
   <div
-    class="css-1g2bats"
+    class="css-imab3e CardHeader"
     id="timeline-item"
   >
     TimelineItem

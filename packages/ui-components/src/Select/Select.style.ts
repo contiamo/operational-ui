@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default ({ theme, color, disabled }: Props): {} => {
-  const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
+  const backgroundColor = color && theme.colors.palette ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
   return {
     backgroundColor,
@@ -19,7 +19,7 @@ export default ({ theme, color, disabled }: Props): {} => {
     width: "fit-content",
     minHeight: 20,
     border: "1px solid",
-    borderColor: theme.colors.grey30,
+    borderColor: theme.colors.palette.grey30,
     opacity: disabled ? 0.5 : 1,
     cursor: "pointer",
     color: readableTextColor(backgroundColor)(["black", "white"]),
@@ -35,8 +35,8 @@ export default ({ theme, color, disabled }: Props): {} => {
       width: 0,
       height: 0,
       border: "4px solid transparent",
-      borderTopColor: theme.colors.grey70,
-      transform: "translateY(calc(-50% + 2px))"
+      borderTopColor: theme.colors.palette.grey70,
+      transform: "translateY(calc(-50% + 2px))",
     },
 
     // spinner when loading.
@@ -46,8 +46,8 @@ export default ({ theme, color, disabled }: Props): {} => {
       height: 16,
       border: 0,
       borderRadius: "50%",
-      boxShadow: `1px 0px 0px 0px ${theme.colors.grey70} inset`,
-      animation: `.7s ${spin} linear infinite`
+      boxShadow: `1px 0px 0px 0px ${theme.colors.palette.grey70} inset`,
+      animation: `.7s ${spin} linear infinite`,
     },
 
     "& .Select__options": {
@@ -60,11 +60,11 @@ export default ({ theme, color, disabled }: Props): {} => {
       opacity: 0,
       transform: "translateY(-10px)",
       animation: `${fadeIn} .15s forwards ease,
-        ${resetTransform} .15s forwards ease`
+        ${resetTransform} .15s forwards ease`,
     },
 
     "& .Select__options_list": {
-      maxHeight: "50vh"
-    }
+      maxHeight: "50vh",
+    },
   }
 }

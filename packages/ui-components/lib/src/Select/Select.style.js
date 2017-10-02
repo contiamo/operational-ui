@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 exports.default = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled;
-    var backgroundColor = color && theme.colors ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors[color]) : "white";
+    var backgroundColor = color && theme.colors.palette ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
     return {
         backgroundColor: backgroundColor,
         position: "relative",
@@ -14,7 +14,7 @@ exports.default = function (_a) {
         width: "fit-content",
         minHeight: 20,
         border: "1px solid",
-        borderColor: theme.colors.grey30,
+        borderColor: theme.colors.palette.grey30,
         opacity: disabled ? 0.5 : 1,
         cursor: "pointer",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
@@ -29,8 +29,8 @@ exports.default = function (_a) {
             width: 0,
             height: 0,
             border: "4px solid transparent",
-            borderTopColor: theme.colors.grey70,
-            transform: "translateY(calc(-50% + 2px))"
+            borderTopColor: theme.colors.palette.grey70,
+            transform: "translateY(calc(-50% + 2px))",
         },
         // spinner when loading.
         "&.Select_updating::after": {
@@ -39,8 +39,8 @@ exports.default = function (_a) {
             height: 16,
             border: 0,
             borderRadius: "50%",
-            boxShadow: "1px 0px 0px 0px " + theme.colors.grey70 + " inset",
-            animation: ".7s " + contiamo_ui_utils_1.spin + " linear infinite"
+            boxShadow: "1px 0px 0px 0px " + theme.colors.palette.grey70 + " inset",
+            animation: ".7s " + contiamo_ui_utils_1.spin + " linear infinite",
         },
         "& .Select__options": {
             position: "absolute",
@@ -51,11 +51,11 @@ exports.default = function (_a) {
             boxShadow: "0 2px 7px 2px rgba(0, 0, 0, .14)",
             opacity: 0,
             transform: "translateY(-10px)",
-            animation: contiamo_ui_utils_1.fadeIn + " .15s forwards ease,\n        " + contiamo_ui_utils_1.resetTransform + " .15s forwards ease"
+            animation: contiamo_ui_utils_1.fadeIn + " .15s forwards ease,\n        " + contiamo_ui_utils_1.resetTransform + " .15s forwards ease",
         },
         "& .Select__options_list": {
-            maxHeight: "50vh"
-        }
+            maxHeight: "50vh",
+        },
     };
 };
 //# sourceMappingURL=Select.style.js.map

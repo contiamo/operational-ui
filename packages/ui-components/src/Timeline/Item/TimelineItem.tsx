@@ -20,7 +20,7 @@ const Line = glamorous.div(
     height: "100%"
   },
   ({ theme }: { theme: Theme }) => ({
-    borderLeft: `2px solid ${theme.colors.grey30}`
+    borderLeft: `2px solid ${theme.colors.palette.grey30}`
   })
 )
 
@@ -38,7 +38,7 @@ const StatusContainer = glamorous.div(
     }
   },
   ({ theme, color, children }: { theme: Theme; color: CustomColor; children: any }) => ({
-    backgroundColor: `${theme.colors.white}`,
+    backgroundColor: `${theme.colors.palette.white}`,
     borderColor: `${color}`,
     color: `${color}`,
     ...children
@@ -90,7 +90,7 @@ const TimelineItem: React.SFC<Props> = ({ children, color = "info", icon = "", t
   const IconLib = ReactFeather as any
   const isValidIcon = IconLib.hasOwnProperty(icon)
   const Icon = IconLib[icon]
-  color = hexOrColor(color)(theme.colors[color] || theme.colors.info)
+  color = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
 
   return (
     <Container>
