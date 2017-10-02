@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -16,7 +15,7 @@ const style: {} = ({ theme }: Props) => ({
   backgroundColor: "rgba(0, 0, 0, 0.2)"
 })
 
-const HeaderSeparator: SFC<Props> = ({ className }: Props) => <div className={className} />
+const HeaderSeparator: React.SFC<Props> = ({ className }: Props) => <div className={className} />
 
 export default glamorous(HeaderSeparator)(style)
 export { HeaderSeparator }

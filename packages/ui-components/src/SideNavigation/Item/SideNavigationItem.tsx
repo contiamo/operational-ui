@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -29,16 +28,16 @@ const Container = glamorous.div(({ theme, active }: Props): {} => {
     whiteSpace: "pre",
 
     ":hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.07)",
+      backgroundColor: "rgba(255, 255, 255, 0.07)"
     },
 
     ":first-child": {
-      marginTop: 0,
-    },
+      marginTop: 0
+    }
   }
 })
 
-const SideNavigationItem: SFC<Props> = ({ className, css, children, onClick, active }: Props) => (
+const SideNavigationItem: React.SFC<Props> = ({ className, css, children, onClick, active }: Props) => (
   <Container css={css} className={`${className}`} active={!!active} onClick={onClick} role="button" tabIndex={-1}>
     {children}
   </Container>

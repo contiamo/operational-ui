@@ -5,7 +5,5 @@ import { SideNavigationHeader } from "../SideNavigationHeader"
 
 describe("SideNavigationHeader", () => {
   it("Should render correctly", () =>
-    expect(
-      shallow(<SideNavigationHeader>hi</SideNavigationHeader>)
-    ).toMatchSnapshot())
+    expect(shallow(<SideNavigationHeader>hi</SideNavigationHeader>)).toMatchSnapshot())
 })

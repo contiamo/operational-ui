@@ -1,5 +1,4 @@
 import * as React from "react"
-import { ReactElement } from "react"
 import { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 

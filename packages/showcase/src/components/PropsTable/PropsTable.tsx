@@ -12,7 +12,7 @@ interface PropsSet {
 type Props = {
   css?: {}
   className?: string
-  props?: Array<PropsSet>
+  props?: [PropsSet]
 }
 
 const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({

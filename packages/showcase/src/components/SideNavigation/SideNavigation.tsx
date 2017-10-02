@@ -1,7 +1,6 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { Div, Img } from "glamorous"
 import { Link } from "react-router-dom"
-import { Div, Img } from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 
 import { SideNavigation, SideNavigationHeader, SideNavigationItem } from "contiamo-ui-components"

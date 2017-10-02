@@ -19,7 +19,7 @@ var style = function (_a) {
 };
 var CardHeader = function (_a) {
     var className = _a.className, children = _a.children, id = _a.id;
-    return (React.createElement("div", { id: id, className: className + " CardHeader" }, children));
+    return (React.createElement("div", { id: id, className: className }, children));
 };
 exports.default = glamorous_1.default(CardHeader)(style);
 //# sourceMappingURL=CardHeader.js.map

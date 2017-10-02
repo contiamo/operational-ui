@@ -7,8 +7,8 @@ var style = function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = color && theme.colors ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
     return {
-        padding: theme.spacing / 2,
         backgroundColor: backgroundColor,
+        padding: theme.spacing / 2,
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         outline: "none",
         ":hover": {

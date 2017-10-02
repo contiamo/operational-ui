@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous, { Div, GlamorousComponent } from "glamorous"
 
@@ -22,14 +21,14 @@ type State = {
 
 class SidebarItem extends React.Component<Props, State> {
   static defaultProps = {
-    open: false,
+    open: false
   }
 
   constructor(props: Props) {
     super(props)
     this.state = {
       open: this.props && this.props.open,
-      updating: false,
+      updating: false
     }
   }
 
@@ -44,7 +43,7 @@ class SidebarItem extends React.Component<Props, State> {
     }
     this.setState(prevState => ({
       open: !prevState.open,
-      updating: false,
+      updating: false
     }))
     return true
   }
@@ -58,21 +57,12 @@ class SidebarItem extends React.Component<Props, State> {
     const HeaderWithTooltip = Div
     return (
       <div
-        className={`${this.props.className} ${this.state.updating
-          ? "updating"
-          : ""} ${this.state.open ? "open" : ""}`}
+        className={`${this.props.className} ${this.state.updating ? "updating" : ""} ${this.state.open ? "open" : ""}`}
       >
-        <div
-          className={`header ${this.state.open ? "open" : ""}`}
-          onClick={() => this.toggle()}
-        >
+        <div className={`header ${this.state.open ? "open" : ""}`} onClick={() => this.toggle()}>
           {this.props.label}
         </div>
-        {this.state.open
-          ? <div className="content">
-              {this.props.children}
-            </div>
-          : ""}
+        {this.state.open ? <div className="content">{this.props.children}</div> : ""}
       </div>
     )
   }

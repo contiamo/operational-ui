@@ -11,9 +11,9 @@
     "build": "webpack -p",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "tslint ./index.tsx --fix && tslint ./src/**/*.{ts,tsx} --fix",
-    "prettier": "prettier ./index.tsx --write && prettier ./src/**/*.{ts,tsx} --write",
-    "precommit": "npm run test && npm run lint && npm run prettier",
+    "lint": "tslint './index.tsx' --fix && tslint './src/**/*.{ts,tsx}' --fix",
+    "prettier": "prettier './index.tsx' --write && prettier './src/**/*.{ts,tsx}' --write",
+    "precommit": "npm run test && npm run lint && npm run prettier && git add .",
     "preversion": "npm run precommit",
     "version": "npm run build --production && git add -A dist"
   },

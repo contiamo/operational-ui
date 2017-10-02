@@ -14,7 +14,7 @@ exports.default = function (_a) {
     // If we have children, style a caret.
     var caret = children
         ? {
-            content: '""',
+            content: "\"\"",
             display: "block",
             width: 0,
             height: 0,

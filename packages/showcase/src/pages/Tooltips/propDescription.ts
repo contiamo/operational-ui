@@ -2,7 +2,7 @@ export default [
   {
     name: "color",
     description: "A hex value or a named color from your theme.",
-    defaultValue: 'The greys["100"] in your theme.',
+    defaultValue: "The greys[\"100\"] in your theme.",
     type: "string",
     optional: true
   },

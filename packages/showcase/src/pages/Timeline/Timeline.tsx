@@ -13,8 +13,8 @@ export default () => (
     <CardHeader>Timeline</CardHeader>
 
     <p>
-      Display information vertically on a timeline from top to bottom.
-      This is composed of multiple <a href="#timeline-item">TimelineItem</a>s.
+      Display information vertically on a timeline from top to bottom. This is composed of multiple{" "}
+      <a href="#timeline-item">TimelineItem</a>s.
     </p>
     <h4>Usage</h4>
     <Playground snippet={String(TimelineSnippet)} components={{ Timeline, TimelineItem }} />

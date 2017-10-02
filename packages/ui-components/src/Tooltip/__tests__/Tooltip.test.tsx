@@ -7,7 +7,7 @@ import theme from "../../theme"
 describe("Tooltip Component", () => {
   it("Should intialize without problems", () => {
     const output = shallow(<Tooltip className="test">Hello</Tooltip>)
-    expect(output.state().style).toEqual({position:'absolute'})
+    expect(output.state().style).toEqual({ position: "absolute" })
     expect(output).toMatchSnapshot()
   })
   xit("Should have a position on mount", () => {

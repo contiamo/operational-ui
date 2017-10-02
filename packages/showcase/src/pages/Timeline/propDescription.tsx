@@ -7,7 +7,7 @@ export default {
       name: "color",
       description: "It can be a named theme color or a hex value.",
       defaultValue: "info",
-      type: 'string',
+      type: "string",
       optional: true
     },
     {

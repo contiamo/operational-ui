@@ -12,7 +12,7 @@ type option = {
 type Props = {
   className?: string
   children: React.ReactNode
-  options?: Array<option>
+  options?: option[]
   onChange?: () => void
   theme?: Theme
 }
@@ -98,7 +98,7 @@ const style: {} = ({ theme, options }: Props) => {
 
     // Caret
     "&::after": {
-      content: options && options.length ? '""' : "none",
+      content: options && options.length ? "\"\"" : "none",
       position: "absolute",
       top: "50%",
       right: theme.spacing,
