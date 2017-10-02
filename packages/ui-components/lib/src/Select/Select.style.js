@@ -30,7 +30,7 @@ exports.default = function (_a) {
             height: 0,
             border: "4px solid transparent",
             borderTopColor: theme.colors.palette.grey70,
-            transform: "translateY(calc(-50% + 2px))",
+            transform: "translateY(calc(-50% + 2px))"
         },
         // spinner when loading.
         "&.Select_updating::after": {
@@ -40,7 +40,7 @@ exports.default = function (_a) {
             border: 0,
             borderRadius: "50%",
             boxShadow: "1px 0px 0px 0px " + theme.colors.palette.grey70 + " inset",
-            animation: ".7s " + contiamo_ui_utils_1.spin + " linear infinite",
+            animation: ".7s " + contiamo_ui_utils_1.spin + " linear infinite"
         },
         "& .Select__options": {
             position: "absolute",
@@ -51,11 +51,11 @@ exports.default = function (_a) {
             boxShadow: "0 2px 7px 2px rgba(0, 0, 0, .14)",
             opacity: 0,
             transform: "translateY(-10px)",
-            animation: contiamo_ui_utils_1.fadeIn + " .15s forwards ease,\n        " + contiamo_ui_utils_1.resetTransform + " .15s forwards ease",
+            animation: contiamo_ui_utils_1.fadeIn + " .15s forwards ease,\n        " + contiamo_ui_utils_1.resetTransform + " .15s forwards ease"
         },
         "& .Select__options_list": {
-            maxHeight: "50vh",
-        },
+            maxHeight: "50vh"
+        }
     };
 };
 //# sourceMappingURL=Select.style.js.map

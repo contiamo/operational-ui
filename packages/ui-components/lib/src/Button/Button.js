@@ -32,12 +32,12 @@ var Container = glamorous_1.default.div(function (_a) {
         outline: "none",
         ":hover": {
             backgroundColor: activeBackgroundColor,
-            color: contiamo_ui_utils_1.readableTextColor(activeBackgroundColor)(["white", "#222"]),
+            color: contiamo_ui_utils_1.readableTextColor(activeBackgroundColor)(["white", "#222"])
         },
         ":active": {
-            boxShadow: activeBoxShadow,
+            boxShadow: activeBoxShadow
         },
-        marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0",
+        marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0"
     };
 });
 var Button = function (props) { return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, props)); };

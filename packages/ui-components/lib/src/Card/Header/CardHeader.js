@@ -13,8 +13,8 @@ var style = function (_a) {
         lineHeight: 1,
         color: theme.colors.usage.emphasizedText,
         "* + &": {
-            marginTop: theme.spacing,
-        },
+            marginTop: theme.spacing
+        }
     });
 };
 var CardHeader = function (_a) {

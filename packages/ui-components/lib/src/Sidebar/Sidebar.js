@@ -17,7 +17,7 @@ var style = function (_a) {
         scrollBehavior: "smooth",
         fontWeight: 300,
         backgroundColor: theme.colors.usage.cardBackground,
-        color: theme.colors.palette.grey80,
+        color: theme.colors.palette.grey80
     });
 };
 var Sidebar = function (_a) {

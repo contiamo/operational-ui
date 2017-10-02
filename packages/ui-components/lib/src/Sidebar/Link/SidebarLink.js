@@ -18,19 +18,19 @@ var style = function (_a) {
     return __assign({ backgroundColor: backgroundColor }, theme.typography.body, { position: "relative", display: "flex", padding: theme.spacing / 1.5 + "px " + theme.spacing + "px", transition: "background-color .1s ease", cursor: "pointer", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor }, disabledStyle, { "&:link, &:visited": {
-            color: textColor,
+            color: textColor
         }, "&.SideNavigationLink + .SideNavigationLink": {
             borderTop: "1px solid",
-            borderColor: theme.colors.usage.subContentSeparatorLine,
+            borderColor: theme.colors.usage.subContentSeparatorLine
         }, ":hover": {
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(2),
             // The text color needs to change too if it gets too dark 😁
             // Also, here's a prime benefit of functional JS: function composition!
-            color: contiamo_ui_utils_1.readableTextColor(contiamo_ui_utils_1.darken(backgroundColor)(5))(["black", "white"]),
+            color: contiamo_ui_utils_1.readableTextColor(contiamo_ui_utils_1.darken(backgroundColor)(5))(["black", "white"])
         }, 
         // Symbol goes on the right.
         "& > .symbol": {
-            marginLeft: "auto",
+            marginLeft: "auto"
         } });
 };
 exports.style = style;
