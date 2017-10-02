@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -51,7 +50,7 @@ const style: {} = ({ theme, active }: Props) => {
   }
 }
 
-const HeaderItem: SFC<Props> = ({ className, children, onClick }) => (
+const HeaderItem: React.SFC<Props> = ({ className, children, onClick }) => (
   <div tabIndex={-1} role="button" onClick={onClick} className={className}>
     {children}
   </div>

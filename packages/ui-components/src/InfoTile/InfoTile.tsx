@@ -21,7 +21,9 @@ const Container = glamorous.div(
     }
   },
   ({ theme, color, withIcon }: { color?: string; theme: Theme; withIcon: boolean }): any => {
-    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white"
+    const backgroundColor = color
+      ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
+      : "white"
 
     return {
       backgroundColor,
@@ -57,7 +59,9 @@ const IconContainer = glamorous.div(
     transform: "translateY(-50%)"
   },
   ({ theme, color }: { theme: Theme; color?: string }) => {
-    const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white"
+    const backgroundColor = color
+      ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
+      : "white"
 
     return {
       right: theme.spacing / 2,

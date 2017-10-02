@@ -6,11 +6,11 @@ export default (
   <div>
     {/* Uncomment the attributes to see them in action */}
     <Select
-      //filterable
+      // filterable
       multiple
-      //disabled
-      //onClick={() => window.alert('Hi!')}
-      //onFilter={() => console.log('Filtering!')}
+      // disabled
+      // onClick={() => window.alert('Hi!')}
+      // onFilter={() => console.log('Filtering!')}
       placeholder="Choose an option!"
       options={[
         { id: 1, label: "Option 1", value: "one" },

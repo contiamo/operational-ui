@@ -3,7 +3,7 @@
 exports[`Sidebar Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-imab3e CardHeader"
+    class="css-imab3e"
   >
     Sidebar
   </div>
@@ -62,7 +62,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
     style="margin-bottom:32px;"
   />
   <div
-    class="css-imab3e CardHeader"
+    class="css-imab3e"
     id="sidebar-item"
   >
     SidebarItem
@@ -160,7 +160,7 @@ exports[`Sidebar Page Should render correctly 1`] = `
     </strong>
   </p>
   <div
-    class="css-imab3e CardHeader"
+    class="css-imab3e"
     id="sidebar-link"
   >
     SidebarLink

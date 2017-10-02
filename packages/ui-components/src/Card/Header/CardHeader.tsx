@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -20,12 +19,12 @@ const style: {} = ({ theme }: Props) => ({
   color: theme.colors.usage.emphasizedText,
 
   "* + &": {
-    marginTop: theme.spacing,
-  },
+    marginTop: theme.spacing
+  }
 })
 
-const CardHeader: SFC<Props> = ({ className, children, id }: Props) => (
-  <div id={id} className={`${className} CardHeader`}>
+const CardHeader: React.SFC<Props> = ({ className, children, id }: Props) => (
+  <div id={id} className={className}>
     {children}
   </div>
 )

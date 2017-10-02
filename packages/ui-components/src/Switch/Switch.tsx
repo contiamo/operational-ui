@@ -20,7 +20,7 @@ const Container = glamorous.div({
   width,
   height,
   position: "relative",
-  cursor: "pointer",
+  cursor: "pointer"
 })
 
 const Button = glamorous.div(
@@ -32,13 +32,13 @@ const Button = glamorous.div(
     left: 1,
     content: " ",
     width: height,
-    borderRadius: "50%",
+    borderRadius: "50%"
   },
   ({ on, theme }: StyleProps) => ({
     transform: `translate3d(${on ? width - height - 2 : 0}px, 0, 0)`,
     backgroundColor: theme.colors.palette.white,
     border: `1px solid ${theme.colors.palette.grey70}`,
-    zIndex: theme.baseZIndex + 2,
+    zIndex: theme.baseZIndex + 2
   })
 )
 
@@ -51,7 +51,7 @@ const Rail = glamorous.div(
     top: (height - railHeight) / 2,
     left: railOffset,
     borderRadius: railHeight / 2,
-    overflow: "hidden",
+    overflow: "hidden"
   },
   ({ on, theme }: StyleProps) => ({
     backgroundColor: theme.colors.palette.grey60,
@@ -65,8 +65,8 @@ const Rail = glamorous.div(
       backgroundColor: theme.colors.palette.success,
       transition: "transform .3s",
       transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
-      zIndex: theme.baseZIndex + 1,
-    },
+      zIndex: theme.baseZIndex + 1
+    }
   })
 )
 

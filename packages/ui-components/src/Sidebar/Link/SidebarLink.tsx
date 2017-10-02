@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import { Link } from "react-router-dom"
 
 import glamorous, { Div } from "glamorous"
@@ -25,6 +24,8 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
     disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
+    backgroundColor,
+    ...theme.typography.body,
     position: "relative",
     display: "flex",
     padding: `${theme.spacing / 1.5}px ${theme.spacing}px`,
@@ -32,17 +33,16 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
     cursor: "pointer",
     // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: "none",
-    color: active ? theme.colors.palette.primary : textColor,
-    backgroundColor,
+    color: textColor,
     ...disabledStyle,
 
     "&:link, &:visited": {
-      color: textColor,
+      color: textColor
     },
 
     "&.SideNavigationLink + .SideNavigationLink": {
       borderTop: "1px solid",
-      borderColor: theme.colors.usage.subContentSeparatorLine,
+      borderColor: theme.colors.usage.subContentSeparatorLine
     },
 
     ":hover": {
@@ -50,16 +50,16 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
 
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
-      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"]),
+      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
     },
     // Symbol goes on the right.
     "& > .symbol": {
-      marginLeft: "auto",
-    },
+      marginLeft: "auto"
+    }
   }
 }
 
-const SidebarLink: SFC<Props> = ({ className, children, to, onClick, symbol }: Props) => {
+const SidebarLink: React.SFC<Props> = ({ className, children, to, onClick, symbol }: Props) => {
   // if this is expected to work with react-router,
   if (to) {
     return (

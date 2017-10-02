@@ -7,11 +7,11 @@ export default (() => {
       page: 1
     }
 
-    handleChange (page: number): void {
+    handleChange(page: number): void {
       this.setState(() => ({ page }))
     }
 
-    render () {
+    render() {
       return (
         <Paginator
           pageCount={10}

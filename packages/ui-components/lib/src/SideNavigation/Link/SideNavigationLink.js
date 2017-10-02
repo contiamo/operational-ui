@@ -7,6 +7,7 @@ var style = function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey90;
     return {
+        backgroundColor: backgroundColor,
         position: "relative",
         zIndex: theme.baseZIndex + 1,
         margin: "0 " + theme.spacing * -0.5 + "px",
@@ -14,7 +15,6 @@ var style = function (_a) {
         minWidth: 200,
         borderRadius: 2,
         transition: ".1s background-color ease",
-        backgroundColor: backgroundColor,
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         "& + &": {
             borderTop: "1px solid " + theme.colors.palette.grey90

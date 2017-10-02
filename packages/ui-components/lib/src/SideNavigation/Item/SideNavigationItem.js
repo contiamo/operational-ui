@@ -19,11 +19,11 @@ var Container = glamorous_1.default.div(function (_a) {
         minWidth: "100%",
         whiteSpace: "pre",
         ":hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.07)",
+            backgroundColor: "rgba(255, 255, 255, 0.07)"
         },
         ":first-child": {
-            marginTop: 0,
-        },
+            marginTop: 0
+        }
     };
 });
 var SideNavigationItem = function (_a) {

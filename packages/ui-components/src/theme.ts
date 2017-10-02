@@ -13,7 +13,7 @@ const palette: Palette = {
   grey60: "#999999",
   grey70: "#8092B0",
   grey80: "#747474",
-  grey90: "#445873",
+  grey90: "#445873"
 }
 
 const usageColors: UsageColors = {
@@ -24,7 +24,7 @@ const usageColors: UsageColors = {
   bodyBackground: palette.grey20,
   cardBackground: palette.white,
   contentSeparatorLine: "#f2f2f2",
-  subContentSeparatorLine: "#f8f8f8",
+  subContentSeparatorLine: "#f8f8f8"
 }
 
 const colors: ThemeColors = {
@@ -35,20 +35,20 @@ const colors: ThemeColors = {
 const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
   lineHeight: "1.5",
   textTransform: "none",
-  letterSpacing: "normal",
+  letterSpacing: "normal"
 }
 
 const typography: ThemeTypography = {
   title: {
     ...baseTypography,
     fontSize: 22,
-    fontWeight: 600,
+    fontWeight: 600
   },
   heading1: {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 700,
-    color: usageColors.emphasizedText,
+    color: usageColors.emphasizedText
   },
   heading2: {
     ...baseTypography,
@@ -57,24 +57,24 @@ const typography: ThemeTypography = {
     textTransform: "uppercase",
     color: usageColors.lightText,
     "&::before": {
-      content: "» ",
-    },
+      content: "» "
+    }
   },
   body: {
     ...baseTypography,
     fontSize: 13,
-    fontWeight: 400,
+    fontWeight: 400
   },
   small: {
     ...baseTypography,
     fontSize: 12,
-    fontWeight: 400,
-  },
+    fontWeight: 400
+  }
 }
 
 const shadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-  card: "0px 1px 2px #d3d1d1",
+  card: "0px 1px 2px #d3d1d1"
 }
 
 const defaultTheme: Theme = {
@@ -82,7 +82,7 @@ const defaultTheme: Theme = {
   shadows,
   colors,
   spacing: 12,
-  baseZIndex: 0,
+  baseZIndex: 0
 }
 
 export default defaultTheme

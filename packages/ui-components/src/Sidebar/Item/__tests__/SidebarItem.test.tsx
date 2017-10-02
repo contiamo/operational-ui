@@ -9,7 +9,7 @@ describe("SidebarItem", () => {
     expect(renderedComponent).toMatchSnapshot()
     expect(renderedComponent.state().updating).toBe(false)
   })
-  it("Should handle asynchronous requests before expanding", async() => {
+  it("Should handle asynchronous requests before expanding", async () => {
     const myPromise = () => new Promise(resolve => setTimeout(() => resolve(true), 1)),
       renderedComponent = shallow(<SidebarItem onClick={() => myPromise()}>Hola, compadre!</SidebarItem>)
 

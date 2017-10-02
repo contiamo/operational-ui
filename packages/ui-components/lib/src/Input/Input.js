@@ -9,7 +9,7 @@ var StyledInput = glamorous_1.default.input(function (_a) {
         border: "1px solid",
         borderColor: theme.colors.palette.grey30,
         font: "inherit",
-        WebkitAppearance: "none",
+        WebkitAppearance: "none"
     });
 });
 var Input = function (_a) {

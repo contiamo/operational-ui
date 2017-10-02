@@ -8,7 +8,7 @@ const Timeline = wrapDefaultTheme(ThemelessTimeline)
 
 describe("Timeline", () => {
   it("Should render properly", () => {
-    const renderedComponent = render(<Timeline></Timeline>)
+    const renderedComponent = render(<Timeline />)
     expect(renderedComponent).toMatchSnapshot()
   })
 })

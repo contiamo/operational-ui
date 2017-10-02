@@ -5,7 +5,7 @@ const removeLeadingNewLine = (s: string): string => (s[0] === "\n" ? s.slice(1) 
 // Processes a tsx file-string to include only the exported snippet into Component Playground.
 const toReactPlayground = (snippet: string): string => {
   if (snippet.indexOf(trimAfter) > -1) {
-    let frontTrimmedSnippet = removeLeadingNewLine(snippet.slice(snippet.indexOf(trimAfter) + trimAfter.length))
+    const frontTrimmedSnippet = removeLeadingNewLine(snippet.slice(snippet.indexOf(trimAfter) + trimAfter.length))
 
     if (frontTrimmedSnippet.indexOf(")()")) {
       // If it's an IIFE-style snippet

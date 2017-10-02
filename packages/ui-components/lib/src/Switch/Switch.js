@@ -10,7 +10,7 @@ var Container = glamorous_1.default.div({
     width: width,
     height: height,
     position: "relative",
-    cursor: "pointer",
+    cursor: "pointer"
 });
 var Button = glamorous_1.default.div({
     height: height,
@@ -20,14 +20,14 @@ var Button = glamorous_1.default.div({
     left: 1,
     content: " ",
     width: height,
-    borderRadius: "50%",
+    borderRadius: "50%"
 }, function (_a) {
     var on = _a.on, theme = _a.theme;
     return ({
         transform: "translate3d(" + (on ? width - height - 2 : 0) + "px, 0, 0)",
         backgroundColor: theme.colors.palette.white,
         border: "1px solid " + theme.colors.palette.grey70,
-        zIndex: theme.baseZIndex + 2,
+        zIndex: theme.baseZIndex + 2
     });
 });
 var Rail = glamorous_1.default.div({
@@ -38,7 +38,7 @@ var Rail = glamorous_1.default.div({
     top: (height - railHeight) / 2,
     left: railOffset,
     borderRadius: railHeight / 2,
-    overflow: "hidden",
+    overflow: "hidden"
 }, function (_a) {
     var on = _a.on, theme = _a.theme;
     return ({
@@ -53,8 +53,8 @@ var Rail = glamorous_1.default.div({
             backgroundColor: theme.colors.palette.success,
             transition: "transform .3s",
             transform: "translate3d(" + (on ? "0" : "-100%") + ", 0, 0)",
-            zIndex: theme.baseZIndex + 1,
-        },
+            zIndex: theme.baseZIndex + 1
+        }
     });
 });
 var Switch = function (_a) {

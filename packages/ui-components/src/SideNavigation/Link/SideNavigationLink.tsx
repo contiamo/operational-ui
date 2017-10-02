@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 
 import glamorous from "glamorous"
 
@@ -16,6 +15,7 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey90
 
   return {
+    backgroundColor,
     position: "relative",
     zIndex: theme.baseZIndex + 1,
     margin: `0 ${theme.spacing * -0.5}px`,
@@ -23,7 +23,6 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
     minWidth: 200,
     borderRadius: 2,
     transition: ".1s background-color ease",
-    backgroundColor,
     color: readableTextColor(backgroundColor)(["black", "white"]),
 
     "& + &": {
@@ -44,7 +43,7 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
   }
 }
 
-const SideNavigationLink: SFC<Props> = ({ className, children, onClick }: Props) => (
+const SideNavigationLink: React.SFC<Props> = ({ className, children, onClick }: Props) => (
   <div className={className} onClick={onClick} role="button" tabIndex={-1}>
     {children}
   </div>

@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import { hexOrColor, darken } from "contiamo-ui-utils"
@@ -30,7 +29,7 @@ const style: {} = ({ theme, color }: Props) => {
   }
 }
 
-const SelectFilter: SFC<Props> = ({ className, placeholder, onChange }: Props) => (
+const SelectFilter: React.SFC<Props> = ({ className, placeholder, onChange }: Props) => (
   <div className={className}>
     <input
       onClick={e => e.stopPropagation()}

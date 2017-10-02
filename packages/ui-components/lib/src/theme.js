@@ -23,7 +23,7 @@ var palette = {
     grey60: "#999999",
     grey70: "#8092B0",
     grey80: "#747474",
-    grey90: "#445873",
+    grey90: "#445873"
 };
 var usageColors = {
     bodyText: "#555f61",
@@ -33,7 +33,7 @@ var usageColors = {
     bodyBackground: palette.grey20,
     cardBackground: palette.white,
     contentSeparatorLine: "#f2f2f2",
-    subContentSeparatorLine: "#f8f8f8",
+    subContentSeparatorLine: "#f8f8f8"
 };
 var colors = {
     palette: palette,
@@ -42,27 +42,27 @@ var colors = {
 var baseTypography = {
     lineHeight: "1.5",
     textTransform: "none",
-    letterSpacing: "normal",
+    letterSpacing: "normal"
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 22, fontWeight: 600 }),
     heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: usageColors.emphasizedText }),
     heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: usageColors.lightText, "&::before": {
-            content: "» ",
+            content: "» "
         } }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
-    small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 }),
+    small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 })
 };
 var shadows = {
     pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-    card: "0px 1px 2px #d3d1d1",
+    card: "0px 1px 2px #d3d1d1"
 };
 var defaultTheme = {
     typography: typography,
     shadows: shadows,
     colors: colors,
     spacing: 12,
-    baseZIndex: 0,
+    baseZIndex: 0
 };
 exports.default = defaultTheme;
 //# sourceMappingURL=theme.js.map

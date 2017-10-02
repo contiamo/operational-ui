@@ -3,7 +3,7 @@
 exports[`Cards Page Should render correctly 1`] = `
 <div>
   <div
-    class="css-imab3e CardHeader"
+    class="css-imab3e"
   >
     Chips
   </div>
@@ -14,12 +14,12 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex;"
   >
     <div
-      class="css-c6pmm2 chip"
+      class="css-1kcm2xa chip"
     >
       Chip 1
     </div>
     <div
-      class="css-c6pmm2 chip"
+      class="css-1kcm2xa chip"
     >
       Chip 2
     </div>
@@ -132,7 +132,7 @@ exports[`Cards Page Should render correctly 1`] = `
     style="margin-bottom:32px;"
   />
   <div
-    class="css-imab3e CardHeader"
+    class="css-imab3e"
   >
     PlusChip
   </div>

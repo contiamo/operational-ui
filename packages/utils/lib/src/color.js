@@ -14,7 +14,7 @@ var hexOrColor = function (color) {
       */
     var hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     var isColorACodeOrHex = hexRegEx.test(color);
-    return function (fallback) { return isColorACodeOrHex ? color : fallback; };
+    return function (fallback) { return (isColorACodeOrHex ? color : fallback); };
 };
 exports.hexOrColor = hexOrColor;
 var readableTextColor = function (background) { return function (workingColors) {
@@ -29,7 +29,9 @@ var readableTextColor = function (background) { return function (workingColors) 
 }; };
 exports.readableTextColor = readableTextColor;
 var darken = function (color) { return function (percentage) {
-    return colorCalculator(color).darken(percentage).toString();
+    return colorCalculator(color)
+        .darken(percentage)
+        .toString();
 }; };
 exports.darken = darken;
 //# sourceMappingURL=color.js.map

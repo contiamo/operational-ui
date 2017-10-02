@@ -13,14 +13,14 @@ var style = function (_a) {
         backgroundColor: theme.colors.usage.cardBackground,
         color: theme.colors.usage.bodyText,
         "& p": {
-            lineHeight: "20px",
+            lineHeight: "20px"
         },
         "& > img": {
-            maxWidth: "100%",
+            maxWidth: "100%"
         },
         "& .CardHeader:not(:first-child)": {
-            borderBottomStyle: "dashed",
-        },
+            borderBottomStyle: "dashed"
+        }
     });
 };
 var Card = function (_a) {

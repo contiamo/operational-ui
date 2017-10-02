@@ -54,7 +54,7 @@ var SidebarItem = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             open: _this.props && _this.props.open,
-            updating: false,
+            updating: false
         };
         return _this;
     }
@@ -75,7 +75,7 @@ var SidebarItem = /** @class */ (function (_super) {
                     case 2:
                         this.setState(function (prevState) { return ({
                             open: !prevState.open,
-                            updating: false,
+                            updating: false
                         }); });
                         return [2 /*return*/, true];
                 }
@@ -90,16 +90,12 @@ var SidebarItem = /** @class */ (function (_super) {
           own tooltips.
         */
         var HeaderWithTooltip = glamorous_1.Div;
-        return (React.createElement("div", { className: this.props.className + " " + (this.state.updating
-                ? "updating"
-                : "") + " " + (this.state.open ? "open" : "") },
+        return (React.createElement("div", { className: this.props.className + " " + (this.state.updating ? "updating" : "") + " " + (this.state.open ? "open" : "") },
             React.createElement("div", { className: "header " + (this.state.open ? "open" : ""), onClick: function () { return _this.toggle(); } }, this.props.label),
-            this.state.open
-                ? React.createElement("div", { className: "content" }, this.props.children)
-                : ""));
+            this.state.open ? React.createElement("div", { className: "content" }, this.props.children) : ""));
     };
     SidebarItem.defaultProps = {
-        open: false,
+        open: false
     };
     return SidebarItem;
 }(React.Component));

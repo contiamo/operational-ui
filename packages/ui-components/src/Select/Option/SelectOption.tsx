@@ -1,5 +1,4 @@
 import * as React from "react"
-import { SFC } from "react"
 import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
@@ -18,8 +17,8 @@ const style = ({ theme, color }: Props) => {
   const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
   return {
-    padding: theme.spacing / 2,
     backgroundColor,
+    padding: theme.spacing / 2,
     color: readableTextColor(backgroundColor)(["black", "white"]),
     outline: "none",
 
@@ -39,7 +38,7 @@ const style = ({ theme, color }: Props) => {
   }
 }
 
-const SelectOption: SFC<Props> = ({ className, selected, onClick, children }: Props) => (
+const SelectOption: React.SFC<Props> = ({ className, selected, onClick, children }: Props) => (
   <div
     className={`${className} Select__option${selected ? " Select__option_selected" : ""}`}
     tabIndex={-2}

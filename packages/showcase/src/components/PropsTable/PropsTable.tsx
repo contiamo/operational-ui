@@ -12,7 +12,7 @@ interface PropsSet {
 type Props = {
   css?: {}
   className?: string
-  props?: Array<PropsSet>
+  props?: PropsSet[]
 }
 
 const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
@@ -21,17 +21,17 @@ const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
   textAlign: "left",
   backgroundColor: "white",
   "& th": {
-    border: `1px solid ${theme.colors.palette.grey10}`,
+    border: `1px solid ${theme.colors.palette.grey10}`
   },
   "& td": {
-    border: `1px solid ${theme.colors.palette.grey20}`,
+    border: `1px solid ${theme.colors.palette.grey20}`
   },
   "& td, & th": {
-    padding: theme.spacing / 2,
+    padding: theme.spacing / 2
   },
   "& tr:nth-child(even)": {
-    backgroundColor: theme.colors.palette.grey10,
-  },
+    backgroundColor: theme.colors.palette.grey10
+  }
 }))
 
 const PropsTable = ({ className, props }: Props) => (

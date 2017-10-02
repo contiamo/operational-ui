@@ -19,7 +19,9 @@ var Container = glamorous_1.default.div({
     }
 }, function (_a) {
     var theme = _a.theme, color = _a.color, withIcon = _a.withIcon;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
+    var backgroundColor = color
+        ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
+        : "white";
     return {
         backgroundColor: backgroundColor,
         position: "relative",
@@ -46,7 +48,9 @@ var IconContainer = glamorous_1.default.div({
     transform: "translateY(-50%)"
 }, function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
+    var backgroundColor = color
+        ? contiamo_ui_utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
+        : "white";
     return {
         right: theme.spacing / 2,
         "& svg": {

@@ -13,13 +13,13 @@ var style = function (_a) {
         lineHeight: 1,
         color: theme.colors.usage.emphasizedText,
         "* + &": {
-            marginTop: theme.spacing,
-        },
+            marginTop: theme.spacing
+        }
     });
 };
 var CardHeader = function (_a) {
     var className = _a.className, children = _a.children, id = _a.id;
-    return (React.createElement("div", { id: id, className: className + " CardHeader" }, children));
+    return (React.createElement("div", { id: id, className: className }, children));
 };
 exports.default = glamorous_1.default(CardHeader)(style);
 //# sourceMappingURL=CardHeader.js.map

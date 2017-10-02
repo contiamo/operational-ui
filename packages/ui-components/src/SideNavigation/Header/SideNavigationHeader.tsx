@@ -12,7 +12,7 @@ type option = {
 type Props = {
   className?: string
   children: React.ReactNode
-  options?: Array<option>
+  options?: option[]
   onChange?: () => void
   theme?: Theme
 }

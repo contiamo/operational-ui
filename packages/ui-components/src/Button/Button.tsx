@@ -42,14 +42,14 @@ const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps
 
     ":hover": {
       backgroundColor: activeBackgroundColor,
-      color: readableTextColor(activeBackgroundColor)(["white", "#222"]),
+      color: readableTextColor(activeBackgroundColor)(["white", "#222"])
     },
 
     ":active": {
-      boxShadow: activeBoxShadow,
+      boxShadow: activeBoxShadow
     },
 
-    marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0",
+    marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0"
   }
 })
 

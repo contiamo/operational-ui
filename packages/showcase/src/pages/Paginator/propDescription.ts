@@ -9,21 +9,22 @@ export default [
   {
     name: "maxVisible",
     description: "Maximum amount of pages to be displayed.",
-    defaultValue: '5',
+    defaultValue: "5",
     type: "number",
     optional: true
   },
   {
     name: "selected",
     description: "Index of the current selected page",
-    defaultValue: '1',
+    defaultValue: "1",
     type: "number",
     optional: true
   },
   {
     name: "onChange",
-    description: "Function to be executed after changing page. Receives a single argument which represents the new page number",
-    defaultValue: '() => {}',
+    description:
+      "Function to be executed after changing page. Receives a single argument which represents the new page number",
+    defaultValue: "() => {}",
     type: "function",
     optional: true
   }

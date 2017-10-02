@@ -3,7 +3,7 @@
 exports[`ColorPickersPage Should render correctly 1`] = `
 <div>
   <div
-    class="css-imab3e CardHeader"
+    class="css-imab3e"
   >
     Color Picker
   </div>
