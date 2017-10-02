@@ -15,7 +15,7 @@
     "package": "lerna run package",
     "lint": "lerna run lint",
     "test": "lerna run test",
-    "precommit": "npm run lint && npm run test",
+    "precommit": "npm run test && npm run lint && npm run prettier && git add .",
     "preversion": "lerna run version && git add ."
   },
   "devDependencies": {
