@@ -2,13 +2,13 @@ import * as React from "react"
 
 import Table from "../../components/PropsTable/PropsTable"
 import Playground from "../../components/Playground/Playground"
-import { Paginator, CardHeader } from "contiamo-ui-components"
+import { Paginator, Card, CardHeader } from "contiamo-ui-components"
 
 import * as PaginatorSnippet from "./snippets/Paginator.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Paginator</CardHeader>
 
     <p>Simple component to navigate through pages</p>
@@ -18,5 +18,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </div>
+  </Card>
 )

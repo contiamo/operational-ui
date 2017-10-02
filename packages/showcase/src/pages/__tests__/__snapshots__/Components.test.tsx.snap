@@ -64,10 +64,6 @@ exports[`ComponentsPage Should render correctly 1`] = `
   </div>
   <div
     class="css-1wtbray"
-  >
-    <div
-      class="css-1dkvbfz"
-    />
-  </div>
+  />
 </div>
 `;

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "ES5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "types": ["types"]
+    },
+    "lib": ["dom", "es6", "es2016", "dom.iterable", "scripthost"]
+  },
+  "include": ["./index.tsx", "./types/**/*"],
+  "exclude": ["./node_modules"]
+}

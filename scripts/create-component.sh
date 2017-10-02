@@ -85,7 +85,7 @@ import * as simpleSnippet from "./snippets/$1s.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>$1s</CardHeader>
 
     <p>
@@ -97,7 +97,7 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </div>
+  </Card>
 )
 EOL
 

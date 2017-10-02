@@ -2,14 +2,14 @@ import * as React from "react"
 import { Link } from "react-router-dom"
 
 import Playground from "../../components/Playground/Playground"
-import { CardHeader, Timeline, TimelineItem } from "contiamo-ui-components"
+import { Card, CardHeader, Timeline, TimelineItem } from "contiamo-ui-components"
 
 import Table from "../../components/PropsTable/PropsTable"
 import * as TimelineSnippet from "./snippets/Timeline.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Timeline</CardHeader>
 
     <p>
@@ -25,5 +25,5 @@ export default () => (
     <h4>Represents an individual node in the timeline.</h4>
 
     <Table props={propDescription.TimelineItem} />
-  </div>
+  </Card>
 )

@@ -3,13 +3,13 @@ import * as React from "react"
 import Playground from "../../components/Playground/Playground"
 
 import Table from "../../components/PropsTable/PropsTable"
-import { Icon, CardHeader } from "contiamo-ui-components"
+import { Icon, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/Icons.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Icons</CardHeader>
 
     <p>
@@ -22,5 +22,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </div>
+  </Card>
 )

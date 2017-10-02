@@ -2,13 +2,13 @@ import * as React from "react"
 
 import Table from "../../components/PropsTable/PropsTable"
 import Playground from "../../components/Playground/Playground"
-import { Button, CardHeader } from "contiamo-ui-components"
+import { Button, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/Buttons.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Buttons</CardHeader>
 
     <p>
@@ -21,5 +21,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </div>
+  </Card>
 )

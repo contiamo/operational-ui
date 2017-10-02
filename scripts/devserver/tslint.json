@@ -1,0 +1,11 @@
+{
+  "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+  "rules": {
+    "one-variable-per-declaration": false,
+    "semicolon": false,
+    "quotemark": "double",
+    "variable-name": ["allow-pascal-case"],
+    "indent": false,
+    "import-name": false
+  }
+}

@@ -2,7 +2,7 @@ import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
 import { Div } from "glamorous"
 
-import AppCanvas from "../components/Canvas/Canvas"
+import Canvas from "../components/Canvas/Canvas"
 import Sidebar from "../components/Sidebar/Sidebar"
 
 import Buttons from "./Buttons/Buttons"
@@ -35,7 +35,7 @@ export default () => (
     }}
   >
     <SidebarWithRouter css={{ height: "100%" }} />
-    <AppCanvas>
+    <Canvas>
       <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={Buttons} />
       <Route path="/components/form-fields" component={FormFields} />
@@ -53,6 +53,6 @@ export default () => (
       <Route path="/components/progress" component={Progress} />
       <Route path="/components/timeline" component={Timeline} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
-    </AppCanvas>
+    </Canvas>
   </Div>
 )

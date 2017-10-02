@@ -2,13 +2,13 @@ import * as React from "react"
 
 import Table from "../../components/PropsTable/PropsTable"
 import Playground from "../../components/Playground/Playground"
-import { Progress, CardHeader } from "contiamo-ui-components"
+import { Progress, Card, CardHeader } from "contiamo-ui-components"
 
 import * as basicSnippet from "./snippets/Progress.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Progress</CardHeader>
 
     <p>Animating progress bar, covering an entire area. Add as a child to any non-statically positioned element.</p>
@@ -18,5 +18,5 @@ export default () => (
 
     <h4>Props</h4>
     <Table props={propDescription} />
-  </div>
+  </Card>
 )
