@@ -13,33 +13,34 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   maxHeight: "100%",
 
   "& > *": {
-    maxWidth: 670,
+    width: "100%",
+    maxWidth: 800
   },
 
   "& a:link, & a:visited": {
-    color: theme.colors.palette.info,
+    color: theme.colors.palette.info
   },
 
   "& a:hover": {
-    color: theme.colors.palette.success,
+    color: theme.colors.palette.success
   },
 
   "& .playground": {
     display: "flex",
     width: "80vw",
     maxWidth: 850,
-    maxHeight: 320,
+    maxHeight: 320
   },
 
   "& .playgroundCode, & .playgroundPreview": {
-    flex: "1 1 50%",
+    flex: "1 1 50%"
   },
   "& .playgroundPreview": {
-    marginLeft: 16,
+    marginLeft: 16
   },
   "& .CodeMirror-wrap.CodeMirror": {
-    minHeight: 320,
-  },
+    minHeight: 320
+  }
 }))
 
 const Canvas = ({ children }: Props) => (

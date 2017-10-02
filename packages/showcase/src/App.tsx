@@ -19,7 +19,7 @@ const Container = glamorous.div({
   flexDirection: "column",
   width: "100vw",
   height: "100vh",
-  marginLeft: 60,
+  marginLeft: 60
 })
 
 const styles: {} = {
@@ -30,26 +30,26 @@ const styles: {} = {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
     height: 1,
     border: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.14)",
+    backgroundColor: "rgba(0, 0, 0, 0.14)"
   },
   "& h1": {
     margin: 0,
-    fontSize: "2rem",
+    fontSize: "2rem"
   },
   "& h2": {
-    fontSize: "1.3rem",
+    fontSize: "1.3rem"
   },
   "& p": {
     margin: 0,
-    marginBottom: contiamoTheme.spacing,
+    marginBottom: contiamoTheme.spacing
   },
   "& .CodeMirror-code": {
-    fontFamily: "monospace",
+    fontFamily: "monospace"
   },
   "& .CodeMirror-code pre": {
     fontSize: 13,
-    lineHeight: 1.3,
-  },
+    lineHeight: 1.3
+  }
 }
 
 const SideNavigationWithRouter = withRouter(SideNavigation)
@@ -75,12 +75,12 @@ appFontWeights.forEach((fontWeight: number) => {
   x.fontFace({
     ...appFontFace,
     ...getFontSrcString(fontWeight)()(),
-    fontWeight,
+    fontWeight
   })
 })
 x.global("body", { backgroundColor: contiamoTheme.colors.usage.bodyBackground })
 x.global({
-  fontSize: 13,
+  fontSize: 13
 })
 
 export default glamorous(App)(styles)

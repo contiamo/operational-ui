@@ -12,15 +12,15 @@ const ColorBox = glamorous.div(
     display: "inline-block",
     "& > div": {
       width: 40,
-      height: 40,
-    },
+      height: 40
+    }
   },
   ({ theme }: { theme: Theme }) => ({
     margin: `0 ${theme.spacing}px ${theme.spacing}px 0`,
     "& > p": {
       ...theme.typography.small,
-      margin: 0,
-    },
+      margin: 0
+    }
   })
 )
 
