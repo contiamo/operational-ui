@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 
 import { wrapTheme } from "contiamo-ui-utils"
 import { contiamoTheme } from "contiamo-ui-components"
-import ThemelessComponentsPage from "../Components"
+import ThemelessComponentsPage from "../components/Components"
 
 const ComponentsPage = wrapTheme(contiamoTheme)(ThemelessComponentsPage)
 

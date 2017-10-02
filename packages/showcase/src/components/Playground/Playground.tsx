@@ -34,12 +34,12 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
     minHeight: 320
   },
   "& .CodeMirror-code": {
-    fontFamily: "monospace",
+    fontFamily: "monospace"
   },
   "& .CodeMirror-code pre": {
     fontSize: 13,
-    lineHeight: 1.3,
-  },
+    lineHeight: 1.3
+  }
 }))
 
 const Playground: React.SFC<Props> = ({ snippet, components, scope }) => {
