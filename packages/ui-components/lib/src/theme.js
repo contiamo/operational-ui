@@ -8,34 +8,36 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var themeColors = {
-    palette: {
-        info: "#1499CE",
-        success: "#00b34d",
-        warning: "#FFAE00",
-        error: "#DE1A1A",
-        white: "#FFFFFF",
-        black: "#000000",
-        grey10: "#F5F5F5",
-        grey20: "#F1F1F1",
-        grey30: "#D0D9E5",
-        grey40: "#C6D1E1",
-        grey50: "#BBCADC",
-        grey60: "#999999",
-        grey70: "#8092B0",
-        grey80: "#747474",
-        grey90: "#445873",
-    },
+var palette = {
+    info: "#1499CE",
+    success: "#00b34d",
+    warning: "#FFAE00",
+    error: "#DE1A1A",
+    white: "#FFFFFF",
+    black: "#000000",
+    grey10: "#F5F5F5",
+    grey20: "#F1F1F1",
+    grey30: "#D0D9E5",
+    grey40: "#C6D1E1",
+    grey50: "#BBCADC",
+    grey60: "#999999",
+    grey70: "#8092B0",
+    grey80: "#747474",
+    grey90: "#445873",
 };
-themeColors.usage = {
+var usageColors = {
     bodyText: "#555f61",
     lightText: "#969696",
     emphasizedText: "#373d3f",
     contentBorder: "#dadada",
-    bodyBackground: themeColors.palette.grey20,
-    cardBackground: themeColors.palette.white,
+    bodyBackground: palette.grey20,
+    cardBackground: palette.white,
     contentSeparatorLine: "#f2f2f2",
     subContentSeparatorLine: "#f8f8f8",
+};
+var colors = {
+    palette: palette,
+    usage: usageColors
 };
 var baseTypography = {
     lineHeight: "1.5",
@@ -44,8 +46,8 @@ var baseTypography = {
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 22, fontWeight: 600 }),
-    heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: themeColors.usage.emphasizedText }),
-    heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: themeColors.usage.lightText, "&::before": {
+    heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: usageColors.emphasizedText }),
+    heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: usageColors.lightText, "&::before": {
             content: "» ",
         } }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
@@ -58,7 +60,7 @@ var shadows = {
 var defaultTheme = {
     typography: typography,
     shadows: shadows,
-    colors: themeColors,
+    colors: colors,
     spacing: 12,
     baseZIndex: 0,
 };

@@ -34,7 +34,7 @@ interface Palette {
   grey90: string
 }
 
-interface Usage {
+interface UsageColors {
   bodyText: string,
   lightText: string,
   emphasizedText: string,
@@ -47,7 +47,7 @@ interface Usage {
 
 interface ThemeColors {
   palette: Palette
-  usage?: Usage
+  usage: UsageColors
 }
 
 interface ThemeShadows {
@@ -78,5 +78,5 @@ interface Theme {
   typography: ThemeTypography
   spacing: number
   baseZIndex: number
-  shadows?: ThemeShadows
+  shadows: ThemeShadows
 }

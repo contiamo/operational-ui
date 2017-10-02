@@ -1,32 +1,35 @@
-const themeColors: ThemeColors = {
-  palette: {
-    info: "#1499CE",
-    success: "#00b34d",
-    warning: "#FFAE00",
-    error: "#DE1A1A",
-    white: "#FFFFFF",
-    black: "#000000",
-    grey10: "#F5F5F5",
-    grey20: "#F1F1F1",
-    grey30: "#D0D9E5",
-    grey40: "#C6D1E1",
-    grey50: "#BBCADC",
-    grey60: "#999999",
-    grey70: "#8092B0",
-    grey80: "#747474",
-    grey90: "#445873",
-  },
+const palette: Palette = {
+  info: "#1499CE",
+  success: "#00b34d",
+  warning: "#FFAE00",
+  error: "#DE1A1A",
+  white: "#FFFFFF",
+  black: "#000000",
+  grey10: "#F5F5F5",
+  grey20: "#F1F1F1",
+  grey30: "#D0D9E5",
+  grey40: "#C6D1E1",
+  grey50: "#BBCADC",
+  grey60: "#999999",
+  grey70: "#8092B0",
+  grey80: "#747474",
+  grey90: "#445873",
 }
 
-themeColors.usage = {
+const usageColors: UsageColors = {
   bodyText: "#555f61",
   lightText: "#969696",
   emphasizedText: "#373d3f",
   contentBorder: "#dadada",
-  bodyBackground: themeColors.palette.grey20,
-  cardBackground: themeColors.palette.white,
+  bodyBackground: palette.grey20,
+  cardBackground: palette.white,
   contentSeparatorLine: "#f2f2f2",
   subContentSeparatorLine: "#f8f8f8",
+}
+
+const colors: ThemeColors = {
+  palette,
+  usage: usageColors
 }
 
 const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
@@ -45,14 +48,14 @@ const typography: ThemeTypography = {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 700,
-    color: themeColors.usage.emphasizedText,
+    color: usageColors.emphasizedText,
   },
   heading2: {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 600,
     textTransform: "uppercase",
-    color: themeColors.usage.lightText,
+    color: usageColors.lightText,
     "&::before": {
       content: "» ",
     },
@@ -77,7 +80,7 @@ const shadows = {
 const defaultTheme: Theme = {
   typography,
   shadows,
-  colors: themeColors,
+  colors,
   spacing: 12,
   baseZIndex: 0,
 }
