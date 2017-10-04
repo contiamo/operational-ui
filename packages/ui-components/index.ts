@@ -22,6 +22,7 @@ import SideNavigation, {
   SideNavigationLink
 } from "./src/SideNavigation/SideNavigation"
 import Switch from "./src/Switch/Switch"
+import Tabs, { Tab } from "./src/Tabs/Tabs"
 import Tooltip from "./src/Tooltip/Tooltip"
 import Timeline, { TimelineItem } from "./src/Timeline/Timeline"
 import theme from "./src/theme"
@@ -52,6 +53,8 @@ export {
   SidebarItem,
   SidebarLink,
   Switch,
+  Tabs,
+  Tab,
   Timeline,
   TimelineItem,
   Tooltip,

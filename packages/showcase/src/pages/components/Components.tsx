@@ -19,6 +19,7 @@ import Typography from "./Typography/Typography"
 import Colors from "./Colors/Colors"
 import Paginator from "./Paginator/Paginator"
 import Progress from "./Progress/Progress"
+import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
 
 const SidebarWithRouter = withRouter(Sidebar)
@@ -51,6 +52,7 @@ export default () => (
       <Route path="/components/colors" component={Colors} />
       <Route path="/components/paginator" component={Paginator} />
       <Route path="/components/progress" component={Progress} />
+      <Route path="/components/tabs" component={Tabs} />
       <Route path="/components/timeline" component={Timeline} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </Canvas>
