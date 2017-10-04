@@ -1,0 +1,6 @@
+.Visualization {
+  margin-top: 40px;
+}
+path.link {
+  marker-mid: url(#arrow);
+}

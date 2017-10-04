@@ -25,9 +25,9 @@ module.exports = {
           {
             test: /.*/,
             loader: "awesome-typescript-loader",
-            exclude: /node_modules/
-          }
-        ]
+            exclude: /node_modules/,
+          },
+        ],
       },
       {
         test: /\.(png|eot|svg|ttf|woff|woff2)$/,

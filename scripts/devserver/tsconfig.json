@@ -13,6 +13,6 @@
     },
     "lib": ["dom", "es6", "es2016", "dom.iterable", "scripthost"]
   },
-  "include": ["./index.tsx", "./types/**/*"],
+  "include": ["types/**/*", "index.ts"],
   "exclude": ["./node_modules"]
 }

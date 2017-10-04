@@ -118,7 +118,7 @@ exports[`IntroPage Should render correctly 1`] = `
       </h2>
     </div>
     <a
-      href="./visualizations"
+      href="/visualizations"
     >
       <div
         class="css-1dkvbfz card"

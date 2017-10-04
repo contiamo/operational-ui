@@ -8,3 +8,4 @@ packages/*
 !packages/utils
 !packages/ui-components
 !packages/showcase
+!packages/visualizations
