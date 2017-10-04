@@ -10,9 +10,9 @@ export default (
     </div>
     <div>
       <p>
-        Custom sizes:
+        Custom sizes and colors:
         <Icon name="ChevronLeft" size={16} />
-        <Icon name="AlertCircle" size={24} />
+        <Icon name="AlertCircle" size={24} color="error" />
         <Icon name="Pause" size={18} />
       </p>
     </div>

@@ -12,5 +12,12 @@ export default [
     defaultValue: "medium",
     type: "string",
     optional: true
+  },
+  {
+    name: "color",
+    description: "Icon color, specified as a hex, or a color name (info, success, warning, error).",
+    defaultValue: "black",
+    type: "string",
+    optional: true
   }
 ]
