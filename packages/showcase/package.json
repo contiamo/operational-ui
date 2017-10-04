@@ -6,6 +6,7 @@
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot --public --host 0.0.0.0",
     "build": "webpack -p",
