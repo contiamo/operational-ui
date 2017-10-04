@@ -3,10 +3,10 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import { bind, map, forEach, find, times, extend } from "lodash/fp"
-import { TNode, TLink, TJourney, TData, TInputData, TLinkAttrs, TAccessors, TState } from "./typings"
+import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, TState } from "./typings"
 
 class DataHandler {
-  journeys: TJourney[]
+  journeys: IJourney[]
   nodes: TNode[]
   links: TLink[]
   nodeAccessors: TAccessors
@@ -17,7 +17,7 @@ class DataHandler {
     this.state = state
   }
 
-  prepareData(): TData {
+  prepareData(): IData {
     const data = this.state.current.get("data")
     this.journeys = data.journeys
     this.setNodeAccessors(this.state.current.get("accessors").node)
@@ -31,7 +31,7 @@ class DataHandler {
     }
   }
 
-  initializeNodes(data: TInputData): void {
+  initializeNodes(data: IInputData): void {
     this.nodes = map(bind(this.addNode, this))(data.nodes)
     forEach((node: TNode): void => {
       node.sourceLinks = []
@@ -57,14 +57,14 @@ class DataHandler {
   }
 
   calculateNodeSizes(): void {
-    forEach((journey: TJourney): void => {
+    forEach((journey: IJourney): void => {
       forEach((nodeId: string): void => {
         this.findNode(nodeId).attributes.size += journey.size
       })(journey.path)
     })(this.journeys)
   }
 
-  initializeLinks(data: TInputData): void {
+  initializeLinks(data: IInputData): void {
     this.computeLinks()
   }
 
@@ -81,15 +81,15 @@ class DataHandler {
     this.linkAccessors.setAccessors(accessors)
   }
 
-  addLink(attrs: TLinkAttrs): TLink {
+  addLink(attrs: ILinkAttrs): TLink {
     return new Link(attrs, this.linkAccessors.accessors)
   }
 
   computeLinks(): void {
     this.links = []
-    forEach((journey: TJourney): void => {
+    forEach((journey: IJourney): void => {
       const path: string[] = journey.path
-      const computeLink: any = (i: number): void => {
+      const computeLink: (i: number) => void = (i: number): void => {
         const sourceId: string = path[i]
         const targetId: string = path[i + 1]
         const sourceNode: TNode = this.findNode(sourceId)
@@ -99,7 +99,7 @@ class DataHandler {
         if (existingLink) {
           existingLink.attributes.size += journey.size
         } else {
-          const linkAttrs: TLinkAttrs = {
+          const linkAttrs: ILinkAttrs = {
             source: sourceNode,
             sourceId: sourceNode.id(),
             target: targetNode,

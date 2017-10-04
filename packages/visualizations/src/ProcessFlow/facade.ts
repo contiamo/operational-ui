@@ -1,12 +1,10 @@
 import AbstractFacade from "../utils/abstract_facade"
-import DataHandler from "./data_handler"
 import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
 import { uniqueId } from "lodash/fp"
 
 class ProcessFlow extends AbstractFacade {
-  dataHandler: DataHandler
   series: Series
   canvas: Canvas
 
@@ -14,6 +12,7 @@ class ProcessFlow extends AbstractFacade {
     return {
       data: {},
       config: {
+        duration: 1e3,
         width: 500,
         height: 1000,
         maxNodeSize: 1500,
@@ -24,6 +23,8 @@ class ProcessFlow extends AbstractFacade {
         visualizationName: this.visualizationName(),
         arrowFill: "#ccc",
         uid: uniqueId(this.visualizationName()),
+        showNodeFocusLabels: true,
+        showLinkFocusLabels: true,
       },
       accessors: {
         journeys: {

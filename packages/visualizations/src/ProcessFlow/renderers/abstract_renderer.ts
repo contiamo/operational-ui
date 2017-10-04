@@ -1,18 +1,28 @@
 import { map } from "lodash/fp"
 import * as d3 from "d3-selection"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
-import { TNode, TLink, TScale, TState, TEvents } from "../typings"
+import {
+  IConfig,
+  IFocus,
+  TEvents,
+  TLink,
+  TLinkSelection,
+  TNode,
+  TNodeSelection,
+  TScale,
+  TSeriesEl,
+  TState,
+} from "../typings"
 import Events from "../../utils/event_catalog"
 
 abstract class AbstractRenderer {
-  computed: any
-  config: any
+  config: IConfig
   data: TNode[] | TLink[]
   state: TState
   events: TEvents
-  el: any
+  el: TSeriesEl
 
-  constructor(state: TState, events: TEvents, el: any) {
+  constructor(state: TState, events: TEvents, el: TSeriesEl) {
     this.state = state
     this.events = events
     this.el = el
@@ -25,14 +35,14 @@ abstract class AbstractRenderer {
   }
 
   mouseOver(element: any, d: TLink | TNode): void {
-    let focusPoint: {} = this.focusPoint(element, d)
+    let focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
     element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint))
   }
 
-  abstract focusPoint(element: any, d: any): any
+  abstract focusPoint(element: any, d: TLink | TNode): IFocus
 
-  onMouseOut(ctx: AbstractRenderer, focusPoint: any): any {
+  onMouseOut(ctx: AbstractRenderer, focusPoint: IFocus): any {
     return function(d: TLink | TNode): void {
       ctx.events.emit(Events.FOCUS.ELEMENT.OUT, focusPoint)
       d3.select(this).classed("hover", false)
@@ -47,14 +57,21 @@ abstract class AbstractRenderer {
 
   abstract updateDraw(): void
 
-  abstract exit(exitEls: any): void
+  exit(els: TNodeSelection | TLinkSelection): void {
+    els
+      .exit()
+      .on("mouseenter", null)
+      .on("mouseleave", null)
+      .transition()
+      .duration(this.config.duration)
+      .style("opacity", 0)
+      .remove()
+  }
 
-  abstract enterAndUpdate(enterEls: any): void
+  abstract enterAndUpdate(enterEls: TNodeSelection | TLinkSelection): void
 
   sizeScale(range: [number, number]): TScale {
-    const sizes: number[] = map((el: TLink | TNode): number => {
-      return el.size()
-    })(this.data)
+    const sizes: number[] = map((el: TLink | TNode): number => el.size())(this.data)
     return d3ScaleLinear()
       .domain([0, Math.max(...sizes)])
       .range(range)

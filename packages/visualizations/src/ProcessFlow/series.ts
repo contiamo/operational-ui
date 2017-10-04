@@ -1,20 +1,20 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
 import { invoke } from "lodash/fp"
-import { TState, TStateWriter, TEvents } from "./typings"
+import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
 
 class Series {
   data: any
   dataHandler: any
   drawingContainer: any
   drawn: boolean
-  el: any
+  el: TSeriesEl
   events: TEvents
   renderer: Renderer
   state: TState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, el: any) {
+  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, el: TSeriesEl) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events

@@ -1,16 +1,16 @@
 import { extend } from "lodash/fp"
-import { TNode, TLinkAttrs, TAccessors } from "./typings"
+import { TNode, ILinkAttrs, TAccessors } from "./typings"
 
 class Link {
   accessors: TAccessors
-  attributes: TLinkAttrs
+  attributes: ILinkAttrs
 
-  constructor(linkAttributes: TLinkAttrs, accessors: TAccessors) {
+  constructor(linkAttributes: ILinkAttrs, accessors: TAccessors) {
     this.accessors = accessors
     this.assignProperties(linkAttributes)
   }
 
-  assignProperties(linkAttributes: TLinkAttrs) {
+  assignProperties(linkAttributes: ILinkAttrs) {
     this.attributes = extend.convert({ immutable: false })({}, linkAttributes)
   }
 

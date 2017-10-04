@@ -1,36 +1,36 @@
 import { uniqueId } from "lodash/fp"
 import AccessorsFactory from "../utils/accessors_factory"
-import { TNodeAttrs } from "./typings"
+import { INodeAttrs } from "./typings"
 
 let defaultAccessors: any = {
   // Fill color - default white.
-  color: (node: TNodeAttrs): string => {
+  color: (node: INodeAttrs): string => {
     return node.color || "#fff"
   },
 
   // attribute by which nodes should be colored
-  shape: (node: TNodeAttrs): string => {
+  shape: (node: INodeAttrs): string => {
     return node.shape || "diamond"
   },
 
-  size: (node: TNodeAttrs): number => {
+  size: (node: INodeAttrs): number => {
     return node.size || 1
   },
 
-  stroke: (node: TNodeAttrs): string => {
+  stroke: (node: INodeAttrs): string => {
     return node.stroke || "#000"
   },
 
   // Unique ID - defaults to a new unique string.
-  id: (node: TNodeAttrs): string => {
+  id: (node: INodeAttrs): string => {
     return node.id || uniqueId("node")
   },
 
-  label: (node: TNodeAttrs): string => {
+  label: (node: INodeAttrs): string => {
     return node.label || node.id || ""
   },
 
-  labelPosition: (node: TNodeAttrs): string => {
+  labelPosition: (node: INodeAttrs): string => {
     return node.labelPosition || "right"
   },
 }

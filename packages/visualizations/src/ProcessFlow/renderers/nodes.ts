@@ -2,7 +2,7 @@ import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
-import { TNode, TScale } from "../typings"
+import { TNode, TScale, IFocus, TNodeSelection } from "../typings"
 
 const MINNODESIZE: number = 100,
   nodeLabelOptions: any = {
@@ -40,35 +40,19 @@ const MINNODESIZE: number = 100,
 
 class Nodes extends AbstractRenderer {
   updateDraw(): void {
-    let nodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = this.el
+    let nodeGroups: TNodeSelection = this.el
       .selectAll("g.node-group")
-      .data(this.data, (node: TNode): string => {
-        return node.id()
-      })
+      .data(this.data, (node: TNode): string => node.id())
 
-    this.exit(nodeGroups.exit())
+    this.exit(nodeGroups)
     this.enterAndUpdate(nodeGroups.enter())
   }
 
-  exit(exitNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
-    exitNodes.selectAll("text.label").remove()
-    exitNodes
-      .selectAll("path.node")
-      .on("mouseenter", null)
-      .on("mouseleave", null)
-      .transition()
-      .duration(this.config.duration)
-      .style("opacity", 0)
-      .remove()
-  }
-
-  enterAndUpdate(enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
-    let enterNodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = enterNodes
+  enterAndUpdate(enterNodes: TNodeSelection): void {
+    let enterNodeGroups: TNodeSelection = enterNodes
       .append("g")
       .attr("class", "node-group")
-      .attr("transform", (node: TNode): string => {
-        return "translate(" + node.x + "," + node.y + ")"
-      })
+      .attr("transform", (node: TNode): string => "translate(" + node.x + "," + node.y + ")")
 
     this.updateNodes(enterNodeGroups)
   }
@@ -85,7 +69,7 @@ class Nodes extends AbstractRenderer {
     }
   }
 
-  updateNodes(enterNodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
+  updateNodes(enterNodeGroups: TNodeSelection): void {
     const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize])
     let n: number = 0
     enterNodeGroups
@@ -97,12 +81,8 @@ class Nodes extends AbstractRenderer {
           .type(this.getNodeShape)
           .size(0),
       )
-      .attr("fill", (d: TNode): string => {
-        return d.color()
-      })
-      .attr("stroke", (d: TNode): string => {
-        return d.stroke()
-      })
+      .attr("fill", (d: TNode): string => d.color())
+      .attr("stroke", (d: TNode): string => d.stroke())
       .on("mouseenter", this.onMouseOver(this))
       .merge(enterNodeGroups)
       .transition()
@@ -111,9 +91,7 @@ class Nodes extends AbstractRenderer {
         "d",
         d3Symbol()
           .type(this.getNodeShape)
-          .size((d: TNode): number => {
-            return scale(d.size())
-          }),
+          .size((d: TNode): number => scale(d.size())),
       )
       .each((): void => {
         ++n
@@ -125,7 +103,7 @@ class Nodes extends AbstractRenderer {
       })
   }
 
-  getNodeBBox(el: any): any {
+  getNodeBBox(el: any): SVGRect {
     const node: any = d3
       .select(el.parentNode)
       .select("path.node")
@@ -134,42 +112,34 @@ class Nodes extends AbstractRenderer {
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).width / 2 //+ this.config.labelOffset
+    const offset: number = this.getNodeBBox(el).width / 2 + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).height / 2 //+ this.config.labelOffset
+    const offset: number = this.getNodeBBox(el).height / 2 + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(enterNodes: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}>): void {
+  updateNodeLabels(enterNodes: TNodeSelection): void {
     const that: any = this
     enterNodes
       .append("text")
       .attr("class", "label")
       .merge(enterNodes)
-      .text((node: TNode): string => {
-        return node.label()
-      })
+      .text((node: TNode): string => node.label())
       .attr("x", function(d: TNode): number {
         return that.getNodeLabelX(d, this)
       })
       .attr("y", function(d: TNode): number {
         return that.getNodeLabelY(d, this)
       })
-      .attr("dy", (d: TNode): number => {
-        return nodeLabelOptions[d.labelPosition()].dy
-      })
-      .attr("text-anchor", (d: TNode): string => {
-        return nodeLabelOptions[d.labelPosition()].textAnchor
-      })
+      .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)
+      .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
   }
 
-  focusPoint(element: any, d: any): any {
-    if (d == null) {
-      return
-    }
+  focusPoint(element: any, d: TNode): IFocus {
+    if (d == null) return
     const nodeBBox = this.getNodeBBox(element.node())
     return {
       offset: nodeBBox.width / 2,

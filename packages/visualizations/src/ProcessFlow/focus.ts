@@ -1,28 +1,26 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import Events from "../utils/event_catalog"
-import * as d3 from "d3-selection"
-import { all, uniqueId } from "lodash/fp"
+// import Events from "../utils/event_catalog"
+import { uniqueId } from "lodash/fp"
+import { IConfig, IFocus } from "./typings"
 
-// There can only be an element focus in sankey diagrams
+// There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
   uid: string
 
-  onElementHover(ctx: any): (payload: { focusPoint: any; d: any }) => void {
-    return function(payload: { focusPoint: any; d: any }): void {
-      const focusPoint: any = payload.focusPoint,
+  onElementHover(ctx: any): (payload: { focusPoint: IFocus; d: any }) => void {
+    return function(payload: { focusPoint: IFocus; d: any }): void {
+      const focusPoint: IFocus = payload.focusPoint,
         datum: any = payload.d
 
       ctx.remove()
 
       const isNode: boolean = focusPoint.type === "node",
-        config: any = ctx.state.current.get("config")
-      // All conditions must be true to render focus label.
-      let condition: boolean = isNode ? config.showNodeFocusLabels : config.showLinkFocusLabels
+        config: IConfig = ctx.state.current.get("config")
 
-      // if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
-      //   return
-      // }
+      if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
+        return
+      }
 
       ctx.uid = uniqueId("elFocusLabel")
 
@@ -34,38 +32,15 @@ class Focus extends AbstractFocus {
         .attr("class", "title clearfix")
         .text(datum.label())
 
-      // let valueFormatter: any = ctx.state.current.config.labelFormatter
-
-      // let percentageText: string = datum.percentage
-      //   ? "(" + valueFormatter(datum.percentage) + "%" + (isNode ? "" : " of " + datum.source.label()) + ")"
-      //   : ""
-
       content
         .append("xhtml:li")
         .attr("class", "series clearfix")
-        .html(
-          '<span class="value">' +
-            // valueFormatter(datum.value) +
-            datum.size() +
-            "</span>",
-          //   '</span> \
-          // <span class="percentage">' +
-          //   percentageText +
-          //   "</span>",
-        )
+        .html('<span class="value">' + datum.size() + "</span>")
 
       // Get label dimensions (has to be actually rendered in the page to do ctx)
       let labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(ctx.el)
 
       const drawingContainer: ClientRect = ctx.state.current.get("computed").canvas.elRect
-
-      // const panelContainer: ClientRect = ctx.state.current.computed.series[focusPoint.sid].sankey
-      //   .node()
-      //   .getBoundingClientRect()
-      // const panelPaddingTop: number = parseInt(
-      //   ctx.state.current.computed.series[focusPoint.sid].sankey.style("padding-top"),
-      //   10,
-      // )
 
       let drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = {
         xMax: drawingContainer.left + config.width,
@@ -74,7 +49,6 @@ class Focus extends AbstractFocus {
         yMin: drawingContainer.top,
       }
       let offset: number = focusPoint.offset + config.labelPadding
-      // focusPoint.x -= focusPoint.offset
 
       FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
@@ -89,7 +63,7 @@ class Focus extends AbstractFocus {
   // }
   //
   // removeElementFocus(): void {
-  //   this.events.emit(Events.FOCUS.CLEAR)
+  // this.events.emit(Events.FOCUS.CLEAR)
   // }
 
   // // Remove focus (necessary when data changed or chart is resized)

@@ -7,5 +7,7 @@ interface TState {
 
 type TStateWriter = (propertyPath: string | string[], value: any) => void
 type TEvents = EventEmitter
+// @TODO replace with d3-selection typings
+type TSeriesEl = any
 
-export { TState, TStateWriter, TEvents }
+export { TState, TStateWriter, TEvents, TSeriesEl }

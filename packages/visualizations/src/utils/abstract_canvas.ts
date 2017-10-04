@@ -1,11 +1,11 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
-import { TState, TStateWriter, TEvents } from "./typings"
+import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
 
 abstract class AbstractCanvas {
   container: d3.Selection<Element, {}, null, undefined>
-  el: d3.Selection<Element, null, Window, undefined>
+  el: TSeriesEl
   events: TEvents
   focusEl: any
   protected elements: any = {}
@@ -22,7 +22,7 @@ abstract class AbstractCanvas {
     // this.listenToMouseOver()
   }
 
-  abstract createEl(): d3.Selection<Element, null, Window, undefined>
+  abstract createEl(): TSeriesEl
 
   insertContainer(context: any): void {
     this.container = d3

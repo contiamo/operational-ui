@@ -1,36 +1,23 @@
 import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
-import { TLink, TScale } from "../typings"
+import { TLink, TScale, IFocus, TLinkSelection } from "../typings"
 
 const MINLINKWIDTH: number = 2
 
 class Links extends AbstractRenderer {
   updateDraw(): void {
-    const links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}> = this.el
+    const links: TLinkSelection = this.el
       .selectAll("path.link")
-      .data(this.data, (link: TLink): string => {
-        return link.sourceId() + ";" + link.targetId()
-      })
+      .data(this.data, (link: TLink): string => link.sourceId() + ";" + link.targetId())
 
-    this.exit(links.exit())
-    this.enterAndUpdate(links)
+    this.exit(links)
+    this.enterAndUpdate(links.enter())
   }
 
-  exit(exitLinks: any): void {
-    exitLinks
-      .on("mouseenter", null)
-      .on("mouseleave", null)
-      .transition()
-      .duration(this.config.duration)
-      .style("opacity", 0)
-      .remove()
-  }
-
-  enterAndUpdate(links: d3.Selection<d3.BaseType, TLink, d3.BaseType, {}>): void {
+  enterAndUpdate(links: TLinkSelection): void {
     const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
     links
-      .enter()
       .append("path")
       .attr("class", "link")
       .attr("d", this.linkStartPath.bind(this))
@@ -38,17 +25,11 @@ class Links extends AbstractRenderer {
       .on("mouseenter", this.onMouseOver(this))
       .merge(links)
       .transition()
-      .duration(1e3)
+      .duration(this.config.duration)
       .attr("d", this.linkPath.bind(this))
-      .attr("stroke", (d: TLink): string => {
-        return d.stroke()
-      })
-      .attr("stroke-width", (d: TLink): string => {
-        return scale(d.size()) + "px"
-      })
-      .attr("stroke-dasharray", (d: TLink): number => {
-        return d.dash()
-      })
+      .attr("stroke", (d: TLink): string => d.stroke())
+      .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
+      .attr("stroke-dasharray", (d: TLink): number => d.dash())
       .attr("marker-mid", "url(#arrow)")
   }
 
@@ -68,10 +49,8 @@ class Links extends AbstractRenderer {
     return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
   }
 
-  focusPoint(element: any, d: any): any {
-    if (d == null) {
-      return
-    }
+  focusPoint(element: any, d: TLink): IFocus {
+    if (d == null) return
     const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
 
     return {
