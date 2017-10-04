@@ -1,4 +1,4 @@
-import { TState, TStateWriter } from "../utils/typings"
+import { TState, TStateWriter, TEvents } from "../utils/typings"
 // Type definitions for the Contiamo Process Flow visualization
 import Nodes from "./node"
 import Link from "./link"
@@ -77,4 +77,5 @@ export {
   TProps,
   TState,
   TStateWriter,
+  TEvents,
 }

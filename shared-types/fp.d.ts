@@ -166,6 +166,7 @@ declare namespace fp {
     all: any
     any: any
     isObject: any
+    last: any
   }
 }
 

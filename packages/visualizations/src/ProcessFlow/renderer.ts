@@ -3,7 +3,7 @@ import * as $ from "jquery"
 import Layout from "./layout"
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
-import { TNode, TState } from "./typings"
+import { TNode, TState, TEvents } from "./typings"
 
 class Renderer {
   computed: any
@@ -13,11 +13,11 @@ class Renderer {
   nodes: Nodes
   state: TState
 
-  constructor(state: TState) {
+  constructor(state: TState, events: TEvents, el: any) {
     this.state = state
     this.layout = new Layout(state)
-    this.links = new Links(state)
-    this.nodes = new Nodes(state)
+    this.links = new Links(state, events, el)
+    this.nodes = new Nodes(state, events, el)
   }
 
   draw(): void {
@@ -34,7 +34,7 @@ class Renderer {
         return node.x
       })(this.layout.nodes),
       maxX: number = Math.max(...xValues),
-      config: any = this.state.current.config,
+      config: any = this.state.current.get("config"),
       xGridSpacing: number = config.width / (maxX + 1),
       yGridSpacing: number = config.height / (rows.length + 1)
 

@@ -1,11 +1,11 @@
 import StateHandler from "./state_handler"
-import EventHandler from "./event_handler"
+import EventEmitter from "./event_bus"
 import * as $ from "jquery"
 import "../styles/styles.less"
 
 abstract class AbstractChart {
   state: StateHandler
-  events: EventHandler
+  events: any
   components: any
   context: any
   __disposed: boolean
@@ -15,16 +15,21 @@ abstract class AbstractChart {
   constructor(context: any) {
     this.context = context
     this.state = new StateHandler(this.defaultConfig())
-    this.events = new EventHandler()
-    this.initializeSeries()
+    this.events = new EventEmitter()
+    this.insertCanvas()
     this.initializeComponents()
+    this.initializeSeries()
   }
+
+  abstract visualizationName(): string
 
   abstract defaultConfig(): any
 
-  abstract initializeSeries(): void
+  abstract insertCanvas(): void
 
   initializeComponents(): void {}
+
+  abstract initializeSeries(): void
 
   data(data?: any) {
     this.dirty = true

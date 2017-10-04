@@ -1,18 +1,21 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
-import { TState, TStateWriter } from "./typings"
+import { TState, TStateWriter, TEvents } from "./typings"
 
 abstract class AbstractCanvas {
   container: d3.Selection<Element, {}, null, undefined>
   el: d3.Selection<Element, null, Window, undefined>
+  events: TEvents
+  focusEl: any
   protected elements: any = {}
   protected state: TState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, context: any) {
+  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, context: any) {
     this.state = state
     this.stateWriter = stateWriter
+    this.events = events
     this.insertContainer(context)
     this.insertEl()
     this.createInitialElements()
@@ -33,14 +36,30 @@ abstract class AbstractCanvas {
     this.container.node().appendChild(this.el.node())
   }
 
+  insertFocusLabel(): void {
+    this.focusEl = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", "focus-legend clearfix")
+      .style("visibility", "hidden")
+    this.container.node().appendChild(this.focusEl.node())
+  }
+
   createInitialElements(): void {
     return
   }
 
-  // prefixedId(id: string): string {
-  //   return this.state.uid + id
-  // }
-  //
+  elementFor(component: string): any {
+    const elMap: any = {
+      series: this.el,
+      focus: this.focusEl,
+    }
+    return elMap[component]
+  }
+
+  prefixedId(id: string): string {
+    return this.state.current.get("config").uid + id
+  }
+
   // listenToMouseOver(): void {
   //   let el: d3.Selection<Node> = this.mouseOverElement()
   //   if (el) {
@@ -114,7 +133,7 @@ abstract class AbstractCanvas {
   // }
 
   draw(): void {
-    const config = this.state.current.config
+    const config = this.state.current.get("config")
     this.container.style("width", config.width + "px").style("height", config.height + "px")
 
     this.el.style("width", config.width + "px").style("height", config.height + "px")
@@ -123,8 +142,6 @@ abstract class AbstractCanvas {
       .select("marker#arrow")
       .attr("fill", config.arrowFill)
       .attr("stroke", config.linkStroke)
-
-    this.stateWriter("el", this.el)
   }
 
   margin(side: string): number {

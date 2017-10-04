@@ -1,8 +1,11 @@
 import * as React from "react"
 import * as Viz from "contiamo-visualizations"
+// @TODO Fix this!
+// import { ProcessFlow } from "contiamo-visualizations"
 import { Card, CardHeader } from "contiamo-ui-components"
 import Wrapper from "../react_wrapper"
-const ProcessFlow = (Viz as any)["contiamo-visualizations"].ProcessFlow
+
+const ProcessFlow: any = (Viz as any)["contiamo-visualizations"].ProcessFlow
 
 const data = {
     journeys: [
@@ -47,7 +50,7 @@ const data = {
       label: (node: any) => "Node " + node.id,
       labelPosition: (node: any) => "top",
       shape: (node: any) => (node.group === "start" ? "square" : node.group === "end" ? "circle" : "diamond"),
-      size: (node: any) => (node.group === "start" ? 50 : 20),
+      // size: (node: any) => (node.group === "start" ? 50 : 20),
       stroke: (node: any) => {
         if (node.group) {
           return "none"

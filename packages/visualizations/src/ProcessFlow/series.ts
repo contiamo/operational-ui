@@ -1,7 +1,7 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
 import { invoke } from "lodash/fp"
-import { TState, TStateWriter } from "./typings"
+import { TState, TStateWriter, TEvents } from "./typings"
 
 class Series {
   data: any
@@ -9,15 +9,18 @@ class Series {
   drawingContainer: any
   drawn: boolean
   el: any
+  events: TEvents
   renderer: Renderer
   state: TState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, options: any = {}) {
+  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, el: any) {
     this.state = state
     this.stateWriter = stateWriter
+    this.events = events
+    this.el = el
     this.dataHandler = new DataHandler(state)
-    this.renderer = new Renderer(state)
+    this.renderer = new Renderer(state, events, el)
     this.drawn = false
   }
 
@@ -33,27 +36,15 @@ class Series {
   draw(): void {
     if (!this.hasData()) {
       this.renderer.close()
-    } else {
-      this.prepareDraw()
+      return
     }
-  }
 
-  prepareDraw(): void {
-    this.drawn ? this.updateDraw() : this.initialDraw()
-  }
-
-  initialDraw(): void {
-    this.el = this.state.current.computed.canvas.el
-    this.updateDraw()
+    const config = this.state.current.get("config")
+    this.el.attr("width", config.width).attr("height", config.height)
+    this.renderer.draw()
     this.drawn = true
   }
 
-  updateDraw(): void {
-    const config = this.state.current.config
-    this.el.attr("width", config.width).attr("height", config.height)
-    this.stateWriter("el", this.el)
-    this.renderer.draw()
-  }
   //
   // resize(): void {
   //   this.updateDraw()

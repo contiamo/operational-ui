@@ -39,8 +39,8 @@ const MINNODESIZE: number = 100,
   }
 
 class Nodes extends AbstractRenderer {
-  updateDraw(svg: any): void {
-    let nodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = svg
+  updateDraw(): void {
+    let nodeGroups: d3.Selection<d3.BaseType, TNode, d3.BaseType, {}> = this.el
       .selectAll("g.node-group")
       .data(this.data, (node: TNode): string => {
         return node.id()
@@ -54,6 +54,8 @@ class Nodes extends AbstractRenderer {
     exitNodes.selectAll("text.label").remove()
     exitNodes
       .selectAll("path.node")
+      .on("mouseenter", null)
+      .on("mouseleave", null)
       .transition()
       .duration(this.config.duration)
       .style("opacity", 0)
@@ -101,6 +103,7 @@ class Nodes extends AbstractRenderer {
       .attr("stroke", (d: TNode): string => {
         return d.stroke()
       })
+      .on("mouseenter", this.onMouseOver(this))
       .merge(enterNodeGroups)
       .transition()
       .duration(this.config.duration)
@@ -131,12 +134,12 @@ class Nodes extends AbstractRenderer {
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).width / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBBox(el).width / 2 // + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).height / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBBox(el).height / 2 // + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
@@ -161,6 +164,20 @@ class Nodes extends AbstractRenderer {
       .attr("text-anchor", (d: TNode): string => {
         return nodeLabelOptions[d.labelPosition()].textAnchor
       })
+  }
+
+  focusPoint(element: any, d: any): any {
+    if (d == null) {
+      return
+    }
+    const nodeBBox = this.getNodeBBox(element.node())
+    return {
+      offset: nodeBBox.width / 2,
+      type: "node",
+      x: d.x,
+      y: d.y,
+      id: d.id(),
+    }
   }
 }
 

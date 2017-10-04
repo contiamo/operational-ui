@@ -15,13 +15,12 @@
   }
   .series-legend,
   .comparison-legend {
-    // .clearfix();
     padding: 1px 3px 0 3px;
     line-height: 14px;
     .color {
       width: 6px;
       height: 6px;
-      // border: 1px solid transparent;
+      border: 1px solid transparent;
       margin: 2px 3px 0 0;
       float: left;
     }
@@ -38,7 +37,6 @@
   }
   .legend-top,
   .legend-bottom {
-    // .clearfix();
     padding: 0 7px;
     margin: 3px 0;
     .series-legend,
@@ -57,7 +55,6 @@
     }
   }
   .legend-right {
-    // .clearfix();
     font-size: 12px;
     .color-bar {
       opacity: 0.8;
@@ -84,10 +81,10 @@
     margin-bottom: 2px;
   }
   .focus-legend {
-    // .user-select(none);
+    user-select: none;
     pointer-events: none;
-    // .box-shadow(0px 1px 2px @boxShadow);
-    // .border-radius(2px);
+    box-shadow: 0px 1px 2px @boxShadow;
+    border-radius: 2px;
     padding: 7px;
     border: 1px solid #cdcdcd;
     position: absolute;
@@ -111,9 +108,6 @@
       .percentage {
         color: #999;
       }
-      li {
-        // .clearfix();
-      }
       .stacked-total {
         margin-top: 7px;
         color: @gray;
@@ -123,7 +117,7 @@
         width: 6px;
         height: 6px;
         margin: 5px 4px 5px 1px;
-        // border: 1px solid transparent;
+        border: 1px solid transparent;
       }
       .series-name {
         float: left;

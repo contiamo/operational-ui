@@ -26,7 +26,7 @@ const defaultChartStateObj: ChartStateObj = {
   data: [],
   config: {},
   accessors: {},
-  computed: {}
+  computed: {},
 }
 
 class StateHandler {
@@ -44,7 +44,7 @@ class StateHandler {
   readOnly(): IChartStateReadOnly<ChartStateObj> {
     return {
       current: this.state.current.readOnly(),
-      previous: this.state.previous.readOnly()
+      previous: this.state.previous.readOnly(),
     }
   }
 
@@ -73,7 +73,7 @@ class StateHandler {
   // Computed
   computedWriter(namespace: TPath) {
     return (path: TPath, value: any) => {
-      this.state.current.set([].concat(namespace).concat(path), value)
+      this.state.current.set(["computed"].concat(namespace).concat(path), value)
     }
   }
 }
