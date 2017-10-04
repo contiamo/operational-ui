@@ -12,5 +12,19 @@ export default [
     defaultValue: "",
     type: "func",
     optional: true
+  },
+  {
+    name: "active",
+    description: "Active state.",
+    defaultValue: "",
+    type: "boolean",
+    optional: true
+  },
+  {
+    name: "active",
+    description: "Condensed option",
+    defaultValue: "",
+    type: "boolean",
+    optional: true
   }
 ]

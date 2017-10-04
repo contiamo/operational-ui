@@ -9,8 +9,8 @@ type Modifier = "space"
 type StyleProps = {
   theme?: Theme
   color?: string
-  colorOverride?: string
   active?: boolean
+  condensed?: boolean
   modifiers?: Modifier[]
 }
 
@@ -20,7 +20,7 @@ type Props = StyleProps & {
   children?: any
 }
 
-const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps): any => {
+const Container = glamorous.div(({ theme, color, active, modifiers, condensed }: StyleProps): any => {
   const backgroundColor: string = color ? hexOrColor(color)(theme.colors.palette[color] || "white") as string : "white"
   const activeBackgroundColor: string = darken(backgroundColor)(5)
   const textColor = readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"])
@@ -30,7 +30,7 @@ const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps
 
   return {
     display: "inline-block",
-    padding: `${spacing * 2 / 3}px ${spacing}px`,
+    padding: condensed ? `${spacing / 3}px ${spacing * 1 / 2}px` : `${spacing * 2 / 3}px ${spacing}px`,
     border: "1px solid rgba(0, 0, 0, .2)",
     borderRadius: 2,
     cursor: "pointer",
