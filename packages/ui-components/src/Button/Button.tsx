@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-type Modifier = "group" | "space"
+type Modifier = "space"
 
 type StyleProps = {
   theme?: Theme
@@ -25,7 +25,6 @@ const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps
   const activeBackgroundColor: string = darken(backgroundColor)(5)
   const textColor = readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"])
   const activeBoxShadow = theme.shadows.pressed
-  const isGroup = modifiers && modifiers.indexOf("group") > -1
   const isSpace = modifiers && modifiers.indexOf("space") > -1
   const spacing = theme.spacing
 
@@ -54,7 +53,7 @@ const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps
       boxShadow: activeBoxShadow
     },
 
-    marginLeft: isGroup ? -1 : isSpace ? spacing / 2 : "0"
+    marginLeft: isSpace ? spacing / 2 : "0"
   }
 })
 

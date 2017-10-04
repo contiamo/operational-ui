@@ -5,17 +5,17 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        "& > *": {
-            margin: 0,
-            borderRadius: 0
+        "& > div": {
+            margin: 0
         },
-        "& > *:first-child": {
-            borderTopLeftRadius: 2,
-            borderBottomLeftRadius: 2
+        "& > div:not(:first-child)": {
+            borderLeft: 0,
+            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: 0
         },
-        "& > *:last-child": {
-            borderTopRightRadius: 2,
-            borderBottomRightRadius: 2
+        "& > div:not(:last-child)": {
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 0
         }
     });
 });

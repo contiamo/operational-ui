@@ -9,17 +9,17 @@ interface Props {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
-  "& > *": {
-    margin: 0,
-    borderRadius: 0
+  "& > div": {
+    margin: 0
   },
-  "& > *:first-child": {
-    borderTopLeftRadius: 2,
-    borderBottomLeftRadius: 2
+  "& > div:not(:first-child)": {
+    borderLeft: 0,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0
   },
-  "& > *:last-child": {
-    borderTopRightRadius: 2,
-    borderBottomRightRadius: 2
+  "& > div:not(:last-child)": {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0
   }
 }))
 
