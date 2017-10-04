@@ -40,6 +40,11 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
       color: textColor
     },
 
+    ":focus": {
+      outline: 0,
+      backgroundColor: darken(backgroundColor)(10)
+    },
+
     "&.SideNavigationLink + .SideNavigationLink": {
       borderTop: "1px solid",
       borderColor: theme.colors.usage.subContentSeparatorLine

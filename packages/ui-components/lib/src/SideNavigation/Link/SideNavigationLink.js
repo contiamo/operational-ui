@@ -22,6 +22,10 @@ var style = function (_a) {
         ":hover": {
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(10)
         },
+        ":focus": {
+            outline: 0,
+            backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(15)
+        },
         ":first-child": {
             marginTop: theme.spacing * -0.5 + "px"
         },

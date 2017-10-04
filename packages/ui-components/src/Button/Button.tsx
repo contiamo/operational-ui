@@ -45,6 +45,11 @@ const Container = glamorous.div(({ theme, color, active, modifiers }: StyleProps
       color: readableTextColor(activeBackgroundColor)(["white", "#222"])
     },
 
+    ":focus": {
+      outline: 0,
+      backgroundColor: activeBackgroundColor
+    },
+
     ":active": {
       boxShadow: activeBoxShadow
     },
