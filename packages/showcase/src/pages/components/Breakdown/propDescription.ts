@@ -7,18 +7,18 @@ export default [
     optional: false
   },
   {
-    name: "count",
-    description: "A statistic number within the bar of the breakdown",
+    name: "label",
+    description: "A statistic number label within the bar of the breakdown",
     defaultValue: "-",
-    type: "number",
+    type: "string",
     optional: false
   },
   {
-    name: "percentage",
+    name: "fill",
     description:
       "The percentage to fill the bar. This is typically passed in from a container component that calculates percentages at large.",
     defaultValue: "-",
-    type: "string",
+    type: "number",
     optional: false
   },
   {

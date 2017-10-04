@@ -3,13 +3,13 @@ import { Breakdown } from "contiamo-ui-components"
 
 export default (
   <div>
-    <Breakdown number={1} count={50} percentage="20%">
+    <Breakdown number={1} label="50 (20%)" fill={0.2}>
       Stat 1
     </Breakdown>
-    <Breakdown number={2} count={200} percentage="40%">
+    <Breakdown number={2} label="20 (40%)" fill={0.4}>
       Stat 2
     </Breakdown>
-    <Breakdown number={3} count={400} percentage="80%">
+    <Breakdown number={3} label="40 (80%)" fill={0.8}>
       Stat 3
     </Breakdown>
   </div>

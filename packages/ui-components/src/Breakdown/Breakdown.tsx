@@ -5,8 +5,8 @@ import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 interface IProps {
   children: React.ReactChild
   number?: number
-  count: number
-  percentage: string
+  label: string
+  fill: number
   color?: string
   icon?: ReactFeatherIconName
   onMouseEnter?: () => void
@@ -58,7 +58,7 @@ const Bar = glamorous.div(
       pointerEvents: "none"
     }
   },
-  ({ theme, percentage, color }: { theme?: Theme; percentage: string; color?: string }) => {
+  ({ theme, fill, color }: { theme?: Theme; fill: number; color?: string }) => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors.palette.info) : theme.colors.palette.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
@@ -68,7 +68,7 @@ const Bar = glamorous.div(
       },
       ":before": {
         backgroundColor,
-        width: percentage.match(/%/) ? percentage : `${percentage}%`
+        width: `${fill * 100}%`
       }
     }
   }
@@ -87,15 +87,13 @@ const Number = glamorous.div(
   })
 )
 
-export default ({ children, count, percentage, number, onMouseEnter, onMouseLeave }: IProps) => (
+export default ({ children, label, fill, number, onMouseEnter, onMouseLeave }: IProps) => (
   <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
     <Number>{number}</Number>
     <div style={{ width: "100%" }}>
       <Label>{children}</Label>
-      <Bar percentage={percentage}>
-        <div style={{}}>
-          {count} ({percentage})
-        </div>
+      <Bar fill={fill}>
+        <div>{label}</div>
       </Bar>
     </div>
   </Container>

@@ -18,11 +18,9 @@ exports[`Breakdown Component Should initialize properly 1`] = `
       hi
     </label>
     <div
-      class="css-1wo530a"
+      class="css-19pbxuo"
     >
-      <div>
-        20 (50%)
-      </div>
+      <div />
     </div>
   </div>
 </div>

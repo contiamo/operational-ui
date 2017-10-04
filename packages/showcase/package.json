@@ -84,7 +84,12 @@
     "webpack-merge": "^4.1.0"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
     },
@@ -93,8 +98,14 @@
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
-    "snapshotSerializers": ["../../node_modules/jest-serializer-enzyme"],
-    "unmockedModulePathPatterns": ["react", "enzyme", "jest-enzyme"],
+    "snapshotSerializers": [
+      "../../node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ],
     "mapCoverage": true
   }
 }

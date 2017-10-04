@@ -44,7 +44,7 @@ var Bar = glamorous_1.default.div({
         pointerEvents: "none"
     }
 }, function (_a) {
-    var theme = _a.theme, percentage = _a.percentage, color = _a.color;
+    var theme = _a.theme, fill = _a.fill, color = _a.color;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette.info) : theme.colors.palette.info;
     return {
         padding: theme.spacing / 4 + "px " + theme.spacing / 2 + "px",
@@ -54,7 +54,7 @@ var Bar = glamorous_1.default.div({
         },
         ":before": {
             backgroundColor: backgroundColor,
-            width: percentage.match(/%/) ? percentage : percentage + "%"
+            width: fill * 100 + "%"
         }
     };
 });
@@ -71,16 +71,12 @@ var Number = glamorous_1.default.div({
     });
 });
 exports.default = function (_a) {
-    var children = _a.children, count = _a.count, percentage = _a.percentage, number = _a.number, onMouseEnter = _a.onMouseEnter, onMouseLeave = _a.onMouseLeave;
+    var children = _a.children, label = _a.label, fill = _a.fill, number = _a.number, onMouseEnter = _a.onMouseEnter, onMouseLeave = _a.onMouseLeave;
     return (React.createElement(Container, { onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave },
         React.createElement(Number, null, number),
         React.createElement("div", { style: { width: "100%" } },
             React.createElement(Label, null, children),
-            React.createElement(Bar, { percentage: percentage },
-                React.createElement("div", { style: {} },
-                    count,
-                    " (",
-                    percentage,
-                    ")")))));
+            React.createElement(Bar, { fill: fill },
+                React.createElement("div", null, label)))));
 };
 //# sourceMappingURL=Breakdown.js.map
