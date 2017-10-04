@@ -16,7 +16,8 @@ var Control = glamorous_1.default.li({
 }, function (_a) {
     var _b = _a.disabled, disabled = _b === void 0 ? false : _b, theme = _a.theme;
     return ({
-        cursor: disabled ? "not-allowed" : "pointer"
+        cursor: disabled ? "not-allowed" : "pointer",
+        color: disabled ? theme.colors.palette.grey50 : "default"
     });
 });
 var PaginatorControl = function (_a) {
@@ -64,12 +65,12 @@ var PageLink = glamorous_1.default.li({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer",
     userSelect: "none"
 }, function (_a) {
-    var _b = _a.active, active = _b === void 0 ? false : _b, theme = _a.theme;
+    var _b = _a.active, active = _b === void 0 ? false : _b, theme = _a.theme, _c = _a.hidePointer, hidePointer = _c === void 0 ? false : _c;
     return ({
-        color: active ? theme.colors.palette.success : ""
+        color: active ? theme.colors.palette.success : "",
+        cursor: hidePointer ? "default" : "pointer"
     });
 });
 var createPagesFragment = function (_a) {
@@ -89,9 +90,27 @@ var createPagesFragment = function (_a) {
         if (acc === void 0) { acc = []; }
         return start > end ? acc : range(start + 1, end, acc.concat([start]));
     };
-    return range(skip + 1, maxVisible + skip).map(function (pageNumber) { return (React.createElement(PageLink, { key: pageNumber, onClick: function () {
+    var hasEnoughPages = pageCount > maxVisible;
+    var adjustedMaxVisible = hasEnoughPages ? maxVisible : pageCount;
+    var cond = pageCount - selected < adjustedMaxVisible;
+    var start = cond ? pageCount - adjustedMaxVisible + 1 : skip + 1;
+    var end = cond ? pageCount : adjustedMaxVisible + skip;
+    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(PageLink, { key: pageNumber, onClick: function () {
             onChange(pageNumber);
         }, active: pageNumber === selected }, pageNumber)); });
+    var lowerSeparator = [
+        React.createElement(PageLink, { key: 1, onClick: function () {
+                onChange(1);
+            } }, "1"),
+        start === 2 ? null : (React.createElement(PageLink, { key: "lower", hidePointer: true }, "..."))
+    ];
+    var upperSeparator = [
+        React.createElement(PageLink, { key: "upper", hidePointer: true }, "..."),
+        React.createElement(PageLink, { key: pageCount, onClick: function () {
+                onChange(pageCount);
+            } }, pageCount)
+    ];
+    return (selected >= maxVisible && hasEnoughPages ? lowerSeparator : []).concat(fragment, (pageCount - selected >= maxVisible && hasEnoughPages ? upperSeparator : []));
 };
 var Container = glamorous_1.default.ul({
     display: "flex",
@@ -106,18 +125,12 @@ var Container = glamorous_1.default.ul({
 var Paginator = function (_a) {
     var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.selected, selected = _c === void 0 ? 1 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d;
     var controlProps = { pageCount: pageCount, selected: selected, onChange: onChange };
-    var hasEnoughPages = pageCount > maxVisible;
-    maxVisible = hasEnoughPages ? maxVisible : pageCount;
     return (React.createElement(Container, null,
-        hasEnoughPages ? (React.createElement(PaginatorControl, __assign({ type: "first" }, controlProps),
-            React.createElement(Icon.ChevronsLeft, { size: "17" }))) : null,
         React.createElement(PaginatorControl, __assign({ type: "previous" }, controlProps),
             React.createElement(Icon.ChevronLeft, { size: "17" })),
         createPagesFragment({ pageCount: pageCount, maxVisible: maxVisible, selected: selected, onChange: onChange }),
         React.createElement(PaginatorControl, __assign({ type: "next" }, controlProps),
-            React.createElement(Icon.ChevronRight, { size: "17" })),
-        hasEnoughPages ? (React.createElement(PaginatorControl, __assign({ type: "last" }, controlProps),
-            React.createElement(Icon.ChevronsRight, { size: "17" }))) : null));
+            React.createElement(Icon.ChevronRight, { size: "17" }))));
 };
 exports.default = Paginator;
 //# sourceMappingURL=Paginator.js.map

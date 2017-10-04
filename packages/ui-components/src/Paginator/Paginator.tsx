@@ -24,7 +24,8 @@ const Control = glamorous.li(
     listStyle: "none"
   },
   ({ disabled = false, theme }: { disabled?: boolean; theme?: Theme }) => ({
-    cursor: disabled ? "not-allowed" : "pointer"
+    cursor: disabled ? "not-allowed" : "pointer",
+    color: disabled ? theme.colors.palette.grey50 : "default"
   })
 )
 
@@ -81,11 +82,11 @@ const PageLink = glamorous.li(
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer",
     userSelect: "none"
   },
-  ({ active = false, theme }: { active?: boolean; theme?: Theme }) => ({
-    color: active ? theme.colors.palette.success : ""
+  ({ active = false, theme, hidePointer = false }: { active?: boolean; theme?: Theme; hidePointer?: boolean }) => ({
+    color: active ? theme.colors.palette.success : "",
+    cursor: hidePointer ? "default" : "pointer"
   })
 )
 
@@ -103,7 +104,14 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Prop
   const range = (start: number, end: number, acc: number[] = []): number[] =>
     start > end ? acc : range(start + 1, end, [...acc, start])
 
-  return range(skip + 1, maxVisible + skip).map(pageNumber => (
+  const hasEnoughPages = pageCount > maxVisible
+  const adjustedMaxVisible = hasEnoughPages ? maxVisible : pageCount
+
+  const cond = pageCount - selected < adjustedMaxVisible
+  const start = cond ? pageCount - adjustedMaxVisible + 1 : skip + 1
+  const end = cond ? pageCount : adjustedMaxVisible + skip
+
+  const fragment = range(start, end).map((pageNumber, i) => (
     <PageLink
       key={pageNumber}
       onClick={() => {
@@ -114,6 +122,42 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Prop
       {pageNumber}
     </PageLink>
   ))
+
+  const lowerSeparator = [
+    <PageLink
+      key={1}
+      onClick={() => {
+        onChange(1)
+      }}
+    >
+      1
+    </PageLink>,
+    start === 2 ? null : (
+      <PageLink key="lower" hidePointer>
+        ...
+      </PageLink>
+    )
+  ]
+
+  const upperSeparator = [
+    <PageLink key="upper" hidePointer>
+      ...
+    </PageLink>,
+    <PageLink
+      key={pageCount}
+      onClick={() => {
+        onChange(pageCount)
+      }}
+    >
+      {pageCount}
+    </PageLink>
+  ]
+
+  return [
+    ...(selected >= maxVisible && hasEnoughPages ? lowerSeparator : []),
+    ...fragment,
+    ...(pageCount - selected >= maxVisible && hasEnoughPages ? upperSeparator : [])
+  ]
 }
 
 const Container = glamorous.ul(
@@ -129,15 +173,8 @@ const Container = glamorous.ul(
 
 const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, onChange = () => {} }: Props) => {
   const controlProps = { pageCount, selected, onChange }
-  const hasEnoughPages = pageCount > maxVisible
-  maxVisible = hasEnoughPages ? maxVisible : pageCount
   return (
     <Container>
-      {hasEnoughPages ? (
-        <PaginatorControl type="first" {...controlProps}>
-          <Icon.ChevronsLeft size="17" />
-        </PaginatorControl>
-      ) : null}
       <PaginatorControl type="previous" {...controlProps}>
         <Icon.ChevronLeft size="17" />
       </PaginatorControl>
@@ -145,11 +182,6 @@ const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, 
       <PaginatorControl type="next" {...controlProps}>
         <Icon.ChevronRight size="17" />
       </PaginatorControl>
-      {hasEnoughPages ? (
-        <PaginatorControl type="last" {...controlProps}>
-          <Icon.ChevronsRight size="17" />
-        </PaginatorControl>
-      ) : null}
     </Container>
   )
 }

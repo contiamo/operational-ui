@@ -5,34 +5,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
   class="css-pnafp5"
 >
   <li
-    class="css-1p15y6p"
-  >
-    <svg
-      height="17"
-      viewbox="0 0 24 24"
-      width="17"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline
-        fill="none"
-        points="11 17 6 12 11 7"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      />
-      <polyline
-        fill="none"
-        points="18 17 13 12 18 7"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      />
-    </svg>
-  </li>
-  <li
-    class="css-1p15y6p"
+    class="css-8sx9h7"
   >
     <svg
       fill="none"
@@ -51,32 +24,42 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </li>
   <li
-    class="css-88pg6l"
+    class="css-1040i6y"
   >
     1
   </li>
   <li
-    class="css-1hbkp3c"
+    class="css-1ry42c6"
   >
     2
   </li>
   <li
-    class="css-1hbkp3c"
+    class="css-1ry42c6"
   >
     3
   </li>
   <li
-    class="css-1hbkp3c"
+    class="css-1ry42c6"
   >
     4
   </li>
   <li
-    class="css-1hbkp3c"
+    class="css-1ry42c6"
   >
     5
   </li>
   <li
-    class="css-1j7ndtv"
+    class="css-14yrwhw"
+  >
+    ...
+  </li>
+  <li
+    class="css-1ry42c6"
+  >
+    10
+  </li>
+  <li
+    class="css-midahf"
   >
     <svg
       fill="none"
@@ -91,33 +74,6 @@ exports[`Paginator Component Should initialize properly 1`] = `
     >
       <polyline
         points="9 18 15 12 9 6"
-      />
-    </svg>
-  </li>
-  <li
-    class="css-1j7ndtv"
-  >
-    <svg
-      height="17"
-      viewbox="0 0 24 24"
-      width="17"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline
-        fill="none"
-        points="13 17 18 12 13 7"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      />
-      <polyline
-        fill="none"
-        points="6 17 11 12 6 7"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
       />
     </svg>
   </li>
