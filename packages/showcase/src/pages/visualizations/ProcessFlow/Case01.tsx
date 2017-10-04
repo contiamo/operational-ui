@@ -13,7 +13,7 @@ const data = {
       { path: ["1", "2", "3", "6", "11"], size: 130 },
       { path: ["1", "2", "3", "4", "10"], size: 290 },
       { path: ["1", "2", "3", "12", "10"], size: 120 },
-      { path: ["1", "2", "3", "4", "13"], size: 620 }
+      { path: ["1", "2", "3", "4", "13"], size: 620 },
     ],
     nodes: [
       { id: "1", group: "start" },
@@ -28,11 +28,11 @@ const data = {
       { id: "10", group: "end" },
       { id: "11", group: "end" },
       { id: "12" },
-      { id: "13", group: "end" }
-    ]
+      { id: "13", group: "end" },
+    ],
   },
   config = {
-    arrowFill: "none"
+    arrowFill: "none",
   },
   accessors = {
     node: {
@@ -51,7 +51,7 @@ const data = {
         if (node.group) {
           return "none"
         }
-      }
+      },
     },
     link: {
       stroke: (link: any) => {
@@ -60,8 +60,8 @@ const data = {
         } else if (link.target.attributes.group === "end") {
           return "lightcoral"
         }
-      }
-    }
+      },
+    },
   }
 
 export default () => (
