@@ -6,7 +6,7 @@ import SelectFilter from "./Filter/SelectFilter"
 
 import SelectStyle from "./Select.style"
 
-export interface option {
+export interface Option {
   label: string
   id?: number
   value?: any
@@ -16,10 +16,11 @@ export interface option {
 type Props = {
   className?: string
   placeholder?: string | boolean
-  options: option[]
+  options: Option[]
+  value: undefined | Option | Option[]
   filterable?: boolean
   disabled?: boolean
-  multiple?: boolean
+  onChange: (newValue: Option | Option[]) => void
   onClick?: () => void
   onFilter?: () => void
 }
@@ -27,7 +28,6 @@ type Props = {
 type State = {
   open: boolean
   updating: boolean
-  value: option | option[]
   filter: RegExp
 }
 
@@ -44,7 +44,6 @@ class Select extends React.Component<Props, State> {
     this.state = {
       open: false,
       updating: false,
-      value: this.getInitialValue(),
       filter: new RegExp(/./)
     }
   }
@@ -85,87 +84,39 @@ class Select extends React.Component<Props, State> {
     window.removeEventListener("keyup", this.handleEsc, true)
   }
 
-  getInitialValue(): option | option[] {
-    if (!this.props.multiple) {
-      return typeof this.props.placeholder === "string" ? { label: this.props.placeholder } : { label: "" }
-    }
-
-    return typeof this.props.placeholder === "string"
-      ? [{ placeholder: true, label: this.props.placeholder }]
-      : [{ placeholder: true, label: "" }]
-  }
-
   getDisplayValue(): string {
-    if (!this.props.multiple) {
-      if (!Array.isArray(this.state.value) && typeof this.state.value.label === "string") {
-        return this.state.value.label
-      } else {
-        return typeof this.props.placeholder === "string" ? this.props.placeholder : ""
-      }
+    if (!this.props.value) {
+      return typeof this.props.placeholder === "string" ? this.props.placeholder : ""
     }
 
-    if (!(this.state.value instanceof Array)) {
-      throw new Error(
-        "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
-      )
+    if (!Array.isArray(this.props.value)) {
+      return this.props.value.label
     }
 
-    return [...this.state.value.map(option => option.label)].join(", ")
+    return [...this.props.value.map(option => option.label)].join(", ")
   }
 
-  selectOption(option: option) {
-    if (!this.props.multiple) {
-      this.setState(() => ({ value: option }))
+  selectOption(option: Option) {
+    if (!Array.isArray(this.props.value)) {
+      this.props.onChange(option)
       return
     }
 
-    if (!(this.state.value instanceof Array)) {
-      throw new Error(
-        "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
-      )
-    }
-
-    const optionIndex: number = this.state.value.indexOf(option)
+    const optionIndex: number = this.props.value.indexOf(option)
 
     if (optionIndex < 0) {
-      this.setState((prevState: State) => {
-        if (Array.isArray(prevState.value)) {
-          return {
-            value: [...prevState.value, option].filter(item => !item.placeholder)
-          }
-        } else {
-          throw new Error(
-            "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
-          )
-        }
-      })
+      this.props.onChange([...this.props.value, option].filter(item => !item.placeholder))
     } else {
-      this.setState(prevState => {
-        if (Array.isArray(prevState.value)) {
-          return {
-            value: [...prevState.value.slice(0, optionIndex), ...prevState.value.slice(optionIndex + 1)]
-          }
-        } else {
-          throw new Error(
-            "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
-          )
-        }
-      })
+      this.props.onChange([...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)])
     }
   }
 
-  isOptionSelected(option: option) {
-    if (!this.props.multiple) {
-      return this.state.value === option
+  isOptionSelected(option: Option) {
+    if (!Array.isArray(this.props.value)) {
+      return this.props.value === option
     }
 
-    if (!(this.state.value instanceof Array)) {
-      throw new Error(
-        "<Select>: Strings are not allowed to be values of a Select component with the multiple attribute"
-      )
-    }
-
-    return this.state.value.indexOf(option) > -1
+    return this.props.value.indexOf(option) > -1
   }
 
   async updateFilter(event: React.SyntheticEvent<HTMLInputElement>) {
@@ -202,9 +153,7 @@ class Select extends React.Component<Props, State> {
     return (
       <div
         ref={container => (this.container = container)}
-        className={`${this.props.className} Select${this.state.open ? " Select_open" : ""}${this.state.updating
-          ? " Select_updating"
-          : ""}`}
+        className={`${this.props.className} Select${this.state.updating ? " Select_updating" : ""}`}
         role="listbox"
         tabIndex={-2}
         onClick={() => this.toggle()}
@@ -215,7 +164,7 @@ class Select extends React.Component<Props, State> {
             {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
             <div className="Select__options_list">
               {this.props.options.map(
-                (option: option) =>
+                (option: Option) =>
                   option.label.match(this.state.filter) && (
                     <SelectOption
                       key={option.id}

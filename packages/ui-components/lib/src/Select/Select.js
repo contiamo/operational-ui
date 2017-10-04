@@ -76,7 +76,6 @@ var Select = /** @class */ (function (_super) {
         _this.state = {
             open: false,
             updating: false,
-            value: _this.getInitialValue(),
             filter: new RegExp(/./)
         };
         return _this;
@@ -89,70 +88,33 @@ var Select = /** @class */ (function (_super) {
         window.removeEventListener("click", this.handleClick, true);
         window.removeEventListener("keyup", this.handleEsc, true);
     };
-    Select.prototype.getInitialValue = function () {
-        if (!this.props.multiple) {
-            return typeof this.props.placeholder === "string" ? { label: this.props.placeholder } : { label: "" };
-        }
-        return typeof this.props.placeholder === "string"
-            ? [{ placeholder: true, label: this.props.placeholder }]
-            : [{ placeholder: true, label: "" }];
-    };
     Select.prototype.getDisplayValue = function () {
-        if (!this.props.multiple) {
-            if (!Array.isArray(this.state.value) && typeof this.state.value.label === "string") {
-                return this.state.value.label;
-            }
-            else {
-                return typeof this.props.placeholder === "string" ? this.props.placeholder : "";
-            }
+        if (!this.props.value) {
+            return typeof this.props.placeholder === "string" ? this.props.placeholder : "";
         }
-        if (!(this.state.value instanceof Array)) {
-            throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
+        if (!Array.isArray(this.props.value)) {
+            return this.props.value.label;
         }
-        return this.state.value.map(function (option) { return option.label; }).slice().join(", ");
+        return this.props.value.map(function (option) { return option.label; }).slice().join(", ");
     };
     Select.prototype.selectOption = function (option) {
-        if (!this.props.multiple) {
-            this.setState(function () { return ({ value: option }); });
+        if (!Array.isArray(this.props.value)) {
+            this.props.onChange(option);
             return;
         }
-        if (!(this.state.value instanceof Array)) {
-            throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
-        }
-        var optionIndex = this.state.value.indexOf(option);
+        var optionIndex = this.props.value.indexOf(option);
         if (optionIndex < 0) {
-            this.setState(function (prevState) {
-                if (Array.isArray(prevState.value)) {
-                    return {
-                        value: prevState.value.concat([option]).filter(function (item) { return !item.placeholder; })
-                    };
-                }
-                else {
-                    throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
-                }
-            });
+            this.props.onChange(this.props.value.concat([option]).filter(function (item) { return !item.placeholder; }));
         }
         else {
-            this.setState(function (prevState) {
-                if (Array.isArray(prevState.value)) {
-                    return {
-                        value: prevState.value.slice(0, optionIndex).concat(prevState.value.slice(optionIndex + 1))
-                    };
-                }
-                else {
-                    throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
-                }
-            });
+            this.props.onChange(this.props.value.slice(0, optionIndex).concat(this.props.value.slice(optionIndex + 1)));
         }
     };
     Select.prototype.isOptionSelected = function (option) {
-        if (!this.props.multiple) {
-            return this.state.value === option;
+        if (!Array.isArray(this.props.value)) {
+            return this.props.value === option;
         }
-        if (!(this.state.value instanceof Array)) {
-            throw new Error("<Select>: Strings are not allowed to be values of a Select component with the multiple attribute");
-        }
-        return this.state.value.indexOf(option) > -1;
+        return this.props.value.indexOf(option) > -1;
     };
     Select.prototype.updateFilter = function (event) {
         return __awaiter(this, void 0, void 0, function () {
@@ -203,9 +165,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { ref: function (container) { return (_this.container = container); }, className: this.props.className + " Select" + (this.state.open ? " Select_open" : "") + (this.state.updating
-                ? " Select_updating"
-                : ""), role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+        return (React.createElement("div", { ref: function (container) { return (_this.container = container); }, className: this.props.className + " Select" + (this.state.updating ? " Select_updating" : ""), role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
             React.createElement("div", { className: "Select__value" }, this.getDisplayValue() || this.props.placeholder),
             this.props.options.length && this.state.open ? (React.createElement("div", { className: "Select__options" },
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),

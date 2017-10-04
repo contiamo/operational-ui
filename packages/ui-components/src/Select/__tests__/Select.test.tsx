@@ -1,10 +1,15 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import { Select } from "../Select"
+import { Select, Option } from "../Select"
 import style from "../Select.style"
 
-import { options } from "../__mocks__/Select.mock"
+const options: [Option] = [
+  { id: 1, label: "John", value: -10 },
+  { id: 2, label: "Joey", value: "Nein" },
+  { id: 3, label: "Tupac", value: true },
+  { id: 4, label: "Chandler", value: [{ alive: true }] }
+]
 
 describe("Select", () => {
   it("Should render correctly", () => {
