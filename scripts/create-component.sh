@@ -1,11 +1,16 @@
 #!/bin/sh
 
+# Constants
+
+COMP_ROOT="packages/ui-components/src/$1"
+SHOWCASE_ROOT="packages/showcase/src/pages/components/$1s"
+
 # Create component
 
-mkdir packages/ui-components/src/$1
-touch packages/ui-components/src/$1/$1.tsx
+mkdir $COMP_ROOT
+touch $COMP_ROOT/$1.tsx
 
-cat > packages/ui-components/src/$1/$1.tsx << EOL
+cat > $COMP_ROOT/$1.tsx << EOL
 import * as React from "react"
 import glamorous from "glamorous"
 
@@ -49,8 +54,8 @@ EOL
 
 # Create test file
 
-mkdir packages/ui-components/src/$1/__tests__
-touch packages/ui-components/src/$1/__tests__/$1.test.tsx
+mkdir $COMP_ROOT/__tests__
+touch $COMP_ROOT/__tests__/$1.test.tsx
 
 cat > packages/ui-components/src/$1/__tests__/$1.test.tsx << EOL
 import * as React from "react"
@@ -71,15 +76,15 @@ EOL
 
 # Create showcase file
 
-mkdir packages/showcase/src/pages/$1s
-touch packages/showcase/src/pages/$1s/$1s.tsx
+mkdir $SHOWCASE_ROOT
+touch $SHOWCASE_ROOT/$1s.tsx
 
-cat > packages/showcase/src/pages/$1s/$1s.tsx << EOL
+cat > $SHOWCASE_ROOT/$1s.tsx << EOL
 import * as React from "react"
 
 import Table from "../../components/PropsTable/PropsTable"
 import Playground from "../../components/Playground/Playground"
-import { $1, CardHeader } from "contiamo-ui-components"
+import { $1, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/$1s.simple.snippet"
 import propDescription from "./propDescription"
@@ -103,9 +108,9 @@ EOL
 
 # Create showcase prop description
 
-touch packages/showcase/src/pages/$1s/propDescription.ts
+touch $SHOWCASE_ROOT/propDescription.ts
 
-cat > packages/showcase/src/pages/$1s/propDescription.ts << EOL
+cat > $SHOWCASE_ROOT/propDescription.ts << EOL
 export default [
   {
     name: "value",
@@ -119,10 +124,10 @@ EOL
 
 # Create showcase snippet
 
-mkdir packages/showcase/src/pages/$1s/snippets
-touch packages/showcase/src/pages/$1s/snippets/$1s.simple.snippet.tsx
+mkdir $SHOWCASE_ROOT/snippets
+touch $SHOWCASE_ROOT/snippets/$1s.simple.snippet.tsx
 
-cat > packages/showcase/src/pages/$1s/snippets/$1s.simple.snippet.tsx << EOL
+cat > $SHOWCASE_ROOT/snippets/$1s.simple.snippet.tsx << EOL
 import * as React from "react"
 import { TestComp } from "contiamo-ui-components"
 
@@ -141,10 +146,10 @@ EOL
 
 # Create showcase test file
 
-mkdir packages/showcase/src/pages/$1s/__tests__
-touch packages/showcase/src/pages/$1s/__tests__/$1s.test.tsx
+mkdir $SHOWCASE_ROOT/__tests__
+touch $SHOWCASE_ROOT/__tests__/$1s.test.tsx
 
-cat > packages/showcase/src/pages/$1s/__tests__/$1s.test.tsx << EOL
+cat > $SHOWCASE_ROOT/__tests__/$1s.test.tsx << EOL
 import * as React from "react"
 import { render } from "enzyme"
 
@@ -163,8 +168,8 @@ EOL
 
 echo
 echo "🎉 $1 component created!"
-echo 'A few things to do manually:'
-echo '* import component into packages/ui-components/index.ts + add to named exports'
-echo '* add showcase page to router at packages/showcase/pages/Components.tsx'
-echo '* add url to showcase side navigation packages/showcase/components/Sidebar.tsx'
-echo '* enjoy your new component!'
+echo "A few things to do manually:"
+echo "* import component into packages/ui-components/index.ts + add to named exports"
+echo "* add showcase page to router at $SHOWCASE_ROOT/Components.tsx"
+echo "* add url to showcase side navigation packages/showcase/components/Sidebar.tsx"
+echo "* enjoy your new component!"
