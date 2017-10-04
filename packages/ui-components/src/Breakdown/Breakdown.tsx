@@ -11,7 +11,6 @@ interface IProps {
   icon?: ReactFeatherIconName
   onMouseEnter?: () => void
   onMouseLeave?: () => void
-  theme?: Theme
 }
 
 const Container = glamorous.div(
@@ -87,12 +86,12 @@ const Number = glamorous.div(
   })
 )
 
-export default ({ children, label, fill, number, onMouseEnter, onMouseLeave }: IProps) => (
+export default ({ children, color, label, fill, number, onMouseEnter, onMouseLeave }: IProps) => (
   <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
     <Number>{number}</Number>
     <div style={{ width: "100%" }}>
       <Label>{children}</Label>
-      <Bar fill={fill}>
+      <Bar color={color} fill={fill}>
         <div>{label}</div>
       </Bar>
     </div>
