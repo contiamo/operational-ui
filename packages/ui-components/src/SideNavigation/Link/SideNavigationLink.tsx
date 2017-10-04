@@ -33,6 +33,11 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
       backgroundColor: darken(backgroundColor)(10)
     },
 
+    ":focus": {
+      outline: 0,
+      backgroundColor: darken(backgroundColor)(15)
+    },
+
     ":first-child": {
       marginTop: `${theme.spacing * -0.5}px`
     },

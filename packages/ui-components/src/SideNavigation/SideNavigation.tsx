@@ -62,7 +62,11 @@ const style = ({
     overflow: "hidden",
     boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
     color: readableTextColor(backgroundColor)(["black", "white"]),
-    ...hoverWidth
+    ...hoverWidth,
+    "& a:focus": {
+      outline: 0,
+      backgroundColor: "rgba(255, 255, 255, 0.1)"
+    }
   }
 }
 

@@ -34,6 +34,10 @@ var Container = glamorous_1.default.div(function (_a) {
             backgroundColor: activeBackgroundColor,
             color: contiamo_ui_utils_1.readableTextColor(activeBackgroundColor)(["white", "#222"])
         },
+        ":focus": {
+            outline: 0,
+            backgroundColor: activeBackgroundColor
+        },
         ":active": {
             boxShadow: activeBoxShadow
         },

@@ -19,6 +19,9 @@ var style = function (_a) {
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor }, disabledStyle, { "&:link, &:visited": {
             color: textColor
+        }, ":focus": {
+            outline: 0,
+            backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(10)
         }, "&.SideNavigationLink + .SideNavigationLink": {
             borderTop: "1px solid",
             borderColor: theme.colors.usage.subContentSeparatorLine
