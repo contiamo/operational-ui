@@ -4,6 +4,7 @@ import { ThemeProvider } from "glamorous"
 
 import Button from "./src/Button/Button"
 import ButtonGroup from "./src/ButtonGroup/ButtonGroup"
+import Breakdown from "./src/Breakdown/Breakdown"
 import Card, { CardHeader } from "./src/Card/Card"
 import Chip from "./src/Chip/Chip"
 import ColorPicker from "./src/ColorPicker/ColorPicker"
@@ -30,6 +31,7 @@ import theme from "./src/theme"
 export {
   Button,
   ButtonGroup,
+  Breakdown,
   Card,
   CardHeader,
   Chip,

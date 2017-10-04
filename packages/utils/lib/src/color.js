@@ -17,13 +17,20 @@ var hexOrColor = function (color) {
     return function (fallback) { return (isColorACodeOrHex ? color : fallback); };
 };
 exports.hexOrColor = hexOrColor;
+var getBrightestColor = function (colors) {
+    return colors.reduce(function (acc, curr) {
+        if (curr.l > acc.l) {
+            return curr;
+        }
+        return acc;
+    });
+};
 var readableTextColor = function (background) { return function (workingColors) {
     var backgroundHsl = colorCalculator(background).toHsl();
     var workingColorHsls = workingColors.map(function (color) { return colorCalculator(color).toHsl(); });
     // For reasonably saturated colors on the bright side, still pick the lightest color.
     if (backgroundHsl.s > 0.4 && backgroundHsl.l < 0.75) {
-        var brightestWorkingColorHsl = workingColorHsls.sort(function (a, b) { return b.l - a.l; })[0];
-        return colorCalculator(brightestWorkingColorHsl).toHexString();
+        return colorCalculator(getBrightestColor(workingColorHsls)).toHexString();
     }
     return colorCalculator.mostReadable(background, workingColors).toHexString();
 }; };

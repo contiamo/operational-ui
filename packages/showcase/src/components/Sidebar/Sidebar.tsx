@@ -28,6 +28,7 @@ const links: Link[] = [
       { url: "/components/buttons", label: "Buttons" },
       { url: "/components/cards", label: "Cards" },
       { url: "/components/chips", label: "Chips" },
+      { url: "/components/breakdown", label: "Breakdown" },
       { label: "Context Menu" },
       { url: "/components/info-tiles", label: "InfoTiles" },
       { url: "/components/timeline", label: "Timeline" }

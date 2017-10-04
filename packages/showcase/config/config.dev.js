@@ -10,5 +10,6 @@ module.exports = webpackMerge(config, {
     contentBase: resolve(__dirname, "..", "public"),
     historyApiFallback: true,
     publicPath: "/"
-  }
+  },
+  devtool: 'inline-source-map',
 })

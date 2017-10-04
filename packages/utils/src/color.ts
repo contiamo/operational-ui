@@ -17,13 +17,20 @@ const hexOrColor = (color: string): ((fallback: string) => string) => {
   return (fallback: string) => (isColorACodeOrHex ? color : fallback)
 }
 
+const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
+  colors.reduce((acc, curr) => {
+    if (curr.l > acc.l) {
+      return curr
+    }
+    return acc
+  })
+
 const readableTextColor = (background: string) => (workingColors: string[]): string => {
   const backgroundHsl = colorCalculator(background).toHsl()
   const workingColorHsls = workingColors.map(color => colorCalculator(color).toHsl())
   // For reasonably saturated colors on the bright side, still pick the lightest color.
   if (backgroundHsl.s > 0.4 && backgroundHsl.l < 0.75) {
-    const brightestWorkingColorHsl = workingColorHsls.sort((a, b) => b.l - a.l)[0]
-    return colorCalculator(brightestWorkingColorHsl).toHexString()
+    return colorCalculator(getBrightestColor(workingColorHsls)).toHexString()
   }
   return colorCalculator.mostReadable(background, workingColors).toHexString()
 }
