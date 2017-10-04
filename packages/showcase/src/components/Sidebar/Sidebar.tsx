@@ -16,7 +16,11 @@ type Link = {
 const links: Link[] = [
   {
     label: "Basics",
-    links: [{ url: "/components/colors", label: "Colors" }, { url: "/components/typography", label: "Typography" }]
+    links: [
+      { url: "/components/colors", label: "Colors" },
+      { url: "/components/typography", label: "Typography" },
+      { url: "/components/icons", label: "Icons" }
+    ]
   },
   {
     label: "UI Elements",

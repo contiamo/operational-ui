@@ -1,7 +1,7 @@
 export default [
   {
     name: "name",
-    description: "Icon name, see https://feathericons.com/ (convert name to PascalCase).",
+    description: "Icon name, see https://feathericons.com (convert name to PascalCase).",
     defaultValue: "Play",
     type: "string",
     optional: false
@@ -14,10 +14,10 @@ export default [
     optional: true
   },
   {
-    name: "sizeOverride",
-    description: "Override the size to a single number.",
-    defaultValue: null,
-    type: "number",
+    name: "color",
+    description: "Icon color, specified as a hex, or a color name (info, success, warning, error).",
+    defaultValue: "black",
+    type: "string",
     optional: true
   }
 ]
