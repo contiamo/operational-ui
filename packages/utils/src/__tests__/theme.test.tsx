@@ -10,8 +10,6 @@ const ThemelessComp = () => <div>Hello, ThemeWrapper!</div>
 
 const Comp = wrapTheme({})(ThemelessComp)
 
-console.log(Comp)
-
 describe("Progress Component", () => {
   it("Should initialize properly", () => {
     expect(render(<Comp />)).toMatchSnapshot()

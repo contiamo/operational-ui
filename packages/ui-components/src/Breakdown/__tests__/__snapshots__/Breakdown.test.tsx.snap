@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breakdown Component Should initialize properly 1`] = `
+<div
+  class="css-1ctda1l"
+>
+  <div
+    class="css-h1ixjn"
+  >
+    3
+  </div>
+  <div
+    style="width:100%;"
+  >
+    <label
+      class="css-adasqi"
+    >
+      hi
+    </label>
+    <div
+      class="css-1wo530a"
+    >
+      <div>
+        20 (50%)
+      </div>
+    </div>
+  </div>
+</div>
+`;

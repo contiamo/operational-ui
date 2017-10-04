@@ -6,6 +6,7 @@ import Canvas from "../../components/Canvas/Canvas"
 import Sidebar from "../../components/Sidebar/Sidebar"
 
 import Buttons from "./Buttons/Buttons"
+import Breakdown from "./Breakdown/Breakdown"
 import FormFields from "./FormFields/FormFields"
 import Cards from "./Cards/Cards"
 import Chips from "./Chips/Chips"
@@ -39,6 +40,7 @@ export default () => (
     <Canvas>
       <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={Buttons} />
+      <Route path="/components/breakdown" component={Breakdown} />
       <Route path="/components/form-fields" component={FormFields} />
       <Route path="/components/color-picker" component={ColorPickers} />
       <Route path="/components/cards" component={Cards} />

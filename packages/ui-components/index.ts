@@ -4,6 +4,7 @@ import { ThemeProvider } from "glamorous"
 
 import Button from "./src/Button/Button"
 import ButtonGroup from "./src/ButtonGroup/ButtonGroup"
+import Breakdown from "./src/Breakdown/Breakdown"
 import Card, { CardHeader } from "./src/Card/Card"
 import Chip from "./src/Chip/Chip"
 import ColorPicker from "./src/ColorPicker/ColorPicker"
@@ -19,7 +20,7 @@ import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar"
 import SideNavigation, {
   SideNavigationHeader,
   SideNavigationItem,
-  SideNavigationLink
+  SideNavigationLink,
 } from "./src/SideNavigation/SideNavigation"
 import Switch from "./src/Switch/Switch"
 import Tabs, { Tab } from "./src/Tabs/Tabs"
@@ -30,6 +31,7 @@ import theme from "./src/theme"
 export {
   Button,
   ButtonGroup,
+  Breakdown,
   Card,
   CardHeader,
   Chip,
@@ -59,5 +61,5 @@ export {
   TimelineItem,
   Tooltip,
   theme as contiamoTheme,
-  ThemeProvider
+  ThemeProvider,
 }
