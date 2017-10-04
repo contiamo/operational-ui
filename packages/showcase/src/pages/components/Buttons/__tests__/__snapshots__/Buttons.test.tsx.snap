@@ -103,6 +103,36 @@ exports[`Buttons Page Should render correctly 1`] = `
           ✅
         </td>
       </tr>
+      <tr>
+        <td>
+          active
+        </td>
+        <td>
+          Active state.
+        </td>
+        <td />
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          active
+        </td>
+        <td>
+          Condensed option
+        </td>
+        <td />
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
