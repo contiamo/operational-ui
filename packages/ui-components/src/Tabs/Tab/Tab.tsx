@@ -4,6 +4,7 @@ import glamorous from "glamorous"
 export type TabProps = {
   children?: React.ReactChild
   disabled?: boolean
+  index?: number
   title?: string
 }
 

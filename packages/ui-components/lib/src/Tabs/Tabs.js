@@ -1,14 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -84,55 +74,35 @@ var TabTitle = glamorous_1.default.li({
             color: theme.colors.palette.grey60,
             cursor: "not-allowed"
         }
-        : {}, !disabled
-        ? {
+        : {
             "&:hover": {
                 color: color
             }
-        }
-        : {}));
+        }));
 });
-var Tabs = /** @class */ (function (_super) {
-    __extends(Tabs, _super);
-    function Tabs() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Tabs.prototype.componentWillMount = function () {
-        var _a = this.props, activeColor = _a.activeColor, children = _a.children;
-        this.data = React.Children.map(children, function (child, index) { return (__assign({}, child.props, { activeColor: activeColor,
-            index: index })); });
-    };
-    Tabs.prototype.renderTabs = function () {
-        var _a = this.props, active = _a.active, activeColor = _a.activeColor, onChange = _a.onChange, theme = _a.theme;
-        var color = contiamo_ui_utils_1.hexOrColor(activeColor)(theme.colors.palette[activeColor] || theme.colors.palette.info);
-        return this.data.map(function (_a) {
-            var disabled = _a.disabled, index = _a.index, title = _a.title;
-            return (React.createElement(TabTitle, { color: color, disabled: disabled, isActive: active === index && !disabled, key: index, onClick: function () {
-                    if (!disabled)
-                        onChange(index);
-                } }, title));
-        });
-    };
-    Tabs.prototype.renderPanel = function () {
-        var _this = this;
-        var _a = this.data.find(function (_a) {
-            var index = _a.index;
-            return index === _this.props.active;
-        }), children = _a.children, disabled = _a.disabled;
-        return disabled ? null : React.createElement(TabPanel, null, children);
-    };
-    Tabs.prototype.render = function () {
-        return (React.createElement(Container, null,
-            React.createElement(TabList, null, this.renderTabs()),
-            React.createElement(Content, null, this.renderPanel())));
-    };
-    Tabs.defaultProps = {
-        active: 0,
-        activeColor: "info",
-        onChange: function () { }
-    };
-    return Tabs;
-}(React.Component));
+var Tabs = function (_a) {
+    var _b = _a.active, active = _b === void 0 ? 0 : _b, _c = _a.activeColor, activeColor = _c === void 0 ? "info" : _c, children = _a.children, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d, theme = _a.theme;
+    // Get all children properties and add an index value to each of them
+    var childrenProps = React.Children.map(children, function (child, index) { return (__assign({}, child.props, { index: index })); });
+    var color = contiamo_ui_utils_1.hexOrColor(activeColor)(theme.colors.palette[activeColor] || theme.colors.palette.info);
+    // Display only the active panel based off the children props
+    var _e = childrenProps.find(function (_a) {
+        var index = _a.index;
+        return index === active;
+    }), panelContent = _e.children, disabled = _e.disabled;
+    var activePanel = disabled ? null : React.createElement(TabPanel, null, panelContent);
+    // Build titles fragment based off the children props
+    var tabTitles = childrenProps.map(function (_a) {
+        var disabled = _a.disabled, index = _a.index, title = _a.title;
+        return (React.createElement(TabTitle, { color: color, disabled: disabled, isActive: active === index && !disabled, key: index, onClick: function () {
+                if (!disabled)
+                    onChange(index);
+            } }, title));
+    });
+    return (React.createElement(Container, null,
+        React.createElement(TabList, null, tabTitles),
+        React.createElement(Content, null, activePanel)));
+};
 exports.Tabs = Tabs;
 exports.default = glamorous_1.withTheme(Tabs);
 //# sourceMappingURL=Tabs.js.map

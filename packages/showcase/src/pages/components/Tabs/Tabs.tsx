@@ -1,14 +1,14 @@
 import * as React from "react"
 
-import Table from "../../components/PropsTable/PropsTable"
-import Playground from "../../components/Playground/Playground"
-import { Tabs, Tab, CardHeader } from "contiamo-ui-components"
+import Table from "../../../components/PropsTable/PropsTable"
+import Playground from "../../../components/Playground/Playground"
+import { Tabs, Tab, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/Tabs.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
-  <div>
+  <Card>
     <CardHeader>Tabs</CardHeader>
     <p>
       Component used to navigate across multiple views. It's composed of multiple <a href="#tab">Tab</a> components.
@@ -25,5 +25,5 @@ export default () => (
     <CardHeader id="tab">Tab</CardHeader>
 
     <Table props={propDescription.Tab} />
-  </div>
+  </Card>
 )

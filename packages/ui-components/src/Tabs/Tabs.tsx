@@ -97,68 +97,48 @@ const TabTitle = glamorous.li(
           color: theme.colors.palette.grey60,
           cursor: "not-allowed"
         }
-      : {},
-    ...!disabled
-      ? {
+      : {
           "&:hover": {
             color
           }
         }
-      : {}
   })
 )
 
-class Tabs extends React.Component<Props, {}> {
-  static defaultProps = {
-    active: 0,
-    activeColor: "info",
-    onChange: () => {}
-  }
+const Tabs: React.SFC<Props> = ({ active = 0, activeColor = "info", children, onChange = () => {}, theme }: Props) => {
+  // Get all children properties and add an index value to each of them
+  const childrenProps: TabProps[] = React.Children.map(
+    children,
+    (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index })
+  )
 
-  // Will fix this, but need to understand TS better
-  data: any[]
+  const color = hexOrColor(activeColor)(theme.colors.palette[activeColor] || theme.colors.palette.info)
 
-  componentWillMount() {
-    const { activeColor, children } = this.props
-    this.data = React.Children.map(children, (child: React.ReactElement<TabProps>, index: number) => ({
-      ...child.props,
-      activeColor,
-      index
-    }))
-  }
+  // Display only the active panel based off the children props
+  const { children: panelContent, disabled }: TabProps = childrenProps.find(({ index }) => index === active)
+  const activePanel: JSX.Element = disabled ? null : <TabPanel>{panelContent}</TabPanel>
 
-  renderTabs() {
-    const { active, activeColor, onChange, theme } = this.props
-    const color = hexOrColor(activeColor)(theme.colors.palette[activeColor] || theme.colors.palette.info)
+  // Build titles fragment based off the children props
+  const tabTitles: JSX.Element[] = childrenProps.map(({ disabled, index, title }) => (
+    <TabTitle
+      color={color}
+      disabled={disabled}
+      isActive={active === index && !disabled}
+      key={index}
+      onClick={() => {
+        if (!disabled) onChange(index)
+      }}
+    >
+      {title}
+    </TabTitle>
+  ))
 
-    return this.data.map(({ disabled, index, title }) => (
-      <TabTitle
-        color={color}
-        disabled={disabled}
-        isActive={active === index && !disabled}
-        key={index}
-        onClick={() => {
-          if (!disabled) onChange(index)
-        }}
-      >
-        {title}
-      </TabTitle>
-    ))
-  }
-
-  renderPanel() {
-    const { children, disabled } = this.data.find(({ index }) => index === this.props.active)
-    return disabled ? null : <TabPanel>{children}</TabPanel>
-  }
-
-  render() {
-    return (
-      <Container>
-        <TabList>{this.renderTabs()}</TabList>
-        <Content>{this.renderPanel()}</Content>
-      </Container>
-    )
-  }
+  return (
+    <Container>
+      <TabList>{tabTitles}</TabList>
+      <Content>{activePanel}</Content>
+    </Container>
+  )
 }
 
 export default withTheme(Tabs)

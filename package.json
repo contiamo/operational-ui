@@ -21,8 +21,7 @@
   "devDependencies": {
     "chalk": "^2.1.0",
     "husky": "^0.14.3",
-    "lerna": "^2.1.2",
-    "webpack": "^3.6.0"
+    "lerna": "^2.1.2"
   },
   "workspaces": [
     "packages/*"
