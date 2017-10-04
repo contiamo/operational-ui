@@ -13,8 +13,8 @@ export default () => (
     <CardHeader>Icons</CardHeader>
 
     <p>
-      Contiamo's SVG icon set as a single component. It abstracts over different types of icons (react-feather, custom
-      shapes, SVG sprites) to provide a consistent API as the icon set evolves.
+      Contiamo's SVG icon set as a single component. It abstracts over different types of icons (<a href="https://feathericons.com">Feather Icons</a>,
+      custom shapes, SVG sprites) to provide a consistent API as the icon set evolves.
     </p>
 
     <h4>Usage</h4>
