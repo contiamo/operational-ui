@@ -1,81 +1,158 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Paginator Component Should initialize properly 1`] = `
-<ul
-  class="css-pnafp5"
+<div
+  class="css-1f5s5d"
+  style="user-select:none;"
 >
-  <li
-    class="css-8sx9h7"
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
+  >
+    <svg
+      height="10"
+      viewbox="0 0 24 24"
+      width="10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        fill="none"
+        points="11 17 6 12 11 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+      <polyline
+        fill="none"
+        points="18 17 13 12 18 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+    </svg>
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     <svg
       fill="none"
-      height="17"
+      height="10"
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
       viewbox="0 0 24 24"
-      width="17"
+      width="10"
       xmlns="http://www.w3.org/2000/svg"
     >
       <polyline
         points="15 18 9 12 15 6"
       />
     </svg>
-  </li>
-  <li
-    class="css-1040i6y"
+  </div>
+  <div
+    class="css-1a897r8"
+    role="button"
+    tabindex="-1"
   >
     1
-  </li>
-  <li
-    class="css-1ry42c6"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     2
-  </li>
-  <li
-    class="css-1ry42c6"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     3
-  </li>
-  <li
-    class="css-1ry42c6"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     4
-  </li>
-  <li
-    class="css-1ry42c6"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     5
-  </li>
-  <li
-    class="css-14yrwhw"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     ...
-  </li>
-  <li
-    class="css-1ry42c6"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     10
-  </li>
-  <li
-    class="css-midahf"
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
   >
     <svg
       fill="none"
-      height="17"
+      height="10"
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
       viewbox="0 0 24 24"
-      width="17"
+      width="10"
       xmlns="http://www.w3.org/2000/svg"
     >
       <polyline
         points="9 18 15 12 9 6"
       />
     </svg>
-  </li>
-</ul>
+  </div>
+  <div
+    class="css-wjbtu"
+    role="button"
+    tabindex="-1"
+  >
+    <svg
+      height="10"
+      viewbox="0 0 24 24"
+      width="10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        fill="none"
+        points="13 17 18 12 13 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+      <polyline
+        fill="none"
+        points="6 17 11 12 6 7"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+    </svg>
+  </div>
+</div>
 `;

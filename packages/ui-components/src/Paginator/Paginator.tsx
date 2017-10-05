@@ -2,6 +2,11 @@ import * as React from "react"
 import * as Icon from "react-feather"
 import glamorous from "glamorous"
 
+import ButtonGroup from "../ButtonGroup/ButtonGroup"
+import Button, { Props as ButtonProps } from "../Button/Button"
+
+const CondensedButton: React.SFC<ButtonProps> = (props: ButtonProps) => <Button condensed {...props} />
+
 interface Props {
   pageCount: number
   maxVisible?: number
@@ -18,16 +23,6 @@ interface ControlProps {
   onChange: (selected: number) => void
   children: any
 }
-
-const Control = glamorous.li(
-  {
-    listStyle: "none"
-  },
-  ({ disabled = false, theme }: { disabled?: boolean; theme?: Theme }) => ({
-    cursor: disabled ? "not-allowed" : "pointer",
-    color: disabled ? theme.colors.palette.grey50 : "default"
-  })
-)
 
 const PaginatorControl = ({ type, pageCount, selected, onChange, children }: ControlProps) => {
   const handleFirst = (): void => {
@@ -68,27 +63,8 @@ const PaginatorControl = ({ type, pageCount, selected, onChange, children }: Con
       handler = handleLast
   }
 
-  return (
-    <Control onClick={handler} disabled={isDisabled}>
-      {children}
-    </Control>
-  )
+  return <CondensedButton onClick={handler}>{children}</CondensedButton>
 }
-
-const PageLink = glamorous.li(
-  {
-    listStyle: "none",
-    width: "30px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    userSelect: "none"
-  },
-  ({ active = false, theme, hidePointer = false }: { active?: boolean; theme?: Theme; hidePointer?: boolean }) => ({
-    color: active ? theme.colors.palette.success : "",
-    cursor: hidePointer ? "default" : "pointer"
-  })
-)
 
 const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Props) => {
   let skip
@@ -106,83 +82,60 @@ const createPagesFragment = ({ pageCount, maxVisible, selected, onChange }: Prop
 
   const hasEnoughPages = pageCount > maxVisible
   const adjustedMaxVisible = hasEnoughPages ? maxVisible : pageCount
+  const remainingPages = pageCount - selected
 
   const cond = pageCount - selected < adjustedMaxVisible
-  const start = cond ? pageCount - adjustedMaxVisible + 1 : skip + 1
+  const start = (cond ? pageCount - adjustedMaxVisible : skip + 1) || 1
   const end = cond ? pageCount : adjustedMaxVisible + skip
 
   const fragment = range(start, end).map((pageNumber, i) => (
-    <PageLink
+    <CondensedButton
       key={pageNumber}
       onClick={() => {
         onChange(pageNumber)
       }}
-      active={pageNumber === selected}
+      color={pageNumber === selected && "success"}
     >
       {pageNumber}
-    </PageLink>
+    </CondensedButton>
   ))
 
-  const lowerSeparator = [
-    <PageLink
-      key={1}
-      onClick={() => {
-        onChange(1)
-      }}
-    >
-      1
-    </PageLink>,
-    start === 2 ? null : (
-      <PageLink key="lower" hidePointer>
-        ...
-      </PageLink>
-    )
-  ]
+  const renderUpperSeparator = () =>
+    remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
+      ? [
+          <CondensedButton key="upper">...</CondensedButton>,
+          <CondensedButton
+            key={pageCount}
+            onClick={() => {
+              onChange(pageCount)
+            }}
+          >
+            {pageCount}
+          </CondensedButton>
+        ]
+      : []
 
-  const upperSeparator = [
-    <PageLink key="upper" hidePointer>
-      ...
-    </PageLink>,
-    <PageLink
-      key={pageCount}
-      onClick={() => {
-        onChange(pageCount)
-      }}
-    >
-      {pageCount}
-    </PageLink>
-  ]
-
-  return [
-    ...(selected >= maxVisible && hasEnoughPages ? lowerSeparator : []),
-    ...fragment,
-    ...(pageCount - selected >= maxVisible && hasEnoughPages ? upperSeparator : [])
-  ]
+  return [...fragment, ...renderUpperSeparator()]
 }
-
-const Container = glamorous.ul(
-  {
-    display: "flex",
-    padding: "0"
-  },
-  ({ disabled }: { disabled?: boolean; theme?: Theme }): {} => ({
-    pointerEvents: disabled ? "none" : "all",
-    opacity: disabled ? 0.4 : 1
-  })
-)
 
 const Paginator: React.SFC<Props> = ({ pageCount, maxVisible = 5, selected = 1, onChange = () => {} }: Props) => {
   const controlProps = { pageCount, selected, onChange }
   return (
-    <Container>
+    <ButtonGroup style={{ userSelect: "none" }}>
+      <PaginatorControl type="first" {...controlProps}>
+        <Icon.ChevronsLeft size="10" />
+      </PaginatorControl>
       <PaginatorControl type="previous" {...controlProps}>
-        <Icon.ChevronLeft size="17" />
+        <Icon.ChevronLeft size="10" />
       </PaginatorControl>
       {createPagesFragment({ pageCount, maxVisible, selected, onChange })}
       <PaginatorControl type="next" {...controlProps}>
-        <Icon.ChevronRight size="17" />
+        <Icon.ChevronRight size="10" />
       </PaginatorControl>
-    </Container>
+      <PaginatorControl type="last" {...controlProps}>
+        <Icon.ChevronsRight size="10" />
+      </PaginatorControl>
+    </ButtonGroup>
   )
 }
 

@@ -10,16 +10,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Icon = require("react-feather");
-var glamorous_1 = require("glamorous");
-var Control = glamorous_1.default.li({
-    listStyle: "none"
-}, function (_a) {
-    var _b = _a.disabled, disabled = _b === void 0 ? false : _b, theme = _a.theme;
-    return ({
-        cursor: disabled ? "not-allowed" : "pointer",
-        color: disabled ? theme.colors.palette.grey50 : "default"
-    });
-});
+var ButtonGroup_1 = require("../ButtonGroup/ButtonGroup");
+var Button_1 = require("../Button/Button");
+var CondensedButton = function (props) { return React.createElement(Button_1.default, __assign({ condensed: true }, props)); };
 var PaginatorControl = function (_a) {
     var type = _a.type, pageCount = _a.pageCount, selected = _a.selected, onChange = _a.onChange, children = _a.children;
     var handleFirst = function () {
@@ -57,22 +50,8 @@ var PaginatorControl = function (_a) {
         default:
             handler = handleLast;
     }
-    return (React.createElement(Control, { onClick: handler, disabled: isDisabled }, children));
+    return React.createElement(CondensedButton, { onClick: handler }, children);
 };
-var PageLink = glamorous_1.default.li({
-    listStyle: "none",
-    width: "30px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    userSelect: "none"
-}, function (_a) {
-    var _b = _a.active, active = _b === void 0 ? false : _b, theme = _a.theme, _c = _a.hidePointer, hidePointer = _c === void 0 ? false : _c;
-    return ({
-        color: active ? theme.colors.palette.success : "",
-        cursor: hidePointer ? "default" : "pointer"
-    });
-});
 var createPagesFragment = function (_a) {
     var pageCount = _a.pageCount, maxVisible = _a.maxVisible, selected = _a.selected, onChange = _a.onChange;
     var skip;
@@ -92,45 +71,38 @@ var createPagesFragment = function (_a) {
     };
     var hasEnoughPages = pageCount > maxVisible;
     var adjustedMaxVisible = hasEnoughPages ? maxVisible : pageCount;
+    var remainingPages = pageCount - selected;
     var cond = pageCount - selected < adjustedMaxVisible;
-    var start = cond ? pageCount - adjustedMaxVisible + 1 : skip + 1;
+    var start = (cond ? pageCount - adjustedMaxVisible : skip + 1) || 1;
     var end = cond ? pageCount : adjustedMaxVisible + skip;
-    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(PageLink, { key: pageNumber, onClick: function () {
+    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(CondensedButton, { key: pageNumber, onClick: function () {
             onChange(pageNumber);
-        }, active: pageNumber === selected }, pageNumber)); });
-    var lowerSeparator = [
-        React.createElement(PageLink, { key: 1, onClick: function () {
-                onChange(1);
-            } }, "1"),
-        start === 2 ? null : (React.createElement(PageLink, { key: "lower", hidePointer: true }, "..."))
-    ];
-    var upperSeparator = [
-        React.createElement(PageLink, { key: "upper", hidePointer: true }, "..."),
-        React.createElement(PageLink, { key: pageCount, onClick: function () {
-                onChange(pageCount);
-            } }, pageCount)
-    ];
-    return (selected >= maxVisible && hasEnoughPages ? lowerSeparator : []).concat(fragment, (pageCount - selected >= maxVisible && hasEnoughPages ? upperSeparator : []));
+        }, color: pageNumber === selected && "success" }, pageNumber)); });
+    var renderUpperSeparator = function () {
+        return remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
+            ? [
+                React.createElement(CondensedButton, { key: "upper" }, "..."),
+                React.createElement(CondensedButton, { key: pageCount, onClick: function () {
+                        onChange(pageCount);
+                    } }, pageCount)
+            ]
+            : [];
+    };
+    return fragment.concat(renderUpperSeparator());
 };
-var Container = glamorous_1.default.ul({
-    display: "flex",
-    padding: "0"
-}, function (_a) {
-    var disabled = _a.disabled;
-    return ({
-        pointerEvents: disabled ? "none" : "all",
-        opacity: disabled ? 0.4 : 1
-    });
-});
 var Paginator = function (_a) {
     var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.selected, selected = _c === void 0 ? 1 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d;
     var controlProps = { pageCount: pageCount, selected: selected, onChange: onChange };
-    return (React.createElement(Container, null,
+    return (React.createElement(ButtonGroup_1.default, { style: { userSelect: "none" } },
+        React.createElement(PaginatorControl, __assign({ type: "first" }, controlProps),
+            React.createElement(Icon.ChevronsLeft, { size: "10" })),
         React.createElement(PaginatorControl, __assign({ type: "previous" }, controlProps),
-            React.createElement(Icon.ChevronLeft, { size: "17" })),
+            React.createElement(Icon.ChevronLeft, { size: "10" })),
         createPagesFragment({ pageCount: pageCount, maxVisible: maxVisible, selected: selected, onChange: onChange }),
         React.createElement(PaginatorControl, __assign({ type: "next" }, controlProps),
-            React.createElement(Icon.ChevronRight, { size: "17" }))));
+            React.createElement(Icon.ChevronRight, { size: "10" })),
+        React.createElement(PaginatorControl, __assign({ type: "last" }, controlProps),
+            React.createElement(Icon.ChevronsRight, { size: "10" }))));
 };
 exports.default = Paginator;
 //# sourceMappingURL=Paginator.js.map

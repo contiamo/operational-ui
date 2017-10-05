@@ -14,7 +14,7 @@ type StyleProps = {
   modifiers?: Modifier[]
 }
 
-type Props = StyleProps & {
+export type Props = StyleProps & {
   className?: string
   onClick?: any
   children?: any

@@ -36,7 +36,7 @@ describe("Paginator Component", () => {
     const testFn = jest.fn()
     const comp = mount(<Paginator pageCount={5} onChange={testFn} />)
     comp
-      .find("li")
+      .find("div")
       .last()
       .simulate("click")
     expect(testFn).toHaveBeenCalled()
@@ -44,9 +44,9 @@ describe("Paginator Component", () => {
   it("Should update state of container component", () => {
     const comp = mount(<StatefulPaginator />)
     comp
-      .find("li")
-      .at(3)
+      .find("div")
+      .at(4)
       .simulate("click")
-    expect(comp.state().page).toBe(3)
+    expect(comp.state().page).toBe(2)
   })
 })
