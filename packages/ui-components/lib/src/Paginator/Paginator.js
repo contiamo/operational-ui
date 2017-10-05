@@ -10,32 +10,33 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Icon = require("react-feather");
+var glamorous_1 = require("glamorous");
 var ButtonGroup_1 = require("../ButtonGroup/ButtonGroup");
 var Button_1 = require("../Button/Button");
 var CondensedButton = function (props) { return React.createElement(Button_1.default, __assign({ condensed: true }, props)); };
 var PaginatorControl = function (_a) {
-    var type = _a.type, pageCount = _a.pageCount, selected = _a.selected, onChange = _a.onChange, children = _a.children;
+    var type = _a.type, pageCount = _a.pageCount, page = _a.page, onChange = _a.onChange, children = _a.children;
     var handleFirst = function () {
-        if (selected > 1) {
+        if (page > 1) {
             onChange(1);
         }
     };
     var handlePrevious = function () {
-        if (selected > 1) {
-            onChange(selected - 1);
+        if (page > 1) {
+            onChange(page - 1);
         }
     };
     var handleNext = function () {
-        if (selected < pageCount) {
-            onChange(selected + 1);
+        if (page < pageCount) {
+            onChange(page + 1);
         }
     };
     var handleLast = function () {
-        if (selected < pageCount) {
+        if (page < pageCount) {
             onChange(pageCount);
         }
     };
-    var isDisabled = type === "previous" || type === "first" ? selected === 1 : selected === pageCount;
+    var isDisabled = type === "previous" || type === "first" ? page === 1 : page === pageCount;
     var handler;
     switch (type) {
         case "previous":
@@ -53,13 +54,13 @@ var PaginatorControl = function (_a) {
     return React.createElement(CondensedButton, { onClick: handler }, children);
 };
 var createPagesFragment = function (_a) {
-    var pageCount = _a.pageCount, maxVisible = _a.maxVisible, selected = _a.selected, onChange = _a.onChange;
+    var pageCount = _a.pageCount, maxVisible = _a.maxVisible, page = _a.page, onChange = _a.onChange;
     var skip;
-    if (selected > maxVisible - 1 && selected < pageCount) {
-        skip = selected - maxVisible + 1;
+    if (page > maxVisible - 1 && page < pageCount) {
+        skip = page - maxVisible + 1;
     }
-    else if (selected === pageCount) {
-        skip = selected - maxVisible;
+    else if (page === pageCount) {
+        skip = page - maxVisible;
     }
     else {
         skip = 0;
@@ -71,13 +72,13 @@ var createPagesFragment = function (_a) {
     };
     var hasEnoughPages = pageCount > maxVisible;
     var adjustedMaxVisible = hasEnoughPages ? maxVisible : pageCount;
-    var remainingPages = pageCount - selected;
-    var cond = pageCount - selected < adjustedMaxVisible;
-    var start = (cond ? pageCount - adjustedMaxVisible : skip + 1) || 1;
-    var end = cond ? pageCount : adjustedMaxVisible + skip;
+    var remainingPages = pageCount - page;
+    var isCloseToEnd = remainingPages < adjustedMaxVisible;
+    var start = (isCloseToEnd ? pageCount - adjustedMaxVisible : skip + 1) || 1;
+    var end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip;
     var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(CondensedButton, { key: pageNumber, onClick: function () {
             onChange(pageNumber);
-        }, color: pageNumber === selected && "success" }, pageNumber)); });
+        }, color: pageNumber === page && "success" }, pageNumber)); });
     var renderUpperSeparator = function () {
         return remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
             ? [
@@ -90,19 +91,28 @@ var createPagesFragment = function (_a) {
     };
     return fragment.concat(renderUpperSeparator());
 };
+var Container = glamorous_1.default.div({
+    "& [role=button]": {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minWidth: 25
+    }
+});
 var Paginator = function (_a) {
-    var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.selected, selected = _c === void 0 ? 1 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d;
-    var controlProps = { pageCount: pageCount, selected: selected, onChange: onChange };
-    return (React.createElement(ButtonGroup_1.default, { style: { userSelect: "none" } },
-        React.createElement(PaginatorControl, __assign({ type: "first" }, controlProps),
-            React.createElement(Icon.ChevronsLeft, { size: "10" })),
-        React.createElement(PaginatorControl, __assign({ type: "previous" }, controlProps),
-            React.createElement(Icon.ChevronLeft, { size: "10" })),
-        createPagesFragment({ pageCount: pageCount, maxVisible: maxVisible, selected: selected, onChange: onChange }),
-        React.createElement(PaginatorControl, __assign({ type: "next" }, controlProps),
-            React.createElement(Icon.ChevronRight, { size: "10" })),
-        React.createElement(PaginatorControl, __assign({ type: "last" }, controlProps),
-            React.createElement(Icon.ChevronsRight, { size: "10" }))));
+    var pageCount = _a.pageCount, _b = _a.maxVisible, maxVisible = _b === void 0 ? 5 : _b, _c = _a.page, page = _c === void 0 ? 1 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d;
+    var controlProps = { pageCount: pageCount, page: page, onChange: onChange };
+    return (React.createElement(Container, null,
+        React.createElement(ButtonGroup_1.default, { style: { display: "flex", userSelect: "none" } },
+            React.createElement(PaginatorControl, __assign({ type: "first" }, controlProps),
+                React.createElement(Icon.ChevronsLeft, { size: "11" })),
+            React.createElement(PaginatorControl, __assign({ type: "previous" }, controlProps),
+                React.createElement(Icon.ChevronLeft, { size: "11" })),
+            createPagesFragment({ pageCount: pageCount, maxVisible: maxVisible, page: page, onChange: onChange }),
+            React.createElement(PaginatorControl, __assign({ type: "next" }, controlProps),
+                React.createElement(Icon.ChevronRight, { size: "11" })),
+            React.createElement(PaginatorControl, __assign({ type: "last" }, controlProps),
+                React.createElement(Icon.ChevronsRight, { size: "11" })))));
 };
 exports.default = Paginator;
 //# sourceMappingURL=Paginator.js.map

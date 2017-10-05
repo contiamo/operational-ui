@@ -12,7 +12,7 @@ export default (() => {
     }
 
     render() {
-      return <Paginator pageCount={30} selected={this.state.page} onChange={page => this.handleChange(page)} />
+      return <Paginator pageCount={30} page={this.state.page} onChange={page => this.handleChange(page)} />
     }
   }
 
