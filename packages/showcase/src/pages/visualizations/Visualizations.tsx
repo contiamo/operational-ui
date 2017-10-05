@@ -5,7 +5,8 @@ import { Div } from "glamorous"
 import Canvas from "../../components/Canvas/Canvas"
 import Sidebar from "../../components/Sidebar/Sidebar"
 
-import ProcessFlow1 from "./ProcessFlow/Case01"
+import ProcessFlow from "./ProcessFlow/ProcessFlow"
+import * as processFlowData from "./ProcessFlow/data/index"
 
 const SidebarWithRouter = withRouter(Sidebar),
   InfoTooltip = () => <Div>Choose a Visualization to Get Started</Div>
@@ -13,7 +14,7 @@ const SidebarWithRouter = withRouter(Sidebar),
 const links = [
   {
     label: "Process Flow",
-    links: [{ url: "/visualizations/process-flow/case01", label: "Case 1" }]
+    links: Object.keys(processFlowData).map(key => ({ url: `/visualizations/process-flow/${key}`, label: key }))
   },
   {
     label: "Bar chart",
@@ -34,7 +35,7 @@ export default () => (
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/visualizations" component={InfoTooltip} />
-      <Route path="/visualizations/process-flow/case01" component={ProcessFlow1} />
+      <Route path="/visualizations/process-flow/:case" component={ProcessFlow} />
     </Canvas>
   </Div>
 )
