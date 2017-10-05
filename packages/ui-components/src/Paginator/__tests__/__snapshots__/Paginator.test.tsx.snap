@@ -1,125 +1,162 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Paginator Component Should initialize properly 1`] = `
-<ul
-  class="css-pnafp5"
+<div
+  class="css-1ef2t77"
 >
-  <li
-    class="css-1p15y6p"
+  <div
+    class="css-1f5s5d"
+    style="display:flex;user-select:none;"
   >
-    <svg
-      height="17"
-      viewbox="0 0 24 24"
-      width="17"
-      xmlns="http://www.w3.org/2000/svg"
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
     >
-      <polyline
+      <svg
+        height="11"
+        viewbox="0 0 24 24"
+        width="11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polyline
+          fill="none"
+          points="11 17 6 12 11 7"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+        <polyline
+          fill="none"
+          points="18 17 13 12 18 7"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      <svg
         fill="none"
-        points="11 17 6 12 11 7"
+        height="11"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
-      />
-      <polyline
+        viewbox="0 0 24 24"
+        width="11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polyline
+          points="15 18 9 12 15 6"
+        />
+      </svg>
+    </div>
+    <div
+      class="css-1a897r8"
+      role="button"
+      tabindex="-1"
+    >
+      1
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      2
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      3
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      4
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      5
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      ...
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      10
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
+    >
+      <svg
         fill="none"
-        points="18 17 13 12 18 7"
+        height="11"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
-      />
-    </svg>
-  </li>
-  <li
-    class="css-1p15y6p"
-  >
-    <svg
-      fill="none"
-      height="17"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewbox="0 0 24 24"
-      width="17"
-      xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 24 24"
+        width="11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polyline
+          points="9 18 15 12 9 6"
+        />
+      </svg>
+    </div>
+    <div
+      class="css-wjbtu"
+      role="button"
+      tabindex="-1"
     >
-      <polyline
-        points="15 18 9 12 15 6"
-      />
-    </svg>
-  </li>
-  <li
-    class="css-88pg6l"
-  >
-    1
-  </li>
-  <li
-    class="css-1hbkp3c"
-  >
-    2
-  </li>
-  <li
-    class="css-1hbkp3c"
-  >
-    3
-  </li>
-  <li
-    class="css-1hbkp3c"
-  >
-    4
-  </li>
-  <li
-    class="css-1hbkp3c"
-  >
-    5
-  </li>
-  <li
-    class="css-1j7ndtv"
-  >
-    <svg
-      fill="none"
-      height="17"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewbox="0 0 24 24"
-      width="17"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline
-        points="9 18 15 12 9 6"
-      />
-    </svg>
-  </li>
-  <li
-    class="css-1j7ndtv"
-  >
-    <svg
-      height="17"
-      viewbox="0 0 24 24"
-      width="17"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline
-        fill="none"
-        points="13 17 18 12 13 7"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      />
-      <polyline
-        fill="none"
-        points="6 17 11 12 6 7"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      />
-    </svg>
-  </li>
-</ul>
+      <svg
+        height="11"
+        viewbox="0 0 24 24"
+        width="11"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polyline
+          fill="none"
+          points="13 17 18 12 13 7"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+        <polyline
+          fill="none"
+          points="6 17 11 12 6 7"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
 `;

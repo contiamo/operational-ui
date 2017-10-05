@@ -19,7 +19,7 @@ class StatefulPaginator extends React.Component {
     return (
       <Paginator
         pageCount={5}
-        selected={this.state.page}
+        page={this.state.page}
         onChange={newPage => {
           this.handleChange(newPage)
         }}
@@ -36,7 +36,7 @@ describe("Paginator Component", () => {
     const testFn = jest.fn()
     const comp = mount(<Paginator pageCount={5} onChange={testFn} />)
     comp
-      .find("li")
+      .find('[role="button"]')
       .last()
       .simulate("click")
     expect(testFn).toHaveBeenCalled()
@@ -44,8 +44,8 @@ describe("Paginator Component", () => {
   it("Should update state of container component", () => {
     const comp = mount(<StatefulPaginator />)
     comp
-      .find("li")
-      .at(3)
+      .find('[role="button"]')
+      .at(4)
       .simulate("click")
     expect(comp.state().page).toBe(3)
   })

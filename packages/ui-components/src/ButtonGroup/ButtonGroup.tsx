@@ -5,7 +5,7 @@ import glamorous from "glamorous"
 interface Props {
   className?: string
   children?: any
-  style: any
+  style?: any
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
@@ -23,6 +23,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   }
 }))
 
-const ButtonGroup: React.SFC<Props> = ({ children, style }: Props) => <Container style={style}>{children}</Container>
+const ButtonGroup: React.SFC<Props> = ({ children, style = {} }: Props) => (
+  <Container style={style}>{children}</Container>
+)
 
 export default ButtonGroup
