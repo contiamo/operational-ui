@@ -3,7 +3,8 @@
 # Constants
 
 COMP_ROOT="packages/ui-components/src/$1"
-SHOWCASE_ROOT="packages/showcase/src/pages/components/$1s"
+SHOWCASE_PATH="packages/showcase/src/pages/components"
+SHOWCASE_ROOT="$SHOWCASE_PATH/$1s"
 
 # Create component
 
@@ -82,8 +83,8 @@ touch $SHOWCASE_ROOT/$1s.tsx
 cat > $SHOWCASE_ROOT/$1s.tsx << EOL
 import * as React from "react"
 
-import Table from "../../components/PropsTable/PropsTable"
-import Playground from "../../components/Playground/Playground"
+import Table from "../../../components/PropsTable/PropsTable"
+import Playground from "../../../components/Playground/Playground"
 import { $1, Card, CardHeader } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/$1s.simple.snippet"
@@ -129,7 +130,7 @@ touch $SHOWCASE_ROOT/snippets/$1s.simple.snippet.tsx
 
 cat > $SHOWCASE_ROOT/snippets/$1s.simple.snippet.tsx << EOL
 import * as React from "react"
-import { TestComp } from "contiamo-ui-components"
+import { $1 } from "contiamo-ui-components"
 
 // Run any code inside the IIFE, as long as a React element is returned
 // (you do not need the IIFE, but it is useful to define simple state containers for stateless components)
@@ -138,7 +139,7 @@ export default (() => {
 
   return (
     <div>
-      <TestComp value={value} />
+      <$1 value={value} />
     </div>
   )
 })()
@@ -170,6 +171,6 @@ echo
 echo "🎉 $1 component created!"
 echo "A few things to do manually:"
 echo "* import component into packages/ui-components/index.ts + add to named exports"
-echo "* add showcase page to router at $SHOWCASE_ROOT/Components.tsx"
+echo "* add showcase page to router at $SHOWCASE_PATH/Components.tsx"
 echo "* add url to showcase side navigation packages/showcase/components/Sidebar.tsx"
 echo "* enjoy your new component!"
