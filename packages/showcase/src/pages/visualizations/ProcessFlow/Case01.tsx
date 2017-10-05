@@ -1,11 +1,13 @@
 import * as React from "react"
-import * as Viz from "contiamo-visualizations"
+import * as ContiamoVisualizations from "contiamo-visualizations"
 // @TODO Fix this!
 // import { ProcessFlow } from "contiamo-visualizations"
 import { Card, CardHeader } from "contiamo-ui-components"
-import Wrapper from "../react_wrapper"
 
-const ProcessFlow: any = (Viz as any)["contiamo-visualizations"].ProcessFlow
+const Viz = (ContiamoVisualizations as any)["contiamo-visualizations"]
+
+const ProcessFlow: any = Viz.ProcessFlow
+const VisualizationWrapper: any = Viz.VisualizationWrapper
 
 const data = {
     journeys: [
@@ -71,6 +73,6 @@ const data = {
 export default () => (
   <Card>
     <CardHeader>Process Flow Visualization</CardHeader>
-    <Wrapper facade={ProcessFlow} data={data} accessors={accessors} config={config} />
+    <VisualizationWrapper facade={ProcessFlow} data={data} accessors={accessors} config={config} />
   </Card>
 )
