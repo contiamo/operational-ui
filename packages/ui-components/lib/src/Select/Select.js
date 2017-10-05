@@ -46,7 +46,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var glamorous_1 = require("glamorous");
 var SelectOption_1 = require("./Option/SelectOption");
 var SelectFilter_1 = require("./Filter/SelectFilter");
 var Select_style_1 = require("./Select.style");
@@ -165,11 +164,11 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { ref: function (container) { return (_this.container = container); }, className: this.props.className + " Select" + (this.state.updating ? " Select_updating" : ""), role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
-            React.createElement("div", { className: "Select__value" }, this.getDisplayValue() || this.props.placeholder),
-            this.props.options.length && this.state.open ? (React.createElement("div", { className: "Select__options" },
+        return (React.createElement(Select_style_1.Container, { innerRef: function (container) { return (_this.container = container); }, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+            React.createElement("div", null, this.getDisplayValue() || this.props.placeholder),
+            this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
-                React.createElement("div", { className: "Select__options_list" }, this.props.options.map(function (option) {
+                React.createElement(Select_style_1.OptionsList, null, this.props.options.map(function (option) {
                     return option.label.match(_this.state.filter) && (React.createElement(SelectOption_1.default, { key: option.id, onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
                 })))) : ("")));
     };
@@ -181,6 +180,5 @@ var Select = /** @class */ (function (_super) {
     };
     return Select;
 }(React.Component));
-exports.Select = Select;
-exports.default = glamorous_1.default(Select)(Select_style_1.default);
+exports.default = Select;
 //# sourceMappingURL=Select.js.map

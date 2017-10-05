@@ -10,7 +10,7 @@ var style = function (_a) {
         padding: 0,
         borderBottom: "1px solid",
         borderColor: contiamo_ui_utils_1.darken(backgroundColor)(10),
-        "& .Select__filter": {
+        "& > input": {
             width: "100%",
             padding: theme.spacing / 2,
             border: 0,
@@ -22,7 +22,7 @@ var style = function (_a) {
 var SelectFilter = function (_a) {
     var className = _a.className, placeholder = _a.placeholder, onChange = _a.onChange;
     return (React.createElement("div", { className: className },
-        React.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: onChange, className: "Select__filter", placeholder: placeholder })));
+        React.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: onChange, placeholder: placeholder })));
 };
 SelectFilter.defaultProps = {
     placeholder: "Filter..."

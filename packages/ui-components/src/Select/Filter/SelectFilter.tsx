@@ -19,7 +19,7 @@ const style: {} = ({ theme, color }: Props) => {
     borderBottom: "1px solid",
     borderColor: darken(backgroundColor)(10),
 
-    "& .Select__filter": {
+    "& > input": {
       width: "100%",
       padding: theme.spacing / 2,
       border: 0,
@@ -34,7 +34,6 @@ const SelectFilter: React.SFC<Props> = ({ className, placeholder, onChange }: Pr
     <input
       onClick={e => e.stopPropagation()}
       onChange={onChange}
-      className="Select__filter"
       placeholder={placeholder}
     />
   </div>

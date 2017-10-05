@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 import SelectOption from "./Option/SelectOption"
 import SelectFilter from "./Filter/SelectFilter"
 
-import SelectStyle from "./Select.style"
+import { Container, Options, OptionsList } from "./Select.style"
 
 export interface Option {
   label: string
@@ -13,7 +13,7 @@ export interface Option {
   placeholder?: boolean
 }
 
-type Props = {
+interface IProps {
   className?: string
   placeholder?: string | boolean
   options: Option[]
@@ -23,15 +23,16 @@ type Props = {
   onChange: (newValue: Option | Option[]) => void
   onClick?: () => void
   onFilter?: () => void
+  color?: string
 }
 
-type State = {
+interface IState {
   open: boolean
   updating: boolean
   filter: RegExp
 }
 
-class Select extends React.Component<Props, State> {
+class Select extends React.Component<IProps, IState> {
   static defaultProps = {
     className: "",
     filterable: false,
@@ -39,7 +40,7 @@ class Select extends React.Component<Props, State> {
     multiple: false
   }
 
-  constructor(props: Props) {
+  constructor(props: IProps) {
     super(props)
     this.state = {
       open: false,
@@ -151,18 +152,21 @@ class Select extends React.Component<Props, State> {
 
   render() {
     return (
-      <div
-        ref={container => (this.container = container)}
-        className={`${this.props.className} Select${this.state.updating ? " Select_updating" : ""}`}
+      <Container
+        innerRef={container => (this.container = container)}
+        className={this.props.className}
+        updating={this.state.updating}
+        color={this.props.color}
+        disabled={this.props.disabled}
         role="listbox"
         tabIndex={-2}
         onClick={() => this.toggle()}
       >
-        <div className="Select__value">{this.getDisplayValue() || this.props.placeholder}</div>
+        <div>{this.getDisplayValue() || this.props.placeholder}</div>
         {this.props.options.length && this.state.open ? (
-          <div className="Select__options">
+          <Options>
             {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
-            <div className="Select__options_list">
+            <OptionsList>
               {this.props.options.map(
                 (option: Option) =>
                   option.label.match(this.state.filter) && (
@@ -175,15 +179,14 @@ class Select extends React.Component<Props, State> {
                     </SelectOption>
                   )
               )}
-            </div>
-          </div>
+            </OptionsList>
+          </Options>
         ) : (
           ""
         )}
-      </div>
+      </Container>
     )
   }
 }
 
-export default glamorous(Select)(SelectStyle)
-export { Select }
+export default Select
