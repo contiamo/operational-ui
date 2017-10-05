@@ -10,9 +10,11 @@ class Renderer {
   links: Links
   nodes: Nodes
   state: TState
+  el: TSeriesEl
 
   constructor(state: TState, events: TEvents, el: TSeriesEl) {
     this.state = state
+    this.el = el
     this.layout = new Layout(state)
     this.links = new Links(state, events, el)
     this.nodes = new Nodes(state, events, el)
@@ -48,9 +50,8 @@ class Renderer {
     })(rows)
   }
 
-  //@TODO check this
   close(): any {
-    // $(this.computed.el.node()).html("")
+    this.el.node().innerHTML = ""
   }
 }
 

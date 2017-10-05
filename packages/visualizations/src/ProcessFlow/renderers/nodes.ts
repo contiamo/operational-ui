@@ -40,21 +40,62 @@ const MINNODESIZE: number = 100,
 
 class Nodes extends AbstractRenderer {
   updateDraw(): void {
-    let nodeGroups: TNodeSelection = this.el
-      .selectAll("g.node-group")
-      .data(this.data, (node: TNode): string => node.id())
+    let nodeGroups: any = this.el.selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
 
     this.exit(nodeGroups)
-    this.enterAndUpdate(nodeGroups.enter())
+    this.enterAndUpdate(nodeGroups)
   }
 
-  enterAndUpdate(enterNodes: TNodeSelection): void {
-    let enterNodeGroups: TNodeSelection = enterNodes
+  enterAndUpdate(nodeGroups: TNodeSelection): void {
+    const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize]),
+      ctx: Nodes = this
+    let n: number = 0
+
+    nodeGroups
+      .enter()
       .append("g")
       .attr("class", "node-group")
-      .attr("transform", (node: TNode): string => "translate(" + node.x + "," + node.y + ")")
-
-    this.updateNodes(enterNodeGroups)
+      .each(function(d) {
+        d3
+          .select(this)
+          .append("path")
+          .attr("class", "node")
+          .attr(
+            "d",
+            d3Symbol()
+              .type(ctx.getNodeShape)
+              .size(0),
+          )
+          .attr("fill", d.color())
+          .attr("stroke", d.stroke())
+          .on("mouseenter", ctx.onMouseOver(ctx))
+        d3
+          .select(this)
+          .append("text")
+          .attr("class", "label")
+      })
+      .merge(nodeGroups)
+      .attr("transform", (d: TNode): string => "translate(" + d.x + "," + d.y + ")")
+      .transition()
+      .duration(ctx.config.duration)
+      .each(function(d: TNode): void {
+        d3
+          .select(this)
+          .select("path.node")
+          .attr(
+            "d",
+            d3Symbol()
+              .type(ctx.getNodeShape)
+              .size(scale(d.size())),
+          )
+        ++n
+      })
+      .on("end", (): void => {
+        --n
+        if (n < 1) {
+          this.updateNodeLabels(nodeGroups)
+        }
+      })
   }
 
   // @TODO How do I import the d3 symbol types?
@@ -67,40 +108,6 @@ class Nodes extends AbstractRenderer {
       default:
         return symbolDiamond
     }
-  }
-
-  updateNodes(enterNodeGroups: TNodeSelection): void {
-    const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize])
-    let n: number = 0
-    enterNodeGroups
-      .append("path")
-      .attr("class", "node")
-      .attr(
-        "d",
-        d3Symbol()
-          .type(this.getNodeShape)
-          .size(0),
-      )
-      .attr("fill", (d: TNode): string => d.color())
-      .attr("stroke", (d: TNode): string => d.stroke())
-      .on("mouseenter", this.onMouseOver(this))
-      .merge(enterNodeGroups)
-      .transition()
-      .duration(this.config.duration)
-      .attr(
-        "d",
-        d3Symbol()
-          .type(this.getNodeShape)
-          .size((d: TNode): number => scale(d.size())),
-      )
-      .each((): void => {
-        ++n
-      })
-      .on("end", (): void => {
-        if (!--n) {
-          this.updateNodeLabels(enterNodeGroups)
-        }
-      })
   }
 
   getNodeBBox(el: any): SVGRect {
@@ -121,13 +128,13 @@ class Nodes extends AbstractRenderer {
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(enterNodes: TNodeSelection): void {
+  updateNodeLabels(nodeGroups: TNodeSelection): void {
     const that: any = this
-    enterNodes
-      .append("text")
-      .attr("class", "label")
-      .merge(enterNodes)
-      .text((node: TNode): string => node.label())
+    nodeGroups
+      .enter()
+      .selectAll("text.label")
+      .merge(nodeGroups)
+      .text((d: TNode): string => d.label())
       .attr("x", function(d: TNode): number {
         return that.getNodeLabelX(d, this)
       })
