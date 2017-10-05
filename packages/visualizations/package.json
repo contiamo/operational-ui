@@ -1,10 +1,9 @@
 {
   "name": "contiamo-visualizations",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
-  "private": "true",
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
   "dependencies": {
