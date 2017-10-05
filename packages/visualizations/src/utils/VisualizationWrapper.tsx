@@ -1,7 +1,7 @@
 import * as React from "react"
 import { forEach } from "lodash/fp"
 
-class Wrapper extends React.Component {
+class VisualizationWrapper extends React.Component {
   viz: any
   containerNode: HTMLElement
   props: {
@@ -39,4 +39,4 @@ class Wrapper extends React.Component {
   }
 }
 
-export default Wrapper
+export default VisualizationWrapper

@@ -26,6 +26,62 @@ import Timeline from "./Timeline/Timeline"
 const SidebarWithRouter = withRouter(Sidebar)
 const InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
 
+const links = [
+  {
+    label: "Basics",
+    links: [
+      { url: "/components/colors", label: "Colors" },
+      { url: "/components/typography", label: "Typography" },
+      { url: "/components/icons", label: "Icons" }
+    ]
+  },
+  {
+    label: "UI Elements",
+    links: [
+      { url: "/components/buttons", label: "Buttons" },
+      { url: "/components/cards", label: "Cards" },
+      { url: "/components/chips", label: "Chips" },
+      { url: "/components/breakdown", label: "Breakdown" },
+      { label: "Context Menu" },
+      { url: "/components/info-tiles", label: "InfoTiles" },
+      { url: "/components/timeline", label: "Timeline" }
+    ]
+  },
+  {
+    label: "Data Entry",
+    links: [
+      { url: "/components/color-picker", label: "Color Picker" },
+      { label: "Date Picker" },
+      { url: "/components/form-fields", label: "Form Fields" },
+      { url: "/components/switch", label: "Switch" }
+    ]
+  },
+  {
+    label: "Feedback",
+    links: [
+      { label: "Alerts" },
+      { label: "Messages" },
+      { label: "Modals" },
+      { label: "Notifications" },
+      { url: "/components/progress", label: "Progress" },
+      { url: "/components/tooltips", label: "Tooltips" }
+    ]
+  },
+  {
+    label: "Navigation",
+    links: [
+      { url: "/components/paginator", label: "Pagination" },
+      { url: "/components/sidebar", label: "Sidebar" },
+      { label: "Side Navigation" },
+      { url: "/components/tabs", label: "Tabs" }
+    ]
+  },
+  {
+    label: "Layout",
+    links: [{ label: "Grid" }, { label: "List" }]
+  }
+]
+
 export default () => (
   <Div
     css={{
@@ -36,7 +92,7 @@ export default () => (
       height: "100vh"
     }}
   >
-    <SidebarWithRouter css={{ height: "100%" }} />
+    <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={Buttons} />
