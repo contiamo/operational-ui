@@ -6,7 +6,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
 >
   <div
     class="css-1f5s5d"
-    style="display:flex;user-select:none;"
+    style="display:flex;user-select:none"
   >
     <div
       class="css-wjbtu"

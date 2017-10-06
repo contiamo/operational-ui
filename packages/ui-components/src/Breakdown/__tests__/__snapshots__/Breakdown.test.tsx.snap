@@ -10,7 +10,7 @@ exports[`Breakdown Component Should initialize properly 1`] = `
     3
   </div>
   <div
-    style="width:100%;"
+    style="width:100%"
   >
     <label
       class="css-adasqi"

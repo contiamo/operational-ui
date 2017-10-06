@@ -1,7 +1,7 @@
-const webpackMerge = require("webpack-merge"),
-  CopyWebpackPlugin = require("copy-webpack-plugin"),
-  baseConfig = require("./config.base"),
-  { resolve } = require("path")
+const webpackMerge = require("webpack-merge")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const baseConfig = require("./config.base")
+const { resolve } = require("path")
 
 module.exports = webpackMerge(baseConfig, {
   plugins: [

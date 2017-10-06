@@ -1,11 +1,10 @@
-const webpackMerge = require("webpack-merge"),
-  DashboardPlugin = require("webpack-dashboard/plugin"),
-  webpack = require("webpack"),
-  { resolve } = require("path")
+const webpackMerge = require("webpack-merge")
+const webpack = require("webpack")
+const { resolve } = require("path")
 
 const config = require("./config.base")
 module.exports = webpackMerge(config, {
-  plugins: [new webpack.NamedModulesPlugin(), new DashboardPlugin()],
+  plugins: [new webpack.NamedModulesPlugin()],
   devServer: {
     contentBase: resolve(__dirname, "..", "public"),
     historyApiFallback: true,

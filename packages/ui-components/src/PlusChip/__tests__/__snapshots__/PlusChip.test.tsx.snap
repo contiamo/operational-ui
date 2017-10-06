@@ -2,9 +2,9 @@
 
 exports[`Plus Chip Should correctly render 1`] = `
 <div
-  className="undefined PlusChip"
+  class="undefined PlusChip"
   role="button"
-  tabIndex={-1}
+  tabindex="-1"
 >
   +
 </div>

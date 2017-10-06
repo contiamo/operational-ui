@@ -6,24 +6,6 @@
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
-  "dependencies": {
-    "@types/d3-scale": "^1.0.10",
-    "@types/d3-selection": "^1.1.0",
-    "@types/d3-shape": "^1.2.1",
-    "@types/d3-transition": "^1.1.0",
-    "@types/jquery": "^3.2.12",
-    "@types/lodash": "^4.14.74",
-    "awesome-typescript-loader": "^3.2.3",
-    "css-loader": "^0.28.7",
-    "d3": "^4.10.2",
-    "glamorous": "^4.8.0",
-    "jquery": "^3.2.1",
-    "lodash": "^4.17.4",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.6.0"
-  },
   "scripts": {
     "package": "webpack",
     "prettier": "echo 'Prettier is not yet ready ready for the pre-commit hook. See prettier_ script for tentative implementation.'",
@@ -33,16 +15,33 @@
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "start": "webpack-dev-server"
   },
+  "dependencies": {
+    "d3": "^4.10.2",
+    "glamorous": "^4.8.0",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "react": "^16.0.0"
+  },
   "devDependencies": {
+    "@types/d3-scale": "^1.0.10",
+    "@types/d3-selection": "^1.1.0",
+    "@types/d3-shape": "^1.2.1",
+    "@types/d3-transition": "^1.1.0",
+    "@types/jquery": "^3.2.12",
+    "@types/lodash": "^4.14.74",
+    "@types/react": "^16.0.9",
+    "awesome-typescript-loader": "^3.2.3",
     "css-loader": "^0.28.7",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "prettier": "^1.7.0",
+    "react-test-renderer": "^16.0.0",
     "style-loader": "^0.19.0",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.2.1",
     "tslint-config-prettier": "^1.5.0",
     "typescript": "^2.5.2",
+    "webpack": "^3.6.0",
     "webpack-dev-server": "^2.7.1"
   }
 }

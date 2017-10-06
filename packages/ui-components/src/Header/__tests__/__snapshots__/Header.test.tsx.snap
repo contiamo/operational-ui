@@ -1,93 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header Header component renders 1`] = `
-<ThemeProvider
-  theme={
-    Object {
-      "baseZIndex": 0,
-      "colors": Object {
-        "palette": Object {
-          "black": "#000000",
-          "error": "#DE1A1A",
-          "grey10": "#F5F5F5",
-          "grey20": "#F1F1F1",
-          "grey30": "#D0D9E5",
-          "grey40": "#C6D1E1",
-          "grey50": "#BBCADC",
-          "grey60": "#999999",
-          "grey70": "#8092B0",
-          "grey80": "#747474",
-          "grey90": "#445873",
-          "info": "#1499CE",
-          "success": "#00b34d",
-          "warning": "#FFAE00",
-          "white": "#FFFFFF",
-        },
-        "usage": Object {
-          "bodyBackground": "#F1F1F1",
-          "bodyText": "#555f61",
-          "cardBackground": "#FFFFFF",
-          "contentBorder": "#dadada",
-          "contentSeparatorLine": "#f2f2f2",
-          "emphasizedText": "#373d3f",
-          "lightText": "#969696",
-          "subContentSeparatorLine": "#f8f8f8",
-        },
-      },
-      "shadows": Object {
-        "card": "0px 1px 2px #d3d1d1",
-        "pressed": "inset 0 1px 1px rgba(0,0,0,0.15)",
-      },
-      "spacing": 12,
-      "typography": Object {
-        "body": Object {
-          "fontSize": 13,
-          "fontWeight": 400,
-          "letterSpacing": "normal",
-          "lineHeight": "1.5",
-          "textTransform": "none",
-        },
-        "heading1": Object {
-          "color": "#373d3f",
-          "fontSize": 13,
-          "fontWeight": 700,
-          "letterSpacing": "normal",
-          "lineHeight": "1.5",
-          "textTransform": "none",
-        },
-        "heading2": Object {
-          "&::before": Object {
-            "content": "» ",
-          },
-          "color": "#969696",
-          "fontSize": 13,
-          "fontWeight": 600,
-          "letterSpacing": "normal",
-          "lineHeight": "1.5",
-          "textTransform": "uppercase",
-        },
-        "small": Object {
-          "fontSize": 12,
-          "fontWeight": 400,
-          "letterSpacing": "normal",
-          "lineHeight": "1.5",
-          "textTransform": "none",
-        },
-        "title": Object {
-          "fontSize": 22,
-          "fontWeight": 600,
-          "letterSpacing": "normal",
-          "lineHeight": "1.5",
-          "textTransform": "none",
-        },
-      },
-    }
-  }
+<div
+  class="css-16vo6x2 hi"
 >
-  <glamorous(Header)
-    className="hi"
-  >
-    Hello
-  </glamorous(Header)>
-</ThemeProvider>
+  Hello
+</div>
 `;

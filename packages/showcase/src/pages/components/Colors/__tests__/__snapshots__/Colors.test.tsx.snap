@@ -16,7 +16,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#1499CE;"
+      style="background-color:#1499CE"
     />
     <p>
       info
@@ -26,7 +26,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#00b34d;"
+      style="background-color:#00b34d"
     />
     <p>
       success
@@ -36,7 +36,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#FFAE00;"
+      style="background-color:#FFAE00"
     />
     <p>
       warning
@@ -46,7 +46,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#DE1A1A;"
+      style="background-color:#DE1A1A"
     />
     <p>
       error
@@ -56,7 +56,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#FFFFFF;"
+      style="background-color:#FFFFFF"
     />
     <p>
       white
@@ -66,7 +66,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#000000;"
+      style="background-color:#000000"
     />
     <p>
       black
@@ -76,7 +76,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#F5F5F5;"
+      style="background-color:#F5F5F5"
     />
     <p>
       grey10
@@ -86,7 +86,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#F1F1F1;"
+      style="background-color:#F1F1F1"
     />
     <p>
       grey20
@@ -96,7 +96,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#D0D9E5;"
+      style="background-color:#D0D9E5"
     />
     <p>
       grey30
@@ -106,7 +106,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#C6D1E1;"
+      style="background-color:#C6D1E1"
     />
     <p>
       grey40
@@ -116,7 +116,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#BBCADC;"
+      style="background-color:#BBCADC"
     />
     <p>
       grey50
@@ -126,7 +126,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#999999;"
+      style="background-color:#999999"
     />
     <p>
       grey60
@@ -136,7 +136,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#8092B0;"
+      style="background-color:#8092B0"
     />
     <p>
       grey70
@@ -146,7 +146,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#747474;"
+      style="background-color:#747474"
     />
     <p>
       grey80
@@ -156,7 +156,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     class="css-dgyz0l"
   >
     <div
-      style="background-color:#445873;"
+      style="background-color:#445873"
     />
     <p>
       grey90

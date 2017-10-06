@@ -187,7 +187,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     The Select component holds its value in its \`state\`. The value is either an \`Option\` object, or an Array of \`Option\` objects, depending on the \`multiple\` prop. The shape of an Option object is described below.
   </p>
   <pre
-    style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444;"
+    style="display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0;color:#444"
   >
     <code>
       
@@ -198,20 +198,20 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       </span>
       : 
       <span
-        style="color:#880000;"
+        style="color:#880000"
       >
         1
       </span>
       , 
       <span
-        style="color:#888888;"
+        style="color:#888888"
       >
         // a number that is passed as a \`key\` in the React iterator,
       </span>
       
         label: 
       <span
-        style="color:#880000;"
+        style="color:#880000"
       >
         "Any string"
       </span>
@@ -225,7 +225,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         <span>
           &lt;
           <span
-            style="font-weight:bold;"
+            style="font-weight:bold"
           >
             div
           </span>
@@ -235,7 +235,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         <span>
           &lt;/
           <span
-            style="font-weight:bold;"
+            style="font-weight:bold"
           >
             div
           </span>
