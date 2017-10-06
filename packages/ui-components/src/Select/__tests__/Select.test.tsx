@@ -1,8 +1,10 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import { Select, Option } from "../Select"
-import style from "../Select.style"
+import ThemelessSelect, { Option } from "../Select"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+
+const Select = wrapDefaultTheme(ThemelessSelect)
 
 const options: [Option] = [
   { id: 1, label: "John", value: -10 },

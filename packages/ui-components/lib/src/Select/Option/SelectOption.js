@@ -9,7 +9,9 @@ var Container = glamorous_1.default.div(function (_a) {
     return {
         backgroundColor: backgroundColor,
         padding: theme.spacing / 2,
-        color: selected ? contiamo_ui_utils_1.readableTextColor(backgroundColor)(["#aaa"]) : contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: selected
+            ? contiamo_ui_utils_1.readableTextColor(backgroundColor)(["#aaa"])
+            : contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         outline: "none",
         ":hover": {
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(5),

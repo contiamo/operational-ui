@@ -13,13 +13,15 @@ type Props = {
   color?: string
 }
 
-const Container = glamorous.div(({ theme, color, selected }: {theme: Theme, color?: string, selected: boolean}) => {
+const Container = glamorous.div(({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }) => {
   const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
   return {
     backgroundColor,
     padding: theme.spacing / 2,
-    color: selected ? readableTextColor(backgroundColor)(["#aaa"]) : readableTextColor(backgroundColor)(["black", "white"]),
+    color: selected
+      ? readableTextColor(backgroundColor)(["#aaa"])
+      : readableTextColor(backgroundColor)(["black", "white"]),
     outline: "none",
 
     ":hover": {
