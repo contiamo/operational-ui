@@ -1,21 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColorPicker Should initialize properly 1`] = `
-<ColorPicker
-  color="#03f"
-  size={16}
->
+<div>
   <div
-    onClick={[Function]}
-  >
-    <glamorous(div)
-      color="#03f"
-      size={16}
-    >
-      <div
-        className="css-ebsmcl"
-      />
-    </glamorous(div)>
-  </div>
-</ColorPicker>
+    class="css-ebsmcl"
+  />
+</div>
 `;

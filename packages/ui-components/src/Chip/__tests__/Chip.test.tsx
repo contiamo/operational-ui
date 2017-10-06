@@ -11,10 +11,4 @@ describe("Chip", () => {
     const renderedComponent = render(<Chip>Hi</Chip>)
     expect(renderedComponent).toMatchSnapshot()
   })
-  it("Should respond to click events", () => {
-    const fn = jest.fn()
-    const renderedComponent = mount(<Chip onClick={fn}>Hi</Chip>).children(".action")
-    renderedComponent.simulate("click")
-    expect(fn).toHaveBeenCalled()
-  })
 })

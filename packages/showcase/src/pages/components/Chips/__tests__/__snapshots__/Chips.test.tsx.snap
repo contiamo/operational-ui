@@ -13,7 +13,7 @@ exports[`Cards Page Should render correctly 1`] = `
     Most commonly used for filters, these elements represent small bits of information that give a sense of context to the user. Chips can be interactive, or simply informative. They can take on any color passed through \`props\`, along with a symbol for the button that will be displayed if click behavior is detected.
   </p>
   <div
-    style="display:flex;"
+    style="display:flex"
   >
     <div
       class="css-1kcm2xa chip"
@@ -135,7 +135,7 @@ exports[`Cards Page Should render correctly 1`] = `
     </tbody>
   </table>
   <div
-    style="margin-bottom:32px;"
+    style="margin-bottom:32px"
   />
   <div
     class="css-imab3e"

@@ -22,7 +22,7 @@ exports[`Cards Page Should render correctly 1`] = `
      different kinds of content.
   </div>
   <div
-    style="display:flex;"
+    style="display:flex"
   >
     <div
       class="css-x8kytd"

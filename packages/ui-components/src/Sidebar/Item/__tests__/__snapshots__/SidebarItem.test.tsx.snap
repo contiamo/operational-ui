@@ -2,11 +2,10 @@
 
 exports[`SidebarItem Should initialize 1`] = `
 <div
-  className="undefined  "
+  class="undefined  "
 >
   <div
-    className="header "
-    onClick={[Function]}
+    class="header "
   />
 </div>
 `;

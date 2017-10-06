@@ -52,7 +52,7 @@ exports[`Timeline Page Should render correctly 1`] = `
     </div>
   </div>
   <div
-    style="margin-bottom:32px;"
+    style="margin-bottom:32px"
   />
   <div
     class="css-imab3e"

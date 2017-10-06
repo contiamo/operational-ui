@@ -13,7 +13,7 @@ exports[`InfoTiles Page Should render correctly 1`] = `
     InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
   </p>
   <div
-    style="display:flex;"
+    style="display:flex"
   >
     <div
       class="css-farlai"

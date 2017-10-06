@@ -2,6 +2,6 @@
 
 exports[`HeaderSeparator component renders 1`] = `
 <div
-  className="hi"
+  class="hi"
 />
 `;

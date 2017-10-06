@@ -3,7 +3,7 @@
 exports[`IntroPage Should render correctly 1`] = `
 <div
   class="css-11vlmwh"
-  style="padding:32px;max-width:700px;"
+  style="padding:32px;max-width:700px"
 >
   <h1>
     Contiamo UI
