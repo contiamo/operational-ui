@@ -21,10 +21,17 @@ export default [
     optional: true
   },
   {
-    name: "active",
+    name: "condensed",
     description: "Condensed option",
     defaultValue: "",
     type: "boolean",
     optional: true
+  },
+  {
+    name: "disabled",
+    description: "Disabled option",
+    defaultValue: "",
+    type: "boolean",
+    optional: false
   }
 ]

@@ -31,14 +31,8 @@ exports[`Tabs Page Should render correctly 1`] = `
         class="playgroundCode"
       >
         <div
-          class="ReactCodeMirror playgroundStage"
-        >
-          <textarea
-            autocomplete="off"
-          >
-            [object Object]
-          </textarea>
-        </div>
+          class="react-codemirror2 playgroundStage"
+        />
       </div>
       <div
         class="playgroundPreview"

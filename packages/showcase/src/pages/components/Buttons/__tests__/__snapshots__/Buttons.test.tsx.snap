@@ -25,14 +25,8 @@ exports[`Buttons Page Should render correctly 1`] = `
         class="playgroundCode"
       >
         <div
-          class="ReactCodeMirror playgroundStage"
-        >
-          <textarea
-            autocomplete="off"
-          >
-            [object Object]
-          </textarea>
-        </div>
+          class="react-codemirror2 playgroundStage"
+        />
       </div>
       <div
         class="playgroundPreview"
@@ -120,7 +114,7 @@ exports[`Buttons Page Should render correctly 1`] = `
       </tr>
       <tr>
         <td>
-          active
+          condensed
         </td>
         <td>
           Condensed option
@@ -131,6 +125,21 @@ exports[`Buttons Page Should render correctly 1`] = `
         </td>
         <td>
           ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          disabled
+        </td>
+        <td>
+          Disabled option
+        </td>
+        <td />
+        <td>
+          boolean
+        </td>
+        <td>
+          🚫
         </td>
       </tr>
     </tbody>
