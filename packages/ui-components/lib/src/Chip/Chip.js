@@ -13,7 +13,7 @@ var Container = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         width: "fit-content",
         padding: hasChip
-            ? theme.spacing / 4 + "px " + 3 * theme.spacing / 4 + "px " + theme.spacing / 4 + "px " + theme.spacing / 4 + "px"
+            ? theme.spacing / 4 + "px " + 1.5 * theme.spacing + "px " + theme.spacing / 4 + "px " + theme.spacing / 4 + "px"
             : theme.spacing / 4,
         cursor: "pointer",
         overflow: "hidden",
@@ -27,9 +27,11 @@ var Action = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
     return {
-        backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(-5),
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         position: "absolute",
+        width: theme.spacing * 1.25,
         top: 0,
         right: 0,
         display: "flex",
@@ -37,16 +39,17 @@ var Action = glamorous_1.default.div(function (_a) {
         justifyContent: "center",
         height: "100%",
         padding: "0 " + theme.spacing / 4 + "px",
-        width: "fit-content",
-        opacity: 0,
-        zIndex: theme.baseZIndex + 100
+        transition: "background-color 0.3s",
+        "&:hover": {
+            backgroundColor: "rgba(255, 255, 255, 0.15)"
+        }
     };
 });
 var Chip = function (_a) {
     var className = _a.className, style = _a.style, children = _a.children, onClick = _a.onClick, color = _a.color, symbol = _a.symbol;
-    return (React.createElement(Container, { className: className + " co_chip", style: style, color: color, hasChip: !!onClick },
+    return (React.createElement(Container, { className: (className || "") + " co_chip", style: style, color: color, hasChip: !!onClick },
         children,
-        onClick && (React.createElement(Action, { tabIndex: -1, role: "button", className: "co_action", color: color, onClick: onClick }, symbol || "x"))));
+        onClick && (React.createElement(Action, { className: "co_action", color: color, onClick: onClick }, symbol || "×"))));
 };
 exports.default = Chip;
 //# sourceMappingURL=Chip.js.map

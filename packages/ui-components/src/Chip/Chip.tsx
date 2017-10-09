@@ -24,7 +24,7 @@ const Container = glamorous.div(
       alignItems: "center",
       width: "fit-content",
       padding: hasChip
-        ? `${theme.spacing / 4}px ${3 * theme.spacing / 4}px ${theme.spacing / 4}px ${theme.spacing / 4}px`
+        ? `${theme.spacing / 4}px ${1.5 * theme.spacing}px ${theme.spacing / 4}px ${theme.spacing / 4}px`
         : theme.spacing / 4,
       cursor: "pointer",
       overflow: "hidden",
@@ -40,9 +40,11 @@ const Container = glamorous.div(
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): any => {
   const backgroundColor = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
   return {
-    backgroundColor: darken(backgroundColor)(-5),
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
     color: readableTextColor(backgroundColor)(["black", "white"]),
     position: "absolute",
+    width: theme.spacing * 1.25,
     top: 0,
     right: 0,
     display: "flex",
@@ -50,18 +52,19 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
     justifyContent: "center",
     height: "100%",
     padding: `0 ${theme.spacing / 4}px`,
-    width: "fit-content",
-    opacity: 0,
-    zIndex: theme.baseZIndex + 100
+    transition: "background-color 0.3s",
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, 0.15)"
+    }
   }
 })
 
 const Chip = ({ className, style, children, onClick, color, symbol }: Props) => (
-  <Container className={`${className} co_chip`} style={style} color={color} hasChip={!!onClick}>
+  <Container className={`${className || ""} co_chip`} style={style} color={color} hasChip={!!onClick}>
     {children}
     {onClick && (
-      <Action tabIndex={-1} role="button" className="co_action" color={color} onClick={onClick}>
-        {symbol || "x"}
+      <Action className="co_action" color={color} onClick={onClick}>
+        {symbol || "×"}
       </Action>
     )}
   </Container>
