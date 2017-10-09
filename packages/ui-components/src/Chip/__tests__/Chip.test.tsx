@@ -8,7 +8,6 @@ const Chip = wrapDefaultTheme(ThemelessChip)
 
 describe("Chip", () => {
   it("Should render", () => {
-    const renderedComponent = render(<Chip>Hi</Chip>)
-    expect(renderedComponent).toMatchSnapshot()
+    expect(render(<Chip>Hi</Chip>)).toMatchSnapshot()
   })
 })
