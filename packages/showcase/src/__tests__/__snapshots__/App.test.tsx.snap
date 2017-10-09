@@ -79,7 +79,7 @@ exports[`App starts 1`] = `
       tabindex="-1"
     >
       <a
-        href="#"
+        href="/"
       >
         <svg
           height="20"
@@ -133,7 +133,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="SideNavigationItem__label"
+          class="css-j9z7vu SideNavigationItem__label"
         >
           Composed
         </div>
