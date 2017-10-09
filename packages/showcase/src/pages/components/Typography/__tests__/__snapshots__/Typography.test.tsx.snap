@@ -13,7 +13,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     <em>
       contiamo-ui-components
     </em>
-     keeps typography styles: by default, there are two font sizes and weights, organized in 4 typography styles, as follows:
+     keeps typography styles, organized in 5 typography styles, as follows:
   </p>
   <div
     class="css-1w8lcxk"
@@ -25,14 +25,8 @@ exports[`Tooltips Page Should render correctly 1`] = `
         class="playgroundCode"
       >
         <div
-          class="ReactCodeMirror playgroundStage"
-        >
-          <textarea
-            autocomplete="off"
-          >
-            [object Object]
-          </textarea>
-        </div>
+          class="react-codemirror2 playgroundStage"
+        />
       </div>
       <div
         class="playgroundPreview"

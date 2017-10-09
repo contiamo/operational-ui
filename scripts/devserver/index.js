@@ -54,4 +54,4 @@ const config = {
 const compiler = webpack(config)
 const server = new WebpackDevServer(compiler)
 
-server.listen(3000)
+server.listen(8080)

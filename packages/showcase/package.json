@@ -54,7 +54,7 @@
     "contiamo-ui-components": "=0.0.1-20",
     "contiamo-ui-utils": "=0.0.1-20",
     "contiamo-visualizations": "=0.0.1-20",
-    "component-playground": "^2.0.0",
+    "component-playground": "^3.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "jest-cli": "^20.0.4",
