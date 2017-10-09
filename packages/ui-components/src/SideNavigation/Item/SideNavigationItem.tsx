@@ -18,7 +18,6 @@ const Container = glamorous.div(({ theme, active }: Props): {} => {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: `${theme.spacing / 2}px ${theme.spacing * 1.7}px`,
     borderRadius: 2,
     width: "fit-content",
     minHeight: 40,

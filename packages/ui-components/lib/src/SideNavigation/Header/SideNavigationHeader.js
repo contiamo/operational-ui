@@ -121,7 +121,7 @@ var style = function (_a) {
         alignItems: "center",
         width: "100%",
         borderBottom: "1px solid rgba(255, 255, 255, .1)",
-        padding: theme.spacing,
+        padding: theme.spacing + "px 0",
         cursor: options && options.length ? "pointer" : "default",
         backgroundColor: "inherit",
         // Caret

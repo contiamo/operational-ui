@@ -15,9 +15,14 @@ type Props = {
 const style: {} = (): {} => ({
   "& a": {
     display: "flex",
+    position: "relative",
     alignItems: "center",
+    justifyContent: "flex-start",
     textDecoration: "none",
-    color: "white"
+    color: "white",
+    width: "100%",
+    paddingLeft: 20,
+    height: 40
   },
   "& .SideNavigationItem__label": {
     marginLeft: 20
@@ -28,7 +33,7 @@ const AppSideNavigation = ({ location }: Props) => {
   return (
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader>
-        <Link to="/">
+        <Link style={{ left: -7 }} to="/">
           <Img css={{ maxWidth: 32, marginRight: 16 }} alt="Contiamo" src="/img/logo/outline.png" />
           Contiamo
         </Link>
