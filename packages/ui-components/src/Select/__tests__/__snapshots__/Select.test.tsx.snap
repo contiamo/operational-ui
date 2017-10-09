@@ -2,13 +2,11 @@
 
 exports[`Select Should render correctly 1`] = `
 <div
-  class=" Select"
+  class="css-3kwy5e"
   role="listbox"
   tabindex="-2"
 >
-  <div
-    class="Select__value"
-  >
+  <div>
     Select me
   </div>
 </div>

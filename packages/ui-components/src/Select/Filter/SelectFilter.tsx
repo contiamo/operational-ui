@@ -11,37 +11,30 @@ type Props = {
   color?: string
 }
 
-const style: {} = ({ theme, color }: Props) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : "white"
+const Container = glamorous.div(
+  ({} = ({ theme, color }: Props) => {
+    const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
-  return {
-    padding: 0,
-    borderBottom: "1px solid",
-    borderColor: darken(backgroundColor)(10),
+    return {
+      padding: 0,
+      borderBottom: "1px solid",
+      borderColor: darken(backgroundColor)(10),
 
-    "& .Select__filter": {
-      width: "100%",
-      padding: theme.spacing / 2,
-      border: 0,
-      outline: "none",
-      font: "inherit"
+      "& > input": {
+        width: "100%",
+        padding: theme.spacing / 2,
+        border: 0,
+        outline: "none",
+        font: "inherit"
+      }
     }
-  }
-}
-
-const SelectFilter: React.SFC<Props> = ({ className, placeholder, onChange }: Props) => (
-  <div className={className}>
-    <input
-      onClick={e => e.stopPropagation()}
-      onChange={onChange}
-      className="Select__filter"
-      placeholder={placeholder}
-    />
-  </div>
+  })
 )
 
-SelectFilter.defaultProps = {
-  placeholder: "Filter..."
-}
+const SelectFilter: React.SFC<Props> = ({ className, placeholder = "Filter...", onChange }: Props) => (
+  <Container className={className}>
+    <input onClick={e => e.stopPropagation()} onChange={onChange} placeholder={placeholder} />
+  </Container>
+)
 
-export default glamorous(SelectFilter)(style)
+export default SelectFilter

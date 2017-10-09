@@ -13,13 +13,15 @@ type Props = {
   color?: string
 }
 
-const style = ({ theme, color }: Props) => {
+const Container = glamorous.div(({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }) => {
   const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
   return {
     backgroundColor,
     padding: theme.spacing / 2,
-    color: readableTextColor(backgroundColor)(["black", "white"]),
+    color: selected
+      ? readableTextColor(backgroundColor)(["#aaa"])
+      : readableTextColor(backgroundColor)(["black", "white"]),
     outline: "none",
 
     ":hover": {
@@ -27,32 +29,29 @@ const style = ({ theme, color }: Props) => {
       color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
     },
 
-    "& + .Select__option": {
+    "&:not(:first-child)": {
       borderTop: "1px solid",
       borderColor: darken(backgroundColor)(10)
-    },
-
-    "&.Select__option_selected": {
-      color: readableTextColor(backgroundColor)(["#aaa"])
     }
   }
-}
+})
 
-const SelectOption: React.SFC<Props> = ({ className, selected, onClick, children }: Props) => (
-  <div
-    className={`${className} Select__option${selected ? " Select__option_selected" : ""}`}
+const SelectOption: React.SFC<Props> = ({ className, selected, color, onClick, children }: Props) => (
+  <Container
+    className={className}
+    selected={selected}
+    color={color}
     tabIndex={-2}
     role="option"
     aria-selected={selected}
     onClick={onClick}
   >
     {children}
-  </div>
+  </Container>
 )
 
 SelectOption.defaultProps = {
   selected: false
 }
 
-export default glamorous(SelectOption)(style)
-export { SelectOption }
+export default SelectOption
