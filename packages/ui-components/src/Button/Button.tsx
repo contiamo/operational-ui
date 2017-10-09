@@ -10,6 +10,7 @@ type StyleProps = {
   theme?: Theme
   color?: string
   active?: boolean
+  disabled?: boolean
   condensed?: boolean
   modifiers?: Modifier[]
 }
@@ -20,7 +21,7 @@ export type Props = StyleProps & {
   children?: any
 }
 
-const Container = glamorous.div(({ theme, color, active, modifiers, condensed }: StyleProps): any => {
+const Container = glamorous.div(({ theme, color, active, disabled, modifiers, condensed }: StyleProps): any => {
   const backgroundColor: string = color ? hexOrColor(color)(theme.colors.palette[color] || "white") as string : "white"
   const activeBackgroundColor: string = darken(backgroundColor)(5)
   const textColor = readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"])
@@ -33,10 +34,11 @@ const Container = glamorous.div(({ theme, color, active, modifiers, condensed }:
     padding: condensed ? `${spacing / 3}px ${spacing * 1 / 2}px` : `${spacing * 2 / 3}px ${spacing}px`,
     border: "1px solid rgba(0, 0, 0, .2)",
     borderRadius: 2,
-    cursor: "pointer",
+    cursor: disabled ? "auto" : "pointer",
     boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     color: textColor,
+    opacity: disabled ? 0.6 : 1.0,
     outline: "none",
 
     ":hover": {
@@ -53,10 +55,16 @@ const Container = glamorous.div(({ theme, color, active, modifiers, condensed }:
       boxShadow: activeBoxShadow
     },
 
-    marginLeft: isSpace ? spacing / 2 : "0"
+    marginLeft: isSpace ? spacing / 2 : undefined
   }
 })
 
-const Button: React.SFC<Props> = props => <Container tabIndex={-1} role="button" {...props} />
+const Button: React.SFC<Props> = props => {
+  const componentProps = {
+    ...props,
+    onClick: props.disabled ? null : props.onClick
+  }
+  return <Container tabIndex={-1} role="button" {...componentProps} />
+}
 
 export default Button

@@ -12,7 +12,7 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, color = _a.color, active = _a.active, modifiers = _a.modifiers, condensed = _a.condensed;
+    var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, modifiers = _a.modifiers, condensed = _a.condensed;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "white";
     var activeBackgroundColor = contiamo_ui_utils_1.darken(backgroundColor)(5);
     var textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"]);
@@ -24,10 +24,11 @@ var Container = glamorous_1.default.div(function (_a) {
         padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px",
         border: "1px solid rgba(0, 0, 0, .2)",
         borderRadius: 2,
-        cursor: "pointer",
+        cursor: disabled ? "auto" : "pointer",
         boxShadow: active ? activeBoxShadow : "none",
         backgroundColor: active ? activeBackgroundColor : backgroundColor,
         color: textColor,
+        opacity: disabled ? 0.6 : 1.0,
         outline: "none",
         ":hover": {
             backgroundColor: activeBackgroundColor,
@@ -40,9 +41,12 @@ var Container = glamorous_1.default.div(function (_a) {
         ":active": {
             boxShadow: activeBoxShadow
         },
-        marginLeft: isSpace ? spacing / 2 : "0"
+        marginLeft: isSpace ? spacing / 2 : undefined
     };
 });
-var Button = function (props) { return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, props)); };
+var Button = function (props) {
+    var componentProps = __assign({}, props, { onClick: props.disabled ? null : props.onClick });
+    return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, componentProps));
+};
 exports.default = Button;
 //# sourceMappingURL=Button.js.map
