@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline BodyType should render properly 1`] = `<Unknown />`;
+
+exports[`Timeline Heading1Type should render properly 1`] = `<Unknown />`;
+
+exports[`Timeline Heading2Type should render properly 1`] = `<Unknown />`;
+
+exports[`Timeline SmallType should render properly 1`] = `<Unknown />`;
+
+exports[`Timeline TitleType should render properly 1`] = `<Unknown />`;
