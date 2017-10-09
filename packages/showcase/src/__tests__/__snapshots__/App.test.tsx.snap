@@ -3,15 +3,16 @@
 exports[`App starts 1`] = `
 <div>
   <div
-    class="css-1tikp86"
+    class="css-1f023pv"
   >
     <div
-      class="css-q2mq94 SideNavigationHeader"
+      class="css-1woyxdt SideNavigationHeader"
       role="listbox"
       tabindex="-1"
     >
       <a
         href="/"
+        style="left:-7px"
       >
         <img
           alt="Contiamo"
@@ -25,7 +26,7 @@ exports[`App starts 1`] = `
       />
     </div>
     <div
-      class="css-1vqcugq undefined"
+      class="css-1n1hwgn undefined"
       role="button"
       tabindex="-1"
     >
@@ -74,7 +75,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1vqcugq undefined"
+      class="css-1n1hwgn undefined"
       role="button"
       tabindex="-1"
     >
@@ -140,7 +141,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1vqcugq undefined"
+      class="css-1n1hwgn undefined"
       role="button"
       tabindex="-1"
     >
