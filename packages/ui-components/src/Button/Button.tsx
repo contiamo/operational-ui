@@ -34,7 +34,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, modifiers, co
     padding: condensed ? `${spacing / 3}px ${spacing * 1 / 2}px` : `${spacing * 2 / 3}px ${spacing}px`,
     border: "1px solid rgba(0, 0, 0, .2)",
     borderRadius: 2,
-    cursor: "pointer",
+    cursor: disabled ? "auto" : "pointer",
     boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     color: textColor,
@@ -59,6 +59,12 @@ const Container = glamorous.div(({ theme, color, active, disabled, modifiers, co
   }
 })
 
-const Button: React.SFC<Props> = props => <Container tabIndex={-1} role="button" {...props} />
+const Button: React.SFC<Props> = props => {
+  const componentProps = {
+    ...props,
+    onClick: props.disabled ? null : props.onClick
+  }
+  return <Container tabIndex={-1} role="button" {...componentProps} />
+}
 
 export default Button

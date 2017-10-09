@@ -24,7 +24,7 @@ var Container = glamorous_1.default.div(function (_a) {
         padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px",
         border: "1px solid rgba(0, 0, 0, .2)",
         borderRadius: 2,
-        cursor: "pointer",
+        cursor: disabled ? "auto" : "pointer",
         boxShadow: active ? activeBoxShadow : "none",
         backgroundColor: active ? activeBackgroundColor : backgroundColor,
         color: textColor,
@@ -44,6 +44,9 @@ var Container = glamorous_1.default.div(function (_a) {
         marginLeft: isSpace ? spacing / 2 : undefined
     };
 });
-var Button = function (props) { return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, props)); };
+var Button = function (props) {
+    var componentProps = __assign({}, props, { onClick: props.disabled ? null : props.onClick });
+    return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, componentProps));
+};
 exports.default = Button;
 //# sourceMappingURL=Button.js.map
