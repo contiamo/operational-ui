@@ -8,6 +8,7 @@ import Breakdown from "./src/Breakdown/Breakdown"
 import Card, { CardHeader } from "./src/Card/Card"
 import Chip from "./src/Chip/Chip"
 import ColorPicker from "./src/ColorPicker/ColorPicker"
+import Grid from "./src/Grid/Grid"
 import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/Header"
 import Icon from "./src/Icon/Icon"
 import InfoTile from "./src/InfoTile/InfoTile"
@@ -37,6 +38,7 @@ export {
   CardHeader,
   Chip,
   ColorPicker,
+  Grid,
   Header,
   HeaderItem,
   HeaderSeparator,

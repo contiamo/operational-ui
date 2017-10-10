@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grids Showcase Page Should render correctly 1`] = `
+<div
+  class="css-1dkvbfz"
+>
+  <div
+    class="css-imab3e"
+  >
+    Grids
+  </div>
+  <p>
+    Grid component based on CSS grid spec. Beware 
+    <a
+      href="http://caniuse.com/#search=grid"
+    >
+      browser support
+    </a>
+    .
+  </p>
+  <h4>
+    Usage
+  </h4>
+  <div
+    class="css-1w8lcxk"
+  >
+    <div
+      class="playground"
+    >
+      <div
+        class="playgroundCode"
+      >
+        <div
+          class="react-codemirror2 playgroundStage"
+        />
+      </div>
+      <div
+        class="playgroundPreview"
+      >
+        <div>
+          <div
+            class="previewArea"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-xa6ngs"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          rows
+        </td>
+        <td>
+          A list of row dimensions, either a string ('auto', '20%') or a numerical value, which indicates pixels.
+        </td>
+        <td>
+          ['auto', 'auto']
+        </td>
+        <td>
+          (string || number)[]
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          columns
+        </td>
+        <td>
+          A list of column dimensions, either a string ('auto', '20%') or a numerical value, which indicates pixels.
+        </td>
+        <td>
+          ['auto', 'auto']
+        </td>
+        <td>
+          (string || number)[]
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gap
+        </td>
+        <td>
+          Grid gap
+        </td>
+        <td>
+          theme.spacing
+        </td>
+        <td>
+          number
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          children
+        </td>
+        <td>
+          Child elements.
+        </td>
+        <td>
+          -
+        </td>
+        <td>
+          ReactElement[]
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
