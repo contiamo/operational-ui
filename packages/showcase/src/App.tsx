@@ -19,7 +19,16 @@ const Container = glamorous.div({
   width: "100vw",
   backgroundColor: contiamoTheme.colors.usage.bodyBackground,
   height: "100vh",
-  marginLeft: 60
+  paddingLeft: 60,
+  "& > *": {
+    width: "100%"
+  },
+  "& > :nth-child(2)": {
+    display: "flex",
+    alignItems: "flex-start",
+    padding: 16,
+    height: "100vh"
+  }
 })
 
 const styles: {} = {

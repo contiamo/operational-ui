@@ -23,8 +23,8 @@ var style = function (_a) {
 };
 exports.style = style;
 var Header = function (_a) {
-    var className = _a.className, children = _a.children;
-    return React.createElement("div", { className: className }, children);
+    var className = _a.className, style = _a.style, children = _a.children;
+    return (React.createElement("div", { style: style, className: className }, children));
 };
 exports.default = glamorous_1.default(Header)(style);
 //# sourceMappingURL=Header.js.map

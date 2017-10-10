@@ -6,7 +6,7 @@ exports[`App starts 1`] = `
     class="css-1f023pv"
   >
     <div
-      class="css-1woyxdt SideNavigationHeader"
+      class="css-2sxhxf SideNavigationHeader"
       role="listbox"
       tabindex="-1"
     >
@@ -200,10 +200,11 @@ exports[`App starts 1`] = `
     />
   </div>
   <div
-    class="css-1980k2e"
+    class="css-oslscu"
   >
     <div
-      class="css-t9hfxf"
+      class="css-17142z3"
+      style="box-shadow:0px 1px 2px #d3d1d1;background-color:#fff"
     >
       Contiamo UI
     </div>

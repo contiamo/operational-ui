@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ComponentsPage Should render correctly 1`] = `
-<div
-  class="css-10t383z"
->
+<div>
   <div
     class="css-13tr0bq"
   >
