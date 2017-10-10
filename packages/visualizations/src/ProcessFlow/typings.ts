@@ -24,6 +24,8 @@ interface IConfig {
   linkStroke: string
   maxLinkWidth: number
   maxNodeSize: number
+  minLinkWidth: number
+  minNodeSize: number
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
   uid: string

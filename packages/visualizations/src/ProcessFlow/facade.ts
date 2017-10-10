@@ -17,6 +17,8 @@ class ProcessFlow extends AbstractFacade {
         height: 1000,
         maxNodeSize: 1500,
         maxLinkWidth: 15,
+        minNodeSize: 100,
+        minLinkWidth: 2,
         labelOffset: 5,
         labelPadding: 5,
         linkStroke: "#aaa",

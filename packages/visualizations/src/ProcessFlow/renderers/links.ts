@@ -3,8 +3,6 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { TLink, TScale, IFocus, TLinkSelection } from "../typings"
 
-const MINLINKWIDTH: number = 2
-
 class Links extends AbstractRenderer {
   updateDraw(): void {
     const links: TLinkSelection = this.el
@@ -16,7 +14,7 @@ class Links extends AbstractRenderer {
   }
 
   enterAndUpdate(links: TLinkSelection): void {
-    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
+    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])
     links
       .append("path")
       .attr("class", "link")
@@ -51,7 +49,7 @@ class Links extends AbstractRenderer {
 
   focusPoint(element: any, d: TLink): IFocus {
     if (d == null) return
-    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
+    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])
 
     return {
       offset: scale(d.size()) / 2,

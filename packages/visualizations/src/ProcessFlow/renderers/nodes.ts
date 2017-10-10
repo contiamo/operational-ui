@@ -4,39 +4,38 @@ import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { TNode, TScale, IFocus, TNodeSelection } from "../typings"
 
-const MINNODESIZE: number = 100,
-  nodeLabelOptions: any = {
-    top: {
-      dy: "0",
-      textAnchor: "middle",
-      x: 0,
-      y: -1,
-    },
-    bottom: {
-      dy: "1em",
-      textAnchor: "middle",
-      x: 0,
-      y: 1,
-    },
-    middle: {
-      dy: "0.35em",
-      textAnchor: "middle",
-      x: 0,
-      y: 0,
-    },
-    left: {
-      dy: "0.35em",
-      textAnchor: "end",
-      x: -1,
-      y: 0,
-    },
-    right: {
-      dy: "0.35em",
-      textAnchor: "start",
-      x: 1,
-      y: 0,
-    },
-  }
+const nodeLabelOptions: any = {
+  top: {
+    dy: "0",
+    textAnchor: "middle",
+    x: 0,
+    y: -1,
+  },
+  bottom: {
+    dy: "1em",
+    textAnchor: "middle",
+    x: 0,
+    y: 1,
+  },
+  middle: {
+    dy: "0.35em",
+    textAnchor: "middle",
+    x: 0,
+    y: 0,
+  },
+  left: {
+    dy: "0.35em",
+    textAnchor: "end",
+    x: -1,
+    y: 0,
+  },
+  right: {
+    dy: "0.35em",
+    textAnchor: "start",
+    x: 1,
+    y: 0,
+  },
+}
 
 class Nodes extends AbstractRenderer {
   updateDraw(): void {
@@ -47,7 +46,7 @@ class Nodes extends AbstractRenderer {
   }
 
   enterAndUpdate(nodeGroups: TNodeSelection): void {
-    const scale: TScale = this.sizeScale([MINNODESIZE, this.config.maxNodeSize]),
+    const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
       ctx: Nodes = this
     let n: number = 0
 
