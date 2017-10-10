@@ -66,11 +66,11 @@ class Layout {
   }
 
   placeNode(used: number[], x: number, node: TNode): void {
-    if (indexOf(used)(x) === -1) {
+    if (find((val: number): boolean => val === x)(used)) {
+      this.placeNode(used, x + 1, node)
+    } else {
       node.x = x
       used.push(x)
-    } else {
-      this.placeNode(used, x + 1, node)
     }
   }
 
