@@ -51,11 +51,5 @@ var SideNavigation = function (_a) {
     var className = _a.className, children = _a.children;
     return React.createElement("div", { className: className }, children);
 };
-SideNavigation.defaultProps = {
-    expandOnHover: false,
-    expandedWidth: 280,
-    width: 64,
-    fix: false
-};
 exports.default = glamorous_1.default(SideNavigation)(style);
 //# sourceMappingURL=SideNavigation.js.map

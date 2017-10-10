@@ -9,6 +9,7 @@ import HeaderSeparator from "./Separator/HeaderSeparator"
 
 type Props = {
   className?: string
+  style?: any
   children: React.ReactNode
   theme?: Theme
   color: string
@@ -27,7 +28,11 @@ const style: {} = ({ theme, color }: Props) => {
   }
 }
 
-const Header: React.SFC<Props> = ({ className, children }) => <div className={className}>{children}</div>
+const Header: React.SFC<Props> = ({ className, style, children }) => (
+  <div style={style} className={className}>
+    {children}
+  </div>
+)
 
 export default glamorous(Header)(style)
 export { HeaderItem, HeaderSeparator, HeaderTitle, style }

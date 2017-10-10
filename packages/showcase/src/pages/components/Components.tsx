@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
-import { Div } from "glamorous"
 
 import Canvas from "../../components/Canvas/Canvas"
 import Sidebar from "../../components/Sidebar/Sidebar"
@@ -24,7 +23,8 @@ import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
 
 const SidebarWithRouter = withRouter(Sidebar)
-const InfoTooltip = () => <Div>Choose a Component to Get Started</Div>
+
+const InfoTooltip = () => <div>Choose a Component to Get Started</div>
 
 const links = [
   {
@@ -83,15 +83,7 @@ const links = [
 ]
 
 export default () => (
-  <Div
-    css={{
-      display: "flex",
-      alignItems: "flex-start",
-      padding: 16,
-      width: "100%",
-      height: "100vh"
-    }}
-  >
+  <div>
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/components" component={InfoTooltip} />
@@ -114,5 +106,5 @@ export default () => (
       <Route path="/components/timeline" component={Timeline} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </Canvas>
-  </Div>
+  </div>
 )

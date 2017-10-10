@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
-import { Div } from "glamorous"
 
 import Canvas from "../../components/Canvas/Canvas"
 import Sidebar from "../../components/Sidebar/Sidebar"
@@ -8,8 +7,9 @@ import Sidebar from "../../components/Sidebar/Sidebar"
 import ProcessFlow from "./ProcessFlow/ProcessFlow"
 import * as processFlowData from "./ProcessFlow/data/index"
 
-const SidebarWithRouter = withRouter(Sidebar),
-  InfoTooltip = () => <Div>Choose a Visualization to Get Started</Div>
+const SidebarWithRouter = withRouter(Sidebar)
+
+const InfoTooltip = () => <div>Choose a Visualization to Get Started</div>
 
 const links = [
   {
@@ -23,19 +23,11 @@ const links = [
 ]
 
 export default () => (
-  <Div
-    css={{
-      display: "flex",
-      alignItems: "flex-start",
-      padding: 16,
-      width: "100%",
-      height: "100vh"
-    }}
-  >
+  <div>
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/visualizations" component={InfoTooltip} />
       <Route path="/visualizations/process-flow/:case" component={ProcessFlow} />
     </Canvas>
-  </Div>
+  </div>
 )

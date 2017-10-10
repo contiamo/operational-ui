@@ -72,12 +72,5 @@ const style = ({
 
 const SideNavigation: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>
 
-SideNavigation.defaultProps = {
-  expandOnHover: false,
-  expandedWidth: 280,
-  width: 64,
-  fix: false
-}
-
 export default glamorous(SideNavigation)(style)
 export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }
