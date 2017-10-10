@@ -43,7 +43,6 @@ export interface ILinkAttrs {
   dash?: number
   focusLabel?: any
   label?: string
-  marker?: string
   size: number
   source: TNode
   sourceId: string

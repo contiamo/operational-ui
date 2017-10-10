@@ -23,7 +23,6 @@ class ProcessFlow extends AbstractFacade {
         labelPadding: 5,
         linkStroke: "#aaa",
         visualizationName: this.visualizationName(),
-        arrowFill: "#ccc",
         uid: uniqueId(this.visualizationName()),
         showNodeFocusLabels: true,
         showLinkFocusLabels: true,

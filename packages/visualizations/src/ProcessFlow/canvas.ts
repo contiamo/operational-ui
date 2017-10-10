@@ -10,23 +10,8 @@ class Canvas extends AbstractCanvas {
 
   createInitialElements(): void {
     this.insertFocusLabel()
-    this.defineMarker()
   }
 
-  defineMarker(): void {
-    // Add arrow marker definition for link paths
-    this.el
-      .append("defs")
-      .append("marker")
-      .attr("id", "arrow")
-      .attr("viewBox", "-7 -6 14 12")
-      .attr("markerWidth", 16)
-      .attr("markerHeight", 12)
-      .attr("markerUnits", "userSpaceOnUse")
-      .attr("orient", "auto")
-      .append("path")
-      .attr("d", "M-5,-5L5,0L-5,5")
-  }
   //
   // mouseOverElement(): d3.Selection<Node> {
   //   return this.el

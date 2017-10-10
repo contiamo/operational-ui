@@ -15,10 +15,6 @@ let defaultAccessors: any = {
   label: (link: ILinkAttrs): string => {
     return link.label || ""
   },
-  // Marker style for link. Defaults to "arrow".
-  marker: (link: ILinkAttrs): string => {
-    return link.marker || "arrow"
-  },
   // Value for determining width of link. Default: 1.
   size: (link: ILinkAttrs): number => {
     return link.size || 1

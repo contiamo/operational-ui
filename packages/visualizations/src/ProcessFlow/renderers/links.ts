@@ -28,7 +28,6 @@ class Links extends AbstractRenderer {
       .attr("stroke", (d: TLink): string => d.stroke())
       .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
       .attr("stroke-dasharray", (d: TLink): number => d.dash())
-      .attr("marker-mid", "url(#arrow)")
   }
 
   linkStartPath(link: TLink): string {
