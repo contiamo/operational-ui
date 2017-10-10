@@ -44,6 +44,9 @@
     "tinycolor2": "^1.4.1"
   },
   "jest": {
+    "setupFiles": [
+      "./test-polyfills.js"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
