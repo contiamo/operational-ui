@@ -4,18 +4,19 @@ import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-type TNode = Nodes
-type TLink = Link
-type TNodeSelection = d3.Selection<d3.BaseType, TNode, Element, null>
-type TLinkSelection = d3.Selection<d3.BaseType, TLink, Element, null>
+export { TState, TStateWriter, TEvents, TSeriesEl }
+export type TNode = Nodes
+export type TLink = Link
+export type TNodeSelection = d3.Selection<d3.BaseType, TNode, Element, null>
+export type TLinkSelection = d3.Selection<d3.BaseType, TLink, Element, null>
 
 //@TODO
-type TAccessors = any
+export type TAccessors = any
 
 // @TODO How do I import the d3 scale types?
-type TScale = (size: number) => number
+export type TScale = (size: number) => number
 
-interface IConfig {
+export interface IConfig {
   arrowFill: string
   duration: number
   height: number
@@ -33,12 +34,12 @@ interface IConfig {
   width: number
 }
 
-interface IJourney {
+export interface IJourney {
   size: number
   path: string[]
 }
 
-interface ILinkAttrs {
+export interface ILinkAttrs {
   dash?: number
   focusLabel?: any
   label?: string
@@ -51,7 +52,7 @@ interface ILinkAttrs {
   targetId: string
 }
 
-interface INodeAttrs {
+export interface INodeAttrs {
   color?: string
   shape?: string
   size?: number
@@ -61,7 +62,7 @@ interface INodeAttrs {
   labelPosition?: string
 }
 
-interface IInputData {
+export interface IInputData {
   journeys?: IJourney[]
   nodes?: any[]
   nodeAccessors?: any
@@ -69,35 +70,16 @@ interface IInputData {
   el?: any
 }
 
-interface IData {
+export interface IData {
   journeys: IJourney[]
   nodes: TNode[]
   links: TLink[]
 }
 
-interface IFocus {
+export interface IFocus {
   offset: number
   type: string
   x: number
   y: number
   id: string
-}
-export {
-  IConfig,
-  IData,
-  IFocus,
-  IInputData,
-  IJourney,
-  ILinkAttrs,
-  INodeAttrs,
-  TAccessors,
-  TEvents,
-  TLink,
-  TLinkSelection,
-  TNode,
-  TNodeSelection,
-  TScale,
-  TSeriesEl,
-  TState,
-  TStateWriter,
 }
