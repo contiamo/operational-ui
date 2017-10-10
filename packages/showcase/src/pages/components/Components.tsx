@@ -22,6 +22,7 @@ import Paginator from "./Paginator/Paginator"
 import Progress from "./Progress/Progress"
 import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
+import Uploads from "./Uploads/Uploads"
 
 const SidebarWithRouter = withRouter(Sidebar)
 
@@ -54,7 +55,8 @@ const links = [
       { url: "/components/color-picker", label: "Color Picker" },
       { label: "Date Picker" },
       { url: "/components/form-fields", label: "Form Fields" },
-      { url: "/components/switch", label: "Switch" }
+      { url: "/components/switch", label: "Switch" },
+      { url: "/components/upload", label: "Upload" }
     ]
   },
   {
@@ -106,6 +108,7 @@ export default () => (
       <Route path="/components/progress" component={Progress} />
       <Route path="/components/tabs" component={Tabs} />
       <Route path="/components/timeline" component={Timeline} />
+      <Route path="/components/upload" component={Uploads} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </Canvas>
   </div>
