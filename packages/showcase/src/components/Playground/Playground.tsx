@@ -6,22 +6,47 @@ import { wrapTheme } from "contiamo-ui-utils"
 import { contiamoTheme } from "contiamo-ui-components"
 import transformSnippet from "./transform-snippet"
 
-type Props = {
+interface IProps {
   snippet: string
   components?: { [id: string]: any }
   scope?: { [id: string]: any }
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
+interface IState {
+  expanded: boolean
+}
+
+const customGrey: string = "#cdcdcd"
+
+const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }) => ({
+  borderBottom: `3px solid ${customGrey}`,
+  borderLeft: `3px solid ${customGrey}`,
+  borderRight: `3px solid ${customGrey}`,
+
+  ...isExpanded
+    ? {
+        border: 0,
+        backgroundColor: theme.colors.palette.white,
+        position: "fixed",
+        top: 0,
+        left: 60,
+        width: "calc(100vw - 60px)",
+        height: "100vh",
+        "& .playgroundStage": {
+          height: "100%",
+          "& > div": {
+            height: "100%"
+          }
+        }
+      }
+    : {},
+
   "& .playground": {
     display: "flex",
     width: "100%",
-    maxWidth: 850,
-    maxHeight: 400
-  },
-
-  "& .playgroundCode": {
-    border: "3px solid #dadada"
+    height: isExpanded ? "calc(100% - 20px)" : "auto",
+    maxWidth: isExpanded ? "none" : 850,
+    maxHeight: isExpanded ? "none" : 400
   },
 
   "& .playgroundCode, & .playgroundPreview": {
@@ -42,20 +67,55 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   }
 }))
 
-const Playground: React.SFC<Props> = ({ snippet, components, scope }) => {
-  const wrappedComponents: { [id: string]: any } = {}
-  const comps = components || {}
-  for (const key in comps) {
-    wrappedComponents[key] = wrapTheme(contiamoTheme)(comps[key])
+const ExpandPrompt = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  ...theme.typography.small,
+  width: "calc(100% + 6px)",
+  position: "relative",
+  left: -3,
+  height: 20,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: theme.spacing / 4,
+  cursor: "pointer",
+  backgroundColor: customGrey,
+  color: theme.colors.palette.white,
+  transition: "all 0.3s",
+  "&:hover": {
+    backgroundColor: theme.colors.palette.info
   }
-  return (
-    <Container>
-      <ComponentPlayground
-        codeText={transformSnippet(snippet)}
-        scope={{ React, ...wrappedComponents, ...(scope || {}) }}
-      />
-    </Container>
-  )
+}))
+
+class Playground extends React.Component<IProps, IState> {
+  state: IState = {
+    expanded: false
+  }
+
+  render() {
+    const { snippet, components, scope } = this.props
+    const wrappedComponents: { [id: string]: any } = {}
+    const comps = components || {}
+    for (const key in comps) {
+      wrappedComponents[key] = wrapTheme(contiamoTheme)(comps[key])
+    }
+    return (
+      <Container isExpanded={this.state.expanded}>
+        <ExpandPrompt
+          onClick={(ev: any): void => {
+            this.setState(prevState => ({
+              expanded: !prevState.expanded
+            }))
+          }}
+        >
+          {this.state.expanded ? "Collapse" : "Give yourself some space - expand this playground"}
+        </ExpandPrompt>
+        <ComponentPlayground
+          codeText={transformSnippet(snippet)}
+          scope={{ React, ...wrappedComponents, ...(scope || {}) }}
+        />
+      </Container>
+    )
+  }
 }
 
 export default Playground

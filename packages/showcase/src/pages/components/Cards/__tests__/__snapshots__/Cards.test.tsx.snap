@@ -57,8 +57,13 @@ exports[`Cards Page Should render correctly 1`] = `
     Usage
   </h4>
   <div
-    class="css-1w8lcxk"
+    class="css-1dospeq"
   >
+    <div
+      class="css-10kxzv6"
+    >
+      Give yourself some space - expand this playground
+    </div>
     <div
       class="playground"
     >

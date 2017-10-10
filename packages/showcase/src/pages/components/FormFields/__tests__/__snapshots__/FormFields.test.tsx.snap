@@ -23,8 +23,13 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     This component lives up to its name, allowing a user to input text, numbers, or other data.
   </p>
   <div
-    class="css-1w8lcxk"
+    class="css-1dospeq"
   >
+    <div
+      class="css-10kxzv6"
+    >
+      Give yourself some space - expand this playground
+    </div>
     <div
       class="playground"
     >
@@ -145,8 +150,13 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     The Select component presents users with a list of information with single-choice or multiple-choice options. Select elements can have options filled onClick, and also support filters.
   </p>
   <div
-    class="css-1w8lcxk"
+    class="css-1dospeq"
   >
+    <div
+      class="css-10kxzv6"
+    >
+      Give yourself some space - expand this playground
+    </div>
     <div
       class="playground"
     >
