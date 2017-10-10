@@ -37,6 +37,25 @@ const nodeLabelOptions: any = {
   },
 }
 
+const nodeShapeOptions: any = {
+  squareDiamond: {
+    symbol: symbolSquare,
+    rotation: 45
+  },
+  square: {
+    symbol: symbolSquare,
+    rotation: 0,
+  },
+  diamond: {
+    symbol: symbolDiamond,
+    rotation: 0,
+  },
+  circle: {
+    symbol: symbolCircle,
+    rotation: 0,
+  },
+}
+
 class Nodes extends AbstractRenderer {
   updateDraw(): void {
     let nodeGroups: any = this.el.selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
@@ -62,9 +81,10 @@ class Nodes extends AbstractRenderer {
           .attr(
             "d",
             d3Symbol()
-              .type(ctx.getNodeShape)
+              .type(nodeShapeOptions[d.shape()].symbol)
               .size(0),
           )
+          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
           .on("mouseenter", ctx.onMouseOver(ctx))
@@ -84,9 +104,10 @@ class Nodes extends AbstractRenderer {
           .attr(
             "d",
             d3Symbol()
-              .type(ctx.getNodeShape)
+              .type(nodeShapeOptions[d.shape()].symbol)
               .size(scale(d.size())),
           )
+          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
         ++n
       })
       .on("end", (): void => {
@@ -97,33 +118,21 @@ class Nodes extends AbstractRenderer {
       })
   }
 
-  // @TODO How do I import the d3 symbol types?
-  getNodeShape(d: TNode): any {
-    switch (d.shape()) {
-      case "square":
-        return symbolSquare
-      case "circle":
-        return symbolCircle
-      default:
-        return symbolDiamond
-    }
-  }
-
-  getNodeBBox(el: any): SVGRect {
+  getNodeBoundingRect(el: any): SVGRect {
     const node: any = d3
       .select(el.parentNode)
       .select("path.node")
       .node()
-    return node.getBBox()
+    return node.getBoundingClientRect()
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).width / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBoundingRect(el).width / 2 + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBBox(el).height / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBoundingRect(el).height / 2 + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
@@ -146,9 +155,9 @@ class Nodes extends AbstractRenderer {
 
   focusPoint(element: any, d: TNode): IFocus {
     if (d == null) return
-    const nodeBBox = this.getNodeBBox(element.node())
+    const offset: number = this.getNodeBoundingRect(element.node()).width / 2
     return {
-      offset: nodeBBox.width / 2,
+      offset: offset,
       type: "node",
       x: d.x,
       y: d.y,

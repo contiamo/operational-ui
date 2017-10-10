@@ -10,7 +10,7 @@ let defaultAccessors: any = {
 
   // attribute by which nodes should be colored
   shape: (node: INodeAttrs): string => {
-    return node.shape || "diamond"
+    return node.shape || "squareDiamond"
   },
 
   size: (node: INodeAttrs): number => {
