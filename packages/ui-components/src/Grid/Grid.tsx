@@ -5,7 +5,7 @@ type Dimension = string | number
 
 interface IProps {
   className?: string
-  children?: any
+  children?: React.ReactNode
   rows?: Dimension[]
   columns?: Dimension[]
   gap?: number
