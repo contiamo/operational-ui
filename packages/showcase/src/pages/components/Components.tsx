@@ -9,6 +9,7 @@ import Breakdown from "./Breakdown/Breakdown"
 import FormFields from "./FormFields/FormFields"
 import Cards from "./Cards/Cards"
 import Chips from "./Chips/Chips"
+import Grids from "./Grids/Grids"
 import Tooltips from "./Tooltips/Tooltips"
 import InfoTiles from "./InfoTiles/InfoTiles"
 import SidebarPage from "./Sidebar/Sidebar"
@@ -78,7 +79,7 @@ const links = [
   },
   {
     label: "Layout",
-    links: [{ label: "Grid" }, { label: "List" }]
+    links: [{ url: "/components/grids", label: "Grid" }, { label: "List" }]
   }
 ]
 
@@ -90,6 +91,7 @@ export default () => (
       <Route path="/components/buttons" component={Buttons} />
       <Route path="/components/breakdown" component={Breakdown} />
       <Route path="/components/form-fields" component={FormFields} />
+      <Route path="/components/grids" component={Grids} />
       <Route path="/components/color-picker" component={ColorPickers} />
       <Route path="/components/cards" component={Cards} />
       <Route path="/components/chips" component={Chips} />
