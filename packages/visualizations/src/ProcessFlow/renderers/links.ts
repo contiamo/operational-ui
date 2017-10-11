@@ -9,6 +9,7 @@ const MINOPACITY: number = 0.5,
 class Links extends AbstractRenderer {
   updateDraw(): void {
     const links: TLinkSelection = this.el
+      .select("g.links-group")
       .selectAll("path.link")
       .data(this.data, (link: TLink): string => link.sourceId() + ";" + link.targetId())
 

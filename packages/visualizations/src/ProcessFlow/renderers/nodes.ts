@@ -58,7 +58,7 @@ const nodeShapeOptions: any = {
 
 class Nodes extends AbstractRenderer {
   updateDraw(): void {
-    let nodeGroups: any = this.el.selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
+    let nodeGroups: any = this.el.select("g.nodes-group").selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
 
     this.exit(nodeGroups)
     this.enterAndUpdate(nodeGroups)
