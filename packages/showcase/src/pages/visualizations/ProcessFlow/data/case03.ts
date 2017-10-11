@@ -12,8 +12,8 @@ interface INode {
   size: number
 }
 interface IData {
-  journeys?: IJourney[]
-  nodes?: INode[]
+  unloopedJourneys?: IJourney[]
+  nodeList?: INode[]
 }
 
 const journeys: IJourney[] = [
@@ -120,9 +120,11 @@ const journeys: IJourney[] = [
 ]
 
 const data: IData = {}
-data.journeys = LoopHandler(journeys)
-const nodeList: string[] = flow(map((journey: IJourney): string[] => journey.path), flatten, uniq)(data.journeys)
-data.nodes = map((nodeId: string): INode => {
+data.unloopedJourneys = LoopHandler(journeys)
+const nodeList: string[] = flow(map((journey: IJourney): string[] => journey.path), flatten, uniq)(
+  data.unloopedJourneys
+)
+data.nodeList = map((nodeId: string): INode => {
   return {
     id: nodeId,
     size: 0
@@ -156,6 +158,10 @@ const accessors = {
         return "lightcoral"
       }
     }
+  },
+  data: {
+    journeys: (data: any) => data.unloopedJourneys,
+    nodes: (data: any) => data.nodeList
   }
 }
 

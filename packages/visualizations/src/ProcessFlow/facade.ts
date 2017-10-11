@@ -28,13 +28,10 @@ class ProcessFlow extends AbstractFacade {
         showLinkFocusLabels: true,
       },
       accessors: {
-        journeys: {
-          data: (d: any) => d.journeys,
-        },
-        nodes: {
-          data: (d: any) => d.nodes,
-          color: (d: any) => d.color,
-        },
+        data: {
+          nodes: (d: any) => d.nodes,
+          journeys: (d: any) => d.journeys
+        }
       },
       computed: {
         series: {},
