@@ -20,10 +20,15 @@
   version "20.0.8"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-20.0.8.tgz#7f8c97f73d20d3bf5448fbe33661a342002b5954"
 
-"@types/react-dom@^15.5.4":
-  version "15.5.4"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.4.tgz#3f75ba86a2ce9a7d1d9e7d1ee3f186f3a9652d8f"
+"@types/node@*":
+  version "8.0.33"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.33.tgz#1126e94374014e54478092830704f6ea89df04cd"
+
+"@types/react-dom@^16.0.9":
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.1.tgz#de159d00dd70050000f462e8bcff0c08ef803dee"
   dependencies:
+    "@types/node" "*"
     "@types/react" "*"
 
 "@types/react-hot-loader@^3.0.4":
@@ -38,13 +43,17 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.0.5":
+"@types/react@*":
   version "16.0.5"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.5.tgz#d713cf67cc211dea20463d2a0b66005c22070c4b"
 
 "@types/react@^15.0.22":
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-15.6.2.tgz#2c8495aa853cb37591d0046e9afe544fb837c612"
+
+"@types/react@^16.0.9":
+  version "16.0.10"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.10.tgz#a24b630f5f1f170866a148a147d4fc8636ea88e0"
 
 "@types/webpack-env@^1.13.1":
   version "1.13.1"
@@ -2656,6 +2665,18 @@ fbjs@^0.8.12, fbjs@^0.8.9:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
+fbjs@^0.8.16:
+  version "0.8.16"
+  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
+  dependencies:
+    core-js "^1.0.0"
+    isomorphic-fetch "^2.1.1"
+    loose-envify "^1.0.0"
+    object-assign "^4.1.0"
+    promise "^7.1.1"
+    setimmediate "^1.0.5"
+    ua-parser-js "^0.7.9"
+
 file-loader@^0.11.2:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.11.2.tgz#4ff1df28af38719a6098093b88c82c71d1794a34"
@@ -4842,6 +4863,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.0.tgz#44f675ef6b944942762581b1c179fb679e599d67"
+
 most@^1.6.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/most/-/most-1.7.0.tgz#3f2478a5d6bf6bce687e6e4d8e973ca1a395cd1a"
@@ -5533,6 +5558,14 @@ prop-types@^15.5.10, prop-types@^15.5.4:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
+prop-types@^15.6.0:
+  version "15.6.0"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 proxy-addr@~1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.5.tgz#71c0ee3b102de3f202f3b64f608d173fcba1a918"
@@ -5649,7 +5682,7 @@ react-deep-force-update@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.1.1.tgz#8ea4263cd6455a050b37445b3f08fd839d86e909"
 
-react-dom@^15.4.2, react-dom@^15.6.1:
+react-dom@^15.4.2:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
   dependencies:
@@ -5657,6 +5690,15 @@ react-dom@^15.4.2, react-dom@^15.6.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
+
+react-dom@^16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.0.0.tgz#9cc3079c3dcd70d4c6e01b84aab2a7e34c303f58"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 react-feather@^1.0.7:
   version "1.0.7"
@@ -5728,7 +5770,7 @@ react-syntax-highlighter@^5.7.0:
     highlight.js "~9.12.0"
     lowlight "~1.9.1"
 
-react@^15.4.2, react@^15.6.1:
+react@^15.4.2:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:
@@ -5737,6 +5779,15 @@ react@^15.4.2, react@^15.6.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
+
+react@^16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 reactcss@^1.2.0:
   version "1.2.3"

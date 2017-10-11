@@ -14,6 +14,7 @@ import Tooltips from "./Tooltips/Tooltips"
 import InfoTiles from "./InfoTiles/InfoTiles"
 import SidebarPage from "./Sidebar/Sidebar"
 import ColorPickers from "./ColorPickers/ColorPickers"
+import DatePickers from "./DatePickers/DatePickers"
 import Switches from "./Switches/Switches"
 import Icons from "./Icons/Icons"
 import Typography from "./Typography/Typography"
@@ -53,7 +54,7 @@ const links = [
     label: "Data Entry",
     links: [
       { url: "/components/color-picker", label: "Color Picker" },
-      { label: "Date Picker" },
+      { url: "/components/date-pickers", label: "Date Picker" },
       { url: "/components/form-fields", label: "Form Fields" },
       { url: "/components/switch", label: "Switch" },
       { url: "/components/upload", label: "Upload" }
@@ -95,6 +96,7 @@ export default () => (
       <Route path="/components/form-fields" component={FormFields} />
       <Route path="/components/grids" component={Grids} />
       <Route path="/components/color-picker" component={ColorPickers} />
+      <Route path="/components/date-pickers" component={DatePickers} />
       <Route path="/components/cards" component={Cards} />
       <Route path="/components/chips" component={Chips} />
       <Route path="/components/tooltips" component={Tooltips} />

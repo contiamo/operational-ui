@@ -19,7 +19,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var activeBoxShadow = theme.shadows.pressed;
     var isSpace = modifiers && modifiers.indexOf("space") > -1;
     var spacing = theme.spacing;
-    return __assign({ display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px", border: "1px solid rgba(0, 0, 0, .2)", borderRadius: 2, cursor: disabled ? "not-allowed" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
+    return __assign({ display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px", border: "1px solid rgba(0, 0, 0, .2)", borderRadius: 2, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
         ? {
             ":hover": {
                 backgroundColor: activeBackgroundColor,

@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePickers Showcase Page Should render correctly 1`] = `
+<div
+  class="css-1dkvbfz"
+>
+  <div
+    class="css-imab3e"
+  >
+    DatePickers
+  </div>
+  <p>
+    DatePickers are great components!
+  </p>
+  <h4>
+    Usage
+  </h4>
+  <div
+    class="css-1w8lcxk"
+  >
+    <div
+      class="playground"
+    >
+      <div
+        class="playgroundCode"
+      >
+        <div
+          class="react-codemirror2 playgroundStage"
+        />
+      </div>
+      <div
+        class="playgroundPreview"
+      >
+        <div>
+          <div
+            class="previewArea"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-xa6ngs"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          value
+        </td>
+        <td>
+          Description of the value prop.
+        </td>
+        <td>
+          Hello World
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

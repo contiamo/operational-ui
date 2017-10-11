@@ -13,7 +13,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   margin: "40px auto"
 }))
 
-import(`../../packages/showcase/src/pages/${pageName}/${pageName}`).then(({ default: Comp }) => {
+import(`../../packages/showcase/src/pages/components/${pageName}/${pageName}`).then(({ default: Comp }) => {
   render(
     <ThemeProvider theme={contiamoTheme}>
       <Container>
