@@ -6,14 +6,16 @@ import { DatePicker } from "contiamo-ui-components"
 export default (() => {
   class ComponentWithDatePicker extends React.Component {
     state = {
-      date: "2015-01-01"
+      start: "2017-10-03",
+      end: "2017-10-18"
     }
     render() {
       return (
         <DatePicker
-          date={this.state.date}
-          onChange={date => {
-            this.setState(prevState => ({ date }))
+          start={this.state.start}
+          end={this.state.end}
+          onChange={newState => {
+            this.setState(prevState => newState)
           }}
         />
       )

@@ -3,19 +3,39 @@ import glamorous from "glamorous"
 import Card from "../Card/Card"
 import Button from "../Button/Button"
 import Icon from "../Icon/Icon"
-import { months, daysInMonth, range } from "./utils"
+import Input from "../Input/Input"
+import { months, daysInMonth, range, toDate } from "./utils"
 
 interface IProps {
-  date: string
-  onChange?: (date: string) => void
+  start?: string
+  end?: string
+  onChange?: (date: { start?: string; end?: string }) => void
   style?: any
   className?: string
 }
 
 interface IState {
+  isExpanded: boolean
   year: number
   month: number
 }
+
+const Container = glamorous.div(({ isExpanded }: { isExpanded: boolean }): any => ({
+  display: "inline-block",
+  width: "auto",
+  position: "relative",
+  "& .co_card": {
+    display: isExpanded ? "block" : "none",
+    position: "absolute",
+    top: 30,
+    left: "50%",
+    transform: "translate3d(-50%, 0, 0)",
+    width: 240
+  },
+  "& input": {
+    width: 200
+  }
+}))
 
 const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
   margin: theme.spacing,
@@ -33,7 +53,8 @@ const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
 
 const IconContainer = glamorous.div({
   width: 16,
-  height: 16
+  height: 16,
+  cursor: "pointer"
 })
 
 const Days = glamorous.div({
@@ -45,6 +66,8 @@ const Day = glamorous.div(
   {
     width: 30,
     height: 30,
+    marginRight: -1,
+    marginBottom: -1,
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
@@ -59,8 +82,9 @@ const Day = glamorous.div(
 
 class DatePicker extends React.Component<IProps, IState> {
   state = {
+    isExpanded: false,
     year: 2017,
-    month: 10
+    month: 9
   }
 
   changeMonth(diff: number) {
@@ -74,42 +98,60 @@ class DatePicker extends React.Component<IProps, IState> {
   }
 
   render() {
-    const [year, month_, day_] = this.props.date.split("-").map(Number)
-    const month = month_ - 1
-    const day = day_ - 1
+    const { start, end } = this.props
     return (
-      <Card>
-        <Nav>
-          <IconContainer
-            onClick={() => {
-              this.changeMonth(-1)
-            }}
-          >
-            <Icon name="ChevronLeft" size={16} />
-          </IconContainer>
-          <span>{`${months[this.state.month]}, ${this.state.year}`}</span>
-          <IconContainer
-            onClick={() => {
-              this.changeMonth(+1)
-            }}
-          >
-            <Icon name="ChevronRight" size={16} />
-          </IconContainer>
-        </Nav>
-        <Days>
-          {range(daysInMonth(this.state.month, this.state.year)).map((number, index) => (
-            <Day
-              selected={year === this.state.year && month === this.state.month && day === index}
-              key={index}
+      <Container isExpanded={this.state.isExpanded}>
+        <Input
+          value={[start, end].filter(s => !!s).join(" - ")}
+          onFocus={() => {
+            this.setState(prevState => ({
+              isExpanded: true
+            }))
+          }}
+        />
+        <Card className="co_card">
+          <Nav>
+            <IconContainer
               onClick={() => {
-                this.props.onChange && this.props.onChange(`${this.state.year}-${this.state.month + 1}-${index + 1}`)
+                this.changeMonth(-1)
               }}
             >
-              {index + 1}
-            </Day>
-          ))}
-        </Days>
-      </Card>
+              <Icon name="ChevronLeft" size={16} />
+            </IconContainer>
+            <span>{`${months[this.state.month]}, ${this.state.year}`}</span>
+            <IconContainer
+              onClick={() => {
+                this.changeMonth(+1)
+              }}
+            >
+              <Icon name="ChevronRight" size={16} />
+            </IconContainer>
+          </Nav>
+          <Days>
+            {range(daysInMonth(this.state.month, this.state.year)).map((number, index) => {
+              const date = toDate(this.state.year, this.state.month, index)
+              return (
+                <Day
+                  selected={date === start || date === end || (!!start && !!end && date >= start && date <= end)}
+                  key={index}
+                  onClick={() => {
+                    const newStart = start && !end ? start : date
+                    const newEnd = start && !end ? date : start && end ? null : end
+                    const [sortedNewStart, sortedNewEnd] = [newStart, newEnd].sort()
+                    this.props.onChange &&
+                      this.props.onChange({
+                        start: sortedNewStart,
+                        end: sortedNewEnd
+                      })
+                  }}
+                >
+                  {index + 1}
+                </Day>
+              )
+            })}
+          </Days>
+        </Card>
+      </Container>
     )
   }
 }

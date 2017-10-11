@@ -47,17 +47,18 @@
     "tslint-config-prettier": "^1.5.0",
     "typescript": "latest",
     "webpack": "^3.6.0",
-    "webpack-merge": "^4.1.0",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "component-playground": "^3.0.0",
     "contiamo-ui-components": "=0.0.1-20",
     "contiamo-ui-utils": "=0.0.1-20",
     "contiamo-visualizations": "=0.0.1-20",
-    "component-playground": "^3.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "jest-cli": "^20.0.4",
+    "moment": "^2.19.0",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
     "react-color": "^2.13.8",

@@ -13,8 +13,8 @@ var StyledInput = glamorous_1.default.input(function (_a) {
     });
 });
 var Input = function (_a) {
-    var className = _a.className, name = _a.name, placeholder = _a.placeholder, value = _a.value, onChange = _a.onChange;
-    return (React.createElement(StyledInput, { className: className, name: name, placeholder: placeholder, value: value, onChange: function (e) {
+    var className = _a.className, name = _a.name, placeholder = _a.placeholder, value = _a.value, onChange = _a.onChange, onFocus = _a.onFocus, onBlur = _a.onBlur;
+    return (React.createElement(StyledInput, { className: className, name: name, placeholder: placeholder, value: value, onFocus: onFocus, onBlur: onBlur, onChange: function (e) {
             onChange(e.target.value);
         } }));
 };

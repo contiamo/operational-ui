@@ -14,7 +14,27 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var Card_1 = require("../Card/Card");
 var Icon_1 = require("../Icon/Icon");
+var Input_1 = require("../Input/Input");
 var utils_1 = require("./utils");
+var Container = glamorous_1.default.div(function (_a) {
+    var isExpanded = _a.isExpanded;
+    return ({
+        display: "inline-block",
+        width: "auto",
+        position: "relative",
+        "& .co_card": {
+            display: isExpanded ? "block" : "none",
+            position: "absolute",
+            top: 30,
+            left: "50%",
+            transform: "translate3d(-50%, 0, 0)",
+            width: 240
+        },
+        "& input": {
+            width: 200
+        }
+    });
+});
 var Nav = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
@@ -33,7 +53,8 @@ var Nav = glamorous_1.default.div(function (_a) {
 });
 var IconContainer = glamorous_1.default.div({
     width: 16,
-    height: 16
+    height: 16,
+    cursor: "pointer"
 });
 var Days = glamorous_1.default.div({
     width: 210,
@@ -42,6 +63,8 @@ var Days = glamorous_1.default.div({
 var Day = glamorous_1.default.div({
     width: 30,
     height: 30,
+    marginRight: -1,
+    marginBottom: -1,
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
@@ -59,8 +82,9 @@ var DatePicker = /** @class */ (function (_super) {
     function DatePicker() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
+            isExpanded: false,
             year: 2017,
-            month: 10
+            month: 9
         };
         return _this;
     }
@@ -74,23 +98,37 @@ var DatePicker = /** @class */ (function (_super) {
     };
     DatePicker.prototype.render = function () {
         var _this = this;
-        var _a = this.props.date.split("-").map(Number), year = _a[0], month_ = _a[1], day_ = _a[2];
-        var month = month_ - 1;
-        var day = day_ - 1;
-        return (React.createElement(Card_1.default, null,
-            React.createElement(Nav, null,
-                React.createElement(IconContainer, { onClick: function () {
-                        _this.changeMonth(-1);
-                    } },
-                    React.createElement(Icon_1.default, { name: "ChevronLeft", size: 16 })),
-                React.createElement("span", null, utils_1.months[this.state.month] + ", " + this.state.year),
-                React.createElement(IconContainer, { onClick: function () {
-                        _this.changeMonth(+1);
-                    } },
-                    React.createElement(Icon_1.default, { name: "ChevronRight", size: 16 }))),
-            React.createElement(Days, null, utils_1.range(utils_1.daysInMonth(this.state.month, this.state.year)).map(function (number, index) { return (React.createElement(Day, { selected: year === _this.state.year && month === _this.state.month && day === index, key: index, onClick: function () {
-                    _this.props.onChange && _this.props.onChange(_this.state.year + "-" + (_this.state.month + 1) + "-" + (index + 1));
-                } }, index + 1)); }))));
+        var _a = this.props, start = _a.start, end = _a.end;
+        return (React.createElement(Container, { isExpanded: this.state.isExpanded },
+            React.createElement(Input_1.default, { value: [start, end].filter(function (s) { return !!s; }).join(" - "), onFocus: function () {
+                    _this.setState(function (prevState) { return ({
+                        isExpanded: true
+                    }); });
+                } }),
+            React.createElement(Card_1.default, { className: "co_card" },
+                React.createElement(Nav, null,
+                    React.createElement(IconContainer, { onClick: function () {
+                            _this.changeMonth(-1);
+                        } },
+                        React.createElement(Icon_1.default, { name: "ChevronLeft", size: 16 })),
+                    React.createElement("span", null, utils_1.months[this.state.month] + ", " + this.state.year),
+                    React.createElement(IconContainer, { onClick: function () {
+                            _this.changeMonth(+1);
+                        } },
+                        React.createElement(Icon_1.default, { name: "ChevronRight", size: 16 }))),
+                React.createElement(Days, null, utils_1.range(utils_1.daysInMonth(this.state.month, this.state.year)).map(function (number, index) {
+                    var date = utils_1.toDate(_this.state.year, _this.state.month, index);
+                    return (React.createElement(Day, { selected: date === start || date === end || (!!start && !!end && date >= start && date <= end), key: index, onClick: function () {
+                            var newStart = start && !end ? start : date;
+                            var newEnd = start && !end ? date : start && end ? null : end;
+                            var _a = [newStart, newEnd].sort(), sortedNewStart = _a[0], sortedNewEnd = _a[1];
+                            _this.props.onChange &&
+                                _this.props.onChange({
+                                    start: sortedNewStart,
+                                    end: sortedNewEnd
+                                });
+                        } }, index + 1));
+                })))));
     };
     return DatePicker;
 }(React.Component));
