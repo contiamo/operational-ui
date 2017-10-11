@@ -32,6 +32,7 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
         left: 60,
         width: "calc(100vw - 60px)",
         height: "100vh",
+        zIndex: theme.baseZIndex + 1000,
         "& .playgroundStage": {
           height: "100%",
           "& > div": {
@@ -53,7 +54,7 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
     flex: "1 1 50%"
   },
   "& .playgroundPreview": {
-    marginLeft: theme.spacing * 4 / 3
+    padding: theme.spacing * 4 / 3
   },
   "& .CodeMirror-wrap.CodeMirror": {
     minHeight: 320
