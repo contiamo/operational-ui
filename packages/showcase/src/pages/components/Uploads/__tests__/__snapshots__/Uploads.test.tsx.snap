@@ -192,7 +192,24 @@ exports[`Uploads Showcase Page Should render correctly 1`] = `
           onBeforeUpload
         </td>
         <td>
-          Function to be executed before uploading the files
+          Function to be executed before uploading the files.
+        </td>
+        <td>
+          void
+        </td>
+        <td>
+          func
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          onStartUpload
+        </td>
+        <td>
+          Function to be executed right before the uploading process starts.
         </td>
         <td>
           void
@@ -209,7 +226,7 @@ exports[`Uploads Showcase Page Should render correctly 1`] = `
           onError
         </td>
         <td>
-          Function to be executed when a file is successfully uploaded
+          Function to be executed when a file is successfully uploaded.
         </td>
         <td>
           void
@@ -226,7 +243,7 @@ exports[`Uploads Showcase Page Should render correctly 1`] = `
           onSuccess
         </td>
         <td>
-          Function to be executed when a file is successfully uploaded
+          Function to be executed when a file is successfully uploaded.
         </td>
         <td>
           void

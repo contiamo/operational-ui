@@ -1,8 +1,6 @@
 import * as React from "react"
 import { Upload, Icon, Button } from "contiamo-ui-components"
 
-// Run any code inside the IIFE, as long as a React element is returned
-// (you do not need the IIFE, but it is useful to define simple state containers for stateless components)
 export default (() => {
   class ComponentWithUploader extends React.Component {
     state: any = {
@@ -19,7 +17,7 @@ export default (() => {
       onBeforeUpload: (file: File, files: File[]) => {
         this.setState({ files })
       },
-      onStart: (file: File) => {
+      onStartUpload: (file: File) => {
         const files = this.updateStatus(file, "uploading")
         this.setState({ files })
       },
@@ -60,7 +58,7 @@ export default (() => {
         return item
       })
 
-    renderFiles = () => {
+    renderFileList = () => {
       const { files } = this.state
       return (
         <ul style={{ padding: 0 }}>
@@ -92,7 +90,7 @@ export default (() => {
               <Icon name="Upload" /> Upload
             </Button>
           </Upload>
-          {this.renderFiles()}
+          {this.renderFileList()}
         </div>
       )
     }

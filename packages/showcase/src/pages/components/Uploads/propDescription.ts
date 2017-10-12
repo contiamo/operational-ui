@@ -50,21 +50,28 @@ export default [
   },
   {
     name: "onBeforeUpload",
-    description: "Function to be executed before uploading the files",
+    description: "Function to be executed before uploading the files.",
+    defaultValue: "void",
+    type: "func",
+    optional: true
+  },
+  {
+    name: "onStartUpload",
+    description: "Function to be executed right before the uploading process starts.",
     defaultValue: "void",
     type: "func",
     optional: true
   },
   {
     name: "onError",
-    description: "Function to be executed when a file is successfully uploaded",
+    description: "Function to be executed when a file is successfully uploaded.",
     defaultValue: "void",
     type: "func",
     optional: true
   },
   {
     name: "onSuccess",
-    description: "Function to be executed when a file is successfully uploaded",
+    description: "Function to be executed when a file is successfully uploaded.",
     defaultValue: "void",
     type: "func",
     optional: true

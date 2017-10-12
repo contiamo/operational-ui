@@ -145,15 +145,15 @@ var Upload = /** @class */ (function (_super) {
             });
         }); };
         _this.postFile = function (file) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, action, data, headers, name, onStart, onSuccess, onError, response, error_2;
+            var _a, action, data, headers, name, onStartUpload, onSuccess, onError, response, error_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = this.props, action = _a.action, data = _a.data, headers = _a.headers, name = _a.name, onStart = _a.onStart, onSuccess = _a.onSuccess, onError = _a.onError;
+                        _a = this.props, action = _a.action, data = _a.data, headers = _a.headers, name = _a.name, onStartUpload = _a.onStartUpload, onSuccess = _a.onSuccess, onError = _a.onError;
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        onStart(file);
+                        onStartUpload(file);
                         return [4 /*yield*/, request({ action: action, data: data, file: file, headers: headers, name: name })];
                     case 2:
                         response = _b.sent();
@@ -180,7 +180,9 @@ var Upload = /** @class */ (function (_super) {
             }
             : {};
         return (React.createElement("div", __assign({}, handlers),
-            React.createElement("input", { style: { display: "none" }, accept: accept, multiple: multiple, onChange: this.onChange, ref: function (node) { return (_this.fileInput = node); }, type: "file" }),
+            React.createElement("input", { style: { display: "none" }, accept: accept, multiple: multiple, onChange: this.onChange, ref: function (node) {
+                    _this.fileInput = node;
+                }, type: "file" }),
             children));
     };
     Upload.defaultProps = {
@@ -191,8 +193,8 @@ var Upload = /** @class */ (function (_super) {
         multiple: false,
         name: "file",
         onBeforeUpload: function () { },
+        onStartUpload: function () { },
         onError: function () { },
-        onStart: function () { },
         onSuccess: function () { }
     };
     return Upload;

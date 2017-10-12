@@ -1,14 +1,6 @@
 import * as React from "react"
 import * as attrAccept from "attr-accept"
 
-type RequestOptions = {
-  action: string
-  data: {}
-  file: File
-  headers: {}
-  name: string
-}
-
 interface IProps {
   action: string
   accept?: string
@@ -18,9 +10,17 @@ interface IProps {
   multiple?: boolean
   name?: string
   onBeforeUpload?: (file: File, fileList: File[]) => Promise<any> | void
+  onStartUpload?: (file: File) => void
   onError?: (error: Error, file: File) => void
-  onStart?: (file: File) => void
   onSuccess?: (response: {}, file: File) => void
+}
+
+type RequestOptions = {
+  action: string
+  data: {}
+  file: File
+  headers: {}
+  name: string
 }
 
 const checkStatus = (response: Response) => {
@@ -61,8 +61,8 @@ class Upload extends React.Component<IProps, any> {
     multiple: false,
     name: "file",
     onBeforeUpload: () => {},
+    onStartUpload: () => {},
     onError: () => {},
-    onStart: () => {},
     onSuccess: () => {}
   }
 
@@ -109,9 +109,9 @@ class Upload extends React.Component<IProps, any> {
   }
 
   postFile = async (file: File) => {
-    const { action, data, headers, name, onStart, onSuccess, onError } = this.props
+    const { action, data, headers, name, onStartUpload, onSuccess, onError } = this.props
     try {
-      onStart(file)
+      onStartUpload(file)
       const response = await request({ action, data, file, headers, name })
       onSuccess(response, file)
     } catch (error) {
@@ -136,7 +136,9 @@ class Upload extends React.Component<IProps, any> {
           accept={accept}
           multiple={multiple}
           onChange={this.onChange}
-          ref={node => (this.fileInput = node)}
+          ref={node => {
+            this.fileInput = node
+          }}
           type="file"
         />
         {children}
