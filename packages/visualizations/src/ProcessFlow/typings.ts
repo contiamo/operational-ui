@@ -20,6 +20,7 @@ export interface IConfig {
   arrowFill: string
   duration: number
   height: number
+  highlightColor: string
   labelOffset: number
   labelPadding: number
   linkStroke: string

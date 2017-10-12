@@ -14,6 +14,7 @@ class ProcessFlow extends AbstractFacade {
       config: {
         duration: 1e3,
         height: 1000,
+        highlightColor: "#0000ff",
         labelOffset: 5,
         labelPadding: 5,
         linkStroke: "#aaa",

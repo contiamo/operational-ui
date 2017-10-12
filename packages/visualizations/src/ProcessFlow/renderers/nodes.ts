@@ -93,6 +93,7 @@ class Nodes extends AbstractRenderer {
           )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", "#fff")
+          .on("mouseenter", ctx.onMouseOver(ctx))
         // Append node
         d3
           .select(this)
@@ -107,7 +108,6 @@ class Nodes extends AbstractRenderer {
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
-          .on("mouseenter", ctx.onMouseOver(ctx))
         // Append label
         d3
           .select(this)
@@ -184,6 +184,10 @@ class Nodes extends AbstractRenderer {
       })
       .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)
       .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
+  }
+
+  highlight(element: any, value: boolean): void {
+    element.attr("stroke", value ? this.config.highlightColor : "none")
   }
 
   focusPoint(element: any, d: TNode): IFocus {

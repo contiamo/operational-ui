@@ -52,6 +52,10 @@ class Links extends AbstractRenderer {
     return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
   }
 
+  highlight(element: any, value: boolean): void {
+    element.attr("stroke", (d: TLink): string => value ? this.config.highlightColor : d.stroke())
+  }
+
   focusPoint(element: any, d: TLink): IFocus {
     if (d == null) return
     const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])

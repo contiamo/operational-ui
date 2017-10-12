@@ -35,17 +35,22 @@ abstract class AbstractRenderer {
   }
 
   mouseOver(element: any, d: TLink | TNode): void {
+    this.highlight(element, true)
     let focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
     element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint))
   }
+
+  abstract highlight(element: any, val: boolean): void
 
   abstract focusPoint(element: any, d: TLink | TNode): IFocus
 
   onMouseOut(ctx: AbstractRenderer, focusPoint: IFocus): any {
     return function(d: TLink | TNode): void {
       ctx.events.emit(Events.FOCUS.ELEMENT.OUT, focusPoint)
-      d3.select(this).classed("hover", false)
+      const element: any = d3.select(this)
+      ctx.highlight(element, false)
+      element.classed("hover", false)
     }
   }
 
