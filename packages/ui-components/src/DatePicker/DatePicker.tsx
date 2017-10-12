@@ -87,6 +87,9 @@ class DatePicker extends React.Component<IProps, IState> {
     month: 9
   }
 
+  inputNode: any
+  keypressHandler: (a: any) => void
+
   changeMonth(diff: number) {
     this.setState(prevState => ({
       month: prevState.month + diff < 0 ? prevState.month + diff + 12 : (prevState.month + diff) % 12,
@@ -97,11 +100,35 @@ class DatePicker extends React.Component<IProps, IState> {
     }))
   }
 
+  componentDidMount() {
+    this.keypressHandler = ev => {
+      if (ev.keyCode !== 27) {
+        return
+      }
+      this.setState(prevState => ({
+        ...prevState,
+        isExpanded: !prevState.isExpanded
+      }))
+      console.log(this.inputNode)
+      if (this.inputNode) {
+        this.inputNode.blur()
+      }
+    }
+    window.addEventListener("keydown", this.keypressHandler)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.keypressHandler)
+  }
+
   render() {
     const { start, end } = this.props
     return (
       <Container isExpanded={this.state.isExpanded}>
         <Input
+          inputRef={node => {
+            this.inputNode = node
+          }}
           value={[start, end].filter(s => !!s).join(" - ")}
           onFocus={() => {
             this.setState(prevState => ({

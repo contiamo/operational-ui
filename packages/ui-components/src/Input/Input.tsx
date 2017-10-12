@@ -6,6 +6,7 @@ type Props = {
   placeholder?: string
   name?: string
   value: string
+  inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
   onFocus?: (ev: any) => void
   onBlur?: (ev: any) => void
@@ -24,9 +25,10 @@ const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   WebkitAppearance: "none"
 }))
 
-const Input: React.SFC<Props> = ({ className, name, placeholder, value, onChange, onFocus, onBlur }) => {
+const Input: React.SFC<Props> = ({ className, name, placeholder, value, onChange, onFocus, onBlur, inputRef }) => {
   return (
     <StyledInput
+      innerRef={inputRef}
       className={className}
       name={name}
       placeholder={placeholder}
