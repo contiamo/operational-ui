@@ -19,9 +19,10 @@ class DataHandler {
 
   prepareData(): IData {
     const data = this.state.current.get("data")
-    this.journeys = data.journeys
-    this.setNodeAccessors(this.state.current.get("accessors").node)
-    this.setLinkAccessors(this.state.current.get("accessors").link)
+    const accessors: any = this.state.current.get("accessors")
+    this.journeys = accessors.data.journeys(data)
+    this.setNodeAccessors(accessors.node)
+    this.setLinkAccessors(accessors.link)
     this.initializeNodes(data)
     this.initializeLinks(data)
     return {
@@ -32,7 +33,8 @@ class DataHandler {
   }
 
   initializeNodes(data: IInputData): void {
-    this.nodes = map(bind(this.addNode, this))(data.nodes)
+    const accessors: any = this.state.current.get("accessors")
+    this.nodes = map(bind(this.addNode, this))(accessors.data.nodes(data))
     forEach((node: TNode): void => {
       node.sourceLinks = []
       node.targetLinks = []
@@ -41,9 +43,13 @@ class DataHandler {
   }
 
   findNode(nodeId: string): TNode {
-    return find((node: TNode): boolean => {
+    const node: TNode = find((node: TNode): boolean => {
       return node.id() === nodeId
     })(this.nodes)
+    if (!node) {
+      throw new Error("No node with id '" + nodeId + "' defined.")
+    }
+    return node
   }
 
   setNodeAccessors(accessors: TAccessors) {
@@ -65,6 +71,7 @@ class DataHandler {
   }
 
   initializeLinks(data: IInputData): void {
+    this.links = []
     this.computeLinks()
   }
 
@@ -86,7 +93,6 @@ class DataHandler {
   }
 
   computeLinks(): void {
-    this.links = []
     forEach((journey: IJourney): void => {
       const path: string[] = journey.path
       const computeLink: (i: number) => void = (i: number): void => {

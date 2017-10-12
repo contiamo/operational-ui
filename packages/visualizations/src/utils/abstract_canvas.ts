@@ -19,7 +19,7 @@ abstract class AbstractCanvas {
     this.insertContainer(context)
     this.insertEl()
     this.createInitialElements()
-    // this.listenToMouseOver()
+    this.listenToMouseOver()
   }
 
   abstract createEl(): TSeriesEl
@@ -60,46 +60,48 @@ abstract class AbstractCanvas {
     return this.state.current.get("config").uid + id
   }
 
-  // listenToMouseOver(): void {
-  //   let el: d3.Selection<Node> = this.mouseOverElement()
-  //   if (el) {
-  //     $(el.node())
-  //       .on(
-  //         "mouseenter",
-  //         _.bind(function(): void {
-  //           this.state.trigger(Events.CHART.HOVER)
-  //           this.trackMouseMove()
-  //         }, this),
-  //       )
-  //       .on(
-  //         "mouseleave",
-  //         _.bind(function(): void {
-  //           this.state.trigger(Events.CHART.OUT)
-  //           this.stopMouseMove()
-  //         }, this),
-  //       )
-  //       .on(
-  //         "mouseclick",
-  //         _.bind(function(): void {
-  //           this.state.trigger(Events.CHART.CLICK)
-  //         }, this),
-  //       )
-  //   }
-  // }
+  listenToMouseOver(): void {
+    let el: any = this.mouseOverElement()
+    if (el) {
+      el.node()
+        .addEventListener(
+          "mouseenter",
+          ((): void => {
+            this.events.emit(Events.CHART.HOVER)
+            this.trackMouseMove()
+          }),
+        )
+       el.node()
+        .addEventListener(
+          "mouseleave",
+          ((): void => {
+            this.events.emit(Events.CHART.OUT)
+            this.stopMouseMove()
+          }),
+        )
+       el.node()
+        .addEventListener(
+          "click",
+          ((): void => {
+            this.events.emit(Events.CHART.CLICK)
+          }),
+        )
+    }
+  }
 
   rootElement(): Node {
     return this.container.node()
   }
 
-  // abstract mouseOverElement(): d3.Selection<Node>
-  //
-  // trackMouseMove(): void {
-  //   return
-  // }
-  //
-  // stopMouseMove(): void {
-  //   return
-  // }
+  abstract mouseOverElement(): any
+
+  trackMouseMove(): void {
+    return
+  }
+
+  stopMouseMove(): void {
+    return
+  }
 
   seriesElements(): string[] | string[][] {
     return []
@@ -113,24 +115,6 @@ abstract class AbstractCanvas {
       return memo
     }, {})(this.seriesElements())
   }
-
-  // insertElement(name: string, element: d3.Selection<Node>): void {
-  //   this.elements[name].node().appendChild(element.node())
-  // }
-  //
-  // insertFocus(element: d3.Selection<Node>): void {
-  //   let ref: Node = this.el.node()
-  //   ref.parentNode.appendChild(element.node())
-  // }
-  //
-  // insertComponentFocus(element: d3.Selection<Node>): void {
-  //   let ref: Node = this.container.node()
-  //   ref.insertBefore(element.node(), ref.nextSibling)
-  // }
-  //
-  // toggleSmall(value?: boolean): void {
-  //   this.el.classed(this.state.options.smallClass, value)
-  // }
 
   draw(): void {
     const config = this.state.current.get("config")
@@ -153,7 +137,7 @@ abstract class AbstractCanvas {
   }
 
   remove(): void {
-    // $(this.mouseOverElement().node()).off()
+    $(this.mouseOverElement().node()).off()
     this.elements = {}
     this.container.remove()
     this.container = undefined

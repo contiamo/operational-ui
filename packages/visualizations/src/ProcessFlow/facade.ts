@@ -13,27 +13,27 @@ class ProcessFlow extends AbstractFacade {
       data: {},
       config: {
         duration: 1e3,
-        width: 500,
         height: 1000,
-        maxNodeSize: 1500,
-        maxLinkWidth: 15,
+        highlightColor: "#0000ff",
         labelOffset: 5,
         labelPadding: 5,
         linkStroke: "#aaa",
-        visualizationName: this.visualizationName(),
-        arrowFill: "#ccc",
-        uid: uniqueId(this.visualizationName()),
-        showNodeFocusLabels: true,
+        maxLinkWidth: 8,
+        maxNodeSize: 1500,
+        minLinkWidth: 1,
+        minNodeSize: 100,
+        nodeBorderWidth: 10,
         showLinkFocusLabels: true,
+        showNodeFocusLabels: true,
+        uid: uniqueId(this.visualizationName()),
+        visualizationName: this.visualizationName(),
+        width: 500,
       },
       accessors: {
-        journeys: {
-          data: (d: any) => d.journeys,
-        },
-        nodes: {
-          data: (d: any) => d.nodes,
-          color: (d: any) => d.color,
-        },
+        data: {
+          nodes: (d: any) => d.nodes,
+          journeys: (d: any) => d.journeys
+        }
       },
       computed: {
         series: {},

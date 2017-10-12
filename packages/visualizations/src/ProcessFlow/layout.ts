@@ -34,6 +34,9 @@ class Layout {
         })(node.sourceLinks)
       })(nodes)
       if (nextNodes.length > 0 && i < this.nodes.length) {
+        if (nodes.length === nextNodes.length) {
+          throw new Error("The data contains at least one loop. Handle loops before rendering.")
+        }
         ++i
         assignNextNodes(nextNodes)
       }
@@ -66,11 +69,11 @@ class Layout {
   }
 
   placeNode(used: number[], x: number, node: TNode): void {
-    if (indexOf(used)(x) === -1) {
+    if (find((val: number): boolean => val === x)(used)) {
+      this.placeNode(used, x + 1, node)
+    } else {
       node.x = x
       used.push(x)
-    } else {
-      this.placeNode(used, x + 1, node)
     }
   }
 

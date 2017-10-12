@@ -26,10 +26,6 @@ class Link {
     return this.accessors.label(this.attributes)
   }
 
-  marker(): string {
-    return this.accessors.marker(this.attributes)
-  }
-
   size(): number {
     return this.accessors.size(this.attributes)
   }

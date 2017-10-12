@@ -167,6 +167,8 @@ declare namespace fp {
     any: any
     isObject: any
     last: any
+    drop: any
+    dropRight: any
   }
 }
 

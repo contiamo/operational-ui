@@ -13,11 +13,7 @@ let defaultAccessors: any = {
   },
   // Label to display next to link - defaults to an empty string.
   label: (link: ILinkAttrs): string => {
-    return link.label || ""
-  },
-  // Marker style for link. Defaults to "arrow".
-  marker: (link: ILinkAttrs): string => {
-    return link.marker || "arrow"
+    return link.label || link.source.label() + " → " + link.target.label() || ""
   },
   // Value for determining width of link. Default: 1.
   size: (link: ILinkAttrs): number => {

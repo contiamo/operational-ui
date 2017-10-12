@@ -7,6 +7,7 @@
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
   "scripts": {
+    "test": "jest",
     "package": "webpack",
     "prettier": "echo 'Prettier is not yet ready ready for the pre-commit hook. See prettier_ script for tentative implementation.'",
     "prettier_": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",
@@ -32,6 +33,7 @@
     "@types/react": "^16.0.9",
     "awesome-typescript-loader": "^3.2.3",
     "css-loader": "^0.28.7",
+    "jest": "^21.2.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "prettier": "^1.7.0",
@@ -41,7 +43,34 @@
     "tslint-config-airbnb": "^5.2.1",
     "tslint-config-prettier": "^1.5.0",
     "typescript": "^2.5.2",
-    "webpack": "^3.6.0",
+    "webpack": "^3.7.1",
     "webpack-dev-server": "^2.7.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test-polyfills.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "setupTestFrameworkScriptFile": "../../node_modules/jest-enzyme/lib/index.js",
+    "moduleNameMapper": {
+      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
+    },
+    "snapshotSerializers": [
+      "../../node_modules/jest-serializer-enzyme"
+    ],
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ],
+    "mapCoverage": true
   }
 }

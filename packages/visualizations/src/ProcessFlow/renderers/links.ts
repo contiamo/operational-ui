@@ -3,11 +3,13 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { TLink, TScale, IFocus, TLinkSelection } from "../typings"
 
-const MINLINKWIDTH: number = 2
+const MINOPACITY: number = 0.5,
+  MAXOPACITY: number = 1
 
 class Links extends AbstractRenderer {
   updateDraw(): void {
     const links: TLinkSelection = this.el
+      .select("g.links-group")
       .selectAll("path.link")
       .data(this.data, (link: TLink): string => link.sourceId() + ";" + link.targetId())
 
@@ -16,7 +18,8 @@ class Links extends AbstractRenderer {
   }
 
   enterAndUpdate(links: TLinkSelection): void {
-    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
+    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])
+    const opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
     links
       .append("path")
       .attr("class", "link")
@@ -30,7 +33,7 @@ class Links extends AbstractRenderer {
       .attr("stroke", (d: TLink): string => d.stroke())
       .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
       .attr("stroke-dasharray", (d: TLink): number => d.dash())
-      .attr("marker-mid", "url(#arrow)")
+      .attr("opacity", (d: TLink): number => opacityScale(d.size()))
   }
 
   linkStartPath(link: TLink): string {
@@ -49,9 +52,13 @@ class Links extends AbstractRenderer {
     return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
   }
 
+  highlight(element: any, value: boolean): void {
+    element.attr("stroke", (d: TLink): string => value ? this.config.highlightColor : d.stroke())
+  }
+
   focusPoint(element: any, d: TLink): IFocus {
     if (d == null) return
-    const scale: TScale = this.sizeScale([MINLINKWIDTH, this.config.maxLinkWidth])
+    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])
 
     return {
       offset: scale(d.size()) / 2,

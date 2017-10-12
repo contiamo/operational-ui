@@ -1,4 +1,4 @@
-import Layout from "./layout"
+import Layout from "../layout"
 
 test("singleSourceAbove", () => {
   const singleSourceAbove = new Layout().singleSourceAbove
