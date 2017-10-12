@@ -3,4 +3,4 @@ declare module "*.snippet.tsx" {
   export default content
 }
 
-declare module "attr-accept";
+declare module "attr-accept"

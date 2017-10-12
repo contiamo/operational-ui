@@ -1,3 +1,4 @@
+const webpack = require("webpack")
 const webpackMerge = require("webpack-merge")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const baseConfig = require("./config.base")
@@ -14,6 +15,9 @@ module.exports = webpackMerge(baseConfig, {
         from: resolve(__dirname, "..", "public", "fonts"),
         to: resolve(__dirname, "..", "dist", "fonts")
       }
-    ])
+    ]),
+    new webpack.DefinePlugin({ 
+      "process.env.NODE_ENV": JSON.stringify("production")
+    })
   ]
 })
