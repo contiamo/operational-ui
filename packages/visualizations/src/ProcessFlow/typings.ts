@@ -27,6 +27,7 @@ export interface IConfig {
   maxNodeSize: number
   minLinkWidth: number
   minNodeSize: number
+  nodeBorderWidth: number
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
   uid: string

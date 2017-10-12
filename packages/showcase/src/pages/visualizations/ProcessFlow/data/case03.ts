@@ -135,7 +135,8 @@ const config = {
   arrowFill: "none",
   height: 2500,
   width: 1000,
-  maxNodeSize: 800
+  maxNodeSize: 800,
+  nodeBorderWidth: 6
 }
 
 const accessors = {

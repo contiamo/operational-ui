@@ -64,8 +64,14 @@ class Nodes extends AbstractRenderer {
     this.enterAndUpdate(nodeGroups)
   }
 
+  nodeBorderScale(scale: TScale): (d: TNode) => number {
+    return (d: TNode): number => {
+      return Math.pow((Math.sqrt(scale(d.size())) + this.config.nodeBorderWidth), 2)
+    }
+  }
   enterAndUpdate(nodeGroups: TNodeSelection): void {
     const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
+      borderScale = this.nodeBorderScale(scale),
       ctx: Nodes = this
     let n: number = 0
 
@@ -73,11 +79,12 @@ class Nodes extends AbstractRenderer {
       .enter()
       .append("g")
       .attr("class", "node-group")
-      .each(function(d) {
+      .each(function(d: TNode): void {
+        // Append node "border" element - white element behind node.
         d3
           .select(this)
           .append("path")
-          .attr("class", "node")
+          .attr("class", "node-border")
           .attr(
             "d",
             d3Symbol()
@@ -85,9 +92,23 @@ class Nodes extends AbstractRenderer {
               .size(0),
           )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+          .attr("fill", "#fff")
+        // Append node
+        d3
+          .select(this)
+          .append("path")
+          .attr("class", "node")
+          .attr(
+          "d",
+          d3Symbol()
+            .type(nodeShapeOptions[d.shape()].symbol)
+            .size(0),
+        )
+          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
           .on("mouseenter", ctx.onMouseOver(ctx))
+        // Append label
         d3
           .select(this)
           .append("text")
@@ -98,6 +119,18 @@ class Nodes extends AbstractRenderer {
       .transition()
       .duration(ctx.config.duration)
       .each(function(d: TNode): void {
+        // Update node border
+        d3
+          .select(this)
+          .select("path.node-border")
+          .attr(
+          "d",
+          d3Symbol()
+            .type(nodeShapeOptions[d.shape()].symbol)
+            .size(borderScale(d)),
+        )
+          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+        // Update node
         d3
           .select(this)
           .select("path.node")
