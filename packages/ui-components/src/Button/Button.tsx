@@ -41,19 +41,23 @@ const Container = glamorous.div(({ theme, color, active, disabled, modifiers, co
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
 
-    ":hover": {
-      backgroundColor: activeBackgroundColor,
-      color: readableTextColor(activeBackgroundColor)(["white", "#222"])
-    },
+    ...!disabled
+      ? {
+          ":hover": {
+            backgroundColor: activeBackgroundColor,
+            color: readableTextColor(activeBackgroundColor)(["white", "#222"])
+          },
 
-    ":focus": {
-      outline: 0,
-      backgroundColor: activeBackgroundColor
-    },
+          ":focus": {
+            outline: 0,
+            backgroundColor: activeBackgroundColor
+          },
 
-    ":active": {
-      boxShadow: activeBoxShadow
-    },
+          ":active": {
+            boxShadow: activeBoxShadow
+          }
+        }
+      : {},
 
     marginLeft: isSpace ? spacing / 2 : undefined
   }
