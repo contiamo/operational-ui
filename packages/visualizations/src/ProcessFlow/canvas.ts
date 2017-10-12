@@ -21,11 +21,11 @@ class Canvas extends AbstractCanvas {
     })(["links", "nodes"])
   }
 
-  //
-  // mouseOverElement(): d3.Selection<Node> {
-  //   return this.el
-  // }
-  //
+
+  mouseOverElement(): any {
+    return this.el
+  }
+
 }
 
 export default Canvas

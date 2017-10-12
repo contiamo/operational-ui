@@ -1,6 +1,5 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-// import Events from "../utils/event_catalog"
 import { uniqueId } from "lodash/fp"
 import { IConfig, IFocus } from "./typings"
 
@@ -53,23 +52,6 @@ class Focus extends AbstractFocus {
       FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
   }
-
-  // onElementOut(): void {
-  //   this.removeElementFocus()
-  // }
-  //
-  // onMouseLeave(): void {
-  //   this.removeElementFocus()
-  // }
-  //
-  // removeElementFocus(): void {
-  // this.events.emit(Events.FOCUS.CLEAR)
-  // }
-
-  // // Remove focus (necessary when data changed or chart is resized)
-  // refresh(): void {
-  //   this.removeElementFocus()
-  // }
 }
 
 export default Focus
