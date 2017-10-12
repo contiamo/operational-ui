@@ -4,14 +4,14 @@ import { Grid } from "contiamo-ui-components"
 // Run any code inside the IIFE, as long as a React element is returned
 // (you do not need the IIFE, but it is useful to define simple state containers for stateless components)
 export default (() => {
-  const TestContainer = ({ children }) => (
+  const TestContainer = (props: any) => (
     <div
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.1)",
         padding: 10
       }}
     >
-      {children}
+      {props.children}
     </div>
   )
 
