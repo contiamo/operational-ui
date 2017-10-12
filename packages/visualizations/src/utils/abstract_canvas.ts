@@ -2,7 +2,6 @@ import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
 import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
-import * as $ from "jquery"
 
 abstract class AbstractCanvas {
   container: d3.Selection<Element, {}, null, undefined>
@@ -64,23 +63,25 @@ abstract class AbstractCanvas {
   listenToMouseOver(): void {
     let el: any = this.mouseOverElement()
     if (el) {
-      $(el.node())
-        .on(
+      el.node()
+        .addEventListener(
           "mouseenter",
           ((): void => {
             this.events.emit(Events.CHART.HOVER)
             this.trackMouseMove()
           }),
         )
-        .on(
+       el.node()
+        .addEventListener(
           "mouseleave",
           ((): void => {
             this.events.emit(Events.CHART.OUT)
             this.stopMouseMove()
           }),
         )
-        .on(
-          "mouseclick",
+       el.node()
+        .addEventListener(
+          "click",
           ((): void => {
             this.events.emit(Events.CHART.CLICK)
           }),
