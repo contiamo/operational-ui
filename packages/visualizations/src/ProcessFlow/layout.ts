@@ -34,6 +34,9 @@ class Layout {
         })(node.sourceLinks)
       })(nodes)
       if (nextNodes.length > 0 && i < this.nodes.length) {
+        if (nodes.length === nextNodes.length) {
+          throw new Error("The data contains at least one loop. Handle loops before rendering.")
+        }
         ++i
         assignNextNodes(nextNodes)
       }

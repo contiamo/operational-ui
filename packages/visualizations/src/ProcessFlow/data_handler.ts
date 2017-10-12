@@ -43,9 +43,13 @@ class DataHandler {
   }
 
   findNode(nodeId: string): TNode {
-    return find((node: TNode): boolean => {
+    const node: TNode = find((node: TNode): boolean => {
       return node.id() === nodeId
     })(this.nodes)
+    if (!node) {
+      throw new Error("No node with id '" + nodeId + "' defined.")
+    }
+    return node
   }
 
   setNodeAccessors(accessors: TAccessors) {
@@ -67,6 +71,7 @@ class DataHandler {
   }
 
   initializeLinks(data: IInputData): void {
+    this.links = []
     this.computeLinks()
   }
 
@@ -88,7 +93,6 @@ class DataHandler {
   }
 
   computeLinks(): void {
-    this.links = []
     forEach((journey: IJourney): void => {
       const path: string[] = journey.path
       const computeLink: (i: number) => void = (i: number): void => {
