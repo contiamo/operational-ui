@@ -64,4 +64,6 @@ exports.BodyType = Typography_1.BodyType;
 exports.SmallType = Typography_1.SmallType;
 var theme_1 = require("./src/theme");
 exports.contiamoTheme = theme_1.default;
+var Upload_1 = require("./src/Upload/Upload");
+exports.Upload = Upload_1.default;
 //# sourceMappingURL=index.js.map

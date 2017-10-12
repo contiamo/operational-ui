@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload Component Should render 1`] = `
+<div>
+  <input
+    accept="*"
+    style="display:none"
+    type="file"
+  />
+</div>
+`;
