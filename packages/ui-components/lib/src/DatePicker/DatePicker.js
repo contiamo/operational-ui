@@ -79,10 +79,12 @@ var Day = glamorous_1.default.div({
     justifyContent: "center",
     border: "1px solid #efefef"
 }, function (_a) {
-    var theme = _a.theme, selected = _a.selected;
+    var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
     return ({
         backgroundColor: selected ? theme.colors.palette.success : "transparent",
-        color: selected ? "#FFF" : "#000"
+        color: selected ? "#FFF" : "#000",
+        visibility: isPlaceholder ? "hidden" : "visible",
+        content: isPlaceholder ? "' '" : ""
     });
 });
 var DatePicker = /** @class */ (function (_super) {
@@ -111,7 +113,6 @@ var DatePicker = /** @class */ (function (_super) {
                 return;
             }
             _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: !prevState.isExpanded })); });
-            console.log(_this.inputNode);
             if (_this.inputNode) {
                 _this.inputNode.blur();
             }
@@ -124,6 +125,8 @@ var DatePicker = /** @class */ (function (_super) {
     DatePicker.prototype.render = function () {
         var _this = this;
         var _a = this.props, start = _a.start, end = _a.end;
+        var placeholderDays = utils_1.monthStartDay(this.state.year, this.state.month);
+        var daysInCurrentMonth = utils_1.daysInMonth(this.state.month, this.state.year);
         return (React.createElement(Container, { isExpanded: this.state.isExpanded },
             React.createElement(Input_1.default, { inputRef: function (node) {
                     _this.inputNode = node;
@@ -143,19 +146,23 @@ var DatePicker = /** @class */ (function (_super) {
                             _this.changeMonth(+1);
                         } },
                         React.createElement(Icon_1.default, { name: "ChevronRight", size: 16 }))),
-                React.createElement(Days, null, utils_1.range(utils_1.daysInMonth(this.state.month, this.state.year)).map(function (number, index) {
-                    var date = utils_1.toDate(_this.state.year, _this.state.month, index);
-                    return (React.createElement(Day, { selected: date === start || date === end || (!!start && !!end && date >= start && date <= end), key: index, onClick: function () {
-                            var newStart = start && !end ? start : date;
-                            var newEnd = start && !end ? date : start && end ? null : end;
-                            var _a = [newStart, newEnd].sort(), sortedNewStart = _a[0], sortedNewEnd = _a[1];
-                            _this.props.onChange &&
-                                _this.props.onChange({
-                                    start: sortedNewStart,
-                                    end: sortedNewEnd
-                                });
-                        } }, index + 1));
-                })))));
+                React.createElement(Days, null,
+                    utils_1.range(placeholderDays).map(function (number, index) {
+                        return React.createElement(Day, { key: index, isPlaceholder: true });
+                    }),
+                    utils_1.range(daysInCurrentMonth).map(function (number, index) {
+                        var date = utils_1.toDate(_this.state.year, _this.state.month, index);
+                        return (React.createElement(Day, { selected: date === start || date === end || (!!start && !!end && date >= start && date <= end), key: index, onClick: function () {
+                                var newStart = start && !end ? start : date;
+                                var newEnd = start && !end ? date : start && end ? null : end;
+                                var _a = [newStart, newEnd].sort(), sortedNewStart = _a[0], sortedNewEnd = _a[1];
+                                _this.props.onChange &&
+                                    _this.props.onChange({
+                                        start: sortedNewStart,
+                                        end: sortedNewEnd
+                                    });
+                            } }, index + 1));
+                    })))));
     };
     return DatePicker;
 }(React.Component));

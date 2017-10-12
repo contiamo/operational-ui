@@ -4,7 +4,7 @@ import Card from "../Card/Card"
 import Button from "../Button/Button"
 import Icon from "../Icon/Icon"
 import Input from "../Input/Input"
-import { months, daysInMonth, range, toDate } from "./utils"
+import { months, daysInMonth, range, toDate, monthStartDay } from "./utils"
 
 interface IProps {
   start?: string
@@ -74,9 +74,11 @@ const Day = glamorous.div(
     justifyContent: "center",
     border: "1px solid #efefef"
   },
-  ({ theme, selected }: { theme: Theme; selected: boolean }) => ({
+  ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): any => ({
     backgroundColor: selected ? theme.colors.palette.success : "transparent",
-    color: selected ? "#FFF" : "#000"
+    color: selected ? "#FFF" : "#000",
+    visibility: isPlaceholder ? "hidden" : "visible",
+    content: isPlaceholder ? "' '" : ""
   })
 )
 
@@ -109,7 +111,6 @@ class DatePicker extends React.Component<IProps, IState> {
         ...prevState,
         isExpanded: !prevState.isExpanded
       }))
-      console.log(this.inputNode)
       if (this.inputNode) {
         this.inputNode.blur()
       }
@@ -123,6 +124,8 @@ class DatePicker extends React.Component<IProps, IState> {
 
   render() {
     const { start, end } = this.props
+    const placeholderDays = monthStartDay(this.state.year, this.state.month)
+    const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
     return (
       <Container isExpanded={this.state.isExpanded}>
         <Input
@@ -155,7 +158,10 @@ class DatePicker extends React.Component<IProps, IState> {
             </IconContainer>
           </Nav>
           <Days>
-            {range(daysInMonth(this.state.month, this.state.year)).map((number, index) => {
+            {range(placeholderDays).map((number, index) => {
+              return <Day key={index} isPlaceholder />
+            })}
+            {range(daysInCurrentMonth).map((number, index) => {
               const date = toDate(this.state.year, this.state.month, index)
               return (
                 <Day
