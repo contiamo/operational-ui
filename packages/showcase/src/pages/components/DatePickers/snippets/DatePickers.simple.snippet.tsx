@@ -14,6 +14,7 @@ export default (() => {
         <DatePicker
           start={this.state.start}
           end={this.state.end}
+          placeholder="Pick a date"
           onChange={newState => {
             this.setState(prevState => newState)
           }}

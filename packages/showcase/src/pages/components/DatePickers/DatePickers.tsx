@@ -9,9 +9,9 @@ import propDescription from "./propDescription"
 
 export default () => (
   <Card>
-    <CardHeader>DatePickers</CardHeader>
+    <CardHeader>DatePicker</CardHeader>
 
-    <p>DatePickers are great components!</p>
+    <p>DatePickers can currently be used to pick an period bound by two day selections.</p>
 
     <h4>Usage</h4>
     <Playground snippet={String(simpleSnippet)} components={{ DatePicker }} />

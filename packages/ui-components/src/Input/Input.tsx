@@ -36,7 +36,7 @@ const Input: React.SFC<Props> = ({ className, name, placeholder, value, onChange
       onFocus={onFocus}
       onBlur={onBlur}
       onChange={(e: any) => {
-        onChange(e.target.value)
+        onChange && onChange(e.target.value)
       }}
     />
   )

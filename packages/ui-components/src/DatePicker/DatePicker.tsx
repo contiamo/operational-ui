@@ -1,7 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import Card from "../Card/Card"
-import Button from "../Button/Button"
 import Icon from "../Icon/Icon"
 import Input from "../Input/Input"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./utils"
@@ -10,8 +9,8 @@ interface IProps {
   start?: string
   end?: string
   onChange?: (date: { start?: string; end?: string }) => void
-  style?: any
   className?: string
+  placeholder?: string
 }
 
 interface IState {
@@ -91,6 +90,7 @@ class DatePicker extends React.Component<IProps, IState> {
 
   inputNode: any
   keypressHandler: (a: any) => void
+  outsideClickHandler: (a: any) => void
 
   changeMonth(diff: number) {
     this.setState(prevState => ({
@@ -103,7 +103,7 @@ class DatePicker extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.keypressHandler = ev => {
+    this.keypressHandler = (ev: any) => {
       if (ev.keyCode !== 27) {
         return
       }
@@ -115,10 +115,18 @@ class DatePicker extends React.Component<IProps, IState> {
         this.inputNode.blur()
       }
     }
+    this.outsideClickHandler = (ev: any) => {
+      this.setState(prevState => ({
+        ...prevState,
+        isExpanded: false
+      }))
+    }
+    window.addEventListener("click", this.outsideClickHandler)
     window.addEventListener("keydown", this.keypressHandler)
   }
 
   componentWillUnmount() {
+    window.removeEventListener("click", this.outsideClickHandler)
     window.removeEventListener("keydown", this.keypressHandler)
   }
 
@@ -127,12 +135,18 @@ class DatePicker extends React.Component<IProps, IState> {
     const placeholderDays = monthStartDay(this.state.year, this.state.month)
     const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
     return (
-      <Container isExpanded={this.state.isExpanded}>
+      <Container
+        isExpanded={this.state.isExpanded}
+        onClick={(ev: any) => {
+          ev.stopPropagation()
+        }}
+      >
         <Input
           inputRef={node => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
+          placeholder={this.props.placeholder}
           onFocus={() => {
             this.setState(prevState => ({
               isExpanded: true

@@ -117,9 +117,14 @@ var DatePicker = /** @class */ (function (_super) {
                 _this.inputNode.blur();
             }
         };
+        this.outsideClickHandler = function (ev) {
+            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
+        };
+        window.addEventListener("click", this.outsideClickHandler);
         window.addEventListener("keydown", this.keypressHandler);
     };
     DatePicker.prototype.componentWillUnmount = function () {
+        window.removeEventListener("click", this.outsideClickHandler);
         window.removeEventListener("keydown", this.keypressHandler);
     };
     DatePicker.prototype.render = function () {
@@ -127,10 +132,12 @@ var DatePicker = /** @class */ (function (_super) {
         var _a = this.props, start = _a.start, end = _a.end;
         var placeholderDays = utils_1.monthStartDay(this.state.year, this.state.month);
         var daysInCurrentMonth = utils_1.daysInMonth(this.state.month, this.state.year);
-        return (React.createElement(Container, { isExpanded: this.state.isExpanded },
+        return (React.createElement(Container, { isExpanded: this.state.isExpanded, onClick: function (ev) {
+                ev.stopPropagation();
+            } },
             React.createElement(Input_1.default, { inputRef: function (node) {
                     _this.inputNode = node;
-                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), onFocus: function () {
+                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder, onFocus: function () {
                     _this.setState(function (prevState) { return ({
                         isExpanded: true
                     }); });
