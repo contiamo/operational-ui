@@ -94,6 +94,8 @@ class Nodes extends AbstractRenderer {
           )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", "#fff")
+          // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
+          // Single event handlers should be attached to a non-svg node.
           .on("mouseenter", ctx.onMouseOver(ctx))
         // Append node
         d3
