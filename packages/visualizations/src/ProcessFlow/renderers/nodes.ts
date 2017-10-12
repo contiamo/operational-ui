@@ -79,6 +79,7 @@ class Nodes extends AbstractRenderer {
       .enter()
       .append("g")
       .attr("class", "node-group")
+      .attr("transform", (d: TNode): string => "translate(" + d.x + "," + d.y + ")")
       .each(function(d: TNode): void {
         // Append node "border" element - white element behind node.
         d3
@@ -89,7 +90,7 @@ class Nodes extends AbstractRenderer {
             "d",
             d3Symbol()
               .type(nodeShapeOptions[d.shape()].symbol)
-              .size(0),
+              .size(borderScale(d)),
           )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", "#fff")
@@ -100,14 +101,15 @@ class Nodes extends AbstractRenderer {
           .append("path")
           .attr("class", "node")
           .attr(
-          "d",
-          d3Symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(0),
-        )
+            "d",
+            d3Symbol()
+              .type(nodeShapeOptions[d.shape()].symbol)
+              .size(scale(d.size())),
+          )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
+          .attr("opacity", 0)
         // Append label
         d3
           .select(this)
@@ -115,14 +117,16 @@ class Nodes extends AbstractRenderer {
           .attr("class", "label")
       })
       .merge(nodeGroups)
-      .attr("transform", (d: TNode): string => "translate(" + d.x + "," + d.y + ")")
       .transition()
       .duration(ctx.config.duration)
+      .attr("transform", (d: TNode): string => "translate(" + d.x + "," + d.y + ")")
       .each(function(d: TNode): void {
         // Update node border
         d3
           .select(this)
           .select("path.node-border")
+          .transition()
+          .duration(ctx.config.duration)
           .attr(
           "d",
           d3Symbol()
@@ -134,6 +138,8 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .select("path.node")
+          .transition()
+          .duration(ctx.config.duration)
           .attr(
             "d",
             d3Symbol()
@@ -141,6 +147,9 @@ class Nodes extends AbstractRenderer {
               .size(scale(d.size())),
           )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+          .attr("fill", d.color())
+          .attr("stroke", d.stroke())
+          .attr("opacity", 1)
         ++n
       })
       .on("end", (): void => {
