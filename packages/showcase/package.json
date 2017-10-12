@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --hot --public --host 0.0.0.0",
-    "build": "webpack -p",
+    "build": "NODE_ENV=production webpack",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint './index.tsx' --fix && tslint './src/**/*.{ts,tsx}' --fix",
@@ -17,7 +17,7 @@
     "prettier": "prettier './index.tsx' --write && prettier './src/**/*.{ts,tsx}' --write",
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "preversion": "npm run precommit",
-    "version": "npm run build --production && git add -A dist"
+    "version": "npm run build && git add -A dist"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.43",
