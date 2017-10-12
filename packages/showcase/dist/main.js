@@ -1,20 +1,301 @@
 webpackJsonp([0],{
 
-/***/ 1201:
+/***/ 10:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Simple imports n' exports for consumers of the library.
+Object.defineProperty(exports, "__esModule", { value: true });
+var glamorous_1 = __webpack_require__(4);
+exports.ThemeProvider = glamorous_1.ThemeProvider;
+var Button_1 = __webpack_require__(210);
+exports.Button = Button_1.default;
+var ButtonGroup_1 = __webpack_require__(212);
+exports.ButtonGroup = ButtonGroup_1.default;
+var Breakdown_1 = __webpack_require__(521);
+exports.Breakdown = Breakdown_1.default;
+var Card_1 = __webpack_require__(213);
+exports.Card = Card_1.default;
+exports.CardHeader = Card_1.CardHeader;
+var Chip_1 = __webpack_require__(523);
+exports.Chip = Chip_1.default;
+var ColorPicker_1 = __webpack_require__(524);
+exports.ColorPicker = ColorPicker_1.default;
+var Grid_1 = __webpack_require__(679);
+exports.Grid = Grid_1.default;
+var DatePicker_1 = __webpack_require__(680);
+exports.DatePicker = DatePicker_1.default;
+var Header_1 = __webpack_require__(960);
+exports.Header = Header_1.default;
+exports.HeaderItem = Header_1.HeaderItem;
+exports.HeaderSeparator = Header_1.HeaderSeparator;
+exports.HeaderTitle = Header_1.HeaderTitle;
+var Icon_1 = __webpack_require__(251);
+exports.Icon = Icon_1.default;
+var InfoTile_1 = __webpack_require__(964);
+exports.InfoTile = InfoTile_1.default;
+var Input_1 = __webpack_require__(252);
+exports.Input = Input_1.default;
+var Paginator_1 = __webpack_require__(965);
+exports.Paginator = Paginator_1.default;
+var PlusChip_1 = __webpack_require__(966);
+exports.PlusChip = PlusChip_1.default;
+var Progress_1 = __webpack_require__(967);
+exports.Progress = Progress_1.default;
+var Select_1 = __webpack_require__(968);
+exports.Select = Select_1.default;
+var Sidebar_1 = __webpack_require__(972);
+exports.Sidebar = Sidebar_1.default;
+exports.SidebarItem = Sidebar_1.SidebarItem;
+exports.SidebarLink = Sidebar_1.SidebarLink;
+var SideNavigation_1 = __webpack_require__(976);
+exports.SideNavigation = SideNavigation_1.default;
+exports.SideNavigationHeader = SideNavigation_1.SideNavigationHeader;
+exports.SideNavigationItem = SideNavigation_1.SideNavigationItem;
+exports.SideNavigationLink = SideNavigation_1.SideNavigationLink;
+var Switch_1 = __webpack_require__(980);
+exports.Switch = Switch_1.default;
+var Tabs_1 = __webpack_require__(981);
+exports.Tabs = Tabs_1.default;
+exports.Tab = Tabs_1.Tab;
+var Tooltip_1 = __webpack_require__(983);
+exports.Tooltip = Tooltip_1.default;
+var Timeline_1 = __webpack_require__(985);
+exports.Timeline = Timeline_1.default;
+exports.TimelineItem = Timeline_1.TimelineItem;
+var Typography_1 = __webpack_require__(987);
+exports.TitleType = Typography_1.TitleType;
+exports.Heading1Type = Typography_1.Heading1Type;
+exports.Heading2Type = Typography_1.Heading2Type;
+exports.BodyType = Typography_1.BodyType;
+exports.SmallType = Typography_1.SmallType;
+var theme_1 = __webpack_require__(988);
+exports.contiamoTheme = theme_1.default;
+var Upload_1 = __webpack_require__(989);
+exports.Upload = Upload_1.default;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 1211:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var trimAfter = "export default (";
+var removeLeadingNewLine = function (s) { return (s[0] === "\n" ? s.slice(1) : s); };
+// Processes a tsx file-string to include only the exported snippet into Component Playground.
+var toReactPlayground = function (snippet) {
+    if (snippet.indexOf(trimAfter) > -1) {
+        var frontTrimmedSnippet = removeLeadingNewLine(snippet.slice(snippet.indexOf(trimAfter) + trimAfter.length));
+        if (frontTrimmedSnippet.indexOf(")()")) {
+            // If it's an IIFE-style snippet
+            return "(" + frontTrimmedSnippet;
+        }
+        else {
+            // Otherwise, drop trailing paranthesis
+            return frontTrimmedSnippet.slice(0, -2);
+        }
+    }
+    return snippet;
+};
+exports.default = toReactPlayground;
+
+
+/***/ }),
+
+/***/ 1212:
+/***/ (function(module, exports) {
+
+module.exports = "import * as React from \"react\"\nimport { Button, ButtonGroup } from \"contiamo-ui-components\"\n\nexport default (\n  <div>\n    <div style={{ display: \"flex\", marginTop: 16 }}>\n      <Button color=\"info\">Colored</Button>\n      <Button modifiers={[\"space\"]}>Spaced</Button>\n      <Button modifiers={[\"space\"]} disabled>\n        Disabled\n      </Button>\n    </div>\n    <div style={{ display: \"flex\", marginTop: 16 }}>\n      <ButtonGroup>\n        <Button>Group 1</Button>\n        <Button active>Group 2</Button>\n        <Button>Group 3</Button>\n      </ButtonGroup>\n    </div>\n    <div style={{ display: \"flex\", marginTop: 16 }}>\n      <ButtonGroup>\n        <Button condensed>1</Button>\n        <Button condensed color=\"#5F8E2C\">\n          2\n        </Button>\n        <Button condensed>3</Button>\n      </ButtonGroup>\n    </div>\n  </div>\n)\n"
+
+/***/ }),
+
+/***/ 1213:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = [
+    {
+        name: "color",
+        description: "What color of button would you like? It can be a hex value or a named theme color.",
+        defaultValue: "white",
+        type: "string",
+        optional: true
+    },
+    {
+        name: "onClick",
+        description: "What happens when the button is clicked?",
+        defaultValue: "",
+        type: "func",
+        optional: true
+    },
+    {
+        name: "active",
+        description: "Active state.",
+        defaultValue: "",
+        type: "boolean",
+        optional: true
+    },
+    {
+        name: "condensed",
+        description: "Condensed option",
+        defaultValue: "",
+        type: "boolean",
+        optional: true
+    },
+    {
+        name: "disabled",
+        description: "Disabled option",
+        defaultValue: "",
+        type: "boolean",
+        optional: false
+    }
+];
+
+
+/***/ }),
+
+/***/ 1214:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1215);
+var propDescription_1 = __webpack_require__(1216);
+exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
+    React.createElement(contiamo_ui_components_1.CardHeader, null, "Breakdown"),
+    React.createElement("p", null, "Breakdowns are a means of representing aggregated data in a way that should be relatively easy to reason about. The breakdown component itself belongs within the context of a larger container component that calculates numbers and supplies them to said component."),
+    React.createElement("h4", null, "Usage"),
+    React.createElement(Playground_1.default, { snippet: String(simpleSnippet), components: { Breakdown: contiamo_ui_components_1.Breakdown } }),
+    React.createElement("h4", null, "Props"),
+    React.createElement(PropsTable_1.default, { props: propDescription_1.default }))); };
+
+
+/***/ }),
+
+/***/ 1215:
+/***/ (function(module, exports) {
+
+module.exports = "import * as React from \"react\"\nimport { Breakdown } from \"contiamo-ui-components\"\n\nexport default (\n  <div>\n    <Breakdown number={1} label=\"50 (20%)\" fill={0.2}>\n      Stat 1\n    </Breakdown>\n    <Breakdown number={2} label=\"20 (40%)\" fill={0.4}>\n      Stat 2\n    </Breakdown>\n    <Breakdown number={3} label=\"40 (80%)\" fill={0.8}>\n      Stat 3\n    </Breakdown>\n  </div>\n)\n"
+
+/***/ }),
+
+/***/ 1216:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = [
+    {
+        name: "number",
+        description: "A number by which the breakdown is represented.",
+        defaultValue: "-",
+        type: "number",
+        optional: false
+    },
+    {
+        name: "label",
+        description: "A statistic number label within the bar of the breakdown",
+        defaultValue: "-",
+        type: "string",
+        optional: false
+    },
+    {
+        name: "fill",
+        description: "The percentage to fill the bar. This is typically passed in from a container component that calculates percentages at large.",
+        defaultValue: "-",
+        type: "number",
+        optional: false
+    },
+    {
+        name: "color",
+        description: "A theme palette color name, or a hex code that the bar will be colored with.",
+        defaultValue: "*info*",
+        type: "string",
+        optional: true
+    },
+    {
+        name: "icon",
+        description: "An icon that is displayed on the breakdown",
+        defaultValue: "-",
+        type: "string",
+        optional: true
+    },
+    {
+        name: "onMouseEnter/onMouseLeave",
+        description: "Functions that are invoked when the mouse enters and/or leaves the breakdown. Useful for tooltips/infowindows",
+        defaultValue: "-",
+        type: "func",
+        optional: true
+    }
+];
+
+
+/***/ }),
+
+/***/ 1217:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var Playground_1 = __webpack_require__(17);
+var react_syntax_highlighter_1 = __webpack_require__(1218);
+var PropsTable_1 = __webpack_require__(20);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var inputSnippet = __webpack_require__(1429);
+var selectSnippet = __webpack_require__(1430);
+var propDescription_1 = __webpack_require__(1431);
+exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
+    React.createElement(contiamo_ui_components_1.CardHeader, null, "Form Fields"),
+    React.createElement("p", null,
+        "Our applications tend to be composed of a myriad of form controls.",
+        React.createElement("br", null),
+        "This page seeks to document the vast majority of these controls."),
+    React.createElement(contiamo_ui_components_1.CardHeader, null, "Input"),
+    React.createElement("p", null, "This component lives up to its name, allowing a user to input text, numbers, or other data."),
+    React.createElement(Playground_1.default, { snippet: String(inputSnippet), components: { Input: contiamo_ui_components_1.Input } }),
+    React.createElement("h4", null, "Props"),
+    React.createElement(PropsTable_1.default, { props: propDescription_1.default.Input }),
+    React.createElement(contiamo_ui_components_1.CardHeader, null, "Select"),
+    React.createElement("p", null, "The Select component presents users with a list of information with single-choice or multiple-choice options. Select elements can have options filled onClick, and also support filters."),
+    React.createElement(Playground_1.default, { snippet: String(selectSnippet), components: { Select: contiamo_ui_components_1.Select } }),
+    React.createElement("h4", null, "Return Value"),
+    React.createElement("p", null, "The Select component holds its value in its `state`. The value is either an `Option` object, or an Array of `Option` objects, depending on the `multiple` prop. The shape of an Option object is described below."),
+    React.createElement(react_syntax_highlighter_1.default, { language: "javascript" }, "\nOption {\n  id: 1, // a number that is passed as a `key` in the React iterator,\n  label: \"Any string\",\n  value: (<div>Literally anything can go here</div>)\n}\n    "),
+    React.createElement("h4", null, "Props"),
+    React.createElement(PropsTable_1.default, { props: propDescription_1.default.Select }))); };
+
+
+/***/ }),
+
+/***/ 1429:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Input } from \"contiamo-ui-components\"\n\nexport default (function() {\n  class StatefulInput extends React.Component {\n    state = {\n      value: \"\"\n    }\n\n    render() {\n      return (\n        <Input\n          placeholder=\"Name here\"\n          name=\"forForms\"\n          value={this.state.value}\n          onChange={value => {\n            this.setState(prevState => ({ value }))\n          }}\n        />\n      )\n    }\n  }\n\n  return (\n    <div style={{ marginBottom: 16 }}>\n      <StatefulInput />\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1202:
+/***/ 1430:
 /***/ (function(module, exports) {
 
-module.exports = "import * as React from \"react\"\n\nimport { Select } from \"contiamo-ui-components\"\n\nexport default (() => {\n  const options = [\n    { id: 1, label: \"Option 1\", value: \"one\" },\n    { id: 2, label: \"Option 2\", value: \"two\" },\n    { id: 3, label: \"Option 3\", value: \"three\" }\n  ]\n\n  class ComponentWithSelect extends React.Component {\n    state: {value: any[]} = {\n      value: []\n    }\n\n    render() {\n      return (\n        <Select\n          value={this.state.value}\n          options={options}\n          filterable\n          placeholder=\"Choose an option\"\n          onChange={newValue => {\n            this.setState(prevState => ({\n              value: newValue\n            }))\n          }}\n        />\n      )\n    }\n  }\n\n  return <ComponentWithSelect />\n})()\n"
+module.exports = "import * as React from \"react\"\n\nimport { Select } from \"contiamo-ui-components\"\n\nexport default (() => {\n  const options = [\n    { id: 1, label: \"Option 1\", value: \"one\" },\n    { id: 2, label: \"Option 2\", value: \"two\" },\n    { id: 3, label: \"Option 3\", value: \"three\" }\n  ]\n\n  class ComponentWithSelect extends React.Component {\n    state: { value: any[] } = {\n      value: []\n    }\n\n    render() {\n      return (\n        <Select\n          value={this.state.value}\n          options={options}\n          filterable\n          placeholder=\"Choose an option\"\n          onChange={newValue => {\n            this.setState(prevState => ({\n              value: newValue\n            }))\n          }}\n        />\n      )\n    }\n  }\n\n  return <ComponentWithSelect />\n})()\n"
 
 /***/ }),
 
-/***/ 1203:
+/***/ 1431:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107,18 +388,18 @@ exports.default = {
 
 /***/ }),
 
-/***/ 1204:
+/***/ 1432:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var PropsTable_1 = __webpack_require__(18);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1205);
-var propDescription_1 = __webpack_require__(1206);
+var Playground_1 = __webpack_require__(17);
+var PropsTable_1 = __webpack_require__(20);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1433);
+var propDescription_1 = __webpack_require__(1434);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Cards"),
     React.createElement("p", null, "These elements make up the UI. They accept any type of children and elegantly wrap them."),
@@ -149,14 +430,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1205:
+/***/ 1433:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Card } from \"contiamo-ui-components\"\n\nexport default (\n  <Card padding={32} width={260}>\n    <h1>Edit me! I am interactive!</h1>\n    <h2>What is the internet without cats?</h2>\n    <img src=\"https://media.giphy.com/media/Nm8ZPAGOwZUQM/giphy-downsized.gif\" />\n  </Card>\n)\n"
 
 /***/ }),
 
-/***/ 1206:
+/***/ 1434:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -182,19 +463,19 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1207:
+/***/ 1435:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var PropsTable_1 = __webpack_require__(18);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1208);
-var plusSnippet = __webpack_require__(1209);
-var propDescription_1 = __webpack_require__(1210);
+var Playground_1 = __webpack_require__(17);
+var PropsTable_1 = __webpack_require__(20);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1436);
+var plusSnippet = __webpack_require__(1437);
+var propDescription_1 = __webpack_require__(1438);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Chips"),
     React.createElement("p", null, "Most commonly used for filters, these elements represent small bits of information that give a sense of context to the user. Chips can be interactive, or simply informative. They can take on any color passed through `props`, along with a symbol for the button that will be displayed if click behavior is detected."),
@@ -216,21 +497,21 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1208:
+/***/ 1436:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Chip } from \"contiamo-ui-components\"\n\nexport default (\n  <div style={{ display: \"flex\" }}>\n    {/* These work well in a flex-ed parent */}\n    <Chip color=\"#006847\">Hola</Chip>\n    <Chip color=\"#fff\">Compadre</Chip>\n\n    <Chip color=\"#CE1126\" symbol=\"!\" onClick={() => window.alert(\"Muy bien!\")}>\n      Como estas?\n    </Chip>\n    {/* onClick can do literally anything you want it to */}\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1209:
+/***/ 1437:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { PlusChip } from \"contiamo-ui-components\"\n\nexport default (\n  <div style={{ display: \"flex\" }}>\n    <PlusChip color=\"#f0f\" size={31} onClick={() => window.alert(\"Ouch!\")} />\n\n    <PlusChip color=\"#f00\" size={31} onClick={() => window.alert(\"Smiling is healthy!\")}>\n      😁\n    </PlusChip>\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1210:
+/***/ 1438:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -288,18 +569,18 @@ exports.default = {
 
 /***/ }),
 
-/***/ 1211:
+/***/ 1439:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1212);
-var propDescription_1 = __webpack_require__(1213);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1440);
+var propDescription_1 = __webpack_require__(1441);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Grids"),
     React.createElement("p", null,
@@ -314,14 +595,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1212:
+/***/ 1440:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Grid } from \"contiamo-ui-components\"\n\n// Run any code inside the IIFE, as long as a React element is returned\n// (you do not need the IIFE, but it is useful to define simple state containers for stateless components)\nexport default (() => {\n  const TestContainer = (props: any) => (\n    <div\n      style={{\n        backgroundColor: \"rgba(0, 0, 0, 0.1)\",\n        padding: 10\n      }}\n    >\n      {props.children}\n    </div>\n  )\n\n  return (\n    <div style={{ border: \"1px solid rgba(0, 0, 0, 0.1)\" }}>\n      <Grid columns={[\"auto\", \"auto\"]} rows={[\"auto\", \"auto\"]} gap={20}>\n        <TestContainer>One</TestContainer>\n        <TestContainer>Two</TestContainer>\n        <TestContainer>Three</TestContainer>\n        <TestContainer>Four</TestContainer>\n      </Grid>\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1213:
+/***/ 1441:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -361,19 +642,19 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1214:
+/***/ 1442:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var PropsTable_1 = __webpack_require__(18);
-var simpleSnippet = __webpack_require__(1215);
-var propDescription_1 = __webpack_require__(1216);
+var glamorous_1 = __webpack_require__(4);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var PropsTable_1 = __webpack_require__(20);
+var simpleSnippet = __webpack_require__(1443);
+var propDescription_1 = __webpack_require__(1444);
 var StickyTooltip = glamorous_1.default(contiamo_ui_components_1.Tooltip)({
     position: "relative",
     top: 0,
@@ -391,14 +672,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1215:
+/***/ 1443:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Tooltip } from \"contiamo-ui-components\"\n\nexport default (\n  <div\n    style={{\n      width: 120,\n      height: 120,\n      position: \"relative\",\n      backgroundColor: \"black\",\n      padding: 20,\n      boxSizing: \"border-box\"\n    }}\n  >\n    <p style={{ color: \"white\" }}>I am a box full of mysteries.</p>\n    <Tooltip active color=\"#00f\">\n      I uncover them all.\n    </Tooltip>\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1216:
+/***/ 1444:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -445,18 +726,18 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1217:
+/***/ 1445:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var PropsTable_1 = __webpack_require__(18);
-var snippet = __webpack_require__(1218);
-var propDescription_1 = __webpack_require__(1219);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var PropsTable_1 = __webpack_require__(20);
+var snippet = __webpack_require__(1446);
+var propDescription_1 = __webpack_require__(1447);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "InfoTiles"),
     React.createElement("p", null, "InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings."),
@@ -472,14 +753,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1218:
+/***/ 1446:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { InfoTile } from \"contiamo-ui-components\"\n\nexport default (\n  <div style={{ display: \"flex\" }}>\n    <InfoTile\n      label=\"Use Cases\"\n      icon=\"ChevronLeft\"\n      onIconClick={() => {\n        alert(\"Oh hello!\")\n      }}\n    >\n      Infinite\n    </InfoTile>\n    <InfoTile label=\"Potential\">Unlimited</InfoTile>\n    <InfoTile color=\"#009de8\" label=\"Cool Factor\">\n      > 10\n    </InfoTile>\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1219:
+/***/ 1447:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -519,19 +800,19 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1220:
+/***/ 1448:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(44);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var PropsTable_1 = __webpack_require__(18);
-var simpleSnippet = __webpack_require__(1221);
-var propDescription_1 = __webpack_require__(1222);
+var react_router_dom_1 = __webpack_require__(59);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var PropsTable_1 = __webpack_require__(20);
+var simpleSnippet = __webpack_require__(1449);
+var propDescription_1 = __webpack_require__(1450);
 exports.fetch = function (text) { return new Promise(function (resolve) { return setTimeout(function () { return resolve(text); }, 2000); }); };
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Sidebar"),
@@ -565,14 +846,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1221:
+/***/ 1449:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Sidebar, SidebarItem, SidebarLink } from \"contiamo-ui-components\"\n\nexport default (\n  <Sidebar>\n    <SidebarItem label=\"Links\">\n      <SidebarLink onClick={() => window.open(\"https://www.contiamo.com\")} symbol=\"&rarr;\">\n        Link 1\n      </SidebarLink>\n      <SidebarLink>Link 2</SidebarLink>\n    </SidebarItem>\n    <SidebarItem label=\"Fetch data first\" tooltip=\"Click for async fun!\" onClick={() => fetch(\"SOME URL\")}>\n      <SidebarLink color=\"#eee\">This could have been</SidebarLink>\n      <SidebarLink color=\"#777\" tooltip=\"Notice how the text is always readable. 😉\">\n        fetched from an\n      </SidebarLink>\n      <SidebarLink>external resource.</SidebarLink>\n    </SidebarItem>\n  </Sidebar>\n)\n"
 
 /***/ }),
 
-/***/ 1222:
+/***/ 1450:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -639,18 +920,18 @@ exports.default = {
 
 /***/ }),
 
-/***/ 1223:
+/***/ 1451:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var PropsTable_1 = __webpack_require__(18);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1224);
-var propDescription_1 = __webpack_require__(1225);
+var Playground_1 = __webpack_require__(17);
+var PropsTable_1 = __webpack_require__(20);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1452);
+var propDescription_1 = __webpack_require__(1453);
 var ColorPickerPage = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Color Picker"),
     React.createElement("p", null, "Colors are an important part of any user interface. This calls for a reasonable control that allows a user to choose a color from a canvas. Our component library exposes such a control, as seen below."),
@@ -662,14 +943,14 @@ exports.default = ColorPickerPage;
 
 /***/ }),
 
-/***/ 1224:
+/***/ 1452:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { ColorPicker } from \"contiamo-ui-components\"\n\nexport default (function() {\n  class CompWithColorPicker extends React.Component {\n    state = {\n      color: \"#013\"\n    }\n\n    handleColorChange = (color: string) => {\n      this.setState(prevState => ({\n        color\n      }))\n    }\n\n    render() {\n      return (\n        <div>\n          <ColorPicker color={this.state.color} onChange={this.handleColorChange} />\n          <p style={{ color: this.state.color }}>What color should I wear today?</p>\n        </div>\n      )\n    }\n  }\n\n  return (\n    <div>\n      <CompWithColorPicker />\n      <br />\n      Click above for fun times!\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1225:
+/***/ 1453:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -702,18 +983,88 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1226:
+/***/ 1454:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var PropsTable_1 = __webpack_require__(18);
-var simpleSnippet = __webpack_require__(1227);
-var propDescription_1 = __webpack_require__(1228);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1455);
+var propDescription_1 = __webpack_require__(1456);
+exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
+    React.createElement(contiamo_ui_components_1.CardHeader, null, "DatePicker"),
+    React.createElement("p", null, "DatePickers can currently be used to pick an period bound by two day selections."),
+    React.createElement("h4", null, "Usage"),
+    React.createElement(Playground_1.default, { snippet: String(simpleSnippet), components: { DatePicker: contiamo_ui_components_1.DatePicker } }),
+    React.createElement("h4", null, "Props"),
+    React.createElement(PropsTable_1.default, { props: propDescription_1.default }))); };
+
+
+/***/ }),
+
+/***/ 1455:
+/***/ (function(module, exports) {
+
+module.exports = "import * as React from \"react\"\nimport { DatePicker } from \"contiamo-ui-components\"\n\n// Run any code inside the IIFE, as long as a React element is returned\n// (you do not need the IIFE, but it is useful to define simple state containers for stateless components)\nexport default (() => {\n  class ComponentWithDatePicker extends React.Component {\n    state = {\n      start: \"2017-10-03\",\n      end: \"2017-10-18\"\n    }\n    render() {\n      return (\n        <DatePicker\n          start={this.state.start}\n          end={this.state.end}\n          placeholder=\"Pick a date\"\n          onChange={newState => {\n            this.setState(prevState => newState)\n          }}\n        />\n      )\n    }\n  }\n\n  return <ComponentWithDatePicker />\n})()\n"
+
+/***/ }),
+
+/***/ 1456:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = [
+    {
+        name: "start",
+        description: "Start date in the format 2012-10-01.",
+        defaultValue: "-",
+        type: "string",
+        optional: true
+    },
+    {
+        name: "end",
+        description: "End date in the format 2012-10-01.",
+        defaultValue: "-",
+        type: "string",
+        optional: true
+    },
+    {
+        name: "onChange",
+        description: "Triggered every time the start or end dates change.",
+        type: "(change: {start: string, end: string}) => void",
+        defaultValue: "-",
+        optional: true
+    },
+    {
+        name: "placeholder",
+        description: "Placeholder text when no dates selected",
+        defaultValue: "",
+        type: "string",
+        optional: true
+    }
+];
+
+
+/***/ }),
+
+/***/ 1457:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var PropsTable_1 = __webpack_require__(20);
+var simpleSnippet = __webpack_require__(1458);
+var propDescription_1 = __webpack_require__(1459);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Switch"),
     React.createElement("p", null, "A switch is a simple toggle indicating whether a specific functionality is enabled or disabled."),
@@ -725,14 +1076,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1227:
+/***/ 1458:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Switch } from \"contiamo-ui-components\"\n\nexport default (function() {\n  class ComponentWithSwitch extends React.Component {\n    state = {\n      on: true\n    }\n\n    render() {\n      return (\n        <Switch\n          on={this.state.on}\n          onChange={newOnState => {\n            this.setState(prevState => ({\n              on: newOnState\n            }))\n          }}\n        />\n      )\n    }\n  }\n\n  return (\n    <div style={{ display: \"flex\" }}>\n      <ComponentWithSwitch />\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1228:
+/***/ 1459:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -758,18 +1109,18 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1229:
+/***/ 1460:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var PropsTable_1 = __webpack_require__(18);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1230);
-var propDescription_1 = __webpack_require__(1231);
+var Playground_1 = __webpack_require__(17);
+var PropsTable_1 = __webpack_require__(20);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1461);
+var propDescription_1 = __webpack_require__(1462);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Icons"),
     React.createElement("p", null,
@@ -784,14 +1135,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1230:
+/***/ 1461:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Icon } from \"contiamo-ui-components\"\n\nexport default (\n  <div style={{ display: \"flex\", marginTop: 16 }}>\n    <Icon name=\"Play\" />\n    <Icon name=\"Pause\" />\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1231:
+/***/ 1462:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -824,16 +1175,16 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1232:
+/***/ 1463:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1233);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1464);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Typography"),
     React.createElement("p", null,
@@ -844,14 +1195,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1233:
+/***/ 1464:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport {\n  contiamoTheme as theme,\n  TitleType,\n  Heading1Type,\n  Heading2Type,\n  BodyType,\n  SmallType\n} from \"contiamo-ui-components\"\n\nexport default (\n  <div>\n    <TitleType>I am a title.</TitleType>\n    <Heading1Type>I am a heading1.</Heading1Type>\n    <Heading2Type>I am a heading2.</Heading2Type>\n    <BodyType style={{ color: \"olive\" }}>I am a regular body section. Feel free to paint me olive.</BodyType>\n    <SmallType>I am a little smaller than that.</SmallType>\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1234:
+/***/ 1465:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -866,10 +1217,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1235);
+var glamorous_1 = __webpack_require__(4);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1466);
 var ColorBox = glamorous_1.default.div({
     display: "inline-block",
     "& > div": {
@@ -894,25 +1245,25 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1235:
+/***/ 1466:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { contiamoTheme as theme } from \"contiamo-ui-components\"\n\nexport default (\n  <div>\n    <div style={{ width: 80, height: 80, backgroundColor: theme.colors.palette.info }} />\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1236:
+/***/ 1467:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var PaginatorSnippet = __webpack_require__(1237);
-var propDescription_1 = __webpack_require__(1238);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var PaginatorSnippet = __webpack_require__(1468);
+var propDescription_1 = __webpack_require__(1469);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Paginator"),
     React.createElement("p", null, "Simple component to navigate through pages"),
@@ -924,14 +1275,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1237:
+/***/ 1468:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Paginator } from \"contiamo-ui-components\"\n\nexport default (() => {\n  class ComponentWithPaginator extends React.Component {\n    state = {\n      page: 1\n    }\n\n    handleChange(page: number): void {\n      this.setState(() => ({ page }))\n    }\n\n    render() {\n      return <Paginator pageCount={30} page={this.state.page} onChange={page => this.handleChange(page)} />\n    }\n  }\n\n  return (\n    <div style={{ display: \"flex\" }}>\n      <ComponentWithPaginator />\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1238:
+/***/ 1469:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -971,18 +1322,18 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1239:
+/***/ 1470:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var basicSnippet = __webpack_require__(1240);
-var propDescription_1 = __webpack_require__(1241);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var basicSnippet = __webpack_require__(1471);
+var propDescription_1 = __webpack_require__(1472);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Progress"),
     React.createElement("p", null, "Animating progress bar, covering an entire area. Add as a child to any non-statically positioned element."),
@@ -994,14 +1345,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1240:
+/***/ 1471:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Progress } from \"contiamo-ui-components\"\n\nexport default (\n  <div style={{ width: 300, height: 240, border: \"1px solid #adadad\", padding: 20, position: \"relative\" }}>\n    While I patiently wait for my data, this progress bar assures me that things will be ok.\n    <Progress />\n  </div>\n)\n"
 
 /***/ }),
 
-/***/ 1241:
+/***/ 1472:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1027,18 +1378,18 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1242:
+/***/ 1473:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1243);
-var propDescription_1 = __webpack_require__(1244);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1474);
+var propDescription_1 = __webpack_require__(1475);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Tabs"),
     React.createElement("p", null,
@@ -1056,14 +1407,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1243:
+/***/ 1474:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Tabs, Tab } from \"contiamo-ui-components\"\n\nexport default (() => {\n  class ComponentWithTab extends React.Component {\n    state = {\n      tabIndex: 0\n    }\n\n    handleChange = (tabIndex: number) => {\n      this.setState({\n        tabIndex\n      })\n    }\n\n    render() {\n      return (\n        <Tabs onChange={this.handleChange} active={this.state.tabIndex}>\n          <Tab title=\"Tab 1\">\n            <div>\n              <h3>Example panel 1</h3>\n              <p>\n                Sunt do fugiat non est cupidatat ad et nisi. Adipisicing mollit veniam officia do id. Consequat\n                voluptate excepteur ex duis qui adipisicing exercitation minim nostrud non aliquip culpa enim. Aute non\n                adipisicing in officia tempor cupidatat culpa fugiat elit sunt nisi eu esse.\n              </p>\n            </div>\n          </Tab>\n          <Tab title=\"Tab 2\">\n            <div>\n              <h3>Example panel 2</h3>\n              <p>\n                Ex occaecat est esse consectetur labore id sint id ut. Lorem commodo adipisicing ad adipisicing ea\n                consectetur esse minim anim pariatur. Excepteur est elit mollit sunt qui excepteur minim fugiat.\n              </p>\n            </div>\n          </Tab>\n          <Tab title=\"Tab 3\" disabled>\n            <div>\n              <h3>Example panel 3</h3>\n              <p>\n                Non et esse reprehenderit elit in ad nulla mollit. Fugiat nulla consequat esse do est. Enim cupidatat\n                sit ullamco pariatur ullamco commodo ipsum deserunt deserunt dolor minim sit magna. Duis adipisicing\n                irure irure incididunt non cupidatat est ipsum deserunt ex qui adipisicing.\n              </p>\n            </div>\n          </Tab>\n        </Tabs>\n      )\n    }\n  }\n\n  return (\n    <div\n      style={{\n        padding: 15,\n        boxShadow: \"0 1px 2px rgba(0, 0, 0, 0.14)\",\n        backgroundColor: \"#fff\",\n        minHeight: 221\n      }}\n    >\n      <ComponentWithTab />\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1244:
+/***/ 1475:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1114,18 +1465,18 @@ exports.default = {
 
 /***/ }),
 
-/***/ 1245:
+/***/ 1476:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var PropsTable_1 = __webpack_require__(18);
-var TimelineSnippet = __webpack_require__(1246);
-var propDescription_1 = __webpack_require__(1247);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var PropsTable_1 = __webpack_require__(20);
+var TimelineSnippet = __webpack_require__(1477);
+var propDescription_1 = __webpack_require__(1478);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Timeline"),
     React.createElement("p", null,
@@ -1143,14 +1494,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1246:
+/***/ 1477:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Timeline, TimelineItem } from \"contiamo-ui-components\"\nimport glamorous from \"glamorous\"\n\nexport default (() => {\n  const CustomSpan = ({ children }: any) => (\n    <span style={{ fontSize: 12, marginRight: 8, opacity: 0.6 }}>{children}</span>\n  )\n\n  return (\n    <Timeline>\n      <TimelineItem color=\"success\">\n        <h3>Service visit - issue resolved</h3>\n        <p>\n          <CustomSpan>1 week ago</CustomSpan>\n          <CustomSpan>Details</CustomSpan>\n        </p>\n      </TimelineItem>\n      <TimelineItem color=\"error\">\n        <h3>Network issues</h3>\n        <p>\n          <CustomSpan>2 days ago</CustomSpan>\n          <CustomSpan>Details</CustomSpan>\n        </p>\n      </TimelineItem>\n      <TimelineItem>\n        <h3>Contract extended</h3>\n        <p>\n          <CustomSpan>5 days ago</CustomSpan>\n          <CustomSpan>Details</CustomSpan>\n        </p>\n      </TimelineItem>\n      <TimelineItem color=\"warning\">\n        <h3>Contract expires in 1 month</h3>\n        <p>\n          <CustomSpan>2 weeks ago</CustomSpan>\n          <CustomSpan>Details</CustomSpan>\n        </p>\n      </TimelineItem>\n      <TimelineItem color=\"#7a137a\" icon=\"PhoneOutgoing\">\n        <h3>Survey outreach</h3>\n        <p>\n          <CustomSpan>2 weeks ago</CustomSpan>\n          <CustomSpan>Details</CustomSpan>\n        </p>\n      </TimelineItem>\n    </Timeline>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1247:
+/***/ 1478:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1179,18 +1530,18 @@ exports.default = {
 
 /***/ }),
 
-/***/ 1248:
+/***/ 1479:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(1249);
-var propDescription_1 = __webpack_require__(1250);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1480);
+var propDescription_1 = __webpack_require__(1481);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Uploads"),
     React.createElement("p", null, "Uploads are great components!"),
@@ -1202,14 +1553,14 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
 
 /***/ }),
 
-/***/ 1249:
+/***/ 1480:
 /***/ (function(module, exports) {
 
 module.exports = "import * as React from \"react\"\nimport { Upload, Icon, Button } from \"contiamo-ui-components\"\n\nexport default (() => {\n  class ComponentWithUploader extends React.Component {\n    state: any = {\n      files: []\n    }\n\n    uploaderProps = {\n      action: \"//jsonplaceholder.typicode.com/posts/\",\n      data: { x: 1, y: 2 },\n      headers: {\n        authorization: \"authorization-text\"\n      },\n      multiple: true,\n      onBeforeUpload: (file: File, files: File[]) => {\n        this.setState({ files })\n      },\n      onStartUpload: (file: File) => {\n        const files = this.updateStatus(file, \"uploading\")\n        this.setState({ files })\n      },\n      onSuccess: (response: {}, file: File) => {\n        const files = this.updateStatus(file, \"success\")\n        this.setState({ files })\n      },\n      onError: (error: Error, file: File) => {\n        const files = this.updateStatus(file, \"error\")\n        this.setState({ files })\n      }\n    }\n\n    getColor = (status: string) => {\n      const colorsMap: any = {\n        uploading: \"#1499CE\",\n        success: \"#00b34d\",\n        warning: \"#FFAE00\",\n        error: \"#DE1A1A\"\n      }\n      return colorsMap[status]\n    }\n\n    getIconName = (status: string) => {\n      const iconsMap: any = {\n        uploading: \"Loader\",\n        success: \"CheckCircle\",\n        error: \"AlertCircle\"\n      }\n      return iconsMap[status]\n    }\n\n    updateStatus = (file: any, status: string) =>\n      this.state.files.map((item: any) => {\n        if (item.name === file.name) {\n          item.status = status\n        }\n        return item\n      })\n\n    renderFileList = () => {\n      const { files } = this.state\n      return (\n        <ul style={{ padding: 0 }}>\n          {files.map((file: any, i: number) => (\n            <li\n              key={i}\n              style={{\n                listStyle: \"none\",\n                color: this.getColor(file.status),\n                padding: \"6px 0\",\n                display: \"flex\",\n                alignItems: \"center\",\n                transition: \"color .5s ease\"\n              }}\n            >\n              <Icon name={this.getIconName(file.status)} />\n              <span style={{ marginLeft: 8 }}>{file.name}</span>\n            </li>\n          ))}\n        </ul>\n      )\n    }\n\n    render() {\n      return (\n        <div>\n          <Upload {...this.uploaderProps}>\n            <Button>\n              <Icon name=\"Upload\" /> Upload\n            </Button>\n          </Upload>\n          {this.renderFileList()}\n        </div>\n      )\n    }\n  }\n\n  return (\n    <div>\n      <ComponentWithUploader />\n    </div>\n  )\n})()\n"
 
 /***/ }),
 
-/***/ 1250:
+/***/ 1481:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1298,18 +1649,18 @@ exports.default = [
 
 /***/ }),
 
-/***/ 1251:
+/***/ 1482:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(44);
-var Canvas_1 = __webpack_require__(208);
-var Sidebar_1 = __webpack_require__(209);
-var ProcessFlow_1 = __webpack_require__(1252);
-var processFlowData = __webpack_require__(251);
+var react_router_dom_1 = __webpack_require__(59);
+var Canvas_1 = __webpack_require__(399);
+var Sidebar_1 = __webpack_require__(400);
+var ProcessFlow_1 = __webpack_require__(1483);
+var processFlowData = __webpack_require__(442);
 var SidebarWithRouter = react_router_dom_1.withRouter(Sidebar_1.default);
 var InfoTooltip = function () { return React.createElement("div", null, "Choose a Visualization to Get Started"); };
 var links = [
@@ -1331,16 +1682,16 @@ exports.default = function () { return (React.createElement("div", null,
 
 /***/ }),
 
-/***/ 1252:
+/***/ 1483:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var ContiamoVisualizations = __webpack_require__(1253);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var data = __webpack_require__(251);
+var ContiamoVisualizations = __webpack_require__(1484);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var data = __webpack_require__(442);
 // @TODO Fix this!
 // import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
 var Viz = ContiamoVisualizations["contiamo-visualizations"];
@@ -1391,7 +1742,7 @@ exports.default = ProcessFlowContainer;
 
 /***/ }),
 
-/***/ 1253:
+/***/ 1484:
 /***/ (function(module, exports) {
 
 exports["contiamo-visualizations"] =
@@ -46124,7 +46475,7 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ 1254:
+/***/ 1485:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46162,7 +46513,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 1255:
+/***/ 1486:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46199,27 +46550,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 15:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = __webpack_require__(327);
-exports.fadeIn = animations_1.fadeIn;
-exports.resetTransform = animations_1.resetTransform;
-exports.spin = animations_1.spin;
-var color_1 = __webpack_require__(328);
-exports.hexOrColor = color_1.hexOrColor;
-exports.readableTextColor = color_1.readableTextColor;
-exports.darken = color_1.darken;
-var theme_1 = __webpack_require__(329);
-exports.wrapTheme = theme_1.wrapTheme;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46244,11 +46575,11 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var component_playground_1 = __webpack_require__(769);
-var contiamo_ui_utils_1 = __webpack_require__(15);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var transform_snippet_1 = __webpack_require__(983);
+var glamorous_1 = __webpack_require__(4);
+var component_playground_1 = __webpack_require__(997);
+var contiamo_ui_utils_1 = __webpack_require__(18);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var transform_snippet_1 = __webpack_require__(1211);
 var customGrey = "#cdcdcd";
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isExpanded = _a.isExpanded;
@@ -46326,98 +46657,34 @@ exports.default = Playground;
 
 /***/ }),
 
-/***/ 168:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
-var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, modifiers = _a.modifiers, condensed = _a.condensed;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "white";
-    var activeBackgroundColor = contiamo_ui_utils_1.darken(backgroundColor)(5);
-    var textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"]);
-    var activeBoxShadow = theme.shadows.pressed;
-    var isSpace = modifiers && modifiers.indexOf("space") > -1;
-    var spacing = theme.spacing;
-    return __assign({ display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px", border: "1px solid rgba(0, 0, 0, .2)", borderRadius: 2, cursor: disabled ? "not-allowed" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
-        ? {
-            ":hover": {
-                backgroundColor: activeBackgroundColor,
-                color: contiamo_ui_utils_1.readableTextColor(activeBackgroundColor)(["white", "#222"])
-            },
-            ":focus": {
-                outline: 0,
-                backgroundColor: activeBackgroundColor
-            },
-            ":active": {
-                boxShadow: activeBoxShadow
-            }
-        }
-        : {}, { marginLeft: isSpace ? spacing / 2 : undefined });
-});
-var Button = function (props) {
-    var componentProps = __assign({}, props, { onClick: props.disabled ? null : props.onClick });
-    return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, componentProps));
-};
-exports.default = Button;
-//# sourceMappingURL=Button.js.map
-
-/***/ }),
-
-/***/ 170:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({
-        "& > div": {
-            margin: 0
-        },
-        "& > div:not(:first-child)": {
-            borderLeft: 0,
-            borderTopLeftRadius: 0,
-            borderBottomLeftRadius: 0
-        },
-        "& > div:not(:last-child)": {
-            borderTopRightRadius: 0,
-            borderBottomRightRadius: 0
-        }
-    });
-});
-var ButtonGroup = function (_a) {
-    var children = _a.children, _b = _a.style, style = _b === void 0 ? {} : _b;
-    return (React.createElement(Container, { style: style }, children));
-};
-exports.default = ButtonGroup;
-//# sourceMappingURL=ButtonGroup.js.map
-
-/***/ }),
-
 /***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var animations_1 = __webpack_require__(518);
+exports.fadeIn = animations_1.fadeIn;
+exports.resetTransform = animations_1.resetTransform;
+exports.spin = animations_1.spin;
+var color_1 = __webpack_require__(519);
+exports.hexOrColor = color_1.hexOrColor;
+exports.readableTextColor = color_1.readableTextColor;
+exports.darken = color_1.darken;
+var theme_1 = __webpack_require__(520);
+exports.wrapTheme = theme_1.wrapTheme;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var Table = glamorous_1.default.table(function (_a) {
     var theme = _a.theme;
     return ({
@@ -46465,14 +46732,195 @@ exports.default = PropsTable;
 
 /***/ }),
 
-/***/ 208:
+/***/ 210:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
+var Container = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, modifiers = _a.modifiers, condensed = _a.condensed;
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "white";
+    var activeBackgroundColor = contiamo_ui_utils_1.darken(backgroundColor)(5);
+    var textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"]);
+    var activeBoxShadow = theme.shadows.pressed;
+    var isSpace = modifiers && modifiers.indexOf("space") > -1;
+    var spacing = theme.spacing;
+    return __assign({ display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px", border: "1px solid rgba(0, 0, 0, .2)", borderRadius: 2, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
+        ? {
+            ":hover": {
+                backgroundColor: activeBackgroundColor,
+                color: contiamo_ui_utils_1.readableTextColor(activeBackgroundColor)(["white", "#222"])
+            },
+            ":focus": {
+                outline: 0,
+                backgroundColor: activeBackgroundColor
+            },
+            ":active": {
+                boxShadow: activeBoxShadow
+            }
+        }
+        : {}, { marginLeft: isSpace ? spacing / 2 : undefined });
+});
+var Button = function (props) {
+    var componentProps = __assign({}, props, { onClick: props.disabled ? null : props.onClick });
+    return React.createElement(Container, __assign({ tabIndex: -1, role: "button" }, componentProps));
+};
+exports.default = Button;
+//# sourceMappingURL=Button.js.map
+
+/***/ }),
+
+/***/ 212:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
+var Container = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        "& > div": {
+            margin: 0
+        },
+        "& > div:not(:first-child)": {
+            borderLeft: 0,
+            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: 0
+        },
+        "& > div:not(:last-child)": {
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 0
+        }
+    });
+});
+var ButtonGroup = function (_a) {
+    var children = _a.children, _b = _a.style, style = _b === void 0 ? {} : _b;
+    return (React.createElement(Container, { style: style }, children));
+};
+exports.default = ButtonGroup;
+//# sourceMappingURL=ButtonGroup.js.map
+
+/***/ }),
+
+/***/ 213:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var glamorous_1 = __webpack_require__(4);
+var CardHeader_1 = __webpack_require__(522);
+exports.CardHeader = CardHeader_1.default;
+var style = function (_a) {
+    var theme = _a.theme, width = _a.width, padding = _a.padding;
+    return ({
+        width: width,
+        padding: padding || theme.spacing,
+        boxShadow: theme.shadows.card,
+        backgroundColor: theme.colors.usage.cardBackground,
+        color: theme.colors.usage.bodyText,
+        "& p": {
+            lineHeight: "20px"
+        },
+        "& > img": {
+            maxWidth: "100%"
+        },
+        "& .CardHeader:not(:first-child)": {
+            borderBottomStyle: "dashed"
+        }
+    });
+};
+var Card = function (_a) {
+    var className = _a.className, children = _a.children;
+    return React.createElement("div", { className: className }, children);
+};
+exports.default = glamorous_1.default(Card)(style);
+//# sourceMappingURL=Card.js.map
+
+/***/ }),
+
+/***/ 251:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+// @todo -> type this better
+var React = __webpack_require__(0);
+var ReactFeather = __webpack_require__(97);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
+var Icon = function (_a) {
+    var name = _a.name, size = _a.size, color = _a.color, theme = _a.theme;
+    var defaultColor = theme.colors.palette.black;
+    var color_ = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || defaultColor) : defaultColor;
+    // @todo -> this, better
+    var IconLib = ReactFeather;
+    if (IconLib.hasOwnProperty(name)) {
+        var Comp = IconLib[name];
+        return React.createElement(Comp, { size: size || theme.spacing, color: color_ });
+    }
+    else {
+        return React.createElement("div", null, "Icon doesn't exist");
+    }
+};
+exports.default = glamorous_1.withTheme(Icon);
+//# sourceMappingURL=Icon.js.map
+
+/***/ }),
+
+/***/ 252:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var glamorous_1 = __webpack_require__(4);
+var StyledInput = glamorous_1.default.input(function (_a) {
+    var theme = _a.theme;
+    return ({
+        padding: theme.spacing / 2,
+        border: "1px solid",
+        borderColor: theme.colors.palette.grey30,
+        font: "inherit",
+        WebkitAppearance: "none"
+    });
+});
+var Input = function (_a) {
+    var className = _a.className, name = _a.name, placeholder = _a.placeholder, value = _a.value, onChange = _a.onChange, onFocus = _a.onFocus, onBlur = _a.onBlur, inputRef = _a.inputRef;
+    return (React.createElement(StyledInput, { innerRef: inputRef, className: className, name: name, placeholder: placeholder, value: value, onFocus: onFocus, onBlur: onBlur, onChange: function (e) {
+            onChange && onChange(e.target.value);
+        } }));
+};
+exports.default = Input;
+//# sourceMappingURL=Input.js.map
+
+/***/ }),
+
+/***/ 399:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var glamorous_1 = __webpack_require__(4);
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
@@ -46503,14 +46951,14 @@ exports.default = Canvas;
 
 /***/ }),
 
-/***/ 209:
+/***/ 400:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var contiamo_ui_components_1 = __webpack_require__(9);
+var contiamo_ui_components_1 = __webpack_require__(10);
 exports.default = function (_a) {
     var links = _a.links, location = _a.location, css = _a.css;
     return (React.createElement(contiamo_ui_components_1.Sidebar, { css: css }, links.map(function (link, index) {
@@ -46525,40 +46973,40 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ 251:
+/***/ 442:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var case01_1 = __webpack_require__(1254);
+var case01_1 = __webpack_require__(1485);
 exports.case01 = case01_1.default;
-var case02_1 = __webpack_require__(1255);
+var case02_1 = __webpack_require__(1486);
 exports.case02 = case02_1.default;
 
 
 /***/ }),
 
-/***/ 252:
+/***/ 443:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(253);
-module.exports = __webpack_require__(254);
+__webpack_require__(444);
+module.exports = __webpack_require__(445);
 
 
 /***/ }),
 
-/***/ 254:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(255);
+__webpack_require__(446);
 var React = __webpack_require__(0);
-var ReactDOM = __webpack_require__(104);
-var react_hot_loader_1 = __webpack_require__(268);
-var App_1 = __webpack_require__(273);
+var ReactDOM = __webpack_require__(139);
+var react_hot_loader_1 = __webpack_require__(459);
+var App_1 = __webpack_require__(464);
 var render = function (Component) {
     ReactDOM.render(React.createElement(react_hot_loader_1.AppContainer, null,
         React.createElement(App_1.default, null)), document.querySelector("#app"));
@@ -46575,7 +47023,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 273:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46590,16 +47038,16 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(44);
-var glamorous_1 = __webpack_require__(3);
-var glamor_1 = __webpack_require__(79);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var fonts_1 = __webpack_require__(763);
-var SideNavigation_1 = __webpack_require__(764);
-var Header_1 = __webpack_require__(765);
-var Intro_1 = __webpack_require__(766);
-var Components_1 = __webpack_require__(767);
-var Visualizations_1 = __webpack_require__(1251);
+var react_router_dom_1 = __webpack_require__(59);
+var glamorous_1 = __webpack_require__(4);
+var glamor_1 = __webpack_require__(109);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var fonts_1 = __webpack_require__(991);
+var SideNavigation_1 = __webpack_require__(992);
+var Header_1 = __webpack_require__(993);
+var Intro_1 = __webpack_require__(994);
+var Components_1 = __webpack_require__(995);
+var Visualizations_1 = __webpack_require__(1482);
 var Container = glamorous_1.default.div({
     display: "flex",
     flexDirection: "column",
@@ -46662,13 +47110,13 @@ exports.default = glamorous_1.default(App)(styles);
 
 /***/ }),
 
-/***/ 327:
+/***/ 518:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var glamor_1 = __webpack_require__(79);
+var glamor_1 = __webpack_require__(109);
 var fadeIn = glamor_1.css.keyframes({
     to: {
         opacity: 1
@@ -46692,13 +47140,13 @@ exports.spin = spin;
 
 /***/ }),
 
-/***/ 328:
+/***/ 519:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var colorCalculator = __webpack_require__(169);
+var colorCalculator = __webpack_require__(211);
 var hexOrColor = function (color) {
     /*
         Allow for named colors from the theme, AND hex codes.
@@ -46743,7 +47191,7 @@ exports.darken = darken;
 
 /***/ }),
 
-/***/ 329:
+/***/ 520:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46758,7 +47206,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 // Wrap each ui component in its own theme provider to make sure the default
 // Contiamo theme is always available. Props are passed along unaltered.
 var wrapTheme = function (theme) { return function (Comp) {
@@ -46770,15 +47218,15 @@ exports.wrapTheme = wrapTheme;
 
 /***/ }),
 
-/***/ 330:
+/***/ 521:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Container = glamorous_1.default.div({
     display: "flex",
     alignItems: "center",
@@ -46859,52 +47307,14 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ 331:
+/***/ 522:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var CardHeader_1 = __webpack_require__(332);
-exports.CardHeader = CardHeader_1.default;
-var style = function (_a) {
-    var theme = _a.theme, width = _a.width, padding = _a.padding;
-    return ({
-        width: width,
-        padding: padding || theme.spacing,
-        boxShadow: theme.shadows.card,
-        backgroundColor: theme.colors.usage.cardBackground,
-        color: theme.colors.usage.bodyText,
-        "& p": {
-            lineHeight: "20px"
-        },
-        "& > img": {
-            maxWidth: "100%"
-        },
-        "& .CardHeader:not(:first-child)": {
-            borderBottomStyle: "dashed"
-        }
-    });
-};
-var Card = function (_a) {
-    var className = _a.className, children = _a.children;
-    return React.createElement("div", { className: className }, children);
-};
-exports.default = glamorous_1.default(Card)(style);
-//# sourceMappingURL=Card.js.map
-
-/***/ }),
-
-/***/ 332:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var style = function (_a) {
     var theme = _a.theme;
     return ({
@@ -46929,15 +47339,15 @@ exports.default = glamorous_1.default(CardHeader)(style);
 
 /***/ }),
 
-/***/ 333:
+/***/ 523:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, hasChip = _a.hasChip;
     var backgroundColor = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
@@ -46991,7 +47401,7 @@ exports.default = Chip;
 
 /***/ }),
 
-/***/ 334:
+/***/ 524:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47008,8 +47418,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_color_1 = __webpack_require__(335);
-var glamorous_1 = __webpack_require__(3);
+var react_color_1 = __webpack_require__(525);
+var glamorous_1 = __webpack_require__(4);
 var hasTheme = function (theme) { return theme && Object.keys(theme).length > 0; };
 var ColorSquare = glamorous_1.default.div({
     border: "3px solid white",
@@ -47115,14 +47525,14 @@ exports.default = ColorPicker;
 
 /***/ }),
 
-/***/ 489:
+/***/ 679:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var Container = glamorous_1.default.div({
     display: "grid"
 }, 
@@ -47145,20 +47555,242 @@ exports.default = Grid;
 
 /***/ }),
 
-/***/ 490:
+/***/ 680:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var glamorous_1 = __webpack_require__(4);
+var Card_1 = __webpack_require__(213);
+var Icon_1 = __webpack_require__(251);
+var Input_1 = __webpack_require__(252);
+var utils_1 = __webpack_require__(921);
+var Container = glamorous_1.default.div(function (_a) {
+    var isExpanded = _a.isExpanded;
+    return ({
+        display: "inline-block",
+        width: "auto",
+        position: "relative",
+        "& .co_card": {
+            display: isExpanded ? "block" : "none",
+            position: "absolute",
+            top: 30,
+            left: "50%",
+            transform: "translate3d(-50%, 0, 0)",
+            width: 240
+        },
+        "& input": {
+            width: 200
+        }
+    });
+});
+var Nav = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        margin: theme.spacing,
+        textAlign: "center",
+        "& > *": {
+            margin: "0 6px",
+            verticalAlign: "middle",
+            display: "inline-block"
+        },
+        "& > span": {
+            width: 100,
+            textAlign: "center"
+        }
+    });
+});
+var IconContainer = glamorous_1.default.div({
+    width: 16,
+    height: 16,
+    cursor: "pointer"
+});
+var Days = glamorous_1.default.div({
+    width: 210,
+    margin: "auto"
+});
+var Day = glamorous_1.default.div({
+    width: 30,
+    height: 30,
+    marginRight: -1,
+    marginBottom: -1,
+    cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid #efefef"
+}, function (_a) {
+    var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
+    return ({
+        backgroundColor: selected ? theme.colors.palette.success : "transparent",
+        color: selected ? "#FFF" : "#000",
+        visibility: isPlaceholder ? "hidden" : "visible",
+        content: isPlaceholder ? "' '" : ""
+    });
+});
+var DatePicker = /** @class */ (function (_super) {
+    __extends(DatePicker, _super);
+    function DatePicker() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            isExpanded: false,
+            year: 2017,
+            month: 9
+        };
+        return _this;
+    }
+    DatePicker.prototype.changeMonth = function (diff) {
+        this.setState(function (prevState) { return ({
+            month: prevState.month + diff < 0 ? prevState.month + diff + 12 : (prevState.month + diff) % 12,
+            year: prevState.month + diff < 0
+                ? prevState.year - 1
+                : prevState.month + diff > 11 ? prevState.year + 1 : prevState.year
+        }); });
+    };
+    DatePicker.prototype.componentDidMount = function () {
+        var _this = this;
+        this.keypressHandler = function (ev) {
+            if (ev.keyCode !== 27) {
+                return;
+            }
+            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: !prevState.isExpanded })); });
+            if (_this.inputNode) {
+                _this.inputNode.blur();
+            }
+        };
+        this.outsideClickHandler = function (ev) {
+            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
+        };
+        window.addEventListener("click", this.outsideClickHandler);
+        window.addEventListener("keydown", this.keypressHandler);
+    };
+    DatePicker.prototype.componentWillUnmount = function () {
+        window.removeEventListener("click", this.outsideClickHandler);
+        window.removeEventListener("keydown", this.keypressHandler);
+    };
+    DatePicker.prototype.render = function () {
+        var _this = this;
+        var _a = this.props, start = _a.start, end = _a.end;
+        var placeholderDays = utils_1.monthStartDay(this.state.year, this.state.month);
+        var daysInCurrentMonth = utils_1.daysInMonth(this.state.month, this.state.year);
+        return (React.createElement(Container, { isExpanded: this.state.isExpanded, onClick: function (ev) {
+                ev.stopPropagation();
+            } },
+            React.createElement(Input_1.default, { inputRef: function (node) {
+                    _this.inputNode = node;
+                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder, onFocus: function () {
+                    _this.setState(function (prevState) { return ({
+                        isExpanded: true
+                    }); });
+                } }),
+            React.createElement(Card_1.default, { className: "co_card" },
+                React.createElement(Nav, null,
+                    React.createElement(IconContainer, { onClick: function () {
+                            _this.changeMonth(-1);
+                        } },
+                        React.createElement(Icon_1.default, { name: "ChevronLeft", size: 16 })),
+                    React.createElement("span", null, utils_1.months[this.state.month] + ", " + this.state.year),
+                    React.createElement(IconContainer, { onClick: function () {
+                            _this.changeMonth(+1);
+                        } },
+                        React.createElement(Icon_1.default, { name: "ChevronRight", size: 16 }))),
+                React.createElement(Days, null,
+                    utils_1.range(placeholderDays).map(function (number, index) {
+                        return React.createElement(Day, { key: index, isPlaceholder: true });
+                    }),
+                    utils_1.range(daysInCurrentMonth).map(function (number, index) {
+                        var date = utils_1.toDate(_this.state.year, _this.state.month, index);
+                        return (React.createElement(Day, { selected: date === start || date === end || (!!start && !!end && date >= start && date <= end), key: index, onClick: function () {
+                                var newStart = start && !end ? start : date;
+                                var newEnd = start && !end ? date : start && end ? null : end;
+                                var _a = [newStart, newEnd].sort(), sortedNewStart = _a[0], sortedNewEnd = _a[1];
+                                _this.props.onChange &&
+                                    _this.props.onChange({
+                                        start: sortedNewStart,
+                                        end: sortedNewEnd
+                                    });
+                            } }, index + 1));
+                    })))));
+    };
+    return DatePicker;
+}(React.Component));
+exports.default = DatePicker;
+//# sourceMappingURL=DatePicker.js.map
+
+/***/ }),
+
+/***/ 921:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var moment_1 = __webpack_require__(922);
+var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+exports.months = months;
+var range = function (n) { return Array.apply(null, { length: n }).map(function (val, i) { return i; }); };
+exports.range = range;
+var toDate = function (year, month, day) {
+    return year + "-" + (month < 9 ? "0" : "") + (month + 1) + "-" + (day < 9 ? "0" : "") + (day + 1);
+};
+exports.toDate = toDate;
+var monthStartDay = function (year, month) { return moment_1.default(toDate(year, month, 0)).day(); };
+exports.monthStartDay = monthStartDay;
+var daysInMonth = function (month, year) {
+    return moment_1.default(toDate(year, month, 2)).daysInMonth();
+};
+exports.daysInMonth = daysInMonth;
+//# sourceMappingURL=utils.js.map
+
+/***/ }),
+
+/***/ 960:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
-var HeaderItem_1 = __webpack_require__(491);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
+var HeaderItem_1 = __webpack_require__(961);
 exports.HeaderItem = HeaderItem_1.default;
-var HeaderTitle_1 = __webpack_require__(492);
+var HeaderTitle_1 = __webpack_require__(962);
 exports.HeaderTitle = HeaderTitle_1.default;
-var HeaderSeparator_1 = __webpack_require__(493);
+var HeaderSeparator_1 = __webpack_require__(963);
 exports.HeaderSeparator = HeaderSeparator_1.default;
 var style = function (_a) {
     var theme = _a.theme, color = _a.color;
@@ -47182,14 +47814,14 @@ exports.default = glamorous_1.default(Header)(style);
 
 /***/ }),
 
-/***/ 491:
+/***/ 961:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var style = function (_a) {
     var theme = _a.theme, active = _a.active;
     var opacity = 0.1, activeBackground = "rgba(0, 0, 0, " + opacity * 2 + ")";
@@ -47233,7 +47865,7 @@ exports.default = glamorous_1.default(HeaderItem)(style);
 
 /***/ }),
 
-/***/ 492:
+/***/ 962:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47248,7 +47880,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var style = function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.title, { marginRight: theme.spacing }));
@@ -47263,14 +47895,14 @@ exports.default = glamorous_1.default(HeaderTitle)(style);
 
 /***/ }),
 
-/***/ 493:
+/***/ 963:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var style = function (_a) {
     var theme = _a.theme;
     return ({
@@ -47291,37 +47923,7 @@ exports.default = glamorous_1.default(HeaderSeparator)(style);
 
 /***/ }),
 
-/***/ 494:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// @todo -> type this better
-var React = __webpack_require__(0);
-var ReactFeather = __webpack_require__(73);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
-var Icon = function (_a) {
-    var name = _a.name, size = _a.size, color = _a.color, theme = _a.theme;
-    var defaultColor = theme.colors.palette.black;
-    var color_ = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || defaultColor) : defaultColor;
-    // @todo -> this, better
-    var IconLib = ReactFeather;
-    if (IconLib.hasOwnProperty(name)) {
-        var Comp = IconLib[name];
-        return React.createElement(Comp, { size: size || theme.spacing, color: color_ });
-    }
-    else {
-        return React.createElement("div", null, "Icon doesn't exist");
-    }
-};
-exports.default = glamorous_1.withTheme(Icon);
-//# sourceMappingURL=Icon.js.map
-
-/***/ }),
-
-/***/ 735:
+/***/ 964:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47336,9 +47938,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var ReactFeather = __webpack_require__(73);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var ReactFeather = __webpack_require__(97);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Container = glamorous_1.default.div({
     "&:not(:first-child)": {
         borderLeftWidth: 1,
@@ -47403,36 +48005,7 @@ exports.default = InfoTile;
 
 /***/ }),
 
-/***/ 736:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var StyledInput = glamorous_1.default.input(function (_a) {
-    var theme = _a.theme;
-    return ({
-        padding: theme.spacing / 2,
-        border: "1px solid",
-        borderColor: theme.colors.palette.grey30,
-        font: "inherit",
-        WebkitAppearance: "none"
-    });
-});
-var Input = function (_a) {
-    var className = _a.className, name = _a.name, placeholder = _a.placeholder, value = _a.value, onChange = _a.onChange;
-    return (React.createElement(StyledInput, { className: className, name: name, placeholder: placeholder, value: value, onChange: function (e) {
-            onChange(e.target.value);
-        } }));
-};
-exports.default = Input;
-//# sourceMappingURL=Input.js.map
-
-/***/ }),
-
-/***/ 737:
+/***/ 965:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47447,10 +48020,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Icon = __webpack_require__(73);
-var glamorous_1 = __webpack_require__(3);
-var ButtonGroup_1 = __webpack_require__(170);
-var Button_1 = __webpack_require__(168);
+var Icon = __webpack_require__(97);
+var glamorous_1 = __webpack_require__(4);
+var ButtonGroup_1 = __webpack_require__(212);
+var Button_1 = __webpack_require__(210);
 var CondensedButton = function (props) { return React.createElement(Button_1.default, __assign({ condensed: true }, props)); };
 var PaginatorControl = function (_a) {
     var children = _a.children, onChange = _a.onChange, pageCount = _a.pageCount, page = _a.page, type = _a.type;
@@ -47559,15 +48132,15 @@ exports.default = Paginator;
 
 /***/ }),
 
-/***/ 738:
+/***/ 966:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, size = _a.size;
     var borderColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "black";
@@ -47598,15 +48171,15 @@ exports.default = glamorous_1.default(PlusChip)(style);
 
 /***/ }),
 
-/***/ 739:
+/***/ 967:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var glamor_1 = __webpack_require__(79);
+var glamorous_1 = __webpack_require__(4);
+var glamor_1 = __webpack_require__(109);
 var width = 120;
 var height = 45;
 var padding = 15;
@@ -47669,7 +48242,7 @@ exports.default = Progress;
 
 /***/ }),
 
-/***/ 740:
+/***/ 968:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47721,9 +48294,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var SelectOption_1 = __webpack_require__(741);
-var SelectFilter_1 = __webpack_require__(742);
-var Select_style_1 = __webpack_require__(743);
+var SelectOption_1 = __webpack_require__(969);
+var SelectFilter_1 = __webpack_require__(970);
+var Select_style_1 = __webpack_require__(971);
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
     function Select(props) {
@@ -47860,15 +48433,15 @@ exports.default = Select;
 
 /***/ }),
 
-/***/ 741:
+/***/ 969:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, selected = _a.selected;
     var backgroundColor = color && theme.colors ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
@@ -47901,15 +48474,15 @@ exports.default = SelectOption;
 
 /***/ }),
 
-/***/ 742:
+/***/ 970:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Container = glamorous_1.default.div((({ theme, color }) => {
     const backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
     return {
@@ -47935,7 +48508,7 @@ exports.default = SelectFilter;
 
 /***/ }),
 
-/***/ 743:
+/***/ 971:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47949,8 +48522,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled, updating = _a.updating;
     var backgroundColor = color && theme.colors.palette ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
@@ -48010,17 +48583,17 @@ exports.OptionsList = OptionsList;
 
 /***/ }),
 
-/***/ 744:
+/***/ 972:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var SidebarItem_1 = __webpack_require__(745);
+var glamorous_1 = __webpack_require__(4);
+var SidebarItem_1 = __webpack_require__(973);
 exports.SidebarItem = SidebarItem_1.default;
-var SidebarLink_1 = __webpack_require__(747);
+var SidebarLink_1 = __webpack_require__(975);
 exports.SidebarLink = SidebarLink_1.default;
 var style = function (_a) {
     var theme = _a.theme;
@@ -48046,7 +48619,7 @@ exports.default = glamorous_1.default(Sidebar)(style);
 
 /***/ }),
 
-/***/ 745:
+/***/ 973:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48098,8 +48671,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var SidebarItem_style_1 = __webpack_require__(746);
+var glamorous_1 = __webpack_require__(4);
+var SidebarItem_style_1 = __webpack_require__(974);
 var SidebarItem = /** @class */ (function (_super) {
     __extends(SidebarItem, _super);
     function SidebarItem(props) {
@@ -48157,7 +48730,7 @@ exports.default = glamorous_1.default(SidebarItem)(SidebarItem_style_1.default);
 
 /***/ }),
 
-/***/ 746:
+/***/ 974:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48171,7 +48744,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 exports.default = function (_a) {
     var theme = _a.theme, children = _a.children;
     // If we have children, style a caret.
@@ -48239,7 +48812,7 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ 747:
+/***/ 975:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48254,9 +48827,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(44);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var react_router_dom_1 = __webpack_require__(59);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled, active = _a.active;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff", textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]), disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
@@ -48300,7 +48873,7 @@ exports.default = glamorous_1.default(SidebarLink)(style);
 
 /***/ }),
 
-/***/ 748:
+/***/ 976:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48315,14 +48888,14 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var SideNavigationHeader_1 = __webpack_require__(749);
+var glamorous_1 = __webpack_require__(4);
+var SideNavigationHeader_1 = __webpack_require__(977);
 exports.SideNavigationHeader = SideNavigationHeader_1.default;
-var SideNavigationItem_1 = __webpack_require__(750);
+var SideNavigationItem_1 = __webpack_require__(978);
 exports.SideNavigationItem = SideNavigationItem_1.default;
-var SideNavigationLink_1 = __webpack_require__(751);
+var SideNavigationLink_1 = __webpack_require__(979);
 exports.SideNavigationLink = SideNavigationLink_1.default;
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, 
     // for some reason, glamorous doesn't get the defaultProps...
@@ -48362,7 +48935,7 @@ exports.default = glamorous_1.default(SideNavigation)(style);
 
 /***/ }),
 
-/***/ 749:
+/***/ 977:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48422,8 +48995,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var SideNavigationHeader = /** @class */ (function (_super) {
     __extends(SideNavigationHeader, _super);
     function SideNavigationHeader(props) {
@@ -48536,14 +49109,14 @@ exports.default = glamorous_1.default(SideNavigationHeader)(style);
 
 /***/ }),
 
-/***/ 750:
+/***/ 978:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, active = _a.active;
     var activeBackgroundColor = "rgba(0, 0, 0, 0.2)";
@@ -48576,15 +49149,15 @@ exports.default = SideNavigationItem;
 
 /***/ }),
 
-/***/ 751:
+/***/ 979:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var style = function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey90;
@@ -48627,14 +49200,14 @@ exports.default = glamorous_1.default(SideNavigationLink)(style);
 
 /***/ }),
 
-/***/ 752:
+/***/ 980:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var width = 32;
 var height = 16;
 var railHeight = 6;
@@ -48703,7 +49276,7 @@ exports.default = Switch;
 
 /***/ }),
 
-/***/ 753:
+/***/ 981:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48718,9 +49291,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
-var Tab_1 = __webpack_require__(754);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
+var Tab_1 = __webpack_require__(982);
 exports.Tab = Tab_1.default;
 var Container = glamorous_1.default.div({});
 var Content = glamorous_1.default.div({
@@ -48818,7 +49391,7 @@ exports.default = glamorous_1.withTheme(Tabs);
 
 /***/ }),
 
-/***/ 754:
+/***/ 982:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48843,7 +49416,7 @@ exports.default = Tab;
 
 /***/ }),
 
-/***/ 755:
+/***/ 983:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48860,8 +49433,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var Tooltip_style_1 = __webpack_require__(756);
+var glamorous_1 = __webpack_require__(4);
+var Tooltip_style_1 = __webpack_require__(984);
 exports.style = Tooltip_style_1.default;
 var Tooltip = /** @class */ (function (_super) {
     __extends(Tooltip, _super);
@@ -48917,7 +49490,7 @@ exports.default = glamorous_1.default(Tooltip)(Tooltip_style_1.default);
 
 /***/ }),
 
-/***/ 756:
+/***/ 984:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48931,7 +49504,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var getTooltipPosition = function (anchor) {
     var position = {};
     switch (anchor) {
@@ -48982,15 +49555,15 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ 757:
+/***/ 985:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var TimelineItem_1 = __webpack_require__(758);
+var glamorous_1 = __webpack_require__(4);
+var TimelineItem_1 = __webpack_require__(986);
 exports.TimelineItem = TimelineItem_1.default;
 var Container = glamorous_1.default.ul({
     listStyle: "none",
@@ -49007,7 +49580,7 @@ exports.default = Timeline;
 
 /***/ }),
 
-/***/ 758:
+/***/ 986:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49022,9 +49595,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var ReactFeather = __webpack_require__(73);
-var glamorous_1 = __webpack_require__(3);
-var contiamo_ui_utils_1 = __webpack_require__(15);
+var ReactFeather = __webpack_require__(97);
+var glamorous_1 = __webpack_require__(4);
+var contiamo_ui_utils_1 = __webpack_require__(18);
 var Line = glamorous_1.default.div({
     position: "absolute",
     left: 7,
@@ -49104,13 +49677,13 @@ exports.default = glamorous_1.withTheme(TimelineItem);
 
 /***/ }),
 
-/***/ 759:
+/***/ 987:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var glamorous_1 = __webpack_require__(3);
+var glamorous_1 = __webpack_require__(4);
 var TitleType = glamorous_1.default.h1({}, function (_a) {
     var theme = _a.theme;
     return theme.typography.title;
@@ -49140,7 +49713,7 @@ exports.SmallType = SmallType;
 
 /***/ }),
 
-/***/ 760:
+/***/ 988:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49215,7 +49788,7 @@ exports.default = defaultTheme;
 
 /***/ }),
 
-/***/ 761:
+/***/ 989:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49276,7 +49849,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var attrAccept = __webpack_require__(762);
+var attrAccept = __webpack_require__(990);
 var checkStatus = function (response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
@@ -49425,7 +49998,7 @@ exports.default = Upload;
 
 /***/ }),
 
-/***/ 763:
+/***/ 991:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49454,16 +50027,16 @@ exports.getFontSrcString = getFontSrcString;
 
 /***/ }),
 
-/***/ 764:
+/***/ 992:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var react_router_dom_1 = __webpack_require__(44);
-var contiamo_ui_components_1 = __webpack_require__(9);
+var glamorous_1 = __webpack_require__(4);
+var react_router_dom_1 = __webpack_require__(59);
+var contiamo_ui_components_1 = __webpack_require__(10);
 var style = function () { return ({
     "& a": {
         display: "flex",
@@ -49507,15 +50080,15 @@ exports.default = glamorous_1.default(AppSideNavigation)(style);
 
 /***/ }),
 
-/***/ 765:
+/***/ 993:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(44);
-var contiamo_ui_components_1 = __webpack_require__(9);
+var react_router_dom_1 = __webpack_require__(59);
+var contiamo_ui_components_1 = __webpack_require__(10);
 var AppHeader = function () { return (React.createElement(contiamo_ui_components_1.Header, { style: {
         boxShadow: "0px 1px 2px #d3d1d1",
         backgroundColor: "#fff"
@@ -49529,17 +50102,17 @@ exports.default = AppHeader;
 
 /***/ }),
 
-/***/ 766:
+/***/ 994:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var glamorous_1 = __webpack_require__(3);
-var react_router_dom_1 = __webpack_require__(44);
-var react_feather_1 = __webpack_require__(73);
-var contiamo_ui_components_1 = __webpack_require__(9);
+var glamorous_1 = __webpack_require__(4);
+var react_router_dom_1 = __webpack_require__(59);
+var react_feather_1 = __webpack_require__(97);
+var contiamo_ui_components_1 = __webpack_require__(10);
 var style = function () { return ({
     "& .grid": {
         display: "grid",
@@ -49610,35 +50183,36 @@ exports.default = glamorous_1.default(myCard)(style);
 
 /***/ }),
 
-/***/ 767:
+/***/ 995:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var react_router_dom_1 = __webpack_require__(44);
-var Canvas_1 = __webpack_require__(208);
-var Sidebar_1 = __webpack_require__(209);
-var Buttons_1 = __webpack_require__(768);
-var Breakdown_1 = __webpack_require__(986);
-var FormFields_1 = __webpack_require__(989);
-var Cards_1 = __webpack_require__(1204);
-var Chips_1 = __webpack_require__(1207);
-var Grids_1 = __webpack_require__(1211);
-var Tooltips_1 = __webpack_require__(1214);
-var InfoTiles_1 = __webpack_require__(1217);
-var Sidebar_2 = __webpack_require__(1220);
-var ColorPickers_1 = __webpack_require__(1223);
-var Switches_1 = __webpack_require__(1226);
-var Icons_1 = __webpack_require__(1229);
-var Typography_1 = __webpack_require__(1232);
-var Colors_1 = __webpack_require__(1234);
-var Paginator_1 = __webpack_require__(1236);
-var Progress_1 = __webpack_require__(1239);
-var Tabs_1 = __webpack_require__(1242);
-var Timeline_1 = __webpack_require__(1245);
-var Uploads_1 = __webpack_require__(1248);
+var react_router_dom_1 = __webpack_require__(59);
+var Canvas_1 = __webpack_require__(399);
+var Sidebar_1 = __webpack_require__(400);
+var Buttons_1 = __webpack_require__(996);
+var Breakdown_1 = __webpack_require__(1214);
+var FormFields_1 = __webpack_require__(1217);
+var Cards_1 = __webpack_require__(1432);
+var Chips_1 = __webpack_require__(1435);
+var Grids_1 = __webpack_require__(1439);
+var Tooltips_1 = __webpack_require__(1442);
+var InfoTiles_1 = __webpack_require__(1445);
+var Sidebar_2 = __webpack_require__(1448);
+var ColorPickers_1 = __webpack_require__(1451);
+var DatePickers_1 = __webpack_require__(1454);
+var Switches_1 = __webpack_require__(1457);
+var Icons_1 = __webpack_require__(1460);
+var Typography_1 = __webpack_require__(1463);
+var Colors_1 = __webpack_require__(1465);
+var Paginator_1 = __webpack_require__(1467);
+var Progress_1 = __webpack_require__(1470);
+var Tabs_1 = __webpack_require__(1473);
+var Timeline_1 = __webpack_require__(1476);
+var Uploads_1 = __webpack_require__(1479);
 var SidebarWithRouter = react_router_dom_1.withRouter(Sidebar_1.default);
 var InfoTooltip = function () { return React.createElement("div", null, "Choose a Component to Get Started"); };
 var links = [
@@ -49666,7 +50240,7 @@ var links = [
         label: "Data Entry",
         links: [
             { url: "/components/color-picker", label: "Color Picker" },
-            { label: "Date Picker" },
+            { url: "/components/date-pickers", label: "Date Picker" },
             { url: "/components/form-fields", label: "Form Fields" },
             { url: "/components/switch", label: "Switch" },
             { url: "/components/upload", label: "Upload" }
@@ -49706,6 +50280,7 @@ exports.default = function () { return (React.createElement("div", null,
         React.createElement(react_router_dom_1.Route, { path: "/components/form-fields", component: FormFields_1.default }),
         React.createElement(react_router_dom_1.Route, { path: "/components/grids", component: Grids_1.default }),
         React.createElement(react_router_dom_1.Route, { path: "/components/color-picker", component: ColorPickers_1.default }),
+        React.createElement(react_router_dom_1.Route, { path: "/components/date-pickers", component: DatePickers_1.default }),
         React.createElement(react_router_dom_1.Route, { path: "/components/cards", component: Cards_1.default }),
         React.createElement(react_router_dom_1.Route, { path: "/components/chips", component: Chips_1.default }),
         React.createElement(react_router_dom_1.Route, { path: "/components/tooltips", component: Tooltips_1.default }),
@@ -49725,18 +50300,18 @@ exports.default = function () { return (React.createElement("div", null,
 
 /***/ }),
 
-/***/ 768:
+/***/ 996:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(984);
-var propDescription_1 = __webpack_require__(985);
+var PropsTable_1 = __webpack_require__(20);
+var Playground_1 = __webpack_require__(17);
+var contiamo_ui_components_1 = __webpack_require__(10);
+var simpleSnippet = __webpack_require__(1212);
+var propDescription_1 = __webpack_require__(1213);
 exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
     React.createElement(contiamo_ui_components_1.CardHeader, null, "Buttons"),
     React.createElement("p", null, "Buttons clearly indicate a point of interaction that allow users to perform actions in applications. On Contiamo, buttons exist independently, and in groups. These buttons can also take on any number of colors required."),
@@ -49746,285 +50321,6 @@ exports.default = function () { return (React.createElement(contiamo_ui_componen
     React.createElement(PropsTable_1.default, { props: propDescription_1.default }))); };
 
 
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// Simple imports n' exports for consumers of the library.
-Object.defineProperty(exports, "__esModule", { value: true });
-var glamorous_1 = __webpack_require__(3);
-exports.ThemeProvider = glamorous_1.ThemeProvider;
-var Button_1 = __webpack_require__(168);
-exports.Button = Button_1.default;
-var ButtonGroup_1 = __webpack_require__(170);
-exports.ButtonGroup = ButtonGroup_1.default;
-var Breakdown_1 = __webpack_require__(330);
-exports.Breakdown = Breakdown_1.default;
-var Card_1 = __webpack_require__(331);
-exports.Card = Card_1.default;
-exports.CardHeader = Card_1.CardHeader;
-var Chip_1 = __webpack_require__(333);
-exports.Chip = Chip_1.default;
-var ColorPicker_1 = __webpack_require__(334);
-exports.ColorPicker = ColorPicker_1.default;
-var Grid_1 = __webpack_require__(489);
-exports.Grid = Grid_1.default;
-var Header_1 = __webpack_require__(490);
-exports.Header = Header_1.default;
-exports.HeaderItem = Header_1.HeaderItem;
-exports.HeaderSeparator = Header_1.HeaderSeparator;
-exports.HeaderTitle = Header_1.HeaderTitle;
-var Icon_1 = __webpack_require__(494);
-exports.Icon = Icon_1.default;
-var InfoTile_1 = __webpack_require__(735);
-exports.InfoTile = InfoTile_1.default;
-var Input_1 = __webpack_require__(736);
-exports.Input = Input_1.default;
-var Paginator_1 = __webpack_require__(737);
-exports.Paginator = Paginator_1.default;
-var PlusChip_1 = __webpack_require__(738);
-exports.PlusChip = PlusChip_1.default;
-var Progress_1 = __webpack_require__(739);
-exports.Progress = Progress_1.default;
-var Select_1 = __webpack_require__(740);
-exports.Select = Select_1.default;
-var Sidebar_1 = __webpack_require__(744);
-exports.Sidebar = Sidebar_1.default;
-exports.SidebarItem = Sidebar_1.SidebarItem;
-exports.SidebarLink = Sidebar_1.SidebarLink;
-var SideNavigation_1 = __webpack_require__(748);
-exports.SideNavigation = SideNavigation_1.default;
-exports.SideNavigationHeader = SideNavigation_1.SideNavigationHeader;
-exports.SideNavigationItem = SideNavigation_1.SideNavigationItem;
-exports.SideNavigationLink = SideNavigation_1.SideNavigationLink;
-var Switch_1 = __webpack_require__(752);
-exports.Switch = Switch_1.default;
-var Tabs_1 = __webpack_require__(753);
-exports.Tabs = Tabs_1.default;
-exports.Tab = Tabs_1.Tab;
-var Tooltip_1 = __webpack_require__(755);
-exports.Tooltip = Tooltip_1.default;
-var Timeline_1 = __webpack_require__(757);
-exports.Timeline = Timeline_1.default;
-exports.TimelineItem = Timeline_1.TimelineItem;
-var Typography_1 = __webpack_require__(759);
-exports.TitleType = Typography_1.TitleType;
-exports.Heading1Type = Typography_1.Heading1Type;
-exports.Heading2Type = Typography_1.Heading2Type;
-exports.BodyType = Typography_1.BodyType;
-exports.SmallType = Typography_1.SmallType;
-var theme_1 = __webpack_require__(760);
-exports.contiamoTheme = theme_1.default;
-var Upload_1 = __webpack_require__(761);
-exports.Upload = Upload_1.default;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 983:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var trimAfter = "export default (";
-var removeLeadingNewLine = function (s) { return (s[0] === "\n" ? s.slice(1) : s); };
-// Processes a tsx file-string to include only the exported snippet into Component Playground.
-var toReactPlayground = function (snippet) {
-    if (snippet.indexOf(trimAfter) > -1) {
-        var frontTrimmedSnippet = removeLeadingNewLine(snippet.slice(snippet.indexOf(trimAfter) + trimAfter.length));
-        if (frontTrimmedSnippet.indexOf(")()")) {
-            // If it's an IIFE-style snippet
-            return "(" + frontTrimmedSnippet;
-        }
-        else {
-            // Otherwise, drop trailing paranthesis
-            return frontTrimmedSnippet.slice(0, -2);
-        }
-    }
-    return snippet;
-};
-exports.default = toReactPlayground;
-
-
-/***/ }),
-
-/***/ 984:
-/***/ (function(module, exports) {
-
-module.exports = "import * as React from \"react\"\nimport { Button, ButtonGroup } from \"contiamo-ui-components\"\n\nexport default (\n  <div>\n    <div style={{ display: \"flex\", marginTop: 16 }}>\n      <Button color=\"info\">Colored</Button>\n      <Button modifiers={[\"space\"]}>Spaced</Button>\n      <Button modifiers={[\"space\"]} disabled>\n        Disabled\n      </Button>\n    </div>\n    <div style={{ display: \"flex\", marginTop: 16 }}>\n      <ButtonGroup>\n        <Button>Group 1</Button>\n        <Button active>Group 2</Button>\n        <Button>Group 3</Button>\n      </ButtonGroup>\n    </div>\n    <div style={{ display: \"flex\", marginTop: 16 }}>\n      <ButtonGroup>\n        <Button condensed>1</Button>\n        <Button condensed color=\"#5F8E2C\">\n          2\n        </Button>\n        <Button condensed>3</Button>\n      </ButtonGroup>\n    </div>\n  </div>\n)\n"
-
-/***/ }),
-
-/***/ 985:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = [
-    {
-        name: "color",
-        description: "What color of button would you like? It can be a hex value or a named theme color.",
-        defaultValue: "white",
-        type: "string",
-        optional: true
-    },
-    {
-        name: "onClick",
-        description: "What happens when the button is clicked?",
-        defaultValue: "",
-        type: "func",
-        optional: true
-    },
-    {
-        name: "active",
-        description: "Active state.",
-        defaultValue: "",
-        type: "boolean",
-        optional: true
-    },
-    {
-        name: "condensed",
-        description: "Condensed option",
-        defaultValue: "",
-        type: "boolean",
-        optional: true
-    },
-    {
-        name: "disabled",
-        description: "Disabled option",
-        defaultValue: "",
-        type: "boolean",
-        optional: false
-    }
-];
-
-
-/***/ }),
-
-/***/ 986:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var PropsTable_1 = __webpack_require__(18);
-var Playground_1 = __webpack_require__(16);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var simpleSnippet = __webpack_require__(987);
-var propDescription_1 = __webpack_require__(988);
-exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
-    React.createElement(contiamo_ui_components_1.CardHeader, null, "Breakdown"),
-    React.createElement("p", null, "Breakdowns are a means of representing aggregated data in a way that should be relatively easy to reason about. The breakdown component itself belongs within the context of a larger container component that calculates numbers and supplies them to said component."),
-    React.createElement("h4", null, "Usage"),
-    React.createElement(Playground_1.default, { snippet: String(simpleSnippet), components: { Breakdown: contiamo_ui_components_1.Breakdown } }),
-    React.createElement("h4", null, "Props"),
-    React.createElement(PropsTable_1.default, { props: propDescription_1.default }))); };
-
-
-/***/ }),
-
-/***/ 987:
-/***/ (function(module, exports) {
-
-module.exports = "import * as React from \"react\"\nimport { Breakdown } from \"contiamo-ui-components\"\n\nexport default (\n  <div>\n    <Breakdown number={1} label=\"50 (20%)\" fill={0.2}>\n      Stat 1\n    </Breakdown>\n    <Breakdown number={2} label=\"20 (40%)\" fill={0.4}>\n      Stat 2\n    </Breakdown>\n    <Breakdown number={3} label=\"40 (80%)\" fill={0.8}>\n      Stat 3\n    </Breakdown>\n  </div>\n)\n"
-
-/***/ }),
-
-/***/ 988:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = [
-    {
-        name: "number",
-        description: "A number by which the breakdown is represented.",
-        defaultValue: "-",
-        type: "number",
-        optional: false
-    },
-    {
-        name: "label",
-        description: "A statistic number label within the bar of the breakdown",
-        defaultValue: "-",
-        type: "string",
-        optional: false
-    },
-    {
-        name: "fill",
-        description: "The percentage to fill the bar. This is typically passed in from a container component that calculates percentages at large.",
-        defaultValue: "-",
-        type: "number",
-        optional: false
-    },
-    {
-        name: "color",
-        description: "A theme palette color name, or a hex code that the bar will be colored with.",
-        defaultValue: "*info*",
-        type: "string",
-        optional: true
-    },
-    {
-        name: "icon",
-        description: "An icon that is displayed on the breakdown",
-        defaultValue: "-",
-        type: "string",
-        optional: true
-    },
-    {
-        name: "onMouseEnter/onMouseLeave",
-        description: "Functions that are invoked when the mouse enters and/or leaves the breakdown. Useful for tooltips/infowindows",
-        defaultValue: "-",
-        type: "func",
-        optional: true
-    }
-];
-
-
-/***/ }),
-
-/***/ 989:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var Playground_1 = __webpack_require__(16);
-var react_syntax_highlighter_1 = __webpack_require__(990);
-var PropsTable_1 = __webpack_require__(18);
-var contiamo_ui_components_1 = __webpack_require__(9);
-var inputSnippet = __webpack_require__(1201);
-var selectSnippet = __webpack_require__(1202);
-var propDescription_1 = __webpack_require__(1203);
-exports.default = function () { return (React.createElement(contiamo_ui_components_1.Card, null,
-    React.createElement(contiamo_ui_components_1.CardHeader, null, "Form Fields"),
-    React.createElement("p", null,
-        "Our applications tend to be composed of a myriad of form controls.",
-        React.createElement("br", null),
-        "This page seeks to document the vast majority of these controls."),
-    React.createElement(contiamo_ui_components_1.CardHeader, null, "Input"),
-    React.createElement("p", null, "This component lives up to its name, allowing a user to input text, numbers, or other data."),
-    React.createElement(Playground_1.default, { snippet: String(inputSnippet), components: { Input: contiamo_ui_components_1.Input } }),
-    React.createElement("h4", null, "Props"),
-    React.createElement(PropsTable_1.default, { props: propDescription_1.default.Input }),
-    React.createElement(contiamo_ui_components_1.CardHeader, null, "Select"),
-    React.createElement("p", null, "The Select component presents users with a list of information with single-choice or multiple-choice options. Select elements can have options filled onClick, and also support filters."),
-    React.createElement(Playground_1.default, { snippet: String(selectSnippet), components: { Select: contiamo_ui_components_1.Select } }),
-    React.createElement("h4", null, "Return Value"),
-    React.createElement("p", null, "The Select component holds its value in its `state`. The value is either an `Option` object, or an Array of `Option` objects, depending on the `multiple` prop. The shape of an Option object is described below."),
-    React.createElement(react_syntax_highlighter_1.default, { language: "javascript" }, "\nOption {\n  id: 1, // a number that is passed as a `key` in the React iterator,\n  label: \"Any string\",\n  value: (<div>Literally anything can go here</div>)\n}\n    "),
-    React.createElement("h4", null, "Props"),
-    React.createElement(PropsTable_1.default, { props: propDescription_1.default.Select }))); };
-
-
 /***/ })
 
-},[252]);
+},[443]);

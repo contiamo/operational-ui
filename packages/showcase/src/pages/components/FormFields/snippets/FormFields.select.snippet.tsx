@@ -10,7 +10,7 @@ export default (() => {
   ]
 
   class ComponentWithSelect extends React.Component {
-    state: {value: any[]} = {
+    state: { value: any[] } = {
       value: []
     }
 

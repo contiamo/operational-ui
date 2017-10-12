@@ -9,7 +9,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     style="display:flex;user-select:none"
   >
     <div
-      class="css-n0icov"
+      class="css-1ode4lx"
       role="button"
       tabindex="-1"
     >
@@ -38,7 +38,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </svg>
     </div>
     <div
-      class="css-n0icov"
+      class="css-1ode4lx"
       role="button"
       tabindex="-1"
     >
