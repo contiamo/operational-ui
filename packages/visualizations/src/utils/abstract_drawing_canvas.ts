@@ -1,7 +1,6 @@
 import AbstractCanvas from "./abstract_canvas"
 import * as d3 from "d3-selection"
 import { forEach, reduce, isArray } from "lodash/fp"
-import * as $ from "jquery"
 
 abstract class AbstractDrawingCanvas extends AbstractCanvas {
   drawingContainer: any

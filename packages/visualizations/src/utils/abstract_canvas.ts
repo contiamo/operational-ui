@@ -137,7 +137,12 @@ abstract class AbstractCanvas {
   }
 
   remove(): void {
-    $(this.mouseOverElement().node()).off()
+    let el: any = this.mouseOverElement()
+    if (el) {
+      el.node().removeEventListener("mouseenter")
+      el.node().removeEventListener("mouseleave")
+      el.node().removeEventListener("click")
+    }
     this.elements = {}
     this.container.remove()
     this.container = undefined

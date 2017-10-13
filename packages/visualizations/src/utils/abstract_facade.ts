@@ -1,6 +1,5 @@
 import StateHandler from "./state_handler"
 import EventEmitter from "./event_bus"
-import * as $ from "jquery"
 import "../styles/styles.less"
 
 abstract class AbstractChart {
