@@ -109,7 +109,7 @@ abstract class AbstractCanvas {
 
   insertSeries(): { [key: string]: any[] } {
     let that: AbstractCanvas = this
-    return reduce((memo: any, se: string | string[]): any => {
+    return reduce((memo: any, se: any): any => {
       let renderer: string = isArray(se) ? se[0] : se
       memo[renderer] = this.elements.series[renderer].append("svg:g")
       return memo
