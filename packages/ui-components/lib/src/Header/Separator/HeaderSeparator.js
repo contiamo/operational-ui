@@ -13,8 +13,8 @@ var Container = glamorous_1.default.div(function (_a) {
     });
 });
 var HeaderSeparator = function (_a) {
-    var style = _a.style, className = _a.className;
-    return React.createElement("div", { style: style, className: className });
+    var css = _a.css, className = _a.className;
+    return React.createElement(Container, { css: css, className: className });
 };
 exports.default = HeaderSeparator;
 //# sourceMappingURL=HeaderSeparator.js.map

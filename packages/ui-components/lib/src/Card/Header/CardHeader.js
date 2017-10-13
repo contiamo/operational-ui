@@ -18,8 +18,8 @@ var Container = glamorous_1.default.div(function (_a) {
     });
 });
 var CardHeader = function (_a) {
-    var className = _a.className, children = _a.children, id = _a.id;
-    return (React.createElement(Container, { id: id, className: className }, children));
+    var css = _a.css, className = _a.className, children = _a.children, id = _a.id;
+    return (React.createElement(Container, { id: id, css: css, className: className }, children));
 };
 exports.default = CardHeader;
 //# sourceMappingURL=CardHeader.js.map

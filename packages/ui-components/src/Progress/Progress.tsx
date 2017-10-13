@@ -2,7 +2,10 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { css } from "glamor"
 
-interface IProps {}
+interface IProps {
+  css?: any
+  className?: string
+}
 
 const width: number = 120
 const height: number = 45
@@ -63,8 +66,8 @@ const Bar = glamorous.div(
   })
 )
 
-const Progress: React.SFC<IProps> = (props: IProps) => (
-  <Container>
+const Progress: React.SFC<IProps> = ({ css, className }: IProps) => (
+  <Container css={css} className={className}>
     <Box>
       <BarContainer>
         <Bar />

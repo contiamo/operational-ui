@@ -1,9 +1,9 @@
 import * as React from "react"
 import { SketchPicker, RGBColor } from "react-color"
-import glamorous from "glamorous"
+import glamorous, { CSSProperties } from "glamorous"
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
   color?: string
   size?: number
@@ -21,6 +21,8 @@ interface IState {
 }
 
 const hasTheme = (theme: any): boolean => theme && Object.keys(theme).length > 0
+
+const Container = glamorous.div({})
 
 const ColorSquare = glamorous.div(
   {
@@ -122,12 +124,14 @@ class ColorPicker extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { size, color, style, className } = this.props
+    const { size, color, css, className } = this.props
     return (
-      <div
-        style={style}
+      <Container
+        css={css}
         className={className}
-        ref={containerEl => (this.containerEl = containerEl)}
+        innerRef={(containerEl: any): void => {
+          this.containerEl = containerEl
+        }}
         onClick={() => this.togglePicker()}
       >
         <ColorSquare size={size} color={color} />
@@ -140,7 +144,7 @@ class ColorPicker extends React.Component<IProps, IState> {
             <SketchPicker color={this.props.color} onChangeComplete={color => this.onColorChange(color)} />
           </PickerContainer>
         )}
-      </div>
+      </Container>
     )
   }
 }

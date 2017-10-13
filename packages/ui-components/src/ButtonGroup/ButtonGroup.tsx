@@ -3,7 +3,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 interface Props {
-  style?: any
+  css?: any
   className?: string
   children?: React.ReactNode
 }
@@ -23,8 +23,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   }
 }))
 
-const ButtonGroup: React.SFC<Props> = ({ style, children, className }: Props) => (
-  <Container style={style} className={className}>
+const ButtonGroup: React.SFC<Props> = ({ css, children, className }: Props) => (
+  <Container css={css} className={className}>
     {children}
   </Container>
 )

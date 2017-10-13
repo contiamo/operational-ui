@@ -21,8 +21,8 @@ var Container = glamorous_1.default.div(function (_a) {
     });
 });
 var Card = function (_a) {
-    var style = _a.style, className = _a.className, children = _a.children, width = _a.width, padding = _a.padding;
-    return (React.createElement(Container, { style: style, width: width, padding: padding, className: className }, children));
+    var css = _a.css, className = _a.className, children = _a.children, width = _a.width, padding = _a.padding;
+    return (React.createElement(Container, { css: css, width: width, padding: padding, className: className }, children));
 };
 exports.default = Card;
 //# sourceMappingURL=Card.js.map

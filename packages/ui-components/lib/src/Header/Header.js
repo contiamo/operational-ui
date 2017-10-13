@@ -22,8 +22,8 @@ var Container = glamorous_1.default.header(function (_a) {
     };
 });
 var Header = function (_a) {
-    var className = _a.className, style = _a.style, children = _a.children, color = _a.color;
-    return (React.createElement(Container, { style: style, className: className, color: color }, children));
+    var className = _a.className, css = _a.css, children = _a.children, color = _a.color;
+    return (React.createElement(Container, { css: css, className: className, color: color }, children));
 };
 exports.default = Header;
 //# sourceMappingURL=Header.js.map

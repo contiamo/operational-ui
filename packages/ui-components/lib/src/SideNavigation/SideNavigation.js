@@ -49,7 +49,7 @@ var style = function (_a) {
 };
 var SideNavigation = function (_a) {
     var className = _a.className, children = _a.children;
-    return React.createElement("div", { className: className }, children);
+    return (React.createElement("div", { className: className }, children));
 };
 exports.default = glamorous_1.default(SideNavigation)(style);
 //# sourceMappingURL=SideNavigation.js.map

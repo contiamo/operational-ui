@@ -9,6 +9,7 @@ interface IProps {
   start?: string
   end?: string
   onChange?: (date: { start?: string; end?: string }) => void
+  css?: any
   className?: string
   placeholder?: string
 }
@@ -136,6 +137,7 @@ class DatePicker extends React.Component<IProps, IState> {
     const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
     return (
       <Container
+        css={this.props.css}
         isExpanded={this.state.isExpanded}
         onClick={(ev: any) => {
           ev.stopPropagation()

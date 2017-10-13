@@ -6,6 +6,8 @@ import ButtonGroup from "../ButtonGroup/ButtonGroup"
 import Button from "../Button/Button"
 
 interface IProps {
+  css?: any
+  className?: string
   activeColor?: string
   disabled?: boolean
   onChange: (page: number) => void
@@ -148,11 +150,13 @@ const Paginator: React.SFC<IProps> = ({
   maxVisible = 3,
   onChange = () => {},
   pageCount,
-  page = 1
+  page = 1,
+  css,
+  className
 }: IProps) => {
   const controlProps = { pageCount, page, onChange }
   return (
-    <Container>
+    <Container css={css} className={className}>
       <ButtonGroup className="co_bgrp">
         <PaginatorControl type="first" {...controlProps}>
           <Icon.ChevronsLeft size="11" />

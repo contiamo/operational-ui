@@ -13,7 +13,7 @@ interface IStyleProps {
 }
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
   onClick?: any
   children?: React.ReactNode

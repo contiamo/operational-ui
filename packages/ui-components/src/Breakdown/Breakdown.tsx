@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
   children: React.ReactNode
   number?: number
@@ -88,8 +88,8 @@ const Number = glamorous.div(
   })
 )
 
-export default ({ style, className, children, color, label, fill, number, onMouseEnter, onMouseLeave }: IProps) => (
-  <Container style={style} className={className} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+export default ({ css, className, children, color, label, fill, number, onMouseEnter, onMouseLeave }: IProps) => (
+  <Container css={css} className={className} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
     <Number>{number}</Number>
     <div style={{ width: "100%" }}>
       <Label>{children}</Label>

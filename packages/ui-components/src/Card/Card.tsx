@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 import CardHeader from "./Header/CardHeader"
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
   children: React.ReactNode
   theme?: Theme
@@ -27,8 +27,8 @@ const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; widt
   }
 }))
 
-const Card: React.SFC<IProps> = ({ style, className, children, width, padding }) => (
-  <Container style={style} width={width} padding={padding} className={className}>
+const Card: React.SFC<IProps> = ({ css, className, children, width, padding }) => (
+  <Container css={css} width={width} padding={padding} className={className}>
     {children}
   </Container>
 )

@@ -30,8 +30,8 @@ var Container = glamorous_1.default.div(function (_a) {
     };
 });
 var HeaderItem = function (_a) {
-    var style = _a.style, className = _a.className, children = _a.children, onClick = _a.onClick, active = _a.active;
-    return (React.createElement(Container, { tabIndex: -1, role: "button", style: style, onClick: onClick, className: className, active: !!active }, children));
+    var css = _a.css, className = _a.className, children = _a.children, onClick = _a.onClick, active = _a.active;
+    return (React.createElement(Container, { tabIndex: -1, role: "button", css: css, onClick: onClick, className: className, active: !!active }, children));
 };
 exports.default = HeaderItem;
 //# sourceMappingURL=HeaderItem.js.map

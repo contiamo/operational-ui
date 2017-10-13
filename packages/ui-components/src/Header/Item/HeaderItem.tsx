@@ -3,11 +3,10 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
   children: Node
   onClick?: any
-  theme: Theme
   active?: boolean
 }
 
@@ -42,8 +41,8 @@ const Container = glamorous.div(({ theme, active }: { theme: Theme; active: bool
   }
 })
 
-const HeaderItem: React.SFC<IProps> = ({ style, className, children, onClick, active }: IProps) => (
-  <Container tabIndex={-1} role="button" style={style} onClick={onClick} className={className} active={!!active}>
+const HeaderItem: React.SFC<IProps> = ({ css, className, children, onClick, active }: IProps) => (
+  <Container tabIndex={-1} role="button" css={css} onClick={onClick} className={className} active={!!active}>
     {children}
   </Container>
 )

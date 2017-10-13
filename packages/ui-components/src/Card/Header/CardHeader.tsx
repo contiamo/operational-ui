@@ -3,6 +3,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 interface IProps {
+  css?: any
   className?: string
   children?: React.ReactNode
   id?: string
@@ -22,8 +23,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const CardHeader: React.SFC<IProps> = ({ className, children, id }) => (
-  <Container id={id} className={className}>
+const CardHeader: React.SFC<IProps> = ({ css, className, children, id }) => (
+  <Container id={id} css={css} className={className}>
     {children}
   </Container>
 )

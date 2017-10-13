@@ -8,7 +8,7 @@ import SideNavigationLink from "./Link/SideNavigationLink"
 
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
-type Props = {
+interface IProps {
   className?: string
   css?: {}
   children: React.ReactNode
@@ -29,7 +29,7 @@ const style = ({
   // for some reason, glamorous doesn't get the defaultProps...
   expandedWidth = 240,
   width = 60
-}: Props): {} => {
+}: IProps): {} => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80,
     hoverWidth = expandOnHover
       ? {
@@ -70,7 +70,9 @@ const style = ({
   }
 }
 
-const SideNavigation: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>
+const SideNavigation: React.SFC<IProps> = ({ className, children }: IProps) => (
+  <div className={className}>{children}</div>
+)
 
 export default glamorous(SideNavigation)(style)
 export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }

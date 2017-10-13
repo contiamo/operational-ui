@@ -9,8 +9,8 @@ interface PropsSet {
   optional?: boolean
 }
 
-type Props = {
-  css?: {}
+interface IProps {
+  style?: any
   className?: string
   props?: PropsSet[]
 }
@@ -34,7 +34,7 @@ const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const PropsTable = ({ className, props }: Props) => (
+const PropsTable: React.SFC<IProps> = ({ className, props }: IProps) => (
   <Table className={className}>
     <thead>
       <tr>

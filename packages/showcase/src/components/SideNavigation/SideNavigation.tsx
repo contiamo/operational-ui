@@ -18,7 +18,7 @@ interface ILink {
   icon: ReactFeatherIconName
 }
 
-const style: {} = (): {} => ({
+const style: {} = {
   "& a": {
     display: "flex",
     position: "relative",
@@ -33,7 +33,7 @@ const style: {} = (): {} => ({
   "& .co_label": {
     marginLeft: 20
   }
-})
+}
 
 const links: ILink[] = [
   { url: "/components", label: "Components", icon: "Box" },
@@ -41,7 +41,7 @@ const links: ILink[] = [
   { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
 ]
 
-const AppSideNavigation: React.SFC<IProps> = ({ location }) => {
+const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
   return (
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader>
@@ -70,4 +70,4 @@ const AppSideNavigation: React.SFC<IProps> = ({ location }) => {
   )
 }
 
-export default glamorous(AppSideNavigation)(style)
+export default AppSideNavigation

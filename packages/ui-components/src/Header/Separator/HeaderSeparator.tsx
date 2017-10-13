@@ -3,7 +3,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
 }
 
@@ -15,6 +15,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   backgroundColor: "rgba(0, 0, 0, 0.2)"
 }))
 
-const HeaderSeparator: React.SFC<IProps> = ({ style, className }: IProps) => <div style={style} className={className} />
+const HeaderSeparator: React.SFC<IProps> = ({ css, className }: IProps) => <Container css={css} className={className} />
 
 export default HeaderSeparator

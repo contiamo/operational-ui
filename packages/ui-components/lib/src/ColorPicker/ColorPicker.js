@@ -14,6 +14,7 @@ var React = require("react");
 var react_color_1 = require("react-color");
 var glamorous_1 = require("glamorous");
 var hasTheme = function (theme) { return theme && Object.keys(theme).length > 0; };
+var Container = glamorous_1.default.div({});
 var ColorSquare = glamorous_1.default.div({
     border: "3px solid white",
     borderRadius: 2,
@@ -101,8 +102,10 @@ var ColorPicker = /** @class */ (function (_super) {
     };
     ColorPicker.prototype.render = function () {
         var _this = this;
-        var _a = this.props, size = _a.size, color = _a.color, style = _a.style, className = _a.className;
-        return (React.createElement("div", { style: style, className: className, ref: function (containerEl) { return (_this.containerEl = containerEl); }, onClick: function () { return _this.togglePicker(); } },
+        var _a = this.props, size = _a.size, color = _a.color, css = _a.css, className = _a.className;
+        return (React.createElement(Container, { css: css, className: className, innerRef: function (containerEl) {
+                _this.containerEl = containerEl;
+            }, onClick: function () { return _this.togglePicker(); } },
             React.createElement(ColorSquare, { size: size, color: color }),
             this.state.isPickerOpen && (React.createElement(PickerContainer, { top: this.state.position.top, left: this.state.position.left, onClick: function (e) { return e.stopPropagation(); } },
                 React.createElement(react_color_1.SketchPicker, { color: this.props.color, onChangeComplete: function (color) { return _this.onColorChange(color); } })))));

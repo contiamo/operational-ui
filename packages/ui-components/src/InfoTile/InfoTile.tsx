@@ -5,7 +5,7 @@ import glamorous from "glamorous"
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
   icon?: ReactFeatherIconName
   onIconClick?: () => void
@@ -73,8 +73,8 @@ const IconContainer = glamorous.div(
   }
 )
 
-const InfoTile: React.SFC<IProps> = ({ style, className, label, children, color, icon, onIconClick }) => (
-  <Container style={style} className={className} withIcon={!!icon} color={color}>
+const InfoTile: React.SFC<IProps> = ({ css, className, label, children, color, icon, onIconClick }) => (
+  <Container css={css} className={className} withIcon={!!icon} color={color}>
     <Label color={color}>{label}</Label>
     <span>{children}</span>
     {icon ? (
