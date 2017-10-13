@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var moment_1 = require("moment");
+var moment = require("moment");
 var months = [
     "January",
     "February",
@@ -22,10 +22,10 @@ var toDate = function (year, month, day) {
     return year + "-" + (month < 9 ? "0" : "") + (month + 1) + "-" + (day < 9 ? "0" : "") + (day + 1);
 };
 exports.toDate = toDate;
-var monthStartDay = function (year, month) { return moment_1.default(toDate(year, month, 0)).day(); };
+var monthStartDay = function (year, month) { return moment(toDate(year, month, 0)).day(); };
 exports.monthStartDay = monthStartDay;
 var daysInMonth = function (month, year) {
-    return moment_1.default(toDate(year, month, 2)).daysInMonth();
+    return moment(toDate(year, month, 2)).daysInMonth();
 };
 exports.daysInMonth = daysInMonth;
 //# sourceMappingURL=utils.js.map
