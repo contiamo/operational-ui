@@ -34,11 +34,6 @@ class Series {
   }
 
   draw(): void {
-    if (!this.hasData()) {
-      this.renderer.close()
-      return
-    }
-
     const config = this.state.current.get("config")
     this.el.attr("width", config.width).attr("height", config.height)
     this.renderer.draw()
