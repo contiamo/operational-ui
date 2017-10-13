@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-components",
-  "version": "0.0.1-21",
+  "version": "0.0.1-23",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "lib/index.js",
   "types": "./types/main.d.ts",

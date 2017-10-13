@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-showcase",
-  "version": "0.0.1-22",
+  "version": "0.0.1-23",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
@@ -53,9 +53,9 @@
   },
   "dependencies": {
     "component-playground": "^3.0.0",
-    "contiamo-ui-components": "^0.0.1-21",
+    "contiamo-ui-components": "^0.0.1-23",
     "contiamo-ui-utils": "^0.0.1-21",
-    "contiamo-visualizations": "^0.0.1-22",
+    "contiamo-visualizations": "^0.0.1-23",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "jest-cli": "^20.0.4",

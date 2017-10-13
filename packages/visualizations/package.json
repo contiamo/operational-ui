@@ -1,6 +1,6 @@
 {
   "name": "contiamo-visualizations",
-  "version": "0.0.1-22",
+  "version": "0.0.1-23",
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
