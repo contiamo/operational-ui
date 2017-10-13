@@ -5,11 +5,17 @@ import { Box, BarChart2, Grid } from "react-feather"
 
 import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
 
-type Props = {
+interface IProps {
   location?: {
     pathname: string
   }
   theme?: Theme
+}
+
+interface ILink {
+  url?: string
+  label: string
+  icon: ReactFeatherIconName
 }
 
 const style: {} = (): {} => ({
@@ -29,7 +35,13 @@ const style: {} = (): {} => ({
   }
 })
 
-const AppSideNavigation = ({ location }: Props) => {
+const links: ILink[] = [
+  { url: "/components", label: "Components", icon: "Box" },
+  { label: "Composed", icon: "Grid" },
+  { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
+]
+
+const AppSideNavigation: React.SFC<IProps> = ({ location }) => {
   return (
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader>
@@ -39,11 +51,7 @@ const AppSideNavigation = ({ location }: Props) => {
         </Link>
       </SideNavigationHeader>
 
-      {[
-        { url: "/components", label: "Components", icon: "Box" },
-        { label: "Composed", icon: "Grid" },
-        { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
-      ].map(({ url, label, icon }: { url?: string; label: string; icon: string }, index: number) => {
+      {links.map(({ url, label, icon }: ILink, index: number) => {
         const routeMatch = location && location.pathname && url && location.pathname.slice(0, url.length) === url
         const color = routeMatch ? "#67FFAA" : "#fff"
         return (

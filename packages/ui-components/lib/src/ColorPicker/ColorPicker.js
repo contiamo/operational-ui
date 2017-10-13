@@ -102,7 +102,7 @@ var ColorPicker = /** @class */ (function (_super) {
     ColorPicker.prototype.render = function () {
         var _this = this;
         var _a = this.props, size = _a.size, color = _a.color;
-        return (React.createElement("div", { ref: function (containerEl) { return (_this.containerEl = containerEl); }, onClick: function () { return _this.togglePicker(); } },
+        return (React.createElement("div", { style: this.props.style, className: this.props.className, ref: function (containerEl) { return (_this.containerEl = containerEl); }, onClick: function () { return _this.togglePicker(); } },
             React.createElement(ColorSquare, { size: size, color: this.props.color }),
             this.state.isPickerOpen && (React.createElement(PickerContainer, { top: this.state.position.top, left: this.state.position.left, onClick: function (e) { return e.stopPropagation(); } },
                 React.createElement(react_color_1.SketchPicker, { color: this.props.color, onChangeComplete: function (color) { return _this.onColorChange(color); } })))));

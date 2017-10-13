@@ -3,11 +3,10 @@ import glamorous from "glamorous"
 
 import { darken, hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
-type Props = {
-  theme?: Theme
+interface IProps {
+  style?: any
   color?: string
   onClick?: () => void
-  style?: {}
   className?: string
   children: React.ReactNode
   symbol?: string
@@ -59,11 +58,11 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
   }
 })
 
-const Chip = ({ className, style, children, onClick, color, symbol }: Props) => (
+const Chip: React.SFC<IProps> = ({ className, style, children, onClick, color, symbol }) => (
   <Container className={`${className || ""} co_chip`} style={style} color={color} hasChip={!!onClick}>
     {children}
     {onClick && (
-      <Action className="co_action" color={color} onClick={onClick}>
+      <Action color={color} onClick={onClick}>
         {symbol || "×"}
       </Action>
     )}

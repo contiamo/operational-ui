@@ -202,12 +202,12 @@ exports[`App starts 1`] = `
   <div
     class="css-oslscu"
   >
-    <div
+    <header
       class="css-17142z3"
       style="box-shadow:0px 1px 2px #d3d1d1;background-color:#fff"
     >
       Contiamo UI
-    </div>
+    </header>
   </div>
 </div>
 `;

@@ -7,7 +7,7 @@ import HeaderItem from "./Item/HeaderItem"
 import HeaderTitle from "./Title/HeaderTitle"
 import HeaderSeparator from "./Separator/HeaderSeparator"
 
-type Props = {
+interface IProps {
   className?: string
   style?: any
   children: React.ReactNode
@@ -15,7 +15,7 @@ type Props = {
   color: string
 }
 
-const style: {} = ({ theme, color }: Props) => {
+const Container = glamorous.header(({ theme, color }: { theme: Theme; color: string }): any => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color] || "white") : "white"
 
   return {
@@ -26,13 +26,13 @@ const style: {} = ({ theme, color }: Props) => {
     padding: `${theme.spacing / 2}px ${theme.spacing}px`,
     color: readableTextColor(backgroundColor)(["black", "white"])
   }
-}
+})
 
-const Header: React.SFC<Props> = ({ className, style, children }) => (
-  <div style={style} className={className}>
+const Header: React.SFC<IProps> = ({ className, style, children, color }) => (
+  <Container style={style} className={className} color={color}>
     {children}
-  </div>
+  </Container>
 )
 
-export default glamorous(Header)(style)
-export { HeaderItem, HeaderSeparator, HeaderTitle, style }
+export default Header
+export { HeaderItem, HeaderSeparator, HeaderTitle }

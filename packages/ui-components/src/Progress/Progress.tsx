@@ -11,11 +11,6 @@ interface State {
   fillRatio: number
 }
 
-interface StyleProps {
-  on: boolean
-  theme: Theme
-}
-
 const width: number = 120
 const height: number = 45
 const padding: number = 15

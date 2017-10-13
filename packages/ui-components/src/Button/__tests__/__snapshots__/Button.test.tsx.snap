@@ -2,7 +2,7 @@
 
 exports[`Button Component Should initialize properly 1`] = `
 <div
-  class="css-1fb63mj"
+  class="css-gb9y7"
   role="button"
   tabindex="-1"
 >

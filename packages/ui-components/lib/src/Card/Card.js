@@ -4,7 +4,7 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var CardHeader_1 = require("./Header/CardHeader");
 exports.CardHeader = CardHeader_1.default;
-var style = function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, width = _a.width, padding = _a.padding;
     return ({
         width: width,
@@ -17,15 +17,12 @@ var style = function (_a) {
         },
         "& > img": {
             maxWidth: "100%"
-        },
-        "& .CardHeader:not(:first-child)": {
-            borderBottomStyle: "dashed"
         }
     });
-};
+});
 var Card = function (_a) {
-    var className = _a.className, children = _a.children;
-    return React.createElement("div", { className: className }, children);
+    var style = _a.style, className = _a.className, children = _a.children, width = _a.width, padding = _a.padding;
+    return (React.createElement(Container, { style: style, width: width, padding: padding, className: className }, children));
 };
-exports.default = glamorous_1.default(Card)(style);
+exports.default = Card;
 //# sourceMappingURL=Card.js.map
