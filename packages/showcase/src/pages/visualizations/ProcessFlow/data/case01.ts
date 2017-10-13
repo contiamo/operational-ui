@@ -57,6 +57,10 @@ export default {
           return "lightcoral"
         }
       }
+    },
+    data: {
+      journeys: (data: any) => data.journeys,
+      nodes: (data: any) => data.nodes
     }
   }
 }
