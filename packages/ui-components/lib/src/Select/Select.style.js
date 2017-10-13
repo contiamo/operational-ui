@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, color = _a.color, disabled = _a.disabled, updating = _a.updating;
+    var theme = _a.theme, color = _a.color, disabled = _a.disabled, updating = _a.updating, style = _a.style;
     var backgroundColor = color && theme.colors.palette ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
     var updatingAfterStyles = updating
         ? {

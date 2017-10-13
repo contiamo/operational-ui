@@ -3,7 +3,7 @@
 exports[`App starts 1`] = `
 <div>
   <div
-    class="css-1f023pv"
+    class="css-186klkv"
   >
     <div
       class="css-2sxhxf SideNavigationHeader"
@@ -68,7 +68,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="css-j9z7vu SideNavigationItem__label"
+          class="css-j9z7vu co_label"
         >
           Components
         </div>
@@ -134,7 +134,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="css-j9z7vu SideNavigationItem__label"
+          class="css-j9z7vu co_label"
         >
           Composed
         </div>
@@ -189,7 +189,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="css-j9z7vu SideNavigationItem__label"
+          class="css-j9z7vu co_label"
         >
           Visualizations
         </div>

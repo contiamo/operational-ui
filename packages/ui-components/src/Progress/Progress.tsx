@@ -1,15 +1,8 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous from "glamorous"
 import { css } from "glamor"
 
-interface Props {
-  paused?: boolean
-  complete?: boolean
-}
-
-interface State {
-  fillRatio: number
-}
+interface IProps {}
 
 const width: number = 120
 const height: number = 45
@@ -70,7 +63,7 @@ const Bar = glamorous.div(
   })
 )
 
-const Progress = () => (
+const Progress: React.SFC<IProps> = (props: IProps) => (
   <Container>
     <Box>
       <BarContainer>

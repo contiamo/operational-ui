@@ -51,8 +51,13 @@ var SelectFilter_1 = require("./Filter/SelectFilter");
 var Select_style_1 = require("./Select.style");
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
-    function Select(props) {
-        var _this = _super.call(this, props) || this;
+    function Select() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            open: false,
+            updating: false,
+            filter: new RegExp(/./)
+        };
         // This implements "click outside to close" behavior
         _this.handleClick = function (e) {
             var el = _this.container;
@@ -71,11 +76,6 @@ var Select = /** @class */ (function (_super) {
             if (e.keyCode === 27) {
                 _this.close();
             }
-        };
-        _this.state = {
-            open: false,
-            updating: false,
-            filter: new RegExp(/./)
         };
         return _this;
     }
@@ -164,19 +164,13 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Select_style_1.Container, { innerRef: function (container) { return (_this.container = container); }, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+        return (React.createElement(Select_style_1.Container, { innerRef: function (container) { return (_this.container = container); }, style: this.props.style, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
             React.createElement("div", null, this.getDisplayValue() || this.props.placeholder),
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
                 React.createElement(Select_style_1.OptionsList, null, this.props.options.map(function (option) {
                     return option.label.match(_this.state.filter) && (React.createElement(SelectOption_1.default, { key: option.id, onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
                 })))) : ("")));
-    };
-    Select.defaultProps = {
-        className: "",
-        filterable: false,
-        disabled: false,
-        multiple: false
     };
     return Select;
 }(React.Component));

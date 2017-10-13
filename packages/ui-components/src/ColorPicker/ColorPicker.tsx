@@ -122,15 +122,15 @@ class ColorPicker extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { size, color } = this.props
+    const { size, color, style, className } = this.props
     return (
       <div
-        style={this.props.style}
-        className={this.props.className}
+        style={style}
+        className={className}
         ref={containerEl => (this.containerEl = containerEl)}
         onClick={() => this.togglePicker()}
       >
-        <ColorSquare size={size} color={this.props.color} />
+        <ColorSquare size={size} color={color} />
         {this.state.isPickerOpen && (
           <PickerContainer
             top={this.state.position.top}

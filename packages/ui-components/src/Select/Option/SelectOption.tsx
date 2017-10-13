@@ -3,8 +3,9 @@ import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-type Props = {
+interface IProps {
   key: number
+  style?: any
   className?: string
   selected?: boolean
   onClick?: () => void
@@ -36,10 +37,11 @@ const Container = glamorous.div(({ theme, color, selected }: { theme: Theme; col
   }
 })
 
-const SelectOption: React.SFC<Props> = ({ className, selected, color, onClick, children }: Props) => (
+const SelectOption: React.SFC<IProps> = ({ style, className, selected, color, onClick, children }: IProps) => (
   <Container
+    style={style}
     className={className}
-    selected={selected}
+    selected={!!selected}
     color={color}
     tabIndex={-2}
     role="option"
@@ -49,9 +51,5 @@ const SelectOption: React.SFC<Props> = ({ className, selected, color, onClick, c
     {children}
   </Container>
 )
-
-SelectOption.defaultProps = {
-  selected: false
-}
 
 export default SelectOption

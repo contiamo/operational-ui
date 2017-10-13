@@ -3,7 +3,8 @@
 exports[`ComponentsPage Should render correctly 1`] = `
 <div>
   <div
-    class="css-13tr0bq"
+    class="css-hfid3b"
+    style="height:100%"
   >
     <div
       class="css-1jmpc8u  "

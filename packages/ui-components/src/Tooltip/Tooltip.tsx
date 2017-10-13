@@ -41,7 +41,7 @@ type RectCoords = {
   height: number
 }
 
-type Props = {
+interface IProps {
   className?: string
   children?: React.ReactNode
   active?: boolean
@@ -50,16 +50,16 @@ type Props = {
   betaFixOverflow?: boolean
 }
 
-type State = {
+interface IState {
   style: TooltipPosition
 }
 
-class Tooltip extends React.Component<Props, State> {
+class Tooltip extends React.Component<IProps, IState> {
   static defaultProps = {
     anchor: "top",
     active: false
   }
-  state: State = {
+  state: IState = {
     style: {
       position: "absolute"
     }

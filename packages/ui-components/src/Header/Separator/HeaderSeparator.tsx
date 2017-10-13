@@ -2,20 +2,19 @@ import * as React from "react"
 
 import glamorous from "glamorous"
 
-type Props = {
-  className: string
-  theme: Theme
+interface IProps {
+  style?: any
+  className?: string
 }
 
-const style: {} = ({ theme }: Props) => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   width: 5,
   height: 5,
   margin: `0 ${theme.spacing}px`,
   borderRadius: "50%",
   backgroundColor: "rgba(0, 0, 0, 0.2)"
-})
+}))
 
-const HeaderSeparator: React.SFC<Props> = ({ className }: Props) => <div className={className} />
+const HeaderSeparator: React.SFC<IProps> = ({ style, className }: IProps) => <div style={style} className={className} />
 
-export default glamorous(HeaderSeparator)(style)
-export { HeaderSeparator }
+export default HeaderSeparator

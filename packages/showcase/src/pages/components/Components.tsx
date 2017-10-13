@@ -88,7 +88,7 @@ const links = [
 
 export default () => (
   <div>
-    <SidebarWithRouter links={links} css={{ height: "100%" }} />
+    <SidebarWithRouter links={links} style={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/components" component={InfoTooltip} />
       <Route path="/components/buttons" component={Buttons} />

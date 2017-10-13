@@ -5,7 +5,7 @@ import glamorous from "glamorous"
 import ButtonGroup from "../ButtonGroup/ButtonGroup"
 import Button from "../Button/Button"
 
-interface Props {
+interface IProps {
   activeColor?: string
   disabled?: boolean
   onChange: (page: number) => void
@@ -68,7 +68,7 @@ const PaginatorControl = ({ children, onChange, pageCount, page, type }: Control
   )
 }
 
-const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCount }: Props) => {
+const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCount }: IProps) => {
   let skip
   if (page > maxVisible - 1 && page < pageCount) {
     skip = page - maxVisible + 1
@@ -143,13 +143,13 @@ const Container = glamorous.div({
   }
 })
 
-const Paginator: React.SFC<Props> = ({
+const Paginator: React.SFC<IProps> = ({
   activeColor = "info",
   maxVisible = 3,
   onChange = () => {},
   pageCount,
   page = 1
-}: Props) => {
+}: IProps) => {
   const controlProps = { pageCount, page, onChange }
   return (
     <Container>

@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 export type TabProps = {
-  children?: React.ReactChild
+  children?: React.ReactNode
   disabled?: boolean
   index?: number
   title?: string

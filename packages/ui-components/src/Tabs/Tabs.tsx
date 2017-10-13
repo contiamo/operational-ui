@@ -3,10 +3,10 @@ import glamorous, { withTheme } from "glamorous"
 import { darken, hexOrColor } from "contiamo-ui-utils"
 import Tab, { TabProps } from "./Tab/Tab"
 
-type Props = {
+interface IProps {
   active?: number
   activeColor?: string
-  children: JSX.Element[]
+  children?: React.ReactNode
   onChange?: (index: number) => void
   theme: Theme
 }
@@ -105,7 +105,13 @@ const TabTitle = glamorous.li(
   })
 )
 
-const Tabs: React.SFC<Props> = ({ active = 0, activeColor = "info", children, onChange = () => {}, theme }: Props) => {
+const Tabs: React.SFC<IProps> = ({
+  active = 0,
+  activeColor = "info",
+  children,
+  onChange = () => {},
+  theme
+}: IProps) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
     children,

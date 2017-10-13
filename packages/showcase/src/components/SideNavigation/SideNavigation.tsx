@@ -30,7 +30,7 @@ const style: {} = (): {} => ({
     paddingLeft: 20,
     height: 40
   },
-  "& .SideNavigationItem__label": {
+  "& .co_label": {
     marginLeft: 20
   }
 })
@@ -58,7 +58,7 @@ const AppSideNavigation: React.SFC<IProps> = ({ location }) => {
           <SideNavigationItem key={index} active={routeMatch}>
             <Link to={url || "/"}>
               <Icon name={icon} color={color} size={20} />
-              <Div css={{ color }} className="SideNavigationItem__label">
+              <Div css={{ color }} className="co_label">
                 {label}
               </Div>
             </Link>

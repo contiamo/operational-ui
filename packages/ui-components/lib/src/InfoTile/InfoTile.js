@@ -59,8 +59,8 @@ var IconContainer = glamorous_1.default.div({
     };
 });
 var InfoTile = function (_a) {
-    var className = _a.className, label = _a.label, children = _a.children, color = _a.color, icon = _a.icon, onIconClick = _a.onIconClick;
-    return (React.createElement(Container, { withIcon: !!icon, color: color, className: className },
+    var style = _a.style, className = _a.className, label = _a.label, children = _a.children, color = _a.color, icon = _a.icon, onIconClick = _a.onIconClick;
+    return (React.createElement(Container, { style: style, className: className, withIcon: !!icon, color: color },
         React.createElement(Label, { color: color }, label),
         React.createElement("span", null, children),
         icon ? (React.createElement(IconContainer, { color: color, onClick: onIconClick }, (function () {

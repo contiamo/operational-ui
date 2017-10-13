@@ -1,23 +1,19 @@
 import glamorous from "glamorous"
 import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "contiamo-ui-utils"
 
-type Props = {
-  theme: Theme
-  color?: string
-  disabled?: boolean
-}
-
 const Container = glamorous.div(
   ({
     theme,
     color,
     disabled,
-    updating
+    updating,
+    style
   }: {
     theme: Theme
     color?: string
     disabled: boolean
     updating: boolean
+    style?: any
   }): {} => {
     const backgroundColor = color && theme.colors.palette ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 

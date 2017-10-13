@@ -4,12 +4,13 @@ import glamorous from "glamorous"
 import SidebarItem from "./Item/SidebarItem"
 import SidebarLink from "./Link/SidebarLink"
 
-type Props = {
+interface IProps {
+  style?: any
   className?: string
-  children: JSX.Element[]
+  children: React.ReactNode
 }
 
-const style: {} = ({ theme }: { theme: Theme }) => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   width: "100%",
   maxWidth: 280,
   maxHeight: "100%",
@@ -19,9 +20,13 @@ const style: {} = ({ theme }: { theme: Theme }) => ({
   fontWeight: 300,
   backgroundColor: theme.colors.usage.cardBackground,
   color: theme.colors.palette.grey80
-})
+}))
 
-const Sidebar: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>
+const Sidebar: React.SFC<IProps> = ({ style, className, children }: IProps) => (
+  <Container style={style} className={className}>
+    {children}
+  </Container>
+)
 
-export default glamorous(Sidebar)(style)
+export default Sidebar
 export { Sidebar, SidebarItem, SidebarLink }

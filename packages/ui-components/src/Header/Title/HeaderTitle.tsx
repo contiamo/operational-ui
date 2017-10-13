@@ -1,14 +1,21 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-type Props = { className: string; theme: Theme; children: React.ReactNode }
+interface IProps {
+  style?: any
+  className?: string
+  children?: React.ReactNode
+}
 
-const style: {} = ({ theme }: Props) => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   ...theme.typography.title,
   marginRight: theme.spacing
-})
+}))
 
-const HeaderTitle: React.SFC = ({ className, children }: Props) => <div className={className}>{children}</div>
+const HeaderTitle: React.SFC = ({ style, className, children }: IProps) => (
+  <Container style={style} className={className}>
+    {children}
+  </Container>
+)
 
-export default glamorous(HeaderTitle)(style)
-export { HeaderTitle }
+export default HeaderTitle
