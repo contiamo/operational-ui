@@ -5,9 +5,9 @@ import glamorous, { Div } from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-type Props = {
+interface IProps {
   className?: string
-  children: React.ReactNode
+  children?: React.ReactNode
   to?: string
   onClick?: () => void
   symbol?: string
@@ -18,7 +18,7 @@ type Props = {
   active?: boolean
 }
 
-const style: {} = ({ theme, color, disabled, active }: Props) => {
+const style: {} = ({ theme, color, disabled, active }: IProps) => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff",
     textColor = readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]),
     disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
@@ -45,7 +45,7 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
       backgroundColor: darken(backgroundColor)(10)
     },
 
-    "&.SideNavigationLink + .SideNavigationLink": {
+    "&.co_link + .co_link": {
       borderTop: "1px solid",
       borderColor: theme.colors.usage.subContentSeparatorLine
     },
@@ -56,29 +56,29 @@ const style: {} = ({ theme, color, disabled, active }: Props) => {
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
       color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
-    },
-    // Symbol goes on the right.
-    "& > .symbol": {
-      marginLeft: "auto"
     }
   }
 }
 
-const SidebarLink: React.SFC<Props> = ({ className, children, to, onClick, symbol }: Props) => {
+const Symbol = glamorous.div({
+  marginLeft: "auto"
+})
+
+const SidebarLink: React.SFC<IProps> = ({ className, children, to, onClick, symbol }: IProps) => {
   // if this is expected to work with react-router,
   if (to) {
     return (
-      <Link to={to ? to : ""} className={`${className} SideNavigationLink`}>
+      <Link to={to ? to : ""} className={`${className} co_link`}>
         {children}
-        {symbol ? <div className="symbol">{symbol}</div> : ""}
+        {symbol ? <Symbol>{symbol}</Symbol> : ""}
       </Link>
     )
   }
 
   return (
-    <div onClick={onClick} className={`${className} SideNavigationLink`}>
+    <div onClick={onClick} className={`${className} co_link`}>
       {children}
-      {symbol ? <div className="symbol">{symbol}</div> : ""}
+      {symbol ? <Symbol>{symbol}</Symbol> : ""}
     </div>
   )
 }

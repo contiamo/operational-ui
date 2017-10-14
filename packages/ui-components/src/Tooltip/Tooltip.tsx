@@ -32,7 +32,7 @@ interface TooltipPosition extends React.CSSProperties {
   bottom?: number | string
 }
 
-type RectCoords = {
+interface IRectCoords {
   top: number
   left: number
   bottom: number
@@ -74,7 +74,7 @@ class Tooltip extends React.Component<IProps, IState> {
     }
   }
   getPosition(): TooltipPosition {
-    const rect: RectCoords = this.tooltip.getBoundingClientRect()
+    const rect: IRectCoords = this.tooltip.getBoundingClientRect()
     const top: number = rect.top
     /**
       The following style properties can only properly be set

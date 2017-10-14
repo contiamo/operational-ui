@@ -5,7 +5,7 @@ import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 interface IProps {
   key: number
-  style?: any
+  css?: any
   className?: string
   selected?: boolean
   onClick?: () => void
@@ -37,9 +37,9 @@ const Container = glamorous.div(({ theme, color, selected }: { theme: Theme; col
   }
 })
 
-const SelectOption: React.SFC<IProps> = ({ style, className, selected, color, onClick, children }: IProps) => (
+const SelectOption: React.SFC<IProps> = ({ css, className, selected, color, onClick, children }: IProps) => (
   <Container
-    style={style}
+    css={css}
     className={className}
     selected={!!selected}
     color={color}

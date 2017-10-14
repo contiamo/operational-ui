@@ -8,6 +8,7 @@
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "node scripts/dev-server/index.js",
     "package": "rm -rf lib && tsc",
     "package:watch": "tsc -w",
     "test": "jest",
@@ -38,7 +39,9 @@
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.3.0",
     "tslint-config-prettier": "^1.5.0",
-    "typescript": "latest"
+    "typescript": "latest",
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1"
   },
   "peerDependencies": {
     "glamor": "^2.20.40",

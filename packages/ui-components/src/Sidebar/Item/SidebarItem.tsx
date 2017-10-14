@@ -5,7 +5,8 @@ import glamorous, { Div, GlamorousComponent } from "glamorous"
 import style from "./SidebarItem.style"
 import SidebarLink from "../Link/SidebarLink"
 
-type Props = {
+interface IProps {
+  css?: any
   className?: string
   label: string
   children?: any
@@ -14,20 +15,16 @@ type Props = {
   tooltip?: string
 }
 
-type State = {
+interface IState {
   open: boolean
   updating: boolean // async, woo!
 }
 
-class SidebarItem extends React.Component<Props, State> {
-  static defaultProps = {
-    open: false
-  }
-
-  constructor(props: Props) {
+class SidebarItem extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
     super(props)
     this.state = {
-      open: this.props && this.props.open,
+      open: !!props.open,
       updating: false
     }
   }
@@ -54,7 +51,6 @@ class SidebarItem extends React.Component<Props, State> {
       even when the cursor is over the children... who may also have their
       own tooltips.
     */
-    const HeaderWithTooltip = Div
     return (
       <div
         className={`${this.props.className} ${this.state.updating ? "updating" : ""} ${this.state.open ? "open" : ""}`}

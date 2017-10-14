@@ -5,7 +5,7 @@ interface IProps {
   location?: {
     pathname: string
   }
-  style: any
+  css?: any
   links: ILink[]
 }
 
@@ -17,8 +17,8 @@ interface ILink {
   }[]
 }
 
-export default ({ links, location, style }: IProps) => (
-  <Sidebar style={style}>
+export default ({ links, location, css }: IProps) => (
+  <Sidebar css={css}>
     {links.map((link, index) => {
       const isOpen = location && link.links.map(link => link.url).includes(location.pathname)
       return (

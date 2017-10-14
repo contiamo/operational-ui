@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-interface PropsSet {
+interface IPropsSet {
   name: string | React.ReactElement<any>
   description?: string
   defaultValue: string | React.ReactElement<any>
@@ -10,9 +10,9 @@ interface PropsSet {
 }
 
 interface IProps {
-  style?: any
+  css?: any
   className?: string
-  props?: PropsSet[]
+  props?: IPropsSet[]
 }
 
 const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
@@ -34,8 +34,8 @@ const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const PropsTable: React.SFC<IProps> = ({ className, props }: IProps) => (
-  <Table className={className}>
+const PropsTable: React.SFC<IProps> = ({ css, className, props }: IProps) => (
+  <Table css={css} className={className}>
     <thead>
       <tr>
         <th>Name</th>

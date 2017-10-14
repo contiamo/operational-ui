@@ -22,7 +22,7 @@ var style = function (_a) {
         }, ":focus": {
             outline: 0,
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(10)
-        }, "&.SideNavigationLink + .SideNavigationLink": {
+        }, "&.co_link + .co_link": {
             borderTop: "1px solid",
             borderColor: theme.colors.usage.subContentSeparatorLine
         }, ":hover": {
@@ -30,24 +30,23 @@ var style = function (_a) {
             // The text color needs to change too if it gets too dark 😁
             // Also, here's a prime benefit of functional JS: function composition!
             color: contiamo_ui_utils_1.readableTextColor(contiamo_ui_utils_1.darken(backgroundColor)(5))(["black", "white"])
-        }, 
-        // Symbol goes on the right.
-        "& > .symbol": {
-            marginLeft: "auto"
         } });
 };
 exports.style = style;
+var Symbol = glamorous_1.default.div({
+    marginLeft: "auto"
+});
 var SidebarLink = function (_a) {
     var className = _a.className, children = _a.children, to = _a.to, onClick = _a.onClick, symbol = _a.symbol;
     // if this is expected to work with react-router,
     if (to) {
-        return (React.createElement(react_router_dom_1.Link, { to: to ? to : "", className: className + " SideNavigationLink" },
+        return (React.createElement(react_router_dom_1.Link, { to: to ? to : "", className: className + " co_link" },
             children,
-            symbol ? React.createElement("div", { className: "symbol" }, symbol) : ""));
+            symbol ? React.createElement(Symbol, null, symbol) : ""));
     }
-    return (React.createElement("div", { onClick: onClick, className: className + " SideNavigationLink" },
+    return (React.createElement("div", { onClick: onClick, className: className + " co_link" },
         children,
-        symbol ? React.createElement("div", { className: "symbol" }, symbol) : ""));
+        symbol ? React.createElement(Symbol, null, symbol) : ""));
 };
 exports.SidebarLink = SidebarLink;
 exports.default = glamorous_1.default(SidebarLink)(style);

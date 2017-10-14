@@ -14,7 +14,7 @@ export interface Option {
 }
 
 interface IProps {
-  style?: string
+  css?: any
   className?: string
   placeholder?: string | boolean
   options: Option[]
@@ -145,7 +145,7 @@ class Select extends React.Component<IProps, IState> {
     return (
       <Container
         innerRef={container => (this.container = container)}
-        style={this.props.style}
+        css={this.props.css}
         className={this.props.className}
         updating={this.state.updating}
         color={this.props.color}

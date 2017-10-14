@@ -21,8 +21,8 @@ var Container = glamorous_1.default.div(function (_a) {
     });
 });
 var Sidebar = function (_a) {
-    var style = _a.style, className = _a.className, children = _a.children;
-    return (React.createElement(Container, { style: style, className: className }, children));
+    var css = _a.css, className = _a.className, children = _a.children;
+    return (React.createElement(Container, { css: css, className: className }, children));
 };
 exports.Sidebar = Sidebar;
 exports.default = Sidebar;
