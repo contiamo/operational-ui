@@ -72,8 +72,7 @@ export const Day = glamorous.div(
     ...theme.typography.body,
     backgroundColor: selected ? theme.colors.palette.success : "transparent",
     color: selected ? "#FFF" : "#000",
-    visibility: isPlaceholder ? "hidden" : "visible",
-    content: isPlaceholder ? "' '" : ""
+    opacity: isPlaceholder ? 0.6 : 1.0
   })
 )
 

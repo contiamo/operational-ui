@@ -76,7 +76,7 @@ exports.Day = glamorous_1.default.div({
     border: "1px solid #efefef"
 }, function (_a) {
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
-    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.palette.success : "transparent", color: selected ? "#FFF" : "#000", visibility: isPlaceholder ? "hidden" : "visible", content: isPlaceholder ? "' '" : "" }));
+    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.palette.success : "transparent", color: selected ? "#FFF" : "#000", opacity: isPlaceholder ? 0.6 : 1.0 }));
 });
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
