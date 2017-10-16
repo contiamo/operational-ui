@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var moment_ = require("moment");
+// Temporary hack to work around inconsistent exports/imports between tsc and awesome-typescript-loader
+// @todo -> find a better solution here
 var moment = typeof moment_ === "function" ? moment_ : moment_.default;
 var months = [
     "January",
@@ -29,4 +31,4 @@ var daysInMonth = function (month, year) {
     return moment(toDate(year, month, 2)).daysInMonth();
 };
 exports.daysInMonth = daysInMonth;
-//# sourceMappingURL=utils.js.map
+//# sourceMappingURL=DatePicker.utils.js.map

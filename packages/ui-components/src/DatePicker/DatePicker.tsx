@@ -2,7 +2,9 @@ import * as React from "react"
 import glamorous from "glamorous"
 import Card from "../Card/Card"
 import Icon from "../Icon/Icon"
-import { months, daysInMonth, range, toDate, monthStartDay } from "./utils"
+import { Container, Toggle, Nav, IconContainer, Days, Day, Input } from "./DatePicker.styles"
+import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
+import Month from "./DatePicker.Month"
 
 interface IProps {
   start?: string
@@ -18,91 +20,6 @@ interface IState {
   year: number
   month: number
 }
-
-const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): any => ({
-  display: "inline-block",
-  width: "auto",
-  position: "relative",
-  "& .co_card": {
-    display: isExpanded ? "block" : "none",
-    position: "absolute",
-    top: 30,
-    left: "50%",
-    transform: "translate3d(-50%, 0, 0)",
-    width: 240
-  }
-}))
-
-const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  position: "absolute",
-  top: 0,
-  right: 0,
-  width: 24,
-  height: 24,
-  fontSize: 10,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: theme.baseZIndex + 1,
-  color: theme.colors.palette.grey80,
-  borderLeft: `1px solid ${theme.colors.palette.grey60}`
-}))
-
-const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  margin: theme.spacing,
-  textAlign: "center",
-  "& > *": {
-    margin: `0 6px`,
-    verticalAlign: "middle",
-    display: "inline-block"
-  },
-  "& > span": {
-    ...theme.typography.body,
-    width: 100,
-    textAlign: "center"
-  }
-}))
-
-const IconContainer = glamorous.div({
-  width: 16,
-  height: 16,
-  cursor: "pointer"
-})
-
-const Days = glamorous.div({
-  width: 210,
-  margin: "auto"
-})
-
-const Day = glamorous.div(
-  {
-    width: 30,
-    height: 30,
-    marginRight: -1,
-    marginBottom: -1,
-    cursor: "pointer",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "1px solid #efefef"
-  },
-  ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): any => ({
-    ...theme.typography.body,
-    backgroundColor: selected ? theme.colors.palette.success : "transparent",
-    color: selected ? "#FFF" : "#000",
-    visibility: isPlaceholder ? "hidden" : "visible",
-    content: isPlaceholder ? "' '" : ""
-  })
-)
-
-const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
-  padding: theme.spacing / 2,
-  height: 24,
-  border: "1px solid",
-  borderColor: theme.colors.palette.grey30,
-  width: 160,
-  position: "relative"
-}))
 
 class DatePicker extends React.Component<IProps, IState> {
   state = {
@@ -205,32 +122,13 @@ class DatePicker extends React.Component<IProps, IState> {
               <Icon name="ChevronRight" size={12} />
             </IconContainer>
           </Nav>
-          <Days>
-            {range(placeholderDays).map((number, index) => {
-              return <Day key={index} isPlaceholder />
-            })}
-            {range(daysInCurrentMonth).map((number, index) => {
-              const date = toDate(this.state.year, this.state.month, index)
-              return (
-                <Day
-                  selected={date === start || date === end || (!!start && !!end && date >= start && date <= end)}
-                  key={index}
-                  onClick={() => {
-                    const newStart = start && !end ? start : date
-                    const newEnd = start && !end ? date : start && end ? null : end
-                    const [sortedNewStart, sortedNewEnd] = [newStart, newEnd].sort()
-                    this.props.onChange &&
-                      this.props.onChange({
-                        start: sortedNewStart,
-                        end: sortedNewEnd
-                      })
-                  }}
-                >
-                  {index + 1}
-                </Day>
-              )
-            })}
-          </Days>
+          <Month
+            start={this.props.start}
+            end={this.props.end}
+            year={this.state.year}
+            month={this.state.month}
+            onChange={this.props.onChange}
+          />
         </Card>
       </Container>
     )
