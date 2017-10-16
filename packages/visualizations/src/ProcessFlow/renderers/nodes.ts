@@ -129,6 +129,8 @@ class Nodes extends AbstractRenderer {
           .select("path.node-border")
           .transition()
           .duration(ctx.config.duration)
+          // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
+          // but doesn't break the viz.
           .attr(
           "d",
           d3Symbol()
@@ -142,6 +144,8 @@ class Nodes extends AbstractRenderer {
           .select("path.node")
           .transition()
           .duration(ctx.config.duration)
+          // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
+          // but doesn't break the viz.
           .attr(
             "d",
             d3Symbol()

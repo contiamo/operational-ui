@@ -42,7 +42,7 @@ export default {
       },
       label: (node: any) => "Node " + node.id,
       labelPosition: (node: any) => "top",
-      shape: (node: any) => (node.group === "start" ? "square" : node.group === "end" ? "circle" : "diamond"),
+      shape: (node: any) => (node.group === "start" ? "square" : node.group === "end" ? "squareDiamond" : "diamond"),
       // size: (node: any) => (node.group === "start" ? 50 : 20),
       stroke: (node: any) => {
         if (node.group) {
