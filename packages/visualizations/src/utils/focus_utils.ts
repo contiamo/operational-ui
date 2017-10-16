@@ -33,10 +33,10 @@ let FocusUtils: any = {
 
   // Return dimensions of focus label, including width of any margins or borders.
   labelDimensions: (focusEl: any): { height: number; width: number } => {
-    let $label: any = $(focusEl.node())
+    const rect: ClientRect = focusEl.node().getBoundingClientRect()
     return {
-      height: $label.outerHeight(true),
-      width: $label.outerWidth(true),
+      height: rect.height,
+      width: rect.width,
     }
   },
 
