@@ -24,7 +24,7 @@ const links = [
 
 export default () => (
   <div>
-    <SidebarWithRouter links={links} style={{ height: "100%" }} />
+    <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/visualizations" component={InfoTooltip} />
       <Route path="/visualizations/process-flow/:case" component={ProcessFlow} />

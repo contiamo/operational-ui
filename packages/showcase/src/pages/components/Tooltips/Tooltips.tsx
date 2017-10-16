@@ -29,6 +29,6 @@ export default () => (
     <Playground snippet={String(simpleSnippet)} components={{ Tooltip }} />
 
     <h4>Props</h4>
-    <Table style={{ marginBottom: 32 }} props={propDescription} />
+    <Table css={{ marginBottom: 32 }} props={propDescription} />
   </Card>
 )
