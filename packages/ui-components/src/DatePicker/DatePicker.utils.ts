@@ -1,5 +1,7 @@
 import * as moment_ from "moment"
 
+// Temporary hack to work around inconsistent exports/imports between tsc and awesome-typescript-loader
+// @todo -> find a better solution here
 const moment = typeof moment_ === "function" ? moment_ : (moment_ as any).default
 
 const months: string[] = [

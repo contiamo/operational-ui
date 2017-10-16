@@ -52,6 +52,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "@types/d3-ease": "^1.0.7",
     "component-playground": "^3.0.0",
     "contiamo-ui-components": "^0.0.1-23",
     "contiamo-ui-utils": "^0.0.1-21",
