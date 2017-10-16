@@ -25,7 +25,7 @@ const Container = glamorous.div(
   ({
     theme,
     color = "info",
-    spinnerSize = 50,
+    spinnerSize = 40,
     spinDuration = 2
   }: {
     theme: Theme

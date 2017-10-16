@@ -72,19 +72,53 @@ exports[`Spinners Showcase Page Should render correctly 1`] = `
     <tbody>
       <tr>
         <td>
-          value
+          color
         </td>
         <td>
-          Description of the value prop.
+          Spinner of the color, as a hex value or a color palette code.
         </td>
         <td>
-          Hello World
+          info
         </td>
         <td>
           string
         </td>
         <td>
-          🚫
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          size
+        </td>
+        <td>
+          Spinner size, either as a number (pixels), or a different unit as string.
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          number | string
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
+      <tr>
+        <td>
+          spinDuration
+        </td>
+        <td>
+          You can override the amount of time it takes for the spinner to take a full turn. While this is generally discouraged among spinners of the same size, small tweaks are sometimes aesthetically justified.
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          number
+        </td>
+        <td>
+          ✅
         </td>
       </tr>
     </tbody>

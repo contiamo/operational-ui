@@ -13,7 +13,7 @@ var spin = glamor_1.css.keyframes({
     }
 });
 var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, _b = _a.color, color = _b === void 0 ? "info" : _b, _c = _a.spinnerSize, spinnerSize = _c === void 0 ? 50 : _c, _d = _a.spinDuration, spinDuration = _d === void 0 ? 2 : _d;
+    var theme = _a.theme, _b = _a.color, color = _b === void 0 ? "info" : _b, _c = _a.spinnerSize, spinnerSize = _c === void 0 ? 40 : _c, _d = _a.spinDuration, spinDuration = _d === void 0 ? 2 : _d;
     var spinnerColor = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white");
     return {
         fontSize: "10px",
