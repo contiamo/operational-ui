@@ -165,19 +165,19 @@ abstract class AbstractDrawingCanvas extends AbstractCanvas {
       .attr("transform", "translate(" + this.state.current.get("config").drawingMargin.join(",") + ")")
   }
 
-  resize(): void {
-    this.draw()
-  }
+  // resize(): void {
+  //   this.draw()
+  // }
 
-  remove(): void {
-    super.remove()
-    if (!this.drawingContainer) {
-      return
-    }
-    $(this.drawingContainer.node()).off()
-    this.drawingContainer.remove()
-    this.drawingContainer = undefined
-  }
+  // remove(): void {
+  //   super.remove()
+  //   if (!this.drawingContainer) {
+  //     return
+  //   }
+  //   $(this.drawingContainer.node()).off()
+  //   this.drawingContainer.remove()
+  //   this.drawingContainer = undefined
+  // }
 }
 
 export = AbstractDrawingCanvas

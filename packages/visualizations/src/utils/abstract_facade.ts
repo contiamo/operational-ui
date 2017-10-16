@@ -53,14 +53,14 @@ abstract class AbstractChart {
     this.events.off(event, handler)
   }
 
-  hasData(): boolean {
-    return this.state.hasData()
-  }
+  // hasData(): boolean {
+  //   return this.state.hasData()
+  // }
 
-  // Clear all data (does not render, need to call "#draw")
-  clear(): void {
-    this.data({})
-  }
+  // // Clear all data (does not render, need to call "#draw")
+  // clear(): void {
+  //   this.data({})
+  // }
 
   // Draw / resize
   abstract draw(args?: any): any
@@ -68,39 +68,39 @@ abstract class AbstractChart {
   //@TODO implement
   redraw(drawAll: () => void): void {}
 
-  resize(width: number, height: number): void {
-    this.config({ width: width, height: height })
-    if (!this.drawn) {
-      return
-    }
-    if (this.dirty) {
-      this.draw()
-    }
-  }
+  // resize(width: number, height: number): void {
+  //   this.config({ width: width, height: height })
+  //   if (!this.drawn) {
+  //     return
+  //   }
+  //   if (this.dirty) {
+  //     this.draw()
+  //   }
+  // }
 
-  // Focus
-  // Date Axes
-  focusDate(date: Date, periodUnit: string): void {
-    return
-  }
+  // // Focus
+  // // Date Axes
+  // focusDate(date: Date, periodUnit: string): void {
+  //   return
+  // }
 
-  // Ordinal Axes
-  focusElement(): void {
-    return
-  }
+  // // Ordinal Axes
+  // focusElement(): void {
+  //   return
+  // }
 
-  focusClear(): void {
-    return
-  }
+  // focusClear(): void {
+  //   return
+  // }
 
-  // Hide / show
-  hide(): void {
-    $(this.context).hide()
-  }
+  // // Hide / show
+  // hide(): void {
+  //   $(this.context).hide()
+  // }
 
-  show(): void {
-    $(this.context).show()
-  }
+  // show(): void {
+  //   $(this.context).show()
+  // }
 
   // Close / cleanup
   close(): void {
