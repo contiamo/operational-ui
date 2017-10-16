@@ -21,9 +21,11 @@
     "glamorous": "^4.8.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "react": "^16.0.0"
+    "react": "^16.0.0",
+    "webpack": "^3.7.1"
   },
   "devDependencies": {
+    "@types/d3-ease": "^1.0.7",
     "@types/d3-scale": "^1.0.10",
     "@types/d3-selection": "^1.1.0",
     "@types/d3-shape": "^1.2.1",

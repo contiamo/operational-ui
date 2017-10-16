@@ -1,5 +1,4 @@
 import { map, flow, groupBy, sortBy, forEach } from "lodash/fp"
-import * as $ from "jquery"
 import Layout from "./layout"
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
