@@ -2,11 +2,11 @@ import * as React from "react"
 import { render } from "react-dom"
 import { ThemeProvider } from "glamorous"
 
-import { DatePicker, contiamoTheme } from "../../index.ts"
+import { Spinner, contiamoTheme } from "../../index"
 
 const Site = () => (
   <ThemeProvider theme={contiamoTheme}>
-    <DatePicker />
+    <Spinner />
   </ThemeProvider>
 )
 

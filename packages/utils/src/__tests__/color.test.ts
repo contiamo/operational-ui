@@ -1,4 +1,4 @@
-import { hexOrColor, readableTextColor, darken } from "../color"
+import { hexOrColor, readableTextColor, darken, lighten, transparentize } from "../color"
 
 describe("Color utils", () => {
   it("Should give me a hex code or a color presented by name", () => {
@@ -17,5 +17,13 @@ describe("Color utils", () => {
 
   it("Should darken a color by a percentage", () => {
     expect(darken("#ffffff")(50)).toEqual("#808080")
+  })
+
+  it("Should lighten a color by a percentage", () => {
+    expect(lighten("#808080")(50)).toEqual("#ffffff")
+  })
+
+  it("Should transparentize a color by a percentage", () => {
+    expect(transparentize("red")(100)).toEqual("rgba(255, 0, 0, 0)")
   })
 })

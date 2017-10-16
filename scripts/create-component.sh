@@ -15,7 +15,8 @@ cat > $COMP_ROOT/$1.tsx << EOL
 import * as React from "react"
 import glamorous from "glamorous"
 
-type Props = {
+interface IProps {
+  css?: any
   className?: string
   value: string
   children?: any
@@ -44,7 +45,7 @@ const Content = glamorous.div(
   })
 )
 
-const $1: React.SFC<Props> = ({ value }: Props) => (
+const $1 = ({ value }: IProps) => (
   <Container>
     <Content active>{value}</Content>
   </Container>

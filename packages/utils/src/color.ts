@@ -40,4 +40,14 @@ const darken = (color: string) => (percentage: number): string =>
     .darken(percentage)
     .toString()
 
-export { hexOrColor, readableTextColor, darken }
+const lighten = (color: string) => (percentage: number): string =>
+  colorCalculator(color)
+    .lighten(percentage)
+    .toString()
+
+const transparentize = (color: string) => (percentage: number): string =>
+  (({ r, g, b }) => {
+    return `rgba(${r}, ${g}, ${b}, ${255 * (100 - percentage) / 100})`
+  })(colorCalculator(color).toRgb())
+
+export { hexOrColor, readableTextColor, darken, lighten, transparentize }

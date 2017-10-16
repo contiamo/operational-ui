@@ -15,6 +15,7 @@ import InfoTiles from "./InfoTiles/InfoTiles"
 import SidebarPage from "./Sidebar/Sidebar"
 import ColorPickers from "./ColorPickers/ColorPickers"
 import DatePickers from "./DatePickers/DatePickers"
+import Spinners from "./Spinners/Spinners"
 import Switches from "./Switches/Switches"
 import Icons from "./Icons/Icons"
 import Typography from "./Typography/Typography"
@@ -68,6 +69,7 @@ const links = [
       { label: "Modals" },
       { label: "Notifications" },
       { url: "/components/progress", label: "Progress" },
+      { url: "/components/spinners", label: "Spinners" },
       { url: "/components/tooltips", label: "Tooltips" }
     ]
   },
@@ -104,6 +106,7 @@ export default () => (
       <Route path="/components/sidebar" component={SidebarPage} />
       <Route path="/components/icons" component={Icons} />
       <Route path="/components/switch" component={Switches} />
+      <Route path="/components/spinners" component={Spinners} />
       <Route path="/components/typography" component={Typography} />
       <Route path="/components/colors" component={Colors} />
       <Route path="/components/paginator" component={Paginator} />
