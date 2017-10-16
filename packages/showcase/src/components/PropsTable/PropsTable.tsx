@@ -1,18 +1,18 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-interface PropsSet {
+interface IProps {
+  css?: any
+  className?: string
+  props?: IPropsSet[]
+}
+
+interface IPropsSet {
   name: string | React.ReactElement<any>
   description?: string
   defaultValue: string | React.ReactElement<any>
   type?: string
   optional?: boolean
-}
-
-type Props = {
-  css?: {}
-  className?: string
-  props?: PropsSet[]
 }
 
 const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
@@ -34,8 +34,8 @@ const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const PropsTable = ({ className, props }: Props) => (
-  <Table className={className}>
+const PropsTable: React.SFC<IProps> = ({ css, className, props }: IProps) => (
+  <Table css={css} className={className}>
     <thead>
       <tr>
         <th>Name</th>

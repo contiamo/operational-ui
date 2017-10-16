@@ -14,6 +14,7 @@ export interface Option {
 }
 
 interface IProps {
+  css?: any
   className?: string
   placeholder?: string | boolean
   options: Option[]
@@ -33,20 +34,10 @@ interface IState {
 }
 
 class Select extends React.Component<IProps, IState> {
-  static defaultProps = {
-    className: "",
-    filterable: false,
-    disabled: false,
-    multiple: false
-  }
-
-  constructor(props: IProps) {
-    super(props)
-    this.state = {
-      open: false,
-      updating: false,
-      filter: new RegExp(/./)
-    }
+  state: IState = {
+    open: false,
+    updating: false,
+    filter: new RegExp(/./)
   }
 
   // flow complains if this isn't initialized sooo...
@@ -154,6 +145,7 @@ class Select extends React.Component<IProps, IState> {
     return (
       <Container
         innerRef={container => (this.container = container)}
+        css={this.props.css}
         className={this.props.className}
         updating={this.state.updating}
         color={this.props.color}
@@ -165,7 +157,7 @@ class Select extends React.Component<IProps, IState> {
         <div>{this.getDisplayValue() || this.props.placeholder}</div>
         {this.props.options.length && this.state.open ? (
           <Options>
-            {this.props.filterable && <SelectFilter onChange={e => this.updateFilter(e)} />}
+            {this.props.filterable && <SelectFilter onChange={(e: any) => this.updateFilter(e)} />}
             <OptionsList>
               {this.props.options.map(
                 (option: Option) =>

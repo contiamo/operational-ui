@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App starts 1`] = `
-<div>
+<div
+  class="css-1ekk8l2"
+>
   <div
-    class="css-1f023pv"
+    class="css-guolr8"
   >
     <div
-      class="css-2sxhxf SideNavigationHeader"
+      class="css-ihgfbr"
       role="listbox"
       tabindex="-1"
     >
@@ -22,7 +24,7 @@ exports[`App starts 1`] = `
         Contiamo
       </a>
       <div
-        class="SideNavigationHeader__value"
+        class="css-1poypx5"
       />
     </div>
     <div
@@ -68,7 +70,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="css-j9z7vu SideNavigationItem__label"
+          class="css-j9z7vu co_label"
         >
           Components
         </div>
@@ -134,7 +136,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="css-j9z7vu SideNavigationItem__label"
+          class="css-j9z7vu co_label"
         >
           Composed
         </div>
@@ -189,7 +191,7 @@ exports[`App starts 1`] = `
           />
         </svg>
         <div
-          class="css-j9z7vu SideNavigationItem__label"
+          class="css-j9z7vu co_label"
         >
           Visualizations
         </div>
@@ -202,12 +204,11 @@ exports[`App starts 1`] = `
   <div
     class="css-oslscu"
   >
-    <div
-      class="css-17142z3"
-      style="box-shadow:0px 1px 2px #d3d1d1;background-color:#fff"
+    <header
+      class="css-t9hfxf"
     >
       Contiamo UI
-    </div>
+    </header>
   </div>
 </div>
 `;

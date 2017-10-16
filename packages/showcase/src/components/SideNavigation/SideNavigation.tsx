@@ -5,14 +5,20 @@ import { Box, BarChart2, Grid } from "react-feather"
 
 import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
 
-type Props = {
+interface IProps {
   location?: {
     pathname: string
   }
   theme?: Theme
 }
 
-const style: {} = (): {} => ({
+interface ILink {
+  url?: string
+  label: string
+  icon: ReactFeatherIconName
+}
+
+const style: {} = {
   "& a": {
     display: "flex",
     position: "relative",
@@ -24,12 +30,18 @@ const style: {} = (): {} => ({
     paddingLeft: 20,
     height: 40
   },
-  "& .SideNavigationItem__label": {
+  "& .co_label": {
     marginLeft: 20
   }
-})
+}
 
-const AppSideNavigation = ({ location }: Props) => {
+const links: ILink[] = [
+  { url: "/components", label: "Components", icon: "Box" },
+  { label: "Composed", icon: "Grid" },
+  { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
+]
+
+const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
   return (
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader>
@@ -39,18 +51,14 @@ const AppSideNavigation = ({ location }: Props) => {
         </Link>
       </SideNavigationHeader>
 
-      {[
-        { url: "/components", label: "Components", icon: "Box" },
-        { label: "Composed", icon: "Grid" },
-        { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
-      ].map(({ url, label, icon }: { url?: string; label: string; icon: string }, index: number) => {
+      {links.map(({ url, label, icon }: ILink, index: number) => {
         const routeMatch = location && location.pathname && url && location.pathname.slice(0, url.length) === url
         const color = routeMatch ? "#67FFAA" : "#fff"
         return (
           <SideNavigationItem key={index} active={routeMatch}>
             <Link to={url || "/"}>
               <Icon name={icon} color={color} size={20} />
-              <Div css={{ color }} className="SideNavigationItem__label">
+              <Div css={{ color }} className="co_label">
                 {label}
               </Div>
             </Link>
@@ -62,4 +70,4 @@ const AppSideNavigation = ({ location }: Props) => {
   )
 }
 
-export default glamorous(AppSideNavigation)(style)
+export default AppSideNavigation

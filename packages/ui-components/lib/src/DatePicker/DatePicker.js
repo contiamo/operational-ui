@@ -132,7 +132,7 @@ var DatePicker = /** @class */ (function (_super) {
         var _a = this.props, start = _a.start, end = _a.end;
         var placeholderDays = utils_1.monthStartDay(this.state.year, this.state.month);
         var daysInCurrentMonth = utils_1.daysInMonth(this.state.month, this.state.year);
-        return (React.createElement(Container, { isExpanded: this.state.isExpanded, onClick: function (ev) {
+        return (React.createElement(Container, { css: this.props.css, isExpanded: this.state.isExpanded, onClick: function (ev) {
                 ev.stopPropagation();
             } },
             React.createElement(Input_1.default, { inputRef: function (node) {

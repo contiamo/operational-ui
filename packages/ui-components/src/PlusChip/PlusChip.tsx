@@ -3,16 +3,16 @@ import glamorous from "glamorous"
 
 import { hexOrColor } from "contiamo-ui-utils"
 
-type Props = {
+interface IProps {
+  css?: any
   className?: string
   size?: number
   children?: React.ReactNode
   onClick?: () => void
-  theme?: Theme
   color?: string
 }
 
-const style: {} = ({ theme, color, size }: Props) => {
+const Container = glamorous.div(({ theme, color, size }: { theme: Theme; color?: string; size: number }): any => {
   const borderColor = color ? hexOrColor(color)(theme.colors.palette[color] || "white") : "black"
 
   return {
@@ -23,23 +23,14 @@ const style: {} = ({ theme, color, size }: Props) => {
     height: size,
     border: "1px solid",
     cursor: "pointer",
-    color: borderColor,
-
-    "&.plus-chip + .plus-chip": {
-      marginLeft: theme.spacing / 2
-    }
+    color: borderColor
   }
-}
+})
 
-const PlusChip: React.SFC<Props> = ({ className, children, onClick }: Props) => (
-  <div className={`${className} PlusChip`} onClick={onClick} tabIndex={-1} role="button">
+const PlusChip: React.SFC<IProps> = ({ css, size = 15, color, className, children, onClick }: IProps) => (
+  <Container css={css} className={className} size={size} color={color} onClick={onClick} tabIndex={-1} role="button">
     {children || "+"}
-  </div>
+  </Container>
 )
 
-PlusChip.defaultProps = {
-  size: 15
-}
-
-export default glamorous(PlusChip)(style)
-export { PlusChip }
+export default PlusChip

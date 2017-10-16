@@ -1,7 +1,6 @@
 import { spin } from "contiamo-ui-utils"
 
-type Props = { theme: Theme; children?: Node }
-export default ({ theme, children }: Props): {} => {
+export default ({ theme, children }: { theme: Theme; children?: Node }): {} => {
   // If we have children, style a caret.
   const caret: {} = children
     ? {

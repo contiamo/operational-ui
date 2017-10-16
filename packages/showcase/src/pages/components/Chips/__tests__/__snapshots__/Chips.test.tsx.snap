@@ -2,7 +2,7 @@
 
 exports[`Cards Page Should render correctly 1`] = `
 <div
-  class="css-1dkvbfz"
+  class="css-zssd73"
 >
   <div
     class="css-imab3e"
@@ -16,14 +16,12 @@ exports[`Cards Page Should render correctly 1`] = `
     style="display:flex"
   >
     <div
-      class="css-wg56g2 co_chip"
-      style="margin-bottom:16px"
+      class="css-198apk0 co_chip"
     >
       Chip 1
     </div>
     <div
-      class="css-wg56g2 co_chip"
-      style="margin-bottom:16px"
+      class="css-198apk0 co_chip"
     >
       Chip 2
     </div>
@@ -35,7 +33,7 @@ exports[`Cards Page Should render correctly 1`] = `
     class="css-1r6pn67"
   >
     <div
-      class="css-10kxzv6"
+      class="css-koz1rt"
     >
       Give yourself some space - expand this playground
     </div>
@@ -153,7 +151,7 @@ exports[`Cards Page Should render correctly 1`] = `
     class="css-1r6pn67"
   >
     <div
-      class="css-10kxzv6"
+      class="css-koz1rt"
     >
       Give yourself some space - expand this playground
     </div>

@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 type Props = {
+  css?: any
   className?: string
   placeholder?: string
   name?: string
@@ -25,9 +26,10 @@ const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   WebkitAppearance: "none"
 }))
 
-const Input: React.SFC<Props> = ({ className, name, placeholder, value, onChange, onFocus, onBlur, inputRef }) => {
+const Input: React.SFC<Props> = ({ css, className, name, placeholder, value, onChange, onFocus, onBlur, inputRef }) => {
   return (
     <StyledInput
+      css={css}
       innerRef={inputRef}
       className={className}
       name={name}

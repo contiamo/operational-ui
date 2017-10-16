@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColorPicker Should initialize properly 1`] = `
-<div>
+<div
+  class="css-nil"
+>
   <div
     class="css-ebsmcl"
   />

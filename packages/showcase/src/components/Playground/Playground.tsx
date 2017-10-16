@@ -13,7 +13,7 @@ interface IProps {
 }
 
 interface IState {
-  expanded: boolean
+  isExpanded: boolean
 }
 
 const customGrey: string = "#cdcdcd"
@@ -38,6 +38,10 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
           "& > div": {
             height: "100%"
           }
+        },
+        "& > :first-child": {
+          width: isExpanded ? "100%" : "calc(100% + 6px)",
+          left: isExpanded ? 0 : -3
         }
       }
     : {},
@@ -70,9 +74,7 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
 
 const ExpandPrompt = glamorous.div(({ theme }: { theme: Theme }): any => ({
   ...theme.typography.small,
-  width: "calc(100% + 6px)",
   position: "relative",
-  left: -3,
   height: 20,
   display: "flex",
   alignItems: "center",
@@ -89,7 +91,26 @@ const ExpandPrompt = glamorous.div(({ theme }: { theme: Theme }): any => ({
 
 class Playground extends React.Component<IProps, IState> {
   state: IState = {
-    expanded: false
+    isExpanded: false
+  }
+
+  keypressHandler: (a: any) => void
+
+  componentDidMount() {
+    this.keypressHandler = (ev: any) => {
+      if (ev.keyCode !== 27) {
+        return
+      }
+      this.setState(prevState => ({
+        ...prevState,
+        isExpanded: false
+      }))
+    }
+    window.addEventListener("keydown", this.keypressHandler)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.keypressHandler)
   }
 
   render() {
@@ -100,15 +121,15 @@ class Playground extends React.Component<IProps, IState> {
       wrappedComponents[key] = wrapTheme(contiamoTheme)(comps[key])
     }
     return (
-      <Container isExpanded={this.state.expanded}>
+      <Container isExpanded={this.state.isExpanded}>
         <ExpandPrompt
           onClick={(ev: any): void => {
             this.setState(prevState => ({
-              expanded: !prevState.expanded
+              isExpanded: !prevState.isExpanded
             }))
           }}
         >
-          {this.state.expanded ? "Collapse" : "Give yourself some space - expand this playground"}
+          {this.state.isExpanded ? "Collapse" : "Give yourself some space - expand this playground"}
         </ExpandPrompt>
         <ComponentPlayground
           codeText={transformSnippet(snippet)}

@@ -1,4 +1,6 @@
-import * as moment from "moment"
+import * as moment_ from "moment"
+
+const moment = typeof moment_ === "function" ? moment_ : (moment_ as any).default
 
 const months: string[] = [
   "January",

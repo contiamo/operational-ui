@@ -4,6 +4,7 @@ import glamorous from "glamorous"
 type Dimension = string | number
 
 interface IProps {
+  css?: any
   className?: string
   children?: React.ReactNode
   rows?: Dimension[]
@@ -34,8 +35,8 @@ const Container = glamorous.div(
   })
 )
 
-const Grid: React.SFC<IProps> = ({ rows, columns, gap, children }: IProps) => (
-  <Container rowData={rows} columnData={columns} gap={gap}>
+const Grid: React.SFC<IProps> = ({ css, rows, columns, gap, children }: IProps) => (
+  <Container css={css} rowData={rows} columnData={columns} gap={gap}>
     {children}
   </Container>
 )

@@ -2,14 +2,13 @@
 
 exports[`SideNavigationHeader Should render correctly 1`] = `
 <div
-  className="undefined SideNavigationHeader"
-  onClick={[Function]}
+  class="css-ihgfbr"
   role="listbox"
-  tabIndex={-1}
+  tabindex="-1"
 >
   hi
   <div
-    className="SideNavigationHeader__value"
+    class="css-1poypx5"
   />
 </div>
 `;

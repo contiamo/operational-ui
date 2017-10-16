@@ -32,7 +32,7 @@ interface TooltipPosition extends React.CSSProperties {
   bottom?: number | string
 }
 
-type RectCoords = {
+interface IRectCoords {
   top: number
   left: number
   bottom: number
@@ -41,7 +41,7 @@ type RectCoords = {
   height: number
 }
 
-type Props = {
+interface IProps {
   className?: string
   children?: React.ReactNode
   active?: boolean
@@ -50,16 +50,16 @@ type Props = {
   betaFixOverflow?: boolean
 }
 
-type State = {
+interface IState {
   style: TooltipPosition
 }
 
-class Tooltip extends React.Component<Props, State> {
+class Tooltip extends React.Component<IProps, IState> {
   static defaultProps = {
     anchor: "top",
     active: false
   }
-  state: State = {
+  state: IState = {
     style: {
       position: "absolute"
     }
@@ -74,7 +74,7 @@ class Tooltip extends React.Component<Props, State> {
     }
   }
   getPosition(): TooltipPosition {
-    const rect: RectCoords = this.tooltip.getBoundingClientRect()
+    const rect: IRectCoords = this.tooltip.getBoundingClientRect()
     const top: number = rect.top
     /**
       The following style properties can only properly be set

@@ -2,14 +2,14 @@ import * as React from "react"
 
 import glamorous from "glamorous"
 
-type Props = {
+interface IProps {
+  css?: any
   className?: string
-  children: React.ReactNode
-  theme?: Theme
+  children?: React.ReactNode
   id?: string
 }
 
-const style: {} = ({ theme }: Props) => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   margin: theme.spacing * -1,
   marginBottom: theme.spacing * 4 / 3,
   padding: `${theme.spacing}px ${theme.spacing}px ${theme.spacing * 5 / 6}px`,
@@ -21,12 +21,12 @@ const style: {} = ({ theme }: Props) => ({
   "* + &": {
     marginTop: theme.spacing
   }
-})
+}))
 
-const CardHeader: React.SFC<Props> = ({ className, children, id }: Props) => (
-  <div id={id} className={className}>
+const CardHeader: React.SFC<IProps> = ({ css, className, children, id }) => (
+  <Container id={id} css={css} className={className}>
     {children}
-  </div>
+  </Container>
 )
 
-export default glamorous(CardHeader)(style)
+export default CardHeader

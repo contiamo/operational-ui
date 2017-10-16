@@ -3,7 +3,10 @@ import glamorous from "glamorous"
 
 import { Card } from "contiamo-ui-components"
 
-type Props = { className?: string; children: React.ReactNode }
+interface IProps {
+  className?: string
+  children: React.ReactNode
+}
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "flex",
@@ -27,6 +30,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const Canvas = ({ children }: Props) => <Container>{children}</Container>
+const Canvas: React.SFC<IProps> = ({ children }: IProps) => <Container>{children}</Container>
 
 export default Canvas

@@ -4,29 +4,30 @@ import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-type Modifier = "space"
-
-type StyleProps = {
+interface IStyleProps {
   theme?: Theme
   color?: string
   active?: boolean
   disabled?: boolean
   condensed?: boolean
-  modifiers?: Modifier[]
 }
 
-export type Props = StyleProps & {
+interface IProps {
+  css?: any
   className?: string
   onClick?: any
-  children?: any
+  children?: React.ReactNode
+  color?: string
+  active?: boolean
+  disabled?: boolean
+  condensed?: boolean
 }
 
-const Container = glamorous.div(({ theme, color, active, disabled, modifiers, condensed }: StyleProps): any => {
+const Container = glamorous.div(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
   const backgroundColor: string = color ? hexOrColor(color)(theme.colors.palette[color] || "white") as string : "white"
   const activeBackgroundColor: string = darken(backgroundColor)(5)
   const textColor = readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"])
   const activeBoxShadow = theme.shadows.pressed
-  const isSpace = modifiers && modifiers.indexOf("space") > -1
   const spacing = theme.spacing
 
   return {
@@ -59,11 +60,11 @@ const Container = glamorous.div(({ theme, color, active, disabled, modifiers, co
         }
       : {},
 
-    marginLeft: isSpace ? spacing / 2 : undefined
+    marginRight: spacing / 2
   }
 })
 
-const Button: React.SFC<Props> = props => {
+const Button: React.SFC<IProps> = props => {
   const componentProps = {
     ...props,
     onClick: props.disabled ? null : props.onClick

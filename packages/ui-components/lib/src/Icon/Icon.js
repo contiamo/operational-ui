@@ -9,10 +9,8 @@ var Icon = function (_a) {
     var name = _a.name, size = _a.size, color = _a.color, theme = _a.theme;
     var defaultColor = theme.colors.palette.black;
     var color_ = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || defaultColor) : defaultColor;
-    // @todo -> this, better
-    var IconLib = ReactFeather;
-    if (IconLib.hasOwnProperty(name)) {
-        var Comp = IconLib[name];
+    if (ReactFeather.hasOwnProperty(name)) {
+        var Comp = ReactFeather[name];
         return React.createElement(Comp, { size: size || theme.spacing, color: color_ });
     }
     else {

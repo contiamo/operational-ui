@@ -1,20 +1,23 @@
 import * as React from "react"
 import { Sidebar, SidebarItem, SidebarLink } from "contiamo-ui-components"
 
-type Props = {
+interface IProps {
   location?: {
     pathname: string
   }
-  css: {}
-  links: Link[]
+  css?: any
+  links: ILink[]
 }
 
-type Link = {
+interface ILink {
   label: string
-  links: { url?: string; label: string }[]
+  links: {
+    url?: string
+    label: string
+  }[]
 }
 
-export default ({ links, location, css }: Props) => (
+export default ({ links, location, css }: IProps) => (
   <Sidebar css={css}>
     {links.map((link, index) => {
       const isOpen = location && link.links.map(link => link.url).includes(location.pathname)

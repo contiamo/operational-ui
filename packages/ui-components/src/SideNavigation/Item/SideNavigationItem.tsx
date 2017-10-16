@@ -2,7 +2,7 @@ import * as React from "react"
 
 import glamorous from "glamorous"
 
-interface Props {
+interface IProps {
   className?: string
   children: React.ReactNode
   onClick?: () => void
@@ -11,7 +11,7 @@ interface Props {
   theme?: Theme
 }
 
-const Container = glamorous.div(({ theme, active }: Props): {} => {
+const Container = glamorous.div(({ theme, active }: IProps): {} => {
   const activeBackgroundColor = "rgba(0, 0, 0, 0.2)"
   return {
     position: "relative",
@@ -36,7 +36,7 @@ const Container = glamorous.div(({ theme, active }: Props): {} => {
   }
 })
 
-const SideNavigationItem: React.SFC<Props> = ({ className, css, children, onClick, active }: Props) => (
+const SideNavigationItem: React.SFC<IProps> = ({ className, css, children, onClick, active }: IProps) => (
   <Container css={css} className={`${className}`} active={!!active} onClick={onClick} role="button" tabIndex={-1}>
     {children}
   </Container>

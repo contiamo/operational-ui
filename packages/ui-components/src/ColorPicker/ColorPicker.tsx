@@ -1,25 +1,28 @@
 import * as React from "react"
 import { SketchPicker, RGBColor } from "react-color"
-import glamorous from "glamorous"
+import glamorous, { CSSProperties } from "glamorous"
 
-type Props = {
+interface IProps {
+  css?: any
+  className?: string
   color?: string
   size?: number
   onChange?: (color: string) => any
 }
 
-type State = {
-  isPickerOpen: boolean
-  position: { top?: number; left?: number }
+interface IPosition {
+  top?: number
+  left?: number
 }
 
-type ColorSquareProps = {
-  color: string
-  size: number
-  theme?: Theme
+interface IState {
+  isPickerOpen: boolean
+  position: IPosition
 }
 
 const hasTheme = (theme: any): boolean => theme && Object.keys(theme).length > 0
+
+const Container = glamorous.div({})
 
 const ColorSquare = glamorous.div(
   {
@@ -27,7 +30,7 @@ const ColorSquare = glamorous.div(
     borderRadius: 2,
     cursor: "pointer"
   },
-  ({ color, size, theme }: ColorSquareProps) =>
+  ({ color, size, theme }: { color: string; size: number; theme?: Theme }) =>
     // Need to check this because the tests run without a ThemeProvider
     // Otherwise, tests could not access the state of ColorPicker.
     hasTheme(theme)
@@ -40,17 +43,11 @@ const ColorSquare = glamorous.div(
       : {}
 )
 
-type PickerContainerProps = {
-  top: number
-  left: number
-  theme?: Theme
-}
-
 const PickerContainer = glamorous.div(
   {
     position: "fixed"
   },
-  ({ top, left, theme }: PickerContainerProps) =>
+  ({ top, left, theme }: { top: number; left: number; theme?: Theme }) =>
     // Need to check this because the tests run without a ThemeProvider
     // Otherwise, tests could not access the state of ColorPicker.
     hasTheme(theme)
@@ -62,7 +59,7 @@ const PickerContainer = glamorous.div(
       : {}
 )
 
-class ColorPicker extends React.Component<Props, State> {
+class ColorPicker extends React.Component<IProps, IState> {
   static defaultProps = {
     color: "#03f",
     size: 16
@@ -127,10 +124,17 @@ class ColorPicker extends React.Component<Props, State> {
   }
 
   render() {
-    const { size, color } = this.props
+    const { size, color, css, className } = this.props
     return (
-      <div ref={containerEl => (this.containerEl = containerEl)} onClick={() => this.togglePicker()}>
-        <ColorSquare size={size} color={this.props.color} />
+      <Container
+        css={css}
+        className={className}
+        innerRef={(containerEl: any): void => {
+          this.containerEl = containerEl
+        }}
+        onClick={() => this.togglePicker()}
+      >
+        <ColorSquare size={size} color={color} />
         {this.state.isPickerOpen && (
           <PickerContainer
             top={this.state.position.top}
@@ -140,7 +144,7 @@ class ColorPicker extends React.Component<Props, State> {
             <SketchPicker color={this.props.color} onChangeComplete={color => this.onColorChange(color)} />
           </PickerContainer>
         )}
-      </div>
+      </Container>
     )
   }
 }

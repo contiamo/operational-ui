@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var style = function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, active = _a.active;
-    var opacity = 0.1, activeBackground = "rgba(0, 0, 0, " + opacity * 2 + ")";
+    var opacity = 0.1;
+    var activeBackground = "rgba(0, 0, 0, " + opacity * 2 + ")";
     return {
         display: "flex",
         alignItems: "center",
@@ -19,13 +20,6 @@ var style = function (_a) {
         ":hover": {
             backgroundColor: "rgba(0, 0, 0, " + opacity + ")"
         },
-        ":not(.active):active": {
-            transform: "scale(0.95)",
-            backgroundColor: "rgba(0, 0, 0, " + opacity * 2 + ")"
-        },
-        "&.active": {
-            backgroundColor: activeBackground
-        },
         "& + &": {
             marginLeft: theme.spacing / 2
         },
@@ -34,11 +28,10 @@ var style = function (_a) {
             marginRight: theme.spacing / 2
         }
     };
-};
+});
 var HeaderItem = function (_a) {
-    var className = _a.className, children = _a.children, onClick = _a.onClick;
-    return (React.createElement("div", { tabIndex: -1, role: "button", onClick: onClick, className: className }, children));
+    var css = _a.css, className = _a.className, children = _a.children, onClick = _a.onClick, active = _a.active;
+    return (React.createElement(Container, { tabIndex: -1, role: "button", css: css, onClick: onClick, className: className, active: !!active }, children));
 };
-exports.HeaderItem = HeaderItem;
-exports.default = glamorous_1.default(HeaderItem)(style);
+exports.default = HeaderItem;
 //# sourceMappingURL=HeaderItem.js.map

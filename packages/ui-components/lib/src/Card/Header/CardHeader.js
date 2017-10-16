@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var style = function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         margin: theme.spacing * -1,
@@ -16,10 +16,10 @@ var style = function (_a) {
             marginTop: theme.spacing
         }
     });
-};
+});
 var CardHeader = function (_a) {
-    var className = _a.className, children = _a.children, id = _a.id;
-    return (React.createElement("div", { id: id, className: className }, children));
+    var css = _a.css, className = _a.className, children = _a.children, id = _a.id;
+    return (React.createElement(Container, { id: id, css: css, className: className }, children));
 };
-exports.default = glamorous_1.default(CardHeader)(style);
+exports.default = CardHeader;
 //# sourceMappingURL=CardHeader.js.map

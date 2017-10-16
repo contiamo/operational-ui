@@ -5,10 +5,8 @@ export default (
   <div>
     <div style={{ display: "flex", marginTop: 16 }}>
       <Button color="info">Colored</Button>
-      <Button modifiers={["space"]}>Spaced</Button>
-      <Button modifiers={["space"]} disabled>
-        Disabled
-      </Button>
+      <Button>Spaced</Button>
+      <Button disabled>Disabled</Button>
     </div>
     <div style={{ display: "flex", marginTop: 16 }}>
       <ButtonGroup>

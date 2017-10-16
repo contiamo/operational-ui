@@ -1,12 +1,14 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 
-type Props = {
+interface IProps {
   on: boolean
   onChange: (on: boolean) => void
+  className?: string
+  style?: any
 }
 
-type StyleProps = {
+interface IStyleProps {
   on: boolean
   theme: Theme
 }
@@ -34,7 +36,7 @@ const Button = glamorous.div(
     width: height,
     borderRadius: "50%"
   },
-  ({ on, theme }: StyleProps) => ({
+  ({ on, theme }: IStyleProps) => ({
     transform: `translate3d(${on ? width - height - 2 : 0}px, 0, 0)`,
     backgroundColor: theme.colors.palette.white,
     border: `1px solid ${theme.colors.palette.grey70}`,
@@ -53,7 +55,7 @@ const Rail = glamorous.div(
     borderRadius: railHeight / 2,
     overflow: "hidden"
   },
-  ({ on, theme }: StyleProps) => ({
+  ({ on, theme }: IStyleProps) => ({
     backgroundColor: theme.colors.palette.grey60,
     "&:after": {
       content: " ",
@@ -70,8 +72,10 @@ const Rail = glamorous.div(
   })
 )
 
-const Switch: React.SFC<Props> = ({ on, onChange }: Props) => (
+const Switch: React.SFC<IProps> = ({ className, style, on, onChange }: IProps) => (
   <Container
+    style={style}
+    className={className}
     onClick={() => {
       onChange(!on)
     }}

@@ -3,9 +3,9 @@ import { Route } from "react-router-dom"
 
 import { Header } from "contiamo-ui-components"
 
-const AppHeader = () => (
+const AppHeader: React.SFC<{}> = () => (
   <Header
-    style={{
+    css={{
       boxShadow: "0px 1px 2px #d3d1d1",
       backgroundColor: "#fff"
     }}

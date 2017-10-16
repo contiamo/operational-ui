@@ -53,7 +53,7 @@ var SidebarItem = /** @class */ (function (_super) {
     function SidebarItem(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
-            open: _this.props && _this.props.open,
+            open: !!props.open,
             updating: false
         };
         return _this;
@@ -89,13 +89,9 @@ var SidebarItem = /** @class */ (function (_super) {
           even when the cursor is over the children... who may also have their
           own tooltips.
         */
-        var HeaderWithTooltip = glamorous_1.Div;
         return (React.createElement("div", { className: this.props.className + " " + (this.state.updating ? "updating" : "") + " " + (this.state.open ? "open" : "") },
             React.createElement("div", { className: "header " + (this.state.open ? "open" : ""), onClick: function () { return _this.toggle(); } }, this.props.label),
             this.state.open ? React.createElement("div", { className: "content" }, this.props.children) : ""));
-    };
-    SidebarItem.defaultProps = {
-        open: false
     };
     return SidebarItem;
 }(React.Component));

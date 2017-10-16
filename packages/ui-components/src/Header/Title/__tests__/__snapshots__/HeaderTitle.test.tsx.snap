@@ -2,7 +2,7 @@
 
 exports[`HeaderTitle component renders 1`] = `
 <div
-  class="hi"
+  class="css-4ycv5u hi"
 >
   hi
 </div>

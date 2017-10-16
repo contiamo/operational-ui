@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var moment = require("moment");
+var moment_ = require("moment");
+var moment = typeof moment_ === "function" ? moment_ : moment_.default;
 var months = [
     "January",
     "February",

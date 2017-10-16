@@ -9,7 +9,7 @@ var HeaderTitle_1 = require("./Title/HeaderTitle");
 exports.HeaderTitle = HeaderTitle_1.default;
 var HeaderSeparator_1 = require("./Separator/HeaderSeparator");
 exports.HeaderSeparator = HeaderSeparator_1.default;
-var style = function (_a) {
+var Container = glamorous_1.default.header(function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "white";
     return {
@@ -20,11 +20,10 @@ var style = function (_a) {
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"])
     };
-};
-exports.style = style;
+});
 var Header = function (_a) {
-    var className = _a.className, style = _a.style, children = _a.children;
-    return (React.createElement("div", { style: style, className: className }, children));
+    var className = _a.className, css = _a.css, children = _a.children, color = _a.color;
+    return (React.createElement(Container, { css: css, className: className, color: color }, children));
 };
-exports.default = glamorous_1.default(Header)(style);
+exports.default = Header;
 //# sourceMappingURL=Header.js.map

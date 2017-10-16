@@ -3,7 +3,8 @@ import glamorous from "glamorous"
 
 import CardHeader from "./Header/CardHeader"
 
-type Props = {
+interface IProps {
+  css?: any
   className?: string
   children: React.ReactNode
   theme?: Theme
@@ -11,7 +12,7 @@ type Props = {
   padding?: number
 }
 
-const style = ({ theme, width, padding }: Props) => ({
+const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; width?: number; padding?: number }) => ({
   width,
   padding: padding || theme.spacing,
   boxShadow: theme.shadows.card,
@@ -23,13 +24,14 @@ const style = ({ theme, width, padding }: Props) => ({
   },
   "& > img": {
     maxWidth: "100%"
-  },
-  "& .CardHeader:not(:first-child)": {
-    borderBottomStyle: "dashed"
   }
-})
+}))
 
-const Card: React.SFC<Props> = ({ className, children }: Props) => <div className={className}>{children}</div>
+const Card: React.SFC<IProps> = ({ css, className, children, width, padding }) => (
+  <Container css={css} width={width} padding={padding} className={className}>
+    {children}
+  </Container>
+)
 
-export default glamorous(Card)(style)
+export default Card
 export { CardHeader }

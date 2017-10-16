@@ -24,11 +24,8 @@ var Container = glamorous_1.default.div(function (_a) {
     };
 });
 var SelectOption = function (_a) {
-    var className = _a.className, selected = _a.selected, color = _a.color, onClick = _a.onClick, children = _a.children;
-    return (React.createElement(Container, { className: className, selected: selected, color: color, tabIndex: -2, role: "option", "aria-selected": selected, onClick: onClick }, children));
-};
-SelectOption.defaultProps = {
-    selected: false
+    var css = _a.css, className = _a.className, selected = _a.selected, color = _a.color, onClick = _a.onClick, children = _a.children;
+    return (React.createElement(Container, { css: css, className: className, selected: !!selected, color: color, tabIndex: -2, role: "option", "aria-selected": selected, onClick: onClick }, children));
 };
 exports.default = SelectOption;
 //# sourceMappingURL=SelectOption.js.map

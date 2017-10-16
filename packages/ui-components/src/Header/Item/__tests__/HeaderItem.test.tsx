@@ -1,7 +1,10 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import { HeaderItem } from "../HeaderItem"
+import ThemelessHeaderItem from "../HeaderItem"
+import wrapDefaultTheme from "../../../../utils/wrap-default-theme"
+
+const HeaderItem = wrapDefaultTheme(ThemelessHeaderItem)
 
 describe("HeaderItem", () => {
   it("Renders", () => {

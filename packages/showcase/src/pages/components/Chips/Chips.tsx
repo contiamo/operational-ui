@@ -19,8 +19,8 @@ export default () => (
     </p>
 
     <div style={{ display: "flex" }}>
-      <Chip style={{ marginBottom: 16 }}>Chip 1</Chip>
-      <Chip style={{ marginBottom: 16 }}>Chip 2</Chip>
+      <Chip css={{ marginBottom: 16 }}>Chip 1</Chip>
+      <Chip css={{ marginBottom: 16 }}>Chip 2</Chip>
     </div>
 
     <h4>Usage</h4>

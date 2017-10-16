@@ -4,8 +4,9 @@ import glamorous from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-type Props = {
-  className: string
+interface IProps {
+  css?: any
+  className?: string
   children: Node
   onClick?: any
   theme?: Theme
@@ -48,7 +49,7 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
   }
 }
 
-const SideNavigationLink: React.SFC<Props> = ({ className, children, onClick }: Props) => (
+const SideNavigationLink: React.SFC<IProps> = ({ className, children, onClick }: IProps) => (
   <div className={className} onClick={onClick} role="button" tabIndex={-1}>
     {children}
   </div>

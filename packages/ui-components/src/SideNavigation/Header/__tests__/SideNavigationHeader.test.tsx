@@ -1,9 +1,11 @@
 import * as React from "react"
-import { shallow } from "enzyme"
+import { render } from "enzyme"
 
-import { SideNavigationHeader } from "../SideNavigationHeader"
+import ThemelessSideNavigationHeader from "../SideNavigationHeader"
+import wrapDefaultTheme from "../../../../utils/wrap-default-theme"
+
+const SideNavigationHeader = wrapDefaultTheme(ThemelessSideNavigationHeader)
 
 describe("SideNavigationHeader", () => {
-  it("Should render correctly", () =>
-    expect(shallow(<SideNavigationHeader>hi</SideNavigationHeader>)).toMatchSnapshot())
+  it("Should render correctly", () => expect(render(<SideNavigationHeader>hi</SideNavigationHeader>)).toMatchSnapshot())
 })

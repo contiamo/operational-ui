@@ -46,10 +46,10 @@ var Action = glamorous_1.default.div(function (_a) {
     };
 });
 var Chip = function (_a) {
-    var className = _a.className, style = _a.style, children = _a.children, onClick = _a.onClick, color = _a.color, symbol = _a.symbol;
-    return (React.createElement(Container, { className: (className || "") + " co_chip", style: style, color: color, hasChip: !!onClick },
+    var className = _a.className, css = _a.css, children = _a.children, onClick = _a.onClick, color = _a.color, symbol = _a.symbol;
+    return (React.createElement(Container, { className: (className || "") + " co_chip", css: css, color: color, hasChip: !!onClick },
         children,
-        onClick && (React.createElement(Action, { className: "co_action", color: color, onClick: onClick }, symbol || "×"))));
+        onClick && (React.createElement(Action, { color: color, onClick: onClick }, symbol || "×"))));
 };
 exports.default = Chip;
 //# sourceMappingURL=Chip.js.map

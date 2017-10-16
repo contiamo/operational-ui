@@ -56,10 +56,69 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
+var Container = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, hasOptions = _a.hasOptions;
+    return ({
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        borderBottom: "1px solid rgba(255, 255, 255, .1)",
+        padding: theme.spacing * 3 / 4 + "px 0",
+        cursor: hasOptions ? "pointer" : "default",
+        backgroundColor: "inherit",
+        // Caret
+        "&::after": {
+            content: hasOptions ? '""' : "none",
+            position: "absolute",
+            top: "50%",
+            right: theme.spacing,
+            width: 0,
+            height: 0,
+            opacity: 0,
+            transform: "translateY(-50%)",
+            animation: contiamo_ui_utils_1.fadeIn + " .3s .3s ease forwards",
+            border: "4px solid transparent",
+            borderTopColor: "white"
+        }
+    });
+});
+var Options = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        position: "absolute",
+        top: "100%",
+        left: 0,
+        zIndex: theme.baseZIndex + 100,
+        width: "100%",
+        minWidth: "fit-content",
+        boxShadow: "0 6px 18px -3px rgba(0, 0, 0, .5)",
+        backgroundColor: "inherit"
+    });
+});
+var Option = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        padding: theme.spacing,
+        minWidth: "fit-content",
+        whiteSpace: "pre",
+        cursor: "pointer",
+        "&:hover": {
+            backgroundColor: "rgba(255, 255, 255, 0.07)"
+        }
+    });
+});
+var Value = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        width: "fit-content",
+        whiteSpace: "pre"
+    });
+});
 var SideNavigationHeader = /** @class */ (function (_super) {
     __extends(SideNavigationHeader, _super);
-    function SideNavigationHeader(props) {
-        var _this = _super.call(this, props) || this;
+    function SideNavigationHeader() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
             open: false,
             value: { id: -1, label: "" }
@@ -98,13 +157,13 @@ var SideNavigationHeader = /** @class */ (function (_super) {
     };
     SideNavigationHeader.prototype.getDropdown = function () {
         var _this = this;
-        return (React.createElement("div", { className: "SideNavigationHeader__options" }, this.props.options.map(function (option) { return (React.createElement("div", { key: option.id, className: "SideNavigationHeader__option", onClick: function () { return _this.onChange(option); }, tabIndex: option.id * -1, "aria-selected": _this.state.value === option, role: "option" }, option.label)); })));
+        return (React.createElement(Options, null, this.props.options.map(function (option) { return (React.createElement(Option, { key: option.id, onClick: function () { return _this.onChange(option); }, tabIndex: option.id * -1, "aria-selected": _this.state.value === option, role: "option" }, option.label)); })));
     };
     SideNavigationHeader.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { className: this.props.className + " SideNavigationHeader", onClick: function () { return _this.toggle(); }, tabIndex: -1, role: "listbox" },
+        return (React.createElement(Container, { css: this.props.css, className: this.props.className, hasOptions: this.props.options && this.props.options.length > 0, onClick: function () { return _this.toggle(); }, tabIndex: -1, role: "listbox" },
             this.props.children,
-            this.state.value && React.createElement("div", { className: "SideNavigationHeader__value" }, this.state.value.label),
+            this.state.value && React.createElement(Value, null, this.state.value.label),
             this.props.options.length > 0 && this.state.open && this.getDropdown()));
     };
     SideNavigationHeader.defaultProps = {
@@ -112,56 +171,5 @@ var SideNavigationHeader = /** @class */ (function (_super) {
     };
     return SideNavigationHeader;
 }(React.Component));
-exports.SideNavigationHeader = SideNavigationHeader;
-var style = function (_a) {
-    var theme = _a.theme, options = _a.options;
-    return {
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        borderBottom: "1px solid rgba(255, 255, 255, .1)",
-        padding: theme.spacing * 3 / 4 + "px 0",
-        cursor: options && options.length ? "pointer" : "default",
-        backgroundColor: "inherit",
-        // Caret
-        "&::after": {
-            content: options && options.length ? '""' : "none",
-            position: "absolute",
-            top: "50%",
-            right: theme.spacing,
-            width: 0,
-            height: 0,
-            opacity: 0,
-            transform: "translateY(-50%)",
-            animation: contiamo_ui_utils_1.fadeIn + " .3s .3s ease forwards",
-            border: "4px solid transparent",
-            borderTopColor: "white"
-        },
-        "& .SideNavigationHeader__value": {
-            width: "fit-content",
-            whiteSpace: "pre"
-        },
-        "& .SideNavigationHeader__options": {
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            zIndex: theme.baseZIndex + 100,
-            width: "100%",
-            minWidth: "fit-content",
-            boxShadow: "0 6px 18px -3px rgba(0, 0, 0, .5)",
-            backgroundColor: "inherit"
-        },
-        "& .SideNavigationHeader__option": {
-            padding: theme.spacing,
-            minWidth: "fit-content",
-            whiteSpace: "pre",
-            cursor: "pointer"
-        },
-        "& .SideNavigationHeader__option:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.07)"
-        }
-    };
-};
-exports.default = glamorous_1.default(SideNavigationHeader)(style);
+exports.default = SideNavigationHeader;
 //# sourceMappingURL=SideNavigationHeader.js.map

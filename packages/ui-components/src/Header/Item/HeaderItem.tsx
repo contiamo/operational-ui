@@ -2,17 +2,17 @@ import * as React from "react"
 
 import glamorous from "glamorous"
 
-type Props = {
+interface IProps {
+  css?: any
   className?: string
   children: Node
   onClick?: any
-  theme: Theme
   active?: boolean
 }
 
-const style: {} = ({ theme, active }: Props) => {
-  const opacity = 0.1,
-    activeBackground = `rgba(0, 0, 0, ${opacity * 2})`
+const Container = glamorous.div(({ theme, active }: { theme: Theme; active: boolean }): any => {
+  const opacity = 0.1
+  const activeBackground = `rgba(0, 0, 0, ${opacity * 2})`
 
   return {
     display: "flex",
@@ -30,15 +30,6 @@ const style: {} = ({ theme, active }: Props) => {
       backgroundColor: `rgba(0, 0, 0, ${opacity})`
     },
 
-    ":not(.active):active": {
-      transform: "scale(0.95)",
-      backgroundColor: `rgba(0, 0, 0, ${opacity * 2})`
-    },
-
-    "&.active": {
-      backgroundColor: activeBackground
-    },
-
     "& + &": {
       marginLeft: theme.spacing / 2
     },
@@ -48,13 +39,12 @@ const style: {} = ({ theme, active }: Props) => {
       marginRight: theme.spacing / 2
     }
   }
-}
+})
 
-const HeaderItem: React.SFC<Props> = ({ className, children, onClick }) => (
-  <div tabIndex={-1} role="button" onClick={onClick} className={className}>
+const HeaderItem: React.SFC<IProps> = ({ css, className, children, onClick, active }: IProps) => (
+  <Container tabIndex={-1} role="button" css={css} onClick={onClick} className={className} active={!!active}>
     {children}
-  </div>
+  </Container>
 )
 
-export default glamorous(HeaderItem)(style)
-export { HeaderItem }
+export default HeaderItem

@@ -15,7 +15,7 @@ interface IProps {
   onSuccess?: (response: {}, file: File) => void
 }
 
-type RequestOptions = {
+interface IRequestOptions {
   action: string
   data: {}
   file: File
@@ -32,7 +32,7 @@ const checkStatus = (response: Response) => {
   }
 }
 
-const request = async ({ action, data, file, headers, name }: RequestOptions) => {
+const request = async ({ action, data, file, headers, name }: IRequestOptions) => {
   const formData = (Object as any)
     .entries(data)
     .reduce((accFormData: FormData, [key, value]: [string, any], i: number) => {

@@ -15,24 +15,6 @@ import VisualizationsPage from "./pages/visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
-  flexDirection: "column",
-  width: "100vw",
-  backgroundColor: contiamoTheme.colors.usage.bodyBackground,
-  height: "100vh",
-  paddingLeft: 60,
-  "& > *": {
-    width: "100%"
-  },
-  "& > :nth-child(2)": {
-    display: "flex",
-    alignItems: "flex-start",
-    padding: 16,
-    height: "100vh"
-  }
-})
-
-const styles: {} = {
-  display: "flex",
   fontFamily: "'Proxima Nova', sans-serif",
   "& hr": {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
@@ -51,22 +33,40 @@ const styles: {} = {
     margin: 0,
     marginBottom: contiamoTheme.spacing
   }
-}
+})
 
-const SideNavigationWithRouter = withRouter(SideNavigation)
+const Content = glamorous.div({
+  display: "flex",
+  flexDirection: "column",
+  width: "100vw",
+  backgroundColor: contiamoTheme.colors.usage.bodyBackground,
+  height: "100vh",
+  paddingLeft: 60,
+  "& > *": {
+    width: "100%"
+  },
+  "& > :nth-child(2)": {
+    display: "flex",
+    alignItems: "flex-start",
+    padding: 16,
+    height: "100vh"
+  }
+})
 
-const App = () => (
+const SideNavigationWithRouter: React.SFC<{}> = withRouter(SideNavigation as any)
+
+const App: React.SFC<{}> = () => (
   <Router>
     <ThemeProvider theme={contiamoTheme}>
-      <div>
+      <Container>
         <SideNavigationWithRouter />
-        <Container>
+        <Content>
           <Header />
           <Route exact path="/" component={IntroPage} />
           <Route path="/components" component={ComponentsPage} />
           <Route path="/visualizations" component={VisualizationsPage} />
-        </Container>
-      </div>
+        </Content>
+      </Container>
     </ThemeProvider>
   </Router>
 )
@@ -85,4 +85,4 @@ x.global({
   fontSize: 13
 })
 
-export default glamorous(App)(styles)
+export default App

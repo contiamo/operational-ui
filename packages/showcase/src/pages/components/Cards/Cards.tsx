@@ -11,15 +11,15 @@ export default () => (
     <CardHeader>Cards</CardHeader>
     <p>These elements make up the UI. They accept any type of children and elegantly wrap them.</p>
 
-    <Card css={{ marginBottom: 16 }} width={400} padding={16}>
+    <Card width={400} padding={16}>
       Hello, I am a card. And I can contain <em>many</em> different kinds of content.
     </Card>
 
     <div style={{ display: "flex" }}>
-      <Card css={{ marginBottom: 16 }} width={320} padding={16}>
+      <Card width={320} padding={16}>
         Hello, we are cards.<br />
       </Card>
-      <Card css={{ marginLeft: 16, marginBottom: 16 }} width={320} padding={16}>
+      <Card width={320} padding={16}>
         Indeed, we are.<br />
         Indeed, we can.<br />
         <br />
@@ -30,7 +30,7 @@ export default () => (
       </Card>
     </div>
 
-    <Card css={{ marginBottom: 32 }}>
+    <Card>
       Hello, I am a <em>also</em> card.
     </Card>
 

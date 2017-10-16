@@ -3,7 +3,8 @@ import glamorous from "glamorous"
 
 import TimelineItem from "./Item/TimelineItem"
 
-type Props = {
+interface IProps {
+  style?: any
   className?: string
   children: any
 }
@@ -14,8 +15,10 @@ const Container = glamorous.ul({
   margin: "0"
 })
 
-const Timeline: React.SFC<Props> = ({ className, children }: Props) => (
-  <Container className={className}>{children}</Container>
+const Timeline: React.SFC<IProps> = ({ style, className, children }: IProps) => (
+  <Container style={style} className={className}>
+    {children}
+  </Container>
 )
 
 export default Timeline

@@ -5,7 +5,7 @@ import { hexOrColor } from "contiamo-ui-utils"
 
 type CustomColor = ThemeColorName | string
 
-type Props = {
+interface IProps {
   children: any
   color?: CustomColor
   icon?: string
@@ -86,7 +86,7 @@ const Container = glamorous.li({
   }
 })
 
-const TimelineItem: React.SFC<Props> = ({ children, color = "info", icon = "", theme }: Props) => {
+const TimelineItem: React.SFC<IProps> = ({ children, color = "info", icon = "", theme }: IProps) => {
   const IconLib = ReactFeather as any
   const isValidIcon = IconLib.hasOwnProperty(icon)
   const Icon = IconLib[icon]

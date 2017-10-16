@@ -84,6 +84,6 @@ exports[`SideNavigation component renders 1`] = `
     }
   }
 >
-  <glamorous(SideNavigation) />
+  <SideNavigation />
 </ThemeProvider>
 `;

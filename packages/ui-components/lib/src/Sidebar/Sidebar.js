@@ -6,7 +6,7 @@ var SidebarItem_1 = require("./Item/SidebarItem");
 exports.SidebarItem = SidebarItem_1.default;
 var SidebarLink_1 = require("./Link/SidebarLink");
 exports.SidebarLink = SidebarLink_1.default;
-var style = function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         width: "100%",
@@ -19,11 +19,11 @@ var style = function (_a) {
         backgroundColor: theme.colors.usage.cardBackground,
         color: theme.colors.palette.grey80
     });
-};
+});
 var Sidebar = function (_a) {
-    var className = _a.className, children = _a.children;
-    return React.createElement("div", { className: className }, children);
+    var css = _a.css, className = _a.className, children = _a.children;
+    return (React.createElement(Container, { css: css, className: className }, children));
 };
 exports.Sidebar = Sidebar;
-exports.default = glamorous_1.default(Sidebar)(style);
+exports.default = Sidebar;
 //# sourceMappingURL=Sidebar.js.map
