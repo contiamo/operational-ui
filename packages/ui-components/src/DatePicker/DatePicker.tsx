@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import Card from "../Card/Card"
 import Icon from "../Icon/Icon"
-import { Container, Toggle, Nav, IconContainer, Days, Day, Input } from "./DatePicker.styles"
+import { Container, ClearButton, Toggle, MonthNav, IconContainer, Days, Day, Input } from "./DatePicker.styles"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 
@@ -91,12 +91,26 @@ class DatePicker extends React.Component<IProps, IState> {
         >
           <Icon name={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} size={12} />
         </Toggle>
+        {!!(start && end) && (
+          <ClearButton
+            onClick={ev => {
+              this.props.onChange &&
+                this.props.onChange({
+                  start: null,
+                  end: null
+                })
+            }}
+          >
+            <Icon name="X" size={12} />
+          </ClearButton>
+        )}
         <Input
+          readOnly
           innerRef={node => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
-          placeholder={this.props.placeholder}
+          placeholder={this.props.placeholder || "Enter date"}
           onFocus={() => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
@@ -105,13 +119,13 @@ class DatePicker extends React.Component<IProps, IState> {
           }}
         />
         <Card className="co_card">
-          <Nav>
+          <MonthNav>
             <IconContainer
               onClick={() => {
                 this.changeMonth(-1)
               }}
             >
-              <Icon name="ChevronLeft" size={12} />
+              <Icon name="ChevronLeft" size={14} />
             </IconContainer>
             <span>{`${months[this.state.month]}, ${this.state.year}`}</span>
             <IconContainer
@@ -119,9 +133,10 @@ class DatePicker extends React.Component<IProps, IState> {
                 this.changeMonth(+1)
               }}
             >
-              <Icon name="ChevronRight" size={12} />
+              <Icon name="ChevronRight" size={14} />
             </IconContainer>
-          </Nav>
+          </MonthNav>
+
           <Month
             start={this.props.start}
             end={this.props.end}

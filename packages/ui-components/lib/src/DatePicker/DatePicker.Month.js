@@ -26,9 +26,7 @@ var Month = function (_a) {
     var prevYear = month === 0 ? year - 1 : year;
     var daysInCurrentMonth = DatePicker_utils_1.daysInMonth(month, year);
     var daysInPreviousMonth = DatePicker_utils_1.daysInMonth(prevMonth, prevYear);
-    var nextPlaceholderDays = (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0
-        ? daysInCurrentMonth + prevPlaceholderDays
-        : 7 - (daysInCurrentMonth + prevPlaceholderDays) % 7;
+    var nextPlaceholderDays = (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0 ? 0 : 7 - (daysInCurrentMonth + prevPlaceholderDays) % 7;
     return (React.createElement(DatePicker_styles_1.Days, null,
         DatePicker_utils_1.range(prevPlaceholderDays).map(function (number, index) {
             var day = daysInPreviousMonth + index - prevPlaceholderDays;

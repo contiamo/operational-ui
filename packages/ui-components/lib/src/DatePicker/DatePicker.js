@@ -78,25 +78,33 @@ var DatePicker = /** @class */ (function (_super) {
                     }); });
                 } },
                 React.createElement(Icon_1.default, { name: this.state.isExpanded ? "ChevronUp" : "ChevronDown", size: 12 })),
-            React.createElement(DatePicker_styles_1.Input, { innerRef: function (node) {
+            !!(start && end) && (React.createElement(DatePicker_styles_1.ClearButton, { onClick: function (ev) {
+                    _this.props.onChange &&
+                        _this.props.onChange({
+                            start: null,
+                            end: null
+                        });
+                } },
+                React.createElement(Icon_1.default, { name: "X", size: 12 }))),
+            React.createElement(DatePicker_styles_1.Input, { readOnly: true, innerRef: function (node) {
                     _this.inputNode = node;
-                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder, onFocus: function () {
+                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function () {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded
                     }); });
                     _this.inputNode && _this.inputNode.blur();
                 } }),
             React.createElement(Card_1.default, { className: "co_card" },
-                React.createElement(DatePicker_styles_1.Nav, null,
+                React.createElement(DatePicker_styles_1.MonthNav, null,
                     React.createElement(DatePicker_styles_1.IconContainer, { onClick: function () {
                             _this.changeMonth(-1);
                         } },
-                        React.createElement(Icon_1.default, { name: "ChevronLeft", size: 12 })),
+                        React.createElement(Icon_1.default, { name: "ChevronLeft", size: 14 })),
                     React.createElement("span", null, DatePicker_utils_1.months[this.state.month] + ", " + this.state.year),
                     React.createElement(DatePicker_styles_1.IconContainer, { onClick: function () {
                             _this.changeMonth(+1);
                         } },
-                        React.createElement(Icon_1.default, { name: "ChevronRight", size: 12 }))),
+                        React.createElement(Icon_1.default, { name: "ChevronRight", size: 14 }))),
                 React.createElement(DatePicker_Month_1.default, { start: this.props.start, end: this.props.end, year: this.state.year, month: this.state.month, onChange: this.props.onChange }))));
     };
     return DatePicker;

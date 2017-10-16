@@ -41,9 +41,7 @@ const Month: React.SFC<IProps> = ({ year, month, start, end, onChange }: IProps)
   const daysInCurrentMonth = daysInMonth(month, year)
   const daysInPreviousMonth = daysInMonth(prevMonth, prevYear)
   const nextPlaceholderDays =
-    (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0
-      ? daysInCurrentMonth + prevPlaceholderDays
-      : 7 - (daysInCurrentMonth + prevPlaceholderDays) % 7
+    (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0 ? 0 : 7 - (daysInCurrentMonth + prevPlaceholderDays) % 7
   return (
     <Days>
       {range(prevPlaceholderDays).map((number, index) => {

@@ -1,17 +1,31 @@
 import * as React from "react"
 import glamorous from "glamorous"
+import { css } from "glamor"
+
+const fadeIn = css.keyframes({
+  from: {
+    opacity: 0,
+    transform: "translate3d(-50%, -6px, 0)"
+  },
+  to: {
+    opacity: 1,
+    transform: "translate3d(-50%, 0, 0)"
+  }
+})
 
 export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): any => ({
   display: "inline-block",
   width: "auto",
   position: "relative",
   "& .co_card": {
+    animation: `${fadeIn} ease-in-out forwards 0.2s`,
     display: isExpanded ? "block" : "none",
     position: "absolute",
     top: 30,
     left: "50%",
     transform: "translate3d(-50%, 0, 0)",
-    width: 240
+    padding: `${theme.spacing * 4 / 3}px ${theme.spacing}px`,
+    width: 210 + 2 * theme.spacing
   }
 }))
 
@@ -27,10 +41,10 @@ export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
   justifyContent: "center",
   zIndex: theme.baseZIndex + 1,
   color: theme.colors.palette.grey80,
-  borderLeft: `1px solid ${theme.colors.palette.grey60}`
+  borderLeft: `1px solid ${theme.colors.palette.grey40}`
 }))
 
-export const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
+export const MonthNav = glamorous.div(({ theme }: { theme: Theme }): any => ({
   marginBottom: theme.spacing / 2,
   textAlign: "center",
   "& > *": {
@@ -40,24 +54,29 @@ export const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
   },
   "& > span": {
     ...theme.typography.body,
+    userSelect: "none",
     width: 100,
     textAlign: "center"
   }
 }))
 
 export const IconContainer = glamorous.div({
-  width: 16,
-  height: 16,
+  backgroundColor: "#FFFFFF",
+  padding: 4,
+  height: "auto",
+  width: "fit-content",
   cursor: "pointer"
 })
 
 export const Days = glamorous.div({
+  textAlign: "center",
   width: 210,
-  margin: "auto"
+  margin: "auto -1px"
 })
 
 export const Day = glamorous.div(
   {
+    userSelect: "none",
     width: 30,
     height: 30,
     marginRight: -1,
@@ -71,16 +90,37 @@ export const Day = glamorous.div(
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): any => ({
     ...theme.typography.body,
     backgroundColor: selected ? theme.colors.palette.success : "transparent",
-    color: selected ? "#FFF" : "#000",
-    opacity: isPlaceholder ? 0.6 : 1.0
+    color: selected ? "#FFF" : isPlaceholder ? theme.colors.palette.grey80 : theme.colors.palette.black
   })
 )
 
 export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
+  userSelect: "none",
   padding: theme.spacing / 2,
   height: 24,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
-  width: 160,
+  width: 150,
   position: "relative"
+}))
+
+export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  width: 24,
+  height: 24,
+  cursor: "pointer",
+  position: "absolute",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  top: 0,
+  right: -23,
+  opacity: 0.3,
+  textAlign: "center",
+  zIndex: theme.baseZIndex + 100,
+  "&:hover": {
+    opacity: 1,
+    "& svg": {
+      stroke: theme.colors.palette.warning
+    }
+  }
 }))
