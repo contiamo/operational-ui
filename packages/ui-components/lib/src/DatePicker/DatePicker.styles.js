@@ -33,8 +33,9 @@ exports.Container = glamorous_1.default.div(function (_a) {
             top: 30,
             left: "50%",
             transform: "translate3d(-50%, 0, 0)",
-            padding: theme.spacing * 4 / 3 + "px " + theme.spacing + "px",
-            width: 210 + 2 * theme.spacing
+            padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
+            width: 210 + 2 * theme.spacing,
+            zIndex: theme.baseZIndex + 1000
         }
     });
 });
@@ -103,7 +104,7 @@ exports.Input = glamorous_1.default.input(function (_a) {
         height: 24,
         border: "1px solid",
         borderColor: theme.colors.palette.grey30,
-        width: 150,
+        width: 180,
         position: "relative"
     });
 });
