@@ -24,6 +24,7 @@ import SideNavigation, {
   SideNavigationItem,
   SideNavigationLink
 } from "./src/SideNavigation/SideNavigation"
+import Spinner from "./src/Spinner/Spinner"
 import Switch from "./src/Switch/Switch"
 import Tabs, { Tab } from "./src/Tabs/Tabs"
 import Tooltip from "./src/Tooltip/Tooltip"
@@ -60,6 +61,7 @@ export {
   Sidebar,
   SidebarItem,
   SidebarLink,
+  Spinner,
   Switch,
   Tabs,
   Tab,

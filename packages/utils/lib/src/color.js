@@ -41,4 +41,17 @@ var darken = function (color) { return function (percentage) {
         .toString();
 }; };
 exports.darken = darken;
+var lighten = function (color) { return function (percentage) {
+    return colorCalculator(color)
+        .lighten(percentage)
+        .toString();
+}; };
+exports.lighten = lighten;
+var transparentize = function (color) { return function (percentage) {
+    return (function (_a) {
+        var r = _a.r, g = _a.g, b = _a.b;
+        return "rgba(" + r + ", " + g + ", " + b + ", " + 255 * (100 - percentage) / 100 + ")";
+    })(colorCalculator(color).toRgb());
+}; };
+exports.transparentize = transparentize;
 //# sourceMappingURL=color.js.map
