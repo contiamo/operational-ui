@@ -17,27 +17,15 @@ exports.SideNavigationItem = SideNavigationItem_1.default;
 var SideNavigationLink_1 = require("./Link/SideNavigationLink");
 exports.SideNavigationLink = SideNavigationLink_1.default;
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
-var style = function (_a) {
-    var theme = _a.theme, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, 
-    // for some reason, glamorous doesn't get the defaultProps...
-    _b = _a.expandedWidth, 
-    // for some reason, glamorous doesn't get the defaultProps...
-    expandedWidth = _b === void 0 ? 240 : _b, _c = _a.width, width = _c === void 0 ? 60 : _c;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80, hoverWidth = expandOnHover
+var Container = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80;
+    var hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
             willChange: "width",
             "&:hover": {
                 width: expandedWidth
-            },
-            "& .Tooltip": {
-                display: "none"
-            },
-            "&:not(:hover) .SideNavigationHeader::after": {
-                content: "none"
-            },
-            "&:not(:hover) .SideNavigationHeader__options": {
-                display: "none"
             }
         }
         : {};
@@ -46,10 +34,10 @@ var style = function (_a) {
             outline: 0,
             backgroundColor: "rgba(255, 255, 255, 0.1)"
         } });
-};
+});
 var SideNavigation = function (_a) {
-    var className = _a.className, children = _a.children;
-    return (React.createElement("div", { className: className }, children));
+    var css = _a.css, className = _a.className, children = _a.children, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
+    return (React.createElement(Container, { css: css, className: className, color: color, fix: fix, expandOnHover: expandOnHover, expandedWidth: expandedWidth || 240, width: width || 60 }, children));
 };
-exports.default = glamorous_1.default(SideNavigation)(style);
+exports.default = SideNavigation;
 //# sourceMappingURL=SideNavigation.js.map

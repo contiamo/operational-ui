@@ -5,10 +5,10 @@ exports[`App starts 1`] = `
   class="css-1ekk8l2"
 >
   <div
-    class="css-186klkv"
+    class="css-guolr8"
   >
     <div
-      class="css-2sxhxf SideNavigationHeader"
+      class="css-ihgfbr"
       role="listbox"
       tabindex="-1"
     >
@@ -24,7 +24,7 @@ exports[`App starts 1`] = `
         Contiamo
       </a>
       <div
-        class="SideNavigationHeader__value"
+        class="css-1poypx5"
       />
     </div>
     <div
