@@ -2,7 +2,6 @@ import * as React from "react"
 import glamorous from "glamorous"
 import Card from "../Card/Card"
 import Icon from "../Icon/Icon"
-import Input from "../Input/Input"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./utils"
 
 interface IProps {
@@ -20,7 +19,7 @@ interface IState {
   month: number
 }
 
-const Container = glamorous.div(({ isExpanded }: { isExpanded: boolean }): any => ({
+const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): any => ({
   display: "inline-block",
   width: "auto",
   position: "relative",
@@ -31,10 +30,22 @@ const Container = glamorous.div(({ isExpanded }: { isExpanded: boolean }): any =
     left: "50%",
     transform: "translate3d(-50%, 0, 0)",
     width: 240
-  },
-  "& input": {
-    width: 200
   }
+}))
+
+const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  position: "absolute",
+  top: 0,
+  right: 0,
+  width: 24,
+  height: 24,
+  fontSize: 10,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: theme.baseZIndex + 1,
+  color: theme.colors.palette.grey80,
+  borderLeft: `1px solid ${theme.colors.palette.grey60}`
 }))
 
 const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
@@ -46,6 +57,7 @@ const Nav = glamorous.div(({ theme }: { theme: Theme }): any => ({
     display: "inline-block"
   },
   "& > span": {
+    ...theme.typography.body,
     width: 100,
     textAlign: "center"
   }
@@ -75,12 +87,22 @@ const Day = glamorous.div(
     border: "1px solid #efefef"
   },
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): any => ({
+    ...theme.typography.body,
     backgroundColor: selected ? theme.colors.palette.success : "transparent",
     color: selected ? "#FFF" : "#000",
     visibility: isPlaceholder ? "hidden" : "visible",
     content: isPlaceholder ? "' '" : ""
   })
 )
+
+const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
+  padding: theme.spacing / 2,
+  height: 24,
+  border: "1px solid",
+  borderColor: theme.colors.palette.grey30,
+  width: 160,
+  position: "relative"
+}))
 
 class DatePicker extends React.Component<IProps, IState> {
   state = {
@@ -143,16 +165,26 @@ class DatePicker extends React.Component<IProps, IState> {
           ev.stopPropagation()
         }}
       >
+        <Toggle
+          onClick={() => {
+            this.setState(prevState => ({
+              isExpanded: !prevState.isExpanded
+            }))
+          }}
+        >
+          <Icon name={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} size={12} />
+        </Toggle>
         <Input
-          inputRef={node => {
+          innerRef={node => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={this.props.placeholder}
           onFocus={() => {
             this.setState(prevState => ({
-              isExpanded: true
+              isExpanded: !prevState.isExpanded
             }))
+            this.inputNode && this.inputNode.blur()
           }}
         />
         <Card className="co_card">
@@ -162,7 +194,7 @@ class DatePicker extends React.Component<IProps, IState> {
                 this.changeMonth(-1)
               }}
             >
-              <Icon name="ChevronLeft" size={16} />
+              <Icon name="ChevronLeft" size={12} />
             </IconContainer>
             <span>{`${months[this.state.month]}, ${this.state.year}`}</span>
             <IconContainer
@@ -170,7 +202,7 @@ class DatePicker extends React.Component<IProps, IState> {
                 this.changeMonth(+1)
               }}
             >
-              <Icon name="ChevronRight" size={16} />
+              <Icon name="ChevronRight" size={12} />
             </IconContainer>
           </Nav>
           <Days>

@@ -22,10 +22,9 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var Card_1 = require("../Card/Card");
 var Icon_1 = require("../Icon/Icon");
-var Input_1 = require("../Input/Input");
 var utils_1 = require("./utils");
 var Container = glamorous_1.default.div(function (_a) {
-    var isExpanded = _a.isExpanded;
+    var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
         display: "inline-block",
         width: "auto",
@@ -37,10 +36,24 @@ var Container = glamorous_1.default.div(function (_a) {
             left: "50%",
             transform: "translate3d(-50%, 0, 0)",
             width: 240
-        },
-        "& input": {
-            width: 200
         }
+    });
+});
+var Toggle = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        position: "absolute",
+        top: 0,
+        right: 0,
+        width: 24,
+        height: 24,
+        fontSize: 10,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: theme.baseZIndex + 1,
+        color: theme.colors.palette.grey80,
+        borderLeft: "1px solid " + theme.colors.palette.grey60
     });
 });
 var Nav = glamorous_1.default.div(function (_a) {
@@ -53,10 +66,7 @@ var Nav = glamorous_1.default.div(function (_a) {
             verticalAlign: "middle",
             display: "inline-block"
         },
-        "& > span": {
-            width: 100,
-            textAlign: "center"
-        }
+        "& > span": __assign({}, theme.typography.body, { width: 100, textAlign: "center" })
     });
 });
 var IconContainer = glamorous_1.default.div({
@@ -80,11 +90,17 @@ var Day = glamorous_1.default.div({
     border: "1px solid #efefef"
 }, function (_a) {
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
+    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.palette.success : "transparent", color: selected ? "#FFF" : "#000", visibility: isPlaceholder ? "hidden" : "visible", content: isPlaceholder ? "' '" : "" }));
+});
+var Input = glamorous_1.default.input(function (_a) {
+    var theme = _a.theme;
     return ({
-        backgroundColor: selected ? theme.colors.palette.success : "transparent",
-        color: selected ? "#FFF" : "#000",
-        visibility: isPlaceholder ? "hidden" : "visible",
-        content: isPlaceholder ? "' '" : ""
+        padding: theme.spacing / 2,
+        height: 24,
+        border: "1px solid",
+        borderColor: theme.colors.palette.grey30,
+        width: 160,
+        position: "relative"
     });
 });
 var DatePicker = /** @class */ (function (_super) {
@@ -135,24 +151,31 @@ var DatePicker = /** @class */ (function (_super) {
         return (React.createElement(Container, { css: this.props.css, isExpanded: this.state.isExpanded, onClick: function (ev) {
                 ev.stopPropagation();
             } },
-            React.createElement(Input_1.default, { inputRef: function (node) {
+            React.createElement(Toggle, { onClick: function () {
+                    _this.setState(function (prevState) { return ({
+                        isExpanded: !prevState.isExpanded
+                    }); });
+                } },
+                React.createElement(Icon_1.default, { name: this.state.isExpanded ? "ChevronUp" : "ChevronDown", size: 12 })),
+            React.createElement(Input, { innerRef: function (node) {
                     _this.inputNode = node;
                 }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder, onFocus: function () {
                     _this.setState(function (prevState) { return ({
-                        isExpanded: true
+                        isExpanded: !prevState.isExpanded
                     }); });
+                    _this.inputNode && _this.inputNode.blur();
                 } }),
             React.createElement(Card_1.default, { className: "co_card" },
                 React.createElement(Nav, null,
                     React.createElement(IconContainer, { onClick: function () {
                             _this.changeMonth(-1);
                         } },
-                        React.createElement(Icon_1.default, { name: "ChevronLeft", size: 16 })),
+                        React.createElement(Icon_1.default, { name: "ChevronLeft", size: 12 })),
                     React.createElement("span", null, utils_1.months[this.state.month] + ", " + this.state.year),
                     React.createElement(IconContainer, { onClick: function () {
                             _this.changeMonth(+1);
                         } },
-                        React.createElement(Icon_1.default, { name: "ChevronRight", size: 16 }))),
+                        React.createElement(Icon_1.default, { name: "ChevronRight", size: 12 }))),
                 React.createElement(Days, null,
                     utils_1.range(placeholderDays).map(function (number, index) {
                         return React.createElement(Day, { key: index, isPlaceholder: true });
