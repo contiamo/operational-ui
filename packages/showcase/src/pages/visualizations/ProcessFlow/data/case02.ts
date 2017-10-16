@@ -27,7 +27,9 @@ export default {
     ]
   },
   config: {
-    arrowFill: "none"
+    arrowFill: "none",
+    width: 800,
+    height: 800
   },
   accessors: {
     node: {
