@@ -170,6 +170,7 @@ declare namespace fp {
     drop: any
     dropRight: any
     every: any
+    merge: any
   }
 }
 

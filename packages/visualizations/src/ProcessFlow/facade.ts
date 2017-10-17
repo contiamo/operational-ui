@@ -3,44 +3,34 @@ import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
-import { uniqueId } from "lodash/fp"
-import { IFocusElement } from "./typings"
+import { IFocusElement, IKeyValueObject, INestedKeyValueObject } from "./typings"
 
 class ProcessFlow extends AbstractFacade {
   series: Series
   canvas: Canvas
 
-  defaultConfig(): any {
+  defaultConfig(): IKeyValueObject {
     return {
-      data: {},
-      config: {
-        duration: 1e3,
-        height: 1000,
-        highlightColor: "#0000ff",
-        labelOffset: 5,
-        labelPadding: 5,
-        linkStroke: "#aaa",
-        maxLinkWidth: 8,
-        maxNodeSize: 1500,
-        minLinkWidth: 1,
-        minNodeSize: 100,
-        nodeBorderWidth: 10,
-        showLinkFocusLabels: true,
-        showNodeFocusLabels: true,
-        uid: uniqueId(this.visualizationName()),
-        visualizationName: this.visualizationName(),
-        width: 500,
-      },
-      accessors: {
-        data: {
-          nodes: (d: any) => d.nodes,
-          journeys: (d: any) => d.journeys
-        }
-      },
-      computed: {
-        series: {},
-        canvas: {},
-      },
+      highlightColor: "#0000ff",
+      labelOffset: 5,
+      labelPadding: 5,
+      linkStroke: "#aaa",
+      maxLinkWidth: 8,
+      maxNodeSize: 1500,
+      minLinkWidth: 1,
+      minNodeSize: 100,
+      nodeBorderWidth: 10,
+      showLinkFocusLabels: true,
+      showNodeFocusLabels: true,
+    }
+  }
+
+  defaultAccessors(): INestedKeyValueObject {
+    return {
+      data: {
+        nodes: (d: any) => d.nodes,
+        journeys: (d: any) => d.journeys
+      }
     }
   }
 

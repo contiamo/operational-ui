@@ -1,7 +1,7 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
-import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
 import * as styles from "../styles/styles"
 
 abstract class AbstractCanvas {
@@ -10,10 +10,10 @@ abstract class AbstractCanvas {
   events: TEvents
   focusEl: any
   protected elements: any = {}
-  protected state: TState
+  protected state: IState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, context: any) {
+  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, context: any) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events

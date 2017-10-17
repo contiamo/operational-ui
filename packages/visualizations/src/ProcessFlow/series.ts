@@ -1,7 +1,7 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
 import { invoke } from "lodash/fp"
-import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
 
 class Series {
   data: any
@@ -11,10 +11,10 @@ class Series {
   el: TSeriesEl
   events: TEvents
   renderer: Renderer
-  state: TState
+  state: IState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, el: TSeriesEl) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events

@@ -1,10 +1,27 @@
-import { TState, TStateWriter, TEvents, TSeriesEl } from "../utils/typings"
+import {
+  IDefaultConfig,
+  IKeyValueObject,
+  INestedKeyValueObject,
+  IState,
+  TEvents,
+  TSeriesEl,
+  TStateWriter,
+} from "../utils/typings"
 import * as d3 from "d3-selection"
 // Type definitions for the Contiamo Process Flow visualization
 import Nodes from "./node"
 import Link from "./link"
 
-export { TState, TStateWriter, TEvents, TSeriesEl }
+export {
+  IDefaultConfig,
+  IKeyValueObject,
+  INestedKeyValueObject,
+  IState,
+  TEvents,
+  TSeriesEl,
+  TStateWriter,
+}
+
 export type TNode = Nodes
 export type TLink = Link
 export type TNodeSelection = d3.Selection<d3.BaseType, TNode, Element, null>
@@ -18,9 +35,7 @@ export type TScale = (size: number) => number
 
 export interface IFocusElement {
   type: "node" | "link"
-  matchers: {
-    [key: string]: string | number | boolean
-  }
+  matchers: IKeyValueObject
 }
 
 export interface IConfig {

@@ -15,7 +15,6 @@ var canvas_1 = require("./canvas");
 var series_1 = require("./series");
 var focus_1 = require("./focus");
 var event_catalog_1 = require("../utils/event_catalog");
-var fp_1 = require("lodash/fp");
 var ProcessFlow = /** @class */ (function (_super) {
     __extends(ProcessFlow, _super);
     function ProcessFlow() {
@@ -23,35 +22,25 @@ var ProcessFlow = /** @class */ (function (_super) {
     }
     ProcessFlow.prototype.defaultConfig = function () {
         return {
-            data: {},
-            config: {
-                duration: 1e3,
-                height: 1000,
-                highlightColor: "#0000ff",
-                labelOffset: 5,
-                labelPadding: 5,
-                linkStroke: "#aaa",
-                maxLinkWidth: 8,
-                maxNodeSize: 1500,
-                minLinkWidth: 1,
-                minNodeSize: 100,
-                nodeBorderWidth: 10,
-                showLinkFocusLabels: true,
-                showNodeFocusLabels: true,
-                uid: fp_1.uniqueId(this.visualizationName()),
-                visualizationName: this.visualizationName(),
-                width: 500,
-            },
-            accessors: {
-                data: {
-                    nodes: function (d) { return d.nodes; },
-                    journeys: function (d) { return d.journeys; }
-                }
-            },
-            computed: {
-                series: {},
-                canvas: {},
-            },
+            highlightColor: "#0000ff",
+            labelOffset: 5,
+            labelPadding: 5,
+            linkStroke: "#aaa",
+            maxLinkWidth: 8,
+            maxNodeSize: 1500,
+            minLinkWidth: 1,
+            minNodeSize: 100,
+            nodeBorderWidth: 10,
+            showLinkFocusLabels: true,
+            showNodeFocusLabels: true,
+        };
+    };
+    ProcessFlow.prototype.defaultAccessors = function () {
+        return {
+            data: {
+                nodes: function (d) { return d.nodes; },
+                journeys: function (d) { return d.journeys; }
+            }
         };
     };
     ProcessFlow.prototype.visualizationName = function () {

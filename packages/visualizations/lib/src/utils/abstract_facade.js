@@ -2,17 +2,55 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var state_handler_1 = require("./state_handler");
 var event_bus_1 = require("./event_bus");
+var fp_1 = require("lodash/fp");
 var AbstractChart = /** @class */ (function () {
     function AbstractChart(context) {
         this.drawn = false;
         this.dirty = false;
         this.context = context;
-        this.state = new state_handler_1.default(this.defaultConfig());
+        this.state = new state_handler_1.default(this.defaultState());
         this.events = new event_bus_1.default();
         this.insertCanvas();
         this.initializeComponents();
         this.initializeSeries();
     }
+    AbstractChart.prototype.baseDefaultState = function () {
+        return {
+            data: {},
+            config: {
+                duration: 1e3,
+                height: 1000,
+                uid: fp_1.uniqueId(this.visualizationName()),
+                visualizationName: this.visualizationName(),
+                width: 500,
+            },
+            accessors: {},
+            computed: {
+                series: {},
+                canvas: {},
+            }
+        };
+    };
+    AbstractChart.prototype.defaultState = function () {
+        return fp_1.merge(this.baseDefaultState())({
+            data: this.defaultData(),
+            config: this.defaultConfig(),
+            accessors: this.defaultAccessors(),
+            computed: this.defaultComputed(),
+        });
+    };
+    AbstractChart.prototype.defaultData = function () {
+        return {};
+    };
+    AbstractChart.prototype.defaultConfig = function () {
+        return {};
+    };
+    AbstractChart.prototype.defaultAccessors = function () {
+        return {};
+    };
+    AbstractChart.prototype.defaultComputed = function () {
+        return {};
+    };
     AbstractChart.prototype.initializeComponents = function () { };
     AbstractChart.prototype.data = function (data) {
         this.dirty = true;
@@ -30,7 +68,7 @@ var AbstractChart = /** @class */ (function () {
         this.events.on(event, handler);
     };
     AbstractChart.prototype.off = function (event, handler) {
-        this.events.off(event, handler);
+        this.events.removeListener(event, handler);
     };
     //@TODO implement
     AbstractChart.prototype.redraw = function (drawAll) { };

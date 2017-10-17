@@ -15,7 +15,7 @@ import {
   TNodeSelection,
   TScale,
   TSeriesEl,
-  TState,
+  IState,
 } from "../typings"
 import Events from "../../utils/event_catalog"
 
@@ -24,11 +24,11 @@ abstract class AbstractRenderer {
   data: TNode[] | TLink[]
   el: TSeriesEl
   events: TEvents
-  state: TState
+  state: IState
   type: string
   focusElementAccessor: string
 
-  constructor(state: TState, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, events: TEvents, el: TSeriesEl) {
     this.state = state
     this.events = events
     this.el = el

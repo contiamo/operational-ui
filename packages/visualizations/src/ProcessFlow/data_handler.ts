@@ -3,7 +3,7 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import { bind, map, forEach, find, times, extend } from "lodash/fp"
-import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, TState } from "./typings"
+import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, IState } from "./typings"
 
 class DataHandler {
   journeys: IJourney[]
@@ -11,9 +11,9 @@ class DataHandler {
   links: TLink[]
   nodeAccessors: TAccessors
   linkAccessors: TAccessors
-  state: TState
+  state: IState
 
-  constructor(state: TState) {
+  constructor(state: IState) {
     this.state = state
   }
 
