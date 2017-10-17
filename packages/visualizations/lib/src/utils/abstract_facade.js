@@ -70,29 +70,6 @@ var AbstractChart = /** @class */ (function () {
     AbstractChart.prototype.off = function (event, handler) {
         this.events.removeListener(event, handler);
     };
-    //@TODO implement
-    AbstractChart.prototype.redraw = function (drawAll) { };
-    // resize(width: number, height: number): void {
-    //   this.config({ width: width, height: height })
-    //   if (!this.drawn) {
-    //     return
-    //   }
-    //   if (this.dirty) {
-    //     this.draw()
-    //   }
-    // }
-    // // Focus
-    // // Date Axes
-    // focusDate(date: Date, periodUnit: string): void {
-    //   return
-    // }
-    // // Ordinal Axes
-    // focusElement(): void {
-    //   return
-    // }
-    // focusClear(): void {
-    //   return
-    // }
     // Close / cleanup
     AbstractChart.prototype.close = function () {
         if (this.__disposed) {

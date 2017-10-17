@@ -95,45 +95,8 @@ abstract class AbstractChart {
     this.events.removeListener(event, handler)
   }
 
-  // hasData(): boolean {
-  //   return this.state.hasData()
-  // }
-
-  // // Clear all data (does not render, need to call "#draw")
-  // clear(): void {
-  //   this.data({})
-  // }
-
   // Draw / resize
   abstract draw(args?: any): any
-
-  //@TODO implement
-  redraw(drawAll: () => void): void {}
-
-  // resize(width: number, height: number): void {
-  //   this.config({ width: width, height: height })
-  //   if (!this.drawn) {
-  //     return
-  //   }
-  //   if (this.dirty) {
-  //     this.draw()
-  //   }
-  // }
-
-  // // Focus
-  // // Date Axes
-  // focusDate(date: Date, periodUnit: string): void {
-  //   return
-  // }
-
-  // // Ordinal Axes
-  // focusElement(): void {
-  //   return
-  // }
-
-  // focusClear(): void {
-  //   return
-  // }
 
   // Close / cleanup
   close(): void {
