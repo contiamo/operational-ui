@@ -59,14 +59,9 @@ var Select = /** @class */ (function (_super) {
             filter: new RegExp(/./)
         };
         // This implements "click outside to close" behavior
-        _this.handleClick = function (e) {
-            var el = _this.container;
-            // if we're somehow not working with a DOM node (flowtype is fun!)
-            if (!(e.target instanceof Node)) {
-                return;
-            }
+        _this.handleClick = function (ev) {
             // if we're clicking on the Select itself,
-            if (el && el.contains(e.target)) {
+            if (_this.containerNode && _this.containerNode.contains(ev.target)) {
                 return;
             }
             // if we're clicking outside,
@@ -80,12 +75,12 @@ var Select = /** @class */ (function (_super) {
         return _this;
     }
     Select.prototype.componentDidMount = function () {
-        window.addEventListener("click", this.handleClick, true);
-        window.addEventListener("keyup", this.handleEsc, true);
+        document.addEventListener("click", this.handleClick, true);
+        document.addEventListener("keyup", this.handleEsc, true);
     };
     Select.prototype.componentWillUnmount = function () {
-        window.removeEventListener("click", this.handleClick, true);
-        window.removeEventListener("keyup", this.handleEsc, true);
+        document.removeEventListener("click", this.handleClick, true);
+        document.removeEventListener("keyup", this.handleEsc, true);
     };
     Select.prototype.getDisplayValue = function () {
         var _this = this;
@@ -169,7 +164,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Select_style_1.Container, { innerRef: function (container) { return (_this.container = container); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+        return (React.createElement(Select_style_1.Container, { innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
             React.createElement("div", null, this.getDisplayValue() || this.props.placeholder),
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
