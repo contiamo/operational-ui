@@ -2,19 +2,31 @@ import * as React from "react"
 import { render } from "react-dom"
 import { ThemeProvider } from "glamorous"
 
-import { DatePicker, contiamoTheme } from "../../index"
+import { Select, contiamoTheme } from "../../index"
+
+const options = [
+  {
+    label: 'Label1',
+    value: 'value1'
+  },
+  {
+    label: 'Label2',
+    value: 'value2'
+  }
+]
 
 class Site extends React.Component<{}, {}> {
   state = {
-    start: '2017-10-03',
-    end: '2017-10-13'
+    value: ['value1']
   }
 
   render() {
     return (
       <ThemeProvider theme={contiamoTheme}>
         <div style={{padding: 40}}>
-          <DatePicker start={this.state.start} end={this.state.end} onChange={newState => {this.setState(prevState => newState)}} />
+          <Select value={this.state.value} options={options} onChange={value => {this.setState(prevState => ({
+            value
+          }))}} />
         </div>
       </ThemeProvider>
     )

@@ -88,22 +88,27 @@ var Select = /** @class */ (function (_super) {
         window.removeEventListener("keyup", this.handleEsc, true);
     };
     Select.prototype.getDisplayValue = function () {
+        var _this = this;
         if (!this.props.value) {
-            return typeof this.props.placeholder === "string" ? this.props.placeholder : "";
+            return this.props.placeholder || "No entries selected";
         }
         if (!Array.isArray(this.props.value)) {
-            return this.props.value.label;
+            return this.props.options.filter(function (option) { return option.value === _this.props.value; })[0].label;
         }
-        return this.props.value.map(function (option) { return option.label; }).slice().join(", ");
+        var listDisplay = this.props.options
+            .map(function (option) { return (_this.props.value.indexOf(option.value) > -1 ? option.label : null); })
+            .filter(function (a) { return !!a; })
+            .join(", ");
+        return listDisplay === "" ? this.props.placeholder || "No entries selected" : listDisplay;
     };
     Select.prototype.selectOption = function (option) {
         if (!Array.isArray(this.props.value)) {
-            this.props.onChange(option);
+            this.props.onChange(option.value);
             return;
         }
-        var optionIndex = this.props.value.indexOf(option);
+        var optionIndex = this.props.value.indexOf(option.value);
         if (optionIndex < 0) {
-            this.props.onChange(this.props.value.concat([option]).filter(function (item) { return !item.placeholder; }));
+            this.props.onChange(this.props.value.concat([option.value]));
         }
         else {
             this.props.onChange(this.props.value.slice(0, optionIndex).concat(this.props.value.slice(optionIndex + 1)));
@@ -113,7 +118,7 @@ var Select = /** @class */ (function (_super) {
         if (!Array.isArray(this.props.value)) {
             return this.props.value === option;
         }
-        return this.props.value.indexOf(option) > -1;
+        return this.props.value.indexOf(option.value) > -1;
     };
     Select.prototype.updateFilter = function (event) {
         return __awaiter(this, void 0, void 0, function () {
@@ -169,7 +174,7 @@ var Select = /** @class */ (function (_super) {
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
                 React.createElement(Select_style_1.OptionsList, null, this.props.options.map(function (option) {
-                    return option.label.match(_this.state.filter) && (React.createElement(SelectOption_1.default, { key: option.id, onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
+                    return option.label.match(_this.state.filter) && (React.createElement(SelectOption_1.default, { key: String(option.value), onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
                 })))) : ("")));
     };
     return Select;
