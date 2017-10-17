@@ -93,13 +93,6 @@ var AbstractChart = /** @class */ (function () {
     // focusClear(): void {
     //   return
     // }
-    // // Hide / show
-    // hide(): void {
-    //   $(this.context).hide()
-    // }
-    // show(): void {
-    //   $(this.context).show()
-    // }
     // Close / cleanup
     AbstractChart.prototype.close = function () {
         if (this.__disposed) {

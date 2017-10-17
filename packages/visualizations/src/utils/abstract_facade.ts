@@ -135,15 +135,6 @@ abstract class AbstractChart {
   //   return
   // }
 
-  // // Hide / show
-  // hide(): void {
-  //   $(this.context).hide()
-  // }
-
-  // show(): void {
-  //   $(this.context).show()
-  // }
-
   // Close / cleanup
   close(): void {
     if (this.__disposed) {

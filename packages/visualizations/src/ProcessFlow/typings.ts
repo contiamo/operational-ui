@@ -43,6 +43,7 @@ export interface IConfig {
   duration: number
   focusElement?: IFocusElement // type ("node"/"link"), id / [sourceId, targetId]
   height: number
+  hidden: boolean
   highlightColor: string
   labelOffset: number
   labelPadding: number

@@ -94,6 +94,7 @@ var AbstractCanvas = /** @class */ (function () {
             .select("marker#arrow")
             .attr("fill", config.arrowFill)
             .attr("stroke", config.linkStroke);
+        this.el.classed("hidden", this.state.current.get("config").hidden);
     };
     AbstractCanvas.prototype.margin = function (side) {
         return parseInt(this.el.style("margin-" + side), 10) || 0;

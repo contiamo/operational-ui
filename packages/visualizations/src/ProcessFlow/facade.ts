@@ -11,6 +11,7 @@ class ProcessFlow extends AbstractFacade {
 
   defaultConfig(): IKeyValueObject {
     return {
+      hidden: false,
       highlightColor: "#0000ff",
       labelOffset: 5,
       labelPadding: 5,

@@ -1,7 +1,11 @@
 import { css } from "glamor"
 
 const chartContainerStyle = {
-  position: "relative"
+  position: "relative",
+  display: "initial",
+  "&.hidden": {
+    display: "none"
+  }
 }
 
 const focusLegendStyle = {

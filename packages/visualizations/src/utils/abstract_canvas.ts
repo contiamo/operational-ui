@@ -127,6 +127,8 @@ abstract class AbstractCanvas {
       .select("marker#arrow")
       .attr("fill", config.arrowFill)
       .attr("stroke", config.linkStroke)
+
+    this.el.classed("hidden", this.state.current.get("config").hidden)
   }
 
   margin(side: string): number {

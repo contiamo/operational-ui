@@ -148,6 +148,9 @@ export default {
       }
     ]
   },
+  config: {
+    hidden: true
+  },
   accessors: {
     node: {
       labelPosition: (node: any) => {
