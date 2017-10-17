@@ -168,11 +168,11 @@ var Nodes = /** @class */ (function (_super) {
         return node.getBoundingClientRect();
     };
     Nodes.prototype.getNodeLabelX = function (d, el) {
-        var offset = this.getNodeBoundingRect(el).width / 2 + this.config.labelOffset;
+        var offset = this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset;
         return nodeLabelOptions[d.labelPosition()].x * offset;
     };
     Nodes.prototype.getNodeLabelY = function (d, el) {
-        var offset = this.getNodeBoundingRect(el).height / 2 + this.config.labelOffset;
+        var offset = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset;
         return nodeLabelOptions[d.labelPosition()].y * offset;
     };
     Nodes.prototype.updateNodeLabels = function (nodeGroups) {

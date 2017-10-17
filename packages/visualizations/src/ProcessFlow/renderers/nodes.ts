@@ -179,12 +179,12 @@ class Nodes extends AbstractRenderer {
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBoundingRect(el).width / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBoundingRect(el).height / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 

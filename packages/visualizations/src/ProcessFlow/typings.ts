@@ -46,7 +46,6 @@ export interface IConfig {
   hidden: boolean
   highlightColor: string
   labelOffset: number
-  labelPadding: number
   linkStroke: string
   maxLinkWidth: number
   maxNodeSize: number

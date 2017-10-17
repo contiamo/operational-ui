@@ -47,7 +47,7 @@ var Focus = /** @class */ (function (_super) {
                 yMax: drawingContainer.top + config.height,
                 yMin: drawingContainer.top,
             };
-            var offset = focusPoint.offset + config.labelPadding;
+            var offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
             focus_utils_1.default.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset);
         };
     };

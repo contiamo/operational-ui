@@ -47,7 +47,7 @@ class Focus extends AbstractFocus {
         yMax: drawingContainer.top + config.height,
         yMin: drawingContainer.top,
       }
-      let offset: number = focusPoint.offset + config.labelPadding
+      let offset: number = focusPoint.offset + config.nodeBorderWidth + config.labelOffset
 
       FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
