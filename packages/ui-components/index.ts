@@ -32,6 +32,7 @@ import Timeline, { TimelineItem } from "./src/Timeline/Timeline"
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./src/Typography/Typography"
 import theme from "./src/theme"
 import Upload from "./src/Upload/Upload"
+import Marathon from "./src/Marathon/Marathon"
 
 export {
   Button,
@@ -75,5 +76,6 @@ export {
   SmallType,
   theme as contiamoTheme,
   ThemeProvider,
-  Upload
+  Upload,
+  Marathon
 }

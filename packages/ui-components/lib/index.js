@@ -70,4 +70,6 @@ var theme_1 = require("./src/theme");
 exports.contiamoTheme = theme_1.default;
 var Upload_1 = require("./src/Upload/Upload");
 exports.Upload = Upload_1.default;
+var Marathon_1 = require("./src/Marathon/Marathon");
+exports.Marathon = Marathon_1.default;
 //# sourceMappingURL=index.js.map
