@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 interface IProps {
-  key: number
+  key: number | string
   css?: any
   className?: string
   selected?: boolean

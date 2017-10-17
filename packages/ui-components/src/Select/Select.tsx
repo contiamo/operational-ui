@@ -6,25 +6,25 @@ import SelectFilter from "./Filter/SelectFilter"
 
 import { Container, Options, OptionsList } from "./Select.style"
 
+type Value = number | string
+
 export interface Option {
-  label: string
-  id?: number
-  value?: any
-  placeholder?: boolean
+  label?: string
+  value?: Value
 }
 
 interface IProps {
   css?: any
   className?: string
-  placeholder?: string | boolean
   options: Option[]
-  value: undefined | Option | Option[]
+  value: undefined | Value | Value[]
   filterable?: boolean
   disabled?: boolean
-  onChange: (newValue: Option | Option[]) => void
+  onChange: (newValue: Value | Value[]) => void
   onClick?: () => void
   onFilter?: () => void
   color?: string
+  placeholder?: string
 }
 
 interface IState {
@@ -78,26 +78,30 @@ class Select extends React.Component<IProps, IState> {
 
   getDisplayValue(): string {
     if (!this.props.value) {
-      return typeof this.props.placeholder === "string" ? this.props.placeholder : ""
+      return this.props.placeholder || "No entries selected"
     }
 
     if (!Array.isArray(this.props.value)) {
-      return this.props.value.label
+      return this.props.options.filter(option => option.value === this.props.value)[0].label
     }
 
-    return [...this.props.value.map(option => option.label)].join(", ")
+    const listDisplay = this.props.options
+      .map(option => ((this.props.value as Value[]).indexOf(option.value) > -1 ? option.label : null))
+      .filter(a => !!a)
+      .join(", ")
+    return listDisplay === "" ? this.props.placeholder || "No entries selected" : listDisplay
   }
 
   selectOption(option: Option) {
     if (!Array.isArray(this.props.value)) {
-      this.props.onChange(option)
+      this.props.onChange(option.value)
       return
     }
 
-    const optionIndex: number = this.props.value.indexOf(option)
+    const optionIndex: number = this.props.value.indexOf(option.value)
 
     if (optionIndex < 0) {
-      this.props.onChange([...this.props.value, option].filter(item => !item.placeholder))
+      this.props.onChange([...this.props.value, option.value])
     } else {
       this.props.onChange([...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)])
     }
@@ -108,7 +112,7 @@ class Select extends React.Component<IProps, IState> {
       return this.props.value === option
     }
 
-    return this.props.value.indexOf(option) > -1
+    return this.props.value.indexOf(option.value) > -1
   }
 
   async updateFilter(event: React.SyntheticEvent<HTMLInputElement>) {
@@ -163,7 +167,7 @@ class Select extends React.Component<IProps, IState> {
                 (option: Option) =>
                   option.label.match(this.state.filter) && (
                     <SelectOption
-                      key={option.id}
+                      key={String(option.value)}
                       onClick={() => this.selectOption(option)}
                       selected={this.isOptionSelected(option)}
                     >
