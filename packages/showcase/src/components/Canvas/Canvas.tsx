@@ -13,11 +13,14 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   alignItems: "flex-start",
   flexBasis: "100%",
   marginLeft: theme.spacing * 4 / 3,
-  overflow: "auto",
+  overflow: "hidden",
+  height: "100%",
   maxHeight: "100%",
 
   "& > *": {
+    overflow: "auto",
     width: "100%",
+    height: "100%",
     maxWidth: 800
   },
 

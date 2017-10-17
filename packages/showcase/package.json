@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/core-js": "^0.9.43",
     "@types/jest": "^20.0.8",
+    "@types/marked": "^0.3.0",
     "@types/react": "^16.0.9",
     "@types/react-dom": "^16.0.0",
     "@types/react-hot-loader": "^3.0.4",
@@ -60,6 +61,7 @@
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "jest-cli": "^20.0.4",
+    "marked": "^0.3.6",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
     "react-color": "^2.13.8",

@@ -1,8 +1,11 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
 
+import { Card, CardHeader } from "contiamo-ui-components"
+
 import Canvas from "../../components/Canvas/Canvas"
 import Sidebar from "../../components/Sidebar/Sidebar"
+import StaticContent from "../../components/StaticContent/StaticContent"
 
 import Buttons from "./Buttons/Buttons"
 import Breakdown from "./Breakdown/Breakdown"
@@ -28,7 +31,16 @@ import Uploads from "./Uploads/Uploads"
 
 const SidebarWithRouter = withRouter(Sidebar)
 
-const InfoTooltip = () => <div>Choose a Component to Get Started</div>
+const introContent: string = `
+This is a set of opinionated presentational components implementing a visual style well-suited for operational interfaces.
+`
+
+const Intro = () => (
+  <Card>
+    <CardHeader>Components overview</CardHeader>
+    <StaticContent markdownContent={introContent} />
+  </Card>
+)
 
 const links = [
   {
@@ -92,7 +104,7 @@ export default () => (
   <div>
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
-      <Route exact path="/components" component={InfoTooltip} />
+      <Route exact path="/components" component={Intro} />
       <Route path="/components/buttons" component={Buttons} />
       <Route path="/components/breakdown" component={Breakdown} />
       <Route path="/components/form-fields" component={FormFields} />
