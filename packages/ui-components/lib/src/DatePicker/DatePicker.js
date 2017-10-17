@@ -55,24 +55,26 @@ var DatePicker = /** @class */ (function (_super) {
             }
         };
         this.outsideClickHandler = function (ev) {
-            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
+            if (_this.containerNode && ev.target.contains(_this.containerNode)) {
+                _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
+            }
         };
-        window.addEventListener("click", this.outsideClickHandler);
-        window.addEventListener("keydown", this.keypressHandler);
+        document.addEventListener("click", this.outsideClickHandler);
+        document.addEventListener("keydown", this.keypressHandler);
     };
     DatePicker.prototype.componentWillUnmount = function () {
-        window.removeEventListener("click", this.outsideClickHandler);
-        window.removeEventListener("keydown", this.keypressHandler);
+        document.removeEventListener("click", this.outsideClickHandler);
+        document.removeEventListener("keydown", this.keypressHandler);
     };
     DatePicker.prototype.render = function () {
         var _this = this;
         var _a = this.props, start = _a.start, end = _a.end;
         var placeholderDays = DatePicker_utils_1.monthStartDay(this.state.year, this.state.month);
         var daysInCurrentMonth = DatePicker_utils_1.daysInMonth(this.state.month, this.state.year);
-        return (React.createElement(DatePicker_styles_1.Container, { css: this.props.css, isExpanded: this.state.isExpanded, onClick: function (ev) {
-                ev.stopPropagation();
-            } },
-            React.createElement(DatePicker_styles_1.Toggle, { onClick: function () {
+        return (React.createElement(DatePicker_styles_1.Container, { innerRef: function (node) {
+                _this.containerNode = node;
+            }, css: this.props.css, isExpanded: this.state.isExpanded },
+            React.createElement(DatePicker_styles_1.Toggle, { onClick: function (ev) {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded
                     }); });
@@ -81,14 +83,14 @@ var DatePicker = /** @class */ (function (_super) {
             !!(start && end) && (React.createElement(DatePicker_styles_1.ClearButton, { onClick: function (ev) {
                     _this.props.onChange &&
                         _this.props.onChange({
-                            start: null,
-                            end: null
+                            start: undefined,
+                            end: undefined
                         });
                 } },
                 React.createElement(Icon_1.default, { name: "X", size: 12 }))),
             React.createElement(DatePicker_styles_1.Input, { readOnly: true, innerRef: function (node) {
                     _this.inputNode = node;
-                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function () {
+                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function (ev) {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded
                     }); });

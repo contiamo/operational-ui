@@ -40,19 +40,12 @@ class Select extends React.Component<IProps, IState> {
     filter: new RegExp(/./)
   }
 
-  // flow complains if this isn't initialized sooo...
-  container: HTMLDivElement | null
+  containerNode: any
 
   // This implements "click outside to close" behavior
-  handleClick = (e: MouseEvent) => {
-    const el = this.container
-
-    // if we're somehow not working with a DOM node (flowtype is fun!)
-    if (!(e.target instanceof Node)) {
-      return
-    }
+  handleClick = (ev: MouseEvent) => {
     // if we're clicking on the Select itself,
-    if (el && el.contains(e.target)) {
+    if (this.containerNode && this.containerNode.contains(ev.target)) {
       return
     }
 
@@ -67,13 +60,13 @@ class Select extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    window.addEventListener("click", this.handleClick, true)
-    window.addEventListener("keyup", this.handleEsc, true)
+    document.addEventListener("click", this.handleClick, true)
+    document.addEventListener("keyup", this.handleEsc, true)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("click", this.handleClick, true)
-    window.removeEventListener("keyup", this.handleEsc, true)
+    document.removeEventListener("click", this.handleClick, true)
+    document.removeEventListener("keyup", this.handleEsc, true)
   }
 
   getDisplayValue(): string {
@@ -148,7 +141,7 @@ class Select extends React.Component<IProps, IState> {
   render() {
     return (
       <Container
-        innerRef={container => (this.container = container)}
+        innerRef={containerNode => (this.containerNode = containerNode)}
         css={this.props.css}
         className={this.props.className}
         updating={this.state.updating}

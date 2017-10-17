@@ -28,6 +28,7 @@ class DatePicker extends React.Component<IProps, IState> {
     month: 9
   }
 
+  containerNode: any
   inputNode: any
   keypressHandler: (a: any) => void
   outsideClickHandler: (a: any) => void
@@ -56,18 +57,20 @@ class DatePicker extends React.Component<IProps, IState> {
       }
     }
     this.outsideClickHandler = (ev: any) => {
-      this.setState(prevState => ({
-        ...prevState,
-        isExpanded: false
-      }))
+      if (this.containerNode && ev.target.contains(this.containerNode)) {
+        this.setState(prevState => ({
+          ...prevState,
+          isExpanded: false
+        }))
+      }
     }
-    window.addEventListener("click", this.outsideClickHandler)
-    window.addEventListener("keydown", this.keypressHandler)
+    document.addEventListener("click", this.outsideClickHandler)
+    document.addEventListener("keydown", this.keypressHandler)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("click", this.outsideClickHandler)
-    window.removeEventListener("keydown", this.keypressHandler)
+    document.removeEventListener("click", this.outsideClickHandler)
+    document.removeEventListener("keydown", this.keypressHandler)
   }
 
   render() {
@@ -76,14 +79,14 @@ class DatePicker extends React.Component<IProps, IState> {
     const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
     return (
       <Container
+        innerRef={node => {
+          this.containerNode = node
+        }}
         css={this.props.css}
         isExpanded={this.state.isExpanded}
-        onClick={(ev: any) => {
-          ev.stopPropagation()
-        }}
       >
         <Toggle
-          onClick={() => {
+          onClick={ev => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
             }))
@@ -96,8 +99,8 @@ class DatePicker extends React.Component<IProps, IState> {
             onClick={ev => {
               this.props.onChange &&
                 this.props.onChange({
-                  start: null,
-                  end: null
+                  start: undefined,
+                  end: undefined
                 })
             }}
           >
@@ -111,7 +114,7 @@ class DatePicker extends React.Component<IProps, IState> {
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={this.props.placeholder || "Enter date"}
-          onFocus={() => {
+          onFocus={ev => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
             }))
