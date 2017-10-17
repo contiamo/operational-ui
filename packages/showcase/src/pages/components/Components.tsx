@@ -25,6 +25,7 @@ import Progress from "./Progress/Progress"
 import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
 import Uploads from "./Uploads/Uploads"
+import Marathons from "./Marathons/Marathons"
 
 const SidebarWithRouter = withRouter(Sidebar)
 
@@ -70,7 +71,8 @@ const links = [
       { label: "Notifications" },
       { url: "/components/progress", label: "Progress" },
       { url: "/components/spinners", label: "Spinners" },
-      { url: "/components/tooltips", label: "Tooltips" }
+      { url: "/components/tooltips", label: "Tooltips" },
+      { url: "/components/marathon", label: "Marathon" }
     ]
   },
   {
@@ -114,6 +116,7 @@ export default () => (
       <Route path="/components/tabs" component={Tabs} />
       <Route path="/components/timeline" component={Timeline} />
       <Route path="/components/upload" component={Uploads} />
+      <Route path="/components/marathon" component={Marathons} />
       <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </Canvas>
   </div>
