@@ -16,9 +16,17 @@ export type TAccessors = any
 // @TODO How do I import the d3 scale types?
 export type TScale = (size: number) => number
 
+export interface IFocusElement {
+  type: "node" | "link"
+  matchers: {
+    [key: string]: string | number | boolean
+  }
+}
+
 export interface IConfig {
   arrowFill: string
   duration: number
+  focusElement?: IFocusElement // type ("node"/"link"), id / [sourceId, targetId]
   height: number
   highlightColor: string
   labelOffset: number

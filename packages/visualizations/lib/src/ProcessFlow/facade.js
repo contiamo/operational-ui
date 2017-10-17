@@ -14,6 +14,7 @@ var abstract_facade_1 = require("../utils/abstract_facade");
 var canvas_1 = require("./canvas");
 var series_1 = require("./series");
 var focus_1 = require("./focus");
+var event_catalog_1 = require("../utils/event_catalog");
 var fp_1 = require("lodash/fp");
 var ProcessFlow = /** @class */ (function (_super) {
     __extends(ProcessFlow, _super);
@@ -73,6 +74,10 @@ var ProcessFlow = /** @class */ (function (_super) {
         this.series.draw();
         this.drawn = true;
         this.dirty = false;
+        var focusElement = this.state.config().focusElement;
+        if (focusElement) {
+            this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, focusElement);
+        }
         return this.canvas.elementFor("series").node();
     };
     return ProcessFlow;

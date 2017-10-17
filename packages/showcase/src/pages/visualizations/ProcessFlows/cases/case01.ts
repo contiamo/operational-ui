@@ -30,7 +30,11 @@ export default {
   config: {
     arrowFill: "none",
     width: 500,
-    height: 1000
+    height: 1000,
+    focusElement: {
+      type: "node",
+      matchers: { id: "7" }
+    }
   },
   accessors: {
     node: {

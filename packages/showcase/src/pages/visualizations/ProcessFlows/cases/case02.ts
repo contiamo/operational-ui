@@ -29,7 +29,14 @@ export default {
   config: {
     arrowFill: "none",
     width: 800,
-    height: 800
+    height: 800,
+    focusElement: {
+      type: "link",
+      matchers: {
+        sourceId: "2",
+        targetId: "3"
+      }
+    }
   },
   accessors: {
     node: {

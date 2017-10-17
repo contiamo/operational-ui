@@ -1,6 +1,10 @@
 import { map } from "lodash/fp"
 import * as d3 from "d3-selection"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
+import Node from "../node"
+import { IFocusElement } from "../typings"
+import { every, invoke } from "lodash/fp"
+
 import {
   IConfig,
   IFocus,
@@ -18,14 +22,17 @@ import Events from "../../utils/event_catalog"
 abstract class AbstractRenderer {
   config: IConfig
   data: TNode[] | TLink[]
-  state: TState
-  events: TEvents
   el: TSeriesEl
+  events: TEvents
+  state: TState
+  type: string
+  focusElementAccessor: string
 
   constructor(state: TState, events: TEvents, el: TSeriesEl) {
     this.state = state
     this.events = events
     this.el = el
+    this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement(this))
   }
 
   onMouseOver(ctx: AbstractRenderer): (d: TLink | TNode) => void {
@@ -35,13 +42,42 @@ abstract class AbstractRenderer {
   }
 
   mouseOver(element: any, d: TLink | TNode): void {
-    this.highlight(element, true)
+    this.highlight(element, d)
     let focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
     element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint))
   }
 
-  abstract highlight(element: any, val: boolean): void
+  focusElement(ctx: AbstractRenderer): (elementInfo: IFocusElement) => void {
+    return (elementInfo: IFocusElement): void => {
+      const type: string = elementInfo.type
+      if (type !== this.type) { return }
+      this.el
+        .selectAll(this.focusElementAccessor)
+        .filter((d: TLink | TNode): boolean => {
+          return every.convert({ cap: false })((value: any, matcher: string): boolean => {
+            return invoke(matcher)(d) === value
+          })(elementInfo.matchers)
+        })
+        .each(function(d: TLink | TNode): void {
+          ctx.mouseOver(d3.select(this), d)
+        })
+    }
+  }
+
+  highlight(element: any, d: TLink | TNode): void {
+    this.removeHighlights()
+    element.attr("stroke", this.config.highlightColor)
+  }
+
+  // Remove any old highlights (needed if an element has been manually focussed)
+  removeHighlights(): void {
+    this.el.selectAll(".hover")
+      .attr("stroke", function(d: TLink | TNode): string {
+        return d instanceof Node ? "none" : d.stroke()
+      })
+      .classed("hover", false)
+  }
 
   abstract focusPoint(element: any, d: TLink | TNode): IFocus
 
@@ -49,7 +85,7 @@ abstract class AbstractRenderer {
     return function(d: TLink | TNode): void {
       ctx.events.emit(Events.FOCUS.ELEMENT.OUT, focusPoint)
       const element: any = d3.select(this)
-      ctx.highlight(element, false)
+      ctx.removeHighlights()
       element.classed("hover", false)
     }
   }

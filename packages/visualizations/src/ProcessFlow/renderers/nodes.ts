@@ -58,6 +58,9 @@ const nodeShapeOptions: any = {
 }
 
 class Nodes extends AbstractRenderer {
+  type: string = "node"
+  focusElementAccessor: string = "path.node-border"
+
   updateDraw(): void {
     let nodeGroups: any = this.el.select("g.nodes-group").selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
 
@@ -133,11 +136,11 @@ class Nodes extends AbstractRenderer {
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
           // but doesn't break the viz.
           .attr(
-          "d",
-          d3Symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(borderScale(d)),
-        )
+            "d",
+            d3Symbol()
+              .type(nodeShapeOptions[d.shape()].symbol)
+              .size(borderScale(d)),
+          )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
         // Update node
         d3
@@ -200,10 +203,6 @@ class Nodes extends AbstractRenderer {
       })
       .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)
       .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
-  }
-
-  highlight(element: any, value: boolean): void {
-    element.attr("stroke", value ? this.config.highlightColor : "none")
   }
 
   focusPoint(element: any, d: TNode): IFocus {

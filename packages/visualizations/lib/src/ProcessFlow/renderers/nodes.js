@@ -68,7 +68,10 @@ var nodeShapeOptions = {
 var Nodes = /** @class */ (function (_super) {
     __extends(Nodes, _super);
     function Nodes() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "node";
+        _this.focusElementAccessor = "path.node-border";
+        return _this;
     }
     Nodes.prototype.updateDraw = function () {
         var nodeGroups = this.el.select("g.nodes-group").selectAll("g.node-group").data(this.data, function (node) { return node.id(); });
@@ -187,9 +190,6 @@ var Nodes = /** @class */ (function (_super) {
         })
             .attr("dy", function (d) { return nodeLabelOptions[d.labelPosition()].dy; })
             .attr("text-anchor", function (d) { return nodeLabelOptions[d.labelPosition()].textAnchor; });
-    };
-    Nodes.prototype.highlight = function (element, value) {
-        element.attr("stroke", value ? this.config.highlightColor : "none");
     };
     Nodes.prototype.focusPoint = function (element, d) {
         if (d == null)

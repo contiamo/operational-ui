@@ -29,6 +29,7 @@ var Events = {
         },
         DATE: "focus:date",
         ELEMENT: {
+            HIGHLIGHT: "focus:element:highlight",
             CLICK: "focus:element:click",
             HOVER: "focus:element:hover",
             OUT: "focus:element:out",

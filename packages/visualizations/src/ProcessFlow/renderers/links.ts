@@ -1,7 +1,7 @@
 import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
-import { TLink, TScale, IFocus, TLinkSelection } from "../typings"
+import { TLink, TNode, TScale, IFocus, TLinkSelection, IFocusElement } from "../typings"
 import { easeCubicInOut } from "d3-ease"
 import * as styles from "./styles"
 
@@ -9,6 +9,9 @@ const MINOPACITY: number = 0.5,
   MAXOPACITY: number = 1
 
 class Links extends AbstractRenderer {
+  type: string = "link"
+  focusElementAccessor: string = "path.link"
+
   updateDraw(): void {
     const links: TLinkSelection = this.el
       .select("g")
@@ -20,8 +23,9 @@ class Links extends AbstractRenderer {
   }
 
   enterAndUpdate(links: TLinkSelection): void {
-    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])
-    const opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
+    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]),
+      opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
+
     links.enter()
       .append("path")
       .attr("class", styles.link)
@@ -29,11 +33,11 @@ class Links extends AbstractRenderer {
       .attr("stroke-width", "0px")
       .on("mouseenter", this.onMouseOver(this))
       .merge(links)
+      .attr("stroke", (d: TLink): string => d.stroke())
       .transition()
       .duration(this.config.duration)
       .ease(easeCubicInOut)
       .attr("d", this.linkPath.bind(this))
-      .attr("stroke", (d: TLink): string => d.stroke())
       .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
       .attr("stroke-dasharray", (d: TLink): number => d.dash())
       .attr("opacity", (d: TLink): number => opacityScale(d.size()))
@@ -55,8 +59,15 @@ class Links extends AbstractRenderer {
     return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
   }
 
-  highlight(element: any, value: boolean): void {
-    element.attr("stroke", (d: TLink): string => value ? this.config.highlightColor : d.stroke())
+  highlight(element: any, d: TLink): void {
+    super.highlight(element, d)
+    // Highlight source and target nodes as well as link
+    const ctx: Links = this
+    this.el.selectAll("path.node-border")
+      .filter((node: TNode): boolean => node.id() === d.sourceId() || node.id() === d.targetId())
+      .each(function(node: TNode): void {
+        d3.select(this).classed("hover", true).attr("stroke", ctx.config.highlightColor)
+      })
   }
 
   focusPoint(element: any, d: TLink): IFocus {

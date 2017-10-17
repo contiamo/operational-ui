@@ -2,7 +2,9 @@ import AbstractFacade from "../utils/abstract_facade"
 import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
+import Events from "../utils/event_catalog"
 import { uniqueId } from "lodash/fp"
+import { IFocusElement } from "./typings"
 
 class ProcessFlow extends AbstractFacade {
   series: Series
@@ -76,6 +78,10 @@ class ProcessFlow extends AbstractFacade {
     this.series.draw()
     this.drawn = true
     this.dirty = false
+    const focusElement: IFocusElement = this.state.config().focusElement
+    if (focusElement) {
+      this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
+    }
     return this.canvas.elementFor("series").node()
   }
 }
