@@ -3,7 +3,7 @@ import { Route, withRouter } from "react-router-dom"
 
 import { Card, CardHeader } from "contiamo-ui-components"
 import Canvas from "../../components/Canvas/Canvas"
-import Sidebar from "../../components/Sidebar/Sidebar"
+import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
 
 import ProcessFlow from "./ProcessFlow/ProcessFlow"
@@ -22,7 +22,7 @@ const Intro = () => (
   </Card>
 )
 
-const links = [
+const links: ISidebarLink[] = [
   {
     label: "Process Flow",
     links: Object.keys(processFlowData).map(key => ({ url: `/visualizations/process-flow/${key}`, label: key }))

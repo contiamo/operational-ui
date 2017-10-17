@@ -4,7 +4,7 @@ import { Route, withRouter } from "react-router-dom"
 import { Card, CardHeader } from "contiamo-ui-components"
 
 import Canvas from "../../components/Canvas/Canvas"
-import Sidebar from "../../components/Sidebar/Sidebar"
+import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
 
 import Buttons from "./Buttons/Buttons"
@@ -32,7 +32,7 @@ import Uploads from "./Uploads/Uploads"
 const SidebarWithRouter = withRouter(Sidebar)
 
 const introContent: string = `
-This is a set of opinionated presentational components implementing a visual style well-suited for operational interfaces.
+Select a component to get started.
 `
 
 const Intro = () => (
@@ -42,7 +42,7 @@ const Intro = () => (
   </Card>
 )
 
-const links = [
+const links: ISidebarLink[] = [
   {
     label: "Basics",
     links: [

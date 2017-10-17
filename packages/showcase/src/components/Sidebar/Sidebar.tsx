@@ -6,10 +6,10 @@ interface IProps {
     pathname: string
   }
   css?: any
-  links: ILink[]
+  links: ISidebarLink[]
 }
 
-interface ILink {
+export interface ISidebarLink {
   label: string
   links: {
     url?: string

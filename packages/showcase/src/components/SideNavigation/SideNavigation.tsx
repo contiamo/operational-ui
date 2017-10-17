@@ -36,6 +36,7 @@ const style: {} = {
 }
 
 const links: ILink[] = [
+  { url: "/styleguide", label: "Style guide", icon: "Edit" },
   { url: "/components", label: "Components", icon: "Box" },
   { label: "Composed", icon: "Grid" },
   { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }

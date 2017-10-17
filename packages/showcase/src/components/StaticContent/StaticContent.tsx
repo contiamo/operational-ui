@@ -6,7 +6,7 @@ import { Box, BarChart2, Grid } from "react-feather"
 
 import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
 
-const marked = typeof marked_ === "function" ? marked_ : marked_.default
+const marked = typeof marked_ === "function" ? marked_ : (marked_ as any).default
 
 interface IProps {
   css?: any
@@ -27,7 +27,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const StaticContent = ({ css, className, markdownContent, children }) =>
+const StaticContent = ({ css, className, markdownContent, children }: IProps) =>
   markdownContent ? (
     <Container css={css} className={className} dangerouslySetInnerHTML={{ __html: marked(markdownContent) }} />
   ) : (

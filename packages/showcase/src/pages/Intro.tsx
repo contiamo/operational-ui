@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, Grid, BarChart2 } from "react-feather"
 
-import { Card } from "contiamo-ui-components"
+import { Card, Icon } from "contiamo-ui-components"
 
 const style = () => ({
   "& .grid": {
@@ -59,19 +59,25 @@ const myCard = ({ className }: { className?: string }) => (
     <h2>A single collection of UI components that compose to create Contiamo products.</h2>
 
     <div className="grid">
+      <Link to="/styleguide">
+        <Card className="card">
+          <Icon name="Edit" size={30} color="#777" />
+          <h2>Style guide</h2>
+        </Card>
+      </Link>
       <Link to="/components">
         <Card className="card">
-          <Box color="#777" size={30} />
+          <Icon name="Box" size={30} color="#777" />
           <h2>Components</h2>
         </Card>
       </Link>
       <Card className="card card_disabled">
-        <Grid color="#777" size={30} />
+        <Icon name="Grid" size={30} color="#777" />
         <h2>Composed</h2>
       </Card>
       <Link to="/visualizations">
         <Card className="card">
-          <BarChart2 color="#777" size={30} />
+          <Icon name="BarChart2" size={30} color="#777" />
           <h2>Visualizations</h2>
         </Card>
       </Link>
