@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous, { withTheme } from "glamorous"
+import glamorous, { Div, Ul, withTheme } from "glamorous"
 
 type TestFn = (done?: ((a: any) => void)) => void
 
@@ -9,6 +9,8 @@ interface IState {
 }
 
 interface IProps {
+  css?: any
+  className?: string
   timeout?: number
   test: (a: IMarathon) => void
   theme: Theme
@@ -106,15 +108,16 @@ class Marathon extends React.Component<IProps, IState> {
   }
 
   render() {
+    const { css, className } = this.props
     return (
-      <div>
+      <Div css={css} className={className}>
         <TestResults tests={this.state.tests} completed={this.state.completed} />
         <Content
           innerRef={(node: HTMLElement) => {
             this.container = node
           }}
         />
-      </div>
+      </Div>
     )
   }
 }
@@ -128,10 +131,6 @@ const Content = glamorous.div(
   })
 )
 
-const ListContainer = glamorous.ul({
-  padding: 0
-})
-
 const Item = glamorous.li(
   {
     listStyle: "none",
@@ -143,12 +142,12 @@ const Item = glamorous.li(
       display: "inline-block"
     }
   },
-  ({ theme, hasCompleted, failed }: { theme?: Theme; hasCompleted?: boolean; failed?: boolean }) => {
+  ({ theme, isCompleted, failed }: { theme: Theme; isCompleted?: boolean; failed?: boolean }) => {
     const { palette } = theme.colors
     return {
       "&:before": {
-        content: hasCompleted ? (failed ? "✘" : "✓") : "...",
-        color: hasCompleted ? (failed ? palette.error : palette.success) : palette.black
+        content: isCompleted ? (failed ? "✘" : "✓") : "...",
+        color: isCompleted ? (failed ? palette.error : palette.success) : palette.black
       }
     }
   }
@@ -160,13 +159,13 @@ interface IResultsProps {
 }
 
 const TestResults: React.SFC<IResultsProps> = ({ tests, completed }: IResultsProps) => (
-  <ListContainer>
+  <Ul css={{ padding: 0 }}>
     {tests.map((test: any, index: any) => (
-      <Item hasCompleted={completed > index} failed={test.fail} key={index}>
+      <Item isCompleted={completed > index} failed={test.fail} key={index}>
         {test.description}
       </Item>
     ))}
-  </ListContainer>
+  </Ul>
 )
 
 export default withTheme(Marathon)

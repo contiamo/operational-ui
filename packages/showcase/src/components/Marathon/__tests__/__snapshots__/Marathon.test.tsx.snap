@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Marathon Component Should render 1`] = `
-<div>
+<div
+  class="css-nil"
+>
   <ul
     class="css-1a24qct"
   />
