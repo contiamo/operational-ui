@@ -70,7 +70,7 @@ var Nodes = /** @class */ (function (_super) {
     function Nodes() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.type = "node";
-        _this.focusElementAccessor = "path.node-border";
+        _this.focusElementAccessor = "path." + styles.link;
         return _this;
     }
     Nodes.prototype.updateDraw = function () {
@@ -121,7 +121,7 @@ var Nodes = /** @class */ (function (_super) {
             d3
                 .select(this)
                 .append("text")
-                .attr("class", "label");
+                .attr("class", styles.label);
         })
             .merge(nodeGroups)
             .transition()

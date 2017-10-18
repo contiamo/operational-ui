@@ -21,7 +21,7 @@ var Links = /** @class */ (function (_super) {
     function Links() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.type = "link";
-        _this.focusElementAccessor = "path.link";
+        _this.focusElementAccessor = "path." + styles.link;
         return _this;
     }
     Links.prototype.updateDraw = function () {

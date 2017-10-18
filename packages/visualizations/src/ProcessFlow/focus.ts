@@ -1,7 +1,8 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import { uniqueId } from "lodash/fp"
-import { IConfig, IFocus } from "./typings"
+import { uniqueId, forEach, reduce } from "lodash/fp"
+import { IConfig, IFocus, IBreakdown } from "./typings"
+import * as styles from "./styles"
 
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
@@ -28,13 +29,26 @@ class Focus extends AbstractFocus {
 
       content
         .append("xhtml:li")
-        .attr("class", "title clearfix")
+        .attr("class", `${styles.title} clearfix`)
         .text(datum.label())
 
       content
         .append("xhtml:li")
         .attr("class", "series clearfix")
         .html('<span class="value">' + datum.size() + "</span>")
+
+      if (isNode) {
+        const container: any = content.append("div").attr("class", styles.breakdownsContainer)
+        ctx.addBreakdowns("Inputs", container, datum.inputsBreakdown)
+        ctx.addBreakdowns("Outputs", container, datum.outputsBreakdown)
+
+        const outputTotal: number = reduce((memo: number, link: any): number => {
+          return memo + link.size()
+        }, 0)(datum.sourceLinks)
+        content.append("xhtml:li")
+          .attr("class", "breakdown-difference")
+          .text("Difference: " + (datum.size() - outputTotal))
+      }
 
       // Get label dimensions (has to be actually rendered in the page to do ctx)
       let labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(ctx.el)
@@ -51,6 +65,37 @@ class Focus extends AbstractFocus {
 
       FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
+  }
+
+  addBreakdowns(title: string, content: any, breakdownItems: IBreakdown[]): void {
+    const container: any = content.append("div").attr("class", styles.breakdownContainer)
+
+    container.append("span")
+      .attr("class", styles.title)
+      .text(title)
+
+    forEach((item: IBreakdown): void => {
+      const breakdown: any = container.append("div")
+        .attr("class", styles.breakdown)
+
+      breakdown
+        .append("label")
+        .attr("class", styles.breakdownLabel)
+        .text(item.label)
+
+      const backgroundBar: any = breakdown.append("div")
+        .attr("class", styles.breakdownBackgroundBar)
+
+
+      backgroundBar.append("div")
+        .attr("class", styles.breakdownBar)
+        .style("width", item.percentage + "%")
+
+      backgroundBar.append("div")
+        .attr("class", styles.breakdownText)
+        .text(item.size + " (" + item.percentage + "%)")
+
+    })(breakdownItems)
   }
 }
 

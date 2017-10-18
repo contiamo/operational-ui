@@ -17,6 +17,7 @@ var DataHandler = /** @class */ (function () {
         this.setLinkAccessors(accessors.link);
         this.initializeNodes(data);
         this.initializeLinks(data);
+        this.computeBreakdowns();
         return {
             nodes: this.nodes,
             journeys: this.journeys,
@@ -104,6 +105,26 @@ var DataHandler = /** @class */ (function () {
             };
             fp_1.times(computeLink)(path.length - 1);
         })(this.journeys);
+    };
+    DataHandler.prototype.computeBreakdowns = function () {
+        fp_1.forEach(function (node) {
+            node.inputsBreakdown = fp_1.map(function (link) {
+                var size = link.size();
+                return {
+                    label: link.source().label(),
+                    size: size,
+                    percentage: Math.round(size * 100 / node.size())
+                };
+            })(node.targetLinks);
+            node.outputsBreakdown = fp_1.map(function (link) {
+                var size = link.size();
+                return {
+                    label: link.target().label(),
+                    size: size,
+                    percentage: Math.round(size * 100 / node.size())
+                };
+            })(node.sourceLinks);
+        })(this.nodes);
     };
     return DataHandler;
 }());

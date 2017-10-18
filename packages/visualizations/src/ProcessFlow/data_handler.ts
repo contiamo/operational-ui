@@ -3,7 +3,7 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import { bind, map, forEach, find, times, extend } from "lodash/fp"
-import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, IState } from "./typings"
+import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, IState, IBreakdown } from "./typings"
 
 class DataHandler {
   journeys: IJourney[]
@@ -25,6 +25,7 @@ class DataHandler {
     this.setLinkAccessors(accessors.link)
     this.initializeNodes(data)
     this.initializeLinks(data)
+    this.computeBreakdowns()
     return {
       nodes: this.nodes,
       journeys: this.journeys,
@@ -120,6 +121,27 @@ class DataHandler {
       }
       times(computeLink)(path.length - 1)
     })(this.journeys)
+  }
+
+  computeBreakdowns(): void {
+    forEach((node: TNode): void => {
+      node.inputsBreakdown = map((link: TLink): IBreakdown => {
+        const size: number = link.size()
+        return {
+          label: link.source().label(),
+          size: size,
+          percentage: Math.round(size * 100 / node.size())
+        }
+      })(node.targetLinks)
+      node.outputsBreakdown = map((link: TLink): IBreakdown => {
+        const size: number = link.size()
+        return {
+          label: link.target().label(),
+          size: size,
+          percentage: Math.round(size * 100 / node.size())
+        }
+      })(node.sourceLinks)
+    })(this.nodes)
   }
 }
 

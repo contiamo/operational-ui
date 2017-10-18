@@ -1,5 +1,5 @@
 import { extend } from "lodash/fp"
-import { TLink, TAccessors, INodeAttrs } from "./typings"
+import { TLink, TAccessors, INodeAttrs, IBreakdown } from "./typings"
 
 class Node {
   accessors: TAccessors
@@ -8,6 +8,8 @@ class Node {
   y: number
   sourceLinks: TLink[]
   targetLinks: TLink[]
+  inputsBreakdown: IBreakdown[]
+  outputsBreakdown: IBreakdown[]
 
   constructor(nodeAttributes: INodeAttrs, accessors: TAccessors) {
     this.accessors = accessors

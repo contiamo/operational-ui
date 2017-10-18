@@ -59,7 +59,7 @@ const nodeShapeOptions: any = {
 
 class Nodes extends AbstractRenderer {
   type: string = "node"
-  focusElementAccessor: string = "path.node-border"
+  focusElementAccessor: string = `path.${styles.link}`
 
   updateDraw(): void {
     let nodeGroups: any = this.el.select("g.nodes-group").selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
@@ -120,7 +120,7 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .append("text")
-          .attr("class", "label")
+          .attr("class", styles.label)
       })
       .merge(nodeGroups)
       .transition()

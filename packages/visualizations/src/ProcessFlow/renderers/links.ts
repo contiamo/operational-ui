@@ -10,7 +10,7 @@ const MINOPACITY: number = 0.5,
 
 class Links extends AbstractRenderer {
   type: string = "link"
-  focusElementAccessor: string = "path.link"
+  focusElementAccessor: string = `path.${styles.link}`
 
   updateDraw(): void {
     const links: TLinkSelection = this.el
