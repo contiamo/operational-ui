@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous, { Div, Ul, withTheme } from "glamorous"
+import glamorous, { Div, Ul } from "glamorous"
 
 type TestFn = (done?: ((a: any) => void)) => void
 
@@ -168,4 +168,4 @@ const TestResults: React.SFC<IResultsProps> = ({ tests, completed }: IResultsPro
   </Ul>
 )
 
-export default withTheme(Marathon)
+export default Marathon

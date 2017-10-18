@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Card, CardHeader } from "contiamo-ui-components"
-import * as caseData from "./data/index"
 import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
+import * as cases from "./cases/index"
 
 interface IProps {
   match: {
@@ -13,9 +13,9 @@ interface IProps {
 
 const ProcessFlowContainer: React.SFC<IProps> = props => {
   const case_: string = props.match.params.case
-  const config: any = (caseData as any)[case_].config || {}
-  const accessors: any = (caseData as any)[case_].accessors || {}
-  const data: any = (caseData as any)[case_].data || {}
+  const config: any = (cases as any)[case_].config || {}
+  const accessors: any = (cases as any)[case_].accessors || {}
+  const data: any = (cases as any)[case_].data || {}
   return (
     <Card>
       <CardHeader>Process Flow Visualization</CardHeader>

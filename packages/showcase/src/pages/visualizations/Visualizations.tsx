@@ -7,7 +7,7 @@ import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
 
 import ProcessFlow from "./ProcessFlow/ProcessFlow"
-import * as processFlowData from "./ProcessFlow/data/index"
+import * as processFlowCases from "./ProcessFlow/cases/index"
 
 const SidebarWithRouter = withRouter(Sidebar)
 
@@ -25,7 +25,7 @@ const Intro = () => (
 const links: ISidebarLink[] = [
   {
     label: "Process Flow",
-    links: Object.keys(processFlowData).map(key => ({ url: `/visualizations/process-flow/${key}`, label: key }))
+    links: Object.keys(processFlowCases).map(key => ({ url: `/visualizations/process-flow/${key}`, label: key }))
   },
   {
     label: "Bar chart",
