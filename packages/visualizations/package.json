@@ -8,21 +8,20 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "package": "webpack",
+    "package": "rm -rf lib && tsc",
+    "package:watch": "rm -rf lib && tsc -w",
     "prettier": "echo 'Prettier is not yet ready ready for the pre-commit hook. See prettier_ script for tentative implementation.'",
     "prettier_": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",
     "lint": "echo 'Tslint is not yet ready ready for the pre-commit hook. See tslint_ script for tentative implementation.'",
     "lint_": "tslint './index.ts' --fix && tslint './src/**/*.{ts,tsx}' --fix",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
-    "start": "webpack-dev-server"
+    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add ."
   },
   "dependencies": {
     "d3": "^4.10.2",
     "glamorous": "^4.8.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "react": "^16.0.0",
-    "webpack": "^3.7.1"
+    "react": "^16.0.0"
   },
   "devDependencies": {
     "@types/d3-ease": "^1.0.7",
@@ -34,19 +33,13 @@
     "@types/lodash": "^4.14.74",
     "@types/react": "^16.0.9",
     "awesome-typescript-loader": "^3.2.3",
-    "css-loader": "^0.28.7",
     "jest": "^21.2.1",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
     "prettier": "^1.7.0",
     "react-test-renderer": "^16.0.0",
-    "style-loader": "^0.19.0",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.2.1",
     "tslint-config-prettier": "^1.5.0",
-    "typescript": "^2.5.2",
-    "webpack": "^3.7.1",
-    "webpack-dev-server": "^2.7.1"
+    "typescript": "^2.5.2"
   },
   "jest": {
     "setupFiles": [

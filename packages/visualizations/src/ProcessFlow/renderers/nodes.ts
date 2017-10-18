@@ -3,6 +3,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { TNode, TScale, IFocus, TNodeSelection } from "../typings"
+import * as styles from "./styles"
 
 const nodeLabelOptions: any = {
   top: {
@@ -85,7 +86,7 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .append("path")
-          .attr("class", "node-border")
+          .attr("class", styles.link)
           .attr(
             "d",
             d3Symbol()
@@ -101,7 +102,7 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .append("path")
-          .attr("class", "node")
+          .attr("class", styles.node)
           .attr(
             "d",
             d3Symbol()
@@ -126,7 +127,7 @@ class Nodes extends AbstractRenderer {
         // Update node border
         d3
           .select(this)
-          .select("path.node-border")
+          .select(`path.${styles.link}`)
           .transition()
           .duration(ctx.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
@@ -141,7 +142,7 @@ class Nodes extends AbstractRenderer {
         // Update node
         d3
           .select(this)
-          .select("path.node")
+          .select(`path.${styles.node}`)
           .transition()
           .duration(ctx.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
@@ -169,7 +170,7 @@ class Nodes extends AbstractRenderer {
   getNodeBoundingRect(el: any): SVGRect {
     const node: any = d3
       .select(el.parentNode)
-      .select("path.node")
+      .select(`path.${styles.node}`)
       .node()
     return node.getBoundingClientRect()
   }
@@ -188,7 +189,7 @@ class Nodes extends AbstractRenderer {
     const that: any = this
     nodeGroups
       .enter()
-      .selectAll("text.label")
+      .selectAll(`text.${styles.label}`)
       .merge(nodeGroups)
       .text((d: TNode): string => d.label())
       .attr("x", function(d: TNode): number {

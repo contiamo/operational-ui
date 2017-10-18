@@ -3,6 +3,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { TLink, TScale, IFocus, TLinkSelection } from "../typings"
 import { easeCubicInOut } from "d3-ease"
+import * as styles from "./styles"
 
 const MINOPACITY: number = 0.5,
   MAXOPACITY: number = 1
@@ -10,8 +11,8 @@ const MINOPACITY: number = 0.5,
 class Links extends AbstractRenderer {
   updateDraw(): void {
     const links: TLinkSelection = this.el
-      .select("g.links-group")
-      .selectAll("path.link")
+      .select("g")
+      .selectAll(`path.${styles.link}`)
       .data(this.data, (link: TLink): string => link.sourceId() + ";" + link.targetId())
 
     this.exit(links)
@@ -23,7 +24,7 @@ class Links extends AbstractRenderer {
     const opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
     links.enter()
       .append("path")
-      .attr("class", "link")
+      .attr("class", styles.link)
       .attr("d", this.linkStartPath.bind(this))
       .attr("stroke-width", "0px")
       .on("mouseenter", this.onMouseOver(this))

@@ -1,13 +1,7 @@
 import * as React from "react"
-import * as ContiamoVisualizations from "contiamo-visualizations"
 import { Card, CardHeader } from "contiamo-ui-components"
 import * as caseData from "./data/index"
-
-// @TODO Fix this!
-// import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
-const Viz = (ContiamoVisualizations as any)["contiamo-visualizations"]
-const ProcessFlow: any = Viz.ProcessFlow
-const VisualizationWrapper: any = Viz.VisualizationWrapper
+import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
 
 interface IProps {
   match: {

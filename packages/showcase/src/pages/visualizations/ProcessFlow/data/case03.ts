@@ -1,6 +1,4 @@
-import * as ContiamoVisualizations from "contiamo-visualizations"
-const Viz = (ContiamoVisualizations as any)["contiamo-visualizations"]
-const LoopHandler: any = Viz.ProcessFlowLoopHandler
+import { ProcessFlowLoopHandler } from "contiamo-visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
 
 interface IJourney {
@@ -120,7 +118,7 @@ const journeys: IJourney[] = [
 ]
 
 const data: IData = {}
-data.unloopedJourneys = LoopHandler(journeys)
+data.unloopedJourneys = ProcessFlowLoopHandler(journeys)
 const nodeList: string[] = flow(map((journey: IJourney): string[] => journey.path), flatten, uniq)(
   data.unloopedJourneys
 )

@@ -1,5 +1,6 @@
 import { find, last } from "lodash/fp"
 import * as d3 from "d3-selection"
+import * as styles from "../styles/styles"
 
 function optimalPosition(possibilities: number[], min: number, max: number, dimension: number): number {
   function withinRange(value: number): boolean {
@@ -17,7 +18,7 @@ let FocusUtils: any = {
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
   drawHidden: (canvasEl: any, type: string): any => {
-    let label: any = canvasEl.attr("class", "focus-legend focus-legend-" + type).style("visibility", "hidden")
+    let label: any = canvasEl.attr("class", `${styles.focusLegend} focus-legend-` + type).style("visibility", "hidden")
 
     // canvasEl.node().appendChild(label.node())
     return label
