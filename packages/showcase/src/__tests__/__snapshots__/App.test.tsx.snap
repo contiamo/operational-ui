@@ -5,10 +5,10 @@ exports[`App starts 1`] = `
   class="css-1ekk8l2"
 >
   <div
-    class="css-guolr8"
+    class="css-1scyin7"
   >
     <div
-      class="css-ihgfbr"
+      class="css-12zxt11"
       role="listbox"
       tabindex="-1"
     >
@@ -28,9 +28,38 @@ exports[`App starts 1`] = `
       />
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
+    >
+      <a
+        href="/styleguide"
+      >
+        <svg
+          fill="none"
+          height="20"
+          stroke="#fff"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewbox="0 0 24 24"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"
+          />
+          <polygon
+            points="18 2 22 6 12 16 8 16 8 12 18 2"
+          />
+        </svg>
+        <div
+          class="css-j9z7vu co_label"
+        >
+          Style guide
+        </div>
+      </a>
+    </div>
+    <div
+      class="css-1n1hwgn"
     >
       <a
         href="/components"
@@ -77,9 +106,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
     >
       <a
         href="/"
@@ -143,9 +170,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
     >
       <a
         href="/visualizations"
@@ -205,7 +230,7 @@ exports[`App starts 1`] = `
     class="css-oslscu"
   >
     <header
-      class="css-t9hfxf"
+      class="css-vstb49"
     >
       Contiamo UI
     </header>

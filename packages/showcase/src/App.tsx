@@ -9,9 +9,10 @@ import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 import SideNavigation from "./components/SideNavigation/SideNavigation"
 import Header from "./components/Header/Header"
 
-import IntroPage from "./pages/Intro"
-import ComponentsPage from "./pages/components/Components"
-import VisualizationsPage from "./pages/visualizations/Visualizations"
+import Intro from "./pages/Intro"
+import StyleGuide from "./pages/styleguide/StyleGuide"
+import Components from "./pages/components/Components"
+import Visualizations from "./pages/visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
@@ -62,9 +63,10 @@ const App: React.SFC<{}> = () => (
         <SideNavigationWithRouter />
         <Content>
           <Header />
-          <Route exact path="/" component={IntroPage} />
-          <Route path="/components" component={ComponentsPage} />
-          <Route path="/visualizations" component={VisualizationsPage} />
+          <Route exact path="/" component={Intro} />
+          <Route path="/styleguide" component={StyleGuide} />
+          <Route path="/components" component={Components} />
+          <Route path="/visualizations" component={Visualizations} />
         </Content>
       </Container>
     </ThemeProvider>

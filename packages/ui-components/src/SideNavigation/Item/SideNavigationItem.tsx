@@ -37,7 +37,7 @@ const Container = glamorous.div(({ theme, active }: IProps): {} => {
 })
 
 const SideNavigationItem: React.SFC<IProps> = ({ className, css, children, onClick, active }: IProps) => (
-  <Container css={css} className={`${className}`} active={!!active} onClick={onClick} role="button" tabIndex={-1}>
+  <Container css={css} className={className} active={!!active} onClick={onClick}>
     {children}
   </Container>
 )

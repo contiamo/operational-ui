@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Showcase: StaticContent Should render correctly 1`] = `
+<div
+  class="css-13van8m"
+>
+  <h2
+    id="hello"
+  >
+    Hello
+  </h2>
+  
+
+</div>
+`;

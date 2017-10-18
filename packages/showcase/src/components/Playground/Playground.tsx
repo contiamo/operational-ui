@@ -129,7 +129,7 @@ class Playground extends React.Component<IProps, IState> {
             }))
           }}
         >
-          {this.state.isExpanded ? "Collapse" : "Give yourself some space - expand this playground"}
+          {this.state.isExpanded ? "Collapse (Esc)" : "Give yourself some space - expand this playground"}
         </ExpandPrompt>
         <ComponentPlayground
           codeText={transformSnippet(snippet)}
