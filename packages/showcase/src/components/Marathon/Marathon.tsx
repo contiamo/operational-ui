@@ -1,5 +1,7 @@
 import * as React from "react"
-import glamorous, { Div, Ul } from "glamorous"
+import glamorous, { Div } from "glamorous"
+
+import TestResults from "./Marathon.TestResults"
 
 type TestFn = (done?: ((a: any) => void)) => void
 
@@ -16,8 +18,8 @@ interface IProps {
   theme: Theme
 }
 
-interface IMarathon {
-  test?: (a: IMarathon) => void
+export interface IMarathon {
+  test?: (description: string, done?: () => void) => void
   expect?: (description: string, fn: TestFn) => void
   beforeEach?: (a: any) => void
   afterEach?: (a: any) => void
@@ -26,10 +28,15 @@ interface IMarathon {
   container?: HTMLElement
 }
 
-interface ITest {
+interface ITestWithRunner {
   description: string
   fail: boolean
   fn: TestFn
+}
+
+interface ITest {
+  description: string
+  fail: boolean
 }
 
 const sleep = (ms: number) =>
@@ -38,6 +45,15 @@ const sleep = (ms: number) =>
       resolve()
     }, ms)
   })
+
+const Content = glamorous.div(
+  {
+    padding: 20
+  },
+  ({ theme }: { theme: Theme }) => ({
+    backgroundColor: theme.colors.palette.grey10
+  })
+)
 
 class Marathon extends React.Component<IProps, IState> {
   static defaultProps = {
@@ -51,7 +67,7 @@ class Marathon extends React.Component<IProps, IState> {
 
   container: HTMLElement
 
-  private _tests: ITest[] = []
+  private _tests: ITestWithRunner[] = []
 
   setStateAsync = (updater: (prevState: IState, props: IProps) => {}): Promise<void> =>
     new Promise(resolve => {
@@ -75,7 +91,7 @@ class Marathon extends React.Component<IProps, IState> {
   runNext = async () => {
     const { tests, completed } = this.state
     const { timeout } = this.props
-    const test = tests[completed]
+    const test = this._tests[completed]
 
     if (!test) {
       return
@@ -102,7 +118,9 @@ class Marathon extends React.Component<IProps, IState> {
     this.props.test({ test, expect, container } as any)
 
     // Pin the test array on state, run first one when ready.
-    this.setStateAsync(prevState => ({ tests })).then(() => {
+    this.setStateAsync(prevState => ({
+      tests: tests.map(test => ({ description: test.description, fail: test.fail }))
+    })).then(() => {
       this.runNext()
     })
   }
@@ -121,51 +139,5 @@ class Marathon extends React.Component<IProps, IState> {
     )
   }
 }
-
-const Content = glamorous.div(
-  {
-    padding: 20
-  },
-  ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.palette.grey10
-  })
-)
-
-const Item = glamorous.li(
-  {
-    listStyle: "none",
-    margin: 0,
-    "&:before": {
-      width: 16,
-      height: 16,
-      borderRadius: "50%",
-      display: "inline-block"
-    }
-  },
-  ({ theme, isCompleted, failed }: { theme: Theme; isCompleted?: boolean; failed?: boolean }) => {
-    const { palette } = theme.colors
-    return {
-      "&:before": {
-        content: isCompleted ? (failed ? "✘" : "✓") : "...",
-        color: isCompleted ? (failed ? palette.error : palette.success) : palette.black
-      }
-    }
-  }
-)
-
-interface IResultsProps {
-  tests: ITest[]
-  completed: number
-}
-
-const TestResults: React.SFC<IResultsProps> = ({ tests, completed }: IResultsProps) => (
-  <Ul css={{ padding: 0 }}>
-    {tests.map((test: any, index: any) => (
-      <Item isCompleted={completed > index} failed={test.fail} key={index}>
-        {test.description}
-      </Item>
-    ))}
-  </Ul>
-)
 
 export default Marathon
