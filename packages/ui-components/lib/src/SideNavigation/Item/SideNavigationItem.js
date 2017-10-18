@@ -27,7 +27,7 @@ var Container = glamorous_1.default.div(function (_a) {
 });
 var SideNavigationItem = function (_a) {
     var className = _a.className, css = _a.css, children = _a.children, onClick = _a.onClick, active = _a.active;
-    return (React.createElement(Container, { css: css, className: "" + className, active: !!active, onClick: onClick, role: "button", tabIndex: -1 }, children));
+    return (React.createElement(Container, { css: css, className: className, active: !!active, onClick: onClick }, children));
 };
 exports.default = SideNavigationItem;
 //# sourceMappingURL=SideNavigationItem.js.map

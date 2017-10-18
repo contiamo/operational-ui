@@ -9,7 +9,7 @@ exports[`IntroPage Should render correctly 1`] = `
     Contiamo UI
   </h1>
   <h2>
-    A single collection of UI components that compose to create Contiamo products.
+    Building blocks for effective operational interfaces
   </h2>
   <div
     class="grid"

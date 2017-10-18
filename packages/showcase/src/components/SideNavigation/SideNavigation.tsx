@@ -27,8 +27,8 @@ const style: {} = {
     textDecoration: "none",
     color: "white",
     width: "100%",
-    paddingLeft: 20,
-    height: 40
+    padding: `10px 20px`,
+    minHeight: "100%"
   },
   "& .co_label": {
     marginLeft: 20

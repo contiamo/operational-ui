@@ -22,8 +22,11 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   "& h3": {
     ...theme.typography.heading2
   },
-  "& p": {
+  "& p, & li": {
     ...theme.typography.body
+  },
+  "& ul": {
+    paddingLeft: theme.spacing * 1.25
   }
 }))
 

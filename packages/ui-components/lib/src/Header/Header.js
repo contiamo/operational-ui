@@ -15,7 +15,8 @@ var Container = glamorous_1.default.header(function (_a) {
     return {
         backgroundColor: backgroundColor,
         display: "flex",
-        minHeight: 50,
+        flex: "0 0 50px",
+        height: 50,
         alignItems: "center",
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"])

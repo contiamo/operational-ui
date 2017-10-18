@@ -28,8 +28,9 @@ const Container = glamorous.div(({ theme, hasOptions }: { theme: Theme; hasOptio
   display: "flex",
   alignItems: "center",
   width: "100%",
+  height: 50,
+  flex: "0 0 50px",
   borderBottom: "1px solid rgba(255, 255, 255, .1)",
-  padding: `${theme.spacing * 3 / 4}px 0`,
   cursor: hasOptions ? "pointer" : "default",
   backgroundColor: "inherit",
 

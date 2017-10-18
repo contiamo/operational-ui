@@ -56,7 +56,7 @@ const style = () => ({
 const myCard = ({ className }: { className?: string }) => (
   <div className={className} style={{ display: "block", padding: 32, maxWidth: 700 }}>
     <h1>Contiamo UI</h1>
-    <h2>A single collection of UI components that compose to create Contiamo products.</h2>
+    <h2>Building blocks for effective operational interfaces</h2>
 
     <div className="grid">
       <Link to="/styleguide">

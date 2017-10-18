@@ -5,10 +5,10 @@ exports[`App starts 1`] = `
   class="css-1ekk8l2"
 >
   <div
-    class="css-guolr8"
+    class="css-1scyin7"
   >
     <div
-      class="css-ihgfbr"
+      class="css-12zxt11"
       role="listbox"
       tabindex="-1"
     >
@@ -28,9 +28,7 @@ exports[`App starts 1`] = `
       />
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
     >
       <a
         href="/styleguide"
@@ -61,9 +59,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
     >
       <a
         href="/components"
@@ -110,9 +106,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
     >
       <a
         href="/"
@@ -176,9 +170,7 @@ exports[`App starts 1`] = `
       </a>
     </div>
     <div
-      class="css-1n1hwgn undefined"
-      role="button"
-      tabindex="-1"
+      class="css-1n1hwgn"
     >
       <a
         href="/visualizations"
@@ -238,7 +230,7 @@ exports[`App starts 1`] = `
     class="css-oslscu"
   >
     <header
-      class="css-t9hfxf"
+      class="css-vstb49"
     >
       Contiamo UI
     </header>
