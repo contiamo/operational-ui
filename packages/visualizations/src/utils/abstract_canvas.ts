@@ -2,6 +2,7 @@ import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
 import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import * as styles from "../styles/styles"
 
 abstract class AbstractCanvas {
   container: d3.Selection<Element, {}, null, undefined>
@@ -27,7 +28,7 @@ abstract class AbstractCanvas {
   insertContainer(context: any): void {
     this.container = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", "chart-container clearfix")
+      .attr("class", `${styles.chartContainer} clearfix`)
     context.appendChild(this.container.node())
   }
 
@@ -39,7 +40,7 @@ abstract class AbstractCanvas {
   insertFocusLabel(): void {
     this.focusEl = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", "focus-legend clearfix")
+      .attr("class", `${styles.focusLegend} clearfix`)
       .style("visibility", "hidden")
     this.container.node().appendChild(this.focusEl.node())
   }
