@@ -45,15 +45,19 @@ var AbstractRenderer = /** @class */ (function () {
     };
     AbstractRenderer.prototype.highlight = function (element, d) {
         this.removeHighlights();
-        element.attr("stroke", this.config.highlightColor);
+        element
+            .classed("highlighted", true)
+            .attr("stroke", this.config.highlightColor);
     };
     // Remove any old highlights (needed if an element has been manually focussed)
     AbstractRenderer.prototype.removeHighlights = function () {
-        this.el.selectAll(".hover")
+        var _this = this;
+        this.el
+            .selectAll(".highlighted")
             .attr("stroke", function (d) {
-            return d instanceof node_1.default ? "none" : d.stroke();
+            return d instanceof node_1.default ? _this.config.borderColor : d.stroke();
         })
-            .classed("hover", false);
+            .classed("highlighted", false);
     };
     AbstractRenderer.prototype.onMouseOut = function (ctx, focusPoint) {
         return function (d) {
@@ -68,8 +72,8 @@ var AbstractRenderer = /** @class */ (function () {
         this.config = this.state.current.get("config");
         this.updateDraw();
     };
-    AbstractRenderer.prototype.exit = function (els) {
-        els
+    AbstractRenderer.prototype.exit = function (elementGroups) {
+        elementGroups
             .exit()
             .on("mouseenter", null)
             .on("mouseleave", null)

@@ -10,37 +10,65 @@ const MINOPACITY: number = 0.5,
 
 class Links extends AbstractRenderer {
   type: string = "link"
-  focusElementAccessor: string = `path.${styles.link}`
+  focusElementAccessor: string = `path.link.${styles.element}`
 
   updateDraw(): void {
-    const links: TLinkSelection = this.el
-      .select("g")
-      .selectAll(`path.${styles.link}`)
+    const linkGroups: TLinkSelection = this.el.select("g.links-group")
+      .selectAll("g.link-group")
       .data(this.data, (link: TLink): string => link.sourceId() + ";" + link.targetId())
 
-    this.exit(links)
-    this.enterAndUpdate(links)
+    this.exit(linkGroups)
+    this.enterAndUpdate(linkGroups)
   }
 
-  enterAndUpdate(links: TLinkSelection): void {
-    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]),
-      opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
+  linkBorderScale(scale: TScale): TScale {
+    return (size: number): number => {
+      return scale(size) + 2 * this.config.linkBorderWidth
+    }
+  }
 
-    links.enter()
-      .append("path")
-      .attr("class", styles.link)
-      .attr("d", this.linkStartPath.bind(this))
-      .attr("stroke-width", "0px")
-      .on("mouseenter", this.onMouseOver(this))
-      .merge(links)
-      .attr("stroke", (d: TLink): string => d.stroke())
-      .transition()
-      .duration(this.config.duration)
-      .ease(easeCubicInOut)
-      .attr("d", this.linkPath.bind(this))
-      .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
-      .attr("stroke-dasharray", (d: TLink): number => d.dash())
-      .attr("opacity", (d: TLink): number => opacityScale(d.size()))
+  enterAndUpdate(linkGroups: TLinkSelection): void {
+    const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]),
+      borderScale: TScale = this.linkBorderScale(scale),
+      opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY]),
+      ctx: Links = this
+
+    linkGroups
+      .enter()
+      .append("g")
+      .attr("class", "link-group")
+      .each(function(d: TLink): void {
+        d3.select(this)
+          .append("path")
+          .attr("class", `link ${styles.border}`)
+          .attr("d", ctx.linkStartPath.bind(ctx))
+          .attr("stroke-width", "0px")
+          .on("mouseenter", ctx.onMouseOver(ctx))
+          .merge(linkGroups)
+          .attr("stroke", ctx.config.borderColor)
+          .transition()
+          .duration(ctx.config.duration)
+          .ease(easeCubicInOut)
+          .attr("d", ctx.linkPath.bind(ctx))
+          .attr("stroke-width", (d: TLink): string => borderScale(d.size()) + "px")
+          .attr("stroke-dasharray", (d: TLink): number => d.dash())
+          .attr("opacity", (d: TLink): number => opacityScale(d.size()))
+
+        d3.select(this)
+          .append("path")
+          .attr("class", `link ${styles.element}`)
+          .attr("d", ctx.linkStartPath.bind(ctx))
+          .attr("stroke-width", "0px")
+          .merge(linkGroups)
+          .attr("stroke", (d: TLink): string => d.stroke())
+          .transition()
+          .duration(ctx.config.duration)
+          .ease(easeCubicInOut)
+          .attr("d", ctx.linkPath.bind(ctx))
+          .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
+          .attr("stroke-dasharray", (d: TLink): number => d.dash())
+          .attr("opacity", (d: TLink): number => opacityScale(d.size()))
+      })
   }
 
   linkStartPath(link: TLink): string {
@@ -60,13 +88,18 @@ class Links extends AbstractRenderer {
   }
 
   highlight(element: any, d: TLink): void {
-    super.highlight(element, d)
+    // Highlight path.element when `path.${styles.border}` is hovered
+    const pathEl: any = this.el.selectAll(`path.link.${styles.element}`)
+      .filter((link: TLink): boolean => {
+        return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
+      })
+    super.highlight(pathEl, d)
     // Highlight source and target nodes as well as link
     const ctx: Links = this
-    this.el.selectAll("path.node-border")
+    this.el.selectAll(`path.node.${styles.border}`)
       .filter((node: TNode): boolean => node.id() === d.sourceId() || node.id() === d.targetId())
       .each(function(node: TNode): void {
-        d3.select(this).classed("hover", true).attr("stroke", ctx.config.highlightColor)
+        d3.select(this).classed("highlighted", true).attr("stroke", ctx.config.highlightColor)
       })
   }
 

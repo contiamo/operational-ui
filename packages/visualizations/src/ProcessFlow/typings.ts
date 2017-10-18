@@ -24,8 +24,8 @@ export {
 
 export type TNode = Nodes
 export type TLink = Link
-export type TNodeSelection = d3.Selection<d3.BaseType, TNode, Element, null>
-export type TLinkSelection = d3.Selection<d3.BaseType, TLink, Element, null>
+export type TNodeSelection = d3.Selection<d3.BaseType, TNode, null, null>
+export type TLinkSelection = d3.Selection<d3.BaseType, TLink, null, null>
 
 //@TODO
 export type TAccessors = any
@@ -40,12 +40,14 @@ export interface IFocusElement {
 
 export interface IConfig {
   arrowFill: string
+  borderColor: string
   duration: number
   focusElement?: IFocusElement // type ("node"/"link"), id / [sourceId, targetId]
   height: number
   hidden: boolean
   highlightColor: string
   labelOffset: number
+  linkBorderWidth: number
   linkStroke: string
   maxLinkWidth: number
   maxNodeSize: number

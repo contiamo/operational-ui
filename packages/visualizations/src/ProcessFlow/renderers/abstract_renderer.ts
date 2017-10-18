@@ -67,16 +67,19 @@ abstract class AbstractRenderer {
 
   highlight(element: any, d: TLink | TNode): void {
     this.removeHighlights()
-    element.attr("stroke", this.config.highlightColor)
+    element
+      .classed("highlighted", true)
+      .attr("stroke", this.config.highlightColor)
   }
 
   // Remove any old highlights (needed if an element has been manually focussed)
   removeHighlights(): void {
-    this.el.selectAll(".hover")
-      .attr("stroke", function(d: TLink | TNode): string {
-        return d instanceof Node ? "none" : d.stroke()
+    this.el
+      .selectAll(".highlighted")
+      .attr("stroke", (d: TNode | TLink): string => {
+        return d instanceof Node ? this.config.borderColor : d.stroke()
       })
-      .classed("hover", false)
+      .classed("highlighted", false)
   }
 
   abstract focusPoint(element: any, d: TLink | TNode): IFocus
@@ -98,8 +101,8 @@ abstract class AbstractRenderer {
 
   abstract updateDraw(): void
 
-  exit(els: TNodeSelection | TLinkSelection): void {
-    els
+  exit(elementGroups: TNodeSelection | TLinkSelection): void {
+    elementGroups
       .exit()
       .on("mouseenter", null)
       .on("mouseleave", null)

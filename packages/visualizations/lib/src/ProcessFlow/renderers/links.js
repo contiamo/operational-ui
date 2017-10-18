@@ -21,34 +21,59 @@ var Links = /** @class */ (function (_super) {
     function Links() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.type = "link";
-        _this.focusElementAccessor = "path." + styles.link;
+        _this.focusElementAccessor = "path.link." + styles.element;
         return _this;
     }
     Links.prototype.updateDraw = function () {
-        var links = this.el
-            .select("g")
-            .selectAll("path." + styles.link)
+        var linkGroups = this.el.select("g.links-group")
+            .selectAll("g.link-group")
             .data(this.data, function (link) { return link.sourceId() + ";" + link.targetId(); });
-        this.exit(links);
-        this.enterAndUpdate(links);
+        this.exit(linkGroups);
+        this.enterAndUpdate(linkGroups);
     };
-    Links.prototype.enterAndUpdate = function (links) {
-        var scale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]), opacityScale = this.sizeScale([MINOPACITY, MAXOPACITY]);
-        links.enter()
-            .append("path")
-            .attr("class", styles.link)
-            .attr("d", this.linkStartPath.bind(this))
-            .attr("stroke-width", "0px")
-            .on("mouseenter", this.onMouseOver(this))
-            .merge(links)
-            .attr("stroke", function (d) { return d.stroke(); })
-            .transition()
-            .duration(this.config.duration)
-            .ease(d3_ease_1.easeCubicInOut)
-            .attr("d", this.linkPath.bind(this))
-            .attr("stroke-width", function (d) { return scale(d.size()) + "px"; })
-            .attr("stroke-dasharray", function (d) { return d.dash(); })
-            .attr("opacity", function (d) { return opacityScale(d.size()); });
+    Links.prototype.linkBorderScale = function (scale) {
+        var _this = this;
+        return function (size) {
+            return scale(size) + 2 * _this.config.linkBorderWidth;
+        };
+    };
+    Links.prototype.enterAndUpdate = function (linkGroups) {
+        var scale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]), borderScale = this.linkBorderScale(scale), opacityScale = this.sizeScale([MINOPACITY, MAXOPACITY]), ctx = this;
+        linkGroups
+            .enter()
+            .append("g")
+            .attr("class", "link-group")
+            .each(function (d) {
+            d3.select(this)
+                .append("path")
+                .attr("class", "link " + styles.border)
+                .attr("d", ctx.linkStartPath.bind(ctx))
+                .attr("stroke-width", "0px")
+                .on("mouseenter", ctx.onMouseOver(ctx))
+                .merge(linkGroups)
+                .attr("stroke", ctx.config.borderColor)
+                .transition()
+                .duration(ctx.config.duration)
+                .ease(d3_ease_1.easeCubicInOut)
+                .attr("d", ctx.linkPath.bind(ctx))
+                .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
+                .attr("stroke-dasharray", function (d) { return d.dash(); })
+                .attr("opacity", function (d) { return opacityScale(d.size()); });
+            d3.select(this)
+                .append("path")
+                .attr("class", "link " + styles.element)
+                .attr("d", ctx.linkStartPath.bind(ctx))
+                .attr("stroke-width", "0px")
+                .merge(linkGroups)
+                .attr("stroke", function (d) { return d.stroke(); })
+                .transition()
+                .duration(ctx.config.duration)
+                .ease(d3_ease_1.easeCubicInOut)
+                .attr("d", ctx.linkPath.bind(ctx))
+                .attr("stroke-width", function (d) { return scale(d.size()) + "px"; })
+                .attr("stroke-dasharray", function (d) { return d.dash(); })
+                .attr("opacity", function (d) { return opacityScale(d.size()); });
+        });
     };
     Links.prototype.linkStartPath = function (link) {
         var xStart = link.source().x, yStart = link.source().y;
@@ -59,13 +84,18 @@ var Links = /** @class */ (function (_super) {
         return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd;
     };
     Links.prototype.highlight = function (element, d) {
-        _super.prototype.highlight.call(this, element, d);
+        // Highlight path.element when `path.${styles.border}` is hovered
+        var pathEl = this.el.selectAll("path.link." + styles.element)
+            .filter(function (link) {
+            return link.sourceId() === d.sourceId() && link.targetId() === d.targetId();
+        });
+        _super.prototype.highlight.call(this, pathEl, d);
         // Highlight source and target nodes as well as link
         var ctx = this;
-        this.el.selectAll("path.node-border")
+        this.el.selectAll("path.node." + styles.border)
             .filter(function (node) { return node.id() === d.sourceId() || node.id() === d.targetId(); })
             .each(function (node) {
-            d3.select(this).classed("hover", true).attr("stroke", ctx.config.highlightColor);
+            d3.select(this).classed("highlighted", true).attr("stroke", ctx.config.highlightColor);
         });
     };
     Links.prototype.focusPoint = function (element, d) {

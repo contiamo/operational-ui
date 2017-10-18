@@ -1,10 +1,10 @@
 import { css } from "glamor"
 
-const nodeStyle = {
+const elementStyle = {
   pointerEvents: "none"
 }
 
-const linkStyle = {
+const borderStyle = {
   cursor: "pointer"
 }
 
@@ -12,6 +12,6 @@ const labelStyle = {
   fillOpacity: 0.7
 }
 
-export const node = css(nodeStyle).toString()
-export const link = css(linkStyle).toString()
+export const element = css(elementStyle).toString()
+export const border = css(borderStyle).toString()
 export const label = css(labelStyle).toString()
