@@ -28,7 +28,7 @@ abstract class AbstractCanvas {
   insertContainer(context: any): void {
     this.container = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.chartContainer} clearfix`)
+      .attr("class", `${styles.chartContainer}`)
     context.appendChild(this.container.node())
   }
 
@@ -40,7 +40,7 @@ abstract class AbstractCanvas {
   insertFocusLabel(): void {
     this.focusEl = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.focusLegend} clearfix`)
+      .attr("class", `${styles.focusLegend}`)
       .style("visibility", "hidden")
     this.container.node().appendChild(this.focusEl.node())
   }

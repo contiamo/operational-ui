@@ -41,7 +41,7 @@ const breakdownBarStyle = {
   left: "0px",
   zIndex: "0",
   display: "block",
-  height: "100 %",
+  height: "100%",
   pointerEvents: "none",
   backgroundColor: "blue",
 }

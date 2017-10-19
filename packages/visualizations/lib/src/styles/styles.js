@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var glamor_1 = require("glamor");
 var chartContainerStyle = {
     position: "relative",
-    display: "initial",
+    display: "block",
     "&.hidden": {
         display: "none"
     }

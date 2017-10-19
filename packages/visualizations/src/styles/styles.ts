@@ -2,7 +2,7 @@ import { css } from "glamor"
 
 const chartContainerStyle = {
   position: "relative",
-  display: "initial",
+  display: "block",
   "&.hidden": {
     display: "none"
   }
