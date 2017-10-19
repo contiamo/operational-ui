@@ -25,6 +25,10 @@ class EventEmitter {
       subscriber(eventData)
     })
   }
+
+  removeAll(): void {
+    this.subscribers = {}
+  }
 }
 
 export default EventEmitter

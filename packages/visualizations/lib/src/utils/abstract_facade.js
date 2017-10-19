@@ -76,9 +76,7 @@ var AbstractChart = /** @class */ (function () {
             return;
         }
         this.__disposed = true;
-        // this.state.close();
-        // this.trigger("close");
-        // this.off();
+        this.events.removeAll();
     };
     return AbstractChart;
 }());
