@@ -181,7 +181,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
   <div
     class="css-imab3e"
   >
-    Fieldset
+    Organizing forms
   </div>
   <p>
     Fieldsets contain several input components, grouping them together within a larger form.

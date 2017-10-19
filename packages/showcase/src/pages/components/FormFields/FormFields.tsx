@@ -4,11 +4,11 @@ import Playground from "../../../components/Playground/Playground"
 import SyntaxHighlighter from "react-syntax-highlighter"
 
 import Table from "../../../components/PropsTable/PropsTable"
-import { Input, Select, Fieldset, Card, CardHeader } from "contiamo-ui-components"
+import { Input, Select, Fieldset, DatePicker, Card, CardHeader } from "contiamo-ui-components"
 
 import * as inputSnippet from "./snippets/FormFields.input.snippet"
 import * as selectSnippet from "./snippets/FormFields.select.snippet"
-import * as fieldsetSnippet from "./snippets/FormFields.fieldset.snippet"
+import * as formSnippet from "./snippets/FormFields.form.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
@@ -36,10 +36,10 @@ export default () => (
 
     <Playground snippet={String(selectSnippet)} components={{ Select }} />
 
-    <CardHeader>Fieldset</CardHeader>
+    <CardHeader>Organizing forms</CardHeader>
     <p>Fieldsets contain several input components, grouping them together within a larger form.</p>
 
-    <Playground snippet={String(fieldsetSnippet)} components={{ Input, Fieldset }} />
+    <Playground snippet={String(formSnippet)} components={{ Input, Fieldset, DatePicker }} />
 
     <h4>Return Value</h4>
     <p>

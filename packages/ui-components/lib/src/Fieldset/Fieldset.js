@@ -13,18 +13,23 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.fieldset(function (_a) {
     var theme = _a.theme;
     return ({
+        verticalAlign: "top",
         padding: 0,
         border: 0,
+        margin: theme.spacing + "px 0 " + theme.spacing / 2 + "px",
         "& > *:not(legend)": {
             display: "block",
             marginTop: theme.spacing,
             marginBottom: theme.spacing
+        },
+        "&:first-child": {
+            marginTop: 0
         }
     });
 });
 var Legend = glamorous_1.default.legend(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.heading1));
+    return (__assign({}, theme.typography.heading1, { paddingLeft: 0 }));
 });
 var Fieldset = function (_a) {
     var children = _a.children, legend = _a.legend;

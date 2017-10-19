@@ -21,7 +21,7 @@ export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boo
     animation: `${fadeIn} ease-in-out forwards 0.2s`,
     display: isExpanded ? "block" : "none",
     position: "absolute",
-    top: 30,
+    top: 45,
     left: "50%",
     transform: "translate3d(-50%, 0, 0)",
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,

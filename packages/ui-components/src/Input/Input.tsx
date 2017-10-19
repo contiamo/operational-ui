@@ -24,7 +24,7 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
   "& > span": {
     ...theme.typography.body,
     display: "inline-block",
-    marginBottom: theme.spacing / 3
+    marginBottom: theme.spacing / 4
   }
 }))
 

@@ -9,17 +9,23 @@ interface IProps {
 }
 
 const Container = glamorous.fieldset(({ theme }: { theme: Theme }): any => ({
+  verticalAlign: "top",
   padding: 0,
   border: 0,
+  margin: `${theme.spacing}px 0 ${theme.spacing / 2}px`,
   "& > *:not(legend)": {
     display: "block",
     marginTop: theme.spacing,
     marginBottom: theme.spacing
+  },
+  "&:first-child": {
+    marginTop: 0
   }
 }))
 
 const Legend = glamorous.legend(({ theme }: { theme: Theme }): any => ({
-  ...theme.typography.heading1
+  ...theme.typography.heading1,
+  paddingLeft: 0
 }))
 
 const Fieldset = ({ children, legend }: IProps) => (
