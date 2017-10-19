@@ -38,13 +38,28 @@ class Links extends AbstractRenderer {
       .append("g")
       .attr("class", "link-group")
       .each(function(d: TLink): void {
-        d3.select(this)
+        // Append link "border" element - white element behind link.
+        d3
+          .select(this)
           .append("path")
           .attr("class", `link ${styles.border}`)
           .attr("d", ctx.linkStartPath.bind(ctx))
           .attr("stroke-width", "0px")
           .on("mouseenter", ctx.onMouseOver(ctx))
-          .merge(linkGroups)
+        // Append link
+        d3
+          .select(this)
+          .append("path")
+          .attr("class", `link ${styles.element}`)
+          .attr("d", ctx.linkStartPath.bind(ctx))
+          .attr("stroke-width", "0px")
+      })
+      .merge(linkGroups)
+      .each(function(d: TLink): void {
+        // Update link border
+        d3
+          .select(this)
+          .select(`path.link.${styles.border}`)
           .attr("stroke", ctx.config.borderColor)
           .transition()
           .duration(ctx.config.duration)
@@ -53,13 +68,10 @@ class Links extends AbstractRenderer {
           .attr("stroke-width", (d: TLink): string => borderScale(d.size()) + "px")
           .attr("stroke-dasharray", (d: TLink): number => d.dash())
           .attr("opacity", (d: TLink): number => opacityScale(d.size()))
-
-        d3.select(this)
-          .append("path")
-          .attr("class", `link ${styles.element}`)
-          .attr("d", ctx.linkStartPath.bind(ctx))
-          .attr("stroke-width", "0px")
-          .merge(linkGroups)
+        // Update link
+        d3
+          .select(this)
+          .select(`path.link.${styles.element}`)
           .attr("stroke", (d: TLink): string => d.stroke())
           .transition()
           .duration(ctx.config.duration)

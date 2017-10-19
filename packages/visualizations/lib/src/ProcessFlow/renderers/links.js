@@ -44,13 +44,28 @@ var Links = /** @class */ (function (_super) {
             .append("g")
             .attr("class", "link-group")
             .each(function (d) {
-            d3.select(this)
+            // Append link "border" element - white element behind link.
+            d3
+                .select(this)
                 .append("path")
                 .attr("class", "link " + styles.border)
                 .attr("d", ctx.linkStartPath.bind(ctx))
                 .attr("stroke-width", "0px")
-                .on("mouseenter", ctx.onMouseOver(ctx))
-                .merge(linkGroups)
+                .on("mouseenter", ctx.onMouseOver(ctx));
+            // Append link
+            d3
+                .select(this)
+                .append("path")
+                .attr("class", "link " + styles.element)
+                .attr("d", ctx.linkStartPath.bind(ctx))
+                .attr("stroke-width", "0px");
+        })
+            .merge(linkGroups)
+            .each(function (d) {
+            // Update link border
+            d3
+                .select(this)
+                .select("path.link." + styles.border)
                 .attr("stroke", ctx.config.borderColor)
                 .transition()
                 .duration(ctx.config.duration)
@@ -59,12 +74,10 @@ var Links = /** @class */ (function (_super) {
                 .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
                 .attr("stroke-dasharray", function (d) { return d.dash(); })
                 .attr("opacity", function (d) { return opacityScale(d.size()); });
-            d3.select(this)
-                .append("path")
-                .attr("class", "link " + styles.element)
-                .attr("d", ctx.linkStartPath.bind(ctx))
-                .attr("stroke-width", "0px")
-                .merge(linkGroups)
+            // Update link
+            d3
+                .select(this)
+                .select("path.link." + styles.element)
                 .attr("stroke", function (d) { return d.stroke(); })
                 .transition()
                 .duration(ctx.config.duration)
