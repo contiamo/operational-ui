@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fieldsets Showcase Page Should render correctly 1`] = `
+<div
+  class="css-zssd73"
+>
+  <div
+    class="css-imab3e"
+  >
+    Fieldsets
+  </div>
+  <p>
+    Fieldsets are great components!
+  </p>
+  <h4>
+    Usage
+  </h4>
+  <div
+    class="css-1r6pn67"
+  >
+    <div
+      class="css-koz1rt"
+    >
+      Give yourself some space - expand this playground
+    </div>
+    <div
+      class="playground"
+    >
+      <div
+        class="playgroundCode"
+      >
+        <div
+          class="react-codemirror2 playgroundStage"
+        />
+      </div>
+      <div
+        class="playgroundPreview"
+      >
+        <div>
+          <div
+            class="previewArea"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4>
+    Props
+  </h4>
+  <table
+    class="css-xa6ngs"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Optional?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          value
+        </td>
+        <td>
+          Description of the value prop.
+        </td>
+        <td>
+          Hello World
+        </td>
+        <td>
+          string
+        </td>
+        <td>
+          🚫
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

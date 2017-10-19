@@ -178,6 +178,43 @@ exports[`FormFieldsPage Should render correctly 1`] = `
       </div>
     </div>
   </div>
+  <div
+    class="css-imab3e"
+  >
+    Fieldset
+  </div>
+  <p>
+    Fieldsets contain several input components, grouping them together within a larger form.
+  </p>
+  <div
+    class="css-1r6pn67"
+  >
+    <div
+      class="css-koz1rt"
+    >
+      Give yourself some space - expand this playground
+    </div>
+    <div
+      class="playground"
+    >
+      <div
+        class="playgroundCode"
+      >
+        <div
+          class="react-codemirror2 playgroundStage"
+        />
+      </div>
+      <div
+        class="playgroundPreview"
+      >
+        <div>
+          <div
+            class="previewArea"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
   <h4>
     Return Value
   </h4>
