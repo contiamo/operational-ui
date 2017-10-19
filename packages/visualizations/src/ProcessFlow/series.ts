@@ -39,20 +39,6 @@ class Series {
     this.renderer.draw()
     this.drawn = true
   }
-
-  //
-  // resize(): void {
-  //   this.updateDraw()
-  //   this.draw()
-  // }
-
-  // close(): void {
-  //   if (this.drawn) {
-  //     this.renderer.close()
-  //     invoke("remove")(this.el)
-  //     this.drawn = false
-  //   }
-  // }
 }
 
 export default Series
