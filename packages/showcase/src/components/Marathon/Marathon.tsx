@@ -15,28 +15,27 @@ interface IProps {
   className?: string
   timeout?: number
   test: (a: IMarathon) => void
-  theme: Theme
 }
 
+// Test globals mimicking Jest's API
 export interface IMarathon {
   test?: (description: string, done?: () => void) => void
-  expect?: (description: string, fn: TestFn) => void
-  beforeEach?: (a: any) => void
-  afterEach?: (a: any) => void
-  beforeAll?: (a: any) => void
-  afterAll?: (a: any) => void
+  expect?: (expected: any) => { toBe: any }
+  beforeEach?: (fn: any) => void
+  afterEach?: (fn: any) => void
+  beforeAll?: (fn: any) => void
+  afterAll?: (fn: any) => void
   container?: HTMLElement
 }
 
 interface ITestWithRunner {
   description: string
-  fail: boolean
   fn: TestFn
 }
 
 interface ITest {
   description: string
-  fail: boolean
+  failure?: string
 }
 
 const sleep = (ms: number) =>
@@ -77,16 +76,25 @@ class Marathon extends React.Component<IProps, IState> {
     })
 
   test = (description: string, fn: (done?: ((a: any) => void)) => void): void => {
-    this._tests.push({ description, fn, fail: false })
+    this._tests.push({ description, fn })
   }
 
-  expect = (condition: boolean): void => {
-    if (!condition) {
-      this.setState(({ tests, completed }: IState) => ({
-        tests: tests.map((test, index) => (index === completed ? { ...test, fail: true } : test))
-      }))
+  expect = (actual: any): { toBe: any } => {
+    return {
+      toBe: (expected: any): void => {
+        const failure = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
+        this.setState(({ tests, completed }: IState) => ({
+          tests: tests.map((test, index) => (index === completed ? { ...test, failure } : test))
+        }))
+      }
     }
   }
+
+  // Test lifecycle callbacks
+  beforeEach?: () => void
+  afterEach?: () => void
+  beforeAll?: () => void
+  afterAll?: () => void
 
   runNext = async () => {
     const { tests, completed } = this.state
@@ -94,18 +102,23 @@ class Marathon extends React.Component<IProps, IState> {
     const test = this._tests[completed]
 
     if (!test) {
+      this.afterAll && this.afterAll()
       return
     }
 
     if (test.fn.length === 0) {
       await sleep(timeout)
+      this.beforeEach && this.beforeEach()
       test.fn()
       await this.setStateAsync(prevState => ({ completed: prevState.completed + 1 }))
+      this.afterEach && this.afterEach()
       this.runNext()
     } else {
       await sleep(timeout)
+      this.beforeEach && this.beforeEach()
       test.fn(async () => {
         await this.setState(prevState => ({ completed: prevState.completed + 1 }))
+        this.afterEach && this.afterEach()
         this.runNext()
       })
     }
@@ -115,12 +128,29 @@ class Marathon extends React.Component<IProps, IState> {
     const { test, _tests: tests, expect, container } = this
 
     // Run client-provided test function, injecting test methods (test, expect, ...)
-    this.props.test({ test, expect, container } as any)
+    this.props.test({
+      test,
+      expect,
+      container,
+      beforeEach: (fn: any): void => {
+        this.beforeEach = fn
+      },
+      afterEach: (fn: any): void => {
+        this.beforeEach = fn
+      },
+      beforeAll: (fn: any): void => {
+        this.beforeAll = fn
+      },
+      afterAll: (fn: any): void => {
+        this.afterAll = fn
+      }
+    } as any)
 
     // Pin the test array on state, run first one when ready.
     this.setStateAsync(prevState => ({
-      tests: tests.map(test => ({ description: test.description, fail: test.fail }))
+      tests: tests.map(test => ({ description: test.description, failure: null }))
     })).then(() => {
+      this.beforeAll && this.beforeAll()
       this.runNext()
     })
   }

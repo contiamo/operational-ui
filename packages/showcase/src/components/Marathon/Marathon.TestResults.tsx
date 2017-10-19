@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { withTheme } from "glamorous"
 
 import { Icon } from "contiamo-ui-components"
 
@@ -13,40 +13,65 @@ const Item = glamorous.li({
   "& > *": {
     display: "inline-block",
     verticalAlign: "middle",
-    margin: "4px auto"
-  },
-  "& :first-child": {
-    marginRight: 6
+    marginTop: 2,
+    marginBottom: 2
   }
 })
 
+const Title = glamorous.p(({ theme }: { theme: Theme }): any => ({
+  ...theme.typography.heading1,
+  display: "inline-block",
+  "& :first-child": {
+    position: "relative",
+    top: -2,
+    marginRight: 6
+  },
+  "& > *": {
+    display: "inline-block",
+    verticalAlign: "middle"
+  }
+}))
+
+const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
+  color: theme.colors.palette.error,
+  display: "inline-block",
+  marginLeft: 8,
+  "&::before": {
+    content: " → "
+  }
+}))
+
 interface IProps {
-  tests: { description: string; fail: boolean }[]
+  tests: { description: string; failure?: string }[]
   completed: number
+  theme: Theme
 }
 
-const TestResults: React.SFC<IProps> = ({ tests, completed }: IProps) => (
+const TestResults: React.SFC<IProps> = ({ tests, completed, theme }: IProps) => (
   <Container>
     {tests.map((test: any, index: any) => {
-      const failed = test.fail
+      const failed = !!test.failure
       const isCompleted = completed > index
       const content = isCompleted ? (
         failed ? (
-          <Icon name="X" size={12} color="#FF0000" />
+          <Icon name="X" size={12} color={theme.colors.palette.error} />
         ) : (
-          <Icon name="Check" size={12} color="#00FF00" />
+          <Icon name="Check" size={12} color={theme.colors.palette.success} />
         )
       ) : (
-        <Icon name="MoreHorizontal" size={12} color="#000000" />
+        <Icon name="MoreHorizontal" size={12} color={theme.colors.palette.black} />
       )
       return (
         <Item key={index}>
-          {content}
-          {test.description}
+          <Title>
+            {content}
+            {test.description}
+          </Title>
+          {test.failure && <FailureMessage>{test.failure}</FailureMessage>}
         </Item>
       )
     })}
   </Container>
 )
 
-export default TestResults
+export default withTheme(TestResults)

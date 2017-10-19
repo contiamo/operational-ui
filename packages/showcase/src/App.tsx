@@ -31,7 +31,7 @@ const Container = glamorous.div({
     fontSize: "1.3rem"
   },
   "& p": {
-    margin: 0,
+    marginTop: 0,
     marginBottom: contiamoTheme.spacing
   }
 })
