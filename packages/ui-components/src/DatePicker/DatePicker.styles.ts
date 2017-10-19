@@ -32,7 +32,7 @@ export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boo
 
 export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
   position: "absolute",
-  top: 0,
+  bottom: 0,
   right: 0,
   width: 24,
   height: 24,
@@ -95,6 +95,15 @@ export const Day = glamorous.div(
   })
 )
 
+// @todo -> remove code duplication with <Input> component once labeling strategy stabilizes
+export const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
+  "& > span": {
+    ...theme.typography.body,
+    display: "inline-block",
+    marginBottom: theme.spacing / 3
+  }
+}))
+
 export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
   userSelect: "none",
   padding: theme.spacing / 2,
@@ -113,7 +122,7 @@ export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => (
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  top: 0,
+  bottom: 0,
   right: -23,
   opacity: 0.3,
   textAlign: "center",

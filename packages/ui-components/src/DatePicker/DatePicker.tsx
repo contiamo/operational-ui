@@ -2,11 +2,13 @@ import * as React from "react"
 import glamorous from "glamorous"
 import Card from "../Card/Card"
 import Icon from "../Icon/Icon"
-import { Container, ClearButton, Toggle, MonthNav, IconContainer, Days, Day, Input } from "./DatePicker.styles"
+import { Container, ClearButton, Toggle, MonthNav, IconContainer, Days, Day, Input, Label } from "./DatePicker.styles"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 
 interface IProps {
+  id?: string
+  label?: string
   start?: string
   end?: string
   onChange?: (date: { start?: string; end?: string }) => void
@@ -74,7 +76,8 @@ class DatePicker extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { start, end } = this.props
+    const { start, end, label, id } = this.props
+    const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
     const placeholderDays = monthStartDay(this.state.year, this.state.month)
     const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
     return (
@@ -107,20 +110,26 @@ class DatePicker extends React.Component<IProps, IState> {
             <Icon name="X" size={12} />
           </ClearButton>
         )}
-        <Input
-          readOnly
-          innerRef={node => {
-            this.inputNode = node
-          }}
-          value={[start, end].filter(s => !!s).join(" - ")}
-          placeholder={this.props.placeholder || "Enter date"}
-          onFocus={ev => {
-            this.setState(prevState => ({
-              isExpanded: !prevState.isExpanded
-            }))
-            this.inputNode && this.inputNode.blur()
-          }}
-        />
+        <Label htmlFor={domId}>
+          {/* @todo -> remove code duplication with <Input> component once labeling strategy stabilizes */}
+          {label && <span>{label}</span>}
+          {label && <br />}
+          <Input
+            id={domId}
+            readOnly
+            innerRef={node => {
+              this.inputNode = node
+            }}
+            value={[start, end].filter(s => !!s).join(" - ")}
+            placeholder={this.props.placeholder || "Enter date"}
+            onFocus={ev => {
+              this.setState(prevState => ({
+                isExpanded: !prevState.isExpanded
+              }))
+              this.inputNode && this.inputNode.blur()
+            }}
+          />
+        </Label>
         <Card className="co_card">
           <MonthNav>
             <IconContainer

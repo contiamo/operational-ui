@@ -7,6 +7,8 @@ type Props = {
   placeholder?: string
   name?: string
   value: string
+  id?: string
+  label?: string
   inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
   onFocus?: (ev: any) => void
@@ -18,7 +20,15 @@ type StyleProps = {
   theme: Theme
 }
 
-const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
+const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
+  "& > span": {
+    ...theme.typography.body,
+    display: "inline-block",
+    marginBottom: theme.spacing / 3
+  }
+}))
+
+const InputField = glamorous.input(({ theme }: StyleProps) => ({
   padding: theme.spacing / 2,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
@@ -26,21 +36,39 @@ const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   WebkitAppearance: "none"
 }))
 
-const Input: React.SFC<Props> = ({ css, className, name, placeholder, value, onChange, onFocus, onBlur, inputRef }) => {
+const Input: React.SFC<Props> = ({
+  css,
+  className,
+  label,
+  id,
+  name,
+  placeholder,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  inputRef
+}) => {
+  const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
   return (
-    <StyledInput
-      css={css}
-      innerRef={inputRef}
-      className={className}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onChange={(e: any) => {
-        onChange && onChange(e.target.value)
-      }}
-    />
+    <Label htmlFor={domId}>
+      {label && <span>{label}</span>}
+      {label && <br />}
+      <InputField
+        css={css}
+        innerRef={inputRef}
+        className={className}
+        id={domId}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={(e: any) => {
+          onChange && onChange(e.target.value)
+        }}
+      />
+    </Label>
   )
 }
 

@@ -68,7 +68,8 @@ var DatePicker = /** @class */ (function (_super) {
     };
     DatePicker.prototype.render = function () {
         var _this = this;
-        var _a = this.props, start = _a.start, end = _a.end;
+        var _a = this.props, start = _a.start, end = _a.end, label = _a.label, id = _a.id;
+        var domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null);
         var placeholderDays = DatePicker_utils_1.monthStartDay(this.state.year, this.state.month);
         var daysInCurrentMonth = DatePicker_utils_1.daysInMonth(this.state.month, this.state.year);
         return (React.createElement(DatePicker_styles_1.Container, { innerRef: function (node) {
@@ -88,14 +89,17 @@ var DatePicker = /** @class */ (function (_super) {
                         });
                 } },
                 React.createElement(Icon_1.default, { name: "X", size: 12 }))),
-            React.createElement(DatePicker_styles_1.Input, { readOnly: true, innerRef: function (node) {
-                    _this.inputNode = node;
-                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function (ev) {
-                    _this.setState(function (prevState) { return ({
-                        isExpanded: !prevState.isExpanded
-                    }); });
-                    _this.inputNode && _this.inputNode.blur();
-                } }),
+            React.createElement(DatePicker_styles_1.Label, { htmlFor: domId },
+                label && React.createElement("span", null, label),
+                label && React.createElement("br", null),
+                React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
+                        _this.inputNode = node;
+                    }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function (ev) {
+                        _this.setState(function (prevState) { return ({
+                            isExpanded: !prevState.isExpanded
+                        }); });
+                        _this.inputNode && _this.inputNode.blur();
+                    } })),
             React.createElement(Card_1.default, { className: "co_card" },
                 React.createElement(DatePicker_styles_1.MonthNav, null,
                     React.createElement(DatePicker_styles_1.IconContainer, { onClick: function () {
