@@ -14,6 +14,7 @@ interface IProps {
   onClick?: () => void
   onMouseEnter?: () => void
   onMouseLeave?: () => void
+  theme?: Theme
 }
 
 const Container = glamorous.div(
@@ -60,11 +61,15 @@ const Bar = glamorous.div(
       pointerEvents: "none"
     }
   },
-  ({ theme, fill, color }: { theme?: Theme; fill: number; color?: string }) => {
+  ({ theme, fill, color, onClick }: IProps) => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors.palette.info) : theme.colors.palette.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
       backgroundColor: theme.colors.palette.grey10,
+      cursor: onClick ? "pointer" : "auto",
+      "&:hover": {
+        backgroundColor: "rgba(0, 0, 0, 0.01)"
+      },
       "> div": {
         color: readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
       },
