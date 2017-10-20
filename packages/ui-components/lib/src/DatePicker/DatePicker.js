@@ -24,6 +24,7 @@ var Icon_1 = require("../Icon/Icon");
 var DatePicker_styles_1 = require("./DatePicker.styles");
 var DatePicker_utils_1 = require("./DatePicker.utils");
 var DatePicker_Month_1 = require("./DatePicker.Month");
+var with_label_1 = require("../../utils/with-label");
 var DatePicker = /** @class */ (function (_super) {
     __extends(DatePicker, _super);
     function DatePicker() {
@@ -89,17 +90,14 @@ var DatePicker = /** @class */ (function (_super) {
                         });
                 } },
                 React.createElement(Icon_1.default, { name: "X", size: 12 }))),
-            React.createElement(DatePicker_styles_1.Label, { htmlFor: domId },
-                label && React.createElement("span", null, label),
-                label && React.createElement("br", null),
-                React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
-                        _this.inputNode = node;
-                    }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function (ev) {
-                        _this.setState(function (prevState) { return ({
-                            isExpanded: !prevState.isExpanded
-                        }); });
-                        _this.inputNode && _this.inputNode.blur();
-                    } })),
+            React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
+                    _this.inputNode = node;
+                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function (ev) {
+                    _this.setState(function (prevState) { return ({
+                        isExpanded: !prevState.isExpanded
+                    }); });
+                    _this.inputNode && _this.inputNode.blur();
+                } }),
             React.createElement(Card_1.default, { className: "co_card" },
                 React.createElement(DatePicker_styles_1.MonthNav, null,
                     React.createElement(DatePicker_styles_1.IconContainer, { onClick: function () {
@@ -115,5 +113,5 @@ var DatePicker = /** @class */ (function (_super) {
     };
     return DatePicker;
 }(React.Component));
-exports.default = DatePicker;
+exports.default = with_label_1.default(DatePicker);
 //# sourceMappingURL=DatePicker.js.map

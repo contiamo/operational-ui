@@ -96,13 +96,6 @@ exports.Day = glamorous_1.default.div({
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
     return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.palette.success : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.palette.grey80 : theme.colors.palette.black }));
 });
-// @todo -> remove code duplication with <Input> component once labeling strategy stabilizes
-exports.Label = glamorous_1.default.label(function (_a) {
-    var theme = _a.theme;
-    return ({
-        "& > span": __assign({}, theme.typography.body, { display: "inline-block", marginBottom: theme.spacing / 3 })
-    });
-});
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
     return ({

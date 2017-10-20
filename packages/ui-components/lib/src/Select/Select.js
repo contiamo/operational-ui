@@ -49,6 +49,7 @@ var React = require("react");
 var SelectOption_1 = require("./Option/SelectOption");
 var SelectFilter_1 = require("./Filter/SelectFilter");
 var Select_style_1 = require("./Select.style");
+var with_label_1 = require("../../utils/with-label");
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
     function Select() {
@@ -164,7 +165,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Select_style_1.Container, { innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+        return (React.createElement(Select_style_1.Container, { id: this.props.domId, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
             React.createElement("div", null, this.getDisplayValue() || this.props.placeholder),
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
@@ -174,5 +175,5 @@ var Select = /** @class */ (function (_super) {
     };
     return Select;
 }(React.Component));
-exports.default = Select;
+exports.default = with_label_1.default(Select);
 //# sourceMappingURL=Select.js.map

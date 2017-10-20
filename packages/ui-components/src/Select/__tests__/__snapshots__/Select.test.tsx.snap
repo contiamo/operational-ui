@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select Should render correctly 1`] = `
-<div
-  class="css-3kwy5e"
-  role="listbox"
-  tabindex="-2"
+<label
+  class="css-838dbk"
 >
-  <div>
-    Select me
+  <div
+    class="css-3kwy5e"
+    role="listbox"
+    tabindex="-2"
+  >
+    <div>
+      Select me
+    </div>
   </div>
-</div>
+</label>
 `;

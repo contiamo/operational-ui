@@ -13,7 +13,7 @@ export default (function() {
           placeholder="Name here"
           name="forForms"
           value={this.state.value}
-          onChange={value => {
+          onChange={(value: string) => {
             this.setState(prevState => ({ value }))
           }}
         />
