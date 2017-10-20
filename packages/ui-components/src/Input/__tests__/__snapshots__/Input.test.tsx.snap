@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input Should initialize 1`] = `
-<label
-  class="css-838dbk"
+<div
+  class="css-w0yocm"
 >
   <input
     class="css-v17uu1 hi"
@@ -10,5 +10,5 @@ exports[`Input Should initialize 1`] = `
     placeholder="hello"
     value="How are you?"
   />
-</label>
+</div>
 `;

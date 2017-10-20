@@ -103,6 +103,7 @@ class DatePicker extends React.Component<IProps, IState> {
         {!!(start && end) && (
           <ClearButton
             onClick={ev => {
+              ev.preventDefault()
               this.props.onChange &&
                 this.props.onChange({
                   start: undefined,
@@ -121,7 +122,7 @@ class DatePicker extends React.Component<IProps, IState> {
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={this.props.placeholder || "Enter date"}
-          onFocus={ev => {
+          onClick={ev => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
             }))

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select Should render correctly 1`] = `
-<label
-  class="css-838dbk"
+<div
+  class="css-w0yocm"
 >
   <div
     class="css-3kwy5e"
@@ -13,5 +13,5 @@ exports[`Select Should render correctly 1`] = `
       Select me
     </div>
   </div>
-</label>
+</div>
 `;
