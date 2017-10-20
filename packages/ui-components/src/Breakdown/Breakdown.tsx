@@ -14,7 +14,6 @@ interface IProps {
   onClick?: () => void
   onMouseEnter?: () => void
   onMouseLeave?: () => void
-  theme?: Theme
 }
 
 const Container = glamorous.div(
