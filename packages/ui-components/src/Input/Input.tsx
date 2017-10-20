@@ -1,12 +1,18 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-type Props = {
+import withLabel from "../../utils/with-label"
+
+interface IProps {
   css?: any
   className?: string
   placeholder?: string
   name?: string
   value: string
+  id?: string
+  // Injected by withLabel higher-order component
+  domId?: string
+  label?: string
   inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
   onFocus?: (ev: any) => void
@@ -14,11 +20,15 @@ type Props = {
   children?: string
 }
 
-type StyleProps = {
-  theme: Theme
-}
+const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
+  "& > span": {
+    ...theme.typography.body,
+    display: "inline-block",
+    marginBottom: theme.spacing / 3
+  }
+}))
 
-const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
+const InputField = glamorous.input(({ theme }: { theme: Theme }) => ({
   padding: theme.spacing / 2,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
@@ -26,12 +36,25 @@ const StyledInput = glamorous.input(({ theme }: StyleProps) => ({
   WebkitAppearance: "none"
 }))
 
-const Input: React.SFC<Props> = ({ css, className, name, placeholder, value, onChange, onFocus, onBlur, inputRef }) => {
+const Input = ({
+  css,
+  className,
+  label,
+  domId,
+  name,
+  placeholder,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  inputRef
+}: IProps) => {
   return (
-    <StyledInput
+    <InputField
       css={css}
       innerRef={inputRef}
       className={className}
+      id={domId}
       name={name}
       placeholder={placeholder}
       value={value}
@@ -44,4 +67,4 @@ const Input: React.SFC<Props> = ({ css, className, name, placeholder, value, onC
   )
 }
 
-export default Input
+export default withLabel(Input)

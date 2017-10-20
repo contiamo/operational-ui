@@ -24,6 +24,7 @@ var Icon_1 = require("../Icon/Icon");
 var DatePicker_styles_1 = require("./DatePicker.styles");
 var DatePicker_utils_1 = require("./DatePicker.utils");
 var DatePicker_Month_1 = require("./DatePicker.Month");
+var with_label_1 = require("../../utils/with-label");
 var DatePicker = /** @class */ (function (_super) {
     __extends(DatePicker, _super);
     function DatePicker() {
@@ -68,7 +69,8 @@ var DatePicker = /** @class */ (function (_super) {
     };
     DatePicker.prototype.render = function () {
         var _this = this;
-        var _a = this.props, start = _a.start, end = _a.end;
+        var _a = this.props, start = _a.start, end = _a.end, label = _a.label, id = _a.id;
+        var domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null);
         var placeholderDays = DatePicker_utils_1.monthStartDay(this.state.year, this.state.month);
         var daysInCurrentMonth = DatePicker_utils_1.daysInMonth(this.state.month, this.state.year);
         return (React.createElement(DatePicker_styles_1.Container, { innerRef: function (node) {
@@ -81,6 +83,7 @@ var DatePicker = /** @class */ (function (_super) {
                 } },
                 React.createElement(Icon_1.default, { name: this.state.isExpanded ? "ChevronUp" : "ChevronDown", size: 12 })),
             !!(start && end) && (React.createElement(DatePicker_styles_1.ClearButton, { onClick: function (ev) {
+                    ev.preventDefault();
                     _this.props.onChange &&
                         _this.props.onChange({
                             start: undefined,
@@ -88,9 +91,9 @@ var DatePicker = /** @class */ (function (_super) {
                         });
                 } },
                 React.createElement(Icon_1.default, { name: "X", size: 12 }))),
-            React.createElement(DatePicker_styles_1.Input, { readOnly: true, innerRef: function (node) {
+            React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
                     _this.inputNode = node;
-                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onFocus: function (ev) {
+                }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onClick: function (ev) {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded
                     }); });
@@ -111,5 +114,5 @@ var DatePicker = /** @class */ (function (_super) {
     };
     return DatePicker;
 }(React.Component));
-exports.default = DatePicker;
+exports.default = with_label_1.default(DatePicker);
 //# sourceMappingURL=DatePicker.js.map

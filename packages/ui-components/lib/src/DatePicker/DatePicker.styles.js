@@ -43,7 +43,7 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "absolute",
-        top: 0,
+        bottom: 0,
         right: 0,
         width: 24,
         height: 24,
@@ -118,7 +118,7 @@ exports.ClearButton = glamorous_1.default.div(function (_a) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        top: 0,
+        bottom: 0,
         right: -23,
         opacity: 0.3,
         textAlign: "center",

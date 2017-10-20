@@ -15,7 +15,7 @@ export default (() => {
           start={this.state.start}
           end={this.state.end}
           placeholder="Pick a date"
-          onChange={newState => {
+          onChange={(newState: any) => {
             this.setState(prevState => newState)
           }}
         />

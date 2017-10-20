@@ -5,8 +5,13 @@ import Icon from "../Icon/Icon"
 import { Container, ClearButton, Toggle, MonthNav, IconContainer, Days, Day, Input } from "./DatePicker.styles"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
+import withLabel from "../../utils/with-label"
 
 interface IProps {
+  id?: string
+  // Injected by withLabel higher-order component
+  domId?: string
+  label?: string
   start?: string
   end?: string
   onChange?: (date: { start?: string; end?: string }) => void
@@ -74,7 +79,8 @@ class DatePicker extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { start, end } = this.props
+    const { start, end, label, id } = this.props
+    const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
     const placeholderDays = monthStartDay(this.state.year, this.state.month)
     const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
     return (
@@ -97,6 +103,7 @@ class DatePicker extends React.Component<IProps, IState> {
         {!!(start && end) && (
           <ClearButton
             onClick={ev => {
+              ev.preventDefault()
               this.props.onChange &&
                 this.props.onChange({
                   start: undefined,
@@ -108,13 +115,14 @@ class DatePicker extends React.Component<IProps, IState> {
           </ClearButton>
         )}
         <Input
+          id={domId}
           readOnly
           innerRef={node => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={this.props.placeholder || "Enter date"}
-          onFocus={ev => {
+          onClick={ev => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
             }))
@@ -153,4 +161,4 @@ class DatePicker extends React.Component<IProps, IState> {
   }
 }
 
-export default DatePicker
+export default withLabel(DatePicker)

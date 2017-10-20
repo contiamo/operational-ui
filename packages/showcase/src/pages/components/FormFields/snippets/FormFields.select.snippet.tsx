@@ -21,7 +21,7 @@ export default (() => {
           options={options}
           filterable
           placeholder="Choose an option"
-          onChange={newValue => {
+          onChange={(newValue: any) => {
             this.setState(prevState => ({
               value: newValue
             }))

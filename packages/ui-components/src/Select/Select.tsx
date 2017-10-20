@@ -5,6 +5,7 @@ import SelectOption from "./Option/SelectOption"
 import SelectFilter from "./Filter/SelectFilter"
 
 import { Container, Options, OptionsList } from "./Select.style"
+import withLabel from "../../utils/with-label"
 
 type Value = number | string
 
@@ -14,6 +15,9 @@ export interface Option {
 }
 
 interface IProps {
+  id?: string
+  // Injected by withLabel higher-order component
+  domId?: string
   css?: any
   className?: string
   options: Option[]
@@ -141,6 +145,7 @@ class Select extends React.Component<IProps, IState> {
   render() {
     return (
       <Container
+        id={this.props.domId}
         innerRef={containerNode => (this.containerNode = containerNode)}
         css={this.props.css}
         className={this.props.className}
@@ -178,4 +183,4 @@ class Select extends React.Component<IProps, IState> {
   }
 }
 
-export default Select
+export default withLabel(Select)

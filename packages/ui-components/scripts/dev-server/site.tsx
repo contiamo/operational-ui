@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "react-dom"
 import { ThemeProvider } from "glamorous"
 
-import { Select, contiamoTheme } from "../../index"
+import { DatePicker, contiamoTheme } from "../../index"
 
 const options = [
   {
@@ -17,16 +17,15 @@ const options = [
 
 class Site extends React.Component<{}, {}> {
   state = {
-    value: ['value1']
+    start: "2017-10-02",
+    end: "2017-10-26"
   }
 
   render() {
     return (
       <ThemeProvider theme={contiamoTheme}>
         <div style={{padding: 40}}>
-          <Select value={this.state.value} options={options} onChange={value => {this.setState(prevState => ({
-            value
-          }))}} />
+          <DatePicker label="Select date" start={this.state.start} end={this.state.end} onChange={(newState: any) => {this.setState(prevState => newState)}} />
         </div>
       </ThemeProvider>
     )

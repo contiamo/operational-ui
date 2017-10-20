@@ -32,7 +32,7 @@ export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boo
 
 export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
   position: "absolute",
-  top: 0,
+  bottom: 0,
   right: 0,
   width: 24,
   height: 24,
@@ -113,7 +113,7 @@ export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => (
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  top: 0,
+  bottom: 0,
   right: -23,
   opacity: 0.3,
   textAlign: "center",
