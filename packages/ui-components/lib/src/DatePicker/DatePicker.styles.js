@@ -30,7 +30,7 @@ exports.Container = glamorous_1.default.div(function (_a) {
             animation: fadeIn + " ease-in-out forwards 0.2s",
             display: isExpanded ? "block" : "none",
             position: "absolute",
-            top: 45,
+            top: 30,
             left: "50%",
             transform: "translate3d(-50%, 0, 0)",
             padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
@@ -45,8 +45,8 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         position: "absolute",
         bottom: 0,
         right: 0,
-        width: 24,
-        height: 24,
+        width: 27,
+        height: 27,
         fontSize: 10,
         display: "flex",
         alignItems: "center",
@@ -98,21 +98,13 @@ exports.Day = glamorous_1.default.div({
 });
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return ({
-        userSelect: "none",
-        padding: theme.spacing / 2,
-        height: 24,
-        border: "1px solid",
-        borderColor: theme.colors.palette.grey30,
-        width: 180,
-        position: "relative"
-    });
+    return (__assign({}, theme.typography.body, { userSelect: "none", padding: theme.spacing / 2, height: 27, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 180, position: "relative" }));
 });
 exports.ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        width: 24,
-        height: 24,
+        width: 27,
+        height: 27,
         cursor: "pointer",
         position: "absolute",
         display: "flex",

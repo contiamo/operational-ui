@@ -13,6 +13,7 @@ const Container = glamorous.fieldset(({ theme }: { theme: Theme }): any => ({
   padding: 0,
   border: 0,
   margin: `${theme.spacing}px 0 ${theme.spacing / 2}px`,
+  breakInside: "avoid-column",
   "& > *:not(legend)": {
     display: "block",
     marginTop: theme.spacing,

@@ -8,7 +8,6 @@ import { Input, Select, Fieldset, DatePicker, Card, CardHeader } from "contiamo-
 
 import * as inputSnippet from "./snippets/FormFields.input.snippet"
 import * as selectSnippet from "./snippets/FormFields.select.snippet"
-import * as formSnippet from "./snippets/FormFields.form.snippet"
 import propDescription from "./propDescription"
 
 export default () => (
@@ -37,9 +36,32 @@ export default () => (
     <Playground snippet={String(selectSnippet)} components={{ Select }} />
 
     <CardHeader>Organizing forms</CardHeader>
-    <p>Fieldsets contain several input components, grouping them together within a larger form.</p>
 
-    <Playground snippet={String(formSnippet)} components={{ Input, Fieldset, DatePicker }} />
+    <p>
+      The Fieldset component can be used to group multiple form elements, layout them out under a common legend. These
+      fieldsets stay together when used in a multi-column layout.
+    </p>
+
+    <p>
+      Since there is very little code involved in laying out fieldsets in a multi-column form, this library doesn't
+      provide a Form component, leaving its implementation up to the user.
+    </p>
+
+    <form style={{ columns: "3 200px" }}>
+      <Fieldset legend="Customer">
+        <Input label="First name" value="John" />
+        <Input label="Last name" value="John" />
+        <DatePicker label="Date of birth" />
+      </Fieldset>
+      <Fieldset legend="Product">
+        <Input label="Type" value="John" />
+      </Fieldset>
+      <Fieldset legend="Customer">
+        <Input label="First name" value="John" />
+        <Input label="Last name" value="John" />
+        <DatePicker label="Date of birth" />
+      </Fieldset>
+    </form>
 
     <h4>Return Value</h4>
     <p>

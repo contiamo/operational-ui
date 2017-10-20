@@ -21,7 +21,7 @@ export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boo
     animation: `${fadeIn} ease-in-out forwards 0.2s`,
     display: isExpanded ? "block" : "none",
     position: "absolute",
-    top: 45,
+    top: 30,
     left: "50%",
     transform: "translate3d(-50%, 0, 0)",
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
@@ -34,8 +34,8 @@ export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
   position: "absolute",
   bottom: 0,
   right: 0,
-  width: 24,
-  height: 24,
+  width: 27,
+  height: 27,
   fontSize: 10,
   display: "flex",
   alignItems: "center",
@@ -96,9 +96,10 @@ export const Day = glamorous.div(
 )
 
 export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
+  ...theme.typography.body,
   userSelect: "none",
   padding: theme.spacing / 2,
-  height: 24,
+  height: 27,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
   width: 180,
@@ -106,8 +107,8 @@ export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
 }))
 
 export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  width: 24,
-  height: 24,
+  width: 27,
+  height: 27,
   cursor: "pointer",
   position: "absolute",
   display: "flex",

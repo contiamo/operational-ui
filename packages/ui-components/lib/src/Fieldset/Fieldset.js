@@ -17,6 +17,7 @@ var Container = glamorous_1.default.fieldset(function (_a) {
         padding: 0,
         border: 0,
         margin: theme.spacing + "px 0 " + theme.spacing / 2 + "px",
+        breakInside: "avoid-column",
         "& > *:not(legend)": {
             display: "block",
             marginTop: theme.spacing,
