@@ -11,6 +11,7 @@ interface IProps {
   fill: number
   color?: string
   icon?: ReactFeatherIconName
+  onClick?: () => void
   onMouseEnter?: () => void
   onMouseLeave?: () => void
 }
@@ -88,8 +89,19 @@ const Number = glamorous.div(
   })
 )
 
-export default ({ css, className, children, color, label, fill, number, onMouseEnter, onMouseLeave }: IProps) => (
-  <Container css={css} className={className} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+export default ({
+  css,
+  className,
+  children,
+  color,
+  label,
+  fill,
+  number,
+  onClick,
+  onMouseEnter,
+  onMouseLeave
+}: IProps) => (
+  <Container css={css} className={className} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
     <Number>{number}</Number>
     <div style={{ width: "100%" }}>
       <Label>{children}</Label>
