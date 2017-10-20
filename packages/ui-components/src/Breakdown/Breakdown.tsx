@@ -23,8 +23,12 @@ const Container = glamorous.div(
     alignItems: "center",
     maxWidth: 300
   },
-  ({ theme }: { theme?: Theme }) => ({
+  ({ theme, onClick }: { theme?: Theme; onClick: () => void }) => ({
     padding: theme.spacing / 2,
+    cursor: onClick ? "pointer" : "auto",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.01)"
+    },
     background: theme.colors.palette.white,
     "& + &": {
       borderTop: `1px solid ${theme.colors.palette.grey20}`
@@ -66,10 +70,6 @@ const Bar = glamorous.div(
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
       backgroundColor: theme.colors.palette.grey10,
-      cursor: onClick ? "pointer" : "auto",
-      "&:hover": {
-        backgroundColor: "rgba(0, 0, 0, 0.01)"
-      },
       "> div": {
         color: readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
       },
