@@ -10,6 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
 var glamor_1 = require("glamor");
+var inputHeight = 27;
 var fadeIn = glamor_1.css.keyframes({
     from: {
         opacity: 0,
@@ -45,8 +46,8 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         position: "absolute",
         bottom: 0,
         right: 0,
-        width: 27,
-        height: 27,
+        width: inputHeight,
+        height: inputHeight,
         fontSize: 10,
         display: "flex",
         alignItems: "center",
@@ -98,20 +99,20 @@ exports.Day = glamorous_1.default.div({
 });
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", padding: theme.spacing / 2, height: 27, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 180, position: "relative" }));
+    return (__assign({}, theme.typography.body, { userSelect: "none", padding: theme.spacing / 2, height: inputHeight, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative" }));
 });
 exports.ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        width: 27,
-        height: 27,
+        width: inputHeight,
+        height: inputHeight,
         cursor: "pointer",
         position: "absolute",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         bottom: 0,
-        right: -23,
+        right: -inputHeight + 1,
         opacity: 0.3,
         textAlign: "center",
         zIndex: theme.baseZIndex + 100,

@@ -29,7 +29,7 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
 }))
 
 const InputField = glamorous.input(({ theme }: { theme: Theme }) => ({
-  minWidth: 180,
+  minWidth: 200,
   padding: theme.spacing / 2,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,

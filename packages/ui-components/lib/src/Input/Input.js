@@ -20,7 +20,7 @@ var Label = glamorous_1.default.label(function (_a) {
 var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
     return ({
-        minWidth: 180,
+        minWidth: 200,
         padding: theme.spacing / 2,
         border: "1px solid",
         borderColor: theme.colors.palette.grey30,

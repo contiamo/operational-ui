@@ -211,7 +211,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-10jjetm"
+          class="css-5ccdv7"
           id="first-name"
           value="John"
         />
@@ -227,7 +227,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-10jjetm"
+          class="css-5ccdv7"
           id="last-name"
           value="John"
         />
@@ -265,7 +265,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
             </svg>
           </div>
           <input
-            class="css-ekajuy"
+            class="css-yhifvi"
             id="date-of-birth"
             placeholder="Enter date"
             readonly=""
@@ -521,7 +521,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-10jjetm"
+          class="css-5ccdv7"
           id="type"
           value="John"
         />
@@ -546,7 +546,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-10jjetm"
+          class="css-5ccdv7"
           id="first-name"
           value="John"
         />
@@ -562,7 +562,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-10jjetm"
+          class="css-5ccdv7"
           id="last-name"
           value="John"
         />
@@ -600,7 +600,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
             </svg>
           </div>
           <input
-            class="css-ekajuy"
+            class="css-yhifvi"
             id="date-of-birth"
             placeholder="Enter date"
             readonly=""
