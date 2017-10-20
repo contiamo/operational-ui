@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import { uniqueId, forEach, reduce } from "lodash/fp"
-import { IConfig, IFocus, IBreakdown } from "./typings"
+import { uniqueId, forEach, reduce, map } from "lodash/fp"
+import { IConfig, IFocus, IBreakdown, TLink, TNode } from "./typings"
 import * as styles from "./styles"
 
 // There can only be an element focus in process flow diagrams
@@ -38,9 +38,10 @@ class Focus extends AbstractFocus {
         .html('<span class="value">' + datum.size() + "</span>")
 
       if (isNode) {
+        const breakdowns: { inputs: IBreakdown[], outputs: IBreakdown[] } = ctx.computeBreakdowns(datum)
         const container: any = content.append("div").attr("class", styles.breakdownsContainer)
-        ctx.addBreakdowns("Inputs", container, datum.inputsBreakdown)
-        ctx.addBreakdowns("Outputs", container, datum.outputsBreakdown)
+        ctx.addBreakdowns("Inputs", container, breakdowns.inputs)
+        ctx.addBreakdowns("Outputs", container, breakdowns.outputs)
 
         const outputTotal: number = reduce((memo: number, link: any): number => {
           return memo + link.size()
@@ -65,6 +66,26 @@ class Focus extends AbstractFocus {
 
       FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
+  }
+
+  computeBreakdowns(node: TNode): { inputs: IBreakdown[], outputs: IBreakdown[] } {
+    const inputs: IBreakdown[] = map((link: TLink): IBreakdown => {
+      const size: number = link.size()
+      return {
+        label: link.source().label(),
+        size: size,
+        percentage: Math.round(size * 100 / node.size())
+      }
+    })(node.targetLinks)
+    const outputs: IBreakdown[] = map((link: TLink): IBreakdown => {
+      const size: number = link.size()
+      return {
+        label: link.target().label(),
+        size: size,
+        percentage: Math.round(size * 100 / node.size())
+      }
+    })(node.sourceLinks)
+    return { inputs, outputs}
   }
 
   addBreakdowns(title: string, content: any, breakdownItems: IBreakdown[]): void {

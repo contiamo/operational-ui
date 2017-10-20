@@ -40,9 +40,10 @@ var Focus = /** @class */ (function (_super) {
                 .attr("class", "series clearfix")
                 .html('<span class="value">' + datum.size() + "</span>");
             if (isNode) {
+                var breakdowns = ctx.computeBreakdowns(datum);
                 var container = content.append("div").attr("class", styles.breakdownsContainer);
-                ctx.addBreakdowns("Inputs", container, datum.inputsBreakdown);
-                ctx.addBreakdowns("Outputs", container, datum.outputsBreakdown);
+                ctx.addBreakdowns("Inputs", container, breakdowns.inputs);
+                ctx.addBreakdowns("Outputs", container, breakdowns.outputs);
                 var outputTotal = fp_1.reduce(function (memo, link) {
                     return memo + link.size();
                 }, 0)(datum.sourceLinks);
@@ -62,6 +63,25 @@ var Focus = /** @class */ (function (_super) {
             var offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
             focus_utils_1.default.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset);
         };
+    };
+    Focus.prototype.computeBreakdowns = function (node) {
+        var inputs = fp_1.map(function (link) {
+            var size = link.size();
+            return {
+                label: link.source().label(),
+                size: size,
+                percentage: Math.round(size * 100 / node.size())
+            };
+        })(node.targetLinks);
+        var outputs = fp_1.map(function (link) {
+            var size = link.size();
+            return {
+                label: link.target().label(),
+                size: size,
+                percentage: Math.round(size * 100 / node.size())
+            };
+        })(node.sourceLinks);
+        return { inputs: inputs, outputs: outputs };
     };
     Focus.prototype.addBreakdowns = function (title, content, breakdownItems) {
         var container = content.append("div").attr("class", styles.breakdownContainer);
