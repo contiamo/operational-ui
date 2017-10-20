@@ -64,7 +64,7 @@ const Bar = glamorous.div(
       pointerEvents: "none"
     }
   },
-  ({ theme, fill, color, onClick }: IProps) => {
+  ({ theme, fill, color }: { theme: Theme; fill: string; color: string }) => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors.palette.info) : theme.colors.palette.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
