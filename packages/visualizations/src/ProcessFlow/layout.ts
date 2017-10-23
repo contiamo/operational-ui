@@ -35,7 +35,7 @@ class Layout {
       })(nodes)
       if (nextNodes.length > 0 && i < this.nodes.length) {
         if (nodes.length === nextNodes.length) {
-          throw new Error("The data contains at least one loop. Handle loops before rendering.")
+          throw new Error('The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the "contiamo-visualizations" package.')
         }
         ++i
         assignNextNodes(nextNodes)
