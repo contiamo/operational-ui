@@ -46,10 +46,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var SelectOption_1 = require("./Option/SelectOption");
-var SelectFilter_1 = require("./Filter/SelectFilter");
+var SelectOption_1 = require("./SelectOption");
+var SelectFilter_1 = require("./SelectFilter");
 var Select_style_1 = require("./Select.style");
 var with_label_1 = require("../../utils/with-label");
+var displayOption = function (opt) {
+    if (opt.label) {
+        return opt.label;
+    }
+    return String(opt.value);
+};
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
     function Select() {
@@ -85,21 +91,23 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.getDisplayValue = function () {
         var _this = this;
+        var placeholder = this.props.placeholder || "No entries selected";
         if (!this.props.value) {
-            return this.props.placeholder || "No entries selected";
+            return placeholder;
         }
         if (!Array.isArray(this.props.value)) {
-            return this.props.options.filter(function (option) { return option.value === _this.props.value; })[0].label;
+            var displayedOption = this.props.options.filter(function (option) { return option.value === _this.props.value; })[0];
+            return displayedOption ? displayOption(displayedOption) : placeholder;
         }
         var listDisplay = this.props.options
-            .map(function (option) { return (_this.props.value.indexOf(option.value) > -1 ? option.label : null); })
+            .map(function (option) { return (_this.props.value.indexOf(option.value) > -1 ? displayOption(option) : null); })
             .filter(function (a) { return !!a; })
             .join(", ");
         return listDisplay === "" ? this.props.placeholder || "No entries selected" : listDisplay;
     };
     Select.prototype.selectOption = function (option) {
         if (!Array.isArray(this.props.value)) {
-            this.props.onChange(option.value);
+            this.props.onChange(this.props.value === option.value ? null : option.value);
             return;
         }
         var optionIndex = this.props.value.indexOf(option.value);
@@ -112,7 +120,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.isOptionSelected = function (option) {
         if (!Array.isArray(this.props.value)) {
-            return this.props.value === option;
+            return this.props.value === option.value;
         }
         return this.props.value.indexOf(option.value) > -1;
     };
@@ -166,7 +174,7 @@ var Select = /** @class */ (function (_super) {
     Select.prototype.render = function () {
         var _this = this;
         return (React.createElement(Select_style_1.Container, { id: this.props.domId, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
-            React.createElement("div", null, this.getDisplayValue() || this.props.placeholder),
+            React.createElement(Select_style_1.DisplayValue, { isPlaceholder: Array.isArray(this.props.value) ? this.props.value.length === 0 : !this.props.value }, this.getDisplayValue()),
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
                 React.createElement(Select_style_1.OptionsList, null, this.props.options.map(function (option) {

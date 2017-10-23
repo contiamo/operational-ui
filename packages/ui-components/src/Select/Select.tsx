@@ -1,17 +1,24 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import SelectOption from "./Option/SelectOption"
-import SelectFilter from "./Filter/SelectFilter"
+import SelectOption from "./SelectOption"
+import SelectFilter from "./SelectFilter"
 
-import { Container, Options, OptionsList } from "./Select.style"
+import { Container, Options, OptionsList, DisplayValue } from "./Select.style"
 import withLabel from "../../utils/with-label"
 
 type Value = number | string
 
 export interface Option {
   label?: string
-  value?: Value
+  value: Value
+}
+
+const displayOption = (opt: Option): string => {
+  if (opt.label) {
+    return opt.label
+  }
+  return String(opt.value)
 }
 
 interface IProps {
@@ -74,16 +81,18 @@ class Select extends React.Component<IProps, IState> {
   }
 
   getDisplayValue(): string {
+    const placeholder = this.props.placeholder || "No entries selected"
     if (!this.props.value) {
-      return this.props.placeholder || "No entries selected"
+      return placeholder
     }
 
     if (!Array.isArray(this.props.value)) {
-      return this.props.options.filter(option => option.value === this.props.value)[0].label
+      const displayedOption = this.props.options.filter(option => option.value === this.props.value)[0]
+      return displayedOption ? displayOption(displayedOption) : placeholder
     }
 
     const listDisplay = this.props.options
-      .map(option => ((this.props.value as Value[]).indexOf(option.value) > -1 ? option.label : null))
+      .map(option => ((this.props.value as Value[]).indexOf(option.value) > -1 ? displayOption(option) : null))
       .filter(a => !!a)
       .join(", ")
     return listDisplay === "" ? this.props.placeholder || "No entries selected" : listDisplay
@@ -91,7 +100,7 @@ class Select extends React.Component<IProps, IState> {
 
   selectOption(option: Option) {
     if (!Array.isArray(this.props.value)) {
-      this.props.onChange(option.value)
+      this.props.onChange(this.props.value === option.value ? null : option.value)
       return
     }
 
@@ -106,7 +115,7 @@ class Select extends React.Component<IProps, IState> {
 
   isOptionSelected(option: Option) {
     if (!Array.isArray(this.props.value)) {
-      return this.props.value === option
+      return this.props.value === option.value
     }
 
     return this.props.value.indexOf(option.value) > -1
@@ -156,7 +165,11 @@ class Select extends React.Component<IProps, IState> {
         tabIndex={-2}
         onClick={() => this.toggle()}
       >
-        <div>{this.getDisplayValue() || this.props.placeholder}</div>
+        <DisplayValue
+          isPlaceholder={Array.isArray(this.props.value) ? this.props.value.length === 0 : !this.props.value}
+        >
+          {this.getDisplayValue()}
+        </DisplayValue>
         {this.props.options.length && this.state.open ? (
           <Options>
             {this.props.filterable && <SelectFilter onChange={(e: any) => this.updateFilter(e)} />}

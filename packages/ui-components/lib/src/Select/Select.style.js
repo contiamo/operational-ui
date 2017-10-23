@@ -45,6 +45,13 @@ var Container = glamorous_1.default.div(function (_a) {
     };
 });
 exports.Container = Container;
+var DisplayValue = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, isPlaceholder = _a.isPlaceholder;
+    return ({
+        color: isPlaceholder ? theme.colors.palette.grey60 : theme.colors.palette.black
+    });
+});
+exports.DisplayValue = DisplayValue;
 var Options = glamorous_1.default.div({
     position: "absolute",
     top: "calc(100% + 1px)",
@@ -61,8 +68,13 @@ var Options = glamorous_1.default.div({
     });
 });
 exports.Options = Options;
-var OptionsList = glamorous_1.default.div({
-    maxHeight: "50vh"
+var OptionsList = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        // whole number + 3/4 ratio here ensures options don't get cut off
+        maxHeight: theme.spacing * 12.75,
+        overflow: "auto"
+    });
 });
 exports.OptionsList = OptionsList;
 //# sourceMappingURL=Select.style.js.map
