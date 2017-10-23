@@ -63,7 +63,7 @@ var Select = /** @class */ (function (_super) {
         _this.state = {
             open: false,
             updating: false,
-            filter: new RegExp(/./),
+            filter: new RegExp(/./)
         };
         // This implements "click outside to close" behavior
         _this.handleClick = function (ev) {
@@ -168,7 +168,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.close = function () {
         this.setState(function () { return ({
-            open: false,
+            open: false
         }); });
     };
     Select.prototype.render = function () {

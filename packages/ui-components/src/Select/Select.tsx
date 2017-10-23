@@ -48,7 +48,7 @@ class Select extends React.Component<IProps, IState> {
   state: IState = {
     open: false,
     updating: false,
-    filter: new RegExp(/./),
+    filter: new RegExp(/./)
   }
 
   containerNode: any
@@ -150,7 +150,7 @@ class Select extends React.Component<IProps, IState> {
 
   close() {
     this.setState(() => ({
-      open: false,
+      open: false
     }))
   }
 
