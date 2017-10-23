@@ -11,9 +11,12 @@
     "package:watch": "rm -rf lib && tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:diff": "jest --onlyChanged",
     "lint": "tslint './index.ts' --fix && tslint './src/**/*.{ts,tsx}' --fix",
+    "lint:diff": "cd ../.. && tslint $(git diff --cached --name-only | grep '\\(js\\|jsx\\|tsx\\|ts\\)$') --fix",
     "prettier": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
+    "prettier:diff": "cd ../.. && prettier $(git diff --cached --name-only | grep '\\(js\\|jsx\\|tsx\\|ts\\)$') --write",
+    "precommit": "npm run test:diff && npm run lint:diff && npm run prettier:diff && git add .",
     "preversion": "npm run precommit",
     "version": "npm run package && git add ."
   },

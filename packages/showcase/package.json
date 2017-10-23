@@ -12,12 +12,15 @@
     "build": "NODE_ENV=production webpack",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:diff": "jest --onlyChanged",
     "lint": "tslint './index.tsx' --fix && tslint './src/**/*.{ts,tsx}' --fix",
-    "package": "echo 'Not a public package, hence no package script :).'",
+    "lint:diff": "cd ../.. && tslint $(git diff --cached --name-only | grep '\\(js\\|jsx\\|tsx\\|ts\\)$') --fix",
     "prettier": "prettier './index.tsx' --write && prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
+    "prettier:diff": "cd ../.. && prettier $(git diff --cached --name-only | grep '\\(js\\|jsx\\|tsx\\|ts\\)$') --write",
+    "precommit": "npm run test:diff && npm run lint:diff && npm run prettier:diff && git add .",
     "preversion": "npm run precommit",
-    "version": "npm run build && git add -A dist"
+    "version": "npm run build && git add -A dist",
+    "package": "echo 'Not a public package, hence no package script 😉.'"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.43",
