@@ -6,7 +6,9 @@ export default (function() {
     state = {
       config: {
         width: 300,
-        height: 350
+        height: 288,
+        maxNodeSize: 800,
+        nodeBorderWidth: 4
       },
       data: {
         journeys: [{ path: ["1", "3", "4"], size: 1500 }, { path: ["2", "3", "4"], size: 1200 }],
