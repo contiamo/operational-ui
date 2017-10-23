@@ -36,12 +36,12 @@ export default () => (
 
     <p>
       'data.journeys' is an array of objects, with each object representing a single journey. Each journey object should
-      have the following properties
-      <ul>
-        <li>path - an array of node id strings</li>
-        <li>size - the journey count</li>
-      </ul>
+      have the following properties:
     </p>
+    <ul>
+      <li>path - an array of node id strings</li>
+      <li>size - the journey count</li>
+    </ul>
 
     <p>
       'data.nodes' is an array of node objects. All nodes referenced in a journey path must be included here. Every node
