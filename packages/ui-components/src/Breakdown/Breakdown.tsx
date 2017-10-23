@@ -24,12 +24,16 @@ const Container = glamorous.div(
   },
   ({ theme, onClick }: { theme?: Theme; onClick: () => void }) => ({
     padding: theme.spacing / 2,
-    cursor: onClick ? "pointer" : "auto",
-    "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.01)"
-    },
+    ...onClick
+      ? {
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.01)"
+          }
+        }
+      : {},
     background: theme.colors.palette.white,
-    "& + &": {
+    ":not(:first-child)": {
       borderTop: `1px solid ${theme.colors.palette.grey20}`
     }
   })
