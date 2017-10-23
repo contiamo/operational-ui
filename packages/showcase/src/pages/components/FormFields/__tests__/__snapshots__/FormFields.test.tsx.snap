@@ -849,8 +849,8 @@ exports[`FormFieldsPage Should render correctly 1`] = `
   >
     <code>
       
-      Option {
-        
+Option {
+  
       <span>
         id
       </span>
@@ -867,14 +867,14 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         // a number that is passed as a \`key\` in the React iterator,
       </span>
       
-        label: 
+  label: 
       <span
         style="color:#880000"
       >
         "Any string"
       </span>
       ,
-        
+  
       <span>
         value
       </span>
@@ -901,8 +901,8 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </span>
       </span>
       )
-      }
-          
+}
+    
     </code>
   </pre>
   <h4>

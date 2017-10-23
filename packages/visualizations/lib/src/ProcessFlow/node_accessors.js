@@ -7,7 +7,6 @@ var defaultAccessors = {
     color: function (node) {
         return node.color || "#fff";
     },
-    // attribute by which nodes should be colored
     shape: function (node) {
         return node.shape || "squareDiamond";
     },

@@ -8,7 +8,6 @@ let defaultAccessors: any = {
     return node.color || "#fff"
   },
 
-  // attribute by which nodes should be colored
   shape: (node: INodeAttrs): string => {
     return node.shape || "squareDiamond"
   },

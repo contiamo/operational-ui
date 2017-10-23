@@ -48,7 +48,6 @@ export interface IConfig {
   highlightColor: string
   labelOffset: number
   linkBorderWidth: number
-  linkStroke: string
   maxLinkWidth: number
   maxNodeSize: number
   minLinkWidth: number

@@ -27,7 +27,6 @@ var ProcessFlow = /** @class */ (function (_super) {
             highlightColor: "#0000ff",
             labelOffset: 2,
             linkBorderWidth: 4,
-            linkStroke: "#aaa",
             maxLinkWidth: 8,
             maxNodeSize: 1500,
             minLinkWidth: 1,
