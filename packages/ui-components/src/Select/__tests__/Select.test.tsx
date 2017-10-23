@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import ThemelessSelect, { Option } from "../Select"
+import ThemelessSelect from "../Select"
 import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
 const Select = wrapDefaultTheme(ThemelessSelect)

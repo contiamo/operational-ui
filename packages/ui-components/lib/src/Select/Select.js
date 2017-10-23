@@ -46,8 +46,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var SelectOption_1 = require("./Option/SelectOption");
-var SelectFilter_1 = require("./Filter/SelectFilter");
+var SelectOption_1 = require("./SelectOption");
+var SelectFilter_1 = require("./SelectFilter");
 var Select_style_1 = require("./Select.style");
 var with_label_1 = require("../../utils/with-label");
 var displayOption = function (opt) {
