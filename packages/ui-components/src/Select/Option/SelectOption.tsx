@@ -1,7 +1,8 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { withTheme } from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
+import { Icon } from "contiamo-ui-components"
 
 interface IProps {
   key: number | string
@@ -10,34 +11,44 @@ interface IProps {
   selected?: boolean
   onClick?: () => void
   children?: React.ReactNode
-  theme?: Theme
+  theme: Theme
   color?: string
 }
 
-const Container = glamorous.div(({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }) => {
-  const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
+const Container = glamorous.div(
+  ({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }): any => {
+    const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
-  return {
-    backgroundColor,
-    padding: theme.spacing / 2,
-    color: selected
-      ? readableTextColor(backgroundColor)(["#aaa"])
-      : readableTextColor(backgroundColor)(["black", "white"]),
-    outline: "none",
+    return {
+      backgroundColor,
+      position: "relative",
+      padding: theme.spacing / 2,
+      color: readableTextColor(backgroundColor)(["black", "white"]),
+      outline: "none",
 
-    ":hover": {
-      backgroundColor: darken(backgroundColor)(5),
-      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
-    },
+      ":hover": {
+        backgroundColor: darken(backgroundColor)(5),
+        color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
+      },
 
-    "&:not(:first-child)": {
-      borderTop: "1px solid",
-      borderColor: darken(backgroundColor)(10)
+      "&:not(:first-child)": {
+        borderTop: "1px solid",
+        borderColor: darken(backgroundColor)(10)
+      }
     }
   }
-})
+)
 
-const SelectOption: React.SFC<IProps> = ({ css, className, selected, color, onClick, children }: IProps) => (
+const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  width: 8,
+  height: 8,
+  position: "absolute",
+  top: "50%",
+  right: 4,
+  transform: "translate3d(-50%, -50%, 0)"
+}))
+
+const SelectOption: React.SFC<IProps> = ({ css, className, theme, selected, color, onClick, children }: IProps) => (
   <Container
     css={css}
     className={className}
@@ -49,7 +60,12 @@ const SelectOption: React.SFC<IProps> = ({ css, className, selected, color, onCl
     onClick={onClick}
   >
     {children}
+    {selected ? (
+      <IconContainer>
+        <Icon name="X" size={theme.spacing} />
+      </IconContainer>
+    ) : null}
   </Container>
 )
 
-export default SelectOption
+export default withTheme(SelectOption)

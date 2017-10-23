@@ -8,9 +8,13 @@ var Container = glamorous_1.default.div({
     alignItems: "center",
     maxWidth: 300
 }, function (_a) {
-    var theme = _a.theme;
+    var theme = _a.theme, onClick = _a.onClick;
     return ({
         padding: theme.spacing / 2,
+        cursor: onClick ? "pointer" : "auto",
+        "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.01)"
+        },
         background: theme.colors.palette.white,
         "& + &": {
             borderTop: "1px solid " + theme.colors.palette.grey20

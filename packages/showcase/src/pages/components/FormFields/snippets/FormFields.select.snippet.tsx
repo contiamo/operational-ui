@@ -4,9 +4,14 @@ import { Select } from "contiamo-ui-components"
 
 export default (() => {
   const options = [
-    { id: 1, label: "Option 1", value: "one" },
-    { id: 2, label: "Option 2", value: "two" },
-    { id: 3, label: "Option 3", value: "three" }
+    { label: "Option 1", value: "one" },
+    { label: "Option 2", value: "two" },
+    { label: "Option 3", value: "three" },
+    { label: "Option 4", value: "four" },
+    { label: "Option 5", value: "five" },
+    { label: "Option 6", value: "six" },
+    { label: "Option 7", value: "seven" },
+    { label: "Option 8", value: "eight" }
   ]
 
   class ComponentWithSelect extends React.Component {

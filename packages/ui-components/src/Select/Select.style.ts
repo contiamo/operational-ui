@@ -63,6 +63,10 @@ const Container = glamorous.div(
   }
 )
 
+const DisplayValue = glamorous.div(({ theme, isPlaceholder }: { theme: Theme; isPlaceholder: boolean }): any => ({
+  color: isPlaceholder ? theme.colors.palette.grey60 : theme.colors.palette.black
+}))
+
 const Options = glamorous.div(
   {
     position: "absolute",
@@ -80,8 +84,10 @@ const Options = glamorous.div(
   })
 )
 
-const OptionsList = glamorous.div({
-  maxHeight: "50vh"
-})
+const OptionsList = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  // whole number + 3/4 ratio here ensures options don't get cut off
+  maxHeight: theme.spacing * 12.75,
+  overflow: "auto"
+}))
 
-export { Container, Options, OptionsList }
+export { Container, Options, OptionsList, DisplayValue }
