@@ -12,6 +12,7 @@ import Breakdown from "./Breakdown/Breakdown"
 import FormFields from "./FormFields/FormFields"
 import Cards from "./Cards/Cards"
 import Chips from "./Chips/Chips"
+import ContextMenus from "./ContextMenus/ContextMenus"
 import Grids from "./Grids/Grids"
 import Tooltips from "./Tooltips/Tooltips"
 import InfoTiles from "./InfoTiles/InfoTiles"
@@ -59,7 +60,7 @@ const links: ISidebarLink[] = [
       { url: "/components/cards", label: "Cards" },
       { url: "/components/chips", label: "Chips" },
       { url: "/components/breakdown", label: "Breakdown" },
-      { label: "Context Menu" },
+      { url: "/components/context-menus", label: "Context Menu" },
       { url: "/components/info-tiles", label: "InfoTiles" },
       { url: "/components/timeline", label: "Timeline" }
     ]
@@ -114,6 +115,7 @@ export default () => (
       <Route path="/components/date-pickers" component={DatePickers} />
       <Route path="/components/cards" component={Cards} />
       <Route path="/components/chips" component={Chips} />
+      <Route path="/components/context-menus" component={ContextMenus} />
       <Route path="/components/tooltips" component={Tooltips} />
       <Route path="/components/info-tiles" component={InfoTiles} />
       <Route path="/components/modals" component={Modals} />

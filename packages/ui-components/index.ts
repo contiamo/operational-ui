@@ -8,6 +8,7 @@ import Breakdown from "./src/Breakdown/Breakdown"
 import Card, { CardHeader } from "./src/Card/Card"
 import Chip from "./src/Chip/Chip"
 import ColorPicker from "./src/ColorPicker/ColorPicker"
+import ContextMenu, { ContextMenuItem } from "./src/ContextMenu/ContextMenu"
 import Grid from "./src/Grid/Grid"
 import DatePicker from "./src/DatePicker/DatePicker"
 import Fieldset from "./src/Fieldset/Fieldset"
@@ -43,6 +44,8 @@ export {
   CardHeader,
   Chip,
   ColorPicker,
+  ContextMenu,
+  ContextMenuItem,
   Grid,
   DatePicker,
   Fieldset,
