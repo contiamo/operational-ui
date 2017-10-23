@@ -18,6 +18,7 @@ import InfoTiles from "./InfoTiles/InfoTiles"
 import SidebarPage from "./Sidebar/Sidebar"
 import ColorPickers from "./ColorPickers/ColorPickers"
 import DatePickers from "./DatePickers/DatePickers"
+import Modals from "./Modals/Modals"
 import Spinners from "./Spinners/Spinners"
 import Switches from "./Switches/Switches"
 import Icons from "./Icons/Icons"
@@ -78,7 +79,7 @@ const links: ISidebarLink[] = [
     links: [
       { label: "Alerts" },
       { label: "Messages" },
-      { label: "Modals" },
+      { url: "/components/modals", label: "Modals" },
       { label: "Notifications" },
       { url: "/components/progress", label: "Progress" },
       { url: "/components/spinners", label: "Spinners" },
@@ -115,6 +116,7 @@ export default () => (
       <Route path="/components/chips" component={Chips} />
       <Route path="/components/tooltips" component={Tooltips} />
       <Route path="/components/info-tiles" component={InfoTiles} />
+      <Route path="/components/modals" component={Modals} />
       <Route path="/components/sidebar" component={SidebarPage} />
       <Route path="/components/icons" component={Icons} />
       <Route path="/components/switch" component={Switches} />
