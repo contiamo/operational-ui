@@ -63,7 +63,7 @@ var Select = /** @class */ (function (_super) {
         _this.state = {
             open: false,
             updating: false,
-            filter: new RegExp(/./)
+            filter: new RegExp(/./),
         };
         // This implements "click outside to close" behavior
         _this.handleClick = function (ev) {
@@ -112,10 +112,10 @@ var Select = /** @class */ (function (_super) {
         }
         var optionIndex = this.props.value.indexOf(option.value);
         if (optionIndex < 0) {
-            this.props.onChange(this.props.value.concat([option.value]));
+            this.props.onChange(this.props.value.concat([option.value]), option.value);
         }
         else {
-            this.props.onChange(this.props.value.slice(0, optionIndex).concat(this.props.value.slice(optionIndex + 1)));
+            this.props.onChange(this.props.value.slice(0, optionIndex).concat(this.props.value.slice(optionIndex + 1)), option.value);
         }
     };
     Select.prototype.isOptionSelected = function (option) {
@@ -168,7 +168,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.close = function () {
         this.setState(function () { return ({
-            open: false
+            open: false,
         }); });
     };
     Select.prototype.render = function () {

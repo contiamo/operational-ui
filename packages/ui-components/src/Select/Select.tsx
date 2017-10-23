@@ -31,7 +31,7 @@ interface IProps {
   value: undefined | Value | Value[]
   filterable?: boolean
   disabled?: boolean
-  onChange: (newValue: Value | Value[]) => void
+  onChange: (newValue: Value | Value[], changedItem?: any) => void
   onClick?: () => void
   onFilter?: () => void
   color?: string
@@ -107,9 +107,12 @@ class Select extends React.Component<IProps, IState> {
     const optionIndex: number = this.props.value.indexOf(option.value)
 
     if (optionIndex < 0) {
-      this.props.onChange([...this.props.value, option.value])
+      this.props.onChange([...this.props.value, option.value], option.value)
     } else {
-      this.props.onChange([...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)])
+      this.props.onChange(
+        [...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)],
+        option.value
+      )
     }
   }
 

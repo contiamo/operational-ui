@@ -10,6 +10,6 @@ exports[`App Showcase: StaticContent Should render correctly 1`] = `
     Hello
   </h2>
   
-
+  
 </div>
 `;
