@@ -14,12 +14,13 @@ var with_label_1 = require("../../utils/with-label");
 var Label = glamorous_1.default.label(function (_a) {
     var theme = _a.theme;
     return ({
-        "& > span": __assign({}, theme.typography.body, { display: "inline-block", marginBottom: theme.spacing / 3 })
+        "& > span": __assign({}, theme.typography.body, { display: "inline-block", marginBottom: theme.spacing / 4 })
     });
 });
 var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
     return ({
+        minWidth: 200,
         padding: theme.spacing / 2,
         border: "1px solid",
         borderColor: theme.colors.palette.grey30,

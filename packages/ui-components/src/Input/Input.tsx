@@ -24,11 +24,12 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
   "& > span": {
     ...theme.typography.body,
     display: "inline-block",
-    marginBottom: theme.spacing / 3
+    marginBottom: theme.spacing / 4
   }
 }))
 
 const InputField = glamorous.input(({ theme }: { theme: Theme }) => ({
+  minWidth: 200,
   padding: theme.spacing / 2,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,

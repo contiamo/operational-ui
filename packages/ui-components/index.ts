@@ -10,6 +10,7 @@ import Chip from "./src/Chip/Chip"
 import ColorPicker from "./src/ColorPicker/ColorPicker"
 import Grid from "./src/Grid/Grid"
 import DatePicker from "./src/DatePicker/DatePicker"
+import Fieldset from "./src/Fieldset/Fieldset"
 import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/Header"
 import Icon from "./src/Icon/Icon"
 import InfoTile from "./src/InfoTile/InfoTile"
@@ -43,6 +44,7 @@ export {
   ColorPicker,
   Grid,
   DatePicker,
+  Fieldset,
   Header,
   HeaderItem,
   HeaderSeparator,

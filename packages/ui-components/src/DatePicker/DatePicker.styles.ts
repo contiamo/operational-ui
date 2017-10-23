@@ -2,6 +2,8 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { css } from "glamor"
 
+const inputHeight: number = 27
+
 const fadeIn = css.keyframes({
   from: {
     opacity: 0,
@@ -34,8 +36,8 @@ export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
   position: "absolute",
   bottom: 0,
   right: 0,
-  width: 24,
-  height: 24,
+  width: inputHeight,
+  height: inputHeight,
   fontSize: 10,
   display: "flex",
   alignItems: "center",
@@ -96,25 +98,26 @@ export const Day = glamorous.div(
 )
 
 export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
+  ...theme.typography.body,
   userSelect: "none",
   padding: theme.spacing / 2,
-  height: 24,
+  height: inputHeight,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
-  width: 180,
+  width: 200,
   position: "relative"
 }))
 
 export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  width: 24,
-  height: 24,
+  width: inputHeight,
+  height: inputHeight,
   cursor: "pointer",
   position: "absolute",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   bottom: 0,
-  right: -23,
+  right: -inputHeight + 1,
   opacity: 0.3,
   textAlign: "center",
   zIndex: theme.baseZIndex + 100,

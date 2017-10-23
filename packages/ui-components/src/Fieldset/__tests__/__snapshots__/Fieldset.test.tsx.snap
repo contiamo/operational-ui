@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fieldset Component Should render 1`] = `
+<fieldset
+  class="css-3fkjwm"
+>
+  <legend
+    class="css-1l8opoi"
+  />
+</fieldset>
+`;
