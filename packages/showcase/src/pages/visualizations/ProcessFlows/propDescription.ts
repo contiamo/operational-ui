@@ -40,7 +40,7 @@ export default {
     {
       name: "highlightColor",
       description: "Color with with nodes/links are highlighted on hover",
-      defaultValue: "#0000ff",
+      defaultValue: "#1499CE",
       type: "string",
       optional: true
     },

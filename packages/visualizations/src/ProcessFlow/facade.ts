@@ -13,7 +13,7 @@ class ProcessFlow extends AbstractFacade {
     return {
       borderColor: "#fff",
       hidden: false,
-      highlightColor: "#0000ff",
+      highlightColor: "#1499CE",
       labelOffset: 2,
       linkBorderWidth: 4,
       maxLinkWidth: 8,
