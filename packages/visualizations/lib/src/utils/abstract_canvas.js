@@ -18,7 +18,7 @@ var AbstractCanvas = /** @class */ (function () {
     AbstractCanvas.prototype.insertContainer = function (context) {
         this.container = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", styles.chartContainer + " clearfix");
+            .attr("class", "" + styles.chartContainer);
         context.appendChild(this.container.node());
     };
     AbstractCanvas.prototype.insertEl = function () {
@@ -28,7 +28,7 @@ var AbstractCanvas = /** @class */ (function () {
     AbstractCanvas.prototype.insertFocusLabel = function () {
         this.focusEl = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", styles.focusLegend + " clearfix")
+            .attr("class", "" + styles.focusLegend)
             .style("visibility", "hidden");
         this.container.node().appendChild(this.focusEl.node());
     };
@@ -94,6 +94,7 @@ var AbstractCanvas = /** @class */ (function () {
             .select("marker#arrow")
             .attr("fill", config.arrowFill)
             .attr("stroke", config.linkStroke);
+        this.container.classed("hidden", this.state.current.get("config").hidden);
     };
     AbstractCanvas.prototype.margin = function (side) {
         return parseInt(this.el.style("margin-" + side), 10) || 0;

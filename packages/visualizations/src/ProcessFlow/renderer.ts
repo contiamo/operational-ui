@@ -2,16 +2,16 @@ import { map, flow, groupBy, sortBy, forEach } from "lodash/fp"
 import Layout from "./layout"
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
-import { TNode, TState, TEvents, IConfig, TSeriesEl } from "./typings"
+import { TNode, IState, TEvents, IConfig, TSeriesEl } from "./typings"
 
 class Renderer {
   layout: Layout
   links: Links
   nodes: Nodes
-  state: TState
+  state: IState
   el: TSeriesEl
 
-  constructor(state: TState, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, events: TEvents, el: TSeriesEl) {
     this.state = state
     this.el = el
     this.layout = new Layout(state)

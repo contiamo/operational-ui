@@ -1,14 +1,31 @@
-import { TState, TStateWriter, TEvents, TSeriesEl } from "../utils/typings"
+import {
+  IDefaultConfig,
+  IKeyValueObject,
+  INestedKeyValueObject,
+  IState,
+  TEvents,
+  TSeriesEl,
+  TStateWriter,
+} from "../utils/typings"
 import * as d3 from "d3-selection"
 // Type definitions for the Contiamo Process Flow visualization
 import Nodes from "./node"
 import Link from "./link"
 
-export { TState, TStateWriter, TEvents, TSeriesEl }
+export {
+  IDefaultConfig,
+  IKeyValueObject,
+  INestedKeyValueObject,
+  IState,
+  TEvents,
+  TSeriesEl,
+  TStateWriter,
+}
+
 export type TNode = Nodes
 export type TLink = Link
-export type TNodeSelection = d3.Selection<d3.BaseType, TNode, Element, null>
-export type TLinkSelection = d3.Selection<d3.BaseType, TLink, Element, null>
+export type TNodeSelection = d3.Selection<d3.BaseType, TNode, null, null>
+export type TLinkSelection = d3.Selection<d3.BaseType, TLink, null, null>
 
 //@TODO
 export type TAccessors = any
@@ -16,14 +33,21 @@ export type TAccessors = any
 // @TODO How do I import the d3 scale types?
 export type TScale = (size: number) => number
 
+export interface IFocusElement {
+  type: "node" | "link"
+  matchers: IKeyValueObject
+}
+
 export interface IConfig {
   arrowFill: string
+  borderColor: string
   duration: number
+  focusElement?: IFocusElement // type ("node"/"link"), id / [sourceId, targetId]
   height: number
+  hidden: boolean
   highlightColor: string
   labelOffset: number
-  labelPadding: number
-  linkStroke: string
+  linkBorderWidth: number
   maxLinkWidth: number
   maxNodeSize: number
   minLinkWidth: number
@@ -83,4 +107,10 @@ export interface IFocus {
   x: number
   y: number
   id: string
+}
+
+export interface IBreakdown {
+  label: string
+  size: number
+  percentage: number
 }

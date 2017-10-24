@@ -1,15 +1,10 @@
 import AccessorsFactory from "../utils/accessors_factory"
 import { ILinkAttrs, TNode } from "./typings"
 
-let defaultAccessors: any = {
+const defaultAccessors: any = {
   // Dash length of link. Default 0 (solid line)
   dash: (link: ILinkAttrs): any => {
     return link.dash || 0
-  },
-  // Information for the link's focus label
-  focusLabel: (link: ILinkAttrs): any => {
-    const defaultFocusLabel: any = { name: link.label, value: link.size }
-    return link.focusLabel || [defaultFocusLabel]
   },
   // Label to display next to link - defaults to an empty string.
   label: (link: ILinkAttrs): string => {
@@ -23,20 +18,20 @@ let defaultAccessors: any = {
   stroke: (link: ILinkAttrs): string => {
     return link.stroke || "#bbb"
   },
-  // Node at which the link starts. Default: undefined.
-  source: (link: ILinkAttrs): TNode => {
-    return link.source || undefined
+  // Node at which the link starts, if available.
+  source: (link: ILinkAttrs): TNode | undefined => {
+    return link.source
   },
-  // ID of node at which the link starts. Default: undefined.
-  sourceId: (link: ILinkAttrs): string => {
-    return link.sourceId || undefined
+  // ID of node at which the link starts, if available.
+  sourceId: (link: ILinkAttrs): string | undefined => {
+    return link.sourceId
   },
-  // Node at which the link ends. Default: undefined.
-  target: (link: ILinkAttrs): TNode => {
-    return link.target || undefined
+  // Node at which the link ends, if available.
+  target: (link: ILinkAttrs): TNode | undefined => {
+    return link.target
   },
-  // ID of node at which the link ends. Default: undefined.
-  targetId: (link: ILinkAttrs): string => {
+  // ID of node at which the link ends, if available.
+  targetId: (link: ILinkAttrs): string | undefined => {
     return link.targetId
   },
 }

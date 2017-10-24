@@ -2,7 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamor_1 = require("glamor");
 var chartContainerStyle = {
-    position: "relative"
+    position: "relative",
+    display: "block",
+    "&.hidden": {
+        display: "none"
+    }
 };
 var focusLegendStyle = {
     userSelect: "none",

@@ -6,7 +6,8 @@ import Canvas from "../../components/Canvas/Canvas"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
 
-import { ProcessFlowCases, ProcessFlowTest } from "./ProcessFlows/ProcessFlows"
+import ProcessFlowMain from "./ProcessFlows/ProcessFlowMain"
+import { ProcessFlowCases } from "./ProcessFlows/ProcessFlows"
 import * as processFlowCases from "./ProcessFlows/cases/index"
 
 const SidebarWithRouter = withRouter(Sidebar)
@@ -25,9 +26,14 @@ const Intro = () => (
 const links: ISidebarLink[] = [
   {
     label: "Process Flow",
-    links: Object.keys(processFlowCases)
-      .map(key => ({ url: `/visualizations/process-flow/cases/${key}`, label: key }))
-      .concat([{ label: "Visual test", url: "/visualizations/process-flow/test" }])
+    links: [{ label: "Main", url: "/visualizations/process-flow/main" }].concat(
+      Object.keys(processFlowCases).map((key, i) => {
+        return {
+          url: `/visualizations/process-flow/cases/${key}`,
+          label: `${i + 1}: ${(processFlowCases as any)[key].title}`
+        }
+      })
+    )
   },
   {
     label: "Bar chart",
@@ -40,8 +46,8 @@ export default () => (
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/visualizations" component={Intro} />
+      <Route exact path="/visualizations/process-flow/main" component={ProcessFlowMain} />
       <Route path="/visualizations/process-flow/cases/:case" component={ProcessFlowCases} />
-      <Route exact path="/visualizations/process-flow/test" component={ProcessFlowTest} />
     </Canvas>
   </div>
 )

@@ -169,6 +169,8 @@ declare namespace fp {
     last: any
     drop: any
     dropRight: any
+    every: any
+    merge: any
   }
 }
 

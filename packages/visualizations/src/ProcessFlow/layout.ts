@@ -1,12 +1,12 @@
 import { map, flow, find, forEach, indexOf, reduce, filter, sortBy, uniq, bind } from "lodash/fp"
-import { TNode, TLink, TState, IData } from "./typings"
+import { TNode, TLink, IState, IData } from "./typings"
 
 class Layout {
   nodes: TNode[]
   links: TLink[]
-  state: TState
+  state: IState
 
-  constructor(state: TState) {
+  constructor(state: IState) {
     this.state = state
   }
 
@@ -35,7 +35,7 @@ class Layout {
       })(nodes)
       if (nextNodes.length > 0 && i < this.nodes.length) {
         if (nodes.length === nextNodes.length) {
-          throw new Error("The data contains at least one loop. Handle loops before rendering.")
+          throw new Error('The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the "contiamo-visualizations" package.')
         }
         ++i
         assignNextNodes(nextNodes)

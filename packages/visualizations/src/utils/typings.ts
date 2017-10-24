@@ -1,6 +1,33 @@
 import EventEmitter from "./event_bus"
 
-export interface TState {
+export interface IKeyValueObject {
+  [key: string]: any
+}
+
+export interface INestedKeyValueObject {
+  [key: string]: IKeyValueObject
+}
+
+export interface IDefaultConfig {
+  duration: number
+  height: number
+  uid: string
+  visualizationName: string
+  width: number
+  [key: string]: any
+}
+
+export interface IDefaultState {
+  data: IKeyValueObject
+  config: IDefaultConfig
+  accessors: IKeyValueObject,
+  computed: {
+    series: IKeyValueObject,
+    canvas: IKeyValueObject,
+  }
+}
+
+export interface IState {
   current: any
   previous: any
 }

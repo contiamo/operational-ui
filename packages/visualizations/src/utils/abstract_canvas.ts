@@ -1,7 +1,7 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { reduce, isArray } from "lodash/fp"
-import { TState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
 import * as styles from "../styles/styles"
 
 abstract class AbstractCanvas {
@@ -10,10 +10,10 @@ abstract class AbstractCanvas {
   events: TEvents
   focusEl: any
   protected elements: any = {}
-  protected state: TState
+  protected state: IState
   stateWriter: TStateWriter
 
-  constructor(state: TState, stateWriter: TStateWriter, events: TEvents, context: any) {
+  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, context: any) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -28,7 +28,7 @@ abstract class AbstractCanvas {
   insertContainer(context: any): void {
     this.container = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.chartContainer} clearfix`)
+      .attr("class", `${styles.chartContainer}`)
     context.appendChild(this.container.node())
   }
 
@@ -40,7 +40,7 @@ abstract class AbstractCanvas {
   insertFocusLabel(): void {
     this.focusEl = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.focusLegend} clearfix`)
+      .attr("class", `${styles.focusLegend}`)
       .style("visibility", "hidden")
     this.container.node().appendChild(this.focusEl.node())
   }
@@ -127,6 +127,8 @@ abstract class AbstractCanvas {
       .select("marker#arrow")
       .attr("fill", config.arrowFill)
       .attr("stroke", config.linkStroke)
+
+    this.container.classed("hidden", this.state.current.get("config").hidden)
   }
 
   margin(side: string): number {

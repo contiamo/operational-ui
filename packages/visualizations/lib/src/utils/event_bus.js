@@ -26,6 +26,9 @@ var EventEmitter = /** @class */ (function () {
             subscriber(eventData);
         });
     };
+    EventEmitter.prototype.removeAll = function () {
+        this.subscribers = {};
+    };
     return EventEmitter;
 }());
 exports.default = EventEmitter;

@@ -6,11 +6,6 @@ var defaultAccessors = {
     dash: function (link) {
         return link.dash || 0;
     },
-    // Information for the link's focus label
-    focusLabel: function (link) {
-        var defaultFocusLabel = { name: link.label, value: link.size };
-        return link.focusLabel || [defaultFocusLabel];
-    },
     // Label to display next to link - defaults to an empty string.
     label: function (link) {
         return link.label || link.source.label() + " → " + link.target.label() || "";
@@ -23,19 +18,19 @@ var defaultAccessors = {
     stroke: function (link) {
         return link.stroke || "#bbb";
     },
-    // Node at which the link starts. Default: undefined.
+    // Node at which the link starts, if available.
     source: function (link) {
-        return link.source || undefined;
+        return link.source;
     },
-    // ID of node at which the link starts. Default: undefined.
+    // ID of node at which the link starts, if available.
     sourceId: function (link) {
-        return link.sourceId || undefined;
+        return link.sourceId;
     },
-    // Node at which the link ends. Default: undefined.
+    // Node at which the link ends, if available.
     target: function (link) {
-        return link.target || undefined;
+        return link.target;
     },
-    // ID of node at which the link ends. Default: undefined.
+    // ID of node at which the link ends, if available.
     targetId: function (link) {
         return link.targetId;
     },

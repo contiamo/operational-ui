@@ -58,21 +58,27 @@ const nodeShapeOptions: any = {
 }
 
 class Nodes extends AbstractRenderer {
+  type: string = "node"
+  focusElementAccessor: string = `path.node.${styles.border}`
+
   updateDraw(): void {
-    let nodeGroups: any = this.el.select("g.nodes-group").selectAll("g.node-group").data(this.data, (node: TNode): string => node.id())
+    let nodeGroups: any = this.el.select("g.nodes-group")
+      .selectAll("g.node-group")
+      .data(this.data, (node: TNode): string => node.id())
 
     this.exit(nodeGroups)
     this.enterAndUpdate(nodeGroups)
   }
 
-  nodeBorderScale(scale: TScale): (d: TNode) => number {
-    return (d: TNode): number => {
-      return Math.pow((Math.sqrt(scale(d.size())) + this.config.nodeBorderWidth), 2)
+  nodeBorderScale(scale: TScale): TScale {
+    return (size: number): number => {
+      return Math.pow((Math.sqrt(scale(size)) + this.config.nodeBorderWidth), 2)
     }
   }
+
   enterAndUpdate(nodeGroups: TNodeSelection): void {
     const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
-      borderScale = this.nodeBorderScale(scale),
+      borderScale: any = this.nodeBorderScale(scale),
       ctx: Nodes = this
     let n: number = 0
 
@@ -86,15 +92,15 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .append("path")
-          .attr("class", styles.link)
+          .attr("class", `node ${styles.border}`)
           .attr(
             "d",
             d3Symbol()
               .type(nodeShapeOptions[d.shape()].symbol)
-              .size(borderScale(d)),
+              .size(borderScale(d.size())),
           )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
-          .attr("fill", "#fff")
+          .attr("fill", ctx.config.borderColor)
           // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
           // Single event handlers should be attached to a non-svg node.
           .on("mouseenter", ctx.onMouseOver(ctx))
@@ -102,7 +108,7 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .append("path")
-          .attr("class", styles.node)
+          .attr("class", `node ${styles.element}`)
           .attr(
             "d",
             d3Symbol()
@@ -117,7 +123,7 @@ class Nodes extends AbstractRenderer {
         d3
           .select(this)
           .append("text")
-          .attr("class", "label")
+          .attr("class", styles.label)
       })
       .merge(nodeGroups)
       .transition()
@@ -127,22 +133,22 @@ class Nodes extends AbstractRenderer {
         // Update node border
         d3
           .select(this)
-          .select(`path.${styles.link}`)
+          .select(`path.node.${styles.border}`)
           .transition()
           .duration(ctx.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
           // but doesn't break the viz.
           .attr(
-          "d",
-          d3Symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(borderScale(d)),
-        )
+            "d",
+            d3Symbol()
+              .type(nodeShapeOptions[d.shape()].symbol)
+              .size(borderScale(d.size())),
+          )
           .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
         // Update node
         d3
           .select(this)
-          .select(`path.${styles.node}`)
+          .select(`path.node.${styles.element}`)
           .transition()
           .duration(ctx.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
@@ -170,18 +176,18 @@ class Nodes extends AbstractRenderer {
   getNodeBoundingRect(el: any): SVGRect {
     const node: any = d3
       .select(el.parentNode)
-      .select(`path.${styles.node}`)
+      .select(`path.node.${styles.element}`)
       .node()
     return node.getBoundingClientRect()
   }
 
   getNodeLabelX(d: TNode, el: any): number {
-    const offset: number = this.getNodeBoundingRect(el).width / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
   getNodeLabelY(d: TNode, el: any): number {
-    const offset: number = this.getNodeBoundingRect(el).height / 2 + this.config.labelOffset
+    const offset: number = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
@@ -200,10 +206,6 @@ class Nodes extends AbstractRenderer {
       })
       .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)
       .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
-  }
-
-  highlight(element: any, value: boolean): void {
-    element.attr("stroke", value ? this.config.highlightColor : "none")
   }
 
   focusPoint(element: any, d: TNode): IFocus {
