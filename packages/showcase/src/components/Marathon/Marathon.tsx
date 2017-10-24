@@ -101,11 +101,6 @@ class Marathon extends React.Component<IProps, IState> {
     const { timeout } = this.props
     const test = this._tests[completed]
 
-    if (!test) {
-      this.afterAll && this.afterAll()
-      return
-    }
-
     if (test.fn.length === 0) {
       await sleep(timeout)
       try {
@@ -132,8 +127,10 @@ class Marathon extends React.Component<IProps, IState> {
     }
   }
 
-  componentDidMount() {
-    const { test, _tests: tests, expect, container } = this
+  startTests() {
+    const { test, expect, container } = this
+
+    this._tests = []
 
     // Run client-provided test function, injecting test methods (test, expect, ...)
     this.props.test({
@@ -156,11 +153,32 @@ class Marathon extends React.Component<IProps, IState> {
 
     // Pin the test array on state, run first one when ready.
     this.setStateAsync(prevState => ({
-      tests: tests.map(test => ({ description: test.description, errors: [] }))
+      tests: this._tests.map(test => ({ description: test.description, errors: [] }))
     })).then(() => {
       this.beforeAll && this.beforeAll()
       this.runNext()
     })
+  }
+
+  componentDidMount() {
+    this.startTests()
+  }
+
+  componentDidUpdate(prevProps: IProps, prevState: IState) {
+    if (prevProps.test !== this.props.test) {
+      this.afterAll && this.afterAll()
+      this.beforeEach = null
+      this.afterEach = null
+      this.beforeAll = null
+      this.afterAll = null
+      this.container.innerHTML = ""
+      this.setStateAsync(prevState => ({
+        tests: [],
+        completed: 0
+      })).then(() => {
+        this.startTests()
+      })
+    }
   }
 
   render() {
