@@ -15,6 +15,7 @@ interface IProps {
   label?: string
   inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
+  disabled?: boolean
   onFocus?: (ev: any) => void
   onBlur?: (ev: any) => void
   children?: string
@@ -28,10 +29,11 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
   }
 }))
 
-const InputField = glamorous.input(({ theme }: { theme: Theme }) => ({
+const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }) => ({
   minWidth: 200,
   padding: theme.spacing / 2,
   border: "1px solid",
+  opacity: disabled ? 0.6 : 1.0,
   borderColor: theme.colors.palette.grey30,
   font: "inherit",
   WebkitAppearance: "none"
@@ -43,6 +45,7 @@ const Input = ({
   label,
   domId,
   name,
+  disabled,
   placeholder,
   value,
   onChange,
@@ -57,6 +60,7 @@ const Input = ({
       className={className}
       id={domId}
       name={name}
+      disabled={disabled}
       placeholder={placeholder}
       value={value}
       onFocus={onFocus}

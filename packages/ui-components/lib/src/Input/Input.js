@@ -18,19 +18,20 @@ var Label = glamorous_1.default.label(function (_a) {
     });
 });
 var InputField = glamorous_1.default.input(function (_a) {
-    var theme = _a.theme;
+    var theme = _a.theme, disabled = _a.disabled;
     return ({
         minWidth: 200,
         padding: theme.spacing / 2,
         border: "1px solid",
+        opacity: disabled ? 0.6 : 1.0,
         borderColor: theme.colors.palette.grey30,
         font: "inherit",
         WebkitAppearance: "none"
     });
 });
 var Input = function (_a) {
-    var css = _a.css, className = _a.className, label = _a.label, domId = _a.domId, name = _a.name, placeholder = _a.placeholder, value = _a.value, onChange = _a.onChange, onFocus = _a.onFocus, onBlur = _a.onBlur, inputRef = _a.inputRef;
-    return (React.createElement(InputField, { css: css, innerRef: inputRef, className: className, id: domId, name: name, placeholder: placeholder, value: value, onFocus: onFocus, onBlur: onBlur, onChange: function (e) {
+    var css = _a.css, className = _a.className, label = _a.label, domId = _a.domId, name = _a.name, disabled = _a.disabled, placeholder = _a.placeholder, value = _a.value, onChange = _a.onChange, onFocus = _a.onFocus, onBlur = _a.onBlur, inputRef = _a.inputRef;
+    return (React.createElement(InputField, { css: css, innerRef: inputRef, className: className, id: domId, name: name, disabled: disabled, placeholder: placeholder, value: value, onFocus: onFocus, onBlur: onBlur, onChange: function (e) {
             onChange && onChange(e.target.value);
         } }));
 };
