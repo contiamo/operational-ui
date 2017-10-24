@@ -133,7 +133,7 @@ class DataHandler {
     let nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
     const rows: string[] = Object.keys(nodesByRow),
       xValues: number[] = map((node: TNode): number => node.x)(this.layout.nodes),
-      maxX: number = Math.max(...xValues),
+      maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
       config: IConfig = this.state.current.get("config"),
       finiteWidth: boolean = isFinite(config.width),
       finiteHeight: boolean = isFinite(config.height),

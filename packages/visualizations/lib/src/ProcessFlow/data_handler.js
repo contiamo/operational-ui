@@ -112,7 +112,7 @@ var DataHandler = /** @class */ (function () {
     };
     DataHandler.prototype.positionNodes = function () {
         var nodesByRow = fp_1.groupBy("y")(this.layout.nodes);
-        var rows = Object.keys(nodesByRow), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = Math.max.apply(Math, xValues), config = this.state.current.get("config"), finiteWidth = isFinite(config.width), finiteHeight = isFinite(config.height), xGridSpacing = finiteWidth ? config.width / (maxX + 1) : config.horizontalNodeSpacing, yGridSpacing = finiteHeight ? config.height / (rows.length + 1) : config.verticalNodeSpacing, totalWidth = finiteWidth ? config.width : config.horizontalNodeSpacing * (maxX + 1), totalHeight = finiteHeight ? config.height : config.verticalNodeSpacing * (rows.length + 1);
+        var rows = Object.keys(nodesByRow), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, config = this.state.current.get("config"), finiteWidth = isFinite(config.width), finiteHeight = isFinite(config.height), xGridSpacing = finiteWidth ? config.width / (maxX + 1) : config.horizontalNodeSpacing, yGridSpacing = finiteHeight ? config.height / (rows.length + 1) : config.verticalNodeSpacing, totalWidth = finiteWidth ? config.width : config.horizontalNodeSpacing * (maxX + 1), totalHeight = finiteHeight ? config.height : config.verticalNodeSpacing * (rows.length + 1);
         this.stateWriter(["width"], totalWidth);
         this.stateWriter(["height"], totalHeight);
         // Assign y values
