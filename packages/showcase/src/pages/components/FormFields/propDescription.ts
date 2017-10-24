@@ -29,6 +29,13 @@ export default {
       defaultValue: "",
       type: "string",
       optional: true
+    },
+    {
+      name: "disabled",
+      description: "Disabled input",
+      defaultValue: "null",
+      type: "boolean",
+      optional: true
     }
   ],
   Select: [

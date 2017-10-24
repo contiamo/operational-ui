@@ -139,6 +139,23 @@ exports[`FormFieldsPage Should render correctly 1`] = `
           ✅
         </td>
       </tr>
+      <tr>
+        <td>
+          disabled
+        </td>
+        <td>
+          Disabled input
+        </td>
+        <td>
+          null
+        </td>
+        <td>
+          boolean
+        </td>
+        <td>
+          ✅
+        </td>
+      </tr>
     </tbody>
   </table>
   <div
@@ -211,7 +228,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-5ccdv7"
+          class="css-51d8ca"
           id="first-name"
           value="John"
         />
@@ -227,7 +244,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-5ccdv7"
+          class="css-51d8ca"
           id="last-name"
           value="John"
         />
@@ -521,7 +538,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-5ccdv7"
+          class="css-51d8ca"
           id="type"
           value="John"
         />
@@ -546,7 +563,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-5ccdv7"
+          class="css-51d8ca"
           id="first-name"
           value="John"
         />
@@ -562,7 +579,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
         </label>
         <br />
         <input
-          class="css-5ccdv7"
+          class="css-51d8ca"
           id="last-name"
           value="John"
         />
