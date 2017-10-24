@@ -42,7 +42,7 @@ const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
 }))
 
 interface IProps {
-  tests: { description: string; failure?: string }[]
+  tests: { description: string; errors: string[] }[]
   completed: number
   theme: Theme
 }
@@ -50,7 +50,7 @@ interface IProps {
 const TestResults: React.SFC<IProps> = ({ tests, completed, theme }: IProps) => (
   <Container>
     {tests.map((test: any, index: any) => {
-      const failed = !!test.failure
+      const failed = test.errors.length > 0
       const isCompleted = completed > index
       const content = isCompleted ? (
         failed ? (
@@ -67,7 +67,7 @@ const TestResults: React.SFC<IProps> = ({ tests, completed, theme }: IProps) => 
             {content}
             {test.description}
           </Title>
-          {test.failure && <FailureMessage>{test.failure}</FailureMessage>}
+          {failed && <FailureMessage>{test.errors.concat(" ")}</FailureMessage>}
         </Item>
       )
     })}

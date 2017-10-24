@@ -6,6 +6,7 @@ import TestResults from "./Marathon.TestResults"
 type TestFn = (done?: ((a: any) => void)) => void
 
 interface IState {
+  id: number // the id of the test, incrementing every time a new test prop is passed
   tests: ITest[]
   completed: number
 }
@@ -35,7 +36,7 @@ interface ITestWithRunner {
 
 interface ITest {
   description: string
-  failure?: string
+  errors: string[]
 }
 
 const sleep = (ms: number) =>
@@ -61,19 +62,26 @@ class Marathon extends React.Component<IProps, IState> {
 
   state = {
     tests: [] as ITest[],
-    completed: 0
+    completed: 0,
+    id: 0
   }
 
   container: HTMLElement
 
   private _tests: ITestWithRunner[] = []
 
-  setStateAsync = (updater: (prevState: IState, props: IProps) => {}): Promise<void> =>
-    new Promise(resolve => {
+  setStateById = (updater: (prevState: IState, props: IProps) => { id: number }, ignoreId?: boolean): Promise<void> => {
+    // If the test id's don't match, it means that the setState is called from an uncleared timeout or async action from an old test.
+    const tentativeNewState = updater(this.state, this.props)
+    return new Promise((resolve, reject) => {
+      if (!ignoreId && tentativeNewState.id !== this.state.id) {
+        return reject()
+      }
       this.setState(updater, () => {
         resolve()
       })
     })
+  }
 
   test = (description: string, fn: (done?: ((a: any) => void)) => void): void => {
     this._tests.push({ description, fn })
@@ -82,9 +90,10 @@ class Marathon extends React.Component<IProps, IState> {
   expect = (actual: any): { toBe: any } => {
     return {
       toBe: (expected: any): void => {
-        const failure = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
-        this.setState(({ tests, completed }: IState) => ({
-          tests: tests.map((test, index) => (index === completed ? { ...test, failure } : test))
+        const error = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
+        this.setStateById(({ id, tests, completed }: IState) => ({
+          id,
+          tests: tests.map((test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test))
         }))
       }
     }
@@ -102,30 +111,47 @@ class Marathon extends React.Component<IProps, IState> {
     const test = this._tests[completed]
 
     if (!test) {
-      this.afterAll && this.afterAll()
       return
     }
 
+    const currentTestId = this.state.id
+
     if (test.fn.length === 0) {
       await sleep(timeout)
-      this.beforeEach && this.beforeEach()
-      test.fn()
-      await this.setStateAsync(prevState => ({ completed: prevState.completed + 1 }))
-      this.afterEach && this.afterEach()
-      this.runNext()
+      try {
+        this.beforeEach && this.beforeEach()
+        test.fn()
+        this.afterEach && this.afterEach()
+      } catch (err) {
+        await this.setStateById(prevState => ({
+          id: currentTestId,
+          tests: prevState.tests.map(
+            (test: ITest, index: number) =>
+              index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test
+          )
+        }))
+      }
+      try {
+        await this.setStateById((prevState: IState) => ({ id: currentTestId, completed: prevState.completed + 1 }))
+        this.runNext()
+      } catch (err) {}
     } else {
       await sleep(timeout)
       this.beforeEach && this.beforeEach()
       test.fn(async () => {
-        await this.setState(prevState => ({ completed: prevState.completed + 1 }))
         this.afterEach && this.afterEach()
-        this.runNext()
+        try {
+          await this.setStateById(prevState => ({ id: currentTestId, completed: prevState.completed + 1 }))
+          this.runNext()
+        } catch (err) {}
       })
     }
   }
 
-  componentDidMount() {
-    const { test, _tests: tests, expect, container } = this
+  startTests() {
+    const { test, expect, container } = this
+
+    this._tests = []
 
     // Run client-provided test function, injecting test methods (test, expect, ...)
     this.props.test({
@@ -147,12 +173,39 @@ class Marathon extends React.Component<IProps, IState> {
     } as any)
 
     // Pin the test array on state, run first one when ready.
-    this.setStateAsync(prevState => ({
-      tests: tests.map(test => ({ description: test.description, failure: null }))
+    this.setStateById((prevState: IState) => ({
+      id: prevState.id,
+      tests: this._tests.map(test => ({ description: test.description, errors: [] }))
     })).then(() => {
       this.beforeAll && this.beforeAll()
       this.runNext()
     })
+  }
+
+  componentDidMount() {
+    this.startTests()
+  }
+
+  componentDidUpdate(prevProps: IProps, prevState: IState) {
+    if (prevProps.test !== this.props.test) {
+      this.afterAll && this.afterAll()
+      this.beforeEach = null
+      this.afterEach = null
+      this.beforeAll = null
+      this.afterAll = null
+      this.container.innerHTML = ""
+      this.setStateById(
+        prevState => ({
+          id: prevState.id + 1,
+          tests: [],
+          completed: 0
+          // Set ignoreId flag to true to proceed with the state update even though test ids don't match.
+        }),
+        true
+      ).then(() => {
+        this.startTests()
+      })
+    }
   }
 
   render() {
