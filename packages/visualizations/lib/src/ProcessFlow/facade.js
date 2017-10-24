@@ -23,8 +23,10 @@ var ProcessFlow = /** @class */ (function (_super) {
     ProcessFlow.prototype.defaultConfig = function () {
         return {
             borderColor: "#fff",
+            height: Infinity,
             hidden: false,
             highlightColor: "#1499CE",
+            horizontalNodeSpacing: 100,
             labelOffset: 2,
             linkBorderWidth: 4,
             maxLinkWidth: 8,
@@ -34,6 +36,8 @@ var ProcessFlow = /** @class */ (function (_super) {
             nodeBorderWidth: 10,
             showLinkFocusLabels: true,
             showNodeFocusLabels: true,
+            verticalNodeSpacing: 100,
+            width: Infinity
         };
     };
     ProcessFlow.prototype.defaultAccessors = function () {
@@ -59,6 +63,7 @@ var ProcessFlow = /** @class */ (function (_super) {
         this.series = new series_1.default(this.state.readOnly(), this.state.computedWriter(["series"]), this.events, this.canvas.elementFor("series"));
     };
     ProcessFlow.prototype.draw = function () {
+        this.state.captureState();
         this.series.prepareData();
         this.canvas.draw();
         this.series.draw();

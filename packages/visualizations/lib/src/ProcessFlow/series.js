@@ -8,7 +8,7 @@ var Series = /** @class */ (function () {
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
-        this.dataHandler = new data_handler_1.default(state);
+        this.dataHandler = new data_handler_1.default(state, stateWriter);
         this.renderer = new renderer_1.default(state, events, el);
         this.drawn = false;
     }
@@ -20,9 +20,9 @@ var Series = /** @class */ (function () {
         return this.data.nodes != null && this.data.nodes.length > 0;
     };
     Series.prototype.draw = function () {
-        var config = this.state.current.get("config");
-        this.el.attr("width", config.width).attr("height", config.height);
-        this.renderer.draw();
+        var seriesConfig = this.state.current.get("computed").series;
+        this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height);
+        this.renderer.draw(this.data);
         this.drawn = true;
     };
     return Series;

@@ -3,17 +3,15 @@ import { TNode, TLink, IState, IData } from "./typings"
 
 class Layout {
   nodes: TNode[]
-  links: TLink[]
   state: IState
 
   constructor(state: IState) {
     this.state = state
   }
 
-  computeLayout(): void {
+  computeLayout(nodes: TNode[]): void {
     const data: IData = this.state.current.get("computed").series.data
-    this.nodes = data.nodes
-    this.links = data.links
+    this.nodes = nodes
     this.computeNodeYPositions()
     this.computeNodeXPositions()
   }

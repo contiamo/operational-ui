@@ -2,8 +2,9 @@ import Node from "./node"
 import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
-import { bind, map, forEach, find, times, extend } from "lodash/fp"
-import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, IState, IBreakdown } from "./typings"
+import Layout from "./layout"
+import { bind, map, forEach, find, times, extend, groupBy, flow, sortBy } from "lodash/fp"
+import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, IState, IBreakdown, IConfig, TStateWriter } from "./typings"
 
 class DataHandler {
   journeys: IJourney[]
@@ -12,9 +13,13 @@ class DataHandler {
   nodeAccessors: TAccessors
   linkAccessors: TAccessors
   state: IState
+  stateWriter: TStateWriter
+  layout: Layout
 
-  constructor(state: IState) {
+  constructor(state: IState, stateWriter: TStateWriter) {
     this.state = state
+    this.stateWriter = stateWriter
+    this.layout = new Layout(state)
   }
 
   prepareData(): IData {
@@ -25,6 +30,8 @@ class DataHandler {
     this.setLinkAccessors(accessors.link)
     this.initializeNodes(data)
     this.initializeLinks(data)
+    this.layout.computeLayout(this.nodes)
+    this.positionNodes()
     return {
       nodes: this.nodes,
       journeys: this.journeys,
@@ -120,6 +127,36 @@ class DataHandler {
       }
       times(computeLink)(path.length - 1)
     })(this.journeys)
+  }
+
+  positionNodes(): void {
+    let nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
+    const rows: string[] = Object.keys(nodesByRow),
+      xValues: number[] = map((node: TNode): number => node.x)(this.layout.nodes),
+      maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
+      config: IConfig = this.state.current.get("config"),
+      finiteWidth: boolean = isFinite(config.width),
+      finiteHeight: boolean = isFinite(config.height),
+      xGridSpacing: number = finiteWidth ? config.width / (maxX + 1) : config.horizontalNodeSpacing,
+      yGridSpacing: number = finiteHeight ? config.height / (rows.length + 1) : config.verticalNodeSpacing,
+      totalWidth: number = finiteWidth ? config.width : config.horizontalNodeSpacing * (maxX + 1),
+      totalHeight: number = finiteHeight ? config.height : config.verticalNodeSpacing * (rows.length + 1)
+
+    this.stateWriter(["width"], totalWidth)
+    this.stateWriter(["height"], totalHeight)
+
+    // Assign y values
+    forEach((node: TNode): void => {
+      node.y = (node.y + 1) * yGridSpacing
+    })(this.layout.nodes)
+    forEach((row: string): void => {
+      flow(
+        sortBy((node: TNode): number => node.x),
+        forEach((node: TNode): void => {
+          node.x *= xGridSpacing
+        }),
+      )(nodesByRow[parseInt(row, 10)])
+    })(rows)
   }
 }
 

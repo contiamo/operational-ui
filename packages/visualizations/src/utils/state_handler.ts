@@ -38,7 +38,7 @@ class StateHandler {
   }
 
   captureState() {
-    this.state.previous = this.state.current.clone()
+    this.state.previous.set(["computed"], this.state.current.clone().get("computed"))
   }
 
   readOnly(): IChartStateReadOnly<ChartStateObj> {

@@ -29,13 +29,12 @@ class Focus extends AbstractFocus {
 
       content
         .append("xhtml:li")
-        .attr("class", `${styles.title} clearfix`)
+        .attr("class", styles.title)
         .text(datum.label())
 
       content
         .append("xhtml:li")
-        .attr("class", "series clearfix")
-        .html('<span class="value">' + datum.size() + "</span>")
+        .text(datum.size())
 
       if (isNode) {
         const breakdowns: { inputs: IBreakdown[], outputs: IBreakdown[] } = ctx.computeBreakdowns(datum)
@@ -46,8 +45,9 @@ class Focus extends AbstractFocus {
         const outputTotal: number = reduce((memo: number, link: any): number => {
           return memo + link.size()
         }, 0)(datum.sourceLinks)
+
         content.append("xhtml:li")
-          .attr("class", "breakdown-difference")
+          .attr("class", `${styles.title} breakdown-difference`)
           .text("Difference: " + (datum.size() - outputTotal))
       }
 
@@ -106,7 +106,6 @@ class Focus extends AbstractFocus {
 
       const backgroundBar: any = breakdown.append("div")
         .attr("class", styles.breakdownBackgroundBar)
-
 
       backgroundBar.append("div")
         .attr("class", styles.breakdownBar)

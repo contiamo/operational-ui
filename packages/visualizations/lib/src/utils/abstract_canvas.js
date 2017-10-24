@@ -90,11 +90,7 @@ var AbstractCanvas = /** @class */ (function () {
         var config = this.state.current.get("config");
         this.container.style("width", config.width + "px").style("height", config.height + "px");
         this.el.style("width", config.width + "px").style("height", config.height + "px");
-        this.el
-            .select("marker#arrow")
-            .attr("fill", config.arrowFill)
-            .attr("stroke", config.linkStroke);
-        this.container.classed("hidden", this.state.current.get("config").hidden);
+        this.container.classed("hidden", config.hidden);
     };
     AbstractCanvas.prototype.margin = function (side) {
         return parseInt(this.el.style("margin-" + side), 10) || 0;

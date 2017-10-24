@@ -181,8 +181,8 @@ var Nodes = /** @class */ (function (_super) {
         var that = this;
         nodeGroups
             .enter()
-            .selectAll("text." + styles.label)
             .merge(nodeGroups)
+            .selectAll("text." + styles.label)
             .text(function (d) { return d.label(); })
             .attr("x", function (d) {
             return that.getNodeLabelX(d, this);
