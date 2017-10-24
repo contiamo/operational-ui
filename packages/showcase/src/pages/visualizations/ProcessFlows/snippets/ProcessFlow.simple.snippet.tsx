@@ -5,8 +5,6 @@ export default (function() {
   class Flow extends React.Component {
     state = {
       config: {
-        width: 300,
-        height: 288,
         maxNodeSize: 800,
         nodeBorderWidth: 4
       },

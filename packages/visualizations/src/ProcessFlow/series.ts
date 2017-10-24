@@ -1,12 +1,10 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
-import { invoke } from "lodash/fp"
 import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
 
 class Series {
   data: any
   dataHandler: any
-  drawingContainer: any
   drawn: boolean
   el: TSeriesEl
   events: TEvents
@@ -19,7 +17,7 @@ class Series {
     this.stateWriter = stateWriter
     this.events = events
     this.el = el
-    this.dataHandler = new DataHandler(state)
+    this.dataHandler = new DataHandler(state, stateWriter)
     this.renderer = new Renderer(state, events, el)
     this.drawn = false
   }
@@ -34,9 +32,9 @@ class Series {
   }
 
   draw(): void {
-    const config = this.state.current.get("config")
-    this.el.attr("width", config.width).attr("height", config.height)
-    this.renderer.draw()
+    const seriesConfig = this.state.current.get("computed").series
+    this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)
+    this.renderer.draw(this.data)
     this.drawn = true
   }
 }

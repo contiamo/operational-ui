@@ -23,8 +23,10 @@ var ProcessFlow = /** @class */ (function (_super) {
     ProcessFlow.prototype.defaultConfig = function () {
         return {
             borderColor: "#fff",
+            height: Infinity,
             hidden: false,
             highlightColor: "#1499CE",
+            horizontalNodeSpacing: 100,
             labelOffset: 2,
             linkBorderWidth: 4,
             maxLinkWidth: 8,
@@ -34,6 +36,8 @@ var ProcessFlow = /** @class */ (function (_super) {
             nodeBorderWidth: 10,
             showLinkFocusLabels: true,
             showNodeFocusLabels: true,
+            verticalNodeSpacing: 100,
+            width: Infinity
         };
     };
     ProcessFlow.prototype.defaultAccessors = function () {

@@ -12,8 +12,10 @@ class ProcessFlow extends AbstractFacade {
   defaultConfig(): IKeyValueObject {
     return {
       borderColor: "#fff",
+      height: Infinity,
       hidden: false,
       highlightColor: "#1499CE",
+      horizontalNodeSpacing: 100,
       labelOffset: 2,
       linkBorderWidth: 4,
       maxLinkWidth: 8,
@@ -23,6 +25,8 @@ class ProcessFlow extends AbstractFacade {
       nodeBorderWidth: 10,
       showLinkFocusLabels: true,
       showNodeFocusLabels: true,
+      verticalNodeSpacing: 100,
+      width: Infinity
     }
   }
 

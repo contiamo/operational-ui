@@ -34,6 +34,12 @@ var Canvas = /** @class */ (function (_super) {
                 .attr("class", group + "-group");
         })(["links", "nodes"]);
     };
+    Canvas.prototype.draw = function () {
+        var config = this.state.current.get("config"), series = this.state.current.get("computed").series;
+        this.container.style("width", series.width + "px").style("height", series.height + "px");
+        this.el.style("width", series.width + "px").style("height", series.height + "px");
+        this.container.classed("hidden", config.hidden);
+    };
     Canvas.prototype.mouseOverElement = function () {
         return this.el;
     };

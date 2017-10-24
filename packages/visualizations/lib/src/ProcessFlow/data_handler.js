@@ -4,10 +4,13 @@ var node_1 = require("./node");
 var node_accessors_1 = require("./node_accessors");
 var link_1 = require("./link");
 var link_accessors_1 = require("./link_accessors");
+var layout_1 = require("./layout");
 var fp_1 = require("lodash/fp");
 var DataHandler = /** @class */ (function () {
-    function DataHandler(state) {
+    function DataHandler(state, stateWriter) {
         this.state = state;
+        this.stateWriter = stateWriter;
+        this.layout = new layout_1.default(state);
     }
     DataHandler.prototype.prepareData = function () {
         var data = this.state.current.get("data");
@@ -17,6 +20,8 @@ var DataHandler = /** @class */ (function () {
         this.setLinkAccessors(accessors.link);
         this.initializeNodes(data);
         this.initializeLinks(data);
+        this.layout.computeLayout(this.nodes);
+        this.positionNodes();
         return {
             nodes: this.nodes,
             journeys: this.journeys,
@@ -104,6 +109,21 @@ var DataHandler = /** @class */ (function () {
             };
             fp_1.times(computeLink)(path.length - 1);
         })(this.journeys);
+    };
+    DataHandler.prototype.positionNodes = function () {
+        var nodesByRow = fp_1.groupBy("y")(this.layout.nodes);
+        var rows = Object.keys(nodesByRow), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = Math.max.apply(Math, xValues), config = this.state.current.get("config"), finiteWidth = isFinite(config.width), finiteHeight = isFinite(config.height), xGridSpacing = finiteWidth ? config.width / (maxX + 1) : config.horizontalNodeSpacing, yGridSpacing = finiteHeight ? config.height / (rows.length + 1) : config.verticalNodeSpacing, totalWidth = finiteWidth ? config.width : config.horizontalNodeSpacing * (maxX + 1), totalHeight = finiteHeight ? config.height : config.verticalNodeSpacing * (rows.length + 1);
+        this.stateWriter(["width"], totalWidth);
+        this.stateWriter(["height"], totalHeight);
+        // Assign y values
+        fp_1.forEach(function (node) {
+            node.y = (node.y + 1) * yGridSpacing;
+        })(this.layout.nodes);
+        fp_1.forEach(function (row) {
+            fp_1.flow(fp_1.sortBy(function (node) { return node.x; }), fp_1.forEach(function (node) {
+                node.x *= xGridSpacing;
+            }))(nodesByRow[parseInt(row, 10)]);
+        })(rows);
     };
     return DataHandler;
 }());

@@ -26,7 +26,7 @@ export default {
     {
       name: "height",
       description: "Visualization height",
-      defaultValue: "1000",
+      defaultValue: "Infinity",
       type: "number",
       optional: true
     },
@@ -42,6 +42,13 @@ export default {
       description: "Color with with nodes/links are highlighted on hover",
       defaultValue: "#1499CE",
       type: "string",
+      optional: true
+    },
+    {
+      name: "horizontalNodeSpacing",
+      description: "Horizontal distance between nodes, if width is set to Infinity",
+      defaultValue: "100",
+      type: "number",
       optional: true
     },
     {
@@ -116,6 +123,13 @@ export default {
       optional: true
     },
     {
+      name: "verticalNodeSpacing",
+      description: "Vertical distance between nodes, if height is set to Infinity",
+      defaultValue: "100",
+      type: "number",
+      optional: true
+    },
+    {
       name: "visualizationName",
       description: "Name of visualization",
       defaultValue: "processflow",
@@ -125,7 +139,7 @@ export default {
     {
       name: "width",
       description: "Visualization width",
-      defaultValue: "500",
+      defaultValue: "Infinity",
       type: "number",
       optional: true
     }

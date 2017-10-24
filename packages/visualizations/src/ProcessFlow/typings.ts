@@ -46,6 +46,7 @@ export interface IConfig {
   height: number
   hidden: boolean
   highlightColor: string
+  horizontalNodeSpacing: number
   labelOffset: number
   linkBorderWidth: number
   maxLinkWidth: number
@@ -56,6 +57,7 @@ export interface IConfig {
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
   uid: string
+  verticalNodeSpacing: number
   visualizationName: string
   width: number
 }
