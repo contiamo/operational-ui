@@ -67,7 +67,7 @@ const TestResults: React.SFC<IProps> = ({ tests, completed, theme }: IProps) => 
             {content}
             {test.description}
           </Title>
-          {test.errors.length > 0 && <FailureMessage>{test.errors.concat(" ")}</FailureMessage>}
+          {failed && <FailureMessage>{test.errors.concat(" ")}</FailureMessage>}
         </Item>
       )
     })}

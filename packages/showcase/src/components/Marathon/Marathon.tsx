@@ -6,6 +6,7 @@ import TestResults from "./Marathon.TestResults"
 type TestFn = (done?: ((a: any) => void)) => void
 
 interface IState {
+  id: number // the id of the test, incrementing every time a new test prop is passed
   tests: ITest[]
   completed: number
 }
@@ -61,19 +62,26 @@ class Marathon extends React.Component<IProps, IState> {
 
   state = {
     tests: [] as ITest[],
-    completed: 0
+    completed: 0,
+    id: 0
   }
 
   container: HTMLElement
 
   private _tests: ITestWithRunner[] = []
 
-  setStateAsync = (updater: (prevState: IState, props: IProps) => {}): Promise<void> =>
-    new Promise(resolve => {
+  setStateById = (updater: (prevState: IState, props: IProps) => { id: number }, ignoreId?: boolean): Promise<void> => {
+    // If the test id's don't match, it means that the setState is called from an uncleared timeout or async action from an old test.
+    const tentativeNewState = updater(this.state, this.props)
+    return new Promise((resolve, reject) => {
+      if (!ignoreId && tentativeNewState.id !== this.state.id) {
+        return reject()
+      }
       this.setState(updater, () => {
         resolve()
       })
     })
+  }
 
   test = (description: string, fn: (done?: ((a: any) => void)) => void): void => {
     this._tests.push({ description, fn })
@@ -83,7 +91,8 @@ class Marathon extends React.Component<IProps, IState> {
     return {
       toBe: (expected: any): void => {
         const error = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
-        this.setState(({ tests, completed }: IState) => ({
+        this.setStateById(({ id, tests, completed }: IState) => ({
+          id,
           tests: tests.map((test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test))
         }))
       }
@@ -101,6 +110,12 @@ class Marathon extends React.Component<IProps, IState> {
     const { timeout } = this.props
     const test = this._tests[completed]
 
+    if (!test) {
+      return
+    }
+
+    const currentTestId = this.state.id
+
     if (test.fn.length === 0) {
       await sleep(timeout)
       try {
@@ -108,21 +123,27 @@ class Marathon extends React.Component<IProps, IState> {
         test.fn()
         this.afterEach && this.afterEach()
       } catch (err) {
-        await this.setStateAsync(prevState => ({
+        await this.setStateById(prevState => ({
+          id: currentTestId,
           tests: prevState.tests.map(
-            (test, index) => (index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test)
+            (test: ITest, index: number) =>
+              index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test
           )
         }))
       }
-      await this.setStateAsync(prevState => ({ completed: prevState.completed + 1 }))
-      this.runNext()
+      try {
+        await this.setStateById((prevState: IState) => ({ id: currentTestId, completed: prevState.completed + 1 }))
+        this.runNext()
+      } catch (err) {}
     } else {
       await sleep(timeout)
       this.beforeEach && this.beforeEach()
       test.fn(async () => {
         this.afterEach && this.afterEach()
-        await this.setState(prevState => ({ completed: prevState.completed + 1 }))
-        this.runNext()
+        try {
+          await this.setStateById(prevState => ({ id: currentTestId, completed: prevState.completed + 1 }))
+          this.runNext()
+        } catch (err) {}
       })
     }
   }
@@ -152,7 +173,8 @@ class Marathon extends React.Component<IProps, IState> {
     } as any)
 
     // Pin the test array on state, run first one when ready.
-    this.setStateAsync(prevState => ({
+    this.setStateById((prevState: IState) => ({
+      id: prevState.id,
       tests: this._tests.map(test => ({ description: test.description, errors: [] }))
     })).then(() => {
       this.beforeAll && this.beforeAll()
@@ -172,10 +194,15 @@ class Marathon extends React.Component<IProps, IState> {
       this.beforeAll = null
       this.afterAll = null
       this.container.innerHTML = ""
-      this.setStateAsync(prevState => ({
-        tests: [],
-        completed: 0
-      })).then(() => {
+      this.setStateById(
+        prevState => ({
+          id: prevState.id + 1,
+          tests: [],
+          completed: 0
+          // Set ignoreId flag to true to proceed with the state update even though test ids don't match.
+        }),
+        true
+      ).then(() => {
         this.startTests()
       })
     }
