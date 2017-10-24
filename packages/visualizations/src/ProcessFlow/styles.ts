@@ -8,7 +8,9 @@ const breakdownStyle = {
 }
 
 const breakdownsContainerStyle = {
-  width: "300px"
+  width: "300px",
+  float: "left",
+  padding: "7px 0",
 }
 
 const breakdownContainerStyle = {
@@ -43,7 +45,7 @@ const breakdownBarStyle = {
   display: "block",
   height: "100%",
   pointerEvents: "none",
-  backgroundColor: "blue",
+  backgroundColor: "#1499CE",
 }
 
 const breakdownTextStyle = {
@@ -52,7 +54,7 @@ const breakdownTextStyle = {
 }
 
 const titleStyle = {
-  fontFamily: "ProximaNovaSemiBold",
+  fontWeight: "bold",
   color: "#555",
 }
 

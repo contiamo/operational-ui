@@ -8,7 +8,9 @@ var breakdownStyle = {
     background: "white",
 };
 var breakdownsContainerStyle = {
-    width: "300px"
+    width: "300px",
+    float: "left",
+    padding: "7px 0",
 };
 var breakdownContainerStyle = {
     width: "49%",
@@ -39,14 +41,14 @@ var breakdownBarStyle = {
     display: "block",
     height: "100%",
     pointerEvents: "none",
-    backgroundColor: "blue",
+    backgroundColor: "#1499CE",
 };
 var breakdownTextStyle = {
     color: "white",
     position: "relative",
 };
 var titleStyle = {
-    fontFamily: "ProximaNovaSemiBold",
+    fontWeight: "bold",
     color: "#555",
 };
 exports.breakdown = glamor_1.css(breakdownStyle).toString();

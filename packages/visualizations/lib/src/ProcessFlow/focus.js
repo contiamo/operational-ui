@@ -33,12 +33,11 @@ var Focus = /** @class */ (function (_super) {
             var content = ctx.el.append("xhtml:ul");
             content
                 .append("xhtml:li")
-                .attr("class", styles.title + " clearfix")
+                .attr("class", styles.title)
                 .text(datum.label());
             content
                 .append("xhtml:li")
-                .attr("class", "series clearfix")
-                .html('<span class="value">' + datum.size() + "</span>");
+                .text(datum.size());
             if (isNode) {
                 var breakdowns = ctx.computeBreakdowns(datum);
                 var container = content.append("div").attr("class", styles.breakdownsContainer);
@@ -48,7 +47,7 @@ var Focus = /** @class */ (function (_super) {
                     return memo + link.size();
                 }, 0)(datum.sourceLinks);
                 content.append("xhtml:li")
-                    .attr("class", "breakdown-difference")
+                    .attr("class", styles.title + " breakdown-difference")
                     .text("Difference: " + (datum.size() - outputTotal));
             }
             // Get label dimensions (has to be actually rendered in the page to do ctx)
