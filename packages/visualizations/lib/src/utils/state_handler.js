@@ -23,7 +23,7 @@ var StateHandler = /** @class */ (function () {
         this.state = { current: initial, previous: initial.clone() };
     }
     StateHandler.prototype.captureState = function () {
-        this.state.previous = this.state.current.clone();
+        this.state.previous.set(["computed"], this.state.current.clone().get("computed"));
     };
     StateHandler.prototype.readOnly = function () {
         return {

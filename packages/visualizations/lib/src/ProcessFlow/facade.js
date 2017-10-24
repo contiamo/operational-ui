@@ -63,6 +63,7 @@ var ProcessFlow = /** @class */ (function (_super) {
         this.series = new series_1.default(this.state.readOnly(), this.state.computedWriter(["series"]), this.events, this.canvas.elementFor("series"));
     };
     ProcessFlow.prototype.draw = function () {
+        this.state.captureState();
         this.series.prepareData();
         this.canvas.draw();
         this.series.draw();

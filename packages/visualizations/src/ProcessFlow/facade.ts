@@ -68,6 +68,7 @@ class ProcessFlow extends AbstractFacade {
   }
 
   draw(): Element {
+    this.state.captureState()
     this.series.prepareData()
     this.canvas.draw()
     this.series.draw()
