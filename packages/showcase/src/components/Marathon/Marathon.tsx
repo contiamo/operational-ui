@@ -35,7 +35,7 @@ interface ITestWithRunner {
 
 interface ITest {
   description: string
-  failure?: string
+  errors: string[]
 }
 
 const sleep = (ms: number) =>
@@ -82,9 +82,9 @@ class Marathon extends React.Component<IProps, IState> {
   expect = (actual: any): { toBe: any } => {
     return {
       toBe: (expected: any): void => {
-        const failure = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
+        const error = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
         this.setState(({ tests, completed }: IState) => ({
-          tests: tests.map((test, index) => (index === completed ? { ...test, failure } : test))
+          tests: tests.map((test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test))
         }))
       }
     }
@@ -108,17 +108,25 @@ class Marathon extends React.Component<IProps, IState> {
 
     if (test.fn.length === 0) {
       await sleep(timeout)
-      this.beforeEach && this.beforeEach()
-      test.fn()
+      try {
+        this.beforeEach && this.beforeEach()
+        test.fn()
+        this.afterEach && this.afterEach()
+      } catch (err) {
+        await this.setStateAsync(prevState => ({
+          tests: prevState.tests.map(
+            (test, index) => (index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test)
+          )
+        }))
+      }
       await this.setStateAsync(prevState => ({ completed: prevState.completed + 1 }))
-      this.afterEach && this.afterEach()
       this.runNext()
     } else {
       await sleep(timeout)
       this.beforeEach && this.beforeEach()
       test.fn(async () => {
-        await this.setState(prevState => ({ completed: prevState.completed + 1 }))
         this.afterEach && this.afterEach()
+        await this.setState(prevState => ({ completed: prevState.completed + 1 }))
         this.runNext()
       })
     }
@@ -148,7 +156,7 @@ class Marathon extends React.Component<IProps, IState> {
 
     // Pin the test array on state, run first one when ready.
     this.setStateAsync(prevState => ({
-      tests: tests.map(test => ({ description: test.description, failure: null }))
+      tests: tests.map(test => ({ description: test.description, errors: [] }))
     })).then(() => {
       this.beforeAll && this.beforeAll()
       this.runNext()
