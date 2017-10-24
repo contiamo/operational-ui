@@ -18,21 +18,21 @@ var defaultAccessors = {
     stroke: function (link) {
         return link.stroke || "#bbb";
     },
-    // Node at which the link starts. Default: undefined.
+    // Node at which the link starts, if available.
     source: function (link) {
-        return link.source || undefined;
+        return link.source;
     },
-    // ID of node at which the link starts. Default: undefined.
+    // ID of node at which the link starts, if available.
     sourceId: function (link) {
-        return link.sourceId || undefined;
+        return link.sourceId;
     },
-    // Node at which the link ends. Default: undefined.
+    // Node at which the link ends, if available.
     target: function (link) {
-        return link.target || undefined;
+        return link.target;
     },
-    // ID of node at which the link ends. Default: undefined.
+    // ID of node at which the link ends, if available.
     targetId: function (link) {
-        return link.targetId || undefined;
+        return link.targetId;
     },
 };
 exports.default = accessors_factory_1.default(defaultAccessors);
