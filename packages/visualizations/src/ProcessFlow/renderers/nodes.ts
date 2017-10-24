@@ -191,12 +191,12 @@ class Nodes extends AbstractRenderer {
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(nodeGroups: TNodeSelection): void {
+  updateNodeLabels(nodeGroups: any): void {
     const that: any = this
     nodeGroups
       .enter()
-      .selectAll(`text.${styles.label}`)
       .merge(nodeGroups)
+      .selectAll(`text.${styles.label}`)
       .text((d: TNode): string => d.label())
       .attr("x", function(d: TNode): number {
         return that.getNodeLabelX(d, this)
