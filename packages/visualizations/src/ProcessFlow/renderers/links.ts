@@ -38,7 +38,7 @@ class Links extends AbstractRenderer {
       .append("g")
       .attr("class", "link-group")
       .each(function(d: TLink): void {
-        // Append link "border" element - white element behind link.
+        // Append link "border" element - transparent element behind link.
         d3
           .select(this)
           .append("path")
@@ -46,6 +46,7 @@ class Links extends AbstractRenderer {
           .attr("d", ctx.linkStartPath.bind(ctx))
           .attr("stroke-width", "0px")
           .on("mouseenter", ctx.onMouseOver(ctx))
+          .attr("opacity", 0)
         // Append link
         d3
           .select(this)
@@ -67,7 +68,6 @@ class Links extends AbstractRenderer {
           .attr("d", ctx.linkPath.bind(ctx))
           .attr("stroke-width", (d: TLink): string => borderScale(d.size()) + "px")
           .attr("stroke-dasharray", (d: TLink): number => d.dash())
-          .attr("opacity", (d: TLink): number => opacityScale(d.size()))
         // Update link
         d3
           .select(this)

@@ -44,14 +44,15 @@ var Links = /** @class */ (function (_super) {
             .append("g")
             .attr("class", "link-group")
             .each(function (d) {
-            // Append link "border" element - white element behind link.
+            // Append link "border" element - transparent element behind link.
             d3
                 .select(this)
                 .append("path")
                 .attr("class", "link " + styles.border)
                 .attr("d", ctx.linkStartPath.bind(ctx))
                 .attr("stroke-width", "0px")
-                .on("mouseenter", ctx.onMouseOver(ctx));
+                .on("mouseenter", ctx.onMouseOver(ctx))
+                .attr("opacity", 0);
             // Append link
             d3
                 .select(this)
@@ -72,8 +73,7 @@ var Links = /** @class */ (function (_super) {
                 .ease(d3_ease_1.easeCubicInOut)
                 .attr("d", ctx.linkPath.bind(ctx))
                 .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
-                .attr("stroke-dasharray", function (d) { return d.dash(); })
-                .attr("opacity", function (d) { return opacityScale(d.size()); });
+                .attr("stroke-dasharray", function (d) { return d.dash(); });
             // Update link
             d3
                 .select(this)
