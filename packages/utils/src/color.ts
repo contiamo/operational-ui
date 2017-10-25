@@ -45,9 +45,16 @@ const lighten = (color: string) => (percentage: number): string =>
     .lighten(percentage)
     .toString()
 
+// @todo -> Flush out edge cases. Currently, this method only works well for regular common accent colors such as blue or green.
+const setBrightness = (color: string, targetBrightness: number): string => {
+  const c = colorCalculator(color)
+  const brightness = c.getBrightness()
+  return c.brighten(targetBrightness / brightness * 100 - 100).toString()
+}
+
 const transparentize = (color: string) => (percentage: number): string =>
   (({ r, g, b }) => {
     return `rgba(${r}, ${g}, ${b}, ${255 * (100 - percentage) / 100})`
   })(colorCalculator(color).toRgb())
 
-export { hexOrColor, readableTextColor, darken, lighten, transparentize }
+export { hexOrColor, readableTextColor, darken, lighten, transparentize, setBrightness }
