@@ -5,9 +5,13 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: theme.spacing * 3,
         margin: theme.spacing * -1,
         marginBottom: theme.spacing * 4 / 3,
-        padding: theme.spacing + "px " + theme.spacing + "px " + theme.spacing * 5 / 6 + "px",
+        padding: "0 " + theme.spacing + "px",
         borderBottom: "1px solid " + theme.colors.usage.contentSeparatorLine,
         fontWeight: 700,
         lineHeight: 1,

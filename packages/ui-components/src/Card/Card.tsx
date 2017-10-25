@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import CardHeader from "./Header/CardHeader"
+import CardHeader from "./CardHeader"
 
 interface IProps {
   css?: any

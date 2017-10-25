@@ -5,7 +5,7 @@ exports[`Cards Page Should render correctly 1`] = `
   class="css-zssd73"
 >
   <div
-    class="css-imab3e"
+    class="css-1il4ybq"
   >
     Chips
   </div>
@@ -137,7 +137,7 @@ exports[`Cards Page Should render correctly 1`] = `
     style="margin-bottom:32px"
   />
   <div
-    class="css-imab3e"
+    class="css-1il4ybq"
   >
     PlusChip
   </div>
