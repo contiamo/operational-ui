@@ -20,19 +20,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var glamor_1 = require("glamor");
 var ContextMenuItem_1 = require("./ContextMenuItem");
 exports.ContextMenuItem = ContextMenuItem_1.default;
-var fadeIn = glamor_1.css.keyframes({
-    from: {
-        opacity: 0,
-        transform: "translate3d(0, -6px, 0)"
-    },
-    to: {
-        opacity: 1,
-        transform: "translate3d(0, 0, 0)"
-    }
-});
+var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
@@ -42,8 +32,8 @@ var Container = glamorous_1.default.div(function (_a) {
     });
 });
 var MenuContainer = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, isExpanded = _a.isExpanded;
-    return (__assign({ position: "absolute", top: "100%", left: "0%", width: "fit-content" }, isExpanded ? { display: "block", animation: fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
+    var isExpanded = _a.isExpanded;
+    return (__assign({ position: "absolute", top: "100%", left: "0%", width: "fit-content" }, isExpanded ? { display: "block", animation: contiamo_ui_utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
 });
 var ContextMenu = /** @class */ (function (_super) {
     __extends(ContextMenu, _super);
@@ -53,23 +43,19 @@ var ContextMenu = /** @class */ (function (_super) {
             isHovered: false,
             isActive: false
         };
+        _this.handleClick = function (ev) {
+            var newIsActive = _this.menuContainerNode.contains(ev.target)
+                ? _this.state.isActive
+                : _this.containerNode.contains(ev.target) ? !_this.state.isActive : false;
+            _this.setState(function (prevState) { return ({ isActive: newIsActive }); });
+        };
         return _this;
     }
-    ContextMenu.prototype.handleClick = function (ev) {
-        var newIsActive = this.menuContainerNode.contains(ev.target)
-            ? this.state.isActive
-            : this.containerNode.contains(ev.target) ? !this.state.isActive : false;
-        this.setState(function (prevState) { return ({ isActive: newIsActive }); });
-    };
     ContextMenu.prototype.componentDidMount = function () {
-        var _this = this;
-        this.outsideClickHandler = function (ev) {
-            _this.handleClick(ev);
-        };
-        document.addEventListener("click", this.outsideClickHandler);
+        document.addEventListener("click", this.handleClick);
     };
     ContextMenu.prototype.componentWillUnmount = function () {
-        document.removeEventListener("click", this.outsideClickHandler);
+        document.removeEventListener("click", this.handleClick);
     };
     ContextMenu.prototype.render = function () {
         var _this = this;

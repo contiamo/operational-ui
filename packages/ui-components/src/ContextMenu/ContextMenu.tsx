@@ -3,11 +3,12 @@ import glamorous from "glamorous"
 import { css } from "glamor"
 
 import ContextMenuItem from "./ContextMenuItem"
+import { fadeIn } from "contiamo-ui-utils"
 
 interface IProps {
-  css?: any
+  css?: {}
   className?: string
-  children?: any
+  children: React.ReactNode
   expandOnHover?: boolean
 }
 
@@ -16,24 +17,13 @@ interface IState {
   isActive: boolean
 }
 
-const fadeIn = css.keyframes({
-  from: {
-    opacity: 0,
-    transform: "translate3d(0, -6px, 0)"
-  },
-  to: {
-    opacity: 1,
-    transform: "translate3d(0, 0, 0)"
-  }
-})
-
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   position: "relative",
   width: "fit-content",
   margin: theme.spacing * 2
 }))
 
-const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): any => ({
+const MenuContainer = glamorous.div(({ isExpanded }: { isExpanded: boolean }): any => ({
   position: "absolute",
   top: "100%",
   left: "0%",
@@ -51,7 +41,7 @@ class ContextMenu extends React.Component<IProps, IState> {
   menuContainerNode: any
   outsideClickHandler: any
 
-  handleClick(ev: any) {
+  handleClick = (ev: any): void => {
     const newIsActive = this.menuContainerNode.contains(ev.target)
       ? this.state.isActive
       : this.containerNode.contains(ev.target) ? !this.state.isActive : false
@@ -59,14 +49,11 @@ class ContextMenu extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.outsideClickHandler = (ev: any) => {
-      this.handleClick(ev)
-    }
-    document.addEventListener("click", this.outsideClickHandler)
+    document.addEventListener("click", this.handleClick)
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.outsideClickHandler)
+    document.removeEventListener("click", this.handleClick)
   }
 
   render() {

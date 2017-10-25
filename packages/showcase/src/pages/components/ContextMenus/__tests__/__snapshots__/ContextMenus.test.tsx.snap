@@ -126,7 +126,7 @@ exports[`ContextMenus Showcase Page Should render correctly 1`] = `
           -
         </td>
         <td>
-          () =&gt; {}
+          () =&gt; void
         </td>
         <td>
           ✅

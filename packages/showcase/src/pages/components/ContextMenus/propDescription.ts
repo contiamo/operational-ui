@@ -13,7 +13,7 @@ export default {
       name: "onClick",
       description: "Click handler.",
       defaultValue: "-",
-      type: "() => {}",
+      type: "() => void",
       optional: true
     }
   ]
