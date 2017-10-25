@@ -129,21 +129,35 @@ class DataHandler {
     })(this.journeys)
   }
 
+  xGridSpacing(): number {
+    const config: IConfig = this.state.current.get("config"),
+      finiteWidth: boolean = isFinite(config.width),
+      xValues: number[] = map((node: TNode): number => node.x)(this.layout.nodes),
+      maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
+      spacing: number = finiteWidth
+        ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
+        : config.horizontalNodeSpacing
+
+    this.stateWriter(["width"], finiteWidth ? config.width : spacing * (maxX + 1))
+    return spacing
+  }
+
+  yGridSpacing(nRows: number): number {
+    const config: IConfig = this.state.current.get("config"),
+      finiteHeight: boolean = isFinite(config.height),
+      spacing: number = isFinite(config.height)
+        ? Math.min(config.height / (nRows + 1), config.verticalNodeSpacing)
+        : config.verticalNodeSpacing
+
+    this.stateWriter(["height"], finiteHeight ? config.height : spacing * (nRows + 1))
+    return spacing
+  }
+
   positionNodes(): void {
     let nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
     const rows: string[] = Object.keys(nodesByRow),
-      xValues: number[] = map((node: TNode): number => node.x)(this.layout.nodes),
-      maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
-      config: IConfig = this.state.current.get("config"),
-      finiteWidth: boolean = isFinite(config.width),
-      finiteHeight: boolean = isFinite(config.height),
-      xGridSpacing: number = finiteWidth ? config.width / (maxX + 1) : config.horizontalNodeSpacing,
-      yGridSpacing: number = finiteHeight ? config.height / (rows.length + 1) : config.verticalNodeSpacing,
-      totalWidth: number = finiteWidth ? config.width : config.horizontalNodeSpacing * (maxX + 1),
-      totalHeight: number = finiteHeight ? config.height : config.verticalNodeSpacing * (rows.length + 1)
-
-    this.stateWriter(["width"], totalWidth)
-    this.stateWriter(["height"], totalHeight)
+      xGridSpacing: number = this.xGridSpacing(),
+      yGridSpacing: number = this.yGridSpacing(rows.length)
 
     // Assign y values
     forEach((node: TNode): void => {

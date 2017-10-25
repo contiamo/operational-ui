@@ -110,11 +110,23 @@ var DataHandler = /** @class */ (function () {
             fp_1.times(computeLink)(path.length - 1);
         })(this.journeys);
     };
+    DataHandler.prototype.xGridSpacing = function () {
+        var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth
+            ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
+            : config.horizontalNodeSpacing;
+        this.stateWriter(["width"], finiteWidth ? config.width : spacing * (maxX + 1));
+        return spacing;
+    };
+    DataHandler.prototype.yGridSpacing = function (nRows) {
+        var config = this.state.current.get("config"), finiteHeight = isFinite(config.height), spacing = isFinite(config.height)
+            ? Math.min(config.height / (nRows + 1), config.verticalNodeSpacing)
+            : config.verticalNodeSpacing;
+        this.stateWriter(["height"], finiteHeight ? config.height : spacing * (nRows + 1));
+        return spacing;
+    };
     DataHandler.prototype.positionNodes = function () {
         var nodesByRow = fp_1.groupBy("y")(this.layout.nodes);
-        var rows = Object.keys(nodesByRow), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, config = this.state.current.get("config"), finiteWidth = isFinite(config.width), finiteHeight = isFinite(config.height), xGridSpacing = finiteWidth ? config.width / (maxX + 1) : config.horizontalNodeSpacing, yGridSpacing = finiteHeight ? config.height / (rows.length + 1) : config.verticalNodeSpacing, totalWidth = finiteWidth ? config.width : config.horizontalNodeSpacing * (maxX + 1), totalHeight = finiteHeight ? config.height : config.verticalNodeSpacing * (rows.length + 1);
-        this.stateWriter(["width"], totalWidth);
-        this.stateWriter(["height"], totalHeight);
+        var rows = Object.keys(nodesByRow), xGridSpacing = this.xGridSpacing(), yGridSpacing = this.yGridSpacing(rows.length);
         // Assign y values
         fp_1.forEach(function (node) {
             node.y = (node.y + 1) * yGridSpacing;
