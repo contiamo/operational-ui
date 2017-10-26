@@ -72,6 +72,26 @@ const data2: IData = {
   ]
 }
 
+const data3: IData = {
+  journeys: [
+    { path: ["1", "10", "2", "3", "4"], size: 1500 },
+    { path: ["1", "10", "2", "3", "5", "4"], size: 1200 },
+    { path: ["9", "7", "5", "8"], size: 700 },
+    { path: ["9", "2", "3", "8"], size: 600 }
+  ],
+  nodes: [
+    { id: "1", group: "start" },
+    { id: "2" },
+    { id: "3" },
+    { id: "4" },
+    { id: "5" },
+    { id: "7" },
+    { id: "8", group: "end" },
+    { id: "9", group: "start" },
+    { id: "10" }
+  ]
+}
+
 const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz: ProcessFlow = new ProcessFlow(container)
 
@@ -93,6 +113,15 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   test("Updates the data", () => {
     viz.data(data2)
     viz.draw()
+  })
+
+  test("Updates the data", () => {
+    viz.data(data3)
+    viz.draw()
+  })
+
+  test("Closes the viz", () => {
+    viz.close()
   })
 
   afterAll(() => {

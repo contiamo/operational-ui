@@ -105,6 +105,7 @@ abstract class AbstractChart {
     }
     this.__disposed = true
     this.events.removeAll()
+    this.context.innerHTML = ""
   }
 }
 
