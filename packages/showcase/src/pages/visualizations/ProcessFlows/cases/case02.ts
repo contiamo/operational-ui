@@ -40,7 +40,8 @@ const data2: any = {
     { path: ["1", "2", "3", "6", "11"], size: 130 },
     { path: ["1", "2", "3", "4", "11"], size: 290 },
     { path: ["1", "2", "3", "12", "11"], size: 120 },
-    { path: ["1", "2", "3", "4", "13"], size: 620 }
+    { path: ["1", "2", "3", "4", "13"], size: 620 },
+    { path: ["4"], size: 23 }
   ],
   nodes: [
     { id: "1", group: "start" },
@@ -61,22 +62,32 @@ const data2: any = {
 const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz: ProcessFlow = new ProcessFlow(container)
 
-  test("Renders a process flow with no data", () => {
-    viz.draw()
-  })
-
-  test("Renders a process flow with an empty dataset", () => {
-    viz.data({})
-    viz.draw()
-  })
-
-  test("Adds data", () => {
+  test("Focuses a link", () => {
     viz.data(data1)
+    viz.config({
+      focusElement: {
+        type: "link",
+        matchers: { sourceId: "3", targetId: "5" }
+      }
+    })
     viz.draw()
   })
 
-  test("Updates the data", () => {
+  test("Removes focus", () => {
+    viz.config({ focusElement: undefined })
+  })
+
+  test("Focuses a node", () => {
     viz.data(data2)
+    viz.config({
+      focusElement: {
+        type: "node",
+        matchers: { id: "4" }
+      }
+    })
+    viz.accessors("node", {
+      label: (node: any) => `Node ${node.id}`
+    })
     viz.draw()
   })
 
@@ -85,4 +96,4 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export default { marathon, title: "data updates" }
+export default { marathon, title: "element focussing" }

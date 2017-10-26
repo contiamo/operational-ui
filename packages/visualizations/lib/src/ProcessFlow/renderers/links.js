@@ -15,6 +15,7 @@ var d3 = require("d3-selection");
 require("d3-transition");
 var d3_ease_1 = require("d3-ease");
 var styles = require("./styles");
+var fp_1 = require("lodash/fp");
 var MINOPACITY = 0.5, MAXOPACITY = 1;
 var Links = /** @class */ (function (_super) {
     __extends(Links, _super);
@@ -59,6 +60,7 @@ var Links = /** @class */ (function (_super) {
                 .append("path")
                 .attr("class", "link " + styles.element)
                 .attr("d", ctx.linkStartPath.bind(ctx))
+                .attr("fill", "none")
                 .attr("stroke-width", "0px");
         })
             .merge(linkGroups)
@@ -88,9 +90,11 @@ var Links = /** @class */ (function (_super) {
                 .attr("opacity", function (d) { return opacityScale(d.size()); });
         });
     };
+    // Paths start as a single point at the source node. If the source node has already been rendered,
+    // use its position at the start of the transition.
     Links.prototype.linkStartPath = function (link) {
-        var xStart = link.source().x, yStart = link.source().y;
-        return "M" + xStart + "," + yStart + "L" + xStart + "," + yStart;
+        var previousData = this.state.previous.get("computed").series.data, previousNodes = previousData ? previousData.nodes : [], existingSource = fp_1.find(function (node) { return node.id() === link.sourceId(); })(previousNodes), x = existingSource ? existingSource.x : link.source().x, y = existingSource ? existingSource.y : link.source().y;
+        return "M" + x + "," + y + "L" + x + "," + y;
     };
     Links.prototype.linkPath = function (link) {
         var xStart = link.source().x, yStart = link.source().y, xEnd = link.target().x, yEnd = link.target().y, xMid = (xStart + xEnd) / 2, yMid = (yStart + yEnd) / 2;

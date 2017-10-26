@@ -16,12 +16,16 @@ var breakdownContainerStyle = {
     width: "49%",
     float: "left",
     paddingRight: "2%",
-    paddingTop: "5px",
+    paddingTop: "10px",
+    paddingBottom: "10px",
 };
 var breakdownLabelStyle = {
     display: "block",
     marginBottom: "3px",
     fontSize: "12px",
+};
+var breakdownCommentLabelStyle = {
+    marginLeft: "6px"
 };
 var breakdownBackgroundBarStyle = {
     position: "relative",
@@ -50,11 +54,15 @@ var breakdownTextStyle = {
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",
+    "& span": {
+        fontWeight: "normal"
+    }
 };
 exports.breakdown = glamor_1.css(breakdownStyle).toString();
 exports.breakdownsContainer = glamor_1.css(breakdownsContainerStyle).toString();
 exports.breakdownContainer = glamor_1.css(breakdownContainerStyle).toString();
 exports.breakdownLabel = glamor_1.css(breakdownLabelStyle).toString();
+exports.breakdownCommentLabel = glamor_1.css(breakdownCommentLabelStyle).toString();
 exports.breakdownBackgroundBar = glamor_1.css(breakdownBackgroundBarStyle).toString();
 exports.breakdownBar = glamor_1.css(breakdownBarStyle).toString();
 exports.breakdownText = glamor_1.css(breakdownTextStyle).toString();

@@ -77,9 +77,6 @@ var AbstractRenderer = /** @class */ (function () {
             .exit()
             .on("mouseenter", null)
             .on("mouseleave", null)
-            .transition()
-            .duration(this.config.duration)
-            .style("opacity", 0)
             .remove();
     };
     AbstractRenderer.prototype.sizeScale = function (range) {

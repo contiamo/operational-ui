@@ -77,6 +77,7 @@ var AbstractChart = /** @class */ (function () {
         }
         this.__disposed = true;
         this.events.removeAll();
+        this.context.innerHTML = "";
     };
     return AbstractChart;
 }());

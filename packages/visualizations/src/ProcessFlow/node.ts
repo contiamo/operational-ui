@@ -8,6 +8,9 @@ class Node {
   y: number
   sourceLinks: TLink[]
   targetLinks: TLink[]
+  journeyStarts: number = 0
+  journeyEnds: number = 0
+  singleNodeJourneys: number = 0
 
   constructor(nodeAttributes: INodeAttrs, accessors: TAccessors) {
     this.accessors = accessors

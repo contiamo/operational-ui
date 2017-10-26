@@ -4,6 +4,13 @@ import { uniqueId, forEach, reduce, map } from "lodash/fp"
 import { IConfig, IFocus, IBreakdown, TLink, TNode } from "./typings"
 import * as styles from "./styles"
 
+interface IBreakdowns {
+  inputs: IBreakdown[]
+  outputs: IBreakdown[]
+  startsHere: IBreakdown[]
+  endsHere: IBreakdown[]
+}
+
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
   uid: string
@@ -31,24 +38,29 @@ class Focus extends AbstractFocus {
         .append("xhtml:li")
         .attr("class", styles.title)
         .text(datum.label())
-
-      content
-        .append("xhtml:li")
-        .text(datum.size())
+        .append("span")
+        .text(` (${datum.size()})`)
 
       if (isNode) {
-        const breakdowns: { inputs: IBreakdown[], outputs: IBreakdown[] } = ctx.computeBreakdowns(datum)
-        const container: any = content.append("div").attr("class", styles.breakdownsContainer)
-        ctx.addBreakdowns("Inputs", container, breakdowns.inputs)
-        ctx.addBreakdowns("Outputs", container, breakdowns.outputs)
+        const breakdowns: IBreakdowns = ctx.computeBreakdowns(datum),
+          container: any = content.append("div").attr("class", styles.breakdownsContainer)
 
-        const outputTotal: number = reduce((memo: number, link: any): number => {
-          return memo + link.size()
-        }, 0)(datum.sourceLinks)
+        const inputsTotal: number = ctx.computeBreakdownTotal(breakdowns.inputs),
+          outputsTotal: number = ctx.computeBreakdownTotal(breakdowns.outputs),
+          startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
+          endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal)
 
-        content.append("xhtml:li")
-          .attr("class", `${styles.title} breakdown-difference`)
-          .text("Difference: " + (datum.size() - outputTotal))
+        ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, `${startsHerePercentage}% of all outputs`)
+        ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, `${endsHerePercentage}% of all inputs`)
+        ctx.addBreakdowns("Inputs", ` (${inputsTotal})`, container, breakdowns.inputs)
+        ctx.addBreakdowns("Outputs", ` (${outputsTotal})`, container, breakdowns.outputs)
+
+        if (datum.singleNodeJourneys > 0) {
+          content
+            .append("xhtml:li")
+            .attr("class", styles.title)
+            .text(`[!] ${datum.singleNodeJourneys} single node visits (not included in the above stats)`)
+        }
       }
 
       // Get label dimensions (has to be actually rendered in the page to do ctx)
@@ -68,7 +80,7 @@ class Focus extends AbstractFocus {
     }
   }
 
-  computeBreakdowns(node: TNode): { inputs: IBreakdown[], outputs: IBreakdown[] } {
+  computeBreakdowns(node: TNode): IBreakdowns {
     const inputs: IBreakdown[] = map((link: TLink): IBreakdown => {
       const size: number = link.size()
       return {
@@ -85,24 +97,39 @@ class Focus extends AbstractFocus {
         percentage: Math.round(size * 100 / node.size())
       }
     })(node.sourceLinks)
-    return { inputs, outputs}
+    const startsHere: IBreakdown[] = [{
+      size: node.journeyStarts,
+      percentage: Math.round(node.journeyStarts * 100 / node.size())
+    }]
+    const endsHere: IBreakdown[] = [{
+      size: node.journeyEnds,
+      percentage: Math.round(node.journeyEnds * 100 / node.size())
+    }]
+    return { inputs, outputs, startsHere, endsHere }
   }
 
-  addBreakdowns(title: string, content: any, breakdownItems: IBreakdown[]): void {
-    const container: any = content.append("div").attr("class", styles.breakdownContainer)
+  computeBreakdownTotal(breakdowns: IBreakdown[]): number {
+    return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
+  }
 
+  addBreakdowns(title: string, subtitle: string, content: any, breakdownItems: IBreakdown[], comment?: string): void {
+    const container: any = content.append("div").attr("class", styles.breakdownContainer)
     container.append("span")
       .attr("class", styles.title)
       .text(title)
+      .append("span")
+      .text(subtitle)
 
     forEach((item: IBreakdown): void => {
       const breakdown: any = container.append("div")
         .attr("class", styles.breakdown)
 
-      breakdown
-        .append("label")
-        .attr("class", styles.breakdownLabel)
-        .text(item.label)
+      if (item.label) {
+        breakdown
+          .append("label")
+          .attr("class", styles.breakdownLabel)
+          .text(item.label)
+      }
 
       const backgroundBar: any = breakdown.append("div")
         .attr("class", styles.breakdownBackgroundBar)
@@ -114,8 +141,13 @@ class Focus extends AbstractFocus {
       backgroundBar.append("div")
         .attr("class", styles.breakdownText)
         .text(item.size + " (" + item.percentage + "%)")
-
     })(breakdownItems)
+
+    if (comment) {
+      container.append("label")
+        .attr("class", styles.breakdownCommentLabel)
+        .text(comment)
+    }
   }
 }
 
