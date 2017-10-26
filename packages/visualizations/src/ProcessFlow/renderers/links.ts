@@ -4,6 +4,7 @@ import "d3-transition"
 import { TLink, TNode, TScale, IFocus, TLinkSelection, IFocusElement } from "../typings"
 import { easeCubicInOut } from "d3-ease"
 import * as styles from "./styles"
+import { find } from "lodash/fp"
 
 const MINOPACITY: number = 0.5,
   MAXOPACITY: number = 1
@@ -53,6 +54,7 @@ class Links extends AbstractRenderer {
           .append("path")
           .attr("class", `link ${styles.element}`)
           .attr("d", ctx.linkStartPath.bind(ctx))
+          .attr("fill", "none")
           .attr("stroke-width", "0px")
       })
       .merge(linkGroups)
@@ -83,10 +85,16 @@ class Links extends AbstractRenderer {
       })
   }
 
+  // Paths start as a single point at the source node. If the source node has already been rendered,
+  // use its position at the start of the transition.
   linkStartPath(link: TLink): string {
-    const xStart: number = link.source().x,
-      yStart: number = link.source().y
-    return "M" + xStart + "," + yStart + "L" + xStart + "," + yStart
+    const previousData: any = this.state.previous.get("computed").series.data,
+      previousNodes: TNode[] = previousData ? previousData.nodes : [],
+      existingSource: TNode = find((node: TNode): boolean => node.id() === link.sourceId())(previousNodes),
+      x: number = existingSource ? existingSource.x : link.source().x,
+      y: number = existingSource ? existingSource.y : link.source().y
+
+    return "M" + x + "," + y + "L" + x + "," + y
   }
 
   linkPath(link: TLink): string {

@@ -106,9 +106,6 @@ abstract class AbstractRenderer {
       .exit()
       .on("mouseenter", null)
       .on("mouseleave", null)
-      .transition()
-      .duration(this.config.duration)
-      .style("opacity", 0)
       .remove()
   }
 

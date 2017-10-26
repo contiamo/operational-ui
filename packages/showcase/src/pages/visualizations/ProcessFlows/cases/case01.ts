@@ -86,6 +86,7 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
 
   test("Adds data", () => {
     viz.data(data1)
+    viz.config({ duration: 2e3 })
     viz.draw()
   })
 
