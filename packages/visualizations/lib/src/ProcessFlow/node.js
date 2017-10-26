@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var Node = /** @class */ (function () {
     function Node(nodeAttributes, accessors) {
+        this.journeyStarts = 0;
+        this.journeyEnds = 0;
+        this.singleNodeJourneys = 0;
         this.accessors = accessors;
         this.assignProperties(nodeAttributes);
     }

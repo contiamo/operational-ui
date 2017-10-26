@@ -112,7 +112,7 @@ export interface IFocus {
 }
 
 export interface IBreakdown {
-  label: string
+  label?: string
   size: number
   percentage: number
 }

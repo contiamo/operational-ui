@@ -17,13 +17,18 @@ const breakdownContainerStyle = {
   width: "49%",
   float: "left",
   paddingRight: "2%",
-  paddingTop: "5px",
+  paddingTop: "10px",
+  paddingBottom: "10px",
 }
 
 const breakdownLabelStyle = {
   display: "block",
   marginBottom: "3px",
   fontSize: "12px",
+}
+
+const breakdownCommentLabelStyle = {
+  marginLeft: "6px"
 }
 
 const breakdownBackgroundBarStyle = {
@@ -56,12 +61,16 @@ const breakdownTextStyle = {
 const titleStyle = {
   fontWeight: "bold",
   color: "#555",
+  "& span": {
+    fontWeight: "normal"
+  }
 }
 
 export const breakdown = css(breakdownStyle).toString()
 export const breakdownsContainer = css(breakdownsContainerStyle).toString()
 export const breakdownContainer = css(breakdownContainerStyle).toString()
 export const breakdownLabel = css(breakdownLabelStyle).toString()
+export const breakdownCommentLabel = css(breakdownCommentLabelStyle).toString()
 export const breakdownBackgroundBar = css(breakdownBackgroundBarStyle).toString()
 export const breakdownBar = css(breakdownBarStyle).toString()
 export const breakdownText = css(breakdownTextStyle).toString()

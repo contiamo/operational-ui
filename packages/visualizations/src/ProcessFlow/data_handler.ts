@@ -47,6 +47,7 @@ class DataHandler {
       node.targetLinks = []
     })(this.nodes)
     this.calculateNodeSizes()
+    this.calculateStartsAndEnds()
   }
 
   findNode(nodeId: string): TNode {
@@ -74,6 +75,17 @@ class DataHandler {
       forEach((nodeId: string): void => {
         this.findNode(nodeId).attributes.size += journey.size
       })(journey.path)
+    })(this.journeys)
+  }
+
+  calculateStartsAndEnds(): void {
+    forEach((journey: IJourney): void => {
+      if (journey.path.length > 1) {
+        this.findNode(journey.path[0]).journeyStarts += journey.size
+        this.findNode(journey.path[journey.path.length - 1]).journeyEnds += journey.size
+      } else {
+        this.findNode(journey.path[0]).singleNodeJourneys += journey.size
+      }
     })(this.journeys)
   }
 

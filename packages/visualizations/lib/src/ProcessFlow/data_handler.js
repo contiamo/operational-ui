@@ -36,6 +36,7 @@ var DataHandler = /** @class */ (function () {
             node.targetLinks = [];
         })(this.nodes);
         this.calculateNodeSizes();
+        this.calculateStartsAndEnds();
     };
     DataHandler.prototype.findNode = function (nodeId) {
         var node = fp_1.find(function (node) {
@@ -60,6 +61,18 @@ var DataHandler = /** @class */ (function () {
             fp_1.forEach(function (nodeId) {
                 _this.findNode(nodeId).attributes.size += journey.size;
             })(journey.path);
+        })(this.journeys);
+    };
+    DataHandler.prototype.calculateStartsAndEnds = function () {
+        var _this = this;
+        fp_1.forEach(function (journey) {
+            if (journey.path.length > 1) {
+                _this.findNode(journey.path[0]).journeyStarts += journey.size;
+                _this.findNode(journey.path[journey.path.length - 1]).journeyEnds += journey.size;
+            }
+            else {
+                _this.findNode(journey.path[0]).singleNodeJourneys += journey.size;
+            }
         })(this.journeys);
     };
     DataHandler.prototype.initializeLinks = function (data) {

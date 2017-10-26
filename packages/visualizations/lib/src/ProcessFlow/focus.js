@@ -34,21 +34,22 @@ var Focus = /** @class */ (function (_super) {
             content
                 .append("xhtml:li")
                 .attr("class", styles.title)
-                .text(datum.label());
-            content
-                .append("xhtml:li")
-                .text(datum.size());
+                .text(datum.label())
+                .append("span")
+                .text(" (" + datum.size() + ")");
             if (isNode) {
-                var breakdowns = ctx.computeBreakdowns(datum);
-                var container = content.append("div").attr("class", styles.breakdownsContainer);
-                ctx.addBreakdowns("Inputs", container, breakdowns.inputs);
-                ctx.addBreakdowns("Outputs", container, breakdowns.outputs);
-                var outputTotal = fp_1.reduce(function (memo, link) {
-                    return memo + link.size();
-                }, 0)(datum.sourceLinks);
-                content.append("xhtml:li")
-                    .attr("class", styles.title + " breakdown-difference")
-                    .text("Difference: " + (datum.size() - outputTotal));
+                var breakdowns = ctx.computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer);
+                var inputsTotal = ctx.computeBreakdownTotal(breakdowns.inputs), outputsTotal = ctx.computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal);
+                ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, startsHerePercentage + "% of all outputs");
+                ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, endsHerePercentage + "% of all inputs");
+                ctx.addBreakdowns("Inputs", " (" + inputsTotal + ")", container, breakdowns.inputs);
+                ctx.addBreakdowns("Outputs", " (" + outputsTotal + ")", container, breakdowns.outputs);
+                if (datum.singleNodeJourneys > 0) {
+                    content
+                        .append("xhtml:li")
+                        .attr("class", styles.title)
+                        .text("[!] " + datum.singleNodeJourneys + " single node visits (not included in the above stats)");
+                }
             }
             // Get label dimensions (has to be actually rendered in the page to do ctx)
             var labelDimensions = focus_utils_1.default.labelDimensions(ctx.el);
@@ -80,20 +81,35 @@ var Focus = /** @class */ (function (_super) {
                 percentage: Math.round(size * 100 / node.size())
             };
         })(node.sourceLinks);
-        return { inputs: inputs, outputs: outputs };
+        var startsHere = [{
+                size: node.journeyStarts,
+                percentage: Math.round(node.journeyStarts * 100 / node.size())
+            }];
+        var endsHere = [{
+                size: node.journeyEnds,
+                percentage: Math.round(node.journeyEnds * 100 / node.size())
+            }];
+        return { inputs: inputs, outputs: outputs, startsHere: startsHere, endsHere: endsHere };
     };
-    Focus.prototype.addBreakdowns = function (title, content, breakdownItems) {
+    Focus.prototype.computeBreakdownTotal = function (breakdowns) {
+        return fp_1.reduce(function (sum, item) { return sum + item.size; }, 0)(breakdowns);
+    };
+    Focus.prototype.addBreakdowns = function (title, subtitle, content, breakdownItems, comment) {
         var container = content.append("div").attr("class", styles.breakdownContainer);
         container.append("span")
             .attr("class", styles.title)
-            .text(title);
+            .text(title)
+            .append("span")
+            .text(subtitle);
         fp_1.forEach(function (item) {
             var breakdown = container.append("div")
                 .attr("class", styles.breakdown);
-            breakdown
-                .append("label")
-                .attr("class", styles.breakdownLabel)
-                .text(item.label);
+            if (item.label) {
+                breakdown
+                    .append("label")
+                    .attr("class", styles.breakdownLabel)
+                    .text(item.label);
+            }
             var backgroundBar = breakdown.append("div")
                 .attr("class", styles.breakdownBackgroundBar);
             backgroundBar.append("div")
@@ -103,6 +119,11 @@ var Focus = /** @class */ (function (_super) {
                 .attr("class", styles.breakdownText)
                 .text(item.size + " (" + item.percentage + "%)");
         })(breakdownItems);
+        if (comment) {
+            container.append("label")
+                .attr("class", styles.breakdownCommentLabel)
+                .text(comment);
+        }
     };
     return Focus;
 }(abstract_drawing_focus_1.default));
