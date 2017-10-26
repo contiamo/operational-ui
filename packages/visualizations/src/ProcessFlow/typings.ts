@@ -39,7 +39,6 @@ export interface IFocusElement {
 }
 
 export interface IConfig {
-  arrowFill: string
   borderColor: string
   duration: number
   focusElement?: IFocusElement // type ("node"/"link"), id / [sourceId, targetId]

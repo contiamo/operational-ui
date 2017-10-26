@@ -129,4 +129,4 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export default { marathon, title: "Data updates" }
+export default { marathon, title: "data updates" }
