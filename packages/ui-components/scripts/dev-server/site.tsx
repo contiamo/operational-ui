@@ -2,34 +2,23 @@ import * as React from "react"
 import { render } from "react-dom"
 import { ThemeProvider } from "glamorous"
 
-import { DatePicker, contiamoTheme } from "../../index"
-
-const options = [
-  {
-    label: 'Label1',
-    value: 'value1'
-  },
-  {
-    label: 'Label2',
-    value: 'value2'
-  }
-]
+import { ContextMenu, ContextMenuItem, Icon, contiamoTheme } from "../../index"
 
 class Site extends React.Component<{}, {}> {
-  state = {
-    start: "2017-10-02",
-    end: "2017-10-26"
-  }
-
   render() {
     return (
       <ThemeProvider theme={contiamoTheme}>
         <div style={{padding: 40}}>
-          <DatePicker label="Select date" start={this.state.start} end={this.state.end} onChange={(newState: any) => {this.setState(prevState => newState)}} />
+          <ContextMenu expandOnHover>
+            <span><Icon name="X" size={30}></Icon></span>
+            <ContextMenuItem onClick={() => {console.log("clicked")}}>Menu 1</ContextMenuItem>
+            <ContextMenuItem>Menu 2</ContextMenuItem>
+            <ContextMenuItem>Menu 3</ContextMenuItem>
+          </ContextMenu>
         </div>
       </ThemeProvider>
     )
   }
 }
 
-render(<Site />, document.getElementById("app"))
+render(<Site/>, document.getElementById("app"))

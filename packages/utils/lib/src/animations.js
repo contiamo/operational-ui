@@ -2,14 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamor_1 = require("glamor");
 var fadeIn = glamor_1.css.keyframes({
+    from: {
+        opacity: 0,
+        transform: "translate3d(0, -6px, 0)"
+    },
     to: {
-        opacity: 1
+        opacity: 1,
+        transform: "translate3d(0, 0, 0)"
     }
-}), resetTransform = glamor_1.css.keyframes({
+});
+exports.fadeIn = fadeIn;
+var resetTransform = glamor_1.css.keyframes({
     to: {
         transform: "none"
     }
-}), spin = glamor_1.css.keyframes({
+});
+exports.resetTransform = resetTransform;
+var spin = glamor_1.css.keyframes({
     from: {
         transform: "rotate(0deg)"
     },
@@ -17,7 +26,5 @@ var fadeIn = glamor_1.css.keyframes({
         transform: "rotate(359deg)"
     }
 });
-exports.fadeIn = fadeIn;
-exports.resetTransform = resetTransform;
 exports.spin = spin;
 //# sourceMappingURL=animations.js.map

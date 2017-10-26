@@ -9,18 +9,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
-var glamor_1 = require("glamor");
+var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var inputHeight = 27;
-var fadeIn = glamor_1.css.keyframes({
-    from: {
-        opacity: 0,
-        transform: "translate3d(-50%, -6px, 0)"
-    },
-    to: {
-        opacity: 1,
-        transform: "translate3d(-50%, 0, 0)"
-    }
-});
 exports.Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
@@ -28,7 +18,7 @@ exports.Container = glamorous_1.default.div(function (_a) {
         width: "auto",
         position: "relative",
         "& .co_card": {
-            animation: fadeIn + " ease-in-out forwards 0.2s",
+            animation: contiamo_ui_utils_1.fadeIn + " ease-in-out forwards 0.2s",
             display: isExpanded ? "block" : "none",
             position: "absolute",
             top: 30,

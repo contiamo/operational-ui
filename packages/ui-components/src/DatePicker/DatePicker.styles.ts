@@ -2,18 +2,9 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { css } from "glamor"
 
-const inputHeight: number = 27
+import { fadeIn } from "contiamo-ui-utils"
 
-const fadeIn = css.keyframes({
-  from: {
-    opacity: 0,
-    transform: "translate3d(-50%, -6px, 0)"
-  },
-  to: {
-    opacity: 1,
-    transform: "translate3d(-50%, 0, 0)"
-  }
-})
+const inputHeight: number = 27
 
 export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): any => ({
   display: "inline-block",
