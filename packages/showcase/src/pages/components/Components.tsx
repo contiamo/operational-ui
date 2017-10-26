@@ -30,7 +30,6 @@ import Progress from "./Progress/Progress"
 import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
 import Uploads from "./Uploads/Uploads"
-import * as apiDesignContent from "./APIDESIGN"
 import * as introContent from "./INTRO"
 
 const SidebarWithRouter = withRouter(Sidebar)
@@ -42,18 +41,10 @@ const Intro = () => (
   </Card>
 )
 
-const ApiDesign = () => (
-  <Card>
-    <CardHeader>API Design</CardHeader>
-    <StaticContent markdownContent={apiDesignContent} />
-  </Card>
-)
-
 const links: ISidebarLink[] = [
   {
     label: "Basics",
     links: [
-      { url: "/components/api-design", label: "API design" },
       { url: "/components/colors", label: "Colors" },
       { url: "/components/typography", label: "Typography" },
       { url: "/components/icons", label: "Icons" }
@@ -113,7 +104,6 @@ export default () => (
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/components" component={Intro} />
-      <Route path="/components/api-design" component={ApiDesign} />
       <Route path="/components/buttons" component={Buttons} />
       <Route path="/components/breakdown" component={Breakdown} />
       <Route path="/components/form-fields" component={FormFields} />

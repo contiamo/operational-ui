@@ -5,8 +5,8 @@ var chartContainerStyle = {
     position: "relative",
     display: "block",
     "&.hidden": {
-        display: "none"
-    }
+        display: "none",
+    },
 };
 var focusLegendStyle = {
     userSelect: "none",
@@ -16,13 +16,14 @@ var focusLegendStyle = {
     padding: 7,
     border: "1px solid #cdcdcd",
     position: "absolute",
+    zIndex: 3000,
     backgroundColor: "#fff",
     "& ul": {
         listStyle: "none",
         fontSize: 12,
         margin: 0,
-        padding: 0
-    }
+        padding: 0,
+    },
 };
 exports.chartContainer = glamor_1.css(chartContainerStyle).toString();
 exports.focusLegend = glamor_1.css(focusLegendStyle).toString();

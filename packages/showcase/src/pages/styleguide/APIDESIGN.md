@@ -52,6 +52,6 @@ Note that inline styles passed in through the *style* prop are ignored in order 
 
 ## All-JS, all-React
 
-Components tap all the way into advanced features of its significant dependencies, React and glamorous. Custom-defined CSS class names are avoided as much as possible over granular, parameterized styled components. Several components rely on React's event delegation, child manipulation through `React.Children.map`, and there are plans underway to introduce error boundaries and portals.
+Components tap all the way into advanced features of its significant dependencies, React and glamorous. Custom-defined CSS class names are avoided as much as possible over granular, parameterized styled components. Several components rely on React's event delegation, child manipulation through *React.Children.map*, and there are plans underway to introduce error boundaries and portals.
 
 But that doesn't mean the project has to be used this way: you can attach custom class names and style overrides as you see fit, integrate with third-party libraries, and provide custom React content inside components. The hashed class names inside components will make sure you can plug other projects and technologies in and stay conflict-free. 
