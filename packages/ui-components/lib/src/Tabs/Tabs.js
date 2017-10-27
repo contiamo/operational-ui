@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
-var Tab_1 = require("./Tab/Tab");
+var Tab_1 = require("./Tab");
 exports.Tab = Tab_1.default;
 var Container = glamorous_1.default.div({});
 var Content = glamorous_1.default.div({
@@ -103,6 +103,6 @@ var Tabs = function (_a) {
         React.createElement(TabList, null, tabTitles),
         React.createElement(Content, null, activePanel)));
 };
-exports.Tabs = Tabs;
-exports.default = glamorous_1.withTheme(Tabs);
+var WrappedTabs = glamorous_1.withTheme(Tabs);
+exports.Tabs = WrappedTabs;
 //# sourceMappingURL=Tabs.js.map

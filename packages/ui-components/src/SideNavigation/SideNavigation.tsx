@@ -1,6 +1,6 @@
 import * as React from "react"
-
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"
@@ -8,7 +8,7 @@ import SideNavigationLink from "./Link/SideNavigationLink"
 
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
-interface IProps {
+export interface IProps {
   css?: {}
   className?: string
   children?: React.ReactNode

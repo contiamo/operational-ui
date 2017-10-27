@@ -1,11 +1,12 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
 
-import glamorous, { Div } from "glamorous"
+import glamorous, { Div, GlamorousComponent } from "glamorous"
+import { Theme } from "../../theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-interface IProps {
+export interface IProps {
   className?: string
   children?: React.ReactNode
   to?: string

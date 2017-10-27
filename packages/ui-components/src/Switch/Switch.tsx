@@ -1,14 +1,15 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   on: boolean
   onChange: (on: boolean) => void
   className?: string
   style?: any
 }
 
-interface IStyleProps {
+export interface IStyleProps {
   on: boolean
   theme: Theme
 }

@@ -2,19 +2,22 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import { withTheme } from "glamorous"
+import { Theme } from "../theme"
+import { ReactFeatherIconName } from "./ReactFeather"
 
 import { hexOrColor } from "contiamo-ui-utils"
 
-type IconName = ReactFeatherIconName
-
-interface IProps {
-  name: IconName
+export interface IProps {
+  name: ReactFeatherIconName
   size?: number
   color?: string
+}
+
+export interface IPropsWithTheme extends IProps {
   theme: Theme
 }
 
-const Icon: React.SFC<IProps> = ({ name, size, color, theme }) => {
+const Icon: React.StatelessComponent<IPropsWithTheme> = ({ name, size, color, theme }: IPropsWithTheme) => {
   const defaultColor = theme.colors.palette.black
   const color_: string = color ? hexOrColor(color)(theme.colors.palette[color] || defaultColor) as string : defaultColor
 
@@ -22,8 +25,11 @@ const Icon: React.SFC<IProps> = ({ name, size, color, theme }) => {
     const Comp = ReactFeather[name]
     return <Comp size={size || theme.spacing} color={color_} />
   } else {
-    return <div>Icon doesn't exist</div>
+    return null
   }
 }
 
-export default withTheme(Icon)
+const WrappedIcon: React.SFC<IProps> = withTheme(Icon)
+
+export default WrappedIcon
+export { ReactFeatherIconName }

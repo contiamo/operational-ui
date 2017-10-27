@@ -1,5 +1,6 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../src/theme"
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "inline-block"

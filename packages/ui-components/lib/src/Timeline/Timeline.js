@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var TimelineItem_1 = require("./Item/TimelineItem");
+var TimelineItem_1 = require("./TimelineItem");
 exports.TimelineItem = TimelineItem_1.default;
 var Container = glamorous_1.default.ul({
     listStyle: "none",

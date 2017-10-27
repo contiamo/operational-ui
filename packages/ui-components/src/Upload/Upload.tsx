@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as attrAccept from "attr-accept"
 
-interface IProps {
+export interface IProps {
   action: string
   accept?: string
   data?: {}
@@ -15,7 +15,7 @@ interface IProps {
   onSuccess?: (response: {}, file: File) => void
 }
 
-interface IRequestOptions {
+export interface IRequestOptions {
   action: string
   data: {}
   file: File

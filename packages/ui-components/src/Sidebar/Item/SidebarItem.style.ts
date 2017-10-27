@@ -1,4 +1,5 @@
 import { spin } from "contiamo-ui-utils"
+import { Theme } from "../../theme"
 
 export default ({ theme, children }: { theme: Theme; children?: Node }): {} => {
   // If we have children, style a caret.

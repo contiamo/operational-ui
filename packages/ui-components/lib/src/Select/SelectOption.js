@@ -41,5 +41,6 @@ var SelectOption = function (_a) {
         selected ? (React.createElement(IconContainer, null,
             React.createElement(contiamo_ui_components_1.Icon, { name: "X", size: theme.spacing }))) : null));
 };
-exports.default = glamorous_1.withTheme(SelectOption);
+var WrappedSelectOption = glamorous_1.withTheme(SelectOption);
+exports.default = WrappedSelectOption;
 //# sourceMappingURL=SelectOption.js.map

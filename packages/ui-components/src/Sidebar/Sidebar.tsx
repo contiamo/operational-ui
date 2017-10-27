@@ -1,10 +1,11 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import SidebarItem from "./Item/SidebarItem"
 import SidebarLink from "./Link/SidebarLink"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   children: React.ReactNode

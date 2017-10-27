@@ -1,13 +1,14 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
-import HeaderItem from "./Item/HeaderItem"
-import HeaderTitle from "./Title/HeaderTitle"
-import HeaderSeparator from "./Separator/HeaderSeparator"
+import HeaderItem from "./HeaderItem"
+import HeaderTitle from "./HeaderTitle"
+import HeaderSeparator from "./HeaderSeparator"
 
-interface IProps {
+export interface IProps {
   className?: string
   css?: any
   children: React.ReactNode

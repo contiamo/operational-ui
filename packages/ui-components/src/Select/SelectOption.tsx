@@ -1,18 +1,22 @@
 import * as React from "react"
-import glamorous, { withTheme } from "glamorous"
+import glamorous, { withTheme, GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 import { Icon } from "contiamo-ui-components"
 
-interface IProps {
+export interface IProps {
   key: number | string
   css?: any
   className?: string
   selected?: boolean
   onClick?: () => void
   children?: React.ReactNode
-  theme: Theme
   color?: string
+}
+
+export interface IPropsWithTheme extends IProps {
+  theme: Theme
 }
 
 const Container = glamorous.div(
@@ -48,7 +52,15 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
   transform: "translate3d(-50%, -50%, 0)"
 }))
 
-const SelectOption: React.SFC<IProps> = ({ css, className, theme, selected, color, onClick, children }: IProps) => (
+const SelectOption: React.SFC<IPropsWithTheme> = ({
+  css,
+  className,
+  theme,
+  selected,
+  color,
+  onClick,
+  children
+}: IPropsWithTheme) => (
   <Container
     css={css}
     className={className}
@@ -68,4 +80,6 @@ const SelectOption: React.SFC<IProps> = ({ css, className, theme, selected, colo
   </Container>
 )
 
-export default withTheme(SelectOption)
+const WrappedSelectOption: React.SFC<IProps> = withTheme(SelectOption)
+
+export default WrappedSelectOption

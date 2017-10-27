@@ -1,9 +1,10 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
 
 import { darken, hexOrColor, readableTextColor } from "contiamo-ui-utils"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   css?: any
   color?: string
   onClick?: () => void

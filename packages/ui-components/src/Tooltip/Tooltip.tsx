@@ -1,5 +1,6 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import TooltipStyle from "./Tooltip.style"
 
@@ -24,7 +25,7 @@ import TooltipStyle from "./Tooltip.style"
   on the tooltip, along with `position: fixed` and all is well with the
   world. 🌈
 */
-interface TooltipPosition extends React.CSSProperties {
+export interface TooltipPosition extends React.CSSProperties {
   position: "absolute" | "fixed"
   transform?: string
   top?: number
@@ -32,7 +33,7 @@ interface TooltipPosition extends React.CSSProperties {
   bottom?: number | string
 }
 
-interface IRectCoords {
+export interface IRectCoords {
   top: number
   left: number
   bottom: number
@@ -41,7 +42,7 @@ interface IRectCoords {
   height: number
 }
 
-interface IProps {
+export interface IProps {
   className?: string
   children?: React.ReactNode
   active?: boolean
@@ -50,7 +51,7 @@ interface IProps {
   betaFixOverflow?: boolean
 }
 
-interface IState {
+export interface IState {
   style: TooltipPosition
 }
 

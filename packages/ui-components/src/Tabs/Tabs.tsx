@@ -1,13 +1,17 @@
 import * as React from "react"
-import glamorous, { withTheme } from "glamorous"
+import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { darken, hexOrColor } from "contiamo-ui-utils"
-import Tab, { TabProps } from "./Tab/Tab"
+import Tab, { TabProps } from "./Tab"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   active?: number
   activeColor?: string
   children?: React.ReactNode
   onChange?: (index: number) => void
+}
+
+export interface IPropsWithTheme extends IProps {
   theme: Theme
 }
 
@@ -105,13 +109,13 @@ const TabTitle = glamorous.li(
   })
 )
 
-const Tabs: React.SFC<IProps> = ({
+const Tabs: React.SFC<IPropsWithTheme> = ({
   active = 0,
   activeColor = "info",
   children,
   onChange = () => {},
   theme
-}: IProps) => {
+}: IPropsWithTheme) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
     children,
@@ -147,6 +151,6 @@ const Tabs: React.SFC<IProps> = ({
   )
 }
 
-export default withTheme(Tabs)
+const WrappedTabs: React.SFC<IProps> = withTheme(Tabs)
 
-export { Tabs, Tab }
+export { WrappedTabs as Tabs, Tab }

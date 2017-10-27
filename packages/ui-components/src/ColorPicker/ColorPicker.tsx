@@ -1,8 +1,9 @@
 import * as React from "react"
 import { SketchPicker, RGBColor } from "react-color"
-import glamorous, { CSSProperties } from "glamorous"
+import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   color?: string
@@ -10,12 +11,12 @@ interface IProps {
   onChange?: (color: string) => any
 }
 
-interface IPosition {
+export interface IPosition {
   top?: number
   left?: number
 }
 
-interface IState {
+export interface IState {
   isPickerOpen: boolean
   position: IPosition
 }

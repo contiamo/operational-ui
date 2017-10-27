@@ -1,10 +1,11 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   icon?: ReactFeatherIconName

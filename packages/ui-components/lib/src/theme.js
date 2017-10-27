@@ -1,4 +1,5 @@
 "use strict";
+// Type definitions
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -8,6 +9,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// Default theme definition
 var palette = {
     info: "#1499CE",
     success: "#00b34d",

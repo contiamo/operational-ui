@@ -13,7 +13,7 @@ import Grid from "./src/Grid/Grid"
 import DatePicker from "./src/DatePicker/DatePicker"
 import Fieldset from "./src/Fieldset/Fieldset"
 import Header, { HeaderItem, HeaderSeparator, HeaderTitle } from "./src/Header/Header"
-import Icon from "./src/Icon/Icon"
+import Icon, { ReactFeatherIconName } from "./src/Icon/Icon"
 import InfoTile from "./src/InfoTile/InfoTile"
 import Input from "./src/Input/Input"
 import Modal from "./src/Modal/Modal"
@@ -33,7 +33,7 @@ import Tabs, { Tab } from "./src/Tabs/Tabs"
 import Tooltip from "./src/Tooltip/Tooltip"
 import Timeline, { TimelineItem } from "./src/Timeline/Timeline"
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./src/Typography/Typography"
-import theme from "./src/theme"
+import theme, { Theme, ThemeColorName } from "./src/theme"
 import Upload from "./src/Upload/Upload"
 
 export {
@@ -54,6 +54,7 @@ export {
   HeaderSeparator,
   HeaderTitle,
   Icon,
+  ReactFeatherIconName,
   InfoTile,
   Input,
   Modal,
@@ -81,6 +82,8 @@ export {
   BodyType,
   SmallType,
   theme as contiamoTheme,
+  Theme,
+  ThemeColorName,
   ThemeProvider,
   Upload
 }

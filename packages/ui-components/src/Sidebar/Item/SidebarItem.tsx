@@ -1,11 +1,12 @@
 import * as React from "react"
 
 import glamorous, { Div, GlamorousComponent } from "glamorous"
+import { Theme } from "../../theme"
 
 import style from "./SidebarItem.style"
 import SidebarLink from "../Link/SidebarLink"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   label: string
@@ -15,7 +16,7 @@ interface IProps {
   tooltip?: string
 }
 
-interface IState {
+export interface IState {
   open: boolean
   updating: boolean // async, woo!
 }

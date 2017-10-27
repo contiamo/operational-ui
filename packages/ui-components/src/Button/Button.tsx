@@ -1,10 +1,10 @@
 import * as React from "react"
-
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
+import { Theme } from "../theme"
 
-interface IStyleProps {
+export interface IStyleProps {
   theme?: Theme
   color?: string
   active?: boolean
@@ -12,7 +12,7 @@ interface IStyleProps {
   condensed?: boolean
 }
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   onClick?: any
