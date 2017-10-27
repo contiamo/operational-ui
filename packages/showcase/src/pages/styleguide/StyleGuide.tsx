@@ -5,10 +5,10 @@ import { Card, CardHeader } from "contiamo-ui-components"
 import Canvas from "../../components/Canvas/Canvas"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
-import * as introContent from "./INTRO"
-import * as apiDesignContent from "./APIDESIGN"
-import * as visualGuideContent from "./VISUALGUIDE"
-import * as themeContent from "./THEME"
+import * as introContent from "./intro.docs.md"
+import * as apiDesignContent from "./apidesign.docs.md"
+import * as visualGuideContent from "./visualguide.docs.md"
+import * as themeContent from "./theme.docs.md"
 
 const SidebarWithRouter = withRouter(Sidebar)
 

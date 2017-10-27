@@ -6,7 +6,6 @@ import { Card, CardHeader } from "contiamo-ui-components"
 import Canvas from "../../components/Canvas/Canvas"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
-
 import Buttons from "./Buttons/Buttons"
 import Breakdown from "./Breakdown/Breakdown"
 import FormFields from "./FormFields/FormFields"
@@ -30,7 +29,7 @@ import Progress from "./Progress/Progress"
 import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
 import Uploads from "./Uploads/Uploads"
-import * as introContent from "./INTRO"
+import * as introContent from "./intro.docs.md"
 
 const SidebarWithRouter = withRouter(Sidebar)
 
