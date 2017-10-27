@@ -1,4 +1,5 @@
 import { css } from "glamor"
+
 const fadeIn = css.keyframes({
   from: {
     opacity: 0,
@@ -15,6 +16,7 @@ const resetTransform = css.keyframes({
     transform: "none"
   }
 })
+
 const spin = css.keyframes({
   from: {
     transform: "rotate(0deg)"
