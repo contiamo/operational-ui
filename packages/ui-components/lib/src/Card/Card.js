@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var CardHeader_1 = require("./Header/CardHeader");
+var CardHeader_1 = require("./CardHeader");
 exports.CardHeader = CardHeader_1.default;
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, width = _a.width, padding = _a.padding;

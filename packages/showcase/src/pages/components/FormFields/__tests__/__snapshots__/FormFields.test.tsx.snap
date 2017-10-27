@@ -5,7 +5,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
   class="css-zssd73"
 >
   <div
-    class="css-imab3e"
+    class="css-1il4ybq"
   >
     Form Fields
   </div>
@@ -15,7 +15,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     This page seeks to document the vast majority of these controls.
   </p>
   <div
-    class="css-imab3e"
+    class="css-1il4ybq"
   >
     Input
   </div>
@@ -159,7 +159,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     </tbody>
   </table>
   <div
-    class="css-imab3e"
+    class="css-1il4ybq"
   >
     Select
   </div>
@@ -196,7 +196,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     </div>
   </div>
   <div
-    class="css-imab3e"
+    class="css-1il4ybq"
   >
     Organizing forms
   </div>
