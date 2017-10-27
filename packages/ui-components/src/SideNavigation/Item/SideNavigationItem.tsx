@@ -13,6 +13,7 @@ interface IProps {
 
 const Container = glamorous.div(({ theme, active }: IProps): {} => {
   const activeBackgroundColor = "rgba(0, 0, 0, 0.2)"
+  const hoverBackgroundColor = "rgba(255, 255, 255, 0.07)"
   return {
     position: "relative",
     display: "flex",
@@ -27,7 +28,7 @@ const Container = glamorous.div(({ theme, active }: IProps): {} => {
     whiteSpace: "pre",
 
     ":hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.07)"
+      backgroundColor: active ? activeBackgroundColor : hoverBackgroundColor
     },
 
     ":first-child": {

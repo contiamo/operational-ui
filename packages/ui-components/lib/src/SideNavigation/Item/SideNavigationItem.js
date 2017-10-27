@@ -5,6 +5,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, active = _a.active;
     var activeBackgroundColor = "rgba(0, 0, 0, 0.2)";
+    var hoverBackgroundColor = "rgba(255, 255, 255, 0.07)";
     return {
         position: "relative",
         display: "flex",
@@ -18,7 +19,7 @@ var Container = glamorous_1.default.div(function (_a) {
         minWidth: "100%",
         whiteSpace: "pre",
         ":hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.07)"
+            backgroundColor: active ? activeBackgroundColor : hoverBackgroundColor
         },
         ":first-child": {
             marginTop: 0

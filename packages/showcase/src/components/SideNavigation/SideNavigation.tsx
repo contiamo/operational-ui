@@ -29,9 +29,6 @@ const style: {} = {
     width: "100%",
     padding: `10px 20px`,
     minHeight: "100%"
-  },
-  "& .co_label": {
-    marginLeft: 20
   }
 }
 
@@ -46,9 +43,13 @@ const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
   return (
     <SideNavigation css={style} fix expandOnHover color="#4E5665">
       <SideNavigationHeader>
-        <Link style={{ left: -7 }} to="/">
-          <Img css={{ maxWidth: 32, marginRight: 16 }} alt="Contiamo" src="/img/logo/outline.png" />
-          Contiamo
+        <Link to="/">
+          <Img
+            css={{ position: "relative", maxWidth: 32, marginRight: 16, left: -7 }}
+            alt="Contiamo"
+            src="/img/logo/outline.png"
+          />
+          <span style={{ position: "relative", left: -7 }}>Contiamo</span>
         </Link>
       </SideNavigationHeader>
 
@@ -59,9 +60,7 @@ const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
           <SideNavigationItem key={index} active={routeMatch}>
             <Link to={url || "/"}>
               <Icon name={icon} color={color} size={20} />
-              <Div css={{ color }} className="co_label">
-                {label}
-              </Div>
+              <Div css={{ color, marginLeft: 20 }}>{label}</Div>
             </Link>
           </SideNavigationItem>
         )
