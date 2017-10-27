@@ -30,12 +30,9 @@ import Progress from "./Progress/Progress"
 import Tabs from "./Tabs/Tabs"
 import Timeline from "./Timeline/Timeline"
 import Uploads from "./Uploads/Uploads"
+import * as introContent from "./INTRO"
 
 const SidebarWithRouter = withRouter(Sidebar)
-
-const introContent: string = `
-Select a component to get started.
-`
 
 const Intro = () => (
   <Card>

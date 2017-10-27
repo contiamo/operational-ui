@@ -1,6 +1,3 @@
-declare module "*.snippet.tsx" {
-  const content: any
-  export default content
-}
-
+declare module "*.snippet.tsx"
+declare module "*.md"
 declare module "attr-accept"

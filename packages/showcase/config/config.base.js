@@ -13,6 +13,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.md/,
+        loader: "raw-loader",
+        exclude: /node_modules/
+      },
+      {
         test: /\.(ts|tsx)/,
         oneOf: [
           // Documentation snippets
@@ -47,6 +52,6 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: [".jsx", ".js", ".tsx", ".ts"]
+    extensions: [".jsx", ".js", ".tsx", ".ts", ".md"]
   }
 }
