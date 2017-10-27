@@ -7,8 +7,7 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
-        height: theme.spacing * 3,
+        height: 36,
         margin: theme.spacing * -1,
         marginBottom: theme.spacing * 4 / 3,
         padding: "0 " + theme.spacing + "px",

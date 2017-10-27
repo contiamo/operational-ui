@@ -11,8 +11,7 @@ interface IProps {
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
-  height: theme.spacing * 3,
+  height: 36,
   margin: theme.spacing * -1,
   marginBottom: theme.spacing * 4 / 3,
   padding: `0 ${theme.spacing}px`,
