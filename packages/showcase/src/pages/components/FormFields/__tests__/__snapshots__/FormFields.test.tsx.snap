@@ -5,7 +5,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
   class="css-zssd73"
 >
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Form Fields
   </div>
@@ -15,7 +15,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     This page seeks to document the vast majority of these controls.
   </p>
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Input
   </div>
@@ -23,10 +23,10 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     This component lives up to its name, allowing a user to input text, numbers, or other data.
   </p>
   <div
-    class="css-1r6pn67"
+    class="css-djuenc"
   >
     <div
-      class="css-koz1rt"
+      class="css-1r98jnc"
     >
       Give yourself some space - expand this playground
     </div>
@@ -159,7 +159,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     </tbody>
   </table>
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Select
   </div>
@@ -167,10 +167,10 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     The Select component presents users with a list of information with single-choice or multiple-choice options. Select elements can have options filled onClick, and also support filters.
   </p>
   <div
-    class="css-1r6pn67"
+    class="css-djuenc"
   >
     <div
-      class="css-koz1rt"
+      class="css-1r98jnc"
     >
       Give yourself some space - expand this playground
     </div>
@@ -196,7 +196,7 @@ exports[`FormFieldsPage Should render correctly 1`] = `
     </div>
   </div>
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Organizing forms
   </div>

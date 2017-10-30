@@ -21,6 +21,9 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   color: theme.colors.usage.emphasizedText,
   "* + &": {
     marginTop: theme.spacing
+  },
+  "&:not(:first-child)": {
+    borderBottomStyle: "dashed"
   }
 }))
 

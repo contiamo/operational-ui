@@ -17,6 +17,9 @@ var Container = glamorous_1.default.div(function (_a) {
         color: theme.colors.usage.emphasizedText,
         "* + &": {
             marginTop: theme.spacing
+        },
+        "&:not(:first-child)": {
+            borderBottomStyle: "dashed"
         }
     });
 });

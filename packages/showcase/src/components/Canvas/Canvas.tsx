@@ -21,7 +21,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
     overflow: "auto",
     width: "100%",
     height: "100%",
-    maxWidth: 800
+    maxWidth: 670
   },
 
   "& a:link, & a:visited": {
@@ -30,6 +30,10 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
 
   "& a:hover": {
     color: theme.colors.palette.success
+  },
+
+  "& h4": {
+    ...theme.typography.heading2
   }
 }))
 

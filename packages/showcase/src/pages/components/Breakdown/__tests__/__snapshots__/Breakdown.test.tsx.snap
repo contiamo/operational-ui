@@ -5,7 +5,7 @@ exports[`Breakdown Page Should render correctly 1`] = `
   class="css-zssd73"
 >
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Breakdown
   </div>
@@ -16,10 +16,10 @@ exports[`Breakdown Page Should render correctly 1`] = `
     Usage
   </h4>
   <div
-    class="css-1r6pn67"
+    class="css-djuenc"
   >
     <div
-      class="css-koz1rt"
+      class="css-1r98jnc"
     >
       Give yourself some space - expand this playground
     </div>

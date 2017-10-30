@@ -5,7 +5,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
   class="css-zssd73"
 >
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Typography
   </div>
@@ -16,10 +16,10 @@ exports[`Tooltips Page Should render correctly 1`] = `
      keeps typography styles, organized in 5 typography styles, as follows:
   </p>
   <div
-    class="css-1r6pn67"
+    class="css-djuenc"
   >
     <div
-      class="css-koz1rt"
+      class="css-1r98jnc"
     >
       Give yourself some space - expand this playground
     </div>
