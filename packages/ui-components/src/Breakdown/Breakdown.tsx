@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
+import { hexOrColor, readableTextColor, setBrightness } from "contiamo-ui-utils"
 
 interface IProps {
   css?: any
@@ -10,6 +10,7 @@ interface IProps {
   label: string
   fill: number
   color?: string
+  barColor?: string
   icon?: ReactFeatherIconName
   onClick?: () => void
   onMouseEnter?: () => void
@@ -54,8 +55,9 @@ const Bar = glamorous.div(
     position: "relative",
     width: "100%",
     overflow: "hidden",
-    "& > div": {
-      position: "relative"
+    "& > span": {
+      position: "relative",
+      padding: 2
     },
     ":before": {
       content: '""',
@@ -69,15 +71,18 @@ const Bar = glamorous.div(
     }
   },
   ({ theme, fill, color }: { theme: Theme; fill: number; color: string }) => {
-    const backgroundColor = color ? hexOrColor(color)(theme.colors.palette.info) : theme.colors.palette.info
+    const backgroundColor: string = color
+      ? hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info) as string
+      : theme.colors.palette.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
       backgroundColor: theme.colors.palette.grey10,
-      "> div": {
-        color: readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
+      "> span": {
+        color: theme.colors.palette.grey70,
+        fontWeight: 600
       },
       ":before": {
-        backgroundColor,
+        backgroundColor: setBrightness(backgroundColor, 145),
         width: `${fill * 100}%`
       }
     }
@@ -114,7 +119,7 @@ export default ({
     <div style={{ width: "100%" }}>
       <Label>{children}</Label>
       <Bar color={color} fill={fill}>
-        <div>{label}</div>
+        <span>{label}</span>
       </Bar>
     </div>
   </Container>

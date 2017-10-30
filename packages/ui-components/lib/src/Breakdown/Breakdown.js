@@ -41,8 +41,9 @@ var Bar = glamorous_1.default.div({
     position: "relative",
     width: "100%",
     overflow: "hidden",
-    "& > div": {
-        position: "relative"
+    "& > span": {
+        position: "relative",
+        padding: 2
     },
     ":before": {
         content: '""',
@@ -56,15 +57,18 @@ var Bar = glamorous_1.default.div({
     }
 }, function (_a) {
     var theme = _a.theme, fill = _a.fill, color = _a.color;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette.info) : theme.colors.palette.info;
+    var backgroundColor = color
+        ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
+        : theme.colors.palette.info;
     return {
         padding: theme.spacing / 4 + "px " + theme.spacing / 2 + "px",
         backgroundColor: theme.colors.palette.grey10,
-        "> div": {
-            color: contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
+        "> span": {
+            color: theme.colors.palette.grey70,
+            fontWeight: 600
         },
         ":before": {
-            backgroundColor: backgroundColor,
+            backgroundColor: contiamo_ui_utils_1.setBrightness(backgroundColor, 145),
             width: fill * 100 + "%"
         }
     };
@@ -88,6 +92,6 @@ exports.default = function (_a) {
         React.createElement("div", { style: { width: "100%" } },
             React.createElement(Label, null, children),
             React.createElement(Bar, { color: color, fill: fill },
-                React.createElement("div", null, label)))));
+                React.createElement("span", null, label)))));
 };
 //# sourceMappingURL=Breakdown.js.map

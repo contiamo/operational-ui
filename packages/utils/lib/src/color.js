@@ -47,6 +47,13 @@ var lighten = function (color) { return function (percentage) {
         .toString();
 }; };
 exports.lighten = lighten;
+// @todo -> Flush out edge cases. Currently, this method only works well for regular common accent colors such as blue or green.
+var setBrightness = function (color, targetBrightness) {
+    var c = colorCalculator(color);
+    var brightness = c.getBrightness();
+    return c.brighten(targetBrightness / brightness * 100 - 100).toString();
+};
+exports.setBrightness = setBrightness;
 var transparentize = function (color) { return function (percentage) {
     return (function (_a) {
         var r = _a.r, g = _a.g, b = _a.b;
