@@ -2,10 +2,10 @@
 
 exports[`Playground Component Should initialize properly 1`] = `
 <div
-  class="css-1r6pn67"
+  class="css-djuenc"
 >
   <div
-    class="css-koz1rt"
+    class="css-1r98jnc"
   >
     Give yourself some space - expand this playground
   </div>

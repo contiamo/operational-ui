@@ -16,12 +16,10 @@ interface IState {
   isExpanded: boolean
 }
 
-const customGrey: string = "#cdcdcd"
+const customGrey: string = "#dadada"
 
 const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }) => ({
-  borderBottom: `3px solid ${customGrey}`,
-  borderLeft: `3px solid ${customGrey}`,
-  borderRight: `3px solid ${customGrey}`,
+  border: `2px solid ${customGrey}`,
 
   ...isExpanded
     ? {
@@ -81,11 +79,12 @@ const ExpandPrompt = glamorous.div(({ theme }: { theme: Theme }): any => ({
   justifyContent: "center",
   padding: theme.spacing / 4,
   cursor: "pointer",
-  backgroundColor: customGrey,
-  color: theme.colors.palette.white,
-  transition: "all 0.3s",
+  backgroundColor: "#F8F8F8",
+  color: "#8a8a8a",
+  borderBottom: "1px solid #eaeaea",
   "&:hover": {
-    backgroundColor: theme.colors.palette.info
+    backgroundColor: "#F1F1F1",
+    color: "#7a7a7a"
   }
 }))
 
@@ -94,18 +93,17 @@ class Playground extends React.Component<IProps, IState> {
     isExpanded: false
   }
 
-  keypressHandler: (a: any) => void
+  keypressHandler = (ev: any) => {
+    if (ev.keyCode !== 27) {
+      return
+    }
+    this.setState(prevState => ({
+      ...prevState,
+      isExpanded: false
+    }))
+  }
 
   componentDidMount() {
-    this.keypressHandler = (ev: any) => {
-      if (ev.keyCode !== 27) {
-        return
-      }
-      this.setState(prevState => ({
-        ...prevState,
-        isExpanded: false
-      }))
-    }
     window.addEventListener("keydown", this.keypressHandler)
   }
 

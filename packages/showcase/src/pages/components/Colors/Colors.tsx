@@ -11,6 +11,7 @@ const ColorBox = glamorous.div(
   {
     display: "inline-block",
     "& > div": {
+      border: "2px solid #dadada",
       width: 40,
       height: 40
     }

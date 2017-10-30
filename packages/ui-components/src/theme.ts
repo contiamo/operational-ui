@@ -21,7 +21,7 @@ const usageColors: UsageColors = {
   lightText: "#969696",
   emphasizedText: "#373d3f",
   contentBorder: "#dadada",
-  bodyBackground: palette.grey20,
+  bodyBackground: "#F1F1F1",
   cardBackground: palette.white,
   contentSeparatorLine: "#f2f2f2",
   subContentSeparatorLine: "#f8f8f8"

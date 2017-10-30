@@ -5,7 +5,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
   class="css-zssd73"
 >
   <div
-    class="css-1il4ybq"
+    class="css-6pclgm"
   >
     Colors
   </div>
@@ -13,7 +13,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     The library provides a set of basic colors, as well as a range of grays.
   </p>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#1499CE"
@@ -23,7 +23,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#00b34d"
@@ -33,7 +33,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#FFAE00"
@@ -43,7 +43,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#DE1A1A"
@@ -53,7 +53,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#FFFFFF"
@@ -63,7 +63,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#000000"
@@ -73,7 +73,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#F5F5F5"
@@ -83,7 +83,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#F1F1F1"
@@ -93,7 +93,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#D0D9E5"
@@ -103,7 +103,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#C6D1E1"
@@ -113,7 +113,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#BBCADC"
@@ -123,7 +123,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#999999"
@@ -133,7 +133,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#8092B0"
@@ -143,7 +143,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#747474"
@@ -153,7 +153,7 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-dgyz0l"
+    class="css-epss13"
   >
     <div
       style="background-color:#445873"
@@ -163,10 +163,10 @@ exports[`Tooltips Page Should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="css-1r6pn67"
+    class="css-djuenc"
   >
     <div
-      class="css-koz1rt"
+      class="css-1r98jnc"
     >
       Give yourself some space - expand this playground
     </div>

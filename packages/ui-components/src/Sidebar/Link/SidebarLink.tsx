@@ -28,7 +28,7 @@ const style: {} = ({ theme, color, disabled, active }: IProps) => {
     ...theme.typography.body,
     position: "relative",
     display: "flex",
-    padding: `${theme.spacing / 1.5}px ${theme.spacing}px`,
+    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
     transition: "background-color .1s ease",
     cursor: "pointer",
     // react-router <Link /> wraps an <a> which can be underlined by default so
@@ -41,8 +41,7 @@ const style: {} = ({ theme, color, disabled, active }: IProps) => {
     },
 
     ":focus": {
-      outline: 0,
-      backgroundColor: darken(backgroundColor)(10)
+      outline: 0
     },
 
     "&.co_link + .co_link": {
