@@ -8,6 +8,7 @@ export interface IProps {
     label: string;
     fill: number;
     color?: string;
+    barColor?: string;
     icon?: ReactFeatherIconName;
     onClick?: () => void;
     onMouseEnter?: () => void;

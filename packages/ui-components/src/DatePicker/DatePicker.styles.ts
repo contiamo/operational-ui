@@ -56,7 +56,7 @@ const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: 
   }
 }))
 
-const IconContainer: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div({
+const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
   backgroundColor: "#FFFFFF",
   padding: 4,
   height: "auto",
@@ -70,7 +70,10 @@ const Days: GlamorousComponent<{}, {}> = glamorous.div({
   margin: "auto -1px"
 })
 
-const Day: GlamorousComponent<{ selected?: boolean; isPlaceholder?: boolean; onClick?: {} }, {}> = glamorous.div(
+const Day: GlamorousComponent<
+  { selected?: boolean; isPlaceholder?: boolean } & React.HTMLProps<{}>,
+  {}
+> = glamorous.div(
   {
     userSelect: "none",
     width: 30,
@@ -90,10 +93,7 @@ const Day: GlamorousComponent<{ selected?: boolean; isPlaceholder?: boolean; onC
   })
 )
 
-const Input: GlamorousComponent<
-  { onClick?: {}; id?: string; readOnly?: boolean; value?: string; placeholder?: string },
-  {}
-> = glamorous.input(({ theme }: { theme: Theme }): {} => ({
+const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
   userSelect: "none",
   padding: theme.spacing / 2,
@@ -104,7 +104,7 @@ const Input: GlamorousComponent<
   position: "relative"
 }))
 
-const ClearButton: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: inputHeight,
   height: inputHeight,
   cursor: "pointer",
