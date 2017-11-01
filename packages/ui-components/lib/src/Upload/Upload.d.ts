@@ -1,5 +1,12 @@
 /// <reference types="react" />
 import * as React from "react";
+export interface IRequestOptions {
+    action?: string;
+    data?: {};
+    file?: File;
+    headers?: {};
+    name?: string;
+}
 export interface IProps {
     action: string;
     accept?: string;
@@ -12,13 +19,7 @@ export interface IProps {
     onStartUpload?: (file: File) => void;
     onError?: (error: Error, file: File) => void;
     onSuccess?: (response: {}, file: File) => void;
-}
-export interface IRequestOptions {
-    action: string;
-    data: {};
-    file: File;
-    headers: {};
-    name: string;
+    request?: (params: IRequestOptions) => Promise<any>;
 }
 declare class Upload extends React.Component<IProps, any> {
     static defaultProps: {

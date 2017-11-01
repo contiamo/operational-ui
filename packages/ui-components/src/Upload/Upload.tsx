@@ -1,6 +1,14 @@
 import * as React from "react"
 import * as attrAccept from "attr-accept"
 
+export interface IRequestOptions {
+  action?: string
+  data?: {}
+  file?: File
+  headers?: {}
+  name?: string
+}
+
 export interface IProps {
   action: string
   accept?: string
@@ -13,14 +21,7 @@ export interface IProps {
   onStartUpload?: (file: File) => void
   onError?: (error: Error, file: File) => void
   onSuccess?: (response: {}, file: File) => void
-}
-
-export interface IRequestOptions {
-  action: string
-  data: {}
-  file: File
-  headers: {}
-  name: string
+  request?: (params: IRequestOptions) => Promise<any>
 }
 
 const checkStatus = (response: Response) => {
@@ -32,7 +33,7 @@ const checkStatus = (response: Response) => {
   }
 }
 
-const request = async ({ action, data, file, headers, name }: IRequestOptions) => {
+const defaultRequest = async ({ action, data, file, headers, name }: IRequestOptions) => {
   const formData = (Object as any)
     .entries(data)
     .reduce((accFormData: FormData, [key, value]: [string, any], i: number) => {
@@ -109,7 +110,7 @@ class Upload extends React.Component<IProps, any> {
   }
 
   postFile = async (file: File) => {
-    const { action, data, headers, name, onStartUpload, onSuccess, onError } = this.props
+    const { action, data, headers, name, onStartUpload, onSuccess, onError, request = defaultRequest } = this.props
     try {
       onStartUpload(file)
       const response = await request({ action, data, file, headers, name })
