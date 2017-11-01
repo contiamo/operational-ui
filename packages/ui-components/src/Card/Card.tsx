@@ -1,9 +1,10 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
 
 import CardHeader from "./CardHeader"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   children: React.ReactNode

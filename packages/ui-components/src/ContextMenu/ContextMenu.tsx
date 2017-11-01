@@ -1,18 +1,18 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
-
 import ContextMenuItem from "./ContextMenuItem"
 import { fadeIn } from "contiamo-ui-utils"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   css?: {}
   className?: string
   children: React.ReactNode
   expandOnHover?: boolean
 }
 
-interface IState {
+export interface IState {
   isHovered: boolean
   isActive: boolean
 }

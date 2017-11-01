@@ -1,9 +1,10 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
-type Dimension = string | number
+export type Dimension = string | number
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   children?: React.ReactNode

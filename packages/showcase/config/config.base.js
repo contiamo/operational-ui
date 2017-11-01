@@ -18,6 +18,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.snippet.(js|jsx)/,
+        loader: "raw-loader"
+      },
+      {
         test: /\.(ts|tsx)/,
         oneOf: [
           // Documentation snippets

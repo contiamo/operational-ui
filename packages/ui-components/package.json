@@ -9,8 +9,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
-    "package": "rm -rf lib && tsc",
-    "package:watch": "tsc -w",
+    "package": "rm -rf lib && tsc -d",
+    "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint './index.ts' --fix && tslint './src/**/*.{ts,tsx}' --fix && tslint './utils/**/*.{ts,tsx}' --fix",
@@ -24,7 +24,6 @@
     "@types/react": "^16.0.9",
     "@types/react-color": "^2.13.0",
     "@types/react-icons": "^2.2.2",
-    "@types/react-router-dom": "^4.0.7",
     "@types/tinycolor2": "^1.4.0",
     "awesome-typescript-loader": "^3.2.3",
     "enzyme": "^2.9.1",
@@ -59,7 +58,6 @@
     "react-dom": "^16.0.0",
     "react-feather": "^1.0.7",
     "react-icons": "^2.2.5",
-    "react-router-dom": "^4.2.2",
     "tinycolor2": "^1.4.1"
   },
   "jest": {

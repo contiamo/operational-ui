@@ -1,14 +1,19 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
-const TitleType = glamorous.h1({}, ({ theme }: { theme: Theme }): any => theme.typography.title)
+export interface IProps {
+  theme: Theme
+}
 
-const Heading1Type = glamorous.h1({}, ({ theme }: { theme: Theme }): any => theme.typography.heading1)
+const TitleType: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: IProps): any => theme.typography.title)
 
-const Heading2Type = glamorous.h2({}, ({ theme }: { theme: Theme }): any => theme.typography.heading2)
+const Heading1Type: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: IProps): any => theme.typography.heading1)
 
-const BodyType = glamorous.p({}, ({ theme }: { theme: Theme }): any => theme.typography.body)
+const Heading2Type: GlamorousComponent<{}, {}> = glamorous.h2(({ theme }: IProps): any => theme.typography.heading2)
 
-const SmallType = glamorous.p({}, ({ theme }: { theme: Theme }): any => theme.typography.small)
+const BodyType: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: IProps): any => theme.typography.body)
+
+const SmallType: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: IProps): any => theme.typography.small)
 
 export { TitleType, Heading1Type, Heading2Type, BodyType, SmallType }

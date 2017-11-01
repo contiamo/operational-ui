@@ -14,8 +14,9 @@ var Icon = function (_a) {
         return React.createElement(Comp, { size: size || theme.spacing, color: color_ });
     }
     else {
-        return React.createElement("div", null, "Icon doesn't exist");
+        return null;
     }
 };
-exports.default = glamorous_1.withTheme(Icon);
+var WrappedIcon = glamorous_1.withTheme(Icon);
+exports.default = WrappedIcon;
 //# sourceMappingURL=Icon.js.map

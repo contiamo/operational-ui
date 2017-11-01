@@ -1,15 +1,16 @@
 import * as React from "react"
 
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../../theme"
 import { fadeIn } from "contiamo-ui-utils"
 
-interface IOption {
+export interface IOption {
   id: number
   label: string
   default?: boolean
 }
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   children: React.ReactNode
@@ -18,7 +19,7 @@ interface IProps {
   theme?: Theme
 }
 
-interface IState {
+export interface IState {
   open: boolean
   value: IOption
 }

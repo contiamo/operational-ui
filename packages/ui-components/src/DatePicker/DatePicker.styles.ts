@@ -1,17 +1,19 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { css } from "glamor"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import { fadeIn } from "contiamo-ui-utils"
 
 const inputHeight: number = 27
 
-export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): any => ({
+const Container: GlamorousComponent<
+  { isExpanded: boolean },
+  {}
+> = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
   display: "inline-block",
   width: "auto",
   position: "relative",
   "& .co_card": {
-    animation: `${fadeIn} ease-in-out forwards 0.2s`,
     display: isExpanded ? "block" : "none",
     position: "absolute",
     top: 30,
@@ -23,7 +25,7 @@ export const Container = glamorous.div(({ isExpanded, theme }: { isExpanded: boo
   }
 }))
 
-export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   bottom: 0,
   right: 0,
@@ -38,7 +40,7 @@ export const Toggle = glamorous.div(({ theme }: { theme: Theme }): any => ({
   borderLeft: `1px solid ${theme.colors.palette.grey40}`
 }))
 
-export const MonthNav = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginBottom: theme.spacing / 2,
   textAlign: "center",
   "& > *": {
@@ -54,7 +56,7 @@ export const MonthNav = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-export const IconContainer = glamorous.div({
+const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
   backgroundColor: "#FFFFFF",
   padding: 4,
   height: "auto",
@@ -62,13 +64,16 @@ export const IconContainer = glamorous.div({
   cursor: "pointer"
 })
 
-export const Days = glamorous.div({
+const Days: GlamorousComponent<{}, {}> = glamorous.div({
   textAlign: "center",
   width: 210,
   margin: "auto -1px"
 })
 
-export const Day = glamorous.div(
+const Day: GlamorousComponent<
+  { selected?: boolean; isPlaceholder?: boolean } & React.HTMLProps<{}>,
+  {}
+> = glamorous.div(
   {
     userSelect: "none",
     width: 30,
@@ -81,14 +86,14 @@ export const Day = glamorous.div(
     justifyContent: "center",
     border: "1px solid #efefef"
   },
-  ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): any => ({
+  ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
     ...theme.typography.body,
     backgroundColor: selected ? theme.colors.palette.success : "transparent",
     color: selected ? "#FFF" : isPlaceholder ? theme.colors.palette.grey80 : theme.colors.palette.black
   })
 )
 
-export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
+const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
   userSelect: "none",
   padding: theme.spacing / 2,
@@ -99,7 +104,7 @@ export const Input = glamorous.input(({ theme }: { theme: Theme }): any => ({
   position: "relative"
 }))
 
-export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: inputHeight,
   height: inputHeight,
   cursor: "pointer",
@@ -119,3 +124,5 @@ export const ClearButton = glamorous.div(({ theme }: { theme: Theme }): any => (
     }
   }
 }))
+
+export { Container, Toggle, MonthNav, IconContainer, Days, Day, Input, ClearButton }

@@ -1,11 +1,12 @@
 import * as React from "react"
 import * as Icon from "react-feather"
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../theme"
 
 import ButtonGroup from "../ButtonGroup/ButtonGroup"
 import Button from "../Button/Button"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   activeColor?: string

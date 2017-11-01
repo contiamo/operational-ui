@@ -2,13 +2,14 @@ import * as React from "react"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 
 import { Days, Day } from "./DatePicker.styles"
+import { Theme } from "../theme"
 
-interface IDatePair {
+export interface IDatePair {
   start?: string
   end?: string
 }
 
-interface IProps {
+export interface IProps {
   year: number
   month: number
   start?: string

@@ -9,9 +9,7 @@ exports[`Tabs Should render 1`] = `
   >
     <li
       class="css-1543rm5"
-    >
-      test
-    </li>
+    />
   </ul>
   <div
     class="css-10id2qb"

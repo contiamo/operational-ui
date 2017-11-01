@@ -1,8 +1,9 @@
 import * as React from "react"
 
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "../../theme"
 
-interface IProps {
+export interface IProps {
   className?: string
   children: React.ReactNode
   onClick?: () => void

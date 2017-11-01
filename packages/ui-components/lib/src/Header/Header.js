@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
-var HeaderItem_1 = require("./Item/HeaderItem");
+var HeaderItem_1 = require("./HeaderItem");
 exports.HeaderItem = HeaderItem_1.default;
-var HeaderTitle_1 = require("./Title/HeaderTitle");
+var HeaderTitle_1 = require("./HeaderTitle");
 exports.HeaderTitle = HeaderTitle_1.default;
-var HeaderSeparator_1 = require("./Separator/HeaderSeparator");
+var HeaderSeparator_1 = require("./HeaderSeparator");
 exports.HeaderSeparator = HeaderSeparator_1.default;
 var Container = glamorous_1.default.header(function (_a) {
     var theme = _a.theme, color = _a.color;

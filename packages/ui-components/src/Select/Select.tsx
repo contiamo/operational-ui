@@ -1,5 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
+import { Theme } from "../theme"
 
 import SelectOption from "./SelectOption"
 import SelectFilter from "./SelectFilter"
@@ -7,7 +8,7 @@ import SelectFilter from "./SelectFilter"
 import { Container, Options, OptionsList, DisplayValue } from "./Select.style"
 import withLabel from "../../utils/with-label"
 
-type Value = number | string
+export type Value = number | string
 
 export interface Option {
   label?: string
@@ -21,7 +22,7 @@ const displayOption = (opt: Option): string => {
   return String(opt.value)
 }
 
-interface IProps {
+export interface IProps {
   id?: string
   // Injected by withLabel higher-order component
   domId?: string

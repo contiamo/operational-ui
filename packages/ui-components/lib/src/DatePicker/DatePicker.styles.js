@@ -9,16 +9,14 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
-var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var inputHeight = 27;
-exports.Container = glamorous_1.default.div(function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
         display: "inline-block",
         width: "auto",
         position: "relative",
         "& .co_card": {
-            animation: contiamo_ui_utils_1.fadeIn + " ease-in-out forwards 0.2s",
             display: isExpanded ? "block" : "none",
             position: "absolute",
             top: 30,
@@ -30,7 +28,8 @@ exports.Container = glamorous_1.default.div(function (_a) {
         }
     });
 });
-exports.Toggle = glamorous_1.default.div(function (_a) {
+exports.Container = Container;
+var Toggle = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "absolute",
@@ -47,7 +46,8 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         borderLeft: "1px solid " + theme.colors.palette.grey40
     });
 });
-exports.MonthNav = glamorous_1.default.div(function (_a) {
+exports.Toggle = Toggle;
+var MonthNav = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         marginBottom: theme.spacing / 2,
@@ -60,19 +60,22 @@ exports.MonthNav = glamorous_1.default.div(function (_a) {
         "& > span": __assign({}, theme.typography.body, { userSelect: "none", width: 100, textAlign: "center" })
     });
 });
-exports.IconContainer = glamorous_1.default.div({
+exports.MonthNav = MonthNav;
+var IconContainer = glamorous_1.default.div({
     backgroundColor: "#FFFFFF",
     padding: 4,
     height: "auto",
     width: "fit-content",
     cursor: "pointer"
 });
-exports.Days = glamorous_1.default.div({
+exports.IconContainer = IconContainer;
+var Days = glamorous_1.default.div({
     textAlign: "center",
     width: 210,
     margin: "auto -1px"
 });
-exports.Day = glamorous_1.default.div({
+exports.Days = Days;
+var Day = glamorous_1.default.div({
     userSelect: "none",
     width: 30,
     height: 30,
@@ -87,11 +90,13 @@ exports.Day = glamorous_1.default.div({
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
     return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.palette.success : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.palette.grey80 : theme.colors.palette.black }));
 });
-exports.Input = glamorous_1.default.input(function (_a) {
+exports.Day = Day;
+var Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.body, { userSelect: "none", padding: theme.spacing / 2, height: inputHeight, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative" }));
 });
-exports.ClearButton = glamorous_1.default.div(function (_a) {
+exports.Input = Input;
+var ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         width: inputHeight,
@@ -114,4 +119,5 @@ exports.ClearButton = glamorous_1.default.div(function (_a) {
         }
     });
 });
+exports.ClearButton = ClearButton;
 //# sourceMappingURL=DatePicker.styles.js.map

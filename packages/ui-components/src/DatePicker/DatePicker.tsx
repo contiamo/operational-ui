@@ -6,8 +6,9 @@ import { Container, ClearButton, Toggle, MonthNav, IconContainer, Days, Day, Inp
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 import withLabel from "../../utils/with-label"
+import { Theme } from "../theme"
 
-interface IProps {
+export interface IProps {
   id?: string
   // Injected by withLabel higher-order component
   domId?: string
@@ -20,7 +21,7 @@ interface IProps {
   placeholder?: string
 }
 
-interface IState {
+export interface IState {
   isExpanded: boolean
   year: number
   month: number
@@ -92,7 +93,7 @@ class DatePicker extends React.Component<IProps, IState> {
         isExpanded={this.state.isExpanded}
       >
         <Toggle
-          onClick={ev => {
+          onClick={(ev: any) => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
             }))
@@ -102,7 +103,7 @@ class DatePicker extends React.Component<IProps, IState> {
         </Toggle>
         {!!(start && end) && (
           <ClearButton
-            onClick={ev => {
+            onClick={(ev: any) => {
               ev.preventDefault()
               this.props.onChange &&
                 this.props.onChange({
@@ -122,7 +123,7 @@ class DatePicker extends React.Component<IProps, IState> {
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={this.props.placeholder || "Enter date"}
-          onClick={ev => {
+          onClick={(ev: any) => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded
             }))
