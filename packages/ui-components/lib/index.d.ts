@@ -22,7 +22,7 @@ import Sidebar, { SidebarItem, SidebarLink } from "./src/Sidebar/Sidebar";
 import SideNavigation, { SideNavigationHeader, SideNavigationItem, SideNavigationLink } from "./src/SideNavigation/SideNavigation";
 import Spinner from "./src/Spinner/Spinner";
 import Switch from "./src/Switch/Switch";
-import Tabs, { Tab } from "./src/Tabs/Tabs";
+import { Tabs, Tab } from "./src/Tabs/Tabs";
 import Tooltip from "./src/Tooltip/Tooltip";
 import Timeline, { TimelineItem } from "./src/Timeline/Timeline";
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./src/Typography/Typography";
