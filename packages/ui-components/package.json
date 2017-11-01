@@ -58,6 +58,7 @@
     "react-dom": "^16.0.0",
     "react-feather": "^1.0.7",
     "react-icons": "^2.2.5",
+    "react-router-dom": "^4.2.2",
     "tinycolor2": "^1.4.1"
   },
   "jest": {

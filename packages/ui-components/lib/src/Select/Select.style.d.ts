@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { GlamorousComponent } from "glamorous";
 import { Theme } from "../theme";
 declare const Container: GlamorousComponent<Pick<{
