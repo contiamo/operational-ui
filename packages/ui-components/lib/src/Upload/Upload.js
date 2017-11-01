@@ -65,7 +65,7 @@ var checkStatus = function (response) {
         throw error;
     }
 };
-var request = function (_a) {
+var defaultRequest = function (_a) {
     var action = _a.action, data = _a.data, file = _a.file, headers = _a.headers, name = _a.name;
     return __awaiter(_this, void 0, void 0, function () {
         var formData, response;
@@ -145,22 +145,22 @@ var Upload = /** @class */ (function (_super) {
             });
         }); };
         _this.postFile = function (file) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, action, data, headers, name, onStartUpload, onSuccess, onError, response, error_2;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var _a, action, data, headers, name, onStartUpload, onSuccess, onError, _b, request, response, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a = this.props, action = _a.action, data = _a.data, headers = _a.headers, name = _a.name, onStartUpload = _a.onStartUpload, onSuccess = _a.onSuccess, onError = _a.onError;
-                        _b.label = 1;
+                        _a = this.props, action = _a.action, data = _a.data, headers = _a.headers, name = _a.name, onStartUpload = _a.onStartUpload, onSuccess = _a.onSuccess, onError = _a.onError, _b = _a.request, request = _b === void 0 ? defaultRequest : _b;
+                        _c.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _c.trys.push([1, 3, , 4]);
                         onStartUpload(file);
                         return [4 /*yield*/, request({ action: action, data: data, file: file, headers: headers, name: name })];
                     case 2:
-                        response = _b.sent();
+                        response = _c.sent();
                         onSuccess(response, file);
                         return [3 /*break*/, 4];
                     case 3:
-                        error_2 = _b.sent();
+                        error_2 = _c.sent();
                         onError(error_2, file);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];

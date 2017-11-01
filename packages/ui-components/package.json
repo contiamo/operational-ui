@@ -24,6 +24,7 @@
     "@types/react": "^16.0.9",
     "@types/react-color": "^2.13.0",
     "@types/react-icons": "^2.2.2",
+    "@types/react-router-dom": "^4.2.0",
     "@types/tinycolor2": "^1.4.0",
     "awesome-typescript-loader": "^3.2.3",
     "enzyme": "^2.9.1",
