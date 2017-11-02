@@ -39,9 +39,9 @@ var Focus = /** @class */ (function (_super) {
                 .text(" (" + datum.size() + ")");
             if (isNode) {
                 var breakdowns = ctx.computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer);
-                var inputsTotal = ctx.computeBreakdownTotal(breakdowns.inputs), outputsTotal = ctx.computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal);
-                ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, startsHerePercentage + "% of all outputs");
-                ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, endsHerePercentage + "% of all inputs");
+                var inputsTotal = ctx.computeBreakdownTotal(breakdowns.inputs), outputsTotal = ctx.computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";
+                ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, startsHereString);
+                ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, endsHereString);
                 ctx.addBreakdowns("Inputs", " (" + inputsTotal + ")", container, breakdowns.inputs);
                 ctx.addBreakdowns("Outputs", " (" + outputsTotal + ")", container, breakdowns.outputs);
                 if (datum.singleNodeJourneys > 0) {

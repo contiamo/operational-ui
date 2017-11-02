@@ -48,10 +48,12 @@ class Focus extends AbstractFocus {
         const inputsTotal: number = ctx.computeBreakdownTotal(breakdowns.inputs),
           outputsTotal: number = ctx.computeBreakdownTotal(breakdowns.outputs),
           startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
-          endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal)
+          endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal),
+          startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
+          endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all outputs` : " "
 
-        ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, `${startsHerePercentage}% of all outputs`)
-        ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, `${endsHerePercentage}% of all inputs`)
+        ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, startsHereString)
+        ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, endsHereString)
         ctx.addBreakdowns("Inputs", ` (${inputsTotal})`, container, breakdowns.inputs)
         ctx.addBreakdowns("Outputs", ` (${outputsTotal})`, container, breakdowns.outputs)
 
