@@ -1,6 +1,6 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import { uniqueId, forEach, reduce, map } from "lodash/fp"
+import { uniqueId, forEach, reduce, map, flow } from "lodash/fp"
 import { IConfig, IFocus, IBreakdown, TLink, TNode } from "./typings"
 import * as styles from "./styles"
 
@@ -52,10 +52,35 @@ class Focus extends AbstractFocus {
           startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
           endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all outputs` : " "
 
-        ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, startsHereString)
-        ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, endsHereString)
-        ctx.addBreakdowns("Inputs", ` (${inputsTotal})`, container, breakdowns.inputs)
-        ctx.addBreakdowns("Outputs", ` (${outputsTotal})`, container, breakdowns.outputs)
+        // Add "Starts here" breakdown
+        flow(
+          ctx.addBreakdownContainer,
+          ctx.addBreakdownTitle("Starts here"),
+          ctx.addBreakdownBars(breakdowns.startsHere),
+          ctx.addBreakdownComment(startsHereString)
+        )(container)
+
+        // Add "Ends here" breakdown
+        flow(
+          ctx.addBreakdownContainer,
+          ctx.addBreakdownTitle("Ends here"),
+          ctx.addBreakdownBars(breakdowns.endsHere),
+          ctx.addBreakdownComment(endsHereString)
+        )(container)
+
+        // Add inputs breakdown
+        flow(
+          ctx.addBreakdownContainer,
+          ctx.addBreakdownTitle("Inputs", ` (${inputsTotal})`),
+          ctx.addBreakdownBars(breakdowns.inputs)
+        )(container)
+
+        // Add outputs breakdown
+        flow(
+          ctx.addBreakdownContainer,
+          ctx.addBreakdownTitle("Outputs", ` (${outputsTotal})`),
+          ctx.addBreakdownBars(breakdowns.outputs)
+        )(container)
 
         if (datum.singleNodeJourneys > 0) {
           content
@@ -114,41 +139,56 @@ class Focus extends AbstractFocus {
     return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
   }
 
-  addBreakdowns(title: string, subtitle: string, content: any, breakdownItems: IBreakdown[], comment?: string): void {
-    const container: any = content.append("div").attr("class", styles.breakdownContainer)
-    container.append("span")
-      .attr("class", styles.title)
-      .text(title)
-      .append("span")
-      .text(subtitle)
+  addBreakdownContainer(content: any): any {
+    return content.append("div").attr("class", styles.breakdownContainer)
+  }
 
-    forEach((item: IBreakdown): void => {
-      const breakdown: any = container.append("div")
-        .attr("class", styles.breakdown)
+  addBreakdownTitle(title: string, subtitle?: string): any {
+    return (container: any): any => {
+      container.append("span")
+        .attr("class", styles.title)
+        .text(title)
+        .append("span")
+        .text(subtitle)
+      return container
+    }
+  }
 
-      if (item.label) {
-        breakdown
-          .append("label")
-          .attr("class", styles.breakdownLabel)
-          .text(item.label)
-      }
+  addBreakdownBars(breakdownItems: IBreakdown[]): any {
+    return (container: any): any => {
+      forEach((item: IBreakdown): void => {
+        const breakdown: any = container.append("div")
+          .attr("class", styles.breakdown)
 
-      const backgroundBar: any = breakdown.append("div")
-        .attr("class", styles.breakdownBackgroundBar)
+        if (item.label) {
+          breakdown
+            .append("label")
+            .attr("class", styles.breakdownLabel)
+            .text(item.label)
+        }
 
-      backgroundBar.append("div")
-        .attr("class", styles.breakdownBar)
-        .style("width", item.percentage + "%")
+        const backgroundBar: any = breakdown.append("div")
+          .attr("class", styles.breakdownBackgroundBar)
 
-      backgroundBar.append("div")
-        .attr("class", styles.breakdownText)
-        .text(item.size + " (" + item.percentage + "%)")
-    })(breakdownItems)
+        backgroundBar.append("div")
+          .attr("class", styles.breakdownBar)
+          .style("width", item.percentage + "%")
 
-    if (comment) {
+        backgroundBar.append("div")
+          .attr("class", styles.breakdownText)
+          .text(item.size + " (" + item.percentage + "%)")
+      })(breakdownItems)
+
+      return container
+    }
+  }
+
+  addBreakdownComment(comment: string): any {
+    return (container: any): any => {
       container.append("label")
         .attr("class", styles.breakdownCommentLabel)
         .text(comment)
+      return container
     }
   }
 }
