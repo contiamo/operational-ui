@@ -116,4 +116,11 @@ export interface IBreakdown {
   percentage: number
 }
 
+export interface IBreakdowns {
+  inputs: IBreakdown[]
+  outputs: IBreakdown[]
+  startsHere: IBreakdown[]
+  endsHere: IBreakdown[]
+}
+
 export type TD3SelectionNoData = d3.Selection<d3.BaseType, null, Window, null>
