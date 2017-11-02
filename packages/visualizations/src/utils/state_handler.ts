@@ -1,23 +1,23 @@
 import { State, TPath, IReadOnlyState } from "./state"
 import { isEmpty } from "lodash/fp"
 
-type Data = Array<any> | Object
+export type Data = Array<any> | Object
 
-interface ChartStateObj {
+export interface ChartStateObj {
   data: Data
   config: Object
   accessors: Object
   computed: Object
 }
 
-type Partial<T> = { [P in keyof T]?: T[P] }
+export type Partial<T> = { [P in keyof T]?: T[P] }
 
-interface IChartState<T> {
+export interface IChartState<T> {
   current: State<T>
   previous: State<T>
 }
 
-interface IChartStateReadOnly<T> {
+export interface IChartStateReadOnly<T> {
   current: IReadOnlyState<T>
   previous: IReadOnlyState<T>
 }

@@ -1,0 +1,31 @@
+import StateHandler from "./state_handler";
+import EventEmitter from "./event_bus";
+import { IDefaultState } from "./typings";
+declare abstract class AbstractChart {
+    state: StateHandler;
+    events: EventEmitter;
+    components: any;
+    context: any;
+    __disposed: boolean;
+    drawn: boolean;
+    dirty: boolean;
+    constructor(context: any);
+    abstract visualizationName(): string;
+    baseDefaultState(): IDefaultState;
+    defaultState(): IDefaultState;
+    defaultData(): any;
+    defaultConfig(): any;
+    defaultAccessors(): any;
+    defaultComputed(): any;
+    abstract insertCanvas(): void;
+    initializeComponents(): void;
+    abstract initializeSeries(): void;
+    data(data?: any): any;
+    config(config?: Object): any;
+    accessors(type: string, accessors: Object): any;
+    on(event: string, handler: any): void;
+    off(event: string, handler: any): void;
+    abstract draw(args?: any): any;
+    close(): void;
+}
+export default AbstractChart;

@@ -1,4 +1,4 @@
-declare namespace fp {
+declare module fp {
   interface ListIterator<T, TResult> {
     (value: T, index: number, collection: List<T>): TResult
   }
