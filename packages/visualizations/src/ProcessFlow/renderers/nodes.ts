@@ -60,6 +60,7 @@ const nodeShapeOptions: any = {
 class Nodes extends AbstractRenderer {
   type: string = "node"
   focusElementAccessor: string = `path.node.${styles.border}`
+  data: TNode[]
 
   updateDraw(): void {
     let nodeGroups: any = this.el.select("g.nodes-group")

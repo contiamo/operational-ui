@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
 import { uniqueId, forEach, reduce, map, flow } from "lodash/fp"
-import { IConfig, IFocus, IBreakdown, TLink, TNode } from "./typings"
+import { IConfig, IFocus, IBreakdown, TLink, TNode, TSeriesEl, TD3SelectionNoData } from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {
@@ -10,6 +10,8 @@ interface IBreakdowns {
   startsHere: IBreakdown[]
   endsHere: IBreakdown[]
 }
+
+type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
 
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
@@ -32,7 +34,7 @@ class Focus extends AbstractFocus {
       ctx.uid = uniqueId("elFocusLabel")
 
       FocusUtils.drawHidden(ctx.el, "element").style("pointer-events", "none")
-      let content: any = ctx.el.append("xhtml:ul")
+      let content: TSeriesEl = ctx.el.append("xhtml:ul")
 
       content
         .append("xhtml:li")
@@ -43,7 +45,7 @@ class Focus extends AbstractFocus {
 
       if (isNode) {
         const breakdowns: IBreakdowns = ctx.computeBreakdowns(datum),
-          container: any = content.append("div").attr("class", styles.breakdownsContainer)
+          container: TD3SelectionNoData = content.append("div").attr("class", styles.breakdownsContainer)
 
         const inputsTotal: number = ctx.computeBreakdownTotal(breakdowns.inputs),
           outputsTotal: number = ctx.computeBreakdownTotal(breakdowns.outputs),
@@ -139,12 +141,12 @@ class Focus extends AbstractFocus {
     return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
   }
 
-  addBreakdownContainer(content: any): any {
+  addBreakdownContainer(content: TD3SelectionNoData): TD3SelectionNoData {
     return content.append("div").attr("class", styles.breakdownContainer)
   }
 
-  addBreakdownTitle(title: string, subtitle?: string): any {
-    return (container: any): any => {
+  addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
+    return (container: TD3SelectionNoData): TD3SelectionNoData => {
       container.append("span")
         .attr("class", styles.title)
         .text(title)
@@ -183,8 +185,8 @@ class Focus extends AbstractFocus {
     }
   }
 
-  addBreakdownComment(comment: string): any {
-    return (container: any): any => {
+  addBreakdownComment(comment: string): TContainerMethod {
+    return (container: TD3SelectionNoData): TD3SelectionNoData => {
       container.append("label")
         .attr("class", styles.breakdownCommentLabel)
         .text(comment)

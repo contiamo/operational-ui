@@ -24,8 +24,8 @@ export {
 
 export type TNode = Nodes
 export type TLink = Link
-export type TNodeSelection = d3.Selection<d3.BaseType, TNode, null, null>
-export type TLinkSelection = d3.Selection<d3.BaseType, TLink, null, null>
+export type TNodeSelection = d3.Selection<d3.BaseType, TNode, d3.BaseType, any>
+export type TLinkSelection = d3.Selection<d3.BaseType, TLink, d3.BaseType, any>
 
 //@TODO
 export type TAccessors = any
@@ -115,3 +115,5 @@ export interface IBreakdown {
   size: number
   percentage: number
 }
+
+export type TD3SelectionNoData = d3.Selection<d3.BaseType, null, Window, null>

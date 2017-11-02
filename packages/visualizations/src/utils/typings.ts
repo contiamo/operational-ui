@@ -1,4 +1,5 @@
 import EventEmitter from "./event_bus"
+import * as d3 from "d3-selection"
 
 export interface IKeyValueObject {
   [key: string]: any
@@ -34,5 +35,4 @@ export interface IState {
 
 export type TStateWriter = (propertyPath: string | string[], value: any) => void
 export type TEvents = EventEmitter
-// @TODO replace with d3-selection typings
-export type TSeriesEl = any
+export type TSeriesEl = d3.Selection<Element, any, Window, any>

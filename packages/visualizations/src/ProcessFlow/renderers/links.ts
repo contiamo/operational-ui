@@ -12,6 +12,7 @@ const MINOPACITY: number = 0.5,
 class Links extends AbstractRenderer {
   type: string = "link"
   focusElementAccessor: string = `path.link.${styles.element}`
+  data: TLink[]
 
   updateDraw(): void {
     const linkGroups: TLinkSelection = this.el.select("g.links-group")
