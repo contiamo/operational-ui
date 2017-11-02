@@ -11,7 +11,7 @@ var AbstractRenderer = /** @class */ (function () {
         this.state = state;
         this.events = events;
         this.el = el;
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement());
     }
     AbstractRenderer.prototype.onMouseOver = function (ctx) {
         return function (d) {
@@ -24,11 +24,11 @@ var AbstractRenderer = /** @class */ (function () {
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { focusPoint: focusPoint, d: d });
         element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint));
     };
-    AbstractRenderer.prototype.focusElement = function (ctx) {
+    AbstractRenderer.prototype.focusElement = function () {
         var _this = this;
         return function (elementInfo) {
-            var type = elementInfo.type;
-            if (type !== _this.type) {
+            var ctx = _this;
+            if (elementInfo.type !== _this.type) {
                 return;
             }
             _this.el

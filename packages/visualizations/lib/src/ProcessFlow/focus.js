@@ -20,17 +20,18 @@ var Focus = /** @class */ (function (_super) {
     function Focus() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Focus.prototype.onElementHover = function (ctx) {
+    Focus.prototype.onElementHover = function () {
+        var _this = this;
         return function (payload) {
             var focusPoint = payload.focusPoint, datum = payload.d;
-            ctx.remove();
-            var isNode = focusPoint.type === "node", config = ctx.state.current.get("config");
+            _this.remove();
+            var isNode = focusPoint.type === "node", config = _this.state.current.get("config");
             if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
                 return;
             }
-            ctx.uid = fp_1.uniqueId("elFocusLabel");
-            focus_utils_1.default.drawHidden(ctx.el, "element").style("pointer-events", "none");
-            var content = ctx.el.append("xhtml:ul");
+            _this.uid = fp_1.uniqueId("elFocusLabel");
+            focus_utils_1.default.drawHidden(_this.el, "element").style("pointer-events", "none");
+            var content = _this.el.append("xhtml:ul");
             content
                 .append("xhtml:li")
                 .attr("class", styles.title)
@@ -38,16 +39,16 @@ var Focus = /** @class */ (function (_super) {
                 .append("span")
                 .text(" (" + datum.size() + ")");
             if (isNode) {
-                var breakdowns = ctx.computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer);
-                var inputsTotal = ctx.computeBreakdownTotal(breakdowns.inputs), outputsTotal = ctx.computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";
+                var breakdowns = _this.computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer);
+                var inputsTotal = _this.computeBreakdownTotal(breakdowns.inputs), outputsTotal = _this.computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";
                 // Add "Starts here" breakdown
-                fp_1.flow(ctx.addBreakdownContainer, ctx.addBreakdownTitle("Starts here"), ctx.addBreakdownBars(breakdowns.startsHere), ctx.addBreakdownComment(startsHereString))(container);
+                fp_1.flow(_this.addBreakdownContainer, _this.addBreakdownTitle("Starts here"), _this.addBreakdownBars(breakdowns.startsHere), _this.addBreakdownComment(startsHereString))(container);
                 // Add "Ends here" breakdown
-                fp_1.flow(ctx.addBreakdownContainer, ctx.addBreakdownTitle("Ends here"), ctx.addBreakdownBars(breakdowns.endsHere), ctx.addBreakdownComment(endsHereString))(container);
+                fp_1.flow(_this.addBreakdownContainer, _this.addBreakdownTitle("Ends here"), _this.addBreakdownBars(breakdowns.endsHere), _this.addBreakdownComment(endsHereString))(container);
                 // Add inputs breakdown
-                fp_1.flow(ctx.addBreakdownContainer, ctx.addBreakdownTitle("Inputs", " (" + inputsTotal + ")"), ctx.addBreakdownBars(breakdowns.inputs))(container);
+                fp_1.flow(_this.addBreakdownContainer, _this.addBreakdownTitle("Inputs", " (" + inputsTotal + ")"), _this.addBreakdownBars(breakdowns.inputs))(container);
                 // Add outputs breakdown
-                fp_1.flow(ctx.addBreakdownContainer, ctx.addBreakdownTitle("Outputs", " (" + outputsTotal + ")"), ctx.addBreakdownBars(breakdowns.outputs))(container);
+                fp_1.flow(_this.addBreakdownContainer, _this.addBreakdownTitle("Outputs", " (" + outputsTotal + ")"), _this.addBreakdownBars(breakdowns.outputs))(container);
                 if (datum.singleNodeJourneys > 0) {
                     content
                         .append("xhtml:li")
@@ -55,9 +56,9 @@ var Focus = /** @class */ (function (_super) {
                         .text("[!] " + datum.singleNodeJourneys + " single node visits (not included in the above stats)");
                 }
             }
-            // Get label dimensions (has to be actually rendered in the page to do ctx)
-            var labelDimensions = focus_utils_1.default.labelDimensions(ctx.el);
-            var drawingContainer = ctx.state.current.get("computed").canvas.elRect;
+            // Get label dimensions (has to be actually rendered in the page to do this)
+            var labelDimensions = focus_utils_1.default.labelDimensions(_this.el);
+            var drawingContainer = _this.state.current.get("computed").canvas.elRect;
             var drawingDimensions = {
                 xMax: drawingContainer.left + config.width,
                 xMin: drawingContainer.left,
@@ -65,7 +66,7 @@ var Focus = /** @class */ (function (_super) {
                 yMin: drawingContainer.top,
             };
             var offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
-            focus_utils_1.default.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset);
+            focus_utils_1.default.positionLabel(_this.el, focusPoint, labelDimensions, drawingDimensions, offset);
         };
     };
     Focus.prototype.computeBreakdowns = function (node) {
