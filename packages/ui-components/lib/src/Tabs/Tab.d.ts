@@ -1,10 +1,10 @@
 /// <reference types="react" />
 import * as React from "react";
-export declare type TabProps = {
+export interface IProps {
     children?: React.ReactNode;
     disabled?: boolean;
     index?: number;
     title?: string;
-};
-declare const Tab: React.SFC<TabProps>;
+}
+declare const Tab: React.SFC<IProps>;
 export default Tab;

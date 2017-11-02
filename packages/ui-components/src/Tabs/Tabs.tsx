@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { darken, hexOrColor } from "contiamo-ui-utils"
-import Tab, { TabProps } from "./Tab"
+import Tab, { IProps as TabProps } from "./Tab"
 import { Theme } from "../theme"
 
 export interface IProps {
