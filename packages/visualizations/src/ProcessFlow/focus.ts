@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import { uniqueId, forEach, reduce, map } from "lodash/fp"
-import { IConfig, IFocus, IBreakdown, TLink, TNode } from "./typings"
+import { uniqueId, forEach, reduce, map, flow } from "lodash/fp"
+import { IConfig, IFocus, IBreakdown, TLink, TNode, TSeriesEl, TD3SelectionNoData } from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {
@@ -11,28 +11,30 @@ interface IBreakdowns {
   endsHere: IBreakdown[]
 }
 
+type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
+
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
   uid: string
 
-  onElementHover(ctx: any): (payload: { focusPoint: IFocus; d: any }) => void {
-    return function(payload: { focusPoint: IFocus; d: any }): void {
+  onElementHover(): (payload: { focusPoint: IFocus; d: any }) => void {
+    return (payload: { focusPoint: IFocus; d: any }): void => {
       const focusPoint: IFocus = payload.focusPoint,
         datum: any = payload.d
 
-      ctx.remove()
+      this.remove()
 
       const isNode: boolean = focusPoint.type === "node",
-        config: IConfig = ctx.state.current.get("config")
+        config: IConfig = this.state.current.get("config")
 
       if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
         return
       }
 
-      ctx.uid = uniqueId("elFocusLabel")
+      this.uid = uniqueId("elFocusLabel")
 
-      FocusUtils.drawHidden(ctx.el, "element").style("pointer-events", "none")
-      let content: any = ctx.el.append("xhtml:ul")
+      FocusUtils.drawHidden(this.el, "element").style("pointer-events", "none")
+      let content: TSeriesEl = this.el.append("xhtml:ul")
 
       content
         .append("xhtml:li")
@@ -42,18 +44,45 @@ class Focus extends AbstractFocus {
         .text(` (${datum.size()})`)
 
       if (isNode) {
-        const breakdowns: IBreakdowns = ctx.computeBreakdowns(datum),
-          container: any = content.append("div").attr("class", styles.breakdownsContainer)
+        const breakdowns: IBreakdowns = this.computeBreakdowns(datum),
+          container: TD3SelectionNoData = content.append("div").attr("class", styles.breakdownsContainer)
 
-        const inputsTotal: number = ctx.computeBreakdownTotal(breakdowns.inputs),
-          outputsTotal: number = ctx.computeBreakdownTotal(breakdowns.outputs),
+        const inputsTotal: number = this.computeBreakdownTotal(breakdowns.inputs),
+          outputsTotal: number = this.computeBreakdownTotal(breakdowns.outputs),
           startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
-          endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal)
+          endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal),
+          startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
+          endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all outputs` : " "
 
-        ctx.addBreakdowns("Starts here", "", container, breakdowns.startsHere, `${startsHerePercentage}% of all outputs`)
-        ctx.addBreakdowns("Ends here", "", container, breakdowns.endsHere, `${endsHerePercentage}% of all inputs`)
-        ctx.addBreakdowns("Inputs", ` (${inputsTotal})`, container, breakdowns.inputs)
-        ctx.addBreakdowns("Outputs", ` (${outputsTotal})`, container, breakdowns.outputs)
+        // Add "Starts here" breakdown
+        flow(
+          this.addBreakdownContainer,
+          this.addBreakdownTitle("Starts here"),
+          this.addBreakdownBars(breakdowns.startsHere),
+          this.addBreakdownComment(startsHereString)
+        )(container)
+
+        // Add "Ends here" breakdown
+        flow(
+          this.addBreakdownContainer,
+          this.addBreakdownTitle("Ends here"),
+          this.addBreakdownBars(breakdowns.endsHere),
+          this.addBreakdownComment(endsHereString)
+        )(container)
+
+        // Add inputs breakdown
+        flow(
+          this.addBreakdownContainer,
+          this.addBreakdownTitle("Inputs", ` (${inputsTotal})`),
+          this.addBreakdownBars(breakdowns.inputs)
+        )(container)
+
+        // Add outputs breakdown
+        flow(
+          this.addBreakdownContainer,
+          this.addBreakdownTitle("Outputs", ` (${outputsTotal})`),
+          this.addBreakdownBars(breakdowns.outputs)
+        )(container)
 
         if (datum.singleNodeJourneys > 0) {
           content
@@ -63,10 +92,10 @@ class Focus extends AbstractFocus {
         }
       }
 
-      // Get label dimensions (has to be actually rendered in the page to do ctx)
-      let labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(ctx.el)
+      // Get label dimensions (has to be actually rendered in the page to do this)
+      let labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el)
 
-      const drawingContainer: ClientRect = ctx.state.current.get("computed").canvas.elRect
+      const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect
 
       let drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = {
         xMax: drawingContainer.left + config.width,
@@ -76,7 +105,7 @@ class Focus extends AbstractFocus {
       }
       let offset: number = focusPoint.offset + config.nodeBorderWidth + config.labelOffset
 
-      FocusUtils.positionLabel(ctx.el, focusPoint, labelDimensions, drawingDimensions, offset)
+      FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
     }
   }
 
@@ -112,16 +141,25 @@ class Focus extends AbstractFocus {
     return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
   }
 
-  addBreakdowns(title: string, subtitle: string, content: any, breakdownItems: IBreakdown[], comment?: string): void {
-    const container: any = content.append("div").attr("class", styles.breakdownContainer)
-    container.append("span")
-      .attr("class", styles.title)
-      .text(title)
-      .append("span")
-      .text(subtitle)
+  addBreakdownContainer(content: TD3SelectionNoData): TD3SelectionNoData {
+    return content.append("div").attr("class", styles.breakdownContainer)
+  }
 
-    forEach((item: IBreakdown): void => {
-      const breakdown: any = container.append("div")
+  addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
+    return (container: TD3SelectionNoData): TD3SelectionNoData => {
+      container.append("span")
+        .attr("class", styles.title)
+        .text(title)
+        .append("span")
+        .text(subtitle)
+      return container
+    }
+  }
+
+  // Implementation
+  appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => void {
+    return (item: IBreakdown): void => {
+      const breakdown: TD3SelectionNoData = container.append("div")
         .attr("class", styles.breakdown)
 
       if (item.label) {
@@ -131,7 +169,7 @@ class Focus extends AbstractFocus {
           .text(item.label)
       }
 
-      const backgroundBar: any = breakdown.append("div")
+      const backgroundBar: TD3SelectionNoData = breakdown.append("div")
         .attr("class", styles.breakdownBackgroundBar)
 
       backgroundBar.append("div")
@@ -141,12 +179,23 @@ class Focus extends AbstractFocus {
       backgroundBar.append("div")
         .attr("class", styles.breakdownText)
         .text(item.size + " (" + item.percentage + "%)")
-    })(breakdownItems)
+    }
+  }
 
-    if (comment) {
+  // Control flow
+  addBreakdownBars(breakdownItems: IBreakdown[]): TContainerMethod {
+    return (container: TD3SelectionNoData): TD3SelectionNoData => {
+      forEach(this.appendBreakdown(container))(breakdownItems)
+      return container
+    }
+  }
+
+  addBreakdownComment(comment: string): TContainerMethod {
+    return (container: TD3SelectionNoData): TD3SelectionNoData => {
       container.append("label")
         .attr("class", styles.breakdownCommentLabel)
         .text(comment)
+      return container
     }
   }
 }

@@ -32,7 +32,7 @@ abstract class AbstractRenderer {
     this.state = state
     this.events = events
     this.el = el
-    this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement(this))
+    this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement())
   }
 
   onMouseOver(ctx: AbstractRenderer): (d: TLink | TNode) => void {
@@ -48,10 +48,11 @@ abstract class AbstractRenderer {
     element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint))
   }
 
-  focusElement(ctx: AbstractRenderer): (elementInfo: IFocusElement) => void {
+  focusElement(): (elementInfo: IFocusElement) => void {
     return (elementInfo: IFocusElement): void => {
-      const type: string = elementInfo.type
-      if (type !== this.type) { return }
+      const ctx: AbstractRenderer = this
+
+      if (elementInfo.type !== this.type) { return }
       this.el
         .selectAll(this.focusElementAccessor)
         .filter((d: TLink | TNode): boolean => {
