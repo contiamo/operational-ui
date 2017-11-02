@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-showcase",
-  "version": "0.0.1-34",
+  "version": "0.0.1-35",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
@@ -55,7 +55,7 @@
   "dependencies": {
     "@types/d3-ease": "^1.0.7",
     "component-playground": "^3.0.0",
-    "contiamo-ui-components": "^0.0.1-34",
+    "contiamo-ui-components": "^0.0.1-35",
     "contiamo-ui-utils": "^0.0.1-34",
     "contiamo-visualizations": "^0.0.1-30",
     "glamor": "^2.20.40",
