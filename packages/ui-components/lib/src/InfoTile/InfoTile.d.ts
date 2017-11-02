@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
+import { ReactFeatherIconName } from "../Icon/ReactFeather";
 export interface IProps {
     css?: any;
     className?: string;
