@@ -156,31 +156,36 @@ class Focus extends AbstractFocus {
     }
   }
 
-  addBreakdownBars(breakdownItems: IBreakdown[]): any {
-    return (container: any): any => {
-      forEach((item: IBreakdown): void => {
-        const breakdown: any = container.append("div")
-          .attr("class", styles.breakdown)
+  // Implementation
+  appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => void {
+    return (item: IBreakdown): void => {
+      const breakdown: TD3SelectionNoData = container.append("div")
+        .attr("class", styles.breakdown)
 
-        if (item.label) {
-          breakdown
-            .append("label")
-            .attr("class", styles.breakdownLabel)
-            .text(item.label)
-        }
+      if (item.label) {
+        breakdown
+          .append("label")
+          .attr("class", styles.breakdownLabel)
+          .text(item.label)
+      }
 
-        const backgroundBar: any = breakdown.append("div")
-          .attr("class", styles.breakdownBackgroundBar)
+      const backgroundBar: TD3SelectionNoData = breakdown.append("div")
+        .attr("class", styles.breakdownBackgroundBar)
 
-        backgroundBar.append("div")
-          .attr("class", styles.breakdownBar)
-          .style("width", item.percentage + "%")
+      backgroundBar.append("div")
+        .attr("class", styles.breakdownBar)
+        .style("width", item.percentage + "%")
 
-        backgroundBar.append("div")
-          .attr("class", styles.breakdownText)
-          .text(item.size + " (" + item.percentage + "%)")
-      })(breakdownItems)
+      backgroundBar.append("div")
+        .attr("class", styles.breakdownText)
+        .text(item.size + " (" + item.percentage + "%)")
+    }
+  }
 
+  // Control flow
+  addBreakdownBars(breakdownItems: IBreakdown[]): TContainerMethod {
+    return (container: TD3SelectionNoData): TD3SelectionNoData => {
+      forEach(this.appendBreakdown(container))(breakdownItems)
       return container
     }
   }

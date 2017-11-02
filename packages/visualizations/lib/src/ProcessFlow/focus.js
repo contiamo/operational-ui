@@ -112,26 +112,32 @@ var Focus = /** @class */ (function (_super) {
             return container;
         };
     };
+    // Implementation
+    Focus.prototype.appendBreakdown = function (container) {
+        return function (item) {
+            var breakdown = container.append("div")
+                .attr("class", styles.breakdown);
+            if (item.label) {
+                breakdown
+                    .append("label")
+                    .attr("class", styles.breakdownLabel)
+                    .text(item.label);
+            }
+            var backgroundBar = breakdown.append("div")
+                .attr("class", styles.breakdownBackgroundBar);
+            backgroundBar.append("div")
+                .attr("class", styles.breakdownBar)
+                .style("width", item.percentage + "%");
+            backgroundBar.append("div")
+                .attr("class", styles.breakdownText)
+                .text(item.size + " (" + item.percentage + "%)");
+        };
+    };
+    // Control flow
     Focus.prototype.addBreakdownBars = function (breakdownItems) {
+        var _this = this;
         return function (container) {
-            fp_1.forEach(function (item) {
-                var breakdown = container.append("div")
-                    .attr("class", styles.breakdown);
-                if (item.label) {
-                    breakdown
-                        .append("label")
-                        .attr("class", styles.breakdownLabel)
-                        .text(item.label);
-                }
-                var backgroundBar = breakdown.append("div")
-                    .attr("class", styles.breakdownBackgroundBar);
-                backgroundBar.append("div")
-                    .attr("class", styles.breakdownBar)
-                    .style("width", item.percentage + "%");
-                backgroundBar.append("div")
-                    .attr("class", styles.breakdownText)
-                    .text(item.size + " (" + item.percentage + "%)");
-            })(breakdownItems);
+            fp_1.forEach(_this.appendBreakdown(container))(breakdownItems);
             return container;
         };
     };
