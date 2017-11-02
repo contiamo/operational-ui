@@ -13,6 +13,88 @@ interface IBreakdowns {
 
 type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
 
+// Implementation
+const computeBreakdowns = (node: TNode): IBreakdowns => {
+  const inputs: IBreakdown[] = map((link: TLink): IBreakdown => {
+    const size: number = link.size()
+    return {
+      label: link.source().label(),
+      size: size,
+      percentage: Math.round(size * 100 / node.size())
+    }
+  })(node.targetLinks)
+  const outputs: IBreakdown[] = map((link: TLink): IBreakdown => {
+    const size: number = link.size()
+    return {
+      label: link.target().label(),
+      size: size,
+      percentage: Math.round(size * 100 / node.size())
+    }
+  })(node.sourceLinks)
+  const startsHere: IBreakdown[] = [{
+    size: node.journeyStarts,
+    percentage: Math.round(node.journeyStarts * 100 / node.size())
+  }]
+  const endsHere: IBreakdown[] = [{
+    size: node.journeyEnds,
+    percentage: Math.round(node.journeyEnds * 100 / node.size())
+  }]
+  return { inputs, outputs, startsHere, endsHere }
+}
+
+const computeBreakdownTotal = (breakdowns: IBreakdown[]): number  => {
+  return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
+}
+
+const addBreakdownContainer = (content: TD3SelectionNoData): TD3SelectionNoData  => {
+  return content.append("div").attr("class", styles.breakdownContainer)
+}
+
+const addBreakdownTitle = (title: string, subtitle ?: string): TContainerMethod  => {
+  return (container: TD3SelectionNoData): TD3SelectionNoData => {
+    container.append("span")
+      .attr("class", styles.title)
+      .text(title)
+      .append("span")
+      .text(subtitle)
+    return container
+  }
+}
+
+const appendBreakdown = (container: TD3SelectionNoData): (item: IBreakdown) => void => {
+  return(item: IBreakdown): void => {
+  const breakdown: TD3SelectionNoData = container.append("div")
+    .attr("class", styles.breakdown)
+
+  if (item.label) {
+    breakdown
+      .append("label")
+      .attr("class", styles.breakdownLabel)
+      .text(item.label)
+  }
+
+  const backgroundBar: TD3SelectionNoData = breakdown.append("div")
+    .attr("class", styles.breakdownBackgroundBar)
+
+  backgroundBar.append("div")
+    .attr("class", styles.breakdownBar)
+    .style("width", item.percentage + "%")
+
+  backgroundBar.append("div")
+    .attr("class", styles.breakdownText)
+    .text(item.size + " (" + item.percentage + "%)")
+  }
+}
+
+const addBreakdownComment = (comment: string): TContainerMethod => {
+  return (container: TD3SelectionNoData): TD3SelectionNoData => {
+    container.append("label")
+      .attr("class", styles.breakdownCommentLabel)
+      .text(comment)
+    return container
+  }
+}
+
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
   uid: string
@@ -44,11 +126,11 @@ class Focus extends AbstractFocus {
         .text(` (${datum.size()})`)
 
       if (isNode) {
-        const breakdowns: IBreakdowns = this.computeBreakdowns(datum),
+        const breakdowns: IBreakdowns = computeBreakdowns(datum),
           container: TD3SelectionNoData = content.append("div").attr("class", styles.breakdownsContainer)
 
-        const inputsTotal: number = this.computeBreakdownTotal(breakdowns.inputs),
-          outputsTotal: number = this.computeBreakdownTotal(breakdowns.outputs),
+        const inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),
+          outputsTotal: number = computeBreakdownTotal(breakdowns.outputs),
           startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
           endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal),
           startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
@@ -56,31 +138,31 @@ class Focus extends AbstractFocus {
 
         // Add "Starts here" breakdown
         flow(
-          this.addBreakdownContainer,
-          this.addBreakdownTitle("Starts here"),
+          addBreakdownContainer,
+          addBreakdownTitle("Starts here"),
           this.addBreakdownBars(breakdowns.startsHere),
-          this.addBreakdownComment(startsHereString)
+          addBreakdownComment(startsHereString)
         )(container)
 
         // Add "Ends here" breakdown
         flow(
-          this.addBreakdownContainer,
-          this.addBreakdownTitle("Ends here"),
+          addBreakdownContainer,
+          addBreakdownTitle("Ends here"),
           this.addBreakdownBars(breakdowns.endsHere),
-          this.addBreakdownComment(endsHereString)
+          addBreakdownComment(endsHereString)
         )(container)
 
         // Add inputs breakdown
         flow(
-          this.addBreakdownContainer,
-          this.addBreakdownTitle("Inputs", ` (${inputsTotal})`),
+          addBreakdownContainer,
+          addBreakdownTitle("Inputs", ` (${inputsTotal})`),
           this.addBreakdownBars(breakdowns.inputs)
         )(container)
 
         // Add outputs breakdown
         flow(
-          this.addBreakdownContainer,
-          this.addBreakdownTitle("Outputs", ` (${outputsTotal})`),
+          addBreakdownContainer,
+          addBreakdownTitle("Outputs", ` (${outputsTotal})`),
           this.addBreakdownBars(breakdowns.outputs)
         )(container)
 
@@ -109,92 +191,9 @@ class Focus extends AbstractFocus {
     }
   }
 
-  computeBreakdowns(node: TNode): IBreakdowns {
-    const inputs: IBreakdown[] = map((link: TLink): IBreakdown => {
-      const size: number = link.size()
-      return {
-        label: link.source().label(),
-        size: size,
-        percentage: Math.round(size * 100 / node.size())
-      }
-    })(node.targetLinks)
-    const outputs: IBreakdown[] = map((link: TLink): IBreakdown => {
-      const size: number = link.size()
-      return {
-        label: link.target().label(),
-        size: size,
-        percentage: Math.round(size * 100 / node.size())
-      }
-    })(node.sourceLinks)
-    const startsHere: IBreakdown[] = [{
-      size: node.journeyStarts,
-      percentage: Math.round(node.journeyStarts * 100 / node.size())
-    }]
-    const endsHere: IBreakdown[] = [{
-      size: node.journeyEnds,
-      percentage: Math.round(node.journeyEnds * 100 / node.size())
-    }]
-    return { inputs, outputs, startsHere, endsHere }
-  }
-
-  computeBreakdownTotal(breakdowns: IBreakdown[]): number {
-    return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
-  }
-
-  addBreakdownContainer(content: TD3SelectionNoData): TD3SelectionNoData {
-    return content.append("div").attr("class", styles.breakdownContainer)
-  }
-
-  addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
-    return (container: TD3SelectionNoData): TD3SelectionNoData => {
-      container.append("span")
-        .attr("class", styles.title)
-        .text(title)
-        .append("span")
-        .text(subtitle)
-      return container
-    }
-  }
-
-  // Implementation
-  appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => void {
-    return (item: IBreakdown): void => {
-      const breakdown: TD3SelectionNoData = container.append("div")
-        .attr("class", styles.breakdown)
-
-      if (item.label) {
-        breakdown
-          .append("label")
-          .attr("class", styles.breakdownLabel)
-          .text(item.label)
-      }
-
-      const backgroundBar: TD3SelectionNoData = breakdown.append("div")
-        .attr("class", styles.breakdownBackgroundBar)
-
-      backgroundBar.append("div")
-        .attr("class", styles.breakdownBar)
-        .style("width", item.percentage + "%")
-
-      backgroundBar.append("div")
-        .attr("class", styles.breakdownText)
-        .text(item.size + " (" + item.percentage + "%)")
-    }
-  }
-
-  // Control flow
   addBreakdownBars(breakdownItems: IBreakdown[]): TContainerMethod {
     return (container: TD3SelectionNoData): TD3SelectionNoData => {
-      forEach(this.appendBreakdown(container))(breakdownItems)
-      return container
-    }
-  }
-
-  addBreakdownComment(comment: string): TContainerMethod {
-    return (container: TD3SelectionNoData): TD3SelectionNoData => {
-      container.append("label")
-        .attr("class", styles.breakdownCommentLabel)
-        .text(comment)
+      forEach(appendBreakdown(container))(breakdownItems)
       return container
     }
   }
