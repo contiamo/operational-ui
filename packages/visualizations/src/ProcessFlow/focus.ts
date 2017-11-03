@@ -11,12 +11,10 @@ interface IBreakdowns {
   endsHere: IBreakdown[]
 }
 
-type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
-
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
 
-  onElementHover(): (payload: { focusPoint: IFocus; d: any }) => void {
+  onElementHover() {
     return (payload: { focusPoint: IFocus; d: any }): void => {
       // Remove the current focus label, if there is one
       this.remove()
@@ -157,7 +155,7 @@ function addBreakdownContainer(content: TD3SelectionNoData): TD3SelectionNoData 
   return content.append("div").attr("class", styles.breakdownContainer)
 }
 
-function addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
+function addBreakdownTitle(title: string, subtitle?: string) {
   return (container: TD3SelectionNoData): TD3SelectionNoData => {
     container.append("span")
       .attr("class", styles.title)
@@ -168,14 +166,14 @@ function addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
   }
 }
 
-function addBreakdownBars(breakdownItems: IBreakdown[]): TContainerMethod {
+function addBreakdownBars(breakdownItems: IBreakdown[]) {
   return (container: TD3SelectionNoData): TD3SelectionNoData => {
     forEach(appendBreakdown(container))(breakdownItems)
     return container
   }
 }
 
-function appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => void {
+function appendBreakdown(container: TD3SelectionNoData) {
   return (item: IBreakdown): void => {
     const breakdown: TD3SelectionNoData = container.append("div")
       .attr("class", styles.breakdown)
@@ -200,7 +198,7 @@ function appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => v
   }
 }
 
-function addBreakdownComment(comment: string): TContainerMethod {
+function addBreakdownComment(comment: string) {
   return (container: TD3SelectionNoData): TD3SelectionNoData => {
     container.append("label")
       .attr("class", styles.breakdownCommentLabel)

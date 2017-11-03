@@ -36,7 +36,7 @@ abstract class AbstractRenderer {
     this.events.on(Events.FOCUS.ELEMENT.OUT, bind(this.removeHighlights, this))
   }
 
-  onMouseOver(ctx: AbstractRenderer): (d: TLink | TNode) => void {
+  onMouseOver(ctx: AbstractRenderer) {
     return function(d: TLink | TNode): void {
       ctx.mouseOver(d3.select(this), d)
     }
@@ -49,7 +49,7 @@ abstract class AbstractRenderer {
     element.classed("hover", true).on("mouseleave", this.onMouseOut(this))
   }
 
-  focusElement(): (elementInfo: IFocusElement) => void {
+  focusElement() {
     return (elementInfo: IFocusElement): void => {
       const ctx: AbstractRenderer = this
 
@@ -86,7 +86,7 @@ abstract class AbstractRenderer {
 
   abstract focusPoint(element: any, d: TLink | TNode): IFocus
 
-  onMouseOut(ctx: AbstractRenderer): any {
+  onMouseOut(ctx: AbstractRenderer) {
     return function(): void {
       ctx.events.emit(Events.FOCUS.ELEMENT.OUT)
       const element: any = d3.select(this)

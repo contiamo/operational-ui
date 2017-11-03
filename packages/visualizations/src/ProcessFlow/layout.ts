@@ -114,7 +114,7 @@ function singleSourceAbove(sourcePositions: number[]): any {
 }
 
 // Check that there isn't a non-source node vertically between 2 linked nodes.
-function isSourceDirectlyAbove(node: TNode, nodes: TNode[]): (xValue: number) => boolean {
+function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
   return (xValue: number): boolean => {
     const findSourceNodeAtX: any = find((link: TLink): boolean => link.source().x === xValue)
     const maxYVal: any = flow(
@@ -127,12 +127,12 @@ function isSourceDirectlyAbove(node: TNode, nodes: TNode[]): (xValue: number) =>
   }
 }
 
-function xPositionAvailable(nodePositions: number[]): (x: number) => boolean {
+function xPositionAvailable(nodePositions: number[]) {
   return (x: number): boolean => indexOf(x)(nodePositions) === -1
 }
 
 // Shift all nodes that have an x-value >= the given value to the right by one place
-function shiftNodesToRight(x: number): any {
+function shiftNodesToRight(x: number) {
   return flow(
     filter((n: TNode): boolean => n.x >= x),
     forEach((n: TNode): void => { n.x += 1 }),

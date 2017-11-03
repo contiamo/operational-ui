@@ -19,7 +19,7 @@ class Renderer {
     this.nodes.draw(data.nodes)
   }
 
-  close(): any {
+  close(): void {
     this.el.node().innerHTML = ""
   }
 }
