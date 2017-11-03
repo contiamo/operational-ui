@@ -30,7 +30,7 @@ var AbstractDrawingFocus = /** @class */ (function (_super) {
     AbstractDrawingFocus.prototype.onMouseLeave = function () {
         var _this = this;
         return function () {
-            _this.remove();
+            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         };
     };
     return AbstractDrawingFocus;

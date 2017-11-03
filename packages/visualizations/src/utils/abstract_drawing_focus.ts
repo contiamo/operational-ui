@@ -20,7 +20,7 @@ abstract class AbstractDrawingFocus extends AbstractFocus {
 
   onMouseLeave(): () => void {
     return () => {
-      this.remove()
+      this.events.emit(Events.FOCUS.ELEMENT.OUT)
     }
   }
 }

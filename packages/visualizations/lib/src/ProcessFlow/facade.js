@@ -73,6 +73,9 @@ var ProcessFlow = /** @class */ (function (_super) {
         if (focusElement) {
             this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, focusElement);
         }
+        else {
+            this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
+        }
         return this.canvas.elementFor("series").node();
     };
     return ProcessFlow;
