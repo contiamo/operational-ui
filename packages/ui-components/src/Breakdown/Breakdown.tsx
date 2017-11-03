@@ -56,6 +56,7 @@ const Bar = glamorous.div(
   {
     position: "relative",
     width: "100%",
+    fontSize: 12,
     overflow: "hidden",
     "& > span": {
       position: "relative",
@@ -81,7 +82,10 @@ const Bar = glamorous.div(
       backgroundColor: theme.colors.palette.grey10,
       "> span": {
         color: theme.colors.palette.grey70,
-        fontWeight: 600
+        fontSize: 12,
+        position: "relative",
+        top: 1,
+        fontWeight: 400
       },
       ":before": {
         backgroundColor: setBrightness(backgroundColor, 145),

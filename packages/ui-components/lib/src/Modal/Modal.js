@@ -24,7 +24,7 @@ var Container = glamorous_1.default.div(function (_a) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(255, 255, 255, 0.9)"
+        backgroundColor: "rgba(0, 0, 0, .6)"
     });
 });
 var Content = glamorous_1.default.div(function (_a) {
@@ -32,7 +32,7 @@ var Content = glamorous_1.default.div(function (_a) {
     return ({
         backgroundColor: theme.colors.palette.white,
         padding: theme.spacing,
-        boxShadow: theme.shadows.card
+        boxShadow: "0 3px 7px rgba(0, 0, 0, .3)"
     });
 });
 var Modal = /** @class */ (function (_super) {

@@ -18,13 +18,15 @@ export interface Palette {
     grey90: string;
 }
 export interface UsageColors {
-    bodyText: string;
-    lightText: string;
-    emphasizedText: string;
-    contentBorder: string;
     bodyBackground: string;
+    bodyText: string;
     cardBackground: string;
+    contentBorder: string;
     contentSeparatorLine: string;
+    emphasizedText: string;
+    lightText: string;
+    link: string;
+    sideNavigationBackground: string;
     subContentSeparatorLine: string;
 }
 export interface ThemeColors {
@@ -34,6 +36,8 @@ export interface ThemeColors {
 export interface ThemeShadows {
     pressed: string;
     card: string;
+    focus: string;
+    popup: string;
 }
 export interface ThemeTypographyElement {
     fontSize: number;

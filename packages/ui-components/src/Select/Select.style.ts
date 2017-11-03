@@ -35,7 +35,8 @@ const Container = glamorous.div(
       position: "relative",
       display: "flex",
       alignItems: "center",
-      padding: theme.spacing / 2,
+      padding: theme.spacing * 2 / 3,
+      borderRadius: 2,
       paddingRight: theme.spacing / 2 + 40,
       width: "fit-content",
       minHeight: 20,
@@ -59,6 +60,11 @@ const Container = glamorous.div(
         border: "4px solid transparent",
         borderTopColor: theme.colors.palette.grey70,
         transform: "translateY(calc(-50% + 2px))"
+      },
+
+      "&:focus": {
+        borderColor: "rgba(82,168,236,.8)",
+        boxShadow: theme.shadows.focus
       }
     }
   }
@@ -74,13 +80,13 @@ const Options = glamorous.div(
     top: "calc(100% + 1px)",
     left: 0,
     width: "100%",
-    boxShadow: "0 2px 7px 2px rgba(0, 0, 0, .14)",
     opacity: 0,
     transform: "translateY(-10px)",
     animation: `${fadeIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`
   },
   ({ theme }: { theme: Theme }) => ({
+    boxShadow: theme.shadows.popup,
     zIndex: theme.baseZIndex + 100
   })
 )

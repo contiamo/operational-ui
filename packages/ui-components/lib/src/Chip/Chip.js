@@ -12,9 +12,10 @@ var Container = glamorous_1.default.div(function (_a) {
         display: "flex",
         alignItems: "center",
         width: "fit-content",
+        borderRadius: 2,
         padding: hasChip
-            ? theme.spacing / 4 + "px " + 1.5 * theme.spacing + "px " + theme.spacing / 4 + "px " + theme.spacing / 4 + "px"
-            : theme.spacing / 4,
+            ? theme.spacing / 3 + "px " + 2.5 * theme.spacing + "px " + theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px"
+            : theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px",
         cursor: "pointer",
         overflow: "hidden",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
@@ -31,7 +32,7 @@ var Action = glamorous_1.default.div(function (_a) {
         borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         position: "absolute",
-        width: theme.spacing * 1.25,
+        width: theme.spacing * 1.75,
         top: 0,
         right: 0,
         display: "flex",
@@ -39,9 +40,8 @@ var Action = glamorous_1.default.div(function (_a) {
         justifyContent: "center",
         height: "100%",
         padding: "0 " + theme.spacing / 4 + "px",
-        transition: "background-color 0.3s",
         "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.15)"
+            backgroundColor: "rgba(255, 255, 255, 0.25)"
         }
     };
 });

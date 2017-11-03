@@ -59,12 +59,11 @@ var TabTitle = glamorous_1.default.li({
     listStyle: "none",
     maxWidth: "100%",
     position: "relative",
-    transition: "all 250ms ease",
     padding: "5px 15px",
     zIndex: 10
 }, function (_a) {
     var theme = _a.theme, color = _a.color, isActive = _a.isActive, disabled = _a.disabled;
-    return (__assign({}, theme.typography.body, overflowEllipsis, { fontSize: theme.typography.body.fontSize * 1.1, borderBottom: "2px solid transparent" }, isActive
+    return (__assign({}, theme.typography.body, overflowEllipsis, { borderBottom: "2px solid transparent" }, isActive
         ? {
             color: color,
             borderColor: color

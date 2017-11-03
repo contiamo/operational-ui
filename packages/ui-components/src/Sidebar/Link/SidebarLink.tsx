@@ -29,8 +29,7 @@ const style: {} = ({ theme, color, disabled, active }: IProps) => {
     ...theme.typography.body,
     position: "relative",
     display: "flex",
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-    transition: "background-color .1s ease",
+    padding: `${theme.spacing / 3}px ${theme.spacing}px`,
     cursor: "pointer",
     // react-router <Link /> wraps an <a> which can be underlined by default so
     textDecoration: "none",

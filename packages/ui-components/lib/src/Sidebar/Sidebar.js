@@ -15,7 +15,6 @@ var Container = glamorous_1.default.div(function (_a) {
         boxShadow: theme.shadows.card,
         overflow: "auto",
         scrollBehavior: "smooth",
-        fontWeight: 300,
         backgroundColor: theme.colors.usage.cardBackground,
         color: theme.colors.palette.grey80
     });

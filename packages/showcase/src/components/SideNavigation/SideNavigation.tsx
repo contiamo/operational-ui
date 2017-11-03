@@ -1,15 +1,18 @@
 import * as React from "react"
-import glamorous, { Div, Img } from "glamorous"
+import glamorous, { Div, Img, withTheme } from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, BarChart2, Grid } from "react-feather"
 
-import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
+import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon, Theme } from "contiamo-ui-components"
 
 interface IProps {
   location?: {
     pathname: string
   }
-  theme?: Theme
+}
+
+interface IPropsWithTheme extends IProps {
+  theme: Theme
 }
 
 interface ILink {
@@ -39,9 +42,11 @@ const links: ILink[] = [
   { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
 ]
 
-const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
+const highlightColor = "rgb(20, 153, 206)"
+
+const AppSideNavigation: React.SFC<IPropsWithTheme> = ({ location, theme }: IPropsWithTheme) => {
   return (
-    <SideNavigation css={style} fix expandOnHover color="#4E5665">
+    <SideNavigation css={style} fix expandOnHover>
       <SideNavigationHeader>
         <Link to="/">
           <Img
@@ -55,7 +60,7 @@ const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
 
       {links.map(({ url, label, icon }: ILink, index: number) => {
         const routeMatch = location && location.pathname && url && location.pathname.slice(0, url.length) === url
-        const color = routeMatch ? "#67FFAA" : "#fff"
+        const color = routeMatch ? theme.colors.usage.link : "#fff"
         return (
           <SideNavigationItem key={index} active={routeMatch}>
             <Link to={url || "/"}>
@@ -70,4 +75,6 @@ const AppSideNavigation: React.SFC<IProps> = ({ location }: IProps) => {
   )
 }
 
-export default AppSideNavigation
+const WrappedAppSideNavigation: React.SFC<IProps> = withTheme(AppSideNavigation)
+
+export default WrappedAppSideNavigation

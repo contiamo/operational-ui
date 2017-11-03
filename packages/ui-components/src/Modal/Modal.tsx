@@ -20,13 +20,13 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "rgba(255, 255, 255, 0.9)"
+  backgroundColor: "rgba(0, 0, 0, .6)"
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
   backgroundColor: theme.colors.palette.white,
   padding: theme.spacing,
-  boxShadow: theme.shadows.card
+  boxShadow: "0 3px 7px rgba(0, 0, 0, .3)"
 }))
 
 class Modal extends React.Component<IProps, {}> {

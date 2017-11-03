@@ -35,7 +35,9 @@ const Container = glamorous.div(
     expandedWidth: number
     width: number
   }): any => {
-    const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80
+    const backgroundColor = color
+      ? hexOrColor(color)(theme.colors.palette[color])
+      : theme.colors.usage.sideNavigationBackground
     const hoverWidth = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",

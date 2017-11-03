@@ -11,5 +11,5 @@
     "moduleResolution": "node"
   },
   "include": ["types/theme.d.ts", "types/**/*", "index.ts"],
-  "exclude": ["./node_modules"]
+  "exclude": ["node_modules", "lib"]
 }

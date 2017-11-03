@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Card } from "contiamo-ui-components"
+import { Card, Theme } from "contiamo-ui-components"
 
 interface IProps {
   className?: string
@@ -13,15 +13,13 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   alignItems: "flex-start",
   flexBasis: "100%",
   marginLeft: theme.spacing * 4 / 3,
-  overflow: "hidden",
   height: "100%",
   maxHeight: "100%",
 
   "& > *": {
     overflow: "auto",
     width: "100%",
-    height: "100%",
-    maxWidth: 670
+    height: "100%"
   },
 
   "& a:link, & a:visited": {
@@ -34,6 +32,10 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
 
   "& h4": {
     ...theme.typography.heading2
+  },
+
+  "& p": {
+    maxWidth: 670
   }
 }))
 

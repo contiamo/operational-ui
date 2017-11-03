@@ -2,7 +2,7 @@
 
 exports[`Chip Should render 1`] = `
 <div
-  class="css-wg56g2 co_chip"
+  class="css-ec0pog co_chip"
 >
   Hi
 </div>
