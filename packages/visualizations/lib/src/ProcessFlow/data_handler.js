@@ -93,36 +93,35 @@ var DataHandler = /** @class */ (function () {
     DataHandler.prototype.addLink = function (attrs) {
         return new link_1.default(attrs, this.linkAccessors.accessors);
     };
-    DataHandler.prototype.computeJourneyLinks = function (journey) {
-        var _this = this;
-        var path = journey.path;
-        var computeLink = function (i) {
-            var sourceId = path[i];
-            var targetId = path[i + 1];
-            var sourceNode = _this.findNode(sourceId);
-            var targetNode = _this.findNode(targetId);
-            var existingLink = _this.findLink(sourceId, targetId);
-            if (existingLink) {
-                existingLink.attributes.size += journey.size;
-            }
-            else {
-                var linkAttrs = {
-                    source: sourceNode,
-                    sourceId: sourceNode.id(),
-                    target: targetNode,
-                    targetId: targetNode.id(),
-                    size: journey.size,
-                };
-                var newLink = _this.addLink(linkAttrs);
-                _this.links.push(newLink);
-                sourceNode.sourceLinks.push(newLink);
-                targetNode.targetLinks.push(newLink);
-            }
-        };
-        fp_1.times(computeLink)(path.length - 1);
-    };
     DataHandler.prototype.computeLinks = function () {
-        fp_1.forEach(this.computeJourneyLinks)(this.journeys);
+        var _this = this;
+        fp_1.forEach(function (journey) {
+            var path = journey.path;
+            var computeLink = function (i) {
+                var sourceId = path[i];
+                var targetId = path[i + 1];
+                var sourceNode = _this.findNode(sourceId);
+                var targetNode = _this.findNode(targetId);
+                var existingLink = _this.findLink(sourceId, targetId);
+                if (existingLink) {
+                    existingLink.attributes.size += journey.size;
+                }
+                else {
+                    var linkAttrs = {
+                        source: sourceNode,
+                        sourceId: sourceNode.id(),
+                        target: targetNode,
+                        targetId: targetNode.id(),
+                        size: journey.size,
+                    };
+                    var newLink = _this.addLink(linkAttrs);
+                    _this.links.push(newLink);
+                    sourceNode.sourceLinks.push(newLink);
+                    targetNode.targetLinks.push(newLink);
+                }
+            };
+            fp_1.times(computeLink)(path.length - 1);
+        })(this.journeys);
     };
     DataHandler.prototype.xGridSpacing = function () {
         var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth

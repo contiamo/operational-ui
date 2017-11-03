@@ -111,36 +111,34 @@ class DataHandler {
     return new Link(attrs, this.linkAccessors.accessors)
   }
 
-  computeJourneyLinks(journey: IJourney): void {
-    const path: string[] = journey.path
-    const computeLink: (i: number) => void = (i: number): void => {
-      const sourceId: string = path[i]
-      const targetId: string = path[i + 1]
-      const sourceNode: TNode = this.findNode(sourceId)
-      const targetNode: TNode = this.findNode(targetId)
-
-      const existingLink: TLink = this.findLink(sourceId, targetId)
-      if (existingLink) {
-        existingLink.attributes.size += journey.size
-      } else {
-        const linkAttrs: ILinkAttrs = {
-          source: sourceNode,
-          sourceId: sourceNode.id(),
-          target: targetNode,
-          targetId: targetNode.id(),
-          size: journey.size,
-        }
-        const newLink: TLink = this.addLink(linkAttrs)
-        this.links.push(newLink)
-        sourceNode.sourceLinks.push(newLink)
-        targetNode.targetLinks.push(newLink)
-      }
-    }
-    times(computeLink)(path.length - 1)
-  }
-
   computeLinks(): void {
-    forEach(this.computeJourneyLinks)(this.journeys)
+    forEach((journey: IJourney): void => {
+      const path: string[] = journey.path
+      const computeLink: (i: number) => void = (i: number): void => {
+        const sourceId: string = path[i]
+        const targetId: string = path[i + 1]
+        const sourceNode: TNode = this.findNode(sourceId)
+        const targetNode: TNode = this.findNode(targetId)
+
+        const existingLink: TLink = this.findLink(sourceId, targetId)
+        if (existingLink) {
+          existingLink.attributes.size += journey.size
+        } else {
+          const linkAttrs: ILinkAttrs = {
+            source: sourceNode,
+            sourceId: sourceNode.id(),
+            target: targetNode,
+            targetId: targetNode.id(),
+            size: journey.size,
+          }
+          const newLink: TLink = this.addLink(linkAttrs)
+          this.links.push(newLink)
+          sourceNode.sourceLinks.push(newLink)
+          targetNode.targetLinks.push(newLink)
+        }
+      }
+      times(computeLink)(path.length - 1)
+    })(this.journeys)
   }
 
   xGridSpacing(): number {
