@@ -1,6 +1,74 @@
 import { map, flow, find, forEach, indexOf, reduce, filter, sortBy, uniq, bind } from "lodash/fp"
 import { TNode, TLink, IState, IData } from "./typings"
-import Utils from "./layout_utils"
+
+const placeNode = (used: number[], x: number, node: TNode): void => {
+  if (find((val: number): boolean => val === x)(used)) {
+    placeNode(used, x + 1, node)
+  } else {
+    node.x = x
+    used.push(x)
+  }
+}
+
+const placeSingleSourceNodes = (nodesInRow: TNode[], nodePositions: number[]): void => {
+  const singleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length === 1)(nodesInRow)
+  forEach((node: TNode): void => {
+    let sourceNodePosition: number = node.targetLinks[0].source().x
+    placeNode(nodePositions, sourceNodePosition, node)
+  })(singleSourceNodes)
+}
+
+const singleSourceAbove = (sourcePositions: number[]): any => {
+  const sourceNodesAbove: any = (x: number): any => {
+    return filter((position: number): boolean => position === x)(sourcePositions)
+  }
+  return (x: number): boolean => sourceNodesAbove(x).length === 1
+}
+
+// Check that there isn't a non-source node vertically between 2 linked nodes.
+const isSourceDirectlyAbove = (node: TNode, nodes: TNode[]): (xValue: number) => boolean => {
+  return (xValue: number): boolean => {
+    const findSourceNodeAtX: any = find((link: TLink): boolean => link.source().x === xValue)
+    const maxYVal: any = flow(
+      filter((n: TNode): boolean => n.x === xValue),
+      reduce((max: number, n: TNode): number => {
+        return Math.max(max, n.y)
+      }, 0),
+    )(nodes)
+    return maxYVal === findSourceNodeAtX(node.targetLinks).source().y
+  }
+}
+
+const xPositionAvailable = (nodePositions: number[]): (x: number) => boolean => {
+  return (x: number): boolean => indexOf(x)(nodePositions) === -1
+}
+
+// Shift all nodes that have an x-value >= the given value to the right by one place
+const shiftNodesToRight = (x: number): any => {
+  return flow(
+    filter((n: TNode): boolean => n.x >= x),
+    forEach((n: TNode): void => { n.x += 1 }),
+  )
+}
+
+// The mean source node position is calculated as a starting point for positioning the node
+const calculateXPosition = (sourcePositions: number[], possiblePositions: number[]): { xPosition: number, newColumn: boolean } => {
+  let newColumn: boolean = false
+  const sourcePositionsSum: number = reduce((sum: number, val: number): number => {
+    return sum + val
+  }, 0)(sourcePositions)
+  const meanSourcePosition: number = sourcePositionsSum / sourcePositions.length
+  let xPosition: number
+  if (possiblePositions.length > 0) {
+    possiblePositions = sortBy((x: number): number => Math.abs(x - meanSourcePosition))(possiblePositions)
+    xPosition = possiblePositions[0]
+  } else {
+    xPosition = Math.round(meanSourcePosition)
+    // Shift nodes to the right by one place to make space for new node column
+    newColumn = true
+  }
+  return { xPosition, newColumn }
+}
 
 class Layout {
   nodes: TNode[]
@@ -51,16 +119,16 @@ class Layout {
       // Calculate possible node x positions that satisfy the following conditions
       let possiblePositions = flow(
         // 1) there can only be one source node directly above
-        filter(Utils.singleSourceAbove(sourcePositions)),
+        filter(singleSourceAbove(sourcePositions)),
         // 2) there cannot be another (non-source) node in between the node and the source node above
-        filter(Utils.isSourceDirectlyAbove(node, this.nodes)),
+        filter(isSourceDirectlyAbove(node, this.nodes)),
         // 3) there can't already be another node on the same row in that position
-        filter(Utils.xPositionAvailable(nodePositions)),
+        filter(xPositionAvailable(nodePositions)),
       )(sourcePositions)
 
-      const calculated: { xPosition: number, newColumn: boolean } = Utils.calculateXPosition(sourcePositions, possiblePositions)
+      const calculated: { xPosition: number, newColumn: boolean } = calculateXPosition(sourcePositions, possiblePositions)
       if (calculated.newColumn) {
-        Utils.shiftNodesToRight(calculated.xPosition)(this.nodes)
+        shiftNodesToRight(calculated.xPosition)(this.nodes)
       }
       node.x = calculated.xPosition
       nodePositions.push(calculated.xPosition)
@@ -80,7 +148,7 @@ class Layout {
       } else {
         let nodePositions: number[] = []
         // Place nodes with only one incoming link directly below their source node, if possible.
-        Utils.placeSingleSourceNodes(nodesInRow, nodePositions)
+        placeSingleSourceNodes(nodesInRow, nodePositions)
         // If there are more than 1 incoming links, calculate optimal x position for node,
         //  and move other nodes as required.
         this.placeMultipleSourceNodes(nodesInRow, nodePositions)
