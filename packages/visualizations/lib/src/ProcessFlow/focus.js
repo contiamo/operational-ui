@@ -14,8 +14,73 @@ var abstract_drawing_focus_1 = require("../utils/abstract_drawing_focus");
 var focus_utils_1 = require("../utils/focus_utils");
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
-// Implementation
-var computeBreakdowns = function (node) {
+// There can only be an element focus in process flow diagrams
+var Focus = /** @class */ (function (_super) {
+    __extends(Focus, _super);
+    function Focus() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Focus.prototype.onElementHover = function () {
+        var _this = this;
+        return function (payload) {
+            // Remove the current focus label, if there is one
+            _this.remove();
+            // Check if focus labels should be displayed for the element type.
+            var focusPoint = payload.focusPoint, datum = payload.d, isNode = focusPoint.type === "node", config = _this.state.current.get("config");
+            if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
+                return;
+            }
+            // Render the focus label hidden initially to allow placement calculations
+            focus_utils_1.default.drawHidden(_this.el, "element").style("pointer-events", "none");
+            var content = _this.el.append("xhtml:ul");
+            content
+                .append("xhtml:li")
+                .attr("class", styles.title)
+                .text(datum.label())
+                .append("span")
+                .text(" (" + datum.size() + ")");
+            if (isNode) {
+                _this.addNodeBreakdowns(content, datum);
+                _this.addSingleNodeVisitsComment(content, datum);
+            }
+            // Get label dimensions (has to be actually rendered in the page to do this) and position label
+            var labelDimensions = focus_utils_1.default.labelDimensions(_this.el), drawingDimensions = _this.getDrawingDimensions(), offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
+            focus_utils_1.default.positionLabel(_this.el, focusPoint, labelDimensions, drawingDimensions, offset);
+        };
+    };
+    Focus.prototype.addNodeBreakdowns = function (content, datum) {
+        var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer), inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";
+        // Add "Starts here" breakdown
+        fp_1.flow(addBreakdownContainer, addBreakdownTitle("Starts here"), addBreakdownBars(breakdowns.startsHere), addBreakdownComment(startsHereString))(container);
+        // Add "Ends here" breakdown
+        fp_1.flow(addBreakdownContainer, addBreakdownTitle("Ends here"), addBreakdownBars(breakdowns.endsHere), addBreakdownComment(endsHereString))(container);
+        // Add inputs breakdown
+        fp_1.flow(addBreakdownContainer, addBreakdownTitle("Inputs", " (" + inputsTotal + ")"), addBreakdownBars(breakdowns.inputs))(container);
+        // Add outputs breakdown
+        fp_1.flow(addBreakdownContainer, addBreakdownTitle("Outputs", " (" + outputsTotal + ")"), addBreakdownBars(breakdowns.outputs))(container);
+    };
+    Focus.prototype.addSingleNodeVisitsComment = function (content, datum) {
+        if (datum.singleNodeJourneys === 0) {
+            return;
+        }
+        content
+            .append("xhtml:li")
+            .attr("class", styles.title)
+            .text("[!] " + datum.singleNodeJourneys + " single node visits (not included in the above stats)");
+    };
+    Focus.prototype.getDrawingDimensions = function () {
+        var drawingContainer = this.state.current.get("computed").canvas.elRect, config = this.state.current.get("config");
+        return {
+            xMax: drawingContainer.left + config.width,
+            xMin: drawingContainer.left,
+            yMax: drawingContainer.top + config.height,
+            yMin: drawingContainer.top,
+        };
+    };
+    return Focus;
+}(abstract_drawing_focus_1.default));
+// Helper functions
+function computeBreakdowns(node) {
     var inputs = fp_1.map(function (link) {
         var size = link.size();
         return {
@@ -41,14 +106,14 @@ var computeBreakdowns = function (node) {
             percentage: Math.round(node.journeyEnds * 100 / node.size())
         }];
     return { inputs: inputs, outputs: outputs, startsHere: startsHere, endsHere: endsHere };
-};
-var computeBreakdownTotal = function (breakdowns) {
+}
+function computeBreakdownTotal(breakdowns) {
     return fp_1.reduce(function (sum, item) { return sum + item.size; }, 0)(breakdowns);
-};
-var addBreakdownContainer = function (content) {
+}
+function addBreakdownContainer(content) {
     return content.append("div").attr("class", styles.breakdownContainer);
-};
-var addBreakdownTitle = function (title, subtitle) {
+}
+function addBreakdownTitle(title, subtitle) {
     return function (container) {
         container.append("span")
             .attr("class", styles.title)
@@ -57,8 +122,14 @@ var addBreakdownTitle = function (title, subtitle) {
             .text(subtitle);
         return container;
     };
-};
-var appendBreakdown = function (container) {
+}
+function addBreakdownBars(breakdownItems) {
+    return function (container) {
+        fp_1.forEach(appendBreakdown(container))(breakdownItems);
+        return container;
+    };
+}
+function appendBreakdown(container) {
     return function (item) {
         var breakdown = container.append("div")
             .attr("class", styles.breakdown);
@@ -77,77 +148,14 @@ var appendBreakdown = function (container) {
             .attr("class", styles.breakdownText)
             .text(item.size + " (" + item.percentage + "%)");
     };
-};
-var addBreakdownComment = function (comment) {
+}
+function addBreakdownComment(comment) {
     return function (container) {
         container.append("label")
             .attr("class", styles.breakdownCommentLabel)
             .text(comment);
         return container;
     };
-};
-// There can only be an element focus in process flow diagrams
-var Focus = /** @class */ (function (_super) {
-    __extends(Focus, _super);
-    function Focus() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Focus.prototype.onElementHover = function () {
-        var _this = this;
-        return function (payload) {
-            var focusPoint = payload.focusPoint, datum = payload.d;
-            _this.remove();
-            var isNode = focusPoint.type === "node", config = _this.state.current.get("config");
-            if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
-                return;
-            }
-            _this.uid = fp_1.uniqueId("elFocusLabel");
-            focus_utils_1.default.drawHidden(_this.el, "element").style("pointer-events", "none");
-            var content = _this.el.append("xhtml:ul");
-            content
-                .append("xhtml:li")
-                .attr("class", styles.title)
-                .text(datum.label())
-                .append("span")
-                .text(" (" + datum.size() + ")");
-            if (isNode) {
-                var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer);
-                var inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";
-                // Add "Starts here" breakdown
-                fp_1.flow(addBreakdownContainer, addBreakdownTitle("Starts here"), _this.addBreakdownBars(breakdowns.startsHere), addBreakdownComment(startsHereString))(container);
-                // Add "Ends here" breakdown
-                fp_1.flow(addBreakdownContainer, addBreakdownTitle("Ends here"), _this.addBreakdownBars(breakdowns.endsHere), addBreakdownComment(endsHereString))(container);
-                // Add inputs breakdown
-                fp_1.flow(addBreakdownContainer, addBreakdownTitle("Inputs", " (" + inputsTotal + ")"), _this.addBreakdownBars(breakdowns.inputs))(container);
-                // Add outputs breakdown
-                fp_1.flow(addBreakdownContainer, addBreakdownTitle("Outputs", " (" + outputsTotal + ")"), _this.addBreakdownBars(breakdowns.outputs))(container);
-                if (datum.singleNodeJourneys > 0) {
-                    content
-                        .append("xhtml:li")
-                        .attr("class", styles.title)
-                        .text("[!] " + datum.singleNodeJourneys + " single node visits (not included in the above stats)");
-                }
-            }
-            // Get label dimensions (has to be actually rendered in the page to do this)
-            var labelDimensions = focus_utils_1.default.labelDimensions(_this.el);
-            var drawingContainer = _this.state.current.get("computed").canvas.elRect;
-            var drawingDimensions = {
-                xMax: drawingContainer.left + config.width,
-                xMin: drawingContainer.left,
-                yMax: drawingContainer.top + config.height,
-                yMin: drawingContainer.top,
-            };
-            var offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
-            focus_utils_1.default.positionLabel(_this.el, focusPoint, labelDimensions, drawingDimensions, offset);
-        };
-    };
-    Focus.prototype.addBreakdownBars = function (breakdownItems) {
-        return function (container) {
-            fp_1.forEach(appendBreakdown(container))(breakdownItems);
-            return container;
-        };
-    };
-    return Focus;
-}(abstract_drawing_focus_1.default));
+}
 exports.default = Focus;
 //# sourceMappingURL=focus.js.map
