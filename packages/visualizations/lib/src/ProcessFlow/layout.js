@@ -37,57 +37,27 @@ var Layout = /** @class */ (function () {
         };
         assignNextNodes(this.nodes);
     };
-    // Shift all nodes that have an x-value >= the given value to the right by one place
-    Layout.prototype.shiftNodesToRight = function (x) {
-        return fp_1.flow(fp_1.filter(function (n) { return n.x >= x; }), fp_1.forEach(function (n) {
-            n.x += 1;
-        }));
-    };
-    // Check that there isn't a non-source node vertically between 2 linked nodes.
-    Layout.prototype.isSourceDirectlyAbove = function (node) {
+    Layout.prototype.placeMultipleSourceNodes = function (nodesInRow, nodePositions) {
         var _this = this;
-        return fp_1.bind(function (xValue) {
-            var findSourceNodeAtX = fp_1.find(function (link) { return link.source().x === xValue; });
-            var maxYVal = fp_1.flow(fp_1.filter(function (n) { return n.x === xValue; }), fp_1.reduce(function (max, n) {
-                return Math.max(max, n.y);
-            }, 0))(_this.nodes);
-            return maxYVal === findSourceNodeAtX(node.targetLinks).source().y;
-        }, this);
-    };
-    Layout.prototype.placeNode = function (used, x, node) {
-        if (fp_1.find(function (val) { return val === x; })(used)) {
-            this.placeNode(used, x + 1, node);
-        }
-        else {
-            node.x = x;
-            used.push(x);
-        }
-    };
-    Layout.prototype.singleSourceAbove = function (sourcePositions) {
-        var sourceNodesAbove = function (x) {
-            return fp_1.filter(function (position) { return position === x; })(sourcePositions);
-        };
-        return function (x) { return sourceNodesAbove(x).length === 1; };
-    };
-    Layout.prototype.xPositionAvailable = function (nodePositions) {
-        return function (x) { return fp_1.indexOf(x)(nodePositions) === -1; };
-    };
-    Layout.prototype.calculateXPosition = function (sourcePositions, possiblePositions) {
-        var sourcePositionsSum = fp_1.reduce(function (sum, val) {
-            return sum + val;
-        }, 0)(sourcePositions);
-        var meanSourcePosition = sourcePositionsSum / sourcePositions.length;
-        var xPosition;
-        if (possiblePositions.length > 0) {
-            possiblePositions = fp_1.sortBy(function (x) { return Math.abs(x - meanSourcePosition); })(possiblePositions);
-            xPosition = possiblePositions[0];
-        }
-        else {
-            xPosition = Math.round(meanSourcePosition);
-            // Shift nodes to the right by one place to make space for new node column
-            this.shiftNodesToRight(xPosition)(this.nodes);
-        }
-        return xPosition;
+        var multipleSourceNodes = fp_1.filter(function (node) { return node.targetLinks.length > 1; })(nodesInRow);
+        fp_1.forEach(function (node) {
+            var sourcePositions = fp_1.map(function (link) { return link.source().x; })(node.targetLinks);
+            // A node should be placed directly under a source node if possible:
+            // Calculate possible node x positions that satisfy the following conditions
+            var possiblePositions = fp_1.flow(
+            // 1) there can only be one source node directly above
+            fp_1.filter(singleSourceAbove(sourcePositions)), 
+            // 2) there cannot be another (non-source) node in between the node and the source node above
+            fp_1.filter(isSourceDirectlyAbove(node, _this.nodes)), 
+            // 3) there can't already be another node on the same row in that position
+            fp_1.filter(xPositionAvailable(nodePositions)))(sourcePositions);
+            var calculated = calculateXPosition(sourcePositions, possiblePositions);
+            if (calculated.newColumn) {
+                shiftNodesToRight(calculated.xPosition)(_this.nodes);
+            }
+            node.x = calculated.xPosition;
+            nodePositions.push(calculated.xPosition);
+        })(multipleSourceNodes);
     };
     Layout.prototype.computeNodeXPositions = function () {
         var _this = this;
@@ -101,35 +71,75 @@ var Layout = /** @class */ (function () {
                 })(nodesInRow);
             }
             else {
-                var nodePositions_1 = [];
+                var nodePositions = [];
                 // Place nodes with only one incoming link directly below their source node, if possible.
-                var singleSourceNodes = fp_1.filter(function (node) { return node.targetLinks.length === 1; })(nodesInRow);
-                fp_1.forEach(function (node) {
-                    var sourceNodePosition = node.targetLinks[0].source().x;
-                    _this.placeNode(nodePositions_1, sourceNodePosition, node);
-                })(singleSourceNodes);
-                // If there are more than 1 incoming links, look at source node x positions.
-                var multipleSourceNodes = fp_1.filter(function (node) { return node.targetLinks.length > 1; })(nodesInRow);
-                fp_1.forEach(function (node) {
-                    // The mean source node position is calculated as a starting point for positioning the node
-                    var sourcePositions = fp_1.map(function (link) { return link.source().x; })(node.targetLinks);
-                    // A node should be placed directly under a source node if possible:
-                    // Calculate possible node x positions that satisfy the following conditions
-                    var possiblePositions = fp_1.flow(
-                    // 1) there can only be one source node directly above
-                    fp_1.filter(_this.singleSourceAbove(sourcePositions)), 
-                    // 2) there cannot be another (non-source) node in between the node and the source node above
-                    fp_1.filter(_this.isSourceDirectlyAbove(node)), 
-                    // 3) there can't already be another node on the same row in that position
-                    fp_1.filter(_this.xPositionAvailable(nodePositions_1)))(sourcePositions);
-                    var xPosition = _this.calculateXPosition(sourcePositions, possiblePositions);
-                    node.x = xPosition;
-                    nodePositions_1.push(xPosition);
-                })(multipleSourceNodes);
+                placeSingleSourceNodes(nodesInRow, nodePositions);
+                // If there are more than 1 incoming links, calculate optimal x position for node,
+                //  and move other nodes as required.
+                _this.placeMultipleSourceNodes(nodesInRow, nodePositions);
             }
         })(rows);
     };
     return Layout;
 }());
+// Helper functions
+function placeNode(used, x, node) {
+    if (fp_1.find(function (val) { return val === x; })(used)) {
+        placeNode(used, x + 1, node);
+    }
+    else {
+        node.x = x;
+        used.push(x);
+    }
+}
+function placeSingleSourceNodes(nodesInRow, nodePositions) {
+    var singleSourceNodes = fp_1.filter(function (node) { return node.targetLinks.length === 1; })(nodesInRow);
+    fp_1.forEach(function (node) {
+        var sourceNodePosition = node.targetLinks[0].source().x;
+        placeNode(nodePositions, sourceNodePosition, node);
+    })(singleSourceNodes);
+}
+function singleSourceAbove(sourcePositions) {
+    var sourceNodesAbove = function (x) {
+        return fp_1.filter(function (position) { return position === x; })(sourcePositions);
+    };
+    return function (x) { return sourceNodesAbove(x).length === 1; };
+}
+// Check that there isn't a non-source node vertically between 2 linked nodes.
+function isSourceDirectlyAbove(node, nodes) {
+    return function (xValue) {
+        var findSourceNodeAtX = fp_1.find(function (link) { return link.source().x === xValue; });
+        var maxYVal = fp_1.flow(fp_1.filter(function (n) { return n.x === xValue; }), fp_1.reduce(function (max, n) {
+            return Math.max(max, n.y);
+        }, 0))(nodes);
+        return maxYVal === findSourceNodeAtX(node.targetLinks).source().y;
+    };
+}
+function xPositionAvailable(nodePositions) {
+    return function (x) { return fp_1.indexOf(x)(nodePositions) === -1; };
+}
+// Shift all nodes that have an x-value >= the given value to the right by one place
+function shiftNodesToRight(x) {
+    return fp_1.flow(fp_1.filter(function (n) { return n.x >= x; }), fp_1.forEach(function (n) { n.x += 1; }));
+}
+// The mean source node position is calculated as a starting point for positioning the node
+function calculateXPosition(sourcePositions, possiblePositions) {
+    var newColumn = false;
+    var sourcePositionsSum = fp_1.reduce(function (sum, val) {
+        return sum + val;
+    }, 0)(sourcePositions);
+    var meanSourcePosition = sourcePositionsSum / sourcePositions.length;
+    var xPosition;
+    if (possiblePositions.length > 0) {
+        possiblePositions = fp_1.sortBy(function (x) { return Math.abs(x - meanSourcePosition); })(possiblePositions);
+        xPosition = possiblePositions[0];
+    }
+    else {
+        xPosition = Math.round(meanSourcePosition);
+        // Shift nodes to the right by one place to make space for new node column
+        newColumn = true;
+    }
+    return { xPosition: xPosition, newColumn: newColumn };
+}
 exports.default = Layout;
 //# sourceMappingURL=layout.js.map

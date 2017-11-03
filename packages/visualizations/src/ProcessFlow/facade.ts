@@ -77,6 +77,8 @@ class ProcessFlow extends AbstractFacade {
     const focusElement: IFocusElement = this.state.config().focusElement
     if (focusElement) {
       this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
+    } else {
+      this.events.emit(Events.FOCUS.ELEMENT.OUT)
     }
     return this.canvas.elementFor("series").node()
   }

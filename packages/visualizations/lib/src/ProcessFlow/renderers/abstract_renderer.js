@@ -12,6 +12,7 @@ var AbstractRenderer = /** @class */ (function () {
         this.events = events;
         this.el = el;
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement());
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, fp_2.bind(this.removeHighlights, this));
     }
     AbstractRenderer.prototype.onMouseOver = function (ctx) {
         return function (d) {
@@ -22,7 +23,7 @@ var AbstractRenderer = /** @class */ (function () {
         this.highlight(element, d);
         var focusPoint = this.focusPoint(element, d);
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { focusPoint: focusPoint, d: d });
-        element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint));
+        element.classed("hover", true).on("mouseleave", this.onMouseOut(this));
     };
     AbstractRenderer.prototype.focusElement = function () {
         var _this = this;
@@ -59,11 +60,10 @@ var AbstractRenderer = /** @class */ (function () {
         })
             .classed("highlighted", false);
     };
-    AbstractRenderer.prototype.onMouseOut = function (ctx, focusPoint) {
-        return function (d) {
-            ctx.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT, focusPoint);
+    AbstractRenderer.prototype.onMouseOut = function (ctx) {
+        return function () {
+            ctx.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
             var element = d3.select(this);
-            ctx.removeHighlights();
             element.classed("hover", false);
         };
     };

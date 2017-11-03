@@ -3,7 +3,7 @@ import * as d3 from "d3-selection"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import Node from "../node"
 import { IFocusElement } from "../typings"
-import { every, invoke } from "lodash/fp"
+import { every, invoke, bind } from "lodash/fp"
 
 import {
   IConfig,
@@ -33,6 +33,7 @@ abstract class AbstractRenderer {
     this.events = events
     this.el = el
     this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement())
+    this.events.on(Events.FOCUS.ELEMENT.OUT, bind(this.removeHighlights, this))
   }
 
   onMouseOver(ctx: AbstractRenderer): (d: TLink | TNode) => void {
@@ -45,7 +46,7 @@ abstract class AbstractRenderer {
     this.highlight(element, d)
     let focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
-    element.classed("hover", true).on("mouseleave", this.onMouseOut(this, focusPoint))
+    element.classed("hover", true).on("mouseleave", this.onMouseOut(this))
   }
 
   focusElement(): (elementInfo: IFocusElement) => void {
@@ -85,11 +86,10 @@ abstract class AbstractRenderer {
 
   abstract focusPoint(element: any, d: TLink | TNode): IFocus
 
-  onMouseOut(ctx: AbstractRenderer, focusPoint: IFocus): any {
-    return function(d: TLink | TNode): void {
-      ctx.events.emit(Events.FOCUS.ELEMENT.OUT, focusPoint)
+  onMouseOut(ctx: AbstractRenderer): any {
+    return function(): void {
+      ctx.events.emit(Events.FOCUS.ELEMENT.OUT)
       const element: any = d3.select(this)
-      ctx.removeHighlights()
       element.classed("hover", false)
     }
   }
