@@ -60,7 +60,7 @@ class DataHandler {
     return node
   }
 
-  setNodeAccessors(accessors: TAccessors) {
+  setNodeAccessors(accessors: TAccessors): void {
     this.nodeAccessors = new NodeAccessors()
     this.nodeAccessors.setAccessors(accessors)
   }
@@ -111,34 +111,36 @@ class DataHandler {
     return new Link(attrs, this.linkAccessors.accessors)
   }
 
-  computeLinks(): void {
-    forEach((journey: IJourney): void => {
-      const path: string[] = journey.path
-      const computeLink: (i: number) => void = (i: number): void => {
-        const sourceId: string = path[i]
-        const targetId: string = path[i + 1]
-        const sourceNode: TNode = this.findNode(sourceId)
-        const targetNode: TNode = this.findNode(targetId)
+  computeJourneyLinks(journey: IJourney): void {
+    const path: string[] = journey.path
+    const computeLink: (i: number) => void = (i: number): void => {
+      const sourceId: string = path[i]
+      const targetId: string = path[i + 1]
+      const sourceNode: TNode = this.findNode(sourceId)
+      const targetNode: TNode = this.findNode(targetId)
 
-        const existingLink: TLink = this.findLink(sourceId, targetId)
-        if (existingLink) {
-          existingLink.attributes.size += journey.size
-        } else {
-          const linkAttrs: ILinkAttrs = {
-            source: sourceNode,
-            sourceId: sourceNode.id(),
-            target: targetNode,
-            targetId: targetNode.id(),
-            size: journey.size,
-          }
-          const newLink: TLink = this.addLink(linkAttrs)
-          this.links.push(newLink)
-          sourceNode.sourceLinks.push(newLink)
-          targetNode.targetLinks.push(newLink)
+      const existingLink: TLink = this.findLink(sourceId, targetId)
+      if (existingLink) {
+        existingLink.attributes.size += journey.size
+      } else {
+        const linkAttrs: ILinkAttrs = {
+          source: sourceNode,
+          sourceId: sourceNode.id(),
+          target: targetNode,
+          targetId: targetNode.id(),
+          size: journey.size,
         }
+        const newLink: TLink = this.addLink(linkAttrs)
+        this.links.push(newLink)
+        sourceNode.sourceLinks.push(newLink)
+        targetNode.targetLinks.push(newLink)
       }
-      times(computeLink)(path.length - 1)
-    })(this.journeys)
+    }
+    times(computeLink)(path.length - 1)
+  }
+
+  computeLinks(): void {
+    forEach(this.computeJourneyLinks)(this.journeys)
   }
 
   xGridSpacing(): number {
@@ -175,6 +177,8 @@ class DataHandler {
     forEach((node: TNode): void => {
       node.y = (node.y + 1) * yGridSpacing
     })(this.layout.nodes)
+
+    // Assign x values
     forEach((row: string): void => {
       flow(
         sortBy((node: TNode): number => node.x),
