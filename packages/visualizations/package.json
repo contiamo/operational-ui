@@ -7,14 +7,18 @@
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
     "package": "rm -rf lib && tsc",
     "package:watch": "rm -rf lib && tsc -w",
-    "prettier": "echo 'Prettier is not yet ready ready for the pre-commit hook. See prettier_ script for tentative implementation.'",
-    "prettier_": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",
-    "lint": "echo 'Tslint is not yet ready ready for the pre-commit hook. See tslint_ script for tentative implementation.'",
-    "lint_": "tslint './index.ts' --fix && tslint './src/**/*.{ts,tsx}' --fix",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add ."
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:diff": "jest --onlyChanged",
+    "lint": "tslint './index.ts' --fix && tslint './src/**/*.{ts,tsx}' --fix",
+    "lint:diff": "cd ../.. && tslint $(git diff --cached --name-only | grep '\\(js\\|jsx\\|tsx\\|ts\\)$') --fix",
+    "prettier": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",
+    "prettier:diff": "cd ../.. && prettier $(git diff --cached --name-only | grep '\\(js\\|jsx\\|tsx\\|ts\\)$') --write",
+    "precommit": "npm run test:diff && npm run lint:diff && npm run prettier:diff && git add .",
+    "preversion": "npm run precommit",
+    "version": "npm run package && git add ."
   },
   "dependencies": {
     "d3": "^4.10.2",
