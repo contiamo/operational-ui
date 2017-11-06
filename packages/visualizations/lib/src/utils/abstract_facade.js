@@ -5,6 +5,7 @@ var event_bus_1 = require("./event_bus");
 var fp_1 = require("lodash/fp");
 var AbstractChart = /** @class */ (function () {
     function AbstractChart(context) {
+        this.__disposed = false;
         this.drawn = false;
         this.dirty = false;
         this.context = context;
@@ -25,10 +26,7 @@ var AbstractChart = /** @class */ (function () {
                 width: 500,
             },
             accessors: {},
-            computed: {
-                series: {},
-                canvas: {},
-            }
+            computed: {}
         };
     };
     AbstractChart.prototype.defaultState = function () {

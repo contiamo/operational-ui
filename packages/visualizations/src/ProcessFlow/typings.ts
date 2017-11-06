@@ -1,48 +1,56 @@
-import {
-  IDefaultConfig,
-  IKeyValueObject,
-  INestedKeyValueObject,
-  IState,
-  TEvents,
-  TSeriesEl,
-  TStateWriter,
-} from "../utils/typings"
-import * as d3 from "d3-selection"
 // Type definitions for the Contiamo Process Flow visualization
+import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-export {
+import {
+  IAccessors,
+  IAccessorsObject,
   IDefaultConfig,
-  IKeyValueObject,
-  INestedKeyValueObject,
+  IEvents,
+  INestedObject,
+  IObject,
   IState,
-  TEvents,
+  Partial,
+  TD3Selection,
+  TSeriesEl,
+  TStateWriter,
+} from "../utils/typings"
+
+export {
+  IAccessors,
+  IAccessorsObject,
+  IDefaultConfig,
+  IEvents,
+  INestedObject,
+  IObject,
+  IState,
+  Partial,
+  TD3Selection,
   TSeriesEl,
   TStateWriter,
 }
 
-export type TNode = Nodes
 export type TLink = Link
-export type TNodeSelection = d3.Selection<d3.BaseType, TNode, d3.BaseType, any>
-export type TLinkSelection = d3.Selection<d3.BaseType, TLink, d3.BaseType, any>
+export type TNode = Nodes
 
-//@TODO
-export type TAccessors = any
+export type TAccessors = IObject
 
-// @TODO How do I import the d3 scale types?
+export type TElementSelection = d3.Selection<d3.BaseType, TNode | TLink, d3.BaseType, any>
+export type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>
+export type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
+
+// @TODO Import the d3 scale types
 export type TScale = (size: number) => number
 
 export interface IFocusElement {
   type: "node" | "link"
-  matchers: IKeyValueObject
+  matchers: IObject
 }
 
-export interface IConfig {
+export interface IConfig extends IDefaultConfig {
   borderColor: string
-  duration: number
-  focusElement?: IFocusElement // type ("node"/"link"), id / [sourceId, targetId]
-  height: number
+  focusElement?: IFocusElement
   hidden: boolean
   highlightColor: string
   horizontalNodeSpacing: number
@@ -55,10 +63,7 @@ export interface IConfig {
   nodeBorderWidth: number
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
-  uid: string
   verticalNodeSpacing: number
-  visualizationName: string
-  width: number
 }
 
 export interface IJourney {
@@ -115,5 +120,3 @@ export interface IBreakdown {
   size: number
   percentage: number
 }
-
-export type TD3SelectionNoData = d3.Selection<d3.BaseType, null, Window, null>

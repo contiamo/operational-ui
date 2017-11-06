@@ -2,11 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var AccessorsFactory = function (defaultAccessors) {
-    var wrapWithDefaultAccessor = function (customAccessor, defaultAccessor) {
-        return function (node) {
-            return customAccessor(node) || defaultAccessor(node);
-        };
-    };
+    function wrapWithDefaultAccessor(customAccessor, defaultAccessor) {
+        return function (node) { return customAccessor(node) || defaultAccessor(node); };
+    }
     return /** @class */ (function () {
         function Accessors() {
             this.resetAccessors();

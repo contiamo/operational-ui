@@ -1,6 +1,6 @@
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
-import { IState, TEvents, TSeriesEl, IData } from "./typings"
+import { IState, IEvents, TSeriesEl, IData } from "./typings"
 
 class Renderer {
   links: Links
@@ -8,7 +8,7 @@ class Renderer {
   state: IState
   el: TSeriesEl
 
-  constructor(state: IState, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, events: IEvents, el: TSeriesEl) {
     this.el = el
     this.links = new Links(state, events, el)
     this.nodes = new Nodes(state, events, el)

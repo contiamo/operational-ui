@@ -2,10 +2,10 @@ import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
-import { TNode, TScale, IFocus, TNodeSelection } from "../typings"
+import { TNode, TScale, IFocus, TNodeSelection, IObject } from "../typings"
 import * as styles from "./styles"
 
-const nodeLabelOptions: any = {
+const nodeLabelOptions: IObject = {
   top: {
     dy: "0",
     textAnchor: "middle",
@@ -38,7 +38,7 @@ const nodeLabelOptions: any = {
   },
 }
 
-const nodeShapeOptions: any = {
+const nodeShapeOptions: IObject = {
   squareDiamond: {
     symbol: symbolSquare,
     rotation: 45
@@ -63,7 +63,7 @@ class Nodes extends AbstractRenderer {
   data: TNode[]
 
   updateDraw(): void {
-    let nodeGroups: any = this.el.select("g.nodes-group")
+    let nodeGroups: TNodeSelection = this.el.select("g.nodes-group")
       .selectAll("g.node-group")
       .data(this.data, (node: TNode): string => node.id())
 
@@ -79,7 +79,7 @@ class Nodes extends AbstractRenderer {
 
   enterAndUpdate(nodeGroups: TNodeSelection): void {
     const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
-      borderScale: any = this.nodeBorderScale(scale),
+      borderScale: TScale = this.nodeBorderScale(scale),
       ctx: Nodes = this
     let n: number = 0
 
@@ -192,8 +192,8 @@ class Nodes extends AbstractRenderer {
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(nodeGroups: any): void {
-    const that: any = this
+  updateNodeLabels(nodeGroups: TNodeSelection): void {
+    const that: Nodes = this
     nodeGroups
       .enter()
       .merge(nodeGroups)
@@ -209,7 +209,7 @@ class Nodes extends AbstractRenderer {
       .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
   }
 
-  focusPoint(element: any, d: TNode): IFocus {
+  focusPoint(element: TNodeSelection, d: TNode): IFocus {
     if (d == null) return
     const offset: number = this.getNodeBoundingRect(element.node()).width / 2
     return {

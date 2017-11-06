@@ -8,14 +8,15 @@ import { every, invoke, bind } from "lodash/fp"
 import {
   IConfig,
   IFocus,
-  TEvents,
+  IState,
+  TElementSelection,
+  IEvents,
   TLink,
   TLinkSelection,
   TNode,
   TNodeSelection,
   TScale,
   TSeriesEl,
-  IState,
 } from "../typings"
 import Events from "../../utils/event_catalog"
 
@@ -23,12 +24,12 @@ abstract class AbstractRenderer {
   config: IConfig
   data: TNode[] | TLink[]
   el: TSeriesEl
-  events: TEvents
+  events: IEvents
   state: IState
   type: string
   focusElementAccessor: string
 
-  constructor(state: IState, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, events: IEvents, el: TSeriesEl) {
     this.state = state
     this.events = events
     this.el = el
@@ -42,7 +43,7 @@ abstract class AbstractRenderer {
     }
   }
 
-  mouseOver(element: any, d: TLink | TNode): void {
+  mouseOver(element: TElementSelection, d: TLink | TNode): void {
     this.highlight(element, d)
     let focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
@@ -67,7 +68,7 @@ abstract class AbstractRenderer {
     }
   }
 
-  highlight(element: any, d: TLink | TNode): void {
+  highlight(element: TElementSelection, d: TLink | TNode): void {
     this.removeHighlights()
     element
       .classed("highlighted", true)
@@ -84,12 +85,12 @@ abstract class AbstractRenderer {
       .classed("highlighted", false)
   }
 
-  abstract focusPoint(element: any, d: TLink | TNode): IFocus
+  abstract focusPoint(element: TElementSelection, d: TLink | TNode): IFocus
 
   onMouseOut(ctx: AbstractRenderer) {
     return function(): void {
       ctx.events.emit(Events.FOCUS.ELEMENT.OUT)
-      const element: any = d3.select(this)
+      const element: TElementSelection = d3.select(this)
       element.classed("hover", false)
     }
   }

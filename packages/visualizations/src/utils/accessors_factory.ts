@@ -1,20 +1,16 @@
 import { reduce, bind, forEach } from "lodash/fp"
+import { IObject } from "./typings"
 
 type AccessorFunction = (node: any) => any
 
-let AccessorsFactory: any = (defaultAccessors: any) => {
-  const wrapWithDefaultAccessor: (a: AccessorFunction, b: AccessorFunction) => AccessorFunction = function(
-    customAccessor: AccessorFunction,
-    defaultAccessor: AccessorFunction,
-  ) {
-    return function(node: any) {
-      return customAccessor(node) || defaultAccessor(node)
-    }
+let AccessorsFactory: any = (defaultAccessors: IObject) => {
+  function wrapWithDefaultAccessor(customAccessor: AccessorFunction, defaultAccessor: AccessorFunction) {
+    return (node: any) => customAccessor(node) || defaultAccessor(node)
   }
 
   return class Accessors {
-    accessors: Object
-    customAccessors: Object
+    accessors: IObject
+    customAccessors: IObject
 
     constructor() {
       this.resetAccessors()
@@ -25,7 +21,7 @@ let AccessorsFactory: any = (defaultAccessors: any) => {
       this.customAccessors = {}
     }
 
-    setAccessors(accessors: any): void {
+    setAccessors(accessors: IObject): void {
       forEach.convert({ cap: false })(
         bind(function(method: AccessorFunction, property: string): void {
           this.customAccessors[property] = method
@@ -41,7 +37,7 @@ let AccessorsFactory: any = (defaultAccessors: any) => {
       }, this)
     }
 
-    buildAccessors(): Object {
+    buildAccessors(): IObject {
       return reduce.convert({ cap: false })(
         bind(function(memo: any, defaultAccessor: AccessorFunction, property: string): any {
           memo[property] = this.propertyAccessor(property)

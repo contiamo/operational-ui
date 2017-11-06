@@ -1,7 +1,7 @@
 import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
-import { TLink, TNode, TScale, IFocus, TLinkSelection, IFocusElement } from "../typings"
+import { TLink, TNode, TScale, IFocus, TLinkSelection, IFocusElement, IData, TD3Selection } from "../typings"
 import { easeCubicInOut } from "d3-ease"
 import * as styles from "./styles"
 import { find } from "lodash/fp"
@@ -89,7 +89,7 @@ class Links extends AbstractRenderer {
   // Paths start as a single point at the source node. If the source node has already been rendered,
   // use its position at the start of the transition.
   linkStartPath(link: TLink): string {
-    const previousData: any = this.state.previous.get("computed").series.data,
+    const previousData: IData = this.state.previous.get("computed").series.data,
       previousNodes: TNode[] = previousData ? previousData.nodes : [],
       existingSource: TNode = find((node: TNode): boolean => node.id() === link.sourceId())(previousNodes),
       x: number = existingSource ? existingSource.x : link.source().x,
@@ -108,9 +108,9 @@ class Links extends AbstractRenderer {
     return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
   }
 
-  highlight(element: any, d: TLink): void {
+  highlight(element: TLinkSelection, d: TLink): void {
     // Highlight path.element when `path.${styles.border}` is hovered
-    const pathEl: any = this.el.selectAll(`path.link.${styles.element}`)
+    const pathEl: TD3Selection = this.el.selectAll(`path.link.${styles.element}`)
       .filter((link: TLink): boolean => {
         return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
       })
@@ -124,7 +124,7 @@ class Links extends AbstractRenderer {
       })
   }
 
-  focusPoint(element: any, d: TLink): IFocus {
+  focusPoint(element: TLinkSelection, d: TLink): IFocus {
     if (d == null) return
     const scale: TScale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth])
 

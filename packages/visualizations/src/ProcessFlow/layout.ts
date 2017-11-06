@@ -1,4 +1,4 @@
-import { map, flow, find, forEach, indexOf, reduce, filter, sortBy, uniq, bind } from "lodash/fp"
+import { map, flow, find, forEach, indexOf, reduce, filter, sortBy, uniq } from "lodash/fp"
 import { TNode, TLink, IState, IData } from "./typings"
 
 class Layout {
@@ -116,7 +116,7 @@ function singleSourceAbove(sourcePositions: number[]): any {
 // Check that there isn't a non-source node vertically between 2 linked nodes.
 function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
   return (xValue: number): boolean => {
-    const findSourceNodeAtX: any = find((link: TLink): boolean => link.source().x === xValue)
+    const findSourceNodeAtX = find((link: TLink): boolean => link.source().x === xValue)
     const maxYVal: any = flow(
       filter((n: TNode): boolean => n.x === xValue),
       reduce((max: number, n: TNode): number => {

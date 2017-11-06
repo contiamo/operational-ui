@@ -18,7 +18,7 @@ var DataHandler = /** @class */ (function () {
         this.journeys = accessors.data.journeys(data);
         this.setNodeAccessors(accessors.node);
         this.setLinkAccessors(accessors.link);
-        this.initializeNodes(data);
+        this.initializeNodes(accessors.data.nodes(data));
         this.initializeLinks(data);
         this.layout.computeLayout(this.nodes);
         this.positionNodes();
@@ -28,9 +28,8 @@ var DataHandler = /** @class */ (function () {
             links: this.links,
         };
     };
-    DataHandler.prototype.initializeNodes = function (data) {
-        var accessors = this.state.current.get("accessors");
-        this.nodes = fp_1.map(fp_1.bind(this.addNode, this))(accessors.data.nodes(data));
+    DataHandler.prototype.initializeNodes = function (nodeAttrs) {
+        this.nodes = fp_1.map(fp_1.bind(this.addNode, this))(nodeAttrs);
         fp_1.forEach(function (node) {
             node.sourceLinks = [];
             node.targetLinks = [];
@@ -79,11 +78,10 @@ var DataHandler = /** @class */ (function () {
         this.links = [];
         this.computeLinks();
     };
-    // @TODO why is there a type error if the method output has type TLink?
     DataHandler.prototype.findLink = function (sourceId, targetId) {
-        var checkIds = function (link) {
+        function checkIds(link) {
             return link.sourceId() === sourceId && link.targetId() === targetId;
-        };
+        }
         return fp_1.find(checkIds)(this.links);
     };
     DataHandler.prototype.setLinkAccessors = function (accessors) {

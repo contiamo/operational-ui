@@ -19,7 +19,8 @@ var Canvas = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Canvas.prototype.createEl = function () {
-        var el = d3.select(document.createElementNS(d3.namespaces["svg"], "svg")).attr("class", "processflow");
+        var el = d3.select(document.createElementNS(d3.namespaces["svg"], "svg"))
+            .attr("class", "processflow");
         this.stateWriter("elRect", el.node().getBoundingClientRect());
         return el;
     };
