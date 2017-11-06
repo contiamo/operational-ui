@@ -14,8 +14,12 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled, active = _a.active;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff", textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]), disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
-    return __assign({ backgroundColor: backgroundColor }, theme.typography.body, { position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff";
+    var textColor = active
+        ? theme.colors.usage.link
+        : contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]);
+    var disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
+    return __assign({ backgroundColor: backgroundColor, fontWeight: active ? 600 : 400 }, theme.typography.body, { position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor }, disabledStyle, { "&:link, &:visited": {
             color: textColor
@@ -28,7 +32,7 @@ var style = function (_a) {
             backgroundColor: contiamo_ui_utils_1.darken(backgroundColor)(2),
             // The text color needs to change too if it gets too dark 😁
             // Also, here's a prime benefit of functional JS: function composition!
-            color: contiamo_ui_utils_1.readableTextColor(contiamo_ui_utils_1.darken(backgroundColor)(5))(["black", "white"])
+            color: active ? textColor : contiamo_ui_utils_1.readableTextColor(contiamo_ui_utils_1.darken(backgroundColor)(5))(["black", "white"])
         } });
 };
 exports.style = style;

@@ -1,16 +1,16 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Link } from "react-router-dom"
-import { Box, Grid, BarChart2 } from "react-feather"
 
-import { Card, Icon } from "contiamo-ui-components"
+import { Card, Icon, Heading2Type, Theme } from "contiamo-ui-components"
 
-const style = () => ({
-  "& .grid": {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gridGap: 16,
-    marginTop: 32
+const Grid = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  gridGap: 16,
+  marginTop: 20,
+  "& a:link": {
+    textDecoration: "none"
   },
   "& .card": {
     position: "relative",
@@ -18,9 +18,6 @@ const style = () => ({
     textAlign: "center",
     transition: ".3s transform ease",
     cursor: "pointer"
-  },
-  "& .grid a:link": {
-    textDecoration: "none"
   },
   "& .card.card_disabled": {
     opacity: 0.6,
@@ -45,44 +42,59 @@ const style = () => ({
     opacity: 1
   },
   "& .card h2": {
+    ...theme.typography.title,
     marginBottom: 0,
-    fontSize: 24,
-    marginTop: 16,
-    fontWeight: 300,
+    marginTop: 10,
     color: "#777"
   }
-})
+}))
 
-const myCard = ({ className }: { className?: string }) => (
-  <div className={className} style={{ display: "block", padding: 32, maxWidth: 700 }}>
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  "& > h1": {
+    ...theme.typography.title,
+    margin: 0
+  },
+  "& > h2": {
+    ...theme.typography.heading1,
+    marginTop: 0
+  },
+  display: "block",
+  padding: 32,
+  maxWidth: 700
+}))
+
+const MyCard = ({ className }: { className?: string }) => (
+  <Container className={className}>
     <h1>Contiamo UI</h1>
     <h2>Building blocks for effective operational interfaces</h2>
 
-    <div className="grid">
-      <Link to="/styleguide">
-        <Card className="card">
-          <Icon name="Edit" size={30} color="#777" />
-          <h2>Style guide</h2>
-        </Card>
-      </Link>
+    <Grid>
       <Link to="/components">
         <Card className="card">
           <Icon name="Box" size={30} color="#777" />
           <h2>Components</h2>
         </Card>
       </Link>
-      <Card className="card card_disabled">
-        <Icon name="Grid" size={30} color="#777" />
-        <h2>Composed</h2>
-      </Card>
+      <Link to="/blocks">
+        <Card className="card card_disabled">
+          <Icon name="Grid" size={30} color="#777" />
+          <h2>Blocks</h2>
+        </Card>
+      </Link>
       <Link to="/visualizations">
         <Card className="card">
           <Icon name="BarChart2" size={30} color="#777" />
           <h2>Visualizations</h2>
         </Card>
       </Link>
-    </div>
-  </div>
+      <Link to="/documentation">
+        <Card className="card">
+          <Icon name="Edit" size={30} color="#777" />
+          <h2>Documentation</h2>
+        </Card>
+      </Link>
+    </Grid>
+  </Container>
 )
 
-export default glamorous(myCard)(style)
+export default MyCard

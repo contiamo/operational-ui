@@ -20,12 +20,15 @@ export interface IProps {
 }
 
 const style: {} = ({ theme, color, disabled, active }: IProps) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff",
-    textColor = readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]),
-    disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
+  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff"
+  const textColor = active
+    ? theme.colors.usage.link
+    : readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"])
+  const disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
     backgroundColor,
+    fontWeight: active ? 600 : 400,
     ...theme.typography.body,
     position: "relative",
     display: "flex",
@@ -54,7 +57,7 @@ const style: {} = ({ theme, color, disabled, active }: IProps) => {
 
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
-      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
+      color: active ? textColor : readableTextColor(darken(backgroundColor)(5))(["black", "white"])
     }
   }
 }

@@ -45,8 +45,8 @@ const Content = glamorous.div(
   })
 )
 
-const $1 = ({ value }: IProps) => (
-  <Container>
+const $1 = ({ css, className, value }: IProps) => (
+  <Container css={css} className={className}>
     <Content active>{value}</Content>
   </Container>
 )

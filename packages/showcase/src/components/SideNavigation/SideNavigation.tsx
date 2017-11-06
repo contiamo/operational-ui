@@ -36,10 +36,10 @@ const style: {} = {
 }
 
 const links: ILink[] = [
-  { url: "/styleguide", label: "Style guide", icon: "Edit" },
   { url: "/components", label: "Components", icon: "Box" },
-  { label: "Composed", icon: "Grid" },
-  { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
+  { url: "/blocks", label: "Blocks", icon: "Grid" },
+  { url: "/visualizations", label: "Visualizations", icon: "BarChart2" },
+  { url: "/documentation", label: "Documentation", icon: "Edit" }
 ]
 
 const highlightColor = "rgb(20, 153, 206)"

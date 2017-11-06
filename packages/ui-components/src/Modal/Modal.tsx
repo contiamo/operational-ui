@@ -26,7 +26,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
 const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
   backgroundColor: theme.colors.palette.white,
   padding: theme.spacing,
-  boxShadow: "0 3px 7px rgba(0, 0, 0, .3)"
+  boxShadow: theme.shadows.popup
 }))
 
 class Modal extends React.Component<IProps, {}> {

@@ -32,7 +32,7 @@ var Content = glamorous_1.default.div(function (_a) {
     return ({
         backgroundColor: theme.colors.palette.white,
         padding: theme.spacing,
-        boxShadow: "0 3px 7px rgba(0, 0, 0, .3)"
+        boxShadow: theme.shadows.popup
     });
 });
 var Modal = /** @class */ (function (_super) {

@@ -10,9 +10,10 @@ import SideNavigation from "./components/SideNavigation/SideNavigation"
 import Header from "./components/Header/Header"
 
 import Intro from "./pages/Intro"
-import StyleGuide from "./pages/styleguide/StyleGuide"
-import Components from "./pages/components/Components"
-import Visualizations from "./pages/visualizations/Visualizations"
+import Documentation from "./pages/Documentation/Documentation"
+import UiComponents from "./pages/UiComponents/UiComponents"
+import UiBlocks from "./pages/UiBlocks/UiBlocks"
+import Visualizations from "./pages/Visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
@@ -22,13 +23,6 @@ const Container = glamorous.div({
     height: 1,
     border: 0,
     backgroundColor: "rgba(0, 0, 0, 0.14)"
-  },
-  "& h1": {
-    margin: 0,
-    fontSize: "2rem"
-  },
-  "& h2": {
-    fontSize: "1.3rem"
   },
   "& p": {
     marginTop: 0,
@@ -45,12 +39,6 @@ const Content = glamorous.div({
   paddingLeft: 60,
   "& > *": {
     width: "100%"
-  },
-  "& > :nth-child(2)": {
-    display: "flex",
-    alignItems: "flex-start",
-    padding: 16,
-    height: "100vh"
   }
 })
 
@@ -64,8 +52,9 @@ const App: React.SFC<{}> = () => (
         <Content>
           <Header />
           <Route exact path="/" component={Intro} />
-          <Route path="/styleguide" component={StyleGuide} />
-          <Route path="/components" component={Components} />
+          <Route path="/documentation" component={Documentation} />
+          <Route path="/blocks" component={UiBlocks} />
+          <Route path="/components" component={UiComponents} />
           <Route path="/visualizations" component={Visualizations} />
         </Content>
       </Container>

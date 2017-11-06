@@ -3,6 +3,7 @@ import { Route, withRouter } from "react-router-dom"
 
 import { Card, CardHeader } from "contiamo-ui-components"
 import Canvas from "../../components/Canvas/Canvas"
+import PageContent from "../../components/PageContent/PageContent"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
 
@@ -42,12 +43,12 @@ const links: ISidebarLink[] = [
 ]
 
 export default () => (
-  <div>
-    <SidebarWithRouter links={links} css={{ height: "100%" }} />
+  <PageContent>
+    <SidebarWithRouter links={links} />
     <Canvas>
       <Route exact path="/visualizations" component={Intro} />
       <Route exact path="/visualizations/process-flow/main" component={ProcessFlowMain} />
       <Route path="/visualizations/process-flow/cases/:case" component={ProcessFlowCases} />
     </Canvas>
-  </div>
+  </PageContent>
 )
