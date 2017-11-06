@@ -9,7 +9,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
-var inputHeight = 27;
+var inputHeight = 31;
 var Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
@@ -19,9 +19,9 @@ var Container = glamorous_1.default.div(function (_a) {
         "& .co_card": {
             display: isExpanded ? "block" : "none",
             position: "absolute",
-            top: 30,
-            left: "50%",
-            transform: "translate3d(-50%, 0, 0)",
+            boxShadow: theme.shadows.popup,
+            top: inputHeight + 4,
+            left: 0,
             padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
             width: 210 + 2 * theme.spacing,
             zIndex: theme.baseZIndex + 1000
@@ -93,7 +93,11 @@ var Day = glamorous_1.default.div({
 exports.Day = Day;
 var Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", padding: theme.spacing / 2, height: inputHeight, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative" }));
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative", "&:focus": {
+            outline: 0,
+            borderColor: "rgba(82,168,236,.8)",
+            boxShadow: theme.shadows.focus
+        } }));
 });
 exports.Input = Input;
 var ClearButton = glamorous_1.default.div(function (_a) {

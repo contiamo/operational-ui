@@ -2,7 +2,7 @@
 
 exports[`PropsTable Should render correctly with props 1`] = `
 <table
-  class="css-xa6ngs"
+  class="css-hd1d6e"
 >
   <thead>
     <tr>
@@ -43,7 +43,7 @@ exports[`PropsTable Should render correctly with props 1`] = `
 
 exports[`PropsTable Should render correctly without props 1`] = `
 <table
-  class="css-xa6ngs"
+  class="css-hd1d6e"
 >
   <thead>
     <tr>

@@ -18,7 +18,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   boxShadow: theme.shadows.card,
   overflow: "auto",
   scrollBehavior: "smooth", // future-proof
-  fontWeight: 300,
   backgroundColor: theme.colors.usage.cardBackground,
   color: theme.colors.palette.grey80
 }))

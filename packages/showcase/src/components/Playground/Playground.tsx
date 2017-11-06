@@ -3,7 +3,7 @@ import glamorous, { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
 import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-components"
+import { contiamoTheme, Theme } from "contiamo-ui-components"
 import transformSnippet from "./transform-snippet"
 
 interface IProps {
@@ -62,7 +62,7 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
     minHeight: 320
   },
   "& .CodeMirror-code": {
-    fontFamily: "monospace"
+    fontFamily: "Menlo, Consolas, 'DejaVu Sans Mono', monospace"
   },
   "& .CodeMirror-code pre": {
     fontSize: 13,
@@ -130,6 +130,7 @@ class Playground extends React.Component<IProps, IState> {
           {this.state.isExpanded ? "Collapse (Esc)" : "Give yourself some space - expand this playground"}
         </ExpandPrompt>
         <ComponentPlayground
+          theme="mbo"
           codeText={transformSnippet(snippet)}
           scope={{ React, ...wrappedComponents, ...(scope || {}) }}
         />

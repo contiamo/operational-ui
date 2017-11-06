@@ -17,24 +17,26 @@ var palette = {
     error: "#DE1A1A",
     white: "#FFFFFF",
     black: "#000000",
-    grey10: "#F5F5F5",
-    grey20: "#F1F1F1",
-    grey30: "#D0D9E5",
-    grey40: "#C6D1E1",
-    grey50: "#BBCADC",
+    grey10: "#F8F8F8",
+    grey20: "#e8e8e8",
+    grey30: "#D0D0D0",
+    grey40: "#C6C6C6",
+    grey50: "#BBBBBB",
     grey60: "#999999",
-    grey70: "#8092B0",
+    grey70: "#808080",
     grey80: "#747474",
-    grey90: "#445873"
+    grey90: "#444444"
 };
 var usageColors = {
-    bodyText: "#555f61",
-    lightText: "#969696",
-    emphasizedText: "#373d3f",
-    contentBorder: "#dadada",
     bodyBackground: "#F1F1F1",
+    bodyText: "#555f61",
     cardBackground: palette.white,
+    contentBorder: "#dadada",
     contentSeparatorLine: "#f2f2f2",
+    emphasizedText: "#373d3f",
+    lightText: "#969696",
+    link: palette.info,
+    sideNavigationBackground: "#393939",
     subContentSeparatorLine: "#f8f8f8"
 };
 var colors = {
@@ -57,7 +59,9 @@ var typography = {
 };
 var shadows = {
     pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-    card: "0px 1px 2px #d3d1d1"
+    card: "0px 1px 2px #d3d1d1",
+    focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
+    popup: "0 3px 12px rgba(0, 0, 0, .14)"
 };
 var defaultTheme = {
     typography: typography,

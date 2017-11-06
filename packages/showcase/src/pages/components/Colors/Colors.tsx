@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 
 import Playground from "../../../components/Playground/Playground"
 import Table from "../../../components/PropsTable/PropsTable"
-import { contiamoTheme, Card, CardHeader } from "contiamo-ui-components"
+import { contiamoTheme, Card, CardHeader, Theme } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/Colors.simple.snippet"
 

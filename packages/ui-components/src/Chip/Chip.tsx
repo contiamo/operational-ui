@@ -23,9 +23,10 @@ const Container = glamorous.div(
       display: "flex",
       alignItems: "center",
       width: "fit-content",
+      borderRadius: 2,
       padding: hasChip
-        ? `${theme.spacing / 4}px ${1.5 * theme.spacing}px ${theme.spacing / 4}px ${theme.spacing / 4}px`
-        : theme.spacing / 4,
+        ? `${theme.spacing / 3}px ${2.5 * theme.spacing}px ${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`
+        : `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
       cursor: "pointer",
       overflow: "hidden",
       color: readableTextColor(backgroundColor)(["black", "white"]),
@@ -44,7 +45,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
     borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
     color: readableTextColor(backgroundColor)(["black", "white"]),
     position: "absolute",
-    width: theme.spacing * 1.25,
+    width: theme.spacing * 1.75,
     top: 0,
     right: 0,
     display: "flex",
@@ -52,9 +53,8 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
     justifyContent: "center",
     height: "100%",
     padding: `0 ${theme.spacing / 4}px`,
-    transition: "background-color 0.3s",
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.15)"
+      backgroundColor: "rgba(255, 255, 255, 0.25)"
     }
   }
 })

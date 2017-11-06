@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 
 import TestResults from "./Marathon.TestResults"
+import { Theme } from "contiamo-ui-components"
 
 type TestFn = (done?: ((a: any) => void)) => void
 

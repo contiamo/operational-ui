@@ -29,7 +29,8 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         display: "flex",
         alignItems: "center",
-        padding: theme.spacing / 2,
+        padding: theme.spacing * 2 / 3,
+        borderRadius: 2,
         paddingRight: theme.spacing / 2 + 40,
         width: "fit-content",
         minHeight: 20,
@@ -41,7 +42,11 @@ var Container = glamorous_1.default.div(function (_a) {
         outline: "none",
         pointerEvents: disabled ? "none" : "all",
         // downward caret.
-        "&::after": __assign({}, updatingAfterStyles, { content: "''", position: "absolute", top: "50%", right: theme.spacing / 2, width: 0, height: 0, border: "4px solid transparent", borderTopColor: theme.colors.palette.grey70, transform: "translateY(calc(-50% + 2px))" })
+        "&::after": __assign({}, updatingAfterStyles, { content: "''", position: "absolute", top: "50%", right: theme.spacing / 2, width: 0, height: 0, border: "4px solid transparent", borderTopColor: theme.colors.palette.grey70, transform: "translateY(calc(-50% + 2px))" }),
+        "&:focus": {
+            borderColor: "rgba(82,168,236,.8)",
+            boxShadow: theme.shadows.focus
+        }
     };
 });
 exports.Container = Container;
@@ -57,13 +62,13 @@ var Options = glamorous_1.default.div({
     top: "calc(100% + 1px)",
     left: 0,
     width: "100%",
-    boxShadow: "0 2px 7px 2px rgba(0, 0, 0, .14)",
     opacity: 0,
     transform: "translateY(-10px)",
     animation: contiamo_ui_utils_1.fadeIn + " .15s forwards ease,\n    " + contiamo_ui_utils_1.resetTransform + " .15s forwards ease"
 }, function (_a) {
     var theme = _a.theme;
     return ({
+        boxShadow: theme.shadows.popup,
         zIndex: theme.baseZIndex + 100
     });
 });

@@ -19,7 +19,9 @@ exports.SideNavigationLink = SideNavigationLink_1.default;
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
-    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey80;
+    var backgroundColor = color
+        ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color])
+        : theme.colors.usage.sideNavigationBackground;
     var hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",

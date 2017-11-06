@@ -21,12 +21,18 @@ var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme, disabled = _a.disabled;
     return ({
         minWidth: 200,
-        padding: theme.spacing / 2,
+        padding: theme.spacing * 2 / 3,
         border: "1px solid",
         opacity: disabled ? 0.6 : 1.0,
-        borderColor: theme.colors.palette.grey30,
+        borderColor: "rgb(208, 217, 229)",
         font: "inherit",
-        WebkitAppearance: "none"
+        borderRadius: 2,
+        WebkitAppearance: "none",
+        "&:focus": {
+            outline: 0,
+            borderColor: "rgba(82,168,236,.8)",
+            boxShadow: theme.shadows.focus
+        }
     });
 });
 var Input = function (_a) {

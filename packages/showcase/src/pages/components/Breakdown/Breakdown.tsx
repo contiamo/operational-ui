@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Breakdown, Card, CardHeader } from "contiamo-ui-components"
+import { Breakdown, Card, CardHeader, Theme } from "contiamo-ui-components"
 
 import * as simpleSnippet from "./snippets/Breakdown.simple.snippet"
 import propDescription from "./propDescription"

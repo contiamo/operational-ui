@@ -4,7 +4,7 @@ import { Theme } from "../theme"
 
 import { fadeIn } from "contiamo-ui-utils"
 
-const inputHeight: number = 27
+const inputHeight: number = 31
 
 const Container: GlamorousComponent<
   { isExpanded: boolean },
@@ -16,9 +16,9 @@ const Container: GlamorousComponent<
   "& .co_card": {
     display: isExpanded ? "block" : "none",
     position: "absolute",
-    top: 30,
-    left: "50%",
-    transform: "translate3d(-50%, 0, 0)",
+    boxShadow: theme.shadows.popup,
+    top: inputHeight + 4,
+    left: 0,
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
     width: 210 + 2 * theme.spacing,
     zIndex: theme.baseZIndex + 1000
@@ -96,12 +96,18 @@ const Day: GlamorousComponent<
 const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
   userSelect: "none",
-  padding: theme.spacing / 2,
+  borderRadius: 2,
+  padding: theme.spacing * 2 / 3,
   height: inputHeight,
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
   width: 200,
-  position: "relative"
+  position: "relative",
+  "&:focus": {
+    outline: 0,
+    borderColor: "rgba(82,168,236,.8)",
+    boxShadow: theme.shadows.focus
+  }
 }))
 
 const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({

@@ -71,7 +71,6 @@ const TabTitle = glamorous.li(
     listStyle: "none",
     maxWidth: "100%",
     position: "relative",
-    transition: "all 250ms ease",
     padding: "5px 15px",
     zIndex: 10
   },
@@ -88,7 +87,6 @@ const TabTitle = glamorous.li(
   }): {} => ({
     ...theme.typography.body,
     ...overflowEllipsis,
-    fontSize: theme.typography.body.fontSize * 1.1,
     borderBottom: `2px solid transparent`,
     ...isActive
       ? {

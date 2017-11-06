@@ -32,12 +32,18 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
 
 const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }) => ({
   minWidth: 200,
-  padding: theme.spacing / 2,
+  padding: theme.spacing * 2 / 3,
   border: "1px solid",
   opacity: disabled ? 0.6 : 1.0,
-  borderColor: theme.colors.palette.grey30,
+  borderColor: "rgb(208, 217, 229)",
   font: "inherit",
-  WebkitAppearance: "none"
+  borderRadius: 2,
+  WebkitAppearance: "none",
+  "&:focus": {
+    outline: 0,
+    borderColor: "rgba(82,168,236,.8)",
+    boxShadow: theme.shadows.focus
+  }
 }))
 
 const Input = ({

@@ -15,23 +15,14 @@ export default () => (
       Hello, I am a card. And I can contain <em>many</em> different kinds of content.
     </Card>
 
-    <div style={{ display: "flex" }}>
-      <Card width={320} padding={16}>
-        Hello, we are cards.<br />
-      </Card>
-      <Card width={320} padding={16}>
-        Indeed, we are.<br />
-        Indeed, we can.<br />
-        <br />
-        <img
-          alt="Image"
-          src="http://1.bp.blogspot.com/-TMQ0popcxJ0/Tdk9o2tS4fI/AAAAAAAAVjk/HF7UhI-M4Hs/s1600/Hey+%253B+%2529.png"
-        />
-      </Card>
-    </div>
-
-    <Card>
-      Hello, I am a <em>also</em> card.
+    <Card width={320} padding={16}>
+      Indeed, we are.<br />
+      Indeed, we can.<br />
+      <br />
+      <img
+        alt="Image"
+        src="http://1.bp.blogspot.com/-TMQ0popcxJ0/Tdk9o2tS4fI/AAAAAAAAVjk/HF7UhI-M4Hs/s1600/Hey+%253B+%2529.png"
+      />
     </Card>
 
     <h4>Usage</h4>

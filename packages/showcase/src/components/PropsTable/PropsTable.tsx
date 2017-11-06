@@ -1,6 +1,8 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
+import { Theme } from "contiamo-ui-components"
+
 interface IProps {
   css?: any
   className?: string
@@ -21,16 +23,20 @@ const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
   textAlign: "left",
   backgroundColor: "white",
   "& th": {
-    border: `1px solid ${theme.colors.palette.grey10}`
+    border: "1px solid",
+    ...theme.typography.body,
+    fontWeight: 600
   },
   "& td": {
-    border: `1px solid ${theme.colors.palette.grey20}`
+    border: "1px solid",
+    ...theme.typography.body
   },
   "& td, & th": {
-    padding: theme.spacing / 2
+    borderColor: theme.colors.palette.grey20,
+    padding: theme.spacing
   },
   "& tr:nth-child(even)": {
-    backgroundColor: theme.colors.palette.grey10
+    backgroundColor: "#F8F8F8"
   }
 }))
 
