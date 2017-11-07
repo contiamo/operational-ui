@@ -3,7 +3,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { withD3Element } from "../../utils/d3_utils"
-import { TNode, TScale, IFocus, TNodeSelection, IObject } from "../typings"
+import { IFocus, IObject, TNode, TNodeSelection, TScale } from "../typings"
 import * as styles from "./styles"
 
 const nodeLabelOptions: IObject = {

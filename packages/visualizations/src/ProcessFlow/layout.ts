@@ -1,5 +1,5 @@
-import { map, flow, find, forEach, indexOf, reduce, filter, sortBy, uniq, get, identity } from "lodash/fp"
-import { TNode, TLink, IState, IData } from "./typings"
+import { filter, find, flow, forEach, get, identity,indexOf, map, reduce, sortBy, uniq } from "lodash/fp"
+import { IData, IState, TLink, TNode } from "./typings"
 
 class Layout {
   nodes: TNode[]

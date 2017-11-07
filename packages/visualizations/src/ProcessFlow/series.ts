@@ -1,6 +1,6 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
-import { IState, TStateWriter, IEvents, TSeriesEl, IData, IObject } from "./typings"
+import { IData, IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings"
 
 class Series {
   data: IData

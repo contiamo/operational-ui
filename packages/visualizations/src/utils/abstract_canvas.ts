@@ -1,7 +1,7 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
-import { reduce, isArray } from "lodash/fp"
-import { IState, TStateWriter, IEvents, TSeriesEl, TD3Selection, IObject } from "./typings"
+import { isArray, reduce } from "lodash/fp"
+import { IEvents, IObject, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
 import * as styles from "../styles/styles"
 
 abstract class AbstractCanvas {

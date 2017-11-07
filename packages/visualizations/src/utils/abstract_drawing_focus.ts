@@ -1,6 +1,6 @@
 import AbstractFocus from "./abstract_focus"
 import Events from "./event_catalog"
-import { IState, TStateWriter, IEvents, TSeriesEl } from "./typings"
+import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings"
 
 abstract class AbstractDrawingFocus extends AbstractFocus {
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl) {

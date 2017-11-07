@@ -1,14 +1,7 @@
 import StateHandler from "./state_handler"
 import EventEmitter from "./event_bus"
-import { uniqueId, merge } from "lodash/fp"
-import {
-  IAccessors,
-  IAccessorsObject,
-  IChartStateObject,
-  IDefaultConfig,
-  INestedObject,
-  IObject,
-} from "./typings"
+import { merge, uniqueId } from "lodash/fp"
+import { IAccessors, IAccessorsObject, IChartStateObject, IDefaultConfig, INestedObject, IObject } from "./typings"
 
 abstract class AbstractChart {
   state: StateHandler

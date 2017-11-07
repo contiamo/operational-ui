@@ -1,7 +1,7 @@
 import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
-import { TLink, TNode, TScale, IFocus, TLinkSelection, IFocusElement, IData, TD3Selection } from "../typings"
+import { IData, IFocus, IFocusElement, TD3Selection,TLink, TLinkSelection, TNode, TScale } from "../typings"
 import { easeCubicInOut } from "d3-ease"
 import { withD3Element } from "../../utils/d3_utils"
 import * as styles from "./styles"

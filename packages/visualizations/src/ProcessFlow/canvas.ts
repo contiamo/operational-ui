@@ -1,7 +1,7 @@
 import AbstractCanvas from "../utils/abstract_canvas"
 import * as d3 from "d3-selection"
 import { forEach } from "lodash/fp"
-import { TSeriesEl, TD3Selection } from "./typings"
+import { TD3Selection, TSeriesEl } from "./typings"
 
 class Canvas extends AbstractCanvas {
   createEl(): TSeriesEl {

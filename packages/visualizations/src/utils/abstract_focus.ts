@@ -1,5 +1,5 @@
 import Events from "./event_catalog"
-import { IState, TStateWriter, IEvents, TSeriesEl } from "./typings"
+import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings"
 
 abstract class AbstractFocus {
   el: TSeriesEl

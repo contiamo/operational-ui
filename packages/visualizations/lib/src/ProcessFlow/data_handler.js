@@ -29,7 +29,7 @@ var DataHandler = /** @class */ (function () {
         };
     };
     DataHandler.prototype.initializeNodes = function (nodeAttrs) {
-        this.nodes = fp_1.map(fp_1.bind(this.addNode, this))(nodeAttrs);
+        this.nodes = fp_1.map(this.addNode.bind(this))(nodeAttrs);
         fp_1.forEach(function (node) {
             node.sourceLinks = [];
             node.targetLinks = [];

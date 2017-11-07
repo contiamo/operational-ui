@@ -3,7 +3,7 @@ import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
-import { IFocusElement, INestedObject, IInputData, IConfig } from "./typings"
+import { IConfig,IFocusElement, IInputData, INestedObject } from "./typings"
 
 class ProcessFlow extends AbstractFacade {
   series: Series

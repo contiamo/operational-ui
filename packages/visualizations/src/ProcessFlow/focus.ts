@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import { uniqueId, forEach, reduce, map, flow } from "lodash/fp"
-import { IConfig, IFocus, IBreakdown, TLink, TNode, TSeriesEl, TD3Selection } from "./typings"
+import { flow, forEach, map, reduce, uniqueId } from "lodash/fp"
+import { IBreakdown, IConfig, IFocus, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {

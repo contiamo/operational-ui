@@ -1,4 +1,4 @@
-import { reduce, forEach } from "lodash/fp"
+import { forEach, reduce } from "lodash/fp"
 import { IObject } from "./typings"
 
 type AccessorFunction = (node: any) => any

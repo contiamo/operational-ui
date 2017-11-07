@@ -3,7 +3,7 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import Layout from "./layout"
-import { bind, map, forEach, find, times, extend, groupBy, flow, sortBy, get } from "lodash/fp"
+import { bind, extend, find, flow, forEach, get, groupBy, map, sortBy, times } from "lodash/fp"
 import {
   TNode,
   TLink,
@@ -54,7 +54,7 @@ class DataHandler {
   }
 
   initializeNodes(nodeAttrs: {}[]): void {
-    this.nodes = map(bind(this.addNode, this))(nodeAttrs)
+    this.nodes = map(this.addNode.bind(this))(nodeAttrs)
     forEach((node: TNode): void => {
       node.sourceLinks = []
       node.targetLinks = []
@@ -126,7 +126,7 @@ class DataHandler {
   computeLinks(): void {
     forEach((journey: IJourney): void => {
       const path: string[] = journey.path
-      const computeLink: (i: number) => void = (i: number): void => {
+      const computeLink = (i: number): void => {
         const sourceId: string = path[i]
         const targetId: string = path[i + 1]
         const sourceNode: TNode = this.findNode(sourceId)

@@ -1,4 +1,4 @@
-import { State, TPath, IReadOnlyState } from "./state"
+import { IReadOnlyState, State, TPath } from "./state"
 import { IChartStateObject } from "./typings"
 import { isEmpty } from "lodash/fp"
 

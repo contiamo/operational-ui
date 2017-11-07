@@ -1,5 +1,5 @@
 import { extend } from "lodash/fp"
-import { TLink, TAccessors, INodeAttrs, IBreakdown } from "./typings"
+import { IBreakdown, INodeAttrs, TAccessors, TLink } from "./typings"
 
 class Node {
   accessors: TAccessors

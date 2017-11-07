@@ -7,10 +7,10 @@ import { every, invoke } from "lodash/fp"
 
 import {
   IConfig,
+  IEvents,
   IFocus,
   IState,
   TElementSelection,
-  IEvents,
   TLink,
   TLinkSelection,
   TNode,
