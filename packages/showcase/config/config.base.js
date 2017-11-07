@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   // We use babel-polyfill for async/await
-  entry: ["regenerator-runtime/runtime", resolve(__dirname, "..", "index.tsx")],
+  entry: ["regenerator-runtime/runtime", resolve(__dirname, "../src/index.tsx")],
   output: {
     publicPath: "/",
     path: resolve(__dirname, "..", "dist"),

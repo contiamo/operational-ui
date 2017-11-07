@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 import { hexOrColor, readableTextColor, darken, transparentize } from "contiamo-ui-utils"
 

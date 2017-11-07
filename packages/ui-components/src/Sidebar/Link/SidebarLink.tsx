@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "react-router-dom"
 
 import glamorous, { Div, GlamorousComponent } from "glamorous"
-import { Theme } from "../../theme"
+import { Theme } from "contiamo-ui-theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
@@ -28,8 +28,8 @@ const style: {} = ({ theme, color, disabled, active }: IProps) => {
 
   return {
     backgroundColor,
-    fontWeight: active ? 600 : 400,
     ...theme.typography.body,
+    fontWeight: active ? 600 : 400,
     position: "relative",
     display: "flex",
     padding: `${theme.spacing / 3}px ${theme.spacing}px`,

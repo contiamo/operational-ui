@@ -22,8 +22,9 @@ export default [
     optional: true
   },
   {
-    name: "onIconClick",
-    description: "Method triggered when the icon is clicked.",
+    name: "onAction",
+    description:
+      "Method triggered when the top-right action icon is clicked. If not specified, the icon is not rendered at all.",
     defaultValue: "",
     type: "function",
     optional: true

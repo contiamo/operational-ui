@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as Icon from "react-feather"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 import ButtonGroup from "../ButtonGroup/ButtonGroup"
 import Button from "../Button/Button"

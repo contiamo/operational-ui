@@ -4,7 +4,7 @@ import { ContextMenu, ContextMenuItem, Icon } from "contiamo-ui-components"
 export default (() => {
   return (
     <ContextMenu>
-      <Icon name="MoreHorizontal" size={30} />
+      <Icon name="MoreHorizontal" size={16} />
       <ContextMenuItem
         onClick={() => {
           console.log("clicked")

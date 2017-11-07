@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
-
 import { Card, CardHeader } from "contiamo-ui-components"
 
 import Canvas from "../../components/Canvas/Canvas"
@@ -75,10 +74,7 @@ const links: ISidebarLink[] = [
   {
     label: "Feedback",
     links: [
-      { label: "Alerts" },
-      { label: "Messages" },
       { url: "/components/modals", label: "Modals" },
-      { label: "Notifications" },
       { url: "/components/progress", label: "Progress" },
       { url: "/components/spinners", label: "Spinners" },
       { url: "/components/tooltips", label: "Tooltips" }

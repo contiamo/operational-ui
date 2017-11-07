@@ -1,7 +1,9 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Card, Theme } from "contiamo-ui-components"
+import { Card } from "contiamo-ui-components"
+import { Theme } from "contiamo-ui-theme"
+import { darken } from "contiamo-ui-utils"
 
 interface IProps {
   className?: string
@@ -27,7 +29,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   },
 
   "& a:hover": {
-    color: theme.colors.palette.success
+    color: darken(theme.colors.palette.info)(5)
   },
 
   "& h4": {

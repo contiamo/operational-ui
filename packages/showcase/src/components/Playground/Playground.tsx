@@ -3,7 +3,7 @@ import glamorous, { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
 import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme, Theme } from "contiamo-ui-components"
+import { Theme, contiamoTheme } from "contiamo-ui-theme"
 import transformSnippet from "./transform-snippet"
 
 interface IProps {

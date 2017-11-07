@@ -2,7 +2,7 @@ import * as React from "react"
 import { shallow } from "enzyme"
 
 import { SidebarLink, style } from "../SidebarLink"
-import theme from "../../../theme"
+import { contiamoTheme } from "contiamo-ui-theme"
 
 describe("SidebarLink", () => {
   it("Should render correctly", () => {
@@ -18,7 +18,7 @@ describe("SidebarLink", () => {
     expect(renderedComponent).toMatchSnapshot()
   })
   it("Should receive proper styles", () => {
-    expect(style({ theme })).toMatchObject({})
+    expect(style({ theme: contiamoTheme })).toMatchObject({})
   })
   it("Should display a symbol to the right", () => {
     const renderedComponent = shallow(

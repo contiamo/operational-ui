@@ -1,6 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
+import { darken } from "contiamo-ui-utils"
 
 export interface IProps {
   css?: any
@@ -13,14 +14,14 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
   backgroundColor: theme.colors.palette.white,
   minWidth: 160,
   width: "fit-content",
-  padding: theme.spacing / 2,
+  padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
   border: "1px solid",
-  borderColor: theme.colors.palette.grey30,
+  borderColor: theme.colors.usage.contentSeparatorLine,
   ...clickable
     ? {
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: "rgba(0, 0, 0, 0.05)"
+          backgroundColor: darken(theme.colors.palette.white)(2)
         }
       }
     : {},

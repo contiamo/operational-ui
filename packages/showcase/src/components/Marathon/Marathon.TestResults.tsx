@@ -1,7 +1,8 @@
 import * as React from "react"
 import glamorous, { withTheme } from "glamorous"
 
-import { Icon, Theme } from "contiamo-ui-components"
+import { Icon } from "contiamo-ui-components"
+import { Theme } from "contiamo-ui-theme"
 
 const Container = glamorous.ul({
   padding: 0

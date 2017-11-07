@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"

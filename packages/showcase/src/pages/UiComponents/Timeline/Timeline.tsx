@@ -12,18 +12,15 @@ export default () => (
   <Card>
     <CardHeader>Timeline</CardHeader>
 
-    <p>
-      Display information vertically on a timeline from top to bottom. This is composed of multiple{" "}
-      <a href="#timeline-item">TimelineItem</a>s.
-    </p>
+    <p>Display information vertically on a timeline from top to bottom.</p>
     <Heading2Type>Usage</Heading2Type>
+    <p>
+      A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component. Items
+      may contain any children.
+    </p>
     <Playground snippet={String(TimelineSnippet)} components={{ Timeline, TimelineItem }} />
 
-    <div style={{ marginBottom: 32 }} />
-
-    <CardHeader id="timeline-item">TimelineItem</CardHeader>
-    <Heading2Type>Represents an individual node in the timeline.</Heading2Type>
-
+    <Heading2Type>Props</Heading2Type>
     <Table props={propDescription.TimelineItem} />
   </Card>
 )

@@ -2,18 +2,19 @@ import * as React from "react"
 import { InfoTile } from "contiamo-ui-components"
 
 export default (
-  <div style={{ display: "flex" }}>
+  <div>
     <InfoTile
+      color="info"
       label="Use Cases"
-      icon="ChevronLeft"
-      onIconClick={() => {
+      icon="AlertCircle"
+      onAction={() => {
         alert("Oh hello!")
       }}
     >
       Infinite
     </InfoTile>
     <InfoTile label="Potential">Unlimited</InfoTile>
-    <InfoTile color="#009de8" label="Cool Factor">
+    <InfoTile color="info" label="Cool Factor">
       > 10
     </InfoTile>
   </div>

@@ -1,23 +1,22 @@
 import * as React from "react"
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
-import glamorous, { Div, ThemeProvider } from "glamorous"
+import glamorous, { ThemeProvider } from "glamorous"
 import { css } from "glamor"
-import { contiamoTheme } from "contiamo-ui-components"
+import { contiamoTheme } from "contiamo-ui-theme"
+import { baseStylesheet, injectStylesheet } from "contiamo-ui-utils"
 
 import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 
-import SideNavigation from "./components/SideNavigation/SideNavigation"
-import Header from "./components/Header/Header"
-
-import Intro from "./pages/Intro"
 import Documentation from "./pages/Documentation/Documentation"
-import UiComponents from "./pages/UiComponents/UiComponents"
+import Header from "./components/Header/Header"
+import Intro from "./pages/Intro"
+import SideNavigation from "./components/SideNavigation/SideNavigation"
 import UiBlocks from "./pages/UiBlocks/UiBlocks"
+import UiComponents from "./pages/UiComponents/UiComponents"
 import Visualizations from "./pages/Visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
-  fontFamily: "'Proxima Nova', sans-serif",
   "& hr": {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
     height: 1,
@@ -71,9 +70,7 @@ appFontWeights.forEach((fontWeight: number) => {
     fontWeight
   })
 })
-x.global("body", { backgroundColor: contiamoTheme.colors.usage.bodyBackground })
-x.global({
-  fontSize: 13
-})
+
+injectStylesheet(baseStylesheet(contiamoTheme))
 
 export default App

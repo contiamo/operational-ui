@@ -37,13 +37,6 @@ export default (() => {
           <CustomSpan>Details</CustomSpan>
         </p>
       </TimelineItem>
-      <TimelineItem color="#7a137a" icon="PhoneOutgoing">
-        <h3>Survey outreach</h3>
-        <p>
-          <CustomSpan>2 weeks ago</CustomSpan>
-          <CustomSpan>Details</CustomSpan>
-        </p>
-      </TimelineItem>
     </Timeline>
   )
 })()

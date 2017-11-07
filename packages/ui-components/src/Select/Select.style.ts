@@ -1,6 +1,6 @@
 import glamorous, { GlamorousComponent } from "glamorous"
 import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "contiamo-ui-utils"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 const Container = glamorous.div(
   ({

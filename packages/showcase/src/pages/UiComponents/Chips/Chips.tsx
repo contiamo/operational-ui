@@ -18,11 +18,6 @@ export default () => (
       along with a symbol for the button that will be displayed if click behavior is detected.
     </p>
 
-    <div style={{ display: "flex" }}>
-      <Chip css={{ marginBottom: 16 }}>Chip 1</Chip>
-      <Chip css={{ marginBottom: 16 }}>Chip 2</Chip>
-    </div>
-
     <Heading2Type>Usage</Heading2Type>
     <Playground snippet={String(simpleSnippet)} components={{ Chip }} />
 

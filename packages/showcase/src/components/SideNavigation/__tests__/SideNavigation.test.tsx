@@ -2,7 +2,7 @@ import * as React from "react"
 import { shallow } from "enzyme"
 
 import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-components"
+import { contiamoTheme } from "contiamo-ui-theme"
 import ThemelessSideNavigation from "../SideNavigation"
 
 const SideNavigation = wrapTheme(contiamoTheme)(ThemelessSideNavigation)

@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { darken, hexOrColor } from "contiamo-ui-utils"
 import Tab, { IProps as TabProps } from "./Tab"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
   active?: number

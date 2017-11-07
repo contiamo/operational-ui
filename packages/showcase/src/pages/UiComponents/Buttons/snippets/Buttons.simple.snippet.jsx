@@ -3,26 +3,8 @@ import { Button, ButtonGroup } from "contiamo-ui-components"
 
 export default (
   <div>
-    <div style={{ display: "flex", marginTop: 16 }}>
-      <Button color="info">Colored</Button>
-      <Button>Spaced</Button>
-      <Button disabled>Disabled</Button>
-    </div>
-    <div style={{ display: "flex", marginTop: 16 }}>
-      <ButtonGroup>
-        <Button>Group 1</Button>
-        <Button active>Group 2</Button>
-        <Button>Group 3</Button>
-      </ButtonGroup>
-    </div>
-    <div style={{ display: "flex", marginTop: 16 }}>
-      <ButtonGroup>
-        <Button condensed>1</Button>
-        <Button condensed color="#5F8E2C">
-          2
-        </Button>
-        <Button condensed>3</Button>
-      </ButtonGroup>
-    </div>
+    <Button color="info">Button One</Button>
+    <Button color="#393939">Button Two</Button>
+    <Button disabled>Button Three</Button>
   </div>
 )

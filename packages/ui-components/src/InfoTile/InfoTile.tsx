@@ -1,7 +1,8 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
+import Icon from "../Icon/Icon"
 import { ReactFeatherIconName } from "../Icon/ReactFeather"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
@@ -10,7 +11,7 @@ export interface IProps {
   css?: any
   className?: string
   icon?: ReactFeatherIconName
-  onIconClick?: () => void
+  onAction?: () => void
   label?: string
   children: React.ReactNode
   color?: string
@@ -23,7 +24,17 @@ const Container = glamorous.div(
       borderLeftStyle: "solid"
     }
   },
-  ({ theme, color, withIcon }: { color?: string; theme: Theme; withIcon: boolean }): any => {
+  ({
+    theme,
+    color,
+    withIcon,
+    withActionIcon
+  }: {
+    color?: string
+    theme: Theme
+    withIcon: boolean
+    withActionIcon: boolean
+  }): any => {
     const backgroundColor = color
       ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
       : "white"
@@ -31,12 +42,13 @@ const Container = glamorous.div(
     return {
       backgroundColor,
       position: "relative",
-      display: "flex",
+      display: "inline-flex",
       flexDirection: "column",
       width: "fit-content",
-      borderColor: darken(backgroundColor)(15),
+      borderColor: theme.colors.palette.grey30,
       padding: theme.spacing / 2,
-      paddingRight: withIcon ? theme.spacing + 20 : theme.spacing / 2,
+      paddingLeft: withIcon ? theme.spacing + 20 : theme.spacing / 2,
+      paddingRight: withActionIcon ? theme.spacing * 2.25 : theme.spacing / 2,
       color: readableTextColor(backgroundColor)(["black", "white"])
     }
   }
@@ -48,7 +60,7 @@ const Label = glamorous.small(({ color, theme }: { color?: string; theme: Theme 
     ...theme.typography.small,
     marginBottom: 3,
     fontWeight: 600,
-    color: readableTextColor(backgroundColor)([theme.colors.palette.grey60, theme.colors.palette.grey10])
+    color: readableTextColor(backgroundColor)([theme.colors.palette.grey60, theme.colors.palette.grey20])
   }
 })
 
@@ -67,7 +79,7 @@ const IconContainer = glamorous.div(
       : "white"
 
     return {
-      right: theme.spacing / 2,
+      left: theme.spacing / 2,
       "& svg": {
         stroke: readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
       }
@@ -75,21 +87,42 @@ const IconContainer = glamorous.div(
   }
 )
 
-const InfoTile: React.SFC<IProps> = ({ css, className, label, children, color, icon, onIconClick }) => (
-  <Container css={css} className={className} withIcon={!!icon} color={color}>
-    <Label color={color}>{label}</Label>
-    <span>{children}</span>
+const ActionIconContainer = glamorous.div(({ theme, color }: { theme: Theme; color: string }): {} => {
+  const backgroundColor = color ? hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white"
+  return {
+    position: "absolute",
+    width: theme.spacing * 1.5,
+    height: theme.spacing * 1.5,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 0,
+    right: 0,
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, 0.25)"
+    },
+    "& svg": {
+      stroke: readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
+    }
+  }
+})
+
+const InfoTile: React.SFC<IProps> = ({ css, className, label, children, color, icon, onAction }) => (
+  <Container css={css} className={className} withIcon={!!icon} withActionIcon={!!onAction} color={color}>
     {icon ? (
-      <IconContainer color={color} onClick={onIconClick}>
-        {(() => {
-          if (ReactFeather.hasOwnProperty(icon)) {
-            const Comp = ReactFeather[icon]
-            return <Comp size={20} />
-          }
-          return null
-        })()}
+      <IconContainer color={color}>
+        <Icon size={20} name={icon} />
       </IconContainer>
     ) : null}
+    {onAction ? (
+      <ActionIconContainer color={color} onClick={onAction}>
+        <Icon name="MoreHorizontal" size={8} />
+      </ActionIconContainer>
+    ) : null}
+    <Label color={color}>{label}</Label>
+    <span>{children}</span>
   </Container>
 )
 

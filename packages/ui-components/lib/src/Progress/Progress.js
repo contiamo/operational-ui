@@ -35,7 +35,7 @@ var BarContainer = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme;
     return ({
-        backgroundColor: theme.colors.palette.grey50,
+        backgroundColor: theme.colors.palette.grey30,
         border: "1px solid " + theme.colors.palette.grey20
     });
 });

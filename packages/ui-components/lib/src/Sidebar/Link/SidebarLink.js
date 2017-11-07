@@ -19,7 +19,7 @@ var style = function (_a) {
         ? theme.colors.usage.link
         : contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]);
     var disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
-    return __assign({ backgroundColor: backgroundColor, fontWeight: active ? 600 : 400 }, theme.typography.body, { position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
+    return __assign({ backgroundColor: backgroundColor }, theme.typography.body, { fontWeight: active ? 600 : 400, position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor }, disabledStyle, { "&:link, &:visited": {
             color: textColor
