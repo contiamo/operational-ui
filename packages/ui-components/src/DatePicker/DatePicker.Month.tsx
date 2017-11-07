@@ -2,7 +2,7 @@ import * as React from "react"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 
 import { Days, Day } from "./DatePicker.styles"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IDatePair {
   start?: string

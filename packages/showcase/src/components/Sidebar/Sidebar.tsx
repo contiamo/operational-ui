@@ -24,8 +24,9 @@ export default ({ links, location, css }: IProps) => (
       return (
         <SidebarItem key={index} open={isOpen} label={link.label}>
           {link.links.map(({ url, label }, index) => {
+            const isActive = location.pathname === url
             return (
-              <SidebarLink key={index} to={url} disabled={!url}>
+              <SidebarLink key={index} to={url} disabled={!url} active={isActive}>
                 {label}
               </SidebarLink>
             )

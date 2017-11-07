@@ -1,7 +1,7 @@
 import * as React from "react"
 import { SketchPicker, RGBColor } from "react-color"
 import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
   css?: any

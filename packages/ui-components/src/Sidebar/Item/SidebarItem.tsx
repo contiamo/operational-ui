@@ -1,10 +1,9 @@
 import * as React from "react"
 
-import glamorous, { Div, GlamorousComponent } from "glamorous"
-import { Theme } from "../../theme"
+import glamorous, { GlamorousComponent } from "glamorous"
+import { Theme } from "contiamo-ui-theme"
 
 import style from "./SidebarItem.style"
-import SidebarLink from "../Link/SidebarLink"
 
 export interface IProps {
   css?: any

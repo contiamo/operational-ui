@@ -32,8 +32,8 @@ var Container = glamorous_1.default.div(function (_a) {
     });
 });
 var MenuContainer = glamorous_1.default.div(function (_a) {
-    var isExpanded = _a.isExpanded;
-    return (__assign({ position: "absolute", top: "100%", left: "0%", width: "fit-content" }, isExpanded ? { display: "block", animation: contiamo_ui_utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
+    var theme = _a.theme, isExpanded = _a.isExpanded;
+    return (__assign({ position: "absolute", top: "100%", left: "0%", boxShadow: theme.shadows.popup, width: "fit-content" }, isExpanded ? { display: "block", animation: contiamo_ui_utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
 });
 var ContextMenu = /** @class */ (function (_super) {
     __extends(ContextMenu, _super);

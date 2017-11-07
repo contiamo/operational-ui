@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import { Theme } from "../../theme";
+import { Theme } from "contiamo-ui-theme";
 export interface IProps {
     className?: string;
     children: React.ReactNode;

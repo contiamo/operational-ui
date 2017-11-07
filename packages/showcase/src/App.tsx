@@ -1,34 +1,27 @@
 import * as React from "react"
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
-import glamorous, { Div, ThemeProvider } from "glamorous"
+import glamorous, { ThemeProvider } from "glamorous"
 import { css } from "glamor"
-import { contiamoTheme } from "contiamo-ui-components"
+import { contiamoTheme } from "contiamo-ui-theme"
+import { baseStylesheet, injectStylesheet } from "contiamo-ui-utils"
 
 import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
 
-import SideNavigation from "./components/SideNavigation/SideNavigation"
+import Documentation from "./pages/Documentation/Documentation"
 import Header from "./components/Header/Header"
-
 import Intro from "./pages/Intro"
-import StyleGuide from "./pages/styleguide/StyleGuide"
-import Components from "./pages/components/Components"
-import Visualizations from "./pages/visualizations/Visualizations"
+import SideNavigation from "./components/SideNavigation/SideNavigation"
+import UiBlocks from "./pages/UiBlocks/UiBlocks"
+import UiComponents from "./pages/UiComponents/UiComponents"
+import Visualizations from "./pages/Visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
-  fontFamily: "'Proxima Nova', sans-serif",
   "& hr": {
     margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
     height: 1,
     border: 0,
     backgroundColor: "rgba(0, 0, 0, 0.14)"
-  },
-  "& h1": {
-    margin: 0,
-    fontSize: "2rem"
-  },
-  "& h2": {
-    fontSize: "1.3rem"
   },
   "& p": {
     marginTop: 0,
@@ -45,12 +38,6 @@ const Content = glamorous.div({
   paddingLeft: 60,
   "& > *": {
     width: "100%"
-  },
-  "& > :nth-child(2)": {
-    display: "flex",
-    alignItems: "flex-start",
-    padding: 16,
-    height: "100vh"
   }
 })
 
@@ -64,8 +51,9 @@ const App: React.SFC<{}> = () => (
         <Content>
           <Header />
           <Route exact path="/" component={Intro} />
-          <Route path="/styleguide" component={StyleGuide} />
-          <Route path="/components" component={Components} />
+          <Route path="/documentation" component={Documentation} />
+          <Route path="/blocks" component={UiBlocks} />
+          <Route path="/components" component={UiComponents} />
           <Route path="/visualizations" component={Visualizations} />
         </Content>
       </Container>
@@ -82,9 +70,7 @@ appFontWeights.forEach((fontWeight: number) => {
     fontWeight
   })
 })
-x.global("body", { backgroundColor: contiamoTheme.colors.usage.bodyBackground })
-x.global({
-  fontSize: 13
-})
+
+injectStylesheet(baseStylesheet(contiamoTheme))
 
 export default App

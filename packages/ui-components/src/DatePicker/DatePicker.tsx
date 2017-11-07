@@ -6,7 +6,7 @@ import { Container, ClearButton, Toggle, MonthNav, IconContainer, Days, Day, Inp
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 import withLabel from "../../utils/with-label"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
   id?: string

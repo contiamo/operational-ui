@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "../../theme"
+import { Theme } from "contiamo-ui-theme"
 import { fadeIn } from "contiamo-ui-utils"
 
 export interface IOption {

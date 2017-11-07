@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
   css?: any
@@ -43,7 +43,7 @@ const BarContainer = glamorous.div(
     overflow: "hidden"
   },
   ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.palette.grey50,
+    backgroundColor: theme.colors.palette.grey30,
     border: `1px solid ${theme.colors.palette.grey20}`
   })
 )

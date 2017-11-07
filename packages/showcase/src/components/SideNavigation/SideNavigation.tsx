@@ -3,7 +3,8 @@ import glamorous, { Div, Img, withTheme } from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, BarChart2, Grid } from "react-feather"
 
-import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon, Theme } from "contiamo-ui-components"
+import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
+import { Theme } from "contiamo-ui-theme"
 
 interface IProps {
   location?: {
@@ -36,10 +37,10 @@ const style: {} = {
 }
 
 const links: ILink[] = [
-  { url: "/styleguide", label: "Style guide", icon: "Edit" },
   { url: "/components", label: "Components", icon: "Box" },
-  { label: "Composed", icon: "Grid" },
-  { url: "/visualizations", label: "Visualizations", icon: "BarChart2" }
+  { url: "/blocks", label: "Blocks", icon: "Grid" },
+  { url: "/visualizations", label: "Visualizations", icon: "BarChart2" },
+  { url: "/documentation", label: "Documentation", icon: "Edit" }
 ]
 
 const highlightColor = "rgb(20, 153, 206)"

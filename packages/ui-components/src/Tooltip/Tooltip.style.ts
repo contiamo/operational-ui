@@ -1,5 +1,5 @@
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 type tooltipPosition = {
   top?: string | number

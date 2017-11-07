@@ -1,4 +1,4 @@
-import { Theme } from "../theme";
+import { Theme } from "contiamo-ui-theme";
 declare const _default: ({theme, color, anchor}: {
     theme: Theme;
     color?: string;

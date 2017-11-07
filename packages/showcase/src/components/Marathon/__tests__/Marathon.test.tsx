@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render } from "enzyme"
 import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-components"
+import { contiamoTheme } from "contiamo-ui-theme"
 import ThemelessMarathon from "../Marathon"
 
 const Marathon = wrapTheme(contiamoTheme)(ThemelessMarathon)

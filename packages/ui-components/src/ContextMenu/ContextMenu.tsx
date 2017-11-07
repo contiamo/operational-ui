@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
 import ContextMenuItem from "./ContextMenuItem"
 import { fadeIn } from "contiamo-ui-utils"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
   css?: {}
@@ -23,10 +23,11 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   margin: theme.spacing * 2
 }))
 
-const MenuContainer = glamorous.div(({ isExpanded }: { isExpanded: boolean }): any => ({
+const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): any => ({
   position: "absolute",
   top: "100%",
   left: "0%",
+  boxShadow: theme.shadows.popup,
   width: "fit-content",
   ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }
 }))

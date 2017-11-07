@@ -3,7 +3,7 @@ import glamorous, { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
 import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme, Theme } from "contiamo-ui-components"
+import { Theme, contiamoTheme } from "contiamo-ui-theme"
 import transformSnippet from "./transform-snippet"
 
 interface IProps {
@@ -47,9 +47,7 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
   "& .playground": {
     display: "flex",
     width: "100%",
-    height: isExpanded ? "calc(100% - 20px)" : "auto",
-    maxWidth: isExpanded ? "none" : 850,
-    maxHeight: isExpanded ? "none" : 400
+    height: isExpanded ? "calc(100% - 20px)" : "auto"
   },
 
   "& .playgroundCode, & .playgroundPreview": {

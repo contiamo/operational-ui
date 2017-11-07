@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous, { withTheme, GlamorousComponent } from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 import { Icon } from "contiamo-ui-components"

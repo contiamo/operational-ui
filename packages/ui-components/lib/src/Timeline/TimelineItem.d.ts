@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import { Theme, ThemeColorName } from "../theme";
+import { Theme, ThemeColorName } from "contiamo-ui-theme";
 export declare type CustomColor = ThemeColorName | string;
 export interface IProps {
     css?: {};

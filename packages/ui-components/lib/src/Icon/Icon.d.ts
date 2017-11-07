@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import { Theme } from "../theme";
+import { Theme } from "contiamo-ui-theme";
 import { ReactFeatherIconName } from "./ReactFeather";
 export interface IProps {
     name: ReactFeatherIconName;

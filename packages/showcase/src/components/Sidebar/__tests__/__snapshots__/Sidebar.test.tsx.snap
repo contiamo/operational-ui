@@ -36,6 +36,7 @@ exports[`App Showcase: Sidebar Should render correctly 1`] = `
           "subContentSeparatorLine": "#f8f8f8",
         },
       },
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
       "shadows": Object {
         "card": "0px 1px 2px #d3d1d1",
         "focus": "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",

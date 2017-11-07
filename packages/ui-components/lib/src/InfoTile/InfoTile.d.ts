@@ -5,7 +5,7 @@ export interface IProps {
     css?: any;
     className?: string;
     icon?: ReactFeatherIconName;
-    onIconClick?: () => void;
+    onAction?: () => void;
     label?: string;
     children: React.ReactNode;
     color?: string;

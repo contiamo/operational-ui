@@ -1,5 +1,5 @@
 import { GlamorousComponent } from "glamorous";
-import { Theme } from "../theme";
+import { Theme } from "contiamo-ui-theme";
 export interface IProps {
     theme: Theme;
 }

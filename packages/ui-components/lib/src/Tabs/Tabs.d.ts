@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import Tab from "./Tab";
-import { Theme } from "../theme";
+import { Theme } from "contiamo-ui-theme";
 export interface IProps {
     active?: number;
     activeColor?: string;

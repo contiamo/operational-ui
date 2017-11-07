@@ -2,7 +2,7 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import { withTheme } from "glamorous"
-import { Theme } from "../theme"
+import { Theme } from "contiamo-ui-theme"
 import { ReactFeatherIconName } from "./ReactFeather"
 
 import { hexOrColor } from "contiamo-ui-utils"

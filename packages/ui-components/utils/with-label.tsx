@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "../src/theme"
+import { Theme } from "contiamo-ui-theme"
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "inline-block"

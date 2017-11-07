@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "react-router-dom"
 
 import glamorous, { Div, GlamorousComponent } from "glamorous"
-import { Theme } from "../../theme"
+import { Theme } from "contiamo-ui-theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
@@ -20,13 +20,16 @@ export interface IProps {
 }
 
 const style: {} = ({ theme, color, disabled, active }: IProps) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff",
-    textColor = readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]),
-    disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
+  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff"
+  const textColor = active
+    ? theme.colors.usage.link
+    : readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"])
+  const disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
     backgroundColor,
     ...theme.typography.body,
+    fontWeight: active ? 600 : 400,
     position: "relative",
     display: "flex",
     padding: `${theme.spacing / 3}px ${theme.spacing}px`,
@@ -54,7 +57,7 @@ const style: {} = ({ theme, color, disabled, active }: IProps) => {
 
       // The text color needs to change too if it gets too dark 😁
       // Also, here's a prime benefit of functional JS: function composition!
-      color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
+      color: active ? textColor : readableTextColor(darken(backgroundColor)(5))(["black", "white"])
     }
   }
 }

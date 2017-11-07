@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Card, CardHeader } from "contiamo-ui-components"
+import { Card, CardHeader, Heading2Type } from "contiamo-ui-components"
 import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
 
 import * as simpleSnippet from "./snippets/ProcessFlow.simple.snippet"
@@ -25,10 +25,10 @@ export default () => (
       "contiamo-visualizations" package.
     </p>
 
-    <h4>Usage</h4>
+    <Heading2Type>Usage</Heading2Type>
     <Playground snippet={String(simpleSnippet)} scope={{ ProcessFlow }} components={{ VisualizationWrapper }} />
 
-    <h4>Data</h4>
+    <Heading2Type>Data</Heading2Type>
     <p>
       The input data should be an object with properties 'journeys' and 'nodes' (alternative names can only be used if
       the data accessors are then set accordingly: see below).
@@ -48,29 +48,29 @@ export default () => (
       object must have an 'id' property that corresponds to the ids used in the journey paths.
     </p>
 
-    <h4>Accessors</h4>
+    <Heading2Type>Accessors</Heading2Type>
     <p>
       Accessors are used to tell the visualization about data structure (data accessors), and to determine how
       individual nodes and individual links should be rendered (node and link accessors). Rendering options that must
       apply to all nodes and links are set via the config.
     </p>
 
-    <h4>Data Accessors</h4>
+    <Heading2Type>Data Accessors</Heading2Type>
     <p>
       Data accessors must be functions with single parameter 'data'. They are required if the nodes and journeys can not
       be accessed from the input data via the properties 'nodes' and 'journeys'.
     </p>
     <Table props={propDescription.DataAccessors} />
 
-    <h4>Node Accessors</h4>
+    <Heading2Type>Node Accessors</Heading2Type>
     <p>Node accessors must be functions with single parameter 'node'.</p>
     <Table props={propDescription.NodeAccessors} />
 
-    <h4>Link Accessors</h4>
+    <Heading2Type>Link Accessors</Heading2Type>
     <p>Link accessors must be functions with single parameter 'link'.</p>
     <Table props={propDescription.LinkAccessors} />
 
-    <h4>Config</h4>
+    <Heading2Type>Config</Heading2Type>
     <Table props={propDescription.Config} />
   </Card>
 )

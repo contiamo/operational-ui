@@ -10,13 +10,14 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
+var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, clickable = _a.clickable;
-    return (__assign({ backgroundColor: theme.colors.palette.white, minWidth: 160, width: "fit-content", padding: theme.spacing / 2, border: "1px solid", borderColor: theme.colors.palette.grey30 }, clickable
+    return (__assign({ backgroundColor: theme.colors.palette.white, minWidth: 160, width: "fit-content", padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", border: "1px solid", borderColor: theme.colors.usage.contentSeparatorLine }, clickable
         ? {
             cursor: "pointer",
             "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.05)"
+                backgroundColor: contiamo_ui_utils_1.darken(theme.colors.palette.white)(2)
             }
         }
         : {}, { "&:not(:first-child)": {

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import { Theme } from "../theme";
+import { Theme } from "contiamo-ui-theme";
 import HeaderItem from "./HeaderItem";
 import HeaderTitle from "./HeaderTitle";
 import HeaderSeparator from "./HeaderSeparator";
