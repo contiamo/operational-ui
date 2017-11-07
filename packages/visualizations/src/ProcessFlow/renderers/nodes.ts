@@ -88,8 +88,8 @@ class Nodes extends AbstractRenderer {
 
   enterAndUpdate(nodeGroups: TNodeSelection): void {
     const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
-      borderScale: TScale = this.nodeBorderScale(scale),
-      ctx: Nodes = this
+      borderScale: TScale = this.nodeBorderScale(scale)
+
     let n: number = 0
 
     nodeGroups
@@ -97,10 +97,10 @@ class Nodes extends AbstractRenderer {
       .append("g")
       .attr("class", "node-group")
       .attr("transform", this.translate)
-      .each(function(d: TNode): void {
+      .each((d: TNode, el: any): void => {
         // Append node "border" element - white element behind node.
         d3
-          .select(this)
+          .select(el)
           .append("path")
           .attr("class", `node ${styles.border}`)
           .attr(
@@ -109,14 +109,14 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(borderScale(d.size())),
           )
-          .attr("transform", ctx.rotate)
-          .attr("fill", ctx.config.borderColor)
+          .attr("transform", this.rotate)
+          .attr("fill", this.config.borderColor)
           // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
           // Single event handlers should be attached to a non-svg node.
-          .on("mouseenter", withD3Element(ctx.onMouseOver.bind(ctx)))
+          .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
         // Append node
         d3
-          .select(this)
+          .select(el)
           .append("path")
           .attr("class", `node ${styles.element}`)
           .attr(
@@ -125,27 +125,27 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(scale(d.size())),
           )
-          .attr("transform", ctx.rotate)
+          .attr("transform", this.rotate)
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
           .attr("opacity", 0)
         // Append label
         d3
-          .select(this)
+          .select(el)
           .append("text")
           .attr("class", styles.label)
       })
       .merge(nodeGroups)
       .transition()
-      .duration(ctx.config.duration)
+      .duration(this.config.duration)
       .attr("transform", this.translate)
-      .each(function(d: TNode): void {
+      .each((d: TNode, el: any): void => {
         // Update node border
         d3
-          .select(this)
+          .select(el)
           .select(`path.node.${styles.border}`)
           .transition()
-          .duration(ctx.config.duration)
+          .duration(this.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
           // but doesn't break the viz.
           .attr(
@@ -154,13 +154,13 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(borderScale(d.size())),
           )
-          .attr("transform", ctx.rotate)
+          .attr("transform", this.rotate)
         // Update node
         d3
-          .select(this)
+          .select(el)
           .select(`path.node.${styles.element}`)
           .transition()
-          .duration(ctx.config.duration)
+          .duration(this.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
           // but doesn't break the viz.
           .attr(
@@ -169,7 +169,7 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(scale(d.size())),
           )
-          .attr("transform", ctx.rotate)
+          .attr("transform", this.rotate)
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
           .attr("opacity", 1)

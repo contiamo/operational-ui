@@ -51,7 +51,6 @@ abstract class AbstractRenderer {
 
   focusElement(elementInfo: IFocusElement): void {
     if (elementInfo.type !== this.type) { return }
-    const ctx: AbstractRenderer = this
     this.el
       .selectAll(this.focusElementAccessor)
       .filter((d: TLink | TNode): boolean => {
@@ -59,8 +58,8 @@ abstract class AbstractRenderer {
           return invoke(matcher)(d) === value
         })(elementInfo.matchers)
       })
-      .each(function(d: TLink | TNode): void {
-        ctx.mouseOver(d3.select(this), d)
+      .each((d: TLink | TNode, el: any): void => {
+        this.mouseOver(d3.select(el), d)
       })
   }
 

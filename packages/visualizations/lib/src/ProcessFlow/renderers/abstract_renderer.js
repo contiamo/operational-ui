@@ -25,10 +25,10 @@ var AbstractRenderer = /** @class */ (function () {
         element.classed("hover", true).on("mouseleave", d3_utils_1.withD3Element(this.onMouseOut.bind(this)));
     };
     AbstractRenderer.prototype.focusElement = function (elementInfo) {
+        var _this = this;
         if (elementInfo.type !== this.type) {
             return;
         }
-        var ctx = this;
         this.el
             .selectAll(this.focusElementAccessor)
             .filter(function (d) {
@@ -36,8 +36,8 @@ var AbstractRenderer = /** @class */ (function () {
                 return fp_2.invoke(matcher)(d) === value;
             })(elementInfo.matchers);
         })
-            .each(function (d) {
-            ctx.mouseOver(d3.select(this), d);
+            .each(function (d, el) {
+            _this.mouseOver(d3.select(el), d);
         });
     };
     AbstractRenderer.prototype.highlight = function (element, d) {

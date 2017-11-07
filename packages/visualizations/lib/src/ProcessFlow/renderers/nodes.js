@@ -95,68 +95,68 @@ var Nodes = /** @class */ (function (_super) {
     };
     Nodes.prototype.enterAndUpdate = function (nodeGroups) {
         var _this = this;
-        var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale), ctx = this;
+        var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale);
         var n = 0;
         nodeGroups
             .enter()
             .append("g")
             .attr("class", "node-group")
             .attr("transform", this.translate)
-            .each(function (d) {
+            .each(function (d, el) {
             // Append node "border" element - white element behind node.
             d3
-                .select(this)
+                .select(el)
                 .append("path")
                 .attr("class", "node " + styles.border)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(borderScale(d.size())))
-                .attr("transform", ctx.rotate)
-                .attr("fill", ctx.config.borderColor)
-                .on("mouseenter", d3_utils_1.withD3Element(ctx.onMouseOver.bind(ctx)));
+                .attr("transform", _this.rotate)
+                .attr("fill", _this.config.borderColor)
+                .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)));
             // Append node
             d3
-                .select(this)
+                .select(el)
                 .append("path")
                 .attr("class", "node " + styles.element)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(scale(d.size())))
-                .attr("transform", ctx.rotate)
+                .attr("transform", _this.rotate)
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 0);
             // Append label
             d3
-                .select(this)
+                .select(el)
                 .append("text")
                 .attr("class", styles.label);
         })
             .merge(nodeGroups)
             .transition()
-            .duration(ctx.config.duration)
+            .duration(this.config.duration)
             .attr("transform", this.translate)
-            .each(function (d) {
+            .each(function (d, el) {
             // Update node border
             d3
-                .select(this)
+                .select(el)
                 .select("path.node." + styles.border)
                 .transition()
-                .duration(ctx.config.duration)
+                .duration(_this.config.duration)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(borderScale(d.size())))
-                .attr("transform", ctx.rotate);
+                .attr("transform", _this.rotate);
             // Update node
             d3
-                .select(this)
+                .select(el)
                 .select("path.node." + styles.element)
                 .transition()
-                .duration(ctx.config.duration)
+                .duration(_this.config.duration)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(scale(d.size())))
-                .attr("transform", ctx.rotate)
+                .attr("transform", _this.rotate)
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 1);
