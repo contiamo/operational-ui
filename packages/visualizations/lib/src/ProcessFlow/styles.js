@@ -8,7 +8,7 @@ var breakdownStyle = {
     background: "white",
 };
 var breakdownsContainerStyle = {
-    width: "100%",
+    width: "350px",
     float: "left",
     padding: "7px 0",
 };

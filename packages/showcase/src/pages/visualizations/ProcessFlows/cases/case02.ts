@@ -83,7 +83,7 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
     viz.config({
       focusElement: {
         type: "node",
-        matchers: { id: "4" }
+        matchers: { id: "3" }
       }
     })
     viz.accessors("node", {
