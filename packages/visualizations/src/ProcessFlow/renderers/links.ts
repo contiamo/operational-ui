@@ -3,6 +3,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { TLink, TNode, TScale, IFocus, TLinkSelection, IFocusElement, IData, TD3Selection } from "../typings"
 import { easeCubicInOut } from "d3-ease"
+import { withD3Element } from "../../utils/d3_utils"
 import * as styles from "./styles"
 import { find } from "lodash/fp"
 
@@ -47,7 +48,7 @@ class Links extends AbstractRenderer {
           .attr("class", `link ${styles.border}`)
           .attr("d", ctx.linkStartPath.bind(ctx))
           .attr("stroke-width", "0px")
-          .on("mouseenter", ctx.onMouseOver(ctx))
+          .on("mouseenter", withD3Element(ctx.onMouseOver.bind(ctx)))
           .attr("opacity", 0)
         // Append link
         d3

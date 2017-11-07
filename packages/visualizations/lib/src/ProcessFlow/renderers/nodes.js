@@ -14,6 +14,7 @@ var abstract_renderer_1 = require("./abstract_renderer");
 var d3 = require("d3-selection");
 require("d3-transition");
 var d3_shape_1 = require("d3-shape");
+var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
 var nodeLabelOptions = {
     top: {
@@ -106,7 +107,7 @@ var Nodes = /** @class */ (function (_super) {
                 .size(borderScale(d.size())))
                 .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
                 .attr("fill", ctx.config.borderColor)
-                .on("mouseenter", ctx.onMouseOver(ctx));
+                .on("mouseenter", d3_utils_1.withD3Element(ctx.onMouseOver.bind(ctx)));
             // Append node
             d3
                 .select(this)

@@ -2,6 +2,7 @@ import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
+import { withD3Element } from "../../utils/d3_utils"
 import { TNode, TScale, IFocus, TNodeSelection, IObject } from "../typings"
 import * as styles from "./styles"
 
@@ -104,7 +105,7 @@ class Nodes extends AbstractRenderer {
           .attr("fill", ctx.config.borderColor)
           // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
           // Single event handlers should be attached to a non-svg node.
-          .on("mouseenter", ctx.onMouseOver(ctx))
+          .on("mouseenter", withD3Element(ctx.onMouseOver.bind(ctx)))
         // Append node
         d3
           .select(this)

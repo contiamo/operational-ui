@@ -14,6 +14,7 @@ var abstract_renderer_1 = require("./abstract_renderer");
 var d3 = require("d3-selection");
 require("d3-transition");
 var d3_ease_1 = require("d3-ease");
+var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
 var fp_1 = require("lodash/fp");
 var MINOPACITY = 0.5, MAXOPACITY = 1;
@@ -52,7 +53,7 @@ var Links = /** @class */ (function (_super) {
                 .attr("class", "link " + styles.border)
                 .attr("d", ctx.linkStartPath.bind(ctx))
                 .attr("stroke-width", "0px")
-                .on("mouseenter", ctx.onMouseOver(ctx))
+                .on("mouseenter", d3_utils_1.withD3Element(ctx.onMouseOver.bind(ctx)))
                 .attr("opacity", 0);
             // Append link
             d3
