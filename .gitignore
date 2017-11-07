@@ -5,7 +5,8 @@ node_modules
 flow-typed/npm
 coverage
 packages/*
-!packages/utils
+!packages/ui-utils
 !packages/ui-components
+!packages/ui-theme
 !packages/showcase
 !packages/visualizations
