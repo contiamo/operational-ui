@@ -5,6 +5,7 @@ var d3 = require("d3-selection");
 var d3_scale_1 = require("d3-scale");
 var node_1 = require("../node");
 var fp_2 = require("lodash/fp");
+var d3_utils_1 = require("../../utils/d3_utils");
 var event_catalog_1 = require("../../utils/event_catalog");
 var AbstractRenderer = /** @class */ (function () {
     function AbstractRenderer(state, events, el) {
@@ -21,7 +22,7 @@ var AbstractRenderer = /** @class */ (function () {
         this.highlight(element, d);
         var focusPoint = this.focusPoint(element, d);
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { focusPoint: focusPoint, d: d });
-        element.classed("hover", true).on("mouseleave", this.onMouseOut.bind(this));
+        element.classed("hover", true).on("mouseleave", d3_utils_1.withD3Element(this.onMouseOut.bind(this)));
     };
     AbstractRenderer.prototype.focusElement = function (elementInfo) {
         if (elementInfo.type !== this.type) {

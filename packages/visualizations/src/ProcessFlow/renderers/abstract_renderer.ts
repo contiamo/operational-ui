@@ -4,6 +4,7 @@ import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import Node from "../node"
 import { IFocusElement } from "../typings"
 import { every, invoke } from "lodash/fp"
+import { withD3Element } from "../../utils/d3_utils"
 
 import {
   IConfig,
@@ -45,7 +46,7 @@ abstract class AbstractRenderer {
     this.highlight(element, d)
     let focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
-    element.classed("hover", true).on("mouseleave", this.onMouseOut.bind(this))
+    element.classed("hover", true).on("mouseleave", withD3Element(this.onMouseOut.bind(this)))
   }
 
   focusElement(elementInfo: IFocusElement): void {
