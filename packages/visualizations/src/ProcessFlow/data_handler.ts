@@ -3,7 +3,7 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import Layout from "./layout"
-import { bind, map, forEach, find, times, extend, groupBy, flow, sortBy } from "lodash/fp"
+import { bind, map, forEach, find, times, extend, groupBy, flow, sortBy, get } from "lodash/fp"
 import {
   TNode,
   TLink,
@@ -156,7 +156,7 @@ class DataHandler {
   xGridSpacing(): number {
     const config: IConfig = this.state.current.get("config"),
       finiteWidth: boolean = isFinite(config.width),
-      xValues: number[] = map((node: TNode): number => node.x)(this.layout.nodes),
+      xValues: number[] = map(get("x"))(this.layout.nodes),
       maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
       spacing: number = finiteWidth
         ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
@@ -191,7 +191,7 @@ class DataHandler {
     // Assign x values
     forEach((row: string): void => {
       flow(
-        sortBy((node: TNode): number => node.x),
+        sortBy(get("x")),
         forEach((node: TNode): void => {
           node.x *= xGridSpacing
         }),

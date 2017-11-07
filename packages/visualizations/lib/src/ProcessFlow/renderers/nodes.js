@@ -87,6 +87,12 @@ var Nodes = /** @class */ (function (_super) {
             return Math.pow((Math.sqrt(scale(size)) + _this.config.nodeBorderWidth), 2);
         };
     };
+    Nodes.prototype.translate = function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+    };
+    Nodes.prototype.rotate = function (d) {
+        return "rotate(" + nodeShapeOptions[d.shape()].rotation + ")";
+    };
     Nodes.prototype.enterAndUpdate = function (nodeGroups) {
         var _this = this;
         var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale), ctx = this;
@@ -95,7 +101,7 @@ var Nodes = /** @class */ (function (_super) {
             .enter()
             .append("g")
             .attr("class", "node-group")
-            .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .attr("transform", this.translate)
             .each(function (d) {
             // Append node "border" element - white element behind node.
             d3
@@ -105,7 +111,7 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(borderScale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+                .attr("transform", ctx.rotate)
                 .attr("fill", ctx.config.borderColor)
                 .on("mouseenter", d3_utils_1.withD3Element(ctx.onMouseOver.bind(ctx)));
             // Append node
@@ -116,7 +122,7 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(scale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+                .attr("transform", ctx.rotate)
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 0);
@@ -129,7 +135,7 @@ var Nodes = /** @class */ (function (_super) {
             .merge(nodeGroups)
             .transition()
             .duration(ctx.config.duration)
-            .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .attr("transform", this.translate)
             .each(function (d) {
             // Update node border
             d3
@@ -140,7 +146,7 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(borderScale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")");
+                .attr("transform", ctx.rotate);
             // Update node
             d3
                 .select(this)
@@ -150,7 +156,7 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(scale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+                .attr("transform", ctx.rotate)
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 1);

@@ -78,6 +78,14 @@ class Nodes extends AbstractRenderer {
     }
   }
 
+  translate(d: TNode): string {
+    return "translate(" + d.x + "," + d.y + ")"
+  }
+
+  rotate(d: TNode): string {
+    return "rotate(" + nodeShapeOptions[d.shape()].rotation + ")"
+  }
+
   enterAndUpdate(nodeGroups: TNodeSelection): void {
     const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
       borderScale: TScale = this.nodeBorderScale(scale),
@@ -88,7 +96,7 @@ class Nodes extends AbstractRenderer {
       .enter()
       .append("g")
       .attr("class", "node-group")
-      .attr("transform", (d: TNode): string => "translate(" + d.x + "," + d.y + ")")
+      .attr("transform", this.translate)
       .each(function(d: TNode): void {
         // Append node "border" element - white element behind node.
         d3
@@ -101,7 +109,7 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(borderScale(d.size())),
           )
-          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+          .attr("transform", ctx.rotate)
           .attr("fill", ctx.config.borderColor)
           // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
           // Single event handlers should be attached to a non-svg node.
@@ -117,7 +125,7 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(scale(d.size())),
           )
-          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+          .attr("transform", ctx.rotate)
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
           .attr("opacity", 0)
@@ -130,7 +138,7 @@ class Nodes extends AbstractRenderer {
       .merge(nodeGroups)
       .transition()
       .duration(ctx.config.duration)
-      .attr("transform", (d: TNode): string => "translate(" + d.x + "," + d.y + ")")
+      .attr("transform", this.translate)
       .each(function(d: TNode): void {
         // Update node border
         d3
@@ -146,7 +154,7 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(borderScale(d.size())),
           )
-          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+          .attr("transform", ctx.rotate)
         // Update node
         d3
           .select(this)
@@ -161,7 +169,7 @@ class Nodes extends AbstractRenderer {
               .type(nodeShapeOptions[d.shape()].symbol)
               .size(scale(d.size())),
           )
-          .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+          .attr("transform", ctx.rotate)
           .attr("fill", d.color())
           .attr("stroke", d.stroke())
           .attr("opacity", 1)

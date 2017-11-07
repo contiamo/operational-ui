@@ -29,7 +29,7 @@ var Links = /** @class */ (function (_super) {
     Links.prototype.updateDraw = function () {
         var linkGroups = this.el.select("g.links-group")
             .selectAll("g.link-group")
-            .data(this.data, function (link) { return link.sourceId() + ";" + link.targetId(); });
+            .data(this.data, function (d) { return d.sourceId() + ";" + d.targetId(); });
         this.exit(linkGroups);
         this.enterAndUpdate(linkGroups);
     };
@@ -75,20 +75,20 @@ var Links = /** @class */ (function (_super) {
                 .duration(ctx.config.duration)
                 .ease(d3_ease_1.easeCubicInOut)
                 .attr("d", ctx.linkPath.bind(ctx))
-                .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
-                .attr("stroke-dasharray", function (d) { return d.dash(); });
+                .attr("stroke-width", borderScale(d.size()) + "px")
+                .attr("stroke-dasharray", d.dash());
             // Update link
             d3
                 .select(this)
                 .select("path.link." + styles.element)
-                .attr("stroke", function (d) { return d.stroke(); })
+                .attr("stroke", d.stroke())
                 .transition()
                 .duration(ctx.config.duration)
                 .ease(d3_ease_1.easeCubicInOut)
                 .attr("d", ctx.linkPath.bind(ctx))
-                .attr("stroke-width", function (d) { return scale(d.size()) + "px"; })
-                .attr("stroke-dasharray", function (d) { return d.dash(); })
-                .attr("opacity", function (d) { return opacityScale(d.size()); });
+                .attr("stroke-width", scale(d.size()) + "px")
+                .attr("stroke-dasharray", d.dash())
+                .attr("opacity", opacityScale(d.size()));
         });
     };
     // Paths start as a single point at the source node. If the source node has already been rendered,

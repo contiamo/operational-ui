@@ -122,7 +122,7 @@ var DataHandler = /** @class */ (function () {
         })(this.journeys);
     };
     DataHandler.prototype.xGridSpacing = function () {
-        var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth
+        var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(fp_1.get("x"))(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth
             ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
             : config.horizontalNodeSpacing;
         this.stateWriter(["width"], finiteWidth ? config.width : spacing * (maxX + 1));
@@ -144,7 +144,7 @@ var DataHandler = /** @class */ (function () {
         })(this.layout.nodes);
         // Assign x values
         fp_1.forEach(function (row) {
-            fp_1.flow(fp_1.sortBy(function (node) { return node.x; }), fp_1.forEach(function (node) {
+            fp_1.flow(fp_1.sortBy(fp_1.get("x")), fp_1.forEach(function (node) {
                 node.x *= xGridSpacing;
             }))(nodesByRow[parseInt(row, 10)]);
         })(rows);

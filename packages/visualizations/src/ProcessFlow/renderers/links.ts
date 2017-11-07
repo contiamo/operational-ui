@@ -18,7 +18,7 @@ class Links extends AbstractRenderer {
   updateDraw(): void {
     const linkGroups: TLinkSelection = this.el.select("g.links-group")
       .selectAll("g.link-group")
-      .data(this.data, (link: TLink): string => link.sourceId() + ";" + link.targetId())
+      .data(this.data, (d: TLink): string => d.sourceId() + ";" + d.targetId())
 
     this.exit(linkGroups)
     this.enterAndUpdate(linkGroups)
@@ -70,20 +70,20 @@ class Links extends AbstractRenderer {
           .duration(ctx.config.duration)
           .ease(easeCubicInOut)
           .attr("d", ctx.linkPath.bind(ctx))
-          .attr("stroke-width", (d: TLink): string => borderScale(d.size()) + "px")
-          .attr("stroke-dasharray", (d: TLink): number => d.dash())
+          .attr("stroke-width", borderScale(d.size()) + "px")
+          .attr("stroke-dasharray", d.dash())
         // Update link
         d3
           .select(this)
           .select(`path.link.${styles.element}`)
-          .attr("stroke", (d: TLink): string => d.stroke())
+          .attr("stroke", d.stroke())
           .transition()
           .duration(ctx.config.duration)
           .ease(easeCubicInOut)
           .attr("d", ctx.linkPath.bind(ctx))
-          .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
-          .attr("stroke-dasharray", (d: TLink): number => d.dash())
-          .attr("opacity", (d: TLink): number => opacityScale(d.size()))
+          .attr("stroke-width", scale(d.size()) + "px")
+          .attr("stroke-dasharray", d.dash())
+          .attr("opacity", opacityScale(d.size()))
       })
   }
 
