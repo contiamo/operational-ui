@@ -17,6 +17,7 @@ const focusLegendStyle = {
   border: "1px solid #cdcdcd",
   position: "absolute",
   zIndex: 3000,
+  maxWidth: "350px",
   backgroundColor: "#fff",
   "& ul": {
     listStyle: "none",

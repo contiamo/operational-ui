@@ -2,13 +2,13 @@ import { css } from "glamor"
 
 const breakdownStyle = {
   fontFamily: "sans-serif",
-  maxWidth: "300px",
+  maxWidth: "350px",
   padding: "6px",
   background: "white",
 }
 
 const breakdownsContainerStyle = {
-  width: "300px",
+  width: "100%",
   float: "left",
   padding: "7px 0",
 }

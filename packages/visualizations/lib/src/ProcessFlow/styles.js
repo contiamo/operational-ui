@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var glamor_1 = require("glamor");
 var breakdownStyle = {
     fontFamily: "sans-serif",
-    maxWidth: "300px",
+    maxWidth: "350px",
     padding: "6px",
     background: "white",
 };
 var breakdownsContainerStyle = {
-    width: "300px",
+    width: "100%",
     float: "left",
     padding: "7px 0",
 };
