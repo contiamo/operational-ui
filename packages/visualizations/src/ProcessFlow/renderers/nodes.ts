@@ -3,7 +3,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { withD3Element } from "../../utils/d3_utils"
-import { IFocus, IObject, TNode, TNodeSelection, TScale } from "../typings"
+import { IFocus, IObject, TD3Selection, TNode, TNodeSelection, TScale } from "../typings"
 import * as styles from "./styles"
 
 const nodeLabelOptions: IObject = {
@@ -97,11 +97,10 @@ class Nodes extends AbstractRenderer {
       .append("g")
       .attr("class", "node-group")
       .attr("transform", this.translate)
-      .each((d: TNode, el: any): void => {
+      .each(withD3Element((d: TNode, el: HTMLElement): void => {
+        const element: TD3Selection = d3.select(el)
         // Append node "border" element - white element behind node.
-        d3
-          .select(el)
-          .append("path")
+        element.append("path")
           .attr("class", `node ${styles.border}`)
           .attr(
             "d",
@@ -115,9 +114,7 @@ class Nodes extends AbstractRenderer {
           // Single event handlers should be attached to a non-svg node.
           .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
         // Append node
-        d3
-          .select(el)
-          .append("path")
+        element.append("path")
           .attr("class", `node ${styles.element}`)
           .attr(
             "d",
@@ -130,20 +127,17 @@ class Nodes extends AbstractRenderer {
           .attr("stroke", d.stroke())
           .attr("opacity", 0)
         // Append label
-        d3
-          .select(el)
-          .append("text")
+        element.append("text")
           .attr("class", styles.label)
-      })
+      }))
       .merge(nodeGroups)
       .transition()
       .duration(this.config.duration)
       .attr("transform", this.translate)
-      .each((d: TNode, el: any): void => {
+      .each(withD3Element((d: TNode, el: HTMLElement): void => {
+        const element: TD3Selection = d3.select(el)
         // Update node border
-        d3
-          .select(el)
-          .select(`path.node.${styles.border}`)
+        element.select(`path.node.${styles.border}`)
           .transition()
           .duration(this.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
@@ -156,9 +150,7 @@ class Nodes extends AbstractRenderer {
           )
           .attr("transform", this.rotate)
         // Update node
-        d3
-          .select(el)
-          .select(`path.node.${styles.element}`)
+        element.select(`path.node.${styles.element}`)
           .transition()
           .duration(this.config.duration)
           // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
@@ -174,7 +166,7 @@ class Nodes extends AbstractRenderer {
           .attr("stroke", d.stroke())
           .attr("opacity", 1)
         ++n
-      })
+      }))
       .on("end", (): void => {
         --n
         if (n < 1) {
@@ -183,37 +175,32 @@ class Nodes extends AbstractRenderer {
       })
   }
 
-  getNodeBoundingRect(el: any): SVGRect {
+  getNodeBoundingRect(el: HTMLElement): SVGRect {
     const node: any = d3
-      .select(el.parentNode)
+      .select((el.parentNode as any))
       .select(`path.node.${styles.element}`)
       .node()
     return node.getBoundingClientRect()
   }
 
-  getNodeLabelX(d: TNode, el: any): number {
+  getNodeLabelX(d: TNode, el: HTMLElement): number {
     const offset: number = this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].x * offset
   }
 
-  getNodeLabelY(d: TNode, el: any): number {
+  getNodeLabelY(d: TNode, el: HTMLElement): number {
     const offset: number = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
   updateNodeLabels(nodeGroups: TNodeSelection): void {
-    const that: Nodes = this
     nodeGroups
       .enter()
       .merge(nodeGroups)
       .selectAll(`text.${styles.label}`)
       .text((d: TNode): string => d.label())
-      .attr("x", function(d: TNode): number {
-        return that.getNodeLabelX(d, this)
-      })
-      .attr("y", function(d: TNode): number {
-        return that.getNodeLabelY(d, this)
-      })
+      .attr("x", withD3Element(this.getNodeLabelX.bind(this)))
+      .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
       .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)
       .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
   }

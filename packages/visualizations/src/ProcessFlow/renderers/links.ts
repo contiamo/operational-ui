@@ -39,31 +39,27 @@ class Links extends AbstractRenderer {
       .enter()
       .append("g")
       .attr("class", "link-group")
-      .each((d: TLink, el: any): void => {
+      .each(withD3Element((d: TLink, el: HTMLElement): void => {
+        const element: TD3Selection = d3.select(el)
         // Append link "border" element - transparent element behind link.
-        d3
-          .select(el)
-          .append("path")
+        element.append("path")
           .attr("class", `link ${styles.border}`)
           .attr("d", this.linkStartPath.bind(this))
           .attr("stroke-width", "0px")
           .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
           .attr("opacity", 0)
         // Append link
-        d3
-          .select(el)
-          .append("path")
+        element.append("path")
           .attr("class", `link ${styles.element}`)
           .attr("d", this.linkStartPath.bind(this))
           .attr("fill", "none")
           .attr("stroke-width", "0px")
-      })
+      }))
       .merge(linkGroups)
-      .each((d: TLink, el: any): void => {
+      .each(withD3Element((d: TLink, el: HTMLElement): void => {
+        const element: TD3Selection = d3.select(el)
         // Update link border
-        d3
-          .select(el)
-          .select(`path.link.${styles.border}`)
+        element.select(`path.link.${styles.border}`)
           .attr("stroke", this.config.borderColor)
           .transition()
           .duration(this.config.duration)
@@ -72,9 +68,7 @@ class Links extends AbstractRenderer {
           .attr("stroke-width", borderScale(d.size()) + "px")
           .attr("stroke-dasharray", d.dash())
         // Update link
-        d3
-          .select(el)
-          .select(`path.link.${styles.element}`)
+        element.select(`path.link.${styles.element}`)
           .attr("stroke", d.stroke())
           .transition()
           .duration(this.config.duration)
@@ -83,7 +77,7 @@ class Links extends AbstractRenderer {
           .attr("stroke-width", scale(d.size()) + "px")
           .attr("stroke-dasharray", d.dash())
           .attr("opacity", opacityScale(d.size()))
-      })
+      }))
   }
 
   // Paths start as a single point at the source node. If the source node has already been rendered,
@@ -118,9 +112,9 @@ class Links extends AbstractRenderer {
     // Highlight source and target nodes as well as link
     this.el.selectAll(`path.node.${styles.border}`)
       .filter((node: TNode): boolean => node.id() === d.sourceId() || node.id() === d.targetId())
-      .each((node: TNode, el: any): void => {
+      .each(withD3Element((node: TNode, el: HTMLElement): void => {
         d3.select(el).classed("highlighted", true).attr("stroke", this.config.highlightColor)
-      })
+      }))
   }
 
   focusPoint(element: TLinkSelection, d: TLink): IFocus {

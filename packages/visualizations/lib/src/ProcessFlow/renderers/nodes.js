@@ -102,11 +102,10 @@ var Nodes = /** @class */ (function (_super) {
             .append("g")
             .attr("class", "node-group")
             .attr("transform", this.translate)
-            .each(function (d, el) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Append node "border" element - white element behind node.
-            d3
-                .select(el)
-                .append("path")
+            element.append("path")
                 .attr("class", "node " + styles.border)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
@@ -115,9 +114,7 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("fill", _this.config.borderColor)
                 .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)));
             // Append node
-            d3
-                .select(el)
-                .append("path")
+            element.append("path")
                 .attr("class", "node " + styles.element)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
@@ -127,20 +124,17 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("stroke", d.stroke())
                 .attr("opacity", 0);
             // Append label
-            d3
-                .select(el)
-                .append("text")
+            element.append("text")
                 .attr("class", styles.label);
-        })
+        }))
             .merge(nodeGroups)
             .transition()
             .duration(this.config.duration)
             .attr("transform", this.translate)
-            .each(function (d, el) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Update node border
-            d3
-                .select(el)
-                .select("path.node." + styles.border)
+            element.select("path.node." + styles.border)
                 .transition()
                 .duration(_this.config.duration)
                 .attr("d", d3_shape_1.symbol()
@@ -148,9 +142,7 @@ var Nodes = /** @class */ (function (_super) {
                 .size(borderScale(d.size())))
                 .attr("transform", _this.rotate);
             // Update node
-            d3
-                .select(el)
-                .select("path.node." + styles.element)
+            element.select("path.node." + styles.element)
                 .transition()
                 .duration(_this.config.duration)
                 .attr("d", d3_shape_1.symbol()
@@ -161,7 +153,7 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("stroke", d.stroke())
                 .attr("opacity", 1);
             ++n;
-        })
+        }))
             .on("end", function () {
             --n;
             if (n < 1) {
@@ -185,18 +177,13 @@ var Nodes = /** @class */ (function (_super) {
         return nodeLabelOptions[d.labelPosition()].y * offset;
     };
     Nodes.prototype.updateNodeLabels = function (nodeGroups) {
-        var that = this;
         nodeGroups
             .enter()
             .merge(nodeGroups)
             .selectAll("text." + styles.label)
             .text(function (d) { return d.label(); })
-            .attr("x", function (d) {
-            return that.getNodeLabelX(d, this);
-        })
-            .attr("y", function (d) {
-            return that.getNodeLabelY(d, this);
-        })
+            .attr("x", d3_utils_1.withD3Element(this.getNodeLabelX.bind(this)))
+            .attr("y", d3_utils_1.withD3Element(this.getNodeLabelY.bind(this)))
             .attr("dy", function (d) { return nodeLabelOptions[d.labelPosition()].dy; })
             .attr("text-anchor", function (d) { return nodeLabelOptions[d.labelPosition()].textAnchor; });
     };

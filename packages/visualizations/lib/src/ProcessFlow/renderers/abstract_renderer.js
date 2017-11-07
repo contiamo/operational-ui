@@ -36,9 +36,9 @@ var AbstractRenderer = /** @class */ (function () {
                 return fp_2.invoke(matcher)(d) === value;
             })(elementInfo.matchers);
         })
-            .each(function (d, el) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
             _this.mouseOver(d3.select(el), d);
-        });
+        }));
     };
     AbstractRenderer.prototype.highlight = function (element, d) {
         this.removeHighlights();

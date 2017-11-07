@@ -46,31 +46,27 @@ var Links = /** @class */ (function (_super) {
             .enter()
             .append("g")
             .attr("class", "link-group")
-            .each(function (d, el) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Append link "border" element - transparent element behind link.
-            d3
-                .select(el)
-                .append("path")
+            element.append("path")
                 .attr("class", "link " + styles.border)
                 .attr("d", _this.linkStartPath.bind(_this))
                 .attr("stroke-width", "0px")
                 .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)))
                 .attr("opacity", 0);
             // Append link
-            d3
-                .select(el)
-                .append("path")
+            element.append("path")
                 .attr("class", "link " + styles.element)
                 .attr("d", _this.linkStartPath.bind(_this))
                 .attr("fill", "none")
                 .attr("stroke-width", "0px");
-        })
+        }))
             .merge(linkGroups)
-            .each(function (d, el) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Update link border
-            d3
-                .select(el)
-                .select("path.link." + styles.border)
+            element.select("path.link." + styles.border)
                 .attr("stroke", _this.config.borderColor)
                 .transition()
                 .duration(_this.config.duration)
@@ -79,9 +75,7 @@ var Links = /** @class */ (function (_super) {
                 .attr("stroke-width", borderScale(d.size()) + "px")
                 .attr("stroke-dasharray", d.dash());
             // Update link
-            d3
-                .select(el)
-                .select("path.link." + styles.element)
+            element.select("path.link." + styles.element)
                 .attr("stroke", d.stroke())
                 .transition()
                 .duration(_this.config.duration)
@@ -90,7 +84,7 @@ var Links = /** @class */ (function (_super) {
                 .attr("stroke-width", scale(d.size()) + "px")
                 .attr("stroke-dasharray", d.dash())
                 .attr("opacity", opacityScale(d.size()));
-        });
+        }));
     };
     // Paths start as a single point at the source node. If the source node has already been rendered,
     // use its position at the start of the transition.
@@ -113,9 +107,9 @@ var Links = /** @class */ (function (_super) {
         // Highlight source and target nodes as well as link
         this.el.selectAll("path.node." + styles.border)
             .filter(function (node) { return node.id() === d.sourceId() || node.id() === d.targetId(); })
-            .each(function (node, el) {
+            .each(d3_utils_1.withD3Element(function (node, el) {
             d3.select(el).classed("highlighted", true).attr("stroke", _this.config.highlightColor);
-        });
+        }));
     };
     Links.prototype.focusPoint = function (element, d) {
         if (d == null)

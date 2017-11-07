@@ -58,9 +58,9 @@ abstract class AbstractRenderer {
           return invoke(matcher)(d) === value
         })(elementInfo.matchers)
       })
-      .each((d: TLink | TNode, el: any): void => {
+      .each(withD3Element((d: TLink | TNode, el: HTMLElement): void => {
         this.mouseOver(d3.select(el), d)
-      })
+      }))
   }
 
   highlight(element: TElementSelection, d: TLink | TNode): void {
@@ -82,7 +82,7 @@ abstract class AbstractRenderer {
 
   abstract focusPoint(element: TElementSelection, d: TLink | TNode): IFocus
 
-  onMouseOut(d: TLink | TNode, el: any): void {
+  onMouseOut(d: TLink | TNode, el: HTMLElement): void {
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
     const element: TElementSelection = d3.select(el)
     element.classed("hover", false)
