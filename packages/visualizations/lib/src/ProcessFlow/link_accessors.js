@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var accessors_factory_1 = require("../utils/accessors_factory");
 var defaultAccessors = {
-    // Dash length of link. Default 0 (solid line)
+    // Dash length of link. Default "0" (solid line)
     dash: function (link) {
-        return link.dash || 0;
+        return link.dash || "0";
     },
     // Label to display next to link - defaults to an empty string.
     label: function (link) {

@@ -72,7 +72,7 @@ export interface IJourney {
 }
 
 export interface ILinkAttrs {
-  dash?: number
+  dash?: string
   focusLabel?: any
   label?: string
   size: number

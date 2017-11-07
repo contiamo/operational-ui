@@ -14,7 +14,7 @@ class Link {
     this.attributes = extend.convert({ immutable: false })({}, linkAttributes)
   }
 
-  dash(): number {
+  dash(): string {
     return this.accessors.dash(this.attributes)
   }
 
