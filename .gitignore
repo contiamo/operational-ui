@@ -2,11 +2,3 @@ node_modules
 .DS_Store
 .idea
 *.log
-flow-typed/npm
-coverage
-packages/*
-!packages/ui-utils
-!packages/ui-components
-!packages/ui-theme
-!packages/showcase
-!packages/visualizations
