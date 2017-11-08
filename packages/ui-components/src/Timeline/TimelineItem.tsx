@@ -12,7 +12,6 @@ export interface IProps {
   children?: React.ReactNode
   color?: CustomColor
   icon?: string
-  theme: Theme
 }
 
 export interface IPropsWithTheme extends IProps {
