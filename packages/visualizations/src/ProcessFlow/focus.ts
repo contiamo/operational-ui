@@ -4,14 +4,14 @@ import { uniqueId, forEach, reduce, map, flow } from "lodash/fp"
 import { IConfig, IFocus, IBreakdown, TLink, TNode, TSeriesEl, TD3SelectionNoData } from "./typings"
 import * as styles from "./styles"
 
-interface IBreakdowns {
+export interface IBreakdowns {
   inputs: IBreakdown[]
   outputs: IBreakdown[]
   startsHere: IBreakdown[]
   endsHere: IBreakdown[]
 }
 
-type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
+export type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
 
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {

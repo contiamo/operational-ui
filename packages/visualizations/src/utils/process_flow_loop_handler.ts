@@ -7,11 +7,11 @@ import {
   uniq,
 } from "lodash/fp"
 
-type TPath = string[]
+export type TPath = string[]
 
 type TNodesList = string[]
 
-interface IJourney {
+export interface IJourney {
   path: TPath
   size: number
 }
