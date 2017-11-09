@@ -1,0 +1,12 @@
+coverage
+src
+types
+utils
+.DS_Store
+.gitignore
+index.ts
+package.json
+tsconfig.json
+tslint.json
+*.log
+!lib/*
