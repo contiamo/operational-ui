@@ -23,10 +23,11 @@ const Container = glamorous.div(
   {
     display: "flex",
     alignItems: "center",
+    position: "relative",
     maxWidth: 300
   },
   ({ theme, onClick }: { theme?: Theme; onClick: () => void }) => ({
-    padding: theme.spacing / 2,
+    padding: `${theme.spacing / 2}px ${theme.spacing / 2}px ${theme.spacing / 2}px ${3 * theme.spacing}px`,
     ...onClick
       ? {
           cursor: "pointer",
@@ -97,9 +98,12 @@ const Bar = glamorous.div(
 
 const Number = glamorous.div(
   {
-    fontSize: 24
+    fontSize: 24,
+    position: "absolute"
   },
-  ({ theme }: { theme?: Theme }) => ({
+  ({ theme }: { theme: Theme }) => ({
+    top: theme.spacing,
+    right: `calc(100% - ${3.75 * theme.spacing}px)`,
     minWidth: theme.spacing * 3,
     paddingRight: theme.spacing,
     paddingLeft: theme.spacing / 2,

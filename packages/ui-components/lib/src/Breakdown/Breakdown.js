@@ -14,10 +14,11 @@ var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div({
     display: "flex",
     alignItems: "center",
+    position: "relative",
     maxWidth: 300
 }, function (_a) {
     var theme = _a.theme, onClick = _a.onClick;
-    return (__assign({ padding: theme.spacing / 2 }, onClick
+    return (__assign({ padding: theme.spacing / 2 + "px " + theme.spacing / 2 + "px " + theme.spacing / 2 + "px " + 3 * theme.spacing + "px" }, onClick
         ? {
             cursor: "pointer",
             "&:hover": {
@@ -78,10 +79,13 @@ var Bar = glamorous_1.default.div({
     };
 });
 var Number = glamorous_1.default.div({
-    fontSize: 24
+    fontSize: 24,
+    position: "absolute"
 }, function (_a) {
     var theme = _a.theme;
     return ({
+        top: theme.spacing,
+        right: "calc(100% - " + 3.75 * theme.spacing + "px)",
         minWidth: theme.spacing * 3,
         paddingRight: theme.spacing,
         paddingLeft: theme.spacing / 2,
