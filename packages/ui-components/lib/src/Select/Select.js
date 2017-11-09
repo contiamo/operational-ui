@@ -65,29 +65,29 @@ var Select = /** @class */ (function (_super) {
             updating: false,
             filter: new RegExp(/./)
         };
-        // This implements "click outside to close" behavior
-        _this.handleClick = function (ev) {
-            // if we're clicking on the Select itself,
-            if (_this.containerNode && _this.containerNode.contains(ev.target)) {
-                return;
-            }
-            // if we're clicking outside,
-            _this.close();
-        };
-        _this.handleEsc = function (e) {
-            if (e.keyCode === 27) {
-                _this.close();
-            }
-        };
         return _this;
     }
+    // This implements "click outside to close" behavior
+    Select.prototype.handleClick = function (ev) {
+        // if we're clicking on the Select itself,
+        if (this.containerNode && this.containerNode.contains(ev.target)) {
+            return;
+        }
+        // if we're clicking outside,
+        this.close();
+    };
+    Select.prototype.handleEsc = function (e) {
+        if (e.keyCode === 27) {
+            this.close();
+        }
+    };
     Select.prototype.componentDidMount = function () {
-        document.addEventListener("click", this.handleClick, true);
-        document.addEventListener("keyup", this.handleEsc, true);
+        document.addEventListener("click", this.handleClick.bind(this), true);
+        document.addEventListener("keyup", this.handleEsc.bind(this), true);
     };
     Select.prototype.componentWillUnmount = function () {
-        document.removeEventListener("click", this.handleClick, true);
-        document.removeEventListener("keyup", this.handleEsc, true);
+        document.removeEventListener("click", this.handleClick.bind(this), true);
+        document.removeEventListener("keyup", this.handleEsc.bind(this), true);
     };
     Select.prototype.getDisplayValue = function () {
         var _this = this;

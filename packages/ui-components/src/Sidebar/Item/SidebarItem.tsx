@@ -21,12 +21,15 @@ export interface IState {
 }
 
 class SidebarItem extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props)
-    this.state = {
-      open: !!props.open,
-      updating: false
-    }
+  state = {
+    open: false,
+    updating: false
+  }
+
+  componentWillMount() {
+    this.setState({
+      open: !!this.props.open
+    })
   }
 
   async toggle() {

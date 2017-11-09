@@ -50,14 +50,19 @@ var glamorous_1 = require("glamorous");
 var SidebarItem_style_1 = require("./SidebarItem.style");
 var SidebarItem = /** @class */ (function (_super) {
     __extends(SidebarItem, _super);
-    function SidebarItem(props) {
-        var _this = _super.call(this, props) || this;
+    function SidebarItem() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            open: !!props.open,
+            open: false,
             updating: false
         };
         return _this;
     }
+    SidebarItem.prototype.componentWillMount = function () {
+        this.setState({
+            open: !!this.props.open
+        });
+    };
     SidebarItem.prototype.toggle = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

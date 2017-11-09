@@ -55,7 +55,7 @@ class Select extends React.Component<IProps, IState> {
   containerNode: any
 
   // This implements "click outside to close" behavior
-  handleClick = (ev: MouseEvent) => {
+  handleClick(ev: MouseEvent) {
     // if we're clicking on the Select itself,
     if (this.containerNode && this.containerNode.contains(ev.target)) {
       return
@@ -65,20 +65,20 @@ class Select extends React.Component<IProps, IState> {
     this.close()
   }
 
-  handleEsc = (e: KeyboardEvent) => {
+  handleEsc(e: KeyboardEvent) {
     if (e.keyCode === 27) {
       this.close()
     }
   }
 
   componentDidMount() {
-    document.addEventListener("click", this.handleClick, true)
-    document.addEventListener("keyup", this.handleEsc, true)
+    document.addEventListener("click", this.handleClick.bind(this), true)
+    document.addEventListener("keyup", this.handleEsc.bind(this), true)
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick, true)
-    document.removeEventListener("keyup", this.handleEsc, true)
+    document.removeEventListener("click", this.handleClick.bind(this), true)
+    document.removeEventListener("keyup", this.handleEsc.bind(this), true)
   }
 
   getDisplayValue(): string {

@@ -35,12 +35,12 @@ declare class Upload extends React.Component<IProps, any> {
         onSuccess: () => void;
     };
     fileInput: HTMLInputElement;
-    onChange: (evt: any) => void;
-    onClick: () => void;
-    onDrop: (evt: DragEvent) => void;
-    uploadAll: (files: File[]) => void;
-    upload: (file: File, fileList: File[]) => Promise<void>;
-    postFile: (file: File) => Promise<void>;
+    onChange(evt: any): void;
+    onClick(): void;
+    onDrop(evt: DragEvent): void;
+    uploadAll(files: File[]): void;
+    upload(file: File, fileList: File[]): Promise<void>;
+    postFile(file: File): Promise<void>;
     render(): JSX.Element;
 }
 export default Upload;
