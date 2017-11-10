@@ -42,7 +42,7 @@ class ContextMenu extends React.Component<IProps, IState> {
   menuContainerNode: any
   outsideClickHandler: any
 
-  handleClick = (ev: any): void => {
+  handleClick(ev: any): void {
     const newIsActive = this.menuContainerNode.contains(ev.target)
       ? this.state.isActive
       : this.containerNode.contains(ev.target) ? !this.state.isActive : false
@@ -50,11 +50,11 @@ class ContextMenu extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    document.addEventListener("click", this.handleClick)
+    document.addEventListener("click", this.handleClick.bind(this))
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick)
+    document.removeEventListener("click", this.handleClick.bind(this))
   }
 
   render() {

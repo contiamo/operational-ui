@@ -19,7 +19,7 @@ declare class ContextMenu extends React.Component<IProps, IState> {
     containerNode: any;
     menuContainerNode: any;
     outsideClickHandler: any;
-    handleClick: (ev: any) => void;
+    handleClick(ev: any): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
     render(): JSX.Element;

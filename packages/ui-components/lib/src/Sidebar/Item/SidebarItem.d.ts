@@ -16,7 +16,11 @@ export interface IState {
     updating: boolean;
 }
 declare class SidebarItem extends React.Component<IProps, IState> {
-    constructor(props: IProps);
+    state: {
+        open: boolean;
+        updating: boolean;
+    };
+    componentWillMount(): void;
     toggle(): Promise<boolean>;
     render(): JSX.Element;
 }

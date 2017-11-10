@@ -52,22 +52,130 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var attrAccept = require("attr-accept");
-var checkStatus = function (response) {
-    if (response.status >= 200 && response.status < 300) {
+var Upload = /** @class */ (function (_super) {
+    __extends(Upload, _super);
+    function Upload() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Upload.prototype.onChange = function (evt) {
+        this.uploadAll(Array.from(evt.target.files));
+    };
+    Upload.prototype.onClick = function () {
+        this.fileInput.click();
+    };
+    Upload.prototype.onDrop = function (evt) {
+        evt.preventDefault();
+        if (evt.type === "dragover")
+            return;
+        var files = Array.from(evt.dataTransfer.files).filter(function (file) { return attrAccept(file); });
+        this.uploadAll(files);
+    };
+    Upload.prototype.uploadAll = function (files) {
+        var _this = this;
+        files.forEach(function (file) {
+            _this.upload(file, files);
+        });
+    };
+    Upload.prototype.upload = function (file, fileList) {
+        return __awaiter(this, void 0, void 0, function () {
+            var onBeforeUpload, newFile, type, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        onBeforeUpload = this.props.onBeforeUpload;
+                        return [4 /*yield*/, onBeforeUpload(file, fileList)];
+                    case 1:
+                        newFile = _a.sent();
+                        type = Object.prototype.toString.call(newFile);
+                        if (type === "[object Blob]" || type === "[object File]") {
+                            this.postFile(newFile);
+                        }
+                        else {
+                            this.postFile(file);
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        console.log(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Upload.prototype.postFile = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, action, data, headers, name, onStartUpload, onSuccess, onError, _b, request, response, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _a = this.props, action = _a.action, data = _a.data, headers = _a.headers, name = _a.name, onStartUpload = _a.onStartUpload, onSuccess = _a.onSuccess, onError = _a.onError, _b = _a.request, request = _b === void 0 ? defaultRequest : _b;
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 3, , 4]);
+                        onStartUpload(file);
+                        return [4 /*yield*/, request({ action: action, data: data, file: file, headers: headers, name: name })];
+                    case 2:
+                        response = _c.sent();
+                        onSuccess(response, file);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_2 = _c.sent();
+                        onError(error_2, file);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Upload.prototype.render = function () {
+        var _this = this;
+        var _a = this.props, accept = _a.accept, children = _a.children, disabled = _a.disabled, multiple = _a.multiple;
+        var handlers = !disabled
+            ? {
+                onClick: this.onClick.bind(this),
+                onDragOver: this.onDrop.bind(this),
+                onDrop: this.onDrop.bind(this)
+            }
+            : {};
+        return (React.createElement("div", __assign({}, handlers),
+            React.createElement("input", { style: { display: "none" }, accept: accept, multiple: multiple, onChange: this.onChange.bind(this), ref: function (node) {
+                    _this.fileInput = node;
+                }, type: "file" }),
+            children));
+    };
+    Upload.defaultProps = {
+        accept: "*",
+        data: {},
+        headers: {},
+        multipart: false,
+        multiple: false,
+        name: "file",
+        onBeforeUpload: function () { },
+        onStartUpload: function () { },
+        onError: function () { },
+        onSuccess: function () { }
+    };
+    return Upload;
+}(React.Component));
+exports.default = Upload;
+function checkStatus(response) {
+    if (response.ok) {
         return response;
     }
     else {
         var error = new Error(response.statusText);
+        error.response = response;
         throw error;
     }
-};
-var defaultRequest = function (_a) {
+}
+function defaultRequest(_a) {
     var action = _a.action, data = _a.data, file = _a.file, headers = _a.headers, name = _a.name;
-    return __awaiter(_this, void 0, void 0, function () {
+    return __awaiter(this, void 0, void 0, function () {
         var formData, response;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -95,109 +203,5 @@ var defaultRequest = function (_a) {
             }
         });
     });
-};
-var Upload = /** @class */ (function (_super) {
-    __extends(Upload, _super);
-    function Upload() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.onChange = function (evt) {
-            _this.uploadAll(Array.from(evt.target.files));
-        };
-        _this.onClick = function () {
-            _this.fileInput.click();
-        };
-        _this.onDrop = function (evt) {
-            evt.preventDefault();
-            if (evt.type === "dragover")
-                return;
-            var files = Array.from(evt.dataTransfer.files).filter(function (file) { return attrAccept(file); });
-            _this.uploadAll(files);
-        };
-        _this.uploadAll = function (files) {
-            files.forEach(function (file) {
-                _this.upload(file, files);
-            });
-        };
-        _this.upload = function (file, fileList) { return __awaiter(_this, void 0, void 0, function () {
-            var onBeforeUpload, newFile, type, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        onBeforeUpload = this.props.onBeforeUpload;
-                        return [4 /*yield*/, onBeforeUpload(file, fileList)];
-                    case 1:
-                        newFile = _a.sent();
-                        type = Object.prototype.toString.call(newFile);
-                        if (type === "[object Blob]" || type === "[object File]") {
-                            this.postFile(newFile);
-                        }
-                        else {
-                            this.postFile(file);
-                        }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_1 = _a.sent();
-                        console.log(error_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); };
-        _this.postFile = function (file) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, action, data, headers, name, onStartUpload, onSuccess, onError, _b, request, response, error_2;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _a = this.props, action = _a.action, data = _a.data, headers = _a.headers, name = _a.name, onStartUpload = _a.onStartUpload, onSuccess = _a.onSuccess, onError = _a.onError, _b = _a.request, request = _b === void 0 ? defaultRequest : _b;
-                        _c.label = 1;
-                    case 1:
-                        _c.trys.push([1, 3, , 4]);
-                        onStartUpload(file);
-                        return [4 /*yield*/, request({ action: action, data: data, file: file, headers: headers, name: name })];
-                    case 2:
-                        response = _c.sent();
-                        onSuccess(response, file);
-                        return [3 /*break*/, 4];
-                    case 3:
-                        error_2 = _c.sent();
-                        onError(error_2, file);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        }); };
-        return _this;
-    }
-    Upload.prototype.render = function () {
-        var _this = this;
-        var _a = this.props, accept = _a.accept, children = _a.children, disabled = _a.disabled, multiple = _a.multiple;
-        var handlers = !disabled
-            ? {
-                onClick: this.onClick,
-                onDragOver: this.onDrop,
-                onDrop: this.onDrop
-            }
-            : {};
-        return (React.createElement("div", __assign({}, handlers),
-            React.createElement("input", { style: { display: "none" }, accept: accept, multiple: multiple, onChange: this.onChange, ref: function (node) {
-                    _this.fileInput = node;
-                }, type: "file" }),
-            children));
-    };
-    Upload.defaultProps = {
-        accept: "*",
-        data: {},
-        headers: {},
-        multipart: false,
-        multiple: false,
-        name: "file",
-        onBeforeUpload: function () { },
-        onStartUpload: function () { },
-        onError: function () { },
-        onSuccess: function () { }
-    };
-    return Upload;
-}(React.Component));
-exports.default = Upload;
+}
 //# sourceMappingURL=Upload.js.map

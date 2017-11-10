@@ -43,19 +43,19 @@ var ContextMenu = /** @class */ (function (_super) {
             isHovered: false,
             isActive: false
         };
-        _this.handleClick = function (ev) {
-            var newIsActive = _this.menuContainerNode.contains(ev.target)
-                ? _this.state.isActive
-                : _this.containerNode.contains(ev.target) ? !_this.state.isActive : false;
-            _this.setState(function (prevState) { return ({ isActive: newIsActive }); });
-        };
         return _this;
     }
+    ContextMenu.prototype.handleClick = function (ev) {
+        var newIsActive = this.menuContainerNode.contains(ev.target)
+            ? this.state.isActive
+            : this.containerNode.contains(ev.target) ? !this.state.isActive : false;
+        this.setState(function (prevState) { return ({ isActive: newIsActive }); });
+    };
     ContextMenu.prototype.componentDidMount = function () {
-        document.addEventListener("click", this.handleClick);
+        document.addEventListener("click", this.handleClick.bind(this));
     };
     ContextMenu.prototype.componentWillUnmount = function () {
-        document.removeEventListener("click", this.handleClick);
+        document.removeEventListener("click", this.handleClick.bind(this));
     };
     ContextMenu.prototype.render = function () {
         var _this = this;
