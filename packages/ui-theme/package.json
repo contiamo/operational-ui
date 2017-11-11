@@ -17,10 +17,11 @@
     "version": "npm run package"
   },
   "devDependencies": {
+    "@types/react": "^16.0.22",
     "prettier": "^1.7.0",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.3.0",
     "tslint-config-prettier": "^1.5.0",
-    "typescript": "latest"
+    "typescript": "2.5.3"
   }
 }
