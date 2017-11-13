@@ -77,7 +77,7 @@ declare namespace fp {
      * Returns a new list containing only those items that match a given predicate function. The
      * predicate function is passed one argument: (value).
      */
-    filter<T>(fn: (value: T) => boolean): (list: T[]) => T[]
+    // filter<T>(fn: (value: T) => boolean): (list: T[]) => T[]
 
     /**
      * Creates an array of elements, sorted in ascending order by the results of
@@ -171,6 +171,9 @@ declare namespace fp {
     dropRight: any
     every: any
     merge: any
+    get: any
+    identity: any
+    filter: any
   }
 }
 

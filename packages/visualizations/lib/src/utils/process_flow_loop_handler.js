@@ -17,12 +17,7 @@ function getSourcesRecursively(sources) {
             }
         })(findNode(sourceId).linkedToFrom);
     })(sources);
-    if (sources.length > numberOfLinks) {
-        return getSourcesRecursively(sources);
-    }
-    else {
-        return sources;
-    }
+    return sources.length > numberOfLinks ? getSourcesRecursively(sources) : sources;
 }
 function isLinkedToFrom(sourceId, targetId) {
     var sourceNodes = findNode(sourceId).linkedToFrom;

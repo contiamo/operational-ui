@@ -1,20 +1,16 @@
-import { reduce, bind, forEach } from "lodash/fp"
+import { forEach, reduce } from "lodash/fp"
+import { IObject } from "./typings"
 
 type AccessorFunction = (node: any) => any
 
-let AccessorsFactory: any = (defaultAccessors: any) => {
-  const wrapWithDefaultAccessor: (a: AccessorFunction, b: AccessorFunction) => AccessorFunction = function(
-    customAccessor: AccessorFunction,
-    defaultAccessor: AccessorFunction,
-  ) {
-    return function(node: any) {
-      return customAccessor(node) || defaultAccessor(node)
-    }
+let AccessorsFactory: any = (defaultAccessors: IObject) => {
+  function wrapWithDefaultAccessor(customAccessor: AccessorFunction, defaultAccessor: AccessorFunction) {
+    return (node: any) => customAccessor(node) || defaultAccessor(node)
   }
 
   return class Accessors {
-    accessors: Object
-    customAccessors: Object
+    accessors: IObject
+    customAccessors: IObject
 
     constructor() {
       this.resetAccessors()
@@ -25,30 +21,29 @@ let AccessorsFactory: any = (defaultAccessors: any) => {
       this.customAccessors = {}
     }
 
-    setAccessors(accessors: any): void {
+    setAccessors(accessors: IObject): void {
       forEach.convert({ cap: false })(
-        bind(function(method: AccessorFunction, property: string): void {
+        (method: AccessorFunction, property: string): void => {
           this.customAccessors[property] = method
-        }, this),
+        }
       )(accessors)
     }
 
     propertyAccessor(property: string): AccessorFunction {
-      return bind(function(node: any): AccessorFunction {
-        let customAccessor: AccessorFunction = this.customAccessors[property],
+      return (node: any): AccessorFunction => {
+        const customAccessor: AccessorFunction = this.customAccessors[property],
           defaultAccessor: AccessorFunction = defaultAccessors[property]
         return customAccessor ? wrapWithDefaultAccessor(customAccessor, defaultAccessor)(node) : defaultAccessor(node)
-      }, this)
+      }
     }
 
-    buildAccessors(): Object {
+    buildAccessors(): IObject {
       return reduce.convert({ cap: false })(
-        bind(function(memo: any, defaultAccessor: AccessorFunction, property: string): any {
+        (memo: IObject, defaultAccessor: AccessorFunction, property: string): IObject => {
           memo[property] = this.propertyAccessor(property)
           return memo
-        }, this),
-        {},
-      )(defaultAccessors)
+        }
+      , {})(defaultAccessors)
     }
   }
 }

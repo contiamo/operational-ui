@@ -1,39 +1,22 @@
-import { State, TPath, IReadOnlyState } from "./state"
+import { IReadOnlyState, State, TPath } from "./state"
+import { IChartStateObject } from "./typings"
 import { isEmpty } from "lodash/fp"
-
-type Data = Array<any> | Object
-
-interface ChartStateObj {
-  data: Data
-  config: Object
-  accessors: Object
-  computed: Object
-}
-
-type Partial<T> = { [P in keyof T]?: T[P] }
 
 interface IChartState<T> {
   current: State<T>
   previous: State<T>
 }
 
-interface IChartStateReadOnly<T> {
+export interface IChartStateReadOnly<T> {
   current: IReadOnlyState<T>
   previous: IReadOnlyState<T>
 }
 
-const defaultChartStateObj: ChartStateObj = {
-  data: [],
-  config: {},
-  accessors: {},
-  computed: {},
-}
-
 class StateHandler {
-  state: IChartState<ChartStateObj>
+  state: IChartState<IChartStateObject>
 
-  constructor(obj: Partial<ChartStateObj> = {}) {
-    const initial = new State<ChartStateObj>({ ...defaultChartStateObj, ...obj })
+  constructor(obj: IChartStateObject) {
+    const initial = new State<IChartStateObject>(obj)
     this.state = { current: initial, previous: initial.clone() }
   }
 
@@ -41,7 +24,7 @@ class StateHandler {
     this.state.previous.set(["computed"], this.state.current.clone().get("computed"))
   }
 
-  readOnly(): IChartStateReadOnly<ChartStateObj> {
+  readOnly(): IChartStateReadOnly<IChartStateObject> {
     return {
       current: this.state.current.readOnly(),
       previous: this.state.previous.readOnly(),
@@ -49,7 +32,7 @@ class StateHandler {
   }
 
   // Data
-  data(data?: Data) {
+  data(data?: any) {
     if (!arguments.length) return this.state.current.get("data")
     return this.state.current.set("data", data)
   }

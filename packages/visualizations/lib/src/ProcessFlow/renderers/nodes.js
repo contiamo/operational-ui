@@ -14,6 +14,7 @@ var abstract_renderer_1 = require("./abstract_renderer");
 var d3 = require("d3-selection");
 require("d3-transition");
 var d3_shape_1 = require("d3-shape");
+var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
 var nodeLabelOptions = {
     top: {
@@ -86,75 +87,73 @@ var Nodes = /** @class */ (function (_super) {
             return Math.pow((Math.sqrt(scale(size)) + _this.config.nodeBorderWidth), 2);
         };
     };
+    Nodes.prototype.translate = function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+    };
+    Nodes.prototype.rotate = function (d) {
+        return "rotate(" + nodeShapeOptions[d.shape()].rotation + ")";
+    };
     Nodes.prototype.enterAndUpdate = function (nodeGroups) {
         var _this = this;
-        var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale), ctx = this;
+        var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale);
         var n = 0;
         nodeGroups
             .enter()
             .append("g")
             .attr("class", "node-group")
-            .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
-            .each(function (d) {
+            .attr("transform", this.translate)
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Append node "border" element - white element behind node.
-            d3
-                .select(this)
-                .append("path")
+            element.append("path")
                 .attr("class", "node " + styles.border)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(borderScale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
-                .attr("fill", ctx.config.borderColor)
-                .on("mouseenter", ctx.onMouseOver(ctx));
+                .attr("transform", _this.rotate)
+                .attr("fill", _this.config.borderColor)
+                .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)));
             // Append node
-            d3
-                .select(this)
-                .append("path")
+            element.append("path")
                 .attr("class", "node " + styles.element)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(scale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+                .attr("transform", _this.rotate)
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 0);
             // Append label
-            d3
-                .select(this)
-                .append("text")
+            element.append("text")
                 .attr("class", styles.label);
-        })
+        }))
             .merge(nodeGroups)
             .transition()
-            .duration(ctx.config.duration)
-            .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
-            .each(function (d) {
+            .duration(this.config.duration)
+            .attr("transform", this.translate)
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Update node border
-            d3
-                .select(this)
-                .select("path.node." + styles.border)
+            element.select("path.node." + styles.border)
                 .transition()
-                .duration(ctx.config.duration)
+                .duration(_this.config.duration)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(borderScale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")");
+                .attr("transform", _this.rotate);
             // Update node
-            d3
-                .select(this)
-                .select("path.node." + styles.element)
+            element.select("path.node." + styles.element)
                 .transition()
-                .duration(ctx.config.duration)
+                .duration(_this.config.duration)
                 .attr("d", d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
                 .size(scale(d.size())))
-                .attr("transform", "rotate(" + nodeShapeOptions[d.shape()].rotation + ")")
+                .attr("transform", _this.rotate)
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 1);
             ++n;
-        })
+        }))
             .on("end", function () {
             --n;
             if (n < 1) {
@@ -178,18 +177,13 @@ var Nodes = /** @class */ (function (_super) {
         return nodeLabelOptions[d.labelPosition()].y * offset;
     };
     Nodes.prototype.updateNodeLabels = function (nodeGroups) {
-        var that = this;
         nodeGroups
             .enter()
             .merge(nodeGroups)
             .selectAll("text." + styles.label)
             .text(function (d) { return d.label(); })
-            .attr("x", function (d) {
-            return that.getNodeLabelX(d, this);
-        })
-            .attr("y", function (d) {
-            return that.getNodeLabelY(d, this);
-        })
+            .attr("x", d3_utils_1.withD3Element(this.getNodeLabelX.bind(this)))
+            .attr("y", d3_utils_1.withD3Element(this.getNodeLabelY.bind(this)))
             .attr("dy", function (d) { return nodeLabelOptions[d.labelPosition()].dy; })
             .attr("text-anchor", function (d) { return nodeLabelOptions[d.labelPosition()].textAnchor; });
     };

@@ -1,18 +1,18 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
-import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { IData, IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings"
 
 class Series {
-  data: any
-  dataHandler: any
+  data: IData
+  dataHandler: DataHandler
   drawn: boolean
   el: TSeriesEl
-  events: TEvents
+  events: IEvents
   renderer: Renderer
   state: IState
   stateWriter: TStateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -23,7 +23,7 @@ class Series {
   }
 
   prepareData(): void {
-    this.data = this.dataHandler.prepareData(this.state)
+    this.data = this.dataHandler.prepareData()
     this.stateWriter("data", this.data)
   }
 
@@ -32,7 +32,7 @@ class Series {
   }
 
   draw(): void {
-    const seriesConfig = this.state.current.get("computed").series
+    const seriesConfig: IObject = this.state.current.get("computed").series
     this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)
     this.renderer.draw(this.data)
     this.drawn = true

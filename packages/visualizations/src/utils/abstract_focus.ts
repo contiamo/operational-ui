@@ -1,14 +1,13 @@
 import Events from "./event_catalog"
-import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings"
 
 abstract class AbstractFocus {
   el: TSeriesEl
-  focus: any
   state: IState
   stateWriter: TStateWriter
-  events: TEvents
+  events: IEvents
 
-  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events

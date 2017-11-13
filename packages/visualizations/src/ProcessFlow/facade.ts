@@ -3,13 +3,13 @@ import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
-import { IFocusElement, IKeyValueObject, INestedKeyValueObject } from "./typings"
+import { IConfig,IFocusElement, IInputData, INestedObject } from "./typings"
 
 class ProcessFlow extends AbstractFacade {
   series: Series
   canvas: Canvas
 
-  defaultConfig(): IKeyValueObject {
+  defaultConfig(): Partial<IConfig> {
     return {
       borderColor: "#fff",
       height: Infinity,
@@ -30,12 +30,20 @@ class ProcessFlow extends AbstractFacade {
     }
   }
 
-  defaultAccessors(): INestedKeyValueObject {
+  defaultAccessors(): INestedObject {
     return {
       data: {
-        nodes: (d: any) => d.nodes,
-        journeys: (d: any) => d.journeys
+        nodes: (d: IInputData) => d.nodes,
+        journeys: (d: IInputData) => d.journeys
       }
+    }
+  }
+
+  defaultComputed(): INestedObject {
+     return {
+      canvas: {},
+      focus: {},
+      series: {},
     }
   }
 

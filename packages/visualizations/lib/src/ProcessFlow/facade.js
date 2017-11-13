@@ -48,6 +48,13 @@ var ProcessFlow = /** @class */ (function (_super) {
             }
         };
     };
+    ProcessFlow.prototype.defaultComputed = function () {
+        return {
+            canvas: {},
+            focus: {},
+            series: {},
+        };
+    };
     ProcessFlow.prototype.visualizationName = function () {
         return "processflow";
     };

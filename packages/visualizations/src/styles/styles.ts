@@ -12,11 +12,13 @@ const focusLegendStyle = {
   userSelect: "none",
   pointerEvents: "none",
   boxShadow: "0px 1px 2px #d3d1d1",
+  boxSizing: "content-box",
   borderRadius: 2,
   padding: 7,
   border: "1px solid #cdcdcd",
   position: "absolute",
   zIndex: 3000,
+  maxWidth: "350px",
   backgroundColor: "#fff",
   "& ul": {
     listStyle: "none",

@@ -3,15 +3,29 @@ import NodeAccessors from "./node_accessors"
 import Link from "./link"
 import LinkAccessors from "./link_accessors"
 import Layout from "./layout"
-import { bind, map, forEach, find, times, extend, groupBy, flow, sortBy } from "lodash/fp"
-import { TNode, TLink, IJourney, IData, IInputData, ILinkAttrs, TAccessors, IState, IBreakdown, IConfig, TStateWriter } from "./typings"
+import { bind, extend, find, flow, forEach, get, groupBy, map, sortBy, times } from "lodash/fp"
+import {
+  TNode,
+  TLink,
+  IJourney,
+  IData,
+  IInputData,
+  ILinkAttrs,
+  IState,
+  IBreakdown,
+  IConfig,
+  TStateWriter,
+  IObject,
+  IAccessors,
+  IAccessorsObject
+} from "./typings"
 
 class DataHandler {
   journeys: IJourney[]
   nodes: TNode[]
   links: TLink[]
-  nodeAccessors: TAccessors
-  linkAccessors: TAccessors
+  nodeAccessors: IAccessors
+  linkAccessors: IAccessors
   state: IState
   stateWriter: TStateWriter
   layout: Layout
@@ -24,11 +38,11 @@ class DataHandler {
 
   prepareData(): IData {
     const data = this.state.current.get("data")
-    const accessors: any = this.state.current.get("accessors")
+    const accessors: IAccessorsObject = this.state.current.get("accessors")
     this.journeys = accessors.data.journeys(data)
     this.setNodeAccessors(accessors.node)
     this.setLinkAccessors(accessors.link)
-    this.initializeNodes(data)
+    this.initializeNodes(accessors.data.nodes(data))
     this.initializeLinks(data)
     this.layout.computeLayout(this.nodes)
     this.positionNodes()
@@ -39,9 +53,8 @@ class DataHandler {
     }
   }
 
-  initializeNodes(data: IInputData): void {
-    const accessors: any = this.state.current.get("accessors")
-    this.nodes = map(bind(this.addNode, this))(accessors.data.nodes(data))
+  initializeNodes(nodeAttrs: {}[]): void {
+    this.nodes = map(this.addNode.bind(this))(nodeAttrs)
     forEach((node: TNode): void => {
       node.sourceLinks = []
       node.targetLinks = []
@@ -60,7 +73,7 @@ class DataHandler {
     return node
   }
 
-  setNodeAccessors(accessors: TAccessors) {
+  setNodeAccessors(accessors: IAccessors): void {
     this.nodeAccessors = new NodeAccessors()
     this.nodeAccessors.setAccessors(accessors)
   }
@@ -94,15 +107,14 @@ class DataHandler {
     this.computeLinks()
   }
 
-  // @TODO why is there a type error if the method output has type TLink?
-  findLink(sourceId: string, targetId: string): any {
-    const checkIds: any = (link: TLink): boolean => {
+  findLink(sourceId: string, targetId: string): TLink {
+    function checkIds(link: TLink): boolean {
       return link.sourceId() === sourceId && link.targetId() === targetId
     }
     return find(checkIds)(this.links)
   }
 
-  setLinkAccessors(accessors: TAccessors): void {
+  setLinkAccessors(accessors: IAccessors): void {
     this.linkAccessors = new LinkAccessors()
     this.linkAccessors.setAccessors(accessors)
   }
@@ -114,7 +126,7 @@ class DataHandler {
   computeLinks(): void {
     forEach((journey: IJourney): void => {
       const path: string[] = journey.path
-      const computeLink: (i: number) => void = (i: number): void => {
+      const computeLink = (i: number): void => {
         const sourceId: string = path[i]
         const targetId: string = path[i + 1]
         const sourceNode: TNode = this.findNode(sourceId)
@@ -144,7 +156,7 @@ class DataHandler {
   xGridSpacing(): number {
     const config: IConfig = this.state.current.get("config"),
       finiteWidth: boolean = isFinite(config.width),
-      xValues: number[] = map((node: TNode): number => node.x)(this.layout.nodes),
+      xValues: number[] = map(get("x"))(this.layout.nodes),
       maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
       spacing: number = finiteWidth
         ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
@@ -175,9 +187,11 @@ class DataHandler {
     forEach((node: TNode): void => {
       node.y = (node.y + 1) * yGridSpacing
     })(this.layout.nodes)
+
+    // Assign x values
     forEach((row: string): void => {
       flow(
-        sortBy((node: TNode): number => node.x),
+        sortBy(get("x")),
         forEach((node: TNode): void => {
           node.x *= xGridSpacing
         }),

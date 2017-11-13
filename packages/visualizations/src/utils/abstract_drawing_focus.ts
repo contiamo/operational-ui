@@ -1,27 +1,23 @@
 import AbstractFocus from "./abstract_focus"
 import Events from "./event_catalog"
-import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings"
 
 abstract class AbstractDrawingFocus extends AbstractFocus {
-  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, el: TSeriesEl) {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl) {
     super(state, stateWriter, events, el)
     this.events.on(Events.FOCUS.ELEMENT.HOVER, this.onElementHover())
-    this.events.on(Events.FOCUS.ELEMENT.OUT, this.onElementOut())
-    this.events.on(Events.CHART.OUT, this.onMouseLeave())
+    this.events.on(Events.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.OUT, this.onMouseLeave.bind(this))
   }
 
   abstract onElementHover(): (payload: { focusPoint: any; d: any }) => void
 
-  onElementOut(): () => void {
-    return () => {
-      this.remove()
-    }
+  onElementOut(): void {
+    this.remove()
   }
 
-  onMouseLeave(): () => void {
-    return () => {
-      this.events.emit(Events.FOCUS.ELEMENT.OUT)
-    }
+  onMouseLeave(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
   }
 }
 

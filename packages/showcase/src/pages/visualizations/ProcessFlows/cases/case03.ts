@@ -81,7 +81,7 @@ const nodeAccessors: any = {
 
 const linkAccessors: any = {
   stroke: (link: any) => (link.size > 1000 ? "blue" : "#bbb"),
-  dash: (link: any) => 10,
+  dash: (link: any) => "10 2",
   size: (link: any) => 2
 }
 

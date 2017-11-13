@@ -13,7 +13,7 @@ var Series = /** @class */ (function () {
         this.drawn = false;
     }
     Series.prototype.prepareData = function () {
-        this.data = this.dataHandler.prepareData(this.state);
+        this.data = this.dataHandler.prepareData();
         this.stateWriter("data", this.data);
     };
     Series.prototype.hasData = function () {

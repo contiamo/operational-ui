@@ -1,5 +1,5 @@
 import { extend } from "lodash/fp"
-import { TNode, ILinkAttrs, TAccessors } from "./typings"
+import { TAccessors, ILinkAttrs, TNode } from "./typings"
 
 class Link {
   accessors: TAccessors
@@ -14,7 +14,7 @@ class Link {
     this.attributes = extend.convert({ immutable: false })({}, linkAttributes)
   }
 
-  dash(): number {
+  dash(): string {
     return this.accessors.dash(this.attributes)
   }
 

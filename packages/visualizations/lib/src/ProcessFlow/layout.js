@@ -61,9 +61,9 @@ var Layout = /** @class */ (function () {
     };
     Layout.prototype.computeNodeXPositions = function () {
         var _this = this;
-        var rows = fp_1.uniq(fp_1.sortBy(function (y) { return y; })(fp_1.map(function (node) { return node.y; })(this.nodes)));
+        var rows = fp_1.flow(fp_1.map(fp_1.get("y")), fp_1.sortBy(fp_1.identity), fp_1.uniq)(this.nodes);
         fp_1.forEach(function (row) {
-            var nodesInRow = fp_1.filter(function (node) { return node.y === row; })(_this.nodes);
+            var nodesInRow = fp_1.filter({ y: row })(_this.nodes);
             if (row === 0) {
                 // For the top row, spread nodes out equally
                 fp_1.forEach.convert({ cap: false })(function (node, i) {
@@ -84,7 +84,7 @@ var Layout = /** @class */ (function () {
 }());
 // Helper functions
 function placeNode(used, x, node) {
-    if (fp_1.find(function (val) { return val === x; })(used)) {
+    if (fp_1.indexOf(x)(used) > -1) {
         placeNode(used, x + 1, node);
     }
     else {
@@ -100,16 +100,16 @@ function placeSingleSourceNodes(nodesInRow, nodePositions) {
     })(singleSourceNodes);
 }
 function singleSourceAbove(sourcePositions) {
-    var sourceNodesAbove = function (x) {
+    function sourceNodesAbove(x) {
         return fp_1.filter(function (position) { return position === x; })(sourcePositions);
-    };
+    }
     return function (x) { return sourceNodesAbove(x).length === 1; };
 }
 // Check that there isn't a non-source node vertically between 2 linked nodes.
 function isSourceDirectlyAbove(node, nodes) {
     return function (xValue) {
         var findSourceNodeAtX = fp_1.find(function (link) { return link.source().x === xValue; });
-        var maxYVal = fp_1.flow(fp_1.filter(function (n) { return n.x === xValue; }), fp_1.reduce(function (max, n) {
+        var maxYVal = fp_1.flow(fp_1.filter({ x: xValue }), fp_1.reduce(function (max, n) {
             return Math.max(max, n.y);
         }, 0))(nodes);
         return maxYVal === findSourceNodeAtX(node.targetLinks).source().y;

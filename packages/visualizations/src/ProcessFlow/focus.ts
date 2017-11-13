@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/abstract_drawing_focus"
 import FocusUtils from "../utils/focus_utils"
-import { uniqueId, forEach, reduce, map, flow } from "lodash/fp"
-import { IConfig, IFocus, IBreakdown, TLink, TNode, TSeriesEl, TD3SelectionNoData } from "./typings"
+import { flow, forEach, map, reduce, uniqueId } from "lodash/fp"
+import { IBreakdown, IConfig, IFocus, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {
@@ -11,13 +11,11 @@ interface IBreakdowns {
   endsHere: IBreakdown[]
 }
 
-type TContainerMethod = (container: TD3SelectionNoData) => TD3SelectionNoData
-
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
 
-  onElementHover(): (payload: { focusPoint: IFocus; d: any }) => void {
-    return (payload: { focusPoint: IFocus; d: any }): void => {
+  onElementHover() {
+    return (payload: { focusPoint: IFocus; d: TNode | TLink }): void => {
       // Remove the current focus label, if there is one
       this.remove()
 
@@ -58,7 +56,7 @@ class Focus extends AbstractFocus {
 
   addNodeBreakdowns(content: TSeriesEl, datum: TNode): void {
     const breakdowns: IBreakdowns = computeBreakdowns(datum),
-      container: TD3SelectionNoData = content.append("div").attr("class", styles.breakdownsContainer),
+      container: TD3Selection = content.append("div").attr("class", styles.breakdownsContainer),
       inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),
       outputsTotal: number = computeBreakdownTotal(breakdowns.outputs),
       startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
@@ -153,12 +151,12 @@ function computeBreakdownTotal(breakdowns: IBreakdown[]): number {
   return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
 }
 
-function addBreakdownContainer(content: TD3SelectionNoData): TD3SelectionNoData {
+function addBreakdownContainer(content: TD3Selection): TD3Selection {
   return content.append("div").attr("class", styles.breakdownContainer)
 }
 
-function addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
-  return (container: TD3SelectionNoData): TD3SelectionNoData => {
+function addBreakdownTitle(title: string, subtitle?: string) {
+  return (container: TD3Selection): TD3Selection => {
     container.append("span")
       .attr("class", styles.title)
       .text(title)
@@ -168,16 +166,16 @@ function addBreakdownTitle(title: string, subtitle?: string): TContainerMethod {
   }
 }
 
-function addBreakdownBars(breakdownItems: IBreakdown[]): TContainerMethod {
-  return (container: TD3SelectionNoData): TD3SelectionNoData => {
+function addBreakdownBars(breakdownItems: IBreakdown[]) {
+  return (container: TD3Selection): TD3Selection => {
     forEach(appendBreakdown(container))(breakdownItems)
     return container
   }
 }
 
-function appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => void {
+function appendBreakdown(container: TD3Selection) {
   return (item: IBreakdown): void => {
-    const breakdown: TD3SelectionNoData = container.append("div")
+    const breakdown: TD3Selection = container.append("div")
       .attr("class", styles.breakdown)
 
     if (item.label) {
@@ -187,7 +185,7 @@ function appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => v
         .text(item.label)
     }
 
-    const backgroundBar: TD3SelectionNoData = breakdown.append("div")
+    const backgroundBar: TD3Selection = breakdown.append("div")
       .attr("class", styles.breakdownBackgroundBar)
 
     backgroundBar.append("div")
@@ -200,8 +198,8 @@ function appendBreakdown(container: TD3SelectionNoData): (item: IBreakdown) => v
   }
 }
 
-function addBreakdownComment(comment: string): TContainerMethod {
-  return (container: TD3SelectionNoData): TD3SelectionNoData => {
+function addBreakdownComment(comment: string) {
+  return (container: TD3Selection): TD3Selection => {
     container.append("label")
       .attr("class", styles.breakdownCommentLabel)
       .text(comment)

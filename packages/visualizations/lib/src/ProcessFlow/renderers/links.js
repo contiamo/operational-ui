@@ -14,6 +14,7 @@ var abstract_renderer_1 = require("./abstract_renderer");
 var d3 = require("d3-selection");
 require("d3-transition");
 var d3_ease_1 = require("d3-ease");
+var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
 var fp_1 = require("lodash/fp");
 var MINOPACITY = 0.5, MAXOPACITY = 1;
@@ -28,7 +29,7 @@ var Links = /** @class */ (function (_super) {
     Links.prototype.updateDraw = function () {
         var linkGroups = this.el.select("g.links-group")
             .selectAll("g.link-group")
-            .data(this.data, function (link) { return link.sourceId() + ";" + link.targetId(); });
+            .data(this.data, function (d) { return d.sourceId() + ";" + d.targetId(); });
         this.exit(linkGroups);
         this.enterAndUpdate(linkGroups);
     };
@@ -39,56 +40,51 @@ var Links = /** @class */ (function (_super) {
         };
     };
     Links.prototype.enterAndUpdate = function (linkGroups) {
-        var scale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]), borderScale = this.linkBorderScale(scale), opacityScale = this.sizeScale([MINOPACITY, MAXOPACITY]), ctx = this;
+        var _this = this;
+        var scale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]), borderScale = this.linkBorderScale(scale), opacityScale = this.sizeScale([MINOPACITY, MAXOPACITY]);
         linkGroups
             .enter()
             .append("g")
             .attr("class", "link-group")
-            .each(function (d) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Append link "border" element - transparent element behind link.
-            d3
-                .select(this)
-                .append("path")
+            element.append("path")
                 .attr("class", "link " + styles.border)
-                .attr("d", ctx.linkStartPath.bind(ctx))
+                .attr("d", _this.linkStartPath.bind(_this))
                 .attr("stroke-width", "0px")
-                .on("mouseenter", ctx.onMouseOver(ctx))
+                .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)))
                 .attr("opacity", 0);
             // Append link
-            d3
-                .select(this)
-                .append("path")
+            element.append("path")
                 .attr("class", "link " + styles.element)
-                .attr("d", ctx.linkStartPath.bind(ctx))
+                .attr("d", _this.linkStartPath.bind(_this))
                 .attr("fill", "none")
                 .attr("stroke-width", "0px");
-        })
+        }))
             .merge(linkGroups)
-            .each(function (d) {
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            var element = d3.select(el);
             // Update link border
-            d3
-                .select(this)
-                .select("path.link." + styles.border)
-                .attr("stroke", ctx.config.borderColor)
+            element.select("path.link." + styles.border)
+                .attr("stroke", _this.config.borderColor)
                 .transition()
-                .duration(ctx.config.duration)
+                .duration(_this.config.duration)
                 .ease(d3_ease_1.easeCubicInOut)
-                .attr("d", ctx.linkPath.bind(ctx))
-                .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
-                .attr("stroke-dasharray", function (d) { return d.dash(); });
+                .attr("d", _this.linkPath.bind(_this))
+                .attr("stroke-width", borderScale(d.size()) + "px")
+                .attr("stroke-dasharray", d.dash());
             // Update link
-            d3
-                .select(this)
-                .select("path.link." + styles.element)
-                .attr("stroke", function (d) { return d.stroke(); })
+            element.select("path.link." + styles.element)
+                .attr("stroke", d.stroke())
                 .transition()
-                .duration(ctx.config.duration)
+                .duration(_this.config.duration)
                 .ease(d3_ease_1.easeCubicInOut)
-                .attr("d", ctx.linkPath.bind(ctx))
-                .attr("stroke-width", function (d) { return scale(d.size()) + "px"; })
-                .attr("stroke-dasharray", function (d) { return d.dash(); })
-                .attr("opacity", function (d) { return opacityScale(d.size()); });
-        });
+                .attr("d", _this.linkPath.bind(_this))
+                .attr("stroke-width", scale(d.size()) + "px")
+                .attr("stroke-dasharray", d.dash())
+                .attr("opacity", opacityScale(d.size()));
+        }));
     };
     // Paths start as a single point at the source node. If the source node has already been rendered,
     // use its position at the start of the transition.
@@ -101,6 +97,7 @@ var Links = /** @class */ (function (_super) {
         return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd;
     };
     Links.prototype.highlight = function (element, d) {
+        var _this = this;
         // Highlight path.element when `path.${styles.border}` is hovered
         var pathEl = this.el.selectAll("path.link." + styles.element)
             .filter(function (link) {
@@ -108,12 +105,11 @@ var Links = /** @class */ (function (_super) {
         });
         _super.prototype.highlight.call(this, pathEl, d);
         // Highlight source and target nodes as well as link
-        var ctx = this;
         this.el.selectAll("path.node." + styles.border)
             .filter(function (node) { return node.id() === d.sourceId() || node.id() === d.targetId(); })
-            .each(function (node) {
-            d3.select(this).classed("highlighted", true).attr("stroke", ctx.config.highlightColor);
-        });
+            .each(d3_utils_1.withD3Element(function (node, el) {
+            d3.select(el).classed("highlighted", true).attr("stroke", _this.config.highlightColor);
+        }));
     };
     Links.prototype.focusPoint = function (element, d) {
         if (d == null)

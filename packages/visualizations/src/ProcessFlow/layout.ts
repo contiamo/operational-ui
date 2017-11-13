@@ -1,5 +1,5 @@
-import { map, flow, find, forEach, indexOf, reduce, filter, sortBy, uniq, bind } from "lodash/fp"
-import { TNode, TLink, IState, IData } from "./typings"
+import { filter, find, flow, forEach, get, identity,indexOf, map, reduce, sortBy, uniq } from "lodash/fp"
+import { IData, IState, TLink, TNode } from "./typings"
 
 class Layout {
   nodes: TNode[]
@@ -67,10 +67,14 @@ class Layout {
   }
 
   computeNodeXPositions(): void {
-    const rows: number[] = uniq(sortBy((y: number): number => y)(map((node: TNode): number => node.y)(this.nodes)))
+    const rows: number[] = flow(
+      map(get("y")),
+      sortBy(identity),
+      uniq
+    )(this.nodes)
 
     forEach((row: number): void => {
-      var nodesInRow: TNode[] = filter((node: TNode): boolean => node.y === row)(this.nodes)
+      var nodesInRow: TNode[] = filter({ y: row })(this.nodes)
       if (row === 0) {
         // For the top row, spread nodes out equally
         forEach.convert({ cap: false })((node: TNode, i: number): void => {
@@ -90,7 +94,7 @@ class Layout {
 
 // Helper functions
 function placeNode(used: number[], x: number, node: TNode): void {
-  if (find((val: number): boolean => val === x)(used)) {
+  if (indexOf(x)(used) > -1) {
     placeNode(used, x + 1, node)
   } else {
     node.x = x
@@ -106,19 +110,19 @@ function placeSingleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): v
   })(singleSourceNodes)
 }
 
-function singleSourceAbove(sourcePositions: number[]): any {
-  const sourceNodesAbove: any = (x: number): any => {
+function singleSourceAbove(sourcePositions: number[]) {
+  function sourceNodesAbove(x: number): any {
     return filter((position: number): boolean => position === x)(sourcePositions)
   }
   return (x: number): boolean => sourceNodesAbove(x).length === 1
 }
 
 // Check that there isn't a non-source node vertically between 2 linked nodes.
-function isSourceDirectlyAbove(node: TNode, nodes: TNode[]): (xValue: number) => boolean {
+function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
   return (xValue: number): boolean => {
-    const findSourceNodeAtX: any = find((link: TLink): boolean => link.source().x === xValue)
+    const findSourceNodeAtX = find((link: TLink): boolean => link.source().x === xValue)
     const maxYVal: any = flow(
-      filter((n: TNode): boolean => n.x === xValue),
+      filter({ x: xValue }),
       reduce((max: number, n: TNode): number => {
         return Math.max(max, n.y)
       }, 0),
@@ -127,12 +131,12 @@ function isSourceDirectlyAbove(node: TNode, nodes: TNode[]): (xValue: number) =>
   }
 }
 
-function xPositionAvailable(nodePositions: number[]): (x: number) => boolean {
+function xPositionAvailable(nodePositions: number[]) {
   return (x: number): boolean => indexOf(x)(nodePositions) === -1
 }
 
 // Shift all nodes that have an x-value >= the given value to the right by one place
-function shiftNodesToRight(x: number): any {
+function shiftNodesToRight(x: number) {
   return flow(
     filter((n: TNode): boolean => n.x >= x),
     forEach((n: TNode): void => { n.x += 1 }),

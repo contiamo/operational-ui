@@ -1,19 +1,20 @@
 import Events from "./event_catalog"
 import * as d3 from "d3-selection"
-import { reduce, isArray } from "lodash/fp"
-import { IState, TStateWriter, TEvents, TSeriesEl } from "./typings"
+import { isArray, reduce } from "lodash/fp"
+import { IEvents, IObject, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
 import * as styles from "../styles/styles"
 
 abstract class AbstractCanvas {
-  container: d3.Selection<Element, {}, null, undefined>
+  container: TD3Selection
   el: TSeriesEl
-  events: TEvents
-  focusEl: any
-  protected elements: any = {}
+  events: IEvents
+  focusEl: TD3Selection
+  protected elements: IObject = {}
   protected state: IState
+  protected elMap: IObject = {}
   stateWriter: TStateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: TEvents, context: any) {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -25,7 +26,7 @@ abstract class AbstractCanvas {
 
   abstract createEl(): TSeriesEl
 
-  insertContainer(context: any): void {
+  insertContainer(context: Element): void {
     this.container = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.chartContainer}`)
@@ -35,6 +36,7 @@ abstract class AbstractCanvas {
   insertEl(): void {
     this.el = this.createEl()
     this.container.node().appendChild(this.el.node())
+    this.elMap.series = this.el
   }
 
   insertFocusLabel(): void {
@@ -43,18 +45,15 @@ abstract class AbstractCanvas {
       .attr("class", `${styles.focusLegend}`)
       .style("visibility", "hidden")
     this.container.node().appendChild(this.focusEl.node())
+    this.elMap.focus = this.focusEl
   }
 
   createInitialElements(): void {
     return
   }
 
-  elementFor(component: string): any {
-    const elMap: any = {
-      series: this.el,
-      focus: this.focusEl,
-    }
-    return elMap[component]
+  elementFor(component: string): TD3Selection {
+    return this.elMap[component]
   }
 
   prefixedId(id: string): string {
@@ -94,7 +93,7 @@ abstract class AbstractCanvas {
     return this.container.node()
   }
 
-  abstract mouseOverElement(): any
+  abstract mouseOverElement(): TD3Selection
 
   trackMouseMove(): void {
     return
@@ -108,9 +107,9 @@ abstract class AbstractCanvas {
     return []
   }
 
-  insertSeries(): { [key: string]: any[] } {
+  insertSeries(): IObject {
     let that: AbstractCanvas = this
-    return reduce((memo: any, se: any): any => {
+    return reduce((memo: IObject, se: any): IObject => {
       let renderer: string = isArray(se) ? se[0] : se
       memo[renderer] = this.elements.series[renderer].append("svg:g")
       return memo
@@ -128,12 +127,12 @@ abstract class AbstractCanvas {
     return parseInt(this.el.style("margin-" + side), 10) || 0
   }
 
-  resize(computed: any): void {
+  resize(computed: IObject): void {
     return this.draw()
   }
 
   remove(): void {
-    let el: any = this.mouseOverElement()
+    let el: TD3Selection = this.mouseOverElement()
     if (el) {
       el.node().removeEventListener("mouseenter")
       el.node().removeEventListener("mouseleave")

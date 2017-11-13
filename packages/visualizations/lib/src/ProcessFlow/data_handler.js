@@ -18,7 +18,7 @@ var DataHandler = /** @class */ (function () {
         this.journeys = accessors.data.journeys(data);
         this.setNodeAccessors(accessors.node);
         this.setLinkAccessors(accessors.link);
-        this.initializeNodes(data);
+        this.initializeNodes(accessors.data.nodes(data));
         this.initializeLinks(data);
         this.layout.computeLayout(this.nodes);
         this.positionNodes();
@@ -28,9 +28,8 @@ var DataHandler = /** @class */ (function () {
             links: this.links,
         };
     };
-    DataHandler.prototype.initializeNodes = function (data) {
-        var accessors = this.state.current.get("accessors");
-        this.nodes = fp_1.map(fp_1.bind(this.addNode, this))(accessors.data.nodes(data));
+    DataHandler.prototype.initializeNodes = function (nodeAttrs) {
+        this.nodes = fp_1.map(this.addNode.bind(this))(nodeAttrs);
         fp_1.forEach(function (node) {
             node.sourceLinks = [];
             node.targetLinks = [];
@@ -79,11 +78,10 @@ var DataHandler = /** @class */ (function () {
         this.links = [];
         this.computeLinks();
     };
-    // @TODO why is there a type error if the method output has type TLink?
     DataHandler.prototype.findLink = function (sourceId, targetId) {
-        var checkIds = function (link) {
+        function checkIds(link) {
             return link.sourceId() === sourceId && link.targetId() === targetId;
-        };
+        }
         return fp_1.find(checkIds)(this.links);
     };
     DataHandler.prototype.setLinkAccessors = function (accessors) {
@@ -124,7 +122,7 @@ var DataHandler = /** @class */ (function () {
         })(this.journeys);
     };
     DataHandler.prototype.xGridSpacing = function () {
-        var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(function (node) { return node.x; })(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth
+        var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(fp_1.get("x"))(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth
             ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
             : config.horizontalNodeSpacing;
         this.stateWriter(["width"], finiteWidth ? config.width : spacing * (maxX + 1));
@@ -144,8 +142,9 @@ var DataHandler = /** @class */ (function () {
         fp_1.forEach(function (node) {
             node.y = (node.y + 1) * yGridSpacing;
         })(this.layout.nodes);
+        // Assign x values
         fp_1.forEach(function (row) {
-            fp_1.flow(fp_1.sortBy(function (node) { return node.x; }), fp_1.forEach(function (node) {
+            fp_1.flow(fp_1.sortBy(fp_1.get("x")), fp_1.forEach(function (node) {
                 node.x *= xGridSpacing;
             }))(nodesByRow[parseInt(row, 10)]);
         })(rows);

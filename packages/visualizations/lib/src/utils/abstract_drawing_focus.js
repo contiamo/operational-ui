@@ -17,21 +17,15 @@ var AbstractDrawingFocus = /** @class */ (function (_super) {
     function AbstractDrawingFocus(state, stateWriter, events, el) {
         var _this = _super.call(this, state, stateWriter, events, el) || this;
         _this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, _this.onElementHover());
-        _this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, _this.onElementOut());
-        _this.events.on(event_catalog_1.default.CHART.OUT, _this.onMouseLeave());
+        _this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, _this.onElementOut.bind(_this));
+        _this.events.on(event_catalog_1.default.CHART.OUT, _this.onMouseLeave.bind(_this));
         return _this;
     }
     AbstractDrawingFocus.prototype.onElementOut = function () {
-        var _this = this;
-        return function () {
-            _this.remove();
-        };
+        this.remove();
     };
     AbstractDrawingFocus.prototype.onMouseLeave = function () {
-        var _this = this;
-        return function () {
-            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
-        };
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
     return AbstractDrawingFocus;
 }(abstract_focus_1.default));

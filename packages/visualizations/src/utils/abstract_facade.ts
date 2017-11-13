@@ -1,18 +1,18 @@
 import StateHandler from "./state_handler"
 import EventEmitter from "./event_bus"
-import { uniqueId, merge } from "lodash/fp"
-import { IDefaultState } from "./typings"
+import { merge, uniqueId } from "lodash/fp"
+import { IAccessors, IAccessorsObject, IChartStateObject, IDefaultConfig, INestedObject, IObject } from "./typings"
 
 abstract class AbstractChart {
   state: StateHandler
   events: EventEmitter
-  components: any
-  context: any
-  __disposed: boolean
+  components: IObject
+  context: Element
+  __disposed: boolean = false
   drawn: boolean = false
   dirty: boolean = false
 
-  constructor(context: any) {
+  constructor(context: Element) {
     this.context = context
     this.state = new StateHandler(this.defaultState())
     this.events = new EventEmitter()
@@ -23,7 +23,7 @@ abstract class AbstractChart {
 
   abstract visualizationName(): string
 
-  baseDefaultState(): IDefaultState {
+  private baseDefaultState(): IChartStateObject {
     return {
       data: {},
       config: {
@@ -34,14 +34,11 @@ abstract class AbstractChart {
         width: 500,
       },
       accessors: {},
-      computed: {
-        series: {},
-        canvas: {},
-      }
+      computed: {}
     }
   }
 
-  defaultState(): IDefaultState {
+  defaultState(): IChartStateObject {
     return merge(this.baseDefaultState())({
       data: this.defaultData(),
       config: this.defaultConfig(),
@@ -50,19 +47,19 @@ abstract class AbstractChart {
     })
   }
 
-  defaultData(): any {
+  defaultData(): Array<any> | IObject {
     return {}
   }
 
-  defaultConfig(): any {
+  defaultConfig(): Partial<IDefaultConfig> {
     return {}
   }
 
-  defaultAccessors(): any {
+  defaultAccessors(): Partial<IAccessorsObject> {
     return {}
   }
 
-  defaultComputed(): any {
+  defaultComputed(): INestedObject {
     return {}
   }
 
@@ -77,12 +74,12 @@ abstract class AbstractChart {
     return this.state.data(data)
   }
 
-  config(config?: Object) {
+  config(config?: IObject) {
     this.dirty = true
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: Object) {
+  accessors(type: string, accessors: IAccessors) {
     this.dirty = true
     return this.state.accessors(type, accessors)
   }
@@ -95,8 +92,8 @@ abstract class AbstractChart {
     this.events.removeListener(event, handler)
   }
 
-  // Draw / resize
-  abstract draw(args?: any): any
+  // Draw
+  abstract draw(): Element
 
   // Close / cleanup
   close(): void {

@@ -220,8 +220,8 @@ export default {
   LinkAccessors: [
     {
       name: "dash",
-      description: "Dash length of link. 0 is solid line",
-      defaultValue: "link.dash || 0",
+      description: 'Dash length of link. "<dashLength> <gapLength>". 0 is solid line',
+      defaultValue: 'link.dash || "0"',
       type: "string",
       optional: true
     },
@@ -236,7 +236,7 @@ export default {
       name: "size",
       description: "Value for determining width of link",
       defaultValue: "link.size || 1",
-      type: "string",
+      type: "number",
       optional: true
     },
     {
@@ -250,7 +250,7 @@ export default {
       name: "source",
       description: "Node at which the link starts",
       defaultValue: "link.source || undefined",
-      type: "string",
+      type: "node",
       optional: true
     },
     {
@@ -264,7 +264,7 @@ export default {
       name: "target",
       description: "Node at which the link ends",
       defaultValue: "link.target || undefined",
-      type: "string",
+      type: "node",
       optional: true
     },
     {

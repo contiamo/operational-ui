@@ -1,11 +1,4 @@
-import {
-  drop,
-  dropRight,
-  forEach,
-  indexOf,
-  map,
-  uniq,
-} from "lodash/fp"
+import { drop, dropRight, forEach, indexOf, map, uniq } from "lodash/fp"
 
 type TPath = string[]
 
@@ -43,11 +36,7 @@ function getSourcesRecursively(sources: TNodesList): TNodesList {
     })(findNode(sourceId).linkedToFrom)
   })(sources)
 
-  if (sources.length > numberOfLinks) {
-    return getSourcesRecursively(sources)
-  } else {
-    return sources
-  }
+  return sources.length > numberOfLinks ? getSourcesRecursively(sources) : sources
 }
 
 function isLinkedToFrom(sourceId: string, targetId: string): boolean {

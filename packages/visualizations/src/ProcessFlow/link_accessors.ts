@@ -2,9 +2,9 @@ import AccessorsFactory from "../utils/accessors_factory"
 import { ILinkAttrs, TNode } from "./typings"
 
 const defaultAccessors: any = {
-  // Dash length of link. Default 0 (solid line)
-  dash: (link: ILinkAttrs): number => {
-    return link.dash || 0
+  // Dash length of link. Default "0" (solid line)
+  dash: (link: ILinkAttrs): string => {
+    return link.dash || "0"
   },
   // Label to display next to link - defaults to an empty string.
   label: (link: ILinkAttrs): string => {

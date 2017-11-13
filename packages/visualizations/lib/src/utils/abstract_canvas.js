@@ -7,6 +7,7 @@ var styles = require("../styles/styles");
 var AbstractCanvas = /** @class */ (function () {
     function AbstractCanvas(state, stateWriter, events, context) {
         this.elements = {};
+        this.elMap = {};
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
@@ -24,6 +25,7 @@ var AbstractCanvas = /** @class */ (function () {
     AbstractCanvas.prototype.insertEl = function () {
         this.el = this.createEl();
         this.container.node().appendChild(this.el.node());
+        this.elMap.series = this.el;
     };
     AbstractCanvas.prototype.insertFocusLabel = function () {
         this.focusEl = d3
@@ -31,16 +33,13 @@ var AbstractCanvas = /** @class */ (function () {
             .attr("class", "" + styles.focusLegend)
             .style("visibility", "hidden");
         this.container.node().appendChild(this.focusEl.node());
+        this.elMap.focus = this.focusEl;
     };
     AbstractCanvas.prototype.createInitialElements = function () {
         return;
     };
     AbstractCanvas.prototype.elementFor = function (component) {
-        var elMap = {
-            series: this.el,
-            focus: this.focusEl,
-        };
-        return elMap[component];
+        return this.elMap[component];
     };
     AbstractCanvas.prototype.prefixedId = function (id) {
         return this.state.current.get("config").uid + id;
