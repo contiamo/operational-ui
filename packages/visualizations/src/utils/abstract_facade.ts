@@ -9,8 +9,6 @@ abstract class AbstractChart {
   components: IObject
   context: Element
   __disposed: boolean = false
-  drawn: boolean = false
-  dirty: boolean = false
 
   constructor(context: Element) {
     this.context = context
@@ -70,17 +68,14 @@ abstract class AbstractChart {
   abstract initializeSeries(): void
 
   data(data?: any) {
-    this.dirty = true
     return this.state.data(data)
   }
 
   config(config?: IObject) {
-    this.dirty = true
     return this.state.config(config)
   }
 
   accessors(type: string, accessors: IAccessors) {
-    this.dirty = true
     return this.state.accessors(type, accessors)
   }
 

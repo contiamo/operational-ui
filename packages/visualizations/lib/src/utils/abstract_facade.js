@@ -6,8 +6,6 @@ var fp_1 = require("lodash/fp");
 var AbstractChart = /** @class */ (function () {
     function AbstractChart(context) {
         this.__disposed = false;
-        this.drawn = false;
-        this.dirty = false;
         this.context = context;
         this.state = new state_handler_1.default(this.defaultState());
         this.events = new event_bus_1.default();
@@ -51,15 +49,12 @@ var AbstractChart = /** @class */ (function () {
     };
     AbstractChart.prototype.initializeComponents = function () { };
     AbstractChart.prototype.data = function (data) {
-        this.dirty = true;
         return this.state.data(data);
     };
     AbstractChart.prototype.config = function (config) {
-        this.dirty = true;
         return this.state.config(config);
     };
     AbstractChart.prototype.accessors = function (type, accessors) {
-        this.dirty = true;
         return this.state.accessors(type, accessors);
     };
     AbstractChart.prototype.on = function (event, handler) {

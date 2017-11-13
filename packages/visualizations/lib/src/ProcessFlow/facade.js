@@ -74,8 +74,6 @@ var ProcessFlow = /** @class */ (function (_super) {
         this.series.prepareData();
         this.canvas.draw();
         this.series.draw();
-        this.drawn = true;
-        this.dirty = false;
         var focusElement = this.state.config().focusElement;
         if (focusElement) {
             this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, focusElement);

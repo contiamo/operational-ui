@@ -80,8 +80,6 @@ class ProcessFlow extends AbstractFacade {
     this.series.prepareData()
     this.canvas.draw()
     this.series.draw()
-    this.drawn = true
-    this.dirty = false
     const focusElement: IFocusElement = this.state.config().focusElement
     if (focusElement) {
       this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
