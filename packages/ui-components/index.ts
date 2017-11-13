@@ -33,6 +33,7 @@ import { Tabs, Tab } from "./src/Tabs/Tabs"
 import Tooltip from "./src/Tooltip/Tooltip"
 import Timeline, { TimelineItem } from "./src/Timeline/Timeline"
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./src/Typography/Typography"
+import { contiamoTheme, Theme } from "contiamo-ui-theme"
 import Upload from "./src/Upload/Upload"
 
 export {
@@ -81,5 +82,7 @@ export {
   BodyType,
   SmallType,
   ThemeProvider,
+  contiamoTheme,
+  Theme,
   Upload
 }

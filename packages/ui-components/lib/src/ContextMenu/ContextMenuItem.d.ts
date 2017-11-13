@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export interface IProps {
     css?: any;
     className?: string;
