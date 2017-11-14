@@ -13,11 +13,12 @@ export interface IProps {
   css?: any
   children: React.ReactNode
   theme?: Theme
-  color: string
+  color?: string
 }
 
-const Container = glamorous.header(({ theme, color }: { theme: Theme; color: string }): any => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color] || "white") : "white"
+const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: string }): {} => {
+  const { white } = theme.colors.palette
+  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color] || white) : white
 
   return {
     backgroundColor,

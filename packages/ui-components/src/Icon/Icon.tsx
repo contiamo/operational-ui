@@ -19,7 +19,9 @@ export interface IPropsWithTheme extends IProps {
 
 const Icon: React.StatelessComponent<IPropsWithTheme> = ({ name, size, color, theme }: IPropsWithTheme) => {
   const defaultColor = theme.colors.palette.grey90
-  const color_: string = color ? hexOrColor(color)(theme.colors.palette[color] || defaultColor) as string : defaultColor
+  const color_: string = color
+    ? (hexOrColor(color)(theme.colors.palette[color] || defaultColor) as string)
+    : defaultColor
 
   if (ReactFeather.hasOwnProperty(name)) {
     const Comp = ReactFeather[name]

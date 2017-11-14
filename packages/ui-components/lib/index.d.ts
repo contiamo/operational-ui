@@ -26,5 +26,6 @@ import { Tabs, Tab } from "./src/Tabs/Tabs";
 import Tooltip from "./src/Tooltip/Tooltip";
 import Timeline, { TimelineItem } from "./src/Timeline/Timeline";
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./src/Typography/Typography";
+import { contiamoTheme, Theme } from "contiamo-ui-theme";
 import Upload from "./src/Upload/Upload";
-export { Button, ButtonGroup, Breakdown, Card, CardHeader, Chip, ColorPicker, ContextMenu, ContextMenuItem, Grid, DatePicker, Fieldset, Header, HeaderItem, HeaderSeparator, HeaderTitle, Icon, ReactFeatherIconName, InfoTile, Input, Modal, Paginator, PlusChip, Progress, Select, SideNavigation, SideNavigationHeader, SideNavigationItem, SideNavigationLink, Sidebar, SidebarItem, SidebarLink, Spinner, Switch, Tabs, Tab, Timeline, TimelineItem, Tooltip, TitleType, Heading1Type, Heading2Type, BodyType, SmallType, ThemeProvider, Upload };
+export { Button, ButtonGroup, Breakdown, Card, CardHeader, Chip, ColorPicker, ContextMenu, ContextMenuItem, Grid, DatePicker, Fieldset, Header, HeaderItem, HeaderSeparator, HeaderTitle, Icon, ReactFeatherIconName, InfoTile, Input, Modal, Paginator, PlusChip, Progress, Select, SideNavigation, SideNavigationHeader, SideNavigationItem, SideNavigationLink, Sidebar, SidebarItem, SidebarLink, Spinner, Switch, Tabs, Tab, Timeline, TimelineItem, Tooltip, TitleType, Heading1Type, Heading2Type, BodyType, SmallType, ThemeProvider, contiamoTheme, Theme, Upload };

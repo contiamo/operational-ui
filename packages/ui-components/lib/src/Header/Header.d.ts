@@ -9,7 +9,7 @@ export interface IProps {
     css?: any;
     children: React.ReactNode;
     theme?: Theme;
-    color: string;
+    color?: string;
 }
 declare const Header: React.SFC<IProps>;
 export default Header;
