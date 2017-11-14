@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var state_handler_1 = require("./state_handler");
 var event_bus_1 = require("./event_bus");
 var fp_1 = require("lodash/fp");
-var AbstractChart = /** @class */ (function () {
-    function AbstractChart(context) {
+var Facade = /** @class */ (function () {
+    function Facade(context) {
         this.__disposed = false;
         this.context = context;
         this.state = new state_handler_1.default(this.defaultState());
@@ -13,7 +13,7 @@ var AbstractChart = /** @class */ (function () {
         this.initializeComponents();
         this.initializeSeries();
     }
-    AbstractChart.prototype.baseDefaultState = function () {
+    Facade.prototype.baseDefaultState = function () {
         return {
             data: {},
             config: {
@@ -27,7 +27,7 @@ var AbstractChart = /** @class */ (function () {
             computed: {}
         };
     };
-    AbstractChart.prototype.defaultState = function () {
+    Facade.prototype.defaultState = function () {
         return fp_1.merge(this.baseDefaultState())({
             data: this.defaultData(),
             config: this.defaultConfig(),
@@ -35,36 +35,36 @@ var AbstractChart = /** @class */ (function () {
             computed: this.defaultComputed(),
         });
     };
-    AbstractChart.prototype.defaultData = function () {
+    Facade.prototype.defaultData = function () {
         return {};
     };
-    AbstractChart.prototype.defaultConfig = function () {
+    Facade.prototype.defaultConfig = function () {
         return {};
     };
-    AbstractChart.prototype.defaultAccessors = function () {
+    Facade.prototype.defaultAccessors = function () {
         return {};
     };
-    AbstractChart.prototype.defaultComputed = function () {
+    Facade.prototype.defaultComputed = function () {
         return {};
     };
-    AbstractChart.prototype.initializeComponents = function () { };
-    AbstractChart.prototype.data = function (data) {
+    Facade.prototype.initializeComponents = function () { };
+    Facade.prototype.data = function (data) {
         return this.state.data(data);
     };
-    AbstractChart.prototype.config = function (config) {
+    Facade.prototype.config = function (config) {
         return this.state.config(config);
     };
-    AbstractChart.prototype.accessors = function (type, accessors) {
+    Facade.prototype.accessors = function (type, accessors) {
         return this.state.accessors(type, accessors);
     };
-    AbstractChart.prototype.on = function (event, handler) {
+    Facade.prototype.on = function (event, handler) {
         this.events.on(event, handler);
     };
-    AbstractChart.prototype.off = function (event, handler) {
+    Facade.prototype.off = function (event, handler) {
         this.events.removeListener(event, handler);
     };
     // Close / cleanup
-    AbstractChart.prototype.close = function () {
+    Facade.prototype.close = function () {
         if (this.__disposed) {
             return;
         }
@@ -72,7 +72,7 @@ var AbstractChart = /** @class */ (function () {
         this.events.removeAll();
         this.context.innerHTML = "";
     };
-    return AbstractChart;
+    return Facade;
 }());
-exports.default = AbstractChart;
-//# sourceMappingURL=abstract_facade.js.map
+exports.default = Facade;
+//# sourceMappingURL=facade.js.map

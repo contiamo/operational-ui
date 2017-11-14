@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("./event_catalog");
-var AbstractFocus = /** @class */ (function () {
-    function AbstractFocus(state, stateWriter, events, el) {
+var Focus = /** @class */ (function () {
+    function Focus(state, stateWriter, events, el) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
     }
-    AbstractFocus.prototype.remove = function () {
+    Focus.prototype.remove = function () {
         this.el.node().innerHTML = "";
         this.el.style("visibility", "hidden");
         this.events.emit(event_catalog_1.default.FOCUS.CLEAR);
     };
     // Remove date focus and redraw (necessary when data changed or chart is resized)
-    AbstractFocus.prototype.refresh = function () {
+    Focus.prototype.refresh = function () {
         this.remove();
     };
-    return AbstractFocus;
+    return Focus;
 }());
-exports.default = AbstractFocus;
-//# sourceMappingURL=abstract_focus.js.map
+exports.default = Focus;
+//# sourceMappingURL=focus.js.map

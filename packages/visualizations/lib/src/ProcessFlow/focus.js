@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_drawing_focus_1 = require("../utils/abstract_drawing_focus");
+var drawing_focus_1 = require("../utils/drawing_focus");
 var focus_utils_1 = require("../utils/focus_utils");
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
@@ -78,7 +78,7 @@ var Focus = /** @class */ (function (_super) {
         };
     };
     return Focus;
-}(abstract_drawing_focus_1.default));
+}(drawing_focus_1.default));
 // Helper functions
 function computeBreakdowns(node) {
     var inputs = fp_1.map(function (link) {

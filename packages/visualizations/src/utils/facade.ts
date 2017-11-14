@@ -3,7 +3,7 @@ import EventEmitter from "./event_bus"
 import { merge, uniqueId } from "lodash/fp"
 import { IAccessors, IAccessorsObject, IChartStateObject, IDefaultConfig, INestedObject, IObject } from "./typings"
 
-abstract class AbstractChart {
+abstract class Facade {
   state: StateHandler
   events: EventEmitter
   components: IObject
@@ -101,4 +101,4 @@ abstract class AbstractChart {
   }
 }
 
-export default AbstractChart
+export default Facade

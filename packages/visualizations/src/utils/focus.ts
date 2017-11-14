@@ -1,7 +1,7 @@
 import Events from "./event_catalog"
 import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings"
 
-abstract class AbstractFocus {
+abstract class Focus {
   el: TSeriesEl
   state: IState
   stateWriter: TStateWriter
@@ -26,4 +26,4 @@ abstract class AbstractFocus {
   }
 }
 
-export default AbstractFocus
+export default Focus

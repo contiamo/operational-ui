@@ -1,4 +1,4 @@
-import AbstractFacade from "../utils/abstract_facade"
+import AbstractFacade from "../utils/facade"
 import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"

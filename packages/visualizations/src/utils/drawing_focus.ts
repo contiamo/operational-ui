@@ -1,8 +1,8 @@
-import AbstractFocus from "./abstract_focus"
+import Focus from "./focus"
 import Events from "./event_catalog"
 import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings"
 
-abstract class AbstractDrawingFocus extends AbstractFocus {
+abstract class DrawingFocus extends Focus {
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl) {
     super(state, stateWriter, events, el)
     this.events.on(Events.FOCUS.ELEMENT.HOVER, this.onElementHover())
@@ -21,4 +21,4 @@ abstract class AbstractDrawingFocus extends AbstractFocus {
   }
 }
 
-export default AbstractDrawingFocus
+export default DrawingFocus

@@ -1,4 +1,4 @@
-import AbstractFocus from "../utils/abstract_drawing_focus"
+import AbstractFocus from "../utils/drawing_focus"
 import FocusUtils from "../utils/focus_utils"
 import { flow, forEach, map, reduce, uniqueId } from "lodash/fp"
 import { IBreakdown, IConfig, IFocus, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"

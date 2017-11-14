@@ -10,24 +10,24 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_focus_1 = require("./abstract_focus");
+var focus_1 = require("./focus");
 var event_catalog_1 = require("./event_catalog");
-var AbstractDrawingFocus = /** @class */ (function (_super) {
-    __extends(AbstractDrawingFocus, _super);
-    function AbstractDrawingFocus(state, stateWriter, events, el) {
+var DrawingFocus = /** @class */ (function (_super) {
+    __extends(DrawingFocus, _super);
+    function DrawingFocus(state, stateWriter, events, el) {
         var _this = _super.call(this, state, stateWriter, events, el) || this;
         _this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, _this.onElementHover());
         _this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, _this.onElementOut.bind(_this));
         _this.events.on(event_catalog_1.default.CHART.OUT, _this.onMouseLeave.bind(_this));
         return _this;
     }
-    AbstractDrawingFocus.prototype.onElementOut = function () {
+    DrawingFocus.prototype.onElementOut = function () {
         this.remove();
     };
-    AbstractDrawingFocus.prototype.onMouseLeave = function () {
+    DrawingFocus.prototype.onMouseLeave = function () {
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
-    return AbstractDrawingFocus;
-}(abstract_focus_1.default));
-exports.default = AbstractDrawingFocus;
-//# sourceMappingURL=abstract_drawing_focus.js.map
+    return DrawingFocus;
+}(focus_1.default));
+exports.default = DrawingFocus;
+//# sourceMappingURL=drawing_focus.js.map

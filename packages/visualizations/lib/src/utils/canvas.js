@@ -4,8 +4,8 @@ var event_catalog_1 = require("./event_catalog");
 var d3 = require("d3-selection");
 var fp_1 = require("lodash/fp");
 var styles = require("../styles/styles");
-var AbstractCanvas = /** @class */ (function () {
-    function AbstractCanvas(state, stateWriter, events, context) {
+var Canvas = /** @class */ (function () {
+    function Canvas(state, stateWriter, events, context) {
         this.elements = {};
         this.elMap = {};
         this.state = state;
@@ -16,18 +16,18 @@ var AbstractCanvas = /** @class */ (function () {
         this.createInitialElements();
         this.listenToMouseOver();
     }
-    AbstractCanvas.prototype.insertContainer = function (context) {
+    Canvas.prototype.insertContainer = function (context) {
         this.container = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.chartContainer);
         context.appendChild(this.container.node());
     };
-    AbstractCanvas.prototype.insertEl = function () {
+    Canvas.prototype.insertEl = function () {
         this.el = this.createEl();
         this.container.node().appendChild(this.el.node());
         this.elMap.series = this.el;
     };
-    AbstractCanvas.prototype.insertFocusLabel = function () {
+    Canvas.prototype.insertFocusLabel = function () {
         this.focusEl = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.focusLegend)
@@ -35,16 +35,16 @@ var AbstractCanvas = /** @class */ (function () {
         this.container.node().appendChild(this.focusEl.node());
         this.elMap.focus = this.focusEl;
     };
-    AbstractCanvas.prototype.createInitialElements = function () {
+    Canvas.prototype.createInitialElements = function () {
         return;
     };
-    AbstractCanvas.prototype.elementFor = function (component) {
+    Canvas.prototype.elementFor = function (component) {
         return this.elMap[component];
     };
-    AbstractCanvas.prototype.prefixedId = function (id) {
+    Canvas.prototype.prefixedId = function (id) {
         return this.state.current.get("config").uid + id;
     };
-    AbstractCanvas.prototype.listenToMouseOver = function () {
+    Canvas.prototype.listenToMouseOver = function () {
         var _this = this;
         var el = this.mouseOverElement();
         if (el) {
@@ -64,19 +64,19 @@ var AbstractCanvas = /** @class */ (function () {
             }));
         }
     };
-    AbstractCanvas.prototype.rootElement = function () {
+    Canvas.prototype.rootElement = function () {
         return this.container.node();
     };
-    AbstractCanvas.prototype.trackMouseMove = function () {
+    Canvas.prototype.trackMouseMove = function () {
         return;
     };
-    AbstractCanvas.prototype.stopMouseMove = function () {
+    Canvas.prototype.stopMouseMove = function () {
         return;
     };
-    AbstractCanvas.prototype.seriesElements = function () {
+    Canvas.prototype.seriesElements = function () {
         return [];
     };
-    AbstractCanvas.prototype.insertSeries = function () {
+    Canvas.prototype.insertSeries = function () {
         var _this = this;
         var that = this;
         return fp_1.reduce(function (memo, se) {
@@ -85,19 +85,19 @@ var AbstractCanvas = /** @class */ (function () {
             return memo;
         }, {})(this.seriesElements());
     };
-    AbstractCanvas.prototype.draw = function () {
+    Canvas.prototype.draw = function () {
         var config = this.state.current.get("config");
         this.container.style("width", config.width + "px").style("height", config.height + "px");
         this.el.style("width", config.width + "px").style("height", config.height + "px");
         this.container.classed("hidden", config.hidden);
     };
-    AbstractCanvas.prototype.margin = function (side) {
+    Canvas.prototype.margin = function (side) {
         return parseInt(this.el.style("margin-" + side), 10) || 0;
     };
-    AbstractCanvas.prototype.resize = function (computed) {
+    Canvas.prototype.resize = function (computed) {
         return this.draw();
     };
-    AbstractCanvas.prototype.remove = function () {
+    Canvas.prototype.remove = function () {
         var el = this.mouseOverElement();
         if (el) {
             el.node().removeEventListener("mouseenter");
@@ -109,7 +109,7 @@ var AbstractCanvas = /** @class */ (function () {
         this.container = undefined;
         this.el = undefined;
     };
-    return AbstractCanvas;
+    return Canvas;
 }());
-exports.default = AbstractCanvas;
-//# sourceMappingURL=abstract_canvas.js.map
+exports.default = Canvas;
+//# sourceMappingURL=canvas.js.map

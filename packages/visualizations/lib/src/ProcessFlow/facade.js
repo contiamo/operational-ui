@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_facade_1 = require("../utils/abstract_facade");
+var facade_1 = require("../utils/facade");
 var canvas_1 = require("./canvas");
 var series_1 = require("./series");
 var focus_1 = require("./focus");
@@ -84,6 +84,6 @@ var ProcessFlow = /** @class */ (function (_super) {
         return this.canvas.elementFor("series").node();
     };
     return ProcessFlow;
-}(abstract_facade_1.default));
+}(facade_1.default));
 exports.default = ProcessFlow;
 //# sourceMappingURL=facade.js.map

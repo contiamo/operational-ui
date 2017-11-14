@@ -1,4 +1,4 @@
-import AbstractCanvas from "../utils/abstract_canvas"
+import AbstractCanvas from "../utils/canvas"
 import * as d3 from "d3-selection"
 import { forEach } from "lodash/fp"
 import { TD3Selection, TSeriesEl } from "./typings"

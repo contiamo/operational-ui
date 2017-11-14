@@ -4,7 +4,7 @@ import { isArray, reduce } from "lodash/fp"
 import { IEvents, IObject, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
 import * as styles from "../styles/styles"
 
-abstract class AbstractCanvas {
+abstract class Canvas {
   container: TD3Selection
   el: TSeriesEl
   events: IEvents
@@ -108,7 +108,7 @@ abstract class AbstractCanvas {
   }
 
   insertSeries(): IObject {
-    let that: AbstractCanvas = this
+    let that: Canvas = this
     return reduce((memo: IObject, se: any): IObject => {
       let renderer: string = isArray(se) ? se[0] : se
       memo[renderer] = this.elements.series[renderer].append("svg:g")
@@ -145,4 +145,4 @@ abstract class AbstractCanvas {
   }
 }
 
-export default AbstractCanvas
+export default Canvas

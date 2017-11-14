@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_canvas_1 = require("../utils/abstract_canvas");
+var canvas_1 = require("../utils/canvas");
 var d3 = require("d3-selection");
 var fp_1 = require("lodash/fp");
 var Canvas = /** @class */ (function (_super) {
@@ -45,6 +45,6 @@ var Canvas = /** @class */ (function (_super) {
         return this.el;
     };
     return Canvas;
-}(abstract_canvas_1.default));
+}(canvas_1.default));
 exports.default = Canvas;
 //# sourceMappingURL=canvas.js.map
