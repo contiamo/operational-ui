@@ -1,7 +1,5 @@
 import Node from "./node"
-import NodeAccessors from "./node_accessors"
 import Link from "./link"
-import LinkAccessors from "./link_accessors"
 import Layout from "./layout"
 import { bind, extend, find, flow, forEach, get, groupBy, map, sortBy, times } from "lodash/fp"
 import {
@@ -40,8 +38,6 @@ class DataHandler {
     const data = this.state.current.get("data")
     const accessors: IAccessorsObject = this.state.current.get("accessors")
     this.journeys = accessors.data.journeys(data)
-    this.setNodeAccessors(accessors.node)
-    this.setLinkAccessors(accessors.link)
     this.initializeNodes(accessors.data.nodes(data))
     this.initializeLinks(data)
     this.layout.computeLayout(this.nodes)
@@ -73,14 +69,9 @@ class DataHandler {
     return node
   }
 
-  setNodeAccessors(accessors: IAccessors): void {
-    this.nodeAccessors = new NodeAccessors()
-    this.nodeAccessors.setAccessors(accessors)
-  }
-
   addNode(attrs: {}): TNode {
     extend.convert({ immutable: false })(attrs, { size: 0 })
-    return new Node(attrs, this.nodeAccessors.accessors)
+    return new Node(attrs, this.state.current.get("accessors").node)
   }
 
   calculateNodeSizes(): void {
@@ -114,13 +105,8 @@ class DataHandler {
     return find(checkIds)(this.links)
   }
 
-  setLinkAccessors(accessors: IAccessors): void {
-    this.linkAccessors = new LinkAccessors()
-    this.linkAccessors.setAccessors(accessors)
-  }
-
   addLink(attrs: ILinkAttrs): TLink {
-    return new Link(attrs, this.linkAccessors.accessors)
+    return new Link(attrs, this.state.current.get("accessors").link)
   }
 
   computeLinks(): void {

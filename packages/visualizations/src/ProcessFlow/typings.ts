@@ -6,7 +6,7 @@ import Link from "./link"
 import {
   IAccessors,
   IAccessorsObject,
-  IDefaultConfig,
+  IChartStateObject,
   IEvents,
   INestedObject,
   IObject,
@@ -20,7 +20,7 @@ import {
 export {
   IAccessors,
   IAccessorsObject,
-  IDefaultConfig,
+  IChartStateObject,
   IEvents,
   INestedObject,
   IObject,
@@ -48,9 +48,11 @@ export interface IFocusElement {
   matchers: IObject
 }
 
-export interface IConfig extends IDefaultConfig {
+export interface IConfig {
   borderColor: string
+  duration: number
   focusElement?: IFocusElement
+  height: number
   hidden: boolean
   highlightColor: string
   horizontalNodeSpacing: number
@@ -63,7 +65,10 @@ export interface IConfig extends IDefaultConfig {
   nodeBorderWidth: number
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
+  uid: string
   verticalNodeSpacing: number
+  visualizationName: string
+  width: number
 }
 
 export interface IJourney {
@@ -99,6 +104,17 @@ export interface IInputData {
   nodeAccessors?: any
   linkAccessors?: any
   el?: any
+}
+
+export interface IDataAccessors {
+  nodes: (d: IInputData) => any[]
+  journeys: (d: IInputData) => IJourney[]
+}
+
+export interface IComputedState {
+  canvas: IObject
+  focus: IObject
+  series: IObject
 }
 
 export interface IData {

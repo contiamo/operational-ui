@@ -12,22 +12,13 @@ export interface INestedObject {
   [key: string]: IObject
 }
 
-export interface IDefaultConfig {
-  duration: number
-  height: number
-  uid: string
-  visualizationName: string
-  width: number
-  [key: string]: any
-}
-
 export type IState = IChartStateReadOnly<IChartStateObject>
 
 export interface IChartStateObject {
   data: Array<any> | IObject
-  config: IDefaultConfig
+  config: IObject
   accessors: INestedObject
-  computed: INestedObject
+  computed: IObject
 }
 
 export interface IAccessors {

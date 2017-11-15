@@ -70,6 +70,9 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
         matchers: { sourceId: "3", targetId: "5" }
       }
     })
+    viz.accessors("node", {
+      label: (node: any) => `Node ${node.id}`
+    })
     viz.draw()
   })
 

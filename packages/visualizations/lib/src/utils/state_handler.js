@@ -35,7 +35,11 @@ var StateHandler = /** @class */ (function () {
     StateHandler.prototype.accessors = function (type, accessors) {
         if (!accessors)
             return this.state.current.get(["accessors", type]);
-        return this.state.current.merge(["accessors", type], accessors);
+        var accessorFuncs = fp_1.reduce.convert({ cap: false })(function (memo, accessor, key) {
+            memo[key] = typeof accessor === "function" ? accessor : function () { return accessor; };
+            return memo;
+        }, {})(accessors);
+        return this.state.current.merge(["accessors", type], accessorFuncs);
     };
     // Computed
     StateHandler.prototype.computedWriter = function (namespace) {

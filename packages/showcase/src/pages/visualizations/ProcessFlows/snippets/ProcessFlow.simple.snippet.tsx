@@ -19,6 +19,8 @@ export default (function() {
               return "lightgreen"
             } else if (node.group === "end") {
               return "lightcoral"
+            } else {
+              return "#fff"
             }
           },
           shape: (node: any) => {
@@ -26,12 +28,12 @@ export default (function() {
               return "square"
             } else if (node.group === "end") {
               return "circle"
+            } else {
+              return "squareDiamond"
             }
           },
           stroke: (node: any) => {
-            if (node.group) {
-              return "none"
-            }
+            return node.group ? "none" : "#000"
           }
         },
         link: {
@@ -40,6 +42,8 @@ export default (function() {
               return "lightgreen"
             } else if (link.target.attributes.group === "end") {
               return "lightcoral"
+            } else {
+              return "#bbb"
             }
           }
         }

@@ -139,28 +139,32 @@ const config = {
 
 const accessors = {
   node: {
-    color: (node: any) => {
-      if (node.id.indexOf("++") > -1) {
+    color: (d: any) => {
+      if (d.id.indexOf("++") > -1) {
         return "lightgreen"
-      } else if (node.id.indexOf("+") > -1) {
+      } else if (d.id.indexOf("+") > -1) {
         return "lightcoral"
+      } else {
+        return "#fff"
       }
     },
-    label: (node: any) => "N:" + node.id,
-    labelPosition: (node: any) => "top"
+    label: (d: any) => "N:" + d.id,
+    labelPosition: "top"
   },
   link: {
-    stroke: (link: any) => {
-      if (link.target.attributes.id.indexOf("++") > -1) {
+    stroke: (d: any) => {
+      if (d.target.attributes.id.indexOf("++") > -1) {
         return "lightgreen"
-      } else if (link.target.attributes.id.indexOf("+") > -1) {
+      } else if (d.target.attributes.id.indexOf("+") > -1) {
         return "lightcoral"
+      } else {
+        return "#bbb"
       }
     }
   },
   data: {
-    journeys: (data: any) => data.unloopedJourneys,
-    nodes: (data: any) => data.nodeList
+    journeys: (d: any) => d.unloopedJourneys,
+    nodes: (d: any) => d.nodeList
   }
 }
 

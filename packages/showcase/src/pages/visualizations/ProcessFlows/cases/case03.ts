@@ -51,38 +51,29 @@ const dataAccessors: any = {
   nodes: (data: any) => data.nodeList,
   journeys: (data: any) => data.journeyList
 }
+
 const nodeAccessors: any = {
-  color: (node: any) => {
-    if (node.group) {
-      return groupAccessorValue[node.group].color
-    }
+  color: (d: any) => {
+    return d.group ? groupAccessorValue[d.group].color : "#fff"
   },
-  shape: (node: any) => {
-    if (node.group) {
-      return groupAccessorValue[node.group].shape
-    }
+  shape: (d: any) => {
+    return d.group ? groupAccessorValue[d.group].shape : "squareDiamond"
   },
-  size: (node: any) => {
-    if (node.group) {
-      return groupAccessorValue[node.group].size
-    }
+  size: (d: any) => {
+    return d.group ? groupAccessorValue[d.group].size : d.size || 1
   },
-  stroke: (node: any) => {
-    if (node.group) {
-      return groupAccessorValue[node.group].stroke
-    }
+  stroke: (d: any) => {
+    return d.group ? groupAccessorValue[d.group].stroke : "#000"
   },
-  labelPosition: (node: any) => {
-    if (node.group) {
-      return groupAccessorValue[node.group].labelPosition
-    }
+  labelPosition: (d: any) => {
+    return d.group ? groupAccessorValue[d.group].labelPosition : "right"
   }
 }
 
 const linkAccessors: any = {
   stroke: (link: any) => (link.size > 1000 ? "blue" : "#bbb"),
-  dash: (link: any) => "10 2",
-  size: (link: any) => 2
+  dash: "10 2",
+  size: 2
 }
 
 const marathon = ({ test, afterAll, container }: IMarathon): void => {

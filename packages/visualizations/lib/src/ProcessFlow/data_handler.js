@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var node_1 = require("./node");
-var node_accessors_1 = require("./node_accessors");
 var link_1 = require("./link");
-var link_accessors_1 = require("./link_accessors");
 var layout_1 = require("./layout");
 var fp_1 = require("lodash/fp");
 var DataHandler = /** @class */ (function () {
@@ -16,8 +14,6 @@ var DataHandler = /** @class */ (function () {
         var data = this.state.current.get("data");
         var accessors = this.state.current.get("accessors");
         this.journeys = accessors.data.journeys(data);
-        this.setNodeAccessors(accessors.node);
-        this.setLinkAccessors(accessors.link);
         this.initializeNodes(accessors.data.nodes(data));
         this.initializeLinks(data);
         this.layout.computeLayout(this.nodes);
@@ -46,13 +42,9 @@ var DataHandler = /** @class */ (function () {
         }
         return node;
     };
-    DataHandler.prototype.setNodeAccessors = function (accessors) {
-        this.nodeAccessors = new node_accessors_1.default();
-        this.nodeAccessors.setAccessors(accessors);
-    };
     DataHandler.prototype.addNode = function (attrs) {
         fp_1.extend.convert({ immutable: false })(attrs, { size: 0 });
-        return new node_1.default(attrs, this.nodeAccessors.accessors);
+        return new node_1.default(attrs, this.state.current.get("accessors").node);
     };
     DataHandler.prototype.calculateNodeSizes = function () {
         var _this = this;
@@ -84,12 +76,8 @@ var DataHandler = /** @class */ (function () {
         }
         return fp_1.find(checkIds)(this.links);
     };
-    DataHandler.prototype.setLinkAccessors = function (accessors) {
-        this.linkAccessors = new link_accessors_1.default();
-        this.linkAccessors.setAccessors(accessors);
-    };
     DataHandler.prototype.addLink = function (attrs) {
-        return new link_1.default(attrs, this.linkAccessors.accessors);
+        return new link_1.default(attrs, this.state.current.get("accessors").link);
     };
     DataHandler.prototype.computeLinks = function () {
         var _this = this;
