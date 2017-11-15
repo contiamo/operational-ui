@@ -10,8 +10,8 @@ var Container = glamorous_1.default.ul({
     margin: "0"
 });
 var Timeline = function (_a) {
-    var style = _a.style, className = _a.className, children = _a.children;
-    return (React.createElement(Container, { style: style, className: className }, children));
+    var key = _a.key, css = _a.css, className = _a.className, children = _a.children;
+    return (React.createElement(Container, { key: key, css: css, className: className }, children));
 };
 exports.Timeline = Timeline;
 exports.default = Timeline;

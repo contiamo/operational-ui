@@ -57,8 +57,8 @@ var Bar = glamorous_1.default.div({
     });
 });
 var Progress = function (_a) {
-    var css = _a.css, className = _a.className;
-    return (React.createElement(Container, { css: css, className: className },
+    var key = _a.key, css = _a.css, className = _a.className;
+    return (React.createElement(Container, { key: key, css: css, className: className },
         React.createElement(Box, null,
             React.createElement(BarContainer, null,
                 React.createElement(Bar, null)))));

@@ -6,6 +6,7 @@ import { hexOrColor, darken } from "contiamo-ui-utils"
 
 export interface IProps {
   css?: any
+  key?: string | number
   className?: string
   placeholder?: string
   onChange?: (e: React.SyntheticEvent<HTMLInputElement>) => Promise<void>
@@ -31,8 +32,8 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   }
 })
 
-const SelectFilter: React.SFC<IProps> = ({ css, className, placeholder = "Filter...", onChange }: IProps) => (
-  <Container css={css} className={className}>
+const SelectFilter: React.SFC<IProps> = ({ css, key, className, placeholder = "Filter...", onChange }: IProps) => (
+  <Container key={key} css={css} className={className}>
     <input onClick={e => e.stopPropagation()} onChange={onChange} placeholder={placeholder} />
   </Container>
 )

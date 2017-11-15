@@ -2,6 +2,7 @@
 import * as React from "react";
 import ContextMenuItem from "./ContextMenuItem";
 export interface IProps {
+    key?: string | number;
     css?: {};
     className?: string;
     children: React.ReactNode;

@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   childClassName?: string
@@ -32,9 +33,10 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
 class Modal extends React.Component<IProps, {}> {
   contentNode: any
   render() {
-    const { css, className, childClassName, children, onClose } = this.props
+    const { key, css, className, childClassName, children, onClose } = this.props
     return (
       <Container
+        key={key}
         css={css}
         className={className}
         onClick={ev => {

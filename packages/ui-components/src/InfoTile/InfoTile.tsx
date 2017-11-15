@@ -8,6 +8,7 @@ import { ReactFeatherIconName } from "../Icon/ReactFeather"
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   icon?: ReactFeatherIconName
@@ -109,8 +110,8 @@ const ActionIconContainer = glamorous.div(({ theme, color }: { theme: Theme; col
   }
 })
 
-const InfoTile: React.SFC<IProps> = ({ css, className, label, children, color, icon, onAction }) => (
-  <Container css={css} className={className} withIcon={!!icon} withActionIcon={!!onAction} color={color}>
+const InfoTile: React.SFC<IProps> = ({ key, css, className, label, children, color, icon, onAction }) => (
+  <Container key={key} css={css} className={className} withIcon={!!icon} withActionIcon={!!onAction} color={color}>
     {icon ? (
       <IconContainer color={color}>
         <Icon size={20} name={icon} />

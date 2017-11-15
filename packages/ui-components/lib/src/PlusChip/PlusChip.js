@@ -18,8 +18,8 @@ var Container = glamorous_1.default.div(function (_a) {
     };
 });
 var PlusChip = function (_a) {
-    var css = _a.css, _b = _a.size, size = _b === void 0 ? 15 : _b, color = _a.color, className = _a.className, children = _a.children, onClick = _a.onClick;
-    return (React.createElement(Container, { css: css, className: className, size: size, color: color, onClick: onClick, tabIndex: -1, role: "button" }, children || "+"));
+    var key = _a.key, css = _a.css, _b = _a.size, size = _b === void 0 ? 15 : _b, color = _a.color, className = _a.className, children = _a.children, onClick = _a.onClick;
+    return (React.createElement(Container, { key: key, css: css, className: className, size: size, color: color, onClick: onClick, tabIndex: -1, role: "button" }, children || "+"));
 };
 exports.default = PlusChip;
 //# sourceMappingURL=PlusChip.js.map

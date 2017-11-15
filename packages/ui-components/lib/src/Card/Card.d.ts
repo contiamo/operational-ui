@@ -3,6 +3,7 @@ import * as React from "react";
 import CardHeader from "./CardHeader";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
+    key?: string | number;
     css?: any;
     className?: string;
     children: React.ReactNode;

@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   children?: React.ReactNode
@@ -30,8 +31,8 @@ const Legend = glamorous.legend(({ theme }: { theme: Theme }): any => ({
   paddingLeft: 0
 }))
 
-const Fieldset = ({ children, legend }: IProps) => (
-  <Container>
+const Fieldset = ({ css, className, key, children, legend }: IProps) => (
+  <Container css={css} className={className} key={key}>
     <Legend>{legend}</Legend>
     {children}
   </Container>

@@ -4,6 +4,7 @@ import { Theme } from "contiamo-ui-theme"
 import { darken } from "contiamo-ui-utils"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   children?: any
@@ -30,8 +31,8 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
   }
 }))
 
-const ContextMenuItem = ({ css, className, onClick, children }: IProps) => (
-  <Container css={css} className={className} clickable={!!onClick} onClick={onClick}>
+const ContextMenuItem = ({ key, css, className, onClick, children }: IProps) => (
+  <Container key={key} css={css} className={className} clickable={!!onClick} onClick={onClick}>
     {children}
   </Container>
 )

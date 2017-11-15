@@ -94,8 +94,8 @@ var Number = glamorous_1.default.div({
     });
 });
 exports.default = function (_a) {
-    var css = _a.css, className = _a.className, children = _a.children, color = _a.color, label = _a.label, fill = _a.fill, number = _a.number, onClick = _a.onClick, onMouseEnter = _a.onMouseEnter, onMouseLeave = _a.onMouseLeave;
-    return (React.createElement(Container, { css: css, className: className, onClick: onClick, onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave },
+    var css = _a.css, key = _a.key, className = _a.className, children = _a.children, color = _a.color, label = _a.label, fill = _a.fill, number = _a.number, onClick = _a.onClick, onMouseEnter = _a.onMouseEnter, onMouseLeave = _a.onMouseLeave;
+    return (React.createElement(Container, { key: key, css: css, className: className, onClick: onClick, onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave },
         React.createElement(Number, null, number),
         React.createElement("div", { style: { width: "100%" } },
             React.createElement(Label, null, children),

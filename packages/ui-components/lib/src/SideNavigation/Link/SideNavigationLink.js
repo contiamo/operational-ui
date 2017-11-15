@@ -36,8 +36,8 @@ var style = function (_a) {
 };
 exports.style = style;
 var SideNavigationLink = function (_a) {
-    var className = _a.className, children = _a.children, onClick = _a.onClick;
-    return (React.createElement("div", { className: className, onClick: onClick, role: "button", tabIndex: -1 }, children));
+    var key = _a.key, style = _a.style, className = _a.className, children = _a.children, onClick = _a.onClick;
+    return (React.createElement("div", { key: key, style: style, className: className, onClick: onClick, role: "button", tabIndex: -1 }, children));
 };
 exports.SideNavigationLink = SideNavigationLink;
 exports.default = glamorous_1.default(SideNavigationLink)(style);

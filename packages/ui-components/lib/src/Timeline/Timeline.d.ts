@@ -2,7 +2,8 @@
 import * as React from "react";
 import TimelineItem from "./TimelineItem";
 export interface IProps {
-    style?: any;
+    key?: string | number;
+    css?: {};
     className?: string;
     children: any;
 }

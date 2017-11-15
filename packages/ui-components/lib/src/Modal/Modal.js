@@ -42,8 +42,8 @@ var Modal = /** @class */ (function (_super) {
     }
     Modal.prototype.render = function () {
         var _this = this;
-        var _a = this.props, css = _a.css, className = _a.className, childClassName = _a.childClassName, children = _a.children, onClose = _a.onClose;
-        return (React.createElement(Container, { css: css, className: className, onClick: function (ev) {
+        var _a = this.props, key = _a.key, css = _a.css, className = _a.className, childClassName = _a.childClassName, children = _a.children, onClose = _a.onClose;
+        return (React.createElement(Container, { key: key, css: css, className: className, onClick: function (ev) {
                 if (_this.contentNode && !_this.contentNode.contains(ev.target)) {
                     onClose && onClose();
                 }

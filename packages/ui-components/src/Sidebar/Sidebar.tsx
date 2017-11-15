@@ -6,6 +6,7 @@ import SidebarItem from "./Item/SidebarItem"
 import SidebarLink from "./Link/SidebarLink"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   children: React.ReactNode
@@ -22,8 +23,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   color: theme.colors.palette.grey80
 }))
 
-const Sidebar: React.SFC<IProps> = ({ css, className, children }: IProps) => (
-  <Container css={css} className={className}>
+const Sidebar: React.SFC<IProps> = ({ key, css, className, children }: IProps) => (
+  <Container key={key} css={css} className={className}>
     {children}
   </Container>
 )

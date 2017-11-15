@@ -35,8 +35,8 @@ var IconContainer = glamorous_1.default.div(function (_a) {
     });
 });
 var SelectOption = function (_a) {
-    var css = _a.css, className = _a.className, theme = _a.theme, selected = _a.selected, color = _a.color, onClick = _a.onClick, children = _a.children;
-    return (React.createElement(Container, { css: css, className: className, selected: !!selected, color: color, tabIndex: -2, role: "option", "aria-selected": selected, onClick: onClick },
+    var css = _a.css, key = _a.key, className = _a.className, theme = _a.theme, selected = _a.selected, color = _a.color, onClick = _a.onClick, children = _a.children;
+    return (React.createElement(Container, { css: css, key: key, className: className, selected: !!selected, color: color, tabIndex: -2, role: "option", "aria-selected": selected, onClick: onClick },
         children,
         selected ? (React.createElement(IconContainer, null,
             React.createElement(contiamo_ui_components_1.Icon, { name: "X", size: theme.spacing }))) : null));

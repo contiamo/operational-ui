@@ -6,6 +6,7 @@ import { Theme } from "contiamo-ui-theme"
 import { hexOrColor, readableTextColor, darken, transparentize } from "contiamo-ui-utils"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   color?: string
@@ -75,8 +76,8 @@ const Container = glamorous.div(
   }
 )
 
-const Spinner = ({ css, className, color, size, spinDuration }: IProps) => (
-  <Container css={css} className={className} color={color} spinnerSize={size} spinDuration={spinDuration} />
+const Spinner = ({ key, css, className, color, size, spinDuration }: IProps) => (
+  <Container key={key} css={css} className={className} color={color} spinnerSize={size} spinDuration={spinDuration} />
 )
 
 export default Spinner

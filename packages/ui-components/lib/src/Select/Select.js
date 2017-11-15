@@ -173,7 +173,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Select_style_1.Container, { id: this.props.domId, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+        return (React.createElement(Select_style_1.Container, { id: this.props.domId, key: this.props.key, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, css: this.props.css, className: this.props.className, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
             React.createElement(Select_style_1.DisplayValue, { isPlaceholder: Array.isArray(this.props.value) ? this.props.value.length === 0 : !this.props.value }, this.getDisplayValue()),
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),

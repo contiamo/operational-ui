@@ -6,6 +6,7 @@ import { fadeIn } from "contiamo-ui-utils"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  key?: string | number
   css?: {}
   className?: string
   children: React.ReactNode
@@ -83,6 +84,7 @@ class ContextMenu extends React.Component<IProps, IState> {
         innerRef={node => {
           this.containerNode = node
         }}
+        key={this.props.key}
         css={this.props.css}
         className={this.props.className}
         {...hoverProps}

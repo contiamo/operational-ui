@@ -33,8 +33,8 @@ var Legend = glamorous_1.default.legend(function (_a) {
     return (__assign({}, theme.typography.heading1, { paddingLeft: 0 }));
 });
 var Fieldset = function (_a) {
-    var children = _a.children, legend = _a.legend;
-    return (React.createElement(Container, null,
+    var css = _a.css, className = _a.className, key = _a.key, children = _a.children, legend = _a.legend;
+    return (React.createElement(Container, { css: css, className: className, key: key },
         React.createElement(Legend, null, legend),
         children));
 };

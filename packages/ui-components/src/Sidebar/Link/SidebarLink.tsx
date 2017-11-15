@@ -7,6 +7,8 @@ import { Theme } from "contiamo-ui-theme"
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 export interface IProps {
+  style?: {}
+  key?: string | number
   className?: string
   children?: React.ReactNode
   to?: string
@@ -66,11 +68,11 @@ const Symbol = glamorous.div({
   marginLeft: "auto"
 })
 
-const SidebarLink: React.SFC<IProps> = ({ className, children, to, onClick, symbol }: IProps) => {
+const SidebarLink: React.SFC<IProps> = ({ key, style, className, children, to, onClick, symbol }: IProps) => {
   // if this is expected to work with react-router,
   if (to) {
     return (
-      <Link to={to ? to : ""} className={`${className} co_link`}>
+      <Link to={to ? to : ""} style={style} key={key} className={`${className} co_link`}>
         {children}
         {symbol ? <Symbol>{symbol}</Symbol> : ""}
       </Link>
@@ -78,7 +80,7 @@ const SidebarLink: React.SFC<IProps> = ({ className, children, to, onClick, symb
   }
 
   return (
-    <div onClick={onClick} className={`${className} co_link`}>
+    <div key={key} style={style} onClick={onClick} className={`${className} co_link`}>
       {children}
       {symbol ? <Symbol>{symbol}</Symbol> : ""}
     </div>

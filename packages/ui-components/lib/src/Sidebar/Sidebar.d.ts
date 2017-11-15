@@ -3,6 +3,7 @@ import * as React from "react";
 import SidebarItem from "./Item/SidebarItem";
 import SidebarLink from "./Link/SidebarLink";
 export interface IProps {
+    key?: string | number;
     css?: any;
     className?: string;
     children: React.ReactNode;

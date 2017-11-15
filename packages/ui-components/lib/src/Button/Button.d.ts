@@ -11,6 +11,7 @@ export interface IStyleProps {
 export interface IProps {
     css?: any;
     className?: string;
+    key?: string | number;
     onClick?: any;
     children?: React.ReactNode;
     color?: string;

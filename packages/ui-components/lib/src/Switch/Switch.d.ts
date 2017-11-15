@@ -2,6 +2,7 @@
 import * as React from "react";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
+    key?: string | number;
     on: boolean;
     onChange: (on: boolean) => void;
     className?: string;

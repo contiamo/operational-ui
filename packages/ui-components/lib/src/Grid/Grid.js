@@ -16,8 +16,8 @@ function (_a) {
     });
 });
 var Grid = function (_a) {
-    var css = _a.css, rows = _a.rows, columns = _a.columns, gap = _a.gap, children = _a.children;
-    return (React.createElement(Container, { css: css, rowData: rows, columnData: columns, gap: gap }, children));
+    var key = _a.key, css = _a.css, className = _a.className, rows = _a.rows, columns = _a.columns, gap = _a.gap, children = _a.children;
+    return (React.createElement(Container, { key: key, css: css, className: className, rowData: rows, columnData: columns, gap: gap }, children));
 };
 exports.default = Grid;
 //# sourceMappingURL=Grid.js.map

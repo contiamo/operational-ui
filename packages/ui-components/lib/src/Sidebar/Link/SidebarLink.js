@@ -40,14 +40,14 @@ var Symbol = glamorous_1.default.div({
     marginLeft: "auto"
 });
 var SidebarLink = function (_a) {
-    var className = _a.className, children = _a.children, to = _a.to, onClick = _a.onClick, symbol = _a.symbol;
+    var key = _a.key, style = _a.style, className = _a.className, children = _a.children, to = _a.to, onClick = _a.onClick, symbol = _a.symbol;
     // if this is expected to work with react-router,
     if (to) {
-        return (React.createElement(react_router_dom_1.Link, { to: to ? to : "", className: className + " co_link" },
+        return (React.createElement(react_router_dom_1.Link, { to: to ? to : "", style: style, key: key, className: className + " co_link" },
             children,
             symbol ? React.createElement(Symbol, null, symbol) : ""));
     }
-    return (React.createElement("div", { onClick: onClick, className: className + " co_link" },
+    return (React.createElement("div", { key: key, style: style, onClick: onClick, className: className + " co_link" },
         children,
         symbol ? React.createElement(Symbol, null, symbol) : ""));
 };

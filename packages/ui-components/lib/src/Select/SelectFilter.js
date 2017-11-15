@@ -20,8 +20,8 @@ var Container = glamorous_1.default.div(function (_a) {
     };
 });
 var SelectFilter = function (_a) {
-    var css = _a.css, className = _a.className, _b = _a.placeholder, placeholder = _b === void 0 ? "Filter..." : _b, onChange = _a.onChange;
-    return (React.createElement(Container, { css: css, className: className },
+    var css = _a.css, key = _a.key, className = _a.className, _b = _a.placeholder, placeholder = _b === void 0 ? "Filter..." : _b, onChange = _a.onChange;
+    return (React.createElement(Container, { key: key, css: css, className: className },
         React.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: onChange, placeholder: placeholder })));
 };
 exports.default = SelectFilter;

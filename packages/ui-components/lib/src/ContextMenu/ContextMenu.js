@@ -81,7 +81,7 @@ var ContextMenu = /** @class */ (function (_super) {
             : {};
         return (React.createElement(Container, __assign({ innerRef: function (node) {
                 _this.containerNode = node;
-            }, css: this.props.css, className: this.props.className }, hoverProps),
+            }, key: this.props.key, css: this.props.css, className: this.props.className }, hoverProps),
             children,
             React.createElement(MenuContainer, { innerRef: function (node) {
                     _this.menuContainerNode = node;

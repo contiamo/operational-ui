@@ -4,6 +4,7 @@ import SideNavigationHeader from "./Header/SideNavigationHeader";
 import SideNavigationItem from "./Item/SideNavigationItem";
 import SideNavigationLink from "./Link/SideNavigationLink";
 export interface IProps {
+    key?: string | number;
     css?: {};
     className?: string;
     children?: React.ReactNode;

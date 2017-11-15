@@ -2,6 +2,7 @@
 import * as React from "react";
 import { ReactFeatherIconName } from "../Icon/ReactFeather";
 export interface IProps {
+    key?: string | number;
     css?: any;
     className?: string;
     icon?: ReactFeatherIconName;

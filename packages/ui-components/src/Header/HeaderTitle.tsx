@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   children?: React.ReactNode
@@ -13,8 +14,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   marginRight: theme.spacing
 }))
 
-const HeaderTitle: React.SFC = ({ css, className, children }: IProps) => (
-  <Container css={css} className={className}>
+const HeaderTitle: React.SFC = ({ key, css, className, children }: IProps) => (
+  <Container key={key} css={css} className={className}>
     {children}
   </Container>
 )

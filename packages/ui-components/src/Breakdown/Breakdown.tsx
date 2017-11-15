@@ -7,6 +7,7 @@ import { ReactFeatherIconName } from "../Icon/ReactFeather"
 export interface IProps {
   css?: any
   className?: string
+  key?: string | number
   children: React.ReactNode
   number?: number
   label: string
@@ -114,6 +115,7 @@ const Number = glamorous.div(
 
 export default ({
   css,
+  key,
   className,
   children,
   color,
@@ -124,7 +126,14 @@ export default ({
   onMouseEnter,
   onMouseLeave
 }: IProps) => (
-  <Container css={css} className={className} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+  <Container
+    key={key}
+    css={css}
+    className={className}
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
     <Number>{number}</Number>
     <div style={{ width: "100%" }}>
       <Label>{children}</Label>

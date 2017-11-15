@@ -5,7 +5,8 @@ import { Theme } from "contiamo-ui-theme"
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 export interface IProps {
-  css?: any
+  key?: string | number
+  style?: {}
   className?: string
   children: Node
   onClick?: any
@@ -49,8 +50,8 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
   }
 }
 
-const SideNavigationLink: React.SFC<IProps> = ({ className, children, onClick }: IProps) => (
-  <div className={className} onClick={onClick} role="button" tabIndex={-1}>
+const SideNavigationLink: React.SFC<IProps> = ({ key, style, className, children, onClick }: IProps) => (
+  <div key={key} style={style} className={className} onClick={onClick} role="button" tabIndex={-1}>
     {children}
   </div>
 )

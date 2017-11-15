@@ -5,6 +5,7 @@ import { Theme } from "contiamo-ui-theme"
 import { hexOrColor } from "contiamo-ui-utils"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   size?: number
@@ -28,8 +29,17 @@ const Container = glamorous.div(({ theme, color, size }: { theme: Theme; color?:
   }
 })
 
-const PlusChip: React.SFC<IProps> = ({ css, size = 15, color, className, children, onClick }: IProps) => (
-  <Container css={css} className={className} size={size} color={color} onClick={onClick} tabIndex={-1} role="button">
+const PlusChip: React.SFC<IProps> = ({ key, css, size = 15, color, className, children, onClick }: IProps) => (
+  <Container
+    key={key}
+    css={css}
+    className={className}
+    size={size}
+    color={color}
+    onClick={onClick}
+    tabIndex={-1}
+    role="button"
+  >
     {children || "+"}
   </Container>
 )

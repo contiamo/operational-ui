@@ -6,7 +6,7 @@ import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 import { Icon } from "contiamo-ui-components"
 
 export interface IProps {
-  key: number | string
+  key?: number | string
   css?: any
   className?: string
   selected?: boolean
@@ -54,6 +54,7 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
 
 const SelectOption: React.SFC<IPropsWithTheme> = ({
   css,
+  key,
   className,
   theme,
   selected,
@@ -63,6 +64,7 @@ const SelectOption: React.SFC<IPropsWithTheme> = ({
 }: IPropsWithTheme) => (
   <Container
     css={css}
+    key={key}
     className={className}
     selected={!!selected}
     color={color}

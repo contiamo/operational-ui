@@ -4,6 +4,7 @@ import { ReactFeatherIconName } from "../Icon/ReactFeather";
 export interface IProps {
     css?: any;
     className?: string;
+    key?: string | number;
     children: React.ReactNode;
     number?: number;
     label: string;
@@ -15,5 +16,5 @@ export interface IProps {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 }
-declare const _default: ({css, className, children, color, label, fill, number, onClick, onMouseEnter, onMouseLeave}: IProps) => JSX.Element;
+declare const _default: ({css, key, className, children, color, label, fill, number, onClick, onMouseEnter, onMouseLeave}: IProps) => JSX.Element;
 export default _default;

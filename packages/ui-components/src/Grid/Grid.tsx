@@ -5,6 +5,7 @@ import { Theme } from "contiamo-ui-theme"
 export type Dimension = string | number
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   children?: React.ReactNode
@@ -36,8 +37,8 @@ const Container = glamorous.div(
   })
 )
 
-const Grid: React.SFC<IProps> = ({ css, rows, columns, gap, children }: IProps) => (
-  <Container css={css} rowData={rows} columnData={columns} gap={gap}>
+const Grid: React.SFC<IProps> = ({ key, css, className, rows, columns, gap, children }: IProps) => (
+  <Container key={key} css={css} className={className} rowData={rows} columnData={columns} gap={gap}>
     {children}
   </Container>
 )

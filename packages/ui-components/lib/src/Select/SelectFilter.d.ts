@@ -3,6 +3,7 @@ import * as React from "react";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
     css?: any;
+    key?: string | number;
     className?: string;
     placeholder?: string;
     onChange?: (e: React.SyntheticEvent<HTMLInputElement>) => Promise<void>;

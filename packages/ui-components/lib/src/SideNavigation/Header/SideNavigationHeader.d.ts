@@ -7,7 +7,8 @@ export interface IOption {
     default?: boolean;
 }
 export interface IProps {
-    css?: any;
+    key?: string | number;
+    css?: {};
     className?: string;
     children: React.ReactNode;
     options?: IOption[];

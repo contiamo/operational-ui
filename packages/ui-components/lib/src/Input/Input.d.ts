@@ -1,4 +1,5 @@
 export interface IProps {
+    key?: string | number;
     css?: any;
     className?: string;
     placeholder?: string;

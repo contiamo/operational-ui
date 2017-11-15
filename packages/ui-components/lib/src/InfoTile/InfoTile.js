@@ -82,8 +82,8 @@ var ActionIconContainer = glamorous_1.default.div(function (_a) {
     };
 });
 var InfoTile = function (_a) {
-    var css = _a.css, className = _a.className, label = _a.label, children = _a.children, color = _a.color, icon = _a.icon, onAction = _a.onAction;
-    return (React.createElement(Container, { css: css, className: className, withIcon: !!icon, withActionIcon: !!onAction, color: color },
+    var key = _a.key, css = _a.css, className = _a.className, label = _a.label, children = _a.children, color = _a.color, icon = _a.icon, onAction = _a.onAction;
+    return (React.createElement(Container, { key: key, css: css, className: className, withIcon: !!icon, withActionIcon: !!onAction, color: color },
         icon ? (React.createElement(IconContainer, { color: color },
             React.createElement(Icon_1.default, { size: 20, name: icon }))) : null,
         onAction ? (React.createElement(ActionIconContainer, { color: color, onClick: onAction },

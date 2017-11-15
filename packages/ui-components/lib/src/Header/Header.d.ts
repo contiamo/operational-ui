@@ -5,6 +5,7 @@ import HeaderItem from "./HeaderItem";
 import HeaderTitle from "./HeaderTitle";
 import HeaderSeparator from "./HeaderSeparator";
 export interface IProps {
+    key?: string | number;
     className?: string;
     css?: any;
     children: React.ReactNode;

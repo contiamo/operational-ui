@@ -1,6 +1,7 @@
 export interface IProps {
     id?: string;
     domId?: string;
+    key?: string | number;
     label?: string;
     start?: string;
     end?: string;

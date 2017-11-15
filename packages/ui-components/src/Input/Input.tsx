@@ -5,6 +5,7 @@ import { Theme } from "contiamo-ui-theme"
 import withLabel from "../../utils/with-label"
 
 export interface IProps {
+  key?: string | number
   css?: any
   className?: string
   placeholder?: string
@@ -48,6 +49,7 @@ const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disable
 
 const Input = ({
   css,
+  key,
   className,
   label,
   domId,
@@ -62,6 +64,7 @@ const Input = ({
 }: IProps) => {
   return (
     <InputField
+      key={key}
       css={css}
       innerRef={inputRef}
       className={className}
