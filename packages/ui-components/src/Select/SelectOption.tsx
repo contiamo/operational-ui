@@ -6,7 +6,7 @@ import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 import { Icon } from "contiamo-ui-components"
 
 export interface IProps {
-  key: number | string
+  id?: number | string
   css?: any
   className?: string
   selected?: boolean
@@ -52,29 +52,22 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
   transform: "translate3d(-50%, -50%, 0)"
 }))
 
-const SelectOption: React.SFC<IPropsWithTheme> = ({
-  css,
-  className,
-  theme,
-  selected,
-  color,
-  onClick,
-  children
-}: IPropsWithTheme) => (
+const SelectOption = (props: IPropsWithTheme) => (
   <Container
-    css={css}
-    className={className}
-    selected={!!selected}
-    color={color}
+    key={props.id}
+    css={props.css}
+    className={props.className}
+    selected={!!props.selected}
+    color={props.color}
     tabIndex={-2}
     role="option"
-    aria-selected={selected}
-    onClick={onClick}
+    aria-selected={props.selected}
+    onClick={props.onClick}
   >
-    {children}
-    {selected ? (
+    {props.children}
+    {props.selected ? (
       <IconContainer>
-        <Icon name="X" size={theme.spacing} />
+        <Icon name="X" size={props.theme.spacing} />
       </IconContainer>
     ) : null}
   </Container>

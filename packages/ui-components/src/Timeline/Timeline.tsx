@@ -5,7 +5,8 @@ import TimelineItem from "./TimelineItem"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
-  style?: any
+  id?: string | number
+  css?: {}
   className?: string
   children: any
 }
@@ -16,9 +17,9 @@ const Container = glamorous.ul({
   margin: "0"
 })
 
-const Timeline: React.SFC<IProps> = ({ style, className, children }: IProps) => (
-  <Container style={style} className={className}>
-    {children}
+const Timeline = (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className}>
+    {props.children}
   </Container>
 )
 

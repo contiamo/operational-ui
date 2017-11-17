@@ -2,6 +2,7 @@
 import * as React from "react";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
+    id?: string | number;
     css?: any;
     className?: string;
     placeholder?: string;
@@ -9,5 +10,5 @@ export interface IProps {
     theme?: Theme;
     color?: string;
 }
-declare const SelectFilter: React.SFC<IProps>;
+declare const SelectFilter: (props: IProps) => JSX.Element;
 export default SelectFilter;

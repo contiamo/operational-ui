@@ -3,6 +3,8 @@ import * as React from "react";
 import { GlamorousComponent } from "glamorous";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
+    id?: string | number;
+    style?: {};
     className?: string;
     children?: React.ReactNode;
     to?: string;

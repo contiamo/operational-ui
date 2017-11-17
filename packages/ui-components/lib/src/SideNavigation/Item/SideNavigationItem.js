@@ -26,9 +26,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     };
 });
-var SideNavigationItem = function (_a) {
-    var className = _a.className, css = _a.css, children = _a.children, onClick = _a.onClick, active = _a.active;
-    return (React.createElement(Container, { css: css, className: className, active: !!active, onClick: onClick }, children));
-};
+var SideNavigationItem = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, active: !!props.active, onClick: props.onClick }, props.children)); };
 exports.default = SideNavigationItem;
 //# sourceMappingURL=SideNavigationItem.js.map

@@ -89,6 +89,7 @@ class DatePicker extends React.Component<IProps, IState> {
         innerRef={node => {
           this.containerNode = node
         }}
+        key={this.props.id}
         css={this.props.css}
         isExpanded={this.state.isExpanded}
       >

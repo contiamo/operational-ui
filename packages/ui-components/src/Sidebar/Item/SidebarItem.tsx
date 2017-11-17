@@ -6,7 +6,8 @@ import { Theme } from "contiamo-ui-theme"
 import style from "./SidebarItem.style"
 
 export interface IProps {
-  css?: any
+  id?: string | number
+  style?: {}
   className?: string
   label: string
   children?: any
@@ -56,6 +57,8 @@ class SidebarItem extends React.Component<IProps, IState> {
     */
     return (
       <div
+        style={this.props.style}
+        key={this.props.id}
         className={`${this.props.className} ${this.state.updating ? "updating" : ""} ${this.state.open ? "open" : ""}`}
       >
         <div className={`header ${this.state.open ? "open" : ""}`} onClick={() => this.toggle()}>

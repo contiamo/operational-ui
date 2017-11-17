@@ -2,6 +2,7 @@
 import * as React from "react";
 import { RGBColor } from "react-color";
 export interface IProps {
+    id?: string | number;
     css?: any;
     className?: string;
     color?: string;

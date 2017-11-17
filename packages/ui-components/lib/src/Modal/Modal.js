@@ -42,15 +42,15 @@ var Modal = /** @class */ (function (_super) {
     }
     Modal.prototype.render = function () {
         var _this = this;
-        var _a = this.props, css = _a.css, className = _a.className, childClassName = _a.childClassName, children = _a.children, onClose = _a.onClose;
-        return (React.createElement(Container, { css: css, className: className, onClick: function (ev) {
+        var props = this.props;
+        return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: function (ev) {
                 if (_this.contentNode && !_this.contentNode.contains(ev.target)) {
-                    onClose && onClose();
+                    props.onClose && props.onClose();
                 }
             } },
             React.createElement(Content, { innerRef: function (contentNode) {
                     _this.contentNode = contentNode;
-                }, className: childClassName }, children)));
+                }, className: props.childClassName }, props.children)));
     };
     return Modal;
 }(React.Component));

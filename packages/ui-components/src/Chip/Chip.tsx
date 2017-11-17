@@ -5,6 +5,7 @@ import { darken, hexOrColor, readableTextColor } from "contiamo-ui-utils"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  id?: string | number
   css?: any
   color?: string
   onClick?: () => void
@@ -59,12 +60,18 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
   }
 })
 
-const Chip: React.SFC<IProps> = ({ className, css, children, onClick, color, symbol }) => (
-  <Container className={`${className || ""} co_chip`} css={css} color={color} hasChip={!!onClick}>
-    {children}
-    {onClick && (
-      <Action color={color} onClick={onClick}>
-        {symbol || "×"}
+const Chip = (props: IProps) => (
+  <Container
+    key={props.id}
+    className={`${props.className || ""} co_chip`}
+    css={props.css}
+    color={props.color}
+    hasChip={!!props.onClick}
+  >
+    {props.children}
+    {props.onClick && (
+      <Action color={props.color} onClick={props.onClick}>
+        {props.symbol || "×"}
       </Action>
     )}
   </Container>

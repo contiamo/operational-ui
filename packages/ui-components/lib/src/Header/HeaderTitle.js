@@ -14,9 +14,6 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.title, { marginRight: theme.spacing }));
 });
-var HeaderTitle = function (_a) {
-    var css = _a.css, className = _a.className, children = _a.children;
-    return (React.createElement(Container, { css: css, className: className }, children));
-};
+var HeaderTitle = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
 exports.default = HeaderTitle;
 //# sourceMappingURL=HeaderTitle.js.map

@@ -1,11 +1,11 @@
 /// <reference types="react" />
-import * as React from "react";
 import TimelineItem from "./TimelineItem";
 export interface IProps {
-    style?: any;
+    id?: string | number;
+    css?: {};
     className?: string;
     children: any;
 }
-declare const Timeline: React.SFC<IProps>;
+declare const Timeline: (props: IProps) => JSX.Element;
 export default Timeline;
 export { Timeline, TimelineItem };

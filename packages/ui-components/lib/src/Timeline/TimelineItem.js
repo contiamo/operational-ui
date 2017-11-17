@@ -76,12 +76,12 @@ var Container = glamorous_1.default.li({
     }
 });
 var TimelineItem = function (_a) {
-    var css = _a.css, className = _a.className, children = _a.children, _b = _a.color, color = _b === void 0 ? "info" : _b, _c = _a.icon, icon = _c === void 0 ? "" : _c, theme = _a.theme;
+    var css = _a.css, id = _a.id, className = _a.className, children = _a.children, _b = _a.color, color = _b === void 0 ? "info" : _b, _c = _a.icon, icon = _c === void 0 ? "" : _c, theme = _a.theme;
     var IconLib = ReactFeather;
     var isValidIcon = IconLib.hasOwnProperty(icon);
     var Icon = IconLib[icon];
     color = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
-    return (React.createElement(Container, { css: css, className: className },
+    return (React.createElement(Container, { key: id, css: css, className: className },
         React.createElement(Line, null),
         React.createElement(StatusContainer, { color: color }, isValidIcon ? React.createElement(Icon, { color: color }) : null),
         React.createElement(Content, null, children)));

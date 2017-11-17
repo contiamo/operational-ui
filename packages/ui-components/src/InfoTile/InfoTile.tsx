@@ -8,6 +8,7 @@ import { ReactFeatherIconName } from "../Icon/ReactFeather"
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
   icon?: ReactFeatherIconName
@@ -109,20 +110,27 @@ const ActionIconContainer = glamorous.div(({ theme, color }: { theme: Theme; col
   }
 })
 
-const InfoTile: React.SFC<IProps> = ({ css, className, label, children, color, icon, onAction }) => (
-  <Container css={css} className={className} withIcon={!!icon} withActionIcon={!!onAction} color={color}>
-    {icon ? (
-      <IconContainer color={color}>
-        <Icon size={20} name={icon} />
+const InfoTile = (props: IProps) => (
+  <Container
+    key={props.id}
+    css={props.css}
+    className={props.className}
+    withIcon={!!props.icon}
+    withActionIcon={!!props.onAction}
+    color={props.color}
+  >
+    {props.icon ? (
+      <IconContainer color={props.color}>
+        <Icon size={20} name={props.icon} />
       </IconContainer>
     ) : null}
-    {onAction ? (
-      <ActionIconContainer color={color} onClick={onAction}>
+    {props.onAction ? (
+      <ActionIconContainer color={props.color} onClick={props.onAction}>
         <Icon name="MoreHorizontal" size={8} />
       </ActionIconContainer>
     ) : null}
-    <Label color={color}>{label}</Label>
-    <span>{children}</span>
+    <Label color={props.color}>{props.label}</Label>
+    <span>{props.children}</span>
   </Container>
 )
 

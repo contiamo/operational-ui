@@ -159,6 +159,7 @@ class Select extends React.Component<IProps, IState> {
     return (
       <Container
         id={this.props.domId}
+        key={this.props.id}
         innerRef={containerNode => (this.containerNode = containerNode)}
         css={this.props.css}
         className={this.props.className}

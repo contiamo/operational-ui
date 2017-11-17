@@ -9,10 +9,7 @@ var Container = glamorous_1.default.ul({
     padding: "0",
     margin: "0"
 });
-var Timeline = function (_a) {
-    var style = _a.style, className = _a.className, children = _a.children;
-    return (React.createElement(Container, { style: style, className: className }, children));
-};
+var Timeline = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
 exports.Timeline = Timeline;
 exports.default = Timeline;
 //# sourceMappingURL=Timeline.js.map

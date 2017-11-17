@@ -4,6 +4,7 @@ import { css } from "glamor"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
 }
@@ -67,8 +68,8 @@ const Bar = glamorous.div(
   })
 )
 
-const Progress: React.SFC<IProps> = ({ css, className }: IProps) => (
-  <Container css={css} className={className}>
+const Progress = (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className}>
     <Box>
       <BarContainer>
         <Bar />

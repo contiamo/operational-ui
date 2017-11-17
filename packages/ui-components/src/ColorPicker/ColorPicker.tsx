@@ -4,6 +4,7 @@ import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
   color?: string
@@ -125,11 +126,12 @@ class ColorPicker extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { size, color, css, className } = this.props
+    const { size, color } = this.props
     return (
       <Container
-        css={css}
-        className={className}
+        key={this.props.id}
+        css={this.props.css}
+        className={this.props.className}
         innerRef={(containerEl: any): void => {
           this.containerEl = containerEl
         }}

@@ -15,9 +15,6 @@ function (_a) {
         gridRowGap: gap || theme.spacing
     });
 });
-var Grid = function (_a) {
-    var css = _a.css, rows = _a.rows, columns = _a.columns, gap = _a.gap, children = _a.children;
-    return (React.createElement(Container, { css: css, rowData: rows, columnData: columns, gap: gap }, children));
-};
+var Grid = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, rowData: props.rows, columnData: props.columns, gap: props.gap }, props.children)); };
 exports.default = Grid;
 //# sourceMappingURL=Grid.js.map

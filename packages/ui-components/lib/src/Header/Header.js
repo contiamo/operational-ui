@@ -23,9 +23,6 @@ var Container = glamorous_1.default.header(function (_a) {
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"])
     };
 });
-var Header = function (_a) {
-    var className = _a.className, css = _a.css, children = _a.children, color = _a.color;
-    return (React.createElement(Container, { css: css, className: className, color: color }, children));
-};
+var Header = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, color: props.color }, props.children)); };
 exports.default = Header;
 //# sourceMappingURL=Header.js.map

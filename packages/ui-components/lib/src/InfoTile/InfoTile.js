@@ -81,15 +81,12 @@ var ActionIconContainer = glamorous_1.default.div(function (_a) {
         }
     };
 });
-var InfoTile = function (_a) {
-    var css = _a.css, className = _a.className, label = _a.label, children = _a.children, color = _a.color, icon = _a.icon, onAction = _a.onAction;
-    return (React.createElement(Container, { css: css, className: className, withIcon: !!icon, withActionIcon: !!onAction, color: color },
-        icon ? (React.createElement(IconContainer, { color: color },
-            React.createElement(Icon_1.default, { size: 20, name: icon }))) : null,
-        onAction ? (React.createElement(ActionIconContainer, { color: color, onClick: onAction },
-            React.createElement(Icon_1.default, { name: "MoreHorizontal", size: 8 }))) : null,
-        React.createElement(Label, { color: color }, label),
-        React.createElement("span", null, children)));
-};
+var InfoTile = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, withIcon: !!props.icon, withActionIcon: !!props.onAction, color: props.color },
+    props.icon ? (React.createElement(IconContainer, { color: props.color },
+        React.createElement(Icon_1.default, { size: 20, name: props.icon }))) : null,
+    props.onAction ? (React.createElement(ActionIconContainer, { color: props.color, onClick: props.onAction },
+        React.createElement(Icon_1.default, { name: "MoreHorizontal", size: 8 }))) : null,
+    React.createElement(Label, { color: props.color }, props.label),
+    React.createElement("span", null, props.children))); };
 exports.default = InfoTile;
 //# sourceMappingURL=InfoTile.js.map

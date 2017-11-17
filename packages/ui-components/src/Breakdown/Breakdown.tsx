@@ -5,6 +5,7 @@ import { hexOrColor, readableTextColor, setBrightness } from "contiamo-ui-utils"
 import { ReactFeatherIconName } from "../Icon/ReactFeather"
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
   children: React.ReactNode
@@ -42,6 +43,10 @@ const Container = glamorous.div(
     }
   })
 )
+
+const Content = glamorous.div({
+  width: "100%"
+})
 
 const Label = glamorous.label(
   {
@@ -112,25 +117,21 @@ const Number = glamorous.div(
   })
 )
 
-export default ({
-  css,
-  className,
-  children,
-  color,
-  label,
-  fill,
-  number,
-  onClick,
-  onMouseEnter,
-  onMouseLeave
-}: IProps) => (
-  <Container css={css} className={className} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-    <Number>{number}</Number>
-    <div style={{ width: "100%" }}>
-      <Label>{children}</Label>
-      <Bar color={color} fill={fill}>
-        <span>{label}</span>
+export default (props: IProps) => (
+  <Container
+    key={props.id}
+    css={props.css}
+    className={props.className}
+    onClick={props.onClick}
+    onMouseEnter={props.onMouseEnter}
+    onMouseLeave={props.onMouseLeave}
+  >
+    <Number>{props.number}</Number>
+    <Content>
+      <Label>{props.children}</Label>
+      <Bar color={props.color} fill={props.fill}>
+        <span>{props.label}</span>
       </Bar>
-    </div>
+    </Content>
   </Container>
 )

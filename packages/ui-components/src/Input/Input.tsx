@@ -46,34 +46,22 @@ const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disable
   }
 }))
 
-const Input = ({
-  css,
-  className,
-  label,
-  domId,
-  name,
-  disabled,
-  placeholder,
-  value,
-  onChange,
-  onFocus,
-  onBlur,
-  inputRef
-}: IProps) => {
+const Input = (props: IProps) => {
   return (
     <InputField
-      css={css}
-      innerRef={inputRef}
-      className={className}
-      id={domId}
-      name={name}
-      disabled={disabled}
-      placeholder={placeholder}
-      value={value}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      key={props.id}
+      css={props.css}
+      innerRef={props.inputRef}
+      className={props.className}
+      id={props.domId}
+      name={props.name}
+      disabled={props.disabled}
+      placeholder={props.placeholder}
+      value={props.value}
+      onFocus={props.onFocus}
+      onBlur={props.onBlur}
       onChange={(e: any) => {
-        onChange && onChange(e.target.value)
+        props.onChange && props.onChange(e.target.value)
       }}
     />
   )

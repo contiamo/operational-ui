@@ -4,6 +4,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
   children: Node
@@ -42,9 +43,17 @@ const Container = glamorous.div(({ theme, active }: { theme: Theme; active: bool
   }
 })
 
-const HeaderItem: React.SFC<IProps> = ({ css, className, children, onClick, active }: IProps) => (
-  <Container tabIndex={-1} role="button" css={css} onClick={onClick} className={className} active={!!active}>
-    {children}
+const HeaderItem = (props: IProps) => (
+  <Container
+    key={props.id}
+    tabIndex={-1}
+    role="button"
+    css={props.css}
+    onClick={props.onClick}
+    className={props.className}
+    active={!!props.active}
+  >
+    {props.children}
   </Container>
 )
 

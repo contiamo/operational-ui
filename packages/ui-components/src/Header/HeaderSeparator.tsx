@@ -4,6 +4,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
 }
@@ -16,6 +17,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   backgroundColor: "rgba(0, 0, 0, 0.2)"
 }))
 
-const HeaderSeparator: React.SFC<IProps> = ({ css, className }: IProps) => <Container css={css} className={className} />
+const HeaderSeparator = (props: IProps) => <Container key={props.id} css={props.css} className={props.className} />
 
 export default HeaderSeparator

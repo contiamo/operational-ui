@@ -9,6 +9,7 @@ export interface IStyleProps {
     condensed?: boolean;
 }
 export interface IProps {
+    id?: string | number;
     css?: any;
     className?: string;
     onClick?: any;

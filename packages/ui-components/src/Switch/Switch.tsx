@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  id?: string | number
   on: boolean
   onChange: (on: boolean) => void
   className?: string
@@ -73,16 +74,17 @@ const Rail = glamorous.div(
   })
 )
 
-const Switch: React.SFC<IProps> = ({ className, style, on, onChange }: IProps) => (
+const Switch = (props: IProps) => (
   <Container
-    style={style}
-    className={className}
+    key={props.id}
+    style={props.style}
+    className={props.className}
     onClick={() => {
-      onChange(!on)
+      props.onChange(!props.on)
     }}
   >
-    <Button on={on} />
-    <Rail on={on} />
+    <Button on={props.on} />
+    <Rail on={props.on} />
   </Container>
 )
 

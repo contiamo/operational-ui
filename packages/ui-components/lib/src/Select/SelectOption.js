@@ -34,13 +34,10 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         transform: "translate3d(-50%, -50%, 0)"
     });
 });
-var SelectOption = function (_a) {
-    var css = _a.css, className = _a.className, theme = _a.theme, selected = _a.selected, color = _a.color, onClick = _a.onClick, children = _a.children;
-    return (React.createElement(Container, { css: css, className: className, selected: !!selected, color: color, tabIndex: -2, role: "option", "aria-selected": selected, onClick: onClick },
-        children,
-        selected ? (React.createElement(IconContainer, null,
-            React.createElement(contiamo_ui_components_1.Icon, { name: "X", size: theme.spacing }))) : null));
-};
+var SelectOption = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, selected: !!props.selected, color: props.color, tabIndex: -2, role: "option", "aria-selected": props.selected, onClick: props.onClick },
+    props.children,
+    props.selected ? (React.createElement(IconContainer, null,
+        React.createElement(contiamo_ui_components_1.Icon, { name: "X", size: props.theme.spacing }))) : null)); };
 var WrappedSelectOption = glamorous_1.withTheme(SelectOption);
 exports.default = WrappedSelectOption;
 //# sourceMappingURL=SelectOption.js.map

@@ -94,7 +94,7 @@ var SidebarItem = /** @class */ (function (_super) {
           even when the cursor is over the children... who may also have their
           own tooltips.
         */
-        return (React.createElement("div", { className: this.props.className + " " + (this.state.updating ? "updating" : "") + " " + (this.state.open ? "open" : "") },
+        return (React.createElement("div", { style: this.props.style, key: this.props.id, className: this.props.className + " " + (this.state.updating ? "updating" : "") + " " + (this.state.open ? "open" : "") },
             React.createElement("div", { className: "header " + (this.state.open ? "open" : ""), onClick: function () { return _this.toggle(); } }, this.props.label),
             this.state.open ? React.createElement("div", { className: "content" }, this.props.children) : ""));
     };
