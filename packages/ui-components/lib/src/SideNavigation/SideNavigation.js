@@ -38,8 +38,8 @@ var Container = glamorous_1.default.div(function (_a) {
         } });
 });
 var SideNavigation = function (_a) {
-    var css = _a.css, className = _a.className, key = _a.key, children = _a.children, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
-    return (React.createElement(Container, { key: key, css: css, className: className, color: color, fix: fix, expandOnHover: expandOnHover, expandedWidth: expandedWidth || 240, width: width || 60 }, children));
+    var id = _a.id, css = _a.css, className = _a.className, children = _a.children, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
+    return (React.createElement(Container, { key: id, css: css, className: className, color: color, fix: fix, expandOnHover: expandOnHover, expandedWidth: expandedWidth || 240, width: width || 60 }, children));
 };
 exports.default = SideNavigation;
 //# sourceMappingURL=SideNavigation.js.map

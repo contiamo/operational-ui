@@ -4,7 +4,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   className?: string
   children: React.ReactNode
   onClick?: () => void
@@ -39,9 +39,9 @@ const Container = glamorous.div(({ theme, active }: IProps): {} => {
   }
 })
 
-const SideNavigationItem: React.SFC<IProps> = ({ key, className, css, children, onClick, active }: IProps) => (
-  <Container key={key} css={css} className={className} active={!!active} onClick={onClick}>
-    {children}
+const SideNavigationItem = (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className} active={!!props.active} onClick={props.onClick}>
+    {props.children}
   </Container>
 )
 

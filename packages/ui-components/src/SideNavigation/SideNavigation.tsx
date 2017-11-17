@@ -9,7 +9,7 @@ import SideNavigationLink from "./Link/SideNavigationLink"
 import { hexOrColor, readableTextColor } from "contiamo-ui-utils"
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -71,9 +71,9 @@ const Container = glamorous.div(
 )
 
 const SideNavigation: React.SFC<IProps> = ({
+  id,
   css,
   className,
-  key,
   children,
   color,
   fix,
@@ -82,7 +82,7 @@ const SideNavigation: React.SFC<IProps> = ({
   width
 }: IProps) => (
   <Container
-    key={key}
+    key={id}
     css={css}
     className={className}
     color={color}

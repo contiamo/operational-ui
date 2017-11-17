@@ -12,9 +12,6 @@ var Container = glamorous_1.default.div(function (_a) {
         backgroundColor: "rgba(0, 0, 0, 0.2)"
     });
 });
-var HeaderSeparator = function (_a) {
-    var key = _a.key, css = _a.css, className = _a.className;
-    return (React.createElement(Container, { key: key, css: css, className: className }));
-};
+var HeaderSeparator = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className })); };
 exports.default = HeaderSeparator;
 //# sourceMappingURL=HeaderSeparator.js.map

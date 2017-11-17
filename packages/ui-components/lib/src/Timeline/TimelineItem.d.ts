@@ -3,7 +3,7 @@ import * as React from "react";
 import { Theme, ThemeColorName } from "contiamo-ui-theme";
 export declare type CustomColor = ThemeColorName | string;
 export interface IProps {
-    key?: string | number;
+    id?: string | number;
     css?: {};
     className?: string;
     children?: React.ReactNode;

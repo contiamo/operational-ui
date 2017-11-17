@@ -17,9 +17,6 @@ var Container = glamorous_1.default.div(function (_a) {
         color: borderColor
     };
 });
-var PlusChip = function (_a) {
-    var key = _a.key, css = _a.css, _b = _a.size, size = _b === void 0 ? 15 : _b, color = _a.color, className = _a.className, children = _a.children, onClick = _a.onClick;
-    return (React.createElement(Container, { key: key, css: css, className: className, size: size, color: color, onClick: onClick, tabIndex: -1, role: "button" }, children || "+"));
-};
+var PlusChip = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, size: props.size || 15, color: props.color, onClick: props.onClick, tabIndex: -1, role: "button" }, props.children || "+")); };
 exports.default = PlusChip;
 //# sourceMappingURL=PlusChip.js.map

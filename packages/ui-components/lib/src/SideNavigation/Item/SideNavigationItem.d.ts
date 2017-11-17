@@ -2,7 +2,7 @@
 import * as React from "react";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
-    key?: string | number;
+    id?: string | number;
     className?: string;
     children: React.ReactNode;
     onClick?: () => void;
@@ -10,5 +10,5 @@ export interface IProps {
     css?: any;
     theme?: Theme;
 }
-declare const SideNavigationItem: React.SFC<IProps>;
+declare const SideNavigationItem: (props: IProps) => JSX.Element;
 export default SideNavigationItem;

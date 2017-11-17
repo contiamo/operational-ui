@@ -162,7 +162,7 @@ var SideNavigationHeader = /** @class */ (function (_super) {
     };
     SideNavigationHeader.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Container, { key: this.props.key, css: this.props.css, className: this.props.className, hasOptions: this.props.options && this.props.options.length > 0, onClick: function () { return _this.toggle(); }, tabIndex: -1, role: "listbox" },
+        return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className, hasOptions: this.props.options && this.props.options.length > 0, onClick: function () { return _this.toggle(); }, tabIndex: -1, role: "listbox" },
             this.props.children,
             this.state.value && React.createElement(Value, null, this.state.value.label),
             this.props.options.length > 0 && this.state.open && this.getDropdown()));

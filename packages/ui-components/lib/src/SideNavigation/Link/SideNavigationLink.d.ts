@@ -1,9 +1,8 @@
 /// <reference types="react" />
-import * as React from "react";
 import { GlamorousComponent } from "glamorous";
 import { Theme } from "contiamo-ui-theme";
 export interface IProps {
-    key?: string | number;
+    id?: string | number;
     style?: {};
     className?: string;
     children: Node;
@@ -14,7 +13,7 @@ declare const style: ({theme, color}: {
     theme: Theme;
     color?: string;
 }) => {};
-declare const SideNavigationLink: React.SFC<IProps>;
+declare const SideNavigationLink: (props: IProps) => JSX.Element;
 declare const _default: GlamorousComponent<IProps & object & Pick<{
     theme: Theme;
     color?: string;

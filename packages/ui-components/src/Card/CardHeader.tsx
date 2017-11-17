@@ -3,11 +3,11 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   css?: any
   className?: string
   children?: React.ReactNode
-  id?: string
+  domId?: string
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
@@ -29,9 +29,9 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-const CardHeader: React.SFC<IProps> = ({ key, css, className, children, id }) => (
-  <Container key={key} id={id} css={css} className={className}>
-    {children}
+const CardHeader = (props: IProps) => (
+  <Container key={props.id} id={props.domId} css={props.css} className={props.className}>
+    {props.children}
   </Container>
 )
 

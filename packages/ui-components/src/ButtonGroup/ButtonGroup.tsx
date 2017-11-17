@@ -4,8 +4,8 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface Props {
+  id?: string | number
   css?: any
-  key?: string | number
   className?: string
   children?: React.ReactNode
 }
@@ -25,9 +25,9 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   }
 }))
 
-const ButtonGroup: React.SFC<Props> = ({ css, key, children, className }: Props) => (
-  <Container key={key} css={css} className={className}>
-    {children}
+const ButtonGroup: React.SFC<Props> = (props: Props) => (
+  <Container key={props.id} css={props.css} className={props.className}>
+    {props.children}
   </Container>
 )
 

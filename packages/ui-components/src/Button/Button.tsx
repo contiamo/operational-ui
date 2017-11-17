@@ -13,9 +13,9 @@ export interface IStyleProps {
 }
 
 export interface IProps {
+  id?: string | number
   css?: any
   className?: string
-  key?: string | number
   onClick?: any
   children?: React.ReactNode
   color?: string
@@ -67,12 +67,23 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
   }
 })
 
-const Button: React.SFC<IProps> = props => {
-  const componentProps = {
-    ...props,
-    onClick: props.disabled ? null : props.onClick
-  }
-  return <Container tabIndex={-1} role="button" {...componentProps} />
+const Button: React.SFC<IProps> = (props: IProps) => {
+  return (
+    <Container
+      tabIndex={-1}
+      role="button"
+      key={props.id}
+      css={props.css}
+      className={props.className}
+      onClick={props.onClick}
+      color={props.color}
+      active={props.active}
+      disabled={props.disabled}
+      condensed={props.condensed}
+    >
+      {props.children}
+    </Container>
+  )
 }
 
 export default Button

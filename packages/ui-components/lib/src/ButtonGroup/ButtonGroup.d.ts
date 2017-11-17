@@ -1,8 +1,8 @@
 /// <reference types="react" />
 import * as React from "react";
 export interface Props {
+    id?: string | number;
     css?: any;
-    key?: string | number;
     className?: string;
     children?: React.ReactNode;
 }

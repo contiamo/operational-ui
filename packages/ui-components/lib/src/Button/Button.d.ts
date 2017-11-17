@@ -9,9 +9,9 @@ export interface IStyleProps {
     condensed?: boolean;
 }
 export interface IProps {
+    id?: string | number;
     css?: any;
     className?: string;
-    key?: string | number;
     onClick?: any;
     children?: React.ReactNode;
     color?: string;

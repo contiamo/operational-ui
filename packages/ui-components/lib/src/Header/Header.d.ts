@@ -5,13 +5,13 @@ import HeaderItem from "./HeaderItem";
 import HeaderTitle from "./HeaderTitle";
 import HeaderSeparator from "./HeaderSeparator";
 export interface IProps {
-    key?: string | number;
+    id?: string | number;
     className?: string;
     css?: any;
     children: React.ReactNode;
     theme?: Theme;
     color?: string;
 }
-declare const Header: React.SFC<IProps>;
+declare const Header: (props: IProps) => JSX.Element;
 export default Header;
 export { HeaderItem, HeaderSeparator, HeaderTitle };

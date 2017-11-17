@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   css?: any
   className?: string
   childClassName?: string
@@ -33,15 +33,15 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
 class Modal extends React.Component<IProps, {}> {
   contentNode: any
   render() {
-    const { key, css, className, childClassName, children, onClose } = this.props
+    const { props } = this
     return (
       <Container
-        key={key}
-        css={css}
-        className={className}
+        key={props.id}
+        css={props.css}
+        className={props.className}
         onClick={ev => {
           if (this.contentNode && !this.contentNode.contains(ev.target)) {
-            onClose && onClose()
+            props.onClose && props.onClose()
           }
         }}
       >
@@ -49,9 +49,9 @@ class Modal extends React.Component<IProps, {}> {
           innerRef={contentNode => {
             this.contentNode = contentNode
           }}
-          className={childClassName}
+          className={props.childClassName}
         >
-          {children}
+          {props.children}
         </Content>
       </Container>
     )

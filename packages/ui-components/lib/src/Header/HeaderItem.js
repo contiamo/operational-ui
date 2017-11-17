@@ -29,9 +29,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     };
 });
-var HeaderItem = function (_a) {
-    var key = _a.key, css = _a.css, className = _a.className, children = _a.children, onClick = _a.onClick, active = _a.active;
-    return (React.createElement(Container, { key: key, tabIndex: -1, role: "button", css: css, onClick: onClick, className: className, active: !!active }, children));
-};
+var HeaderItem = function (props) { return (React.createElement(Container, { key: props.id, tabIndex: -1, role: "button", css: props.css, onClick: props.onClick, className: props.className, active: !!props.active }, props.children)); };
 exports.default = HeaderItem;
 //# sourceMappingURL=HeaderItem.js.map

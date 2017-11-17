@@ -8,6 +8,7 @@ import { ReactFeatherIconName } from "./ReactFeather"
 import { hexOrColor } from "contiamo-ui-utils"
 
 export interface IProps {
+  id?: string | number
   name: ReactFeatherIconName
   size?: number
   color?: string
@@ -17,15 +18,15 @@ export interface IPropsWithTheme extends IProps {
   theme: Theme
 }
 
-const Icon: React.StatelessComponent<IPropsWithTheme> = ({ name, size, color, theme }: IPropsWithTheme) => {
-  const defaultColor = theme.colors.palette.grey90
-  const color_: string = color
-    ? (hexOrColor(color)(theme.colors.palette[color] || defaultColor) as string)
+const Icon = (props: IPropsWithTheme) => {
+  const defaultColor = props.theme.colors.palette.grey90
+  const color_: string = props.color
+    ? (hexOrColor(props.color)(props.theme.colors.palette[props.color] || defaultColor) as string)
     : defaultColor
 
-  if (ReactFeather.hasOwnProperty(name)) {
-    const Comp = ReactFeather[name]
-    return <Comp size={size || theme.spacing} color={color_} />
+  if (ReactFeather.hasOwnProperty(props.name)) {
+    const Comp = ReactFeather[props.name]
+    return <Comp key={props.id} size={props.size || props.theme.spacing} color={color_} />
   } else {
     return null
   }

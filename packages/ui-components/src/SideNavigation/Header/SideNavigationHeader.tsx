@@ -11,7 +11,7 @@ export interface IOption {
 }
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   css?: {}
   className?: string
   children: React.ReactNode
@@ -130,7 +130,7 @@ class SideNavigationHeader extends React.Component<IProps, IState> {
   render() {
     return (
       <Container
-        key={this.props.key}
+        key={this.props.id}
         css={this.props.css}
         className={this.props.className}
         hasOptions={this.props.options && this.props.options.length > 0}

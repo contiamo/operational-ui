@@ -29,6 +29,9 @@ var Container = glamorous_1.default.div({
             borderTop: "1px solid " + theme.colors.palette.grey20
         } }));
 });
+var Content = glamorous_1.default.div({
+    width: "100%"
+});
 var Label = glamorous_1.default.label({
     display: "block"
 }, function (_a) {
@@ -93,13 +96,10 @@ var Number = glamorous_1.default.div({
         color: theme.colors.palette.grey20
     });
 });
-exports.default = function (_a) {
-    var css = _a.css, key = _a.key, className = _a.className, children = _a.children, color = _a.color, label = _a.label, fill = _a.fill, number = _a.number, onClick = _a.onClick, onMouseEnter = _a.onMouseEnter, onMouseLeave = _a.onMouseLeave;
-    return (React.createElement(Container, { key: key, css: css, className: className, onClick: onClick, onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave },
-        React.createElement(Number, null, number),
-        React.createElement("div", { style: { width: "100%" } },
-            React.createElement(Label, null, children),
-            React.createElement(Bar, { color: color, fill: fill },
-                React.createElement("span", null, label)))));
-};
+exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: props.onClick, onMouseEnter: props.onMouseEnter, onMouseLeave: props.onMouseLeave },
+    React.createElement(Number, null, props.number),
+    React.createElement(Content, null,
+        React.createElement(Label, null, props.children),
+        React.createElement(Bar, { color: props.color, fill: props.fill },
+            React.createElement("span", null, props.label))))); };
 //# sourceMappingURL=Breakdown.js.map

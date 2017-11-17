@@ -5,7 +5,7 @@ import CardHeader from "./CardHeader"
 import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   css?: any
   className?: string
   children: React.ReactNode
@@ -29,9 +29,9 @@ const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; widt
   }
 }))
 
-const Card: React.SFC<IProps> = ({ key, css, className, children, width, padding }) => (
-  <Container key={key} css={css} width={width} padding={padding} className={className}>
-    {children}
+const Card: React.SFC<IProps> = (props: IProps) => (
+  <Container key={props.id} css={props.css} width={props.width} padding={props.padding} className={props.className}>
+    {props.children}
   </Container>
 )
 

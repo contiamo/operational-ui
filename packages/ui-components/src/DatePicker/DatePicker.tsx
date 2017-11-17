@@ -12,7 +12,6 @@ export interface IProps {
   id?: string
   // Injected by withLabel higher-order component
   domId?: string
-  key?: string | number
   label?: string
   start?: string
   end?: string
@@ -90,7 +89,7 @@ class DatePicker extends React.Component<IProps, IState> {
         innerRef={node => {
           this.containerNode = node
         }}
-        key={this.props.key}
+        key={this.props.id}
         css={this.props.css}
         isExpanded={this.state.isExpanded}
       >

@@ -2,7 +2,7 @@
 import * as React from "react";
 export declare type Dimension = string | number;
 export interface IProps {
-    key?: string | number;
+    id?: string | number;
     css?: any;
     className?: string;
     children?: React.ReactNode;

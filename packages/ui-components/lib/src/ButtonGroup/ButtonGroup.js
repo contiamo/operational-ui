@@ -19,9 +19,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var ButtonGroup = function (_a) {
-    var css = _a.css, key = _a.key, children = _a.children, className = _a.className;
-    return (React.createElement(Container, { key: key, css: css, className: className }, children));
-};
+var ButtonGroup = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
 exports.default = ButtonGroup;
 //# sourceMappingURL=ButtonGroup.js.map

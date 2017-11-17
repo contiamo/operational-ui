@@ -3,6 +3,7 @@ import * as React from "react";
 import { Theme } from "contiamo-ui-theme";
 import { ReactFeatherIconName } from "./ReactFeather";
 export interface IProps {
+    id?: string | number;
     name: ReactFeatherIconName;
     size?: number;
     color?: string;

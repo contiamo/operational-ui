@@ -102,8 +102,8 @@ var ColorPicker = /** @class */ (function (_super) {
     };
     ColorPicker.prototype.render = function () {
         var _this = this;
-        var _a = this.props, size = _a.size, color = _a.color, css = _a.css, className = _a.className;
-        return (React.createElement(Container, { key: this.props.key, css: css, className: className, innerRef: function (containerEl) {
+        var _a = this.props, size = _a.size, color = _a.color;
+        return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className, innerRef: function (containerEl) {
                 _this.containerEl = containerEl;
             }, onClick: function () { return _this.togglePicker(); } },
             React.createElement(ColorSquare, { size: size, color: color }),

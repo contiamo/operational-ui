@@ -75,7 +75,7 @@ var DatePicker = /** @class */ (function (_super) {
         var daysInCurrentMonth = DatePicker_utils_1.daysInMonth(this.state.month, this.state.year);
         return (React.createElement(DatePicker_styles_1.Container, { innerRef: function (node) {
                 _this.containerNode = node;
-            }, key: this.props.key, css: this.props.css, isExpanded: this.state.isExpanded },
+            }, key: this.props.id, css: this.props.css, isExpanded: this.state.isExpanded },
             React.createElement(DatePicker_styles_1.Toggle, { onClick: function (ev) {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded

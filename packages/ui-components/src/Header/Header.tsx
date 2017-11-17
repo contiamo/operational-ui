@@ -9,7 +9,7 @@ import HeaderTitle from "./HeaderTitle"
 import HeaderSeparator from "./HeaderSeparator"
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   className?: string
   css?: any
   children: React.ReactNode
@@ -32,9 +32,9 @@ const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: st
   }
 })
 
-const Header: React.SFC<IProps> = ({ key, className, css, children, color }) => (
-  <Container key={key} css={css} className={className} color={color}>
-    {children}
+const Header = (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className} color={props.color}>
+    {props.children}
   </Container>
 )
 

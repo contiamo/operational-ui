@@ -7,7 +7,7 @@ import { Theme, ThemeColorName } from "contiamo-ui-theme"
 export type CustomColor = ThemeColorName | string
 
 export interface IProps {
-  key?: string | number
+  id?: string | number
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -95,7 +95,7 @@ const Container = glamorous.li({
 
 const TimelineItem: React.SFC<IPropsWithTheme> = ({
   css,
-  key,
+  id,
   className,
   children,
   color = "info",
@@ -108,7 +108,7 @@ const TimelineItem: React.SFC<IPropsWithTheme> = ({
   color = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
 
   return (
-    <Container key={key} css={css} className={className}>
+    <Container key={id} css={css} className={className}>
       <Line />
       <StatusContainer color={color}>{isValidIcon ? <Icon color={color} /> : null}</StatusContainer>
       <Content>{children}</Content>

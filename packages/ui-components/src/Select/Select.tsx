@@ -26,7 +26,6 @@ export interface IProps {
   id?: string
   // Injected by withLabel higher-order component
   domId?: string
-  key?: string | number
   css?: any
   className?: string
   options: Option[]
@@ -160,7 +159,7 @@ class Select extends React.Component<IProps, IState> {
     return (
       <Container
         id={this.props.domId}
-        key={this.props.key}
+        key={this.props.id}
         innerRef={containerNode => (this.containerNode = containerNode)}
         css={this.props.css}
         className={this.props.className}

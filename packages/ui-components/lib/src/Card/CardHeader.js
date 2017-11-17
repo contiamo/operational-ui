@@ -23,9 +23,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var CardHeader = function (_a) {
-    var key = _a.key, css = _a.css, className = _a.className, children = _a.children, id = _a.id;
-    return (React.createElement(Container, { key: key, id: id, css: css, className: className }, children));
-};
+var CardHeader = function (props) { return (React.createElement(Container, { key: props.id, id: props.domId, css: props.css, className: props.className }, props.children)); };
 exports.default = CardHeader;
 //# sourceMappingURL=CardHeader.js.map

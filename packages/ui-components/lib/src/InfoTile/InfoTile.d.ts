@@ -2,7 +2,7 @@
 import * as React from "react";
 import { ReactFeatherIconName } from "../Icon/ReactFeather";
 export interface IProps {
-    key?: string | number;
+    id?: string | number;
     css?: any;
     className?: string;
     icon?: ReactFeatherIconName;
@@ -11,5 +11,5 @@ export interface IProps {
     children: React.ReactNode;
     color?: string;
 }
-declare const InfoTile: React.SFC<IProps>;
+declare const InfoTile: (props: IProps) => JSX.Element;
 export default InfoTile;

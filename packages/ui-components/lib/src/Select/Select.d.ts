@@ -6,7 +6,6 @@ export interface Option {
 export interface IProps {
     id?: string;
     domId?: string;
-    key?: string | number;
     css?: any;
     className?: string;
     options: Option[];

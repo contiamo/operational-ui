@@ -52,9 +52,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     };
 });
-var Spinner = function (_a) {
-    var key = _a.key, css = _a.css, className = _a.className, color = _a.color, size = _a.size, spinDuration = _a.spinDuration;
-    return (React.createElement(Container, { key: key, css: css, className: className, color: color, spinnerSize: size, spinDuration: spinDuration }));
-};
+var Spinner = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, color: props.color, spinnerSize: props.size, spinDuration: props.spinDuration })); };
 exports.default = Spinner;
 //# sourceMappingURL=Spinner.js.map
