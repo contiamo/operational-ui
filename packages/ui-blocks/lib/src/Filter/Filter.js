@@ -15,8 +15,13 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_components_1 = require("contiamo-ui-components");
 var Container = glamorous_1.default.div({});
 var FilterBar = glamorous_1.default.div({
-    "& > *": {
-        display: "inline-block"
+    "& > div": {
+        display: "inline-flex"
+    }
+});
+var FormFields = glamorous_1.default.div({
+    "& > label, & > div": {
+        display: "block"
     }
 });
 var Filter = /** @class */ (function (_super) {
@@ -34,18 +39,19 @@ var Filter = /** @class */ (function (_super) {
         return (React.createElement(Container, null,
             React.createElement(FilterBar, null,
                 React.Children.map(children, function (child, index) {
-                    return React.createElement(contiamo_ui_components_1.Chip, null, String(child.props.value));
+                    return React.createElement(contiamo_ui_components_1.Chip, null, (child.props.label || child.props.id) + ": " + child.props.value);
                 }),
-                React.createElement(contiamo_ui_components_1.Chip, { onClick: function () {
+                React.createElement(contiamo_ui_components_1.Chip, { color: "#efefef", onClick: function () {
                         _this.setState(function (prevState) { return ({
                             isExpanded: true
                         }); });
-                    } }, "...")),
+                    }, symbol: "..." }, "Filter")),
             this.state.isExpanded ? (React.createElement(contiamo_ui_components_1.Modal, { onClose: function () {
                     _this.setState(function (prevState) { return ({
                         isExpanded: false
                     }); });
-                } }, children)) : null));
+                } },
+                React.createElement(FormFields, null, children))) : null));
     };
     return Filter;
 }(React.Component));

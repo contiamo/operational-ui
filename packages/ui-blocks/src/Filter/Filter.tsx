@@ -14,8 +14,14 @@ export interface IState {
 const Container = glamorous.div({})
 
 const FilterBar = glamorous.div({
-  "& > *": {
-    display: "inline-block"
+  "& > div": {
+    display: "inline-flex"
+  }
+})
+
+const FormFields = glamorous.div({
+  "& > label, & > div": {
+    display: "block"
   }
 })
 
@@ -29,17 +35,22 @@ class Filter extends React.Component<IProps, IState> {
     return (
       <Container>
         <FilterBar>
-          {React.Children.map(children, (child: React.ReactElement<{ value: string | number }>, index: number) => {
-            return <Chip>{String(child.props.value)}</Chip>
-          })}
+          {React.Children.map(
+            children,
+            (child: React.ReactElement<{ value: string | number; id?: string; label?: string }>, index: number) => {
+              return <Chip>{`${child.props.label || child.props.id}: ${child.props.value}`}</Chip>
+            }
+          )}
           <Chip
+            color="#efefef"
             onClick={() => {
               this.setState(prevState => ({
                 isExpanded: true
               }))
             }}
+            symbol="..."
           >
-            ...
+            Filter
           </Chip>
         </FilterBar>
         {this.state.isExpanded ? (
@@ -50,7 +61,7 @@ class Filter extends React.Component<IProps, IState> {
               }))
             }}
           >
-            {children}
+            <FormFields>{children}</FormFields>
           </Modal>
         ) : null}
       </Container>
