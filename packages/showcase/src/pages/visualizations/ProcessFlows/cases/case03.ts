@@ -66,10 +66,10 @@ const nodeAccessors: any = {
     return d.group ? groupAccessorValue[d.group].stroke : "#000"
   },
   labelPosition: (d: any) => {
-    return d.group ? groupAccessorValue[d.group].labelPosition : "right"
+    return d.group ? groupAccessorValue[d.group].labelPosition : "top"
   },
   label: (d: any) => {
-    return `Node ${d.id}`
+    return `${d.id}: an excessively long label to check overlap behaviour`
   }
 }
 

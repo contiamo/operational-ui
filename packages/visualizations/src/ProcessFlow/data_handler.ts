@@ -148,7 +148,8 @@ class DataHandler {
         ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
         : config.horizontalNodeSpacing
 
-    this.stateWriter(["width"], finiteWidth ? config.width : spacing * (maxX + 1))
+    this.stateWriter("horizontalNodeSpacing", spacing)
+    this.stateWriter("width", finiteWidth ? config.width : spacing * (maxX + 1))
     return spacing
   }
 

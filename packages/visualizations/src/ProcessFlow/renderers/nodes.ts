@@ -193,6 +193,13 @@ class Nodes extends AbstractRenderer {
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
+  getLabelText(d: TNode): string {
+    // Pixel width of character approx 1/2 of font-size - allow 7px per character
+    const desiredPixelWidth: number = this.state.current.get("computed").series.horizontalNodeSpacing,
+      numberOfCharacters: number = desiredPixelWidth / 7
+    return d.label().substring(0, numberOfCharacters) + (d.label().length > numberOfCharacters ? "..." : "")
+  }
+
   updateNodeLabels(): void {
     let labels: TNodeSelection = this.el.select("g.nodes-group")
       .selectAll(`text.${styles.label}`)
@@ -200,7 +207,7 @@ class Nodes extends AbstractRenderer {
 
     labels.enter()
       .merge(labels)
-      .text((d: TNode): string => d.label())
+      .text((d) => this.getLabelText(d))
       .attr("x", withD3Element(this.getNodeLabelX.bind(this)))
       .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
       .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)

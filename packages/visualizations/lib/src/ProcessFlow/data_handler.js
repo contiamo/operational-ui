@@ -113,7 +113,8 @@ var DataHandler = /** @class */ (function () {
         var config = this.state.current.get("config"), finiteWidth = isFinite(config.width), xValues = fp_1.map(fp_1.get("x"))(this.layout.nodes), maxX = xValues.length > 0 ? Math.max.apply(Math, xValues) : 0, spacing = finiteWidth
             ? Math.min(config.width / (maxX + 1), config.horizontalNodeSpacing)
             : config.horizontalNodeSpacing;
-        this.stateWriter(["width"], finiteWidth ? config.width : spacing * (maxX + 1));
+        this.stateWriter("horizontalNodeSpacing", spacing);
+        this.stateWriter("width", finiteWidth ? config.width : spacing * (maxX + 1));
         return spacing;
     };
     DataHandler.prototype.yGridSpacing = function (nRows) {
