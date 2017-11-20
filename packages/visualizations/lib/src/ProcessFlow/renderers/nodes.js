@@ -157,7 +157,7 @@ var Nodes = /** @class */ (function (_super) {
             .on("end", function () {
             --n;
             if (n < 1) {
-                _this.updateNodeLabels(nodeGroups);
+                _this.updateNodeLabels();
             }
         });
     };
@@ -176,11 +176,12 @@ var Nodes = /** @class */ (function (_super) {
         var offset = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset;
         return nodeLabelOptions[d.labelPosition()].y * offset;
     };
-    Nodes.prototype.updateNodeLabels = function (nodeGroups) {
-        nodeGroups
-            .enter()
-            .merge(nodeGroups)
+    Nodes.prototype.updateNodeLabels = function () {
+        var labels = this.el.select("g.nodes-group")
             .selectAll("text." + styles.label)
+            .data(this.data, function (node) { return node.id(); });
+        labels.enter()
+            .merge(labels)
             .text(function (d) { return d.label(); })
             .attr("x", d3_utils_1.withD3Element(this.getNodeLabelX.bind(this)))
             .attr("y", d3_utils_1.withD3Element(this.getNodeLabelY.bind(this)))

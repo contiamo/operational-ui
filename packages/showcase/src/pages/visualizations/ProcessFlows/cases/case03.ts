@@ -67,6 +67,9 @@ const nodeAccessors: any = {
   },
   labelPosition: (d: any) => {
     return d.group ? groupAccessorValue[d.group].labelPosition : "right"
+  },
+  label: (d: any) => {
+    return `Node ${d.id}`
   }
 }
 

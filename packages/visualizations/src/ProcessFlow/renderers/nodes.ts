@@ -170,7 +170,7 @@ class Nodes extends AbstractRenderer {
       .on("end", (): void => {
         --n
         if (n < 1) {
-          this.updateNodeLabels(nodeGroups)
+          this.updateNodeLabels()
         }
       })
   }
@@ -193,11 +193,13 @@ class Nodes extends AbstractRenderer {
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(nodeGroups: TNodeSelection): void {
-    nodeGroups
-      .enter()
-      .merge(nodeGroups)
+  updateNodeLabels(): void {
+    let labels: TNodeSelection = this.el.select("g.nodes-group")
       .selectAll(`text.${styles.label}`)
+      .data(this.data, (node: TNode): string => node.id())
+
+    labels.enter()
+      .merge(labels)
       .text((d: TNode): string => d.label())
       .attr("x", withD3Element(this.getNodeLabelX.bind(this)))
       .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
