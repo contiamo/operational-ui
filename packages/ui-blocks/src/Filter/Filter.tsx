@@ -1,9 +1,11 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Chip, Modal, Select } from "contiamo-ui-components"
+import { Chip, Modal, Input, Select, DatePicker } from "contiamo-ui-components"
+import { Theme } from "contiamo-ui-theme"
 
 export interface IProps {
+  onClear?: (id: string) => void
   children?: React.ReactNode
 }
 
@@ -19,11 +21,12 @@ const FilterBar = glamorous.div({
   }
 })
 
-const FormFields = glamorous.div({
+const FormFields = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& > label, & > div": {
+    margin: `${theme.spacing}px 0`,
     display: "block"
   }
-})
+}))
 
 class Filter extends React.Component<IProps, IState> {
   state: IState = {
@@ -31,14 +34,52 @@ class Filter extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { children } = this.props
     return (
       <Container>
         <FilterBar>
           {React.Children.map(
-            children,
-            (child: React.ReactElement<{ value: string | number; id?: string; label?: string }>, index: number) => {
-              return <Chip>{`${child.props.label || child.props.id}: ${child.props.value}`}</Chip>
+            this.props.children,
+            (
+              child: React.ReactElement<{
+                id: string
+                start?: string
+                end?: string
+                value?: string | number
+                label?: string
+              }>,
+              index: number
+            ) => {
+              if (!child.props.start && !child.props.end && !child.props.value) {
+                return null
+              }
+              const label = child.props.label || child.props.id
+              let value = ""
+              switch (child.type) {
+                case Input:
+                  value = !!child.props.value || child.props.value === 0 ? String(child.props.value) : ""
+                  break
+                case Select:
+                  value = !!child.props.value || child.props.value === 0 ? String(child.props.value) : ""
+                  break
+                case DatePicker:
+                  value = [child.props.start, child.props.end].filter(date => !!date).join(" - ")
+                  break
+              }
+              if (value === "") {
+                value = "..."
+              }
+              return (
+                <Chip
+                  onClick={
+                    this.props.onClear
+                      ? () => {
+                          this.props.onClear(child.props.id)
+                        }
+                      : null
+                  }
+                  symbol="×"
+                >{`${label}: ${value}`}</Chip>
+              )
             }
           )}
           <Chip
@@ -48,9 +89,9 @@ class Filter extends React.Component<IProps, IState> {
                 isExpanded: true
               }))
             }}
-            symbol="..."
+            symbol="+"
           >
-            Filter
+            Add filter
           </Chip>
         </FilterBar>
         {this.state.isExpanded ? (
@@ -61,7 +102,7 @@ class Filter extends React.Component<IProps, IState> {
               }))
             }}
           >
-            <FormFields>{children}</FormFields>
+            <FormFields>{this.props.children}</FormFields>
           </Modal>
         ) : null}
       </Container>

@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Card, CardHeader, Heading2Type, Select, Input } from "contiamo-ui-components"
+import { Card, CardHeader, Heading2Type, Select, Input, DatePicker } from "contiamo-ui-components"
 import { Filter } from "contiamo-ui-blocks"
 
 import * as simpleSnippet from "./snippets/Filters.simple.snippet"
@@ -19,7 +19,7 @@ export default () => (
 
     <Heading2Type>Usage</Heading2Type>
     <p>Simply nest `contiamo-ui-components` form elements using their API.</p>
-    <Playground snippet={String(simpleSnippet)} components={{ Filter, Select, Input }} />
+    <Playground snippet={String(simpleSnippet)} scope={{ Input, Select, DatePicker }} components={{ Filter }} />
 
     <Heading2Type>Props</Heading2Type>
     <Table props={propDescription} />

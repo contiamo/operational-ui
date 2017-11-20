@@ -19,9 +19,7 @@ var Container = glamorous_1.default.div(function (_a) {
         cursor: "pointer",
         overflow: "hidden",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
-        "& + .co_chip": {
-            marginLeft: theme.spacing / 4
-        }
+        margin: theme.spacing / 4 + "px " + theme.spacing / 4 + "px 0px 0px"
     };
 });
 var Action = glamorous_1.default.div(function (_a) {
@@ -45,7 +43,7 @@ var Action = glamorous_1.default.div(function (_a) {
         }
     };
 });
-var Chip = function (props) { return (React.createElement(Container, { key: props.id, className: (props.className || "") + " co_chip", css: props.css, color: props.color, hasChip: !!props.onClick },
+var Chip = function (props) { return (React.createElement(Container, { key: props.id, className: props.className, css: props.css, color: props.color, hasChip: !!props.onClick },
     props.children,
     props.onClick && (React.createElement(Action, { color: props.color, onClick: props.onClick }, props.symbol || "×")))); };
 exports.default = Chip;

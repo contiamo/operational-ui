@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 export interface IProps {
+    onClear?: (id: string) => void;
     children?: React.ReactNode;
 }
 export interface IState {

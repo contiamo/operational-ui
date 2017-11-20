@@ -31,10 +31,7 @@ const Container = glamorous.div(
       cursor: "pointer",
       overflow: "hidden",
       color: readableTextColor(backgroundColor)(["black", "white"]),
-
-      "& + .co_chip": {
-        marginLeft: theme.spacing / 4
-      }
+      margin: `${theme.spacing / 4}px ${theme.spacing / 4}px 0px 0px`
     }
   }
 )
@@ -61,13 +58,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
 })
 
 const Chip = (props: IProps) => (
-  <Container
-    key={props.id}
-    className={`${props.className || ""} co_chip`}
-    css={props.css}
-    color={props.color}
-    hasChip={!!props.onClick}
-  >
+  <Container key={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>
     {props.children}
     {props.onClick && (
       <Action color={props.color} onClick={props.onClick}>

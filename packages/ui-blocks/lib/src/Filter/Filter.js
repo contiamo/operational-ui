@@ -19,10 +19,14 @@ var FilterBar = glamorous_1.default.div({
         display: "inline-flex"
     }
 });
-var FormFields = glamorous_1.default.div({
-    "& > label, & > div": {
-        display: "block"
-    }
+var FormFields = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        "& > label, & > div": {
+            margin: theme.spacing + "px 0",
+            display: "block"
+        }
+    });
 });
 var Filter = /** @class */ (function (_super) {
     __extends(Filter, _super);
@@ -35,23 +39,45 @@ var Filter = /** @class */ (function (_super) {
     }
     Filter.prototype.render = function () {
         var _this = this;
-        var children = this.props.children;
         return (React.createElement(Container, null,
             React.createElement(FilterBar, null,
-                React.Children.map(children, function (child, index) {
-                    return React.createElement(contiamo_ui_components_1.Chip, null, (child.props.label || child.props.id) + ": " + child.props.value);
+                React.Children.map(this.props.children, function (child, index) {
+                    if (!child.props.start && !child.props.end && !child.props.value) {
+                        return null;
+                    }
+                    var label = child.props.label || child.props.id;
+                    var value = "";
+                    switch (child.type) {
+                        case contiamo_ui_components_1.Input:
+                            value = (!!child.props.value || child.props.value === 0) ? String(child.props.value) : "";
+                            break;
+                        case contiamo_ui_components_1.Select:
+                            value = (!!child.props.value || child.props.value === 0) ? String(child.props.value) : "";
+                            break;
+                        case contiamo_ui_components_1.DatePicker:
+                            value = [child.props.start, child.props.end].filter(function (date) { return !!date; }).join(" - ");
+                            break;
+                    }
+                    if (value === "") {
+                        value = "...";
+                    }
+                    return (React.createElement(contiamo_ui_components_1.Chip, { onClick: _this.props.onClear
+                            ? function () {
+                                _this.props.onClear(child.props.id);
+                            }
+                            : null, symbol: "×" }, label + ": " + value));
                 }),
                 React.createElement(contiamo_ui_components_1.Chip, { color: "#efefef", onClick: function () {
                         _this.setState(function (prevState) { return ({
                             isExpanded: true
                         }); });
-                    }, symbol: "..." }, "Filter")),
+                    }, symbol: "+" }, "Add filter")),
             this.state.isExpanded ? (React.createElement(contiamo_ui_components_1.Modal, { onClose: function () {
                     _this.setState(function (prevState) { return ({
                         isExpanded: false
                     }); });
                 } },
-                React.createElement(FormFields, null, children))) : null));
+                React.createElement(FormFields, null, this.props.children))) : null));
     };
     return Filter;
 }(React.Component));
