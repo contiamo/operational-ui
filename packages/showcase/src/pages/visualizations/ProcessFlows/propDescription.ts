@@ -148,14 +148,14 @@ export default {
     {
       name: "nodes",
       description: "Provides the attribute name for accessing nodes in the input data",
-      defaultValue: "(d) => d.nodes",
+      defaultValue: "d => d.nodes",
       type: "string",
       optional: true
     },
     {
       name: "journeys",
       description: "Provides the attribute name for accessing journeys in the input data",
-      defaultValue: "(d) => d.journeys",
+      defaultValue: "d => d.journeys",
       type: "string",
       optional: true
     }
@@ -164,7 +164,7 @@ export default {
     {
       name: "color",
       description: "Node fill color",
-      defaultValue: '(d) => d.color || "#fff"',
+      defaultValue: 'd => d.color || "#fff"',
       type: "string",
       optional: true
     },
@@ -172,7 +172,7 @@ export default {
     {
       name: "shape",
       description: "Node shape",
-      defaultValue: '(d) => d.shape || "squareDiamond"',
+      defaultValue: 'd => d.shape || "squareDiamond"',
       type: "string",
       optional: true
     },
@@ -180,7 +180,7 @@ export default {
     {
       name: "size",
       description: "Value for determining node size",
-      defaultValue: "(d) => d.size || 1",
+      defaultValue: "d => d.size || 1",
       type: "number",
       optional: true
     },
@@ -188,7 +188,7 @@ export default {
     {
       name: "stroke",
       description: "Color of node border",
-      defaultValue: '(d) => d.stroke || "#000"',
+      defaultValue: 'd => d.stroke || "#000"',
       type: "string",
       optional: true
     },
@@ -196,7 +196,7 @@ export default {
     {
       name: "id",
       description: "Unique ID - defaults to a new unique string.",
-      defaultValue: '(d) => d.id || uniqueId("node")',
+      defaultValue: 'd => d.id || uniqueId("node")',
       type: "string",
       optional: true
     },
@@ -204,7 +204,7 @@ export default {
     {
       name: "label",
       description: "Label to display next to node/on focus labels",
-      defaultValue: '(d) => d.label || d.id || ""',
+      defaultValue: 'd => d.label || d.id || ""',
       type: "string",
       optional: true
     },
@@ -212,7 +212,7 @@ export default {
     {
       name: "labelPosition",
       description: "Node label position",
-      defaultValue: '(d) => d.labelPosition || "right"',
+      defaultValue: 'd => d.labelPosition || "right"',
       type: "string",
       optional: true
     }
@@ -221,56 +221,56 @@ export default {
     {
       name: "dash",
       description: 'Dash length of link. "<dashLength> <gapLength>". 0 is solid line',
-      defaultValue: '(d) => d.dash || "0"',
+      defaultValue: 'd => d.dash || "0"',
       type: "string",
       optional: true
     },
     {
       name: "label",
       description: "Label to display next to link.",
-      defaultValue: '(d) => d.label || d.source.label() + " → " + d.target.label() || ""',
+      defaultValue: 'd => d.label || d.source.label() + " → " + d.target.label() || ""',
       type: "string",
       optional: true
     },
     {
       name: "size",
       description: "Value for determining width of link",
-      defaultValue: "(d) => d.size || 1",
+      defaultValue: "d => d.size || 1",
       type: "number",
       optional: true
     },
     {
       name: "stroke",
       description: "Color of link",
-      defaultValue: '(d) => d.stroke || "#bbb"',
+      defaultValue: 'd => d.stroke || "#bbb"',
       type: "string",
       optional: true
     },
     {
       name: "source",
       description: "Node at which the link starts",
-      defaultValue: "(d) => d.source || undefined",
+      defaultValue: "d => d.source || undefined",
       type: "node",
       optional: true
     },
     {
       name: "sourceId",
       description: "ID of node at which the link starts",
-      defaultValue: "(d) => d.sourceId || undefined",
+      defaultValue: "d => d.sourceId || undefined",
       type: "string",
       optional: true
     },
     {
       name: "target",
       description: "Node at which the link ends",
-      defaultValue: "(d) => d.target || undefined",
+      defaultValue: "d => d.target || undefined",
       type: "node",
       optional: true
     },
     {
       name: "targetId",
       description: "ID of node at which the link ends",
-      defaultValue: "(d) => d.targetId || undefined",
+      defaultValue: "d => d.targetId || undefined",
       type: "string",
       optional: true
     }
