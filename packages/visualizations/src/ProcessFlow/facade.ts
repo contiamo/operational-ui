@@ -4,7 +4,7 @@ import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
-import { IAccessorsObject, IConfig, INestedObject, IFocusElement, IComputedState, IInputData, IChartStateObject, IObject, INodeAttrs, ILinkAttrs, TNode } from "./typings"
+import { IAccessors, IAccessorsObject, IConfig, IFocusElement, IComputedState, IInputData, IChartStateObject, IObject, INodeAttrs, ILinkAttrs, TNode } from "./typings"
 import { uniqueId } from "lodash/fp"
 
 class Facade {
@@ -14,7 +14,7 @@ class Facade {
   context: Element
   events: EventEmitter
   series: Series
-  state: StateHandler//<IAccessorsObject>
+  state: StateHandler<IConfig>
 
   constructor(context: Element) {
     this.context = context
@@ -58,7 +58,7 @@ class Facade {
     }
   }
 
-  initialAccessors(): INestedObject {
+  initialAccessors(): IAccessorsObject {
     return {
       data: {
         nodes: (d: IInputData) => d.nodes,
@@ -126,7 +126,7 @@ class Facade {
     return this.state.config(config)
   }
 
-  accessors<T>(type: string, accessors: T): T {
+  accessors(type: string, accessors: IObject): IAccessors {
     return this.state.accessors(type, accessors)
   }
 

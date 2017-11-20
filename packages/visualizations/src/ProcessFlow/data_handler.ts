@@ -13,8 +13,8 @@ import {
   IBreakdown,
   IConfig,
   TStateWriter,
-  IObject,
-  IAccessors,
+  INodeAccessors,
+  ILinkAccessors,
   IAccessorsObject
 } from "./typings"
 
@@ -22,8 +22,8 @@ class DataHandler {
   journeys: IJourney[]
   nodes: TNode[]
   links: TLink[]
-  nodeAccessors: IAccessors
-  linkAccessors: IAccessors
+  nodeAccessors: INodeAccessors
+  linkAccessors: ILinkAccessors
   state: IState
   stateWriter: TStateWriter
   layout: Layout
@@ -39,7 +39,7 @@ class DataHandler {
     const accessors: IAccessorsObject = this.state.current.get("accessors")
     this.journeys = accessors.data.journeys(data)
     this.initializeNodes(accessors.data.nodes(data))
-    this.initializeLinks(data)
+    this.initializeLinks()
     this.layout.computeLayout(this.nodes)
     this.positionNodes()
     return {
@@ -93,7 +93,7 @@ class DataHandler {
     })(this.journeys)
   }
 
-  initializeLinks(data: IInputData): void {
+  initializeLinks(): void {
     this.links = []
     this.computeLinks()
   }

@@ -12,9 +12,6 @@ var Link = /** @class */ (function () {
     Link.prototype.dash = function () {
         return this.accessors.dash(this.attributes);
     };
-    Link.prototype.focusLabel = function () {
-        return this.accessors.focusLabel(this.attributes);
-    };
     Link.prototype.label = function () {
         return this.accessors.label(this.attributes);
     };

@@ -1,8 +1,8 @@
 import { extend } from "lodash/fp"
-import { IBreakdown, INodeAttrs, TAccessors, TLink } from "./typings"
+import { IBreakdown, INodeAttrs, INodeAccessors, TLink } from "./typings"
 
 class Node {
-  accessors: TAccessors
+  accessors: INodeAccessors
   attributes: INodeAttrs
   x: number
   y: number
@@ -12,7 +12,7 @@ class Node {
   journeyEnds: number = 0
   singleNodeJourneys: number = 0
 
-  constructor(nodeAttributes: INodeAttrs, accessors: TAccessors) {
+  constructor(nodeAttributes: INodeAttrs, accessors: INodeAccessors) {
     this.accessors = accessors
     this.assignProperties(nodeAttributes)
   }

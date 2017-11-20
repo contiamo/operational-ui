@@ -15,7 +15,7 @@ var DataHandler = /** @class */ (function () {
         var accessors = this.state.current.get("accessors");
         this.journeys = accessors.data.journeys(data);
         this.initializeNodes(accessors.data.nodes(data));
-        this.initializeLinks(data);
+        this.initializeLinks();
         this.layout.computeLayout(this.nodes);
         this.positionNodes();
         return {
@@ -66,7 +66,7 @@ var DataHandler = /** @class */ (function () {
             }
         })(this.journeys);
     };
-    DataHandler.prototype.initializeLinks = function (data) {
+    DataHandler.prototype.initializeLinks = function () {
         this.links = [];
         this.computeLinks();
     };

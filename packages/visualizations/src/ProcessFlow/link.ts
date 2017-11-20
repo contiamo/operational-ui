@@ -1,11 +1,11 @@
 import { extend } from "lodash/fp"
-import { TAccessors, ILinkAttrs, TNode } from "./typings"
+import { ILinkAccessors, ILinkAttrs, TNode } from "./typings"
 
 class Link {
-  accessors: TAccessors
+  accessors: ILinkAccessors
   attributes: ILinkAttrs
 
-  constructor(linkAttributes: ILinkAttrs, accessors: TAccessors) {
+  constructor(linkAttributes: ILinkAttrs, accessors: ILinkAccessors) {
     this.accessors = accessors
     this.assignProperties(linkAttributes)
   }
@@ -16,10 +16,6 @@ class Link {
 
   dash(): string {
     return this.accessors.dash(this.attributes)
-  }
-
-  focusLabel(): string {
-    return this.accessors.focusLabel(this.attributes)
   }
 
   label(): string {
