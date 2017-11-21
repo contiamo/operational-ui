@@ -10,7 +10,6 @@ class Layout {
   }
 
   computeLayout(nodes: TNode[]): void {
-    const data: IData = this.state.current.get("computed").series.data
     this.nodes = nodes
     this.computeNodeYPositions()
     this.computeNodeXPositions()

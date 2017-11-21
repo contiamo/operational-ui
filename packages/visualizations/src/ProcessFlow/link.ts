@@ -15,12 +15,12 @@ class Link {
 
   constructor(linkAttributes: ILinkAttrs, accessors: ILinkAccessors) {
     this.accessors = accessors
-    this.assignProperties(linkAttributes)
+    this.attributes = this.assignAttributes(linkAttributes)
     this.assignAccessors()
   }
 
-  assignProperties(linkAttributes: ILinkAttrs) {
-    this.attributes = extend.convert({ immutable: false })({}, linkAttributes)
+  assignAttributes(linkAttributes: ILinkAttrs): ILinkAttrs {
+    return extend.convert({ immutable: false })({}, linkAttributes)
   }
 
   assignAccessors(): void {

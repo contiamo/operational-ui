@@ -21,12 +21,12 @@ class Node {
 
   constructor(nodeAttributes: INodeAttrs, accessors: INodeAccessors) {
     this.accessors = accessors
-    this.assignProperties(nodeAttributes)
+    this.attributes = this.assignAttributes(nodeAttributes)
     this.assignAccessors()
   }
 
-  assignProperties(nodeAttributes: INodeAttrs): void {
-    this.attributes = extend.convert({ immutable: false })({})(nodeAttributes)
+  assignAttributes(nodeAttributes: INodeAttrs): INodeAttrs {
+    return extend.convert({ immutable: false })({})(nodeAttributes)
   }
 
   assignAccessors(): void {

@@ -19,14 +19,14 @@ class Facade {
   constructor(context: Element) {
     this.context = context
     this.events = new EventEmitter()
-    this.initializeState()
-    this.insertCanvas()
-    this.initializeComponents()
-    this.initializeSeries()
+    this.state = this.insertState()
+    this.canvas = this.insertCanvas()
+    this.components = this.insertComponents()
+    this.series = this.insertSeries()
   }
 
-  initializeState(): void {
-    this.state = new StateHandler({
+  insertState(): StateHandler<IConfig> {
+    return new StateHandler({
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
@@ -94,12 +94,17 @@ class Facade {
     }
   }
 
-  insertCanvas(): void {
-    this.canvas = new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
+  insertCanvas(): Canvas {
+    return new Canvas(
+      this.state.readOnly(),
+      this.state.computedWriter(["canvas"]),
+      this.events,
+      this.context
+    )
   }
 
-  initializeComponents(): void {
-    this.components = {
+  insertComponents(): IObject {
+    return {
       focus: new Focus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
@@ -109,8 +114,8 @@ class Facade {
     }
   }
 
-  initializeSeries(): void {
-    this.series = new Series(
+  insertSeries(): Series {
+    return new Series(
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
       this.events,

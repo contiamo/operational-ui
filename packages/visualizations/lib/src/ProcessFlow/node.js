@@ -7,11 +7,11 @@ var Node = /** @class */ (function () {
         this.journeyStarts = 0;
         this.singleNodeJourneys = 0;
         this.accessors = accessors;
-        this.assignProperties(nodeAttributes);
+        this.attributes = this.assignAttributes(nodeAttributes);
         this.assignAccessors();
     }
-    Node.prototype.assignProperties = function (nodeAttributes) {
-        this.attributes = fp_1.extend.convert({ immutable: false })({})(nodeAttributes);
+    Node.prototype.assignAttributes = function (nodeAttributes) {
+        return fp_1.extend.convert({ immutable: false })({})(nodeAttributes);
     };
     Node.prototype.assignAccessors = function () {
         var _this = this;

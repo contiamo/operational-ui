@@ -6,7 +6,6 @@ var Layout = /** @class */ (function () {
         this.state = state;
     }
     Layout.prototype.computeLayout = function (nodes) {
-        var data = this.state.current.get("computed").series.data;
         this.nodes = nodes;
         this.computeNodeYPositions();
         this.computeNodeXPositions();

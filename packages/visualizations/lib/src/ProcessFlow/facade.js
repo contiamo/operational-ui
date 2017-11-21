@@ -12,13 +12,13 @@ var Facade = /** @class */ (function () {
         this.__disposed = false;
         this.context = context;
         this.events = new event_bus_1.default();
-        this.initializeState();
-        this.insertCanvas();
-        this.initializeComponents();
-        this.initializeSeries();
+        this.state = this.insertState();
+        this.canvas = this.insertCanvas();
+        this.components = this.insertComponents();
+        this.series = this.insertSeries();
     }
-    Facade.prototype.initializeState = function () {
-        this.state = new state_handler_1.default({
+    Facade.prototype.insertState = function () {
+        return new state_handler_1.default({
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
@@ -83,15 +83,15 @@ var Facade = /** @class */ (function () {
         };
     };
     Facade.prototype.insertCanvas = function () {
-        this.canvas = new canvas_1.default(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context);
+        return new canvas_1.default(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context);
     };
-    Facade.prototype.initializeComponents = function () {
-        this.components = {
+    Facade.prototype.insertComponents = function () {
+        return {
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus")),
         };
     };
-    Facade.prototype.initializeSeries = function () {
-        this.series = new series_1.default(this.state.readOnly(), this.state.computedWriter(["series"]), this.events, this.canvas.elementFor("series"));
+    Facade.prototype.insertSeries = function () {
+        return new series_1.default(this.state.readOnly(), this.state.computedWriter(["series"]), this.events, this.canvas.elementFor("series"));
     };
     Facade.prototype.data = function (data) {
         return this.state.data(data);
