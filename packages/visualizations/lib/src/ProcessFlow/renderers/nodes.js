@@ -157,7 +157,7 @@ var Nodes = /** @class */ (function (_super) {
             .on("end", function () {
             --n;
             if (n < 1) {
-                _this.updateNodeLabels(nodeGroups);
+                _this.updateNodeLabels();
             }
         });
     };
@@ -176,12 +176,19 @@ var Nodes = /** @class */ (function (_super) {
         var offset = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset;
         return nodeLabelOptions[d.labelPosition()].y * offset;
     };
-    Nodes.prototype.updateNodeLabels = function (nodeGroups) {
-        nodeGroups
-            .enter()
-            .merge(nodeGroups)
+    Nodes.prototype.getLabelText = function (d) {
+        // Pixel width of character approx 1/2 of font-size - allow 7px per character
+        var desiredPixelWidth = this.state.current.get("computed").series.horizontalNodeSpacing, numberOfCharacters = desiredPixelWidth / 7;
+        return d.label().substring(0, numberOfCharacters) + (d.label().length > numberOfCharacters ? "..." : "");
+    };
+    Nodes.prototype.updateNodeLabels = function () {
+        var _this = this;
+        var labels = this.el.select("g.nodes-group")
             .selectAll("text." + styles.label)
-            .text(function (d) { return d.label(); })
+            .data(this.data, function (node) { return node.id(); });
+        labels.enter()
+            .merge(labels)
+            .text(function (d) { return _this.getLabelText(d); })
             .attr("x", d3_utils_1.withD3Element(this.getNodeLabelX.bind(this)))
             .attr("y", d3_utils_1.withD3Element(this.getNodeLabelY.bind(this)))
             .attr("dy", function (d) { return nodeLabelOptions[d.labelPosition()].dy; })

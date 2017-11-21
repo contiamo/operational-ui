@@ -5,10 +5,8 @@ import Link from "./link"
 
 import {
   IAccessors,
-  IAccessorsObject,
-  IDefaultConfig,
+  IChartStateObject,
   IEvents,
-  INestedObject,
   IObject,
   IState,
   Partial,
@@ -19,10 +17,8 @@ import {
 
 export {
   IAccessors,
-  IAccessorsObject,
-  IDefaultConfig,
+  IChartStateObject,
   IEvents,
-  INestedObject,
   IObject,
   IState,
   Partial,
@@ -34,8 +30,6 @@ export {
 export type TLink = Link
 export type TNode = Nodes
 
-export type TAccessors = IObject
-
 export type TElementSelection = d3.Selection<d3.BaseType, TNode | TLink, d3.BaseType, any>
 export type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>
 export type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
@@ -46,24 +40,6 @@ export type TScale = (size: number) => number
 export interface IFocusElement {
   type: "node" | "link"
   matchers: IObject
-}
-
-export interface IConfig extends IDefaultConfig {
-  borderColor: string
-  focusElement?: IFocusElement
-  hidden: boolean
-  highlightColor: string
-  horizontalNodeSpacing: number
-  labelOffset: number
-  linkBorderWidth: number
-  maxLinkWidth: number
-  maxNodeSize: number
-  minLinkWidth: number
-  minNodeSize: number
-  nodeBorderWidth: number
-  showLinkFocusLabels: boolean
-  showNodeFocusLabels: boolean
-  verticalNodeSpacing: number
 }
 
 export interface IJourney {
@@ -93,12 +69,70 @@ export interface INodeAttrs {
   labelPosition?: string
 }
 
+export interface IDataAccessors {
+  nodes: (d: any) => any
+  journeys: (d: any) => any
+}
+
+export interface INodeAccessors {
+  color: (d: INodeAttrs) => string
+  shape: (d: INodeAttrs) => string
+  size: (d: INodeAttrs) => number
+  stroke: (d: INodeAttrs) => string
+  id: (d: INodeAttrs) => string
+  label: (d: INodeAttrs) => string
+  labelPosition: (d: INodeAttrs) => string
+}
+
+export interface ILinkAccessors {
+  dash: (d: ILinkAttrs) => string
+  label: (d: ILinkAttrs) => string
+  size: (d: ILinkAttrs) => number
+  stroke: (d: ILinkAttrs) => string
+  source: (d: ILinkAttrs) => TNode | undefined
+  sourceId: (d: ILinkAttrs) => string | undefined
+  target: (d: ILinkAttrs) => TNode | undefined
+  targetId: (d: ILinkAttrs) => string | undefined
+}
+
+export interface IAccessorsObject {
+  data: IDataAccessors
+  node: INodeAccessors
+  link: ILinkAccessors
+}
+
+export interface IConfig {
+  borderColor: string
+  duration: number
+  focusElement?: IFocusElement
+  height: number
+  hidden: boolean
+  highlightColor: string
+  horizontalNodeSpacing: number
+  labelOffset: number
+  linkBorderWidth: number
+  maxLinkWidth: number
+  maxNodeSize: number
+  minLinkWidth: number
+  minNodeSize: number
+  nodeBorderWidth: number
+  showLinkFocusLabels: boolean
+  showNodeFocusLabels: boolean
+  uid: string
+  verticalNodeSpacing: number
+  visualizationName: string
+  width: number
+}
+
 export interface IInputData {
   journeys?: IJourney[]
   nodes?: any[]
-  nodeAccessors?: any
-  linkAccessors?: any
-  el?: any
+}
+
+export interface IComputedState {
+  canvas: IObject
+  focus: IObject
+  series: IObject
 }
 
 export interface IData {

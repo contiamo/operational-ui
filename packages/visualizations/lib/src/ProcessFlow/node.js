@@ -3,35 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var Node = /** @class */ (function () {
     function Node(nodeAttributes, accessors) {
-        this.journeyStarts = 0;
         this.journeyEnds = 0;
+        this.journeyStarts = 0;
         this.singleNodeJourneys = 0;
         this.accessors = accessors;
-        this.assignProperties(nodeAttributes);
+        this.attributes = this.assignAttributes(nodeAttributes);
+        this.assignAccessors();
     }
-    Node.prototype.assignProperties = function (nodeAttributes) {
-        this.attributes = fp_1.extend.convert({ immutable: false })({})(nodeAttributes);
+    Node.prototype.assignAttributes = function (nodeAttributes) {
+        return fp_1.extend.convert({ immutable: false })({})(nodeAttributes);
     };
-    Node.prototype.color = function () {
-        return this.accessors.color(this.attributes);
-    };
-    Node.prototype.shape = function () {
-        return this.accessors.shape(this.attributes);
-    };
-    Node.prototype.size = function () {
-        return this.accessors.size(this.attributes);
-    };
-    Node.prototype.stroke = function () {
-        return this.accessors.stroke(this.attributes);
-    };
-    Node.prototype.id = function () {
-        return this.accessors.id(this.attributes);
-    };
-    Node.prototype.label = function () {
-        return this.accessors.label(this.attributes);
-    };
-    Node.prototype.labelPosition = function () {
-        return this.accessors.labelPosition(this.attributes);
+    Node.prototype.assignAccessors = function () {
+        var _this = this;
+        fp_1.forEach.convert({ cap: false })(function (accessor, key) {
+            _this[key] = function () { return accessor(_this.attributes); };
+        })(this.accessors);
     };
     return Node;
 }());

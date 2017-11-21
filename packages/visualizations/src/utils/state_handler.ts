@@ -1,6 +1,6 @@
 import { IReadOnlyState, State, TPath } from "./state"
-import { IChartStateObject } from "./typings"
-import { isEmpty } from "lodash/fp"
+import { IAccessors, IChartStateObject, IObject, TStateWriter } from "./typings"
+import { isEmpty, reduce } from "lodash/fp"
 
 interface IChartState<T> {
   current: State<T>
@@ -12,7 +12,7 @@ export interface IChartStateReadOnly<T> {
   previous: IReadOnlyState<T>
 }
 
-class StateHandler {
+class StateHandler<IConfig> {
   state: IChartState<IChartStateObject>
 
   constructor(obj: IChartStateObject) {
@@ -42,20 +42,24 @@ class StateHandler {
   }
 
   // Config
-  config(config?: Object) {
+  config(config?: Partial<IConfig>): IConfig {
     if (!arguments.length) return this.state.current.get("config")
     return this.state.current.merge("config", config)
   }
 
   // Accessors
-  accessors(type: string, accessors?: Object) {
+  accessors(type: string, accessors?: IObject): IAccessors {
     if (!accessors) return this.state.current.get(["accessors", type])
-    return this.state.current.merge(["accessors", type], accessors)
+    const accessorFuncs: any = reduce.convert({ cap: false })((memo: IObject, accessor: any, key: string) => {
+      memo[key] = typeof accessor === "function" ? accessor : () => accessor
+      return memo
+    }, {})(accessors)
+    return this.state.current.merge(["accessors", type], accessorFuncs)
   }
 
   // Computed
-  computedWriter(namespace: TPath) {
-    return (path: TPath, value: any) => {
+  computedWriter(namespace: TPath): TStateWriter {
+    return (path: TPath, value: any): void => {
       this.state.current.set(["computed"].concat(namespace).concat(path), value)
     }
   }

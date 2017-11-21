@@ -8,38 +8,24 @@ export interface IObject {
   [key: string]: any
 }
 
-export interface INestedObject {
-  [key: string]: IObject
-}
+export type TStateWriter = (propertyPath: string | string[], value: any) => void
 
-export interface IDefaultConfig {
-  duration: number
-  height: number
-  uid: string
-  visualizationName: string
-  width: number
-  [key: string]: any
-}
+export type TSeriesEl = d3.Selection<Element, any, Window, any>
 
-export type IState = IChartStateReadOnly<IChartStateObject>
-
-export interface IChartStateObject {
-  data: Array<any> | IObject
-  config: IDefaultConfig
-  accessors: INestedObject
-  computed: INestedObject
-}
+export type TD3Selection = d3.Selection<any, any, any, any>
 
 export interface IAccessors {
   [key: string]: (d: any) => any
 }
 
-export interface IAccessorsObject {
-  [key: string]: IAccessors
+export type IEvents = EventEmitter
+
+export interface IChartStateObject {
+  data: Array<any> | IObject
+  config: IObject
+  accessors: any
+  computed: IObject
 }
 
-export type TStateWriter = (propertyPath: string | string[], value: any) => void
-export type IEvents = EventEmitter
-export type TSeriesEl = d3.Selection<Element, any, Window, any>
+export type IState = IChartStateReadOnly<IChartStateObject>
 
-export type TD3Selection = d3.Selection<any, any, any, any>

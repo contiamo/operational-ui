@@ -170,7 +170,7 @@ class Nodes extends AbstractRenderer {
       .on("end", (): void => {
         --n
         if (n < 1) {
-          this.updateNodeLabels(nodeGroups)
+          this.updateNodeLabels()
         }
       })
   }
@@ -193,12 +193,21 @@ class Nodes extends AbstractRenderer {
     return nodeLabelOptions[d.labelPosition()].y * offset
   }
 
-  updateNodeLabels(nodeGroups: TNodeSelection): void {
-    nodeGroups
-      .enter()
-      .merge(nodeGroups)
+  getLabelText(d: TNode): string {
+    // Pixel width of character approx 1/2 of font-size - allow 7px per character
+    const desiredPixelWidth: number = this.state.current.get("computed").series.horizontalNodeSpacing,
+      numberOfCharacters: number = desiredPixelWidth / 7
+    return d.label().substring(0, numberOfCharacters) + (d.label().length > numberOfCharacters ? "..." : "")
+  }
+
+  updateNodeLabels(): void {
+    let labels: TNodeSelection = this.el.select("g.nodes-group")
       .selectAll(`text.${styles.label}`)
-      .text((d: TNode): string => d.label())
+      .data(this.data, (node: TNode): string => node.id())
+
+    labels.enter()
+      .merge(labels)
+      .text((d) => this.getLabelText(d))
       .attr("x", withD3Element(this.getNodeLabelX.bind(this)))
       .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
       .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)

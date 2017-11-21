@@ -55,19 +55,24 @@ export default () => (
       apply to all nodes and links are set via the config.
     </p>
 
+    <p>
+      Accessors can take 2 forms: a function with single parameter 'd', or a constant value, which is transformed within
+      the visualization into function which returns the given constant. Custom accessors must be exhaustive: if the
+      returned values are dependent on some condition(s), all possible outcomes of the condition(s) must be explicitly
+      dealt with.
+    </p>
+
     <Heading2Type>Data Accessors</Heading2Type>
     <p>
-      Data accessors must be functions with single parameter 'data'. They are required if the nodes and journeys can not
-      be accessed from the input data via the properties 'nodes' and 'journeys'.
+      Data accessors are required if the nodes and journeys can not be accessed from the input data via the properties
+      'nodes' and 'journeys'.
     </p>
     <Table props={propDescription.DataAccessors} />
 
     <Heading2Type>Node Accessors</Heading2Type>
-    <p>Node accessors must be functions with single parameter 'node'.</p>
     <Table props={propDescription.NodeAccessors} />
 
     <Heading2Type>Link Accessors</Heading2Type>
-    <p>Link accessors must be functions with single parameter 'link'.</p>
     <Table props={propDescription.LinkAccessors} />
 
     <Heading2Type>Config</Heading2Type>

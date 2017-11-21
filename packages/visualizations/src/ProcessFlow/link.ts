@@ -1,53 +1,32 @@
-import { extend } from "lodash/fp"
-import { TAccessors, ILinkAttrs, TNode } from "./typings"
+import { extend, forEach } from "lodash/fp"
+import { ILinkAccessors, ILinkAttrs, TNode } from "./typings"
 
 class Link {
-  accessors: TAccessors
+  accessors: ILinkAccessors
   attributes: ILinkAttrs
+  dash: () => string
+  label: () => string
+  size: () => number
+  source: () => TNode
+  sourceId: () => string
+  stroke: () => string
+  target: () => TNode
+  targetId: () => string
 
-  constructor(linkAttributes: ILinkAttrs, accessors: TAccessors) {
+  constructor(linkAttributes: ILinkAttrs, accessors: ILinkAccessors) {
     this.accessors = accessors
-    this.assignProperties(linkAttributes)
+    this.attributes = this.assignAttributes(linkAttributes)
+    this.assignAccessors()
   }
 
-  assignProperties(linkAttributes: ILinkAttrs) {
-    this.attributes = extend.convert({ immutable: false })({}, linkAttributes)
+  assignAttributes(linkAttributes: ILinkAttrs): ILinkAttrs {
+    return extend.convert({ immutable: false })({}, linkAttributes)
   }
 
-  dash(): string {
-    return this.accessors.dash(this.attributes)
-  }
-
-  focusLabel(): string {
-    return this.accessors.focusLabel(this.attributes)
-  }
-
-  label(): string {
-    return this.accessors.label(this.attributes)
-  }
-
-  size(): number {
-    return this.accessors.size(this.attributes)
-  }
-
-  source(): TNode {
-    return this.accessors.source(this.attributes)
-  }
-
-  sourceId(): string {
-    return this.accessors.sourceId(this.attributes)
-  }
-
-  stroke(): string {
-    return this.accessors.stroke(this.attributes)
-  }
-
-  target(): TNode {
-    return this.accessors.target(this.attributes)
-  }
-
-  targetId(): string {
-    return this.accessors.targetId(this.attributes)
+  assignAccessors(): void {
+    forEach.convert({ cap: false })((accessor: any, key: string) => {
+      (this as any)[key] = () => accessor(this.attributes)
+    })(this.accessors)
   }
 }
 
