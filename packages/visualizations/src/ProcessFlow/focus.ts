@@ -1,4 +1,4 @@
-import AbstractFocus from "../utils/drawing_focus"
+import AbstractFocus from "../utils/focus"
 import FocusUtils from "../utils/focus_utils"
 import { flow, forEach, map, reduce, uniqueId } from "lodash/fp"
 import { IBreakdown, IConfig, IFocus, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
@@ -14,44 +14,42 @@ interface IBreakdowns {
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
 
-  onElementHover() {
-    return (payload: { focusPoint: IFocus; d: TNode | TLink }): void => {
-      // Remove the current focus label, if there is one
-      this.remove()
+  onElementHover(payload: { focusPoint: IFocus; d: TNode | TLink }): void {
+    // Remove the current focus label, if there is one
+    this.remove()
 
-      // Check if focus labels should be displayed for the element type.
-      const focusPoint: IFocus = payload.focusPoint,
-        datum: any = payload.d,
-        isNode: boolean = focusPoint.type === "node",
-        config: IConfig = this.state.current.get("config")
+    // Check if focus labels should be displayed for the element type.
+    const focusPoint: IFocus = payload.focusPoint,
+      datum: any = payload.d,
+      isNode: boolean = focusPoint.type === "node",
+      config: IConfig = this.state.current.get("config")
 
-      if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
-        return
-      }
-
-      // Render the focus label hidden initially to allow placement calculations
-      FocusUtils.drawHidden(this.el, "element").style("pointer-events", "none")
-      let content: TSeriesEl = this.el.append("xhtml:ul")
-
-      content
-        .append("xhtml:li")
-        .attr("class", styles.title)
-        .text(datum.label())
-        .append("span")
-        .text(` (${datum.size()})`)
-
-      if (isNode) {
-        this.addNodeBreakdowns(content, datum)
-        this.addSingleNodeVisitsComment(content, datum)
-      }
-
-      // Get label dimensions (has to be actually rendered in the page to do this) and position label
-      const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
-        drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions(),
-        offset: number = focusPoint.offset + config.nodeBorderWidth + config.labelOffset
-
-      FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
+    if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
+      return
     }
+
+    // Render the focus label hidden initially to allow placement calculations
+    FocusUtils.drawHidden(this.el, "element").style("pointer-events", "none")
+    let content: TSeriesEl = this.el.append("xhtml:ul")
+
+    content
+      .append("xhtml:li")
+      .attr("class", styles.title)
+      .text(datum.label())
+      .append("span")
+      .text(` (${datum.size()})`)
+
+    if (isNode) {
+      this.addNodeBreakdowns(content, datum)
+      this.addSingleNodeVisitsComment(content, datum)
+    }
+
+    // Get label dimensions (has to be actually rendered in the page to do this) and position label
+    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
+      drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions(),
+      offset: number = focusPoint.offset + config.nodeBorderWidth + config.labelOffset
+
+    FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
   }
 
   addNodeBreakdowns(content: TSeriesEl, datum: TNode): void {

@@ -7,15 +7,20 @@ var Focus = /** @class */ (function () {
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.OUT, this.onMouseLeave.bind(this));
     }
+    Focus.prototype.onElementOut = function () {
+        this.remove();
+    };
+    Focus.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
+    };
     Focus.prototype.remove = function () {
         this.el.node().innerHTML = "";
         this.el.style("visibility", "hidden");
         this.events.emit(event_catalog_1.default.FOCUS.CLEAR);
-    };
-    // Remove date focus and redraw (necessary when data changed or chart is resized)
-    Focus.prototype.refresh = function () {
-        this.remove();
     };
     return Focus;
 }());

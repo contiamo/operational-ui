@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var drawing_focus_1 = require("../utils/drawing_focus");
+var focus_1 = require("../utils/focus");
 var focus_utils_1 = require("../utils/focus_utils");
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
@@ -20,33 +20,30 @@ var Focus = /** @class */ (function (_super) {
     function Focus() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Focus.prototype.onElementHover = function () {
-        var _this = this;
-        return function (payload) {
-            // Remove the current focus label, if there is one
-            _this.remove();
-            // Check if focus labels should be displayed for the element type.
-            var focusPoint = payload.focusPoint, datum = payload.d, isNode = focusPoint.type === "node", config = _this.state.current.get("config");
-            if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
-                return;
-            }
-            // Render the focus label hidden initially to allow placement calculations
-            focus_utils_1.default.drawHidden(_this.el, "element").style("pointer-events", "none");
-            var content = _this.el.append("xhtml:ul");
-            content
-                .append("xhtml:li")
-                .attr("class", styles.title)
-                .text(datum.label())
-                .append("span")
-                .text(" (" + datum.size() + ")");
-            if (isNode) {
-                _this.addNodeBreakdowns(content, datum);
-                _this.addSingleNodeVisitsComment(content, datum);
-            }
-            // Get label dimensions (has to be actually rendered in the page to do this) and position label
-            var labelDimensions = focus_utils_1.default.labelDimensions(_this.el), drawingDimensions = _this.getDrawingDimensions(), offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
-            focus_utils_1.default.positionLabel(_this.el, focusPoint, labelDimensions, drawingDimensions, offset);
-        };
+    Focus.prototype.onElementHover = function (payload) {
+        // Remove the current focus label, if there is one
+        this.remove();
+        // Check if focus labels should be displayed for the element type.
+        var focusPoint = payload.focusPoint, datum = payload.d, isNode = focusPoint.type === "node", config = this.state.current.get("config");
+        if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
+            return;
+        }
+        // Render the focus label hidden initially to allow placement calculations
+        focus_utils_1.default.drawHidden(this.el, "element").style("pointer-events", "none");
+        var content = this.el.append("xhtml:ul");
+        content
+            .append("xhtml:li")
+            .attr("class", styles.title)
+            .text(datum.label())
+            .append("span")
+            .text(" (" + datum.size() + ")");
+        if (isNode) {
+            this.addNodeBreakdowns(content, datum);
+            this.addSingleNodeVisitsComment(content, datum);
+        }
+        // Get label dimensions (has to be actually rendered in the page to do this) and position label
+        var labelDimensions = focus_utils_1.default.labelDimensions(this.el), drawingDimensions = this.getDrawingDimensions(), offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
+        focus_utils_1.default.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset);
     };
     Focus.prototype.addNodeBreakdowns = function (content, datum) {
         var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer), inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";
@@ -78,7 +75,7 @@ var Focus = /** @class */ (function (_super) {
         };
     };
     return Focus;
-}(drawing_focus_1.default));
+}(focus_1.default));
 // Helper functions
 function computeBreakdowns(node) {
     var inputs = fp_1.map(function (link) {
