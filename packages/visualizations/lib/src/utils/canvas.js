@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("./event_catalog");
 var d3 = require("d3-selection");
-var fp_1 = require("lodash/fp");
 var styles = require("../styles/styles");
 var Canvas = /** @class */ (function () {
     function Canvas(state, stateWriter, events, context) {
@@ -11,61 +10,44 @@ var Canvas = /** @class */ (function () {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.insertContainer(context);
-        this.insertEl();
-        this.createInitialElements();
+        this.container = this.insertContainer(context);
+        this.el = this.insertEl();
         this.listenToMouseOver();
     }
     Canvas.prototype.insertContainer = function (context) {
-        this.container = d3
+        var container = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.chartContainer);
-        context.appendChild(this.container.node());
+        context.appendChild(container.node());
+        return container;
     };
     Canvas.prototype.insertEl = function () {
-        this.el = this.createEl();
-        this.container.node().appendChild(this.el.node());
-        this.elMap.series = this.el;
+        var el = this.createEl();
+        this.container.node().appendChild(el.node());
+        this.elMap.series = el;
+        return el;
     };
-    Canvas.prototype.insertFocusLabel = function () {
-        this.focusEl = d3
-            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", "" + styles.focusLegend)
-            .style("visibility", "hidden");
-        this.container.node().appendChild(this.focusEl.node());
-        this.elMap.focus = this.focusEl;
+    Canvas.prototype.onMouseEnter = function () {
+        this.events.emit(event_catalog_1.default.CHART.HOVER);
+        this.trackMouseMove();
     };
-    Canvas.prototype.createInitialElements = function () {
-        return;
+    Canvas.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.CHART.OUT);
+        this.stopMouseMove();
+    };
+    Canvas.prototype.onClick = function () {
+        this.events.emit(event_catalog_1.default.CHART.CLICK);
+    };
+    Canvas.prototype.listenToMouseOver = function () {
+        var el = this.mouseOverElement();
+        if (el) {
+            el.node().addEventListener("mouseenter", this.onMouseEnter.bind(this));
+            el.node().addEventListener("mouseleave", this.onMouseLeave.bind(this));
+            el.node().addEventListener("click", this.onClick.bind(this));
+        }
     };
     Canvas.prototype.elementFor = function (component) {
         return this.elMap[component];
-    };
-    Canvas.prototype.prefixedId = function (id) {
-        return this.state.current.get("config").uid + id;
-    };
-    Canvas.prototype.listenToMouseOver = function () {
-        var _this = this;
-        var el = this.mouseOverElement();
-        if (el) {
-            el.node()
-                .addEventListener("mouseenter", (function () {
-                _this.events.emit(event_catalog_1.default.CHART.HOVER);
-                _this.trackMouseMove();
-            }));
-            el.node()
-                .addEventListener("mouseleave", (function () {
-                _this.events.emit(event_catalog_1.default.CHART.OUT);
-                _this.stopMouseMove();
-            }));
-            el.node()
-                .addEventListener("click", (function () {
-                _this.events.emit(event_catalog_1.default.CHART.CLICK);
-            }));
-        }
-    };
-    Canvas.prototype.rootElement = function () {
-        return this.container.node();
     };
     Canvas.prototype.trackMouseMove = function () {
         return;
@@ -73,36 +55,15 @@ var Canvas = /** @class */ (function () {
     Canvas.prototype.stopMouseMove = function () {
         return;
     };
-    Canvas.prototype.seriesElements = function () {
-        return [];
-    };
-    Canvas.prototype.insertSeries = function () {
-        var _this = this;
-        var that = this;
-        return fp_1.reduce(function (memo, se) {
-            var renderer = fp_1.isArray(se) ? se[0] : se;
-            memo[renderer] = _this.elements.series[renderer].append("svg:g");
-            return memo;
-        }, {})(this.seriesElements());
-    };
     Canvas.prototype.draw = function () {
-        var config = this.state.current.get("config");
-        this.container.style("width", config.width + "px").style("height", config.height + "px");
-        this.el.style("width", config.width + "px").style("height", config.height + "px");
-        this.container.classed("hidden", config.hidden);
-    };
-    Canvas.prototype.margin = function (side) {
-        return parseInt(this.el.style("margin-" + side), 10) || 0;
-    };
-    Canvas.prototype.resize = function (computed) {
-        return this.draw();
+        this.container.classed("hidden", this.state.current.get("config").hidden);
     };
     Canvas.prototype.remove = function () {
         var el = this.mouseOverElement();
         if (el) {
-            el.node().removeEventListener("mouseenter");
-            el.node().removeEventListener("mouseleave");
-            el.node().removeEventListener("click");
+            el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));
+            el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this));
+            el.node().removeEventListener("click", this.onClick.bind(this));
         }
         this.elements = {};
         this.container.remove();

@@ -13,10 +13,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var canvas_1 = require("../utils/canvas");
 var d3 = require("d3-selection");
 var fp_1 = require("lodash/fp");
+var styles = require("../styles/styles");
 var Canvas = /** @class */ (function (_super) {
     __extends(Canvas, _super);
-    function Canvas() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Canvas(state, stateWriter, events, context) {
+        var _this = _super.call(this, state, stateWriter, events, context) || this;
+        _this.focusEl = _this.insertFocusLabel();
+        _this.appendDrawingGroups();
+        return _this;
     }
     Canvas.prototype.createEl = function () {
         var el = d3.select(document.createElementNS(d3.namespaces["svg"], "svg"))
@@ -24,22 +28,21 @@ var Canvas = /** @class */ (function (_super) {
         this.stateWriter("elRect", el.node().getBoundingClientRect());
         return el;
     };
-    Canvas.prototype.createInitialElements = function () {
-        this.insertDrawingGroups();
-        this.insertFocusLabel();
+    Canvas.prototype.insertFocusLabel = function () {
+        var focusEl = d3
+            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+            .attr("class", "" + styles.focusLegend)
+            .style("visibility", "hidden");
+        this.container.node().appendChild(focusEl.node());
+        this.elMap.focus = focusEl;
+        return focusEl;
     };
-    Canvas.prototype.insertDrawingGroups = function () {
+    Canvas.prototype.appendDrawingGroups = function () {
         var _this = this;
         fp_1.forEach(function (group) {
             _this.el.append("svg:g")
                 .attr("class", group + "-group");
         })(["links", "nodes"]);
-    };
-    Canvas.prototype.draw = function () {
-        var config = this.state.current.get("config"), series = this.state.current.get("computed").series;
-        this.container.style("width", series.width + "px").style("height", series.height + "px");
-        this.el.style("width", series.width + "px").style("height", series.height + "px");
-        this.container.classed("hidden", config.hidden);
     };
     Canvas.prototype.mouseOverElement = function () {
         return this.el;

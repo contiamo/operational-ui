@@ -1,9 +1,18 @@
 import AbstractCanvas from "../utils/canvas"
 import * as d3 from "d3-selection"
 import { forEach } from "lodash/fp"
-import { TD3Selection, TSeriesEl } from "./typings"
+import { IEvents, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
+import * as styles from "../styles/styles"
 
 class Canvas extends AbstractCanvas {
+  focusEl: TD3Selection
+
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
+    super(state, stateWriter, events, context)
+    this.focusEl = this.insertFocusLabel()
+    this.appendDrawingGroups()
+  }
+
   createEl(): TSeriesEl {
     const el: TD3Selection = d3.select(document.createElementNS(d3.namespaces["svg"], "svg"))
       .attr("class", "processflow")
@@ -11,25 +20,21 @@ class Canvas extends AbstractCanvas {
     return el
   }
 
-  createInitialElements(): void {
-    this.insertDrawingGroups()
-    this.insertFocusLabel()
+  insertFocusLabel(): TD3Selection {
+    const focusEl = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", `${styles.focusLegend}`)
+      .style("visibility", "hidden")
+    this.container.node().appendChild(focusEl.node())
+    this.elMap.focus = focusEl
+    return focusEl
   }
 
-  insertDrawingGroups(): void {
+  appendDrawingGroups(): void {
     forEach((group: string): void => {
       this.el.append("svg:g")
         .attr("class", group + "-group")
     })(["links", "nodes"])
-  }
-
-  draw(): void {
-    const config = this.state.current.get("config"),
-      series = this.state.current.get("computed").series
-
-    this.container.style("width", series.width + "px").style("height", series.height + "px")
-    this.el.style("width", series.width + "px").style("height", series.height + "px")
-    this.container.classed("hidden", config.hidden)
   }
 
   mouseOverElement(): TSeriesEl {

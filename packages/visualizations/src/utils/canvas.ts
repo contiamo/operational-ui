@@ -8,7 +8,6 @@ abstract class Canvas {
   container: TD3Selection
   el: TSeriesEl
   events: IEvents
-  focusEl: TD3Selection
   protected elements: IObject = {}
   protected state: IState
   protected elMap: IObject = {}
@@ -18,82 +17,56 @@ abstract class Canvas {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
-    this.insertContainer(context)
-    this.insertEl()
-    this.createInitialElements()
+    this.container = this.insertContainer(context)
+    this.el = this.insertEl()
     this.listenToMouseOver()
+  }
+
+  insertContainer(context: Element): TD3Selection {
+    const container = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", `${styles.chartContainer}`)
+    context.appendChild(container.node())
+    return container
   }
 
   abstract createEl(): TSeriesEl
 
-  insertContainer(context: Element): void {
-    this.container = d3
-      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.chartContainer}`)
-    context.appendChild(this.container.node())
+  insertEl(): TSeriesEl {
+    const el: TSeriesEl = this.createEl()
+    this.container.node().appendChild(el.node())
+    this.elMap.series = el
+    return el
   }
 
-  insertEl(): void {
-    this.el = this.createEl()
-    this.container.node().appendChild(this.el.node())
-    this.elMap.series = this.el
+  abstract mouseOverElement(): TD3Selection
+
+  onMouseEnter(): void {
+    this.events.emit(Events.CHART.HOVER)
+    this.trackMouseMove()
   }
 
-  insertFocusLabel(): void {
-    this.focusEl = d3
-      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.focusLegend}`)
-      .style("visibility", "hidden")
-    this.container.node().appendChild(this.focusEl.node())
-    this.elMap.focus = this.focusEl
+  onMouseLeave(): void {
+    this.events.emit(Events.CHART.OUT)
+    this.stopMouseMove()
   }
 
-  createInitialElements(): void {
-    return
-  }
-
-  elementFor(component: string): TD3Selection {
-    return this.elMap[component]
-  }
-
-  prefixedId(id: string): string {
-    return this.state.current.get("config").uid + id
+  onClick(): void {
+    this.events.emit(Events.CHART.CLICK)
   }
 
   listenToMouseOver(): void {
     let el: any = this.mouseOverElement()
     if (el) {
-      el.node()
-        .addEventListener(
-          "mouseenter",
-          ((): void => {
-            this.events.emit(Events.CHART.HOVER)
-            this.trackMouseMove()
-          }),
-        )
-       el.node()
-        .addEventListener(
-          "mouseleave",
-          ((): void => {
-            this.events.emit(Events.CHART.OUT)
-            this.stopMouseMove()
-          }),
-        )
-       el.node()
-        .addEventListener(
-          "click",
-          ((): void => {
-            this.events.emit(Events.CHART.CLICK)
-          }),
-        )
+      el.node().addEventListener("mouseenter", this.onMouseEnter.bind(this))
+      el.node().addEventListener("mouseleave", this.onMouseLeave.bind(this))
+      el.node().addEventListener("click", this.onClick.bind(this))
     }
   }
 
-  rootElement(): Node {
-    return this.container.node()
+  elementFor(component: string): TD3Selection {
+    return this.elMap[component]
   }
-
-  abstract mouseOverElement(): TD3Selection
 
   trackMouseMove(): void {
     return
@@ -103,40 +76,16 @@ abstract class Canvas {
     return
   }
 
-  seriesElements(): string[] | string[][] {
-    return []
-  }
-
-  insertSeries(): IObject {
-    let that: Canvas = this
-    return reduce((memo: IObject, se: any): IObject => {
-      let renderer: string = isArray(se) ? se[0] : se
-      memo[renderer] = this.elements.series[renderer].append("svg:g")
-      return memo
-    }, {})(this.seriesElements())
-  }
-
   draw(): void {
-    const config = this.state.current.get("config")
-    this.container.style("width", config.width + "px").style("height", config.height + "px")
-    this.el.style("width", config.width + "px").style("height", config.height + "px")
-    this.container.classed("hidden", config.hidden)
-  }
-
-  margin(side: string): number {
-    return parseInt(this.el.style("margin-" + side), 10) || 0
-  }
-
-  resize(computed: IObject): void {
-    return this.draw()
+    this.container.classed("hidden", this.state.current.get("config").hidden)
   }
 
   remove(): void {
     let el: TD3Selection = this.mouseOverElement()
     if (el) {
-      el.node().removeEventListener("mouseenter")
-      el.node().removeEventListener("mouseleave")
-      el.node().removeEventListener("click")
+      el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this))
+      el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this))
+      el.node().removeEventListener("click", this.onClick.bind(this))
     }
     this.elements = {}
     this.container.remove()
