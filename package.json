@@ -19,6 +19,7 @@
     "preversion": "lerna run version && git add ."
   },
   "devDependencies": {
+    "@types/react": "^16.0.25",
     "chalk": "^2.1.0",
     "husky": "^0.14.3",
     "lerna": "^2.1.2",

@@ -104,7 +104,7 @@ class SideNavigationHeader extends React.Component<IProps, IState> {
 
   async onChange(option: IOption) {
     if (this.props.onChange) {
-      await this.props.onChange()
+      await this.props.onChange(option)
     }
     this.setState(prevState => ({ ...prevState, value: option }))
   }

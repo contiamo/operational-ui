@@ -6,23 +6,24 @@ import { fadeIn } from "contiamo-ui-utils"
 
 const inputHeight: number = 31
 
-const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div(
-  ({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
-    display: "inline-block",
-    width: "auto",
-    position: "relative",
-    "& .co_card": {
-      display: isExpanded ? "block" : "none",
-      position: "absolute",
-      boxShadow: theme.shadows.popup,
-      top: inputHeight + 4,
-      left: 0,
-      padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
-      width: 210 + 2 * theme.spacing,
-      zIndex: theme.baseZIndex + 1000
-    }
-  })
-)
+const Container: GlamorousComponent<
+  { isExpanded: boolean },
+  {}
+> = glamorous.div(({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
+  display: "inline-block",
+  width: "auto",
+  position: "relative",
+  "& .co_card": {
+    display: isExpanded ? "block" : "none",
+    position: "absolute",
+    boxShadow: theme.shadows.popup,
+    top: inputHeight + 4,
+    left: 0,
+    padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
+    width: 210 + 2 * theme.spacing,
+    zIndex: theme.baseZIndex + 1000
+  }
+}))
 
 const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
