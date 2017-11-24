@@ -21,7 +21,7 @@ export interface IPropsWithTheme extends IProps {
 const Icon = (props: IPropsWithTheme) => {
   const defaultColor = props.theme.colors.palette.grey90
   const color_: string = props.color
-    ? hexOrColor(props.color)(props.theme.colors.palette[props.color] || defaultColor) as string
+    ? (hexOrColor(props.color)(props.theme.colors.palette[props.color] || defaultColor) as string)
     : defaultColor
 
   if (ReactFeather.hasOwnProperty(props.name)) {

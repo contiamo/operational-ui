@@ -167,11 +167,9 @@ function checkStatus(response) {
     if (response.ok) {
         return response;
     }
-    else {
-        var error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-    }
+    var error = new Error(response.statusText);
+    error.response = response;
+    throw error;
 }
 function defaultRequest(_a) {
     var action = _a.action, data = _a.data, file = _a.file, headers = _a.headers, name = _a.name;

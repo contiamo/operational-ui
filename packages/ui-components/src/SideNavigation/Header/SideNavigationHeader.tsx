@@ -38,7 +38,7 @@ const Container = glamorous.div(({ theme, hasOptions }: { theme: Theme; hasOptio
 
   // Caret
   "&::after": {
-    content: hasOptions ? "\"\"" : "none",
+    content: hasOptions ? '""' : "none",
     position: "absolute",
     top: "50%",
     right: theme.spacing,

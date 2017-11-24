@@ -14,9 +14,7 @@ var Icon = function (props) {
         var Comp = ReactFeather[props.name];
         return React.createElement(Comp, { key: props.id, size: props.size || props.theme.spacing, color: color_ });
     }
-    else {
-        return null;
-    }
+    return null;
 };
 var WrappedIcon = glamorous_1.withTheme(Icon);
 exports.default = WrappedIcon;

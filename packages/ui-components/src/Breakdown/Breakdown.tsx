@@ -69,7 +69,7 @@ const Bar = glamorous.div(
       padding: 2
     },
     ":before": {
-      content: "\"\"",
+      content: '""',
       position: "absolute",
       top: 0,
       left: 0,
@@ -81,7 +81,7 @@ const Bar = glamorous.div(
   },
   ({ theme, fill, color }: { theme: Theme; fill: number; color: string }) => {
     const backgroundColor: string = color
-      ? hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info) as string
+      ? (hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info) as string)
       : theme.colors.palette.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
