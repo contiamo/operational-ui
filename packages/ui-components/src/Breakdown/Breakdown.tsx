@@ -69,7 +69,7 @@ const Bar = glamorous.div(
       padding: 2
     },
     ":before": {
-      content: '""',
+      content: "\"\"",
       position: "absolute",
       top: 0,
       left: 0,

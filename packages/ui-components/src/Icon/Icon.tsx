@@ -27,9 +27,8 @@ const Icon = (props: IPropsWithTheme) => {
   if (ReactFeather.hasOwnProperty(props.name)) {
     const Comp = ReactFeather[props.name]
     return <Comp key={props.id} size={props.size || props.theme.spacing} color={color_} />
-  } else {
-    return null
   }
+  return null
 }
 
 const WrappedIcon: React.SFC<IProps> = withTheme(Icon)
