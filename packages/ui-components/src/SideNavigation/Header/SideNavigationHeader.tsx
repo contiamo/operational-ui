@@ -7,7 +7,7 @@ import { fadeIn } from "contiamo-ui-utils"
 export interface IOption {
   id: number
   label: string
-  default?: boolean
+  value: any
 }
 
 export interface IProps {
@@ -16,13 +16,13 @@ export interface IProps {
   className?: string
   children: React.ReactNode
   options?: IOption[]
-  onChange?: () => void
+  value?: string
+  onChange?: (option: IOption) => void
   theme?: Theme
 }
 
 export interface IState {
-  open: boolean
-  value: IOption
+  isOpen: boolean
 }
 
 const Container = glamorous.div(({ theme, hasOptions }: { theme: Theme; hasOptions: boolean }): any => ({
@@ -82,42 +82,39 @@ class SideNavigationHeader extends React.Component<IProps, IState> {
   static defaultProps: { options: IOption[] } = {
     options: []
   }
+
   state = {
-    open: false,
-    value: { id: -1, label: "" }
-  }
-
-  componentDidMount() {
-    this.setState(() => ({ value: this.getDefaultValue() }))
-  }
-
-  getDefaultValue() {
-    return this.props.options.find(option => option.default === true) || this.props.options[0]
+    isOpen: false
   }
 
   toggle() {
     if (this.props.options.length === 0) {
       return
     }
-    this.setState(prevState => ({ open: !prevState.open }))
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
   }
 
-  async onChange(option: IOption) {
+  onChange(option: IOption): void {
     if (this.props.onChange) {
-      await this.props.onChange(option)
+      this.props.onChange(option)
     }
-    this.setState(prevState => ({ ...prevState, value: option }))
   }
 
-  getDropdown() {
+  labelFor(value: string): string {
+    const option = this.props.options.find(option => option.value === value)
+    return option ? option.label : value
+  }
+
+  displayDropdown() {
+    const { options, value } = this.props
     return (
       <Options>
-        {this.props.options.map(option => (
+        {options.map(option => (
           <Option
             key={option.id}
             onClick={() => this.onChange(option)}
             tabIndex={option.id * -1}
-            aria-selected={this.state.value === option}
+            aria-selected={option.value === value}
             role="option"
           >
             {option.label}
@@ -128,19 +125,20 @@ class SideNavigationHeader extends React.Component<IProps, IState> {
   }
 
   render() {
+    const { id, css, className, options, value, children } = this.props
     return (
       <Container
-        key={this.props.id}
-        css={this.props.css}
-        className={this.props.className}
-        hasOptions={this.props.options && this.props.options.length > 0}
+        key={id}
+        css={css}
+        className={className}
+        hasOptions={options && options.length > 0}
         onClick={() => this.toggle()}
         tabIndex={-1}
         role="listbox"
       >
-        {this.props.children}
-        {this.state.value && <Value>{this.state.value.label}</Value>}
-        {this.props.options.length > 0 && this.state.open && this.getDropdown()}
+        {children}
+        {value ? <Value>{this.labelFor(value)}</Value> : null}
+        {options.length > 0 && this.state.isOpen ? this.displayDropdown() : null}
       </Container>
     )
   }

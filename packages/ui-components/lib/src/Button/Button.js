@@ -13,9 +13,7 @@ var glamorous_1 = require("glamorous");
 var contiamo_ui_utils_1 = require("contiamo-ui-utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, condensed = _a.condensed;
-    var backgroundColor = color
-        ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white")
-        : "white";
+    var backgroundColor = color ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || "white") : "white";
     var activeBackgroundColor = contiamo_ui_utils_1.darken(backgroundColor)(5);
     var textColor = contiamo_ui_utils_1.readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"]);
     var activeBoxShadow = theme.shadows.pressed;

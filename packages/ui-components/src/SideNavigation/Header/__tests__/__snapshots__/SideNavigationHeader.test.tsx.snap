@@ -7,8 +7,5 @@ exports[`SideNavigationHeader Should render correctly 1`] = `
   tabindex="-1"
 >
   hi
-  <div
-    class="css-1poypx5"
-  />
 </div>
 `;

@@ -142,11 +142,11 @@ const accessors = {
     color: (d: any) => {
       if (d.id.indexOf("++") > -1) {
         return "lightgreen"
-      } else if (d.id.indexOf("+") > -1) {
-        return "lightcoral"
-      } else {
-        return "#fff"
       }
+      if (d.id.indexOf("+") > -1) {
+        return "lightcoral"
+      }
+      return "#fff"
     },
     label: (d: any) => "N:" + d.id,
     labelPosition: "top"
@@ -155,11 +155,11 @@ const accessors = {
     stroke: (d: any) => {
       if (d.target.attributes.id.indexOf("++") > -1) {
         return "lightgreen"
-      } else if (d.target.attributes.id.indexOf("+") > -1) {
-        return "lightcoral"
-      } else {
-        return "#bbb"
       }
+      if (d.target.attributes.id.indexOf("+") > -1) {
+        return "lightcoral"
+      }
+      return "#bbb"
     }
   },
   data: {

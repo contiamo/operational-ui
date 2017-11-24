@@ -10,10 +10,9 @@ const toReactPlayground = (snippet: string): string => {
     if (frontTrimmedSnippet.indexOf(")()")) {
       // If it's an IIFE-style snippet
       return "(" + frontTrimmedSnippet
-    } else {
-      // Otherwise, drop trailing paranthesis
-      return frontTrimmedSnippet.slice(0, -2)
     }
+    // Otherwise, drop trailing paranthesis
+    return frontTrimmedSnippet.slice(0, -2)
   }
   return snippet
 }
