@@ -11,6 +11,7 @@ var Container = glamorous_1.default.div(function (_a) {
         backgroundColor: backgroundColor,
         position: "relative",
         padding: theme.spacing / 2,
+        wordWrap: "break-word",
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         outline: "none",
         ":hover": {
@@ -19,7 +20,6 @@ var Container = glamorous_1.default.div(function (_a) {
         },
         "&:not(:first-child)": {
             borderTop: "1px solid",
-            wordBreak: "break-all",
             borderColor: contiamo_ui_utils_1.darken(backgroundColor)(10)
         }
     };

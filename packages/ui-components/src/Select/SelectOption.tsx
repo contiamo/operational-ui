@@ -27,6 +27,7 @@ const Container = glamorous.div(
       backgroundColor,
       position: "relative",
       padding: theme.spacing / 2,
+      wordWrap: "break-word",
       color: readableTextColor(backgroundColor)(["black", "white"]),
       outline: "none",
 
@@ -37,7 +38,6 @@ const Container = glamorous.div(
 
       "&:not(:first-child)": {
         borderTop: "1px solid",
-        wordBreak: "break-all",
         borderColor: darken(backgroundColor)(10)
       }
     }
