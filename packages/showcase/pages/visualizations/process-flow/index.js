@@ -97,8 +97,8 @@ const propDescription = {
     {
       name: "focusElement",
       description:
-        'Node or link to be manually focussed. Object with properties "type" ("node" or "link") and "matchers" (desired values of node/link properties)',
-      defaultValue: "{}",
+        'Node, link or path to be manually focussed. Object with properties "type" ("node", "link" or "path") and "matchers" (desired values of node/link properties)',
+      defaultValue: "",
       type: "object",
       optional: true
     },

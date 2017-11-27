@@ -10,7 +10,7 @@ declare class Links extends AbstractRenderer {
     enterAndUpdate(linkGroups: TLinkSelection): void;
     linkStartPath(link: TLink): string;
     linkPath(link: TLink): string;
-    highlight(element: TLinkSelection, d: TLink): void;
+    highlight(element: TLinkSelection, d: TLink, keepCurrent?: boolean): void;
     focusPoint(element: TLinkSelection, d: TLink): IFocus;
 }
 export default Links;

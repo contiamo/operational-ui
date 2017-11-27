@@ -23,6 +23,9 @@ var Focus = /** @class */ (function (_super) {
     Focus.prototype.onElementHover = function (payload) {
         // Remove the current focus label, if there is one
         this.remove();
+        if (payload.hideLabel) {
+            return;
+        }
         // Check if focus labels should be displayed for the element type.
         var focusPoint = payload.focusPoint, datum = payload.d, isNode = focusPoint.type === "node", config = this.state.current.get("config");
         if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {

@@ -9,9 +9,10 @@ declare abstract class AbstractRenderer {
     focusElementAccessor: string;
     constructor(state: IState, events: IEvents, el: TSeriesEl);
     onMouseOver(d: TLink | TNode, element: any): void;
-    mouseOver(element: TElementSelection, d: TLink | TNode): void;
-    focusElement(elementInfo: IFocusElement): void;
-    highlight(element: TElementSelection, d: TLink | TNode): void;
+    mouseOver(element: TElementSelection, d: TLink | TNode, hideLabel?: boolean): void;
+    focusElement(focusElement: IFocusElement): void;
+    highlightPath(focusElement: IFocusElement): void;
+    highlight(element: TElementSelection, d: TLink | TNode, keepCurrent?: boolean): void;
     removeHighlights(): void;
     abstract focusPoint(element: TElementSelection, d: TLink | TNode): IFocus;
     onMouseOut(d: TLink | TNode, el: HTMLElement): void;

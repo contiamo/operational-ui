@@ -15,8 +15,9 @@ declare abstract class Focus {
     onComponentLeave(): void;
     removeComponentFocus(options?: IObject): void;
     abstract onElementHover(payload: {
-        focusPoint: IObject;
-        d: IObject;
+        focusPoint: any;
+        d: any;
+        hideLabel: boolean;
     }): void;
     onElementOut(): void;
     onMouseLeave(): void;

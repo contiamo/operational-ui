@@ -4,6 +4,7 @@ declare class Focus extends AbstractFocus {
     onElementHover(payload: {
         focusPoint: IFocus;
         d: TNode | TLink;
+        hideLabel: boolean;
     }): void;
     appendContent(container: TD3Selection, content: IObject[]): void;
     addNodeBreakdowns(content: TSeriesEl, datum: TNode): void;

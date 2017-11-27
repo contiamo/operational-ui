@@ -27,8 +27,9 @@ export type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
 export type TScale = (size: number) => number
 
 export interface IFocusElement {
-  type?: string
+  type?: "node" | "link" | "path"
   matchers?: IObject
+  hideLabel?: boolean
 }
 
 export interface IJourney {
