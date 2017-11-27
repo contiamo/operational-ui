@@ -4,7 +4,7 @@ import { Theme } from "contiamo-ui-theme";
 export interface IOption {
     id: number;
     label: string;
-    default?: boolean;
+    value: any;
 }
 export interface IProps {
     id?: string | number;
@@ -12,29 +12,24 @@ export interface IProps {
     className?: string;
     children: React.ReactNode;
     options?: IOption[];
-    onChange?: () => void;
+    value?: string;
+    onChange?: (option: IOption) => void;
     theme?: Theme;
 }
 export interface IState {
-    open: boolean;
-    value: IOption;
+    isOpen: boolean;
 }
 declare class SideNavigationHeader extends React.Component<IProps, IState> {
     static defaultProps: {
         options: IOption[];
     };
     state: {
-        open: boolean;
-        value: {
-            id: number;
-            label: string;
-        };
+        isOpen: boolean;
     };
-    componentDidMount(): void;
-    getDefaultValue(): IOption;
     toggle(): void;
-    onChange(option: IOption): Promise<void>;
-    getDropdown(): JSX.Element;
+    onChange(option: IOption): void;
+    labelFor(value: string): string;
+    displayDropdown(): JSX.Element;
     render(): JSX.Element;
 }
 export default SideNavigationHeader;

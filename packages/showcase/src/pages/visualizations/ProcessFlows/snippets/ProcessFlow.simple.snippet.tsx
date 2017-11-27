@@ -17,20 +17,20 @@ export default (function() {
           color: (node: any) => {
             if (node.group === "start") {
               return "lightgreen"
-            } else if (node.group === "end") {
-              return "lightcoral"
-            } else {
-              return "#fff"
             }
+            if (node.group === "end") {
+              return "lightcoral"
+            }
+            return "#fff"
           },
           shape: (node: any) => {
             if (node.group === "start") {
               return "square"
-            } else if (node.group === "end") {
-              return "circle"
-            } else {
-              return "squareDiamond"
             }
+            if (node.group === "end") {
+              return "circle"
+            }
+            return "squareDiamond"
           },
           stroke: (node: any) => {
             return node.group ? "none" : "#000"
@@ -40,11 +40,11 @@ export default (function() {
           stroke: (link: any) => {
             if (link.source.attributes.group === "start") {
               return "lightgreen"
-            } else if (link.target.attributes.group === "end") {
-              return "lightcoral"
-            } else {
-              return "#bbb"
             }
+            if (link.target.attributes.group === "end") {
+              return "lightcoral"
+            }
+            return "#bbb"
           }
         }
       }

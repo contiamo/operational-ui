@@ -80,10 +80,10 @@ var TimelineItem = function (_a) {
     var IconLib = ReactFeather;
     var isValidIcon = IconLib.hasOwnProperty(icon);
     var Icon = IconLib[icon];
-    color = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
+    var statusColor = contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
     return (React.createElement(Container, { key: id, css: css, className: className },
         React.createElement(Line, null),
-        React.createElement(StatusContainer, { color: color }, isValidIcon ? React.createElement(Icon, { color: color }) : null),
+        React.createElement(StatusContainer, { color: statusColor }, isValidIcon ? React.createElement(Icon, { color: statusColor }) : null),
         React.createElement(Content, null, children)));
 };
 var WrappedTimelineItem = glamorous_1.withTheme(TimelineItem);

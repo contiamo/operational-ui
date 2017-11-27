@@ -105,12 +105,12 @@ const TimelineItem: React.SFC<IPropsWithTheme> = ({
   const IconLib = ReactFeather as any
   const isValidIcon = IconLib.hasOwnProperty(icon)
   const Icon = IconLib[icon]
-  color = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
+  const statusColor = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
 
   return (
     <Container key={id} css={css} className={className}>
       <Line />
-      <StatusContainer color={color}>{isValidIcon ? <Icon color={color} /> : null}</StatusContainer>
+      <StatusContainer color={statusColor}>{isValidIcon ? <Icon color={statusColor} /> : null}</StatusContainer>
       <Content>{children}</Content>
     </Container>
   )

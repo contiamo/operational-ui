@@ -124,11 +124,10 @@ export default Upload
 function checkStatus(response: Response): Response {
   if (response.ok) {
     return response
-  } else {
-    const error = new Error(response.statusText)
-    ;(error as any).response = response
-    throw error
   }
+  const error = new Error(response.statusText)
+  ;(error as any).response = response
+  throw error
 }
 
 async function defaultRequest({ action, data, file, headers, name }: IRequestOptions): Promise<any> {

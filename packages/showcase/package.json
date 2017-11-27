@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-showcase",
-  "version": "0.0.1-37",
+  "version": "0.0.1-41",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/ui-components.git",
@@ -15,8 +15,6 @@
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "package": "echo 'Not a public package, hence no package script :).'",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
-    "preversion": "npm run precommit",
     "version": "npm run build && git add -A dist"
   },
   "devDependencies": {
@@ -55,10 +53,10 @@
   "dependencies": {
     "@types/d3-ease": "^1.0.7",
     "component-playground": "^3.0.0",
-    "contiamo-ui-components": "^0.0.1-37",
-    "contiamo-ui-theme": "^0.0.1-37",
-    "contiamo-ui-utils": "^0.0.1-37",
-    "contiamo-visualizations": "^0.0.1-36",
+    "contiamo-ui-components": "^0.0.1-41",
+    "contiamo-ui-theme": "^0.0.1-41",
+    "contiamo-ui-utils": "^0.0.1-41",
+    "contiamo-visualizations": "^0.0.1-41",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "jest-cli": "^20.0.4",
