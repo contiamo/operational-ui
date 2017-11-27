@@ -63,12 +63,13 @@ class DatePicker extends React.Component<IProps, IState> {
       }
     }
     this.outsideClickHandler = (ev: any) => {
-      if (this.containerNode && ev.target.contains(this.containerNode)) {
-        this.setState(prevState => ({
-          ...prevState,
-          isExpanded: false
-        }))
+      if (this.containerNode && (this.containerNode === ev.target || this.containerNode.contains(ev.target))) {
+        return
       }
+      this.setState(prevState => ({
+        ...prevState,
+        isExpanded: false
+      }))
     }
     document.addEventListener("click", this.outsideClickHandler)
     document.addEventListener("keydown", this.keypressHandler)

@@ -110,7 +110,6 @@ var SideNavigationHeader = /** @class */ (function (_super) {
                     isHovered: true
                 }); });
             }, onMouseLeave: function () {
-                console.log("leaving mouse");
                 _this.setState(function (prevState) { return ({
                     isHovered: false,
                     isOpen: false
