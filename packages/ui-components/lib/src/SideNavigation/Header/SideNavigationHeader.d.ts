@@ -17,6 +17,7 @@ export interface IProps {
     theme?: Theme;
 }
 export interface IState {
+    isHovered: boolean;
     isOpen: boolean;
 }
 declare class SideNavigationHeader extends React.Component<IProps, IState> {
@@ -25,8 +26,8 @@ declare class SideNavigationHeader extends React.Component<IProps, IState> {
     };
     state: {
         isOpen: boolean;
+        isHovered: boolean;
     };
-    toggle(): void;
     onChange(option: IOption): void;
     labelFor(value: string): string;
     displayDropdown(): JSX.Element;

@@ -78,16 +78,11 @@ var SideNavigationHeader = /** @class */ (function (_super) {
     function SideNavigationHeader() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            isOpen: false
+            isOpen: false,
+            isHovered: false
         };
         return _this;
     }
-    SideNavigationHeader.prototype.toggle = function () {
-        if (this.props.options.length === 0) {
-            return;
-        }
-        this.setState(function (prevState) { return ({ isOpen: !prevState.isOpen }); });
-    };
     SideNavigationHeader.prototype.onChange = function (option) {
         if (this.props.onChange) {
             this.props.onChange(option);
@@ -105,7 +100,21 @@ var SideNavigationHeader = /** @class */ (function (_super) {
     SideNavigationHeader.prototype.render = function () {
         var _this = this;
         var _a = this.props, id = _a.id, css = _a.css, className = _a.className, options = _a.options, value = _a.value, children = _a.children;
-        return (React.createElement(Container, { key: id, css: css, className: className, hasOptions: options && options.length > 0, onClick: function () { return _this.toggle(); }, tabIndex: -1, role: "listbox" },
+        return (React.createElement(Container, { key: id, css: css, className: className, hasOptions: options && options.length > 0, onClick: function () {
+                if (_this.props.options.length === 0) {
+                    return;
+                }
+                _this.setState(function (prevState) { return ({ isOpen: !prevState.isOpen }); });
+            }, onMouseEnter: function () {
+                _this.setState(function (prevState) { return ({
+                    isHovered: true
+                }); });
+            }, onMouseLeave: function () {
+                _this.setState(function (prevState) { return ({
+                    isHovered: false,
+                    isOpen: false
+                }); });
+            }, tabIndex: -1, role: "listbox" },
             children,
             value ? React.createElement(Value, null, this.labelFor(value)) : null,
             options.length > 0 && this.state.isOpen ? this.displayDropdown() : null));

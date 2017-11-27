@@ -56,9 +56,10 @@ var DatePicker = /** @class */ (function (_super) {
             }
         };
         this.outsideClickHandler = function (ev) {
-            if (_this.containerNode && ev.target.contains(_this.containerNode)) {
-                _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
+            if (_this.containerNode && (_this.containerNode === ev.target || _this.containerNode.contains(ev.target))) {
+                return;
             }
+            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
         };
         document.addEventListener("click", this.outsideClickHandler);
         document.addEventListener("keydown", this.keypressHandler);
