@@ -22,6 +22,7 @@ export interface IProps {
 }
 
 export interface IState {
+  isHovered: boolean
   isOpen: boolean
 }
 
@@ -84,14 +85,8 @@ class SideNavigationHeader extends React.Component<IProps, IState> {
   }
 
   state = {
-    isOpen: false
-  }
-
-  toggle() {
-    if (this.props.options.length === 0) {
-      return
-    }
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+    isOpen: false,
+    isHovered: false
   }
 
   onChange(option: IOption): void {
@@ -132,7 +127,23 @@ class SideNavigationHeader extends React.Component<IProps, IState> {
         css={css}
         className={className}
         hasOptions={options && options.length > 0}
-        onClick={() => this.toggle()}
+        onClick={() => {
+          if (this.props.options.length === 0) {
+            return
+          }
+          this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+        }}
+        onMouseEnter={() => {
+          this.setState(prevState => ({
+            isHovered: true
+          }))
+        }}
+        onMouseLeave={() => {
+          this.setState(prevState => ({
+            isHovered: false,
+            isOpen: false
+          }))
+        }}
         tabIndex={-1}
         role="listbox"
       >

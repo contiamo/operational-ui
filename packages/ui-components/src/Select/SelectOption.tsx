@@ -25,6 +25,7 @@ const Container = glamorous.div(
 
     return {
       backgroundColor,
+      wordWrap: "break-all",
       position: "relative",
       padding: theme.spacing / 2,
       color: readableTextColor(backgroundColor)(["black", "white"]),

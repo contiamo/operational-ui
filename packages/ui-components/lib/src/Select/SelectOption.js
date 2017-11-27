@@ -9,6 +9,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var backgroundColor = color && theme.colors ? contiamo_ui_utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
     return {
         backgroundColor: backgroundColor,
+        wordWrap: "break-all",
         position: "relative",
         padding: theme.spacing / 2,
         color: contiamo_ui_utils_1.readableTextColor(backgroundColor)(["black", "white"]),
