@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "target": "ES5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "jsx": "react",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "es2017.object"],
+    "moduleResolution": "node"
+  },
+  "include": ["types/theme.d.ts", "types/**/*", "index.ts"],
+  "exclude": ["node_modules", "lib"]
+}

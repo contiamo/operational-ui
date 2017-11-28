@@ -7,6 +7,7 @@ import Canvas from "../../components/Canvas/Canvas"
 import PageContent from "../../components/PageContent/PageContent"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
+import Filters from "./Filters/Filters"
 import * as introContent from "./intro.docs.md"
 
 const SidebarWithRouter = withRouter(Sidebar)
@@ -30,6 +31,7 @@ export default () => (
     <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/blocks" component={Intro} />
+      <Route exact path="/blocks/filters" component={Filters} />
     </Canvas>
   </PageContent>
 )

@@ -77,7 +77,7 @@ const MyCard = ({ className }: { className?: string }) => (
         </Card>
       </Link>
       <Link to="/blocks">
-        <Card className="card card_disabled">
+        <Card className="card">
           <Icon name="Grid" size={30} color="#777" />
           <h2>Blocks</h2>
         </Card>
