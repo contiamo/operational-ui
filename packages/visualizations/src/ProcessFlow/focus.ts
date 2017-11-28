@@ -1,6 +1,6 @@
 import AbstractFocus from "../utils/focus"
 import FocusUtils from "../utils/focus_utils"
-import { flow, forEach, map, reduce, uniqueId } from "lodash/fp"
+import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
 import { IBreakdown, IConfig, IFocus, IObject, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
 import * as styles from "./styles"
 
@@ -182,8 +182,9 @@ function addBreakdownTitle(title: string, subtitle?: string) {
 }
 
 function addBreakdownBars(breakdownItems: IBreakdown[]) {
+  const sortedItems: IBreakdown[] = sortBy((item: IBreakdown): number => -item.size)(breakdownItems)
   return (container: TD3Selection): TD3Selection => {
-    forEach(appendBreakdown(container))(breakdownItems)
+    forEach(appendBreakdown(container))(sortedItems)
     return container
   }
 }

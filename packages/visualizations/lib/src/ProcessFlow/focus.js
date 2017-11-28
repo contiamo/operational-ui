@@ -135,8 +135,9 @@ function addBreakdownTitle(title, subtitle) {
     };
 }
 function addBreakdownBars(breakdownItems) {
+    var sortedItems = fp_1.sortBy(function (item) { return -item.size; })(breakdownItems);
     return function (container) {
-        fp_1.forEach(appendBreakdown(container))(breakdownItems);
+        fp_1.forEach(appendBreakdown(container))(sortedItems);
         return container;
     };
 }
