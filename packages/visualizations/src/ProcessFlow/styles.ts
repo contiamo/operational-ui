@@ -34,7 +34,7 @@ const breakdownCommentLabelStyle = {
 const breakdownBackgroundBarStyle = {
   position: "relative",
   width: "100%",
-  backgroundColor: "rgb(245, 245, 245)",
+  backgroundColor: "#ddd",
   overflow: "hidden",
   padding: "0 3px",
   height: "15px",
