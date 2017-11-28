@@ -8,20 +8,12 @@
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "package": "rm -rf lib && tsc -d",
+    "package": "rm -rf lib && tsc -d --outDir './lib'",
     "package:watch": "tsc -d -w",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "preversion": "npm run precommit",
     "version": "npm run package"
-  },
-  "devDependencies": {
-    "@types/react": "^16.0.22",
-    "prettier": "1.8.2",
-    "tslint": "5.8.0",
-    "tslint-config-airbnb": "5.4.2",
-    "tslint-config-prettier": "1.6.0",
-    "typescript": "2.5.3"
   }
 }

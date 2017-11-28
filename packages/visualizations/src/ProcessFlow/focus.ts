@@ -13,7 +13,6 @@ interface IBreakdowns {
 
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
-
   onElementHover(payload: { focusPoint: IFocus; d: TNode | TLink }): void {
     // Remove the current focus label, if there is one
     this.remove()
@@ -97,11 +96,17 @@ class Focus extends AbstractFocus {
     )(container)
 
     // Add inputs breakdown
+<<<<<<< HEAD
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Inputs", ` (${numberFormatter(inputsTotal)})`),
       addBreakdownBars(breakdowns.inputs, numberFormatter)
     )(container)
+=======
+    flow(addBreakdownContainer, addBreakdownTitle("Inputs", ` (${inputsTotal})`), addBreakdownBars(breakdowns.inputs))(
+      container
+    )
+>>>>>>> Lift up dev dependencies
 
     // Add outputs breakdown
     flow(
@@ -129,7 +134,7 @@ class Focus extends AbstractFocus {
       xMax: drawingContainer.left + config.width,
       xMin: drawingContainer.left,
       yMax: drawingContainer.top + config.height,
-      yMin: drawingContainer.top,
+      yMin: drawingContainer.top
     }
   }
 }
@@ -152,19 +157,25 @@ function computeBreakdowns(node: TNode): IBreakdowns {
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.sourceLinks)
-  const startsHere: IBreakdown[] = [{
-    size: node.journeyStarts,
-    percentage: Math.round(node.journeyStarts * 100 / node.size())
-  }]
-  const endsHere: IBreakdown[] = [{
-    size: node.journeyEnds,
-    percentage: Math.round(node.journeyEnds * 100 / node.size())
-  }]
+  const startsHere: IBreakdown[] = [
+    {
+      size: node.journeyStarts,
+      percentage: Math.round(node.journeyStarts * 100 / node.size())
+    }
+  ]
+  const endsHere: IBreakdown[] = [
+    {
+      size: node.journeyEnds,
+      percentage: Math.round(node.journeyEnds * 100 / node.size())
+    }
+  ]
   return { inputs, outputs, startsHere, endsHere }
 }
 
 function computeBreakdownTotal(breakdowns: IBreakdown[]): number {
-  return reduce((sum: number, item: IBreakdown): number => { return sum + item.size }, 0)(breakdowns)
+  return reduce((sum: number, item: IBreakdown): number => {
+    return sum + item.size
+  }, 0)(breakdowns)
 }
 
 function addBreakdownContainer(content: TD3Selection): TD3Selection {
@@ -173,7 +184,8 @@ function addBreakdownContainer(content: TD3Selection): TD3Selection {
 
 function addBreakdownTitle(title: string, subtitle?: string) {
   return (container: TD3Selection): TD3Selection => {
-    container.append("span")
+    container
+      .append("span")
       .attr("class", styles.title)
       .text(title)
       .append("span")
@@ -192,8 +204,7 @@ function addBreakdownBars(breakdownItems: IBreakdown[], numberFormatter: (x: num
 
 function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) => string) {
   return (item: IBreakdown): void => {
-    const breakdown: TD3Selection = container.append("div")
-      .attr("class", styles.breakdown)
+    const breakdown: TD3Selection = container.append("div").attr("class", styles.breakdown)
 
     if (item.label) {
       breakdown
@@ -202,14 +213,15 @@ function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) =
         .text(item.label)
     }
 
-    const backgroundBar: TD3Selection = breakdown.append("div")
-      .attr("class", styles.breakdownBackgroundBar)
+    const backgroundBar: TD3Selection = breakdown.append("div").attr("class", styles.breakdownBackgroundBar)
 
-    backgroundBar.append("div")
+    backgroundBar
+      .append("div")
       .attr("class", styles.breakdownBar)
       .style("width", item.percentage + "%")
 
-    backgroundBar.append("div")
+    backgroundBar
+      .append("div")
       .attr("class", styles.breakdownText)
       .text(numberFormatter(item.size) + " (" + item.percentage + "%)")
   }
@@ -217,7 +229,8 @@ function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) =
 
 function addBreakdownComment(comment: string) {
   return (container: TD3Selection): TD3Selection => {
-    container.append("label")
+    container
+      .append("label")
       .attr("class", styles.breakdownCommentLabel)
       .text(comment)
     return container

@@ -4,8 +4,20 @@ import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
-import { IAccessors, IAccessorsObject, IConfig, IFocusElement, IComputedState, IInputData, IChartStateObject, IObject, INodeAttrs, ILinkAttrs, TNode } from "./typings"
 import { isEmpty, uniqueId } from "lodash/fp"
+import {
+  IAccessors,
+  IAccessorsObject,
+  IConfig,
+  IFocusElement,
+  IComputedState,
+  IInputData,
+  IChartStateObject,
+  IObject,
+  INodeAttrs,
+  ILinkAttrs,
+  TNode
+} from "./typings"
 
 class Facade {
   __disposed: boolean = false
@@ -30,7 +42,7 @@ class Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      computed: this.initialComputed()
     })
   }
 
@@ -74,7 +86,7 @@ class Facade {
         stroke: (d: INodeAttrs): string => d.stroke || "#000",
         id: (d: INodeAttrs): string => d.id || uniqueId("node"),
         label: (d: INodeAttrs): string => d.label || d.id || "",
-        labelPosition: (d: INodeAttrs): string => d.labelPosition || "right",
+        labelPosition: (d: INodeAttrs): string => d.labelPosition || "right"
       },
       link: {
         content: (d: INodeAttrs): IObject[] => d.content || [],
@@ -85,26 +97,21 @@ class Facade {
         source: (d: ILinkAttrs): TNode | undefined => d.source,
         sourceId: (d: ILinkAttrs): string | undefined => d.sourceId,
         target: (d: ILinkAttrs): TNode | undefined => d.target,
-        targetId: (d: ILinkAttrs): string | undefined => d.targetId,
-      },
+        targetId: (d: ILinkAttrs): string | undefined => d.targetId
+      }
     }
   }
 
   initialComputed(): IComputedState {
-     return {
+    return {
       canvas: {},
       focus: {},
-      series: {},
+      series: {}
     }
   }
 
   insertCanvas(): Canvas {
-    return new Canvas(
-      this.state.readOnly(),
-      this.state.computedWriter(["canvas"]),
-      this.events,
-      this.context
-    )
+    return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
   insertComponents(): IObject {
@@ -113,8 +120,8 @@ class Facade {
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
         this.events,
-        this.canvas.elementFor("focus"),
-      ),
+        this.canvas.elementFor("focus")
+      )
     }
   }
 
@@ -123,7 +130,7 @@ class Facade {
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
       this.events,
-      this.canvas.elementFor("series"),
+      this.canvas.elementFor("series")
     )
   }
 

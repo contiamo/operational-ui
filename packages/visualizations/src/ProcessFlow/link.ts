@@ -25,7 +25,7 @@ class Link {
 
   assignAccessors(): void {
     forEach.convert({ cap: false })((accessor: any, key: string) => {
-      (this as any)[key] = () => accessor(this.attributes)
+      ;(this as any)[key] = () => accessor(this.attributes)
     })(this.accessors)
   }
 }

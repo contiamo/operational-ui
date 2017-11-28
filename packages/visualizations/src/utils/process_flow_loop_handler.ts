@@ -14,7 +14,7 @@ interface INode {
 }
 
 interface INodes {
-  [id: string]: INode;
+  [id: string]: INode
 }
 
 let nodes: INodes = {}
