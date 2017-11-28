@@ -27,6 +27,7 @@ const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div
 const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   bottom: 0,
+  cursor: "pointer",
   right: 0,
   width: inputHeight,
   height: inputHeight,
@@ -98,6 +99,7 @@ const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ th
   borderRadius: 2,
   padding: theme.spacing * 2 / 3,
   height: inputHeight,
+  cursor: "pointer",
   border: "1px solid",
   borderColor: theme.colors.palette.grey30,
   width: 200,

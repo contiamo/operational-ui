@@ -63,6 +63,10 @@ var Option = glamorous_1.default.div(function (_a) {
         cursor: "pointer",
         "&:hover": {
             backgroundColor: "rgba(255, 255, 255, 0.07)"
+        },
+        "&:focus": {
+            outline: 0,
+            backgroundColor: "rgba(255, 255, 255, 0.12)"
         }
     });
 });

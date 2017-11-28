@@ -34,6 +34,7 @@ var Toggle = glamorous_1.default.div(function (_a) {
     return ({
         position: "absolute",
         bottom: 0,
+        cursor: "pointer",
         right: 0,
         width: inputHeight,
         height: inputHeight,
@@ -93,7 +94,7 @@ var Day = glamorous_1.default.div({
 exports.Day = Day;
 var Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative", "&:focus": {
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative", "&:focus": {
             outline: 0,
             borderColor: "rgba(82,168,236,.8)",
             boxShadow: theme.shadows.focus
