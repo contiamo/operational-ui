@@ -30,12 +30,12 @@
     "jest-enzyme": "^3.8.3",
     "jest-glamor-react": "^3.1.1",
     "jest-serializer-enzyme": "^1.0.0",
-    "prettier": "^1.7.0",
+    "prettier": "1.8.2",
     "react-test-renderer": "^16.0.0",
     "ts-jest": "^21.0.1",
-    "tslint": "^5.7.0",
-    "tslint-config-airbnb": "^5.2.1",
-    "tslint-config-prettier": "^1.5.0",
+    "tslint": "5.8.0",
+    "tslint-config-airbnb": "5.4.2",
+    "tslint-config-prettier": "1.6.0",
     "typescript": "2.5.3"
   },
   "dependencies": {
