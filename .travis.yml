@@ -1,0 +1,7 @@
+# This file tells Travis what's up
+language: node_js
+node_js:
+- stable
+
+# When Travis gets notified of a new build, do this
+script: yarn precommit
