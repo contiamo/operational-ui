@@ -71,6 +71,10 @@ const Option = glamorous.div(({ theme }: { theme: Theme }): any => ({
   cursor: "pointer",
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.07)"
+  },
+  "&:focus": {
+    outline: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.12)"
   }
 }))
 
