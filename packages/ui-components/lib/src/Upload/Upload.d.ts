@@ -8,7 +8,7 @@ export interface IRequestOptions {
     name?: string;
 }
 export interface IProps {
-    action: string;
+    action?: string;
     accept?: string;
     data?: {};
     disabled?: boolean;
