@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-blocks",
-  "version": "0.0.1-37",
+  "version": "0.0.1-44",
   "description": "Opinionated composed ui components",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -46,9 +46,9 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "contiamo-ui-components": "^0.0.1-37",
-    "contiamo-ui-theme": "^0.0.1-37",
-    "contiamo-ui-utils": "^0.0.1-37",
+    "contiamo-ui-components": "^0.0.1-44",
+    "contiamo-ui-theme": "^0.0.1-44",
+    "contiamo-ui-utils": "^0.0.1-44",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "moment": "^2.19.0",

@@ -1,6 +1,6 @@
 {
   "name": "contiamo-ui-theme",
-  "version": "0.0.1-42",
+  "version": "0.0.1-44",
   "description": "Customization theme for contiamo ui packages.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

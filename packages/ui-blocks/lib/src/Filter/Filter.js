@@ -49,10 +49,10 @@ var Filter = /** @class */ (function (_super) {
                     var value = "";
                     switch (child.type) {
                         case contiamo_ui_components_1.Input:
-                            value = (!!child.props.value || child.props.value === 0) ? String(child.props.value) : "";
+                            value = !!child.props.value || child.props.value === 0 ? String(child.props.value) : "";
                             break;
                         case contiamo_ui_components_1.Select:
-                            value = (!!child.props.value || child.props.value === 0) ? String(child.props.value) : "";
+                            value = !!child.props.value || child.props.value === 0 ? String(child.props.value) : "";
                             break;
                         case contiamo_ui_components_1.DatePicker:
                             value = [child.props.start, child.props.end].filter(function (date) { return !!date; }).join(" - ");
