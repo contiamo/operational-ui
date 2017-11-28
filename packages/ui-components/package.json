@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
-    "package": "rm -rf lib && tsc -d",
+    "package": "rm -rf lib && tsc -d --outDir './lib'",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -18,30 +18,6 @@
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "preversion": "npm run precommit",
     "version": "npm run package && git add lib"
-  },
-  "devDependencies": {
-    "@types/node": "^8.0.27",
-    "@types/react": "^16.0.22",
-    "@types/react-color": "^2.13.0",
-    "@types/react-icons": "^2.2.2",
-    "@types/react-router-dom": "^4.2.0",
-    "@types/tinycolor2": "^1.4.0",
-    "awesome-typescript-loader": "^3.2.3",
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1",
-    "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "jest-enzyme": "^3.8.1",
-    "jest-glamor-react": "^3.1.0",
-    "jest-serializer-enzyme": "^1.0.0",
-    "prettier": "1.8.2",
-    "react-test-renderer": "^16.0.0",
-    "tslint": "5.8.0",
-    "tslint-config-airbnb": "5.4.2",
-    "tslint-config-prettier": "1.6.0",
-    "typescript": "2.5.3",
-    "webpack": "^3.7.1",
-    "webpack-dev-server": "^2.9.1"
   },
   "peerDependencies": {
     "glamor": "^2.20.40",
@@ -62,32 +38,5 @@
     "react-icons": "^2.2.5",
     "react-router-dom": "^4.2.2",
     "tinycolor2": "^1.4.1"
-  },
-  "jest": {
-    "setupFiles": [
-      "./test-polyfills.js"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
-    "setupTestFrameworkScriptFile": "../../node_modules/jest-enzyme/lib/index.js",
-    "moduleNameMapper": {
-      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
-    },
-    "snapshotSerializers": [
-      "../../node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ],
-    "mapCoverage": true
   }
 }

@@ -4,13 +4,13 @@ const breakdownStyle = {
   fontFamily: "sans-serif",
   maxWidth: "350px",
   padding: "6px",
-  background: "white",
+  background: "white"
 }
 
 const breakdownsContainerStyle = {
   width: "350px",
   float: "left",
-  padding: "7px 0",
+  padding: "7px 0"
 }
 
 const breakdownContainerStyle = {
@@ -18,13 +18,13 @@ const breakdownContainerStyle = {
   float: "left",
   paddingRight: "2%",
   paddingTop: "10px",
-  paddingBottom: "10px",
+  paddingBottom: "10px"
 }
 
 const breakdownLabelStyle = {
   display: "block",
   marginBottom: "3px",
-  fontSize: "12px",
+  fontSize: "12px"
 }
 
 const breakdownCommentLabelStyle = {
@@ -38,7 +38,7 @@ const breakdownBackgroundBarStyle = {
   overflow: "hidden",
   padding: "0 3px",
   height: "15px",
-  fontSize: "13px",
+  fontSize: "13px"
 }
 
 const breakdownBarStyle = {
@@ -50,12 +50,12 @@ const breakdownBarStyle = {
   display: "block",
   height: "100%",
   pointerEvents: "none",
-  backgroundColor: "#1499CE",
+  backgroundColor: "#1499CE"
 }
 
 const breakdownTextStyle = {
   color: "white",
-  position: "relative",
+  position: "relative"
 }
 
 const titleStyle = {

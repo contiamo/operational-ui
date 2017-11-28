@@ -4,8 +4,8 @@ const chartContainerStyle = {
   position: "relative",
   display: "block",
   "&.hidden": {
-    display: "none",
-  },
+    display: "none"
+  }
 }
 
 const focusLegendStyle = {
@@ -24,8 +24,8 @@ const focusLegendStyle = {
     listStyle: "none",
     fontSize: 12,
     margin: 0,
-    padding: 0,
-  },
+    padding: 0
+  }
 }
 
 export const chartContainer = css(chartContainerStyle).toString()

@@ -9,7 +9,7 @@ declare namespace fp {
 
   type ReduceFunction<T, TResult> = (
     iterator: ReduceIterator<T, TResult>,
-    accumulator: TResult,
+    accumulator: TResult
   ) => (collection: List<T>) => TResult
 
   // Common interface between Arrays and jQuery objects

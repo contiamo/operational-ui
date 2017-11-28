@@ -1,4 +1,4 @@
-import { filter, find, flow, forEach, get, identity,indexOf, map, reduce, sortBy, uniq } from "lodash/fp"
+import { filter, find, flow, forEach, get, identity, indexOf, map, reduce, sortBy, uniq } from "lodash/fp"
 import { IData, IState, TLink, TNode } from "./typings"
 
 class Layout {
@@ -32,7 +32,9 @@ class Layout {
       })(nodes)
       if (nextNodes.length > 0 && i < this.nodes.length) {
         if (nodes.length === nextNodes.length) {
-          throw new Error('The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the "contiamo-visualizations" package.')
+          throw new Error(
+            'The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the "contiamo-visualizations" package.'
+          )
         }
         ++i
         assignNextNodes(nextNodes)
@@ -53,10 +55,13 @@ class Layout {
         // 2) there cannot be another (non-source) node in between the node and the source node above
         filter(isSourceDirectlyAbove(node, this.nodes)),
         // 3) there can't already be another node on the same row in that position
-        filter(xPositionAvailable(nodePositions)),
+        filter(xPositionAvailable(nodePositions))
       )(sourcePositions)
 
-      const calculated: { xPosition: number, newColumn: boolean } = calculateXPosition(sourcePositions, possiblePositions)
+      const calculated: { xPosition: number; newColumn: boolean } = calculateXPosition(
+        sourcePositions,
+        possiblePositions
+      )
       if (calculated.newColumn) {
         shiftNodesToRight(calculated.xPosition)(this.nodes)
       }
@@ -66,11 +71,7 @@ class Layout {
   }
 
   computeNodeXPositions(): void {
-    const rows: number[] = flow(
-      map(get("y")),
-      sortBy(identity),
-      uniq
-    )(this.nodes)
+    const rows: number[] = flow(map(get("y")), sortBy(identity), uniq)(this.nodes)
 
     forEach((row: number): void => {
       var nodesInRow: TNode[] = filter({ y: row })(this.nodes)
@@ -124,7 +125,7 @@ function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
       filter({ x: xValue }),
       reduce((max: number, n: TNode): number => {
         return Math.max(max, n.y)
-      }, 0),
+      }, 0)
     )(nodes)
     return maxYVal === findSourceNodeAtX(node.targetLinks).source().y
   }
@@ -138,12 +139,17 @@ function xPositionAvailable(nodePositions: number[]) {
 function shiftNodesToRight(x: number) {
   return flow(
     filter((n: TNode): boolean => n.x >= x),
-    forEach((n: TNode): void => { n.x += 1 }),
+    forEach((n: TNode): void => {
+      n.x += 1
+    })
   )
 }
 
 // The mean source node position is calculated as a starting point for positioning the node
-function calculateXPosition(sourcePositions: number[], possiblePositions: number[]): { xPosition: number, newColumn: boolean } {
+function calculateXPosition(
+  sourcePositions: number[],
+  possiblePositions: number[]
+): { xPosition: number; newColumn: boolean } {
   let newColumn: boolean = false
   const sourcePositionsSum: number = reduce((sum: number, val: number): number => {
     return sum + val

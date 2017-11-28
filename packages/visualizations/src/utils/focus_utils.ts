@@ -19,9 +19,7 @@ let FocusUtils: any = {
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
   drawHidden: (canvasEl: TD3Selection, type: string): any => {
-   return canvasEl
-     .attr("class", styles.focusLegend + " focus-legend-" + type)
-     .style("visibility", "hidden")
+    return canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden")
   },
 
   // Move the focus label to the desired position and make it visible.
@@ -37,13 +35,20 @@ let FocusUtils: any = {
     const rect: ClientRect = focusEl.node().getBoundingClientRect()
     return {
       height: rect.height,
-      width: rect.width,
+      width: rect.width
     }
   },
 
   // Position focus label according to desired position relative to focus point.
   // Use label and drawing dimensions to ensure focus label does not overflow drawing.
-  positionLabel: (el: TD3Selection, focus: IObject, label: IObject, drawing: IObject, offset: number = 0, position: string): void => {
+  positionLabel: (
+    el: TD3Selection,
+    focus: IObject,
+    label: IObject,
+    drawing: IObject,
+    offset: number = 0,
+    position: string
+  ): void => {
     if (!position) {
       position = "toRight"
     }
@@ -52,14 +57,14 @@ let FocusUtils: any = {
       farLeft: drawing.xMin + offset,
       farRight: drawing.xMax - offset - label.width,
       left: drawing.xMin + focus.x - offset - label.width,
-      right: drawing.xMin + focus.x + offset,
+      right: drawing.xMin + focus.x + offset
     }
 
     let y: any = {
       above: drawing.yMin + focus.y - offset - label.height,
       below: drawing.yMin + focus.y + offset,
       bottom: drawing.yMin + drawing.yMax - offset - label.height,
-      top: drawing.yMin + offset,
+      top: drawing.yMin + offset
     }
 
     let top: number
@@ -91,7 +96,7 @@ let FocusUtils: any = {
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
   verticalCentre: (focus: IObject, label: IObject, drawing: IObject): number => {
     return Math.min(Math.max(focus.y + drawing.yMin - label.height / 2, drawing.yMin), drawing.yMax)
-  },
+  }
 }
 
 export default FocusUtils

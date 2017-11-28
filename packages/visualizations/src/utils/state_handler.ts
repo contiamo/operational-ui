@@ -27,7 +27,7 @@ class StateHandler<IConfig> {
   readOnly(): IChartStateReadOnly<IChartStateObject> {
     return {
       current: this.state.current.readOnly(),
-      previous: this.state.previous.readOnly(),
+      previous: this.state.previous.readOnly()
     }
   }
 
