@@ -148,6 +148,7 @@ const accessors = {
       }
       return "#fff"
     },
+    content: [{ key: "Description", value: "This is a node." }, { key: "Comment", value: "This comment is boring." }],
     label: (d: any) => "N:" + d.id,
     labelPosition: "top"
   },

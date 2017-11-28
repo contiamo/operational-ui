@@ -56,6 +56,7 @@ var Facade = /** @class */ (function () {
             },
             node: {
                 color: function (d) { return d.color || "#fff"; },
+                content: function (d) { return d.content || []; },
                 shape: function (d) { return d.shape || "squareDiamond"; },
                 size: function (d) { return d.size || 1; },
                 stroke: function (d) { return d.stroke || "#000"; },
@@ -64,6 +65,7 @@ var Facade = /** @class */ (function () {
                 labelPosition: function (d) { return d.labelPosition || "right"; },
             },
             link: {
+                content: function (d) { return d.content || []; },
                 dash: function (d) { return d.dash || "0"; },
                 label: function (d) { return d.label || d.source.label() + " → " + d.target.label() || ""; },
                 size: function (d) { return d.size || 1; },

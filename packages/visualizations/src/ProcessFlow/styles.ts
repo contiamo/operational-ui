@@ -66,6 +66,10 @@ const titleStyle = {
   }
 }
 
+const contentStyle = {
+  paddingTop: "15px"
+}
+
 export const breakdown = css(breakdownStyle).toString()
 export const breakdownsContainer = css(breakdownsContainerStyle).toString()
 export const breakdownContainer = css(breakdownContainerStyle).toString()
@@ -75,3 +79,4 @@ export const breakdownBackgroundBar = css(breakdownBackgroundBarStyle).toString(
 export const breakdownBar = css(breakdownBarStyle).toString()
 export const breakdownText = css(breakdownTextStyle).toString()
 export const title = css(titleStyle).toString()
+export const content = css(contentStyle).toString()

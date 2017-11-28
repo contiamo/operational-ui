@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/focus"
 import FocusUtils from "../utils/focus_utils"
 import { flow, forEach, map, reduce, uniqueId } from "lodash/fp"
-import { IBreakdown, IConfig, IFocus, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
+import { IBreakdown, IConfig, IFocus, IObject, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {
@@ -39,6 +39,10 @@ class Focus extends AbstractFocus {
       .append("span")
       .text(` (${datum.size()})`)
 
+    if (datum.content().length > 0) {
+      this.appendContent(content, datum.content())
+    }
+
     if (isNode) {
       this.addNodeBreakdowns(content, datum)
       this.addSingleNodeVisitsComment(content, datum)
@@ -50,6 +54,19 @@ class Focus extends AbstractFocus {
       offset: number = focusPoint.offset + config.nodeBorderWidth + config.labelOffset
 
     FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
+  }
+
+  appendContent(container: TD3Selection, content: IObject[]): void {
+    let contentContainer: TD3Selection = container.append("div").attr("class", styles.content)
+
+    forEach((contentItem: IObject): void => {
+      contentContainer
+        .append("xhtml:li")
+        .attr("class", styles.title)
+        .text(`${contentItem.key}: `)
+        .append("span")
+        .text(contentItem.value)
+    })(content)
   }
 
   addNodeBreakdowns(content: TSeriesEl, datum: TNode): void {

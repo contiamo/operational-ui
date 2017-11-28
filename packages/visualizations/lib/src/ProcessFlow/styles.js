@@ -58,6 +58,9 @@ var titleStyle = {
         fontWeight: "normal"
     }
 };
+var contentStyle = {
+    paddingTop: "15px"
+};
 exports.breakdown = glamor_1.css(breakdownStyle).toString();
 exports.breakdownsContainer = glamor_1.css(breakdownsContainerStyle).toString();
 exports.breakdownContainer = glamor_1.css(breakdownContainerStyle).toString();
@@ -67,4 +70,5 @@ exports.breakdownBackgroundBar = glamor_1.css(breakdownBackgroundBarStyle).toStr
 exports.breakdownBar = glamor_1.css(breakdownBarStyle).toString();
 exports.breakdownText = glamor_1.css(breakdownTextStyle).toString();
 exports.title = glamor_1.css(titleStyle).toString();
+exports.content = glamor_1.css(contentStyle).toString();
 //# sourceMappingURL=styles.js.map

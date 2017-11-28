@@ -37,6 +37,9 @@ var Focus = /** @class */ (function (_super) {
             .text(datum.label())
             .append("span")
             .text(" (" + datum.size() + ")");
+        if (datum.content().length > 0) {
+            this.appendContent(content, datum.content());
+        }
         if (isNode) {
             this.addNodeBreakdowns(content, datum);
             this.addSingleNodeVisitsComment(content, datum);
@@ -44,6 +47,17 @@ var Focus = /** @class */ (function (_super) {
         // Get label dimensions (has to be actually rendered in the page to do this) and position label
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el), drawingDimensions = this.getDrawingDimensions(), offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
         focus_utils_1.default.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset);
+    };
+    Focus.prototype.appendContent = function (container, content) {
+        var contentContainer = container.append("div").attr("class", styles.content);
+        fp_1.forEach(function (contentItem) {
+            contentContainer
+                .append("xhtml:li")
+                .attr("class", styles.title)
+                .text(contentItem.key + ": ")
+                .append("span")
+                .text(contentItem.value);
+        })(content);
     };
     Focus.prototype.addNodeBreakdowns = function (content, datum) {
         var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer), inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ";

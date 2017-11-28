@@ -66,6 +66,7 @@ class Facade {
       },
       node: {
         color: (d: INodeAttrs): string => d.color || "#fff",
+        content: (d: INodeAttrs): IObject[] => d.content || [],
         shape: (d: INodeAttrs): string => d.shape || "squareDiamond",
         size: (d: INodeAttrs): number => d.size || 1,
         stroke: (d: INodeAttrs): string => d.stroke || "#000",
@@ -74,6 +75,7 @@ class Facade {
         labelPosition: (d: INodeAttrs): string => d.labelPosition || "right",
       },
       link: {
+        content: (d: INodeAttrs): IObject[] => d.content || [],
         dash: (d: ILinkAttrs): string => d.dash || "0",
         label: (d: ILinkAttrs): string => d.label || d.source.label() + " → " + d.target.label() || "",
         size: (d: ILinkAttrs): number => d.size || 1,

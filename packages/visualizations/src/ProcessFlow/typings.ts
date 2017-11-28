@@ -48,6 +48,7 @@ export interface IJourney {
 }
 
 export interface ILinkAttrs {
+  content?: IObject[]
   dash?: string
   focusLabel?: any
   label?: string
@@ -61,6 +62,7 @@ export interface ILinkAttrs {
 
 export interface INodeAttrs {
   color?: string
+  content?: IObject[]
   shape?: string
   size?: number
   stroke?: string
@@ -76,6 +78,7 @@ export interface IDataAccessors {
 
 export interface INodeAccessors {
   color: (d: INodeAttrs) => string
+  content: (d: INodeAttrs) => IObject[]
   shape: (d: INodeAttrs) => string
   size: (d: INodeAttrs) => number
   stroke: (d: INodeAttrs) => string
@@ -85,6 +88,7 @@ export interface INodeAccessors {
 }
 
 export interface ILinkAccessors {
+  content: (d: ILinkAttrs) => IObject[]
   dash: (d: ILinkAttrs) => string
   label: (d: ILinkAttrs) => string
   size: (d: ILinkAttrs) => number
