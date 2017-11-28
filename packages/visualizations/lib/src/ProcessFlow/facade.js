@@ -40,6 +40,7 @@ var Facade = /** @class */ (function () {
             minLinkWidth: 1,
             minNodeSize: 100,
             nodeBorderWidth: 10,
+            numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             showLinkFocusLabels: true,
             showNodeFocusLabels: true,
             uid: fp_1.uniqueId("processflow"),

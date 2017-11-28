@@ -49,6 +49,7 @@ class Facade {
       minLinkWidth: 1,
       minNodeSize: 100,
       nodeBorderWidth: 10,
+      numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       showLinkFocusLabels: true,
       showNodeFocusLabels: true,
       uid: uniqueId("processflow"),

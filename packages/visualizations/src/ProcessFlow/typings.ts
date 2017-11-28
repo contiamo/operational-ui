@@ -120,6 +120,7 @@ export interface IConfig {
   minLinkWidth: number
   minNodeSize: number
   nodeBorderWidth: number
+  numberFormatter: (x: number) => string
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
   uid: string

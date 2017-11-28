@@ -37,7 +37,7 @@ class Focus extends AbstractFocus {
       .attr("class", styles.title)
       .text(datum.label())
       .append("span")
-      .text(` (${datum.size()})`)
+      .text(` (${this.state.current.get("config").numberFormatter(datum.size())})`)
 
     if (datum.content().length > 0) {
       this.appendContent(content, datum.content())
@@ -77,13 +77,14 @@ class Focus extends AbstractFocus {
       startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
       endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal),
       startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
-      endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all outputs` : " "
+      endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all outputs` : " ",
+      numberFormatter: (x: number) => string = this.state.current.get("config").numberFormatter
 
     // Add "Starts here" breakdown
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Starts here"),
-      addBreakdownBars(breakdowns.startsHere),
+      addBreakdownBars(breakdowns.startsHere, numberFormatter),
       addBreakdownComment(startsHereString)
     )(container)
 
@@ -91,22 +92,22 @@ class Focus extends AbstractFocus {
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Ends here"),
-      addBreakdownBars(breakdowns.endsHere),
+      addBreakdownBars(breakdowns.endsHere, numberFormatter),
       addBreakdownComment(endsHereString)
     )(container)
 
     // Add inputs breakdown
     flow(
       addBreakdownContainer,
-      addBreakdownTitle("Inputs", ` (${inputsTotal})`),
-      addBreakdownBars(breakdowns.inputs)
+      addBreakdownTitle("Inputs", ` (${numberFormatter(inputsTotal)})`),
+      addBreakdownBars(breakdowns.inputs, numberFormatter)
     )(container)
 
     // Add outputs breakdown
     flow(
       addBreakdownContainer,
-      addBreakdownTitle("Outputs", ` (${outputsTotal})`),
-      addBreakdownBars(breakdowns.outputs)
+      addBreakdownTitle("Outputs", ` (${numberFormatter(outputsTotal)})`),
+      addBreakdownBars(breakdowns.outputs, numberFormatter)
     )(container)
   }
 
@@ -181,15 +182,15 @@ function addBreakdownTitle(title: string, subtitle?: string) {
   }
 }
 
-function addBreakdownBars(breakdownItems: IBreakdown[]) {
+function addBreakdownBars(breakdownItems: IBreakdown[], numberFormatter: (x: number) => string) {
   const sortedItems: IBreakdown[] = sortBy((item: IBreakdown): number => -item.size)(breakdownItems)
   return (container: TD3Selection): TD3Selection => {
-    forEach(appendBreakdown(container))(sortedItems)
+    forEach(appendBreakdown(container, numberFormatter))(sortedItems)
     return container
   }
 }
 
-function appendBreakdown(container: TD3Selection) {
+function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) => string) {
   return (item: IBreakdown): void => {
     const breakdown: TD3Selection = container.append("div")
       .attr("class", styles.breakdown)
@@ -210,7 +211,7 @@ function appendBreakdown(container: TD3Selection) {
 
     backgroundBar.append("div")
       .attr("class", styles.breakdownText)
-      .text(item.size + " (" + item.percentage + "%)")
+      .text(numberFormatter(item.size) + " (" + item.percentage + "%)")
   }
 }
 
