@@ -29,6 +29,7 @@ var Facade = /** @class */ (function () {
         return {
             borderColor: "#fff",
             duration: 1e3,
+            focusElement: {},
             height: Infinity,
             hidden: false,
             highlightColor: "#1499CE",
@@ -117,7 +118,7 @@ var Facade = /** @class */ (function () {
         this.canvas.draw();
         this.series.draw();
         var focusElement = this.state.config().focusElement;
-        focusElement
+        !fp_1.isEmpty(focusElement)
             ? this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
             : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         return this.canvas.elementFor("series").node();

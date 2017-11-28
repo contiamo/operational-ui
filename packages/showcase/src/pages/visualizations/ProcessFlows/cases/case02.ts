@@ -77,7 +77,7 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 
   test("Removes focus", () => {
-    viz.config({ focusElement: null })
+    viz.config({ focusElement: {} })
     viz.draw()
   })
 

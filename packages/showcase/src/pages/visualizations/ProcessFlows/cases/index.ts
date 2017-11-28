@@ -3,5 +3,6 @@ import case02 from "./case02"
 import case03 from "./case03"
 import case04 from "./case04"
 import case05 from "./case05"
+import case06 from "./case06"
 
-export { case01, case02, case03, case04, case05 }
+export { case01, case02, case03, case04, case05, case06 }

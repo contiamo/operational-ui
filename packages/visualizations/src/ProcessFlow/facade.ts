@@ -5,7 +5,7 @@ import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { IAccessors, IAccessorsObject, IConfig, IFocusElement, IComputedState, IInputData, IChartStateObject, IObject, INodeAttrs, ILinkAttrs, TNode } from "./typings"
-import { uniqueId } from "lodash/fp"
+import { isEmpty, uniqueId } from "lodash/fp"
 
 class Facade {
   __disposed: boolean = false
@@ -38,6 +38,7 @@ class Facade {
     return {
       borderColor: "#fff",
       duration: 1e3,
+      focusElement: {},
       height: Infinity,
       hidden: false,
       highlightColor: "#1499CE",
@@ -153,7 +154,7 @@ class Facade {
     this.series.draw()
 
     const focusElement: IFocusElement = this.state.config().focusElement
-    focusElement
+    !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
       : this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
