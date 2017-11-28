@@ -1,7 +1,8 @@
 {
   "name": "contiamo-ui",
   "version": "1.0.0",
-  "description": "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
+  "description":
+    "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "private": true,
   "author": "Tejas Kumar <tejas@contiamo.com>",
@@ -15,7 +16,8 @@
     "lint": "lerna run lint",
     "test": "lerna run test",
     "prettier": "lerna run prettier",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
+    "precommit": "npm run prettier && git add .",
+    "ci": "npm run test && npm run lint && npm run package",
     "preversion": "lerna run version && git add ."
   },
   "devDependencies": {
@@ -25,7 +27,5 @@
     "lerna": "^2.1.2",
     "webpack-dev-server": "^2.9.1"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
