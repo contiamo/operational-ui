@@ -29,6 +29,7 @@ var Facade = /** @class */ (function () {
         return {
             borderColor: "#fff",
             duration: 1e3,
+            focusElement: {},
             height: Infinity,
             hidden: false,
             highlightColor: "#1499CE",
@@ -40,6 +41,7 @@ var Facade = /** @class */ (function () {
             minLinkWidth: 1,
             minNodeSize: 100,
             nodeBorderWidth: 10,
+            numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             showLinkFocusLabels: true,
             showNodeFocusLabels: true,
             uid: fp_1.uniqueId("processflow"),
@@ -56,6 +58,7 @@ var Facade = /** @class */ (function () {
             },
             node: {
                 color: function (d) { return d.color || "#fff"; },
+                content: function (d) { return d.content || []; },
                 shape: function (d) { return d.shape || "squareDiamond"; },
                 size: function (d) { return d.size || 1; },
                 stroke: function (d) { return d.stroke || "#000"; },
@@ -64,6 +67,7 @@ var Facade = /** @class */ (function () {
                 labelPosition: function (d) { return d.labelPosition || "right"; },
             },
             link: {
+                content: function (d) { return d.content || []; },
                 dash: function (d) { return d.dash || "0"; },
                 label: function (d) { return d.label || d.source.label() + " → " + d.target.label() || ""; },
                 size: function (d) { return d.size || 1; },
@@ -114,7 +118,7 @@ var Facade = /** @class */ (function () {
         this.canvas.draw();
         this.series.draw();
         var focusElement = this.state.config().focusElement;
-        focusElement
+        !fp_1.isEmpty(focusElement)
             ? this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
             : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         return this.canvas.elementFor("series").node();

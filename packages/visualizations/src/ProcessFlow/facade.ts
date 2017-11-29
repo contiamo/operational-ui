@@ -5,7 +5,7 @@ import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { IAccessors, IAccessorsObject, IConfig, IFocusElement, IComputedState, IInputData, IChartStateObject, IObject, INodeAttrs, ILinkAttrs, TNode } from "./typings"
-import { uniqueId } from "lodash/fp"
+import { isEmpty, uniqueId } from "lodash/fp"
 
 class Facade {
   __disposed: boolean = false
@@ -38,6 +38,7 @@ class Facade {
     return {
       borderColor: "#fff",
       duration: 1e3,
+      focusElement: {},
       height: Infinity,
       hidden: false,
       highlightColor: "#1499CE",
@@ -49,6 +50,7 @@ class Facade {
       minLinkWidth: 1,
       minNodeSize: 100,
       nodeBorderWidth: 10,
+      numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       showLinkFocusLabels: true,
       showNodeFocusLabels: true,
       uid: uniqueId("processflow"),
@@ -66,6 +68,7 @@ class Facade {
       },
       node: {
         color: (d: INodeAttrs): string => d.color || "#fff",
+        content: (d: INodeAttrs): IObject[] => d.content || [],
         shape: (d: INodeAttrs): string => d.shape || "squareDiamond",
         size: (d: INodeAttrs): number => d.size || 1,
         stroke: (d: INodeAttrs): string => d.stroke || "#000",
@@ -74,6 +77,7 @@ class Facade {
         labelPosition: (d: INodeAttrs): string => d.labelPosition || "right",
       },
       link: {
+        content: (d: INodeAttrs): IObject[] => d.content || [],
         dash: (d: ILinkAttrs): string => d.dash || "0",
         label: (d: ILinkAttrs): string => d.label || d.source.label() + " → " + d.target.label() || "",
         size: (d: ILinkAttrs): number => d.size || 1,
@@ -150,7 +154,7 @@ class Facade {
     this.series.draw()
 
     const focusElement: IFocusElement = this.state.config().focusElement
-    focusElement
+    !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
       : this.events.emit(Events.FOCUS.ELEMENT.OUT)
 

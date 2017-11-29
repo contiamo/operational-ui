@@ -77,7 +77,7 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 
   test("Removes focus", () => {
-    viz.config({ focusElement: null })
+    viz.config({ focusElement: {} })
     viz.draw()
   })
 
@@ -90,7 +90,8 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
       }
     })
     viz.accessors("node", {
-      label: (node: any) => `Node ${node.id}`
+      label: (node: any) => `Node ${node.id}`,
+      content: [{ key: "Description", value: "This is a node." }, { key: "Comment", value: "This comment is boring." }]
     })
     viz.draw()
   })

@@ -1,4 +1,5 @@
 import { cloneDeep } from "lodash"
+import { defaults } from "lodash/fp"
 
 export type TPath = string | string[]
 
@@ -61,7 +62,7 @@ export class State<T> {
     return path.reduce((currentStateChunk: any, currentPath: string, index: number) => {
       if (currentStateChunk !== null && typeof currentStateChunk === "object") {
         if (index === path.length - 1) {
-          currentStateChunk[currentPath] = { ...currentStateChunk[currentPath], ...value }
+          currentStateChunk[currentPath] = defaults(currentStateChunk[currentPath])(value)
         }
         return currentStateChunk[currentPath]
       } else {

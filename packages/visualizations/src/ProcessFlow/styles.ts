@@ -34,7 +34,7 @@ const breakdownCommentLabelStyle = {
 const breakdownBackgroundBarStyle = {
   position: "relative",
   width: "100%",
-  backgroundColor: "rgb(245, 245, 245)",
+  backgroundColor: "#ddd",
   overflow: "hidden",
   padding: "0 3px",
   height: "15px",
@@ -66,6 +66,10 @@ const titleStyle = {
   }
 }
 
+const contentStyle = {
+  paddingTop: "15px"
+}
+
 export const breakdown = css(breakdownStyle).toString()
 export const breakdownsContainer = css(breakdownsContainerStyle).toString()
 export const breakdownContainer = css(breakdownContainerStyle).toString()
@@ -75,3 +79,4 @@ export const breakdownBackgroundBar = css(breakdownBackgroundBarStyle).toString(
 export const breakdownBar = css(breakdownBarStyle).toString()
 export const breakdownText = css(breakdownTextStyle).toString()
 export const title = css(titleStyle).toString()
+export const content = css(contentStyle).toString()

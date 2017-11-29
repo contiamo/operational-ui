@@ -174,6 +174,7 @@ declare namespace fp {
     get: any
     identity: any
     filter: any
+    defaults: any
   }
 }
 
