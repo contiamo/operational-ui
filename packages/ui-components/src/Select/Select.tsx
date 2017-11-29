@@ -6,7 +6,7 @@ import SelectOption from "./SelectOption"
 import SelectFilter from "./SelectFilter"
 
 import { Container, Options, OptionsList, DisplayValue } from "./Select.style"
-import withLabel from "../../utils/with-label"
+import withLabel from "../utils/with-label"
 
 export type Value = number | string
 
