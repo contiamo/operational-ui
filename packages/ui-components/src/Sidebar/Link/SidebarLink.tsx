@@ -21,7 +21,7 @@ export interface IProps {
   active?: boolean
 }
 
-const style: {} = ({ theme, color, disabled, active }: IProps) => {
+const style = ({ theme, color, disabled, active }: IProps): {} => {
   const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff"
   const textColor = active
     ? theme.colors.usage.link

@@ -1,16 +1,16 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import ThemelessSelect from "../Select"
+import ThemelessSelect, { IOption } from "../Select"
 import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
 const Select = wrapDefaultTheme(ThemelessSelect)
 
-const options: [Option] = [
+const options: IOption[] = [
   { label: "John", value: -10 },
   { label: "Joey", value: "Nein" },
-  { label: "Tupac", value: true },
-  { label: "Chandler", value: [{ alive: true }] }
+  { label: "Tupac", value: "true" },
+  { label: "Chandler", value: 10 }
 ]
 
 describe("Select", () => {

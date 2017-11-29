@@ -9,7 +9,7 @@ export interface IProps {
   id?: string | number
   style?: {}
   className?: string
-  label: string
+  label?: string
   children?: any
   open?: boolean
   onClick?: () => Promise<any>

@@ -2,7 +2,7 @@ import Canvas from "./canvas"
 import Series from "./series"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
-import StateHandler from "../utils/state_handler"
+import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import {
   IAccessors,

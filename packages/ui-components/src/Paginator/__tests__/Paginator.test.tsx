@@ -8,6 +8,6 @@ const Paginator = wrapDefaultTheme(ThemelessPaginator)
 
 describe("Paginator Component", () => {
   it("Should initialize properly", () => {
-    expect(render(<Paginator pageCount={10} onChange={newPage => {}} />)).toMatchSnapshot()
+    expect(render(<Paginator pageCount={10} onChange={(newPage: string) => {}} />)).toMatchSnapshot()
   })
 })

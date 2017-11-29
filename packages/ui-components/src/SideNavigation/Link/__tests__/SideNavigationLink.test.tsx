@@ -2,7 +2,7 @@ import * as React from "react"
 import { shallow } from "enzyme"
 
 import { SideNavigationLink, style } from "../SideNavigationLink"
-import theme from "../../../theme"
+import theme from "contiamo-ui-theme"
 
 describe("SideNavigationLink", () => {
   it("Should render", () => {

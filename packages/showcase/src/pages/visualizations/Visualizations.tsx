@@ -11,7 +11,7 @@ import ProcessFlowMain from "./ProcessFlows/ProcessFlowMain"
 import { ProcessFlowCases } from "./ProcessFlows/ProcessFlows"
 import * as processFlowCases from "./ProcessFlows/cases/index"
 
-const SidebarWithRouter = withRouter(Sidebar)
+const SidebarWithRouter = withRouter(Sidebar as any)
 
 const introContent: string = `
 This is an extensive collection of visualizations. Click one on the sidebar to get started.

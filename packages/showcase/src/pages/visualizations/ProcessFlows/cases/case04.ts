@@ -169,7 +169,7 @@ const accessors = {
 }
 
 const marathon = ({ test, afterAll, container }: IMarathon): void => {
-  const viz: ProcessFlow = new ProcessFlow(container)
+  const viz = new ProcessFlow(container)
 
   test("Renders viz with looped data", () => {
     viz.data(data)

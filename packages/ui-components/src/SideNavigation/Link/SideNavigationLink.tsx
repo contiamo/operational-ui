@@ -8,7 +8,7 @@ export interface IProps {
   id?: string | number
   style?: {}
   className?: string
-  children: Node
+  children: React.ReactNode
   onClick?: any
   theme?: Theme
 }

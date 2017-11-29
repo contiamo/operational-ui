@@ -10,7 +10,7 @@ import StaticContent from "../../components/StaticContent/StaticContent"
 import Filters from "./Filters/Filters"
 import * as introContent from "./intro.docs.md"
 
-const SidebarWithRouter = withRouter(Sidebar)
+const SidebarWithRouter = withRouter(Sidebar as any)
 
 const Intro = () => (
   <Card>

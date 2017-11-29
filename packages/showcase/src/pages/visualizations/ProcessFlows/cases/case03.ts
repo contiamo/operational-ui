@@ -80,7 +80,7 @@ const linkAccessors: any = {
 }
 
 const marathon = ({ test, afterAll, container }: IMarathon): void => {
-  const viz: ProcessFlow = new ProcessFlow(container)
+  const viz = new ProcessFlow(container)
 
   test("Renders viz with data accessors", () => {
     viz.data(data)
