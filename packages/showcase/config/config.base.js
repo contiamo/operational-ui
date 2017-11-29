@@ -8,54 +8,53 @@ module.exports = {
   output: {
     publicPath: "/",
     path: resolve(__dirname, "..", "dist"),
-    filename: "[name].js"
+    filename: "[name].js",
   },
   module: {
     rules: [
       {
         test: /\.md/,
         loader: "raw-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.snippet.(js|jsx)/,
-        loader: "raw-loader"
+        loader: "raw-loader",
       },
       {
-        test: /\.(ts|tsx)/,
+        test: /\.(!.d|ts|tsx)/,
         oneOf: [
           // Documentation snippets
           {
             test: /\.snippet/,
             loader: "raw-loader",
-            exclude: /node_modules/
           },
           // All other TS
           {
             test: /.*/,
-            loader: "awesome-typescript-loader",
-            exclude: /node_modules/,
+            loader: "ts-loader",
           },
         ],
+        exclude: [/node_modules/, /lib/, /__test__/],
       },
       {
         test: /\.(png|eot|svg|ttf|woff|woff2)$/,
         use: {
           loader: "file-loader",
           options: {
-            name: "[path][name].[ext]"
-          }
-        }
-      }
-    ]
+            name: "[path][name].[ext]",
+          },
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
-      template: resolve(__dirname, "..", "public", "index.html")
-    })
+      template: resolve(__dirname, "..", "public", "index.html"),
+    }),
   ],
   resolve: {
-    extensions: [".", ".jsx", ".js", ".tsx", ".ts", ".md"]
-  }
+    extensions: [".", ".jsx", ".js", ".tsx", ".ts", ".md"],
+  },
 }

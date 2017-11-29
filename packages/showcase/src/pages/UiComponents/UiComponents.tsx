@@ -31,7 +31,7 @@ import Timeline from "./Timeline/Timeline"
 import Uploads from "./Uploads/Uploads"
 import * as introContent from "./intro.docs.md"
 
-const SidebarWithRouter = withRouter(Sidebar)
+const SidebarWithRouter = withRouter(Sidebar as any)
 
 const Intro = () => (
   <Card>

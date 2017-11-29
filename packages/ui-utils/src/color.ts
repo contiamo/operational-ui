@@ -1,4 +1,4 @@
-import colorCalculator from "tinycolor2"
+import * as colorCalculator from "tinycolor2"
 
 const hexOrColor = (color: string): ((fallback: string) => string) => {
   /*

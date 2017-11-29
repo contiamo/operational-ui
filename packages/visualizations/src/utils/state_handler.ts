@@ -12,7 +12,7 @@ export interface IChartStateReadOnly<T> {
   previous: IReadOnlyState<T>
 }
 
-class StateHandler<IConfig> {
+export class StateHandler<IConfig> {
   state: IChartState<IChartStateObject>
 
   constructor(obj: IChartStateObject) {
@@ -74,5 +74,3 @@ class StateHandler<IConfig> {
     }
   }
 }
-
-export default StateHandler

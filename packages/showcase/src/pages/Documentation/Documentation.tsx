@@ -11,7 +11,7 @@ import * as apiDesignContent from "./apidesign.docs.md"
 import * as visualGuideContent from "./visualguide.docs.md"
 import * as themeContent from "./theme.docs.md"
 
-const SidebarWithRouter = withRouter(Sidebar)
+const SidebarWithRouter = withRouter(Sidebar as any)
 
 const Intro = () => (
   <Card>

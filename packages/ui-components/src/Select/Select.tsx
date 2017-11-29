@@ -10,12 +10,12 @@ import withLabel from "../../utils/with-label"
 
 export type Value = number | string
 
-export interface Option {
+export interface IOption {
   label?: string
   value: Value
 }
 
-const displayOption = (opt: Option): string => {
+const displayOption = (opt: IOption): string => {
   if (opt.label) {
     return opt.label
   }
@@ -28,7 +28,7 @@ export interface IProps {
   domId?: string
   css?: any
   className?: string
-  options: Option[]
+  options: IOption[]
   value: undefined | Value | Value[]
   filterable?: boolean
   disabled?: boolean
@@ -99,7 +99,7 @@ class Select extends React.Component<IProps, IState> {
     return listDisplay === "" ? this.props.placeholder || "No entries selected" : listDisplay
   }
 
-  selectOption(option: Option) {
+  selectOption(option: IOption) {
     if (!Array.isArray(this.props.value)) {
       this.props.onChange(this.props.value === option.value ? null : option.value)
       return
@@ -117,7 +117,7 @@ class Select extends React.Component<IProps, IState> {
     }
   }
 
-  isOptionSelected(option: Option) {
+  isOptionSelected(option: IOption) {
     if (!Array.isArray(this.props.value)) {
       return this.props.value === option.value
     }
@@ -180,7 +180,7 @@ class Select extends React.Component<IProps, IState> {
             {this.props.filterable && <SelectFilter onChange={(e: any) => this.updateFilter(e)} />}
             <OptionsList>
               {this.props.options.map(
-                (option: Option) =>
+                (option: IOption) =>
                   option.label.match(this.state.filter) && (
                     <SelectOption
                       key={String(option.value)}

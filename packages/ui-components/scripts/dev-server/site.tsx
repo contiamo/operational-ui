@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "react-dom"
 import { ThemeProvider } from "glamorous"
 
-import { ContextMenu, ContextMenuItem, Icon, contiamoTheme } from "../../index"
+import { ContextMenu, ContextMenuItem, Icon, contiamoTheme } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {

@@ -3,7 +3,7 @@ import glamorous, { withTheme, GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
 import { hexOrColor, readableTextColor, darken } from "contiamo-ui-utils"
-import { Icon } from "contiamo-ui-components"
+import { X } from "react-feather"
 
 export interface IProps {
   id?: number | string
@@ -68,7 +68,7 @@ const SelectOption = (props: IPropsWithTheme) => (
     {props.children}
     {props.selected ? (
       <IconContainer>
-        <Icon name="X" size={props.theme.spacing} />
+        <X size={props.theme.spacing} />
       </IconContainer>
     ) : null}
   </Container>

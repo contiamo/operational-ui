@@ -5,16 +5,16 @@
     "target": "ES5",
     "module": "commonjs",
     "sourceMap": true,
-    "allowJs": true,
     "noImplicitAny": true,
     "jsx": "react",
     "baseUrl": ".",
+    "declaration": true,
+    "allowJs": true,
     "paths": {
       "types": ["types"]
     },
     "lib": ["dom", "es6", "es2016", "dom.iterable", "scripthost"],
-    "allowJs": true
   },
-  "include": ["packages/"],
+  "include": ["packages/", "shared-types/"],
   "exclude": ["node_modules"]
 }

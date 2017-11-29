@@ -60,7 +60,7 @@ const data2: any = {
 }
 
 const marathon = ({ test, afterAll, container }: IMarathon): void => {
-  const viz: ProcessFlow = new ProcessFlow(container)
+  const viz = new ProcessFlow(container)
 
   test("Focuses a link", () => {
     viz.data(data1)
