@@ -9,6 +9,7 @@
   "scripts": {
     "build": "make build",
     "bootstrap": "lerna bootstrap",
+    "postinstall": "make postinstall",
     "ci": "npm run test && npm run lint && npm run build",
     "start": "cd packages/showcase && npm run start",
     "test": "jest",

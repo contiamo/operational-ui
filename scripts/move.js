@@ -10,7 +10,5 @@ const getPackages = source =>
     .filter(package => package.name !== "showcase")
 
 getPackages(resolve(__dirname, "../lib")).forEach(({ path, name }) => {
-  rename(resolve(path, "src"), resolve(__dirname, "../packages", name, "lib"), status => console.log("haha", status))
+  rename(resolve(path, "src"), resolve(__dirname, "../packages", name, "lib"), status => true)
 })
-
-// fs.rename(resolve(__dirname, '../lib'))

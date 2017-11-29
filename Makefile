@@ -6,6 +6,7 @@ install: reset
 
 reset:
 	find . -name node_modules -prune -exec rm -rf {} \;
+	find . -name lib -prune -exec rm -rf {} \;
 
 clean:
 	rm -rf dist
@@ -25,3 +26,4 @@ bootstrap:
 	npm run bootstrap
 
 postinstall: bootstrap
+	make build
