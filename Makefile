@@ -6,8 +6,6 @@ install: reset
 
 reset:
 	find . -name node_modules -prune -exec rm -rf {} \;
-	find ./packages -maxdepth 2 -name lib -prune -exec rm -rf {} \;
-	find ./packages -maxdepth 2 -name dist -prune -exec rm -rf {} \;
 
 clean:
 	rm -rf dist
@@ -17,6 +15,8 @@ move-into-place:
 	node ./scripts/move.js
 
 build: clean
+	find ./packages -maxdepth 2 -name lib -prune -exec rm -rf {} \;
+	find ./packages -maxdepth 2 -name dist -prune -exec rm -rf {} \;
 	./node_modules/.bin/tsc || :
 	make move-into-place
 	make clean
