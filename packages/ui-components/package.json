@@ -1,12 +1,15 @@
 {
   "name": "contiamo-ui-components",
-  "version": "0.0.1-44",
+  "version": "0.0.1-45",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.contiamo.com/"
+  },
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
     "package": "rm -rf lib && tsc -d --outDir './lib'",
@@ -26,8 +29,8 @@
   },
   "dependencies": {
     "attr-accept": "^1.1.0",
-    "contiamo-ui-theme": "^0.0.1-44",
-    "contiamo-ui-utils": "^0.0.1-44",
+    "contiamo-ui-theme": "^0.0.1-45",
+    "contiamo-ui-utils": "^0.0.1-45",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "moment": "^2.19.0",

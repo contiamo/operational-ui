@@ -1,12 +1,15 @@
 {
   "name": "contiamo-ui-theme",
-  "version": "0.0.1-44",
+  "version": "0.0.1-45",
   "description": "Customization theme for contiamo ui packages.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.contiamo.com/"
+  },
   "scripts": {
     "package": "rm -rf lib && tsc -d --outDir './lib'",
     "package:watch": "tsc -d -w",
