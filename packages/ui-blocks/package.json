@@ -1,12 +1,15 @@
 {
   "name": "contiamo-ui-blocks",
-  "version": "0.0.1-44",
+  "version": "0.0.1-45",
   "description": "Opinionated composed ui components",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.contiamo.com/"
+  },
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
     "package": "rm -rf lib && tsc -d",
@@ -25,9 +28,9 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "contiamo-ui-components": "^0.0.1-44",
-    "contiamo-ui-theme": "^0.0.1-44",
-    "contiamo-ui-utils": "^0.0.1-44",
+    "contiamo-ui-components": "^0.0.1-45",
+    "contiamo-ui-theme": "^0.0.1-45",
+    "contiamo-ui-utils": "^0.0.1-45",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "moment": "^2.19.0",
