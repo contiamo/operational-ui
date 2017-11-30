@@ -1,19 +1,19 @@
 import { drop, dropRight, forEach, indexOf, map, uniq } from "lodash/fp"
 
-type TPath = string[]
+export type TPath = string[]
 
-type TNodesList = string[]
+export type TNodesList = string[]
 
-interface IJourney {
+export interface IJourney {
   path: TPath
   size: number
 }
 
-interface INode {
+export interface INode {
   linkedToFrom: string[]
 }
 
-interface INodes {
+export interface INodes {
   [id: string]: INode
 }
 

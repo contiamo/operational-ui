@@ -2,7 +2,7 @@ import { IReadOnlyState, State, TPath } from "./state"
 import { IAccessors, IChartStateObject, IObject, TStateWriter } from "./typings"
 import { forEach, isEmpty, reduce } from "lodash/fp"
 
-interface IChartState<T> {
+export interface IChartState<T> {
   current: State<T>
   previous: State<T>
 }

@@ -9,7 +9,7 @@ import { Theme } from "contiamo-ui-theme"
 
 const marked = typeof marked_ === "function" ? marked_ : (marked_ as any).default
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   markdownContent?: string

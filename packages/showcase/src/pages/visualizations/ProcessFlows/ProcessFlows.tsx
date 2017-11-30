@@ -3,7 +3,7 @@ import { Card, CardHeader } from "contiamo-ui-components"
 import Marathon from "../../../components/Marathon/Marathon"
 import * as cases from "./cases/index"
 
-interface IProps {
+export interface IProps {
   match: {
     params: {
       case?: string

@@ -3,7 +3,7 @@ import { render, mount } from "enzyme"
 
 import ThemelessButtonGroup from "../ButtonGroup"
 import Button from "../../Button/Button"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const ButtonGroup = wrapDefaultTheme(ThemelessButtonGroup)
 

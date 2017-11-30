@@ -1,6 +1,6 @@
-import glamorous from "glamorous"
+import glamorous, { GlamorousComponent } from "glamorous"
 
-export default glamorous.div({
+const PageContent: GlamorousComponent<{}, {}> = glamorous.div({
   display: "flex",
   alignItems: "flex-start",
   padding: 16,
@@ -10,3 +10,5 @@ export default glamorous.div({
     height: "100%"
   }
 })
+
+export default PageContent

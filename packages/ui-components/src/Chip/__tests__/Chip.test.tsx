@@ -2,7 +2,7 @@ import * as React from "react"
 import { render, mount } from "enzyme"
 
 import ThemelessChip from "../Chip"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const Chip = wrapDefaultTheme(ThemelessChip)
 

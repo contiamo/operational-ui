@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import ThemelessContextMenu from "../ContextMenu"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const ContextMenu = wrapDefaultTheme(ThemelessContextMenu)
 

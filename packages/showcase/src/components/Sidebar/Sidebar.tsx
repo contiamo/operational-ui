@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Sidebar, SidebarItem, SidebarLink } from "contiamo-ui-components"
 
-interface IProps {
+export interface IProps {
   location?: {
     pathname: string
   }

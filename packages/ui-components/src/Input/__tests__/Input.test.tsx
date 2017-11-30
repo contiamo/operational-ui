@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import ThemelessInput from "../Input"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const Input = wrapDefaultTheme(ThemelessInput)
 

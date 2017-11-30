@@ -42,7 +42,7 @@ const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-interface IProps {
+export interface IProps {
   tests: { description: string; errors: string[] }[]
   completed: number
   theme: Theme

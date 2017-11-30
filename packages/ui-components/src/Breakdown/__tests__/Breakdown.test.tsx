@@ -2,7 +2,7 @@ import * as React from "react"
 import { render, mount } from "enzyme"
 
 import ThemelessBreakdown from "../Breakdown"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const Breakdown = wrapDefaultTheme(ThemelessBreakdown)
 

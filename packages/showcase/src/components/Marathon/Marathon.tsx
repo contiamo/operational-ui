@@ -6,13 +6,13 @@ import { Theme } from "contiamo-ui-theme"
 
 type TestFn = (done?: ((a: any) => void)) => void
 
-interface IState {
+export interface IState {
   id: number // the id of the test, incrementing every time a new test prop is passed
   tests: ITest[]
   completed: number
 }
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   timeout?: number
@@ -35,7 +35,7 @@ interface ITestWithRunner {
   fn: TestFn
 }
 
-interface ITest {
+export interface ITest {
   description: string
   errors: string[]
 }

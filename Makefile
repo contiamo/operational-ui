@@ -1,3 +1,18 @@
+# Very, very WIP
+link:
+	ln -s ~/Sites/contiamo-ui-components/packages/ui-theme ~/Sites/contiamo-ui-components/node_modules/contiamo-ui-theme
+	ln -s ~/Sites/contiamo-ui-components/packages/ui-utils ~/Sites/contiamo-ui-components/node_modules/contiamo-ui-utils
+	ln -s ~/Sites/contiamo-ui-components/packages/ui-blocks ~/Sites/contiamo-ui-components/node_modules/contiamo-ui-blocks
+	ln -s ~/Sites/contiamo-ui-components/packages/ui-components ~/Sites/contiamo-ui-components/node_modules/contiamo-ui-components
+	ln -s ~/Sites/contiamo-ui-components/packages/visualizations ~/Sites/contiamo-ui-components/node_modules/contiamo-visualizations
+
+unlink:
+	unlink node_modules/contiamo-ui-theme
+	unlink node_modules/contiamo-ui-utils
+	unlink node_modules/contiamo-ui-blocks
+	unlink node_modules/contiamo-ui-components
+	unlink node_modules/contiamo-visualizations
+
 install: reset
 	make clean
 	npm install --registry=https://npm.contiamo.com/

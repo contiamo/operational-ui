@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "jest",
-    "package": "rm -rf lib && tsc -d --outDir './lib'",
+    "package": "rm -rf lib && ../../node_modules/.bin/tsc -d --outDir './lib'",
     "package:watch": "rm -rf lib && tsc -w",
     "prettier": "echo 'Prettier is not yet ready ready for the pre-commit hook. See prettier_ script for tentative implementation.'",
     "prettier_": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",

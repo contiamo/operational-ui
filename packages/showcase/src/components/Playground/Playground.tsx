@@ -6,13 +6,13 @@ import { wrapTheme } from "contiamo-ui-utils"
 import { Theme, contiamoTheme } from "contiamo-ui-theme"
 import transformSnippet from "./transform-snippet"
 
-interface IProps {
+export interface IProps {
   snippet: string
   components?: { [id: string]: any }
   scope?: { [id: string]: any }
 }
 
-interface IState {
+export interface IState {
   isExpanded: boolean
 }
 

@@ -11,7 +11,7 @@
     "registry": "https://npm.contiamo.com/"
   },
   "scripts": {
-    "package": "rm -rf lib && tsc -d --outDir './lib'",
+    "package": "rm -rf lib && ../../node_mobules/.bin/tsc -d --outDir './lib'",
     "package:watch": "rm -rf lib && tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch",

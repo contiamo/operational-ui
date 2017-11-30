@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import ThemelessSideNavigationItem from "../SideNavigationItem"
-import wrapDefaultTheme from "../../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../../utils/wrap-default-theme"
 
 const SideNavigationItem = wrapDefaultTheme(ThemelessSideNavigationItem)
 

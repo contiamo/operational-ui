@@ -5,7 +5,7 @@ import { Card } from "contiamo-ui-components"
 import { Theme } from "contiamo-ui-theme"
 import { darken } from "contiamo-ui-utils"
 
-interface IProps {
+export interface IProps {
   className?: string
   children: React.ReactNode
 }

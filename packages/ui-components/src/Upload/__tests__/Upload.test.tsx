@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import ThemelessUpload from "../Upload"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const Upload = wrapDefaultTheme(ThemelessUpload)
 
