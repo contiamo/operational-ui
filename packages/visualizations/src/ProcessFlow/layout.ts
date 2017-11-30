@@ -49,7 +49,7 @@ class Layout {
       const sourcePositions: number[] = map((link: TLink): number => link.source().x)(node.targetLinks)
       // A node should be placed directly under a source node if possible:
       // Calculate possible node x positions that satisfy the following conditions
-      let possiblePositions = flow(
+      const possiblePositions = flow(
         // 1) there can only be one source node directly above
         filter(singleSourceAbove(sourcePositions)),
         // 2) there cannot be another (non-source) node in between the node and the source node above
@@ -74,14 +74,14 @@ class Layout {
     const rows: number[] = flow(map(get("y")), sortBy(identity), uniq)(this.nodes)
 
     forEach((row: number): void => {
-      var nodesInRow: TNode[] = filter({ y: row })(this.nodes)
+      const nodesInRow: TNode[] = filter({ y: row })(this.nodes)
       if (row === 0) {
         // For the top row, spread nodes out equally
         forEach.convert({ cap: false })((node: TNode, i: number): void => {
           node.x = i + 1
         })(nodesInRow)
       } else {
-        let nodePositions: number[] = []
+        const nodePositions: number[] = []
         // Place nodes with only one incoming link directly below their source node, if possible.
         placeSingleSourceNodes(nodesInRow, nodePositions)
         // If there are more than 1 incoming links, calculate optimal x position for node,
@@ -105,7 +105,7 @@ function placeNode(used: number[], x: number, node: TNode): void {
 function placeSingleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
   const singleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length === 1)(nodesInRow)
   forEach((node: TNode): void => {
-    let sourceNodePosition: number = node.targetLinks[0].source().x
+    const sourceNodePosition: number = node.targetLinks[0].source().x
     placeNode(nodePositions, sourceNodePosition, node)
   })(singleSourceNodes)
 }

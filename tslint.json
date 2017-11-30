@@ -1,5 +1,6 @@
 {
   "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+  "exclude": ["**/node_modules/**"],
   "rules": {
     "one-variable-per-declaration": false,
     "semicolon": false,

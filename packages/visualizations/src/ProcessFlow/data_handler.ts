@@ -165,7 +165,7 @@ class DataHandler {
   }
 
   positionNodes(): void {
-    let nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
+    const nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
     const rows: string[] = Object.keys(nodesByRow),
       xGridSpacing: number = this.xGridSpacing(),
       yGridSpacing: number = this.yGridSpacing(rows.length)

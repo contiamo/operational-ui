@@ -29,7 +29,7 @@ class Focus extends AbstractFocus {
 
     // Render the focus label hidden initially to allow placement calculations
     FocusUtils.drawHidden(this.el, "element").style("pointer-events", "none")
-    let content: TSeriesEl = this.el.append("xhtml:ul")
+    const content: TSeriesEl = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")
@@ -145,7 +145,7 @@ function computeBreakdowns(node: TNode): IBreakdowns {
     const size: number = link.size()
     return {
       label: link.source().label(),
-      size: size,
+      size,
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.targetLinks)
@@ -153,7 +153,7 @@ function computeBreakdowns(node: TNode): IBreakdowns {
     const size: number = link.size()
     return {
       label: link.target().label(),
-      size: size,
+      size,
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.sourceLinks)

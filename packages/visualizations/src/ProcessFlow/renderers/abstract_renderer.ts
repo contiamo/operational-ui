@@ -44,7 +44,7 @@ abstract class AbstractRenderer {
 
   mouseOver(element: TElementSelection, d: TLink | TNode): void {
     this.highlight(element, d)
-    let focusPoint: IFocus = this.focusPoint(element, d)
+    const focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
     element.classed("hover", true).on("mouseleave", withD3Element(this.onMouseOut.bind(this)))
   }

@@ -64,7 +64,7 @@ class Nodes extends AbstractRenderer {
   data: TNode[]
 
   updateDraw(): void {
-    let nodeGroups: TNodeSelection = this.el
+    const nodeGroups: TNodeSelection = this.el
       .select("g.nodes-group")
       .selectAll("g.node-group")
       .data(this.data, (node: TNode): string => node.id())
@@ -211,7 +211,7 @@ class Nodes extends AbstractRenderer {
   }
 
   updateNodeLabels(): void {
-    let labels: TNodeSelection = this.el
+    const labels: TNodeSelection = this.el
       .select("g.nodes-group")
       .selectAll(`text.${styles.label}`)
       .data(this.data, (node: TNode): string => node.id())
@@ -230,7 +230,7 @@ class Nodes extends AbstractRenderer {
     if (d == null) return
     const offset: number = this.getNodeBoundingRect(element.node()).width / 2
     return {
-      offset: offset,
+      offset,
       type: "node",
       x: d.x,
       y: d.y,

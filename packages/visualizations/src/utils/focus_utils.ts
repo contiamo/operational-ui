@@ -7,12 +7,12 @@ function optimalPosition(possibilities: number[], min: number, max: number, dime
   function withinRange(value: number): boolean {
     return value >= min && value + dimension <= max
   }
-  let optimal: number = find(withinRange)(possibilities)
+  const optimal: number = find(withinRange)(possibilities)
   return optimal || last(possibilities)
 }
 
 // Focus Label Formatting
-let FocusUtils: any = {
+const FocusUtils: any = {
   // Public Functions
 
   // Initial, hidden rendering of the focus label.
@@ -53,14 +53,14 @@ let FocusUtils: any = {
       position = "toRight"
     }
 
-    let x: any = {
+    const x: any = {
       farLeft: drawing.xMin + offset,
       farRight: drawing.xMax - offset - label.width,
       left: drawing.xMin + focus.x - offset - label.width,
       right: drawing.xMin + focus.x + offset
     }
 
-    let y: any = {
+    const y: any = {
       above: drawing.yMin + focus.y - offset - label.height,
       below: drawing.yMin + focus.y + offset,
       bottom: drawing.yMin + drawing.yMax - offset - label.height,
@@ -90,7 +90,7 @@ let FocusUtils: any = {
         throw new Error("Invalid label position '" + position + "'.")
     }
     // Finally. Done.
-    this.default.drawVisible(el, { left: left, top: top })
+    this.default.drawVisible(el, { left, top })
   },
 
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
