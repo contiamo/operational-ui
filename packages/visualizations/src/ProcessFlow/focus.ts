@@ -1,7 +1,7 @@
 import AbstractFocus from "../utils/focus"
 import FocusUtils from "../utils/focus_utils"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
-import { IBreakdown, IConfig, IFocus, IObject, TD3Selection,TLink, TNode, TSeriesEl } from "./typings"
+import { IBreakdown, IConfig, IFocus, IObject, TD3Selection, TLink, TNode, TSeriesEl } from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {
@@ -96,17 +96,11 @@ class Focus extends AbstractFocus {
     )(container)
 
     // Add inputs breakdown
-<<<<<<< HEAD
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Inputs", ` (${numberFormatter(inputsTotal)})`),
       addBreakdownBars(breakdowns.inputs, numberFormatter)
     )(container)
-=======
-    flow(addBreakdownContainer, addBreakdownTitle("Inputs", ` (${inputsTotal})`), addBreakdownBars(breakdowns.inputs))(
-      container
-    )
->>>>>>> Lift up dev dependencies
 
     // Add outputs breakdown
     flow(

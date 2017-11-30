@@ -45,10 +45,15 @@ export class StateHandler<IConfig> {
   config(config?: Partial<IConfig>): IConfig {
     if (!arguments.length) return this.state.current.get("config")
 
-    const invalidOptions: string[] = reduce.convert({ cap: false })((memo: string[], value: any, key: string): string[] => {
-      if (!value) { memo.push(key) }
-      return memo
-    }, [])(config)
+    const invalidOptions: string[] = reduce.convert({ cap: false })(
+      (memo: string[], value: any, key: string): string[] => {
+        if (!value) {
+          memo.push(key)
+        }
+        return memo
+      },
+      []
+    )(config)
 
     forEach((option: string): void => {
       console.warn("Warning: invalid config option `" + option + "`: reverting to default.")

@@ -29,6 +29,15 @@ var StateHandler = /** @class */ (function () {
     StateHandler.prototype.config = function (config) {
         if (!arguments.length)
             return this.state.current.get("config");
+        var invalidOptions = fp_1.reduce.convert({ cap: false })(function (memo, value, key) {
+            if (!value) {
+                memo.push(key);
+            }
+            return memo;
+        }, [])(config);
+        fp_1.forEach(function (option) {
+            console.warn("Warning: invalid config option `" + option + "`: reverting to default.");
+        })(invalidOptions);
         return this.state.current.merge("config", config);
     };
     // Accessors
