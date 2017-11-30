@@ -3,5 +3,8 @@ language: node_js
 node_js:
 - stable
 
+notifications:
+  email: false
+
 # When Travis gets notified of a new build, do this
 script: yarn precommit
