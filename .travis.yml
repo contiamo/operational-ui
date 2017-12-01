@@ -7,4 +7,4 @@ notifications:
   email: false
 
 # When Travis gets notified of a new build, do this
-script: yarn precommit
+script: yarn verify

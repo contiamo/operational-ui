@@ -16,7 +16,8 @@
     "test:watch": "jest -w",
     "lint": "tslint './**/*.{ts,tsx}' --fix",
     "prettier": "prettier './**/*.{ts,tsx}' --write",
-    "precommit": "npm run prettier && git add ."
+    "precommit": "npm run prettier",
+    "verify": "prettier './**/*.{ts,tsx}' -l && echo 'Add tslint script once visualizations package is linted'"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.43",
