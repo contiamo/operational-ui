@@ -8,16 +8,12 @@
   "license": "MIT",
   "scripts": {
     "build": "make build",
-    "bootstrap": "lerna bootstrap",
-    "postinstall": "make postinstall",
-    "ci": "npm run test && npm run lint && npm run build",
-    "start": "cd packages/showcase && npm run start",
+    "setup": "npm install --registry=https://npm.contiamo.com/ && lerna bootstrap",
     "test": "jest",
     "test:watch": "jest -w",
-    "lint": "tslint './**/*.{ts,tsx}' --fix",
-    "prettier": "prettier './**/*.{ts,tsx}' --write",
+    "lint": "",
     "precommit": "npm run prettier",
-    "verify": "prettier './**/*.{ts,tsx}' -l && echo 'Add tslint script once visualizations package is linted'"
+    "ci": "lerna run test && lerna run prettier:verify && lerna run lint"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.43",
