@@ -8,6 +8,9 @@ export interface IContainerProps {
   disabled: boolean
   updating: boolean
   style?: {}
+  role?: string
+  tabIndex?: number
+  onClick?: () => void
 }
 
 const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
