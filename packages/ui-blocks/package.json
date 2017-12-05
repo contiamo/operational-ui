@@ -16,11 +16,14 @@
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "tslint './index.ts' --fix && tslint './src/**/*.{ts,tsx}' --fix && tslint './utils/**/*.{ts,tsx}' --fix",
-    "prettier": "prettier './index.ts' --write && prettier './src/**/*.{ts,tsx}' --write",
+    "lint": "tslint './**/*.{ts,tsx}' --fix",
+    "prettier": "prettier './**/*.{ts,tsx}' --write",
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "preversion": "npm run precommit",
-    "version": "npm run package && git add lib"
+    "version": "npm run package && git add lib",
+    "prettier:verify": "prettier './**/*.{ts,tsx}' -l",
+    "lint:verify": "tslint './**/*.{ts,tsx}'",
+    "test:u": "jest -u"
   },
   "peerDependencies": {
     "glamor": "^2.20.40",
@@ -45,18 +48,19 @@
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "jsx"
     ],
     "transform": {
-      "\\.(ts|tsx)$": "../../node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
-    "setupTestFrameworkScriptFile": "../../node_modules/jest-enzyme/lib/index.js",
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
+    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-enzyme/lib/index.js",
     "moduleNameMapper": {
       "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
     },
     "snapshotSerializers": [
-      "../../node_modules/jest-serializer-enzyme"
+      "<rootDir>/node_modules/jest-serializer-enzyme"
     ],
     "unmockedModulePathPatterns": [
       "react",
@@ -64,5 +68,41 @@
       "jest-enzyme"
     ],
     "mapCoverage": true
+  },
+  "devDependencies": {
+    "@types/enzyme": "3.1.5",
+    "@types/jest": "20.0.8",
+    "@types/node": "8.0.27",
+    "enzyme": "2.9.1",
+    "enzyme-to-json": "1.5.1",
+    "prettier": "1.8.2",
+    "tslint": "5.7.0",
+    "tslint-config-airbnb": "5.2.1",
+    "tslint-config-prettier": "1.5.0",
+    "typescript": "2.6.2",
+    "jest": "21.2.1",
+    "jest-enzyme": "3.8.1",
+    "jest-glamor-react": "3.1.0",
+    "jest-serializer-enzyme": "1.0.0",
+    "react-test-renderer": "16.0.0",
+    "ts-jest": "21.0.0",
+    "@types/core-js": "0.9.43",
+    "@types/d3-ease": "1.0.7",
+    "@types/d3-scale": "1.0.10",
+    "@types/d3-selection": "1.1.0",
+    "@types/d3-shape": "1.2.1",
+    "@types/d3-transition": "1.1.0",
+    "@types/jquery": "3.2.12",
+    "@types/lodash": "4.14.74",
+    "@types/marked": "0.3.0",
+    "@types/react": "16.0.25",
+    "@types/react-color": "2.13.0",
+    "@types/react-dom": "16.0.0",
+    "@types/react-hot-loader": "3.0.4",
+    "@types/react-icons": "2.2.2",
+    "@types/react-router-dom": "4.2.0",
+    "@types/react-syntax-highlighter": "0.0.3",
+    "@types/tinycolor2": "1.4.0",
+    "@types/webpack-env": "1.13.1"
   }
 }
