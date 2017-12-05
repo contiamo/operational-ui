@@ -16,13 +16,13 @@
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "tslint './**/*.{ts,tsx}' --fix",
-    "prettier": "prettier './**/*.{ts,tsx}' --write",
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "preversion": "npm run precommit",
     "version": "npm run package && git add lib",
-    "prettier:verify": "prettier './**/*.{ts,tsx}' -l",
-    "lint:verify": "tslint './**/*.{ts,tsx}'",
+    "prettier:verify": "prettier './src/**/*.{ts,tsx}' -l",
+    "lint:verify": "tslint './src/**/*.{ts,tsx}'",
     "test:u": "jest -u"
   },
   "peerDependencies": {

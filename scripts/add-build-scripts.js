@@ -2,10 +2,10 @@ const fs = require("fs")
 const path = require("path")
 
 const scripts = {
-  prettier: "prettier './**/*.{ts,tsx}' --write",
-  "prettier:verify": "prettier './**/*.{ts,tsx}' -l",
-  lint: "tslint './**/*.{ts,tsx}' --fix",
-  "lint:verify": "tslint './**/*.{ts,tsx}'",
+  prettier: "prettier './src/**/*.{ts,tsx}' --write",
+  "prettier:verify": "prettier './src/**/*.{ts,tsx}' -l",
+  lint: "tslint './src/**/*.{ts,tsx}' --fix",
+  "lint:verify": "tslint './src/**/*.{ts,tsx}'",
   test: "jest",
   "test:u": "jest -u",
   package: "rm -rf lib && tsc -d"

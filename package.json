@@ -8,15 +8,16 @@
   "license": "MIT",
   "scripts": {
     "build": "cd packages/showcase && npm run build",
-    "setup": "npm install --registry=https://npm.contiamo.com/ && lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
+    "postinstall": "npm run bootstrap",
     "clean": "rm -rf node_modules && rm -rf packages/*/node_modules",
     "test": "lerna run jest",
     "lint": "lerna run lint",
-    "lint:verify": "lerna run lint:verify",
     "prettier": "lerna run prettier",
-    "prettier:verify": "lerna run prettier:verify",
     "precommit": "npm run prettier",
-    "ci": "npm run test && npm run prettier:verify && lerna run lint"
+    "package": "lerna run package",
+    "check:unchanged": "git diff --exit-code > /dev/null || echo 'Changed files..' && exit 1",
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
     "husky": "^0.14.3",
