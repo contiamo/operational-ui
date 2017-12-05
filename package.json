@@ -17,7 +17,7 @@
     "precommit": "npm run prettier",
     "package": "lerna run package",
     "check:unchanged": "git diff --exit-code > /dev/null || echo 'Changed files..' && exit 1",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package && npm run check:unchanged"
   },
   "devDependencies": {
     "husky": "^0.14.3",
