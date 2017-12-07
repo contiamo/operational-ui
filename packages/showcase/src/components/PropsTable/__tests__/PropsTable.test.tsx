@@ -1,8 +1,8 @@
 import * as React from "react"
 import { render } from "enzyme"
+import { wrapTheme } from "@operational/utils"
+import { contiamoTheme } from "@operational/theme"
 
-import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-theme"
 import ThemelessPropsTable from "../PropsTable"
 
 const PropsTable = wrapTheme(contiamoTheme)(ThemelessPropsTable)

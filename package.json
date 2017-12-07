@@ -1,6 +1,6 @@
 {
-  "name": "contiamo-ui",
-  "version": "1.0.0",
+  "name": "operational",
+  "version": "0.1.0",
   "description": "An all-encompassing framework of UI components, composed components, and a showcase of components that compose together to create Contiamo products.",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "private": true,

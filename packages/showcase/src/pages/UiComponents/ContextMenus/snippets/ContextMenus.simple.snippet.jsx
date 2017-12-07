@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ContextMenu, ContextMenuItem, Icon } from "contiamo-ui-components"
+import { ContextMenu, ContextMenuItem, Icon } from "@operational/components"
 
 export default (() => {
   return (

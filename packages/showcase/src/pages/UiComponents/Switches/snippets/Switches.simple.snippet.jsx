@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Switch } from "contiamo-ui-components"
+import { Switch } from "@operational/components"
 
 export default (function() {
   class ComponentWithSwitch extends React.Component {

@@ -1,8 +1,8 @@
 import * as React from "react"
+import { Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../../components/Playground/Playground"
 import Table from "../../../components/PropsTable/PropsTable"
-import { Card, CardHeader, Heading2Type } from "contiamo-ui-components"
 import * as simpleSnippet from "./snippets/Cards.simple.snippet"
 import * as headerSnippet from "./snippets/Cards.header.snippet"
 import propDescription from "./propDescription"

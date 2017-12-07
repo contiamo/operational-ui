@@ -1,9 +1,8 @@
 import * as React from "react"
+import { Tabs, Tab, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Tabs, Tab, Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-
 import * as simpleSnippet from "./snippets/Tabs.simple.snippet"
 import propDescription from "./propDescription"
 

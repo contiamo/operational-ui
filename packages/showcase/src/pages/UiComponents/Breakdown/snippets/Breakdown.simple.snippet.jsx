@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Breakdown } from "contiamo-ui-components"
+import { Breakdown } from "@operational/components"
 
 export default (
   <div>

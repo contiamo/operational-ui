@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
+import { ProcessFlow, VisualizationWrapper } from "@operational/visualizations"
 
 export default (function() {
   class Flow extends React.Component {

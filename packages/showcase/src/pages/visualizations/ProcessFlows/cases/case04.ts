@@ -1,4 +1,4 @@
-import { ProcessFlow, ProcessFlowLoopHandler } from "contiamo-visualizations"
+import { ProcessFlow, ProcessFlowLoopHandler } from "@operational/visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
 import { IMarathon } from "../../../../components/Marathon/Marathon"
 

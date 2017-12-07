@@ -1,9 +1,8 @@
 import * as React from "react"
+import { ContextMenu, ContextMenuItem, Card, CardHeader, Icon, Heading2Type } from "@operational/components"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { ContextMenu, ContextMenuItem, Card, CardHeader, Icon, Heading2Type } from "contiamo-ui-components"
-
 import * as simpleSnippet from "./snippets/ContextMenus.simple.snippet"
 import propDescription from "./propDescription"
 

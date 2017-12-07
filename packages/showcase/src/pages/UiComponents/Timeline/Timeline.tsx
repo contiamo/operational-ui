@@ -1,9 +1,8 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
+import { Card, CardHeader, Timeline, TimelineItem, Heading2Type } from "@operational/components"
 
 import Playground from "../../../components/Playground/Playground"
-import { Card, CardHeader, Timeline, TimelineItem, Heading2Type } from "contiamo-ui-components"
-
 import Table from "../../../components/PropsTable/PropsTable"
 import * as TimelineSnippet from "./snippets/Timeline.snippet"
 import propDescription from "./propDescription"

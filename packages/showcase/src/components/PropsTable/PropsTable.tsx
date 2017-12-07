@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Theme } from "contiamo-ui-theme"
+import { Theme } from "@operational/theme"
 
 export interface IProps {
   css?: any

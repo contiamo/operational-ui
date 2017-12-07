@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Tabs, Tab } from "contiamo-ui-components"
+import { Tabs, Tab } from "@operational/components"
 
 export default (() => {
   class ComponentWithTab extends React.Component {

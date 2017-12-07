@@ -1,9 +1,8 @@
 import * as React from "react"
+import { Button, ButtonGroup, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Button, ButtonGroup, Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-
 import * as simpleSnippet from "./snippets/Buttons.simple.snippet"
 import * as groupSnippet from "./snippets/Buttons.group.snippet"
 import * as condensedSnippet from "./snippets/Buttons.condensed.snippet"

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Icon } from "contiamo-ui-components"
+import { Icon } from "@operational/components"
 
 export default (
   <div>

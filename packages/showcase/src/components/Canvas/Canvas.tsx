@@ -1,9 +1,9 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Card } from "contiamo-ui-components"
-import { Theme } from "contiamo-ui-theme"
-import { darken } from "contiamo-ui-utils"
+import { Card } from "@operational/components"
+import { Theme } from "@operational/theme"
+import { darken } from "@operational/utils"
 
 export interface IProps {
   className?: string

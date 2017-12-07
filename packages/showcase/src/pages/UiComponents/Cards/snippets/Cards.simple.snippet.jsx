@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Card } from "contiamo-ui-components"
+import { Card } from "@operational/components"
 
 export default (
   <Card padding={32} width={260}>

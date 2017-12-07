@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Route } from "react-router-dom"
 
-import { Header } from "contiamo-ui-components"
+import { Header } from "@operational/components"
 
 const AppHeader: React.SFC<{}> = () => (
   <Header

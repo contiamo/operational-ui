@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Input } from "contiamo-ui-components"
+import { Input } from "@operational/components"
 
 export default (function() {
   class StatefulInput extends React.Component {

@@ -2,10 +2,8 @@ import * as React from "react"
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
 import glamorous, { ThemeProvider } from "glamorous"
 import { css } from "glamor"
-import { contiamoTheme } from "contiamo-ui-theme"
-import { baseStylesheet, injectStylesheet } from "contiamo-ui-utils"
-
-import { appFontFace, appFontWeights, getFontSrcString } from "./utils/fonts"
+import { contiamoTheme } from "@operational/theme"
+import { baseStylesheet, injectStylesheet } from "@operational/utils"
 
 import Documentation from "./pages/Documentation/Documentation"
 import Header from "./components/Header/Header"
@@ -60,16 +58,6 @@ const App: React.SFC<{}> = () => (
     </ThemeProvider>
   </Router>
 )
-
-// @todo -> type this better
-const x = css as any
-appFontWeights.forEach((fontWeight: number) => {
-  x.fontFace({
-    ...appFontFace,
-    ...getFontSrcString(fontWeight)()(),
-    fontWeight
-  })
-})
 
 injectStylesheet(baseStylesheet(contiamoTheme))
 

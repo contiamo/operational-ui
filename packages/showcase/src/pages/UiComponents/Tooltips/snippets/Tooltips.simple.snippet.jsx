@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Tooltip } from "contiamo-ui-components"
+import { Tooltip } from "@operational/components"
 
 export default (
   <div

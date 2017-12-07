@@ -1,9 +1,8 @@
 import * as React from "react"
+import { ColorPicker, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../../components/Playground/Playground"
 import Table from "../../../components/PropsTable/PropsTable"
-import { ColorPicker, Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-
 import * as simpleSnippet from "./snippets/ColorPickers.simple.snippet"
 import propDescription from "./propDescription"
 

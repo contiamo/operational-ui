@@ -1,4 +1,4 @@
-import { ProcessFlow } from "contiamo-visualizations"
+import { ProcessFlow } from "@operational/visualizations"
 import { IMarathon } from "../../../../components/Marathon/Marathon"
 
 const data: any = {

@@ -1,11 +1,9 @@
 import * as React from "react"
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { Input, Select, Fieldset, DatePicker, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../../components/Playground/Playground"
-import SyntaxHighlighter from "react-syntax-highlighter"
-
 import Table from "../../../components/PropsTable/PropsTable"
-import { Input, Select, Fieldset, DatePicker, Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-
 import * as inputSnippet from "./snippets/FormFields.input.snippet"
 import * as selectSnippet from "./snippets/FormFields.select.snippet"
 import propDescription from "./propDescription"

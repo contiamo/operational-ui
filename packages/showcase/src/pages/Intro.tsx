@@ -1,9 +1,8 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Link } from "react-router-dom"
-
-import { Card, Icon, Heading2Type } from "contiamo-ui-components"
-import { Theme } from "contiamo-ui-theme"
+import { Card, Icon, Heading2Type } from "@operational/components"
+import { Theme } from "@operational/theme"
 
 const Grid = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "grid",

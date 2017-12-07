@@ -3,8 +3,8 @@ import glamorous, { Div, Img, withTheme } from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, BarChart2, Grid } from "react-feather"
 
-import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
-import { Theme } from "contiamo-ui-theme"
+import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "@operational/components"
+import { Theme } from "@operational/theme"
 
 export interface IProps {
   location?: {

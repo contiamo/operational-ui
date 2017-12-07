@@ -1,6 +1,5 @@
 import * as React from "react"
-
-import { Select } from "contiamo-ui-components"
+import { Select } from "@operational/components"
 
 export default (() => {
   const options = [

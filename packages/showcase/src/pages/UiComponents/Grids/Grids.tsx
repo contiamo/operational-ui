@@ -1,9 +1,8 @@
 import * as React from "react"
+import { Grid, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Grid, Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-
 import * as simpleSnippet from "./snippets/Grids.simple.snippet"
 import propDescription from "./propDescription"
 
