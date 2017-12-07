@@ -20,8 +20,6 @@
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
     "preversion": "npm run precommit",
     "version": "npm run package && git add .",
-    "prettier:verify": "prettier './src/**/*.{ts,tsx}' -l",
-    "lint:verify": "tslint './src/**/*.{ts,tsx}'",
     "test:u": "jest -u"
   },
   "dependencies": {
