@@ -14,7 +14,7 @@ interface IBreakdowns {
 // There can only be an element focus in process flow diagrams
 class Focus extends AbstractFocus {
 
-  onElementHover(payload: { focusPoint: IFocus; d: TNode | TLink, hideLabel: boolean  }): void {
+  onElementHover(payload: { focusPoint: IFocus, d: TNode | TLink, hideLabel: boolean }): void {
     // Remove the current focus label, if there is one
     this.remove()
     if (payload.hideLabel) { return }
