@@ -1,4 +1,4 @@
-declare module "*.snippet.tsx"
+declare module "*.snippet"
 declare module "*.docs.md"
 declare module "attr-accept"
 

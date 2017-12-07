@@ -20,7 +20,7 @@ export interface ISidebarLink {
 export default ({ links, location, css }: IProps) => (
   <Sidebar css={css}>
     {links.map((link, index) => {
-      const isOpen = location && link.links.map(link => link.url).includes(location.pathname)
+      const isOpen = location && link.links.map(link => link.url).indexOf(location.pathname) > -1
       return (
         <SidebarItem key={index} open={isOpen} label={link.label}>
           {link.links.map(({ url, label }, index) => {

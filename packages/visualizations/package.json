@@ -3,6 +3,7 @@
   "version": "0.0.1-45",
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "repository": "git@github.com:Contiamo/ui-components.git",
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
