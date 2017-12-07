@@ -3,4 +3,3 @@ export const withD3Element = (func: any) => {
     return func(datum, this, ...args)
   }
 }
-

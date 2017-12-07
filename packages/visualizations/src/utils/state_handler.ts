@@ -2,7 +2,7 @@ import { IReadOnlyState, State, TPath } from "./state"
 import { IAccessors, IChartStateObject, IObject, TStateWriter } from "./typings"
 import { forEach, isEmpty, reduce } from "lodash/fp"
 
-interface IChartState<T> {
+export interface IChartState<T> {
   current: State<T>
   previous: State<T>
 }
@@ -12,7 +12,7 @@ export interface IChartStateReadOnly<T> {
   previous: IReadOnlyState<T>
 }
 
-class StateHandler<IConfig> {
+export class StateHandler<IConfig> {
   state: IChartState<IChartStateObject>
 
   constructor(obj: IChartStateObject) {
@@ -27,7 +27,7 @@ class StateHandler<IConfig> {
   readOnly(): IChartStateReadOnly<IChartStateObject> {
     return {
       current: this.state.current.readOnly(),
-      previous: this.state.previous.readOnly(),
+      previous: this.state.previous.readOnly()
     }
   }
 
@@ -45,10 +45,15 @@ class StateHandler<IConfig> {
   config(config?: Partial<IConfig>): IConfig {
     if (!arguments.length) return this.state.current.get("config")
 
-    const invalidOptions: string[] = reduce.convert({ cap: false })((memo: string[], value: any, key: string): string[] => {
-      if (!value) { memo.push(key) }
-      return memo
-    }, [])(config)
+    const invalidOptions: string[] = reduce.convert({ cap: false })(
+      (memo: string[], value: any, key: string): string[] => {
+        if (!value) {
+          memo.push(key)
+        }
+        return memo
+      },
+      []
+    )(config)
 
     forEach((option: string): void => {
       console.warn("Warning: invalid config option `" + option + "`: reverting to default.")
@@ -74,5 +79,3 @@ class StateHandler<IConfig> {
     }
   }
 }
-
-export default StateHandler

@@ -7,23 +7,22 @@
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
+    "start": "cd packages/showcase && yarn start",
+    "build": "cd packages/showcase && npm run build",
     "bootstrap": "lerna bootstrap",
-    "postbootstrap": "node ./scripts/postbootstrap",
-    "postinstall": "node ./scripts/postinstall",
-    "start": "cd packages/showcase && npm run start",
-    "package": "lerna run package",
+    "postinstall": "npm run bootstrap",
+    "clean": "rm -rf node_modules && rm -rf packages/*/node_modules",
+    "test": "lerna run jest",
     "lint": "lerna run lint",
-    "test": "lerna run test",
     "prettier": "lerna run prettier",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
-    "preversion": "lerna run version && git add ."
+    "precommit": "npm run prettier",
+    "package": "lerna run package",
+    "check:unchanged": "./scripts/check-unchanged.sh",
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
-    "@types/react": "^16.0.25",
-    "chalk": "^2.1.0",
     "husky": "^0.14.3",
-    "lerna": "^2.1.2",
-    "webpack-dev-server": "^2.9.1"
+    "lerna": "^2.1.2"
   },
   "workspaces": [
     "packages/*"

@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "../Typography"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 describe("Timeline", () => {
   it("TitleType should render properly", () => {

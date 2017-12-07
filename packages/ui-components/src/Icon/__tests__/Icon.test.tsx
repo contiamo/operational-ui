@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 import ThemelessIcon from "../Icon"
 
 const Icon = wrapDefaultTheme(ThemelessIcon)

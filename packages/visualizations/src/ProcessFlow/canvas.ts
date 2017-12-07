@@ -14,7 +14,8 @@ class Canvas extends AbstractCanvas {
   }
 
   createEl(): TSeriesEl {
-    const el: TD3Selection = d3.select(document.createElementNS(d3.namespaces["svg"], "svg"))
+    const el: TD3Selection = d3
+      .select(document.createElementNS(d3.namespaces["svg"], "svg"))
       .attr("class", "processflow")
     this.stateWriter("elRect", el.node().getBoundingClientRect())
     return el
@@ -32,15 +33,13 @@ class Canvas extends AbstractCanvas {
 
   appendDrawingGroups(): void {
     forEach((group: string): void => {
-      this.el.append("svg:g")
-        .attr("class", group + "-group")
+      this.el.append("svg:g").attr("class", group + "-group")
     })(["links", "nodes"])
   }
 
   mouseOverElement(): TSeriesEl {
     return this.el
   }
-
 }
 
 export default Canvas

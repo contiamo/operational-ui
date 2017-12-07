@@ -3,13 +3,13 @@ import glamorous from "glamorous"
 
 import { Theme } from "contiamo-ui-theme"
 
-interface IProps {
+export interface IProps {
   css?: any
   className?: string
   props?: IPropsSet[]
 }
 
-interface IPropsSet {
+export interface IPropsSet {
   name: string | React.ReactElement<any>
   description?: string
   defaultValue: string | React.ReactElement<any>

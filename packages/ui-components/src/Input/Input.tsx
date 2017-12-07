@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "contiamo-ui-theme"
 
-import withLabel from "../../utils/with-label"
+import withLabel from "../utils/with-label"
 
 export interface IProps {
   css?: any

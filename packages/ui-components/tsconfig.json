@@ -10,6 +10,6 @@
     "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "es2017.object"],
     "moduleResolution": "node"
   },
-  "include": ["types/theme.d.ts", "types/**/*", "index.ts"],
+  "include": ["types/**/*", "src/index.ts"],
   "exclude": ["node_modules", "lib"]
 }

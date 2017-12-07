@@ -2,20 +2,19 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "contiamo-ui-utils"
 import { Theme } from "contiamo-ui-theme"
 
-const Container = glamorous.div(
-  ({
-    theme,
-    color,
-    disabled,
-    updating,
-    style
-  }: {
-    theme: Theme
-    color?: string
-    disabled: boolean
-    updating: boolean
-    style?: any
-  }): {} => {
+export interface IContainerProps {
+  id?: string
+  color?: string
+  disabled: boolean
+  updating: boolean
+  style?: {}
+  role?: string
+  tabIndex?: number
+  onClick?: () => void
+}
+
+const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
+  ({ theme, color, disabled, updating, style }: IContainerProps & { theme: Theme }): {} => {
     const backgroundColor = color && theme.colors.palette ? hexOrColor(color)(theme.colors.palette[color]) : "white"
 
     const updatingAfterStyles = updating
@@ -70,11 +69,17 @@ const Container = glamorous.div(
   }
 )
 
-const DisplayValue = glamorous.div(({ theme, isPlaceholder }: { theme: Theme; isPlaceholder: boolean }): any => ({
-  color: isPlaceholder ? theme.colors.palette.grey60 : theme.colors.palette.black
-}))
+export interface IDisplayValueProps {
+  isPlaceholder: boolean
+}
 
-const Options = glamorous.div(
+const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
+  ({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
+    color: isPlaceholder ? theme.colors.palette.grey60 : theme.colors.palette.black
+  })
+)
+
+const Options: GlamorousComponent<{}, {}> = glamorous.div(
   {
     position: "absolute",
     top: "calc(100% + 1px)",
@@ -85,13 +90,13 @@ const Options = glamorous.div(
     animation: `${fadeIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`
   },
-  ({ theme }: { theme: Theme }) => ({
+  ({ theme }: { theme: Theme }): {} => ({
     boxShadow: theme.shadows.popup,
     zIndex: theme.baseZIndex + 100
   })
 )
 
-const OptionsList = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const OptionsList: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   // whole number + 3/4 ratio here ensures options don't get cut off
   maxHeight: theme.spacing * 12.75,
   overflow: "auto"

@@ -6,7 +6,7 @@ import { Box, BarChart2, Grid } from "react-feather"
 import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
 import { Theme } from "contiamo-ui-theme"
 
-interface IProps {
+export interface IProps {
   location?: {
     pathname: string
   }

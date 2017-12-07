@@ -1,10 +1,10 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 import ThemelessHeader from "../Header"
 
-import theme from "../../theme"
+import { contiamoTheme as theme } from "contiamo-ui-theme"
 
 const Header = wrapDefaultTheme(ThemelessHeader)
 

@@ -12,20 +12,10 @@ import {
   Partial,
   TD3Selection,
   TSeriesEl,
-  TStateWriter,
+  TStateWriter
 } from "../utils/typings"
 
-export {
-  IAccessors,
-  IChartStateObject,
-  IEvents,
-  IObject,
-  IState,
-  Partial,
-  TD3Selection,
-  TSeriesEl,
-  TStateWriter,
-}
+export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
 
 export type TLink = Link
 export type TNode = Nodes

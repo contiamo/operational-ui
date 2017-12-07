@@ -28,4 +28,3 @@ export interface IChartStateObject {
 }
 
 export type IState = IChartStateReadOnly<IChartStateObject>
-

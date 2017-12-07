@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import { Tabs as ThemelessTabs, Tab } from "../Tabs"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const Tabs = wrapDefaultTheme(ThemelessTabs)
 

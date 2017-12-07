@@ -17,7 +17,7 @@ import {
   TNode,
   TNodeSelection,
   TScale,
-  TSeriesEl,
+  TSeriesEl
 } from "../typings"
 import Events from "../../utils/event_catalog"
 
@@ -44,13 +44,15 @@ abstract class AbstractRenderer {
 
   mouseOver(element: TElementSelection, d: TLink | TNode): void {
     this.highlight(element, d)
-    let focusPoint: IFocus = this.focusPoint(element, d)
+    const focusPoint: IFocus = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d })
     element.classed("hover", true).on("mouseleave", withD3Element(this.onMouseOut.bind(this)))
   }
 
   focusElement(elementInfo: IFocusElement): void {
-    if (elementInfo.type !== this.type) { return }
+    if (elementInfo.type !== this.type) {
+      return
+    }
     this.el
       .selectAll(this.focusElementAccessor)
       .filter((d: TLink | TNode): boolean => {
@@ -58,16 +60,16 @@ abstract class AbstractRenderer {
           return invoke(matcher)(d) === value
         })(elementInfo.matchers)
       })
-      .each(withD3Element((d: TLink | TNode, el: HTMLElement): void => {
-        this.mouseOver(d3.select(el), d)
-      }))
+      .each(
+        withD3Element((d: TLink | TNode, el: HTMLElement): void => {
+          this.mouseOver(d3.select(el), d)
+        })
+      )
   }
 
   highlight(element: TElementSelection, d: TLink | TNode): void {
     this.removeHighlights()
-    element
-      .classed("highlighted", true)
-      .attr("stroke", this.config.highlightColor)
+    element.classed("highlighted", true).attr("stroke", this.config.highlightColor)
   }
 
   // Remove any old highlights (needed if an element has been manually focussed)
