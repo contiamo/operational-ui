@@ -3,7 +3,7 @@
   "version": "0.1.0-1",
   "description": "A showcase of the various components available in the Contiamo UI framework",
   "main": "index.js",
-  "repository": "git@github.com:Contiamo/ui-components.git",
+  "repository": "git@github.com:Contiamo/operational.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "private": true,
@@ -13,6 +13,7 @@
     "version": "npm run build && git add -A dist",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "precommit": "npm run test && npm run lint && npm run prettier",
     "test": "jest",
     "test:u": "jest -u",
     "package": "rm -rf lib && tsc -d"

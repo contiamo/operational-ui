@@ -11,7 +11,7 @@ const AppHeader: React.SFC<{}> = () => (
     }}
     color="#fff"
   >
-    Contiamo UI
+    Operational UI
     <Route
       path="/components"
       render={() => (

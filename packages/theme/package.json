@@ -4,7 +4,7 @@
   "description": "Customization theme for the Operational UI packages.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/ui-components.git",
+  "repository": "git@github.com:Contiamo/operational.git",
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
   "publishConfig": {

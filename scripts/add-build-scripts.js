@@ -6,7 +6,8 @@ const scripts = {
   lint: "tslint './src/**/*.{ts,tsx}' --fix",
   test: "jest",
   "test:u": "jest -u",
-  package: "rm -rf lib && tsc -d"
+  package: "rm -rf lib && tsc -d",
+  precommit: "npm run test && npm run lint && npm run prettier && npm run package"
 }
 
 const jest = {
