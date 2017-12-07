@@ -14,7 +14,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "flex",
   alignItems: "flex-start",
   flexBasis: "100%",
-  marginLeft: theme.spacing * 4 / 3,
   height: "100%",
   maxHeight: "100%",
 

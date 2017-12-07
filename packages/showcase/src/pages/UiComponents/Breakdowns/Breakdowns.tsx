@@ -3,7 +3,7 @@ import { Breakdown, Card, CardHeader, Heading2Type } from "@operational/componen
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import * as simpleSnippet from "./snippets/Breakdown.simple.snippet"
+import * as simpleSnippet from "./snippets/Breakdowns.simple.snippet"
 import propDescription from "./propDescription"
 
 export default () => (

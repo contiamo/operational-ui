@@ -4,6 +4,9 @@ import { Link } from "react-router-dom"
 import { Card, Icon, Heading2Type } from "@operational/components"
 import { Theme } from "@operational/theme"
 
+import PageContent from "../components/PageContent/PageContent"
+import Demo from "../components/Demo/Demo"
+
 const Grid = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
@@ -20,72 +23,74 @@ const LinkBox = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   textAlign: "center",
   transition: ".3s transform ease",
   cursor: "pointer",
-  backgroundColor: "#efefef",
+  color: "#777",
+  backgroundColor: "#fafafa",
   "&:hover": {
-    backgroundColor: "#dedede"
+    backgroundColor: "#efefef"
   },
   "& h2": {
     ...theme.typography.title,
+    color: "#777",
     marginBottom: 0,
-    marginTop: 10,
-    color: "#777"
+    marginTop: 5
   }
 }))
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  height: "100%",
-  "& > div": {
-    height: `calc(100% - 2 * ${theme.spacing}px)`
-  },
-  "& > * > h1": {
+const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  padding: `${theme.spacing * 1}px 0`,
+  color: "#000",
+  borderBottom: `1px solid ${theme.colors.usage.contentSeparatorLine}`,
+  "& > h1": {
     ...theme.typography.title,
     textAlign: "center",
     margin: 0
   },
-  "& > * > h2": {
-    ...theme.typography.heading1,
+  "& > h2": {
+    ...theme.typography.body,
     textAlign: "center",
     marginTop: 0
-  },
-  display: "block",
-  padding: theme.spacing * 1.5,
-  maxWidth: 800
+  }
 }))
 
 const MyCard = ({ className }: { className?: string }) => (
-  <Container className={className}>
-    <Card>
-      <h1>Operational UI</h1>
-      <h2>Building blocks for effective operational interfaces</h2>
+  <PageContent>
+    <Card css={{ width: "66%" }}>
+      <TitleBar>
+        <h1>Operational UI</h1>
+        <h2>Building blocks for effective operational interfaces</h2>
+      </TitleBar>
 
       <Grid>
         <Link to="/components">
           <LinkBox>
-            <Icon name="Box" size={30} color="#777" />
+            <Icon name="Box" size={30} />
             <h2>Components</h2>
           </LinkBox>
         </Link>
         <Link to="/blocks">
           <LinkBox>
-            <Icon name="Grid" size={30} color="#777" />
+            <Icon name="Grid" size={30} />
             <h2>Blocks</h2>
           </LinkBox>
         </Link>
         <Link to="/visualizations">
           <LinkBox>
-            <Icon name="BarChart2" size={30} color="#777" />
+            <Icon name="BarChart2" size={30} />
             <h2>Visualizations</h2>
           </LinkBox>
         </Link>
         <Link to="/documentation">
           <LinkBox>
-            <Icon name="Edit" size={30} color="#777" />
+            <Icon name="Edit" size={30} />
             <h2>Documentation</h2>
           </LinkBox>
         </Link>
       </Grid>
     </Card>
-  </Container>
+    <Card css={{ width: "33%" }}>
+      <Demo />
+    </Card>
+  </PageContent>
 )
 
 export default MyCard
