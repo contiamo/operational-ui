@@ -18,7 +18,7 @@
     "precommit": "lerna run precommit",
     "package": "lerna run package",
     "check:unchanged": "./scripts/check-unchanged.sh",
-    "ci": "npm run lint && npm run prettier && npm run package && npm run check:unchanged"
+    "ci": "npm run lint && npm run prettier && npm run package && git diff && npm run check:unchanged"
   },
   "devDependencies": {
     "husky": "^0.14.3",
