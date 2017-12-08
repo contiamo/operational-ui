@@ -3,9 +3,7 @@ const path = require("path")
 
 const scripts = {
   prettier: "prettier './src/**/*.{ts,tsx}' --write",
-  "prettier:verify": "prettier './src/**/*.{ts,tsx}' -l",
   lint: "tslint './src/**/*.{ts,tsx}' --fix",
-  "lint:verify": "tslint './src/**/*.{ts,tsx}'",
   test: "jest",
   "test:u": "jest -u",
   package: "rm -rf lib && tsc -d"

@@ -12,13 +12,13 @@
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
     "clean": "rm -rf node_modules && rm -rf packages/*/node_modules",
-    "test": "lerna run jest",
+    "test": "lerna run test",
     "lint": "lerna run lint",
     "prettier": "lerna run prettier",
-    "precommit": "npm run prettier",
+    "precommit": "lerna run precommit",
     "package": "lerna run package",
     "check:unchanged": "./scripts/check-unchanged.sh",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "ci": "npm run lint && npm run prettier && npm run package && git diff && npm run check:unchanged"
   },
   "devDependencies": {
     "husky": "^0.14.3",

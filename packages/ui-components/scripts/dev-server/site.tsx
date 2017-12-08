@@ -1,6 +1,7 @@
 import * as React from "react"
 import { render } from "react-dom"
 import { ThemeProvider } from "glamorous"
+import { injectStylesheet, baseStylesheet } from "contiamo-ui-utils"
 
 import { ContextMenu, ContextMenuItem, Icon, contiamoTheme } from "../../src/index"
 
@@ -29,4 +30,5 @@ class Site extends React.Component<{}, {}> {
   }
 }
 
+injectStylesheet(baseStylesheet(contiamoTheme))
 render(<Site />, document.getElementById("app"))

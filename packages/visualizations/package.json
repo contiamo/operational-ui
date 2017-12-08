@@ -17,8 +17,6 @@
     "prettier": "echo ''",
     "lint": "echo ''",
     "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
-    "prettier:verify": "echo ''",
-    "lint:verify": "echo ''",
     "test:u": "jest -u"
   },
   "dependencies": {
