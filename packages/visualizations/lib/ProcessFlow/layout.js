@@ -28,7 +28,7 @@ var Layout = /** @class */ (function () {
             })(nodes);
             if (nextNodes.length > 0 && i < _this.nodes.length) {
                 if (nodes.length === nextNodes.length) {
-                    throw new Error("The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the \"contiamo-visualizations\" package.");
+                    throw new Error('The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the "contiamo-visualizations" package.');
                 }
                 i = i + 1;
                 assignNextNodes(nextNodes);
@@ -132,8 +132,8 @@ function calculateXPosition(sourcePositions, possiblePositions) {
     var meanSourcePosition = sourcePositionsSum / sourcePositions.length;
     var xPosition;
     if (possiblePositions.length > 0) {
-        possiblePositions = fp_1.sortBy(function (x) { return Math.abs(x - meanSourcePosition); })(possiblePositions);
-        xPosition = possiblePositions[0];
+        var sortedPossibilities = fp_1.sortBy(function (x) { return Math.abs(x - meanSourcePosition); })(possiblePositions);
+        xPosition = sortedPossibilities[0];
     }
     else {
         xPosition = Math.round(meanSourcePosition);

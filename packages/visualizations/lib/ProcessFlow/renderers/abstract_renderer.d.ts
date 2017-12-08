@@ -1,5 +1,4 @@
-import { IFocusElement } from "../typings";
-import { IConfig, IEvents, IFocus, IState, TElementSelection, TLink, TLinkSelection, TNode, TNodeSelection, TScale, TSeriesEl } from "../typings";
+import { IConfig, IEvents, IFocus, IFocusElement, IState, TElementSelection, TLink, TLinkSelection, TNode, TNodeSelection, TScale, TSeriesEl } from "../typings";
 declare abstract class AbstractRenderer {
     config: IConfig;
     data: TNode[] | TLink[];

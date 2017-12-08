@@ -25,26 +25,25 @@ function isLinkedToFrom(sourceId, targetId) {
     return sourceLinkedToFrom.indexOf(targetId) > -1;
 }
 function removeLoops(path) {
-    var i = 1;
+    var i = 1, newPath = path;
     function checkForLoops(pathLeft) {
         var suffix = "";
-        var sourceNodeId = pathLeft[0];
-        var targetNodeId = pathLeft[1];
+        var sourceNodeId = pathLeft[0], targetNodeId = pathLeft[1];
         var remainingPath = fp_1.drop(1)(pathLeft);
         if (isLinkedToFrom(sourceNodeId, targetNodeId)) {
             suffix = "+";
             remainingPath = fp_1.map(function (nodeId) { return nodeId + suffix; })(remainingPath);
-            path = fp_1.dropRight(path.length - i)(path).concat(remainingPath);
+            newPath = fp_1.dropRight(newPath.length - i)(newPath).concat(remainingPath);
         }
         var targetNode = findNode(targetNodeId + suffix);
-        targetNode.linkedToFrom = fp_1.uniq(targetNode.linkedToFrom.concat(fp_1.dropRight(path.length - i)(path)));
+        targetNode.linkedToFrom = fp_1.uniq(targetNode.linkedToFrom.concat(fp_1.dropRight(newPath.length - i)(newPath)));
         i = i + 1;
         if (remainingPath.length > 1) {
             checkForLoops(remainingPath);
         }
     }
-    checkForLoops(path);
-    return path;
+    checkForLoops(newPath);
+    return newPath;
 }
 exports.default = function (journeys) {
     fp_1.forEach(function (journey) {

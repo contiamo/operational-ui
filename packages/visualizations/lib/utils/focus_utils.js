@@ -38,9 +38,7 @@ var FocusUtils = {
     // Use label and drawing dimensions to ensure focus label does not overflow drawing.
     positionLabel: function (el, focus, label, drawing, offset, position) {
         if (offset === void 0) { offset = 0; }
-        if (!position) {
-            position = "toRight";
-        }
+        if (position === void 0) { position = "toRight"; }
         var x = {
             farLeft: drawing.xMin + offset,
             farRight: drawing.xMax - offset - label.width,

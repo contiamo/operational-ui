@@ -14,8 +14,9 @@ export interface IAccessors {
     [key: string]: (d: any) => any;
 }
 export declare type IEvents = EventEmitter;
+export declare type Datum = {};
 export interface IChartStateObject {
-    data: Array<any> | IObject;
+    data: Datum[] | IObject;
     config: IObject;
     accessors: any;
     computed: IObject;
