@@ -2,8 +2,8 @@ import * as React from "react"
 import glamorous, { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
-import { wrapTheme } from "contiamo-ui-utils"
-import { Theme, contiamoTheme } from "contiamo-ui-theme"
+import { wrapTheme } from "@operational/utils"
+import { Theme, contiamoTheme } from "@operational/theme"
 import transformSnippet from "./transform-snippet"
 
 export interface IProps {

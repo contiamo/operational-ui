@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Timeline, TimelineItem } from "contiamo-ui-components"
 import glamorous from "glamorous"
+import { Timeline, TimelineItem } from "@operational/components"
 
 export default (() => {
   const CustomSpan = ({ children }) => (

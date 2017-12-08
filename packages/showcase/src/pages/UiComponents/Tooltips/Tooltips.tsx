@@ -1,11 +1,10 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
+import { Tooltip, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../../components/Playground/Playground"
-import { Tooltip, Card, CardHeader, Heading2Type } from "contiamo-ui-components"
 import Table from "../../../components/PropsTable/PropsTable"
-
 import * as simpleSnippet from "./snippets/Tooltips.simple.snippet"
 import propDescription from "./propDescription"
 

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
 
-import { Card, CardHeader } from "contiamo-ui-components"
+import { Card, CardHeader } from "@operational/components"
 import Canvas from "../../components/Canvas/Canvas"
 import PageContent from "../../components/PageContent/PageContent"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"

@@ -4,8 +4,8 @@ import glamorous from "glamorous"
 import { Link } from "react-router-dom"
 import { Box, BarChart2, Grid } from "react-feather"
 
-import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "contiamo-ui-components"
-import { Theme } from "contiamo-ui-theme"
+import { SideNavigation, SideNavigationHeader, SideNavigationItem, Icon } from "@operational/components"
+import { Theme } from "@operational/theme"
 
 const marked = typeof marked_ === "function" ? marked_ : (marked_ as any).default
 

@@ -1,101 +1,96 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Link } from "react-router-dom"
+import { Card, Icon, Heading2Type } from "@operational/components"
+import { Theme } from "@operational/theme"
 
-import { Card, Icon, Heading2Type } from "contiamo-ui-components"
-import { Theme } from "contiamo-ui-theme"
+import PageContent from "../components/PageContent/PageContent"
+import Demo from "../components/Demo/Demo"
 
 const Grid = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
   gridGap: 16,
   marginTop: 20,
-  "& a:link": {
+  "& a": {
     textDecoration: "none"
-  },
-  "& .card": {
-    position: "relative",
-    padding: "32px 16px",
-    textAlign: "center",
-    transition: ".3s transform ease",
-    cursor: "pointer"
-  },
-  "& .card.card_disabled": {
-    opacity: 0.6,
-    pointerEvents: "none"
-  },
-  "& .card:hover": {
-    transform: "translateY(-5px)"
-  },
-  "& .card::after": {
-    content: "''",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    opacity: 0,
-    transition: ".3s opacity ease",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, .1)"
-  },
-  "& .card:hover::after": {
-    transition: ".3s opacity ease",
-    opacity: 1
-  },
-  "& .card h2": {
-    ...theme.typography.title,
-    marginBottom: 0,
-    marginTop: 10,
-    color: "#777"
   }
 }))
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const LinkBox = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  position: "relative",
+  padding: "32px 16px",
+  textAlign: "center",
+  transition: ".3s transform ease",
+  cursor: "pointer",
+  color: "#777",
+  backgroundColor: "#fafafa",
+  "&:hover": {
+    backgroundColor: "#efefef"
+  },
+  "& h2": {
+    ...theme.typography.title,
+    color: "#777",
+    marginBottom: 0,
+    marginTop: 5
+  }
+}))
+
+const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  padding: `${theme.spacing * 1}px 0`,
+  color: "#000",
+  borderBottom: `1px solid ${theme.colors.usage.contentSeparatorLine}`,
   "& > h1": {
     ...theme.typography.title,
+    textAlign: "center",
     margin: 0
   },
   "& > h2": {
-    ...theme.typography.heading1,
+    ...theme.typography.body,
+    textAlign: "center",
     marginTop: 0
-  },
-  display: "block",
-  padding: 32,
-  maxWidth: 700
+  }
 }))
 
 const MyCard = ({ className }: { className?: string }) => (
-  <Container className={className}>
-    <h1>Contiamo UI</h1>
-    <h2>Building blocks for effective operational interfaces</h2>
+  <PageContent>
+    <Card css={{ width: "66%" }}>
+      <TitleBar>
+        <h1>Operational UI</h1>
+        <h2>Building blocks for effective operational interfaces</h2>
+      </TitleBar>
 
-    <Grid>
-      <Link to="/components">
-        <Card className="card">
-          <Icon name="Box" size={30} color="#777" />
-          <h2>Components</h2>
-        </Card>
-      </Link>
-      <Link to="/blocks">
-        <Card className="card">
-          <Icon name="Grid" size={30} color="#777" />
-          <h2>Blocks</h2>
-        </Card>
-      </Link>
-      <Link to="/visualizations">
-        <Card className="card">
-          <Icon name="BarChart2" size={30} color="#777" />
-          <h2>Visualizations</h2>
-        </Card>
-      </Link>
-      <Link to="/documentation">
-        <Card className="card">
-          <Icon name="Edit" size={30} color="#777" />
-          <h2>Documentation</h2>
-        </Card>
-      </Link>
-    </Grid>
-  </Container>
+      <Grid>
+        <Link to="/components">
+          <LinkBox>
+            <Icon name="Box" size={30} />
+            <h2>Components</h2>
+          </LinkBox>
+        </Link>
+        <Link to="/blocks">
+          <LinkBox>
+            <Icon name="Grid" size={30} />
+            <h2>Blocks</h2>
+          </LinkBox>
+        </Link>
+        <Link to="/visualizations">
+          <LinkBox>
+            <Icon name="BarChart2" size={30} />
+            <h2>Visualizations</h2>
+          </LinkBox>
+        </Link>
+        <Link to="/documentation">
+          <LinkBox>
+            <Icon name="Edit" size={30} />
+            <h2>Documentation</h2>
+          </LinkBox>
+        </Link>
+      </Grid>
+    </Card>
+    <Card css={{ width: "33%" }}>
+      <Demo />
+    </Card>
+  </PageContent>
 )
 
 export default MyCard

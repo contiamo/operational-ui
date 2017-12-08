@@ -1,10 +1,9 @@
 import * as React from "react"
+import { Card, CardHeader, Heading2Type } from "@operational/components"
+import { ProcessFlow, VisualizationWrapper } from "@operational/visualizations"
 
 import Table from "../../../components/PropsTable/PropsTable"
 import Playground from "../../../components/Playground/Playground"
-import { Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-import { ProcessFlow, VisualizationWrapper } from "contiamo-visualizations"
-
 import * as simpleSnippet from "./snippets/ProcessFlow.simple.snippet"
 import propDescription from "./propDescription"
 
@@ -22,7 +21,7 @@ export default () => (
       instance, "Step A" sometimes comes before "Step B" and sometimes after, this is condsidered to be a loop. The
       visualization will throw an error if there are loops in the data. Loops can be removed from the data before it is
       passed to the visualization by passing it through the ProcessFlowLoopHandler component of the
-      "contiamo-visualizations" package.
+      "@operational/visualizations" package.
     </p>
 
     <Heading2Type>Usage</Heading2Type>

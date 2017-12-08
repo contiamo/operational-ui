@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Paginator } from "contiamo-ui-components"
+import { Paginator } from "@operational/components"
 
 export default (() => {
   class ComponentWithPaginator extends React.Component {

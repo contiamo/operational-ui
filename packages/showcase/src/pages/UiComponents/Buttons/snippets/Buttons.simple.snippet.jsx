@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Button, ButtonGroup } from "contiamo-ui-components"
+import { Button, ButtonGroup } from "@operational/components"
 
 export default (
   <div>

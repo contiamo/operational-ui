@@ -5,9 +5,11 @@ const PageContent: GlamorousComponent<{}, {}> = glamorous.div({
   alignItems: "flex-start",
   padding: 16,
   height: "100vh",
-  // Targets Sidebar
-  "& > :first-child": {
+  "& > *": {
     height: "100%"
+  },
+  "& > :first-child": {
+    marginRight: 16
   }
 })
 

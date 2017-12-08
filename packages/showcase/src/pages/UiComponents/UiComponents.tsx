@@ -1,13 +1,13 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
-import { Card, CardHeader } from "contiamo-ui-components"
+import { Card, CardHeader } from "@operational/components"
 
 import Canvas from "../../components/Canvas/Canvas"
 import PageContent from "../../components/PageContent/PageContent"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
 import Buttons from "./Buttons/Buttons"
-import Breakdown from "./Breakdown/Breakdown"
+import Breakdowns from "./Breakdowns/Breakdowns"
 import FormFields from "./FormFields/FormFields"
 import Cards from "./Cards/Cards"
 import Chips from "./Chips/Chips"
@@ -55,7 +55,7 @@ const links: ISidebarLink[] = [
       { url: "/components/buttons", label: "Buttons" },
       { url: "/components/cards", label: "Cards" },
       { url: "/components/chips", label: "Chips" },
-      { url: "/components/breakdown", label: "Breakdown" },
+      { url: "/components/breakdowns", label: "Breakdown" },
       { url: "/components/context-menus", label: "Context Menu" },
       { url: "/components/info-tiles", label: "InfoTiles" },
       { url: "/components/timeline", label: "Timeline" }
@@ -101,7 +101,7 @@ export default () => (
     <Canvas>
       <Route exact path="/components" component={Intro} />
       <Route path="/components/buttons" component={Buttons} />
-      <Route path="/components/breakdown" component={Breakdown} />
+      <Route path="/components/breakdowns" component={Breakdowns} />
       <Route path="/components/form-fields" component={FormFields} />
       <Route path="/components/grids" component={Grids} />
       <Route path="/components/color-picker" component={ColorPickers} />

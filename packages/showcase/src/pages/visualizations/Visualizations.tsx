@@ -1,12 +1,11 @@
 import * as React from "react"
 import { Route, withRouter } from "react-router-dom"
+import { Card, CardHeader } from "@operational/components"
 
-import { Card, CardHeader } from "contiamo-ui-components"
 import Canvas from "../../components/Canvas/Canvas"
 import PageContent from "../../components/PageContent/PageContent"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
-
 import ProcessFlowMain from "./ProcessFlows/ProcessFlowMain"
 import { ProcessFlowCases } from "./ProcessFlows/ProcessFlows"
 import * as processFlowCases from "./ProcessFlows/cases/index"

@@ -1,5 +1,6 @@
 import * as React from "react"
-import { Card, CardHeader } from "contiamo-ui-components"
+import { Card, CardHeader } from "@operational/components"
+
 import Marathon from "../../../components/Marathon/Marathon"
 import * as cases from "./cases/index"
 

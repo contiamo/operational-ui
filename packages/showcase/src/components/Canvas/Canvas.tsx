@@ -1,9 +1,9 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-import { Card } from "contiamo-ui-components"
-import { Theme } from "contiamo-ui-theme"
-import { darken } from "contiamo-ui-utils"
+import { Card } from "@operational/components"
+import { Theme } from "@operational/theme"
+import { darken } from "@operational/utils"
 
 export interface IProps {
   className?: string
@@ -14,7 +14,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   display: "flex",
   alignItems: "flex-start",
   flexBasis: "100%",
-  marginLeft: theme.spacing * 4 / 3,
   height: "100%",
   maxHeight: "100%",
 

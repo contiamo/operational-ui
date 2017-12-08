@@ -10,10 +10,6 @@ module.exports = webpackMerge(baseConfig, {
       {
         from: resolve(__dirname, "..", "public", "img"),
         to: resolve(__dirname, "..", "dist", "img")
-      },
-      {
-        from: resolve(__dirname, "..", "public", "fonts"),
-        to: resolve(__dirname, "..", "dist", "fonts")
       }
     ]),
     new webpack.DefinePlugin({ 

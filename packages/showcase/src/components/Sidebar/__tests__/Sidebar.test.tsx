@@ -1,8 +1,8 @@
 import * as React from "react"
 import { shallow } from "enzyme"
+import { wrapTheme } from "@operational/utils"
+import { contiamoTheme } from "@operational/theme"
 
-import { wrapTheme } from "contiamo-ui-utils"
-import { contiamoTheme } from "contiamo-ui-theme"
 import ThemelessSidebar from "../Sidebar"
 
 const Sidebar = wrapTheme(contiamoTheme)(ThemelessSidebar)

@@ -1,17 +1,17 @@
 {
-  "name": "contiamo-visualizations",
-  "version": "0.0.1-45",
+  "name": "@operational/visualizations",
+  "version": "0.1.0-1",
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/ui-components.git",
+  "repository": "git@github.com:Contiamo/operational.git",
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.contiamo.com/"
   },
   "scripts": {
-    "test": "jest",
+    "test": "echo 'No tests at the moment'",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "rm -rf lib && tsc -w",
     "prettier": "echo ''",

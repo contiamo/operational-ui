@@ -1,5 +1,5 @@
 import * as React from "react"
-import { InfoTile } from "contiamo-ui-components"
+import { InfoTile } from "@operational/components"
 
 export default (
   <div>

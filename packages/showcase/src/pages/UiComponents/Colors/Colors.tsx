@@ -1,11 +1,10 @@
 import * as React from "react"
 import glamorous from "glamorous"
+import { Card, CardHeader, Heading2Type } from "@operational/components"
+import { contiamoTheme, Theme } from "@operational/theme"
 
 import Playground from "../../../components/Playground/Playground"
 import Table from "../../../components/PropsTable/PropsTable"
-import { Card, CardHeader, Heading2Type } from "contiamo-ui-components"
-import { contiamoTheme, Theme } from "contiamo-ui-theme"
-
 import * as simpleSnippet from "./snippets/Colors.simple.snippet"
 
 const ColorBox = glamorous.div(

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Upload, Icon, Button } from "contiamo-ui-components"
+import { Upload, Icon, Button } from "@operational/components"
 
 export default (() => {
   class ComponentWithUploader extends React.Component {
