@@ -11,7 +11,7 @@
     "registry": "https://npm.contiamo.com/"
   },
   "scripts": {
-    "test": "jest",
+    "test": "echo 'No tests at the moment'",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "rm -rf lib && tsc -w",
     "prettier": "echo ''",

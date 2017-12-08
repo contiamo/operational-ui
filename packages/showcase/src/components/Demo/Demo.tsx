@@ -19,27 +19,53 @@ const Container = glamorous.div({
   }
 })
 
-class Demo extends React.Component {
+class Demo extends React.Component<IProps, IState> {
   state = {
     step: 0
   }
 
+  interval?: {}
+
+  constructor(props: IProps) {
+    super(props)
+    this.shiftStep = this.shiftStep.bind(this)
+  }
+
+  shiftStep() {
+    this.setState(prevState => ({
+      step: (this.state.step + 1) % 3
+    }))
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.shiftStep, 2500)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval as any)
+  }
+
   render() {
+    let breakdownData: number[] = []
+    if (this.state.step === 0) {
+      breakdownData = [0.2, 0.4, 0.8]
+    } else if (this.state.step === 1) {
+      breakdownData = [0.4, 0.3, 0.1]
+    } else {
+      breakdownData = [0.7, 0.6, 0.3]
+    }
     return (
       <Container>
         <ButtonGroup>
-          <Button>One</Button>
-          <Button>Two</Button>
-          <Button>Three</Button>
+          {[0, 1, 2].map((no, index) => <Button active={this.state.step === index}>{`Dataset ${no + 1}`}</Button>)}
         </ButtonGroup>
-        <ProcessFlowDemo />
+        <ProcessFlowDemo step={this.state.step} />
         <div>
-          <Breakdown number={1} label="Metric" fill={0.2}>
-            Good!
-          </Breakdown>
-          <Breakdown number={2} label="Metric 2" fill={0.4}>
-            Better!
-          </Breakdown>
+          {breakdownData.map((datum, index) => (
+            <Breakdown key={index} color={datum < 0.3 ? "warning" : "info"} number={index + 1} label={""} fill={datum}>
+              {`Metric ${index + 1}`}
+            </Breakdown>
+          ))}
         </div>
       </Container>
     )

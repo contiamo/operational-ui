@@ -96,6 +96,7 @@ const Bar = glamorous.div(
       },
       ":before": {
         backgroundColor: setBrightness(backgroundColor, 145),
+        transition: "all 0.3s ease-in-out",
         width: `${fill * 100}%`
       }
     }
