@@ -56,7 +56,7 @@ class Focus extends AbstractFocus {
   }
 
   appendContent(container: TD3Selection, content: IObject[]): void {
-    let contentContainer: TD3Selection = container.append("div").attr("class", styles.content)
+    const contentContainer: TD3Selection = container.append("div").attr("class", styles.content)
 
     forEach((contentItem: IObject): void => {
       contentContainer
@@ -138,16 +138,16 @@ function computeBreakdowns(node: TNode): IBreakdowns {
   const inputs: IBreakdown[] = map((link: TLink): IBreakdown => {
     const size: number = link.size()
     return {
-      label: link.source().label(),
       size,
+      label: link.source().label(),
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.targetLinks)
   const outputs: IBreakdown[] = map((link: TLink): IBreakdown => {
     const size: number = link.size()
     return {
-      label: link.target().label(),
       size,
+      label: link.target().label(),
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.sourceLinks)

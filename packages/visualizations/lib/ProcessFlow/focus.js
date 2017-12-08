@@ -95,16 +95,16 @@ function computeBreakdowns(node) {
     var inputs = fp_1.map(function (link) {
         var size = link.size();
         return {
-            label: link.source().label(),
             size: size,
+            label: link.source().label(),
             percentage: Math.round(size * 100 / node.size())
         };
     })(node.targetLinks);
     var outputs = fp_1.map(function (link) {
         var size = link.size();
         return {
-            label: link.target().label(),
             size: size,
+            label: link.target().label(),
             percentage: Math.round(size * 100 / node.size())
         };
     })(node.sourceLinks);

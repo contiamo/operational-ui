@@ -15,7 +15,7 @@
     "package:watch": "tsc -d -w",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
+    "precommit": "npm run test && npm run lint && npm run prettier && npm run package",
     "preversion": "npm run precommit",
     "version": "npm run package",
     "test": "echo 'No tests at the moment'",

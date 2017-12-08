@@ -59,7 +59,7 @@ function removeLoops(path: TPath): TPath {
     }
     const targetNode: INode = findNode(targetNodeId + suffix)
     targetNode.linkedToFrom = uniq(targetNode.linkedToFrom.concat(dropRight(path.length - i)(path)))
-    i++
+    i = i + 1
     if (remainingPath.length > 1) {
       checkForLoops(remainingPath)
     }

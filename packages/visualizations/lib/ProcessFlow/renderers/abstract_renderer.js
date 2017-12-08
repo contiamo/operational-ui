@@ -4,7 +4,6 @@ var fp_1 = require("lodash/fp");
 var d3 = require("d3-selection");
 var d3_scale_1 = require("d3-scale");
 var node_1 = require("../node");
-var fp_2 = require("lodash/fp");
 var d3_utils_1 = require("../../utils/d3_utils");
 var event_catalog_1 = require("../../utils/event_catalog");
 var AbstractRenderer = /** @class */ (function () {
@@ -32,8 +31,8 @@ var AbstractRenderer = /** @class */ (function () {
         this.el
             .selectAll(this.focusElementAccessor)
             .filter(function (d) {
-            return fp_2.every.convert({ cap: false })(function (value, matcher) {
-                return fp_2.invoke(matcher)(d) === value;
+            return fp_1.every.convert({ cap: false })(function (value, matcher) {
+                return fp_1.invoke(matcher)(d) === value;
             })(elementInfo.matchers);
         })
             .each(d3_utils_1.withD3Element(function (d, el) {

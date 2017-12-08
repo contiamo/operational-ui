@@ -38,7 +38,7 @@ function removeLoops(path) {
         }
         var targetNode = findNode(targetNodeId + suffix);
         targetNode.linkedToFrom = fp_1.uniq(targetNode.linkedToFrom.concat(fp_1.dropRight(path.length - i)(path)));
-        i++;
+        i = i + 1;
         if (remainingPath.length > 1) {
             checkForLoops(remainingPath);
         }

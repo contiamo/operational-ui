@@ -14,9 +14,9 @@
     "test": "echo 'No tests at the moment'",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "rm -rf lib && tsc -w",
-    "prettier": "echo ''",
-    "lint": "echo ''",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
+    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "precommit": "npm run test && npm run lint && npm run prettier && npm run package",
     "test:u": "jest -u"
   },
   "dependencies": {
