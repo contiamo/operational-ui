@@ -7,7 +7,6 @@ import SideNavigationHeader from "./Header/SideNavigationHeader"
 import SideNavigationItem from "./Item/SideNavigationItem"
 import SideNavigationLink from "./Link/SideNavigationLink"
 
-
 export interface IProps {
   id?: string | number
   css?: {}
