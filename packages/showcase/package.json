@@ -13,10 +13,11 @@
     "version": "npm run build && git add -A dist",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package",
+    "precommit": "npm run prettier",
     "test": "jest",
     "test:u": "jest -u",
-    "package": "echo 'Showcase is not published, hence no package script.'"
+    "package": "echo 'Showcase is not published, hence no package script.'",
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
@@ -24,9 +25,9 @@
     "html-webpack-plugin": "^2.30.1",
     "raw-loader": "^0.5.1",
     "ts-loader": "^3.1.1",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.4",
-    "webpack-merge": "^4.1.0",
+    "webpack": "3.10.0",
+    "webpack-dev-server": "2.9.7",
+    "webpack-merge": "4.1.1",
     "@types/enzyme": "3.1.5",
     "@types/jest": "20.0.8",
     "@types/node": "8.0.27",
@@ -60,7 +61,8 @@
     "@types/react-router-dom": "4.2.0",
     "@types/react-syntax-highlighter": "0.0.3",
     "@types/tinycolor2": "1.4.0",
-    "@types/webpack-env": "1.13.1"
+    "@types/webpack-env": "1.13.1",
+    "awesome-typescript-loader": "3.4.1"
   },
   "dependencies": {
     "component-playground": "^3.0.0",
