@@ -7,7 +7,8 @@ const scripts = {
   test: "jest",
   "test:u": "jest -u",
   package: "rm -rf lib && tsc -d",
-  precommit: "npm run test && npm run lint && npm run prettier && npm run package"
+  precommit: "npm run prettier",
+  ci: "npm run test && npm run lint && npm run prettier && npm run package"
 }
 
 const jest = {
@@ -111,7 +112,11 @@ const devDependencies = {
   "jest-glamor-react": "3.1.0",
   "jest-serializer-enzyme": "1.0.0",
   "react-test-renderer": "16.0.0",
-  "ts-jest": "21.0.0"
+  "ts-jest": "21.0.0",
+  webpack: "3.10.0",
+  "webpack-dev-server": "2.9.7",
+  "webpack-merge": "4.1.1",
+  "awesome-typescript-loader": "3.4.1"
 }
 
 const packages = ["showcase", "blocks", "components", "theme", "utils", "visualizations"]

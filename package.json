@@ -9,6 +9,7 @@
   "scripts": {
     "start": "cd packages/showcase && yarn start",
     "build": "cd packages/showcase && npm run build",
+    "add:build:scripts": "node scripts/add-build-scripts.js",
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
     "clean": "rm -rf node_modules && rm -rf packages/*/node_modules",
