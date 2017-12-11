@@ -114,7 +114,7 @@ const devDependencies = {
   "ts-jest": "21.0.0"
 }
 
-const packages = ["showcase", "ui-blocks", "ui-components", "ui-theme", "ui-utils", "visualizations"]
+const packages = ["showcase", "blocks", "components", "theme", "utils", "visualizations"]
 
 const writeFiles = () => {
   packages.forEach(pkg => {
@@ -130,6 +130,9 @@ const changePackageJson = () => {
     packageJson.scripts = Object.assign({}, packageJson.scripts, scripts)
     packageJson.devDependencies = Object.assign({}, packageJson.devDependencies, devDependencies)
     packageJson.jest = jest
+    if (pkg === "showcase") {
+      packageJson.scripts.package = "echo 'Showcase is not published, hence no package script.'"
+    }
     fs.writeFileSync(path.resolve(__dirname, "../packages", pkg, "package.json"), JSON.stringify(packageJson, null, 2))
   })
 }

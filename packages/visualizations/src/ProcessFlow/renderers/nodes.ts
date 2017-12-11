@@ -172,11 +172,11 @@ class Nodes extends AbstractRenderer {
             .attr("fill", d.color())
             .attr("stroke", d.stroke())
             .attr("opacity", 1)
-          ++n
+          n = n + 1
         })
       )
       .on("end", (): void => {
-        --n
+        n = n - 1
         if (n < 1) {
           this.updateNodeLabels()
         }

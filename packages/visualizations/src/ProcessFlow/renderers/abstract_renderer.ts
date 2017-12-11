@@ -1,15 +1,14 @@
-import { map } from "lodash/fp"
+import { every, invoke, map } from "lodash/fp"
 import * as d3 from "d3-selection"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import Node from "../node"
-import { IFocusElement } from "../typings"
-import { every, invoke } from "lodash/fp"
 import { withD3Element } from "../../utils/d3_utils"
 
 import {
   IConfig,
   IEvents,
   IFocus,
+  IFocusElement,
   IState,
   TElementSelection,
   TLink,

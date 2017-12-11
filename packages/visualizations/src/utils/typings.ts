@@ -20,8 +20,10 @@ export interface IAccessors {
 
 export type IEvents = EventEmitter
 
+export type Datum = {}
+
 export interface IChartStateObject {
-  data: Array<any> | IObject
+  data: Datum[] | IObject
   config: IObject
   accessors: any
   computed: IObject

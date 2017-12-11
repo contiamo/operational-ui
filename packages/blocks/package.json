@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run test && npm run lint && npm run prettier && npm run package && git add .",
+    "precommit": "npm run test && npm run lint && npm run prettier && npm run package",
     "preversion": "npm run precommit",
     "version": "npm run package && git add lib",
     "test:u": "jest -u"

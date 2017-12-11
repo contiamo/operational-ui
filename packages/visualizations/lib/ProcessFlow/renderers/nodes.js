@@ -156,10 +156,10 @@ var Nodes = /** @class */ (function (_super) {
                 .attr("fill", d.color())
                 .attr("stroke", d.stroke())
                 .attr("opacity", 1);
-            ++n;
+            n = n + 1;
         }))
             .on("end", function () {
-            --n;
+            n = n - 1;
             if (n < 1) {
                 _this.updateNodeLabels();
             }

@@ -36,7 +36,7 @@ class Layout {
             'The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the "contiamo-visualizations" package.'
           )
         }
-        ++i
+        i = i + 1
         assignNextNodes(nextNodes)
       }
     }
@@ -157,8 +157,8 @@ function calculateXPosition(
   const meanSourcePosition: number = sourcePositionsSum / sourcePositions.length
   let xPosition: number
   if (possiblePositions.length > 0) {
-    possiblePositions = sortBy((x: number): number => Math.abs(x - meanSourcePosition))(possiblePositions)
-    xPosition = possiblePositions[0]
+    const sortedPossibilities = sortBy((x: number): number => Math.abs(x - meanSourcePosition))(possiblePositions)
+    xPosition = sortedPossibilities[0]
   } else {
     xPosition = Math.round(meanSourcePosition)
     // Shift nodes to the right by one place to make space for new node column

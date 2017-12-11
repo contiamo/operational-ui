@@ -46,26 +46,27 @@ function isLinkedToFrom(sourceId: string, targetId: string): boolean {
 }
 
 function removeLoops(path: TPath): TPath {
-  let i = 1
+  let i = 1,
+    newPath: TPath = path
   function checkForLoops(pathLeft: TPath): void {
     let suffix = ""
-    const sourceNodeId: string = pathLeft[0]
-    const targetNodeId: string = pathLeft[1]
+    const sourceNodeId: string = pathLeft[0],
+      targetNodeId: string = pathLeft[1]
     let remainingPath = drop(1)(pathLeft)
     if (isLinkedToFrom(sourceNodeId, targetNodeId)) {
       suffix = "+"
       remainingPath = map((nodeId: string): string => nodeId + suffix)(remainingPath)
-      path = dropRight(path.length - i)(path).concat(remainingPath)
+      newPath = dropRight(newPath.length - i)(newPath).concat(remainingPath)
     }
     const targetNode: INode = findNode(targetNodeId + suffix)
-    targetNode.linkedToFrom = uniq(targetNode.linkedToFrom.concat(dropRight(path.length - i)(path)))
-    i++
+    targetNode.linkedToFrom = uniq(targetNode.linkedToFrom.concat(dropRight(newPath.length - i)(newPath)))
+    i = i + 1
     if (remainingPath.length > 1) {
       checkForLoops(remainingPath)
     }
   }
-  checkForLoops(path)
-  return path
+  checkForLoops(newPath)
+  return newPath
 }
 
 export default (journeys: IJourney[]): IJourney[] => {

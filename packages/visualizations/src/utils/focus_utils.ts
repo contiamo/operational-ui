@@ -47,12 +47,8 @@ const FocusUtils: any = {
     label: IObject,
     drawing: IObject,
     offset: number = 0,
-    position: string
+    position: string = "toRight"
   ): void => {
-    if (!position) {
-      position = "toRight"
-    }
-
     const x: any = {
       farLeft: drawing.xMin + offset,
       farRight: drawing.xMax - offset - label.width,
