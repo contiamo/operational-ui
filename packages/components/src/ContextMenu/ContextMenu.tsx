@@ -11,12 +11,13 @@ export interface IProps {
   css?: {}
   className?: string
   children: React.ReactNode
-  expandOnHover?: boolean
+  openOnHover?: boolean
+  keepOpenOnItemClick?: boolean
 }
 
 export interface IState {
   isHovered: boolean
-  isActive: boolean
+  isOpen: boolean
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
@@ -37,7 +38,7 @@ const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isEx
 class ContextMenu extends React.Component<IProps, IState> {
   state = {
     isHovered: false,
-    isActive: false
+    isOpen: false
   }
 
   containerNode: any
@@ -46,9 +47,9 @@ class ContextMenu extends React.Component<IProps, IState> {
 
   handleClick(ev: any): void {
     const newIsActive = this.menuContainerNode.contains(ev.target)
-      ? this.state.isActive
-      : this.containerNode.contains(ev.target) ? !this.state.isActive : false
-    this.setState(prevState => ({ isActive: newIsActive }))
+      ? this.state.isOpen
+      : this.containerNode.contains(ev.target) ? !this.state.isOpen : false
+    this.setState(prevState => ({ isOpen: newIsActive }))
   }
 
   componentDidMount() {
@@ -62,14 +63,29 @@ class ContextMenu extends React.Component<IProps, IState> {
   render() {
     const menuItems: any = []
     const children: any = []
-    React.Children.forEach(this.props.children, (child: any): void => {
+    React.Children.forEach(this.props.children, (child: any, index: number): void => {
       if (child.type === ContextMenuItem) {
-        menuItems.push(child)
+        const { onClick } = child.props
+        menuItems.push(
+          React.cloneElement(child, {
+            key: index,
+            onClick:
+              onClick &&
+              (() => {
+                if (!this.props.keepOpenOnItemClick) {
+                  this.setState(prevState => ({
+                    isOpen: false
+                  }))
+                }
+                onClick()
+              })
+          })
+        )
       } else {
         children.push(child)
       }
     })
-    const hoverProps = this.props.expandOnHover
+    const hoverProps = this.props.openOnHover
       ? {
           onMouseEnter: (ev: any) => {
             this.setState(prevState => ({ isHovered: true }))
@@ -95,7 +111,7 @@ class ContextMenu extends React.Component<IProps, IState> {
           innerRef={node => {
             this.menuContainerNode = node
           }}
-          isExpanded={this.state.isActive || this.state.isHovered}
+          isExpanded={this.state.isOpen || this.state.isHovered}
         >
           {menuItems}
         </MenuContainer>

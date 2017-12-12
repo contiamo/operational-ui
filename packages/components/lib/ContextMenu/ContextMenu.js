@@ -41,15 +41,15 @@ var ContextMenu = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
             isHovered: false,
-            isActive: false
+            isOpen: false
         };
         return _this;
     }
     ContextMenu.prototype.handleClick = function (ev) {
         var newIsActive = this.menuContainerNode.contains(ev.target)
-            ? this.state.isActive
-            : this.containerNode.contains(ev.target) ? !this.state.isActive : false;
-        this.setState(function (prevState) { return ({ isActive: newIsActive }); });
+            ? this.state.isOpen
+            : this.containerNode.contains(ev.target) ? !this.state.isOpen : false;
+        this.setState(function (prevState) { return ({ isOpen: newIsActive }); });
     };
     ContextMenu.prototype.componentDidMount = function () {
         document.addEventListener("click", this.handleClick.bind(this));
@@ -61,15 +61,26 @@ var ContextMenu = /** @class */ (function (_super) {
         var _this = this;
         var menuItems = [];
         var children = [];
-        React.Children.forEach(this.props.children, function (child) {
+        React.Children.forEach(this.props.children, function (child, index) {
             if (child.type === ContextMenuItem_1.default) {
-                menuItems.push(child);
+                var onClick_1 = child.props.onClick;
+                menuItems.push(React.cloneElement(child, {
+                    key: index,
+                    onClick: onClick_1 && (function () {
+                        if (!_this.props.keepOpenOnItemClick) {
+                            _this.setState(function (prevState) { return ({
+                                isOpen: false
+                            }); });
+                        }
+                        onClick_1();
+                    })
+                }));
             }
             else {
                 children.push(child);
             }
         });
-        var hoverProps = this.props.expandOnHover
+        var hoverProps = this.props.openOnHover
             ? {
                 onMouseEnter: function (ev) {
                     _this.setState(function (prevState) { return ({ isHovered: true }); });
@@ -85,7 +96,7 @@ var ContextMenu = /** @class */ (function (_super) {
             children,
             React.createElement(MenuContainer, { innerRef: function (node) {
                     _this.menuContainerNode = node;
-                }, isExpanded: this.state.isActive || this.state.isHovered }, menuItems)));
+                }, isExpanded: this.state.isOpen || this.state.isHovered }, menuItems)));
     };
     return ContextMenu;
 }(React.Component));
