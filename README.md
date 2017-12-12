@@ -1,4 +1,4 @@
-# [Contiamo UI](https://ui.contiamo.com)
+# [Operational UI](https://ui.contiamo.com)
 ### A UI library for data-driven applications.
 
 This is a [monorepo](https://danluu.com/monorepo/) consisting of three interdependent, independent packages.
