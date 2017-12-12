@@ -8,8 +8,8 @@ module.exports = webpackMerge(baseConfig, {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: resolve(__dirname, "..", "public", "img"),
-        to: resolve(__dirname, "..", "dist", "img")
+        from: resolve(__dirname, "..", "public", "favicons"),
+        to: resolve(__dirname, "..", "dist", "favicons")
       }
     ]),
     new webpack.DefinePlugin({ 

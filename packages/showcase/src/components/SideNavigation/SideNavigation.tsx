@@ -5,6 +5,7 @@ import { Box, BarChart2, Grid } from "react-feather"
 
 import { Sidenav, SidenavHeader, Icon } from "@operational/components"
 import { Theme } from "@operational/theme"
+import Logo from "../Logo/Logo"
 
 export interface IProps {
   location?: {
@@ -34,6 +35,7 @@ const links: ILink[] = [
 
 const AppSideNavigation = ({ location }: IProps) => {
   return (
+<<<<<<< HEAD
     <Sidenav css={style} fix expandOnHover>
       <Link to="/">
         <SidenavHeader
@@ -42,6 +44,15 @@ const AppSideNavigation = ({ location }: IProps) => {
           icon="Circle"
         />
       </Link>
+=======
+    <SideNavigation css={style} fix expandOnHover>
+      <SideNavigationHeader>
+        <Link to="/">
+          <Logo/>
+          <span style={{ position: "relative", left: -7 }}>Operational</span>
+        </Link>
+      </SideNavigationHeader>
+>>>>>>> Add favicons and logo
 
       {links.map(({ url, label, icon }: ILink, index: number) => {
         const routeMatch = location && location.pathname && url && location.pathname.slice(0, url.length) === url
