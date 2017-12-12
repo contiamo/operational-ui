@@ -23,11 +23,10 @@ import PlusChip from "./PlusChip/PlusChip"
 import Progress from "./Progress/Progress"
 import Select from "./Select/Select"
 import Sidebar, { SidebarItem, SidebarLink } from "./Sidebar/Sidebar"
-import SideNavigation, {
-  SideNavigationHeader,
-  SideNavigationItem,
-  SideNavigationLink
-} from "./SideNavigation/SideNavigation"
+import Sidenav, {
+  SidenavHeader,
+  SidenavItem
+} from "./Sidenav/Sidenav"
 import Spinner from "./Spinner/Spinner"
 import Switch from "./Switch/Switch"
 import { Tabs, Tab } from "./Tabs/Tabs"
@@ -62,10 +61,9 @@ export {
   PlusChip,
   Progress,
   Select,
-  SideNavigation,
-  SideNavigationHeader,
-  SideNavigationItem,
-  SideNavigationLink,
+  Sidenav,
+  SidenavHeader,
+  SidenavItem,
   Sidebar,
   SidebarItem,
   SidebarLink,

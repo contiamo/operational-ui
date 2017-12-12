@@ -3,9 +3,8 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { hexOrColor, readableTextColor } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
-import SideNavigationHeader from "./Header/SideNavigationHeader"
-import SideNavigationItem from "./Item/SideNavigationItem"
-import SideNavigationLink from "./Link/SideNavigationLink"
+import SidenavHeader from "./SidenavHeader"
+import SidenavItem from "./SidenavItem"
 
 export interface IProps {
   id?: string | number
@@ -67,7 +66,7 @@ const Container = glamorous.div(
   }
 )
 
-const SideNavigation: React.SFC<IProps> = ({
+const Sidenav: React.SFC<IProps> = ({
   id,
   css,
   className,
@@ -92,5 +91,5 @@ const SideNavigation: React.SFC<IProps> = ({
   </Container>
 )
 
-export default SideNavigation
-export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }
+export default Sidenav
+export { SidenavHeader, SidenavItem }
