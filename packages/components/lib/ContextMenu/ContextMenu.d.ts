@@ -6,16 +6,17 @@ export interface IProps {
     css?: {};
     className?: string;
     children: React.ReactNode;
-    expandOnHover?: boolean;
+    openOnHover?: boolean;
+    keepOpenOnItemClick?: boolean;
 }
 export interface IState {
     isHovered: boolean;
-    isActive: boolean;
+    isOpen: boolean;
 }
 declare class ContextMenu extends React.Component<IProps, IState> {
     state: {
         isHovered: boolean;
-        isActive: boolean;
+        isOpen: boolean;
     };
     containerNode: any;
     menuContainerNode: any;

@@ -10,7 +10,7 @@ class Site extends React.Component<{}, {}> {
     return (
       <ThemeProvider theme={contiamoTheme}>
         <div style={{ padding: 40 }}>
-          <ContextMenu expandOnHover>
+          <ContextMenu>
             <span>
               <Icon name="X" size={30} />
             </span>
