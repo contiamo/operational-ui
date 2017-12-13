@@ -1,57 +1,60 @@
 // Type definitions
 
 export type ThemeColorName =
+  | "brand"
   | "info"
   | "success"
   | "warning"
   | "error"
   | "white"
   | "black"
-  | "grey10"
-  | "grey20"
-  | "grey30"
-  | "grey40"
-  | "grey50"
-  | "grey60"
-  | "grey70"
-  | "grey80"
-  | "grey90"
+  | "gray10"
+  | "gray20"
+  | "gray30"
+  | "gray40"
+  | "gray50"
+  | "gray60"
+  | "gray70"
+  | "gray80"
+  | "gray90"
+  | "background"
+  | "regularText"
+  | "emphasizedText"
+  | "lightText"
+  | "linkText"
+  | "cardBackground"
+  | "border"
+  | "sidenavBackground"
+  | "secondarySeparator"
+  | "separator"
 
-export interface Palette {
-  [key: string]: string
+export interface ThemeColors {
+  brand: string
   info: string
   success: string
   warning: string
   error: string
   white: string
   black: string
-  grey10: string
-  grey20: string
-  grey30: string
-  grey40: string
-  grey50: string
-  grey60: string
-  grey70: string
-  grey80: string
-  grey90: string
-}
-
-export interface UsageColors {
-  bodyBackground: string
-  bodyText: string
-  cardBackground: string
-  contentBorder: string
-  contentSeparatorLine: string
+  gray10: string
+  gray20: string
+  gray30: string
+  gray40: string
+  gray50: string
+  gray60: string
+  gray70: string
+  gray80: string
+  gray90: string
+  background: string
+  regularText: string
   emphasizedText: string
   lightText: string
-  link: string
-  sideNavigationBackground: string
-  subContentSeparatorLine: string
-}
-
-export interface ThemeColors {
-  palette: Palette
-  usage: UsageColors
+  linkText: string
+  cardBackground: string
+  border: string
+  sidenavBackground: string
+  secondarySeparator: string
+  separator: string
 }
 
 export interface ThemeShadows {
@@ -90,40 +93,33 @@ export interface Theme {
 
 // Default theme definition
 
-const palette: Palette = {
+const colors: ThemeColors = {
+  brand: "#000000",
   info: "#1499CE",
   success: "#00b34d",
   warning: "#FFAE00",
   error: "#DE1A1A",
   white: "#FFFFFF",
   black: "#000000",
-  grey10: "#F8F8F8",
-  grey20: "#e8e8e8",
-  grey30: "#D0D0D0",
-  grey40: "#C6C6C6",
-  grey50: "#BBBBBB",
-  grey60: "#999999",
-  grey70: "#808080",
-  grey80: "#747474",
-  grey90: "#444444"
-}
-
-const usageColors: UsageColors = {
-  bodyBackground: "#F1F1F1",
-  bodyText: "#555f61",
-  cardBackground: palette.white,
-  contentBorder: "#dadada",
-  contentSeparatorLine: "#f2f2f2",
+  gray10: "#F8F8F8",
+  gray20: "#e8e8e8",
+  gray30: "#D0D0D0",
+  gray40: "#C6C6C6",
+  gray50: "#BBBBBB",
+  gray60: "#999999",
+  gray70: "#808080",
+  gray80: "#747474",
+  gray90: "#444444",
+  background: "#F1F1F1",
+  regularText: "#555f61",
+  cardBackground: "#FFFFFF",
+  border: "#dadada",
   emphasizedText: "#373d3f",
   lightText: "#969696",
-  link: palette.info,
-  sideNavigationBackground: "#393939",
-  subContentSeparatorLine: "#f8f8f8"
-}
-
-const colors: ThemeColors = {
-  palette,
-  usage: usageColors
+  linkText: "#1499CE",
+  sidenavBackground: "#393939",
+  separator: "#f2f2f2",
+  secondarySeparator: "#f8f8f8"
 }
 
 const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
@@ -142,14 +138,14 @@ const typography: ThemeTypography = {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 700,
-    color: usageColors.emphasizedText
+    color: "#373d3f"
   },
   heading2: {
     ...baseTypography,
     fontSize: 13,
     fontWeight: 600,
     textTransform: "uppercase",
-    color: usageColors.lightText,
+    color: "#969696",
     "&::before": {
       content: "» "
     }
@@ -173,7 +169,7 @@ const shadows: ThemeShadows = {
   popup: "0 3px 12px rgba(0, 0, 0, .14)"
 }
 
-const contiamoTheme: Theme = {
+const operational: Theme = {
   typography,
   shadows,
   colors,
@@ -183,4 +179,4 @@ const contiamoTheme: Theme = {
   baseZIndex: 0
 }
 
-export { contiamoTheme }
+export { operational }
