@@ -18,6 +18,10 @@ export interface IProps {
   fix?: boolean
 }
 
+export interface IState {
+  isHovered: boolean
+}
+
 const Container = glamorous.div(
   ({
     theme,
@@ -66,30 +70,38 @@ const Container = glamorous.div(
   }
 )
 
-const Sidenav: React.SFC<IProps> = ({
-  id,
-  css,
-  className,
-  children,
-  color,
-  fix,
-  expandOnHover,
-  expandedWidth,
-  width
-}: IProps) => (
-  <Container
-    key={id}
-    css={css}
-    className={className}
-    color={color}
-    fix={fix}
-    expandOnHover={expandOnHover}
-    expandedWidth={expandedWidth || 240}
-    width={width || 60}
-  >
-    {children}
-  </Container>
-)
+class Sidenav extends React.Component<IProps, IState> {
+  state = {
+    isHovered: false
+  }
+
+  render() {
+    return (
+      <Container
+        key={this.props.id}
+        css={this.props.css}
+        className={this.props.className}
+        color={this.props.color}
+        fix={this.props.fix}
+        expandOnHover={this.props.expandOnHover}
+        expandedWidth={this.props.expandedWidth || 240}
+        onMouseEnter={() => {
+          this.setState(prevState => ({
+            isHovered: true
+          }))
+        }}
+        onMouseLeave={() => {
+          this.setState(prevState => ({
+            isHovered: false
+          }))
+        }}
+        width={this.props.width || 60}
+      >
+        {this.props.children}
+      </Container>
+    )
+  }
+}
 
 export default Sidenav
 export { SidenavHeader, SidenavItem }

@@ -5,18 +5,27 @@ import { Theme } from "@operational/theme"
 export interface IProps {
   id?: string | number
   className?: string
-  children: React.ReactNode
   onClick?: () => void
   active?: boolean
-  css?: any
+  css?: {}
+  label: string
 }
 
-const Container = glamorous.div({})
+const Container = glamorous.div({
+  height: 30,
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  padding: "0 16px",
+  justifyContent: "flex-start",
+  backgroundColor: "rgba(0, 0, 0, 0.2)",
+  color: "#FFF"
+})
 
-const SideNavigationItem = (props: IProps) => (
+const SidenavItem = (props: IProps) => (
   <Container key={props.id} css={props.css} className={props.className} onClick={props.onClick}>
-    {props.children}
+    {props.label}
   </Container>
 )
 
-export default SideNavigationItem
+export default SidenavItem

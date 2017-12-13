@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SideNavigation component renders 1`] = `
+exports[`Sidenav component renders 1`] = `
 <ThemeProvider
   theme={
     Object {
@@ -86,6 +86,6 @@ exports[`SideNavigation component renders 1`] = `
     }
   }
 >
-  <SideNavigation />
+  <Sidenav />
 </ThemeProvider>
 `;

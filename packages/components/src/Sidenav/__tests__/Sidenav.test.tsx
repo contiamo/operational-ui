@@ -2,9 +2,9 @@ import * as React from "react"
 import { shallow } from "enzyme"
 
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
-import ThemelessSidenav from "../SideNav"
+import ThemelessSidenav from "../Sidenav"
 
-const SideNav = wrapDefaultTheme(ThemelessSideNav)
+const Sidenav = wrapDefaultTheme(ThemelessSidenav)
 
 test("Sidenav component renders", () => {
   expect(shallow(<Sidenav />)).toMatchSnapshot()
