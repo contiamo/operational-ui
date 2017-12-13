@@ -54,7 +54,8 @@ const accessors = {
 
 const config = {
   maxNodeSize: 800,
-  nodeBorderWidth: 4
+  nodeBorderWidth: 4,
+  focusElement: { type: "node", matchers: { id: "3" }}
 }
 
 const viz = new ProcessFlow(containerNode)
