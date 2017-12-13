@@ -49,7 +49,7 @@ var breakdownBarStyle = {
     pointerEvents: "none",
     backgroundColor: utils_1.setBrightness(theme_1.contiamoTheme.colors.palette.info, 145)
 };
-var breakdownTextStyle = __assign({}, theme_1.contiamoTheme.typography.small, { color: theme_1.contiamoTheme.colors.palette.grey70, position: "relative", top: 1, fontWeight: 400, padding: 2 });
+var breakdownTextStyle = __assign({}, theme_1.contiamoTheme.typography.small, { color: theme_1.contiamoTheme.colors.palette.grey70, position: "relative", top: 1, fontWeight: 400, padding: theme_1.contiamoTheme.spacing / 4 + "px " + theme_1.contiamoTheme.spacing / 2 + "px" });
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",

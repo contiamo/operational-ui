@@ -57,7 +57,7 @@ const breakdownTextStyle = {
   position: "relative",
   top: 1,
   fontWeight: 400,
-  padding: 2
+  padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`
 }
 
 const titleStyle = {
