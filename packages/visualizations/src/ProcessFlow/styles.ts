@@ -1,7 +1,8 @@
 import { css } from "glamor"
+import { contiamoTheme as theme } from "@operational/theme"
+import { setBrightness } from "@operational/utils"
 
 const breakdownStyle = {
-  fontFamily: "sans-serif",
   maxWidth: "350px",
   padding: "6px",
   background: "white"
@@ -14,17 +15,16 @@ const breakdownsContainerStyle = {
 }
 
 const breakdownContainerStyle = {
+  padding: `${theme.spacing / 2}px`,
+  background: theme.colors.palette.white,
   width: "49%",
-  float: "left",
-  paddingRight: "2%",
-  paddingTop: "10px",
-  paddingBottom: "10px"
+  float: "left"
 }
 
 const breakdownLabelStyle = {
+  ...theme.typography.small,
   display: "block",
-  marginBottom: "3px",
-  fontSize: "12px"
+  marginBottom: theme.spacing / 4
 }
 
 const breakdownCommentLabelStyle = {
@@ -34,28 +34,30 @@ const breakdownCommentLabelStyle = {
 const breakdownBackgroundBarStyle = {
   position: "relative",
   width: "100%",
-  backgroundColor: "#ddd",
+  fontSize: 12,
   overflow: "hidden",
-  padding: "0 3px",
-  height: "15px",
-  fontSize: "13px"
+  backgroundColor: theme.colors.palette.grey10
 }
 
 const breakdownBarStyle = {
   content: "",
   position: "absolute",
-  top: "0px",
-  left: "0px",
-  zIndex: "0",
+  top: 0,
+  left: 0,
+  zIndex: 0,
   display: "block",
   height: "100%",
   pointerEvents: "none",
-  backgroundColor: "#1499CE"
+  backgroundColor: setBrightness(theme.colors.palette.info, 145)
 }
 
 const breakdownTextStyle = {
-  color: "white",
-  position: "relative"
+  ...theme.typography.small,
+  color: theme.colors.palette.grey70,
+  position: "relative",
+  top: 1,
+  fontWeight: 400,
+  padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`
 }
 
 const titleStyle = {

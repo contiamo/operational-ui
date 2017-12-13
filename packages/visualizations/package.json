@@ -22,6 +22,8 @@
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "dependencies": {
+    "@operational/theme": "0.1.0-1",
+    "@operational/utils": "0.1.0-1",
     "d3": "^4.10.2",
     "glamor": "^2.20.40",
     "glamorous": "^4.8.0",
