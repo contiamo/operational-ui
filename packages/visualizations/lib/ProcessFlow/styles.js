@@ -1,4 +1,12 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamor_1 = require("glamor");
 var theme_1 = require("@operational/theme");
@@ -19,11 +27,7 @@ var breakdownContainerStyle = {
     width: "49%",
     float: "left"
 };
-var breakdownLabelStyle = {
-    display: "block",
-    marginBottom: theme_1.contiamoTheme.spacing / 4,
-    fontSize: theme_1.contiamoTheme.typography.small.fontSize
-};
+var breakdownLabelStyle = __assign({}, theme_1.contiamoTheme.typography.small, { display: "block", marginBottom: theme_1.contiamoTheme.spacing / 4 });
 var breakdownCommentLabelStyle = {
     marginLeft: "6px"
 };
@@ -45,14 +49,7 @@ var breakdownBarStyle = {
     pointerEvents: "none",
     backgroundColor: utils_1.setBrightness(theme_1.contiamoTheme.colors.palette.info, 145)
 };
-var breakdownTextStyle = {
-    color: theme_1.contiamoTheme.colors.palette.grey70,
-    fontSize: 12,
-    position: "relative",
-    top: 1,
-    fontWeight: 400,
-    padding: 2
-};
+var breakdownTextStyle = __assign({}, theme_1.contiamoTheme.typography.small, { color: theme_1.contiamoTheme.colors.palette.grey70, position: "relative", top: 1, fontWeight: 400, padding: 2 });
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",

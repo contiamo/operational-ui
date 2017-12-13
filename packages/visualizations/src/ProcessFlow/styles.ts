@@ -22,9 +22,9 @@ const breakdownContainerStyle = {
 }
 
 const breakdownLabelStyle = {
+  ...theme.typography.small,
   display: "block",
-  marginBottom: theme.spacing / 4,
-  fontSize: theme.typography.small.fontSize
+  marginBottom: theme.spacing / 4
 }
 
 const breakdownCommentLabelStyle = {
@@ -52,8 +52,8 @@ const breakdownBarStyle = {
 }
 
 const breakdownTextStyle = {
+  ...theme.typography.small,
   color: theme.colors.palette.grey70,
-  fontSize: 12,
   position: "relative",
   top: 1,
   fontWeight: 400,
