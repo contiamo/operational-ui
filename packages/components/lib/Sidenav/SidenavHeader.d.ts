@@ -8,14 +8,9 @@ export interface IProps {
     children?: React.ReactNode;
     label: string;
     icon: ReactFeatherIconName;
+    active?: boolean;
+    expanded?: boolean;
+    onClick?: () => void;
 }
-export interface IState {
-    isExpanded: boolean;
-}
-declare class SidenavHeader extends React.Component<IProps, IState> {
-    state: {
-        isExpanded: boolean;
-    };
-    render(): JSX.Element;
-}
+declare const SidenavHeader: (props: IProps) => JSX.Element;
 export default SidenavHeader;

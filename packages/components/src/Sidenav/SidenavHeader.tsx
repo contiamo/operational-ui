@@ -13,32 +13,35 @@ export interface IProps {
   children?: React.ReactNode
   label: string
   icon: ReactFeatherIconName
-}
-
-export interface IState {
-  isExpanded: boolean
+  active?: boolean
+  expanded?: boolean
+  onClick?: () => void
 }
 
 const size: number = 60
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  width: "100%",
-  overflow: "hidden",
-  height: size,
-  flex: `0 0 ${size}px`,
-  backgroundColor: "inherit",
-  "&:first-child": {
-    borderBottom: "1px solid rgba(255, 255, 255, .1)"
-  }
-}))
+const Container = glamorous.div({
+  width: "100%"
+})
 
-const Label = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Content = glamorous.div(
+  ({ theme, isActive, isExpanded }: { theme: Theme; isActive: boolean; isExpanded: boolean }): {} => ({
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    overflow: "hidden",
+    height: size,
+    flex: `0 0 ${size}px`,
+    color: isActive ? theme.colors.linkText : theme.colors.white,
+    backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)"
+  })
+)
+
+const Label = glamorous.div({
   width: "fit-content",
-  whiteSpace: "pre"
-}))
+  whiteSpace: "nowrap"
+})
 
 const IconContainer = glamorous.div({
   width: size,
@@ -49,21 +52,16 @@ const IconContainer = glamorous.div({
   flex: `0 0 ${size}px`
 })
 
-class SidenavHeader extends React.Component<IProps, IState> {
-  state = {
-    isExpanded: false
-  }
-
-  render() {
-    return (
-      <Container key={this.props.id} css={this.props.css} className={this.props.className}>
-        <IconContainer>
-          <Icon name={this.props.icon} size={28} color="#FFF" />
-        </IconContainer>
-        <Label>{this.props.label}</Label>
-      </Container>
-    )
-  }
-}
+const SidenavHeader = (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className}>
+    <Content isActive={!!props.active} isExpanded={!!props.expanded}>
+      <IconContainer>
+        <Icon name={props.icon} size={24} />
+      </IconContainer>
+      <Label>{props.label}</Label>
+    </Content>
+    {props.expanded ? props.children : null}
+  </Container>
+)
 
 export default SidenavHeader

@@ -1,21 +1,14 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var Icon_1 = require("../Icon/Icon");
 var size = 60;
-var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
+var Container = glamorous_1.default.div({
+    width: "100%"
+});
+var Content = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, isActive = _a.isActive, isExpanded = _a.isExpanded;
     return ({
         position: "relative",
         display: "flex",
@@ -24,18 +17,13 @@ var Container = glamorous_1.default.div(function (_a) {
         overflow: "hidden",
         height: size,
         flex: "0 0 " + size + "px",
-        backgroundColor: "inherit",
-        "&:first-child": {
-            borderBottom: "1px solid rgba(255, 255, 255, .1)"
-        }
+        color: isActive ? theme.colors.linkText : theme.colors.white,
+        backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)"
     });
 });
-var Label = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({
-        width: "fit-content",
-        whiteSpace: "pre"
-    });
+var Label = glamorous_1.default.div({
+    width: "fit-content",
+    whiteSpace: "nowrap"
 });
 var IconContainer = glamorous_1.default.div({
     width: size,
@@ -45,22 +33,11 @@ var IconContainer = glamorous_1.default.div({
     justifyContent: "center",
     flex: "0 0 " + size + "px"
 });
-var SidenavHeader = /** @class */ (function (_super) {
-    __extends(SidenavHeader, _super);
-    function SidenavHeader() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            isExpanded: false
-        };
-        return _this;
-    }
-    SidenavHeader.prototype.render = function () {
-        return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className },
-            React.createElement(IconContainer, null,
-                React.createElement(Icon_1.default, { name: this.props.icon, size: 28, color: "#FFF" })),
-            React.createElement(Label, null, this.props.label)));
-    };
-    return SidenavHeader;
-}(React.Component));
+var SidenavHeader = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
+    React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded },
+        React.createElement(IconContainer, null,
+            React.createElement(Icon_1.default, { name: props.icon, size: 24 })),
+        React.createElement(Label, null, props.label)),
+    props.expanded ? props.children : null)); };
 exports.default = SidenavHeader;
 //# sourceMappingURL=SidenavHeader.js.map

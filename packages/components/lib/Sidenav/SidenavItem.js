@@ -9,9 +9,14 @@ var Container = glamorous_1.default.div({
     alignItems: "center",
     padding: "0 16px",
     justifyContent: "flex-start",
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
-    color: "#FFF"
+    whiteSpace: "nowrap",
+    backgroundColor: "rgba(0, 0, 0, 0.2)"
+}, function (_a) {
+    var theme = _a.theme, isActive = _a.isActive;
+    return ({
+        color: isActive ? theme.colors.linkText : theme.colors.white
+    });
 });
-var SidenavItem = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: props.onClick }, props.label)); };
+var SidenavItem = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: props.onClick, isActive: !!props.active }, props.label)); };
 exports.default = SidenavItem;
 //# sourceMappingURL=SidenavItem.js.map

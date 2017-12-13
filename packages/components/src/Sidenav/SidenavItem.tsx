@@ -11,19 +11,30 @@ export interface IProps {
   label: string
 }
 
-const Container = glamorous.div({
-  height: 30,
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  padding: "0 16px",
-  justifyContent: "flex-start",
-  backgroundColor: "rgba(0, 0, 0, 0.2)",
-  color: "#FFF"
-})
+const Container = glamorous.div(
+  {
+    height: 30,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    padding: "0 16px",
+    justifyContent: "flex-start",
+    whiteSpace: "nowrap",
+    backgroundColor: "rgba(0, 0, 0, 0.2)"
+  },
+  ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
+    color: isActive ? theme.colors.linkText : theme.colors.white
+  })
+)
 
 const SidenavItem = (props: IProps) => (
-  <Container key={props.id} css={props.css} className={props.className} onClick={props.onClick}>
+  <Container
+    key={props.id}
+    css={props.css}
+    className={props.className}
+    onClick={props.onClick}
+    isActive={!!props.active}
+  >
     {props.label}
   </Container>
 )

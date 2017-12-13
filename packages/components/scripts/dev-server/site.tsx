@@ -9,17 +9,17 @@ class Site extends React.Component<{}, {}> {
   render() {
     return (
       <ThemeProvider theme={contiamoTheme}>
-       <Sidenav expandOnHover> 
-        <SidenavHeader label="Operational UI" icon="Box"/>
-        <SidenavHeader label="Components" icon="Box"/>
-        <SidenavHeader label="Blocks" icon="Grid"/>
-        <SidenavHeader label="Visualizations" icon="BarChart2"/>
-        <SidenavHeader label="Documentation" icon="Edit"/>
-        <SidenavItem label="Buttons"/>
-        <SidenavItem label="Chips"/>
-        <SidenavItem label="Form Fields"/>
-        <SidenavItem label="Buttons"/>
-       </Sidenav>
+        <Sidenav expandOnHover>
+          <SidenavHeader label="Components" icon="Box">
+            <SidenavItem label="Buttons" />
+            <SidenavItem label="Chips" />
+            <SidenavItem label="Form Fields" />
+            <SidenavItem label="Buttons" />
+          </SidenavHeader>
+          <SidenavHeader label="Blocks" icon="Grid" />
+          <SidenavHeader label="Visualizations" icon="BarChart2" active />
+          <SidenavHeader label="Documentation" icon="Edit" />
+        </Sidenav>
       </ThemeProvider>
     )
   }

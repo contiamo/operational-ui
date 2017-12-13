@@ -19,10 +19,7 @@ export interface IPropsWithTheme extends IProps {
 }
 
 const Icon = (props: IPropsWithTheme) => {
-  const defaultColor = props.theme.colors.gray90
-  const color_: string = props.color
-    ? (hexOrColor(props.color)(props.theme.colors[props.color] || defaultColor) as string)
-    : defaultColor
+  const color_: string = props.color && (hexOrColor(props.color)(props.theme.colors[props.color]) as string)
 
   if (ReactFeather.hasOwnProperty(props.name)) {
     const Comp = ReactFeather[props.name]
