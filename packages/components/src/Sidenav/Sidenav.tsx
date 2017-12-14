@@ -3,19 +3,16 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { hexOrColor, readableTextColor } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
-import SidenavHeader from "./SidenavHeader"
-import SidenavItem from "./SidenavItem"
-
 export interface IProps {
   id?: string | number
   css?: {}
   className?: string
   children?: React.ReactNode
   color?: string
+  expanded?: boolean
   expandOnHover?: boolean
   expandedWidth?: number
   width?: number
-  fix?: boolean
 }
 
 export interface IState {
@@ -27,6 +24,7 @@ const Container = glamorous.div(
     theme,
     color,
     fix,
+    expanded,
     expandOnHover,
     expandedWidth,
     width
@@ -36,6 +34,7 @@ const Container = glamorous.div(
     fix?: boolean
     expandOnHover?: boolean
     expandedWidth: number
+    expanded?: boolean
     width: number
   }): any => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.sidenavBackground
@@ -50,9 +49,8 @@ const Container = glamorous.div(
       : {}
 
     return {
-      width,
       backgroundColor,
-      position: fix ? "fixed" : "relative",
+      width: expanded ? expandedWidth : width,
       zIndex: theme.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",
@@ -81,9 +79,9 @@ class Sidenav extends React.Component<IProps, IState> {
         css={this.props.css}
         className={this.props.className}
         color={this.props.color}
-        fix={this.props.fix}
         expandOnHover={this.props.expandOnHover}
         expandedWidth={this.props.expandedWidth || 240}
+        expanded={this.props.expanded}
         onMouseEnter={() => {
           this.setState(prevState => ({
             isHovered: true
@@ -103,4 +101,3 @@ class Sidenav extends React.Component<IProps, IState> {
 }
 
 export default Sidenav
-export { SidenavHeader, SidenavItem }
