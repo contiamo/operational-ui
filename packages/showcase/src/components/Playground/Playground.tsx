@@ -3,7 +3,7 @@ import glamorous, { ThemeProvider } from "glamorous"
 import ComponentPlayground from "component-playground"
 
 import { wrapTheme } from "@operational/utils"
-import { Theme, contiamoTheme } from "@operational/theme"
+import { Theme, operational } from "@operational/theme"
 import transformSnippet from "./transform-snippet"
 
 export interface IProps {
@@ -24,7 +24,7 @@ const Container = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpand
   ...isExpanded
     ? {
         border: 0,
-        backgroundColor: theme.colors.palette.white,
+        backgroundColor: theme.colors.white,
         position: "fixed",
         top: 0,
         left: 60,
@@ -114,7 +114,7 @@ class Playground extends React.Component<IProps, IState> {
     const wrappedComponents: { [id: string]: any } = {}
     const comps = components || {}
     for (const key in comps) {
-      wrappedComponents[key] = wrapTheme(contiamoTheme)(comps[key])
+      wrappedComponents[key] = wrapTheme(operational)(comps[key])
     }
     return (
       <Container isExpanded={this.state.isExpanded}>

@@ -5,7 +5,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey90;
+    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.gray90;
     return {
         backgroundColor: backgroundColor,
         position: "relative",
@@ -17,7 +17,7 @@ var style = function (_a) {
         transition: ".1s background-color ease",
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         "& + &": {
-            borderTop: "1px solid " + theme.colors.palette.grey90
+            borderTop: "1px solid " + theme.colors.gray90
         },
         ":hover": {
             backgroundColor: utils_1.darken(backgroundColor)(10)

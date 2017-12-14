@@ -15,7 +15,7 @@ export interface IContainerProps {
 
 const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
   ({ theme, color, disabled, updating, style }: IContainerProps & { theme: Theme }): {} => {
-    const backgroundColor = color && theme.colors.palette ? hexOrColor(color)(theme.colors.palette[color]) : "white"
+    const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
 
     const updatingAfterStyles = updating
       ? {
@@ -24,7 +24,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
           height: 16,
           border: 0,
           borderRadius: "50%",
-          boxShadow: `1px 0px 0px 0px ${theme.colors.palette.grey70} inset`,
+          boxShadow: `1px 0px 0px 0px ${theme.colors.gray70} inset`,
           animation: `.7s ${spin} linear infinite`
         }
       : {}
@@ -40,7 +40,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
       width: "fit-content",
       minHeight: 20,
       border: "1px solid",
-      borderColor: theme.colors.palette.grey30,
+      borderColor: theme.colors.gray30,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
       color: readableTextColor(backgroundColor)(["black", "white"]),
@@ -57,7 +57,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
         width: 0,
         height: 0,
         border: "4px solid transparent",
-        borderTopColor: theme.colors.palette.grey70,
+        borderTopColor: theme.colors.gray70,
         transform: "translateY(calc(-50% + 2px))"
       },
 
@@ -75,7 +75,7 @@ export interface IDisplayValueProps {
 
 const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
   ({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
-    color: isPlaceholder ? theme.colors.palette.grey60 : theme.colors.palette.black
+    color: isPlaceholder ? theme.colors.gray60 : theme.colors.black
   })
 )
 

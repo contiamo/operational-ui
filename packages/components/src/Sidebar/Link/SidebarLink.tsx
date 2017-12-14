@@ -20,10 +20,8 @@ export interface IProps {
 }
 
 const style = ({ theme, color, disabled, active }: IProps): {} => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff"
-  const textColor = active
-    ? theme.colors.usage.link
-    : readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"])
+  const backgroundColor = color ? hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff"
+  const textColor = active ? theme.colors.linkText : readableTextColor(backgroundColor)([theme.colors.gray80, "white"])
   const disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 }
 
   return {
@@ -49,7 +47,7 @@ const style = ({ theme, color, disabled, active }: IProps): {} => {
 
     "&.co_link + .co_link": {
       borderTop: "1px solid",
-      borderColor: theme.colors.usage.subContentSeparatorLine
+      borderColor: theme.colors.secondarySeparator
     },
 
     ":hover": {

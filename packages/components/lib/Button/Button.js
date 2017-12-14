@@ -13,11 +13,9 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, condensed = _a.condensed;
-    var backgroundColor = color
-        ? utils_1.hexOrColor(color)(theme.colors.palette[color] || "white")
-        : "white";
+    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color] || "white") : "white";
     var activeBackgroundColor = utils_1.darken(backgroundColor)(5);
-    var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"]);
+    var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"]);
     var activeBoxShadow = theme.shadows.pressed;
     var spacing = theme.spacing;
     return __assign({ display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing * 1 / 2 + "px" : spacing * 2 / 3 + "px " + spacing + "px", border: "1px solid rgba(0, 0, 0, .2)", borderRadius: 2, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled

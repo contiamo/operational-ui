@@ -1,5 +1,6 @@
-export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray10" | "gray20" | "gray30" | "gray40" | "gray50" | "gray60" | "gray70" | "gray80" | "gray90" | "background" | "regularText" | "emphasizedText" | "lightText" | "linkText" | "cardBackground" | "border" | "sidenavBackground" | "secondarySeparator" | "separator";
+export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray10" | "gray20" | "gray30" | "gray40" | "gray50" | "gray60" | "gray70" | "gray80" | "gray90" | "background" | "bodyText" | "emphasizedText" | "lightText" | "linkText" | "cardBackground" | "border" | "sidenavBackground" | "secondarySeparator" | "separator";
 export interface ThemeColors {
+    [key: string]: string;
     brand: string;
     info: string;
     success: string;
@@ -17,7 +18,7 @@ export interface ThemeColors {
     gray80: string;
     gray90: string;
     background: string;
-    regularText: string;
+    bodyText: string;
     emphasizedText: string;
     lightText: string;
     linkText: string;

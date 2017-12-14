@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  background-color: ${theme.colors.usage.bodyBackground};
+  background-color: ${theme.colors.background};
 }
 `
 

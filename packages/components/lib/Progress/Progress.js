@@ -35,8 +35,8 @@ var BarContainer = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme;
     return ({
-        backgroundColor: theme.colors.palette.grey30,
-        border: "1px solid " + theme.colors.palette.grey20
+        backgroundColor: theme.colors.gray30,
+        border: "1px solid " + theme.colors.gray20
     });
 });
 var fillProgress = glamor_1.css.keyframes({
@@ -53,7 +53,7 @@ var Bar = glamorous_1.default.div({
     var theme = _a.theme;
     return ({
         animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 30s",
-        backgroundColor: theme.colors.palette.success
+        backgroundColor: theme.colors.success
     });
 });
 var Progress = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },

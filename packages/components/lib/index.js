@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
 exports.ThemeProvider = glamorous_1.ThemeProvider;
 var theme_1 = require("@operational/theme");
-exports.contiamoTheme = theme_1.contiamoTheme;
+exports.operationalTheme = theme_1.operational;
 var Button_1 = require("./Button/Button");
 exports.Button = Button_1.default;
 var ButtonGroup_1 = require("./ButtonGroup/ButtonGroup");

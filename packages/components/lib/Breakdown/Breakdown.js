@@ -25,8 +25,8 @@ var Container = glamorous_1.default.div({
                 backgroundColor: "rgba(0, 0, 0, 0.01)"
             }
         }
-        : {}, { background: theme.colors.palette.white, ":not(:first-child)": {
-            borderTop: "1px solid " + theme.colors.palette.grey20
+        : {}, { background: theme.colors.white, ":not(:first-child)": {
+            borderTop: "1px solid " + theme.colors.gray20
         } }));
 });
 var Content = glamorous_1.default.div({
@@ -63,13 +63,13 @@ var Bar = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme, fill = _a.fill, color = _a.color;
     var backgroundColor = color
-        ? utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
-        : theme.colors.palette.info;
+        ? utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info)
+        : theme.colors.info;
     return {
         padding: theme.spacing / 4 + "px " + theme.spacing / 2 + "px",
-        backgroundColor: theme.colors.palette.grey10,
+        backgroundColor: theme.colors.gray10,
         "> span": {
-            color: theme.colors.palette.grey70,
+            color: theme.colors.gray70,
             fontSize: 12,
             position: "relative",
             top: 1,
@@ -94,7 +94,7 @@ var Number = glamorous_1.default.div({
         paddingRight: theme.spacing,
         paddingLeft: theme.spacing / 2,
         fontWeight: theme.typography.title.fontWeight,
-        color: theme.colors.palette.grey20
+        color: theme.colors.gray20
     });
 });
 exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: props.onClick, onMouseEnter: props.onMouseEnter, onMouseLeave: props.onMouseLeave },

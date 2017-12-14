@@ -1,5 +1,5 @@
 import { css } from "glamor"
-import { contiamoTheme as theme } from "@operational/theme"
+import { operational as theme } from "@operational/theme"
 import { setBrightness } from "@operational/utils"
 
 const breakdownStyle = {
@@ -16,7 +16,7 @@ const breakdownsContainerStyle = {
 
 const breakdownContainerStyle = {
   padding: `${theme.spacing / 2}px`,
-  background: theme.colors.palette.white,
+  background: theme.colors.white,
   width: "49%",
   float: "left"
 }
@@ -36,7 +36,7 @@ const breakdownBackgroundBarStyle = {
   width: "100%",
   fontSize: 12,
   overflow: "hidden",
-  backgroundColor: theme.colors.palette.grey10
+  backgroundColor: theme.colors.gray10
 }
 
 const breakdownBarStyle = {
@@ -48,12 +48,12 @@ const breakdownBarStyle = {
   display: "block",
   height: "100%",
   pointerEvents: "none",
-  backgroundColor: setBrightness(theme.colors.palette.info, 145)
+  backgroundColor: setBrightness(theme.colors.info, 145)
 }
 
 const breakdownTextStyle = {
   ...theme.typography.small,
-  color: theme.colors.palette.grey70,
+  color: theme.colors.gray70,
   position: "relative",
   top: 1,
   fontWeight: 400,

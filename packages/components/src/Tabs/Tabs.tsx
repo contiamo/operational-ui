@@ -49,7 +49,7 @@ const TabList = glamorous.ul(
   },
   ({ theme }: { theme: Theme }) => ({
     "&:after": {
-      background: darken(theme.colors.palette.grey20)(6)
+      background: darken(theme.colors.gray20)(6)
     }
   })
 )
@@ -97,7 +97,7 @@ const TabTitle = glamorous.li(
       : {},
     ...disabled
       ? {
-          color: theme.colors.palette.grey60,
+          color: theme.colors.gray60,
           cursor: "not-allowed"
         }
       : {
@@ -121,7 +121,7 @@ const Tabs: React.SFC<IPropsWithTheme> = ({
     (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index })
   )
 
-  const color = hexOrColor(activeColor)(theme.colors.palette[activeColor] || theme.colors.palette.info)
+  const color = hexOrColor(activeColor)(theme.colors[activeColor] || theme.colors.info)
 
   // Display only the active panel based off the children props
   const { children: panelContent, disabled }: TabProps = childrenProps.find(({ index }) => index === active)

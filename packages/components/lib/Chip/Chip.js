@@ -5,7 +5,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, hasChip = _a.hasChip;
-    var backgroundColor = utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
+    var backgroundColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
     return {
         backgroundColor: backgroundColor,
         position: "relative",
@@ -24,7 +24,7 @@ var Container = glamorous_1.default.div(function (_a) {
 });
 var Action = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = utils_1.hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info);
+    var backgroundColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
     return {
         backgroundColor: "rgba(255, 255, 255, 0.1)",
         borderLeft: "1px solid rgba(255, 255, 255, 0.15)",

@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Card, CardHeader, Heading2Type } from "@operational/components"
-import { contiamoTheme, Theme } from "@operational/theme"
+import { operational, Theme } from "@operational/theme"
 
 import Playground from "../../../components/Playground/Playground"
 import Table from "../../../components/PropsTable/PropsTable"
@@ -31,13 +31,13 @@ export default () => (
 
     <p>The library provides a set of basic colors, as well as a range of grays.</p>
 
-    {Object.keys(contiamoTheme.colors.palette).map((color, index) => (
+    {Object.keys(operational.colors).map((color, index) => (
       <ColorBox key={index}>
-        <div style={{ backgroundColor: contiamoTheme.colors.palette[color] }} />
+        <div style={{ backgroundColor: operational.colors[color] }} />
         <p>{color}</p>
       </ColorBox>
     ))}
 
-    <Playground snippet={String(simpleSnippet)} components={{}} scope={{ theme: contiamoTheme }} />
+    <Playground snippet={String(simpleSnippet)} components={{}} scope={{ theme: operational }} />
   </Card>
 )

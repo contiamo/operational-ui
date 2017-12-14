@@ -15,7 +15,7 @@ export interface IProps {
 
 const Container = glamorous.div(
   ({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): any => {
-    const backgroundColor = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
+    const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
 
     return {
       backgroundColor,
@@ -36,7 +36,7 @@ const Container = glamorous.div(
 )
 
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): any => {
-  const backgroundColor = hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info)
+  const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
   return {
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderLeft: "1px solid rgba(255, 255, 255, 0.15)",

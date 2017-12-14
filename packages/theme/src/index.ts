@@ -18,7 +18,7 @@ export type ThemeColorName =
   | "gray80"
   | "gray90"
   | "background"
-  | "regularText"
+  | "bodyText"
   | "emphasizedText"
   | "lightText"
   | "linkText"
@@ -29,6 +29,7 @@ export type ThemeColorName =
   | "separator"
 
 export interface ThemeColors {
+  [key: string]: string
   brand: string
   info: string
   success: string
@@ -46,7 +47,7 @@ export interface ThemeColors {
   gray80: string
   gray90: string
   background: string
-  regularText: string
+  bodyText: string
   emphasizedText: string
   lightText: string
   linkText: string
@@ -111,7 +112,7 @@ const colors: ThemeColors = {
   gray80: "#747474",
   gray90: "#444444",
   background: "#F1F1F1",
-  regularText: "#555f61",
+  bodyText: "#555f61",
   cardBackground: "#FFFFFF",
   border: "#dadada",
   emphasizedText: "#373d3f",

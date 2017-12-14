@@ -20,42 +20,42 @@ exports.default = function (_a) {
             height: 0,
             marginLeft: "auto",
             border: "4px solid transparent",
-            borderLeftColor: theme.colors.palette.grey20,
+            borderLeftColor: theme.colors.gray20,
             transition: ".15s transform ease"
         }
         : {};
     return {
         position: "relative",
-        color: theme.colors.usage.emphasizedText,
+        color: theme.colors.emphasizedText,
         "& .header": {
             position: "relative",
             display: "flex",
             alignItems: "center",
             padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px",
             borderTop: "1px solid",
-            borderTopColor: theme.colors.palette.grey10,
+            borderTopColor: theme.colors.gray10,
             cursor: "pointer",
             outline: "none",
-            backgroundColor: theme.colors.palette.white
+            backgroundColor: theme.colors.white
         },
         "& .header:hover": {
-            backgroundColor: theme.colors.palette.grey10
+            backgroundColor: theme.colors.gray10
         },
         "&.open .header": {
             borderBottom: "1px solid",
-            borderBottomColor: theme.colors.usage.contentSeparatorLine,
+            borderBottomColor: theme.colors.separator,
             fontWeight: 600,
-            backgroundColor: theme.colors.palette.grey10
+            backgroundColor: theme.colors.gray10
         },
         // Caret styles begin here.
         "& .header::after": __assign({}, caret),
         "&:hover .header::after": {
-            borderLeftColor: theme.colors.palette.grey80
+            borderLeftColor: theme.colors.gray80
         },
         "&.open .header.open::after": {
             // rotate the caret to face down when an item is open.
             transform: "translate3d(-2px, 2px, 0) rotate(90deg)",
-            borderLeftColor: theme.colors.palette.grey80
+            borderLeftColor: theme.colors.gray80
         },
         // Spinner for async items replaces a caret.
         "&.updating .header::after": {
@@ -63,7 +63,7 @@ exports.default = function (_a) {
             height: 16,
             border: 0,
             borderRadius: "50%",
-            boxShadow: "1px 0px 0px 0px " + theme.colors.palette.grey70 + " inset",
+            boxShadow: "1px 0px 0px 0px " + theme.colors.gray70 + " inset",
             animation: ".7s " + utils_1.spin + " linear infinite"
         },
         "& .content": {

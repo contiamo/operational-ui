@@ -19,16 +19,14 @@ var Container = glamorous_1.default.div({
     }
 }, function (_a) {
     var theme = _a.theme, color = _a.color, withIcon = _a.withIcon, withActionIcon = _a.withActionIcon;
-    var backgroundColor = color
-        ? utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
-        : "white";
+    var backgroundColor = color ? utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
     return {
         backgroundColor: backgroundColor,
         position: "relative",
         display: "inline-flex",
         flexDirection: "column",
         width: "fit-content",
-        borderColor: theme.colors.palette.grey30,
+        borderColor: theme.colors.gray30,
         padding: theme.spacing / 2,
         paddingLeft: withIcon ? theme.spacing + 20 : theme.spacing / 2,
         paddingRight: withActionIcon ? theme.spacing * 2.25 : theme.spacing / 2,
@@ -37,8 +35,8 @@ var Container = glamorous_1.default.div({
 });
 var Label = glamorous_1.default.small(function (_a) {
     var color = _a.color, theme = _a.theme;
-    var backgroundColor = color ? utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
-    return __assign({}, theme.typography.small, { marginBottom: 3, fontWeight: 600, color: utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey60, theme.colors.palette.grey20]) });
+    var backgroundColor = color ? utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
+    return __assign({}, theme.typography.small, { marginBottom: 3, fontWeight: 600, color: utils_1.readableTextColor(backgroundColor)([theme.colors.gray60, theme.colors.gray20]) });
 });
 var IconContainer = glamorous_1.default.div({
     width: 20,
@@ -49,19 +47,17 @@ var IconContainer = glamorous_1.default.div({
     transform: "translateY(-50%)"
 }, function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color
-        ? utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white")
-        : "white";
+    var backgroundColor = color ? utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
     return {
         left: theme.spacing / 2,
         "& svg": {
-            stroke: utils_1.readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
+            stroke: utils_1.readableTextColor(backgroundColor)([theme.colors.white, theme.colors.black])
         }
     };
 });
 var ActionIconContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? utils_1.hexOrColor(color)((theme.colors && theme.colors.palette[color]) || "white") : "white";
+    var backgroundColor = color ? utils_1.hexOrColor(color)((theme.colors && theme.colors[color]) || "white") : "white";
     return {
         position: "absolute",
         width: theme.spacing * 1.5,
@@ -77,7 +73,7 @@ var ActionIconContainer = glamorous_1.default.div(function (_a) {
             backgroundColor: "rgba(255, 255, 255, 0.25)"
         },
         "& svg": {
-            stroke: utils_1.readableTextColor(backgroundColor)([theme.colors.palette.white, theme.colors.palette.black])
+            stroke: utils_1.readableTextColor(backgroundColor)([theme.colors.white, theme.colors.black])
         }
     };
 });

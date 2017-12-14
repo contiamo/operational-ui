@@ -1,7 +1,7 @@
 // Simple imports n' exports for consumers of the library.
 
 import { ThemeProvider } from "glamorous"
-import { contiamoTheme, Theme } from "@operational/theme"
+import { operational as operationalTheme, Theme } from "@operational/theme"
 
 import Button from "./Button/Button"
 import ButtonGroup from "./ButtonGroup/ButtonGroup"
@@ -82,7 +82,7 @@ export {
   BodyType,
   SmallType,
   ThemeProvider,
-  contiamoTheme,
+  operationalTheme,
   Theme,
   Upload
 }

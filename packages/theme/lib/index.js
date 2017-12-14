@@ -28,7 +28,7 @@ var colors = {
     gray80: "#747474",
     gray90: "#444444",
     background: "#F1F1F1",
-    regularText: "#555f61",
+    bodyText: "#555f61",
     cardBackground: "#FFFFFF",
     border: "#dadada",
     emphasizedText: "#373d3f",

@@ -35,8 +35,8 @@ const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme 
   alignItems: "center",
   justifyContent: "center",
   zIndex: theme.baseZIndex + 1,
-  color: theme.colors.palette.grey80,
-  borderLeft: `1px solid ${theme.colors.palette.grey40}`
+  color: theme.colors.gray80,
+  borderLeft: `1px solid ${theme.colors.gray40}`
 }))
 
 const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -87,8 +87,8 @@ const Day: GlamorousComponent<
   },
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
     ...theme.typography.body,
-    backgroundColor: selected ? theme.colors.palette.success : "transparent",
-    color: selected ? "#FFF" : isPlaceholder ? theme.colors.palette.grey80 : theme.colors.palette.black
+    backgroundColor: selected ? theme.colors.success : "transparent",
+    color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray80 : theme.colors.black
   })
 )
 
@@ -100,7 +100,7 @@ const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ th
   height: inputHeight,
   cursor: "pointer",
   border: "1px solid",
-  borderColor: theme.colors.palette.grey30,
+  borderColor: theme.colors.gray30,
   width: 200,
   position: "relative",
   "&:focus": {
@@ -126,7 +126,7 @@ const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div((
   "&:hover": {
     opacity: 1,
     "& svg": {
-      stroke: theme.colors.palette.warning
+      stroke: theme.colors.warning
     }
   }
 }))

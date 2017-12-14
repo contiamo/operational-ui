@@ -2,7 +2,7 @@ import * as React from "react"
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
 import glamorous, { ThemeProvider } from "glamorous"
 import { css } from "glamor"
-import { contiamoTheme } from "@operational/theme"
+import { operational } from "@operational/theme"
 import { baseStylesheet, injectStylesheet } from "@operational/utils"
 
 import Documentation from "./pages/Documentation/Documentation"
@@ -16,14 +16,14 @@ import Visualizations from "./pages/Visualizations/Visualizations"
 const Container = glamorous.div({
   display: "flex",
   "& hr": {
-    margin: `${contiamoTheme.spacing * 3}px 0 ${contiamoTheme.spacing * 2}px`,
+    margin: `${operational.spacing * 3}px 0 ${operational.spacing * 2}px`,
     height: 1,
     border: 0,
     backgroundColor: "rgba(0, 0, 0, 0.14)"
   },
   "& p": {
     marginTop: 0,
-    marginBottom: contiamoTheme.spacing
+    marginBottom: operational.spacing
   }
 })
 
@@ -31,7 +31,7 @@ const Content = glamorous.div({
   display: "flex",
   flexDirection: "column",
   width: "100vw",
-  backgroundColor: contiamoTheme.colors.usage.bodyBackground,
+  backgroundColor: operational.colors.background,
   height: "100vh",
   paddingLeft: 60,
   "& > *": {
@@ -43,7 +43,7 @@ const SideNavigationWithRouter: React.SFC<{}> = withRouter(SideNavigation as any
 
 const App: React.SFC<{}> = () => (
   <Router>
-    <ThemeProvider theme={contiamoTheme}>
+    <ThemeProvider theme={operational}>
       <Container>
         <SideNavigationWithRouter />
         <Content>
@@ -59,6 +59,6 @@ const App: React.SFC<{}> = () => (
   </Router>
 )
 
-injectStylesheet(baseStylesheet(contiamoTheme))
+injectStylesheet(baseStylesheet(operational))
 
 export default App

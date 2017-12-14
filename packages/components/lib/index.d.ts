@@ -1,5 +1,5 @@
 import { ThemeProvider } from "glamorous";
-import { contiamoTheme, Theme } from "@operational/theme";
+import { operational as operationalTheme, Theme } from "@operational/theme";
 import Button from "./Button/Button";
 import ButtonGroup from "./ButtonGroup/ButtonGroup";
 import Breakdown from "./Breakdown/Breakdown";
@@ -28,4 +28,4 @@ import Tooltip from "./Tooltip/Tooltip";
 import Timeline, { TimelineItem } from "./Timeline/Timeline";
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./Typography/Typography";
 import Upload from "./Upload/Upload";
-export { Button, ButtonGroup, Breakdown, Card, CardHeader, Chip, ColorPicker, ContextMenu, ContextMenuItem, Grid, DatePicker, Fieldset, Header, HeaderItem, HeaderSeparator, HeaderTitle, Icon, ReactFeatherIconName, InfoTile, Input, Modal, Paginator, PlusChip, Progress, Select, SideNavigation, SideNavigationHeader, SideNavigationItem, SideNavigationLink, Sidebar, SidebarItem, SidebarLink, Spinner, Switch, Tabs, Tab, Timeline, TimelineItem, Tooltip, TitleType, Heading1Type, Heading2Type, BodyType, SmallType, ThemeProvider, contiamoTheme, Theme, Upload };
+export { Button, ButtonGroup, Breakdown, Card, CardHeader, Chip, ColorPicker, ContextMenu, ContextMenuItem, Grid, DatePicker, Fieldset, Header, HeaderItem, HeaderSeparator, HeaderTitle, Icon, ReactFeatherIconName, InfoTile, Input, Modal, Paginator, PlusChip, Progress, Select, SideNavigation, SideNavigationHeader, SideNavigationItem, SideNavigationLink, Sidebar, SidebarItem, SidebarLink, Spinner, Switch, Tabs, Tab, Timeline, TimelineItem, Tooltip, TitleType, Heading1Type, Heading2Type, BodyType, SmallType, ThemeProvider, operationalTheme, Theme, Upload };

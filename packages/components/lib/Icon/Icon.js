@@ -6,9 +6,9 @@ var ReactFeather = require("react-feather");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Icon = function (props) {
-    var defaultColor = props.theme.colors.palette.grey90;
+    var defaultColor = props.theme.colors.gray90;
     var color_ = props.color
-        ? utils_1.hexOrColor(props.color)(props.theme.colors.palette[props.color] || defaultColor)
+        ? utils_1.hexOrColor(props.color)(props.theme.colors[props.color] || defaultColor)
         : defaultColor;
     if (ReactFeather.hasOwnProperty(props.name)) {
         var Comp = ReactFeather[props.name];

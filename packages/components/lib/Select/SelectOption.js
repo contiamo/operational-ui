@@ -6,7 +6,7 @@ var utils_1 = require("@operational/utils");
 var react_feather_1 = require("react-feather");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, selected = _a.selected;
-    var backgroundColor = color && theme.colors ? utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
+    var backgroundColor = color && theme.colors ? utils_1.hexOrColor(color)(theme.colors[color]) : "white";
     return {
         backgroundColor: backgroundColor,
         position: "relative",

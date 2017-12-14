@@ -61,7 +61,7 @@ const AppSideNavigation: React.SFC<IPropsWithTheme> = ({ location, theme }: IPro
 
       {links.map(({ url, label, icon }: ILink, index: number) => {
         const routeMatch = location && location.pathname && url && location.pathname.slice(0, url.length) === url
-        const color = routeMatch ? theme.colors.usage.link : "#fff"
+        const color = routeMatch ? theme.colors.link : "#fff"
         return (
           <SideNavigationItem key={index} active={routeMatch}>
             <Link to={url || "/"}>

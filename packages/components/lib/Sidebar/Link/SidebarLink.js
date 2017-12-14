@@ -14,10 +14,8 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var style = function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled, active = _a.active;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors.palette && theme.colors.palette[color]) : "#fff";
-    var textColor = active
-        ? theme.colors.usage.link
-        : utils_1.readableTextColor(backgroundColor)([theme.colors.palette.grey80, "white"]);
+    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff";
+    var textColor = active ? theme.colors.linkText : utils_1.readableTextColor(backgroundColor)([theme.colors.gray80, "white"]);
     var disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
     return __assign({ backgroundColor: backgroundColor }, theme.typography.body, { fontWeight: active ? 600 : 400, position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
@@ -27,7 +25,7 @@ var style = function (_a) {
             outline: 0
         }, "&.co_link + .co_link": {
             borderTop: "1px solid",
-            borderColor: theme.colors.usage.subContentSeparatorLine
+            borderColor: theme.colors.secondarySeparator
         }, ":hover": {
             backgroundColor: utils_1.darken(backgroundColor)(2),
             // The text color needs to change too if it gets too dark 😁

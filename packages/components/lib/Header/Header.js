@@ -11,8 +11,8 @@ var HeaderSeparator_1 = require("./HeaderSeparator");
 exports.HeaderSeparator = HeaderSeparator_1.default;
 var Container = glamorous_1.default.header(function (_a) {
     var theme = _a.theme, color = _a.color;
-    var white = theme.colors.palette.white;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors.palette[color] || white) : white;
+    var white = theme.colors.white;
+    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color] || white) : white;
     return {
         backgroundColor: backgroundColor,
         display: "flex",

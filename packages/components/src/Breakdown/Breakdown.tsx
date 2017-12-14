@@ -38,9 +38,9 @@ const Container = glamorous.div(
           }
         }
       : {},
-    background: theme.colors.palette.white,
+    background: theme.colors.white,
     ":not(:first-child)": {
-      borderTop: `1px solid ${theme.colors.palette.grey20}`
+      borderTop: `1px solid ${theme.colors.gray20}`
     }
   })
 )
@@ -82,13 +82,13 @@ const Bar = glamorous.div(
   },
   ({ theme, fill, color }: { theme: Theme; fill: number; color: string }) => {
     const backgroundColor: string = color
-      ? (hexOrColor(color)(theme.colors.palette[color] || theme.colors.palette.info) as string)
-      : theme.colors.palette.info
+      ? (hexOrColor(color)(theme.colors[color] || theme.colors.info) as string)
+      : theme.colors.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
-      backgroundColor: theme.colors.palette.grey10,
+      backgroundColor: theme.colors.gray10,
       "> span": {
-        color: theme.colors.palette.grey70,
+        color: theme.colors.gray70,
         fontSize: 12,
         position: "relative",
         top: 1,
@@ -115,7 +115,7 @@ const Number = glamorous.div(
     paddingRight: theme.spacing,
     paddingLeft: theme.spacing / 2,
     fontWeight: theme.typography.title.fontWeight,
-    color: theme.colors.palette.grey20
+    color: theme.colors.gray20
   })
 )
 

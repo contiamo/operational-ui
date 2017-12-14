@@ -10,8 +10,8 @@ var Container = glamorous_1.default.div(function (_a) {
         width: width,
         padding: padding || theme.spacing,
         boxShadow: theme.shadows.card,
-        backgroundColor: theme.colors.usage.cardBackground,
-        color: theme.colors.usage.bodyText,
+        backgroundColor: theme.colors.cardBackground,
+        color: theme.colors.bodyText,
         "& p": {
             lineHeight: "20px"
         },

@@ -19,8 +19,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   boxShadow: theme.shadows.card,
   overflow: "auto",
   scrollBehavior: "smooth", // future-proof
-  backgroundColor: theme.colors.usage.cardBackground,
-  color: theme.colors.palette.grey80
+  backgroundColor: theme.colors.cardBackground,
+  color: theme.colors.gray80
 }))
 
 const Sidebar: React.SFC<IProps> = (props: IProps) => (

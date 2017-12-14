@@ -27,7 +27,7 @@ var ColorSquare = glamorous_1.default.div({
         ? {
             width: size,
             height: size,
-            boxShadow: "0 0 0 1px " + theme.colors.palette.grey30,
+            boxShadow: "0 0 0 1px " + theme.colors.gray30,
             backgroundColor: color
         }
         : {};

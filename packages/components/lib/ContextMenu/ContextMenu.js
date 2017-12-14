@@ -66,14 +66,15 @@ var ContextMenu = /** @class */ (function (_super) {
                 var onClick_1 = child.props.onClick;
                 menuItems.push(React.cloneElement(child, {
                     key: index,
-                    onClick: onClick_1 && (function () {
-                        if (!_this.props.keepOpenOnItemClick) {
-                            _this.setState(function (prevState) { return ({
-                                isOpen: false
-                            }); });
-                        }
-                        onClick_1();
-                    })
+                    onClick: onClick_1 &&
+                        (function () {
+                            if (!_this.props.keepOpenOnItemClick) {
+                                _this.setState(function (prevState) { return ({
+                                    isOpen: false
+                                }); });
+                            }
+                            onClick_1();
+                        })
                 }));
             }
             else {
