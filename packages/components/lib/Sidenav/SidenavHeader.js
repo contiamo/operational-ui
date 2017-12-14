@@ -35,8 +35,7 @@ var IconContainer = glamorous_1.default.div({
 });
 var SidenavHeader = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
     React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded },
-        React.createElement(IconContainer, null,
-            React.createElement(Icon_1.default, { name: props.icon, size: 24 })),
+        React.createElement(IconContainer, null, props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: props.icon, size: 24 }) : props.icon),
         React.createElement(Label, null, props.label)),
     props.expanded ? props.children : null)); };
 exports.default = SidenavHeader;

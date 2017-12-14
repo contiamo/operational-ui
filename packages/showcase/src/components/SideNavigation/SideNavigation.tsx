@@ -20,6 +20,7 @@ interface ILink {
 }
 
 const style: {} = {
+  position: "fixed",
   "& a": {
     textDecoration: "none",
     width: "100%"
@@ -35,12 +36,12 @@ const links: ILink[] = [
 
 const AppSideNavigation = ({ location }: IProps) => {
   return (
-    <Sidenav css={style} fix expandOnHover>
+    <Sidenav css={style} expandOnHover>
       <Link to="/">
         <SidenavHeader
           css={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}
           label="Operational UI"
-          icon="Circle"
+          icon={<Logo size={28} />}
         />
       </Link>
 

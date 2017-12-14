@@ -15,12 +15,6 @@ import Visualizations from "./pages/Visualizations/Visualizations"
 
 const Container = glamorous.div({
   display: "flex",
-  "& hr": {
-    margin: `${operational.spacing * 3}px 0 ${operational.spacing * 2}px`,
-    height: 1,
-    border: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.14)"
-  },
   "& p": {
     marginTop: 0,
     marginBottom: operational.spacing
