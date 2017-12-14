@@ -16,8 +16,8 @@ var Container = glamorous_1.default.header(function (_a) {
     return {
         backgroundColor: backgroundColor,
         display: "flex",
-        flex: "0 0 50px",
-        height: 50,
+        flex: "0 0 60px",
+        height: 60,
         alignItems: "center",
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"])
