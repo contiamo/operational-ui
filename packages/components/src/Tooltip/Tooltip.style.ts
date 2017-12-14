@@ -47,7 +47,7 @@ const getCaretPosition = (anchor: string) => (theme: Theme): caretPosition => {
 }
 
 export default ({ theme, color, anchor }: { theme: Theme; color?: string; anchor?: string }): {} => {
-  const backgroundColor: string = color ? hexOrColor(color)(theme.colors.palette[color]) : "black"
+  const backgroundColor: string = color ? hexOrColor(color)(theme.colors[color]) : "black"
 
   return {
     backgroundColor,

@@ -15,8 +15,8 @@ var Container = glamorous_1.default.div(function (_a) {
         boxShadow: theme.shadows.card,
         overflow: "auto",
         scrollBehavior: "smooth",
-        backgroundColor: theme.colors.usage.cardBackground,
-        color: theme.colors.palette.grey80
+        backgroundColor: theme.colors.cardBackground,
+        color: theme.colors.gray80
     });
 });
 var Sidebar = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };

@@ -12,7 +12,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled, updating = _a.updating, style = _a.style;
-    var backgroundColor = color && theme.colors.palette ? utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
+    var backgroundColor = color && theme.colors ? utils_1.hexOrColor(color)(theme.colors[color]) : "white";
     var updatingAfterStyles = updating
         ? {
             top: 6,
@@ -20,7 +20,7 @@ var Container = glamorous_1.default.div(function (_a) {
             height: 16,
             border: 0,
             borderRadius: "50%",
-            boxShadow: "1px 0px 0px 0px " + theme.colors.palette.grey70 + " inset",
+            boxShadow: "1px 0px 0px 0px " + theme.colors.gray70 + " inset",
             animation: ".7s " + utils_1.spin + " linear infinite"
         }
         : {};
@@ -35,14 +35,14 @@ var Container = glamorous_1.default.div(function (_a) {
         width: "fit-content",
         minHeight: 20,
         border: "1px solid",
-        borderColor: theme.colors.palette.grey30,
+        borderColor: theme.colors.gray30,
         opacity: disabled ? 0.5 : 1,
         cursor: "pointer",
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         outline: "none",
         pointerEvents: disabled ? "none" : "all",
         // downward caret.
-        "&::after": __assign({}, updatingAfterStyles, { content: "''", position: "absolute", top: "50%", right: theme.spacing / 2, width: 0, height: 0, border: "4px solid transparent", borderTopColor: theme.colors.palette.grey70, transform: "translateY(calc(-50% + 2px))" }),
+        "&::after": __assign({}, updatingAfterStyles, { content: "''", position: "absolute", top: "50%", right: theme.spacing / 2, width: 0, height: 0, border: "4px solid transparent", borderTopColor: theme.colors.gray70, transform: "translateY(calc(-50% + 2px))" }),
         "&:focus": {
             borderColor: "rgba(82,168,236,.8)",
             boxShadow: theme.shadows.focus
@@ -53,7 +53,7 @@ exports.Container = Container;
 var DisplayValue = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isPlaceholder = _a.isPlaceholder;
     return ({
-        color: isPlaceholder ? theme.colors.palette.grey60 : theme.colors.palette.black
+        color: isPlaceholder ? theme.colors.gray60 : theme.colors.black
     });
 });
 exports.DisplayValue = DisplayValue;

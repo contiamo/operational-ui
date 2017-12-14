@@ -13,7 +13,7 @@ export interface IProps {
 }
 
 const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : theme.colors.palette.grey90
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.gray90
 
   return {
     backgroundColor,
@@ -27,7 +27,7 @@ const style = ({ theme, color }: { theme: Theme; color?: string }): {} => {
     color: readableTextColor(backgroundColor)(["black", "white"]),
 
     "& + &": {
-      borderTop: `1px solid ${theme.colors.palette.grey90}`
+      borderTop: `1px solid ${theme.colors.gray90}`
     },
 
     ":hover": {

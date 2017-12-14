@@ -21,7 +21,7 @@ export interface IPropsWithTheme extends IProps {
 
 const Container = glamorous.div(
   ({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }): any => {
-    const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors.palette[color]) : "white"
+    const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
 
     return {
       backgroundColor,

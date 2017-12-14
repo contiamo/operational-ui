@@ -32,7 +32,7 @@ const Table = glamorous.table(({ theme }: { theme: Theme }): any => ({
     ...theme.typography.body
   },
   "& td, & th": {
-    borderColor: theme.colors.palette.grey20,
+    borderColor: theme.colors.gray20,
     padding: theme.spacing
   },
   "& tr:nth-child(even)": {

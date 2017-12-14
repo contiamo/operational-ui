@@ -42,7 +42,7 @@ var TabList = glamorous_1.default.ul({
     var theme = _a.theme;
     return ({
         "&:after": {
-            background: utils_1.darken(theme.colors.palette.grey20)(6)
+            background: utils_1.darken(theme.colors.gray20)(6)
         }
     });
 });
@@ -70,7 +70,7 @@ var TabTitle = glamorous_1.default.li({
         }
         : {}, disabled
         ? {
-            color: theme.colors.palette.grey60,
+            color: theme.colors.gray60,
             cursor: "not-allowed"
         }
         : {
@@ -83,7 +83,7 @@ var Tabs = function (_a) {
     var _b = _a.active, active = _b === void 0 ? 0 : _b, _c = _a.activeColor, activeColor = _c === void 0 ? "info" : _c, children = _a.children, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d, theme = _a.theme;
     // Get all children properties and add an index value to each of them
     var childrenProps = React.Children.map(children, function (child, index) { return (__assign({}, child.props, { index: index })); });
-    var color = utils_1.hexOrColor(activeColor)(theme.colors.palette[activeColor] || theme.colors.palette.info);
+    var color = utils_1.hexOrColor(activeColor)(theme.colors[activeColor] || theme.colors.info);
     // Display only the active panel based off the children props
     var _e = childrenProps.find(function (_a) {
         var index = _a.index;

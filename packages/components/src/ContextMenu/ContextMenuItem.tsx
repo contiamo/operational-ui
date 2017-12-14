@@ -12,17 +12,17 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable: boolean }): any => ({
-  backgroundColor: theme.colors.palette.white,
+  backgroundColor: theme.colors.white,
   minWidth: 160,
   width: "fit-content",
   padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
   border: "1px solid",
-  borderColor: theme.colors.usage.contentSeparatorLine,
+  borderColor: theme.colors.separator,
   ...clickable
     ? {
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: darken(theme.colors.palette.white)(2)
+          backgroundColor: darken(theme.colors.white)(2)
         }
       }
     : {},

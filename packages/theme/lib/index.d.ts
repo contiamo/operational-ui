@@ -1,37 +1,32 @@
-export declare type ThemeColorName = "info" | "success" | "warning" | "error" | "white" | "black" | "grey10" | "grey20" | "grey30" | "grey40" | "grey50" | "grey60" | "grey70" | "grey80" | "grey90";
-export interface Palette {
+export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray10" | "gray20" | "gray30" | "gray40" | "gray50" | "gray60" | "gray70" | "gray80" | "gray90" | "background" | "bodyText" | "emphasizedText" | "lightText" | "linkText" | "cardBackground" | "border" | "sidenavBackground" | "secondarySeparator" | "separator";
+export interface ThemeColors {
     [key: string]: string;
+    brand: string;
     info: string;
     success: string;
     warning: string;
     error: string;
     white: string;
     black: string;
-    grey10: string;
-    grey20: string;
-    grey30: string;
-    grey40: string;
-    grey50: string;
-    grey60: string;
-    grey70: string;
-    grey80: string;
-    grey90: string;
-}
-export interface UsageColors {
-    bodyBackground: string;
+    gray10: string;
+    gray20: string;
+    gray30: string;
+    gray40: string;
+    gray50: string;
+    gray60: string;
+    gray70: string;
+    gray80: string;
+    gray90: string;
+    background: string;
     bodyText: string;
-    cardBackground: string;
-    contentBorder: string;
-    contentSeparatorLine: string;
     emphasizedText: string;
     lightText: string;
-    link: string;
-    sideNavigationBackground: string;
-    subContentSeparatorLine: string;
-}
-export interface ThemeColors {
-    palette: Palette;
-    usage: UsageColors;
+    linkText: string;
+    cardBackground: string;
+    border: string;
+    sidenavBackground: string;
+    secondarySeparator: string;
+    separator: string;
 }
 export interface ThemeShadows {
     pressed: string;
@@ -65,5 +60,5 @@ export interface Theme {
     baseZIndex: number;
     shadows: ThemeShadows;
 }
-declare const contiamoTheme: Theme;
-export { contiamoTheme };
+declare const operational: Theme;
+export { operational };

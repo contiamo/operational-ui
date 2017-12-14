@@ -30,7 +30,7 @@ var Container = glamorous_1.default.div(function (_a) {
 var Content = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        backgroundColor: theme.colors.palette.white,
+        backgroundColor: theme.colors.white,
         padding: theme.spacing,
         boxShadow: theme.shadows.popup
     });

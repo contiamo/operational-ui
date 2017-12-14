@@ -25,11 +25,9 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
-  const backgroundColor: string = color
-    ? (hexOrColor(color)(theme.colors.palette[color] || "white") as string)
-    : "white"
+  const backgroundColor: string = color ? (hexOrColor(color)(theme.colors[color] || "white") as string) : "white"
   const activeBackgroundColor: string = darken(backgroundColor)(5)
-  const textColor = readableTextColor(backgroundColor)([theme.colors.usage.emphasizedText, "white"])
+  const textColor = readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"])
   const activeBoxShadow = theme.shadows.pressed
   const spacing = theme.spacing
 

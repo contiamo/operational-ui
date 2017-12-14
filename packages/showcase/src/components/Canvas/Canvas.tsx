@@ -24,11 +24,11 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   },
 
   "& a:link, & a:visited": {
-    color: theme.colors.palette.info
+    color: theme.colors.info
   },
 
   "& a:hover": {
-    color: darken(theme.colors.palette.info)(5)
+    color: darken(theme.colors.info)(5)
   },
 
   "& h4": {

@@ -13,11 +13,11 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, clickable = _a.clickable;
-    return (__assign({ backgroundColor: theme.colors.palette.white, minWidth: 160, width: "fit-content", padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", border: "1px solid", borderColor: theme.colors.usage.contentSeparatorLine }, clickable
+    return (__assign({ backgroundColor: theme.colors.white, minWidth: 160, width: "fit-content", padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", border: "1px solid", borderColor: theme.colors.separator }, clickable
         ? {
             cursor: "pointer",
             "&:hover": {
-                backgroundColor: utils_1.darken(theme.colors.palette.white)(2)
+                backgroundColor: utils_1.darken(theme.colors.white)(2)
             }
         }
         : {}, { "&:not(:first-child)": {

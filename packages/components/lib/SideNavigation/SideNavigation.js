@@ -19,9 +19,7 @@ var SideNavigationLink_1 = require("./Link/SideNavigationLink");
 exports.SideNavigationLink = SideNavigationLink_1.default;
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, fix = _a.fix, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
-    var backgroundColor = color
-        ? utils_1.hexOrColor(color)(theme.colors.palette[color])
-        : theme.colors.usage.sideNavigationBackground;
+    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.sidenavBackground;
     var hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",

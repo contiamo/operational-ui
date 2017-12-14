@@ -1,11 +1,11 @@
 import * as React from "react"
 import { render } from "enzyme"
 import { wrapTheme } from "@operational/utils"
-import { contiamoTheme } from "@operational/theme"
+import { operational } from "@operational/theme"
 
 import ThemelessPropsTable from "../PropsTable"
 
-const PropsTable = wrapTheme(contiamoTheme)(ThemelessPropsTable)
+const PropsTable = wrapTheme(operational)(ThemelessPropsTable)
 
 const sampleProps = [
   {

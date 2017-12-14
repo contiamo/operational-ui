@@ -25,7 +25,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  backgroundColor: theme.colors.palette.white,
+  backgroundColor: theme.colors.white,
   padding: theme.spacing,
   boxShadow: theme.shadows.popup
 }))

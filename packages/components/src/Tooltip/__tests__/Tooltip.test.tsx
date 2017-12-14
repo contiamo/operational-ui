@@ -1,6 +1,5 @@
 import * as React from "react"
 import { render } from "enzyme"
-import { contiamoTheme as theme } from "@operational/theme"
 
 import { Tooltip, style } from "../Tooltip"
 

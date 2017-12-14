@@ -14,7 +14,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color]) : "white"
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : "white"
 
   return {
     padding: 0,

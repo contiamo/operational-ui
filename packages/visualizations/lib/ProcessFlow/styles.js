@@ -22,12 +22,12 @@ var breakdownsContainerStyle = {
     padding: "7px 0"
 };
 var breakdownContainerStyle = {
-    padding: theme_1.contiamoTheme.spacing / 2 + "px",
-    background: theme_1.contiamoTheme.colors.palette.white,
+    padding: theme_1.operational.spacing / 2 + "px",
+    background: theme_1.operational.colors.white,
     width: "49%",
     float: "left"
 };
-var breakdownLabelStyle = __assign({}, theme_1.contiamoTheme.typography.small, { display: "block", marginBottom: theme_1.contiamoTheme.spacing / 4 });
+var breakdownLabelStyle = __assign({}, theme_1.operational.typography.small, { display: "block", marginBottom: theme_1.operational.spacing / 4 });
 var breakdownCommentLabelStyle = {
     marginLeft: "6px"
 };
@@ -36,7 +36,7 @@ var breakdownBackgroundBarStyle = {
     width: "100%",
     fontSize: 12,
     overflow: "hidden",
-    backgroundColor: theme_1.contiamoTheme.colors.palette.grey10
+    backgroundColor: theme_1.operational.colors.gray10
 };
 var breakdownBarStyle = {
     content: "",
@@ -47,9 +47,9 @@ var breakdownBarStyle = {
     display: "block",
     height: "100%",
     pointerEvents: "none",
-    backgroundColor: utils_1.setBrightness(theme_1.contiamoTheme.colors.palette.info, 145)
+    backgroundColor: utils_1.setBrightness(theme_1.operational.colors.info, 145)
 };
-var breakdownTextStyle = __assign({}, theme_1.contiamoTheme.typography.small, { color: theme_1.contiamoTheme.colors.palette.grey70, position: "relative", top: 1, fontWeight: 400, padding: theme_1.contiamoTheme.spacing / 4 + "px " + theme_1.contiamoTheme.spacing / 2 + "px" });
+var breakdownTextStyle = __assign({}, theme_1.operational.typography.small, { color: theme_1.operational.colors.gray70, position: "relative", top: 1, fontWeight: 400, padding: theme_1.operational.spacing / 4 + "px " + theme_1.operational.spacing / 2 + "px" });
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",

@@ -5,7 +5,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors.palette[color]) : "white";
+    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color]) : "white";
     return {
         padding: 0,
         borderBottom: "1px solid",

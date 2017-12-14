@@ -10,38 +10,33 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // Default theme definition
-var palette = {
+var colors = {
+    brand: "#000000",
     info: "#1499CE",
     success: "#00b34d",
     warning: "#FFAE00",
     error: "#DE1A1A",
     white: "#FFFFFF",
     black: "#000000",
-    grey10: "#F8F8F8",
-    grey20: "#e8e8e8",
-    grey30: "#D0D0D0",
-    grey40: "#C6C6C6",
-    grey50: "#BBBBBB",
-    grey60: "#999999",
-    grey70: "#808080",
-    grey80: "#747474",
-    grey90: "#444444"
-};
-var usageColors = {
-    bodyBackground: "#F1F1F1",
+    gray10: "#F8F8F8",
+    gray20: "#e8e8e8",
+    gray30: "#D0D0D0",
+    gray40: "#C6C6C6",
+    gray50: "#BBBBBB",
+    gray60: "#999999",
+    gray70: "#808080",
+    gray80: "#747474",
+    gray90: "#444444",
+    background: "#F1F1F1",
     bodyText: "#555f61",
-    cardBackground: palette.white,
-    contentBorder: "#dadada",
-    contentSeparatorLine: "#f2f2f2",
+    cardBackground: "#FFFFFF",
+    border: "#dadada",
     emphasizedText: "#373d3f",
     lightText: "#969696",
-    link: palette.info,
-    sideNavigationBackground: "#393939",
-    subContentSeparatorLine: "#f8f8f8"
-};
-var colors = {
-    palette: palette,
-    usage: usageColors
+    linkText: "#1499CE",
+    sidenavBackground: "#393939",
+    separator: "#f2f2f2",
+    secondarySeparator: "#f8f8f8"
 };
 var baseTypography = {
     lineHeight: "1.5",
@@ -50,8 +45,8 @@ var baseTypography = {
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 22, fontWeight: 600 }),
-    heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: usageColors.emphasizedText }),
-    heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: usageColors.lightText, "&::before": {
+    heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: "#373d3f" }),
+    heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: "#969696", "&::before": {
             content: "» "
         } }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
@@ -63,7 +58,7 @@ var shadows = {
     focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
     popup: "0 3px 12px rgba(0, 0, 0, .14)"
 };
-var contiamoTheme = {
+var operational = {
     typography: typography,
     shadows: shadows,
     colors: colors,
@@ -71,5 +66,5 @@ var contiamoTheme = {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     baseZIndex: 0
 };
-exports.contiamoTheme = contiamoTheme;
+exports.operational = operational;
 //# sourceMappingURL=index.js.map

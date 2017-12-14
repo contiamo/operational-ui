@@ -17,8 +17,8 @@ export interface IProps {
 }
 
 const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const { white } = theme.colors.palette
-  const backgroundColor = color ? hexOrColor(color)(theme.colors.palette[color] || white) : white
+  const { white } = theme.colors
+  const backgroundColor = color ? hexOrColor(color)(theme.colors[color] || white) : white
 
   return {
     backgroundColor,

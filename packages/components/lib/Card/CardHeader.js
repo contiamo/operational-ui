@@ -11,10 +11,10 @@ var Container = glamorous_1.default.div(function (_a) {
         margin: theme.spacing * -1,
         marginBottom: theme.spacing * 4 / 3,
         padding: "0 " + theme.spacing + "px",
-        borderBottom: "1px solid " + theme.colors.usage.contentSeparatorLine,
+        borderBottom: "1px solid " + theme.colors.separator,
         fontWeight: 700,
         lineHeight: 1,
-        color: theme.colors.usage.emphasizedText,
+        color: theme.colors.emphasizedText,
         "* + &": {
             marginTop: theme.spacing
         },

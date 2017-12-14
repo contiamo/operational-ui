@@ -34,7 +34,7 @@ const Title = glamorous.p(({ theme }: { theme: Theme }): any => ({
 }))
 
 const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
-  color: theme.colors.palette.error,
+  color: theme.colors.error,
   display: "inline-block",
   marginLeft: 8,
   "&::before": {
@@ -55,12 +55,12 @@ const TestResults: React.SFC<IProps> = ({ tests, completed, theme }: IProps) => 
       const isCompleted = completed > index
       const content = isCompleted ? (
         failed ? (
-          <Icon name="X" size={12} color={theme.colors.palette.error} />
+          <Icon name="X" size={12} color={theme.colors.error} />
         ) : (
-          <Icon name="Check" size={12} color={theme.colors.palette.success} />
+          <Icon name="Check" size={12} color={theme.colors.success} />
         )
       ) : (
-        <Icon name="MoreHorizontal" size={12} color={theme.colors.palette.black} />
+        <Icon name="MoreHorizontal" size={12} color={theme.colors.black} />
       )
       return (
         <Item key={index}>

@@ -2,7 +2,7 @@ import * as React from "react"
 import { shallow } from "enzyme"
 
 import { SidebarLink, style } from "../SidebarLink"
-import { contiamoTheme as theme } from "@operational/theme"
+import { operational as theme } from "@operational/theme"
 
 describe("SidebarLink", () => {
   it("Should render correctly", () => {

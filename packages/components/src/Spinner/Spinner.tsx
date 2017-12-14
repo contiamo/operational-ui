@@ -34,7 +34,7 @@ const Container = glamorous.div(
     spinnerSize?: string | number
     spinDuration?: number
   }): any => {
-    const spinnerColor: string = hexOrColor(color)(theme.colors.palette[color] || "white") as string
+    const spinnerColor: string = hexOrColor(color)(theme.colors[color] || "white") as string
 
     return {
       fontSize: "10px",

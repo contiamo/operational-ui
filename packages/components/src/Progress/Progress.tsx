@@ -44,8 +44,8 @@ const BarContainer = glamorous.div(
     overflow: "hidden"
   },
   ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.palette.grey30,
-    border: `1px solid ${theme.colors.palette.grey20}`
+    backgroundColor: theme.colors.gray30,
+    border: `1px solid ${theme.colors.gray20}`
   })
 )
 
@@ -64,7 +64,7 @@ const Bar = glamorous.div(
   },
   ({ theme }: { theme?: Theme }) => ({
     animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 30s`,
-    backgroundColor: theme.colors.palette.success
+    backgroundColor: theme.colors.success
   })
 )
 

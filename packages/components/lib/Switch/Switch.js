@@ -25,8 +25,8 @@ var Button = glamorous_1.default.div({
     var on = _a.on, theme = _a.theme;
     return ({
         transform: "translate3d(" + (on ? width - height - 2 : 0) + "px, 0, 0)",
-        backgroundColor: theme.colors.palette.white,
-        border: "1px solid " + theme.colors.palette.grey70,
+        backgroundColor: theme.colors.white,
+        border: "1px solid " + theme.colors.gray70,
         zIndex: theme.baseZIndex + 2
     });
 });
@@ -42,7 +42,7 @@ var Rail = glamorous_1.default.div({
 }, function (_a) {
     var on = _a.on, theme = _a.theme;
     return ({
-        backgroundColor: theme.colors.palette.grey60,
+        backgroundColor: theme.colors.gray60,
         "&:after": {
             content: " ",
             position: "absolute",
@@ -50,7 +50,7 @@ var Rail = glamorous_1.default.div({
             height: "100%",
             top: 0,
             left: 0,
-            backgroundColor: theme.colors.palette.success,
+            backgroundColor: theme.colors.success,
             transition: "transform .3s",
             transform: "translate3d(" + (on ? "0" : "-100%") + ", 0, 0)",
             zIndex: theme.baseZIndex + 1

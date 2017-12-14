@@ -43,8 +43,8 @@ var Toggle = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         justifyContent: "center",
         zIndex: theme.baseZIndex + 1,
-        color: theme.colors.palette.grey80,
-        borderLeft: "1px solid " + theme.colors.palette.grey40
+        color: theme.colors.gray80,
+        borderLeft: "1px solid " + theme.colors.gray40
     });
 });
 exports.Toggle = Toggle;
@@ -89,12 +89,12 @@ var Day = glamorous_1.default.div({
     border: "1px solid #efefef"
 }, function (_a) {
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
-    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.palette.success : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.palette.grey80 : theme.colors.palette.black }));
+    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.success : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray80 : theme.colors.black }));
 });
 exports.Day = Day;
 var Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.palette.grey30, width: 200, position: "relative", "&:focus": {
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.gray30, width: 200, position: "relative", "&:focus": {
             outline: 0,
             borderColor: "rgba(82,168,236,.8)",
             boxShadow: theme.shadows.focus
@@ -119,7 +119,7 @@ var ClearButton = glamorous_1.default.div(function (_a) {
         "&:hover": {
             opacity: 1,
             "& svg": {
-                stroke: theme.colors.palette.warning
+                stroke: theme.colors.warning
             }
         }
     });
