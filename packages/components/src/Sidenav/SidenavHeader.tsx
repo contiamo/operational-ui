@@ -12,7 +12,7 @@ export interface IProps {
   className?: string
   children?: React.ReactNode
   label: string
-  icon: ReactFeatherIconName
+  icon: ReactFeatherIconName | React.ReactNode
   active?: boolean
   expanded?: boolean
   onClick?: () => void
@@ -56,7 +56,7 @@ const SidenavHeader = (props: IProps) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <Content isActive={!!props.active} isExpanded={!!props.expanded}>
       <IconContainer>
-        <Icon name={props.icon} size={24} />
+        {props.icon === String(props.icon) ? <Icon name={props.icon as ReactFeatherIconName} size={24} /> : props.icon}
       </IconContainer>
       <Label>{props.label}</Label>
     </Content>

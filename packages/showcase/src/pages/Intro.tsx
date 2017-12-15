@@ -39,7 +39,7 @@ const LinkBox = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: `${theme.spacing * 1}px 0`,
   color: "#000",
-  borderBottom: `1px solid ${theme.colors.contentSeparatorLine}`,
+  borderBottom: `1px solid ${theme.colors.separator}`,
   "& > h1": {
     ...theme.typography.title,
     textAlign: "center",

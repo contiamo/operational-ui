@@ -31,10 +31,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
     color: darken(theme.colors.info)(5)
   },
 
-  "& h4": {
-    ...theme.typography.heading2
-  },
-
   "& p": {
     maxWidth: 670
   }
