@@ -18,8 +18,9 @@
     "prettier": "lerna run prettier",
     "precommit": "lerna run precommit",
     "package": "lerna run package",
-    "check:unchanged": "./scripts/check-unchanged.sh",
-    "ci": "npm run lint && npm run prettier && npm run package && git diff && npm run check:unchanged"
+    "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
+    "ci:local": "npm run lint && npm run prettier && npm run package && git diff",
+    "ci": "npm run ci:local && npm run ensure:clean:repo"
   },
   "devDependencies": {
     "husky": "^0.14.3",
