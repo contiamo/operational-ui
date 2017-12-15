@@ -23,8 +23,8 @@ const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: st
   return {
     backgroundColor,
     display: "flex",
-    flex: "0 0 50px",
-    height: 50,
+    flex: "0 0 60px",
+    height: 60,
     alignItems: "center",
     padding: `${theme.spacing / 2}px ${theme.spacing}px`,
     color: readableTextColor(backgroundColor)(["black", "white"])

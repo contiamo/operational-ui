@@ -3,20 +3,20 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { hexOrColor, readableTextColor } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
-import SideNavigationHeader from "./Header/SideNavigationHeader"
-import SideNavigationItem from "./Item/SideNavigationItem"
-import SideNavigationLink from "./Link/SideNavigationLink"
-
 export interface IProps {
   id?: string | number
   css?: {}
   className?: string
   children?: React.ReactNode
   color?: string
+  expanded?: boolean
   expandOnHover?: boolean
   expandedWidth?: number
   width?: number
-  fix?: boolean
+}
+
+export interface IState {
+  isHovered: boolean
 }
 
 const Container = glamorous.div(
@@ -24,6 +24,7 @@ const Container = glamorous.div(
     theme,
     color,
     fix,
+    expanded,
     expandOnHover,
     expandedWidth,
     width
@@ -33,6 +34,7 @@ const Container = glamorous.div(
     fix?: boolean
     expandOnHover?: boolean
     expandedWidth: number
+    expanded?: boolean
     width: number
   }): any => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.sidenavBackground
@@ -47,9 +49,8 @@ const Container = glamorous.div(
       : {}
 
     return {
-      width,
       backgroundColor,
-      position: fix ? "fixed" : "relative",
+      width: expanded ? expandedWidth : width,
       zIndex: theme.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",
@@ -60,37 +61,43 @@ const Container = glamorous.div(
       color: readableTextColor(backgroundColor)(["black", "white"]),
       ...hoverWidth,
       "& a:focus": {
-        outline: 0,
-        backgroundColor: "rgba(255, 255, 255, 0.07)"
+        outline: 0
       }
     }
   }
 )
 
-const SideNavigation: React.SFC<IProps> = ({
-  id,
-  css,
-  className,
-  children,
-  color,
-  fix,
-  expandOnHover,
-  expandedWidth,
-  width
-}: IProps) => (
-  <Container
-    key={id}
-    css={css}
-    className={className}
-    color={color}
-    fix={fix}
-    expandOnHover={expandOnHover}
-    expandedWidth={expandedWidth || 240}
-    width={width || 60}
-  >
-    {children}
-  </Container>
-)
+class Sidenav extends React.Component<IProps, IState> {
+  state = {
+    isHovered: false
+  }
 
-export default SideNavigation
-export { SideNavigationHeader, SideNavigationItem, SideNavigationLink }
+  render() {
+    return (
+      <Container
+        key={this.props.id}
+        css={this.props.css}
+        className={this.props.className}
+        color={this.props.color}
+        expandOnHover={this.props.expandOnHover}
+        expandedWidth={this.props.expandedWidth || 240}
+        expanded={this.props.expanded}
+        onMouseEnter={() => {
+          this.setState(prevState => ({
+            isHovered: true
+          }))
+        }}
+        onMouseLeave={() => {
+          this.setState(prevState => ({
+            isHovered: false
+          }))
+        }}
+        width={this.props.width || 60}
+      >
+        {this.props.children}
+      </Container>
+    )
+  }
+}
+
+export default Sidenav

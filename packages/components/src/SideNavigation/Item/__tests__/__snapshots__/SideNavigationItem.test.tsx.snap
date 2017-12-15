@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`SideNavigationItem component renders 1`] = `
-<div
-  class="css-1n1hwgn"
->
-  Hi, I'm an Item
-</div>
-`;
