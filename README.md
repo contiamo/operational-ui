@@ -1,5 +1,5 @@
 <div align="center">
-  <img style="width: 120px; height: 120px" src="/packages/showcase/public/favicons/__original.png" alt="Operational UI Logo">
+  <img width="120" height="120" src="/packages/showcase/public/favicons/__original.png" alt="Operational UI Logo">
   <h1>Operational UI</h1>
   <p>Building blocks for effective operational interfaces</p>
   <a href="https://travis-ci.org/Contiamo/operational-ui" target="_blank">
