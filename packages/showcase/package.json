@@ -10,15 +10,13 @@
   "scripts": {
     "start": "webpack-dev-server --hot --public --host 0.0.0.0",
     "build": "NODE_ENV=production webpack",
-    "version": "echo 'version'",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "precommit": "npm run prettier",
     "test": "jest",
     "test:u": "jest -u",
     "package": "echo 'Showcase is not published, hence no package script.'",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package",
-    "preversion": "echo 'preversion'"
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
     "@types/core-js": "0.9.43",

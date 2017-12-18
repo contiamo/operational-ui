@@ -1,7 +1,10 @@
 #!/bin/bash
 
 pub() {
-  npm run preversion
+  cd packages/showcase
+  npm run build
+  git add -f dist
+  cd ../..
   node_modules/.bin/lerna publish --skip-npm
   cd packages/utils
   npm publish

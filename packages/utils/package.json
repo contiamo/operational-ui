@@ -19,9 +19,7 @@
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "precommit": "npm run prettier",
     "test:u": "jest -u",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package",
-    "preversion": "echo 'preversion'",
-    "version": "echo 'version'"
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "dependencies": {
     "@operational/theme": "0.1.0-1",

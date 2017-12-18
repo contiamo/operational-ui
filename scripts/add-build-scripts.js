@@ -8,8 +8,6 @@ const scripts = {
   "test:u": "jest -u",
   package: "rm -rf lib && tsc -d",
   precommit: "npm run prettier",
-  preversion: "echo 'preversion'",
-  version: "echo 'version'",
   ci: "npm run test && npm run lint && npm run prettier && npm run package"
 }
 
