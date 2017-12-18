@@ -39,7 +39,7 @@ const MyInterface = () => (
 render(<MyInterface />, document.querySelector("#app"))
 ```
 
-Why mandate the `ThemeProvider`? We wanted to make theming as explicit as possible, and make library users to work with the theme right from the start. Tweaking the interface should always start with poking around the theme object and seeing if modifications made there can get the look you need. Adding custom styles and overrides to components should come as a second consideration, used only sparingly.
+Note that wrapping your application inside a `ThemeProvider` with an `operationalTheme`-like theme object is mandatory for the components to render properly. This ensures we have an transparent, explicit set of styling defaults you can edit directly in case you want the UI to look different in a way that doesn't break consistency.
 
 ## Working on Operational UI
 
@@ -83,6 +83,12 @@ We look forward to your contribution, and we would like to assure you that we va
         <br>
         <a href="https://github.com/TejasQ">Tejas Kumar</a>
         <p>The Original Creator</p>
+      </td>
+      <td align="center" valign="top">
+        <img width="150" height="150" src="https://github.com/micha-f.png?s=150">
+        <br>
+        <a href="https://github.com/micha-f">Michael Franzkowiak</a>
+        <p>Contributor</p>
       </td>
       <td align="center" valign="top">
         <img width="150" height="150" src="https://github.com/Angarsk8.png?s=150">
