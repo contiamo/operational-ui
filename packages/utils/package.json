@@ -18,8 +18,6 @@
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "precommit": "npm run prettier",
-    "preversion": "npm run precommit",
-    "version": "npm run package && git add .",
     "test:u": "jest -u",
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
