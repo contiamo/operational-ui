@@ -4,12 +4,9 @@
   "description": "Customization theme for the Operational UI packages.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/operational.git",
+  "repository": "git@github.com:Contiamo/operational-ui.git",
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.contiamo.com/"
-  },
   "scripts": {
     "package": "rm -rf lib && tsc -d",
     "package:watch": "tsc -d -w",

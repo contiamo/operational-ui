@@ -4,12 +4,9 @@
   "description": "Opinionated composed ui components",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/operational.git",
+  "repository": "git@github.com:Contiamo/operational-ui.git",
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.contiamo.com/"
-  },
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
     "package": "rm -rf lib && tsc -d",
@@ -29,8 +26,8 @@
   },
   "dependencies": {
     "@operational/components": "^0.1.0-3",
-    "@operational/theme": "^0.1.0-2",
-    "@operational/utils": "^0.1.0-2",
+    "@operational/theme": "^0.1.0-3",
+    "@operational/utils": "^0.1.0-3",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "moment": "^2.19.0",

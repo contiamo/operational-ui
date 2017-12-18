@@ -4,12 +4,9 @@
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/operational.git",
+  "repository": "git@github.com:Contiamo/operational-ui.git",
   "author": "Imogen Mason <imogen@contiamo.com>",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.contiamo.com/"
-  },
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
     "test": "jest",

@@ -4,12 +4,9 @@
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/operational.git",
+  "repository": "git@github.com:Contiamo/operational-ui.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.contiamo.com/"
-  },
   "scripts": {
     "dev": "node scripts/dev-server/index.js",
     "package": "rm -rf lib && tsc -d",
@@ -27,8 +24,8 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "@operational/theme": "^0.1.0-2",
-    "@operational/utils": "^0.1.0-2",
+    "@operational/theme": "^0.1.0-3",
+    "@operational/utils": "^0.1.0-3",
     "attr-accept": "^1.1.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
