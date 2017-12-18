@@ -19,7 +19,9 @@
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "precommit": "npm run prettier",
     "test:u": "jest -u",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package",
+    "preversion": "echo 'preversion'",
+    "version": "echo 'version'"
   },
   "peerDependencies": {
     "glamor": "^2.20.40",

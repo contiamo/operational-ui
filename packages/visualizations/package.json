@@ -19,7 +19,9 @@
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "precommit": "npm run prettier",
     "test:u": "jest -u",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package",
+    "preversion": "echo 'preversion'",
+    "version": "echo 'version'"
   },
   "dependencies": {
     "@operational/theme": "0.1.0-1",

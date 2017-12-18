@@ -18,7 +18,9 @@
     "precommit": "npm run prettier",
     "test": "jest",
     "test:u": "jest -u",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package",
+    "preversion": "echo 'preversion'",
+    "version": "echo 'version'"
   },
   "devDependencies": {
     "@types/enzyme": "3.1.5",
