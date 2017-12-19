@@ -19,6 +19,9 @@
     "test:u": "jest -u",
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "glamor": "^2.20.40",
     "react": "^16.0.0",

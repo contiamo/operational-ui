@@ -7,6 +7,9 @@
   "repository": "git@github.com:Contiamo/operational-ui.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "package": "rm -rf lib && tsc -d",
     "package:watch": "rm -rf lib && tsc -d -w",
