@@ -33,7 +33,7 @@ var Container = glamorous_1.default.div(function (_a) {
             }
         }
         : {};
-    return __assign({ backgroundColor: backgroundColor, width: expanded ? expandedWidth : width, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflow: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: utils_1.readableTextColor(backgroundColor)(["black", "white"]) }, hoverWidth, { "& a:focus": {
+    return __assign({ backgroundColor: backgroundColor, width: expanded ? expandedWidth : width, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflowY: "auto", overflowX: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: utils_1.readableTextColor(backgroundColor)(["black", "white"]) }, hoverWidth, { "& a:focus": {
             outline: 0
         } });
 });

@@ -6,10 +6,10 @@ import Canvas from "../../components/Canvas/Canvas"
 import PageContent from "../../components/PageContent/PageContent"
 import Sidebar, { ISidebarLink } from "../../components/Sidebar/Sidebar"
 import StaticContent from "../../components/StaticContent/StaticContent"
-import * as introContent from "./intro.docs.md"
-import * as apiDesignContent from "./apidesign.docs.md"
-import * as visualGuideContent from "./visualguide.docs.md"
-import * as themeContent from "./theme.docs.md"
+import introContent from "./intro.docs"
+import apiDesignContent from "./apidesign.docs"
+import visualGuideContent from "./visualguide.docs"
+import themeContent from "./theme.docs"
 
 const SidebarWithRouter = withRouter(Sidebar as any)
 

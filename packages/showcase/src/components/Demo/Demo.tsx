@@ -13,10 +13,11 @@ interface IState {
 const Container = glamorous.div({
   width: "100%",
   height: "100%",
-  opacity: 0.4,
-  "&:hover": {
-    opacity: 1
-  }
+  top: 0,
+  left: 0,
+  padding: 40,
+  position: "absolute",
+  opacity: 0.4
 })
 
 class Demo extends React.Component<IProps, IState> {
