@@ -1,0 +1,26 @@
+{
+  "name": "showcase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "start": "next start",
+    "build": "next build"
+  },
+  "author": "Peter Szerzo",
+  "license": "ISC",
+  "dependencies": {
+    "next": "4.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "@operational/blocks": "0.1.0-1",
+    "@operational/components": "0.1.0-1",
+    "@operational/theme": "0.1.0-1",
+    "@operational/utils": "0.1.0-1",
+    "@operational/visualizations": "0.1.0-1"
+  },
+  "devDependencies": {
+    "prettier": "^1.7.4"
+  }
+}
