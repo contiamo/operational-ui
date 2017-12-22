@@ -1,5 +1,6 @@
 import * as React from "react"
-import { ProcessFlow, VisualizationWrapper } from "@operational/visualizations"
+import { ProcessFlow, ProcessFlowLoopHandler, VisualizationWrapper } from "@operational/visualizations"
+import { uniq, flow, map, flatten } from "lodash/fp"
 
 interface IProps {
   step: number
@@ -7,84 +8,175 @@ interface IProps {
 
 interface IState {}
 
+interface IJourney {
+  path: string[]
+  size: number
+}
+
+interface INode {
+  id: string
+  size: number
+}
+
+interface IData {
+  unloopedJourneys?: IJourney[]
+  nodeList?: INode[]
+}
+
+const journeys: IJourney[] = [
+  { path: ["135", "22", "186", "20", "1"], size: 42 },
+  { path: ["135", "22", "186", "3", "77", "53"], size: 34 },
+  { path: ["119", "137", "48", "52", "67", "70", "58", "3"], size: 32 },
+  { path: ["135", "22", "109", "4"], size: 18 },
+  { path: ["119", "137", "36", "52", "67", "70", "58", "3"], size: 17 },
+  { path: ["102", "111", "36", "52", "87", "85", "3"], size: 12 },
+  { path: ["135", "22", "109", "2", "77", "53"], size: 10 },
+  { path: ["135", "22", "18", "109", "4"], size: 10 },
+  { path: ["135", "22", "186", "1"], size: 9 },
+  { path: ["135", "22", "186", "77", "53", "181", "20", "1"], size: 9 },
+  { path: ["119", "137", "48", "52", "87", "85", "3"], size: 8 },
+  { path: ["135", "22", "109", "262", "77", "53", "4"], size: 8 },
+  { path: ["135", "22", "186", "4"], size: 7 },
+  { path: ["135", "22", "155", "1"], size: 6 },
+  { path: ["119", "137", "48", "52", "87", "85", "58", "3"], size: 5 },
+  { path: ["135", "22", "186", "77", "53", "1"], size: 5 },
+  { path: ["101", "95", "199", "217", "238", "36", "62", "99", "3"], size: 4 },
+  { path: ["135", "22", "109", "1"], size: 4 },
+  { path: ["135", "22", "109", "2", "77"], size: 4 },
+  { path: ["135", "22", "155", "234", "4"], size: 4 },
+  { path: ["135", "22", "186", "3", "77", "53", "181"], size: 4 },
+  { path: ["135", "22", "18", "109", "192", "4"], size: 4 },
+  { path: ["111", "36", "52", "87", "85", "102", "3"], size: 3 },
+  { path: ["135", "22", "109", "262", "77", "53", "192", "4"], size: 3 },
+  { path: ["135", "22", "109", "3", "77", "53", "181"], size: 3 },
+  { path: ["135", "22", "155", "4"], size: 3 },
+  { path: ["135", "22", "163", "20", "1"], size: 3 },
+  { path: ["101", "95", "199", "36", "62", "99", "2"], size: 2 },
+  { path: ["102", "111", "36", "52", "87", "85", "58", "3"], size: 2 },
+  { path: ["119", "137", "48", "52", "87", "85", "58", "102", "3"], size: 2 },
+  { path: ["135", "22", "109", "192", "4"], size: 2 },
+  { path: ["135", "22", "109", "262", "4"], size: 2 },
+  { path: ["135", "22", "109", "2"], size: 2 },
+  { path: ["135", "22", "109", "2", "77", "53", "192"], size: 2 },
+  { path: ["135", "22", "109", "3", "77", "53"], size: 2 },
+  { path: ["135", "22", "155", "234", "1"], size: 2 },
+  { path: ["135", "22", "163", "77", "53", "315", "20", "1"], size: 2 },
+  { path: ["135", "22", "186", "3", "77", "53", "181", "109"], size: 2 },
+  { path: ["135", "22", "186", "467", "4"], size: 2 },
+  { path: ["135", "22", "186", "77", "53", "4"], size: 2 },
+  { path: ["135", "22", "18", "109", "1"], size: 2 },
+  { path: ["135", "22", "18", "109", "262", "192", "4"], size: 2 },
+  { path: ["101", "95", "250", "211", "174", "352", "239", "48", "62", "99", "3"], size: 1 },
+  { path: ["102", "111", "36", "119", "137", "48", "52", "87", "85", "3"], size: 1 },
+  { path: ["102", "111", "36", "119", "174", "148", "137", "48", "52", "87", "85", "58", "3"], size: 1 },
+  { path: ["102", "111", "36", "52", "87", "85", "119", "137", "48", "62", "67", "70", "3"], size: 1 },
+  { path: ["102", "111", "36", "52", "87", "85", "119", "3"], size: 1 },
+  { path: ["102", "111", "36", "87", "85", "52", "67", "70", "58", "119", "137", "48", "3"], size: 1 },
+  { path: ["109", "3", "77", "53", "181"], size: 1 },
+  { path: ["10", "6", "12", "116", "4"], size: 1 },
+  { path: ["10", "6", "19", "13", "8", "17", "1"], size: 1 },
+  { path: ["10", "71", "4"], size: 1 },
+  { path: ["111", "36", "52", "87", "85", "58", "102", "3"], size: 1 },
+  { path: ["119", "137", "48", "52", "87", "85", "102", "111", "36", "62", "67", "70", "58", "302", "3"], size: 1 },
+  { path: ["119", "137", "48", "52", "87", "85", "58", "102", "111", "3"], size: 1 },
+  { path: ["119", "137", "48", "58", "111", "36", "52", "87", "85", "102", "3"], size: 1 },
+  { path: ["119", "137", "48", "87", "85", "102", "111", "36", "52", "67", "70", "58", "3"], size: 1 },
+  { path: ["119", "137", "48", "87", "85", "111", "36", "52", "67", "70", "58", "102", "3"], size: 1 },
+  { path: ["119", "137", "48", "87", "85", "52", "67", "70", "58", "3"], size: 1 },
+  { path: ["119", "137", "62", "67", "70", "58", "193", "211", "239", "48", "52", "3"], size: 1 },
+  { path: ["119", "137", "62", "70", "58", "193", "211", "239", "48", "52", "67", "3"], size: 1 },
+  { path: ["119", "137", "87", "85", "102", "111", "36", "52", "67", "70", "58", "3"], size: 1 },
+  { path: ["119", "174", "148", "137", "48", "111", "36", "52", "87", "85", "58", "102", "3", "422"], size: 1 },
+  { path: ["119", "174", "148", "137", "48", "52", "67", "70", "58", "3"], size: 1 },
+  { path: ["119", "174", "148", "137", "48", "52", "87", "85", "3"], size: 1 },
+  { path: ["127", "48", "52", "87", "85", "93", "94", "3"], size: 1 },
+  { path: ["127", "48", "62", "99", "101", "93", "94", "3"], size: 1 },
+  { path: ["135", "22", "109", "262", "2", "77", "53"], size: 1 },
+  { path: ["135", "22", "109", "262", "3", "77", "53", "315", "266"], size: 1 },
+  { path: ["135", "22", "109", "262", "77", "192", "3", "315", "53", "266", "308", "2", "379", "2", "388"], size: 1 },
+  { path: ["135", "22", "109", "262", "77", "4"], size: 1 },
+  { path: ["135", "22", "109", "262", "77", "53", "266", "4"], size: 1 },
+  { path: ["135", "22", "109", "262", "77", "53", "308", "266", "4"], size: 1 },
+  { path: ["135", "22", "109", "296", "4"], size: 1 },
+  { path: ["135", "22", "109", "2", "77", "117", "190"], size: 1 },
+  { path: ["135", "22", "109", "77", "53", "1"], size: 1 },
+  { path: ["135", "22", "109", "77", "53", "4"], size: 1 },
+  { path: ["135", "22", "163", "20", "4"], size: 1 },
+  { path: ["135", "22", "163", "20", "77", "53", "1"], size: 1 },
+  { path: ["135", "22", "163", "53", "266", "20", "3", "77", "181"], size: 1 },
+  { path: ["135", "22", "163", "77", "53", "315", "266", "308", "379", "566", "20", "1"], size: 1 },
+  { path: ["135", "22", "186", "20", "163", "77", "117", "190", "53", "266", "1"], size: 1 },
+  { path: ["135", "22", "186", "20", "163", "77", "53", "266", "1"], size: 1 },
+  { path: ["135", "22", "186", "20", "2", "77", "53"], size: 1 },
+  { path: ["135", "22", "186", "20", "4"], size: 1 },
+  { path: ["135", "22", "186", "20", "77", "53", "1"], size: 1 },
+  { path: ["135", "22", "186", "2"], size: 1 },
+  { path: ["135", "22", "186", "3", "53", "181", "20", "3", "77"], size: 1 },
+  { path: ["135", "22", "186", "3", "77", "53", "181", "20"], size: 1 },
+  { path: ["135", "22", "186", "467", "542", "20", "1"], size: 1 },
+  { path: ["135", "22", "186", "467", "610", "4"], size: 1 },
+  { path: ["135", "22", "186", "53", "181", "77", "323", "20", "1"], size: 1 },
+  { path: ["135", "22", "186", "77", "117", "190", "4"], size: 1 },
+  { path: ["135", "22", "186", "77", "1"], size: 1 },
+  { path: ["135", "22", "186", "77", "53", "181", "109", "1"], size: 1 },
+  { path: ["135", "22", "186", "77", "53", "181", "296", "109", "4"], size: 1 },
+  { path: ["135", "22", "18", "109", "262", "117", "4"], size: 1 },
+  { path: ["135", "22", "18", "109", "2", "117"], size: 1 },
+  { path: ["135", "22", "18", "109", "2", "117", "190"], size: 1 },
+  { path: ["135", "22", "18", "109", "2", "77", "53", "192"], size: 1 }
+]
+
+const data: IData = {}
+data.unloopedJourneys = ProcessFlowLoopHandler(journeys)
+const nodeList: string[] = flow(map((journey: IJourney): string[] => journey.path), flatten, uniq)(
+  data.unloopedJourneys
+)
+data.nodeList = map((nodeId: string): INode => {
+  return {
+    id: nodeId,
+    size: 0
+  }
+})(nodeList)
+
+const accessors = {
+  node: {
+    color: (d: any) => {
+      if (d.id.indexOf("++") > -1) {
+        return "lightgreen"
+      }
+      if (d.id.indexOf("+") > -1) {
+        return "lightcoral"
+      }
+      return "#fff"
+    },
+    content: [{ key: "Description", value: "This is a node." }, { key: "Comment", value: "This comment is boring." }],
+    label: (d: any) => "N:" + d.id,
+    labelPosition: "top"
+  },
+  link: {
+    stroke: (d: any) => {
+      if (d.target.attributes.id.indexOf("++") > -1) {
+        return "lightgreen"
+      }
+      if (d.target.attributes.id.indexOf("+") > -1) {
+        return "lightcoral"
+      }
+      return "#bbb"
+    }
+  },
+  data: {
+    journeys: (d: any) => d.unloopedJourneys,
+    nodes: (d: any) => d.nodeList
+  }
+}
+
 class ProcessFlowDemo extends React.Component<IProps, IState> {
   render() {
-    const data1 = {
-      journeys: [{ path: ["1", "3", "4"], size: 1500 }, { path: ["2", "3", "4"], size: 1200 }],
-      nodes: [{ id: "1", group: "start" }, { id: "2", group: "start" }, { id: "3" }, { id: "4", group: "end" }]
-    }
-    const data2 = {
-      journeys: [
-        { path: ["1", "3", "4"], size: 1500 },
-        { path: ["2", "3", "4"], size: 800 },
-        { path: ["2", "3", "5"], size: 1600 },
-        { path: ["1", "3", "5"], size: 800 }
-      ],
-      nodes: [
-        { id: "1", group: "start" },
-        { id: "2", group: "start" },
-        { id: "3" },
-        { id: "4", group: "end" },
-        { id: "5", group: "end" }
-      ]
-    }
-    const data3 = {
-      journeys: [
-        { path: ["1", "3", "4"], size: 1500 },
-        { path: ["2", "3", "4"], size: 800 },
-        { path: ["2", "3", "5"], size: 1600 },
-        { path: ["2", "3", "6"], size: 1600 },
-        { path: ["1", "3", "5"], size: 800 }
-      ],
-      nodes: [
-        { id: "1", group: "start" },
-        { id: "2", group: "start" },
-        { id: "3" },
-        { id: "6" },
-        { id: "4", group: "end" },
-        { id: "5", group: "end" }
-      ]
-    }
     return (
       <VisualizationWrapper
         facade={ProcessFlow}
-        data={this.props.step === 0 ? data1 : this.props.step === 1 ? data2 : data3}
-        accessors={{
-          node: {
-            color: (node: any) => {
-              if (node.group === "start") {
-                return "lightgreen"
-              }
-              if (node.group === "end") {
-                return "lightcoral"
-              }
-              return "#fff"
-            },
-            shape: (node: any) => {
-              if (node.group === "start") {
-                return "square"
-              }
-              if (node.group === "end") {
-                return "circle"
-              }
-              return "squareDiamond"
-            },
-            stroke: (node: any) => {
-              return node.group ? "none" : "#000"
-            }
-          },
-          link: {
-            stroke: (link: any) => {
-              if (link.source.attributes.group === "start") {
-                return "lightgreen"
-              }
-              if (link.target.attributes.group === "end") {
-                return "lightcoral"
-              }
-              return "#bbb"
-            }
-          }
-        }}
+        data={data}
+        accessors={accessors}
         config={{
           maxNodeSize: 800,
           nodeBorderWidth: 4

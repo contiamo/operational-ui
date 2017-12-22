@@ -5,22 +5,24 @@ import { Box, BarChart2, Grid } from "react-feather"
 
 import { Sidenav, SidenavHeader, SidenavItem, Icon } from "@operational/components"
 import { Theme } from "@operational/theme"
+import { routes, IRoute } from "../../routes"
 import Logo from "../Logo/Logo"
 
 export interface IProps {
-  location?: {
-    pathname: string
-  }
+  pathname: string
 }
 
-interface ILink {
-  url?: string
-  label: string
-  icon: ReactFeatherIconName
-  items: {
-    url: string
-    label: string
-  }[]
+const getMainRouteIcon = (mainRoute: string): ReactFeatherIconName => {
+  if (mainRoute === "/components") {
+    return "Box"
+  }
+  if (mainRoute === "/blocks") {
+    return "Grid"
+  }
+  if (mainRoute === "/visualizations") {
+    return "BarChart2"
+  }
+  return "Edit"
 }
 
 const style: {} = {
@@ -30,54 +32,8 @@ const style: {} = {
   }
 }
 
-const links: ILink[] = [
-  {
-    url: "/components",
-    label: "Components",
-    icon: "Box",
-    items: [
-      { url: "/buttons", label: "Basics" },
-      { url: "/buttons", label: "Breakdowns" },
-      { url: "/buttons", label: "Buttons" },
-      { url: "/buttons", label: "Cards" },
-      { url: "/buttons", label: "Chips" },
-      { url: "/buttons", label: "ColorPickers" },
-      { url: "/buttons", label: "Context Menus" },
-      { url: "/buttons", label: "Form Fields" },
-      { url: "/buttons", label: "Grids" },
-      { url: "/buttons", label: "Icons" },
-      { url: "/buttons", label: "Info Tiles" },
-      { url: "/buttons", label: "Modals" },
-      { url: "/buttons", label: "Paginators" },
-      { url: "/buttons", label: "Progress" },
-      { url: "/buttons", label: "Sidebar" },
-      { url: "/buttons", label: "Switches" },
-      { url: "/buttons", label: "Tabs" },
-      { url: "/buttons", label: "Timeline" },
-      { url: "/buttons", label: "Tooltips" }
-    ]
-  },
-  {
-    url: "/blocks",
-    label: "Blocks",
-    icon: "Grid",
-    items: []
-  },
-  {
-    url: "/visualizations",
-    label: "Visualizations",
-    icon: "BarChart2",
-    items: []
-  },
-  {
-    url: "/documentation",
-    label: "Documentation",
-    icon: "Edit",
-    items: []
-  }
-]
-
-export default ({ location }: IProps) => {
+export default ({ pathname }: IProps) => {
+  const pathSegments = pathname ? pathname.split("/").filter(s => s !== "") : []
   return (
     <Sidenav css={style} expanded>
       <Link to="/">
@@ -87,14 +43,24 @@ export default ({ location }: IProps) => {
           icon={<Logo size={28} />}
         />
       </Link>
-
-      {links.map(({ url, label, icon, items }: ILink, index: number) => {
-        const routeMatch = location && location.pathname && url && location.pathname.slice(0, url.length) === url
-        return (
-          <Link to={url || "/"}>
-            <SidenavHeader expanded key={index} active={routeMatch} icon={icon} label={label}>
-              {items.map((item, index) => <SidenavItem label={item.label} key={index} />)}
-            </SidenavHeader>
+      {routes.map(({ url, label, items }: IRoute, index: number) => {
+        const routeMatch = pathname && url && pathname.slice(0, url.length) === url
+        const el = (
+          <SidenavHeader expanded key={index} active={pathname === url} icon={getMainRouteIcon(url)} label={label}>
+            {routeMatch
+              ? items.map((item, index) => (
+                  <Link to={url + item.url} key={index}>
+                    <SidenavItem label={item.label} key={index} active={item.url.slice(1) === pathSegments[1]} />
+                  </Link>
+                ))
+              : null}
+          </SidenavHeader>
+        )
+        return routeMatch ? (
+          el
+        ) : (
+          <Link to={url || "/"} key={index}>
+            {el}
           </Link>
         )
       })}

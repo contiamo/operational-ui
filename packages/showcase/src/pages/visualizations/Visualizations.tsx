@@ -43,7 +43,7 @@ const links: ISidebarLink[] = [
 
 export default () => (
   <PageContent>
-    <SidebarWithRouter links={links} />
+    <SidebarWithRouter links={links} css={{ marginRight: 16 }} />
     <Canvas>
       <Route exact path="/visualizations" component={Intro} />
       <Route exact path="/visualizations/process-flow/main" component={ProcessFlowMain} />

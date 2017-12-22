@@ -8,9 +8,7 @@ const PageContent: GlamorousComponent<{}, {}> = glamorous.div({
   "& > *": {
     height: "100%"
   },
-  "& > :first-child": {
-    marginRight: 16
-  }
+  "& > :first-child": {}
 })
 
 export default PageContent

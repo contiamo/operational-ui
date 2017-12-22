@@ -11,13 +11,13 @@ interface IState {
 }
 
 const Container = glamorous.div({
-  width: "100%",
-  height: "100%",
-  top: 0,
-  left: 0,
+  top: "50%",
+  left: "50%",
+  transform: "translate3d(-50%, -50%, 0)",
   padding: 40,
   position: "absolute",
-  opacity: 0.4
+  pointerEvents: "none",
+  opacity: 0.25
 })
 
 class Demo extends React.Component<IProps, IState> {
@@ -47,27 +47,9 @@ class Demo extends React.Component<IProps, IState> {
   }
 
   render() {
-    let breakdownData: number[] = []
-    if (this.state.step === 0) {
-      breakdownData = [0.2, 0.4, 0.8]
-    } else if (this.state.step === 1) {
-      breakdownData = [0.4, 0.3, 0.1]
-    } else {
-      breakdownData = [0.7, 0.6, 0.3]
-    }
     return (
       <Container>
-        <ButtonGroup>
-          {[0, 1, 2].map((no, index) => <Button active={this.state.step === index}>{`Dataset ${no + 1}`}</Button>)}
-        </ButtonGroup>
         <ProcessFlowDemo step={this.state.step} />
-        <div>
-          {breakdownData.map((datum, index) => (
-            <Breakdown key={index} color={datum < 0.3 ? "warning" : "info"} number={index + 1} label={""} fill={datum}>
-              {`Metric ${index + 1}`}
-            </Breakdown>
-          ))}
-        </div>
       </Container>
     )
   }

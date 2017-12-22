@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Route, withRouter } from "react-router-dom"
+import { Route } from "react-router-dom"
 import { Card, CardHeader } from "@operational/components"
 
 import Canvas from "../../components/Canvas/Canvas"
@@ -31,8 +31,6 @@ import Timeline from "./Timeline/Timeline"
 import Uploads from "./Uploads/Uploads"
 import introContent from "./intro.docs"
 
-const SidebarWithRouter = withRouter(Sidebar as any)
-
 const Intro = () => (
   <Card>
     <CardHeader>Components overview</CardHeader>
@@ -40,64 +38,8 @@ const Intro = () => (
   </Card>
 )
 
-const links: ISidebarLink[] = [
-  {
-    label: "Basics",
-    links: [
-      { url: "/components/colors", label: "Colors" },
-      { url: "/components/typography", label: "Typography" },
-      { url: "/components/icons", label: "Icons" }
-    ]
-  },
-  {
-    label: "UI Elements",
-    links: [
-      { url: "/components/buttons", label: "Buttons" },
-      { url: "/components/cards", label: "Cards" },
-      { url: "/components/chips", label: "Chips" },
-      { url: "/components/breakdowns", label: "Breakdown" },
-      { url: "/components/context-menus", label: "Context Menu" },
-      { url: "/components/info-tiles", label: "InfoTiles" },
-      { url: "/components/timeline", label: "Timeline" }
-    ]
-  },
-  {
-    label: "Data Entry",
-    links: [
-      { url: "/components/color-picker", label: "Color Picker" },
-      { url: "/components/date-pickers", label: "Date Picker" },
-      { url: "/components/form-fields", label: "Form Fields" },
-      { url: "/components/switch", label: "Switch" },
-      { url: "/components/upload", label: "Upload" }
-    ]
-  },
-  {
-    label: "Feedback",
-    links: [
-      { url: "/components/modals", label: "Modals" },
-      { url: "/components/progress", label: "Progress" },
-      { url: "/components/spinners", label: "Spinners" },
-      { url: "/components/tooltips", label: "Tooltips" }
-    ]
-  },
-  {
-    label: "Navigation",
-    links: [
-      { url: "/components/paginator", label: "Pagination" },
-      { url: "/components/sidebar", label: "Sidebar" },
-      { label: "Side Navigation" },
-      { url: "/components/tabs", label: "Tabs" }
-    ]
-  },
-  {
-    label: "Layout",
-    links: [{ url: "/components/grids", label: "Grid" }, { label: "List" }]
-  }
-]
-
 export default () => (
   <PageContent>
-    <SidebarWithRouter links={links} css={{ height: "100%" }} />
     <Canvas>
       <Route exact path="/components" component={Intro} />
       <Route path="/components/buttons" component={Buttons} />
@@ -123,7 +65,6 @@ export default () => (
       <Route path="/components/tabs" component={Tabs} />
       <Route path="/components/timeline" component={Timeline} />
       <Route path="/components/upload" component={Uploads} />
-      <Route path="/demo" render={() => <img style={{ maxWidth: "175%" }} src="/screen.png" />} />
     </Canvas>
   </PageContent>
 )

@@ -13,6 +13,12 @@ import Blocks from "./pages/Blocks/Blocks"
 import Components from "./pages/Components/Components"
 import Visualizations from "./pages/Visualizations/Visualizations"
 
+interface IProps {
+  location?: {
+    pathname: string
+  }
+}
+
 const Container = glamorous.div({
   display: "flex",
   "& p": {
@@ -32,26 +38,28 @@ const Content = glamorous.div({
   }
 })
 
-const SidenavWithRouter: React.SFC<{}> = withRouter(ShowcaseSidenav as any)
+const Layout = (props: IProps) => (
+  <ThemeProvider theme={operational}>
+    <Container>
+      <ShowcaseSidenav pathname={props.location ? props.location.pathname : "/"} />
+      <Content>
+        <Header note="v0.1.0-5" />
+        <Route exact path="/" component={Intro} />
+        <Route path="/documentation" component={Documentation} />
+        <Route path="/blocks" component={Blocks} />
+        <Route path="/components" component={Components} />
+        <Route path="/visualizations" component={Visualizations} />
+      </Content>
+    </Container>
+  </ThemeProvider>
+)
 
-const App: React.SFC<{}> = () => (
+const LayoutWithRouter = withRouter(Layout)
+
+export default (props: {}) => (
   <Router>
-    <ThemeProvider theme={operational}>
-      <Container>
-        <SidenavWithRouter />
-        <Content>
-          <Header />
-          <Route exact path="/" component={Intro} />
-          <Route path="/documentation" component={Documentation} />
-          <Route path="/blocks" component={Blocks} />
-          <Route path="/components" component={Components} />
-          <Route path="/visualizations" component={Visualizations} />
-        </Content>
-      </Container>
-    </ThemeProvider>
+    <LayoutWithRouter />
   </Router>
 )
 
 injectStylesheet(baseStylesheet(operational))
-
-export default App
