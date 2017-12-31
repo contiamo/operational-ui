@@ -8,6 +8,11 @@ import PageContent from "../components/PageContent/PageContent"
 import Logo from "../components/Logo/Logo"
 import Demo from "../components/Demo/Demo"
 
+interface IState {
+  animationPosition: number
+  animationVelocity: number
+}
+
 const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: `${theme.spacing * 1}px 0`,
   color: "#000",
@@ -42,19 +47,25 @@ const TitleBarContent = glamorous.div({
   }
 })
 
-const MyCard = ({ className }: { className?: string }) => (
-  <PageContent>
-    <Card css={{ width: "100%", position: "relative", padding: 0 }}>
-      <TitleBar>
-        <TitleBarContent>
-          <Logo size={80} />
-          <h1>Operational UI</h1>
-          <h2>Building blocks for effective operational interfaces</h2>
-        </TitleBarContent>
-        <Demo />
-      </TitleBar>
-    </Card>
-  </PageContent>
-)
+class Intro extends React.Component<{}, IState> {
+  state = {
+    animationPosition: 0,
+    animationVelocity: 0
+  }
+  render() {
+    return <PageContent>
+      <Card css={{ width: "100%", position: "relative", padding: 0 }}>
+        <TitleBar>
+          <TitleBarContent>
+            <Logo size={80} />
+            <h1>Operational UI</h1>
+            <h2>Building blocks for effective operational interfaces</h2>
+          </TitleBarContent>
+          <Demo />
+        </TitleBar>
+      </Card>
+    </PageContent>
+  }
+}
 
-export default MyCard
+export default Intro
