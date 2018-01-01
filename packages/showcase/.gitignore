@@ -4,3 +4,4 @@ package-lock.json
 .idea
 *.log
 coverage
+.next
