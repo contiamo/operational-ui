@@ -19,6 +19,7 @@ class Site extends React.Component<{}, {}> {
           <SidenavHeader label="Blocks" icon="Grid" />
           <SidenavHeader label="Visualizations" expanded icon="BarChart2">
             <SidenavItem label="Process Flow" active />
+            <SidenavItem label="Process Flow" active />
           </SidenavHeader>
           <SidenavHeader label="Documentation" icon="Edit" />
         </Sidenav>

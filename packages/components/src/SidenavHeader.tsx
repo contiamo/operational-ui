@@ -34,6 +34,7 @@ const Content = glamorous.div(
     height: size,
     flex: `0 0 ${size}px`,
     color: isActive ? theme.colors.linkText : theme.colors.white,
+    borderBottom: isExpanded ? `2px solid #515151` : "none",
     backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)"
   })
 )
@@ -53,7 +54,8 @@ const IconContainer = glamorous.div({
 })
 
 export default (props: IProps) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+// See ./SidenavItem.tsx for reason why class name is set.
+  <Container key={props.id} css={props.css} className={"op_sidenavheader " + props.className}>
     <Content isActive={!!props.active} isExpanded={!!props.expanded}>
       <IconContainer>
         {props.icon === String(props.icon) ? <Icon name={props.icon as ReactFeatherIconName} size={24} /> : props.icon}
