@@ -1,4 +1,4 @@
-export default (props) => {
+export default props => {
   const size = props.size
   const color = props.color || "currentColor"
   return (

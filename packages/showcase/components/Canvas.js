@@ -5,7 +5,6 @@ import { Card } from "@operational/components"
 import { Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
 
-
 const Container = glamorous.div(({ theme }) => ({
   display: "flex",
   alignItems: "flex-start",

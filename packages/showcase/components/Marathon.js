@@ -46,7 +46,7 @@ class Marathon extends React.Component {
 
   expect = actual => {
     return {
-      toBe: (expected) => {
+      toBe: expected => {
         const error = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
         this.setStateById(({ id, tests, completed }) => ({
           id,
@@ -109,22 +109,22 @@ class Marathon extends React.Component {
       test,
       expect,
       container,
-      beforeEach: (fn) => {
+      beforeEach: fn => {
         this.beforeEach = fn
       },
-      afterEach: (fn) => {
+      afterEach: fn => {
         this.beforeEach = fn
       },
-      beforeAll: (fn) => {
+      beforeAll: fn => {
         this.beforeAll = fn
       },
-      afterAll: (fn) => {
+      afterAll: fn => {
         this.afterAll = fn
       }
     })
 
     // Pin the test array on state, run first one when ready.
-    this.setStateById((prevState) => ({
+    this.setStateById(prevState => ({
       id: prevState.id,
       tests: this._tests.map(test => ({ description: test.description, errors: [] }))
     })).then(() => {

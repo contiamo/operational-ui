@@ -59,9 +59,7 @@ export default ({ pathname }) => {
           el
         ) : (
           <Link href={url || "/"} key={index}>
-            <a>
-              {el}
-            </a>
+            <a>{el}</a>
           </Link>
         )
       })}
