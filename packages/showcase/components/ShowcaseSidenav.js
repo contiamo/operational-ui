@@ -4,7 +4,7 @@ import { Box, BarChart2, Grid } from "react-feather"
 
 import { Sidenav, SidenavHeader, SidenavItem, Icon } from "@operational/components"
 import { routes } from "./routes"
-import Logo from "./Logo"
+import * as icons from "./Icons"
 
 const getMainRouteIcon = mainRoute => {
   if (mainRoute === "/components") {
@@ -36,14 +36,35 @@ export default ({ pathname }) => {
           <SidenavHeader
             css={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}
             label="Operational UI"
-            icon={<Logo size={28} />}
+            icon={<icons.Operational size={28} />}
           />
         </a>
       </Link>
       {routes.map(({ url, label, items }: IRoute, index: number) => {
         const routeMatch = pathname && url && pathname.slice(0, url.length) === url
+        const Logo = (() => {
+          if (url === "/components") {
+            return icons.Components
+          }
+          if (url === "/blocks") {
+            return icons.Blocks
+          }
+          if (url === "/visualizations") {
+            return icons.Visualizations
+          }
+          if (url === "/documentation") {
+            return icons.Documentation
+          }
+          return icons.Components
+        })()
         const el = (
-          <SidenavHeader expanded key={index} active={pathname === url} icon={getMainRouteIcon(url)} label={label}>
+          <SidenavHeader
+            expanded={routeMatch}
+            key={index}
+            active={pathname === url}
+            icon={<Logo size={28} />}
+            label={label}
+          >
             {routeMatch
               ? items.map((item, index) => (
                   <Link href={url + item.url} key={index}>

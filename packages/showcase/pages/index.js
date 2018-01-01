@@ -2,7 +2,7 @@ import glamorous from "glamorous"
 import { Card, Icon, Heading2Type } from "@operational/components"
 import Layout from "../components/Layout"
 
-import Logo from "../components/Logo"
+import { Operational } from "../components/Icons"
 import Demo from "../components/Demo"
 
 const TitleBar = glamorous.div(({ theme }) => ({
@@ -50,7 +50,7 @@ export default class Intro extends React.Component {
         <Card css={{ width: "100%", position: "relative", padding: 0 }}>
           <TitleBar>
             <TitleBarContent>
-              <Logo size={80} />
+              <Operational size={80} />
               <h1>Operational UI</h1>
               <h2>Building blocks for effective operational interfaces</h2>
             </TitleBarContent>

@@ -34,7 +34,7 @@ const Content = glamorous.div(
     height: size,
     flex: `0 0 ${size}px`,
     color: isActive ? theme.colors.linkText : theme.colors.white,
-    borderBottom: isExpanded ? `2px solid #515151` : "none",
+    borderBottom: isExpanded ? `1px solid #515151` : "none",
     backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)"
   })
 )
