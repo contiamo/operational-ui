@@ -48,7 +48,7 @@ export default props => {
       {
         <Breadcrumbs>
           {breadcrumbs.map((breadcrumb, index) => (
-            <span>
+            <span key={index}>
               {breadcrumb.url ? (
                 <Link key={index} href={breadcrumb.url}>
                   <a>{breadcrumb.label}</a>
