@@ -16,7 +16,7 @@ declare abstract class Canvas {
     onMouseLeave(): void;
     onClick(): void;
     listenToMouseOver(): void;
-    elementFor(component: string): TD3Selection;
+    elementFor(component: string): any;
     trackMouseMove(): void;
     stopMouseMove(): void;
     draw(): void;

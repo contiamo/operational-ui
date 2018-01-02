@@ -24,6 +24,7 @@
   "dependencies": {
     "@operational/theme": "^0.1.0-8",
     "@operational/utils": "^0.1.0-8",
+    "@types/d3-interpolate": "^1.1.6",
     "d3": "^4.10.2",
     "glamor": "^2.20.40",
     "glamorous": "^4.8.0",

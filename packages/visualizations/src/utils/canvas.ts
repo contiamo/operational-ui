@@ -64,7 +64,7 @@ abstract class Canvas {
     }
   }
 
-  elementFor(component: string): TD3Selection {
+  elementFor(component: string): any {
     return this.elMap[component]
   }
 

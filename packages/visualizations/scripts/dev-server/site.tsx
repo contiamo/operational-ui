@@ -2,68 +2,45 @@ import * as React from "react"
 import { render } from "react-dom"
 import { forEach } from "lodash/fp"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
-import { contiamoTheme } from "@operational/theme"
+import { operational } from "@operational/theme"
 
-injectStylesheet(baseStylesheet(contiamoTheme))
+injectStylesheet(baseStylesheet(operational))
 
 const containerNode = document.getElementById("app")
 
-import ProcessFlow from "../../src/ProcessFlow/facade"
+import PieChart from "../../src/PieChart/facade"
 
-const data = {
-  journeys: [{ path: ["1", "3", "4"], size: 1500 }, { path: ["2", "3", "4"], size: 1200 }],
-  nodes: [{ id: "1", group: "start" }, { id: "2", group: "start" }, { id: "3" }, { id: "4", group: "end" }]
+const colors: any = {
+  "Berlin": operational.colors.info,
+  "Dortmund": operational.colors.success,
+  "Bonn": operational.colors.warning,
+  "Cologne": operational.colors.error,
 }
 
-const accessors = {
-  node: {
-    color: (node: any) => {
-      if (node.group === "start") {
-        return "lightgreen"
-      }
-      if (node.group === "end") {
-        return "lightcoral"
-      }
-      return "#fff"
-    },
-    shape: (node: any) => {
-      if (node.group === "start") {
-        return "square"
-      }
-      if (node.group === "end") {
-        return "circle"
-      }
-      return "squareDiamond"
-    },
-    stroke: (node: any) => {
-      return node.group ? "none" : "#000"
-    }
-  },
-  link: {
-    stroke: (link: any) => {
-      if (link.source.attributes.group === "start") {
-        return "lightgreen"
-      }
-      if (link.target.attributes.group === "end") {
-        return "lightcoral"
-      }
-      return "#bbb"
-    }
-  }
+const DonutRenderer: any = {
+  type: "donut",
+  key: (d: any): string => d.key,
+  value: (d: any): string => d.value,
+  color: (d: any): string => colors[d.key],
 }
 
-const config = {
-  maxNodeSize: 800,
-  nodeBorderWidth: 4,
-  focusElement: { type: "node", matchers: { id: "3" }}
+const data: any = {
+  name: "Name",
+  data: [
+    { key: "Berlin", value: 12 },
+    { key: "Dortmund", value: 5 },
+    { key: "Bonn", value: 7 },
+    { key: "Cologne", value: 11 },
+    { key: "", value: 50 },
+    { key: undefined, value: 70 },
+    { key: "test", value: 0 },
+    { key: "test2", value: undefined }
+  ],
+  // comparison: ["Last month", 18],
+  // target: 50,
+  renderAs: [DonutRenderer]
 }
 
-const viz = new ProcessFlow(containerNode)
-
+const viz: PieChart = new PieChart(containerNode)
 viz.data(data)
-forEach.convert({ cap: false })((accessors: any, key: string): void => {
-  viz.accessors(key, accessors)
-})(accessors)
-viz.config(config)
-
 viz.draw()
