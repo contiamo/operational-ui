@@ -1,8 +1,6 @@
-import { Card, CardHeader } from "@operational/components"
+import { Card } from "@operational/components"
 import StaticContent from "../../components/StaticContent"
 import Layout from "../../components/Layout"
-import PageContent from "../../components/PageContent"
-import Canvas from "../../components/Canvas"
 
 const markdownContent = `
 \`@operational/components\` package holds a set of opinionated presentational components, composed components and data visualizations that implement a visual style well-suited for operational interfaces.
@@ -18,10 +16,8 @@ These interfaces assume regular use and familiarity by operatives. They are comp
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <StaticContent markdownContent={markdownContent} />
-      </Card>
-    </Canvas>
+    <Card>
+      <StaticContent markdownContent={markdownContent} />
+    </Card>
   </Layout>
 )

@@ -3,7 +3,6 @@ import { Switch, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
@@ -54,16 +53,14 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>A switch is a simple toggle indicating whether a specific functionality is enabled or disabled.</p>
+    <Card>
+      <p>A switch is a simple toggle indicating whether a specific functionality is enabled or disabled.</p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Switch }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Switch }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

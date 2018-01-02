@@ -3,6 +3,7 @@ import { Card, Icon, Heading2Type } from "@operational/components"
 import fetch from "isomorphic-fetch"
 
 import Layout from "../components/Layout"
+import StaticContent from "../components/StaticContent"
 import { Operational } from "../components/Icons"
 import Demo from "../components/Demo"
 
@@ -40,6 +41,12 @@ const TitleBarContent = glamorous.div({
   }
 })
 
+const BodyContent = glamorous.div({
+  padding: 16,
+  maxWidth: 760,
+  margin: "auto"
+})
+
 export default class Intro extends React.Component {
   static async getInitialProps() {
     const res = await fetch("https://rawgit.com/Contiamo/operational-ui/master/README.md")
@@ -48,6 +55,10 @@ export default class Intro extends React.Component {
   }
 
   render() {
+    const readme = this.props.content
+      .split("\n")
+      .slice(12, -41)
+      .join("\n")
     return (
       <Layout pathname={this.props.url.pathname}>
         <Card css={{ width: "100%", position: "relative", padding: 0 }}>
@@ -59,6 +70,9 @@ export default class Intro extends React.Component {
             </TitleBarContent>
             <Demo />
           </TitleBar>
+          <BodyContent>
+            <StaticContent markdownContent={readme} />
+          </BodyContent>
         </Card>
       </Layout>
     )

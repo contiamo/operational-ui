@@ -4,7 +4,6 @@ import { Card, CardHeader, Heading2Type } from "@operational/components"
 import Playground from "../../components/Playground"
 import Table from "../../components/PropsTable"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 
 const headerSnippet = `
 <Card width={260}>
@@ -40,27 +39,25 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Cards are used to group and lay out content on the interface - in fact, non-scrolling interfaces with a number
-          of cards laid out in a grid are the most common use-cases of this project.
-        </p>
+    <Card>
+      <p>
+        Cards are used to group and lay out content on the interface - in fact, non-scrolling interfaces with a number
+        of cards laid out in a grid are the most common use-cases of this project.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <p>Simply add any content inside the card.</p>
-        <Playground snippet={String(simpleSnippet)} components={{ Card, CardHeader }} />
+      <Heading2Type>Usage</Heading2Type>
+      <p>Simply add any content inside the card.</p>
+      <Playground snippet={String(simpleSnippet)} components={{ Card, CardHeader }} />
 
-        <Heading2Type>Card headers</Heading2Type>
-        <p>
-          Using a CardHeader component is the standard way to add a title element to the card. This may include not just
-          the card title, but also navigation on the right-hand side.
-        </p>
-        <Playground snippet={String(headerSnippet)} components={{ Card, CardHeader }} />
+      <Heading2Type>Card headers</Heading2Type>
+      <p>
+        Using a CardHeader component is the standard way to add a title element to the card. This may include not just
+        the card title, but also navigation on the right-hand side.
+      </p>
+      <Playground snippet={String(headerSnippet)} components={{ Card, CardHeader }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

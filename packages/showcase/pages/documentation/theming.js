@@ -1,8 +1,6 @@
-import { Card, CardHeader } from "@operational/components"
+import { Card } from "@operational/components"
 import StaticContent from "../../components/StaticContent"
 import Layout from "../../components/Layout"
-import PageContent from "../../components/PageContent"
-import Canvas from "../../components/Canvas"
 
 const markdownContent = `
 The theme is a JS object with a predefined structure, containing primitive constants used by the different components. Modifying this object is the first and cleanest option to customize the components.
@@ -22,10 +20,8 @@ TBD
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <StaticContent markdownContent={markdownContent} />
-      </Card>
-    </Canvas>
+    <Card>
+      <StaticContent markdownContent={markdownContent} />
+    </Card>
   </Layout>
 )

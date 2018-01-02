@@ -2,7 +2,6 @@ import * as React from "react"
 import { Breakdown, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 
@@ -69,20 +68,18 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Breakdowns are a means of representing aggregated data in a way that should be relatively easy to reason
-          about. The breakdown component itself belongs within the context of a larger container component that
-          calculates numbers and supplies them to said component.
-        </p>
+    <Card>
+      <p>
+        Breakdowns are a means of representing aggregated data in a way that should be relatively easy to reason about.
+        The breakdown component itself belongs within the context of a larger container component that calculates
+        numbers and supplies them to said component.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Breakdown }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Breakdown }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

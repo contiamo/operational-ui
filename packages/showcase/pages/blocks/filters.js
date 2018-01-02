@@ -3,7 +3,6 @@ import { Card, CardHeader, Heading2Type, Select, Input, DatePicker } from "@oper
 import { Filter } from "@operational/blocks"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 
@@ -104,20 +103,18 @@ const simpleSnippet = `
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Filters are opinionated collections of form elements expanded through a modal. They display a very condensed
-          summary of the current form state when the modal is not expanded.
-        </p>
+    <Card>
+      <p>
+        Filters are opinionated collections of form elements expanded through a modal. They display a very condensed
+        summary of the current form state when the modal is not expanded.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <p>Simply nest `@operational/components` form elements using their API.</p>
-        <Playground snippet={String(simpleSnippet)} scope={{ Input, Select, DatePicker }} components={{ Filter }} />
+      <Heading2Type>Usage</Heading2Type>
+      <p>Simply nest `@operational/components` form elements using their API.</p>
+      <Playground snippet={String(simpleSnippet)} scope={{ Input, Select, DatePicker }} components={{ Filter }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

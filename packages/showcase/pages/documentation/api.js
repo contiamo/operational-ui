@@ -1,8 +1,6 @@
-import { Card, CardHeader } from "@operational/components"
+import { Card } from "@operational/components"
 import StaticContent from "../../components/StaticContent"
 import Layout from "../../components/Layout"
-import PageContent from "../../components/PageContent"
-import Canvas from "../../components/Canvas"
 
 const markdownContent = `
 Operational UI exports a wide range of granular components fulfilling a wide range of purposes. To help using them successfully, this page describes the general API philosophy, and outlines common code patterns that all components adhere to.
@@ -66,10 +64,8 @@ But that doesn't mean the project has to be used this way: you can attach custom
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <StaticContent markdownContent={markdownContent} />
-      </Card>
-    </Canvas>
+    <Card>
+      <StaticContent markdownContent={markdownContent} />
+    </Card>
   </Layout>
 )

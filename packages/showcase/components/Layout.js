@@ -2,11 +2,9 @@ import glamorous, { ThemeProvider } from "glamorous"
 import { css, rehydrate } from "glamor"
 import { renderStatic } from "glamor/server"
 import { operational } from "@operational/theme"
-import { baseStylesheet } from "@operational/utils"
-import Head from "next/head"
+import { baseStylesheet, darken } from "@operational/utils"
 
 import Header from "../components/Header"
-import PageContent from "./PageContent"
 import Sidenavigation from "../components/Sidenavigation"
 import nextConfig from "../next.config"
 
@@ -32,6 +30,32 @@ const Content = glamorous.div({
     width: "100%"
   }
 })
+
+const PageContent = glamorous.div(({ theme }) => ({
+  display: "flex",
+  alignItems: "flex-start",
+  padding: 16,
+  height: "100vh",
+  display: "flex",
+  alignItems: "flex-start",
+  flexBasis: "100%",
+  height: "100%",
+  maxHeight: "100%",
+  "& > *": {
+    overflow: "auto",
+    width: "100%",
+    height: "100%"
+  },
+  "& a:link, & a:visited": {
+    color: theme.colors.info
+  },
+  "& a:hover": {
+    color: darken(theme.colors.info)(5)
+  },
+  "& p": {
+    maxWidth: 670
+  }
+}))
 
 class Layout extends React.Component {
   render() {

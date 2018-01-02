@@ -2,7 +2,6 @@ import * as React from "react"
 import { Spinner, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 
@@ -50,19 +49,17 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Spinners are small siblings to the `Progress` component, used in places where progress comps would be either
-          too large or when they're more aesthetically desirable.
-        </p>
+    <Card>
+      <p>
+        Spinners are small siblings to the `Progress` component, used in places where progress comps would be either too
+        large or when they're more aesthetically desirable.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Spinner }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Spinner }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

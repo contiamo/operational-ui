@@ -3,7 +3,6 @@ import { Card, CardHeader, Timeline, TimelineItem, Heading2Type } from "@operati
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
@@ -69,19 +68,17 @@ const propDescription = {
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>Display information vertically on a timeline from top to bottom.</p>
-        <Heading2Type>Usage</Heading2Type>
-        <p>
-          A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component.
-          Items may contain any children.
-        </p>
-        <Playground snippet={String(simpleSnippet)} components={{ Timeline, TimelineItem }} />
+    <Card>
+      <p>Display information vertically on a timeline from top to bottom.</p>
+      <Heading2Type>Usage</Heading2Type>
+      <p>
+        A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component. Items
+        may contain any children.
+      </p>
+      <Playground snippet={String(simpleSnippet)} components={{ Timeline, TimelineItem }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription.TimelineItem} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription.TimelineItem} />
+    </Card>
   </Layout>
 )

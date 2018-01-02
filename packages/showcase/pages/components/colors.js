@@ -4,7 +4,6 @@ import { Card, CardHeader, Heading2Type } from "@operational/components"
 import { operational } from "@operational/theme"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Playground from "../../components/Playground"
 import Table from "../../components/PropsTable"
 
@@ -34,19 +33,17 @@ const ColorBox = glamorous.div(
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>The library provides a set of basic colors, as well as a range of grays.</p>
+    <Card>
+      <p>The library provides a set of basic colors, as well as a range of grays.</p>
 
-        {Object.keys(operational.colors).map((color, index) => (
-          <ColorBox key={index}>
-            <div style={{ backgroundColor: operational.colors[color] }} />
-            <p>{color}</p>
-          </ColorBox>
-        ))}
+      {Object.keys(operational.colors).map((color, index) => (
+        <ColorBox key={index}>
+          <div style={{ backgroundColor: operational.colors[color] }} />
+          <p>{color}</p>
+        </ColorBox>
+      ))}
 
-        <Playground snippet={String(simpleSnippet)} components={{}} scope={{ theme: operational }} />
-      </Card>
-    </Canvas>
+      <Playground snippet={String(simpleSnippet)} components={{}} scope={{ theme: operational }} />
+    </Card>
   </Layout>
 )

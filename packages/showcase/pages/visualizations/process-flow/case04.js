@@ -1,5 +1,4 @@
 import Layout from "../../../components/Layout"
-import Canvas from "../../../components/Canvas"
 import { ProcessFlow, ProcessFlowLoopHandler } from "@operational/visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
 import Marathon from "../../../components/Marathon"
@@ -178,11 +177,9 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <CardHeader>Process Flow Visualization Tests - Looped Data</CardHeader>
-        <Marathon test={marathon} timeout={2e3} />
-      </Card>
-    </Canvas>
+    <Card>
+      <CardHeader>Process Flow Visualization Tests - Looped Data</CardHeader>
+      <Marathon test={marathon} timeout={2e3} />
+    </Card>
   </Layout>
 )

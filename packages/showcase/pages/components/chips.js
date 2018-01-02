@@ -2,7 +2,6 @@ import * as React from "react"
 import { Chip, PlusChip, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Playground from "../../components/Playground"
 import Table from "../../components/PropsTable"
 
@@ -80,36 +79,33 @@ const propDescription = {
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Most commonly used for filters, these elements represent small bits of information that give a sense of
-          context to the user. Chips can be interactive, or simply informative. They can take on any color passed
-          through `props`, along with a symbol for the button that will be displayed if click behavior is detected.
-        </p>
+    <Card>
+      <p>
+        Most commonly used for filters, these elements represent small bits of information that give a sense of context
+        to the user. Chips can be interactive, or simply informative. They can take on any color passed through `props`,
+        along with a symbol for the button that will be displayed if click behavior is detected.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Chip }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Chip }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription.chip} />
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription.chip} />
 
-        <div style={{ marginBottom: 32 }} />
+      <div style={{ marginBottom: 32 }} />
 
-        <CardHeader>PlusChip</CardHeader>
+      <CardHeader>PlusChip</CardHeader>
 
-        <p>
-          A PlusChip is a specialized chip that bears no label, but simply takes an action and displays a symbol
-          prompting the action. These chips can either contain their own symbol, or simply have a plus if no symbol is
-          specified.
-        </p>
+      <p>
+        A PlusChip is a specialized chip that bears no label, but simply takes an action and displays a symbol prompting
+        the action. These chips can either contain their own symbol, or simply have a plus if no symbol is specified.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(plusSnippet)} components={{ Chip, PlusChip }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(plusSnippet)} components={{ Chip, PlusChip }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription.plusChip} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription.plusChip} />
+    </Card>
   </Layout>
 )

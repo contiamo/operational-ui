@@ -3,7 +3,6 @@ import { Card, CardHeader, TitleType, Heading1Type, Heading2Type, BodyType, Smal
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
@@ -18,17 +17,15 @@ const simpleSnippet = `
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          <em>@operational/components</em> keeps typography styles, organized in 5 typography styles, as follows:
-        </p>
+    <Card>
+      <p>
+        <em>@operational/components</em> keeps typography styles, organized in 5 typography styles, as follows:
+      </p>
 
-        <Playground
-          snippet={String(simpleSnippet)}
-          components={{ TitleType, Heading1Type, Heading2Type, BodyType, SmallType }}
-        />
-      </Card>
-    </Canvas>
+      <Playground
+        snippet={String(simpleSnippet)}
+        components={{ TitleType, Heading1Type, Heading2Type, BodyType, SmallType }}
+      />
+    </Card>
   </Layout>
 )

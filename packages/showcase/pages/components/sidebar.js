@@ -3,7 +3,6 @@ import { Sidebar, SidebarItem, SidebarLink, Card, CardHeader, Heading2Type } fro
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
@@ -88,42 +87,40 @@ const propDescription = {
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          The sidebar is a dynamic list-style navigational element to be used in cases with a large number of list-style
-          actionable items. This component involves composition of two constituent elements. Namely,
-        </p>
-        <ul>
-          <li>
-            <a href="#sidebar-item">SidebarItem</a>
-          </li>
-          <li>
-            <a href="#sidebar-link">SidebarLink</a>
-          </li>
-        </ul>
+    <Card>
+      <p>
+        The sidebar is a dynamic list-style navigational element to be used in cases with a large number of list-style
+        actionable items. This component involves composition of two constituent elements. Namely,
+      </p>
+      <ul>
+        <li>
+          <a href="#sidebar-item">SidebarItem</a>
+        </li>
+        <li>
+          <a href="#sidebar-link">SidebarLink</a>
+        </li>
+      </ul>
 
-        <div style={{ marginBottom: 32 }} />
+      <div style={{ marginBottom: 32 }} />
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground
-          snippet={String(simpleSnippet)}
-          components={{ Sidebar, SidebarItem, SidebarLink }}
-          scope={{ fetch }}
-        />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground
+        snippet={String(simpleSnippet)}
+        components={{ Sidebar, SidebarItem, SidebarLink }}
+        scope={{ fetch }}
+      />
 
-        <div style={{ marginBottom: 32 }} />
+      <div style={{ marginBottom: 32 }} />
 
-        <CardHeader id="sidebar-item">SidebarItem</CardHeader>
-        <Heading2Type>An expandable group of SidebarLinks, with added asynchronous functionality.</Heading2Type>
+      <CardHeader id="sidebar-item">SidebarItem</CardHeader>
+      <Heading2Type>An expandable group of SidebarLinks, with added asynchronous functionality.</Heading2Type>
 
-        <Table props={propDescription.sidebarItem} />
+      <Table props={propDescription.sidebarItem} />
 
-        <CardHeader id="sidebar-link">SidebarLink</CardHeader>
-        <p>A link, but with onClick instead of href.</p>
+      <CardHeader id="sidebar-link">SidebarLink</CardHeader>
+      <p>A link, but with onClick instead of href.</p>
 
-        <Table props={propDescription.sidebarLink} />
-      </Card>
-    </Canvas>
+      <Table props={propDescription.sidebarLink} />
+    </Card>
   </Layout>
 )

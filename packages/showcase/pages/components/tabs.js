@@ -2,7 +2,6 @@ import * as React from "react"
 import { Tabs, Tab, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 
@@ -115,23 +114,21 @@ const propDescription = {
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Component used to navigate across multiple views. It's composed of multiple <a href="#tab">Tab</a> components.
-        </p>
+    <Card>
+      <p>
+        Component used to navigate across multiple views. It's composed of multiple <a href="#tab">Tab</a> components.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Tabs, Tab }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Tabs, Tab }} />
 
-        <Heading2Type>Props</Heading2Type>
+      <Heading2Type>Props</Heading2Type>
 
-        <div style={{ marginBottom: 32 }} />
+      <div style={{ marginBottom: 32 }} />
 
-        <CardHeader id="tab">Tab</CardHeader>
+      <CardHeader id="tab">Tab</CardHeader>
 
-        <Table props={propDescription.Tab} />
-      </Card>
-    </Canvas>
+      <Table props={propDescription.Tab} />
+    </Card>
   </Layout>
 )

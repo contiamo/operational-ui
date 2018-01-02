@@ -5,7 +5,6 @@ import { Tooltip, Card, CardHeader, Heading2Type } from "@operational/components
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
@@ -75,20 +74,18 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          These elements give helpful hints about actions an end-user can perform. They are designed to be reusable,
-          elegant and unobtrusive. Tooltips are great for UX. They can (and in many cases should) be used along with,
-          and in, other components. For this reason, we took a highly versatile approach to our tooltips.
-        </p>
+    <Card>
+      <p>
+        These elements give helpful hints about actions an end-user can perform. They are designed to be reusable,
+        elegant and unobtrusive. Tooltips are great for UX. They can (and in many cases should) be used along with, and
+        in, other components. For this reason, we took a highly versatile approach to our tooltips.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Tooltip }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Tooltip }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table css={{ marginBottom: 32 }} props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table css={{ marginBottom: 32 }} props={propDescription} />
+    </Card>
   </Layout>
 )

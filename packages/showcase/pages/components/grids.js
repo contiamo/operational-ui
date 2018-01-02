@@ -2,7 +2,6 @@ import * as React from "react"
 import { Grid, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 
@@ -67,18 +66,16 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Grid component based on CSS grid spec. Beware <a href="http://caniuse.com/#search=grid">browser support</a>.
-        </p>
+    <Card>
+      <p>
+        Grid component based on CSS grid spec. Beware <a href="http://caniuse.com/#search=grid">browser support</a>.
+      </p>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(simpleSnippet)} components={{ Grid }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ Grid }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

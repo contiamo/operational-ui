@@ -3,7 +3,6 @@ import { InfoTile, Card, CardHeader, Heading2Type } from "@operational/component
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Table from "../../components/PropsTable"
 
 const snippet = `
@@ -60,25 +59,23 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These
-          elements are commonly used to represent KPI data, with strong key-value pairings.
-        </p>
+    <Card>
+      <p>
+        InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These
+        elements are commonly used to represent KPI data, with strong key-value pairings.
+      </p>
 
-        <div style={{ display: "flex" }}>
-          <InfoTile label="Components">200,000</InfoTile>
-          <InfoTile label="Reusability">High</InfoTile>
-          <InfoTile label="Potential Added Value">&euro;2M</InfoTile>
-        </div>
+      <div style={{ display: "flex" }}>
+        <InfoTile label="Components">200,000</InfoTile>
+        <InfoTile label="Reusability">High</InfoTile>
+        <InfoTile label="Potential Added Value">&euro;2M</InfoTile>
+      </div>
 
-        <Heading2Type>Usage</Heading2Type>
-        <Playground snippet={String(snippet)} components={{ InfoTile }} />
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(snippet)} components={{ InfoTile }} />
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )

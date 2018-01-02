@@ -2,7 +2,6 @@ import * as React from "react"
 import { ColorPicker, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"
-import Canvas from "../../components/Canvas"
 import Playground from "../../components/Playground"
 import Table from "../../components/PropsTable"
 
@@ -65,17 +64,15 @@ const propDescription = [
 
 export default props => (
   <Layout pathname={props.url.pathname}>
-    <Canvas>
-      <Card>
-        <p>
-          Colors are an important part of any user interface. This calls for a reasonable control that allows a user to
-          choose a color from a canvas. Our component library exposes such a control, as seen below.
-        </p>
-        {process.env.NODE_ENV !== "test" && <Playground snippet={String(simpleSnippet)} components={{ ColorPicker }} />}
+    <Card>
+      <p>
+        Colors are an important part of any user interface. This calls for a reasonable control that allows a user to
+        choose a color from a canvas. Our component library exposes such a control, as seen below.
+      </p>
+      {process.env.NODE_ENV !== "test" && <Playground snippet={String(simpleSnippet)} components={{ ColorPicker }} />}
 
-        <Heading2Type>Props</Heading2Type>
-        <Table props={propDescription} />
-      </Card>
-    </Canvas>
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
   </Layout>
 )
