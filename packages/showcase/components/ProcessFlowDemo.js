@@ -152,6 +152,7 @@ class ProcessFlowDemo extends React.Component<IProps, IState> {
   render() {
     return (
       <VisualizationWrapper
+        style={{ pointerEvents: "none" }}
         facade={ProcessFlow}
         data={data}
         accessors={accessors}

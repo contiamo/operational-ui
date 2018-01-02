@@ -19,7 +19,7 @@ var VisualizationWrapper = /** @class */ (function (_super) {
     }
     VisualizationWrapper.prototype.render = function () {
         var _this = this;
-        return React.createElement("div", { className: "Visualization", ref: function (containerNode) { return (_this.containerNode = containerNode); } });
+        return (React.createElement("div", { style: this.props.style, className: (this.props.className ? this.props.className + " " : "") + "Visualization", ref: function (containerNode) { return (_this.containerNode = containerNode); } }));
     };
     VisualizationWrapper.prototype.componentDidMount = function () {
         this.viz = new this.props.facade(this.containerNode);

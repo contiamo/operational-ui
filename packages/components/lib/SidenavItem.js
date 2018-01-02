@@ -32,8 +32,8 @@ var ConnectorStrip = glamorous_1.default.div({
         backgroundColor: "#515151",
         position: "absolute",
         borderRadius: "50%",
-        left: -4,
-        top: 19
+        left: -3,
+        top: 20
     },
     // Only half-height for last element - selectors cover both the case
     // when the side nav item is wrapped inside a <Link/> element (e.g. react-router)

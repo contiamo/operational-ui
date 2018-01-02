@@ -1,18 +1,27 @@
 import * as React from "react"
 import { forEach } from "lodash/fp"
 
-class VisualizationWrapper extends React.Component {
+export interface IProps {
+  style?: {}
+  className?: string
+  facade: any
+  accessors?: any
+  data?: any
+  config?: any
+}
+
+class VisualizationWrapper extends React.Component<IProps, {}> {
   viz: any
   containerNode: HTMLElement
-  props: {
-    facade: any
-    accessors?: any
-    data?: any
-    config?: any
-  }
 
   render() {
-    return <div className="Visualization" ref={containerNode => (this.containerNode = containerNode)} />
+    return (
+      <div
+        style={this.props.style}
+        className={`${this.props.className ? `${this.props.className} ` : ""}Visualization`}
+        ref={containerNode => (this.containerNode = containerNode)}
+      />
+    )
   }
 
   componentDidMount() {

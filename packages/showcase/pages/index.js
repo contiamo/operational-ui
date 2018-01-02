@@ -22,7 +22,7 @@ const TitleBar = glamorous.div(({ theme }) => ({
     fontWeight: 400,
     fontSize: "2.5rem",
     textAlign: "center",
-    margin: "10px 0 0px 0"
+    margin: "10px 0 10px 0"
   },
   "& h2": {
     ...theme.typography.body,
@@ -42,7 +42,7 @@ const TitleBarContent = glamorous.div({
 })
 
 const BodyContent = glamorous.div({
-  padding: 16,
+  padding: "32px 16px",
   maxWidth: 760,
   margin: "auto"
 })
