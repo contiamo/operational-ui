@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "react-router-dom"
 import { Sidebar, SidebarItem, SidebarLink, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../components/Playground"
@@ -121,23 +120,11 @@ export default props => (
         <Heading2Type>An expandable group of SidebarLinks, with added asynchronous functionality.</Heading2Type>
 
         <Table props={propDescription.sidebarItem} />
-        <p style={{ marginTop: 16, marginBottom: 32 }}>
-          <strong>
-            Note: This component is wrapped with <Link to="/tooltips">withTooltip</Link> and thus exposes all of the
-            props that such components do.
-          </strong>
-        </p>
 
         <CardHeader id="sidebar-link">SidebarLink</CardHeader>
         <p>A link, but with onClick instead of href.</p>
 
         <Table props={propDescription.sidebarLink} />
-        <p style={{ marginTop: 16, marginBottom: 32 }}>
-          <strong>
-            Note: This component is wrapped with <Link to="/tooltips">withTooltip</Link> and thus exposes all of the
-            props that such components do.
-          </strong>
-        </p>
       </Card>
     </Canvas>
   </Layout>

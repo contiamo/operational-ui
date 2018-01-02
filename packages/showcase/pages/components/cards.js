@@ -7,18 +7,18 @@ import Layout from "../../components/Layout"
 import Canvas from "../../components/Canvas"
 
 const headerSnippet = `
-  <Card width={260}>
-    <CardHeader>Title for my card</CardHeader>
-    <p>Here is a bare card with custom padding.</p>
-    <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
-  </Card>
+<Card width={260}>
+  <CardHeader>Title for my card</CardHeader>
+  <p>Here is a bare card with custom padding.</p>
+  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+</Card>
 `
 
 const simpleSnippet = `
-  <Card padding={32} width={260}>
-    <p>Here is a bare card with custom padding.</p>
-    <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
-  </Card>
+<Card padding={32} width={260}>
+  <p>Here is a bare card with custom padding.</p>
+  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+</Card>
 `
 
 const propDescription = [

@@ -54,8 +54,8 @@ const IconContainer = glamorous.div({
 })
 
 export default (props: IProps) => (
-// See ./SidenavItem.tsx for reason why class name is set.
-  <Container key={props.id} css={props.css} className={"op_sidenavheader " + props.className}>
+  // See ./SidenavItem.tsx for reason why class name is set.
+  <Container key={props.id} css={props.css} onClick={props.onClick} className={"op_sidenavheader " + props.className}>
     <Content isActive={!!props.active} isExpanded={!!props.expanded}>
       <IconContainer>
         {props.icon === String(props.icon) ? <Icon name={props.icon as ReactFeatherIconName} size={24} /> : props.icon}

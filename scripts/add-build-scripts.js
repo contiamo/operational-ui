@@ -119,7 +119,7 @@ const devDependencies = {
   "awesome-typescript-loader": "3.4.1"
 }
 
-const packages = ["showcase", "blocks", "components", "theme", "utils", "visualizations"]
+const packages = ["blocks", "components", "theme", "utils", "visualizations"]
 
 const writeFiles = () => {
   packages.forEach(pkg => {

@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "react-router-dom"
 import glamorous, { Div, GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { hexOrColor, readableTextColor, darken } from "@operational/utils"
@@ -9,7 +8,6 @@ export interface IProps {
   style?: {}
   className?: string
   children?: React.ReactNode
-  to?: string
   onClick?: () => void
   symbol?: string
   theme?: Theme
@@ -64,17 +62,7 @@ const Symbol = glamorous.div({
   marginLeft: "auto"
 })
 
-const SidebarLink: React.SFC<IProps> = ({ id, style, className, children, to, onClick, symbol }: IProps) => {
-  // if this is expected to work with react-router,
-  if (to) {
-    return (
-      <Link to={to ? to : ""} style={style} key={id} className={`${className} co_link`}>
-        {children}
-        {symbol ? <Symbol>{symbol}</Symbol> : ""}
-      </Link>
-    )
-  }
-
+const SidebarLink: React.SFC<IProps> = ({ id, style, className, children, onClick, symbol }: IProps) => {
   return (
     <div key={id} style={style} onClick={onClick} className={`${className} co_link`}>
       {children}

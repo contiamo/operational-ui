@@ -1,5 +1,6 @@
 import glamorous, { Div, Img, withTheme } from "glamorous"
 import Link from "next/link"
+import Router from "next/router"
 import { Box, BarChart2, Grid } from "react-feather"
 
 import { Sidenav, SidenavHeader, SidenavItem, Icon } from "@operational/components"
@@ -34,7 +35,7 @@ export default ({ pathname }) => {
       <Link href="/">
         <a>
           <SidenavHeader
-            css={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}
+            css={{ borderBottom: "1px solid #515151" }}
             label="Operational UI"
             icon={<icons.Operational size={28} />}
           />
@@ -59,6 +60,7 @@ export default ({ pathname }) => {
         })()
         const el = (
           <SidenavHeader
+            css={{ cursor: "pointer" }}
             expanded={routeMatch}
             key={index}
             active={pathname === url}

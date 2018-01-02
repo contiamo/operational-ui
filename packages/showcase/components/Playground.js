@@ -13,7 +13,6 @@ const Container = glamorous.div(({ theme, isExpanded }) => ({
 
   ...isExpanded
     ? {
-        border: 0,
         backgroundColor: theme.colors.white,
         position: "fixed",
         top: 0,
@@ -101,6 +100,7 @@ class Playground extends React.Component {
 
   render() {
     const { snippet, components, scope } = this.props
+    const processedSnippet = snippet[0] === "\n" ? snippet.slice(1) : snippet
     const wrappedComponents = {}
     const comps = components || {}
     for (const key in comps) {
@@ -108,6 +108,11 @@ class Playground extends React.Component {
     }
     return (
       <Container isExpanded={this.state.isExpanded}>
+        <ComponentPlayground
+          theme="mbo"
+          codeText={processedSnippet}
+          scope={{ React, ...wrappedComponents, ...(scope || {}) }}
+        />
         <ExpandPrompt
           onClick={ev => {
             this.setState(prevState => ({
@@ -117,7 +122,6 @@ class Playground extends React.Component {
         >
           {this.state.isExpanded ? "Collapse (Esc)" : "Give yourself some space - expand this playground"}
         </ExpandPrompt>
-        <ComponentPlayground theme="mbo" codeText={snippet} scope={{ React, ...wrappedComponents, ...(scope || {}) }} />
       </Container>
     )
   }

@@ -7,6 +7,5 @@ export default glamorous.div({
   height: "100vh",
   "& > *": {
     height: "100%"
-  },
-  "& > :first-child": {}
+  }
 })

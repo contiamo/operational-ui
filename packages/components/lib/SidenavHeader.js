@@ -36,7 +36,7 @@ var IconContainer = glamorous_1.default.div({
 });
 exports.default = function (props) { return (
 // See ./SidenavItem.tsx for reason why class name is set.
-React.createElement(Container, { key: props.id, css: props.css, className: "op_sidenavheader " + props.className },
+React.createElement(Container, { key: props.id, css: props.css, onClick: props.onClick, className: "op_sidenavheader " + props.className },
     React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded },
         React.createElement(IconContainer, null, props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: props.icon, size: 24 }) : props.icon),
         React.createElement(Label, null, props.label)),

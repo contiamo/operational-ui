@@ -9,7 +9,6 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var react_router_dom_1 = require("react-router-dom");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var style = function (_a) {
@@ -38,13 +37,7 @@ var Symbol = glamorous_1.default.div({
     marginLeft: "auto"
 });
 var SidebarLink = function (_a) {
-    var id = _a.id, style = _a.style, className = _a.className, children = _a.children, to = _a.to, onClick = _a.onClick, symbol = _a.symbol;
-    // if this is expected to work with react-router,
-    if (to) {
-        return (React.createElement(react_router_dom_1.Link, { to: to ? to : "", style: style, key: id, className: className + " co_link" },
-            children,
-            symbol ? React.createElement(Symbol, null, symbol) : ""));
-    }
+    var id = _a.id, style = _a.style, className = _a.className, children = _a.children, onClick = _a.onClick, symbol = _a.symbol;
     return (React.createElement("div", { key: id, style: style, onClick: onClick, className: className + " co_link" },
         children,
         symbol ? React.createElement(Symbol, null, symbol) : ""));

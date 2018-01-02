@@ -6,7 +6,7 @@ import Head from "next/head"
 
 import Header from "../components/Header"
 import PageContent from "./PageContent"
-import ShowcaseSidenav from "../components/ShowcaseSidenav"
+import Sidenavigation from "../components/Sidenavigation"
 
 const Container = glamorous.div({
   display: "flex",
@@ -62,7 +62,7 @@ class Layout extends React.Component {
               src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/mode/javascript/javascript.min.js"
             />
           </Head>
-          <ShowcaseSidenav pathname={pathname} />
+          <Sidenavigation pathname={pathname} />
           <Content>
             <Header note="v0.1.0-5" pathname={pathname} />
             <PageContent>{this.props.children}</PageContent>

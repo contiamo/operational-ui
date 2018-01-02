@@ -7,7 +7,6 @@ export interface IProps {
     style?: {};
     className?: string;
     children?: React.ReactNode;
-    to?: string;
     onClick?: () => void;
     symbol?: string;
     theme?: Theme;

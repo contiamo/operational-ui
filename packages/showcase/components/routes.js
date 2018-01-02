@@ -36,6 +36,10 @@ export const routes = [
   {
     url: "/documentation",
     label: "Documentation",
-    items: [{ url: "/comp", label: "Comp" }]
+    items: [
+      { url: "/design-guidelines", label: "Design Guidelines" },
+      { url: "/api", label: "API Design" },
+      { url: "/theming", label: "Theming" }
+    ]
   }
 ]

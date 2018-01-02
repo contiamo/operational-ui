@@ -40,10 +40,6 @@ const TitleBarContent = glamorous.div({
 })
 
 export default class Intro extends React.Component {
-  state = {
-    animationPosition: 0,
-    animationVelocity: 0
-  }
   render() {
     return (
       <Layout pathname={this.props.url.pathname}>
