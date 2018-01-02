@@ -69,8 +69,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Grids</CardHeader>
-
         <p>
           Grid component based on CSS grid spec. Beware <a href="http://caniuse.com/#search=grid">browser support</a>.
         </p>

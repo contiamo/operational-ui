@@ -77,7 +77,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Tooltips</CardHeader>
         <p>
           These elements give helpful hints about actions an end-user can perform. They are designed to be reusable,
           elegant and unobtrusive. Tooltips are great for UX. They can (and in many cases should) be used along with,

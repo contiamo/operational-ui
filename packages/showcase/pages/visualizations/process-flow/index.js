@@ -360,8 +360,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Process Flow</CardHeader>
-
         <p>
           Process flow visualizations are designed to show the paths taken through a set of process steps (represented
           by nodes).

@@ -2,7 +2,6 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Header } from "@operational/components"
 import { operational } from "@operational/theme"
-import { routes } from "./routes"
 import Link from "next/link"
 
 const Breadcrumbs = glamorous.div(({ theme }) => ({
@@ -24,18 +23,16 @@ export default props => {
   const breadcrumbs = []
   const chunk1 = pathnameChunks[0]
   const chunk2 = pathnameChunks[1]
-  let route
   if (chunk1) {
-    route = routes.filter(r => r.url === "/" + chunk1)[0]
     breadcrumbs.push({
-      url: chunk2 ? "/" + chunk1 : null,
-      label: route.label
+      url: `/${chunk1}`,
+      label: props.pathmap[`/${chunk1}`].query.title
     })
   }
   if (chunk2) {
     breadcrumbs.push({
-      url: null,
-      label: route.items.filter(i => i.url === "/" + chunk2)[0].label
+      url: `/${chunk1}/${chunk2}`,
+      label: props.pathmap[`/${chunk1}/${chunk2}`].query.title
     })
   }
   return (
@@ -49,7 +46,6 @@ export default props => {
       color="#fff"
     >
       {
-        /* Placeholder for breadcrumbs */
         <Breadcrumbs>
           {breadcrumbs.map((breadcrumb, index) => (
             <span>

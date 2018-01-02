@@ -176,8 +176,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Form Fields</CardHeader>
-
         <p>
           Our applications tend to be composed of a myriad of form controls.<br />This page seeks to document the vast
           majority of these controls.

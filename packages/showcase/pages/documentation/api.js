@@ -68,7 +68,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>API Design</CardHeader>
         <StaticContent markdownContent={markdownContent} />
       </Card>
     </Canvas>

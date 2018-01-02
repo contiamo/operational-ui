@@ -90,8 +90,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Sidebar</CardHeader>
-
         <p>
           The sidebar is a dynamic list-style navigational element to be used in cases with a large number of list-style
           actionable items. This component involves composition of two constituent elements. Namely,

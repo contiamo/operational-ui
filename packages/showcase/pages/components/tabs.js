@@ -117,7 +117,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Tabs</CardHeader>
         <p>
           Component used to navigate across multiple views. It's composed of multiple <a href="#tab">Tab</a> components.
         </p>

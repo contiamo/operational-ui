@@ -36,8 +36,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Colors</CardHeader>
-
         <p>The library provides a set of basic colors, as well as a range of grays.</p>
 
         {Object.keys(operational.colors).map((color, index) => (

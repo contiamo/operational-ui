@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "next",
-    "build": "next build",
+    "build": "next build && next export",
     "prettier": "prettier './{components,pages}/**/*.js' --write",
     "lint": "echo 'Linter to be added as project matures.'",
     "precommit": "npm run prettier",
@@ -19,6 +19,7 @@
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "next": "^4.2.1",
     "prettier": "1.8.2"
   },

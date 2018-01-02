@@ -7,6 +7,9 @@ import Head from "next/head"
 import Header from "../components/Header"
 import PageContent from "./PageContent"
 import Sidenavigation from "../components/Sidenavigation"
+import nextConfig from "../next.config"
+
+const pathmap = nextConfig.exportPathMap()
 
 const Container = glamorous.div({
   display: "flex",
@@ -62,9 +65,9 @@ class Layout extends React.Component {
               src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/mode/javascript/javascript.min.js"
             />
           </Head>
-          <Sidenavigation pathname={pathname} />
+          <Sidenavigation pathname={pathname} pathmap={pathmap} />
           <Content>
-            <Header note="v0.1.0-5" pathname={pathname} />
+            <Header note="v0.1.0-5" pathname={pathname} pathmap={pathmap} />
             <PageContent>{this.props.children}</PageContent>
           </Content>
         </Container>

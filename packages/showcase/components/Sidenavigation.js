@@ -4,7 +4,6 @@ import Router from "next/router"
 import { Box, BarChart2, Grid } from "react-feather"
 
 import { Sidenav, SidenavHeader, SidenavItem, Icon } from "@operational/components"
-import { routes } from "./routes"
 import * as icons from "./Icons"
 
 const getMainRouteIcon = mainRoute => {
@@ -28,7 +27,9 @@ const style = {
   }
 }
 
-export default ({ pathname }) => {
+const mainPaths = ["/components", "/blocks", "/visualizations", "/documentation"]
+
+export default ({ pathname, pathmap }) => {
   const pathSegments = pathname ? pathname.split("/").filter(s => s !== "") : []
   return (
     <Sidenav css={style} expanded>
@@ -41,7 +42,14 @@ export default ({ pathname }) => {
           />
         </a>
       </Link>
-      {routes.map(({ url, label, items }: IRoute, index: number) => {
+      {mainPaths.map((url, index) => {
+        const label = pathmap[url].query.title
+        const items = Object.keys(pathmap)
+          .filter(s => !!s.match(new RegExp("^" + url)) && s !== url)
+          .map(url => ({
+            url,
+            label: pathmap[url].query.title
+          }))
         const routeMatch = pathname && url && pathname.slice(0, url.length) === url
         const Logo = (() => {
           if (url === "/components") {
@@ -69,9 +77,9 @@ export default ({ pathname }) => {
           >
             {routeMatch
               ? items.map((item, index) => (
-                  <Link href={url + item.url} key={index}>
+                  <Link href={item.url} key={index}>
                     <a>
-                      <SidenavItem label={item.label} key={index} active={item.url.slice(1) === pathSegments[1]} />
+                      <SidenavItem label={item.label} key={index} active={item.url === pathname} />
                     </a>
                   </Link>
                 ))

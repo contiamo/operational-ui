@@ -42,7 +42,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Cards</CardHeader>
         <p>
           Cards are used to group and lay out content on the interface - in fact, non-scrolling interfaces with a number
           of cards laid out in a grid are the most common use-cases of this project.

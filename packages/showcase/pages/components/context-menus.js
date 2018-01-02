@@ -53,8 +53,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>ContextMenus</CardHeader>
-
         <p>
           Context menus are nested menus that can expand from anywhere on a page. Their use is encouraged in the header
           and in the upper right corner of cards.

@@ -82,8 +82,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Chips</CardHeader>
-
         <p>
           Most commonly used for filters, these elements represent small bits of information that give a sense of
           context to the user. Chips can be interactive, or simply informative. They can take on any color passed

@@ -66,8 +66,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>DatePicker</CardHeader>
-
         <p>DatePickers can currently be used to pick an period bound by two day selections.</p>
 
         <Heading2Type>Usage</Heading2Type>

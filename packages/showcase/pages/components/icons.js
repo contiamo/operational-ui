@@ -41,8 +41,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Icons</CardHeader>
-
         <p>
           Contiamo's SVG icon set as a single component. It abstracts over different types of icons (<a href="https://feathericons.com">
             Feather Icons

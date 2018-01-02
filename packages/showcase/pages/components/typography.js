@@ -20,8 +20,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Typography</CardHeader>
-
         <p>
           <em>@operational/components</em> keeps typography styles, organized in 5 typography styles, as follows:
         </p>

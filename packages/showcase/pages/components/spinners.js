@@ -52,8 +52,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Spinners</CardHeader>
-
         <p>
           Spinners are small siblings to the `Progress` component, used in places where progress comps would be either
           too large or when they're more aesthetically desirable.

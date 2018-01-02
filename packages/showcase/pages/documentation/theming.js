@@ -24,7 +24,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Theming</CardHeader>
         <StaticContent markdownContent={markdownContent} />
       </Card>
     </Canvas>

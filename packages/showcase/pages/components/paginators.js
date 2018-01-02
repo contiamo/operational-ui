@@ -66,8 +66,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Paginator</CardHeader>
-
         <p>Simple component to navigate through pages</p>
 
         <Heading2Type>Usage</Heading2Type>

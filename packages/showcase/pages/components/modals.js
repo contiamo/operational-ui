@@ -74,8 +74,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Modals</CardHeader>
-
         <p>Modals are customizable full-screen alert boxes.</p>
 
         <Heading2Type>Usage</Heading2Type>

@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "react-router-dom"
 import { Card, CardHeader, Timeline, TimelineItem, Heading2Type } from "@operational/components"
 
 import Playground from "../../components/Playground"
@@ -72,8 +71,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Timeline</CardHeader>
-
         <p>Display information vertically on a timeline from top to bottom.</p>
         <Heading2Type>Usage</Heading2Type>
         <p>

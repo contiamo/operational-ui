@@ -72,8 +72,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Buttons</CardHeader>
-
         <p>
           Buttons are used heavily throughout an operational interface, and they often require a fair amount of
           customization. They exist independently or in groups, and can shrink to a condensed mode if space is short.

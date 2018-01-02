@@ -1,7 +1,8 @@
 import glamorous from "glamorous"
 import { Card, Icon, Heading2Type } from "@operational/components"
-import Layout from "../components/Layout"
+import fetch from "isomorphic-fetch"
 
+import Layout from "../components/Layout"
 import { Operational } from "../components/Icons"
 import Demo from "../components/Demo"
 
@@ -40,6 +41,12 @@ const TitleBarContent = glamorous.div({
 })
 
 export default class Intro extends React.Component {
+  static async getInitialProps() {
+    const res = await fetch("https://rawgit.com/Contiamo/operational-ui/master/README.md")
+    const content = await res.text()
+    return { content }
+  }
+
   render() {
     return (
       <Layout pathname={this.props.url.pathname}>

@@ -35,8 +35,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Progress</CardHeader>
-
         <p>Animating progress bar, covering an entire area. Add as a child to any non-statically positioned element.</p>
 
         <Heading2Type>Usage</Heading2Type>

@@ -56,8 +56,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Switch</CardHeader>
-
         <p>A switch is a simple toggle indicating whether a specific functionality is enabled or disabled.</p>
 
         <Heading2Type>Usage</Heading2Type>

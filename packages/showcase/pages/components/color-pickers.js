@@ -67,7 +67,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Color Picker</CardHeader>
         <p>
           Colors are an important part of any user interface. This calls for a reasonable control that allows a user to
           choose a color from a canvas. Our component library exposes such a control, as seen below.

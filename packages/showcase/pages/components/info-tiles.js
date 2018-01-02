@@ -62,8 +62,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>InfoTiles</CardHeader>
-
         <p>
           InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These
           elements are commonly used to represent KPI data, with strong key-value pairings.

@@ -194,8 +194,6 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Canvas>
       <Card>
-        <CardHeader>Uploads</CardHeader>
-
         <p>Uploads are great components!</p>
 
         <Heading2Type>Usage</Heading2Type>
