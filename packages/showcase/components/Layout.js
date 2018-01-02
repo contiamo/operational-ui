@@ -23,7 +23,7 @@ const Container = glamorous.div({
 const Content = glamorous.div({
   display: "flex",
   flexDirection: "column",
-  width: "100vw",
+  width: "calc(100vw - 240px)",
   backgroundColor: operational.colors.background,
   height: "100vh",
   "& > *": {
@@ -34,6 +34,7 @@ const Content = glamorous.div({
 const PageContent = glamorous.div(({ theme }) => ({
   display: "flex",
   alignItems: "flex-start",
+  flex: "1",
   padding: 16,
   height: "100vh",
   display: "flex",

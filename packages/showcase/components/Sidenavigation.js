@@ -32,7 +32,7 @@ const mainPaths = ["/components", "/blocks", "/visualizations", "/documentation"
 export default ({ pathname, pathmap }) => {
   const pathSegments = pathname ? pathname.split("/").filter(s => s !== "") : []
   return (
-    <Sidenav css={style} expanded>
+    <Sidenav css={style} width={240} expanded>
       <Link href="/">
         <a>
           <SidenavHeader

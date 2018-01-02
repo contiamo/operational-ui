@@ -11,7 +11,9 @@ const sleep = ms =>
   })
 
 const Content = glamorous.div({ padding: 20 }, ({ theme }) => ({
-  backgroundColor: theme.colors.gray10
+  backgroundColor: theme.colors.gray10,
+  maxWidth: "100%",
+  overflow: "auto"
 }))
 
 class Marathon extends React.Component {
