@@ -1,6 +1,6 @@
 # Operational UI Visualizations
 
-The `@operational/visualizations` package contains fully featured data visualization modules used to 
+The `@operational/visualizations` package contains fully featured data visualization modules tailored to operational interfaces. 
 
 ## Getting Started
 

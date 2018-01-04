@@ -1,6 +1,6 @@
 import glamorous from "glamorous"
 import { Card, Icon, Heading2Type } from "@operational/components"
-import fetch from "isomorphic-fetch"
+import { fetchFromRepo } from "../utils"
 
 import Layout from "../components/Layout"
 import StaticContent from "../components/StaticContent"
@@ -49,16 +49,11 @@ const BodyContent = glamorous.div({
 
 export default class Intro extends React.Component {
   static async getInitialProps() {
-    const res = await fetch("https://rawgit.com/Contiamo/operational-ui/master/README.md")
-    const content = await res.text()
+    const content = await fetchFromRepo("/README.md", 12, -41)
     return { content }
   }
 
   render() {
-    const readme = this.props.content
-      .split("\n")
-      .slice(12, -41)
-      .join("\n")
     return (
       <Layout pathname={this.props.url.pathname}>
         <Card css={{ width: "100%", position: "relative", padding: 0 }}>
@@ -71,7 +66,7 @@ export default class Intro extends React.Component {
             <Demo />
           </TitleBar>
           <BodyContent>
-            <StaticContent markdownContent={readme} />
+            <StaticContent markdownContent={this.props.content} />
           </BodyContent>
         </Card>
       </Layout>
