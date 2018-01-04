@@ -17,11 +17,22 @@ const colors: any = {
   "Cologne": operational.colors.error,
 }
 
-const DonutRenderer: any = {
-  type: "donut",
+const accessors: any = {
   key: (d: any): string => d.key,
   value: (d: any): string => d.value,
   color: (d: any): string => colors[d.key],
+}
+const DonutRenderer: any = {
+  type: "donut",
+  ...accessors
+}
+
+const GaugeRenderer: any = {
+  type: "gauge",
+  extent: "semi",
+  comparison: { key: "Last month", value: 18 },
+  target: 50,
+  ...accessors
 }
 
 const data: any = {
@@ -36,9 +47,7 @@ const data: any = {
     { key: "test", value: 0 },
     { key: "test2", value: undefined }
   ],
-  // comparison: ["Last month", 18],
-  // target: 50,
-  renderAs: [DonutRenderer]
+  renderAs: [GaugeRenderer]
 }
 
 const viz: PieChart = new PieChart(containerNode)

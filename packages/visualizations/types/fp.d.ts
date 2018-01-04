@@ -158,6 +158,7 @@ declare namespace fp {
     every: any
     extend: any
     filter: any
+    findIndex: any
     flatten: any
     forEach: any
     get: any

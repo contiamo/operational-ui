@@ -29,6 +29,7 @@ class Series {
     this.assignAccessors()
     this.renderer = this.initializeRenderer()
     this.prepareData()
+    this.stateWriter("dataForLegend", this.renderer.dataForLegend())
   }
 
   prepareData(): void {
@@ -37,9 +38,8 @@ class Series {
         return this.renderer.key(datum) && this.renderer.key(datum).length > 0 && this.renderer.value(datum) > 0
       })
     )(this.state.current.get("accessors").data.data(this.attributes))
+    this.renderer.setData(this.data)
     this.stateWriter("data", this.data)
-    this.stateWriter("keyAccessor", this.renderer.key)
-    this.stateWriter("colorAccessor", this.renderer.color)
   }
 
   assignAccessors(): void {
@@ -65,7 +65,7 @@ class Series {
   draw(): void {
     const seriesConfig: IObject = this.state.current.get("computed").series
     // this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)
-    this.renderer.draw(this.data)
+    this.renderer.draw()
     this.drawn = true
   }
 }

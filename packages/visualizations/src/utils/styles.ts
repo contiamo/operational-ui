@@ -16,6 +16,7 @@ const legendTopBottomStyle = {
 
 const seriesLegendStyle = {
   padding: "1px 3px 0 3px",
+  float: "left",
   lineHeight: "14px",
   "& div.color": {
     width: "6px",

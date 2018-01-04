@@ -6,6 +6,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { pie as d3Pie, arc as d3Arc } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
+import * as styles from "./styles"
 
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
@@ -56,6 +57,7 @@ abstract class AbstractRenderer {
   series: any
   state: any
   total: number
+  type: string
   value: (d: any) => number
 
   constructor(state: any, events: any, el: TD3Selection, options: IObject) {
@@ -63,22 +65,16 @@ abstract class AbstractRenderer {
     this.events = events
     this.el = el.select("g.drawing")
     forEach.convert({ cap: false })((option: any, key: string): void => {
-      if (!isFunction(option)) {
-        return
-      }
-      ;(this as any)[key] = (d?: any) => option(d)
+      ;(this as any)[key] = isFunction(option) ? (d?: any) => option(d) : option
     })(options)
     this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this), this)
     this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this), this)
     this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this), this)
   }
 
-  // data(data: any, dataFormat: string[], target?: number, comparison?: number): any {
-  //   this.previousParsed = this.parsedData
-  //   this.dataFormat = dataFormat || this.dataFormat
-  //   // Return so that outside world knows about assigned colors
-  //   return this.parsedData
-  // }
+  setData(data: IObject): void {
+    this.data = data
+  }
 
   computeTotal(): void {
     this.total = reduce((memo: number, datum: any[]): number => {
@@ -87,25 +83,11 @@ abstract class AbstractRenderer {
     }, 0)(this.data)
   }
 
-  // parse(data: any, percentageDenominator: number): void {
-  //   this.parsedData = reduce((memo: any[], datapoint: any): any[] => {
-  //     if (datapoint[1] != null) {
-  //       memo.push({
-  //         key: datapoint[0],
-  //         percentage: (datapoint[1] / percentageDenominator) * 100,
-  //         value: datapoint[1]
-  //       })
-  //     }
-  //     return memo
-  //   }, [])(data)
-  // }
-
   hasData(): boolean {
     return this.data.length > 0
   }
 
-  draw(data: any): void {
-    this.data = data
+  draw(): void {
     this.compute()
     this.drawn ? this.updateDraw() : this.initialDraw()
   }
@@ -113,7 +95,7 @@ abstract class AbstractRenderer {
   initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
-    this.el.append("svg:g").attr("class", "total")
+    this.el.append("svg:g").attr("class", styles.total)
 
     if (this.hasData()) {
       this.updateDraw()
@@ -154,13 +136,13 @@ abstract class AbstractRenderer {
     let enter: any = arcs
       .enter()
       .append("svg:g")
-      .attr("class", "arc")
+      .attr("class", styles.arc)
 
     enter.append("svg:path").style("fill", (d: any): string => this.color(d.data))
 
     enter
       .append("svg:text")
-      .attr("class", "label")
+      .attr("class", styles.label)
       .attr("dy", 5)
       .style("text-anchor", "middle")
 
@@ -195,7 +177,7 @@ abstract class AbstractRenderer {
     let duration: number = this.state.current.get("config").duration
 
     let total: any = this.el
-      .select("g.total")
+      .select(`g.${styles.total}`)
       .selectAll("text")
       .data(this.centerDisplayString())
 
@@ -247,15 +229,10 @@ abstract class AbstractRenderer {
     }
 
     let arcs: any = this.el.select("g.arcs").selectAll("g")
-    let filterFocused: any
-    let filterUnFocused: any
-    ;[filterFocused, filterUnFocused] =
-      datapoint && datapoint.data
-        ? [
-            (d: any): boolean => dataKey(d) === dataKey(datapoint),
-            (d: any): boolean => dataKey(d) !== dataKey(datapoint)
-          ]
-        : [(): boolean => false, (): boolean => true]
+
+    const filterFocused: any = (d: any): boolean => datapoint && datapoint.data && dataKey(d) === dataKey(datapoint),
+      filterUnFocused: any = (d: any): boolean =>
+        datapoint && datapoint.data ? dataKey(d) !== dataKey(datapoint) : true
 
     arcs
       .filter(filterFocused)
@@ -278,10 +255,9 @@ abstract class AbstractRenderer {
 
   abstract totalForPercentages(): number
 
-  // angleValue(d: any): number {
-  //   debugger
-  //   return this.value(d)
-  // }
+  checkData(): void {
+    return
+  }
 
   // Compute
   compute(): void {
@@ -292,6 +268,8 @@ abstract class AbstractRenderer {
     if (!this.hasData()) {
       return
     }
+
+    this.checkData()
 
     let startAngle: number
     let endAngle: number
@@ -373,6 +351,15 @@ abstract class AbstractRenderer {
 
   translateString(values: [number, number]): string {
     return "translate(" + values.join(", ") + ")"
+  }
+
+  dataForLegend(): any {
+    return map((datum: IObject): IObject => {
+      return {
+        label: this.key(datum),
+        color: this.color(datum)
+      }
+    })(this.data)
   }
 
   // Remove & clean up
