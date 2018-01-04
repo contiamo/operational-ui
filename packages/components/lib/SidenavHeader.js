@@ -18,6 +18,7 @@ var Content = glamorous_1.default.div(function (_a) {
         height: size,
         flex: "0 0 " + size + "px",
         color: isActive ? theme.colors.linkText : theme.colors.white,
+        borderBottom: isExpanded ? "1px solid #515151" : "none",
         backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)"
     });
 });
@@ -33,7 +34,9 @@ var IconContainer = glamorous_1.default.div({
     justifyContent: "center",
     flex: "0 0 " + size + "px"
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
+exports.default = function (props) { return (
+// See ./SidenavItem.tsx for reason why class name is set.
+React.createElement(Container, { key: props.id, css: props.css, onClick: props.onClick, className: "op_sidenavheader " + props.className },
     React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded },
         React.createElement(IconContainer, null, props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: props.icon, size: 24 }) : props.icon),
         React.createElement(Label, null, props.label)),

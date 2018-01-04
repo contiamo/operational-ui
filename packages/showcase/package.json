@@ -1,67 +1,27 @@
 {
   "name": "@operational/showcase",
   "version": "0.1.0-5",
-  "description": "A showcase of the various components available in the Contiamo UI framework",
+  "description": "Operational UI documentation site",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/operational-ui.git",
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --hot --public --host 0.0.0.0",
-    "build": "NODE_ENV=production webpack",
-    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "start": "next",
+    "build": "next build && next export && rm -rf dist && mv out dist",
+    "prettier": "prettier './{components,pages}/**/*.js' --write",
+    "lint": "echo 'Linter to be added as project matures.'",
     "precommit": "npm run prettier",
-    "test": "jest",
-    "test:u": "jest -u",
+    "test": "echo 'Tests to be added as project matures.'",
+    "test:u": "echo 'Tests to be added as project matures.'",
     "package": "echo 'Showcase is not published, hence no package script.'",
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
-    "@types/core-js": "0.9.43",
-    "@types/d3-ease": "1.0.7",
-    "@types/d3-scale": "1.0.10",
-    "@types/d3-selection": "1.1.0",
-    "@types/d3-shape": "1.2.1",
-    "@types/d3-transition": "1.1.0",
-    "@types/enzyme": "3.1.5",
-    "@types/jest": "20.0.8",
-    "@types/jquery": "3.2.12",
-    "@types/lodash": "4.14.74",
-    "@types/marked": "0.3.0",
-    "@types/node": "8.0.27",
-    "@types/react": "16.0.25",
-    "@types/react-color": "2.13.0",
-    "@types/react-dom": "16.0.0",
-    "@types/react-hot-loader": "3.0.4",
-    "@types/react-icons": "2.2.2",
-    "@types/react-router-dom": "4.2.0",
-    "@types/react-syntax-highlighter": "0.0.3",
-    "@types/tinycolor2": "1.4.0",
-    "@types/webpack-env": "1.13.1",
-    "awesome-typescript-loader": "3.4.1",
-    "copy-webpack-plugin": "^4.0.1",
-    "enzyme": "2.9.1",
-    "enzyme-to-json": "1.5.1",
-    "file-loader": "^0.11.2",
-    "html-webpack-plugin": "^2.30.1",
-    "jest": "21.2.1",
-    "jest-enzyme": "3.8.1",
-    "jest-glamor-react": "3.1.0",
-    "jest-serializer-enzyme": "1.0.0",
-    "prettier": "1.8.2",
-    "raw-loader": "^0.5.1",
-    "react-test-renderer": "16.0.0",
-    "ts-jest": "21.0.0",
-    "ts-loader": "^3.1.1",
-    "tslint": "5.7.0",
-    "tslint-config-airbnb": "5.2.1",
-    "tslint-config-prettier": "1.5.0",
-    "typescript": "2.6.2",
-    "webpack": "3.10.0",
-    "webpack-dev-server": "2.9.7",
-    "webpack-merge": "4.1.1"
+    "isomorphic-fetch": "^2.2.1",
+    "next": "^4.2.1",
+    "prettier": "1.8.2"
   },
   "dependencies": {
     "@operational/blocks": "^0.1.0-5",
@@ -74,44 +34,10 @@
     "glamorous": "^4.6.0",
     "marked": "^0.3.6",
     "moment": "^2.19.0",
-    "prop-types": "^15.5.10",
-    "react": "^16.0.0",
+    "react": "^16.2.0",
     "react-color": "^2.13.8",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.2.0",
     "react-feather": "^1.0.7",
-    "react-hot-loader": "next",
-    "react-icons": "^2.2.5",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.0",
-    "react-syntax-highlighter": "^5.7.0",
-    "regenerator-runtime": "^0.11.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "./test-polyfills.js"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
-    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-enzyme/lib/index.js",
-    "moduleNameMapper": {
-      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ],
-    "mapCoverage": true
+    "react-syntax-highlighter": "^5.7.0"
   }
 }

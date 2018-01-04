@@ -1,14 +1,16 @@
 /// <reference types="react" />
 import * as React from "react";
-declare class VisualizationWrapper extends React.Component {
+export interface IProps {
+    style?: {};
+    className?: string;
+    facade: any;
+    accessors?: any;
+    data?: any;
+    config?: any;
+}
+declare class VisualizationWrapper extends React.Component<IProps, {}> {
     viz: any;
     containerNode: HTMLElement;
-    props: {
-        facade: any;
-        accessors?: any;
-        data?: any;
-        config?: any;
-    };
     render(): JSX.Element;
     componentDidMount(): void;
     componentDidUpdate(): void;
