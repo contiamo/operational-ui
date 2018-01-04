@@ -108,8 +108,9 @@ abstract class AbstractRenderer {
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
-    let duration: number = this.state.current.get("config").duration
-    let that: any = this
+    const duration: number = this.state.current.get("config").duration
+    let that: any = this,
+      n: number = 0
 
     // Center coordinate system
     this.el.attr("transform", this.translateString(this.computeTranslate()))
@@ -159,6 +160,13 @@ abstract class AbstractRenderer {
       .merge(arcs)
       .transition()
       .duration(duration)
+      .each(() => (n = n + 1))
+      .on("end", (): void => {
+        n = n - 1
+        if (n < 1) {
+          this.onTransitionEnd()
+        }
+      })
 
     update.selectAll("path").attrTween("d", this.arcTween.bind(this))
 
@@ -169,6 +177,10 @@ abstract class AbstractRenderer {
 
     // Total
     this.updateTotal()
+  }
+
+  onTransitionEnd(): void {
+    return
   }
 
   abstract centerDisplayString(): any[]

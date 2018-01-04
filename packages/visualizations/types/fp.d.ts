@@ -171,7 +171,9 @@ declare namespace fp {
     isMatch: any
     isObject: any
     last: any
+    max: any
     merge: any
+    min: any
     pluck: any
     size: any
     some: any

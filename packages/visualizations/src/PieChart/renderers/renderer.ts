@@ -1,5 +1,5 @@
 import Donut from "./donut"
-// import Polar from "./polar"
+import Polar from "./polar"
 import Gauge from "./gauge"
 import { IObject } from "../typings"
 
@@ -9,8 +9,8 @@ class Renderer {
     switch (options.type) {
       case "donut":
         return new Donut(state, events, el, options)
-      // case "polar":
-      //   return new Polar(state, events, el)
+      case "polar":
+        return new Polar(state, events, el, options)
       case "gauge":
         return new Gauge(state, events, el, options)
       default:
