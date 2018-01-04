@@ -2,9 +2,8 @@
 
 # Constants
 
-COMP_ROOT="packages/components/src/$1"
-SHOWCASE_PATH="packages/showcase/src/pages/components"
-SHOWCASE_ROOT="$SHOWCASE_PATH/$1s"
+COMP_ROOT="packages/components/src"
+SHOWCASE_ROOT="packages/showcase/pages/components"
 
 # Create component
 
@@ -45,26 +44,23 @@ const Content = glamorous.div(
   })
 )
 
-const $1 = ({ css, className, value }: IProps) => (
+export default ({ css, className, value }: IProps) => (
   <Container css={css} className={className}>
     <Content active>{value}</Content>
   </Container>
 )
-
-export default $1
 EOL
 
 # Create test file
 
-mkdir $COMP_ROOT/__tests__
 touch $COMP_ROOT/__tests__/$1.test.tsx
 
-cat > packages/components/src/$1/__tests__/$1.test.tsx << EOL
+cat > $COMP_ROOT/__tests__/$1.test.tsx << EOL
 import * as React from "react"
 import { render } from "enzyme"
 
-import Themeless$1 from "../$1"
-import wrapDefaultTheme from "../../../utils/wrap-default-theme"
+import Themeless$1 from "../index"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const $1 = wrapDefaultTheme(Themeless$1)
 
@@ -78,100 +74,53 @@ EOL
 
 # Create showcase file
 
-mkdir $SHOWCASE_ROOT
-touch $SHOWCASE_ROOT/$1s.tsx
+touch $SHOWCASE_ROOT/$1s.js
 
-cat > $SHOWCASE_ROOT/$1s.tsx << EOL
+cat > $SHOWCASE_ROOT/$1s.js << EOL
 import * as React from "react"
 
-import Table from "../../../components/PropsTable/PropsTable"
-import Playground from "../../../components/Playground/Playground"
-import { $1, Card, CardHeader, Heading2Type } from "@operational/components"
+import Table from "../../components/PropsTable"
+import Playground from "../../components/Playground"
+import Layout from "../../components/Layout"
+import { $1, Card, CardHeader } from "@operational/components"
 
-import * as simpleSnippet from "./snippets/$1s.simple.snippet"
-import propDescription from "./propDescription"
+const simpleSnippet = `
+<div>
+  <$1 />
+</div>
+`
 
-export default () => (
-  <Card>
-    <CardHeader>$1s</CardHeader>
-
-    <p>
-      $1s are great components!
-    </p>
-
-    <Heading2Type>Usage</Heading2Type>
-    <Playground snippet={String(simpleSnippet)} components={{ $1 }} />
-
-    <Heading2Type>Props</Heading2Type>
-    <Table props={propDescription} />
-  </Card>
-)
-EOL
-
-# Create showcase prop description
-
-touch $SHOWCASE_ROOT/propDescription.ts
-
-cat > $SHOWCASE_ROOT/propDescription.ts << EOL
-export default [
+const propDescription = [
   {
     name: "value",
-    description: "Description of the value prop.",
-    defaultValue: "Hello World",
+    description: "",
+    defaultValue: "",
     type: "string",
     optional: false
   }
 ]
-EOL
 
-# Create showcase snippet
+export default props => (
+  <Layout url={this.props.url}> 
+    <Card>
+      <p>
+        $1s are great components!
+      </p>
 
-mkdir $SHOWCASE_ROOT/snippets
-touch $SHOWCASE_ROOT/snippets/$1s.simple.snippet.tsx
+      <Heading2Type>Usage</Heading2Type>
+      <Playground snippet={String(simpleSnippet)} components={{ $1 }} />
 
-cat > $SHOWCASE_ROOT/snippets/$1s.simple.snippet.tsx << EOL
-import * as React from "react"
-import { $1 } from "@operational/components"
-
-// Run any code inside the IIFE, as long as a React element is returned
-// (you do not need the IIFE, but it is useful to define simple state containers for stateless components)
-export default (() => {
-  const value = "Hello"
-
-  return (
-    <div>
-      <$1 value={value} />
-    </div>
-  )
-})()
-EOL
-
-# Create showcase test file
-
-mkdir $SHOWCASE_ROOT/__tests__
-touch $SHOWCASE_ROOT/__tests__/$1s.test.tsx
-
-cat > $SHOWCASE_ROOT/__tests__/$1s.test.tsx << EOL
-import * as React from "react"
-import { render } from "enzyme"
-
-import { wrapTheme } from "@operational/utils"
-import { contiamoTheme } from "@operational/components"
-import Themeless$1s from "../$1s"
-
-const $1s = wrapTheme(contiamoTheme)(Themeless$1s)
-
-describe("$1s Showcase Page", () => {
-  it("Should render correctly", () => {
-    expect(render(<$1s />)).toMatchSnapshot()
-  })
-})
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription} />
+    </Card>
+  </Layout>
+)
 EOL
 
 echo
 echo "🎉 $1 component created!"
 echo "A few things to do manually:"
-echo "* import component into packages/components/index.ts + add to named exports"
-echo "* add showcase page to router at $SHOWCASE_PATH/UiComponents/Components.tsx"
-echo "* add url to showcase side navigation packages/showcase/components/Sidebar.tsx"
+echo "* import component into packages/components/src/index.ts + add to named exports"
+echo "* add the page to the static page entries directory to packages/showcase/next.config.js"
+echo "* rename packages/showcase/pages/$1.js to form a proper lowercase, dash-separated url fragment"
 echo "* enjoy your new component!"
