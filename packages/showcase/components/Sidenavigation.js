@@ -33,7 +33,7 @@ export default ({ pathname, pathmap }) => {
   const pathSegments = pathname ? pathname.split("/").filter(s => s !== "") : []
   return (
     <Sidenav css={style} width={240} expanded>
-      <Link href="/">
+      <Link prefetch href="/">
         <a>
           <SidenavHeader
             css={{ borderBottom: "1px solid #515151" }}
@@ -77,7 +77,7 @@ export default ({ pathname, pathmap }) => {
           >
             {routeMatch
               ? items.map((item, index) => (
-                  <Link href={item.url} key={index}>
+                  <Link prefetch retch href={item.url} key={index}>
                     <a>
                       <SidenavItem label={item.label} key={index} active={item.url === pathname} />
                     </a>
@@ -89,7 +89,7 @@ export default ({ pathname, pathmap }) => {
         return routeMatch ? (
           el
         ) : (
-          <Link href={url || "/"} key={index}>
+          <Link prefetch href={url || "/"} key={index}>
             <a>{el}</a>
           </Link>
         )

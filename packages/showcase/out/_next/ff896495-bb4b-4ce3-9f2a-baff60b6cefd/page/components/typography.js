@@ -1,6 +1,0 @@
-
-          window.__NEXT_REGISTER_PAGE('/components/typography', function() {
-            var comp = module.exports=webpackJsonp([24],{1597:function(e,n,t){e.exports=t(1598)},1598:function(e,n,t){"use strict";function a(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var l=t(1),p=function(e){if(e&&e.__esModule)return e;var n={};if(null!=e)for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&(n[t]=e[t]);return n.default=e,n}(l),i=t(9),o=t(29),r=a(o),y=t(13),d=a(y),u=t(28);a(u);n.default=function(e){return p.createElement(d.default,{pathname:e.url.pathname},p.createElement(i.Card,null,p.createElement("p",null,p.createElement("em",null,"@operational/components")," keeps typography styles, organized in 5 typography styles, as follows:"),p.createElement(r.default,{snippet:String("\n  <div>\n    <TitleType>I am a title.</TitleType>\n    <Heading1Type>I am a heading1.</Heading1Type>\n    <Heading2Type>I am a heading2.</Heading2Type>\n    <BodyType>I am a regular body section. Feel free to paint me olive.</BodyType>\n    <SmallType>I am a little smaller than that.</SmallType>\n  </div>\n"),components:{TitleType:i.TitleType,Heading1Type:i.Heading1Type,Heading2Type:i.Heading2Type,BodyType:i.BodyType,SmallType:i.SmallType}})))}}},[1597]);
-            return { page: comp.default }
-          })
-        
