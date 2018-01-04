@@ -128,7 +128,7 @@ abstract class AbstractRenderer {
 
     exit.selectAll("path").attrTween("d", this.removeArcTween.bind(this))
 
-    exit.selectAll("text.label").style("opacity", "1e-6")
+    exit.selectAll(`text.${styles.label}`).style("opacity", "1e-6")
 
     exit.remove()
 
@@ -163,7 +163,7 @@ abstract class AbstractRenderer {
     update.selectAll("path").attrTween("d", this.arcTween.bind(this))
 
     update
-      .select("text.label")
+      .selectAll(`text.${styles.label}`)
       .attr("transform", this.labelTranslate.bind(this))
       .text(dataLabelValue)
 
@@ -287,7 +287,14 @@ abstract class AbstractRenderer {
 
     // data should not become part of this.previous in first computation
     this.computed.data = d.layout(this.data)
+    this.calculatePercentages(d.total)
     this.computeArcs()
+  }
+
+  calculatePercentages(total: number): void {
+    forEach((datum: IObject): void => {
+      datum.percentage = this.value(datum) / total * 100
+    })(this.data)
   }
 
   computeArcs(scale?: number): void {
