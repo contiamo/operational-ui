@@ -7,7 +7,6 @@ SHOWCASE_ROOT="packages/showcase/pages/components"
 
 # Create component
 
-mkdir $COMP_ROOT
 touch $COMP_ROOT/$1.tsx
 
 cat > $COMP_ROOT/$1.tsx << EOL
@@ -82,13 +81,13 @@ import * as React from "react"
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import { $1, Card, CardHeader } from "@operational/components"
+import { $1, Card } from "@operational/components"
 
-const simpleSnippet = `
+const simpleSnippet = \`
 <div>
   <$1 />
 </div>
-`
+\`
 
 const propDescription = [
   {
