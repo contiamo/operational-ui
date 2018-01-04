@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip Component Should intialize without problems 1`] = `
+<div
+  class="css-pgkck2 test Tooltip"
+  style="position:absolute"
+>
+  Hello
+</div>
+`;

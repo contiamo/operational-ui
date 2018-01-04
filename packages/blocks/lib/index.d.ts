@@ -1,2 +1,2 @@
-import Filter from "./Filter/Filter";
+import Filter from "./Filter";
 export { Filter };
