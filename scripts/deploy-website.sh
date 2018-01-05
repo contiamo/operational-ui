@@ -1,4 +1,5 @@
 #!/bin/bash
+# Suggested script, please do not run!
 cd packages/showcase
 npm run build
 touch out/.nojekyll
