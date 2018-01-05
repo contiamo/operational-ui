@@ -22,14 +22,14 @@ const TitleBar = glamorous.div(({ theme }) => ({
     fontWeight: 400,
     fontSize: "2.5rem",
     textAlign: "center",
-    margin: "10px 0 10px 0"
+    margin: "10px 0 10px 0",
   },
   "& h2": {
     ...theme.typography.body,
     fontSize: "1.25rem",
     textAlign: "center",
-    marginTop: 0
-  }
+    marginTop: 0,
+  },
 }))
 
 const TitleBarContent = glamorous.div({
@@ -37,14 +37,14 @@ const TitleBarContent = glamorous.div({
   position: "relative",
   zIndex: 1000,
   "& svg": {
-    margin: "auto"
-  }
+    margin: "auto",
+  },
 })
 
 const BodyContent = glamorous.div({
   padding: "32px 16px",
   maxWidth: 760,
-  margin: "auto"
+  margin: "auto",
 })
 
 export default class Intro extends React.Component {
@@ -53,13 +53,28 @@ export default class Intro extends React.Component {
     return { content }
   }
 
+  state = {
+    rotation: 0,
+  }
+
+  componentDidMount() {
+    this.rotationInterval = setInterval(
+      () => this.setState(() => ({ rotation: this.state.rotation === 0 ? 360 : 0 })),
+      5000
+    )
+  }
+
+  componentWillUnmount() {
+    this.rotationInterval && clearInterval(this.rotationInterval)
+  }
+
   render() {
     return (
       <Layout pathname={this.props.url.pathname}>
         <Card css={{ width: "100%", position: "relative", padding: 0 }}>
           <TitleBar>
             <TitleBarContent>
-              <Operational size={80} />
+              <Operational size={80} rotation={this.state.rotation} />
               <h1>Operational UI</h1>
               <h2>Building blocks for effective operational interfaces</h2>
             </TitleBarContent>
