@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "next",
-    "build": "next build && next export && rm -rf dist && mv out dist",
+    "build": "next build && next export",
     "prettier": "prettier './{components,pages}/**/*.js' --write",
     "lint": "echo 'Linter to be added as project matures.'",
     "precommit": "npm run prettier",

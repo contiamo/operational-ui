@@ -18,7 +18,8 @@
     "prettier": "lerna run prettier",
     "precommit": "lerna run precommit",
     "package": "lerna run package",
-    "publish": "./scripts/publish.sh",
+    "publish": "lerna publish",
+    "deploy:website": "./scripts/deploy-website.sh",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
     "ci:local": "npm run lint && npm run prettier && npm run package && git diff",
     "ci": "npm run ci:local && npm run ensure:clean:repo"
