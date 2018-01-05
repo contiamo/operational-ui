@@ -1,6 +1,7 @@
 #!/bin/bash
 cd packages/showcase
 npm run build
+touch out/.nojekyll
 cd ../..
 git branch -D gh-pages
 git checkout --orphan gh-pages
