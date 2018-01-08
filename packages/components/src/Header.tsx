@@ -8,7 +8,6 @@ export interface IProps {
   className?: string
   css?: any
   children: React.ReactNode
-  theme?: Theme
   color?: string
 }
 
@@ -23,14 +22,13 @@ const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: st
     height: 60,
     alignItems: "center",
     padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+    boxShadow: theme.shadows.card,
     color: readableTextColor(backgroundColor)(["black", "white"])
   }
 })
 
-const Header = (props: IProps) => (
+export default (props: IProps) => (
   <Container key={props.id} css={props.css} className={props.className} color={props.color}>
     {props.children}
   </Container>
 )
-
-export default Header
