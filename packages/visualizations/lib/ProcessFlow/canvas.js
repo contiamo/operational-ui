@@ -13,7 +13,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var canvas_1 = require("../utils/canvas");
 var d3 = require("d3-selection");
 var fp_1 = require("lodash/fp");
-var styles = require("../styles/styles");
 var Canvas = /** @class */ (function (_super) {
     __extends(Canvas, _super);
     function Canvas(state, stateWriter, events, context) {
@@ -28,15 +27,6 @@ var Canvas = /** @class */ (function (_super) {
             .attr("class", "processflow");
         this.stateWriter("elRect", el.node().getBoundingClientRect());
         return el;
-    };
-    Canvas.prototype.insertFocusLabel = function () {
-        var focusEl = d3
-            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", "" + styles.focusLegend)
-            .style("visibility", "hidden");
-        this.container.node().appendChild(focusEl.node());
-        this.elMap.focus = focusEl;
-        return focusEl;
     };
     Canvas.prototype.appendDrawingGroups = function () {
         var _this = this;

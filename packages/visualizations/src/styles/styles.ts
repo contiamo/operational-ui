@@ -25,6 +25,9 @@ const focusLegendStyle = {
     fontSize: 12,
     margin: 0,
     padding: 0
+  },
+  "& li.title": {
+    fontWeight: "bold"
   }
 }
 

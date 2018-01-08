@@ -1,6 +1,6 @@
 import Canvas from "./canvas"
 import Series from "./series"
-// import Focus from "./focus"
+import Focus from "./focus"
 import Legend from "./legend"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
@@ -101,13 +101,13 @@ class Facade {
 
   insertComponents(): IObject {
     return {
-      legend: new Legend(this.state.readOnly(), "top", "left", this.canvas.elementFor("legends").top.left)
-      // focus: new Focus(
-      //   this.state.readOnly(),
-      //   this.state.computedWriter(["focus"]),
-      //   this.events,
-      //   this.canvas.elementFor("focus")
-      // )
+      legend: new Legend(this.state.readOnly(), "top", "left", this.canvas.elementFor("legends").top.left),
+      focus: new Focus(
+        this.state.readOnly(),
+        this.state.computedWriter(["focus"]),
+        this.events,
+        this.canvas.elementFor("focus")
+      )
     }
   }
 

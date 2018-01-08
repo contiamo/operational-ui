@@ -21,16 +21,6 @@ class Canvas extends AbstractCanvas {
     return el
   }
 
-  insertFocusLabel(): TD3Selection {
-    const focusEl = d3
-      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.focusLegend}`)
-      .style("visibility", "hidden")
-    this.container.node().appendChild(focusEl.node())
-    this.elMap.focus = focusEl
-    return focusEl
-  }
-
   appendDrawingGroups(): void {
     forEach((group: string): void => {
       this.el.append("svg:g").attr("class", group + "-group")

@@ -12,6 +12,7 @@ declare abstract class Canvas {
     abstract createEl(): TSeriesEl;
     insertEl(): TSeriesEl;
     abstract mouseOverElement(): TD3Selection;
+    insertFocusLabel(): TD3Selection;
     onMouseEnter(): void;
     onMouseLeave(): void;
     onClick(): void;

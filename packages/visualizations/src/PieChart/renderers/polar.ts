@@ -28,14 +28,14 @@ class Polar extends AbstractRenderer {
     this.currentTranslation = [0, 0]
     this.el.attr("transform", this.translateString(this.currentTranslation))
 
-    let current: any = (this.el.node() as any).getBoundingClientRect()
-    let drawing: any = this.state.current.get("computed").canvas.drawingContainerDims
+    const current: ClientRect = (this.el.node() as any).getBoundingClientRect(),
+      drawing: any = this.state.current.get("computed").canvas.drawingContainerDims
     if (current.width === 0 && current.height === 0) {
       return
     }
-    let margin: number = this.state.current.get("config").outerBorderMargin
+    const margin: number = this.state.current.get("config").outerBorderMargin
 
-    let scale: number = Math.min(
+    const scale: number = Math.min(
       (drawing.width - 2 * margin) / current.width,
       (drawing.height - 2 * margin) / current.height
     )
@@ -43,12 +43,12 @@ class Polar extends AbstractRenderer {
     this.computeArcs(scale)
     this.el.selectAll("path").attr("d", this.computed.arc)
 
-    current = (this.el.node() as any).getBoundingClientRect()
+    const newCurrent: ClientRect = (this.el.node() as any).getBoundingClientRect(),
+      topOffset: number = this.state.current.get("computed").canvas.legends.top.left.node().offsetHeight
 
-    const topOffset: number = this.state.current.get("computed").canvas.legends.top.left.node().offsetHeight
     this.currentTranslation = [
-      (drawing.width - current.width) / 2 - current.left,
-      (drawing.height - current.height) / 2 + topOffset - current.top
+      (drawing.width - newCurrent.width) / 2 - newCurrent.left,
+      (drawing.height - newCurrent.height) / 2 + topOffset - newCurrent.top
     ]
 
     this.el.attr("transform", this.translateString(this.currentTranslation))

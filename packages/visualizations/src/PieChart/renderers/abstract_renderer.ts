@@ -138,6 +138,7 @@ abstract class AbstractRenderer {
       .enter()
       .append("svg:g")
       .attr("class", styles.arc)
+      .on("mouseenter", this.onMouseOver.bind(this))
 
     enter.append("svg:path").style("fill", (d: any): string => this.color(d.data))
 
@@ -146,14 +147,6 @@ abstract class AbstractRenderer {
       .attr("class", styles.label)
       .attr("dy", 5)
       .style("text-anchor", "middle")
-
-    enter.on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
-
-    // Update
-    // arcs.enter().merge(arcs)
-    //   .on("mouseover", function(d: any): void {
-    //     that.onMouseOver(d, this)
-    //   })
 
     let update: any = arcs
       .enter()
@@ -260,7 +253,8 @@ abstract class AbstractRenderer {
   }
 
   onMouseOver(d: any): void {
-    this.events.emit(Events.FOCUS.ELEMENT.HOVER, d, this.translateBack(this.computed.arc.centroid(d)))
+    const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint: { centroid }, d })
   }
 
   abstract angleRange(): [number, number]

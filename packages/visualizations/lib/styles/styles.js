@@ -25,6 +25,9 @@ var focusLegendStyle = {
         fontSize: 12,
         margin: 0,
         padding: 0
+    },
+    "& li.title": {
+        fontWeight: "bold"
     }
 };
 exports.chartContainer = glamor_1.css(chartContainerStyle).toString();

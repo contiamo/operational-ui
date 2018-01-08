@@ -27,6 +27,15 @@ var Canvas = /** @class */ (function () {
         this.elMap.series = el;
         return el;
     };
+    Canvas.prototype.insertFocusLabel = function () {
+        var focusEl = d3
+            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+            .attr("class", "" + styles.focusLegend)
+            .style("visibility", "hidden");
+        this.container.node().appendChild(focusEl.node());
+        this.elMap.focus = focusEl;
+        return focusEl;
+    };
     Canvas.prototype.onMouseEnter = function () {
         this.events.emit(event_catalog_1.default.CHART.HOVER);
         this.trackMouseMove();

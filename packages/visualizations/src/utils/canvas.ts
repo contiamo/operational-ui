@@ -41,6 +41,16 @@ abstract class Canvas {
 
   abstract mouseOverElement(): TD3Selection
 
+  insertFocusLabel(): TD3Selection {
+    const focusEl = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", `${styles.focusLegend}`)
+      .style("visibility", "hidden")
+    this.container.node().appendChild(focusEl.node())
+    this.elMap.focus = focusEl
+    return focusEl
+  }
+
   onMouseEnter(): void {
     this.events.emit(Events.CHART.HOVER)
     this.trackMouseMove()

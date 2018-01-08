@@ -95,10 +95,6 @@ abstract class DrawingCanvas extends Canvas {
     }, {})(seriesElements)
   }
 
-  appendFocus(): void {
-    this.elements.focus = this.elements.drawing.append("svg:g").attr("class", "focus-group")
-  }
-
   insertLegend(position: string, float: string): void {
     const legendPositionClass: string = ["top", "bottom"].indexOf(position) > -1 ? styles.legendTopBottom : ""
     let legend: TD3Selection = d3
