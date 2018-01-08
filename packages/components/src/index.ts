@@ -1,8 +1,6 @@
 // Simple imports n' exports for consumers of the library.
 
-import { ThemeProvider } from "glamorous"
-import { operational as operationalTheme, Theme } from "@operational/theme"
-
+import { Theme, operational as operationalTheme } from "@operational/theme"
 import Button from "./Button"
 import ButtonGroup from "./ButtonGroup"
 import Breakdown from "./Breakdown"
@@ -23,6 +21,7 @@ import Icon, { ReactFeatherIconName } from "./Icon"
 import InfoTile from "./InfoTile"
 import Input from "./Input"
 import Modal from "./Modal"
+import OperationalUI from "./OperationalUI"
 import Paginator from "./Paginator"
 import Progress from "./Progress"
 import Select from "./Select"
@@ -62,6 +61,7 @@ export {
   InfoTile,
   Input,
   Modal,
+  OperationalUI,
   Paginator,
   Progress,
   Select,
@@ -83,8 +83,7 @@ export {
   Heading2Type,
   BodyType,
   SmallType,
-  ThemeProvider,
-  operationalTheme,
   Theme,
-  Upload
+  Upload,
+  operationalTheme
 }

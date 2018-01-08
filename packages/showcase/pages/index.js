@@ -49,8 +49,8 @@ const BodyContent = glamorous.div({
 
 export default class Intro extends React.Component {
   static async getInitialProps() {
-    const content = await fetchFromRepo("/README.md", 12, -41)
-    return { content }
+    const content = await fetchFromRepo("/README.md")
+    return { content: content.split("<!-- content -->")[1] }
   }
 
   state = {

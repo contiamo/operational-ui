@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch"
 
-const repoBasePath = "https://rawgit.com/Contiamo/operational-ui/master"
+const repoBasePath = "https://rawgit.com/Contiamo/operational-ui/enhance/readme"
 
 /**
  * In order to avoid additional dependencies and hacking next.js internals to pull in readme file contents into the site,
