@@ -182,7 +182,7 @@ export default props => (
       <CardHeader>Input</CardHeader>
       <p>This component lives up to its name, allowing a user to input text, numbers, or other data.</p>
 
-      <Playground snippet={String(inputSnippet)} components={{ Input }} />
+      <Playground snippet={inputSnippet} components={{ Input }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription.Input} />
@@ -193,7 +193,7 @@ export default props => (
         Select elements can have options filled onClick, and also support filters.
       </p>
 
-      <Playground snippet={String(selectSnippet)} components={{ Select }} />
+      <Playground snippet={selectSnippet} components={{ Select }} />
 
       <CardHeader>Organizing forms</CardHeader>
 

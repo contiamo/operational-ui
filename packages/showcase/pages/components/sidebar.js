@@ -104,11 +104,7 @@ export default props => (
       <div style={{ marginBottom: 32 }} />
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground
-        snippet={String(simpleSnippet)}
-        components={{ Sidebar, SidebarItem, SidebarLink }}
-        scope={{ fetch }}
-      />
+      <Playground snippet={simpleSnippet} components={{ Sidebar, SidebarItem, SidebarLink }} scope={{ fetch }} />
 
       <div style={{ marginBottom: 32 }} />
 

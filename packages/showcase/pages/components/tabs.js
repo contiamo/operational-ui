@@ -120,7 +120,7 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Tabs, Tab }} />
+      <Playground snippet={simpleSnippet} components={{ Tabs, Tab }} />
 
       <Heading2Type>Props</Heading2Type>
 

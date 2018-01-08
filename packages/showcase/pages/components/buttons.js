@@ -81,18 +81,18 @@ export default props => (
         Using buttons is as simple as including the component with a text node as a child. Colors may be specified as
         hex strings, or as a pre-defined color key from the theme.
       </p>
-      <Playground snippet={String(simpleSnippet)} components={{ Button, ButtonGroup }} />
+      <Playground snippet={simpleSnippet} components={{ Button, ButtonGroup }} />
 
       <Heading2Type>Button groups</Heading2Type>
       <p>
         If used within the button group component, the library takes care to remove intermediate spacings, border radii
         and makes sure borders don't double up.
       </p>
-      <Playground snippet={String(groupSnippet)} components={{ Button, ButtonGroup }} />
+      <Playground snippet={groupSnippet} components={{ Button, ButtonGroup }} />
 
       <Heading2Type>Condensed mode</Heading2Type>
       <p>Buttons can be condensed, and further grouped to achieve, among other things, this paginator-style look:</p>
-      <Playground snippet={String(condensedSnippet)} components={{ Button, ButtonGroup }} />
+      <Playground snippet={condensedSnippet} components={{ Button, ButtonGroup }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

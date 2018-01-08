@@ -67,7 +67,7 @@ export default props => (
       <p>Simple component to navigate through pages</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(PaginatorSnippet)} components={{ Paginator }} />
+      <Playground snippet={PaginatorSnippet} components={{ Paginator }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

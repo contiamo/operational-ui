@@ -43,7 +43,7 @@ export default props => (
         </ColorBox>
       ))}
 
-      <Playground snippet={String(simpleSnippet)} components={{}} scope={{ theme: operational }} />
+      <Playground snippet={simpleSnippet} components={{}} scope={{ theme: operational }} />
     </Card>
   </Layout>
 )

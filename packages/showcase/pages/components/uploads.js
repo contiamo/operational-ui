@@ -195,7 +195,7 @@ export default props => (
       <p>Uploads are great components!</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Upload, Icon, Button }} />
+      <Playground snippet={simpleSnippet} components={{ Upload, Icon, Button }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

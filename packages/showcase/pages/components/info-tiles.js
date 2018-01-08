@@ -72,7 +72,7 @@ export default props => (
       </div>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(snippet)} components={{ InfoTile }} />
+      <Playground snippet={snippet} components={{ InfoTile }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

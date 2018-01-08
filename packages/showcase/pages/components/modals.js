@@ -75,7 +75,7 @@ export default props => (
       <p>Modals are customizable full-screen alert boxes.</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Modal }} />
+      <Playground snippet={simpleSnippet} components={{ Modal }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

@@ -75,7 +75,7 @@ export default props => (
         A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component. Items
         may contain any children.
       </p>
-      <Playground snippet={String(simpleSnippet)} components={{ Timeline, TimelineItem }} />
+      <Playground snippet={simpleSnippet} components={{ Timeline, TimelineItem }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription.TimelineItem} />

@@ -111,7 +111,7 @@ export default props => (
 
       <Heading2Type>Usage</Heading2Type>
       <p>Simply nest `@operational/components` form elements using their API.</p>
-      <Playground snippet={String(simpleSnippet)} scope={{ Input, Select, DatePicker }} components={{ Filter }} />
+      <Playground snippet={simpleSnippet} scope={{ Input, Select, DatePicker }} components={{ Filter }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

@@ -67,7 +67,7 @@ export default props => (
       <p>DatePickers can currently be used to pick an period bound by two day selections.</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ DatePicker }} />
+      <Playground snippet={simpleSnippet} components={{ DatePicker }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />
