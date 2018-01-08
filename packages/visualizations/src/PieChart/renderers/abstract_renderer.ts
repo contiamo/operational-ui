@@ -265,6 +265,10 @@ abstract class AbstractRenderer {
     return
   }
 
+  angleValue(d: any): number {
+    return this.value(d)
+  }
+
   // Compute
   compute(): void {
     this.previous = this.computed
@@ -283,7 +287,7 @@ abstract class AbstractRenderer {
 
     d.layout = d3Pie()
       .sort(null)
-      .value(this.value)
+      .value(this.angleValue.bind(this))
       .startAngle(startAngle)
       .endAngle(endAngle)
     d.total = this.totalForPercentages()

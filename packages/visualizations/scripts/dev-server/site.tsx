@@ -52,7 +52,7 @@ const data: any = {
     { key: "test", value: 0 },
     { key: "test2", value: undefined }
   ],
-  renderAs: [DonutRenderer]
+  renderAs: [PolarRenderer]
 }
 
 const viz: PieChart = new PieChart(containerNode)
