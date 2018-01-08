@@ -10,7 +10,7 @@
   </a>
 </div>
 
-<!-- content -->
+<!-- separator -->
 
 `Operational UI` is an opinionated set of building blocks designed to best support user interfaces used for operational decision-making.
 
@@ -69,7 +69,7 @@ We look forward to your contribution, and we would like to assure you that we va
 
 `Operational UI` adheres to the [Berlin Code of Conduct](http://berlincodeofconduct.org).
 
-<!-- content -->
+<!-- separator -->
 
 <h2 align="center">Core Team</h2>
 
