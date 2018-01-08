@@ -53,13 +53,31 @@ export default class Intro extends React.Component {
     return { content }
   }
 
+  state = {
+    rotation: 0
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState(() => ({ rotation: 360 }))
+      this.rotationInterval = setInterval(
+        () => this.setState(() => ({ rotation: this.state.rotation === 0 ? 360 : 0 })),
+        10000
+      )
+    }, 5000)
+  }
+
+  componentWillUnmount() {
+    this.rotationInterval && clearInterval(this.rotationInterval)
+  }
+
   render() {
     return (
       <Layout pathname={this.props.url.pathname}>
         <Card css={{ width: "100%", position: "relative", padding: 0 }}>
           <TitleBar>
             <TitleBarContent>
-              <Operational size={80} />
+              <Operational size={80} rotation={this.state.rotation} />
               <h1>Operational UI</h1>
               <h2>Building blocks for effective operational interfaces</h2>
             </TitleBarContent>
