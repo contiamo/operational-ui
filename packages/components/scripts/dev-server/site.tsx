@@ -1,14 +1,13 @@
 import * as React from "react"
 import { render } from "react-dom"
-import { ThemeProvider } from "glamorous"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { Sidenav, SidenavHeader, SidenavItem, operationalTheme } from "../../src/index"
+import { OperationalUI, Sidenav, SidenavHeader, SidenavItem, operationalTheme } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {
     return (
-      <ThemeProvider theme={operationalTheme}>
+      <OperationalUI>
         <Sidenav expanded expandOnHover>
           <SidenavHeader label="Components" icon="Box">
             <SidenavItem label="Buttons" />
@@ -23,7 +22,7 @@ class Site extends React.Component<{}, {}> {
           </SidenavHeader>
           <SidenavHeader label="Documentation" icon="Edit" />
         </Sidenav>
-      </ThemeProvider>
+      </OperationalUI>
     )
   }
 }

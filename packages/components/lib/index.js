@@ -1,8 +1,6 @@
 "use strict";
 // Simple imports n' exports for consumers of the library.
 Object.defineProperty(exports, "__esModule", { value: true });
-var glamorous_1 = require("glamorous");
-exports.ThemeProvider = glamorous_1.ThemeProvider;
 var theme_1 = require("@operational/theme");
 exports.operationalTheme = theme_1.operational;
 var Button_1 = require("./Button");
@@ -45,6 +43,8 @@ var Input_1 = require("./Input");
 exports.Input = Input_1.default;
 var Modal_1 = require("./Modal");
 exports.Modal = Modal_1.default;
+var OperationalUI_1 = require("./OperationalUI");
+exports.OperationalUI = OperationalUI_1.default;
 var Paginator_1 = require("./Paginator");
 exports.Paginator = Paginator_1.default;
 var Progress_1 = require("./Progress");
