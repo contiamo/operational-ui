@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs Component Should initialize properly 1`] = `
+<div
+  class="css-nil"
+>
+  <span
+    class="css-1kp7zex"
+  >
+    <a
+      href="http://ui.contiamo.com"
+    >
+      Home
+    </a>
+  </span>
+  <span
+    class="css-xnv2wx"
+  >
+    /
+  </span>
+  <span
+    class="css-1kp7zex"
+  >
+    Link 1
+  </span>
+</div>
+`;

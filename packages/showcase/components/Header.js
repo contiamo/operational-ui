@@ -1,22 +1,8 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Header } from "@operational/components"
+import { Header, Breadcrumb, Breadcrumbs } from "@operational/components"
 import { operational } from "@operational/theme"
 import Link from "next/link"
-
-const Breadcrumbs = glamorous.div(({ theme }) => ({
-  "& a": {
-    textDecoration: "none",
-    color: "inherit",
-    color: theme.colors.linkText,
-    borderBottom: `1px solid ${theme.colors.linkText}`
-  }
-}))
-
-const BreadcrumbsDivider = glamorous.span({
-  display: "inline-block",
-  margin: "0 6px"
-})
 
 export default props => {
   const pathnameChunks = props.pathname.split("/").filter(s => s !== "")
@@ -48,16 +34,11 @@ export default props => {
       {
         <Breadcrumbs>
           {breadcrumbs.map((breadcrumb, index) => (
-            <span key={index}>
-              {breadcrumb.url ? (
-                <Link key={index} href={breadcrumb.url}>
-                  <a>{breadcrumb.label}</a>
-                </Link>
-              ) : (
-                <strong>{breadcrumb.label}</strong>
-              )}
-              {index === breadcrumbs.length - 1 ? null : <BreadcrumbsDivider>/</BreadcrumbsDivider>}
-            </span>
+            <Breadcrumb key={index}>
+              <Link key={index} href={breadcrumb.url}>
+                <a>{breadcrumb.label}</a>
+              </Link>
+            </Breadcrumb>
           ))}
         </Breadcrumbs>
       }
