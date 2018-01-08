@@ -2,7 +2,7 @@ import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { isArray, reduce } from "lodash/fp"
 import { IEvents, IObject, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
-import * as styles from "../styles/styles"
+import * as styles from "./styles"
 
 abstract class Canvas {
   container: TD3Selection
@@ -27,6 +27,7 @@ abstract class Canvas {
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.chartContainer}`)
     context.appendChild(container.node())
+    this.stateWriter(["containerRect"], container.node().getBoundingClientRect())
     return container
   }
 
@@ -41,13 +42,25 @@ abstract class Canvas {
 
   abstract mouseOverElement(): TD3Selection
 
+  insertFocusElements(): void {
+    const main: TD3Selection = this.insertFocusLabel()
+    const component: TD3Selection = this.insertComponentFocus()
+    this.elMap.focus = { main, component }
+  }
+
   insertFocusLabel(): TD3Selection {
     const focusEl = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
       .style("visibility", "hidden")
     this.container.node().appendChild(focusEl.node())
-    this.elMap.focus = focusEl
+    return focusEl
+  }
+
+  insertComponentFocus(): TD3Selection {
+    const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
+    let ref: Node = this.container.node()
+    ref.insertBefore(focusEl.node(), ref.nextSibling)
     return focusEl
   }
 

@@ -101,7 +101,13 @@ class Facade {
 
   insertComponents(): IObject {
     return {
-      legend: new Legend(this.state.readOnly(), "top", "left", this.canvas.elementFor("legends").top.left),
+      legend: new Legend(
+        this.state.readOnly(),
+        this.state.computedWriter(["legend"]),
+        this.events,
+        this.canvas.elementFor("legends").top.left,
+        { position: "top", float: "left" }
+      ),
       focus: new Focus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),

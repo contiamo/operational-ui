@@ -56,16 +56,20 @@ function totalHeight(element: any): number {
 // Basic discrete color legend.
 abstract class Legend {
   drawn: boolean = false
+  events: any
   float: string
   legend: TD3Selection
   position: string
   previousRequirements: any[]
   state: any
+  stateWriter: any
 
-  constructor(state: any, position: string, float: string, el: TD3Selection) {
+  constructor(state: any, stateWriter: any, events: any, el: TD3Selection, options: IObject) {
     this.state = state
-    this.position = position
-    this.float = float
+    this.stateWriter = stateWriter
+    this.events = events
+    this.position = options.position
+    this.float = options.float
     this.legend = el
   }
 
@@ -120,7 +124,7 @@ abstract class Legend {
       .append("div")
       .attr("class", styles.seriesLegend)
       .style("float", this.float)
-      // .on("mouseenter", this.onComponentHover(this))
+      .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
         withD3Element((d: any, el: HTMLElement): void => {
           const element: TD3Selection = d3.select(el)
@@ -181,14 +185,12 @@ abstract class Legend {
 
   abstract labelAccessor(d: any): string
 
-  // onComponentHover(ctx: any): (d: any) => void {
-  //   return function(d: any): void {
-  //     ctx.state.trigger(Events.FOCUS.COMPONENT.HOVER, d3.select(this), ctx.currentOptions(d))
-  //     d3.select(this).on("mouseleave", function(): void { ctx.state.trigger(Events.FOCUS.COMPONENT.OUT) })
-  //   }
-  // }
+  onComponentHover(d: any, el: HTMLElement): void {
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
+    d3.select(el).on("mouseleave", (): void => this.events.emit(Events.FOCUS.COMPONENT.OUT))
+  }
 
-  // abstract currentOptions(datum: any): any
+  abstract currentOptions(datum: any): any
 
   dimensions(): { height: number; width: number } {
     const legendNode: any = this.legend.node()

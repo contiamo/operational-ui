@@ -2,7 +2,7 @@
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
-var styles = require("../styles/styles");
+var styles = require("./styles");
 function optimalPosition(possibilities, min, max, dimension) {
     function withinRange(value) {
         return value >= min && value + dimension <= max;

@@ -1,7 +1,6 @@
 import AbstractCanvas from "../utils/canvas";
-import { IEvents, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings";
+import { IEvents, IState, TSeriesEl, TStateWriter } from "./typings";
 declare class Canvas extends AbstractCanvas {
-    focusEl: TD3Selection;
     constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element);
     createEl(): TSeriesEl;
     appendDrawingGroups(): void;

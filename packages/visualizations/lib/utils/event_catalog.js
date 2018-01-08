@@ -9,6 +9,14 @@ var Events = {
     },
     FOCUS: {
         CLEAR: "focus:clear",
+        COMPONENT: {
+            CLICK: "focus:component:click",
+            HOVER: "focus:component:hover",
+            OUT: "focus:component:out",
+            LABEL: {
+                OUT: "focus:component:label:out"
+            }
+        },
         ELEMENT: {
             HIGHLIGHT: "focus:element:highlight",
             CLICK: "focus:element:click",

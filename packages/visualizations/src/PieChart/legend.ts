@@ -2,6 +2,7 @@ import AbstractLegend from "../utils/legend"
 import { filter, find, forEach, get, groupBy, keys, map } from "lodash/fp"
 import { IObject } from "./typings"
 import * as styles from "./styles"
+import { withD3Element } from "../utils/d3_utils"
 
 class Legend extends AbstractLegend {
   data(): any {
@@ -34,7 +35,7 @@ class Legend extends AbstractLegend {
       .enter()
       .append("div")
       .attr("class", `comparison ${styles.comparisonLegend}`)
-    // .on("mouseenter", this.onComponentHover(this))
+      .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
 
     enter.append("div").attr("class", styles.comparisonLegendLine)
 
@@ -44,6 +45,24 @@ class Legend extends AbstractLegend {
       .merge(legends)
       .select("div.name")
       .html((d: any): string => d.label)
+  }
+
+  currentOptions(datum: any): any {
+    return datum.type === "comparison"
+      ? {
+          options: {
+            data: datum.data
+          },
+          seriesType: "comparison",
+          type: "series"
+        }
+      : {
+          options: {
+            color: this.colorAccessor(datum),
+            key: this.dataKey(datum)
+          },
+          type: "config"
+        }
   }
 }
 

@@ -2,14 +2,13 @@ import AbstractCanvas from "../utils/canvas"
 import * as d3 from "d3-selection"
 import { forEach } from "lodash/fp"
 import { IEvents, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
-import * as styles from "../styles/styles"
 
 class Canvas extends AbstractCanvas {
-  focusEl: TD3Selection
+  // focusEl: TD3Selection
 
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
     super(state, stateWriter, events, context)
-    this.focusEl = this.insertFocusLabel()
+    this.insertFocusLabel()
     this.appendDrawingGroups()
   }
 

@@ -15,9 +15,10 @@ var d3 = require("d3-selection");
 var fp_1 = require("lodash/fp");
 var Canvas = /** @class */ (function (_super) {
     __extends(Canvas, _super);
+    // focusEl: TD3Selection
     function Canvas(state, stateWriter, events, context) {
         var _this = _super.call(this, state, stateWriter, events, context) || this;
-        _this.focusEl = _this.insertFocusLabel();
+        _this.insertFocusLabel();
         _this.appendDrawingGroups();
         return _this;
     }

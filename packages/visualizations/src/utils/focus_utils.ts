@@ -1,6 +1,6 @@
 import { find, last } from "lodash/fp"
 import * as d3 from "d3-selection"
-import * as styles from "../styles/styles"
+import * as styles from "./styles"
 import { IObject, TD3Selection } from "./typings"
 
 function optimalPosition(possibilities: number[], min: number, max: number, dimension: number): number {

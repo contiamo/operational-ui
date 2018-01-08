@@ -7,6 +7,14 @@ declare const Events: {
     };
     FOCUS: {
         CLEAR: string;
+        COMPONENT: {
+            CLICK: string;
+            HOVER: string;
+            OUT: string;
+            LABEL: {
+                OUT: string;
+            };
+        };
         ELEMENT: {
             HIGHLIGHT: string;
             CLICK: string;

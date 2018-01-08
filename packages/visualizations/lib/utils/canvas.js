@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("./event_catalog");
 var d3 = require("d3-selection");
-var styles = require("../styles/styles");
+var styles = require("./styles");
 var Canvas = /** @class */ (function () {
     function Canvas(state, stateWriter, events, context) {
         this.elements = {};
@@ -19,6 +19,7 @@ var Canvas = /** @class */ (function () {
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.chartContainer);
         context.appendChild(container.node());
+        this.stateWriter(["containerRect"], container.node().getBoundingClientRect());
         return container;
     };
     Canvas.prototype.insertEl = function () {
@@ -27,13 +28,23 @@ var Canvas = /** @class */ (function () {
         this.elMap.series = el;
         return el;
     };
+    Canvas.prototype.insertFocusElements = function () {
+        var main = this.insertFocusLabel();
+        var component = this.insertComponentFocus();
+        this.elMap.focus = { main: main, component: component };
+    };
     Canvas.prototype.insertFocusLabel = function () {
         var focusEl = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.focusLegend)
             .style("visibility", "hidden");
         this.container.node().appendChild(focusEl.node());
-        this.elMap.focus = focusEl;
+        return focusEl;
+    };
+    Canvas.prototype.insertComponentFocus = function () {
+        var focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus");
+        var ref = this.container.node();
+        ref.insertBefore(focusEl.node(), ref.nextSibling);
         return focusEl;
     };
     Canvas.prototype.onMouseEnter = function () {
