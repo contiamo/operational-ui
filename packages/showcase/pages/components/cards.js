@@ -47,14 +47,14 @@ export default props => (
 
       <Heading2Type>Usage</Heading2Type>
       <p>Simply add any content inside the card.</p>
-      <Playground snippet={String(simpleSnippet)} components={{ Card, CardHeader }} />
+      <Playground snippet={simpleSnippet} components={{ Card, CardHeader }} />
 
       <Heading2Type>Card headers</Heading2Type>
       <p>
         Using a CardHeader component is the standard way to add a title element to the card. This may include not just
         the card title, but also navigation on the right-hand side.
       </p>
-      <Playground snippet={String(headerSnippet)} components={{ Card, CardHeader }} />
+      <Playground snippet={headerSnippet} components={{ Card, CardHeader }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

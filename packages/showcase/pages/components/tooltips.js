@@ -82,7 +82,7 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Tooltip }} />
+      <Playground snippet={simpleSnippet} components={{ Tooltip }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table css={{ marginBottom: 32 }} props={propDescription} />

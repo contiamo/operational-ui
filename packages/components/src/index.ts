@@ -24,7 +24,6 @@ import InfoTile from "./InfoTile"
 import Input from "./Input"
 import Modal from "./Modal"
 import Paginator from "./Paginator"
-import PlusChip from "./PlusChip"
 import Progress from "./Progress"
 import Select from "./Select"
 import Sidebar, { SidebarItem, SidebarLink } from "./Sidebar"
@@ -64,7 +63,6 @@ export {
   Input,
   Modal,
   Paginator,
-  PlusChip,
   Progress,
   Select,
   Sidenav,

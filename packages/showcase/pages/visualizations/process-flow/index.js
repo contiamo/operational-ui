@@ -372,7 +372,7 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} scope={{ ProcessFlow }} components={{ VisualizationWrapper }} />
+      <Playground snippet={simpleSnippet} scope={{ ProcessFlow }} components={{ VisualizationWrapper }} />
 
       <Heading2Type>Data</Heading2Type>
       <p>

@@ -18,64 +18,30 @@ const simpleSnippet = `
 </div>
 `
 
-const plusSnippet = `
-<div style={{ display: "flex" }}>
-  <PlusChip color="#f0f" size={31} onClick={() => window.alert("Ouch!")} />
-  <PlusChip color="#f00" size={31} onClick={() => window.alert("Smiling is healthy!")}>
-        😁
-  </PlusChip>
-</div>
-`
-
-const propDescription = {
-  chip: [
-    {
-      name: "color",
-      description: "What color of chip would you like? It can be a hex value or a named theme color.",
-      defaultValue: "The `primary` color of your theme.",
-      type: "string",
-      optional: true
-    },
-    {
-      name: "symbol",
-      description: "The symbol that is shown on mouse over of a clickable chip.",
-      defaultValue: "",
-      type: "string",
-      optional: true
-    },
-    {
-      name: "onClick",
-      description:
-        "Is this interactive? If yes, what happens when the chip is clicked? This is commonly used to delete a filter in a list of filters.",
-      defaultValue: "",
-      type: "func",
-      optional: true
-    }
-  ],
-  plusChip: [
-    {
-      name: "color",
-      description: "What color of chip would you like? It can be a hex value or a named theme color.",
-      defaultValue: "Black",
-      type: "string",
-      optional: true
-    },
-    {
-      name: "size",
-      description: "The size of the chip in pixels. This can vary for obvious reasons.",
-      defaultValue: "16",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "onClick",
-      description: "A function that will be called on click of the PlusChip.",
-      defaultValue: "",
-      type: "func",
-      optional: true
-    }
-  ]
-}
+const propDescription = [
+  {
+    name: "color",
+    description: "What color of chip would you like? It can be a hex value or a named theme color.",
+    defaultValue: "The `primary` color of your theme.",
+    type: "string",
+    optional: true
+  },
+  {
+    name: "symbol",
+    description: "The symbol that is shown on mouse over of a clickable chip.",
+    defaultValue: "",
+    type: "string",
+    optional: true
+  },
+  {
+    name: "onClick",
+    description:
+      "Is this interactive? If yes, what happens when the chip is clicked? This is commonly used to delete a filter in a list of filters.",
+    defaultValue: "",
+    type: "func",
+    optional: true
+  }
+]
 
 export default props => (
   <Layout pathname={props.url.pathname}>
@@ -87,25 +53,10 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Chip }} />
+      <Playground snippet={simpleSnippet} components={{ Chip }} />
 
       <Heading2Type>Props</Heading2Type>
-      <Table props={propDescription.chip} />
-
-      <div style={{ marginBottom: 32 }} />
-
-      <CardHeader>PlusChip</CardHeader>
-
-      <p>
-        A PlusChip is a specialized chip that bears no label, but simply takes an action and displays a symbol prompting
-        the action. These chips can either contain their own symbol, or simply have a plus if no symbol is specified.
-      </p>
-
-      <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(plusSnippet)} components={{ Chip, PlusChip }} />
-
-      <Heading2Type>Props</Heading2Type>
-      <Table props={propDescription.plusChip} />
+      <Table props={propDescription} />
     </Card>
   </Layout>
 )

@@ -36,7 +36,7 @@ export default props => (
       <p>Animating progress bar, covering an entire area. Add as a child to any non-statically positioned element.</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(basicSnippet)} components={{ Progress }} />
+      <Playground snippet={basicSnippet} components={{ Progress }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

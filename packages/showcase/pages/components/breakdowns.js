@@ -76,7 +76,7 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Breakdown }} />
+      <Playground snippet={simpleSnippet} components={{ Breakdown }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

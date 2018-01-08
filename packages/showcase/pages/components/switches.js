@@ -57,7 +57,7 @@ export default props => (
       <p>A switch is a simple toggle indicating whether a specific functionality is enabled or disabled.</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ Switch }} />
+      <Playground snippet={simpleSnippet} components={{ Switch }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

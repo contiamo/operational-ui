@@ -57,7 +57,7 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} scope={{ Icon, ContextMenuItem }} components={{ ContextMenu }} />
+      <Playground snippet={simpleSnippet} scope={{ Icon, ContextMenuItem }} components={{ ContextMenu }} />
 
       <Heading2Type>ContextMenu Props</Heading2Type>
       <Table props={propDescription.contextMenu} />
