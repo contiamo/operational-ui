@@ -9,6 +9,7 @@ import ContextMenuItem from "./ContextMenuItem"
 export interface IProps {
   id?: string | number
   css?: {}
+  menuCss?: {}
   className?: string
   children: React.ReactNode
   openOnHover?: boolean
@@ -20,22 +21,22 @@ export interface IState {
   isOpen: boolean
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  cursor: "pointer",
   position: "relative",
-  width: "fit-content",
-  margin: theme.spacing * 2
+  width: "fit-content"
 }))
 
-const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): any => ({
+const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
   position: "absolute",
-  top: "100%",
-  left: "0%",
+  top: `calc(100% + ${theme.spacing / 2}px)`,
+  left: - theme.spacing,
   boxShadow: theme.shadows.popup,
   width: "fit-content",
   ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }
 }))
 
-class ContextMenu extends React.Component<IProps, IState> {
+export default class ContextMenu extends React.Component<IProps, IState> {
   state = {
     isHovered: false,
     isOpen: false
@@ -68,7 +69,7 @@ class ContextMenu extends React.Component<IProps, IState> {
         const { onClick } = child.props
         menuItems.push(
           React.cloneElement(child, {
-            key: index,
+            key: "contextmenu-" + index,
             onClick:
               onClick &&
               (() => {
@@ -108,6 +109,7 @@ class ContextMenu extends React.Component<IProps, IState> {
       >
         {children}
         <MenuContainer
+          css={this.props.menuCss}
           innerRef={node => {
             this.menuContainerNode = node
           }}
@@ -119,6 +121,3 @@ class ContextMenu extends React.Component<IProps, IState> {
     )
   }
 }
-
-export default ContextMenu
-export { ContextMenuItem }

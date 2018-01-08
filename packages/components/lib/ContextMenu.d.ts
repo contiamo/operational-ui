@@ -1,9 +1,9 @@
 /// <reference types="react" />
 import * as React from "react";
-import ContextMenuItem from "./ContextMenuItem";
 export interface IProps {
     id?: string | number;
     css?: {};
+    menuCss?: {};
     className?: string;
     children: React.ReactNode;
     openOnHover?: boolean;
@@ -13,7 +13,7 @@ export interface IState {
     isHovered: boolean;
     isOpen: boolean;
 }
-declare class ContextMenu extends React.Component<IProps, IState> {
+export default class ContextMenu extends React.Component<IProps, IState> {
     state: {
         isHovered: boolean;
         isOpen: boolean;
@@ -26,5 +26,3 @@ declare class ContextMenu extends React.Component<IProps, IState> {
     componentWillUnmount(): void;
     render(): JSX.Element;
 }
-export default ContextMenu;
-export { ContextMenuItem };

@@ -14,9 +14,9 @@ var Container = glamorous_1.default.header(function (_a) {
         height: 60,
         alignItems: "center",
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
+        boxShadow: theme.shadows.card,
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"])
     };
 });
-var Header = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, color: props.color }, props.children)); };
-exports.default = Header;
+exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, color: props.color }, props.children)); };
 //# sourceMappingURL=Header.js.map

@@ -8,7 +8,12 @@ export interface IProps {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div({})
+const Container = glamorous.div({
+  "& a": {
+    textDecoration: "none",
+    color: "inherit"
+  }
+})
 
 const Breadcrumbs = glamorous.div(({ theme }) => ({}))
 
@@ -21,12 +26,15 @@ const Divider = glamorous.span(({ theme }: { theme: Theme }): {} => ({
 export default (props: IProps) => (
   <Container className={props.className} css={props.css}>
     {(() => {
+      /* This IIFE adds the divider elements containing slashes between children, e.g:
+       * <Breadcrumb>1</Breadcrumb> <Breadcrumb>2</Breadcrumb> -> <span>1</span> <span>/</span> <span>2</span> 
+       */
       const newChildren: React.ReactNode[] = []
       const childrenCount = React.Children.count(props.children)
       React.Children.forEach(props.children, (child: React.ReactNode, index: number) => {
         newChildren.push(child)
         if (index < childrenCount - 1) {
-          newChildren.push(<Divider key={index}>/</Divider>)
+          newChildren.push(<Divider key={"breadcrumbdivider-" + index}>/</Divider>)
         }
       })
       return newChildren

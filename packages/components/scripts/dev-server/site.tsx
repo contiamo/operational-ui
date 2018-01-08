@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { Header, HeaderTitle, HeaderSeparator, Breadcrumbs, Breadcrumb, operationalTheme } from "../../src/index"
+import { Header, HeaderTitle, HeaderSeparator, Breadcrumbs, Breadcrumb, operationalTheme, ContextMenu, ContextMenuItem } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {
@@ -11,7 +11,12 @@ class Site extends React.Component<{}, {}> {
         <div>
           <Header>
             <Breadcrumbs>
-              <Breadcrumb>Hello</Breadcrumb>
+              <ContextMenu css={{display: "inline-block", margin: 0}}>
+                <Breadcrumb icon="ChevronDown">Hello</Breadcrumb>
+                <ContextMenuItem>Item 1</ContextMenuItem>
+                <ContextMenuItem>Item 2</ContextMenuItem>
+                <ContextMenuItem>Item 3</ContextMenuItem>
+              </ContextMenu>
               <Breadcrumb>Good Bye</Breadcrumb>
             </Breadcrumbs>
           </Header>

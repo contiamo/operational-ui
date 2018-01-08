@@ -35,6 +35,13 @@ const propDescription = {
       defaultValue: "false",
       type: "boolean",
       optional: true
+    },
+    {
+      name: "menuCss",
+      description: "Styling overrides for the menu's container",
+      defaultValue: "null",
+      type: "object",
+      optional: true
     }
   ],
   contextMenuItem: [
