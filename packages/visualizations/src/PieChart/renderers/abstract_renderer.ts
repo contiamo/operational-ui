@@ -1,5 +1,5 @@
 import Events from "../../utils/event_catalog"
-import { IEvents, IObject, IState, TD3Selection, TDatum } from "../typings"
+import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum } from "../typings"
 import { defaults, find, filter, forEach, isFunction, keys, map, reduce, values } from "lodash/fp"
 import { withD3Element } from "../../utils/d3_utils"
 import * as d3 from "d3-selection"
@@ -326,14 +326,12 @@ abstract class AbstractRenderer {
 
   // Calculation of inner radius
   computeInner(outerRadius: any): number {
-    const width: number = outerRadius - this.state.current.get("config").minInnerRadius
+    const config: IConfig = this.state.current.get("config"),
+      width: number = outerRadius - config.minInnerRadius
+
     // If there isn't enough space, don't render inner circle
-    return width < this.minWidth() ? 0 : outerRadius - Math.min(width, this.maxWidth())
+    return width < config.minWidth ? 0 : outerRadius - Math.min(width, config.maxWidth)
   }
-
-  abstract minWidth(): number
-
-  abstract maxWidth(): number
 
   hoverOuter(radius: number): number {
     return radius + 1

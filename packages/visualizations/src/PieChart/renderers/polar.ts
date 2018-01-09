@@ -6,11 +6,15 @@ import { interpolateObject } from "d3-interpolate"
 import { scaleSqrt as d3ScaleSqrt } from "d3-scale"
 import { IConfig, IObject, TDatum } from "../typings"
 
+const MIN_SEGMENT_WIDTH: number = 5
+
 function radiusValue(d: TDatum): number {
   return d.data ? d.data.value : d.value
 }
 
 class Polar extends AbstractRenderer {
+  minSegmentWidth: number
+
   onTransitionEnd(): void {
     this.fitToCanvas()
   }
@@ -60,8 +64,8 @@ class Polar extends AbstractRenderer {
 
   computeInner(outerRadius: (d: TDatum) => number): number {
     let options: IConfig = this.state.current.get("config")
-    let minWidth: number = options.minPolarSegmentWidth
-    let maxWidth: number = options.maxDonutWidth
+    let minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
+    let maxWidth: number = options.maxWidth
     let minOuterRadius: number = min(map(outerRadius)(this.computed.data))
     // Space is not enough, don't render
     let width: number = minOuterRadius - options.minInnerRadius
@@ -91,14 +95,6 @@ class Polar extends AbstractRenderer {
 
   centerDisplayString(): string[] {
     return this.computed.inner > 0 ? [this.computed.total.toString()] : []
-  }
-
-  minWidth(): number {
-    return this.state.current.get("config").minDonutWidth
-  }
-
-  maxWidth(): number {
-    return this.state.current.get("config").maxDonutWidth
   }
 
   totalYOffset(): string {

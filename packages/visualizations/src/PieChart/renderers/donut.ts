@@ -20,14 +20,6 @@ class Donut extends AbstractRenderer {
     return this.computed.inner > 0 ? [this.computed.total.toString()] : []
   }
 
-  minWidth(): number {
-    return this.state.current.get("config").minDonutWidth
-  }
-
-  maxWidth(): number {
-    return this.state.current.get("config").maxDonutWidth
-  }
-
   totalYOffset(): string {
     return "0.35em"
   }

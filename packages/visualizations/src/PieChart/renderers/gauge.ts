@@ -122,14 +122,6 @@ class Gauge extends AbstractRenderer {
     return this.extent === "semi" ? [-Math.PI / 2, Math.PI / 2] : [-Math.PI, Math.PI]
   }
 
-  minWidth(): number {
-    return this.state.current.get("config").minGaugeWidth
-  }
-
-  maxWidth(): number {
-    return this.state.current.get("config").maxGaugeWidth
-  }
-
   totalYOffset(): string {
     return this.extent === "semi" ? "0" : "0.35em"
   }

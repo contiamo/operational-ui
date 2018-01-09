@@ -24,16 +24,14 @@ export interface IConfig {
   height: number
   hidden: boolean
   legend: true
-  maxDonutWidth: number
-  maxGaugeWidth: number
+  maxWidth: number
   maxLegendRatio: number
   maxLegendWidth: number
   maxTotalFontSize: number
   minChartWithLegend: number
-  minDonutWidth: number
+  minWidth: number
   minInnerRadius: number
   minLegendWidth: number
-  minPolarSegmentWidth: number
   minTotalFontSize: number
   numberFormatter: (x: number) => string
   outerBorderMargin: number
