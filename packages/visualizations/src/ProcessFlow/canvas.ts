@@ -8,7 +8,7 @@ class Canvas extends AbstractCanvas {
 
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
     super(state, stateWriter, events, context)
-    this.insertFocusLabel()
+    this.insertFocusElements()
     this.appendDrawingGroups()
   }
 

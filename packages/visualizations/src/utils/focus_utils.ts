@@ -18,8 +18,8 @@ const FocusUtils: IObject = {
   // Initial, hidden rendering of the focus label.
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
-  drawHidden: (canvasEl: TD3Selection, type: string): void => {
-    canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden")
+  drawHidden: (canvasEl: TD3Selection, type: string): TD3Selection => {
+    return canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden")
   },
 
   // Move the focus label to the desired position and make it visible.

@@ -18,7 +18,7 @@ var Canvas = /** @class */ (function (_super) {
     // focusEl: TD3Selection
     function Canvas(state, stateWriter, events, context) {
         var _this = _super.call(this, state, stateWriter, events, context) || this;
-        _this.insertFocusLabel();
+        _this.insertFocusElements();
         _this.appendDrawingGroups();
         return _this;
     }
