@@ -1,21 +1,22 @@
 import FocusUtils from "../utils/focus_utils"
 import AbstractDrawingFocus from "../utils/focus"
 import * as d3 from "d3-selection"
+import { TD3Selection, TDatum, IObject } from "./typings"
 
-const dataName = (d: any): string => d.data.key
-const dataValue = (d: any): number => d.data.value
-const dataPercentage = (d: any): string => d.data.percentage.toFixed(1) + "%"
+const dataName = (d: TDatum): string => d.data.key,
+  dataValue = (d: TDatum): number => d.data.value,
+  dataPercentage = (d: TDatum): string => d.data.percentage.toFixed(1) + "%"
 
 class Focus extends AbstractDrawingFocus {
-  onElementHover(payload: { focusPoint: any; d: any }): void {
+  onElementHover(payload: { focusPoint: IObject; d: TDatum }): void {
     this.remove()
 
-    const focusPoint: any = payload.focusPoint,
-      datum: any = payload.d
+    const focusPoint: IObject = payload.focusPoint,
+      datum: TDatum = payload.d
 
     FocusUtils.drawHidden(this.el, "element")
 
-    let content: any = this.el.append("xhtml:ul")
+    let content: TD3Selection = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")
@@ -35,11 +36,11 @@ class Focus extends AbstractDrawingFocus {
       )
 
     // Get label dimensions
-    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el)
-    const labelPlacement: { left: number; top: number } = {
-      left: focusPoint.centroid[0] - labelDimensions.width / 2,
-      top: focusPoint.centroid[1]
-    }
+    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
+      labelPlacement: { left: number; top: number } = {
+        left: focusPoint.centroid[0] - labelDimensions.width / 2,
+        top: focusPoint.centroid[1]
+      }
 
     FocusUtils.drawVisible(this.el, labelPlacement)
   }

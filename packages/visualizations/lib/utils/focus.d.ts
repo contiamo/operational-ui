@@ -9,14 +9,14 @@ declare abstract class Focus {
     events: IEvents;
     constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
     onComponentHover(payload: {
-        component: any;
-        options: any;
+        component: TD3Selection;
+        options: IObject;
     }): void;
     onComponentLeave(): void;
-    removeComponentFocus(options?: any): void;
+    removeComponentFocus(options?: IObject): void;
     abstract onElementHover(payload: {
-        focusPoint: any;
-        d: any;
+        focusPoint: IObject;
+        d: IObject;
     }): void;
     onElementOut(): void;
     onMouseLeave(): void;

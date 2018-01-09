@@ -80,7 +80,7 @@ abstract class DrawingCanvas extends Canvas {
 
   appendSeriesDrawingGroups(seriesElements: string[] | string[][]): void {
     let series: TD3Selection = this.elements.drawing.append("svg:g").attr("class", "series-drawings-group")
-    this.elements.series = reduce((memo: IObject, se: string | string[]): any => {
+    this.elements.series = reduce((memo: IObject, se: string | string[]): IObject => {
       if (isArray(se)) {
         let renderer: string = se[0]
         let clip: string = se[1]
@@ -89,7 +89,7 @@ abstract class DrawingCanvas extends Canvas {
           .attr("class", "series-" + renderer)
           .attr("clip-path", "url(#" + this.prefixedId(`_${clip}`) + ")")
       } else {
-        memo[se] = series.append("svg:g").attr("class", "series-" + se)
+        memo[se as string] = series.append("svg:g").attr("class", "series-" + se)
       }
       return memo
     }, {})(seriesElements)
@@ -149,7 +149,7 @@ abstract class DrawingCanvas extends Canvas {
 
   draw(): void {
     super.draw()
-    let config: any = this.state.current.get("config")
+    let config: IObject = this.state.current.get("config")
     let drawingContainerDims: { width: number; height: number } = this.drawingContainerDims()
 
     this.container.style("width", config.width + "px").style("height", config.height + "px")

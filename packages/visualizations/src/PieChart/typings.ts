@@ -21,7 +21,6 @@ export interface IConfig {
   colors: IObject
   duration: number
   focusElement?: TFocusElement
-  // gaugeExtent: "semi"
   height: number
   hidden: boolean
   legend: true
@@ -38,24 +37,25 @@ export interface IConfig {
   minTotalFontSize: number
   numberFormatter: (x: number) => string
   outerBorderMargin: number
-  // renderer: "pie-chart"
   showComponentFocus: boolean
   uid: string
   visualizationName: string
   width: number
 }
 
+export type TDatum = IObject
+
+export interface IDataAccessors {
+  data: (d: any) => any
+}
+export interface ISeriesAccessors {
+  name: (d: TDatum) => string
+  renderAs: (d: TDatum) => any
+}
+
 export interface IAccessorsObject {
-  data: {
-    data: (d: any) => any
-  }
-  series: {
-    comparison: (d: any) => any
-    data: (d: any) => any
-    name: (d: any) => string
-    renderAs: (d: any) => any
-    target: (d: any) => any
-  }
+  data: IDataAccessors
+  series: ISeriesAccessors
 }
 
 export interface IComputedState {
@@ -63,5 +63,3 @@ export interface IComputedState {
   focus: IObject
   series: IObject
 }
-
-export type TData = [string, number][]

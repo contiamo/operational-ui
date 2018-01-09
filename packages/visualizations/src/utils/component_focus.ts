@@ -1,4 +1,4 @@
-import { IObject, IState, TD3Selection } from "./typings"
+import { IEvents, IObject, IState, TD3Selection } from "./typings"
 import { uniqueId } from "lodash/fp"
 import Events from "./event_catalog"
 import * as styles from "./styles"
@@ -6,14 +6,14 @@ import * as d3 from "d3-selection"
 
 class ComponentFocus {
   el: TD3Selection
-  events: any
+  events: IEvents
   isMouseOver: boolean = false
   label: TD3Selection
   state: IState
   type: string = "component"
   uid: string
 
-  constructor(state: IState, el: TD3Selection, events: any, payload: IObject) {
+  constructor(state: IState, el: TD3Selection, events: IEvents, payload: IObject) {
     this.state = state
     this.el = el.append("xhtml:div").attr("class", `${styles.focusLegend} ${styles.componentFocus}`)
     this.events = events

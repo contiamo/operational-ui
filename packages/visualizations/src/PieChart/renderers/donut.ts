@@ -1,5 +1,5 @@
 import AbstractRenderer from "./abstract_renderer"
-import { IObject } from "../typings"
+import { IObject, TDatum } from "../typings"
 import { interpolateObject } from "d3-interpolate"
 
 class Donut extends AbstractRenderer {
@@ -16,8 +16,8 @@ class Donut extends AbstractRenderer {
     return this.total
   }
 
-  centerDisplayString(): any[] {
-    return this.computed.inner > 0 ? [this.computed.total] : []
+  centerDisplayString(): string[] {
+    return this.computed.inner > 0 ? [this.computed.total.toString()] : []
   }
 
   minWidth(): number {
@@ -33,8 +33,8 @@ class Donut extends AbstractRenderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: any, i: number): (t: number) => string {
-    let old: any = this.previous.data || []
+  arcTween(d: TDatum, i: number): (t: number) => string {
+    let old: TDatum[] = this.previous.data || []
     let s0: number
     let e0: number
     if (old[i]) {
@@ -50,7 +50,7 @@ class Donut extends AbstractRenderer {
       s0 = 0
       e0 = 0
     }
-    let f: any = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
+    let f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
     return (t: number): string => this.computed.arc(f(t))
   }
 

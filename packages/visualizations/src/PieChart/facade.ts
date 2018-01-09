@@ -13,6 +13,7 @@ import {
   IConfig,
   IChartStateObject,
   IObject,
+  TDatum,
   TFocusElement
 } from "./typings"
 
@@ -75,14 +76,11 @@ class Facade {
   initialAccessors(): IAccessorsObject {
     return {
       data: {
-        data: (d: any): any => d.data
+        data: (d: IObject): TDatum[] => d.data
       },
       series: {
-        comparison: (d: any): any => d.comparison,
-        data: (d: any): any => d.data || [],
-        name: (d: any): string => d.name || "",
-        renderAs: (d: any): any => d.renderAs,
-        target: (d: any): any => d.target
+        name: (d: TDatum): string => d.name || "",
+        renderAs: (d: TDatum): IObject[] => d.renderAs
       }
     }
   }

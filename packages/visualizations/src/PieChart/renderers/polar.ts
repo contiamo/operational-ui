@@ -4,9 +4,9 @@ import "d3-transition"
 import { extend, map, max, min } from "lodash/fp"
 import { interpolateObject } from "d3-interpolate"
 import { scaleSqrt as d3ScaleSqrt } from "d3-scale"
-import { IObject } from "../typings"
+import { IConfig, IObject, TDatum } from "../typings"
 
-function radiusValue(d: any): number {
+function radiusValue(d: TDatum): number {
   return d.data ? d.data.value : d.value
 }
 
@@ -29,7 +29,7 @@ class Polar extends AbstractRenderer {
     this.el.attr("transform", this.translateString(this.currentTranslation))
 
     const current: ClientRect = (this.el.node() as any).getBoundingClientRect(),
-      drawing: any = this.state.current.get("computed").canvas.drawingContainerDims
+      drawing: IObject = this.state.current.get("computed").canvas.drawingContainerDims
     if (current.width === 0 && current.height === 0) {
       return
     }
@@ -63,11 +63,11 @@ class Polar extends AbstractRenderer {
         Math.min(width, height) / 2 - this.state.current.get("config").outerBorderMargin
       ])
       .domain([0, domainMax])
-    return (d: any): number => scale(radiusValue(d)) * scaleFactor
+    return (d: TDatum): number => scale(radiusValue(d)) * scaleFactor
   }
 
-  computeInner(outerRadius: (d: any) => number): any {
-    let options: any = this.state.current.get("config")
+  computeInner(outerRadius: (d: TDatum) => number): number {
+    let options: IConfig = this.state.current.get("config")
     let minWidth: number = options.minPolarSegmentWidth
     let maxWidth: number = options.maxDonutWidth
     let minOuterRadius: number = min(map(outerRadius)(this.computed.data))
@@ -77,10 +77,10 @@ class Polar extends AbstractRenderer {
   }
 
   hoverOuter(radius: any): any {
-    return (d: any): number => radius(d) + 1
+    return (d: TDatum): number => radius(d) + 1
   }
 
-  angleValue(d: any): number {
+  angleValue(d: TDatum): number {
     return 1
   }
 
@@ -97,8 +97,8 @@ class Polar extends AbstractRenderer {
     return this.total
   }
 
-  centerDisplayString(): any[] {
-    return this.computed.inner > 0 ? [this.computed.total] : []
+  centerDisplayString(): string[] {
+    return this.computed.inner > 0 ? [this.computed.total.toString()] : []
   }
 
   minWidth(): number {
@@ -114,7 +114,7 @@ class Polar extends AbstractRenderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: any, i: number): (t: number) => string {
+  arcTween(d: TDatum, i: number): (t: number) => string {
     let old: any = this.previous.data || []
     let s0: number
     let e0: number
@@ -132,16 +132,16 @@ class Polar extends AbstractRenderer {
       e0 = 0
     }
 
-    let f: any = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
+    let f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
     return (t: number): string => this.computed.arc(extend(f(t))(d))
   }
 
-  removeArcTween(d: any, i: number): (t: number) => string {
+  removeArcTween(d: TDatum, i: number): (t: number) => string {
     let s0: number
     let e0: number
     s0 = e0 = this.angleRange()[1]
     // Value is needed to interpolate the radius as well as the angles.
-    let f: any = interpolateObject(
+    let f = interpolateObject(
       { endAngle: d.endAngle, startAngle: d.startAngle, value: d.value },
       { endAngle: e0, startAngle: s0, value: d.value }
     )

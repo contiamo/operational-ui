@@ -23,7 +23,7 @@ abstract class Focus {
     this.events.on(Events.CHART.OUT, this.onMouseLeave.bind(this))
   }
 
-  onComponentHover(payload: { component: any; options: any }): void {
+  onComponentHover(payload: { component: TD3Selection; options: IObject }): void {
     this.removeComponentFocus({ force: true })
     this.focus = new ComponentFocus(this.state, this.componentEl, this.events, payload)
   }
@@ -32,7 +32,7 @@ abstract class Focus {
     setTimeout(this.removeComponentFocus.bind(this), 1)
   }
 
-  removeComponentFocus(options: any = {}): void {
+  removeComponentFocus(options: IObject = {}): void {
     if (options.uid && options.uid !== this.focus.uid) {
       return
     }
@@ -47,7 +47,7 @@ abstract class Focus {
       : this.remove()
   }
 
-  abstract onElementHover(payload: { focusPoint: any; d: any }): void
+  abstract onElementHover(payload: { focusPoint: IObject; d: IObject }): void
 
   onElementOut(): void {
     this.remove()

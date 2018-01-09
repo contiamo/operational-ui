@@ -12,14 +12,14 @@ function optimalPosition(possibilities: number[], min: number, max: number, dime
 }
 
 // Focus Label Formatting
-const FocusUtils: any = {
+const FocusUtils: IObject = {
   // Public Functions
 
   // Initial, hidden rendering of the focus label.
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
-  drawHidden: (canvasEl: TD3Selection, type: string): any => {
-    return canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden")
+  drawHidden: (canvasEl: TD3Selection, type: string): void => {
+    canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden")
   },
 
   // Move the focus label to the desired position and make it visible.
@@ -49,14 +49,14 @@ const FocusUtils: any = {
     offset: number = 0,
     position: string = "toRight"
   ): void => {
-    const x: any = {
+    const x: IObject = {
       farLeft: drawing.xMin + offset,
       farRight: drawing.xMax - offset - label.width,
       left: drawing.xMin + focus.x - offset - label.width,
       right: drawing.xMin + focus.x + offset
     }
 
-    const y: any = {
+    const y: IObject = {
       above: drawing.yMin + focus.y - offset - label.height,
       below: drawing.yMin + focus.y + offset,
       bottom: drawing.yMin + drawing.yMax - offset - label.height,

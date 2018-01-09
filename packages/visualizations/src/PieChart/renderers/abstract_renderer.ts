@@ -1,6 +1,6 @@
 import Events from "../../utils/event_catalog"
-import { IObject, TD3Selection } from "../typings"
-import { defaults, find, forEach, isFunction, keys, map, reduce, values } from "lodash/fp"
+import { IEvents, IObject, IState, TD3Selection, TDatum } from "../typings"
+import { defaults, find, filter, forEach, isFunction, keys, map, reduce, values } from "lodash/fp"
 import { withD3Element } from "../../utils/d3_utils"
 import * as d3 from "d3-selection"
 import "d3-transition"
@@ -32,52 +32,49 @@ function approxZero(y: (x: number) => number, initialX: number): number {
 }
 
 // Accessors of series in prepared data
-function dataKey(d: any): string {
+function dataKey(d: TDatum): string {
   return d.data.key
 }
-function dataLabelValue(d: any): string {
+function dataLabelValue(d: TDatum): string {
   return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined
 }
-function dataColor(d: any): string {
+function dataColor(d: TDatum): string {
   return d.data.colorHex
 }
 
 abstract class AbstractRenderer {
-  color: (d: any) => string
-  computed: any = {}
+  color: (d: TDatum) => string
+  computed: IObject = {}
   currentTranslation: [number, number]
-  data: any
+  data: TDatum[]
   drawn: boolean = false
   el: TD3Selection
-  events: any
-  key: (d: any) => string
-  parsedData: any[] = []
-  previous: any
-  previousParsed: any[]
-  series: any
-  state: any
+  events: IEvents
+  key: (d: TDatum) => string
+  previous: IObject
+  state: IState
   total: number
   type: string
-  value: (d: any) => number
+  value: (d: TDatum) => number
 
-  constructor(state: any, events: any, el: TD3Selection, options: IObject) {
+  constructor(state: IState, events: IEvents, el: TD3Selection, options: IObject) {
     this.state = state
     this.events = events
     this.el = el.select("g.drawing")
     forEach.convert({ cap: false })((option: any, key: string): void => {
       ;(this as any)[key] = isFunction(option) ? (d?: any) => option(d) : option
     })(options)
-    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this), this)
-    this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this), this)
-    this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this), this)
+    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this))
+    this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this))
   }
 
-  setData(data: IObject): void {
+  setData(data: TDatum[]): void {
     this.data = data
   }
 
   computeTotal(): void {
-    this.total = reduce((memo: number, datum: any[]): number => {
+    this.total = reduce((memo: number, datum: TDatum): number => {
       const value: number = this.value(datum)
       return memo + (value || 0)
     }, 0)(this.data)
@@ -109,14 +106,14 @@ abstract class AbstractRenderer {
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
     const duration: number = this.state.current.get("config").duration
-    let that: any = this,
+    let that: AbstractRenderer = this,
       n: number = 0
 
     // Center coordinate system
     this.el.attr("transform", this.translateString(this.computeTranslate()))
 
     // Arcs
-    let arcs: any = this.el
+    let arcs: TD3Selection = this.el
       .select("g.arcs")
       .selectAll("g")
       .data(this.computed.data, dataKey)
@@ -134,13 +131,13 @@ abstract class AbstractRenderer {
     exit.remove()
 
     // Enter
-    let enter: any = arcs
+    let enter: TD3Selection = arcs
       .enter()
       .append("svg:g")
       .attr("class", styles.arc)
       .on("mouseenter", this.onMouseOver.bind(this))
 
-    enter.append("svg:path").style("fill", (d: any): string => this.color(d.data))
+    enter.append("svg:path").style("fill", (d: TDatum): string => this.color(d.data))
 
     enter
       .append("svg:text")
@@ -176,7 +173,7 @@ abstract class AbstractRenderer {
     return
   }
 
-  abstract centerDisplayString(): any[]
+  abstract centerDisplayString(): string[]
 
   updateTotal(): void {
     let duration: number = this.state.current.get("config").duration
@@ -207,7 +204,7 @@ abstract class AbstractRenderer {
 
     const node: any = mergedTotal.node()
     if (node) {
-      let y: (x: number) => number = (x: number): number => {
+      let y = (x: number): number => {
         mergedTotal.style("font-size", x + "px")
         // Text should fill half of available width (0.5 * diameter = radius)
         return this.computed.inner - node.getBBox().width
@@ -225,19 +222,19 @@ abstract class AbstractRenderer {
     }
   }
 
-  // let dy: any = this.type() === "gauge" && this.state.current.get("config").gaugeExtent === "semi" ? 0 : "0.35em"
   abstract totalYOffset(): string
 
-  updateElementHover(datapoint: any): void {
+  updateElementHover(datapoint: IObject): void {
     if (!this.drawn) {
       return
     }
 
     let arcs: any = this.el.select("g.arcs").selectAll("g")
 
-    const filterFocused: any = (d: any): boolean => datapoint && datapoint.data && dataKey(d) === dataKey(datapoint),
-      filterUnFocused: any = (d: any): boolean =>
-        datapoint && datapoint.data ? dataKey(d) !== dataKey(datapoint) : true
+    const filterFocused: any = (d: TDatum): boolean =>
+        datapoint.d && datapoint.d.data && dataKey(d) === dataKey(datapoint.d),
+      filterUnFocused: any = (d: TDatum): boolean =>
+        datapoint.d && datapoint.d.data ? dataKey(d) !== dataKey(datapoint.d) : true
 
     arcs
       .filter(filterFocused)
@@ -252,7 +249,7 @@ abstract class AbstractRenderer {
       .attr("filter", null)
   }
 
-  onMouseOver(d: any): void {
+  onMouseOver(d: TDatum): void {
     const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint: { centroid }, d })
   }
@@ -265,14 +262,14 @@ abstract class AbstractRenderer {
     return
   }
 
-  angleValue(d: any): number {
+  angleValue(d: TDatum): number {
     return this.value(d)
   }
 
   // Compute
   compute(): void {
     this.previous = this.computed
-    let d: any = {}
+    let d: IObject = {}
 
     // We cannot draw a pie chart with no series or only series that have the value 0
     if (!this.hasData()) {
@@ -308,7 +305,7 @@ abstract class AbstractRenderer {
   }
 
   computeArcs(scale?: number): void {
-    let computed: any = this.computed
+    let computed: IObject = this.computed
     const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
     computed.r = this.computeOuter(drawingDims.width, drawingDims.height, scale)
     computed.inner = this.computeInner(computed.r)
@@ -328,7 +325,7 @@ abstract class AbstractRenderer {
   }
 
   // Calculation of inner radius
-  computeInner(outerRadius: any): any {
+  computeInner(outerRadius: any): number {
     const width: number = outerRadius - this.state.current.get("config").minInnerRadius
     // If there isn't enough space, don't render inner circle
     return width < this.minWidth() ? 0 : outerRadius - Math.min(width, this.maxWidth())
@@ -340,7 +337,7 @@ abstract class AbstractRenderer {
   // maxWidth: number = this.type() === "gauge" ? options.maxGaugeWidth : options.maxDonutWidth,
   abstract maxWidth(): number
 
-  hoverOuter(radius: any): any {
+  hoverOuter(radius: number): number {
     return radius + 1
   }
 
@@ -352,17 +349,17 @@ abstract class AbstractRenderer {
     return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
   }
 
-  abstract arcTween(d: any, i: number): (t: number) => string
+  abstract arcTween(d: TDatum, i: number): (t: number) => string
 
-  removeArcTween(d: any, i: number): (t: number) => string {
+  removeArcTween(d: TDatum, i: number): (t: number) => string {
     let s0: number
     let e0: number
     s0 = e0 = this.angleRange()[1]
-    let f: any = interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { endAngle: e0, startAngle: s0 })
+    let f = interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { endAngle: e0, startAngle: s0 })
     return (t: number): string => this.computed.arc(f(t))
   }
 
-  labelTranslate(d: any): string {
+  labelTranslate(d: TDatum): string {
     return this.translateString(this.computed.arc.centroid(d))
   }
 
@@ -370,7 +367,7 @@ abstract class AbstractRenderer {
     return "translate(" + values.join(", ") + ")"
   }
 
-  dataForLegend(): any {
+  dataForLegend(): IObject[] {
     return map((datum: IObject): IObject => {
       return {
         label: this.key(datum),

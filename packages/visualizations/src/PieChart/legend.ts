@@ -1,11 +1,11 @@
 import AbstractLegend from "../utils/legend"
 import { filter, find, forEach, get, groupBy, keys, map } from "lodash/fp"
-import { IObject } from "./typings"
+import { IObject, TD3Selection } from "./typings"
 import * as styles from "./styles"
 import { withD3Element } from "../utils/d3_utils"
 
 class Legend extends AbstractLegend {
-  data(): any {
+  data(): IObject[] {
     return filter((d: IObject): boolean => !d.comparison)(this.state.current.get("computed").series.dataForLegend)
   }
 
@@ -23,15 +23,15 @@ class Legend extends AbstractLegend {
 
   updateComparisonLegend(): void {
     // Only needed for gauges, if comparison value is given.
-    const data: any[] = filter((d: IObject): boolean => d.comparison)(
+    const data: IObject[] = filter((d: IObject): boolean => d.comparison)(
       this.state.current.get("computed").series.dataForLegend
     )
 
-    let legends: any = this.legend.selectAll(`div.comparison`).data(data)
+    let legends: TD3Selection = this.legend.selectAll(`div.comparison`).data(data)
 
     legends.exit().remove()
 
-    let enter: any = legends
+    let enter: TD3Selection = legends
       .enter()
       .append("div")
       .attr("class", `comparison ${styles.comparisonLegend}`)
@@ -44,10 +44,10 @@ class Legend extends AbstractLegend {
     enter
       .merge(legends)
       .select("div.name")
-      .html((d: any): string => d.label)
+      .html((d: IObject): string => d.label)
   }
 
-  currentOptions(datum: any): any {
+  currentOptions(datum: IObject): IObject {
     return datum.type === "comparison"
       ? {
           options: {

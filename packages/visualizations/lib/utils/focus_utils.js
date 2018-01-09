@@ -17,7 +17,7 @@ var FocusUtils = {
     // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
     // before the label is made visible.
     drawHidden: function (canvasEl, type) {
-        return canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden");
+        canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden");
     },
     // Move the focus label to the desired position and make it visible.
     drawVisible: function (focusEl, labelPlacement) {

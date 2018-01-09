@@ -1,13 +1,12 @@
 // import DataHandler from "./data_handler"
 import Renderer from "./renderers/renderer"
 import AbstractRenderer from "./renderers/abstract_renderer"
-import { TData, IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings"
+import { TDatum, IEvents, IObject, ISeriesAccessors, IState, TSeriesEl, TStateWriter } from "./typings"
 import { flow, filter, forEach } from "lodash/fp"
 
 class Series {
   attributes: IObject
-  data: TData
-  // dataHandler: DataHandler
+  data: TDatum[]
   drawn: boolean
   el: TSeriesEl
   events: IEvents
@@ -43,7 +42,7 @@ class Series {
   }
 
   assignAccessors(): void {
-    const accessors: any = this.state.current.get("accessors").series
+    const accessors: ISeriesAccessors = this.state.current.get("accessors").series
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(accessors)
@@ -64,7 +63,6 @@ class Series {
 
   draw(): void {
     const seriesConfig: IObject = this.state.current.get("computed").series
-    // this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)
     this.renderer.draw()
     this.drawn = true
   }

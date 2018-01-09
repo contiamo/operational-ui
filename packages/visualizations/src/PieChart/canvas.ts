@@ -1,7 +1,7 @@
 import AbstractDrawingCanvas from "../utils/drawing_canvas"
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { TD3Selection, IState, TStateWriter, IEvents, IObject } from "./typings"
+import { TD3Selection, IConfig, IState, TStateWriter, IEvents, IObject } from "./typings"
 
 interface IMousePosition {
   absolute: { x: number; y: number }
@@ -73,10 +73,10 @@ class Canvas extends AbstractDrawingCanvas {
   }
 
   trackMouseMove(): void {
-    const config = this.state.current.get("config")
+    const config: IConfig = this.state.current.get("config")
     this.el.on("mousemove", (): void => {
-      let event: any = d3.event
-      let mouse: [number, number] = d3.mouse(this.el.node() as any)
+      const event: any = d3.event,
+        mouse: [number, number] = d3.mouse(this.el.node() as any)
       this.mousePosition = {
         absolute: {
           x: event.pageX,

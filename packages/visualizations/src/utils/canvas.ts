@@ -79,7 +79,7 @@ abstract class Canvas {
   }
 
   listenToMouseOver(): void {
-    const el: any = this.mouseOverElement()
+    const el: TD3Selection = this.mouseOverElement()
     if (el) {
       el.node().addEventListener("mouseenter", this.onMouseEnter.bind(this))
       el.node().addEventListener("mouseleave", this.onMouseLeave.bind(this))
