@@ -331,10 +331,8 @@ abstract class AbstractRenderer {
     return width < this.minWidth() ? 0 : outerRadius - Math.min(width, this.maxWidth())
   }
 
-  // minWidth: number = this.type() === "gauge" ? options.minGaugeWidth : options.minDonutWidth,
   abstract minWidth(): number
 
-  // maxWidth: number = this.type() === "gauge" ? options.maxGaugeWidth : options.maxDonutWidth,
   abstract maxWidth(): number
 
   hoverOuter(radius: number): number {

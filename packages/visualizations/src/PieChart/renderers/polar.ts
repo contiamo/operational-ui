@@ -11,14 +11,6 @@ function radiusValue(d: TDatum): number {
 }
 
 class Polar extends AbstractRenderer {
-  // updateDraw(): void {
-  //   super.updateDraw()
-  //   // // need to ensure all transitions have finished.
-  //   // this.el.transition()
-  //   //   .duration(this.state.current.get("config").duration)
-  //   //   .each("end", this.fitToCanvas.bind(this))
-  // }
-
   onTransitionEnd(): void {
     this.fitToCanvas()
   }

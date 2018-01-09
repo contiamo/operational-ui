@@ -48,7 +48,6 @@ class Facade {
     return {
       colors: {},
       duration: 1e3,
-      // gaugeExtent: "semi",
       height: 500,
       hidden: false,
       legend: true,
@@ -65,7 +64,6 @@ class Facade {
       minTotalFontSize: 11,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
-      // renderer: "pie-chart",
       showComponentFocus: true,
       uid: uniqueId("piechart"),
       visualizationName: "piechart",
@@ -164,7 +162,6 @@ class Facade {
       return
     }
     this.__disposed = true
-    // this.canvas.remove()
     this.events.removeAll()
     this.context.innerHTML = ""
   }
