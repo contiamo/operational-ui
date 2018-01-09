@@ -1,6 +1,4 @@
 import * as React from "react"
-import { render } from "react-dom"
-import { forEach } from "lodash/fp"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
 
