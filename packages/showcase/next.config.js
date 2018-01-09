@@ -2,6 +2,7 @@ module.exports = {
   exportPathMap: () => ({
     "/": { page: "/", query: { title: "Operational UI" } },
     "/components": { page: "/components", query: { title: "Components" } },
+    "/components/breadcrumbs": { page: "/components/breadcrumbs", query: { title: "Breadcrumbs" } },
     "/components/breakdowns": { page: "/components/breakdowns", query: { title: "Breakdowns" } },
     "/components/buttons": { page: "/components/buttons", query: { title: "Buttons" } },
     "/components/cards": { page: "/components/cards", query: { title: "Cards" } },

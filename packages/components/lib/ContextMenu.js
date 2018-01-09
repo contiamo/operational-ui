@@ -22,18 +22,17 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var ContextMenuItem_1 = require("./ContextMenuItem");
-exports.ContextMenuItem = ContextMenuItem_1.default;
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        cursor: "pointer",
         position: "relative",
-        width: "fit-content",
-        margin: theme.spacing * 2
+        width: "fit-content"
     });
 });
 var MenuContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isExpanded = _a.isExpanded;
-    return (__assign({ position: "absolute", top: "100%", left: "0%", boxShadow: theme.shadows.popup, width: "fit-content" }, isExpanded ? { display: "block", animation: utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
+    return (__assign({ position: "absolute", top: "calc(100% + " + theme.spacing / 2 + "px)", left: -theme.spacing, boxShadow: theme.shadows.popup, width: "fit-content" }, isExpanded ? { display: "block", animation: utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
 });
 var ContextMenu = /** @class */ (function (_super) {
     __extends(ContextMenu, _super);
@@ -65,7 +64,7 @@ var ContextMenu = /** @class */ (function (_super) {
             if (child.type === ContextMenuItem_1.default) {
                 var onClick_1 = child.props.onClick;
                 menuItems.push(React.cloneElement(child, {
-                    key: index,
+                    key: "contextmenu-" + index,
                     onClick: onClick_1 &&
                         (function () {
                             if (!_this.props.keepOpenOnItemClick) {
@@ -95,7 +94,7 @@ var ContextMenu = /** @class */ (function (_super) {
                 _this.containerNode = node;
             }, key: this.props.id, css: this.props.css, className: this.props.className }, hoverProps),
             children,
-            React.createElement(MenuContainer, { innerRef: function (node) {
+            React.createElement(MenuContainer, { css: this.props.menuCss, innerRef: function (node) {
                     _this.menuContainerNode = node;
                 }, isExpanded: this.state.isOpen || this.state.isHovered }, menuItems)));
     };

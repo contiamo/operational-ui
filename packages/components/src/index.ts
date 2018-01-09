@@ -1,6 +1,9 @@
 // Simple imports n' exports for consumers of the library.
 
 import { Theme, operational as operationalTheme } from "@operational/theme"
+
+import Breadcrumb from "./Breadcrumb"
+import Breadcrumbs from "./Breadcrumbs"
 import Button from "./Button"
 import ButtonGroup from "./ButtonGroup"
 import Breakdown from "./Breakdown"
@@ -40,6 +43,8 @@ import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./Ty
 import Upload from "./Upload"
 
 export {
+  Breadcrumb,
+  Breadcrumbs,
   Button,
   ButtonGroup,
   Breakdown,

@@ -1,4 +1,6 @@
 import { Theme, operational as operationalTheme } from "@operational/theme";
+import Breadcrumb from "./Breadcrumb";
+import Breadcrumbs from "./Breadcrumbs";
 import Button from "./Button";
 import ButtonGroup from "./ButtonGroup";
 import Breakdown from "./Breakdown";
@@ -36,4 +38,4 @@ import Timeline from "./Timeline";
 import TimelineItem from "./TimelineItem";
 import { TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "./Typography";
 import Upload from "./Upload";
-export { Button, ButtonGroup, Breakdown, Card, CardHeader, Chip, ColorPicker, ContextMenu, ContextMenuItem, Grid, DatePicker, Fieldset, Header, HeaderItem, HeaderSeparator, HeaderTitle, Icon, ReactFeatherIconName, InfoTile, Input, Modal, OperationalUI, Paginator, Progress, Select, Sidenav, SidenavHeader, SidenavItem, Sidebar, SidebarItem, SidebarLink, Spinner, Switch, Tabs, Tab, Timeline, TimelineItem, Tooltip, TitleType, Heading1Type, Heading2Type, BodyType, SmallType, Theme, Upload, operationalTheme };
+export { Breadcrumb, Breadcrumbs, Button, ButtonGroup, Breakdown, Card, CardHeader, Chip, ColorPicker, ContextMenu, ContextMenuItem, Grid, DatePicker, Fieldset, Header, HeaderItem, HeaderSeparator, HeaderTitle, Icon, ReactFeatherIconName, InfoTile, Input, Modal, OperationalUI, Paginator, Progress, Select, Sidenav, SidenavHeader, SidenavItem, Sidebar, SidebarItem, SidebarLink, Spinner, Switch, Tabs, Tab, Timeline, TimelineItem, Tooltip, TitleType, Heading1Type, Heading2Type, BodyType, SmallType, Theme, Upload, operationalTheme };

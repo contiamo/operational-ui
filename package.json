@@ -16,7 +16,7 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "prettier": "lerna run prettier",
-    "precommit": "lerna run precommit",
+    "precommit": "lerna run precommit && git add .",
     "package": "lerna run package",
     "publish": "lerna publish",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",

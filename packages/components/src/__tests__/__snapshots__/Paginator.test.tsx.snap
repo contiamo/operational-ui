@@ -13,26 +13,21 @@ exports[`Paginator Component Should initialize properly 1`] = `
       tabindex="-1"
     >
       <svg
+        fill="none"
         height="11"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
         viewbox="0 0 24 24"
         width="11"
         xmlns="http://www.w3.org/2000/svg"
       >
         <polyline
-          fill="none"
           points="11 17 6 12 11 7"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
         />
         <polyline
-          fill="none"
           points="18 17 13 12 18 7"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
         />
       </svg>
     </div>
@@ -119,26 +114,21 @@ exports[`Paginator Component Should initialize properly 1`] = `
       tabindex="-1"
     >
       <svg
+        fill="none"
         height="11"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
         viewbox="0 0 24 24"
         width="11"
         xmlns="http://www.w3.org/2000/svg"
       >
         <polyline
-          fill="none"
           points="13 17 18 12 13 7"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
         />
         <polyline
-          fill="none"
           points="6 17 11 12 6 7"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
         />
       </svg>
     </div>

@@ -3,6 +3,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var theme_1 = require("@operational/theme");
 exports.operationalTheme = theme_1.operational;
+var Breadcrumb_1 = require("./Breadcrumb");
+exports.Breadcrumb = Breadcrumb_1.default;
+var Breadcrumbs_1 = require("./Breadcrumbs");
+exports.Breadcrumbs = Breadcrumbs_1.default;
 var Button_1 = require("./Button");
 exports.Button = Button_1.default;
 var ButtonGroup_1 = require("./ButtonGroup");

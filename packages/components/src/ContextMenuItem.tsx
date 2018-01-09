@@ -31,7 +31,7 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
   }
 }))
 
-const ContextMenuItem = (props: IProps) => (
+export default (props: IProps) => (
   <Container
     key={props.id}
     css={props.css}
@@ -42,5 +42,3 @@ const ContextMenuItem = (props: IProps) => (
     {props.children}
   </Container>
 )
-
-export default ContextMenuItem

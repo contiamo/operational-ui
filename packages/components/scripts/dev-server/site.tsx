@@ -2,26 +2,25 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, Sidenav, SidenavHeader, SidenavItem, operationalTheme } from "../../src/index"
+import { OperationalUI, Header, HeaderTitle, HeaderSeparator, Breadcrumbs, Breadcrumb, operationalTheme, ContextMenu, ContextMenuItem } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI>
-        <Sidenav expanded expandOnHover>
-          <SidenavHeader label="Components" icon="Box">
-            <SidenavItem label="Buttons" />
-            <SidenavItem label="Chips" />
-            <SidenavItem label="Form Fields" />
-            <SidenavItem label="Buttons" />
-          </SidenavHeader>
-          <SidenavHeader label="Blocks" icon="Grid" />
-          <SidenavHeader label="Visualizations" expanded icon="BarChart2">
-            <SidenavItem label="Process Flow" active />
-            <SidenavItem label="Process Flow" active />
-          </SidenavHeader>
-          <SidenavHeader label="Documentation" icon="Edit" />
-        </Sidenav>
+        <div>
+          <Header>
+            <Breadcrumbs>
+              <ContextMenu css={{display: "inline-block", margin: 0}}>
+                <Breadcrumb icon="ChevronDown">Hello</Breadcrumb>
+                <ContextMenuItem>Item 1</ContextMenuItem>
+                <ContextMenuItem>Item 2</ContextMenuItem>
+                <ContextMenuItem>Item 3</ContextMenuItem>
+              </ContextMenu>
+              <Breadcrumb>Good Bye</Breadcrumb>
+            </Breadcrumbs>
+          </Header>
+        </div>
       </OperationalUI>
     )
   }

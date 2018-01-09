@@ -77,7 +77,7 @@ export default ({ pathname, pathmap }) => {
           >
             {routeMatch
               ? items.map((item, index) => (
-                  <Link prefetch retch href={item.url} key={index}>
+                  <Link prefetch href={item.url} key={index}>
                     <a>
                       <SidenavItem label={item.label} key={index} active={item.url === pathname} />
                     </a>
