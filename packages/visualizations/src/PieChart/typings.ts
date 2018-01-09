@@ -61,3 +61,8 @@ export interface IComputedState {
   focus: IObject
   series: IObject
 }
+
+export interface IMousePosition {
+  absolute: { x: number; y: number }
+  relative: { x: number; y: number }
+}

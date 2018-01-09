@@ -1,15 +1,10 @@
 import AbstractDrawingCanvas from "../utils/drawing_canvas"
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { TD3Selection, IConfig, IState, TStateWriter, IEvents, IObject } from "./typings"
-
-interface IMousePosition {
-  absolute: { x: number; y: number }
-  relative: { x: number; y: number }
-}
+import { TD3Selection, IConfig, IState, TStateWriter, IEvents, IObject, IMousePosition } from "./typings"
 
 class Canvas extends AbstractDrawingCanvas {
-  private mousePosition: IMousePosition
+  mousePosition: IMousePosition
 
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
     super(state, stateWriter, events, context)
