@@ -30,7 +30,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
   position: "absolute",
   top: `calc(100% + ${theme.spacing / 2}px)`,
-  left: - theme.spacing,
+  left: -theme.spacing,
   boxShadow: theme.shadows.popup,
   width: "fit-content",
   ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }

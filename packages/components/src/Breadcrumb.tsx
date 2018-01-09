@@ -23,7 +23,7 @@ const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({
 }))
 
 export default (props: IProps) => {
-  const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as ReactFeatherIconName) : "ChevronDown" 
+  const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as ReactFeatherIconName) : "ChevronDown"
   return (
     <Container className={props.className} css={props.css}>
       <Content>{props.children}</Content>
