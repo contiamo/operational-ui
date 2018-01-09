@@ -6,5 +6,5 @@ export interface IProps {
     children?: any;
     onClick?: () => void;
 }
-declare const ContextMenuItem: (props: IProps) => JSX.Element;
-export default ContextMenuItem;
+declare const _default: (props: IProps) => JSX.Element;
+export default _default;

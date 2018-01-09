@@ -24,6 +24,5 @@ var Container = glamorous_1.default.div(function (_a) {
             borderTop: 0
         } }));
 });
-var ContextMenuItem = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, clickable: !!props.onClick, onClick: props.onClick }, props.children)); };
-exports.default = ContextMenuItem;
+exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, clickable: !!props.onClick, onClick: props.onClick }, props.children)); };
 //# sourceMappingURL=ContextMenuItem.js.map

@@ -25,13 +25,14 @@ var ContextMenuItem_1 = require("./ContextMenuItem");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        cursor: "pointer",
         position: "relative",
         width: "fit-content"
     });
 });
 var MenuContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isExpanded = _a.isExpanded;
-    return (__assign({ position: "absolute", top: "100%", left: "0%", boxShadow: theme.shadows.popup, width: "fit-content" }, isExpanded ? { display: "block", animation: utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
+    return (__assign({ position: "absolute", top: "calc(100% + " + theme.spacing / 2 + "px)", left: -theme.spacing, boxShadow: theme.shadows.popup, width: "fit-content" }, isExpanded ? { display: "block", animation: utils_1.fadeIn + " ease-in-out forwards 0.2s" } : { display: "none" }));
 });
 var ContextMenu = /** @class */ (function (_super) {
     __extends(ContextMenu, _super);
