@@ -36,7 +36,7 @@ var InputField = glamorous_1.default.input(function (_a) {
     });
 });
 var Input = function (props) {
-    return (React.createElement(InputField, { key: props.id, css: props.css, innerRef: props.inputRef, className: props.className, id: props.domId, name: props.name, disabled: props.disabled, placeholder: props.placeholder, value: props.value, onFocus: props.onFocus, onBlur: props.onBlur, onChange: function (e) {
+    return (React.createElement(InputField, { key: props.id, css: props.css, innerRef: props.inputRef, className: props.className, id: props.domId, name: props.name, disabled: props.disabled, placeholder: props.placeholder, value: props.value, type: props.type, onFocus: props.onFocus, onBlur: props.onBlur, onChange: function (e) {
             props.onChange && props.onChange(e.target.value);
         } }));
 };

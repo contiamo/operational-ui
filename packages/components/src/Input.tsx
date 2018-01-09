@@ -19,6 +19,7 @@ export interface IProps {
   disabled?: boolean
   onFocus?: (ev: any) => void
   onBlur?: (ev: any) => void
+  type?: string
   children?: string
 }
 
@@ -58,6 +59,7 @@ const Input = (props: IProps) => {
       disabled={props.disabled}
       placeholder={props.placeholder}
       value={props.value}
+      type={props.type}
       onFocus={props.onFocus}
       onBlur={props.onBlur}
       onChange={(e: any) => {
