@@ -6,21 +6,16 @@ import Link from "next/link"
 
 export default props => {
   const pathnameChunks = props.pathname.split("/").filter(s => s !== "")
-  const breadcrumbs = []
   const chunk1 = pathnameChunks[0]
   const chunk2 = pathnameChunks[1]
-  if (chunk1) {
-    breadcrumbs.push({
-      url: `/${chunk1}`,
-      label: props.pathmap[`/${chunk1}`].query.title
-    })
-  }
-  if (chunk2) {
-    breadcrumbs.push({
-      url: `/${chunk1}/${chunk2}`,
-      label: props.pathmap[`/${chunk1}/${chunk2}`].query.title
-    })
-  }
+  let currentPath = ""
+  const breadcrumbs = pathnameChunks.map((chunk, index) => {
+    currentPath += `/${chunk}`
+    return {
+      url: currentPath,
+      label: props.pathmap[currentPath].query.title
+    }
+  })
   return (
     <Header
       css={{

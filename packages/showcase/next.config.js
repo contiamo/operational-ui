@@ -30,6 +30,7 @@ module.exports = {
     "/blocks/filters": { page: "/blocks/filters", query: { title: "Filters" } },
     "/visualizations": { page: "/visualizations", query: { title: "Visualizations" } },
     "/visualizations/process-flow": { page: "/visualizations/process-flow", query: { title: "Process Flow" } },
+    "/visualizations/process-flow/testcases": { page: "/visualizations/process-flow/testcases", query: { title: "Test Cases" } },
     "/documentation": { page: "/documentation", query: { title: "Documentation" } },
     "/documentation/design-guidelines": { page: "/documentation/design-guidelines", query: { title: "Design Guidelines" } },
     "/documentation/api": { page: "/documentation/api", query: { title: "API Design" } },

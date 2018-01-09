@@ -158,7 +158,7 @@ const accessors = {
   }
 }
 
-const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz = new ProcessFlow(container)
 
   test("Renders viz with looped data", () => {
@@ -175,11 +175,4 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export default props => (
-  <Layout pathname={props.url.pathname}>
-    <Card>
-      <CardHeader>Process Flow Visualization Tests - Looped Data</CardHeader>
-      <Marathon test={marathon} timeout={2e3} />
-    </Card>
-  </Layout>
-)
+export const title = "Looped data"
