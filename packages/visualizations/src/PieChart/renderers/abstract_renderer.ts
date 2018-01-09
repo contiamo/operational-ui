@@ -64,6 +64,7 @@ abstract class AbstractRenderer {
     forEach.convert({ cap: false })((option: any, key: string): void => {
       ;(this as any)[key] = isFunction(option) ? (d?: any) => option(d) : option
     })(options)
+    this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this))
     this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this))
@@ -252,6 +253,11 @@ abstract class AbstractRenderer {
   onMouseOver(d: TDatum): void {
     const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint: { centroid }, d })
+  }
+
+  highlightElement(key: string): void {
+    const d: TDatum = find((datum: TDatum): boolean => dataKey(datum) === key)(this.computed.data)
+    this.onMouseOver(d)
   }
 
   abstract angleRange(): [number, number]

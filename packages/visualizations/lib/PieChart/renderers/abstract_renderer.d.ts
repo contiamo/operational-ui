@@ -27,6 +27,7 @@ declare abstract class AbstractRenderer {
     abstract totalYOffset(): string;
     updateElementHover(datapoint: IObject): void;
     onMouseOver(d: TDatum): void;
+    highlightElement(key: string): void;
     abstract angleRange(): [number, number];
     abstract totalForPercentages(): number;
     checkData(): void;

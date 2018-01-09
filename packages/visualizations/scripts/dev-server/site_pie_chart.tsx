@@ -55,4 +55,5 @@ const data: any = {
 
 const viz: PieChart = new PieChart(containerNode)
 viz.data(data)
+viz.config({ focusElement: "Berlin" })
 viz.draw()

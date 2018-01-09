@@ -47,6 +47,7 @@ var AbstractRenderer = /** @class */ (function () {
             ;
             _this[key] = fp_1.isFunction(option) ? function (d) { return option(d); } : option;
         })(options);
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this));
         this.events.on(event_catalog_1.default.CHART.OUT, this.updateElementHover.bind(this));
@@ -198,6 +199,10 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.onMouseOver = function (d) {
         var centroid = this.translateBack(this.computed.arc.centroid(d));
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { focusPoint: { centroid: centroid }, d: d });
+    };
+    AbstractRenderer.prototype.highlightElement = function (key) {
+        var d = fp_1.find(function (datum) { return dataKey(datum) === key; })(this.computed.data);
+        this.onMouseOver(d);
     };
     AbstractRenderer.prototype.checkData = function () {
         return;
