@@ -23,7 +23,7 @@ const simpleSnippet = `
 
 const snippetWithContextMenu = `
 <Breadcrumbs>
-  <ContextMenu css={{display: "inline-block", margin: 0}} menuCss={{ top: "calc(100% + 6px)"}}>
+  <ContextMenu css={{display: "inline-block", margin: 0}}>
     <Breadcrumb icon="ChevronDown">Hello</Breadcrumb>
     <ContextMenuItem>Item 1</ContextMenuItem>
     <ContextMenuItem>Item 2</ContextMenuItem>

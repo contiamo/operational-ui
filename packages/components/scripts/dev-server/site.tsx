@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { Header, HeaderTitle, HeaderSeparator, Breadcrumbs, Breadcrumb, operationalTheme, ContextMenu, ContextMenuItem } from "../../src/index"
+import { OperationalUI, Header, HeaderTitle, HeaderSeparator, Breadcrumbs, Breadcrumb, operationalTheme, ContextMenu, ContextMenuItem } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {
