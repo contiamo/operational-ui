@@ -80,7 +80,7 @@ We look forward to your contribution, and we would like to assure you that we va
         <img width="150" height="150" src="https://github.com/peterszerzo.png?s=150">
         <br>
         <a href="https://github.com/peterszerzo">Peter Szerzo</a>
-        <p>General Codebase<br/>Handyperson</p>
+        <p>Codebase Handyperson 🔥</p>
       </td>
       <td align="center" width="20%" valign="top">
         <img width="150" height="150" src="https://github.com/ImogenF.png?s=150">
@@ -98,12 +98,6 @@ We look forward to your contribution, and we would like to assure you that we va
         <img width="150" height="150" src="https://github.com/micha-f.png?s=150">
         <br>
         <a href="https://github.com/micha-f">Michael Franzkowiak</a>
-        <p>Contributor</p>
-      </td>
-      <td align="center" valign="top">
-        <img width="150" height="150" src="https://github.com/Angarsk8.png?s=150">
-        <br>
-        <a href="https://github.com/Angarsk8">Andrés García</a>
         <p>Contributor</p>
       </td>
      </tr>
