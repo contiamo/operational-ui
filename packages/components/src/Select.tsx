@@ -155,13 +155,13 @@ class Select extends React.Component<IProps, IState> {
   }
 
   render() {
+    // `css` and `className` props are not set, as they are set on the wrapped label container.
+    // See ./src/utils/with-label.tsx.
     return (
       <Container
         id={this.props.domId}
         key={this.props.id}
         innerRef={containerNode => (this.containerNode = containerNode)}
-        css={this.props.css}
-        className={this.props.className}
         updating={this.state.updating}
         color={this.props.color}
         disabled={this.props.disabled}

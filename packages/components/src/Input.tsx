@@ -32,6 +32,7 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
 }))
 
 const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }) => ({
+  width: "100%",
   minWidth: 200,
   padding: theme.spacing * 2 / 3,
   border: "1px solid",
@@ -48,12 +49,12 @@ const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disable
 }))
 
 const Input = (props: IProps) => {
+  // `css` and `className` props are not set, as they are set on the wrapped label container.
+  // See ./src/utils/with-label.tsx.
   return (
     <InputField
       key={props.id}
-      css={props.css}
       innerRef={props.inputRef}
-      className={props.className}
       id={props.domId}
       name={props.name}
       disabled={props.disabled}

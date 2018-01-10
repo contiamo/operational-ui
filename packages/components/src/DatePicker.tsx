@@ -95,13 +95,14 @@ class DatePicker extends React.Component<IProps, IState> {
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
     const placeholderDays = monthStartDay(this.state.year, this.state.month)
     const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
+    // `css` and `className` props are not set, as they are set on the wrapped label container.
+    // See ./src/utils/with-label.tsx.
     return (
       <Container
         innerRef={node => {
           this.containerNode = node
         }}
         key={this.props.id}
-        css={this.props.css}
         isExpanded={this.state.isExpanded}
       >
         <Toggle

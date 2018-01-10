@@ -2,14 +2,16 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block"
 }))
 
-const Label = glamorous.label(({ theme }: { theme: Theme }): any => ({
+const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
+  textTransform: "uppercase",
+  opacity: 0.8,
   display: "inline-block",
-  marginBottom: theme.spacing / 3
+  marginBottom: theme.spacing / 4
 }))
 
 const withLabel = (Component: any): any => {
@@ -17,7 +19,7 @@ const withLabel = (Component: any): any => {
     const { id, label } = props
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
     return (
-      <Container>
+      <Container className={props.className} css={props.css}>
         {props.label && <Label htmlFor={domId}>{props.label}</Label>}
         {props.label && <br />}
         <Component {...props} domId={domId} />
