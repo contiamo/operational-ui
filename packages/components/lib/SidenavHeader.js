@@ -20,7 +20,10 @@ var Content = glamorous_1.default.div(function (_a) {
         flex: "0 0 " + size + "px",
         color: isActive ? theme.colors.linkText : theme.colors.white,
         borderBottom: isExpanded ? "1px solid #515151" : "none",
-        backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)"
+        backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
+        ":hover": {
+            backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)"
+        }
     });
 });
 var Label = glamorous_1.default.div({

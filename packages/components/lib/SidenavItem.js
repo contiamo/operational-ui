@@ -12,7 +12,10 @@ var Container = glamorous_1.default.div({
     padding: "0 16px 0 60px",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
-    backgroundColor: "rgba(0, 0, 0, 0.2)"
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    "&:hover": {
+        backgroundColor: "rgba(0, 0, 0, 0.25)"
+    }
 }, function (_a) {
     var theme = _a.theme, isActive = _a.isActive;
     return ({

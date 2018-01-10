@@ -22,7 +22,10 @@ const Container = glamorous.div(
     padding: "0 16px 0 60px",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
-    backgroundColor: "rgba(0, 0, 0, 0.2)"
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.25)"
+    }
   },
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
     color: isActive ? theme.colors.linkText : theme.colors.white
