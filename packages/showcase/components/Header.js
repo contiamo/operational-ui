@@ -8,8 +8,11 @@ export default props => {
   const pathnameChunks = props.pathname.split("/").filter(s => s !== "")
   const chunk1 = pathnameChunks[0]
   const chunk2 = pathnameChunks[1]
+  // Maintain a built-up version of the current breadcrumbs path so the links can point to
+  // e.g. /components, then /components/buttons, then /components/buttons/sublink
   let currentPath = ""
   const breadcrumbs = pathnameChunks.map((chunk, index) => {
+    // Add to this path in when creating the data for each breadcrumb link.
     currentPath += `/${chunk}`
     return {
       url: currentPath,
