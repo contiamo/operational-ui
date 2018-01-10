@@ -23,6 +23,7 @@ const railOffset: number = 4
 const Container = glamorous.div({
   width,
   height,
+  label: "switch",
   position: "relative",
   cursor: "pointer"
 })

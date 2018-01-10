@@ -12,6 +12,7 @@ export interface IProps {
 }
 
 const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
+  label: "breadcrumb",
   color: theme.colors.linkText,
   "& svg": {
     marginLeft: 4

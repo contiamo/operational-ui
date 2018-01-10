@@ -8,6 +8,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var backgroundColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
     return {
         backgroundColor: backgroundColor,
+        label: "chip",
         position: "relative",
         display: "flex",
         alignItems: "center",

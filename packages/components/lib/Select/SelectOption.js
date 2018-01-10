@@ -9,6 +9,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var backgroundColor = color && theme.colors ? utils_1.hexOrColor(color)(theme.colors[color]) : "white";
     return {
         backgroundColor: backgroundColor,
+        label: "selectoption",
         position: "relative",
         padding: theme.spacing / 2,
         wordWrap: "break-word",

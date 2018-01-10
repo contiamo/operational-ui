@@ -35,6 +35,7 @@ const style = ({ theme, children }: { theme: Theme; children?: Node }): {} => {
     : {}
 
   return {
+    label: "sidebaritem",
     position: "relative",
     color: theme.colors.emphasizedText,
 

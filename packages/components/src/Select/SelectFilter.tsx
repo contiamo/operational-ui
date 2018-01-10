@@ -17,6 +17,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : "white"
 
   return {
+    label: "selectfilter",
     padding: 0,
     borderBottom: "1px solid",
     borderColor: darken(backgroundColor)(10),

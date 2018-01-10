@@ -7,6 +7,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var opacity = 0.1;
     var activeBackground = "rgba(0, 0, 0, " + opacity * 2 + ")";
     return {
+        label: "headeritem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

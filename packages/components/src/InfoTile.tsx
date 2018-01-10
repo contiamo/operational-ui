@@ -20,6 +20,7 @@ export interface IProps {
 
 const Container = glamorous.div(
   {
+    label: "infotile",
     "&:not(:first-child)": {
       borderLeftWidth: 1,
       borderLeftStyle: "solid"

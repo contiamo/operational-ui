@@ -15,6 +15,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "modal",
         position: "fixed",
         top: 0,
         left: 0,

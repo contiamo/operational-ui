@@ -21,6 +21,7 @@ export interface IProps {
 const size: number = 60
 
 const Container = glamorous.div({
+  label: "sidenavheader",
   width: "100%"
 })
 

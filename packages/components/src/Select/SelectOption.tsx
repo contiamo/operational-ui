@@ -25,6 +25,7 @@ const Container = glamorous.div(
 
     return {
       backgroundColor,
+      label: "selectoption",
       position: "relative",
       padding: theme.spacing / 2,
       wordWrap: "break-word",

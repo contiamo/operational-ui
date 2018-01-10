@@ -17,7 +17,7 @@ export interface IPropsWithTheme extends IProps {
 }
 
 const Container = glamorous.div({
-  /* Add any styles to the container */
+  label: "tabs"
 })
 
 const Content = glamorous.div({

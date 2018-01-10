@@ -13,6 +13,7 @@ export interface IProps {
 
 const Container = glamorous.div(
   {
+    label: "sidenavitem",
     height: 45,
     position: "relative",
     width: "100%",

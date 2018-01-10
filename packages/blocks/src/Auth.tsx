@@ -20,6 +20,7 @@ export interface IProps {
 export interface IState {}
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  label: "auth",
   backgroundColor: theme.colors.sidenavBackground,
   width: "100%",
   height: "100%",

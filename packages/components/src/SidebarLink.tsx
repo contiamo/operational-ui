@@ -24,6 +24,7 @@ const style = ({ theme, color, disabled, active }: IProps): {} => {
 
   return {
     backgroundColor,
+    label: "sidebarlink",
     ...theme.typography.body,
     fontWeight: active ? 600 : 400,
     position: "relative",

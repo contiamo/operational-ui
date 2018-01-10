@@ -26,6 +26,7 @@ var Container = glamorous_1.default.div(function (_a) {
         : {};
     return {
         backgroundColor: backgroundColor,
+        label: "select",
         position: "relative",
         display: "flex",
         alignItems: "center",

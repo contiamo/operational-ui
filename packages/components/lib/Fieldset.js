@@ -13,6 +13,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.fieldset(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "fieldset",
         verticalAlign: "top",
         padding: 0,
         border: 0,

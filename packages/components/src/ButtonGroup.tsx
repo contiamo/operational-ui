@@ -10,6 +10,7 @@ export interface Props {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
+  label: "buttongroup",
   "& > div": {
     margin: 0
   },

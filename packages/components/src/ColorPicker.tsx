@@ -24,7 +24,9 @@ export interface IState {
 
 const hasTheme = (theme: any): boolean => theme && Object.keys(theme).length > 0
 
-const Container = glamorous.div({})
+const Container = glamorous.div({
+  label: "colorpicker"
+})
 
 const ColorSquare = glamorous.div(
   {

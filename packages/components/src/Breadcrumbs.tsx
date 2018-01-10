@@ -9,6 +9,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div({
+  label: "breadcrumbs",
   "& a": {
     textDecoration: "none",
     color: "inherit"

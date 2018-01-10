@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 
 export interface IProps {
   id?: string | number
-  css?: any
+  css?: {}
   color?: string
   onClick?: () => void
   className?: string
@@ -13,29 +13,28 @@ export interface IProps {
   symbol?: string
 }
 
-const Container = glamorous.div(
-  ({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): any => {
-    const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
+const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): {} => {
+  const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
 
-    return {
-      backgroundColor,
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      width: "fit-content",
-      borderRadius: 2,
-      padding: hasChip
-        ? `${theme.spacing / 3}px ${2.5 * theme.spacing}px ${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`
-        : `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
-      cursor: "pointer",
-      overflow: "hidden",
-      color: readableTextColor(backgroundColor)(["black", "white"]),
-      margin: `${theme.spacing / 4}px ${theme.spacing / 4}px 0px 0px`
-    }
+  return {
+    backgroundColor,
+    label: "chip",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    width: "fit-content",
+    borderRadius: 2,
+    padding: hasChip
+      ? `${theme.spacing / 3}px ${2.5 * theme.spacing}px ${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`
+      : `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
+    cursor: "pointer",
+    overflow: "hidden",
+    color: readableTextColor(backgroundColor)(["black", "white"]),
+    margin: `${theme.spacing / 4}px ${theme.spacing / 4}px 0px 0px`
   }
-)
+})
 
-const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): any => {
+const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
   const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
   return {
     backgroundColor: "rgba(255, 255, 255, 0.1)",

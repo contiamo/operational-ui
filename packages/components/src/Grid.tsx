@@ -16,6 +16,7 @@ export interface IProps {
 
 const Container = glamorous.div(
   {
+    label: "grid",
     display: "grid"
   },
   // Dynamic/theme-dependent styles

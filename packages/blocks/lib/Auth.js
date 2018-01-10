@@ -16,6 +16,7 @@ var components_1 = require("@operational/components");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "auth",
         backgroundColor: theme.colors.sidenavBackground,
         width: "100%",
         height: "100%",

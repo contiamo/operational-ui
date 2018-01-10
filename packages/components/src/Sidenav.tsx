@@ -36,7 +36,7 @@ const Container = glamorous.div(
     expandedWidth: number
     expanded?: boolean
     width: number
-  }): any => {
+  }): {} => {
     const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.sidenavBackground
     const hoverWidth = expandOnHover
       ? {
@@ -50,6 +50,7 @@ const Container = glamorous.div(
 
     return {
       backgroundColor,
+      label: "sidenav",
       width: expanded ? expandedWidth : width,
       zIndex: theme.baseZIndex + 100,
       display: "flex",

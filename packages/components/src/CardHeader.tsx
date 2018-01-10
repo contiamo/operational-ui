@@ -11,6 +11,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  label: "cardheader",
   display: "flex",
   alignItems: "center",
   height: 36,

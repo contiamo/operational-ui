@@ -32,6 +32,7 @@ const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
 }))
 
 const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }) => ({
+  label: "inputfield",
   width: "100%",
   minWidth: 200,
   padding: theme.spacing * 2 / 3,

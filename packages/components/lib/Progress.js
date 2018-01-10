@@ -7,6 +7,7 @@ var width = 120;
 var height = 45;
 var padding = 15;
 var Container = glamorous_1.default.div({
+    label: "progress",
     width: "100%",
     height: "100%",
     top: 0,

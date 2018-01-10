@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div({
+    label: "sidenavitem",
     height: 45,
     position: "relative",
     width: "100%",

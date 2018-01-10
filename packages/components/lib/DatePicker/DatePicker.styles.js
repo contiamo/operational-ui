@@ -13,6 +13,7 @@ var inputHeight = 31;
 var Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
+        label: "datepicker",
         display: "inline-block",
         width: "auto",
         position: "relative",

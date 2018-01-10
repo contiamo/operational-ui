@@ -16,7 +16,7 @@ var style = function (_a) {
     var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors && theme.colors[color]) : "#fff";
     var textColor = active ? theme.colors.linkText : utils_1.readableTextColor(backgroundColor)([theme.colors.gray80, "white"]);
     var disabledStyle = disabled ? { opacity: 0.25 } : { opacity: 1 };
-    return __assign({ backgroundColor: backgroundColor }, theme.typography.body, { fontWeight: active ? 600 : 400, position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
+    return __assign({ backgroundColor: backgroundColor, label: "sidebarlink" }, theme.typography.body, { fontWeight: active ? 600 : 400, position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", 
         // react-router <Link /> wraps an <a> which can be underlined by default so
         textDecoration: "none", color: textColor }, disabledStyle, { "&:link, &:visited": {
             color: textColor

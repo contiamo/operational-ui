@@ -7,6 +7,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color]) : "white";
     return {
+        label: "selectfilter",
         padding: 0,
         borderBottom: "1px solid",
         borderColor: utils_1.darken(backgroundColor)(10),

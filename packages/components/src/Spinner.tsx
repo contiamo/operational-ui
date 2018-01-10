@@ -37,6 +37,7 @@ const Container = glamorous.div(
     const spinnerColor: string = hexOrColor(color)(theme.colors[color] || "white") as string
 
     return {
+      label: "spinner",
       fontSize: "10px",
       margin: "auto",
       top: 50,

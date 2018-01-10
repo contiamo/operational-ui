@@ -12,6 +12,7 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div({
+    label: "breakdown",
     display: "flex",
     alignItems: "center",
     position: "relative",

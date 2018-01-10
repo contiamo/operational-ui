@@ -5,6 +5,7 @@ var glamorous_1 = require("glamorous");
 var Icon_1 = require("./Icon");
 var size = 60;
 var Container = glamorous_1.default.div({
+    label: "sidenavheader",
     width: "100%"
 });
 var Content = glamorous_1.default.div(function (_a) {

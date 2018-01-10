@@ -13,6 +13,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div({
+    label: "infotile",
     "&:not(:first-child)": {
         borderLeftWidth: 1,
         borderLeftStyle: "solid"

@@ -25,6 +25,7 @@ var ContextMenuItem_1 = require("./ContextMenuItem");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "contextmenu",
         cursor: "pointer",
         position: "relative",
         width: "fit-content"

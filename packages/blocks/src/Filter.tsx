@@ -12,7 +12,9 @@ export interface IState {
   isExpanded: boolean
 }
 
-const Container = glamorous.div({})
+const Container = glamorous.div({
+  label: "filter"
+})
 
 const FilterBar = glamorous.div({
   "& > div": {

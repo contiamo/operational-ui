@@ -23,6 +23,7 @@ export interface IProps {
 
 const Container = glamorous.div(
   {
+    label: "breakdown",
     display: "flex",
     alignItems: "center",
     position: "relative",

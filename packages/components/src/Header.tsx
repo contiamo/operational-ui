@@ -17,6 +17,7 @@ const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: st
 
   return {
     backgroundColor,
+    label: "header",
     display: "flex",
     flex: "0 0 60px",
     height: 60,

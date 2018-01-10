@@ -7,6 +7,7 @@ const inputHeight: number = 31
 
 const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div(
   ({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
+    label: "datepicker",
     display: "inline-block",
     width: "auto",
     position: "relative",
