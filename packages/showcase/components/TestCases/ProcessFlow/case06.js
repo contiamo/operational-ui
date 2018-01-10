@@ -184,7 +184,7 @@ const data = {
   ]
 }
 
-const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz: ProcessFlow = new ProcessFlow(container)
 
   test("Renders a process flow", () => {
@@ -203,11 +203,4 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export default props => (
-  <Layout pathname={props.url.pathname}>
-    <Card>
-      <CardHeader>Process Flow Visualization Tests - Undefined Config Options</CardHeader>
-      <Marathon test={marathon} timeout={2e3} />
-    </Card>
-  </Layout>
-)
+export const title = "Undefined Config Options"

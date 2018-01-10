@@ -8,7 +8,7 @@ const data = {
   nodes: [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }, { id: "5" }, { id: "6" }]
 }
 
-const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz = new ProcessFlow(container)
 
   test("Renders a process flow viz", () => {
@@ -45,11 +45,4 @@ const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export default props => (
-  <Layout pathname={props.url.pathname}>
-    <Card>
-      <CardHeader>Process Flow Visualization Tests - Resizing</CardHeader>
-      <Marathon test={marathon} timeout={2e3} />
-    </Card>
-  </Layout>
-)
+export const title = "Resizing"

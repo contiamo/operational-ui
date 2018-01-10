@@ -45,7 +45,7 @@ export default ({ pathname, pathmap }) => {
       {mainPaths.map((url, index) => {
         const label = pathmap[url].query.title
         const items = Object.keys(pathmap)
-          .filter(s => !!s.match(new RegExp("^" + url)) && s !== url)
+          .filter(s => !!s.match(new RegExp("^" + url)) && s !== url && s.split("/").length < 4)
           .map(url => ({
             url,
             label: pathmap[url].query.title

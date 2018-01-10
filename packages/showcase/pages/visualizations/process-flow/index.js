@@ -1,4 +1,5 @@
 import * as React from "react"
+import Link from "next/link"
 import { Card, CardHeader, Heading2Type } from "@operational/components"
 import { ProcessFlow, VisualizationWrapper } from "@operational/visualizations"
 
@@ -372,7 +373,15 @@ export default props => (
       </p>
 
       <Heading2Type>Usage</Heading2Type>
+      <p>Here is a simple usage scenario for the process flow</p>
       <Playground snippet={simpleSnippet} scope={{ ProcessFlow }} components={{ VisualizationWrapper }} />
+
+      <p>
+        For more complicated use-cases, check out our collection of{" "}
+        <Link href="/visualizations/process-flow/testcases">
+          <a>visual test cases</a>
+        </Link>.
+      </p>
 
       <Heading2Type>Data</Heading2Type>
       <p>

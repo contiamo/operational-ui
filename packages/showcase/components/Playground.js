@@ -10,6 +10,7 @@ const customGrey: string = "#dadada"
 
 const Container = glamorous.div(({ theme, isExpanded }) => ({
   border: `2px solid ${customGrey}`,
+  margin: `${theme.spacing}px 0`,
 
   ...isExpanded
     ? {
