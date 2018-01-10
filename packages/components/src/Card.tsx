@@ -14,6 +14,7 @@ export interface IProps {
 
 const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; width?: number; padding?: number }) => ({
   width,
+  label: "card",
   padding: padding || theme.spacing,
   boxShadow: theme.shadows.card,
   backgroundColor: theme.colors.cardBackground,

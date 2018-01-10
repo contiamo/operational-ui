@@ -67,6 +67,7 @@ var Content = glamorous_1.default.div({
     return (__assign({}, theme.typography.body));
 });
 var Container = glamorous_1.default.li({
+    label: "timelineitem",
     listStyle: "none",
     margin: 0,
     padding: "0 0 24px",

@@ -9,6 +9,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  label: "headerseparator",
   width: 5,
   height: 5,
   margin: `0 ${theme.spacing}px`,

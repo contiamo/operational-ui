@@ -14,7 +14,9 @@ var React = require("react");
 var react_color_1 = require("react-color");
 var glamorous_1 = require("glamorous");
 var hasTheme = function (theme) { return theme && Object.keys(theme).length > 0; };
-var Container = glamorous_1.default.div({});
+var Container = glamorous_1.default.div({
+    label: "colorpicker"
+});
 var ColorSquare = glamorous_1.default.div({
     border: "3px solid white",
     borderRadius: 2,

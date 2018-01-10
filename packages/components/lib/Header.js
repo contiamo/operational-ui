@@ -9,6 +9,7 @@ var Container = glamorous_1.default.header(function (_a) {
     var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color] || white) : white;
     return {
         backgroundColor: backgroundColor,
+        label: "header",
         display: "flex",
         flex: "0 0 60px",
         height: 60,

@@ -1,3 +1,4 @@
+import * as React from "react"
 import glamorous from "glamorous"
 import { Card, Icon, Heading2Type } from "@operational/components"
 import { fetchFromRepo } from "../utils"
@@ -8,6 +9,7 @@ import { Operational } from "../components/Icons"
 import Demo from "../components/Demo"
 
 const TitleBar = glamorous.div(({ theme }) => ({
+  label: "showcasetitlebar",
   padding: `${theme.spacing * 1}px 0`,
   color: "#000",
   position: "relative",
@@ -33,6 +35,7 @@ const TitleBar = glamorous.div(({ theme }) => ({
 }))
 
 const TitleBarContent = glamorous.div({
+  label: "showcasetitlebarcontent",
   textAlign: "center",
   position: "relative",
   zIndex: 1000,

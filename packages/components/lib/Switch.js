@@ -9,6 +9,7 @@ var railOffset = 4;
 var Container = glamorous_1.default.div({
     width: width,
     height: height,
+    label: "switch",
     position: "relative",
     cursor: "pointer"
 });

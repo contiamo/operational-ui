@@ -13,7 +13,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var components_1 = require("@operational/components");
-var Container = glamorous_1.default.div({});
+var Container = glamorous_1.default.div({
+    label: "filter"
+});
 var FilterBar = glamorous_1.default.div({
     "& > div": {
         display: "inline-flex"

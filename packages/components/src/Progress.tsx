@@ -15,6 +15,7 @@ const padding: number = 15
 
 const Container = glamorous.div(
   {
+    label: "progress",
     width: "100%",
     height: "100%",
     top: 0,

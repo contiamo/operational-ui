@@ -5,6 +5,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "headerseparator",
         width: 5,
         height: 5,
         margin: "0 " + theme.spacing + "px",

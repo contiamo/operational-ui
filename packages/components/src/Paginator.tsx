@@ -135,6 +135,7 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
 }
 
 const Container = glamorous.div({
+  label: "paginator",
   "& [role=button]": {
     display: "flex",
     alignItems: "center",

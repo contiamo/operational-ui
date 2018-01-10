@@ -1,9 +1,11 @@
+import * as React from "react"
 import marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 import highlight from "highlight.js"
 
 const Container = glamorous.div(({ theme }) => ({
+  label: "showcasestaticcontent",
   "& h2": {
     ...theme.typography.heading1
   },

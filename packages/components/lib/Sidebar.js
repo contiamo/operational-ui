@@ -9,6 +9,7 @@ exports.SidebarLink = SidebarLink_1.default;
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "sidebar",
         width: "100%",
         maxWidth: 280,
         maxHeight: "100%",

@@ -1,6 +1,8 @@
+import * as React from "react"
 import glamorous from "glamorous"
 
 const Table = glamorous.table(({ theme }) => ({
+  label: "showcasetable",
   border: 0,
   borderCollapse: "collapse",
   textAlign: "left",

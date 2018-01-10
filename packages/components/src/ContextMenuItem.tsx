@@ -12,6 +12,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable: boolean }): any => ({
+  label: "contextmenuitem",
   backgroundColor: theme.colors.white,
   minWidth: 160,
   width: "fit-content",

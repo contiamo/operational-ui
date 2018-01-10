@@ -13,6 +13,7 @@ export interface IProps {
 
 const Container = glamorous.div(
   {
+    label: "sidenavitem",
     height: 45,
     position: "relative",
     width: "100%",
@@ -21,7 +22,10 @@ const Container = glamorous.div(
     padding: "0 16px 0 60px",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
-    backgroundColor: "rgba(0, 0, 0, 0.2)"
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.25)"
+    }
   },
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
     color: isActive ? theme.colors.linkText : theme.colors.white
@@ -37,8 +41,8 @@ const ConnectorStrip = glamorous.div({
   left: 29,
   "&::after": {
     content: "' '",
-    width: 8,
-    height: 8,
+    width: 7,
+    height: 7,
     backgroundColor: "#515151",
     position: "absolute",
     borderRadius: "50%",
@@ -57,7 +61,7 @@ export default (props: IProps) => (
   <Container
     key={props.id}
     css={props.css}
-    className={"op_sidenavitem " + props.className}
+    className={["op_sidenavitem", props.className].filter(a => !!a).join(" ")}
     onClick={props.onClick}
     isActive={!!props.active}
   >

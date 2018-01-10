@@ -11,6 +11,7 @@ export interface IProps {
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   ...theme.typography.title,
+  label: "headertitle",
   marginRight: theme.spacing
 }))
 

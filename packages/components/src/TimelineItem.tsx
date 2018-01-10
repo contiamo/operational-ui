@@ -84,6 +84,7 @@ const Content = glamorous.div(
 )
 
 const Container = glamorous.li({
+  label: "timelineitem",
   listStyle: "none",
   margin: 0,
   padding: "0 0 24px",

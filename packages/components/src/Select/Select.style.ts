@@ -31,6 +31,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
 
     return {
       backgroundColor,
+      label: "select",
       position: "relative",
       display: "flex",
       alignItems: "center",

@@ -11,7 +11,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
-var Container = glamorous_1.default.div({});
+var Container = glamorous_1.default.div({
+    label: "tabs"
+});
 var Content = glamorous_1.default.div({
     marginTop: 18
 });

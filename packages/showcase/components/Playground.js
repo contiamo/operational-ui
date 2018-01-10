@@ -1,3 +1,4 @@
+import * as React from "react"
 import dynamic from "next/dynamic"
 import glamorous, { ThemeProvider } from "glamorous"
 
@@ -9,16 +10,17 @@ const ComponentPlayground = dynamic(import("component-playground"), { ssr: false
 const customGrey: string = "#dadada"
 
 const Container = glamorous.div(({ theme, isExpanded }) => ({
+  label: "playground",
   border: `2px solid ${customGrey}`,
-  margin: `${theme.spacing}px 0`,
+  margin: isExpanded ? 0 : `${theme.spacing}px 0`,
 
   ...isExpanded
     ? {
         backgroundColor: theme.colors.white,
         position: "fixed",
         top: 0,
-        left: 240,
-        width: "calc(100vw - 240px)",
+        left: 0,
+        width: "100vw",
         height: "100vh",
         zIndex: theme.baseZIndex + 1000,
         "& .playgroundStage": {

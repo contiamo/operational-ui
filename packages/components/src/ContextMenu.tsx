@@ -22,6 +22,7 @@ export interface IState {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  label: "contextmenu",
   cursor: "pointer",
   position: "relative",
   width: "fit-content"

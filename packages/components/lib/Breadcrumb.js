@@ -6,6 +6,7 @@ var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
     return ({
+        label: "breadcrumb",
         color: theme.colors.linkText,
         "& svg": {
             marginLeft: 4

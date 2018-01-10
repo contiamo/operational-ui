@@ -1,3 +1,5 @@
+import * as React from "react"
+
 export const Operational = props => {
   const size = props.size
   const color = props.color || "currentColor"

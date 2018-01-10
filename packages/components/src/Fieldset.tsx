@@ -11,6 +11,7 @@ export interface IProps {
 }
 
 const Container = glamorous.fieldset(({ theme }: { theme: Theme }): any => ({
+  label: "fieldset",
   verticalAlign: "top",
   padding: 0,
   border: 0,

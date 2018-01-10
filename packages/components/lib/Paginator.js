@@ -93,6 +93,7 @@ var createPagesFragment = function (_a) {
     return fragment.concat(renderUpperSeparator());
 };
 var Container = glamorous_1.default.div({
+    label: "paginator",
     "& [role=button]": {
         display: "flex",
         alignItems: "center",

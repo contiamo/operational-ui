@@ -72,6 +72,7 @@ var style = function (_a) {
         }
         : {};
     return {
+        label: "sidebaritem",
         position: "relative",
         color: theme.colors.emphasizedText,
         "& .header": {

@@ -16,6 +16,7 @@ const Container = glamorous.div(({ theme, active }: { theme: Theme; active: bool
   const activeBackground = `rgba(0, 0, 0, ${opacity * 2})`
 
   return {
+    label: "headeritem",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

@@ -13,7 +13,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, clickable = _a.clickable;
-    return (__assign({ backgroundColor: theme.colors.white, minWidth: 160, width: "fit-content", padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", border: "1px solid", borderColor: theme.colors.separator }, clickable
+    return (__assign({ label: "contextmenuitem", backgroundColor: theme.colors.white, minWidth: 160, width: "fit-content", padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", border: "1px solid", borderColor: theme.colors.separator }, clickable
         ? {
             cursor: "pointer",
             "&:hover": {

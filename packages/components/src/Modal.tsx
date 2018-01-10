@@ -12,6 +12,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  label: "modal",
   position: "fixed",
   top: 0,
   left: 0,
