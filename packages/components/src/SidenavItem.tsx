@@ -37,8 +37,8 @@ const ConnectorStrip = glamorous.div({
   left: 29,
   "&::after": {
     content: "' '",
-    width: 8,
-    height: 8,
+    width: 7,
+    height: 7,
     backgroundColor: "#515151",
     position: "absolute",
     borderRadius: "50%",
@@ -57,7 +57,7 @@ export default (props: IProps) => (
   <Container
     key={props.id}
     css={props.css}
-    className={"op_sidenavitem " + props.className}
+    className={["op_sidenavitem", props.className].filter(a => !!a).join(" ")}
     onClick={props.onClick}
     isActive={!!props.active}
   >

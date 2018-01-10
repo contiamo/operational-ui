@@ -27,8 +27,8 @@ var ConnectorStrip = glamorous_1.default.div({
     left: 29,
     "&::after": {
         content: "' '",
-        width: 8,
-        height: 8,
+        width: 7,
+        height: 7,
         backgroundColor: "#515151",
         position: "absolute",
         borderRadius: "50%",
@@ -42,7 +42,7 @@ var ConnectorStrip = glamorous_1.default.div({
         height: 22.5
     }
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: "op_sidenavitem " + props.className, onClick: props.onClick, isActive: !!props.active },
+exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: ["op_sidenavitem", props.className].filter(function (a) { return !!a; }).join(" "), onClick: props.onClick, isActive: !!props.active },
     React.createElement(ConnectorStrip, null),
     props.label)); };
 //# sourceMappingURL=SidenavItem.js.map

@@ -3,12 +3,11 @@ import { css, rehydrate } from "glamor"
 import { renderStatic } from "glamor/server"
 import { operational } from "@operational/theme"
 import { baseStylesheet, darken } from "@operational/utils"
+import { OperationalUI } from "@operational/components"
 
 import Header from "../components/Header"
 import Sidenavigation from "../components/Sidenavigation"
 import nextConfig from "../next.config"
-
-let didRehydrate = false
 
 const pathmap = nextConfig.exportPathMap()
 
@@ -58,11 +57,11 @@ const PageContent = glamorous.div(({ theme }) => ({
   }
 }))
 
-class Layout extends React.Component {
+export default class Layout extends React.Component {
   render() {
     const { pathname } = this.props
     return (
-      <ThemeProvider theme={operational}>
+      <OperationalUI>
         <Container>
           <Sidenavigation pathname={pathname} pathmap={pathmap} />
           <Content>
@@ -70,16 +69,11 @@ class Layout extends React.Component {
             <PageContent>{this.props.children}</PageContent>
           </Content>
         </Container>
-      </ThemeProvider>
+      </OperationalUI>
     )
   }
 
-  componentWillMount() {
-    if (!didRehydrate && typeof window !== "undefined") {
-      rehydrate(window.__NEXT_DATA__.ids)
-      didRehydrate = true
-    }
+  componentDidMount() {
+    rehydrate(window.__NEXT_DATA__.ids)
   }
 }
-
-export default Layout
