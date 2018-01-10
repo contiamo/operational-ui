@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Card, CardHeader, TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "@operational/components"
 
 import Playground from "../../components/Playground"

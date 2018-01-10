@@ -1,6 +1,5 @@
 import glamorous, { ThemeProvider } from "glamorous"
-import { css, rehydrate } from "glamor"
-import { renderStatic } from "glamor/server"
+import { rehydrate } from "glamor"
 import { operational } from "@operational/theme"
 import { baseStylesheet, darken } from "@operational/utils"
 import { OperationalUI } from "@operational/components"

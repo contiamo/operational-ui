@@ -1,4 +1,3 @@
-import * as React from "react"
 import glamorous, { Div } from "glamorous"
 
 import TestResults from "./MarathonTestResults"

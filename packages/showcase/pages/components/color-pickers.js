@@ -1,4 +1,3 @@
-import * as React from "react"
 import { ColorPicker, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"

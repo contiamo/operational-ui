@@ -1,4 +1,3 @@
-import * as React from "react"
 import glamorous, { withTheme } from "glamorous"
 
 import { Icon } from "@operational/components"

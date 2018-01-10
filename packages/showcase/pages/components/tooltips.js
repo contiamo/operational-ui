@@ -1,4 +1,3 @@
-import * as React from "react"
 import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { Tooltip, Card, CardHeader, Heading2Type } from "@operational/components"

@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Button, ButtonGroup, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Table from "../../components/PropsTable"

@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Card, CardHeader, Heading2Type, Select, Input, DatePicker } from "@operational/components"
 import { Filter } from "@operational/blocks"
 

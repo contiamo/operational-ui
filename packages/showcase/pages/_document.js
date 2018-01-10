@@ -1,4 +1,3 @@
-import * as React from "react"
 import Document, { Head, Main, NextScript } from "next/document"
 import { baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
