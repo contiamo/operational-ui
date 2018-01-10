@@ -20,6 +20,7 @@ var Label = glamorous_1.default.label(function (_a) {
 var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme, disabled = _a.disabled;
     return ({
+        width: "100%",
         minWidth: 200,
         padding: theme.spacing * 2 / 3,
         border: "1px solid",
@@ -36,7 +37,9 @@ var InputField = glamorous_1.default.input(function (_a) {
     });
 });
 var Input = function (props) {
-    return (React.createElement(InputField, { key: props.id, css: props.css, innerRef: props.inputRef, className: props.className, id: props.domId, name: props.name, disabled: props.disabled, placeholder: props.placeholder, value: props.value, type: props.type, onFocus: props.onFocus, onBlur: props.onBlur, onChange: function (e) {
+    // `css` and `className` props are not set, as they are set on the wrapped label container.
+    // See ./src/utils/with-label.tsx.
+    return (React.createElement(InputField, { key: props.id, innerRef: props.inputRef, id: props.domId, name: props.name, disabled: props.disabled, placeholder: props.placeholder, value: props.value, type: props.type, onFocus: props.onFocus, onBlur: props.onBlur, onChange: function (e) {
             props.onChange && props.onChange(e.target.value);
         } }));
 };

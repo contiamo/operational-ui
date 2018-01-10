@@ -74,9 +74,11 @@ var DatePicker = /** @class */ (function (_super) {
         var domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null);
         var placeholderDays = DatePicker_utils_1.monthStartDay(this.state.year, this.state.month);
         var daysInCurrentMonth = DatePicker_utils_1.daysInMonth(this.state.month, this.state.year);
+        // `css` and `className` props are not set, as they are set on the wrapped label container.
+        // See ./src/utils/with-label.tsx.
         return (React.createElement(DatePicker_styles_1.Container, { innerRef: function (node) {
                 _this.containerNode = node;
-            }, key: this.props.id, css: this.props.css, isExpanded: this.state.isExpanded },
+            }, key: this.props.id, isExpanded: this.state.isExpanded },
             React.createElement(DatePicker_styles_1.Toggle, { onClick: function (ev) {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded
