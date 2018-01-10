@@ -18,7 +18,6 @@ export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Se
 export type TFocusElement = string
 
 export interface IConfig {
-  colors: IObject
   duration: number
   focusElement?: TFocusElement
   height: number

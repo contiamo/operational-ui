@@ -2,7 +2,6 @@ import { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Se
 export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
 export declare type TFocusElement = string;
 export interface IConfig {
-    colors: IObject;
     duration: number;
     focusElement?: TFocusElement;
     height: number;

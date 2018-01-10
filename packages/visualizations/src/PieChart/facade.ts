@@ -46,7 +46,6 @@ class Facade {
 
   initialConfig(): IConfig {
     return {
-      colors: {},
       duration: 1e3,
       height: 500,
       hidden: false,

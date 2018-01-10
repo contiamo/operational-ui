@@ -38,9 +38,6 @@ function dataKey(d: TDatum): string {
 function dataLabelValue(d: TDatum): string {
   return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined
 }
-function dataColor(d: TDatum): string {
-  return d.data.colorHex
-}
 
 abstract class AbstractRenderer {
   color: (d: TDatum) => string
