@@ -9,6 +9,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
@@ -25,22 +33,50 @@ var Container = glamorous_1.default.div(function (_a) {
         justifyContent: "center"
     });
 });
-var Content = glamorous_1.default.div(function (_a) {
+var AuthCard = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        position: "relative",
+        label: "authcontent",
+        boxShadow: theme.shadows.popup,
+        borderRadius: 2,
         backgroundColor: theme.colors.white,
-        padding: theme.spacing + "px " + theme.spacing + "px",
+        padding: 3 * theme.spacing + "px " + 1.5 * theme.spacing + "px",
         width: "100%",
-        maxWidth: 480
+        maxWidth: 360
     });
 });
-var InputContainer = glamorous_1.default.div(function (_a) {
+var Content = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, isEnabled = _a.isEnabled;
+    return ({
+        opacity: isEnabled ? 1 : 0.4,
+        pointerEvents: isEnabled ? "all" : "none"
+    });
+});
+var SubmitContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        margin: 2 * theme.spacing + "px 0",
-        display: "block"
+        marginTop: 2.5 * theme.spacing,
+        textAlign: "center",
+        "& > *": {
+            width: "100%"
+        }
     });
 });
+var InputFields = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        margin: 1 * theme.spacing + "px 0"
+    });
+});
+var ErrorNotice = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return (__assign({}, theme.typography.body, { textAlign: "center", color: theme.colors.error }));
+});
+var inputStyle = {
+    display: "block",
+    margin: "20px 0"
+};
 var Auth = /** @class */ (function (_super) {
     __extends(Auth, _super);
     function Auth() {
@@ -49,32 +85,34 @@ var Auth = /** @class */ (function (_super) {
     Auth.prototype.render = function () {
         var _this = this;
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
-            React.createElement(Content, null,
-                this.props.title ? React.createElement(components_1.TitleType, null, this.props.title) : null,
-                this.props.username ? (React.createElement(InputContainer, null,
-                    React.createElement(components_1.Input, { value: this.props.username, label: "User name", onChange: function (v) {
-                            _this.props.onChange &&
-                                _this.props.onChange({
-                                    username: v
-                                });
-                        } }))) : null,
-                this.props.password ? (React.createElement(InputContainer, null,
-                    React.createElement(components_1.Input, { value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
-                            _this.props.onChange &&
-                                _this.props.onChange({
-                                    password: v
-                                });
-                        } }))) : null,
-                this.props.passwordConfirmation ? (React.createElement(InputContainer, null,
-                    React.createElement(components_1.Input, { value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
-                            _this.props.onChange &&
-                                _this.props.onChange({
-                                    passwordConfirmation: v
-                                });
-                        } }))) : null,
-                React.createElement(components_1.Button, { color: "info", type: "submit", onClick: function () {
-                        _this.props.onSubmit && _this.props.onSubmit();
-                    } }, "Submit"))));
+            React.createElement(AuthCard, null,
+                this.props.processing ? (React.createElement(components_1.Spinner, { css: { position: "absolute", top: "calc(50% - 20px)", left: "calc(50% - 20px)", zIndex: 10000 } })) : null,
+                React.createElement(Content, { isEnabled: !this.props.processing },
+                    this.props.title ? (React.createElement(components_1.TitleType, { css: { textAlign: "center", margin: 0 } }, this.props.title)) : null,
+                    this.props.error ? React.createElement(ErrorNotice, null, this.props.error) : null,
+                    React.createElement(InputFields, null,
+                        this.props.username ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
+                                _this.props.onChange &&
+                                    _this.props.onChange({
+                                        username: v
+                                    });
+                            } })) : null,
+                        this.props.password ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
+                                _this.props.onChange &&
+                                    _this.props.onChange({
+                                        password: v
+                                    });
+                            } })) : null,
+                        this.props.passwordConfirmation ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
+                                _this.props.onChange &&
+                                    _this.props.onChange({
+                                        passwordConfirmation: v
+                                    });
+                            } })) : null),
+                    React.createElement(SubmitContainer, null,
+                        React.createElement(components_1.Button, { css: { margin: 0 }, color: "info", type: "submit", onClick: function () {
+                                _this.props.onSubmit && _this.props.onSubmit();
+                            } }, "Submit"))))));
     };
     return Auth;
 }(React.Component));
