@@ -12,6 +12,7 @@ export interface IProps {
     disabled?: boolean;
     onFocus?: (ev: any) => void;
     onBlur?: (ev: any) => void;
+    type?: string;
     children?: string;
 }
 declare const _default: any;

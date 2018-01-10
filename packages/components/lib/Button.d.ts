@@ -13,11 +13,12 @@ export interface IProps {
     css?: any;
     className?: string;
     onClick?: any;
+    type?: string;
     children?: React.ReactNode;
     color?: string;
     active?: boolean;
     disabled?: boolean;
     condensed?: boolean;
 }
-declare const Button: React.SFC<IProps>;
-export default Button;
+declare const _default: (props: IProps) => JSX.Element;
+export default _default;

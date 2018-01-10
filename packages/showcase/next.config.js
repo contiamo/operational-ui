@@ -28,6 +28,7 @@ module.exports = {
     "/components/uploads": { page: "/components/uploads", query: { title: "Uploads" } },
     "/blocks": { page: "/blocks", query: { title: "Blocks" } },
     "/blocks/filters": { page: "/blocks/filters", query: { title: "Filters" } },
+    "/blocks/auth": { page: "/blocks/auth", query: { title: "Auth" } },
     "/visualizations": { page: "/visualizations", query: { title: "Visualizations" } },
     "/visualizations/process-flow": { page: "/visualizations/process-flow", query: { title: "Process Flow" } },
     "/visualizations/process-flow/testcases": { page: "/visualizations/process-flow/testcases", query: { title: "Test Cases" } },
