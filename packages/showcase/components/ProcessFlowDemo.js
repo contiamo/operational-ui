@@ -1,3 +1,4 @@
+import * as React from "react"
 import { ProcessFlow, ProcessFlowLoopHandler, VisualizationWrapper } from "@operational/visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
 

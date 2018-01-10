@@ -1,3 +1,4 @@
+import * as React from "react"
 import { ContextMenu, ContextMenuItem, Card, CardHeader, Icon, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"

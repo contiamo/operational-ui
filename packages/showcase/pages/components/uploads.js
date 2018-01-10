@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Upload, Card, CardHeader, Icon, Button, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"

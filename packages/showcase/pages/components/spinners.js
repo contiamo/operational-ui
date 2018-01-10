@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Spinner, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"

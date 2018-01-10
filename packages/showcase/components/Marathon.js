@@ -1,4 +1,5 @@
-import glamorous, { Div } from "glamorous"
+import * as React from "react"
+import glamorous from "glamorous"
 
 import TestResults from "./MarathonTestResults"
 
@@ -8,6 +9,10 @@ const sleep = ms =>
       resolve()
     }, ms)
   })
+
+const Container = glamorous.div({
+  label: "marathon"
+})
 
 const Content = glamorous.div({ padding: 20 }, ({ theme }) => ({
   backgroundColor: theme.colors.gray10,
@@ -163,14 +168,14 @@ class Marathon extends React.Component {
   render() {
     const { css, className } = this.props
     return (
-      <Div css={css} className={className}>
+      <Container css={css} className={className}>
         <TestResults tests={this.state.tests} completed={this.state.completed} />
         <Content
           innerRef={node => {
             this.container = node
           }}
         />
-      </Div>
+      </Container>
     )
   }
 }

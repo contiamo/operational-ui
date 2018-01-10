@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Grid, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Layout from "../../components/Layout"

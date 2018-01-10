@@ -1,3 +1,4 @@
+import * as React from "react"
 import Link from "next/link"
 import { Card, CardHeader, Heading2Type } from "@operational/components"
 import { ProcessFlow, VisualizationWrapper } from "@operational/visualizations"

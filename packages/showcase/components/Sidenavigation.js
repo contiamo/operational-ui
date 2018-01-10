@@ -1,4 +1,5 @@
-import glamorous, { Div, Img, withTheme } from "glamorous"
+import * as React from "react"
+import glamorous from "glamorous"
 import Link from "next/link"
 import Router from "next/router"
 import { Box, BarChart2, Grid } from "react-feather"

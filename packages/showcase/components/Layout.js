@@ -11,6 +11,7 @@ import nextConfig from "../next.config"
 const pathmap = nextConfig.exportPathMap()
 
 const Container = glamorous.div({
+  label: "showcaselayout",
   display: "flex",
   "& p": {
     marginTop: 0,

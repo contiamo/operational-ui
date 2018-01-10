@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Card, CardHeader } from "@operational/components"
 import StaticContent from "../../components/StaticContent"
 import Layout from "../../components/Layout"

@@ -1,9 +1,11 @@
+import * as React from "react"
 import glamorous, { withTheme } from "glamorous"
 
 import { Icon } from "@operational/components"
 import { Theme } from "@operational/theme"
 
 const Container = glamorous.ul({
+  label: "marathontestresults",
   padding: 0
 })
 

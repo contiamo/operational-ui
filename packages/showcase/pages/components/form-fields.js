@@ -1,3 +1,4 @@
+import * as React from "react"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { Input, Select, Fieldset, DatePicker, Card, CardHeader, Heading2Type } from "@operational/components"
 
