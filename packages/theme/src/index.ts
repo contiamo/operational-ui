@@ -132,8 +132,8 @@ const baseTypography: { lineHeight: string; textTransform: string; letterSpacing
 const typography: ThemeTypography = {
   title: {
     ...baseTypography,
-    fontSize: 22,
-    fontWeight: 600
+    fontSize: 24,
+    fontWeight: 400
   },
   heading1: {
     ...baseTypography,

@@ -6,9 +6,9 @@ export interface IProps {
     username?: string;
     password?: string;
     passwordConfirmation?: string;
-    processing?: string;
     error?: string;
     title?: string;
+    processing?: boolean;
     onSubmit?: () => void;
     onChange?: (change: {}) => void;
 }

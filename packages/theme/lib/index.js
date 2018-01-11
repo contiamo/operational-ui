@@ -44,7 +44,7 @@ var baseTypography = {
     letterSpacing: "normal"
 };
 var typography = {
-    title: __assign({}, baseTypography, { fontSize: 22, fontWeight: 600 }),
+    title: __assign({}, baseTypography, { fontSize: 24, fontWeight: 400 }),
     heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: "#373d3f" }),
     heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: "#969696", "&::before": {
             content: "» "

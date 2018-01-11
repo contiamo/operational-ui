@@ -4,14 +4,13 @@ import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
 import { OperationalUI } from "@operational/components"
 import { operational } from "@operational/theme"
-import { Auth } from  "../../src/index"
+import { Auth } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI>
-        <Auth title="Log in" username="1@2.3" password="1234">
-        </Auth>
+        <Auth title="Log in" username="1@2.3" password="1234" error="Could not log in" processing />
       </OperationalUI>
     )
   }

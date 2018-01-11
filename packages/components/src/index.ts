@@ -9,6 +9,7 @@ import ButtonGroup from "./ButtonGroup"
 import Breakdown from "./Breakdown"
 import Card from "./Card"
 import CardHeader from "./CardHeader"
+import Checkbox from "./Checkbox"
 import Chip from "./Chip"
 import ColorPicker from "./ColorPicker"
 import ContextMenu from "./ContextMenu"
@@ -50,6 +51,7 @@ export {
   Breakdown,
   Card,
   CardHeader,
+  Checkbox,
   Chip,
   ColorPicker,
   ContextMenu,
