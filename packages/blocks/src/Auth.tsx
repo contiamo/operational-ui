@@ -24,6 +24,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.sidenavBackground,
   width: "100%",
   height: "100%",
+  padding: theme.spacing,
   display: "flex",
   alignItems: "center",
   justifyContent: "center"
@@ -68,8 +69,11 @@ const inputStyle: {} = {
   margin: "20px 0"
 }
 
+const exists = (s?: string): boolean => !!s || s === ""
+
 export default class Auth extends React.Component<IProps, IState> {
   render() {
+    console.log("is username", !!this.props.username)
     return (
       <Container css={this.props.css} className={this.props.className}>
         <AuthCard>
@@ -82,7 +86,7 @@ export default class Auth extends React.Component<IProps, IState> {
             ) : null}
             {this.props.error ? <ErrorNotice>{this.props.error}</ErrorNotice> : null}
             <InputFields>
-              {this.props.username ? (
+              {exists(this.props.username) ? (
                 <Input
                   css={inputStyle}
                   value={this.props.username}
@@ -95,7 +99,7 @@ export default class Auth extends React.Component<IProps, IState> {
                   }}
                 />
               ) : null}
-              {this.props.password ? (
+              {exists(this.props.password) ? (
                 <Input
                   css={inputStyle}
                   value={this.props.password}
@@ -110,7 +114,7 @@ export default class Auth extends React.Component<IProps, IState> {
                   }}
                 />
               ) : null}
-              {this.props.passwordConfirmation ? (
+              {exists(this.props.passwordConfirmation) ? (
                 <Input
                   css={inputStyle}
                   value={this.props.passwordConfirmation}

@@ -81,6 +81,15 @@ class AuthExpand extends React.Component {
   }
 }
 
+const simpleSnippet = `
+<Auth
+  title="Log in"
+  username=""
+  password=""
+  error="Trouble logging in"
+/>
+`
+
 const propDescription = [
   {
     name: "title",
@@ -146,6 +155,10 @@ export default props => (
 
       <p>Try out the component by expanding the auth block below:</p>
       <AuthExpand />
+
+      <Heading2Type>Usage</Heading2Type>
+      <p>Here is a simple stateless example to help you get a feel for the props:</p>
+      <Playground snippet={simpleSnippet} scope={{}} components={{ Auth }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

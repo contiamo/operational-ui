@@ -28,6 +28,7 @@ var Container = glamorous_1.default.div(function (_a) {
         backgroundColor: theme.colors.sidenavBackground,
         width: "100%",
         height: "100%",
+        padding: theme.spacing,
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
@@ -77,6 +78,7 @@ var inputStyle = {
     display: "block",
     margin: "20px 0"
 };
+var exists = function (s) { return !!s || s === ""; };
 var Auth = /** @class */ (function (_super) {
     __extends(Auth, _super);
     function Auth() {
@@ -84,6 +86,7 @@ var Auth = /** @class */ (function (_super) {
     }
     Auth.prototype.render = function () {
         var _this = this;
+        console.log("is username", !!this.props.username);
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
             React.createElement(AuthCard, null,
                 this.props.processing ? (React.createElement(components_1.Spinner, { css: { position: "absolute", top: "calc(50% - 20px)", left: "calc(50% - 20px)", zIndex: 10000 } })) : null,
@@ -91,19 +94,19 @@ var Auth = /** @class */ (function (_super) {
                     this.props.title ? (React.createElement(components_1.TitleType, { css: { textAlign: "center", margin: 0 } }, this.props.title)) : null,
                     this.props.error ? React.createElement(ErrorNotice, null, this.props.error) : null,
                     React.createElement(InputFields, null,
-                        this.props.username ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
+                        exists(this.props.username) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
                                         username: v
                                     });
                             } })) : null,
-                        this.props.password ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
+                        exists(this.props.password) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
                                         password: v
                                     });
                             } })) : null,
-                        this.props.passwordConfirmation ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
+                        exists(this.props.passwordConfirmation) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
                                         passwordConfirmation: v
