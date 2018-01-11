@@ -6,8 +6,10 @@ import { Icon as ThemelessIcon } from "../index"
 
 const Icon = wrapDefaultTheme(ThemelessIcon)
 
+console.log(Icon)
+
 describe("Icon Component", () => {
   it("Renders an <svg> tag", () => {
-    expect(render(<Icon name="play" />)).toMatchSnapshot()
+    expect(render(<Icon name="Play" />)).toMatchSnapshot()
   })
 })

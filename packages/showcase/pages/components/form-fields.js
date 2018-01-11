@@ -1,6 +1,6 @@
 import * as React from "react"
 import SyntaxHighlighter from "react-syntax-highlighter"
-import { Input, Select, Fieldset, DatePicker, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Input, Select, Checkbox, Fieldset, DatePicker, Card, CardHeader, Heading2Type } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -71,6 +71,32 @@ const selectSnippet = `
   }
 
   return <ComponentWithSelect />
+})()
+`
+
+const checkboxSnippet = `
+(() => {
+  class ComponentWithCheckbox extends React.Component {
+    state = {
+      selected: ["1"]
+    }
+    render() {
+      return (
+        <Checkbox
+          label="Something"
+          options={["1", "2", "3"]}
+          selected={this.state.selected}
+          onChange={n => {
+            this.setState(p => ({
+              selected: n
+            }))
+          }}
+        />
+      )
+    }
+  }
+
+  return <ComponentWithCheckbox />
 })()
 `
 
@@ -168,6 +194,29 @@ const propDescription = {
       type: "func",
       optional: true
     }
+  ],
+  Checkbox: [
+    {
+      name: "options",
+      description: "All checkbox options",
+      defaultValue: "",
+      type: "string[]",
+      optional: false
+    },
+    {
+      name: "selected",
+      description: "Selected options",
+      defaultValue: "",
+      type: "string[]",
+      optional: false
+    },
+    {
+      name: "onChange",
+      description: "Change callback, passing a full list of the new current selected options.",
+      defaultValue: "() => void",
+      type: "(newSelected: string[]) => void",
+      optional: true
+    }
   ]
 }
 
@@ -194,6 +243,34 @@ export default props => (
       </p>
 
       <Playground snippet={selectSnippet} components={{ Select }} />
+
+      <Heading2Type>Return Value</Heading2Type>
+      <p>
+        The value prop passed to select is is either an `Option` object, or an Array of `Option` objects. If it is an
+        array, the component automatically becomes a multi-select. The shape of an Option object is described below.
+      </p>
+
+      <SyntaxHighlighter language="javascript">{`
+Option {
+  id: 1, // a number that is passed as a \`key\` in the React iterator,
+  label: "Any string",
+  value: (<div>Literally anything can go here</div>)
+}
+    `}</SyntaxHighlighter>
+
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription.Select} />
+
+      <CardHeader>Checkbox</CardHeader>
+      <p>
+        The Select component presents users with a list of information with single-choice or multiple-choice options.
+        Select elements can have options filled onClick, and also support filters.
+      </p>
+
+      <Playground snippet={checkboxSnippet} components={{ Checkbox }} />
+
+      <Heading2Type>Props</Heading2Type>
+      <Table props={propDescription.Checkbox} />
 
       <CardHeader>Organizing forms</CardHeader>
 
@@ -222,24 +299,6 @@ export default props => (
           <DatePicker label="Date of birth" />
         </Fieldset>
       </form>
-
-      <Heading2Type>Return Value</Heading2Type>
-      <p>
-        The Select component holds its value in its `state`. The value is either an `Option` object, or an Array of
-        `Option` objects, depending on the `multiple` prop. The shape of an Option object is described below.
-      </p>
-
-      {/* TODO: clean up inlining once markdown is introduced. */}
-      <SyntaxHighlighter language="javascript">{`
-Option {
-  id: 1, // a number that is passed as a \`key\` in the React iterator,
-  label: "Any string",
-  value: (<div>Literally anything can go here</div>)
-}
-    `}</SyntaxHighlighter>
-
-      <Heading2Type>Props</Heading2Type>
-      <Table props={propDescription.Select} />
     </Card>
   </Layout>
 )
