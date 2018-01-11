@@ -36,57 +36,48 @@ class Links extends AbstractRenderer {
       borderScale: TScale = this.linkBorderScale(scale),
       opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
 
-    linkGroups
+    let enteringLinkGroups: TD3Selection = linkGroups
       .enter()
       .append("g")
       .attr("class", "link-group")
-      .each(
-        withD3Element((d: TLink, el: HTMLElement): void => {
-          const element: TD3Selection = d3.select(el)
-          // Append link "border" element - transparent element behind link.
-          element
-            .append("path")
-            .attr("class", `link ${styles.border}`)
-            .attr("d", this.linkStartPath.bind(this))
-            .attr("stroke-width", "0px")
-            .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
-            .attr("opacity", 0)
-          // Append link
-          element
-            .append("path")
-            .attr("class", `link ${styles.element}`)
-            .attr("d", this.linkStartPath.bind(this))
-            .attr("fill", "none")
-            .attr("stroke-width", "0px")
-        })
-      )
-      .merge(linkGroups)
-      .each(
-        withD3Element((d: TLink, el: HTMLElement): void => {
-          const element: TD3Selection = d3.select(el)
-          // Update link border
-          element
-            .select(`path.link.${styles.border}`)
-            .attr("stroke", this.config.borderColor)
-            .transition()
-            .duration(this.config.duration)
-            .ease(easeCubicInOut)
-            .attr("d", this.linkPath.bind(this))
-            .attr("stroke-width", borderScale(d.size()) + "px")
-            .attr("stroke-dasharray", d.dash())
-          // Update link
-          element
-            .select(`path.link.${styles.element}`)
-            .attr("stroke", d.stroke())
-            .transition()
-            .duration(this.config.duration)
-            .ease(easeCubicInOut)
-            .attr("d", this.linkPath.bind(this))
-            .attr("stroke-width", scale(d.size()) + "px")
-            .attr("stroke-dasharray", d.dash())
-            .attr("opacity", opacityScale(d.size()))
-        })
-      )
+
+    enteringLinkGroups
+      .append("path")
+      .attr("class", `link ${styles.border}`)
+      .attr("d", this.linkStartPath.bind(this))
+      .attr("stroke-width", "0px")
+      .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
+      .attr("opacity", 0)
+
+    enteringLinkGroups
+      .append("path")
+      .attr("class", `link ${styles.element}`)
+      .attr("d", this.linkStartPath.bind(this))
+      .attr("fill", "none")
+      .attr("stroke-width", "0px")
+
+    linkGroups
+      .merge(enteringLinkGroups)
+      .select(`path.link.${styles.border}`)
+      .attr("stroke", this.config.borderColor)
+      .transition()
+      .duration(this.config.duration)
+      .ease(easeCubicInOut)
+      .attr("d", this.linkPath.bind(this))
+      .attr("stroke-width", (d: TLink): string => borderScale(d.size()) + "px")
+      .attr("stroke-dasharray", (d: TLink): string => d.dash())
+
+    linkGroups
+      .merge(enteringLinkGroups)
+      .select(`path.link.${styles.element}`)
+      .attr("stroke", (d: TLink): string => d.stroke())
+      .transition()
+      .duration(this.config.duration)
+      .ease(easeCubicInOut)
+      .attr("d", this.linkPath.bind(this))
+      .attr("stroke-width", (d: TLink): string => scale(d.size()) + "px")
+      .attr("stroke-dasharray", (d: TLink): string => d.dash())
+      .attr("opacity", (d: TLink): number => opacityScale(d.size()))
   }
 
   // Paths start as a single point at the source node. If the source node has already been rendered,
