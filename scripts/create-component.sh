@@ -12,12 +12,13 @@ touch $COMP_ROOT/$1.tsx
 cat > $COMP_ROOT/$1.tsx << EOL
 import * as React from "react"
 import glamorous from "glamorous"
+import { Theme } from "@operational/theme"
 
 interface IProps {
-  css?: any
+  css?: {}
   className?: string
   value: string
-  children?: any
+  children?: React.ReactNode
 }
 
 const Container = glamorous.div(
@@ -28,7 +29,7 @@ const Container = glamorous.div(
     }
   },
   // Dynamic/theme-dependent styles
-  ({ theme }: { theme: Theme }): any => ({
+  ({ theme }: { theme: Theme }): {} => ({
     margin: theme.spacing * 2
   })
 )
@@ -37,15 +38,15 @@ const Content = glamorous.div(
   // Static styles
   {
     color: 'green'
-  }, ({ theme, active }: { theme: Theme, active: boolean }): any => ({
+  }, ({ theme, active }: { theme: Theme, active: boolean }): {} => ({
   // Local prop-dependent styling (see active prop assignment in component definition below)
   backgroundColor: active ? theme.colors.palette.info : "green"
   })
 )
 
-export default ({ css, className, value }: IProps) => (
-  <Container css={css} className={className}>
-    <Content active>{value}</Content>
+export default (props: IProps) => (
+  <Container css={props.css} className={props.className}>
+    <Content active>{props.value}</Content>
   </Container>
 )
 EOL
@@ -58,7 +59,7 @@ cat > $COMP_ROOT/__tests__/$1.test.tsx << EOL
 import * as React from "react"
 import { render } from "enzyme"
 
-import Themeless$1 from "../index"
+import { $1 as Themeless$1 } from "../index"
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const $1 = wrapDefaultTheme(Themeless$1)
@@ -77,11 +78,11 @@ touch $SHOWCASE_ROOT/$1s.js
 
 cat > $SHOWCASE_ROOT/$1s.js << EOL
 import * as React from "react"
+import { Card, Heading2Type, $1 } from "@operational/components"
 
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
-import { $1, Card } from "@operational/components"
 
 const simpleSnippet = \`
 <div>
@@ -100,14 +101,14 @@ const propDescription = [
 ]
 
 export default props => (
-  <Layout url={this.props.url}> 
+  <Layout pathname={props.url.pathname}>
     <Card>
       <p>
         $1s are great components!
       </p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={String(simpleSnippet)} components={{ $1 }} />
+      <Playground snippet={simpleSnippet} components={{ $1 }} />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />
