@@ -141,7 +141,7 @@ class Facade {
 
   draw(): Element {
     this.state.captureState()
-    this.series.initializeSeries()
+    this.series.assignData()
     this.components.legend.draw()
     this.canvas.draw()
     this.series.draw()

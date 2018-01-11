@@ -23,10 +23,10 @@ class Series {
     this.drawn = false
   }
 
-  initializeSeries(): void {
+  assignData(): void {
     this.attributes = this.state.current.get("data")
     this.assignAccessors()
-    this.renderer = this.initializeRenderer()
+    this.updateRenderer()
     this.prepareData()
     this.stateWriter("dataForLegend", this.renderer.dataForLegend())
   }
@@ -48,13 +48,24 @@ class Series {
     })(accessors)
   }
 
-  initializeRenderer(): AbstractRenderer {
+  updateRenderer(): void {
     const options: IObject[] = this.renderAs()
     if (options.length !== 1) {
       throw new Error(`Incorrect number of renderers: ${options.length} specified, 1 required`)
     }
-    const renderer: any = new Renderer(this.state, this.events, this.el, options[0])
-    return renderer
+    const rendererOptions: IObject = options[0]
+    if (!this.renderer) {
+      this.renderer = this.createRenderer(rendererOptions)
+    } else if (this.renderer.type !== rendererOptions.type) {
+      this.renderer.remove()
+      this.renderer = this.createRenderer(rendererOptions)
+    } else {
+      this.renderer.assignOptions(rendererOptions)
+    }
+  }
+
+  createRenderer(options: IObject): any {
+    return new Renderer(this.state, this.events, this.el, options)
   }
 
   hasData(): boolean {

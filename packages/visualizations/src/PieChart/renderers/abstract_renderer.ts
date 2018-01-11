@@ -1,7 +1,6 @@
 import Events from "../../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum } from "../typings"
 import { defaults, find, filter, forEach, isFunction, keys, map, reduce, values } from "lodash/fp"
-import { withD3Element } from "../../utils/d3_utils"
 import * as d3 from "d3-selection"
 import "d3-transition"
 import { pie as d3Pie, arc as d3Arc } from "d3-shape"
@@ -58,13 +57,17 @@ abstract class AbstractRenderer {
     this.state = state
     this.events = events
     this.el = el.select("g.drawing")
-    forEach.convert({ cap: false })((option: any, key: string): void => {
-      ;(this as any)[key] = isFunction(option) ? (d?: any) => option(d) : option
-    })(options)
+    this.assignOptions(options)
     this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this))
     this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this))
+  }
+
+  assignOptions(options: IObject): void {
+    forEach.convert({ cap: false })((option: any, key: string): void => {
+      ;(this as any)[key] = isFunction(option) ? (d?: any) => option(d) : option
+    })(options)
   }
 
   setData(data: TDatum[]): void {
@@ -103,9 +106,7 @@ abstract class AbstractRenderer {
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
-    const duration: number = this.state.current.get("config").duration
-    let that: AbstractRenderer = this,
-      n: number = 0
+    let that: AbstractRenderer = this
 
     // Center coordinate system
     this.el.attr("transform", this.translateString(this.computeTranslate()))
@@ -116,38 +117,54 @@ abstract class AbstractRenderer {
       .selectAll("g")
       .data(this.computed.data, dataKey)
 
-    // Exit
-    let exit: any = arcs
-      .exit()
+    this.exit(arcs)
+    this.enterAndUpdate(arcs)
+  }
+
+  exit(arcs: TD3Selection): void {
+    const duration: number = this.state.current.get("config").duration
+
+    let exitingArcs: TD3Selection = arcs.exit()
+
+    exitingArcs
+      .select("path")
       .transition()
       .duration(duration)
+      .attrTween("d", this.removeArcTween.bind(this))
 
-    exit.selectAll("path").attrTween("d", this.removeArcTween.bind(this))
+    exitingArcs
+      .select(`text.${styles.label}`)
+      .transition()
+      .duration(duration)
+      .style("opacity", "1e6")
 
-    exit.selectAll(`text.${styles.label}`).style("opacity", "1e-6")
+    exitingArcs.remove()
+  }
 
-    exit.remove()
+  enterAndUpdate(arcs: TD3Selection): void {
+    const duration: number = this.state.current.get("config").duration
+    let n: number = 0
 
-    // Enter
-    let enter: TD3Selection = arcs
+    let enteringArcs: TD3Selection = arcs
       .enter()
       .append("svg:g")
       .attr("class", styles.arc)
       .on("mouseenter", this.onMouseOver.bind(this))
 
-    enter.append("svg:path").style("fill", (d: TDatum): string => this.color(d.data))
+    enteringArcs.append("svg:path").style("fill", (d: TDatum): string => this.color(d.data))
 
-    enter
+    enteringArcs
       .append("svg:text")
       .attr("class", styles.label)
       .attr("dy", 5)
       .style("text-anchor", "middle")
 
-    let update: any = arcs
-      .enter()
-      .merge(arcs)
+    arcs
+      .merge(enteringArcs)
+      .select("path")
       .transition()
       .duration(duration)
+      .attrTween("d", this.arcTween.bind(this))
       .each(() => (n = n + 1))
       .on("end", (): void => {
         n = n - 1
@@ -156,14 +173,14 @@ abstract class AbstractRenderer {
         }
       })
 
-    update.selectAll("path").attrTween("d", this.arcTween.bind(this))
-
-    update
-      .selectAll(`text.${styles.label}`)
+    arcs
+      .merge(enteringArcs)
+      .select(`text.${styles.label}`)
+      .transition()
+      .duration(duration)
       .attr("transform", this.labelTranslate.bind(this))
       .text(dataLabelValue)
 
-    // Total
     this.updateTotal()
   }
 
@@ -174,7 +191,7 @@ abstract class AbstractRenderer {
   abstract centerDisplayString(): string[]
 
   updateTotal(): void {
-    let duration: number = this.state.current.get("config").duration
+    const duration: number = this.state.current.get("config").duration
 
     let total: any = this.el
       .select(`g.${styles.total}`)
@@ -183,22 +200,15 @@ abstract class AbstractRenderer {
 
     total
       .exit()
-      .transition()
-      .duration(duration)
       .style("font-size", "1px")
       .remove()
 
-    total
+    let mergedTotal: TD3Selection = total
       .enter()
       .append("svg:text")
       .attr("text-anchor", "middle")
-
-    let mergedTotal: TD3Selection = total
-      .enter()
       .merge(total)
-      .selectAll("text")
-
-    mergedTotal.text((d: string): string => d)
+      .text((d: string): string => d)
 
     const node: any = mergedTotal.node()
     if (node) {

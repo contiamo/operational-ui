@@ -22,7 +22,7 @@ const DonutRenderer = {
 const data = {
   data: [
     { key: "Berlin", value: 15 },
-    { key: "Dortmund", value: null },
+    { key: "Dortmund", value: 6 },
     { key: "Bonn", value: 8 },
     { key: "Cologne", value: 1 }
   ],
@@ -33,8 +33,8 @@ const data1 = {
   data: [
     { key: "Berlin", value: 18 },
     { key: "Dortmund", value: 12 },
-    { key: "Bonn", value: undefined },
-    { key: "Cologne", value: null },
+    { key: "Bonn", value: 13 },
+    { key: "Cologne", value: 7 },
     { key: "Munich", value: 3 },
     { key: "Potsdam", value: 2 }
   ],

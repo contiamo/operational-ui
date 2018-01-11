@@ -1,6 +1,7 @@
 import AbstractRenderer from "./abstract_renderer"
 import { IObject, TDatum } from "../typings"
 import { interpolateObject } from "d3-interpolate"
+import { find } from "lodash/fp"
 
 class Donut extends AbstractRenderer {
   // Establish coordinate system with 0,0 being the center of the width, height rectangle
@@ -25,19 +26,23 @@ class Donut extends AbstractRenderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: TDatum, i: number): (t: number) => string {
-    let old: TDatum[] = this.previous.data || []
+  arcTween(d: TDatum): (t: number) => string {
+    const previousData: IObject[] = this.previous.data || [],
+      old: TDatum = find((datum: IObject): boolean => datum.index === d.index)(previousData),
+      previous: TDatum = find((datum: IObject): boolean => datum.index === d.index - 1)(previousData),
+      last: TDatum = previousData[previousData.length - 1]
+
     let s0: number
     let e0: number
-    if (old[i]) {
-      s0 = old[i].startAngle
-      e0 = old[i].endAngle
-    } else if (!old[i] && old[i - 1]) {
-      s0 = old[i - 1].endAngle
-      e0 = old[i - 1].endAngle
-    } else if (!old[i - 1] && old.length > 0) {
-      s0 = old[old.length - 1].endAngle
-      e0 = old[old.length - 1].endAngle
+    if (old) {
+      s0 = old.startAngle
+      e0 = old.endAngle
+    } else if (!old && previous) {
+      s0 = previous.endAngle
+      e0 = previous.endAngle
+    } else if (!previous && previousData.length > 0) {
+      s0 = last.endAngle
+      e0 = last.endAngle
     } else {
       s0 = 0
       e0 = 0

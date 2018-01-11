@@ -12,6 +12,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var abstract_renderer_1 = require("./abstract_renderer");
 var d3_interpolate_1 = require("d3-interpolate");
+var fp_1 = require("lodash/fp");
 var Donut = /** @class */ (function (_super) {
     __extends(Donut, _super);
     function Donut() {
@@ -35,22 +36,22 @@ var Donut = /** @class */ (function (_super) {
         return "0.35em";
     };
     // Interpolate the arcs in data space.
-    Donut.prototype.arcTween = function (d, i) {
+    Donut.prototype.arcTween = function (d) {
         var _this = this;
-        var old = this.previous.data || [];
+        var previousData = this.previous.data || [], old = fp_1.find(function (datum) { return datum.index === d.index; })(previousData), previous = fp_1.find(function (datum) { return datum.index === d.index - 1; })(previousData), last = previousData[previousData.length - 1];
         var s0;
         var e0;
-        if (old[i]) {
-            s0 = old[i].startAngle;
-            e0 = old[i].endAngle;
+        if (old) {
+            s0 = old.startAngle;
+            e0 = old.endAngle;
         }
-        else if (!old[i] && old[i - 1]) {
-            s0 = old[i - 1].endAngle;
-            e0 = old[i - 1].endAngle;
+        else if (!old && previous) {
+            s0 = previous.endAngle;
+            e0 = previous.endAngle;
         }
-        else if (!old[i - 1] && old.length > 0) {
-            s0 = old[old.length - 1].endAngle;
-            e0 = old[old.length - 1].endAngle;
+        else if (!previous && previousData.length > 0) {
+            s0 = last.endAngle;
+            e0 = last.endAngle;
         }
         else {
             s0 = 0;

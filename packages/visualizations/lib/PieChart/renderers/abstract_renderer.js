@@ -32,26 +32,26 @@ function dataKey(d) {
 function dataLabelValue(d) {
     return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined;
 }
-function dataColor(d) {
-    return d.data.colorHex;
-}
 var AbstractRenderer = /** @class */ (function () {
     function AbstractRenderer(state, events, el, options) {
-        var _this = this;
         this.computed = {};
         this.drawn = false;
         this.state = state;
         this.events = events;
         this.el = el.select("g.drawing");
-        fp_1.forEach.convert({ cap: false })(function (option, key) {
-            ;
-            _this[key] = fp_1.isFunction(option) ? function (d) { return option(d); } : option;
-        })(options);
+        this.assignOptions(options);
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this));
         this.events.on(event_catalog_1.default.CHART.OUT, this.updateElementHover.bind(this));
     }
+    AbstractRenderer.prototype.assignOptions = function (options) {
+        var _this = this;
+        fp_1.forEach.convert({ cap: false })(function (option, key) {
+            ;
+            _this[key] = fp_1.isFunction(option) ? function (d) { return option(d); } : option;
+        })(options);
+    };
     AbstractRenderer.prototype.setData = function (data) {
         this.data = data;
     };
@@ -79,11 +79,9 @@ var AbstractRenderer = /** @class */ (function () {
         this.drawn = true;
     };
     AbstractRenderer.prototype.updateDraw = function () {
-        var _this = this;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
-        var duration = this.state.current.get("config").duration;
-        var that = this, n = 0;
+        var that = this;
         // Center coordinate system
         this.el.attr("transform", this.translateString(this.computeTranslate()));
         // Arcs
@@ -91,44 +89,55 @@ var AbstractRenderer = /** @class */ (function () {
             .select("g.arcs")
             .selectAll("g")
             .data(this.computed.data, dataKey);
-        // Exit
-        var exit = arcs
-            .exit()
+        this.exit(arcs);
+        this.enterAndUpdate(arcs);
+    };
+    AbstractRenderer.prototype.exit = function (arcs) {
+        var duration = this.state.current.get("config").duration;
+        var exitingArcs = arcs.exit();
+        exitingArcs.select("path")
             .transition()
-            .duration(duration);
-        exit.selectAll("path").attrTween("d", this.removeArcTween.bind(this));
-        exit.selectAll("text." + styles.label).style("opacity", "1e-6");
-        exit.remove();
-        // Enter
-        var enter = arcs
+            .duration(duration)
+            .attrTween("d", this.removeArcTween.bind(this));
+        exitingArcs.select("text." + styles.label)
+            .transition()
+            .duration(duration)
+            .style("opacity", "1e6");
+        exitingArcs.remove();
+    };
+    AbstractRenderer.prototype.enterAndUpdate = function (arcs) {
+        var _this = this;
+        var duration = this.state.current.get("config").duration;
+        var n = 0;
+        var enteringArcs = arcs
             .enter()
             .append("svg:g")
             .attr("class", styles.arc)
             .on("mouseenter", this.onMouseOver.bind(this));
-        enter.append("svg:path").style("fill", function (d) { return _this.color(d.data); });
-        enter
+        enteringArcs.append("svg:path")
+            .style("fill", function (d) { return _this.color(d.data); });
+        enteringArcs
             .append("svg:text")
             .attr("class", styles.label)
             .attr("dy", 5)
             .style("text-anchor", "middle");
-        var update = arcs
-            .enter()
-            .merge(arcs)
+        arcs.merge(enteringArcs).select("path")
             .transition()
             .duration(duration)
-            .each(function () { return (n = n + 1); })
+            .attrTween("d", this.arcTween.bind(this))
+            .each(function () { return n = n + 1; })
             .on("end", function () {
             n = n - 1;
             if (n < 1) {
                 _this.onTransitionEnd();
             }
         });
-        update.selectAll("path").attrTween("d", this.arcTween.bind(this));
-        update
-            .selectAll("text." + styles.label)
+        arcs.merge(enteringArcs)
+            .select("text." + styles.label)
+            .transition()
+            .duration(duration)
             .attr("transform", this.labelTranslate.bind(this))
             .text(dataLabelValue);
-        // Total
         this.updateTotal();
     };
     AbstractRenderer.prototype.onTransitionEnd = function () {
@@ -143,19 +152,14 @@ var AbstractRenderer = /** @class */ (function () {
             .data(this.centerDisplayString());
         total
             .exit()
-            .transition()
-            .duration(duration)
             .style("font-size", "1px")
             .remove();
-        total
-            .enter()
-            .append("svg:text")
-            .attr("text-anchor", "middle");
         var mergedTotal = total
             .enter()
+            .append("svg:text")
+            .attr("text-anchor", "middle")
             .merge(total)
-            .selectAll("text");
-        mergedTotal.text(function (d) { return d; });
+            .text(function (d) { return d; });
         var node = mergedTotal.node();
         if (node) {
             var y = function (x) {

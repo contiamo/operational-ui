@@ -5,7 +5,7 @@ declare class Donut extends AbstractRenderer {
     totalForPercentages(): number;
     centerDisplayString(): string[];
     totalYOffset(): string;
-    arcTween(d: TDatum, i: number): (t: number) => string;
+    arcTween(d: TDatum): (t: number) => string;
     angleRange(): [number, number];
 }
 export default Donut;

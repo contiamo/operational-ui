@@ -11,10 +11,10 @@ var Series = /** @class */ (function () {
         this.el = el;
         this.drawn = false;
     }
-    Series.prototype.initializeSeries = function () {
+    Series.prototype.assignData = function () {
         this.attributes = this.state.current.get("data");
         this.assignAccessors();
-        this.renderer = this.initializeRenderer();
+        this.updateRenderer();
         this.prepareData();
         this.stateWriter("dataForLegend", this.renderer.dataForLegend());
     };
@@ -34,13 +34,25 @@ var Series = /** @class */ (function () {
             _this[key] = function () { return accessor(_this.attributes); };
         })(accessors);
     };
-    Series.prototype.initializeRenderer = function () {
+    Series.prototype.updateRenderer = function () {
         var options = this.renderAs();
         if (options.length !== 1) {
             throw new Error("Incorrect number of renderers: " + options.length + " specified, 1 required");
         }
-        var renderer = new renderer_1.default(this.state, this.events, this.el, options[0]);
-        return renderer;
+        var rendererOptions = options[0];
+        if (!this.renderer) {
+            this.renderer = this.createRenderer(rendererOptions);
+        }
+        else if (this.renderer.type !== rendererOptions.type) {
+            this.renderer.remove();
+            this.renderer = this.createRenderer(rendererOptions);
+        }
+        else {
+            this.renderer.assignOptions(rendererOptions);
+        }
+    };
+    Series.prototype.createRenderer = function (options) {
+        return new renderer_1.default(this.state, this.events, this.el, options);
     };
     Series.prototype.hasData = function () {
         return this.data.length > 0;

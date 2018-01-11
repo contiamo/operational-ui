@@ -96,7 +96,7 @@ var Facade = /** @class */ (function () {
     };
     Facade.prototype.draw = function () {
         this.state.captureState();
-        this.series.initializeSeries();
+        this.series.assignData();
         this.components.legend.draw();
         this.canvas.draw();
         this.series.draw();

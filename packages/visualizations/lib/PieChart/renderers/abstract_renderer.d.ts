@@ -15,12 +15,15 @@ declare abstract class AbstractRenderer {
     type: string;
     value: (d: TDatum) => number;
     constructor(state: IState, events: IEvents, el: TD3Selection, options: IObject);
+    assignOptions(options: IObject): void;
     setData(data: TDatum[]): void;
     computeTotal(): void;
     hasData(): boolean;
     draw(): void;
     initialDraw(): void;
     updateDraw(): void;
+    exit(arcs: TD3Selection): void;
+    enterAndUpdate(arcs: TD3Selection): void;
     onTransitionEnd(): void;
     abstract centerDisplayString(): string[];
     updateTotal(): void;

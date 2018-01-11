@@ -11,10 +11,11 @@ declare class Series {
     state: IState;
     stateWriter: TStateWriter;
     constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl);
-    initializeSeries(): void;
+    assignData(): void;
     prepareData(): void;
     assignAccessors(): void;
-    initializeRenderer(): AbstractRenderer;
+    updateRenderer(): void;
+    createRenderer(options: IObject): any;
     hasData(): boolean;
     draw(): void;
 }
