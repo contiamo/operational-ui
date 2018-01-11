@@ -27,7 +27,7 @@ function approxZero(y: (x: number) => number, initialX: number): number {
     }
   }
 
-  return x
+  return xInt
 }
 
 // Accessors of series in prepared data

@@ -16,14 +16,14 @@ function approxZero(y, initialX) {
     var m = (p0.y - p1.y) / (p0.x - p1.x);
     var xZero = -p0.y / m + p0.x;
     // Find nearest integer value for x that has y > 0
-    var x = Math.round(xZero);
+    var xInt = Math.round(xZero);
     var i;
-    for (i = 0; i <= 10; i++) {
-        if (y(x) <= 0) {
-            x--;
+    for (i = 0; i <= 10; i = i + 1) {
+        if (y(xInt) <= 0) {
+            xInt = xInt - 1;
         }
     }
-    return x;
+    return xInt;
 }
 // Accessors of series in prepared data
 function dataKey(d) {
