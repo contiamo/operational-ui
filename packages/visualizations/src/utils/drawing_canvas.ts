@@ -79,11 +79,11 @@ abstract class DrawingCanvas extends Canvas {
   }
 
   appendSeriesDrawingGroups(seriesElements: string[] | string[][]): void {
-    let series: TD3Selection = this.elements.drawing.append("svg:g").attr("class", "series-drawings-group")
+    const series: TD3Selection = this.elements.drawing.append("svg:g").attr("class", "series-drawings-group")
     this.elements.series = reduce((memo: IObject, se: string | string[]): IObject => {
       if (isArray(se)) {
-        let renderer: string = se[0]
-        let clip: string = se[1]
+        const renderer: string = se[0]
+        const clip: string = se[1]
         memo[renderer] = series
           .append("svg:g")
           .attr("class", "series-" + renderer)
@@ -97,7 +97,7 @@ abstract class DrawingCanvas extends Canvas {
 
   insertLegend(position: string, float: string): void {
     const legendPositionClass: string = ["top", "bottom"].indexOf(position) > -1 ? styles.legendTopBottom : ""
-    let legend: TD3Selection = d3
+    const legend: TD3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.legend} ${legendPositionClass} ${float}`)
       .style("float", float)
@@ -113,12 +113,12 @@ abstract class DrawingCanvas extends Canvas {
   }
 
   insertLegendBefore(element: TD3Selection): void {
-    let ref: Node = this.drawingContainer.node()
+    const ref: Node = this.drawingContainer.node()
     ref.parentNode.insertBefore(element.node(), ref)
   }
 
   insertLegendAfter(element: TD3Selection): void {
-    let ref: Node = this.drawingContainer.node()
+    const ref: Node = this.drawingContainer.node()
     ref.parentNode.insertBefore(element.node(), ref.nextSibling)
   }
 
@@ -149,8 +149,8 @@ abstract class DrawingCanvas extends Canvas {
 
   draw(): void {
     super.draw()
-    let config: IObject = this.state.current.get("config")
-    let drawingContainerDims: { width: number; height: number } = this.drawingContainerDims()
+    const config: IObject = this.state.current.get("config")
+    const drawingContainerDims: { width: number; height: number } = this.drawingContainerDims()
 
     this.container.style("width", config.width + "px").style("height", config.height + "px")
     this.drawingContainer

@@ -16,7 +16,7 @@ class Focus extends AbstractDrawingFocus {
 
     FocusUtils.drawHidden(this.el, "element")
 
-    let content: TD3Selection = this.el.append("xhtml:ul")
+    const content: TD3Selection = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")

@@ -47,7 +47,7 @@ class Donut extends AbstractRenderer {
       s0 = 0
       e0 = 0
     }
-    let f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
+    const f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
     return (t: number): string => this.computed.arc(f(t))
   }
 

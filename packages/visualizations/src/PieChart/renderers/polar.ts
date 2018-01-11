@@ -49,10 +49,9 @@ class Polar extends AbstractRenderer {
     this.el.attr("transform", this.translateString(this.currentTranslation))
   }
 
-  computeOuter(width: number, height: number, scaleFactor: number): any {
-    scaleFactor = scaleFactor ? scaleFactor : 1
-    let domainMax: number = max(map((datum: IObject): number => this.value(datum))(this.data))
-    let scale: any = d3ScaleSqrt()
+  computeOuter(width: number, height: number, scaleFactor: number = 1): any {
+    const domainMax: number = max(map((datum: IObject): number => this.value(datum))(this.data))
+    const scale: any = d3ScaleSqrt()
       .range([
         this.state.current.get("config").minInnerRadius,
         Math.min(width, height) / 2 - this.state.current.get("config").outerBorderMargin
@@ -62,12 +61,12 @@ class Polar extends AbstractRenderer {
   }
 
   computeInner(outerRadius: (d: TDatum) => number): number {
-    let options: IConfig = this.state.current.get("config")
-    let minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
-    let maxWidth: number = options.maxWidth
-    let minOuterRadius: number = min(map(outerRadius)(this.computed.data))
+    const options: IConfig = this.state.current.get("config")
+    const minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
+    const maxWidth: number = options.maxWidth
+    const minOuterRadius: number = min(map(outerRadius)(this.computed.data))
     // Space is not enough, don't render
-    let width: number = minOuterRadius - options.minInnerRadius
+    const width: number = minOuterRadius - options.minInnerRadius
     return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth)
   }
 
@@ -102,7 +101,7 @@ class Polar extends AbstractRenderer {
 
   // Interpolate the arcs in data space.
   arcTween(d: TDatum, i: number): (t: number) => string {
-    let old: any = this.previous.data || []
+    const old: any = this.previous.data || []
     let s0: number
     let e0: number
     if (old[i]) {
@@ -119,7 +118,7 @@ class Polar extends AbstractRenderer {
       e0 = 0
     }
 
-    let f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
+    const f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
     return (t: number): string => this.computed.arc(extend(f(t))(d))
   }
 
@@ -128,7 +127,7 @@ class Polar extends AbstractRenderer {
     let e0: number
     s0 = e0 = this.angleRange()[1]
     // Value is needed to interpolate the radius as well as the angles.
-    let f = interpolateObject(
+    const f = interpolateObject(
       { endAngle: d.endAngle, startAngle: d.startAngle, value: d.value },
       { endAngle: e0, startAngle: s0, value: d.value }
     )

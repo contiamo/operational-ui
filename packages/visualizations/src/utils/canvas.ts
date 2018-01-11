@@ -58,7 +58,7 @@ abstract class Canvas {
 
   insertComponentFocus(): TD3Selection {
     const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
-    let ref: Node = this.container.node()
+    const ref: Node = this.container.node()
     ref.insertBefore(focusEl.node(), ref.nextSibling)
     return focusEl
   }

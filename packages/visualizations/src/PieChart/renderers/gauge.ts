@@ -25,7 +25,7 @@ class Gauge extends AbstractRenderer {
 
   runningTotal(): number[] {
     return reduce((memo: number[], datapoint: TDatum): number[] => {
-      let previous: number = last(memo) || 0
+      const previous: number = last(memo) || 0
       memo.push(previous + datapoint.value)
       return memo
     }, [])(this.data)
@@ -74,13 +74,13 @@ class Gauge extends AbstractRenderer {
   }
 
   updateComparison(): void {
-    let comparison: TD3Selection = this.el
+    const comparison: TD3Selection = this.el
       .selectAll(`g.${styles.comparison}`)
       .data(this.comparison ? [this.comparison] : [])
 
     comparison.exit().remove()
 
-    let enter: TD3Selection = comparison
+    const enter: TD3Selection = comparison
       .enter()
       .append("svg:g")
       .attr("class", styles.comparison)
@@ -110,7 +110,7 @@ class Gauge extends AbstractRenderer {
   // Establish coordinate system with 0,0 being the center of the width, height rectangle
   computeTranslate(): [number, number] {
     const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
-    let yTranslate: number =
+    const yTranslate: number =
       this.extent === "full" ? drawingDims.height / 2 : (drawingDims.height + this.computed.r) / 2
 
     this.currentTranslation = [drawingDims.width / 2, yTranslate]
@@ -196,7 +196,7 @@ class Gauge extends AbstractRenderer {
   }
 
   dataForLegend(): IObject[] {
-    let data: IObject[] = map((datum: IObject): IObject => {
+    const data: IObject[] = map((datum: IObject): IObject => {
       return {
         label: this.key(datum),
         color: this.color(datum)

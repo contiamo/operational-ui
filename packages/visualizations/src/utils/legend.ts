@@ -81,7 +81,7 @@ abstract class Legend {
     } else if (this.drawn) {
       // Check if legend requirements are the same as before. If they are, call updateDraw(),
       // otherwise remove legend and draw from scratch.
-      let sameReqs: boolean = every.convert({ cap: false })((req: string | boolean, i: number): boolean => {
+      const sameReqs: boolean = every.convert({ cap: false })((req: string | boolean, i: number): boolean => {
         return this.previousRequirements[i] === req
       })(this.requirements())
       if (sameReqs) {
@@ -115,7 +115,7 @@ abstract class Legend {
   updateDraw(): void {
     this.setFixedLegendDimensions()
 
-    let legends: TD3Selection = this.legend
+    const legends: TD3Selection = this.legend
       .selectAll(`div.${styles.seriesLegend}`)
       .data(this.data(), this.dataKey.bind(this))
 
@@ -198,7 +198,7 @@ abstract class Legend {
       seriesLegendPadding: any = widthPadding(this.legend.selectAll(`.${styles.seriesLegend}`).node())
 
     if (this.position === "right") {
-      let w: number = config.width
+      const w: number = config.width
       let lw: number = roundedUpWidth(legendNode) + widthMargin(legendNode)
 
       // Legend is wider than legend ratio
@@ -223,7 +223,7 @@ abstract class Legend {
         // If legend width has changed, width of legend text div needs to decrease as well.
         if (lw !== roundedUpWidth(legendNode) + widthMargin(legendNode)) {
           this.legend.attr("width", lw - widthMargin(legendNode))
-          let newNameWidth: number = roundedUpWidth(legendNode) - seriesLegendPadding - colorBoxWidth
+          const newNameWidth: number = roundedUpWidth(legendNode) - seriesLegendPadding - colorBoxWidth
           // If any of the .name divs are wider than the max possible name width and only have
           // one word (i.e. won't be split onto 2 lines), remove the legend.
           some((name: any): boolean => {
@@ -237,8 +237,8 @@ abstract class Legend {
         }
       }
     } else {
-      let h: number = config.height
-      let lh: number = roundedUpHeight(legendNode) + heightMargin(legendNode)
+      const h: number = config.height
+      const lh: number = roundedUpHeight(legendNode) + heightMargin(legendNode)
 
       // Legend is higher than legend ratio or chart is smaller than chart min
       if (lh / h > config.maxLegendRatio || h - lh < config.minChartWithLegend) {

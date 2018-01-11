@@ -27,11 +27,11 @@ class Legend extends AbstractLegend {
       this.state.current.get("computed").series.dataForLegend
     )
 
-    let legends: TD3Selection = this.legend.selectAll(`div.comparison`).data(data)
+    const legends: TD3Selection = this.legend.selectAll(`div.comparison`).data(data)
 
     legends.exit().remove()
 
-    let enter: TD3Selection = legends
+    const enter: TD3Selection = legends
       .enter()
       .append("div")
       .attr("class", `comparison ${styles.comparisonLegend}`)

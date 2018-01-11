@@ -11,19 +11,19 @@ import * as styles from "./styles"
 // on the positive integer domain which is monotonic decreasing
 function approxZero(y: (x: number) => number, initialX: number): number {
   // make sure to get points with different y value
-  let p0: { x: number; y: number } = { x: initialX, y: y(initialX) }
-  let p1: { x: number; y: number } = { x: initialX + 2, y: y(initialX + 2) }
+  const p0: { x: number; y: number } = { x: initialX, y: y(initialX) }
+  const p1: { x: number; y: number } = { x: initialX + 2, y: y(initialX + 2) }
 
   // Solve for 0
-  let m: number = (p0.y - p1.y) / (p0.x - p1.x)
-  let xZero: number = -p0.y / m + p0.x
+  const m: number = (p0.y - p1.y) / (p0.x - p1.x)
+  const xZero: number = -p0.y / m + p0.x
 
   // Find nearest integer value for x that has y > 0
-  let x: number = Math.round(xZero)
+  let xInt: number = Math.round(xZero)
   let i: number
-  for (i = 0; i <= 10; i++) {
-    if (y(x) <= 0) {
-      x--
+  for (i = 0; i <= 10; i = i + 1) {
+    if (y(xInt) <= 0) {
+      xInt = xInt - 1
     }
   }
 
@@ -106,13 +106,11 @@ abstract class AbstractRenderer {
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
-    let that: AbstractRenderer = this
-
     // Center coordinate system
     this.el.attr("transform", this.translateString(this.computeTranslate()))
 
     // Arcs
-    let arcs: TD3Selection = this.el
+    const arcs: TD3Selection = this.el
       .select("g.arcs")
       .selectAll("g")
       .data(this.computed.data, dataKey)
@@ -124,7 +122,7 @@ abstract class AbstractRenderer {
   exit(arcs: TD3Selection): void {
     const duration: number = this.state.current.get("config").duration
 
-    let exitingArcs: TD3Selection = arcs.exit()
+    const exitingArcs: TD3Selection = arcs.exit()
 
     exitingArcs
       .select("path")
@@ -145,7 +143,7 @@ abstract class AbstractRenderer {
     const duration: number = this.state.current.get("config").duration
     let n: number = 0
 
-    let enteringArcs: TD3Selection = arcs
+    const enteringArcs: TD3Selection = arcs
       .enter()
       .append("svg:g")
       .attr("class", styles.arc)
@@ -203,7 +201,7 @@ abstract class AbstractRenderer {
       .style("font-size", "1px")
       .remove()
 
-    let mergedTotal: TD3Selection = total
+    const mergedTotal: TD3Selection = total
       .enter()
       .append("svg:text")
       .attr("text-anchor", "middle")
@@ -212,7 +210,7 @@ abstract class AbstractRenderer {
 
     const node: any = mergedTotal.node()
     if (node) {
-      let y = (x: number): number => {
+      const y = (x: number): number => {
         mergedTotal.style("font-size", x + "px")
         // Text should fill half of available width (0.5 * diameter = radius)
         return this.computed.inner - node.getBBox().width
@@ -237,7 +235,7 @@ abstract class AbstractRenderer {
       return
     }
 
-    let arcs: any = this.el.select("g.arcs").selectAll("g")
+    const arcs: any = this.el.select("g.arcs").selectAll("g")
 
     const filterFocused: any = (d: TDatum): boolean =>
         datapoint.d && datapoint.d.data && dataKey(d) === dataKey(datapoint.d),
@@ -259,7 +257,7 @@ abstract class AbstractRenderer {
 
   onMouseOver(d: TDatum): void {
     const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
-    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint: { centroid }, d })
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { d, focusPoint: { centroid } })
   }
 
   highlightElement(key: string): void {
@@ -282,7 +280,7 @@ abstract class AbstractRenderer {
   // Compute
   compute(): void {
     this.previous = this.computed
-    let d: IObject = {}
+    const d: IObject = {}
 
     // We cannot draw a pie chart with no series or only series that have the value 0
     if (!this.hasData()) {
@@ -318,7 +316,7 @@ abstract class AbstractRenderer {
   }
 
   computeArcs(scale?: number): void {
-    let computed: IObject = this.computed
+    const computed: IObject = this.computed
     const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
     computed.r = this.computeOuter(drawingDims.width, drawingDims.height, scale)
     computed.inner = this.computeInner(computed.r)
@@ -354,7 +352,7 @@ abstract class AbstractRenderer {
 
   // Translate back to 0,0 in top left
   translateBack(point: [number, number]): [number, number] {
-    let currentTranslation: [number, number] = this.currentTranslation
+    const currentTranslation: [number, number] = this.currentTranslation
     return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
   }
 
@@ -364,7 +362,7 @@ abstract class AbstractRenderer {
     let s0: number
     let e0: number
     s0 = e0 = this.angleRange()[1]
-    let f = interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { endAngle: e0, startAngle: s0 })
+    const f = interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { endAngle: e0, startAngle: s0 })
     return (t: number): string => this.computed.arc(f(t))
   }
 

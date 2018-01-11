@@ -28,7 +28,7 @@ class Canvas extends AbstractDrawingCanvas {
   }
 
   appendShadows(): void {
-    let shadow: TD3Selection = this.elements.defs
+    const shadow: TD3Selection = this.elements.defs
       .append("filter")
       .attr("id", this.shadowDefinitionId())
       .attr("height", "130%")
@@ -47,7 +47,7 @@ class Canvas extends AbstractDrawingCanvas {
       .attr("type", "linear")
       .attr("slope", "0.5")
 
-    let shadowFeMerge: TD3Selection = shadow.append("feMerge")
+    const shadowFeMerge: TD3Selection = shadow.append("feMerge")
     shadowFeMerge.append("feMergeNode")
     shadowFeMerge.append("feMergeNode").attr("in", "SourceGraphic")
     this.stateWriter("shadowDefinitionId", this.shadowDefinitionId())
