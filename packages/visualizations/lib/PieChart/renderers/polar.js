@@ -38,8 +38,7 @@ var Polar = /** @class */ (function (_super) {
         var margin = this.state.current.get("config").outerBorderMargin;
         var scale = Math.min((drawing.width - 2 * margin) / current.width, (drawing.height - 2 * margin) / current.height);
         this.computeArcs(scale);
-        this.el.selectAll("path")
-            .attr("d", this.computed.arc);
+        this.el.selectAll("path").attr("d", this.computed.arc);
         var newCurrent = this.el.node().getBoundingClientRect(), topOffset = this.state.current.get("computed").canvas.legends.top.left.node().offsetHeight;
         this.currentTranslation = [
             (drawing.width - newCurrent.width) / 2 + drawing.left - newCurrent.left,
@@ -49,7 +48,7 @@ var Polar = /** @class */ (function (_super) {
     };
     Polar.prototype.computeOuter = function (width, height, scaleFactor) {
         var _this = this;
-        scaleFactor = scaleFactor ? scaleFactor : 1;
+        if (scaleFactor === void 0) { scaleFactor = 1; }
         var domainMax = fp_1.max(fp_1.map(function (datum) { return _this.value(datum); })(this.data));
         var scale = d3_scale_1.scaleSqrt()
             .range([

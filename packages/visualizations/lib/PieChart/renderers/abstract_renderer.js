@@ -81,7 +81,6 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.updateDraw = function () {
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
-        var that = this;
         // Center coordinate system
         this.el.attr("transform", this.translateString(this.computeTranslate()));
         // Arcs
@@ -206,7 +205,7 @@ var AbstractRenderer = /** @class */ (function () {
     };
     AbstractRenderer.prototype.onMouseOver = function (d) {
         var centroid = this.translateBack(this.computed.arc.centroid(d));
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { focusPoint: { centroid: centroid }, d: d });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { d: d, focusPoint: { centroid: centroid } });
     };
     AbstractRenderer.prototype.highlightElement = function (key) {
         var d = fp_1.find(function (datum) { return dataKey(datum) === key; })(this.computed.data);

@@ -5,7 +5,7 @@ declare class Polar extends AbstractRenderer {
     minSegmentWidth: number;
     onTransitionEnd(): void;
     fitToCanvas(): void;
-    computeOuter(width: number, height: number, scaleFactor: number): any;
+    computeOuter(width: number, height: number, scaleFactor?: number): any;
     computeInner(outerRadius: (d: TDatum) => number): number;
     hoverOuter(radius: any): any;
     angleValue(d: TDatum): number;
