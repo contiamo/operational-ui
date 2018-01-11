@@ -78,7 +78,14 @@ var inputStyle = {
     display: "block",
     margin: "20px 0"
 };
-var exists = function (stringValue) { return !!stringValue || stringValue === ""; };
+/*
+ * Checks whether a string value exists or not (same as !!stringValue, except it also returns
+ * true for empty string. This is used especially often in this component because this component
+ * renders form fields if any corresponding string value is passed down in props.
+ * e.g. props.username === null -> rendern no user name form field at all
+ *      props.username === "" -> render empty form field for user name
+ */
+var isStringValue = function (stringValue) { return !!stringValue || stringValue === ""; };
 var Auth = /** @class */ (function (_super) {
     __extends(Auth, _super);
     function Auth() {
@@ -93,19 +100,19 @@ var Auth = /** @class */ (function (_super) {
                     this.props.title ? (React.createElement(components_1.TitleType, { css: { textAlign: "center", margin: 0 } }, this.props.title)) : null,
                     this.props.error ? React.createElement(ErrorNotice, null, this.props.error) : null,
                     React.createElement(InputFields, null,
-                        exists(this.props.username) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
+                        isStringValue(this.props.username) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
                                         username: v
                                     });
                             } })) : null,
-                        exists(this.props.password) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
+                        isStringValue(this.props.password) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
                                         password: v
                                     });
                             } })) : null,
-                        exists(this.props.passwordConfirmation) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
+                        isStringValue(this.props.passwordConfirmation) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
                                         passwordConfirmation: v
