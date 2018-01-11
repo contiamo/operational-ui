@@ -69,11 +69,10 @@ const inputStyle: {} = {
   margin: "20px 0"
 }
 
-const exists = (s?: string): boolean => !!s || s === ""
+const exists = (stringValue?: string): boolean => !!stringValue || stringValue === ""
 
 export default class Auth extends React.Component<IProps, IState> {
   render() {
-    console.log("is username", !!this.props.username)
     return (
       <Container css={this.props.css} className={this.props.className}>
         <AuthCard>

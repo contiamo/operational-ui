@@ -78,7 +78,7 @@ var inputStyle = {
     display: "block",
     margin: "20px 0"
 };
-var exists = function (s) { return !!s || s === ""; };
+var exists = function (stringValue) { return !!stringValue || stringValue === ""; };
 var Auth = /** @class */ (function (_super) {
     __extends(Auth, _super);
     function Auth() {
@@ -86,7 +86,6 @@ var Auth = /** @class */ (function (_super) {
     }
     Auth.prototype.render = function () {
         var _this = this;
-        console.log("is username", !!this.props.username);
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
             React.createElement(AuthCard, null,
                 this.props.processing ? (React.createElement(components_1.Spinner, { css: { position: "absolute", top: "calc(50% - 20px)", left: "calc(50% - 20px)", zIndex: 10000 } })) : null,
