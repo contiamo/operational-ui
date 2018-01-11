@@ -158,6 +158,7 @@ abstract class DrawingCanvas extends Canvas {
       .style("height", drawingContainerDims.height + "px")
     this.el.style("width", drawingContainerDims.width + "px").style("height", drawingContainerDims.height + "px")
     this.elements.background.attr("width", drawingContainerDims.width).attr("height", drawingContainerDims.height)
+    this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
   }
 
   resize(): void {

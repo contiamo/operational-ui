@@ -31,18 +31,19 @@ var Polar = /** @class */ (function (_super) {
         // Reset current translation
         this.currentTranslation = [0, 0];
         this.el.attr("transform", this.translateString(this.currentTranslation));
-        var current = this.el.node().getBoundingClientRect(), drawing = this.state.current.get("computed").canvas.drawingContainerDims;
+        var current = this.el.node().getBoundingClientRect(), drawing = this.state.current.get("computed").canvas.drawingContainerRect;
         if (current.width === 0 && current.height === 0) {
             return;
         }
         var margin = this.state.current.get("config").outerBorderMargin;
         var scale = Math.min((drawing.width - 2 * margin) / current.width, (drawing.height - 2 * margin) / current.height);
         this.computeArcs(scale);
-        this.el.selectAll("path").attr("d", this.computed.arc);
+        this.el.selectAll("path")
+            .attr("d", this.computed.arc);
         var newCurrent = this.el.node().getBoundingClientRect(), topOffset = this.state.current.get("computed").canvas.legends.top.left.node().offsetHeight;
         this.currentTranslation = [
-            (drawing.width - newCurrent.width) / 2 - newCurrent.left,
-            (drawing.height - newCurrent.height) / 2 + topOffset - newCurrent.top
+            (drawing.width - newCurrent.width) / 2 + drawing.left - newCurrent.left,
+            (drawing.height - newCurrent.height) / 2 + drawing.top - newCurrent.top
         ];
         this.el.attr("transform", this.translateString(this.currentTranslation));
     };

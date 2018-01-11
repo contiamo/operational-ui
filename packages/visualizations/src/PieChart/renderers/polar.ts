@@ -25,7 +25,7 @@ class Polar extends AbstractRenderer {
     this.el.attr("transform", this.translateString(this.currentTranslation))
 
     const current: ClientRect = (this.el.node() as any).getBoundingClientRect(),
-      drawing: IObject = this.state.current.get("computed").canvas.drawingContainerDims
+      drawing: IObject = this.state.current.get("computed").canvas.drawingContainerRect
     if (current.width === 0 && current.height === 0) {
       return
     }
@@ -43,10 +43,9 @@ class Polar extends AbstractRenderer {
       topOffset: number = this.state.current.get("computed").canvas.legends.top.left.node().offsetHeight
 
     this.currentTranslation = [
-      (drawing.width - newCurrent.width) / 2 - newCurrent.left,
-      (drawing.height - newCurrent.height) / 2 + topOffset - newCurrent.top
+      (drawing.width - newCurrent.width) / 2 + drawing.left - newCurrent.left,
+      (drawing.height - newCurrent.height) / 2 + drawing.top - newCurrent.top
     ]
-
     this.el.attr("transform", this.translateString(this.currentTranslation))
   }
 

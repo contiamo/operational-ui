@@ -146,6 +146,7 @@ var DrawingCanvas = /** @class */ (function (_super) {
             .style("height", drawingContainerDims.height + "px");
         this.el.style("width", drawingContainerDims.width + "px").style("height", drawingContainerDims.height + "px");
         this.elements.background.attr("width", drawingContainerDims.width).attr("height", drawingContainerDims.height);
+        this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect());
     };
     DrawingCanvas.prototype.resize = function () {
         this.draw();
