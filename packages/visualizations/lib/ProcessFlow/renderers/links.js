@@ -42,7 +42,8 @@ var Links = /** @class */ (function (_super) {
     };
     Links.prototype.enterAndUpdate = function (linkGroups) {
         var scale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]), borderScale = this.linkBorderScale(scale), opacityScale = this.sizeScale([MINOPACITY, MAXOPACITY]);
-        var enteringLinkGroups = linkGroups.enter()
+        var enteringLinkGroups = linkGroups
+            .enter()
             .append("g")
             .attr("class", "link-group");
         enteringLinkGroups
@@ -58,7 +59,8 @@ var Links = /** @class */ (function (_super) {
             .attr("d", this.linkStartPath.bind(this))
             .attr("fill", "none")
             .attr("stroke-width", "0px");
-        linkGroups.merge(enteringLinkGroups)
+        linkGroups
+            .merge(enteringLinkGroups)
             .select("path.link." + styles.border)
             .attr("stroke", this.config.borderColor)
             .transition()
@@ -67,7 +69,8 @@ var Links = /** @class */ (function (_super) {
             .attr("d", this.linkPath.bind(this))
             .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
             .attr("stroke-dasharray", function (d) { return d.dash(); });
-        linkGroups.merge(enteringLinkGroups)
+        linkGroups
+            .merge(enteringLinkGroups)
             .select("path.link." + styles.element)
             .attr("stroke", function (d) { return d.stroke(); })
             .transition()

@@ -93,7 +93,7 @@ class Nodes extends AbstractRenderer {
 
     let n: number = 0
 
-    let enteringNodeGroups: TD3Selection = nodeGroups
+    const enteringNodeGroups: TD3Selection = nodeGroups
       .enter()
       .append("g")
       .attr("class", "node-group")

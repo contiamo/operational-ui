@@ -98,52 +98,66 @@ var Nodes = /** @class */ (function (_super) {
         var _this = this;
         var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale);
         var n = 0;
-        var enteringNodeGroups = nodeGroups.enter()
+        var enteringNodeGroups = nodeGroups
+            .enter()
             .append("g")
             .attr("class", "node-group")
             .attr("transform", this.translate);
-        enteringNodeGroups.append("path")
+        enteringNodeGroups
+            .append("path")
             .attr("class", "node " + styles.border)
-            .attr("d", function (d) { return d3_shape_1.symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(borderScale(d.size()))(); })
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
+                .type(nodeShapeOptions[d.shape()].symbol)
+                .size(borderScale(d.size()))();
+        })
             .attr("transform", this.rotate)
             .attr("fill", this.config.borderColor)
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)));
-        enteringNodeGroups.append("path")
+        enteringNodeGroups
+            .append("path")
             .attr("class", "node " + styles.element)
-            .attr("d", function (d) { return d3_shape_1.symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(borderScale(d.size()))(); })
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
+                .type(nodeShapeOptions[d.shape()].symbol)
+                .size(borderScale(d.size()))();
+        })
             .attr("transform", this.rotate)
             .attr("fill", function (d) { return d.color(); })
             .attr("stroke", function (d) { return d.stroke(); })
             .attr("opacity", 0);
         enteringNodeGroups.append("text").attr("class", styles.label);
-        nodeGroups.merge(enteringNodeGroups)
+        nodeGroups
+            .merge(enteringNodeGroups)
             .transition()
             .duration(this.config.duration)
             .attr("transform", this.translate);
-        nodeGroups.merge(enteringNodeGroups)
+        nodeGroups
+            .merge(enteringNodeGroups)
             .selectAll("path.node." + styles.border)
             .transition()
             .duration(this.config.duration)
-            .attr("d", function (d) { return d3_shape_1.symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(borderScale(d.size()))(); })
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
+                .type(nodeShapeOptions[d.shape()].symbol)
+                .size(borderScale(d.size()))();
+        })
             .attr("transform", this.rotate);
-        nodeGroups.merge(enteringNodeGroups)
+        nodeGroups
+            .merge(enteringNodeGroups)
             .selectAll("path.node." + styles.element)
             .transition()
             .duration(this.config.duration)
-            .attr("d", function (d) { return d3_shape_1.symbol()
-            .type(nodeShapeOptions[d.shape()].symbol)
-            .size(borderScale(d.size()))(); })
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
+                .type(nodeShapeOptions[d.shape()].symbol)
+                .size(borderScale(d.size()))();
+        })
             .attr("transform", this.rotate)
             .attr("fill", function (d) { return d.color(); })
             .attr("stroke", function (d) { return d.stroke(); })
             .attr("opacity", 1)
-            .each(function () { return n = n + 1; })
+            .each(function () { return (n = n + 1); })
             .on("end", function () {
             n = n - 1;
             if (n < 1) {

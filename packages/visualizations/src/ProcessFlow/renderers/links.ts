@@ -36,7 +36,7 @@ class Links extends AbstractRenderer {
       borderScale: TScale = this.linkBorderScale(scale),
       opacityScale: TScale = this.sizeScale([MINOPACITY, MAXOPACITY])
 
-    let enteringLinkGroups: TD3Selection = linkGroups
+    const enteringLinkGroups: TD3Selection = linkGroups
       .enter()
       .append("g")
       .attr("class", "link-group")
