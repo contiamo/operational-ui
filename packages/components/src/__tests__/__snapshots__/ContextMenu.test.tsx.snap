@@ -2,10 +2,10 @@
 
 exports[`ContextMenu Component Should render 1`] = `
 <div
-  class="css-1emyoj8"
+  class="css-1gsi2vm"
 >
   <div
-    class="css-2dcmrd"
+    class="css-k2qpfl"
   />
 </div>
 `;

@@ -15,6 +15,7 @@ module.exports = {
     "/components/grids": { page: "/components/grids", query: { title: "Grids" } },
     "/components/icons": { page: "/components/icons", query: { title: "Icons" } },
     "/components/info-tiles": { page: "/components/info-tiles", query: { title: "Infotiles" } },
+    "/components/messages": { page: "/components/messages", query: { title: "Messages" } },
     "/components/modals": { page: "/components/modals", query: { title: "Modals" } },
     "/components/paginators": { page: "/components/paginators", query: { title: "Paginators" } },
     "/components/progress": { page: "/components/progress", query: { title: "Progress" } },

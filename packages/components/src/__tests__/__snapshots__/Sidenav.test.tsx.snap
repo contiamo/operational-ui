@@ -76,8 +76,8 @@ exports[`Sidenav component renders 1`] = `
           "textTransform": "none",
         },
         "title": Object {
-          "fontSize": 22,
-          "fontWeight": 600,
+          "fontSize": 24,
+          "fontWeight": 400,
           "letterSpacing": "normal",
           "lineHeight": "1.5",
           "textTransform": "none",
