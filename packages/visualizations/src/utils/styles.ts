@@ -52,7 +52,7 @@ const ruleStyle = {
 }
 
 const componentFocusStyle = {
-  position: "fixed",
+  position: "absolute",
   pointerEvents: "all",
   backgroundColor: "rgba(190, 255, 255, 0.1)",
   borderRadius: "3px",

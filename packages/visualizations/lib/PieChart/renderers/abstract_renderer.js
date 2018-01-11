@@ -95,11 +95,13 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.exit = function (arcs) {
         var duration = this.state.current.get("config").duration;
         var exitingArcs = arcs.exit();
-        exitingArcs.select("path")
+        exitingArcs
+            .select("path")
             .transition()
             .duration(duration)
             .attrTween("d", this.removeArcTween.bind(this));
-        exitingArcs.select("text." + styles.label)
+        exitingArcs
+            .select("text." + styles.label)
             .transition()
             .duration(duration)
             .style("opacity", "1e6");
@@ -114,25 +116,27 @@ var AbstractRenderer = /** @class */ (function () {
             .append("svg:g")
             .attr("class", styles.arc)
             .on("mouseenter", this.onMouseOver.bind(this));
-        enteringArcs.append("svg:path")
-            .style("fill", function (d) { return _this.color(d.data); });
+        enteringArcs.append("svg:path").style("fill", function (d) { return _this.color(d.data); });
         enteringArcs
             .append("svg:text")
             .attr("class", styles.label)
             .attr("dy", 5)
             .style("text-anchor", "middle");
-        arcs.merge(enteringArcs).select("path")
+        arcs
+            .merge(enteringArcs)
+            .select("path")
             .transition()
             .duration(duration)
             .attrTween("d", this.arcTween.bind(this))
-            .each(function () { return n = n + 1; })
+            .each(function () { return (n = n + 1); })
             .on("end", function () {
             n = n - 1;
             if (n < 1) {
                 _this.onTransitionEnd();
             }
         });
-        arcs.merge(enteringArcs)
+        arcs
+            .merge(enteringArcs)
             .select("text." + styles.label)
             .transition()
             .duration(duration)

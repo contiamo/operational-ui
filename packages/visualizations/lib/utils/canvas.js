@@ -19,7 +19,6 @@ var Canvas = /** @class */ (function () {
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.chartContainer);
         context.appendChild(container.node());
-        this.stateWriter(["containerRect"], container.node().getBoundingClientRect());
         return container;
     };
     Canvas.prototype.insertEl = function () {
@@ -77,6 +76,7 @@ var Canvas = /** @class */ (function () {
     };
     Canvas.prototype.draw = function () {
         this.container.classed("hidden", this.state.current.get("config").hidden);
+        this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect());
     };
     Canvas.prototype.remove = function () {
         var el = this.mouseOverElement();

@@ -7,7 +7,10 @@ declare class ComponentFocus {
     state: IState;
     type: string;
     uid: string;
-    constructor(state: IState, el: TD3Selection, events: IEvents, payload: IObject);
+    constructor(state: IState, el: TD3Selection, events: IEvents, payload: {
+        component: TD3Selection;
+        options: IObject;
+    });
     onMouseOver(): void;
     onMouseOut(): void;
     onClick(configOptions: IObject): () => void;

@@ -23,7 +23,6 @@ var Canvas = /** @class */ (function (_super) {
         _this.appendDrawingGroup();
         _this.insertFocusElements();
         _this.insertLegend("top", "left");
-        _this.insertComponentFocus();
         _this.elements.background.on("mouseover", function () {
             _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         });

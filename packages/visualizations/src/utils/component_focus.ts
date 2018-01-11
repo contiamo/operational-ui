@@ -13,7 +13,12 @@ class ComponentFocus {
   type: string = "component"
   uid: string
 
-  constructor(state: IState, el: TD3Selection, events: IEvents, payload: IObject) {
+  constructor(
+    state: IState,
+    el: TD3Selection,
+    events: IEvents,
+    payload: { component: TD3Selection; options: IObject }
+  ) {
     this.state = state
     this.el = el.append("xhtml:div").attr("class", `${styles.focusLegend} ${styles.componentFocus}`)
     this.events = events
