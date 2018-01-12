@@ -1,5 +1,5 @@
 import * as React from "react"
-import { DatePicker, Card, CardHeader, Heading2Type } from "@operational/components"
+import { DatePicker, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -66,10 +66,10 @@ export default props => (
     <Card>
       <p>DatePickers can currently be used to pick an period bound by two day selections.</p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ DatePicker }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

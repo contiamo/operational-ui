@@ -1,5 +1,5 @@
 import * as React from "react"
-import { InfoTile, Card, CardHeader, Heading2Type } from "@operational/components"
+import { InfoTile, Card, CardHeader } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -71,10 +71,10 @@ export default props => (
         <InfoTile label="Potential Added Value">&euro;2M</InfoTile>
       </div>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={snippet} components={{ InfoTile }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

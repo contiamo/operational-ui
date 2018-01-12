@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Chip, PlusChip, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Chip, PlusChip, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Playground from "../../components/Playground"
@@ -7,14 +7,8 @@ import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
 <div style={{ display: "flex" }}>
-  {/* These work well in a flex-ed parent */}
-  <Chip color="#006847">Hola</Chip>
-  <Chip color="#fff">Compadre</Chip>
-
-  <Chip color="#CE1126" symbol="!" onClick={() => window.alert("Muy bien!")}>
-    Como estas?
-  </Chip>
-  {/* onClick can do literally anything you want it to */}
+  <Chip color="info">Hello!</Chip>
+  <Chip color="success" symbol="!" onClick={() => window.alert("Buonasera!")}>Ciao!</Chip>
 </div>
 `
 
@@ -52,10 +46,10 @@ export default props => (
         along with a symbol for the button that will be displayed if click behavior is detected.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Chip }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

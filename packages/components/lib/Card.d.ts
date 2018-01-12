@@ -8,7 +8,6 @@ export interface IProps {
     children: React.ReactNode;
     theme?: Theme;
     width?: number;
-    padding?: number;
 }
 declare const Card: React.SFC<IProps>;
 export default Card;

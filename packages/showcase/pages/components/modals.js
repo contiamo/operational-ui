@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Modal, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Modal, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -74,10 +74,10 @@ export default props => (
     <Card>
       <p>Modals are customizable full-screen alert boxes.</p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Modal }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

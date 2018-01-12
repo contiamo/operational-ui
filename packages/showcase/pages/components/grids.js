@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Grid, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Grid, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -71,10 +71,10 @@ export default props => (
         Grid component based on CSS grid spec. Beware <a href="http://caniuse.com/#search=grid">browser support</a>.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Grid }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

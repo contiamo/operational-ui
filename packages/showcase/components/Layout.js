@@ -52,6 +52,9 @@ const PageContent = glamorous.div(({ theme }) => ({
   "& a:hover": {
     color: darken(theme.colors.info)(5)
   },
+  "& h2": {
+    ...theme.typography.heading2
+  },
   "& p": {
     maxWidth: 670
   }

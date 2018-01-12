@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ColorPicker, Card, CardHeader, Heading2Type } from "@operational/components"
+import { ColorPicker, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Playground from "../../components/Playground"
@@ -71,7 +71,7 @@ export default props => (
       </p>
       {process.env.NODE_ENV !== "test" && <Playground snippet={simpleSnippet} components={{ ColorPicker }} />}
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

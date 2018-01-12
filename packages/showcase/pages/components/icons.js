@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Icon, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Icon, Card, CardHeader } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -45,10 +45,10 @@ export default props => (
         </a>, custom shapes, SVG sprites) to provide a consistent API as the icon set evolves.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Icon }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

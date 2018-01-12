@@ -34,7 +34,7 @@ var colors = {
     emphasizedText: "#373d3f",
     lightText: "#969696",
     linkText: "#1499CE",
-    sidenavBackground: "#393939",
+    sidenavBackground: "#394960",
     separator: "#f2f2f2",
     secondarySeparator: "#f8f8f8"
 };
@@ -45,10 +45,8 @@ var baseTypography = {
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 24, fontWeight: 400 }),
-    heading1: __assign({}, baseTypography, { fontSize: 13, fontWeight: 700, color: "#373d3f" }),
-    heading2: __assign({}, baseTypography, { fontSize: 13, fontWeight: 600, textTransform: "uppercase", color: "#969696", "&::before": {
-            content: "» "
-        } }),
+    heading1: __assign({}, baseTypography, { fontSize: 16, fontWeight: 600, color: "#373d3f" }),
+    heading2: __assign({}, baseTypography, { fontSize: 16, fontWeight: 400, color: "#969696" }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
     small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 })
 };

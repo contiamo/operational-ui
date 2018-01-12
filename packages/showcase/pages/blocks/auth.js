@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Card, Button, Heading2Type, Input, Icon } from "@operational/components"
+import { Card, Button, Input, Icon } from "@operational/components"
 import { Auth } from "@operational/blocks"
 
 import Layout from "../../components/Layout"
@@ -156,11 +156,11 @@ export default props => (
       <p>Try out the component by expanding the auth block below:</p>
       <AuthExpand />
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <p>Here is a simple stateless example to help you get a feel for the props:</p>
       <Playground snippet={simpleSnippet} scope={{}} components={{ Auth }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

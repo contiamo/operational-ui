@@ -25,19 +25,18 @@ const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; colo
     width: "fit-content",
     borderRadius: 2,
     padding: hasChip
-      ? `${theme.spacing / 3}px ${2.5 * theme.spacing}px ${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`
-      : `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
+      ? `${theme.spacing / 3}px ${theme.spacing * 8 / 3}px ${theme.spacing / 3}px ${theme.spacing * 3 / 3}px`
+      : `${theme.spacing / 3}px ${theme.spacing * 3 / 3}px`,
     cursor: "pointer",
     overflow: "hidden",
     color: readableTextColor(backgroundColor)(["black", "white"]),
-    margin: `${theme.spacing / 4}px ${theme.spacing / 4}px 0px 0px`
+    margin: `${theme.spacing / 3}px ${theme.spacing / 3}px 0px 0px`
   }
 })
 
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
   const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
   return {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
     color: readableTextColor(backgroundColor)(["black", "white"]),
     position: "absolute",
@@ -48,9 +47,9 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    padding: `0 ${theme.spacing / 4}px`,
+    padding: `0 ${theme.spacing / 3}px`,
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.25)"
+      backgroundColor: "rgba(0, 0, 0, 0.1)"
     }
   }
 })

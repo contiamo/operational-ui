@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Tabs, Tab, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Tabs, Tab, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -119,10 +119,10 @@ export default props => (
         Component used to navigate across multiple views. It's composed of multiple <a href="#tab">Tab</a> components.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Tabs, Tab }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
 
       <div style={{ marginBottom: 32 }} />
 

@@ -9,16 +9,14 @@ export interface IProps {
   children: React.ReactNode
   theme?: Theme
   width?: number
-  padding?: number
 }
 
 const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; width?: number; padding?: number }) => ({
   width,
   label: "card",
-  padding: padding || theme.spacing,
+  padding: theme.spacing * 4 / 3,
   boxShadow: theme.shadows.card,
   backgroundColor: theme.colors.cardBackground,
-  color: theme.colors.bodyText,
 
   "& p": {
     lineHeight: "20px"
@@ -29,7 +27,7 @@ const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; widt
 }))
 
 const Card: React.SFC<IProps> = (props: IProps) => (
-  <Container key={props.id} css={props.css} width={props.width} padding={props.padding} className={props.className}>
+  <Container key={props.id} css={props.css} width={props.width} className={props.className}>
     {props.children}
   </Container>
 )

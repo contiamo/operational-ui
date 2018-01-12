@@ -17,8 +17,8 @@ export interface IStyleProps {
 
 const width: number = 32
 const height: number = 16
-const railHeight: number = 6
-const railOffset: number = 4
+const railHeight: number = 16
+const railOffset: number = 8
 
 const Container = glamorous.div({
   width,
@@ -42,7 +42,7 @@ const Button = glamorous.div(
   ({ on, theme }: IStyleProps) => ({
     transform: `translate3d(${on ? width - height - 2 : 0}px, 0, 0)`,
     backgroundColor: theme.colors.white,
-    border: `1px solid ${theme.colors.gray70}`,
+    border: `1px solid ${on ? theme.colors.info : theme.colors.gray80}`,
     zIndex: theme.baseZIndex + 2
   })
 )
@@ -59,7 +59,7 @@ const Rail = glamorous.div(
     overflow: "hidden"
   },
   ({ on, theme }: IStyleProps) => ({
-    backgroundColor: theme.colors.gray60,
+    backgroundColor: theme.colors.gray80,
     "&:after": {
       content: " ",
       position: "absolute",
@@ -67,7 +67,7 @@ const Rail = glamorous.div(
       height: "100%",
       top: 0,
       left: 0,
-      backgroundColor: theme.colors.success,
+      backgroundColor: theme.colors.info,
       transition: "transform .3s",
       transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
       zIndex: theme.baseZIndex + 1

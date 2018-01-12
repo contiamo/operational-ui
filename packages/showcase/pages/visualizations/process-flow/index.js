@@ -1,6 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
-import { Card, CardHeader, Heading2Type } from "@operational/components"
+import { Card, CardHeader } from "@operational/components"
 import { ProcessFlow, VisualizationWrapper } from "@operational/visualizations"
 
 import Layout from "../../../components/Layout"
@@ -372,7 +372,7 @@ export default props => (
         "@operational/visualizations" package.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <p>Here is a simple usage scenario for the process flow</p>
       <Playground snippet={simpleSnippet} scope={{ ProcessFlow }} components={{ VisualizationWrapper }} />
 
@@ -383,7 +383,7 @@ export default props => (
         </Link>.
       </p>
 
-      <Heading2Type>Data</Heading2Type>
+      <h2>Data</h2>
       <p>
         The input data should be an object with properties 'journeys' and 'nodes' (alternative names can only be used if
         the data accessors are then set accordingly: see below).
@@ -403,7 +403,7 @@ export default props => (
         node object must have an 'id' property that corresponds to the ids used in the journey paths.
       </p>
 
-      <Heading2Type>Accessors</Heading2Type>
+      <h2>Accessors</h2>
       <p>
         Accessors are used to tell the visualization about data structure (data accessors), and to determine how
         individual nodes and individual links should be rendered (node and link accessors). Rendering options that must
@@ -417,20 +417,20 @@ export default props => (
         explicitly dealt with.
       </p>
 
-      <Heading2Type>Data Accessors</Heading2Type>
+      <h2>Data Accessors</h2>
       <p>
         Data accessors are required if the nodes and journeys can not be accessed from the input data via the properties
         'nodes' and 'journeys'.
       </p>
       <Table props={propDescription.DataAccessors} />
 
-      <Heading2Type>Node Accessors</Heading2Type>
+      <h2>Node Accessors</h2>
       <Table props={propDescription.NodeAccessors} />
 
-      <Heading2Type>Link Accessors</Heading2Type>
+      <h2>Link Accessors</h2>
       <Table props={propDescription.LinkAccessors} />
 
-      <Heading2Type>Config</Heading2Type>
+      <h2>Config</h2>
       <Table props={propDescription.Config} />
     </Card>
   </Layout>

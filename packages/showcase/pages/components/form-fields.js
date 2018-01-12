@@ -1,6 +1,6 @@
 import * as React from "react"
 import SyntaxHighlighter from "react-syntax-highlighter"
-import { Input, Select, Checkbox, Fieldset, DatePicker, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Input, Select, Checkbox, Fieldset, DatePicker, Card, CardHeader } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -233,7 +233,7 @@ export default props => (
 
       <Playground snippet={inputSnippet} components={{ Input }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription.Input} />
 
       <CardHeader>Select</CardHeader>
@@ -244,7 +244,7 @@ export default props => (
 
       <Playground snippet={selectSnippet} components={{ Select }} />
 
-      <Heading2Type>Return Value</Heading2Type>
+      <h2>Return Value</h2>
       <p>
         The value prop passed to select is is either an `Option` object, or an Array of `Option` objects. If it is an
         array, the component automatically becomes a multi-select. The shape of an Option object is described below.
@@ -258,7 +258,7 @@ Option {
 }
     `}</SyntaxHighlighter>
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription.Select} />
 
       <CardHeader>Checkbox</CardHeader>
@@ -269,7 +269,7 @@ Option {
 
       <Playground snippet={checkboxSnippet} components={{ Checkbox }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription.Checkbox} />
 
       <CardHeader>Organizing forms</CardHeader>

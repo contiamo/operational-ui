@@ -9,48 +9,31 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var ReactFeather = require("react-feather");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Line = glamorous_1.default.div({
     position: "absolute",
-    left: 7,
-    top: 2,
+    left: 5,
+    top: 6,
     height: "100%"
 }, function (_a) {
     var theme = _a.theme;
     return ({
-        borderLeft: "2px solid " + theme.colors.gray30
+        borderLeft: "1px solid " + theme.colors.gray30
     });
 });
 var StatusContainer = glamorous_1.default.div({
     border: "2px solid transparent",
-    borderRadius: "100px",
-    height: 16,
+    borderRadius: "50%",
+    height: 11,
     position: "absolute",
-    top: 2,
-    width: 16,
-    "& > svg": {
-        height: 18,
-        width: 18
-    }
+    top: 6,
+    width: 11
 }, function (_a) {
-    var theme = _a.theme, color = _a.color, children = _a.children;
-    return (__assign({ backgroundColor: "" + theme.colors.white, borderColor: "" + color, color: "" + color }, children
-        ? {
-            border: 0,
-            borderRadius: 0,
-            height: "auto",
-            left: -7,
-            lineHeight: 0,
-            marginTop: 10,
-            padding: "3px 0",
-            position: "absolute",
-            textAlign: "center",
-            transform: "translateY(-50%)",
-            width: 30
-        }
-        : {}));
+    var theme = _a.theme, color = _a.color;
+    return ({
+        backgroundColor: "" + color
+    });
 });
 var Content = glamorous_1.default.div({
     padding: "0 0 5px 26px",
@@ -78,13 +61,10 @@ var Container = glamorous_1.default.li({
 });
 var TimelineItem = function (_a) {
     var css = _a.css, id = _a.id, className = _a.className, children = _a.children, _b = _a.color, color = _b === void 0 ? "info" : _b, _c = _a.icon, icon = _c === void 0 ? "" : _c, theme = _a.theme;
-    var IconLib = ReactFeather;
-    var isValidIcon = IconLib.hasOwnProperty(icon);
-    var Icon = IconLib[icon];
     var statusColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
     return (React.createElement(Container, { key: id, css: css, className: className },
         React.createElement(Line, null),
-        React.createElement(StatusContainer, { color: statusColor }, isValidIcon ? React.createElement(Icon, { color: statusColor }) : null),
+        React.createElement(StatusContainer, { color: statusColor }),
         React.createElement(Content, null, children)));
 };
 var WrappedTimelineItem = glamorous_1.withTheme(TimelineItem);

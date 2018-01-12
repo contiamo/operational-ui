@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Sidebar, SidebarItem, SidebarLink, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Sidebar, SidebarItem, SidebarLink, Card, CardHeader } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -103,13 +103,13 @@ export default props => (
 
       <div style={{ marginBottom: 32 }} />
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Sidebar, SidebarItem, SidebarLink }} scope={{ fetch }} />
 
       <div style={{ marginBottom: 32 }} />
 
       <CardHeader id="sidebar-item">SidebarItem</CardHeader>
-      <Heading2Type>An expandable group of SidebarLinks, with added asynchronous functionality.</Heading2Type>
+      <h2>An expandable group of SidebarLinks, with added asynchronous functionality.</h2>
 
       <Table props={propDescription.sidebarItem} />
 

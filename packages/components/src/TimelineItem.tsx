@@ -22,47 +22,26 @@ export interface IPropsWithTheme extends IProps {
 const Line = glamorous.div(
   {
     position: "absolute",
-    left: 7,
-    top: 2,
+    left: 5,
+    top: 6,
     height: "100%"
   },
   ({ theme }: { theme: Theme }) => ({
-    borderLeft: `2px solid ${theme.colors.gray30}`
+    borderLeft: `1px solid ${theme.colors.gray30}`
   })
 )
 
 const StatusContainer = glamorous.div(
   {
     border: "2px solid transparent",
-    borderRadius: "100px",
-    height: 16,
+    borderRadius: "50%",
+    height: 11,
     position: "absolute",
-    top: 2,
-    width: 16,
-    "& > svg": {
-      height: 18,
-      width: 18
-    }
+    top: 6,
+    width: 11
   },
-  ({ theme, color, children }: { theme: Theme; color: CustomColor; children: any }) => ({
-    backgroundColor: `${theme.colors.white}`,
-    borderColor: `${color}`,
-    color: `${color}`,
-    ...children
-      ? {
-          border: 0,
-          borderRadius: 0,
-          height: "auto",
-          left: -7,
-          lineHeight: 0,
-          marginTop: 10,
-          padding: "3px 0",
-          position: "absolute",
-          textAlign: "center",
-          transform: "translateY(-50%)",
-          width: 30
-        }
-      : {}
+  ({ theme, color }: { theme: Theme; color: CustomColor }) => ({
+    backgroundColor: `${color}`
   })
 )
 
@@ -103,15 +82,12 @@ const TimelineItem: React.SFC<IPropsWithTheme> = ({
   icon = "",
   theme
 }: IPropsWithTheme) => {
-  const IconLib = ReactFeather as any
-  const isValidIcon = IconLib.hasOwnProperty(icon)
-  const Icon = IconLib[icon]
   const statusColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
 
   return (
     <Container key={id} css={css} className={className}>
       <Line />
-      <StatusContainer color={statusColor}>{isValidIcon ? <Icon color={statusColor} /> : null}</StatusContainer>
+      <StatusContainer color={statusColor} />
       <Content>{children}</Content>
     </Container>
   )

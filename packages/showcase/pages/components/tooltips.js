@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
-import { Tooltip, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Tooltip, Card, CardHeader } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -81,10 +81,10 @@ export default props => (
         in, other components. For this reason, we took a highly versatile approach to our tooltips.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Tooltip }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table css={{ marginBottom: 32 }} props={propDescription} />
     </Card>
   </Layout>

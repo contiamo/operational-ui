@@ -7,10 +7,9 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         width: width,
         label: "card",
-        padding: padding || theme.spacing,
+        padding: theme.spacing * 4 / 3,
         boxShadow: theme.shadows.card,
         backgroundColor: theme.colors.cardBackground,
-        color: theme.colors.bodyText,
         "& p": {
             lineHeight: "20px"
         },
@@ -19,6 +18,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var Card = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, width: props.width, padding: props.padding, className: props.className }, props.children)); };
+var Card = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, width: props.width, className: props.className }, props.children)); };
 exports.default = Card;
 //# sourceMappingURL=Card.js.map

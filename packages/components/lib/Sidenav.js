@@ -56,7 +56,7 @@ var Sidenav = /** @class */ (function (_super) {
                 _this.setState(function (prevState) { return ({
                     isHovered: false
                 }); });
-            }, width: this.props.width || 60 }, this.props.children));
+            }, width: this.props.width || 52 }, this.props.children));
     };
     return Sidenav;
 }(React.Component));

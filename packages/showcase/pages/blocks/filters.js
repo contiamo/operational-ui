@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Card, Heading2Type, Select, Input, DatePicker } from "@operational/components"
+import { Card, Select, Input, DatePicker } from "@operational/components"
 import { Filter } from "@operational/blocks"
 
 import Layout from "../../components/Layout"
@@ -109,11 +109,11 @@ export default props => (
         summary of the current form state when the modal is not expanded.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <p>Simply nest `@operational/components` form elements using their API.</p>
       <Playground snippet={simpleSnippet} scope={{ Input, Select, DatePicker }} components={{ Filter }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>
