@@ -65,7 +65,7 @@ export default class Layout extends React.Component {
         <Container>
           <Sidenavigation pathname={pathname} pathmap={pathmap} />
           <Content>
-            <Header note="v0.1.0-6" pathname={pathname} pathmap={pathmap} />
+            <Header note="v0.1.0-8" pathname={pathname} pathmap={pathmap} />
             <PageContent>{this.props.children}</PageContent>
           </Content>
         </Container>
