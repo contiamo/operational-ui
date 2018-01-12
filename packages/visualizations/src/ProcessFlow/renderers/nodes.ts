@@ -93,88 +93,78 @@ class Nodes extends AbstractRenderer {
 
     let n: number = 0
 
-    nodeGroups
+    const enteringNodeGroups: TD3Selection = nodeGroups
       .enter()
       .append("g")
       .attr("class", "node-group")
       .attr("transform", this.translate)
-      .each(
-        withD3Element((d: TNode, el: HTMLElement): void => {
-          const element: TD3Selection = d3.select(el)
-          // Append node "border" element - white element behind node.
-          element
-            .append("path")
-            .attr("class", `node ${styles.border}`)
-            .attr(
-              "d",
-              d3Symbol()
-                .type(nodeShapeOptions[d.shape()].symbol)
-                .size(borderScale(d.size()))
-            )
-            .attr("transform", this.rotate)
-            .attr("fill", this.config.borderColor)
-            // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
-            // Single event handlers should be attached to a non-svg node.
-            .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
-          // Append node
-          element
-            .append("path")
-            .attr("class", `node ${styles.element}`)
-            .attr(
-              "d",
-              d3Symbol()
-                .type(nodeShapeOptions[d.shape()].symbol)
-                .size(scale(d.size()))
-            )
-            .attr("transform", this.rotate)
-            .attr("fill", d.color())
-            .attr("stroke", d.stroke())
-            .attr("opacity", 0)
-          // Append label
-          element.append("text").attr("class", styles.label)
-        })
+
+    enteringNodeGroups
+      .append("path")
+      .attr("class", `node ${styles.border}`)
+      .attr("d", (d: TNode): string =>
+        d3Symbol()
+          .type(nodeShapeOptions[d.shape()].symbol)
+          .size(borderScale(d.size()))()
       )
-      .merge(nodeGroups)
+      .attr("transform", this.rotate)
+      .attr("fill", this.config.borderColor)
+      // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
+      // Single event handlers should be attached to a non-svg node.
+      .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
+
+    enteringNodeGroups
+      .append("path")
+      .attr("class", `node ${styles.element}`)
+      .attr("d", (d: TNode): string =>
+        d3Symbol()
+          .type(nodeShapeOptions[d.shape()].symbol)
+          .size(borderScale(d.size()))()
+      )
+      .attr("transform", this.rotate)
+      .attr("fill", (d: TNode): string => d.color())
+      .attr("stroke", (d: TNode): string => d.stroke())
+      .attr("opacity", 0)
+
+    enteringNodeGroups.append("text").attr("class", styles.label)
+
+    nodeGroups
+      .merge(enteringNodeGroups)
       .transition()
       .duration(this.config.duration)
       .attr("transform", this.translate)
-      .each(
-        withD3Element((d: TNode, el: HTMLElement): void => {
-          const element: TD3Selection = d3.select(el)
-          // Update node border
-          element
-            .select(`path.node.${styles.border}`)
-            .transition()
-            .duration(this.config.duration)
-            // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
-            // but doesn't break the viz.
-            .attr(
-              "d",
-              d3Symbol()
-                .type(nodeShapeOptions[d.shape()].symbol)
-                .size(borderScale(d.size()))
-            )
-            .attr("transform", this.rotate)
-          // Update node
-          element
-            .select(`path.node.${styles.element}`)
-            .transition()
-            .duration(this.config.duration)
-            // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
-            // but doesn't break the viz.
-            .attr(
-              "d",
-              d3Symbol()
-                .type(nodeShapeOptions[d.shape()].symbol)
-                .size(scale(d.size()))
-            )
-            .attr("transform", this.rotate)
-            .attr("fill", d.color())
-            .attr("stroke", d.stroke())
-            .attr("opacity", 1)
-          n = n + 1
-        })
+
+    nodeGroups
+      .merge(enteringNodeGroups)
+      .selectAll(`path.node.${styles.border}`)
+      .transition()
+      .duration(this.config.duration)
+      // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
+      // but doesn't break the viz.
+      .attr("d", (d: TNode): string =>
+        d3Symbol()
+          .type(nodeShapeOptions[d.shape()].symbol)
+          .size(borderScale(d.size()))()
       )
+      .attr("transform", this.rotate)
+
+    nodeGroups
+      .merge(enteringNodeGroups)
+      .selectAll(`path.node.${styles.element}`)
+      .transition()
+      .duration(this.config.duration)
+      // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
+      // but doesn't break the viz.
+      .attr("d", (d: TNode): string =>
+        d3Symbol()
+          .type(nodeShapeOptions[d.shape()].symbol)
+          .size(borderScale(d.size()))()
+      )
+      .attr("transform", this.rotate)
+      .attr("fill", (d: TNode): string => d.color())
+      .attr("stroke", (d: TNode): string => d.stroke())
+      .attr("opacity", 1)
+      .each(() => (n = n + 1))
       .on("end", (): void => {
         n = n - 1
         if (n < 1) {

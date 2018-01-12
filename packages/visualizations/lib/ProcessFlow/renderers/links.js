@@ -41,55 +41,45 @@ var Links = /** @class */ (function (_super) {
         };
     };
     Links.prototype.enterAndUpdate = function (linkGroups) {
-        var _this = this;
         var scale = this.sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth]), borderScale = this.linkBorderScale(scale), opacityScale = this.sizeScale([MINOPACITY, MAXOPACITY]);
-        linkGroups
+        var enteringLinkGroups = linkGroups
             .enter()
             .append("g")
-            .attr("class", "link-group")
-            .each(d3_utils_1.withD3Element(function (d, el) {
-            var element = d3.select(el);
-            // Append link "border" element - transparent element behind link.
-            element
-                .append("path")
-                .attr("class", "link " + styles.border)
-                .attr("d", _this.linkStartPath.bind(_this))
-                .attr("stroke-width", "0px")
-                .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)))
-                .attr("opacity", 0);
-            // Append link
-            element
-                .append("path")
-                .attr("class", "link " + styles.element)
-                .attr("d", _this.linkStartPath.bind(_this))
-                .attr("fill", "none")
-                .attr("stroke-width", "0px");
-        }))
-            .merge(linkGroups)
-            .each(d3_utils_1.withD3Element(function (d, el) {
-            var element = d3.select(el);
-            // Update link border
-            element
-                .select("path.link." + styles.border)
-                .attr("stroke", _this.config.borderColor)
-                .transition()
-                .duration(_this.config.duration)
-                .ease(d3_ease_1.easeCubicInOut)
-                .attr("d", _this.linkPath.bind(_this))
-                .attr("stroke-width", borderScale(d.size()) + "px")
-                .attr("stroke-dasharray", d.dash());
-            // Update link
-            element
-                .select("path.link." + styles.element)
-                .attr("stroke", d.stroke())
-                .transition()
-                .duration(_this.config.duration)
-                .ease(d3_ease_1.easeCubicInOut)
-                .attr("d", _this.linkPath.bind(_this))
-                .attr("stroke-width", scale(d.size()) + "px")
-                .attr("stroke-dasharray", d.dash())
-                .attr("opacity", opacityScale(d.size()));
-        }));
+            .attr("class", "link-group");
+        enteringLinkGroups
+            .append("path")
+            .attr("class", "link " + styles.border)
+            .attr("d", this.linkStartPath.bind(this))
+            .attr("stroke-width", "0px")
+            .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
+            .attr("opacity", 0);
+        enteringLinkGroups
+            .append("path")
+            .attr("class", "link " + styles.element)
+            .attr("d", this.linkStartPath.bind(this))
+            .attr("fill", "none")
+            .attr("stroke-width", "0px");
+        linkGroups
+            .merge(enteringLinkGroups)
+            .select("path.link." + styles.border)
+            .attr("stroke", this.config.borderColor)
+            .transition()
+            .duration(this.config.duration)
+            .ease(d3_ease_1.easeCubicInOut)
+            .attr("d", this.linkPath.bind(this))
+            .attr("stroke-width", function (d) { return borderScale(d.size()) + "px"; })
+            .attr("stroke-dasharray", function (d) { return d.dash(); });
+        linkGroups
+            .merge(enteringLinkGroups)
+            .select("path.link." + styles.element)
+            .attr("stroke", function (d) { return d.stroke(); })
+            .transition()
+            .duration(this.config.duration)
+            .ease(d3_ease_1.easeCubicInOut)
+            .attr("d", this.linkPath.bind(this))
+            .attr("stroke-width", function (d) { return scale(d.size()) + "px"; })
+            .attr("stroke-dasharray", function (d) { return d.dash(); })
+            .attr("opacity", function (d) { return opacityScale(d.size()); });
     };
     // Paths start as a single point at the source node. If the source node has already been rendered,
     // use its position at the start of the transition.

@@ -98,66 +98,66 @@ var Nodes = /** @class */ (function (_super) {
         var _this = this;
         var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale);
         var n = 0;
-        nodeGroups
+        var enteringNodeGroups = nodeGroups
             .enter()
             .append("g")
             .attr("class", "node-group")
-            .attr("transform", this.translate)
-            .each(d3_utils_1.withD3Element(function (d, el) {
-            var element = d3.select(el);
-            // Append node "border" element - white element behind node.
-            element
-                .append("path")
-                .attr("class", "node " + styles.border)
-                .attr("d", d3_shape_1.symbol()
+            .attr("transform", this.translate);
+        enteringNodeGroups
+            .append("path")
+            .attr("class", "node " + styles.border)
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
-                .size(borderScale(d.size())))
-                .attr("transform", _this.rotate)
-                .attr("fill", _this.config.borderColor)
-                .on("mouseenter", d3_utils_1.withD3Element(_this.onMouseOver.bind(_this)));
-            // Append node
-            element
-                .append("path")
-                .attr("class", "node " + styles.element)
-                .attr("d", d3_shape_1.symbol()
+                .size(borderScale(d.size()))();
+        })
+            .attr("transform", this.rotate)
+            .attr("fill", this.config.borderColor)
+            .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)));
+        enteringNodeGroups
+            .append("path")
+            .attr("class", "node " + styles.element)
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
-                .size(scale(d.size())))
-                .attr("transform", _this.rotate)
-                .attr("fill", d.color())
-                .attr("stroke", d.stroke())
-                .attr("opacity", 0);
-            // Append label
-            element.append("text").attr("class", styles.label);
-        }))
-            .merge(nodeGroups)
+                .size(borderScale(d.size()))();
+        })
+            .attr("transform", this.rotate)
+            .attr("fill", function (d) { return d.color(); })
+            .attr("stroke", function (d) { return d.stroke(); })
+            .attr("opacity", 0);
+        enteringNodeGroups.append("text").attr("class", styles.label);
+        nodeGroups
+            .merge(enteringNodeGroups)
             .transition()
             .duration(this.config.duration)
-            .attr("transform", this.translate)
-            .each(d3_utils_1.withD3Element(function (d, el) {
-            var element = d3.select(el);
-            // Update node border
-            element
-                .select("path.node." + styles.border)
-                .transition()
-                .duration(_this.config.duration)
-                .attr("d", d3_shape_1.symbol()
+            .attr("transform", this.translate);
+        nodeGroups
+            .merge(enteringNodeGroups)
+            .selectAll("path.node." + styles.border)
+            .transition()
+            .duration(this.config.duration)
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
-                .size(borderScale(d.size())))
-                .attr("transform", _this.rotate);
-            // Update node
-            element
-                .select("path.node." + styles.element)
-                .transition()
-                .duration(_this.config.duration)
-                .attr("d", d3_shape_1.symbol()
+                .size(borderScale(d.size()))();
+        })
+            .attr("transform", this.rotate);
+        nodeGroups
+            .merge(enteringNodeGroups)
+            .selectAll("path.node." + styles.element)
+            .transition()
+            .duration(this.config.duration)
+            .attr("d", function (d) {
+            return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
-                .size(scale(d.size())))
-                .attr("transform", _this.rotate)
-                .attr("fill", d.color())
-                .attr("stroke", d.stroke())
-                .attr("opacity", 1);
-            n = n + 1;
-        }))
+                .size(borderScale(d.size()))();
+        })
+            .attr("transform", this.rotate)
+            .attr("fill", function (d) { return d.color(); })
+            .attr("stroke", function (d) { return d.stroke(); })
+            .attr("opacity", 1)
+            .each(function () { return (n = n + 1); })
             .on("end", function () {
             n = n - 1;
             if (n < 1) {
