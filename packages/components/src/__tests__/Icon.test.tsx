@@ -8,6 +8,6 @@ const Icon = wrapDefaultTheme(ThemelessIcon)
 
 describe("Icon Component", () => {
   it("Renders an <svg> tag", () => {
-    expect(render(<Icon name="play" />)).toMatchSnapshot()
+    expect(render(<Icon name="Play" />)).toMatchSnapshot()
   })
 })

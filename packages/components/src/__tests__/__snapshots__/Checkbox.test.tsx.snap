@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Should render 1`] = `
+<div
+  class="css-w0yocm"
+>
+  <div
+    class="css-1268me8"
+  >
+    <label
+      class="css-fh9twa"
+    >
+      <input
+        checked=""
+        type="checkbox"
+      />
+      <span
+        class="css-ip0kwy"
+      >
+        1
+      </span>
+    </label>
+    <label
+      class="css-fh9twa"
+    >
+      <input
+        type="checkbox"
+      />
+      <span
+        class="css-ip0kwy"
+      >
+        2
+      </span>
+    </label>
+  </div>
+</div>
+`;

@@ -1,3 +1,2 @@
-import Auth from "./Auth";
-import Filter from "./Filter";
-export { Auth, Filter };
+export { default as Auth } from "./Auth";
+export { default as Filter } from "./Filter";
