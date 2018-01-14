@@ -3,11 +3,7 @@ import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import * as c from "../../src/index"
 
-<<<<<<< HEAD
-import { OperationalUI, operationalTheme, Message } from "../../src/index"
-=======
 import { OperationalUI, operationalTheme, Checkbox } from "../../src/index"
->>>>>>> Implement API
 
 class Site extends React.Component<{}, {}> {
   state = {
@@ -16,14 +12,6 @@ class Site extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI>
-<<<<<<< HEAD
-        <div style={{padding: 20}}>
-          <Message color="info" onClose={() => {
-            console.log("closing")
-          }}>
-            Hello
-          </Message>
-=======
         <div style={{ padding: 20 }}>
           <Checkbox
             label="Something"
@@ -35,7 +23,6 @@ class Site extends React.Component<{}, {}> {
               }))
             }}
           />
->>>>>>> Implement API
         </div>
       </OperationalUI>
     )

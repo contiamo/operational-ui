@@ -1,4 +1,5 @@
 import * as React from "react"
+import SyntaxHighlighter from "react-syntax-highlighter"
 import marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
@@ -54,16 +55,18 @@ export default class StaticContent extends React.Component {
           this.containerNode = node
         }}
       >
-        {children}
+        {this.props.children}
       </Container>
     )
   }
 
   componentDidMount() {
-    const nodes = this.containerNode.querySelectorAll("pre code")
-    const n = nodes.length
+    this.codeNodes = this.containerNode.querySelectorAll("pre code")
+    this.codes = []
+    const n = this.codeNodes.length
     for (let i = 0; i < n; i++) {
-      highlight.highlightBlock(nodes[i])
+      this.codes.push(this.codeNodes[i].innerText)
+      highlight.highlightBlock(this.codeNodes[i])
     }
   }
 }
