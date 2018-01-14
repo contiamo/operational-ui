@@ -3,7 +3,18 @@ import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import * as c from "../../src/index"
 
-import { OperationalUI, operationalTheme, Checkbox } from "../../src/index"
+import {
+  OperationalUI,
+  operationalTheme,
+  InfoTile,
+  Card,
+  Record,
+  RecordSummary,
+  RecordDetails,
+  Heading1Type,
+  ContextMenu,
+  ContextMenuItem
+} from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   state = {
@@ -13,16 +24,18 @@ class Site extends React.Component<{}, {}> {
     return (
       <OperationalUI>
         <div style={{ padding: 20 }}>
-          <Checkbox
-            label="Something"
-            options={["1", "2", "3"]}
-            selected={this.state.selected}
-            onChange={(n: string[]) => {
-              this.setState(p => ({
-                selected: n
-              }))
-            }}
-          />
+          <Card>
+            <Record>
+              <RecordSummary>
+                <Heading1Type>Deutsche Bahn (German Railway Company)</Heading1Type>
+              </RecordSummary>
+              <RecordDetails>
+                <InfoTile label="Founded">1994</InfoTile>
+                <InfoTile label="Employees">~300,000</InfoTile>
+                <InfoTile label="Annual Revenue">A lot!</InfoTile>
+              </RecordDetails>
+            </Record>
+          </Card>
         </div>
       </OperationalUI>
     )

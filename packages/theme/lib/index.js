@@ -45,8 +45,8 @@ var baseTypography = {
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 24, fontWeight: 400 }),
-    heading1: __assign({}, baseTypography, { fontSize: 16, fontWeight: 600, color: "#373d3f" }),
-    heading2: __assign({}, baseTypography, { fontSize: 16, fontWeight: 400, color: "#969696" }),
+    heading1: __assign({}, baseTypography, { fontSize: 16, fontWeight: 600 }),
+    heading2: __assign({}, baseTypography, { fontSize: 16, fontWeight: 400 }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
     small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 })
 };

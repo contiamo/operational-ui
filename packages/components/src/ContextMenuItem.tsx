@@ -9,6 +9,7 @@ export interface IProps {
   className?: string
   children?: any
   onClick?: () => void
+  __isContextMenuItem?: boolean
 }
 
 const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable: boolean }): any => ({
@@ -32,7 +33,7 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
   }
 }))
 
-export default (props: IProps) => (
+const ContextMenuItem = (props: IProps) => (
   <Container
     key={props.id}
     css={props.css}
@@ -43,3 +44,9 @@ export default (props: IProps) => (
     {props.children}
   </Container>
 )
+
+export default Object.assign(ContextMenuItem, {
+  defaultProps: {
+    __isContextMenuItem: true
+  }
+})

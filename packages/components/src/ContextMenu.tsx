@@ -4,8 +4,6 @@ import { css } from "glamor"
 import { fadeIn } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
-import ContextMenuItem from "./ContextMenuItem"
-
 export interface IProps {
   id?: string | number
   css?: {}
@@ -66,7 +64,7 @@ export default class ContextMenu extends React.Component<IProps, IState> {
     const menuItems: any = []
     const children: any = []
     React.Children.forEach(this.props.children, (child: any, index: number): void => {
-      if (child.type === ContextMenuItem) {
+      if (child.props && child.props.__isContextMenuItem) {
         const { onClick } = child.props
         menuItems.push(
           React.cloneElement(child, {

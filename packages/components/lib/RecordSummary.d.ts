@@ -1,15 +1,14 @@
 /// <reference types="react" />
+import * as React from "react";
 export interface IProps {
-    id?: string | number;
-    css?: any;
+    css?: {};
     className?: string;
-    children?: any;
-    onClick?: () => void;
-    __isContextMenuItem?: boolean;
+    children?: React.ReactNode;
+    __isRecordSummary?: boolean;
 }
 declare const _default: ((props: IProps) => JSX.Element) & {
     defaultProps: {
-        __isContextMenuItem: boolean;
+        __isRecordSummary: boolean;
     };
 };
 export default _default;

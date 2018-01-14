@@ -14,7 +14,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-interface IProps {
+export interface IProps {
   css?: {}
   className?: string
   value: string
@@ -24,6 +24,9 @@ interface IProps {
 const Container = glamorous.div(
   // Static styles
   {
+    // This label is included in glamorous class names
+    // so the component is identified more easily.
+    label: "${1,,}",
     "&:hover": {
       backgroundColor: "rgba(0, 0, 0, 0.1)"
     }
@@ -60,7 +63,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import { $1 as Themeless$1 } from "../index"
-import wrapDefaultTheme from "../../utils/wrap-default-theme"
+import wrapDefaultTheme from "../utils/wrap-default-theme"
 
 const $1 = wrapDefaultTheme(Themeless$1)
 
@@ -74,9 +77,9 @@ EOL
 
 # Create showcase file
 
-touch $SHOWCASE_ROOT/$1s.js
+touch $SHOWCASE_ROOT/${1,,}s.js
 
-cat > $SHOWCASE_ROOT/$1s.js << EOL
+cat > $SHOWCASE_ROOT/${1,,}s.js << EOL
 import * as React from "react"
 import { Card, Heading2Type, $1 } from "@operational/components"
 

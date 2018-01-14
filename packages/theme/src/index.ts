@@ -138,14 +138,12 @@ const typography: ThemeTypography = {
   heading1: {
     ...baseTypography,
     fontSize: 16,
-    fontWeight: 600,
-    color: "#373d3f"
+    fontWeight: 600
   },
   heading2: {
     ...baseTypography,
     fontSize: 16,
-    fontWeight: 400,
-    color: "#969696"
+    fontWeight: 400
   },
   body: {
     ...baseTypography,
