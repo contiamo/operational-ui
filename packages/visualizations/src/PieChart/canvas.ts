@@ -4,11 +4,8 @@ import * as d3 from "d3-selection"
 import { TD3Selection, IConfig, IState, TStateWriter, IEvents, IObject, IMousePosition } from "./typings"
 
 class Canvas extends AbstractDrawingCanvas {
-  mousePosition: IMousePosition
-
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
     super(state, stateWriter, events, context)
-    this.mousePosition = this.initialMousePosition()
 
     this.appendShadows()
     this.appendBackground()
@@ -51,42 +48,6 @@ class Canvas extends AbstractDrawingCanvas {
     shadowFeMerge.append("feMergeNode")
     shadowFeMerge.append("feMergeNode").attr("in", "SourceGraphic")
     this.stateWriter("shadowDefinitionId", this.shadowDefinitionId())
-  }
-
-  initialMousePosition(): IMousePosition {
-    return {
-      absolute: {
-        x: undefined,
-        y: undefined
-      },
-      relative: {
-        x: undefined,
-        y: undefined
-      }
-    }
-  }
-
-  trackMouseMove(): void {
-    const config: IConfig = this.state.current.get("config")
-    this.el.on("mousemove", (): void => {
-      const event: any = d3.event,
-        mouse: [number, number] = d3.mouse(this.el.node() as any)
-      this.mousePosition = {
-        absolute: {
-          x: event.pageX,
-          y: event.pageY
-        },
-        relative: {
-          x: mouse[0],
-          y: mouse[1]
-        }
-      }
-      this.events.emit(Events.CHART.MOVE, this.mousePosition)
-    })
-  }
-
-  stopMouseMove(): void {
-    this.el.on("mousemove", undefined)
   }
 
   totalLegendHeight(): number {
