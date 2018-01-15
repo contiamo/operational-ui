@@ -59,9 +59,9 @@ abstract class AbstractRenderer {
     this.el = el.select("g.drawing")
     this.assignOptions(options)
     this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this))
-    this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.updateElementHover.bind(this))
   }
 
   assignOptions(options: IObject): void {
@@ -104,7 +104,7 @@ abstract class AbstractRenderer {
 
   updateDraw(): void {
     // Remove focus before updating chart
-    this.events.emit(Events.FOCUS.ELEMENT.OUT)
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
     // Center coordinate system
     this.el.attr("transform", this.translateString(this.computeTranslate()))
@@ -257,7 +257,7 @@ abstract class AbstractRenderer {
 
   onMouseOver(d: TDatum): void {
     const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
-    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { d, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
   }
 
   highlightElement(key: string): void {

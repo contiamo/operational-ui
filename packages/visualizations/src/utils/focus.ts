@@ -16,11 +16,11 @@ abstract class Focus {
     this.events = events
     this.el = els.main
     this.componentEl = els.component
-    this.events.on(Events.FOCUS.COMPONENT.HOVER, this.onComponentHover.bind(this))
-    this.events.on(Events.FOCUS.COMPONENT.OUT, this.onComponentLeave.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.onElementHover.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this))
-    this.events.on(Events.CHART.OUT, this.onMouseLeave.bind(this))
+    this.events.on(Events.FOCUS.COMPONENT.MOUSEOVER, this.onComponentHover.bind(this))
+    this.events.on(Events.FOCUS.COMPONENT.MOUSEOUT, this.onComponentLeave.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
   }
 
   onComponentHover(payload: { component: TD3Selection; options: IObject }): void {
@@ -43,7 +43,7 @@ abstract class Focus {
     // Do not remove focusElement if it's currently under mouse over
     // i.e. mouse is on top of label
     !options.force && this.focus.isMouseOver
-      ? this.events.on(Events.FOCUS.COMPONENT.LABEL.OUT, this.remove.bind(this))
+      ? this.events.on(Events.FOCUS.COMPONENT.LABEL.MOUSEOUT, this.remove.bind(this))
       : this.remove()
   }
 
@@ -54,7 +54,7 @@ abstract class Focus {
   }
 
   onMouseLeave(): void {
-    this.events.emit(Events.FOCUS.ELEMENT.OUT)
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 
   remove(): void {

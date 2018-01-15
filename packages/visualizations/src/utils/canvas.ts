@@ -64,12 +64,12 @@ abstract class Canvas {
   }
 
   onMouseEnter(): void {
-    this.events.emit(Events.CHART.HOVER)
+    this.events.emit(Events.CHART.MOUSEOVER)
     this.trackMouseMove()
   }
 
   onMouseLeave(): void {
-    this.events.emit(Events.CHART.OUT)
+    this.events.emit(Events.CHART.MOUSEOUT)
     this.stopMouseMove()
   }
 

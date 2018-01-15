@@ -97,7 +97,7 @@ class Gauge extends AbstractRenderer {
 
   onMouseOver(d: TDatum): void {
     if (d.data.unfilled) {
-      this.events.emit(Events.FOCUS.ELEMENT.OUT)
+      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
       return
     }
     super.onMouseOver(d)

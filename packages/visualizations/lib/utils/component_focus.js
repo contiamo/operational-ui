@@ -43,7 +43,7 @@ var ComponentFocus = /** @class */ (function () {
     };
     ComponentFocus.prototype.onMouseOut = function () {
         this.isMouseOver = false;
-        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.LABEL.OUT);
+        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.LABEL.MOUSEOUT);
         this.remove();
     };
     ComponentFocus.prototype.onClick = function (configOptions) {

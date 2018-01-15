@@ -177,8 +177,8 @@ abstract class Legend {
   abstract labelAccessor(d: IObject): string
 
   onComponentHover(d: IObject, el: HTMLElement): void {
-    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
-    d3.select(el).on("mouseleave", (): void => this.events.emit(Events.FOCUS.COMPONENT.OUT))
+    this.events.emit(Events.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) })
+    d3.select(el).on("mouseleave", (): void => this.events.emit(Events.FOCUS.COMPONENT.MOUSEOUT))
   }
 
   abstract currentOptions(datum: IObject): IObject

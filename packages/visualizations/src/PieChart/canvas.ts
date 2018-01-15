@@ -14,7 +14,7 @@ class Canvas extends AbstractDrawingCanvas {
     this.insertLegend("top", "left")
 
     this.elements.background.on("mouseover", (): void => {
-      this.events.emit(Events.FOCUS.ELEMENT.OUT)
+      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
     })
 
     this.stateWriter("elements", this.elements)

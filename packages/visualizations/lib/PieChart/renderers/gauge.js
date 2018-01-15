@@ -96,7 +96,7 @@ var Gauge = /** @class */ (function (_super) {
     };
     Gauge.prototype.onMouseOver = function (d) {
         if (d.data.unfilled) {
-            this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
+            this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
             return;
         }
         _super.prototype.onMouseOver.call(this, d);

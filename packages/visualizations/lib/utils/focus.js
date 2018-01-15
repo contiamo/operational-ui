@@ -9,11 +9,11 @@ var Focus = /** @class */ (function () {
         this.events = events;
         this.el = els.main;
         this.componentEl = els.component;
-        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.HOVER, this.onComponentHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.OUT, this.onComponentLeave.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.onElementHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this));
-        this.events.on(event_catalog_1.default.CHART.OUT, this.onMouseLeave.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, this.onComponentHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOUT, this.onComponentLeave.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
     Focus.prototype.onComponentHover = function (payload) {
         this.removeComponentFocus({ force: true });
@@ -33,14 +33,14 @@ var Focus = /** @class */ (function () {
         // Do not remove focusElement if it's currently under mouse over
         // i.e. mouse is on top of label
         !options.force && this.focus.isMouseOver
-            ? this.events.on(event_catalog_1.default.FOCUS.COMPONENT.LABEL.OUT, this.remove.bind(this))
+            ? this.events.on(event_catalog_1.default.FOCUS.COMPONENT.LABEL.MOUSEOUT, this.remove.bind(this))
             : this.remove();
     };
     Focus.prototype.onElementOut = function () {
         this.remove();
     };
     Focus.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
     };
     Focus.prototype.remove = function () {
         this.el.node().innerHTML = "";

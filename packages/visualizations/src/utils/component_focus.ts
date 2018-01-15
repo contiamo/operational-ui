@@ -69,7 +69,7 @@ class ComponentFocus {
 
   onMouseOut(): void {
     this.isMouseOver = false
-    this.events.emit(Events.FOCUS.COMPONENT.LABEL.OUT)
+    this.events.emit(Events.FOCUS.COMPONENT.LABEL.MOUSEOUT)
     this.remove()
   }
 

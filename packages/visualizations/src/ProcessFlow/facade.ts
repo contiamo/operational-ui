@@ -162,7 +162,7 @@ class Facade {
     const focusElement: IFocusElement = this.state.config().focusElement
     !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
-      : this.events.emit(Events.FOCUS.ELEMENT.OUT)
+      : this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
     return this.canvas.elementFor("series").node()
   }

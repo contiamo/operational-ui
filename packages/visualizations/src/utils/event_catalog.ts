@@ -1,25 +1,25 @@
 const Events = {
   CHART: {
     CLICK: "chart:click",
-    HOVER: "chart:hover",
+    MOUSEOVER: "chart:mouseover",
     MOVE: "chart:mousemove",
-    OUT: "chart:out"
+    MOUSEOUT: "chart:mouseout"
   },
   FOCUS: {
     CLEAR: "focus:clear",
     COMPONENT: {
       CLICK: "focus:component:click",
-      HOVER: "focus:component:hover",
-      OUT: "focus:component:out",
+      MOUSEOVER: "focus:component:mouseover",
+      MOUSEOUT: "focus:component:mouseout",
       LABEL: {
-        OUT: "focus:component:label:out"
+        MOUSEOUT: "focus:component:label:mouseout"
       }
     },
     ELEMENT: {
       HIGHLIGHT: "focus:element:highlight",
       CLICK: "focus:element:click",
-      HOVER: "focus:element:hover",
-      OUT: "focus:element:out"
+      MOUSEOVER: "focus:element:mouseover",
+      MOUSEOUT: "focus:element:mouseout"
     }
   }
 }

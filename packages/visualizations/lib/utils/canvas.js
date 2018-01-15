@@ -47,11 +47,11 @@ var Canvas = /** @class */ (function () {
         return focusEl;
     };
     Canvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.HOVER);
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
         this.trackMouseMove();
     };
     Canvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.OUT);
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
         this.stopMouseMove();
     };
     Canvas.prototype.onClick = function () {

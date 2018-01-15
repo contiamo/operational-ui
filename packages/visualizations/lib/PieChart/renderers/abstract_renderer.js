@@ -41,9 +41,9 @@ var AbstractRenderer = /** @class */ (function () {
         this.el = el.select("g.drawing");
         this.assignOptions(options);
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this));
-        this.events.on(event_catalog_1.default.CHART.OUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.updateElementHover.bind(this));
     }
     AbstractRenderer.prototype.assignOptions = function (options) {
         var _this = this;
@@ -80,7 +80,7 @@ var AbstractRenderer = /** @class */ (function () {
     };
     AbstractRenderer.prototype.updateDraw = function () {
         // Remove focus before updating chart
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         // Center coordinate system
         this.el.attr("transform", this.translateString(this.computeTranslate()));
         // Arcs
@@ -205,7 +205,7 @@ var AbstractRenderer = /** @class */ (function () {
     };
     AbstractRenderer.prototype.onMouseOver = function (d) {
         var centroid = this.translateBack(this.computed.arc.centroid(d));
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { d: d, focusPoint: { centroid: centroid } });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: d, focusPoint: { centroid: centroid } });
     };
     AbstractRenderer.prototype.highlightElement = function (key) {
         var d = fp_1.find(function (datum) { return dataKey(datum) === key; })(this.computed.data);

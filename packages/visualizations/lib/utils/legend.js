@@ -138,8 +138,8 @@ var Legend = /** @class */ (function () {
     };
     Legend.prototype.onComponentHover = function (d, el) {
         var _this = this;
-        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) });
-        d3.select(el).on("mouseleave", function () { return _this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.OUT); });
+        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) });
+        d3.select(el).on("mouseleave", function () { return _this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOUT); });
     };
     Legend.prototype.dimensions = function () {
         var legendNode = this.legend.node();

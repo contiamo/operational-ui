@@ -23,7 +23,7 @@ var Canvas = /** @class */ (function (_super) {
         _this.insertFocusElements();
         _this.insertLegend("top", "left");
         _this.elements.background.on("mouseover", function () {
-            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
+            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         });
         _this.stateWriter("elements", _this.elements);
         return _this;
