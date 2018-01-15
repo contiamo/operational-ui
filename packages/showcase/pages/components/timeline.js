@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Card, CardHeader, Timeline, TimelineItem, Heading2Type } from "@operational/components"
+import { Card, CardHeader, Timeline, TimelineItem } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Layout from "../../components/Layout"
@@ -70,14 +70,14 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
       <p>Display information vertically on a timeline from top to bottom.</p>
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <p>
         A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component. Items
         may contain any children.
       </p>
       <Playground snippet={simpleSnippet} components={{ Timeline, TimelineItem }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription.TimelineItem} />
     </Card>
   </Layout>

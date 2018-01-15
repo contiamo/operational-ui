@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ContextMenu, ContextMenuItem, Card, CardHeader, Icon, Heading2Type } from "@operational/components"
+import { ContextMenu, ContextMenuItem, Card, CardHeader, Icon } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -63,13 +63,13 @@ export default props => (
         and in the upper right corner of cards.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} scope={{ Icon, ContextMenuItem }} components={{ ContextMenu }} />
 
-      <Heading2Type>ContextMenu Props</Heading2Type>
+      <h2>ContextMenu Props</h2>
       <Table props={propDescription.contextMenu} />
 
-      <Heading2Type>ContextMenuItem Props</Heading2Type>
+      <h2>ContextMenuItem Props</h2>
       <Table props={propDescription.contextMenuItem} />
     </Card>
   </Layout>

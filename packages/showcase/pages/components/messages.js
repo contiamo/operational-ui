@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Card, Heading2Type, Message } from "@operational/components"
+import { Card, Message } from "@operational/components"
 
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
@@ -36,10 +36,10 @@ export default props => (
         message simply includes some body (any html/React element) and an optional close icon.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Message }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

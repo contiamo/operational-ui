@@ -5,6 +5,8 @@ import Router from "next/router"
 import { Box, BarChart2, Grid } from "react-feather"
 
 import { Sidenav, SidenavHeader, SidenavItem, Icon } from "@operational/components"
+import { operational } from "@operational/theme"
+import { lighten } from "@operational/utils"
 import * as icons from "./Icons"
 
 const getMainRouteIcon = mainRoute => {
@@ -37,7 +39,7 @@ export default ({ pathname, pathmap }) => {
       <Link prefetch href="/">
         <a>
           <SidenavHeader
-            css={{ borderBottom: "1px solid #515151" }}
+            css={{ borderBottom: `1px solid ${lighten(operational.colors.sidenavBackground)(10)}` }}
             label="Operational UI"
             icon={<icons.Operational size={28} />}
           />

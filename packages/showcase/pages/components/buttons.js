@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Button, ButtonGroup, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Button, ButtonGroup, Card, CardHeader } from "@operational/components"
 
 import Table from "../../components/PropsTable"
 import Layout from "../../components/Layout"
@@ -76,25 +76,25 @@ export default props => (
         These buttons can also take on any number of colors required.
       </p>
 
-      <Heading2Type>Simple usage</Heading2Type>
+      <h2>Simple usage</h2>
       <p>
         Using buttons is as simple as including the component with a text node as a child. Colors may be specified as
         hex strings, or as a pre-defined color key from the theme.
       </p>
       <Playground snippet={simpleSnippet} components={{ Button, ButtonGroup }} />
 
-      <Heading2Type>Button groups</Heading2Type>
+      <h2>Button groups</h2>
       <p>
         If used within the button group component, the library takes care to remove intermediate spacings, border radii
         and makes sure borders don't double up.
       </p>
       <Playground snippet={groupSnippet} components={{ Button, ButtonGroup }} />
 
-      <Heading2Type>Condensed mode</Heading2Type>
+      <h2>Condensed mode</h2>
       <p>Buttons can be condensed, and further grouped to achieve, among other things, this paginator-style look:</p>
       <Playground snippet={condensedSnippet} components={{ Button, ButtonGroup }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

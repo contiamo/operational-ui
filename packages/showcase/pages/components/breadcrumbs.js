@@ -1,13 +1,5 @@
 import * as React from "react"
-import {
-  Breadcrumb,
-  Breadcrumbs,
-  ContextMenu,
-  ContextMenuItem,
-  Card,
-  CardHeader,
-  Heading2Type
-} from "@operational/components"
+import { Breadcrumb, Breadcrumbs, ContextMenu, ContextMenuItem, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -41,17 +33,17 @@ export default props => (
         Operational UI's breadcrumbs add a few extra functionality, such as icon and context menu support.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Breadcrumbs }} scope={{ Breadcrumb }} />
 
-      <Heading2Type>Usage with context menu</Heading2Type>
+      <h2>Usage with context menu</h2>
       <Playground
         snippet={snippetWithContextMenu}
         components={{ Breadcrumbs }}
         scope={{ ContextMenuItem, ContextMenu, Breadcrumb }}
       />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table
         props={[
           {

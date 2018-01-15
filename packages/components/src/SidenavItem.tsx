@@ -1,6 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
+import { lighten } from "@operational/utils"
 
 export interface IProps {
   id?: string | number
@@ -11,15 +12,17 @@ export interface IProps {
   label: string
 }
 
+const size: number = 32
+
 const Container = glamorous.div(
   {
     label: "sidenavitem",
-    height: 45,
+    height: size,
     position: "relative",
     width: "100%",
     display: "flex",
     alignItems: "center",
-    padding: "0 16px 0 60px",
+    padding: "0 16px 0 52px",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
     backgroundColor: "rgba(0, 0, 0, 0.2)",
@@ -32,30 +35,30 @@ const Container = glamorous.div(
   })
 )
 
-const ConnectorStrip = glamorous.div({
+const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: 1,
-  height: 45,
-  backgroundColor: "#515151",
+  height: size,
+  backgroundColor: lighten(theme.colors.sidenavBackground)(10),
   position: "absolute",
   top: 0,
-  left: 29,
+  left: 24,
   "&::after": {
     content: "' '",
     width: 7,
     height: 7,
-    backgroundColor: "#515151",
+    backgroundColor: lighten(theme.colors.sidenavBackground)(10),
     position: "absolute",
     borderRadius: "50%",
     left: -3,
-    top: 20
+    top: size / 2 - 4
   },
   // Only half-height for last element - selectors cover both the case
   // when the side nav item is wrapped inside a <Link/> element (e.g. react-router)
   // and when it isn't. This is also why the class names are necessary.
   ".op_sidenavheader > .op_sidenavitem:last-child > &, .op_sidenavheader > *:last-child > .op_sidenavitem > &": {
-    height: 22.5
+    height: size / 2
   }
-})
+}))
 
 export default (props: IProps) => (
   <Container

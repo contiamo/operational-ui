@@ -3,11 +3,18 @@ import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import * as c from "../../src/index"
 
-<<<<<<< HEAD
-import { OperationalUI, operationalTheme, Message } from "../../src/index"
-=======
-import { OperationalUI, operationalTheme, Checkbox } from "../../src/index"
->>>>>>> Implement API
+import {
+  OperationalUI,
+  operationalTheme,
+  InfoTile,
+  Card,
+  Record,
+  RecordSummary,
+  RecordDetails,
+  Heading1Type,
+  ContextMenu,
+  ContextMenuItem
+} from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   state = {
@@ -16,26 +23,19 @@ class Site extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI>
-<<<<<<< HEAD
-        <div style={{padding: 20}}>
-          <Message color="info" onClose={() => {
-            console.log("closing")
-          }}>
-            Hello
-          </Message>
-=======
         <div style={{ padding: 20 }}>
-          <Checkbox
-            label="Something"
-            options={["1", "2", "3"]}
-            selected={this.state.selected}
-            onChange={(n: string[]) => {
-              this.setState(p => ({
-                selected: n
-              }))
-            }}
-          />
->>>>>>> Implement API
+          <Card>
+            <Record>
+              <RecordSummary>
+                <Heading1Type>Deutsche Bahn (German Railway Company)</Heading1Type>
+              </RecordSummary>
+              <RecordDetails>
+                <InfoTile label="Founded">1994</InfoTile>
+                <InfoTile label="Employees">~300,000</InfoTile>
+                <InfoTile label="Annual Revenue">A lot!</InfoTile>
+              </RecordDetails>
+            </Record>
+          </Card>
         </div>
       </OperationalUI>
     )

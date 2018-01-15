@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Upload, Card, CardHeader, Icon, Button, Heading2Type } from "@operational/components"
+import { Upload, Card, CardHeader, Icon, Button } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -194,10 +194,10 @@ export default props => (
     <Card>
       <p>Uploads are great components!</p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Upload, Icon, Button }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

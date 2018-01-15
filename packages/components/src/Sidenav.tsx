@@ -94,7 +94,7 @@ export default class Sidenav extends React.Component<IProps, IState> {
             isHovered: false
           }))
         }}
-        width={this.props.width || 60}
+        width={this.props.width || 52}
       >
         {this.props.children}
       </Container>

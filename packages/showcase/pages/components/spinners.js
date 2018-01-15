@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Spinner, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Spinner, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -55,10 +55,10 @@ export default props => (
         large or when they're more aesthetically desirable.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Spinner }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

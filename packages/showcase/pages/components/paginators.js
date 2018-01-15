@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Paginator, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Paginator, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -66,10 +66,10 @@ export default props => (
     <Card>
       <p>Simple component to navigate through pages</p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={PaginatorSnippet} components={{ Paginator }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

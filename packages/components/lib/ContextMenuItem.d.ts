@@ -5,6 +5,11 @@ export interface IProps {
     className?: string;
     children?: any;
     onClick?: () => void;
+    __isContextMenuItem?: boolean;
 }
-declare const _default: (props: IProps) => JSX.Element;
+declare const _default: ((props: IProps) => JSX.Element) & {
+    defaultProps: {
+        __isContextMenuItem: boolean;
+    };
+};
 export default _default;

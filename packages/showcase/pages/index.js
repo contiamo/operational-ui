@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Card, Icon, Heading2Type } from "@operational/components"
+import { Card, Icon } from "@operational/components"
 import { fetchFromRepo } from "../utils"
 
 import Layout from "../components/Layout"

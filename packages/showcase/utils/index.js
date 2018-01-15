@@ -11,5 +11,13 @@ const repoBasePath = "https://rawgit.com/Contiamo/operational-ui/master"
 export const fetchFromRepo = (path, startLine, endLine) => {
   return fetch(`${repoBasePath}${path}`)
     .then(res => res.text())
-    .then(res => startLine ? res.split("\n").slice(startLine, endLine).join("\n") : res)
+    .then(
+      res =>
+        startLine
+          ? res
+              .split("\n")
+              .slice(startLine, endLine)
+              .join("\n")
+          : res
+    )
 }

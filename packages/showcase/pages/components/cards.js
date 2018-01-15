@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Card, CardHeader, Heading2Type } from "@operational/components"
+import { Card, CardHeader } from "@operational/components"
 
 import Playground from "../../components/Playground"
 import Table from "../../components/PropsTable"
@@ -45,18 +45,18 @@ export default props => (
         of cards laid out in a grid are the most common use-cases of this project.
       </p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <p>Simply add any content inside the card.</p>
       <Playground snippet={simpleSnippet} components={{ Card, CardHeader }} />
 
-      <Heading2Type>Card headers</Heading2Type>
+      <h2>Card headers</h2>
       <p>
         Using a CardHeader component is the standard way to add a title element to the card. This may include not just
         the card title, but also navigation on the right-hand side.
       </p>
       <Playground snippet={headerSnippet} components={{ Card, CardHeader }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>

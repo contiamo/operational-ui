@@ -35,12 +35,17 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
   return {
     label: "button",
     display: "inline-block",
-    padding: condensed ? `${spacing / 3}px ${spacing * 1 / 2}px` : `${spacing * 2 / 3}px ${spacing}px`,
-    border: "1px solid rgba(0, 0, 0, .2)",
+    padding: condensed ? `${spacing / 3}px ${spacing}px` : `${spacing * 2 / 3}px ${spacing * 2}px`,
     borderRadius: 2,
+    border: "1px solid",
+    borderColor:
+      ["white", "#FFF", "#fff"].indexOf(backgroundColor) > -1
+        ? theme.colors.gray30
+        : active ? activeBackgroundColor : backgroundColor,
     cursor: disabled ? "auto" : "pointer",
     boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
+
     color: textColor,
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",

@@ -1,7 +1,9 @@
 import * as React from "react"
+import SyntaxHighlighter from "react-syntax-highlighter"
 import marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
+import { lighten } from "@operational/utils"
 import highlight from "highlight.js"
 
 const Container = glamorous.div(({ theme }) => ({
@@ -10,7 +12,8 @@ const Container = glamorous.div(({ theme }) => ({
     ...theme.typography.heading1
   },
   "& h3": {
-    ...theme.typography.heading2
+    ...theme.typography.heading2,
+    color: "#888"
   },
   "& p, & li": {
     ...theme.typography.body
@@ -19,14 +22,14 @@ const Container = glamorous.div(({ theme }) => ({
     paddingLeft: theme.spacing * 1.25
   },
   "& code": {
-    backgroundColor: "rgba(0, 0, 0, 0.06)",
+    backgroundColor: lighten(theme.colors.sidenavBackground)(62),
     padding: "2px 4px",
     borderRadius: 2
   },
   "& pre": {
-    backgroundColor: "#454545",
+    backgroundColor: lighten(theme.colors.sidenavBackground)(5),
     color: theme.colors.white,
-    borderRadius: 4,
+    borderRadius: 2,
     padding: theme.spacing,
     maxWidth: 680
   },
@@ -54,16 +57,18 @@ export default class StaticContent extends React.Component {
           this.containerNode = node
         }}
       >
-        {children}
+        {this.props.children}
       </Container>
     )
   }
 
   componentDidMount() {
-    const nodes = this.containerNode.querySelectorAll("pre code")
-    const n = nodes.length
+    this.codeNodes = this.containerNode.querySelectorAll("pre code")
+    this.codes = []
+    const n = this.codeNodes.length
     for (let i = 0; i < n; i++) {
-      highlight.highlightBlock(nodes[i])
+      this.codes.push(this.codeNodes[i].innerText)
+      highlight.highlightBlock(this.codeNodes[i])
     }
   }
 }

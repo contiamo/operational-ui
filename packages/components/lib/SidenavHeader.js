@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var Icon_1 = require("./Icon");
-var size = 60;
+var size = 52;
 var Container = glamorous_1.default.div({
     label: "sidenavheader",
     width: "100%"
@@ -19,7 +19,7 @@ var Content = glamorous_1.default.div(function (_a) {
         height: size,
         flex: "0 0 " + size + "px",
         color: isActive ? theme.colors.linkText : theme.colors.white,
-        borderBottom: isExpanded ? "1px solid #515151" : "none",
+        borderBottom: isExpanded ? "1px solid #395568" : "none",
         backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
         ":hover": {
             backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)"

@@ -15,19 +15,18 @@ var Container = glamorous_1.default.div(function (_a) {
         width: "fit-content",
         borderRadius: 2,
         padding: hasChip
-            ? theme.spacing / 3 + "px " + 2.5 * theme.spacing + "px " + theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px"
-            : theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px",
+            ? theme.spacing / 3 + "px " + theme.spacing * 8 / 3 + "px " + theme.spacing / 3 + "px " + theme.spacing + "px"
+            : theme.spacing / 3 + "px " + theme.spacing + "px",
         cursor: "pointer",
         overflow: "hidden",
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
-        margin: theme.spacing / 4 + "px " + theme.spacing / 4 + "px 0px 0px"
+        margin: theme.spacing / 3 + "px " + theme.spacing / 3 + "px 0px 0px"
     };
 });
 var Action = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
     return {
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
         borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
         position: "absolute",
@@ -38,9 +37,9 @@ var Action = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         justifyContent: "center",
         height: "100%",
-        padding: "0 " + theme.spacing / 4 + "px",
+        padding: "0 " + theme.spacing / 3 + "px",
         "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.25)"
+            backgroundColor: "rgba(0, 0, 0, 0.1)"
         }
     };
 });

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Record Component Should render 1`] = `
+<div
+  class="css-1dbx1gs"
+>
+  <div
+    class="css-nil"
+  />
+</div>
+`;

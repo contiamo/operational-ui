@@ -118,7 +118,7 @@ const colors: ThemeColors = {
   emphasizedText: "#373d3f",
   lightText: "#969696",
   linkText: "#1499CE",
-  sidenavBackground: "#393939",
+  sidenavBackground: "#394960",
   separator: "#f2f2f2",
   secondarySeparator: "#f8f8f8"
 }
@@ -137,19 +137,13 @@ const typography: ThemeTypography = {
   },
   heading1: {
     ...baseTypography,
-    fontSize: 13,
-    fontWeight: 700,
-    color: "#373d3f"
+    fontSize: 16,
+    fontWeight: 600
   },
   heading2: {
     ...baseTypography,
-    fontSize: 13,
-    fontWeight: 600,
-    textTransform: "uppercase",
-    color: "#969696",
-    "&::before": {
-      content: "» "
-    }
+    fontSize: 16,
+    fontWeight: 400
   },
   body: {
     ...baseTypography,

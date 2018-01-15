@@ -21,7 +21,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
-var ContextMenuItem_1 = require("./ContextMenuItem");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
@@ -62,7 +61,7 @@ var ContextMenu = /** @class */ (function (_super) {
         var menuItems = [];
         var children = [];
         React.Children.forEach(this.props.children, function (child, index) {
-            if (child.type === ContextMenuItem_1.default) {
+            if (child.props && child.props.__isContextMenuItem) {
                 var onClick_1 = child.props.onClick;
                 menuItems.push(React.cloneElement(child, {
                     key: "contextmenu-" + index,

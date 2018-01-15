@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Progress, Card, CardHeader, Heading2Type } from "@operational/components"
+import { Progress, Card, CardHeader } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -35,10 +35,10 @@ export default props => (
     <Card>
       <p>Animating progress bar, covering an entire area. Add as a child to any non-statically positioned element.</p>
 
-      <Heading2Type>Usage</Heading2Type>
+      <h2>Usage</h2>
       <Playground snippet={basicSnippet} components={{ Progress }} />
 
-      <Heading2Type>Props</Heading2Type>
+      <h2>Props</h2>
       <Table props={propDescription} />
     </Card>
   </Layout>
