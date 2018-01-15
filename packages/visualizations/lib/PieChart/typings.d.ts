@@ -1,5 +1,5 @@
-import { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
-export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
+import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
 export declare type TFocusElement = string;
 export interface IConfig {
     duration: number;
@@ -31,7 +31,7 @@ export interface ISeriesAccessors {
     name: (d: TDatum) => string;
     renderAs: (d: TDatum) => any;
 }
-export interface IAccessorsObject {
+export interface IAccessors {
     data: IDataAccessors;
     series: ISeriesAccessors;
 }

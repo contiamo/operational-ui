@@ -6,16 +6,7 @@ import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
-import {
-  IAccessors,
-  IAccessorsObject,
-  IComputedState,
-  IConfig,
-  IChartStateObject,
-  IObject,
-  TDatum,
-  TFocusElement
-} from "./typings"
+import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum, TFocusElement } from "./typings"
 
 class Facade {
   __disposed: boolean = false
@@ -68,7 +59,7 @@ class Facade {
     }
   }
 
-  initialAccessors(): IAccessorsObject {
+  initialAccessors(): IAccessors {
     return {
       data: {
         data: (d: IObject): TDatum[] => d.data
@@ -127,7 +118,7 @@ class Facade {
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: IObject): IAccessors {
+  accessors(type: string, accessors: IObject): IObject {
     return this.state.accessors(type, accessors)
   }
 

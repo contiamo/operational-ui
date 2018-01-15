@@ -7,7 +7,6 @@ import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
   IAccessors,
-  IAccessorsObject,
   IConfig,
   IFocusElement,
   IComputedState,
@@ -72,7 +71,7 @@ class Facade {
     }
   }
 
-  initialAccessors(): IAccessorsObject {
+  initialAccessors(): IAccessors {
     return {
       data: {
         nodes: (d: IInputData) => d.nodes,
@@ -142,7 +141,7 @@ class Facade {
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: IObject): IAccessors {
+  accessors(type: string, accessors: IObject): IObject {
     return this.state.accessors(type, accessors)
   }
 

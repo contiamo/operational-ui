@@ -1,5 +1,5 @@
 import { IReadOnlyState, State, TPath } from "./state";
-import { IAccessors, IChartStateObject, IObject, TStateWriter } from "./typings";
+import { IChartStateObject, IObject, TStateWriter } from "./typings";
 export interface IChartState<T> {
     current: State<T>;
     previous: State<T>;
@@ -16,6 +16,6 @@ export declare class StateHandler<IConfig> {
     data(data?: any): any;
     hasData(): boolean;
     config(config?: Partial<IConfig>): IConfig;
-    accessors(type: string, accessors?: IObject): IAccessors;
+    accessors(type: string, accessors?: IObject): IObject;
     computedWriter(namespace: TPath): TStateWriter;
 }

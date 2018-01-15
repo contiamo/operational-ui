@@ -2,7 +2,6 @@
 import * as d3 from "d3-selection"
 
 import {
-  IAccessors,
   IChartStateObject,
   IEvents,
   IObject,
@@ -13,7 +12,7 @@ import {
   TStateWriter
 } from "../utils/typings"
 
-export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
 
 export type TFocusElement = string
 
@@ -50,7 +49,7 @@ export interface ISeriesAccessors {
   renderAs: (d: TDatum) => any
 }
 
-export interface IAccessorsObject {
+export interface IAccessors {
   data: IDataAccessors
   series: ISeriesAccessors
 }
