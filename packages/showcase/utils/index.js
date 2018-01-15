@@ -9,8 +9,15 @@ const repoBasePath = "https://rawgit.com/Contiamo/operational-ui/master"
  * request at build time.
  */
 export const fetchFromRepo = (path, startLine, endLine) => {
-  return Promise.resolve("<!-- separator --><pre><code>var a = 2;</code></pre><!-- separator -->")
-  // return fetch(`${repoBasePath}${path}`)
-  //   .then(res => res.text())
-  //   .then(res => startLine ? res.split("\n").slice(startLine, endLine).join("\n") : res)
+  return fetch(`${repoBasePath}${path}`)
+    .then(res => res.text())
+    .then(
+      res =>
+        startLine
+          ? res
+              .split("\n")
+              .slice(startLine, endLine)
+              .join("\n")
+          : res
+    )
 }
