@@ -35,7 +35,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
   return {
     label: "button",
     display: "inline-block",
-    padding: condensed ? `${spacing / 3}px ${spacing * 3 / 3}px` : `${spacing * 2 / 3}px ${spacing * 2}px`,
+    padding: condensed ? `${spacing / 3}px ${spacing}px` : `${spacing * 2 / 3}px ${spacing * 2}px`,
     borderRadius: 2,
     border: "1px solid",
     borderColor:

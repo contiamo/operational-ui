@@ -18,7 +18,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"]);
     var activeBoxShadow = theme.shadows.pressed;
     var spacing = theme.spacing;
-    return __assign({ label: "button", display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing * 3 / 3 + "px" : spacing * 2 / 3 + "px " + spacing * 2 + "px", borderRadius: 2, border: "1px solid", borderColor: ["white", "#FFF", "#fff"].indexOf(backgroundColor) > -1
+    return __assign({ label: "button", display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing + "px" : spacing * 2 / 3 + "px " + spacing * 2 + "px", borderRadius: 2, border: "1px solid", borderColor: ["white", "#FFF", "#fff"].indexOf(backgroundColor) > -1
             ? theme.colors.gray30
             : active ? activeBackgroundColor : backgroundColor, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
         ? {

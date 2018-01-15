@@ -25,8 +25,8 @@ const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; colo
     width: "fit-content",
     borderRadius: 2,
     padding: hasChip
-      ? `${theme.spacing / 3}px ${theme.spacing * 8 / 3}px ${theme.spacing / 3}px ${theme.spacing * 3 / 3}px`
-      : `${theme.spacing / 3}px ${theme.spacing * 3 / 3}px`,
+      ? `${theme.spacing / 3}px ${theme.spacing * 8 / 3}px ${theme.spacing / 3}px ${theme.spacing}px`
+      : `${theme.spacing / 3}px ${theme.spacing}px`,
     cursor: "pointer",
     overflow: "hidden",
     color: readableTextColor(backgroundColor)(["black", "white"]),

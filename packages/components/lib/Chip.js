@@ -15,8 +15,8 @@ var Container = glamorous_1.default.div(function (_a) {
         width: "fit-content",
         borderRadius: 2,
         padding: hasChip
-            ? theme.spacing / 3 + "px " + theme.spacing * 8 / 3 + "px " + theme.spacing / 3 + "px " + theme.spacing * 3 / 3 + "px"
-            : theme.spacing / 3 + "px " + theme.spacing * 3 / 3 + "px",
+            ? theme.spacing / 3 + "px " + theme.spacing * 8 / 3 + "px " + theme.spacing / 3 + "px " + theme.spacing + "px"
+            : theme.spacing / 3 + "px " + theme.spacing + "px",
         cursor: "pointer",
         overflow: "hidden",
         color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
