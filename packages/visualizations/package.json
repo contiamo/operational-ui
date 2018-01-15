@@ -24,6 +24,7 @@
   "dependencies": {
     "@operational/theme": "^0.1.0-8",
     "@operational/utils": "^0.1.0-8",
+    "@types/d3-interpolate": "^1.1.6",
     "d3": "^4.10.2",
     "glamor": "^2.20.40",
     "glamorous": "^4.8.0",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@types/core-js": "0.9.43",
     "@types/d3-ease": "1.0.7",
+    "@types/d3-interpolate": "^1.1.6",
     "@types/d3-scale": "1.0.10",
     "@types/d3-selection": "1.1.0",
     "@types/d3-shape": "1.2.1",

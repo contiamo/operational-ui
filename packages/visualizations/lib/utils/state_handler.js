@@ -36,7 +36,7 @@ var StateHandler = /** @class */ (function () {
             return memo;
         }, [])(config);
         fp_1.forEach(function (option) {
-            console.warn("Warning: invalid config option `" + option + "`: reverting to default.");
+            console.warn("Warning: invalid config option '" + option + ": reverting to default.");
         })(invalidOptions);
         return this.state.current.merge("config", config);
     };

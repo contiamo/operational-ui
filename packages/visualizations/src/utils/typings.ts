@@ -14,10 +14,6 @@ export type TSeriesEl = d3.Selection<Element, any, Window, any>
 
 export type TD3Selection = d3.Selection<any, any, any, any>
 
-export interface IAccessors {
-  [key: string]: (d: any) => any
-}
-
 export type IEvents = EventEmitter
 
 export type Datum = {}

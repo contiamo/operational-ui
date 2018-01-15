@@ -1,8 +1,8 @@
 import * as d3 from "d3-selection";
 import Nodes from "./node";
 import Link from "./link";
-import { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
-export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
+import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
 export declare type TLink = Link;
 export declare type TNode = Nodes;
 export declare type TElementSelection = d3.Selection<d3.BaseType, TNode | TLink, d3.BaseType, any>;
@@ -64,7 +64,7 @@ export interface ILinkAccessors {
     target: (d: ILinkAttrs) => TNode | undefined;
     targetId: (d: ILinkAttrs) => string | undefined;
 }
-export interface IAccessorsObject {
+export interface IAccessors {
     data: IDataAccessors;
     node: INodeAccessors;
     link: ILinkAccessors;

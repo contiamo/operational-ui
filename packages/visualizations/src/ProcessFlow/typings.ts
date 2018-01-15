@@ -4,7 +4,6 @@ import Nodes from "./node"
 import Link from "./link"
 
 import {
-  IAccessors,
   IChartStateObject,
   IEvents,
   IObject,
@@ -15,7 +14,7 @@ import {
   TStateWriter
 } from "../utils/typings"
 
-export { IAccessors, IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
 
 export type TLink = Link
 export type TNode = Nodes
@@ -89,7 +88,7 @@ export interface ILinkAccessors {
   targetId: (d: ILinkAttrs) => string | undefined
 }
 
-export interface IAccessorsObject {
+export interface IAccessors {
   data: IDataAccessors
   node: INodeAccessors
   link: ILinkAccessors

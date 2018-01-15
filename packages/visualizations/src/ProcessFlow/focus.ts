@@ -217,7 +217,7 @@ function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) =
     backgroundBar
       .append("div")
       .attr("class", styles.breakdownText)
-      .text(numberFormatter(item.size) + " (" + item.percentage + "%)")
+      .text(`${numberFormatter(item.size)} (${item.percentage}%)`)
   }
 }
 

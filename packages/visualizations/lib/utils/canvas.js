@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("./event_catalog");
 var d3 = require("d3-selection");
-var styles = require("../styles/styles");
+var styles = require("./styles");
 var Canvas = /** @class */ (function () {
     function Canvas(state, stateWriter, events, context) {
         this.elements = {};
@@ -27,12 +27,31 @@ var Canvas = /** @class */ (function () {
         this.elMap.series = el;
         return el;
     };
+    Canvas.prototype.insertFocusElements = function () {
+        var main = this.insertFocusLabel();
+        var component = this.insertComponentFocus();
+        this.elMap.focus = { main: main, component: component };
+    };
+    Canvas.prototype.insertFocusLabel = function () {
+        var focusEl = d3
+            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+            .attr("class", "" + styles.focusLegend)
+            .style("visibility", "hidden");
+        this.container.node().appendChild(focusEl.node());
+        return focusEl;
+    };
+    Canvas.prototype.insertComponentFocus = function () {
+        var focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus");
+        var ref = this.container.node();
+        ref.insertBefore(focusEl.node(), ref.nextSibling);
+        return focusEl;
+    };
     Canvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.HOVER);
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
         this.trackMouseMove();
     };
     Canvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.OUT);
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
         this.stopMouseMove();
     };
     Canvas.prototype.onClick = function () {
@@ -49,6 +68,12 @@ var Canvas = /** @class */ (function () {
     Canvas.prototype.elementFor = function (component) {
         return this.elMap[component];
     };
+    Canvas.prototype.prefixedId = function (id) {
+        return this.state.current.get("config").uid + id;
+    };
+    Canvas.prototype.shadowDefinitionId = function () {
+        return this.prefixedId("_shadow");
+    };
     Canvas.prototype.trackMouseMove = function () {
         return;
     };
@@ -57,6 +82,7 @@ var Canvas = /** @class */ (function () {
     };
     Canvas.prototype.draw = function () {
         this.container.classed("hidden", this.state.current.get("config").hidden);
+        this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect());
     };
     Canvas.prototype.remove = function () {
         var el = this.mouseOverElement();

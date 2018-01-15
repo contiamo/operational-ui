@@ -148,33 +148,38 @@ declare namespace fp {
      */
     isEmpty(value?: any): boolean
 
-    bind: any
-    forEach: any
-    times: any
-    extend: any
-    uniqueId: any
-    indexOf: any
-    uniq: any
-    invoke: any
-    isMatch: any
-    isDate: any
-    isFinite: any
-    pluck: any
-    compact: any
-    flatten: any
-    size: any
     all: any
     any: any
-    isObject: any
-    last: any
+    bind: any
+    compact: any
+    defaults: any
     drop: any
     dropRight: any
     every: any
-    merge: any
+    extend: any
+    filter: any
+    findIndex: any
+    flatten: any
+    forEach: any
     get: any
     identity: any
-    filter: any
-    defaults: any
+    indexOf: any
+    invoke: any
+    isDate: any
+    isFinite: any
+    isFunction: any
+    isMatch: any
+    isObject: any
+    last: any
+    max: any
+    merge: any
+    min: any
+    pluck: any
+    size: any
+    some: any
+    times: any
+    uniq: any
+    uniqueId: any
   }
 }
 

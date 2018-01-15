@@ -15,7 +15,7 @@ import {
   TStateWriter,
   INodeAccessors,
   ILinkAccessors,
-  IAccessorsObject
+  IAccessors
 } from "./typings"
 
 class DataHandler {
@@ -36,7 +36,7 @@ class DataHandler {
 
   prepareData(): IData {
     const data = this.state.current.get("data")
-    const accessors: IAccessorsObject = this.state.current.get("accessors")
+    const accessors: IAccessors = this.state.current.get("accessors")
     this.journeys = accessors.data.journeys(data)
     this.initializeNodes(accessors.data.nodes(data))
     this.initializeLinks()
@@ -64,7 +64,7 @@ class DataHandler {
       return node.id() === nodeId
     })(this.nodes)
     if (!node) {
-      throw new Error("No node with id '" + nodeId + "' defined.")
+      throw new Error(`No node with id '${nodeId}' defined.`)
     }
     return node
   }

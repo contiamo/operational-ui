@@ -2,7 +2,7 @@ import Events from "./event_catalog"
 import * as d3 from "d3-selection"
 import { isArray, reduce } from "lodash/fp"
 import { IEvents, IObject, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
-import * as styles from "../styles/styles"
+import * as styles from "./styles"
 
 abstract class Canvas {
   container: TD3Selection
@@ -41,13 +41,35 @@ abstract class Canvas {
 
   abstract mouseOverElement(): TD3Selection
 
+  insertFocusElements(): void {
+    const main: TD3Selection = this.insertFocusLabel()
+    const component: TD3Selection = this.insertComponentFocus()
+    this.elMap.focus = { main, component }
+  }
+
+  insertFocusLabel(): TD3Selection {
+    const focusEl = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", `${styles.focusLegend}`)
+      .style("visibility", "hidden")
+    this.container.node().appendChild(focusEl.node())
+    return focusEl
+  }
+
+  insertComponentFocus(): TD3Selection {
+    const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
+    const ref: Node = this.container.node()
+    ref.insertBefore(focusEl.node(), ref.nextSibling)
+    return focusEl
+  }
+
   onMouseEnter(): void {
-    this.events.emit(Events.CHART.HOVER)
+    this.events.emit(Events.CHART.MOUSEOVER)
     this.trackMouseMove()
   }
 
   onMouseLeave(): void {
-    this.events.emit(Events.CHART.OUT)
+    this.events.emit(Events.CHART.MOUSEOUT)
     this.stopMouseMove()
   }
 
@@ -56,7 +78,7 @@ abstract class Canvas {
   }
 
   listenToMouseOver(): void {
-    const el: any = this.mouseOverElement()
+    const el: TD3Selection = this.mouseOverElement()
     if (el) {
       el.node().addEventListener("mouseenter", this.onMouseEnter.bind(this))
       el.node().addEventListener("mouseleave", this.onMouseLeave.bind(this))
@@ -64,8 +86,16 @@ abstract class Canvas {
     }
   }
 
-  elementFor(component: string): TD3Selection {
+  elementFor(component: string): any {
     return this.elMap[component]
+  }
+
+  prefixedId(id: string): string {
+    return this.state.current.get("config").uid + id
+  }
+
+  shadowDefinitionId(): string {
+    return this.prefixedId("_shadow")
   }
 
   trackMouseMove(): void {
@@ -78,6 +108,7 @@ abstract class Canvas {
 
   draw(): void {
     this.container.classed("hidden", this.state.current.get("config").hidden)
+    this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect())
   }
 
   remove(): void {

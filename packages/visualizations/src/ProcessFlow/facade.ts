@@ -7,7 +7,6 @@ import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
   IAccessors,
-  IAccessorsObject,
   IConfig,
   IFocusElement,
   IComputedState,
@@ -72,7 +71,7 @@ class Facade {
     }
   }
 
-  initialAccessors(): IAccessorsObject {
+  initialAccessors(): IAccessors {
     return {
       data: {
         nodes: (d: IInputData) => d.nodes,
@@ -91,7 +90,7 @@ class Facade {
       link: {
         content: (d: INodeAttrs): IObject[] => d.content || [],
         dash: (d: ILinkAttrs): string => d.dash || "0",
-        label: (d: ILinkAttrs): string => d.label || d.source.label() + " → " + d.target.label() || "",
+        label: (d: ILinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
         size: (d: ILinkAttrs): number => d.size || 1,
         stroke: (d: ILinkAttrs): string => d.stroke || "#bbb",
         source: (d: ILinkAttrs): TNode | undefined => d.source,
@@ -142,7 +141,7 @@ class Facade {
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: IObject): IAccessors {
+  accessors(type: string, accessors: IObject): IObject {
     return this.state.accessors(type, accessors)
   }
 
@@ -163,7 +162,7 @@ class Facade {
     const focusElement: IFocusElement = this.state.config().focusElement
     !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
-      : this.events.emit(Events.FOCUS.ELEMENT.OUT)
+      : this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
     return this.canvas.elementFor("series").node()
   }

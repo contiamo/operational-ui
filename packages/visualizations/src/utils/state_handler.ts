@@ -1,5 +1,5 @@
 import { IReadOnlyState, State, TPath } from "./state"
-import { IAccessors, IChartStateObject, IObject, TStateWriter } from "./typings"
+import { IChartStateObject, IObject, TStateWriter } from "./typings"
 import { forEach, isEmpty, reduce } from "lodash/fp"
 
 export interface IChartState<T> {
@@ -56,14 +56,14 @@ export class StateHandler<IConfig> {
     )(config)
 
     forEach((option: string): void => {
-      console.warn("Warning: invalid config option `" + option + "`: reverting to default.")
+      console.warn(`Warning: invalid config option '${option}: reverting to default.`)
     })(invalidOptions)
 
     return this.state.current.merge("config", config)
   }
 
   // Accessors
-  accessors(type: string, accessors?: IObject): IAccessors {
+  accessors(type: string, accessors?: IObject): IObject {
     if (!accessors) return this.state.current.get(["accessors", type])
     const accessorFuncs: any = reduce.convert({ cap: false })((memo: IObject, accessor: any, key: string) => {
       memo[key] = typeof accessor === "function" ? accessor : () => accessor

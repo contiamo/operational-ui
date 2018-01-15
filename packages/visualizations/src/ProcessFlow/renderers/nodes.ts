@@ -80,11 +80,11 @@ class Nodes extends AbstractRenderer {
   }
 
   translate(d: TNode): string {
-    return "translate(" + d.x + "," + d.y + ")"
+    return `translate(${d.x},${d.y})`
   }
 
   rotate(d: TNode): string {
-    return "rotate(" + nodeShapeOptions[d.shape()].rotation + ")"
+    return `rotate(${nodeShapeOptions[d.shape()].rotation})`
   }
 
   enterAndUpdate(nodeGroups: TNodeSelection): void {

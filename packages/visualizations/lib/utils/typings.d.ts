@@ -10,9 +10,6 @@ export interface IObject {
 export declare type TStateWriter = (propertyPath: string | string[], value: any) => void;
 export declare type TSeriesEl = d3.Selection<Element, any, Window, any>;
 export declare type TD3Selection = d3.Selection<any, any, any, any>;
-export interface IAccessors {
-    [key: string]: (d: any) => any;
-}
 export declare type IEvents = EventEmitter;
 export declare type Datum = {};
 export interface IChartStateObject {
