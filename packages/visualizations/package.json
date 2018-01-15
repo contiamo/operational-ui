@@ -1,6 +1,6 @@
 {
   "name": "@operational/visualizations",
-  "version": "0.1.0-8",
+  "version": "0.1.0-9",
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -22,8 +22,8 @@
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "dependencies": {
-    "@operational/theme": "^0.1.0-8",
-    "@operational/utils": "^0.1.0-8",
+    "@operational/theme": "^0.1.0-9",
+    "@operational/utils": "^0.1.0-9",
     "d3": "^4.10.2",
     "glamor": "^2.20.40",
     "glamorous": "^4.8.0",
