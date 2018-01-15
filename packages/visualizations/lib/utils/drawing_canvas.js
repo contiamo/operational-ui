@@ -40,9 +40,6 @@ var DrawingCanvas = /** @class */ (function (_super) {
     DrawingCanvas.prototype.mouseOverElement = function () {
         return this.container;
     };
-    DrawingCanvas.prototype.prefixedId = function (id) {
-        return this.state.current.get("config").uid + id;
-    };
     DrawingCanvas.prototype.appendDrawingGroup = function () {
         this.elements.drawing = this.el.append("svg:g").attr("class", "drawing");
     };
@@ -132,9 +129,6 @@ var DrawingCanvas = /** @class */ (function (_super) {
     };
     DrawingCanvas.prototype.yRulesDefinitionId = function () {
         return this.prefixedId("_yrules_clip");
-    };
-    DrawingCanvas.prototype.shadowDefinitionId = function () {
-        return this.prefixedId("_shadow");
     };
     DrawingCanvas.prototype.draw = function () {
         _super.prototype.draw.call(this);

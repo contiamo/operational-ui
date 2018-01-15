@@ -9,7 +9,7 @@ import * as styles from "./styles"
 
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
-function approxZero(y: (x: number) => number, initialX: number): number {
+const approxZero = (y: (x: number) => number, initialX: number): number => {
   // make sure to get points with different y value
   const p0: { x: number; y: number } = { x: initialX, y: y(initialX) }
   const p1: { x: number; y: number } = { x: initialX + 2, y: y(initialX + 2) }
@@ -20,8 +20,7 @@ function approxZero(y: (x: number) => number, initialX: number): number {
 
   // Find nearest integer value for x that has y > 0
   let xInt: number = Math.round(xZero)
-  let i: number
-  for (i = 0; i <= 10; i = i + 1) {
+  for (let i: number = 0; i <= 10; i = i + 1) {
     if (y(xInt) <= 0) {
       xInt = xInt - 1
     }
@@ -31,10 +30,10 @@ function approxZero(y: (x: number) => number, initialX: number): number {
 }
 
 // Accessors of series in prepared data
-function dataKey(d: TDatum): string {
+const dataKey = (d: TDatum): string => {
   return d.data.key
 }
-function dataLabelValue(d: TDatum): string {
+const dataLabelValue = (d: TDatum): string => {
   return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined
 }
 

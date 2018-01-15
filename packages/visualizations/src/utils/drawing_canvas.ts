@@ -34,10 +34,6 @@ abstract class DrawingCanvas extends Canvas {
     return this.container
   }
 
-  prefixedId(id: string): string {
-    return this.state.current.get("config").uid + id
-  }
-
   appendDrawingGroup(): void {
     this.elements.drawing = this.el.append("svg:g").attr("class", "drawing")
   }
@@ -141,10 +137,6 @@ abstract class DrawingCanvas extends Canvas {
 
   yRulesDefinitionId(): string {
     return this.prefixedId("_yrules_clip")
-  }
-
-  shadowDefinitionId(): string {
-    return this.prefixedId("_shadow")
   }
 
   draw(): void {

@@ -90,6 +90,14 @@ abstract class Canvas {
     return this.elMap[component]
   }
 
+  prefixedId(id: string): string {
+    return this.state.current.get("config").uid + id
+  }
+
+  shadowDefinitionId(): string {
+    return this.prefixedId("_shadow")
+  }
+
   trackMouseMove(): void {
     return
   }

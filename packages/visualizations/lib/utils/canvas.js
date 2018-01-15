@@ -68,6 +68,12 @@ var Canvas = /** @class */ (function () {
     Canvas.prototype.elementFor = function (component) {
         return this.elMap[component];
     };
+    Canvas.prototype.prefixedId = function (id) {
+        return this.state.current.get("config").uid + id;
+    };
+    Canvas.prototype.shadowDefinitionId = function () {
+        return this.prefixedId("_shadow");
+    };
     Canvas.prototype.trackMouseMove = function () {
         return;
     };

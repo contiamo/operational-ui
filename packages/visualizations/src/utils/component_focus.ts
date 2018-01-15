@@ -24,17 +24,17 @@ class ComponentFocus {
     this.events = events
     this.uid = uniqueId("componentFocusLabel")
 
-    const componentPosition: ClientRect = payload.component.node().getBoundingClientRect(),
-      canvasPosition: ClientRect = this.state.current.get("computed").canvas.containerRect,
-      topBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-top-width"], 10),
-      leftBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-left-width"], 10),
-      config: IObject = this.state.current.get("config")
+    const componentPosition: ClientRect = payload.component.node().getBoundingClientRect()
+    const canvasPosition: ClientRect = this.state.current.get("computed").canvas.containerRect
+    const topBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-top-width"], 10)
+    const leftBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-left-width"], 10)
+    const config: IObject = this.state.current.get("config")
 
     // Prevent component focus from going out of canvas.
-    let top: number = componentPosition.top - canvasPosition.top - topBorderWidth,
-      left: number = componentPosition.left - canvasPosition.left - leftBorderWidth,
-      width: number = componentPosition.width,
-      height: number = componentPosition.height
+    let top: number = componentPosition.top - canvasPosition.top - topBorderWidth
+    let left: number = componentPosition.left - canvasPosition.left - leftBorderWidth
+    let width: number = componentPosition.width
+    let height: number = componentPosition.height
 
     if (top < 0) {
       width += top

@@ -20,6 +20,8 @@ declare abstract class Canvas {
     onClick(): void;
     listenToMouseOver(): void;
     elementFor(component: string): any;
+    prefixedId(id: string): string;
+    shadowDefinitionId(): string;
     trackMouseMove(): void;
     stopMouseMove(): void;
     draw(): void;

@@ -8,7 +8,7 @@ var d3_interpolate_1 = require("d3-interpolate");
 var styles = require("./styles");
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
-function approxZero(y, initialX) {
+var approxZero = function (y, initialX) {
     // make sure to get points with different y value
     var p0 = { x: initialX, y: y(initialX) };
     var p1 = { x: initialX + 2, y: y(initialX + 2) };
@@ -17,21 +17,20 @@ function approxZero(y, initialX) {
     var xZero = -p0.y / m + p0.x;
     // Find nearest integer value for x that has y > 0
     var xInt = Math.round(xZero);
-    var i;
-    for (i = 0; i <= 10; i = i + 1) {
+    for (var i = 0; i <= 10; i = i + 1) {
         if (y(xInt) <= 0) {
             xInt = xInt - 1;
         }
     }
     return xInt;
-}
+};
 // Accessors of series in prepared data
-function dataKey(d) {
+var dataKey = function (d) {
     return d.data.key;
-}
-function dataLabelValue(d) {
+};
+var dataLabelValue = function (d) {
     return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined;
-}
+};
 var AbstractRenderer = /** @class */ (function () {
     function AbstractRenderer(state, events, el, options) {
         this.computed = {};

@@ -8,7 +8,6 @@ declare abstract class DrawingCanvas extends Canvas {
     insertEl(): TSeriesEl;
     insertDrawingContainer(): TD3Selection;
     mouseOverElement(): TD3Selection;
-    prefixedId(id: string): string;
     appendDrawingGroup(): void;
     appendDrawingClip(): void;
     appendYRulesClip(): void;
@@ -26,7 +25,6 @@ declare abstract class DrawingCanvas extends Canvas {
     abstract totalLegendHeight(): number;
     drawingClipDefinitionId(): string;
     yRulesDefinitionId(): string;
-    shadowDefinitionId(): string;
     draw(): void;
     resize(): void;
     remove(): void;

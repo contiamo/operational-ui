@@ -11,9 +11,16 @@ var ComponentFocus = /** @class */ (function () {
         this.el = el.append("xhtml:div").attr("class", styles.focusLegend + " " + styles.componentFocus);
         this.events = events;
         this.uid = fp_1.uniqueId("componentFocusLabel");
-        var componentPosition = payload.component.node().getBoundingClientRect(), canvasPosition = this.state.current.get("computed").canvas.containerRect, topBorderWidth = parseInt(window.getComputedStyle(this.el.node())["border-top-width"], 10), leftBorderWidth = parseInt(window.getComputedStyle(this.el.node())["border-left-width"], 10), config = this.state.current.get("config");
+        var componentPosition = payload.component.node().getBoundingClientRect();
+        var canvasPosition = this.state.current.get("computed").canvas.containerRect;
+        var topBorderWidth = parseInt(window.getComputedStyle(this.el.node())["border-top-width"], 10);
+        var leftBorderWidth = parseInt(window.getComputedStyle(this.el.node())["border-left-width"], 10);
+        var config = this.state.current.get("config");
         // Prevent component focus from going out of canvas.
-        var top = componentPosition.top - canvasPosition.top - topBorderWidth, left = componentPosition.left - canvasPosition.left - leftBorderWidth, width = componentPosition.width, height = componentPosition.height;
+        var top = componentPosition.top - canvasPosition.top - topBorderWidth;
+        var left = componentPosition.left - canvasPosition.left - leftBorderWidth;
+        var width = componentPosition.width;
+        var height = componentPosition.height;
         if (top < 0) {
             width += top;
             top = 0;
