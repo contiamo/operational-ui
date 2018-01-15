@@ -19,7 +19,7 @@ class Links extends AbstractRenderer {
     const linkGroups: TLinkSelection = this.el
       .select("g.links-group")
       .selectAll("g.link-group")
-      .data(this.data, (d: TLink): string => d.sourceId() + ";" + d.targetId())
+      .data(this.data, (d: TLink): string => `${d.sourceId()};${d.targetId()}`)
 
     this.exit(linkGroups)
     this.enterAndUpdate(linkGroups)
@@ -89,7 +89,7 @@ class Links extends AbstractRenderer {
       x: number = existingSource ? existingSource.x : link.source().x,
       y: number = existingSource ? existingSource.y : link.source().y
 
-    return "M" + x + "," + y + "L" + x + "," + y
+    return `M${x},${y}L${x},${y}`
   }
 
   linkPath(link: TLink): string {
@@ -99,7 +99,7 @@ class Links extends AbstractRenderer {
       yEnd: number = link.target().y,
       xMid: number = (xStart + xEnd) / 2,
       yMid = (yStart + yEnd) / 2
-    return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd
+    return `M${xStart},${yStart}L${xMid},${yMid}L${xEnd},${yEnd}`
   }
 
   highlight(element: TLinkSelection, d: TLink): void {
@@ -131,7 +131,7 @@ class Links extends AbstractRenderer {
       type: "link",
       x: (d.source().x + d.target().x) / 2,
       y: (d.source().y + d.target().y) / 2,
-      id: d.sourceId() + "->" + d.targetId()
+      id: `${d.sourceId()}->${d.targetId()}`
     }
   }
 }

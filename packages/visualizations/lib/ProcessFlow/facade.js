@@ -69,7 +69,7 @@ var Facade = /** @class */ (function () {
             link: {
                 content: function (d) { return d.content || []; },
                 dash: function (d) { return d.dash || "0"; },
-                label: function (d) { return d.label || d.source.label() + " → " + d.target.label() || ""; },
+                label: function (d) { return (d.label || d.source.label()) + " \u2192 " + (d.target.label() || ""); },
                 size: function (d) { return d.size || 1; },
                 stroke: function (d) { return d.stroke || "#bbb"; },
                 source: function (d) { return d.source; },

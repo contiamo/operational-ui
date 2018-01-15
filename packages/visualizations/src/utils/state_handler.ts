@@ -56,7 +56,7 @@ export class StateHandler<IConfig> {
     )(config)
 
     forEach((option: string): void => {
-      console.warn("Warning: invalid config option `" + option + "`: reverting to default.")
+      console.warn(`Warning: invalid config option '${option}: reverting to default.`)
     })(invalidOptions)
 
     return this.state.current.merge("config", config)

@@ -19,7 +19,7 @@ const FocusUtils: IObject = {
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
   drawHidden: (canvasEl: TD3Selection, type: string): TD3Selection => {
-    return canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden")
+    return canvasEl.attr("class", `${styles.focusLegend} focus-legend-${type}`).style("visibility", "hidden")
   },
 
   // Move the focus label to the desired position and make it visible.
@@ -83,7 +83,7 @@ const FocusUtils: IObject = {
         left = optimalPosition([x.right, x.left, x.farLeft], drawing.xMin, drawing.xMax, label.width)
         break
       default:
-        throw new Error("Invalid label position '" + position + "'.")
+        throw new Error(`Invalid label position '${position}'.`)
     }
     // Finally. Done.
     this.default.drawVisible(el, { left, top })

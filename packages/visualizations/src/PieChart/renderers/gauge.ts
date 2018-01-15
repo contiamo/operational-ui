@@ -186,7 +186,7 @@ class Gauge extends AbstractRenderer {
       yOuter = (d: TDatum): number => -d.r * Math.sin(angle(d)),
       xInner = (d: TDatum): number => -d.inner * Math.cos(angle(d)),
       yInner = (d: TDatum): number => -d.inner * Math.sin(angle(d)),
-      path = (d: TDatum): string => "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(","),
+      path = (d: TDatum): string => `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`,
       oldValue: number = this.previous.comparison ? this.value(this.previous.comparison) : 0,
       f = interpolateObject(
         { inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue },

@@ -90,7 +90,7 @@ class Facade {
       link: {
         content: (d: INodeAttrs): IObject[] => d.content || [],
         dash: (d: ILinkAttrs): string => d.dash || "0",
-        label: (d: ILinkAttrs): string => d.label || d.source.label() + " → " + d.target.label() || "",
+        label: (d: ILinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
         size: (d: ILinkAttrs): number => d.size || 1,
         stroke: (d: ILinkAttrs): string => d.stroke || "#bbb",
         source: (d: ILinkAttrs): TNode | undefined => d.source,

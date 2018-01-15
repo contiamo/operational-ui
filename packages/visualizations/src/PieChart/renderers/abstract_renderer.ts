@@ -371,7 +371,7 @@ abstract class AbstractRenderer {
   }
 
   translateString(values: [number, number]): string {
-    return "translate(" + values.join(", ") + ")"
+    return `translate(${values.join(", ")})`
   }
 
   dataForLegend(): IObject[] {

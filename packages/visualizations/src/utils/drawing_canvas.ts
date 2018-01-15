@@ -86,10 +86,10 @@ abstract class DrawingCanvas extends Canvas {
         const clip: string = se[1]
         memo[renderer] = series
           .append("svg:g")
-          .attr("class", "series-" + renderer)
-          .attr("clip-path", "url(#" + this.prefixedId(`_${clip}`) + ")")
+          .attr("class", `series-${renderer}`)
+          .attr("clip-path", `url(#${this.prefixedId(`_${clip}`)})`)
       } else {
-        memo[se as string] = series.append("svg:g").attr("class", "series-" + se)
+        memo[se as string] = series.append("svg:g").attr("class", `series-${se}`)
       }
       return memo
     }, {})(seriesElements)

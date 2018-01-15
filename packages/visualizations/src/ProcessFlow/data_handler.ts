@@ -64,7 +64,7 @@ class DataHandler {
       return node.id() === nodeId
     })(this.nodes)
     if (!node) {
-      throw new Error("No node with id '" + nodeId + "' defined.")
+      throw new Error(`No node with id '${nodeId}' defined.`)
     }
     return node
   }

@@ -14,7 +14,7 @@ class Renderer {
       case "gauge":
         return new Gauge(state, events, el, options)
       default:
-        throw new Error("invalid render type '" + options.type + "' specified")
+        throw new Error(`invalid render type '${options.type}' specified`)
     }
   }
 }
