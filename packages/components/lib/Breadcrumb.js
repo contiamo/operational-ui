@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
+var utils_1 = require("@operational/utils");
 var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
@@ -10,6 +11,9 @@ var Container = glamorous_1.default.span(function (_a) {
         color: theme.colors.linkText,
         "& svg": {
             marginLeft: 4
+        },
+        "&:hover": {
+            color: utils_1.darken(theme.colors.linkText)(5)
         }
     });
 });

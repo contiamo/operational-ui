@@ -1,5 +1,13 @@
 import * as React from "react"
-import { Card, Heading2Type, Record, RecordSummary, RecordValue, Heading1Type } from "@operational/components"
+import {
+  Card,
+  Heading2Type,
+  Record,
+  RecordSummary,
+  RecordDetails,
+  Heading1Type,
+  InfoTile
+} from "@operational/components"
 
 import Table from "../../components/PropsTable"
 import Playground from "../../components/Playground"
@@ -35,7 +43,11 @@ export default props => (
       <p>Records are great components!</p>
 
       <Heading2Type>Usage</Heading2Type>
-      <Playground snippet={simpleSnippet} components={{ Record }} scope={{ RecordSummary, RecordDetails }} />
+      <Playground
+        snippet={simpleSnippet}
+        components={{ Record }}
+        scope={{ RecordSummary, RecordDetails, Heading1Type, InfoTile }}
+      />
 
       <Heading2Type>Props</Heading2Type>
       <Table props={propDescription} />

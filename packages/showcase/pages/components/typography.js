@@ -22,7 +22,7 @@ export default props => (
         <em>@operational/components</em> keeps typography styles, organized in 5 typography styles, as follows:
       </p>
 
-      <Playground snippet={simpleSnippet} components={{ TitleType, Heading1Type, BodyType, SmallType }} />
+      <Playground snippet={simpleSnippet} components={{ TitleType, Heading1Type, Heading2Type, BodyType, SmallType }} />
     </Card>
   </Layout>
 )

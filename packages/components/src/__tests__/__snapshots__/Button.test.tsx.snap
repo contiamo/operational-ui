@@ -2,7 +2,7 @@
 
 exports[`Button Component Should initialize properly 1`] = `
 <div
-  class="css-dzgrit"
+  class="css-poncas"
   role="button"
   tabindex="-1"
 >

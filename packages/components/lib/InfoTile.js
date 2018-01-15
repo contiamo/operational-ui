@@ -20,7 +20,8 @@ var Container = glamorous_1.default.div(function (_a) {
         display: "inline-flex",
         flexDirection: "column",
         width: "fit-content",
-        padding: theme.spacing / 2 + "px " + theme.spacing * 1,
+        marginRight: theme.spacing,
+        padding: theme.spacing / 3 + "px " + theme.spacing + "px",
         backgroundColor: theme.colors.gray10,
         border: "1px solid " + theme.colors.gray20
     });

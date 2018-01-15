@@ -1,6 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
+import { darken } from "@operational/utils"
 import Icon from "./Icon"
 import { ReactFeatherIconName } from "./ReactFeather"
 
@@ -16,6 +17,9 @@ const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   color: theme.colors.linkText,
   "& svg": {
     marginLeft: 4
+  },
+  "&:hover": {
+    color: darken(theme.colors.linkText)(5)
   }
 }))
 

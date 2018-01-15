@@ -7,18 +7,9 @@ import Table from "../../components/PropsTable"
 
 const snippet = `
 <div>
-  <InfoTile
-    color="info"
-    label="Use Cases"
-    icon="AlertCircle"
-    onAction={() => {
-      alert("Oh hello!")
-    }}
-  >
-    Infinite
-  </InfoTile>
+  <InfoTile label="Use Cases" >Infinite</InfoTile>
   <InfoTile label="Potential">Unlimited</InfoTile>
-  <InfoTile color="info" label="Cool Factor">
+  <InfoTile label="Cool Factor">
     > 10
   </InfoTile>
 </div>
