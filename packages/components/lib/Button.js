@@ -13,7 +13,10 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, condensed = _a.condensed;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color] || "white") : "white";
+    var defaultColor = theme.colors.info;
+    var backgroundColor = color
+        ? utils_1.hexOrColor(color)(theme.colors[color] || defaultColor)
+        : defaultColor;
     var activeBackgroundColor = utils_1.darken(backgroundColor)(5);
     var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"]);
     var activeBoxShadow = theme.shadows.pressed;
@@ -28,7 +31,7 @@ var Container = glamorous_1.default.div(function (_a) {
             },
             ":focus": {
                 outline: 0,
-                backgroundColor: activeBackgroundColor
+                boxShadow: "0 0 0 3px " + utils_1.lighten(backgroundColor)(35)
             },
             ":active": {
                 boxShadow: activeBoxShadow

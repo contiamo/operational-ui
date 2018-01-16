@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
 import withLabel from "./utils/with-label"
+import * as mixins from "./utils/mixins"
 
 export interface IProps {
   css?: any
@@ -42,11 +43,7 @@ const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disable
   font: "inherit",
   borderRadius: 2,
   WebkitAppearance: "none",
-  "&:focus": {
-    outline: 0,
-    borderColor: "rgba(82,168,236,.8)",
-    boxShadow: theme.shadows.focus
-  }
+  "&:focus": mixins.inputFocus({ theme })
 }))
 
 const Input = (props: IProps) => {
