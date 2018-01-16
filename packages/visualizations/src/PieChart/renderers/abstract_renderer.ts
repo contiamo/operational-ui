@@ -111,7 +111,7 @@ abstract class AbstractRenderer {
     // Arcs
     const arcs: TD3Selection = this.el
       .select("g.arcs")
-      .selectAll("g")
+      .selectAll(`g.${styles.arc}`)
       .data(this.computed.data, dataKey)
 
     this.exit(arcs)
@@ -283,6 +283,7 @@ abstract class AbstractRenderer {
 
     // We cannot draw a pie chart with no series or only series that have the value 0
     if (!this.hasData()) {
+      this.computed.data = []
       return
     }
 

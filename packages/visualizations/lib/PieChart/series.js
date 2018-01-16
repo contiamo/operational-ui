@@ -36,8 +36,8 @@ var Series = /** @class */ (function () {
     };
     Series.prototype.updateRenderer = function () {
         var options = this.renderAs();
-        if (options.length !== 1) {
-            throw new Error("Incorrect number of renderers: " + options.length + " specified, 1 required");
+        if (!options || options.length !== 1) {
+            throw new Error("Incorrect number of renderers: " + (!options ? 0 : options.length) + " specified, 1 required");
         }
         var rendererOptions = options[0];
         if (!this.renderer) {
