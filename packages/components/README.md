@@ -21,7 +21,7 @@ const App = () => {
 }
 ```
 
-Wrapping your component inside an `OperationalUI` is mandatory, and does important setup work. Note this component can only have a single child.
+Wrapping your component inside an `OperationalUI` is mandatory, and does important setup work. *Note this component can only have a single child.*
 
 ## Documentation
 
