@@ -6,30 +6,24 @@ import { hexOrColor, readableTextColor } from "@operational/utils"
 export interface IProps {
   id?: string | number
   className?: string
-  css?: any
+  css?: {}
   children: React.ReactNode
-  color?: string
 }
 
-const Container = glamorous.header(({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const { white } = theme.colors
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color] || white) : white
-
-  return {
-    backgroundColor,
-    label: "header",
-    display: "flex",
-    flex: "0 0 52px",
-    height: 52,
-    alignItems: "center",
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-    boxShadow: theme.shadows.card,
-    color: readableTextColor(backgroundColor)(["black", "white"])
-  }
-})
+const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
+  label: "header",
+  display: "flex",
+  flex: "0 0 52px",
+  justifyContent: "space-between",
+  backgroundColor: theme.colors.white,
+  height: 52,
+  alignItems: "center",
+  padding: `${theme.spacing / 2}px ${theme.spacing * 4 / 3}px`,
+  boxShadow: theme.shadows.card
+}))
 
 export default (props: IProps) => (
-  <Container key={props.id} css={props.css} className={props.className} color={props.color}>
+  <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
