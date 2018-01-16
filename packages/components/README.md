@@ -12,14 +12,16 @@ Create your first application like so:
 
 ```js
 import React from "react"
-import { Button, ThemeProvider, operationalTheme } from "@operational/components"
+import { Button, OperationalUI } from "@operational/components"
 
 const App = () => {
-  <ThemeProvider theme={operationalTheme}>
+  <OperationalUI>
     <Button>Hello</Button>
-  </ThemeProvider>
+  </OperationalUI>
 }
 ```
+
+Wrapping your component inside an `OperationalUI` is mandatory, and does important setup work. Note this component can only have a single child.
 
 ## Documentation
 

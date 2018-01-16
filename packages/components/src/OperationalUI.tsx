@@ -8,4 +8,8 @@ export interface IProps {
   children?: React.ReactNode
 }
 
-export default (props: IProps) => <ThemeProvider theme={props.theme || operational}>{props.children}</ThemeProvider>
+export default (props: IProps) => (
+  // Only one child is allowed here,
+  // see https://reactjs.org/docs/react-api.html#reactchildrenonly
+  <ThemeProvider theme={props.theme || operational}>{React.Children.only(props.children)}</ThemeProvider>
+)

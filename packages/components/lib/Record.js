@@ -33,7 +33,6 @@ var Record = /** @class */ (function (_super) {
     }
     Record.prototype.render = function () {
         var _this = this;
-        console.log(this.props.children);
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
             React.Children.map(this.props.children, function (child, index) {
                 return !child.props.__isRecordDetails || _this.state.isExpanded ? child : null;

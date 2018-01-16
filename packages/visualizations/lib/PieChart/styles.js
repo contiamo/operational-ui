@@ -7,8 +7,8 @@ var comparisonLegendStyle = {
     float: "left",
     lineHeight: "14px",
     "& div.color": {
-        width: "6px",
-        height: "6px",
+        width: "10px",
+        height: "10px",
         margin: "2px 3px 0 0",
         float: "left"
     },
