@@ -41,11 +41,12 @@ export const marathon = ({ test, afterAll, container }) => {
   const viz = new PieChart(container)
 
   test("Renders the chart with no dataset", () => {
+    viz.data({ renderAs: [DonutRenderer] })
     viz.draw()
   })
 
   test("Renders the chart with an empty dataset", () => {
-    viz.data({})
+    viz.data({ data: [], renderAs: [DonutRenderer] })
     viz.draw()
   })
 

@@ -50,8 +50,8 @@ class Series {
 
   updateRenderer(): void {
     const options: IObject[] = this.renderAs()
-    if (options.length !== 1) {
-      throw new Error(`Incorrect number of renderers: ${options.length} specified, 1 required`)
+    if (!options || options.length !== 1) {
+      throw new Error(`Incorrect number of renderers: ${!options ? 0 : options.length} specified, 1 required`)
     }
     const rendererOptions: IObject = options[0]
     if (!this.renderer) {

@@ -85,7 +85,7 @@ var AbstractRenderer = /** @class */ (function () {
         // Arcs
         var arcs = this.el
             .select("g.arcs")
-            .selectAll("g")
+            .selectAll("g." + styles.arc)
             .data(this.computed.data, dataKey);
         this.exit(arcs);
         this.enterAndUpdate(arcs);
@@ -222,6 +222,7 @@ var AbstractRenderer = /** @class */ (function () {
         var d = {};
         // We cannot draw a pie chart with no series or only series that have the value 0
         if (!this.hasData()) {
+            this.computed.data = [];
             return;
         }
         this.checkData();
