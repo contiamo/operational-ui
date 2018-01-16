@@ -25,7 +25,6 @@ export default class Record extends React.Component<IProps, IState> {
     isExpanded: false
   }
   render() {
-    console.log(this.props.children)
     return (
       <Container css={this.props.css} className={this.props.className}>
         {React.Children.map(this.props.children, (child: any, index: number) => {

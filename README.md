@@ -39,6 +39,8 @@ render(<MyInterface />, document.querySelector("#app"))
 
 Wrapping the interface inside an `OperationalUI` is required for the components to render properly - it does important setup work and allows for customization later (see [package docs](https://www.npmjs.com/package/%40operational%2Fcomponents) for details).
 
+Note that this component may only have a single child.
+
 ## Next Steps: The `@operational` Package Family
 
 Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with small packages covering various facets of data-driven UI's:
