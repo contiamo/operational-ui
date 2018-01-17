@@ -63,10 +63,10 @@ class DataHandler {
 
     assignColorsByLevel(this.data)
 
-    // For efficiency, filter nodes to keep only those large enough to see.
+    // For efficiency, filter nodes to keep only those large enough to see, and remove top level node.
     const nodes = this.partition(this.data)
       .descendants()
-      .filter((d: TDatum) => d.x1 - d.x0 > 0.005) // 0.005 radians = 0.29 degrees
+      .filter((d: TDatum) => d.parent && d.x1 - d.x0 > 0.005) // 0.005 radians = 0.29 degrees
 
     this.stateWriter("data", nodes)
   }
