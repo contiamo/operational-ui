@@ -10,6 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var mixins = require("../utils/mixins");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, disabled = _a.disabled, updating = _a.updating, style = _a.style;
     var backgroundColor = color && theme.colors ? utils_1.hexOrColor(color)(theme.colors[color]) : "white";
@@ -44,10 +45,7 @@ var Container = glamorous_1.default.div(function (_a) {
         pointerEvents: disabled ? "none" : "all",
         // downward caret.
         "&::after": __assign({}, updatingAfterStyles, { content: "''", position: "absolute", top: "50%", right: theme.spacing / 2, width: 0, height: 0, border: "4px solid transparent", borderTopColor: theme.colors.gray70, transform: "translateY(calc(-50% + 2px))" }),
-        "&:focus": {
-            borderColor: "rgba(82,168,236,.8)",
-            boxShadow: theme.shadows.focus
-        }
+        "&:focus": mixins.inputFocus({ theme: theme })
     };
 });
 exports.Container = Container;

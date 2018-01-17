@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
+import * as mixins from "../utils/mixins"
 
 const inputHeight: number = 31
 
@@ -104,11 +105,7 @@ const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ th
   borderColor: theme.colors.gray30,
   width: 200,
   position: "relative",
-  "&:focus": {
-    outline: 0,
-    borderColor: "rgba(82,168,236,.8)",
-    boxShadow: theme.shadows.focus
-  }
+  "&:focus": mixins.inputFocus({ theme })
 }))
 
 const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({

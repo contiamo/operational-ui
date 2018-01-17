@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var with_label_1 = require("./utils/with-label");
+var mixins = require("./utils/mixins");
 var Label = glamorous_1.default.label(function (_a) {
     var theme = _a.theme;
     return ({
@@ -30,11 +31,7 @@ var InputField = glamorous_1.default.input(function (_a) {
         font: "inherit",
         borderRadius: 2,
         WebkitAppearance: "none",
-        "&:focus": {
-            outline: 0,
-            borderColor: "rgba(82,168,236,.8)",
-            boxShadow: theme.shadows.focus
-        }
+        "&:focus": mixins.inputFocus({ theme: theme })
     });
 });
 var Input = function (props) {

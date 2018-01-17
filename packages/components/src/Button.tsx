@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 
-import { hexOrColor, readableTextColor, darken } from "@operational/utils"
+import { hexOrColor, readableTextColor, darken, lighten } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
 export interface IStyleProps {
@@ -26,7 +26,10 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
-  const backgroundColor: string = color ? (hexOrColor(color)(theme.colors[color] || "white") as string) : "white"
+  const defaultColor: string = theme.colors.info
+  const backgroundColor: string = color
+    ? (hexOrColor(color)(theme.colors[color] || defaultColor) as string)
+    : defaultColor
   const activeBackgroundColor: string = darken(backgroundColor)(5)
   const textColor = readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"])
   const activeBoxShadow = theme.shadows.pressed
@@ -59,7 +62,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
 
           ":focus": {
             outline: 0,
-            backgroundColor: activeBackgroundColor
+            boxShadow: `0 0 0 3px ${lighten(backgroundColor)(35)}`
           },
 
           ":active": {

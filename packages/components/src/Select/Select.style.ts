@@ -1,6 +1,7 @@
 import glamorous, { GlamorousComponent } from "glamorous"
 import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
 import { Theme } from "@operational/theme"
+import * as mixins from "../utils/mixins"
 
 export interface IContainerProps {
   id?: string
@@ -62,10 +63,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
         transform: "translateY(calc(-50% + 2px))"
       },
 
-      "&:focus": {
-        borderColor: "rgba(82,168,236,.8)",
-        boxShadow: theme.shadows.focus
-      }
+      "&:focus": mixins.inputFocus({ theme })
     }
   }
 )

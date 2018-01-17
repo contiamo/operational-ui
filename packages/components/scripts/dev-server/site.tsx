@@ -1,13 +1,14 @@
 import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
-import * as c from "../../src/index"
 
 import {
   OperationalUI,
   operationalTheme,
   InfoTile,
+  Button,
   Card,
+  Input,
   Record,
   RecordSummary,
   RecordDetails,
@@ -26,16 +27,10 @@ class Site extends React.Component<{}, {}> {
       <p>adsf</p>
         <div style={{ padding: 20 }}>
           <Card>
-            <Record>
-              <RecordSummary>
-                <Heading1Type>Deutsche Bahn (German Railway Company)</Heading1Type>
-              </RecordSummary>
-              <RecordDetails>
-                <InfoTile label="Founded">1994</InfoTile>
-                <InfoTile label="Employees">~300,000</InfoTile>
-                <InfoTile label="Annual Revenue">A lot!</InfoTile>
-              </RecordDetails>
-            </Record>
+            <div>
+              <Input value="Hello" css={{marginRight: 8}} />
+              <Button color="warning">Submit</Button>
+            </div>
           </Card>
         </div>
       </OperationalUI>

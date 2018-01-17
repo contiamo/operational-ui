@@ -9,6 +9,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
+var mixins = require("../utils/mixins");
 var inputHeight = 31;
 var Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
@@ -95,11 +96,7 @@ var Day = glamorous_1.default.div({
 exports.Day = Day;
 var Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.gray30, width: 200, position: "relative", "&:focus": {
-            outline: 0,
-            borderColor: "rgba(82,168,236,.8)",
-            boxShadow: theme.shadows.focus
-        } }));
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.gray30, width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }));
 });
 exports.Input = Input;
 var ClearButton = glamorous_1.default.div(function (_a) {
