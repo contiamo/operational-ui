@@ -42,7 +42,7 @@ function getSourcesRecursively(sources: TNodesList): TNodesList {
 function isLinkedToFrom(sourceId: string, targetId: string): boolean {
   const sourceNodes: TNodesList = findNode(sourceId).linkedToFrom
   const sourceLinkedToFrom: TNodesList = getSourcesRecursively(sourceNodes)
-  return sourceLinkedToFrom.indexOf(targetId) > -1
+  return sourceId === targetId || sourceLinkedToFrom.indexOf(targetId) > -1
 }
 
 function removeLoops(path: TPath): TPath {
