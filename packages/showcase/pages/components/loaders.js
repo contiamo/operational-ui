@@ -16,10 +16,13 @@ const progressSnippet = `
 </div>
 `
 
+const spinnerPropDescription = []
+
 const progressPropDescription = [
   {
     name: "fadeParent",
-    description: "Specifies whether the parent container should be faded out",
+    description:
+      "Specifies whether the direct parent element should be faded out. If so, <Progress/> adds a near-opaque white overlay over the direct parent to make it clear that the content underneath is not accessible/dated/something new coming.",
     type: "boolean",
     defaultValue: "false",
     optional: true
@@ -34,7 +37,11 @@ export default props => (
       <CardHeader>Spinners</CardHeader>
       <p>Spinners are used to indicate loading state in a smaller element, such as a card or a single, smaller form.</p>
 
+      <h2>Usage</h2>
       <Playground snippet={spinnerSnippet} components={{ Spinner }} />
+
+      <h2>Props</h2>
+      <Table props={spinnerPropDescription} />
 
       <CardHeader>Progress</CardHeader>
       <p>The progress element is used for larger loading sections, most typically the entire page.</p>

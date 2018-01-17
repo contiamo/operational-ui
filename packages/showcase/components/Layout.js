@@ -2,14 +2,12 @@ import glamorous, { ThemeProvider } from "glamorous"
 import { rehydrate } from "glamor"
 import { operational } from "@operational/theme"
 import { baseStylesheet, darken } from "@operational/utils"
-import { OperationalUI, Progress } from "@operational/components"
+import { OperationalUI, Progress, Spinner } from "@operational/components"
 import Router from "next/router"
 
 import Header from "../components/Header"
 import Sidenavigation from "../components/Sidenavigation"
 import nextConfig from "../next.config"
-
-Router.onRouteChangeComplete = () => {}
 
 const pathmap = nextConfig.exportPathMap()
 
@@ -63,29 +61,43 @@ const PageContent = glamorous.div(({ theme }) => ({
   }
 }))
 
+let didRenderOnClient = false
+
 export default class Layout extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { isNavigating: false }
+    this.state = {
+      isNavigating: false,
+      isClientRendered: didRenderOnClient
+    }
   }
+
   render() {
     const { pathname } = this.props
     return (
       <OperationalUI>
-        <Container>
-          {this.state.isNavigating && <Progress />}
-          <Sidenavigation pathname={pathname} pathmap={pathmap} />
-          <Content>
-            <Header note="v0.1.0-9" pathname={pathname} pathmap={pathmap} />
-            <PageContent>{this.props.children}</PageContent>
-          </Content>
-        </Container>
+        {!this.state.isClientRendered ? (
+          <Spinner css={{ top: "50%", left: "50%", transform: "translate3d(-50%, -50%, 0)", position: "absolute" }} />
+        ) : (
+          <Container>
+            {this.state.isNavigating && <Progress />}
+            <Sidenavigation pathname={pathname} pathmap={pathmap} />
+            <Content>
+              <Header note="v0.1.0-9" pathname={pathname} pathmap={pathmap} />
+              <PageContent>{this.props.children}</PageContent>
+            </Content>
+          </Container>
+        )}
       </OperationalUI>
     )
   }
 
   componentDidMount() {
+    didRenderOnClient = true
     rehydrate(window.__NEXT_DATA__.ids)
+    this.setState(prevState => ({
+      isClientRendered: didRenderOnClient
+    }))
     Router.onRouteChangeStart = () => {
       this.setState(prevState => ({
         isNavigating: true
