@@ -10,56 +10,35 @@ var Container = glamorous_1.default.div({
     label: "progress",
     width: "100%",
     height: "100%",
+    overflow: "hidden",
     top: 0,
     left: 0,
-    display: "flex",
-    position: "absolute",
-    backgroundColor: "rgba(255, 255, 255, 0.8)"
+    position: "absolute"
 }, function (_a) {
-    var theme = _a.theme;
+    var theme = _a.theme, fadeParent = _a.fadeParent;
     return ({
-        zIndex: theme.baseZIndex + 300
-    });
-});
-var Box = glamorous_1.default.div({
-    width: width,
-    height: height,
-    padding: padding,
-    margin: "auto",
-    boxShadow: "0px 1px 2px #d3d1d1",
-    backgroundColor: "#FFFFFF"
-});
-var BarContainer = glamorous_1.default.div({
-    width: "100%",
-    height: "100%",
-    overflow: "hidden"
-}, function (_a) {
-    var theme = _a.theme;
-    return ({
-        backgroundColor: theme.colors.gray30,
-        border: "1px solid " + theme.colors.gray20
+        zIndex: theme.baseZIndex + 300,
+        backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent"
     });
 });
 var fillProgress = glamor_1.css.keyframes({
     from: {
-        transform: "translateX(-100%)"
+        transform: "translate3d(-100%, 0, 0)"
     },
     to: {
-        transform: "none"
+        transform: "translate3d(0, 0, 0)"
     }
 });
 var Bar = glamorous_1.default.div({
-    height: "100%"
+    width: "100%",
+    height: 3
 }, function (_a) {
     var theme = _a.theme;
     return ({
         animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 30s",
-        backgroundColor: theme.colors.success
+        backgroundColor: theme.colors.info
     });
 });
-var Progress = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
-    React.createElement(Box, null,
-        React.createElement(BarContainer, null,
-            React.createElement(Bar, null))))); };
-exports.default = Progress;
+exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, fadeParent: !!props.fadeParent },
+    React.createElement(Bar, null))); };
 //# sourceMappingURL=Progress.js.map

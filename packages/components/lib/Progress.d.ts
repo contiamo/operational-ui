@@ -3,6 +3,7 @@ export interface IProps {
     id?: string | number;
     css?: any;
     className?: string;
+    fadeParent?: boolean;
 }
-declare const Progress: (props: IProps) => JSX.Element;
-export default Progress;
+declare const _default: (props: IProps) => JSX.Element;
+export default _default;

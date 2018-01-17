@@ -7,6 +7,7 @@ export interface IProps {
   id?: string | number
   css?: any
   className?: string
+  fadeParent?: boolean
 }
 
 const width: number = 120
@@ -18,65 +19,39 @@ const Container = glamorous.div(
     label: "progress",
     width: "100%",
     height: "100%",
+    overflow: "hidden",
     top: 0,
     left: 0,
-    display: "flex",
-    position: "absolute",
-    backgroundColor: "rgba(255, 255, 255, 0.8)"
+    position: "absolute"
   },
-  ({ theme }: { theme?: Theme }) => ({
-    zIndex: theme.baseZIndex + 300
-  })
-)
-
-const Box = glamorous.div({
-  width,
-  height,
-  padding,
-  margin: "auto",
-  boxShadow: "0px 1px 2px #d3d1d1",
-  backgroundColor: "#FFFFFF"
-})
-
-const BarContainer = glamorous.div(
-  {
-    width: "100%",
-    height: "100%",
-    overflow: "hidden"
-  },
-  ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.gray30,
-    border: `1px solid ${theme.colors.gray20}`
+  ({ theme, fadeParent }: { theme: Theme; fadeParent: boolean }) => ({
+    zIndex: theme.baseZIndex + 300,
+    backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent"
   })
 )
 
 const fillProgress = css.keyframes({
   from: {
-    transform: "translateX(-100%)"
+    transform: "translate3d(-100%, 0, 0)"
   },
   to: {
-    transform: "none"
+    transform: "translate3d(0, 0, 0)"
   }
 })
 
 const Bar = glamorous.div(
   {
-    height: "100%"
+    width: "100%",
+    height: 3
   },
   ({ theme }: { theme?: Theme }) => ({
     animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 30s`,
-    backgroundColor: theme.colors.success
+    backgroundColor: theme.colors.info
   })
 )
 
-const Progress = (props: IProps) => (
-  <Container key={props.id} css={props.css} className={props.className}>
-    <Box>
-      <BarContainer>
-        <Bar />
-      </BarContainer>
-    </Box>
+export default (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className} fadeParent={!!props.fadeParent}>
+    <Bar />
   </Container>
 )
-
-export default Progress

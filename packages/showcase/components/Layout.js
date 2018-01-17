@@ -2,11 +2,14 @@ import glamorous, { ThemeProvider } from "glamorous"
 import { rehydrate } from "glamor"
 import { operational } from "@operational/theme"
 import { baseStylesheet, darken } from "@operational/utils"
-import { OperationalUI } from "@operational/components"
+import { OperationalUI, Progress } from "@operational/components"
+import Router from "next/router"
 
 import Header from "../components/Header"
 import Sidenavigation from "../components/Sidenavigation"
 import nextConfig from "../next.config"
+
+Router.onRouteChangeComplete = () => {}
 
 const pathmap = nextConfig.exportPathMap()
 
@@ -61,11 +64,16 @@ const PageContent = glamorous.div(({ theme }) => ({
 }))
 
 export default class Layout extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { isNavigating: false }
+  }
   render() {
     const { pathname } = this.props
     return (
       <OperationalUI>
         <Container>
+          {this.state.isNavigating && <Progress />}
           <Sidenavigation pathname={pathname} pathmap={pathmap} />
           <Content>
             <Header note="v0.1.0-9" pathname={pathname} pathmap={pathmap} />
@@ -78,5 +86,14 @@ export default class Layout extends React.Component {
 
   componentDidMount() {
     rehydrate(window.__NEXT_DATA__.ids)
+    Router.onRouteChangeStart = () => {
+      this.setState(prevState => ({
+        isNavigating: true
+      }))
+    }
+  }
+
+  componentWillUnmount() {
+    Router.onRouteChangeStart = null
   }
 }

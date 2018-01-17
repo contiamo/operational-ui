@@ -3,55 +3,61 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var glamor_1 = require("glamor");
-var utils_1 = require("@operational/utils");
 var spin = glamor_1.css.keyframes({
     "0%": {
-        transform: "rotate(0deg)"
+        transform: "scale(1)"
     },
     "100%": {
-        transform: "rotate(360deg)"
+        transform: "scale(0.75)"
     }
 });
+var size = 30;
 var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, _b = _a.color, color = _b === void 0 ? "info" : _b, _c = _a.spinnerSize, spinnerSize = _c === void 0 ? 40 : _c, _d = _a.spinDuration, spinDuration = _d === void 0 ? 2 : _d;
-    var spinnerColor = utils_1.hexOrColor(color)(theme.colors[color] || "white");
-    return {
+    var theme = _a.theme;
+    return ({
         label: "spinner",
-        fontSize: "10px",
         margin: "auto",
-        top: 50,
-        textIndent: "-9999em",
-        width: spinnerSize + (typeof spinnerSize === "string" ? "" : "px"),
-        height: spinnerSize + (typeof spinnerSize === "string" ? "" : "px"),
-        borderRadius: "50%",
-        background: "linear-gradient(to right, " + spinnerColor + " 10%, " + utils_1.transparentize(spinnerColor)(100) + " 42%)",
+        width: size,
+        height: size,
         position: "relative",
-        animation: spin + " " + spinDuration + "s infinite linear",
-        transform: "translateZ(0)",
-        "&::before": {
-            width: "50%",
-            height: "50%",
-            background: spinnerColor,
-            borderRadius: "100% 0 0 0",
-            position: "absolute",
-            top: "0",
-            left: "0",
-            content: "''"
-        },
-        "&::after": {
-            background: "white",
-            width: "75%",
-            height: "75%",
-            borderRadius: "50%",
-            content: "''",
-            margin: "auto",
-            position: "absolute",
-            top: "0",
-            left: "0",
-            bottom: "0",
-            right: "0"
-        }
-    };
+        transform: "translateZ(0)"
+    });
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, color: props.color, spinnerSize: props.size, spinDuration: props.spinDuration })); };
+var animationTimeUnit = 0.6;
+var f = 0.25;
+var Element = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        fontSize: 0,
+        width: size / 2 - 2,
+        height: size / 2 - 2,
+        display: "inline-block",
+        lineHeight: 0,
+        margin: 1,
+        animationName: spin,
+        animationDuration: animationTimeUnit + "s",
+        animationTimingFunction: "ease-in-out",
+        animationDirection: "alternate",
+        animationIterationCount: "infinite",
+        backgroundColor: theme.colors.info,
+        // Increasing the negative animation delay clockwise
+        "&:nth-child(1)": {
+            animationDelay: "0s"
+        },
+        "&:nth-child(2)": {
+            animationDelay: -1 * f * animationTimeUnit + "s"
+        },
+        "&:nth-child(4)": {
+            animationDelay: -2 * f * animationTimeUnit + "s"
+        },
+        "&:nth-child(3)": {
+            animationDelay: -3 * f * animationTimeUnit + "s"
+        }
+    });
+});
+exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
+    React.createElement(Element, null),
+    React.createElement(Element, null),
+    React.createElement(Element, null),
+    React.createElement(Element, null))); };
 //# sourceMappingURL=Spinner.js.map
