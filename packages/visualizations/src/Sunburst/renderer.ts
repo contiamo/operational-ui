@@ -120,10 +120,31 @@ class Renderer {
       .attr("class", (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""}`)
       .style("fill", (d: IObject) => this.color(d.data))
       // .on("mouseenter", this.onMouseOver.bind(this))
+      .on("click", this.onClick.bind(this))
       .merge(arcs)
       .transition()
       .duration(duration)
       .attrTween("d", this.arcTween.bind(this))
+  }
+
+  onClick(d: TDatum): void {
+    this.el
+      .selectAll("path")
+      .transition()
+      .duration(this.state.current.get("config").duration)
+      .tween("scale", () => {
+        const angleDomain = d3Interpolate(this.angleScale.domain(), [d.x0, d.x1]),
+          radiusDomain = d3Interpolate(this.radiusScale.domain(), [d.y0, 1]),
+          radiusRange = d3Interpolate(this.radiusScale.range(), [0, this.radius])
+        return (t: number): void => {
+          this.angleScale.domain(angleDomain(t))
+          this.radiusScale.domain(radiusDomain(t)).range(radiusRange(t))
+        }
+      })
+      .attrTween("d", (d: TDatum): any => {
+        return () => this.arc(d)
+      })
+      .style("opacity", (datum: TDatum): number => (datum.data.name === d.data.name ? 0.2 : 1))
   }
 
   // updateElementHover(datapoint: IObject): void {
