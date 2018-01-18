@@ -29,7 +29,10 @@ const arcStyle = {
   stroke: "#fff",
   strokeWidth: "1",
   opacity: 0.8,
-  fill: "#eee"
+  fill: "#eee",
+  "&.parent": {
+    fill: "#fff"
+  }
 }
 
 const labelStyle = {

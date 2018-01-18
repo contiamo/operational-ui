@@ -1,5 +1,5 @@
 import FocusUtils from "../utils/focus_utils"
-import AbstractDrawingFocus from "../utils/focus"
+import AbstractFocus from "../utils/focus"
 import * as d3 from "d3-selection"
 import { TD3Selection, TDatum, IObject } from "./typings"
 
@@ -7,7 +7,7 @@ const dataName = (d: TDatum): string => d.data.key,
   dataValue = (d: TDatum): number => d.data.value,
   dataPercentage = (d: TDatum): string => d.data.percentage.toFixed(1) + "%"
 
-class Focus extends AbstractDrawingFocus {
+class Focus extends AbstractFocus {
   onElementHover(payload: { focusPoint: IObject; d: TDatum }): void {
     this.remove()
 

@@ -1,5 +1,5 @@
 import Canvas from "./canvas"
-import Series from "./series"
+import Renderer from "./renderer"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
@@ -13,7 +13,6 @@ class Facade {
   components: IObject
   context: Element
   events: EventEmitter
-  series: Series
   state: StateHandler<IConfig>
 
   constructor(context: Element) {
@@ -22,7 +21,6 @@ class Facade {
     this.state = this.insertState()
     this.canvas = this.insertCanvas()
     this.components = this.insertComponents()
-    this.series = this.insertSeries()
   }
 
   insertState(): StateHandler<IConfig> {
@@ -83,17 +81,14 @@ class Facade {
         this.state.computedWriter(["focus"]),
         this.events,
         this.canvas.elementFor("focus")
+      ),
+      renderer: new Renderer(
+        this.state.readOnly(),
+        this.state.computedWriter(["renderer"]),
+        this.events,
+        this.canvas.elementFor("series")
       )
     }
-  }
-
-  insertSeries(): Series {
-    return new Series(
-      this.state.readOnly(),
-      this.state.computedWriter(["series"]),
-      this.events,
-      this.canvas.elementFor("series")
-    )
   }
 
   data<T>(data?: T): T {
@@ -118,9 +113,8 @@ class Facade {
 
   draw(): Element {
     this.state.captureState()
-    this.series.prepareData()
     this.canvas.draw()
-    this.series.draw()
+    this.components.renderer.draw()
 
     const focusElement: TFocusElement = this.state.config().focusElement
     !isEmpty(focusElement)

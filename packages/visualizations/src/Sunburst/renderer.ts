@@ -1,64 +1,58 @@
 import Events from "../utils/event_catalog"
-import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors } from "./typings"
+import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
 import { defaults, find, filter, forEach, isEmpty, isFunction, keys, map, merge, reduce, values } from "lodash/fp"
 import * as d3 from "d3-selection"
+import { interpolate as d3Interpolate } from "d3-interpolate"
 import "d3-transition"
 import { pie as d3Pie, arc as d3Arc } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
+import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy"
 import * as styles from "./styles"
 
-// y is a step-function (with two x values resulting in the same y value)
-// on the positive integer domain which is monotonic decreasing
-function approxZero(y: (x: number) => number, initialX: number): number {
-  // make sure to get points with different y value
-  const p0: { x: number; y: number } = { x: initialX, y: y(initialX) }
-  const p1: { x: number; y: number } = { x: initialX + 2, y: y(initialX + 2) }
-
-  // Solve for 0
-  const m: number = (p0.y - p1.y) / (p0.x - p1.x)
-  const xZero: number = -p0.y / m + p0.x
-
-  // Find nearest integer value for x that has y > 0
-  let xInt: number = Math.round(xZero)
-  let i: number
-  for (i = 0; i <= 10; i = i + 1) {
-    if (y(xInt) <= 0) {
-      xInt = xInt - 1
-    }
-  }
-
-  return xInt
-}
-
-// Accessors of series in prepared data
-function dataKey(d: TDatum): string {
-  return d.data.key
-}
-function dataLabelValue(d: TDatum): string {
-  return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined
-}
+// // Accessors of series in prepared data
+// function dataKey(d: TDatum): string {
+//   return d.data.key
+// }
 
 class Renderer {
+  angleScale: any
+  arc: any
   children: (d: TDatum) => TDatum[]
   color: (d: TDatum) => string
   computed: IObject = {}
   currentTranslation: [number, number]
-  data: IObject[]
+  data: any
   drawn: boolean = false
   el: TD3Selection
   events: IEvents
   name: (d: TDatum) => string
   previous: IObject
+  radiusScale: any
+  radius: number
   state: IState
+  stateWriter: TStateWriter
   total: number
   value: (d: TDatum) => number
 
-  constructor(state: IState, events: IEvents, el: TD3Selection) {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection) {
     this.state = state
+    this.stateWriter = stateWriter
     this.events = events
     this.el = el
     this.assignAccessors()
+
+    const config: IConfig = this.state.current.get("config")
+    this.radius = Math.min(config.width, config.height) / 2
+
+    this.angleScale = d3ScaleLinear().range([0, 2 * Math.PI])
+    this.radiusScale = d3ScaleLinear().range([0, this.radius])
+    this.arc = d3Arc()
+      .startAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0))))
+      .endAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x1))))
+      .innerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y0)))
+      .outerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y1)))
+
     // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
@@ -72,19 +66,11 @@ class Renderer {
     })(accessors)
   }
 
-  // computeTotal(): void {
-  //   this.total = reduce((memo: number, datum: TDatum): number => {
-  //     const value: number = this.value(datum)
-  //     return memo + (value || 0)
-  //   }, 0)(this.data)
-  // }
-
   hasData(): boolean {
     return this.data.length > 0
   }
 
   draw(): void {
-    this.data = this.state.current.get("computed").series.data
     this.compute()
     this.drawn ? this.updateDraw() : this.initialDraw()
   }
@@ -109,122 +95,35 @@ class Renderer {
     const arcs: TD3Selection = this.el
       .select("g.arcs")
       .attr("transform", this.translateString(this.computeTranslate()))
-      .selectAll("g")
+      .selectAll(`path.${styles.arc}`)
       .data(this.data, (d: any) => this.name(d.data))
 
-    this.exit(arcs)
-    this.enterAndUpdate(arcs)
+    const duration: number = this.state.current.get("config").duration
+    this.exit(arcs, duration)
+    this.enterAndUpdate(arcs, duration)
   }
 
-  exit(arcs: TD3Selection): void {
-    const duration: number = this.state.current.get("config").duration
-
-    const exitingArcs: TD3Selection = arcs.exit()
-
-    exitingArcs
-      .select("path")
+  exit(arcs: TD3Selection, duration: number): void {
+    arcs
+      .exit()
+      .select(`path.${styles.arc}`)
       .transition()
       .duration(duration)
       .attrTween("d", this.removeArcTween.bind(this))
-
-    exitingArcs
-      .select(`text.${styles.label}`)
-      .transition()
-      .duration(duration)
-      .style("opacity", "1e6")
-
-    exitingArcs.remove()
+      .remove()
   }
 
-  enterAndUpdate(arcs: TD3Selection): void {
-    const duration: number = this.state.current.get("config").duration
-    let n: number = 0
-
-    const enteringArcs: TD3Selection = arcs
-      .enter()
-      .append("svg:g")
-      .attr("class", styles.arc)
-      .on("mouseenter", this.onMouseOver.bind(this))
-
-    enteringArcs.append("svg:path").style("fill", (d: IObject) => this.color(d.data))
-
-    enteringArcs
-      .append("svg:text")
-      .attr("class", styles.label)
-      .attr("dy", 5)
-      .style("text-anchor", "middle")
-
+  enterAndUpdate(arcs: TD3Selection, duration: number): void {
     arcs
-      .merge(enteringArcs)
-      .select("path")
+      .enter()
+      .append("svg:path")
+      .attr("class", (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""}`)
+      .style("fill", (d: IObject) => this.color(d.data))
+      // .on("mouseenter", this.onMouseOver.bind(this))
+      .merge(arcs)
       .transition()
       .duration(duration)
       .attrTween("d", this.arcTween.bind(this))
-      .each(() => (n = n + 1))
-      .on("end", (): void => {
-        n = n - 1
-        if (n < 1) {
-          this.onTransitionEnd()
-        }
-      })
-
-    arcs
-      .merge(enteringArcs)
-      .select(`text.${styles.label}`)
-      .transition()
-      .duration(duration)
-      // .attr("transform", this.labelTranslate.bind(this))
-      .text(dataLabelValue)
-
-    this.updateTotal()
-  }
-
-  onTransitionEnd(): void {
-    return
-  }
-
-  centerDisplayString(): string[] {
-    return this.computed.inner > 0 ? [this.computed.total.toString()] : []
-  }
-
-  updateTotal(): void {
-    const duration: number = this.state.current.get("config").duration
-
-    let total: any = this.el
-      .select(`g.${styles.total}`)
-      .selectAll("text")
-      .data(this.centerDisplayString())
-
-    total
-      .exit()
-      .style("font-size", "1px")
-      .remove()
-
-    const mergedTotal: TD3Selection = total
-      .enter()
-      .append("svg:text")
-      .attr("text-anchor", "middle")
-      .merge(total)
-      .text((d: string): string => d)
-
-    const node: any = mergedTotal.node()
-    if (node) {
-      const y = (x: number): number => {
-        mergedTotal.style("font-size", x + "px")
-        // Text should fill half of available width (0.5 * diameter = radius)
-        return this.computed.inner - node.getBBox().width
-      }
-
-      // start with min font size
-      if (y(this.state.current.get("config").minTotalFontSize) < 0) {
-        // Not enough room - do not show total
-        total = total.data([])
-      } else {
-        // change font size until bounding box is completely filled
-        approxZero(y, this.state.current.get("config").minTotalFontSize)
-        mergedTotal.attr("dy", "0.35em")
-      }
-    }
   }
 
   // updateElementHover(datapoint: IObject): void {
@@ -252,10 +151,10 @@ class Renderer {
   //     .attr("filter", null)
   // }
 
-  onMouseOver(d: TDatum): void {
-    const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
-  }
+  // onMouseOver(d: TDatum): void {
+  //   const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
+  //   this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
+  // }
 
   // highlightElement(key: string): void {
   //   const d: TDatum = find((datum: TDatum): boolean => dataKey(datum) === key)(this.computed.data)
@@ -264,74 +163,26 @@ class Renderer {
 
   // // Compute
   compute(): void {
+    this.prepareData()
     this.previous = this.computed
     this.computed = this.data
-    this.computed.arc = d3Arc()
-    //   let d: IObject = {}
-
-    //   // We cannot draw a pie chart with no series or only series that have the value 0
-    //   if (!this.hasData()) {
-    //     return
-    //   }
-
-    //   this.computed.data = []
-    //   const computeByLevel = (parent: IObject): void => {
-    //     const children: IObject[] = this.children(parent)
-    //     const layout: any = d3Pie()
-    //       .sort(null)
-    //       .value((d: any): number => d.value)
-    //       .startAngle(parent.startAngle || 0)
-    //       .endAngle(parent.endAngle || 2 * Math.PI)
-
-    //     // parent.children = merge(layout(children))(parent.children)
-
-    //     forEach((child: IObject): void => {
-    //       console.log(layout(children))
-    //       debugger
-    //       let d: IObject = {}
-    //       d.total = parent.value
-    //       child.computed = d
-    //       child.previous = defaults(child.computed)(child.previous)
-    //       child.computed.percentage = child.value / d.total * 100
-    //       this.computeArcs(child)
-
-    //       computeByLevel(child)
-    //     })(children)
-    //     this.computed.data = this.computed.data.concat(children)
-    //   }
-
-    //   computeByLevel(this.data.data)
-    //   console.log(this.computed.data)
   }
 
-  calculatePercentages(data: IObject, total: number): void {
-    forEach((datum: IObject): void => {
-      datum.percentage = datum.value / total * 100
-    })(this.children(data))
+  prepareData(): void {
+    const hierarchyData = d3Hierarchy(this.state.current.get("data").data)
+      .sum(this.value)
+      .each(this.assignColors.bind(this))
+      .sort((a: TDatum, b: TDatum) => b.value - a.value)
+
+    this.data = d3Partition()(hierarchyData)
+      .descendants()
+      .filter((d: TDatum) => d.x1 - d.x0 > 0.005)
   }
 
-  computeArcs(data: IObject): void {
-    const computed: IObject = data.computed
-    const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
-    this.computeRadialExtent(data)
-    data.computed.rHover = this.hoverOuter(data.computed.r)
-    data.computed.innerHover = Math.max(data.computed.inner - 1, 0)
-    data.computed.arc = d3Arc()
-      .innerRadius(data.computed.inner)
-      .outerRadius(data.computed.r)
-    data.computed.arcOver = d3Arc()
-      .innerRadius(data.computed.innerHover)
-      .outerRadius(data.computed.rHover)
-  }
-
-  computeRadialExtent(data: IObject): void {
-    const config: IConfig = this.state.current.get("config")
-    const outer: number = Math.min(config.width, config.height) / 2 - this.state.current.get("config").outerBorderMargin
-    const width: number = outer - config.minInnerRadius
-    const inner: number = width < config.minWidth ? 0 : outer - Math.min(width, config.maxWidth)
-    const ringWidth: number = (outer - inner) / this.state.current.get("computed").series.maxLevel
-    data.computed.inner = inner + ringWidth * (data.level - 1)
-    data.computed.r = data.computed.inner + ringWidth
+  assignColors(node: any): void {
+    if (node.parent && !this.color(node.data)) {
+      node.data.color = this.color(node.parent.data)
+    }
   }
 
   hoverOuter(radius: number): number {
@@ -359,66 +210,41 @@ class Renderer {
     let s0: number
     let e0: number
     if (old) {
-      s0 = old.startAngle
-      e0 = old.endAngle
+      s0 = old.x0
+      e0 = old.x1
     } else if (!old && previous) {
-      s0 = previous.endAngle
-      e0 = previous.endAngle
+      s0 = previous.x1
+      e0 = previous.x1
     } else if (!previous && previousData.length > 0) {
-      s0 = last.endAngle
-      e0 = last.endAngle
+      s0 = last.x1
+      e0 = last.x1
     } else {
       s0 = 0
       e0 = 0
     }
 
-    const startAngle: number = Math.max(0, Math.min(2 * Math.PI, d.x0))
-    const endAngle: number = Math.max(0, Math.min(2 * Math.PI, d.x1))
-    const innerRadius: number = Math.max(0, d.y0)
-    const outerRadius: number = Math.max(0, d.y1)
-    const f = interpolateObject(
-      { endAngle: e0, startAngle: s0, innerRadius: 0, outerRadius: 0 },
-      { endAngle, startAngle, innerRadius, outerRadius }
-    )
-    return (t: number): string => this.computed.arc(f(t))
+    const f = interpolateObject({ x0: s0, x1: e0, y0: 0, y1: 0 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 })
+
+    return (t: number): string => this.arc(f(t))
   }
-
-  // angleScale(value: number): number {
-  //   return d3ScaleLinear()
-  //     .range([0, 2 * Math.PI])(value)
-  // }
-
-  // // @TODO replace 100 with computed radius
-  // radiusScale(value: number): number {
-  //   return d3ScaleLinear()
-  //     .range([0, 1])(value)
-  // }
 
   removeArcTween(d: TDatum, i: number): (t: number) => string {
     let s0: number
     let e0: number
     s0 = e0 = 2 * Math.PI
-    const f = interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { endAngle: e0, startAngle: s0 })
-    return (t: number): string => this.computed.arc(f(t))
+
+    const f = interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: s0, x1: e0, y0: 0, y1: 0 })
+
+    return (t: number): string => this.arc(f(t))
   }
 
   labelTranslate(d: TDatum): string {
-    debugger
     return this.translateString(this.computed.arc.centroid(d))
   }
 
   translateString(values: [number, number]): string {
     return `translate(${values.join(", ")})`
   }
-
-  // dataForLegend(): IObject[] {
-  //   return map((datum: IObject): IObject => {
-  //     return {
-  //       label: this.key(datum),
-  //       color: this.color(datum)
-  //     }
-  //   })(this.data)
-  // }
 
   // // Remove & clean up
   // remove(): void {
