@@ -2,20 +2,24 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, operationalTheme, Card, Spinner, Progress } from "../../src/index"
+import { OperationalUI, operationalTheme, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
-  state = {
-    selected: ["1"]
-  }
   render() {
     return (
       <OperationalUI>
-        <div style={{ padding: 20 }}>
-          <Card>
-            <Spinner/>
-          </Card>
-        </div>
+        <Sidebar>
+          <SidebarHeader label="1234" open>
+            <SidebarHeader label="sub" open>
+              <SidebarItem>1234</SidebarItem>
+              <SidebarItem>5678</SidebarItem>
+            </SidebarHeader>
+
+            <SidebarItem>1234</SidebarItem>
+            <SidebarItem>5678</SidebarItem>
+            <SidebarItem>9012</SidebarItem>
+          </SidebarHeader>
+        </Sidebar>
       </OperationalUI>
     )
   }

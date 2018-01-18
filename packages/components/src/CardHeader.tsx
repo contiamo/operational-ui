@@ -7,13 +7,15 @@ export interface IProps {
   css?: any
   className?: string
   children?: React.ReactNode
-  domId?: string
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+  ...theme.typography.heading1,
   label: "cardheader",
   display: "flex",
   alignItems: "center",
+  // This ensures that the card header text and card controls are placed in opposite corners.
+  justifyContent: "space-between",
   height: 36,
   margin: theme.spacing * -1,
   marginBottom: theme.spacing * 4 / 3,
@@ -21,19 +23,11 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   borderBottom: `1px solid ${theme.colors.separator}`,
   fontWeight: 700,
   lineHeight: 1,
-  color: theme.colors.emphasizedText,
-  "* + &": {
-    marginTop: theme.spacing
-  },
-  "&:not(:first-child)": {
-    borderBottomStyle: "dashed"
-  }
+  color: theme.colors.emphasizedText
 }))
 
-const CardHeader = (props: IProps) => (
-  <Container key={props.id} id={props.domId} css={props.css} className={props.className}>
+export default (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
-
-export default CardHeader

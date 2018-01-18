@@ -2,17 +2,14 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import SidebarItem from "./SidebarItem"
-import SidebarLink from "./SidebarLink"
-
 export interface IProps {
   id?: string | number
-  css?: any
+  css?: {}
   className?: string
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "sidebar",
   width: "100%",
   maxWidth: 280,
@@ -24,11 +21,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   color: theme.colors.gray80
 }))
 
-const Sidebar: React.SFC<IProps> = (props: IProps) => (
+export default (props: IProps) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
-
-export default Sidebar
-export { Sidebar, SidebarItem, SidebarLink }
