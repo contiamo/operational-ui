@@ -16,23 +16,21 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "spinner",
-        margin: "auto",
         width: size,
-        height: size,
-        position: "relative",
-        transform: "translateZ(0)"
+        height: size
     });
 });
 var animationTimeUnit = 0.6;
 var f = 0.25;
-var Element = glamorous_1.default.div(function (_a) {
+var PulsingCube = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         fontSize: 0,
+        letterSpacing: 0,
+        float: "left",
+        wordSpacing: 0,
         width: size / 2 - 2,
         height: size / 2 - 2,
-        display: "inline-block",
-        lineHeight: 0,
         margin: 1,
         animationName: spin,
         animationDuration: animationTimeUnit + "s",
@@ -56,8 +54,8 @@ var Element = glamorous_1.default.div(function (_a) {
     });
 });
 exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
-    React.createElement(Element, null),
-    React.createElement(Element, null),
-    React.createElement(Element, null),
-    React.createElement(Element, null))); };
+    React.createElement(PulsingCube, null),
+    React.createElement(PulsingCube, null),
+    React.createElement(PulsingCube, null),
+    React.createElement(PulsingCube, null))); };
 //# sourceMappingURL=Spinner.js.map

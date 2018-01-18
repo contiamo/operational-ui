@@ -23,22 +23,20 @@ const size = 30
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "spinner",
-  margin: "auto",
   width: size,
-  height: size,
-  position: "relative",
-  transform: "translateZ(0)"
+  height: size
 }))
 
 const animationTimeUnit: number = 0.6
 const f: number = 0.25
 
-const Element = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const PulsingCube = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   fontSize: 0,
+  letterSpacing: 0,
+  float: "left",
+  wordSpacing: 0,
   width: size / 2 - 2,
   height: size / 2 - 2,
-  display: "inline-block",
-  lineHeight: 0,
   margin: 1,
   animationName: spin,
   animationDuration: `${animationTimeUnit}s`,
@@ -63,9 +61,9 @@ const Element = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 export default (props: IProps) => (
   <Container key={props.id} css={props.css} className={props.className}>
-    <Element />
-    <Element />
-    <Element />
-    <Element />
+    <PulsingCube />
+    <PulsingCube />
+    <PulsingCube />
+    <PulsingCube />
   </Container>
 )
