@@ -8,81 +8,62 @@ export interface IProps {
   id?: string | number
   css?: any
   className?: string
-  color?: string
-  size?: number | string
-  spinDuration?: number
 }
 
 const spin = css.keyframes({
   "0%": {
-    transform: "rotate(0deg)"
+    transform: "scale(1)"
   },
   "100%": {
-    transform: "rotate(360deg)"
+    transform: "scale(0.75)"
   }
 })
 
-const Container = glamorous.div(
-  ({
-    theme,
-    color = "info",
-    spinnerSize = 40,
-    spinDuration = 2
-  }: {
-    theme: Theme
-    color?: string
-    spinnerSize?: string | number
-    spinDuration?: number
-  }): any => {
-    const spinnerColor: string = hexOrColor(color)(theme.colors[color] || "white") as string
+const size = 30
 
-    return {
-      label: "spinner",
-      fontSize: "10px",
-      margin: "auto",
-      top: 50,
-      textIndent: "-9999em",
-      width: spinnerSize + (typeof spinnerSize === "string" ? "" : "px"),
-      height: spinnerSize + (typeof spinnerSize === "string" ? "" : "px"),
-      borderRadius: "50%",
-      background: `linear-gradient(to right, ${spinnerColor} 10%, ${transparentize(spinnerColor)(100)} 42%)`,
-      position: "relative",
-      animation: `${spin} ${spinDuration}s infinite linear`,
-      transform: "translateZ(0)",
-      "&::before": {
-        width: "50%",
-        height: "50%",
-        background: spinnerColor,
-        borderRadius: "100% 0 0 0",
-        position: "absolute",
-        top: "0",
-        left: "0",
-        content: "''"
-      },
-      "&::after": {
-        background: "white",
-        width: "75%",
-        height: "75%",
-        borderRadius: "50%",
-        content: "''",
-        margin: "auto",
-        position: "absolute",
-        top: "0",
-        left: "0",
-        bottom: "0",
-        right: "0"
-      }
-    }
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  label: "spinner",
+  width: size,
+  height: size
+}))
+
+const animationTimeUnit: number = 0.6
+const f: number = 0.25
+
+const PulsingCube = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  fontSize: 0,
+  letterSpacing: 0,
+  float: "left",
+  wordSpacing: 0,
+  width: size / 2 - 2,
+  height: size / 2 - 2,
+  margin: 1,
+  animationName: spin,
+  animationDuration: `${animationTimeUnit}s`,
+  animationTimingFunction: "ease-in-out",
+  animationDirection: "alternate",
+  animationIterationCount: "infinite",
+  backgroundColor: theme.colors.info,
+  // Increasing the negative animation delay clockwise
+  "&:nth-child(1)": {
+    animationDelay: "0s"
+  },
+  "&:nth-child(2)": {
+    animationDelay: `${-1 * f * animationTimeUnit}s`
+  },
+  "&:nth-child(4)": {
+    animationDelay: `${-2 * f * animationTimeUnit}s`
+  },
+  "&:nth-child(3)": {
+    animationDelay: `${-3 * f * animationTimeUnit}s`
   }
-)
+}))
 
 export default (props: IProps) => (
-  <Container
-    key={props.id}
-    css={props.css}
-    className={props.className}
-    color={props.color}
-    spinnerSize={props.size}
-    spinDuration={props.spinDuration}
-  />
+  <Container key={props.id} css={props.css} className={props.className}>
+    <PulsingCube />
+    <PulsingCube />
+    <PulsingCube />
+    <PulsingCube />
+  </Container>
 )

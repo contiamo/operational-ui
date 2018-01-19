@@ -2,20 +2,7 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import {
-  OperationalUI,
-  operationalTheme,
-  InfoTile,
-  Button,
-  Card,
-  Input,
-  Record,
-  RecordSummary,
-  RecordDetails,
-  Heading1Type,
-  ContextMenu,
-  ContextMenuItem
-} from "../../src/index"
+import { OperationalUI, operationalTheme, Card, Spinner, Progress } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   state = {
@@ -24,13 +11,9 @@ class Site extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI>
-      <p>adsf</p>
         <div style={{ padding: 20 }}>
           <Card>
-            <div>
-              <Input value="Hello" css={{marginRight: 8}} />
-              <Button color="warning">Submit</Button>
-            </div>
+            <Spinner/>
           </Card>
         </div>
       </OperationalUI>
