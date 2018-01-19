@@ -2,24 +2,20 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, operationalTheme, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
+import { OperationalUI, operationalTheme, Tooltip, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
 
 class Site extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI>
-        <Sidebar>
-          <SidebarHeader label="1234" open>
-            <SidebarHeader label="sub" open>
-              <SidebarItem>1234</SidebarItem>
-              <SidebarItem>5678</SidebarItem>
-            </SidebarHeader>
-
-            <SidebarItem>1234</SidebarItem>
-            <SidebarItem>5678</SidebarItem>
-            <SidebarItem>9012</SidebarItem>
-          </SidebarHeader>
-        </Sidebar>
+        <div style={{ padding: 100 }}>
+          <div style={{ width: 20, height: 20, display: "inline-block", position: "relative", border: "1px solid black" }}>
+            <Tooltip right>Right</Tooltip>
+            <Tooltip left>Left</Tooltip>
+            <Tooltip top>Top</Tooltip>
+            <Tooltip bottom>Bottom</Tooltip>
+          </div>
+        </div>
       </OperationalUI>
     )
   }

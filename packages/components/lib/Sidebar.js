@@ -10,7 +10,8 @@ var Container = glamorous_1.default.div(function (_a) {
         maxWidth: 280,
         maxHeight: "100%",
         boxShadow: theme.shadows.card,
-        overflow: "auto",
+        position: "relative",
+        overflow: "hidden",
         scrollBehavior: "smooth",
         backgroundColor: theme.colors.cardBackground,
         color: theme.colors.gray80

@@ -15,7 +15,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   maxWidth: 280,
   maxHeight: "100%",
   boxShadow: theme.shadows.card,
-  overflow: "auto",
+  position: "relative",
+  overflow: "hidden",
   scrollBehavior: "smooth", // future-proof
   backgroundColor: theme.colors.cardBackground,
   color: theme.colors.gray80
