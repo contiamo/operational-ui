@@ -18,8 +18,6 @@ const simpleSnippet = `
 </Sidebar>
 `
 
-export const fetch = (text: any) => new Promise(resolve => setTimeout(() => resolve(text), 2000))
-
 const propDescription = {
   sidebarHeader: [
     {
