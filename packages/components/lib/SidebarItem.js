@@ -10,14 +10,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isDisabled = _a.isDisabled, isActive = _a.isActive;
-    return (__assign({ label: "sidebarlink", backgroundColor: theme.colors.white }, theme.typography.body, { fontWeight: isActive ? 600 : 400, position: "relative", display: "flex", padding: theme.spacing / 3 + "px " + theme.spacing + "px", cursor: "pointer", textDecoration: "none", color: isActive ? theme.colors.linkText : theme.colors.gray80, opacity: isDisabled ? 0.25 : 1, "&:not(:first-child)": {
-            borderTop: "1px solid",
-            borderColor: theme.colors.secondarySeparator
-        }, ":hover": {
-            backgroundColor: utils_1.darken(theme.colors.white)(2)
+    return (__assign({ label: "sidebaritem", backgroundColor: theme.colors.white, height: 30 }, theme.typography.body, { fontWeight: isActive ? 600 : 400, position: "relative", borderBottom: "1px solid", borderColor: theme.colors.secondarySeparator, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0px " + theme.spacing + "px", cursor: "pointer", textDecoration: "none", color: isActive ? theme.colors.linkText : theme.colors.gray80 }, isDisabled ? { opacity: 0.25, pointerEvents: "none" } : {}, { ":hover": {
+            backgroundColor: theme.colors.gray10
         }, ":focus": {
             outline: 0
         } }));

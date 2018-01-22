@@ -4,7 +4,7 @@ export interface IProps {
     css?: {};
     className?: string;
     open?: boolean;
-    onClick?: () => void;
+    onToggle?: () => void;
     label?: string;
     children?: any;
 }

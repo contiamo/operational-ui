@@ -4,17 +4,31 @@ import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
 import { OperationalUI, operationalTheme, Tooltip, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
 
-class Site extends React.Component<{}, {}> {
+interface IState {
+  isOpen: boolean
+}
+
+class Site extends React.Component<{}, IState> {
+  state = {
+    isOpen: false
+  }
   render() {
     return (
       <OperationalUI>
-        <div style={{ padding: 100 }}>
-          <div style={{ width: 20, height: 20, display: "inline-block", position: "relative", border: "1px solid black" }}>
-            <Tooltip right>Right</Tooltip>
-            <Tooltip left smart>Left</Tooltip>
-            <Tooltip top>Top</Tooltip>
-            <Tooltip bottom>Bottom</Tooltip>
-          </div>
+        <div style={{ margin: 20 }}>
+          <Sidebar>
+            <SidebarHeader
+              label="Label"
+              open={this.state.isOpen}
+              onToggle={() => {
+                this.setState(prevState => ({
+                  isOpen: !prevState.isOpen
+                }))
+              }}
+            >
+              <SidebarItem>Hello</SidebarItem>
+            </SidebarHeader>
+          </Sidebar>
         </div>
       </OperationalUI>
     )

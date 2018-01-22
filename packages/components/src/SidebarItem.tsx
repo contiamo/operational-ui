@@ -15,23 +15,24 @@ export interface IProps {
 
 const Container = glamorous.div(
   ({ theme, isDisabled, isActive }: { theme: Theme; isDisabled: boolean; isActive: boolean }): {} => ({
-    label: "sidebarlink",
+    label: "sidebaritem",
     backgroundColor: theme.colors.white,
+    height: 30,
     ...theme.typography.body,
     fontWeight: isActive ? 600 : 400,
     position: "relative",
+    borderBottom: "1px solid",
+    borderColor: theme.colors.secondarySeparator,
     display: "flex",
-    padding: `${theme.spacing / 3}px ${theme.spacing}px`,
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: `0px ${theme.spacing}px`,
     cursor: "pointer",
     textDecoration: "none",
     color: isActive ? theme.colors.linkText : theme.colors.gray80,
-    opacity: isDisabled ? 0.25 : 1,
-    "&:not(:first-child)": {
-      borderTop: "1px solid",
-      borderColor: theme.colors.secondarySeparator
-    },
+    ...isDisabled ? { opacity: 0.25, pointerEvents: "none" } : {},
     ":hover": {
-      backgroundColor: darken(theme.colors.white)(2)
+      backgroundColor: theme.colors.gray10
     },
     ":focus": {
       outline: 0

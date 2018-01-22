@@ -13,7 +13,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        label: "sidebaritem",
+        label: "sidebarheader",
         position: "relative",
         color: theme.colors.emphasizedText
     });
@@ -22,17 +22,25 @@ var Content = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "relative",
-        paddingLeft: theme.spacing
+        paddingLeft: theme.spacing * 1,
+        "::after": {
+            content: "' '",
+            position: "absolute",
+            width: 1,
+            height: "100%",
+            top: 0,
+            left: theme.spacing * 1,
+            borderLeft: "1px solid",
+            borderColor: theme.colors.separator
+        }
     });
 });
 var Header = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isOpen = _a.isOpen;
-    return (__assign({ position: "relative", display: "flex", alignItems: "center", padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", borderTop: "1px solid", borderTopColor: theme.colors.gray10, cursor: "pointer", outline: "none", backgroundColor: theme.colors.white }, isOpen
+    return (__assign({ position: "relative", display: "flex", height: 30, color: theme.colors.gray80, alignItems: "center", padding: "0px " + theme.spacing + "px", borderBottom: "1px solid", borderBottomColor: theme.colors.separator, cursor: "pointer", outline: "none", backgroundColor: theme.colors.white }, isOpen
         ? {
             borderBottom: "1px solid",
-            borderBottomColor: theme.colors.separator,
-            fontWeight: 600,
-            backgroundColor: theme.colors.gray10
+            borderBottomColor: theme.colors.separator
         }
         : {}, { "&:hover": {
             backgroundColor: theme.colors.gray10
@@ -43,12 +51,12 @@ var Header = glamorous_1.default.div(function (_a) {
             height: 0,
             marginLeft: "auto",
             border: "4px solid transparent",
-            borderLeftColor: theme.colors.gray20,
+            borderLeftColor: theme.colors.gray40,
             transition: ".15s transform ease",
-            transform: isOpen ? "translate3d(-2px, 2px, 0) rotate(90deg)" : null
+            transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null
         } }));
 });
-exports.default = function (props) { return (React.createElement(Container, { css: props.css, key: props.id, onClick: props.onClick, className: props.className + " " + (props.open ? "open" : "") },
-    React.createElement(Header, { isOpen: !!props.open, className: "header " + (props.open ? "open" : "") }, props.label),
+exports.default = function (props) { return (React.createElement(Container, { css: props.css, key: props.id, className: props.className },
+    React.createElement(Header, { isOpen: !!props.open, onClick: props.onToggle }, props.label),
     props.open ? React.createElement(Content, null, props.children) : null)); };
 //# sourceMappingURL=SidebarHeader.js.map
