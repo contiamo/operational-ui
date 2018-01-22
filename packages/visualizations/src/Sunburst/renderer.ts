@@ -128,6 +128,9 @@ class Renderer {
   }
 
   onClick(d: TDatum): void {
+    if (!d.children) {
+      return
+    }
     this.zoomNode = d
     this.stateWriter("zoomNode", this.zoomNode)
 
