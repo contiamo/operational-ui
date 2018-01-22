@@ -45,17 +45,6 @@ class Renderer {
     this.el = el
     this.assignAccessors()
 
-    const config: IConfig = this.state.current.get("config")
-    this.radius = Math.min(config.width, config.height) / 2
-
-    this.angleScale = d3ScaleLinear().range([0, 2 * Math.PI])
-    this.radiusScale = d3ScaleLinear().range([0, this.radius])
-    this.arc = d3Arc()
-      .startAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0))))
-      .endAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x1))))
-      .innerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y0)))
-      .outerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y1)))
-
     // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
@@ -220,6 +209,17 @@ class Renderer {
 
   // // Compute
   compute(): void {
+    const drawingDims: IConfig = this.state.current.get("computed").canvas.drawingDims
+    this.radius = Math.min(drawingDims.width, drawingDims.height) / 2
+
+    this.angleScale = d3ScaleLinear().range([0, 2 * Math.PI])
+    this.radiusScale = d3ScaleLinear().range([0, this.radius])
+    this.arc = d3Arc()
+      .startAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0))))
+      .endAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x1))))
+      .innerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y0)))
+      .outerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y1)))
+
     this.prepareData()
     this.previous = this.computed
     this.computed = this.data
@@ -256,8 +256,8 @@ class Renderer {
   }
 
   computeTranslate(): [number, number] {
-    const config: IObject = this.state.current.get("config")
-    this.currentTranslation = [config.width / 2, config.height / 2]
+    const drawingDims: IObject = this.state.current.get("computed").canvas.drawingDims
+    this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return this.currentTranslation
   }
 

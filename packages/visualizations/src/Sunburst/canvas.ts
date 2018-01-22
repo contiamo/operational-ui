@@ -109,13 +109,36 @@ class Canvas {
     return
   }
 
-  draw(): void {
+  breadcrumbHeight(): number {
+    const nodeStyle: IObject = window.getComputedStyle(this.breadcrumb.node())
+    return (
+      parseInt(nodeStyle.height, 10) +
+      parseInt(nodeStyle.marginTop, 10) +
+      parseInt(nodeStyle.marginBottom, 10) +
+      parseInt(nodeStyle.paddingTop, 10) +
+      parseInt(nodeStyle.paddingBottom, 10)
+    )
+  }
+
+  drawingDims(): IObject {
     const config: IObject = this.state.current.get("config")
+    const dims: IObject = {
+      width: config.width,
+      height: config.height - this.breadcrumbHeight()
+    }
+    this.stateWriter("drawingDims", dims)
+    return dims
+  }
+
+  draw(): void {
+    const config: IObject = this.state.current.get("config"),
+      drawingDims: IObject = this.drawingDims()
+
     this.container
       .classed("hidden", this.state.current.get("config").hidden)
       .style("width", config.width + "px")
       .style("height", config.height + "px")
-    this.el.style("width", config.width + "px").style("height", config.height + "px")
+    this.el.style("width", drawingDims.width + "px").style("height", drawingDims.height + "px")
     this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect())
   }
 
