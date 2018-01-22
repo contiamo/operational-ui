@@ -9,6 +9,7 @@ import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy"
 import * as styles from "./styles"
+import { withD3Element } from "../utils/d3_utils"
 
 // // Accessors of series in prepared data
 // function dataKey(d: TDatum): string {
@@ -26,6 +27,7 @@ class Renderer {
   drawn: boolean = false
   el: TD3Selection
   events: IEvents
+  mouseOverDatum: TDatum
   name: (d: TDatum) => string
   previous: IObject
   radiusScale: any
@@ -78,7 +80,13 @@ class Renderer {
   initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
-    this.el.append("svg:g").attr("class", styles.total)
+    this.el
+      .append("svg:g")
+      .attr("class", styles.total)
+      .append("div")
+      .attr("class", "explanation")
+      .append("span")
+      .attr("class", "percentage")
 
     if (this.hasData()) {
       this.updateDraw()
@@ -119,7 +127,7 @@ class Renderer {
       .append("svg:path")
       .attr("class", (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""}`)
       .style("fill", (d: IObject) => this.color(d.data))
-      // .on("mouseenter", this.onMouseOver.bind(this))
+      .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("click", this.onClick.bind(this))
       .merge(arcs)
       .transition()
@@ -172,10 +180,54 @@ class Renderer {
   //     .attr("filter", null)
   // }
 
-  // onMouseOver(d: TDatum): void {
-  //   const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
-  //   this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
-  // }
+  onMouseOver(d: TDatum, el: Element): void {
+    const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
+    // this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
+    this.mouseOverDatum = d
+    this.highlightPath(d, el)
+  }
+
+  highlightPath(d: TDatum, el: Element) {
+    const percentage: number = Number((100 * d.value / this.total).toPrecision(3))
+    let percentageString: string = percentage + "%"
+    if (percentage < 0.1) {
+      percentageString = "< 0.1%"
+    }
+
+    this.el.select("span.percentage").text(percentageString)
+
+    this.el.select("div.explanation").style("visibility", "")
+
+    let sequenceArray = d.ancestors().reverse()
+    sequenceArray.shift() // remove root node from the array
+    // @TODO update breadcrumb train
+
+    // Fade all the segments.
+    this.el.selectAll(`path.${styles.arc}`).style("opacity", 0.3)
+
+    // Then highlight only those that are an ancestor of the current segment.
+    this.el
+      .selectAll(`path.${styles.arc}`)
+      .filter((d: TDatum): boolean => sequenceArray.indexOf(d) >= 0)
+      .style("opacity", 1)
+
+    d3.select(el).on("mouseleave", this.onMouseLeave.bind(this)(d, el))
+  }
+
+  onMouseLeave(d: TDatum, el: Element): any {
+    return () => {
+      if (this.mouseOverDatum !== d) {
+        return
+      }
+      this.mouseOverDatum = null
+      // @TODO Hide the breadcrumb trail
+
+      // Transition each segment to full opacity and then reactivate it.
+      this.el.selectAll(`path.${styles.arc}`).style("opacity", 1)
+
+      this.el.select("div.explanation").style("visibility", "hidden")
+    }
+  }
 
   // highlightElement(key: string): void {
   //   const d: TDatum = find((datum: TDatum): boolean => dataKey(datum) === key)(this.computed.data)
@@ -195,9 +247,11 @@ class Renderer {
       .each(this.assignColors.bind(this))
       .sort((a: TDatum, b: TDatum) => b.value - a.value)
 
+    this.total = hierarchyData.value
+
     this.data = d3Partition()(hierarchyData)
       .descendants()
-      .filter((d: TDatum) => d.x1 - d.x0 > 0.005)
+      .filter((d: TDatum) => d.parent && d.x1 - d.x0 > 0.005)
   }
 
   assignColors(node: any): void {
