@@ -145,7 +145,7 @@ class Renderer {
       .attrTween("d", (d: TDatum): any => {
         return () => this.arc(d)
       })
-      .style("opacity", (datum: TDatum): number => (datum.data.name === d.data.name ? 0.2 : 1))
+      .style("opacity", (datum: TDatum): number => (datum.data.name === d.data.name ? 0.1 : 1))
 
     this.events.emit(Events.FOCUS.ELEMENT.CLICK)
   }
@@ -171,8 +171,11 @@ class Renderer {
     let sequenceArray = d.ancestors().reverse()
     sequenceArray.shift() // remove root node from the array
 
-    // Fade all the segments.
-    this.el.selectAll(`path.${styles.arc}`).style("opacity", 0.3)
+    // Fade all the segments (leave inner circle as is).
+    this.el
+      .selectAll(`path.${styles.arc}`)
+      .filter((d: TDatum): boolean => d !== this.zoomNode)
+      .style("opacity", 0.3)
 
     // Then highlight only those that are an ancestor of the current segment.
     this.el

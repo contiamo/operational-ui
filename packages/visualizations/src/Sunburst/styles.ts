@@ -31,6 +31,9 @@ const breadcrumbStyle = {
   "& svg": {
     width: "100%",
     height: "100%"
+  },
+  "& polygon": {
+    opacity: "0.5",
   }
 }
 
