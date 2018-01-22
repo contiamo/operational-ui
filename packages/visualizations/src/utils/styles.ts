@@ -64,6 +64,7 @@ const componentFocusStyle = {
 const chartContainerStyle = {
   position: "relative",
   display: "block",
+  backgroundColor: "#fff",
   "&.hidden": {
     display: "none"
   }

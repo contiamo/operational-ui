@@ -19,10 +19,7 @@ class Canvas {
     this.events = events
     this.container = this.insertContainer(context)
     this.el = this.insertEl()
-    this.elements.defs = this.el.append("defs")
     this.listenToMouseOver()
-    this.appendShadows()
-    this.appendBackground()
     this.insertFocusElements()
     this.stateWriter("elements", this.elements)
   }
@@ -44,44 +41,6 @@ class Canvas {
 
   prefixedId(id: string): string {
     return this.state.current.get("config").uid + id
-  }
-
-  shadowDefinitionId(): string {
-    return this.prefixedId("_shadow")
-  }
-
-  appendShadows(): void {
-    const shadow: TD3Selection = this.elements.defs
-      .append("filter")
-      .attr("id", this.shadowDefinitionId())
-      .attr("height", "130%")
-    shadow
-      .append("feGaussianBlur")
-      .attr("in", "SourceAlpha")
-      .attr("stdDeviation", "3")
-    shadow
-      .append("feOffset")
-      .attr("dx", "2")
-      .attr("dy", "2")
-      .attr("result", "offsetblur")
-    shadow
-      .append("feComponentTransfer")
-      .append("feFuncA")
-      .attr("type", "linear")
-      .attr("slope", "0.5")
-
-    const shadowFeMerge: TD3Selection = shadow.append("feMerge")
-    shadowFeMerge.append("feMergeNode")
-    shadowFeMerge.append("feMergeNode").attr("in", "SourceGraphic")
-    this.stateWriter("shadowDefinitionId", this.shadowDefinitionId())
-  }
-
-  appendBackground(): void {
-    this.elements.background = this.el
-      .append("rect")
-      .attr("class", styles.chartBackground)
-      .attr("x", 0)
-      .attr("y", 0)
   }
 
   insertFocusElements(): void {
@@ -145,7 +104,6 @@ class Canvas {
       .style("width", config.width + "px")
       .style("height", config.height + "px")
     this.el.style("width", config.width + "px").style("height", config.height + "px")
-    this.elements.background.attr("width", config.width).attr("height", config.height)
     this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect())
   }
 
