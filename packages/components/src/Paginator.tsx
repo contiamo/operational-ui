@@ -94,8 +94,11 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
   const start = (isCloseToEnd ? pageCount - adjustedMaxVisible : skip + 1) || 1
   const end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip
 
+  const buttonCss: {} = { ":focus": { outline: "0", boxShadow: "none" } }
+
   const fragment = range(start, end).map((pageNumber, i) => (
     <Button
+      css={buttonCss}
       condensed
       key={pageNumber}
       onClick={() => {
@@ -111,6 +114,7 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
     remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
       ? [
           <Button
+            css={buttonCss}
             condensed
             key="upper"
             onClick={() => {
@@ -120,6 +124,7 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
             ...
           </Button>,
           <Button
+            css={buttonCss}
             condensed
             key={pageCount}
             onClick={() => {
@@ -148,7 +153,7 @@ const Container = glamorous.div({
   }
 })
 
-const Paginator: React.SFC<IProps> = ({
+export default ({
   activeColor = "info",
   maxVisible = 3,
   onChange = () => {},
@@ -179,5 +184,3 @@ const Paginator: React.SFC<IProps> = ({
     </Container>
   )
 }
-
-export default Paginator

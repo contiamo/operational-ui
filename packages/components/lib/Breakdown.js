@@ -15,11 +15,12 @@ var Container = glamorous_1.default.div({
     label: "breakdown",
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     position: "relative",
     maxWidth: 300
 }, function (_a) {
     var theme = _a.theme, onClick = _a.onClick;
-    return (__assign({ padding: theme.spacing / 2 + "px " + theme.spacing / 2 + "px " + theme.spacing / 2 + "px " + 3 * theme.spacing + "px" }, onClick
+    return (__assign({ padding: theme.spacing * 3 / 4 + "px 0" }, onClick
         ? {
             cursor: "pointer",
             "&:hover": {
@@ -27,7 +28,7 @@ var Container = glamorous_1.default.div({
             }
         }
         : {}, { background: theme.colors.white, ":not(:first-child)": {
-            borderTop: "1px solid " + theme.colors.gray20
+            borderTop: "1px solid " + theme.colors.separator
         } }));
 });
 var Content = glamorous_1.default.div({
@@ -77,26 +78,20 @@ var Bar = glamorous_1.default.div({
             fontWeight: 400
         },
         ":before": {
-            backgroundColor: utils_1.setBrightness(backgroundColor, 145),
+            backgroundColor: utils_1.setBrightness(backgroundColor, 155),
             transition: "all 0.3s ease-in-out",
             width: fill * 100 + "%"
         }
     };
 });
 var Number = glamorous_1.default.div({
-    fontSize: 24,
-    position: "absolute"
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
 }, function (_a) {
     var theme = _a.theme;
-    return ({
-        top: theme.spacing,
-        right: "calc(100% - " + 3.75 * theme.spacing + "px)",
-        minWidth: theme.spacing * 3,
-        paddingRight: theme.spacing,
-        paddingLeft: theme.spacing / 2,
-        fontWeight: theme.typography.title.fontWeight,
-        color: theme.colors.gray20
-    });
+    return (__assign({}, theme.typography.heading1, { flex: "0 0 " + theme.spacing * 2.5 + "px", color: theme.colors.gray20 }));
 });
 exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: props.onClick, onMouseEnter: props.onMouseEnter, onMouseLeave: props.onMouseLeave },
     React.createElement(Number, null, props.number),

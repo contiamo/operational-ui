@@ -26,11 +26,12 @@ const Container = glamorous.div(
     label: "breakdown",
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     position: "relative",
     maxWidth: 300
   },
   ({ theme, onClick }: { theme?: Theme; onClick: () => void }) => ({
-    padding: `${theme.spacing / 2}px ${theme.spacing / 2}px ${theme.spacing / 2}px ${3 * theme.spacing}px`,
+    padding: `${theme.spacing * 3 / 4}px 0`,
     ...onClick
       ? {
           cursor: "pointer",
@@ -41,7 +42,7 @@ const Container = glamorous.div(
       : {},
     background: theme.colors.white,
     ":not(:first-child)": {
-      borderTop: `1px solid ${theme.colors.gray20}`
+      borderTop: `1px solid ${theme.colors.separator}`
     }
   })
 )
@@ -96,7 +97,7 @@ const Bar = glamorous.div(
         fontWeight: 400
       },
       ":before": {
-        backgroundColor: setBrightness(backgroundColor, 145),
+        backgroundColor: setBrightness(backgroundColor, 155),
         transition: "all 0.3s ease-in-out",
         width: `${fill * 100}%`
       }
@@ -106,16 +107,14 @@ const Bar = glamorous.div(
 
 const Number = glamorous.div(
   {
-    fontSize: 24,
-    position: "absolute"
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
-  ({ theme }: { theme: Theme }) => ({
-    top: theme.spacing,
-    right: `calc(100% - ${3.75 * theme.spacing}px)`,
-    minWidth: theme.spacing * 3,
-    paddingRight: theme.spacing,
-    paddingLeft: theme.spacing / 2,
-    fontWeight: theme.typography.title.fontWeight,
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.heading1,
+    flex: `0 0 ${theme.spacing * 2.5}px`,
     color: theme.colors.gray20
   })
 )

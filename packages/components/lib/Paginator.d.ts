@@ -1,5 +1,4 @@
 /// <reference types="react" />
-import * as React from "react";
 export interface IProps {
     id?: string | number;
     css?: any;
@@ -11,5 +10,5 @@ export interface IProps {
     page?: number;
     pageCount: number;
 }
-declare const Paginator: React.SFC<IProps>;
-export default Paginator;
+declare const _default: ({activeColor, maxVisible, onChange, pageCount, page, id, css, className}: IProps) => JSX.Element;
+export default _default;

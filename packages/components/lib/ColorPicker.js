@@ -13,9 +13,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var react_color_1 = require("react-color");
 var glamorous_1 = require("glamorous");
-var hasTheme = function (theme) { return theme && Object.keys(theme).length > 0; };
+var Button_1 = require("./Button");
 var Container = glamorous_1.default.div({
-    label: "colorpicker"
+    label: "colorpicker",
+    display: "inline-block",
+    width: "fit-content",
+    position: "relative"
 });
 var ColorSquare = glamorous_1.default.div({
     border: "3px solid white",
@@ -23,41 +26,28 @@ var ColorSquare = glamorous_1.default.div({
     cursor: "pointer"
 }, function (_a) {
     var color = _a.color, size = _a.size, theme = _a.theme;
-    // Need to check this because the tests run without a ThemeProvider
-    // Otherwise, tests could not access the state of ColorPicker.
-    return hasTheme(theme)
-        ? {
-            width: size,
-            height: size,
-            boxShadow: "0 0 0 1px " + theme.colors.gray30,
-            backgroundColor: color
-        }
-        : {};
+    return ({
+        width: size,
+        height: size,
+        boxShadow: "0 0 0 1px " + theme.colors.gray30,
+        backgroundColor: color
+    });
 });
-var PickerContainer = glamorous_1.default.div({
-    position: "fixed"
-}, function (_a) {
-    var top = _a.top, left = _a.left, theme = _a.theme;
-    // Need to check this because the tests run without a ThemeProvider
-    // Otherwise, tests could not access the state of ColorPicker.
-    return hasTheme(theme)
-        ? {
-            top: top + 8,
-            left: left + 8,
-            zIndex: theme.baseZIndex + 100
-        }
-        : {};
+var PickerContainer = glamorous_1.default.div({ position: "absolute" }, function (_a) {
+    var theme = _a.theme;
+    return ({
+        top: theme.spacing * 3.5,
+        left: "50%",
+        transform: "translate3d(-50%, 0, 0)",
+        zIndex: theme.baseZIndex + 100
+    });
 });
 var ColorPicker = /** @class */ (function (_super) {
     __extends(ColorPicker, _super);
     function ColorPicker() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            isPickerOpen: false,
-            position: {
-                top: 0,
-                left: 0
-            }
+            isPickerOpen: false
         };
         _this.containerEl = null;
         // This implements "click outside to close" behavior
@@ -82,8 +72,6 @@ var ColorPicker = /** @class */ (function (_super) {
         return _this;
     }
     ColorPicker.prototype.componentDidMount = function () {
-        var _this = this;
-        this.setState(function () { return ({ position: _this.containerEl.getBoundingClientRect() }); });
         window.addEventListener("click", this.handleClickOutside, true);
         window.addEventListener("keyup", this.handleEsc, true);
     };
@@ -108,8 +96,8 @@ var ColorPicker = /** @class */ (function (_super) {
         return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className, innerRef: function (containerEl) {
                 _this.containerEl = containerEl;
             }, onClick: function () { return _this.togglePicker(); } },
-            React.createElement(ColorSquare, { size: size, color: color }),
-            this.state.isPickerOpen && (React.createElement(PickerContainer, { top: this.state.position.top, left: this.state.position.left, onClick: function (e) { return e.stopPropagation(); } },
+            React.createElement(Button_1.default, { color: color }, color),
+            this.state.isPickerOpen && (React.createElement(PickerContainer, { onClick: function (e) { return e.stopPropagation(); } },
                 React.createElement(react_color_1.SketchPicker, { color: this.props.color, onChangeComplete: function (color) { return _this.onColorChange(color); } })))));
     };
     ColorPicker.defaultProps = {
