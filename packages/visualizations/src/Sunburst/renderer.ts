@@ -161,31 +161,6 @@ class Renderer {
     this.events.emit(Events.FOCUS.ELEMENT.CLICK)
   }
 
-  // updateElementHover(datapoint: IObject): void {
-  //   if (!this.drawn) {
-  //     return
-  //   }
-
-  //   const arcs: any = this.el.select("g.arcs").selectAll("g")
-
-  //   const filterFocused: any = (d: TDatum): boolean =>
-  //       datapoint.d && datapoint.d.data && dataKey(d) === dataKey(datapoint.d),
-  //     filterUnFocused: any = (d: TDatum): boolean =>
-  //       datapoint.d && datapoint.d.data ? dataKey(d) !== dataKey(datapoint.d) : true
-
-  //   arcs
-  //     .filter(filterFocused)
-  //     .select("path")
-  //     .attr("d", this.computed.arcOver)
-  //     .attr("filter", `url(#${this.state.current.get("computed").canvas.shadowDefinitionId})`)
-
-  //   arcs
-  //     .filter(filterUnFocused)
-  //     .select("path")
-  //     .attr("d", this.computed.arc)
-  //     .attr("filter", null)
-  // }
-
   onMouseOver(d: TDatum, el: Element): void {
     const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
