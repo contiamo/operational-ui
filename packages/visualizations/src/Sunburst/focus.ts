@@ -3,9 +3,8 @@ import AbstractFocus from "../utils/focus"
 import * as d3 from "d3-selection"
 import { TD3Selection, TDatum, IObject } from "./typings"
 
-const dataName = (d: TDatum): string => d.data.key,
-  dataValue = (d: TDatum): number => d.data.value,
-  dataPercentage = (d: TDatum): string => d.data.percentage.toFixed(1) + "%"
+const dataName = (d: TDatum): string => d.data.name,
+  dataValue = (d: TDatum): number => d.value
 
 class Focus extends AbstractFocus {
   onElementHover(payload: { focusPoint: IObject; d: TDatum }): void {
@@ -26,14 +25,9 @@ class Focus extends AbstractFocus {
     content
       .append("xhtml:li")
       .attr("class", "series")
-      .html(
-        '<span class="value">' +
-          dataValue(datum) +
-          '</span> \
-        <span class="percentage">(' +
-          dataPercentage(datum) +
-          ")</span>"
-      )
+      .append("span")
+      .attr("class", "value")
+      .text(dataValue(datum))
 
     // Get label dimensions
     const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),

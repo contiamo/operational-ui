@@ -182,7 +182,7 @@ class Renderer {
 
   onMouseOver(d: TDatum, el: Element): void {
     const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
-    // this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
     this.mouseOverDatum = d
     this.highlightPath(d, el)
   }
@@ -220,6 +220,10 @@ class Renderer {
         return
       }
       this.mouseOverDatum = null
+
+      // Remove focus label
+      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+
       // @TODO Hide the breadcrumb trail
 
       // Transition each segment to full opacity and then reactivate it.
