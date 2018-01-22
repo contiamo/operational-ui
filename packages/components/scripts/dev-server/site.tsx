@@ -2,19 +2,33 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, operationalTheme, Card, Spinner, Progress } from "../../src/index"
+import { OperationalUI, operationalTheme, Tooltip, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
 
-class Site extends React.Component<{}, {}> {
+interface IState {
+  isOpen: boolean
+}
+
+class Site extends React.Component<{}, IState> {
   state = {
-    selected: ["1"]
+    isOpen: false
   }
   render() {
     return (
       <OperationalUI>
-        <div style={{ padding: 20 }}>
-          <Card>
-            <Spinner/>
-          </Card>
+        <div style={{ margin: 20 }}>
+          <Sidebar>
+            <SidebarHeader
+              label="Label"
+              open={this.state.isOpen}
+              onToggle={() => {
+                this.setState(prevState => ({
+                  isOpen: !prevState.isOpen
+                }))
+              }}
+            >
+              <SidebarItem>Hello</SidebarItem>
+            </SidebarHeader>
+          </Sidebar>
         </div>
       </OperationalUI>
     )

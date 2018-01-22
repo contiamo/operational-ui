@@ -1,13 +1,10 @@
 /// <reference types="react" />
 import * as React from "react";
-import { Theme } from "@operational/theme";
 export interface IProps {
     id?: string | number;
     css?: any;
     className?: string;
     children: React.ReactNode;
-    theme?: Theme;
-    width?: number;
 }
-declare const Card: React.SFC<IProps>;
-export default Card;
+declare const _default: (props: IProps) => JSX.Element;
+export default _default;

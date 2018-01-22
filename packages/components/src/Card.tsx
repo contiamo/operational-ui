@@ -7,29 +7,20 @@ export interface IProps {
   css?: any
   className?: string
   children: React.ReactNode
-  theme?: Theme
-  width?: number
 }
 
-const Container = glamorous.div(({ theme, width, padding }: { theme: Theme; width?: number; padding?: number }) => ({
-  width,
+const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   label: "card",
   padding: theme.spacing * 4 / 3,
   boxShadow: theme.shadows.card,
   backgroundColor: theme.colors.cardBackground,
-
-  "& p": {
-    lineHeight: "20px"
-  },
   "& > img": {
     maxWidth: "100%"
   }
 }))
 
-const Card: React.SFC<IProps> = (props: IProps) => (
-  <Container key={props.id} css={props.css} width={props.width} className={props.className}>
+export default (props: IProps) => (
+  <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
-
-export default Card
