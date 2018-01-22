@@ -118,6 +118,7 @@ class Renderer {
       .append("svg:path")
       .attr("class", (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""}`)
       .style("fill", (d: IObject) => this.color(d.data))
+      .style("stroke", "#fff")
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("click", this.onClick.bind(this))
       .merge(arcs)
@@ -132,6 +133,8 @@ class Renderer {
 
     this.el
       .selectAll("path")
+      .style("fill", (datum: TDatum): string => (datum === d ? "#fff" : this.color(datum.data)))
+      .style("stroke", (datum: TDatum): string => (datum === d ? this.color(datum.data) : "#fff"))
       .transition()
       .duration(this.state.current.get("config").duration)
       .tween("scale", () => {
@@ -143,15 +146,17 @@ class Renderer {
           this.radiusScale.domain(radiusDomain(t)).range(radiusRange(t))
         }
       })
-      .attrTween("d", (d: TDatum): any => {
-        return () => this.arc(d)
+      .attrTween("d", (datum: TDatum): any => {
+        return () => this.arc(datum)
       })
-      .style("opacity", (datum: TDatum): number => (datum.data.name === d.data.name ? 0.1 : 1))
 
     this.events.emit(Events.FOCUS.ELEMENT.CLICK)
   }
 
   onMouseOver(d: TDatum, el: Element): void {
+    if (d === this.zoomNode) {
+      return
+    }
     const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
     this.mouseOverDatum = d
@@ -247,6 +252,7 @@ class Renderer {
     this.data = d3Partition()(hierarchyData)
       .descendants()
       .filter((d: TDatum) => d.parent && d.x1 - d.x0 > 0.005)
+      .reverse()
   }
 
   assignColors(node: any): void {
