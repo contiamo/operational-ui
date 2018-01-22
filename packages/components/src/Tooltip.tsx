@@ -12,6 +12,7 @@ export interface IProps {
   css?: {}
   className?: string
   children?: React.ReactNode
+  smart?: boolean
   top?: boolean
   left?: boolean
   right?: boolean
@@ -34,13 +35,12 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
     backgroundColor,
     label: "tooltip",
     ...theme.typography.small,
+    lineHeight: 1.3,
     position: "absolute",
     zIndex: theme.baseZIndex + 101,
     width: "fit-content",
     maxWidth: 200,
-    opacity: 1, // Initially, they're hidden...
-    transition: ".07s opacity ease", // ...for 0.07 seconds.
-    padding: `${theme.spacing / 3}px ${theme.spacing * 2 / 3}`,
+    padding: `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
     borderRadius: 2,
     wordWrap: "break-word",
     boxShadow: theme.shadows.popup,
@@ -146,8 +146,7 @@ export default class Tooltip extends React.Component<IProps, IState> {
   }
   containerNode: HTMLElement
   render() {
-    console.log(this.state)
-    let position: Position = "top"
+    let position: Position = "right"
     if (this.props.left) {
       position = "left"
     }
@@ -156,6 +155,16 @@ export default class Tooltip extends React.Component<IProps, IState> {
     }
     if (this.props.bottom) {
       position = "bottom"
+    }
+    if (this.props.smart) {
+      // TODO: implement bounding box checks for right- and bottom-placed tooltips.
+      // This should be easier once the OperationalUI provides window dimensions in context.
+      if (this.state.bbLeft < 0 && String(position) === "left") {
+        position = "right"
+      }
+      if (this.state.bbTop < 0 && String(position) === "top") {
+        position = "bottom"
+      }
     }
     return (
       <Container
@@ -173,10 +182,10 @@ export default class Tooltip extends React.Component<IProps, IState> {
   componentDidMount() {
     const bbRect = this.containerNode.getBoundingClientRect()
     this.setState(prevState => ({
-      top: bbRect.top,
-      bottom: bbRect.bottom,
-      left: bbRect.left,
-      right: bbRect.right
+      bbTop: bbRect.top,
+      bbBottom: bbRect.bottom,
+      bbLeft: bbRect.left,
+      bbRight: bbRect.right
     }))
   }
 }

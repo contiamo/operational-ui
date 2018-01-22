@@ -24,7 +24,7 @@ var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var position = _a.position, theme = _a.theme;
     var backgroundColor = theme.colors.black;
-    return __assign({ backgroundColor: backgroundColor, label: "tooltip" }, theme.typography.small, { position: "absolute", zIndex: theme.baseZIndex + 101, width: "fit-content", maxWidth: 200, opacity: 1, transition: ".07s opacity ease", padding: theme.spacing / 3 + "px " + theme.spacing * 2 / 3, borderRadius: 2, wordWrap: "break-word", boxShadow: theme.shadows.popup }, (function () {
+    return __assign({ backgroundColor: backgroundColor, label: "tooltip" }, theme.typography.small, { lineHeight: 1.3, position: "absolute", zIndex: theme.baseZIndex + 101, width: "fit-content", maxWidth: 200, padding: theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px", borderRadius: 2, wordWrap: "break-word", boxShadow: theme.shadows.popup }, (function () {
         if (position === "top") {
             return {
                 left: "50%",
@@ -119,8 +119,7 @@ var Tooltip = /** @class */ (function (_super) {
     }
     Tooltip.prototype.render = function () {
         var _this = this;
-        console.log(this.state);
-        var position = "top";
+        var position = "right";
         if (this.props.left) {
             position = "left";
         }
@@ -130,6 +129,16 @@ var Tooltip = /** @class */ (function (_super) {
         if (this.props.bottom) {
             position = "bottom";
         }
+        if (this.props.smart) {
+            // TODO: implement bounding box checks for right- and bottom-placed tooltips.
+            // This should be easier once the OperationalUI provides window dimensions in context.
+            if (this.state.bbLeft < 0 && String(position) === "left") {
+                position = "right";
+            }
+            if (this.state.bbTop < 0 && String(position) === "top") {
+                position = "bottom";
+            }
+        }
         return (React.createElement(Container, { className: this.props.className, css: this.props.css, position: position, innerRef: function (node) {
                 _this.containerNode = node;
             } }, this.props.children));
@@ -137,10 +146,10 @@ var Tooltip = /** @class */ (function (_super) {
     Tooltip.prototype.componentDidMount = function () {
         var bbRect = this.containerNode.getBoundingClientRect();
         this.setState(function (prevState) { return ({
-            top: bbRect.top,
-            bottom: bbRect.bottom,
-            left: bbRect.left,
-            right: bbRect.right
+            bbTop: bbRect.top,
+            bbBottom: bbRect.bottom,
+            bbLeft: bbRect.left,
+            bbRight: bbRect.right
         }); });
     };
     return Tooltip;

@@ -4,6 +4,7 @@ export interface IProps {
     css?: {};
     className?: string;
     children?: React.ReactNode;
+    smart?: boolean;
     top?: boolean;
     left?: boolean;
     right?: boolean;

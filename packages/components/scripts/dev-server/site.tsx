@@ -11,7 +11,7 @@ class Site extends React.Component<{}, {}> {
         <div style={{ padding: 100 }}>
           <div style={{ width: 20, height: 20, display: "inline-block", position: "relative", border: "1px solid black" }}>
             <Tooltip right>Right</Tooltip>
-            <Tooltip left>Left</Tooltip>
+            <Tooltip left smart>Left</Tooltip>
             <Tooltip top>Top</Tooltip>
             <Tooltip bottom>Bottom</Tooltip>
           </div>
