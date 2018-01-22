@@ -46,8 +46,20 @@ const totalStyle = {
   ...theme.typography.small
 }
 
+const breadcrumbStyle = {
+  width: "100%",
+  height: "30px",
+  paddingTop: "10px",
+  marginBottom: "10px",
+  "& svg": {
+    width: "100%",
+    height: "100%"
+  }
+}
+
 export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
 export const comparisonLegend = seriesLegend
 export const comparisonLegendLine = css(comparisonLegendLineStyle).toString()
+export const breadcrumb = css(breadcrumbStyle).toString()

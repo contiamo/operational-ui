@@ -36,6 +36,7 @@ class Renderer {
   stateWriter: TStateWriter
   total: number
   value: (d: TDatum) => number
+  zoomNode: TDatum
 
   constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection) {
     this.state = state
@@ -136,6 +137,9 @@ class Renderer {
   }
 
   onClick(d: TDatum): void {
+    this.zoomNode = d
+    this.stateWriter("zoomNode", this.zoomNode)
+
     this.el
       .selectAll("path")
       .transition()
@@ -153,6 +157,8 @@ class Renderer {
         return () => this.arc(d)
       })
       .style("opacity", (datum: TDatum): number => (datum.data.name === d.data.name ? 0.2 : 1))
+
+    this.events.emit(Events.FOCUS.ELEMENT.CLICK)
   }
 
   // updateElementHover(datapoint: IObject): void {
@@ -200,7 +206,6 @@ class Renderer {
 
     let sequenceArray = d.ancestors().reverse()
     sequenceArray.shift() // remove root node from the array
-    // @TODO update breadcrumb train
 
     // Fade all the segments.
     this.el.selectAll(`path.${styles.arc}`).style("opacity", 0.3)
@@ -208,7 +213,7 @@ class Renderer {
     // Then highlight only those that are an ancestor of the current segment.
     this.el
       .selectAll(`path.${styles.arc}`)
-      .filter((d: TDatum): boolean => sequenceArray.indexOf(d) >= 0)
+      .filter((d: TDatum): boolean => sequenceArray.indexOf(d) >= 0 && d !== this.zoomNode)
       .style("opacity", 1)
 
     d3.select(el).on("mouseleave", this.onMouseLeave.bind(this)(d, el))
@@ -224,10 +229,10 @@ class Renderer {
       // Remove focus label
       this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
-      // @TODO Hide the breadcrumb trail
-
-      // Transition each segment to full opacity and then reactivate it.
-      this.el.selectAll(`path.${styles.arc}`).style("opacity", 1)
+      this.el
+        .selectAll(`path.${styles.arc}`)
+        .filter((d: TDatum): boolean => d !== this.zoomNode)
+        .style("opacity", 1)
 
       this.el.select("div.explanation").style("visibility", "hidden")
     }
@@ -252,6 +257,13 @@ class Renderer {
       .sort((a: TDatum, b: TDatum) => b.value - a.value)
 
     this.total = hierarchyData.value
+
+    this.stateWriter(
+      "topNode",
+      d3Partition()(hierarchyData)
+        .descendants()
+        .find((d: TDatum) => d.depth === 0)
+    )
 
     this.data = d3Partition()(hierarchyData)
       .descendants()

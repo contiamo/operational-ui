@@ -1,5 +1,6 @@
 import Canvas from "./canvas"
 import Renderer from "./renderer"
+import Breadcrumb from "./breadcrumb"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
@@ -66,7 +67,7 @@ class Facade {
     return {
       canvas: {},
       focus: {},
-      series: {}
+      renderer: {}
     }
   }
 
@@ -76,6 +77,12 @@ class Facade {
 
   insertComponents(): IObject {
     return {
+      breadcrumb: new Breadcrumb(
+        this.state.readOnly(),
+        this.state.computedWriter(["breadcrumb"]),
+        this.events,
+        this.canvas.elementFor("breadcrumb")
+      ),
       focus: new Focus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),

@@ -48,7 +48,7 @@ export interface IAccessors {
 export interface IComputedState {
   canvas: IObject
   focus: IObject
-  series: IObject
+  renderer: IObject
 }
 
 export interface IMousePosition {

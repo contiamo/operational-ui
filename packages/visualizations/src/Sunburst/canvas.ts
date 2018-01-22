@@ -3,8 +3,10 @@ import * as d3 from "d3-selection"
 import { isArray, reduce } from "lodash/fp"
 import { TD3Selection, IState, TStateWriter, IEvents, IObject, TSeriesEl } from "./typings"
 import * as styles from "../utils/styles"
+import * as localStyles from "./styles"
 
 class Canvas {
+  breadcrumb: TD3Selection
   container: TD3Selection
   el: TSeriesEl
   events: IEvents
@@ -18,6 +20,7 @@ class Canvas {
     this.stateWriter = stateWriter
     this.events = events
     this.container = this.insertContainer(context)
+    this.breadcrumb = this.insertBreadcrumb()
     this.el = this.insertEl()
     this.listenToMouseOver()
     this.insertFocusElements()
@@ -30,6 +33,15 @@ class Canvas {
       .attr("class", `${styles.chartContainer}`)
     context.appendChild(container.node())
     return container
+  }
+
+  insertBreadcrumb(): TD3Selection {
+    const el: TD3Selection = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", localStyles.breadcrumb)
+    this.container.node().appendChild(el.node())
+    this.elMap.breadcrumb = el
+    return el
   }
 
   insertEl(): TSeriesEl {
