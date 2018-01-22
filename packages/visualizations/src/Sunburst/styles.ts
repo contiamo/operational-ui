@@ -34,6 +34,10 @@ const breadcrumbStyle = {
   },
   "& polygon": {
     opacity: "0.5",
+    cursor: "pointer"
+  },
+  "& text": {
+    pointerEvents: "none"
   }
 }
 

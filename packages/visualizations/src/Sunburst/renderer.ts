@@ -45,6 +45,7 @@ class Renderer {
     this.el = el
     this.assignAccessors()
 
+    this.events.on(Events.BREADCRUMB.CLICK, this.onClick.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))

@@ -21,6 +21,9 @@ const Events = {
       MOUSEOVER: "focus:element:mouseover",
       MOUSEOUT: "focus:element:mouseout"
     }
+  },
+  BREADCRUMB: {
+    CLICK: "breadcrumb:click"
   }
 }
 

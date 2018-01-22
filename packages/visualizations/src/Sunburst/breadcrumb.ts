@@ -81,6 +81,7 @@ class Breadcrumb {
       .attr("points", this.breadcrumbPoints)
       .style("fill", (d: TDatum): string => d.data.color || "#fff")
       .style("stroke", (d: TDatum): string => (d.data.color ? "none" : "000"))
+      .on("click", this.onClick.bind(this))
 
     entering
       .append("svg:text")
@@ -105,6 +106,10 @@ class Breadcrumb {
 
     // Make the breadcrumb trail visible, if it's hidden.
     d3.select("svg.sequence").style("visibility", "")
+  }
+
+  onClick(d: TDatum): void {
+    this.events.emit(Events.BREADCRUMB.CLICK, d)
   }
 }
 
