@@ -18,16 +18,15 @@ class Focus extends AbstractFocus {
     const content: TD3Selection = this.el.append("xhtml:ul")
 
     content
-      .append("xhtml:li")
+      .append("span")
       .attr("class", "title")
       .text(dataName(datum))
 
-    content
-      .append("xhtml:li")
-      .attr("class", "series")
-      .append("span")
-      .attr("class", "value")
-      .text(dataValue(datum))
+    content.append("span").text(`(${dataValue(datum)})`)
+
+    const zoomNode: TDatum = this.state.current.get("computed").renderer.zoomNode
+    const percentage: string = (dataValue(datum) * 100 / dataValue(zoomNode)).toPrecision(3)
+    content.append("xhtml:li").text(`${percentage}% of ${dataName(zoomNode)}`)
 
     // Get label dimensions
     const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),

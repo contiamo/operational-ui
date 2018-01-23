@@ -43,7 +43,7 @@ class Canvas {
     el
       .append("div")
       .attr("class", localStyles.explanation)
-      .html("<span class='percentage'></span> of paths begin like this")
+      .html("<span class='percentage'></span> of paths begin with this sequence")
 
     this.container.node().appendChild(el.node())
     this.elMap.breadcrumb = el
