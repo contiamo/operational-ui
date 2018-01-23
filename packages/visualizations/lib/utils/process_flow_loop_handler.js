@@ -22,7 +22,7 @@ function getSourcesRecursively(sources) {
 function isLinkedToFrom(sourceId, targetId) {
     var sourceNodes = findNode(sourceId).linkedToFrom;
     var sourceLinkedToFrom = getSourcesRecursively(sourceNodes);
-    return sourceLinkedToFrom.indexOf(targetId) > -1;
+    return sourceId === targetId || sourceLinkedToFrom.indexOf(targetId) > -1;
 }
 function removeLoops(path) {
     var i = 1, newPath = path;
