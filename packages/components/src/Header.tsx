@@ -13,7 +13,6 @@ export interface IProps {
 const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
   label: "header",
   display: "flex",
-  flex: "0 0 52px",
   justifyContent: "space-between",
   backgroundColor: theme.colors.white,
   height: 52,

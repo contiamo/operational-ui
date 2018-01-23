@@ -7,7 +7,6 @@ var Container = glamorous_1.default.header(function (_a) {
     return ({
         label: "header",
         display: "flex",
-        flex: "0 0 52px",
         justifyContent: "space-between",
         backgroundColor: theme.colors.white,
         height: 52,
