@@ -6,6 +6,12 @@ const arcStyle = {
   strokeWidth: "1",
   opacity: 0.8,
   fill: "#eee",
+  "&.zoomable": {
+    cursor: "zoom-in"
+  },
+  "&.zoomed": {
+    cursor: "zoom-out"
+  },
   "&.parent": {
     fill: "#fff"
   }

@@ -110,11 +110,14 @@ class Renderer {
     arcs
       .enter()
       .append("svg:path")
-      .attr("class", (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""}`)
+      .attr(
+        "class",
+        (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
+      )
       .style("fill", (d: IObject) => this.color(d.data))
       .style("stroke", "#fff")
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
-      .on("click", (d: IObject) => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d }))
+      .on("click", (d: IObject) => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
       .merge(arcs)
       .transition()
       .duration(duration)
@@ -122,24 +125,32 @@ class Renderer {
   }
 
   onClick(payload?: IObject): void {
-    if (!payload) {
-      this.zoomNode = this.topNode
-    } else {
-      this.zoomNode = payload.d
-    }
-
-    if (!this.zoomNode.children) {
+    const zoomNode: TDatum = !payload ? this.topNode : payload.d
+    if (!zoomNode.children) {
       return
     }
 
+    if (zoomNode === this.zoomNode && payload && payload.force) {
+      this.zoomOut(payload)
+      return
+    }
+
+    this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
 
     this.el
       .selectAll("path")
+      .attr("pointer-events", "none")
       .style("fill", (datum: TDatum): string => (datum === this.zoomNode ? "#fff" : this.color(datum.data)))
       .style("stroke", (datum: TDatum): string => (datum === this.zoomNode ? this.color(datum.data) : "#fff"))
+      .classed("zoomed", (datum: TDatum): boolean => datum === this.zoomNode)
       .transition()
       .duration(this.state.current.get("config").duration)
+      .each(
+        withD3Element((datum: TDatum, el: Element): void => {
+          d3.select(el).attr("pointer-events", null)
+        })
+      )
       .tween("scale", () => {
         const angleDomain = d3Interpolate(this.angleScale.domain(), [this.zoomNode.x0, this.zoomNode.x1]),
           radiusDomain = d3Interpolate(this.radiusScale.domain(), [this.zoomNode.y0, 1]),
@@ -152,6 +163,10 @@ class Renderer {
       .attrTween("d", (datum: TDatum): any => {
         return () => this.arc(datum)
       })
+  }
+
+  zoomOut(payload: IObject): void {
+    this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d: payload.d.parent })
   }
 
   onMouseOver(d: TDatum, el: Element): void {
@@ -251,8 +266,12 @@ class Renderer {
 
     this.data = d3Partition()(hierarchyData)
       .descendants()
-      .filter((d: TDatum) => d.parent) // && d.x1 - d.x0 > 0.005)
+      .filter((d: TDatum): boolean => d.parent)
       .reverse()
+
+    forEach((d: TDatum): void => {
+      d.zoomable = !!d.children
+    })(this.data)
 
     this.stateWriter("data", this.data)
   }
