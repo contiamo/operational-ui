@@ -5,8 +5,8 @@ import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
-import { isEmpty, uniqueId } from "lodash/fp"
-import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum, TFocusElement } from "./typings"
+import { every, find, isEmpty, uniqueId } from "lodash/fp"
+import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum } from "./typings"
 
 class Facade {
   __disposed: boolean = false
@@ -123,10 +123,16 @@ class Facade {
     this.canvas.draw()
     this.components.renderer.draw()
 
-    const focusElement: TFocusElement = this.state.config().focusElement
-    !isEmpty(focusElement)
-      ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
-      : this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    const data: TDatum[] = this.state.readOnly().current.get("computed").renderer.data
+    const zoomNode: TDatum = find((d: TDatum): boolean => {
+      return every.convert({ cap: false })((value: any, key: string): boolean => {
+        return d[key] || d.data[key] === value
+      })(this.state.config().zoomNode)
+    })(data)
+
+    !isEmpty(zoomNode)
+      ? this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d: zoomNode })
+      : this.events.emit(Events.FOCUS.ELEMENT.CLICK)
 
     return this.canvas.elementFor("series").node()
   }

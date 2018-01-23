@@ -109,7 +109,7 @@ class Breadcrumb {
   }
 
   onClick(d: TDatum): void {
-    this.events.emit(Events.BREADCRUMB.CLICK, d)
+    this.events.emit(Events.BREADCRUMB.CLICK, { d })
   }
 }
 

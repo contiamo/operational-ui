@@ -34,6 +34,7 @@ class Renderer {
   radius: number
   state: IState
   stateWriter: TStateWriter
+  topNode: TDatum
   total: number
   value: (d: TDatum) => number
   zoomNode: TDatum
@@ -46,6 +47,7 @@ class Renderer {
     this.assignAccessors()
 
     this.events.on(Events.BREADCRUMB.CLICK, this.onClick.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.CLICK, this.onClick.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
@@ -120,29 +122,35 @@ class Renderer {
       .style("fill", (d: IObject) => this.color(d.data))
       .style("stroke", "#fff")
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
-      .on("click", this.onClick.bind(this))
+      .on("click", (d: IObject) => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d }))
       .merge(arcs)
       .transition()
       .duration(duration)
       .attrTween("d", this.arcTween.bind(this))
   }
 
-  onClick(d: TDatum): void {
-    if (!d.children) {
+  onClick(payload?: IObject): void {
+    if (!payload) {
+      this.zoomNode = this.topNode
+    } else {
+      this.zoomNode = payload.d
+    }
+
+    if (!this.zoomNode.children) {
       return
     }
-    this.zoomNode = d
+
     this.stateWriter("zoomNode", this.zoomNode)
 
     this.el
       .selectAll("path")
-      .style("fill", (datum: TDatum): string => (datum === d ? "#fff" : this.color(datum.data)))
-      .style("stroke", (datum: TDatum): string => (datum === d ? this.color(datum.data) : "#fff"))
+      .style("fill", (datum: TDatum): string => (datum === this.zoomNode ? "#fff" : this.color(datum.data)))
+      .style("stroke", (datum: TDatum): string => (datum === this.zoomNode ? this.color(datum.data) : "#fff"))
       .transition()
       .duration(this.state.current.get("config").duration)
       .tween("scale", () => {
-        const angleDomain = d3Interpolate(this.angleScale.domain(), [d.x0, d.x1]),
-          radiusDomain = d3Interpolate(this.radiusScale.domain(), [d.y0, 1]),
+        const angleDomain = d3Interpolate(this.angleScale.domain(), [this.zoomNode.x0, this.zoomNode.x1]),
+          radiusDomain = d3Interpolate(this.radiusScale.domain(), [this.zoomNode.y0, 1]),
           radiusRange = d3Interpolate(this.radiusScale.range(), [0, this.radius])
         return (t: number): void => {
           this.angleScale.domain(angleDomain(t))
@@ -152,8 +160,6 @@ class Renderer {
       .attrTween("d", (datum: TDatum): any => {
         return () => this.arc(datum)
       })
-
-    this.events.emit(Events.FOCUS.ELEMENT.CLICK)
   }
 
   onMouseOver(d: TDatum, el: Element): void {
@@ -245,17 +251,18 @@ class Renderer {
 
     this.total = hierarchyData.value
 
-    this.stateWriter(
-      "topNode",
-      d3Partition()(hierarchyData)
-        .descendants()
-        .find((d: TDatum) => d.depth === 0)
-    )
+    this.topNode = d3Partition()(hierarchyData)
+      .descendants()
+      .find((d: TDatum) => d.depth === 0)
+
+    this.stateWriter("topNode", this.topNode)
 
     this.data = d3Partition()(hierarchyData)
       .descendants()
-      .filter((d: TDatum) => d.parent && d.x1 - d.x0 > 0.005)
+      .filter((d: TDatum) => d.parent) // && d.x1 - d.x0 > 0.005)
       .reverse()
+
+    this.stateWriter("data", this.data)
   }
 
   assignColors(node: any): void {

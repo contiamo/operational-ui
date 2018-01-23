@@ -14,11 +14,8 @@ import {
 
 export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
 
-export type TFocusElement = string
-
 export interface IConfig {
   duration: number
-  focusElement?: TFocusElement
   height: number
   hidden: boolean
   maxWidth: number
@@ -32,6 +29,7 @@ export interface IConfig {
   uid: string
   visualizationName: string
   width: number
+  zoomNode?: IObject
 }
 
 export type TDatum = IObject
