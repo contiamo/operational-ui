@@ -28,19 +28,11 @@ class Breadcrumb {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
-    this.el = el.append("svg:svg")
-    this.initialize()
+    this.el = el
+    this.el.insert("svg:svg", ":first-child")
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.updateHoverPath.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateHoverPath.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this))
-  }
-
-  initialize(): void {
-    // Add the svg area.
-    this.el
-      .append("svg:text")
-      .attr("class", "endlabel")
-      .style("fill", "#000")
   }
 
   updateHoverPath(payload?: IObject): void {
@@ -68,7 +60,10 @@ class Breadcrumb {
 
   update(nodeArray: any[], percentage: string): void {
     // Data join; key function combines name and depth (= position in sequence).
-    let trail = this.el.selectAll("g").data(nodeArray, d => d.data.name + d.depth)
+    let trail = this.el
+      .select("svg")
+      .selectAll("g")
+      .data(nodeArray, d => d.data.name + d.depth)
 
     // Remove exiting nodes.
     trail.exit().remove()
@@ -95,21 +90,16 @@ class Breadcrumb {
       return `translate(${i * (dims.width + dims.space)}, 0)`
     })
 
-    // Now move and update the percentage at the end.
+    // Update the explanation.
     this.el
-      .select(".endlabel")
-      .attr("x", (nodeArray.length + 0.5) * (dims.width + dims.space))
-      .attr("y", dims.height / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
+      .select(`.${styles.explanation}`)
+      .style("visibility", () => (percentage.length > 0 ? "visible" : "hidden"))
+      .select(".percentage")
       .text(percentage)
-
-    // Make the breadcrumb trail visible, if it's hidden.
-    d3.select("svg.sequence").style("visibility", "")
   }
 
   onClick(d: TDatum): void {
-    this.events.emit(Events.BREADCRUMB.CLICK, { d })
+    this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d })
   }
 }
 

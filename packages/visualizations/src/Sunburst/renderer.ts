@@ -46,7 +46,6 @@ class Renderer {
     this.el = el
     this.assignAccessors()
 
-    this.events.on(Events.BREADCRUMB.CLICK, this.onClick.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.onClick.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
@@ -73,13 +72,6 @@ class Renderer {
   initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
-    this.el
-      .append("svg:g")
-      .attr("class", styles.total)
-      .append("div")
-      .attr("class", "explanation")
-      .append("span")
-      .attr("class", "percentage")
 
     if (this.hasData()) {
       this.updateDraw()

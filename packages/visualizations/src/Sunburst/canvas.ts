@@ -39,6 +39,12 @@ class Canvas {
     const el: TD3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.breadcrumb)
+
+    el
+      .append("div")
+      .attr("class", localStyles.explanation)
+      .html("<span class='percentage'></span> of paths begin like this")
+
     this.container.node().appendChild(el.node())
     this.elMap.breadcrumb = el
     return el
@@ -109,22 +115,11 @@ class Canvas {
     return
   }
 
-  breadcrumbHeight(): number {
-    const nodeStyle: IObject = window.getComputedStyle(this.breadcrumb.node())
-    return (
-      parseInt(nodeStyle.height, 10) +
-      parseInt(nodeStyle.marginTop, 10) +
-      parseInt(nodeStyle.marginBottom, 10) +
-      parseInt(nodeStyle.paddingTop, 10) +
-      parseInt(nodeStyle.paddingBottom, 10)
-    )
-  }
-
   drawingDims(): IObject {
     const config: IObject = this.state.current.get("config")
     const dims: IObject = {
       width: config.width,
-      height: config.height - this.breadcrumbHeight()
+      height: config.height - this.breadcrumb.node().getBoundingClientRect().height
     }
     this.stateWriter("drawingDims", dims)
     return dims

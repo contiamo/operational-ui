@@ -24,12 +24,10 @@ const totalStyle = {
 
 const breadcrumbStyle = {
   width: "100%",
-  height: "30px",
-  paddingTop: "10px",
-  marginBottom: "10px",
+  padding: "10px 5px 0 5px",
   "& svg": {
     width: "100%",
-    height: "100%"
+    height: "21px"
   },
   "& polygon": {
     opacity: "0.5",
@@ -40,7 +38,15 @@ const breadcrumbStyle = {
   }
 }
 
+const explanationStyle = {
+  padding: "10px 0",
+  "& span.percentage": {
+    fontWeight: "bold"
+  }
+}
+
 export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
 export const breadcrumb = css(breadcrumbStyle).toString()
+export const explanation = css(explanationStyle).toString()
