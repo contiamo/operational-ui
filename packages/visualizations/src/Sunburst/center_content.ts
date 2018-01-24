@@ -23,7 +23,7 @@ class CenterContent {
     const fixedNode: any = renderer.zoomNode || renderer.topNode
 
     this.el.select("span.name").text(fixedNode.data.name)
-    this.el.select("span.value").text(fixedNode.value)
+    this.el.select("span.value").text(config.numberFormatter(fixedNode.value))
     this.el.style("width", `${renderer.innerRadius * 1.5}px`)
 
     const elDims: any = this.el.node().getBoundingClientRect()

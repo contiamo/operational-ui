@@ -22,7 +22,7 @@ class Focus extends AbstractFocus {
       .attr("class", "title")
       .text(dataName(datum))
 
-    content.append("span").text(`(${dataValue(datum)})`)
+    content.append("span").text(`(${this.state.current.get("config").numberFormatter(dataValue(datum))})`)
 
     const computed: IObject = this.state.current.get("computed")
     const comparisonNode: TDatum = computed.renderer.zoomNode || computed.renderer.topNode

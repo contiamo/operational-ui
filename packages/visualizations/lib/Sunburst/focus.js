@@ -27,7 +27,7 @@ var Focus = /** @class */ (function (_super) {
             .append("span")
             .attr("class", "title")
             .text(dataName(datum));
-        content.append("span").text("(" + dataValue(datum) + ")");
+        content.append("span").text("(" + this.state.current.get("config").numberFormatter(dataValue(datum)) + ")");
         var computed = this.state.current.get("computed");
         var comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode;
         var percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3);
