@@ -279,10 +279,10 @@ const data = {
 
 const viz: Sunburst = new Sunburst(containerNode)
 viz.data(data)
-viz.config({
-  zoomNode: {
-    name: "North America"
-  }
-})
+// viz.config({
+//   zoomNode: {
+//     name: "North America"
+//   }
+// })
 viz.accessors("series", accessors)
 viz.draw()

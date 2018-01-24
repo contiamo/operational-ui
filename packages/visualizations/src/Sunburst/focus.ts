@@ -24,9 +24,10 @@ class Focus extends AbstractFocus {
 
     content.append("span").text(`(${dataValue(datum)})`)
 
-    const zoomNode: TDatum = this.state.current.get("computed").renderer.zoomNode
-    const percentage: string = (dataValue(datum) * 100 / dataValue(zoomNode)).toPrecision(3)
-    content.append("xhtml:li").text(`${percentage}% of ${dataName(zoomNode)}`)
+    const computed: IObject = this.state.current.get("computed")
+    const comparisonNode: TDatum = computed.renderer.zoomNode || computed.renderer.topNode
+    const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
+    content.append("xhtml:li").text(`${percentage}% of ${dataName(comparisonNode)}`)
 
     // Get label dimensions
     const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
