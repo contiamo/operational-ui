@@ -23,16 +23,13 @@ class CenterContent {
     const fixedNode: any = renderer.zoomNode || renderer.topNode
 
     this.el.select("span.name").text(fixedNode.data.name)
-
     this.el.select("span.value").text(fixedNode.value)
-
-    this.el.style("width", renderer.innerRadius * 1.5)
+    this.el.style("width", `${renderer.innerRadius * 1.5}px`)
 
     const elDims: any = this.el.node().getBoundingClientRect()
-
-    this.el
-      .style("top", config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2)
-      .style("left", drawingDims.width / 2 - renderer.innerRadius * 0.75)
+    const top: number = config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2
+    const left: number = drawingDims.width / 2 - renderer.innerRadius * 0.75
+    this.el.style("top", `${top}px`).style("left", `${left}px`)
   }
 }
 

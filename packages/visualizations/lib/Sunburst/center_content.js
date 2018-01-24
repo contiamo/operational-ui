@@ -17,11 +17,13 @@ var CenterContent = /** @class */ (function () {
         var fixedNode = renderer.zoomNode || renderer.topNode;
         this.el.select("span.name").text(fixedNode.data.name);
         this.el.select("span.value").text(fixedNode.value);
-        this.el.style("width", renderer.innerRadius * 1.5);
+        this.el.style("width", renderer.innerRadius * 1.5 + "px");
         var elDims = this.el.node().getBoundingClientRect();
+        var top = config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2;
+        var left = drawingDims.width / 2 - renderer.innerRadius * 0.75;
         this.el
-            .style("top", config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2)
-            .style("left", drawingDims.width / 2 - renderer.innerRadius * 0.75);
+            .style("top", top + "px")
+            .style("left", left + "px");
     };
     return CenterContent;
 }());
