@@ -58,6 +58,7 @@ var componentFocusStyle = {
 var chartContainerStyle = {
     position: "relative",
     display: "block",
+    backgroundColor: "#fff",
     "&.hidden": {
         display: "none"
     }
@@ -80,8 +81,11 @@ var focusLegendStyle = {
         margin: 0,
         padding: 0
     },
-    "& li.title": {
+    "& li.title, span.title": {
         fontWeight: "bold"
+    },
+    "& span.title": {
+        paddingRight: "6px"
     }
 };
 exports.chartContainer = glamor_1.css(chartContainerStyle).toString();
