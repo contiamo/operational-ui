@@ -124,25 +124,36 @@ class Renderer {
       .attrTween("d", this.arcTween.bind(this))
   }
 
-  onClick(payload?: IObject): void {
-    const zoomNode: TDatum = !payload ? this.topNode : payload.d
+  onClick(payload: IObject): void {
+    const zoomNode: TDatum = payload.d || this.topNode
+    // Don't allow zooming on last child
     if (!zoomNode.children) {
       return
     }
 
+    // If the center node is clicked, zoom out
     if (zoomNode === this.zoomNode && payload && payload.force) {
       this.zoomOut(payload)
       return
     }
 
+    // Set new scale domains
+    const angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]),
+      radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, 1])
+
+    // Save new inner radius to facilitate sizing and positioning of center content
+    const innerRadius: number = this.radiusScale.domain([zoomNode.y0, 1])(zoomNode.y1)
+    this.stateWriter("innerRadius", innerRadius)
+
+    // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
+    // (occurs when no zoom config is passed in from the outside)
+    // no need to do anything.
+    if (!this.zoomNode && !payload.d) {
+      return
+    }
+
     this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
-
-    const angleDomain = d3Interpolate(this.angleScale.domain(), [this.zoomNode.x0, this.zoomNode.x1]),
-      radiusDomain = d3Interpolate(this.radiusScale.domain(), [this.zoomNode.y0, 1])
-
-    const innerRadius: number = this.radiusScale.domain([this.zoomNode.y0, 1])(this.zoomNode.y1)
-    this.stateWriter("innerRadius", innerRadius)
 
     this.el
       .selectAll("path")

@@ -125,19 +125,23 @@ class Facade {
     this.events.removeListener(event, handler)
   }
 
+  private findNode = (matchers: IObject): TDatum => {
+    return find((d: TDatum): boolean => {
+      return every.convert({ cap: false })((value: any, key: string): boolean => {
+        return d[key] || d.data[key] === value
+      })(matchers)
+    })(this.state.readOnly().current.get("computed").renderer.data)
+  }
+
   draw(): Element {
     this.state.captureState()
     this.canvas.draw()
     this.components.renderer.draw()
 
-    const data: TDatum[] = this.state.readOnly().current.get("computed").renderer.data
-    const zoomNode: TDatum = find((d: TDatum): boolean => {
-      return every.convert({ cap: false })((value: any, key: string): boolean => {
-        return d[key] || d.data[key] === value
-      })(this.state.config().zoomNode)
-    })(data)
+    const zoomMatchers: IObject = this.state.config().zoomNode
+    const zoomNode: TDatum = zoomMatchers ? this.findNode(zoomMatchers) : undefined
 
-    !isEmpty(zoomNode)
+    zoomNode
       ? this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d: zoomNode })
       : this.events.emit(Events.FOCUS.ELEMENT.CLICK)
 

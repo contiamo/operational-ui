@@ -15,7 +15,7 @@ class CenterContent {
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.update.bind(this))
   }
 
-  update(payload?: IObject): void {
+  update(payload: IObject): void {
     const computed: IObject = this.state.current.get("computed")
     const config: IObject = this.state.current.get("config")
     const renderer: IObject = computed.renderer

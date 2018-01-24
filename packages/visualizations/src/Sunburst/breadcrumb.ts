@@ -35,11 +35,11 @@ class Breadcrumb {
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this))
   }
 
-  updateHoverPath(payload?: IObject): void {
+  updateHoverPath(payload: IObject): void {
     const computed: IObject = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
 
-    const nodeArray: any[] = !isEmpty(payload) ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
+    const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
 
     const percentageString =
       nodeArray.length > 1 ? (last(nodeArray).value * 100 / computed.topNode.value).toPrecision(3) + "%" : ""
