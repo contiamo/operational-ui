@@ -21,9 +21,7 @@ var CenterContent = /** @class */ (function () {
         var elDims = this.el.node().getBoundingClientRect();
         var top = config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2;
         var left = drawingDims.width / 2 - renderer.innerRadius * 0.75;
-        this.el
-            .style("top", top + "px")
-            .style("left", left + "px");
+        this.el.style("top", top + "px").style("left", left + "px");
     };
     return CenterContent;
 }());

@@ -249,7 +249,8 @@ class Renderer {
   // // Compute
   compute(): void {
     const drawingDims: IConfig = this.state.current.get("computed").canvas.drawingDims
-    this.radius = Math.min(drawingDims.width, drawingDims.height) / 2
+    this.radius =
+      Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin
 
     this.angleScale = d3ScaleLinear().range([0, 2 * Math.PI])
     this.radiusScale = d3ScaleLinear().range([0, this.radius])
