@@ -39,6 +39,8 @@ module.exports = {
     "/visualizations/pie-chart/polar_testcases": { page: "/visualizations/pie-chart/polar_testcases", query: { title: "Test Cases" } },
     "/visualizations/process-flow": { page: "/visualizations/process-flow", query: { title: "Process Flow" } },
     "/visualizations/process-flow/testcases": { page: "/visualizations/process-flow/testcases", query: { title: "Test Cases" } },
+    "/visualizations/sunburst": { page: "/visualizations/sunburst", query: { title: "Sunburst" } },
+    "/visualizations/sunburst/testcases": { page: "/visualizations/sunburst/testcases", query: { title: "Test Cases" } },
     "/docs": { page: "/docs", query: { title: "Documentation" } },
     "/docs/design-guidelines": { page: "/docs/design-guidelines", query: { title: "Design Guidelines" } },
     "/docs/api-design": { page: "/docs/api-design", query: { title: "API Design" } },

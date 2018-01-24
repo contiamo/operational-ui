@@ -18,14 +18,8 @@ export interface IConfig {
   duration: number
   height: number
   hidden: boolean
-  maxWidth: number
-  maxTotalFontSize: number
-  minWidth: number
-  minInnerRadius: number
-  minTotalFontSize: number
   numberFormatter: (x: number) => string
   outerBorderMargin: number
-  showComponentFocus: boolean
   uid: string
   visualizationName: string
   width: number
