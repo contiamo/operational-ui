@@ -138,6 +138,12 @@ class Renderer {
     this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
 
+    const angleDomain = d3Interpolate(this.angleScale.domain(), [this.zoomNode.x0, this.zoomNode.x1]),
+      radiusDomain = d3Interpolate(this.radiusScale.domain(), [this.zoomNode.y0, 1])
+
+    const innerRadius: number = this.radiusScale.domain([this.zoomNode.y0, 1])(this.zoomNode.y1)
+    this.stateWriter("innerRadius", innerRadius)
+
     this.el
       .selectAll("path")
       .attr("pointer-events", "none")
@@ -152,12 +158,9 @@ class Renderer {
         })
       )
       .tween("scale", () => {
-        const angleDomain = d3Interpolate(this.angleScale.domain(), [this.zoomNode.x0, this.zoomNode.x1]),
-          radiusDomain = d3Interpolate(this.radiusScale.domain(), [this.zoomNode.y0, 1]),
-          radiusRange = d3Interpolate(this.radiusScale.range(), [0, this.radius])
         return (t: number): void => {
           this.angleScale.domain(angleDomain(t))
-          this.radiusScale.domain(radiusDomain(t)).range(radiusRange(t))
+          this.radiusScale.domain(radiusDomain(t))
         }
       })
       .attrTween("d", (datum: TDatum): any => {

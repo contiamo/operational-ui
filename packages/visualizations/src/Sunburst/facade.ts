@@ -1,6 +1,7 @@
 import Canvas from "./canvas"
 import Renderer from "./renderer"
 import Breadcrumb from "./breadcrumb"
+import CenterContent from "./center_content"
 import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
@@ -94,6 +95,12 @@ class Facade {
         this.state.computedWriter(["renderer"]),
         this.events,
         this.canvas.elementFor("series")
+      ),
+      centerContent: new CenterContent(
+        this.state.readOnly(),
+        this.state.computedWriter(["centerContent"]),
+        this.events,
+        this.canvas.elementFor("centerContent")
       )
     }
   }
