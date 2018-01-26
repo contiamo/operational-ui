@@ -6,44 +6,24 @@ import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
 
 const simpleSnippet = `
-(() => {
-  const CustomSpan = ({ children }) => (
-    <span style={{ fontSize: 12, marginRight: 8, opacity: 0.6 }}>{children}</span>
-  )
-
-  return (
-    <Timeline>
-      <TimelineItem color="success">
-        <h3>Service visit - issue resolved</h3>
-        <p>
-          <CustomSpan>1 week ago</CustomSpan>
-          <CustomSpan>Details</CustomSpan>
-        </p>
-      </TimelineItem>
-      <TimelineItem color="error">
-        <h3>Network issues</h3>
-        <p>
-          <CustomSpan>2 days ago</CustomSpan>
-          <CustomSpan>Details</CustomSpan>
-        </p>
-      </TimelineItem>
-      <TimelineItem>
-        <h3>Contract extended</h3>
-        <p>
-          <CustomSpan>5 days ago</CustomSpan>
-          <CustomSpan>Details</CustomSpan>
-        </p>
-      </TimelineItem>
-      <TimelineItem color="warning">
-        <h3>Contract expires in 1 month</h3>
-        <p>
-          <CustomSpan>2 weeks ago</CustomSpan>
-          <CustomSpan>Details</CustomSpan>
-        </p>
-      </TimelineItem>
-    </Timeline>
-  )
-})()
+<Timeline>
+  <TimelineItem color="success">
+    <h3>Service visit - issue resolved</h3>
+    <p>1 week ago</p>
+  </TimelineItem>
+  <TimelineItem color="error">
+    <h3>Network issues</h3>
+    <p>2 days ago</p>
+  </TimelineItem>
+  <TimelineItem>
+    <h3>Contract extended</h3>
+    <p>5 days ago</p>
+  </TimelineItem>
+  <TimelineItem color="warning">
+    <h3>Contract expires in 1 month</h3>
+    <p>2 weeks ago</p>
+  </TimelineItem>
+</Timeline>
 `
 
 const propDescription = {

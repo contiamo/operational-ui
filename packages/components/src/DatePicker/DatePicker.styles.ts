@@ -6,7 +6,7 @@ import * as mixins from "../utils/mixins"
 
 const inputHeight: number = 31
 
-const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div(
+export const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div(
   ({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
     label: "datepicker",
     display: "inline-block",
@@ -25,23 +25,32 @@ const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div
   })
 )
 
-const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+export const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
-  bottom: 0,
+  top: 1,
   cursor: "pointer",
-  right: 0,
-  width: inputHeight,
-  height: inputHeight,
+  right: 1,
+  borderTopRightRadius: 2,
+  borderBottomRightRadius: 2,
+  width: inputHeight - 2,
+  height: inputHeight - 2,
   fontSize: 10,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  zIndex: theme.baseZIndex + 1,
+  zIndex: theme.baseZIndex + 1000,
   color: theme.colors.gray80,
-  borderLeft: `1px solid ${theme.colors.gray40}`
+  borderLeft: `1px solid ${theme.colors.gray40}`,
+  "& svg": {
+    position: "relative",
+    pointerEvents: "none"
+  },
+  ":hover": {
+    backgroundColor: theme.colors.gray10
+  }
 }))
 
-const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginBottom: theme.spacing / 2,
   textAlign: "center",
   "& > *": {
@@ -57,7 +66,7 @@ const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: 
   }
 }))
 
-const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
+export const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
   backgroundColor: "#FFFFFF",
   padding: 4,
   height: "auto",
@@ -65,13 +74,13 @@ const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div
   cursor: "pointer"
 })
 
-const Days: GlamorousComponent<{}, {}> = glamorous.div({
+export const Days: GlamorousComponent<{}, {}> = glamorous.div({
   textAlign: "center",
   width: 210,
   margin: "auto -1px"
 })
 
-const Day: GlamorousComponent<
+export const Day: GlamorousComponent<
   { selected?: boolean; isPlaceholder?: boolean } & React.HTMLProps<{}>,
   {}
 > = glamorous.div(
@@ -94,39 +103,41 @@ const Day: GlamorousComponent<
   })
 )
 
-const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.body,
-  userSelect: "none",
-  borderRadius: 2,
-  padding: theme.spacing * 2 / 3,
-  height: inputHeight,
-  cursor: "pointer",
-  border: "1px solid",
-  borderColor: theme.colors.gray30,
-  width: 200,
-  position: "relative",
-  "&:focus": mixins.inputFocus({ theme })
-}))
+export const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.body,
+    userSelect: "none",
+    borderRadius: 2,
+    padding: theme.spacing * 2 / 3,
+    height: inputHeight,
+    cursor: "pointer",
+    border: "1px solid",
+    borderColor: theme.colors.gray30,
+    width: 200,
+    position: "relative",
+    "&:focus": mixins.inputFocus({ theme })
+  })
+)
 
-const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  width: inputHeight,
-  height: inputHeight,
-  cursor: "pointer",
-  position: "absolute",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  bottom: 0,
-  right: -inputHeight + 1,
-  opacity: 0.3,
-  textAlign: "center",
-  zIndex: theme.baseZIndex + 100,
-  "&:hover": {
-    opacity: 1,
-    "& svg": {
-      stroke: theme.colors.warning
+export const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    width: inputHeight,
+    height: inputHeight,
+    cursor: "pointer",
+    position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    bottom: 0,
+    right: -inputHeight + 1,
+    opacity: 0.3,
+    textAlign: "center",
+    zIndex: theme.baseZIndex + 100,
+    "&:hover": {
+      opacity: 1,
+      "& svg": {
+        stroke: theme.colors.warning
+      }
     }
-  }
-}))
-
-export { Container, Toggle, MonthNav, IconContainer, Days, Day, Input, ClearButton }
+  })
+)

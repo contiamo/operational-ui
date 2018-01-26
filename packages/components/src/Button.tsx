@@ -26,7 +26,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
-  const defaultColor: string = theme.colors.info
+  const defaultColor: string = theme.colors.white
   const backgroundColor: string = color
     ? (hexOrColor(color)(theme.colors[color] || defaultColor) as string)
     : defaultColor
@@ -42,7 +42,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
     borderRadius: 2,
     border: "1px solid",
     borderColor:
-      ["white", "#FFF", "#fff"].indexOf(backgroundColor) > -1
+      ["white", "#FFF", "#fff", "#FFFFFF", "#ffffff"].indexOf(backgroundColor) > -1
         ? theme.colors.gray30
         : active ? activeBackgroundColor : backgroundColor,
     cursor: disabled ? "auto" : "pointer",

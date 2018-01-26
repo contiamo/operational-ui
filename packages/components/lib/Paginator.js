@@ -75,16 +75,17 @@ var createPagesFragment = function (_a) {
     var isCloseToEnd = remainingPages < adjustedMaxVisible;
     var start = (isCloseToEnd ? pageCount - adjustedMaxVisible : skip + 1) || 1;
     var end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip;
-    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(Button_1.default, { condensed: true, key: pageNumber, onClick: function () {
+    var buttonCss = { ":focus": { outline: "0", boxShadow: "none" } };
+    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: pageNumber, onClick: function () {
             onChange(pageNumber);
         }, color: pageNumber === page && activeColor }, pageNumber)); });
     var renderUpperSeparator = function () {
         return remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
             ? [
-                React.createElement(Button_1.default, { condensed: true, key: "upper", onClick: function () {
+                React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: "upper", onClick: function () {
                         onChange(page + maxVisible);
                     } }, "..."),
-                React.createElement(Button_1.default, { condensed: true, key: pageCount, onClick: function () {
+                React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: pageCount, onClick: function () {
                         onChange(pageCount);
                     } }, pageCount)
             ]
@@ -105,7 +106,7 @@ var Container = glamorous_1.default.div({
         userSelect: "none"
     }
 });
-var Paginator = function (_a) {
+exports.default = function (_a) {
     var _b = _a.activeColor, activeColor = _b === void 0 ? "info" : _b, _c = _a.maxVisible, maxVisible = _c === void 0 ? 3 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d, pageCount = _a.pageCount, _e = _a.page, page = _e === void 0 ? 1 : _e, id = _a.id, css = _a.css, className = _a.className;
     var controlProps = { pageCount: pageCount, page: page, onChange: onChange };
     return (React.createElement(Container, { key: id, css: css, className: className },
@@ -120,5 +121,4 @@ var Paginator = function (_a) {
             React.createElement(PaginatorControl, __assign({ type: "last" }, controlProps),
                 React.createElement(Icon.ChevronsRight, { size: "11" })))));
 };
-exports.default = Paginator;
 //# sourceMappingURL=Paginator.js.map

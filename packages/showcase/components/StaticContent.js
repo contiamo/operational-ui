@@ -16,19 +16,20 @@ const Container = glamorous.div(({ theme }) => ({
     color: "#888"
   },
   "& p, & li": {
-    ...theme.typography.body
+    ...theme.typography.body,
+    lineHeight: 1.8
   },
   "& ul": {
     paddingLeft: theme.spacing * 1.25
   },
   "& code": {
-    backgroundColor: lighten(theme.colors.sidenavBackground)(62),
+    backgroundColor: "#eee",
     padding: "2px 4px",
     borderRadius: 2
   },
   "& pre": {
-    backgroundColor: lighten(theme.colors.sidenavBackground)(5),
-    color: theme.colors.white,
+    backgroundColor: "#eee",
+    color: theme.colors.black,
     borderRadius: 2,
     padding: theme.spacing,
     maxWidth: 680

@@ -2,30 +2,26 @@ import * as React from "react"
 import { SketchPicker, RGBColor } from "react-color"
 import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
+import Button from "./Button"
 
 export interface IProps {
   id?: string | number
-  css?: any
+  css?: {}
   className?: string
   color?: string
   size?: number
   onChange?: (color: string) => any
 }
 
-export interface IPosition {
-  top?: number
-  left?: number
-}
-
 export interface IState {
   isPickerOpen: boolean
-  position: IPosition
 }
 
-const hasTheme = (theme: any): boolean => theme && Object.keys(theme).length > 0
-
 const Container = glamorous.div({
-  label: "colorpicker"
+  label: "colorpicker",
+  display: "inline-block",
+  width: "fit-content",
+  position: "relative"
 })
 
 const ColorSquare = glamorous.div(
@@ -34,47 +30,29 @@ const ColorSquare = glamorous.div(
     borderRadius: 2,
     cursor: "pointer"
   },
-  ({ color, size, theme }: { color: string; size: number; theme?: Theme }) =>
-    // Need to check this because the tests run without a ThemeProvider
-    // Otherwise, tests could not access the state of ColorPicker.
-    hasTheme(theme)
-      ? {
-          width: size,
-          height: size,
-          boxShadow: `0 0 0 1px ${theme.colors.gray30}`,
-          backgroundColor: color
-        }
-      : {}
+  ({ color, size, theme }: { color: string; size: number; theme?: Theme }) => ({
+    width: size,
+    height: size,
+    boxShadow: `0 0 0 1px ${theme.colors.gray30}`,
+    backgroundColor: color
+  })
 )
 
-const PickerContainer = glamorous.div(
-  {
-    position: "fixed"
-  },
-  ({ top, left, theme }: { top: number; left: number; theme?: Theme }) =>
-    // Need to check this because the tests run without a ThemeProvider
-    // Otherwise, tests could not access the state of ColorPicker.
-    hasTheme(theme)
-      ? {
-          top: top + 8,
-          left: left + 8,
-          zIndex: theme.baseZIndex + 100
-        }
-      : {}
-)
+const PickerContainer = glamorous.div({ position: "absolute" }, ({ theme }: { theme?: Theme }) => ({
+  top: theme.spacing * 3.5,
+  left: "50%",
+  transform: "translate3d(-50%, 0, 0)",
+  zIndex: theme.baseZIndex + 100
+}))
 
-class ColorPicker extends React.Component<IProps, IState> {
+export default class ColorPicker extends React.Component<IProps, IState> {
   static defaultProps = {
     color: "#03f",
     size: 16
   }
 
   state = {
-    isPickerOpen: false,
-    position: {
-      top: 0,
-      left: 0
-    }
+    isPickerOpen: false
   }
 
   containerEl: HTMLDivElement | null = null
@@ -103,7 +81,6 @@ class ColorPicker extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.setState(() => ({ position: this.containerEl.getBoundingClientRect() }))
     window.addEventListener("click", this.handleClickOutside, true)
     window.addEventListener("keyup", this.handleEsc, true)
   }
@@ -139,13 +116,9 @@ class ColorPicker extends React.Component<IProps, IState> {
         }}
         onClick={() => this.togglePicker()}
       >
-        <ColorSquare size={size} color={color} />
+        <Button color={color}>{color}</Button>
         {this.state.isPickerOpen && (
-          <PickerContainer
-            top={this.state.position.top}
-            left={this.state.position.left}
-            onClick={(e: React.SyntheticEvent<HTMLDivElement>) => e.stopPropagation()}
-          >
+          <PickerContainer onClick={(e: React.SyntheticEvent<HTMLDivElement>) => e.stopPropagation()}>
             <SketchPicker color={this.props.color} onChangeComplete={color => this.onColorChange(color)} />
           </PickerContainer>
         )}
@@ -153,5 +126,3 @@ class ColorPicker extends React.Component<IProps, IState> {
     )
   }
 }
-
-export default ColorPicker

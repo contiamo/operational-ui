@@ -13,8 +13,6 @@ Inspect and customize the theme object:
 ```js
 import { operationalTheme } from "@operational/theme"
 
-console.log(operationalTheme)
-
 const ownTheme = {
   ...operationalTheme,
   colors: {
@@ -28,12 +26,12 @@ Use this theme with e.g. `@operational/components`, like so:
 
 ```js
 import React from "react"
-import { Button, ThemeProvider } from "@operational/components"
+import { OperationalUI, Button, ThemeProvider } from "@operational/components"
 
 const App = () => {
-  <ThemeProvider theme={ownTheme}>
+  <OperationalUI, ThemeProvider theme={ownTheme}>
     <Button color="success">So much success</Button>
-  </ThemeProvider>
+  </OperationalUI, ThemeProvider>
 }
 ```
 

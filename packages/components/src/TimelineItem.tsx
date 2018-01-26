@@ -4,32 +4,13 @@ import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { hexOrColor } from "@operational/utils"
 import { Theme, ThemeColorName } from "@operational/theme"
 
-export type CustomColor = ThemeColorName | string
-
 export interface IProps {
   id?: string | number
   css?: {}
   className?: string
   children?: React.ReactNode
-  color?: CustomColor
-  icon?: string
+  color?: string
 }
-
-export interface IPropsWithTheme extends IProps {
-  theme: Theme
-}
-
-const Line = glamorous.div(
-  {
-    position: "absolute",
-    left: 5,
-    top: 6,
-    height: "100%"
-  },
-  ({ theme }: { theme: Theme }) => ({
-    borderLeft: `1px solid ${theme.colors.gray30}`
-  })
-)
 
 const StatusContainer = glamorous.div(
   {
@@ -40,9 +21,11 @@ const StatusContainer = glamorous.div(
     top: 6,
     width: 11
   },
-  ({ theme, color }: { theme: Theme; color: CustomColor }) => ({
-    backgroundColor: `${color}`
-  })
+  ({ theme, color }: { theme: Theme; color?: string }) => {
+    return {
+      backgroundColor: hexOrColor(color)(theme.colors[color] || theme.colors.info)
+    }
+  }
 )
 
 const Content = glamorous.div(
@@ -62,37 +45,36 @@ const Content = glamorous.div(
   })
 )
 
-const Container = glamorous.li({
-  label: "timelineitem",
-  listStyle: "none",
-  margin: 0,
-  padding: "0 0 24px",
-  position: "relative",
-  "&:last-child > :first-child": {
-    display: "none"
-  }
-})
+const Container = glamorous.li(
+  {
+    label: "timelineitem",
+    listStyle: "none",
+    margin: 0,
+    position: "relative",
+    "&::before": {
+      content: "' '",
+      position: "absolute",
+      left: 5,
+      top: 6,
+      height: "100%"
+    },
+    "&:last-child::before": {
+      display: "none"
+    }
+  },
+  ({ theme }: { theme: Theme }): {} => ({
+    paddingBottom: theme.spacing,
+    "&::before": {
+      borderLeft: `1px solid ${theme.colors.separator}`
+    }
+  })
+)
 
-const TimelineItem: React.SFC<IPropsWithTheme> = ({
-  css,
-  id,
-  className,
-  children,
-  color = "info",
-  icon = "",
-  theme
-}: IPropsWithTheme) => {
-  const statusColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
-
+export default ({ css, id, className, children, color = "info" }: IProps) => {
   return (
     <Container key={id} css={css} className={className}>
-      <Line />
-      <StatusContainer color={statusColor} />
+      <StatusContainer color={color} />
       <Content>{children}</Content>
     </Container>
   )
 }
-
-const WrappedTimelineItem: React.SFC<IProps> = withTheme(TimelineItem)
-
-export default WrappedTimelineItem

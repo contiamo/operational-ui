@@ -3,31 +3,22 @@ import * as React from "react";
 import { RGBColor } from "react-color";
 export interface IProps {
     id?: string | number;
-    css?: any;
+    css?: {};
     className?: string;
     color?: string;
     size?: number;
     onChange?: (color: string) => any;
 }
-export interface IPosition {
-    top?: number;
-    left?: number;
-}
 export interface IState {
     isPickerOpen: boolean;
-    position: IPosition;
 }
-declare class ColorPicker extends React.Component<IProps, IState> {
+export default class ColorPicker extends React.Component<IProps, IState> {
     static defaultProps: {
         color: string;
         size: number;
     };
     state: {
         isPickerOpen: boolean;
-        position: {
-            top: number;
-            left: number;
-        };
     };
     containerEl: HTMLDivElement | null;
     handleClickOutside: (e: MouseEvent) => void;
@@ -42,4 +33,3 @@ declare class ColorPicker extends React.Component<IProps, IState> {
     }): void;
     render(): JSX.Element;
 }
-export default ColorPicker;

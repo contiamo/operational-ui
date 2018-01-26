@@ -31,7 +31,11 @@ const Container = glamorous.div(
     }
   },
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
-    color: isActive ? theme.colors.linkText : theme.colors.white
+    color: isActive ? theme.colors.linkText : theme.colors.white,
+    "& > div:first-child::after": {
+      // Connector strip circle color
+      backgroundColor: isActive ? theme.colors.linkText : null
+    }
   })
 )
 
