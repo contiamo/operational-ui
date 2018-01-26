@@ -112,7 +112,7 @@ class DatePicker extends React.Component<IProps, IState> {
             }))
           }}
         >
-          <Icon name={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} size={12} />
+          <Icon name={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} size={14} />
         </Toggle>
         {!!(start && end) && (
           <ClearButton
@@ -125,7 +125,7 @@ class DatePicker extends React.Component<IProps, IState> {
                 })
             }}
           >
-            <Icon name="X" size={12} />
+            <Icon name="X" size={14} />
           </ClearButton>
         )}
         <Input
@@ -161,7 +161,6 @@ class DatePicker extends React.Component<IProps, IState> {
               <Icon name="ChevronRight" size={14} />
             </IconContainer>
           </MonthNav>
-
           <Month
             start={this.props.start}
             end={this.props.end}

@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
 var mixins = require("../utils/mixins");
 var inputHeight = 31;
-var Container = glamorous_1.default.div(function (_a) {
+exports.Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
         label: "datepicker",
@@ -30,27 +30,34 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     });
 });
-exports.Container = Container;
-var Toggle = glamorous_1.default.div(function (_a) {
+exports.Toggle = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "absolute",
-        bottom: 0,
+        top: 1,
         cursor: "pointer",
-        right: 0,
-        width: inputHeight,
-        height: inputHeight,
+        right: 1,
+        borderTopRightRadius: 2,
+        borderBottomRightRadius: 2,
+        width: inputHeight - 2,
+        height: inputHeight - 2,
         fontSize: 10,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: theme.baseZIndex + 1,
+        zIndex: theme.baseZIndex + 1000,
         color: theme.colors.gray80,
-        borderLeft: "1px solid " + theme.colors.gray40
+        borderLeft: "1px solid " + theme.colors.gray40,
+        "& svg": {
+            position: "relative",
+            pointerEvents: "none"
+        },
+        ":hover": {
+            backgroundColor: theme.colors.gray10
+        }
     });
 });
-exports.Toggle = Toggle;
-var MonthNav = glamorous_1.default.div(function (_a) {
+exports.MonthNav = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         marginBottom: theme.spacing / 2,
@@ -63,22 +70,19 @@ var MonthNav = glamorous_1.default.div(function (_a) {
         "& > span": __assign({}, theme.typography.body, { userSelect: "none", width: 100, textAlign: "center" })
     });
 });
-exports.MonthNav = MonthNav;
-var IconContainer = glamorous_1.default.div({
+exports.IconContainer = glamorous_1.default.div({
     backgroundColor: "#FFFFFF",
     padding: 4,
     height: "auto",
     width: "fit-content",
     cursor: "pointer"
 });
-exports.IconContainer = IconContainer;
-var Days = glamorous_1.default.div({
+exports.Days = glamorous_1.default.div({
     textAlign: "center",
     width: 210,
     margin: "auto -1px"
 });
-exports.Days = Days;
-var Day = glamorous_1.default.div({
+exports.Day = glamorous_1.default.div({
     userSelect: "none",
     width: 30,
     height: 30,
@@ -93,13 +97,11 @@ var Day = glamorous_1.default.div({
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
     return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.success : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray80 : theme.colors.black }));
 });
-exports.Day = Day;
-var Input = glamorous_1.default.input(function (_a) {
+exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.gray30, width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }));
 });
-exports.Input = Input;
-var ClearButton = glamorous_1.default.div(function (_a) {
+exports.ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         width: inputHeight,
@@ -122,5 +124,4 @@ var ClearButton = glamorous_1.default.div(function (_a) {
         }
     });
 });
-exports.ClearButton = ClearButton;
 //# sourceMappingURL=DatePicker.styles.js.map

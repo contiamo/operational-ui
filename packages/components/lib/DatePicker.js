@@ -84,7 +84,7 @@ var DatePicker = /** @class */ (function (_super) {
                         isExpanded: !prevState.isExpanded
                     }); });
                 } },
-                React.createElement(Icon_1.default, { name: this.state.isExpanded ? "ChevronUp" : "ChevronDown", size: 12 })),
+                React.createElement(Icon_1.default, { name: this.state.isExpanded ? "ChevronUp" : "ChevronDown", size: 14 })),
             !!(start && end) && (React.createElement(DatePicker_styles_1.ClearButton, { onClick: function (ev) {
                     ev.preventDefault();
                     _this.props.onChange &&
@@ -93,7 +93,7 @@ var DatePicker = /** @class */ (function (_super) {
                             end: undefined
                         });
                 } },
-                React.createElement(Icon_1.default, { name: "X", size: 12 }))),
+                React.createElement(Icon_1.default, { name: "X", size: 14 }))),
             React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
                     _this.inputNode = node;
                 }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: this.props.placeholder || "Enter date", onClick: function (ev) {

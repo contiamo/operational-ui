@@ -1,6 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Card, Icon } from "@operational/components"
+import Link from "next/link"
+import { Card, Icon, Button } from "@operational/components"
 import { fetchFromRepo } from "../utils"
 
 import Layout from "../components/Layout"
@@ -13,7 +14,7 @@ const TitleBar = glamorous.div(({ theme }) => ({
   padding: `${theme.spacing * 1}px 0`,
   color: "#000",
   position: "relative",
-  height: 400,
+  height: 360,
   display: "flex",
   overflow: "hidden",
   alignItems: "center",
@@ -24,7 +25,7 @@ const TitleBar = glamorous.div(({ theme }) => ({
     fontWeight: 400,
     fontSize: "2.5rem",
     textAlign: "center",
-    margin: "10px 0 10px 0"
+    margin: "10px 0 0 0"
   },
   "& h2": {
     ...theme.typography.body,
@@ -43,6 +44,10 @@ const TitleBarContent = glamorous.div({
     margin: "auto"
   }
 })
+
+const TitleBarNav = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  marginTop: 20
+}))
 
 const BodyContent = glamorous.div({
   padding: "32px 16px",
@@ -83,6 +88,16 @@ export default class Intro extends React.Component {
               <Operational size={80} rotation={this.state.rotation} />
               <h1>Operational UI</h1>
               <h2>Building blocks for effective operational interfaces</h2>
+              <TitleBarNav>
+                <Link href="#getting-started">
+                  <a>
+                    <Button color="info">Get started</Button>
+                  </a>
+                </Link>
+                <a href="https://github.com/Contiamo/operational-ui">
+                  <Button color="black">GitHub</Button>
+                </a>
+              </TitleBarNav>
             </TitleBarContent>
             <Demo />
           </TitleBar>

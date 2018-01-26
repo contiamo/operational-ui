@@ -21,7 +21,11 @@ var Container = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme, isActive = _a.isActive;
     return ({
-        color: isActive ? theme.colors.linkText : theme.colors.white
+        color: isActive ? theme.colors.linkText : theme.colors.white,
+        "& > div:first-child::after": {
+            // Connector strip circle color
+            backgroundColor: isActive ? theme.colors.linkText : null
+        }
     });
 });
 var ConnectorStrip = glamorous_1.default.div(function (_a) {
