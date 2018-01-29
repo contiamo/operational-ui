@@ -72,6 +72,7 @@ class Renderer {
   initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
+    this.el.append("circle").attr("class", styles.centerCircle)
 
     if (this.hasData()) {
       this.updateDraw()
@@ -83,6 +84,12 @@ class Renderer {
   updateDraw(): void {
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+
+    const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
+    this.el
+      .select(`circle.${styles.centerCircle}`)
+      .attr("cx", drawingDims.width / 2)
+      .attr("cy", drawingDims.height / 2)
 
     // Arcs
     const arcs: TD3Selection = this.el
@@ -138,12 +145,18 @@ class Renderer {
     }
 
     // Set new scale domains
-    const angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]),
+    const config: IObject = this.state.current.get("config"),
+      angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]),
       radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, 1])
 
     // Save new inner radius to facilitate sizing and positioning of center content
     const innerRadius: number = this.radiusScale.domain([zoomNode.y0, 1])(zoomNode.y1)
     this.stateWriter("innerRadius", innerRadius)
+    this.el
+      .select(`circle.${styles.centerCircle}`)
+      .transition()
+      .duration(config.duration)
+      .attr("r", innerRadius * config.centerCircleRadius)
 
     // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
     // (occurs when no zoom config is passed in from the outside)
@@ -158,11 +171,9 @@ class Renderer {
     this.el
       .selectAll("path")
       .attr("pointer-events", "none")
-      .style("fill", (datum: TDatum): string => (datum === this.zoomNode ? "#fff" : this.color(datum.data)))
-      .style("stroke", (datum: TDatum): string => (datum === this.zoomNode ? this.color(datum.data) : "#fff"))
       .classed("zoomed", (datum: TDatum): boolean => datum === this.zoomNode)
       .transition()
-      .duration(this.state.current.get("config").duration)
+      .duration(config.duration)
       .each(
         withD3Element((datum: TDatum, el: Element): void => {
           d3.select(el).attr("pointer-events", null)

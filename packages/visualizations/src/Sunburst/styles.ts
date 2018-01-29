@@ -51,6 +51,11 @@ const explanationStyle = {
   }
 }
 
+const centerCircleStyle = {
+  fill: "#fff",
+  pointerEvents: "none"
+}
+
 const centerContentStyle = {
   position: "absolute",
   textAlign: "center",
@@ -70,4 +75,5 @@ export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
 export const breadcrumb = css(breadcrumbStyle).toString()
 export const explanation = css(explanationStyle).toString()
+export const centerCircle = css(centerCircleStyle).toString()
 export const centerContent = css(centerContentStyle).toString()

@@ -36,6 +36,7 @@ class Facade {
 
   initialConfig(): IConfig {
     return {
+      centerCircleRadius: 0.9,
       duration: 1e3,
       height: 500,
       hidden: false,

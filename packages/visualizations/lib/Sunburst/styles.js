@@ -47,6 +47,10 @@ var explanationStyle = {
         fontWeight: "bold"
     }
 };
+var centerCircleStyle = {
+    fill: "#fff",
+    pointerEvents: "none"
+};
 var centerContentStyle = {
     position: "absolute",
     textAlign: "center",
@@ -61,5 +65,6 @@ exports.label = glamor_1.css(labelStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
 exports.breadcrumb = glamor_1.css(breadcrumbStyle).toString();
 exports.explanation = glamor_1.css(explanationStyle).toString();
+exports.centerCircle = glamor_1.css(centerCircleStyle).toString();
 exports.centerContent = glamor_1.css(centerContentStyle).toString();
 //# sourceMappingURL=styles.js.map

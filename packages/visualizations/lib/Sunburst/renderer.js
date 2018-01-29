@@ -48,6 +48,7 @@ var Renderer = /** @class */ (function () {
     Renderer.prototype.initialDraw = function () {
         // groups
         this.el.append("svg:g").attr("class", "arcs");
+        this.el.append("circle").attr("class", styles.centerCircle);
         if (this.hasData()) {
             this.updateDraw();
         }
@@ -57,6 +58,11 @@ var Renderer = /** @class */ (function () {
         var _this = this;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
+        this.el
+            .select("circle." + styles.centerCircle)
+            .attr("cx", drawingDims.width / 2)
+            .attr("cy", drawingDims.height / 2);
         // Arcs
         var arcs = this.el
             .select("g.arcs")
@@ -104,10 +110,15 @@ var Renderer = /** @class */ (function () {
             return;
         }
         // Set new scale domains
-        var angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]), radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, 1]);
+        var config = this.state.current.get("config"), angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]), radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, 1]);
         // Save new inner radius to facilitate sizing and positioning of center content
         var innerRadius = this.radiusScale.domain([zoomNode.y0, 1])(zoomNode.y1);
         this.stateWriter("innerRadius", innerRadius);
+        this.el
+            .select("circle." + styles.centerCircle)
+            .transition()
+            .duration(config.duration)
+            .attr("r", innerRadius * config.centerCircleRadius);
         // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
         // (occurs when no zoom config is passed in from the outside)
         // no need to do anything.
@@ -119,11 +130,9 @@ var Renderer = /** @class */ (function () {
         this.el
             .selectAll("path")
             .attr("pointer-events", "none")
-            .style("fill", function (datum) { return (datum === _this.zoomNode ? "#fff" : _this.color(datum.data)); })
-            .style("stroke", function (datum) { return (datum === _this.zoomNode ? _this.color(datum.data) : "#fff"); })
             .classed("zoomed", function (datum) { return datum === _this.zoomNode; })
             .transition()
-            .duration(this.state.current.get("config").duration)
+            .duration(config.duration)
             .each(d3_utils_1.withD3Element(function (datum, el) {
             d3.select(el).attr("pointer-events", null);
         }))
