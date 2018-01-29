@@ -60,6 +60,7 @@ const PageContent = glamorous.div(({ theme }) => ({
     ...theme.typography.heading2
   },
   "& p": {
+    ...theme.typography.body,
     maxWidth: 670
   }
 }))

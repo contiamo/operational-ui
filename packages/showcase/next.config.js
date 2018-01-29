@@ -1,6 +1,7 @@
 module.exports = {
   exportPathMap: () => ({
     "/": { page: "/", query: { title: "Operational UI" } },
+    "/getting-started": { page: "/getting-started", query: { title: "Getting Started" } },
     "/components": { page: "/components", query: { title: "Components" } },
     "/components/breadcrumbs": { page: "/components/breadcrumbs", query: { title: "Breadcrumbs" } },
     "/components/breakdowns": { page: "/components/breakdowns", query: { title: "Breakdowns" } },

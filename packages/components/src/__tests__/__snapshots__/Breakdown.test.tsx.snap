@@ -2,10 +2,10 @@
 
 exports[`Breakdown Component Should initialize properly 1`] = `
 <div
-  class="css-r883e6"
+  class="css-1pdrqyu"
 >
   <div
-    class="css-1d2v9pr"
+    class="css-15io537"
   >
     3
   </div>
@@ -18,7 +18,7 @@ exports[`Breakdown Component Should initialize properly 1`] = `
       hi
     </label>
     <div
-      class="css-397fxs"
+      class="css-wr231p"
     >
       <span />
     </div>

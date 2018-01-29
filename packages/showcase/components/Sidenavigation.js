@@ -54,20 +54,17 @@ export default ({ pathname, pathmap }) => {
             label: pathmap[url].query.title
           }))
         const routeMatch = pathname && url && pathname.slice(0, url.length) === url
-        const Logo = (() => {
-          if (url === "/components") {
-            return icons.Components
-          }
+        const logoElement = (() => {
           if (url === "/blocks") {
-            return icons.Blocks
+            return <Icon name="Blocks" size={28} />
           }
           if (url === "/visualizations") {
-            return icons.Visualizations
+            return <Icon name="Visualizations" size={28} />
           }
           if (url === "/documentation") {
-            return icons.Documentation
+            return <Icon name="Documentation" size={28} />
           }
-          return icons.Components
+          return <Icon name="Components" size={28} />
         })()
         const el = (
           <SidenavHeader
@@ -75,7 +72,7 @@ export default ({ pathname, pathmap }) => {
             expanded={routeMatch}
             key={index}
             active={pathname === url}
-            icon={<Logo size={28} />}
+            icon={logoElement}
             label={label}
           >
             {routeMatch

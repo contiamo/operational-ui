@@ -5,7 +5,7 @@ exports[`Input Should initialize 1`] = `
   class="css-w0yocm hi"
 >
   <input
-    class="css-1qr9e2z"
+    class="css-1lf9nz7"
     name="bienvenue"
     placeholder="hello"
     value="How are you?"

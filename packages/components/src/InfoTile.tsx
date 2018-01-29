@@ -4,9 +4,6 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { hexOrColor, readableTextColor, darken } from "@operational/utils"
 
-import Icon from "./Icon"
-import { ReactFeatherIconName } from "./ReactFeather"
-
 export interface IProps {
   id?: string | number
   css?: any
