@@ -5,15 +5,14 @@ declare class Renderer {
     arc: any;
     children: (d: TDatum) => TDatum[];
     color: (d: TDatum) => string;
-    computed: IObject;
     currentTranslation: [number, number];
-    data: any;
+    data: TDatum[];
     drawn: boolean;
     el: TD3Selection;
     events: IEvents;
     mouseOverDatum: TDatum;
     name: (d: TDatum) => string;
-    previous: IObject;
+    previous: TDatum[];
     radiusScale: any;
     radius: number;
     state: IState;
@@ -41,6 +40,9 @@ declare class Renderer {
     hoverOuter(radius: number): number;
     computeTranslate(): [number, number];
     translateBack(point: [number, number]): [number, number];
+    isSibling(d1: TDatum, d2: TDatum): boolean;
+    isEqual(d1: TDatum, d2: TDatum): boolean;
+    findAncestor(data: TDatum[], d: TDatum): TDatum;
     arcTween(d: TDatum): (t: number) => string;
     removeArcTween(d: TDatum, i: number): (t: number) => string;
     labelTranslate(d: TDatum): string;

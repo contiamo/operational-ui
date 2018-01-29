@@ -1,6 +1,21 @@
 import Events from "../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
-import { defaults, find, filter, forEach, isEmpty, isFunction, keys, map, merge, reduce, values } from "lodash/fp"
+import {
+  defaults,
+  every,
+  find,
+  filter,
+  forEach,
+  findIndex,
+  identity,
+  isEmpty,
+  isFunction,
+  keys,
+  map,
+  merge,
+  reduce,
+  values
+} from "lodash/fp"
 import * as d3 from "d3-selection"
 import { interpolate as d3Interpolate } from "d3-interpolate"
 import "d3-transition"
@@ -21,15 +36,14 @@ class Renderer {
   arc: any
   children: (d: TDatum) => TDatum[]
   color: (d: TDatum) => string
-  computed: IObject = {}
   currentTranslation: [number, number]
-  data: any
+  data: TDatum[]
   drawn: boolean = false
   el: TD3Selection
   events: IEvents
   mouseOverDatum: TDatum
   name: (d: TDatum) => string
-  previous: IObject
+  previous: TDatum[]
   radiusScale: any
   radius: number
   state: IState
@@ -106,7 +120,6 @@ class Renderer {
   exit(arcs: TD3Selection, duration: number): void {
     arcs
       .exit()
-      .select(`path.${styles.arc}`)
       .transition()
       .duration(duration)
       .attrTween("d", this.removeArcTween.bind(this))
@@ -215,8 +228,8 @@ class Renderer {
 
     this.el.select("div.explanation").style("visibility", "")
 
-    let sequenceArray = d.ancestors().reverse()
-    sequenceArray.shift() // remove root node from the array
+    let sequenceArray = d.ancestors()
+    sequenceArray.pop() // remove root node from the array
 
     // Fade all the segments (leave inner circle as is).
     this.el
@@ -271,9 +284,8 @@ class Renderer {
       .innerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y0)))
       .outerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y1)))
 
+    this.previous = this.data
     this.prepareData()
-    this.previous = this.computed
-    this.computed = this.data
   }
 
   prepareData(): void {
@@ -324,30 +336,67 @@ class Renderer {
     return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
   }
 
-  arcTween(d: TDatum): (t: number) => string {
-    const previousData: IObject[] = this.previous.data || [],
-      old: TDatum = find((datum: IObject): boolean => datum.index === d.index)(previousData),
-      previous: TDatum = find((datum: IObject): boolean => datum.index === d.index - 1)(previousData),
-      last: TDatum = previousData[previousData.length - 1]
+  isSibling(d1: TDatum, d2: TDatum): boolean {
+    return every(identity)([d1.depth === d2.depth, this.name(d1.parent.data) === this.name(d2.parent.data)])
+  }
 
-    let s0: number
-    let e0: number
+  isEqual(d1: TDatum, d2: TDatum): boolean {
+    if (!d1 || !d2) {
+      return false
+    }
+    if (!d1.parent && !d2.parent) {
+      return true
+    }
+    if (!d1.parent || !d2.parent) {
+      return false
+    }
+    return every(identity)([this.name(d1.data) === this.name(d2.data), this.isSibling(d1, d2)])
+  }
+
+  findAncestor(data: TDatum[], d: TDatum): TDatum {
+    if (!d) {
+      return
+    }
+    const parent: TDatum = find((datum: TDatum): boolean => this.isEqual(datum, d.parent))(data)
+    return parent || this.findAncestor(data, d.parent)
+  }
+
+  arcTween(d: TDatum): (t: number) => string {
+    const previousData: TDatum[] = this.previous || [],
+      // old version of same datum
+      old: TDatum = find((datum: TDatum): boolean => this.isEqual(datum, d))(previousData),
+      // old version of parent node
+      oldParent: TDatum = this.findAncestor(previousData.concat([this.topNode]), d)
+
+    let x0: number
+    let x1: number
+    let y0: number
+    let y1: number
     if (old) {
-      s0 = old.x0
-      e0 = old.x1
-    } else if (!old && previous) {
-      s0 = previous.x1
-      e0 = previous.x1
-    } else if (!previous && previousData.length > 0) {
-      s0 = last.x1
-      e0 = last.x1
-    } else {
-      s0 = 0
-      e0 = 0
+      x0 = old.x0
+      x1 = old.x1
+      y0 = old.y0
+      y1 = old.y1
+    } else if (!old && oldParent) {
+      //find siblings - same parent, same depth
+      const siblings: TDatum[] = filter((datum: TDatum): boolean => this.isSibling(datum, d))(this.data)
+      const siblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(siblings)
+      const oldPrecedingSibling: TDatum = find((datum: TDatum): boolean =>
+        this.isEqual(datum, siblings[siblingIndex + 1])
+      )(previousData)
+
+      x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0
+      x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0
+      y0 = d.y0
+      y1 = d.y1
+    } else if (!old && !oldParent) {
+      x0 = 0
+      x1 = 0
+      y0 = d.y0
+      y1 = d.y1
     }
 
-    const f = interpolateObject({ x0: s0, x1: e0, y0: 0, y1: 0 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 })
-
+    const f = interpolateObject({ x0, x1, y0, y1 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 })
     return (t: number): string => this.arc(f(t))
   }
 
@@ -357,12 +406,11 @@ class Renderer {
     s0 = e0 = 2 * Math.PI
 
     const f = interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: s0, x1: e0, y0: 0, y1: 0 })
-
     return (t: number): string => this.arc(f(t))
   }
 
   labelTranslate(d: TDatum): string {
-    return this.translateString(this.computed.arc.centroid(d))
+    return this.translateString(this.arc.centroid(d))
   }
 
   translateString(values: [number, number]): string {

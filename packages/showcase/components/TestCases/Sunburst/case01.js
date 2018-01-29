@@ -18,115 +18,110 @@ const data = {
       {
         name: "Europe",
         color: "0f0",
-        // "value": 52000,
+        value: 50000
+      },
+      {
+        name: "Asia",
+        color: "0ff",
+        value: 38400
+      },
+      {
+        name: "North America",
+        color: "f00",
+        value: 36780
+      }
+    ]
+  }
+}
+
+const data1 = {
+  name: "Pageviews",
+  data: {
+    name: "All",
+    children: [
+      {
+        name: "Europe",
+        color: "0f0",
+        value: 50000
+      },
+      {
+        name: "Asia",
+        color: "0ff",
+        value: 38400
+      },
+      {
+        name: "North America",
+        color: "f00",
+        value: 36780
+      },
+      {
+        name: "Africa",
+        color: "00f",
+        value: 25200
+      }
+    ]
+  }
+}
+
+const data2 = {
+  name: "Pageviews",
+  data: {
+    name: "All",
+    children: [
+      {
+        name: "Europe",
+        color: "0f0",
+        value: 50000
+      },
+      {
+        name: "Asia",
+        color: "0ff",
+        value: 38400
+      },
+      {
+        name: "Australia",
+        color: "#ff0",
+        value: 18000
+      },
+      {
+        name: "North America",
+        color: "f00",
+        value: 36780
+      },
+      {
+        name: "Africa",
+        color: "00f",
+        value: 25200
+      }
+    ]
+  }
+}
+
+const data3 = {
+  name: "Pageviews",
+  data: {
+    name: "All",
+    children: [
+      {
+        name: "Europe",
+        color: "0f0",
+        value: 50000,
         children: [
           {
             name: "UK",
-            value: 11500,
-            children: [
-              {
-                name: "London",
-                value: 1500,
-                children: [
-                  {
-                    name: "Southwark",
-                    value: 123
-                  },
-                  {
-                    name: "Lambeth",
-                    value: 523
-                  },
-                  {
-                    name: "Marylebone",
-                    value: 623
-                  }
-                ]
-              },
-              {
-                name: "Sheffield",
-                value: 1642
-              },
-              {
-                name: "Exeter",
-                value: 935
-              },
-              {
-                name: "Manchester",
-                value: 2076
-              },
-              {
-                name: "Leeds",
-                value: 2970
-              }
-            ]
+            value: 11500
           },
           {
             name: "Germany",
-            value: 9240,
-            children: [
-              {
-                name: "Berlin",
-                value: 1650,
-                children: [
-                  {
-                    name: "Kreuzberg",
-                    value: 693
-                  },
-                  {
-                    name: "Prenzlauer Berg",
-                    value: 402
-                  },
-                  {
-                    name: "Mitte",
-                    value: 573
-                  }
-                ]
-              },
-              {
-                name: "Dortmund",
-                value: 1756
-              },
-              {
-                name: "Köln",
-                value: 1902
-              },
-              {
-                name: "München",
-                value: 2340
-              }
-            ]
+            value: 9240
           },
           {
             name: "Spain",
-            value: 2345,
-            children: [
-              {
-                name: "Madrid",
-                value: 1025
-              },
-              {
-                name: "Barcelona",
-                value: 522
-              }
-            ]
+            value: 12345
           },
           {
             name: "Italy",
-            value: 830,
-            children: [
-              {
-                name: "Rome",
-                value: 307
-              },
-              {
-                name: "Venice",
-                value: 132
-              },
-              {
-                name: "Naples",
-                value: 196
-              }
-            ]
+            value: 1830
           }
         ]
       },
@@ -137,35 +132,11 @@ const data = {
         children: [
           {
             name: "Japan",
-            value: 8230,
-            children: [
-              {
-                name: "Tokyo",
-                value: 2353
-              },
-              {
-                name: "Osaka",
-                value: 1864
-              }
-            ]
+            value: 8230
           },
           {
             name: "China",
-            value: 13000,
-            children: [
-              {
-                name: "Beijing",
-                value: 3852
-              },
-              {
-                name: "Shanghai",
-                value: 3623
-              },
-              {
-                name: "Chengdu",
-                value: 2546
-              }
-            ]
+            value: 13000
           },
           {
             name: "Thailand",
@@ -173,23 +144,92 @@ const data = {
           },
           {
             name: "India",
-            value: 1800,
-            children: [
-              {
-                name: "Mumbai",
-                value: 987
-              },
-              {
-                name: "Delhi",
-                value: 632
-              }
-            ]
+            value: 1800
           },
           {
             name: "Malaysia",
             value: 1423
           }
         ]
+      },
+      {
+        name: "Australia",
+        color: "#ff0",
+        value: 18000
+      },
+      {
+        name: "North America",
+        color: "f00",
+        value: 36780
+      },
+      {
+        name: "Africa",
+        color: "00f",
+        value: 25200
+      }
+    ]
+  }
+}
+
+const data4 = {
+  name: "Pageviews",
+  data: {
+    name: "All",
+    children: [
+      {
+        name: "Europe",
+        color: "0f0",
+        value: 50000,
+        children: [
+          {
+            name: "UK",
+            value: 11500
+          },
+          {
+            name: "Germany",
+            value: 9240
+          },
+          {
+            name: "Spain",
+            value: 12345
+          },
+          {
+            name: "Italy",
+            value: 1830
+          }
+        ]
+      },
+      {
+        name: "Asia",
+        color: "0ff",
+        value: 38400,
+        children: [
+          {
+            name: "Japan",
+            value: 8230
+          },
+          {
+            name: "China",
+            value: 13000
+          },
+          {
+            name: "Thailand",
+            value: 2548
+          },
+          {
+            name: "India",
+            value: 1800
+          },
+          {
+            name: "Malaysia",
+            value: 1423
+          }
+        ]
+      },
+      {
+        name: "Australia",
+        color: "#ff0",
+        value: 18000
       },
       {
         name: "North America",
@@ -245,27 +285,8 @@ const data = {
       },
       {
         name: "Africa",
-        value: 4130,
-        children: [
-          {
-            name: "South Africa",
-            value: 1300,
-            children: [
-              {
-                name: "Capetown",
-                value: 1254
-              }
-            ]
-          },
-          {
-            name: "Zimbabwe",
-            value: 636
-          },
-          {
-            name: "Tanzania",
-            value: 132
-          }
-        ]
+        color: "00f",
+        value: 25200
       }
     ]
   }
@@ -277,6 +298,31 @@ export const marathon = ({ test, afterAll, container }) => {
   test("Renders a sunburst chart", () => {
     viz.data(data)
     viz.accessors("series", accessors)
+    viz.draw()
+  })
+
+  test("Adds segment to end of ring", () => {
+    viz.data(data1)
+    viz.draw()
+  })
+
+  test("Inserts a segment into middle of ring", () => {
+    viz.data(data2)
+    viz.draw()
+  })
+
+  test("Adds a 2nd level", () => {
+    viz.data(data3)
+    viz.draw()
+  })
+
+  test("Adds multiple child levels to segment at once", () => {
+    viz.data(data4)
+    viz.draw()
+  })
+
+  test("Removes data", () => {
+    viz.data(data3)
     viz.draw()
   })
 }

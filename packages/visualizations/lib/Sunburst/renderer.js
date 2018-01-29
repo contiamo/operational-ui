@@ -17,7 +17,6 @@ var d3_utils_1 = require("../utils/d3_utils");
 // }
 var Renderer = /** @class */ (function () {
     function Renderer(state, stateWriter, events, el) {
-        this.computed = {};
         this.drawn = false;
         this.state = state;
         this.stateWriter = stateWriter;
@@ -76,7 +75,6 @@ var Renderer = /** @class */ (function () {
     Renderer.prototype.exit = function (arcs, duration) {
         arcs
             .exit()
-            .select("path." + styles.arc)
             .transition()
             .duration(duration)
             .attrTween("d", this.removeArcTween.bind(this))
@@ -167,8 +165,8 @@ var Renderer = /** @class */ (function () {
         }
         this.el.select("span.percentage").text(percentageString);
         this.el.select("div.explanation").style("visibility", "");
-        var sequenceArray = d.ancestors().reverse();
-        sequenceArray.shift(); // remove root node from the array
+        var sequenceArray = d.ancestors();
+        sequenceArray.pop(); // remove root node from the array
         // Fade all the segments (leave inner circle as is).
         this.el
             .selectAll("path." + styles.arc)
@@ -214,9 +212,8 @@ var Renderer = /** @class */ (function () {
             .endAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, _this.angleScale(d.x1))); })
             .innerRadius(function (d) { return Math.max(0, _this.radiusScale(d.y0)); })
             .outerRadius(function (d) { return Math.max(0, _this.radiusScale(d.y1)); });
+        this.previous = this.data;
         this.prepareData();
-        this.previous = this.computed;
-        this.computed = this.data;
     };
     Renderer.prototype.prepareData = function () {
         var hierarchyData = d3_hierarchy_1.hierarchy(this.state.current.get("data").data)
@@ -255,28 +252,65 @@ var Renderer = /** @class */ (function () {
         var currentTranslation = this.currentTranslation;
         return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]];
     };
+    Renderer.prototype.isSibling = function (d1, d2) {
+        return fp_1.every(fp_1.identity)([d1.depth === d2.depth, this.name(d1.parent.data) === this.name(d2.parent.data)]);
+    };
+    Renderer.prototype.isEqual = function (d1, d2) {
+        if (!d1 || !d2) {
+            return false;
+        }
+        if (!d1.parent && !d2.parent) {
+            return true;
+        }
+        if (!d1.parent || !d2.parent) {
+            return false;
+        }
+        return fp_1.every(fp_1.identity)([this.name(d1.data) === this.name(d2.data), this.isSibling(d1, d2)]);
+    };
+    Renderer.prototype.findAncestor = function (data, d) {
+        var _this = this;
+        if (!d) {
+            return;
+        }
+        var parent = fp_1.find(function (datum) { return _this.isEqual(datum, d.parent); })(data);
+        return parent || this.findAncestor(data, d.parent);
+    };
     Renderer.prototype.arcTween = function (d) {
         var _this = this;
-        var previousData = this.previous.data || [], old = fp_1.find(function (datum) { return datum.index === d.index; })(previousData), previous = fp_1.find(function (datum) { return datum.index === d.index - 1; })(previousData), last = previousData[previousData.length - 1];
-        var s0;
-        var e0;
+        var previousData = this.previous || [], 
+        // old version of same datum
+        old = fp_1.find(function (datum) { return _this.isEqual(datum, d); })(previousData), 
+        // old version of parent node
+        oldParent = this.findAncestor(previousData.concat([this.topNode]), d);
+        var x0;
+        var x1;
+        var y0;
+        var y1;
         if (old) {
-            s0 = old.x0;
-            e0 = old.x1;
+            x0 = old.x0;
+            x1 = old.x1;
+            y0 = old.y0;
+            y1 = old.y1;
         }
-        else if (!old && previous) {
-            s0 = previous.x1;
-            e0 = previous.x1;
+        else if (!old && oldParent) {
+            //find siblings - same parent, same depth
+            var siblings_1 = fp_1.filter(function (datum) { return _this.isSibling(datum, d); })(this.data);
+            var siblingIndex_1 = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(siblings_1);
+            var oldPrecedingSibling = fp_1.find(function (datum) {
+                return _this.isEqual(datum, siblings_1[siblingIndex_1 + 1]);
+            })(previousData);
+            x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
+            x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
+            y0 = d.y0;
+            y1 = d.y1;
         }
-        else if (!previous && previousData.length > 0) {
-            s0 = last.x1;
-            e0 = last.x1;
+        else if (!old && !oldParent) {
+            x0 = 0;
+            x1 = 0;
+            y0 = d.y0;
+            y1 = d.y1;
         }
-        else {
-            s0 = 0;
-            e0 = 0;
-        }
-        var f = d3_interpolate_2.interpolateObject({ x0: s0, x1: e0, y0: 0, y1: 0 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 });
+        var f = d3_interpolate_2.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 });
         return function (t) { return _this.arc(f(t)); };
     };
     Renderer.prototype.removeArcTween = function (d, i) {
@@ -288,7 +322,7 @@ var Renderer = /** @class */ (function () {
         return function (t) { return _this.arc(f(t)); };
     };
     Renderer.prototype.labelTranslate = function (d) {
-        return this.translateString(this.computed.arc.centroid(d));
+        return this.translateString(this.arc.centroid(d));
     };
     Renderer.prototype.translateString = function (values) {
         return "translate(" + values.join(", ") + ")";
