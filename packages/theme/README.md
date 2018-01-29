@@ -1,22 +1,23 @@
 # Operational UI Theme
 
-The `@operational/theme` package is basically a structured plain JavaScript object that other `@operational` packages consume to customize their styling.
+The `@operational/theme` package defines a set of styling constants in the form of a plain JavaScript object that other `@operational` packages consume to customize their styling.
 
 ## Getting Started
 
 Install the package via npm or yarn:
 
-`npm install @operational/theme @operational/components`
+`npm install @operational/theme` 
 
 Inspect and customize the theme object:
 
 ```js
-import { operationalTheme } from "@operational/theme"
+import { operational } from "@operational/theme"
 
 const ownTheme = {
   ...operationalTheme,
   colors: {
     ...operationalTheme.colors,
+    // Redefine the success color to a basic green
     success: "#0F0"
   }
 }
@@ -24,14 +25,16 @@ const ownTheme = {
 
 Use this theme with e.g. `@operational/components`, like so:
 
+`npm install @operational/components`
+
 ```js
 import React from "react"
 import { OperationalUI, Button, ThemeProvider } from "@operational/components"
 
 const App = () => {
-  <OperationalUI, ThemeProvider theme={ownTheme}>
+  <OperationalUI theme={ownTheme}>
     <Button color="success">So much success</Button>
-  </OperationalUI, ThemeProvider>
+  </OperationalUI>
 }
 ```
 
