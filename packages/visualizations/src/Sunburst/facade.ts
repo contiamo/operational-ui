@@ -52,7 +52,6 @@ class Facade {
   initialAccessors(): IAccessors {
     return {
       series: {
-        children: (d: TDatum): IObject[] => d.children || [],
         color: (d: TDatum): string => d.color,
         name: (d: TDatum): string => d.name || "",
         value: (d: TDatum): number => d.value

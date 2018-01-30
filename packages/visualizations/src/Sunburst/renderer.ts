@@ -26,11 +26,6 @@ import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy
 import * as styles from "./styles"
 import { withD3Element } from "../utils/d3_utils"
 
-// // Accessors of series in prepared data
-// function dataKey(d: TDatum): string {
-//   return d.data.key
-// }
-
 class Renderer {
   angleScale: any
   arc: any
@@ -69,8 +64,9 @@ class Renderer {
 
   assignAccessors(): void {
     const accessors: IAccessors = this.state.current.get("accessors").series
+    // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
     forEach.convert({ cap: false })((accessor: (d: TDatum) => any, key: string): void => {
-      ;(this as any)[key] = accessor
+      ;(this as any)[key] = (d: TDatum): any => (d.data ? accessor(d.data) : accessor(d))
     })(accessors)
   }
 
@@ -110,7 +106,7 @@ class Renderer {
       .select("g.arcs")
       .attr("transform", this.translateString(this.computeTranslate()))
       .selectAll(`path.${styles.arc}`)
-      .data(this.data, (d: any) => this.name(d.data))
+      .data(this.data, this.name)
 
     const duration: number = this.state.current.get("config").duration
     this.exit(arcs, duration)
@@ -134,7 +130,7 @@ class Renderer {
         "class",
         (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
       )
-      .style("fill", (d: IObject) => this.color(d.data))
+      .style("fill", this.color)
       .style("stroke", "#fff")
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("click", (d: IObject) => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
@@ -266,7 +262,7 @@ class Renderer {
   }
 
   // highlightElement(key: string): void {
-  //   const d: TDatum = find((datum: TDatum): boolean => dataKey(datum) === key)(this.computed.data)
+  //   const d: TDatum = find((datum: TDatum): boolean => this.name(datum) === key)(this.computed.data)
   //   this.onMouseOver(d)
   // }
 
@@ -319,8 +315,8 @@ class Renderer {
   }
 
   assignColors(node: any): void {
-    if (node.parent && !this.color(node.data)) {
-      node.data.color = this.color(node.parent.data)
+    if (node.parent && !this.color(node)) {
+      node.data.color = this.color(node.parent)
     }
   }
 
@@ -341,7 +337,7 @@ class Renderer {
   }
 
   isSibling(d1: TDatum, d2: TDatum): boolean {
-    return every(identity)([d1.depth === d2.depth, this.name(d1.parent.data) === this.name(d2.parent.data)])
+    return every(identity)([d1.depth === d2.depth, this.name(d1.parent) === this.name(d2.parent)])
   }
 
   isEqual(d1: TDatum, d2: TDatum): boolean {
@@ -354,7 +350,7 @@ class Renderer {
     if (!d1.parent || !d2.parent) {
       return false
     }
-    return every(identity)([this.name(d1.data) === this.name(d2.data), this.isSibling(d1, d2)])
+    return every(identity)([this.name(d1) === this.name(d2), this.isSibling(d1, d2)])
   }
 
   findSiblings(data: TDatum[], d: TDatum): TDatum[] {

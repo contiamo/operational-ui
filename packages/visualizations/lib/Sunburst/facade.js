@@ -51,7 +51,6 @@ var Facade = /** @class */ (function () {
     Facade.prototype.initialAccessors = function () {
         return {
             series: {
-                children: function (d) { return d.children || []; },
                 color: function (d) { return d.color; },
                 name: function (d) { return d.name || ""; },
                 value: function (d) { return d.value; }

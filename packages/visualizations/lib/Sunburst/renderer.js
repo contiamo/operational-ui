@@ -11,10 +11,6 @@ var d3_scale_1 = require("d3-scale");
 var d3_hierarchy_1 = require("d3-hierarchy");
 var styles = require("./styles");
 var d3_utils_1 = require("../utils/d3_utils");
-// // Accessors of series in prepared data
-// function dataKey(d: TDatum): string {
-//   return d.data.key
-// }
 var Renderer = /** @class */ (function () {
     function Renderer(state, stateWriter, events, el) {
         this.drawn = false;
@@ -32,9 +28,10 @@ var Renderer = /** @class */ (function () {
     Renderer.prototype.assignAccessors = function () {
         var _this = this;
         var accessors = this.state.current.get("accessors").series;
+        // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
         fp_1.forEach.convert({ cap: false })(function (accessor, key) {
             ;
-            _this[key] = accessor;
+            _this[key] = function (d) { return d.data ? accessor(d.data) : accessor(d); };
         })(accessors);
     };
     Renderer.prototype.hasData = function () {
@@ -54,7 +51,6 @@ var Renderer = /** @class */ (function () {
         this.drawn = true;
     };
     Renderer.prototype.updateDraw = function () {
-        var _this = this;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
@@ -67,7 +63,7 @@ var Renderer = /** @class */ (function () {
             .select("g.arcs")
             .attr("transform", this.translateString(this.computeTranslate()))
             .selectAll("path." + styles.arc)
-            .data(this.data, function (d) { return _this.name(d.data); });
+            .data(this.data, this.name);
         var duration = this.state.current.get("config").duration;
         this.exit(arcs, duration);
         this.enterAndUpdate(arcs, duration);
@@ -86,7 +82,7 @@ var Renderer = /** @class */ (function () {
             .enter()
             .append("svg:path")
             .attr("class", function (d) { return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : ""); })
-            .style("fill", function (d) { return _this.color(d.data); })
+            .style("fill", this.color)
             .style("stroke", "#fff")
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
             .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); })
@@ -196,7 +192,7 @@ var Renderer = /** @class */ (function () {
         };
     };
     // highlightElement(key: string): void {
-    //   const d: TDatum = find((datum: TDatum): boolean => dataKey(datum) === key)(this.computed.data)
+    //   const d: TDatum = find((datum: TDatum): boolean => this.name(datum) === key)(this.computed.data)
     //   this.onMouseOver(d)
     // }
     // // Compute
@@ -238,8 +234,8 @@ var Renderer = /** @class */ (function () {
         this.stateWriter("data", this.data);
     };
     Renderer.prototype.assignColors = function (node) {
-        if (node.parent && !this.color(node.data)) {
-            node.data.color = this.color(node.parent.data);
+        if (node.parent && !this.color(node)) {
+            node.data.color = this.color(node.parent);
         }
     };
     Renderer.prototype.hoverOuter = function (radius) {
@@ -256,7 +252,7 @@ var Renderer = /** @class */ (function () {
         return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]];
     };
     Renderer.prototype.isSibling = function (d1, d2) {
-        return fp_1.every(fp_1.identity)([d1.depth === d2.depth, this.name(d1.parent.data) === this.name(d2.parent.data)]);
+        return fp_1.every(fp_1.identity)([d1.depth === d2.depth, this.name(d1.parent) === this.name(d2.parent)]);
     };
     Renderer.prototype.isEqual = function (d1, d2) {
         if (!d1 || !d2) {
@@ -268,7 +264,7 @@ var Renderer = /** @class */ (function () {
         if (!d1.parent || !d2.parent) {
             return false;
         }
-        return fp_1.every(fp_1.identity)([this.name(d1.data) === this.name(d2.data), this.isSibling(d1, d2)]);
+        return fp_1.every(fp_1.identity)([this.name(d1) === this.name(d2), this.isSibling(d1, d2)]);
     };
     Renderer.prototype.findSiblings = function (data, d) {
         var _this = this;

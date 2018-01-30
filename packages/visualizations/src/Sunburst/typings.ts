@@ -32,7 +32,6 @@ export type TDatum = IObject
 
 export interface IAccessors {
   series: {
-    children: (d: TDatum) => IObject[]
     color: (d: TDatum) => string
     name: (d: TDatum) => string
     value: (d: TDatum) => number

@@ -385,6 +385,13 @@ const propDescription = {
   ],
   SeriesAccessors: [
     {
+      name: "color",
+      description: "Node color",
+      defaultValue: "d => d.color",
+      type: "string",
+      optional: true
+    },
+    {
       name: "name",
       description: "Node name",
       defaultValue: 'd => d.name || ""',
