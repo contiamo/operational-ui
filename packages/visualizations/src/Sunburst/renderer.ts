@@ -1,21 +1,10 @@
 import Events from "../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
-import {
-  defaults,
-  every,
-  find,
-  filter,
-  forEach,
-  findIndex,
-  identity,
-  isEmpty,
-  isFunction,
-  keys,
-  map,
-  merge,
-  reduce,
-  values
-} from "lodash/fp"
+import { every, find, filter, forEach, findIndex, identity } from "lodash/fp"
+import * as styles from "./styles"
+import { withD3Element } from "../utils/d3_utils"
+
+// d3 imports
 import * as d3 from "d3-selection"
 import { interpolate as d3Interpolate } from "d3-interpolate"
 import "d3-transition"
@@ -23,8 +12,6 @@ import { pie as d3Pie, arc as d3Arc } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy"
-import * as styles from "./styles"
-import { withD3Element } from "../utils/d3_utils"
 
 class Renderer {
   angleScale: any

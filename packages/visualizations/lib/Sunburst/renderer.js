@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../utils/event_catalog");
 var fp_1 = require("lodash/fp");
+var styles = require("./styles");
+var d3_utils_1 = require("../utils/d3_utils");
+// d3 imports
 var d3 = require("d3-selection");
 var d3_interpolate_1 = require("d3-interpolate");
 require("d3-transition");
@@ -9,8 +12,6 @@ var d3_shape_1 = require("d3-shape");
 var d3_interpolate_2 = require("d3-interpolate");
 var d3_scale_1 = require("d3-scale");
 var d3_hierarchy_1 = require("d3-hierarchy");
-var styles = require("./styles");
-var d3_utils_1 = require("../utils/d3_utils");
 var Renderer = /** @class */ (function () {
     function Renderer(state, stateWriter, events, el) {
         this.drawn = false;
