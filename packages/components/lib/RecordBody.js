@@ -5,7 +5,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        label: "recorddetails",
+        label: "recordbody",
         borderTop: "1px solid",
         padding: theme.spacing + "px " + theme.spacing + "px",
         borderColor: theme.colors.gray20,
@@ -15,10 +15,10 @@ var Container = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var RecordDetails = function (props) { return (React.createElement(Container, { css: props.css, className: props.className }, props.children)); };
-exports.default = Object.assign(RecordDetails, {
+var RecordBody = function (props) { return (React.createElement(Container, { css: props.css, className: props.className }, props.children)); };
+exports.default = Object.assign(RecordBody, {
     defaultProps: {
-        __isRecordDetails: true
+        __isRecordBody: true
     }
 });
-//# sourceMappingURL=RecordDetails.js.map
+//# sourceMappingURL=RecordBody.js.map

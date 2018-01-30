@@ -16,7 +16,6 @@ export interface IState {
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "record",
   position: "relative",
-  minHeight: 58,
   border: `1px solid ${theme.colors.gray20}`
 }))
 
@@ -28,15 +27,17 @@ export default class Record extends React.Component<IProps, IState> {
     return (
       <Container css={this.props.css} className={this.props.className}>
         {React.Children.map(this.props.children, (child: any, index: number) => {
-          return !child.props.__isRecordDetails || this.state.isExpanded ? child : null
+          return !child.props.__isRecordBody || this.state.isExpanded ? child : null
         })}
         <Button
+          color="info"
           css={{
             position: "absolute",
+            top: 24,
             right: 12,
-            top: 12
+            marginRight: 0,
+            transform: "translate3d(0, -50%, 0)"
           }}
-          color="info"
           onClick={() => {
             this.setState(prevState => ({
               isExpanded: !prevState.isExpanded

@@ -18,7 +18,6 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         label: "record",
         position: "relative",
-        minHeight: 58,
         border: "1px solid " + theme.colors.gray20
     });
 });
@@ -35,13 +34,15 @@ var Record = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
             React.Children.map(this.props.children, function (child, index) {
-                return !child.props.__isRecordDetails || _this.state.isExpanded ? child : null;
+                return !child.props.__isRecordBody || _this.state.isExpanded ? child : null;
             }),
-            React.createElement(Button_1.default, { css: {
+            React.createElement(Button_1.default, { color: "info", css: {
                     position: "absolute",
+                    top: 24,
                     right: 12,
-                    top: 12
-                }, color: "info", onClick: function () {
+                    marginRight: 0,
+                    transform: "translate3d(0, -50%, 0)"
+                }, onClick: function () {
                     _this.setState(function (prevState) { return ({
                         isExpanded: !prevState.isExpanded
                     }); });

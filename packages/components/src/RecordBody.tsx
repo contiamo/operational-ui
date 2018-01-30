@@ -6,11 +6,11 @@ export interface IProps {
   css?: {}
   className?: string
   children?: React.ReactNode
-  __isRecordDetails?: boolean
+  __isRecordBody?: boolean
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  label: "recorddetails",
+  label: "recordbody",
   borderTop: "1px solid",
   padding: `${theme.spacing}px ${theme.spacing}px`,
   borderColor: theme.colors.gray20,
@@ -20,14 +20,14 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-const RecordDetails = (props: IProps) => (
+const RecordBody = (props: IProps) => (
   <Container css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
 
-export default Object.assign(RecordDetails, {
+export default Object.assign(RecordBody, {
   defaultProps: {
-    __isRecordDetails: true
+    __isRecordBody: true
   }
 })
