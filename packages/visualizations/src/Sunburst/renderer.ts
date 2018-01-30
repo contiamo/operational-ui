@@ -353,6 +353,10 @@ class Renderer {
     return every(identity)([this.name(d1.data) === this.name(d2.data), this.isSibling(d1, d2)])
   }
 
+  findSiblings(data: TDatum[], d: TDatum): TDatum[] {
+    return filter((datum: TDatum): boolean => this.isSibling(datum, d))(data)
+  }
+
   findAncestor(data: TDatum[], d: TDatum): TDatum {
     if (!d) {
       return
@@ -361,11 +365,15 @@ class Renderer {
     return parent || this.findAncestor(data, d.parent)
   }
 
+  findDatum(data: TDatum[], d: TDatum): TDatum {
+    return find((datum: TDatum): boolean => this.isEqual(datum, d))(data)
+  }
+
   arcTween(d: TDatum): (t: number) => string {
     const previousData: TDatum[] = this.previous || [],
       // old version of same datum
       old: TDatum = find((datum: TDatum): boolean => this.isEqual(datum, d))(previousData),
-      // old version of parent node
+      // nearest ancestor that already exists
       oldParent: TDatum = this.findAncestor(previousData.concat([this.topNode]), d)
 
     let x0: number
@@ -379,11 +387,9 @@ class Renderer {
       y1 = old.y1
     } else if (!old && oldParent) {
       //find siblings - same parent, same depth
-      const siblings: TDatum[] = filter((datum: TDatum): boolean => this.isSibling(datum, d))(this.data)
+      const siblings: TDatum[] = this.findSiblings(this.data, d)
       const siblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(siblings)
-      const oldPrecedingSibling: TDatum = find((datum: TDatum): boolean =>
-        this.isEqual(datum, siblings[siblingIndex + 1])
-      )(previousData)
+      const oldPrecedingSibling: TDatum = this.findDatum(previousData, siblings[siblingIndex + 1])
 
       x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0
       x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0
@@ -401,11 +407,17 @@ class Renderer {
   }
 
   removeArcTween(d: TDatum, i: number): (t: number) => string {
-    let s0: number
-    let e0: number
-    s0 = e0 = 2 * Math.PI
+    const oldSiblings: TDatum[] = this.findSiblings(this.previous || [], d)
+    const currentSiblings: TDatum[] = this.findSiblings(this.data, d)
+    const oldSiblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(oldSiblings)
+    const oldPrecedingSibling: TDatum = find.convert({ cap: false })((sibling: TDatum, i: number): boolean => {
+      return i > oldSiblingIndex && !!this.findDatum(currentSiblings, sibling)
+    })(oldSiblings)
+    const precedingSibling: TDatum = this.findDatum(this.data, oldPrecedingSibling)
+    const parent: TDatum = this.findAncestor(this.data.concat([this.topNode]), d)
+    const x: number = precedingSibling ? precedingSibling.x1 : parent.x0
 
-    const f = interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: s0, x1: e0, y0: 0, y1: 0 })
+    const f = interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: x, x1: x, y0: d.y0, y1: d.y1 })
     return (t: number): string => this.arc(f(t))
   }
 

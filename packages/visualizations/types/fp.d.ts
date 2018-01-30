@@ -19,8 +19,8 @@ declare namespace fp {
   }
 
   interface Static {
-    find<T>(predicate: ListIterator<T, boolean>): (collection: List<T>) => T
-    find<TObject extends {}, T>(predicate: TObject): (collection: List<T>) => T
+    // find<T>(predicate: ListIterator<T, boolean>): (collection: List<T>) => T
+    // find<TObject extends {}, T>(predicate: TObject): (collection: List<T>) => T
 
     /**
      * Creates an object composed of keys generated from the results of running each element of collection through
@@ -158,6 +158,7 @@ declare namespace fp {
     every: any
     extend: any
     filter: any
+    find: any
     findIndex: any
     flatten: any
     forEach: any

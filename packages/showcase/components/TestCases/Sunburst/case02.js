@@ -18,167 +18,6 @@ const data = {
       {
         name: "Europe",
         color: "0f0",
-        value: 50000
-      },
-      {
-        name: "Asia",
-        color: "0ff",
-        value: 38400
-      },
-      {
-        name: "North America",
-        color: "f00",
-        value: 36780
-      }
-    ]
-  }
-}
-
-const data1 = {
-  name: "Pageviews",
-  data: {
-    name: "All",
-    children: [
-      {
-        name: "Europe",
-        color: "0f0",
-        value: 50000
-      },
-      {
-        name: "Asia",
-        color: "0ff",
-        value: 38400
-      },
-      {
-        name: "North America",
-        color: "f00",
-        value: 36780
-      },
-      {
-        name: "Africa",
-        color: "00f",
-        value: 25200
-      }
-    ]
-  }
-}
-
-const data2 = {
-  name: "Pageviews",
-  data: {
-    name: "All",
-    children: [
-      {
-        name: "Europe",
-        color: "0f0",
-        value: 50000
-      },
-      {
-        name: "Asia",
-        color: "0ff",
-        value: 38400
-      },
-      {
-        name: "Australia",
-        color: "#ff0",
-        value: 18000
-      },
-      {
-        name: "North America",
-        color: "f00",
-        value: 36780
-      },
-      {
-        name: "Africa",
-        color: "00f",
-        value: 25200
-      }
-    ]
-  }
-}
-
-const data3 = {
-  name: "Pageviews",
-  data: {
-    name: "All",
-    children: [
-      {
-        name: "Europe",
-        color: "0f0",
-        value: 50000,
-        children: [
-          {
-            name: "UK",
-            value: 11500
-          },
-          {
-            name: "Germany",
-            value: 9240
-          },
-          {
-            name: "Spain",
-            value: 12345
-          },
-          {
-            name: "Italy",
-            value: 1830
-          }
-        ]
-      },
-      {
-        name: "Asia",
-        color: "0ff",
-        value: 38400,
-        children: [
-          {
-            name: "Japan",
-            value: 8230
-          },
-          {
-            name: "China",
-            value: 13000
-          },
-          {
-            name: "Thailand",
-            value: 2548
-          },
-          {
-            name: "India",
-            value: 1800
-          },
-          {
-            name: "Malaysia",
-            value: 1423
-          }
-        ]
-      },
-      {
-        name: "Australia",
-        color: "#ff0",
-        value: 18000
-      },
-      {
-        name: "North America",
-        color: "f00",
-        value: 36780
-      },
-      {
-        name: "Africa",
-        color: "00f",
-        value: 25200
-      }
-    ]
-  }
-}
-
-const data4 = {
-  name: "Pageviews",
-  data: {
-    name: "All",
-    children: [
-      {
-        name: "Europe",
-        color: "0f0",
         value: 50000,
         children: [
           {
@@ -292,6 +131,141 @@ const data4 = {
   }
 }
 
+const data1 = {
+  name: "Pageviews",
+  data: {
+    name: "All",
+    children: [
+      {
+        name: "Europe",
+        color: "0f0",
+        value: 50000,
+        children: [
+          {
+            name: "UK",
+            value: 11500
+          },
+          {
+            name: "Germany",
+            value: 9240
+          },
+          {
+            name: "Spain",
+            value: 12345
+          },
+          {
+            name: "Italy",
+            value: 1830
+          }
+        ]
+      },
+      {
+        name: "Asia",
+        color: "0ff",
+        value: 38400,
+        children: [
+          {
+            name: "Japan",
+            value: 8230
+          },
+          {
+            name: "China",
+            value: 13000
+          },
+          {
+            name: "Thailand",
+            value: 2548
+          },
+          {
+            name: "India",
+            value: 1800
+          },
+          {
+            name: "Malaysia",
+            value: 1423
+          }
+        ]
+      },
+      {
+        name: "Australia",
+        color: "#ff0",
+        value: 18000
+      },
+      {
+        name: "North America",
+        color: "f00",
+        value: 36780
+      },
+      {
+        name: "Africa",
+        color: "00f",
+        value: 25200
+      }
+    ]
+  }
+}
+
+const data2 = {
+  name: "Pageviews",
+  data: {
+    name: "All",
+    children: [
+      {
+        name: "Europe",
+        color: "0f0",
+        value: 50000,
+        children: [
+          {
+            name: "UK",
+            value: 11500
+          },
+          {
+            name: "Germany",
+            value: 9240
+          },
+          {
+            name: "Italy",
+            value: 1830
+          }
+        ]
+      },
+      {
+        name: "Asia",
+        color: "0ff",
+        value: 38400,
+        children: [
+          {
+            name: "Japan",
+            value: 8230
+          },
+          {
+            name: "China",
+            value: 13000
+          },
+          {
+            name: "India",
+            value: 1800
+          },
+          {
+            name: "Malaysia",
+            value: 1423
+          }
+        ]
+      },
+      {
+        name: "Australia",
+        color: "#ff0",
+        value: 18000
+      },
+      {
+        name: "North America",
+        color: "f00",
+        value: 36780
+      }
+    ]
+  }
+}
+
 export const marathon = ({ test, afterAll, container }) => {
   const viz = new Sunburst(container)
 
@@ -301,25 +275,15 @@ export const marathon = ({ test, afterAll, container }) => {
     viz.draw()
   })
 
-  test("Adds segment to end of ring", () => {
+  test("Removes an entire set of child nodes", () => {
     viz.data(data1)
     viz.draw()
   })
 
-  test("Inserts a segment into middle of ring", () => {
+  test("Removes single child nodes", () => {
     viz.data(data2)
-    viz.draw()
-  })
-
-  test("Adds a 2nd level", () => {
-    viz.data(data3)
-    viz.draw()
-  })
-
-  test("Adds multiple child levels to segment at once", () => {
-    viz.data(data4)
     viz.draw()
   })
 }
 
-export const title = "Data transitions - entering and updating"
+export const title = "Data transitions - exiting"

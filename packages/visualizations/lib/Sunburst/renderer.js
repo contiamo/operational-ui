@@ -267,6 +267,10 @@ var Renderer = /** @class */ (function () {
         }
         return fp_1.every(fp_1.identity)([this.name(d1.data) === this.name(d2.data), this.isSibling(d1, d2)]);
     };
+    Renderer.prototype.findSiblings = function (data, d) {
+        var _this = this;
+        return fp_1.filter(function (datum) { return _this.isSibling(datum, d); })(data);
+    };
     Renderer.prototype.findAncestor = function (data, d) {
         var _this = this;
         if (!d) {
@@ -275,12 +279,16 @@ var Renderer = /** @class */ (function () {
         var parent = fp_1.find(function (datum) { return _this.isEqual(datum, d.parent); })(data);
         return parent || this.findAncestor(data, d.parent);
     };
+    Renderer.prototype.findDatum = function (data, d) {
+        var _this = this;
+        return fp_1.find(function (datum) { return _this.isEqual(datum, d); })(data);
+    };
     Renderer.prototype.arcTween = function (d) {
         var _this = this;
         var previousData = this.previous || [], 
         // old version of same datum
         old = fp_1.find(function (datum) { return _this.isEqual(datum, d); })(previousData), 
-        // old version of parent node
+        // nearest ancestor that already exists
         oldParent = this.findAncestor(previousData.concat([this.topNode]), d);
         var x0;
         var x1;
@@ -294,11 +302,9 @@ var Renderer = /** @class */ (function () {
         }
         else if (!old && oldParent) {
             //find siblings - same parent, same depth
-            var siblings_1 = fp_1.filter(function (datum) { return _this.isSibling(datum, d); })(this.data);
-            var siblingIndex_1 = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(siblings_1);
-            var oldPrecedingSibling = fp_1.find(function (datum) {
-                return _this.isEqual(datum, siblings_1[siblingIndex_1 + 1]);
-            })(previousData);
+            var siblings = this.findSiblings(this.data, d);
+            var siblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(siblings);
+            var oldPrecedingSibling = this.findDatum(previousData, siblings[siblingIndex + 1]);
             x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
             x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
             y0 = d.y0;
@@ -315,10 +321,16 @@ var Renderer = /** @class */ (function () {
     };
     Renderer.prototype.removeArcTween = function (d, i) {
         var _this = this;
-        var s0;
-        var e0;
-        s0 = e0 = 2 * Math.PI;
-        var f = d3_interpolate_2.interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: s0, x1: e0, y0: 0, y1: 0 });
+        var oldSiblings = this.findSiblings(this.previous || [], d);
+        var currentSiblings = this.findSiblings(this.data, d);
+        var oldSiblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(oldSiblings);
+        var oldPrecedingSibling = fp_1.find.convert({ cap: false })(function (sibling, i) {
+            return i > oldSiblingIndex && !!_this.findDatum(currentSiblings, sibling);
+        })(oldSiblings);
+        var precedingSibling = this.findDatum(this.data, oldPrecedingSibling);
+        var parent = this.findAncestor(this.data.concat([this.topNode]), d);
+        var x = precedingSibling ? precedingSibling.x1 : parent.x0;
+        var f = d3_interpolate_2.interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: x, x1: x, y0: d.y0, y1: d.y1 });
         return function (t) { return _this.arc(f(t)); };
     };
     Renderer.prototype.labelTranslate = function (d) {
