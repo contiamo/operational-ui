@@ -21,6 +21,7 @@ export interface IConfig {
   hidden: boolean
   numberFormatter: (x: number) => string
   outerBorderMargin: number
+  sort: boolean
   uid: string
   visualizationName: string
   width: number

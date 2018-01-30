@@ -42,6 +42,7 @@ class Facade {
       hidden: false,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
+      sort: true,
       uid: uniqueId("sunburst"),
       visualizationName: "sunburst",
       width: 500

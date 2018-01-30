@@ -42,6 +42,7 @@ var Facade = /** @class */ (function () {
             hidden: false,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
+            sort: true,
             uid: fp_1.uniqueId("sunburst"),
             visualizationName: "sunburst",
             width: 500

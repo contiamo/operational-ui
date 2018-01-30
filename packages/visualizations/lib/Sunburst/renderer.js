@@ -216,10 +216,13 @@ var Renderer = /** @class */ (function () {
         this.prepareData();
     };
     Renderer.prototype.prepareData = function () {
+        var sortingFunction = this.state.current.get("config").sort
+            ? function (a, b) { return b.value - a.value; }
+            : undefined;
         var hierarchyData = d3_hierarchy_1.hierarchy(this.state.current.get("data").data)
             .sum(this.value)
             .each(this.assignColors.bind(this))
-            .sort(function (a, b) { return b.value - a.value; });
+            .sort(sortingFunction);
         this.total = hierarchyData.value;
         this.topNode = d3_hierarchy_1.partition()(hierarchyData)
             .descendants()

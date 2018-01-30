@@ -338,6 +338,13 @@ const propDescription = {
       optional: true
     },
     {
+      name: "sort",
+      description: "Whether to sort nodes by size",
+      defaultValue: "true",
+      type: "boolean",
+      optional: true
+    },
+    {
       name: "uid",
       description:
         "Unique identifier for the visualization, normally generated automatically from the visualization name",
