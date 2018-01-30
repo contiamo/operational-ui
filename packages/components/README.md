@@ -16,16 +16,15 @@ Create your first application like so:
 import React from "react"
 import { Button, OperationalUI } from "@operational/components"
 
-// Check out https://ui.contiamo.com/components/buttons
-// to see how you can customize this code.
+// Always wrap your interface in the `OperationalUI` wrapper, 
+// which does important setup work, and takes a single child element.
+// See https://www.npmjs.com/package/%40operational%2Fcomponents
 const App = () => {
   <OperationalUI>
     <Button>Hello</Button>
   </OperationalUI>
 }
 ```
-
-Wrapping your component inside an `OperationalUI` is mandatory, and does important setup work. *Note this component can only have a single child.*
 
 <!-- separator -->
 

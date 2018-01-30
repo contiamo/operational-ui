@@ -18,7 +18,16 @@ export default class extends React.Component {
     return (
       <Layout pathname={this.props.url.pathname}>
         <Card>
-          <StaticContent markdownContent={this.props.content} />
+          <StaticContent
+            markdownContent={
+              this.props.content +
+              `
+## Diving in
+
+Select a block in the sidenav to get started. For a higher-level overview on how to best work with these components in code, head to our [API design guide](https://ui.contiamo.com/docs/api-design).
+          `
+            }
+          />
         </Card>
       </Layout>
     )

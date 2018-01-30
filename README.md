@@ -27,8 +27,9 @@ import React from "react"
 import { render } from "react-dom"
 import { OperationalUI, Button } from "@operational/components"
 
-// Always wrap your interface in the `OperationalUI` wrapper, which does important setup work, and requires a single child element.
-// See https://www.npmjs.com/package/%40operational%2Fcomponents for details.
+// Always wrap your interface in the `OperationalUI` wrapper, 
+// which does important setup work, and requires a single child element.
+// See https://www.npmjs.com/package/%40operational%2Fcomponents
 const MyInterface = () => (
   <OperationalUI>
     <Button onClick={() => {alert("Hello!")}}>Say hello!</Button>

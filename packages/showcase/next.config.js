@@ -42,7 +42,7 @@ module.exports = {
     "/visualizations/process-flow/testcases": { page: "/visualizations/process-flow/testcases", query: { title: "Test Cases" } },
     "/docs": { page: "/docs", query: { title: "Documentation" } },
     "/docs/design-guidelines": { page: "/docs/design-guidelines", query: { title: "Design Guidelines" } },
-    "/docs/api": { page: "/docs/api", query: { title: "API Design" } },
+    "/docs/api-design": { page: "/docs/api-design", query: { title: "API Design" } },
     "/docs/theming": { page: "/docs/theming", query: { title: "Theming" } }
   })
 }

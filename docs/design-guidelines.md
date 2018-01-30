@@ -1,8 +1,6 @@
 `@operational` packages hold a set of opinionated presentational components, composed components and data visualizations that implement a visual style well-suited for operational interfaces.
 
-These interfaces assume regular use and familiarity by operatives. They are generally compact and flat, and takes the principle of [smallest effective differences](https://twitter.com/edwardtufte/status/450076034759524352) very seriously.
-
-The following general principles apply:
+These interfaces assume regular use and familiarity by operatives. They are generally compact and flat, and fairly strict about [smallest effective differences](https://twitter.com/edwardtufte/status/450076034759524352). We'd like to encourage the following principles:
 
 ## Layout
 
