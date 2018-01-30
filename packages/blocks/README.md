@@ -1,5 +1,7 @@
 # Operational UI Blocks
 
+<!-- separator -->
+
 The `@operational/blocks` package builds on [@operational/components](https://github.com/Contiamo/operational-ui/tree/master/packages/components), delivering larger, opinionated pieces of UI that handle a fair bit of their own state or side effects.
 
 ## Getting Started
@@ -29,6 +31,8 @@ const App = () => {
 ```
 
 This component interacts smoothly with data input components from `@operational/components` to render a filter summary, and add the fields themselves into a modal. See more at the [filter documentation page](http://ui.contiamo.com/blocks/filters).
+
+<!-- separator -->
 
 ## Documentation
 

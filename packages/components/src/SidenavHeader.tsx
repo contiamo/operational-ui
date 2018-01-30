@@ -3,8 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
-import Icon from "./Icon"
-import { ReactFeatherIconName } from "./ReactFeather"
+import Icon, { IconName } from "./Icon"
 
 export interface IProps {
   id?: string | number
@@ -12,7 +11,7 @@ export interface IProps {
   className?: string
   children?: React.ReactNode
   label: string
-  icon: ReactFeatherIconName | React.ReactNode
+  icon: IconName | React.ReactNode
   active?: boolean
   expanded?: boolean
   onClick?: () => void
@@ -67,7 +66,7 @@ export default (props: IProps) => (
   >
     <Content isActive={!!props.active} isExpanded={!!props.expanded}>
       <IconContainer>
-        {props.icon === String(props.icon) ? <Icon name={props.icon as ReactFeatherIconName} size={24} /> : props.icon}
+        {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={24} /> : props.icon}
       </IconContainer>
       <Label>{props.label}</Label>
     </Content>

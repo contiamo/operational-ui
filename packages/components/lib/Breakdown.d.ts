@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import { ReactFeatherIconName } from "./ReactFeather";
+import { IconName } from "./Icon";
 export interface IProps {
     id?: string | number;
     css?: any;
@@ -11,7 +11,7 @@ export interface IProps {
     fill: number;
     color?: string;
     barColor?: string;
-    icon?: ReactFeatherIconName;
+    icon?: IconName;
     onClick?: () => void;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;

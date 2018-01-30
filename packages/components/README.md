@@ -1,5 +1,7 @@
 # Operational UI Components
 
+<!-- separator -->
+
 The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on.
 
 ## Getting Started
@@ -14,6 +16,9 @@ Create your first application like so:
 import React from "react"
 import { Button, OperationalUI } from "@operational/components"
 
+// Always wrap your interface in the `OperationalUI` wrapper, 
+// which does important setup work, and takes a single child element.
+// See https://www.npmjs.com/package/%40operational%2Fcomponents
 const App = () => {
   <OperationalUI>
     <Button>Hello</Button>
@@ -21,7 +26,7 @@ const App = () => {
 }
 ```
 
-Wrapping your component inside an `OperationalUI` is mandatory, and does important setup work. *Note this component can only have a single child.*
+<!-- separator -->
 
 ## Documentation
 

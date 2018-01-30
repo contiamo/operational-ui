@@ -1,6 +1,7 @@
 module.exports = {
   exportPathMap: () => ({
     "/": { page: "/", query: { title: "Operational UI" } },
+    "/getting-started": { page: "/getting-started", query: { title: "Getting Started" } },
     "/components": { page: "/components", query: { title: "Components" } },
     "/components/breadcrumbs": { page: "/components/breadcrumbs", query: { title: "Breadcrumbs" } },
     "/components/breakdowns": { page: "/components/breakdowns", query: { title: "Breakdowns" } },
@@ -39,9 +40,9 @@ module.exports = {
     "/visualizations/pie-chart/polar_testcases": { page: "/visualizations/pie-chart/polar_testcases", query: { title: "Test Cases" } },
     "/visualizations/process-flow": { page: "/visualizations/process-flow", query: { title: "Process Flow" } },
     "/visualizations/process-flow/testcases": { page: "/visualizations/process-flow/testcases", query: { title: "Test Cases" } },
-    "/documentation": { page: "/documentation", query: { title: "Documentation" } },
-    "/documentation/design-guidelines": { page: "/documentation/design-guidelines", query: { title: "Design Guidelines" } },
-    "/documentation/api": { page: "/documentation/api", query: { title: "API Design" } },
-    "/documentation/theming": { page: "/documentation/theming", query: { title: "Theming" } }
+    "/docs": { page: "/docs", query: { title: "Documentation" } },
+    "/docs/design-guidelines": { page: "/docs/design-guidelines", query: { title: "Design Guidelines" } },
+    "/docs/api-design": { page: "/docs/api-design", query: { title: "API Design" } },
+    "/docs/theming": { page: "/docs/theming", query: { title: "Theming" } }
   })
 }

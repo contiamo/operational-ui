@@ -9,7 +9,11 @@ Components whose main concern is data entry typically provide a *value* and *onC
 Some examples:
 
     <Input value="MyName" onChange={newValue => { /* */ }/>
-    <DatePicker start="2013-10-02" end={null} onChange={({ start, end }) => { /* */ }/>
+    <DatePicker
+      start="2013-10-02"
+      end={null}
+      onChange={({ start, end }) => { /* */ }
+    />
 
 Notice how *value* is often more complex, and thus named differently to keep props flat. As a general pattern, the data structure passed back through *onChange* mymics the structure passed down, to the extent it can be made clear using JSX syntax.
 
@@ -17,7 +21,11 @@ Notice how *value* is often more complex, and thus named differently to keep pro
 
 One could define a menu in two ways:
 
-    const Menu1 = () => <Menu links={[{ label: "Link1", url: "/link1" }, { label: "Link2", url: "/link2" }]}/>
+    const Menu1 = () => 
+      <Menu links={[
+        { label: "Link1", url: "/link1" },
+        { label: "Link2", url: "/link2" }
+      ]}/>
     const Menu2 = () =>
       <Menu>
         <MenuLink label="Link1" url="/link1"/>
@@ -30,10 +38,10 @@ This library heavily opts for the latter, keeping content more customizable, and
 
 Most components rely on a theme object, the use of which the library mandates, as follows:
 
-    import { operationalTheme, Button } from "@operational/components"
-    import glamorous, { ThemeProvider } from "glamorous"
+    import { OperationalUI, Button } from "@operational/components"
+    import { operational } from "@operational/theme"
 
-    render(<ThemeProvider theme={operationalTheme}><Button>Hello</Button></ThemeProvider>
+    render(<OperationalUI theme={operationalTheme}><Button>Hello</Button></OperationalUI>
 
 You can of course, define your own theme based on the operationalTheme structure. Since the theme structure still changes significantly, more detailed docs will be arriving later.
 
@@ -51,7 +59,7 @@ Note that inline styles passed in through the *style* prop are ignored in order 
 
 ## All-JS, all-React
 
-Components tap all the way into advanced features of its significant dependencies, React and glamorous. Custom-defined CSS class names are avoided as much as possible over granular, parameterized styled components. Several components rely on React's event delegation, child manipulation through *React.Children.map*, and there are plans underway to introduce error boundaries and portals.
+Components tap all the way into advanced features of its significant dependencies, `React` and `glamorous`. Custom-defined CSS class names are avoided as much as possible over granular, parameterized styled components. Several components rely on React's event delegation, child manipulation through *React.Children.map*, and there are plans underway to introduce error boundaries and portals.
 
-But that doesn't mean the project has to be used this way: you can attach custom class names and style overrides as you see fit, integrate with third-party libraries, and provide custom React content inside components. The hashed class names inside components will make sure you can plug other projects and technologies in and stay conflict-free. 
+But that doesn't mean the project has to be used this way: you can attach custom class names and style overrides as you see fit, integrate with third-party libraries, and provide custom React content inside components. The hashed class names inside components will make sure you can plug third-party packages in and stay (reasonably) conflict-free. 
 

@@ -1,13 +1,13 @@
 /// <reference types="react" />
 import * as React from "react";
-import { ReactFeatherIconName } from "./ReactFeather";
+import { IconName } from "./Icon";
 export interface IProps {
     id?: string | number;
     css?: {};
     className?: string;
     children?: React.ReactNode;
     label: string;
-    icon: ReactFeatherIconName | React.ReactNode;
+    icon: IconName | React.ReactNode;
     active?: boolean;
     expanded?: boolean;
     onClick?: () => void;

@@ -12,8 +12,7 @@
 
 <!-- separator -->
 
-`Operational UI` is an opinionated set of building blocks designed to best support user interfaces used for operational decision-making.
-
+`Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for heavily data-driven interfaces that assume familiarity through routine use, adding a bit more on the initial usage learning curve for the sake of compactness and space-efficiency. It encodes a [design language](https://ui.contiamo.com/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
 
 ## Getting started
 
@@ -28,6 +27,9 @@ import React from "react"
 import { render } from "react-dom"
 import { OperationalUI, Button } from "@operational/components"
 
+// Always wrap your interface in the `OperationalUI` wrapper, 
+// which does important setup work, and requires a single child element.
+// See https://www.npmjs.com/package/%40operational%2Fcomponents
 const MyInterface = () => (
   <OperationalUI>
     <Button onClick={() => {alert("Hello!")}}>Say hello!</Button>
@@ -37,11 +39,9 @@ const MyInterface = () => (
 render(<MyInterface />, document.querySelector("#app"))
 ```
 
-Wrapping the interface inside an `OperationalUI` is required for the components to render properly - it does important setup work and allows for customization later (see [package docs](https://www.npmjs.com/package/%40operational%2Fcomponents) for details).
+You have your first simple button. Head to our [getting started](https://ui.contiamo.com/getting-started) for more examples and live coding.
 
-Note that this component may only have a single child.
-
-## Next Steps: The `@operational` Package Family
+## Next Steps: the `@operational` Package Family
 
 Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with small packages covering various facets of data-driven UI's:
 1. [Components](https://github.com/Contiamo/operational-ui/tree/master/packages/components), used in the example above, are the smallest and simplest building blocks, implemented as presentational, heavily [controlled](https://reactjs.org/docs/forms.html#controlled-components) React components. Buttons, input fields, modals, date pickers, and the like.
@@ -51,25 +51,23 @@ Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with sm
 1. [Utils](https://github.com/Contiamo/operational-ui/tree/master/packages/utils) contain helper methods for color manipulation, creating specific higher-order React components, and d3 helpers.
 1. [Showcase](https://github.com/Contiamo/operational-ui/tree/master/packages/showcase) is the documentation website for the modules.
 
-## Working on Operational UI
+## Contributing
 
-After you install dependencies, simply run `npm run dev` or `yarn dev` inside the `components` or `visualizations` packages. This spins up a dev server you can use to test packages, by editing the entry point at `./packages/{components,visualizations}/scripts/dev-server/site.tsx`.
+We look forward to your contribution and feedback. Simply open an issue or PR to open up a discussion. `Operational UI` adheres to the [Berlin Code of Conduct](http://berlincodeofconduct.org).
+
+Below you find some guides on how to work with the codebase:
+
+### Working on Operational UI
+
+After you `npm install`, simply run `npm run dev` or `yarn dev` inside the `components` or `visualizations` packages. This spins up a dev server you can use to test packages, by editing the entry point at `./packages/{components,visualizations}/scripts/dev-server/site.tsx`.
 
 To run the showcase, simply run `npm run start` or `yarn start` from root. 
 
 To make sure your code is ready for Travis and your reviewers, run `npm run ci:local` or `yarn ci:local` from the root of the project.
 
-### Generators
+#### Generators
 
 To create a new `component`, simply run `./scripts/create-component.sh ComponentName`. This will generate all the boilerplate, files like `ComponentName.tsx` and `ComponentName.test.tsx`, and points to a few remaining manual wiring steps to get your component, its tests and its showcase page in place. The boilerplate also tries to guide towards consistent practices around code style, state management and styling. Please ask if anything is unclear.
-
-More generators coming soon..
-
-## Contributing
-
-We look forward to your contribution, and we would like to assure you that we value all thoughts, feedback and PR contribution. Simply open an issue or PR to open up a discussion.
-
-`Operational UI` adheres to the [Berlin Code of Conduct](http://berlincodeofconduct.org).
 
 <!-- separator -->
 
@@ -94,7 +92,7 @@ We look forward to your contribution, and we would like to assure you that we va
         <img width="150" height="150" src="https://github.com/TejasQ.png?s=150">
         <br>
         <a href="https://github.com/TejasQ">Tejas Kumar</a>
-        <p>The Original Creator</p>
+        <p>Contributor + The Original Creator</p>
       </td>
       <td align="center" valign="top">
         <img width="150" height="150" src="https://github.com/micha-f.png?s=150">
@@ -106,4 +104,4 @@ We look forward to your contribution, and we would like to assure you that we va
   </tbody>
 </table>
 
-Made with ❤️ and 🌵 at [Contiamo](https://contiamo.com).
+Made with 🌵 at [Contiamo](https://contiamo.com).

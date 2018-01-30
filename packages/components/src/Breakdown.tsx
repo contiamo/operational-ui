@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { hexOrColor, readableTextColor, setBrightness } from "@operational/utils"
 
-import { ReactFeatherIconName } from "./ReactFeather"
+import { IconName } from "./Icon"
 
 export interface IProps {
   id?: string | number
@@ -15,7 +15,7 @@ export interface IProps {
   fill: number
   color?: string
   barColor?: string
-  icon?: ReactFeatherIconName
+  icon?: IconName
   onClick?: () => void
   onMouseEnter?: () => void
   onMouseLeave?: () => void
