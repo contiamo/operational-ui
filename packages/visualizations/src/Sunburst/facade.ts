@@ -51,6 +51,9 @@ class Facade {
 
   initialAccessors(): IAccessors {
     return {
+      data: {
+        data: (data: IObject): IObject => data
+      },
       series: {
         color: (d: TDatum): string => d.color,
         name: (d: TDatum): string => d.name || "",

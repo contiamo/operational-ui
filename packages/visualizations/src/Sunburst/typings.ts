@@ -31,6 +31,9 @@ export interface IConfig {
 export type TDatum = IObject
 
 export interface IAccessors {
+  data: {
+    data: (d: IObject) => IObject
+  }
   series: {
     color: (d: TDatum) => string
     name: (d: TDatum) => string

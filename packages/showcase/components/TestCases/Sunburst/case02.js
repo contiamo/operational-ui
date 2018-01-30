@@ -4,10 +4,14 @@ import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
 
 const accessors: any = {
-  children: (d: any): any[] => d.children,
-  name: (d: any): string => d.name,
-  value: (d: any): number => d.value,
-  color: (d: any): string => d.color
+  series: {
+    name: (d: any): string => d.name,
+    value: (d: any): number => d.value,
+    color: (d: any): string => d.color
+  },
+  data: {
+    data: (d: any): any => d.data
+  }
 }
 
 const data = {
@@ -271,7 +275,8 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
-    viz.accessors("series", accessors)
+    viz.accessors("series", accessors.series)
+    viz.accessors("data", accessors.data)
     viz.draw()
   })
 

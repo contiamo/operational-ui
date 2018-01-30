@@ -251,6 +251,7 @@ const data = {
       {
         "name": "Africa",
         "value": 4130,
+        "color": "#ff0",
         "children": [
           {
             "name": "South Africa",
@@ -285,4 +286,5 @@ viz.data(data)
 //   }
 // })
 viz.accessors("series", accessors)
+viz.accessors("data", { data: (d: any) => d.data })
 viz.draw()

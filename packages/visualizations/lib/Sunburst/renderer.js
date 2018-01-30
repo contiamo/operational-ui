@@ -31,7 +31,7 @@ var Renderer = /** @class */ (function () {
         // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
         fp_1.forEach.convert({ cap: false })(function (accessor, key) {
             ;
-            _this[key] = function (d) { return d.data ? accessor(d.data) : accessor(d); };
+            _this[key] = function (d) { return (d.data ? accessor(d.data) : accessor(d)); };
         })(accessors);
     };
     Renderer.prototype.hasData = function () {
@@ -212,10 +212,11 @@ var Renderer = /** @class */ (function () {
         this.prepareData();
     };
     Renderer.prototype.prepareData = function () {
+        var data = this.state.current.get("accessors").data.data(this.state.current.get("data"));
         var sortingFunction = this.state.current.get("config").sort
             ? function (a, b) { return b.value - a.value; }
             : undefined;
-        var hierarchyData = d3_hierarchy_1.hierarchy(this.state.current.get("data").data)
+        var hierarchyData = d3_hierarchy_1.hierarchy(data)
             .sum(this.value)
             .each(this.assignColors.bind(this))
             .sort(sortingFunction);

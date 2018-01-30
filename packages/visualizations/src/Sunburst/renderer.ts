@@ -285,11 +285,12 @@ class Renderer {
   }
 
   prepareData(): void {
-    let sortingFunction: any = this.state.current.get("config").sort
+    const data: IObject = this.state.current.get("accessors").data.data(this.state.current.get("data"))
+    const sortingFunction: any = this.state.current.get("config").sort
       ? (a: TDatum, b: TDatum) => b.value - a.value
       : undefined
 
-    const hierarchyData = d3Hierarchy(this.state.current.get("data").data)
+    const hierarchyData = d3Hierarchy(data)
       .sum(this.value)
       .each(this.assignColors.bind(this))
       .sort(sortingFunction)
