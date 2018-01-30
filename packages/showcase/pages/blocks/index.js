@@ -11,7 +11,7 @@ Select a block to get started.
 export default class extends React.Component {
   static async getInitialProps() {
     const content = await fetchFromRepo("/packages/blocks/README.md")
-    return { content: content.split("<!-- separator -->")[1] }
+    return { content }
   }
 
   render() {
