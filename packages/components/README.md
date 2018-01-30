@@ -1,5 +1,7 @@
 # Operational UI Components
 
+<!-- separator -->
+
 The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on.
 
 ## Getting Started
@@ -14,6 +16,8 @@ Create your first application like so:
 import React from "react"
 import { Button, OperationalUI } from "@operational/components"
 
+// Check out https://ui.contiamo.com/components/buttons
+// to see how you can customize this code.
 const App = () => {
   <OperationalUI>
     <Button>Hello</Button>
@@ -22,6 +26,8 @@ const App = () => {
 ```
 
 Wrapping your component inside an `OperationalUI` is mandatory, and does important setup work. *Note this component can only have a single child.*
+
+<!-- separator -->
 
 ## Documentation
 

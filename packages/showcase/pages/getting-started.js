@@ -146,7 +146,7 @@ export default props => (
 
       <Playground snippet={simpleSnippet} scope={{ OperationalUI, Grid, Card, CardHeader, Button, Input, Spinner }} />
 
-      <h2>2. Application Layout</h2>
+      <h2 id="layout">2. Application Layout</h2>
 
       <p>Operational UI makes it easy to give an opinionated navigational frame to your interface:</p>
 

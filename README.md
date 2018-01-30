@@ -52,9 +52,21 @@ Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with sm
 
 ## Contributing
 
-We look forward to your contribution, and we would like to assure you that we value all thoughts, feedback and PR contribution. Simply open an issue or PR to open up a discussion.
+We look forward to your contribution and feedback. Simply open an issue or PR to open up a discussion. `Operational UI` adheres to the [Berlin Code of Conduct](http://berlincodeofconduct.org).
 
-`Operational UI` adheres to the [Berlin Code of Conduct](http://berlincodeofconduct.org).
+Below you find some guides on how to work with the codebase:
+
+### Working on Operational UI
+
+After you `npm install`, simply run `npm run dev` or `yarn dev` inside the `components` or `visualizations` packages. This spins up a dev server you can use to test packages, by editing the entry point at `./packages/{components,visualizations}/scripts/dev-server/site.tsx`.
+
+To run the showcase, simply run `npm run start` or `yarn start` from root. 
+
+To make sure your code is ready for Travis and your reviewers, run `npm run ci:local` or `yarn ci:local` from the root of the project.
+
+#### Generators
+
+To create a new `component`, simply run `./scripts/create-component.sh ComponentName`. This will generate all the boilerplate, files like `ComponentName.tsx` and `ComponentName.test.tsx`, and points to a few remaining manual wiring steps to get your component, its tests and its showcase page in place. The boilerplate also tries to guide towards consistent practices around code style, state management and styling. Please ask if anything is unclear.
 
 <!-- separator -->
 

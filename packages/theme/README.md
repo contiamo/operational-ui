@@ -1,5 +1,7 @@
 # Operational UI Theme
 
+<!-- separator -->
+
 The `@operational/theme` package defines a set of styling constants in the form of a plain JavaScript object that other `@operational` packages consume to customize their styling.
 
 ## Getting Started
@@ -39,6 +41,8 @@ const App = () => {
 ```
 
 The background color of the button will now turn to what you specified.
+
+<!-- separator -->
 
 ## Documentation
 

@@ -30,7 +30,7 @@ const style = {
   }
 }
 
-const mainPaths = ["/components", "/blocks", "/visualizations", "/documentation"]
+const mainPaths = ["/components", "/blocks", "/visualizations", "/docs"]
 
 export default ({ pathname, pathmap }) => {
   const pathSegments = pathname ? pathname.split("/").filter(s => s !== "") : []
@@ -61,7 +61,7 @@ export default ({ pathname, pathmap }) => {
           if (url === "/visualizations") {
             return <Icon name="Visualizations" size={28} />
           }
-          if (url === "/documentation") {
+          if (url === "/docs") {
             return <Icon name="Documentation" size={28} />
           }
           return <Icon name="Components" size={28} />

@@ -6,8 +6,8 @@ import { fetchFromRepo } from "../../utils"
 
 export default class extends React.Component {
   static async getInitialProps() {
-    const content = await fetchFromRepo("/packages/visualizations/README.md", 1)
-    return { content }
+    const content = await fetchFromRepo("/packages/visualizations/README.md")
+    return { content: content.split("<!-- separator -->")[1] }
   }
 
   render() {

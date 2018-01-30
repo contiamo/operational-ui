@@ -1,5 +1,7 @@
 # Operational UI Utils
 
+<!-- separator -->
+
 The `@operational/utils` package contains miscellaneous utilities used across `@operational` packages. They include e.g. color modifiers, `d3` utilities and `React` utilities.
 
 ## Getting Started
@@ -15,6 +17,8 @@ import { darken } from "@operational/utils"
 
 console.log(darken("#125431")(10))
 ```
+
+<!-- separator -->
 
 ## Documentation
 
