@@ -40,6 +40,7 @@ var breadcrumbStyle = {
 };
 var explanationStyle = {
     padding: "10px 0",
+    visibility: "hidden",
     "& span.percentage": {
         fontWeight: "bold"
     }
