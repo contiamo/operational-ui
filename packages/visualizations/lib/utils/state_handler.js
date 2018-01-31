@@ -30,7 +30,7 @@ var StateHandler = /** @class */ (function () {
         if (!arguments.length)
             return this.state.current.get("config");
         var invalidOptions = fp_1.reduce.convert({ cap: false })(function (memo, value, key) {
-            if (!value) {
+            if (!value && value !== false) {
                 memo.push(key);
             }
             return memo;
