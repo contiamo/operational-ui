@@ -40,6 +40,7 @@ class Facade {
       duration: 1e3,
       height: 500,
       hidden: false,
+      maxRings: 10,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
       sort: true,

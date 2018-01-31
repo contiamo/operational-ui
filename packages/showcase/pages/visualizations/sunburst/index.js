@@ -324,6 +324,13 @@ const propDescription = {
       optional: true
     },
     {
+      name: "maxRings",
+      description: "Maximum number of rings to display",
+      defaultValue: "10",
+      type: "number",
+      optional: true
+    },
+    {
       name: "numberFormatter",
       description: "Number formatter",
       defaultValue: '(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, ",")',

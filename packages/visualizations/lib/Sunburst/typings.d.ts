@@ -5,6 +5,7 @@ export interface IConfig {
     duration: number;
     height: number;
     hidden: boolean;
+    maxRings: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
     sort: boolean;

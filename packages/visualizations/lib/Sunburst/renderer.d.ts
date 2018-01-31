@@ -35,9 +35,6 @@ declare class Renderer {
     highlightPath(d: TDatum, el: Element): void;
     onMouseLeave(d: TDatum, el: Element): any;
     compute(): void;
-    innerRadius(d: TDatum): number;
-    outerRadius(d: TDatum): number;
-    startAngle(d: TDatum): number;
     endAngle(d: TDatum): number;
     prepareData(): void;
     assignColors(node: any): void;

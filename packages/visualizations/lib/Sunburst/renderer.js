@@ -102,7 +102,9 @@ var Renderer = /** @class */ (function () {
         }
         // Set new scale domains
         var config = this.state.current.get("config"), maxChildRadius = fp_1.reduce(function (memo, child) {
-            return Math.max(memo, child.y1);
+            return child.depth - zoomNode.depth <= _this.state.current.get("config").maxRings
+                ? Math.max(memo, child.y1)
+                : memo;
         }, 0)(zoomNode.descendants()), angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]), radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius]);
         // Save new inner radius to facilitate sizing and positioning of center content
         var innerRadius = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1);
@@ -192,35 +194,31 @@ var Renderer = /** @class */ (function () {
     };
     // Compute
     Renderer.prototype.compute = function () {
+        var _this = this;
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         this.radius =
             Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin;
-        this.angleScale = d3_scale_1.scaleLinear().range([0, 2 * Math.PI]);
-        this.radiusScale = d3_scale_1.scaleLinear().range([0, this.radius]);
+        this.angleScale = d3_scale_1.scaleLinear()
+            .clamp(true)
+            .range([0, 2 * Math.PI]);
+        this.radiusScale = d3_scale_1.scaleLinear()
+            .clamp(true)
+            .range([0, this.radius]);
         this.arc = d3_shape_1.arc()
-            .startAngle(this.startAngle.bind(this))
+            .startAngle(function (d) { return _this.angleScale(d.x0); })
             .endAngle(this.endAngle.bind(this))
-            .innerRadius(this.innerRadius.bind(this))
-            .outerRadius(this.outerRadius.bind(this));
+            .innerRadius(function (d) { return _this.radiusScale(d.y0); })
+            .outerRadius(function (d) { return _this.radiusScale(d.y1); });
         this.previous = this.data;
         this.prepareData();
-    };
-    Renderer.prototype.innerRadius = function (d) {
-        return Math.max(0, this.radiusScale(d.y0));
-    };
-    Renderer.prototype.outerRadius = function (d) {
-        return Math.max(0, this.radiusScale(d.y1));
-    };
-    Renderer.prototype.startAngle = function (d) {
-        return Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0)));
     };
     Renderer.prototype.endAngle = function (d) {
         var _this = this;
         // Set a minimum segment angle so that the segment can always be seen,
         // UNLESS the segment is not the child of the top or zoomed node (i.e. should not be visible)
         var show = fp_1.findIndex(function (datum) { return _this.isEqual(_this.zoomNode || _this.topNode, datum); })(d.ancestors()) > -1;
-        var minAngle = show ? Math.asin(1 / this.innerRadius(d)) || 0 : 0;
-        return Math.max(this.startAngle(d) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
+        var minAngle = show ? Math.asin(1 / this.radiusScale(d.y0)) || 0 : 0;
+        return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
     };
     Renderer.prototype.prepareData = function () {
         var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
