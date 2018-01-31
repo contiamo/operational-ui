@@ -1,6 +1,6 @@
 import Events from "../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
-import { every, find, filter, forEach, findIndex, identity } from "lodash/fp"
+import { every, find, filter, forEach, findIndex, identity, reduce } from "lodash/fp"
 import * as styles from "./styles"
 import { withD3Element } from "../utils/d3_utils"
 
@@ -139,11 +139,14 @@ class Renderer {
 
     // Set new scale domains
     const config: IObject = this.state.current.get("config"),
+      maxChildRadius: number = reduce((memo: number, child: TDatum) => {
+        return Math.max(memo, child.y1)
+      }, 0)(zoomNode.descendants()),
       angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]),
-      radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, 1])
+      radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius])
 
     // Save new inner radius to facilitate sizing and positioning of center content
-    const innerRadius: number = this.radiusScale.domain([zoomNode.y0, 1])(zoomNode.y1)
+    const innerRadius: number = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1)
     this.stateWriter("innerRadius", innerRadius)
     this.el
       .select(`circle.${styles.centerCircle}`)
@@ -278,7 +281,8 @@ class Renderer {
   endAngle(d: TDatum): number {
     // Set a minimum segment angle so that the segment can always be seen,
     // UNLESS the segment is not the child of the top or zoomed node (i.e. should not be visible)
-    const show: boolean = findIndex((datum: TDatum): boolean => this.isEqual(this.zoomNode || this.topNode, datum))(d.ancestors()) > -1
+    const show: boolean =
+      findIndex((datum: TDatum): boolean => this.isEqual(this.zoomNode || this.topNode, datum))(d.ancestors()) > -1
     const minAngle: number = show ? Math.asin(1 / this.innerRadius(d)) || 0 : 0
     return Math.max(this.startAngle(d) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)))
   }

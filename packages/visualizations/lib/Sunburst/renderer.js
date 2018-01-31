@@ -101,9 +101,11 @@ var Renderer = /** @class */ (function () {
             return;
         }
         // Set new scale domains
-        var config = this.state.current.get("config"), angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]), radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, 1]);
+        var config = this.state.current.get("config"), maxChildRadius = fp_1.reduce(function (memo, child) {
+            return Math.max(memo, child.y1);
+        }, 0)(zoomNode.descendants()), angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]), radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius]);
         // Save new inner radius to facilitate sizing and positioning of center content
-        var innerRadius = this.radiusScale.domain([zoomNode.y0, 1])(zoomNode.y1);
+        var innerRadius = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1);
         this.stateWriter("innerRadius", innerRadius);
         this.el
             .select("circle." + styles.centerCircle)
