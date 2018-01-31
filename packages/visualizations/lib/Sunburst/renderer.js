@@ -218,9 +218,7 @@ var Renderer = /** @class */ (function () {
             .descendants()
             .find(function (d) { return d.depth === 0; });
         this.stateWriter("topNode", this.topNode);
-        this.data = d3_hierarchy_1.partition()(hierarchyData)
-            .descendants()
-            .reverse();
+        this.data = d3_hierarchy_1.partition()(hierarchyData).descendants();
         fp_1.forEach(function (d) {
             d.zoomable = d.parent && !!d.children;
         })(this.data);
@@ -296,7 +294,7 @@ var Renderer = /** @class */ (function () {
             //find siblings - same parent, same depth
             var siblings = this.findSiblings(this.data, d);
             var siblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(siblings);
-            var oldPrecedingSibling = this.findDatum(previousData, siblings[siblingIndex + 1]);
+            var oldPrecedingSibling = this.findDatum(previousData, siblings[siblingIndex - 1]);
             x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
             x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
             y0 = d.y0;
@@ -316,9 +314,11 @@ var Renderer = /** @class */ (function () {
         var oldSiblings = this.findSiblings(this.previous || [], d);
         var currentSiblings = this.findSiblings(this.data, d);
         var oldSiblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(oldSiblings);
-        var oldPrecedingSibling = fp_1.find.convert({ cap: false })(function (sibling, i) {
-            return i > oldSiblingIndex && !!_this.findDatum(currentSiblings, sibling);
-        })(oldSiblings);
+        var oldPrecedingSibling = fp_1.filter
+            .convert({ cap: false })(function (sibling, i) {
+            return i < oldSiblingIndex && !!_this.findDatum(currentSiblings, sibling);
+        })(oldSiblings)
+            .pop();
         var precedingSibling = this.findDatum(this.data, oldPrecedingSibling);
         var parent = this.findAncestor(this.data.concat([this.topNode]), d);
         var x;

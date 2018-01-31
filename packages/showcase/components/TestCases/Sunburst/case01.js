@@ -3,12 +3,6 @@ import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
 
-const accessors: any = {
-  name: (d: any): string => d.name,
-  value: (d: any): number => d.value,
-  color: (d: any): string => d.color
-}
-
 const data = {
   name: "All",
   children: [
@@ -281,7 +275,7 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
-    viz.accessors("series", accessors)
+    viz.config({ sort: false })
     viz.draw()
   })
 

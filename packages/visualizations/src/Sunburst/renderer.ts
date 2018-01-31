@@ -283,9 +283,7 @@ class Renderer {
 
     this.stateWriter("topNode", this.topNode)
 
-    this.data = d3Partition()(hierarchyData)
-      .descendants()
-      .reverse()
+    this.data = d3Partition()(hierarchyData).descendants()
 
     forEach((d: TDatum): void => {
       d.zoomable = d.parent && !!d.children
@@ -369,7 +367,7 @@ class Renderer {
       //find siblings - same parent, same depth
       const siblings: TDatum[] = this.findSiblings(this.data, d)
       const siblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(siblings)
-      const oldPrecedingSibling: TDatum = this.findDatum(previousData, siblings[siblingIndex + 1])
+      const oldPrecedingSibling: TDatum = this.findDatum(previousData, siblings[siblingIndex - 1])
 
       x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0
       x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0
@@ -390,9 +388,11 @@ class Renderer {
     const oldSiblings: TDatum[] = this.findSiblings(this.previous || [], d)
     const currentSiblings: TDatum[] = this.findSiblings(this.data, d)
     const oldSiblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(oldSiblings)
-    const oldPrecedingSibling: TDatum = find.convert({ cap: false })((sibling: TDatum, i: number): boolean => {
-      return i > oldSiblingIndex && !!this.findDatum(currentSiblings, sibling)
-    })(oldSiblings)
+    const oldPrecedingSibling: TDatum = filter
+      .convert({ cap: false })((sibling: TDatum, i: number): boolean => {
+        return i < oldSiblingIndex && !!this.findDatum(currentSiblings, sibling)
+      })(oldSiblings)
+      .pop()
     const precedingSibling: TDatum = this.findDatum(this.data, oldPrecedingSibling)
     const parent: TDatum = this.findAncestor(this.data.concat([this.topNode]), d)
 

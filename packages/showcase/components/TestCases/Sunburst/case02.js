@@ -275,6 +275,7 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
+    viz.config({ sort: false })
     viz.accessors("series", accessors.series)
     viz.accessors("data", accessors.data)
     viz.draw()
