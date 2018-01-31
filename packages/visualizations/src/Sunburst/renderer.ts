@@ -128,11 +128,12 @@ class Renderer {
   }
 
   onClick(payload: IObject): void {
-    const zoomNode: TDatum = payload.d || this.topNode
     // Don't allow zooming on last child
-    if (!zoomNode.children) {
+    if (payload.d && !payload.d.children) {
       return
     }
+
+    const zoomNode: TDatum = payload.d || this.topNode
 
     // If the center node is clicked, zoom out
     if (zoomNode === this.zoomNode && payload && payload.force) {
@@ -272,7 +273,8 @@ class Renderer {
   }
 
   prepareData(): void {
-    const data: IObject = this.state.current.get("accessors").data.data(this.state.current.get("data"))
+    const data: IObject = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
+
     const sortingFunction: any = this.state.current.get("config").sort
       ? (a: TDatum, b: TDatum) => b.value - a.value
       : undefined
@@ -292,7 +294,6 @@ class Renderer {
 
     this.data = d3Partition()(hierarchyData)
       .descendants()
-      .filter((d: TDatum): boolean => d.parent)
       .reverse()
 
     forEach((d: TDatum): void => {
@@ -325,6 +326,12 @@ class Renderer {
   }
 
   isSibling(d1: TDatum, d2: TDatum): boolean {
+    if (!d1.parent && !d2.parent) {
+      return true
+    }
+    if (!d1.parent || !d2.parent) {
+      return false
+    }
     return every(identity)([d1.depth === d2.depth, this.name(d1.parent) === this.name(d2.parent)])
   }
 
@@ -403,7 +410,15 @@ class Renderer {
     })(oldSiblings)
     const precedingSibling: TDatum = this.findDatum(this.data, oldPrecedingSibling)
     const parent: TDatum = this.findAncestor(this.data.concat([this.topNode]), d)
-    const x: number = precedingSibling ? precedingSibling.x1 : parent.x0
+
+    let x: number
+    if (precedingSibling) {
+      x = precedingSibling.x1
+    } else if (parent) {
+      x = parent.x0
+    } else {
+      x = 0
+    }
 
     const f = interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: x, x1: x, y0: d.y0, y1: d.y1 })
     return (t: number): string => this.arc(f(t))

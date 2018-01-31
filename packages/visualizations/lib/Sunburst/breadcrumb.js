@@ -35,7 +35,8 @@ var Breadcrumb = /** @class */ (function () {
     Breadcrumb.prototype.label = function (d, i) {
         // Pixel width of character approx 1/2 of font-size - allow 7px per character
         var desiredPixelWidth = dims.width - (i > 0 ? dims.tip : 0) - dims.tip - 2 * dims.space, numberOfCharacters = desiredPixelWidth / 7;
-        return d.data.name.substring(0, numberOfCharacters) + (d.data.name.length > numberOfCharacters ? "..." : "");
+        var name = d.data.name || "";
+        return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "");
     };
     Breadcrumb.prototype.update = function (nodeArray, percentage) {
         // Data join; key function combines name and depth (= position in sequence).

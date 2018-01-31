@@ -94,11 +94,11 @@ var Renderer = /** @class */ (function () {
     };
     Renderer.prototype.onClick = function (payload) {
         var _this = this;
-        var zoomNode = payload.d || this.topNode;
         // Don't allow zooming on last child
-        if (!zoomNode.children) {
+        if (payload.d && !payload.d.children) {
             return;
         }
+        var zoomNode = payload.d || this.topNode;
         // If the center node is clicked, zoom out
         if (zoomNode === this.zoomNode && payload && payload.force) {
             this.zoomOut(payload);
@@ -213,7 +213,7 @@ var Renderer = /** @class */ (function () {
         this.prepareData();
     };
     Renderer.prototype.prepareData = function () {
-        var data = this.state.current.get("accessors").data.data(this.state.current.get("data"));
+        var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
         var sortingFunction = this.state.current.get("config").sort
             ? function (a, b) { return b.value - a.value; }
             : undefined;
@@ -228,7 +228,6 @@ var Renderer = /** @class */ (function () {
         this.stateWriter("topNode", this.topNode);
         this.data = d3_hierarchy_1.partition()(hierarchyData)
             .descendants()
-            .filter(function (d) { return d.parent; })
             .reverse();
         fp_1.forEach(function (d) {
             d.zoomable = !!d.children;
@@ -254,6 +253,12 @@ var Renderer = /** @class */ (function () {
         return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]];
     };
     Renderer.prototype.isSibling = function (d1, d2) {
+        if (!d1.parent && !d2.parent) {
+            return true;
+        }
+        if (!d1.parent || !d2.parent) {
+            return false;
+        }
         return fp_1.every(fp_1.identity)([d1.depth === d2.depth, this.name(d1.parent) === this.name(d2.parent)]);
     };
     Renderer.prototype.isEqual = function (d1, d2) {
@@ -330,7 +335,16 @@ var Renderer = /** @class */ (function () {
         })(oldSiblings);
         var precedingSibling = this.findDatum(this.data, oldPrecedingSibling);
         var parent = this.findAncestor(this.data.concat([this.topNode]), d);
-        var x = precedingSibling ? precedingSibling.x1 : parent.x0;
+        var x;
+        if (precedingSibling) {
+            x = precedingSibling.x1;
+        }
+        else if (parent) {
+            x = parent.x0;
+        }
+        else {
+            x = 0;
+        }
         var f = d3_interpolate_2.interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: x, x1: x, y0: d.y0, y1: d.y1 });
         return function (t) { return _this.arc(f(t)); };
     };

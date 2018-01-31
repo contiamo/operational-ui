@@ -11,9 +11,6 @@ const arcStyle = {
   },
   "&.zoomed": {
     cursor: "zoom-out"
-  },
-  "&.parent": {
-    fill: "#fff"
   }
 }
 

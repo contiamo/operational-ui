@@ -37,8 +37,8 @@ class Breadcrumb {
 
   updateHoverPath(payload: IObject): void {
     const computed: IObject = this.state.current.get("computed").renderer
-    const fixedNode: any = computed.zoomNode || computed.topNode
 
+    const fixedNode: any = computed.zoomNode || computed.topNode
     const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
 
     const percentageString =
@@ -55,7 +55,8 @@ class Breadcrumb {
     // Pixel width of character approx 1/2 of font-size - allow 7px per character
     const desiredPixelWidth: number = dims.width - (i > 0 ? dims.tip : 0) - dims.tip - 2 * dims.space,
       numberOfCharacters: number = desiredPixelWidth / 7
-    return d.data.name.substring(0, numberOfCharacters) + (d.data.name.length > numberOfCharacters ? "..." : "")
+    const name: string = d.data.name || ""
+    return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "")
   }
 
   update(nodeArray: any[], percentage: string): void {
