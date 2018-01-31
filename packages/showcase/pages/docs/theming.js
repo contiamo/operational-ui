@@ -6,7 +6,7 @@ import { fetchFromRepo } from "../../utils"
 
 export default class extends React.Component {
   static async getInitialProps() {
-    const content = await fetchFromRepo("/packages/theme/README.md", 1)
+    const content = await fetchFromRepo("/packages/theme/README.md")
     return { content }
   }
 

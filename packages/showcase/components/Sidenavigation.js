@@ -25,6 +25,7 @@ const getMainRouteIcon = mainRoute => {
 const style = {
   flex: "0 0 240px",
   "& a": {
+    display: "block",
     textDecoration: "none",
     width: "100%"
   }
@@ -66,6 +67,9 @@ export default ({ pathname, pathmap }) => {
           }
           return <Icon name="Components" size={28} />
         })()
+        const onClick = () => {
+          Router.push(pathmap[url].page)
+        }
         const el = (
           <SidenavHeader
             css={{ cursor: "pointer" }}
@@ -74,6 +78,7 @@ export default ({ pathname, pathmap }) => {
             active={pathname === url}
             icon={logoElement}
             label={label}
+            onClick={routeMatch ? onClick : null}
           >
             {routeMatch
               ? items.map((item, index) => (

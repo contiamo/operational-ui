@@ -12,27 +12,32 @@
 
 <!-- separator -->
 
-`Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for heavily data-driven interfaces that assume familiarity through routine use, adding a bit more on the initial usage learning curve for the sake of compactness and space-efficiency. It encodes a [design language](https://ui.contiamo.com/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
+`Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for data-driven interfaces that assume familiarity through routine use, prioritizing compactness and space-efficiency. It implements a [design language](https://ui.contiamo.com/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
 
 ## Getting started
 
-The `@operational/components` library contains atomic building blocks, and is a good place to start with Operational UI packages.
+`Operational UI` has multiple packages covering different aspects of data-driven UI's , but you can cover most of your needs with `@operational/components`. This package contains stateless atomic building blocks all the way from buttons to a side navigation.
 
 To install, simply grab the package via npm or yarn, along with `React` and `ReactDOM`:
 
 `npm install @operational/components react react-dom`
 
+Create your first simple UI like so:
+
 ```javascript
+/*
+ * Creating and rendering a simple UI with a single button
+ */
 import React from "react"
 import { render } from "react-dom"
 import { OperationalUI, Button } from "@operational/components"
 
 // Always wrap your interface in the `OperationalUI` wrapper, 
 // which does important setup work, and requires a single child element.
-// See https://www.npmjs.com/package/%40operational%2Fcomponents
+// See https://www.npmjs.com/package/@operational/components
 const MyInterface = () => (
   <OperationalUI>
-    <Button onClick={() => {alert("Hello!")}}>Say hello!</Button>
+    <Button onClick={() => { alert("Hello!") }}>Say hello!</Button>
   </OperationalUI>
 )
 
@@ -44,9 +49,9 @@ You have your first simple button. Head to our [getting started](https://ui.cont
 ## Next Steps: the `@operational` Package Family
 
 Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with small packages covering various facets of data-driven UI's:
-1. [Components](https://github.com/Contiamo/operational-ui/tree/master/packages/components), used in the example above, are the smallest and simplest building blocks, implemented as presentational, heavily [controlled](https://reactjs.org/docs/forms.html#controlled-components) React components. Buttons, input fields, modals, date pickers, and the like.
-1. [Blocks](https://github.com/Contiamo/operational-ui/tree/master/packages/blocks) hold more state, more side effects, more opinions. They are our work-in-progress selection of widgets that worked well with client projects and which seemed like a good enough abstraction for a library.
-1. [Visualizations](https://github.com/Contiamo/operational-ui/tree/master/packages/visualizations) are full-featured d3 apps, 
+1. [Components](https://ui.contiamo.com/components), used in the example above, are the smallest and simplest building blocks, implemented as presentational, [controlled](https://reactjs.org/docs/forms.html#controlled-components) React components. Buttons, input fields, modals, date pickers, and the like.
+1. [Blocks](https://ui.contiamo.com/blocks) hold more state, more side effects, more opinions. They are our work-in-progress selection of widgets that worked well with client projects and which seemed like a good enough abstraction for a library.
+1. [Visualizations](https://ui.contiamo.com/visualizations) are full-featured d3 apps, 
 1. The [theme](https://github.com/Contiamo/operational-ui/tree/master/packages/theme) package exports a plain object you can use to customize the designs of components and visualizations.
 1. [Utils](https://github.com/Contiamo/operational-ui/tree/master/packages/utils) contain helper methods for color manipulation, creating specific higher-order React components, and d3 helpers.
 1. [Showcase](https://github.com/Contiamo/operational-ui/tree/master/packages/showcase) is the documentation website for the modules.

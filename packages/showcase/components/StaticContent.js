@@ -8,29 +8,6 @@ import highlight from "highlight.js"
 
 const Container = glamorous.div(({ theme }) => ({
   label: "showcasestaticcontent",
-  "& h2": {
-    ...theme.typography.heading1,
-    marginBottom: 5,
-    ":not(:first-child)": {
-      marginTop: 20
-    }
-  },
-  "& h3": {
-    ...theme.typography.heading2,
-    color: "#888"
-  },
-  "& p, & li": {
-    ...theme.typography.body,
-    lineHeight: 1.8
-  },
-  "& ul": {
-    paddingLeft: theme.spacing * 1.25
-  },
-  "& code": {
-    backgroundColor: "#eee",
-    padding: "2px 4px",
-    borderRadius: 2
-  },
   "& pre": {
     backgroundColor: "#eee",
     color: theme.colors.black,

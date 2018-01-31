@@ -20,6 +20,9 @@ var Container = glamorous_1.default.table(function (_a) {
         backgroundColor: "white",
         "& th": __assign({ border: "1px solid" }, theme.typography.body, { fontWeight: 600 }),
         "& td": __assign({ border: "1px solid" }, theme.typography.body),
+        "& td p": {
+            marginBottom: 0
+        },
         "& td, & th": {
             borderColor: theme.colors.gray20,
             padding: theme.spacing / 2 + "px " + theme.spacing + "px"

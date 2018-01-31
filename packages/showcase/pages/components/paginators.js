@@ -64,7 +64,12 @@ const propDescription = [
 export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
-      <p>Simple component to navigate through pages</p>
+      <p>
+        Pagination is an easy-to-use, predictable and expressive way to handle datasets that don't fit in a single view.
+        They are a straightforward alternative to infinite scrolling and lazy-loading interface elements, which take a
+        long time to get cross-browser effective and accessible. This page describes how to use Operational UI's
+        paginators.
+      </p>
 
       <h2>Usage</h2>
       <Playground snippet={PaginatorSnippet} components={{ Paginator }} />

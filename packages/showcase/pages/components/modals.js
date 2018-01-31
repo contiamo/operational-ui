@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Modal, Card, CardHeader } from "@operational/components"
+import { Modal, Card, CardHeader, Button } from "@operational/components"
 
 import Layout from "../../components/Layout"
 import Table from "../../components/PropsTable"
@@ -27,13 +27,14 @@ const simpleSnippet = `
               </div>
             </Modal>
           ) : null}
-          <p
+          <Button
+            color="info"
             onClick={ev => {
               this.setState(prevState => ({ isModalOpen: !prevState.isModalOpen }))
             }}
           >
             Expand your modal!
-          </p>
+          </Button>
         </div>
       )
     }
@@ -72,10 +73,14 @@ const propDescription = [
 export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
-      <p>Modals are customizable full-screen alert boxes.</p>
+      <p>
+        Modals are customizable full-screen alert boxes. They should be used sparingly, but they come in handy when
+        there is a legitimate reason to block the rest of the screen. Several Operational components such as date
+        pickers and select boxes implement local pop-ups, which are preferable most of the time.
+      </p>
 
       <h2>Usage</h2>
-      <Playground snippet={simpleSnippet} components={{ Modal }} />
+      <Playground snippet={simpleSnippet} components={{ Modal, Button }} />
 
       <h2>Props</h2>
       <Table props={propDescription} />
