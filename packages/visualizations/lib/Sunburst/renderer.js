@@ -78,7 +78,6 @@ var Renderer = /** @class */ (function () {
         arcs
             .enter()
             .append("svg:path")
-            .attr("class", function (d) { return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : ""); })
             .style("fill", this.color)
             .style("stroke", "#fff")
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
@@ -86,6 +85,7 @@ var Renderer = /** @class */ (function () {
             .merge(arcs)
             .transition()
             .duration(duration)
+            .attr("class", function (d) { return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : ""); })
             .attrTween("d", this.arcTween.bind(this));
     };
     Renderer.prototype.onClick = function (payload) {
@@ -222,7 +222,7 @@ var Renderer = /** @class */ (function () {
             .descendants()
             .reverse();
         fp_1.forEach(function (d) {
-            d.zoomable = !!d.children;
+            d.zoomable = d.parent && !!d.children;
         })(this.data);
         this.stateWriter("data", this.data);
     };

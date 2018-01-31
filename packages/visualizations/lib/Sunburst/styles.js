@@ -19,6 +19,9 @@ var arcStyle = {
     },
     "&.zoomed": {
         cursor: "zoom-out"
+    },
+    "&.zoomed.parent": {
+        cursor: "default"
     }
 };
 var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.typography.small);

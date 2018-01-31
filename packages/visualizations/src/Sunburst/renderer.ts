@@ -109,10 +109,6 @@ class Renderer {
     arcs
       .enter()
       .append("svg:path")
-      .attr(
-        "class",
-        (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
-      )
       .style("fill", this.color)
       .style("stroke", "#fff")
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
@@ -120,6 +116,10 @@ class Renderer {
       .merge(arcs)
       .transition()
       .duration(duration)
+      .attr(
+        "class",
+        (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
+      )
       .attrTween("d", this.arcTween.bind(this))
   }
 
@@ -288,7 +288,7 @@ class Renderer {
       .reverse()
 
     forEach((d: TDatum): void => {
-      d.zoomable = !!d.children
+      d.zoomable = d.parent && !!d.children
     })(this.data)
 
     this.stateWriter("data", this.data)
