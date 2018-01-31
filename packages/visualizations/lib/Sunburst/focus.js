@@ -20,6 +20,10 @@ var Focus = /** @class */ (function (_super) {
     }
     Focus.prototype.onElementHover = function (payload) {
         this.remove();
+        var computed = this.state.current.get("computed");
+        if (payload.d === computed.renderer.topNode) {
+            return;
+        }
         var focusPoint = payload.focusPoint, datum = payload.d;
         focus_utils_1.default.drawHidden(this.el, "element");
         var content = this.el.append("xhtml:ul");
@@ -28,7 +32,6 @@ var Focus = /** @class */ (function (_super) {
             .attr("class", "title")
             .text(dataName(datum));
         content.append("span").text("(" + this.state.current.get("config").numberFormatter(dataValue(datum)) + ")");
-        var computed = this.state.current.get("computed");
         var comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode;
         var percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3);
         content.append("xhtml:li").text(percentage + "% of " + dataName(comparisonNode));

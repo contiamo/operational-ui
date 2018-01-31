@@ -10,6 +10,11 @@ class Focus extends AbstractFocus {
   onElementHover(payload: { focusPoint: IObject; d: TDatum }): void {
     this.remove()
 
+    const computed: IObject = this.state.current.get("computed")
+    if (payload.d === computed.renderer.topNode) {
+      return
+    }
+
     const focusPoint: IObject = payload.focusPoint,
       datum: TDatum = payload.d
 
@@ -24,7 +29,6 @@ class Focus extends AbstractFocus {
 
     content.append("span").text(`(${this.state.current.get("config").numberFormatter(dataValue(datum))})`)
 
-    const computed: IObject = this.state.current.get("computed")
     const comparisonNode: TDatum = computed.renderer.zoomNode || computed.renderer.topNode
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
     content.append("xhtml:li").text(`${percentage}% of ${dataName(comparisonNode)}`)
