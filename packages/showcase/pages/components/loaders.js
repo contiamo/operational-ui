@@ -32,24 +32,28 @@ const progressPropDescription = [
 export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
-      <p>Animating progress bar, covering an entire area. Add as a child to any non-statically positioned element.</p>
+      <p>
+        Spinners and progress elements are important components of data-driven UI's, especially when data takes a long
+        time to load. These components should be easily recognizable, easy to plug into any container, and expressive in
+        their looks. Here are some guidelines and code examples on how to use them effectively:
+      </p>
 
-      <CardHeader>Spinners</CardHeader>
+      <h2>Spinners</h2>
       <p>Spinners are used to indicate loading state in a smaller element, such as a card or a single, smaller form.</p>
 
-      <h2>Usage</h2>
+      <h3>Usage</h3>
       <Playground snippet={spinnerSnippet} components={{ Spinner }} />
 
-      <h2>Props</h2>
+      <h3>Props</h3>
       <Table props={spinnerPropDescription} />
 
-      <CardHeader>Progress</CardHeader>
+      <h2>Progress</h2>
       <p>The progress element is used for larger loading sections, most typically the entire page.</p>
 
-      <h2>Usage</h2>
+      <h3>Usage</h3>
       <Playground snippet={progressSnippet} components={{ Progress }} />
 
-      <h2>Props></h2>
+      <h3>Props></h3>
       <Table props={progressPropDescription} />
     </Card>
   </Layout>

@@ -116,18 +116,13 @@ export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
       <p>
-        Component used to navigate across multiple views. It's composed of multiple <a href="#tab">Tab</a> components.
+        Component used to navigate across multiple views. It is composed of multiple `<Tab />` components.
       </p>
 
       <h2>Usage</h2>
       <Playground snippet={simpleSnippet} components={{ Tabs, Tab }} />
 
       <h2>Props</h2>
-
-      <div style={{ marginBottom: 32 }} />
-
-      <CardHeader id="tab">Tab</CardHeader>
-
       <Table props={propDescription.Tab} />
     </Card>
   </Layout>

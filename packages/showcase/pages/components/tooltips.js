@@ -71,8 +71,7 @@ export default props => (
     <Card>
       <p>
         Tooltips give helpful hints about actions an end-user can perform. They are designed to be reusable, elegant and
-        unobtrusive. Tooltips are great for UX. They can (and in many cases should) be used along with, and in, other
-        components. For this reason, we took a highly versatile approach to our tooltips.
+        unobtrusive. Tooltips are great for UX, so we try to make them as versatile as possible.
       </p>
 
       <h2>Usage</h2>

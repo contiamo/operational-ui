@@ -118,7 +118,7 @@ const colors: ThemeColors = {
   emphasizedText: "#373d3f",
   lightText: "#969696",
   linkText: "#1499CE",
-  sidenavBackground: "#394960",
+  sidenavBackground: "#2F3C4F",
   separator: "#f2f2f2",
   secondarySeparator: "#f8f8f8"
 }

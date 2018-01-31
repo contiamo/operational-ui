@@ -40,8 +40,10 @@ var IconContainer = glamorous_1.default.div({
 });
 exports.default = function (props) { return (
 // See ./SidenavItem.tsx for reason why class name is set.
-React.createElement(Container, { key: props.id, css: props.css, onClick: props.onClick, className: ["op_sidenavheader", props.className].filter(function (a) { return !!a; }).join(" ") },
-    React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded },
+// Note that the click listener is set on `<Content>` so it doesn't interfere
+// with click listeners set on the children.
+React.createElement(Container, { key: props.id, css: props.css, className: ["op_sidenavheader", props.className].filter(function (a) { return !!a; }).join(" ") },
+    React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded, onClick: props.onClick },
         React.createElement(IconContainer, null, props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: props.icon, size: 24 }) : props.icon),
         React.createElement(Label, null, props.label)),
     props.expanded ? props.children : null)); };

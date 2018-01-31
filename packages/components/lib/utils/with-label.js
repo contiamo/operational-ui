@@ -18,7 +18,7 @@ var Container = glamorous_1.default.div(function (_a) {
 });
 var Label = glamorous_1.default.label(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { textTransform: "uppercase", opacity: 0.8, display: "inline-block", marginBottom: theme.spacing / 4 }));
+    return (__assign({}, theme.typography.small, { fontWeight: 600, opacity: 0.7, display: "inline-block", marginBottom: theme.spacing / 4 }));
 });
 var withLabel = function (Component) {
     return function (props) {

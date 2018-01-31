@@ -1,6 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Table } from "@operational/components"
+import marked from "marked"
 
 const sharedPropDescription = [
   {
@@ -24,7 +25,7 @@ export default ({ props }) => (
     columns={["Name", "Description", "Default", "Type", "Optional"]}
     rows={[...sharedPropDescription, ...props].map(({ name, description, defaultValue, type, optional }) => [
       name,
-      description,
+      <p dangerouslySetInnerHTML={{ __html: marked(description) }} />,
       defaultValue,
       type,
       optional ? "✅" : "🚫"

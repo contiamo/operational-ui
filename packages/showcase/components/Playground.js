@@ -35,13 +35,11 @@ const Container = glamorous.div(({ theme, isExpanded }) => ({
         }
       }
     : {},
-
   "& .playground": {
     display: "flex",
     width: "100%",
     height: isExpanded ? "calc(100% - 20px)" : 360
   },
-
   "& .playgroundCode, & .playgroundPreview": {
     flex: "0 0 50%"
   },
@@ -49,6 +47,9 @@ const Container = glamorous.div(({ theme, isExpanded }) => ({
     padding: theme.spacing * 4 / 3,
     height: "100%",
     overflow: "scroll"
+  },
+  "& .CodeMirror": {
+    backgroundColor: "#4B596E"
   },
   "& .CodeMirror-wrap.CodeMirror": {
     minHeight: 360

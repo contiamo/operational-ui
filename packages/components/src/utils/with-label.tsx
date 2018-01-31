@@ -7,9 +7,9 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.body,
-  textTransform: "uppercase",
-  opacity: 0.8,
+  ...theme.typography.small,
+  fontWeight: 600,
+  opacity: 0.7,
   display: "inline-block",
   marginBottom: theme.spacing / 4
 }))

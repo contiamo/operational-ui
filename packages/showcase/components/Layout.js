@@ -13,11 +13,7 @@ const pathmap = nextConfig.exportPathMap()
 
 const Container = glamorous.div({
   label: "showcaselayout",
-  display: "flex",
-  "& p": {
-    marginTop: 0,
-    marginBottom: operational.spacing
-  }
+  display: "flex"
 })
 
 const Content = glamorous.div({
@@ -54,14 +50,28 @@ const PageContent = glamorous.div(({ theme }) => ({
     color: darken(theme.colors.info)(5)
   },
   "& h2": {
-    ...theme.typography.heading2
+    ...theme.typography.heading1
   },
   "& h3": {
-    ...theme.typography.heading2
+    ...theme.typography.heading2,
+    color: "#888"
+  },
+  "& p, & li": {
+    ...theme.typography.body,
+    lineHeight: 1.6,
+    maxWidth: 670
   },
   "& p": {
-    ...theme.typography.body,
-    maxWidth: 670
+    marginTop: 0,
+    marginBottom: operational.spacing
+  },
+  "& ul": {
+    paddingLeft: theme.spacing * 1.25
+  },
+  "& code": {
+    backgroundColor: "#eee",
+    padding: "2px 4px",
+    borderRadius: 2
   }
 }))
 
@@ -87,7 +97,7 @@ export default class Layout extends React.Component {
             {this.state.isNavigating && <Progress />}
             <Sidenavigation pathname={pathname} pathmap={pathmap} />
             <Content>
-              <Header note="v0.1.0-10" pathname={pathname} pathmap={pathmap} />
+              <Header note="v0.1.0-11" pathname={pathname} pathmap={pathmap} />
               <PageContent>{this.props.children}</PageContent>
             </Content>
           </Container>

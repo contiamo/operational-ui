@@ -7,7 +7,7 @@ export interface IProps {
   className?: string
   children?: React.ReactNode
   columns: string[]
-  rows: (string[])[]
+  rows: ((string | React.ReactNode)[])[]
 }
 
 const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
@@ -24,6 +24,9 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   "& td": {
     border: "1px solid",
     ...theme.typography.body
+  },
+  "& td p": {
+    marginBottom: 0
   },
   "& td, & th": {
     borderColor: theme.colors.gray20,

@@ -58,13 +58,14 @@ const IconContainer = glamorous.div({
 
 export default (props: IProps) => (
   // See ./SidenavItem.tsx for reason why class name is set.
+  // Note that the click listener is set on `<Content>` so it doesn't interfere
+  // with click listeners set on the children.
   <Container
     key={props.id}
     css={props.css}
-    onClick={props.onClick}
     className={["op_sidenavheader", props.className].filter(a => !!a).join(" ")}
   >
-    <Content isActive={!!props.active} isExpanded={!!props.expanded}>
+    <Content isActive={!!props.active} isExpanded={!!props.expanded} onClick={props.onClick}>
       <IconContainer>
         {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={24} /> : props.icon}
       </IconContainer>

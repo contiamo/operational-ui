@@ -5,7 +5,7 @@ export interface IProps {
     className?: string;
     children?: React.ReactNode;
     columns: string[];
-    rows: (string[])[];
+    rows: ((string | React.ReactNode)[])[];
 }
 declare const _default: (props: IProps) => JSX.Element;
 export default _default;
