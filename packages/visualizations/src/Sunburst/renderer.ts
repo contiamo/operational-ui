@@ -254,13 +254,33 @@ class Renderer {
     this.angleScale = d3ScaleLinear().range([0, 2 * Math.PI])
     this.radiusScale = d3ScaleLinear().range([0, this.radius])
     this.arc = d3Arc()
-      .startAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0))))
-      .endAngle((d: TDatum) => Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x1))))
-      .innerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y0)))
-      .outerRadius((d: TDatum) => Math.max(0, this.radiusScale(d.y1)))
+      .startAngle(this.startAngle.bind(this))
+      .endAngle(this.endAngle.bind(this))
+      .innerRadius(this.innerRadius.bind(this))
+      .outerRadius(this.outerRadius.bind(this))
 
     this.previous = this.data
     this.prepareData()
+  }
+
+  innerRadius(d: TDatum): number {
+    return Math.max(0, this.radiusScale(d.y0))
+  }
+
+  outerRadius(d: TDatum): number {
+    return Math.max(0, this.radiusScale(d.y1))
+  }
+
+  startAngle(d: TDatum): number {
+    return Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0)))
+  }
+
+  endAngle(d: TDatum): number {
+    // Set a minimum segment angle so that the segment can always be seen,
+    // UNLESS the segment is not the child of the top or zoomed node (i.e. should not be visible)
+    const show: boolean = findIndex((datum: TDatum): boolean => this.isEqual(this.zoomNode || this.topNode, datum))(d.ancestors()) > -1
+    const minAngle: number = show ? Math.asin(1 / this.innerRadius(d)) || 0 : 0
+    return Math.max(this.startAngle(d) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)))
   }
 
   prepareData(): void {
@@ -380,7 +400,7 @@ class Renderer {
       y1 = d.y1
     }
 
-    const f = interpolateObject({ x0, x1, y0, y1 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 })
+    const f = interpolateObject({ x0, x1, y0, y1 }, d)
     return (t: number): string => this.arc(f(t))
   }
 
@@ -405,7 +425,7 @@ class Renderer {
       x = 0
     }
 
-    const f = interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: x, x1: x, y0: d.y0, y1: d.y1 })
+    const f = interpolateObject(d, { x0: x, x1: x })
     return (t: number): string => this.arc(f(t))
   }
 

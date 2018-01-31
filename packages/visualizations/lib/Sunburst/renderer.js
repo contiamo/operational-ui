@@ -190,19 +190,35 @@ var Renderer = /** @class */ (function () {
     };
     // Compute
     Renderer.prototype.compute = function () {
-        var _this = this;
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         this.radius =
             Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin;
         this.angleScale = d3_scale_1.scaleLinear().range([0, 2 * Math.PI]);
         this.radiusScale = d3_scale_1.scaleLinear().range([0, this.radius]);
         this.arc = d3_shape_1.arc()
-            .startAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, _this.angleScale(d.x0))); })
-            .endAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, _this.angleScale(d.x1))); })
-            .innerRadius(function (d) { return Math.max(0, _this.radiusScale(d.y0)); })
-            .outerRadius(function (d) { return Math.max(0, _this.radiusScale(d.y1)); });
+            .startAngle(this.startAngle.bind(this))
+            .endAngle(this.endAngle.bind(this))
+            .innerRadius(this.innerRadius.bind(this))
+            .outerRadius(this.outerRadius.bind(this));
         this.previous = this.data;
         this.prepareData();
+    };
+    Renderer.prototype.innerRadius = function (d) {
+        return Math.max(0, this.radiusScale(d.y0));
+    };
+    Renderer.prototype.outerRadius = function (d) {
+        return Math.max(0, this.radiusScale(d.y1));
+    };
+    Renderer.prototype.startAngle = function (d) {
+        return Math.max(0, Math.min(2 * Math.PI, this.angleScale(d.x0)));
+    };
+    Renderer.prototype.endAngle = function (d) {
+        var _this = this;
+        // Set a minimum segment angle so that the segment can always be seen,
+        // UNLESS the segment is not the child of the top or zoomed node (i.e. should not be visible)
+        var show = fp_1.findIndex(function (datum) { return _this.isEqual(_this.zoomNode || _this.topNode, datum); })(d.ancestors()) > -1;
+        var minAngle = show ? Math.asin(1 / this.innerRadius(d)) || 0 : 0;
+        return Math.max(this.startAngle(d) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
     };
     Renderer.prototype.prepareData = function () {
         var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
@@ -306,7 +322,7 @@ var Renderer = /** @class */ (function () {
             y0 = d.y0;
             y1 = d.y1;
         }
-        var f = d3_interpolate_2.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 });
+        var f = d3_interpolate_2.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, d);
         return function (t) { return _this.arc(f(t)); };
     };
     Renderer.prototype.removeArcTween = function (d, i) {
@@ -331,7 +347,7 @@ var Renderer = /** @class */ (function () {
         else {
             x = 0;
         }
-        var f = d3_interpolate_2.interpolateObject({ x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }, { x0: x, x1: x, y0: d.y0, y1: d.y1 });
+        var f = d3_interpolate_2.interpolateObject(d, { x0: x, x1: x });
         return function (t) { return _this.arc(f(t)); };
     };
     Renderer.prototype.labelTranslate = function (d) {
