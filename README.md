@@ -12,7 +12,7 @@
 
 <!-- separator -->
 
-`Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for data-driven interfaces that assume familiarity through routine use, prioritizing compactness and space-efficiency. It implements a [design language](https://ui.contiamo.com/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
+`Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for data-driven interfaces that assume familiarity through routine use, prioritizing compactness and space-efficiency. It implements a [design language](https://ui.contiamo.com/docs/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
 
 ## Getting started
 
