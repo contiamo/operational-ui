@@ -9,7 +9,11 @@ import highlight from "highlight.js"
 const Container = glamorous.div(({ theme }) => ({
   label: "showcasestaticcontent",
   "& h2": {
-    ...theme.typography.heading1
+    ...theme.typography.heading1,
+    marginBottom: 5,
+    ":not(:first-child)": {
+      marginTop: 20
+    }
   },
   "& h3": {
     ...theme.typography.heading2,
@@ -68,7 +72,11 @@ export default class StaticContent extends React.Component {
     this.codes = []
     const n = this.codeNodes.length
     for (let i = 0; i < n; i++) {
-      this.codes.push(this.codeNodes[i].innerText)
+      const code = this.codeNodes[i].innerText
+      this.codes.push(code)
+      if (code[0] === " ") {
+        this.codeNodes[i].innerText = code.slice(1)
+      }
       highlight.highlightBlock(this.codeNodes[i])
     }
   }
