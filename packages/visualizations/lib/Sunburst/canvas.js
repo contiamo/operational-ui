@@ -122,10 +122,6 @@ var Canvas = /** @class */ (function () {
         this.el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this));
         this.el.node().removeEventListener("click", this.onClick.bind(this));
-        this.elements = {};
-        this.container.remove();
-        this.container = undefined;
-        this.el = undefined;
     };
     return Canvas;
 }());

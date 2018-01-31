@@ -19,6 +19,10 @@ export const marathon = ({ test, afterAll, container }) => {
     viz.data({ name: "Testing", value: 50 })
     viz.draw()
   })
+
+  test("Close chart", () => {
+    viz.close()
+  })
 }
 
 export const title = "No data"

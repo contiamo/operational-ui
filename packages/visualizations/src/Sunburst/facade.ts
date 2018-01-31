@@ -151,6 +151,7 @@ class Facade {
       return
     }
     this.__disposed = true
+    this.canvas.remove()
     this.events.removeAll()
     this.context.innerHTML = ""
   }

@@ -416,14 +416,6 @@ class Renderer {
   translateString(values: [number, number]): string {
     return `translate(${values.join(", ")})`
   }
-
-  // // Remove & clean up
-  // remove(): void {
-  //   if (this.drawn) {
-  //     this.el.remove()
-  //     this.drawn = false
-  //   }
-  // }
 }
 
 export default Renderer
