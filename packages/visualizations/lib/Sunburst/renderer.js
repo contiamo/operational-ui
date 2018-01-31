@@ -21,10 +21,6 @@ var Renderer = /** @class */ (function () {
         this.el = el;
         this.assignAccessors();
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.CLICK, this.onClick.bind(this));
-        // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
-        // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
-        // this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
-        // this.events.on(Events.CHART.MOUSEOUT, this.updateElementHover.bind(this))
     }
     Renderer.prototype.assignAccessors = function () {
         var _this = this;
@@ -192,11 +188,7 @@ var Renderer = /** @class */ (function () {
             _this.el.select("div.explanation").style("visibility", "hidden");
         };
     };
-    // highlightElement(key: string): void {
-    //   const d: TDatum = find((datum: TDatum): boolean => this.name(datum) === key)(this.computed.data)
-    //   this.onMouseOver(d)
-    // }
-    // // Compute
+    // Compute
     Renderer.prototype.compute = function () {
         var _this = this;
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
@@ -263,12 +255,6 @@ var Renderer = /** @class */ (function () {
     };
     Renderer.prototype.isEqual = function (d1, d2) {
         if (!d1 || !d2) {
-            return false;
-        }
-        if (!d1.parent && !d2.parent) {
-            return true;
-        }
-        if (!d1.parent || !d2.parent) {
             return false;
         }
         return fp_1.every(fp_1.identity)([this.name(d1) === this.name(d2), this.isSibling(d1, d2)]);

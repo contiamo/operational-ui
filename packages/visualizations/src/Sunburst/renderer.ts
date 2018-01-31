@@ -43,10 +43,6 @@ class Renderer {
     this.assignAccessors()
 
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.onClick.bind(this))
-    // this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
-    // this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
-    // this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
-    // this.events.on(Events.CHART.MOUSEOUT, this.updateElementHover.bind(this))
   }
 
   assignAccessors(): void {
@@ -249,12 +245,7 @@ class Renderer {
     }
   }
 
-  // highlightElement(key: string): void {
-  //   const d: TDatum = find((datum: TDatum): boolean => this.name(datum) === key)(this.computed.data)
-  //   this.onMouseOver(d)
-  // }
-
-  // // Compute
+  // Compute
   compute(): void {
     const drawingDims: IConfig = this.state.current.get("computed").canvas.drawingDims
     this.radius =
@@ -337,12 +328,6 @@ class Renderer {
 
   isEqual(d1: TDatum, d2: TDatum): boolean {
     if (!d1 || !d2) {
-      return false
-    }
-    if (!d1.parent && !d2.parent) {
-      return true
-    }
-    if (!d1.parent || !d2.parent) {
       return false
     }
     return every(identity)([this.name(d1) === this.name(d2), this.isSibling(d1, d2)])
