@@ -1,6 +1,6 @@
 import Events from "../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
-import { every, find, filter, forEach, findIndex, identity, reduce } from "lodash/fp"
+import { every, find, filter, forEach, findIndex, identity, isEmpty, reduce } from "lodash/fp"
 import * as styles from "./styles"
 import { withD3Element } from "../utils/d3_utils"
 
@@ -298,11 +298,13 @@ class Renderer {
 
     this.topNode = d3Partition()(hierarchyData)
       .descendants()
-      .find((d: TDatum) => d.depth === 0)
+      .find((d: TDatum): boolean => d.depth === 0)
 
     this.stateWriter("topNode", this.topNode)
 
-    this.data = d3Partition()(hierarchyData).descendants()
+    this.data = d3Partition()(hierarchyData)
+      .descendants()
+      .filter((d: TDatum): boolean => !isEmpty(d.data))
 
     forEach((d: TDatum): void => {
       d.zoomable = d.parent && !!d.children

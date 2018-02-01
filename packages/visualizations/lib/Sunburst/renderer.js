@@ -234,7 +234,9 @@ var Renderer = /** @class */ (function () {
             .descendants()
             .find(function (d) { return d.depth === 0; });
         this.stateWriter("topNode", this.topNode);
-        this.data = d3_hierarchy_1.partition()(hierarchyData).descendants();
+        this.data = d3_hierarchy_1.partition()(hierarchyData)
+            .descendants()
+            .filter(function (d) { return !fp_1.isEmpty(d.data); });
         fp_1.forEach(function (d) {
             d.zoomable = d.parent && !!d.children;
         })(this.data);
