@@ -277,7 +277,11 @@ const simpleSnippet = `
           ]
         }
       },
-      accessors: {}
+      accessors: {
+        data: {
+          data: (d) => d.data
+        }
+      }
     }
 
     render() {
