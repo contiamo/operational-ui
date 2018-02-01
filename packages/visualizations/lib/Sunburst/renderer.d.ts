@@ -47,7 +47,7 @@ declare class Renderer {
     findAncestor(data: TDatum[], d: TDatum): TDatum;
     findDatum(data: TDatum[], d: TDatum): TDatum;
     arcTween(d: TDatum): (t: number) => string;
-    removeArcTween(d: TDatum, i: number): (t: number) => string;
+    removeArcTween(d: TDatum): (t: number) => string;
     labelTranslate(d: TDatum): string;
     translateString(values: [number, number]): string;
 }

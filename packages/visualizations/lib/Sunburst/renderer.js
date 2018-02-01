@@ -325,7 +325,7 @@ var Renderer = /** @class */ (function () {
         var f = d3_interpolate_2.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, d);
         return function (t) { return _this.arc(f(t)); };
     };
-    Renderer.prototype.removeArcTween = function (d, i) {
+    Renderer.prototype.removeArcTween = function (d) {
         var _this = this;
         var oldSiblings = this.findSiblings(this.previous || [], d);
         var currentSiblings = this.findSiblings(this.data, d);
@@ -347,8 +347,8 @@ var Renderer = /** @class */ (function () {
         else {
             x = 0;
         }
-        var f = d3_interpolate_2.interpolateObject(d, { x0: x, x1: x });
-        return function (t) { return _this.arc(f(t)); };
+        var f = d3_interpolate_2.interpolateObject({ x0: x, x1: x }, d);
+        return function (t) { return _this.arc(f(1 - t)); };
     };
     Renderer.prototype.labelTranslate = function (d) {
         return this.translateString(this.arc.centroid(d));

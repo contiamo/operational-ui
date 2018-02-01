@@ -403,7 +403,7 @@ class Renderer {
     return (t: number): string => this.arc(f(t))
   }
 
-  removeArcTween(d: TDatum, i: number): (t: number) => string {
+  removeArcTween(d: TDatum): (t: number) => string {
     const oldSiblings: TDatum[] = this.findSiblings(this.previous || [], d)
     const currentSiblings: TDatum[] = this.findSiblings(this.data, d)
     const oldSiblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(oldSiblings)
@@ -424,8 +424,8 @@ class Renderer {
       x = 0
     }
 
-    const f = interpolateObject(d, { x0: x, x1: x })
-    return (t: number): string => this.arc(f(t))
+    const f = interpolateObject({ x0: x, x1: x }, d)
+    return (t: number): string => this.arc(f(1 - t))
   }
 
   labelTranslate(d: TDatum): string {
