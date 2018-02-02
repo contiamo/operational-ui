@@ -12,11 +12,6 @@ export interface IProps {
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "recordheader",
   ...theme.typography.heading2,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  height: 48,
-  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
   "& > div": {
     display: "inline-block",
     marginRight: theme.spacing / 2

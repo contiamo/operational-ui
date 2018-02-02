@@ -7,6 +7,7 @@ export interface IProps {
   css?: {}
   className?: string
   children?: React.ReactNode
+  controls?: React.ReactNode
 }
 
 export interface IState {
@@ -19,33 +20,52 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   border: `1px solid ${theme.colors.gray20}`
 }))
 
+const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+  height: 48
+}))
+
 export default class Record extends React.Component<IProps, IState> {
   state = {
     isExpanded: false
   }
+
   render() {
     return (
       <Container css={this.props.css} className={this.props.className}>
+        <HeaderContainer>
+          {React.Children.map(this.props.children, (child: any, index: number) => {
+            return child.props.__isRecordHeader ? child : null
+          })}
+          {this.props.controls ? (
+            this.props.controls
+          ) : (
+            <Button
+              color={this.state.isExpanded ? "#FFF" : "info"}
+              condensed
+              css={{
+                position: "absolute",
+                top: 24,
+                right: 12,
+                marginRight: 0,
+                transform: "translate3d(0, -50%, 0)"
+              }}
+              onClick={() => {
+                this.setState(prevState => ({
+                  isExpanded: !prevState.isExpanded
+                }))
+              }}
+            >
+              {this.state.isExpanded ? "Hide details" : "Details"}
+            </Button>
+          )}
+        </HeaderContainer>
         {React.Children.map(this.props.children, (child: any, index: number) => {
-          return !child.props.__isRecordBody || this.state.isExpanded ? child : null
+          return child.props.__isRecordBody && this.state.isExpanded ? child : null
         })}
-        <Button
-          color="info"
-          css={{
-            position: "absolute",
-            top: 24,
-            right: 12,
-            marginRight: 0,
-            transform: "translate3d(0, -50%, 0)"
-          }}
-          onClick={() => {
-            this.setState(prevState => ({
-              isExpanded: !prevState.isExpanded
-            }))
-          }}
-        >
-          {this.state.isExpanded ? "Hide details" : "Details"}
-        </Button>
       </Container>
     )
   }

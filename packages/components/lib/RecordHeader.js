@@ -12,7 +12,7 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({ label: "recordheader" }, theme.typography.heading2, { display: "flex", alignItems: "center", justifyContent: "space-between", height: 48, padding: theme.spacing / 2 + "px " + theme.spacing + "px", "& > div": {
+    return (__assign({ label: "recordheader" }, theme.typography.heading2, { "& > div": {
             display: "inline-block",
             marginRight: theme.spacing / 2
         } }));

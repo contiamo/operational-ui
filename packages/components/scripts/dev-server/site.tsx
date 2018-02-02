@@ -1,12 +1,20 @@
 import * as React from "react"
+import glamorous from "glamorous"
+import { Theme } from "@operational/theme"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, operationalTheme, Tooltip, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
+import { OperationalUI, operationalTheme, Record, RecordHeader, RecordBody, Card, Heading1Type } from "../../src/index"
 
 interface IState {
   isOpen: boolean
 }
+
+const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  "& > *": {
+    marginTop: -1
+  }
+}))
 
 class Site extends React.Component<{}, IState> {
   state = {
@@ -16,19 +24,31 @@ class Site extends React.Component<{}, IState> {
     return (
       <OperationalUI>
         <div style={{ margin: 20 }}>
-          <Sidebar>
-            <SidebarHeader
-              label="Label"
-              open={this.state.isOpen}
-              onToggle={() => {
-                this.setState(prevState => ({
-                  isOpen: !prevState.isOpen
-                }))
-              }}
-            >
-              <SidebarItem>Hello</SidebarItem>
-            </SidebarHeader>
-          </Sidebar>
+          <Card>
+            <Heading1Type>Stuff</Heading1Type>
+            <Records>
+              <Record css={{ width: 300 }} controls={"Hello"}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+            </Records>
+          </Card>
         </div>
       </OperationalUI>
     )

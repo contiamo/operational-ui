@@ -9,6 +9,7 @@ var Container = glamorous_1.default.div(function (_a) {
         borderTop: "1px solid",
         padding: theme.spacing + "px " + theme.spacing + "px",
         borderColor: theme.colors.gray20,
+        backgroundColor: theme.colors.gray10,
         "& > div": {
             display: "inline-block",
             marginRight: theme.spacing

@@ -14,6 +14,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   borderTop: "1px solid",
   padding: `${theme.spacing}px ${theme.spacing}px`,
   borderColor: theme.colors.gray20,
+  backgroundColor: theme.colors.gray10,
   "& > div": {
     display: "inline-block",
     marginRight: theme.spacing
