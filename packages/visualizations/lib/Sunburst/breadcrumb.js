@@ -39,11 +39,12 @@ var Breadcrumb = /** @class */ (function () {
         return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "");
     };
     Breadcrumb.prototype.update = function (nodeArray, percentage) {
+        var data = nodeArray.length > 1 ? nodeArray : [];
         // Data join; key function combines name and depth (= position in sequence).
         var trail = this.el
             .select("svg")
             .selectAll("g")
-            .data(nodeArray, function (d) { return d.data.name + d.depth; });
+            .data(data, function (d) { return d.data.name + d.depth; });
         // Remove exiting nodes.
         trail.exit().remove();
         // Add breadcrumb and label for entering nodes.
@@ -60,7 +61,8 @@ var Breadcrumb = /** @class */ (function () {
             .attr("dy", "0.35em")
             .text(this.label);
         // Merge enter and update selections; set position for all nodes.
-        entering.merge(trail)
+        entering
+            .merge(trail)
             .on("click", this.onClick.bind(this))
             .attr("transform", function (d, i) {
             return "translate(" + i * (dims.width + dims.space) + ", 0)";

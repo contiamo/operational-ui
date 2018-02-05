@@ -60,11 +60,13 @@ class Breadcrumb {
   }
 
   update(nodeArray: any[], percentage: string): void {
+    const data = nodeArray.length > 1 ? nodeArray : []
+
     // Data join; key function combines name and depth (= position in sequence).
     let trail = this.el
       .select("svg")
       .selectAll("g")
-      .data(nodeArray, d => d.data.name + d.depth)
+      .data(data, d => d.data.name + d.depth)
 
     // Remove exiting nodes.
     trail.exit().remove()
