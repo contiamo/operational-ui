@@ -62,20 +62,22 @@ var Renderer = /** @class */ (function () {
             .selectAll("path." + styles.arc)
             .data(this.data, this.name);
         var duration = this.state.current.get("config").duration;
-        this.exit(arcs, duration);
-        this.enterAndUpdate(arcs, duration);
+        this.exit(arcs, duration, document.hidden);
+        this.enterAndUpdate(arcs, duration, document.hidden);
     };
-    Renderer.prototype.exit = function (arcs, duration) {
-        arcs
-            .exit()
-            .transition()
-            .duration(duration)
-            .attrTween("d", this.removeArcTween.bind(this))
-            .remove();
+    Renderer.prototype.exit = function (arcs, duration, hidden) {
+        var exitingArcs = hidden
+            ? arcs.exit()
+            : arcs
+                .exit()
+                .transition()
+                .duration(duration)
+                .attrTween("d", this.removeArcTween.bind(this));
+        exitingArcs.remove();
     };
-    Renderer.prototype.enterAndUpdate = function (arcs, duration) {
+    Renderer.prototype.enterAndUpdate = function (arcs, duration, hidden) {
         var _this = this;
-        arcs
+        var updatingArcs = arcs
             .enter()
             .append("svg:path")
             .style("fill", this.color)
@@ -83,10 +85,16 @@ var Renderer = /** @class */ (function () {
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
             .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); })
             .merge(arcs)
-            .transition()
-            .duration(duration)
-            .attr("class", function (d) { return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : ""); })
-            .attrTween("d", this.arcTween.bind(this));
+            .attr("class", function (d) { return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : ""); });
+        if (hidden) {
+            updatingArcs.attr("d", this.arc.bind(this));
+        }
+        else {
+            updatingArcs
+                .transition()
+                .duration(duration)
+                .attrTween("d", this.arcTween.bind(this));
+        }
     };
     Renderer.prototype.onClick = function (payload) {
         var _this = this;
@@ -109,11 +117,7 @@ var Renderer = /** @class */ (function () {
         // Save new inner radius to facilitate sizing and positioning of center content
         var innerRadius = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1);
         this.stateWriter("innerRadius", innerRadius);
-        this.el
-            .select("circle." + styles.centerCircle)
-            .transition()
-            .duration(config.duration)
-            .attr("r", innerRadius * config.centerCircleRadius);
+        d3_utils_1.transitionIfVisible(this.el.select("circle." + styles.centerCircle), config.duration).attr("r", innerRadius * config.centerCircleRadius);
         // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
         // (occurs when no zoom config is passed in from the outside)
         // no need to do anything.
@@ -122,24 +126,32 @@ var Renderer = /** @class */ (function () {
         }
         this.zoomNode = zoomNode;
         this.stateWriter("zoomNode", this.zoomNode);
-        this.el
+        var paths = this.el
             .selectAll("path")
             .attr("pointer-events", "none")
             .classed("zoomed", function (datum) { return datum === _this.zoomNode; })
-            .transition()
-            .duration(config.duration)
             .each(d3_utils_1.withD3Element(function (datum, el) {
             d3.select(el).attr("pointer-events", null);
-        }))
-            .tween("scale", function () {
-            return function (t) {
-                _this.angleScale.domain(angleDomain(t));
-                _this.radiusScale.domain(radiusDomain(t));
-            };
-        })
-            .attrTween("d", function (datum) {
-            return function () { return _this.arc(datum); };
-        });
+        }));
+        if (document.hidden) {
+            this.angleScale.domain(angleDomain(1));
+            this.radiusScale.domain(radiusDomain(1));
+            paths.attr("d", this.arc.bind(this));
+        }
+        else {
+            paths
+                .transition()
+                .duration(config.duration)
+                .tween("scale", function () {
+                return function (t) {
+                    _this.angleScale.domain(angleDomain(t));
+                    _this.radiusScale.domain(radiusDomain(t));
+                };
+            })
+                .attrTween("d", function (datum) {
+                return function () { return _this.arc(datum); };
+            });
+        }
     };
     Renderer.prototype.zoomOut = function (payload) {
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: payload.d.parent });

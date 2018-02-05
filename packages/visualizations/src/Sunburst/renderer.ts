@@ -2,7 +2,7 @@ import Events from "../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
 import { every, find, filter, forEach, findIndex, identity, isEmpty, reduce } from "lodash/fp"
 import * as styles from "./styles"
-import { withD3Element } from "../utils/d3_utils"
+import { withD3Element, transitionIfVisible } from "../utils/d3_utils"
 
 // d3 imports
 import * as d3 from "d3-selection"
@@ -92,21 +92,23 @@ class Renderer {
       .data(this.data, this.name)
 
     const duration: number = this.state.current.get("config").duration
-    this.exit(arcs, duration)
-    this.enterAndUpdate(arcs, duration)
+    this.exit(arcs, duration, document.hidden)
+    this.enterAndUpdate(arcs, duration, document.hidden)
   }
 
-  exit(arcs: TD3Selection, duration: number): void {
-    arcs
-      .exit()
-      .transition()
-      .duration(duration)
-      .attrTween("d", this.removeArcTween.bind(this))
-      .remove()
+  exit(arcs: TD3Selection, duration: number, hidden: boolean): void {
+    const exitingArcs: any = hidden
+      ? arcs.exit()
+      : arcs
+          .exit()
+          .transition()
+          .duration(duration)
+          .attrTween("d", this.removeArcTween.bind(this))
+    exitingArcs.remove()
   }
 
-  enterAndUpdate(arcs: TD3Selection, duration: number): void {
-    arcs
+  enterAndUpdate(arcs: TD3Selection, duration: number, hidden: boolean): void {
+    let updatingArcs: TD3Selection = arcs
       .enter()
       .append("svg:path")
       .style("fill", this.color)
@@ -114,13 +116,19 @@ class Renderer {
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("click", (d: IObject) => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
       .merge(arcs)
-      .transition()
-      .duration(duration)
       .attr(
         "class",
         (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
       )
-      .attrTween("d", this.arcTween.bind(this))
+
+    if (hidden) {
+      updatingArcs.attr("d", this.arc.bind(this))
+    } else {
+      updatingArcs
+        .transition()
+        .duration(duration)
+        .attrTween("d", this.arcTween.bind(this))
+    }
   }
 
   onClick(payload: IObject): void {
@@ -150,11 +158,11 @@ class Renderer {
     // Save new inner radius to facilitate sizing and positioning of center content
     const innerRadius: number = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1)
     this.stateWriter("innerRadius", innerRadius)
-    this.el
-      .select(`circle.${styles.centerCircle}`)
-      .transition()
-      .duration(config.duration)
-      .attr("r", innerRadius * config.centerCircleRadius)
+
+    transitionIfVisible(this.el.select(`circle.${styles.centerCircle}`), config.duration).attr(
+      "r",
+      innerRadius * config.centerCircleRadius
+    )
 
     // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
     // (occurs when no zoom config is passed in from the outside)
@@ -166,26 +174,34 @@ class Renderer {
     this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
 
-    this.el
+    let paths: TD3Selection = this.el
       .selectAll("path")
       .attr("pointer-events", "none")
       .classed("zoomed", (datum: TDatum): boolean => datum === this.zoomNode)
-      .transition()
-      .duration(config.duration)
       .each(
         withD3Element((datum: TDatum, el: Element): void => {
           d3.select(el).attr("pointer-events", null)
         })
       )
-      .tween("scale", () => {
-        return (t: number): void => {
-          this.angleScale.domain(angleDomain(t))
-          this.radiusScale.domain(radiusDomain(t))
-        }
-      })
-      .attrTween("d", (datum: TDatum): any => {
-        return () => this.arc(datum)
-      })
+
+    if (document.hidden) {
+      this.angleScale.domain(angleDomain(1))
+      this.radiusScale.domain(radiusDomain(1))
+      paths.attr("d", this.arc.bind(this))
+    } else {
+      paths
+        .transition()
+        .duration(config.duration)
+        .tween("scale", () => {
+          return (t: number): void => {
+            this.angleScale.domain(angleDomain(t))
+            this.radiusScale.domain(radiusDomain(t))
+          }
+        })
+        .attrTween("d", (datum: TDatum): any => {
+          return () => this.arc(datum)
+        })
+    }
   }
 
   zoomOut(payload: IObject): void {

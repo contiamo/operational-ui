@@ -27,8 +27,8 @@ declare class Renderer {
     draw(): void;
     initialDraw(): void;
     updateDraw(): void;
-    exit(arcs: TD3Selection, duration: number): void;
-    enterAndUpdate(arcs: TD3Selection, duration: number): void;
+    exit(arcs: TD3Selection, duration: number, hidden: boolean): void;
+    enterAndUpdate(arcs: TD3Selection, duration: number, hidden: boolean): void;
     onClick(payload: IObject): void;
     zoomOut(payload: IObject): void;
     onMouseOver(d: TDatum, el: Element): void;
