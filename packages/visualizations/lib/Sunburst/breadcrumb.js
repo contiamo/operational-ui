@@ -52,8 +52,7 @@ var Breadcrumb = /** @class */ (function () {
             .append("svg:polygon")
             .attr("points", this.breadcrumbPoints)
             .style("fill", function (d) { return d.data.color || "#fff"; })
-            .style("stroke", function (d) { return (d.data.color ? "none" : "000"); })
-            .on("click", this.onClick.bind(this));
+            .style("stroke", function (d) { return (d.data.color ? "none" : "000"); });
         entering
             .append("svg:text")
             .attr("x", function (d, i) { return (i > 0 ? dims.tip : 0) + dims.space; })
@@ -61,7 +60,9 @@ var Breadcrumb = /** @class */ (function () {
             .attr("dy", "0.35em")
             .text(this.label);
         // Merge enter and update selections; set position for all nodes.
-        entering.merge(trail).attr("transform", function (d, i) {
+        entering.merge(trail)
+            .on("click", this.onClick.bind(this))
+            .attr("transform", function (d, i) {
             return "translate(" + i * (dims.width + dims.space) + ", 0)";
         });
         // Update the explanation.

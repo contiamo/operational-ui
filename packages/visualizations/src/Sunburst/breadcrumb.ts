@@ -77,7 +77,6 @@ class Breadcrumb {
       .attr("points", this.breadcrumbPoints)
       .style("fill", (d: TDatum): string => d.data.color || "#fff")
       .style("stroke", (d: TDatum): string => (d.data.color ? "none" : "000"))
-      .on("click", this.onClick.bind(this))
 
     entering
       .append("svg:text")
@@ -87,9 +86,12 @@ class Breadcrumb {
       .text(this.label)
 
     // Merge enter and update selections; set position for all nodes.
-    entering.merge(trail).attr("transform", (d: TDatum, i: number): string => {
-      return `translate(${i * (dims.width + dims.space)}, 0)`
-    })
+    entering
+      .merge(trail)
+      .on("click", this.onClick.bind(this))
+      .attr("transform", (d: TDatum, i: number): string => {
+        return `translate(${i * (dims.width + dims.space)}, 0)`
+      })
 
     // Update the explanation.
     this.el
