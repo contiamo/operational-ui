@@ -2,7 +2,16 @@ import * as React from "react"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, operationalTheme, Tooltip, Sidebar, SidebarHeader, SidebarItem } from "../../src/index"
+import {
+  OperationalUI,
+  operationalTheme,
+  Chip,
+  Tooltip,
+  Sidebar,
+  SidebarHeader,
+  SidebarItem,
+  Card
+} from "../../src/index"
 
 interface IState {
   isOpen: boolean
@@ -16,19 +25,15 @@ class Site extends React.Component<{}, IState> {
     return (
       <OperationalUI>
         <div style={{ margin: 20 }}>
-          <Sidebar>
-            <SidebarHeader
-              label="Label"
-              open={this.state.isOpen}
-              onToggle={() => {
-                this.setState(prevState => ({
-                  isOpen: !prevState.isOpen
-                }))
-              }}
-            >
-              <SidebarItem>Hello</SidebarItem>
-            </SidebarHeader>
-          </Sidebar>
+          <Card>
+            <Chip color="info" icon="X" onIconClick={() => {}}>
+              Hello
+            </Chip>
+            <Chip color="white" icon="X" onIconClick={() => {}}>
+              Hello
+            </Chip>
+            <Chip>Good bye</Chip>
+          </Card>
         </div>
       </OperationalUI>
     )

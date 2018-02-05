@@ -8,7 +8,7 @@ import Table from "../../components/PropsTable"
 const simpleSnippet = `
 <div style={{ display: "flex" }}>
   <Chip color="info">Hello!</Chip>
-  <Chip color="success" symbol="!" onClick={() => window.alert("Buonasera!")}>Ciao!</Chip>
+  <Chip color="success" icon="X" onIconClick={() => window.alert("Buonasera")} onClick={() => window.alert("Good evening!")}>Ciao!</Chip>
 </div>
 `
 
@@ -20,19 +20,28 @@ const propDescription = [
     type: "string",
     optional: true
   },
+
   {
-    name: "symbol",
-    description: "The symbol that is shown on mouse over of a clickable chip.",
+    name: "onClick",
+    description:
+      "Handle clicks on the chip's body. This is never triggered when the icon bar is clicked. When an icon is not specified, however, this basically turns into a full element click handler.",
+    defaultValue: "",
+    type: "() => void",
+    optional: true
+  },
+  {
+    name: "icon",
+    description:
+      "The name of the icon shown in the right icon bar area of the chip. A typical use here would be the `X` icon for closing the chip. Note that this icon is only displayed if there is an `onIconClick` prop present.",
     defaultValue: "",
     type: "string",
     optional: true
   },
   {
-    name: "onClick",
-    description:
-      "Is this interactive? If yes, what happens when the chip is clicked? This is commonly used to delete a filter in a list of filters.",
+    name: "onIconClick",
+    description: "Handle clicks on the chip's icon area on the right",
     defaultValue: "",
-    type: "func",
+    type: "() => void",
     optional: true
   }
 ]

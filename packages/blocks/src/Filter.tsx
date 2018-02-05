@@ -71,26 +71,26 @@ class Filter extends React.Component<IProps, IState> {
               }
               return (
                 <Chip
-                  onClick={
+                  onIconClick={
                     this.props.onClear
                       ? () => {
                           this.props.onClear(child.props.id)
                         }
                       : null
                   }
-                  symbol="×"
+                  icon="X"
                 >{`${label}: ${value}`}</Chip>
               )
             }
           )}
           <Chip
             color="#efefef"
-            onClick={() => {
+            onIconClick={() => {
               this.setState(prevState => ({
                 isExpanded: true
               }))
             }}
-            symbol="+"
+            icon="Plus"
           >
             Add filter
           </Chip>

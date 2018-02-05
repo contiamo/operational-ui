@@ -5,9 +5,10 @@ export interface IProps {
     css?: {};
     color?: string;
     onClick?: () => void;
+    onIconClick?: () => void;
     className?: string;
     children: React.ReactNode;
-    symbol?: string;
+    icon?: string | React.ReactNode;
 }
-declare const Chip: (props: IProps) => JSX.Element;
-export default Chip;
+declare const _default: (props: IProps) => JSX.Element;
+export default _default;

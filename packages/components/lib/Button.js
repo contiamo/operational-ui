@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var color_1 = require("./utils/color");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, condensed = _a.condensed;
     var defaultColor = theme.colors.white;
@@ -21,9 +22,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"]);
     var activeBoxShadow = theme.shadows.pressed;
     var spacing = theme.spacing;
-    return __assign({ label: "button", display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing + "px" : spacing * 2 / 3 + "px " + spacing * 2 + "px", borderRadius: 2, border: "1px solid", borderColor: ["white", "#FFF", "#fff", "#FFFFFF", "#ffffff"].indexOf(backgroundColor) > -1
-            ? theme.colors.gray30
-            : active ? activeBackgroundColor : backgroundColor, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
+    return __assign({ label: "button", display: "inline-block", padding: condensed ? spacing / 3 + "px " + spacing + "px" : spacing * 2 / 3 + "px " + spacing * 2 + "px", borderRadius: 2, border: "1px solid", borderColor: color_1.isWhite(backgroundColor) ? theme.colors.gray30 : active ? activeBackgroundColor : backgroundColor, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
         ? {
             ":hover": {
                 backgroundColor: activeBackgroundColor,

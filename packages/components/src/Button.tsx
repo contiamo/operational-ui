@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 
 import { hexOrColor, readableTextColor, darken, lighten } from "@operational/utils"
 import { Theme } from "@operational/theme"
+import { isWhite } from "./utils/color"
 
 export interface IStyleProps {
   theme?: Theme
@@ -41,10 +42,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
     padding: condensed ? `${spacing / 3}px ${spacing}px` : `${spacing * 2 / 3}px ${spacing * 2}px`,
     borderRadius: 2,
     border: "1px solid",
-    borderColor:
-      ["white", "#FFF", "#fff", "#FFFFFF", "#ffffff"].indexOf(backgroundColor) > -1
-        ? theme.colors.gray30
-        : active ? activeBackgroundColor : backgroundColor,
+    borderColor: isWhite(backgroundColor) ? theme.colors.gray30 : active ? activeBackgroundColor : backgroundColor,
     cursor: disabled ? "auto" : "pointer",
     boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
