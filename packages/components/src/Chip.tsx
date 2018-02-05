@@ -4,6 +4,7 @@ import { darken, hexOrColor, readableTextColor } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
 import Icon, { IconName } from "./Icon"
+import { isWhite } from "./utils/color"
 
 export interface IProps {
   id?: string | number
@@ -18,26 +19,31 @@ export interface IProps {
 
 const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): {} => {
   const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
+  const border = isWhite(backgroundColor) ? `1px solid ${theme.colors.gray20}` : "0"
 
   return {
     backgroundColor,
+    border,
     label: "chip",
     position: "relative",
     height: 20,
-    display: "flex",
+    display: "inline-flex",
     alignItems: "center",
+    boxSizing: "border-box",
     width: "fit-content",
     borderRadius: 2,
     cursor: "pointer",
     overflow: "hidden",
     color: readableTextColor(backgroundColor)(["black", "white"]),
-    margin: `${theme.spacing / 3}px ${theme.spacing / 3}px 0px 0px`
+    margin: `0px ${theme.spacing / 2}px 0px 0px`
   }
 })
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  display: "block",
-  padding: theme.spacing / 2,
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  padding: `0px ${theme.spacing / 2}px`,
   "&:hover": {
     backgroundColor: "rgba(0, 0, 0, 0.1)"
   }
@@ -45,8 +51,9 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
   const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
+  const borderColor = isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)"
   return {
-    borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
+    borderLeft: `1px solid ${borderColor}`,
     color: readableTextColor(backgroundColor)(["black", "white"]),
     width: theme.spacing * 1.75,
     display: "flex",
@@ -59,7 +66,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
   }
 })
 
-const Chip = (props: IProps) => (
+export default (props: IProps) => (
   <Container key={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>
     <Content onClick={props.onClick}>{props.children}</Content>
     {props.onIconClick && (
@@ -69,5 +76,3 @@ const Chip = (props: IProps) => (
     )}
   </Container>
 )
-
-export default Chip
