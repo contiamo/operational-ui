@@ -24,6 +24,9 @@ const Content = glamorous.div({
   height: "100vh",
   "& > *": {
     width: "100%"
+  },
+  "& > *:first-child": {
+    flexShrink: 0
   }
 })
 
