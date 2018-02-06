@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../utils/event_catalog");
-var fp_1 = require("lodash/fp");
-var styles = require("./styles");
 var dims = {
     width: 70,
     height: 20,
@@ -26,8 +24,7 @@ var Breadcrumb = /** @class */ (function () {
         var computed = this.state.current.get("computed").renderer;
         var fixedNode = computed.zoomNode || computed.topNode;
         var nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse();
-        var percentageString = nodeArray.length > 1 ? (fp_1.last(nodeArray).value * 100 / computed.topNode.value).toPrecision(3) + "%" : "";
-        this.update(nodeArray, percentageString);
+        this.update(nodeArray);
     };
     Breadcrumb.prototype.breadcrumbPoints = function (d, i) {
         return i > 0 ? breadcrumbPolygon : breadcrumbPolygonStart;
@@ -38,7 +35,7 @@ var Breadcrumb = /** @class */ (function () {
         var name = d.data.name || "";
         return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "");
     };
-    Breadcrumb.prototype.update = function (nodeArray, percentage) {
+    Breadcrumb.prototype.update = function (nodeArray) {
         var data = nodeArray.length > 1 ? nodeArray : [];
         // Data join; key function combines name and depth (= position in sequence).
         var trail = this.el
@@ -67,12 +64,6 @@ var Breadcrumb = /** @class */ (function () {
             .attr("transform", function (d, i) {
             return "translate(" + i * (dims.width + dims.space) + ", 0)";
         });
-        // Update the explanation.
-        this.el
-            .select("." + styles.explanation)
-            .style("visibility", function () { return (percentage.length > 0 ? "visible" : "hidden"); })
-            .select(".percentage")
-            .text(percentage);
     };
     Breadcrumb.prototype.onClick = function (d) {
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d });

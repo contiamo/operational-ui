@@ -28,7 +28,7 @@ var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var breadcrumbStyle = {
     width: "100%",
-    padding: "10px 5px 0 5px",
+    padding: "10px 5px",
     "& svg": {
         width: "100%",
         height: "21px"
@@ -39,13 +39,6 @@ var breadcrumbStyle = {
     },
     "& text": {
         pointerEvents: "none"
-    }
-};
-var explanationStyle = {
-    padding: "10px 0",
-    visibility: "hidden",
-    "& span.percentage": {
-        fontWeight: "bold"
     }
 };
 var centerCircleStyle = {
@@ -65,7 +58,6 @@ exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
 exports.breadcrumb = glamor_1.css(breadcrumbStyle).toString();
-exports.explanation = glamor_1.css(explanationStyle).toString();
 exports.centerCircle = glamor_1.css(centerCircleStyle).toString();
 exports.centerContent = glamor_1.css(centerContentStyle).toString();
 //# sourceMappingURL=styles.js.map

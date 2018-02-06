@@ -8,7 +8,7 @@ declare class Breadcrumb {
     updateHoverPath(payload: IObject): void;
     breadcrumbPoints(d: any, i: number): string;
     label(d: TDatum, i: number): string;
-    update(nodeArray: any[], percentage: string): void;
+    update(nodeArray: any[]): void;
     onClick(d: TDatum): void;
 }
 export default Breadcrumb;

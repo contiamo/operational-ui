@@ -41,12 +41,6 @@ class Canvas {
     const el: TD3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.breadcrumb)
-
-    el
-      .append("div")
-      .attr("class", localStyles.explanation)
-      .html("<span class='percentage'></span> of paths begin with this sequence")
-
     this.container.node().appendChild(el.node())
     this.elMap.breadcrumb = el
     return el

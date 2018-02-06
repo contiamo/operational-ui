@@ -37,14 +37,9 @@ class Breadcrumb {
 
   updateHoverPath(payload: IObject): void {
     const computed: IObject = this.state.current.get("computed").renderer
-
     const fixedNode: any = computed.zoomNode || computed.topNode
     const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
-
-    const percentageString =
-      nodeArray.length > 1 ? (last(nodeArray).value * 100 / computed.topNode.value).toPrecision(3) + "%" : ""
-
-    this.update(nodeArray, percentageString)
+    this.update(nodeArray)
   }
 
   breadcrumbPoints(d: any, i: number): string {
@@ -59,7 +54,7 @@ class Breadcrumb {
     return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "")
   }
 
-  update(nodeArray: any[], percentage: string): void {
+  update(nodeArray: any[]): void {
     const data = nodeArray.length > 1 ? nodeArray : []
 
     // Data join; key function combines name and depth (= position in sequence).
@@ -94,13 +89,6 @@ class Breadcrumb {
       .attr("transform", (d: TDatum, i: number): string => {
         return `translate(${i * (dims.width + dims.space)}, 0)`
       })
-
-    // Update the explanation.
-    this.el
-      .select(`.${styles.explanation}`)
-      .style("visibility", () => (percentage.length > 0 ? "visible" : "hidden"))
-      .select(".percentage")
-      .text(percentage)
   }
 
   onClick(d: TDatum): void {

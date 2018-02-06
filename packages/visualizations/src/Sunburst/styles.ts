@@ -30,7 +30,7 @@ const totalStyle = {
 
 const breadcrumbStyle = {
   width: "100%",
-  padding: "10px 5px 0 5px",
+  padding: "10px 5px",
   "& svg": {
     width: "100%",
     height: "21px"
@@ -41,14 +41,6 @@ const breadcrumbStyle = {
   },
   "& text": {
     pointerEvents: "none"
-  }
-}
-
-const explanationStyle = {
-  padding: "10px 0",
-  visibility: "hidden",
-  "& span.percentage": {
-    fontWeight: "bold"
   }
 }
 
@@ -75,6 +67,5 @@ export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
 export const breadcrumb = css(breadcrumbStyle).toString()
-export const explanation = css(explanationStyle).toString()
 export const centerCircle = css(centerCircleStyle).toString()
 export const centerContent = css(centerContentStyle).toString()
