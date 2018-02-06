@@ -159,9 +159,17 @@ class Renderer {
     const innerRadius: number = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1)
     this.stateWriter("innerRadius", innerRadius)
 
+    // If the sunburst is not zoomed in and the root node is fully surrounded by children,
+    // make the radius of the central white circle equal to the inner radius of the first ring,
+    // to avoid an extra grey ring around the root node.
+    const totalRootChildValue: number = reduce((memo: number, child: TDatum): number => {
+      return (memo += child.value)
+    }, 0)(this.topNode.children)
+    const rootIsSurrounded: boolean = zoomNode === this.topNode && zoomNode.value === totalRootChildValue
+
     transitionIfVisible(this.el.select(`circle.${styles.centerCircle}`), config.duration).attr(
       "r",
-      innerRadius * config.centerCircleRadius
+      rootIsSurrounded ? innerRadius : innerRadius * config.centerCircleRadius
     )
 
     // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
