@@ -114,7 +114,7 @@ var Renderer = /** @class */ (function () {
                 ? Math.max(memo, child.y1)
                 : memo;
         }, 0)(zoomNode.descendants()), angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]), radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius]);
-        // Save new inner radius to facilitate sizing and positioning of center content
+        // Save new inner radius to facilitate sizing and positioning of root label
         var innerRadius = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1);
         this.stateWriter("innerRadius", innerRadius);
         d3_utils_1.transitionIfVisible(this.el.select("circle." + styles.centerCircle), config.duration).attr("r", innerRadius * config.centerCircleRadius);

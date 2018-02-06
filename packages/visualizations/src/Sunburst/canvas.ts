@@ -10,7 +10,7 @@ class Canvas {
   container: TD3Selection
   el: TSeriesEl
   events: IEvents
-  centerContent: TD3Selection
+  rootLabel: TD3Selection
   protected elements: IObject = {}
   protected state: IState
   protected elMap: IObject = {}
@@ -23,7 +23,7 @@ class Canvas {
     this.container = this.insertContainer(context)
     this.breadcrumb = this.insertBreadcrumb()
     this.el = this.insertEl()
-    this.centerContent = this.insertCenterContent()
+    this.rootLabel = this.insertRootLabel()
     this.listenToMouseOver()
     this.insertFocusElements()
     this.stateWriter("elements", this.elements)
@@ -53,13 +53,13 @@ class Canvas {
     return el
   }
 
-  insertCenterContent(): TD3Selection {
+  insertRootLabel(): TD3Selection {
     const el: TD3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", localStyles.centerContent)
+      .attr("class", localStyles.rootLabel)
       .html("<span class='value'></span><br><span class='name'></span>")
     this.container.node().appendChild(el.node())
-    this.elMap.centerContent = el
+    this.elMap.rootLabel = el
     return el
   }
 

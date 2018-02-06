@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var canvas_1 = require("./canvas");
 var renderer_1 = require("./renderer");
 var breadcrumb_1 = require("./breadcrumb");
-var center_content_1 = require("./center_content");
+var root_label_1 = require("./root_label");
 var focus_1 = require("./focus");
 var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
@@ -76,7 +76,7 @@ var Facade = /** @class */ (function () {
             breadcrumb: new breadcrumb_1.default(this.state.readOnly(), this.state.computedWriter(["breadcrumb"]), this.events, this.canvas.elementFor("breadcrumb")),
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus")),
             renderer: new renderer_1.default(this.state.readOnly(), this.state.computedWriter(["renderer"]), this.events, this.canvas.elementFor("series")),
-            centerContent: new center_content_1.default(this.state.readOnly(), this.state.computedWriter(["centerContent"]), this.events, this.canvas.elementFor("centerContent"))
+            rootLabel: new root_label_1.default(this.state.readOnly(), this.state.computedWriter(["rootLabel"]), this.events, this.canvas.elementFor("rootLabel"))
         };
     };
     Facade.prototype.data = function (data) {

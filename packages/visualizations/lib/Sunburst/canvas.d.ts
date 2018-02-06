@@ -4,7 +4,7 @@ declare class Canvas {
     container: TD3Selection;
     el: TSeriesEl;
     events: IEvents;
-    centerContent: TD3Selection;
+    rootLabel: TD3Selection;
     protected elements: IObject;
     protected state: IState;
     protected elMap: IObject;
@@ -13,7 +13,7 @@ declare class Canvas {
     insertContainer(context: Element): TD3Selection;
     insertBreadcrumb(): TD3Selection;
     insertEl(): TSeriesEl;
-    insertCenterContent(): TD3Selection;
+    insertRootLabel(): TD3Selection;
     prefixedId(id: string): string;
     insertFocusElements(): void;
     insertFocusLabel(): TD3Selection;

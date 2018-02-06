@@ -1,7 +1,7 @@
 import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./typings"
 import Events from "../utils/event_catalog"
 
-class CenterContent {
+class RootLabel {
   el: TD3Selection
   events: IEvents
   state: IState
@@ -33,4 +33,4 @@ class CenterContent {
   }
 }
 
-export default CenterContent
+export default RootLabel

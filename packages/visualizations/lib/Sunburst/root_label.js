@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../utils/event_catalog");
-var CenterContent = /** @class */ (function () {
-    function CenterContent(state, stateWriter, events, el) {
+var RootLabel = /** @class */ (function () {
+    function RootLabel(state, stateWriter, events, el) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.CLICK, this.update.bind(this));
     }
-    CenterContent.prototype.update = function (payload) {
+    RootLabel.prototype.update = function (payload) {
         var computed = this.state.current.get("computed");
         var config = this.state.current.get("config");
         var renderer = computed.renderer;
@@ -23,7 +23,7 @@ var CenterContent = /** @class */ (function () {
         var left = drawingDims.width / 2 - renderer.innerRadius * config.centerCircleRadius;
         this.el.style("top", top + "px").style("left", left + "px");
     };
-    return CenterContent;
+    return RootLabel;
 }());
-exports.default = CenterContent;
-//# sourceMappingURL=center_content.js.map
+exports.default = RootLabel;
+//# sourceMappingURL=root_label.js.map

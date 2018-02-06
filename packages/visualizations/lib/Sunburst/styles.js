@@ -45,7 +45,7 @@ var centerCircleStyle = {
     fill: "#fff",
     pointerEvents: "none"
 };
-var centerContentStyle = {
+var rootLabelStyle = {
     position: "absolute",
     textAlign: "center",
     pointerEvents: "none",
@@ -59,5 +59,5 @@ exports.label = glamor_1.css(labelStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
 exports.breadcrumb = glamor_1.css(breadcrumbStyle).toString();
 exports.centerCircle = glamor_1.css(centerCircleStyle).toString();
-exports.centerContent = glamor_1.css(centerContentStyle).toString();
+exports.rootLabel = glamor_1.css(rootLabelStyle).toString();
 //# sourceMappingURL=styles.js.map

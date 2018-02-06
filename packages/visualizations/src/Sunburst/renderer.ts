@@ -155,7 +155,7 @@ class Renderer {
       angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]),
       radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius])
 
-    // Save new inner radius to facilitate sizing and positioning of center content
+    // Save new inner radius to facilitate sizing and positioning of root label
     const innerRadius: number = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1)
     this.stateWriter("innerRadius", innerRadius)
 

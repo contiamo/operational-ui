@@ -14,7 +14,7 @@ var Canvas = /** @class */ (function () {
         this.container = this.insertContainer(context);
         this.breadcrumb = this.insertBreadcrumb();
         this.el = this.insertEl();
-        this.centerContent = this.insertCenterContent();
+        this.rootLabel = this.insertRootLabel();
         this.listenToMouseOver();
         this.insertFocusElements();
         this.stateWriter("elements", this.elements);
@@ -40,13 +40,13 @@ var Canvas = /** @class */ (function () {
         this.elMap.series = el;
         return el;
     };
-    Canvas.prototype.insertCenterContent = function () {
+    Canvas.prototype.insertRootLabel = function () {
         var el = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", localStyles.centerContent)
+            .attr("class", localStyles.rootLabel)
             .html("<span class='value'></span><br><span class='name'></span>");
         this.container.node().appendChild(el.node());
-        this.elMap.centerContent = el;
+        this.elMap.rootLabel = el;
         return el;
     };
     Canvas.prototype.prefixedId = function (id) {
