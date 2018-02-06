@@ -1,12 +1,16 @@
 import FocusUtils from "../utils/focus_utils"
 import AbstractFocus from "../utils/focus"
 import * as d3 from "d3-selection"
-import { TD3Selection, TDatum, IObject } from "./typings"
+import { IEvents, IObject, IState, TD3Selection, TDatum, TStateWriter } from "./typings"
 
 const dataName = (d: TDatum): string => d.data.name,
   dataValue = (d: TDatum): number => d.value
 
 class Focus extends AbstractFocus {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject) {
+    super(state, stateWriter, events, els)
+  }
+
   onElementHover(payload: { focusPoint: IObject; d: TDatum }): void {
     this.remove()
 
@@ -18,7 +22,7 @@ class Focus extends AbstractFocus {
     const focusPoint: IObject = payload.focusPoint,
       datum: TDatum = payload.d
 
-    FocusUtils.drawHidden(this.el, "element")
+    FocusUtils.drawHidden(this.el, "element", "above")
 
     const content: TD3Selection = this.el.append("xhtml:ul")
 

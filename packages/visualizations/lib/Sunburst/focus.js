@@ -15,8 +15,8 @@ var focus_1 = require("../utils/focus");
 var dataName = function (d) { return d.data.name; }, dataValue = function (d) { return d.value; };
 var Focus = /** @class */ (function (_super) {
     __extends(Focus, _super);
-    function Focus() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Focus(state, stateWriter, events, els) {
+        return _super.call(this, state, stateWriter, events, els) || this;
     }
     Focus.prototype.onElementHover = function (payload) {
         this.remove();
@@ -25,7 +25,7 @@ var Focus = /** @class */ (function (_super) {
             return;
         }
         var focusPoint = payload.focusPoint, datum = payload.d;
-        focus_utils_1.default.drawHidden(this.el, "element");
+        focus_utils_1.default.drawHidden(this.el, "element", "above");
         var content = this.el.append("xhtml:ul");
         content
             .append("span")

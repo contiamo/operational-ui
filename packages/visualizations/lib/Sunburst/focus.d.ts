@@ -1,6 +1,7 @@
 import AbstractFocus from "../utils/focus";
-import { TDatum, IObject } from "./typings";
+import { IEvents, IObject, IState, TDatum, TStateWriter } from "./typings";
 declare class Focus extends AbstractFocus {
+    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
     onElementHover(payload: {
         focusPoint: IObject;
         d: TDatum;
