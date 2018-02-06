@@ -89,7 +89,7 @@ var focusLegendStyle = {
         content: "''",
         position: "absolute",
         width: 0,
-        height: 0,
+        height: 0
     },
     "&.above::after": {
         borderTop: "solid 7px #fff",

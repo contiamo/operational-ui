@@ -28,17 +28,60 @@ var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var breadcrumbStyle = {
     width: "100%",
-    padding: "10px 5px",
-    "& svg": {
-        width: "100%",
-        height: "21px"
+    height: "36px",
+    position: "relative",
+    overflow: "hidden",
+    margin: "5px 0"
+};
+var breadcrumbItemStyle = {
+    float: "left",
+    width: "80px",
+    height: "26px",
+    position: "relative",
+    paddingLeft: "20px",
+    lineHeight: "26px",
+    cursor: "pointer",
+    margin: "5px 0",
+    "&:first-child": {
+        paddingLeft: "5px"
     },
-    "& polygon": {
-        opacity: "0.5",
-        cursor: "pointer"
+    "&.hops": {
+        width: "40px"
     },
-    "& text": {
-        pointerEvents: "none"
+    "& .label": {
+        pointerEvents: "none",
+        float: "left",
+        display: "block",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        width: "65px"
+    },
+    "& .background-arrow": {
+        content: "''",
+        position: "absolute",
+        width: 0,
+        height: 0,
+        borderLeft: "solid 15px #fff",
+        borderTop: "solid 15px transparent",
+        borderBottom: "solid 15px transparent",
+        top: "50%",
+        left: "100%",
+        marginTop: "-15px",
+        zIndex: "2"
+    },
+    "& .arrow": {
+        content: "''",
+        position: "absolute",
+        width: 0,
+        height: 0,
+        borderLeft: "solid 13px #fff",
+        borderTop: "solid 13px transparent",
+        borderBottom: "solid 13px transparent",
+        top: "50%",
+        left: "100%",
+        marginTop: "-13px",
+        zIndex: "3"
     }
 };
 var centerCircleStyle = {
@@ -58,6 +101,7 @@ exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
 exports.breadcrumb = glamor_1.css(breadcrumbStyle).toString();
+exports.breadcrumbItem = glamor_1.css(breadcrumbItemStyle).toString();
 exports.centerCircle = glamor_1.css(centerCircleStyle).toString();
 exports.rootLabel = glamor_1.css(rootLabelStyle).toString();
 //# sourceMappingURL=styles.js.map

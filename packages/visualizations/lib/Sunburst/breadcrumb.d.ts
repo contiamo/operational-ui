@@ -6,9 +6,9 @@ declare class Breadcrumb {
     stateWriter: TStateWriter;
     constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
     updateHoverPath(payload: IObject): void;
-    breadcrumbPoints(d: any, i: number): string;
-    label(d: TDatum, i: number): string;
-    update(nodeArray: any[]): void;
-    onClick(d: TDatum): void;
+    label(d: any, i: number): string;
+    truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[];
+    update(nodeArray: TDatum[]): void;
+    onClick(d: TDatum | string): void;
 }
 export default Breadcrumb;

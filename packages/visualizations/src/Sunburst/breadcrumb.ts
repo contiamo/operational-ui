@@ -1,7 +1,7 @@
 import * as d3 from "d3-selection"
 import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./typings"
 import Events from "../utils/event_catalog"
-import { isEmpty, last } from "lodash/fp"
+import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
 
 const dims: IObject = {
@@ -10,13 +10,6 @@ const dims: IObject = {
   space: 3,
   tip: 7
 }
-
-const breadcrumbPolygonStart: string = `0,0 ${dims.width}, 0 ${dims.width + dims.tip}, ${dims.height / 2} ${
-  dims.width
-}, ${dims.height} 0, ${dims.height}`
-const breadcrumbPolygon: string = `0,0 ${dims.width},0 ${dims.width + dims.tip},${dims.height / 2} ${dims.width},${
-  dims.height
-} 0,${dims.height} ${dims.tip},${dims.height / 2}`
 
 class Breadcrumb {
   el: TD3Selection
@@ -29,7 +22,6 @@ class Breadcrumb {
     this.stateWriter = stateWriter
     this.events = events
     this.el = el
-    this.el.insert("svg:svg", ":first-child")
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.updateHoverPath.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateHoverPath.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this))
@@ -42,56 +34,61 @@ class Breadcrumb {
     this.update(nodeArray)
   }
 
-  breadcrumbPoints(d: any, i: number): string {
-    return i > 0 ? breadcrumbPolygon : breadcrumbPolygonStart
+  label(d: any, i: number): string {
+    return d === "hops" ? "..." : d.data.name
   }
 
-  label(d: TDatum, i: number): string {
-    // Pixel width of character approx 1/2 of font-size - allow 7px per character
-    const desiredPixelWidth: number = dims.width - (i > 0 ? dims.tip : 0) - dims.tip - 2 * dims.space,
-      numberOfCharacters: number = desiredPixelWidth / 7
-    const name: string = d.data.name || ""
-    return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "")
+  truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[] {
+    if (nodeArray.length <= 5) {
+      return nodeArray
+    } else {
+      const firstNodes: TDatum[] = nodeArray.slice(0, 2)
+      const lastNodes: TDatum[] = nodeArray.slice(nodeArray.length - 2)
+      return firstNodes.concat(["hops"]).concat(lastNodes)
+    }
   }
 
-  update(nodeArray: any[]): void {
-    const data = nodeArray.length > 1 ? nodeArray : []
+  update(nodeArray: TDatum[]): void {
+    const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
     // Data join; key function combines name and depth (= position in sequence).
-    let trail = this.el
-      .select("svg")
-      .selectAll("g")
-      .data(data, d => d.data.name + d.depth)
+    let trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => {
+      return d === "hops" ? d : d.data.name + d.depth
+    })
 
     // Remove exiting nodes.
     trail.exit().remove()
 
     // Add breadcrumb and label for entering nodes.
-    let entering = trail.enter().append("svg:g")
-
-    entering
-      .append("svg:polygon")
-      .attr("points", this.breadcrumbPoints)
-      .style("fill", (d: TDatum): string => d.data.color || "#fff")
-      .style("stroke", (d: TDatum): string => (d.data.color ? "none" : "000"))
-
-    entering
-      .append("svg:text")
-      .attr("x", (d, i) => (i > 0 ? dims.tip : 0) + dims.space)
-      .attr("y", dims.height / 2)
-      .attr("dy", "0.35em")
-      .text(this.label)
-
-    // Merge enter and update selections; set position for all nodes.
-    entering
-      .merge(trail)
-      .on("click", this.onClick.bind(this))
-      .attr("transform", (d: TDatum, i: number): string => {
-        return `translate(${i * (dims.width + dims.space)}, 0)`
+    let entering: TD3Selection = trail
+      .enter()
+      .append("div")
+      .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
+      .style("background-color", (d: any): string => {
+        return d === "hops" ? "#fff" : d.data.color || "#eee"
       })
+
+    entering
+      .append("div")
+      .attr("class", "label")
+      .html(this.label)
+
+    entering.append("div").attr("class", "background-arrow")
+
+    entering
+      .append("div")
+      .attr("class", "arrow")
+      .style("border-left-color", (d: any): string => {
+        return d === "hops" ? "#fff" : d.data.color || "#eee"
+      })
+
+    entering.merge(trail).on("click", this.onClick.bind(this))
   }
 
-  onClick(d: TDatum): void {
+  onClick(d: TDatum | string): void {
+    if (d === "hops") {
+      return
+    }
     this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d })
   }
 }

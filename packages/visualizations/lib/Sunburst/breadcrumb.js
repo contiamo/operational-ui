@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../utils/event_catalog");
+var styles = require("./styles");
 var dims = {
     width: 70,
     height: 20,
     space: 3,
     tip: 7
 };
-var breadcrumbPolygonStart = "0,0 " + dims.width + ", 0 " + (dims.width + dims.tip) + ", " + dims.height / 2 + " " + dims.width + ", " + dims.height + " 0, " + dims.height;
-var breadcrumbPolygon = "0,0 " + dims.width + ",0 " + (dims.width + dims.tip) + "," + dims.height / 2 + " " + dims.width + "," + dims.height + " 0," + dims.height + " " + dims.tip + "," + dims.height / 2;
 var Breadcrumb = /** @class */ (function () {
     function Breadcrumb(state, stateWriter, events, el) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
-        this.el.insert("svg:svg", ":first-child");
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.CLICK, this.updateHoverPath.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateHoverPath.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this));
@@ -26,46 +24,54 @@ var Breadcrumb = /** @class */ (function () {
         var nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse();
         this.update(nodeArray);
     };
-    Breadcrumb.prototype.breadcrumbPoints = function (d, i) {
-        return i > 0 ? breadcrumbPolygon : breadcrumbPolygonStart;
-    };
     Breadcrumb.prototype.label = function (d, i) {
-        // Pixel width of character approx 1/2 of font-size - allow 7px per character
-        var desiredPixelWidth = dims.width - (i > 0 ? dims.tip : 0) - dims.tip - 2 * dims.space, numberOfCharacters = desiredPixelWidth / 7;
-        var name = d.data.name || "";
-        return name.substring(0, numberOfCharacters) + (name.length > numberOfCharacters ? "..." : "");
+        return d === "hops" ? "..." : d.data.name;
+    };
+    Breadcrumb.prototype.truncateNodeArray = function (nodeArray) {
+        if (nodeArray.length <= 5) {
+            return nodeArray;
+        }
+        else {
+            var firstNodes = nodeArray.slice(0, 2);
+            var lastNodes = nodeArray.slice(nodeArray.length - 2);
+            return firstNodes.concat(["hops"]).concat(lastNodes);
+        }
     };
     Breadcrumb.prototype.update = function (nodeArray) {
-        var data = nodeArray.length > 1 ? nodeArray : [];
+        var data = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : [];
         // Data join; key function combines name and depth (= position in sequence).
         var trail = this.el
-            .select("svg")
-            .selectAll("g")
-            .data(data, function (d) { return d.data.name + d.depth; });
+            .selectAll("div." + styles.breadcrumbItem)
+            .data(data, function (d) {
+            return d === "hops" ? d : d.data.name + d.depth;
+        });
         // Remove exiting nodes.
         trail.exit().remove();
         // Add breadcrumb and label for entering nodes.
-        var entering = trail.enter().append("svg:g");
-        entering
-            .append("svg:polygon")
-            .attr("points", this.breadcrumbPoints)
-            .style("fill", function (d) { return d.data.color || "#fff"; })
-            .style("stroke", function (d) { return (d.data.color ? "none" : "000"); });
-        entering
-            .append("svg:text")
-            .attr("x", function (d, i) { return (i > 0 ? dims.tip : 0) + dims.space; })
-            .attr("y", dims.height / 2)
-            .attr("dy", "0.35em")
-            .text(this.label);
-        // Merge enter and update selections; set position for all nodes.
-        entering
-            .merge(trail)
-            .on("click", this.onClick.bind(this))
-            .attr("transform", function (d, i) {
-            return "translate(" + i * (dims.width + dims.space) + ", 0)";
+        var entering = trail
+            .enter()
+            .append("div")
+            .attr("class", function (d) { return styles.breadcrumbItem + " " + (d === "hops" ? d : ""); })
+            .style("background-color", function (d) {
+            return d === "hops" ? "#fff" : d.data.color || "#eee";
         });
+        entering
+            .append("div")
+            .attr("class", "label")
+            .html(this.label);
+        entering.append("div").attr("class", "background-arrow");
+        entering
+            .append("div")
+            .attr("class", "arrow")
+            .style("border-left-color", function (d) {
+            return d === "hops" ? "#fff" : d.data.color || "#eee";
+        });
+        entering.merge(trail).on("click", this.onClick.bind(this));
     };
     Breadcrumb.prototype.onClick = function (d) {
+        if (d === "hops") {
+            return;
+        }
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d });
     };
     return Breadcrumb;

@@ -30,17 +30,61 @@ const totalStyle = {
 
 const breadcrumbStyle = {
   width: "100%",
-  padding: "10px 5px",
-  "& svg": {
-    width: "100%",
-    height: "21px"
+  height: "36px",
+  position: "relative",
+  overflow: "hidden",
+  margin: "5px 0"
+}
+
+const breadcrumbItemStyle = {
+  float: "left",
+  width: "80px",
+  height: "26px",
+  position: "relative",
+  paddingLeft: "20px",
+  lineHeight: "26px",
+  cursor: "pointer",
+  margin: "5px 0",
+  "&:first-child": {
+    paddingLeft: "5px"
   },
-  "& polygon": {
-    opacity: "0.5",
-    cursor: "pointer"
+  "&.hops": {
+    width: "40px"
   },
-  "& text": {
-    pointerEvents: "none"
+  "& .label": {
+    pointerEvents: "none",
+    float: "left",
+    display: "block",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    width: "65px"
+  },
+  "& .background-arrow": {
+    content: "''",
+    position: "absolute",
+    width: 0,
+    height: 0,
+    borderLeft: "solid 15px #fff",
+    borderTop: "solid 15px transparent",
+    borderBottom: "solid 15px transparent",
+    top: "50%",
+    left: "100%",
+    marginTop: "-15px",
+    zIndex: "2"
+  },
+  "& .arrow": {
+    content: "''",
+    position: "absolute",
+    width: 0,
+    height: 0,
+    borderLeft: "solid 13px #fff",
+    borderTop: "solid 13px transparent",
+    borderBottom: "solid 13px transparent",
+    top: "50%",
+    left: "100%",
+    marginTop: "-13px",
+    zIndex: "3"
   }
 }
 
@@ -67,5 +111,6 @@ export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
 export const breadcrumb = css(breadcrumbStyle).toString()
+export const breadcrumbItem = css(breadcrumbItemStyle).toString()
 export const centerCircle = css(centerCircleStyle).toString()
 export const rootLabel = css(rootLabelStyle).toString()
