@@ -5,5 +5,7 @@ declare class Focus extends AbstractFocus {
         focusPoint: IObject;
         d: TDatum;
     }): void;
+    percentageString(datum: TDatum): string;
+    singlePercentageString(datum: TDatum, comparison: TDatum): string;
 }
 export default Focus;

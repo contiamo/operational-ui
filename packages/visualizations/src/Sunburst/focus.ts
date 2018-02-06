@@ -31,7 +31,7 @@ class Focus extends AbstractFocus {
 
     const comparisonNode: TDatum = computed.renderer.zoomNode || computed.renderer.topNode
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
-    content.append("xhtml:li").text(`${percentage}% of ${dataName(comparisonNode)}`)
+    content.append("xhtml:li").text(this.percentageString(datum))
 
     // Get label dimensions
     const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
@@ -41,6 +41,21 @@ class Focus extends AbstractFocus {
       }
 
     FocusUtils.drawVisible(this.el, labelPlacement)
+  }
+
+  percentageString(datum: TDatum): string {
+    const computed: IObject = this.state.current.get("computed")
+    const topNode: TDatum = computed.renderer.topNode
+    const zoomNode: TDatum = computed.renderer.zoomNode
+    return !zoomNode || topNode === zoomNode
+      ? `${this.singlePercentageString(datum, topNode)}`
+      : `${this.singlePercentageString(datum, zoomNode)} / ${this.singlePercentageString(datum, topNode)}`
+  }
+
+  singlePercentageString(datum: TDatum, comparison: TDatum): string {
+    const topNode: TDatum = this.state.current.get("computed").renderer.topNode
+    const percentage: string = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3)
+    return `${percentage}% of ${dataName(comparison)}`
   }
 }
 
