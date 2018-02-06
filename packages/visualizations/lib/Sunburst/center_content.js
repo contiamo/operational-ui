@@ -15,8 +15,8 @@ var CenterContent = /** @class */ (function () {
         var renderer = computed.renderer;
         var drawingDims = computed.canvas.drawingDims;
         var fixedNode = renderer.zoomNode || renderer.topNode;
-        this.el.select("span.name").text(fixedNode.data.name);
         this.el.select("span.value").text(renderer.data.length > 0 ? config.numberFormatter(fixedNode.value) : null);
+        this.el.select("span.name").text(fixedNode.data.name);
         this.el.style("width", renderer.innerRadius * config.centerCircleRadius * 2 + "px");
         var elDims = this.el.node().getBoundingClientRect();
         var top = config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2;

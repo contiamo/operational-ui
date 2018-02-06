@@ -57,7 +57,7 @@ class Canvas {
     const el: TD3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.centerContent)
-      .html("<span class='name'></span><br><span class='value'></span>")
+      .html("<span class='value'></span><br><span class='name'></span>")
     this.container.node().appendChild(el.node())
     this.elMap.centerContent = el
     return el

@@ -34,9 +34,7 @@ var Focus = /** @class */ (function (_super) {
         content.append("span").text("(" + this.state.current.get("config").numberFormatter(dataValue(datum)) + ")");
         var comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode;
         var percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3);
-        content
-            .append("xhtml:li")
-            .text(this.percentageString(datum));
+        content.append("xhtml:li").text(this.percentageString(datum));
         // Get label dimensions
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el), labelPlacement = {
             left: focusPoint.centroid[0] - labelDimensions.width / 2,

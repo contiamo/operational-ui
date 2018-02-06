@@ -51,8 +51,8 @@ var centerContentStyle = {
     pointerEvents: "none",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    "& .name": __assign({}, theme_1.operational.typography.heading1),
-    "& .value": __assign({}, theme_1.operational.typography.small)
+    "& .name": __assign({}, theme_1.operational.typography.small),
+    "& .value": __assign({}, theme_1.operational.typography.heading1)
 };
 exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();

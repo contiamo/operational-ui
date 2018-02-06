@@ -56,10 +56,10 @@ const centerContentStyle = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   "& .name": {
-    ...theme.typography.heading1
+    ...theme.typography.small
   },
   "& .value": {
-    ...theme.typography.small
+    ...theme.typography.heading1
   }
 }
 
