@@ -40,8 +40,6 @@ class Renderer {
     this.stateWriter = stateWriter
     this.events = events
     this.el = el
-    this.assignAccessors()
-
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.onClick.bind(this))
   }
 
@@ -58,6 +56,7 @@ class Renderer {
   }
 
   draw(): void {
+    this.assignAccessors()
     this.compute()
     this.drawn ? this.updateDraw() : this.initialDraw()
   }

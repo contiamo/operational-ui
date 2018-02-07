@@ -19,7 +19,6 @@ var Renderer = /** @class */ (function () {
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
-        this.assignAccessors();
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.CLICK, this.onClick.bind(this));
     }
     Renderer.prototype.assignAccessors = function () {
@@ -35,6 +34,7 @@ var Renderer = /** @class */ (function () {
         return this.data.length > 0;
     };
     Renderer.prototype.draw = function () {
+        this.assignAccessors();
         this.compute();
         this.drawn ? this.updateDraw() : this.initialDraw();
     };
@@ -247,7 +247,7 @@ var Renderer = /** @class */ (function () {
         }
         // Parent nodes cannot be smaller than the sum of their children
         var childrenExceedParent = fp_1.filter(function (d) {
-            return d.value < fp_1.reduce(function (sum, child) { return sum += child.value; }, 0)(d.children);
+            return d.value < fp_1.reduce(function (sum, child) { return (sum += child.value); }, 0)(d.children);
         })(this.data);
         if (childrenExceedParent.length > 0) {
             throw new Error("The following nodes are smaller than the sum of their child nodes: " + fp_1.map(this.name)(childrenExceedParent));
