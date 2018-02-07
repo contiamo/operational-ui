@@ -19,11 +19,12 @@ const data = {
   "name": "Pageviews",
   "data": {
     "name": "All",
+    "value": 140000,
     "children": [
       {
         "name": "Europe",
         "color": "0f0",
-        // "value": 52000,
+        "value": 52000,
         "children": [
           {
             "name": "UK",
@@ -199,10 +200,11 @@ const data = {
       {
         "name": "North America",
         "color": "f00",
-        "value": 36780,
+        "value": 43000,
         "children": [
           {
             "name": "USA",
+            "value": 33218,
             "children": [
               {
                 "name": "Washington DC",

@@ -239,13 +239,26 @@ var Renderer = /** @class */ (function () {
         var minAngle = show ? Math.asin(1 / this.radiusScale(d.y0)) || 0 : 0;
         return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
     };
+    Renderer.prototype.checkDataValidity = function () {
+        // All data points must have a value assigned
+        var noValueData = fp_1.filter(function (d) { return !d.value; })(this.data);
+        if (noValueData.length > 0) {
+            throw new Error("The following nodes do not have values: " + fp_1.map(this.name)(noValueData));
+        }
+        // Parent nodes cannot be smaller than the sum of their children
+        var childrenExceedParent = fp_1.filter(function (d) {
+            return d.value < fp_1.reduce(function (sum, child) { return sum += child.value; }, 0)(d.children);
+        })(this.data);
+        if (childrenExceedParent.length > 0) {
+            throw new Error("The following nodes are smaller than the sum of their child nodes: " + fp_1.map(this.name)(childrenExceedParent));
+        }
+    };
     Renderer.prototype.prepareData = function () {
         var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
         var sortingFunction = this.state.current.get("config").sort
             ? function (a, b) { return b.value - a.value; }
             : undefined;
         var hierarchyData = d3_hierarchy_1.hierarchy(data)
-            .sum(this.value)
             .each(this.assignColors.bind(this))
             .sort(sortingFunction);
         this.total = hierarchyData.value;
@@ -256,6 +269,7 @@ var Renderer = /** @class */ (function () {
         this.data = d3_hierarchy_1.partition()(hierarchyData)
             .descendants()
             .filter(function (d) { return !fp_1.isEmpty(d.data); });
+        this.checkDataValidity();
         fp_1.forEach(function (d) {
             d.zoomable = d.parent && !!d.children;
         })(this.data);

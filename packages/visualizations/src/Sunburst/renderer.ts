@@ -1,6 +1,6 @@
 import Events from "../utils/event_catalog"
 import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum, IAccessors, TStateWriter } from "./typings"
-import { every, find, filter, forEach, findIndex, identity, isEmpty, reduce } from "lodash/fp"
+import { every, find, filter, forEach, findIndex, identity, isEmpty, map, reduce } from "lodash/fp"
 import * as styles from "./styles"
 import { withD3Element, transitionIfVisible } from "../utils/d3_utils"
 
@@ -306,6 +306,26 @@ class Renderer {
     return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)))
   }
 
+  checkDataValidity(): void {
+    // All data points must have a value assigned
+    const noValueData: TDatum[] = filter((d: TDatum): boolean => !d.value)(this.data)
+
+    if (noValueData.length > 0) {
+      throw new Error(`The following nodes do not have values: ${map(this.name)(noValueData)}`)
+    }
+
+    // Parent nodes cannot be smaller than the sum of their children
+    const childrenExceedParent: TDatum[] = filter((d: TDatum): boolean => {
+      return d.value < reduce((sum: number, child: TDatum): number => (sum += child.value), 0)(d.children)
+    })(this.data)
+
+    if (childrenExceedParent.length > 0) {
+      throw new Error(
+        `The following nodes are smaller than the sum of their child nodes: ${map(this.name)(childrenExceedParent)}`
+      )
+    }
+  }
+
   prepareData(): void {
     const data: IObject = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
 
@@ -314,7 +334,6 @@ class Renderer {
       : undefined
 
     const hierarchyData = d3Hierarchy(data)
-      .sum(this.value)
       .each(this.assignColors.bind(this))
       .sort(sortingFunction)
 
@@ -329,6 +348,8 @@ class Renderer {
     this.data = d3Partition()(hierarchyData)
       .descendants()
       .filter((d: TDatum): boolean => !isEmpty(d.data))
+
+    this.checkDataValidity()
 
     forEach((d: TDatum): void => {
       d.zoomable = d.parent && !!d.children

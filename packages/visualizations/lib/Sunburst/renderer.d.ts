@@ -36,6 +36,7 @@ declare class Renderer {
     onMouseLeave(d: TDatum, el: Element): any;
     compute(): void;
     endAngle(d: TDatum): number;
+    checkDataValidity(): void;
     prepareData(): void;
     assignColors(node: any): void;
     hoverOuter(radius: number): number;

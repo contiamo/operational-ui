@@ -40,9 +40,7 @@ var Breadcrumb = /** @class */ (function () {
     Breadcrumb.prototype.update = function (nodeArray) {
         var data = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : [];
         // Data join; key function combines name and depth (= position in sequence).
-        var trail = this.el
-            .selectAll("div." + styles.breadcrumbItem)
-            .data(data, function (d) {
+        var trail = this.el.selectAll("div." + styles.breadcrumbItem).data(data, function (d) {
             return d === "hops" ? d : d.data.name + d.depth;
         });
         // Remove exiting nodes.

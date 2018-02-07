@@ -5,6 +5,7 @@ import { Card, CardHeader } from "@operational/components"
 
 const data = {
   name: "All",
+  value: "125190",
   children: [
     {
       name: "Europe",
@@ -26,6 +27,7 @@ const data = {
 
 const data1 = {
   name: "All",
+  value: "150390",
   children: [
     {
       name: "Europe",
@@ -52,6 +54,7 @@ const data1 = {
 
 const data2 = {
   name: "All",
+  value: "168390",
   children: [
     {
       name: "Europe",
@@ -83,6 +86,7 @@ const data2 = {
 
 const data3 = {
   name: "All",
+  value: "168390",
   children: [
     {
       name: "Europe",
@@ -154,6 +158,7 @@ const data3 = {
 
 const data4 = {
   name: "All",
+  value: "178390",
   children: [
     {
       name: "Europe",
@@ -213,10 +218,11 @@ const data4 = {
     {
       name: "North America",
       color: "f00",
-      value: 36780,
+      value: 45700,
       children: [
         {
           name: "USA",
+          value: "33218",
           children: [
             {
               name: "Washington DC",

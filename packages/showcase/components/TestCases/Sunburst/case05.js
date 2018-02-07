@@ -5,9 +5,11 @@ import { Card, CardHeader } from "@operational/components"
 
 const data = {
   name: "All",
+  value: "139000",
   children: [
     {
       name: "Europe",
+      value: 50000,
       color: "0f0",
       children: [
         {
@@ -56,7 +58,7 @@ const data = {
           children: [
             {
               name: "Berlin",
-              value: 1650,
+              value: 1850,
               children: [
                 {
                   name: "Kreuzberg",
@@ -208,10 +210,11 @@ const data = {
     {
       name: "North America",
       color: "f00",
-      value: 36780,
+      value: 45700,
       children: [
         {
           name: "USA",
+          value: "33218",
           children: [
             {
               name: "Washington DC",

@@ -20,11 +20,12 @@ const simpleSnippet = `
         "name": "Pageviews",
         "data": {
           "name": "All",
+          "value": 140000,
           "children": [
             {
               "name": "Europe",
               "color": "0f0",
-              // "value": 52000,
+              "value": 52000,
               "children": [
                 {
                   "name": "UK",
@@ -72,7 +73,7 @@ const simpleSnippet = `
                   "children": [
                     {
                       "name": "Berlin",
-                      "value": 1650,
+                      "value": 1750,
                       "children": [
                         {
                           "name": "Kreuzberg",
@@ -200,10 +201,11 @@ const simpleSnippet = `
             {
               "name": "North America",
               "color": "f00",
-              "value": 36780,
+              "value": 43000,
               "children": [
                 {
                   "name": "USA",
+                  "value": 33218,
                   "children": [
                     {
                       "name": "Washington DC",
