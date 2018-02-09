@@ -18,6 +18,7 @@ export default class ContextMenu extends React.Component<IProps, IState> {
         isHovered: boolean;
         isOpen: boolean;
     };
+    constructor(props: IProps);
     containerNode: any;
     menuContainerNode: any;
     outsideClickHandler: any;

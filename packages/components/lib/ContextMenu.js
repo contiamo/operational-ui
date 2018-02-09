@@ -36,12 +36,13 @@ var MenuContainer = glamorous_1.default.div(function (_a) {
 });
 var ContextMenu = /** @class */ (function (_super) {
     __extends(ContextMenu, _super);
-    function ContextMenu() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function ContextMenu(props) {
+        var _this = _super.call(this, props) || this;
         _this.state = {
             isHovered: false,
             isOpen: false
         };
+        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
     ContextMenu.prototype.handleClick = function (ev) {
@@ -51,10 +52,10 @@ var ContextMenu = /** @class */ (function (_super) {
         this.setState(function (prevState) { return ({ isOpen: newIsActive }); });
     };
     ContextMenu.prototype.componentDidMount = function () {
-        document.addEventListener("click", this.handleClick.bind(this));
+        document.addEventListener("click", this.handleClick);
     };
     ContextMenu.prototype.componentWillUnmount = function () {
-        document.removeEventListener("click", this.handleClick.bind(this));
+        document.removeEventListener("click", this.handleClick);
     };
     ContextMenu.prototype.render = function () {
         var _this = this;

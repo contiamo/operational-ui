@@ -41,6 +41,11 @@ export default class ContextMenu extends React.Component<IProps, IState> {
     isOpen: false
   }
 
+  constructor(props: IProps) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   containerNode: any
   menuContainerNode: any
   outsideClickHandler: any
@@ -53,11 +58,11 @@ export default class ContextMenu extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    document.addEventListener("click", this.handleClick.bind(this))
+    document.addEventListener("click", this.handleClick)
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick.bind(this))
+    document.removeEventListener("click", this.handleClick)
   }
 
   render() {
