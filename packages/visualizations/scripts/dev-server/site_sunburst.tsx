@@ -76,7 +76,7 @@ const data = {
                 "children": [
                   {
                     "name": "Kreuzberg",
-                    "value": 693,
+                    "value": 593,
                   },
                   {
                     "name": "Prenzlauer Berg",
