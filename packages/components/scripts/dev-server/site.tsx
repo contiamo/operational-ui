@@ -1,21 +1,20 @@
 import * as React from "react"
+import glamorous from "glamorous"
+import { Theme } from "@operational/theme"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import {
-  OperationalUI,
-  operationalTheme,
-  Chip,
-  Tooltip,
-  Sidebar,
-  SidebarHeader,
-  SidebarItem,
-  Card
-} from "../../src/index"
+import { OperationalUI, operationalTheme, Record, RecordHeader, RecordBody, Card, Heading1Type } from "../../src/index"
 
 interface IState {
   isOpen: boolean
 }
+
+const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  "& > *": {
+    marginTop: -1
+  }
+}))
 
 class Site extends React.Component<{}, IState> {
   state = {
@@ -26,13 +25,29 @@ class Site extends React.Component<{}, IState> {
       <OperationalUI>
         <div style={{ margin: 20 }}>
           <Card>
-            <Chip color="info" icon="X" onIconClick={() => {}}>
-              Hello
-            </Chip>
-            <Chip color="white" icon="X" onIconClick={() => {}}>
-              Hello
-            </Chip>
-            <Chip>Good bye</Chip>
+            <Heading1Type>Stuff</Heading1Type>
+            <Records>
+              <Record css={{ width: 300 }} controls={"Hello"}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+              <Record css={{ width: 300 }}>
+                <RecordHeader>Hello</RecordHeader>
+                <RecordBody>Hello</RecordBody>
+              </Record>
+            </Records>
           </Card>
         </div>
       </OperationalUI>

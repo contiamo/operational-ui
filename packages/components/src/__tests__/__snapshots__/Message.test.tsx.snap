@@ -9,13 +9,13 @@ exports[`Message Component Should render 1`] = `
   >
     <svg
       fill="none"
-      height="12"
+      height="18"
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
       viewbox="0 0 24 24"
-      width="12"
+      width="18"
       xmlns="http://www.w3.org/2000/svg"
     >
       <line

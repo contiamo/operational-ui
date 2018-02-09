@@ -18,8 +18,17 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         label: "record",
         position: "relative",
-        minHeight: 58,
         border: "1px solid " + theme.colors.gray20
+    });
+});
+var HeaderContainer = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: theme.spacing / 2 + "px " + theme.spacing + "px",
+        height: 48
     });
 });
 var Record = /** @class */ (function (_super) {
@@ -34,18 +43,24 @@ var Record = /** @class */ (function (_super) {
     Record.prototype.render = function () {
         var _this = this;
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
+            React.createElement(HeaderContainer, null,
+                React.Children.map(this.props.children, function (child, index) {
+                    return child.props.__isRecordHeader ? child : null;
+                }),
+                this.props.controls ? (this.props.controls) : (React.createElement(Button_1.default, { color: this.state.isExpanded ? "#FFF" : "info", condensed: true, css: {
+                        position: "absolute",
+                        top: 24,
+                        right: 12,
+                        marginRight: 0,
+                        transform: "translate3d(0, -50%, 0)"
+                    }, onClick: function () {
+                        _this.setState(function (prevState) { return ({
+                            isExpanded: !prevState.isExpanded
+                        }); });
+                    } }, this.state.isExpanded ? "Hide details" : "Details"))),
             React.Children.map(this.props.children, function (child, index) {
-                return !child.props.__isRecordDetails || _this.state.isExpanded ? child : null;
-            }),
-            React.createElement(Button_1.default, { css: {
-                    position: "absolute",
-                    right: 12,
-                    top: 12
-                }, color: "info", onClick: function () {
-                    _this.setState(function (prevState) { return ({
-                        isExpanded: !prevState.isExpanded
-                    }); });
-                } }, this.state.isExpanded ? "Hide details" : "Details")));
+                return child.props.__isRecordBody && _this.state.isExpanded ? child : null;
+            })));
     };
     return Record;
 }(React.Component));

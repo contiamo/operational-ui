@@ -4,6 +4,7 @@ export interface IProps {
     css?: {};
     className?: string;
     children?: React.ReactNode;
+    controls?: React.ReactNode;
 }
 export interface IState {
     isExpanded: boolean;
