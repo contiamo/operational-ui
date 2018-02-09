@@ -1,0 +1,32 @@
+import { TD3Selection, IState, TStateWriter, IEvents, IObject, TSeriesEl } from "./typings";
+declare class Canvas {
+    breadcrumb: TD3Selection;
+    container: TD3Selection;
+    el: TSeriesEl;
+    events: IEvents;
+    rootLabel: TD3Selection;
+    protected elements: IObject;
+    protected state: IState;
+    protected elMap: IObject;
+    stateWriter: TStateWriter;
+    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element);
+    insertContainer(context: Element): TD3Selection;
+    insertBreadcrumb(): TD3Selection;
+    insertEl(): TSeriesEl;
+    insertRootLabel(): TD3Selection;
+    prefixedId(id: string): string;
+    insertFocusElements(): void;
+    insertFocusLabel(): TD3Selection;
+    insertComponentFocus(): TD3Selection;
+    onMouseEnter(): void;
+    onMouseLeave(): void;
+    onClick(): void;
+    listenToMouseOver(): void;
+    elementFor(component: string): any;
+    trackMouseMove(): void;
+    stopMouseMove(): void;
+    drawingDims(): IObject;
+    draw(): void;
+    remove(): void;
+}
+export default Canvas;

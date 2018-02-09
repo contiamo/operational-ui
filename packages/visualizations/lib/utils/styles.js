@@ -58,6 +58,7 @@ var componentFocusStyle = {
 var chartContainerStyle = {
     position: "relative",
     display: "block",
+    backgroundColor: "#fff",
     "&.hidden": {
         display: "none"
     }
@@ -65,10 +66,8 @@ var chartContainerStyle = {
 var focusLegendStyle = {
     userSelect: "none",
     pointerEvents: "none",
-    boxShadow: "0px 1px 2px #d3d1d1",
     boxSizing: "content-box",
-    borderRadius: 2,
-    padding: 7,
+    padding: "4px 8px",
     border: "1px solid #cdcdcd",
     position: "absolute",
     zIndex: 3000,
@@ -80,8 +79,25 @@ var focusLegendStyle = {
         margin: 0,
         padding: 0
     },
-    "& li.title": {
+    "& li.title, span.title": {
         fontWeight: "bold"
+    },
+    "& span.title": {
+        paddingRight: "6px"
+    },
+    "&::after": {
+        content: "''",
+        position: "absolute",
+        width: 0,
+        height: 0
+    },
+    "&.above::after": {
+        borderTop: "solid 7px #fff",
+        borderLeft: "solid 7px transparent",
+        borderRight: "solid 7px transparent",
+        top: "100%",
+        left: "50%",
+        marginLeft: "-7px"
     }
 };
 exports.chartContainer = glamor_1.css(chartContainerStyle).toString();

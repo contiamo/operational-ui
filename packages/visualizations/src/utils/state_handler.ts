@@ -47,14 +47,13 @@ export class StateHandler<IConfig> {
 
     const invalidOptions: string[] = reduce.convert({ cap: false })(
       (memo: string[], value: any, key: string): string[] => {
-        if (!value) {
+        if (!value && value !== false) {
           memo.push(key)
         }
         return memo
       },
       []
     )(config)
-
     forEach((option: string): void => {
       console.warn(`Warning: invalid config option '${option}: reverting to default.`)
     })(invalidOptions)
