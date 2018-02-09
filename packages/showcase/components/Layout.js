@@ -100,7 +100,7 @@ export default class Layout extends React.Component {
             {this.state.isNavigating && <Progress />}
             <Sidenavigation pathname={pathname} pathmap={pathmap} />
             <Content>
-              <Header note="v0.1.0-11" pathname={pathname} pathmap={pathmap} />
+              <Header note="v0.1.0-12" pathname={pathname} pathmap={pathmap} />
               <PageContent>{this.props.children}</PageContent>
             </Content>
           </Container>
