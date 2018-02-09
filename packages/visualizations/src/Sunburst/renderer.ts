@@ -6,10 +6,9 @@ import { withD3Element, transitionIfVisible } from "../utils/d3_utils"
 
 // d3 imports
 import * as d3 from "d3-selection"
-import { interpolate as d3Interpolate } from "d3-interpolate"
 import "d3-transition"
+import { interpolate as d3Interpolate, interpolateObject as d3InterpolateObject } from "d3-interpolate"
 import { pie as d3Pie, arc as d3Arc } from "d3-shape"
-import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy"
 
@@ -107,7 +106,7 @@ class Renderer {
   }
 
   enterAndUpdate(arcs: TD3Selection, duration: number, hidden: boolean): void {
-    let updatingArcs: TD3Selection = arcs
+    const updatingArcs: TD3Selection = arcs
       .enter()
       .append("svg:path")
       .style("fill", this.color)
@@ -162,7 +161,7 @@ class Renderer {
     // make the radius of the central white circle equal to the inner radius of the first ring,
     // to avoid an extra grey ring around the root node.
     const totalRootChildValue: number = reduce((memo: number, child: TDatum): number => {
-      return (memo += child.value)
+      return memo + child.value
     }, 0)(this.topNode.children)
     const rootIsSurrounded: boolean = zoomNode === this.topNode && zoomNode.value === totalRootChildValue
 
@@ -181,7 +180,7 @@ class Renderer {
     this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
 
-    let paths: TD3Selection = this.el
+    const paths: TD3Selection = this.el
       .selectAll("path")
       .attr("pointer-events", "none")
       .classed("zoomed", (datum: TDatum): boolean => datum === this.zoomNode)
@@ -236,7 +235,7 @@ class Renderer {
 
     this.el.select("div.explanation").style("visibility", "")
 
-    let sequenceArray = d.ancestors()
+    const sequenceArray = d.ancestors()
     sequenceArray.pop() // remove root node from the array
 
     // Fade all the segments (leave inner circle as is).
@@ -315,7 +314,8 @@ class Renderer {
 
     // Parent nodes cannot be smaller than the sum of their children
     const childrenExceedParent: TDatum[] = filter((d: TDatum): boolean => {
-      return d.value < reduce((sum: number, child: TDatum): number => (sum += child.value), 0)(d.children)
+      const childSum: number = reduce((sum: number, child: TDatum): number => sum + child.value, 0)(d.children)
+      return d.value < childSum
     })(this.data)
 
     if (childrenExceedParent.length > 0) {
@@ -429,7 +429,7 @@ class Renderer {
       y0 = old.y0
       y1 = old.y1
     } else if (!old && oldParent) {
-      //find siblings - same parent, same depth
+      // find siblings - same parent, same depth
       const siblings: TDatum[] = this.findSiblings(this.data, d)
       const siblingIndex: number = findIndex((datum: TDatum): boolean => this.isEqual(datum, d))(siblings)
       const oldPrecedingSibling: TDatum = this.findDatum(previousData, siblings[siblingIndex - 1])
@@ -445,7 +445,7 @@ class Renderer {
       y1 = d.y1
     }
 
-    const f = interpolateObject({ x0, x1, y0, y1 }, d)
+    const f = d3InterpolateObject({ x0, x1, y0, y1 }, d)
     return (t: number): string => this.arc(f(t))
   }
 
@@ -470,7 +470,7 @@ class Renderer {
       x = 0
     }
 
-    const f = interpolateObject({ x0: x, x1: x }, d)
+    const f = d3InterpolateObject({ x0: x, x1: x }, d)
     return (t: number): string => this.arc(f(1 - t))
   }
 

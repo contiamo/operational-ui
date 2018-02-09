@@ -6,10 +6,9 @@ var styles = require("./styles");
 var d3_utils_1 = require("../utils/d3_utils");
 // d3 imports
 var d3 = require("d3-selection");
-var d3_interpolate_1 = require("d3-interpolate");
 require("d3-transition");
+var d3_interpolate_1 = require("d3-interpolate");
 var d3_shape_1 = require("d3-shape");
-var d3_interpolate_2 = require("d3-interpolate");
 var d3_scale_1 = require("d3-scale");
 var d3_hierarchy_1 = require("d3-hierarchy");
 var Renderer = /** @class */ (function () {
@@ -121,7 +120,7 @@ var Renderer = /** @class */ (function () {
         // make the radius of the central white circle equal to the inner radius of the first ring,
         // to avoid an extra grey ring around the root node.
         var totalRootChildValue = fp_1.reduce(function (memo, child) {
-            return (memo += child.value);
+            return memo + child.value;
         }, 0)(this.topNode.children);
         var rootIsSurrounded = zoomNode === this.topNode && zoomNode.value === totalRootChildValue;
         d3_utils_1.transitionIfVisible(this.el.select("circle." + styles.centerCircle), config.duration).attr("r", rootIsSurrounded ? innerRadius : innerRadius * config.centerCircleRadius);
@@ -247,7 +246,8 @@ var Renderer = /** @class */ (function () {
         }
         // Parent nodes cannot be smaller than the sum of their children
         var childrenExceedParent = fp_1.filter(function (d) {
-            return d.value < fp_1.reduce(function (sum, child) { return (sum += child.value); }, 0)(d.children);
+            var childSum = fp_1.reduce(function (sum, child) { return sum + child.value; }, 0)(d.children);
+            return d.value < childSum;
         })(this.data);
         if (childrenExceedParent.length > 0) {
             throw new Error("The following nodes are smaller than the sum of their child nodes: " + fp_1.map(this.name)(childrenExceedParent));
@@ -342,7 +342,7 @@ var Renderer = /** @class */ (function () {
             y1 = old.y1;
         }
         else if (!old && oldParent) {
-            //find siblings - same parent, same depth
+            // find siblings - same parent, same depth
             var siblings = this.findSiblings(this.data, d);
             var siblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(siblings);
             var oldPrecedingSibling = this.findDatum(previousData, siblings[siblingIndex - 1]);
@@ -357,7 +357,7 @@ var Renderer = /** @class */ (function () {
             y0 = d.y0;
             y1 = d.y1;
         }
-        var f = d3_interpolate_2.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, d);
+        var f = d3_interpolate_1.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, d);
         return function (t) { return _this.arc(f(t)); };
     };
     Renderer.prototype.removeArcTween = function (d) {
@@ -382,7 +382,7 @@ var Renderer = /** @class */ (function () {
         else {
             x = 0;
         }
-        var f = d3_interpolate_2.interpolateObject({ x0: x, x1: x }, d);
+        var f = d3_interpolate_1.interpolateObject({ x0: x, x1: x }, d);
         return function (t) { return _this.arc(f(1 - t)); };
     };
     Renderer.prototype.labelTranslate = function (d) {

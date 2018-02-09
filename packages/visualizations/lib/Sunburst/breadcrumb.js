@@ -19,10 +19,13 @@ var Breadcrumb = /** @class */ (function () {
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this));
     }
     Breadcrumb.prototype.updateHoverPath = function (payload) {
+        var _this = this;
         var computed = this.state.current.get("computed").renderer;
         var fixedNode = computed.zoomNode || computed.topNode;
         var nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse();
-        this.update(nodeArray);
+        setTimeout(function () {
+            _this.update(nodeArray);
+        }, 1e2);
     };
     Breadcrumb.prototype.label = function (d, i) {
         return d === "hops" ? "..." : d.data.name;

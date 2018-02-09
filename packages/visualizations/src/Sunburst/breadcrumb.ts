@@ -31,7 +31,9 @@ class Breadcrumb {
     const computed: IObject = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
     const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
-    this.update(nodeArray)
+    setTimeout(() => {
+      this.update(nodeArray)
+    }, 1e2)
   }
 
   label(d: any, i: number): string {
@@ -52,7 +54,7 @@ class Breadcrumb {
     const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
     // Data join; key function combines name and depth (= position in sequence).
-    let trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => {
+    const trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => {
       return d === "hops" ? d : d.data.name + d.depth
     })
 
@@ -60,7 +62,7 @@ class Breadcrumb {
     trail.exit().remove()
 
     // Add breadcrumb and label for entering nodes.
-    let entering: TD3Selection = trail
+    const entering: TD3Selection = trail
       .enter()
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
