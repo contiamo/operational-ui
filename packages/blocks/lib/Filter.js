@@ -63,17 +63,17 @@ var Filter = /** @class */ (function (_super) {
                     if (value === "") {
                         value = "...";
                     }
-                    return (React.createElement(components_1.Chip, { onClick: _this.props.onClear
+                    return (React.createElement(components_1.Chip, { onIconClick: _this.props.onClear
                             ? function () {
                                 _this.props.onClear(child.props.id);
                             }
-                            : null, symbol: "×" }, label + ": " + value));
+                            : null, icon: "X" }, label + ": " + value));
                 }),
-                React.createElement(components_1.Chip, { color: "#efefef", onClick: function () {
+                React.createElement(components_1.Chip, { color: "#efefef", onIconClick: function () {
                         _this.setState(function (prevState) { return ({
                             isExpanded: true
                         }); });
-                    }, symbol: "+" }, "Add filter")),
+                    }, icon: "Plus" }, "Add filter")),
             this.state.isExpanded ? (React.createElement(components_1.Modal, { onClose: function () {
                     _this.setState(function (prevState) { return ({
                         isExpanded: false

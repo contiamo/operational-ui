@@ -3,3 +3,9 @@ export const withD3Element = (func: any) => {
     return func(datum, this, ...args)
   }
 }
+
+// Only animates transitions if the document can be seen
+// N.B. can only be used if no attribute interpolation required
+export const transitionIfVisible = (selection: any, duration: number): any => {
+  return document.hidden ? selection : selection.transition().duration(duration)
+}
