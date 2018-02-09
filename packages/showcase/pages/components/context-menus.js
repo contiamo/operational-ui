@@ -23,10 +23,24 @@ const simpleSnippet = `
 const propDescription = {
   contextMenu: [
     {
-      name: "openOnHover",
-      description: "Specifies whether the context menu should open on hover.",
+      name: "open",
+      description: "Specify whether the menu items are visible. Overrides internal open state that triggers on click.",
       defaultValue: "false",
       type: "boolean",
+      optional: true
+    },
+    {
+      name: "onClick",
+      description: "Handles click events anywhere *inside* the context menu container, including menu items.",
+      defaultValue: "",
+      type: "() => void",
+      optional: true
+    },
+    {
+      name: "onOutsideClick",
+      description: "Handles click events anywhere *outside* the context menu container, including menu items.",
+      defaultValue: "",
+      type: "() => void",
       optional: true
     },
     {

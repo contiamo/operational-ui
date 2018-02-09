@@ -36,21 +36,27 @@ var MenuContainer = glamorous_1.default.div(function (_a) {
 });
 var ContextMenu = /** @class */ (function (_super) {
     __extends(ContextMenu, _super);
-    function ContextMenu(props) {
-        var _this = _super.call(this, props) || this;
+    function ContextMenu() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            isHovered: false,
             isOpen: false
         };
-        _this.handleClick = _this.handleClick.bind(_this);
+        _this.handleClick = function (ev) {
+            var isTargetInsideMenu = _this.menuContainerNode.contains(ev.target);
+            var isTargetInsideContainer = _this.containerNode.contains(ev.target);
+            if (!isTargetInsideContainer && _this.props.onOutsideClick) {
+                _this.props.onOutsideClick();
+            }
+            if (isTargetInsideContainer && _this.props.onClick) {
+                _this.props.onClick();
+            }
+            var newIsActive = isTargetInsideMenu ? _this.state.isOpen : isTargetInsideContainer ? !_this.state.isOpen : false;
+            _this.setState(function (prevState) { return ({
+                isOpen: newIsActive
+            }); });
+        };
         return _this;
     }
-    ContextMenu.prototype.handleClick = function (ev) {
-        var newIsActive = this.menuContainerNode.contains(ev.target)
-            ? this.state.isOpen
-            : this.containerNode.contains(ev.target) ? !this.state.isOpen : false;
-        this.setState(function (prevState) { return ({ isOpen: newIsActive }); });
-    };
     ContextMenu.prototype.componentDidMount = function () {
         document.addEventListener("click", this.handleClick);
     };
@@ -81,23 +87,13 @@ var ContextMenu = /** @class */ (function (_super) {
                 children.push(child);
             }
         });
-        var hoverProps = this.props.openOnHover
-            ? {
-                onMouseEnter: function (ev) {
-                    _this.setState(function (prevState) { return ({ isHovered: true }); });
-                },
-                onMouseLeave: function (ev) {
-                    _this.setState(function (prevState) { return ({ isHovered: false }); });
-                }
-            }
-            : {};
-        return (React.createElement(Container, __assign({ innerRef: function (node) {
+        return (React.createElement(Container, { innerRef: function (node) {
                 _this.containerNode = node;
-            }, key: this.props.id, css: this.props.css, className: this.props.className }, hoverProps),
+            }, key: this.props.id, css: this.props.css, className: this.props.className },
             children,
             React.createElement(MenuContainer, { css: this.props.menuCss, innerRef: function (node) {
                     _this.menuContainerNode = node;
-                }, isExpanded: this.state.isOpen || this.state.isHovered }, menuItems)));
+                }, isExpanded: this.props.open || this.state.isOpen }, menuItems)));
     };
     return ContextMenu;
 }(React.Component));

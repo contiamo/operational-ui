@@ -10,12 +10,13 @@ export interface IProps {
   menuCss?: {}
   className?: string
   children: React.ReactNode
-  openOnHover?: boolean
+  open?: boolean
+  onClick?: () => void
+  onOutsideClick?: () => void
   keepOpenOnItemClick?: boolean
 }
 
 export interface IState {
-  isHovered: boolean
   isOpen: boolean
 }
 
@@ -37,24 +38,26 @@ const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isEx
 
 export default class ContextMenu extends React.Component<IProps, IState> {
   state = {
-    isHovered: false,
     isOpen: false
-  }
-
-  constructor(props: IProps) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
   }
 
   containerNode: any
   menuContainerNode: any
   outsideClickHandler: any
 
-  handleClick(ev: any): void {
-    const newIsActive = this.menuContainerNode.contains(ev.target)
-      ? this.state.isOpen
-      : this.containerNode.contains(ev.target) ? !this.state.isOpen : false
-    this.setState(prevState => ({ isOpen: newIsActive }))
+  handleClick = (ev: any): void => {
+    const isTargetInsideMenu = this.menuContainerNode.contains(ev.target)
+    const isTargetInsideContainer = this.containerNode.contains(ev.target)
+    if (!isTargetInsideContainer && this.props.onOutsideClick) {
+      this.props.onOutsideClick()
+    }
+    if (isTargetInsideContainer && this.props.onClick) {
+      this.props.onClick()
+    }
+    const newIsActive = isTargetInsideMenu ? this.state.isOpen : isTargetInsideContainer ? !this.state.isOpen : false
+    this.setState(prevState => ({
+      isOpen: newIsActive
+    }))
   }
 
   componentDidMount() {
@@ -90,17 +93,7 @@ export default class ContextMenu extends React.Component<IProps, IState> {
         children.push(child)
       }
     })
-    const hoverProps = this.props.openOnHover
-      ? {
-          onMouseEnter: (ev: any) => {
-            this.setState(prevState => ({ isHovered: true }))
-          },
 
-          onMouseLeave: (ev: any) => {
-            this.setState(prevState => ({ isHovered: false }))
-          }
-        }
-      : {}
     return (
       <Container
         innerRef={node => {
@@ -109,7 +102,6 @@ export default class ContextMenu extends React.Component<IProps, IState> {
         key={this.props.id}
         css={this.props.css}
         className={this.props.className}
-        {...hoverProps}
       >
         {children}
         <MenuContainer
@@ -117,7 +109,7 @@ export default class ContextMenu extends React.Component<IProps, IState> {
           innerRef={node => {
             this.menuContainerNode = node
           }}
-          isExpanded={this.state.isOpen || this.state.isHovered}
+          isExpanded={this.props.open || this.state.isOpen}
         >
           {menuItems}
         </MenuContainer>
