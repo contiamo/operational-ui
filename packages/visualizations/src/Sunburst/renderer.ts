@@ -89,9 +89,9 @@ class Renderer {
       .selectAll(`path.${styles.arc}`)
       .data(this.data, this.name)
 
-    const duration: number = this.state.current.get("config").duration
-    this.exit(arcs, duration, document.hidden)
-    this.enterAndUpdate(arcs, duration, document.hidden)
+    const config: IConfig = this.state.current.get("config")
+    this.exit(arcs, config.duration, document.hidden || config.suppressAnimation)
+    this.enterAndUpdate(arcs, config.duration, document.hidden || config.suppressAnimation)
   }
 
   exit(arcs: TD3Selection, duration: number, hidden: boolean): void {

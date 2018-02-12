@@ -60,9 +60,9 @@ var Renderer = /** @class */ (function () {
             .attr("transform", this.translateString(this.computeTranslate()))
             .selectAll("path." + styles.arc)
             .data(this.data, this.name);
-        var duration = this.state.current.get("config").duration;
-        this.exit(arcs, duration, document.hidden);
-        this.enterAndUpdate(arcs, duration, document.hidden);
+        var config = this.state.current.get("config");
+        this.exit(arcs, config.duration, document.hidden || config.suppressAnimation);
+        this.enterAndUpdate(arcs, config.duration, document.hidden || config.suppressAnimation);
     };
     Renderer.prototype.exit = function (arcs, duration, hidden) {
         var exitingArcs = hidden

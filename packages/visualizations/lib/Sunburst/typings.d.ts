@@ -8,6 +8,7 @@ export interface IConfig {
     maxRings: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
+    suppressAnimation: boolean;
     sort: boolean;
     uid: string;
     visualizationName: string;
