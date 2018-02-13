@@ -309,6 +309,20 @@ const simpleSnippet = `
 const propDescription = {
   Config: [
     {
+      name: "arrowMarkerSize",
+      description: "Width/height of arrow marker used to denote truncated path",
+      defaultValue: "15",
+      type: "number",
+      optional: true
+    },
+    {
+      name: "centerCircleRadius",
+      description: "Percentage of inner circle filled in white / controls width of inner ring",
+      defaultValue: "0.9",
+      type: "number",
+      optional: true
+    },
+    {
       name: "duration",
       description: "Speed at which transitions are animated",
       defaultValue: "1e3",
@@ -348,6 +362,13 @@ const propDescription = {
       description: "Margin between edge of chart and drawing area",
       defaultValue: "1",
       type: "number",
+      optional: true
+    },
+    {
+      name: "suppressAnimation",
+      description: "If true, animations when 'draw' is called are suppressed. Improves speed for large datasets.",
+      defaultValue: "false",
+      type: "boolean",
       optional: true
     },
     {
