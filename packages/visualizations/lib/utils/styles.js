@@ -93,7 +93,7 @@ var focusLegendStyle = {
     },
     "&.above::before,.above::after": {
         top: "100%",
-        left: "50%",
+        left: "50%"
     },
     "&.above::before": {
         borderLeft: "solid 8px transparent",
