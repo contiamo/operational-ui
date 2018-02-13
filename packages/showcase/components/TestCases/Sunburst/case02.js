@@ -17,7 +17,7 @@ const data = {
   children: [
     {
       name: "Europe",
-      color: "0f0",
+      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -40,7 +40,7 @@ const data = {
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -72,7 +72,7 @@ const data = {
     },
     {
       name: "North America",
-      color: "f00",
+      color: "#f00",
       value: 45700,
       children: [
         {
@@ -125,7 +125,7 @@ const data = {
     },
     {
       name: "Africa",
-      color: "00f",
+      color: "#00f",
       value: 25200
     }
   ]

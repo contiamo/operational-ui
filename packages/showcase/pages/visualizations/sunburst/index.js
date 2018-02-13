@@ -24,7 +24,7 @@ const simpleSnippet = `
           "children": [
             {
               "name": "Europe",
-              "color": "0f0",
+              "color": "#0f0",
               "value": 52000,
               "children": [
                 {
@@ -139,7 +139,7 @@ const simpleSnippet = `
             },
             {
               "name": "Asia",
-              "color": "0ff",
+              "color": "#0ff",
               "value": 38400,
               "children": [
                 {
@@ -200,7 +200,7 @@ const simpleSnippet = `
             },
             {
               "name": "North America",
-              "color": "f00",
+              "color": "#f00",
               "value": 43000,
               "children": [
                 {
