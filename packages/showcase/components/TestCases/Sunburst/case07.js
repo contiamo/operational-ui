@@ -5719,11 +5719,9 @@ export const marathon = ({ test, afterAll, container }) => {
     viz.config({
       suppressAnimation: true,
       width: 1000,
-      height: 1000
+      height: 1000,
+      outerBorderMargin: 5
     })
-    // viz.accessors("series", {
-    //   color: d => (d.name === "Common Business Entities Domain" ? "#0f0" : "#aaa")
-    // })
     viz.draw()
   })
 }

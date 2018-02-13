@@ -130,7 +130,8 @@ var Renderer = /** @class */ (function () {
         return "M" + x(r + 5) + "," + y(r + 5) + " L" + x(r + arrowSize) + "," + y(r + arrowSize);
     };
     Renderer.prototype.removeTrunactionArrows = function () {
-        this.el.select("g.arrows")
+        this.el
+            .select("g.arrows")
             .selectAll("path")
             .remove();
     };
@@ -145,7 +146,8 @@ var Renderer = /** @class */ (function () {
             .selectAll("path")
             .data(data, this.name);
         arrows.exit().remove();
-        arrows.enter()
+        arrows
+            .enter()
             .append("svg:path")
             .merge(arrows)
             .attr("d", this.arrowPath.bind(this))

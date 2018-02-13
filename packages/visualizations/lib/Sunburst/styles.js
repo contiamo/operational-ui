@@ -28,10 +28,9 @@ var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var breadcrumbStyle = {
     width: "100%",
-    height: "36px",
+    height: "40px",
     position: "relative",
-    overflow: "hidden",
-    margin: "5px 0"
+    overflow: "hidden"
 };
 var breadcrumbItemStyle = {
     float: "left",

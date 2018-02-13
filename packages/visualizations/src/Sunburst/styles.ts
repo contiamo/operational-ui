@@ -30,10 +30,9 @@ const totalStyle = {
 
 const breadcrumbStyle = {
   width: "100%",
-  height: "36px",
+  height: "40px",
   position: "relative",
-  overflow: "hidden",
-  margin: "5px 0"
+  overflow: "hidden"
 }
 
 const breadcrumbItemStyle = {
