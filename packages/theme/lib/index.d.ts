@@ -6,6 +6,7 @@ export interface ThemeColors {
     success: string;
     warning: string;
     error: string;
+    visualizationPalette: string[];
     white: string;
     black: string;
     gray10: string;
