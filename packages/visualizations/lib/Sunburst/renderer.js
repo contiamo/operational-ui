@@ -367,9 +367,10 @@ var Renderer = /** @class */ (function () {
         this.stateWriter("data", this.data);
     };
     Renderer.prototype.assignColors = function (node) {
-        if (node.parent && !this.color(node)) {
-            node.data.color = this.color(node.parent);
-        }
+        var propagateColors = this.state.current.get("config").propagateColors;
+        node.data.color = propagateColors && node.parent && !this.color(node)
+            ? this.color(node.parent)
+            : node.data.color = this.color(node);
     };
     Renderer.prototype.hoverOuter = function (radius) {
         return radius + 1;

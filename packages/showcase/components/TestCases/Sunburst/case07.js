@@ -9,32 +9,26 @@ export const marathon = ({ test, afterAll, container }) => {
   const data = {
     name: "All",
     color: "#aaa",
-    color: "#bbb",
     value: "1995",
     children: [
       {
         name: "Approval Notice",
-        color: "#bbb",
         value: "1",
         children: [
           {
             name: "Event ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -48,27 +42,22 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Common Business Entities Domain",
-        color: "#bbb",
         value: "713",
         children: [
           {
             name: "Base Types ABE",
-            color: "#bbb",
             value: "15",
             children: [
               {
                 name: "Association ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -78,17 +67,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Example1",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -100,22 +86,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Business Interaction ABE",
-            color: "#bbb",
             value: "30",
             children: [
               {
                 name: "Disputed Amount ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -125,17 +107,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Dunning ABE",
-                color: "#bbb",
                 value: "22",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "22",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "22",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "22" }]
                       }
@@ -147,22 +126,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Calendar ABE",
-            color: "#bbb",
             value: "42",
             children: [
               {
                 name: "Project Scope ABE",
-                color: "#bbb",
                 value: "31",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "31",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "31",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "31" }]
                       }
@@ -172,17 +147,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Schedule Definition ABE",
-                color: "#bbb",
                 value: "11",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "11",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "11",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "11" }]
                       }
@@ -194,22 +166,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Capacity ABE",
-            color: "#bbb",
             value: "14",
             children: [
               {
                 name: "Performance Monitoring ABE",
-                color: "#bbb",
                 value: "14",
                 children: [
                   {
                     name: "Performance Collection ABE",
-                    color: "#bbb",
                     value: "14",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "14",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "14" }]
                       }
@@ -221,22 +189,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Catalog ABE",
-            color: "#bbb",
             value: "11",
             children: [
               {
                 name: "Entity Catalog ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -246,17 +210,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Management Job ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -268,22 +229,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Configuration and Profiling ABE",
-            color: "#bbb",
             value: "12",
             children: [
               {
                 name: "Configuration Instance Diagrams and Instances",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Configuration Instance Diagrams ",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -291,12 +248,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -306,17 +261,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Disputed Amount ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -328,22 +280,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Bill Inquiry ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Dunning ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -355,22 +303,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Event ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -382,22 +326,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Location ABE",
-            color: "#bbb",
             value: "92",
             children: [
               {
                 name: "Example1",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -407,17 +347,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Geographic Place ABE",
-                color: "#bbb",
                 value: "45",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "25",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "25",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "25" }]
                       }
@@ -425,12 +362,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "15",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "15",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "15" }]
                       }
@@ -438,12 +373,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Symbology ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -453,17 +386,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Local Place ABE",
-                color: "#bbb",
                 value: "27",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "27",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "27",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "27" }]
                       }
@@ -473,17 +403,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "OpenGisSFS ABE",
-                color: "#bbb",
                 value: "16",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "16",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "16",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "16" }]
                       }
@@ -495,22 +422,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Metric ABE",
-            color: "#bbb",
             value: "56",
             children: [
               {
                 name: "Example Metric Entities",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Metric Definition Dimension ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -520,17 +443,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Metric Definition ABE",
-                color: "#bbb",
                 value: "14",
                 children: [
                   {
                     name: "Metric Definition Dimension ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -538,12 +458,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Metric Definition Measure Threshold ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -553,17 +471,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Metric Definition Measure ABE",
-                color: "#bbb",
                 value: "18",
                 children: [
                   {
                     name: "Metric Definition Measure Threshold ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -571,12 +486,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Performance Collection ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -586,17 +499,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Metric Measure ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Metric Definition Measure Threshold ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -606,17 +516,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "12",
                 children: [
                   {
                     name: "Metric Collection ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -624,12 +531,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Metric Definition Dimension ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -637,12 +542,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -652,17 +555,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Performance Monitoring ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Performance Collection ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -674,22 +574,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Performance ABE",
-            color: "#bbb",
             value: "51",
             children: [
               {
                 name: "Performance Category ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -697,12 +593,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Performance Category Specification ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -712,17 +606,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Performance Monitoring ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Performance Category Specification ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -730,12 +621,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Performance Collection ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -743,12 +632,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Performance Production ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -758,17 +645,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Performance Specification ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Performance Category Specification ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -778,17 +662,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Performance Threshold  ABE",
-                color: "#bbb",
                 value: "12",
                 children: [
                   {
                     name: "Performance Category Specification ABE",
-                    color: "#bbb",
                     value: "12",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "12",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "12" }]
                       }
@@ -798,17 +679,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Usage Spec ABE",
-                color: "#bbb",
                 value: "12",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "12",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "12",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "12" }]
                       }
@@ -820,22 +698,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Policy ABE",
-            color: "#bbb",
             value: "107",
             children: [
               {
                 name: "Entity Catalog ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -845,17 +719,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Policy Application ABE",
-                color: "#bbb",
                 value: "24",
                 children: [
                   {
                     name: "Policy Server ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -863,12 +734,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "PolicyApp Role ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -876,12 +745,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -891,17 +758,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Policy Framework ABE",
-                color: "#bbb",
                 value: "12",
                 children: [
                   {
                     name: "Policy ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -909,12 +773,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "PolicyApp Role ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -924,17 +786,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Policy Framework Spec ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Policy Statement ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -944,17 +803,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Policy Management ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Policy Statement ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -964,17 +820,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Policy Structure ABE",
-                color: "#bbb",
                 value: "57",
                 children: [
                   {
                     name: "Policy ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -982,12 +835,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Action ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -995,12 +846,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Condition ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1008,12 +857,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Event ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -1021,12 +868,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Statement ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -1034,12 +879,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Value ABE",
-                    color: "#bbb",
                     value: "11",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "11",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "11" }]
                       }
@@ -1047,12 +890,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Variable ABE",
-                    color: "#bbb",
                     value: "21",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "21",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "21" }]
                       }
@@ -1064,22 +905,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Project ABE",
-            color: "#bbb",
             value: "138",
             children: [
               {
                 name: "Activity ABE",
-                color: "#bbb",
                 value: "18",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "18",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "18",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "18" }]
                       }
@@ -1089,17 +926,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Additional Relationships ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -1109,17 +943,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "EntitiesToBeFixedInPh4",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1129,17 +960,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "OpenGisSFS ABE",
-                color: "#bbb",
                 value: "25",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "25",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "25",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "25" }]
                       }
@@ -1149,17 +977,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Project ABE",
-                color: "#bbb",
                 value: "14",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "14",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "14",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "14" }]
                       }
@@ -1169,17 +994,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Project Calendar ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -1189,17 +1011,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Project Element ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -1209,17 +1028,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Project Resource ABE",
-                color: "#bbb",
                 value: "19",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "19",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "19",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "19" }]
                       }
@@ -1229,17 +1045,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Project Role ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -1249,17 +1062,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Project Scope ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -1269,17 +1079,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "SCRUM Blade ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -1289,17 +1096,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Work Breakdown Structure ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -1309,17 +1113,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Work Order ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -1331,22 +1132,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Root Business Entities ABE",
-            color: "#bbb",
             value: "67",
             children: [
               {
                 name: "Association ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -1356,17 +1153,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Characteristic ABE",
-                color: "#bbb",
                 value: "17",
                 children: [
                   {
                     name: "Characteristic Pricing ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -1374,12 +1168,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Policy Statement ABE",
-                    color: "#bbb",
                     value: "14",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "14",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "14" }]
                       }
@@ -1389,17 +1181,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Entity Identification ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Policy Statement ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -1409,17 +1198,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Entity Specification Action ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -1429,17 +1215,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Entity Specification Attachment ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Characteristic Pricing ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -1447,12 +1230,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -1462,17 +1243,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "External System Capability ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -1482,17 +1260,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Policy Framework Spec ABE",
-                color: "#bbb",
                 value: "15",
                 children: [
                   {
                     name: "Policy Statement ABE",
-                    color: "#bbb",
                     value: "15",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "15",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "15" }]
                       }
@@ -1502,17 +1277,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Root Entity Group ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Entity Specification Attachment Example Instances ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1524,22 +1296,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "TIP Common ABE",
-            color: "#bbb",
             value: "10",
             children: [
               {
                 name: "Configuration Instance Diagrams and Instances",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Configuration Instance Diagrams ",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -1549,17 +1317,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Framework ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Configuration Instance Diagrams ",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -1567,12 +1332,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -1582,17 +1345,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Management Job ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -1604,22 +1364,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Test ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1631,22 +1387,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Topology ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1658,22 +1410,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Trouble Ticket ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Usage Spec ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -1685,22 +1433,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Trouble or Problem ABE",
-            color: "#bbb",
             value: "4",
             children: [
               {
                 name: "Entity Catalog ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "TIP Internal Model - Illustrative only",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -1712,22 +1456,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Usage ABE",
-            color: "#bbb",
             value: "36",
             children: [
               {
                 name: "IP Detail Record ABE",
-                color: "#bbb",
                 value: "18",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "18",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "18",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "18" }]
                       }
@@ -1737,17 +1477,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Schedule Definition ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1757,17 +1494,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Usage Example Instances ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -1777,17 +1511,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Usage Spec ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Geographic Address ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -1799,22 +1530,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Users and Roles ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Performance Monitoring ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Performance Collection ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -1828,27 +1555,22 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Customer Domain",
-        color: "#bbb",
         value: "85",
         children: [
           {
             name: "Applied Customer Billing Rate ABE",
-            color: "#bbb",
             value: "19",
             children: [
               {
                 name: "Applied Customer Billing Rate Spec ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -1858,17 +1580,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "17",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "17",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "17",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "17" }]
                       }
@@ -1880,22 +1599,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -1907,22 +1622,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Bill ABE",
-            color: "#bbb",
             value: "29",
             children: [
               {
                 name: "Applied Customer Billing Rate Spec ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -1932,17 +1643,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Customer Account Balance ABE",
-                color: "#bbb",
                 value: "14",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -1950,12 +1658,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Customer Billing Credit ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -1963,12 +1669,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -1978,17 +1682,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Customer Billing Statistic ABE",
-                color: "#bbb",
                 value: "13",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "13",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "13",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "13" }]
                       }
@@ -2000,22 +1701,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Bill Collection ABE",
-            color: "#bbb",
             value: "13",
             children: [
               {
                 name: "Customer Account Balance ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -2025,17 +1722,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Customer Payment ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -2045,17 +1739,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Dunning ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -2067,22 +1758,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Bill Inquiry ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "Dunning ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -2094,22 +1781,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Interaction ABE",
-            color: "#bbb",
             value: "5",
             children: [
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -2121,22 +1804,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Order ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -2148,22 +1827,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Problem ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Dunning ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Customer Account Balance Type ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -2175,22 +1850,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Service Level Agreement ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -2202,22 +1873,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Customer Statistic ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -2229,22 +1896,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Workforce ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -2263,22 +1926,18 @@ export const marathon = ({ test, afterAll, container }) => {
         children: [
           {
             name: "Additional Party Entities ABE",
-            color: "#bbb",
             value: "9",
             children: [
               {
                 name: "Example Party Order Entities ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -2290,22 +1949,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Agreement ABE",
-            color: "#bbb",
             value: "14",
             children: [
               {
                 name: "Commitment ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -2315,17 +1970,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -2337,22 +1989,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Event ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Metric Monitoring ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -2369,17 +2017,14 @@ export const marathon = ({ test, afterAll, container }) => {
             children: [
               {
                 name: "Commitment ABE",
-                color: "#bbb",
                 value: "16",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "16",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "16",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "16" }]
                       }
@@ -2401,7 +2046,9 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Security Vulnerability Score ABE",
                         color: "#e20074",
                         value: "6",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "6" }
+                        ]
                       }
                     ]
                   }
@@ -2409,17 +2056,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Currency ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -2429,17 +2073,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Identification ABE",
-                color: "#bbb",
                 value: "12",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "12",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "12",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "12" }]
                       }
@@ -2449,17 +2090,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Community ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -2469,17 +2107,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Demographic ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -2489,17 +2124,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Organization ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -2509,17 +2141,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Profile ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -2541,7 +2170,9 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Security Vulnerability Score ABE",
                         color: "#e20074",
                         value: "18",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "18" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "18" }
+                        ]
                       }
                     ]
                   }
@@ -2549,17 +2180,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Role Group ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -2569,17 +2197,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Skill ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -2608,7 +2233,9 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Security Vulnerability Score ABE",
                         color: "#e20074",
                         value: "8",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "8" }
+                        ]
                       }
                     ]
                   }
@@ -2618,22 +2245,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Party Order ABE",
-            color: "#bbb",
             value: "8",
             children: [
               {
                 name: "Example Party Order Entities ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -2643,17 +2266,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Role Group ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -2665,22 +2285,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Party Privacy ABE",
-            color: "#bbb",
             value: "11",
             children: [
               {
                 name: "Party Privacy Profile ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "Example Party Role Product Spec Entities ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
                       }
@@ -2690,17 +2306,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Privacy Profile Type ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Example Party Role Product Spec Entities ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -2710,17 +2323,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Role Product Specification ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Example Party Role Product Spec Entities ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -2732,22 +2342,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Party Problem ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Party Revenue Sharing ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Party Revenue Sharing Model ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -2776,7 +2382,9 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Payment Method ABE",
                         color: "#e20074",
                         value: "1",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "1" }
+                        ]
                       }
                     ]
                   }
@@ -2784,17 +2392,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Role Product Offering ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Example Party Role Product Offering Entities ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -2802,12 +2407,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Party Revenue Sharing Model ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -2822,12 +2425,10 @@ export const marathon = ({ test, afterAll, container }) => {
                 children: [
                   {
                     name: "Example Party Role Product Offering Entities ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -2842,7 +2443,9 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Payment Method ABE",
                         color: "#e20074",
                         value: "5",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "5" }
+                        ]
                       }
                     ]
                   }
@@ -2857,17 +2460,14 @@ export const marathon = ({ test, afterAll, container }) => {
             children: [
               {
                 name: "Applied Party Billing Rate ABE",
-                color: "#bbb",
                 value: "16",
                 children: [
                   {
                     name: "Party Billing Statistic ABE",
-                    color: "#bbb",
                     value: "16",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "16",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "16" }]
                       }
@@ -2877,17 +2477,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Example Party Order Entities ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -2897,17 +2494,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Bill ABE",
-                color: "#bbb",
                 value: "30",
                 children: [
                   {
                     name: "Dunning ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -2915,12 +2509,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Party Billing Credit ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "7" }]
                       }
@@ -2928,12 +2520,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Party Billing Statistic ABE",
-                    color: "#bbb",
                     value: "13",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "13",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "13" }]
                       }
@@ -2943,17 +2533,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Bill Collection ABE",
-                color: "#bbb",
                 value: "31",
                 children: [
                   {
                     name: "Dunning ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "9" }]
                       }
@@ -2961,12 +2548,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -2974,24 +2559,20 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Party Payment ABE",
-                    color: "#bbb",
                     value: "21",
                     children: [
                       {
                         name: "Bank ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       },
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "12",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "12" }]
                       },
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -3006,12 +2587,10 @@ export const marathon = ({ test, afterAll, container }) => {
                 children: [
                   {
                     name: "Party Billing Statistic ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -3026,18 +2605,18 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Payment Method ABE",
                         color: "#e20074",
                         value: "12",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "12" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "12" }
+                        ]
                       }
                     ]
                   },
                   {
                     name: "Party Revenue Share Reconciliation ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -3052,18 +2631,18 @@ export const marathon = ({ test, afterAll, container }) => {
                         name: "Payment Method ABE",
                         color: "#e20074",
                         value: "4",
-                        children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "4" }]
+                        children: [
+                          { name: "Security Vulnerability Scoring Algorithm ABE", color: "#e20074", value: "4" }
+                        ]
                       }
                     ]
                   },
                   {
                     name: "Party Revenue Sharing Model ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -3073,17 +2652,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Party Settlement ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Party Billing Statistic ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -3095,22 +2671,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Party Service Level Agreement ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "Example Party Order Entities ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -3122,22 +2694,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Party Statistic ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "Example Party Order Entities ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Metric Job ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -3149,22 +2717,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Party Strategy ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Party Privacy Profile Type ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Example Party Role Product Spec Entities ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Payment Method ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -3178,27 +2742,22 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Enterprise Domain",
-        color: "#bbb",
         value: "158",
         children: [
           {
             name: "Enterprise Effectiveness ABE",
-            color: "#bbb",
             value: "10",
             children: [
               {
                 name: "Business Objective ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -3208,17 +2767,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Process ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -3228,17 +2784,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Process Definition ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "2" }]
                       }
@@ -3248,17 +2801,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Revenue Assurance ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -3270,22 +2820,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Enterprise Risk ABE",
-            color: "#bbb",
             value: "119",
             children: [
               {
                 name: "Enterprise Security ABE",
-                color: "#bbb",
                 value: "89",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -3293,12 +2839,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Security Entity ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -3306,12 +2850,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Security Event ABE",
-                    color: "#bbb",
                     value: "15",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "15",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "15" }]
                       }
@@ -3319,12 +2861,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Security Incident ABE",
-                    color: "#bbb",
                     value: "11",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "11",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "11" }]
                       }
@@ -3332,24 +2872,20 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Security Threat ABE",
-                    color: "#bbb",
                     value: "28",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       },
                       {
                         name: "Security Threat Technique ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Placeholder Classes", value: "10" }]
                       },
                       {
                         name: "Security Threat Tool ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Placeholder Classes", value: "10" }]
                       }
@@ -3357,24 +2893,20 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Security Vulnerability ABE",
-                    color: "#bbb",
                     value: "28",
                     children: [
                       {
                         name: "Security Threat Tool ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Placeholder Classes", value: "9" }]
                       },
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       },
                       {
                         name: "Security Vulnerability Scoring Definition ABE",
-                        color: "#bbb",
                         value: "13",
                         children: [
                           { name: "Placeholder Classes", value: "7" },
@@ -3387,17 +2919,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Media ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -3407,17 +2936,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Revenue Assurance ABE",
-                color: "#bbb",
                 value: "29",
                 children: [
                   {
                     name: "RA Action_Response ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "5" }]
                       }
@@ -3425,12 +2951,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -3438,12 +2962,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "RA Control ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -3451,12 +2973,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "RA Key Performance Indicator ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -3464,12 +2984,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "RA Trouble Ticket ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -3477,12 +2995,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "RA Violation ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -3490,12 +3006,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Security Entity ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -3507,22 +3021,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Marketing Campaign ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Media ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -3534,22 +3044,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Workforce ABE",
-            color: "#bbb",
             value: "28",
             children: [
               {
                 name: "Business Objective ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "1" }]
                       }
@@ -3559,17 +3065,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "WorkSpecification ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "8" }]
                       }
@@ -3579,17 +3082,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Workforce Resource ABE",
-                color: "#bbb",
                 value: "13",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "10",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "10" }]
                       }
@@ -3597,12 +3097,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Work ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "3" }]
                       }
@@ -3612,17 +3110,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Workforce Schedule ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "RA Assessment ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "Security Vulnerability Score ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Security Vulnerability Scoring Algorithm ABE", value: "6" }]
                       }
@@ -3636,27 +3131,22 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Market_Sales Domain",
-        color: "#bbb",
         value: "49",
         children: [
           {
             name: "Competitor ABE",
-            color: "#bbb",
             value: "22",
             children: [
               {
                 name: "Competitor Intelligence ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -3666,17 +3156,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Competitor Product Correlation ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Placeholder Classes", value: "6" }]
                       }
@@ -3686,17 +3173,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Market Statistic ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -3708,22 +3192,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Contact Lead Prospect ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Competitor Product Correlation ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -3735,22 +3215,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Market Segment ABE",
-            color: "#bbb",
             value: "12",
             children: [
               {
                 name: "Market Statistic ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Placeholder Classes", value: "4" }]
                       }
@@ -3760,17 +3236,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Action ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -3782,22 +3255,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Market Strategy Plan ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "Market Statistic ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -3809,22 +3278,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Marketing Campaign ABE",
-            color: "#bbb",
             value: "8",
             children: [
               {
                 name: "Competitor Product Correlation ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Placeholder Classes", value: "6" }]
                       }
@@ -3834,17 +3299,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Media ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -3856,22 +3318,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Performance ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Product Action ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -3883,22 +3341,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Sales Channel ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "Market Statistic ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -3910,22 +3364,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Sales Statistics ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Competitor Product Correlation ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -3939,27 +3389,22 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Product Domain",
-        color: "#bbb",
         value: "131",
         children: [
           {
             name: "Loyalty ABE",
-            color: "#bbb",
             value: "15",
             children: [
               {
                 name: "Loyalty Program ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -3969,17 +3414,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Loyalty Program Specification ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "6",
                         children: [{ name: "Placeholder Classes", value: "6" }]
                       }
@@ -3989,17 +3431,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Usage Spec ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -4011,22 +3450,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product ABE",
-            color: "#bbb",
             value: "16",
             children: [
               {
                 name: "Pricing Logic Algorithm ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Placeholder Classes", value: "7" }]
                       }
@@ -4036,17 +3471,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Price ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Placeholder Classes", value: "9" }]
                       }
@@ -4058,22 +3490,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Configuration ABE",
-            color: "#bbb",
             value: "7",
             children: [
               {
                 name: "Loyalty Program ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -4083,17 +3511,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Action ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Placeholder Classes", value: "4" }]
                       }
@@ -4105,22 +3530,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Offering ABE",
-            color: "#bbb",
             value: "52",
             children: [
               {
                 name: "Example Product Specification Entities ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Placeholder Classes", value: "9" }]
                       }
@@ -4130,17 +3551,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Pricing Logic Algorithm ABE",
-                color: "#bbb",
                 value: "15",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -4148,12 +3566,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Placeholder Classes", value: "7" }]
                       }
@@ -4163,17 +3579,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Catalog ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Placeholder Classes", value: "4" }]
                       }
@@ -4183,17 +3596,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Offering Price ABE",
-                color: "#bbb",
                 value: "15",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "15",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "15",
                         children: [{ name: "Placeholder Classes", value: "15" }]
                       }
@@ -4203,17 +3613,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Offering Price Rule ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Placeholder Classes", value: "5" }]
                       }
@@ -4223,17 +3630,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Placement ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4243,17 +3647,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Promotion ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4265,22 +3666,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Performance ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Product Action ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -4292,22 +3689,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Specification ABE",
-            color: "#bbb",
             value: "26",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "17",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "17",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "17",
                         children: [{ name: "Placeholder Classes", value: "17" }]
                       }
@@ -4317,17 +3710,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Example Product Specification Entities ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "9",
                         children: [{ name: "Placeholder Classes", value: "9" }]
                       }
@@ -4339,22 +3729,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Test ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Product Action ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -4366,22 +3752,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Product Usage ABE",
-            color: "#bbb",
             value: "8",
             children: [
               {
                 name: "Product Price ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Placeholder Classes", value: "4" }]
                       }
@@ -4391,17 +3773,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Product Usage Spec ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Placeholder Classes", value: "4" }]
                       }
@@ -4413,22 +3792,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Strategy & Plan ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -4440,22 +3815,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Strategic Product Portfolio Plan ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "Product Price ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "PLA Spec ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4469,17 +3840,14 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Resource Domain",
-        color: "bbb",
         value: "438",
         children: [
           {
             name: "Resource ABE",
-            color: "#bbb",
             value: "354",
             children: [
               {
                 name: "CompoundResource ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
@@ -4497,12 +3865,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "CompoundResource Specification ABE",
-                color: "#bbb",
                 value: "8",
                 children: [
                   {
                     name: "Physical Role Specification ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       { name: "Software Resource Specification ABE", value: "8", children: [{ name: "", value: "8" }] }
@@ -4512,12 +3878,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "LogicalResource ABE",
-                color: "#bbb",
                 value: "245",
                 children: [
                   {
                     name: "Address ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       { name: "Device Interface Association ABE", value: "7", children: [{ name: "", value: "7" }] }
@@ -4525,7 +3889,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Computing and Software ABE",
-                    color: "#bbb",
                     value: "12",
                     children: [
                       { name: "Software Resource Specification ABE", value: "1", children: [{ name: "", value: "1" }] },
@@ -4534,13 +3897,11 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Converged Network ABE",
-                    color: "#bbb",
                     value: "30",
                     children: [
                       { name: "Class Diagrams", value: "1", children: [{ name: "", value: "1" }] },
                       {
                         name: "Informal Classes",
-                        color: "#bbb",
                         value: "12",
                         children: [
                           { name: "", value: "1" },
@@ -4553,7 +3914,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Device Interface ABE",
-                    color: "#bbb",
                     value: "24",
                     children: [
                       { name: "Device Interface Association ABE", value: "11", children: [{ name: "", value: "11" }] },
@@ -4562,7 +3922,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Device Protocol Association ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       { name: "Device Interface Association ABE", value: "9", children: [{ name: "", value: "9" }] }
@@ -4570,7 +3929,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Logical Device ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       { name: "Device Interface Association ABE", value: "4", children: [{ name: "", value: "4" }] }
@@ -4578,7 +3936,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Logical Role ABE",
-                    color: "#bbb",
                     value: "16",
                     children: [
                       { name: "Service Statistical Info ABE", value: "16", children: [{ name: "", value: "16" }] }
@@ -4586,7 +3943,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "LogicalResource Examples ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       { name: "Informal Classes", value: "2", children: [{ name: "Placeholder Classes", value: "2" }] }
@@ -4594,7 +3950,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Managed Transmission ABE",
-                    color: "#bbb",
                     value: "9",
                     children: [
                       { name: "Software Resource and Software ABE", value: "5", children: [{ name: "", value: "5" }] },
@@ -4603,7 +3958,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Management Information ABE",
-                    color: "#bbb",
                     value: "36",
                     children: [
                       { name: "Accounting ABE", value: "2", children: [{ name: "", value: "2" }] },
@@ -4620,13 +3974,11 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Network ABE",
-                    color: "#bbb",
                     value: "11",
                     children: [{ name: "Termination Point ABE", value: "11", children: [{ name: "", value: "11" }] }]
                   },
                   {
                     name: "Physical Role Specification ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       { name: "Software Resource Specification ABE", value: "7", children: [{ name: "", value: "7" }] }
@@ -4634,7 +3986,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Protection ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Network Resource Fulfillment ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -4642,7 +3993,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Protocol Service ABE",
-                    color: "#bbb",
                     value: "52",
                     children: [
                       { name: "Bridging Protocols ABE", value: "6", children: [{ name: "", value: "6" }] },
@@ -4658,7 +4008,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Resource Number ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Informal Classes", value: "3", children: [{ name: "Placeholder Classes", value: "3" }] }
@@ -4666,13 +4015,11 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Statistics ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [{ name: "Switching Protocols ABE", value: "2", children: [{ name: "", value: "2" }] }]
                   },
                   {
                     name: "TIP Logical Resource ABE",
-                    color: "#bbb",
                     value: "18",
                     children: [
                       { name: "Network Resource Fulfillment ABE", value: "17", children: [{ name: "", value: "17" }] },
@@ -4683,12 +4030,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "PhysicalResource ABE",
-                color: "#bbb",
                 value: "69",
                 children: [
                   {
                     name: "Auxiliary Component ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       { name: "Informal Classes", value: "5", children: [{ name: "Placeholder Classes", value: "5" }] }
@@ -4696,12 +4041,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Equipment ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -4709,13 +4052,11 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Equipment Holder ABE",
-                    color: "#bbb",
                     value: "14",
                     children: [
                       { name: "HolderAtomic ABE", value: "4", children: [{ name: "Placeholder Classes", value: "4" }] },
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       },
@@ -4724,12 +4065,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Hardware ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "7",
                         children: [{ name: "Placeholder Classes", value: "7" }]
                       }
@@ -4737,7 +4076,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "LogicalResource Examples ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       { name: "Informal Classes", value: "6", children: [{ name: "Placeholder Classes", value: "6" }] }
@@ -4745,12 +4083,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Physical Capacity ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "5",
                         children: [{ name: "Placeholder Classes", value: "5" }]
                       }
@@ -4758,7 +4094,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Physical Component ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       { name: "Informal Classes", value: "7", children: [{ name: "Placeholder Classes", value: "7" }] }
@@ -4766,12 +4101,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Physical Device ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "4",
                         children: [{ name: "Placeholder Classes", value: "4" }]
                       }
@@ -4779,12 +4112,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Physical Role ABE",
-                    color: "#bbb",
                     value: "13",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "13",
                         children: [{ name: "Placeholder Classes", value: "13" }]
                       }
@@ -4794,17 +4125,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Resource Order ABE",
-                color: "#bbb",
                 value: "14",
                 children: [
                   {
                     name: "PhysicalRole System View ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -4812,12 +4140,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Resource Number Portability ABE",
-                    color: "#bbb",
                     value: "8",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "8",
                         children: [{ name: "Placeholder Classes", value: "8" }]
                       }
@@ -4825,12 +4151,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Resource Number Portability Role ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -4840,17 +4164,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "ResourceRole System View ABE",
-                color: "#bbb",
                 value: "7",
                 children: [
                   {
                     name: "LogicalRole System View ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4858,12 +4179,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Physical Role ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -4871,12 +4190,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "PhysicalRole System View ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4886,17 +4203,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "TIP Resource ABE",
-                color: "#bbb",
                 value: "4",
                 children: [
                   {
                     name: "Network Resource Assurance ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -4904,12 +4218,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4917,12 +4229,10 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Resource Number Portability Role ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -4934,22 +4244,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Configuration ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -4961,22 +4267,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Performance ABE",
-            color: "#bbb",
             value: "4",
             children: [
               {
                 name: "Resource Performance Specification ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -4986,17 +4288,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "TIP Resource ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -5008,17 +4307,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Specification ABE",
-            color: "#bbb",
             value: "62",
             children: [
               {
                 name: "CompoundResource Specification ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Physical Role Specification ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Software Resource Specification ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -5028,12 +4324,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "LogicalResource Specification ABE",
-                color: "#bbb",
                 value: "30",
                 children: [
                   {
                     name: "Logical Role Specification ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       { name: "Software Resource Specification ABE", value: "2", children: [{ name: "", value: "2" }] }
@@ -5041,7 +4335,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "LogicalResource Spec Examples ABE",
-                    color: "#bbb",
                     value: "7",
                     children: [
                       { name: "Software Resource Specification ABE", value: "7", children: [{ name: "", value: "7" }] }
@@ -5049,7 +4342,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "5", children: [{ name: "", value: "5" }] }
@@ -5057,24 +4349,20 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Software Resource and Software Specifications ABE",
-                    color: "bbb",
                     value: "16",
                     children: [
                       {
                         name: "Service Bundle Examples ABE",
-                        color: "bbb",
                         value: "1",
                         children: [{ name: "", value: "1" }]
                       },
                       {
                         name: "Software Resource Specification ABE",
-                        color: "bbb",
                         value: "8",
                         children: [{ name: "", value: "8" }]
                       },
                       {
                         name: "Software Specification ABE",
-                        color: "bbb",
                         value: "7",
                         children: [{ name: "", value: "7" }]
                       }
@@ -5084,12 +4372,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "PhysicalResource Specification ABE",
-                color: "#bbb",
                 value: "10",
                 children: [
                   {
                     name: "LogicalResource Spec Examples ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       { name: "Software Resource Specification ABE", value: "6", children: [{ name: "", value: "6" }] }
@@ -5097,7 +4383,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Physical Role Specification ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [
                       { name: "Software Resource Specification ABE", value: "4", children: [{ name: "", value: "4" }] }
@@ -5107,12 +4392,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Resource Catalog ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "5", children: [{ name: "", value: "5" }] }
@@ -5122,12 +4405,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "14",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "14",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "14", children: [{ name: "", value: "14" }] }
@@ -5139,22 +4420,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Strategy & Plan ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -5166,22 +4443,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Test ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -5193,22 +4466,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Topology ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -5220,22 +4489,18 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Trouble ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Alarm ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "3",
                         children: [{ name: "Placeholder Classes", value: "3" }]
                       }
@@ -5245,17 +4510,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Alarm Severity Assignment Profile ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "2",
                         children: [{ name: "Placeholder Classes", value: "2" }]
                       }
@@ -5265,17 +4527,14 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Resource Performance Specification ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Network Resource Basic ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       {
                         name: "HolderComposite ABE",
-                        color: "#bbb",
                         value: "1",
                         children: [{ name: "Placeholder Classes", value: "1" }]
                       }
@@ -5287,17 +4546,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Resource Usage ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "CompoundResource Specification ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Physical Role Specification ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Software Resource Specification ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -5309,17 +4565,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Strategy & Plan ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "1", children: [{ name: "", value: "1" }] }
@@ -5333,17 +4586,14 @@ export const marathon = ({ test, afterAll, container }) => {
       },
       {
         name: "Service Domain",
-        color: "#bbb",
         value: "129",
         children: [
           {
             name: "",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "",
-                color: "#bbb",
                 value: "1",
                 children: [
                   { name: "", value: "1", children: [{ name: "", value: "1", children: [{ name: "", value: "1" }] }] }
@@ -5353,17 +4603,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service ABE",
-            color: "#bbb",
             value: "39",
             children: [
               {
                 name: "",
-                color: "#bbb",
                 value: "11",
                 children: [
                   {
                     name: "",
-                    color: "#bbb",
                     value: "11",
                     children: [{ name: "", value: "11", children: [{ name: "", value: "11" }] }]
                   }
@@ -5371,19 +4618,16 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Customer Facing Service ABE",
-                color: "#bbb",
                 value: "9",
                 children: [
                   { name: "", value: "5", children: [{ name: "", value: "5", children: [{ name: "", value: "5" }] }] },
                   {
                     name: "Customer Facing Service Example ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [{ name: "", value: "2", children: [{ name: "", value: "2" }] }]
                   },
                   {
                     name: "CustomerFacing Service Role ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [{ name: "", value: "2", children: [{ name: "", value: "2" }] }]
                   }
@@ -5391,24 +4635,20 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Resource Facing Service ABE",
-                color: "#bbb",
                 value: "16",
                 children: [
                   {
                     name: "Customer Facing Service Example ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [{ name: "", value: "6", children: [{ name: "", value: "6" }] }]
                   },
                   {
                     name: "Resource Facing Service Examples ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [{ name: "", value: "6", children: [{ name: "", value: "6" }] }]
                   },
                   {
                     name: "Resource Facing Service Role ABE",
-                    color: "#bbb",
                     value: "4",
                     children: [{ name: "", value: "4", children: [{ name: "", value: "4" }] }]
                   }
@@ -5416,12 +4656,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Service Order ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Resource Facing Service Examples ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [{ name: "", value: "3", children: [{ name: "", value: "3" }] }]
                   }
@@ -5431,17 +4669,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Configuration ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -5453,17 +4688,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Performance ABE",
-            color: "#bbb",
             value: "15",
             children: [
               {
                 name: "Service Catalog ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "2", children: [{ name: "", value: "2" }] }
@@ -5473,12 +4705,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "11",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "11",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "11", children: [{ name: "", value: "11" }] }
@@ -5488,12 +4718,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Service Performance Specification ABE",
-                color: "#bbb",
                 value: "2",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "2", children: [{ name: "", value: "2" }] }
@@ -5505,12 +4733,10 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Problem ABE",
-            color: "#bbb",
             value: "2",
             children: [
               {
                 name: "",
-                color: "#bbb",
                 value: "2",
                 children: [
                   { name: "", value: "2", children: [{ name: "", value: "2", children: [{ name: "", value: "2" }] }] }
@@ -5520,17 +4746,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Specification ABE",
-            color: "#bbb",
             value: "56",
             children: [
               {
                 name: "Customer Facing Service Spec ABE",
-                color: "#bbb",
                 value: "21",
                 children: [
                   {
                     name: "Customer Facing Service Spec Examples ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Service Package Spec Examples ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -5538,19 +4761,16 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Customer Facing Service Spec Role ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [{ name: "", value: "2", children: [{ name: "", value: "2" }] }]
                   },
                   {
                     name: "Resource Facing Service Examples ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [{ name: "", value: "6", children: [{ name: "", value: "6" }] }]
                   },
                   {
                     name: "Service Package ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       { name: "", value: "4", children: [{ name: "", value: "4" }] },
@@ -5561,12 +4781,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Resource Facing Service Spec ABE",
-                color: "#bbb",
                 value: "18",
                 children: [
                   {
                     name: "Customer Facing Service Spec Examples ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       { name: "Service Package Spec Examples ABE", value: "6", children: [{ name: "", value: "6" }] }
@@ -5574,7 +4792,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Resource Facing Service Spec Role ABE",
-                    color: "#bbb",
                     value: "2",
                     children: [
                       { name: "Service Package Spec Examples ABE", value: "2", children: [{ name: "", value: "2" }] }
@@ -5582,7 +4799,6 @@ export const marathon = ({ test, afterAll, container }) => {
                   },
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "10",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "5", children: [{ name: "", value: "5" }] },
@@ -5593,12 +4809,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Service Catalog ABE",
-                color: "#bbb",
                 value: "5",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "5",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "5", children: [{ name: "", value: "5" }] }
@@ -5608,12 +4822,10 @@ export const marathon = ({ test, afterAll, container }) => {
               },
               {
                 name: "Service Order ABE",
-                color: "#bbb",
                 value: "12",
                 children: [
                   {
                     name: "Resource Facing Service Examples ABE",
-                    color: "#bbb",
                     value: "12",
                     children: [{ name: "", value: "12", children: [{ name: "", value: "12" }] }]
                   }
@@ -5623,17 +4835,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Strategy & Plan ABE",
-            color: "#bbb",
             value: "1",
             children: [
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "1",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "1",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "1", children: [{ name: "", value: "1" }] }
@@ -5645,17 +4854,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Test ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -5667,17 +4873,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "Service Usage ABE",
-            color: "#bbb",
             value: "3",
             children: [
               {
                 name: "Service Catalog ABE",
-                color: "#bbb",
                 value: "3",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "3",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "3", children: [{ name: "", value: "3" }] }
@@ -5689,17 +4892,14 @@ export const marathon = ({ test, afterAll, container }) => {
           },
           {
             name: "TIP Service Management ABE",
-            color: "#bbb",
             value: "6",
             children: [
               {
                 name: "Service Level Spec ABE",
-                color: "#bbb",
                 value: "6",
                 children: [
                   {
                     name: "Service Bundle ABE",
-                    color: "#bbb",
                     value: "6",
                     children: [
                       { name: "Service Bundle Examples ABE", value: "6", children: [{ name: "", value: "6" }] }
@@ -5720,7 +4920,8 @@ export const marathon = ({ test, afterAll, container }) => {
       suppressAnimation: true,
       width: 1000,
       height: 1000,
-      outerBorderMargin: 5
+      outerBorderMargin: 5,
+      propagateColors: false
     })
     viz.draw()
   })

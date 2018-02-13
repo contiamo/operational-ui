@@ -9,6 +9,7 @@ export interface IConfig {
     maxRings: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
+    propagateColors: boolean;
     suppressAnimation: boolean;
     sort: boolean;
     uid: string;

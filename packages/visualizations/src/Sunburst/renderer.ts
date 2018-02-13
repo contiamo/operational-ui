@@ -461,9 +461,11 @@ class Renderer {
   }
 
   assignColors(node: any): void {
-    if (node.parent && !this.color(node)) {
-      node.data.color = this.color(node.parent)
-    }
+    const propagateColors: boolean = this.state.current.get("config").propagateColors
+    node.data.color =
+      propagateColors && node.parent && !this.color(node)
+        ? this.color(node.parent)
+        : (node.data.color = this.color(node))
   }
 
   hoverOuter(radius: number): number {

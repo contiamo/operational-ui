@@ -365,6 +365,13 @@ const propDescription = {
       optional: true
     },
     {
+      name: "propagateColors",
+      description: "If true, child nodes take same color as their parent unless color is already defined",
+      defaultValue: "true",
+      type: "boolean",
+      optional: true
+    },
+    {
       name: "suppressAnimation",
       description: "If true, animations when 'draw' is called are suppressed. Improves speed for large datasets.",
       defaultValue: "false",
