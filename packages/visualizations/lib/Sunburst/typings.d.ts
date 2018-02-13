@@ -1,6 +1,7 @@
 import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
 export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
 export interface IConfig {
+    arrowMarkerSize: number;
     centerCircleRadius: number;
     duration: number;
     height: number;

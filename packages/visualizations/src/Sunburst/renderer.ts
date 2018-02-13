@@ -39,7 +39,24 @@ class Renderer {
     this.stateWriter = stateWriter
     this.events = events
     this.el = el
+    this.defineArrowMarker()
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.onClick.bind(this))
+  }
+
+  defineArrowMarker(): void {
+    const arrowMarkerSize: number = this.state.current.get("config").arrowMarkerSize
+    this.el
+      .append("svg:defs")
+      .append("svg:marker")
+      .attr("id", "arrow")
+      .attr("markerHeight", arrowMarkerSize)
+      .attr("markerWidth", arrowMarkerSize * 0.6)
+      .attr("markerUnits", "strokeWidth")
+      .attr("orient", "auto")
+      .attr("viewBox", "-3 -5 5 10")
+      .append("svg:path")
+      .attr("d", "M 0,0 m -3,-5 L 2,0 L -3,5 L 0,0")
+      .attr("fill", "#aaa")
   }
 
   assignAccessors(): void {
@@ -63,6 +80,7 @@ class Renderer {
   initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
+    this.el.append("svg:g").attr("class", "arrows")
     this.el.append("circle").attr("class", styles.centerCircle)
 
     if (this.hasData()) {
@@ -94,8 +112,8 @@ class Renderer {
     this.enterAndUpdate(arcs, config.duration, document.hidden || config.suppressAnimation)
   }
 
-  exit(arcs: TD3Selection, duration: number, hidden: boolean): void {
-    const exitingArcs: any = hidden
+  exit(arcs: TD3Selection, duration: number, suppressAnimation: boolean): void {
+    const exitingArcs: any = suppressAnimation
       ? arcs.exit()
       : arcs
           .exit()
@@ -105,7 +123,7 @@ class Renderer {
     exitingArcs.remove()
   }
 
-  enterAndUpdate(arcs: TD3Selection, duration: number, hidden: boolean): void {
+  enterAndUpdate(arcs: TD3Selection, duration: number, suppressAnimation: boolean): void {
     const updatingArcs: TD3Selection = arcs
       .enter()
       .append("svg:path")
@@ -119,14 +137,66 @@ class Renderer {
         (d: TDatum): string => `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
       )
 
-    if (hidden) {
+    if (suppressAnimation) {
       updatingArcs.attr("d", this.arc.bind(this))
+      this.updateTruncationArrows()
     } else {
+      let n: number = 0
       updatingArcs
         .transition()
         .duration(duration)
         .attrTween("d", this.arcTween.bind(this))
+        .each(() => (n = n + 1))
+        .on("end", (): void => {
+          n = n - 1
+          if (n < 1) {
+            this.updateTruncationArrows()
+          }
+        })
     }
+  }
+
+  arrowPath(d: TDatum): string {
+    const angle: number = d3Interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5)
+    const y: any = (r: number): number => -r * Math.cos(angle)
+    const x: any = (r: number): number => r * Math.sin(angle)
+    const r: number = this.radiusScale(d.y1)
+    const arrowSize: number = Math.max(0.6 * this.state.current.get("config").arrowMarkerSize, 8)
+    return `M${x(r + 5)},${y(r + 5)} L${x(r + arrowSize)},${y(r + arrowSize)}`
+  }
+
+  removeTrunactionArrows(): void {
+    this.el
+      .select("g.arrows")
+      .selectAll("path")
+      .remove()
+  }
+
+  updateTruncationArrows(): void {
+    const centerNode: TDatum = this.zoomNode || this.topNode,
+      config: IConfig = this.state.current.get("config")
+
+    const data: TDatum[] = map((d: TDatum): TDatum => d.parent)(
+      filter((d: TDatum): boolean => {
+        return d.depth - centerNode.depth > config.maxRings && d.parent.depth - centerNode.depth <= config.maxRings
+      })(this.data)
+    )
+
+    const arrows: TD3Selection = this.el
+      .select("g.arrows")
+      .attr("transform", this.translateString(this.computeTranslate()))
+      .selectAll("path")
+      .data(data, this.name)
+
+    arrows.exit().remove()
+
+    arrows
+      .enter()
+      .append("svg:path")
+      .merge(arrows)
+      .attr("d", this.arrowPath.bind(this))
+      .attr("marker-end", "url(#arrow)")
+      .attr("marker-start", "url(#arrow)")
   }
 
   onClick(payload: IObject): void {
@@ -144,14 +214,23 @@ class Renderer {
     }
 
     // Set new scale domains
-    const config: IObject = this.state.current.get("config"),
-      maxChildRadius: number = reduce((memo: number, child: TDatum) => {
-        return child.depth - zoomNode.depth <= this.state.current.get("config").maxRings
-          ? Math.max(memo, child.y1)
-          : memo
-      }, 0)(zoomNode.descendants()),
-      angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]),
-      radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius])
+    const config: IObject = this.state.current.get("config")
+
+    let maxChildRadius: number = 0
+    let truncated: boolean = false
+    forEach((child: TDatum): void => {
+      if (child.depth - zoomNode.depth <= this.state.current.get("config").maxRings) {
+        maxChildRadius = Math.max(maxChildRadius, child.y1)
+      } else {
+        truncated = true
+      }
+    })(zoomNode.descendants())
+
+    this.radiusScale.range([0, this.radius - (truncated ? config.arrowMarkerSize : 0)])
+
+    const angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1])
+
+    const radiusDomain = d3Interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius])
 
     // Save new inner radius to facilitate sizing and positioning of root label
     const innerRadius: number = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1)
@@ -173,15 +252,16 @@ class Renderer {
     // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
     // (occurs when no zoom config is passed in from the outside)
     // no need to do anything.
-    if (!this.zoomNode && !payload.d) {
+    if (!this.zoomNode && (!payload.d || payload.d === this.topNode)) {
       return
     }
 
+    this.removeTrunactionArrows()
     this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
 
     const paths: TD3Selection = this.el
-      .selectAll("path")
+      .selectAll(`path.${styles.arc}`)
       .attr("pointer-events", "none")
       .classed("zoomed", (datum: TDatum): boolean => datum === this.zoomNode)
       .each(
@@ -195,6 +275,7 @@ class Renderer {
       this.radiusScale.domain(radiusDomain(1))
       paths.attr("d", this.arc.bind(this))
     } else {
+      let n: number = 0
       paths
         .transition()
         .duration(config.duration)
@@ -206,6 +287,13 @@ class Renderer {
         })
         .attrTween("d", (datum: TDatum): any => {
           return () => this.arc(datum)
+        })
+        .each(() => (n = n + 1))
+        .on("end", (): void => {
+          n = n - 1
+          if (n < 1) {
+            this.updateTruncationArrows()
+          }
         })
     }
   }

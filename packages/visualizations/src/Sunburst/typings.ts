@@ -15,6 +15,7 @@ import {
 export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
 
 export interface IConfig {
+  arrowMarkerSize: number
   centerCircleRadius: number
   duration: number
   height: number
