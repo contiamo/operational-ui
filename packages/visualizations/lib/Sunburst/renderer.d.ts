@@ -41,6 +41,7 @@ declare class Renderer {
     compute(): void;
     endAngle(d: TDatum): number;
     checkDataValidity(): void;
+    fillValues(node: any): void;
     prepareData(): void;
     assignColors(node: any): void;
     hoverOuter(radius: number): number;

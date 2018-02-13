@@ -330,6 +330,19 @@ var Renderer = /** @class */ (function () {
             throw new Error("The following nodes are smaller than the sum of their child nodes: " + fp_1.map(this.name)(childrenExceedParent));
         }
     };
+    Renderer.prototype.fillValues = function (node) {
+        if (this.value(node)) {
+            node.value = +this.value(node);
+            return;
+        }
+        var sum = 0;
+        var children = node.children;
+        var i = children && children.length;
+        while (--i >= 0) {
+            sum += +children[i].value;
+        }
+        node.value = sum;
+    };
     Renderer.prototype.prepareData = function () {
         var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
         var sortingFunction = this.state.current.get("config").sort
@@ -337,7 +350,8 @@ var Renderer = /** @class */ (function () {
             : undefined;
         var hierarchyData = d3_hierarchy_1.hierarchy(data)
             .each(this.assignColors.bind(this))
-            .sort(sortingFunction);
+            .sort(sortingFunction)
+            .eachAfter(this.fillValues.bind(this));
         this.total = hierarchyData.value;
         this.topNode = d3_hierarchy_1.partition()(hierarchyData)
             .descendants()

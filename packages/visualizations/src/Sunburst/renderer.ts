@@ -413,6 +413,20 @@ class Renderer {
     }
   }
 
+  fillValues(node: any): void {
+    if (this.value(node)) {
+      node.value = +this.value(node)
+      return
+    }
+    let sum: number = 0
+    const children = node.children
+    let i: number = children && children.length
+    while (--i >= 0) {
+      sum += +children[i].value
+    }
+    node.value = sum
+  }
+
   prepareData(): void {
     const data: IObject = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
 
@@ -423,6 +437,7 @@ class Renderer {
     const hierarchyData = d3Hierarchy(data)
       .each(this.assignColors.bind(this))
       .sort(sortingFunction)
+      .eachAfter(this.fillValues.bind(this))
 
     this.total = hierarchyData.value
 

@@ -1,19 +1,7 @@
-import * as React from "react"
-import { injectStylesheet, baseStylesheet } from "@operational/utils"
-import { operational } from "@operational/theme"
-
-injectStylesheet(baseStylesheet(operational))
-
-const containerNode = document.getElementById("app")
-
-import Sunburst from "../../src/Sunburst/facade"
-
-const accessors: any = {
-  children: (d: any): any[] => d.children,
-  name: (d: any): string => d.name,
-  value: (d: any): number => d.value,
-  color: (d: any): string => d.color
-}
+import Layout from "../../../components/Layout"
+import { Sunburst } from "@operational/visualizations"
+import Marathon from "../../../components/Marathon"
+import { Card, CardHeader } from "@operational/components"
 
 const data = {
   name: "All",
@@ -293,8 +281,14 @@ const data = {
   ]
 }
 
+export const marathon = ({ test, afterAll, container }) => {
+  const viz = new Sunburst(container)
 
-const viz: Sunburst = new Sunburst(containerNode)
-viz.data(data)
-viz.config({ maxRings: 4 })
-viz.draw()
+  test("Renders a sunburst chart", () => {
+    viz.data(data)
+    viz.config({ maxRings: 4 })
+    viz.draw()
+  })
+}
+
+export const title = "Missing values"
