@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../utils/event_catalog");
 var styles = require("./styles");
+var utils_1 = require("@operational/utils");
 var dims = {
     width: 70,
     height: 20,
@@ -37,6 +38,12 @@ var Breadcrumb = /** @class */ (function () {
             return firstNodes.concat(["hops"]).concat(lastNodes);
         }
     };
+    Breadcrumb.prototype.backgroundColor = function (d) {
+        return d === "hops" ? "#fff" : d.color || "#eee";
+    };
+    Breadcrumb.prototype.labelColor = function (d) {
+        return utils_1.readableTextColor(this.backgroundColor(d))(["black", "white"]);
+    };
     Breadcrumb.prototype.update = function (nodeArray) {
         var data = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : [];
         // Data join; key function combines name and depth (= position in sequence).
@@ -50,13 +57,12 @@ var Breadcrumb = /** @class */ (function () {
             .enter()
             .append("div")
             .attr("class", function (d) { return styles.breadcrumbItem + " " + (d === "hops" ? d : ""); })
-            .style("background-color", function (d) {
-            return d === "hops" ? "#fff" : d.color || "#eee";
-        });
+            .style("background-color", this.backgroundColor);
         entering
             .append("div")
             .attr("class", "label")
-            .html(this.label);
+            .html(this.label)
+            .style("color", this.labelColor.bind(this));
         entering.append("div").attr("class", "background-arrow");
         entering
             .append("div")

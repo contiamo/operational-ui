@@ -3,6 +3,7 @@ import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./
 import Events from "../utils/event_catalog"
 import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
+import { readableTextColor } from "@operational/utils"
 
 const dims: IObject = {
   width: 70,
@@ -48,6 +49,14 @@ class Breadcrumb {
     }
   }
 
+  backgroundColor(d: any): string {
+    return d === "hops" ? "#fff" : d.color || "#eee"
+  }
+
+  labelColor(d: TDatum): string {
+    return readableTextColor(this.backgroundColor(d))(["black", "white"])
+  }
+
   update(nodeArray: TDatum[]): void {
     const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
@@ -64,14 +73,13 @@ class Breadcrumb {
       .enter()
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
-      .style("background-color", (d: any): string => {
-        return d === "hops" ? "#fff" : d.color || "#eee"
-      })
+      .style("background-color", this.backgroundColor)
 
     entering
       .append("div")
       .attr("class", "label")
       .html(this.label)
+      .style("color", this.labelColor.bind(this))
 
     entering.append("div").attr("class", "background-arrow")
 

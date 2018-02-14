@@ -62,12 +62,12 @@ var breadcrumbItemStyle = {
         position: "absolute",
         width: 0,
         height: 0,
-        borderLeft: "solid 15px #fff",
-        borderTop: "solid 15px transparent",
-        borderBottom: "solid 15px transparent",
+        borderLeft: "solid 16px #fff",
+        borderTop: "solid 16px transparent",
+        borderBottom: "solid 16px transparent",
         top: "50%",
         left: "100%",
-        marginTop: "-15px",
+        marginTop: "-16px",
         zIndex: "2"
     },
     "& .arrow": {
