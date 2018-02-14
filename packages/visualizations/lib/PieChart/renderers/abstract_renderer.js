@@ -5,6 +5,7 @@ var fp_1 = require("lodash/fp");
 require("d3-transition");
 var d3_shape_1 = require("d3-shape");
 var d3_interpolate_1 = require("d3-interpolate");
+var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
@@ -126,13 +127,7 @@ var AbstractRenderer = /** @class */ (function () {
             .transition()
             .duration(duration)
             .attrTween("d", this.arcTween.bind(this))
-            .each(function () { return (n = n + 1); })
-            .on("end", function () {
-            n = n - 1;
-            if (n < 1) {
-                _this.onTransitionEnd();
-            }
-        });
+            .call(d3_utils_1.onTransitionEnd, this.onTransitionEnd.bind(this));
         arcs
             .merge(enteringArcs)
             .select("text." + styles.label)

@@ -5,6 +5,7 @@ import * as d3 from "d3-selection"
 import "d3-transition"
 import { pie as d3Pie, arc as d3Arc } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
+import { onTransitionEnd } from "../../utils/d3_utils"
 import * as styles from "./styles"
 
 // y is a step-function (with two x values resulting in the same y value)
@@ -162,13 +163,7 @@ abstract class AbstractRenderer {
       .transition()
       .duration(duration)
       .attrTween("d", this.arcTween.bind(this))
-      .each(() => (n = n + 1))
-      .on("end", (): void => {
-        n = n - 1
-        if (n < 1) {
-          this.onTransitionEnd()
-        }
-      })
+      .call(onTransitionEnd, this.onTransitionEnd.bind(this))
 
     arcs
       .merge(enteringArcs)

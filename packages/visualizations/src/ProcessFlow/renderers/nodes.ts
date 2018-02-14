@@ -2,7 +2,7 @@ import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
-import { withD3Element } from "../../utils/d3_utils"
+import { withD3Element, onTransitionEnd } from "../../utils/d3_utils"
 import { IFocus, IObject, TD3Selection, TNode, TNodeSelection, TScale } from "../typings"
 import * as styles from "./styles"
 
@@ -91,8 +91,6 @@ class Nodes extends AbstractRenderer {
     const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
       borderScale: TScale = this.nodeBorderScale(scale)
 
-    let n: number = 0
-
     const enteringNodeGroups: TD3Selection = nodeGroups
       .enter()
       .append("g")
@@ -164,13 +162,7 @@ class Nodes extends AbstractRenderer {
       .attr("fill", (d: TNode): string => d.color())
       .attr("stroke", (d: TNode): string => d.stroke())
       .attr("opacity", 1)
-      .each(() => (n = n + 1))
-      .on("end", (): void => {
-        n = n - 1
-        if (n < 1) {
-          this.updateNodeLabels()
-        }
-      })
+      .call(onTransitionEnd, this.updateNodeLabels.bind(this))
   }
 
   getNodeBoundingRect(el: HTMLElement): SVGRect {
