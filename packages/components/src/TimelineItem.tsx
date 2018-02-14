@@ -1,8 +1,7 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import glamorous, { GlamorousComponent, withTheme } from "glamorous"
-import { hexOrColor } from "@operational/utils"
-import { Theme, ThemeColorName } from "@operational/theme"
+import { Theme, expandColor } from "@operational/theme"
 
 export interface IProps {
   id?: string | number
@@ -23,7 +22,7 @@ const StatusContainer = glamorous.div(
   },
   ({ theme, color }: { theme: Theme; color?: string }) => {
     return {
-      backgroundColor: hexOrColor(color)(theme.colors[color] || theme.colors.info)
+      backgroundColor: expandColor(theme, color) || theme.colors.info
     }
   }
 )

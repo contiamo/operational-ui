@@ -11,13 +11,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var color_1 = require("./utils/color");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, condensed = _a.condensed;
     var defaultColor = theme.colors.white;
-    var backgroundColor = color
-        ? utils_1.hexOrColor(color)(theme.colors[color] || defaultColor)
-        : defaultColor;
+    var backgroundColor = theme_1.expandColor(theme, color) || defaultColor;
     var activeBackgroundColor = utils_1.darken(backgroundColor)(5);
     var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"]);
     var activeBoxShadow = theme.shadows.pressed;

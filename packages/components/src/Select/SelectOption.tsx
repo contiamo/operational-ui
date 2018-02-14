@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { withTheme, GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-import { hexOrColor, readableTextColor, darken } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
+import { readableTextColor, darken } from "@operational/utils"
 
 import { X } from "react-feather"
 
@@ -21,7 +21,7 @@ export interface IPropsWithTheme extends IProps {
 
 const Container = glamorous.div(
   ({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }): any => {
-    const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
+    const backgroundColor = expandColor(theme, color) || theme.colors.white
 
     return {
       backgroundColor,

@@ -10,5 +10,5 @@ export interface IProps {
     theme?: Theme;
     color?: string;
 }
-declare const SelectFilter: (props: IProps) => JSX.Element;
-export default SelectFilter;
+declare const _default: (props: IProps) => JSX.Element;
+export default _default;

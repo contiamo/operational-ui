@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { hexOrColor, readableTextColor } from "@operational/utils"
+import { readableTextColor } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
 // Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:

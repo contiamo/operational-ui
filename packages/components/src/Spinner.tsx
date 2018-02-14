@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
 import { Theme } from "@operational/theme"
-import { hexOrColor, readableTextColor, darken, transparentize } from "@operational/utils"
+import { readableTextColor, darken, transparentize } from "@operational/utils"
 
 export interface IProps {
   id?: string | number

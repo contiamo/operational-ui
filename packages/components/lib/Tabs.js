@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var Container = glamorous_1.default.div({
     label: "tabs"
 });
@@ -83,7 +84,7 @@ var Tabs = function (_a) {
     var _b = _a.active, active = _b === void 0 ? 0 : _b, _c = _a.activeColor, activeColor = _c === void 0 ? "info" : _c, children = _a.children, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d, theme = _a.theme;
     // Get all children properties and add an index value to each of them
     var childrenProps = React.Children.map(children, function (child, index) { return (__assign({}, child.props, { index: index })); });
-    var color = utils_1.hexOrColor(activeColor)(theme.colors[activeColor] || theme.colors.info);
+    var color = theme_1.expandColor(theme, activeColor) || theme.colors.info;
     // Display only the active panel based off the children props
     var _e = childrenProps.find(function (_a) {
         var index = _a.index;

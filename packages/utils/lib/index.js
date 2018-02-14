@@ -7,7 +7,6 @@ exports.spin = styles_1.spin;
 exports.baseStylesheet = styles_1.baseStylesheet;
 exports.injectStylesheet = styles_1.injectStylesheet;
 var color_1 = require("./color");
-exports.hexOrColor = color_1.hexOrColor;
 exports.readableTextColor = color_1.readableTextColor;
 exports.darken = color_1.darken;
 exports.lighten = color_1.lighten;

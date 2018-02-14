@@ -1,5 +1,5 @@
 import { fadeIn, resetTransform, spin, baseStylesheet, injectStylesheet } from "./styles"
-import { hexOrColor, readableTextColor, darken, lighten, transparentize, setBrightness } from "./color"
+import { readableTextColor, darken, lighten, transparentize, setBrightness } from "./color"
 import { handleWithD3Element } from "./d3"
 import { wrapTheme } from "./theme"
 
@@ -8,7 +8,6 @@ export {
   darken,
   fadeIn,
   handleWithD3Element,
-  hexOrColor,
   injectStylesheet,
   lighten,
   readableTextColor,

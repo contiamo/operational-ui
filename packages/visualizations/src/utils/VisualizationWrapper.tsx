@@ -1,7 +1,6 @@
 import * as React from "react"
 import { withTheme } from "glamorous"
 import { forEach } from "lodash/fp"
-
 import { Theme } from "@operational/theme"
 
 export interface IProps {
@@ -11,10 +10,13 @@ export interface IProps {
   accessors?: any
   data?: any
   config?: any
-  theme?: Theme
 }
 
-class VisualizationWrapper extends React.Component<IProps, {}> {
+export interface IPropsWithTheme extends IProps {
+  theme: Theme
+}
+
+class VisualizationWrapperInternal extends React.Component<IPropsWithTheme, {}> {
   viz: any
   containerNode: HTMLElement
 
@@ -29,6 +31,7 @@ class VisualizationWrapper extends React.Component<IProps, {}> {
   }
 
   componentDidMount() {
+    // Work with the theme here
     console.log(this.props.theme)
     this.viz = new this.props.facade(this.containerNode)
     this.updateViz()
@@ -53,4 +56,8 @@ class VisualizationWrapper extends React.Component<IProps, {}> {
   }
 }
 
-export default withTheme(VisualizationWrapper) 
+const VisualizationWrapper = (props: IPropsWithTheme) => <VisualizationWrapperInternal {...props} />
+
+const WrappedVisualizationWrapper = withTheme(VisualizationWrapper) as React.SFC<IProps>
+
+export default WrappedVisualizationWrapper

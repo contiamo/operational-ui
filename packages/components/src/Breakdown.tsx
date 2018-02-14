@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-import { hexOrColor, readableTextColor, setBrightness } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
+import { readableTextColor, setBrightness } from "@operational/utils"
 
 import { IconName } from "./Icon"
 
@@ -83,9 +83,7 @@ const Bar = glamorous.div(
     }
   },
   ({ theme, fill, color }: { theme: Theme; fill: number; color: string }) => {
-    const backgroundColor: string = color
-      ? (hexOrColor(color)(theme.colors[color] || theme.colors.info) as string)
-      : theme.colors.info
+    const backgroundColor: string = expandColor(theme, color) || theme.colors.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
       backgroundColor: theme.colors.gray10,

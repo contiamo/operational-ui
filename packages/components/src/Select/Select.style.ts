@@ -1,6 +1,6 @@
 import glamorous, { GlamorousComponent } from "glamorous"
-import { hexOrColor, readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
-import { Theme } from "@operational/theme"
+import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
 import * as mixins from "../utils/mixins"
 
 export interface IContainerProps {
@@ -16,7 +16,7 @@ export interface IContainerProps {
 
 const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
   ({ theme, color, disabled, updating, style }: IContainerProps & { theme: Theme }): {} => {
-    const backgroundColor = color && theme.colors ? hexOrColor(color)(theme.colors[color]) : "white"
+    const backgroundColor = expandColor(theme, color) || theme.colors.white
 
     const updatingAfterStyles = updating
       ? {

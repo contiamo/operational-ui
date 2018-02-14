@@ -9,28 +9,39 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var glamorous_1 = require("glamorous");
 var fp_1 = require("lodash/fp");
-var VisualizationWrapper = /** @class */ (function (_super) {
-    __extends(VisualizationWrapper, _super);
-    function VisualizationWrapper() {
+var VisualizationWrapperInternal = /** @class */ (function (_super) {
+    __extends(VisualizationWrapperInternal, _super);
+    function VisualizationWrapperInternal() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    VisualizationWrapper.prototype.render = function () {
+    VisualizationWrapperInternal.prototype.render = function () {
         var _this = this;
         return (React.createElement("div", { style: this.props.style, className: (this.props.className ? this.props.className + " " : "") + "Visualization", ref: function (containerNode) { return (_this.containerNode = containerNode); } }));
     };
-    VisualizationWrapper.prototype.componentDidMount = function () {
+    VisualizationWrapperInternal.prototype.componentDidMount = function () {
+        // Work with the theme here
+        console.log(this.props.theme);
         this.viz = new this.props.facade(this.containerNode);
         this.updateViz();
         this.viz.draw();
     };
-    VisualizationWrapper.prototype.componentDidUpdate = function () {
+    VisualizationWrapperInternal.prototype.componentDidUpdate = function () {
         this.updateViz();
         this.viz.draw();
     };
-    VisualizationWrapper.prototype.updateViz = function () {
+    VisualizationWrapperInternal.prototype.updateViz = function () {
         var _this = this;
         this.viz.data(this.props.data || {});
         fp_1.forEach.convert({ cap: false })(function (accessors, key) {
@@ -38,10 +49,12 @@ var VisualizationWrapper = /** @class */ (function (_super) {
         })(this.props.accessors);
         this.viz.config(this.props.config || {});
     };
-    VisualizationWrapper.prototype.componentWillUnmount = function () {
+    VisualizationWrapperInternal.prototype.componentWillUnmount = function () {
         this.viz.close();
     };
-    return VisualizationWrapper;
+    return VisualizationWrapperInternal;
 }(React.Component));
-exports.default = VisualizationWrapper;
+var VisualizationWrapper = function (props) { return React.createElement(VisualizationWrapperInternal, __assign({}, props)); };
+var WrappedVisualizationWrapper = glamorous_1.withTheme(VisualizationWrapper);
+exports.default = WrappedVisualizationWrapper;
 //# sourceMappingURL=VisualizationWrapper.js.map

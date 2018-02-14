@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent, withTheme } from "glamorous"
-import { darken, hexOrColor } from "@operational/utils"
-import { Theme } from "@operational/theme"
+import { darken } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
 
 import Tab, { IProps as TabProps } from "./Tab"
 
@@ -121,7 +121,7 @@ const Tabs: React.SFC<IPropsWithTheme> = ({
     (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index })
   )
 
-  const color = hexOrColor(activeColor)(theme.colors[activeColor] || theme.colors.info)
+  const color = expandColor(theme, activeColor) || theme.colors.info
 
   // Display only the active panel based off the children props
   const { children: panelContent, disabled }: TabProps = childrenProps.find(({ index }) => index === active)
