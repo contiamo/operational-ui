@@ -31,13 +31,11 @@ class Breadcrumb {
     const computed: IObject = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
     const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
-    setTimeout(() => {
-      this.update(nodeArray)
-    }, 1e2)
+    this.update(nodeArray)
   }
 
   label(d: any, i: number): string {
-    return d === "hops" ? "..." : d.data.name
+    return d === "hops" ? "..." : d.name
   }
 
   truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[] {
@@ -55,7 +53,7 @@ class Breadcrumb {
 
     // Data join; key function combines name and depth (= position in sequence).
     const trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => {
-      return d === "hops" ? d : d.data.name + d.depth
+      return d === "hops" ? d : d.name + d.depth
     })
 
     // Remove exiting nodes.
@@ -67,7 +65,7 @@ class Breadcrumb {
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
       .style("background-color", (d: any): string => {
-        return d === "hops" ? "#fff" : d.data.color || "#eee"
+        return d === "hops" ? "#fff" : d.color || "#eee"
       })
 
     entering
@@ -81,7 +79,7 @@ class Breadcrumb {
       .append("div")
       .attr("class", "arrow")
       .style("border-left-color", (d: any): string => {
-        return d === "hops" ? "#fff" : d.data.color || "#eee"
+        return d === "hops" ? "#fff" : d.color || "#eee"
       })
 
     entering.merge(trail).on("click", this.onClick.bind(this))

@@ -14,6 +14,7 @@ declare class Canvas {
     insertBreadcrumb(): TD3Selection;
     insertEl(): TSeriesEl;
     insertRootLabel(): TD3Selection;
+    defineMarkers(): void;
     prefixedId(id: string): string;
     insertFocusElements(): void;
     insertFocusLabel(): TD3Selection;

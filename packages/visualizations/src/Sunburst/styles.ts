@@ -4,6 +4,7 @@ import { seriesLegend } from "../utils/styles"
 
 const arcStyle = {
   strokeWidth: "1",
+  stroke: "#fff",
   opacity: 0.8,
   fill: "#eee",
   "&.zoomable": {

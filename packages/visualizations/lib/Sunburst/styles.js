@@ -12,6 +12,7 @@ var glamor_1 = require("glamor");
 var theme_1 = require("@operational/theme");
 var arcStyle = {
     strokeWidth: "1",
+    stroke: "#fff",
     opacity: 0.8,
     fill: "#eee",
     "&.zoomable": {

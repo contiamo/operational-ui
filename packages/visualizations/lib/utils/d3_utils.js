@@ -16,9 +16,7 @@ exports.transitionIfVisible = function (selection, duration) {
 };
 exports.onTransitionEnd = function (selection, func) {
     var n = 0;
-    return selection
-        .each(function () { return (n = n + 1); })
-        .on("end", function () {
+    return selection.each(function () { return (n = n + 1); }).on("end", function () {
         n = n - 1;
         if (n < 1) {
             func();

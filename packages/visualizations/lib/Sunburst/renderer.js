@@ -1,82 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var data_handler_1 = require("./data_handler");
 var event_catalog_1 = require("../utils/event_catalog");
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
-var d3_utils_1 = require("../utils/d3_utils");
 // d3 imports
 var d3 = require("d3-selection");
 require("d3-transition");
 var d3_interpolate_1 = require("d3-interpolate");
 var d3_shape_1 = require("d3-shape");
 var d3_scale_1 = require("d3-scale");
-var d3_hierarchy_1 = require("d3-hierarchy");
+var d3_utils_1 = require("../utils/d3_utils");
 var Renderer = /** @class */ (function () {
     function Renderer(state, stateWriter, events, el) {
-        this.drawn = false;
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
-        this.defineArrowMarker();
+        this.dataHandler = new data_handler_1.default(state, stateWriter);
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.CLICK, this.onClick.bind(this));
     }
-    Renderer.prototype.defineArrowMarker = function () {
-        var arrowMarkerSize = this.state.current.get("config").arrowMarkerSize;
-        this.el
-            .append("svg:defs")
-            .append("svg:marker")
-            .attr("id", "arrow")
-            .attr("markerHeight", arrowMarkerSize)
-            .attr("markerWidth", arrowMarkerSize * 0.6)
-            .attr("markerUnits", "strokeWidth")
-            .attr("orient", "auto")
-            .attr("viewBox", "-3 -5 5 10")
-            .append("svg:path")
-            .attr("d", "M 0,0 m -3,-5 L 2,0 L -3,5 L 0,0")
-            .attr("fill", "#aaa");
-    };
-    Renderer.prototype.assignAccessors = function () {
-        var _this = this;
-        var accessors = this.state.current.get("accessors").series;
-        // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
-        fp_1.forEach.convert({ cap: false })(function (accessor, key) {
-            ;
-            _this[key] = function (d) { return (d.data ? accessor(d.data) : accessor(d)); };
-        })(accessors);
-    };
-    Renderer.prototype.hasData = function () {
-        return this.data.length > 0;
-    };
     Renderer.prototype.draw = function () {
-        this.assignAccessors();
         this.compute();
-        this.drawn ? this.updateDraw() : this.initialDraw();
-    };
-    Renderer.prototype.initialDraw = function () {
-        // groups
-        this.el.append("svg:g").attr("class", "arcs");
-        this.el.append("svg:g").attr("class", "arrows");
-        this.el.append("circle").attr("class", styles.centerCircle);
-        if (this.hasData()) {
-            this.updateDraw();
-        }
-        this.drawn = true;
-    };
-    Renderer.prototype.updateDraw = function () {
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
-        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
-        this.el
-            .select("circle." + styles.centerCircle)
-            .attr("cx", drawingDims.width / 2)
-            .attr("cy", drawingDims.height / 2);
-        // Arcs
         var arcs = this.el
             .select("g.arcs")
-            .attr("transform", this.translateString(this.computeTranslate()))
+            .attr("transform", this.translate())
             .selectAll("path." + styles.arc)
-            .data(this.data, this.name);
+            .data(this.data, fp_1.get("name"));
         var config = this.state.current.get("config");
         this.exit(arcs, config.duration, document.hidden || config.suppressAnimation);
         this.enterAndUpdate(arcs, config.duration, document.hidden || config.suppressAnimation);
@@ -91,77 +43,170 @@ var Renderer = /** @class */ (function () {
                 .attrTween("d", this.removeArcTween.bind(this));
         exitingArcs.remove();
     };
+    Renderer.prototype.arcClass = function (d) {
+        return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : "");
+    };
     Renderer.prototype.enterAndUpdate = function (arcs, duration, suppressAnimation) {
         var _this = this;
         var updatingArcs = arcs
             .enter()
             .append("svg:path")
-            .style("fill", this.color)
-            .style("stroke", "#fff")
-            .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
-            .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); })
             .merge(arcs)
-            .attr("class", function (d) { return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : ""); });
+            .attr("class", this.arcClass)
+            .style("fill", fp_1.get("color"))
+            .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
+            .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); });
         if (suppressAnimation) {
             updatingArcs.attr("d", this.arc.bind(this));
             this.updateTruncationArrows();
         }
         else {
-            var n_1 = 0;
+            // let n: number = 0
             updatingArcs
                 .transition()
                 .duration(duration)
                 .attrTween("d", this.arcTween.bind(this))
-                .each(function () { return (n_1 = n_1 + 1); })
-                .on("end", function () {
-                n_1 = n_1 - 1;
-                if (n_1 < 1) {
-                    _this.updateTruncationArrows();
-                }
-            });
+                .call(d3_utils_1.onTransitionEnd, this.updateTruncationArrows.bind(this));
         }
     };
-    Renderer.prototype.arrowPath = function (d) {
-        var angle = d3_interpolate_1.interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5);
-        var y = function (r) { return -r * Math.cos(angle); };
-        var x = function (r) { return r * Math.sin(angle); };
-        var r = this.radiusScale(d.y1);
-        var arrowSize = Math.max(0.6 * this.state.current.get("config").arrowMarkerSize, 8);
-        return "M" + x(r + 5) + "," + y(r + 5) + " L" + x(r + arrowSize) + "," + y(r + arrowSize);
+    // Computations
+    Renderer.prototype.compute = function () {
+        var _this = this;
+        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
+        this.radius =
+            Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin;
+        this.angleScale = d3_scale_1.scaleLinear()
+            .clamp(true)
+            .range([0, 2 * Math.PI]);
+        this.radiusScale = d3_scale_1.scaleLinear()
+            .clamp(true)
+            .range([0, this.radius]);
+        this.arc = d3_shape_1.arc()
+            .startAngle(function (d) { return _this.angleScale(d.x0); })
+            .endAngle(this.endAngle.bind(this))
+            .innerRadius(function (d) { return _this.radiusScale(d.y0); })
+            .outerRadius(function (d) { return _this.radiusScale(d.y1); });
+        this.previous = this.data;
+        this.data = this.dataHandler.prepareData();
     };
-    Renderer.prototype.removeTrunactionArrows = function () {
-        this.el
-            .select("g.arrows")
-            .selectAll("path")
-            .remove();
+    Renderer.prototype.endAngle = function (d) {
+        // Set a minimum segment angle so that the segment can always be seen,
+        // UNLESS the segment is not a descendant of the top or zoomed node (i.e. should not be visible)
+        var show = fp_1.findIndex(this.isEqual(this.zoomNode || this.dataHandler.topNode))(d.ancestors()) > -1;
+        var minAngle = show ? Math.asin(1 / this.radiusScale(d.y0)) || 0 : 0;
+        return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
     };
-    Renderer.prototype.updateTruncationArrows = function () {
-        var centerNode = this.zoomNode || this.topNode, config = this.state.current.get("config");
-        var data = fp_1.map(function (d) { return d.parent; })(fp_1.filter(function (d) {
-            return d.depth - centerNode.depth > config.maxRings && d.parent.depth - centerNode.depth <= config.maxRings;
-        })(this.data));
-        var arrows = this.el
-            .select("g.arrows")
-            .attr("transform", this.translateString(this.computeTranslate()))
-            .selectAll("path")
-            .data(data, this.name);
-        arrows.exit().remove();
-        arrows
-            .enter()
-            .append("svg:path")
-            .merge(arrows)
-            .attr("d", this.arrowPath.bind(this))
-            .attr("marker-end", "url(#arrow)")
-            .attr("marker-start", "url(#arrow)");
+    // Center elements within drawing container
+    Renderer.prototype.translate = function () {
+        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
+        this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2];
+        return "translate(" + this.currentTranslation.join(", ") + ")";
     };
+    // Translate back to 0,0 in top left, for focus labels
+    Renderer.prototype.translateBack = function (point) {
+        var currentTranslation = this.currentTranslation;
+        return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]];
+    };
+    // Helper functions for finding / filtering / comparing nodes
+    Renderer.prototype.isEqual = function (d1) {
+        var _this = this;
+        return function (d2) {
+            return Boolean(d1) && Boolean(d2) && fp_1.every(fp_1.identity)([d1.name === d2.name, _this.isSibling(d1)(d2)]);
+        };
+    };
+    Renderer.prototype.isSibling = function (d1) {
+        return function (d2) {
+            if (!d1.parent && !d2.parent) {
+                return true;
+            }
+            return d1.parent && d2.parent && fp_1.every(fp_1.identity([d1.depth === d2.depth, d1.parent.name === d2.parent.name]));
+        };
+    };
+    Renderer.prototype.findSiblings = function (data, d) {
+        return fp_1.filter(this.isSibling(d))(data);
+    };
+    Renderer.prototype.findAncestor = function (data, d) {
+        if (!d) {
+            return;
+        }
+        var parent = fp_1.find(this.isEqual(d.parent))(data);
+        return parent || this.findAncestor(data, d.parent);
+    };
+    Renderer.prototype.findDatum = function (data, d) {
+        return fp_1.find(this.isEqual(d))(data);
+    };
+    // Arc interpolations for entering segments
+    Renderer.prototype.arcTween = function (d) {
+        var _this = this;
+        var previousData = this.previous || [], 
+        // old version of same datum
+        old = fp_1.find(this.isEqual(d))(previousData), 
+        // nearest ancestor that already exists
+        oldParent = this.findAncestor(previousData.concat([this.dataHandler.topNode]), d);
+        var x0;
+        var x1;
+        var y0;
+        var y1;
+        if (old) {
+            x0 = old.x0;
+            x1 = old.x1;
+            y0 = old.y0;
+            y1 = old.y1;
+        }
+        else if (!old && oldParent) {
+            // find siblings - same parent, same depth
+            var siblings = this.findSiblings(this.data, d);
+            var siblingIndex = fp_1.findIndex(this.isEqual(d))(siblings);
+            var oldPrecedingSibling = this.findDatum(previousData, siblings[siblingIndex - 1]);
+            x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
+            x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
+            y0 = d.y0;
+            y1 = d.y1;
+        }
+        else if (!old && !oldParent) {
+            x0 = 0;
+            x1 = 0;
+            y0 = d.y0;
+            y1 = d.y1;
+        }
+        var f = d3_interpolate_1.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, d);
+        return function (t) { return _this.arc(f(t)); };
+    };
+    // Arc interpolations for exiting segments
+    Renderer.prototype.removeArcTween = function (d) {
+        var _this = this;
+        var oldSiblings = this.findSiblings(this.previous || [], d);
+        var currentSiblings = this.findSiblings(this.data, d);
+        var oldSiblingIndex = fp_1.findIndex(this.isEqual(d))(oldSiblings);
+        var oldPrecedingSibling = fp_1.filter
+            .convert({ cap: false })(function (sibling, i) {
+            return i < oldSiblingIndex && !!_this.findDatum(currentSiblings, sibling);
+        })(oldSiblings)
+            .pop();
+        var precedingSibling = this.findDatum(this.data, oldPrecedingSibling);
+        var parent = this.findAncestor(this.data.concat([this.dataHandler.topNode]), d);
+        var x;
+        if (precedingSibling) {
+            x = precedingSibling.x1;
+        }
+        else if (parent) {
+            x = parent.x0;
+        }
+        else {
+            x = 0;
+        }
+        var f = d3_interpolate_1.interpolateObject({ x0: x, x1: x }, d);
+        return function (t) { return _this.arc(f(1 - t)); };
+    };
+    // Event handlers
     Renderer.prototype.onClick = function (payload) {
         var _this = this;
         // Don't allow zooming on last child
         if (payload.d && !payload.d.children) {
             return;
         }
-        var zoomNode = payload.d || this.topNode;
-        // If the center node is clicked, zoom out
+        var zoomNode = payload.d || this.dataHandler.topNode;
+        // If the center node is clicked, zoom out by one level
         if (zoomNode === this.zoomNode && payload && payload.force) {
             this.zoomOut(payload);
             return;
@@ -178,29 +223,32 @@ var Renderer = /** @class */ (function () {
                 truncated = true;
             }
         })(zoomNode.descendants());
+        // If any paths are truncated, reduce radius scale range to allow space for arrow markers
         this.radiusScale.range([0, this.radius - (truncated ? config.arrowMarkerSize : 0)]);
+        // Angle and radius domains
         var angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]);
         var radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius]);
         // Save new inner radius to facilitate sizing and positioning of root label
-        var innerRadius = this.radiusScale.domain([zoomNode.y0, maxChildRadius])(zoomNode.y1);
+        this.radiusScale.domain(radiusDomain(1));
+        var innerRadius = this.radiusScale(zoomNode.y1);
         this.stateWriter("innerRadius", innerRadius);
         // If the sunburst is not zoomed in and the root node is fully surrounded by children,
         // make the radius of the central white circle equal to the inner radius of the first ring,
         // to avoid an extra grey ring around the root node.
         var totalRootChildValue = fp_1.reduce(function (memo, child) {
             return memo + child.value;
-        }, 0)(this.topNode.children);
-        var rootIsSurrounded = zoomNode === this.topNode && zoomNode.value === totalRootChildValue;
-        d3_utils_1.transitionIfVisible(this.el.select("circle." + styles.centerCircle), config.duration).attr("r", rootIsSurrounded ? innerRadius : innerRadius * config.centerCircleRadius);
+        }, 0)(this.dataHandler.topNode.children);
+        var isSurrounded = zoomNode === this.dataHandler.topNode && zoomNode.value === totalRootChildValue;
+        d3_utils_1.transitionIfVisible(this.el.select("circle." + styles.centerCircle), config.duration).attr("r", innerRadius * (isSurrounded ? 1 : config.centerCircleRadius));
         // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
         // (occurs when no zoom config is passed in from the outside)
         // no need to do anything.
-        if (!this.zoomNode && (!payload.d || payload.d === this.topNode)) {
+        if (!this.zoomNode && (!payload.d || payload.d === this.dataHandler.topNode)) {
             return;
         }
-        this.removeTrunactionArrows();
         this.zoomNode = zoomNode;
         this.stateWriter("zoomNode", this.zoomNode);
+        this.removeTrunactionArrows();
         var paths = this.el
             .selectAll("path." + styles.arc)
             .attr("pointer-events", "none")
@@ -210,11 +258,10 @@ var Renderer = /** @class */ (function () {
         }));
         if (document.hidden) {
             this.angleScale.domain(angleDomain(1));
-            this.radiusScale.domain(radiusDomain(1));
             paths.attr("d", this.arc.bind(this));
         }
         else {
-            var n_2 = 0;
+            var n = 0;
             paths
                 .transition()
                 .duration(config.duration)
@@ -227,13 +274,7 @@ var Renderer = /** @class */ (function () {
                 .attrTween("d", function (datum) {
                 return function () { return _this.arc(datum); };
             })
-                .each(function () { return (n_2 = n_2 + 1); })
-                .on("end", function () {
-                n_2 = n_2 - 1;
-                if (n_2 < 1) {
-                    _this.updateTruncationArrows();
-                }
-            });
+                .call(d3_utils_1.onTransitionEnd, this.updateTruncationArrows.bind(this));
         }
     };
     Renderer.prototype.zoomOut = function (payload) {
@@ -287,201 +328,39 @@ var Renderer = /** @class */ (function () {
             _this.el.select("div.explanation").style("visibility", "hidden");
         };
     };
-    // Compute
-    Renderer.prototype.compute = function () {
-        var _this = this;
-        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
-        this.radius =
-            Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin;
-        this.angleScale = d3_scale_1.scaleLinear()
-            .clamp(true)
-            .range([0, 2 * Math.PI]);
-        this.radiusScale = d3_scale_1.scaleLinear()
-            .clamp(true)
-            .range([0, this.radius]);
-        this.arc = d3_shape_1.arc()
-            .startAngle(function (d) { return _this.angleScale(d.x0); })
-            .endAngle(this.endAngle.bind(this))
-            .innerRadius(function (d) { return _this.radiusScale(d.y0); })
-            .outerRadius(function (d) { return _this.radiusScale(d.y1); });
-        this.previous = this.data;
-        this.prepareData();
+    // Arrows to denote path truncation
+    Renderer.prototype.removeTrunactionArrows = function () {
+        this.el
+            .select("g.arrows")
+            .selectAll("path")
+            .remove();
     };
-    Renderer.prototype.endAngle = function (d) {
-        var _this = this;
-        // Set a minimum segment angle so that the segment can always be seen,
-        // UNLESS the segment is not the child of the top or zoomed node (i.e. should not be visible)
-        var show = fp_1.findIndex(function (datum) { return _this.isEqual(_this.zoomNode || _this.topNode, datum); })(d.ancestors()) > -1;
-        var minAngle = show ? Math.asin(1 / this.radiusScale(d.y0)) || 0 : 0;
-        return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
+    Renderer.prototype.arrowPath = function (d) {
+        var angle = d3_interpolate_1.interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5);
+        var y = function (r) { return -r * Math.cos(angle); };
+        var x = function (r) { return r * Math.sin(angle); };
+        var r = this.radiusScale(d.y1);
+        var arrowSize = Math.max(0.6 * this.state.current.get("config").arrowMarkerSize, 8);
+        return "M" + x(r + 5) + "," + y(r + 5) + " L" + x(r + arrowSize) + "," + y(r + arrowSize);
     };
-    Renderer.prototype.checkDataValidity = function () {
-        // All data points must have a value assigned
-        var noValueData = fp_1.filter(function (d) { return !d.value; })(this.data);
-        if (noValueData.length > 0) {
-            throw new Error("The following nodes do not have values: " + fp_1.map(this.name)(noValueData));
-        }
-        // Parent nodes cannot be smaller than the sum of their children
-        var childrenExceedParent = fp_1.filter(function (d) {
-            var childSum = fp_1.reduce(function (sum, child) { return sum + child.value; }, 0)(d.children);
-            return d.value < childSum;
-        })(this.data);
-        if (childrenExceedParent.length > 0) {
-            throw new Error("The following nodes are smaller than the sum of their child nodes: " + fp_1.map(this.name)(childrenExceedParent));
-        }
-    };
-    Renderer.prototype.fillValues = function (node) {
-        if (this.value(node)) {
-            node.value = +this.value(node);
-            return;
-        }
-        var sum = 0;
-        var children = node.children;
-        var i = children && children.length;
-        while (--i >= 0) {
-            sum += +children[i].value;
-        }
-        node.value = sum;
-    };
-    Renderer.prototype.prepareData = function () {
-        var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
-        var sortingFunction = this.state.current.get("config").sort
-            ? function (a, b) { return b.value - a.value; }
-            : undefined;
-        var hierarchyData = d3_hierarchy_1.hierarchy(data)
-            .each(this.assignColors.bind(this))
-            .sort(sortingFunction)
-            .eachAfter(this.fillValues.bind(this));
-        this.total = hierarchyData.value;
-        this.topNode = d3_hierarchy_1.partition()(hierarchyData)
-            .descendants()
-            .find(function (d) { return d.depth === 0; });
-        this.stateWriter("topNode", this.topNode);
-        this.data = d3_hierarchy_1.partition()(hierarchyData)
-            .descendants()
-            .filter(function (d) { return !fp_1.isEmpty(d.data); });
-        this.checkDataValidity();
-        fp_1.forEach(function (d) {
-            d.zoomable = d.parent && !!d.children;
-        })(this.data);
-        this.stateWriter("data", this.data);
-    };
-    Renderer.prototype.assignColors = function (node) {
-        var propagateColors = this.state.current.get("config").propagateColors;
-        node.data.color = propagateColors && node.parent && !this.color(node)
-            ? this.color(node.parent)
-            : node.data.color = this.color(node);
-    };
-    Renderer.prototype.hoverOuter = function (radius) {
-        return radius + 1;
-    };
-    Renderer.prototype.computeTranslate = function () {
-        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
-        this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2];
-        return this.currentTranslation;
-    };
-    // Translate back to 0,0 in top left
-    Renderer.prototype.translateBack = function (point) {
-        var currentTranslation = this.currentTranslation;
-        return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]];
-    };
-    Renderer.prototype.isSibling = function (d1, d2) {
-        if (!d1.parent && !d2.parent) {
-            return true;
-        }
-        if (!d1.parent || !d2.parent) {
-            return false;
-        }
-        return fp_1.every(fp_1.identity)([d1.depth === d2.depth, this.name(d1.parent) === this.name(d2.parent)]);
-    };
-    Renderer.prototype.isEqual = function (d1, d2) {
-        if (!d1 || !d2) {
-            return false;
-        }
-        return fp_1.every(fp_1.identity)([this.name(d1) === this.name(d2), this.isSibling(d1, d2)]);
-    };
-    Renderer.prototype.findSiblings = function (data, d) {
-        var _this = this;
-        return fp_1.filter(function (datum) { return _this.isSibling(datum, d); })(data);
-    };
-    Renderer.prototype.findAncestor = function (data, d) {
-        var _this = this;
-        if (!d) {
-            return;
-        }
-        var parent = fp_1.find(function (datum) { return _this.isEqual(datum, d.parent); })(data);
-        return parent || this.findAncestor(data, d.parent);
-    };
-    Renderer.prototype.findDatum = function (data, d) {
-        var _this = this;
-        return fp_1.find(function (datum) { return _this.isEqual(datum, d); })(data);
-    };
-    Renderer.prototype.arcTween = function (d) {
-        var _this = this;
-        var previousData = this.previous || [], 
-        // old version of same datum
-        old = fp_1.find(function (datum) { return _this.isEqual(datum, d); })(previousData), 
-        // nearest ancestor that already exists
-        oldParent = this.findAncestor(previousData.concat([this.topNode]), d);
-        var x0;
-        var x1;
-        var y0;
-        var y1;
-        if (old) {
-            x0 = old.x0;
-            x1 = old.x1;
-            y0 = old.y0;
-            y1 = old.y1;
-        }
-        else if (!old && oldParent) {
-            // find siblings - same parent, same depth
-            var siblings = this.findSiblings(this.data, d);
-            var siblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(siblings);
-            var oldPrecedingSibling = this.findDatum(previousData, siblings[siblingIndex - 1]);
-            x0 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
-            x1 = oldPrecedingSibling ? oldPrecedingSibling.x1 : oldParent.x0;
-            y0 = d.y0;
-            y1 = d.y1;
-        }
-        else if (!old && !oldParent) {
-            x0 = 0;
-            x1 = 0;
-            y0 = d.y0;
-            y1 = d.y1;
-        }
-        var f = d3_interpolate_1.interpolateObject({ x0: x0, x1: x1, y0: y0, y1: y1 }, d);
-        return function (t) { return _this.arc(f(t)); };
-    };
-    Renderer.prototype.removeArcTween = function (d) {
-        var _this = this;
-        var oldSiblings = this.findSiblings(this.previous || [], d);
-        var currentSiblings = this.findSiblings(this.data, d);
-        var oldSiblingIndex = fp_1.findIndex(function (datum) { return _this.isEqual(datum, d); })(oldSiblings);
-        var oldPrecedingSibling = fp_1.filter
-            .convert({ cap: false })(function (sibling, i) {
-            return i < oldSiblingIndex && !!_this.findDatum(currentSiblings, sibling);
-        })(oldSiblings)
-            .pop();
-        var precedingSibling = this.findDatum(this.data, oldPrecedingSibling);
-        var parent = this.findAncestor(this.data.concat([this.topNode]), d);
-        var x;
-        if (precedingSibling) {
-            x = precedingSibling.x1;
-        }
-        else if (parent) {
-            x = parent.x0;
-        }
-        else {
-            x = 0;
-        }
-        var f = d3_interpolate_1.interpolateObject({ x0: x, x1: x }, d);
-        return function (t) { return _this.arc(f(1 - t)); };
-    };
-    Renderer.prototype.labelTranslate = function (d) {
-        return this.translateString(this.arc.centroid(d));
-    };
-    Renderer.prototype.translateString = function (values) {
-        return "translate(" + values.join(", ") + ")";
+    Renderer.prototype.updateTruncationArrows = function () {
+        var centerNode = this.zoomNode || this.dataHandler.topNode, config = this.state.current.get("config");
+        var data = fp_1.map(fp_1.get("parent"))(fp_1.filter(function (d) {
+            return d.depth - centerNode.depth > config.maxRings && d.parent.depth - centerNode.depth <= config.maxRings;
+        })(this.data));
+        var arrows = this.el
+            .select("g.arrows")
+            .attr("transform", this.translate())
+            .selectAll("path")
+            .data(data, fp_1.get("name"));
+        arrows.exit().remove();
+        arrows
+            .enter()
+            .append("svg:path")
+            .attr("marker-end", "url(#arrow)")
+            .attr("marker-start", "url(#arrow)")
+            .merge(arrows)
+            .attr("d", this.arrowPath.bind(this));
     };
     return Renderer;
 }());

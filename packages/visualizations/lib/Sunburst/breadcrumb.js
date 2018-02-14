@@ -19,16 +19,13 @@ var Breadcrumb = /** @class */ (function () {
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this));
     }
     Breadcrumb.prototype.updateHoverPath = function (payload) {
-        var _this = this;
         var computed = this.state.current.get("computed").renderer;
         var fixedNode = computed.zoomNode || computed.topNode;
         var nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse();
-        setTimeout(function () {
-            _this.update(nodeArray);
-        }, 1e2);
+        this.update(nodeArray);
     };
     Breadcrumb.prototype.label = function (d, i) {
-        return d === "hops" ? "..." : d.data.name;
+        return d === "hops" ? "..." : d.name;
     };
     Breadcrumb.prototype.truncateNodeArray = function (nodeArray) {
         if (nodeArray.length <= 5) {
@@ -44,7 +41,7 @@ var Breadcrumb = /** @class */ (function () {
         var data = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : [];
         // Data join; key function combines name and depth (= position in sequence).
         var trail = this.el.selectAll("div." + styles.breadcrumbItem).data(data, function (d) {
-            return d === "hops" ? d : d.data.name + d.depth;
+            return d === "hops" ? d : d.name + d.depth;
         });
         // Remove exiting nodes.
         trail.exit().remove();
@@ -54,7 +51,7 @@ var Breadcrumb = /** @class */ (function () {
             .append("div")
             .attr("class", function (d) { return styles.breadcrumbItem + " " + (d === "hops" ? d : ""); })
             .style("background-color", function (d) {
-            return d === "hops" ? "#fff" : d.data.color || "#eee";
+            return d === "hops" ? "#fff" : d.color || "#eee";
         });
         entering
             .append("div")
@@ -65,7 +62,7 @@ var Breadcrumb = /** @class */ (function () {
             .append("div")
             .attr("class", "arrow")
             .style("border-left-color", function (d) {
-            return d === "hops" ? "#fff" : d.data.color || "#eee";
+            return d === "hops" ? "#fff" : d.color || "#eee";
         });
         entering.merge(trail).on("click", this.onClick.bind(this));
     };
