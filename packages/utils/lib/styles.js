@@ -7,7 +7,7 @@ exports.injectStylesheet = function (cssString) {
         return;
     }
     var styleEl = document.createElement("style");
-    styleEl.innerText = cssString;
+    styleEl.innerHTML = cssString;
     document.head.appendChild(styleEl);
 };
 exports.fadeIn = glamor_1.css.keyframes({

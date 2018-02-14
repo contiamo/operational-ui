@@ -34,7 +34,7 @@ const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; colo
     borderRadius: 2,
     cursor: "pointer",
     overflow: "hidden",
-    color: readableTextColor(backgroundColor)(["black", "white"]),
+    color: readableTextColor(backgroundColor, ["black", "white"]),
     margin: `0px ${theme.spacing / 2}px 0px 0px`
   }
 })
@@ -54,7 +54,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
   const borderColor = isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)"
   return {
     borderLeft: `1px solid ${borderColor}`,
-    color: readableTextColor(backgroundColor)(["black", "white"]),
+    color: readableTextColor(backgroundColor, ["black", "white"]),
     width: theme.spacing * 1.75,
     display: "flex",
     alignItems: "center",

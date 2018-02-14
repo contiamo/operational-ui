@@ -29,8 +29,8 @@ export interface IProps {
 const Container = glamorous.div(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
   const defaultColor: string = theme.colors.white
   const backgroundColor: string = expandColor(theme, color) || defaultColor
-  const activeBackgroundColor: string = darken(backgroundColor)(5)
-  const textColor = readableTextColor(backgroundColor)([theme.colors.emphasizedText, "white"])
+  const activeBackgroundColor: string = darken(backgroundColor, 5)
+  const textColor = readableTextColor(backgroundColor, [theme.colors.emphasizedText, "white"])
   const activeBoxShadow = theme.shadows.pressed
   const spacing = theme.spacing
 
@@ -53,12 +53,12 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
       ? {
           ":hover": {
             backgroundColor: activeBackgroundColor,
-            color: readableTextColor(activeBackgroundColor)(["white", "#222"])
+            color: readableTextColor(activeBackgroundColor, ["white", "#222"])
           },
 
           ":focus": {
             outline: 0,
-            boxShadow: `0 0 0 3px ${lighten(backgroundColor)(35)}`
+            boxShadow: `0 0 0 3px ${lighten(backgroundColor, 35)}`
           },
 
           ":active": {

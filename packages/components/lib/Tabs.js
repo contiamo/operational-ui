@@ -43,7 +43,7 @@ var TabList = glamorous_1.default.ul({
     var theme = _a.theme;
     return ({
         "&:after": {
-            background: utils_1.darken(theme.colors.gray20)(6)
+            background: utils_1.darken(theme.colors.gray20, 6)
         }
     });
 });

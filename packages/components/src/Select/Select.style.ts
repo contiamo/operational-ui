@@ -45,7 +45,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
       borderColor: theme.colors.gray30,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
-      color: readableTextColor(backgroundColor)(["black", "white"]),
+      color: readableTextColor(backgroundColor, ["black", "white"]),
       outline: "none",
       pointerEvents: disabled ? "none" : "all",
 

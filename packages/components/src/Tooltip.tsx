@@ -74,7 +74,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
       }
       return {}
     })(),
-    color: readableTextColor(backgroundColor)(["black", "white"]),
+    color: readableTextColor(backgroundColor, ["black", "white"]),
 
     // This pseudo-element extends the clickable area of the far-away tooltip.
     "&::after": {

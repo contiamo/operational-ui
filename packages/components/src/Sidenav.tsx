@@ -60,7 +60,7 @@ const Container = glamorous.div(
       overflowY: "auto",
       overflowX: "hidden",
       boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-      color: readableTextColor(backgroundColor)(["black", "white"]),
+      color: readableTextColor(backgroundColor, ["black", "white"]),
       ...hoverWidth,
       "& a:focus": {
         outline: 0

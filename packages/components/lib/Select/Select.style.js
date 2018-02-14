@@ -41,7 +41,7 @@ var Container = glamorous_1.default.div(function (_a) {
         borderColor: theme.colors.gray30,
         opacity: disabled ? 0.5 : 1,
         cursor: "pointer",
-        color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         outline: "none",
         pointerEvents: disabled ? "none" : "all",
         // downward caret.

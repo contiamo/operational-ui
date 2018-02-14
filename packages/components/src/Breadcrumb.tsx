@@ -18,7 +18,7 @@ const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
     marginLeft: 4
   },
   "&:hover": {
-    color: darken(theme.colors.linkText)(5)
+    color: darken(theme.colors.linkText, 5)
   }
 }))
 

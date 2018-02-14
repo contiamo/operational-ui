@@ -42,7 +42,7 @@ const Container = glamorous.div(
 const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: 1,
   height: size,
-  backgroundColor: lighten(theme.colors.sidenavBackground)(10),
+  backgroundColor: lighten(theme.colors.sidenavBackground, 10),
   position: "absolute",
   top: 0,
   left: 24,
@@ -50,7 +50,7 @@ const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     content: "' '",
     width: 7,
     height: 7,
-    backgroundColor: lighten(theme.colors.sidenavBackground)(10),
+    backgroundColor: lighten(theme.colors.sidenavBackground, 10),
     position: "absolute",
     borderRadius: "50%",
     left: -3,

@@ -11,7 +11,7 @@ var Container = glamorous_1.default.div(function (_a) {
         label: "selectfilter",
         padding: 0,
         borderBottom: "1px solid",
-        borderColor: utils_1.darken(backgroundColor)(10),
+        borderColor: utils_1.darken(backgroundColor, 10),
         "& > input": {
             width: "100%",
             padding: theme.spacing / 2,

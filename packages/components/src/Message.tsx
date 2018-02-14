@@ -14,7 +14,7 @@ export interface IProps {
 
 const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
   const backgroundColor = expandColor(theme, color) || theme.colors.white
-  const textColor = readableTextColor(backgroundColor)([theme.colors.black, "white"])
+  const textColor = readableTextColor(backgroundColor, [theme.colors.black, "white"])
 
   return {
     backgroundColor,

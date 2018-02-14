@@ -29,17 +29,17 @@ const Container = glamorous.div(
       position: "relative",
       padding: theme.spacing / 2,
       wordWrap: "break-word",
-      color: readableTextColor(backgroundColor)(["black", "white"]),
+      color: readableTextColor(backgroundColor, ["black", "white"]),
       outline: "none",
 
       ":hover": {
-        backgroundColor: darken(backgroundColor)(5),
-        color: readableTextColor(darken(backgroundColor)(5))(["black", "white"])
+        backgroundColor: darken(backgroundColor, 5),
+        color: readableTextColor(darken(backgroundColor, 5), ["black", "white"])
       },
 
       "&:not(:first-child)": {
         borderTop: "1px solid",
-        borderColor: darken(backgroundColor)(10)
+        borderColor: darken(backgroundColor, 10)
       }
     }
   }

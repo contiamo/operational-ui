@@ -8,7 +8,7 @@ var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.white;
-    var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.black, "white"]);
+    var textColor = utils_1.readableTextColor(backgroundColor, [theme.colors.black, "white"]);
     return {
         backgroundColor: backgroundColor,
         overflow: "hidden",

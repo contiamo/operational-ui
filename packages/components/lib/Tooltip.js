@@ -53,7 +53,7 @@ var Container = glamorous_1.default.div(function (_a) {
             };
         }
         return {};
-    })(), { color: utils_1.readableTextColor(backgroundColor)(["black", "white"]), 
+    })(), { color: utils_1.readableTextColor(backgroundColor, ["black", "white"]), 
         // This pseudo-element extends the clickable area of the far-away tooltip.
         "&::after": {
             content: "''",

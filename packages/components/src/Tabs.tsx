@@ -49,7 +49,7 @@ const TabList = glamorous.ul(
   },
   ({ theme }: { theme: Theme }) => ({
     "&:after": {
-      background: darken(theme.colors.gray20)(6)
+      background: darken(theme.colors.gray20, 6)
     }
   })
 )

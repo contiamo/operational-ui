@@ -23,7 +23,7 @@ var Container = glamorous_1.default.div(function (_a) {
         borderRadius: 2,
         cursor: "pointer",
         overflow: "hidden",
-        color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         margin: "0px " + theme.spacing / 2 + "px 0px 0px"
     };
 });
@@ -45,7 +45,7 @@ var Action = glamorous_1.default.div(function (_a) {
     var borderColor = color_1.isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)";
     return {
         borderLeft: "1px solid " + borderColor,
-        color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         width: theme.spacing * 1.75,
         display: "flex",
         alignItems: "center",

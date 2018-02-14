@@ -14,15 +14,15 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         padding: theme.spacing / 2,
         wordWrap: "break-word",
-        color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         outline: "none",
         ":hover": {
-            backgroundColor: utils_1.darken(backgroundColor)(5),
-            color: utils_1.readableTextColor(utils_1.darken(backgroundColor)(5))(["black", "white"])
+            backgroundColor: utils_1.darken(backgroundColor, 5),
+            color: utils_1.readableTextColor(utils_1.darken(backgroundColor, 5), ["black", "white"])
         },
         "&:not(:first-child)": {
             borderTop: "1px solid",
-            borderColor: utils_1.darken(backgroundColor)(10)
+            borderColor: utils_1.darken(backgroundColor, 10)
         }
     };
 });

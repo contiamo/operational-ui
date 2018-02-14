@@ -20,7 +20,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
     label: "selectfilter",
     padding: 0,
     borderBottom: "1px solid",
-    borderColor: darken(backgroundColor)(10),
+    borderColor: darken(backgroundColor, 10),
 
     "& > input": {
       width: "100%",
