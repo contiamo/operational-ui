@@ -41,9 +41,9 @@ class Renderer {
 
   draw(): void {
     this.compute()
-
-    // Remove focus before updating chart
+    // Remove focus and truncation markers before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.removeTrunactionArrows()
 
     const arcs: TD3Selection = this.el
       .select("g.arcs")

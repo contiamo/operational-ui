@@ -22,8 +22,9 @@ var Renderer = /** @class */ (function () {
     }
     Renderer.prototype.draw = function () {
         this.compute();
-        // Remove focus before updating chart
+        // Remove focus and truncation markers before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.removeTrunactionArrows();
         var arcs = this.el
             .select("g.arcs")
             .attr("transform", this.translate())
