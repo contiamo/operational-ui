@@ -16,7 +16,7 @@ var Facade = /** @class */ (function () {
         this.findNode = function (matchers) {
             return fp_1.find(function (d) {
                 return fp_1.every.convert({ cap: false })(function (value, key) {
-                    return d[key] || d.data[key] === value;
+                    return (d.data[key] || d[key]) === value;
                 })(matchers);
             })(_this.state.readOnly().current.get("computed").renderer.data);
         };

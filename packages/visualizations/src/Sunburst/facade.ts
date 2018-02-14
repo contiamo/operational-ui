@@ -130,7 +130,7 @@ class Facade {
   private findNode = (matchers: IObject): TDatum => {
     return find((d: TDatum): boolean => {
       return every.convert({ cap: false })((value: any, key: string): boolean => {
-        return d[key] || d.data[key] === value
+        return (d.data[key] || d[key]) === value
       })(matchers)
     })(this.state.readOnly().current.get("computed").renderer.data)
   }
