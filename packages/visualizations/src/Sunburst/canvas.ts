@@ -156,7 +156,7 @@ class Canvas {
       drawingDims: IObject = this.drawingDims()
 
     this.container
-      .classed("hidden", this.state.current.get("config").hidden)
+      .style("visibility", this.state.current.get("config").hidden ? "hidden" : "visible")
       .style("width", config.width + "px")
       .style("height", config.height + "px")
     this.el.style("width", drawingDims.width + "px").style("height", drawingDims.height + "px")
