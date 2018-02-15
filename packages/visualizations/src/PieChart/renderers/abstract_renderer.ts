@@ -141,7 +141,6 @@ abstract class AbstractRenderer {
 
   enterAndUpdate(arcs: TD3Selection): void {
     const duration: number = this.state.current.get("config").duration
-    let n: number = 0
 
     const enteringArcs: TD3Selection = arcs
       .enter()

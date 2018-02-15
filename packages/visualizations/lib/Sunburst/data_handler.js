@@ -59,9 +59,10 @@ var DataHandler = /** @class */ (function () {
         }
         var sum = 0;
         var children = node.children;
-        var i = children && children.length;
-        while (--i >= 0) {
+        var i = children && children.length - 1;
+        while (i >= 0) {
             sum += +children[i].value;
+            i = i - 1;
         }
         node.value = sum;
     };

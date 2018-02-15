@@ -313,7 +313,6 @@ class Renderer {
       this.angleScale.domain(angleDomain(1))
       paths.attr("d", this.arc.bind(this))
     } else {
-      let n: number = 0
       paths
         .transition()
         .duration(config.duration)

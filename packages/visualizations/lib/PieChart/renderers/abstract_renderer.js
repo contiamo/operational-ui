@@ -109,7 +109,6 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.enterAndUpdate = function (arcs) {
         var _this = this;
         var duration = this.state.current.get("config").duration;
-        var n = 0;
         var enteringArcs = arcs
             .enter()
             .append("svg:g")

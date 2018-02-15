@@ -81,9 +81,10 @@ class DataHandler {
     }
     let sum: number = 0
     const children = node.children
-    let i: number = children && children.length
-    while (--i >= 0) {
+    let i: number = children && children.length - 1
+    while (i >= 0) {
       sum += +children[i].value
+      i = i - 1
     }
     node.value = sum
   }

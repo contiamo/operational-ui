@@ -262,7 +262,6 @@ var Renderer = /** @class */ (function () {
             paths.attr("d", this.arc.bind(this));
         }
         else {
-            var n = 0;
             paths
                 .transition()
                 .duration(config.duration)
