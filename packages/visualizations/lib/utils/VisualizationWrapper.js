@@ -32,7 +32,6 @@ var VisualizationWrapperInternal = /** @class */ (function (_super) {
     };
     VisualizationWrapperInternal.prototype.componentDidMount = function () {
         // Work with the theme here
-        console.log(this.props.theme);
         this.viz = new this.props.facade(this.containerNode);
         this.updateViz();
         this.viz.draw();

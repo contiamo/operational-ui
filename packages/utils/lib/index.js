@@ -12,6 +12,7 @@ exports.darken = color_1.darken;
 exports.lighten = color_1.lighten;
 exports.transparentize = color_1.transparentize;
 exports.setBrightness = color_1.setBrightness;
+exports.getBrightness = color_1.getBrightness;
 var d3_1 = require("./d3");
 exports.handleWithD3Element = d3_1.handleWithD3Element;
 var theme_1 = require("./theme");
