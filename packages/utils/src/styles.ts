@@ -24,7 +24,7 @@ export const injectStylesheet = (cssString: string): void => {
     return
   }
   const styleEl = document.createElement("style")
-  styleEl.innerText = cssString
+  styleEl.innerHTML = cssString
   document.head.appendChild(styleEl)
 }
 

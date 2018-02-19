@@ -1,2 +1,1 @@
-declare const wrapTheme: (theme: any) => (Comp: any) => any;
-export { wrapTheme };
+export declare const wrapTheme: (theme: any) => (Comp: any) => any;

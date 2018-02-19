@@ -7,7 +7,7 @@ exports.inputFocus = function (_a) {
         outline: 0,
         border: "1px solid",
         borderColor: theme.colors.info,
-        boxShadow: "0 0 0 3px " + utils_1.lighten(theme.colors.info)(40)
+        boxShadow: "0 0 0 3px " + utils_1.lighten(theme.colors.info, 40)
     });
 };
 //# sourceMappingURL=mixins.js.map

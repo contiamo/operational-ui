@@ -3,7 +3,6 @@ import SyntaxHighlighter from "react-syntax-highlighter"
 import marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
-import { lighten } from "@operational/utils"
 import highlight from "highlight.js"
 
 const Container = glamorous.div(({ theme }) => ({

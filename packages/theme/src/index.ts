@@ -1,5 +1,7 @@
 // Type definitions
 
+export { expandColor } from "./utils"
+
 export type ThemeColorName =
   | "brand"
   | "info"
@@ -29,7 +31,6 @@ export type ThemeColorName =
   | "separator"
 
 export interface ThemeColors {
-  [key: string]: string
   brand: string
   info: string
   success: string

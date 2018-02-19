@@ -50,7 +50,7 @@ const PageContent = glamorous.div(({ theme }) => ({
     color: theme.colors.info
   },
   "& a:hover": {
-    color: darken(theme.colors.info)(5)
+    color: darken(theme.colors.info, 5)
   },
   "& h2": {
     ...theme.typography.heading1

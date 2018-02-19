@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import { wrapTheme } from "../theme"
+import { wrapTheme } from "../index"
 
 const ThemelessComp = () => <div>Hello, ThemeWrapper!</div>
 

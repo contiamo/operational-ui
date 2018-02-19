@@ -12,9 +12,8 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 // Wrap each ui component in its own theme provider to make sure the default
 // Contiamo theme is always available. Props are passed along unaltered.
-var wrapTheme = function (theme) { return function (Comp) {
+exports.wrapTheme = function (theme) { return function (Comp) {
     return function (props) { return (React.createElement(glamorous_1.ThemeProvider, { theme: theme },
         React.createElement(Comp, __assign({}, props)))); };
 }; };
-exports.wrapTheme = wrapTheme;
 //# sourceMappingURL=theme.js.map

@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { Div, GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
-import { hexOrColor, readableTextColor, darken } from "@operational/utils"
+import { readableTextColor, darken } from "@operational/utils"
 
 export interface IProps {
   id?: string | number

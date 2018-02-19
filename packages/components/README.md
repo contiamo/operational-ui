@@ -19,11 +19,11 @@ import { Button, OperationalUI } from "@operational/components"
 // Always wrap your interface in the `OperationalUI` wrapper, 
 // which does important setup work, and takes a single child element.
 // See https://www.npmjs.com/package/%40operational%2Fcomponents
-const App = () => {
+const App = () => ( 
   <OperationalUI>
     <Button>Hello</Button>
   </OperationalUI>
-}
+)
 ```
 
 <!-- separator -->

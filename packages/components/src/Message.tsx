@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
-import { hexOrColor, readableTextColor, darken } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
+import { readableTextColor, darken } from "@operational/utils"
 import Icon from "./Icon"
 
 export interface IProps {
@@ -13,8 +13,8 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const backgroundColor: string = color ? (hexOrColor(color)(theme.colors[color] || "white") as string) : "white"
-  const textColor = readableTextColor(backgroundColor)([theme.colors.black, "white"])
+  const backgroundColor = expandColor(theme, color) || theme.colors.white
+  const textColor = readableTextColor(backgroundColor, [theme.colors.black, "white"])
 
   return {
     backgroundColor,

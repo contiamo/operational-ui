@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-import { hexOrColor, darken } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
+import { darken } from "@operational/utils"
 
 export interface IProps {
   id?: string | number
@@ -14,13 +14,13 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }) => {
-  const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : "white"
+  const backgroundColor = expandColor(theme, color) || theme.colors.white
 
   return {
     label: "selectfilter",
     padding: 0,
     borderBottom: "1px solid",
-    borderColor: darken(backgroundColor)(10),
+    borderColor: darken(backgroundColor, 10),
 
     "& > input": {
       width: "100%",
@@ -32,7 +32,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   }
 })
 
-const SelectFilter = (props: IProps) => (
+export default (props: IProps) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <input
       onClick={e => e.stopPropagation()}
@@ -41,5 +41,3 @@ const SelectFilter = (props: IProps) => (
     />
   </Container>
 )
-
-export default SelectFilter

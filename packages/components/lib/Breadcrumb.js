@@ -13,7 +13,7 @@ var Container = glamorous_1.default.span(function (_a) {
             marginLeft: 4
         },
         "&:hover": {
-            color: utils_1.darken(theme.colors.linkText)(5)
+            color: utils_1.darken(theme.colors.linkText, 5)
         }
     });
 });

@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var StatusContainer = glamorous_1.default.div({
     border: "2px solid transparent",
     borderRadius: "50%",
@@ -21,7 +21,7 @@ var StatusContainer = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme, color = _a.color;
     return {
-        backgroundColor: utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info)
+        backgroundColor: theme_1.expandColor(theme, color) || theme.colors.info
     };
 });
 var Content = glamorous_1.default.div({

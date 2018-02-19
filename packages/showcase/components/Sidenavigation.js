@@ -40,7 +40,7 @@ export default ({ pathname, pathmap }) => {
       <Link prefetch href="/">
         <a>
           <SidenavHeader
-            css={{ borderBottom: `1px solid ${lighten(operational.colors.sidenavBackground)(10)}` }}
+            css={{ borderBottom: `1px solid ${lighten(operational.colors.sidenavBackground, 10)}` }}
             label="Operational UI"
             icon={<icons.Operational size={28} />}
           />
