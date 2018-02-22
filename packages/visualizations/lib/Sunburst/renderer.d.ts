@@ -39,8 +39,8 @@ declare class Renderer {
     onMouseOver(d: TDatum, el: Element): void;
     highlightPath(d: TDatum, el: Element): void;
     onMouseLeave(d: TDatum, el: Element): any;
-    removeTrunactionArrows(): void;
-    arrowPath(d: TDatum): string;
+    removeTruncationArrows(): void;
+    arrowTransformation(d: TDatum): string;
     updateTruncationArrows(): void;
 }
 export default Renderer;

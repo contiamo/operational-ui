@@ -11,6 +11,8 @@ var d3_interpolate_1 = require("d3-interpolate");
 var d3_shape_1 = require("d3-shape");
 var d3_scale_1 = require("d3-scale");
 var d3_utils_1 = require("../utils/d3_utils");
+var arrowPath = "M-5 0 L0 -5 L5 0 M-4 -5 L0 -9 L4 -5 M-3 -10 L0 -13 L3 -10";
+var spaceForArrow = 20;
 var Renderer = /** @class */ (function () {
     function Renderer(state, stateWriter, events, el) {
         this.state = state;
@@ -24,7 +26,7 @@ var Renderer = /** @class */ (function () {
         this.compute();
         // Remove focus and truncation markers before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
-        this.removeTrunactionArrows();
+        this.removeTruncationArrows();
         var arcs = this.el
             .select("g.arcs")
             .attr("transform", this.translate())
@@ -225,7 +227,7 @@ var Renderer = /** @class */ (function () {
             }
         })(zoomNode.descendants());
         // If any paths are truncated, reduce radius scale range to allow space for arrow markers
-        this.radiusScale.range([0, this.radius - (truncated ? config.arrowMarkerSize : 0)]);
+        this.radiusScale.range([0, this.radius - (truncated ? config.arrowOffset + spaceForArrow : 0)]);
         // Angle and radius domains
         var angleDomain = d3_interpolate_1.interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1]);
         var radiusDomain = d3_interpolate_1.interpolate(this.radiusScale.domain(), [zoomNode.y0, maxChildRadius]);
@@ -249,7 +251,7 @@ var Renderer = /** @class */ (function () {
         }
         this.zoomNode = zoomNode;
         this.stateWriter("zoomNode", this.zoomNode);
-        this.removeTrunactionArrows();
+        this.removeTruncationArrows();
         var paths = this.el
             .selectAll("path." + styles.arc)
             .attr("pointer-events", "none")
@@ -285,7 +287,8 @@ var Renderer = /** @class */ (function () {
             return;
         }
         var centroid = this.translateBack(this.arc.centroid(d));
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: d, focusPoint: { centroid: centroid } });
+        var hideLabel = d3.select(el).classed(styles.arrow);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: d, hideLabel: hideLabel, focusPoint: { centroid: centroid } });
         this.mouseOverDatum = d;
         this.highlightPath(d, el);
     };
@@ -329,21 +332,20 @@ var Renderer = /** @class */ (function () {
         };
     };
     // Arrows to denote path truncation
-    Renderer.prototype.removeTrunactionArrows = function () {
+    Renderer.prototype.removeTruncationArrows = function () {
         this.el
             .select("g.arrows")
             .selectAll("path")
             .remove();
     };
-    Renderer.prototype.arrowPath = function (d) {
-        var angle = d3_interpolate_1.interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5);
-        var y = function (r) { return -r * Math.cos(angle); };
-        var x = function (r) { return r * Math.sin(angle); };
-        var r = this.radiusScale(d.y1);
-        var arrowSize = Math.max(0.6 * this.state.current.get("config").arrowMarkerSize, 8);
-        return "M" + x(r + 5) + "," + y(r + 5) + " L" + x(r + arrowSize) + "," + y(r + arrowSize);
+    Renderer.prototype.arrowTransformation = function (d) {
+        var radAngle = d3_interpolate_1.interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5);
+        var degAngle = radAngle * 180 / Math.PI;
+        var r = this.radiusScale(d.y1) + this.state.current.get("config").arrowOffset;
+        return "translate(0, " + -r + ") rotate(" + degAngle + " 0 " + r + ")";
     };
     Renderer.prototype.updateTruncationArrows = function () {
+        var _this = this;
         var centerNode = this.zoomNode || this.dataHandler.topNode, config = this.state.current.get("config");
         var data = fp_1.map(fp_1.get("parent"))(fp_1.filter(function (d) {
             return d.depth - centerNode.depth > config.maxRings && d.parent.depth - centerNode.depth <= config.maxRings;
@@ -351,16 +353,18 @@ var Renderer = /** @class */ (function () {
         var arrows = this.el
             .select("g.arrows")
             .attr("transform", this.translate())
-            .selectAll("path")
+            .selectAll("path." + styles.arrow)
             .data(data, fp_1.get("name"));
         arrows.exit().remove();
         arrows
             .enter()
             .append("svg:path")
-            .attr("marker-end", "url(#arrow)")
-            .attr("marker-start", "url(#arrow)")
+            .attr("class", styles.arrow)
             .merge(arrows)
-            .attr("d", this.arrowPath.bind(this));
+            .attr("d", arrowPath)
+            .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
+            .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); })
+            .attr("transform", this.arrowTransformation.bind(this));
     };
     return Renderer;
 }());

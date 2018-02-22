@@ -97,6 +97,15 @@ var rootLabelStyle = {
     "& .name": __assign({}, theme_1.operational.typography.small),
     "& .value": __assign({}, theme_1.operational.typography.heading1)
 };
+var arrowStyle = {
+    fill: "transparent",
+    stroke: "#bbb",
+    strokeWidth: "1px",
+    cursor: "zoom-in",
+    "&:hover": {
+        stroke: "#aaa"
+    }
+};
 exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
@@ -104,4 +113,5 @@ exports.breadcrumb = glamor_1.css(breadcrumbStyle).toString();
 exports.breadcrumbItem = glamor_1.css(breadcrumbItemStyle).toString();
 exports.centerCircle = glamor_1.css(centerCircleStyle).toString();
 exports.rootLabel = glamor_1.css(rootLabelStyle).toString();
+exports.arrow = glamor_1.css(arrowStyle).toString();
 //# sourceMappingURL=styles.js.map

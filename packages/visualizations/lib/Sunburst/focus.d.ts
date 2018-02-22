@@ -5,6 +5,7 @@ declare class Focus extends AbstractFocus {
     onElementHover(payload: {
         focusPoint: IObject;
         d: TDatum;
+        hideLabel?: boolean;
     }): void;
     percentageString(datum: TDatum): string;
     singlePercentageString(datum: TDatum, comparison: TDatum): string;

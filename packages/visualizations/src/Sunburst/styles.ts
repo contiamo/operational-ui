@@ -107,6 +107,16 @@ const rootLabelStyle = {
   }
 }
 
+const arrowStyle = {
+  fill: "transparent",
+  stroke: "#bbb",
+  strokeWidth: "1px",
+  cursor: "zoom-in",
+  "&:hover": {
+    stroke: "#aaa"
+  }
+}
+
 export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
@@ -114,3 +124,4 @@ export const breadcrumb = css(breadcrumbStyle).toString()
 export const breadcrumbItem = css(breadcrumbItemStyle).toString()
 export const centerCircle = css(centerCircleStyle).toString()
 export const rootLabel = css(rootLabelStyle).toString()
+export const arrow = css(arrowStyle).toString()

@@ -12,6 +12,9 @@ import { arc as d3Arc } from "d3-shape"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { withD3Element, transitionIfVisible, onTransitionEnd } from "../utils/d3_utils"
 
+const arrowPath: string = "M-5 0 L0 -5 L5 0 M-4 -5 L0 -9 L4 -5 M-3 -10 L0 -13 L3 -10"
+const spaceForArrow: number = 20
+
 class Renderer {
   angleScale: any
   arc: any
@@ -43,7 +46,7 @@ class Renderer {
     this.compute()
     // Remove focus and truncation markers before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
-    this.removeTrunactionArrows()
+    this.removeTruncationArrows()
 
     const arcs: TD3Selection = this.el
       .select("g.arcs")
@@ -263,7 +266,7 @@ class Renderer {
     })(zoomNode.descendants())
 
     // If any paths are truncated, reduce radius scale range to allow space for arrow markers
-    this.radiusScale.range([0, this.radius - (truncated ? config.arrowMarkerSize : 0)])
+    this.radiusScale.range([0, this.radius - (truncated ? config.arrowOffset + spaceForArrow : 0)])
 
     // Angle and radius domains
     const angleDomain = d3Interpolate(this.angleScale.domain(), [zoomNode.x0, zoomNode.x1])
@@ -297,7 +300,7 @@ class Renderer {
     this.zoomNode = zoomNode
     this.stateWriter("zoomNode", this.zoomNode)
 
-    this.removeTrunactionArrows()
+    this.removeTruncationArrows()
 
     const paths: TD3Selection = this.el
       .selectAll(`path.${styles.arc}`)
@@ -338,7 +341,9 @@ class Renderer {
       return
     }
     const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
+    const hideLabel: boolean = d3.select(el).classed(styles.arrow)
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, hideLabel, focusPoint: { centroid } })
+
     this.mouseOverDatum = d
     this.highlightPath(d, el)
   }
@@ -392,20 +397,18 @@ class Renderer {
   }
 
   // Arrows to denote path truncation
-  removeTrunactionArrows(): void {
+  removeTruncationArrows(): void {
     this.el
       .select("g.arrows")
       .selectAll("path")
       .remove()
   }
 
-  arrowPath(d: TDatum): string {
-    const angle: number = d3Interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5)
-    const y: any = (r: number): number => -r * Math.cos(angle)
-    const x: any = (r: number): number => r * Math.sin(angle)
-    const r: number = this.radiusScale(d.y1)
-    const arrowSize: number = Math.max(0.6 * this.state.current.get("config").arrowMarkerSize, 8)
-    return `M${x(r + 5)},${y(r + 5)} L${x(r + arrowSize)},${y(r + arrowSize)}`
+  arrowTransformation(d: TDatum): string {
+    const radAngle: number = d3Interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5)
+    const degAngle: number = radAngle * 180 / Math.PI
+    const r: number = this.radiusScale(d.y1) + this.state.current.get("config").arrowOffset
+    return `translate(0, ${-r}) rotate(${degAngle} 0 ${r})`
   }
 
   updateTruncationArrows(): void {
@@ -421,7 +424,7 @@ class Renderer {
     const arrows: TD3Selection = this.el
       .select("g.arrows")
       .attr("transform", this.translate())
-      .selectAll("path")
+      .selectAll(`path.${styles.arrow}`)
       .data(data, get("name"))
 
     arrows.exit().remove()
@@ -429,10 +432,12 @@ class Renderer {
     arrows
       .enter()
       .append("svg:path")
-      .attr("marker-end", "url(#arrow)")
-      .attr("marker-start", "url(#arrow)")
+      .attr("class", styles.arrow)
       .merge(arrows)
-      .attr("d", this.arrowPath.bind(this))
+      .attr("d", arrowPath)
+      .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
+      .on("click", (d: TDatum): void => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
+      .attr("transform", this.arrowTransformation.bind(this))
   }
 }
 

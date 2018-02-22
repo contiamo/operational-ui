@@ -309,8 +309,8 @@ const simpleSnippet = `
 const propDescription = {
   Config: [
     {
-      name: "arrowMarkerSize",
-      description: "Width/height of arrow marker used to denote truncated path",
+      name: "arrowOffset",
+      description: "Offset of truncation arrows from edge of visualization",
       defaultValue: "15",
       type: "number",
       optional: true

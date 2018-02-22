@@ -24,7 +24,6 @@ class Canvas {
     this.breadcrumb = this.insertBreadcrumb()
     this.el = this.insertEl()
     this.rootLabel = this.insertRootLabel()
-    this.defineMarkers()
     this.listenToMouseOver()
     this.insertFocusElements()
     this.stateWriter("elements", this.elements)
@@ -65,22 +64,6 @@ class Canvas {
     this.container.node().appendChild(el.node())
     this.elMap.rootLabel = el
     return el
-  }
-
-  defineMarkers(): void {
-    const arrowMarkerSize: number = this.state.current.get("config").arrowMarkerSize
-    this.el
-      .append("svg:defs")
-      .append("svg:marker")
-      .attr("id", "arrow")
-      .attr("markerHeight", arrowMarkerSize)
-      .attr("markerWidth", arrowMarkerSize * 0.6)
-      .attr("markerUnits", "strokeWidth")
-      .attr("orient", "auto")
-      .attr("viewBox", "-3 -5 5 10")
-      .append("svg:path")
-      .attr("d", "M 0,0 m -3,-5 L 2,0 L -3,5 L 0,0")
-      .attr("fill", "#aaa")
   }
 
   prefixedId(id: string): string {

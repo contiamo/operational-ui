@@ -11,8 +11,12 @@ class Focus extends AbstractFocus {
     super(state, stateWriter, events, els)
   }
 
-  onElementHover(payload: { focusPoint: IObject; d: TDatum }): void {
+  onElementHover(payload: { focusPoint: IObject; d: TDatum; hideLabel?: boolean }): void {
     this.remove()
+
+    if (payload.hideLabel) {
+      return
+    }
 
     const computed: IObject = this.state.current.get("computed")
     if (payload.d === computed.renderer.topNode) {
