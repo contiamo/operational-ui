@@ -55,12 +55,12 @@ class Renderer {
       .data(this.data, get("name"))
 
     const config: IConfig = this.state.current.get("config")
-    this.exit(arcs, config.duration, document.hidden || config.suppressAnimation)
-    this.enterAndUpdate(arcs, config.duration, document.hidden || config.suppressAnimation)
+    this.exit(arcs, config.duration, document.hidden || config.disableAnimations)
+    this.enterAndUpdate(arcs, config.duration, document.hidden || config.disableAnimations)
   }
 
-  exit(arcs: TD3Selection, duration: number, suppressAnimation: boolean): void {
-    const exitingArcs: any = suppressAnimation
+  exit(arcs: TD3Selection, duration: number, disableAnimations: boolean): void {
+    const exitingArcs: any = disableAnimations
       ? arcs.exit()
       : arcs
           .exit()
@@ -74,7 +74,7 @@ class Renderer {
     return `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
   }
 
-  enterAndUpdate(arcs: TD3Selection, duration: number, suppressAnimation: boolean): void {
+  enterAndUpdate(arcs: TD3Selection, duration: number, disableAnimations: boolean): void {
     const updatingArcs: TD3Selection = arcs
       .enter()
       .append("svg:path")
@@ -84,7 +84,7 @@ class Renderer {
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("click", (d: TDatum): void => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
 
-    if (suppressAnimation) {
+    if (disableAnimations) {
       updatingArcs.attr("d", this.arc.bind(this))
       this.updateTruncationArrows()
     } else {

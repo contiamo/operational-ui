@@ -20,9 +20,9 @@ declare class Renderer {
     zoomNode: TDatum;
     constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
     draw(): void;
-    exit(arcs: TD3Selection, duration: number, suppressAnimation: boolean): void;
+    exit(arcs: TD3Selection, duration: number, disableAnimations: boolean): void;
     arcClass(d: TDatum): string;
-    enterAndUpdate(arcs: TD3Selection, duration: number, suppressAnimation: boolean): void;
+    enterAndUpdate(arcs: TD3Selection, duration: number, disableAnimations: boolean): void;
     compute(): void;
     endAngle(d: TDatum): number;
     translate(): string;

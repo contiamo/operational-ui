@@ -33,11 +33,11 @@ var Renderer = /** @class */ (function () {
             .selectAll("path." + styles.arc)
             .data(this.data, fp_1.get("name"));
         var config = this.state.current.get("config");
-        this.exit(arcs, config.duration, document.hidden || config.suppressAnimation);
-        this.enterAndUpdate(arcs, config.duration, document.hidden || config.suppressAnimation);
+        this.exit(arcs, config.duration, document.hidden || config.disableAnimations);
+        this.enterAndUpdate(arcs, config.duration, document.hidden || config.disableAnimations);
     };
-    Renderer.prototype.exit = function (arcs, duration, suppressAnimation) {
-        var exitingArcs = suppressAnimation
+    Renderer.prototype.exit = function (arcs, duration, disableAnimations) {
+        var exitingArcs = disableAnimations
             ? arcs.exit()
             : arcs
                 .exit()
@@ -49,7 +49,7 @@ var Renderer = /** @class */ (function () {
     Renderer.prototype.arcClass = function (d) {
         return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : "");
     };
-    Renderer.prototype.enterAndUpdate = function (arcs, duration, suppressAnimation) {
+    Renderer.prototype.enterAndUpdate = function (arcs, duration, disableAnimations) {
         var _this = this;
         var updatingArcs = arcs
             .enter()
@@ -59,7 +59,7 @@ var Renderer = /** @class */ (function () {
             .style("fill", fp_1.get("color"))
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
             .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); });
-        if (suppressAnimation) {
+        if (disableAnimations) {
             updatingArcs.attr("d", this.arc.bind(this));
             this.updateTruncationArrows();
         }

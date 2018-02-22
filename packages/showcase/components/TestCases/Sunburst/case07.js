@@ -4917,7 +4917,7 @@ export const marathon = ({ test, afterAll, container }) => {
   test("Renders the chart", () => {
     viz.data(data)
     viz.config({
-      suppressAnimation: true,
+      disableAnimations: true,
       width: 1000,
       height: 1000,
       outerBorderMargin: 5,

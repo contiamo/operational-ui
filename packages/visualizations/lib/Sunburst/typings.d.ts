@@ -10,7 +10,7 @@ export interface IConfig {
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
     propagateColors: boolean;
-    suppressAnimation: boolean;
+    disableAnimations: boolean;
     sort: boolean;
     uid: string;
     visualizationName: string;

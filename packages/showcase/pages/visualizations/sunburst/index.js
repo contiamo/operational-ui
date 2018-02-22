@@ -372,8 +372,8 @@ const propDescription = {
       optional: true
     },
     {
-      name: "suppressAnimation",
-      description: "If true, animations when 'draw' is called are suppressed. Improves speed for large datasets.",
+      name: "disableAnimations",
+      description: "If true, animations when 'draw' is called are disabled. Improves speed for large datasets.",
       defaultValue: "false",
       type: "boolean",
       optional: true
