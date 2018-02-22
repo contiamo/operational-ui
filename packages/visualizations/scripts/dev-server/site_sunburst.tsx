@@ -23,7 +23,7 @@ const data = {
   children: [
     {
       name: "Europe",
-      value: 50000,
+      value: 52000,
       color: "#0f0",
       children: [
         {
@@ -302,3 +302,8 @@ const viz: Sunburst = new Sunburst(containerNode)
 viz.data(data)
 viz.config({ maxRings: 4 })
 viz.draw()
+
+const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} accessors={accessors} /></OperationalUI>
+
+render(<App />, containerNode)
+
