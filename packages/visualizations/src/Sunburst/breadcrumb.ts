@@ -77,6 +77,7 @@ class Breadcrumb {
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
       .style("background-color", this.backgroundColor)
+      .attr("title", this.label)
 
     entering
       .append("div")

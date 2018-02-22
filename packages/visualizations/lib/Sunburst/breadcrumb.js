@@ -60,7 +60,8 @@ var Breadcrumb = /** @class */ (function () {
             .enter()
             .append("div")
             .attr("class", function (d) { return styles.breadcrumbItem + " " + (d === "hops" ? d : ""); })
-            .style("background-color", this.backgroundColor);
+            .style("background-color", this.backgroundColor)
+            .attr("title", this.label);
         entering
             .append("div")
             .attr("class", "label")
