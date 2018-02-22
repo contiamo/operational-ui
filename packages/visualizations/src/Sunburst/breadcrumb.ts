@@ -57,7 +57,7 @@ class Breadcrumb {
   }
 
   labelColor(d: TDatum): string {
-    return readableTextColor(this.backgroundColor(d))(["black", "white"])
+    return readableTextColor(this.backgroundColor(d), ["black", "white"])
   }
 
   update(nodeArray: TDatum[]): void {

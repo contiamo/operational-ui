@@ -45,7 +45,7 @@ var Breadcrumb = /** @class */ (function () {
         return d === "hops" ? "#fff" : d.color || "#eee";
     };
     Breadcrumb.prototype.labelColor = function (d) {
-        return utils_1.readableTextColor(this.backgroundColor(d))(["black", "white"]);
+        return utils_1.readableTextColor(this.backgroundColor(d), ["black", "white"]);
     };
     Breadcrumb.prototype.update = function (nodeArray) {
         var data = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : [];
