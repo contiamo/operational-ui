@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
+var theme_1 = require("@operational/theme");
 var utils_1 = require("@operational/utils");
 var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color] || "white") : "white";
-    var textColor = utils_1.readableTextColor(backgroundColor)([theme.colors.black, "white"]);
+    var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.white;
+    var textColor = utils_1.readableTextColor(backgroundColor, [theme.colors.black, "white"]);
     return {
         backgroundColor: backgroundColor,
         overflow: "hidden",

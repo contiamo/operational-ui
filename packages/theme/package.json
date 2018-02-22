@@ -1,6 +1,6 @@
 {
   "name": "@operational/theme",
-  "version": "0.1.0-12",
+  "version": "0.1.0-13",
   "description": "Customization theme for the Operational UI packages.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

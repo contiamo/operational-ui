@@ -1,12 +1,15 @@
 import * as React from "react"
+import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
+import { OperationalUI, Progress, Spinner } from "@operational/components"
 
 injectStylesheet(baseStylesheet(operational))
 
 const containerNode = document.getElementById("app")
 
 import Sunburst from "../../src/Sunburst/facade"
+import { VisualizationWrapper } from "../../src/index"
 
 const accessors: any = {
   children: (d: any): any[] => d.children,
@@ -269,6 +272,7 @@ const data = {
     {
       name: "Africa",
       value: 4130,
+      color: "#ff0",
       children: [
         {
           name: "South Africa",

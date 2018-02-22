@@ -1,8 +1,7 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import { withTheme } from "glamorous"
-import { Theme } from "@operational/theme"
-import { hexOrColor } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
 
 import * as BrandIcons from "./Icon/BrandIcon"
 import { ReactFeatherIconName } from "./Icon/ReactFeatherIcon"
@@ -24,7 +23,7 @@ export interface IPropsWithTheme extends IProps {
 }
 
 const Icon = (props: IPropsWithTheme) => {
-  const color_: string = props.color && (hexOrColor(props.color)(props.theme.colors[props.color]) as string)
+  const color_: string = expandColor(props.theme, props.color) || "currentColor"
   const defaultSize: number = props.theme.spacing * 1.5
 
   if (ReactFeather.hasOwnProperty(props.name)) {

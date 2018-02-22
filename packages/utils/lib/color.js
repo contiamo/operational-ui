@@ -1,22 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var colorCalculator = require("tinycolor2");
-var hexOrColor = function (color) {
-    /*
-        Allow for named colors from the theme, AND hex codes.
-        Test for #f00b4r, or just #foo. If it doesn't match,
-        check for a named color in the theme.
-  
-        Usage: hexOrColor("MY COLOR LOL")("#foob47") where the
-        first argument is a string that could possibly be a hex code.
-        If it IS a hex code, use it. If not, use the hex code in the
-        returned function.
-      */
-    var hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
-    var isColorACodeOrHex = hexRegEx.test(color);
-    return function (fallback) { return (isColorACodeOrHex ? color : fallback); };
-};
-exports.hexOrColor = hexOrColor;
 var getBrightestColor = function (colors) {
     return colors.reduce(function (acc, curr) {
         if (curr.l > acc.l) {
@@ -25,40 +9,38 @@ var getBrightestColor = function (colors) {
         return acc;
     });
 };
-var readableTextColor = function (background) { return function (workingColors) {
-    var backgroundHsl = colorCalculator(background).toHsl();
+exports.readableTextColor = function (backgroundColor, workingColors) {
+    var backgroundHsl = colorCalculator(backgroundColor).toHsl();
     var workingColorHsls = workingColors.map(function (color) { return colorCalculator(color).toHsl(); });
     // For reasonably saturated colors on the bright side, still pick the lightest color.
     if (backgroundHsl.s > 0.4 && backgroundHsl.l < 0.75) {
         return colorCalculator(getBrightestColor(workingColorHsls)).toHexString();
     }
-    return colorCalculator.mostReadable(background, workingColors).toHexString();
-}; };
-exports.readableTextColor = readableTextColor;
-var darken = function (color) { return function (percentage) {
+    return colorCalculator.mostReadable(backgroundColor, workingColors).toHexString();
+};
+exports.darken = function (color, percentage) {
     return colorCalculator(color)
         .darken(percentage)
         .toString();
-}; };
-exports.darken = darken;
-var lighten = function (color) { return function (percentage) {
+};
+exports.lighten = function (color, percentage) {
     return colorCalculator(color)
         .lighten(percentage)
         .toString();
-}; };
-exports.lighten = lighten;
-// @todo -> Flush out edge cases. Currently, this method only works well for regular common accent colors such as blue or green.
-var setBrightness = function (color, targetBrightness) {
+};
+exports.getBrightness = function (color) {
+    var c = colorCalculator(color);
+    return c.getBrightness();
+};
+exports.setBrightness = function (color, targetBrightness) {
     var c = colorCalculator(color);
     var brightness = c.getBrightness();
     return c.brighten(targetBrightness / brightness * 100 - 100).toString();
 };
-exports.setBrightness = setBrightness;
-var transparentize = function (color) { return function (percentage) {
+exports.transparentize = function (color) { return function (percentage) {
     return (function (_a) {
         var r = _a.r, g = _a.g, b = _a.b;
         return "rgba(" + r + ", " + g + ", " + b + ", " + 255 * (100 - percentage) / 100 + ")";
     })(colorCalculator(color).toRgb());
 }; };
-exports.transparentize = transparentize;
 //# sourceMappingURL=color.js.map

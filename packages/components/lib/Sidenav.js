@@ -21,9 +21,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, fix = _a.fix, expanded = _a.expanded, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth, width = _a.width;
-    var backgroundColor = color ? utils_1.hexOrColor(color)(theme.colors[color]) : theme.colors.sidenavBackground;
+    var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.sidenavBackground;
     var hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
@@ -33,7 +34,7 @@ var Container = glamorous_1.default.div(function (_a) {
             }
         }
         : {};
-    return __assign({ backgroundColor: backgroundColor, label: "sidenav", width: expanded ? expandedWidth : width, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflowY: "auto", overflowX: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: utils_1.readableTextColor(backgroundColor)(["black", "white"]) }, hoverWidth, { "& a:focus": {
+    return __assign({ backgroundColor: backgroundColor, label: "sidenav", width: expanded ? expandedWidth : width, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflowY: "auto", overflowX: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: utils_1.readableTextColor(backgroundColor, ["black", "white"]) }, hoverWidth, { "& a:focus": {
             outline: 0
         } });
 });

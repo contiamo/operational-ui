@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var Icon_1 = require("./Icon");
 var color_1 = require("./utils/color");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, hasChip = _a.hasChip;
-    var backgroundColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
+    var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.info;
     var border = color_1.isWhite(backgroundColor) ? "1px solid " + theme.colors.gray20 : "0";
     return {
         backgroundColor: backgroundColor,
@@ -22,7 +23,7 @@ var Container = glamorous_1.default.div(function (_a) {
         borderRadius: 2,
         cursor: "pointer",
         overflow: "hidden",
-        color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         margin: "0px " + theme.spacing / 2 + "px 0px 0px"
     };
 });
@@ -40,11 +41,11 @@ var Content = glamorous_1.default.div(function (_a) {
 });
 var Action = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
-    var backgroundColor = utils_1.hexOrColor(color)(theme.colors[color] || theme.colors.info);
+    var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.info;
     var borderColor = color_1.isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)";
     return {
         borderLeft: "1px solid " + borderColor,
-        color: utils_1.readableTextColor(backgroundColor)(["black", "white"]),
+        color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         width: theme.spacing * 1.75,
         display: "flex",
         alignItems: "center",

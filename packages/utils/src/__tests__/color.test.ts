@@ -1,4 +1,4 @@
-import { hexOrColor, readableTextColor, darken, lighten, transparentize, setBrightness } from "../color"
+import { readableTextColor, darken, lighten, transparentize, setBrightness } from "../index"
 
 xdescribe("Color utils", () => {
   it("Should give me a hex code or a color presented by name", () => {

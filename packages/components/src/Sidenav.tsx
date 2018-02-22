@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { hexOrColor, readableTextColor } from "@operational/utils"
-import { Theme } from "@operational/theme"
+import { readableTextColor } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
 
 export interface IProps {
   id?: string | number
@@ -37,7 +37,7 @@ const Container = glamorous.div(
     expanded?: boolean
     width: number
   }): {} => {
-    const backgroundColor = color ? hexOrColor(color)(theme.colors[color]) : theme.colors.sidenavBackground
+    const backgroundColor = expandColor(theme, color) || theme.colors.sidenavBackground
     const hoverWidth = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
@@ -60,7 +60,7 @@ const Container = glamorous.div(
       overflowY: "auto",
       overflowX: "hidden",
       boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-      color: readableTextColor(backgroundColor)(["black", "white"]),
+      color: readableTextColor(backgroundColor, ["black", "white"]),
       ...hoverWidth,
       "& a:focus": {
         outline: 0

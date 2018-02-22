@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var ReactFeather = require("react-feather");
 var glamorous_1 = require("glamorous");
-var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var BrandIcons = require("./Icon/BrandIcon");
 var Icon = function (props) {
-    var color_ = props.color && utils_1.hexOrColor(props.color)(props.theme.colors[props.color]);
+    var color_ = theme_1.expandColor(props.theme, props.color) || "currentColor";
     var defaultSize = props.theme.spacing * 1.5;
     if (ReactFeather.hasOwnProperty(props.name)) {
         var Comp = ReactFeather[props.name];

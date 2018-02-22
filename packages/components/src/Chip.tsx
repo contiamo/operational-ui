@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { darken, hexOrColor, readableTextColor } from "@operational/utils"
-import { Theme } from "@operational/theme"
+import { darken, readableTextColor } from "@operational/utils"
+import { Theme, expandColor } from "@operational/theme"
 
 import Icon, { IconName } from "./Icon"
 import { isWhite } from "./utils/color"
@@ -18,7 +18,7 @@ export interface IProps {
 }
 
 const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): {} => {
-  const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
+  const backgroundColor = expandColor(theme, color) || theme.colors.info
   const border = isWhite(backgroundColor) ? `1px solid ${theme.colors.gray20}` : "0"
 
   return {
@@ -34,7 +34,7 @@ const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; colo
     borderRadius: 2,
     cursor: "pointer",
     overflow: "hidden",
-    color: readableTextColor(backgroundColor)(["black", "white"]),
+    color: readableTextColor(backgroundColor, ["black", "white"]),
     margin: `0px ${theme.spacing / 2}px 0px 0px`
   }
 })
@@ -50,11 +50,11 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const backgroundColor = hexOrColor(color)(theme.colors[color] || theme.colors.info)
+  const backgroundColor = expandColor(theme, color) || theme.colors.info
   const borderColor = isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)"
   return {
     borderLeft: `1px solid ${borderColor}`,
-    color: readableTextColor(backgroundColor)(["black", "white"]),
+    color: readableTextColor(backgroundColor, ["black", "white"]),
     width: theme.spacing * 1.75,
     display: "flex",
     alignItems: "center",

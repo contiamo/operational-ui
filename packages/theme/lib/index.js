@@ -9,6 +9,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("./utils");
+exports.expandColor = utils_1.expandColor;
 // Default theme definition
 var colors = {
     brand: "#000000",
@@ -18,6 +20,28 @@ var colors = {
     error: "#DE1A1A",
     white: "#FFFFFF",
     black: "#000000",
+    visualizationPalette: [
+        "#2ca02c",
+        "#1f77b4",
+        "#ff7f0e",
+        "#d62728",
+        "#9467bd",
+        "#17becf",
+        "#7f7f7f",
+        "#e377c2",
+        "#8c564b",
+        "#bcbd22",
+        "#98df8a",
+        "#aec7e8",
+        "#ffbb78",
+        "#ff9896",
+        "#c5b0d5",
+        "#9edae5",
+        "#c7c7c7",
+        "#f7b6d2",
+        "#c49c94",
+        "#dbdb8d"
+    ],
     gray10: "#F8F8F8",
     gray20: "#e8e8e8",
     gray30: "#D0D0D0",

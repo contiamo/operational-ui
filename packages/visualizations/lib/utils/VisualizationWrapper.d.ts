@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
+import { Theme } from "@operational/theme";
 export interface IProps {
     style?: {};
     className?: string;
@@ -8,13 +9,8 @@ export interface IProps {
     data?: any;
     config?: any;
 }
-declare class VisualizationWrapper extends React.Component<IProps, {}> {
-    viz: any;
-    containerNode: HTMLElement;
-    render(): JSX.Element;
-    componentDidMount(): void;
-    componentDidUpdate(): void;
-    updateViz(): void;
-    componentWillUnmount(): void;
+export interface IPropsWithTheme extends IProps {
+    theme: Theme;
 }
-export default VisualizationWrapper;
+declare const WrappedVisualizationWrapper: React.StatelessComponent<IProps>;
+export default WrappedVisualizationWrapper;

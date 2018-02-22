@@ -17,7 +17,7 @@ var Container = glamorous_1.default.div(function (_a) {
         ? {
             cursor: "pointer",
             "&:hover": {
-                backgroundColor: utils_1.darken(theme.colors.white)(2)
+                backgroundColor: utils_1.darken(theme.colors.white, 2)
             }
         }
         : {}, { "&:not(:first-child)": {

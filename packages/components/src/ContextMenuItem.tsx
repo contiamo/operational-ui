@@ -24,7 +24,7 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
     ? {
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: darken(theme.colors.white)(2)
+          backgroundColor: darken(theme.colors.white, 2)
         }
       }
     : {},

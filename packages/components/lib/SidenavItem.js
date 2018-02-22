@@ -33,7 +33,7 @@ var ConnectorStrip = glamorous_1.default.div(function (_a) {
     return ({
         width: 1,
         height: size,
-        backgroundColor: utils_1.lighten(theme.colors.sidenavBackground)(10),
+        backgroundColor: utils_1.lighten(theme.colors.sidenavBackground, 10),
         position: "absolute",
         top: 0,
         left: 24,
@@ -41,7 +41,7 @@ var ConnectorStrip = glamorous_1.default.div(function (_a) {
             content: "' '",
             width: 7,
             height: 7,
-            backgroundColor: utils_1.lighten(theme.colors.sidenavBackground)(10),
+            backgroundColor: utils_1.lighten(theme.colors.sidenavBackground, 10),
             position: "absolute",
             borderRadius: "50%",
             left: -3,
