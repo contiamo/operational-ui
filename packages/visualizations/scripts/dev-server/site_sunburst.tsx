@@ -11,21 +11,15 @@ const containerNode = document.getElementById("app")
 import Sunburst from "../../src/Sunburst/facade"
 import { VisualizationWrapper } from "../../src/index"
 
-const accessors: any = {
-  children: (d: any): any[] => d.children,
-  name: (d: any): string => d.name,
-  value: (d: any): number => d.value,
-  color: (d: any): string => d.color
-}
+const config: any = { maxRings: 4 }
 
 const data = {
   name: "All",
-  value: 140000,
   children: [
     {
       name: "Europe",
-      color: "0f0",
       value: 52000,
+      color: "#0f0",
       children: [
         {
           name: "UK",
@@ -73,11 +67,31 @@ const data = {
           children: [
             {
               name: "Berlin",
-              value: 1650,
               children: [
                 {
                   name: "Kreuzberg",
-                  value: 593
+                  value: 693,
+                  children: [
+                    {
+                      name: "test",
+                      children: [
+                        {
+                          name: "test level 2",
+                          children: [
+                            {
+                              name: "test level 3",
+                              children: [
+                                {
+                                  name: "test level 4",
+                                  value: 20
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   name: "Prenzlauer Berg",
@@ -139,7 +153,7 @@ const data = {
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -200,12 +214,11 @@ const data = {
     },
     {
       name: "North America",
-      color: "f00",
-      value: 43000,
+      color: "#f00",
       children: [
         {
           name: "USA",
-          value: 33218,
+          value: "33218",
           children: [
             {
               name: "Washington DC",
@@ -279,17 +292,8 @@ const data = {
   ]
 }
 
-const viz: Sunburst = new Sunburst(containerNode)
-viz.data(data)
-// viz.config({
-//   zoomNode: {
-//     name: "North America"
-//   }
-// })
-viz.accessors("series", accessors)
-viz.accessors("data", { data: (d: any) => d.data })
-// viz.draw()
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} accessors={accessors} /></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} /></OperationalUI>
 
 render(<App />, containerNode)
+

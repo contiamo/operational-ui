@@ -20,6 +20,9 @@ var Focus = /** @class */ (function (_super) {
     }
     Focus.prototype.onElementHover = function (payload) {
         this.remove();
+        if (payload.hideLabel) {
+            return;
+        }
         var computed = this.state.current.get("computed");
         if (payload.d === computed.renderer.topNode) {
             return;

@@ -9,17 +9,17 @@ const data = {
   children: [
     {
       name: "Europe",
-      color: "0f0",
+      color: "#0f0",
       value: 50000
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400
     },
     {
       name: "North America",
-      color: "f00",
+      color: "#f00",
       value: 36780
     }
   ]
@@ -31,22 +31,22 @@ const data1 = {
   children: [
     {
       name: "Europe",
-      color: "0f0",
+      color: "#0f0",
       value: 50000
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400
     },
     {
       name: "North America",
-      color: "f00",
+      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "00f",
+      color: "#00f",
       value: 25200
     }
   ]
@@ -58,12 +58,12 @@ const data2 = {
   children: [
     {
       name: "Europe",
-      color: "0f0",
+      color: "#0f0",
       value: 50000
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400
     },
     {
@@ -73,12 +73,12 @@ const data2 = {
     },
     {
       name: "North America",
-      color: "f00",
+      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "00f",
+      color: "#00f",
       value: 25200
     }
   ]
@@ -90,7 +90,7 @@ const data3 = {
   children: [
     {
       name: "Europe",
-      color: "0f0",
+      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -113,7 +113,7 @@ const data3 = {
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -145,12 +145,12 @@ const data3 = {
     },
     {
       name: "North America",
-      color: "f00",
+      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "00f",
+      color: "#00f",
       value: 25200
     }
   ]
@@ -162,7 +162,7 @@ const data4 = {
   children: [
     {
       name: "Europe",
-      color: "0f0",
+      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -185,7 +185,7 @@ const data4 = {
     },
     {
       name: "Asia",
-      color: "0ff",
+      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -217,7 +217,7 @@ const data4 = {
     },
     {
       name: "North America",
-      color: "f00",
+      color: "#f00",
       value: 45700,
       children: [
         {
@@ -270,7 +270,7 @@ const data4 = {
     },
     {
       name: "Africa",
-      color: "00f",
+      color: "#00f",
       value: 25200
     }
   ]

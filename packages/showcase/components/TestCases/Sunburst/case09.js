@@ -292,8 +292,24 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
+    viz.config({ maxRings: 4 })
+    viz.draw()
+  })
+
+  test("Resizes the chart", () => {
+    viz.config({ width: 1000, height: 300 })
+    viz.draw()
+  })
+
+  test("Resizes the chart", () => {
+    viz.config({ width: 400, height: 800 })
+    viz.draw()
+  })
+
+  test("Resizes the chart", () => {
+    viz.config({ width: 500, height: 500 })
     viz.draw()
   })
 }
 
-export const title = "Small segments"
+export const title = "Resizing"

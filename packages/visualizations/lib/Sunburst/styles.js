@@ -12,6 +12,7 @@ var glamor_1 = require("glamor");
 var theme_1 = require("@operational/theme");
 var arcStyle = {
     strokeWidth: "1",
+    stroke: "#fff",
     opacity: 0.8,
     fill: "#eee",
     "&.zoomable": {
@@ -28,10 +29,9 @@ var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var breadcrumbStyle = {
     width: "100%",
-    height: "36px",
+    height: "40px",
     position: "relative",
-    overflow: "hidden",
-    margin: "5px 0"
+    overflow: "hidden"
 };
 var breadcrumbItemStyle = {
     float: "left",
@@ -62,12 +62,12 @@ var breadcrumbItemStyle = {
         position: "absolute",
         width: 0,
         height: 0,
-        borderLeft: "solid 15px #fff",
-        borderTop: "solid 15px transparent",
-        borderBottom: "solid 15px transparent",
+        borderLeft: "solid 16px #fff",
+        borderTop: "solid 16px transparent",
+        borderBottom: "solid 16px transparent",
         top: "50%",
         left: "100%",
-        marginTop: "-15px",
+        marginTop: "-16px",
         zIndex: "2"
     },
     "& .arrow": {
@@ -97,6 +97,15 @@ var rootLabelStyle = {
     "& .name": __assign({}, theme_1.operational.typography.small),
     "& .value": __assign({}, theme_1.operational.typography.heading1)
 };
+var arrowStyle = {
+    fill: "transparent",
+    stroke: "#bbb",
+    strokeWidth: "1px",
+    cursor: "zoom-in",
+    "&:hover": {
+        stroke: "#aaa"
+    }
+};
 exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
@@ -104,4 +113,5 @@ exports.breadcrumb = glamor_1.css(breadcrumbStyle).toString();
 exports.breadcrumbItem = glamor_1.css(breadcrumbItemStyle).toString();
 exports.centerCircle = glamor_1.css(centerCircleStyle).toString();
 exports.rootLabel = glamor_1.css(rootLabelStyle).toString();
+exports.arrow = glamor_1.css(arrowStyle).toString();
 //# sourceMappingURL=styles.js.map

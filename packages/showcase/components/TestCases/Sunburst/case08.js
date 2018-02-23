@@ -5,7 +5,6 @@ import { Card, CardHeader } from "@operational/components"
 
 const data = {
   name: "All",
-  value: "139000",
   children: [
     {
       name: "Europe",
@@ -58,7 +57,6 @@ const data = {
           children: [
             {
               name: "Berlin",
-              value: 1850,
               children: [
                 {
                   name: "Kreuzberg",
@@ -66,15 +64,12 @@ const data = {
                   children: [
                     {
                       name: "test",
-                      value: 70,
                       children: [
                         {
                           name: "test level 2",
-                          value: 40,
                           children: [
                             {
                               name: "test level 3",
-                              value: 30,
                               children: [
                                 {
                                   name: "test level 4",
@@ -210,7 +205,6 @@ const data = {
     {
       name: "North America",
       color: "#f00",
-      value: 45700,
       children: [
         {
           name: "USA",
@@ -292,8 +286,9 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
+    viz.config({ maxRings: 4 })
     viz.draw()
   })
 }
 
-export const title = "Small segments"
+export const title = "Missing values"

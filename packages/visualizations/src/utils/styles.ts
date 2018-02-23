@@ -92,18 +92,26 @@ const focusLegendStyle = {
   "& span.title": {
     paddingRight: "6px"
   },
-  "&::after": {
+  "&::before,::after": {
     content: "''",
     position: "absolute",
     width: 0,
     height: 0
   },
+  "&.above::before,.above::after": {
+    top: "100%",
+    left: "50%"
+  },
+  "&.above::before": {
+    borderLeft: "solid 8px transparent",
+    borderRight: "solid 8px transparent",
+    borderTop: "solid 8px #cdcdcd",
+    marginLeft: "-8px"
+  },
   "&.above::after": {
-    borderTop: "solid 7px #fff",
     borderLeft: "solid 7px transparent",
     borderRight: "solid 7px transparent",
-    top: "100%",
-    left: "50%",
+    borderTop: "solid 7px #fff",
     marginLeft: "-7px"
   }
 }

@@ -14,4 +14,13 @@ exports.withD3Element = function (func) {
 exports.transitionIfVisible = function (selection, duration) {
     return document.hidden ? selection : selection.transition().duration(duration);
 };
+exports.onTransitionEnd = function (selection, func) {
+    var n = 0;
+    return selection.each(function () { return (n = n + 1); }).on("end", function () {
+        n = n - 1;
+        if (n < 1) {
+            func();
+        }
+    });
+};
 //# sourceMappingURL=d3_utils.js.map

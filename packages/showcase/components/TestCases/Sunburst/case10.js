@@ -287,6 +287,10 @@ const data = {
   ]
 }
 
+const numberFormatter = (x: number): string => {
+  return x >= 1000 ? Math.round(x / 100) / 10 + "k" : x.toString()
+}
+
 export const marathon = ({ test, afterAll, container }) => {
   const viz = new Sunburst(container)
 
@@ -294,6 +298,52 @@ export const marathon = ({ test, afterAll, container }) => {
     viz.data(data)
     viz.draw()
   })
+
+  test("Reduces the max number of rings shown", () => {
+    viz.config({ maxRings: 4 })
+    viz.draw()
+  })
+
+  test("Changes the truncation arrow marker size", () => {
+    viz.config({ arrowMarkerSize: 20 })
+    viz.draw()
+  })
+
+  test("Changes the size of the center circle", () => {
+    viz.config({ centerCircleRadius: 0.8 })
+    viz.draw()
+  })
+
+  test("Hides the chart", () => {
+    viz.config({ hidden: true })
+    viz.draw()
+  })
+
+  // Layout is wrong
+  test("Shows the chart", () => {
+    viz.config({ hidden: false })
+    viz.draw()
+  })
+
+  test("Changes the number formatter", () => {
+    viz.config({ numberFormatter: numberFormatter })
+    viz.draw()
+  })
+
+  test("Increases the outerBorderMargin", () => {
+    viz.config({ outerBorderMargin: 5 })
+    viz.draw()
+  })
+
+  test("Turns off color propagation", () => {
+    viz.config({ propagateColors: false })
+    viz.draw()
+  })
+
+  test("Turns off sorting by size", () => {
+    viz.config({ sort: false })
+    viz.draw()
+  })
 }
 
-export const title = "Small segments"
+export const title = "Testing config options"

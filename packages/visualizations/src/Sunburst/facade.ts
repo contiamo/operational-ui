@@ -36,6 +36,7 @@ class Facade {
 
   initialConfig(): IConfig {
     return {
+      arrowOffset: 10,
       centerCircleRadius: 0.9,
       duration: 1e3,
       height: 500,
@@ -43,6 +44,8 @@ class Facade {
       maxRings: 10,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
+      propagateColors: true,
+      disableAnimations: false,
       sort: true,
       uid: uniqueId("sunburst"),
       visualizationName: "sunburst",
@@ -127,7 +130,7 @@ class Facade {
   private findNode = (matchers: IObject): TDatum => {
     return find((d: TDatum): boolean => {
       return every.convert({ cap: false })((value: any, key: string): boolean => {
-        return d[key] || d.data[key] === value
+        return (d.data[key] || d[key]) === value
       })(matchers)
     })(this.state.readOnly().current.get("computed").renderer.data)
   }

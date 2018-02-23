@@ -48,6 +48,9 @@ class Canvas {
 
   insertEl(): TSeriesEl {
     const el: TSeriesEl = d3.select(document.createElementNS(d3.namespaces["svg"], "svg"))
+    el.append("svg:g").attr("class", "arcs")
+    el.append("svg:g").attr("class", "arrows")
+    el.append("circle").attr("class", localStyles.centerCircle)
     this.container.node().appendChild(el.node())
     this.elMap.series = el
     return el
@@ -136,10 +139,15 @@ class Canvas {
       drawingDims: IObject = this.drawingDims()
 
     this.container
-      .classed("hidden", this.state.current.get("config").hidden)
+      .style("visibility", this.state.current.get("config").hidden ? "hidden" : "visible")
       .style("width", config.width + "px")
       .style("height", config.height + "px")
     this.el.style("width", drawingDims.width + "px").style("height", drawingDims.height + "px")
+    this.el
+      .select(`circle.${localStyles.centerCircle}`)
+      .attr("cx", drawingDims.width / 2)
+      .attr("cy", drawingDims.height / 2)
+
     this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect())
   }
 

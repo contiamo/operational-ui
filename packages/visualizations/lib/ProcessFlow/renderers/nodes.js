@@ -95,9 +95,7 @@ var Nodes = /** @class */ (function (_super) {
         return "rotate(" + nodeShapeOptions[d.shape()].rotation + ")";
     };
     Nodes.prototype.enterAndUpdate = function (nodeGroups) {
-        var _this = this;
         var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale);
-        var n = 0;
         var enteringNodeGroups = nodeGroups
             .enter()
             .append("g")
@@ -157,13 +155,7 @@ var Nodes = /** @class */ (function (_super) {
             .attr("fill", function (d) { return d.color(); })
             .attr("stroke", function (d) { return d.stroke(); })
             .attr("opacity", 1)
-            .each(function () { return (n = n + 1); })
-            .on("end", function () {
-            n = n - 1;
-            if (n < 1) {
-                _this.updateNodeLabels();
-            }
-        });
+            .call(d3_utils_1.onTransitionEnd, this.updateNodeLabels.bind(this));
     };
     Nodes.prototype.getNodeBoundingRect = function (el) {
         var node = d3

@@ -4,6 +4,7 @@ import { seriesLegend } from "../utils/styles"
 
 const arcStyle = {
   strokeWidth: "1",
+  stroke: "#fff",
   opacity: 0.8,
   fill: "#eee",
   "&.zoomable": {
@@ -30,10 +31,9 @@ const totalStyle = {
 
 const breadcrumbStyle = {
   width: "100%",
-  height: "36px",
+  height: "40px",
   position: "relative",
-  overflow: "hidden",
-  margin: "5px 0"
+  overflow: "hidden"
 }
 
 const breadcrumbItemStyle = {
@@ -65,12 +65,12 @@ const breadcrumbItemStyle = {
     position: "absolute",
     width: 0,
     height: 0,
-    borderLeft: "solid 15px #fff",
-    borderTop: "solid 15px transparent",
-    borderBottom: "solid 15px transparent",
+    borderLeft: "solid 16px #fff",
+    borderTop: "solid 16px transparent",
+    borderBottom: "solid 16px transparent",
     top: "50%",
     left: "100%",
-    marginTop: "-15px",
+    marginTop: "-16px",
     zIndex: "2"
   },
   "& .arrow": {
@@ -107,6 +107,16 @@ const rootLabelStyle = {
   }
 }
 
+const arrowStyle = {
+  fill: "transparent",
+  stroke: "#bbb",
+  strokeWidth: "1px",
+  cursor: "zoom-in",
+  "&:hover": {
+    stroke: "#aaa"
+  }
+}
+
 export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
 export const total = css(totalStyle).toString()
@@ -114,3 +124,4 @@ export const breadcrumb = css(breadcrumbStyle).toString()
 export const breadcrumbItem = css(breadcrumbItemStyle).toString()
 export const centerCircle = css(centerCircleStyle).toString()
 export const rootLabel = css(rootLabelStyle).toString()
+export const arrow = css(arrowStyle).toString()

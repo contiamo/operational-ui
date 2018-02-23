@@ -8,6 +8,8 @@ declare class Breadcrumb {
     updateHoverPath(payload: IObject): void;
     label(d: any, i: number): string;
     truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[];
+    backgroundColor(d: any): string;
+    labelColor(d: TDatum): string;
     update(nodeArray: TDatum[]): void;
     onClick(d: TDatum | string): void;
 }

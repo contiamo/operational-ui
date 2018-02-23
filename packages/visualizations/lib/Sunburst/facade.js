@@ -16,7 +16,7 @@ var Facade = /** @class */ (function () {
         this.findNode = function (matchers) {
             return fp_1.find(function (d) {
                 return fp_1.every.convert({ cap: false })(function (value, key) {
-                    return d[key] || d.data[key] === value;
+                    return (d.data[key] || d[key]) === value;
                 })(matchers);
             })(_this.state.readOnly().current.get("computed").renderer.data);
         };
@@ -36,6 +36,7 @@ var Facade = /** @class */ (function () {
     };
     Facade.prototype.initialConfig = function () {
         return {
+            arrowOffset: 10,
             centerCircleRadius: 0.9,
             duration: 1e3,
             height: 500,
@@ -43,6 +44,8 @@ var Facade = /** @class */ (function () {
             maxRings: 10,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
+            propagateColors: true,
+            disableAnimations: false,
             sort: true,
             uid: fp_1.uniqueId("sunburst"),
             visualizationName: "sunburst",

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../utils/event_catalog");
 var styles = require("./styles");
+var utils_1 = require("@operational/utils");
 var dims = {
     width: 70,
     height: 20,
@@ -19,16 +20,16 @@ var Breadcrumb = /** @class */ (function () {
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this));
     }
     Breadcrumb.prototype.updateHoverPath = function (payload) {
-        var _this = this;
         var computed = this.state.current.get("computed").renderer;
         var fixedNode = computed.zoomNode || computed.topNode;
+        if (!fixedNode) {
+            return;
+        }
         var nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse();
-        setTimeout(function () {
-            _this.update(nodeArray);
-        }, 1e2);
+        this.update(nodeArray);
     };
     Breadcrumb.prototype.label = function (d, i) {
-        return d === "hops" ? "..." : d.data.name;
+        return d === "hops" ? "..." : d.name;
     };
     Breadcrumb.prototype.truncateNodeArray = function (nodeArray) {
         if (nodeArray.length <= 5) {
@@ -40,11 +41,17 @@ var Breadcrumb = /** @class */ (function () {
             return firstNodes.concat(["hops"]).concat(lastNodes);
         }
     };
+    Breadcrumb.prototype.backgroundColor = function (d) {
+        return d === "hops" ? "#fff" : d.color || "#eee";
+    };
+    Breadcrumb.prototype.labelColor = function (d) {
+        return utils_1.readableTextColor(this.backgroundColor(d), ["black", "white"]);
+    };
     Breadcrumb.prototype.update = function (nodeArray) {
         var data = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : [];
         // Data join; key function combines name and depth (= position in sequence).
         var trail = this.el.selectAll("div." + styles.breadcrumbItem).data(data, function (d) {
-            return d === "hops" ? d : d.data.name + d.depth;
+            return d === "hops" ? d : d.name + d.depth;
         });
         // Remove exiting nodes.
         trail.exit().remove();
@@ -53,19 +60,19 @@ var Breadcrumb = /** @class */ (function () {
             .enter()
             .append("div")
             .attr("class", function (d) { return styles.breadcrumbItem + " " + (d === "hops" ? d : ""); })
-            .style("background-color", function (d) {
-            return d === "hops" ? "#fff" : d.data.color || "#eee";
-        });
+            .style("background-color", this.backgroundColor)
+            .attr("title", this.label);
         entering
             .append("div")
             .attr("class", "label")
-            .html(this.label);
+            .html(this.label)
+            .style("color", this.labelColor.bind(this));
         entering.append("div").attr("class", "background-arrow");
         entering
             .append("div")
             .attr("class", "arrow")
             .style("border-left-color", function (d) {
-            return d === "hops" ? "#fff" : d.data.color || "#eee";
+            return d === "hops" ? "#fff" : d.color || "#eee";
         });
         entering.merge(trail).on("click", this.onClick.bind(this));
     };

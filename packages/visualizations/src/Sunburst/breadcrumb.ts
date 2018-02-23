@@ -3,6 +3,7 @@ import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./
 import Events from "../utils/event_catalog"
 import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
+import { readableTextColor } from "@operational/utils"
 
 const dims: IObject = {
   width: 70,
@@ -30,14 +31,15 @@ class Breadcrumb {
   updateHoverPath(payload: IObject): void {
     const computed: IObject = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
+    if (!fixedNode) {
+      return
+    }
     const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
-    setTimeout(() => {
-      this.update(nodeArray)
-    }, 1e2)
+    this.update(nodeArray)
   }
 
   label(d: any, i: number): string {
-    return d === "hops" ? "..." : d.data.name
+    return d === "hops" ? "..." : d.name
   }
 
   truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[] {
@@ -50,12 +52,20 @@ class Breadcrumb {
     }
   }
 
+  backgroundColor(d: any): string {
+    return d === "hops" ? "#fff" : d.color || "#eee"
+  }
+
+  labelColor(d: TDatum): string {
+    return readableTextColor(this.backgroundColor(d), ["black", "white"])
+  }
+
   update(nodeArray: TDatum[]): void {
     const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
     // Data join; key function combines name and depth (= position in sequence).
     const trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => {
-      return d === "hops" ? d : d.data.name + d.depth
+      return d === "hops" ? d : d.name + d.depth
     })
 
     // Remove exiting nodes.
@@ -66,14 +76,14 @@ class Breadcrumb {
       .enter()
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
-      .style("background-color", (d: any): string => {
-        return d === "hops" ? "#fff" : d.data.color || "#eee"
-      })
+      .style("background-color", this.backgroundColor)
+      .attr("title", this.label)
 
     entering
       .append("div")
       .attr("class", "label")
       .html(this.label)
+      .style("color", this.labelColor.bind(this))
 
     entering.append("div").attr("class", "background-arrow")
 
@@ -81,7 +91,7 @@ class Breadcrumb {
       .append("div")
       .attr("class", "arrow")
       .style("border-left-color", (d: any): string => {
-        return d === "hops" ? "#fff" : d.data.color || "#eee"
+        return d === "hops" ? "#fff" : d.color || "#eee"
       })
 
     entering.merge(trail).on("click", this.onClick.bind(this))

@@ -1,6 +1,7 @@
 import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
 export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
 export interface IConfig {
+    arrowOffset: number;
     centerCircleRadius: number;
     duration: number;
     height: number;
@@ -8,6 +9,8 @@ export interface IConfig {
     maxRings: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
+    propagateColors: boolean;
+    disableAnimations: boolean;
     sort: boolean;
     uid: string;
     visualizationName: string;

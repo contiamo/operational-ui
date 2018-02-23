@@ -24,7 +24,7 @@ const simpleSnippet = `
           "children": [
             {
               "name": "Europe",
-              "color": "0f0",
+              "color": "#0f0",
               "value": 52000,
               "children": [
                 {
@@ -139,7 +139,7 @@ const simpleSnippet = `
             },
             {
               "name": "Asia",
-              "color": "0ff",
+              "color": "#0ff",
               "value": 38400,
               "children": [
                 {
@@ -200,7 +200,7 @@ const simpleSnippet = `
             },
             {
               "name": "North America",
-              "color": "f00",
+              "color": "#f00",
               "value": 43000,
               "children": [
                 {
@@ -309,6 +309,20 @@ const simpleSnippet = `
 const propDescription = {
   Config: [
     {
+      name: "arrowOffset",
+      description: "Offset of truncation arrows from edge of visualization",
+      defaultValue: "10",
+      type: "number",
+      optional: true
+    },
+    {
+      name: "centerCircleRadius",
+      description: "Percentage of inner circle filled in white / controls width of inner ring",
+      defaultValue: "0.9",
+      type: "number",
+      optional: true
+    },
+    {
       name: "duration",
       description: "Speed at which transitions are animated",
       defaultValue: "1e3",
@@ -348,6 +362,20 @@ const propDescription = {
       description: "Margin between edge of chart and drawing area",
       defaultValue: "1",
       type: "number",
+      optional: true
+    },
+    {
+      name: "propagateColors",
+      description: "If true, child nodes take same color as their parent unless color is already defined",
+      defaultValue: "true",
+      type: "boolean",
+      optional: true
+    },
+    {
+      name: "disableAnimations",
+      description: "If true, animations when 'draw' is called are disabled. Improves speed for large datasets.",
+      defaultValue: "false",
+      type: "boolean",
       optional: true
     },
     {
