@@ -4,7 +4,7 @@ export interface IProps {
     id?: string | number;
     className?: string;
     css?: {};
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 declare const _default: (props: IProps) => JSX.Element;
 export default _default;

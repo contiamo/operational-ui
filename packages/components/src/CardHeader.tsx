@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface IProps {

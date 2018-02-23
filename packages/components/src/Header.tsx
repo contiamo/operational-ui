@@ -7,7 +7,7 @@ export interface IProps {
   id?: string | number
   className?: string
   css?: {}
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
