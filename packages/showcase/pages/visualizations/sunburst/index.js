@@ -311,7 +311,7 @@ const propDescription = {
     {
       name: "arrowOffset",
       description: "Offset of truncation arrows from edge of visualization",
-      defaultValue: "15",
+      defaultValue: "10",
       type: "number",
       optional: true
     },

@@ -36,7 +36,7 @@ class Facade {
 
   initialConfig(): IConfig {
     return {
-      arrowOffset: 5,
+      arrowOffset: 10,
       centerCircleRadius: 0.9,
       duration: 1e3,
       height: 500,

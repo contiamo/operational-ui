@@ -36,7 +36,7 @@ var Facade = /** @class */ (function () {
     };
     Facade.prototype.initialConfig = function () {
         return {
-            arrowOffset: 5,
+            arrowOffset: 10,
             centerCircleRadius: 0.9,
             duration: 1e3,
             height: 500,

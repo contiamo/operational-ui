@@ -11,12 +11,7 @@ const containerNode = document.getElementById("app")
 import Sunburst from "../../src/Sunburst/facade"
 import { VisualizationWrapper } from "../../src/index"
 
-const accessors: any = {
-  children: (d: any): any[] => d.children,
-  name: (d: any): string => d.name,
-  value: (d: any): number => d.value,
-  color: (d: any): string => d.color
-}
+const config: any = { maxRings: 4 }
 
 const data = {
   name: "All",
@@ -298,12 +293,7 @@ const data = {
 }
 
 
-const viz: Sunburst = new Sunburst(containerNode)
-viz.data(data)
-viz.config({ maxRings: 4 })
-viz.draw()
-
-const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} accessors={accessors} /></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} /></OperationalUI>
 
 render(<App />, containerNode)
 
