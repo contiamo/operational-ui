@@ -47,7 +47,7 @@ var DataHandler = /** @class */ (function () {
         node.color =
             propagateColors && node.depth > 1 && !node.data.color
                 ? node.parent.color
-                : (node.depth > 0 ? this.color(node) : node.data.color);
+                : node.depth > 0 ? this.color(node) : node.data.color;
     };
     DataHandler.prototype.assignNames = function (node) {
         node.name = this.name(node);
