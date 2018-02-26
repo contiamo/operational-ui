@@ -98,6 +98,16 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
     viz.draw()
   })
 
+  test("Focuses a journey", () => {
+    viz.config({
+      focusElement: {
+        type: "path",
+        matchers: { path: ["9", "2", "3", "8"] }
+      }
+    })
+    viz.draw()
+  })
+
   afterAll(() => {
     viz.close()
   })

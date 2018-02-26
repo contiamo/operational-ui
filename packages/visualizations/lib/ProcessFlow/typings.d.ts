@@ -10,8 +10,9 @@ export declare type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>;
 export declare type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>;
 export declare type TScale = (size: number) => number;
 export interface IFocusElement {
-    type?: string;
+    type?: "node" | "link" | "path";
     matchers?: IObject;
+    hideLabel?: boolean;
 }
 export interface IJourney {
     size: number;

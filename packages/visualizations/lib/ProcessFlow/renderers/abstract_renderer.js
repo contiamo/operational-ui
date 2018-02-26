@@ -17,15 +17,20 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.onMouseOver = function (d, element) {
         this.mouseOver(d3.select(element), d);
     };
-    AbstractRenderer.prototype.mouseOver = function (element, d) {
+    AbstractRenderer.prototype.mouseOver = function (element, d, hideLabel) {
+        if (hideLabel === void 0) { hideLabel = false; }
         this.highlight(element, d);
         var focusPoint = this.focusPoint(element, d);
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { focusPoint: focusPoint, d: d });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { focusPoint: focusPoint, d: d, hideLabel: hideLabel });
         element.classed("hover", true).on("mouseleave", d3_utils_1.withD3Element(this.onMouseOut.bind(this)));
     };
-    AbstractRenderer.prototype.focusElement = function (elementInfo) {
+    AbstractRenderer.prototype.focusElement = function (focusElement) {
         var _this = this;
-        if (elementInfo.type !== this.type) {
+        if (focusElement.type === "path") {
+            this.highlightPath(focusElement);
+            return;
+        }
+        if (focusElement.type !== this.type) {
             return;
         }
         this.el
@@ -33,14 +38,41 @@ var AbstractRenderer = /** @class */ (function () {
             .filter(function (d) {
             return fp_1.every.convert({ cap: false })(function (value, matcher) {
                 return fp_1.invoke(matcher)(d) === value;
-            })(elementInfo.matchers);
+            })(focusElement.matchers);
         })
             .each(d3_utils_1.withD3Element(function (d, el) {
-            _this.mouseOver(d3.select(el), d);
+            _this.mouseOver(d3.select(el), d, focusElement.hideLabel);
         }));
     };
-    AbstractRenderer.prototype.highlight = function (element, d) {
-        this.removeHighlights();
+    AbstractRenderer.prototype.highlightPath = function (focusElement) {
+        var _this = this;
+        if (this.type !== "link") {
+            return;
+        }
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        var links = fp_1.reduce.convert({ cap: false })(function (memo, nodeId, i) {
+            if (!focusElement.matchers.path[i + 1]) {
+                return memo;
+            }
+            memo.push([nodeId, focusElement.matchers.path[i + 1]]);
+            return memo;
+        }, [])(focusElement.matchers.path);
+        fp_1.forEach(function (link) {
+            _this.el
+                .selectAll(_this.focusElementAccessor)
+                .filter(function (d) {
+                return d.sourceId() === link[0] && d.targetId() === link[1];
+            })
+                .each(d3_utils_1.withD3Element(function (d, el) {
+                _this.highlight(d3.select(el), d, true);
+            }));
+        })(links);
+    };
+    AbstractRenderer.prototype.highlight = function (element, d, keepCurrent) {
+        if (keepCurrent === void 0) { keepCurrent = false; }
+        if (!keepCurrent) {
+            this.removeHighlights();
+        }
         element.classed("highlighted", true).attr("stroke", this.config.highlightColor);
     };
     // Remove any old highlights (needed if an element has been manually focussed)

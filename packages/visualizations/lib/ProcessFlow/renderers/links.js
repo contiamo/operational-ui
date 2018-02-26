@@ -91,13 +91,14 @@ var Links = /** @class */ (function (_super) {
         var xStart = link.source().x, yStart = link.source().y, xEnd = link.target().x, yEnd = link.target().y, xMid = (xStart + xEnd) / 2, yMid = (yStart + yEnd) / 2;
         return "M" + xStart + "," + yStart + "L" + xMid + "," + yMid + "L" + xEnd + "," + yEnd;
     };
-    Links.prototype.highlight = function (element, d) {
+    Links.prototype.highlight = function (element, d, keepCurrent) {
         var _this = this;
+        if (keepCurrent === void 0) { keepCurrent = false; }
         // Highlight path.element when `path.${styles.border}` is hovered
         var pathEl = this.el.selectAll("path.link." + styles.element).filter(function (link) {
             return link.sourceId() === d.sourceId() && link.targetId() === d.targetId();
         });
-        _super.prototype.highlight.call(this, pathEl, d);
+        _super.prototype.highlight.call(this, pathEl, d, keepCurrent);
         // Highlight source and target nodes as well as link
         this.el
             .selectAll("path.node." + styles.border)

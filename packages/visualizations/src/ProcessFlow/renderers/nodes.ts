@@ -117,7 +117,7 @@ class Nodes extends AbstractRenderer {
       .attr("d", (d: TNode): string =>
         d3Symbol()
           .type(nodeShapeOptions[d.shape()].symbol)
-          .size(borderScale(d.size()))()
+          .size(scale(d.size()))()
       )
       .attr("transform", this.rotate)
       .attr("fill", (d: TNode): string => d.color())
@@ -156,7 +156,7 @@ class Nodes extends AbstractRenderer {
       .attr("d", (d: TNode): string =>
         d3Symbol()
           .type(nodeShapeOptions[d.shape()].symbol)
-          .size(borderScale(d.size()))()
+          .size(scale(d.size()))()
       )
       .attr("transform", this.rotate)
       .attr("fill", (d: TNode): string => d.color())
