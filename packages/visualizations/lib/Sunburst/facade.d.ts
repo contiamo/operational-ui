@@ -1,7 +1,7 @@
 import Canvas from "./canvas";
 import { StateHandler } from "../utils/state_handler";
 import EventEmitter from "../utils/event_bus";
-import { IAccessors, IComputedState, IConfig, IObject } from "./typings";
+import { IAccessors, IComputedState, IConfig, IObject, TDatum } from "./typings";
 declare class Facade {
     __disposed: boolean;
     canvas: Canvas;
@@ -12,6 +12,7 @@ declare class Facade {
     constructor(context: Element);
     insertState(): StateHandler<IConfig>;
     initialConfig(): IConfig;
+    colorAccessor(palette: string[]): (d: TDatum) => string;
     initialAccessors(): IAccessors;
     initialComputed(): IComputedState;
     insertCanvas(): Canvas;

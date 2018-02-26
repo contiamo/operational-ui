@@ -17,4 +17,6 @@ var d3_1 = require("./d3");
 exports.handleWithD3Element = d3_1.handleWithD3Element;
 var theme_1 = require("./theme");
 exports.wrapTheme = theme_1.wrapTheme;
+var colorAssigner_1 = require("./colorAssigner");
+exports.colorAssigner = colorAssigner_1.colorAssigner;
 //# sourceMappingURL=index.js.map

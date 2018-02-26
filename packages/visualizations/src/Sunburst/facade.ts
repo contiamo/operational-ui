@@ -8,6 +8,7 @@ import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { every, find, isEmpty, uniqueId } from "lodash/fp"
 import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum } from "./typings"
+import { colorAssigner } from "@operational/utils"
 
 class Facade {
   __disposed: boolean = false
@@ -38,18 +39,26 @@ class Facade {
     return {
       arrowOffset: 10,
       centerCircleRadius: 0.9,
+      disableAnimations: false,
       duration: 1e3,
       height: 500,
       hidden: false,
       maxRings: 10,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
+      palette: ["#bbb"],
       propagateColors: true,
-      disableAnimations: false,
       sort: true,
       uid: uniqueId("sunburst"),
       visualizationName: "sunburst",
       width: 500
+    }
+  }
+
+  colorAccessor(palette: string[]): (d: TDatum) => string {
+    const assignColor = colorAssigner(palette)
+    return (d: TDatum): string => {
+      return assignColor(d.name, d.color)
     }
   }
 
@@ -59,7 +68,7 @@ class Facade {
         data: (data: IObject): IObject => data
       },
       series: {
-        color: (d: TDatum): string => d.color,
+        color: this.colorAccessor(this.initialConfig().palette),
         name: (d: TDatum): string => d.name || "",
         value: (d: TDatum): number => d.value
       }
@@ -112,6 +121,13 @@ class Facade {
   }
 
   config(config?: Partial<IConfig>): IConfig {
+    // Update color accessor if palette changed
+    if (config && config.palette) {
+      this.accessors("series", {
+        color: this.colorAccessor(config.palette)
+      })
+    }
+
     return this.state.config(config)
   }
 

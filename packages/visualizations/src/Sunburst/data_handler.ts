@@ -64,10 +64,11 @@ class DataHandler {
 
   assignColors(node: any): void {
     const propagateColors: boolean = this.state.current.get("config").propagateColors
+
     node.color =
-      propagateColors && node.parent && !this.color(node)
-        ? this.color(node.parent) || node.parent.color
-        : this.color(node)
+      propagateColors && node.depth > 1 && !node.data.color
+        ? node.parent.color
+        : node.depth > 0 ? this.color(node) : node.data.color
   }
 
   assignNames(node: any): void {

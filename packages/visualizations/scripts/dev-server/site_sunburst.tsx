@@ -19,7 +19,6 @@ const data = {
     {
       name: "Europe",
       value: 52000,
-      color: "#0f0",
       children: [
         {
           name: "UK",
@@ -153,7 +152,6 @@ const data = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -267,7 +265,6 @@ const data = {
     {
       name: "Africa",
       value: 4130,
-      color: "#ff0",
       children: [
         {
           name: "South Africa",
@@ -291,7 +288,6 @@ const data = {
     }
   ]
 }
-
 
 const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} /></OperationalUI>
 

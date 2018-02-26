@@ -46,7 +46,7 @@ var VisualizationWrapperInternal = /** @class */ (function (_super) {
         fp_1.forEach.convert({ cap: false })(function (accessors, key) {
             _this.viz.accessors(key, accessors);
         })(this.props.accessors);
-        this.viz.config(this.props.config || {});
+        this.viz.config(fp_1.defaults({ palette: this.props.theme.colors.visualizationPalette })(this.props.config || {}));
     };
     VisualizationWrapperInternal.prototype.componentWillUnmount = function () {
         this.viz.close();
