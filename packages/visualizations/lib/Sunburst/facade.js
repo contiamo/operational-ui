@@ -9,7 +9,6 @@ var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
-var utils_1 = require("@operational/utils");
 var Facade = /** @class */ (function () {
     function Facade(context) {
         var _this = this;
@@ -54,19 +53,15 @@ var Facade = /** @class */ (function () {
             width: 500
         };
     };
-    Facade.prototype.colorAccessor = function (palette) {
-        var assignColor = utils_1.colorAssigner(palette);
-        return function (d) {
-            return assignColor(d.name, d.color);
-        };
-    };
     Facade.prototype.initialAccessors = function () {
         return {
             data: {
                 data: function (data) { return data; }
             },
             series: {
-                color: this.colorAccessor(this.initialConfig().palette),
+                color: function (d, colorAssigner) {
+                    return colorAssigner(d.name, d.color);
+                },
                 name: function (d) { return d.name || ""; },
                 value: function (d) { return d.value; }
             }
@@ -94,12 +89,6 @@ var Facade = /** @class */ (function () {
         return this.state.data(data);
     };
     Facade.prototype.config = function (config) {
-        // Update color accessor if palette changed
-        if (config && config.palette) {
-            this.accessors("series", {
-                color: this.colorAccessor(config.palette)
-            });
-        }
         return this.state.config(config);
     };
     Facade.prototype.accessors = function (type, accessors) {

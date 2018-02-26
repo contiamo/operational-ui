@@ -8,7 +8,6 @@ import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { every, find, isEmpty, uniqueId } from "lodash/fp"
 import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum } from "./typings"
-import { colorAssigner } from "@operational/utils"
 
 class Facade {
   __disposed: boolean = false
@@ -55,20 +54,14 @@ class Facade {
     }
   }
 
-  colorAccessor(palette: string[]): (d: TDatum) => string {
-    const assignColor = colorAssigner(palette)
-    return (d: TDatum): string => {
-      return assignColor(d.name, d.color)
-    }
-  }
-
   initialAccessors(): IAccessors {
     return {
       data: {
         data: (data: IObject): IObject => data
       },
       series: {
-        color: this.colorAccessor(this.initialConfig().palette),
+        color: (d: TDatum, colorAssigner: (key: string, color?: string) => string): string =>
+          colorAssigner(d.name, d.color),
         name: (d: TDatum): string => d.name || "",
         value: (d: TDatum): number => d.value
       }
@@ -121,13 +114,6 @@ class Facade {
   }
 
   config(config?: Partial<IConfig>): IConfig {
-    // Update color accessor if palette changed
-    if (config && config.palette) {
-      this.accessors("series", {
-        color: this.colorAccessor(config.palette)
-      })
-    }
-
     return this.state.config(config)
   }
 
