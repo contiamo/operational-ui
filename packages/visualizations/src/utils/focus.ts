@@ -47,7 +47,7 @@ abstract class Focus {
       : this.remove()
   }
 
-  abstract onElementHover(payload: { focusPoint: any, d: any, hideLabel: boolean }): void
+  abstract onElementHover(payload: { focusPoint: any; d: any; hideLabel: boolean }): void
 
   onElementOut(): void {
     this.remove()

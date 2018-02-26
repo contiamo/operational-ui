@@ -104,10 +104,9 @@ class Links extends AbstractRenderer {
 
   highlight(element: TLinkSelection, d: TLink, keepCurrent: boolean = false): void {
     // Highlight path.element when `path.${styles.border}` is hovered
-    const pathEl: TD3Selection = this.el.selectAll(`path.link.${styles.element}`)
-      .filter((link: TLink): boolean => {
-        return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
-      })
+    const pathEl: TD3Selection = this.el.selectAll(`path.link.${styles.element}`).filter((link: TLink): boolean => {
+      return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
+    })
     super.highlight(pathEl, d, keepCurrent)
 
     // Highlight source and target nodes as well as link

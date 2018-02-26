@@ -53,7 +53,9 @@ abstract class AbstractRenderer {
       this.highlightPath(focusElement)
       return
     }
-    if (focusElement.type !== this.type) { return }
+    if (focusElement.type !== this.type) {
+      return
+    }
     this.el
       .selectAll(this.focusElementAccessor)
       .filter((d: TLink | TNode): boolean => {
@@ -61,20 +63,29 @@ abstract class AbstractRenderer {
           return invoke(matcher)(d) === value
         })(focusElement.matchers)
       })
-      .each(withD3Element((d: TLink | TNode, el: HTMLElement): void => {
-        this.mouseOver(d3.select(el), d, focusElement.hideLabel)
-      }))
+      .each(
+        withD3Element((d: TLink | TNode, el: HTMLElement): void => {
+          this.mouseOver(d3.select(el), d, focusElement.hideLabel)
+        })
+      )
   }
 
   highlightPath(focusElement: IFocusElement): void {
-    if (this.type !== "link") { return }
+    if (this.type !== "link") {
+      return
+    }
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
-    const links: [string, string][] = reduce.convert({ cap: false })((memo: [string, string][], nodeId: string, i: number): [string, string][] => {
-      if (!focusElement.matchers.path[i + 1]) { return memo }
-      memo.push([nodeId, focusElement.matchers.path[i + 1]])
-      return memo
-    }, [])(focusElement.matchers.path)
+    const links: [string, string][] = reduce.convert({ cap: false })(
+      (memo: [string, string][], nodeId: string, i: number): [string, string][] => {
+        if (!focusElement.matchers.path[i + 1]) {
+          return memo
+        }
+        memo.push([nodeId, focusElement.matchers.path[i + 1]])
+        return memo
+      },
+      []
+    )(focusElement.matchers.path)
 
     forEach((link: [string, string]): void => {
       this.el
@@ -82,17 +93,19 @@ abstract class AbstractRenderer {
         .filter((d: TLink): boolean => {
           return d.sourceId() === link[0] && d.targetId() === link[1]
         })
-        .each(withD3Element((d: TLink, el: HTMLElement): void => {
-          this.highlight(d3.select(el), d, true)
-        }))
+        .each(
+          withD3Element((d: TLink, el: HTMLElement): void => {
+            this.highlight(d3.select(el), d, true)
+          })
+        )
     })(links)
   }
 
   highlight(element: TElementSelection, d: TLink | TNode, keepCurrent: boolean = false): void {
-    if (!keepCurrent) { this.removeHighlights() }
-    element
-      .classed("highlighted", true)
-      .attr("stroke", this.config.highlightColor)
+    if (!keepCurrent) {
+      this.removeHighlights()
+    }
+    element.classed("highlighted", true).attr("stroke", this.config.highlightColor)
   }
 
   // Remove any old highlights (needed if an element has been manually focussed)

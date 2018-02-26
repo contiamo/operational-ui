@@ -95,8 +95,7 @@ var Links = /** @class */ (function (_super) {
         var _this = this;
         if (keepCurrent === void 0) { keepCurrent = false; }
         // Highlight path.element when `path.${styles.border}` is hovered
-        var pathEl = this.el.selectAll("path.link." + styles.element)
-            .filter(function (link) {
+        var pathEl = this.el.selectAll("path.link." + styles.element).filter(function (link) {
             return link.sourceId() === d.sourceId() && link.targetId() === d.targetId();
         });
         _super.prototype.highlight.call(this, pathEl, d, keepCurrent);

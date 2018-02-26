@@ -73,9 +73,7 @@ var AbstractRenderer = /** @class */ (function () {
         if (!keepCurrent) {
             this.removeHighlights();
         }
-        element
-            .classed("highlighted", true)
-            .attr("stroke", this.config.highlightColor);
+        element.classed("highlighted", true).attr("stroke", this.config.highlightColor);
     };
     // Remove any old highlights (needed if an element has been manually focussed)
     AbstractRenderer.prototype.removeHighlights = function () {
