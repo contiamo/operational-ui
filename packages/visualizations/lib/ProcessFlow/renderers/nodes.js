@@ -118,7 +118,7 @@ var Nodes = /** @class */ (function (_super) {
             .attr("d", function (d) {
             return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
-                .size(borderScale(d.size()))();
+                .size(scale(d.size()))();
         })
             .attr("transform", this.rotate)
             .attr("fill", function (d) { return d.color(); })
@@ -149,7 +149,7 @@ var Nodes = /** @class */ (function (_super) {
             .attr("d", function (d) {
             return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
-                .size(borderScale(d.size()))();
+                .size(scale(d.size()))();
         })
             .attr("transform", this.rotate)
             .attr("fill", function (d) { return d.color(); })
