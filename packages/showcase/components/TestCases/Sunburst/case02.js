@@ -2,13 +2,11 @@ import Layout from "../../../components/Layout"
 import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
+import { operational } from "@operational/theme"
 
-const accessors: any = {
-  series: {
-    name: (d: any): string => d.name,
-    value: (d: any): number => d.value,
-    color: (d: any): string => d.color
-  }
+const config = {
+  sort: false,
+  palette: operational.colors.visualizationPalette
 }
 
 const data = {
@@ -17,7 +15,6 @@ const data = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -40,7 +37,6 @@ const data = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -67,12 +63,10 @@ const data = {
     },
     {
       name: "Australia",
-      color: "#ff0",
       value: 18000
     },
     {
       name: "North America",
-      color: "#f00",
       value: 45700,
       children: [
         {
@@ -125,7 +119,6 @@ const data = {
     },
     {
       name: "Africa",
-      color: "#00f",
       value: 25200
     }
   ]
@@ -137,7 +130,6 @@ const data1 = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -160,7 +152,6 @@ const data1 = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -187,17 +178,14 @@ const data1 = {
     },
     {
       name: "Australia",
-      color: "#ff0",
       value: 18000
     },
     {
       name: "North America",
-      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "#00f",
       value: 25200
     }
   ]
@@ -209,7 +197,6 @@ const data2 = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -228,7 +215,6 @@ const data2 = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -251,12 +237,10 @@ const data2 = {
     },
     {
       name: "Australia",
-      color: "#ff0",
       value: 18000
     },
     {
       name: "North America",
-      color: "#f00",
       value: 36780
     }
   ]
@@ -267,8 +251,7 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
-    viz.config({ sort: false })
-    viz.accessors("series", accessors.series)
+    viz.config(config)
     viz.draw()
   })
 
