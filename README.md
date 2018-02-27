@@ -64,11 +64,11 @@ Below you find some guides on how to work with the codebase:
 
 ### Working on Operational UI
 
-After you `npm install`, simply run `npm run dev` or `yarn dev` inside the `components` or `visualizations` packages. This spins up a dev server you can use to test packages, by editing the entry point at `./packages/{components,visualizations}/scripts/dev-server/site.tsx`.
+After you `yarn install`, simply run `yarn dev` inside the `components` or `visualizations` packages. This spins up a dev server you can use to test packages, by editing the entry point at `./packages/{components,visualizations}/scripts/dev-server/site.tsx`.
 
-To run the showcase, simply run `npm run start` or `yarn start` from root. 
+To run the showcase, simply run `yarn start` from root. 
 
-To make sure your code is ready for Travis and your reviewers, run `npm run ci:local` or `yarn ci:local` from the root of the project.
+To make sure your code is ready for Travis and your reviewers, run `yarn ci:local` from the root of the project.
 
 #### Generators
 
