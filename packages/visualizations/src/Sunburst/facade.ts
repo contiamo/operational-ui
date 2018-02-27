@@ -56,20 +56,18 @@ class Facade {
     }
   }
 
-  defaultColorAssigner(palette: string[]): (key: string, color?: string) => string {
+  defaultColorAssigner(palette: string[]): (key: string) => string {
     return colorAssigner(palette)
   }
 
   initialAccessors(): IAccessors {
-    const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(
-      this.initialConfig().palette
-    )
+    const assignColors: (key: string) => string = this.defaultColorAssigner(this.initialConfig().palette)
     return {
       data: {
         data: (data: IObject): IObject => data
       },
       series: {
-        color: (d: TDatum): string => assignColors(d.name, d.color),
+        color: (d: TDatum): string => assignColors(d.name),
         name: (d: TDatum): string => d.name || "",
         value: (d: TDatum): number => d.value
       }

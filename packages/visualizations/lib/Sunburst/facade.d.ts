@@ -13,7 +13,7 @@ declare class Facade {
     constructor(context: Element);
     insertState(): StateHandler<IConfig>;
     initialConfig(): IConfig;
-    defaultColorAssigner(palette: string[]): (key: string, color?: string) => string;
+    defaultColorAssigner(palette: string[]): (key: string) => string;
     initialAccessors(): IAccessors;
     initialComputed(): IComputedState;
     insertCanvas(): Canvas;

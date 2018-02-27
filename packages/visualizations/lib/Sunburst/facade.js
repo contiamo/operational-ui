@@ -65,7 +65,7 @@ var Facade = /** @class */ (function () {
                 data: function (data) { return data; }
             },
             series: {
-                color: function (d) { return assignColors(d.name, d.color); },
+                color: function (d) { return assignColors(d.name); },
                 name: function (d) { return d.name || ""; },
                 value: function (d) { return d.value; }
             }

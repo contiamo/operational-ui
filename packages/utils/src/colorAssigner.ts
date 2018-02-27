@@ -36,18 +36,14 @@ export const colorAssigner = (palette: Array<string>) => {
     })
   }
 
-  const addAssignment = (key: string, color: string): string => {
+  const assignColor = (key: string): string => {
+    const color: string = nextColor()
     assigned[key] = color
     usedColors.push(color)
     return color
   }
 
-  const assignColor = (key: string, color?: string): string => {
-    // @TODO color must be a hex
-    return addAssignment(key, color || nextColor())
-  }
-
-  return (key: string, color?: string): string => {
-    return getColor(key) || assignColor(key, color)
+  return (key: string): string => {
+    return getColor(key) || assignColor(key)
   }
 }

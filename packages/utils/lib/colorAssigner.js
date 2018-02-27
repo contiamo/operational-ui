@@ -27,17 +27,14 @@ exports.colorAssigner = function (palette) {
             return usageCount[color] === min;
         });
     };
-    var addAssignment = function (key, color) {
+    var assignColor = function (key) {
+        var color = nextColor();
         assigned[key] = color;
         usedColors.push(color);
         return color;
     };
-    var assignColor = function (key, color) {
-        // @TODO color must be a hex
-        return addAssignment(key, color || nextColor());
-    };
-    return function (key, color) {
-        return getColor(key) || assignColor(key, color);
+    return function (key) {
+        return getColor(key) || assignColor(key);
     };
 };
 //# sourceMappingURL=colorAssigner.js.map
