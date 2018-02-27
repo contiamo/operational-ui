@@ -19,8 +19,7 @@ exports.colorAssigner = function (palette) {
             usageCount[color] += 1;
         });
         var min = palette.reduce(function (memo, color) {
-            memo = memo ? Math.min(memo, usageCount[color]) : usageCount[color];
-            return memo;
+            return memo ? Math.min(memo, usageCount[color]) : usageCount[color];
         }, undefined);
         // Find a color with the minimum usage count
         return palette.find(function (color) {

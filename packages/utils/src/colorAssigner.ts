@@ -2,13 +2,13 @@ interface UsageCount {
   [key: string]: number
 }
 
-export const colorAssigner = (palette: Array<string>) => {
+export const colorAssigner = (palette: string[]) => {
   if (palette.length === 0) {
     throw new Error("No color palette defined")
   }
 
-  let assigned: { [key: string]: string } = {}
-  let usedColors: Array<string> = []
+  const assigned: { [key: string]: string } = {}
+  const usedColors: string[] = []
 
   const getColor = (key: string): string => {
     return assigned[key]
@@ -16,7 +16,7 @@ export const colorAssigner = (palette: Array<string>) => {
 
   const nextColor = (): string => {
     // Count how many times each colour has been used
-    let usageCount: UsageCount = palette.reduce((memo: UsageCount, color: string): UsageCount => {
+    const usageCount: UsageCount = palette.reduce((memo: UsageCount, color: string): UsageCount => {
       memo[color] = 0
       return memo
     }, {})
@@ -26,8 +26,7 @@ export const colorAssigner = (palette: Array<string>) => {
     })
 
     const min: number = palette.reduce((memo: number, color: string): number => {
-      memo = memo ? Math.min(memo, usageCount[color]) : usageCount[color]
-      return memo
+      return memo ? Math.min(memo, usageCount[color]) : usageCount[color]
     }, undefined)
 
     // Find a color with the minimum usage count
