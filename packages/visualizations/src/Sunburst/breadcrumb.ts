@@ -90,9 +90,7 @@ class Breadcrumb {
     entering
       .append("div")
       .attr("class", "arrow")
-      .style("border-left-color", (d: any): string => {
-        return d === "hops" ? "#fff" : d.color || "#eee"
-      })
+      .style("border-left-color", this.backgroundColor)
 
     entering.merge(trail).on("click", this.onClick.bind(this))
   }

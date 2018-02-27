@@ -71,9 +71,7 @@ var Breadcrumb = /** @class */ (function () {
         entering
             .append("div")
             .attr("class", "arrow")
-            .style("border-left-color", function (d) {
-            return d === "hops" ? "#fff" : d.color || "#eee";
-        });
+            .style("border-left-color", this.backgroundColor);
         entering.merge(trail).on("click", this.onClick.bind(this));
     };
     Breadcrumb.prototype.onClick = function (d) {
