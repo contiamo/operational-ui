@@ -24,7 +24,7 @@ export interface IAccessors {
         data: (d: IObject) => IObject;
     };
     series: {
-        color: (d: TDatum, colorAssigner: (key: string, color?: string) => string) => string;
+        color: (d: TDatum) => string;
         name: (d: TDatum) => string;
         value: (d: TDatum) => number;
     };

@@ -1,7 +1,6 @@
 import { IAccessors, IObject, IState, TDatum, TStateWriter } from "./typings"
 import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy"
 import { filter, forEach, isEmpty, map, reduce } from "lodash/fp"
-import { colorAssigner } from "@operational/utils"
 
 class DataHandler {
   color: (d: TDatum) => string
@@ -20,15 +19,10 @@ class DataHandler {
 
   assignAccessors(): void {
     const accessors: IAccessors = this.state.current.get("accessors").series
-    const assignColor = colorAssigner(this.state.current.get("config").palette)
 
     // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
     forEach.convert({ cap: false })((accessor: (d: TDatum, ...args: any[]) => any, key: string): void => {
-      if (key === "color") {
-        this.color = (d: TDatum): string => (d.data ? accessor(d.data, assignColor) : accessor(d, assignColor))
-      } else {
-        ;(this as any)[key] = (d: TDatum): any => (d.data ? accessor(d.data) : accessor(d))
-      }
+      ;(this as any)[key] = (d: TDatum): any => (d.data ? accessor(d.data) : accessor(d))
     })(accessors)
   }
 

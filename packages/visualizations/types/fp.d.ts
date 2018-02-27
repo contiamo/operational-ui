@@ -163,6 +163,7 @@ declare namespace fp {
     flatten: any
     forEach: any
     get: any
+    has: any
     identity: any
     indexOf: any
     invoke: any

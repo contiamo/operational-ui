@@ -14,7 +14,7 @@ import { VisualizationWrapper } from "../../src/index"
 const config: any = { maxRings: 4, propagateColors: true }
 
 const seriesAccessors = {
-  color: (d: any, assignColor: any): string => d.value > 10000 ? assignColor("large") : assignColor("small")
+  // color: (d: any, assignColor: any): string => d.value > 10000 ? assignColor("large") : assignColor("small")
   // color: (d): string => d.value > 10000 ? "#f00" : "#0f0"
 }
 
@@ -217,7 +217,6 @@ const data = {
     },
     {
       name: "North America",
-      color: "#f00",
       children: [
         {
           name: "USA",
@@ -294,7 +293,7 @@ const data = {
   ]
 }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} accessors={{ series: seriesAccessors }} /></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} /></OperationalUI>
 
 render(<App />, containerNode)
 

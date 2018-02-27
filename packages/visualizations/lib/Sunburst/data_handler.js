@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var d3_hierarchy_1 = require("d3-hierarchy");
 var fp_1 = require("lodash/fp");
-var utils_1 = require("@operational/utils");
 var DataHandler = /** @class */ (function () {
     function DataHandler(state, stateWriter) {
         this.state = state;
@@ -11,16 +10,10 @@ var DataHandler = /** @class */ (function () {
     DataHandler.prototype.assignAccessors = function () {
         var _this = this;
         var accessors = this.state.current.get("accessors").series;
-        var assignColor = utils_1.colorAssigner(this.state.current.get("config").palette);
         // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
         fp_1.forEach.convert({ cap: false })(function (accessor, key) {
-            if (key === "color") {
-                _this.color = function (d) { return (d.data ? accessor(d.data, assignColor) : accessor(d, assignColor)); };
-            }
-            else {
-                ;
-                _this[key] = function (d) { return (d.data ? accessor(d.data) : accessor(d)); };
-            }
+            ;
+            _this[key] = function (d) { return (d.data ? accessor(d.data) : accessor(d)); };
         })(accessors);
     };
     DataHandler.prototype.prepareData = function () {
