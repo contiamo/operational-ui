@@ -1,4 +1,4 @@
-type usageCountType = {
+interface UsageCount {
   [key: string]: number
 }
 
@@ -16,7 +16,7 @@ export const colorAssigner = (palette: Array<string>) => {
 
   const nextColor = (): string => {
     // Count how many times each colour has been used
-    let usageCount: usageCountType = palette.reduce((memo: usageCountType, color: string): usageCountType => {
+    let usageCount: UsageCount = palette.reduce((memo: UsageCount, color: string): UsageCount => {
       memo[color] = 0
       return memo
     }, {})
