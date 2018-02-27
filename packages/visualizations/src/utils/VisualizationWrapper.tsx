@@ -1,6 +1,6 @@
 import * as React from "react"
 import { withTheme } from "glamorous"
-import { forEach } from "lodash/fp"
+import { defaults, forEach } from "lodash/fp"
 import { Theme } from "@operational/theme"
 
 export interface IProps {
@@ -47,7 +47,7 @@ class VisualizationWrapperInternal extends React.Component<IPropsWithTheme, {}> 
     forEach.convert({ cap: false })((accessors: any, key: string): void => {
       this.viz.accessors(key, accessors)
     })(this.props.accessors)
-    this.viz.config(this.props.config || {})
+    this.viz.config(defaults({ palette: this.props.theme.colors.visualizationPalette })(this.props.config || {}))
   }
 
   componentWillUnmount() {

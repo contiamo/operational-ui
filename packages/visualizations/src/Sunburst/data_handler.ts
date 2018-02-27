@@ -19,8 +19,9 @@ class DataHandler {
 
   assignAccessors(): void {
     const accessors: IAccessors = this.state.current.get("accessors").series
+
     // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
-    forEach.convert({ cap: false })((accessor: (d: TDatum) => any, key: string): void => {
+    forEach.convert({ cap: false })((accessor: (d: TDatum, ...args: any[]) => any, key: string): void => {
       ;(this as any)[key] = (d: TDatum): any => (d.data ? accessor(d.data) : accessor(d))
     })(accessors)
   }
@@ -64,10 +65,8 @@ class DataHandler {
 
   assignColors(node: any): void {
     const propagateColors: boolean = this.state.current.get("config").propagateColors
-    node.color =
-      propagateColors && node.parent && !this.color(node)
-        ? this.color(node.parent) || node.parent.color
-        : this.color(node)
+
+    node.color = propagateColors && node.depth > 1 ? node.parent.color : node.depth > 0 ? this.color(node) : "#fff"
   }
 
   assignNames(node: any): void {

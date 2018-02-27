@@ -24,7 +24,6 @@ const simpleSnippet = `
           "children": [
             {
               "name": "Europe",
-              "color": "#0f0",
               "value": 52000,
               "children": [
                 {
@@ -139,7 +138,6 @@ const simpleSnippet = `
             },
             {
               "name": "Asia",
-              "color": "#0ff",
               "value": 38400,
               "children": [
                 {
@@ -200,7 +198,6 @@ const simpleSnippet = `
             },
             {
               "name": "North America",
-              "color": "#f00",
               "value": 43000,
               "children": [
                 {
@@ -361,6 +358,13 @@ const propDescription = {
       name: "outerBorderMargin",
       description: "Margin between edge of chart and drawing area",
       defaultValue: "1",
+      type: "number",
+      optional: true
+    },
+    {
+      name: "palette",
+      description: "Color palette for visualization",
+      defaultValue: "[#bbb] || theme visualization palette",
       type: "number",
       optional: true
     },

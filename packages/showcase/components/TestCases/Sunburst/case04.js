@@ -2,6 +2,11 @@ import Layout from "../../../components/Layout"
 import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
+import { operational } from "@operational/theme"
+
+const config = {
+  palette: operational.colors.visualizationPalette
+}
 
 const data = {
   name: "All",
@@ -10,7 +15,6 @@ const data = {
     {
       name: "Europe",
       value: 50000,
-      color: "#0f0",
       children: [
         {
           name: "UK",
@@ -148,7 +152,6 @@ const data = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -209,7 +212,6 @@ const data = {
     },
     {
       name: "North America",
-      color: "#f00",
       value: 45700,
       children: [
         {
@@ -292,6 +294,7 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
+    viz.config(config)
     viz.draw()
   })
 }

@@ -6,14 +6,16 @@ import Focus from "./focus"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
-import { every, find, isEmpty, uniqueId } from "lodash/fp"
+import { every, find, has, isEmpty, uniqueId } from "lodash/fp"
 import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum } from "./typings"
+import { colorAssigner } from "@operational/utils"
 
 class Facade {
   __disposed: boolean = false
   canvas: Canvas
   components: IObject
   context: Element
+  customColorAccessor: boolean = false
   events: EventEmitter
   state: StateHandler<IConfig>
 
@@ -38,14 +40,15 @@ class Facade {
     return {
       arrowOffset: 10,
       centerCircleRadius: 0.9,
+      disableAnimations: false,
       duration: 1e3,
       height: 500,
       hidden: false,
       maxRings: 10,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
+      palette: ["#bbb"],
       propagateColors: true,
-      disableAnimations: false,
       sort: true,
       uid: uniqueId("sunburst"),
       visualizationName: "sunburst",
@@ -53,13 +56,18 @@ class Facade {
     }
   }
 
+  defaultColorAssigner(palette: string[]): (key: string) => string {
+    return colorAssigner(palette)
+  }
+
   initialAccessors(): IAccessors {
+    const assignColors: (key: string) => string = this.defaultColorAssigner(this.initialConfig().palette)
     return {
       data: {
         data: (data: IObject): IObject => data
       },
       series: {
-        color: (d: TDatum): string => d.color,
+        color: (d: TDatum): string => assignColors(d.name),
         name: (d: TDatum): string => d.name || "",
         value: (d: TDatum): number => d.value
       }
@@ -112,10 +120,19 @@ class Facade {
   }
 
   config(config?: Partial<IConfig>): IConfig {
+    if (config.palette && !this.customColorAccessor) {
+      const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
+      this.accessors("series", {
+        color: (d: TDatum): string => assignColors(d.name, d.color)
+      })
+    }
     return this.state.config(config)
   }
 
   accessors(type: string, accessors: IObject): IObject {
+    if (type === "series" && has("color")(accessors)) {
+      this.customColorAccessor = true
+    }
     return this.state.accessors(type, accessors)
   }
 

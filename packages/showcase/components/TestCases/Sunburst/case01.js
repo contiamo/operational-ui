@@ -2,6 +2,12 @@ import Layout from "../../../components/Layout"
 import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
+import { operational } from "@operational/theme"
+
+const config = {
+  sort: false,
+  palette: operational.colors.visualizationPalette
+}
 
 const data = {
   name: "All",
@@ -9,17 +15,14 @@ const data = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400
     },
     {
       name: "North America",
-      color: "#f00",
       value: 36780
     }
   ]
@@ -31,22 +34,18 @@ const data1 = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400
     },
     {
       name: "North America",
-      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "#00f",
       value: 25200
     }
   ]
@@ -58,27 +57,22 @@ const data2 = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400
     },
     {
       name: "Australia",
-      color: "#ff0",
       value: 18000
     },
     {
       name: "North America",
-      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "#00f",
       value: 25200
     }
   ]
@@ -90,7 +84,6 @@ const data3 = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -113,7 +106,6 @@ const data3 = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -140,17 +132,14 @@ const data3 = {
     },
     {
       name: "Australia",
-      color: "#ff0",
       value: 18000
     },
     {
       name: "North America",
-      color: "#f00",
       value: 36780
     },
     {
       name: "Africa",
-      color: "#00f",
       value: 25200
     }
   ]
@@ -162,7 +151,6 @@ const data4 = {
   children: [
     {
       name: "Europe",
-      color: "#0f0",
       value: 50000,
       children: [
         {
@@ -185,7 +173,6 @@ const data4 = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -212,12 +199,10 @@ const data4 = {
     },
     {
       name: "Australia",
-      color: "#ff0",
       value: 18000
     },
     {
       name: "North America",
-      color: "#f00",
       value: 45700,
       children: [
         {
@@ -270,7 +255,6 @@ const data4 = {
     },
     {
       name: "Africa",
-      color: "#00f",
       value: 25200
     }
   ]
@@ -281,7 +265,7 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
-    viz.config({ sort: false })
+    viz.config(config)
     viz.draw()
   })
 

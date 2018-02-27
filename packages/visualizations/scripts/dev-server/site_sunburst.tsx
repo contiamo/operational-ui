@@ -11,7 +11,12 @@ const containerNode = document.getElementById("app")
 import Sunburst from "../../src/Sunburst/facade"
 import { VisualizationWrapper } from "../../src/index"
 
-const config: any = { maxRings: 4 }
+const config: any = { maxRings: 4, propagateColors: true }
+
+const seriesAccessors = {
+  // color: (d: any, assignColor: any): string => d.value > 10000 ? assignColor("large") : assignColor("small")
+  // color: (d): string => d.value > 10000 ? "#f00" : "#0f0"
+}
 
 const data = {
   name: "All",
@@ -19,7 +24,6 @@ const data = {
     {
       name: "Europe",
       value: 52000,
-      color: "#0f0",
       children: [
         {
           name: "UK",
@@ -153,7 +157,6 @@ const data = {
     },
     {
       name: "Asia",
-      color: "#0ff",
       value: 38400,
       children: [
         {
@@ -214,7 +217,6 @@ const data = {
     },
     {
       name: "North America",
-      color: "#f00",
       children: [
         {
           name: "USA",
@@ -267,7 +269,6 @@ const data = {
     {
       name: "Africa",
       value: 4130,
-      color: "#ff0",
       children: [
         {
           name: "South Africa",
@@ -291,7 +292,6 @@ const data = {
     }
   ]
 }
-
 
 const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} /></OperationalUI>
 

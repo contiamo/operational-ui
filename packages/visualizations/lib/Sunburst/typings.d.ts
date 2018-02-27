@@ -3,14 +3,15 @@ export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSe
 export interface IConfig {
     arrowOffset: number;
     centerCircleRadius: number;
+    disableAnimations: boolean;
     duration: number;
     height: number;
     hidden: boolean;
     maxRings: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
+    palette: string[];
     propagateColors: boolean;
-    disableAnimations: boolean;
     sort: boolean;
     uid: string;
     visualizationName: string;

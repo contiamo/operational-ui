@@ -124,146 +124,32 @@ const data = {
   ]
 }
 
-const data1 = {
-  name: "All",
-  value: "168390",
-  children: [
-    {
-      name: "Europe",
-      value: 50000,
-      children: [
-        {
-          name: "UK",
-          value: 11500
-        },
-        {
-          name: "Germany",
-          value: 9240
-        },
-        {
-          name: "Spain",
-          value: 12345
-        },
-        {
-          name: "Italy",
-          value: 1830
-        }
-      ]
-    },
-    {
-      name: "Asia",
-      value: 38400,
-      children: [
-        {
-          name: "Japan",
-          value: 8230
-        },
-        {
-          name: "China",
-          value: 13000
-        },
-        {
-          name: "Thailand",
-          value: 2548
-        },
-        {
-          name: "India",
-          value: 1800
-        },
-        {
-          name: "Malaysia",
-          value: 1423
-        }
-      ]
-    },
-    {
-      name: "Australia",
-      value: 18000
-    },
-    {
-      name: "North America",
-      value: 36780
-    },
-    {
-      name: "Africa",
-      value: 25200
-    }
-  ]
-}
-
-const data2 = {
-  name: "All",
-  value: "143190",
-  children: [
-    {
-      name: "Europe",
-      value: 50000,
-      children: [
-        {
-          name: "UK",
-          value: 11500
-        },
-        {
-          name: "Germany",
-          value: 9240
-        },
-        {
-          name: "Italy",
-          value: 1830
-        }
-      ]
-    },
-    {
-      name: "Asia",
-      value: 38400,
-      children: [
-        {
-          name: "Japan",
-          value: 8230
-        },
-        {
-          name: "China",
-          value: 13000
-        },
-        {
-          name: "India",
-          value: 1800
-        },
-        {
-          name: "Malaysia",
-          value: 1423
-        }
-      ]
-    },
-    {
-      name: "Australia",
-      value: 18000
-    },
-    {
-      name: "North America",
-      value: 36780
-    }
-  ]
-}
-
 export const marathon = ({ test, afterAll, container }) => {
   const viz = new Sunburst(container)
 
-  test("Renders a sunburst chart", () => {
+  test("Renders a sunburst chart with automatic color assignment", () => {
     viz.data(data)
     viz.config(config)
     viz.draw()
   })
 
-  test("Removes an entire set of child nodes", () => {
-    viz.data(data1)
+  test("Set colors manually", () => {
+    const palette = operational.colors.visualizationPalette
+    viz.accessors("series", {
+      color: (d): string => (d.value > 20000 ? palette[0] : palette[1])
+    })
     viz.draw()
   })
 
-  test("Removes single child nodes", () => {
-    viz.data(data2)
+  test("Turn off color propagation", () => {
+    viz.config({ propagateColors: false })
+    viz.draw()
+  })
+
+  test("Change color palette", () => {
+    viz.config({ palette: [operational.colors.warning, operational.colors.error] })
     viz.draw()
   })
 }
 
-export const title = "Data transitions - exiting"
+export const title = "Series accessors"

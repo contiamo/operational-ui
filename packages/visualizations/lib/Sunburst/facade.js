@@ -9,10 +9,12 @@ var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
+var utils_1 = require("@operational/utils");
 var Facade = /** @class */ (function () {
     function Facade(context) {
         var _this = this;
         this.__disposed = false;
+        this.customColorAccessor = false;
         this.findNode = function (matchers) {
             return fp_1.find(function (d) {
                 return fp_1.every.convert({ cap: false })(function (value, key) {
@@ -38,27 +40,32 @@ var Facade = /** @class */ (function () {
         return {
             arrowOffset: 10,
             centerCircleRadius: 0.9,
+            disableAnimations: false,
             duration: 1e3,
             height: 500,
             hidden: false,
             maxRings: 10,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
+            palette: ["#bbb"],
             propagateColors: true,
-            disableAnimations: false,
             sort: true,
             uid: fp_1.uniqueId("sunburst"),
             visualizationName: "sunburst",
             width: 500
         };
     };
+    Facade.prototype.defaultColorAssigner = function (palette) {
+        return utils_1.colorAssigner(palette);
+    };
     Facade.prototype.initialAccessors = function () {
+        var assignColors = this.defaultColorAssigner(this.initialConfig().palette);
         return {
             data: {
                 data: function (data) { return data; }
             },
             series: {
-                color: function (d) { return d.color; },
+                color: function (d) { return assignColors(d.name); },
                 name: function (d) { return d.name || ""; },
                 value: function (d) { return d.value; }
             }
@@ -86,9 +93,18 @@ var Facade = /** @class */ (function () {
         return this.state.data(data);
     };
     Facade.prototype.config = function (config) {
+        if (config.palette && !this.customColorAccessor) {
+            var assignColors_1 = this.defaultColorAssigner(config.palette);
+            this.accessors("series", {
+                color: function (d) { return assignColors_1(d.name, d.color); }
+            });
+        }
         return this.state.config(config);
     };
     Facade.prototype.accessors = function (type, accessors) {
+        if (type === "series" && fp_1.has("color")(accessors)) {
+            this.customColorAccessor = true;
+        }
         return this.state.accessors(type, accessors);
     };
     Facade.prototype.on = function (event, handler) {

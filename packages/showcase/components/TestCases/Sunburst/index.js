@@ -8,5 +8,6 @@ import * as case07 from "./case07"
 import * as case08 from "./case08"
 import * as case09 from "./case09"
 import * as case10 from "./case10"
+import * as case11 from "./case11"
 
-export default [case01, case02, case03, case04, case05, case06, case07, case08, case09, case10]
+export default [case01, case02, case03, case04, case05, case06, case07, case08, case09, case10, case11]
