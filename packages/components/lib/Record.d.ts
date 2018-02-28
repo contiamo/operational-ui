@@ -5,13 +5,12 @@ export interface IProps {
     className?: string;
     children?: React.ReactNode;
     controls?: React.ReactNode;
+    initiallyExpanded?: boolean;
 }
 export interface IState {
     isExpanded: boolean;
 }
 export default class Record extends React.Component<IProps, IState> {
-    state: {
-        isExpanded: boolean;
-    };
+    constructor(props: IProps);
     render(): JSX.Element;
 }

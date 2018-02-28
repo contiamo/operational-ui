@@ -33,10 +33,10 @@ var HeaderContainer = glamorous_1.default.div(function (_a) {
 });
 var Record = /** @class */ (function (_super) {
     __extends(Record, _super);
-    function Record() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function Record(props) {
+        var _this = _super.call(this, props) || this;
         _this.state = {
-            isExpanded: false
+            isExpanded: Boolean(props.initiallyExpanded)
         };
         return _this;
     }
