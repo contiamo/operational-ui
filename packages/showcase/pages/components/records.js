@@ -25,13 +25,30 @@ const propDescription = [
     defaultValue: "",
     type: "React.ReactElement",
     optional: true
+  },
+  {
+    name: "initiallyExpanded",
+    description: "Specifies the expanded state the component should start in (whether RecordBody should show).",
+    defaultValue: "",
+    type: "React.ReactElement",
+    optional: true
+  },
+  {
+    name: "controls",
+    description: "Replaces the standard expand button with a custom set of controls.",
+    defaultValue: "",
+    type: "React.ReactElement",
+    optional: true
   }
 ]
 
 export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
-      <p>Records are great components!</p>
+      <p>
+        Records are general-purpose displays of resources, composed of a header element and a body that can be expanded
+        and hidden from a standardized button on the top right.
+      </p>
 
       <Heading2Type>Usage</Heading2Type>
       <Playground

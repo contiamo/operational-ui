@@ -8,6 +8,7 @@ export interface IProps {
   className?: string
   children?: React.ReactNode
   controls?: React.ReactNode
+  initiallyExpanded?: boolean
 }
 
 export interface IState {
@@ -29,8 +30,11 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 export default class Record extends React.Component<IProps, IState> {
-  state = {
-    isExpanded: false
+  constructor(props: IProps) {
+    super(props)
+    this.state = {
+      isExpanded: Boolean(props.initiallyExpanded)
+    }
   }
 
   render() {
