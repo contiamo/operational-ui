@@ -3,7 +3,7 @@ import glamorous, { Div, GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   className?: string
@@ -40,7 +40,7 @@ const Container = glamorous.div(
   })
 )
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container
     key={props.id}
     css={props.css}

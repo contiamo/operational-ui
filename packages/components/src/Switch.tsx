@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   on: boolean
   onChange: (on: boolean) => void
@@ -75,7 +75,7 @@ const Rail = glamorous.div(
   })
 )
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container
     key={props.id}
     style={props.style}

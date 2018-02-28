@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -34,7 +34,7 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container css={props.css} className={props.className}>
     <thead>
       <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>

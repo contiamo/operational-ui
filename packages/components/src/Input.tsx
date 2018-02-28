@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 import withLabel from "./utils/with-label"
 import * as mixins from "./utils/mixins"
 
-export interface IProps {
+export interface Props {
   css?: any
   className?: string
   placeholder?: string
@@ -46,7 +46,7 @@ const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disable
   "&:focus": mixins.inputFocus({ theme })
 }))
 
-const Input = (props: IProps) => {
+const Input = (props: Props) => {
   // `css` and `className` props are not set, as they are set on the wrapped label container.
   // See ./src/utils/with-label.tsx.
   return (

@@ -1,14 +1,14 @@
 /// <reference types="react" />
 import * as React from "react";
 import { Theme } from "@operational/theme";
-export interface IProps {
+export interface Props {
     active?: number;
     activeColor?: string;
     children?: React.ReactNode;
     onChange?: (index: number) => void;
 }
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
     theme: Theme;
 }
-declare const WrappedTabs: React.SFC<IProps>;
+declare const WrappedTabs: React.SFC<Props>;
 export default WrappedTabs;

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: any;
     className?: string;
@@ -10,5 +10,5 @@ export interface IProps {
     page?: number;
     pageCount: number;
 }
-declare const _default: ({activeColor, maxVisible, onChange, pageCount, page, id, css, className}: IProps) => JSX.Element;
+declare const _default: ({activeColor, maxVisible, onChange, pageCount, page, id, css, className}: Props) => JSX.Element;
 export default _default;

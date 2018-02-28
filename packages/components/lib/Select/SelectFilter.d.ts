@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { Theme } from "@operational/theme";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: any;
     className?: string;
@@ -10,5 +10,5 @@ export interface IProps {
     theme?: Theme;
     color?: string;
 }
-declare const _default: (props: IProps) => JSX.Element;
+declare const _default: (props: Props) => JSX.Element;
 export default _default;

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     css?: {};
     className?: string;
     username?: string;
@@ -12,8 +12,8 @@ export interface IProps {
     onSubmit?: () => void;
     onChange?: (change: {}) => void;
 }
-export interface IState {
+export interface State {
 }
-export default class Auth extends React.Component<IProps, IState> {
+export default class Auth extends React.Component<Props, State> {
     render(): JSX.Element;
 }

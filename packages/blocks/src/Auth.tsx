@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import { Input, TitleType, Button, Spinner } from "@operational/components"
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   username?: string
@@ -17,7 +17,7 @@ export interface IProps {
   onChange?: (change: {}) => void
 }
 
-export interface IState {}
+export interface State {}
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "auth",
@@ -78,7 +78,7 @@ const inputStyle: {} = {
  */
 const isStringValue = (stringValue?: string): boolean => !!stringValue || stringValue === ""
 
-export default class Auth extends React.Component<IProps, IState> {
+export default class Auth extends React.Component<Props, State> {
   render() {
     return (
       <Container css={this.props.css} className={this.props.className}>

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: any;
     className?: string;
@@ -8,7 +8,7 @@ export interface IProps {
     children: React.ReactNode;
     onClose?: () => void;
 }
-declare class Modal extends React.Component<IProps, {}> {
+declare class Modal extends React.Component<Props, {}> {
     contentNode: any;
     render(): JSX.Element;
 }

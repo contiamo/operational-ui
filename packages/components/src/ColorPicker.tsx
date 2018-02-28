@@ -4,7 +4,7 @@ import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import Button from "./Button"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   className?: string
@@ -13,7 +13,7 @@ export interface IProps {
   onChange?: (color: string) => any
 }
 
-export interface IState {
+export interface State {
   isPickerOpen: boolean
 }
 
@@ -45,7 +45,7 @@ const PickerContainer = glamorous.div({ position: "absolute" }, ({ theme }: { th
   zIndex: theme.baseZIndex + 100
 }))
 
-export default class ColorPicker extends React.Component<IProps, IState> {
+export default class ColorPicker extends React.Component<Props, State> {
   static defaultProps = {
     color: "#03f",
     size: 16

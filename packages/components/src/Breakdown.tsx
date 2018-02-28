@@ -5,7 +5,7 @@ import { readableTextColor, setBrightness } from "@operational/utils"
 
 import { IconName } from "./Icon"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -117,7 +117,7 @@ const Number = glamorous.div(
   })
 )
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container
     key={props.id}
     css={props.css}

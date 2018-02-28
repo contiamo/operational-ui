@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: {};
     className?: string;
@@ -11,10 +11,10 @@ export interface IProps {
     expandedWidth?: number;
     width?: number;
 }
-export interface IState {
+export interface State {
     isHovered: boolean;
 }
-export default class Sidenav extends React.Component<IProps, IState> {
+export default class Sidenav extends React.Component<Props, State> {
     state: {
         isHovered: boolean;
     };

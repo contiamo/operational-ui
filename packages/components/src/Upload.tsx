@@ -9,7 +9,7 @@ export interface IRequestOptions {
   name?: string
 }
 
-export interface IProps {
+export interface Props {
   action?: string
   accept?: string
   data?: {}
@@ -24,7 +24,7 @@ export interface IProps {
   request?: (params: IRequestOptions) => Promise<any>
 }
 
-class Upload extends React.Component<IProps, any> {
+class Upload extends React.Component<Props, any> {
   static defaultProps = {
     accept: "*",
     data: {},

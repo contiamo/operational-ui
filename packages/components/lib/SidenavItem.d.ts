@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export interface IProps {
+export interface Props {
     id?: string | number;
     className?: string;
     onClick?: () => void;
@@ -7,5 +7,5 @@ export interface IProps {
     css?: {};
     label: string;
 }
-declare const _default: (props: IProps) => JSX.Element;
+declare const _default: (props: Props) => JSX.Element;
 export default _default;

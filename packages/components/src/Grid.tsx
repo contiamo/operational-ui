@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 
 export type Dimension = string | number
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -38,7 +38,7 @@ const Container = glamorous.div(
   })
 )
 
-const Grid: React.SFC<IProps> = (props: IProps) => (
+const Grid: React.SFC<Props> = (props: Props) => (
   <Container
     key={props.id}
     css={props.css}

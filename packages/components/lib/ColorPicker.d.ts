@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { RGBColor } from "react-color";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: {};
     className?: string;
@@ -9,10 +9,10 @@ export interface IProps {
     size?: number;
     onChange?: (color: string) => any;
 }
-export interface IState {
+export interface State {
     isPickerOpen: boolean;
 }
-export default class ColorPicker extends React.Component<IProps, IState> {
+export default class ColorPicker extends React.Component<Props, State> {
     static defaultProps: {
         color: string;
         size: number;

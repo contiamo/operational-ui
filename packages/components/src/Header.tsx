@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor } from "@operational/utils"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   className?: string
   css?: {}
@@ -21,7 +21,7 @@ const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
   boxShadow: theme.shadows.card
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>

@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   className?: string
@@ -16,7 +16,7 @@ const Container = glamorous.ul({
   margin: "0"
 })
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>

@@ -1,12 +1,12 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     css?: {};
     className?: string;
     children?: React.ReactNode;
     __isRecordBody?: boolean;
 }
-declare const _default: ((props: IProps) => JSX.Element) & {
+declare const _default: ((props: Props) => JSX.Element) & {
     defaultProps: {
         __isRecordBody: boolean;
     };

@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import Button from "./Button"
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -11,7 +11,7 @@ export interface IProps {
   initiallyExpanded?: boolean
 }
 
-export interface IState {
+export interface State {
   isExpanded: boolean
 }
 
@@ -29,8 +29,8 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   height: 48
 }))
 
-export default class Record extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+export default class Record extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = {
       isExpanded: Boolean(props.initiallyExpanded)

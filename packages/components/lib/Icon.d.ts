@@ -4,15 +4,15 @@ import { Theme } from "@operational/theme";
 import * as BrandIcons from "./Icon/BrandIcon";
 import { ReactFeatherIconName } from "./Icon/ReactFeatherIcon";
 export declare type IconName = ReactFeatherIconName | BrandIcons.BrandIconName;
-export interface IProps {
+export interface Props {
     id?: string | number;
     name: IconName;
     size?: number;
     color?: string;
     rotation?: number;
 }
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
     theme: Theme;
 }
-declare const WrappedIcon: React.SFC<IProps>;
+declare const WrappedIcon: React.SFC<Props>;
 export default WrappedIcon;

@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -18,7 +18,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-const RecordHeader = (props: IProps) => (
+const RecordHeader = (props: Props) => (
   <Container css={props.css} className={props.className}>
     {props.children}
   </Container>

@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import withLabel from "./utils/with-label"
 
-export interface IProps {
+export interface Props {
   id?: string
   css?: {}
   className?: {}
@@ -27,7 +27,7 @@ const OptionText = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   marginLeft: theme.spacing / 6
 }))
 
-const Checkbox = (props: IProps) => (
+const Checkbox = (props: Props) => (
   // `css` and `className` props are not set, as they are set on the wrapped label container.
   // See ./utils/with-label.tsx.
   <Container>

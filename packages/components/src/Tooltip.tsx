@@ -8,7 +8,7 @@ import { Theme } from "@operational/theme"
 // It gets translated into the Position type inside the component, so it allows for a more
 // straightforward implementation.
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -20,7 +20,7 @@ export interface IProps {
 }
 
 // bbTop is an abbreviation of boundingBoxTop
-export interface IState {
+export interface State {
   bbTop: number
   bbBottom: number
   bbLeft: number
@@ -137,7 +137,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
   }
 })
 
-export default class Tooltip extends React.Component<IProps, IState> {
+export default class Tooltip extends React.Component<Props, State> {
   state = {
     bbTop: 0,
     bbLeft: 0,

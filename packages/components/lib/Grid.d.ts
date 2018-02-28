@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 export declare type Dimension = string | number;
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: any;
     className?: string;
@@ -10,5 +10,5 @@ export interface IProps {
     columns?: Dimension[];
     gap?: number;
 }
-declare const Grid: React.SFC<IProps>;
+declare const Grid: React.SFC<Props>;
 export default Grid;
