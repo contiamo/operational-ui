@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   className?: string
   onClick?: () => void
@@ -64,7 +64,7 @@ const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container
     key={props.id}
     css={props.css}

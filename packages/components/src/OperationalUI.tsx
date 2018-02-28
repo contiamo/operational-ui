@@ -3,12 +3,12 @@ import { ThemeProvider } from "glamorous"
 
 import { Theme, operational } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   theme?: Theme
   children?: React.ReactNode
 }
 
-export default (props: IProps) => {
+export default (props: Props) => {
   // Only one child is allowed here,
   // see https://reactjs.org/docs/react-api.html#reactchildrenonly
   if (React.Children.count(props.children) > 1) {

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: {};
     className?: string;
@@ -9,5 +9,5 @@ export interface IProps {
     disabled?: boolean;
     active?: boolean;
 }
-declare const _default: (props: IProps) => JSX.Element;
+declare const _default: (props: Props) => JSX.Element;
 export default _default;

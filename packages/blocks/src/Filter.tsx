@@ -3,12 +3,12 @@ import glamorous from "glamorous"
 import { Chip, Modal, Input, Select, DatePicker } from "@operational/components"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   onClear?: (id: string) => void
   children?: React.ReactNode
 }
 
-export interface IState {
+export interface State {
   isExpanded: boolean
 }
 
@@ -29,8 +29,8 @@ const FormFields = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-class Filter extends React.Component<IProps, IState> {
-  state: IState = {
+class Filter extends React.Component<Props, State> {
+  state: State = {
     isExpanded: false
   }
 

@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   className?: string
   css?: {}
   children?: React.ReactNode
@@ -24,7 +24,7 @@ const Divider = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   color: theme.colors.black
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container className={props.className} css={props.css}>
     {(() => {
       /* This IIFE adds the divider elements containing slashes between children, e.g:

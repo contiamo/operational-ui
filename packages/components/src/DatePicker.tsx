@@ -18,7 +18,7 @@ import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker/
 import Month from "./DatePicker/DatePicker.Month"
 import withLabel from "./utils/with-label"
 
-export interface IProps {
+export interface Props {
   id?: string
   // Injected by withLabel higher-order component
   domId?: string
@@ -31,13 +31,13 @@ export interface IProps {
   placeholder?: string
 }
 
-export interface IState {
+export interface State {
   isExpanded: boolean
   year: number
   month: number
 }
 
-class DatePicker extends React.Component<IProps, IState> {
+class DatePicker extends React.Component<Props, State> {
   state = {
     isExpanded: false,
     year: 2017,

@@ -13,7 +13,7 @@ export interface IStyleProps {
   condensed?: boolean
 }
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -71,7 +71,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
   }
 })
 
-export default (props: IProps) => {
+export default (props: Props) => {
   return (
     <Container
       tabIndex={-1}

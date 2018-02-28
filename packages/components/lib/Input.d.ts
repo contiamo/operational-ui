@@ -1,4 +1,4 @@
-export interface IProps {
+export interface Props {
     css?: any;
     className?: string;
     placeholder?: string;

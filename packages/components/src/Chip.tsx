@@ -6,7 +6,7 @@ import { Theme, expandColor } from "@operational/theme"
 import Icon, { IconName } from "./Icon"
 import { isWhite } from "./utils/color"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   color?: string
@@ -66,7 +66,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
   }
 })
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container key={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>
     <Content onClick={props.onClick}>{props.children}</Content>
     {props.onIconClick && (

@@ -14,7 +14,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   value: string
@@ -47,7 +47,7 @@ const Content = glamorous.div(
   })
 )
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container css={props.css} className={props.className}>
     <Content active>{props.value}</Content>
   </Container>

@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { readableTextColor } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   className?: string
@@ -15,7 +15,7 @@ export interface IProps {
   width?: number
 }
 
-export interface IState {
+export interface State {
   isHovered: boolean
 }
 
@@ -69,7 +69,7 @@ const Container = glamorous.div(
   }
 )
 
-export default class Sidenav extends React.Component<IProps, IState> {
+export default class Sidenav extends React.Component<Props, State> {
   state = {
     isHovered: false
   }

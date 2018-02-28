@@ -5,7 +5,7 @@ import { readableTextColor, darken } from "@operational/utils"
 
 import { X } from "react-feather"
 
-export interface IProps {
+export interface Props {
   id?: number | string
   css?: any
   className?: string
@@ -15,7 +15,7 @@ export interface IProps {
   color?: string
 }
 
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
   theme: Theme
 }
 
@@ -54,7 +54,7 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
   transform: "translate3d(-50%, -50%, 0)"
 }))
 
-const SelectOption = (props: IPropsWithTheme) => (
+const SelectOption = (props: PropsWithTheme) => (
   <Container
     key={props.id}
     css={props.css}
@@ -75,6 +75,6 @@ const SelectOption = (props: IPropsWithTheme) => (
   </Container>
 )
 
-const WrappedSelectOption: React.SFC<IProps> = withTheme(SelectOption)
+const WrappedSelectOption: React.SFC<Props> = withTheme(SelectOption)
 
 export default WrappedSelectOption

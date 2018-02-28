@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: any;
     className?: string;
@@ -7,7 +7,7 @@ export interface IProps {
     onClick?: () => void;
     __isContextMenuItem?: boolean;
 }
-declare const _default: ((props: IProps) => JSX.Element) & {
+declare const _default: ((props: Props) => JSX.Element) & {
     defaultProps: {
         __isContextMenuItem: boolean;
     };

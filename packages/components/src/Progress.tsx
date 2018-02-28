@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -50,7 +50,7 @@ const Bar = glamorous.div(
   })
 )
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className} fadeParent={!!props.fadeParent}>
     <Bar />
   </Container>

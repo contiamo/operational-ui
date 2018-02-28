@@ -7,7 +7,7 @@ export interface IRequestOptions {
     headers?: {};
     name?: string;
 }
-export interface IProps {
+export interface Props {
     action?: string;
     accept?: string;
     data?: {};
@@ -21,7 +21,7 @@ export interface IProps {
     onSuccess?: (response: {}, file: File) => void;
     request?: (params: IRequestOptions) => Promise<any>;
 }
-declare class Upload extends React.Component<IProps, any> {
+declare class Upload extends React.Component<Props, any> {
     static defaultProps: {
         accept: string;
         data: {};

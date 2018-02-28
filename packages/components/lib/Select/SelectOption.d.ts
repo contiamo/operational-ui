@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { Theme } from "@operational/theme";
-export interface IProps {
+export interface Props {
     id?: number | string;
     css?: any;
     className?: string;
@@ -10,8 +10,8 @@ export interface IProps {
     children?: React.ReactNode;
     color?: string;
 }
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
     theme: Theme;
 }
-declare const WrappedSelectOption: React.SFC<IProps>;
+declare const WrappedSelectOption: React.SFC<Props>;
 export default WrappedSelectOption;

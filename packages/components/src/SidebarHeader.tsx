@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { spin } from "@operational/utils"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   className?: string
@@ -68,7 +68,7 @@ const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean
   }
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container css={props.css} key={props.id} className={props.className}>
     <Header isOpen={!!props.open} onClick={props.onToggle}>
       {props.label}

@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 import { darken } from "@operational/utils"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -32,7 +32,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   }
 })
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <input
       onClick={e => e.stopPropagation()}

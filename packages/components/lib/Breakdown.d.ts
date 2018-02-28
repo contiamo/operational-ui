@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { IconName } from "./Icon";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: any;
     className?: string;
@@ -16,5 +16,5 @@ export interface IProps {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 }
-declare const _default: (props: IProps) => JSX.Element;
+declare const _default: (props: Props) => JSX.Element;
 export default _default;

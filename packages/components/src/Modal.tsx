@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -31,7 +31,7 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
   boxShadow: theme.shadows.popup
 }))
 
-class Modal extends React.Component<IProps, {}> {
+class Modal extends React.Component<Props, {}> {
   contentNode: any
   render() {
     const { props } = this

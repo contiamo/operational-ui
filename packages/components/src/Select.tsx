@@ -21,7 +21,7 @@ const displayOption = (opt: IOption): string => {
   return String(opt.value)
 }
 
-export interface IProps {
+export interface Props {
   id?: string
   // Injected by withLabel higher-order component
   domId?: string
@@ -38,14 +38,14 @@ export interface IProps {
   placeholder?: string
 }
 
-interface IState {
+interface State {
   open: boolean
   updating: boolean
   filter: RegExp
 }
 
-class Select extends React.Component<IProps, IState> {
-  state: IState = {
+class Select extends React.Component<Props, State> {
+  state: State = {
     open: false,
     updating: false,
     filter: new RegExp(/./)

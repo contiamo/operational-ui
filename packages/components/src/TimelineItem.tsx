@@ -3,7 +3,7 @@ import * as ReactFeather from "react-feather"
 import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   className?: string
@@ -69,7 +69,7 @@ const Container = glamorous.li(
   })
 )
 
-export default ({ css, id, className, children, color = "info" }: IProps) => {
+export default ({ css, id, className, children, color = "info" }: Props) => {
   return (
     <Container key={id} css={css} className={className}>
       <StatusContainer color={color} />

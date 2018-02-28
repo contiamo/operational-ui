@@ -2,7 +2,7 @@ import * as React from "react"
 
 export type BrandIconName = "OperationalUI" | "Components" | "Blocks" | "Visualizations" | "Documentation" | "Labs"
 
-export interface IProps {
+export interface Props {
   size?: number
   color?: string
   // OperationalUI needs this prop to animate the inner circle.
@@ -10,7 +10,7 @@ export interface IProps {
   rotation?: number
 }
 
-export const OperationalUI = (props: IProps) => {
+export const OperationalUI = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -31,7 +31,7 @@ export const OperationalUI = (props: IProps) => {
   )
 }
 
-export const Components = (props: IProps) => {
+export const Components = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -41,7 +41,7 @@ export const Components = (props: IProps) => {
   )
 }
 
-export const Blocks = (props: IProps) => {
+export const Blocks = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -51,7 +51,7 @@ export const Blocks = (props: IProps) => {
   )
 }
 
-export const Visualizations = (props: IProps) => {
+export const Visualizations = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -61,7 +61,7 @@ export const Visualizations = (props: IProps) => {
   )
 }
 
-export const Documentation = (props: IProps) => {
+export const Documentation = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -71,7 +71,7 @@ export const Documentation = (props: IProps) => {
   )
 }
 
-export const Labs = (props: IProps) => {
+export const Labs = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (

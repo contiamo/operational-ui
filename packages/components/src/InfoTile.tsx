@@ -4,7 +4,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -35,7 +35,7 @@ const Label = glamorous.small(({ theme }: { theme: Theme }): {} => ({
   opacity: 0.6
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <Label>{props.label}</Label>
     <Content>{props.children}</Content>

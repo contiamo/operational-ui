@@ -3,7 +3,7 @@ export interface IOption {
     label?: string;
     value: Value;
 }
-export interface IProps {
+export interface Props {
     id?: string;
     domId?: string;
     css?: any;

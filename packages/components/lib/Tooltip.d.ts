@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     css?: {};
     className?: string;
     children?: React.ReactNode;
@@ -10,13 +10,13 @@ export interface IProps {
     right?: boolean;
     bottom?: boolean;
 }
-export interface IState {
+export interface State {
     bbTop: number;
     bbBottom: number;
     bbLeft: number;
     bbRight: number;
 }
-export default class Tooltip extends React.Component<IProps, IState> {
+export default class Tooltip extends React.Component<Props, State> {
     state: {
         bbTop: number;
         bbLeft: number;

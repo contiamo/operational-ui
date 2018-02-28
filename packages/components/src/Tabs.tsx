@@ -3,16 +3,16 @@ import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { darken } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
 
-import Tab, { IProps as TabProps } from "./Tab"
+import Tab, { Props as TabProps } from "./Tab"
 
-export interface IProps {
+export interface Props {
   active?: number
   activeColor?: string
   children?: React.ReactNode
   onChange?: (index: number) => void
 }
 
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
   theme: Theme
 }
 
@@ -108,13 +108,13 @@ const TabTitle = glamorous.li(
   })
 )
 
-const Tabs: React.SFC<IPropsWithTheme> = ({
+const Tabs: React.SFC<PropsWithTheme> = ({
   active = 0,
   activeColor = "info",
   children,
   onChange = () => {},
   theme
-}: IPropsWithTheme) => {
+}: PropsWithTheme) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
     children,
@@ -150,6 +150,6 @@ const Tabs: React.SFC<IPropsWithTheme> = ({
   )
 }
 
-const WrappedTabs: React.SFC<IProps> = withTheme(Tabs)
+const WrappedTabs: React.SFC<Props> = withTheme(Tabs)
 
 export default WrappedTabs

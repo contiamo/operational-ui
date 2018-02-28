@@ -4,7 +4,7 @@ import { css } from "glamor"
 import { fadeIn } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: {}
   menuCss?: {}
@@ -16,7 +16,7 @@ export interface IProps {
   keepOpenOnItemClick?: boolean
 }
 
-export interface IState {
+export interface State {
   isOpen: boolean
 }
 
@@ -36,7 +36,7 @@ const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isEx
   ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }
 }))
 
-export default class ContextMenu extends React.Component<IProps, IState> {
+export default class ContextMenu extends React.Component<Props, State> {
   state = {
     isOpen: false
   }

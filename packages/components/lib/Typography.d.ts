@@ -1,6 +1,6 @@
 import { GlamorousComponent } from "glamorous";
 import { Theme } from "@operational/theme";
-export interface IProps {
+export interface Props {
     theme: Theme;
 }
 declare const TitleType: GlamorousComponent<{}, {}>;

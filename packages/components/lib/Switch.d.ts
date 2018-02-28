@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { Theme } from "@operational/theme";
-export interface IProps {
+export interface Props {
     id?: string | number;
     on: boolean;
     onChange: (on: boolean) => void;
@@ -11,5 +11,5 @@ export interface IStyleProps {
     on: boolean;
     theme: Theme;
 }
-declare const _default: (props: IProps) => JSX.Element;
+declare const _default: (props: Props) => JSX.Element;
 export default _default;

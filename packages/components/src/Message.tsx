@@ -4,7 +4,7 @@ import { Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 import Icon from "./Icon"
 
-export interface IProps {
+export interface Props {
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -49,7 +49,7 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: IProps) => (
+export default (props: Props) => (
   <Container css={props.css} className={props.className} color={props.color}>
     <IconContainer onClick={props.onClose}>
       <Icon name="X" />

@@ -1,4 +1,4 @@
-export interface IProps {
+export interface Props {
     id?: string;
     domId?: string;
     label?: string;
@@ -12,7 +12,7 @@ export interface IProps {
     className?: string;
     placeholder?: string;
 }
-export interface IState {
+export interface State {
     isExpanded: boolean;
     year: number;
     month: number;

@@ -6,7 +6,7 @@ import { Theme } from "@operational/theme"
 import ButtonGroup from "./ButtonGroup"
 import Button from "./Button"
 
-export interface IProps {
+export interface Props {
   id?: string | number
   css?: any
   className?: string
@@ -72,7 +72,7 @@ const PaginatorControl = ({ children, onChange, pageCount, page, type }: Control
   )
 }
 
-const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCount }: IProps) => {
+const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCount }: Props) => {
   let skip
   if (page > maxVisible - 1 && page < pageCount) {
     skip = page - maxVisible + 1
@@ -162,7 +162,7 @@ export default ({
   id,
   css,
   className
-}: IProps) => {
+}: Props) => {
   const controlProps = { pageCount, page, onChange }
   return (
     <Container key={id} css={css} className={className}>

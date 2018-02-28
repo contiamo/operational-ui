@@ -8,7 +8,7 @@ import { ReactFeatherIconName } from "./Icon/ReactFeatherIcon"
 
 export type IconName = ReactFeatherIconName | BrandIcons.BrandIconName
 
-export interface IProps {
+export interface Props {
   id?: string | number
   name: IconName
   size?: number
@@ -18,11 +18,11 @@ export interface IProps {
   rotation?: number
 }
 
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
   theme: Theme
 }
 
-const Icon = (props: IPropsWithTheme) => {
+const Icon = (props: PropsWithTheme) => {
   const color_: string = expandColor(props.theme, props.color) || "currentColor"
   const defaultSize: number = props.theme.spacing * 1.5
 
@@ -54,6 +54,6 @@ const Icon = (props: IPropsWithTheme) => {
   return null
 }
 
-const WrappedIcon: React.SFC<IProps> = withTheme(Icon)
+const WrappedIcon: React.SFC<Props> = withTheme(Icon)
 
 export default WrappedIcon

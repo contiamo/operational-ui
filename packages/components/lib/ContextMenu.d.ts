@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IProps {
+export interface Props {
     id?: string | number;
     css?: {};
     menuCss?: {};
@@ -11,10 +11,10 @@ export interface IProps {
     onOutsideClick?: () => void;
     keepOpenOnItemClick?: boolean;
 }
-export interface IState {
+export interface State {
     isOpen: boolean;
 }
-export default class ContextMenu extends React.Component<IProps, IState> {
+export default class ContextMenu extends React.Component<Props, State> {
     state: {
         isOpen: boolean;
     };

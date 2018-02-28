@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
 import Icon, { IconName } from "./Icon"
 
-export interface IProps {
+export interface Props {
   className?: string
   css?: {}
   children?: React.ReactNode
@@ -26,7 +26,7 @@ const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   borderBottom: "1px solid currentColor"
 }))
 
-export default (props: IProps) => {
+export default (props: Props) => {
   const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as IconName) : "ChevronDown"
   return (
     <Container className={props.className} css={props.css}>
