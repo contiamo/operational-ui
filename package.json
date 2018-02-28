@@ -29,5 +29,10 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@operational/components": "0.1.0-13",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
 }
