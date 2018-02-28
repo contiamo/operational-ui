@@ -119,7 +119,7 @@ var Tooltip = /** @class */ (function (_super) {
     }
     Tooltip.prototype.render = function () {
         var _this = this;
-        var position = "right";
+        var position = "top";
         if (this.props.left) {
             position = "left";
         }

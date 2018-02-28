@@ -146,7 +146,7 @@ export default class Tooltip extends React.Component<Props, State> {
   }
   containerNode: HTMLElement
   render() {
-    let position: Position = "right"
+    let position: Position = "top"
     if (this.props.left) {
       position = "left"
     }
