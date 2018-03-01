@@ -69,7 +69,7 @@ const Container = glamorous.div(
   }
 )
 
-export default class Sidenav extends React.Component<Props, State> {
+class Sidenav extends React.Component<Props, State> {
   state = {
     isHovered: false
   }
@@ -101,3 +101,5 @@ export default class Sidenav extends React.Component<Props, State> {
     )
   }
 }
+
+export default Sidenav

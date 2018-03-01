@@ -29,7 +29,7 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   height: 48
 }))
 
-export default class Record extends React.Component<Props, State> {
+class Record extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -74,3 +74,5 @@ export default class Record extends React.Component<Props, State> {
     )
   }
 }
+
+export default Record

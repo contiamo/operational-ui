@@ -25,8 +25,10 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   color: theme.colors.emphasizedText
 }))
 
-export default (props: Props) => (
+const CardHeader = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
+
+export default CardHeader

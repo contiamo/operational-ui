@@ -69,7 +69,7 @@ const Container = glamorous.li(
   })
 )
 
-export default ({ css, id, className, children, color = "info" }: Props) => {
+const TimelineItem = ({ css, id, className, children, color = "info" }: Props) => {
   return (
     <Container key={id} css={css} className={className}>
       <StatusContainer color={color} />
@@ -77,3 +77,5 @@ export default ({ css, id, className, children, color = "info" }: Props) => {
     </Container>
   )
 }
+
+export default TimelineItem

@@ -153,7 +153,7 @@ const Container = glamorous.div({
   }
 })
 
-export default ({
+const Paginator = ({
   activeColor = "info",
   maxVisible = 3,
   onChange = () => {},
@@ -184,3 +184,5 @@ export default ({
     </Container>
   )
 }
+
+export default Paginator

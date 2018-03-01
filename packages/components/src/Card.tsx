@@ -19,8 +19,10 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   }
 }))
 
-export default (props: Props) => (
+const Card = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
+
+export default Card

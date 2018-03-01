@@ -22,8 +22,10 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   color: theme.colors.gray80
 }))
 
-export default (props: Props) => (
+const Sidebar = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
+
+export default Sidebar

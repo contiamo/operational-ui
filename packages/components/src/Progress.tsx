@@ -50,8 +50,10 @@ const Bar = glamorous.div(
   })
 )
 
-export default (props: Props) => (
+const Progress = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className} fadeParent={!!props.fadeParent}>
     <Bar />
   </Container>
 )
+
+export default Progress

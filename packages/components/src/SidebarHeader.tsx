@@ -68,7 +68,7 @@ const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean
   }
 }))
 
-export default (props: Props) => (
+const SidebarHeader = (props: Props) => (
   <Container css={props.css} key={props.id} className={props.className}>
     <Header isOpen={!!props.open} onClick={props.onToggle}>
       {props.label}
@@ -76,3 +76,5 @@ export default (props: Props) => (
     {props.open ? <Content>{props.children}</Content> : null}
   </Container>
 )
+
+export default SidebarHeader

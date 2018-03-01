@@ -8,7 +8,7 @@ export interface Props {
   children?: React.ReactNode
 }
 
-export default (props: Props) => {
+const OperationalUI = (props: Props) => {
   // Only one child is allowed here,
   // see https://reactjs.org/docs/react-api.html#reactchildrenonly
   if (React.Children.count(props.children) > 1) {
@@ -18,3 +18,5 @@ export default (props: Props) => {
   }
   return <ThemeProvider theme={props.theme || operational}>{props.children}</ThemeProvider>
 }
+
+export default OperationalUI

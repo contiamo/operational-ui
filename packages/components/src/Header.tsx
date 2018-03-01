@@ -21,8 +21,10 @@ const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
   boxShadow: theme.shadows.card
 }))
 
-export default (props: Props) => (
+const Header = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
+
+export default Header

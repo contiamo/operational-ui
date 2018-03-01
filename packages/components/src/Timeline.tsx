@@ -16,8 +16,10 @@ const Container = glamorous.ul({
   margin: "0"
 })
 
-export default (props: Props) => (
+const Timeline = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )
+
+export default Timeline

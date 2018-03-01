@@ -16,15 +16,13 @@ const Container = glamorous.div({
   }
 })
 
-const Breadcrumbs = glamorous.div(({ theme }) => ({}))
-
 const Divider = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
   margin: "0 6px",
   color: theme.colors.black
 }))
 
-export default (props: Props) => (
+const Breadcrumbs = (props: Props) => (
   <Container className={props.className} css={props.css}>
     {(() => {
       /* This IIFE adds the divider elements containing slashes between children, e.g:
@@ -42,3 +40,5 @@ export default (props: Props) => (
     })()}
   </Container>
 )
+
+export default Breadcrumbs

@@ -71,7 +71,7 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
   }
 })
 
-export default (props: Props) => {
+const Button = (props: Props) => {
   return (
     <Container
       tabIndex={-1}
@@ -90,3 +90,5 @@ export default (props: Props) => {
     </Container>
   )
 }
+
+export default Button

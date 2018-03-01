@@ -49,7 +49,7 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: Props) => (
+const Message = (props: Props) => (
   <Container css={props.css} className={props.className} color={props.color}>
     <IconContainer onClick={props.onClose}>
       <Icon name="X" />
@@ -57,3 +57,5 @@ export default (props: Props) => (
     <Content>{props.children}</Content>
   </Container>
 )
+
+export default Message

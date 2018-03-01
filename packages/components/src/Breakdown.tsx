@@ -117,7 +117,7 @@ const Number = glamorous.div(
   })
 )
 
-export default (props: Props) => (
+const Breakdown = (props: Props) => (
   <Container
     key={props.id}
     css={props.css}
@@ -135,3 +135,5 @@ export default (props: Props) => (
     </Content>
   </Container>
 )
+
+export default Breakdown
