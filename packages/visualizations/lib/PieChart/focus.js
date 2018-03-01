@@ -29,12 +29,7 @@ var Focus = /** @class */ (function (_super) {
         content
             .append("xhtml:li")
             .attr("class", "series")
-            .html('<span class="value">' +
-            payload.d.value +
-            '</span> \
-        <span class="percentage">(' +
-            percentageString(payload.d.percentage) +
-            ")</span>");
+            .html("<span class=\"value\">" + payload.d.value + "</span>\n        <span class=\"percentage\">(" + percentageString(payload.d.percentage) + ")</span>");
         // Get label dimensions
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el), labelPlacement = {
             left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,

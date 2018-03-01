@@ -22,12 +22,8 @@ class Focus extends AbstractDrawingFocus {
       .append("xhtml:li")
       .attr("class", "series")
       .html(
-        '<span class="value">' +
-          payload.d.value +
-          '</span> \
-        <span class="percentage">(' +
-          percentageString(payload.d.percentage) +
-          ")</span>"
+        `<span class="value">${payload.d.value}</span>
+        <span class="percentage">(${percentageString(payload.d.percentage)})</span>`
       )
 
     // Get label dimensions

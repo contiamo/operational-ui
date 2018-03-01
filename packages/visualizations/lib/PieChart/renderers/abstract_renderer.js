@@ -27,7 +27,7 @@ var approxZero = function (y, initialX) {
     return xInt;
 };
 var percentageString = function (d) {
-    return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : "";
+    return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : null;
 };
 var AbstractRenderer = /** @class */ (function () {
     function AbstractRenderer(state, events, el, options) {
