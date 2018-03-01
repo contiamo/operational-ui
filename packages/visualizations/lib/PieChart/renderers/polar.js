@@ -16,9 +16,6 @@ var fp_1 = require("lodash/fp");
 var d3_interpolate_1 = require("d3-interpolate");
 var d3_scale_1 = require("d3-scale");
 var MIN_SEGMENT_WIDTH = 5;
-function radiusValue(d) {
-    return d.data ? d.data.value : d.value;
-}
 var Polar = /** @class */ (function (_super) {
     __extends(Polar, _super);
     function Polar() {
@@ -56,7 +53,7 @@ var Polar = /** @class */ (function (_super) {
             Math.min(width, height) / 2 - this.state.current.get("config").outerBorderMargin
         ])
             .domain([0, domainMax]);
-        return function (d) { return scale(radiusValue(d)) * scaleFactor; };
+        return function (d) { return scale(_this.value(d)) * scaleFactor; };
     };
     Polar.prototype.computeInner = function (outerRadius) {
         var options = this.state.current.get("config");

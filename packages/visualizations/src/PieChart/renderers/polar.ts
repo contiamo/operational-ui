@@ -8,10 +8,6 @@ import { IConfig, IObject, TDatum } from "../typings"
 
 const MIN_SEGMENT_WIDTH: number = 5
 
-function radiusValue(d: TDatum): number {
-  return d.data ? d.data.value : d.value
-}
-
 class Polar extends AbstractRenderer {
   minSegmentWidth: number
 
@@ -57,7 +53,7 @@ class Polar extends AbstractRenderer {
         Math.min(width, height) / 2 - this.state.current.get("config").outerBorderMargin
       ])
       .domain([0, domainMax])
-    return (d: TDatum): number => scale(radiusValue(d)) * scaleFactor
+    return (d: TDatum): number => scale(this.value(d)) * scaleFactor
   }
 
   computeInner(outerRadius: (d: TDatum) => number): number {

@@ -16,6 +16,8 @@ declare abstract class AbstractRenderer {
     value: (d: TDatum) => number;
     constructor(state: IState, events: IEvents, el: TD3Selection, options: IObject);
     assignOptions(options: IObject): void;
+    assignAccessors(customAccessors: IObject): void;
+    defaultAccessors(): IObject;
     setData(data: TDatum[]): void;
     computeTotal(): void;
     hasData(): boolean;

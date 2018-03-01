@@ -7,6 +7,7 @@ var d3_shape_1 = require("d3-shape");
 var d3_interpolate_1 = require("d3-interpolate");
 var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
+var utils_1 = require("@operational/utils");
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
 var approxZero = function (y, initialX) {
@@ -25,12 +26,8 @@ var approxZero = function (y, initialX) {
     }
     return xInt;
 };
-// Accessors of series in prepared data
-var dataKey = function (d) {
-    return d.data.key;
-};
-var dataLabelValue = function (d) {
-    return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined;
+var percentageString = function (d) {
+    return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : "";
 };
 var AbstractRenderer = /** @class */ (function () {
     function AbstractRenderer(state, events, el, options) {
@@ -40,6 +37,7 @@ var AbstractRenderer = /** @class */ (function () {
         this.events = events;
         this.el = el.select("g.drawing");
         this.assignOptions(options);
+        this.assignAccessors(options.accessors);
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this));
@@ -48,9 +46,29 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.assignOptions = function (options) {
         var _this = this;
         fp_1.forEach.convert({ cap: false })(function (option, key) {
+            if (key === "accessors") {
+                return;
+            }
             ;
-            _this[key] = fp_1.isFunction(option) ? function (d) { return option(d); } : option;
+            _this[key] = option;
         })(options);
+    };
+    AbstractRenderer.prototype.assignAccessors = function (customAccessors) {
+        var _this = this;
+        var accessors = fp_1.defaults(this.defaultAccessors())(customAccessors);
+        fp_1.forEach.convert({ cap: false })(function (option, key) {
+            ;
+            _this[key] = function (d) { return (d.data ? option(d.data) : option(d)); };
+        })(accessors);
+    };
+    AbstractRenderer.prototype.defaultAccessors = function () {
+        var _this = this;
+        var assignColor = utils_1.colorAssigner(this.state.current.get("config").palette);
+        return {
+            key: function (d) { return d.key; },
+            value: function (d) { return d.value; },
+            color: function (d) { return assignColor(_this.key(d)); }
+        };
     };
     AbstractRenderer.prototype.setData = function (data) {
         this.data = data;
@@ -87,7 +105,7 @@ var AbstractRenderer = /** @class */ (function () {
         var arcs = this.el
             .select("g.arcs")
             .selectAll("g." + styles.arc)
-            .data(this.computed.data, dataKey);
+            .data(this.computed.data, this.key);
         this.exit(arcs);
         this.enterAndUpdate(arcs);
     };
@@ -133,7 +151,7 @@ var AbstractRenderer = /** @class */ (function () {
             .transition()
             .duration(duration)
             .attr("transform", this.labelTranslate.bind(this))
-            .text(dataLabelValue);
+            .text(percentageString);
         this.updateTotal();
     };
     AbstractRenderer.prototype.onTransitionEnd = function () {
@@ -176,14 +194,15 @@ var AbstractRenderer = /** @class */ (function () {
         }
     };
     AbstractRenderer.prototype.updateElementHover = function (datapoint) {
+        var _this = this;
         if (!this.drawn) {
             return;
         }
         var arcs = this.el.select("g.arcs").selectAll("g");
         var filterFocused = function (d) {
-            return datapoint.d && datapoint.d.data && dataKey(d) === dataKey(datapoint.d);
+            return datapoint.d && datapoint.d.data && _this.key(d) === _this.key(datapoint.d);
         }, filterUnFocused = function (d) {
-            return datapoint.d && datapoint.d.data ? dataKey(d) !== dataKey(datapoint.d) : true;
+            return datapoint.d && datapoint.d.data ? _this.key(d) !== _this.key(datapoint.d) : true;
         };
         arcs
             .filter(filterFocused)
@@ -197,11 +216,17 @@ var AbstractRenderer = /** @class */ (function () {
             .attr("filter", null);
     };
     AbstractRenderer.prototype.onMouseOver = function (d) {
+        var datumInfo = {
+            key: this.key(d),
+            value: this.value(d),
+            percentage: d.data.percentage
+        };
         var centroid = this.translateBack(this.computed.arc.centroid(d));
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: d, focusPoint: { centroid: centroid } });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
     };
     AbstractRenderer.prototype.highlightElement = function (key) {
-        var d = fp_1.find(function (datum) { return dataKey(datum) === key; })(this.computed.data);
+        var _this = this;
+        var d = fp_1.find(function (datum) { return _this.key(datum) === key; })(this.computed.data);
         this.onMouseOver(d);
     };
     AbstractRenderer.prototype.checkData = function () {

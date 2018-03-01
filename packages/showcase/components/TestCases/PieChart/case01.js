@@ -3,18 +3,8 @@ import { PieChart } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
 
-const colors = {
-  Berlin: "#1499CE",
-  Dortmund: "#00B34D",
-  Bonn: "#FFAE00",
-  Cologne: "#DE1A1A"
-}
-
 const DonutRenderer = {
-  type: "donut",
-  key: d => d.key,
-  value: d => d.value,
-  color: d => colors[d.key]
+  type: "donut"
 }
 
 const data = {

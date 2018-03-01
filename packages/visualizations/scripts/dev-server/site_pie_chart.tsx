@@ -1,12 +1,15 @@
 import * as React from "react"
+import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
+import { OperationalUI } from "@operational/components"
 
 injectStylesheet(baseStylesheet(operational))
 
 const containerNode = document.getElementById("app")
 
 import PieChart from "../../src/PieChart/facade"
+import { VisualizationWrapper } from "../../src/index"
 
 const colors: any = {
   "Berlin": operational.colors.info,
@@ -16,44 +19,46 @@ const colors: any = {
 }
 
 const accessors: any = {
-  key: (d: any): string => d.key,
-  value: (d: any): string => d.value,
-  color: (d: any): string => colors[d.key],
+  key: (d: any): string => d.id,
+  value: (d: any): string => d.size,
+  color: (d: any): string => colors[d.id],
 }
+
 const DonutRenderer: any = {
   type: "donut",
-  ...accessors
+  accessors
 }
 
 const GaugeRenderer: any = {
   type: "gauge",
   extent: "semi",
-  comparison: { key: "Last month", value: 18 },
+  comparison: { id: "Last month", size: 18 },
   target: 50,
-  ...accessors
+  accessors
 }
 
 const PolarRenderer: any = {
   type: "polar",
-  ...accessors
+  accessors
 }
 
 const data: any = {
   name: "Name",
   data: [
-    { key: "Berlin", value: 12 },
-    { key: "Dortmund", value: 5 },
-    { key: "Bonn", value: 7 },
-    { key: "Cologne", value: 11 },
-    { key: "", value: 50 },
-    { key: undefined, value: 70 },
-    { key: "test", value: 0 },
-    { key: "test2", value: undefined }
+    { id: "Berlin", size: 12 },
+    { id: "Dortmund", size: 5 },
+    { id: "Bonn", size: 7 },
+    { id: "Cologne", size: 11 },
+    { id: "", size: 50 },
+    { id: undefined, size: 70 },
+    { id: "test", size: 0 },
+    { id: "test2", size: undefined }
   ],
   renderAs: [DonutRenderer]
 }
 
-const viz: PieChart = new PieChart(containerNode)
-viz.data(data)
-viz.config({ focusElement: "Berlin" })
-viz.draw()
+const config: any = { focusElement: "Berlin" }
+
+const App = () => <OperationalUI><VisualizationWrapper facade={PieChart} data={data} config={config} /></OperationalUI>
+
+render(<App />, containerNode)

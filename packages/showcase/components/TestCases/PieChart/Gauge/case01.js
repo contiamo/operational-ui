@@ -3,17 +3,10 @@ import { PieChart } from "@operational/visualizations"
 import Marathon from "../../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
 
-const colors: any = {
-  Berlin: "#1499CE"
-}
-
 const GaugeRenderer = {
   type: "gauge",
   extent: "semi",
-  target: 50,
-  key: d => d.key,
-  value: d => d.value,
-  color: d => colors[d.key]
+  target: 50
 }
 
 const data = {
