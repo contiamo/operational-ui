@@ -52,6 +52,7 @@ class Facade {
       minTotalFontSize: 11,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
+      palette: ["#bbb"],
       showComponentFocus: true,
       uid: uniqueId("piechart"),
       visualizationName: "piechart",

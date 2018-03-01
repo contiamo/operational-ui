@@ -177,21 +177,21 @@ class Gauge extends AbstractRenderer {
   lineTween(comparison: IObject): (t: number) => string {
     // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
     // Here, we need '0' to be horizontal to left of origin.
-    const range: number[] = map((value: number): number => value + Math.PI / 2)(this.angleRange()),
-      angle = (d: TDatum): number =>
-        d3ScaleLinear()
-          .range(range)
-          .domain([0, this.target])(this.value(d)),
-      xOuter = (d: TDatum): number => -d.r * Math.cos(angle(d)),
-      yOuter = (d: TDatum): number => -d.r * Math.sin(angle(d)),
-      xInner = (d: TDatum): number => -d.inner * Math.cos(angle(d)),
-      yInner = (d: TDatum): number => -d.inner * Math.sin(angle(d)),
-      path = (d: TDatum): string => `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`,
-      oldValue: number = this.previous.comparison ? this.value(this.previous.comparison) : 0,
-      f = interpolateObject(
-        { inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue },
-        { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) }
-      )
+    const range: number[] = map((value: number): number => value + Math.PI / 2)(this.angleRange())
+    const angle = (d: TDatum): number =>
+      d3ScaleLinear()
+        .range(range)
+        .domain([0, this.target])(d.value)
+    const xOuter = (d: TDatum): number => -d.r * Math.cos(angle(d))
+    const yOuter = (d: TDatum): number => -d.r * Math.sin(angle(d))
+    const xInner = (d: TDatum): number => -d.inner * Math.cos(angle(d))
+    const yInner = (d: TDatum): number => -d.inner * Math.sin(angle(d))
+    const path = (d: TDatum): string => `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`
+    const oldValue: number = this.previous.comparison ? this.value(this.previous.comparison) : 0
+    const f = interpolateObject(
+      { inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue },
+      { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) }
+    )
     return (t: number): string => path(f(t))
   }
 

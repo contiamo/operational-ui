@@ -7,6 +7,7 @@ import { pie as d3Pie, arc as d3Arc } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
 import { onTransitionEnd } from "../../utils/d3_utils"
 import * as styles from "./styles"
+import { colorAssigner } from "@operational/utils"
 
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
@@ -30,12 +31,8 @@ const approxZero = (y: (x: number) => number, initialX: number): number => {
   return xInt
 }
 
-// Accessors of series in prepared data
-const dataKey = (d: TDatum): string => {
-  return d.data.key
-}
-const dataLabelValue = (d: TDatum): string => {
-  return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : undefined
+const percentageString = (d: TDatum): string | null => {
+  return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : null
 }
 
 abstract class AbstractRenderer {
@@ -58,6 +55,7 @@ abstract class AbstractRenderer {
     this.events = events
     this.el = el.select("g.drawing")
     this.assignOptions(options)
+    this.assignAccessors(options.accessors)
     this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
@@ -66,8 +64,27 @@ abstract class AbstractRenderer {
 
   assignOptions(options: IObject): void {
     forEach.convert({ cap: false })((option: any, key: string): void => {
-      ;(this as any)[key] = isFunction(option) ? (d?: any) => option(d) : option
+      if (key === "accessors") {
+        return
+      }
+      ;(this as any)[key] = option
     })(options)
+  }
+
+  assignAccessors(customAccessors: IObject): void {
+    const accessors: IObject = defaults(this.defaultAccessors())(customAccessors)
+    forEach.convert({ cap: false })((option: any, key: string): void => {
+      ;(this as any)[key] = (d: TDatum): any => (d.data ? option(d.data) : option(d))
+    })(accessors)
+  }
+
+  defaultAccessors(): IObject {
+    const assignColor: (key: string) => string = colorAssigner(this.state.current.get("config").palette)
+    return {
+      key: (d: TDatum): string => d.key,
+      value: (d: TDatum): number => d.value,
+      color: (d: TDatum): string => assignColor(this.key(d))
+    }
   }
 
   setData(data: TDatum[]): void {
@@ -113,7 +130,7 @@ abstract class AbstractRenderer {
     const arcs: TD3Selection = this.el
       .select("g.arcs")
       .selectAll(`g.${styles.arc}`)
-      .data(this.computed.data, dataKey)
+      .data(this.computed.data, this.key)
 
     this.exit(arcs)
     this.enterAndUpdate(arcs)
@@ -170,7 +187,7 @@ abstract class AbstractRenderer {
       .transition()
       .duration(duration)
       .attr("transform", this.labelTranslate.bind(this))
-      .text(dataLabelValue)
+      .text(percentageString)
 
     this.updateTotal()
   }
@@ -231,9 +248,9 @@ abstract class AbstractRenderer {
     const arcs: any = this.el.select("g.arcs").selectAll("g")
 
     const filterFocused: any = (d: TDatum): boolean =>
-        datapoint.d && datapoint.d.data && dataKey(d) === dataKey(datapoint.d),
+        datapoint.d && datapoint.d.data && this.key(d) === this.key(datapoint.d),
       filterUnFocused: any = (d: TDatum): boolean =>
-        datapoint.d && datapoint.d.data ? dataKey(d) !== dataKey(datapoint.d) : true
+        datapoint.d && datapoint.d.data ? this.key(d) !== this.key(datapoint.d) : true
 
     arcs
       .filter(filterFocused)
@@ -249,12 +266,17 @@ abstract class AbstractRenderer {
   }
 
   onMouseOver(d: TDatum): void {
+    const datumInfo: IObject = {
+      key: this.key(d),
+      value: this.value(d),
+      percentage: d.data.percentage
+    }
     const centroid: [number, number] = this.translateBack(this.computed.arc.centroid(d))
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
   }
 
   highlightElement(key: string): void {
-    const d: TDatum = find((datum: TDatum): boolean => dataKey(datum) === key)(this.computed.data)
+    const d: TDatum = find((datum: TDatum): boolean => this.key(datum) === key)(this.computed.data)
     this.onMouseOver(d)
   }
 
@@ -299,12 +321,13 @@ abstract class AbstractRenderer {
 
     // data should not become part of this.previous in first computation
     this.computed.data = d.layout(this.data)
+
     this.calculatePercentages(d.total)
     this.computeArcs()
   }
 
   calculatePercentages(total: number): void {
-    forEach((datum: IObject): void => {
+    forEach((datum: TDatum): void => {
       datum.percentage = this.value(datum) / total * 100
     })(this.data)
   }

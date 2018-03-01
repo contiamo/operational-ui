@@ -43,6 +43,7 @@ var Facade = /** @class */ (function () {
             minTotalFontSize: 11,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
+            palette: ["#bbb"],
             showComponentFocus: true,
             uid: fp_1.uniqueId("piechart"),
             visualizationName: "piechart",

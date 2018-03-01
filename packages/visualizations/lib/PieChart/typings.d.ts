@@ -18,6 +18,7 @@ export interface IConfig {
     minTotalFontSize: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
+    palette: string[];
     showComponentFocus: boolean;
     uid: string;
     visualizationName: string;

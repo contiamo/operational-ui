@@ -173,11 +173,19 @@ var Gauge = /** @class */ (function (_super) {
         var _this = this;
         // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
         // Here, we need '0' to be horizontal to left of origin.
-        var range = fp_1.map(function (value) { return value + Math.PI / 2; })(this.angleRange()), angle = function (d) {
+        var range = fp_1.map(function (value) { return value + Math.PI / 2; })(this.angleRange());
+        var angle = function (d) {
             return d3_scale_1.scaleLinear()
                 .range(range)
-                .domain([0, _this.target])(_this.value(d));
-        }, xOuter = function (d) { return -d.r * Math.cos(angle(d)); }, yOuter = function (d) { return -d.r * Math.sin(angle(d)); }, xInner = function (d) { return -d.inner * Math.cos(angle(d)); }, yInner = function (d) { return -d.inner * Math.sin(angle(d)); }, path = function (d) { return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(","); }, oldValue = this.previous.comparison ? this.value(this.previous.comparison) : 0, f = d3_interpolate_1.interpolateObject({ inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue }, { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) });
+                .domain([0, _this.target])(d.value);
+        };
+        var xOuter = function (d) { return -d.r * Math.cos(angle(d)); };
+        var yOuter = function (d) { return -d.r * Math.sin(angle(d)); };
+        var xInner = function (d) { return -d.inner * Math.cos(angle(d)); };
+        var yInner = function (d) { return -d.inner * Math.sin(angle(d)); };
+        var path = function (d) { return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(","); };
+        var oldValue = this.previous.comparison ? this.value(this.previous.comparison) : 0;
+        var f = d3_interpolate_1.interpolateObject({ inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue }, { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) });
         return function (t) { return path(f(t)); };
     };
     Gauge.prototype.dataForLegend = function () {
