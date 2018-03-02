@@ -7,5 +7,5 @@ export interface Props {
     css?: {};
     label: string;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const SidenavItem: (props: Props) => JSX.Element;
+export default SidenavItem;

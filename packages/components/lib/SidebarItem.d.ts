@@ -9,5 +9,5 @@ export interface Props {
     disabled?: boolean;
     active?: boolean;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const SidebarItem: (props: Props) => JSX.Element;
+export default SidebarItem;

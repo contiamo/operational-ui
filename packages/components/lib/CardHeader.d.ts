@@ -6,5 +6,5 @@ export interface Props {
     className?: string;
     children?: React.ReactNode;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const CardHeader: (props: Props) => JSX.Element;
+export default CardHeader;

@@ -20,5 +20,5 @@ export interface Props {
     disabled?: boolean;
     condensed?: boolean;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Button: (props: Props) => JSX.Element;
+export default Button;

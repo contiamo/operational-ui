@@ -7,5 +7,5 @@ export interface Props {
     children?: React.ReactNode;
     icon?: IconName | React.ReactNode;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Breadcrumb: (props: Props) => JSX.Element;
+export default Breadcrumb;

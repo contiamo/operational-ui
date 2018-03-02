@@ -7,5 +7,5 @@ export interface Props {
     children?: React.ReactNode;
     color?: string;
 }
-declare const _default: ({css, id, className, children, color}: Props) => JSX.Element;
-export default _default;
+declare const TimelineItem: ({css, id, className, children, color}: Props) => JSX.Element;
+export default TimelineItem;

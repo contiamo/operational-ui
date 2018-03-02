@@ -36,7 +36,7 @@ const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isEx
   ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }
 }))
 
-export default class ContextMenu extends React.Component<Props, State> {
+class ContextMenu extends React.Component<Props, State> {
   state = {
     isOpen: false
   }
@@ -117,3 +117,5 @@ export default class ContextMenu extends React.Component<Props, State> {
     )
   }
 }
+
+export default ContextMenu

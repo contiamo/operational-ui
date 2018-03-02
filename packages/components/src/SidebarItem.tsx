@@ -40,7 +40,7 @@ const Container = glamorous.div(
   })
 )
 
-export default (props: Props) => (
+const SidebarItem = (props: Props) => (
   <Container
     key={props.id}
     css={props.css}
@@ -52,3 +52,5 @@ export default (props: Props) => (
     {props.children}
   </Container>
 )
+
+export default SidebarItem

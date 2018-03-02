@@ -5,5 +5,5 @@ export interface Props {
     className?: string;
     children: any;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Timeline: (props: Props) => JSX.Element;
+export default Timeline;

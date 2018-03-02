@@ -10,8 +10,9 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-exports.default = function (_a) {
+var Tab = function (_a) {
     var children = _a.children, rest = __rest(_a, ["children"]);
     return React.createElement("div", null, children);
 };
+exports.default = Tab;
 //# sourceMappingURL=Tab.js.map

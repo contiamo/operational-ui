@@ -59,7 +59,7 @@ const PulsingCube = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: Props) => (
+const Spinner = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <PulsingCube />
     <PulsingCube />
@@ -67,3 +67,5 @@ export default (props: Props) => (
     <PulsingCube />
   </Container>
 )
+
+export default Spinner

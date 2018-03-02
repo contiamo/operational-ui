@@ -34,7 +34,7 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: Props) => (
+const Table = (props: Props) => (
   <Container css={props.css} className={props.className}>
     <thead>
       <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
@@ -44,3 +44,5 @@ export default (props: Props) => (
     </tbody>
   </Container>
 )
+
+export default Table

@@ -26,7 +26,7 @@ const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   borderBottom: "1px solid currentColor"
 }))
 
-export default (props: Props) => {
+const Breadcrumb = (props: Props) => {
   const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as IconName) : "ChevronDown"
   return (
     <Container className={props.className} css={props.css}>
@@ -35,3 +35,5 @@ export default (props: Props) => {
     </Container>
   )
 }
+
+export default Breadcrumb

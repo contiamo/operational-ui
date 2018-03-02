@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var theme_1 = require("@operational/theme");
-exports.default = function (props) {
+var OperationalUI = function (props) {
     // Only one child is allowed here,
     // see https://reactjs.org/docs/react-api.html#reactchildrenonly
     if (React.Children.count(props.children) > 1) {
@@ -11,4 +11,5 @@ exports.default = function (props) {
     }
     return React.createElement(glamorous_1.ThemeProvider, { theme: props.theme || theme_1.operational }, props.children);
 };
+exports.default = OperationalUI;
 //# sourceMappingURL=OperationalUI.js.map

@@ -75,7 +75,7 @@ const Rail = glamorous.div(
   })
 )
 
-export default (props: Props) => (
+const Switch = (props: Props) => (
   <Container
     key={props.id}
     style={props.style}
@@ -88,3 +88,5 @@ export default (props: Props) => (
     <Rail on={props.on} />
   </Container>
 )
+
+export default Switch

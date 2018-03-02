@@ -45,7 +45,7 @@ const PickerContainer = glamorous.div({ position: "absolute" }, ({ theme }: { th
   zIndex: theme.baseZIndex + 100
 }))
 
-export default class ColorPicker extends React.Component<Props, State> {
+class ColorPicker extends React.Component<Props, State> {
   static defaultProps = {
     color: "#03f",
     size: 16
@@ -126,3 +126,5 @@ export default class ColorPicker extends React.Component<Props, State> {
     )
   }
 }
+
+export default ColorPicker

@@ -4,5 +4,5 @@ export interface Props {
     css?: any;
     className?: string;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Spinner: (props: Props) => JSX.Element;
+export default Spinner;

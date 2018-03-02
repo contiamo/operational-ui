@@ -9,10 +9,6 @@ var Container = glamorous_1.default.div({
         color: "inherit"
     }
 });
-var Breadcrumbs = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({});
-});
 var Divider = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
     return ({
@@ -21,7 +17,7 @@ var Divider = glamorous_1.default.span(function (_a) {
         color: theme.colors.black
     });
 });
-exports.default = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, (function () {
+var Breadcrumbs = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, (function () {
     /* This IIFE adds the divider elements containing slashes between children, e.g:
      * <Breadcrumb>1</Breadcrumb> <Breadcrumb>2</Breadcrumb> -> <span>1</span> <span>/</span> <span>2</span>
      */
@@ -35,4 +31,5 @@ exports.default = function (props) { return (React.createElement(Container, { cl
     });
     return newChildren;
 })())); };
+exports.default = Breadcrumbs;
 //# sourceMappingURL=Breadcrumbs.js.map

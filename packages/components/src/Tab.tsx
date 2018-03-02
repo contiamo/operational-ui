@@ -8,4 +8,6 @@ export interface Props {
   title?: string
 }
 
-export default ({ children, ...rest }: Props) => <div>{children}</div>
+const Tab = ({ children, ...rest }: Props) => <div>{children}</div>
+
+export default Tab

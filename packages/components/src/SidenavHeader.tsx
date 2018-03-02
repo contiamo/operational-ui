@@ -56,7 +56,7 @@ const IconContainer = glamorous.div({
   flex: `0 0 ${size}px`
 })
 
-export default (props: Props) => (
+const SidenavHeader = (props: Props) => (
   // See ./SidenavItem.tsx for reason why class name is set.
   // Note that the click listener is set on `<Content>` so it doesn't interfere
   // with click listeners set on the children.
@@ -74,3 +74,5 @@ export default (props: Props) => (
     {props.expanded ? props.children : null}
   </Container>
 )
+
+export default SidenavHeader

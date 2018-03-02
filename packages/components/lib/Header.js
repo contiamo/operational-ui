@@ -15,5 +15,6 @@ var Container = glamorous_1.default.header(function (_a) {
         boxShadow: theme.shadows.card
     });
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
+var Header = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
+exports.default = Header;
 //# sourceMappingURL=Header.js.map

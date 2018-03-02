@@ -66,7 +66,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
   }
 })
 
-export default (props: Props) => (
+const Chip = (props: Props) => (
   <Container key={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>
     <Content onClick={props.onClick}>{props.children}</Content>
     {props.onIconClick && (
@@ -76,3 +76,5 @@ export default (props: Props) => (
     )}
   </Container>
 )
+
+export default Chip

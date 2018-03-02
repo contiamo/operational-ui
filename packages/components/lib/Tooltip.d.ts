@@ -16,7 +16,7 @@ export interface State {
     bbLeft: number;
     bbRight: number;
 }
-export default class Tooltip extends React.Component<Props, State> {
+declare class Tooltip extends React.Component<Props, State> {
     state: {
         bbTop: number;
         bbLeft: number;
@@ -27,3 +27,4 @@ export default class Tooltip extends React.Component<Props, State> {
     render(): JSX.Element;
     componentDidMount(): void;
 }
+export default Tooltip;

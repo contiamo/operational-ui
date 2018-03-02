@@ -62,10 +62,11 @@ var Container = glamorous_1.default.li({
         }
     });
 });
-exports.default = function (_a) {
+var TimelineItem = function (_a) {
     var css = _a.css, id = _a.id, className = _a.className, children = _a.children, _b = _a.color, color = _b === void 0 ? "info" : _b;
     return (React.createElement(Container, { key: id, css: css, className: className },
         React.createElement(StatusContainer, { color: color }),
         React.createElement(Content, null, children)));
 };
+exports.default = TimelineItem;
 //# sourceMappingURL=TimelineItem.js.map

@@ -12,7 +12,7 @@ export interface Props {
 export interface State {
     isPickerOpen: boolean;
 }
-export default class ColorPicker extends React.Component<Props, State> {
+declare class ColorPicker extends React.Component<Props, State> {
     static defaultProps: {
         color: string;
         size: number;
@@ -33,3 +33,4 @@ export default class ColorPicker extends React.Component<Props, State> {
     }): void;
     render(): JSX.Element;
 }
+export default ColorPicker;

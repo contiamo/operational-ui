@@ -11,5 +11,5 @@ export interface IStyleProps {
     on: boolean;
     theme: Theme;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Switch: (props: Props) => JSX.Element;
+export default Switch;

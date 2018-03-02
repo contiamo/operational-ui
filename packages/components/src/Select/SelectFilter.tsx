@@ -32,7 +32,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   }
 })
 
-export default (props: Props) => (
+const SelectFilter = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <input
       onClick={e => e.stopPropagation()}
@@ -41,3 +41,5 @@ export default (props: Props) => (
     />
   </Container>
 )
+
+export default SelectFilter

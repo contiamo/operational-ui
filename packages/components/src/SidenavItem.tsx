@@ -64,7 +64,7 @@ const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-export default (props: Props) => (
+const SidenavItem = (props: Props) => (
   <Container
     key={props.id}
     css={props.css}
@@ -76,3 +76,5 @@ export default (props: Props) => (
     {props.label}
   </Container>
 )
+
+export default SidenavItem

@@ -8,5 +8,5 @@ export interface Props {
     label?: string;
     children?: any;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const SidebarHeader: (props: Props) => JSX.Element;
+export default SidebarHeader;

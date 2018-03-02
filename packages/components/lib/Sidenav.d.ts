@@ -14,9 +14,10 @@ export interface Props {
 export interface State {
     isHovered: boolean;
 }
-export default class Sidenav extends React.Component<Props, State> {
+declare class Sidenav extends React.Component<Props, State> {
     state: {
         isHovered: boolean;
     };
     render(): JSX.Element;
 }
+export default Sidenav;

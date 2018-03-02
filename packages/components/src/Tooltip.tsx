@@ -137,7 +137,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
   }
 })
 
-export default class Tooltip extends React.Component<Props, State> {
+class Tooltip extends React.Component<Props, State> {
   state = {
     bbTop: 0,
     bbLeft: 0,
@@ -189,3 +189,5 @@ export default class Tooltip extends React.Component<Props, State> {
     }))
   }
 }
+
+export default Tooltip

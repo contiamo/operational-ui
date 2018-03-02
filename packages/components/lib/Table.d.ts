@@ -7,5 +7,5 @@ export interface Props {
     columns: string[];
     rows: ((string | React.ReactNode)[])[];
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Table: (props: Props) => JSX.Element;
+export default Table;

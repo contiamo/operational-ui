@@ -7,5 +7,5 @@ export interface Props {
     label?: string;
     children: React.ReactNode;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const InfoTile: (props: Props) => JSX.Element;
+export default InfoTile;

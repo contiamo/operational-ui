@@ -14,7 +14,7 @@ export interface Props {
 export interface State {
     isOpen: boolean;
 }
-export default class ContextMenu extends React.Component<Props, State> {
+declare class ContextMenu extends React.Component<Props, State> {
     state: {
         isOpen: boolean;
     };
@@ -26,3 +26,4 @@ export default class ContextMenu extends React.Component<Props, State> {
     componentWillUnmount(): void;
     render(): JSX.Element;
 }
+export default ContextMenu;

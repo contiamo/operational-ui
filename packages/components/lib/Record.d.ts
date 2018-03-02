@@ -10,7 +10,8 @@ export interface Props {
 export interface State {
     isExpanded: boolean;
 }
-export default class Record extends React.Component<Props, State> {
+declare class Record extends React.Component<Props, State> {
     constructor(props: Props);
     render(): JSX.Element;
 }
+export default Record;
