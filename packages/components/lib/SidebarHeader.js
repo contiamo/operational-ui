@@ -56,7 +56,8 @@ var Header = glamorous_1.default.div(function (_a) {
             transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null
         } }));
 });
-exports.default = function (props) { return (React.createElement(Container, { css: props.css, key: props.id, className: props.className },
+var SidebarHeader = function (props) { return (React.createElement(Container, { css: props.css, key: props.id, className: props.className },
     React.createElement(Header, { isOpen: !!props.open, onClick: props.onToggle }, props.label),
     props.open ? React.createElement(Content, null, props.children) : null)); };
+exports.default = SidebarHeader;
 //# sourceMappingURL=SidebarHeader.js.map

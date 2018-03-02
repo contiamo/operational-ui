@@ -23,10 +23,11 @@ var Content = glamorous_1.default.span(function (_a) {
         borderBottom: "1px solid currentColor"
     });
 });
-exports.default = function (props) {
+var Breadcrumb = function (props) {
     var reactFeatherIcon = props.icon === String(props.icon) ? props.icon : "ChevronDown";
     return (React.createElement(Container, { className: props.className, css: props.css },
         React.createElement(Content, null, props.children),
         props.icon ? props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: reactFeatherIcon, size: 12 }) : props.icon : null));
 };
+exports.default = Breadcrumb;
 //# sourceMappingURL=Breadcrumb.js.map

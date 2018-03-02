@@ -37,7 +37,8 @@ var Container = glamorous_1.default.div(function (_a) {
         }
         : {}, { marginRight: spacing / 2 });
 });
-exports.default = function (props) {
+var Button = function (props) {
     return (React.createElement(Container, { tabIndex: -1, role: "button", type: props.type, key: props.id, css: props.css, className: props.className, onClick: props.disabled ? null : props.onClick, color: props.color, active: props.active, disabled: props.disabled, condensed: props.condensed }, props.children));
 };
+exports.default = Button;
 //# sourceMappingURL=Button.js.map

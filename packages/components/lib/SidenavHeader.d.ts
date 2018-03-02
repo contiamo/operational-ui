@@ -12,5 +12,5 @@ export interface Props {
     expanded?: boolean;
     onClick?: () => void;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const SidenavHeader: (props: Props) => JSX.Element;
+export default SidenavHeader;

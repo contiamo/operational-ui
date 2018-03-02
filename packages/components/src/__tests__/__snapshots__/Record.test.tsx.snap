@@ -5,16 +5,20 @@ exports[`Record Component Should render 1`] = `
   class="css-qxcpw4"
 >
   <div
-    class="css-yptwb6"
+    class="css-od8kzb"
   >
-    Hello
-  </div>
-  <div
-    class="css-4ie5oj"
-    role="button"
-    tabindex="-1"
-  >
-    Details
+    <div
+      class="css-69g0zt"
+    >
+      Hello
+    </div>
+    <div
+      class="css-1l7i4x6"
+      role="button"
+      tabindex="-1"
+    >
+      Details
+    </div>
   </div>
 </div>
 `;

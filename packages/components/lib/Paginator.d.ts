@@ -10,5 +10,5 @@ export interface Props {
     page?: number;
     pageCount: number;
 }
-declare const _default: ({activeColor, maxVisible, onChange, pageCount, page, id, css, className}: Props) => JSX.Element;
-export default _default;
+declare const Paginator: ({activeColor, maxVisible, onChange, pageCount, page, id, css, className}: Props) => JSX.Element;
+export default Paginator;

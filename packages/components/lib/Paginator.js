@@ -106,7 +106,7 @@ var Container = glamorous_1.default.div({
         userSelect: "none"
     }
 });
-exports.default = function (_a) {
+var Paginator = function (_a) {
     var _b = _a.activeColor, activeColor = _b === void 0 ? "info" : _b, _c = _a.maxVisible, maxVisible = _c === void 0 ? 3 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d, pageCount = _a.pageCount, _e = _a.page, page = _e === void 0 ? 1 : _e, id = _a.id, css = _a.css, className = _a.className;
     var controlProps = { pageCount: pageCount, page: page, onChange: onChange };
     return (React.createElement(Container, { key: id, css: css, className: className },
@@ -121,4 +121,5 @@ exports.default = function (_a) {
             React.createElement(PaginatorControl, __assign({ type: "last" }, controlProps),
                 React.createElement(Icon.ChevronsRight, { size: "11" })))));
 };
+exports.default = Paginator;
 //# sourceMappingURL=Paginator.js.map

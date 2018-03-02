@@ -56,7 +56,8 @@ var Action = glamorous_1.default.div(function (_a) {
         }
     };
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, className: props.className, css: props.css, color: props.color, hasChip: !!props.onClick },
+var Chip = function (props) { return (React.createElement(Container, { key: props.id, className: props.className, css: props.css, color: props.color, hasChip: !!props.onClick },
     React.createElement(Content, { onClick: props.onClick }, props.children),
     props.onIconClick && (React.createElement(Action, { color: props.color, onClick: props.onIconClick }, String(props.icon) === props.icon ? React.createElement(Icon_1.default, { name: props.icon, size: 12 }) : props.icon)))); };
+exports.default = Chip;
 //# sourceMappingURL=Chip.js.map

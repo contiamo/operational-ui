@@ -10,5 +10,5 @@ export interface Props {
     children: React.ReactNode;
     icon?: string | React.ReactNode;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Chip: (props: Props) => JSX.Element;
+export default Chip;

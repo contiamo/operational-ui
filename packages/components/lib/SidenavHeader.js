@@ -38,7 +38,7 @@ var IconContainer = glamorous_1.default.div({
     justifyContent: "center",
     flex: "0 0 " + size + "px"
 });
-exports.default = function (props) { return (
+var SidenavHeader = function (props) { return (
 // See ./SidenavItem.tsx for reason why class name is set.
 // Note that the click listener is set on `<Content>` so it doesn't interfere
 // with click listeners set on the children.
@@ -47,4 +47,5 @@ React.createElement(Container, { key: props.id, css: props.css, className: ["op_
         React.createElement(IconContainer, null, props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: props.icon, size: 24 }) : props.icon),
         React.createElement(Label, null, props.label)),
     props.expanded ? props.children : null)); };
+exports.default = SidenavHeader;
 //# sourceMappingURL=SidenavHeader.js.map

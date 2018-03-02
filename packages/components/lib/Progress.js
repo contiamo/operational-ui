@@ -39,6 +39,7 @@ var Bar = glamorous_1.default.div({
         backgroundColor: theme.colors.info
     });
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, fadeParent: !!props.fadeParent },
+var Progress = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, fadeParent: !!props.fadeParent },
     React.createElement(Bar, null))); };
+exports.default = Progress;
 //# sourceMappingURL=Progress.js.map

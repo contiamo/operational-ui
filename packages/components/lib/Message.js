@@ -45,8 +45,9 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         }
     });
 });
-exports.default = function (props) { return (React.createElement(Container, { css: props.css, className: props.className, color: props.color },
+var Message = function (props) { return (React.createElement(Container, { css: props.css, className: props.className, color: props.color },
     React.createElement(IconContainer, { onClick: props.onClose },
         React.createElement(Icon_1.default, { name: "X" })),
     React.createElement(Content, null, props.children))); };
+exports.default = Message;
 //# sourceMappingURL=Message.js.map

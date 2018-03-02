@@ -9,18 +9,18 @@ describe("operational theme", () => {
 
 describe("expandColor", () => {
   it("expands a custom hex value", () => {
-    expect(expandColor("#FFFFFF", operational)).toBe("#FFFFFF")
+    expect(expandColor(operational, "#FFFFFF")).toBe("#FFFFFF")
   })
 
   it("expands a known theme color key", () => {
-    expect(expandColor("warning", operational)).toBe("#FFAE00")
+    expect(expandColor(operational, "warning")).toBe("#FFAE00")
   })
 
   it("returns null for an unrecognized color key", () => {
-    expect(expandColor("warningXYZ", operational)).toBe(null)
+    expect(expandColor(operational, "warningXYZ")).toBe(null)
   })
 
   it("returns null for a falsy color", () => {
-    expect(expandColor(undefined, operational)).toBe(null)
+    expect(expandColor(operational, undefined)).toBe(null)
   })
 })

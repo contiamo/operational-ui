@@ -29,8 +29,9 @@ var Container = glamorous_1.default.table(function (_a) {
         }
     });
 });
-exports.default = function (props) { return (React.createElement(Container, { css: props.css, className: props.className },
+var Table = function (props) { return (React.createElement(Container, { css: props.css, className: props.className },
     React.createElement("thead", null,
         React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
     React.createElement("tbody", null, props.rows.map(function (row, index) { return React.createElement("tr", { key: index }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); })); })))); };
+exports.default = Table;
 //# sourceMappingURL=Table.js.map

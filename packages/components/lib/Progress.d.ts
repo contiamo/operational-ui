@@ -5,5 +5,5 @@ export interface Props {
     className?: string;
     fadeParent?: boolean;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Progress: (props: Props) => JSX.Element;
+export default Progress;

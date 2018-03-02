@@ -2,8 +2,12 @@
 
 exports[`Chip Should render 1`] = `
 <div
-  class="css-i5iooe"
+  class="css-3fknd0"
 >
-  Hi
+  <div
+    class="css-hd2beu"
+  >
+    Hi
+  </div>
 </div>
 `;

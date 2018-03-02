@@ -16,5 +16,5 @@ export interface Props {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Breakdown: (props: Props) => JSX.Element;
+export default Breakdown;

@@ -58,9 +58,10 @@ var Rail = glamorous_1.default.div({
         }
     });
 });
-exports.default = function (props) { return (React.createElement(Container, { key: props.id, style: props.style, className: props.className, onClick: function () {
+var Switch = function (props) { return (React.createElement(Container, { key: props.id, style: props.style, className: props.className, onClick: function () {
         props.onChange(!props.on);
     } },
     React.createElement(Button, { on: props.on }),
     React.createElement(Rail, { on: props.on }))); };
+exports.default = Switch;
 //# sourceMappingURL=Switch.js.map

@@ -7,5 +7,5 @@ export interface Props {
     color?: string;
     onClose?: () => void;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const Message: (props: Props) => JSX.Element;
+export default Message;

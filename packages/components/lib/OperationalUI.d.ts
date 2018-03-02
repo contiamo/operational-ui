@@ -5,5 +5,5 @@ export interface Props {
     theme?: Theme;
     children?: React.ReactNode;
 }
-declare const _default: (props: Props) => JSX.Element;
-export default _default;
+declare const OperationalUI: (props: Props) => JSX.Element;
+export default OperationalUI;

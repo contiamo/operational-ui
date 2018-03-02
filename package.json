@@ -20,7 +20,7 @@
     "package": "lerna run package",
     "publish": "lerna publish",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
-    "ci:local": "npm run lint && npm run prettier && npm run package && git diff",
+    "ci:local": "npm run lint && npm run prettier && npm run package",
     "ci": "npm run ci:local && npm run ensure:clean:repo"
   },
   "devDependencies": {
