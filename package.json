@@ -16,11 +16,11 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "prettier": "lerna run prettier",
-    "precommit": "lerna run precommit && git add .",
+    "precommit": "npm run ci:local && git add .",
     "package": "lerna run package",
     "publish": "lerna publish",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
-    "ci:local": "npm run lint && npm run prettier && npm run package",
+    "ci:local": "lerna run package && lerna run test && lerna run lint && lerna run prettier",
     "ci": "npm run ci:local && npm run ensure:clean:repo"
   },
   "devDependencies": {

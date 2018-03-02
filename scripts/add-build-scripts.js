@@ -6,37 +6,23 @@ const scripts = {
   lint: "tslint './src/**/*.{ts,tsx}' --fix",
   test: "jest",
   "test:u": "jest -u",
-  package: "rm -rf lib && tsc -d",
-  precommit: "npm run prettier",
-  ci: "npm run test && npm run lint && npm run prettier && npm run package"
+  package: "rm -rf lib && tsc -d"
 }
 
 const jest = {
-  setupFiles: [
-    "./test-polyfills.js"
-  ],
-  moduleFileExtensions: [
-    "ts",
-    "tsx",
-    "js",
-    "jsx"
-  ],
+  setupFiles: ["./test-polyfills.js"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   transform: {
     "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
   },
   testRegex: "/__tests__/.*\\.(ts|tsx|js|jsx)$",
-  setupTestFrameworkScriptFile: "<rootDir>/node_modules/jest-enzyme/lib/index.js",
+  setupTestFrameworkScriptFile:
+    "<rootDir>/node_modules/jest-enzyme/lib/index.js",
   moduleNameMapper: {
     "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
   },
-  snapshotSerializers: [
-    "<rootDir>/node_modules/jest-serializer-enzyme"
-  ],
-  unmockedModulePathPatterns: [
-    "react",
-    "enzyme",
-    "jest-enzyme"
-  ],
+  snapshotSerializers: ["<rootDir>/node_modules/jest-serializer-enzyme"],
+  unmockedModulePathPatterns: ["react", "enzyme", "jest-enzyme"],
   mapCoverage: true
 }
 
@@ -124,21 +110,37 @@ const packages = ["blocks", "components", "theme", "utils", "visualizations"]
 const writeFiles = () => {
   packages.forEach(pkg => {
     Object.keys(files).forEach(file => {
-      fs.writeFileSync(path.resolve(__dirname, "../packages", pkg, file), files[file])
+      fs.writeFileSync(
+        path.resolve(__dirname, "../packages", pkg, file),
+        files[file]
+      )
     })
   })
 }
 
 const changePackageJson = () => {
   packages.forEach(pkg => {
-    const packageJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../packages", pkg, "package.json"), "utf-8"))
+    const packageJson = JSON.parse(
+      fs.readFileSync(
+        path.resolve(__dirname, "../packages", pkg, "package.json"),
+        "utf-8"
+      )
+    )
     packageJson.scripts = Object.assign({}, packageJson.scripts, scripts)
-    packageJson.devDependencies = Object.assign({}, packageJson.devDependencies, devDependencies)
+    packageJson.devDependencies = Object.assign(
+      {},
+      packageJson.devDependencies,
+      devDependencies
+    )
     packageJson.jest = jest
     if (pkg === "showcase") {
-      packageJson.scripts.package = "echo 'Showcase is not published, hence no package script.'"
+      packageJson.scripts.package =
+        "echo 'Showcase is not published, hence no package script.'"
     }
-    fs.writeFileSync(path.resolve(__dirname, "../packages", pkg, "package.json"), JSON.stringify(packageJson, null, 2))
+    fs.writeFileSync(
+      path.resolve(__dirname, "../packages", pkg, "package.json"),
+      JSON.stringify(packageJson, null, 2)
+    )
   })
 }
 
