@@ -33,7 +33,7 @@ const isSelected = (date: string, current: IDatePair): boolean => {
   return date === start || date === end || (!!start && !!end && date >= start && date <= end)
 }
 
-const Month: React.SFC<Props> = ({ year, month, start, end, onChange }: Props) => {
+const Month = ({ year, month, start, end, onChange }: Props) => {
   const prevPlaceholderDays = monthStartDay(year, month)
   const nextMonth = month === 11 ? 0 : month + 1
   const nextYear = month === 11 ? year + 1 : year
