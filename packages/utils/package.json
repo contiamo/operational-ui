@@ -14,12 +14,9 @@
     "package": "rm -rf lib && tsc -d",
     "package:watch": "rm -rf lib && tsc -d -w",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
-    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run prettier",
     "test:u": "jest -u",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "prettier": "prettier './src/**/*.{ts,tsx}' --write"
   },
   "dependencies": {
     "@operational/theme": "^0.1.0-14",

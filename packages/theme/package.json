@@ -15,10 +15,8 @@
     "package:watch": "tsc -d -w",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "precommit": "npm run prettier",
     "test": "jest",
-    "test:u": "jest -u",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "test:u": "jest -u"
   },
   "devDependencies": {
     "@types/core-js": "0.9.43",
