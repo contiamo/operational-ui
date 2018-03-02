@@ -90,8 +90,7 @@ class Facade {
         this.state.readOnly(),
         this.state.computedWriter(["legend"]),
         this.events,
-        this.canvas.elementFor("legends").top.left,
-        { position: "top", float: "left" }
+        this.canvas.elementFor("legends").top.left
       ),
       focus: new Focus(
         this.state.readOnly(),

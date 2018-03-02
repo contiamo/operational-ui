@@ -1,11 +1,16 @@
-import AbstractLegend from "../utils/legend";
-import { IObject } from "./typings";
-declare class Legend extends AbstractLegend {
-    data(): IObject[];
-    dataKey(d: IObject): string;
-    colorAccessor(d: IObject): string;
-    labelAccessor(d: IObject): string;
+import { IEvents, IObject, IState, TStateWriter, TD3Selection } from "./typings";
+declare class Legend {
+    events: IEvents;
+    legend: TD3Selection;
+    state: IState;
+    stateWriter: TStateWriter;
+    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
+    draw(): void;
     updateComparisonLegend(): void;
+    data(): IObject[];
+    onComponentHover(d: IObject, el: HTMLElement): void;
     currentOptions(datum: IObject): IObject;
+    updateDimensions(): void;
+    remove(): void;
 }
 export default Legend;

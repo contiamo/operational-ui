@@ -73,7 +73,7 @@ var Facade = /** @class */ (function () {
     };
     Facade.prototype.insertComponents = function () {
         return {
-            legend: new legend_1.default(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, this.canvas.elementFor("legends").top.left, { position: "top", float: "left" }),
+            legend: new legend_1.default(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, this.canvas.elementFor("legends").top.left),
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus"))
         };
     };
