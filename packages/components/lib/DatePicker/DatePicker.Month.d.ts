@@ -1,5 +1,4 @@
 /// <reference types="react" />
-import * as React from "react";
 export interface IDatePair {
     start?: string;
     end?: string;
@@ -11,5 +10,5 @@ export interface Props {
     end?: string;
     onChange?: (date: IDatePair) => void;
 }
-declare const Month: React.SFC<Props>;
+declare const Month: ({year, month, start, end, onChange}: Props) => JSX.Element;
 export default Month;

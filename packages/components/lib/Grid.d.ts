@@ -10,5 +10,5 @@ export interface Props {
     columns?: Dimension[];
     gap?: number;
 }
-declare const Grid: React.SFC<Props>;
+declare const Grid: (props: Props) => JSX.Element;
 export default Grid;

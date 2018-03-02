@@ -108,13 +108,7 @@ const TabTitle = glamorous.li(
   })
 )
 
-const Tabs: React.SFC<PropsWithTheme> = ({
-  active = 0,
-  activeColor = "info",
-  children,
-  onChange = () => {},
-  theme
-}: PropsWithTheme) => {
+const Tabs = ({ active = 0, activeColor = "info", children, onChange = () => {}, theme }: PropsWithTheme) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
     children,

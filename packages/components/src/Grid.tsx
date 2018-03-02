@@ -38,7 +38,7 @@ const Container = glamorous.div(
   })
 )
 
-const Grid: React.SFC<Props> = (props: Props) => (
+const Grid = (props: Props) => (
   <Container
     key={props.id}
     css={props.css}

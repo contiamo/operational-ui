@@ -6,5 +6,5 @@ export interface Props {
     className?: string;
     children?: React.ReactNode;
 }
-declare const ButtonGroup: React.SFC<Props>;
+declare const ButtonGroup: (props: Props) => JSX.Element;
 export default ButtonGroup;
