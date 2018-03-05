@@ -1,11 +1,11 @@
+/// <reference types="react" />
 export interface Props {
-    css?: any;
+    css?: {};
     className?: string;
     placeholder?: string;
     name?: string;
     value: string;
     id?: string;
-    domId?: string;
     label?: string;
     inputRef?: (node: any) => void;
     onChange?: (newVal: string) => void;
@@ -15,5 +15,5 @@ export interface Props {
     type?: string;
     children?: string;
 }
-declare const _default: any;
-export default _default;
+declare const Input: (props: Props) => JSX.Element;
+export default Input;

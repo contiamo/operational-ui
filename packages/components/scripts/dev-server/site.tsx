@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 import { render } from "react-dom"
 import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
-import { OperationalUI, operationalTheme, Record, RecordHeader, RecordBody, Card, Heading1Type } from "../../src/index"
+import { OperationalUI, operationalTheme, Input, Record, RecordHeader, RecordBody, Card, Heading1Type } from "../../src/index"
 
 interface IState {
   isOpen: boolean
@@ -25,29 +25,7 @@ class Site extends React.Component<{}, IState> {
       <OperationalUI>
         <div style={{ margin: 20 }}>
           <Card>
-            <Heading1Type>Stuff</Heading1Type>
-            <Records>
-              <Record css={{ width: 300 }} controls={"Hello"}>
-                <RecordHeader>Hello</RecordHeader>
-                <RecordBody>Hello</RecordBody>
-              </Record>
-              <Record css={{ width: 300 }}>
-                <RecordHeader>Hello</RecordHeader>
-                <RecordBody>Hello</RecordBody>
-              </Record>
-              <Record css={{ width: 300 }}>
-                <RecordHeader>Hello</RecordHeader>
-                <RecordBody>Hello</RecordBody>
-              </Record>
-              <Record css={{ width: 300 }}>
-                <RecordHeader>Hello</RecordHeader>
-                <RecordBody>Hello</RecordBody>
-              </Record>
-              <Record css={{ width: 300 }}>
-                <RecordHeader>Hello</RecordHeader>
-                <RecordBody>Hello</RecordBody>
-              </Record>
-            </Records>
+            <Input value="1234" />
           </Card>
         </div>
       </OperationalUI>

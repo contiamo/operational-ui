@@ -2,18 +2,15 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import withLabel from "./utils/with-label"
 import * as mixins from "./utils/mixins"
 
 export interface Props {
-  css?: any
+  css?: {}
   className?: string
   placeholder?: string
   name?: string
   value: string
   id?: string
-  // Injected by withLabel higher-order component
-  domId?: string
   label?: string
   inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
@@ -24,16 +21,11 @@ export interface Props {
   children?: string
 }
 
-const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
-  "& > span": {
-    ...theme.typography.body,
-    display: "inline-block",
-    marginBottom: theme.spacing / 4
-  }
-}))
+const Label = glamorous.label(mixins.label)
 
-const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }) => ({
-  label: "inputfield",
+const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }): {} => ({
+  ...theme.typography.body,
+  label: "input",
   width: "100%",
   minWidth: 200,
   padding: theme.spacing * 2 / 3,
@@ -47,15 +39,17 @@ const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disable
 }))
 
 const Input = (props: Props) => {
-  // `css` and `className` props are not set, as they are set on the wrapped label container.
-  // See ./src/utils/with-label.tsx.
-  return (
+  // @todo - give sensible dom id when one is not supplied
+  const domId = props.id
+  const inputElement = (
     <InputField
+      css={props.css}
+      className={props.className}
       key={props.id}
       innerRef={props.inputRef}
-      id={props.domId}
+      id={domId}
       name={props.name}
-      disabled={props.disabled}
+      disabled={Boolean(props.disabled)}
       placeholder={props.placeholder}
       value={props.value}
       type={props.type}
@@ -66,6 +60,15 @@ const Input = (props: Props) => {
       }}
     />
   )
+  if (props.label) {
+    return (
+      <Label htmlFor={domId}>
+        {props.label}
+        {inputElement}
+      </Label>
+    )
+  }
+  return inputElement
 }
 
-export default withLabel(Input)
+export default Input
