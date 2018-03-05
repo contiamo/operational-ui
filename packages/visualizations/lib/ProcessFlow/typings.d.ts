@@ -5,7 +5,6 @@ import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSe
 export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
 export declare type TLink = Link;
 export declare type TNode = Nodes;
-export declare type TElementSelection = d3.Selection<d3.BaseType, TNode | TLink, d3.BaseType, any>;
 export declare type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>;
 export declare type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>;
 export declare type TScale = (size: number) => number;

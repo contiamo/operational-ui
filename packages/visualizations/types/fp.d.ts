@@ -166,6 +166,7 @@ declare namespace fp {
     has: any
     identity: any
     indexOf: any
+    initial: any
     invoke: any
     isDate: any
     isFinite: any
@@ -179,9 +180,11 @@ declare namespace fp {
     pluck: any
     size: any
     some: any
+    tail: any
     times: any
     uniq: any
     uniqueId: any
+    zip: any
   }
 }
 

@@ -1,10 +1,24 @@
-import AbstractRenderer from "./abstract_renderer"
 import * as d3 from "d3-selection"
 import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { withD3Element, onTransitionEnd } from "../../utils/d3_utils"
-import { IFocus, IObject, TD3Selection, TNode, TNodeSelection, TScale } from "../typings"
 import * as styles from "./styles"
+import Events from "../../utils/event_catalog"
+import { every, invoke, map } from "lodash/fp"
+import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
+import {
+  IConfig,
+  IEvents,
+  IFocus,
+  IFocusElement,
+  IObject,
+  IState,
+  TD3Selection,
+  TNode,
+  TNodeSelection,
+  TScale,
+  TSeriesEl
+} from "../typings"
 
 const nodeLabelOptions: IObject = {
   top: {
@@ -58,22 +72,83 @@ const nodeShapeOptions: IObject = {
   }
 }
 
-class Nodes extends AbstractRenderer {
-  type: string = "node"
-  focusElementAccessor: string = `path.node.${styles.border}`
+class Nodes {
+  config: IConfig
   data: TNode[]
+  el: TSeriesEl
+  events: IEvents
+  state: IState
 
-  updateDraw(): void {
-    const nodeGroups: TNodeSelection = this.el
+  constructor(state: IState, events: IEvents, el: TSeriesEl) {
+    this.state = state
+    this.events = events
+    this.el = el
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.removeHighlights.bind(this))
+  }
+
+  onMouseOver(d: TNode, element: HTMLElement): void {
+    this.mouseOver(d3.select(element), d)
+  }
+
+  mouseOver(element: TNodeSelection, d: TNode, hideLabel: boolean = false): void {
+    this.highlight(element, d)
+    const focusPoint: IFocus = this.focusPoint(element, d)
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { focusPoint, d, hideLabel })
+    element.on("mouseleave", this.onMouseOut.bind(this))
+  }
+
+  focusElement(focusElement: IFocusElement): void {
+    this.el
+      .selectAll(`path.node.${styles.border}`)
+      .filter(filterByMatchers(focusElement.matchers))
+      .each(
+        withD3Element((d: TNode, el: HTMLElement): void => {
+          this.mouseOver(d3.select(el), d, focusElement.hideLabel)
+        })
+      )
+  }
+
+  highlight(element: TNodeSelection, d: TNode, keepCurrent: boolean = false): void {
+    if (!keepCurrent) {
+      this.removeHighlights()
+    }
+    element.attr("stroke", this.config.highlightColor)
+  }
+
+  // Remove any old highlights (needed if an element has been manually focussed)
+  removeHighlights(): void {
+    this.el.selectAll(`path.node.${styles.border}`).attr("stroke", this.config.borderColor)
+  }
+
+  focusPoint(element: TNodeSelection, d: TNode): IFocus {
+    if (d == null) return
+    const offset: number = this.getNodeBoundingRect(element.node()).width / 2
+    return {
+      offset,
+      type: "node",
+      x: d.x,
+      y: d.y,
+      id: d.id()
+    }
+  }
+
+  onMouseOut(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+  }
+
+  draw(data: TNode[]): void {
+    this.data = data
+    this.config = this.state.current.get("config")
+    const groups: TNodeSelection = this.el
       .select("g.nodes-group")
       .selectAll("g.node-group")
       .data(this.data, (node: TNode): string => node.id())
 
-    this.exit(nodeGroups)
-    this.enterAndUpdate(nodeGroups)
+    exitGroups(groups)
+    this.enterAndUpdate(groups)
   }
 
-  nodeBorderScale(scale: TScale): TScale {
+  borderScale(scale: TScale): TScale {
     return (size: number): number => {
       return Math.pow(Math.sqrt(scale(size)) + this.config.nodeBorderWidth, 2)
     }
@@ -87,17 +162,17 @@ class Nodes extends AbstractRenderer {
     return `rotate(${nodeShapeOptions[d.shape()].rotation})`
   }
 
-  enterAndUpdate(nodeGroups: TNodeSelection): void {
-    const scale: TScale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]),
-      borderScale: TScale = this.nodeBorderScale(scale)
+  enterAndUpdate(groups: TNodeSelection): void {
+    const scale: TScale = sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data),
+      borderScale: TScale = this.borderScale(scale)
 
-    const enteringNodeGroups: TD3Selection = nodeGroups
+    const enteringGroups: TD3Selection = groups
       .enter()
       .append("g")
       .attr("class", "node-group")
       .attr("transform", this.translate)
 
-    enteringNodeGroups
+    enteringGroups
       .append("path")
       .attr("class", `node ${styles.border}`)
       .attr("d", (d: TNode): string =>
@@ -111,7 +186,7 @@ class Nodes extends AbstractRenderer {
       // Single event handlers should be attached to a non-svg node.
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
 
-    enteringNodeGroups
+    enteringGroups
       .append("path")
       .attr("class", `node ${styles.element}`)
       .attr("d", (d: TNode): string =>
@@ -124,16 +199,16 @@ class Nodes extends AbstractRenderer {
       .attr("stroke", (d: TNode): string => d.stroke())
       .attr("opacity", 0)
 
-    enteringNodeGroups.append("text").attr("class", styles.label)
+    enteringGroups.append("text").attr("class", styles.label)
 
-    nodeGroups
-      .merge(enteringNodeGroups)
+    groups
+      .merge(enteringGroups)
       .transition()
       .duration(this.config.duration)
       .attr("transform", this.translate)
 
-    nodeGroups
-      .merge(enteringNodeGroups)
+    groups
+      .merge(enteringGroups)
       .selectAll(`path.node.${styles.border}`)
       .transition()
       .duration(this.config.duration)
@@ -146,8 +221,8 @@ class Nodes extends AbstractRenderer {
       )
       .attr("transform", this.rotate)
 
-    nodeGroups
-      .merge(enteringNodeGroups)
+    groups
+      .merge(enteringGroups)
       .selectAll(`path.node.${styles.element}`)
       .transition()
       .duration(this.config.duration)
@@ -215,18 +290,6 @@ class Nodes extends AbstractRenderer {
       .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
       .attr("dy", (d: TNode): number => nodeLabelOptions[this.getLabelPosition(d)].dy)
       .attr("text-anchor", (d: TNode): string => nodeLabelOptions[this.getLabelPosition(d)].textAnchor)
-  }
-
-  focusPoint(element: TNodeSelection, d: TNode): IFocus {
-    if (d == null) return
-    const offset: number = this.getNodeBoundingRect(element.node()).width / 2
-    return {
-      offset,
-      type: "node",
-      x: d.x,
-      y: d.y,
-      id: d.id()
-    }
   }
 }
 

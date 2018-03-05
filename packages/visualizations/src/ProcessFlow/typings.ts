@@ -19,7 +19,6 @@ export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSe
 export type TLink = Link
 export type TNode = Nodes
 
-export type TElementSelection = d3.Selection<d3.BaseType, TNode | TLink, d3.BaseType, any>
 export type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>
 export type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
 

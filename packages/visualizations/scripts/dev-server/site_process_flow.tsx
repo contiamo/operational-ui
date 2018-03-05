@@ -593,6 +593,15 @@ const nodes = map((nodeId: string) => {
 const viz: ProcessFlow = new ProcessFlow(containerNode)
 viz.data({ journeys, nodes })
 viz.accessors("node", {
-    label: (d: any) => `Node id: ${d.id}`
+  label: (d: any) => `Node id: ${d.id}`
+})
+viz.config({
+  focusElement: {
+      type: "path",
+      matchers: {
+          path: ["9", "2", "3", "8"]
+      },
+      hideLabel: false
+  }
 })
 viz.draw()

@@ -1,21 +1,12 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_renderer_1 = require("./abstract_renderer");
 var d3 = require("d3-selection");
 require("d3-transition");
 var d3_shape_1 = require("d3-shape");
 var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
+var event_catalog_1 = require("../../utils/event_catalog");
+var renderer_utils_1 = require("./renderer_utils");
 var nodeLabelOptions = {
     top: {
         dy: "0",
@@ -66,23 +57,69 @@ var nodeShapeOptions = {
         rotation: 0
     }
 };
-var Nodes = /** @class */ (function (_super) {
-    __extends(Nodes, _super);
-    function Nodes() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.type = "node";
-        _this.focusElementAccessor = "path.node." + styles.border;
-        return _this;
+var Nodes = /** @class */ (function () {
+    function Nodes(state, events, el) {
+        this.state = state;
+        this.events = events;
+        this.el = el;
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.removeHighlights.bind(this));
     }
-    Nodes.prototype.updateDraw = function () {
-        var nodeGroups = this.el
+    Nodes.prototype.onMouseOver = function (d, element) {
+        this.mouseOver(d3.select(element), d);
+    };
+    Nodes.prototype.mouseOver = function (element, d, hideLabel) {
+        if (hideLabel === void 0) { hideLabel = false; }
+        this.highlight(element, d);
+        var focusPoint = this.focusPoint(element, d);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { focusPoint: focusPoint, d: d, hideLabel: hideLabel });
+        element.on("mouseleave", this.onMouseOut.bind(this));
+    };
+    Nodes.prototype.focusElement = function (focusElement) {
+        var _this = this;
+        this.el
+            .selectAll("path.node." + styles.border)
+            .filter(renderer_utils_1.filterByMatchers(focusElement.matchers))
+            .each(d3_utils_1.withD3Element(function (d, el) {
+            _this.mouseOver(d3.select(el), d, focusElement.hideLabel);
+        }));
+    };
+    Nodes.prototype.highlight = function (element, d, keepCurrent) {
+        if (keepCurrent === void 0) { keepCurrent = false; }
+        if (!keepCurrent) {
+            this.removeHighlights();
+        }
+        element.attr("stroke", this.config.highlightColor);
+    };
+    // Remove any old highlights (needed if an element has been manually focussed)
+    Nodes.prototype.removeHighlights = function () {
+        this.el.selectAll("path.node." + styles.border).attr("stroke", this.config.borderColor);
+    };
+    Nodes.prototype.focusPoint = function (element, d) {
+        if (d == null)
+            return;
+        var offset = this.getNodeBoundingRect(element.node()).width / 2;
+        return {
+            offset: offset,
+            type: "node",
+            x: d.x,
+            y: d.y,
+            id: d.id()
+        };
+    };
+    Nodes.prototype.onMouseOut = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+    };
+    Nodes.prototype.draw = function (data) {
+        this.data = data;
+        this.config = this.state.current.get("config");
+        var groups = this.el
             .select("g.nodes-group")
             .selectAll("g.node-group")
             .data(this.data, function (node) { return node.id(); });
-        this.exit(nodeGroups);
-        this.enterAndUpdate(nodeGroups);
+        renderer_utils_1.exitGroups(groups);
+        this.enterAndUpdate(groups);
     };
-    Nodes.prototype.nodeBorderScale = function (scale) {
+    Nodes.prototype.borderScale = function (scale) {
         var _this = this;
         return function (size) {
             return Math.pow(Math.sqrt(scale(size)) + _this.config.nodeBorderWidth, 2);
@@ -94,14 +131,14 @@ var Nodes = /** @class */ (function (_super) {
     Nodes.prototype.rotate = function (d) {
         return "rotate(" + nodeShapeOptions[d.shape()].rotation + ")";
     };
-    Nodes.prototype.enterAndUpdate = function (nodeGroups) {
-        var scale = this.sizeScale([this.config.minNodeSize, this.config.maxNodeSize]), borderScale = this.nodeBorderScale(scale);
-        var enteringNodeGroups = nodeGroups
+    Nodes.prototype.enterAndUpdate = function (groups) {
+        var scale = renderer_utils_1.sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data), borderScale = this.borderScale(scale);
+        var enteringGroups = groups
             .enter()
             .append("g")
             .attr("class", "node-group")
             .attr("transform", this.translate);
-        enteringNodeGroups
+        enteringGroups
             .append("path")
             .attr("class", "node " + styles.border)
             .attr("d", function (d) {
@@ -112,7 +149,7 @@ var Nodes = /** @class */ (function (_super) {
             .attr("transform", this.rotate)
             .attr("fill", this.config.borderColor)
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)));
-        enteringNodeGroups
+        enteringGroups
             .append("path")
             .attr("class", "node " + styles.element)
             .attr("d", function (d) {
@@ -124,14 +161,14 @@ var Nodes = /** @class */ (function (_super) {
             .attr("fill", function (d) { return d.color(); })
             .attr("stroke", function (d) { return d.stroke(); })
             .attr("opacity", 0);
-        enteringNodeGroups.append("text").attr("class", styles.label);
-        nodeGroups
-            .merge(enteringNodeGroups)
+        enteringGroups.append("text").attr("class", styles.label);
+        groups
+            .merge(enteringGroups)
             .transition()
             .duration(this.config.duration)
             .attr("transform", this.translate);
-        nodeGroups
-            .merge(enteringNodeGroups)
+        groups
+            .merge(enteringGroups)
             .selectAll("path.node." + styles.border)
             .transition()
             .duration(this.config.duration)
@@ -141,8 +178,8 @@ var Nodes = /** @class */ (function (_super) {
                 .size(borderScale(d.size()))();
         })
             .attr("transform", this.rotate);
-        nodeGroups
-            .merge(enteringNodeGroups)
+        groups
+            .merge(enteringGroups)
             .selectAll("path.node." + styles.element)
             .transition()
             .duration(this.config.duration)
@@ -199,19 +236,7 @@ var Nodes = /** @class */ (function (_super) {
             .attr("dy", function (d) { return nodeLabelOptions[_this.getLabelPosition(d)].dy; })
             .attr("text-anchor", function (d) { return nodeLabelOptions[_this.getLabelPosition(d)].textAnchor; });
     };
-    Nodes.prototype.focusPoint = function (element, d) {
-        if (d == null)
-            return;
-        var offset = this.getNodeBoundingRect(element.node()).width / 2;
-        return {
-            offset: offset,
-            type: "node",
-            x: d.x,
-            y: d.y,
-            id: d.id()
-        };
-    };
     return Nodes;
-}(abstract_renderer_1.default));
+}());
 exports.default = Nodes;
 //# sourceMappingURL=nodes.js.map

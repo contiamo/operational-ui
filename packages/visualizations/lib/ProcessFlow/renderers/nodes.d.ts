@@ -1,15 +1,24 @@
-import AbstractRenderer from "./abstract_renderer";
 import "d3-transition";
-import { IFocus, TNode, TNodeSelection, TScale } from "../typings";
-declare class Nodes extends AbstractRenderer {
-    type: string;
-    focusElementAccessor: string;
+import { IConfig, IEvents, IFocus, IFocusElement, IState, TNode, TNodeSelection, TScale, TSeriesEl } from "../typings";
+declare class Nodes {
+    config: IConfig;
     data: TNode[];
-    updateDraw(): void;
-    nodeBorderScale(scale: TScale): TScale;
+    el: TSeriesEl;
+    events: IEvents;
+    state: IState;
+    constructor(state: IState, events: IEvents, el: TSeriesEl);
+    onMouseOver(d: TNode, element: HTMLElement): void;
+    mouseOver(element: TNodeSelection, d: TNode, hideLabel?: boolean): void;
+    focusElement(focusElement: IFocusElement): void;
+    highlight(element: TNodeSelection, d: TNode, keepCurrent?: boolean): void;
+    removeHighlights(): void;
+    focusPoint(element: TNodeSelection, d: TNode): IFocus;
+    onMouseOut(): void;
+    draw(data: TNode[]): void;
+    borderScale(scale: TScale): TScale;
     translate(d: TNode): string;
     rotate(d: TNode): string;
-    enterAndUpdate(nodeGroups: TNodeSelection): void;
+    enterAndUpdate(groups: TNodeSelection): void;
     getNodeBoundingRect(el: HTMLElement): SVGRect;
     getLabelPosition(d: TNode): string;
     getAutomaticLabelPosition(d: TNode): string;
@@ -17,6 +26,5 @@ declare class Nodes extends AbstractRenderer {
     getNodeLabelY(d: TNode, el: HTMLElement): number;
     getLabelText(d: TNode): string;
     updateNodeLabels(): void;
-    focusPoint(element: TNodeSelection, d: TNode): IFocus;
 }
 export default Nodes;
