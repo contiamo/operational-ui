@@ -31,8 +31,8 @@ const approxZero = (y: (x: number) => number, initialX: number): number => {
   return xInt
 }
 
-const percentageString = (d: TDatum): string | null => {
-  return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : null
+const percentageString = (d: TDatum): string => {
+  return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : ""
 }
 
 abstract class AbstractRenderer {
