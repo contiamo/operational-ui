@@ -54,7 +54,7 @@ class Facade {
       hidden: false,
       highlightColor: "#1499CE",
       horizontalNodeSpacing: 100,
-      labelOffset: 2,
+      labelOffset: 1,
       linkBorderWidth: 4,
       maxLinkWidth: 8,
       maxNodeSize: 1500,

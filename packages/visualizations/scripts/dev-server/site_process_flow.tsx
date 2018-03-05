@@ -39,4 +39,7 @@ const data = {
 
 const viz: ProcessFlow = new ProcessFlow(containerNode)
 viz.data(data)
+viz.accessors("node", {
+    label: (d: any) => `Node id: ${d.id}`
+})
 viz.draw()
