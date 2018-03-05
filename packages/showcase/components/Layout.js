@@ -11,9 +11,12 @@ import nextConfig from "../next.config"
 
 const pathmap = nextConfig.exportPathMap()
 
-const PageContent = glamorous.div(({ theme }) => ({
-  padding: theme.spacing,
-  overflow: "auto",
+const PageContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  display: "grid",
+  gridTemplateColumns: "auto 400px",
+  gridTemplateRows: "auto auto",
+  gridColumnGap: theme.spacing,
+  gridRowGap: theme.spacing,
   "& > *": {
     height: "100%",
     overflow: "auto"
