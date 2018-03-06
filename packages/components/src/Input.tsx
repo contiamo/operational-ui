@@ -2,18 +2,16 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import withLabel from "./utils/with-label"
-import * as mixins from "./utils/mixins"
+import { Label, LabelText, inputFocus } from "./utils/mixins"
 
 export interface Props {
-  css?: any
+  css?: {}
   className?: string
   placeholder?: string
   name?: string
   value: string
   id?: string
-  // Injected by withLabel higher-order component
-  domId?: string
+  inputId?: string
   label?: string
   inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
@@ -24,48 +22,51 @@ export interface Props {
   children?: string
 }
 
-const Label = glamorous.label(({ theme }: { theme: Theme }) => ({
-  "& > span": {
+const InputField = glamorous.input(
+  ({ theme, disabled, isStandalone }: { theme: Theme; disabled: boolean; isStandalone: boolean }): {} => ({
     ...theme.typography.body,
-    display: "inline-block",
-    marginBottom: theme.spacing / 4
-  }
-}))
-
-const InputField = glamorous.input(({ theme, disabled }: { theme: Theme; disabled: boolean }) => ({
-  label: "inputfield",
-  width: "100%",
-  minWidth: 200,
-  padding: theme.spacing * 2 / 3,
-  border: "1px solid",
-  opacity: disabled ? 0.6 : 1.0,
-  borderColor: "rgb(208, 217, 229)",
-  font: "inherit",
-  borderRadius: 2,
-  WebkitAppearance: "none",
-  "&:focus": mixins.inputFocus({ theme })
-}))
+    // If the input field is standalone without a label, it should not specify any display properties
+    // to avoid input fields that span the screen. Min width should take care of presentable
+    // default looks.
+    ...isStandalone ? {} : { display: "block" },
+    label: "input",
+    minWidth: 240,
+    padding: theme.spacing * 2 / 3,
+    border: "1px solid",
+    opacity: disabled ? 0.6 : 1.0,
+    borderColor: "rgb(208, 217, 229)",
+    font: "inherit",
+    borderRadius: 2,
+    WebkitAppearance: "none",
+    "&:focus": inputFocus({ theme })
+  })
+)
 
 const Input = (props: Props) => {
-  // `css` and `className` props are not set, as they are set on the wrapped label container.
-  // See ./src/utils/with-label.tsx.
-  return (
-    <InputField
-      key={props.id}
-      innerRef={props.inputRef}
-      id={props.domId}
-      name={props.name}
-      disabled={props.disabled}
-      placeholder={props.placeholder}
-      value={props.value}
-      type={props.type}
-      onFocus={props.onFocus}
-      onBlur={props.onBlur}
-      onChange={(e: any) => {
-        props.onChange && props.onChange(e.target.value)
-      }}
-    />
-  )
+  const forAttributeId = props.label && props.inputId
+  const commonInputProps = {
+    innerRef: props.inputRef,
+    name: props.name,
+    disabled: Boolean(props.disabled),
+    value: props.value,
+    isStandalone: !Boolean(props.label),
+    type: props.type,
+    onFocus: props.onFocus,
+    onBlur: props.onBlur,
+    placeholder: props.placeholder,
+    onChange: (e: any) => {
+      props.onChange && props.onChange(e.target.value)
+    }
+  }
+  if (props.label) {
+    return (
+      <Label htmlFor={forAttributeId} css={props.css} className={props.className} key={props.id}>
+        <LabelText>{props.label}</LabelText>
+        <InputField {...commonInputProps} key={props.id} id={forAttributeId} />
+      </Label>
+    )
+  }
+  return <InputField {...commonInputProps} css={props.css} className={props.className} key={props.id} />
 }
 
-export default withLabel(Input)
+export default Input
