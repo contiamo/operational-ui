@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import Link from "next/link"
-import { Card, Icon, Button } from "@operational/components"
+import { Card, Icon, Button, CardHeader } from "@operational/components"
 import { fetchFromRepo } from "../utils"
 
 import Layout from "../components/Layout"
@@ -82,7 +82,7 @@ export default class Intro extends React.Component {
   render() {
     return (
       <Layout pathname={this.props.url.pathname}>
-        <Card css={{ width: "100%", position: "relative", padding: 0 }}>
+        <Card>
           <TitleBar>
             <TitleBarContent>
               <Operational size={80} rotation={this.state.rotation} />
@@ -104,6 +104,12 @@ export default class Intro extends React.Component {
           <BodyContent>
             <StaticContent markdownContent={this.props.content} />
           </BodyContent>
+        </Card>
+        <Card>
+          <CardHeader>Quick examples</CardHeader>
+        </Card>
+        <Card>
+          <CardHeader>Documentation</CardHeader>
         </Card>
       </Layout>
     )

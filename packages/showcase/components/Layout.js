@@ -60,6 +60,7 @@ export default class Layout extends React.Component {
 
   render() {
     const { pathname } = this.props
+    const children = React.Children.toArray(this.props.children)
     return (
       <OperationalUI withBaseStyles>
         {!this.state.isClientRendered ? (
