@@ -1,7 +1,19 @@
-import AbstractFocus from "../utils/focus"
 import FocusUtils from "../utils/focus_utils"
+import Events from "../utils/event_catalog"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
-import { IBreakdown, IConfig, IFocus, IObject, TD3Selection, TLink, TNode, TSeriesEl } from "./typings"
+import {
+  IBreakdown,
+  IConfig,
+  IEvents,
+  IFocus,
+  IObject,
+  IState,
+  TD3Selection,
+  TLink,
+  TNode,
+  TSeriesEl,
+  TStateWriter
+} from "./typings"
 import * as styles from "./styles"
 
 interface IBreakdowns {
@@ -12,7 +24,22 @@ interface IBreakdowns {
 }
 
 // There can only be an element focus in process flow diagrams
-class Focus extends AbstractFocus {
+class Focus {
+  el: TSeriesEl
+  state: IState
+  stateWriter: TStateWriter
+  events: IEvents
+
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject) {
+    this.state = state
+    this.stateWriter = stateWriter
+    this.events = events
+    this.el = els.main
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
+  }
+
   onElementHover(payload: { focusPoint: IFocus; d: TNode | TLink; hideLabel: boolean }): void {
     // Remove the current focus label, if there is one
     this.remove()
@@ -133,6 +160,19 @@ class Focus extends AbstractFocus {
       yMax: drawingContainer.top + config.height,
       yMin: drawingContainer.top
     }
+  }
+
+  onElementOut(): void {
+    this.remove()
+  }
+
+  onMouseLeave(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+  }
+
+  remove(): void {
+    this.el.node().innerHTML = ""
+    this.el.style("visibility", "hidden")
   }
 }
 

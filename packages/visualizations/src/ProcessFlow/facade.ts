@@ -15,7 +15,8 @@ import {
   IObject,
   INodeAttrs,
   ILinkAttrs,
-  TNode
+  TNode,
+  Components
 } from "./typings"
 
 class Facade {
@@ -113,7 +114,7 @@ class Facade {
     return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
-  insertComponents(): IObject {
+  insertComponents(): Components {
     return {
       focus: new Focus(
         this.state.readOnly(),

@@ -1,24 +1,19 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var focus_1 = require("../utils/focus");
 var focus_utils_1 = require("../utils/focus_utils");
+var event_catalog_1 = require("../utils/event_catalog");
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
 // There can only be an element focus in process flow diagrams
-var Focus = /** @class */ (function (_super) {
-    __extends(Focus, _super);
-    function Focus() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var Focus = /** @class */ (function () {
+    function Focus(state, stateWriter, events, els) {
+        this.state = state;
+        this.stateWriter = stateWriter;
+        this.events = events;
+        this.el = els.main;
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
     Focus.prototype.onElementHover = function (payload) {
         // Remove the current focus label, if there is one
@@ -91,8 +86,18 @@ var Focus = /** @class */ (function (_super) {
             yMin: drawingContainer.top
         };
     };
+    Focus.prototype.onElementOut = function () {
+        this.remove();
+    };
+    Focus.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+    };
+    Focus.prototype.remove = function () {
+        this.el.node().innerHTML = "";
+        this.el.style("visibility", "hidden");
+    };
     return Focus;
-}(focus_1.default));
+}());
 // Helper functions
 function computeBreakdowns(node) {
     var inputs = fp_1.map(function (link) {

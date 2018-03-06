@@ -1,6 +1,10 @@
-import AbstractFocus from "../utils/focus";
-import { IFocus, IObject, TD3Selection, TLink, TNode, TSeriesEl } from "./typings";
-declare class Focus extends AbstractFocus {
+import { IEvents, IFocus, IObject, IState, TD3Selection, TLink, TNode, TSeriesEl, TStateWriter } from "./typings";
+declare class Focus {
+    el: TSeriesEl;
+    state: IState;
+    stateWriter: TStateWriter;
+    events: IEvents;
+    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
     onElementHover(payload: {
         focusPoint: IFocus;
         d: TNode | TLink;
@@ -15,5 +19,8 @@ declare class Focus extends AbstractFocus {
         yMax: number;
         yMin: number;
     };
+    onElementOut(): void;
+    onMouseLeave(): void;
+    remove(): void;
 }
 export default Focus;

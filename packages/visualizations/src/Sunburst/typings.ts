@@ -1,7 +1,12 @@
-// Type definitions for the Contiamo Process Flow visualization
+// Type definitions for the Contiamo Sunburst visualization
+import Breadcrumb from "./breadcrumb"
+import Renderer from "./renderer"
+import RootLabel from "./root_label"
 import * as d3 from "d3-selection"
 
-import {
+import { IObject, FocusClass } from "../utils/typings"
+
+export {
   IChartStateObject,
   IEvents,
   IObject,
@@ -11,8 +16,6 @@ import {
   TSeriesEl,
   TStateWriter
 } from "../utils/typings"
-
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter }
 
 export interface IConfig {
   arrowOffset: number
@@ -55,4 +58,11 @@ export interface IComputedState {
 export interface IMousePosition {
   absolute: { x: number; y: number }
   relative: { x: number; y: number }
+}
+
+export interface Components {
+  breadcrumb: Breadcrumb
+  focus: FocusClass<IObject, TDatum>
+  renderer: Renderer
+  rootLabel: RootLabel
 }

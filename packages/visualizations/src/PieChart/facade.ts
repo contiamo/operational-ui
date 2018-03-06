@@ -6,7 +6,16 @@ import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
-import { IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum, TFocusElement } from "./typings"
+import {
+  Components,
+  IAccessors,
+  IComputedState,
+  IConfig,
+  IChartStateObject,
+  IObject,
+  TDatum,
+  TFocusElement
+} from "./typings"
 
 class Facade {
   __disposed: boolean = false
@@ -84,7 +93,7 @@ class Facade {
     return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
-  insertComponents(): IObject {
+  insertComponents(): Components {
     return {
       legend: new Legend(
         this.state.readOnly(),

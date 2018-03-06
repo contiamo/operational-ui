@@ -1,5 +1,5 @@
-import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
+import { IObject, FocusClass } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
 export declare type TFocusElement = string;
 export interface IConfig {
     duration: number;
@@ -50,4 +50,8 @@ export interface IMousePosition {
         x: number;
         y: number;
     };
+}
+export interface Components {
+    focus: FocusClass<IObject, TDatum>;
+    legend: any;
 }

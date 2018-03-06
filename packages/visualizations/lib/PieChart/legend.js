@@ -65,9 +65,7 @@ var Legend = /** @class */ (function () {
         return fp_1.filter(function (d) { return !d.comparison; })(this.state.current.get("computed").series.dataForLegend);
     };
     Legend.prototype.onComponentHover = function (d, el) {
-        var _this = this;
         this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) });
-        d3.select(el).on("mouseleave", function () { return _this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOUT); });
     };
     Legend.prototype.currentOptions = function (datum) {
         return datum.type === "comparison"

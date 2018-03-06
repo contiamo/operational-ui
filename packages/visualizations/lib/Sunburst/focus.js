@@ -1,22 +1,17 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var focus_utils_1 = require("../utils/focus_utils");
-var focus_1 = require("../utils/focus");
+var event_catalog_1 = require("../utils/event_catalog");
 var dataName = function (d) { return d.data.name; }, dataValue = function (d) { return d.value; };
-var Focus = /** @class */ (function (_super) {
-    __extends(Focus, _super);
+var Focus = /** @class */ (function () {
     function Focus(state, stateWriter, events, els) {
-        return _super.call(this, state, stateWriter, events, els) || this;
+        this.state = state;
+        this.stateWriter = stateWriter;
+        this.events = events;
+        this.el = els.main;
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
     Focus.prototype.onElementHover = function (payload) {
         this.remove();
@@ -58,7 +53,17 @@ var Focus = /** @class */ (function (_super) {
         var percentage = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3);
         return percentage + "% of " + dataName(comparison);
     };
+    Focus.prototype.onElementOut = function () {
+        this.remove();
+    };
+    Focus.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+    };
+    Focus.prototype.remove = function () {
+        this.el.node().innerHTML = "";
+        this.el.style("visibility", "hidden");
+    };
     return Focus;
-}(focus_1.default));
+}());
 exports.default = Focus;
 //# sourceMappingURL=focus.js.map

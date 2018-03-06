@@ -26,3 +26,10 @@ export interface IChartStateObject {
 }
 
 export type IState = IChartStateReadOnly<IChartStateObject>
+
+export interface FocusClass<FocusPoint, Datum> {
+  onElementHover: (payload: { focusPoint: FocusPoint; d: Datum; hideLabel?: boolean }) => void
+  onElementOut: () => void
+  onMouseLeave: () => void
+  remove: () => void
+}

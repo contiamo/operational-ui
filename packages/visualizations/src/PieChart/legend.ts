@@ -93,7 +93,6 @@ class Legend {
 
   onComponentHover(d: IObject, el: HTMLElement): void {
     this.events.emit(Events.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) })
-    d3.select(el).on("mouseleave", (): void => this.events.emit(Events.FOCUS.COMPONENT.MOUSEOUT))
   }
 
   currentOptions(datum: IObject): IObject {

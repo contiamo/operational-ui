@@ -2,16 +2,16 @@ import { IEvents, IObject, IState, TD3Selection } from "./typings";
 declare class ComponentFocus {
     el: TD3Selection;
     events: IEvents;
-    isMouseOver: boolean;
-    label: TD3Selection;
     state: IState;
-    type: string;
-    uid: string;
-    constructor(state: IState, el: TD3Selection, events: IEvents, payload: {
+    constructor(state: IState, el: TD3Selection, events: IEvents);
+    onComponentHover(payload: {
         component: TD3Selection;
         options: IObject;
-    });
-    onMouseOver(): void;
+    }): void;
+    draw(payload: {
+        component: TD3Selection;
+        options: IObject;
+    }): void;
     onMouseOut(): void;
     onClick(configOptions: IObject): () => void;
     remove(): void;

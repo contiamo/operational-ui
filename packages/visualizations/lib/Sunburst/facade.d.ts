@@ -1,7 +1,7 @@
 import Canvas from "./canvas";
 import { StateHandler } from "../utils/state_handler";
 import EventEmitter from "../utils/event_bus";
-import { IAccessors, IComputedState, IConfig, IObject } from "./typings";
+import { Components, IAccessors, IComputedState, IConfig, IObject } from "./typings";
 declare class Facade {
     __disposed: boolean;
     canvas: Canvas;
@@ -17,7 +17,7 @@ declare class Facade {
     initialAccessors(): IAccessors;
     initialComputed(): IComputedState;
     insertCanvas(): Canvas;
-    insertComponents(): IObject;
+    insertComponents(): Components;
     data<T>(data?: T): T;
     config(config?: Partial<IConfig>): IConfig;
     accessors(type: string, accessors: IObject): IObject;

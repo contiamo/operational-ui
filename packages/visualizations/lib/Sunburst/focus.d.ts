@@ -1,6 +1,9 @@
-import AbstractFocus from "../utils/focus";
-import { IEvents, IObject, IState, TDatum, TStateWriter } from "./typings";
-declare class Focus extends AbstractFocus {
+import { IEvents, IObject, IState, TDatum, TSeriesEl, TStateWriter } from "./typings";
+declare class Focus {
+    el: TSeriesEl;
+    state: IState;
+    stateWriter: TStateWriter;
+    events: IEvents;
     constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
     onElementHover(payload: {
         focusPoint: IObject;
@@ -9,5 +12,8 @@ declare class Focus extends AbstractFocus {
     }): void;
     percentageString(datum: TDatum): string;
     singlePercentageString(datum: TDatum, comparison: TDatum): string;
+    onElementOut(): void;
+    onMouseLeave(): void;
+    remove(): void;
 }
 export default Focus;

@@ -1,8 +1,8 @@
 import * as d3 from "d3-selection";
 import Nodes from "./node";
 import Link from "./link";
-import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
+import { IObject, FocusClass } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
 export declare type TLink = Link;
 export declare type TNode = Nodes;
 export declare type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>;
@@ -117,4 +117,7 @@ export interface IBreakdown {
     label?: string;
     size: number;
     percentage: number;
+}
+export interface Components {
+    focus: FocusClass<IFocus, TNode | TLink>;
 }
