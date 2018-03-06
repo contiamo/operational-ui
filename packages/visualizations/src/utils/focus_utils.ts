@@ -20,7 +20,7 @@ const FocusUtils: IObject = {
   // before the label is made visible.
   drawHidden: (canvasEl: TD3Selection, type: string, position?: string): TD3Selection => {
     return canvasEl
-      .attr("class", `${styles.focusLegend} focus-legend-${type} ${position}`)
+      .attr("class", `${styles.focusLegend} focus-legend-${type} ${position || ""}`)
       .style("visibility", "hidden")
   },
 
