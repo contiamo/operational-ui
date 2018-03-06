@@ -3,7 +3,7 @@ import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-import { IObject, FocusClass } from "../utils/typings"
+import { IObject, Focus } from "../utils/typings"
 
 export {
   IChartStateObject,
@@ -149,6 +149,8 @@ export interface IBreakdown {
   percentage: number
 }
 
+export type Focus = Focus<IFocus, TNode | TLink>
+
 export interface Components {
-  focus: FocusClass<IFocus, TNode | TLink>
+  focus: Focus<IFocus, TNode | TLink>
 }

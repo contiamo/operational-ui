@@ -2,7 +2,7 @@ import Canvas from "./canvas"
 import Renderer from "./renderer"
 import Breadcrumb from "./breadcrumb"
 import RootLabel from "./root_label"
-import Focus from "./focus"
+import SunburstFocus from "./focus"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
@@ -94,7 +94,7 @@ class Facade {
         this.events,
         this.canvas.elementFor("breadcrumb")
       ),
-      focus: new Focus(
+      focus: new SunburstFocus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
         this.events,

@@ -1,6 +1,6 @@
 import ComponentFocus from "../utils/component_focus";
-import { IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings";
-declare class Focus {
+import { Focus, IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings";
+declare class PieChartFocus implements Focus {
     el: TSeriesEl;
     componentFocus: ComponentFocus;
     state: IState;
@@ -15,4 +15,4 @@ declare class Focus {
     onMouseLeave(): void;
     remove(): void;
 }
-export default Focus;
+export default PieChartFocus;

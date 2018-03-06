@@ -1,5 +1,5 @@
-import { IEvents, IObject, IState, TStateWriter, TD3Selection } from "./typings";
-declare class Legend {
+import { Legend, IEvents, IObject, IState, TStateWriter, TD3Selection } from "./typings";
+declare class PieChartLegend implements Legend {
     events: IEvents;
     legend: TD3Selection;
     state: IState;
@@ -13,4 +13,4 @@ declare class Legend {
     updateDimensions(): void;
     remove(): void;
 }
-export default Legend;
+export default PieChartLegend;

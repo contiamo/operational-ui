@@ -5,8 +5,8 @@ var event_catalog_1 = require("../utils/event_catalog");
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
 // There can only be an element focus in process flow diagrams
-var Focus = /** @class */ (function () {
-    function Focus(state, stateWriter, events, els) {
+var ProcessFlowFocus = /** @class */ (function () {
+    function ProcessFlowFocus(state, stateWriter, events, els) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
@@ -15,7 +15,7 @@ var Focus = /** @class */ (function () {
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
         this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
-    Focus.prototype.onElementHover = function (payload) {
+    ProcessFlowFocus.prototype.onElementHover = function (payload) {
         // Remove the current focus label, if there is one
         this.remove();
         if (payload.hideLabel) {
@@ -46,7 +46,7 @@ var Focus = /** @class */ (function () {
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el), drawingDimensions = this.getDrawingDimensions(), offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
         focus_utils_1.default.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset);
     };
-    Focus.prototype.appendContent = function (container, content) {
+    ProcessFlowFocus.prototype.appendContent = function (container, content) {
         var contentContainer = container.append("div").attr("class", styles.content);
         fp_1.forEach(function (contentItem) {
             contentContainer
@@ -57,7 +57,7 @@ var Focus = /** @class */ (function () {
                 .text(contentItem.value);
         })(content);
     };
-    Focus.prototype.addNodeBreakdowns = function (content, datum) {
+    ProcessFlowFocus.prototype.addNodeBreakdowns = function (content, datum) {
         var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer), inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all inputs" : " ", numberFormatter = this.state.current.get("config").numberFormatter;
         // Add "Starts here" breakdown
         fp_1.flow(addBreakdownContainer, addBreakdownTitle("Starts here"), addBreakdownBars(breakdowns.startsHere, numberFormatter), addBreakdownComment(startsHereString))(container);
@@ -68,7 +68,7 @@ var Focus = /** @class */ (function () {
         // Add outputs breakdown
         fp_1.flow(addBreakdownContainer, addBreakdownTitle("Outputs", " (" + numberFormatter(outputsTotal) + ")"), addBreakdownBars(breakdowns.outputs, numberFormatter))(container);
     };
-    Focus.prototype.addSingleNodeVisitsComment = function (content, datum) {
+    ProcessFlowFocus.prototype.addSingleNodeVisitsComment = function (content, datum) {
         if (datum.singleNodeJourneys === 0) {
             return;
         }
@@ -77,7 +77,7 @@ var Focus = /** @class */ (function () {
             .attr("class", styles.title)
             .text("[!] " + datum.singleNodeJourneys + " single node visits (not included in the above stats)");
     };
-    Focus.prototype.getDrawingDimensions = function () {
+    ProcessFlowFocus.prototype.getDrawingDimensions = function () {
         var drawingContainer = this.state.current.get("computed").canvas.elRect, config = this.state.current.get("config");
         return {
             xMax: drawingContainer.left + config.width,
@@ -86,17 +86,17 @@ var Focus = /** @class */ (function () {
             yMin: drawingContainer.top
         };
     };
-    Focus.prototype.onElementOut = function () {
+    ProcessFlowFocus.prototype.onElementOut = function () {
         this.remove();
     };
-    Focus.prototype.onMouseLeave = function () {
+    ProcessFlowFocus.prototype.onMouseLeave = function () {
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
     };
-    Focus.prototype.remove = function () {
+    ProcessFlowFocus.prototype.remove = function () {
         this.el.node().innerHTML = "";
         this.el.style("visibility", "hidden");
     };
-    return Focus;
+    return ProcessFlowFocus;
 }());
 // Helper functions
 function computeBreakdowns(node) {
@@ -185,5 +185,5 @@ function addBreakdownComment(comment) {
         return container;
     };
 }
-exports.default = Focus;
+exports.default = ProcessFlowFocus;
 //# sourceMappingURL=focus.js.map

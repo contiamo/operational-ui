@@ -1,7 +1,7 @@
 import Breadcrumb from "./breadcrumb";
 import Renderer from "./renderer";
 import RootLabel from "./root_label";
-import { IObject, FocusClass } from "../utils/typings";
+import { IObject, Focus } from "../utils/typings";
 export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
 export interface IConfig {
     arrowOffset: number;
@@ -47,9 +47,10 @@ export interface IMousePosition {
         y: number;
     };
 }
+export declare type Focus = Focus<IObject, TDatum>;
 export interface Components {
     breadcrumb: Breadcrumb;
-    focus: FocusClass<IObject, TDatum>;
+    focus: Focus<IObject, TDatum>;
     renderer: Renderer;
     rootLabel: RootLabel;
 }

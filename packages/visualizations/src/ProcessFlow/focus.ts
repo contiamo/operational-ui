@@ -12,7 +12,8 @@ import {
   TLink,
   TNode,
   TSeriesEl,
-  TStateWriter
+  TStateWriter,
+  Focus
 } from "./typings"
 import * as styles from "./styles"
 
@@ -24,7 +25,7 @@ interface IBreakdowns {
 }
 
 // There can only be an element focus in process flow diagrams
-class Focus {
+class ProcessFlowFocus implements Focus {
   el: TSeriesEl
   state: IState
   stateWriter: TStateWriter
@@ -274,4 +275,4 @@ function addBreakdownComment(comment: string) {
   }
 }
 
-export default Focus
+export default ProcessFlowFocus

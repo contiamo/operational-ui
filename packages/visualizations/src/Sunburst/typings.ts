@@ -4,7 +4,7 @@ import Renderer from "./renderer"
 import RootLabel from "./root_label"
 import * as d3 from "d3-selection"
 
-import { IObject, FocusClass } from "../utils/typings"
+import { IObject, Focus } from "../utils/typings"
 
 export {
   IChartStateObject,
@@ -60,9 +60,11 @@ export interface IMousePosition {
   relative: { x: number; y: number }
 }
 
+export type Focus = Focus<IObject, TDatum>
+
 export interface Components {
   breadcrumb: Breadcrumb
-  focus: FocusClass<IObject, TDatum>
+  focus: Focus<IObject, TDatum>
   renderer: Renderer
   rootLabel: RootLabel
 }

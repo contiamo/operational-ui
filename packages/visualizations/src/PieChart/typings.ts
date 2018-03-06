@@ -1,7 +1,7 @@
 // Type definitions for the Contiamo Process Flow visualization
 import * as d3 from "d3-selection"
 
-import { IObject, FocusClass } from "../utils/typings"
+import { IObject, Focus, Legend } from "../utils/typings"
 
 export {
   IChartStateObject,
@@ -11,7 +11,8 @@ export {
   Partial,
   TD3Selection,
   TSeriesEl,
-  TStateWriter
+  TStateWriter,
+  Legend
 } from "../utils/typings"
 
 export type TFocusElement = string
@@ -66,7 +67,9 @@ export interface IMousePosition {
   relative: { x: number; y: number }
 }
 
+export type Focus = Focus<IObject, TDatum>
+
 export interface Components {
-  focus: FocusClass<IObject, TDatum>
-  legend: any
+  focus: Focus<IObject, TDatum>
+  legend: Legend
 }

@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var focus_utils_1 = require("../utils/focus_utils");
 var event_catalog_1 = require("../utils/event_catalog");
 var dataName = function (d) { return d.data.name; }, dataValue = function (d) { return d.value; };
-var Focus = /** @class */ (function () {
-    function Focus(state, stateWriter, events, els) {
+var SunburstFocus = /** @class */ (function () {
+    function SunburstFocus(state, stateWriter, events, els) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
@@ -13,7 +13,7 @@ var Focus = /** @class */ (function () {
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
         this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
-    Focus.prototype.onElementHover = function (payload) {
+    SunburstFocus.prototype.onElementHover = function (payload) {
         this.remove();
         if (payload.hideLabel) {
             return;
@@ -40,7 +40,7 @@ var Focus = /** @class */ (function () {
         };
         focus_utils_1.default.drawVisible(this.el, labelPlacement);
     };
-    Focus.prototype.percentageString = function (datum) {
+    SunburstFocus.prototype.percentageString = function (datum) {
         var computed = this.state.current.get("computed");
         var topNode = computed.renderer.topNode;
         var zoomNode = computed.renderer.zoomNode;
@@ -48,22 +48,22 @@ var Focus = /** @class */ (function () {
             ? "" + this.singlePercentageString(datum, topNode)
             : this.singlePercentageString(datum, zoomNode) + " / " + this.singlePercentageString(datum, topNode);
     };
-    Focus.prototype.singlePercentageString = function (datum, comparison) {
+    SunburstFocus.prototype.singlePercentageString = function (datum, comparison) {
         var topNode = this.state.current.get("computed").renderer.topNode;
         var percentage = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3);
         return percentage + "% of " + dataName(comparison);
     };
-    Focus.prototype.onElementOut = function () {
+    SunburstFocus.prototype.onElementOut = function () {
         this.remove();
     };
-    Focus.prototype.onMouseLeave = function () {
+    SunburstFocus.prototype.onMouseLeave = function () {
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
     };
-    Focus.prototype.remove = function () {
+    SunburstFocus.prototype.remove = function () {
         this.el.node().innerHTML = "";
         this.el.style("visibility", "hidden");
     };
-    return Focus;
+    return SunburstFocus;
 }());
-exports.default = Focus;
+exports.default = SunburstFocus;
 //# sourceMappingURL=focus.js.map

@@ -19,7 +19,7 @@ export interface IChartStateObject {
     computed: IObject;
 }
 export declare type IState = IChartStateReadOnly<IChartStateObject>;
-export interface FocusClass<FocusPoint, Datum> {
+export interface Focus<FocusPoint, Datum> {
     onElementHover: (payload: {
         focusPoint: FocusPoint;
         d: Datum;
@@ -27,5 +27,10 @@ export interface FocusClass<FocusPoint, Datum> {
     }) => void;
     onElementOut: () => void;
     onMouseLeave: () => void;
+    remove: () => void;
+}
+export interface Legend {
+    draw: () => void;
+    updateDimensions: () => void;
     remove: () => void;
 }

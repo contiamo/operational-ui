@@ -1,12 +1,12 @@
 import FocusUtils from "../utils/focus_utils"
 import * as d3 from "d3-selection"
 import Events from "../utils/event_catalog"
-import { IEvents, IObject, IState, TD3Selection, TDatum, TSeriesEl, TStateWriter } from "./typings"
+import { Focus, IEvents, IObject, IState, TD3Selection, TDatum, TSeriesEl, TStateWriter } from "./typings"
 
 const dataName = (d: TDatum): string => d.data.name,
   dataValue = (d: TDatum): number => d.value
 
-class Focus {
+class SunburstFocus implements Focus {
   el: TSeriesEl
   state: IState
   stateWriter: TStateWriter
@@ -91,4 +91,4 @@ class Focus {
   }
 }
 
-export default Focus
+export default SunburstFocus

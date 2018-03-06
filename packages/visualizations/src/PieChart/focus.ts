@@ -2,11 +2,11 @@ import FocusUtils from "../utils/focus_utils"
 import Events from "../utils/event_catalog"
 import ComponentFocus from "../utils/component_focus"
 import * as d3 from "d3-selection"
-import { IEvents, IObject, IState, TD3Selection, TDatum, TSeriesEl, TStateWriter } from "./typings"
+import { Focus, IEvents, IObject, IState, TD3Selection, TDatum, TSeriesEl, TStateWriter } from "./typings"
 
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
-class Focus {
+class PieChartFocus implements Focus {
   el: TSeriesEl
   componentFocus: ComponentFocus
   state: IState
@@ -68,4 +68,4 @@ class Focus {
   }
 }
 
-export default Focus
+export default PieChartFocus

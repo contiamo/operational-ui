@@ -1,5 +1,5 @@
-import { IEvents, IFocus, IObject, IState, TD3Selection, TLink, TNode, TSeriesEl, TStateWriter } from "./typings";
-declare class Focus {
+import { IEvents, IFocus, IObject, IState, TD3Selection, TLink, TNode, TSeriesEl, TStateWriter, Focus } from "./typings";
+declare class ProcessFlowFocus implements Focus {
     el: TSeriesEl;
     state: IState;
     stateWriter: TStateWriter;
@@ -23,4 +23,4 @@ declare class Focus {
     onMouseLeave(): void;
     remove(): void;
 }
-export default Focus;
+export default ProcessFlowFocus;

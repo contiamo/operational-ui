@@ -1,5 +1,5 @@
 import Events from "../utils/event_catalog"
-import { IEvents, IObject, IState, TStateWriter, TD3Selection } from "./typings"
+import { Legend, IEvents, IObject, IState, TStateWriter, TD3Selection } from "./typings"
 import * as d3 from "d3-selection"
 import * as $ from "jquery"
 import { every, filter, find, forEach, get, groupBy, keys, map, some } from "lodash/fp"
@@ -8,7 +8,7 @@ import * as globalStyles from "../utils/styles"
 import { withD3Element } from "../utils/d3_utils"
 import { roundedUpHeight, widthPadding, heightMargin, totalWidth } from "../utils/legend_utils"
 
-class Legend {
+class PieChartLegend implements Legend {
   events: IEvents
   legend: TD3Selection
   state: IState
@@ -137,4 +137,4 @@ class Legend {
   }
 }
 
-export default Legend
+export default PieChartLegend

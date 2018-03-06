@@ -1,5 +1,5 @@
-import { IEvents, IObject, IState, TDatum, TSeriesEl, TStateWriter } from "./typings";
-declare class Focus {
+import { Focus, IEvents, IObject, IState, TDatum, TSeriesEl, TStateWriter } from "./typings";
+declare class SunburstFocus implements Focus {
     el: TSeriesEl;
     state: IState;
     stateWriter: TStateWriter;
@@ -16,4 +16,4 @@ declare class Focus {
     onMouseLeave(): void;
     remove(): void;
 }
-export default Focus;
+export default SunburstFocus;

@@ -1,7 +1,7 @@
 import Canvas from "./canvas"
 import Series from "./series"
-import Focus from "./focus"
-import Legend from "./legend"
+import PieChartFocus from "./focus"
+import PieChartLegend from "./legend"
 import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
@@ -95,13 +95,13 @@ class Facade {
 
   insertComponents(): Components {
     return {
-      legend: new Legend(
+      legend: new PieChartLegend(
         this.state.readOnly(),
         this.state.computedWriter(["legend"]),
         this.events,
         this.canvas.elementFor("legends").top.left
       ),
-      focus: new Focus(
+      focus: new PieChartFocus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
         this.events,

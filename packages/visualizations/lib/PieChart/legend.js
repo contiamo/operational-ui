@@ -7,14 +7,14 @@ var localStyles = require("./styles");
 var globalStyles = require("../utils/styles");
 var d3_utils_1 = require("../utils/d3_utils");
 var legend_utils_1 = require("../utils/legend_utils");
-var Legend = /** @class */ (function () {
-    function Legend(state, stateWriter, events, el) {
+var PieChartLegend = /** @class */ (function () {
+    function PieChartLegend(state, stateWriter, events, el) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
         this.legend = el;
     }
-    Legend.prototype.draw = function () {
+    PieChartLegend.prototype.draw = function () {
         // No legend
         if (!this.state.current.get("config").legend) {
             this.remove();
@@ -44,7 +44,7 @@ var Legend = /** @class */ (function () {
         this.updateComparisonLegend();
         this.updateDimensions();
     };
-    Legend.prototype.updateComparisonLegend = function () {
+    PieChartLegend.prototype.updateComparisonLegend = function () {
         // Only needed for gauges, if comparison value is given.
         var data = fp_1.filter(function (d) { return d.comparison; })(this.state.current.get("computed").series.dataForLegend);
         var legends = this.legend.selectAll("div.comparison").data(data);
@@ -61,13 +61,13 @@ var Legend = /** @class */ (function () {
             .select("div.name")
             .html(function (d) { return d.label; });
     };
-    Legend.prototype.data = function () {
+    PieChartLegend.prototype.data = function () {
         return fp_1.filter(function (d) { return !d.comparison; })(this.state.current.get("computed").series.dataForLegend);
     };
-    Legend.prototype.onComponentHover = function (d, el) {
+    PieChartLegend.prototype.onComponentHover = function (d, el) {
         this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) });
     };
-    Legend.prototype.currentOptions = function (datum) {
+    PieChartLegend.prototype.currentOptions = function (datum) {
         return datum.type === "comparison"
             ? {
                 options: {
@@ -84,7 +84,7 @@ var Legend = /** @class */ (function () {
                 type: "config"
             };
     };
-    Legend.prototype.updateDimensions = function () {
+    PieChartLegend.prototype.updateDimensions = function () {
         var legendNode = this.legend.node(), config = this.state.current.get("config"), colorBoxWidth = legend_utils_1.totalWidth(this.legend.select(".color").node()), seriesLegendPadding = legend_utils_1.widthPadding(this.legend.selectAll("." + globalStyles.seriesLegend).node());
         var h = config.height;
         var lh = legend_utils_1.roundedUpHeight(legendNode) + legend_utils_1.heightMargin(legendNode);
@@ -98,10 +98,10 @@ var Legend = /** @class */ (function () {
             }
         }
     };
-    Legend.prototype.remove = function () {
+    PieChartLegend.prototype.remove = function () {
         this.legend.node().innerHTML = "";
     };
-    return Legend;
+    return PieChartLegend;
 }());
-exports.default = Legend;
+exports.default = PieChartLegend;
 //# sourceMappingURL=legend.js.map
