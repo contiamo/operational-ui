@@ -8,6 +8,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 exports.inputFocus = function (_a) {
     var theme = _a.theme;
@@ -18,13 +19,15 @@ exports.inputFocus = function (_a) {
         boxShadow: "0 0 0 3px " + utils_1.lighten(theme.colors.info, 40)
     });
 };
-exports.label = function (_a) {
+exports.Label = glamorous_1.default.label(function (_a) {
     var theme = _a.theme;
     return ({
         display: "inline-block",
-        minWidth: 240,
-        // Styles for the label text's span tag
-        "& > :first-child": __assign({ display: "inline-block", marginBottom: theme.spacing / 4 }, theme.typography.small, { fontWeight: 600, opacity: 0.7 })
+        minWidth: 240
     });
-};
+});
+exports.LabelText = glamorous_1.default.span(function (_a) {
+    var theme = _a.theme;
+    return (__assign({ display: "inline-block", marginBottom: theme.spacing / 4 }, theme.typography.small, { fontWeight: 600, opacity: 0.7 }));
+});
 //# sourceMappingURL=mixins.js.map

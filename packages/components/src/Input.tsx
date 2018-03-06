@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import * as mixins from "./utils/mixins"
+import { Label, LabelText, inputFocus } from "./utils/mixins"
 
 export interface Props {
   css?: {}
@@ -22,8 +22,6 @@ export interface Props {
   children?: string
 }
 
-const Label = glamorous.label(mixins.label)
-
 const InputField = glamorous.input(
   ({ theme, disabled, isStandalone }: { theme: Theme; disabled: boolean; isStandalone: boolean }): {} => ({
     ...theme.typography.body,
@@ -40,7 +38,7 @@ const InputField = glamorous.input(
     font: "inherit",
     borderRadius: 2,
     WebkitAppearance: "none",
-    "&:focus": mixins.inputFocus({ theme })
+    "&:focus": inputFocus({ theme })
   })
 )
 
@@ -63,7 +61,7 @@ const Input = (props: Props) => {
   if (props.label) {
     return (
       <Label htmlFor={forAttributeId} css={props.css} className={props.className} key={props.id}>
-        <span>{props.label}</span>
+        <LabelText>{props.label}</LabelText>
         <InputField {...commonInputProps} key={props.id} id={forAttributeId} />
       </Label>
     )
