@@ -20,6 +20,11 @@ exports.inputFocus = function (_a) {
 };
 exports.label = function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.small, { fontWeight: 600, opacity: 0.7, display: "inline-block", marginBottom: theme.spacing / 4 }));
+    return ({
+        display: "inline-block",
+        minWidth: 240,
+        // Styles for the label text's span tag
+        "& > :first-child": __assign({ display: "inline-block", marginBottom: theme.spacing / 4 }, theme.typography.small, { fontWeight: 600, opacity: 0.7 })
+    });
 };
 //# sourceMappingURL=mixins.js.map

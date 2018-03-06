@@ -9,9 +9,14 @@ export const inputFocus = ({ theme }: { theme: Theme }): {} => ({
 })
 
 export const label = ({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.small,
-  fontWeight: 600,
-  opacity: 0.7,
   display: "inline-block",
-  marginBottom: theme.spacing / 4
+  minWidth: 240,
+  // Styles for the label text's span tag
+  "& > :first-child": {
+    display: "inline-block",
+    marginBottom: theme.spacing / 4,
+    ...theme.typography.small,
+    fontWeight: 600,
+    opacity: 0.7
+  }
 })

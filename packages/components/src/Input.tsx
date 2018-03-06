@@ -32,7 +32,6 @@ const InputField = glamorous.input(
     // default looks.
     ...isStandalone ? {} : { display: "block" },
     label: "input",
-    width: "100%",
     minWidth: 240,
     padding: theme.spacing * 2 / 3,
     border: "1px solid",
@@ -46,13 +45,9 @@ const InputField = glamorous.input(
 )
 
 const Input = (props: Props) => {
-  // Use label as id if one is not specified
-  // so clicking on the label still activates
-  // the input field.
-  const domId = props.id || props.label
+  const forAttributeId = props.label && props.inputId
   const commonInputProps = {
     innerRef: props.inputRef,
-    id: domId,
     name: props.name,
     disabled: Boolean(props.disabled),
     value: props.value,
@@ -67,9 +62,9 @@ const Input = (props: Props) => {
   }
   if (props.label) {
     return (
-      <Label htmlFor={domId} css={props.css} className={props.className} key={props.id}>
-        {props.label}
-        <InputField {...commonInputProps} key={props.id} />
+      <Label htmlFor={forAttributeId} css={props.css} className={props.className} key={props.id}>
+        <span>{props.label}</span>
+        <InputField {...commonInputProps} key={props.id} id={forAttributeId} />
       </Label>
     )
   }

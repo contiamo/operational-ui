@@ -25,7 +25,7 @@ class Site extends React.Component<{}, IState> {
       <OperationalUI>
         <div style={{ margin: 20 }}>
           <Card>
-            <Input value="1234" />
+            <Input value="1234" label="Apple pie!" onChange={(v) => {console.log(v)}}/>
           </Card>
         </div>
       </OperationalUI>
