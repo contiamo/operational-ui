@@ -13,7 +13,8 @@ export {
   Partial,
   TD3Selection,
   TSeriesEl,
-  TStateWriter
+  TStateWriter,
+  Canvas
 } from "../utils/typings"
 
 export type TLink = Link

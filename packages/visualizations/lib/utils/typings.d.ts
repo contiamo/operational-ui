@@ -31,6 +31,16 @@ export interface Focus<FocusPoint, Datum> {
 }
 export interface Legend {
     draw: () => void;
+    remove: () => void;
     updateDimensions: () => void;
+}
+export interface Canvas {
+    draw: () => void;
+    elementFor: (component: string) => any;
+    insertChartContainer: (context: Element) => TD3Selection;
+    insertEl: () => TSeriesEl;
+    onClick: () => void;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
     remove: () => void;
 }

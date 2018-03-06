@@ -12,11 +12,11 @@ class SunburstFocus implements Focus {
   stateWriter: TStateWriter
   events: IEvents
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject) {
+  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
-    this.el = els.main
+    this.el = el
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
     this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))

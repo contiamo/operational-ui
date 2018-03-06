@@ -1,4 +1,4 @@
-import Canvas from "./canvas"
+import ProcessFlowCanvas from "./canvas"
 import Series from "./series"
 import ProcessFlowFocus from "./focus"
 import Events from "../utils/event_catalog"
@@ -6,17 +6,18 @@ import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
+  Canvas,
+  Components,
   IAccessors,
+  IChartStateObject,
+  IComputedState,
   IConfig,
   IFocusElement,
-  IComputedState,
   IInputData,
-  IChartStateObject,
-  IObject,
-  INodeAttrs,
   ILinkAttrs,
-  TNode,
-  Components
+  INodeAttrs,
+  IObject,
+  TNode
 } from "./typings"
 
 class Facade {
@@ -111,7 +112,12 @@ class Facade {
   }
 
   insertCanvas(): Canvas {
-    return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
+    return new ProcessFlowCanvas(
+      this.state.readOnly(),
+      this.state.computedWriter(["canvas"]),
+      this.events,
+      this.context
+    )
   }
 
   insertComponents(): Components {

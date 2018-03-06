@@ -4,7 +4,7 @@ declare class ProcessFlowFocus implements Focus {
     state: IState;
     stateWriter: TStateWriter;
     events: IEvents;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
+    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
     onElementHover(payload: {
         focusPoint: IFocus;
         d: TNode | TLink;

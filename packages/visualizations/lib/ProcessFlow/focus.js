@@ -6,11 +6,11 @@ var fp_1 = require("lodash/fp");
 var styles = require("./styles");
 // There can only be an element focus in process flow diagrams
 var ProcessFlowFocus = /** @class */ (function () {
-    function ProcessFlowFocus(state, stateWriter, events, els) {
+    function ProcessFlowFocus(state, stateWriter, events, el) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.el = els.main;
+        this.el = el;
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
         this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));

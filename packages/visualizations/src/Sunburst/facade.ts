@@ -1,4 +1,4 @@
-import Canvas from "./canvas"
+import SunburstCanvas from "./canvas"
 import Renderer from "./renderer"
 import Breadcrumb from "./breadcrumb"
 import RootLabel from "./root_label"
@@ -7,8 +7,8 @@ import Events from "../utils/event_catalog"
 import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { every, find, has, isEmpty, uniqueId } from "lodash/fp"
-import { Components, IAccessors, IComputedState, IConfig, IChartStateObject, IObject, TDatum } from "./typings"
 import { colorAssigner } from "@operational/utils"
+import { Canvas, Components, IAccessors, IChartStateObject, IComputedState, IConfig, IObject, TDatum } from "./typings"
 
 class Facade {
   __disposed: boolean = false
@@ -83,7 +83,7 @@ class Facade {
   }
 
   insertCanvas(): Canvas {
-    return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
+    return new SunburstCanvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
   insertComponents(): Components {

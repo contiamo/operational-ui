@@ -2,7 +2,7 @@ import * as d3 from "d3-selection";
 import Nodes from "./node";
 import Link from "./link";
 import { IObject, Focus } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter, Canvas } from "../utils/typings";
 export declare type TLink = Link;
 export declare type TNode = Nodes;
 export declare type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>;

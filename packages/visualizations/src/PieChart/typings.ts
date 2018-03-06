@@ -12,7 +12,8 @@ export {
   TD3Selection,
   TSeriesEl,
   TStateWriter,
-  Legend
+  Legend,
+  Canvas
 } from "../utils/typings"
 
 export type TFocusElement = string

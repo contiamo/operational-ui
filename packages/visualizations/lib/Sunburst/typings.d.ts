@@ -2,7 +2,7 @@ import Breadcrumb from "./breadcrumb";
 import Renderer from "./renderer";
 import RootLabel from "./root_label";
 import { IObject, Focus } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter, Canvas } from "../utils/typings";
 export interface IConfig {
     arrowOffset: number;
     centerCircleRadius: number;

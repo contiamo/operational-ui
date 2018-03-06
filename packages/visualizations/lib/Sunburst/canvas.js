@@ -4,113 +4,78 @@ var event_catalog_1 = require("../utils/event_catalog");
 var d3 = require("d3-selection");
 var styles = require("../utils/styles");
 var localStyles = require("./styles");
-var Canvas = /** @class */ (function () {
-    function Canvas(state, stateWriter, events, context) {
-        this.elements = {};
+var SunburstCanvas = /** @class */ (function () {
+    function SunburstCanvas(state, stateWriter, events, context) {
         this.elMap = {};
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.container = this.insertContainer(context);
+        this.chartContainer = this.insertChartContainer(context);
         this.breadcrumb = this.insertBreadcrumb();
         this.el = this.insertEl();
         this.rootLabel = this.insertRootLabel();
-        this.listenToMouseOver();
-        this.insertFocusElements();
-        this.stateWriter("elements", this.elements);
+        this.insertFocus();
     }
-    Canvas.prototype.insertContainer = function (context) {
-        var container = d3
-            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", "" + styles.chartContainer);
-        context.appendChild(container.node());
-        return container;
+    // Chart container
+    SunburstCanvas.prototype.insertChartContainer = function (context) {
+        var container = document.createElementNS(d3.namespaces["xhtml"], "div");
+        context.appendChild(container);
+        return d3.select(container).attr("class", styles.chartContainer);
     };
-    Canvas.prototype.insertBreadcrumb = function () {
-        var el = d3
-            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", localStyles.breadcrumb);
-        this.container.node().appendChild(el.node());
-        this.elMap.breadcrumb = el;
-        return el;
+    // Breadcrumb
+    SunburstCanvas.prototype.insertBreadcrumb = function () {
+        var el = document.createElementNS(d3.namespaces["xhtml"], "div");
+        this.chartContainer.node().appendChild(el);
+        this.elMap.breadcrumb = d3.select(el).attr("class", localStyles.breadcrumb);
+        return this.elMap.breadcrumb;
     };
-    Canvas.prototype.insertEl = function () {
-        var el = d3.select(document.createElementNS(d3.namespaces["svg"], "svg"));
+    // El
+    SunburstCanvas.prototype.insertEl = function () {
+        var elNode = document.createElementNS(d3.namespaces["svg"], "svg");
+        elNode.addEventListener("mouseenter", this.onMouseEnter.bind(this));
+        elNode.addEventListener("mouseleave", this.onMouseLeave.bind(this));
+        elNode.addEventListener("click", this.onClick.bind(this));
+        this.chartContainer.node().appendChild(elNode);
+        var el = d3.select(elNode);
         el.append("svg:g").attr("class", "arcs");
         el.append("svg:g").attr("class", "arrows");
         el.append("circle").attr("class", localStyles.centerCircle);
-        this.container.node().appendChild(el.node());
         this.elMap.series = el;
         return el;
     };
-    Canvas.prototype.insertRootLabel = function () {
+    SunburstCanvas.prototype.onMouseEnter = function () {
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
+    };
+    SunburstCanvas.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
+    };
+    SunburstCanvas.prototype.onClick = function () {
+        this.events.emit(event_catalog_1.default.CHART.CLICK);
+    };
+    // Root label
+    SunburstCanvas.prototype.insertRootLabel = function () {
         var el = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", localStyles.rootLabel)
             .html("<span class='value'></span><br><span class='name'></span>");
-        this.container.node().appendChild(el.node());
+        this.chartContainer.node().appendChild(el.node());
         this.elMap.rootLabel = el;
         return el;
     };
-    Canvas.prototype.prefixedId = function (id) {
-        return this.state.current.get("config").uid + id;
-    };
-    Canvas.prototype.insertFocusElements = function () {
-        var main = this.insertFocusLabel();
-        var component = this.insertComponentFocus();
-        this.elMap.focus = { main: main, component: component };
-    };
-    Canvas.prototype.insertFocusLabel = function () {
-        var focusEl = d3
+    // FocusElement
+    SunburstCanvas.prototype.insertFocus = function () {
+        var focus = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.focusLegend)
             .style("visibility", "hidden");
-        this.container.node().appendChild(focusEl.node());
-        return focusEl;
+        this.chartContainer.node().appendChild(focus.node());
+        this.elMap.focus = focus;
+        return focus;
     };
-    Canvas.prototype.insertComponentFocus = function () {
-        var focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus");
-        var ref = this.container.node();
-        ref.insertBefore(focusEl.node(), ref.nextSibling);
-        return focusEl;
-    };
-    Canvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
-        this.trackMouseMove();
-    };
-    Canvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
-        this.stopMouseMove();
-    };
-    Canvas.prototype.onClick = function () {
-        this.events.emit(event_catalog_1.default.CHART.CLICK);
-    };
-    Canvas.prototype.listenToMouseOver = function () {
-        this.el.node().addEventListener("mouseenter", this.onMouseEnter.bind(this));
-        this.el.node().addEventListener("mouseleave", this.onMouseLeave.bind(this));
-        this.el.node().addEventListener("click", this.onClick.bind(this));
-    };
-    Canvas.prototype.elementFor = function (component) {
-        return this.elMap[component];
-    };
-    Canvas.prototype.trackMouseMove = function () {
-        return;
-    };
-    Canvas.prototype.stopMouseMove = function () {
-        return;
-    };
-    Canvas.prototype.drawingDims = function () {
-        var config = this.state.current.get("config");
-        var dims = {
-            width: config.width,
-            height: config.height - this.breadcrumb.node().getBoundingClientRect().height
-        };
-        this.stateWriter("drawingDims", dims);
-        return dims;
-    };
-    Canvas.prototype.draw = function () {
+    // Lifecycle
+    SunburstCanvas.prototype.draw = function () {
         var config = this.state.current.get("config"), drawingDims = this.drawingDims();
-        this.container
+        this.chartContainer
             .style("visibility", this.state.current.get("config").hidden ? "hidden" : "visible")
             .style("width", config.width + "px")
             .style("height", config.height + "px");
@@ -119,14 +84,27 @@ var Canvas = /** @class */ (function () {
             .select("circle." + localStyles.centerCircle)
             .attr("cx", drawingDims.width / 2)
             .attr("cy", drawingDims.height / 2);
-        this.stateWriter(["containerRect"], this.container.node().getBoundingClientRect());
+        this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect());
     };
-    Canvas.prototype.remove = function () {
+    SunburstCanvas.prototype.drawingDims = function () {
+        var config = this.state.current.get("config");
+        var dims = {
+            width: config.width,
+            height: config.height - this.breadcrumb.node().getBoundingClientRect().height
+        };
+        this.stateWriter("drawingDims", dims);
+        return dims;
+    };
+    SunburstCanvas.prototype.remove = function () {
         this.el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this));
         this.el.node().removeEventListener("click", this.onClick.bind(this));
     };
-    return Canvas;
+    // Helper method
+    SunburstCanvas.prototype.elementFor = function (component) {
+        return this.elMap[component];
+    };
+    return SunburstCanvas;
 }());
-exports.default = Canvas;
+exports.default = SunburstCanvas;
 //# sourceMappingURL=canvas.js.map

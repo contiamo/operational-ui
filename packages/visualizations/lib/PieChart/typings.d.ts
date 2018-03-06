@@ -1,5 +1,5 @@
 import { IObject, Focus, Legend } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter, Legend } from "../utils/typings";
+export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter, Legend, Canvas } from "../utils/typings";
 export declare type TFocusElement = string;
 export interface IConfig {
     duration: number;

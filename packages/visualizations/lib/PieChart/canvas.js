@@ -1,37 +1,69 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var drawing_canvas_1 = require("../utils/drawing_canvas");
 var event_catalog_1 = require("../utils/event_catalog");
 var d3 = require("d3-selection");
-var Canvas = /** @class */ (function (_super) {
-    __extends(Canvas, _super);
-    function Canvas(state, stateWriter, events, context) {
-        var _this = _super.call(this, state, stateWriter, events, context) || this;
-        _this.appendShadows();
-        _this.appendBackground();
-        _this.appendDrawingGroup();
-        _this.insertFocusElements();
-        _this.insertLegend("top", "left");
-        _this.elements.background.on("mouseover", function () {
-            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
-        });
-        _this.stateWriter("elements", _this.elements);
-        return _this;
+var styles = require("../utils/styles");
+var PieChartCanvas = /** @class */ (function () {
+    function PieChartCanvas(state, stateWriter, events, context) {
+        this.elements = {};
+        this.elMap = {};
+        this.state = state;
+        this.stateWriter = stateWriter;
+        this.events = events;
+        this.chartContainer = this.insertChartContainer(context);
+        this.insertLegend();
+        this.drawingContainer = this.insertDrawingContainer();
+        this.el = this.insertEl();
+        this.appendShadows();
+        this.appendDrawingGroup();
+        this.insertFocusElements();
+        this.stateWriter("elements", this.elements);
     }
-    Canvas.prototype.createEl = function () {
-        return d3.select(document.createElementNS(d3.namespaces["svg"], "svg"));
+    // Chart container
+    PieChartCanvas.prototype.insertChartContainer = function (context) {
+        var container = document.createElementNS(d3.namespaces["xhtml"], "div");
+        context.appendChild(container);
+        container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
+        container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
+        container.addEventListener("click", this.onClick.bind(this));
+        return d3.select(container).attr("class", styles.chartContainer);
     };
-    Canvas.prototype.appendShadows = function () {
+    PieChartCanvas.prototype.onMouseEnter = function () {
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
+    };
+    PieChartCanvas.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
+    };
+    PieChartCanvas.prototype.onClick = function () {
+        this.events.emit(event_catalog_1.default.CHART.CLICK);
+    };
+    // Legend
+    PieChartCanvas.prototype.insertLegend = function () {
+        var legendNode = document.createElementNS(d3.namespaces["xhtml"], "div");
+        this.chartContainer.node().appendChild(legendNode);
+        var legend = d3
+            .select(legendNode)
+            .attr("class", styles.legend + " " + styles.legendTopBottom + " left")
+            .style("float", "left");
+        this.elMap.legend = legend;
+        this.stateWriter("legend", legend);
+    };
+    // Drawing container
+    PieChartCanvas.prototype.insertDrawingContainer = function () {
+        var drawingContainer = document.createElementNS(d3.namespaces["xhtml"], "div");
+        this.chartContainer.node().appendChild(drawingContainer);
+        return d3.select(drawingContainer).attr("class", styles.drawingContainer);
+    };
+    // El
+    PieChartCanvas.prototype.insertEl = function () {
+        var el = document.createElementNS(d3.namespaces["svg"], "svg");
+        this.drawingContainer.node().appendChild(el);
+        this.elMap.series = d3.select(el);
+        return this.elMap.series;
+    };
+    // Defs
+    PieChartCanvas.prototype.appendShadows = function () {
+        this.elements.defs = this.el.append("defs");
         var shadow = this.elements.defs
             .append("filter")
             .attr("id", this.shadowDefinitionId())
@@ -55,11 +87,73 @@ var Canvas = /** @class */ (function (_super) {
         shadowFeMerge.append("feMergeNode").attr("in", "SourceGraphic");
         this.stateWriter("shadowDefinitionId", this.shadowDefinitionId());
     };
-    Canvas.prototype.totalLegendHeight = function () {
-        var legend = this.state.current.get("computed").canvas.legends.top.left;
-        return legend.node().offsetHeight;
+    PieChartCanvas.prototype.prefixedId = function (id) {
+        return this.state.current.get("config").uid + id;
     };
-    return Canvas;
-}(drawing_canvas_1.default));
-exports.default = Canvas;
+    PieChartCanvas.prototype.shadowDefinitionId = function () {
+        return this.prefixedId("_shadow");
+    };
+    // Drawing group
+    PieChartCanvas.prototype.appendDrawingGroup = function () {
+        this.elements.drawing = this.el.append("svg:g").attr("class", "drawing");
+    };
+    // Focus elements
+    PieChartCanvas.prototype.insertFocusElements = function () {
+        var main = this.insertFocusLabel();
+        var component = this.insertComponentFocus();
+        this.elMap.focus = { main: main, component: component };
+    };
+    PieChartCanvas.prototype.insertFocusLabel = function () {
+        var focusEl = d3
+            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+            .attr("class", "" + styles.focusLegend)
+            .style("visibility", "hidden");
+        this.chartContainer.node().appendChild(focusEl.node());
+        return focusEl;
+    };
+    PieChartCanvas.prototype.insertComponentFocus = function () {
+        var focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus");
+        var ref = this.chartContainer.node();
+        ref.insertBefore(focusEl.node(), ref.nextSibling);
+        return focusEl;
+    };
+    // Lifecycle
+    PieChartCanvas.prototype.draw = function () {
+        this.chartContainer.classed("hidden", this.state.current.get("config").hidden);
+        this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect());
+        var config = this.state.current.get("config");
+        var dims = this.drawingContainerDims();
+        this.chartContainer.style("width", config.width + "px").style("height", config.height + "px");
+        this.drawingContainer.style("width", dims.width + "px").style("height", dims.height + "px");
+        this.el.style("width", dims.width + "px").style("height", dims.height + "px");
+        this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect());
+    };
+    PieChartCanvas.prototype.drawingContainerDims = function () {
+        var config = this.state.current.get("config");
+        var dims = {
+            height: config.height - this.elMap.legend.node().offsetHeight,
+            width: config.width
+        };
+        this.stateWriter("drawingContainerDims", dims);
+        return dims;
+    };
+    PieChartCanvas.prototype.remove = function () {
+        this.chartContainer.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));
+        this.chartContainer.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this));
+        this.chartContainer.node().removeEventListener("click", this.onClick.bind(this));
+        this.elements = {};
+        this.chartContainer.remove();
+        this.chartContainer = undefined;
+        this.el = undefined;
+        this.elements = {};
+        this.drawingContainer.remove();
+        this.drawingContainer = undefined;
+    };
+    // Helper method
+    PieChartCanvas.prototype.elementFor = function (component) {
+        return this.elMap[component];
+    };
+    return PieChartCanvas;
+}());
+exports.default = PieChartCanvas;
 //# sourceMappingURL=canvas.js.map

@@ -4,11 +4,11 @@ var focus_utils_1 = require("../utils/focus_utils");
 var event_catalog_1 = require("../utils/event_catalog");
 var dataName = function (d) { return d.data.name; }, dataValue = function (d) { return d.value; };
 var SunburstFocus = /** @class */ (function () {
-    function SunburstFocus(state, stateWriter, events, els) {
+    function SunburstFocus(state, stateWriter, events, el) {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.el = els.main;
+        this.el = el;
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
         this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));

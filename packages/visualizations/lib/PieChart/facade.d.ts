@@ -1,8 +1,7 @@
-import Canvas from "./canvas";
 import Series from "./series";
 import { StateHandler } from "../utils/state_handler";
 import EventEmitter from "../utils/event_bus";
-import { Components, IAccessors, IComputedState, IConfig, IObject } from "./typings";
+import { Canvas, Components, IAccessors, IComputedState, IConfig, IObject } from "./typings";
 declare class Facade {
     __disposed: boolean;
     canvas: Canvas;

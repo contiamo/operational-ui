@@ -1,4 +1,4 @@
-import Canvas from "./canvas"
+import PieChartCanvas from "./canvas"
 import Series from "./series"
 import PieChartFocus from "./focus"
 import PieChartLegend from "./legend"
@@ -7,11 +7,12 @@ import { StateHandler } from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
+  Canvas,
   Components,
   IAccessors,
+  IChartStateObject,
   IComputedState,
   IConfig,
-  IChartStateObject,
   IObject,
   TDatum,
   TFocusElement
@@ -90,7 +91,7 @@ class Facade {
   }
 
   insertCanvas(): Canvas {
-    return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
+    return new PieChartCanvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
   insertComponents(): Components {
@@ -99,7 +100,7 @@ class Facade {
         this.state.readOnly(),
         this.state.computedWriter(["legend"]),
         this.events,
-        this.canvas.elementFor("legends").top.left
+        this.canvas.elementFor("legend")
       ),
       focus: new PieChartFocus(
         this.state.readOnly(),
