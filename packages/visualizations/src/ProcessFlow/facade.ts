@@ -54,7 +54,7 @@ class Facade {
       hidden: false,
       highlightColor: "#1499CE",
       horizontalNodeSpacing: 100,
-      labelOffset: 2,
+      labelOffset: 1,
       linkBorderWidth: 4,
       maxLinkWidth: 8,
       maxNodeSize: 1500,
@@ -85,7 +85,7 @@ class Facade {
         stroke: (d: INodeAttrs): string => d.stroke || "#000",
         id: (d: INodeAttrs): string => d.id || uniqueId("node"),
         label: (d: INodeAttrs): string => d.label || d.id || "",
-        labelPosition: (d: INodeAttrs): string => d.labelPosition || "right"
+        labelPosition: (d: INodeAttrs): string => d.labelPosition || "auto"
       },
       link: {
         content: (d: INodeAttrs): IObject[] => d.content || [],

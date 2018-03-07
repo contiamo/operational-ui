@@ -164,13 +164,20 @@ var Nodes = /** @class */ (function (_super) {
             .node();
         return node.getBoundingClientRect();
     };
+    Nodes.prototype.getLabelPosition = function (d) {
+        return d.labelPosition() === "auto" ? this.getAutomaticLabelPosition(d) : d.labelPosition();
+    };
+    Nodes.prototype.getAutomaticLabelPosition = function (d) {
+        var columnSpacing = this.state.current.get("computed").series.horizontalNodeSpacing;
+        return (d.x / columnSpacing) % 2 === 1 ? "top" : "bottom";
+    };
     Nodes.prototype.getNodeLabelX = function (d, el) {
         var offset = this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset;
-        return nodeLabelOptions[d.labelPosition()].x * offset;
+        return nodeLabelOptions[this.getLabelPosition(d)].x * offset;
     };
     Nodes.prototype.getNodeLabelY = function (d, el) {
         var offset = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset;
-        return nodeLabelOptions[d.labelPosition()].y * offset;
+        return nodeLabelOptions[this.getLabelPosition(d)].y * offset;
     };
     Nodes.prototype.getLabelText = function (d) {
         // Pixel width of character approx 1/2 of font-size - allow 7px per character
@@ -189,8 +196,8 @@ var Nodes = /** @class */ (function (_super) {
             .text(function (d) { return _this.getLabelText(d); })
             .attr("x", d3_utils_1.withD3Element(this.getNodeLabelX.bind(this)))
             .attr("y", d3_utils_1.withD3Element(this.getNodeLabelY.bind(this)))
-            .attr("dy", function (d) { return nodeLabelOptions[d.labelPosition()].dy; })
-            .attr("text-anchor", function (d) { return nodeLabelOptions[d.labelPosition()].textAnchor; });
+            .attr("dy", function (d) { return nodeLabelOptions[_this.getLabelPosition(d)].dy; })
+            .attr("text-anchor", function (d) { return nodeLabelOptions[_this.getLabelPosition(d)].textAnchor; });
     };
     Nodes.prototype.focusPoint = function (element, d) {
         if (d == null)

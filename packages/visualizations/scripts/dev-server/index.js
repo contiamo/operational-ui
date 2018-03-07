@@ -3,7 +3,7 @@ const webpack = require("webpack")
 const WebpackDevServer = require("webpack-dev-server")
 
 const config = {
-  entry: path.resolve(__dirname, "site_pie_chart.tsx"),
+  entry: path.resolve(__dirname, "site_process_flow.tsx"),
   output: {
     path: path.resolve(__dirname),
     publicPath: "/",

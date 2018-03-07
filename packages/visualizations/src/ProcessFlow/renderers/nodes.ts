@@ -173,16 +173,25 @@ class Nodes extends AbstractRenderer {
     return node.getBoundingClientRect()
   }
 
+  getLabelPosition(d: TNode): string {
+    return d.labelPosition() === "auto" ? this.getAutomaticLabelPosition(d) : d.labelPosition()
+  }
+
+  getAutomaticLabelPosition(d: TNode): string {
+    const columnSpacing: number = this.state.current.get("computed").series.horizontalNodeSpacing
+    return (d.x / columnSpacing) % 2 === 1 ? "top" : "bottom"
+  }
+
   getNodeLabelX(d: TNode, el: HTMLElement): number {
     const offset: number =
       this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
-    return nodeLabelOptions[d.labelPosition()].x * offset
+    return nodeLabelOptions[this.getLabelPosition(d)].x * offset
   }
 
   getNodeLabelY(d: TNode, el: HTMLElement): number {
     const offset: number =
       this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
-    return nodeLabelOptions[d.labelPosition()].y * offset
+    return nodeLabelOptions[this.getLabelPosition(d)].y * offset
   }
 
   getLabelText(d: TNode): string {
@@ -204,8 +213,8 @@ class Nodes extends AbstractRenderer {
       .text(d => this.getLabelText(d))
       .attr("x", withD3Element(this.getNodeLabelX.bind(this)))
       .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
-      .attr("dy", (d: TNode): number => nodeLabelOptions[d.labelPosition()].dy)
-      .attr("text-anchor", (d: TNode): string => nodeLabelOptions[d.labelPosition()].textAnchor)
+      .attr("dy", (d: TNode): number => nodeLabelOptions[this.getLabelPosition(d)].dy)
+      .attr("text-anchor", (d: TNode): string => nodeLabelOptions[this.getLabelPosition(d)].textAnchor)
   }
 
   focusPoint(element: TNodeSelection, d: TNode): IFocus {
