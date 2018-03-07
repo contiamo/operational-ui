@@ -20,7 +20,6 @@ const PageContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& > *": {
     height: "100%",
     overflow: "auto"
-  },
   "& h2": {
     ...theme.typography.heading1
   },
@@ -47,6 +46,12 @@ const PageContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
+const Content = glamorous.div({
+  width: "calc(100vw - 240px)",
+  backgroundColor: operational.colors.background,
+  height: "100vh"
+})
+
 let didRenderOnClient = false
 
 export default class Layout extends React.Component {
@@ -60,7 +65,6 @@ export default class Layout extends React.Component {
 
   render() {
     const { pathname } = this.props
-    const children = React.Children.toArray(this.props.children)
     return (
       <OperationalUI withBaseStyles>
         {!this.state.isClientRendered ? (

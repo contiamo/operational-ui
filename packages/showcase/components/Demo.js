@@ -16,10 +16,6 @@ const Container = glamorous.div({
 })
 
 class Demo extends React.Component {
-  constructor(props: IProps) {
-    super(props)
-  }
-
   render() {
     return (
       <Container>

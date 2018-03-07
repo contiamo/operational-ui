@@ -12,14 +12,15 @@ import Demo from "../components/Demo"
 const TitleBar = glamorous.div(({ theme }) => ({
   label: "showcasetitlebar",
   padding: `${theme.spacing * 1}px 0`,
-  color: "#000",
+  margin: -theme.spacing * 4 / 3,
+  color: theme.colors.white,
   position: "relative",
   height: 360,
   display: "flex",
   overflow: "hidden",
   alignItems: "center",
   justifyContent: "center",
-  borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
+  backgroundColor: theme.colors.sidenavBackground,
   "& h1": {
     ...theme.typography.title,
     fontWeight: 400,
