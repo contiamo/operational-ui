@@ -34,7 +34,7 @@ var Facade = /** @class */ (function () {
             hidden: false,
             highlightColor: "#1499CE",
             horizontalNodeSpacing: 100,
-            labelOffset: 2,
+            labelOffset: 1,
             linkBorderWidth: 4,
             maxLinkWidth: 8,
             maxNodeSize: 1500,
@@ -64,7 +64,7 @@ var Facade = /** @class */ (function () {
                 stroke: function (d) { return d.stroke || "#000"; },
                 id: function (d) { return d.id || fp_1.uniqueId("node"); },
                 label: function (d) { return d.label || d.id || ""; },
-                labelPosition: function (d) { return d.labelPosition || "right"; }
+                labelPosition: function (d) { return d.labelPosition || "auto"; }
             },
             link: {
                 content: function (d) { return d.content || []; },

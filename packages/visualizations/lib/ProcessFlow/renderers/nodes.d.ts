@@ -11,6 +11,8 @@ declare class Nodes extends AbstractRenderer {
     rotate(d: TNode): string;
     enterAndUpdate(nodeGroups: TNodeSelection): void;
     getNodeBoundingRect(el: HTMLElement): SVGRect;
+    getLabelPosition(d: TNode): string;
+    getAutomaticLabelPosition(d: TNode): string;
     getNodeLabelX(d: TNode, el: HTMLElement): number;
     getNodeLabelY(d: TNode, el: HTMLElement): number;
     getLabelText(d: TNode): string;

@@ -290,8 +290,8 @@ const propDescription = {
 
     {
       name: "labelPosition",
-      description: "Node label position",
-      defaultValue: 'd => d.labelPosition || "right"',
+      description: 'Node label position - "auto", "top", "bottom", "left", "right" or "middle"',
+      defaultValue: 'd => d.labelPosition || "auto"',
       type: "string",
       optional: true
     }
