@@ -64,7 +64,7 @@ var Facade = /** @class */ (function () {
                 stroke: function (d) { return d.stroke || "#000"; },
                 id: function (d) { return d.id || fp_1.uniqueId("node"); },
                 label: function (d) { return d.label || d.id || ""; },
-                labelPosition: function (d) { return d.labelPosition || "right"; }
+                labelPosition: function (d) { return d.labelPosition || "auto"; }
             },
             link: {
                 content: function (d) { return d.content || []; },

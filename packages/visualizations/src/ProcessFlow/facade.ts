@@ -85,7 +85,7 @@ class Facade {
         stroke: (d: INodeAttrs): string => d.stroke || "#000",
         id: (d: INodeAttrs): string => d.id || uniqueId("node"),
         label: (d: INodeAttrs): string => d.label || d.id || "",
-        labelPosition: (d: INodeAttrs): string => d.labelPosition || "right"
+        labelPosition: (d: INodeAttrs): string => d.labelPosition || "auto"
       },
       link: {
         content: (d: INodeAttrs): IObject[] => d.content || [],
