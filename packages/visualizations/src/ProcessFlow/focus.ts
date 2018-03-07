@@ -79,7 +79,7 @@ class Focus extends AbstractFocus {
       startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
       endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal),
       startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
-      endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all outputs` : " ",
+      endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all inputs` : " ",
       numberFormatter: (x: number) => string = this.state.current.get("config").numberFormatter
 
     // Add "Starts here" breakdown

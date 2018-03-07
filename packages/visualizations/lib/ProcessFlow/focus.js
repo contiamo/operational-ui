@@ -63,7 +63,7 @@ var Focus = /** @class */ (function (_super) {
         })(content);
     };
     Focus.prototype.addNodeBreakdowns = function (content, datum) {
-        var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer), inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all outputs" : " ", numberFormatter = this.state.current.get("config").numberFormatter;
+        var breakdowns = computeBreakdowns(datum), container = content.append("div").attr("class", styles.breakdownsContainer), inputsTotal = computeBreakdownTotal(breakdowns.inputs), outputsTotal = computeBreakdownTotal(breakdowns.outputs), startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal), endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal), startsHereString = !isNaN(startsHerePercentage) ? startsHerePercentage + "% of all outputs" : " ", endsHereString = !isNaN(endsHerePercentage) ? endsHerePercentage + "% of all inputs" : " ", numberFormatter = this.state.current.get("config").numberFormatter;
         // Add "Starts here" breakdown
         fp_1.flow(addBreakdownContainer, addBreakdownTitle("Starts here"), addBreakdownBars(breakdowns.startsHere, numberFormatter), addBreakdownComment(startsHereString))(container);
         // Add "Ends here" breakdown

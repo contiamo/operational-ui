@@ -18,6 +18,7 @@ const inputSnippet = `
       return (
         <Input
           placeholder="Name here"
+          inputId="input-id"
           label="Name"
           name="forForms"
           value={this.state.value}
@@ -130,6 +131,22 @@ const propDescription = {
     {
       name: "name",
       description: "The name used to refer to the input, for forms.",
+      defaultValue: "",
+      type: "string",
+      optional: true
+    },
+    {
+      name: "label",
+      description:
+        "Label text, rendering the input inside a <label> tag if specified. The `inputId` props is responsible for specifying for and id attributes.",
+      defaultValue: "",
+      type: "string",
+      optional: true
+    },
+    {
+      name: "inputId",
+      description:
+        "Specifies the id that should be used when hooking up label for attributes with input id attributes, if a label is present.",
       defaultValue: "",
       type: "string",
       optional: true
