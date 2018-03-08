@@ -1,4 +1,12 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_catalog_1 = require("../../utils/event_catalog");
 var fp_1 = require("lodash/fp");
@@ -31,7 +39,6 @@ var percentageString = function (d) {
 };
 var AbstractRenderer = /** @class */ (function () {
     function AbstractRenderer(state, events, el, options) {
-        this.computed = {};
         this.drawn = false;
         this.state = state;
         this.events = events;
@@ -125,14 +132,13 @@ var AbstractRenderer = /** @class */ (function () {
         exitingArcs.remove();
     };
     AbstractRenderer.prototype.enterAndUpdate = function (arcs) {
-        var _this = this;
         var duration = this.state.current.get("config").duration;
         var enteringArcs = arcs
             .enter()
             .append("svg:g")
             .attr("class", styles.arc)
             .on("mouseenter", this.onMouseOver.bind(this));
-        enteringArcs.append("svg:path").style("fill", function (d) { return _this.color(d.data); });
+        enteringArcs.append("svg:path").style("fill", this.color);
         enteringArcs
             .append("svg:text")
             .attr("class", styles.label)
@@ -199,11 +205,8 @@ var AbstractRenderer = /** @class */ (function () {
             return;
         }
         var arcs = this.el.select("g.arcs").selectAll("g");
-        var filterFocused = function (d) {
-            return datapoint.d && datapoint.d.data && _this.key(d) === _this.key(datapoint.d);
-        }, filterUnFocused = function (d) {
-            return datapoint.d && datapoint.d.data ? _this.key(d) !== _this.key(datapoint.d) : true;
-        };
+        var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
+        var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
         arcs
             .filter(filterFocused)
             .select("path")
@@ -238,7 +241,6 @@ var AbstractRenderer = /** @class */ (function () {
     // Compute
     AbstractRenderer.prototype.compute = function () {
         this.previous = this.computed;
-        var d = {};
         // We cannot draw a pie chart with no series or only series that have the value 0
         if (!this.hasData()) {
             this.computed.data = [];
@@ -248,18 +250,18 @@ var AbstractRenderer = /** @class */ (function () {
         var startAngle;
         var endAngle;
         _a = this.angleRange(), startAngle = _a[0], endAngle = _a[1];
-        d.layout = d3_shape_1.pie()
-            .sort(null)
-            .value(this.angleValue.bind(this))
-            .startAngle(startAngle)
-            .endAngle(endAngle);
-        d.total = this.totalForPercentages();
-        this.computed = d;
-        this.previous = fp_1.defaults(this.computed)(this.previous);
+        var d = {
+            layout: d3_shape_1.pie()
+                .sort(null)
+                .value(this.angleValue.bind(this))
+                .startAngle(startAngle)
+                .endAngle(endAngle),
+            total: this.totalForPercentages()
+        };
         // data should not become part of this.previous in first computation
-        this.computed.data = d.layout(this.data);
+        this.previous = fp_1.defaults(d)(this.previous);
         this.calculatePercentages(d.total);
-        this.computeArcs();
+        this.computed = __assign({}, d, this.computeArcs(d), { data: d.layout(this.data) });
         var _a;
     };
     AbstractRenderer.prototype.calculatePercentages = function (total) {
@@ -268,19 +270,20 @@ var AbstractRenderer = /** @class */ (function () {
             datum.percentage = _this.value(datum) / total * 100;
         })(this.data);
     };
-    AbstractRenderer.prototype.computeArcs = function (scale) {
-        var computed = this.computed;
-        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
-        computed.r = this.computeOuter(drawingDims.width, drawingDims.height, scale);
-        computed.inner = this.computeInner(computed.r);
-        computed.rHover = this.hoverOuter(computed.r);
-        computed.innerHover = Math.max(computed.inner - 1, 0);
-        computed.arc = d3_shape_1.arc()
-            .innerRadius(computed.inner)
-            .outerRadius(computed.r);
-        computed.arcOver = d3_shape_1.arc()
-            .innerRadius(computed.innerHover)
-            .outerRadius(computed.rHover);
+    AbstractRenderer.prototype.computeArcs = function (computed, scale) {
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims, r = this.computeOuter(drawingDims.width, drawingDims.height, scale), inner = this.computeInner(r), rHover = this.hoverOuter(r), innerHover = Math.max(inner - 1, 0);
+        return {
+            r: r,
+            inner: inner,
+            rHover: rHover,
+            innerHover: innerHover,
+            arc: d3_shape_1.arc()
+                .innerRadius(inner)
+                .outerRadius(r),
+            arcOver: d3_shape_1.arc()
+                .innerRadius(innerHover)
+                .outerRadius(rHover)
+        };
     };
     // Calculation of outer radius
     AbstractRenderer.prototype.computeOuter = function (width, height, scaleFactor) {

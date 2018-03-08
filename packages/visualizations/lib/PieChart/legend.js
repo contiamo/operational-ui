@@ -31,12 +31,14 @@ var PieChartLegend = /** @class */ (function () {
             .style("float", "left")
             .on("mouseenter", d3_utils_1.withD3Element(this.onComponentHover.bind(this)))
             .each(d3_utils_1.withD3Element(function (d, el) {
+            // @TODO check type of d
             var element = d3.select(el);
             element.append("div").attr("class", "color");
             element.append("div").attr("class", "name");
         }))
             .merge(legends)
             .each(d3_utils_1.withD3Element(function (d, el) {
+            // @TODO check type of d
             var element = d3.select(el);
             element.select("div.color").style("background-color", fp_1.get("color"));
             element.select("div.name").html(fp_1.get("label"));
@@ -68,10 +70,10 @@ var PieChartLegend = /** @class */ (function () {
         this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) });
     };
     PieChartLegend.prototype.currentOptions = function (datum) {
-        return datum.type === "comparison"
+        return datum.comparison
             ? {
                 options: {
-                    data: datum.data
+                    key: datum.label
                 },
                 seriesType: "comparison",
                 type: "series"
@@ -85,7 +87,8 @@ var PieChartLegend = /** @class */ (function () {
             };
     };
     PieChartLegend.prototype.updateDimensions = function () {
-        var legendNode = this.legend.node(), config = this.state.current.get("config"), colorBoxWidth = legend_utils_1.totalWidth(this.legend.select(".color").node()), seriesLegendPadding = legend_utils_1.widthPadding(this.legend.selectAll("." + globalStyles.seriesLegend).node());
+        var legendNode = this.legend.node();
+        var config = this.state.current.get("config");
         var h = config.height;
         var lh = legend_utils_1.roundedUpHeight(legendNode) + legend_utils_1.heightMargin(legendNode);
         // Legend is higher than legend ratio or chart is smaller than chart min

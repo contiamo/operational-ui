@@ -4,7 +4,7 @@ import "d3-transition"
 import { extend, map, max, min } from "lodash/fp"
 import { interpolateObject } from "d3-interpolate"
 import { scaleSqrt as d3ScaleSqrt } from "d3-scale"
-import { IConfig, IObject, TDatum } from "../typings"
+import { ComputedDatum, Datum, Object, PieChartConfig } from "../typings"
 
 const MIN_SEGMENT_WIDTH: number = 5
 
@@ -20,8 +20,8 @@ class Polar extends AbstractRenderer {
     this.currentTranslation = [0, 0]
     this.el.attr("transform", this.translateString(this.currentTranslation))
 
-    const current: ClientRect = (this.el.node() as any).getBoundingClientRect(),
-      drawing: IObject = this.state.current.get("computed").canvas.drawingContainerRect
+    const current: ClientRect = (this.el.node() as any).getBoundingClientRect()
+    const drawing: ClientRect = this.state.current.get("computed").canvas.drawingContainerRect
     if (current.width === 0 && current.height === 0) {
       return
     }
@@ -32,7 +32,7 @@ class Polar extends AbstractRenderer {
       (drawing.height - 2 * margin) / current.height
     )
 
-    this.computeArcs(scale)
+    this.computeArcs(this.computed, scale)
     this.el.selectAll("path").attr("d", this.computed.arc)
 
     const newCurrent: ClientRect = (this.el.node() as any).getBoundingClientRect(),
@@ -46,18 +46,18 @@ class Polar extends AbstractRenderer {
   }
 
   computeOuter(width: number, height: number, scaleFactor: number = 1): any {
-    const domainMax: number = max(map((datum: IObject): number => this.value(datum))(this.data))
+    const domainMax: number = max(map((datum: Datum): number => this.value(datum))(this.data))
     const scale: any = d3ScaleSqrt()
       .range([
         this.state.current.get("config").minInnerRadius,
         Math.min(width, height) / 2 - this.state.current.get("config").outerBorderMargin
       ])
       .domain([0, domainMax])
-    return (d: TDatum): number => scale(this.value(d)) * scaleFactor
+    return (d: Datum): number => scale(this.value(d)) * scaleFactor
   }
 
-  computeInner(outerRadius: (d: TDatum) => number): number {
-    const options: IConfig = this.state.current.get("config")
+  computeInner(outerRadius: (d: Datum) => number): number {
+    const options: PieChartConfig = this.state.current.get("config")
     const minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
     const maxWidth: number = options.maxWidth
     const minOuterRadius: number = min(map(outerRadius)(this.computed.data))
@@ -67,16 +67,16 @@ class Polar extends AbstractRenderer {
   }
 
   hoverOuter(radius: any): any {
-    return (d: TDatum): number => radius(d) + 1
+    return (d: Datum): number => radius(d) + 1
   }
 
-  angleValue(d: TDatum): number {
+  angleValue(d: Datum): number {
     return 1
   }
 
   // Establish coordinate system with 0,0 being the center of the width, height rectangle
   computeTranslate(): [number, number] {
-    const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
+    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingContainerDims
     this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return this.currentTranslation
   }
@@ -96,7 +96,7 @@ class Polar extends AbstractRenderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: TDatum, i: number): (t: number) => string {
+  arcTween(d: ComputedDatum, i: number): (t: number) => string {
     const old: any = this.previous.data || []
     let s0: number
     let e0: number
@@ -118,7 +118,7 @@ class Polar extends AbstractRenderer {
     return (t: number): string => this.computed.arc(extend(f(t))(d))
   }
 
-  removeArcTween(d: TDatum, i: number): (t: number) => string {
+  removeArcTween(d: ComputedDatum, i: number): (t: number) => string {
     let s0: number
     let e0: number
     s0 = e0 = this.angleRange()[1]

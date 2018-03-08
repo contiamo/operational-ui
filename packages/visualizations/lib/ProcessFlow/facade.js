@@ -7,8 +7,8 @@ var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
-var Facade = /** @class */ (function () {
-    function Facade(context) {
+var ProcessFlowFacade = /** @class */ (function () {
+    function ProcessFlowFacade(context) {
         this.__disposed = false;
         this.context = context;
         this.events = new event_bus_1.default();
@@ -17,15 +17,15 @@ var Facade = /** @class */ (function () {
         this.components = this.insertComponents();
         this.series = this.insertSeries();
     }
-    Facade.prototype.insertState = function () {
-        return new state_handler_1.StateHandler({
+    ProcessFlowFacade.prototype.insertState = function () {
+        return new state_handler_1.default({
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
             computed: this.initialComputed()
         });
     };
-    Facade.prototype.initialConfig = function () {
+    ProcessFlowFacade.prototype.initialConfig = function () {
         return {
             borderColor: "#fff",
             duration: 1e3,
@@ -50,7 +50,7 @@ var Facade = /** @class */ (function () {
             width: Infinity
         };
     };
-    Facade.prototype.initialAccessors = function () {
+    ProcessFlowFacade.prototype.initialAccessors = function () {
         return {
             data: {
                 nodes: function (d) { return d.nodes; },
@@ -64,7 +64,7 @@ var Facade = /** @class */ (function () {
                 stroke: function (d) { return d.stroke || "#000"; },
                 id: function (d) { return d.id || fp_1.uniqueId("node"); },
                 label: function (d) { return d.label || d.id || ""; },
-                labelPosition: function (d) { return d.labelPosition || "auto"; }
+                labelPosition: function (d) { return d.labelPosition || "right"; }
             },
             link: {
                 content: function (d) { return d.content || []; },
@@ -79,40 +79,40 @@ var Facade = /** @class */ (function () {
             }
         };
     };
-    Facade.prototype.initialComputed = function () {
+    ProcessFlowFacade.prototype.initialComputed = function () {
         return {
             canvas: {},
             focus: {},
             series: {}
         };
     };
-    Facade.prototype.insertCanvas = function () {
+    ProcessFlowFacade.prototype.insertCanvas = function () {
         return new canvas_1.default(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context);
     };
-    Facade.prototype.insertComponents = function () {
+    ProcessFlowFacade.prototype.insertComponents = function () {
         return {
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus"))
         };
     };
-    Facade.prototype.insertSeries = function () {
+    ProcessFlowFacade.prototype.insertSeries = function () {
         return new series_1.default(this.state.readOnly(), this.state.computedWriter(["series"]), this.events, this.canvas.elementFor("series"));
     };
-    Facade.prototype.data = function (data) {
+    ProcessFlowFacade.prototype.data = function (data) {
         return this.state.data(data);
     };
-    Facade.prototype.config = function (config) {
+    ProcessFlowFacade.prototype.config = function (config) {
         return this.state.config(config);
     };
-    Facade.prototype.accessors = function (type, accessors) {
+    ProcessFlowFacade.prototype.accessors = function (type, accessors) {
         return this.state.accessors(type, accessors);
     };
-    Facade.prototype.on = function (event, handler) {
+    ProcessFlowFacade.prototype.on = function (event, handler) {
         this.events.on(event, handler);
     };
-    Facade.prototype.off = function (event, handler) {
+    ProcessFlowFacade.prototype.off = function (event, handler) {
         this.events.removeListener(event, handler);
     };
-    Facade.prototype.draw = function () {
+    ProcessFlowFacade.prototype.draw = function () {
         this.state.captureState();
         this.series.prepareData();
         this.canvas.draw();
@@ -123,7 +123,7 @@ var Facade = /** @class */ (function () {
             : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         return this.canvas.elementFor("series").node();
     };
-    Facade.prototype.close = function () {
+    ProcessFlowFacade.prototype.close = function () {
         if (this.__disposed) {
             return;
         }
@@ -132,7 +132,7 @@ var Facade = /** @class */ (function () {
         this.events.removeAll();
         this.context.innerHTML = "";
     };
-    return Facade;
+    return ProcessFlowFacade;
 }());
-exports.default = Facade;
+exports.default = ProcessFlowFacade;
 //# sourceMappingURL=facade.js.map

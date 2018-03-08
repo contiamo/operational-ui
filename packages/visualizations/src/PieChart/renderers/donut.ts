@@ -1,12 +1,12 @@
 import AbstractRenderer from "./abstract_renderer"
-import { IObject, TDatum } from "../typings"
+import { ComputedDatum, Object } from "../typings"
 import { interpolateObject } from "d3-interpolate"
 import { find } from "lodash/fp"
 
 class Donut extends AbstractRenderer {
   // Establish coordinate system with 0,0 being the center of the width, height rectangle
   computeTranslate(): [number, number] {
-    const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
+    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingContainerDims
     this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return this.currentTranslation
   }
@@ -26,11 +26,11 @@ class Donut extends AbstractRenderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: TDatum): (t: number) => string {
-    const previousData: IObject[] = this.previous.data || [],
-      old: TDatum = find((datum: IObject): boolean => datum.index === d.index)(previousData),
-      previous: TDatum = find((datum: IObject): boolean => datum.index === d.index - 1)(previousData),
-      last: TDatum = previousData[previousData.length - 1]
+  arcTween(d: ComputedDatum): (t: number) => string {
+    const previousData: ComputedDatum[] = this.previous.data || [],
+      old: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index)(previousData),
+      previous: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index - 1)(previousData),
+      last: ComputedDatum = previousData[previousData.length - 1]
 
     let s0: number
     let e0: number

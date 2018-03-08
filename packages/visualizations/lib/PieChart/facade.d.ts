@@ -1,29 +1,30 @@
+import PieChartCanvas from "./canvas";
 import Series from "./series";
-import { StateHandler } from "../utils/state_handler";
+import StateHandler from "../utils/state_handler";
 import EventEmitter from "../utils/event_bus";
-import { Canvas, Components, IAccessors, IComputedState, IConfig, IObject } from "./typings";
-declare class Facade {
+import { Accessors, AccessorsObject, Components, Computed, Data, Facade, PieChartConfig } from "./typings";
+declare class PieChartFacade implements Facade {
     __disposed: boolean;
-    canvas: Canvas;
-    components: IObject;
+    canvas: PieChartCanvas;
+    components: Components;
     context: Element;
     events: EventEmitter;
     series: Series;
-    state: StateHandler<IConfig>;
+    state: StateHandler<PieChartConfig, Data>;
     constructor(context: Element);
-    insertState(): StateHandler<IConfig>;
-    initialConfig(): IConfig;
-    initialAccessors(): IAccessors;
-    initialComputed(): IComputedState;
-    insertCanvas(): Canvas;
+    insertState(): StateHandler<PieChartConfig, Data>;
+    initialConfig(): PieChartConfig;
+    initialAccessors(): AccessorsObject;
+    initialComputed(): Computed;
+    insertCanvas(): PieChartCanvas;
     insertComponents(): Components;
     insertSeries(): Series;
-    data<T>(data?: T): T;
-    config(config?: Partial<IConfig>): IConfig;
-    accessors(type: string, accessors: IObject): IObject;
+    data(data?: Data): Data;
+    config(config?: Partial<PieChartConfig>): PieChartConfig;
+    accessors(type: string, accessors: Accessors<any>): Accessors<any>;
     on(event: string, handler: any): void;
     off(event: string, handler: any): void;
     draw(): Element;
     close(): void;
 }
-export default Facade;
+export default PieChartFacade;

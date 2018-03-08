@@ -1,5 +1,4 @@
 import Events from "../../utils/event_catalog"
-import { IConfig, IEvents, IObject, IState, TD3Selection, TDatum } from "../typings"
 import { defaults, find, filter, forEach, isFunction, keys, map, reduce, values } from "lodash/fp"
 import * as d3 from "d3-selection"
 import "d3-transition"
@@ -8,6 +7,23 @@ import { interpolateObject } from "d3-interpolate"
 import { onTransitionEnd } from "../../utils/d3_utils"
 import * as styles from "./styles"
 import { colorAssigner } from "@operational/utils"
+import {
+  ComputedArcs,
+  ComputedData,
+  ComputedDatum,
+  ComputedInitial,
+  D3Selection,
+  Datum,
+  DatumInfo,
+  EventBus,
+  HoverPayload,
+  LegendDatum,
+  Object,
+  Partial,
+  PieChartConfig,
+  RendererAccessors,
+  State
+} from "../typings"
 
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
@@ -31,26 +47,26 @@ const approxZero = (y: (x: number) => number, initialX: number): number => {
   return xInt
 }
 
-const percentageString = (d: TDatum): string => {
+const percentageString = (d: ComputedDatum): string => {
   return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : ""
 }
 
 abstract class AbstractRenderer {
-  color: (d: TDatum) => string
-  computed: IObject = {}
+  color: (d: Datum | ComputedDatum) => string
+  computed: ComputedData
   currentTranslation: [number, number]
-  data: TDatum[]
+  data: Datum[]
   drawn: boolean = false
-  el: TD3Selection
-  events: IEvents
-  key: (d: TDatum) => string
-  previous: IObject
-  state: IState
+  el: D3Selection
+  events: EventBus
+  key: (d: Datum | ComputedDatum) => string
+  previous: Partial<ComputedData>
+  state: State
   total: number
   type: string
-  value: (d: TDatum) => number
+  value: (d: Datum | ComputedDatum) => number
 
-  constructor(state: IState, events: IEvents, el: TD3Selection, options: IObject) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
     this.state = state
     this.events = events
     this.el = el.select("g.drawing")
@@ -62,7 +78,7 @@ abstract class AbstractRenderer {
     this.events.on(Events.CHART.MOUSEOUT, this.updateElementHover.bind(this))
   }
 
-  assignOptions(options: IObject): void {
+  assignOptions(options: Object<any>): void {
     forEach.convert({ cap: false })((option: any, key: string): void => {
       if (key === "accessors") {
         return
@@ -71,28 +87,28 @@ abstract class AbstractRenderer {
     })(options)
   }
 
-  assignAccessors(customAccessors: IObject): void {
-    const accessors: IObject = defaults(this.defaultAccessors())(customAccessors)
+  assignAccessors(customAccessors: Partial<RendererAccessors>): void {
+    const accessors: RendererAccessors = defaults(this.defaultAccessors())(customAccessors)
     forEach.convert({ cap: false })((option: any, key: string): void => {
-      ;(this as any)[key] = (d: TDatum): any => (d.data ? option(d.data) : option(d))
+      ;(this as any)[key] = (d: any): any => (d.data ? option(d.data) : option(d))
     })(accessors)
   }
 
-  defaultAccessors(): IObject {
+  defaultAccessors(): RendererAccessors {
     const assignColor: (key: string) => string = colorAssigner(this.state.current.get("config").palette)
     return {
-      key: (d: TDatum): string => d.key,
-      value: (d: TDatum): number => d.value,
-      color: (d: TDatum): string => assignColor(this.key(d))
+      key: (d: Datum): string => d.key,
+      value: (d: Datum): number => d.value,
+      color: (d: Datum): string => assignColor(this.key(d))
     }
   }
 
-  setData(data: TDatum[]): void {
+  setData(data: Datum[]): void {
     this.data = data
   }
 
   computeTotal(): void {
-    this.total = reduce((memo: number, datum: TDatum): number => {
+    this.total = reduce((memo: number, datum: Datum): number => {
       const value: number = this.value(datum)
       return memo + (value || 0)
     }, 0)(this.data)
@@ -127,7 +143,7 @@ abstract class AbstractRenderer {
     this.el.attr("transform", this.translateString(this.computeTranslate()))
 
     // Arcs
-    const arcs: TD3Selection = this.el
+    const arcs: D3Selection = this.el
       .select("g.arcs")
       .selectAll(`g.${styles.arc}`)
       .data(this.computed.data, this.key)
@@ -136,10 +152,10 @@ abstract class AbstractRenderer {
     this.enterAndUpdate(arcs)
   }
 
-  exit(arcs: TD3Selection): void {
+  exit(arcs: D3Selection): void {
     const duration: number = this.state.current.get("config").duration
 
-    const exitingArcs: TD3Selection = arcs.exit()
+    const exitingArcs: D3Selection = arcs.exit()
 
     exitingArcs
       .select("path")
@@ -156,16 +172,16 @@ abstract class AbstractRenderer {
     exitingArcs.remove()
   }
 
-  enterAndUpdate(arcs: TD3Selection): void {
+  enterAndUpdate(arcs: D3Selection): void {
     const duration: number = this.state.current.get("config").duration
 
-    const enteringArcs: TD3Selection = arcs
+    const enteringArcs: D3Selection = arcs
       .enter()
       .append("svg:g")
       .attr("class", styles.arc)
       .on("mouseenter", this.onMouseOver.bind(this))
 
-    enteringArcs.append("svg:path").style("fill", (d: TDatum): string => this.color(d.data))
+    enteringArcs.append("svg:path").style("fill", this.color)
 
     enteringArcs
       .append("svg:text")
@@ -211,7 +227,7 @@ abstract class AbstractRenderer {
       .style("font-size", "1px")
       .remove()
 
-    const mergedTotal: TD3Selection = total
+    const mergedTotal: D3Selection = total
       .enter()
       .append("svg:text")
       .attr("text-anchor", "middle")
@@ -240,17 +256,15 @@ abstract class AbstractRenderer {
 
   abstract totalYOffset(): string
 
-  updateElementHover(datapoint: IObject): void {
+  updateElementHover(datapoint: HoverPayload): void {
     if (!this.drawn) {
       return
     }
 
     const arcs: any = this.el.select("g.arcs").selectAll("g")
 
-    const filterFocused: any = (d: TDatum): boolean =>
-        datapoint.d && datapoint.d.data && this.key(d) === this.key(datapoint.d),
-      filterUnFocused: any = (d: TDatum): boolean =>
-        datapoint.d && datapoint.d.data ? this.key(d) !== this.key(datapoint.d) : true
+    const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
+    const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
 
     arcs
       .filter(filterFocused)
@@ -265,8 +279,8 @@ abstract class AbstractRenderer {
       .attr("filter", null)
   }
 
-  onMouseOver(d: TDatum): void {
-    const datumInfo: IObject = {
+  onMouseOver(d: ComputedDatum): void {
+    const datumInfo: DatumInfo = {
       key: this.key(d),
       value: this.value(d),
       percentage: d.data.percentage
@@ -276,7 +290,7 @@ abstract class AbstractRenderer {
   }
 
   highlightElement(key: string): void {
-    const d: TDatum = find((datum: TDatum): boolean => this.key(datum) === key)(this.computed.data)
+    const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
     this.onMouseOver(d)
   }
 
@@ -288,14 +302,13 @@ abstract class AbstractRenderer {
     return
   }
 
-  angleValue(d: TDatum): number {
+  angleValue(d: Datum): number {
     return this.value(d)
   }
 
   // Compute
   compute(): void {
     this.previous = this.computed
-    const d: IObject = {}
 
     // We cannot draw a pie chart with no series or only series that have the value 0
     if (!this.hasData()) {
@@ -309,42 +322,51 @@ abstract class AbstractRenderer {
     let endAngle: number
     ;[startAngle, endAngle] = this.angleRange()
 
-    d.layout = d3Pie()
-      .sort(null)
-      .value(this.angleValue.bind(this))
-      .startAngle(startAngle)
-      .endAngle(endAngle)
-    d.total = this.totalForPercentages()
-
-    this.computed = d
-    this.previous = defaults(this.computed)(this.previous)
+    const d: ComputedInitial = {
+      layout: d3Pie()
+        .sort(null)
+        .value(this.angleValue.bind(this))
+        .startAngle(startAngle)
+        .endAngle(endAngle),
+      total: this.totalForPercentages()
+    }
 
     // data should not become part of this.previous in first computation
-    this.computed.data = d.layout(this.data)
+    this.previous = defaults(d)(this.previous)
 
     this.calculatePercentages(d.total)
-    this.computeArcs()
+
+    this.computed = {
+      ...d,
+      ...this.computeArcs(d),
+      data: d.layout(this.data)
+    }
   }
 
   calculatePercentages(total: number): void {
-    forEach((datum: TDatum): void => {
+    forEach((datum: Datum): void => {
       datum.percentage = this.value(datum) / total * 100
     })(this.data)
   }
 
-  computeArcs(scale?: number): void {
-    const computed: IObject = this.computed
-    const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
-    computed.r = this.computeOuter(drawingDims.width, drawingDims.height, scale)
-    computed.inner = this.computeInner(computed.r)
-    computed.rHover = this.hoverOuter(computed.r)
-    computed.innerHover = Math.max(computed.inner - 1, 0)
-    computed.arc = d3Arc()
-      .innerRadius(computed.inner)
-      .outerRadius(computed.r)
-    computed.arcOver = d3Arc()
-      .innerRadius(computed.innerHover)
-      .outerRadius(computed.rHover)
+  computeArcs(computed: ComputedInitial, scale?: number): ComputedArcs {
+    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingContainerDims,
+      r: number = this.computeOuter(drawingDims.width, drawingDims.height, scale),
+      inner: number = this.computeInner(r),
+      rHover: number = this.hoverOuter(r),
+      innerHover: number = Math.max(inner - 1, 0)
+    return {
+      r,
+      inner,
+      rHover,
+      innerHover,
+      arc: d3Arc()
+        .innerRadius(inner)
+        .outerRadius(r),
+      arcOver: d3Arc()
+        .innerRadius(innerHover)
+        .outerRadius(rHover)
+    }
   }
 
   // Calculation of outer radius
@@ -354,7 +376,7 @@ abstract class AbstractRenderer {
 
   // Calculation of inner radius
   computeInner(outerRadius: any): number {
-    const config: IConfig = this.state.current.get("config"),
+    const config: PieChartConfig = this.state.current.get("config"),
       width: number = outerRadius - config.minInnerRadius
 
     // If there isn't enough space, don't render inner circle
@@ -373,9 +395,9 @@ abstract class AbstractRenderer {
     return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
   }
 
-  abstract arcTween(d: TDatum, i: number): (t: number) => string
+  abstract arcTween(d: ComputedDatum, i: number): (t: number) => string
 
-  removeArcTween(d: TDatum, i: number): (t: number) => string {
+  removeArcTween(d: ComputedDatum, i: number): (t: number) => string {
     let s0: number
     let e0: number
     s0 = e0 = this.angleRange()[1]
@@ -383,7 +405,7 @@ abstract class AbstractRenderer {
     return (t: number): string => this.computed.arc(f(t))
   }
 
-  labelTranslate(d: TDatum): string {
+  labelTranslate(d: Datum): string {
     return this.translateString(this.computed.arc.centroid(d))
   }
 
@@ -391,8 +413,8 @@ abstract class AbstractRenderer {
     return `translate(${values.join(", ")})`
   }
 
-  dataForLegend(): IObject[] {
-    return map((datum: IObject): IObject => {
+  dataForLegend(): LegendDatum[] {
+    return map((datum: Datum): LegendDatum => {
       return {
         label: this.key(datum),
         color: this.color(datum)

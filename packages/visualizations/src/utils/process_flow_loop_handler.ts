@@ -1,34 +1,30 @@
 import { drop, dropRight, forEach, indexOf, map, uniq } from "lodash/fp"
+import { Journey } from "../ProcessFlow/typings"
 
-export type TPath = string[]
+type Path = string[]
 
-export type TNodesList = string[]
+type NodesList = string[]
 
-export interface IJourney {
-  path: TPath
-  size: number
-}
-
-export interface INode {
+interface Node {
   linkedToFrom: string[]
 }
 
-export interface INodes {
-  [id: string]: INode
+interface Nodes {
+  [id: string]: Node
 }
 
-const nodes: INodes = {}
+const nodes: Nodes = {}
 
-function findNode(nodeId: string): INode {
+function findNode(nodeId: string): Node {
   if (!nodes[nodeId]) {
     nodes[nodeId] = { linkedToFrom: [] }
   }
   return nodes[nodeId]
 }
 
-function getSourcesRecursively(sources: TNodesList): TNodesList {
+function getSourcesRecursively(sources: NodesList): NodesList {
   const numberOfLinks: number = sources.length
-  let sourcesList: TNodesList = sources
+  let sourcesList: NodesList = sources
   forEach((sourceId: string): void => {
     sourcesList = sourcesList.concat(findNode(sourceId).linkedToFrom)
   })(sources)
@@ -38,15 +34,15 @@ function getSourcesRecursively(sources: TNodesList): TNodesList {
 }
 
 function isLinkedToFrom(sourceId: string, targetId: string): boolean {
-  const sourceNodes: TNodesList = findNode(sourceId).linkedToFrom
-  const sourceLinkedToFrom: TNodesList = getSourcesRecursively(sourceNodes)
+  const sourceNodes: NodesList = findNode(sourceId).linkedToFrom
+  const sourceLinkedToFrom: NodesList = getSourcesRecursively(sourceNodes)
   return sourceId === targetId || sourceLinkedToFrom.indexOf(targetId) > -1
 }
 
-function removeLoops(path: TPath): TPath {
+function removeLoops(path: Path): Path {
   let i = 1,
-    newPath: TPath = path
-  function checkForLoops(pathLeft: TPath): void {
+    newPath: Path = path
+  function checkForLoops(pathLeft: Path): void {
     let suffix = ""
     const sourceNodeId: string = pathLeft[0],
       targetNodeId: string = pathLeft[1]
@@ -56,7 +52,7 @@ function removeLoops(path: TPath): TPath {
       remainingPath = map((nodeId: string): string => nodeId + suffix)(remainingPath)
       newPath = dropRight(newPath.length - i)(newPath).concat(remainingPath)
     }
-    const targetNode: INode = findNode(targetNodeId + suffix)
+    const targetNode: Node = findNode(targetNodeId + suffix)
     targetNode.linkedToFrom = uniq(targetNode.linkedToFrom.concat(dropRight(newPath.length - i)(newPath)))
     i = i + 1
     if (remainingPath.length > 1) {
@@ -67,8 +63,8 @@ function removeLoops(path: TPath): TPath {
   return newPath
 }
 
-export default (journeys: IJourney[]): IJourney[] => {
-  forEach((journey: IJourney): void => {
+export default (journeys: Journey[]): Journey[] => {
+  forEach((journey: Journey): void => {
     journey.path = removeLoops(journey.path)
   })(journeys)
   return journeys

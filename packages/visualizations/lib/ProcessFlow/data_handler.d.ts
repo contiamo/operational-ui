@@ -1,16 +1,16 @@
 import Layout from "./layout";
-import { TNode, TLink, IJourney, IData, ILinkAttrs, IState, TStateWriter, INodeAccessors, ILinkAccessors } from "./typings";
+import { Data, Journey, LinkAccessors, LinkAttrs, NodeAccessors, State, StateWriter, TLink, TNode } from "./typings";
 declare class DataHandler {
-    journeys: IJourney[];
+    journeys: Journey[];
     nodes: TNode[];
     links: TLink[];
-    nodeAccessors: INodeAccessors;
-    linkAccessors: ILinkAccessors;
-    state: IState;
-    stateWriter: TStateWriter;
+    nodeAccessors: NodeAccessors;
+    linkAccessors: LinkAccessors;
+    state: State;
+    stateWriter: StateWriter;
     layout: Layout;
-    constructor(state: IState, stateWriter: TStateWriter);
-    prepareData(): IData;
+    constructor(state: State, stateWriter: StateWriter);
+    prepareData(): Data;
     initializeNodes(nodeAttrs: {}[]): void;
     findNode(nodeId: string): TNode;
     addNode(attrs: {}): TNode;
@@ -18,7 +18,7 @@ declare class DataHandler {
     calculateStartsAndEnds(): void;
     initializeLinks(): void;
     findLink(sourceId: string, targetId: string): TLink;
-    addLink(attrs: ILinkAttrs): TLink;
+    addLink(attrs: LinkAttrs): TLink;
     computeLinks(): void;
     xGridSpacing(): number;
     yGridSpacing(nRows: number): number;

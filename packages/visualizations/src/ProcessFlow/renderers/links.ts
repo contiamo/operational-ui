@@ -7,18 +7,18 @@ import { every, find, invoke, map } from "lodash/fp"
 import Events from "../../utils/event_catalog"
 import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
 import {
-  IConfig,
-  IData,
-  IEvents,
-  IFocus,
-  IFocusElement,
-  IState,
-  TD3Selection,
+  D3Selection,
+  Data,
+  EventBus,
+  FocusElement,
+  FocusPoint,
+  LinkSelection,
+  ProcessFlowConfig,
+  Scale,
+  SeriesEl,
+  State,
   TLink,
-  TLinkSelection,
-  TNode,
-  TScale,
-  TSeriesEl
+  TNode
 } from "../typings"
 
 const MINOPACITY: number = 0.5,
@@ -35,13 +35,13 @@ const path = (link: TLink): string => {
 }
 
 class Links {
-  config: IConfig
+  config: ProcessFlowConfig
   data: TLink[]
-  el: TSeriesEl
-  events: IEvents
-  state: IState
+  el: SeriesEl
+  events: EventBus
+  state: State
 
-  constructor(state: IState, events: IEvents, el: TSeriesEl) {
+  constructor(state: State, events: EventBus, el: SeriesEl) {
     this.state = state
     this.events = events
     this.el = el
@@ -52,14 +52,14 @@ class Links {
     this.mouseOver(d3.select(element), d)
   }
 
-  mouseOver(element: TLinkSelection, d: TLink, hideLabel: boolean = false): void {
+  mouseOver(element: LinkSelection, d: TLink, hideLabel: boolean = false): void {
     this.highlight(element, d)
-    const focusPoint: IFocus = this.focusPoint(element, d)
+    const focusPoint: FocusPoint = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { focusPoint, d, hideLabel })
     element.on("mouseleave", this.onMouseOut.bind(this))
   }
 
-  focusElement(focusElement: IFocusElement): void {
+  focusElement(focusElement: FocusElement): void {
     this.el
       .selectAll(`path.link.${styles.element}`)
       .filter(filterByMatchers(focusElement.matchers))
@@ -70,12 +70,12 @@ class Links {
       )
   }
 
-  highlight(element: TLinkSelection, d: TLink, keepCurrent: boolean = false): void {
+  highlight(element: LinkSelection, d: TLink, keepCurrent: boolean = false): void {
     if (!keepCurrent) {
       this.removeHighlights()
     }
     // Highlight path.element when `path.${styles.border}` is hovered
-    const pathEl: TD3Selection = this.el.selectAll(`path.link.${styles.element}`).filter((link: TLink): boolean => {
+    const pathEl: D3Selection = this.el.selectAll(`path.link.${styles.element}`).filter((link: TLink): boolean => {
       return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
     })
     pathEl.attr("stroke", this.config.highlightColor)
@@ -96,9 +96,9 @@ class Links {
     this.el.selectAll(`path.link.${styles.element}`).attr("stroke", (d: TLink): string => d.stroke())
   }
 
-  focusPoint(element: TLinkSelection, d: TLink): IFocus {
+  focusPoint(element: LinkSelection, d: TLink): FocusPoint {
     if (d == null) return
-    const scale: TScale = sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth], this.data)
+    const scale: Scale = sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth], this.data)
 
     return {
       offset: scale(d.size()) / 2,
@@ -116,7 +116,7 @@ class Links {
   draw(data: TLink[]): void {
     this.data = data
     this.config = this.state.current.get("config")
-    const groups: TLinkSelection = this.el
+    const groups: LinkSelection = this.el
       .select("g.links-group")
       .selectAll("g.link-group")
       .data(this.data, (d: TLink): string => `${d.sourceId()};${d.targetId()}`)
@@ -125,16 +125,16 @@ class Links {
     this.enterAndUpdate(groups)
   }
 
-  borderScale(scale: TScale): TScale {
+  borderScale(scale: Scale): Scale {
     return (size: number): number => scale(size) + 2 * this.config.linkBorderWidth
   }
 
-  enterAndUpdate(groups: TLinkSelection): void {
-    const scale: TScale = sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth], this.data),
-      borderScale: TScale = this.borderScale(scale),
-      opacityScale: TScale = sizeScale([MINOPACITY, MAXOPACITY], this.data)
+  enterAndUpdate(groups: LinkSelection): void {
+    const scale: Scale = sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth], this.data),
+      borderScale: Scale = this.borderScale(scale),
+      opacityScale: Scale = sizeScale([MINOPACITY, MAXOPACITY], this.data)
 
-    const enteringGroups: TD3Selection = groups
+    const enteringGroups: D3Selection = groups
       .enter()
       .append("g")
       .attr("class", "link-group")
@@ -181,7 +181,7 @@ class Links {
   // Paths start as a single point at the source node. If the source node has already been rendered,
   // use its position at the start of the transition.
   startPath(link: TLink): string {
-    const previousData: IData = this.state.previous.get("computed").series.data,
+    const previousData: Data = this.state.previous.get("computed").series.data,
       previousNodes: TNode[] = previousData ? previousData.nodes : [],
       existingSource: TNode = find((node: TNode): boolean => node.id() === link.sourceId())(previousNodes),
       x: number = existingSource ? existingSource.x : link.source().x,

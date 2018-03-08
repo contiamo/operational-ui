@@ -1,6 +1,6 @@
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
-import { IFocusElement, IState, IEvents, TSeriesEl, IData, TLink } from "./typings"
+import { Data, EventBus, FocusElement, SeriesEl, State, TLink } from "./typings"
 import Events from "../utils/event_catalog"
 import { forEach, initial, reduce, tail, zip } from "lodash/fp"
 import * as styles from "./renderers/styles"
@@ -10,11 +10,11 @@ import * as d3 from "d3-selection"
 class Renderer {
   links: Links
   nodes: Nodes
-  state: IState
-  el: TSeriesEl
-  events: IEvents
+  state: State
+  el: SeriesEl
+  events: EventBus
 
-  constructor(state: IState, events: IEvents, el: TSeriesEl) {
+  constructor(state: State, events: EventBus, el: SeriesEl) {
     this.events = events
     this.el = el
     this.links = new Links(state, events, el)
@@ -22,12 +22,12 @@ class Renderer {
     this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.focusElement.bind(this))
   }
 
-  draw(data: IData): void {
+  draw(data: Data): void {
     this.links.draw(data.links)
     this.nodes.draw(data.nodes)
   }
 
-  focusElement(focusElement: IFocusElement): void {
+  focusElement(focusElement: FocusElement): void {
     switch (focusElement.type) {
       case "path":
         this.highlightPath(focusElement)
@@ -41,7 +41,7 @@ class Renderer {
     }
   }
 
-  highlightPath(focusElement: IFocusElement): void {
+  highlightPath(focusElement: FocusElement): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
     const path: string[] = focusElement.matchers.path

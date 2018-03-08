@@ -6,7 +6,6 @@ var styles = require("../utils/styles");
 var fp_1 = require("lodash/fp");
 var ProcessFlowCanvas = /** @class */ (function () {
     function ProcessFlowCanvas(state, stateWriter, events, context) {
-        this.elements = {};
         this.elMap = {};
         this.state = state;
         this.stateWriter = stateWriter;
@@ -67,7 +66,6 @@ var ProcessFlowCanvas = /** @class */ (function () {
         this.el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this));
         this.el.node().removeEventListener("click", this.onClick.bind(this));
-        this.elements = {};
         this.chartContainer.remove();
         this.chartContainer = undefined;
         this.el = undefined;

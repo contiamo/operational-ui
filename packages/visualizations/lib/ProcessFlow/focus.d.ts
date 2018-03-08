@@ -1,18 +1,14 @@
-import { IEvents, IFocus, IObject, IState, TD3Selection, TLink, TNode, TSeriesEl, TStateWriter, Focus } from "./typings";
+import { D3Selection, EventBus, Focus, HoverPayload, Object, SeriesEl, State, StateWriter, TNode } from "./typings";
 declare class ProcessFlowFocus implements Focus {
-    el: TSeriesEl;
-    state: IState;
-    stateWriter: TStateWriter;
-    events: IEvents;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
-    onElementHover(payload: {
-        focusPoint: IFocus;
-        d: TNode | TLink;
-        hideLabel: boolean;
-    }): void;
-    appendContent(container: TD3Selection, content: IObject[]): void;
-    addNodeBreakdowns(content: TSeriesEl, datum: TNode): void;
-    addSingleNodeVisitsComment(content: TSeriesEl, datum: TNode): void;
+    el: SeriesEl;
+    state: State;
+    stateWriter: StateWriter;
+    events: EventBus;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
+    onElementHover(payload: HoverPayload): void;
+    appendContent(container: D3Selection, content: Object<any>[]): void;
+    addNodeBreakdowns(content: SeriesEl, datum: TNode): void;
+    addSingleNodeVisitsComment(content: SeriesEl, datum: TNode): void;
     getDrawingDimensions(): {
         xMax: number;
         xMin: number;

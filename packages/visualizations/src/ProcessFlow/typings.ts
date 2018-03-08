@@ -3,104 +3,24 @@ import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-import { IObject, Focus } from "../utils/typings"
+import { Accessor, Config, Object, Focus, Facade } from "../utils/typings"
 
 export {
-  IChartStateObject,
-  IEvents,
-  IObject,
-  IState,
+  Accessor,
+  Accessors,
+  EventBus,
+  Object,
+  State,
   Partial,
-  TD3Selection,
-  TSeriesEl,
-  TStateWriter,
+  D3Selection,
+  SeriesEl,
+  StateWriter,
   Canvas
 } from "../utils/typings"
 
-export type TLink = Link
-export type TNode = Nodes
-
-export type TLinkSelection = d3.Selection<any, TLink, d3.BaseType, any>
-export type TNodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
-
-// @TODO Import the d3 scale types
-export type TScale = (size: number) => number
-
-export interface IFocusElement {
-  type?: "node" | "link" | "path"
-  matchers?: IObject
-  hideLabel?: boolean
-}
-
-export interface IJourney {
-  size: number
-  path: string[]
-}
-
-export interface ILinkAttrs {
-  content?: IObject[]
-  dash?: string
-  focusLabel?: any
-  label?: string
-  size: number
-  source: TNode
-  sourceId: string
-  stroke?: string
-  target: TNode
-  targetId: string
-}
-
-export interface INodeAttrs {
-  color?: string
-  content?: IObject[]
-  shape?: string
-  size?: number
-  stroke?: string
-  id?: string
-  label?: string
-  labelPosition?: string
-}
-
-export interface IDataAccessors {
-  nodes: (d: any) => any
-  journeys: (d: any) => any
-}
-
-export interface INodeAccessors {
-  color: (d: INodeAttrs) => string
-  content: (d: INodeAttrs) => IObject[]
-  shape: (d: INodeAttrs) => string
-  size: (d: INodeAttrs) => number
-  stroke: (d: INodeAttrs) => string
-  id: (d: INodeAttrs) => string
-  label: (d: INodeAttrs) => string
-  labelPosition: (d: INodeAttrs) => string
-}
-
-export interface ILinkAccessors {
-  content: (d: ILinkAttrs) => IObject[]
-  dash: (d: ILinkAttrs) => string
-  label: (d: ILinkAttrs) => string
-  size: (d: ILinkAttrs) => number
-  stroke: (d: ILinkAttrs) => string
-  source: (d: ILinkAttrs) => TNode | undefined
-  sourceId: (d: ILinkAttrs) => string | undefined
-  target: (d: ILinkAttrs) => TNode | undefined
-  targetId: (d: ILinkAttrs) => string | undefined
-}
-
-export interface IAccessors {
-  data: IDataAccessors
-  node: INodeAccessors
-  link: ILinkAccessors
-}
-
-export interface IConfig {
+export interface ProcessFlowConfig extends Config {
   borderColor: string
-  duration: number
-  focusElement?: IFocusElement
-  height: number
-  hidden: boolean
+  focusElement?: FocusElement
   highlightColor: string
   horizontalNodeSpacing: number
   labelOffset: number
@@ -113,30 +33,106 @@ export interface IConfig {
   numberFormatter: (x: number) => string
   showLinkFocusLabels: boolean
   showNodeFocusLabels: boolean
-  uid: string
   verticalNodeSpacing: number
-  visualizationName: string
-  width: number
 }
 
-export interface IInputData {
-  journeys?: IJourney[]
+export type TLink = Link
+export type TNode = Nodes
+
+export type LinkSelection = d3.Selection<any, TLink, d3.BaseType, any>
+export type NodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
+
+// @TODO Import the d3 scale types
+export type Scale = (size: number) => number
+
+export interface FocusElement {
+  type?: "node" | "link" | "path"
+  matchers?: Object<any>
+  hideLabel?: boolean
+}
+
+export interface Journey {
+  size: number
+  path: string[]
+}
+
+export interface LinkAttrs {
+  content?: Object<any>[]
+  dash?: string
+  focusLabel?: any
+  label?: string
+  size: number
+  source: TNode
+  sourceId: string
+  stroke?: string
+  target: TNode
+  targetId: string
+}
+
+export interface NodeAttrs {
+  color?: string
+  content?: Object<any>[]
+  shape?: string
+  size?: number
+  stroke?: string
+  id?: string
+  label?: string
+  labelPosition?: string
+}
+
+// @TODO
+export interface DataAccessors {
+  nodes: Accessor<any, any>
+  journeys: Accessor<any, any>
+}
+
+export interface NodeAccessors {
+  color: Accessor<NodeAttrs, string>
+  content: Accessor<NodeAttrs, Object<any>[]>
+  shape: Accessor<NodeAttrs, string>
+  size: Accessor<NodeAttrs, number>
+  stroke: Accessor<NodeAttrs, string>
+  id: Accessor<NodeAttrs, string>
+  label: Accessor<NodeAttrs, string>
+  labelPosition: Accessor<NodeAttrs, string>
+}
+
+export interface LinkAccessors {
+  content: (d: LinkAttrs) => Object<any>[]
+  dash: (d: LinkAttrs) => string
+  label: (d: LinkAttrs) => string
+  size: (d: LinkAttrs) => number
+  stroke: (d: LinkAttrs) => string
+  source: (d: LinkAttrs) => TNode | undefined
+  sourceId: (d: LinkAttrs) => string | undefined
+  target: (d: LinkAttrs) => TNode | undefined
+  targetId: (d: LinkAttrs) => string | undefined
+}
+
+export interface AccessorsObject {
+  data: DataAccessors
+  node: NodeAccessors
+  link: LinkAccessors
+}
+
+export interface InputData {
+  journeys?: Journey[]
   nodes?: any[]
 }
 
-export interface IComputedState {
-  canvas: IObject
-  focus: IObject
-  series: IObject
+export interface Computed {
+  canvas: Object<any>
+  focus: Object<any>
+  series: Object<any>
 }
 
-export interface IData {
-  journeys: IJourney[]
+export interface Data {
+  journeys: Journey[]
   nodes: TNode[]
   links: TLink[]
 }
 
-export interface IFocus {
+export interface FocusPoint {
   offset: number
   type: string
   x: number
@@ -144,14 +140,16 @@ export interface IFocus {
   id: string
 }
 
-export interface IBreakdown {
-  label?: string
-  size: number
-  percentage: number
+export interface HoverPayload {
+  d: TNode | TLink
+  focusPoint: FocusPoint
+  hideLabel?: boolean
 }
 
-export type Focus = Focus<IFocus, TNode | TLink>
+export type Focus = Focus<HoverPayload>
+
+export type Facade = Facade<ProcessFlowConfig, AccessorsObject, Computed, Components, InputData>
 
 export interface Components {
-  focus: Focus<IFocus, TNode | TLink>
+  focus: Focus<HoverPayload>
 }

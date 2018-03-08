@@ -1,20 +1,20 @@
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { Canvas, TD3Selection, IState, TStateWriter, IEvents, IObject, TSeriesEl } from "./typings"
+import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter, SunburstConfig } from "./typings"
 import * as styles from "../utils/styles"
 import * as localStyles from "./styles"
 
 class SunburstCanvas implements Canvas {
-  breadcrumb: TD3Selection
-  chartContainer: TD3Selection
-  el: TSeriesEl
-  events: IEvents
-  rootLabel: TD3Selection
-  protected state: IState
-  protected elMap: IObject = {}
-  stateWriter: TStateWriter
+  breadcrumb: D3Selection
+  chartContainer: D3Selection
+  el: SeriesEl
+  events: EventBus
+  rootLabel: D3Selection
+  protected state: State
+  protected elMap: Object<D3Selection> = {}
+  stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -26,14 +26,14 @@ class SunburstCanvas implements Canvas {
   }
 
   // Chart container
-  insertChartContainer(context: Element): TD3Selection {
+  insertChartContainer(context: Element): D3Selection {
     const container: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     return d3.select(container).attr("class", styles.chartContainer)
   }
 
   // Breadcrumb
-  insertBreadcrumb(): TD3Selection {
+  insertBreadcrumb(): D3Selection {
     const el: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(el)
     this.elMap.breadcrumb = d3.select(el).attr("class", localStyles.breadcrumb)
@@ -41,14 +41,14 @@ class SunburstCanvas implements Canvas {
   }
 
   // El
-  insertEl(): TSeriesEl {
+  insertEl(): SeriesEl {
     const elNode: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     elNode.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     elNode.addEventListener("mouseleave", this.onMouseLeave.bind(this))
     elNode.addEventListener("click", this.onClick.bind(this))
     this.chartContainer.node().appendChild(elNode)
 
-    const el: TSeriesEl = d3.select(elNode)
+    const el: SeriesEl = d3.select(elNode)
     el.append("svg:g").attr("class", "arcs")
     el.append("svg:g").attr("class", "arrows")
     el.append("circle").attr("class", localStyles.centerCircle)
@@ -69,8 +69,8 @@ class SunburstCanvas implements Canvas {
   }
 
   // Root label
-  insertRootLabel(): TD3Selection {
-    const el: TD3Selection = d3
+  insertRootLabel(): D3Selection {
+    const el: D3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.rootLabel)
       .html("<span class='value'></span><br><span class='name'></span>")
@@ -80,7 +80,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // FocusElement
-  insertFocus(): TD3Selection {
+  insertFocus(): D3Selection {
     const focus = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
@@ -92,8 +92,8 @@ class SunburstCanvas implements Canvas {
 
   // Lifecycle
   draw(): void {
-    const config: IObject = this.state.current.get("config"),
-      drawingDims: IObject = this.drawingDims()
+    const config: SunburstConfig = this.state.current.get("config"),
+      drawingDims: Object<number> = this.drawingDims()
 
     this.chartContainer
       .style("visibility", this.state.current.get("config").hidden ? "hidden" : "visible")
@@ -108,9 +108,9 @@ class SunburstCanvas implements Canvas {
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
   }
 
-  drawingDims(): IObject {
-    const config: IObject = this.state.current.get("config")
-    const dims: IObject = {
+  drawingDims(): Object<number> {
+    const config: SunburstConfig = this.state.current.get("config")
+    const dims: Object<number> = {
       width: config.width,
       height: config.height - this.breadcrumb.node().getBoundingClientRect().height
     }
@@ -125,7 +125,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // Helper method
-  elementFor(component: string): any {
+  elementFor(component: string): D3Selection {
     return this.elMap[component]
   }
 }

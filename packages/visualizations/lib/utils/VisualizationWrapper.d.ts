@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { Theme } from "@operational/theme";
-export interface IProps {
+export interface Props {
     style?: {};
     className?: string;
     facade: any;
@@ -9,8 +9,8 @@ export interface IProps {
     data?: any;
     config?: any;
 }
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
     theme: Theme;
 }
-declare const WrappedVisualizationWrapper: React.StatelessComponent<IProps>;
+declare const WrappedVisualizationWrapper: React.StatelessComponent<Props>;
 export default WrappedVisualizationWrapper;

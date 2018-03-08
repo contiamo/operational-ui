@@ -1,21 +1,22 @@
-import { IReadOnlyState, State, TPath } from "./state";
-import { IChartStateObject, IObject, TStateWriter } from "./typings";
-export interface IChartState<T> {
+import State, { ReadOnlyState, Path } from "./state";
+import { Accessors, ChartStateObject } from "./typings";
+export interface ChartState<T> {
     current: State<T>;
     previous: State<T>;
 }
-export interface IChartStateReadOnly<T> {
-    current: IReadOnlyState<T>;
-    previous: IReadOnlyState<T>;
+export interface ChartStateReadOnly<T> {
+    current: ReadOnlyState<T>;
+    previous: ReadOnlyState<T>;
 }
-export declare class StateHandler<IConfig> {
-    state: IChartState<IChartStateObject>;
-    constructor(obj: IChartStateObject);
+export declare type StateWriter = (propertyPath: string | string[], value: any) => void;
+export default class StateHandler<Config, Data> {
+    state: ChartState<ChartStateObject>;
+    constructor(obj: ChartStateObject);
     captureState(): void;
-    readOnly(): IChartStateReadOnly<IChartStateObject>;
-    data(data?: any): any;
+    readOnly(): ChartStateReadOnly<ChartStateObject>;
+    data(data?: Data): any;
     hasData(): boolean;
-    config(config?: Partial<IConfig>): IConfig;
-    accessors(type: string, accessors?: IObject): IObject;
-    computedWriter(namespace: TPath): TStateWriter;
+    config(config?: Partial<Config>): Config;
+    accessors(type: string, accessors?: Accessors<any>): any;
+    computedWriter(namespace: Path): StateWriter;
 }

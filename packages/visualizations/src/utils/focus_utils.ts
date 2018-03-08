@@ -1,7 +1,7 @@
 import { find, last } from "lodash/fp"
 import * as d3 from "d3-selection"
 import * as styles from "./styles"
-import { IObject, TD3Selection } from "./typings"
+import { D3Selection, Object } from "./typings"
 
 function optimalPosition(possibilities: number[], min: number, max: number, dimension: number): number {
   function withinRange(value: number): boolean {
@@ -12,20 +12,20 @@ function optimalPosition(possibilities: number[], min: number, max: number, dime
 }
 
 // Focus Label Formatting
-const FocusUtils: IObject = {
+const FocusUtils: Object<any> = {
   // Public Functions
 
   // Initial, hidden rendering of the focus label.
   // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
   // before the label is made visible.
-  drawHidden: (canvasEl: TD3Selection, type: string, position?: string): TD3Selection => {
+  drawHidden: (canvasEl: D3Selection, type: string, position?: string): D3Selection => {
     return canvasEl
       .attr("class", `${styles.focusLegend} focus-legend-${type} ${position || ""}`)
       .style("visibility", "hidden")
   },
 
   // Move the focus label to the desired position and make it visible.
-  drawVisible: (focusEl: TD3Selection, labelPlacement: { top: number; left: number }): void => {
+  drawVisible: (focusEl: D3Selection, labelPlacement: { top: number; left: number }): void => {
     focusEl
       .style("top", labelPlacement.top + "px")
       .style("left", labelPlacement.left + "px")
@@ -33,7 +33,7 @@ const FocusUtils: IObject = {
   },
 
   // Return dimensions of focus label, including width of any margins or borders.
-  labelDimensions: (focusEl: TD3Selection): { height: number; width: number } => {
+  labelDimensions: (focusEl: D3Selection): { height: number; width: number } => {
     const rect: ClientRect = focusEl.node().getBoundingClientRect()
     return {
       height: rect.height,
@@ -44,21 +44,22 @@ const FocusUtils: IObject = {
   // Position focus label according to desired position relative to focus point.
   // Use label and drawing dimensions to ensure focus label does not overflow drawing.
   positionLabel: (
-    el: TD3Selection,
-    focus: IObject,
-    label: IObject,
-    drawing: IObject,
+    el: D3Selection,
+    // @TODO
+    focus: Object<any>,
+    label: Object<any>,
+    drawing: Object<any>,
     offset: number = 0,
     position: string = "toRight"
   ): void => {
-    const x: IObject = {
+    const x: Object<number> = {
       farLeft: drawing.xMin + offset,
       farRight: drawing.xMax - offset - label.width,
       left: drawing.xMin + focus.x - offset - label.width,
       right: drawing.xMin + focus.x + offset
     }
 
-    const y: IObject = {
+    const y: Object<number> = {
       above: drawing.yMin + focus.y - offset - label.height,
       below: drawing.yMin + focus.y + offset,
       bottom: drawing.yMin + drawing.yMax - offset - label.height,
@@ -92,7 +93,7 @@ const FocusUtils: IObject = {
   },
 
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
-  verticalCentre: (focus: IObject, label: IObject, drawing: IObject): number => {
+  verticalCentre: (focus: Object<number>, label: Object<number>, drawing: Object<number>): number => {
     return Math.min(Math.max(focus.y + drawing.yMin - label.height / 2, drawing.yMin), drawing.yMax)
   }
 }

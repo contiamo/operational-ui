@@ -1,21 +1,32 @@
 // import DataHandler from "./data_handler"
 import Renderer from "./renderers/renderer"
 import AbstractRenderer from "./renderers/abstract_renderer"
-import { TDatum, IEvents, IObject, ISeriesAccessors, IState, TSeriesEl, TStateWriter } from "./typings"
+import {
+  Data,
+  Datum,
+  EventBus,
+  Object,
+  RendererOptions,
+  SeriesAccessors,
+  SeriesEl,
+  State,
+  StateWriter
+} from "./typings"
 import { flow, filter, forEach } from "lodash/fp"
 
 class Series {
-  attributes: IObject
-  data: TDatum[]
+  // @TODO really?? Should be "any"
+  attributes: Data
+  data: Data
   drawn: boolean
-  el: TSeriesEl
-  events: IEvents
-  renderAs: () => IObject[]
+  el: SeriesEl
+  events: EventBus
+  renderAs: () => RendererOptions[]
   renderer: AbstractRenderer
-  state: IState
-  stateWriter: TStateWriter
+  state: State
+  stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -33,7 +44,7 @@ class Series {
 
   prepareData(): void {
     this.data = flow(
-      filter((datum: IObject): boolean => {
+      filter((datum: Datum): boolean => {
         return this.renderer.key(datum) && this.renderer.key(datum).length > 0 && this.renderer.value(datum) > 0
       })
     )(this.state.current.get("accessors").data.data(this.attributes))
@@ -42,18 +53,18 @@ class Series {
   }
 
   assignAccessors(): void {
-    const accessors: ISeriesAccessors = this.state.current.get("accessors").series
+    const accessors: SeriesAccessors = this.state.current.get("accessors").series
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(accessors)
   }
 
   updateRenderer(): void {
-    const options: IObject[] = this.renderAs()
+    const options: RendererOptions[] = this.renderAs()
     if (!options || options.length !== 1) {
       throw new Error(`Incorrect number of renderers: ${!options ? 0 : options.length} specified, 1 required`)
     }
-    const rendererOptions: IObject = options[0]
+    const rendererOptions: RendererOptions = options[0]
     if (!this.renderer) {
       this.renderer = this.createRenderer(rendererOptions)
     } else if (this.renderer.type !== rendererOptions.type) {
@@ -64,16 +75,11 @@ class Series {
     }
   }
 
-  createRenderer(options: IObject): any {
+  createRenderer(options: RendererOptions): any {
     return new Renderer(this.state, this.events, this.el, options)
   }
 
-  hasData(): boolean {
-    return this.data.length > 0
-  }
-
   draw(): void {
-    const seriesConfig: IObject = this.state.current.get("computed").series
     this.renderer.draw()
     this.drawn = true
   }

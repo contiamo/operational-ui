@@ -1,14 +1,14 @@
-export declare type TPath = string | string[];
-export interface IReadOnlyState<T> {
-    get(path: TPath): any;
+export declare type Path = string | string[];
+export interface ReadOnlyState<T> {
+    get(path: Path): any;
 }
-export declare class State<T> {
+export default class State<T> {
     state: T;
     constructor(obj: T);
     get: (path: string | string[]) => any;
-    set(path: TPath, value: any): void;
-    merge(path: TPath, value?: Object): any;
-    readOnly(): IReadOnlyState<T>;
+    set(path: Path, value: any): void;
+    merge(path: Path, value?: Object): any;
+    readOnly(): ReadOnlyState<T>;
     clone(): State<T>;
     private getPath(path);
     private setPath(path, value);

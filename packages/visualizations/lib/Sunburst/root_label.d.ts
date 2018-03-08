@@ -1,10 +1,10 @@
-import { TD3Selection, IObject, IState, TStateWriter, IEvents } from "./typings";
+import { ClickPayload, D3Selection, EventBus, State, StateWriter } from "./typings";
 declare class RootLabel {
-    el: TD3Selection;
-    events: IEvents;
-    state: IState;
-    stateWriter: TStateWriter;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
-    update(payload: IObject): void;
+    el: D3Selection;
+    events: EventBus;
+    state: State;
+    stateWriter: StateWriter;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
+    update(payload: ClickPayload): void;
 }
 export default RootLabel;

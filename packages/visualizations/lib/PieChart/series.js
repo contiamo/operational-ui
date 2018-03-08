@@ -54,11 +54,7 @@ var Series = /** @class */ (function () {
     Series.prototype.createRenderer = function (options) {
         return new renderer_1.default(this.state, this.events, this.el, options);
     };
-    Series.prototype.hasData = function () {
-        return this.data.length > 0;
-    };
     Series.prototype.draw = function () {
-        var seriesConfig = this.state.current.get("computed").series;
         this.renderer.draw();
         this.drawn = true;
     };

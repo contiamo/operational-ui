@@ -1,11 +1,11 @@
 import { filter, find, flow, forEach, get, identity, indexOf, map, reduce, sortBy, uniq } from "lodash/fp"
-import { IData, IState, TLink, TNode } from "./typings"
+import { State, TLink, TNode } from "./typings"
 
 class Layout {
   nodes: TNode[]
-  state: IState
+  state: State
 
-  constructor(state: IState) {
+  constructor(state: State) {
     this.state = state
   }
 

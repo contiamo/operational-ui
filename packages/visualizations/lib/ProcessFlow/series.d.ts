@@ -1,16 +1,16 @@
 import DataHandler from "./data_handler";
 import Renderer from "./renderer";
-import { IData, IEvents, IState, TSeriesEl, TStateWriter } from "./typings";
+import { Data, EventBus, SeriesEl, State, StateWriter } from "./typings";
 declare class Series {
-    data: IData;
+    data: Data;
     dataHandler: DataHandler;
     drawn: boolean;
-    el: TSeriesEl;
-    events: IEvents;
+    el: SeriesEl;
+    events: EventBus;
     renderer: Renderer;
-    state: IState;
-    stateWriter: TStateWriter;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl);
+    state: State;
+    stateWriter: StateWriter;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl);
     prepareData(): void;
     hasData(): boolean;
     draw(): void;

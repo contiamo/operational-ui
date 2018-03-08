@@ -34,10 +34,6 @@ const drawingContainerStyle = {
   overflow: "hidden"
 }
 
-const chartBackgroundStyle = {
-  fill: "#fff"
-}
-
 const ruleStyle = {
   stroke: "#eee",
   strokeWidth: "1px",
@@ -122,6 +118,5 @@ export const legend = css(legendStyle).toString()
 export const legendTopBottom = css(legendTopBottomStyle).toString()
 export const seriesLegend = css(seriesLegendStyle).toString()
 export const drawingContainer = css(drawingContainerStyle).toString()
-export const chartBackground = css(chartBackgroundStyle).toString()
 export const rule = css(ruleStyle).toString()
 export const componentFocus = css(componentFocusStyle).toString()

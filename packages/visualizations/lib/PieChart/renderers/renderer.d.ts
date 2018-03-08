@@ -1,5 +1,5 @@
-import { IEvents, IObject, IState, TD3Selection } from "../typings";
+import { D3Selection, EventBus, RendererOptions, State } from "../typings";
 declare class Renderer {
-    constructor(state: IState, events: IEvents, el: TD3Selection, options: IObject);
+    constructor(state: State, events: EventBus, el: D3Selection, options: RendererOptions);
 }
 export default Renderer;

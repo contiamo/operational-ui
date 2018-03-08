@@ -1,7 +1,7 @@
-import { ILinkAccessors, ILinkAttrs, TNode } from "./typings";
+import { LinkAccessors, LinkAttrs, TNode } from "./typings";
 declare class Link {
-    accessors: ILinkAccessors;
-    attributes: ILinkAttrs;
+    accessors: LinkAccessors;
+    attributes: LinkAttrs;
     dash: () => string;
     label: () => string;
     size: () => number;
@@ -10,8 +10,8 @@ declare class Link {
     stroke: () => string;
     target: () => TNode;
     targetId: () => string;
-    constructor(linkAttributes: ILinkAttrs, accessors: ILinkAccessors);
-    assignAttributes(linkAttributes: ILinkAttrs): ILinkAttrs;
+    constructor(linkAttributes: LinkAttrs, accessors: LinkAccessors);
+    assignAttributes(linkAttributes: LinkAttrs): LinkAttrs;
     assignAccessors(): void;
 }
 export default Link;

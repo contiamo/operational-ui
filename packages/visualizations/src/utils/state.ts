@@ -1,32 +1,32 @@
 import { cloneDeep } from "lodash"
 import { defaults } from "lodash/fp"
 
-export type TPath = string | string[]
+export type Path = string | string[]
 
-export interface IReadOnlyState<T> {
-  get(path: TPath): any
+export interface ReadOnlyState<T> {
+  get(path: Path): any
 }
 
-export class State<T> {
+export default class State<T> {
   state: T
 
   constructor(obj: T) {
     this.state = cloneDeep(obj)
   }
 
-  get = (path: TPath): any => {
+  get = (path: Path): any => {
     return this.getPath([].concat(path))
   };
 
-  set(path: TPath, value: any) {
+  set(path: Path, value: any) {
     return this.setPath([].concat(path), value)
   }
 
-  merge(path: TPath, value: Object = {}) {
+  merge(path: Path, value: Object = {}) {
     return this.mergePath([].concat(path), value)
   }
 
-  readOnly(): IReadOnlyState<T> {
+  readOnly(): ReadOnlyState<T> {
     return { get: this.get }
   }
 

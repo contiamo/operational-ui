@@ -7,20 +7,20 @@ import Events from "../../utils/event_catalog"
 import { every, invoke, map } from "lodash/fp"
 import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
 import {
-  IConfig,
-  IEvents,
-  IFocus,
-  IFocusElement,
-  IObject,
-  IState,
-  TD3Selection,
-  TNode,
-  TNodeSelection,
-  TScale,
-  TSeriesEl
+  D3Selection,
+  EventBus,
+  FocusElement,
+  FocusPoint,
+  NodeSelection,
+  Object,
+  ProcessFlowConfig,
+  Scale,
+  SeriesEl,
+  State,
+  TNode
 } from "../typings"
 
-const nodeLabelOptions: IObject = {
+const nodeLabelOptions: Object<Object<any>> = {
   top: {
     dy: "0",
     textAnchor: "middle",
@@ -53,7 +53,7 @@ const nodeLabelOptions: IObject = {
   }
 }
 
-const nodeShapeOptions: IObject = {
+const nodeShapeOptions: Object<Object<any>> = {
   squareDiamond: {
     symbol: symbolSquare,
     rotation: 45
@@ -73,13 +73,13 @@ const nodeShapeOptions: IObject = {
 }
 
 class Nodes {
-  config: IConfig
+  config: ProcessFlowConfig
   data: TNode[]
-  el: TSeriesEl
-  events: IEvents
-  state: IState
+  el: SeriesEl
+  events: EventBus
+  state: State
 
-  constructor(state: IState, events: IEvents, el: TSeriesEl) {
+  constructor(state: State, events: EventBus, el: SeriesEl) {
     this.state = state
     this.events = events
     this.el = el
@@ -90,14 +90,14 @@ class Nodes {
     this.mouseOver(d3.select(element), d)
   }
 
-  mouseOver(element: TNodeSelection, d: TNode, hideLabel: boolean = false): void {
+  mouseOver(element: NodeSelection, d: TNode, hideLabel: boolean = false): void {
     this.highlight(element, d)
-    const focusPoint: IFocus = this.focusPoint(element, d)
+    const focusPoint: FocusPoint = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { focusPoint, d, hideLabel })
     element.on("mouseleave", this.onMouseOut.bind(this))
   }
 
-  focusElement(focusElement: IFocusElement): void {
+  focusElement(focusElement: FocusElement): void {
     this.el
       .selectAll(`path.node.${styles.border}`)
       .filter(filterByMatchers(focusElement.matchers))
@@ -108,7 +108,7 @@ class Nodes {
       )
   }
 
-  highlight(element: TNodeSelection, d: TNode, keepCurrent: boolean = false): void {
+  highlight(element: NodeSelection, d: TNode, keepCurrent: boolean = false): void {
     if (!keepCurrent) {
       this.removeHighlights()
     }
@@ -120,7 +120,7 @@ class Nodes {
     this.el.selectAll(`path.node.${styles.border}`).attr("stroke", this.config.borderColor)
   }
 
-  focusPoint(element: TNodeSelection, d: TNode): IFocus {
+  focusPoint(element: NodeSelection, d: TNode): FocusPoint {
     if (d == null) return
     const offset: number = this.getNodeBoundingRect(element.node()).width / 2
     return {
@@ -139,7 +139,7 @@ class Nodes {
   draw(data: TNode[]): void {
     this.data = data
     this.config = this.state.current.get("config")
-    const groups: TNodeSelection = this.el
+    const groups: NodeSelection = this.el
       .select("g.nodes-group")
       .selectAll("g.node-group")
       .data(this.data, (node: TNode): string => node.id())
@@ -148,7 +148,7 @@ class Nodes {
     this.enterAndUpdate(groups)
   }
 
-  borderScale(scale: TScale): TScale {
+  borderScale(scale: Scale): Scale {
     return (size: number): number => {
       return Math.pow(Math.sqrt(scale(size)) + this.config.nodeBorderWidth, 2)
     }
@@ -162,11 +162,11 @@ class Nodes {
     return `rotate(${nodeShapeOptions[d.shape()].rotation})`
   }
 
-  enterAndUpdate(groups: TNodeSelection): void {
-    const scale: TScale = sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data),
-      borderScale: TScale = this.borderScale(scale)
+  enterAndUpdate(groups: NodeSelection): void {
+    const scale: Scale = sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data),
+      borderScale: Scale = this.borderScale(scale)
 
-    const enteringGroups: TD3Selection = groups
+    const enteringGroups: D3Selection = groups
       .enter()
       .append("g")
       .attr("class", "node-group")
@@ -277,7 +277,7 @@ class Nodes {
   }
 
   updateNodeLabels(): void {
-    const labels: TNodeSelection = this.el
+    const labels: NodeSelection = this.el
       .select("g.nodes-group")
       .selectAll(`text.${styles.label}`)
       .data(this.data, (node: TNode): string => node.id())

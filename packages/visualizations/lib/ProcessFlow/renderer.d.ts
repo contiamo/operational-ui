@@ -1,16 +1,16 @@
 import Nodes from "./renderers/nodes";
 import Links from "./renderers/links";
-import { IFocusElement, IState, IEvents, TSeriesEl, IData } from "./typings";
+import { Data, EventBus, FocusElement, SeriesEl, State } from "./typings";
 declare class Renderer {
     links: Links;
     nodes: Nodes;
-    state: IState;
-    el: TSeriesEl;
-    events: IEvents;
-    constructor(state: IState, events: IEvents, el: TSeriesEl);
-    draw(data: IData): void;
-    focusElement(focusElement: IFocusElement): void;
-    highlightPath(focusElement: IFocusElement): void;
+    state: State;
+    el: SeriesEl;
+    events: EventBus;
+    constructor(state: State, events: EventBus, el: SeriesEl);
+    draw(data: Data): void;
+    focusElement(focusElement: FocusElement): void;
+    highlightPath(focusElement: FocusElement): void;
     close(): void;
 }
 export default Renderer;

@@ -10,7 +10,7 @@ export const widthMargin = (el: any): number => {
   if (!el) {
     return 0
   }
-  const style: any = window.getComputedStyle(el)
+  const style: CSSStyleDeclaration = window.getComputedStyle(el)
   return parseFloat(style.marginLeft) + parseFloat(style.marginRight)
 }
 
@@ -18,7 +18,7 @@ export const widthPadding = (el: any): number => {
   if (!el) {
     return 0
   }
-  const style: any = window.getComputedStyle(el)
+  const style: CSSStyleDeclaration = window.getComputedStyle(el)
   return parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
 }
 
@@ -26,7 +26,7 @@ export const heightMargin = (el: any): number => {
   if (!el) {
     return 0
   }
-  const style: any = window.getComputedStyle(el)
+  const style: CSSStyleDeclaration = window.getComputedStyle(el)
   return parseFloat(style.marginTop) + parseFloat(style.marginBottom)
 }
 
@@ -34,7 +34,7 @@ export const totalWidth = (el: any): number => {
   if (!el) {
     return 0
   }
-  const style: any = window.getComputedStyle(el),
+  const style: CSSStyleDeclaration = window.getComputedStyle(el),
     padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
     border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth)
   return roundedUpWidth(el) + widthMargin(el) - widthPadding(el) + border

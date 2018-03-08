@@ -3,29 +3,30 @@ import Series from "./series"
 import PieChartFocus from "./focus"
 import PieChartLegend from "./legend"
 import Events from "../utils/event_catalog"
-import { StateHandler } from "../utils/state_handler"
+import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
-  Canvas,
+  Accessors,
+  AccessorsObject,
   Components,
-  IAccessors,
-  IChartStateObject,
-  IComputedState,
-  IConfig,
-  IObject,
-  TDatum,
-  TFocusElement
+  Computed,
+  Data,
+  Datum,
+  Facade,
+  FocusElement,
+  PieChartConfig,
+  RendererOptions
 } from "./typings"
 
-class Facade {
+class PieChartFacade implements Facade {
   __disposed: boolean = false
-  canvas: Canvas
-  components: IObject
+  canvas: PieChartCanvas
+  components: Components
   context: Element
   events: EventEmitter
   series: Series
-  state: StateHandler<IConfig>
+  state: StateHandler<PieChartConfig, Data>
 
   constructor(context: Element) {
     this.context = context
@@ -36,7 +37,7 @@ class Facade {
     this.series = this.insertSeries()
   }
 
-  insertState(): StateHandler<IConfig> {
+  insertState(): StateHandler<PieChartConfig, Data> {
     return new StateHandler({
       data: {},
       config: this.initialConfig(),
@@ -45,7 +46,7 @@ class Facade {
     })
   }
 
-  initialConfig(): IConfig {
+  initialConfig(): PieChartConfig {
     return {
       duration: 1e3,
       height: 500,
@@ -70,19 +71,19 @@ class Facade {
     }
   }
 
-  initialAccessors(): IAccessors {
+  initialAccessors(): AccessorsObject {
     return {
       data: {
-        data: (d: IObject): TDatum[] => d.data
+        data: (d: any): Data => d.data
       },
       series: {
-        name: (d: TDatum): string => d.name || "",
-        renderAs: (d: TDatum): IObject[] => d.renderAs
+        name: (d: any): string => d.name || "",
+        renderAs: (d: any): RendererOptions[] => d.renderAs
       }
     }
   }
 
-  initialComputed(): IComputedState {
+  initialComputed(): Computed {
     return {
       canvas: {},
       focus: {},
@@ -90,7 +91,7 @@ class Facade {
     }
   }
 
-  insertCanvas(): Canvas {
+  insertCanvas(): PieChartCanvas {
     return new PieChartCanvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
@@ -102,12 +103,10 @@ class Facade {
         this.events,
         this.canvas.elementFor("legend")
       ),
-      focus: new PieChartFocus(
-        this.state.readOnly(),
-        this.state.computedWriter(["focus"]),
-        this.events,
-        this.canvas.elementFor("focus")
-      )
+      focus: new PieChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
+        main: this.canvas.elementFor("focus"),
+        component: this.canvas.elementFor("componentFocus")
+      })
     }
   }
 
@@ -120,15 +119,15 @@ class Facade {
     )
   }
 
-  data<T>(data?: T): T {
+  data(data?: Data): Data {
     return this.state.data(data)
   }
 
-  config(config?: Partial<IConfig>): IConfig {
+  config(config?: Partial<PieChartConfig>): PieChartConfig {
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: IObject): IObject {
+  accessors(type: string, accessors: Accessors<any>): Accessors<any> {
     return this.state.accessors(type, accessors)
   }
 
@@ -147,7 +146,7 @@ class Facade {
     this.canvas.draw()
     this.series.draw()
 
-    const focusElement: TFocusElement = this.state.config().focusElement
+    const focusElement: FocusElement = this.state.config().focusElement
     !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
       : this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -165,4 +164,4 @@ class Facade {
   }
 }
 
-export default Facade
+export default PieChartFacade

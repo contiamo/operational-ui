@@ -1,29 +1,30 @@
+import ProcessFlowCanvas from "./canvas";
 import Series from "./series";
-import { StateHandler } from "../utils/state_handler";
+import StateHandler from "../utils/state_handler";
 import EventEmitter from "../utils/event_bus";
-import { Canvas, Components, IAccessors, IComputedState, IConfig, IObject } from "./typings";
-declare class Facade {
+import { Accessors, AccessorsObject, Components, Computed, Facade, InputData, ProcessFlowConfig } from "./typings";
+declare class ProcessFlowFacade implements Facade {
     __disposed: boolean;
-    canvas: Canvas;
-    components: IObject;
+    canvas: ProcessFlowCanvas;
+    components: Components;
     context: Element;
     events: EventEmitter;
     series: Series;
-    state: StateHandler<IConfig>;
+    state: StateHandler<ProcessFlowConfig, InputData>;
     constructor(context: Element);
-    insertState(): StateHandler<IConfig>;
-    initialConfig(): IConfig;
-    initialAccessors(): IAccessors;
-    initialComputed(): IComputedState;
-    insertCanvas(): Canvas;
+    insertState(): StateHandler<ProcessFlowConfig, InputData>;
+    initialConfig(): ProcessFlowConfig;
+    initialAccessors(): AccessorsObject;
+    initialComputed(): Computed;
+    insertCanvas(): ProcessFlowCanvas;
     insertComponents(): Components;
     insertSeries(): Series;
-    data<T>(data?: T): T;
-    config(config?: Partial<IConfig>): IConfig;
-    accessors(type: string, accessors: IObject): IObject;
+    data(data?: InputData): InputData;
+    config(config?: Partial<ProcessFlowConfig>): ProcessFlowConfig;
+    accessors(type: string, accessors: Accessors<any>): Accessors<any>;
     on(event: string, handler: any): void;
     off(event: string, handler: any): void;
     draw(): Element;
     close(): void;
 }
-export default Facade;
+export default ProcessFlowFacade;

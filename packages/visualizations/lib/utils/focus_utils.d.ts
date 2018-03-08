@@ -1,3 +1,3 @@
-import { IObject } from "./typings";
-declare const FocusUtils: IObject;
+import { Object } from "./typings";
+declare const FocusUtils: Object<any>;
 export default FocusUtils;

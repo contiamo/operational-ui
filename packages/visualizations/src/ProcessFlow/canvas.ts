@@ -1,19 +1,18 @@
 import * as d3 from "d3-selection"
-import { Canvas, IEvents, IObject, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
+import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter } from "./typings"
 import Events from "../utils/event_catalog"
 import * as styles from "../utils/styles"
 import { forEach } from "lodash/fp"
 
 class ProcessFlowCanvas implements Canvas {
-  chartContainer: TD3Selection
-  el: TSeriesEl
-  events: IEvents
-  protected elements: IObject = {}
-  protected state: IState
-  protected elMap: IObject = {}
-  stateWriter: TStateWriter
+  chartContainer: D3Selection
+  el: SeriesEl
+  events: EventBus
+  protected state: State
+  protected elMap: Object<D3Selection> = {}
+  stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -24,14 +23,14 @@ class ProcessFlowCanvas implements Canvas {
   }
 
   // Chart container
-  insertChartContainer(context: Element): TD3Selection {
+  insertChartContainer(context: Element): D3Selection {
     const container: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     return d3.select(container).attr("class", styles.chartContainer)
   }
 
   // El
-  insertEl(): TSeriesEl {
+  insertEl(): SeriesEl {
     const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     el.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     el.addEventListener("mouseleave", this.onMouseLeave.bind(this))
@@ -56,7 +55,7 @@ class ProcessFlowCanvas implements Canvas {
 
   // Focus
   insertFocus(): void {
-    const focus: TD3Selection = d3
+    const focus: D3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
       .style("visibility", "hidden")
@@ -81,7 +80,6 @@ class ProcessFlowCanvas implements Canvas {
     this.el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this))
     this.el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this))
     this.el.node().removeEventListener("click", this.onClick.bind(this))
-    this.elements = {}
     this.chartContainer.remove()
     this.chartContainer = undefined
     this.el = undefined

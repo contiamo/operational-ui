@@ -3,7 +3,7 @@ import { withTheme } from "glamorous"
 import { defaults, forEach } from "lodash/fp"
 import { Theme } from "@operational/theme"
 
-export interface IProps {
+export interface Props {
   style?: {}
   className?: string
   facade: any
@@ -12,11 +12,11 @@ export interface IProps {
   config?: any
 }
 
-export interface IPropsWithTheme extends IProps {
+export interface PropsWithTheme extends Props {
   theme: Theme
 }
 
-class VisualizationWrapperInternal extends React.Component<IPropsWithTheme, {}> {
+class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
   viz: any
   containerNode: HTMLElement
 
@@ -55,8 +55,8 @@ class VisualizationWrapperInternal extends React.Component<IPropsWithTheme, {}> 
   }
 }
 
-const VisualizationWrapper = (props: IPropsWithTheme) => <VisualizationWrapperInternal {...props} />
+const VisualizationWrapper = (props: PropsWithTheme) => <VisualizationWrapperInternal {...props} />
 
-const WrappedVisualizationWrapper = withTheme(VisualizationWrapper) as React.SFC<IProps>
+const WrappedVisualizationWrapper = withTheme(VisualizationWrapper) as React.SFC<Props>
 
 export default WrappedVisualizationWrapper

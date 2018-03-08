@@ -1,13 +1,13 @@
-import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./typings"
+import { ClickPayload, D3Selection, Datum, EventBus, Object, State, StateWriter, SunburstConfig } from "./typings"
 import Events from "../utils/event_catalog"
 
 class RootLabel {
-  el: TD3Selection
-  events: IEvents
-  state: IState
-  stateWriter: TStateWriter
+  el: D3Selection
+  events: EventBus
+  state: State
+  stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -15,11 +15,11 @@ class RootLabel {
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.update.bind(this))
   }
 
-  update(payload: IObject): void {
-    const computed: IObject = this.state.current.get("computed")
-    const config: IObject = this.state.current.get("config")
-    const renderer: IObject = computed.renderer
-    const drawingDims: IObject = computed.canvas.drawingDims
+  update(payload: ClickPayload): void {
+    const computed: Object<any> = this.state.current.get("computed")
+    const config: SunburstConfig = this.state.current.get("config")
+    const renderer: Object<any> = computed.renderer
+    const drawingDims: Object<number> = computed.canvas.drawingDims
     const fixedNode: any = renderer.zoomNode || renderer.topNode
 
     this.el.select("span.value").text(renderer.data.length > 0 ? config.numberFormatter(fixedNode.value) : null)

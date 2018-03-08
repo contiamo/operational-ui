@@ -1,19 +1,13 @@
-import { IEvents, IObject, IState, TD3Selection } from "./typings";
+import { ComponentHoverPayload, D3Selection, EventBus, Object, State } from "./typings";
 declare class ComponentFocus {
-    el: TD3Selection;
-    events: IEvents;
-    state: IState;
-    constructor(state: IState, el: TD3Selection, events: IEvents);
-    onComponentHover(payload: {
-        component: TD3Selection;
-        options: IObject;
-    }): void;
-    draw(payload: {
-        component: TD3Selection;
-        options: IObject;
-    }): void;
+    el: D3Selection;
+    events: EventBus;
+    state: State;
+    constructor(state: State, el: D3Selection, events: EventBus);
+    onComponentHover(payload: ComponentHoverPayload): void;
+    draw(payload: ComponentHoverPayload): void;
     onMouseOut(): void;
-    onClick(configOptions: IObject): () => void;
+    onClick(configOptions: Object<any>): () => void;
     remove(): void;
 }
 export default ComponentFocus;

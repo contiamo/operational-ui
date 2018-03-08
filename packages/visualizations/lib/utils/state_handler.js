@@ -4,7 +4,7 @@ var state_1 = require("./state");
 var fp_1 = require("lodash/fp");
 var StateHandler = /** @class */ (function () {
     function StateHandler(obj) {
-        var initial = new state_1.State(obj);
+        var initial = new state_1.default(obj);
         this.state = { current: initial, previous: initial.clone() };
     }
     StateHandler.prototype.captureState = function () {
@@ -59,5 +59,5 @@ var StateHandler = /** @class */ (function () {
     };
     return StateHandler;
 }());
-exports.StateHandler = StateHandler;
+exports.default = StateHandler;
 //# sourceMappingURL=state_handler.js.map

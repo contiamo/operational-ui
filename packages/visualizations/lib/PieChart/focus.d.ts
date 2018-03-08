@@ -1,16 +1,13 @@
 import ComponentFocus from "../utils/component_focus";
-import { Focus, IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings";
+import { D3Selection, EventBus, Focus, HoverPayload, Object, SeriesEl, State, StateWriter } from "./typings";
 declare class PieChartFocus implements Focus {
-    el: TSeriesEl;
+    el: SeriesEl;
     componentFocus: ComponentFocus;
-    state: IState;
-    stateWriter: TStateWriter;
-    events: IEvents;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
-    onElementHover(payload: {
-        focusPoint: IObject;
-        d: IObject;
-    }): void;
+    state: State;
+    stateWriter: StateWriter;
+    events: EventBus;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>);
+    onElementHover(payload: HoverPayload): void;
     onElementOut(): void;
     onMouseLeave(): void;
     remove(): void;

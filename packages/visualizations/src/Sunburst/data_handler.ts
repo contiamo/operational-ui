@@ -1,41 +1,41 @@
-import { IAccessors, IObject, IState, TDatum, TStateWriter } from "./typings"
-import { hierarchy as d3Hierarchy, partition as d3Partition } from "d3-hierarchy"
+import { Accessor, Accessors, Datum, RawData, State, StateWriter } from "./typings"
+import { hierarchy as d3Hierarchy, partition as d3Partition, HierarchyNode } from "d3-hierarchy"
 import { filter, forEach, isEmpty, map, reduce } from "lodash/fp"
 
 class DataHandler {
-  color: (d: TDatum) => string
-  data: TDatum[]
-  name: (d: TDatum) => string
-  state: IState
-  stateWriter: TStateWriter
-  topNode: TDatum
+  color: (d: Datum) => string
+  data: Datum[]
+  name: (d: Datum) => string
+  state: State
+  stateWriter: StateWriter
+  topNode: Datum
   total: number
-  value: (d: TDatum) => number
+  value: (d: Datum) => number
 
-  constructor(state: IState, stateWriter: TStateWriter) {
+  constructor(state: State, stateWriter: StateWriter) {
     this.state = state
     this.stateWriter = stateWriter
   }
 
   assignAccessors(): void {
-    const accessors: IAccessors = this.state.current.get("accessors").series
+    const accessors: Accessors<Datum> = this.state.current.get("accessors").series
 
     // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
-    forEach.convert({ cap: false })((accessor: (d: TDatum, ...args: any[]) => any, key: string): void => {
-      ;(this as any)[key] = (d: TDatum): any => (d.data ? accessor(d.data) : accessor(d))
+    forEach.convert({ cap: false })((accessor: Accessor<any, any>, key: string): void => {
+      ;(this as any)[key] = (d: Datum): any => (d.data ? accessor(d.data) : accessor(d))
     })(accessors)
   }
 
-  prepareData(): TDatum[] {
+  prepareData(): Datum[] {
     this.assignAccessors()
 
-    const data: IObject = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
+    const data: RawData = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
 
     const sortingFunction: any = this.state.current.get("config").sort
-      ? (a: TDatum, b: TDatum) => b.value - a.value
+      ? (a: Datum, b: Datum) => b.value - a.value
       : undefined
 
-    const hierarchyData = d3Hierarchy(data)
+    const hierarchyData: HierarchyNode<RawData> = d3Hierarchy(data)
       .each(this.assignColors.bind(this))
       .each(this.assignNames.bind(this))
       .eachAfter(this.assignValues.bind(this))
@@ -45,17 +45,17 @@ class DataHandler {
 
     this.topNode = d3Partition()(hierarchyData)
       .descendants()
-      .find((d: TDatum): boolean => d.depth === 0)
+      .find((d: Datum): boolean => d.depth === 0)
 
     this.stateWriter("topNode", this.topNode)
 
     this.data = d3Partition()(hierarchyData)
       .descendants()
-      .filter((d: TDatum): boolean => !isEmpty(d.data))
+      .filter((d: Datum): boolean => !isEmpty(d.data))
 
     this.checkDataValidity()
 
-    forEach((d: TDatum): void => {
+    forEach((d: Datum): void => {
       d.zoomable = d.parent && !!d.children
     })(this.data)
 
@@ -90,15 +90,15 @@ class DataHandler {
 
   checkDataValidity(): void {
     // All data points must have a value assigned
-    const noValueData: TDatum[] = filter((d: TDatum): boolean => !d.value)(this.data)
+    const noValueData: Datum[] = filter((d: Datum): boolean => !d.value)(this.data)
 
     if (noValueData.length > 0) {
       throw new Error(`The following nodes do not have values: ${map(this.name)(noValueData)}`)
     }
 
     // Parent nodes cannot be smaller than the sum of their children
-    const childrenExceedParent: TDatum[] = filter((d: TDatum): boolean => {
-      const childSum: number = reduce((sum: number, child: TDatum): number => sum + child.value, 0)(d.children)
+    const childrenExceedParent: Datum[] = filter((d: Datum): boolean => {
+      const childSum: number = reduce((sum: number, child: Datum): number => sum + child.value, 0)(d.children)
       return d.value < childSum
     })(this.data)
 

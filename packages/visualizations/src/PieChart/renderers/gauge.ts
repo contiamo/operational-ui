@@ -3,11 +3,11 @@ import Events from "../../utils/event_catalog"
 import { filter, find, findIndex, forEach, last, map, reduce } from "lodash/fp"
 import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
-import { IObject, TD3Selection, TDatum } from "../typings"
+import { ComputedDatum, D3Selection, Datum, LegendDatum, Object } from "../typings"
 import * as styles from "./styles"
 
 class Gauge extends AbstractRenderer {
-  comparison: IObject
+  comparison: Object<any>
   extent: string
   target: number
 
@@ -24,7 +24,7 @@ class Gauge extends AbstractRenderer {
   }
 
   runningTotal(): number[] {
-    return reduce((memo: number[], datapoint: TDatum): number[] => {
+    return reduce((memo: number[], datapoint: Datum): number[] => {
       const previous: number = last(memo) || 0
       memo.push(previous + datapoint.value)
       return memo
@@ -38,7 +38,7 @@ class Gauge extends AbstractRenderer {
     // If target has been exceeded, reduce last value(s)
     if (this.total >= this.target) {
       const index: number = findIndex((value: number): boolean => value >= this.target)(runningTotal)
-      forEach((datapoint: TDatum, i: number): void => {
+      forEach((datapoint: Datum, i: number): void => {
         if (i === index) {
           datapoint.value = i > 0 ? this.target - runningTotal[i - 1] : this.target
         } else if (i > index) {
@@ -74,13 +74,13 @@ class Gauge extends AbstractRenderer {
   }
 
   updateComparison(): void {
-    const comparison: TD3Selection = this.el
+    const comparison: D3Selection = this.el
       .selectAll(`g.${styles.comparison}`)
       .data(this.comparison ? [this.comparison] : [])
 
     comparison.exit().remove()
 
-    const enter: TD3Selection = comparison
+    const enter: D3Selection = comparison
       .enter()
       .append("svg:g")
       .attr("class", styles.comparison)
@@ -95,7 +95,7 @@ class Gauge extends AbstractRenderer {
       .attrTween("d", this.lineTween.bind(this))
   }
 
-  onMouseOver(d: TDatum): void {
+  onMouseOver(d: ComputedDatum): void {
     if (d.data.unfilled) {
       this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
       return
@@ -109,7 +109,7 @@ class Gauge extends AbstractRenderer {
 
   // Establish coordinate system with 0,0 being the center of the width, height rectangle
   computeTranslate(): [number, number] {
-    const drawingDims: IObject = this.state.current.get("computed").canvas.drawingContainerDims
+    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingContainerDims
     const yTranslate: number =
       this.extent === "full" ? drawingDims.height / 2 : (drawingDims.height + this.computed.r) / 2
 
@@ -127,7 +127,7 @@ class Gauge extends AbstractRenderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: TDatum, i: number): (t: number) => string {
+  arcTween(d: ComputedDatum, i: number): (t: number) => string {
     const angleRange: [number, number] = this.angleRange()
     let old: any
     let s0: number
@@ -136,7 +136,7 @@ class Gauge extends AbstractRenderer {
     // Segments transition to and from the start/left of the gauge.
     if (!d.data.unfilled) {
       old =
-        filter((datapoint: TDatum): boolean => {
+        filter((datapoint: ComputedDatum): boolean => {
           return !datapoint.data.unfilled
         })(this.previous.data) || []
 
@@ -155,7 +155,7 @@ class Gauge extends AbstractRenderer {
       }
       // The unfilled part of the gauge transitions to and from the end/right of the gauge.
     } else {
-      old = find((datapoint: TDatum): boolean => {
+      old = find((datapoint: ComputedDatum): boolean => {
         return datapoint.data.unfilled
       })(this.previous.data)
       if (old) {
@@ -174,19 +174,20 @@ class Gauge extends AbstractRenderer {
     return (t: number): string => this.computed.arc(f(t))
   }
 
-  lineTween(comparison: IObject): (t: number) => string {
+  lineTween(comparison: Object<any>): (t: number) => string {
     // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
     // Here, we need '0' to be horizontal to left of origin.
     const range: number[] = map((value: number): number => value + Math.PI / 2)(this.angleRange())
-    const angle = (d: TDatum): number =>
+    const angle = (d: Object<number>): number =>
       d3ScaleLinear()
         .range(range)
         .domain([0, this.target])(d.value)
-    const xOuter = (d: TDatum): number => -d.r * Math.cos(angle(d))
-    const yOuter = (d: TDatum): number => -d.r * Math.sin(angle(d))
-    const xInner = (d: TDatum): number => -d.inner * Math.cos(angle(d))
-    const yInner = (d: TDatum): number => -d.inner * Math.sin(angle(d))
-    const path = (d: TDatum): string => `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`
+    const xOuter = (d: Object<number>): number => -d.r * Math.cos(angle(d))
+    const yOuter = (d: Object<number>): number => -d.r * Math.sin(angle(d))
+    const xInner = (d: Object<number>): number => -d.inner * Math.cos(angle(d))
+    const yInner = (d: Object<number>): number => -d.inner * Math.sin(angle(d))
+    const path = (d: Object<number>): string =>
+      `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`
     const oldValue: number = this.previous.comparison ? this.value(this.previous.comparison) : 0
     const f = interpolateObject(
       { inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue },
@@ -195,8 +196,8 @@ class Gauge extends AbstractRenderer {
     return (t: number): string => path(f(t))
   }
 
-  dataForLegend(): IObject[] {
-    const data: IObject[] = map((datum: IObject): IObject => {
+  dataForLegend(): LegendDatum[] {
+    const data: LegendDatum[] = map((datum: ComputedDatum): LegendDatum => {
       return {
         label: this.key(datum),
         color: this.color(datum)

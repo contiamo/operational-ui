@@ -1,5 +1,4 @@
 import Events from "../utils/event_catalog"
-import { Legend, IEvents, IObject, IState, TStateWriter, TD3Selection } from "./typings"
 import * as d3 from "d3-selection"
 import * as $ from "jquery"
 import { every, filter, find, forEach, get, groupBy, keys, map, some } from "lodash/fp"
@@ -7,14 +6,24 @@ import * as localStyles from "./styles"
 import * as globalStyles from "../utils/styles"
 import { withD3Element } from "../utils/d3_utils"
 import { roundedUpHeight, widthPadding, heightMargin, totalWidth } from "../utils/legend_utils"
+import {
+  ComponentConfigOptions,
+  D3Selection,
+  EventBus,
+  Legend,
+  LegendDatum,
+  PieChartConfig,
+  State,
+  StateWriter
+} from "./typings"
 
 class PieChartLegend implements Legend {
-  events: IEvents
-  legend: TD3Selection
-  state: IState
-  stateWriter: TStateWriter
+  events: EventBus
+  legend: D3Selection
+  state: State
+  stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -28,7 +37,7 @@ class PieChartLegend implements Legend {
       return
     }
 
-    const legends: TD3Selection = this.legend
+    const legends: D3Selection = this.legend
       .selectAll(`div.${globalStyles.seriesLegend}`)
       .data(this.data(), get("label"))
 
@@ -41,16 +50,18 @@ class PieChartLegend implements Legend {
       .style("float", "left")
       .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
-        withD3Element((d: IObject, el: HTMLElement): void => {
-          const element: TD3Selection = d3.select(el)
+        withD3Element((d: LegendDatum, el: HTMLElement): void => {
+          // @TODO check type of d
+          const element: D3Selection = d3.select(el)
           element.append("div").attr("class", "color")
           element.append("div").attr("class", "name")
         })
       )
       .merge(legends)
       .each(
-        withD3Element((d: IObject, el: HTMLElement): void => {
-          const element: TD3Selection = d3.select(el)
+        withD3Element((d: LegendDatum, el: HTMLElement): void => {
+          // @TODO check type of d
+          const element: D3Selection = d3.select(el)
           element.select("div.color").style("background-color", get("color"))
           element.select("div.name").html(get("label"))
         })
@@ -63,15 +74,15 @@ class PieChartLegend implements Legend {
 
   updateComparisonLegend(): void {
     // Only needed for gauges, if comparison value is given.
-    const data: IObject[] = filter((d: IObject): boolean => d.comparison)(
+    const data: LegendDatum[] = filter((d: LegendDatum): boolean => d.comparison)(
       this.state.current.get("computed").series.dataForLegend
     )
 
-    const legends: TD3Selection = this.legend.selectAll(`div.comparison`).data(data)
+    const legends: D3Selection = this.legend.selectAll(`div.comparison`).data(data)
 
     legends.exit().remove()
 
-    const enter: TD3Selection = legends
+    const enter: D3Selection = legends
       .enter()
       .append("div")
       .attr("class", `comparison ${localStyles.comparisonLegend}`)
@@ -84,22 +95,22 @@ class PieChartLegend implements Legend {
     enter
       .merge(legends)
       .select("div.name")
-      .html((d: IObject): string => d.label)
+      .html((d: LegendDatum): string => d.label)
   }
 
-  data(): IObject[] {
-    return filter((d: IObject): boolean => !d.comparison)(this.state.current.get("computed").series.dataForLegend)
+  data(): LegendDatum[] {
+    return filter((d: LegendDatum): boolean => !d.comparison)(this.state.current.get("computed").series.dataForLegend)
   }
 
-  onComponentHover(d: IObject, el: HTMLElement): void {
+  onComponentHover(d: LegendDatum, el: HTMLElement): void {
     this.events.emit(Events.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) })
   }
 
-  currentOptions(datum: IObject): IObject {
-    return datum.type === "comparison"
+  currentOptions(datum: LegendDatum): ComponentConfigOptions {
+    return datum.comparison
       ? {
           options: {
-            data: datum.data
+            key: datum.label
           },
           seriesType: "comparison",
           type: "series"
@@ -114,11 +125,8 @@ class PieChartLegend implements Legend {
   }
 
   updateDimensions(): void {
-    const legendNode: any = this.legend.node(),
-      config: IObject = this.state.current.get("config"),
-      colorBoxWidth: number = totalWidth(this.legend.select(".color").node()),
-      seriesLegendPadding: any = widthPadding(this.legend.selectAll(`.${globalStyles.seriesLegend}`).node())
-
+    const legendNode: Element = this.legend.node()
+    const config: PieChartConfig = this.state.current.get("config")
     const h: number = config.height
     const lh: number = roundedUpHeight(legendNode) + heightMargin(legendNode)
 

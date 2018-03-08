@@ -183,7 +183,9 @@ var Gauge = /** @class */ (function (_super) {
         var yOuter = function (d) { return -d.r * Math.sin(angle(d)); };
         var xInner = function (d) { return -d.inner * Math.cos(angle(d)); };
         var yInner = function (d) { return -d.inner * Math.sin(angle(d)); };
-        var path = function (d) { return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(","); };
+        var path = function (d) {
+            return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(",");
+        };
         var oldValue = this.previous.comparison ? this.value(this.previous.comparison) : 0;
         var f = d3_interpolate_1.interpolateObject({ inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue }, { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) });
         return function (t) { return path(f(t)); };

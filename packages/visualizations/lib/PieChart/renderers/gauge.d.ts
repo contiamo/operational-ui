@@ -1,7 +1,7 @@
 import AbstractRenderer from "./abstract_renderer";
-import { IObject, TDatum } from "../typings";
+import { ComputedDatum, LegendDatum, Object } from "../typings";
 declare class Gauge extends AbstractRenderer {
-    comparison: IObject;
+    comparison: Object<any>;
     extent: string;
     target: number;
     checkData(): void;
@@ -12,13 +12,13 @@ declare class Gauge extends AbstractRenderer {
     compute(): void;
     updateDraw(): void;
     updateComparison(): void;
-    onMouseOver(d: TDatum): void;
+    onMouseOver(d: ComputedDatum): void;
     totalForPercentages(): number;
     computeTranslate(): [number, number];
     angleRange(): [number, number];
     totalYOffset(): string;
-    arcTween(d: TDatum, i: number): (t: number) => string;
-    lineTween(comparison: IObject): (t: number) => string;
-    dataForLegend(): IObject[];
+    arcTween(d: ComputedDatum, i: number): (t: number) => string;
+    lineTween(comparison: Object<any>): (t: number) => string;
+    dataForLegend(): LegendDatum[];
 }
 export default Gauge;

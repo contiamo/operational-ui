@@ -16,6 +16,7 @@ var ProcessFlowFocus = /** @class */ (function () {
         this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
     ProcessFlowFocus.prototype.onElementHover = function (payload) {
+        console.log(payload);
         // Remove the current focus label, if there is one
         this.remove();
         if (payload.hideLabel) {
@@ -35,6 +36,7 @@ var ProcessFlowFocus = /** @class */ (function () {
             .text(datum.label())
             .append("span")
             .text(" (" + this.state.current.get("config").numberFormatter(datum.size()) + ")");
+        // @TODO remove? Doesn't seem to be doing anything...
         if (datum.content().length > 0) {
             this.appendContent(content, datum.content());
         }

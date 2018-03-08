@@ -2,18 +2,18 @@ import FocusUtils from "../utils/focus_utils"
 import Events from "../utils/event_catalog"
 import ComponentFocus from "../utils/component_focus"
 import * as d3 from "d3-selection"
-import { Focus, IEvents, IObject, IState, TD3Selection, TDatum, TSeriesEl, TStateWriter } from "./typings"
+import { D3Selection, EventBus, Focus, HoverPayload, Object, SeriesEl, State, StateWriter } from "./typings"
 
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
 class PieChartFocus implements Focus {
-  el: TSeriesEl
+  el: SeriesEl
   componentFocus: ComponentFocus
-  state: IState
-  stateWriter: TStateWriter
-  events: IEvents
+  state: State
+  stateWriter: StateWriter
+  events: EventBus
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -24,12 +24,12 @@ class PieChartFocus implements Focus {
     this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
   }
 
-  onElementHover(payload: { focusPoint: IObject; d: IObject }): void {
+  onElementHover(payload: HoverPayload): void {
     this.remove()
 
     FocusUtils.drawHidden(this.el, "element")
 
-    const content: TD3Selection = this.el.append("xhtml:ul")
+    const content: D3Selection = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")

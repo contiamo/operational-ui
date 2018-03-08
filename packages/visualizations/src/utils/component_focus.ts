@@ -1,31 +1,31 @@
-import { IEvents, IObject, IState, TD3Selection } from "./typings"
+import { ComponentHoverPayload, Config, D3Selection, EventBus, Object, State } from "./typings"
 import Events from "./event_catalog"
 import * as styles from "./styles"
 
 class ComponentFocus {
-  el: TD3Selection
-  events: IEvents
-  state: IState
+  el: D3Selection
+  events: EventBus
+  state: State
 
-  constructor(state: IState, el: TD3Selection, events: IEvents) {
+  constructor(state: State, el: D3Selection, events: EventBus) {
     this.state = state
     this.el = el.append("xhtml:div").attr("class", `${styles.focusLegend} ${styles.componentFocus}`)
     this.events = events
     this.events.on(Events.FOCUS.COMPONENT.MOUSEOVER, this.onComponentHover.bind(this))
   }
 
-  onComponentHover(payload: { component: TD3Selection; options: IObject }): void {
+  onComponentHover(payload: ComponentHoverPayload): void {
     this.remove()
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
     this.draw(payload)
   }
 
-  draw(payload: { component: TD3Selection; options: IObject }): void {
+  draw(payload: ComponentHoverPayload): void {
     const componentPosition: ClientRect = payload.component.node().getBoundingClientRect()
     const canvasPosition: ClientRect = this.state.current.get("computed").canvas.containerRect
     const topBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-top-width"], 10)
     const leftBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-left-width"], 10)
-    const config: IObject = this.state.current.get("config")
+    const config: Config = this.state.current.get("config")
 
     // Prevent component focus from going out of canvas.
     let top: number = componentPosition.top - canvasPosition.top - topBorderWidth
@@ -64,7 +64,7 @@ class ComponentFocus {
     this.remove()
   }
 
-  onClick(configOptions: IObject): () => void {
+  onClick(configOptions: Object<any>): () => void {
     return (): void => {
       console.log(configOptions)
     }

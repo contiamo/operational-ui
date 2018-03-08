@@ -1,11 +1,9 @@
-import { IObject, Focus, Legend } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter, Legend, Canvas } from "../utils/typings";
-export declare type TFocusElement = string;
-export interface IConfig {
-    duration: number;
-    focusElement?: TFocusElement;
-    height: number;
-    hidden: boolean;
+import { Arc, Pie, PieArcDatum } from "d3-shape";
+import { Accessor, Config, Object, Focus, Legend, Facade } from "../utils/typings";
+export { Accessor, Accessors, Canvas, ComponentConfigOptions, D3Selection, EventBus, Legend, Object, Partial, SeriesEl, State, StateWriter } from "../utils/typings";
+export declare type FocusElement = string;
+export interface PieChartConfig extends Config {
+    focusElement?: FocusElement;
     legend: true;
     maxWidth: number;
     maxLegendRatio: number;
@@ -20,39 +18,81 @@ export interface IConfig {
     outerBorderMargin: number;
     palette: string[];
     showComponentFocus: boolean;
-    uid: string;
-    visualizationName: string;
-    width: number;
 }
-export declare type TDatum = IObject;
-export interface IDataAccessors {
-    data: (d: any) => any;
+export declare type Datum = {
+    value?: number;
+    key?: string;
+    percentage?: number;
+    unfilled?: boolean;
+};
+export declare type Data = Datum[];
+export interface LegendDatum {
+    label: string;
+    color?: string;
+    comparison?: boolean;
 }
-export interface ISeriesAccessors {
-    name: (d: TDatum) => string;
-    renderAs: (d: TDatum) => any;
+export interface DataAccessors {
+    data: Accessor<any, Data>;
 }
-export interface IAccessors {
-    data: IDataAccessors;
-    series: ISeriesAccessors;
+export interface SeriesAccessors {
+    name: Accessor<Datum, string>;
+    renderAs: Accessor<Datum, any>;
 }
-export interface IComputedState {
-    canvas: IObject;
-    focus: IObject;
-    series: IObject;
+export interface AccessorsObject {
+    data: DataAccessors;
+    series: SeriesAccessors;
 }
-export interface IMousePosition {
-    absolute: {
-        x: number;
-        y: number;
+export interface RendererAccessors {
+    key: Accessor<Datum | ComputedDatum, string>;
+    value: Accessor<Datum | ComputedDatum, number>;
+    color: Accessor<Datum | ComputedDatum, string>;
+}
+export interface Computed {
+    canvas: Object<any>;
+    focus: Object<any>;
+    series: Object<any>;
+}
+export interface DatumInfo {
+    key: string;
+    value: number;
+    percentage: number;
+}
+export interface HoverPayload {
+    focusPoint: {
+        centroid: [number, number];
     };
-    relative: {
-        x: number;
-        y: number;
-    };
+    d: DatumInfo;
 }
-export declare type Focus = Focus<IObject, TDatum>;
+export declare type Focus = Focus<HoverPayload>;
 export interface Components {
-    focus: Focus<IObject, TDatum>;
+    focus: Focus<HoverPayload>;
     legend: Legend;
+}
+export declare type Facade = Facade<PieChartConfig, AccessorsObject, Computed, Components, Data>;
+export interface RendererOptions {
+    type: "donut" | "polar" | "gauge";
+    accessors?: Object<Accessor<Datum, any>>;
+    extent?: "semi" | "full";
+    comparison?: {
+        id: string;
+        size: number;
+    };
+    target?: number;
+}
+export interface ComputedInitial {
+    layout: Pie<any, any>;
+    total: number;
+}
+export interface ComputedArcs {
+    arc: Arc<any, any>;
+    arcOver: Arc<any, any>;
+    inner: number;
+    innerHover: number;
+    r: number;
+    rHover: number;
+}
+export declare type ComputedDatum = PieArcDatum<Datum>;
+export interface ComputedData extends ComputedInitial, ComputedArcs {
+    comparison?: any;
+    data: ComputedDatum[];
 }

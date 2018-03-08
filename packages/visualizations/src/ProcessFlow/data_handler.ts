@@ -3,40 +3,39 @@ import Link from "./link"
 import Layout from "./layout"
 import { bind, extend, find, flow, forEach, get, groupBy, map, sortBy, times } from "lodash/fp"
 import {
-  TNode,
+  AccessorsObject,
+  Data,
+  InputData,
+  Journey,
+  LinkAccessors,
+  LinkAttrs,
+  NodeAccessors,
+  ProcessFlowConfig,
+  State,
+  StateWriter,
   TLink,
-  IJourney,
-  IData,
-  IInputData,
-  ILinkAttrs,
-  IState,
-  IBreakdown,
-  IConfig,
-  TStateWriter,
-  INodeAccessors,
-  ILinkAccessors,
-  IAccessors
+  TNode
 } from "./typings"
 
 class DataHandler {
-  journeys: IJourney[]
+  journeys: Journey[]
   nodes: TNode[]
   links: TLink[]
-  nodeAccessors: INodeAccessors
-  linkAccessors: ILinkAccessors
-  state: IState
-  stateWriter: TStateWriter
+  nodeAccessors: NodeAccessors
+  linkAccessors: LinkAccessors
+  state: State
+  stateWriter: StateWriter
   layout: Layout
 
-  constructor(state: IState, stateWriter: TStateWriter) {
+  constructor(state: State, stateWriter: StateWriter) {
     this.state = state
     this.stateWriter = stateWriter
     this.layout = new Layout(state)
   }
 
-  prepareData(): IData {
+  prepareData(): Data {
     const data = this.state.current.get("data")
-    const accessors: IAccessors = this.state.current.get("accessors")
+    const accessors: AccessorsObject = this.state.current.get("accessors")
     this.journeys = accessors.data.journeys(data)
     this.initializeNodes(accessors.data.nodes(data))
     this.initializeLinks()
@@ -75,7 +74,7 @@ class DataHandler {
   }
 
   calculateNodeSizes(): void {
-    forEach((journey: IJourney): void => {
+    forEach((journey: Journey): void => {
       forEach((nodeId: string): void => {
         this.findNode(nodeId).attributes.size += journey.size
       })(journey.path)
@@ -83,7 +82,7 @@ class DataHandler {
   }
 
   calculateStartsAndEnds(): void {
-    forEach((journey: IJourney): void => {
+    forEach((journey: Journey): void => {
       if (journey.path.length > 1) {
         this.findNode(journey.path[0]).journeyStarts += journey.size
         this.findNode(journey.path[journey.path.length - 1]).journeyEnds += journey.size
@@ -105,12 +104,12 @@ class DataHandler {
     return find(checkIds)(this.links)
   }
 
-  addLink(attrs: ILinkAttrs): TLink {
+  addLink(attrs: LinkAttrs): TLink {
     return new Link(attrs, this.state.current.get("accessors").link)
   }
 
   computeLinks(): void {
-    forEach((journey: IJourney): void => {
+    forEach((journey: Journey): void => {
       const path: string[] = journey.path
       const computeLink = (i: number): void => {
         const sourceId: string = path[i]
@@ -122,7 +121,7 @@ class DataHandler {
         if (existingLink) {
           existingLink.attributes.size += journey.size
         } else {
-          const linkAttrs: ILinkAttrs = {
+          const linkAttrs: LinkAttrs = {
             source: sourceNode,
             sourceId: sourceNode.id(),
             target: targetNode,
@@ -140,7 +139,7 @@ class DataHandler {
   }
 
   xGridSpacing(): number {
-    const config: IConfig = this.state.current.get("config"),
+    const config: ProcessFlowConfig = this.state.current.get("config"),
       finiteWidth: boolean = isFinite(config.width),
       xValues: number[] = map(get("x"))(this.layout.nodes),
       maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
@@ -154,7 +153,7 @@ class DataHandler {
   }
 
   yGridSpacing(nRows: number): number {
-    const config: IConfig = this.state.current.get("config"),
+    const config: ProcessFlowConfig = this.state.current.get("config"),
       finiteHeight: boolean = isFinite(config.height),
       spacing: number = isFinite(config.height)
         ? Math.min(config.height / (nRows + 1), config.verticalNodeSpacing)

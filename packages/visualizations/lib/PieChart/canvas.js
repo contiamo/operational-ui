@@ -99,9 +99,8 @@ var PieChartCanvas = /** @class */ (function () {
     };
     // Focus elements
     PieChartCanvas.prototype.insertFocusElements = function () {
-        var main = this.insertFocusLabel();
-        var component = this.insertComponentFocus();
-        this.elMap.focus = { main: main, component: component };
+        this.elMap.focus = this.insertFocusLabel();
+        this.elMap.componentFocus = this.insertComponentFocus();
     };
     PieChartCanvas.prototype.insertFocusLabel = function () {
         var focusEl = d3

@@ -1,22 +1,22 @@
 import "d3-transition";
-import { IConfig, IEvents, IFocus, IFocusElement, IState, TLink, TLinkSelection, TScale, TSeriesEl } from "../typings";
+import { EventBus, FocusElement, FocusPoint, LinkSelection, ProcessFlowConfig, Scale, SeriesEl, State, TLink } from "../typings";
 declare class Links {
-    config: IConfig;
+    config: ProcessFlowConfig;
     data: TLink[];
-    el: TSeriesEl;
-    events: IEvents;
-    state: IState;
-    constructor(state: IState, events: IEvents, el: TSeriesEl);
+    el: SeriesEl;
+    events: EventBus;
+    state: State;
+    constructor(state: State, events: EventBus, el: SeriesEl);
     onMouseOver(d: TLink, element: HTMLElement): void;
-    mouseOver(element: TLinkSelection, d: TLink, hideLabel?: boolean): void;
-    focusElement(focusElement: IFocusElement): void;
-    highlight(element: TLinkSelection, d: TLink, keepCurrent?: boolean): void;
+    mouseOver(element: LinkSelection, d: TLink, hideLabel?: boolean): void;
+    focusElement(focusElement: FocusElement): void;
+    highlight(element: LinkSelection, d: TLink, keepCurrent?: boolean): void;
     removeHighlights(): void;
-    focusPoint(element: TLinkSelection, d: TLink): IFocus;
+    focusPoint(element: LinkSelection, d: TLink): FocusPoint;
     onMouseOut(): void;
     draw(data: TLink[]): void;
-    borderScale(scale: TScale): TScale;
-    enterAndUpdate(groups: TLinkSelection): void;
+    borderScale(scale: Scale): Scale;
+    enterAndUpdate(groups: LinkSelection): void;
     startPath(link: TLink): string;
 }
 export default Links;
