@@ -1,21 +1,42 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var Container = glamorous_1.default.div({
-    label: "grid",
-    display: "grid"
-}, 
-// Dynamic/theme-dependent styles
-function (_a) {
-    var theme = _a.theme, _b = _a.rowData, rowData = _b === void 0 ? ["auto", "auto"] : _b, _c = _a.columnData, columnData = _c === void 0 ? ["auto", "auto"] : _c, gap = _a.gap;
-    return ({
-        gridTemplateColumns: columnData.map(function (val) { return (typeof val === "string" ? val : val + "px"); }).join(" "),
-        gridTemplateRows: rowData.map(function (val) { return (typeof val === "string" ? val : val + "px"); }).join(" "),
-        gridColumnGap: gap || theme.spacing,
-        gridRowGap: gap || theme.spacing
-    });
+var Container = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme, gridType = _a.gridType;
+    return __assign({ label: "Grid", width: "100%", height: "100%", display: "grid", padding: theme.spacing, gridColumnGap: theme.spacing, gridRowGap: theme.spacing }, (function () {
+        switch (gridType) {
+            case "3x2":
+                return {
+                    gridTemplateColumns: "auto auto auto",
+                    gridTemplateRows: "auto auto",
+                };
+            case "1x1":
+                return {
+                    gridTemplateColumns: "auto",
+                    gridTemplateRows: "auto",
+                };
+            case "2x2":
+                return {
+                    gridTemplateColumns: "auto auto",
+                    gridTemplateRows: "auto auto",
+                };
+            case "IDE":
+                return {
+                    gridTemplateColumns: "200px auto",
+                    gridTemplateRows: "auto",
+                };
+        }
+    })());
 });
-var Grid = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, rowData: props.rows, columnData: props.columns, gap: props.gap }, props.children)); };
+var Grid = function (props) { return React.createElement(Container, { gridType: props.type ? props.type : "3x2" }, props.children); };
 exports.default = Grid;
 //# sourceMappingURL=Grid.js.map

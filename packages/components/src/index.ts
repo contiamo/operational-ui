@@ -1,5 +1,3 @@
-// Simple imports n' exports for consumers of the library.
-
 export { Theme, operational as operationalTheme } from "@operational/theme"
 export { default as Breadcrumb } from "./Breadcrumb"
 export { default as Breadcrumbs } from "./Breadcrumbs"
@@ -13,7 +11,7 @@ export { default as Chip } from "./Chip"
 export { default as ColorPicker } from "./ColorPicker"
 export { default as ContextMenu } from "./ContextMenu"
 export { default as ContextMenuItem } from "./ContextMenuItem"
-export { default as Grid } from "./Grid"
+export { default as Grid, GridType } from "./Grid"
 export { default as DatePicker } from "./DatePicker"
 export { default as Fieldset } from "./Fieldset"
 export { default as Header } from "./Header"
