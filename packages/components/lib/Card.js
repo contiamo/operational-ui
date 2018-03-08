@@ -6,7 +6,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "card",
-        padding: theme.spacing * 4 / 3,
+        padding: theme.spacing,
         boxShadow: theme.shadows.card,
         backgroundColor: theme.colors.cardBackground,
         "& > img": {

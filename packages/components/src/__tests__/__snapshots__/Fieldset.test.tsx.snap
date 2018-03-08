@@ -5,7 +5,7 @@ exports[`Fieldset Component Should render 1`] = `
   class="css-3fkjwm"
 >
   <legend
-    class="css-g6wlsh"
+    class="css-1o5dvof"
   />
 </fieldset>
 `;
