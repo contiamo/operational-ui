@@ -1,6 +1,8 @@
 import { css } from "glamor"
 import { Theme } from "@operational/theme"
 
+import { darken } from "./color"
+
 export const baseStylesheet = (theme: Theme): string => `
 * {
   box-sizing: border-box;
@@ -12,10 +14,20 @@ body {
   padding: 0;
   font-family: ${theme.fontFamily};
   font-size: 13px;
+  height: 100%;
 }
 
 body {
   background-color: ${theme.colors.background};
+}
+
+a:link,
+a:visited: {
+  color: ${theme.colors.info};
+}
+
+a:hover: {
+  color: ${darken(theme.colors.info, 5)};
 }
 `
 
