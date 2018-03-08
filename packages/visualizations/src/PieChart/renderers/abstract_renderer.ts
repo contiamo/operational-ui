@@ -303,7 +303,7 @@ abstract class AbstractRenderer {
   }
 
   angleValue(d: Datum): number {
-    return this.value(d)
+    return this.value(d) || d.value
   }
 
   // Compute
@@ -345,7 +345,7 @@ abstract class AbstractRenderer {
 
   calculatePercentages(total: number): void {
     forEach((datum: Datum): void => {
-      datum.percentage = this.value(datum) / total * 100
+      datum.percentage = this.angleValue(datum) / total * 100
     })(this.data)
   }
 

@@ -236,7 +236,7 @@ var AbstractRenderer = /** @class */ (function () {
         return;
     };
     AbstractRenderer.prototype.angleValue = function (d) {
-        return this.value(d);
+        return this.value(d) || d.value;
     };
     // Compute
     AbstractRenderer.prototype.compute = function () {
@@ -267,7 +267,7 @@ var AbstractRenderer = /** @class */ (function () {
     AbstractRenderer.prototype.calculatePercentages = function (total) {
         var _this = this;
         fp_1.forEach(function (datum) {
-            datum.percentage = _this.value(datum) / total * 100;
+            datum.percentage = _this.angleValue(datum) / total * 100;
         })(this.data);
     };
     AbstractRenderer.prototype.computeArcs = function (computed, scale) {
