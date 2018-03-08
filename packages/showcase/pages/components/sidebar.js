@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Sidebar, SidebarItem, SidebarHeader, Card, CardHeader } from "@operational/components"
 
-import Playground from "../../components/Playground"
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <Sidebar>
@@ -116,12 +114,14 @@ export default props => (
         required.
       </p>
 
-      <Table props={propDescription.sidebarHeader} />
-
       <h2>SidebarItem</h2>
       <p>A sidebar item can be thought of as a leaf node.</p>
-
-      <Table props={propDescription.sidebarItem} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props props={propDescription.sidebarHeader} />
+      <Props props={propDescription.sidebarItem} />
     </Card>
   </Layout>
 )

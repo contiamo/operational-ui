@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Card, CardHeader, Spinner, Progress } from "@operational/components"
 
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
-import Playground from "../../components/Playground"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const spinnerSnippet = `
 <Spinner/>
@@ -44,17 +42,21 @@ export default props => (
       <h3>Usage</h3>
       <Playground snippet={spinnerSnippet} components={{ Spinner }} />
 
-      <h3>Props</h3>
-      <Table props={spinnerPropDescription} />
-
       <h2>Progress</h2>
       <p>The progress element is used for larger loading sections, most typically the entire page.</p>
 
       <h3>Usage</h3>
       <Playground snippet={progressSnippet} components={{ Progress }} />
-
-      <h3>Props></h3>
-      <Table props={progressPropDescription} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={spinnerPropDescription}
+      />
+      <Props
+        props={progressPropDescription}
+      />
     </Card>
   </Layout>
 )

@@ -62,10 +62,14 @@ export default props => (
         Colors are an important part of any user interface. This calls for a reasonable control that allows a user to
         choose a color from a canvas. Our component library exposes such a control, as seen below.
       </p>
-      {process.env.NODE_ENV !== "test" && <Playground snippet={simpleSnippet} components={{ ColorPicker }} />}
-
-      <h2>Props</h2>
-      <Table props={propDescription} />
+      <Playground snippet={simpleSnippet} components={{ ColorPicker }} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription}
+      />
     </Card>
   </Layout>
 )

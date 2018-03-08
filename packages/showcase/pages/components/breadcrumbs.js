@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Breadcrumb, Breadcrumbs, ContextMenu, ContextMenuItem, Card, CardHeader } from "@operational/components"
 
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
-import Playground from "../../components/Playground"
+import { Layout, Props, Playground } from "../../components"
 
 const simpleSnippet = `
 <Breadcrumbs>
@@ -28,6 +26,8 @@ const snippetWithContextMenu = `
 export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
+      <CardHeader>Breadcrumbs</CardHeader>
+
       <p>
         Breadcrumbs are typically a series of links showing the path to a particular page, and linking to each parent.
         Operational UI's breadcrumbs add a few extra functionality, such as icon and context menu support.
@@ -42,9 +42,13 @@ export default props => (
         components={{ Breadcrumbs }}
         scope={{ ContextMenuItem, ContextMenu, Breadcrumb }}
       />
-
-      <h2>Props</h2>
-      <Table
+    </Card>
+    <Card>
+      <CardHeader>Examples</CardHeader>
+    </Card>
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
         props={[
           {
             name: "children",

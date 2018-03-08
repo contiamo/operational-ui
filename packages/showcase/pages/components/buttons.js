@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Button, ButtonGroup, Card, CardHeader } from "@operational/components"
 
-import Table from "../../components/PropsTable"
-import Layout from "../../components/Layout"
-import Playground from "../../components/Playground"
+import { Props, Layout, Playground } from "../../components"
 
 const simpleSnippet = `
 <div>
@@ -93,9 +91,13 @@ export default props => (
       <h2>Condensed mode</h2>
       <p>Buttons can be condensed, and further grouped to achieve, among other things, this paginator-style look:</p>
       <Playground snippet={condensedSnippet} components={{ Button, ButtonGroup }} />
-
-      <h2>Props</h2>
-      <Table props={propDescription} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription}
+      />
     </Card>
   </Layout>
 )

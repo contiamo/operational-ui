@@ -69,6 +69,8 @@ const propDescription = [
 export default props => (
   <Layout pathname={props.url.pathname}>
     <Card>
+      <CardHeader>Breakdowns</CardHeader>
+
       <p>
         Breakdowns are a means of representing aggregated data in a way that should be relatively easy to reason about.
         The breakdown component itself belongs within the context of a larger container component that calculates
@@ -80,6 +82,13 @@ export default props => (
 
       <h2>Props</h2>
       <Table props={propDescription} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription}
+      />
     </Card>
   </Layout>
 )

@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Card, Heading2Type, Record, RecordHeader, RecordBody, Heading1Type, InfoTile } from "@operational/components"
 
-import Table from "../../components/PropsTable"
-import Playground from "../../components/Playground"
-import Layout from "../../components/Layout"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <Record>
@@ -56,9 +54,13 @@ export default props => (
         components={{ Record }}
         scope={{ RecordHeader, RecordBody, Heading1Type, InfoTile }}
       />
-
-      <Heading2Type>Props</Heading2Type>
-      <Table props={propDescription} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription}
+      />
     </Card>
   </Layout>
 )

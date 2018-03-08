@@ -1,9 +1,7 @@
 import * as React from "react"
 import { ContextMenu, ContextMenuItem, Card, CardHeader, Icon } from "@operational/components"
 
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
-import Playground from "../../components/Playground"
+import { Layout, Props, Playground } from "../../components"
 
 const simpleSnippet = `
 <ContextMenu>

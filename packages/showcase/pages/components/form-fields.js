@@ -2,10 +2,7 @@ import * as React from "react"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { Input, Select, Checkbox, Fieldset, DatePicker, Card, CardHeader } from "@operational/components"
 
-import Playground from "../../components/Playground"
-import StaticContent from "../../components/StaticContent"
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const inputSnippet = `
 (() => {

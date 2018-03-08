@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Card } from "@operational/components"
-import StaticContent from "../../components/StaticContent"
-import Layout from "../../components/Layout"
+import { StaticContent, Layout } from "../../components"
 import { fetchFromRepo } from "../../utils"
 
 const introContent = `

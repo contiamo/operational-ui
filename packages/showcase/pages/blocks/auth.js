@@ -3,9 +3,7 @@ import glamorous from "glamorous"
 import { Card, Button, Input, Icon } from "@operational/components"
 import { Auth } from "@operational/blocks"
 
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
-import Playground from "../../components/Playground"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const CloseIcon = glamorous.div({
   position: "fixed",

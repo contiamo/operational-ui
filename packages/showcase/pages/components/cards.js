@@ -56,8 +56,13 @@ export default props => (
       </p>
       <Playground snippet={headerSnippet} components={{ Card, CardHeader }} />
 
-      <h2>Props</h2>
-      <Table props={propDescription} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription}
+      />
     </Card>
   </Layout>
 )

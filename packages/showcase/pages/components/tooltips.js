@@ -3,9 +3,7 @@ import glamorous from "glamorous"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { Tooltip, Card, CardHeader } from "@operational/components"
 
-import Playground from "../../components/Playground"
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <div>

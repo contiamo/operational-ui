@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Card, Heading2Type, Table } from "@operational/components"
 
-import PropsTable from "../../components/PropsTable"
-import Playground from "../../components/Playground"
-import Layout from "../../components/Layout"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <Table 
@@ -39,9 +37,13 @@ export default props => (
 
       <Heading2Type>Usage</Heading2Type>
       <Playground snippet={simpleSnippet} components={{ Table }} />
-
-      <Heading2Type>Props</Heading2Type>
-      <PropsTable props={propDescription} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription}
+      />
     </Card>
   </Layout>
 )

@@ -46,12 +46,6 @@ const PageContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-const Content = glamorous.div({
-  width: "calc(100vw - 240px)",
-  backgroundColor: operational.colors.background,
-  height: "100vh"
-})
-
 let didRenderOnClient = false
 
 export default class Layout extends React.Component {

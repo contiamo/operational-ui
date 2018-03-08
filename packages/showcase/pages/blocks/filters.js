@@ -2,9 +2,7 @@ import * as React from "react"
 import { Card, Select, Input, DatePicker } from "@operational/components"
 import { Filter } from "@operational/blocks"
 
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
-import Playground from "../../components/Playground"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const propDescription = [
   {

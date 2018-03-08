@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Card, CardHeader, Timeline, TimelineItem } from "@operational/components"
 
-import Playground from "../../components/Playground"
-import Layout from "../../components/Layout"
-import Table from "../../components/PropsTable"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <Timeline>
@@ -56,9 +54,13 @@ export default props => (
         may contain any children.
       </p>
       <Playground snippet={simpleSnippet} components={{ Timeline, TimelineItem }} />
-
-      <h2>Props</h2>
-      <Table props={propDescription.TimelineItem} />
+    </Card>
+    <Card />
+    <Card>
+      <CardHeader>Props</CardHeader>
+      <Props
+        props={propDescription.TimelineItem}
+      />
     </Card>
   </Layout>
 )
