@@ -9,41 +9,41 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: GridType }): {} => {
-  return {
-    label: "Grid",
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    padding: theme.spacing,
-    gridColumnGap: theme.spacing,
-    gridRowGap: theme.spacing,
-    ...(() => {
-      switch (gridType) {
-        case "3x2":
-          return {
-            gridTemplateColumns: "auto auto auto",
-            gridTemplateRows: "auto auto"
-          }
-        case "1x1":
-          return {
-            gridTemplateColumns: "auto",
-            gridTemplateRows: "auto"
-          }
-        case "2x2":
-          return {
-            gridTemplateColumns: "auto auto",
-            gridTemplateRows: "auto auto"
-          }
-        case "IDE":
-          return {
-            gridTemplateColumns: "200px auto",
-            gridTemplateRows: "auto"
-          }
+const getGridCSSProperties = (gridType: GridType): {} => {
+  switch (gridType) {
+    case "3x2":
+      return {
+        gridTemplateColumns: "auto auto auto",
+        gridTemplateRows: "auto auto"
       }
-    })()
+    case "1x1":
+      return {
+        gridTemplateColumns: "auto",
+        gridTemplateRows: "auto"
+      }
+    case "2x2":
+      return {
+        gridTemplateColumns: "auto auto",
+        gridTemplateRows: "auto auto"
+      }
+    case "IDE":
+      return {
+        gridTemplateColumns: "200px auto",
+        gridTemplateRows: "auto"
+      }
   }
-})
+}
+
+const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: GridType }): {} => ({
+  label: "Grid",
+  width: "100%",
+  height: "100%",
+  display: "grid",
+  padding: theme.spacing,
+  gridColumnGap: theme.spacing,
+  gridRowGap: theme.spacing,
+  ...getGridCSSProperties(gridType)
+}))
 
 const Grid = (props: Props) => <Container gridType={props.type ? props.type : "3x2"}>{props.children}</Container>
 
