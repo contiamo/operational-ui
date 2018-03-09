@@ -2,21 +2,29 @@ import * as React from "react"
 import { ThemeProvider } from "glamorous"
 
 import { Theme, operational } from "@operational/theme"
+import { baseStylesheet } from "@operational/utils"
 
 export interface Props {
   theme?: Theme
   children?: React.ReactNode
+  withBaseStyles?: boolean
 }
 
 const OperationalUI = (props: Props) => {
-  // Only one child is allowed here,
-  // see https://reactjs.org/docs/react-api.html#reactchildrenonly
-  if (React.Children.count(props.children) > 1) {
-    throw new Error(
-      "<OperationalUI/> expects a single child inside of it, like React Router's <Router/>. Please remove any additional children. See https://github.com/Contiamo/operational-ui/tree/master/packages/components."
-    )
-  }
-  return <ThemeProvider theme={props.theme || operational}>{props.children}</ThemeProvider>
+  return (
+    <ThemeProvider theme={props.theme || operational}>
+      <React.Fragment>
+        {props.withBaseStyles ? (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: baseStylesheet(props.theme || operational)
+            }}
+          />
+        ) : null}
+        {props.children}
+      </React.Fragment>
+    </ThemeProvider>
+  )
 }
 
 export default OperationalUI

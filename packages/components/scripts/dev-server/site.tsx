@@ -51,5 +51,4 @@ class Site extends React.Component<{}, IState> {
   }
 }
 
-injectStylesheet(baseStylesheet(operationalTheme))
 render(<Site />, document.getElementById("app"))
