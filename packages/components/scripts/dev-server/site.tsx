@@ -2,22 +2,25 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import { render } from "react-dom"
-import { injectStylesheet, baseStylesheet } from "@operational/utils"
 
 import {
   OperationalUI,
   operationalTheme,
   Input,
   Button,
+  Layout,
+  Grid,
   Record,
   RecordHeader,
   RecordBody,
   Card,
   Heading1Type,
+  Header,
+  Sidenav,
   CardHeader
-} from "../../src/index"
+} from "../../src"
 
-interface IState {
+interface State {
   isOpen: boolean
 }
 
@@ -27,25 +30,20 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-class Site extends React.Component<{}, IState> {
+class Site extends React.Component<{}, State> {
   state = {
     isOpen: false
   }
   render() {
     return (
-      <OperationalUI>
-        <div style={{ width: 800, height: 800, margin: 20, backgroundColor: "#F1F1F1" }}>
-          <Card css={{ width: 400, height: 300, margin: 40 }}>
-            <CardHeader>Hello<Button condensed css={{fontSize: 12}} color="info">Create new</Button></CardHeader>
-            <Input
-              value="1234"
-              label="Apple pie!"
-              onChange={v => {
-                console.log(v)
-              }}
-            />
-          </Card>
-        </div>
+      <OperationalUI withBaseStyles>
+        <Layout>
+          <Sidenav />
+          <Header />
+          <Grid type="3x2">
+            <Card><CardHeader>Hello</CardHeader></Card>
+          </Grid>
+        </Layout>
       </OperationalUI>
     )
   }
