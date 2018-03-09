@@ -11,7 +11,7 @@ export interface Props {
 
 const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   label: "card",
-  padding: theme.spacing * 4 / 3,
+  padding: theme.spacing,
   boxShadow: theme.shadows.card,
   backgroundColor: theme.colors.cardBackground,
   "& > img": {

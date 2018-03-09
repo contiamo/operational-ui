@@ -19,6 +19,7 @@ export interface ThemeColors {
     gray80: string;
     gray90: string;
     background: string;
+    cardHeaderBackground: string;
     bodyText: string;
     emphasizedText: string;
     lightText: string;
@@ -41,6 +42,7 @@ export interface ThemeTypographyElement {
     textTransform: string;
     letterSpacing: number | "normal";
     lineHeight: string;
+    opacity?: number;
     color?: string;
     "&::before"?: {
         content: string;
