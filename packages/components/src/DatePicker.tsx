@@ -66,7 +66,7 @@ class DatePicker extends React.Component<Props, State> {
       }
       this.setState(prevState => ({
         ...prevState,
-        isExpanded: !prevState.isExpanded
+        isExpanded: false
       }))
       if (this.inputNode) {
         this.inputNode.blur()
