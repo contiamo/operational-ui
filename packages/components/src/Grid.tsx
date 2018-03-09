@@ -1,54 +1,50 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-export type Dimension = string | number
+export type GridType = "3x2" | "1x1" | "2x2" | "IDE"
 
 export interface Props {
-  id?: string | number
-  css?: any
-  className?: string
+  type?: GridType
   children?: React.ReactNode
-  rows?: Dimension[]
-  columns?: Dimension[]
-  gap?: number
 }
 
-const Container = glamorous.div(
-  {
-    label: "grid",
-    display: "grid"
-  },
-  // Dynamic/theme-dependent styles
-  ({
-    theme,
-    rowData = ["auto", "auto"],
-    columnData = ["auto", "auto"],
-    gap
-  }: {
-    theme: Theme
-    rowData?: Dimension[]
-    columnData?: Dimension[]
-    gap?: number
-  }): any => ({
-    gridTemplateColumns: columnData.map(val => (typeof val === "string" ? val : val + "px")).join(" "),
-    gridTemplateRows: rowData.map(val => (typeof val === "string" ? val : val + "px")).join(" "),
-    gridColumnGap: gap || theme.spacing,
-    gridRowGap: gap || theme.spacing
-  })
-)
+const getGridCSSProperties = (gridType: GridType): {} => {
+  switch (gridType) {
+    case "3x2":
+      return {
+        gridTemplateColumns: "auto auto auto",
+        gridTemplateRows: "auto auto"
+      }
+    case "1x1":
+      return {
+        gridTemplateColumns: "auto",
+        gridTemplateRows: "auto"
+      }
+    case "2x2":
+      return {
+        gridTemplateColumns: "auto auto",
+        gridTemplateRows: "auto auto"
+      }
+    case "IDE":
+      return {
+        gridTemplateColumns: "200px auto",
+        gridTemplateRows: "auto"
+      }
+  }
+}
 
-const Grid = (props: Props) => (
-  <Container
-    key={props.id}
-    css={props.css}
-    className={props.className}
-    rowData={props.rows}
-    columnData={props.columns}
-    gap={props.gap}
-  >
-    {props.children}
-  </Container>
-)
+const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: GridType }): {} => ({
+  label: "Grid",
+  width: "100%",
+  height: "100%",
+  display: "grid",
+  padding: theme.spacing,
+  gridColumnGap: theme.spacing,
+  gridRowGap: theme.spacing,
+  ...getGridCSSProperties(gridType)
+}))
+
+const Grid = (props: Props) => <Container gridType={props.type ? props.type : "3x2"}>{props.children}</Container>
 
 export default Grid

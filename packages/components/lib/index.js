@@ -1,5 +1,4 @@
 "use strict";
-// Simple imports n' exports for consumers of the library.
 Object.defineProperty(exports, "__esModule", { value: true });
 var theme_1 = require("@operational/theme");
 exports.operationalTheme = theme_1.operational;

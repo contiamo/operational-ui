@@ -1,14 +1,9 @@
 /// <reference types="react" />
 import * as React from "react";
-export declare type Dimension = string | number;
+export declare type GridType = "3x2" | "1x1" | "2x2" | "IDE";
 export interface Props {
-    id?: string | number;
-    css?: any;
-    className?: string;
+    type?: GridType;
     children?: React.ReactNode;
-    rows?: Dimension[];
-    columns?: Dimension[];
-    gap?: number;
 }
 declare const Grid: (props: Props) => JSX.Element;
 export default Grid;
