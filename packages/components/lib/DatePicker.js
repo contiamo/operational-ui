@@ -50,7 +50,7 @@ var DatePicker = /** @class */ (function (_super) {
             if (ev.keyCode !== 27) {
                 return;
             }
-            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: !prevState.isExpanded })); });
+            _this.setState(function (prevState) { return (__assign({}, prevState, { isExpanded: false })); });
             if (_this.inputNode) {
                 _this.inputNode.blur();
             }
