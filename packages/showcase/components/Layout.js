@@ -13,13 +13,10 @@ const pathmap = nextConfig.exportPathMap()
 
 const PageContent = glamorous.div(({ theme }) => ({
   padding: theme.spacing,
-  height: "100%",
   overflow: "auto",
-  "& a:link, & a:visited": {
-    color: theme.colors.info
-  },
-  "& a:hover": {
-    color: darken(theme.colors.info, 5)
+  "& > *": {
+    height: "100%",
+    overflow: "auto"
   },
   "& h2": {
     ...theme.typography.heading1
@@ -61,11 +58,14 @@ export default class Layout extends React.Component {
   render() {
     const { pathname } = this.props
     return (
-      <OperationalUI>
+      <OperationalUI withBaseStyles>
         {!this.state.isClientRendered ? (
           <Spinner css={{ top: "50%", left: "50%", transform: "translate3d(-50%, -50%, 0)", position: "absolute" }} />
         ) : (
-          <OpLayout css={{ gridTemplateColumns: "240px auto" }} loading={this.state.isNavigating}>
+          <OpLayout
+            css={{ gridTemplateColumns: "240px auto", overflow: "hidden", height: "100vh" }}
+            loading={this.state.isNavigating}
+          >
             <Sidenavigation pathname={pathname} pathmap={pathmap} />
             <Header note="v0.1.0-12" pathname={pathname} pathmap={pathmap} />
             <PageContent>{this.props.children}</PageContent>

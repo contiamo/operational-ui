@@ -22,7 +22,7 @@ body {
 }
 
 a:link,
-a:visited: {
+a:visited {
   color: ${theme.colors.info};
 }
 

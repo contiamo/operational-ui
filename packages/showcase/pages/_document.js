@@ -78,6 +78,10 @@ const highlightJsCss = `
 .hljs-strong {
     font-weight: bold;
 }
+
+body {
+  overflow: hidden;
+}
 `
 
 export default class MyDocument extends Document {
@@ -99,7 +103,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <style dangerouslySetInnerHTML={{ __html: baseStylesheet(operational) + highlightJsCss }} />
+          <style dangerouslySetInnerHTML={{ __html: highlightJsCss }} />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
           <title>Operational UI</title>
           <meta name="description" value="Building blocks for effective operational interfaces" />
