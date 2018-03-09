@@ -15,6 +15,7 @@ export { default as Grid, GridType } from "./Grid";
 export { default as DatePicker } from "./DatePicker";
 export { default as Fieldset } from "./Fieldset";
 export { default as Header } from "./Header";
+export { default as Layout } from "./Layout";
 export { default as Icon, IconName } from "./Icon";
 export { default as InfoTile } from "./InfoTile";
 export { default as Input } from "./Input";

@@ -3,6 +3,8 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
+import { sidenavWidth } from "./constants"
+
 export interface Props {
   id?: string | number
   className?: string
@@ -22,7 +24,7 @@ const Container = glamorous.div(
     width: "100%",
     display: "flex",
     alignItems: "center",
-    padding: "0 16px 0 52px",
+    padding: `0 16px 0 ${sidenavWidth}px`,
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
     backgroundColor: "rgba(0, 0, 0, 0.2)",

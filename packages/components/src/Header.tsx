@@ -3,6 +3,8 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor } from "@operational/utils"
 
+import { headerHeight } from "./constants"
+
 export interface Props {
   id?: string | number
   className?: string
@@ -15,9 +17,9 @@ const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
   display: "flex",
   justifyContent: "space-between",
   backgroundColor: theme.colors.white,
-  height: 52,
+  height: headerHeight,
   alignItems: "center",
-  padding: `${theme.spacing / 2}px ${theme.spacing * 4 / 3}px`,
+  padding: `0 ${theme.spacing}px`,
   boxShadow: theme.shadows.card
 }))
 
