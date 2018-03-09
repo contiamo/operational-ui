@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var theme_1 = require("@operational/theme");
+var utils_1 = require("@operational/utils");
 var OperationalUI = function (props) {
-    // Only one child is allowed here,
-    // see https://reactjs.org/docs/react-api.html#reactchildrenonly
-    if (React.Children.count(props.children) > 1) {
-        throw new Error("<OperationalUI/> expects a single child inside of it, like React Router's <Router/>. Please remove any additional children. See https://github.com/Contiamo/operational-ui/tree/master/packages/components.");
-    }
-    return React.createElement(glamorous_1.ThemeProvider, { theme: props.theme || theme_1.operational }, props.children);
+    return (React.createElement(glamorous_1.ThemeProvider, { theme: props.theme || theme_1.operational },
+        React.createElement(React.Fragment, null,
+            props.withBaseStyles ? (React.createElement("style", { dangerouslySetInnerHTML: {
+                    __html: utils_1.baseStylesheet(props.theme || theme_1.operational)
+                } })) : null,
+            props.children)));
 };
 exports.default = OperationalUI;
 //# sourceMappingURL=OperationalUI.js.map

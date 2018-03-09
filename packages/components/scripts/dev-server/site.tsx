@@ -22,7 +22,7 @@ class Site extends React.Component<{}, IState> {
   }
   render() {
     return (
-      <OperationalUI>
+      <OperationalUI withBaseStyles>
         <div style={{ margin: 20 }}>
           <Card>
             <Input value="1234" label="Apple pie!" onChange={(v) => {console.log(v)}}/>
@@ -33,5 +33,4 @@ class Site extends React.Component<{}, IState> {
   }
 }
 
-injectStylesheet(baseStylesheet(operationalTheme))
 render(<Site />, document.getElementById("app"))
