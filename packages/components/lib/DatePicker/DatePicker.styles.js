@@ -34,8 +34,8 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "absolute",
-        top: 1,
         cursor: "pointer",
+        top: 1,
         right: 1,
         borderTopRightRadius: 2,
         borderBottomRightRadius: 2,

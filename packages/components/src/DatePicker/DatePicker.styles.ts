@@ -27,8 +27,8 @@ export const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamor
 
 export const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
-  top: 1,
   cursor: "pointer",
+  top: 1,
   right: 1,
   borderTopRightRadius: 2,
   borderBottomRightRadius: 2,
