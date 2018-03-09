@@ -49,6 +49,7 @@ export interface ThemeColors {
   gray80: string
   gray90: string
   background: string
+  cardHeaderBackground: string
   bodyText: string
   emphasizedText: string
   lightText: string
@@ -73,6 +74,7 @@ export interface ThemeTypographyElement {
   textTransform: string
   letterSpacing: number | "normal"
   lineHeight: string
+  opacity?: number
   color?: string
   "&::before"?: { content: string }
 }
@@ -138,6 +140,7 @@ const colors: ThemeColors = {
   background: "#F1F1F1",
   bodyText: "#555f61",
   cardBackground: "#FFFFFF",
+  cardHeaderBackground: "#F5F5F5",
   border: "#dadada",
   emphasizedText: "#373d3f",
   lightText: "#969696",
@@ -162,11 +165,12 @@ const typography: ThemeTypography = {
   heading1: {
     ...baseTypography,
     fontSize: 16,
-    fontWeight: 600
+    fontWeight: 400
   },
   heading2: {
     ...baseTypography,
     fontSize: 16,
+    opacity: 0.7,
     fontWeight: 400
   },
   body: {
@@ -183,7 +187,7 @@ const typography: ThemeTypography = {
 
 const shadows: ThemeShadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-  card: "0px 1px 2px #d3d1d1",
+  card: "0px 1px 3px #d3d1d1",
   focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
   popup: "0 3px 12px rgba(0, 0, 0, .14)"
 }

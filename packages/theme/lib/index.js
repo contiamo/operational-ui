@@ -54,6 +54,7 @@ var colors = {
     background: "#F1F1F1",
     bodyText: "#555f61",
     cardBackground: "#FFFFFF",
+    cardHeaderBackground: "#F5F5F5",
     border: "#dadada",
     emphasizedText: "#373d3f",
     lightText: "#969696",
@@ -69,14 +70,14 @@ var baseTypography = {
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 24, fontWeight: 400 }),
-    heading1: __assign({}, baseTypography, { fontSize: 16, fontWeight: 600 }),
-    heading2: __assign({}, baseTypography, { fontSize: 16, fontWeight: 400 }),
+    heading1: __assign({}, baseTypography, { fontSize: 16, fontWeight: 400 }),
+    heading2: __assign({}, baseTypography, { fontSize: 16, opacity: 0.7, fontWeight: 400 }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
     small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 })
 };
 var shadows = {
     pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-    card: "0px 1px 2px #d3d1d1",
+    card: "0px 1px 3px #d3d1d1",
     focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
     popup: "0 3px 12px rgba(0, 0, 0, .14)"
 };
