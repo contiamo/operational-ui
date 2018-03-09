@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Chip, PlusChip, Card, CardHeader } from "@operational/components"
 
-import Layout from "../../components/Layout"
-import Playground from "../../components/Playground"
-import Table from "../../components/PropsTable"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <div style={{ display: "flex" }}>
@@ -61,9 +59,7 @@ export default props => (
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={propDescription}
-      />
+      <Props props={propDescription} />
     </Card>
   </Layout>
 )

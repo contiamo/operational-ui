@@ -51,12 +51,8 @@ export default props => (
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={spinnerPropDescription}
-      />
-      <Props
-        props={progressPropDescription}
-      />
+      <Props props={spinnerPropDescription} />
+      <Props props={progressPropDescription} />
     </Card>
   </Layout>
 )

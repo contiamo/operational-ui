@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Breadcrumb, Breadcrumbs, ContextMenu, ContextMenuItem, Card, CardHeader } from "@operational/components"
 
-import { Layout, Props, Playground } from "../../components"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <Breadcrumbs>

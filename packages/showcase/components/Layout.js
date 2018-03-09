@@ -12,14 +12,34 @@ import nextConfig from "../next.config"
 const pathmap = nextConfig.exportPathMap()
 
 const PageContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  padding: theme.spacing,
   display: "grid",
   gridTemplateColumns: "auto 400px",
-  gridTemplateRows: "auto auto",
+  gridTemplateRows: "calc(50% - 6px) calc(50% - 6px)",
+  overflow: "hidden",
   gridColumnGap: theme.spacing,
   gridRowGap: theme.spacing,
   "& > *": {
-    height: "100%",
     overflow: "auto"
+  },
+  "& > *:nth-child(1)": {
+    gridColumnStart: "1",
+    gridColumnEnd: "span 1",
+    gridRowStart: "1",
+    gridRowEnd: "span 2"
+  },
+  "& > *:nth-child(2)": {
+    gridColumnStart: "2",
+    gridColumnEnd: "span 1",
+    gridRowStart: "1",
+    gridRowEnd: "span 1"
+  },
+  "& > *:nth-child(3)": {
+    gridColumnStart: "2",
+    gridColumnEnd: "span 1",
+    gridRowStart: "2",
+    gridRowEnd: "span 1"
+  },
   "& h2": {
     ...theme.typography.heading1
   },
@@ -63,6 +83,8 @@ export default class Layout extends React.Component {
       <OperationalUI withBaseStyles>
         {!this.state.isClientRendered ? (
           <Spinner css={{ top: "50%", left: "50%", transform: "translate3d(-50%, -50%, 0)", position: "absolute" }} />
+        ) : this.props.noNav ? (
+          <PageContent css={{ height: "100%" }}>{this.props.children}</PageContent>
         ) : (
           <OpLayout
             css={{ gridTemplateColumns: "240px auto", overflow: "hidden", height: "100vh" }}

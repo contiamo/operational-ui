@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Card, CardHeader } from "@operational/components"
-import StaticContent from "../../components/StaticContent"
-import Layout from "../../components/Layout"
+
 import { fetchFromRepo } from "../../utils"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 export default class Components extends React.Component {
   static async getInitialProps() {

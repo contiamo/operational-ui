@@ -75,9 +75,7 @@ export default props => (
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={propDescription}
-      />
+      <Props props={propDescription} />
     </Card>
   </Layout>
 )

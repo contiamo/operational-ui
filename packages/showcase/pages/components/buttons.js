@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Button, ButtonGroup, Card, CardHeader } from "@operational/components"
 
-import { Props, Layout, Playground } from "../../components"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const simpleSnippet = `
 <div>
@@ -95,9 +95,7 @@ export default props => (
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={propDescription}
-      />
+      <Props props={propDescription} />
     </Card>
   </Layout>
 )

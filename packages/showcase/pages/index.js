@@ -20,7 +20,16 @@ const TitleBar = glamorous.div(({ theme }) => ({
   overflow: "hidden",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: theme.colors.sidenavBackground,
+  "&::before": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    content: "' '",
+    right: 0,
+    bottom: 0,
+    backgroundColor: theme.colors.sidenavBackground,
+    zIndex: 100
+  },
   "& h1": {
     ...theme.typography.title,
     fontWeight: 400,
@@ -82,7 +91,7 @@ export default class Intro extends React.Component {
 
   render() {
     return (
-      <Layout pathname={this.props.url.pathname}>
+      <Layout pathname={this.props.url.pathname} noNav>
         <Card>
           <TitleBar>
             <TitleBarContent>

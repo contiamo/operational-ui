@@ -3,10 +3,7 @@ import glamorous from "glamorous"
 import { Card, CardHeader, TitleType, Heading1Type, Heading2Type, BodyType, SmallType } from "@operational/components"
 import { operational } from "@operational/theme"
 
-import Playground from "../../components/Playground"
-import Layout from "../../components/Layout"
-import StaticContent from "../../components/StaticContent"
-import Table from "../../components/PropsTable"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const typographySnippet = `
   <div>

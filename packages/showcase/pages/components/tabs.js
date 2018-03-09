@@ -126,9 +126,7 @@ export default props => (
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={propDescription.Tab}
-      />
+      <Props props={propDescription.Tab} />
     </Card>
   </Layout>
 )

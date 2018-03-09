@@ -58,9 +58,7 @@ export default props => (
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={propDescription.TimelineItem}
-      />
+      <Props props={propDescription.TimelineItem} />
     </Card>
   </Layout>
 )

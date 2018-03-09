@@ -1,9 +1,7 @@
 import * as React from "react"
 import { Card, CardHeader } from "@operational/components"
 
-import Playground from "../../components/Playground"
-import Table from "../../components/PropsTable"
-import Layout from "../../components/Layout"
+import { Layout, Props, Playground, StaticContent } from "../../components"
 
 const headerSnippet = `
 <Card width={260}>
@@ -55,14 +53,11 @@ export default props => (
         the card title, but also navigation on the right-hand side.
       </p>
       <Playground snippet={headerSnippet} components={{ Card, CardHeader }} />
-
     </Card>
     <Card />
     <Card>
       <CardHeader>Props</CardHeader>
-      <Props
-        props={propDescription}
-      />
+      <Props props={propDescription} />
     </Card>
   </Layout>
 )
