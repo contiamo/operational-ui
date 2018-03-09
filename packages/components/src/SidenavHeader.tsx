@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
+import { sidenavWidth } from "./constants"
 import Icon, { IconName } from "./Icon"
 
 export interface Props {
@@ -17,8 +18,6 @@ export interface Props {
   onClick?: () => void
 }
 
-const size: number = 52
-
 const Container = glamorous.div({
   label: "sidenavheader",
   width: "100%"
@@ -31,8 +30,8 @@ const Content = glamorous.div(
     alignItems: "center",
     width: "100%",
     overflow: "hidden",
-    height: size,
-    flex: `0 0 ${size}px`,
+    height: sidenavWidth,
+    flex: `0 0 ${sidenavWidth}px`,
     color: isActive ? theme.colors.linkText : theme.colors.white,
     borderBottom: isExpanded ? `1px solid #395568` : "none",
     backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
@@ -48,12 +47,12 @@ const Label = glamorous.div({
 })
 
 const IconContainer = glamorous.div({
-  width: size,
-  height: size,
+  width: sidenavWidth,
+  height: sidenavWidth,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  flex: `0 0 ${size}px`
+  flex: `0 0 ${sidenavWidth}px`
 })
 
 const SidenavHeader = (props: Props) => (

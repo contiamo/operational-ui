@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
+var constants_1 = require("./constants");
 var size = 32;
 var Container = glamorous_1.default.div({
     label: "sidenavitem",
@@ -11,7 +12,7 @@ var Container = glamorous_1.default.div({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    padding: "0 16px 0 52px",
+    padding: "0 16px 0 " + constants_1.sidenavWidth + "px",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
     backgroundColor: "rgba(0, 0, 0, 0.2)",

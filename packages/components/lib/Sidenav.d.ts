@@ -9,7 +9,6 @@ export interface Props {
     expanded?: boolean;
     expandOnHover?: boolean;
     expandedWidth?: number;
-    width?: number;
 }
 export interface State {
     isHovered: boolean;

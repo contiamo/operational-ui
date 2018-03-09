@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
+var constants_1 = require("./constants");
 var Icon_1 = require("./Icon");
-var size = 52;
 var Container = glamorous_1.default.div({
     label: "sidenavheader",
     width: "100%"
@@ -16,8 +16,8 @@ var Content = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         width: "100%",
         overflow: "hidden",
-        height: size,
-        flex: "0 0 " + size + "px",
+        height: constants_1.sidenavWidth,
+        flex: "0 0 " + constants_1.sidenavWidth + "px",
         color: isActive ? theme.colors.linkText : theme.colors.white,
         borderBottom: isExpanded ? "1px solid #395568" : "none",
         backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
@@ -31,12 +31,12 @@ var Label = glamorous_1.default.div({
     whiteSpace: "nowrap"
 });
 var IconContainer = glamorous_1.default.div({
-    width: size,
-    height: size,
+    width: constants_1.sidenavWidth,
+    height: constants_1.sidenavWidth,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flex: "0 0 " + size + "px"
+    flex: "0 0 " + constants_1.sidenavWidth + "px"
 });
 var SidenavHeader = function (props) { return (
 // See ./SidenavItem.tsx for reason why class name is set.

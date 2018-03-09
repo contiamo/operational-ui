@@ -10,6 +10,7 @@ import {
   SidenavHeader,
   SidenavItem,
   Spinner,
+  Layout as OpLayout,
   Header,
   Card,
   CardHeader,
@@ -22,9 +23,8 @@ import Playground from "../components/Playground"
 
 const simpleSnippet = `
 <OperationalUI>
-  <Grid css={{padding: 12, backgroundColor: "#F1F1F1"}} columns={[240, 240]} rows={[120, 120]}>
+  <Grid type="3x2">
     <Card><Button color="info">Press me</Button></Card>
-    <Card><Input label="Impress me" value="I will!" /></Card>
     <Card>
       <CardHeader>Header</CardHeader>
       <p>Content</p>
@@ -37,26 +37,19 @@ const simpleSnippet = `
 `
 
 const layoutSnippet = `
-<OperationalUI>
-  <div style={{width: "100vw", height: "100vh", display: "flex", backgroundColor: "#F1F1F1"}}>
-    <Sidenav>
-      <SidenavHeader icon="Labs" label="Labs" />
-    </Sidenav>
-    <div style={{width: "100%", height: "100%"}}>
-      <Header>
-        <Breadcrumbs>
-          <a href="/home"><Breadcrumb>Home</Breadcrumb></a>
-          <a href="/projects"><Breadcrumb>Projects</Breadcrumb></a>
-        </Breadcrumbs>
-      </Header>
-      <Grid css={{padding: 12, width: "calc(100% - 12px)", height: "calc(100% - 64px)"}} columns={["50%", "50%"]} rows={["50%", "50%"]}>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-      </Grid>
-    </div>
-  </div>
+<OperationalUI withBaseStyles>
+  <Layout>
+    <Sidenav />
+    <Header>
+      <Breadcrumbs>
+        <Breadcrumb>Home</Breadcrumb>
+        <Breadcrumb>Customers</Breadcrumb>
+      </Breadcrumbs>
+    </Header>
+    <Grid type="3x2">
+      <Card><CardHeader>Hello</CardHeader></Card>
+    </Grid>
+  </Layout>
 </OperationalUI>
 `
 
@@ -154,6 +147,7 @@ export default props => (
         snippet={layoutSnippet}
         scope={{
           Breadcrumb,
+          Layout: OpLayout,
           Breadcrumbs,
           Button,
           Card,
