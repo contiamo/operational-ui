@@ -15,6 +15,7 @@ export interface Props {
     onBlur?: (ev: any) => void;
     type?: string;
     children?: string;
+    autoComplete?: string;
 }
 declare const Input: (props: Props) => JSX.Element;
 export default Input;

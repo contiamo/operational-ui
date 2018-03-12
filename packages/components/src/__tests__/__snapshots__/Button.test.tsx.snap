@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button Component Should initialize properly 1`] = `
-<div
+<button
   class="css-1jsbnq5"
-  role="button"
-  tabindex="-1"
 >
   hi
-</div>
+</button>
 `;

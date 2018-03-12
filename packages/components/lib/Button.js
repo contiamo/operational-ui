@@ -13,7 +13,7 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var theme_1 = require("@operational/theme");
 var color_1 = require("./utils/color");
-var Container = glamorous_1.default.div(function (_a) {
+var Container = glamorous_1.default.button(function (_a) {
     var theme = _a.theme, color = _a.color, active = _a.active, disabled = _a.disabled, condensed = _a.condensed;
     var defaultColor = theme.colors.white;
     var backgroundColor = theme_1.expandColor(theme, color) || defaultColor;
@@ -37,8 +37,6 @@ var Container = glamorous_1.default.div(function (_a) {
         }
         : {}, { marginRight: spacing / 2 });
 });
-var Button = function (props) {
-    return (React.createElement(Container, { tabIndex: -1, role: "button", type: props.type, key: props.id, css: props.css, className: props.className, onClick: props.disabled ? null : props.onClick, color: props.color, active: props.active, disabled: props.disabled, condensed: props.condensed }, props.children));
-};
+var Button = function (props) { return (React.createElement(Container, { type: props.type, key: props.id, css: props.css, className: props.className, onClick: props.disabled ? null : props.onClick, color: props.color, active: props.active, disabled: props.disabled, condensed: props.condensed }, props.children)); };
 exports.default = Button;
 //# sourceMappingURL=Button.js.map

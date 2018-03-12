@@ -12,13 +12,11 @@ exports[`Record Component Should render 1`] = `
     >
       Hello
     </div>
-    <div
+    <button
       class="css-x6gmeb"
-      role="button"
-      tabindex="-1"
     >
       Details
-    </div>
+    </button>
   </div>
 </div>
 `;
