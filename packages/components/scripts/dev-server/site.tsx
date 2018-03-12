@@ -11,6 +11,7 @@ import {
   Layout,
   Grid,
   Record,
+  Progress,
   RecordHeader,
   RecordBody,
   Card,
@@ -32,7 +33,7 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 class Site extends React.Component<{}, State> {
   state = {
-    isOpen: false
+    isOpen: true
   }
   render() {
     return (
@@ -41,24 +42,16 @@ class Site extends React.Component<{}, State> {
           <Sidenav />
           <Header />
           <Grid type="3x2">
-            <Card>
+            <Card css={{ position: "relative" }}>
               <CardHeader>Hello</CardHeader>
-              jalsfgfdlsjgfdslhgdshgsf
-            </Card>
-            <Card>
-              <CardHeader>Hello</CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>Hello</CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>Hello</CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>Hello</CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>Hello</CardHeader>
+              <Progress
+                error={this.state.isOpen ? "Loading error" : null}
+                onRetry={() => {
+                  this.setState(prevState => ({
+                    isOpen: false
+                  }))
+                }}
+              />
             </Card>
           </Grid>
         </Layout>

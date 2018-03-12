@@ -17,7 +17,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   backgroundColor: theme.colors.cardHeaderBackground,
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
-  height: 3 * theme.spacing,
+  height: 3.5 * theme.spacing,
   margin: -theme.spacing,
   marginBottom: theme.spacing,
   padding: `0 ${theme.spacing}px`,
