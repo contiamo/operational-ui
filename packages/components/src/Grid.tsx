@@ -10,28 +10,26 @@ export interface Props {
 }
 
 const getGridCSSProperties = (gridType: GridType): {} => {
-  switch (gridType) {
-    case "3x2":
-      return {
-        gridTemplateColumns: "auto auto auto",
-        gridTemplateRows: "auto auto"
-      }
-    case "1x1":
-      return {
-        gridTemplateColumns: "auto",
-        gridTemplateRows: "auto"
-      }
-    case "2x2":
-      return {
-        gridTemplateColumns: "auto auto",
-        gridTemplateRows: "auto auto"
-      }
-    case "IDE":
-      return {
-        gridTemplateColumns: "200px auto",
-        gridTemplateRows: "auto"
-      }
+  if (gridType === "IDE") {
+    return {
+      gridTemplateColumns: "200px auto",
+      gridTemplateRows: "auto"
+    }
   }
+  // Handle NxM case
+  const gridNumbers = String(gridType).split("x")
+  const cols = Number(gridNumbers[0])
+  const rows = Number(gridNumbers[1])
+  if (!isNaN(cols) && !isNaN(rows)) {
+    return {
+      gridTemplateColumns: `repeat(${cols}, 1fr)`,
+      gridTemplateRows: `repeat(${rows}, 1fr)`
+    }
+  }
+  // Because GridType is defines types that all fall into the
+  // cases above, this piece of code is never reached.
+  // (may change if we start accepting arbitrary NxM values)
+  return {}
 }
 
 const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: GridType }): {} => ({

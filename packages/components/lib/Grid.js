@@ -11,28 +11,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var getGridCSSProperties = function (gridType) {
-    switch (gridType) {
-        case "3x2":
-            return {
-                gridTemplateColumns: "auto auto auto",
-                gridTemplateRows: "auto auto"
-            };
-        case "1x1":
-            return {
-                gridTemplateColumns: "auto",
-                gridTemplateRows: "auto"
-            };
-        case "2x2":
-            return {
-                gridTemplateColumns: "auto auto",
-                gridTemplateRows: "auto auto"
-            };
-        case "IDE":
-            return {
-                gridTemplateColumns: "200px auto",
-                gridTemplateRows: "auto"
-            };
+    if (gridType === "IDE") {
+        return {
+            gridTemplateColumns: "200px auto",
+            gridTemplateRows: "auto"
+        };
     }
+    // Handle NxM case
+    var gridNumbers = String(gridType).split("x");
+    var cols = Number(gridNumbers[0]);
+    var rows = Number(gridNumbers[1]);
+    if (!isNaN(cols) && !isNaN(rows)) {
+        return {
+            gridTemplateColumns: "repeat(" + cols + ", 1fr)",
+            gridTemplateRows: "repeat(" + rows + ", 1fr)"
+        };
+    }
+    // Because GridType is defines types that all fall into the
+    // cases above, this piece of code is never reached.
+    // (may change if we start accepting arbitrary NxM values)
+    return {};
 };
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, gridType = _a.gridType;
