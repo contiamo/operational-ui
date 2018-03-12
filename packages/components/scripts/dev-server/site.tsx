@@ -17,6 +17,7 @@ import {
   Card,
   Heading1Type,
   Header,
+  Table,
   Sidenav,
   CardHeader
 } from "../../src"
