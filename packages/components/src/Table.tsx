@@ -12,24 +12,32 @@ export interface Props {
 
 const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   label: "table",
-  border: 0,
+  minWidth: 320,
   borderCollapse: "collapse",
+  border: "1px solid",
+  borderColor: theme.colors.separator,
   textAlign: "left",
   backgroundColor: "white",
   "& th": {
-    border: "1px solid",
     ...theme.typography.body,
-    fontWeight: 600
+    opacity: 0.4
+  },
+  "& tr": {
+    borderTop: "1px solid",
+    borderBottom: "1px solid"
+  },
+  "& tr:first-child": {
+    borderTop: 0
+  },
+  "& tbody tr:last-child": {
+    borderBottom: 0
   },
   "& td": {
-    border: "1px solid",
+    padding: `${theme.spacing * 2 / 3}px ${theme.spacing * 4 / 3}px`,
     ...theme.typography.body
   },
-  "& td p": {
-    marginBottom: 0
-  },
-  "& td, & th": {
-    borderColor: theme.colors.gray20,
+  "& td, & th, & tr": {
+    borderColor: theme.colors.separator,
     padding: `${theme.spacing / 2}px ${theme.spacing}px`
   }
 }))

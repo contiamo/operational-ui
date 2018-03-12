@@ -14,17 +14,26 @@ var Container = glamorous_1.default.table(function (_a) {
     var theme = _a.theme;
     return ({
         label: "table",
-        border: 0,
+        minWidth: 320,
         borderCollapse: "collapse",
+        border: "1px solid",
+        borderColor: theme.colors.separator,
         textAlign: "left",
         backgroundColor: "white",
-        "& th": __assign({ border: "1px solid" }, theme.typography.body, { fontWeight: 600 }),
-        "& td": __assign({ border: "1px solid" }, theme.typography.body),
-        "& td p": {
-            marginBottom: 0
+        "& th": __assign({}, theme.typography.body, { opacity: 0.4 }),
+        "& tr": {
+            borderTop: "1px solid",
+            borderBottom: "1px solid"
         },
-        "& td, & th": {
-            borderColor: theme.colors.gray20,
+        "& tr:first-child": {
+            borderTop: 0
+        },
+        "& tbody tr:last-child": {
+            borderBottom: 0
+        },
+        "& td": __assign({ padding: theme.spacing * 2 / 3 + "px " + theme.spacing * 4 / 3 + "px" }, theme.typography.body),
+        "& td, & th, & tr": {
+            borderColor: theme.colors.separator,
             padding: theme.spacing / 2 + "px " + theme.spacing + "px"
         }
     });
