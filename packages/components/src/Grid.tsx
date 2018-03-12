@@ -2,14 +2,12 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-export type GridType = "3x2" | "1x1" | "2x2" | "IDE"
-
 export interface Props {
-  type?: GridType
+  type?: string
   children?: React.ReactNode
 }
 
-const getGridCSSProperties = (gridType: GridType): {} => {
+const getGridCSSProperties = (gridType: string): {} => {
   if (gridType === "IDE") {
     return {
       gridTemplateColumns: "200px auto",
@@ -26,13 +24,12 @@ const getGridCSSProperties = (gridType: GridType): {} => {
       gridTemplateRows: `repeat(${rows}, 1fr)`
     }
   }
-  // Because GridType is defines types that all fall into the
-  // cases above, this piece of code is never reached.
-  // (may change if we start accepting arbitrary NxM values)
-  return {}
+  throw new Error(
+    "Grid type can be either 'IDE' or of an `MxN` format, e.g. `1x2` or `5x6`. See https://ui.contiamo.com/components/grids/."
+  )
 }
 
-const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: GridType }): {} => ({
+const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: string }): {} => ({
   label: "Grid",
   width: "100%",
   height: "100%",

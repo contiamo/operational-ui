@@ -27,10 +27,7 @@ var getGridCSSProperties = function (gridType) {
             gridTemplateRows: "repeat(" + rows + ", 1fr)"
         };
     }
-    // Because GridType is defines types that all fall into the
-    // cases above, this piece of code is never reached.
-    // (may change if we start accepting arbitrary NxM values)
-    return {};
+    throw new Error("Grid type can be either 'IDE' or of an `MxN` format, e.g. `1x2` or `5x6`. See https://ui.contiamo.com/components/grids/.");
 };
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, gridType = _a.gridType;
