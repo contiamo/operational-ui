@@ -24,7 +24,7 @@ const simpleSnippet = `
 
   const DonutRenderer = {
     type: "donut",
-    ...accessors
+    accessors
   }
 
   const GaugeRenderer = {
@@ -32,12 +32,12 @@ const simpleSnippet = `
     extent: "semi",
     comparison: { key: "Last month", value: 18 },
     target: 50,
-    ...accessors
+    accessors
   }
 
   const PolarRenderer = {
     type: "polar",
-    ...accessors
+    accessors
   }
 
   class Pie extends React.Component {

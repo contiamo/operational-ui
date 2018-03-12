@@ -1,20 +1,44 @@
-import AbstractRenderer from "./abstract_renderer";
 import "d3-transition";
-import { ComputedDatum, Datum } from "../typings";
-declare class Polar extends AbstractRenderer {
+import { ComputedArcs, ComputedData, ComputedDatum, D3Selection, Datum, EventBus, HoverPayload, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
+declare class Polar implements Renderer {
+    color: RendererAccessor<string>;
+    computed: ComputedData;
+    currentTranslation: [number, number];
+    data: Datum[];
+    drawn: boolean;
+    el: D3Selection;
+    events: EventBus;
+    key: RendererAccessor<string>;
     minSegmentWidth: number;
-    onTransitionEnd(): void;
+    previous: Partial<ComputedData>;
+    state: State;
+    type: "donut" | "polar" | "gauge";
+    value: RendererAccessor<number>;
+    constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>);
+    updateOptions(options: Object<any>): void;
+    setData(data: Datum[]): void;
+    draw(): void;
+    initialDraw(): void;
+    updateDraw(): void;
+    arcAttributes(): Object<any>;
     fitToCanvas(): void;
-    computeOuter(width: number, height: number, scaleFactor?: number): any;
-    computeInner(outerRadius: (d: Datum) => number): number;
-    hoverOuter(radius: any): any;
-    angleValue(d: Datum): number;
-    computeTranslate(): [number, number];
-    totalForPercentages(): number;
-    centerDisplayString(): string[];
-    totalYOffset(): string;
     arcTween(d: ComputedDatum, i: number): (t: number) => string;
     removeArcTween(d: ComputedDatum, i: number): (t: number) => string;
-    angleRange(): [number, number];
+    centerDisplayString(): string;
+    compute(): void;
+    angleValue(): number;
+    computeArcs(computed: Partial<ComputedData>): ComputedArcs;
+    computeOuter(drawingDims: {
+        width: number;
+        height: number;
+    }, scaleFactor?: number): (d: Datum) => number;
+    computeInner(data: ComputedDatum[], outerRadius: (d: Datum) => number): number;
+    hoverOuter(radius: any): any;
+    onMouseOver(d: ComputedDatum): void;
+    updateElementHover(datapoint: HoverPayload): void;
+    highlightElement(key: string): void;
+    onMouseOut(): void;
+    dataForLegend(): LegendDatum[];
+    remove(): void;
 }
 export default Polar;

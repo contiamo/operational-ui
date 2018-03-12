@@ -1,123 +1,124 @@
-import AbstractRenderer from "./abstract_renderer"
 import Events from "../../utils/event_catalog"
-import { filter, find, findIndex, forEach, last, map, reduce } from "lodash/fp"
+import { defaults, filter, find, findIndex, forEach, last, map, reduce } from "lodash/fp"
+import * as d3 from "d3-selection"
+import "d3-transition"
+import { arc as d3Arc } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
-import { ComputedDatum, D3Selection, Datum, LegendDatum, Object } from "../typings"
+import { setPathAttributes, setTextAttributes } from "../../utils/d3_utils"
 import * as styles from "./styles"
+import { colorAssigner } from "@operational/utils"
+import * as Utils from "./renderer_utils"
+import {
+  ComputedArcs,
+  ComputedData,
+  ComputedDatum,
+  ComputedInitial,
+  D3Selection,
+  Datum,
+  DatumInfo,
+  EventBus,
+  HoverPayload,
+  LegendDatum,
+  Object,
+  Partial,
+  PieChartConfig,
+  Renderer,
+  RendererAccessor,
+  RendererAccessors,
+  State
+} from "../typings"
 
-class Gauge extends AbstractRenderer {
-  comparison: Object<any>
+class Gauge implements Renderer {
+  color: RendererAccessor<string>
+  comparison: Datum
+  computed: ComputedData
+  currentTranslation: [number, number]
+  data: Datum[]
+  drawn: boolean = false
+  el: D3Selection
+  events: EventBus
   extent: string
+  key: RendererAccessor<string>
+  previous: Partial<ComputedData>
+  state: State
   target: number
+  total: number
+  type: "donut" | "polar" | "gauge" = "gauge"
+  value: RendererAccessor<number>
 
-  checkData(): void {
-    if (!this.target) {
-      throw new Error("No target value provided for gauge")
-    }
+  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
+    this.state = state
+    this.events = events
+    this.el = el
+    this.updateOptions(options)
+    this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.updateElementHover.bind(this))
   }
 
-  computeOuter(width: number, height: number): number {
-    return this.extent === "full"
-      ? super.computeOuter(width, height)
-      : Math.min(width / 2, height) - this.state.current.get("config").outerBorderMargin
+  // Initialization and updating config or accessors
+  updateOptions(options: Object<any>): void {
+    Utils.assignOptions(this, options)
   }
 
-  runningTotal(): number[] {
-    return reduce((memo: number[], datapoint: Datum): number[] => {
-      const previous: number = last(memo) || 0
-      memo.push(previous + datapoint.value)
-      return memo
-    }, [])(this.data)
+  setData(data: Datum[]): void {
+    this.data = data
   }
 
-  // Ensure sum of rendered values is equal to gauge target value.
-  fillGaugeExtent(): void {
-    const runningTotal: number[] = this.runningTotal()
-
-    // If target has been exceeded, reduce last value(s)
-    if (this.total >= this.target) {
-      const index: number = findIndex((value: number): boolean => value >= this.target)(runningTotal)
-      forEach((datapoint: Datum, i: number): void => {
-        if (i === index) {
-          datapoint.value = i > 0 ? this.target - runningTotal[i - 1] : this.target
-        } else if (i > index) {
-          datapoint.value = 0
-        }
-      })(this.data)
-      // If target has not been reached, add an "unfilled" segment which will have no color,
-      // and will not be hoverable.
-    } else {
-      this.data.push({
-        unfilled: true,
-        value: this.target - this.total
-      })
-    }
+  // Drawing
+  draw(): void {
+    this.compute()
+    this.drawn ? this.updateDraw() : this.initialDraw()
   }
 
-  centerDisplayString(): string[] {
-    return [`${this.total} / ${this.target}`]
-  }
-
-  compute(): void {
-    this.computeTotal()
-    this.fillGaugeExtent()
-    super.compute()
-    this.computed.comparison = this.comparison
+  initialDraw(): void {
+    // groups
+    this.el.append("svg:g").attr("class", "arcs")
+    this.el.append("svg:g").attr("class", styles.total)
+    this.updateDraw()
+    this.drawn = true
   }
 
   updateDraw(): void {
-    super.updateDraw()
+    const config: PieChartConfig = this.state.current.get("config")
+    const duration: number = config.duration
+    const minTotalFontSize: number = config.minTotalFontSize
+    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
+      .drawingContainerDims
 
+    // Remove focus before updating chart
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+
+    // Center coordinate system
+    this.currentTranslation = Utils.computeTranslate(drawingDims, this.extent === "semi" ? this.computed.r : 0)
+    this.el.attr("transform", Utils.translateString(this.currentTranslation))
+
+    // Arcs
+    const arcs: D3Selection = Utils.createArcGroups(this.el, this.computed.data, this.key)
+    // Exit
+    Utils.exitArcs(arcs, duration, Utils.removeArcTween(this.computed, this.angleRange()))
+    // Enter
+    Utils.enterArcs(arcs, this.onMouseOver.bind(this), this.onMouseOut.bind(this))
+    // Update
+    const updatingArcs: D3Selection = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
+    setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
+    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
+    // Total / center text
+    const options = { minTotalFontSize, innerRadius: this.computed.inner, yOffset: this.totalYOffset() }
+    Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
     // Comparison line
     this.updateComparison()
   }
 
-  updateComparison(): void {
-    const comparison: D3Selection = this.el
-      .selectAll(`g.${styles.comparison}`)
-      .data(this.comparison ? [this.comparison] : [])
-
-    comparison.exit().remove()
-
-    const enter: D3Selection = comparison
-      .enter()
-      .append("svg:g")
-      .attr("class", styles.comparison)
-
-    enter.append("svg:path")
-
-    enter
-      .merge(comparison)
-      .transition()
-      .duration(this.state.current.get("config").duration)
-      .select("path")
-      .attrTween("d", this.lineTween.bind(this))
-  }
-
-  onMouseOver(d: ComputedDatum): void {
-    if (d.data.unfilled) {
-      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
-      return
+  arcAttributes(): Object<any> {
+    return {
+      path: this.arcTween.bind(this),
+      fill: this.color.bind(this)
     }
-    super.onMouseOver(d)
   }
 
-  totalForPercentages(): number {
-    return this.target
-  }
-
-  // Establish coordinate system with 0,0 being the center of the width, height rectangle
-  computeTranslate(): [number, number] {
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingContainerDims
-    const yTranslate: number =
-      this.extent === "full" ? drawingDims.height / 2 : (drawingDims.height + this.computed.r) / 2
-
-    this.currentTranslation = [drawingDims.width / 2, yTranslate]
-    return this.currentTranslation
-  }
-
-  // Helpers
   angleRange(): [number, number] {
     return this.extent === "semi" ? [-Math.PI / 2, Math.PI / 2] : [-Math.PI, Math.PI]
   }
@@ -170,7 +171,12 @@ class Gauge extends AbstractRenderer {
       }
     }
 
-    const f = interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle })
+    const innerRadius: number = this.previous.inner || this.computed.inner
+    const outerRadius: number = this.previous.r || this.computed.r
+    const f = interpolateObject(
+      { innerRadius, outerRadius, endAngle: e0, startAngle: s0 },
+      { innerRadius: this.computed.inner, outerRadius: this.computed.r, endAngle: d.endAngle, startAngle: d.startAngle }
+    )
     return (t: number): string => this.computed.arc(f(t))
   }
 
@@ -196,6 +202,176 @@ class Gauge extends AbstractRenderer {
     return (t: number): string => path(f(t))
   }
 
+  centerDisplayString(): string {
+    return `${this.total} / ${this.target}`
+  }
+
+  updateComparison(): void {
+    const comparison: D3Selection = this.el
+      .selectAll(`g.${styles.comparison}`)
+      .data(this.comparison ? [this.comparison] : [])
+
+    comparison.exit().remove()
+
+    const enter: D3Selection = comparison
+      .enter()
+      .append("svg:g")
+      .attr("class", styles.comparison)
+
+    enter.append("svg:path")
+
+    enter
+      .merge(comparison)
+      .transition()
+      .duration(this.state.current.get("config").duration)
+      .select("path")
+      .attrTween("d", this.lineTween.bind(this))
+  }
+
+  // Data computation / preparation
+  compute(): void {
+    this.previous = this.computed
+    this.total = Utils.computeTotal(this.data, this.value)
+
+    this.fillGaugeExtent()
+
+    // We cannot draw a pie chart with no series or only series that have the value 0
+    if (this.data.length === 0) {
+      this.computed.data = []
+      return
+    }
+
+    if (!this.target) {
+      throw new Error("No target value provided for gauge")
+    }
+
+    const d: ComputedInitial = {
+      layout: Utils.layout(this.angleValue.bind(this), this.angleRange()),
+      total: this.total,
+      target: this.target
+    }
+
+    // data should not become part of this.previous in first computation
+    this.previous = defaults(d)(this.previous)
+
+    Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.target)
+
+    this.computed = {
+      ...d,
+      ...this.computeArcs(d),
+      data: d.layout(this.data),
+      comparison: this.comparison
+    }
+  }
+
+  angleValue(d: Datum): number {
+    return this.value(d) || d.value
+  }
+
+  // Ensure sum of rendered values is equal to gauge target value.
+  fillGaugeExtent(): void {
+    const runningTotal: number[] = this.runningTotal()
+
+    // If target has been exceeded, reduce last value(s)
+    if (this.total >= this.target) {
+      const index: number = findIndex((value: number): boolean => value >= this.target)(runningTotal)
+      forEach((datapoint: Datum, i: number): void => {
+        if (i === index) {
+          datapoint.value = i > 0 ? this.target - runningTotal[i - 1] : this.target
+        } else if (i > index) {
+          datapoint.value = 0
+        }
+      })(this.data)
+      // If target has not been reached, add an "unfilled" segment which will have no color,
+      // and will not be hoverable.
+    } else {
+      this.data.push({
+        unfilled: true,
+        value: this.target - this.total
+      })
+    }
+  }
+
+  runningTotal(): number[] {
+    return reduce((memo: number[], datapoint: Datum): number[] => {
+      const previous: number = last(memo) || 0
+      memo.push(previous + datapoint.value)
+      return memo
+    }, [])(this.data)
+  }
+
+  computeArcs(computed: ComputedInitial): ComputedArcs {
+    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
+        .drawingContainerDims,
+      outerBorderMargin: number = this.state.current.get("config").outerBorderMargin,
+      r: number = this.computeOuter(drawingDims, outerBorderMargin),
+      inner: number = this.computeInner(r),
+      rHover: number = r + 1,
+      innerHover: number = Math.max(inner - 1, 0)
+    return {
+      r,
+      inner,
+      rHover,
+      innerHover,
+      arc: d3Arc(),
+      arcOver: d3Arc()
+        .innerRadius(innerHover)
+        .outerRadius(rHover)
+    }
+  }
+
+  computeOuter(drawingDims: { width: number; height: number }, margin: number): number {
+    return this.extent === "full"
+      ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
+      : Math.min(drawingDims.width / 2, drawingDims.height) - margin
+  }
+
+  computeInner(outerRadius: any): number {
+    const config: PieChartConfig = this.state.current.get("config")
+    const width: number = outerRadius - config.minInnerRadius
+    // If there isn't enough space, don't render inner circle
+    return width < config.minWidth ? 0 : outerRadius - Math.min(width, config.maxWidth)
+  }
+
+  // Event listeners / handlers
+  onMouseOver(d: ComputedDatum): void {
+    if (d.data.unfilled) {
+      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+      return
+    }
+    const datumInfo: DatumInfo = {
+      key: this.key(d),
+      value: this.value(d),
+      percentage: d.data.percentage
+    }
+    const centroid: [number, number] = Utils.translateBack(this.computed.arc.centroid(d), this.currentTranslation)
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
+  }
+
+  updateElementHover(datapoint: HoverPayload): void {
+    if (!this.drawn) {
+      return
+    }
+
+    const arcs: any = this.el.select("g.arcs").selectAll("g")
+    const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
+    const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
+    const shadowDefinitionId: string = this.state.current.get("computed").canvas.shadowDefinitionId
+
+    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId)
+    Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
+  }
+
+  highlightElement(key: string): void {
+    const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
+    this.onMouseOver(d)
+  }
+
+  onMouseOut(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+  }
+
+  // External methods
   dataForLegend(): LegendDatum[] {
     const data: LegendDatum[] = map((datum: ComputedDatum): LegendDatum => {
       return {
@@ -210,6 +386,14 @@ class Gauge extends AbstractRenderer {
       })
     }
     return data
+  }
+
+  // Remove & clean up
+  remove(): void {
+    if (this.drawn) {
+      this.el.remove()
+      this.drawn = false
+    }
   }
 }
 

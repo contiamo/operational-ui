@@ -16,7 +16,7 @@ var arcStyle = {
     opacity: 0.8,
     fill: "#eee"
 };
-var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.typography.small);
+var labelStyle = __assign({ fill: "#333", stroke: "none", pointerEvents: "none" }, theme_1.operational.typography.small);
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var comparisonStyle = {
     stroke: "#747474",

@@ -11,6 +11,7 @@ const arcStyle = {
 const labelStyle = {
   fill: "#333",
   stroke: "none",
+  pointerEvents: "none",
   ...theme.typography.small
 }
 

@@ -1,11 +1,41 @@
-import AbstractRenderer from "./abstract_renderer";
-import { ComputedDatum } from "../typings";
-declare class Donut extends AbstractRenderer {
-    computeTranslate(): [number, number];
-    totalForPercentages(): number;
-    centerDisplayString(): string[];
-    totalYOffset(): string;
+import "d3-transition";
+import { ComputedArcs, ComputedData, ComputedDatum, ComputedInitial, D3Selection, Datum, EventBus, HoverPayload, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
+declare class Donut implements Renderer {
+    color: RendererAccessor<string>;
+    computed: ComputedData;
+    currentTranslation: [number, number];
+    data: Datum[];
+    drawn: boolean;
+    el: D3Selection;
+    events: EventBus;
+    key: RendererAccessor<string>;
+    previous: Partial<ComputedData>;
+    state: State;
+    type: "donut" | "polar" | "gauge";
+    value: RendererAccessor<number>;
+    constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>);
+    updateOptions(options: Object<any>): void;
+    setData(data: Datum[]): void;
+    draw(): void;
+    initialDraw(): void;
+    updateDraw(): void;
+    arcAttributes(): Object<any>;
     arcTween(d: ComputedDatum): (t: number) => string;
-    angleRange(): [number, number];
+    removeArcTween(d: ComputedDatum, i: number): (t: number) => string;
+    centerDisplayString(): string;
+    compute(): void;
+    angleValue(d: Datum): number;
+    computeArcs(computed: ComputedInitial): ComputedArcs;
+    computeOuter(drawingDims: {
+        width: number;
+        height: number;
+    }): number;
+    computeInner(outerRadius: number): number;
+    onMouseOver(d: ComputedDatum): void;
+    updateElementHover(datapoint: HoverPayload): void;
+    highlightElement(key: string): void;
+    onMouseOut(): void;
+    dataForLegend(): LegendDatum[];
+    remove(): void;
 }
 export default Donut;

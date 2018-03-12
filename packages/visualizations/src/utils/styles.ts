@@ -7,8 +7,7 @@ const legendStyle = {
 }
 
 const legendTopBottomStyle = {
-  padding: "0 7px",
-  margin: "3px 0",
+  padding: "3px 7px",
   "& .series-legend, .comparison-legend": {
     float: "left"
   }

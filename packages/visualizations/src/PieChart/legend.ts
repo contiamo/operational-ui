@@ -51,7 +51,6 @@ class PieChartLegend implements Legend {
       .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
         withD3Element((d: LegendDatum, el: HTMLElement): void => {
-          // @TODO check type of d
           const element: D3Selection = d3.select(el)
           element.append("div").attr("class", "color")
           element.append("div").attr("class", "name")
@@ -60,7 +59,6 @@ class PieChartLegend implements Legend {
       .merge(legends)
       .each(
         withD3Element((d: LegendDatum, el: HTMLElement): void => {
-          // @TODO check type of d
           const element: D3Selection = d3.select(el)
           element.select("div.color").style("background-color", get("color"))
           element.select("div.name").html(get("label"))

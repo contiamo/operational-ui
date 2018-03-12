@@ -1,39 +1,84 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_renderer_1 = require("./abstract_renderer");
-var d3_interpolate_1 = require("d3-interpolate");
-var fp_1 = require("lodash/fp");
-var Donut = /** @class */ (function (_super) {
-    __extends(Donut, _super);
-    function Donut() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
     }
-    // Establish coordinate system with 0,0 being the center of the width, height rectangle
-    Donut.prototype.computeTranslate = function () {
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var event_catalog_1 = require("../../utils/event_catalog");
+var fp_1 = require("lodash/fp");
+require("d3-transition");
+var d3_shape_1 = require("d3-shape");
+var d3_interpolate_1 = require("d3-interpolate");
+var d3_utils_1 = require("../../utils/d3_utils");
+var styles = require("./styles");
+var Utils = require("./renderer_utils");
+var ANGLE_RANGE = [0, 2 * Math.PI];
+var TOTAL_Y_OFFSET = "0.35em";
+var Donut = /** @class */ (function () {
+    function Donut(state, events, el, options) {
+        this.drawn = false;
+        this.type = "donut";
+        this.state = state;
+        this.events = events;
+        this.el = el;
+        this.updateOptions(options);
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.updateElementHover.bind(this));
+    }
+    // Initialization and updating config or accessors
+    Donut.prototype.updateOptions = function (options) {
+        Utils.assignOptions(this, options);
+    };
+    Donut.prototype.setData = function (data) {
+        this.data = data;
+    };
+    // Drawing
+    Donut.prototype.draw = function () {
+        this.compute();
+        this.drawn ? this.updateDraw() : this.initialDraw();
+    };
+    Donut.prototype.initialDraw = function () {
+        // groups
+        this.el.append("svg:g").attr("class", "arcs");
+        this.el.append("svg:g").attr("class", styles.total);
+        this.updateDraw();
+        this.drawn = true;
+    };
+    Donut.prototype.updateDraw = function () {
+        var config = this.state.current.get("config");
+        var duration = config.duration;
+        var minTotalFontSize = config.minTotalFontSize;
         var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
-        this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2];
-        return this.currentTranslation;
+        // Remove focus before updating chart
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        // Center coordinate system
+        this.currentTranslation = Utils.computeTranslate(drawingDims);
+        this.el.attr("transform", Utils.translateString(this.currentTranslation));
+        // Arcs
+        var arcs = Utils.createArcGroups(this.el, this.computed.data, this.key);
+        // Exit
+        Utils.exitArcs(arcs, duration, this.removeArcTween.bind(this));
+        // Enter
+        Utils.enterArcs(arcs, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
+        // Update
+        var updatingArcs = arcs.merge(arcs.enter().selectAll("g." + styles.arc));
+        d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
+        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
+        // Total / center text
+        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.inner, yOffset: TOTAL_Y_OFFSET };
+        Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
     };
-    // Helpers
-    Donut.prototype.totalForPercentages = function () {
-        this.computeTotal();
-        return this.total;
-    };
-    Donut.prototype.centerDisplayString = function () {
-        return this.computed.inner > 0 ? [this.computed.total.toString()] : [];
-    };
-    Donut.prototype.totalYOffset = function () {
-        return "0.35em";
+    Donut.prototype.arcAttributes = function () {
+        return {
+            path: this.arcTween.bind(this),
+            fill: this.color.bind(this)
+        };
     };
     // Interpolate the arcs in data space.
     Donut.prototype.arcTween = function (d) {
@@ -57,13 +102,111 @@ var Donut = /** @class */ (function (_super) {
             s0 = 0;
             e0 = 0;
         }
-        var f = d3_interpolate_1.interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle });
+        var innerRadius = this.previous.inner || this.computed.inner;
+        var outerRadius = this.previous.r || this.computed.r;
+        var f = d3_interpolate_1.interpolateObject({ innerRadius: innerRadius, outerRadius: outerRadius, endAngle: e0, startAngle: s0 }, { innerRadius: this.computed.inner, outerRadius: this.computed.r, endAngle: d.endAngle, startAngle: d.startAngle });
         return function (t) { return _this.computed.arc(f(t)); };
     };
-    Donut.prototype.angleRange = function () {
-        return [0, 2 * Math.PI];
+    Donut.prototype.removeArcTween = function (d, i) {
+        var _this = this;
+        var s0;
+        var e0;
+        s0 = e0 = ANGLE_RANGE[1];
+        var f = d3_interpolate_1.interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { endAngle: e0, startAngle: s0 });
+        return function (t) { return _this.computed.arc(f(t)); };
+    };
+    Donut.prototype.centerDisplayString = function () {
+        return this.computed.inner > 0 ? this.computed.total.toString() : "";
+    };
+    // Data computation / preparation
+    Donut.prototype.compute = function () {
+        this.previous = this.computed;
+        // We cannot draw a pie chart with no series or only series that have the value 0
+        if (this.data.length === 0) {
+            this.computed.data = [];
+            return;
+        }
+        var d = {
+            layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
+            total: Utils.computeTotal(this.data, this.value)
+        };
+        // data should not become part of this.previous in first computation
+        this.previous = fp_1.defaults(d)(this.previous);
+        Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.total);
+        this.computed = __assign({}, d, this.computeArcs(d), { data: d.layout(this.data) });
+    };
+    Donut.prototype.angleValue = function (d) {
+        return this.value(d) || d.value;
+    };
+    Donut.prototype.computeArcs = function (computed) {
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims, r = this.computeOuter(drawingDims), inner = this.computeInner(r), rHover = r + 1, innerHover = Math.max(inner - 1, 0);
+        return {
+            r: r,
+            inner: inner,
+            rHover: rHover,
+            innerHover: innerHover,
+            arc: d3_shape_1.arc(),
+            arcOver: d3_shape_1.arc().innerRadius(innerHover).outerRadius(rHover)
+        };
+    };
+    Donut.prototype.computeOuter = function (drawingDims) {
+        var outerBorderMargin = this.state.current.get("config").outerBorderMargin;
+        return Math.min(drawingDims.width, drawingDims.height) / 2 - outerBorderMargin;
+    };
+    Donut.prototype.computeInner = function (outerRadius) {
+        var config = this.state.current.get("config");
+        var width = outerRadius - config.minInnerRadius;
+        // If there isn't enough space, don't render inner circle
+        return width < config.minWidth ? 0 : outerRadius - Math.min(width, config.maxWidth);
+    };
+    // Event listeners / handlers
+    Donut.prototype.onMouseOver = function (d) {
+        var datumInfo = {
+            key: this.key(d),
+            value: this.value(d),
+            percentage: d.data.percentage
+        };
+        var centroid = Utils.translateBack(this.computed.arc.centroid(d), this.currentTranslation);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
+    };
+    Donut.prototype.updateElementHover = function (datapoint) {
+        var _this = this;
+        if (!this.drawn) {
+            return;
+        }
+        var arcs = this.el.select("g.arcs").selectAll("g");
+        var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
+        var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
+        var shadowDefinitionId = this.state.current.get("computed").canvas.shadowDefinitionId;
+        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId);
+        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc);
+    };
+    Donut.prototype.highlightElement = function (key) {
+        var _this = this;
+        var d = fp_1.find(function (datum) { return _this.key(datum) === key; })(this.computed.data);
+        this.onMouseOver(d);
+    };
+    Donut.prototype.onMouseOut = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+    };
+    // External methods
+    Donut.prototype.dataForLegend = function () {
+        var _this = this;
+        return fp_1.map(function (datum) {
+            return {
+                label: _this.key(datum),
+                color: _this.color(datum)
+            };
+        })(this.data);
+    };
+    // Remove & clean up
+    Donut.prototype.remove = function () {
+        if (this.drawn) {
+            this.el.remove();
+            this.drawn = false;
+        }
     };
     return Donut;
-}(abstract_renderer_1.default));
+}());
 exports.default = Donut;
 //# sourceMappingURL=donut.js.map

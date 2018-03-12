@@ -1,13 +1,12 @@
-import AbstractRenderer from "./renderers/abstract_renderer";
-import { Data, EventBus, RendererOptions, SeriesEl, State, StateWriter } from "./typings";
+import { Data, EventBus, Renderer as RendererInterface, RendererOptions, SeriesEl, State, StateWriter } from "./typings";
 declare class Series {
-    attributes: Data;
+    attributes: any;
     data: Data;
     drawn: boolean;
     el: SeriesEl;
     events: EventBus;
     renderAs: () => RendererOptions[];
-    renderer: AbstractRenderer;
+    renderer: RendererInterface;
     state: State;
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl);

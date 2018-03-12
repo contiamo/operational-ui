@@ -15,6 +15,9 @@ exports.transitionIfVisible = function (selection, duration) {
     return document.hidden ? selection : selection.transition().duration(duration);
 };
 exports.onTransitionEnd = function (selection, func) {
+    if (!func) {
+        return;
+    }
     var n = 0;
     return selection.each(function () { return (n = n + 1); }).on("end", function () {
         n = n - 1;
@@ -22,5 +25,34 @@ exports.onTransitionEnd = function (selection, func) {
             func();
         }
     });
+};
+var transitionOrSelection = function (selection, duration) {
+    return duration != null
+        ? selection.transition()
+            .duration(duration)
+        : selection;
+};
+exports.setPathAttributes = function (selection, attributes, duration, onEnd) {
+    var elements = duration
+        ? transitionOrSelection(selection, duration)
+            .attrTween("d", attributes.path)
+        : transitionOrSelection(selection)
+            .attr("d", attributes.path);
+    elements
+        .style("fill", attributes.fill)
+        .style("stroke", attributes.stroke)
+        .style("opacity", attributes.opacity)
+        .call(exports.onTransitionEnd, onEnd);
+};
+exports.setTextAttributes = function (selection, attributes, duration) {
+    transitionOrSelection(selection, duration)
+        .attr("x", attributes.x)
+        .attr("y", attributes.y)
+        .attr("dx", attributes.dx)
+        .attr("dy", attributes.dy)
+        .style("text-anchor", attributes.textAnchor)
+        .attr("transform", attributes.transform)
+        .text(attributes.text)
+        .style("opacity", attributes.opacity || 1);
 };
 //# sourceMappingURL=d3_utils.js.map

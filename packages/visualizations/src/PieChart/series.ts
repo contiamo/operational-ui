@@ -1,11 +1,11 @@
 // import DataHandler from "./data_handler"
 import Renderer from "./renderers/renderer"
-import AbstractRenderer from "./renderers/abstract_renderer"
 import {
   Data,
   Datum,
   EventBus,
   Object,
+  Renderer as RendererInterface,
   RendererOptions,
   SeriesAccessors,
   SeriesEl,
@@ -15,14 +15,13 @@ import {
 import { flow, filter, forEach } from "lodash/fp"
 
 class Series {
-  // @TODO really?? Should be "any"
-  attributes: Data
+  attributes: any
   data: Data
   drawn: boolean
   el: SeriesEl
   events: EventBus
   renderAs: () => RendererOptions[]
-  renderer: AbstractRenderer
+  renderer: RendererInterface
   state: State
   stateWriter: StateWriter
 
@@ -71,12 +70,12 @@ class Series {
       this.renderer.remove()
       this.renderer = this.createRenderer(rendererOptions)
     } else {
-      this.renderer.assignOptions(rendererOptions)
+      this.renderer.updateOptions(rendererOptions)
     }
   }
 
   createRenderer(options: RendererOptions): any {
-    return new Renderer(this.state, this.events, this.el, options)
+    return new Renderer(this.state, this.events, this.el.select("g.drawing"), options)
   }
 
   draw(): void {

@@ -1,7 +1,7 @@
 // Type definitions for the Contiamo Process Flow visualization
 import * as d3 from "d3-selection"
 import { Arc, Pie, PieArcDatum } from "d3-shape"
-import { Accessor, Config, Object, Focus, Legend, Facade } from "../utils/typings"
+import { Accessor, Config, Facade, Focus, Legend, Object, State } from "../utils/typings"
 
 export {
   Accessor,
@@ -9,6 +9,7 @@ export {
   Canvas,
   ComponentConfigOptions,
   D3Selection,
+  D3Transition,
   EventBus,
   Legend,
   Object,
@@ -65,10 +66,12 @@ export interface AccessorsObject {
   series: SeriesAccessors
 }
 
+export type RendererAccessor<T> = Accessor<Datum | ComputedDatum, T>
+
 export interface RendererAccessors {
-  key: Accessor<Datum | ComputedDatum, string>
-  value: Accessor<Datum | ComputedDatum, number>
-  color: Accessor<Datum | ComputedDatum, string>
+  key: RendererAccessor<string>
+  value: RendererAccessor<number>
+  color: RendererAccessor<string>
 }
 
 export interface Computed {
@@ -101,16 +104,14 @@ export interface RendererOptions {
   type: "donut" | "polar" | "gauge"
   accessors?: Object<Accessor<Datum, any>>
   extent?: "semi" | "full"
-  comparison?: {
-    id: string
-    size: number
-  }
+  comparison?: Datum
   target?: number
 }
 
 export interface ComputedInitial {
   layout: Pie<any, any>
   total: number
+  target?: number
 }
 
 export interface ComputedArcs {
@@ -125,6 +126,18 @@ export interface ComputedArcs {
 export type ComputedDatum = PieArcDatum<Datum>
 
 export interface ComputedData extends ComputedInitial, ComputedArcs {
-  comparison?: any
+  comparison?: Datum
   data: ComputedDatum[]
+}
+
+export interface Renderer {
+  dataForLegend: () => LegendDatum[]
+  draw: () => void
+  key: Accessor<Datum | ComputedDatum, string>
+  remove: () => void
+  setData: (data: Datum[]) => void
+  state: State
+  type: "donut" | "gauge" | "polar"
+  updateOptions: (options: Object<any>) => void
+  value: Accessor<Datum | ComputedDatum, number>
 }
