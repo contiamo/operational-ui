@@ -35,9 +35,9 @@ const simpleSnippet = `
 const propDescription = [
   {
     name: "type",
-    description: "One of the predefined grid types made available by the library.",
+    description: "Either 'IDE', or of an `MxN` format, with `M` and `N` as integers.",
     defaultValue: "3x2",
-    type: "'3x2' | '2x2' | '1x1' | 'IDE'",
+    type: "string",
     optional: true
   }
 ]
@@ -48,10 +48,8 @@ export default props => (
       <StaticContent
         markdownContent={`
 A grid component with the following predefined options:
-* '3x2': a 3-by-2 uniform grid.
-* '2x2': a 3-by-2 uniform grid.
-* '1x1': a 3-by-2 uniform grid.
 * 'IDE': a grid used to implement an IDE, with a narrow column on the left for the folder tree browser, and a wide one on the right for code.
+* 'MxN': an M-by-N grid of any integers.
 
 If you have other special needs, we recommend using the CSS grid directly, as these grid types are build on top of it.
       `}
