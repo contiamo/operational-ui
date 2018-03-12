@@ -22,7 +22,6 @@ const Container = glamorous.div(
   {
     label: "progress",
     width: "100%",
-    height: "100%",
     overflow: "hidden",
     top: 0,
     left: 0,
