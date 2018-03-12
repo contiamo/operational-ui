@@ -58,8 +58,9 @@ var Links = /** @class */ (function () {
             d3.select(el).attr("stroke", _this.config.highlightColor);
         }));
     };
-    // Remove any old highlights (needed if an element has been manually focussed)
+    // Remove any old highlights, including node highlighting (needed if an element has been manually focussed)
     Links.prototype.removeHighlights = function () {
+        this.el.selectAll("path.node." + styles.border).attr("stroke", this.config.borderColor);
         this.el.selectAll("path.link." + styles.element).attr("stroke", function (d) { return d.stroke(); });
     };
     Links.prototype.focusPoint = function (element, d) {

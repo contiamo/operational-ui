@@ -90,9 +90,10 @@ var Nodes = /** @class */ (function () {
         }
         element.attr("stroke", this.config.highlightColor);
     };
-    // Remove any old highlights (needed if an element has been manually focussed)
+    // Remove any old highlights, including link highlighting (needed if an element has been manually focussed)
     Nodes.prototype.removeHighlights = function () {
         this.el.selectAll("path.node." + styles.border).attr("stroke", this.config.borderColor);
+        this.el.selectAll("path.link." + styles.element).attr("stroke", function (d) { return d.stroke(); });
     };
     Nodes.prototype.focusPoint = function (element, d) {
         if (d == null)

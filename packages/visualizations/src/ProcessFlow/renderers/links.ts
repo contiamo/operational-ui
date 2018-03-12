@@ -91,8 +91,9 @@ class Links {
       )
   }
 
-  // Remove any old highlights (needed if an element has been manually focussed)
+  // Remove any old highlights, including node highlighting (needed if an element has been manually focussed)
   removeHighlights(): void {
+    this.el.selectAll(`path.node.${styles.border}`).attr("stroke", this.config.borderColor)
     this.el.selectAll(`path.link.${styles.element}`).attr("stroke", (d: TLink): string => d.stroke())
   }
 
