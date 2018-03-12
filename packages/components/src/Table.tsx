@@ -33,7 +33,7 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
     borderBottom: 0
   },
   "& td": {
-    padding: "8px 16px",
+    padding: `${theme.spacing * 2 / 3}px ${theme.spacing * 4 / 3}px`,
     ...theme.typography.body
   },
   "& td, & th, & tr": {

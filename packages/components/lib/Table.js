@@ -31,7 +31,7 @@ var Container = glamorous_1.default.table(function (_a) {
         "& tbody tr:last-child": {
             borderBottom: 0
         },
-        "& td": __assign({ padding: "8px 16px" }, theme.typography.body),
+        "& td": __assign({ padding: theme.spacing * 2 / 3 + "px " + theme.spacing * 4 / 3 + "px" }, theme.typography.body),
         "& td, & th, & tr": {
             borderColor: theme.colors.separator,
             padding: theme.spacing / 2 + "px " + theme.spacing + "px"
