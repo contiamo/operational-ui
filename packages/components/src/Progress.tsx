@@ -3,10 +3,14 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
 import { Theme } from "@operational/theme"
 
+import Icon from "./Icon"
+
 export interface Props {
   id?: string | number
   css?: any
   className?: string
+  error?: string
+  onRetry?: () => void
   fadeParent?: boolean
 }
 
@@ -39,20 +43,61 @@ const fillProgress = css.keyframes({
   }
 })
 
-const Bar = glamorous.div(
-  {
-    width: "100%",
-    height: 3
+const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean }) => ({
+  width: "100%",
+  height: 2,
+  backgroundColor: theme.colors.info,
+  ...isError
+    ? {
+        backgroundColor: theme.colors.error
+      }
+    : {
+        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`
+      }
+}))
+
+const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  minWidth: 160,
+  ...theme.typography.body,
+  padding: `${theme.spacing / 6}px ${theme.spacing / 2}px`,
+  position: "absolute",
+  borderBottomLeftRadius: 2,
+  borderBottomRightRadius: 2,
+  top: 2,
+  left: "50%",
+  textAlign: "center",
+  transform: "translate3d(-50%, 0, 0)",
+  backgroundColor: theme.colors.error,
+  color: theme.colors.white
+}))
+
+const RetryLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  opacity: 0.7,
+  display: "inline-block",
+  marginLeft: theme.spacing * 3 / 4,
+  userSelect: "none",
+  "& svg": {
+    marginRight: theme.spacing / 3
   },
-  ({ theme }: { theme?: Theme }) => ({
-    animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 30s`,
-    backgroundColor: theme.colors.info
-  })
-)
+  ":hover": {
+    opacity: 1
+  }
+}))
 
 const Progress = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className} fadeParent={!!props.fadeParent}>
-    <Bar />
+    <Bar isError={Boolean(props.error)} />
+    {props.error ? (
+      <ErrorMessage>
+        {props.error}
+        {props.onRetry ? (
+          <RetryLink onClick={props.onRetry}>
+            <Icon name="RefreshCw" size={10} />
+            Retry
+          </RetryLink>
+        ) : null}
+      </ErrorMessage>
+    ) : null}
   </Container>
 )
 
