@@ -20,6 +20,7 @@ export interface Props {
   onBlur?: (ev: any) => void
   type?: string
   children?: string
+  autoComplete?: string
 }
 
 const InputField = glamorous.input(
@@ -62,11 +63,19 @@ const Input = (props: Props) => {
     return (
       <Label htmlFor={forAttributeId} css={props.css} className={props.className} key={props.id}>
         <LabelText>{props.label}</LabelText>
-        <InputField {...commonInputProps} key={props.id} id={forAttributeId} />
+        <InputField {...commonInputProps} key={props.id} id={forAttributeId} autoComplete={props.autoComplete} />
       </Label>
     )
   }
-  return <InputField {...commonInputProps} css={props.css} className={props.className} key={props.id} />
+  return (
+    <InputField
+      {...commonInputProps}
+      css={props.css}
+      className={props.className}
+      key={props.id}
+      autoComplete={props.autoComplete}
+    />
+  )
 }
 
 export default Input

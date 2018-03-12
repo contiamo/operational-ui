@@ -34,9 +34,9 @@ var Input = function (props) {
     if (props.label) {
         return (React.createElement(mixins_1.Label, { htmlFor: forAttributeId, css: props.css, className: props.className, key: props.id },
             React.createElement(mixins_1.LabelText, null, props.label),
-            React.createElement(InputField, __assign({}, commonInputProps, { key: props.id, id: forAttributeId }))));
+            React.createElement(InputField, __assign({}, commonInputProps, { key: props.id, id: forAttributeId, autoComplete: props.autoComplete }))));
     }
-    return React.createElement(InputField, __assign({}, commonInputProps, { css: props.css, className: props.className, key: props.id }));
+    return (React.createElement(InputField, __assign({}, commonInputProps, { css: props.css, className: props.className, key: props.id, autoComplete: props.autoComplete })));
 };
 exports.default = Input;
 //# sourceMappingURL=Input.js.map

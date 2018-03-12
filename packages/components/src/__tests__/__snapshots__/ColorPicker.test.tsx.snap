@@ -4,12 +4,10 @@ exports[`ColorPicker Should initialize properly 1`] = `
 <div
   class="css-ih7tap"
 >
-  <div
+  <button
     class="css-157mc8x"
-    role="button"
-    tabindex="-1"
   >
     #03f
-  </div>
+  </button>
 </div>
 `;

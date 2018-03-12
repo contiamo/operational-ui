@@ -26,7 +26,7 @@ export interface Props {
   condensed?: boolean
 }
 
-const Container = glamorous.div(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
+const Container = glamorous.button(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
   const defaultColor: string = theme.colors.white
   const backgroundColor: string = expandColor(theme, color) || defaultColor
   const activeBackgroundColor: string = darken(backgroundColor, 5)
@@ -72,24 +72,20 @@ const Container = glamorous.div(({ theme, color, active, disabled, condensed }: 
   }
 })
 
-const Button = (props: Props) => {
-  return (
-    <Container
-      tabIndex={-1}
-      role="button"
-      type={props.type}
-      key={props.id}
-      css={props.css}
-      className={props.className}
-      onClick={props.disabled ? null : props.onClick}
-      color={props.color}
-      active={props.active}
-      disabled={props.disabled}
-      condensed={props.condensed}
-    >
-      {props.children}
-    </Container>
-  )
-}
+const Button = (props: Props) => (
+  <Container
+    type={props.type}
+    key={props.id}
+    css={props.css}
+    className={props.className}
+    onClick={props.disabled ? null : props.onClick}
+    color={props.color}
+    active={props.active}
+    disabled={props.disabled}
+    condensed={props.condensed}
+  >
+    {props.children}
+  </Container>
+)
 
 export default Button

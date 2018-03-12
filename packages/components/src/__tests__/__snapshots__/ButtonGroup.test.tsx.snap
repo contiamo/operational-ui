@@ -4,12 +4,10 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
 <div
   class="css-1f5s5d"
 >
-  <div
+  <button
     class="css-1jsbnq5"
-    role="button"
-    tabindex="-1"
   >
     Hello
-  </div>
+  </button>
 </div>
 `;
