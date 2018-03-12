@@ -137,7 +137,8 @@ var AbstractRenderer = /** @class */ (function () {
             .enter()
             .append("svg:g")
             .attr("class", styles.arc)
-            .on("mouseenter", this.onMouseOver.bind(this));
+            .on("mouseenter", this.onMouseOver.bind(this))
+            .on("mouseout", this.onMouseOut.bind(this));
         enteringArcs.append("svg:path").style("fill", this.color);
         enteringArcs
             .append("svg:text")
@@ -231,6 +232,9 @@ var AbstractRenderer = /** @class */ (function () {
         var _this = this;
         var d = fp_1.find(function (datum) { return _this.key(datum) === key; })(this.computed.data);
         this.onMouseOver(d);
+    };
+    AbstractRenderer.prototype.onMouseOut = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
     };
     AbstractRenderer.prototype.checkData = function () {
         return;

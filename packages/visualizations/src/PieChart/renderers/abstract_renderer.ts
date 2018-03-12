@@ -180,6 +180,7 @@ abstract class AbstractRenderer {
       .append("svg:g")
       .attr("class", styles.arc)
       .on("mouseenter", this.onMouseOver.bind(this))
+      .on("mouseout", this.onMouseOut.bind(this))
 
     enteringArcs.append("svg:path").style("fill", this.color)
 
@@ -292,6 +293,10 @@ abstract class AbstractRenderer {
   highlightElement(key: string): void {
     const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
     this.onMouseOver(d)
+  }
+
+  onMouseOut(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 
   abstract angleRange(): [number, number]

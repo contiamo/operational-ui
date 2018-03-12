@@ -33,6 +33,7 @@ declare abstract class AbstractRenderer {
     updateElementHover(datapoint: HoverPayload): void;
     onMouseOver(d: ComputedDatum): void;
     highlightElement(key: string): void;
+    onMouseOut(): void;
     abstract angleRange(): [number, number];
     abstract totalForPercentages(): number;
     checkData(): void;
