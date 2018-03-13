@@ -10,14 +10,12 @@ function findNode(nodeId) {
 }
 function getSourcesRecursively(sources) {
     var numberOfLinks = sources.length;
+    var sourcesList = sources;
     fp_1.forEach(function (sourceId) {
-        fp_1.forEach(function (linkedSource) {
-            if (fp_1.indexOf(linkedSource)(sources) < 0) {
-                sources.push(linkedSource);
-            }
-        })(findNode(sourceId).linkedToFrom);
+        sourcesList = sourcesList.concat(findNode(sourceId).linkedToFrom);
     })(sources);
-    return sources.length > numberOfLinks ? getSourcesRecursively(sources) : sources;
+    var uniqueSources = fp_1.uniq(sourcesList);
+    return uniqueSources.length > numberOfLinks ? getSourcesRecursively(uniqueSources) : uniqueSources;
 }
 function isLinkedToFrom(sourceId, targetId) {
     var sourceNodes = findNode(sourceId).linkedToFrom;
