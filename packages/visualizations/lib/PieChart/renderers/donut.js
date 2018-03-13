@@ -170,7 +170,7 @@ var Donut = /** @class */ (function () {
             value: this.value(d),
             percentage: d.data.percentage
         };
-        var centroid = Utils.translateBack(this.computed.arc.centroid(d), this.currentTranslation);
+        var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
     };
     Donut.prototype.updateElementHover = function (datapoint) {

@@ -48,7 +48,6 @@ class ProcessFlowFocus implements Focus {
   }
 
   onElementHover(payload: HoverPayload): void {
-    console.log(payload)
     // Remove the current focus label, if there is one
     this.remove()
     if (payload.hideLabel) {

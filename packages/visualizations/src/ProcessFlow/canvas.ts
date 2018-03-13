@@ -35,8 +35,8 @@ class ProcessFlowCanvas implements Canvas {
     el.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     el.addEventListener("mouseleave", this.onMouseLeave.bind(this))
     el.addEventListener("click", this.onClick.bind(this))
-    this.chartContainer.node().appendChild(el)
     this.stateWriter("elRect", el.getBoundingClientRect())
+    this.chartContainer.node().appendChild(el)
     this.elMap.series = d3.select(el)
     return d3.select(el)
   }

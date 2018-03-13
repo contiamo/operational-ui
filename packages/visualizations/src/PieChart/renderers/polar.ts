@@ -210,7 +210,7 @@ class Polar implements Renderer {
     this.computed = {
       ...d,
       ...this.computeArcs({ data, ...d }),
-      data: data
+      data
     }
   }
 
@@ -271,7 +271,7 @@ class Polar implements Renderer {
       value: this.value(d),
       percentage: d.data.percentage
     }
-    const centroid: [number, number] = Utils.translateBack(this.computed.arc.centroid(d), this.currentTranslation)
+    const centroid: [number, number] = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
   }
 

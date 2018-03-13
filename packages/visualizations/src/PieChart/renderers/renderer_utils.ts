@@ -119,7 +119,7 @@ export const exitArcs = (arcs: D3Selection, duration: number, path: any): void =
 }
 
 export const enterArcs = (arcs: D3Selection, mouseOverHandler: any, mouseOutHandler: any): void => {
-  let enteringArcs: D3Selection = arcs
+  const enteringArcs: D3Selection = arcs
     .enter()
     .append("svg:g")
     .attr("class", styles.arc)

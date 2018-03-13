@@ -16,7 +16,6 @@ var ProcessFlowFocus = /** @class */ (function () {
         this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
     ProcessFlowFocus.prototype.onElementHover = function (payload) {
-        console.log(payload);
         // Remove the current focus label, if there is one
         this.remove();
         if (payload.hideLabel) {
