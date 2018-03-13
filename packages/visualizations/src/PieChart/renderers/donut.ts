@@ -61,7 +61,7 @@ class Donut implements Renderer {
   }
 
   setData(data: Datum[]): void {
-    this.data = data
+    this.data = data || []
   }
 
   // Drawing
@@ -162,12 +162,6 @@ class Donut implements Renderer {
   compute(): void {
     this.previous = this.computed
 
-    // We cannot draw a pie chart with no series or only series that have the value 0
-    if (this.data.length === 0) {
-      this.computed.data = []
-      return
-    }
-
     const d: ComputedInitial = {
       layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
       total: Utils.computeTotal(this.data, this.value)
@@ -247,6 +241,9 @@ class Donut implements Renderer {
 
   highlightElement(key: string): void {
     const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
+    if (!d) {
+      return
+    }
     this.onMouseOver(d)
   }
 

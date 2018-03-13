@@ -63,7 +63,7 @@ class Gauge implements Renderer {
   }
 
   setData(data: Datum[]): void {
-    this.data = data
+    this.data = data || []
   }
 
   // Drawing
@@ -238,12 +238,6 @@ class Gauge implements Renderer {
 
     this.fillGaugeExtent()
 
-    // We cannot draw a pie chart with no series or only series that have the value 0
-    if (this.data.length === 0) {
-      this.computed.data = []
-      return
-    }
-
     if (!this.target) {
       throw new Error("No target value provided for gauge")
     }
@@ -367,6 +361,9 @@ class Gauge implements Renderer {
 
   highlightElement(key: string): void {
     const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
+    if (!d) {
+      return
+    }
     this.onMouseOver(d)
   }
 

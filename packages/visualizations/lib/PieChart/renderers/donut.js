@@ -36,7 +36,7 @@ var Donut = /** @class */ (function () {
         Utils.assignOptions(this, options);
     };
     Donut.prototype.setData = function (data) {
-        this.data = data;
+        this.data = data || [];
     };
     // Drawing
     Donut.prototype.draw = function () {
@@ -122,11 +122,6 @@ var Donut = /** @class */ (function () {
     // Data computation / preparation
     Donut.prototype.compute = function () {
         this.previous = this.computed;
-        // We cannot draw a pie chart with no series or only series that have the value 0
-        if (this.data.length === 0) {
-            this.computed.data = [];
-            return;
-        }
         var d = {
             layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
             total: Utils.computeTotal(this.data, this.value)
@@ -188,6 +183,9 @@ var Donut = /** @class */ (function () {
     Donut.prototype.highlightElement = function (key) {
         var _this = this;
         var d = fp_1.find(function (datum) { return _this.key(datum) === key; })(this.computed.data);
+        if (!d) {
+            return;
+        }
         this.onMouseOver(d);
     };
     Donut.prototype.onMouseOut = function () {

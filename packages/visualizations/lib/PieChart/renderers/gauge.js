@@ -35,7 +35,7 @@ var Gauge = /** @class */ (function () {
         Utils.assignOptions(this, options);
     };
     Gauge.prototype.setData = function (data) {
-        this.data = data;
+        this.data = data || [];
     };
     // Drawing
     Gauge.prototype.draw = function () {
@@ -190,11 +190,6 @@ var Gauge = /** @class */ (function () {
         this.previous = this.computed;
         this.total = Utils.computeTotal(this.data, this.value);
         this.fillGaugeExtent();
-        // We cannot draw a pie chart with no series or only series that have the value 0
-        if (this.data.length === 0) {
-            this.computed.data = [];
-            return;
-        }
         if (!this.target) {
             throw new Error("No target value provided for gauge");
         }
@@ -297,6 +292,9 @@ var Gauge = /** @class */ (function () {
     Gauge.prototype.highlightElement = function (key) {
         var _this = this;
         var d = fp_1.find(function (datum) { return _this.key(datum) === key; })(this.computed.data);
+        if (!d) {
+            return;
+        }
         this.onMouseOver(d);
     };
     Gauge.prototype.onMouseOut = function () {
