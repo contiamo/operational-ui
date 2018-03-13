@@ -53,7 +53,8 @@ var Gauge = /** @class */ (function () {
         var config = this.state.current.get("config");
         var duration = config.duration;
         var minTotalFontSize = config.minTotalFontSize;
-        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas
+            .drawingContainerDims;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         // Center coordinate system
@@ -78,8 +79,11 @@ var Gauge = /** @class */ (function () {
     Gauge.prototype.arcAttributes = function () {
         return {
             path: this.arcTween.bind(this),
-            fill: this.color.bind(this)
+            fill: this.arcColor.bind(this)
         };
+    };
+    Gauge.prototype.arcColor = function (d) {
+        return d.unfilled ? undefined : this.color(d);
     };
     Gauge.prototype.angleRange = function () {
         return this.extent === "semi" ? [-Math.PI / 2, Math.PI / 2] : [-Math.PI, Math.PI];
@@ -240,14 +244,17 @@ var Gauge = /** @class */ (function () {
         }, [])(this.data);
     };
     Gauge.prototype.computeArcs = function (computed) {
-        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims, outerBorderMargin = this.state.current.get("config").outerBorderMargin, r = this.computeOuter(drawingDims, outerBorderMargin), inner = this.computeInner(r), rHover = r + 1, innerHover = Math.max(inner - 1, 0);
+        var drawingDims = this.state.current.get("computed").canvas
+            .drawingContainerDims, outerBorderMargin = this.state.current.get("config").outerBorderMargin, r = this.computeOuter(drawingDims, outerBorderMargin), inner = this.computeInner(r), rHover = r + 1, innerHover = Math.max(inner - 1, 0);
         return {
             r: r,
             inner: inner,
             rHover: rHover,
             innerHover: innerHover,
             arc: d3_shape_1.arc(),
-            arcOver: d3_shape_1.arc().innerRadius(innerHover).outerRadius(rHover)
+            arcOver: d3_shape_1.arc()
+                .innerRadius(innerHover)
+                .outerRadius(rHover)
         };
     };
     Gauge.prototype.computeOuter = function (drawingDims, margin) {

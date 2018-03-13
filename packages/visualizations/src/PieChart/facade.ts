@@ -6,6 +6,7 @@ import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
+import { operational } from "@operational/theme"
 import {
   Accessors,
   AccessorsObject,
@@ -63,7 +64,7 @@ class PieChartFacade implements Facade {
       minTotalFontSize: 11,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
-      palette: ["#bbb"],
+      palette: operational.colors.visualizationPalette,
       showComponentFocus: true,
       uid: uniqueId("piechart"),
       visualizationName: "piechart",

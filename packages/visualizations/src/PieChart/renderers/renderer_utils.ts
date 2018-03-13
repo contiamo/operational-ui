@@ -53,7 +53,7 @@ export const defaultAccessors = (ctx: Renderer): RendererAccessors => {
   return {
     value: (d: Datum): number => d.value,
     key: (d: Datum): string => d.key,
-    color: (d: Datum): string => assignColor(ctx.key(d))
+    color: (d: Datum): string => (d.unfilled ? undefined : assignColor(ctx.key(d)))
   }
 }
 

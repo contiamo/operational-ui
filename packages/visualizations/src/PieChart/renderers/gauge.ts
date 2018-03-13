@@ -7,7 +7,6 @@ import { interpolateObject } from "d3-interpolate"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { setPathAttributes, setTextAttributes } from "../../utils/d3_utils"
 import * as styles from "./styles"
-import { colorAssigner } from "@operational/utils"
 import * as Utils from "./renderer_utils"
 import {
   ComputedArcs,
@@ -115,8 +114,12 @@ class Gauge implements Renderer {
   arcAttributes(): Object<any> {
     return {
       path: this.arcTween.bind(this),
-      fill: this.color.bind(this)
+      fill: this.arcColor.bind(this)
     }
+  }
+
+  arcColor(d: Datum): string {
+    return d.unfilled ? undefined : this.color(d)
   }
 
   angleRange(): [number, number] {

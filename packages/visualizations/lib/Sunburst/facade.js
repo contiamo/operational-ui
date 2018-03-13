@@ -10,6 +10,7 @@ var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
 var utils_1 = require("@operational/utils");
+var theme_1 = require("@operational/theme");
 var SunburstFacade = /** @class */ (function () {
     function SunburstFacade(context) {
         var _this = this;
@@ -47,7 +48,7 @@ var SunburstFacade = /** @class */ (function () {
             maxRings: 10,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
-            palette: ["#bbb"],
+            palette: theme_1.operational.colors.visualizationPalette,
             propagateColors: true,
             sort: true,
             uid: fp_1.uniqueId("sunburst"),

@@ -56,7 +56,8 @@ var Polar = /** @class */ (function () {
         var config = this.state.current.get("config");
         var duration = config.duration;
         var minTotalFontSize = config.minTotalFontSize;
-        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas
+            .drawingContainerDims;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         // Center coordinate system
@@ -162,14 +163,19 @@ var Polar = /** @class */ (function () {
         return 1;
     };
     Polar.prototype.computeArcs = function (computed) {
-        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims, r = this.computeOuter(drawingDims), inner = this.computeInner(computed.data, r), rHover = this.hoverOuter(r), innerHover = Math.max(inner - 1, 0);
+        var drawingDims = this.state.current.get("computed").canvas
+            .drawingContainerDims, r = this.computeOuter(drawingDims), inner = this.computeInner(computed.data, r), rHover = this.hoverOuter(r), innerHover = Math.max(inner - 1, 0);
         return {
             r: r,
             inner: inner,
             rHover: rHover,
             innerHover: innerHover,
-            arc: d3_shape_1.arc().innerRadius(inner).outerRadius(r),
-            arcOver: d3_shape_1.arc().innerRadius(innerHover).outerRadius(rHover)
+            arc: d3_shape_1.arc()
+                .innerRadius(inner)
+                .outerRadius(r),
+            arcOver: d3_shape_1.arc()
+                .innerRadius(innerHover)
+                .outerRadius(rHover)
         };
     };
     Polar.prototype.computeOuter = function (drawingDims, scaleFactor) {

@@ -24,6 +24,7 @@ declare class Gauge implements Renderer {
     initialDraw(): void;
     updateDraw(): void;
     arcAttributes(): Object<any>;
+    arcColor(d: Datum): string;
     angleRange(): [number, number];
     totalYOffset(): string;
     arcTween(d: ComputedDatum, i: number): (t: number) => string;

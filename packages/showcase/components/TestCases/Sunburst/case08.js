@@ -2,12 +2,11 @@ import Layout from "../../../components/Layout"
 import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
-import { operational } from "@operational/theme"
 
 const config = {
-  maxRings: 4,
-  palette: operational.colors.visualizationPalette
+  maxRings: 4
 }
+
 const data = {
   name: "All",
   children: [

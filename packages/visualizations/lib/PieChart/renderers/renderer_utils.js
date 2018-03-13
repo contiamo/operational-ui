@@ -37,7 +37,7 @@ exports.defaultAccessors = function (ctx) {
     return {
         value: function (d) { return d.value; },
         key: function (d) { return d.key; },
-        color: function (d) { return assignColor(ctx.key(d)); }
+        color: function (d) { return d.unfilled ? undefined : assignColor(ctx.key(d)); }
     };
 };
 exports.assignAccessors = function (ctx, customAccessors) {
@@ -97,9 +97,7 @@ exports.enterArcs = function (arcs, mouseOverHandler, mouseOutHandler) {
         .on("mouseenter", mouseOverHandler)
         .on("mouseout", mouseOutHandler);
     enteringArcs.append("svg:path");
-    enteringArcs
-        .append("svg:text")
-        .attr("class", styles.label);
+    enteringArcs.append("svg:text").attr("class", styles.label);
 };
 // @TODO move last 3 parameters into object
 exports.updateTotal = function (el, label, duration, options) {

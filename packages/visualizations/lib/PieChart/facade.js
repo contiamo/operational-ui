@@ -8,6 +8,7 @@ var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
+var theme_1 = require("@operational/theme");
 var PieChartFacade = /** @class */ (function () {
     function PieChartFacade(context) {
         this.__disposed = false;
@@ -43,7 +44,7 @@ var PieChartFacade = /** @class */ (function () {
             minTotalFontSize: 11,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
-            palette: ["#bbb"],
+            palette: theme_1.operational.colors.visualizationPalette,
             showComponentFocus: true,
             uid: fp_1.uniqueId("piechart"),
             visualizationName: "piechart",

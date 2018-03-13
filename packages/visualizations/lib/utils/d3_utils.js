@@ -27,17 +27,12 @@ exports.onTransitionEnd = function (selection, func) {
     });
 };
 var transitionOrSelection = function (selection, duration) {
-    return duration != null
-        ? selection.transition()
-            .duration(duration)
-        : selection;
+    return duration != null ? selection.transition().duration(duration) : selection;
 };
 exports.setPathAttributes = function (selection, attributes, duration, onEnd) {
     var elements = duration
-        ? transitionOrSelection(selection, duration)
-            .attrTween("d", attributes.path)
-        : transitionOrSelection(selection)
-            .attr("d", attributes.path);
+        ? transitionOrSelection(selection, duration).attrTween("d", attributes.path)
+        : transitionOrSelection(selection).attr("d", attributes.path);
     elements
         .style("fill", attributes.fill)
         .style("stroke", attributes.stroke)

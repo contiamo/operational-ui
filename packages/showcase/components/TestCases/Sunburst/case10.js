@@ -2,11 +2,6 @@ import Layout from "../../../components/Layout"
 import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
-import { operational } from "@operational/theme"
-
-const config = {
-  palette: operational.colors.visualizationPalette
-}
 
 const data = {
   name: "All",
@@ -298,7 +293,6 @@ export const marathon = ({ test, afterAll, container }) => {
 
   test("Renders a sunburst chart", () => {
     viz.data(data)
-    viz.config(config)
     viz.draw()
   })
 
