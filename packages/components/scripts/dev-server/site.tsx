@@ -45,14 +45,8 @@ class Site extends React.Component<{}, State> {
           <Grid type="3x2">
             <Card css={{ position: "relative" }}>
               <CardHeader>Hello</CardHeader>
-              <Progress
-                error={this.state.isOpen ? "Loading error" : null}
-                onRetry={() => {
-                  this.setState(prevState => ({
-                    isOpen: false
-                  }))
-                }}
-              />
+              <Progress />
+              <Input label="1234" css={{ width: 500 }} value="123" />
             </Card>
           </Grid>
         </Layout>

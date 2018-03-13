@@ -63,7 +63,13 @@ const Input = (props: Props) => {
     return (
       <Label htmlFor={forAttributeId} css={props.css} className={props.className} key={props.id}>
         <LabelText>{props.label}</LabelText>
-        <InputField {...commonInputProps} key={props.id} id={forAttributeId} autoComplete={props.autoComplete} />
+        <InputField
+          {...commonInputProps}
+          key={props.id}
+          id={forAttributeId}
+          autoComplete={props.autoComplete}
+          css={{ display: "block", width: "100%" }}
+        />
       </Label>
     )
   }
