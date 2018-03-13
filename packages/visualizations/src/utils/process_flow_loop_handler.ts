@@ -28,15 +28,13 @@ function findNode(nodeId: string): INode {
 
 function getSourcesRecursively(sources: TNodesList): TNodesList {
   const numberOfLinks: number = sources.length
+  let sourcesList: TNodesList = sources
   forEach((sourceId: string): void => {
-    forEach((linkedSource: string): void => {
-      if (indexOf(linkedSource)(sources) < 0) {
-        sources.push(linkedSource)
-      }
-    })(findNode(sourceId).linkedToFrom)
+    sourcesList = sourcesList.concat(findNode(sourceId).linkedToFrom)
   })(sources)
+  const uniqueSources = uniq(sourcesList)
 
-  return sources.length > numberOfLinks ? getSourcesRecursively(sources) : sources
+  return uniqueSources.length > numberOfLinks ? getSourcesRecursively(uniqueSources) : uniqueSources
 }
 
 function isLinkedToFrom(sourceId: string, targetId: string): boolean {
