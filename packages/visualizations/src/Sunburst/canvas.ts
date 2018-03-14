@@ -18,22 +18,22 @@ class SunburstCanvas implements Canvas {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
-    this.chartContainer = this.insertChartContainer(context)
-    this.breadcrumb = this.insertBreadcrumb()
-    this.el = this.insertEl()
-    this.rootLabel = this.insertRootLabel()
-    this.insertFocus()
+    this.chartContainer = this.renderChartContainer(context)
+    this.breadcrumb = this.renderBreadcrumb()
+    this.el = this.renderEl()
+    this.rootLabel = this.renderRootLabel()
+    this.renderFocus()
   }
 
   // Chart container
-  insertChartContainer(context: Element): D3Selection {
+  renderChartContainer(context: Element): D3Selection {
     const container: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     return d3.select(container).attr("class", styles.chartContainer)
   }
 
   // Breadcrumb
-  insertBreadcrumb(): D3Selection {
+  renderBreadcrumb(): D3Selection {
     const el: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(el)
     this.elMap.breadcrumb = d3.select(el).attr("class", localStyles.breadcrumb)
@@ -41,7 +41,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // El
-  insertEl(): SeriesEl {
+  renderEl(): SeriesEl {
     const elNode: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     elNode.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     elNode.addEventListener("mouseleave", this.onMouseLeave.bind(this))
@@ -69,7 +69,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // Root label
-  insertRootLabel(): D3Selection {
+  renderRootLabel(): D3Selection {
     const el: D3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.rootLabel)
@@ -80,7 +80,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // FocusElement
-  insertFocus(): D3Selection {
+  renderFocus(): D3Selection {
     const focus = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)

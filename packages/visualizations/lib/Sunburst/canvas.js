@@ -10,27 +10,27 @@ var SunburstCanvas = /** @class */ (function () {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.chartContainer = this.insertChartContainer(context);
-        this.breadcrumb = this.insertBreadcrumb();
-        this.el = this.insertEl();
-        this.rootLabel = this.insertRootLabel();
-        this.insertFocus();
+        this.chartContainer = this.renderChartContainer(context);
+        this.breadcrumb = this.renderBreadcrumb();
+        this.el = this.renderEl();
+        this.rootLabel = this.renderRootLabel();
+        this.renderFocus();
     }
     // Chart container
-    SunburstCanvas.prototype.insertChartContainer = function (context) {
+    SunburstCanvas.prototype.renderChartContainer = function (context) {
         var container = document.createElementNS(d3.namespaces["xhtml"], "div");
         context.appendChild(container);
         return d3.select(container).attr("class", styles.chartContainer);
     };
     // Breadcrumb
-    SunburstCanvas.prototype.insertBreadcrumb = function () {
+    SunburstCanvas.prototype.renderBreadcrumb = function () {
         var el = document.createElementNS(d3.namespaces["xhtml"], "div");
         this.chartContainer.node().appendChild(el);
         this.elMap.breadcrumb = d3.select(el).attr("class", localStyles.breadcrumb);
         return this.elMap.breadcrumb;
     };
     // El
-    SunburstCanvas.prototype.insertEl = function () {
+    SunburstCanvas.prototype.renderEl = function () {
         var elNode = document.createElementNS(d3.namespaces["svg"], "svg");
         elNode.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         elNode.addEventListener("mouseleave", this.onMouseLeave.bind(this));
@@ -53,7 +53,7 @@ var SunburstCanvas = /** @class */ (function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);
     };
     // Root label
-    SunburstCanvas.prototype.insertRootLabel = function () {
+    SunburstCanvas.prototype.renderRootLabel = function () {
         var el = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", localStyles.rootLabel)
@@ -63,7 +63,7 @@ var SunburstCanvas = /** @class */ (function () {
         return el;
     };
     // FocusElement
-    SunburstCanvas.prototype.insertFocus = function () {
+    SunburstCanvas.prototype.renderFocus = function () {
         var focus = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.focusLegend)

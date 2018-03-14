@@ -59,8 +59,8 @@ export interface Legend {
 export interface Canvas {
   draw: () => void
   elementFor: (component: string) => any
-  insertChartContainer: (context: Element) => D3Selection
-  insertEl: () => SeriesEl
+  renderChartContainer: (context: Element) => D3Selection
+  renderEl: () => SeriesEl
   onClick: () => void
   onMouseEnter: () => void
   onMouseLeave: () => void

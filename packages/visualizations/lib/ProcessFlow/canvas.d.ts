@@ -7,13 +7,13 @@ declare class ProcessFlowCanvas implements Canvas {
     protected elMap: Object<D3Selection>;
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
-    insertChartContainer(context: Element): D3Selection;
-    insertEl(): SeriesEl;
+    renderChartContainer(context: Element): D3Selection;
+    renderEl(): SeriesEl;
     onMouseEnter(): void;
     onMouseLeave(): void;
     onClick(): void;
-    insertFocus(): void;
-    appendDrawingGroups(): void;
+    renderFocus(): void;
+    renderDrawingGroups(): void;
     draw(): void;
     remove(): void;
     elementFor(component: string): any;

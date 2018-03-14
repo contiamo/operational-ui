@@ -10,19 +10,19 @@ var ProcessFlowCanvas = /** @class */ (function () {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.chartContainer = this.insertChartContainer(context);
-        this.el = this.insertEl();
-        this.insertFocus();
-        this.appendDrawingGroups();
+        this.chartContainer = this.renderChartContainer(context);
+        this.el = this.renderEl();
+        this.renderFocus();
+        this.renderDrawingGroups();
     }
     // Chart container
-    ProcessFlowCanvas.prototype.insertChartContainer = function (context) {
+    ProcessFlowCanvas.prototype.renderChartContainer = function (context) {
         var container = document.createElementNS(d3.namespaces["xhtml"], "div");
         context.appendChild(container);
         return d3.select(container).attr("class", styles.chartContainer);
     };
     // El
-    ProcessFlowCanvas.prototype.insertEl = function () {
+    ProcessFlowCanvas.prototype.renderEl = function () {
         var el = document.createElementNS(d3.namespaces["svg"], "svg");
         el.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         el.addEventListener("mouseleave", this.onMouseLeave.bind(this));
@@ -42,7 +42,7 @@ var ProcessFlowCanvas = /** @class */ (function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);
     };
     // Focus
-    ProcessFlowCanvas.prototype.insertFocus = function () {
+    ProcessFlowCanvas.prototype.renderFocus = function () {
         var focus = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.focusLegend)
@@ -51,7 +51,7 @@ var ProcessFlowCanvas = /** @class */ (function () {
         this.elMap.focus = focus;
     };
     // Drawing groups
-    ProcessFlowCanvas.prototype.appendDrawingGroups = function () {
+    ProcessFlowCanvas.prototype.renderDrawingGroups = function () {
         var _this = this;
         fp_1.forEach(function (group) {
             _this.el.append("svg:g").attr("class", group + "-group");

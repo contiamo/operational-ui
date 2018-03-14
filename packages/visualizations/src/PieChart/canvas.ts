@@ -17,18 +17,18 @@ class PieChartCanvas implements Canvas {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
-    this.chartContainer = this.insertChartContainer(context)
-    this.insertLegend()
-    this.drawingContainer = this.insertDrawingContainer()
-    this.el = this.insertEl()
-    this.appendShadows()
-    this.appendDrawingGroup()
-    this.insertFocusElements()
+    this.chartContainer = this.renderChartContainer(context)
+    this.renderLegend()
+    this.drawingContainer = this.renderDrawingContainer()
+    this.el = this.renderEl()
+    this.renderShadows()
+    this.renderDrawingGroup()
+    this.renderFocusElements()
     this.stateWriter("elements", this.elements)
   }
 
   // Chart container
-  insertChartContainer(context: Element): D3Selection {
+  renderChartContainer(context: Element): D3Selection {
     const container = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     container.addEventListener("mouseenter", this.onMouseEnter.bind(this))
@@ -50,7 +50,7 @@ class PieChartCanvas implements Canvas {
   }
 
   // Legend
-  insertLegend(): void {
+  renderLegend(): void {
     const legendNode: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(legendNode)
 
@@ -64,14 +64,14 @@ class PieChartCanvas implements Canvas {
   }
 
   // Drawing container
-  insertDrawingContainer(): D3Selection {
+  renderDrawingContainer(): D3Selection {
     const drawingContainer = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(drawingContainer)
     return d3.select(drawingContainer).attr("class", styles.drawingContainer)
   }
 
   // El
-  insertEl(): SeriesEl {
+  renderEl(): SeriesEl {
     const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     this.drawingContainer.node().appendChild(el)
     this.elMap.series = d3.select(el)
@@ -79,7 +79,7 @@ class PieChartCanvas implements Canvas {
   }
 
   // Defs
-  appendShadows(): void {
+  renderShadows(): void {
     this.elements.defs = this.el.append("defs")
     const shadow: D3Selection = this.elements.defs
       .append("filter")
@@ -115,17 +115,17 @@ class PieChartCanvas implements Canvas {
   }
 
   // Drawing group
-  appendDrawingGroup(): void {
+  renderDrawingGroup(): void {
     this.elements.drawing = this.el.append("svg:g").attr("class", "drawing")
   }
 
   // Focus elements
-  insertFocusElements(): void {
-    this.elMap.focus = this.insertFocusLabel()
-    this.elMap.componentFocus = this.insertComponentFocus()
+  renderFocusElements(): void {
+    this.elMap.focus = this.renderFocusLabel()
+    this.elMap.componentFocus = this.renderComponentFocus()
   }
 
-  insertFocusLabel(): D3Selection {
+  renderFocusLabel(): D3Selection {
     const focusEl = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
@@ -134,7 +134,7 @@ class PieChartCanvas implements Canvas {
     return focusEl
   }
 
-  insertComponentFocus(): D3Selection {
+  renderComponentFocus(): D3Selection {
     const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
     const ref: Node = this.chartContainer.node()
     ref.insertBefore(focusEl.node(), ref.nextSibling)

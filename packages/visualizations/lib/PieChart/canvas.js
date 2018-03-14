@@ -10,17 +10,17 @@ var PieChartCanvas = /** @class */ (function () {
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
-        this.chartContainer = this.insertChartContainer(context);
-        this.insertLegend();
-        this.drawingContainer = this.insertDrawingContainer();
-        this.el = this.insertEl();
-        this.appendShadows();
-        this.appendDrawingGroup();
-        this.insertFocusElements();
+        this.chartContainer = this.renderChartContainer(context);
+        this.renderLegend();
+        this.drawingContainer = this.renderDrawingContainer();
+        this.el = this.renderEl();
+        this.renderShadows();
+        this.renderDrawingGroup();
+        this.renderFocusElements();
         this.stateWriter("elements", this.elements);
     }
     // Chart container
-    PieChartCanvas.prototype.insertChartContainer = function (context) {
+    PieChartCanvas.prototype.renderChartContainer = function (context) {
         var container = document.createElementNS(d3.namespaces["xhtml"], "div");
         context.appendChild(container);
         container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
@@ -38,7 +38,7 @@ var PieChartCanvas = /** @class */ (function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);
     };
     // Legend
-    PieChartCanvas.prototype.insertLegend = function () {
+    PieChartCanvas.prototype.renderLegend = function () {
         var legendNode = document.createElementNS(d3.namespaces["xhtml"], "div");
         this.chartContainer.node().appendChild(legendNode);
         var legend = d3
@@ -49,20 +49,20 @@ var PieChartCanvas = /** @class */ (function () {
         this.stateWriter("legend", legend);
     };
     // Drawing container
-    PieChartCanvas.prototype.insertDrawingContainer = function () {
+    PieChartCanvas.prototype.renderDrawingContainer = function () {
         var drawingContainer = document.createElementNS(d3.namespaces["xhtml"], "div");
         this.chartContainer.node().appendChild(drawingContainer);
         return d3.select(drawingContainer).attr("class", styles.drawingContainer);
     };
     // El
-    PieChartCanvas.prototype.insertEl = function () {
+    PieChartCanvas.prototype.renderEl = function () {
         var el = document.createElementNS(d3.namespaces["svg"], "svg");
         this.drawingContainer.node().appendChild(el);
         this.elMap.series = d3.select(el);
         return this.elMap.series;
     };
     // Defs
-    PieChartCanvas.prototype.appendShadows = function () {
+    PieChartCanvas.prototype.renderShadows = function () {
         this.elements.defs = this.el.append("defs");
         var shadow = this.elements.defs
             .append("filter")
@@ -94,15 +94,15 @@ var PieChartCanvas = /** @class */ (function () {
         return this.prefixedId("_shadow");
     };
     // Drawing group
-    PieChartCanvas.prototype.appendDrawingGroup = function () {
+    PieChartCanvas.prototype.renderDrawingGroup = function () {
         this.elements.drawing = this.el.append("svg:g").attr("class", "drawing");
     };
     // Focus elements
-    PieChartCanvas.prototype.insertFocusElements = function () {
-        this.elMap.focus = this.insertFocusLabel();
-        this.elMap.componentFocus = this.insertComponentFocus();
+    PieChartCanvas.prototype.renderFocusElements = function () {
+        this.elMap.focus = this.renderFocusLabel();
+        this.elMap.componentFocus = this.renderComponentFocus();
     };
-    PieChartCanvas.prototype.insertFocusLabel = function () {
+    PieChartCanvas.prototype.renderFocusLabel = function () {
         var focusEl = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
             .attr("class", "" + styles.focusLegend)
@@ -110,7 +110,7 @@ var PieChartCanvas = /** @class */ (function () {
         this.chartContainer.node().appendChild(focusEl.node());
         return focusEl;
     };
-    PieChartCanvas.prototype.insertComponentFocus = function () {
+    PieChartCanvas.prototype.renderComponentFocus = function () {
         var focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus");
         var ref = this.chartContainer.node();
         ref.insertBefore(focusEl.node(), ref.nextSibling);
