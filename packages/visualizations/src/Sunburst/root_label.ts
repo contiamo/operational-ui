@@ -15,7 +15,7 @@ class RootLabel {
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.update.bind(this))
   }
 
-  update(payload: ClickPayload): void {
+  private update(payload: ClickPayload): void {
     const computed: Object<any> = this.state.current.get("computed")
     const config: SunburstConfig = this.state.current.get("config")
     const renderer: Object<any> = computed.renderer

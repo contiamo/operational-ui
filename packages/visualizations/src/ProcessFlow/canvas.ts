@@ -23,14 +23,14 @@ class ProcessFlowCanvas implements Canvas {
   }
 
   // Chart container
-  renderChartContainer(context: Element): D3Selection {
+  private renderChartContainer(context: Element): D3Selection {
     const container: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     return d3.select(container).attr("class", styles.chartContainer)
   }
 
   // El
-  renderEl(): SeriesEl {
+  private renderEl(): SeriesEl {
     const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     el.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     el.addEventListener("mouseleave", this.onMouseLeave.bind(this))
@@ -41,20 +41,20 @@ class ProcessFlowCanvas implements Canvas {
     return d3.select(el)
   }
 
-  onMouseEnter(): void {
+  private onMouseEnter(): void {
     this.events.emit(Events.CHART.MOUSEOVER)
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.events.emit(Events.CHART.MOUSEOUT)
   }
 
-  onClick(): void {
+  private onClick(): void {
     this.events.emit(Events.CHART.CLICK)
   }
 
   // Focus
-  renderFocus(): void {
+  private renderFocus(): void {
     const focus: D3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
@@ -64,7 +64,7 @@ class ProcessFlowCanvas implements Canvas {
   }
 
   // Drawing groups
-  renderDrawingGroups(): void {
+  private renderDrawingGroups(): void {
     forEach((group: string): void => {
       this.el.append("svg:g").attr("class", `${group}-group`)
     })(["links", "nodes"])

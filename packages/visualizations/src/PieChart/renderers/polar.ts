@@ -73,7 +73,7 @@ class Polar implements Renderer {
     this.drawn ? this.updateDraw() : this.initialDraw()
   }
 
-  initialDraw(): void {
+  private initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
     this.el.append("svg:g").attr("class", styles.total)
@@ -81,7 +81,7 @@ class Polar implements Renderer {
     this.drawn = true
   }
 
-  updateDraw(): void {
+  private updateDraw(): void {
     const config: PieChartConfig = this.state.current.get("config")
     const duration: number = config.duration
     const minTotalFontSize: number = config.minTotalFontSize
@@ -110,14 +110,14 @@ class Polar implements Renderer {
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
-  arcAttributes(): Object<any> {
+  private arcAttributes(): Object<any> {
     return {
       path: this.arcTween.bind(this),
       fill: this.color.bind(this)
     }
   }
 
-  fitToCanvas(): void {
+  private fitToCanvas(): void {
     // Reset current translation
     this.currentTranslation = [0, 0]
     this.el.attr("transform", Utils.translateString(this.currentTranslation))
@@ -148,7 +148,7 @@ class Polar implements Renderer {
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: ComputedDatum, i: number): (t: number) => string {
+  private arcTween(d: ComputedDatum, i: number): (t: number) => string {
     const old: any = this.previous.data || []
     let s0: number
     let e0: number
@@ -170,7 +170,7 @@ class Polar implements Renderer {
     return (t: number): string => this.computed.arc(extend(f(t))(d))
   }
 
-  removeArcTween(d: ComputedDatum, i: number): (t: number) => string {
+  private removeArcTween(d: ComputedDatum, i: number): (t: number) => string {
     let s0: number
     let e0: number
     s0 = e0 = ANGLE_RANGE[1]
@@ -182,12 +182,12 @@ class Polar implements Renderer {
     return (t: number): string => this.computed.arc(f(t))
   }
 
-  centerDisplayString(): string {
+  private centerDisplayString(): string {
     return this.computed.inner > 0 ? this.computed.total.toString() : ""
   }
 
   // Data computation / preparation
-  compute(): void {
+  private compute(): void {
     this.previous = this.computed
 
     const d: ComputedInitial = {
@@ -208,11 +208,11 @@ class Polar implements Renderer {
     }
   }
 
-  angleValue(): number {
+  private angleValue(): number {
     return 1
   }
 
-  computeArcs(computed: Partial<ComputedData>): ComputedArcs {
+  private computeArcs(computed: Partial<ComputedData>): ComputedArcs {
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
         .drawingContainerDims,
       r: any = this.computeOuter(drawingDims),
@@ -233,7 +233,7 @@ class Polar implements Renderer {
     }
   }
 
-  computeOuter(drawingDims: { width: number; height: number }, scaleFactor: number = 1) {
+  private computeOuter(drawingDims: { width: number; height: number }, scaleFactor: number = 1) {
     const domainMax: number = max(map((datum: Datum): number => this.value(datum))(this.data))
     const scale: any = d3ScaleSqrt()
       .range([
@@ -244,7 +244,7 @@ class Polar implements Renderer {
     return (d: Datum): number => scale(this.value(d)) * scaleFactor
   }
 
-  computeInner(data: ComputedDatum[], outerRadius: (d: Datum) => number): number {
+  private computeInner(data: ComputedDatum[], outerRadius: (d: Datum) => number): number {
     const options: PieChartConfig = this.state.current.get("config")
     const minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
     const maxWidth: number = options.maxWidth
@@ -254,12 +254,12 @@ class Polar implements Renderer {
     return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth)
   }
 
-  hoverOuter(radius: any): any {
+  private hoverOuter(radius: any): any {
     return (d: Datum): number => radius(d) + 1
   }
 
   // Event listeners / handlers
-  onMouseOver(d: ComputedDatum): void {
+  private onMouseOver(d: ComputedDatum): void {
     const datumInfo: DatumInfo = {
       key: this.key(d),
       value: this.value(d),
@@ -269,7 +269,7 @@ class Polar implements Renderer {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
   }
 
-  updateElementHover(datapoint: HoverPayload): void {
+  private updateElementHover(datapoint: HoverPayload): void {
     if (!this.drawn) {
       return
     }
@@ -283,7 +283,7 @@ class Polar implements Renderer {
     Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
   }
 
-  highlightElement(key: string): void {
+  private highlightElement(key: string): void {
     const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
     if (!d) {
       return
@@ -291,7 +291,7 @@ class Polar implements Renderer {
     this.onMouseOver(d)
   }
 
-  onMouseOut(): void {
+  private onMouseOut(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 

@@ -17,7 +17,7 @@ declare class Node {
     x: number;
     y: number;
     constructor(nodeAttributes: NodeAttrs, accessors: NodeAccessors);
-    assignAttributes(nodeAttributes: NodeAttrs): NodeAttrs;
-    assignAccessors(): void;
+    private assignAttributes(nodeAttributes);
+    private assignAccessors();
 }
 export default Node;

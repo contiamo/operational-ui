@@ -29,22 +29,22 @@ import {
 } from "../typings"
 
 class Gauge implements Renderer {
-  color: RendererAccessor<string>
-  comparison: Datum
-  computed: ComputedData
-  currentTranslation: [number, number]
-  data: Datum[]
-  drawn: boolean = false
-  el: D3Selection
-  events: EventBus
-  extent: string
-  key: RendererAccessor<string>
-  previous: Partial<ComputedData>
-  state: State
-  target: number
-  total: number
-  type: "donut" | "polar" | "gauge" = "gauge"
-  value: RendererAccessor<number>
+  private color: RendererAccessor<string>
+  private comparison: Datum
+  private computed: ComputedData
+  private currentTranslation: [number, number]
+  private data: Datum[]
+  private drawn: boolean = false
+  private el: D3Selection
+  private events: EventBus
+  private extent: string
+  private key: RendererAccessor<string>
+  private previous: Partial<ComputedData>
+  private state: State
+  private target: number
+  private total: number
+  private type: "donut" | "polar" | "gauge" = "gauge"
+  private value: RendererAccessor<number>
 
   constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
     this.state = state
@@ -72,7 +72,7 @@ class Gauge implements Renderer {
     this.drawn ? this.updateDraw() : this.initialDraw()
   }
 
-  initialDraw(): void {
+  private initialDraw(): void {
     // groups
     this.el.append("svg:g").attr("class", "arcs")
     this.el.append("svg:g").attr("class", styles.total)
@@ -80,7 +80,7 @@ class Gauge implements Renderer {
     this.drawn = true
   }
 
-  updateDraw(): void {
+  private updateDraw(): void {
     const config: PieChartConfig = this.state.current.get("config")
     const duration: number = config.duration
     const minTotalFontSize: number = config.minTotalFontSize
@@ -111,27 +111,27 @@ class Gauge implements Renderer {
     this.updateComparison()
   }
 
-  arcAttributes(): Object<any> {
+  private arcAttributes(): Object<any> {
     return {
       path: this.arcTween.bind(this),
       fill: this.arcColor.bind(this)
     }
   }
 
-  arcColor(d: Datum): string {
+  private arcColor(d: Datum): string {
     return d.unfilled ? undefined : this.color(d)
   }
 
-  angleRange(): [number, number] {
+  private angleRange(): [number, number] {
     return this.extent === "semi" ? [-Math.PI / 2, Math.PI / 2] : [-Math.PI, Math.PI]
   }
 
-  totalYOffset(): string {
+  private totalYOffset(): string {
     return this.extent === "semi" ? "0" : "0.35em"
   }
 
   // Interpolate the arcs in data space.
-  arcTween(d: ComputedDatum, i: number): (t: number) => string {
+  private arcTween(d: ComputedDatum, i: number): (t: number) => string {
     const angleRange: [number, number] = this.angleRange()
     let old: any
     let s0: number
@@ -183,7 +183,7 @@ class Gauge implements Renderer {
     return (t: number): string => this.computed.arc(f(t))
   }
 
-  lineTween(comparison: Object<any>): (t: number) => string {
+  private lineTween(comparison: Object<any>): (t: number) => string {
     // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
     // Here, we need '0' to be horizontal to left of origin.
     const range: number[] = map((value: number): number => value + Math.PI / 2)(this.angleRange())
@@ -205,11 +205,11 @@ class Gauge implements Renderer {
     return (t: number): string => path(f(t))
   }
 
-  centerDisplayString(): string {
+  private centerDisplayString(): string {
     return `${this.total} / ${this.target}`
   }
 
-  updateComparison(): void {
+  private updateComparison(): void {
     const comparison: D3Selection = this.el
       .selectAll(`g.${styles.comparison}`)
       .data(this.comparison ? [this.comparison] : [])
@@ -232,7 +232,7 @@ class Gauge implements Renderer {
   }
 
   // Data computation / preparation
-  compute(): void {
+  private compute(): void {
     this.previous = this.computed
     this.total = Utils.computeTotal(this.data, this.value)
 
@@ -261,12 +261,12 @@ class Gauge implements Renderer {
     }
   }
 
-  angleValue(d: Datum): number {
+  private angleValue(d: Datum): number {
     return this.value(d) || d.value
   }
 
   // Ensure sum of rendered values is equal to gauge target value.
-  fillGaugeExtent(): void {
+  private fillGaugeExtent(): void {
     const runningTotal: number[] = this.runningTotal()
 
     // If target has been exceeded, reduce last value(s)
@@ -289,7 +289,7 @@ class Gauge implements Renderer {
     }
   }
 
-  runningTotal(): number[] {
+  private runningTotal(): number[] {
     return reduce((memo: number[], datapoint: Datum): number[] => {
       const previous: number = last(memo) || 0
       memo.push(previous + datapoint.value)
@@ -297,7 +297,7 @@ class Gauge implements Renderer {
     }, [])(this.data)
   }
 
-  computeArcs(computed: ComputedInitial): ComputedArcs {
+  private computeArcs(computed: ComputedInitial): ComputedArcs {
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
         .drawingContainerDims,
       outerBorderMargin: number = this.state.current.get("config").outerBorderMargin,
@@ -317,13 +317,13 @@ class Gauge implements Renderer {
     }
   }
 
-  computeOuter(drawingDims: { width: number; height: number }, margin: number): number {
+  private computeOuter(drawingDims: { width: number; height: number }, margin: number): number {
     return this.extent === "full"
       ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
       : Math.min(drawingDims.width / 2, drawingDims.height) - margin
   }
 
-  computeInner(outerRadius: any): number {
+  private computeInner(outerRadius: any): number {
     const config: PieChartConfig = this.state.current.get("config")
     const width: number = outerRadius - config.minInnerRadius
     // If there isn't enough space, don't render inner circle
@@ -331,7 +331,7 @@ class Gauge implements Renderer {
   }
 
   // Event listeners / handlers
-  onMouseOver(d: ComputedDatum): void {
+  private onMouseOver(d: ComputedDatum): void {
     if (d.data.unfilled) {
       this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
       return
@@ -345,7 +345,7 @@ class Gauge implements Renderer {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
   }
 
-  updateElementHover(datapoint: HoverPayload): void {
+  private updateElementHover(datapoint: HoverPayload): void {
     if (!this.drawn) {
       return
     }
@@ -359,7 +359,7 @@ class Gauge implements Renderer {
     Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
   }
 
-  highlightElement(key: string): void {
+  private highlightElement(key: string): void {
     const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
     if (!d) {
       return
@@ -367,7 +367,7 @@ class Gauge implements Renderer {
     this.onMouseOver(d)
   }
 
-  onMouseOut(): void {
+  private onMouseOut(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 

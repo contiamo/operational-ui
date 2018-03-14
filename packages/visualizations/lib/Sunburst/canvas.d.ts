@@ -9,16 +9,16 @@ declare class SunburstCanvas implements Canvas {
     protected elMap: Object<D3Selection>;
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
-    renderChartContainer(context: Element): D3Selection;
-    renderBreadcrumb(): D3Selection;
-    renderEl(): SeriesEl;
-    onMouseEnter(): void;
-    onMouseLeave(): void;
-    onClick(): void;
-    renderRootLabel(): D3Selection;
-    renderFocus(): D3Selection;
+    private renderChartContainer(context);
+    private renderBreadcrumb();
+    private renderEl();
+    private onMouseEnter();
+    private onMouseLeave();
+    private onClick();
+    private renderRootLabel();
+    private renderFocus();
+    private drawingDims();
     draw(): void;
-    drawingDims(): Object<number>;
     remove(): void;
     elementFor(component: string): D3Selection;
 }

@@ -1,5 +1,5 @@
 import "d3-transition";
-import { ComputedArcs, ComputedData, ComputedDatum, D3Selection, Datum, EventBus, HoverPayload, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
+import { ComputedData, D3Selection, Datum, EventBus, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
 declare class Polar implements Renderer {
     color: RendererAccessor<string>;
     computed: ComputedData;
@@ -18,26 +18,23 @@ declare class Polar implements Renderer {
     updateOptions(options: Object<any>): void;
     setData(data: Datum[]): void;
     draw(): void;
-    initialDraw(): void;
-    updateDraw(): void;
-    arcAttributes(): Object<any>;
-    fitToCanvas(): void;
-    arcTween(d: ComputedDatum, i: number): (t: number) => string;
-    removeArcTween(d: ComputedDatum, i: number): (t: number) => string;
-    centerDisplayString(): string;
-    compute(): void;
-    angleValue(): number;
-    computeArcs(computed: Partial<ComputedData>): ComputedArcs;
-    computeOuter(drawingDims: {
-        width: number;
-        height: number;
-    }, scaleFactor?: number): (d: Datum) => number;
-    computeInner(data: ComputedDatum[], outerRadius: (d: Datum) => number): number;
-    hoverOuter(radius: any): any;
-    onMouseOver(d: ComputedDatum): void;
-    updateElementHover(datapoint: HoverPayload): void;
-    highlightElement(key: string): void;
-    onMouseOut(): void;
+    private initialDraw();
+    private updateDraw();
+    private arcAttributes();
+    private fitToCanvas();
+    private arcTween(d, i);
+    private removeArcTween(d, i);
+    private centerDisplayString();
+    private compute();
+    private angleValue();
+    private computeArcs(computed);
+    private computeOuter(drawingDims, scaleFactor?);
+    private computeInner(data, outerRadius);
+    private hoverOuter(radius);
+    private onMouseOver(d);
+    private updateElementHover(datapoint);
+    private highlightElement(key);
+    private onMouseOut();
     dataForLegend(): LegendDatum[];
     remove(): void;
 }

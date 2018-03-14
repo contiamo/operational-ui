@@ -27,7 +27,7 @@ class Renderer {
     this.nodes.draw(data.nodes)
   }
 
-  focusElement(focusElement: FocusElement): void {
+  private focusElement(focusElement: FocusElement): void {
     switch (focusElement.type) {
       case "path":
         this.highlightPath(focusElement)
@@ -41,7 +41,7 @@ class Renderer {
     }
   }
 
-  highlightPath(focusElement: FocusElement): void {
+  private highlightPath(focusElement: FocusElement): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
 
     const path: string[] = focusElement.matchers.path

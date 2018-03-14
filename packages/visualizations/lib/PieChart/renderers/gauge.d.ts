@@ -1,5 +1,5 @@
 import "d3-transition";
-import { ComputedArcs, ComputedData, ComputedDatum, ComputedInitial, D3Selection, Datum, EventBus, HoverPayload, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
+import { ComputedData, D3Selection, Datum, EventBus, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
 declare class Gauge implements Renderer {
     color: RendererAccessor<string>;
     comparison: Datum;
@@ -21,30 +21,27 @@ declare class Gauge implements Renderer {
     updateOptions(options: Object<any>): void;
     setData(data: Datum[]): void;
     draw(): void;
-    initialDraw(): void;
-    updateDraw(): void;
-    arcAttributes(): Object<any>;
-    arcColor(d: Datum): string;
-    angleRange(): [number, number];
-    totalYOffset(): string;
-    arcTween(d: ComputedDatum, i: number): (t: number) => string;
-    lineTween(comparison: Object<any>): (t: number) => string;
-    centerDisplayString(): string;
-    updateComparison(): void;
-    compute(): void;
-    angleValue(d: Datum): number;
-    fillGaugeExtent(): void;
-    runningTotal(): number[];
-    computeArcs(computed: ComputedInitial): ComputedArcs;
-    computeOuter(drawingDims: {
-        width: number;
-        height: number;
-    }, margin: number): number;
-    computeInner(outerRadius: any): number;
-    onMouseOver(d: ComputedDatum): void;
-    updateElementHover(datapoint: HoverPayload): void;
-    highlightElement(key: string): void;
-    onMouseOut(): void;
+    private initialDraw();
+    private updateDraw();
+    private arcAttributes();
+    private arcColor(d);
+    private angleRange();
+    private totalYOffset();
+    private arcTween(d, i);
+    private lineTween(comparison);
+    private centerDisplayString();
+    private updateComparison();
+    private compute();
+    private angleValue(d);
+    private fillGaugeExtent();
+    private runningTotal();
+    private computeArcs(computed);
+    private computeOuter(drawingDims, margin);
+    private computeInner(outerRadius);
+    private onMouseOver(d);
+    private updateElementHover(datapoint);
+    private highlightElement(key);
+    private onMouseOut();
     dataForLegend(): LegendDatum[];
     remove(): void;
 }

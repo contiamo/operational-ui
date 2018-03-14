@@ -1,5 +1,5 @@
 import "d3-transition";
-import { ComputedArcs, ComputedData, ComputedDatum, ComputedInitial, D3Selection, Datum, EventBus, HoverPayload, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
+import { ComputedData, D3Selection, Datum, EventBus, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
 declare class Donut implements Renderer {
     color: RendererAccessor<string>;
     computed: ComputedData;
@@ -17,24 +17,21 @@ declare class Donut implements Renderer {
     updateOptions(options: Object<any>): void;
     setData(data: Datum[]): void;
     draw(): void;
-    initialDraw(): void;
-    updateDraw(): void;
-    arcAttributes(): Object<any>;
-    arcTween(d: ComputedDatum): (t: number) => string;
-    removeArcTween(d: ComputedDatum, i: number): (t: number) => string;
-    centerDisplayString(): string;
-    compute(): void;
-    angleValue(d: Datum): number;
-    computeArcs(computed: ComputedInitial): ComputedArcs;
-    computeOuter(drawingDims: {
-        width: number;
-        height: number;
-    }): number;
-    computeInner(outerRadius: number): number;
-    onMouseOver(d: ComputedDatum): void;
-    updateElementHover(datapoint: HoverPayload): void;
-    highlightElement(key: string): void;
-    onMouseOut(): void;
+    private initialDraw();
+    private updateDraw();
+    private arcAttributes();
+    private arcTween(d);
+    private removeArcTween(d, i);
+    private centerDisplayString();
+    private compute();
+    private angleValue(d);
+    private computeArcs(computed);
+    private computeOuter(drawingDims);
+    private computeInner(outerRadius);
+    private onMouseOver(d);
+    private updateElementHover(datapoint);
+    private highlightElement(key);
+    private onMouseOut();
     dataForLegend(): LegendDatum[];
     remove(): void;
 }

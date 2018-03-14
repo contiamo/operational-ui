@@ -70,7 +70,7 @@ class PieChartLegend implements Legend {
     this.updateDimensions()
   }
 
-  updateComparisonLegend(): void {
+  private updateComparisonLegend(): void {
     // Only needed for gauges, if comparison value is given.
     const data: LegendDatum[] = filter((d: LegendDatum): boolean => d.comparison)(
       this.state.current.get("computed").series.dataForLegend
@@ -96,15 +96,15 @@ class PieChartLegend implements Legend {
       .html((d: LegendDatum): string => d.label)
   }
 
-  data(): LegendDatum[] {
+  private data(): LegendDatum[] {
     return filter((d: LegendDatum): boolean => !d.comparison)(this.state.current.get("computed").series.dataForLegend)
   }
 
-  onComponentHover(d: LegendDatum, el: HTMLElement): void {
+  private onComponentHover(d: LegendDatum, el: HTMLElement): void {
     this.events.emit(Events.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) })
   }
 
-  currentOptions(datum: LegendDatum): ComponentConfigOptions {
+  private currentOptions(datum: LegendDatum): ComponentConfigOptions {
     return datum.comparison
       ? {
           options: {
@@ -122,7 +122,7 @@ class PieChartLegend implements Legend {
         }
   }
 
-  updateDimensions(): void {
+  private updateDimensions(): void {
     const legendNode: Element = this.legend.node()
     const config: PieChartConfig = this.state.current.get("config")
     const h: number = config.height

@@ -12,7 +12,6 @@ declare class Series {
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl);
     prepareData(): void;
-    hasData(): boolean;
     draw(): void;
 }
 export default Series;

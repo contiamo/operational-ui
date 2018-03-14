@@ -1,22 +1,22 @@
 import "d3-transition";
-import { EventBus, FocusElement, FocusPoint, LinkSelection, ProcessFlowConfig, Scale, SeriesEl, State, TLink } from "../typings";
-declare class Links {
+import { EventBus, FocusElement, LinkSelection, ProcessFlowConfig, Renderer, SeriesEl, State, TLink } from "../typings";
+declare class Links implements Renderer {
     config: ProcessFlowConfig;
     data: TLink[];
     el: SeriesEl;
     events: EventBus;
     state: State;
     constructor(state: State, events: EventBus, el: SeriesEl);
-    onMouseOver(d: TLink, element: HTMLElement): void;
-    mouseOver(element: LinkSelection, d: TLink, hideLabel?: boolean): void;
+    private onMouseOver(d, element);
+    private mouseOver(element, d, hideLabel?);
     focusElement(focusElement: FocusElement): void;
     highlight(element: LinkSelection, d: TLink, keepCurrent?: boolean): void;
-    removeHighlights(): void;
-    focusPoint(element: LinkSelection, d: TLink): FocusPoint;
-    onMouseOut(): void;
+    private removeHighlights();
+    private focusPoint(element, d);
+    private onMouseOut();
     draw(data: TLink[]): void;
-    borderScale(scale: Scale): Scale;
-    enterAndUpdate(groups: LinkSelection): void;
-    startPath(link: TLink): string;
+    private borderScale(scale);
+    private enterAndUpdate(groups);
+    private startPath(link);
 }
 export default Links;

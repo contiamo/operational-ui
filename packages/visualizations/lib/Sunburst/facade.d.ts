@@ -1,7 +1,7 @@
 import SunburstCanvas from "./canvas";
 import StateHandler from "../utils/state_handler";
 import EventEmitter from "../utils/event_bus";
-import { Accessors, AccessorsObject, Components, Computed, Facade, RawData, SunburstConfig } from "./typings";
+import { Accessors, Components, Facade, RawData, SunburstConfig } from "./typings";
 declare class SunburstFacade implements Facade {
     __disposed: boolean;
     canvas: SunburstCanvas;
@@ -11,13 +11,13 @@ declare class SunburstFacade implements Facade {
     events: EventEmitter;
     state: StateHandler<SunburstConfig, RawData>;
     constructor(context: Element);
-    insertState(): StateHandler<SunburstConfig, RawData>;
-    initialConfig(): SunburstConfig;
-    defaultColorAssigner(palette: string[]): (key: string) => string;
-    initialAccessors(): AccessorsObject;
-    initialComputed(): Computed;
-    insertCanvas(): SunburstCanvas;
-    insertComponents(): Components;
+    private insertState();
+    private initialConfig();
+    private defaultColorAssigner(palette);
+    private initialAccessors();
+    private initialComputed();
+    private insertCanvas();
+    private insertComponents();
     data(data?: RawData): RawData;
     config(config?: Partial<SunburstConfig>): SunburstConfig;
     accessors(type: string, accessors: Accessors<any>): Accessors<any>;

@@ -28,7 +28,7 @@ class SunburstFacade implements Facade {
     this.components = this.insertComponents()
   }
 
-  insertState(): StateHandler<SunburstConfig, RawData> {
+  private insertState(): StateHandler<SunburstConfig, RawData> {
     return new StateHandler({
       data: {},
       config: this.initialConfig(),
@@ -37,7 +37,7 @@ class SunburstFacade implements Facade {
     })
   }
 
-  initialConfig(): SunburstConfig {
+  private initialConfig(): SunburstConfig {
     return {
       arrowOffset: 10,
       centerCircleRadius: 0.9,
@@ -57,11 +57,11 @@ class SunburstFacade implements Facade {
     }
   }
 
-  defaultColorAssigner(palette: string[]): (key: string) => string {
+  private defaultColorAssigner(palette: string[]): (key: string) => string {
     return colorAssigner(palette)
   }
 
-  initialAccessors(): AccessorsObject {
+  private initialAccessors(): AccessorsObject {
     const assignColors: (key: string) => string = this.defaultColorAssigner(this.initialConfig().palette)
     return {
       data: {
@@ -75,7 +75,7 @@ class SunburstFacade implements Facade {
     }
   }
 
-  initialComputed(): Computed {
+  private initialComputed(): Computed {
     return {
       canvas: {},
       focus: {},
@@ -83,11 +83,11 @@ class SunburstFacade implements Facade {
     }
   }
 
-  insertCanvas(): SunburstCanvas {
+  private insertCanvas(): SunburstCanvas {
     return new SunburstCanvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
-  insertComponents(): Components {
+  private insertComponents(): Components {
     return {
       breadcrumb: new Breadcrumb(
         this.state.readOnly(),

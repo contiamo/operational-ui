@@ -59,7 +59,7 @@ class Renderer {
     this.enterAndUpdate(arcs, config.duration, document.hidden || config.disableAnimations)
   }
 
-  exit(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
+  private exit(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
     const exitingArcs: any = disableAnimations
       ? arcs.exit()
       : arcs
@@ -70,11 +70,11 @@ class Renderer {
     exitingArcs.remove()
   }
 
-  arcClass(d: Datum): string {
+  private arcClass(d: Datum): string {
     return `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
   }
 
-  enterAndUpdate(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
+  private enterAndUpdate(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
     const updatingArcs: D3Selection = arcs
       .enter()
       .append("svg:path")
@@ -98,7 +98,7 @@ class Renderer {
   }
 
   // Computations
-  compute(): void {
+  private compute(): void {
     const drawingDims: SunburstConfig = this.state.current.get("computed").canvas.drawingDims
     this.radius =
       Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin
@@ -120,7 +120,7 @@ class Renderer {
     this.data = this.dataHandler.prepareData()
   }
 
-  endAngle(d: Datum): number {
+  private endAngle(d: Datum): number {
     // Set a minimum segment angle so that the segment can always be seen,
     // UNLESS the segment is not a descendant of the top or zoomed node (i.e. should not be visible)
     const show: boolean = findIndex(this.isEqual(this.zoomNode || this.dataHandler.topNode))(d.ancestors()) > -1
@@ -129,26 +129,26 @@ class Renderer {
   }
 
   // Center elements within drawing container
-  translate(): string {
+  private translate(): string {
     const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
     this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return `translate(${this.currentTranslation.join(", ")})`
   }
 
   // Translate back to 0,0 in top left, for focus labels
-  translateBack(point: [number, number]): [number, number] {
+  private translateBack(point: [number, number]): [number, number] {
     const currentTranslation: [number, number] = this.currentTranslation
     return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
   }
 
   // Helper functions for finding / filtering / comparing nodes
-  isEqual(d1: Datum): (d2: Datum) => boolean {
+  private isEqual(d1: Datum): (d2: Datum) => boolean {
     return (d2: Datum): boolean => {
       return Boolean(d1) && Boolean(d2) && every(identity)([d1.name === d2.name, this.isSibling(d1)(d2)])
     }
   }
 
-  isSibling(d1: Datum): (d2: Datum) => boolean {
+  private isSibling(d1: Datum): (d2: Datum) => boolean {
     return (d2: Datum): boolean => {
       if (!d1.parent && !d2.parent) {
         return true
@@ -157,11 +157,11 @@ class Renderer {
     }
   }
 
-  findSiblings(data: Datum[], d: Datum): Datum[] {
+  private findSiblings(data: Datum[], d: Datum): Datum[] {
     return filter(this.isSibling(d))(data)
   }
 
-  findAncestor(data: Datum[], d: Datum): Datum {
+  private findAncestor(data: Datum[], d: Datum): Datum {
     if (!d) {
       return
     }
@@ -169,12 +169,12 @@ class Renderer {
     return parent || this.findAncestor(data, d.parent)
   }
 
-  findDatum(data: Datum[], d: Datum): Datum {
+  private findDatum(data: Datum[], d: Datum): Datum {
     return find(this.isEqual(d))(data)
   }
 
   // Arc interpolations for entering segments
-  arcTween(d: Datum): (t: number) => string {
+  private arcTween(d: Datum): (t: number) => string {
     const previousData: Datum[] = this.previous || [],
       // old version of same datum
       old: Datum = find(this.isEqual(d))(previousData),
@@ -212,7 +212,7 @@ class Renderer {
   }
 
   // Arc interpolations for exiting segments
-  removeArcTween(d: Datum): (t: number) => string {
+  private removeArcTween(d: Datum): (t: number) => string {
     const oldSiblings: Datum[] = this.findSiblings(this.previous || [], d)
     const currentSiblings: Datum[] = this.findSiblings(this.data, d)
     const oldSiblingIndex: number = findIndex(this.isEqual(d))(oldSiblings)
@@ -238,7 +238,7 @@ class Renderer {
   }
 
   // Event handlers
-  onClick(payload: ClickPayload): void {
+  private onClick(payload: ClickPayload): void {
     // Don't allow zooming on last child
     if (payload.d && !payload.d.children) {
       return
@@ -332,11 +332,11 @@ class Renderer {
     }
   }
 
-  zoomOut(payload: ClickPayload): void {
+  private zoomOut(payload: ClickPayload): void {
     this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d: payload.d.parent })
   }
 
-  onMouseOver(d: Datum, el: Element): void {
+  private onMouseOver(d: Datum, el: Element): void {
     if (d === this.zoomNode) {
       return
     }
@@ -348,7 +348,7 @@ class Renderer {
     this.highlightPath(d, el)
   }
 
-  highlightPath(d: Datum, el: Element) {
+  private highlightPath(d: Datum, el: Element) {
     const percentage: number = Number((100 * d.value / this.total).toPrecision(3))
     let percentageString: string = percentage + "%"
     if (percentage < 0.1) {
@@ -377,7 +377,7 @@ class Renderer {
     d3.select(el).on("mouseleave", this.onMouseLeave.bind(this)(d, el))
   }
 
-  onMouseLeave(d: Datum, el: Element): any {
+  private onMouseLeave(d: Datum, el: Element): any {
     return () => {
       if (this.mouseOverDatum !== d) {
         return
@@ -397,21 +397,21 @@ class Renderer {
   }
 
   // Arrows to denote path truncation
-  removeTruncationArrows(): void {
+  private removeTruncationArrows(): void {
     this.el
       .select("g.arrows")
       .selectAll("path")
       .remove()
   }
 
-  arrowTransformation(d: Datum): string {
+  private arrowTransformation(d: Datum): string {
     const radAngle: number = d3Interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5)
     const degAngle: number = radAngle * 180 / Math.PI
     const r: number = this.radiusScale(d.y1) + this.state.current.get("config").arrowOffset
     return `translate(0, ${-r}) rotate(${degAngle} 0 ${r})`
   }
 
-  updateTruncationArrows(): void {
+  private updateTruncationArrows(): void {
     const centerNode: Datum = this.zoomNode || this.dataHandler.topNode,
       config: SunburstConfig = this.state.current.get("config")
 

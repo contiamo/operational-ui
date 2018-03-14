@@ -25,11 +25,11 @@ class Node {
     this.assignAccessors()
   }
 
-  assignAttributes(nodeAttributes: NodeAttrs): NodeAttrs {
+  private assignAttributes(nodeAttributes: NodeAttrs): NodeAttrs {
     return extend.convert({ immutable: false })({})(nodeAttributes)
   }
 
-  assignAccessors(): void {
+  private assignAccessors(): void {
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(this.accessors)

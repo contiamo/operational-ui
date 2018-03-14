@@ -44,36 +44,21 @@ export interface Config {
 }
 
 export interface Focus<HoverPayload> {
-  onElementHover: (payload: HoverPayload) => void
-  onElementOut: () => void
-  onMouseLeave: () => void
   remove: () => void
 }
 
 export interface Legend {
   draw: () => void
   remove: () => void
-  updateDimensions: () => void
 }
 
 export interface Canvas {
   draw: () => void
   elementFor: (component: string) => any
-  renderChartContainer: (context: Element) => D3Selection
-  renderEl: () => SeriesEl
-  onClick: () => void
-  onMouseEnter: () => void
-  onMouseLeave: () => void
   remove: () => void
 }
 
 export interface Facade<Config, AccessorsObject, Computed, Components, Data> {
-  insertState: () => StateHandler<Config, Data>
-  initialConfig: () => Config
-  initialAccessors: () => AccessorsObject
-  initialComputed: () => Computed
-  insertCanvas: () => Canvas
-  insertComponents: () => Components
   data: (data?: Data) => Data
   config: (config?: Partial<Config>) => Config
   accessors: (type: string, accessors: Accessors<any>) => Accessors<any>

@@ -14,6 +14,7 @@ import {
   FocusPoint,
   LinkSelection,
   ProcessFlowConfig,
+  Renderer,
   Scale,
   SeriesEl,
   State,
@@ -34,7 +35,7 @@ const path = (link: TLink): string => {
   return `M${xStart},${yStart}L${xMid},${yMid}L${xEnd},${yEnd}`
 }
 
-class Links {
+class Links implements Renderer {
   config: ProcessFlowConfig
   data: TLink[]
   el: SeriesEl
@@ -48,11 +49,11 @@ class Links {
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.removeHighlights.bind(this))
   }
 
-  onMouseOver(d: TLink, element: HTMLElement): void {
+  private onMouseOver(d: TLink, element: HTMLElement): void {
     this.mouseOver(d3.select(element), d)
   }
 
-  mouseOver(element: LinkSelection, d: TLink, hideLabel: boolean = false): void {
+  private mouseOver(element: LinkSelection, d: TLink, hideLabel: boolean = false): void {
     this.highlight(element, d)
     const focusPoint: FocusPoint = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { focusPoint, d, hideLabel })
@@ -92,12 +93,12 @@ class Links {
   }
 
   // Remove any old highlights, including node highlighting (needed if an element has been manually focussed)
-  removeHighlights(): void {
+  private removeHighlights(): void {
     this.el.selectAll(`path.node.${styles.border}`).attr("stroke", this.config.borderColor)
     this.el.selectAll(`path.link.${styles.element}`).attr("stroke", (d: TLink): string => d.stroke())
   }
 
-  focusPoint(element: LinkSelection, d: TLink): FocusPoint {
+  private focusPoint(element: LinkSelection, d: TLink): FocusPoint {
     if (d == null) return
     const scale: Scale = sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth], this.data)
 
@@ -110,7 +111,7 @@ class Links {
     }
   }
 
-  onMouseOut(): void {
+  private onMouseOut(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 
@@ -126,11 +127,11 @@ class Links {
     this.enterAndUpdate(groups)
   }
 
-  borderScale(scale: Scale): Scale {
+  private borderScale(scale: Scale): Scale {
     return (size: number): number => scale(size) + 2 * this.config.linkBorderWidth
   }
 
-  enterAndUpdate(groups: LinkSelection): void {
+  private enterAndUpdate(groups: LinkSelection): void {
     const scale: Scale = sizeScale([this.config.minLinkWidth, this.config.maxLinkWidth], this.data),
       borderScale: Scale = this.borderScale(scale),
       opacityScale: Scale = sizeScale([MINOPACITY, MAXOPACITY], this.data)
@@ -181,7 +182,7 @@ class Links {
 
   // Paths start as a single point at the source node. If the source node has already been rendered,
   // use its position at the start of the transition.
-  startPath(link: TLink): string {
+  private startPath(link: TLink): string {
     const previousData: Data = this.state.previous.get("computed").series.data,
       previousNodes: TNode[] = previousData ? previousData.nodes : [],
       existingSource: TNode = find((node: TNode): boolean => node.id() === link.sourceId())(previousNodes),

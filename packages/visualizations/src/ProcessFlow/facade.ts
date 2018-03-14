@@ -38,7 +38,7 @@ class ProcessFlowFacade implements Facade {
     this.series = this.insertSeries()
   }
 
-  insertState(): StateHandler<ProcessFlowConfig, InputData> {
+  private insertState(): StateHandler<ProcessFlowConfig, InputData> {
     return new StateHandler({
       data: {},
       config: this.initialConfig(),
@@ -47,7 +47,7 @@ class ProcessFlowFacade implements Facade {
     })
   }
 
-  initialConfig(): ProcessFlowConfig {
+  private initialConfig(): ProcessFlowConfig {
     return {
       borderColor: "#fff",
       duration: 1e3,
@@ -73,7 +73,7 @@ class ProcessFlowFacade implements Facade {
     }
   }
 
-  initialAccessors(): AccessorsObject {
+  private initialAccessors(): AccessorsObject {
     return {
       data: {
         nodes: (d: InputData) => d.nodes,
@@ -103,7 +103,7 @@ class ProcessFlowFacade implements Facade {
     }
   }
 
-  initialComputed(): Computed {
+  private initialComputed(): Computed {
     return {
       canvas: {},
       focus: {},
@@ -111,7 +111,7 @@ class ProcessFlowFacade implements Facade {
     }
   }
 
-  insertCanvas(): ProcessFlowCanvas {
+  private insertCanvas(): ProcessFlowCanvas {
     return new ProcessFlowCanvas(
       this.state.readOnly(),
       this.state.computedWriter(["canvas"]),
@@ -120,7 +120,7 @@ class ProcessFlowFacade implements Facade {
     )
   }
 
-  insertComponents(): Components {
+  private insertComponents(): Components {
     return {
       focus: new ProcessFlowFocus(
         this.state.readOnly(),
@@ -131,7 +131,7 @@ class ProcessFlowFacade implements Facade {
     }
   }
 
-  insertSeries(): Series {
+  private insertSeries(): Series {
     return new Series(
       this.state.readOnly(),
       this.state.computedWriter(["series"]),

@@ -47,7 +47,7 @@ class ProcessFlowFocus implements Focus {
     this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
   }
 
-  onElementHover(payload: HoverPayload): void {
+  private onElementHover(payload: HoverPayload): void {
     // Remove the current focus label, if there is one
     this.remove()
     if (payload.hideLabel) {
@@ -93,7 +93,7 @@ class ProcessFlowFocus implements Focus {
     FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
   }
 
-  appendContent(container: D3Selection, content: Object<any>[]): void {
+  private appendContent(container: D3Selection, content: Object<any>[]): void {
     const contentContainer: D3Selection = container.append("div").attr("class", styles.content)
     forEach((contentItem: Object<any>): void => {
       contentContainer
@@ -105,7 +105,7 @@ class ProcessFlowFocus implements Focus {
     })(content)
   }
 
-  addNodeBreakdowns(content: SeriesEl, datum: TNode): void {
+  private addNodeBreakdowns(content: SeriesEl, datum: TNode): void {
     const breakdowns: Breakdowns = computeBreakdowns(datum),
       container: D3Selection = content.append("div").attr("class", styles.breakdownsContainer),
       inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),
@@ -147,7 +147,7 @@ class ProcessFlowFocus implements Focus {
     )(container)
   }
 
-  addSingleNodeVisitsComment(content: SeriesEl, datum: TNode): void {
+  private addSingleNodeVisitsComment(content: SeriesEl, datum: TNode): void {
     if (datum.singleNodeJourneys === 0) {
       return
     }
@@ -157,7 +157,7 @@ class ProcessFlowFocus implements Focus {
       .text(`[!] ${datum.singleNodeJourneys} single node visits (not included in the above stats)`)
   }
 
-  getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
+  private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect,
       config: ProcessFlowConfig = this.state.current.get("config")
 
@@ -169,11 +169,11 @@ class ProcessFlowFocus implements Focus {
     }
   }
 
-  onElementOut(): void {
+  private onElementOut(): void {
     this.remove()
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 

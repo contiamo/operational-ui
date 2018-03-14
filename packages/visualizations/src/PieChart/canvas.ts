@@ -28,7 +28,7 @@ class PieChartCanvas implements Canvas {
   }
 
   // Chart container
-  renderChartContainer(context: Element): D3Selection {
+  private renderChartContainer(context: Element): D3Selection {
     const container = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     container.addEventListener("mouseenter", this.onMouseEnter.bind(this))
@@ -37,20 +37,20 @@ class PieChartCanvas implements Canvas {
     return d3.select(container).attr("class", styles.chartContainer)
   }
 
-  onMouseEnter(): void {
+  private onMouseEnter(): void {
     this.events.emit(Events.CHART.MOUSEOVER)
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.events.emit(Events.CHART.MOUSEOUT)
   }
 
-  onClick(): void {
+  private onClick(): void {
     this.events.emit(Events.CHART.CLICK)
   }
 
   // Legend
-  renderLegend(): void {
+  private renderLegend(): void {
     const legendNode: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(legendNode)
 
@@ -64,14 +64,14 @@ class PieChartCanvas implements Canvas {
   }
 
   // Drawing container
-  renderDrawingContainer(): D3Selection {
+  private renderDrawingContainer(): D3Selection {
     const drawingContainer = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(drawingContainer)
     return d3.select(drawingContainer).attr("class", styles.drawingContainer)
   }
 
   // El
-  renderEl(): SeriesEl {
+  private renderEl(): SeriesEl {
     const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     this.drawingContainer.node().appendChild(el)
     this.elMap.series = d3.select(el)
@@ -79,7 +79,7 @@ class PieChartCanvas implements Canvas {
   }
 
   // Defs
-  renderShadows(): void {
+  private renderShadows(): void {
     this.elements.defs = this.el.append("defs")
     const shadow: D3Selection = this.elements.defs
       .append("filter")
@@ -106,26 +106,26 @@ class PieChartCanvas implements Canvas {
     this.stateWriter("shadowDefinitionId", this.shadowDefinitionId())
   }
 
-  prefixedId(id: string): string {
+  private prefixedId(id: string): string {
     return this.state.current.get("config").uid + id
   }
 
-  shadowDefinitionId(): string {
+  private shadowDefinitionId(): string {
     return this.prefixedId("_shadow")
   }
 
   // Drawing group
-  renderDrawingGroup(): void {
+  private renderDrawingGroup(): void {
     this.elements.drawing = this.el.append("svg:g").attr("class", "drawing")
   }
 
   // Focus elements
-  renderFocusElements(): void {
+  private renderFocusElements(): void {
     this.elMap.focus = this.renderFocusLabel()
     this.elMap.componentFocus = this.renderComponentFocus()
   }
 
-  renderFocusLabel(): D3Selection {
+  private renderFocusLabel(): D3Selection {
     const focusEl = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
@@ -134,11 +134,21 @@ class PieChartCanvas implements Canvas {
     return focusEl
   }
 
-  renderComponentFocus(): D3Selection {
+  private renderComponentFocus(): D3Selection {
     const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
     const ref: Node = this.chartContainer.node()
     ref.insertBefore(focusEl.node(), ref.nextSibling)
     return focusEl
+  }
+
+  private drawingContainerDims(): { height: number; width: number } {
+    const config = this.state.current.get("config")
+    const dims = {
+      height: config.height - this.elMap.legend.node().offsetHeight,
+      width: config.width
+    }
+    this.stateWriter("drawingContainerDims", dims)
+    return dims
   }
 
   // Lifecycle
@@ -153,16 +163,6 @@ class PieChartCanvas implements Canvas {
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
     this.el.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
     this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
-  }
-
-  drawingContainerDims(): { height: number; width: number } {
-    const config = this.state.current.get("config")
-    const dims = {
-      height: config.height - this.elMap.legend.node().offsetHeight,
-      width: config.width
-    }
-    this.stateWriter("drawingContainerDims", dims)
-    return dims
   }
 
   remove(): void {

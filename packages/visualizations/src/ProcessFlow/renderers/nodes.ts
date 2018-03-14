@@ -14,6 +14,7 @@ import {
   NodeSelection,
   Object,
   ProcessFlowConfig,
+  Renderer,
   Scale,
   SeriesEl,
   State,
@@ -73,7 +74,7 @@ const nodeShapeOptions: Object<Object<any>> = {
   }
 }
 
-class Nodes {
+class Nodes implements Renderer {
   config: ProcessFlowConfig
   data: TNode[]
   el: SeriesEl
@@ -87,11 +88,11 @@ class Nodes {
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.removeHighlights.bind(this))
   }
 
-  onMouseOver(d: TNode, element: HTMLElement): void {
+  private onMouseOver(d: TNode, element: HTMLElement): void {
     this.mouseOver(d3.select(element), d)
   }
 
-  mouseOver(element: NodeSelection, d: TNode, hideLabel: boolean = false): void {
+  private mouseOver(element: NodeSelection, d: TNode, hideLabel: boolean = false): void {
     this.highlight(element, d)
     const focusPoint: FocusPoint = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { focusPoint, d, hideLabel })
@@ -117,12 +118,12 @@ class Nodes {
   }
 
   // Remove any old highlights, including link highlighting (needed if an element has been manually focussed)
-  removeHighlights(): void {
+  private removeHighlights(): void {
     this.el.selectAll(`path.node.${styles.border}`).attr("stroke", this.config.borderColor)
     this.el.selectAll(`path.link.${styles.element}`).attr("stroke", (d: TLink): string => d.stroke())
   }
 
-  focusPoint(element: NodeSelection, d: TNode): FocusPoint {
+  private focusPoint(element: NodeSelection, d: TNode): FocusPoint {
     if (d == null) return
     const offset: number = this.getNodeBoundingRect(element.node()).width / 2
     return {
@@ -134,7 +135,7 @@ class Nodes {
     }
   }
 
-  onMouseOut(): void {
+  private onMouseOut(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 
@@ -150,21 +151,21 @@ class Nodes {
     this.enterAndUpdate(groups)
   }
 
-  borderScale(scale: Scale): Scale {
+  private borderScale(scale: Scale): Scale {
     return (size: number): number => {
       return Math.pow(Math.sqrt(scale(size)) + this.config.nodeBorderWidth, 2)
     }
   }
 
-  translate(d: TNode): string {
+  private translate(d: TNode): string {
     return `translate(${d.x},${d.y})`
   }
 
-  rotate(d: TNode): string {
+  private rotate(d: TNode): string {
     return `rotate(${nodeShapeOptions[d.shape()].rotation})`
   }
 
-  enterAndUpdate(groups: NodeSelection): void {
+  private enterAndUpdate(groups: NodeSelection): void {
     const scale: Scale = sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data),
       borderScale: Scale = this.borderScale(scale)
 
@@ -242,7 +243,7 @@ class Nodes {
       .call(onTransitionEnd, this.updateNodeLabels.bind(this))
   }
 
-  getNodeBoundingRect(el: HTMLElement): SVGRect {
+  private getNodeBoundingRect(el: HTMLElement): SVGRect {
     const node: any = d3
       .select(el.parentNode as any)
       .select(`path.node.${styles.element}`)
@@ -250,35 +251,35 @@ class Nodes {
     return node.getBoundingClientRect()
   }
 
-  getLabelPosition(d: TNode): string {
+  private getLabelPosition(d: TNode): string {
     return d.labelPosition() === "auto" ? this.getAutomaticLabelPosition(d) : d.labelPosition()
   }
 
-  getAutomaticLabelPosition(d: TNode): string {
+  private getAutomaticLabelPosition(d: TNode): string {
     const columnSpacing: number = this.state.current.get("computed").series.horizontalNodeSpacing
     return (d.x / columnSpacing) % 2 === 1 ? "top" : "bottom"
   }
 
-  getNodeLabelX(d: TNode, el: HTMLElement): number {
+  private getNodeLabelX(d: TNode, el: HTMLElement): number {
     const offset: number =
       this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[this.getLabelPosition(d)].x * offset
   }
 
-  getNodeLabelY(d: TNode, el: HTMLElement): number {
+  private getNodeLabelY(d: TNode, el: HTMLElement): number {
     const offset: number =
       this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[this.getLabelPosition(d)].y * offset
   }
 
-  getLabelText(d: TNode): string {
+  private getLabelText(d: TNode): string {
     // Pixel width of character approx 1/2 of font-size - allow 7px per character
     const desiredPixelWidth: number = this.state.current.get("computed").series.horizontalNodeSpacing,
       numberOfCharacters: number = desiredPixelWidth / 7
     return d.label().substring(0, numberOfCharacters) + (d.label().length > numberOfCharacters ? "..." : "")
   }
 
-  updateNodeLabels(): void {
+  private updateNodeLabels(): void {
     const labels: NodeSelection = this.el
       .select("g.nodes-group")
       .selectAll(`text.${styles.label}`)

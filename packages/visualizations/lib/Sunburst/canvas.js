@@ -72,6 +72,15 @@ var SunburstCanvas = /** @class */ (function () {
         this.elMap.focus = focus;
         return focus;
     };
+    SunburstCanvas.prototype.drawingDims = function () {
+        var config = this.state.current.get("config");
+        var dims = {
+            width: config.width,
+            height: config.height - this.breadcrumb.node().getBoundingClientRect().height
+        };
+        this.stateWriter("drawingDims", dims);
+        return dims;
+    };
     // Lifecycle
     SunburstCanvas.prototype.draw = function () {
         var config = this.state.current.get("config"), drawingDims = this.drawingDims();
@@ -85,15 +94,6 @@ var SunburstCanvas = /** @class */ (function () {
             .attr("cx", drawingDims.width / 2)
             .attr("cy", drawingDims.height / 2);
         this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect());
-    };
-    SunburstCanvas.prototype.drawingDims = function () {
-        var config = this.state.current.get("config");
-        var dims = {
-            width: config.width,
-            height: config.height - this.breadcrumb.node().getBoundingClientRect().height
-        };
-        this.stateWriter("drawingDims", dims);
-        return dims;
     };
     SunburstCanvas.prototype.remove = function () {
         this.el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));

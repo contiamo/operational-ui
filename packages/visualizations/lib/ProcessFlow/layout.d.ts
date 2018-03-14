@@ -4,8 +4,8 @@ declare class Layout {
     state: State;
     constructor(state: State);
     computeLayout(nodes: TNode[]): void;
-    computeNodeYPositions(): void;
-    placeMultipleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void;
-    computeNodeXPositions(): void;
+    private computeNodeYPositions();
+    private placeMultipleSourceNodes(nodesInRow, nodePositions);
+    private computeNodeXPositions();
 }
 export default Layout;

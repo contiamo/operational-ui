@@ -1,30 +1,30 @@
 import "d3-transition";
-import { EventBus, FocusElement, FocusPoint, NodeSelection, ProcessFlowConfig, Scale, SeriesEl, State, TNode } from "../typings";
-declare class Nodes {
+import { EventBus, FocusElement, NodeSelection, ProcessFlowConfig, Renderer, SeriesEl, State, TNode } from "../typings";
+declare class Nodes implements Renderer {
     config: ProcessFlowConfig;
     data: TNode[];
     el: SeriesEl;
     events: EventBus;
     state: State;
     constructor(state: State, events: EventBus, el: SeriesEl);
-    onMouseOver(d: TNode, element: HTMLElement): void;
-    mouseOver(element: NodeSelection, d: TNode, hideLabel?: boolean): void;
+    private onMouseOver(d, element);
+    private mouseOver(element, d, hideLabel?);
     focusElement(focusElement: FocusElement): void;
     highlight(element: NodeSelection, d: TNode, keepCurrent?: boolean): void;
-    removeHighlights(): void;
-    focusPoint(element: NodeSelection, d: TNode): FocusPoint;
-    onMouseOut(): void;
+    private removeHighlights();
+    private focusPoint(element, d);
+    private onMouseOut();
     draw(data: TNode[]): void;
-    borderScale(scale: Scale): Scale;
-    translate(d: TNode): string;
-    rotate(d: TNode): string;
-    enterAndUpdate(groups: NodeSelection): void;
-    getNodeBoundingRect(el: HTMLElement): SVGRect;
-    getLabelPosition(d: TNode): string;
-    getAutomaticLabelPosition(d: TNode): string;
-    getNodeLabelX(d: TNode, el: HTMLElement): number;
-    getNodeLabelY(d: TNode, el: HTMLElement): number;
-    getLabelText(d: TNode): string;
-    updateNodeLabels(): void;
+    private borderScale(scale);
+    private translate(d);
+    private rotate(d);
+    private enterAndUpdate(groups);
+    private getNodeBoundingRect(el);
+    private getLabelPosition(d);
+    private getAutomaticLabelPosition(d);
+    private getNodeLabelX(d, el);
+    private getNodeLabelY(d, el);
+    private getLabelText(d);
+    private updateNodeLabels();
 }
 export default Nodes;

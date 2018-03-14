@@ -33,7 +33,7 @@ class SunburstFocus implements Focus {
     this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
   }
 
-  onElementHover(payload: HoverPayload): void {
+  private onElementHover(payload: HoverPayload): void {
     this.remove()
 
     if (payload.hideLabel) {
@@ -73,7 +73,7 @@ class SunburstFocus implements Focus {
     FocusUtils.drawVisible(this.el, labelPlacement)
   }
 
-  percentageString(datum: Datum): string {
+  private percentageString(datum: Datum): string {
     const computed: Object<any> = this.state.current.get("computed")
     const topNode: Datum = computed.renderer.topNode
     const zoomNode: Datum = computed.renderer.zoomNode
@@ -82,17 +82,17 @@ class SunburstFocus implements Focus {
       : `${this.singlePercentageString(datum, zoomNode)} / ${this.singlePercentageString(datum, topNode)}`
   }
 
-  singlePercentageString(datum: Datum, comparison: Datum): string {
+  private singlePercentageString(datum: Datum, comparison: Datum): string {
     const topNode: Datum = this.state.current.get("computed").renderer.topNode
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3)
     return `${percentage}% of ${dataName(comparison)}`
   }
 
-  onElementOut(): void {
+  private onElementOut(): void {
     this.remove()
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 

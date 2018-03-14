@@ -1,5 +1,5 @@
 import Layout from "./layout";
-import { Data, Journey, LinkAccessors, LinkAttrs, NodeAccessors, State, StateWriter, TLink, TNode } from "./typings";
+import { Data, Journey, LinkAccessors, NodeAccessors, State, StateWriter, TLink, TNode } from "./typings";
 declare class DataHandler {
     journeys: Journey[];
     nodes: TNode[];
@@ -11,17 +11,17 @@ declare class DataHandler {
     layout: Layout;
     constructor(state: State, stateWriter: StateWriter);
     prepareData(): Data;
-    initializeNodes(nodeAttrs: {}[]): void;
-    findNode(nodeId: string): TNode;
-    addNode(attrs: {}): TNode;
-    calculateNodeSizes(): void;
-    calculateStartsAndEnds(): void;
-    initializeLinks(): void;
-    findLink(sourceId: string, targetId: string): TLink;
-    addLink(attrs: LinkAttrs): TLink;
-    computeLinks(): void;
-    xGridSpacing(): number;
-    yGridSpacing(nRows: number): number;
-    positionNodes(): void;
+    private initializeNodes(nodeAttrs);
+    private findNode(nodeId);
+    private addNode(attrs);
+    private calculateNodeSizes();
+    private calculateStartsAndEnds();
+    private initializeLinks();
+    private findLink(sourceId, targetId);
+    private addLink(attrs);
+    private computeLinks();
+    private xGridSpacing();
+    private yGridSpacing(nRows);
+    private positionNodes();
 }
 export default DataHandler;

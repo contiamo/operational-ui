@@ -1,16 +1,16 @@
-import { ClickPayload, D3Selection, Datum, EventBus, HoverPayload, State, StateWriter } from "./typings";
+import { D3Selection, EventBus, State, StateWriter } from "./typings";
 declare class Breadcrumb {
     el: D3Selection;
     events: EventBus;
     state: State;
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
-    updateHoverPath(payload: HoverPayload | ClickPayload): void;
-    label(d: any, i: number): string;
-    truncateNodeArray(nodeArray: Datum[]): (Datum | string)[];
-    backgroundColor(d: any): string;
-    labelColor(d: Datum): string;
-    update(nodeArray: Datum[]): void;
-    onClick(d: Datum | string): void;
+    private updateHoverPath(payload);
+    private label(d, i);
+    private truncateNodeArray(nodeArray);
+    private backgroundColor(d);
+    private labelColor(d);
+    private update(nodeArray);
+    private onClick(d);
 }
 export default Breadcrumb;

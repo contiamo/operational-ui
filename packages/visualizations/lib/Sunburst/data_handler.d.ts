@@ -9,11 +9,11 @@ declare class DataHandler {
     total: number;
     value: (d: Datum) => number;
     constructor(state: State, stateWriter: StateWriter);
-    assignAccessors(): void;
+    private assignAccessors();
     prepareData(): Datum[];
-    assignColors(node: any): void;
-    assignNames(node: any): void;
-    assignValues(node: any): void;
-    checkDataValidity(): void;
+    private assignColors(node);
+    private assignNames(node);
+    private assignValues(node);
+    private checkDataValidity();
 }
 export default DataHandler;

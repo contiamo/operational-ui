@@ -27,10 +27,6 @@ class Series {
     this.stateWriter("data", this.data)
   }
 
-  hasData(): boolean {
-    return this.data.nodes != null && this.data.nodes.length > 0
-  }
-
   draw(): void {
     const seriesConfig: Object<any> = this.state.current.get("computed").series
     this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)

@@ -44,17 +44,17 @@ const PolarRenderer: any = {
 
 const data: any = {
   name: "Name",
-  // data: [
-  //   { id: "Berlin", size: 12 },
-  //   { id: "Dortmund", size: 5 },
-  //   { id: "Bonn", size: 7 },
-  //   { id: "Cologne", size: 11 },
-  //   { id: "", size: 50 },
-  //   { id: undefined, size: 70 },
-  //   { id: "test", size: 0 },
-  //   { id: "test2", size: undefined }
-  // ],
-  renderAs: [PolarRenderer]
+  data: [
+    { id: "Berlin", size: 12 },
+    { id: "Dortmund", size: 5 },
+    { id: "Bonn", size: 7 },
+    { id: "Cologne", size: 11 },
+    { id: "", size: 50 },
+    { id: undefined, size: 70 },
+    { id: "test", size: 0 },
+    { id: "test2", size: undefined }
+  ],
+  renderAs: [GaugeRenderer]
 }
 
 const config: any = { focusElement: "Berlin" }

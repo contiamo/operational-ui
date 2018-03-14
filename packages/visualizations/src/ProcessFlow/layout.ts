@@ -17,7 +17,7 @@ class Layout {
 
   // Nodes are assigned the maximum vertical position of incoming neighbors plus one;
   // nodes with no incoming links are considered start nodes.
-  computeNodeYPositions(): void {
+  private computeNodeYPositions(): void {
     let nextNodes: TNode[]
     let i: number = 0
     const assignNextNodes = (nodes: TNode[]): void => {
@@ -43,7 +43,7 @@ class Layout {
     assignNextNodes(this.nodes)
   }
 
-  placeMultipleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
+  private placeMultipleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
     const multipleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length > 1)(nodesInRow)
     forEach((node: TNode): void => {
       const sourcePositions: number[] = map((link: TLink): number => link.source().x)(node.targetLinks)
@@ -70,7 +70,7 @@ class Layout {
     })(multipleSourceNodes)
   }
 
-  computeNodeXPositions(): void {
+  private computeNodeXPositions(): void {
     const rows: number[] = flow(map(get("y")), sortBy(identity), uniq)(this.nodes)
 
     forEach((row: number): void => {

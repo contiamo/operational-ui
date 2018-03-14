@@ -153,3 +153,9 @@ export type Facade = Facade<ProcessFlowConfig, AccessorsObject, Computed, Compon
 export interface Components {
   focus: Focus<HoverPayload>
 }
+
+export interface Renderer {
+  draw: (data: TLink[] | TNode[]) => void
+  focusElement: (focusElement: FocusElement) => void
+  highlight: (element: LinkSelection | NodeSelection, d: TLink | TNode, keepCurrent: boolean) => void
+}

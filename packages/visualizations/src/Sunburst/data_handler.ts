@@ -17,7 +17,7 @@ class DataHandler {
     this.stateWriter = stateWriter
   }
 
-  assignAccessors(): void {
+  private assignAccessors(): void {
     const accessors: Accessors<Datum> = this.state.current.get("accessors").series
 
     // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
@@ -63,17 +63,17 @@ class DataHandler {
     return this.data
   }
 
-  assignColors(node: any): void {
+  private assignColors(node: any): void {
     const propagateColors: boolean = this.state.current.get("config").propagateColors
 
     node.color = propagateColors && node.depth > 1 ? node.parent.color : node.depth > 0 ? this.color(node) : undefined
   }
 
-  assignNames(node: any): void {
+  private assignNames(node: any): void {
     node.name = this.name(node)
   }
 
-  assignValues(node: any): void {
+  private assignValues(node: any): void {
     if (this.value(node)) {
       node.value = +this.value(node)
       return
@@ -88,7 +88,7 @@ class DataHandler {
     node.value = sum
   }
 
-  checkDataValidity(): void {
+  private checkDataValidity(): void {
     // All data points must have a value assigned
     const noValueData: Datum[] = filter((d: Datum): boolean => !d.value)(this.data)
 

@@ -116,6 +116,15 @@ var PieChartCanvas = /** @class */ (function () {
         ref.insertBefore(focusEl.node(), ref.nextSibling);
         return focusEl;
     };
+    PieChartCanvas.prototype.drawingContainerDims = function () {
+        var config = this.state.current.get("config");
+        var dims = {
+            height: config.height - this.elMap.legend.node().offsetHeight,
+            width: config.width
+        };
+        this.stateWriter("drawingContainerDims", dims);
+        return dims;
+    };
     // Lifecycle
     PieChartCanvas.prototype.draw = function () {
         this.chartContainer.classed("hidden", this.state.current.get("config").hidden);
@@ -126,15 +135,6 @@ var PieChartCanvas = /** @class */ (function () {
         this.drawingContainer.style("width", dims.width + "px").style("height", dims.height + "px");
         this.el.style("width", dims.width + "px").style("height", dims.height + "px");
         this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect());
-    };
-    PieChartCanvas.prototype.drawingContainerDims = function () {
-        var config = this.state.current.get("config");
-        var dims = {
-            height: config.height - this.elMap.legend.node().offsetHeight,
-            width: config.width
-        };
-        this.stateWriter("drawingContainerDims", dims);
-        return dims;
     };
     PieChartCanvas.prototype.remove = function () {
         this.chartContainer.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this));

@@ -11,7 +11,7 @@ declare class Link {
     target: () => TNode;
     targetId: () => string;
     constructor(linkAttributes: LinkAttrs, accessors: LinkAccessors);
-    assignAttributes(linkAttributes: LinkAttrs): LinkAttrs;
-    assignAccessors(): void;
+    private assignAttributes(linkAttributes);
+    private assignAccessors();
 }
 export default Link;

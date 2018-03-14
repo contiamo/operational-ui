@@ -24,7 +24,7 @@ class PieChartFocus implements Focus {
     this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
   }
 
-  onElementHover(payload: HoverPayload): void {
+  private onElementHover(payload: HoverPayload): void {
     this.remove()
 
     FocusUtils.drawHidden(this.el, "element")
@@ -54,11 +54,11 @@ class PieChartFocus implements Focus {
     FocusUtils.drawVisible(this.el, labelPlacement)
   }
 
-  onElementOut(): void {
+  private onElementOut(): void {
     this.remove()
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
   }
 

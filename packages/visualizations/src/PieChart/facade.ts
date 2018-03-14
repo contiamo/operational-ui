@@ -38,7 +38,7 @@ class PieChartFacade implements Facade {
     this.series = this.insertSeries()
   }
 
-  insertState(): StateHandler<PieChartConfig, Data> {
+  private insertState(): StateHandler<PieChartConfig, Data> {
     return new StateHandler({
       data: {},
       config: this.initialConfig(),
@@ -47,7 +47,7 @@ class PieChartFacade implements Facade {
     })
   }
 
-  initialConfig(): PieChartConfig {
+  private initialConfig(): PieChartConfig {
     return {
       duration: 1e3,
       height: 500,
@@ -72,7 +72,7 @@ class PieChartFacade implements Facade {
     }
   }
 
-  initialAccessors(): AccessorsObject {
+  private initialAccessors(): AccessorsObject {
     return {
       data: {
         data: (d: any): Data => d.data
@@ -84,7 +84,7 @@ class PieChartFacade implements Facade {
     }
   }
 
-  initialComputed(): Computed {
+  private initialComputed(): Computed {
     return {
       canvas: {},
       focus: {},
@@ -92,11 +92,11 @@ class PieChartFacade implements Facade {
     }
   }
 
-  insertCanvas(): PieChartCanvas {
+  private insertCanvas(): PieChartCanvas {
     return new PieChartCanvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
   }
 
-  insertComponents(): Components {
+  private insertComponents(): Components {
     return {
       legend: new PieChartLegend(
         this.state.readOnly(),
@@ -111,7 +111,7 @@ class PieChartFacade implements Facade {
     }
   }
 
-  insertSeries(): Series {
+  private insertSeries(): Series {
     return new Series(
       this.state.readOnly(),
       this.state.computedWriter(["series"]),

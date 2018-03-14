@@ -28,7 +28,7 @@ class Breadcrumb {
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this))
   }
 
-  updateHoverPath(payload: HoverPayload | ClickPayload): void {
+  private updateHoverPath(payload: HoverPayload | ClickPayload): void {
     const computed: Object<any> = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
     if (!fixedNode) {
@@ -38,11 +38,11 @@ class Breadcrumb {
     this.update(nodeArray)
   }
 
-  label(d: any, i: number): string {
+  private label(d: any, i: number): string {
     return d === "hops" ? "..." : d.name
   }
 
-  truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
+  private truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
     if (nodeArray.length <= 5) {
       return nodeArray
     } else {
@@ -52,15 +52,15 @@ class Breadcrumb {
     }
   }
 
-  backgroundColor(d: any): string {
+  private backgroundColor(d: any): string {
     return d === "hops" ? "#fff" : d.color || "#eee"
   }
 
-  labelColor(d: Datum): string {
+  private labelColor(d: Datum): string {
     return readableTextColor(this.backgroundColor(d), ["black", "white"])
   }
 
-  update(nodeArray: Datum[]): void {
+  private update(nodeArray: Datum[]): void {
     const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
     // Data join; key function combines name and depth (= position in sequence).
@@ -95,7 +95,7 @@ class Breadcrumb {
     entering.merge(trail).on("click", this.onClick.bind(this))
   }
 
-  onClick(d: Datum | string): void {
+  private onClick(d: Datum | string): void {
     if (d === "hops") {
       return
     }

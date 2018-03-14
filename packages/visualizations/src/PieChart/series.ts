@@ -41,7 +41,7 @@ class Series {
     this.stateWriter("dataForLegend", this.renderer.dataForLegend())
   }
 
-  prepareData(): void {
+  private prepareData(): void {
     this.data = flow(
       filter((datum: Datum): boolean => {
         return this.renderer.key(datum) && this.renderer.key(datum).length > 0 && this.renderer.value(datum) > 0
@@ -51,14 +51,14 @@ class Series {
     this.stateWriter("data", this.data)
   }
 
-  assignAccessors(): void {
+  private assignAccessors(): void {
     const accessors: SeriesAccessors = this.state.current.get("accessors").series
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(accessors)
   }
 
-  updateRenderer(): void {
+  private updateRenderer(): void {
     const options: RendererOptions[] = this.renderAs()
     if (!options || options.length !== 1) {
       throw new Error(`Incorrect number of renderers: ${!options ? 0 : options.length} specified, 1 required`)
@@ -74,7 +74,7 @@ class Series {
     }
   }
 
-  createRenderer(options: RendererOptions): any {
+  private createRenderer(options: RendererOptions): any {
     return new Renderer(this.state, this.events, this.el.select("g.drawing"), options)
   }
 

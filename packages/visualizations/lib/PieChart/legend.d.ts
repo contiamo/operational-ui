@@ -1,4 +1,4 @@
-import { ComponentConfigOptions, D3Selection, EventBus, Legend, LegendDatum, State, StateWriter } from "./typings";
+import { D3Selection, EventBus, Legend, State, StateWriter } from "./typings";
 declare class PieChartLegend implements Legend {
     events: EventBus;
     legend: D3Selection;
@@ -6,11 +6,11 @@ declare class PieChartLegend implements Legend {
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
     draw(): void;
-    updateComparisonLegend(): void;
-    data(): LegendDatum[];
-    onComponentHover(d: LegendDatum, el: HTMLElement): void;
-    currentOptions(datum: LegendDatum): ComponentConfigOptions;
-    updateDimensions(): void;
+    private updateComparisonLegend();
+    private data();
+    private onComponentHover(d, el);
+    private currentOptions(datum);
+    private updateDimensions();
     remove(): void;
 }
 export default PieChartLegend;

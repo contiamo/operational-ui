@@ -11,10 +11,10 @@ declare class Series {
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl);
     assignData(): void;
-    prepareData(): void;
-    assignAccessors(): void;
-    updateRenderer(): void;
-    createRenderer(options: RendererOptions): any;
+    private prepareData();
+    private assignAccessors();
+    private updateRenderer();
+    private createRenderer(options);
     draw(): void;
 }
 export default Series;

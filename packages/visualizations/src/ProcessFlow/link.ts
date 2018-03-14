@@ -19,11 +19,11 @@ class Link {
     this.assignAccessors()
   }
 
-  assignAttributes(linkAttributes: LinkAttrs): LinkAttrs {
+  private assignAttributes(linkAttributes: LinkAttrs): LinkAttrs {
     return extend.convert({ immutable: false })({}, linkAttributes)
   }
 
-  assignAccessors(): void {
+  private assignAccessors(): void {
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(this.accessors)

@@ -26,14 +26,14 @@ class SunburstCanvas implements Canvas {
   }
 
   // Chart container
-  renderChartContainer(context: Element): D3Selection {
+  private renderChartContainer(context: Element): D3Selection {
     const container: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     context.appendChild(container)
     return d3.select(container).attr("class", styles.chartContainer)
   }
 
   // Breadcrumb
-  renderBreadcrumb(): D3Selection {
+  private renderBreadcrumb(): D3Selection {
     const el: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(el)
     this.elMap.breadcrumb = d3.select(el).attr("class", localStyles.breadcrumb)
@@ -41,7 +41,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // El
-  renderEl(): SeriesEl {
+  private renderEl(): SeriesEl {
     const elNode: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     elNode.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     elNode.addEventListener("mouseleave", this.onMouseLeave.bind(this))
@@ -56,20 +56,20 @@ class SunburstCanvas implements Canvas {
     return el
   }
 
-  onMouseEnter(): void {
+  private onMouseEnter(): void {
     this.events.emit(Events.CHART.MOUSEOVER)
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.events.emit(Events.CHART.MOUSEOUT)
   }
 
-  onClick(): void {
+  private onClick(): void {
     this.events.emit(Events.CHART.CLICK)
   }
 
   // Root label
-  renderRootLabel(): D3Selection {
+  private renderRootLabel(): D3Selection {
     const el: D3Selection = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.rootLabel)
@@ -80,7 +80,7 @@ class SunburstCanvas implements Canvas {
   }
 
   // FocusElement
-  renderFocus(): D3Selection {
+  private renderFocus(): D3Selection {
     const focus = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
@@ -88,6 +88,16 @@ class SunburstCanvas implements Canvas {
     this.chartContainer.node().appendChild(focus.node())
     this.elMap.focus = focus
     return focus
+  }
+
+  private drawingDims(): Object<number> {
+    const config: SunburstConfig = this.state.current.get("config")
+    const dims: Object<number> = {
+      width: config.width,
+      height: config.height - this.breadcrumb.node().getBoundingClientRect().height
+    }
+    this.stateWriter("drawingDims", dims)
+    return dims
   }
 
   // Lifecycle
@@ -106,16 +116,6 @@ class SunburstCanvas implements Canvas {
       .attr("cy", drawingDims.height / 2)
 
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
-  }
-
-  drawingDims(): Object<number> {
-    const config: SunburstConfig = this.state.current.get("config")
-    const dims: Object<number> = {
-      width: config.width,
-      height: config.height - this.breadcrumb.node().getBoundingClientRect().height
-    }
-    this.stateWriter("drawingDims", dims)
-    return dims
   }
 
   remove(): void {

@@ -48,7 +48,7 @@ class DataHandler {
     }
   }
 
-  initializeNodes(nodeAttrs: {}[]): void {
+  private initializeNodes(nodeAttrs: {}[]): void {
     this.nodes = map(this.addNode.bind(this))(nodeAttrs)
     forEach((node: TNode): void => {
       node.sourceLinks = []
@@ -58,7 +58,7 @@ class DataHandler {
     this.calculateStartsAndEnds()
   }
 
-  findNode(nodeId: string): TNode {
+  private findNode(nodeId: string): TNode {
     const node: TNode = find((node: TNode): boolean => {
       return node.id() === nodeId
     })(this.nodes)
@@ -68,12 +68,12 @@ class DataHandler {
     return node
   }
 
-  addNode(attrs: {}): TNode {
+  private addNode(attrs: {}): TNode {
     extend.convert({ immutable: false })(attrs, { size: 0 })
     return new Node(attrs, this.state.current.get("accessors").node)
   }
 
-  calculateNodeSizes(): void {
+  private calculateNodeSizes(): void {
     forEach((journey: Journey): void => {
       forEach((nodeId: string): void => {
         this.findNode(nodeId).attributes.size += journey.size
@@ -81,7 +81,7 @@ class DataHandler {
     })(this.journeys)
   }
 
-  calculateStartsAndEnds(): void {
+  private calculateStartsAndEnds(): void {
     forEach((journey: Journey): void => {
       if (journey.path.length > 1) {
         this.findNode(journey.path[0]).journeyStarts += journey.size
@@ -92,23 +92,23 @@ class DataHandler {
     })(this.journeys)
   }
 
-  initializeLinks(): void {
+  private initializeLinks(): void {
     this.links = []
     this.computeLinks()
   }
 
-  findLink(sourceId: string, targetId: string): TLink {
+  private findLink(sourceId: string, targetId: string): TLink {
     function checkIds(link: TLink): boolean {
       return link.sourceId() === sourceId && link.targetId() === targetId
     }
     return find(checkIds)(this.links)
   }
 
-  addLink(attrs: LinkAttrs): TLink {
+  private addLink(attrs: LinkAttrs): TLink {
     return new Link(attrs, this.state.current.get("accessors").link)
   }
 
-  computeLinks(): void {
+  private computeLinks(): void {
     forEach((journey: Journey): void => {
       const path: string[] = journey.path
       const computeLink = (i: number): void => {
@@ -138,7 +138,7 @@ class DataHandler {
     })(this.journeys)
   }
 
-  xGridSpacing(): number {
+  private xGridSpacing(): number {
     const config: ProcessFlowConfig = this.state.current.get("config"),
       finiteWidth: boolean = isFinite(config.width),
       xValues: number[] = map(get("x"))(this.layout.nodes),
@@ -152,7 +152,7 @@ class DataHandler {
     return spacing
   }
 
-  yGridSpacing(nRows: number): number {
+  private yGridSpacing(nRows: number): number {
     const config: ProcessFlowConfig = this.state.current.get("config"),
       finiteHeight: boolean = isFinite(config.height),
       spacing: number = isFinite(config.height)
@@ -163,7 +163,7 @@ class DataHandler {
     return spacing
   }
 
-  positionNodes(): void {
+  private positionNodes(): void {
     const nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
     const rows: string[] = Object.keys(nodesByRow),
       xGridSpacing: number = this.xGridSpacing(),
