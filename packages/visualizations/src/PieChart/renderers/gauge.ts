@@ -37,7 +37,7 @@ class Gauge implements Renderer {
   private drawn: boolean = false
   private el: D3Selection
   private events: EventBus
-  private extent: string
+  private extent: "semi" | "full"
   private previousComputed: Partial<ComputedData>
   private target: number
   private total: number
