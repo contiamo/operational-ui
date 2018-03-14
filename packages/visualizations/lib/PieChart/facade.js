@@ -8,8 +8,9 @@ var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
-var Facade = /** @class */ (function () {
-    function Facade(context) {
+var theme_1 = require("@operational/theme");
+var PieChartFacade = /** @class */ (function () {
+    function PieChartFacade(context) {
         this.__disposed = false;
         this.context = context;
         this.events = new event_bus_1.default();
@@ -18,15 +19,15 @@ var Facade = /** @class */ (function () {
         this.components = this.insertComponents();
         this.series = this.insertSeries();
     }
-    Facade.prototype.insertState = function () {
-        return new state_handler_1.StateHandler({
+    PieChartFacade.prototype.insertState = function () {
+        return new state_handler_1.default({
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
             computed: this.initialComputed()
         });
     };
-    Facade.prototype.initialConfig = function () {
+    PieChartFacade.prototype.initialConfig = function () {
         return {
             duration: 1e3,
             height: 500,
@@ -43,14 +44,14 @@ var Facade = /** @class */ (function () {
             minTotalFontSize: 11,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
-            palette: ["#bbb"],
-            showComponentFocus: true,
+            palette: theme_1.operational.colors.visualizationPalette,
+            showComponentFocus: false,
             uid: fp_1.uniqueId("piechart"),
             visualizationName: "piechart",
             width: 500
         };
     };
-    Facade.prototype.initialAccessors = function () {
+    PieChartFacade.prototype.initialAccessors = function () {
         return {
             data: {
                 data: function (d) { return d.data; }
@@ -61,41 +62,44 @@ var Facade = /** @class */ (function () {
             }
         };
     };
-    Facade.prototype.initialComputed = function () {
+    PieChartFacade.prototype.initialComputed = function () {
         return {
             canvas: {},
             focus: {},
             series: {}
         };
     };
-    Facade.prototype.insertCanvas = function () {
+    PieChartFacade.prototype.insertCanvas = function () {
         return new canvas_1.default(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context);
     };
-    Facade.prototype.insertComponents = function () {
+    PieChartFacade.prototype.insertComponents = function () {
         return {
-            legend: new legend_1.default(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, this.canvas.elementFor("legends").top.left, { position: "top", float: "left" }),
-            focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus"))
+            legend: new legend_1.default(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, this.canvas.elementFor("legend")),
+            focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
+                main: this.canvas.elementFor("focus"),
+                component: this.canvas.elementFor("componentFocus")
+            })
         };
     };
-    Facade.prototype.insertSeries = function () {
+    PieChartFacade.prototype.insertSeries = function () {
         return new series_1.default(this.state.readOnly(), this.state.computedWriter(["series"]), this.events, this.canvas.elementFor("series"));
     };
-    Facade.prototype.data = function (data) {
+    PieChartFacade.prototype.data = function (data) {
         return this.state.data(data);
     };
-    Facade.prototype.config = function (config) {
+    PieChartFacade.prototype.config = function (config) {
         return this.state.config(config);
     };
-    Facade.prototype.accessors = function (type, accessors) {
+    PieChartFacade.prototype.accessors = function (type, accessors) {
         return this.state.accessors(type, accessors);
     };
-    Facade.prototype.on = function (event, handler) {
+    PieChartFacade.prototype.on = function (event, handler) {
         this.events.on(event, handler);
     };
-    Facade.prototype.off = function (event, handler) {
+    PieChartFacade.prototype.off = function (event, handler) {
         this.events.removeListener(event, handler);
     };
-    Facade.prototype.draw = function () {
+    PieChartFacade.prototype.draw = function () {
         this.state.captureState();
         this.series.assignData();
         this.components.legend.draw();
@@ -107,7 +111,7 @@ var Facade = /** @class */ (function () {
             : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         return this.canvas.elementFor("series").node();
     };
-    Facade.prototype.close = function () {
+    PieChartFacade.prototype.close = function () {
         if (this.__disposed) {
             return;
         }
@@ -115,7 +119,7 @@ var Facade = /** @class */ (function () {
         this.events.removeAll();
         this.context.innerHTML = "";
     };
-    return Facade;
+    return PieChartFacade;
 }());
-exports.default = Facade;
+exports.default = PieChartFacade;
 //# sourceMappingURL=facade.js.map

@@ -10,8 +10,9 @@ var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
 var utils_1 = require("@operational/utils");
-var Facade = /** @class */ (function () {
-    function Facade(context) {
+var theme_1 = require("@operational/theme");
+var SunburstFacade = /** @class */ (function () {
+    function SunburstFacade(context) {
         var _this = this;
         this.__disposed = false;
         this.customColorAccessor = false;
@@ -28,15 +29,15 @@ var Facade = /** @class */ (function () {
         this.canvas = this.insertCanvas();
         this.components = this.insertComponents();
     }
-    Facade.prototype.insertState = function () {
-        return new state_handler_1.StateHandler({
+    SunburstFacade.prototype.insertState = function () {
+        return new state_handler_1.default({
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
             computed: this.initialComputed()
         });
     };
-    Facade.prototype.initialConfig = function () {
+    SunburstFacade.prototype.initialConfig = function () {
         return {
             arrowOffset: 10,
             centerCircleRadius: 0.9,
@@ -47,7 +48,7 @@ var Facade = /** @class */ (function () {
             maxRings: 10,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
-            palette: ["#bbb"],
+            palette: theme_1.operational.colors.visualizationPalette,
             propagateColors: true,
             sort: true,
             uid: fp_1.uniqueId("sunburst"),
@@ -55,10 +56,10 @@ var Facade = /** @class */ (function () {
             width: 500
         };
     };
-    Facade.prototype.defaultColorAssigner = function (palette) {
+    SunburstFacade.prototype.defaultColorAssigner = function (palette) {
         return utils_1.colorAssigner(palette);
     };
-    Facade.prototype.initialAccessors = function () {
+    SunburstFacade.prototype.initialAccessors = function () {
         var assignColors = this.defaultColorAssigner(this.initialConfig().palette);
         return {
             data: {
@@ -71,17 +72,17 @@ var Facade = /** @class */ (function () {
             }
         };
     };
-    Facade.prototype.initialComputed = function () {
+    SunburstFacade.prototype.initialComputed = function () {
         return {
             canvas: {},
             focus: {},
             renderer: {}
         };
     };
-    Facade.prototype.insertCanvas = function () {
+    SunburstFacade.prototype.insertCanvas = function () {
         return new canvas_1.default(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context);
     };
-    Facade.prototype.insertComponents = function () {
+    SunburstFacade.prototype.insertComponents = function () {
         return {
             breadcrumb: new breadcrumb_1.default(this.state.readOnly(), this.state.computedWriter(["breadcrumb"]), this.events, this.canvas.elementFor("breadcrumb")),
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus")),
@@ -89,10 +90,10 @@ var Facade = /** @class */ (function () {
             rootLabel: new root_label_1.default(this.state.readOnly(), this.state.computedWriter(["rootLabel"]), this.events, this.canvas.elementFor("rootLabel"))
         };
     };
-    Facade.prototype.data = function (data) {
+    SunburstFacade.prototype.data = function (data) {
         return this.state.data(data);
     };
-    Facade.prototype.config = function (config) {
+    SunburstFacade.prototype.config = function (config) {
         if (config.palette && !this.customColorAccessor) {
             var assignColors_1 = this.defaultColorAssigner(config.palette);
             this.accessors("series", {
@@ -101,19 +102,19 @@ var Facade = /** @class */ (function () {
         }
         return this.state.config(config);
     };
-    Facade.prototype.accessors = function (type, accessors) {
+    SunburstFacade.prototype.accessors = function (type, accessors) {
         if (type === "series" && fp_1.has("color")(accessors)) {
             this.customColorAccessor = true;
         }
         return this.state.accessors(type, accessors);
     };
-    Facade.prototype.on = function (event, handler) {
+    SunburstFacade.prototype.on = function (event, handler) {
         this.events.on(event, handler);
     };
-    Facade.prototype.off = function (event, handler) {
+    SunburstFacade.prototype.off = function (event, handler) {
         this.events.removeListener(event, handler);
     };
-    Facade.prototype.draw = function () {
+    SunburstFacade.prototype.draw = function () {
         this.state.captureState();
         this.canvas.draw();
         this.components.renderer.draw();
@@ -124,7 +125,7 @@ var Facade = /** @class */ (function () {
             : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK);
         return this.canvas.elementFor("series").node();
     };
-    Facade.prototype.close = function () {
+    SunburstFacade.prototype.close = function () {
         if (this.__disposed) {
             return;
         }
@@ -133,7 +134,7 @@ var Facade = /** @class */ (function () {
         this.events.removeAll();
         this.context.innerHTML = "";
     };
-    return Facade;
+    return SunburstFacade;
 }());
-exports.default = Facade;
+exports.default = SunburstFacade;
 //# sourceMappingURL=facade.js.map

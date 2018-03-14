@@ -1,16 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var fp_1 = require("lodash/fp");
 var event_catalog_1 = require("./event_catalog");
 var styles = require("./styles");
 var ComponentFocus = /** @class */ (function () {
-    function ComponentFocus(state, el, events, payload) {
-        this.isMouseOver = false;
-        this.type = "component";
+    function ComponentFocus(state, el, events) {
         this.state = state;
         this.el = el.append("xhtml:div").attr("class", styles.focusLegend + " " + styles.componentFocus);
         this.events = events;
-        this.uid = fp_1.uniqueId("componentFocusLabel");
+        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, this.onComponentHover.bind(this));
+    }
+    ComponentFocus.prototype.onComponentHover = function (payload) {
+        this.remove();
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.draw(payload);
+    };
+    ComponentFocus.prototype.draw = function (payload) {
         var componentPosition = payload.component.node().getBoundingClientRect();
         var canvasPosition = this.state.current.get("computed").canvas.containerRect;
         var topBorderWidth = parseInt(window.getComputedStyle(this.el.node())["border-top-width"], 10);
@@ -39,18 +43,13 @@ var ComponentFocus = /** @class */ (function () {
             .style("width", componentPosition.width + "px")
             .style("height", componentPosition.height + "px")
             .style("top", top + "px")
-            .style("left", left + "px");
+            .style("left", left + "px")
+            .style("visibility", "visible");
         // Track mouseover status (mouse over label)
-        this.el.on("mouseenter", this.onMouseOver.bind(this));
         this.el.on("mouseleave", this.onMouseOut.bind(this));
         this.el.on("click", this.onClick.bind(this)(payload.options));
-    }
-    ComponentFocus.prototype.onMouseOver = function () {
-        this.isMouseOver = true;
     };
     ComponentFocus.prototype.onMouseOut = function () {
-        this.isMouseOver = false;
-        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.LABEL.MOUSEOUT);
         this.remove();
     };
     ComponentFocus.prototype.onClick = function (configOptions) {
@@ -59,10 +58,9 @@ var ComponentFocus = /** @class */ (function () {
         };
     };
     ComponentFocus.prototype.remove = function () {
-        this.el.on("mouseenter", null);
         this.el.on("mouseleave", null);
         this.el.on("click", null);
-        this.el.remove();
+        this.el.style("visibility", "hidden");
     };
     return ComponentFocus;
 }());

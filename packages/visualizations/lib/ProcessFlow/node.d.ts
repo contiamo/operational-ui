@@ -1,7 +1,7 @@
-import { INodeAttrs, INodeAccessors, TLink } from "./typings";
+import { NodeAttrs, NodeAccessors, TLink } from "./typings";
 declare class Node {
-    accessors: INodeAccessors;
-    attributes: INodeAttrs;
+    accessors: NodeAccessors;
+    attributes: NodeAttrs;
     color: () => string;
     id: () => string;
     journeyEnds: number;
@@ -16,8 +16,8 @@ declare class Node {
     targetLinks: TLink[];
     x: number;
     y: number;
-    constructor(nodeAttributes: INodeAttrs, accessors: INodeAccessors);
-    assignAttributes(nodeAttributes: INodeAttrs): INodeAttrs;
-    assignAccessors(): void;
+    constructor(nodeAttributes: NodeAttrs, accessors: NodeAccessors);
+    private assignAttributes(nodeAttributes);
+    private assignAccessors();
 }
 export default Node;

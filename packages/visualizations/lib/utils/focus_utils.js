@@ -18,7 +18,7 @@ var FocusUtils = {
     // before the label is made visible.
     drawHidden: function (canvasEl, type, position) {
         return canvasEl
-            .attr("class", styles.focusLegend + " focus-legend-" + type + " " + position)
+            .attr("class", styles.focusLegend + " focus-legend-" + type + " " + (position || ""))
             .style("visibility", "hidden");
     },
     // Move the focus label to the desired position and make it visible.
@@ -38,7 +38,9 @@ var FocusUtils = {
     },
     // Position focus label according to desired position relative to focus point.
     // Use label and drawing dimensions to ensure focus label does not overflow drawing.
-    positionLabel: function (el, focus, label, drawing, offset, position) {
+    positionLabel: function (el, 
+        // @TODO
+        focus, label, drawing, offset, position) {
         if (offset === void 0) { offset = 0; }
         if (position === void 0) { position = "toRight"; }
         var x = {

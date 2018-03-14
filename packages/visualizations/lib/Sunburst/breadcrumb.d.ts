@@ -1,16 +1,16 @@
-import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./typings";
+import { D3Selection, EventBus, State, StateWriter } from "./typings";
 declare class Breadcrumb {
-    el: TD3Selection;
-    events: IEvents;
-    state: IState;
-    stateWriter: TStateWriter;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection);
-    updateHoverPath(payload: IObject): void;
-    label(d: any, i: number): string;
-    truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[];
-    backgroundColor(d: any): string;
-    labelColor(d: TDatum): string;
-    update(nodeArray: TDatum[]): void;
-    onClick(d: TDatum | string): void;
+    private el;
+    private events;
+    private state;
+    private stateWriter;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
+    private updateHoverPath(payload);
+    private label(d, i);
+    private truncateNodeArray(nodeArray);
+    private backgroundColor(d);
+    private labelColor(d);
+    private update(nodeArray);
+    private onClick(d);
 }
 export default Breadcrumb;

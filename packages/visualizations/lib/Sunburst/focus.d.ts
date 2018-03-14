@@ -1,13 +1,15 @@
-import AbstractFocus from "../utils/focus";
-import { IEvents, IObject, IState, TDatum, TStateWriter } from "./typings";
-declare class Focus extends AbstractFocus {
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject);
-    onElementHover(payload: {
-        focusPoint: IObject;
-        d: TDatum;
-        hideLabel?: boolean;
-    }): void;
-    percentageString(datum: TDatum): string;
-    singlePercentageString(datum: TDatum, comparison: TDatum): string;
+import { D3Selection, EventBus, Focus, State, StateWriter } from "./typings";
+declare class SunburstFocus implements Focus {
+    private el;
+    private state;
+    private stateWriter;
+    private events;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
+    private onElementHover(payload);
+    private percentageString(datum);
+    private singlePercentageString(datum, comparison);
+    private onElementOut();
+    private onMouseLeave();
+    remove(): void;
 }
-export default Focus;
+export default SunburstFocus;

@@ -122,7 +122,7 @@ var Renderer = /** @class */ (function () {
             if (!d1.parent && !d2.parent) {
                 return true;
             }
-            return d1.parent && d2.parent && fp_1.every(fp_1.identity([d1.depth === d2.depth, d1.parent.name === d2.parent.name]));
+            return d1.parent && d2.parent && fp_1.every(fp_1.identity)([d1.depth === d2.depth, d1.parent.name === d2.parent.name]);
         };
     };
     Renderer.prototype.findSiblings = function (data, d) {

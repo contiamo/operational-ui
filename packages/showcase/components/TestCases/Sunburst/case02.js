@@ -2,11 +2,9 @@ import Layout from "../../../components/Layout"
 import { Sunburst } from "@operational/visualizations"
 import Marathon from "../../../components/Marathon"
 import { Card, CardHeader } from "@operational/components"
-import { operational } from "@operational/theme"
 
 const config = {
-  sort: false,
-  palette: operational.colors.visualizationPalette
+  sort: false
 }
 
 const data = {

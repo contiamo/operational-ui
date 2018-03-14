@@ -1,19 +1,19 @@
-import { IState, TDatum, TStateWriter } from "./typings";
+import { Datum, State, StateWriter } from "./typings";
 declare class DataHandler {
-    color: (d: TDatum) => string;
-    data: TDatum[];
-    name: (d: TDatum) => string;
-    state: IState;
-    stateWriter: TStateWriter;
-    topNode: TDatum;
-    total: number;
-    value: (d: TDatum) => number;
-    constructor(state: IState, stateWriter: TStateWriter);
-    assignAccessors(): void;
-    prepareData(): TDatum[];
-    assignColors(node: any): void;
-    assignNames(node: any): void;
-    assignValues(node: any): void;
-    checkDataValidity(): void;
+    private color;
+    private data;
+    private name;
+    private state;
+    private stateWriter;
+    private total;
+    private value;
+    topNode: Datum;
+    constructor(state: State, stateWriter: StateWriter);
+    private assignAccessors();
+    prepareData(): Datum[];
+    private assignColors(node);
+    private assignNames(node);
+    private assignValues(node);
+    private checkDataValidity();
 }
 export default DataHandler;

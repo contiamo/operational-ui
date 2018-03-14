@@ -1,17 +1,35 @@
 import FocusUtils from "../utils/focus_utils"
-import AbstractDrawingFocus from "../utils/focus"
+import Events from "../utils/event_catalog"
+import ComponentFocus from "../utils/component_focus"
 import * as d3 from "d3-selection"
-import { TD3Selection, TDatum, IObject } from "./typings"
+import { D3Selection, EventBus, Focus, HoverPayload, Object, SeriesEl, State, StateWriter } from "./typings"
 
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
-class Focus extends AbstractDrawingFocus {
-  onElementHover(payload: { focusPoint: IObject; d: IObject }): void {
+class PieChartFocus implements Focus {
+  private el: SeriesEl
+  private componentFocus: ComponentFocus
+  private state: State
+  private stateWriter: StateWriter
+  private events: EventBus
+
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>) {
+    this.state = state
+    this.stateWriter = stateWriter
+    this.events = events
+    this.el = els.main
+    this.componentFocus = new ComponentFocus(this.state, els.component, this.events)
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
+  }
+
+  private onElementHover(payload: HoverPayload): void {
     this.remove()
 
     FocusUtils.drawHidden(this.el, "element")
 
-    const content: TD3Selection = this.el.append("xhtml:ul")
+    const content: D3Selection = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")
@@ -35,6 +53,19 @@ class Focus extends AbstractDrawingFocus {
 
     FocusUtils.drawVisible(this.el, labelPlacement)
   }
+
+  private onElementOut(): void {
+    this.remove()
+  }
+
+  private onMouseLeave(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+  }
+
+  remove(): void {
+    this.el.node().innerHTML = ""
+    this.el.style("visibility", "hidden")
+  }
 }
 
-export default Focus
+export default PieChartFocus

@@ -5,8 +5,7 @@ import { Card, CardHeader } from "@operational/components"
 import { operational } from "@operational/theme"
 
 const config = {
-  sort: false,
-  palette: operational.colors.visualizationPalette
+  sort: false
 }
 
 const data = {

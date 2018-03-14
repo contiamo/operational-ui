@@ -1,22 +1,24 @@
-import { IReadOnlyState, State, TPath } from "./state"
-import { IChartStateObject, IObject, TStateWriter } from "./typings"
+import State, { ReadOnlyState, Path } from "./state"
+import { Accessor, Accessors, ChartStateObject } from "./typings"
 import { forEach, isEmpty, reduce } from "lodash/fp"
 
-export interface IChartState<T> {
+export interface ChartState<T> {
   current: State<T>
   previous: State<T>
 }
 
-export interface IChartStateReadOnly<T> {
-  current: IReadOnlyState<T>
-  previous: IReadOnlyState<T>
+export interface ChartStateReadOnly<T> {
+  current: ReadOnlyState<T>
+  previous: ReadOnlyState<T>
 }
 
-export class StateHandler<IConfig> {
-  state: IChartState<IChartStateObject>
+export type StateWriter = (propertyPath: string | string[], value: any) => void
 
-  constructor(obj: IChartStateObject) {
-    const initial = new State<IChartStateObject>(obj)
+export default class StateHandler<Config, Data> {
+  state: ChartState<ChartStateObject>
+
+  constructor(obj: ChartStateObject) {
+    const initial = new State<ChartStateObject>(obj)
     this.state = { current: initial, previous: initial.clone() }
   }
 
@@ -24,7 +26,7 @@ export class StateHandler<IConfig> {
     this.state.previous.set(["computed"], this.state.current.clone().get("computed"))
   }
 
-  readOnly(): IChartStateReadOnly<IChartStateObject> {
+  readOnly(): ChartStateReadOnly<ChartStateObject> {
     return {
       current: this.state.current.readOnly(),
       previous: this.state.previous.readOnly()
@@ -32,7 +34,7 @@ export class StateHandler<IConfig> {
   }
 
   // Data
-  data(data?: any) {
+  data(data?: Data) {
     if (!arguments.length) return this.state.current.get("data")
     return this.state.current.set("data", data)
   }
@@ -42,7 +44,7 @@ export class StateHandler<IConfig> {
   }
 
   // Config
-  config(config?: Partial<IConfig>): IConfig {
+  config(config?: Partial<Config>): Config {
     if (!arguments.length) return this.state.current.get("config")
 
     const invalidOptions: string[] = reduce.convert({ cap: false })(
@@ -62,18 +64,21 @@ export class StateHandler<IConfig> {
   }
 
   // Accessors
-  accessors(type: string, accessors?: IObject): IObject {
+  accessors(type: string, accessors?: Accessors<any>) {
     if (!accessors) return this.state.current.get(["accessors", type])
-    const accessorFuncs: any = reduce.convert({ cap: false })((memo: IObject, accessor: any, key: string) => {
-      memo[key] = typeof accessor === "function" ? accessor : () => accessor
-      return memo
-    }, {})(accessors)
+    const accessorFuncs: Accessors<any> = reduce.convert({ cap: false })(
+      (memo: Accessors<any>, accessor: Accessor<any, any>, key: string) => {
+        memo[key] = typeof accessor === "function" ? accessor : () => accessor
+        return memo
+      },
+      {}
+    )(accessors)
     return this.state.current.merge(["accessors", type], accessorFuncs)
   }
 
   // Computed
-  computedWriter(namespace: TPath): TStateWriter {
-    return (path: TPath, value: any): void => {
+  computedWriter(namespace: Path): StateWriter {
+    return (path: Path, value: any): void => {
       this.state.current.set(["computed"].concat(namespace).concat(path), value)
     }
   }

@@ -1,11 +1,11 @@
 import * as d3 from "d3-selection"
-import { TD3Selection, TDatum, IObject, IState, TStateWriter, IEvents } from "./typings"
+import { ClickPayload, D3Selection, Datum, EventBus, HoverPayload, Object, State, StateWriter } from "./typings"
 import Events from "../utils/event_catalog"
 import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
 import { readableTextColor } from "@operational/utils"
 
-const dims: IObject = {
+const dims: Object<number> = {
   width: 70,
   height: 20,
   space: 3,
@@ -13,12 +13,12 @@ const dims: IObject = {
 }
 
 class Breadcrumb {
-  el: TD3Selection
-  events: IEvents
-  state: IState
-  stateWriter: TStateWriter
+  private el: D3Selection
+  private events: EventBus
+  private state: State
+  private stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TD3Selection) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -28,8 +28,8 @@ class Breadcrumb {
     this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this))
   }
 
-  updateHoverPath(payload: IObject): void {
-    const computed: IObject = this.state.current.get("computed").renderer
+  private updateHoverPath(payload: HoverPayload | ClickPayload): void {
+    const computed: Object<any> = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
     if (!fixedNode) {
       return
@@ -38,29 +38,29 @@ class Breadcrumb {
     this.update(nodeArray)
   }
 
-  label(d: any, i: number): string {
+  private label(d: any, i: number): string {
     return d === "hops" ? "..." : d.name
   }
 
-  truncateNodeArray(nodeArray: TDatum[]): (TDatum | string)[] {
+  private truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
     if (nodeArray.length <= 5) {
       return nodeArray
     } else {
-      const firstNodes: TDatum[] = nodeArray.slice(0, 2)
-      const lastNodes: TDatum[] = nodeArray.slice(nodeArray.length - 2)
+      const firstNodes: (Datum | string)[] = nodeArray.slice(0, 2)
+      const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - 2)
       return firstNodes.concat(["hops"]).concat(lastNodes)
     }
   }
 
-  backgroundColor(d: any): string {
+  private backgroundColor(d: any): string {
     return d === "hops" ? "#fff" : d.color || "#eee"
   }
 
-  labelColor(d: TDatum): string {
+  private labelColor(d: Datum): string {
     return readableTextColor(this.backgroundColor(d), ["black", "white"])
   }
 
-  update(nodeArray: TDatum[]): void {
+  private update(nodeArray: Datum[]): void {
     const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
     // Data join; key function combines name and depth (= position in sequence).
@@ -72,7 +72,7 @@ class Breadcrumb {
     trail.exit().remove()
 
     // Add breadcrumb and label for entering nodes.
-    const entering: TD3Selection = trail
+    const entering: D3Selection = trail
       .enter()
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
@@ -95,7 +95,7 @@ class Breadcrumb {
     entering.merge(trail).on("click", this.onClick.bind(this))
   }
 
-  onClick(d: TDatum | string): void {
+  private onClick(d: Datum | string): void {
     if (d === "hops") {
       return
     }

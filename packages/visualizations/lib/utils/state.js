@@ -62,5 +62,5 @@ var State = /** @class */ (function () {
     };
     return State;
 }());
-exports.State = State;
+exports.default = State;
 //# sourceMappingURL=state.js.map

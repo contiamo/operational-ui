@@ -1,19 +1,17 @@
-import AbstractFocus from "../utils/focus";
-import { IFocus, IObject, TD3Selection, TLink, TNode, TSeriesEl } from "./typings";
-declare class Focus extends AbstractFocus {
-    onElementHover(payload: {
-        focusPoint: IFocus;
-        d: TNode | TLink;
-        hideLabel: boolean;
-    }): void;
-    appendContent(container: TD3Selection, content: IObject[]): void;
-    addNodeBreakdowns(content: TSeriesEl, datum: TNode): void;
-    addSingleNodeVisitsComment(content: TSeriesEl, datum: TNode): void;
-    getDrawingDimensions(): {
-        xMax: number;
-        xMin: number;
-        yMax: number;
-        yMin: number;
-    };
+import { D3Selection, EventBus, Focus, State, StateWriter } from "./typings";
+declare class ProcessFlowFocus implements Focus {
+    private el;
+    private state;
+    private stateWriter;
+    private events;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
+    private onElementHover(payload);
+    private appendContent(container, content);
+    private addNodeBreakdowns(content, datum);
+    private addSingleNodeVisitsComment(content, datum);
+    private getDrawingDimensions();
+    private onElementOut();
+    private onMouseLeave();
+    remove(): void;
 }
-export default Focus;
+export default ProcessFlowFocus;

@@ -18,7 +18,9 @@ const seriesAccessors = {
   // color: (d): string => d.value > 10000 ? "#f00" : "#0f0"
 }
 
-const data = {
+import { RawData } from "../../src/Sunburst/typings"
+
+const data: RawData = {
   name: "All",
   children: [
     {
@@ -220,7 +222,7 @@ const data = {
       children: [
         {
           name: "USA",
-          value: "33218",
+          value: 33218,
           children: [
             {
               name: "Washington DC",

@@ -1,31 +1,33 @@
-import Canvas from "./canvas"
+import ProcessFlowCanvas from "./canvas"
 import Series from "./series"
-import Focus from "./focus"
+import ProcessFlowFocus from "./focus"
 import Events from "../utils/event_catalog"
-import { StateHandler } from "../utils/state_handler"
+import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
-  IAccessors,
-  IConfig,
-  IFocusElement,
-  IComputedState,
-  IInputData,
-  IChartStateObject,
-  IObject,
-  INodeAttrs,
-  ILinkAttrs,
+  Accessors,
+  AccessorsObject,
+  Components,
+  Computed,
+  Facade,
+  FocusElement,
+  InputData,
+  LinkAttrs,
+  NodeAttrs,
+  Object,
+  ProcessFlowConfig,
   TNode
 } from "./typings"
 
-class Facade {
-  __disposed: boolean = false
-  canvas: Canvas
-  components: IObject
-  context: Element
-  events: EventEmitter
-  series: Series
-  state: StateHandler<IConfig>
+class ProcessFlowFacade implements Facade {
+  private __disposed: boolean = false
+  private canvas: ProcessFlowCanvas
+  private components: Components
+  private context: Element
+  private events: EventEmitter
+  private series: Series
+  private state: StateHandler<ProcessFlowConfig, InputData>
 
   constructor(context: Element) {
     this.context = context
@@ -36,7 +38,7 @@ class Facade {
     this.series = this.insertSeries()
   }
 
-  insertState(): StateHandler<IConfig> {
+  private insertState(): StateHandler<ProcessFlowConfig, InputData> {
     return new StateHandler({
       data: {},
       config: this.initialConfig(),
@@ -45,7 +47,7 @@ class Facade {
     })
   }
 
-  initialConfig(): IConfig {
+  private initialConfig(): ProcessFlowConfig {
     return {
       borderColor: "#fff",
       duration: 1e3,
@@ -71,37 +73,37 @@ class Facade {
     }
   }
 
-  initialAccessors(): IAccessors {
+  private initialAccessors(): AccessorsObject {
     return {
       data: {
-        nodes: (d: IInputData) => d.nodes,
-        journeys: (d: IInputData) => d.journeys
+        nodes: (d: InputData) => d.nodes,
+        journeys: (d: InputData) => d.journeys
       },
       node: {
-        color: (d: INodeAttrs): string => d.color || "#fff",
-        content: (d: INodeAttrs): IObject[] => d.content || [],
-        shape: (d: INodeAttrs): string => d.shape || "squareDiamond",
-        size: (d: INodeAttrs): number => d.size || 1,
-        stroke: (d: INodeAttrs): string => d.stroke || "#000",
-        id: (d: INodeAttrs): string => d.id || uniqueId("node"),
-        label: (d: INodeAttrs): string => d.label || d.id || "",
-        labelPosition: (d: INodeAttrs): string => d.labelPosition || "auto"
+        color: (d: NodeAttrs): string => d.color || "#fff",
+        content: (d: NodeAttrs): Object<any>[] => d.content || [],
+        shape: (d: NodeAttrs): string => d.shape || "squareDiamond",
+        size: (d: NodeAttrs): number => d.size || 1,
+        stroke: (d: NodeAttrs): string => d.stroke || "#000",
+        id: (d: NodeAttrs): string => d.id || uniqueId("node"),
+        label: (d: NodeAttrs): string => d.label || d.id || "",
+        labelPosition: (d: NodeAttrs): string => d.labelPosition || "right"
       },
       link: {
-        content: (d: INodeAttrs): IObject[] => d.content || [],
-        dash: (d: ILinkAttrs): string => d.dash || "0",
-        label: (d: ILinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
-        size: (d: ILinkAttrs): number => d.size || 1,
-        stroke: (d: ILinkAttrs): string => d.stroke || "#bbb",
-        source: (d: ILinkAttrs): TNode | undefined => d.source,
-        sourceId: (d: ILinkAttrs): string | undefined => d.sourceId,
-        target: (d: ILinkAttrs): TNode | undefined => d.target,
-        targetId: (d: ILinkAttrs): string | undefined => d.targetId
+        content: (d: NodeAttrs): Object<any>[] => d.content || [],
+        dash: (d: LinkAttrs): string => d.dash || "0",
+        label: (d: LinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
+        size: (d: LinkAttrs): number => d.size || 1,
+        stroke: (d: LinkAttrs): string => d.stroke || "#bbb",
+        source: (d: LinkAttrs): TNode | undefined => d.source,
+        sourceId: (d: LinkAttrs): string | undefined => d.sourceId,
+        target: (d: LinkAttrs): TNode | undefined => d.target,
+        targetId: (d: LinkAttrs): string | undefined => d.targetId
       }
     }
   }
 
-  initialComputed(): IComputedState {
+  private initialComputed(): Computed {
     return {
       canvas: {},
       focus: {},
@@ -109,13 +111,18 @@ class Facade {
     }
   }
 
-  insertCanvas(): Canvas {
-    return new Canvas(this.state.readOnly(), this.state.computedWriter(["canvas"]), this.events, this.context)
+  private insertCanvas(): ProcessFlowCanvas {
+    return new ProcessFlowCanvas(
+      this.state.readOnly(),
+      this.state.computedWriter(["canvas"]),
+      this.events,
+      this.context
+    )
   }
 
-  insertComponents(): IObject {
+  private insertComponents(): Components {
     return {
-      focus: new Focus(
+      focus: new ProcessFlowFocus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
         this.events,
@@ -124,7 +131,7 @@ class Facade {
     }
   }
 
-  insertSeries(): Series {
+  private insertSeries(): Series {
     return new Series(
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
@@ -133,15 +140,15 @@ class Facade {
     )
   }
 
-  data<T>(data?: T): T {
+  data(data?: InputData): InputData {
     return this.state.data(data)
   }
 
-  config(config?: Partial<IConfig>): IConfig {
+  config(config?: Partial<ProcessFlowConfig>): ProcessFlowConfig {
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: IObject): IObject {
+  accessors(type: string, accessors: Accessors<any>): Accessors<any> {
     return this.state.accessors(type, accessors)
   }
 
@@ -159,7 +166,7 @@ class Facade {
     this.canvas.draw()
     this.series.draw()
 
-    const focusElement: IFocusElement = this.state.config().focusElement
+    const focusElement: FocusElement = this.state.config().focusElement
     !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
       : this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -178,4 +185,4 @@ class Facade {
   }
 }
 
-export default Facade
+export default ProcessFlowFacade

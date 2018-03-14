@@ -1,24 +1,21 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var focus_utils_1 = require("../utils/focus_utils");
-var focus_1 = require("../utils/focus");
+var event_catalog_1 = require("../utils/event_catalog");
+var component_focus_1 = require("../utils/component_focus");
 var percentageString = function (percentage) { return percentage.toFixed(1) + "%"; };
-var Focus = /** @class */ (function (_super) {
-    __extends(Focus, _super);
-    function Focus() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var PieChartFocus = /** @class */ (function () {
+    function PieChartFocus(state, stateWriter, events, els) {
+        this.state = state;
+        this.stateWriter = stateWriter;
+        this.events = events;
+        this.el = els.main;
+        this.componentFocus = new component_focus_1.default(this.state, els.component, this.events);
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
     }
-    Focus.prototype.onElementHover = function (payload) {
+    PieChartFocus.prototype.onElementHover = function (payload) {
         this.remove();
         focus_utils_1.default.drawHidden(this.el, "element");
         var content = this.el.append("xhtml:ul");
@@ -37,7 +34,17 @@ var Focus = /** @class */ (function (_super) {
         };
         focus_utils_1.default.drawVisible(this.el, labelPlacement);
     };
-    return Focus;
-}(focus_1.default));
-exports.default = Focus;
+    PieChartFocus.prototype.onElementOut = function () {
+        this.remove();
+    };
+    PieChartFocus.prototype.onMouseLeave = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+    };
+    PieChartFocus.prototype.remove = function () {
+        this.el.node().innerHTML = "";
+        this.el.style("visibility", "hidden");
+    };
+    return PieChartFocus;
+}());
+exports.default = PieChartFocus;
 //# sourceMappingURL=focus.js.map

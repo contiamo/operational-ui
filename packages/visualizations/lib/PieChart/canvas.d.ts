@@ -1,9 +1,31 @@
-import AbstractDrawingCanvas from "../utils/drawing_canvas";
-import { TD3Selection, IState, TStateWriter, IEvents } from "./typings";
-declare class Canvas extends AbstractDrawingCanvas {
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element);
-    createEl(): TD3Selection;
-    appendShadows(): void;
-    totalLegendHeight(): number;
+import { Canvas, D3Selection, EventBus, State, StateWriter } from "./typings";
+declare class PieChartCanvas implements Canvas {
+    private drawingContainer;
+    private elements;
+    private chartContainer;
+    private el;
+    private events;
+    private state;
+    private elMap;
+    private stateWriter;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
+    private renderChartContainer(context);
+    private onMouseEnter();
+    private onMouseLeave();
+    private onClick();
+    private renderLegend();
+    private renderDrawingContainer();
+    private renderEl();
+    private renderShadows();
+    private prefixedId(id);
+    private shadowDefinitionId();
+    private renderDrawingGroup();
+    private renderFocusElements();
+    private renderFocusLabel();
+    private renderComponentFocus();
+    private drawingContainerDims();
+    draw(): void;
+    remove(): void;
+    elementFor(component: string): D3Selection;
 }
-export default Canvas;
+export default PieChartCanvas;

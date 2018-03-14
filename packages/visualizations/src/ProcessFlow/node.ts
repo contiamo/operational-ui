@@ -1,9 +1,9 @@
 import { extend, forEach } from "lodash/fp"
-import { IBreakdown, INodeAttrs, INodeAccessors, TLink } from "./typings"
+import { NodeAttrs, NodeAccessors, TLink } from "./typings"
 
 class Node {
-  accessors: INodeAccessors
-  attributes: INodeAttrs
+  accessors: NodeAccessors
+  attributes: NodeAttrs
   color: () => string
   id: () => string
   journeyEnds: number = 0
@@ -19,17 +19,17 @@ class Node {
   x: number
   y: number
 
-  constructor(nodeAttributes: INodeAttrs, accessors: INodeAccessors) {
+  constructor(nodeAttributes: NodeAttrs, accessors: NodeAccessors) {
     this.accessors = accessors
     this.attributes = this.assignAttributes(nodeAttributes)
     this.assignAccessors()
   }
 
-  assignAttributes(nodeAttributes: INodeAttrs): INodeAttrs {
+  private assignAttributes(nodeAttributes: NodeAttrs): NodeAttrs {
     return extend.convert({ immutable: false })({})(nodeAttributes)
   }
 
-  assignAccessors(): void {
+  private assignAccessors(): void {
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(this.accessors)

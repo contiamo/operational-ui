@@ -1,19 +1,53 @@
-import AbstractFocus from "../utils/focus"
 import FocusUtils from "../utils/focus_utils"
+import Events from "../utils/event_catalog"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
-import { IBreakdown, IConfig, IFocus, IObject, TD3Selection, TLink, TNode, TSeriesEl } from "./typings"
+import {
+  D3Selection,
+  EventBus,
+  Focus,
+  FocusPoint,
+  HoverPayload,
+  Object,
+  ProcessFlowConfig,
+  SeriesEl,
+  State,
+  StateWriter,
+  TLink,
+  TNode
+} from "./typings"
 import * as styles from "./styles"
 
-interface IBreakdowns {
-  inputs: IBreakdown[]
-  outputs: IBreakdown[]
-  startsHere: IBreakdown[]
-  endsHere: IBreakdown[]
+interface Breakdown {
+  label?: string
+  size: number
+  percentage: number
+}
+
+interface Breakdowns {
+  inputs: Breakdown[]
+  outputs: Breakdown[]
+  startsHere: Breakdown[]
+  endsHere: Breakdown[]
 }
 
 // There can only be an element focus in process flow diagrams
-class Focus extends AbstractFocus {
-  onElementHover(payload: { focusPoint: IFocus; d: TNode | TLink; hideLabel: boolean }): void {
+class ProcessFlowFocus implements Focus {
+  private el: SeriesEl
+  private state: State
+  private stateWriter: StateWriter
+  private events: EventBus
+
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
+    this.state = state
+    this.stateWriter = stateWriter
+    this.events = events
+    this.el = el
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
+  }
+
+  private onElementHover(payload: HoverPayload): void {
     // Remove the current focus label, if there is one
     this.remove()
     if (payload.hideLabel) {
@@ -21,10 +55,10 @@ class Focus extends AbstractFocus {
     }
 
     // Check if focus labels should be displayed for the element type.
-    const focusPoint: IFocus = payload.focusPoint,
+    const focusPoint: FocusPoint = payload.focusPoint,
       datum: any = payload.d,
       isNode: boolean = focusPoint.type === "node",
-      config: IConfig = this.state.current.get("config")
+      config: ProcessFlowConfig = this.state.current.get("config")
 
     if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
       return
@@ -32,7 +66,7 @@ class Focus extends AbstractFocus {
 
     // Render the focus label hidden initially to allow placement calculations
     FocusUtils.drawHidden(this.el, "element").style("pointer-events", "none")
-    const content: TSeriesEl = this.el.append("xhtml:ul")
+    const content: SeriesEl = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")
@@ -41,6 +75,7 @@ class Focus extends AbstractFocus {
       .append("span")
       .text(` (${this.state.current.get("config").numberFormatter(datum.size())})`)
 
+    // @TODO remove? Doesn't seem to be doing anything...
     if (datum.content().length > 0) {
       this.appendContent(content, datum.content())
     }
@@ -58,10 +93,9 @@ class Focus extends AbstractFocus {
     FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
   }
 
-  appendContent(container: TD3Selection, content: IObject[]): void {
-    const contentContainer: TD3Selection = container.append("div").attr("class", styles.content)
-
-    forEach((contentItem: IObject): void => {
+  private appendContent(container: D3Selection, content: Object<any>[]): void {
+    const contentContainer: D3Selection = container.append("div").attr("class", styles.content)
+    forEach((contentItem: Object<any>): void => {
       contentContainer
         .append("xhtml:li")
         .attr("class", styles.title)
@@ -71,9 +105,9 @@ class Focus extends AbstractFocus {
     })(content)
   }
 
-  addNodeBreakdowns(content: TSeriesEl, datum: TNode): void {
-    const breakdowns: IBreakdowns = computeBreakdowns(datum),
-      container: TD3Selection = content.append("div").attr("class", styles.breakdownsContainer),
+  private addNodeBreakdowns(content: SeriesEl, datum: TNode): void {
+    const breakdowns: Breakdowns = computeBreakdowns(datum),
+      container: D3Selection = content.append("div").attr("class", styles.breakdownsContainer),
       inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),
       outputsTotal: number = computeBreakdownTotal(breakdowns.outputs),
       startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
@@ -113,7 +147,7 @@ class Focus extends AbstractFocus {
     )(container)
   }
 
-  addSingleNodeVisitsComment(content: TSeriesEl, datum: TNode): void {
+  private addSingleNodeVisitsComment(content: SeriesEl, datum: TNode): void {
     if (datum.singleNodeJourneys === 0) {
       return
     }
@@ -123,9 +157,9 @@ class Focus extends AbstractFocus {
       .text(`[!] ${datum.singleNodeJourneys} single node visits (not included in the above stats)`)
   }
 
-  getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
+  private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect,
-      config: IConfig = this.state.current.get("config")
+      config: ProcessFlowConfig = this.state.current.get("config")
 
     return {
       xMax: drawingContainer.left + config.width,
@@ -134,11 +168,24 @@ class Focus extends AbstractFocus {
       yMin: drawingContainer.top
     }
   }
+
+  private onElementOut(): void {
+    this.remove()
+  }
+
+  private onMouseLeave(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+  }
+
+  remove(): void {
+    this.el.node().innerHTML = ""
+    this.el.style("visibility", "hidden")
+  }
 }
 
 // Helper functions
-function computeBreakdowns(node: TNode): IBreakdowns {
-  const inputs: IBreakdown[] = map((link: TLink): IBreakdown => {
+function computeBreakdowns(node: TNode): Breakdowns {
+  const inputs: Breakdown[] = map((link: TLink): Breakdown => {
     const size: number = link.size()
     return {
       size,
@@ -146,7 +193,7 @@ function computeBreakdowns(node: TNode): IBreakdowns {
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.targetLinks)
-  const outputs: IBreakdown[] = map((link: TLink): IBreakdown => {
+  const outputs: Breakdown[] = map((link: TLink): Breakdown => {
     const size: number = link.size()
     return {
       size,
@@ -154,13 +201,13 @@ function computeBreakdowns(node: TNode): IBreakdowns {
       percentage: Math.round(size * 100 / node.size())
     }
   })(node.sourceLinks)
-  const startsHere: IBreakdown[] = [
+  const startsHere: Breakdown[] = [
     {
       size: node.journeyStarts,
       percentage: Math.round(node.journeyStarts * 100 / node.size())
     }
   ]
-  const endsHere: IBreakdown[] = [
+  const endsHere: Breakdown[] = [
     {
       size: node.journeyEnds,
       percentage: Math.round(node.journeyEnds * 100 / node.size())
@@ -169,18 +216,18 @@ function computeBreakdowns(node: TNode): IBreakdowns {
   return { inputs, outputs, startsHere, endsHere }
 }
 
-function computeBreakdownTotal(breakdowns: IBreakdown[]): number {
-  return reduce((sum: number, item: IBreakdown): number => {
+function computeBreakdownTotal(breakdowns: Breakdown[]): number {
+  return reduce((sum: number, item: Breakdown): number => {
     return sum + item.size
   }, 0)(breakdowns)
 }
 
-function addBreakdownContainer(content: TD3Selection): TD3Selection {
+function addBreakdownContainer(content: D3Selection): D3Selection {
   return content.append("div").attr("class", styles.breakdownContainer)
 }
 
 function addBreakdownTitle(title: string, subtitle?: string) {
-  return (container: TD3Selection): TD3Selection => {
+  return (container: D3Selection): D3Selection => {
     container
       .append("span")
       .attr("class", styles.title)
@@ -191,17 +238,17 @@ function addBreakdownTitle(title: string, subtitle?: string) {
   }
 }
 
-function addBreakdownBars(breakdownItems: IBreakdown[], numberFormatter: (x: number) => string) {
-  const sortedItems: IBreakdown[] = sortBy((item: IBreakdown): number => -item.size)(breakdownItems)
-  return (container: TD3Selection): TD3Selection => {
+function addBreakdownBars(breakdownItems: Breakdown[], numberFormatter: (x: number) => string) {
+  const sortedItems: Breakdown[] = sortBy((item: Breakdown): number => -item.size)(breakdownItems)
+  return (container: D3Selection): D3Selection => {
     forEach(appendBreakdown(container, numberFormatter))(sortedItems)
     return container
   }
 }
 
-function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) => string) {
-  return (item: IBreakdown): void => {
-    const breakdown: TD3Selection = container.append("div").attr("class", styles.breakdown)
+function appendBreakdown(container: D3Selection, numberFormatter: (x: number) => string) {
+  return (item: Breakdown): void => {
+    const breakdown: D3Selection = container.append("div").attr("class", styles.breakdown)
 
     if (item.label) {
       breakdown
@@ -210,7 +257,7 @@ function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) =
         .text(item.label)
     }
 
-    const backgroundBar: TD3Selection = breakdown.append("div").attr("class", styles.breakdownBackgroundBar)
+    const backgroundBar: D3Selection = breakdown.append("div").attr("class", styles.breakdownBackgroundBar)
 
     backgroundBar
       .append("div")
@@ -225,7 +272,7 @@ function appendBreakdown(container: TD3Selection, numberFormatter: (x: number) =
 }
 
 function addBreakdownComment(comment: string) {
-  return (container: TD3Selection): TD3Selection => {
+  return (container: D3Selection): D3Selection => {
     container
       .append("label")
       .attr("class", styles.breakdownCommentLabel)
@@ -234,4 +281,4 @@ function addBreakdownComment(comment: string) {
   }
 }
 
-export default Focus
+export default ProcessFlowFocus

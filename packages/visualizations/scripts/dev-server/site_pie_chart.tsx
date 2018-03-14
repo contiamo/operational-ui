@@ -54,7 +54,7 @@ const data: any = {
     { id: "test", size: 0 },
     { id: "test2", size: undefined }
   ],
-  renderAs: [DonutRenderer]
+  renderAs: [GaugeRenderer]
 }
 
 const config: any = { focusElement: "Berlin" }

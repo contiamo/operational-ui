@@ -1,22 +1,20 @@
-import AbstractRenderer from "./renderers/abstract_renderer";
-import { TDatum, IEvents, IObject, IState, TSeriesEl, TStateWriter } from "./typings";
+import { EventBus, SeriesEl, State, StateWriter } from "./typings";
 declare class Series {
-    attributes: IObject;
-    data: TDatum[];
-    drawn: boolean;
-    el: TSeriesEl;
-    events: IEvents;
-    renderAs: () => IObject[];
-    renderer: AbstractRenderer;
-    state: IState;
-    stateWriter: TStateWriter;
-    constructor(state: IState, stateWriter: TStateWriter, events: IEvents, el: TSeriesEl);
+    private attributes;
+    private data;
+    private drawn;
+    private el;
+    private events;
+    private renderAs;
+    private renderer;
+    private state;
+    private stateWriter;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl);
     assignData(): void;
-    prepareData(): void;
-    assignAccessors(): void;
-    updateRenderer(): void;
-    createRenderer(options: IObject): any;
-    hasData(): boolean;
+    private prepareData();
+    private assignAccessors();
+    private updateRenderer();
+    private createRenderer(options);
     draw(): void;
 }
 export default Series;

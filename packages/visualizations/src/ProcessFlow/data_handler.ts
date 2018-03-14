@@ -3,40 +3,39 @@ import Link from "./link"
 import Layout from "./layout"
 import { bind, extend, find, flow, forEach, get, groupBy, map, sortBy, times } from "lodash/fp"
 import {
-  TNode,
+  AccessorsObject,
+  Data,
+  InputData,
+  Journey,
+  LinkAccessors,
+  LinkAttrs,
+  NodeAccessors,
+  ProcessFlowConfig,
+  State,
+  StateWriter,
   TLink,
-  IJourney,
-  IData,
-  IInputData,
-  ILinkAttrs,
-  IState,
-  IBreakdown,
-  IConfig,
-  TStateWriter,
-  INodeAccessors,
-  ILinkAccessors,
-  IAccessors
+  TNode
 } from "./typings"
 
 class DataHandler {
-  journeys: IJourney[]
-  nodes: TNode[]
-  links: TLink[]
-  nodeAccessors: INodeAccessors
-  linkAccessors: ILinkAccessors
-  state: IState
-  stateWriter: TStateWriter
-  layout: Layout
+  private journeys: Journey[]
+  private nodes: TNode[]
+  private links: TLink[]
+  private nodeAccessors: NodeAccessors
+  private linkAccessors: LinkAccessors
+  private state: State
+  private stateWriter: StateWriter
+  private layout: Layout
 
-  constructor(state: IState, stateWriter: TStateWriter) {
+  constructor(state: State, stateWriter: StateWriter) {
     this.state = state
     this.stateWriter = stateWriter
     this.layout = new Layout(state)
   }
 
-  prepareData(): IData {
+  prepareData(): Data {
     const data = this.state.current.get("data")
-    const accessors: IAccessors = this.state.current.get("accessors")
+    const accessors: AccessorsObject = this.state.current.get("accessors")
     this.journeys = accessors.data.journeys(data)
     this.initializeNodes(accessors.data.nodes(data))
     this.initializeLinks()
@@ -49,7 +48,7 @@ class DataHandler {
     }
   }
 
-  initializeNodes(nodeAttrs: {}[]): void {
+  private initializeNodes(nodeAttrs: {}[]): void {
     this.nodes = map(this.addNode.bind(this))(nodeAttrs)
     forEach((node: TNode): void => {
       node.sourceLinks = []
@@ -59,7 +58,7 @@ class DataHandler {
     this.calculateStartsAndEnds()
   }
 
-  findNode(nodeId: string): TNode {
+  private findNode(nodeId: string): TNode {
     const node: TNode = find((node: TNode): boolean => {
       return node.id() === nodeId
     })(this.nodes)
@@ -69,21 +68,21 @@ class DataHandler {
     return node
   }
 
-  addNode(attrs: {}): TNode {
+  private addNode(attrs: {}): TNode {
     extend.convert({ immutable: false })(attrs, { size: 0 })
     return new Node(attrs, this.state.current.get("accessors").node)
   }
 
-  calculateNodeSizes(): void {
-    forEach((journey: IJourney): void => {
+  private calculateNodeSizes(): void {
+    forEach((journey: Journey): void => {
       forEach((nodeId: string): void => {
         this.findNode(nodeId).attributes.size += journey.size
       })(journey.path)
     })(this.journeys)
   }
 
-  calculateStartsAndEnds(): void {
-    forEach((journey: IJourney): void => {
+  private calculateStartsAndEnds(): void {
+    forEach((journey: Journey): void => {
       if (journey.path.length > 1) {
         this.findNode(journey.path[0]).journeyStarts += journey.size
         this.findNode(journey.path[journey.path.length - 1]).journeyEnds += journey.size
@@ -93,24 +92,24 @@ class DataHandler {
     })(this.journeys)
   }
 
-  initializeLinks(): void {
+  private initializeLinks(): void {
     this.links = []
     this.computeLinks()
   }
 
-  findLink(sourceId: string, targetId: string): TLink {
+  private findLink(sourceId: string, targetId: string): TLink {
     function checkIds(link: TLink): boolean {
       return link.sourceId() === sourceId && link.targetId() === targetId
     }
     return find(checkIds)(this.links)
   }
 
-  addLink(attrs: ILinkAttrs): TLink {
+  private addLink(attrs: LinkAttrs): TLink {
     return new Link(attrs, this.state.current.get("accessors").link)
   }
 
-  computeLinks(): void {
-    forEach((journey: IJourney): void => {
+  private computeLinks(): void {
+    forEach((journey: Journey): void => {
       const path: string[] = journey.path
       const computeLink = (i: number): void => {
         const sourceId: string = path[i]
@@ -122,7 +121,7 @@ class DataHandler {
         if (existingLink) {
           existingLink.attributes.size += journey.size
         } else {
-          const linkAttrs: ILinkAttrs = {
+          const linkAttrs: LinkAttrs = {
             source: sourceNode,
             sourceId: sourceNode.id(),
             target: targetNode,
@@ -139,8 +138,8 @@ class DataHandler {
     })(this.journeys)
   }
 
-  xGridSpacing(): number {
-    const config: IConfig = this.state.current.get("config"),
+  private xGridSpacing(): number {
+    const config: ProcessFlowConfig = this.state.current.get("config"),
       finiteWidth: boolean = isFinite(config.width),
       xValues: number[] = map(get("x"))(this.layout.nodes),
       maxX: number = xValues.length > 0 ? Math.max(...xValues) : 0,
@@ -153,8 +152,8 @@ class DataHandler {
     return spacing
   }
 
-  yGridSpacing(nRows: number): number {
-    const config: IConfig = this.state.current.get("config"),
+  private yGridSpacing(nRows: number): number {
+    const config: ProcessFlowConfig = this.state.current.get("config"),
       finiteHeight: boolean = isFinite(config.height),
       spacing: number = isFinite(config.height)
         ? Math.min(config.height / (nRows + 1), config.verticalNodeSpacing)
@@ -164,7 +163,7 @@ class DataHandler {
     return spacing
   }
 
-  positionNodes(): void {
+  private positionNodes(): void {
     const nodesByRow: {}[] = groupBy("y")(this.layout.nodes)
     const rows: string[] = Object.keys(nodesByRow),
       xGridSpacing: number = this.xGridSpacing(),

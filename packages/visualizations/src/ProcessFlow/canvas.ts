@@ -1,34 +1,94 @@
-import AbstractCanvas from "../utils/canvas"
 import * as d3 from "d3-selection"
+import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter } from "./typings"
+import Events from "../utils/event_catalog"
+import * as styles from "../utils/styles"
 import { forEach } from "lodash/fp"
-import { IEvents, IState, TD3Selection, TSeriesEl, TStateWriter } from "./typings"
 
-class Canvas extends AbstractCanvas {
-  // focusEl: TD3Selection
+class ProcessFlowCanvas implements Canvas {
+  private chartContainer: D3Selection
+  private el: SeriesEl
+  private events: EventBus
+  private state: State
+  private elMap: Object<D3Selection> = {}
+  private stateWriter: StateWriter
 
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, context: Element) {
-    super(state, stateWriter, events, context)
-    this.insertFocusElements()
-    this.appendDrawingGroups()
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {
+    this.state = state
+    this.stateWriter = stateWriter
+    this.events = events
+    this.chartContainer = this.renderChartContainer(context)
+    this.el = this.renderEl()
+    this.renderFocus()
+    this.renderDrawingGroups()
   }
 
-  createEl(): TSeriesEl {
-    const el: TD3Selection = d3
-      .select(document.createElementNS(d3.namespaces["svg"], "svg"))
-      .attr("class", "processflow")
-    this.stateWriter("elRect", el.node().getBoundingClientRect())
-    return el
+  // Chart container
+  private renderChartContainer(context: Element): D3Selection {
+    const container: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
+    context.appendChild(container)
+    return d3.select(container).attr("class", styles.chartContainer)
   }
 
-  appendDrawingGroups(): void {
+  // El
+  private renderEl(): SeriesEl {
+    const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
+    el.addEventListener("mouseenter", this.onMouseEnter.bind(this))
+    el.addEventListener("mouseleave", this.onMouseLeave.bind(this))
+    el.addEventListener("click", this.onClick.bind(this))
+    this.stateWriter("elRect", el.getBoundingClientRect())
+    this.chartContainer.node().appendChild(el)
+    this.elMap.series = d3.select(el)
+    return d3.select(el)
+  }
+
+  private onMouseEnter(): void {
+    this.events.emit(Events.CHART.MOUSEOVER)
+  }
+
+  private onMouseLeave(): void {
+    this.events.emit(Events.CHART.MOUSEOUT)
+  }
+
+  private onClick(): void {
+    this.events.emit(Events.CHART.CLICK)
+  }
+
+  // Focus
+  private renderFocus(): void {
+    const focus: D3Selection = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", `${styles.focusLegend}`)
+      .style("visibility", "hidden")
+    this.chartContainer.node().appendChild(focus.node())
+    this.elMap.focus = focus
+  }
+
+  // Drawing groups
+  private renderDrawingGroups(): void {
     forEach((group: string): void => {
-      this.el.append("svg:g").attr("class", group + "-group")
+      this.el.append("svg:g").attr("class", `${group}-group`)
     })(["links", "nodes"])
   }
 
-  mouseOverElement(): TSeriesEl {
-    return this.el
+  // Lifecycle
+  draw(): void {
+    this.chartContainer.classed("hidden", this.state.current.get("config").hidden)
+    this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
+  }
+
+  remove(): void {
+    this.el.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this))
+    this.el.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this))
+    this.el.node().removeEventListener("click", this.onClick.bind(this))
+    this.chartContainer.remove()
+    this.chartContainer = undefined
+    this.el = undefined
+  }
+
+  // Helper method
+  elementFor(component: string): any {
+    return this.elMap[component]
   }
 }
 
-export default Canvas
+export default ProcessFlowCanvas

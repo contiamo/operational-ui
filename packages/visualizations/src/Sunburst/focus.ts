@@ -1,34 +1,56 @@
 import FocusUtils from "../utils/focus_utils"
-import AbstractFocus from "../utils/focus"
 import * as d3 from "d3-selection"
-import { IEvents, IObject, IState, TD3Selection, TDatum, TStateWriter } from "./typings"
+import Events from "../utils/event_catalog"
+import {
+  D3Selection,
+  Datum,
+  EventBus,
+  Focus,
+  FocusPoint,
+  HoverPayload,
+  Object,
+  SeriesEl,
+  State,
+  StateWriter
+} from "./typings"
 
-const dataName = (d: TDatum): string => d.data.name,
-  dataValue = (d: TDatum): number => d.value
+const dataName = (d: Datum): string => d.data.name,
+  dataValue = (d: Datum): number => d.value
 
-class Focus extends AbstractFocus {
-  constructor(state: IState, stateWriter: TStateWriter, events: IEvents, els: IObject) {
-    super(state, stateWriter, events, els)
+class SunburstFocus implements Focus {
+  private el: SeriesEl
+  private state: State
+  private stateWriter: StateWriter
+  private events: EventBus
+
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
+    this.state = state
+    this.stateWriter = stateWriter
+    this.events = events
+    this.el = el
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
   }
 
-  onElementHover(payload: { focusPoint: IObject; d: TDatum; hideLabel?: boolean }): void {
+  private onElementHover(payload: HoverPayload): void {
     this.remove()
 
     if (payload.hideLabel) {
       return
     }
 
-    const computed: IObject = this.state.current.get("computed")
+    const computed: Object<any> = this.state.current.get("computed")
     if (payload.d === computed.renderer.topNode) {
       return
     }
 
-    const focusPoint: IObject = payload.focusPoint,
-      datum: TDatum = payload.d
+    const focusPoint: FocusPoint = payload.focusPoint,
+      datum: Datum = payload.d
 
     FocusUtils.drawHidden(this.el, "element", "above")
 
-    const content: TD3Selection = this.el.append("xhtml:ul")
+    const content: D3Selection = this.el.append("xhtml:ul")
 
     content
       .append("span")
@@ -37,7 +59,7 @@ class Focus extends AbstractFocus {
 
     content.append("span").text(`(${this.state.current.get("config").numberFormatter(dataValue(datum))})`)
 
-    const comparisonNode: TDatum = computed.renderer.zoomNode || computed.renderer.topNode
+    const comparisonNode: Datum = computed.renderer.zoomNode || computed.renderer.topNode
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
     content.append("xhtml:li").text(this.percentageString(datum))
 
@@ -51,20 +73,33 @@ class Focus extends AbstractFocus {
     FocusUtils.drawVisible(this.el, labelPlacement)
   }
 
-  percentageString(datum: TDatum): string {
-    const computed: IObject = this.state.current.get("computed")
-    const topNode: TDatum = computed.renderer.topNode
-    const zoomNode: TDatum = computed.renderer.zoomNode
+  private percentageString(datum: Datum): string {
+    const computed: Object<any> = this.state.current.get("computed")
+    const topNode: Datum = computed.renderer.topNode
+    const zoomNode: Datum = computed.renderer.zoomNode
     return !zoomNode || topNode === zoomNode
       ? `${this.singlePercentageString(datum, topNode)}`
       : `${this.singlePercentageString(datum, zoomNode)} / ${this.singlePercentageString(datum, topNode)}`
   }
 
-  singlePercentageString(datum: TDatum, comparison: TDatum): string {
-    const topNode: TDatum = this.state.current.get("computed").renderer.topNode
+  private singlePercentageString(datum: Datum, comparison: Datum): string {
+    const topNode: Datum = this.state.current.get("computed").renderer.topNode
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3)
     return `${percentage}% of ${dataName(comparison)}`
   }
+
+  private onElementOut(): void {
+    this.remove()
+  }
+
+  private onMouseLeave(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+  }
+
+  remove(): void {
+    this.el.node().innerHTML = ""
+    this.el.style("visibility", "hidden")
+  }
 }
 
-export default Focus
+export default SunburstFocus

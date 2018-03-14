@@ -1,46 +1,67 @@
-import { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter } from "../utils/typings";
-export { IChartStateObject, IEvents, IObject, IState, Partial, TD3Selection, TSeriesEl, TStateWriter };
-export interface IConfig {
+import Breadcrumb from "./breadcrumb";
+import Renderer from "./renderer";
+import RootLabel from "./root_label";
+import { HierarchyRectangularNode } from "d3-hierarchy";
+import { Accessor, Config, Object, Focus, Facade } from "../utils/typings";
+export { Accessor, Accessors, EventBus, Object, State, Partial, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
+export interface SunburstConfig extends Config {
     arrowOffset: number;
     centerCircleRadius: number;
     disableAnimations: boolean;
-    duration: number;
-    height: number;
-    hidden: boolean;
     maxRings: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
     palette: string[];
     propagateColors: boolean;
     sort: boolean;
-    uid: string;
-    visualizationName: string;
-    width: number;
-    zoomNode?: IObject;
+    zoomNode?: Object<any>;
 }
-export declare type TDatum = IObject;
-export interface IAccessors {
-    data: {
-        data: (d: IObject) => IObject;
-    };
-    series: {
-        color: (d: TDatum) => string;
-        name: (d: TDatum) => string;
-        value: (d: TDatum) => number;
-    };
+export interface RawData {
+    name?: string;
+    value?: number;
+    children?: RawData[];
+    [key: string]: any;
 }
-export interface IComputedState {
-    canvas: IObject;
-    focus: IObject;
-    renderer: IObject;
+export interface Datum extends HierarchyRectangularNode<RawData> {
+    color?: string;
+    name?: string;
+    zoomable?: boolean;
+    parent: Datum | null;
 }
-export interface IMousePosition {
-    absolute: {
-        x: number;
-        y: number;
-    };
-    relative: {
-        x: number;
-        y: number;
-    };
+export interface DataAccessors {
+    data: Accessor<any, RawData>;
+}
+export interface SeriesAccessors {
+    color: Accessor<Datum, string>;
+    name: Accessor<Datum, string>;
+    value: Accessor<Datum, number>;
+}
+export interface AccessorsObject {
+    data: DataAccessors;
+    series: SeriesAccessors;
+}
+export interface Computed {
+    canvas: Object<any>;
+    focus: Object<any>;
+    renderer: Object<any>;
+}
+export interface FocusPoint {
+    centroid: [number, number];
+}
+export interface HoverPayload {
+    d: Datum;
+    hideLabel: boolean;
+    focusPoint: FocusPoint;
+}
+export interface ClickPayload {
+    d?: Datum;
+    force?: boolean;
+}
+export declare type Focus = Focus<HoverPayload>;
+export declare type Facade = Facade<SunburstConfig, AccessorsObject, Computed, Components, RawData>;
+export interface Components {
+    breadcrumb: Breadcrumb;
+    focus: Focus<HoverPayload>;
+    renderer: Renderer;
+    rootLabel: RootLabel;
 }

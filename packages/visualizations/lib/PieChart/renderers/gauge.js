@@ -1,42 +1,219 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_renderer_1 = require("./abstract_renderer");
 var event_catalog_1 = require("../../utils/event_catalog");
 var fp_1 = require("lodash/fp");
+require("d3-transition");
+var d3_shape_1 = require("d3-shape");
 var d3_interpolate_1 = require("d3-interpolate");
 var d3_scale_1 = require("d3-scale");
+var d3_utils_1 = require("../../utils/d3_utils");
 var styles = require("./styles");
-var Gauge = /** @class */ (function (_super) {
-    __extends(Gauge, _super);
-    function Gauge() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var Utils = require("./renderer_utils");
+var Gauge = /** @class */ (function () {
+    function Gauge(state, events, el, options) {
+        this.drawn = false;
+        this.type = "gauge";
+        this.state = state;
+        this.events = events;
+        this.el = el;
+        this.updateOptions(options);
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.updateElementHover.bind(this));
     }
-    Gauge.prototype.checkData = function () {
+    // Initialization and updating config or accessors
+    Gauge.prototype.updateOptions = function (options) {
+        Utils.assignOptions(this, options);
+    };
+    Gauge.prototype.setData = function (data) {
+        this.data = data || [];
+    };
+    // Drawing
+    Gauge.prototype.draw = function () {
+        this.compute();
+        this.drawn ? this.updateDraw() : this.initialDraw();
+    };
+    Gauge.prototype.initialDraw = function () {
+        // groups
+        this.el.append("svg:g").attr("class", "arcs");
+        this.el.append("svg:g").attr("class", styles.total);
+        this.updateDraw();
+        this.drawn = true;
+    };
+    Gauge.prototype.updateDraw = function () {
+        var config = this.state.current.get("config");
+        var duration = config.duration;
+        var minTotalFontSize = config.minTotalFontSize;
+        var drawingDims = this.state.current.get("computed").canvas
+            .drawingContainerDims;
+        // Remove focus before updating chart
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        // Center coordinate system
+        this.currentTranslation = Utils.computeTranslate(drawingDims, this.extent === "semi" ? this.computed.r : 0);
+        this.el.attr("transform", Utils.translateString(this.currentTranslation));
+        // Arcs
+        var arcs = Utils.createArcGroups(this.el, this.computed.data, this.key);
+        // Exit
+        Utils.exitArcs(arcs, duration, Utils.removeArcTween(this.computed, this.angleRange()));
+        // Enter
+        Utils.enterArcs(arcs, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
+        // Update
+        var updatingArcs = arcs.merge(arcs.enter().selectAll("g." + styles.arc));
+        d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
+        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
+        // Total / center text
+        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: this.totalYOffset() };
+        Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
+        // Comparison line
+        this.updateComparison();
+    };
+    Gauge.prototype.arcAttributes = function () {
+        return {
+            path: this.arcTween.bind(this),
+            fill: this.arcColor.bind(this)
+        };
+    };
+    Gauge.prototype.arcColor = function (d) {
+        return d.unfilled ? undefined : this.color(d);
+    };
+    Gauge.prototype.angleRange = function () {
+        return this.extent === "semi" ? [-Math.PI / 2, Math.PI / 2] : [-Math.PI, Math.PI];
+    };
+    Gauge.prototype.totalYOffset = function () {
+        return this.extent === "semi" ? "0" : "0.35em";
+    };
+    // Interpolate the arcs in data space.
+    Gauge.prototype.arcTween = function (d, i) {
+        var _this = this;
+        var angleRange = this.angleRange();
+        var old;
+        var s0;
+        var e0;
+        // Segments transition to and from the start/left of the gauge.
+        if (!d.data.unfilled) {
+            old =
+                fp_1.filter(function (datapoint) {
+                    return !datapoint.data.unfilled;
+                })(this.previousComputed.data) || [];
+            if (old[i]) {
+                s0 = old[i].startAngle;
+                e0 = old[i].endAngle;
+            }
+            else if (!old[i] && old[i - 1]) {
+                s0 = old[i - 1].endAngle;
+                e0 = old[i - 1].endAngle;
+            }
+            else if (!old[i - 1] && old.length > 0) {
+                s0 = old[old.length - 1].endAngle;
+                e0 = old[old.length - 1].endAngle;
+            }
+            else {
+                s0 = angleRange[0];
+                e0 = angleRange[0];
+            }
+            // The unfilled part of the gauge transitions to and from the end/right of the gauge.
+        }
+        else {
+            old = fp_1.find(function (datapoint) {
+                return datapoint.data.unfilled;
+            })(this.previousComputed.data);
+            if (old) {
+                s0 = old.startAngle;
+                e0 = old.endAngle;
+            }
+            else if (!this.previousComputed.data) {
+                s0 = angleRange[0];
+                e0 = angleRange[1];
+            }
+            else {
+                s0 = angleRange[1];
+                e0 = angleRange[1];
+            }
+        }
+        var innerRadius = this.previousComputed.rInner || this.computed.rInner;
+        var outerRadius = this.previousComputed.r || this.computed.r;
+        var f = d3_interpolate_1.interpolateObject({ innerRadius: innerRadius, outerRadius: outerRadius, endAngle: e0, startAngle: s0 }, {
+            innerRadius: this.computed.rInner,
+            outerRadius: this.computed.r,
+            endAngle: d.endAngle,
+            startAngle: d.startAngle
+        });
+        return function (t) { return _this.computed.arc(f(t)); };
+    };
+    Gauge.prototype.lineTween = function (comparison) {
+        var _this = this;
+        // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
+        // Here, we need '0' to be horizontal to left of origin.
+        var range = fp_1.map(function (value) { return value + Math.PI / 2; })(this.angleRange());
+        var angle = function (d) {
+            return d3_scale_1.scaleLinear()
+                .range(range)
+                .domain([0, _this.target])(d.value);
+        };
+        var xOuter = function (d) { return -d.r * Math.cos(angle(d)); };
+        var yOuter = function (d) { return -d.r * Math.sin(angle(d)); };
+        var xInner = function (d) { return -d.inner * Math.cos(angle(d)); };
+        var yInner = function (d) { return -d.inner * Math.sin(angle(d)); };
+        var path = function (d) {
+            return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(",");
+        };
+        var oldValue = this.previousComputed.comparison ? this.value(this.previousComputed.comparison) : 0;
+        var f = d3_interpolate_1.interpolateObject({
+            inner: this.previousComputed.rInner || this.computed.rInner,
+            r: this.previousComputed.r || this.computed.r,
+            value: oldValue
+        }, { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) });
+        return function (t) { return path(f(t)); };
+    };
+    Gauge.prototype.centerDisplayString = function () {
+        return this.total + " / " + this.target;
+    };
+    Gauge.prototype.updateComparison = function () {
+        var comparison = this.el
+            .selectAll("g." + styles.comparison)
+            .data(this.comparison ? [this.comparison] : []);
+        comparison.exit().remove();
+        var enter = comparison
+            .enter()
+            .append("svg:g")
+            .attr("class", styles.comparison);
+        enter.append("svg:path");
+        enter
+            .merge(comparison)
+            .transition()
+            .duration(this.state.current.get("config").duration)
+            .select("path")
+            .attrTween("d", this.lineTween.bind(this));
+    };
+    // Data computation / preparation
+    Gauge.prototype.compute = function () {
+        this.previousComputed = this.computed;
+        this.total = Utils.computeTotal(this.data, this.value);
+        this.fillGaugeExtent();
         if (!this.target) {
             throw new Error("No target value provided for gauge");
         }
+        var d = {
+            layout: Utils.layout(this.angleValue.bind(this), this.angleRange()),
+            total: this.total,
+            target: this.target
+        };
+        // data should not become part of this.previousComputed in first computation
+        this.previousComputed = fp_1.defaults(d)(this.previousComputed);
+        Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.target);
+        this.computed = __assign({}, d, this.computeArcs(d), { data: d.layout(this.data), comparison: this.comparison });
     };
-    Gauge.prototype.computeOuter = function (width, height) {
-        return this.extent === "full"
-            ? _super.prototype.computeOuter.call(this, width, height)
-            : Math.min(width / 2, height) - this.state.current.get("config").outerBorderMargin;
-    };
-    Gauge.prototype.runningTotal = function () {
-        return fp_1.reduce(function (memo, datapoint) {
-            var previous = fp_1.last(memo) || 0;
-            memo.push(previous + datapoint.value);
-            return memo;
-        }, [])(this.data);
+    Gauge.prototype.angleValue = function (d) {
+        return this.value(d) || d.value;
     };
     // Ensure sum of rendered values is equal to gauge target value.
     Gauge.prototype.fillGaugeExtent = function () {
@@ -63,131 +240,76 @@ var Gauge = /** @class */ (function (_super) {
             });
         }
     };
-    Gauge.prototype.centerDisplayString = function () {
-        return [this.total + " / " + this.target];
+    Gauge.prototype.runningTotal = function () {
+        return fp_1.reduce(function (memo, datapoint) {
+            var previous = fp_1.last(memo) || 0;
+            memo.push(previous + datapoint.value);
+            return memo;
+        }, [])(this.data);
     };
-    Gauge.prototype.compute = function () {
-        this.computeTotal();
-        this.fillGaugeExtent();
-        _super.prototype.compute.call(this);
-        this.computed.comparison = this.comparison;
+    Gauge.prototype.computeArcs = function (computed) {
+        var drawingDims = this.state.current.get("computed").canvas
+            .drawingContainerDims, outerBorderMargin = this.state.current.get("config").outerBorderMargin, r = this.computeOuterRadius(drawingDims, outerBorderMargin), rInner = this.computeInnerRadius(r), rHover = r + 1, rInnerHover = Math.max(rInner - 1, 0);
+        return {
+            r: r,
+            rInner: rInner,
+            rHover: rHover,
+            rInnerHover: rInnerHover,
+            arc: d3_shape_1.arc(),
+            arcOver: d3_shape_1.arc()
+                .innerRadius(rInnerHover)
+                .outerRadius(rHover)
+        };
     };
-    Gauge.prototype.updateDraw = function () {
-        _super.prototype.updateDraw.call(this);
-        // Comparison line
-        this.updateComparison();
+    Gauge.prototype.computeOuterRadius = function (drawingDims, margin) {
+        return this.extent === "full"
+            ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
+            : Math.min(drawingDims.width / 2, drawingDims.height) - margin;
     };
-    Gauge.prototype.updateComparison = function () {
-        var comparison = this.el
-            .selectAll("g." + styles.comparison)
-            .data(this.comparison ? [this.comparison] : []);
-        comparison.exit().remove();
-        var enter = comparison
-            .enter()
-            .append("svg:g")
-            .attr("class", styles.comparison);
-        enter.append("svg:path");
-        enter
-            .merge(comparison)
-            .transition()
-            .duration(this.state.current.get("config").duration)
-            .select("path")
-            .attrTween("d", this.lineTween.bind(this));
+    Gauge.prototype.computeInnerRadius = function (outerRadius) {
+        var config = this.state.current.get("config");
+        var width = outerRadius - config.minInnerRadius;
+        // If there isn't enough space, don't render inner circle
+        return width < config.minWidth ? 0 : outerRadius - Math.min(width, config.maxWidth);
     };
+    // Event listeners / handlers
     Gauge.prototype.onMouseOver = function (d) {
         if (d.data.unfilled) {
             this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
             return;
         }
-        _super.prototype.onMouseOver.call(this, d);
-    };
-    Gauge.prototype.totalForPercentages = function () {
-        return this.target;
-    };
-    // Establish coordinate system with 0,0 being the center of the width, height rectangle
-    Gauge.prototype.computeTranslate = function () {
-        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
-        var yTranslate = this.extent === "full" ? drawingDims.height / 2 : (drawingDims.height + this.computed.r) / 2;
-        this.currentTranslation = [drawingDims.width / 2, yTranslate];
-        return this.currentTranslation;
-    };
-    // Helpers
-    Gauge.prototype.angleRange = function () {
-        return this.extent === "semi" ? [-Math.PI / 2, Math.PI / 2] : [-Math.PI, Math.PI];
-    };
-    Gauge.prototype.totalYOffset = function () {
-        return this.extent === "semi" ? "0" : "0.35em";
-    };
-    // Interpolate the arcs in data space.
-    Gauge.prototype.arcTween = function (d, i) {
-        var _this = this;
-        var angleRange = this.angleRange();
-        var old;
-        var s0;
-        var e0;
-        // Segments transition to and from the start/left of the gauge.
-        if (!d.data.unfilled) {
-            old =
-                fp_1.filter(function (datapoint) {
-                    return !datapoint.data.unfilled;
-                })(this.previous.data) || [];
-            if (old[i]) {
-                s0 = old[i].startAngle;
-                e0 = old[i].endAngle;
-            }
-            else if (!old[i] && old[i - 1]) {
-                s0 = old[i - 1].endAngle;
-                e0 = old[i - 1].endAngle;
-            }
-            else if (!old[i - 1] && old.length > 0) {
-                s0 = old[old.length - 1].endAngle;
-                e0 = old[old.length - 1].endAngle;
-            }
-            else {
-                s0 = angleRange[0];
-                e0 = angleRange[0];
-            }
-            // The unfilled part of the gauge transitions to and from the end/right of the gauge.
-        }
-        else {
-            old = fp_1.find(function (datapoint) {
-                return datapoint.data.unfilled;
-            })(this.previous.data);
-            if (old) {
-                s0 = old.startAngle;
-                e0 = old.endAngle;
-            }
-            else if (!this.previous.data) {
-                s0 = angleRange[0];
-                e0 = angleRange[1];
-            }
-            else {
-                s0 = angleRange[1];
-                e0 = angleRange[1];
-            }
-        }
-        var f = d3_interpolate_1.interpolateObject({ endAngle: e0, startAngle: s0 }, { endAngle: d.endAngle, startAngle: d.startAngle });
-        return function (t) { return _this.computed.arc(f(t)); };
-    };
-    Gauge.prototype.lineTween = function (comparison) {
-        var _this = this;
-        // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
-        // Here, we need '0' to be horizontal to left of origin.
-        var range = fp_1.map(function (value) { return value + Math.PI / 2; })(this.angleRange());
-        var angle = function (d) {
-            return d3_scale_1.scaleLinear()
-                .range(range)
-                .domain([0, _this.target])(d.value);
+        var datumInfo = {
+            key: this.key(d),
+            value: this.value(d),
+            percentage: d.data.percentage
         };
-        var xOuter = function (d) { return -d.r * Math.cos(angle(d)); };
-        var yOuter = function (d) { return -d.r * Math.sin(angle(d)); };
-        var xInner = function (d) { return -d.inner * Math.cos(angle(d)); };
-        var yInner = function (d) { return -d.inner * Math.sin(angle(d)); };
-        var path = function (d) { return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(","); };
-        var oldValue = this.previous.comparison ? this.value(this.previous.comparison) : 0;
-        var f = d3_interpolate_1.interpolateObject({ inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue }, { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) });
-        return function (t) { return path(f(t)); };
+        var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
     };
+    Gauge.prototype.updateElementHover = function (datapoint) {
+        var _this = this;
+        if (!this.drawn) {
+            return;
+        }
+        var arcs = this.el.select("g.arcs").selectAll("g");
+        var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
+        var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
+        var shadowDefinitionId = this.state.current.get("computed").canvas.shadowDefinitionId;
+        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId);
+        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc);
+    };
+    Gauge.prototype.highlightElement = function (key) {
+        var _this = this;
+        var d = fp_1.find(function (datum) { return _this.key(datum) === key; })(this.computed.data);
+        if (!d) {
+            return;
+        }
+        this.onMouseOver(d);
+    };
+    Gauge.prototype.onMouseOut = function () {
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+    };
+    // External methods
     Gauge.prototype.dataForLegend = function () {
         var _this = this;
         var data = fp_1.map(function (datum) {
@@ -204,7 +326,14 @@ var Gauge = /** @class */ (function (_super) {
         }
         return data;
     };
+    // Remove & clean up
+    Gauge.prototype.remove = function () {
+        if (this.drawn) {
+            this.el.remove();
+            this.drawn = false;
+        }
+    };
     return Gauge;
-}(abstract_renderer_1.default));
+}());
 exports.default = Gauge;
 //# sourceMappingURL=gauge.js.map

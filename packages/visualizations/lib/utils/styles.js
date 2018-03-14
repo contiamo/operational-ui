@@ -7,8 +7,7 @@ var legendStyle = {
     overflow: "hidden"
 };
 var legendTopBottomStyle = {
-    padding: "0 7px",
-    margin: "3px 0",
+    padding: "3px 7px",
     "& .series-legend, .comparison-legend": {
         float: "left"
     }
@@ -30,9 +29,6 @@ var seriesLegendStyle = {
 var drawingContainerStyle = {
     position: "relative",
     overflow: "hidden"
-};
-var chartBackgroundStyle = {
-    fill: "#fff"
 };
 var ruleStyle = {
     stroke: "#eee",
@@ -114,7 +110,6 @@ exports.legend = glamor_1.css(legendStyle).toString();
 exports.legendTopBottom = glamor_1.css(legendTopBottomStyle).toString();
 exports.seriesLegend = glamor_1.css(seriesLegendStyle).toString();
 exports.drawingContainer = glamor_1.css(drawingContainerStyle).toString();
-exports.chartBackground = glamor_1.css(chartBackgroundStyle).toString();
 exports.rule = glamor_1.css(ruleStyle).toString();
 exports.componentFocus = glamor_1.css(componentFocusStyle).toString();
 //# sourceMappingURL=styles.js.map

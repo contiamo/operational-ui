@@ -24,7 +24,7 @@ const simpleSnippet = `
 
   const DonutRenderer = {
     type: "donut",
-    ...accessors
+    accessors
   }
 
   const GaugeRenderer = {
@@ -32,12 +32,12 @@ const simpleSnippet = `
     extent: "semi",
     comparison: { key: "Last month", value: 18 },
     target: 50,
-    ...accessors
+    accessors
   }
 
   const PolarRenderer = {
     type: "polar",
-    ...accessors
+    accessors
   }
 
   class Pie extends React.Component {
@@ -200,8 +200,9 @@ const propDescription = {
     },
     {
       name: "showComponentFocus",
-      description: "Toggle component focus on hover",
-      defaultValue: true,
+      description:
+        "Toggle component focus - if `true`, enables hover and click events on configurable items, in this case series items in legend",
+      defaultValue: false,
       type: "boolean",
       optional: true
     },

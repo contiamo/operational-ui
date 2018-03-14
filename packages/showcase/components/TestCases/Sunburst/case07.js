@@ -6,6 +6,10 @@ import { Card, CardHeader } from "@operational/components"
 export const marathon = ({ test, afterAll, container }) => {
   const viz = new Sunburst(container)
 
+  const accessors = {
+    color: (d: any) => d.color || "#bbb"
+  }
+
   const data = {
     name: "All",
     color: "#aaa",
@@ -4923,6 +4927,7 @@ export const marathon = ({ test, afterAll, container }) => {
       outerBorderMargin: 5,
       propagateColors: false
     })
+    viz.accessors("series", accessors)
     viz.draw()
   })
 }

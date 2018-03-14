@@ -48,17 +48,13 @@ var Series = /** @class */ (function () {
             this.renderer = this.createRenderer(rendererOptions);
         }
         else {
-            this.renderer.assignOptions(rendererOptions);
+            this.renderer.updateOptions(rendererOptions);
         }
     };
     Series.prototype.createRenderer = function (options) {
-        return new renderer_1.default(this.state, this.events, this.el, options);
-    };
-    Series.prototype.hasData = function () {
-        return this.data.length > 0;
+        return new renderer_1.default(this.state, this.events, this.el.select("g.drawing"), options);
     };
     Series.prototype.draw = function () {
-        var seriesConfig = this.state.current.get("computed").series;
         this.renderer.draw();
         this.drawn = true;
     };

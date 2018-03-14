@@ -7,8 +7,7 @@ const legendStyle = {
 }
 
 const legendTopBottomStyle = {
-  padding: "0 7px",
-  margin: "3px 0",
+  padding: "3px 7px",
   "& .series-legend, .comparison-legend": {
     float: "left"
   }
@@ -32,10 +31,6 @@ const seriesLegendStyle = {
 const drawingContainerStyle = {
   position: "relative",
   overflow: "hidden"
-}
-
-const chartBackgroundStyle = {
-  fill: "#fff"
 }
 
 const ruleStyle = {
@@ -122,6 +117,5 @@ export const legend = css(legendStyle).toString()
 export const legendTopBottom = css(legendTopBottomStyle).toString()
 export const seriesLegend = css(seriesLegendStyle).toString()
 export const drawingContainer = css(drawingContainerStyle).toString()
-export const chartBackground = css(chartBackgroundStyle).toString()
 export const rule = css(ruleStyle).toString()
 export const componentFocus = css(componentFocusStyle).toString()

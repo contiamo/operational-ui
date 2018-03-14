@@ -1,9 +1,9 @@
 import { extend, forEach } from "lodash/fp"
-import { ILinkAccessors, ILinkAttrs, TNode } from "./typings"
+import { LinkAccessors, LinkAttrs, TNode } from "./typings"
 
 class Link {
-  accessors: ILinkAccessors
-  attributes: ILinkAttrs
+  accessors: LinkAccessors
+  attributes: LinkAttrs
   dash: () => string
   label: () => string
   size: () => number
@@ -13,17 +13,17 @@ class Link {
   target: () => TNode
   targetId: () => string
 
-  constructor(linkAttributes: ILinkAttrs, accessors: ILinkAccessors) {
+  constructor(linkAttributes: LinkAttrs, accessors: LinkAccessors) {
     this.accessors = accessors
     this.attributes = this.assignAttributes(linkAttributes)
     this.assignAccessors()
   }
 
-  assignAttributes(linkAttributes: ILinkAttrs): ILinkAttrs {
+  private assignAttributes(linkAttributes: LinkAttrs): LinkAttrs {
     return extend.convert({ immutable: false })({}, linkAttributes)
   }
 
-  assignAccessors(): void {
+  private assignAccessors(): void {
     forEach.convert({ cap: false })((accessor: any, key: string) => {
       ;(this as any)[key] = () => accessor(this.attributes)
     })(this.accessors)
