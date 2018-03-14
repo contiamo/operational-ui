@@ -38,7 +38,7 @@ class Donut implements Renderer {
   private drawn: boolean = false
   private el: D3Selection
   private events: EventBus
-  private previous: Partial<ComputedData>
+  private previousComputed: Partial<ComputedData>
   key: RendererAccessor<string>
   state: State
   type: "donut" | "polar" | "gauge" = "donut"
@@ -103,7 +103,7 @@ class Donut implements Renderer {
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
     setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
     // Total / center text
-    const options = { minTotalFontSize, innerRadius: this.computed.inner, yOffset: TOTAL_Y_OFFSET }
+    const options = { minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
@@ -116,7 +116,7 @@ class Donut implements Renderer {
 
   // Interpolate the arcs in data space.
   private arcTween(d: ComputedDatum): (t: number) => string {
-    const previousData: ComputedDatum[] = this.previous.data || [],
+    const previousData: ComputedDatum[] = this.previousComputed.data || [],
       old: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index)(previousData),
       previous: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index - 1)(previousData),
       last: ComputedDatum = previousData[previousData.length - 1]
@@ -137,11 +137,16 @@ class Donut implements Renderer {
       e0 = 0
     }
 
-    const innerRadius: number = this.previous.inner || this.computed.inner
-    const outerRadius: number = this.previous.r || this.computed.r
+    const innerRadius: number = this.previousComputed.rInner || this.computed.rInner
+    const outerRadius: number = this.previousComputed.r || this.computed.r
     const f = interpolateObject(
       { innerRadius, outerRadius, endAngle: e0, startAngle: s0 },
-      { innerRadius: this.computed.inner, outerRadius: this.computed.r, endAngle: d.endAngle, startAngle: d.startAngle }
+      {
+        innerRadius: this.computed.rInner,
+        outerRadius: this.computed.r,
+        endAngle: d.endAngle,
+        startAngle: d.startAngle
+      }
     )
     return (t: number): string => this.computed.arc(f(t))
   }
@@ -155,20 +160,20 @@ class Donut implements Renderer {
   }
 
   private centerDisplayString(): string {
-    return this.computed.inner > 0 ? this.computed.total.toString() : ""
+    return this.computed.rInner > 0 ? this.computed.total.toString() : ""
   }
 
   // Data computation / preparation
   private compute(): void {
-    this.previous = this.computed
+    this.previousComputed = this.computed
 
     const d: ComputedInitial = {
       layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
       total: Utils.computeTotal(this.data, this.value)
     }
 
-    // data should not become part of this.previous in first computation
-    this.previous = defaults(d)(this.previous)
+    // data should not become part of this.previousComputed in first computation
+    this.previousComputed = defaults(d)(this.previousComputed)
 
     Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.total)
 
@@ -186,28 +191,28 @@ class Donut implements Renderer {
   private computeArcs(computed: ComputedInitial): ComputedArcs {
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
         .drawingContainerDims,
-      r: number = this.computeOuter(drawingDims),
-      inner: number = this.computeInner(r),
+      r: number = this.computeOuterRadius(drawingDims),
+      rInner: number = this.computeInnerRadius(r),
       rHover: number = r + 1,
-      innerHover: number = Math.max(inner - 1, 0)
+      rInnerHover: number = Math.max(rInner - 1, 0)
     return {
       r,
-      inner,
+      rInner,
       rHover,
-      innerHover,
+      rInnerHover,
       arc: d3Arc(),
       arcOver: d3Arc()
-        .innerRadius(innerHover)
+        .innerRadius(rInnerHover)
         .outerRadius(rHover)
     }
   }
 
-  private computeOuter(drawingDims: { width: number; height: number }): number {
+  private computeOuterRadius(drawingDims: { width: number; height: number }): number {
     const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
     return Math.min(drawingDims.width, drawingDims.height) / 2 - outerBorderMargin
   }
 
-  private computeInner(outerRadius: number): number {
+  private computeInnerRadius(outerRadius: number): number {
     const config: PieChartConfig = this.state.current.get("config")
     const width: number = outerRadius - config.minInnerRadius
     // If there isn't enough space, don't render inner circle

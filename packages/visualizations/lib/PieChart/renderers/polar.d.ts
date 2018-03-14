@@ -9,7 +9,7 @@ declare class Polar implements Renderer {
     private el;
     private events;
     private minSegmentWidth;
-    private previous;
+    private previousComputed;
     key: RendererAccessor<string>;
     state: State;
     type: "donut" | "polar" | "gauge";
@@ -28,9 +28,9 @@ declare class Polar implements Renderer {
     private compute();
     private angleValue();
     private computeArcs(computed);
-    private computeOuter(drawingDims, scaleFactor?);
-    private computeInner(data, outerRadius);
-    private hoverOuter(radius);
+    private computeOuterRadius(drawingDims, scaleFactor?);
+    private computeInnerRadius(data, outerRadius);
+    private hoverOuterRadius(radius);
     private onMouseOver(d);
     private updateElementHover(datapoint);
     private highlightElement(key);

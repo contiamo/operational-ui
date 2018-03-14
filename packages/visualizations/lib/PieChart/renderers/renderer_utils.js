@@ -155,7 +155,7 @@ exports.layout = function (valueAccessor, angleRange) {
 };
 exports.removeArcTween = function (computed, angleRange) {
     return function (d, i) {
-        var innerRadius = computed.inner;
+        var innerRadius = computed.rInner;
         var outerRadius = computed.r;
         var f = d3_interpolate_1.interpolateObject({ endAngle: d.endAngle, startAngle: d.startAngle }, { innerRadius: innerRadius, outerRadius: outerRadius, endAngle: angleRange[1], startAngle: angleRange[1] });
         return function (t) { return computed.arc(f(t)); };

@@ -8,7 +8,7 @@ declare class Donut implements Renderer {
     private drawn;
     private el;
     private events;
-    private previous;
+    private previousComputed;
     key: RendererAccessor<string>;
     state: State;
     type: "donut" | "polar" | "gauge";
@@ -26,8 +26,8 @@ declare class Donut implements Renderer {
     private compute();
     private angleValue(d);
     private computeArcs(computed);
-    private computeOuter(drawingDims);
-    private computeInner(outerRadius);
+    private computeOuterRadius(drawingDims);
+    private computeInnerRadius(outerRadius);
     private onMouseOver(d);
     private updateElementHover(datapoint);
     private highlightElement(key);

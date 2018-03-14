@@ -74,7 +74,7 @@ var Polar = /** @class */ (function () {
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration, this.fitToCanvas.bind(this));
         d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
         // Total / center text
-        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.inner, yOffset: TOTAL_Y_OFFSET };
+        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
     };
     Polar.prototype.arcAttributes = function () {
@@ -107,7 +107,7 @@ var Polar = /** @class */ (function () {
     // Interpolate the arcs in data space.
     Polar.prototype.arcTween = function (d, i) {
         var _this = this;
-        var old = this.previous.data || [];
+        var old = this.previousComputed.data || [];
         var s0;
         var e0;
         if (old[i]) {
@@ -139,17 +139,17 @@ var Polar = /** @class */ (function () {
         return function (t) { return _this.computed.arc(f(t)); };
     };
     Polar.prototype.centerDisplayString = function () {
-        return this.computed.inner > 0 ? this.computed.total.toString() : "";
+        return this.computed.rInner > 0 ? this.computed.total.toString() : "";
     };
     // Data computation / preparation
     Polar.prototype.compute = function () {
-        this.previous = this.computed;
+        this.previousComputed = this.computed;
         var d = {
             layout: Utils.layout(this.angleValue, ANGLE_RANGE),
             total: Utils.computeTotal(this.data, this.value)
         };
-        // data should not become part of this.previous in first computation
-        this.previous = fp_1.defaults(d)(this.previous);
+        // data should not become part of this.previousComputed in first computation
+        this.previousComputed = fp_1.defaults(d)(this.previousComputed);
         Utils.calculatePercentages(this.data, this.angleValue, d.total);
         var data = d.layout(this.data);
         this.computed = __assign({}, d, this.computeArcs(__assign({ data: data }, d)), { data: data });
@@ -159,21 +159,21 @@ var Polar = /** @class */ (function () {
     };
     Polar.prototype.computeArcs = function (computed) {
         var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, r = this.computeOuter(drawingDims), inner = this.computeInner(computed.data, r), rHover = this.hoverOuter(r), innerHover = Math.max(inner - 1, 0);
+            .drawingContainerDims, r = this.computeOuterRadius(drawingDims), rInner = this.computeInnerRadius(computed.data, r), rHover = this.hoverOuterRadius(r), rInnerHover = Math.max(rInner - 1, 0);
         return {
             r: r,
-            inner: inner,
+            rInner: rInner,
             rHover: rHover,
-            innerHover: innerHover,
+            rInnerHover: rInnerHover,
             arc: d3_shape_1.arc()
-                .innerRadius(inner)
+                .innerRadius(rInner)
                 .outerRadius(r),
             arcOver: d3_shape_1.arc()
-                .innerRadius(innerHover)
+                .innerRadius(rInnerHover)
                 .outerRadius(rHover)
         };
     };
-    Polar.prototype.computeOuter = function (drawingDims, scaleFactor) {
+    Polar.prototype.computeOuterRadius = function (drawingDims, scaleFactor) {
         var _this = this;
         if (scaleFactor === void 0) { scaleFactor = 1; }
         var domainMax = fp_1.max(fp_1.map(function (datum) { return _this.value(datum); })(this.data));
@@ -185,7 +185,7 @@ var Polar = /** @class */ (function () {
             .domain([0, domainMax]);
         return function (d) { return scale(_this.value(d)) * scaleFactor; };
     };
-    Polar.prototype.computeInner = function (data, outerRadius) {
+    Polar.prototype.computeInnerRadius = function (data, outerRadius) {
         var options = this.state.current.get("config");
         var minWidth = this.minSegmentWidth || MIN_SEGMENT_WIDTH;
         var maxWidth = options.maxWidth;
@@ -194,7 +194,7 @@ var Polar = /** @class */ (function () {
         var width = minOuterRadius - options.minInnerRadius;
         return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth);
     };
-    Polar.prototype.hoverOuter = function (radius) {
+    Polar.prototype.hoverOuterRadius = function (radius) {
         return function (d) { return radius(d) + 1; };
     };
     // Event listeners / handlers

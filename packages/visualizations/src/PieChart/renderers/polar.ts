@@ -41,7 +41,7 @@ class Polar implements Renderer {
   private el: D3Selection
   private events: EventBus
   private minSegmentWidth: number
-  private previous: Partial<ComputedData>
+  private previousComputed: Partial<ComputedData>
   key: RendererAccessor<string>
   state: State
   type: "donut" | "polar" | "gauge" = "polar"
@@ -106,7 +106,7 @@ class Polar implements Renderer {
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration, this.fitToCanvas.bind(this))
     setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
     // Total / center text
-    const options = { minTotalFontSize, innerRadius: this.computed.inner, yOffset: TOTAL_Y_OFFSET }
+    const options = { minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
@@ -149,7 +149,7 @@ class Polar implements Renderer {
 
   // Interpolate the arcs in data space.
   private arcTween(d: ComputedDatum, i: number): (t: number) => string {
-    const old: any = this.previous.data || []
+    const old: any = this.previousComputed.data || []
     let s0: number
     let e0: number
     if (old[i]) {
@@ -183,20 +183,20 @@ class Polar implements Renderer {
   }
 
   private centerDisplayString(): string {
-    return this.computed.inner > 0 ? this.computed.total.toString() : ""
+    return this.computed.rInner > 0 ? this.computed.total.toString() : ""
   }
 
   // Data computation / preparation
   private compute(): void {
-    this.previous = this.computed
+    this.previousComputed = this.computed
 
     const d: ComputedInitial = {
       layout: Utils.layout(this.angleValue, ANGLE_RANGE),
       total: Utils.computeTotal(this.data, this.value)
     }
 
-    // data should not become part of this.previous in first computation
-    this.previous = defaults(d)(this.previous)
+    // data should not become part of this.previousComputed in first computation
+    this.previousComputed = defaults(d)(this.previousComputed)
 
     Utils.calculatePercentages(this.data, this.angleValue, d.total)
 
@@ -215,25 +215,25 @@ class Polar implements Renderer {
   private computeArcs(computed: Partial<ComputedData>): ComputedArcs {
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
         .drawingContainerDims,
-      r: any = this.computeOuter(drawingDims),
-      inner: any = this.computeInner(computed.data, r),
-      rHover: number = this.hoverOuter(r),
-      innerHover: number = Math.max(inner - 1, 0)
+      r: any = this.computeOuterRadius(drawingDims),
+      rInner: any = this.computeInnerRadius(computed.data, r),
+      rHover: number = this.hoverOuterRadius(r),
+      rInnerHover: number = Math.max(rInner - 1, 0)
     return {
       r,
-      inner,
+      rInner,
       rHover,
-      innerHover,
+      rInnerHover,
       arc: d3Arc()
-        .innerRadius(inner)
+        .innerRadius(rInner)
         .outerRadius(r),
       arcOver: d3Arc()
-        .innerRadius(innerHover)
+        .innerRadius(rInnerHover)
         .outerRadius(rHover)
     }
   }
 
-  private computeOuter(drawingDims: { width: number; height: number }, scaleFactor: number = 1) {
+  private computeOuterRadius(drawingDims: { width: number; height: number }, scaleFactor: number = 1) {
     const domainMax: number = max(map((datum: Datum): number => this.value(datum))(this.data))
     const scale: any = d3ScaleSqrt()
       .range([
@@ -244,7 +244,7 @@ class Polar implements Renderer {
     return (d: Datum): number => scale(this.value(d)) * scaleFactor
   }
 
-  private computeInner(data: ComputedDatum[], outerRadius: (d: Datum) => number): number {
+  private computeInnerRadius(data: ComputedDatum[], outerRadius: (d: Datum) => number): number {
     const options: PieChartConfig = this.state.current.get("config")
     const minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
     const maxWidth: number = options.maxWidth
@@ -254,7 +254,7 @@ class Polar implements Renderer {
     return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth)
   }
 
-  private hoverOuter(radius: any): any {
+  private hoverOuterRadius(radius: any): any {
     return (d: Datum): number => radius(d) + 1
   }
 

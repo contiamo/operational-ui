@@ -117,8 +117,8 @@ export interface ComputedInitial {
 export interface ComputedArcs {
   arc: Arc<any, any>
   arcOver: Arc<any, any>
-  inner: number
-  innerHover: number
+  rInner: number
+  rInnerHover: number
   r: number
   rHover: number
 }

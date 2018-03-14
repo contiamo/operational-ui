@@ -38,7 +38,7 @@ class Gauge implements Renderer {
   private el: D3Selection
   private events: EventBus
   private extent: string
-  private previous: Partial<ComputedData>
+  private previousComputed: Partial<ComputedData>
   private target: number
   private total: number
   key: RendererAccessor<string>
@@ -105,7 +105,7 @@ class Gauge implements Renderer {
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
     setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
     // Total / center text
-    const options = { minTotalFontSize, innerRadius: this.computed.inner, yOffset: this.totalYOffset() }
+    const options = { minTotalFontSize, innerRadius: this.computed.rInner, yOffset: this.totalYOffset() }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
     // Comparison line
     this.updateComparison()
@@ -142,7 +142,7 @@ class Gauge implements Renderer {
       old =
         filter((datapoint: ComputedDatum): boolean => {
           return !datapoint.data.unfilled
-        })(this.previous.data) || []
+        })(this.previousComputed.data) || []
 
       if (old[i]) {
         s0 = old[i].startAngle
@@ -161,11 +161,11 @@ class Gauge implements Renderer {
     } else {
       old = find((datapoint: ComputedDatum): boolean => {
         return datapoint.data.unfilled
-      })(this.previous.data)
+      })(this.previousComputed.data)
       if (old) {
         s0 = old.startAngle
         e0 = old.endAngle
-      } else if (!this.previous.data) {
+      } else if (!this.previousComputed.data) {
         s0 = angleRange[0]
         e0 = angleRange[1]
       } else {
@@ -174,11 +174,16 @@ class Gauge implements Renderer {
       }
     }
 
-    const innerRadius: number = this.previous.inner || this.computed.inner
-    const outerRadius: number = this.previous.r || this.computed.r
+    const innerRadius: number = this.previousComputed.rInner || this.computed.rInner
+    const outerRadius: number = this.previousComputed.r || this.computed.r
     const f = interpolateObject(
       { innerRadius, outerRadius, endAngle: e0, startAngle: s0 },
-      { innerRadius: this.computed.inner, outerRadius: this.computed.r, endAngle: d.endAngle, startAngle: d.startAngle }
+      {
+        innerRadius: this.computed.rInner,
+        outerRadius: this.computed.r,
+        endAngle: d.endAngle,
+        startAngle: d.startAngle
+      }
     )
     return (t: number): string => this.computed.arc(f(t))
   }
@@ -197,10 +202,14 @@ class Gauge implements Renderer {
     const yInner = (d: Object<number>): number => -d.inner * Math.sin(angle(d))
     const path = (d: Object<number>): string =>
       `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`
-    const oldValue: number = this.previous.comparison ? this.value(this.previous.comparison) : 0
+    const oldValue: number = this.previousComputed.comparison ? this.value(this.previousComputed.comparison) : 0
     const f = interpolateObject(
-      { inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue },
-      { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) }
+      {
+        inner: this.previousComputed.rInner || this.computed.rInner,
+        r: this.previousComputed.r || this.computed.r,
+        value: oldValue
+      },
+      { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) }
     )
     return (t: number): string => path(f(t))
   }
@@ -233,7 +242,7 @@ class Gauge implements Renderer {
 
   // Data computation / preparation
   private compute(): void {
-    this.previous = this.computed
+    this.previousComputed = this.computed
     this.total = Utils.computeTotal(this.data, this.value)
 
     this.fillGaugeExtent()
@@ -248,8 +257,8 @@ class Gauge implements Renderer {
       target: this.target
     }
 
-    // data should not become part of this.previous in first computation
-    this.previous = defaults(d)(this.previous)
+    // data should not become part of this.previousComputed in first computation
+    this.previousComputed = defaults(d)(this.previousComputed)
 
     Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.target)
 
@@ -301,29 +310,29 @@ class Gauge implements Renderer {
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
         .drawingContainerDims,
       outerBorderMargin: number = this.state.current.get("config").outerBorderMargin,
-      r: number = this.computeOuter(drawingDims, outerBorderMargin),
-      inner: number = this.computeInner(r),
+      r: number = this.computeOuterRadius(drawingDims, outerBorderMargin),
+      rInner: number = this.computeInnerRadius(r),
       rHover: number = r + 1,
-      innerHover: number = Math.max(inner - 1, 0)
+      rInnerHover: number = Math.max(rInner - 1, 0)
     return {
       r,
-      inner,
+      rInner,
       rHover,
-      innerHover,
+      rInnerHover,
       arc: d3Arc(),
       arcOver: d3Arc()
-        .innerRadius(innerHover)
+        .innerRadius(rInnerHover)
         .outerRadius(rHover)
     }
   }
 
-  private computeOuter(drawingDims: { width: number; height: number }, margin: number): number {
+  private computeOuterRadius(drawingDims: { width: number; height: number }, margin: number): number {
     return this.extent === "full"
       ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
       : Math.min(drawingDims.width / 2, drawingDims.height) - margin
   }
 
-  private computeInner(outerRadius: any): number {
+  private computeInnerRadius(outerRadius: any): number {
     const config: PieChartConfig = this.state.current.get("config")
     const width: number = outerRadius - config.minInnerRadius
     // If there isn't enough space, don't render inner circle

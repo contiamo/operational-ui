@@ -199,7 +199,7 @@ export const layout = (valueAccessor: Accessor<any, number>, angleRange: [number
 
 export const removeArcTween = (computed: ComputedData, angleRange: [number, number]) => {
   return (d: ComputedDatum, i: number): ((t: number) => string) => {
-    const innerRadius: number = computed.inner
+    const innerRadius: number = computed.rInner
     const outerRadius: number = computed.r
     const f = interpolateObject(
       { endAngle: d.endAngle, startAngle: d.startAngle },

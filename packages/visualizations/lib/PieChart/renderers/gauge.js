@@ -71,7 +71,7 @@ var Gauge = /** @class */ (function () {
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
         d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
         // Total / center text
-        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.inner, yOffset: this.totalYOffset() };
+        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: this.totalYOffset() };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
         // Comparison line
         this.updateComparison();
@@ -103,7 +103,7 @@ var Gauge = /** @class */ (function () {
             old =
                 fp_1.filter(function (datapoint) {
                     return !datapoint.data.unfilled;
-                })(this.previous.data) || [];
+                })(this.previousComputed.data) || [];
             if (old[i]) {
                 s0 = old[i].startAngle;
                 e0 = old[i].endAngle;
@@ -125,12 +125,12 @@ var Gauge = /** @class */ (function () {
         else {
             old = fp_1.find(function (datapoint) {
                 return datapoint.data.unfilled;
-            })(this.previous.data);
+            })(this.previousComputed.data);
             if (old) {
                 s0 = old.startAngle;
                 e0 = old.endAngle;
             }
-            else if (!this.previous.data) {
+            else if (!this.previousComputed.data) {
                 s0 = angleRange[0];
                 e0 = angleRange[1];
             }
@@ -139,9 +139,14 @@ var Gauge = /** @class */ (function () {
                 e0 = angleRange[1];
             }
         }
-        var innerRadius = this.previous.inner || this.computed.inner;
-        var outerRadius = this.previous.r || this.computed.r;
-        var f = d3_interpolate_1.interpolateObject({ innerRadius: innerRadius, outerRadius: outerRadius, endAngle: e0, startAngle: s0 }, { innerRadius: this.computed.inner, outerRadius: this.computed.r, endAngle: d.endAngle, startAngle: d.startAngle });
+        var innerRadius = this.previousComputed.rInner || this.computed.rInner;
+        var outerRadius = this.previousComputed.r || this.computed.r;
+        var f = d3_interpolate_1.interpolateObject({ innerRadius: innerRadius, outerRadius: outerRadius, endAngle: e0, startAngle: s0 }, {
+            innerRadius: this.computed.rInner,
+            outerRadius: this.computed.r,
+            endAngle: d.endAngle,
+            startAngle: d.startAngle
+        });
         return function (t) { return _this.computed.arc(f(t)); };
     };
     Gauge.prototype.lineTween = function (comparison) {
@@ -161,8 +166,12 @@ var Gauge = /** @class */ (function () {
         var path = function (d) {
             return "M" + [xInner(d), yInner(d)].join(",") + "L" + [xOuter(d), yOuter(d)].join(",");
         };
-        var oldValue = this.previous.comparison ? this.value(this.previous.comparison) : 0;
-        var f = d3_interpolate_1.interpolateObject({ inner: this.previous.inner || this.computed.inner, r: this.previous.r || this.computed.r, value: oldValue }, { inner: this.computed.inner, r: this.computed.r, value: this.value(comparison) });
+        var oldValue = this.previousComputed.comparison ? this.value(this.previousComputed.comparison) : 0;
+        var f = d3_interpolate_1.interpolateObject({
+            inner: this.previousComputed.rInner || this.computed.rInner,
+            r: this.previousComputed.r || this.computed.r,
+            value: oldValue
+        }, { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) });
         return function (t) { return path(f(t)); };
     };
     Gauge.prototype.centerDisplayString = function () {
@@ -187,7 +196,7 @@ var Gauge = /** @class */ (function () {
     };
     // Data computation / preparation
     Gauge.prototype.compute = function () {
-        this.previous = this.computed;
+        this.previousComputed = this.computed;
         this.total = Utils.computeTotal(this.data, this.value);
         this.fillGaugeExtent();
         if (!this.target) {
@@ -198,8 +207,8 @@ var Gauge = /** @class */ (function () {
             total: this.total,
             target: this.target
         };
-        // data should not become part of this.previous in first computation
-        this.previous = fp_1.defaults(d)(this.previous);
+        // data should not become part of this.previousComputed in first computation
+        this.previousComputed = fp_1.defaults(d)(this.previousComputed);
         Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.target);
         this.computed = __assign({}, d, this.computeArcs(d), { data: d.layout(this.data), comparison: this.comparison });
     };
@@ -240,24 +249,24 @@ var Gauge = /** @class */ (function () {
     };
     Gauge.prototype.computeArcs = function (computed) {
         var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, outerBorderMargin = this.state.current.get("config").outerBorderMargin, r = this.computeOuter(drawingDims, outerBorderMargin), inner = this.computeInner(r), rHover = r + 1, innerHover = Math.max(inner - 1, 0);
+            .drawingContainerDims, outerBorderMargin = this.state.current.get("config").outerBorderMargin, r = this.computeOuterRadius(drawingDims, outerBorderMargin), rInner = this.computeInnerRadius(r), rHover = r + 1, rInnerHover = Math.max(rInner - 1, 0);
         return {
             r: r,
-            inner: inner,
+            rInner: rInner,
             rHover: rHover,
-            innerHover: innerHover,
+            rInnerHover: rInnerHover,
             arc: d3_shape_1.arc(),
             arcOver: d3_shape_1.arc()
-                .innerRadius(innerHover)
+                .innerRadius(rInnerHover)
                 .outerRadius(rHover)
         };
     };
-    Gauge.prototype.computeOuter = function (drawingDims, margin) {
+    Gauge.prototype.computeOuterRadius = function (drawingDims, margin) {
         return this.extent === "full"
             ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
             : Math.min(drawingDims.width / 2, drawingDims.height) - margin;
     };
-    Gauge.prototype.computeInner = function (outerRadius) {
+    Gauge.prototype.computeInnerRadius = function (outerRadius) {
         var config = this.state.current.get("config");
         var width = outerRadius - config.minInnerRadius;
         // If there isn't enough space, don't render inner circle

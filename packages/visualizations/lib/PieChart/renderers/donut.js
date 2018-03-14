@@ -72,7 +72,7 @@ var Donut = /** @class */ (function () {
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
         d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
         // Total / center text
-        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.inner, yOffset: TOTAL_Y_OFFSET };
+        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
     };
     Donut.prototype.arcAttributes = function () {
@@ -84,7 +84,7 @@ var Donut = /** @class */ (function () {
     // Interpolate the arcs in data space.
     Donut.prototype.arcTween = function (d) {
         var _this = this;
-        var previousData = this.previous.data || [], old = fp_1.find(function (datum) { return datum.index === d.index; })(previousData), previous = fp_1.find(function (datum) { return datum.index === d.index - 1; })(previousData), last = previousData[previousData.length - 1];
+        var previousData = this.previousComputed.data || [], old = fp_1.find(function (datum) { return datum.index === d.index; })(previousData), previous = fp_1.find(function (datum) { return datum.index === d.index - 1; })(previousData), last = previousData[previousData.length - 1];
         var s0;
         var e0;
         if (old) {
@@ -103,9 +103,14 @@ var Donut = /** @class */ (function () {
             s0 = 0;
             e0 = 0;
         }
-        var innerRadius = this.previous.inner || this.computed.inner;
-        var outerRadius = this.previous.r || this.computed.r;
-        var f = d3_interpolate_1.interpolateObject({ innerRadius: innerRadius, outerRadius: outerRadius, endAngle: e0, startAngle: s0 }, { innerRadius: this.computed.inner, outerRadius: this.computed.r, endAngle: d.endAngle, startAngle: d.startAngle });
+        var innerRadius = this.previousComputed.rInner || this.computed.rInner;
+        var outerRadius = this.previousComputed.r || this.computed.r;
+        var f = d3_interpolate_1.interpolateObject({ innerRadius: innerRadius, outerRadius: outerRadius, endAngle: e0, startAngle: s0 }, {
+            innerRadius: this.computed.rInner,
+            outerRadius: this.computed.r,
+            endAngle: d.endAngle,
+            startAngle: d.startAngle
+        });
         return function (t) { return _this.computed.arc(f(t)); };
     };
     Donut.prototype.removeArcTween = function (d, i) {
@@ -117,17 +122,17 @@ var Donut = /** @class */ (function () {
         return function (t) { return _this.computed.arc(f(t)); };
     };
     Donut.prototype.centerDisplayString = function () {
-        return this.computed.inner > 0 ? this.computed.total.toString() : "";
+        return this.computed.rInner > 0 ? this.computed.total.toString() : "";
     };
     // Data computation / preparation
     Donut.prototype.compute = function () {
-        this.previous = this.computed;
+        this.previousComputed = this.computed;
         var d = {
             layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
             total: Utils.computeTotal(this.data, this.value)
         };
-        // data should not become part of this.previous in first computation
-        this.previous = fp_1.defaults(d)(this.previous);
+        // data should not become part of this.previousComputed in first computation
+        this.previousComputed = fp_1.defaults(d)(this.previousComputed);
         Utils.calculatePercentages(this.data, this.angleValue.bind(this), d.total);
         this.computed = __assign({}, d, this.computeArcs(d), { data: d.layout(this.data) });
     };
@@ -136,23 +141,23 @@ var Donut = /** @class */ (function () {
     };
     Donut.prototype.computeArcs = function (computed) {
         var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, r = this.computeOuter(drawingDims), inner = this.computeInner(r), rHover = r + 1, innerHover = Math.max(inner - 1, 0);
+            .drawingContainerDims, r = this.computeOuterRadius(drawingDims), rInner = this.computeInnerRadius(r), rHover = r + 1, rInnerHover = Math.max(rInner - 1, 0);
         return {
             r: r,
-            inner: inner,
+            rInner: rInner,
             rHover: rHover,
-            innerHover: innerHover,
+            rInnerHover: rInnerHover,
             arc: d3_shape_1.arc(),
             arcOver: d3_shape_1.arc()
-                .innerRadius(innerHover)
+                .innerRadius(rInnerHover)
                 .outerRadius(rHover)
         };
     };
-    Donut.prototype.computeOuter = function (drawingDims) {
+    Donut.prototype.computeOuterRadius = function (drawingDims) {
         var outerBorderMargin = this.state.current.get("config").outerBorderMargin;
         return Math.min(drawingDims.width, drawingDims.height) / 2 - outerBorderMargin;
     };
-    Donut.prototype.computeInner = function (outerRadius) {
+    Donut.prototype.computeInnerRadius = function (outerRadius) {
         var config = this.state.current.get("config");
         var width = outerRadius - config.minInnerRadius;
         // If there isn't enough space, don't render inner circle

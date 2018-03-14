@@ -10,7 +10,7 @@ declare class Gauge implements Renderer {
     private el;
     private events;
     private extent;
-    private previous;
+    private previousComputed;
     private target;
     private total;
     key: RendererAccessor<string>;
@@ -36,8 +36,8 @@ declare class Gauge implements Renderer {
     private fillGaugeExtent();
     private runningTotal();
     private computeArcs(computed);
-    private computeOuter(drawingDims, margin);
-    private computeInner(outerRadius);
+    private computeOuterRadius(drawingDims, margin);
+    private computeInnerRadius(outerRadius);
     private onMouseOver(d);
     private updateElementHover(datapoint);
     private highlightElement(key);
