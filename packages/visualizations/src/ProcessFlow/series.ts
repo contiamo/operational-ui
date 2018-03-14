@@ -3,14 +3,14 @@ import Renderer from "./renderer"
 import { Data, EventBus, Object, SeriesEl, State, StateWriter } from "./typings"
 
 class Series {
-  data: Data
-  dataHandler: DataHandler
-  drawn: boolean
-  el: SeriesEl
-  events: EventBus
-  renderer: Renderer
-  state: State
-  stateWriter: StateWriter
+  private data: Data
+  private dataHandler: DataHandler
+  private drawn: boolean
+  private el: SeriesEl
+  private events: EventBus
+  private renderer: Renderer
+  private state: State
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl) {
     this.state = state

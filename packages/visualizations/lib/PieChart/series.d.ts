@@ -1,14 +1,14 @@
-import { Data, EventBus, Renderer as RendererInterface, RendererOptions, SeriesEl, State, StateWriter } from "./typings";
+import { EventBus, SeriesEl, State, StateWriter } from "./typings";
 declare class Series {
-    attributes: any;
-    data: Data;
-    drawn: boolean;
-    el: SeriesEl;
-    events: EventBus;
-    renderAs: () => RendererOptions[];
-    renderer: RendererInterface;
-    state: State;
-    stateWriter: StateWriter;
+    private attributes;
+    private data;
+    private drawn;
+    private el;
+    private events;
+    private renderAs;
+    private renderer;
+    private state;
+    private stateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl);
     assignData(): void;
     private prepareData();

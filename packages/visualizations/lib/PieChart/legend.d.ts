@@ -1,9 +1,9 @@
 import { D3Selection, EventBus, Legend, State, StateWriter } from "./typings";
 declare class PieChartLegend implements Legend {
-    events: EventBus;
-    legend: D3Selection;
-    state: State;
-    stateWriter: StateWriter;
+    private events;
+    private legend;
+    private state;
+    private stateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
     draw(): void;
     private updateComparisonLegend();

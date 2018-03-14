@@ -18,10 +18,10 @@ const dataName = (d: Datum): string => d.data.name,
   dataValue = (d: Datum): number => d.value
 
 class SunburstFocus implements Focus {
-  el: SeriesEl
-  state: State
-  stateWriter: StateWriter
-  events: EventBus
+  private el: SeriesEl
+  private state: State
+  private stateWriter: StateWriter
+  private events: EventBus
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state

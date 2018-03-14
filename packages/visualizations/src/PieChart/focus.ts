@@ -7,11 +7,11 @@ import { D3Selection, EventBus, Focus, HoverPayload, Object, SeriesEl, State, St
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
 class PieChartFocus implements Focus {
-  el: SeriesEl
-  componentFocus: ComponentFocus
-  state: State
-  stateWriter: StateWriter
-  events: EventBus
+  private el: SeriesEl
+  private componentFocus: ComponentFocus
+  private state: State
+  private stateWriter: StateWriter
+  private events: EventBus
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>) {
     this.state = state

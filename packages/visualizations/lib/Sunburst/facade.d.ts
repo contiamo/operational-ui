@@ -1,15 +1,12 @@
-import SunburstCanvas from "./canvas";
-import StateHandler from "../utils/state_handler";
-import EventEmitter from "../utils/event_bus";
-import { Accessors, Components, Facade, RawData, SunburstConfig } from "./typings";
+import { Accessors, Facade, RawData, SunburstConfig } from "./typings";
 declare class SunburstFacade implements Facade {
-    __disposed: boolean;
-    canvas: SunburstCanvas;
-    components: Components;
-    context: Element;
-    customColorAccessor: boolean;
-    events: EventEmitter;
-    state: StateHandler<SunburstConfig, RawData>;
+    private __disposed;
+    private canvas;
+    private components;
+    private context;
+    private customColorAccessor;
+    private events;
+    private state;
     constructor(context: Element);
     private insertState();
     private initialConfig();

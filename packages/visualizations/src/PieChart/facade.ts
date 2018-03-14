@@ -21,13 +21,13 @@ import {
 } from "./typings"
 
 class PieChartFacade implements Facade {
-  __disposed: boolean = false
-  canvas: PieChartCanvas
-  components: Components
-  context: Element
-  events: EventEmitter
-  series: Series
-  state: StateHandler<PieChartConfig, Data>
+  private __disposed: boolean = false
+  private canvas: PieChartCanvas
+  private components: Components
+  private context: Element
+  private events: EventEmitter
+  private series: Series
+  private state: StateHandler<PieChartConfig, Data>
 
   constructor(context: Element) {
     this.context = context

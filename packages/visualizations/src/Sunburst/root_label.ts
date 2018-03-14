@@ -2,10 +2,10 @@ import { ClickPayload, D3Selection, Datum, EventBus, Object, State, StateWriter,
 import Events from "../utils/event_catalog"
 
 class RootLabel {
-  el: D3Selection
-  events: EventBus
-  state: State
-  stateWriter: StateWriter
+  private el: D3Selection
+  private events: EventBus
+  private state: State
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state

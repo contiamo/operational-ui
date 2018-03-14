@@ -18,14 +18,14 @@ import {
 } from "./typings"
 
 class DataHandler {
-  journeys: Journey[]
-  nodes: TNode[]
-  links: TLink[]
-  nodeAccessors: NodeAccessors
-  linkAccessors: LinkAccessors
-  state: State
-  stateWriter: StateWriter
-  layout: Layout
+  private journeys: Journey[]
+  private nodes: TNode[]
+  private links: TLink[]
+  private nodeAccessors: NodeAccessors
+  private linkAccessors: LinkAccessors
+  private state: State
+  private stateWriter: StateWriter
+  private layout: Layout
 
   constructor(state: State, stateWriter: StateWriter) {
     this.state = state

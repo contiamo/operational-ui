@@ -75,11 +75,11 @@ const nodeShapeOptions: Object<Object<any>> = {
 }
 
 class Nodes implements Renderer {
-  config: ProcessFlowConfig
-  data: TNode[]
-  el: SeriesEl
-  events: EventBus
-  state: State
+  private config: ProcessFlowConfig
+  private data: TNode[]
+  private el: SeriesEl
+  private events: EventBus
+  private state: State
 
   constructor(state: State, events: EventBus, el: SeriesEl) {
     this.state = state

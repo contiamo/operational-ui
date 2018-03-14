@@ -1,9 +1,9 @@
-import { D3Selection, EventBus, Focus, SeriesEl, State, StateWriter } from "./typings";
+import { D3Selection, EventBus, Focus, State, StateWriter } from "./typings";
 declare class SunburstFocus implements Focus {
-    el: SeriesEl;
-    state: State;
-    stateWriter: StateWriter;
-    events: EventBus;
+    private el;
+    private state;
+    private stateWriter;
+    private events;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
     private onElementHover(payload);
     private percentageString(datum);

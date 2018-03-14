@@ -18,10 +18,10 @@ import {
 } from "./typings"
 
 class PieChartLegend implements Legend {
-  events: EventBus
-  legend: D3Selection
-  state: State
-  stateWriter: StateWriter
+  private events: EventBus
+  private legend: D3Selection
+  private state: State
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state

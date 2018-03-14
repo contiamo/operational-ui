@@ -1,16 +1,12 @@
-import ProcessFlowCanvas from "./canvas";
-import Series from "./series";
-import StateHandler from "../utils/state_handler";
-import EventEmitter from "../utils/event_bus";
-import { Accessors, Components, Facade, InputData, ProcessFlowConfig } from "./typings";
+import { Accessors, Facade, InputData, ProcessFlowConfig } from "./typings";
 declare class ProcessFlowFacade implements Facade {
-    __disposed: boolean;
-    canvas: ProcessFlowCanvas;
-    components: Components;
-    context: Element;
-    events: EventEmitter;
-    series: Series;
-    state: StateHandler<ProcessFlowConfig, InputData>;
+    private __disposed;
+    private canvas;
+    private components;
+    private context;
+    private events;
+    private series;
+    private state;
     constructor(context: Element);
     private insertState();
     private initialConfig();

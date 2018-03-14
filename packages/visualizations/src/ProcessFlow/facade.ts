@@ -21,13 +21,13 @@ import {
 } from "./typings"
 
 class ProcessFlowFacade implements Facade {
-  __disposed: boolean = false
-  canvas: ProcessFlowCanvas
-  components: Components
-  context: Element
-  events: EventEmitter
-  series: Series
-  state: StateHandler<ProcessFlowConfig, InputData>
+  private __disposed: boolean = false
+  private canvas: ProcessFlowCanvas
+  private components: Components
+  private context: Element
+  private events: EventEmitter
+  private series: Series
+  private state: StateHandler<ProcessFlowConfig, InputData>
 
   constructor(context: Element) {
     this.context = context

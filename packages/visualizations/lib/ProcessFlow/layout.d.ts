@@ -1,7 +1,7 @@
 import { State, TNode } from "./typings";
 declare class Layout {
+    private state;
     nodes: TNode[];
-    state: State;
     constructor(state: State);
     computeLayout(nodes: TNode[]): void;
     private computeNodeYPositions();

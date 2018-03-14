@@ -5,14 +5,14 @@ import * as styles from "../utils/styles"
 import * as localStyles from "./styles"
 
 class SunburstCanvas implements Canvas {
-  breadcrumb: D3Selection
-  chartContainer: D3Selection
-  el: SeriesEl
-  events: EventBus
-  rootLabel: D3Selection
-  protected state: State
-  protected elMap: Object<D3Selection> = {}
-  stateWriter: StateWriter
+  private breadcrumb: D3Selection
+  private chartContainer: D3Selection
+  private el: SeriesEl
+  private elMap: Object<D3Selection> = {}
+  private events: EventBus
+  private rootLabel: D3Selection
+  private state: State
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {
     this.state = state

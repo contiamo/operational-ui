@@ -1,11 +1,11 @@
 import "d3-transition";
-import { EventBus, FocusElement, LinkSelection, ProcessFlowConfig, Renderer, SeriesEl, State, TLink } from "../typings";
+import { EventBus, FocusElement, LinkSelection, Renderer, SeriesEl, State, TLink } from "../typings";
 declare class Links implements Renderer {
-    config: ProcessFlowConfig;
-    data: TLink[];
-    el: SeriesEl;
-    events: EventBus;
-    state: State;
+    private config;
+    private data;
+    private el;
+    private events;
+    private state;
     constructor(state: State, events: EventBus, el: SeriesEl);
     private onMouseOver(d, element);
     private mouseOver(element, d, hideLabel?);

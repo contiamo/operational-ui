@@ -8,11 +8,11 @@ import { withD3Element } from "../utils/d3_utils"
 import * as d3 from "d3-selection"
 
 class Renderer {
-  links: Links
-  nodes: Nodes
-  state: State
-  el: SeriesEl
-  events: EventBus
+  private links: Links
+  private nodes: Nodes
+  private state: State
+  private el: SeriesEl
+  private events: EventBus
 
   constructor(state: State, events: EventBus, el: SeriesEl) {
     this.events = events

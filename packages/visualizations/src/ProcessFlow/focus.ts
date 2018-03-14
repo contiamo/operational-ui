@@ -32,10 +32,10 @@ interface Breakdowns {
 
 // There can only be an element focus in process flow diagrams
 class ProcessFlowFocus implements Focus {
-  el: SeriesEl
-  state: State
-  stateWriter: StateWriter
-  events: EventBus
+  private el: SeriesEl
+  private state: State
+  private stateWriter: StateWriter
+  private events: EventBus
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state

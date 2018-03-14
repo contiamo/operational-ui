@@ -38,11 +38,11 @@ class Donut implements Renderer {
   private drawn: boolean = false
   private el: D3Selection
   private events: EventBus
-  private key: RendererAccessor<string>
   private previous: Partial<ComputedData>
-  private state: State
-  private type: "donut" | "polar" | "gauge" = "donut"
-  private value: RendererAccessor<number>
+  key: RendererAccessor<string>
+  state: State
+  type: "donut" | "polar" | "gauge" = "donut"
+  value: RendererAccessor<number>
 
   constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
     this.state = state

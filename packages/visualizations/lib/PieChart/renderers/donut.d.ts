@@ -1,15 +1,15 @@
 import "d3-transition";
-import { ComputedData, D3Selection, Datum, EventBus, LegendDatum, Object, Partial, Renderer, RendererAccessor, State } from "../typings";
+import { D3Selection, Datum, EventBus, LegendDatum, Object, Renderer, RendererAccessor, State } from "../typings";
 declare class Donut implements Renderer {
-    color: RendererAccessor<string>;
-    computed: ComputedData;
-    currentTranslation: [number, number];
-    data: Datum[];
-    drawn: boolean;
-    el: D3Selection;
-    events: EventBus;
+    private color;
+    private computed;
+    private currentTranslation;
+    private data;
+    private drawn;
+    private el;
+    private events;
+    private previous;
     key: RendererAccessor<string>;
-    previous: Partial<ComputedData>;
     state: State;
     type: "donut" | "polar" | "gauge";
     value: RendererAccessor<number>;

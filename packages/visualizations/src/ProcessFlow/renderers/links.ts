@@ -36,11 +36,11 @@ const path = (link: TLink): string => {
 }
 
 class Links implements Renderer {
-  config: ProcessFlowConfig
-  data: TLink[]
-  el: SeriesEl
-  events: EventBus
-  state: State
+  private config: ProcessFlowConfig
+  private data: TLink[]
+  private el: SeriesEl
+  private events: EventBus
+  private state: State
 
   constructor(state: State, events: EventBus, el: SeriesEl) {
     this.state = state

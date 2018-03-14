@@ -1,13 +1,13 @@
 import { Datum, State, StateWriter } from "./typings";
 declare class DataHandler {
-    color: (d: Datum) => string;
-    data: Datum[];
-    name: (d: Datum) => string;
-    state: State;
-    stateWriter: StateWriter;
+    private color;
+    private data;
+    private name;
+    private state;
+    private stateWriter;
+    private total;
+    private value;
     topNode: Datum;
-    total: number;
-    value: (d: Datum) => number;
     constructor(state: State, stateWriter: StateWriter);
     private assignAccessors();
     prepareData(): Datum[];

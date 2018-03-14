@@ -1,11 +1,11 @@
 import "d3-transition";
-import { EventBus, FocusElement, NodeSelection, ProcessFlowConfig, Renderer, SeriesEl, State, TNode } from "../typings";
+import { EventBus, FocusElement, NodeSelection, Renderer, SeriesEl, State, TNode } from "../typings";
 declare class Nodes implements Renderer {
-    config: ProcessFlowConfig;
-    data: TNode[];
-    el: SeriesEl;
-    events: EventBus;
-    state: State;
+    private config;
+    private data;
+    private el;
+    private events;
+    private state;
     constructor(state: State, events: EventBus, el: SeriesEl);
     private onMouseOver(d, element);
     private mouseOver(element, d, hideLabel?);

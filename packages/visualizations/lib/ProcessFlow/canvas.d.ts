@@ -1,11 +1,11 @@
-import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter } from "./typings";
+import { Canvas, EventBus, State, StateWriter } from "./typings";
 declare class ProcessFlowCanvas implements Canvas {
-    chartContainer: D3Selection;
-    el: SeriesEl;
-    events: EventBus;
-    protected state: State;
-    protected elMap: Object<D3Selection>;
-    stateWriter: StateWriter;
+    private chartContainer;
+    private el;
+    private events;
+    private state;
+    private elMap;
+    private stateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
     private renderChartContainer(context);
     private renderEl();

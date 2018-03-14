@@ -15,15 +15,15 @@ import {
 import { flow, filter, forEach } from "lodash/fp"
 
 class Series {
-  attributes: any
-  data: Data
-  drawn: boolean
-  el: SeriesEl
-  events: EventBus
-  renderAs: () => RendererOptions[]
-  renderer: RendererInterface
-  state: State
-  stateWriter: StateWriter
+  private attributes: any
+  private data: Data
+  private drawn: boolean
+  private el: SeriesEl
+  private events: EventBus
+  private renderAs: () => RendererOptions[]
+  private renderer: RendererInterface
+  private state: State
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl) {
     this.state = state

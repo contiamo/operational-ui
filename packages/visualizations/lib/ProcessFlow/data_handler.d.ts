@@ -1,14 +1,13 @@
-import Layout from "./layout";
-import { Data, Journey, LinkAccessors, NodeAccessors, State, StateWriter, TLink, TNode } from "./typings";
+import { Data, State, StateWriter } from "./typings";
 declare class DataHandler {
-    journeys: Journey[];
-    nodes: TNode[];
-    links: TLink[];
-    nodeAccessors: NodeAccessors;
-    linkAccessors: LinkAccessors;
-    state: State;
-    stateWriter: StateWriter;
-    layout: Layout;
+    private journeys;
+    private nodes;
+    private links;
+    private nodeAccessors;
+    private linkAccessors;
+    private state;
+    private stateWriter;
+    private layout;
     constructor(state: State, stateWriter: StateWriter);
     prepareData(): Data;
     private initializeNodes(nodeAttrs);

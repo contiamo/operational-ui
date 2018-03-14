@@ -33,16 +33,16 @@ const MIN_SEGMENT_WIDTH: number = 5
 const TOTAL_Y_OFFSET: string = "0.35em"
 
 class Polar implements Renderer {
-  color: RendererAccessor<string>
-  computed: ComputedData
-  currentTranslation: [number, number]
-  data: Datum[]
-  drawn: boolean = false
-  el: D3Selection
-  events: EventBus
+  private color: RendererAccessor<string>
+  private computed: ComputedData
+  private currentTranslation: [number, number]
+  private data: Datum[]
+  private drawn: boolean = false
+  private el: D3Selection
+  private events: EventBus
+  private minSegmentWidth: number
+  private previous: Partial<ComputedData>
   key: RendererAccessor<string>
-  minSegmentWidth: number
-  previous: Partial<ComputedData>
   state: State
   type: "donut" | "polar" | "gauge" = "polar"
   value: RendererAccessor<number>

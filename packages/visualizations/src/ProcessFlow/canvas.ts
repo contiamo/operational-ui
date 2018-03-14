@@ -5,12 +5,12 @@ import * as styles from "../utils/styles"
 import { forEach } from "lodash/fp"
 
 class ProcessFlowCanvas implements Canvas {
-  chartContainer: D3Selection
-  el: SeriesEl
-  events: EventBus
-  protected state: State
-  protected elMap: Object<D3Selection> = {}
-  stateWriter: StateWriter
+  private chartContainer: D3Selection
+  private el: SeriesEl
+  private events: EventBus
+  private state: State
+  private elMap: Object<D3Selection> = {}
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {
     this.state = state

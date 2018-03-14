@@ -16,22 +16,22 @@ const arrowPath: string = "M-5 0 L0 -5 L5 0 M-4 -5 L0 -9 L4 -5 M-3 -10 L0 -13 L3
 const spaceForArrow: number = 20
 
 class Renderer {
-  angleScale: any
-  arc: any
-  currentTranslation: [number, number]
-  data: Datum[]
-  dataHandler: DataHandler
-  el: D3Selection
-  events: EventBus
-  mouseOverDatum: Datum
-  previous: Datum[]
-  radiusScale: any
-  radius: number
-  state: State
-  stateWriter: StateWriter
-  topNode: Datum
-  total: number
-  zoomNode: Datum
+  private angleScale: any
+  private arc: any
+  private currentTranslation: [number, number]
+  private data: Datum[]
+  private dataHandler: DataHandler
+  private el: D3Selection
+  private events: EventBus
+  private mouseOverDatum: Datum
+  private previous: Datum[]
+  private radiusScale: any
+  private radius: number
+  private state: State
+  private stateWriter: StateWriter
+  private topNode: Datum
+  private total: number
+  private zoomNode: Datum
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state

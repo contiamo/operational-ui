@@ -1,16 +1,12 @@
-import PieChartCanvas from "./canvas";
-import Series from "./series";
-import StateHandler from "../utils/state_handler";
-import EventEmitter from "../utils/event_bus";
-import { Accessors, Components, Data, Facade, PieChartConfig } from "./typings";
+import { Accessors, Data, Facade, PieChartConfig } from "./typings";
 declare class PieChartFacade implements Facade {
-    __disposed: boolean;
-    canvas: PieChartCanvas;
-    components: Components;
-    context: Element;
-    events: EventEmitter;
-    series: Series;
-    state: StateHandler<PieChartConfig, Data>;
+    private __disposed;
+    private canvas;
+    private components;
+    private context;
+    private events;
+    private series;
+    private state;
     constructor(context: Element);
     private insertState();
     private initialConfig();

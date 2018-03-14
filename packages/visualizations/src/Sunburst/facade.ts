@@ -12,13 +12,13 @@ import { operational } from "@operational/theme"
 import { Accessors, AccessorsObject, Components, Computed, Facade, Object, RawData, SunburstConfig } from "./typings"
 
 class SunburstFacade implements Facade {
-  __disposed: boolean = false
-  canvas: SunburstCanvas
-  components: Components
-  context: Element
-  customColorAccessor: boolean = false
-  events: EventEmitter
-  state: StateHandler<SunburstConfig, RawData>
+  private __disposed: boolean = false
+  private canvas: SunburstCanvas
+  private components: Components
+  private context: Element
+  private customColorAccessor: boolean = false
+  private events: EventEmitter
+  private state: StateHandler<SunburstConfig, RawData>
 
   constructor(context: Element) {
     this.context = context

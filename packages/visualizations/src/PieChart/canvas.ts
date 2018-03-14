@@ -4,14 +4,14 @@ import { Canvas, D3Selection, EventBus, Object, PieChartConfig, SeriesEl, State,
 import * as styles from "../utils/styles"
 
 class PieChartCanvas implements Canvas {
-  drawingContainer: D3Selection
-  protected elements: Object<D3Selection> = {}
-  chartContainer: D3Selection
-  el: SeriesEl
-  events: EventBus
-  protected state: State
-  protected elMap: Object<D3Selection> = {}
-  stateWriter: StateWriter
+  private drawingContainer: D3Selection
+  private elements: Object<D3Selection> = {}
+  private chartContainer: D3Selection
+  private el: SeriesEl
+  private events: EventBus
+  private state: State
+  private elMap: Object<D3Selection> = {}
+  private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {
     this.state = state

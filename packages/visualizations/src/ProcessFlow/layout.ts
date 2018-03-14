@@ -2,8 +2,8 @@ import { filter, find, flow, forEach, get, identity, indexOf, map, reduce, sortB
 import { State, TLink, TNode } from "./typings"
 
 class Layout {
+  private state: State
   nodes: TNode[]
-  state: State
 
   constructor(state: State) {
     this.state = state

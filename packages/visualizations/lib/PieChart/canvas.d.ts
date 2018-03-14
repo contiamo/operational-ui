@@ -1,13 +1,13 @@
-import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter } from "./typings";
+import { Canvas, D3Selection, EventBus, State, StateWriter } from "./typings";
 declare class PieChartCanvas implements Canvas {
-    drawingContainer: D3Selection;
-    protected elements: Object<D3Selection>;
-    chartContainer: D3Selection;
-    el: SeriesEl;
-    events: EventBus;
-    protected state: State;
-    protected elMap: Object<D3Selection>;
-    stateWriter: StateWriter;
+    private drawingContainer;
+    private elements;
+    private chartContainer;
+    private el;
+    private events;
+    private state;
+    private elMap;
+    private stateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
     private renderChartContainer(context);
     private onMouseEnter();

@@ -3,14 +3,14 @@ import { hierarchy as d3Hierarchy, partition as d3Partition, HierarchyNode } fro
 import { filter, forEach, isEmpty, map, reduce } from "lodash/fp"
 
 class DataHandler {
-  color: (d: Datum) => string
-  data: Datum[]
-  name: (d: Datum) => string
-  state: State
-  stateWriter: StateWriter
+  private color: (d: Datum) => string
+  private data: Datum[]
+  private name: (d: Datum) => string
+  private state: State
+  private stateWriter: StateWriter
+  private total: number
+  private value: (d: Datum) => number
   topNode: Datum
-  total: number
-  value: (d: Datum) => number
 
   constructor(state: State, stateWriter: StateWriter) {
     this.state = state

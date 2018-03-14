@@ -38,13 +38,13 @@ class Gauge implements Renderer {
   private el: D3Selection
   private events: EventBus
   private extent: string
-  private key: RendererAccessor<string>
   private previous: Partial<ComputedData>
-  private state: State
   private target: number
   private total: number
-  private type: "donut" | "polar" | "gauge" = "gauge"
-  private value: RendererAccessor<number>
+  key: RendererAccessor<string>
+  state: State
+  type: "donut" | "polar" | "gauge" = "gauge"
+  value: RendererAccessor<number>
 
   constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
     this.state = state
