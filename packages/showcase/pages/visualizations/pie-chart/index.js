@@ -200,8 +200,9 @@ const propDescription = {
     },
     {
       name: "showComponentFocus",
-      description: "Toggle component focus on hover",
-      defaultValue: true,
+      description:
+        "Toggle component focus - if `true`, enables hover and click events on configurable items, in this case series items in legend",
+      defaultValue: false,
       type: "boolean",
       optional: true
     },

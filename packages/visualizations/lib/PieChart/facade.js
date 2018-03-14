@@ -45,7 +45,7 @@ var PieChartFacade = /** @class */ (function () {
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
             palette: theme_1.operational.colors.visualizationPalette,
-            showComponentFocus: true,
+            showComponentFocus: false,
             uid: fp_1.uniqueId("piechart"),
             visualizationName: "piechart",
             width: 500

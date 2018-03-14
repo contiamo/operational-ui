@@ -65,7 +65,7 @@ class PieChartFacade implements Facade {
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
       palette: operational.colors.visualizationPalette,
-      showComponentFocus: true,
+      showComponentFocus: false,
       uid: uniqueId("piechart"),
       visualizationName: "piechart",
       width: 500
