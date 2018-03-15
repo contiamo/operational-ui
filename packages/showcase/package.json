@@ -25,11 +25,12 @@
     "prettier": "1.8.2"
   },
   "dependencies": {
-    "@operational/blocks": "^0.1.0-21",
-    "@operational/components": "^0.1.0-21",
-    "@operational/theme": "^0.1.0-21",
-    "@operational/utils": "^0.1.0-21",
-    "@operational/visualizations": "^0.1.0-21",
+    "@operational/blocks": "^0.1.0-20",
+    "@operational/components": "^0.1.0-20",
+    "@operational/theme": "^0.1.0-20",
+    "@operational/utils": "^0.1.0-20",
+    "@operational/visualizations": "^0.1.0-20",
+    "babel-polyfill": "^6.26.0",
     "component-playground": "^3.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",

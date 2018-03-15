@@ -12,7 +12,7 @@ import Demo from "../components/Demo"
 const TitleBar = glamorous.div(({ theme }) => ({
   label: "showcasetitlebar",
   padding: `${theme.spacing * 1}px 0`,
-  margin: -theme.spacing * 4 / 3,
+  margin: -theme.spacing,
   color: theme.colors.white,
   position: "relative",
   height: 360,

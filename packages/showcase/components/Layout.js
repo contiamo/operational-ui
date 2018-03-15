@@ -83,8 +83,6 @@ export default class Layout extends React.Component {
       <OperationalUI withBaseStyles>
         {!this.state.isClientRendered ? (
           <Spinner css={{ top: "50%", left: "50%", transform: "translate3d(-50%, -50%, 0)", position: "absolute" }} />
-        ) : this.props.noNav ? (
-          <PageContent css={{ height: "100%" }}>{this.props.children}</PageContent>
         ) : (
           <OpLayout
             css={{ gridTemplateColumns: "240px auto", overflow: "hidden", height: "100vh" }}
