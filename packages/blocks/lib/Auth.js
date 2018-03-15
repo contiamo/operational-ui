@@ -9,14 +9,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
@@ -50,7 +42,7 @@ var AuthCard = glamorous_1.default.div(function (_a) {
 var Content = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isEnabled = _a.isEnabled;
     return ({
-        opacity: isEnabled ? 1 : 0.4,
+        opacity: 1,
         pointerEvents: isEnabled ? "all" : "none"
     });
 });
@@ -69,10 +61,6 @@ var InputFields = glamorous_1.default.div(function (_a) {
     return ({
         margin: 1 * theme.spacing + "px 0"
     });
-});
-var ErrorNotice = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { textAlign: "center", color: theme.colors.error }));
 });
 var inputStyle = {
     display: "block",
@@ -95,10 +83,10 @@ var Auth = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement(Container, { css: this.props.css, className: this.props.className },
             React.createElement(AuthCard, null,
-                this.props.processing ? (React.createElement(components_1.Spinner, { css: { position: "absolute", top: "calc(50% - 20px)", left: "calc(50% - 20px)", zIndex: 10000 } })) : null,
+                this.props.processing || this.props.error ? React.createElement(components_1.Progress, { error: this.props.error }) : null,
                 React.createElement(Content, { isEnabled: !this.props.processing },
+                    React.createElement(glamorous_1.default.Div, { css: { textAlign: "center" } }, this.props.icon ? (this.props.icon === String(this.props.icon) ? (React.createElement(components_1.Icon, { name: this.props.icon, size: 48 })) : (this.props.icon)) : null),
                     this.props.title ? (React.createElement(components_1.TitleType, { css: { textAlign: "center", margin: 0 } }, this.props.title)) : null,
-                    this.props.error ? React.createElement(ErrorNotice, null, this.props.error) : null,
                     React.createElement(InputFields, null,
                         isStringValue(this.props.username) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
                                 _this.props.onChange &&

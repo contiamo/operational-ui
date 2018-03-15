@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { css } from "glamor"
 import { Theme } from "@operational/theme"
+import { lighten } from "@operational/utils"
 
 import Icon from "./Icon"
 
@@ -22,7 +23,8 @@ const Container = glamorous.div(
   {
     label: "progress",
     width: "100%",
-    overflow: "hidden",
+    overflowX: "hidden",
+    textAlign: "center",
     top: 0,
     left: 0,
     position: "absolute"
@@ -44,7 +46,7 @@ const fillProgress = css.keyframes({
 
 const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean }) => ({
   width: "100%",
-  height: 2,
+  height: 3,
   backgroundColor: theme.colors.info,
   ...isError
     ? {
@@ -56,16 +58,16 @@ const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean
 }))
 
 const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  minWidth: 160,
   ...theme.typography.body,
+  minWidth: 160,
+  maxWidth: 480,
   padding: `${theme.spacing / 6}px ${theme.spacing / 2}px`,
-  position: "absolute",
   borderBottomLeftRadius: 2,
   borderBottomRightRadius: 2,
-  top: 2,
-  left: "50%",
+  display: "inline-block",
+  position: "relative",
+  zIndex: theme.baseZIndex + 301,
   textAlign: "center",
-  transform: "translate3d(-50%, 0, 0)",
   backgroundColor: theme.colors.error,
   color: theme.colors.white
 }))
