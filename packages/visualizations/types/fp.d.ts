@@ -150,6 +150,7 @@ declare namespace fp {
 
     all: any
     any: any
+    assign: any
     bind: any
     compact: any
     defaults: any
@@ -178,6 +179,7 @@ declare namespace fp {
     merge: any
     min: any
     pluck: any
+    remove: any
     size: any
     some: any
     tail: any
