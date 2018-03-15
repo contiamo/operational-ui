@@ -58,14 +58,15 @@ const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean
 }))
 
 const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  minWidth: 160,
   ...theme.typography.body,
+  minWidth: 160,
+  maxWidth: 480,
   padding: `${theme.spacing / 6}px ${theme.spacing / 2}px`,
+  borderBottomLeftRadius: 2,
+  borderBottomRightRadius: 2,
   display: "inline-block",
   position: "relative",
-  width: "100%",
   zIndex: theme.baseZIndex + 301,
-  top: -3,
   textAlign: "center",
   backgroundColor: theme.colors.error,
   color: theme.colors.white

@@ -50,7 +50,7 @@ var Bar = glamorous_1.default.div(function (_a) {
 });
 var ErrorMessage = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({ minWidth: 160 }, theme.typography.body, { padding: theme.spacing / 6 + "px " + theme.spacing / 2 + "px", display: "inline-block", position: "relative", width: "100%", zIndex: theme.baseZIndex + 301, top: -3, textAlign: "center", backgroundColor: theme.colors.error, color: theme.colors.white }));
+    return (__assign({}, theme.typography.body, { minWidth: 160, maxWidth: 480, padding: theme.spacing / 6 + "px " + theme.spacing / 2 + "px", borderBottomLeftRadius: 2, borderBottomRightRadius: 2, display: "inline-block", position: "relative", zIndex: theme.baseZIndex + 301, textAlign: "center", backgroundColor: theme.colors.error, color: theme.colors.white }));
 });
 var RetryLink = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
