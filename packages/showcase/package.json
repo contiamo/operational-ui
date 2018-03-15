@@ -19,6 +19,7 @@
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "^4.2.1",
     "prettier": "1.8.2"
