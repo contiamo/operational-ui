@@ -18,7 +18,8 @@ var padding = 15;
 var Container = glamorous_1.default.div({
     label: "progress",
     width: "100%",
-    overflow: "hidden",
+    overflowX: "hidden",
+    textAlign: "center",
     top: 0,
     left: 0,
     position: "absolute"
@@ -39,7 +40,7 @@ var fillProgress = glamor_1.css.keyframes({
 });
 var Bar = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isError = _a.isError;
-    return (__assign({ width: "100%", height: 2, backgroundColor: theme.colors.info }, isError
+    return (__assign({ width: "100%", height: 3, backgroundColor: theme.colors.info }, isError
         ? {
             backgroundColor: theme.colors.error
         }
@@ -49,7 +50,7 @@ var Bar = glamorous_1.default.div(function (_a) {
 });
 var ErrorMessage = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({ minWidth: 160 }, theme.typography.body, { padding: theme.spacing / 6 + "px " + theme.spacing / 2 + "px", position: "absolute", borderBottomLeftRadius: 2, borderBottomRightRadius: 2, top: 2, left: "50%", textAlign: "center", transform: "translate3d(-50%, 0, 0)", backgroundColor: theme.colors.error, color: theme.colors.white }));
+    return (__assign({ minWidth: 160 }, theme.typography.body, { padding: theme.spacing / 6 + "px " + theme.spacing / 2 + "px", display: "inline-block", position: "relative", width: "100%", zIndex: theme.baseZIndex + 301, top: -3, textAlign: "center", backgroundColor: theme.colors.error, color: theme.colors.white }));
 });
 var RetryLink = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;

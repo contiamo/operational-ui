@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 import { Theme } from "@operational/theme"
-import { Input, TitleType, Button, Spinner } from "@operational/components"
+import { Input, TitleType, Button, Progress, Icon, IconName } from "@operational/components"
 
 export interface Props {
   css?: {}
@@ -15,6 +15,7 @@ export interface Props {
   processing?: boolean
   onSubmit?: () => void
   onChange?: (change: {}) => void
+  icon?: IconName | React.ReactNode
 }
 
 export interface State {}
@@ -42,7 +43,7 @@ const AuthCard = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const Content = glamorous.div(({ theme, isEnabled }: { theme: Theme; isEnabled: boolean }): {} => ({
-  opacity: isEnabled ? 1 : 0.4,
+  opacity: 1,
   pointerEvents: isEnabled ? "all" : "none"
 }))
 
@@ -56,12 +57,6 @@ const SubmitContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 const InputFields = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   margin: `${1 * theme.spacing}px 0`
-}))
-
-const ErrorNotice = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.body,
-  textAlign: "center",
-  color: theme.colors.error
 }))
 
 const inputStyle: {} = {
@@ -83,14 +78,20 @@ export default class Auth extends React.Component<Props, State> {
     return (
       <Container css={this.props.css} className={this.props.className}>
         <AuthCard>
-          {this.props.processing ? (
-            <Spinner css={{ position: "absolute", top: "calc(50% - 20px)", left: "calc(50% - 20px)", zIndex: 10000 }} />
-          ) : null}
+          {this.props.processing || this.props.error ? <Progress error={this.props.error} /> : null}
           <Content isEnabled={!this.props.processing}>
+            <glamorous.Div css={{ textAlign: "center" }}>
+              {this.props.icon ? (
+                this.props.icon === String(this.props.icon) ? (
+                  <Icon name={this.props.icon as IconName} size={48} />
+                ) : (
+                  this.props.icon
+                )
+              ) : null}
+            </glamorous.Div>
             {this.props.title ? (
               <TitleType css={{ textAlign: "center", margin: 0 }}>{this.props.title}</TitleType>
             ) : null}
-            {this.props.error ? <ErrorNotice>{this.props.error}</ErrorNotice> : null}
             <InputFields>
               {isStringValue(this.props.username) ? (
                 <Input

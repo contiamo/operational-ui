@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
+import { IconName } from "@operational/components";
 export interface Props {
     css?: {};
     className?: string;
@@ -11,6 +12,7 @@ export interface Props {
     processing?: boolean;
     onSubmit?: () => void;
     onChange?: (change: {}) => void;
+    icon?: IconName | React.ReactNode;
 }
 export interface State {
 }

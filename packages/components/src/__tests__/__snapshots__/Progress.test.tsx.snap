@@ -2,10 +2,10 @@
 
 exports[`Progress Component Should initialize properly 1`] = `
 <div
-  class="css-gkwqa2"
+  class="css-15xev6n"
 >
   <div
-    class="css-189d6qr"
+    class="css-exdlg2"
   />
 </div>
 `;
