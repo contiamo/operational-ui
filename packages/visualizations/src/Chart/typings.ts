@@ -131,6 +131,7 @@ export interface RendererOptions<RendererAccessors> {
   type: RendererType | "stacked"
   accessors?: Partial<RendererAccessors>
   renderAs?: RendererOptions<any>[] // Used only in case of type: "stacked"
+  stackAxis?: "x" | "y"
 }
 
 export interface RendererClass<RendererAccessors> {

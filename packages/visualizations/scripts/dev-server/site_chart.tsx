@@ -29,6 +29,7 @@ const BarsRenderer: any = {
 const StackedRenderer = {
   ...AxesAccessors,
   type: "stacked",
+  stackAxis: "y",
   renderAs: [BarsRenderer]
 }
 

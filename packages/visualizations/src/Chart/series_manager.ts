@@ -59,15 +59,17 @@ class ChartSeriesManager implements SeriesManager {
   handleStacks(data: SeriesData): SeriesData {
     const stacks: StackedSeriesOptions[] = filter((options: SeriesOptions): boolean => {
       const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(options.renderAs)
-      return includes("stacked")(rendererTypes)
+      const isStacked: boolean = includes("stacked")(rendererTypes)
+      if (isStacked && rendererTypes.length > 1) {
+        throw new Error("Stacked renderers cannot be combined with non-stacked renderers")
+      }
+      return isStacked
     })(data)
     if (stacks.length === 0) {
       return
     }
 
-    forEach((stack: StackedSeriesOptions): void => {
-      this.computeStack(stack)
-    })(stacks)
+    forEach(this.computeStack.bind(this))(stacks)
 
     let unstackedSeries: SeriesOptions[] = filter((options: SeriesOptions): boolean => {
       const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(options.renderAs)
@@ -84,26 +86,28 @@ class ChartSeriesManager implements SeriesManager {
     return unstackedSeries
   }
 
-  // Currently, series can only be stacked vertically
   computeStack(stack: StackedSeriesOptions): void {
     const stackedSeries: SeriesOptions[] = stack.data as SeriesOptions[]
+    // By default, stacks are vertical
+    const stackAxis: "x" | "y" = stack.renderAs[0].stackAxis || "y"
+    const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
 
     // Transform data into suitable structure for d3 stack
     const dataToStack = flow(
       map(get("data")),
       reduce((memo: any[], data: Datum[]): any[] => {
-        return memo.concat(map(get("x"))(data))
+        return memo.concat(map(get(baseAxis))(data))
       }, []),
       uniqBy(String),
-      map((x: string | number | Date) => {
-        return { x }
+      map((baseValue: string | number | Date) => {
+        return { [baseAxis]: baseValue }
       }),
-      sortBy("x" as any)
+      sortBy(baseAxis as any)
     )(stackedSeries)
 
     forEach((series: SeriesOptions) => {
       forEach((datum: Datum) => {
-        const newDatum = find((d: any) => String(d.x) === String(datum.x))(dataToStack)
+        const newDatum = find((d: any) => String(d[baseAxis]) === String(datum[baseAxis]))(dataToStack)
         newDatum[series.key] = datum.y
       })(series.data)
     })(stackedSeries)
@@ -121,7 +125,12 @@ class ChartSeriesManager implements SeriesManager {
       const originalSeries: SeriesOptions = find({ key: series.key })(stackedSeries)
       // @TODO typing
       originalSeries.data = map((datum: any): Datum => {
-        return { x: datum.data.x, y: datum.data[series.key], y0: datum[0], y1: datum[1] }
+        return {
+          [baseAxis]: datum.data[baseAxis],
+          [stackAxis]: datum.data[series.key],
+          [`${stackAxis}${0}`]: datum[0],
+          [`${stackAxis}${1}`]: datum[1]
+        }
       })(series)
       originalSeries.stacked = true
     })(stackedData)
