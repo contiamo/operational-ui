@@ -11,15 +11,23 @@ const containerNode = document.getElementById("app")
 import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
 
+const AxesAccessors: any = {
+  x: (d: any) => d.x
+  // y: (d) => d.y
+}
+
 const LineRenderer: any = {
-  type: "line"
+  ...AxesAccessors,
+  type: "line" 
 }
 
 const BarsRenderer: any = {
+  ...AxesAccessors,
   type: "bars"
 }
 
 const StackedRenderer = {
+  ...AxesAccessors,
   type: "stacked",
   renderAs: [BarsRenderer]
 }
@@ -42,11 +50,11 @@ const data: any = {
       data: [
         {
           data: [
-            {x: new Date("March 10, 2018"), y: 100},
-            {x: new Date("March 11, 2018"), y: 200},
-            {x: new Date("March 12, 2018"), y: 300},
-            {x: new Date("March 13, 2018"), y: 400},
-            {x: new Date("March 14, 2018"), y: 500}
+            {x: new Date("March 11, 2018"), y: 100},
+            {x: new Date("March 12, 2018"), y: 200},
+            {x: new Date("March 13, 2018"), y: 300},
+            {x: new Date("March 14, 2018"), y: 400},
+            {x: new Date("March 15, 2018"), y: 500}
           ],
           name: "series1",
           key: "series1"
@@ -63,8 +71,6 @@ const data: any = {
           key: "series2"
         }
       ],
-      name: "my series",
-      key: "unique_key2",
       renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2	  
     }
   ],

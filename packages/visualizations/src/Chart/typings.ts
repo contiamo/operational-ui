@@ -133,15 +133,21 @@ export interface RendererOptions<RendererAccessors> {
   renderAs?: RendererOptions<any>[] // Used only in case of type: "stacked"
 }
 
+export interface RendererClass<RendererAccessors> {
+  type: RendererType
+  update: (data: Datum[], options: RendererOptions<RendererAccessors>) => void
+}
+
 // Series
 export interface Datum {
   x?: string | number | Date
   y?: string | number | Date
+  y0?: number
+  y1?: number
 }
 
-export interface SeriesOptions {
+interface BaseSeriesOptions {
   // Required
-  data: Datum[] | SeriesOptions[]
   renderAs: RendererOptions<any>[]
   // Optional
   color?: string
@@ -152,6 +158,15 @@ export interface SeriesOptions {
   unit?: string
   xAxis?: "x1" | "x2"
   yAxis?: "y1" | "y2"
+}
+
+export interface StackedSeriesOptions extends BaseSeriesOptions {
+  data: SeriesOptions[]
+}
+
+export interface SeriesOptions extends BaseSeriesOptions {
+  data: Datum[]
+  stacked?: boolean
 }
 
 export type SeriesData = SeriesOptions[]

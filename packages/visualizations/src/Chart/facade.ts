@@ -134,7 +134,7 @@ class ChartFacade implements Facade {
         axes: (d: Data): AxesData => d.axes
       },
       series: {
-        data: (d: SeriesOptions): Datum[] | SeriesOptions[] => d.data,
+        data: (d: SeriesOptions): Datum[] => d.data,
         hide: (d: SeriesOptions): boolean => false,
         hideInLegend: (d: SeriesOptions): boolean => false,
         key: (d: SeriesOptions): string => d.key || uniqueId("key"),

@@ -185,6 +185,7 @@ declare namespace fp {
     tail: any
     times: any
     uniq: any
+    uniqBy: any
     uniqueId: any
     zip: any
   }
