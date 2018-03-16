@@ -1,6 +1,6 @@
 {
   "name": "@operational/blocks",
-  "version": "0.1.0-18",
+  "version": "0.1.0-19",
   "description": "Opinionated composed ui components",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -25,9 +25,9 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "@operational/components": "^0.1.0-18",
-    "@operational/theme": "^0.1.0-18",
-    "@operational/utils": "^0.1.0-18",
+    "@operational/components": "^0.1.0-19",
+    "@operational/theme": "^0.1.0-19",
+    "@operational/utils": "^0.1.0-19",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "moment": "^2.19.0",
