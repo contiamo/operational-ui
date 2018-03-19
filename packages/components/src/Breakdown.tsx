@@ -130,7 +130,7 @@ const Breakdown = (props: Props) => (
     <Content>
       <Label>{props.children}</Label>
       <Bar color={props.color} fill={props.fill}>
-        <span>{props.label}</span>
+        <glamorous.Span css={{ fontFeatureSettings: "'tnum'" }}>{props.label}</glamorous.Span>
       </Bar>
     </Content>
   </Container>

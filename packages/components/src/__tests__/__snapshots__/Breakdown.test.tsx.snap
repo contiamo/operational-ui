@@ -20,7 +20,9 @@ exports[`Breakdown Component Should initialize properly 1`] = `
     <div
       class="css-wr231p"
     >
-      <span />
+      <span
+        class="css-qotq2o"
+      />
     </div>
   </div>
 </div>

@@ -12,6 +12,7 @@ import {
   Grid,
   Record,
   Progress,
+  Breakdown,
   RecordHeader,
   RecordBody,
   Card,
