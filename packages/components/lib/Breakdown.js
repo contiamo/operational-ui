@@ -97,6 +97,6 @@ var Breakdown = function (props) { return (React.createElement(Container, { key:
     React.createElement(Content, null,
         React.createElement(Label, null, props.children),
         React.createElement(Bar, { color: props.color, fill: props.fill },
-            React.createElement("span", null, props.label))))); };
+            React.createElement(glamorous_1.default.Span, { css: { fontFeatureSettings: "'tnum'" } }, props.label))))); };
 exports.default = Breakdown;
 //# sourceMappingURL=Breakdown.js.map
