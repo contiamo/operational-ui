@@ -24,6 +24,7 @@ import {
 
 interface State {
   isOpen: boolean
+  value: string | null
 }
 
 const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -33,10 +34,12 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 class Site extends React.Component<{}, State> {
-  state = {
-    isOpen: true
+  state: State = {
+    isOpen: true,
+    value: null
   }
   render() {
+    console.log(this.state.value)
     return (
       <OperationalUI withBaseStyles>
         <Layout>
@@ -46,7 +49,11 @@ class Site extends React.Component<{}, State> {
             <Card css={{ position: "relative" }}>
               <CardHeader>Hello</CardHeader>
               <Progress />
-              <Input label="1234" css={{ width: 500 }} value="123" />
+              <Input label="1234" css={{ width: 500 }} value={this.state.value} onChange={(newVal) => {
+                this.setState(prevState => ({
+                  value: newVal
+                }))
+              }}/>
             </Card>
           </Grid>
         </Layout>
