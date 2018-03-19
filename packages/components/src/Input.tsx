@@ -9,7 +9,7 @@ export interface Props {
   className?: string
   placeholder?: string
   name?: string
-  value: string
+  value?: string
   id?: string
   inputId?: string
   label?: string
@@ -49,7 +49,7 @@ const Input = (props: Props) => {
     innerRef: props.inputRef,
     name: props.name,
     disabled: Boolean(props.disabled),
-    value: props.value,
+    value: props.value || "",
     isStandalone: !Boolean(props.label),
     type: props.type,
     onFocus: props.onFocus,

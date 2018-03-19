@@ -21,7 +21,7 @@ var Input = function (props) {
         innerRef: props.inputRef,
         name: props.name,
         disabled: Boolean(props.disabled),
-        value: props.value,
+        value: props.value || "",
         isStandalone: !Boolean(props.label),
         type: props.type,
         onFocus: props.onFocus,

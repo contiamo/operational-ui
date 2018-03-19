@@ -4,7 +4,7 @@ export interface Props {
     className?: string;
     placeholder?: string;
     name?: string;
-    value: string;
+    value?: string;
     id?: string;
     inputId?: string;
     label?: string;
