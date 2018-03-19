@@ -23,8 +23,6 @@ const displayOption = (opt: IOption): string => {
 
 export interface Props {
   id?: string
-  // Injected by withLabel higher-order component
-  domId?: string
   css?: any
   className?: string
   options: IOption[]
@@ -38,7 +36,7 @@ export interface Props {
   placeholder?: string
 }
 
-interface State {
+export interface State {
   open: boolean
   updating: boolean
   filter: RegExp
@@ -155,12 +153,9 @@ class Select extends React.Component<Props, State> {
   }
 
   render() {
-    // `css` and `className` props are not set, as they are set on the wrapped label container.
-    // See ./src/utils/with-label.tsx.
     return (
       <Container
-        id={this.props.domId}
-        key={this.props.id}
+        id={this.props.id}
         innerRef={containerNode => (this.containerNode = containerNode)}
         updating={this.state.updating}
         color={this.props.color}
@@ -200,4 +195,4 @@ class Select extends React.Component<Props, State> {
   }
 }
 
-export default withLabel(Select)
+export default Select

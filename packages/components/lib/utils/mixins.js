@@ -28,6 +28,6 @@ exports.Label = glamorous_1.default.label(function (_a) {
 });
 exports.LabelText = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
-    return (__assign({ display: "inline-block", marginBottom: theme.spacing / 4 }, theme.typography.small, { fontWeight: 600, opacity: 0.7 }));
+    return (__assign({ display: "inline-block", marginBottom: theme.spacing / 6, marginLeft: theme.spacing * 2 / 3 }, theme.typography.small, { fontWeight: 400, opacity: 0.4 }));
 });
 //# sourceMappingURL=mixins.js.map

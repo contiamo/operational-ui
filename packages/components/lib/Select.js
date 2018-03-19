@@ -49,7 +49,6 @@ var React = require("react");
 var SelectOption_1 = require("./Select/SelectOption");
 var SelectFilter_1 = require("./Select/SelectFilter");
 var Select_style_1 = require("./Select/Select.style");
-var with_label_1 = require("./utils/with-label");
 var displayOption = function (opt) {
     if (opt.label) {
         return opt.label;
@@ -173,9 +172,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        // `css` and `className` props are not set, as they are set on the wrapped label container.
-        // See ./src/utils/with-label.tsx.
-        return (React.createElement(Select_style_1.Container, { id: this.props.domId, key: this.props.id, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+        return (React.createElement(Select_style_1.Container, { id: this.props.id, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
             React.createElement(Select_style_1.DisplayValue, { isPlaceholder: Array.isArray(this.props.value) ? this.props.value.length === 0 : !this.props.value }, this.getDisplayValue()),
             this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
                 this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
@@ -185,5 +182,5 @@ var Select = /** @class */ (function (_super) {
     };
     return Select;
 }(React.Component));
-exports.default = with_label_1.default(Select);
+exports.default = Select;
 //# sourceMappingURL=Select.js.map
