@@ -19,14 +19,22 @@ var DataHandler = /** @class */ (function () {
     DataHandler.prototype.prepareData = function () {
         this.assignAccessors();
         var data = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {};
-        var sortingFunction = this.state.current.get("config").sort
-            ? function (a, b) { return b.value - a.value; }
-            : undefined;
+        var sortingFunction = function (a, b) {
+            // Empty segments should always be last
+            if (a.data.empty) {
+                return 1;
+            }
+            if (b.data.empty) {
+                return -1;
+            }
+            // Sort largest to smallest
+            return b.value - a.value;
+        };
         var hierarchyData = d3_hierarchy_1.hierarchy(data)
             .each(this.assignColors.bind(this))
             .each(this.assignNames.bind(this))
             .eachAfter(this.assignValues.bind(this))
-            .sort(sortingFunction);
+            .sort(this.state.current.get("config").sort ? sortingFunction : undefined);
         this.total = hierarchyData.value;
         this.topNode = d3_hierarchy_1.partition()(hierarchyData)
             .descendants()
@@ -43,6 +51,10 @@ var DataHandler = /** @class */ (function () {
         return this.data;
     };
     DataHandler.prototype.assignColors = function (node) {
+        if (node.data.empty) {
+            node.color = "#fff";
+            return;
+        }
         var propagateColors = this.state.current.get("config").propagateColors;
         node.color = propagateColors && node.depth > 1 ? node.parent.color : node.depth > 0 ? this.color(node) : undefined;
     };

@@ -22,7 +22,7 @@ var Breadcrumb = /** @class */ (function () {
     Breadcrumb.prototype.updateHoverPath = function (payload) {
         var computed = this.state.current.get("computed").renderer;
         var fixedNode = computed.zoomNode || computed.topNode;
-        if (!fixedNode) {
+        if (!fixedNode || (payload.d && payload.d.data.empty)) {
             return;
         }
         var nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse();

@@ -23,6 +23,10 @@ var arcStyle = {
     },
     "&.zoomed.parent": {
         cursor: "default"
+    },
+    "&.empty": {
+        stroke: "#aaa",
+        strokeDasharray: "5"
     }
 };
 var labelStyle = __assign({ fill: "#333", stroke: "none" }, theme_1.operational.typography.small);

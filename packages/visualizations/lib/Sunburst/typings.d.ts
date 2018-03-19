@@ -17,6 +17,7 @@ export interface SunburstConfig extends Config {
     zoomNode?: Object<any>;
 }
 export interface RawData {
+    empty?: boolean;
     name?: string;
     value?: number;
     children?: RawData[];

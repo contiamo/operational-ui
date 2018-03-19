@@ -1,4 +1,4 @@
-import { D3Selection, EventBus, State, StateWriter } from "./typings";
+import { D3Selection, Datum, EventBus, State, StateWriter } from "./typings";
 import "d3-transition";
 declare class Renderer {
     private angleScale;
@@ -14,16 +14,19 @@ declare class Renderer {
     private radius;
     private state;
     private stateWriter;
-    private topNode;
     private total;
     private zoomNode;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
     draw(): void;
     private exit(arcs, duration, disableAnimations);
+    isFirstLevelChild(d: Datum): boolean;
     private arcClass(d);
     private enterAndUpdate(arcs, duration, disableAnimations);
     private compute();
+    private startAngle(d);
     private endAngle(d);
+    private innerRadius(d);
+    private outerRadius(d);
     private translate();
     private translateBack(point);
     private isEqual(d1);

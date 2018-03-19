@@ -31,15 +31,23 @@ class DataHandler {
 
     const data: RawData = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
 
-    const sortingFunction: any = this.state.current.get("config").sort
-      ? (a: Datum, b: Datum) => b.value - a.value
-      : undefined
+    const sortingFunction: any = (a: Datum, b: Datum) => {
+      // Empty segments should always be last
+      if (a.data.empty) {
+        return 1
+      }
+      if (b.data.empty) {
+        return -1
+      }
+      // Sort largest to smallest
+      return b.value - a.value
+    }
 
     const hierarchyData: HierarchyNode<RawData> = d3Hierarchy(data)
       .each(this.assignColors.bind(this))
       .each(this.assignNames.bind(this))
       .eachAfter(this.assignValues.bind(this))
-      .sort(sortingFunction)
+      .sort(this.state.current.get("config").sort ? sortingFunction : undefined)
 
     this.total = hierarchyData.value
 
@@ -64,8 +72,12 @@ class DataHandler {
   }
 
   private assignColors(node: any): void {
-    const propagateColors: boolean = this.state.current.get("config").propagateColors
+    if (node.data.empty) {
+      node.color = "#fff"
+      return
+    }
 
+    const propagateColors: boolean = this.state.current.get("config").propagateColors
     node.color = propagateColors && node.depth > 1 ? node.parent.color : node.depth > 0 ? this.color(node) : undefined
   }
 
