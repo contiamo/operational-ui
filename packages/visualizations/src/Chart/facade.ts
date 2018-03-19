@@ -1,5 +1,6 @@
 import ChartCanvas from "./canvas"
 import ChartSeriesManager from "./series_manager"
+import LegendManager from "./legend_manager"
 import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
@@ -165,15 +166,15 @@ class ChartFacade implements Facade {
   private insertComponents(): any {
     // Components {
     return {
-      // legend: new ChartLegend(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
-      //   top: {
-      //     left: this.canvas.elementFor("legend-top-left")
-      //     right: this.canvas.elementFor("legend-top-right")
-      //   }
-      //   bottom: {
-      //     left: this.canvas.elementFor("legend-bottom-left")
-      //   }
-      // }),
+      legend: new LegendManager(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
+        top: {
+          left: this.canvas.elementFor("legend-top-left"),
+          right: this.canvas.elementFor("legend-top-right")
+        },
+        bottom: {
+          left: this.canvas.elementFor("legend-bottom-left")
+        }
+      })
       // focus: new ChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
       //   main: this.canvas.elementFor("focus"),
       //   component: this.canvas.elementFor("componentFocus")
@@ -222,7 +223,7 @@ class ChartFacade implements Facade {
   draw(): Element {
     this.state.captureState()
     this.series.assignData()
-    // this.components.legend.draw()
+    this.components.legend.draw()
     this.canvas.draw()
     // this.series.draw()
 

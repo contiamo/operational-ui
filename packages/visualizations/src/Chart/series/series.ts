@@ -3,8 +3,10 @@ import { filter, find, flow, forEach, get, includes, invoke, map, remove } from 
 import {
   Accessor,
   D3Selection,
+  DataForLegends,
   Datum,
   EventBus,
+  LegendDatum,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -84,6 +86,21 @@ class ChartSeries {
   remove(renderer: Renderer): void {
     this.oldRenderers.push(renderer)
     remove(renderer)(this.renderers)
+  }
+
+  dataForLegend(): LegendDatum {
+    return {
+      color: this.legendColor(),
+      label: this.legendName()
+    }
+  }
+
+  legendPosition(): "top" | "bottom" {
+    return this.xAxis() === "x1" ? "top" : "bottom"
+  }
+
+  legendFloat(): "left" | "right" {
+    return this.legendPosition() === "top" && this.yAxis() === "y2" ? "right" : "left"
   }
 
   draw(): void {}

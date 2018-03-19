@@ -4,6 +4,7 @@ import Series from "./series/series"
 import {
   Accessor,
   D3Selection,
+  DataForLegends,
   Datum,
   EventBus,
   StackedSeriesOptions,
@@ -39,7 +40,7 @@ class ChartSeriesManager implements SeriesManager {
     this.key = this.state.current.get("accessors").series.key
     this.renderAs = this.state.current.get("accessors").series.renderAs
     this.prepareData()
-    // this.stateWriter("dataForLegend", this.renderer.dataForLegend())
+    this.stateWriter("dataForLegends", this.dataForLegends())
   }
 
   private prepareData(): void {
@@ -157,6 +158,24 @@ class ChartSeriesManager implements SeriesManager {
     flow(filter((series: Series): boolean => !includes(this.key(series.options))(keys)), forEach(this.remove))(
       this.series
     )
+  }
+
+  private dataForLegends(): DataForLegends {
+    const data: any = {
+      top: {
+        left: [],
+        right: []
+      },
+      bottom: {
+        left: []
+      }
+    }
+
+    forEach((series: Series): void => {
+      data[series.legendPosition()][series.legendFloat()].push(series.dataForLegend())
+    })(this.series)
+
+    return data
   }
 
   create(options: SeriesOptions): void {

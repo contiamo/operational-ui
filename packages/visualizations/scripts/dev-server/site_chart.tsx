@@ -43,8 +43,9 @@ const data: any = {
         {x: new Date("March 13, 2018"), y: 400},
         {x: new Date("March 14, 2018"), y: 500}
       ],
-      name: "my series",
+      name: "Line series with very, very, very, very long name",
       key: "unique_key",
+      yAxis: "y2",
       renderAs: [LineRenderer]  	  
     },
     {
@@ -57,7 +58,7 @@ const data: any = {
             {x: new Date("March 14, 2018"), y: 400},
             {x: new Date("March 15, 2018"), y: 500}
           ],
-          name: "series1",
+          name: "Stacked series 1 with long name",
           key: "series1"
         },
         {
@@ -68,7 +69,7 @@ const data: any = {
             {x: new Date("March 13, 2018"), y: 40},
             {x: new Date("March 14, 2018"), y: 50}
           ],
-          name: "series2",
+          name: "Stacked series 2 with long name",
           key: "series2"
         }
       ],

@@ -4,6 +4,8 @@ import { Accessor, Config, Facade, Focus, Legend, Object, SeriesManager } from "
 export {
   Accessor,
   Accessors,
+  ComponentConfigOptions,
+  ComponentHoverPayload,
   EventBus,
   Legend,
   Object,
@@ -223,6 +225,22 @@ export interface Computed {
   canvas: Object<any>
   focus: Object<any>
   series: Object<any>
+}
+
+// Legend
+export interface LegendDatum {
+  label: string
+  color: string
+}
+
+export interface DataForLegends {
+  top: {
+    left: LegendDatum[]
+    right: LegendDatum[]
+  }
+  bottom: {
+    left: LegendDatum[]
+  }
 }
 
 // @TODO
