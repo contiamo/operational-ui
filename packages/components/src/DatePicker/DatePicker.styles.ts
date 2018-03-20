@@ -1,31 +1,45 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
+
+import Card from "../Card"
 import * as mixins from "../utils/mixins"
 
 const inputHeight: number = 31
 
-export const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div(
-  ({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
+export const Container: GlamorousComponent<{ isExpanded?: boolean }, {}> = glamorous.div(
+  ({ isExpanded, theme }: { isExpanded?: boolean; theme: Theme }): {} => ({
     label: "datepicker",
-    display: "inline-block",
-    width: "auto",
-    position: "relative",
-    "& .co_card": {
-      display: isExpanded ? "block" : "none",
-      position: "absolute",
-      boxShadow: theme.shadows.popup,
-      top: inputHeight + 4,
-      left: 0,
-      padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
-      width: 210 + 2 * theme.spacing,
-      zIndex: theme.baseZIndex + 1000
-    }
+    width: 210 + 2 * theme.spacing,
+    position: "relative"
   })
 )
 
-export const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+export interface DatePickerCardProps {
+  theme: Theme
+  isExpanded?: boolean
+}
+
+export const DatePickerCard = glamorous(Card)(
+  {
+    position: "absolute",
+    left: 0
+  },
+  ({ theme, isExpanded }: DatePickerCardProps): CSSProperties => ({
+    display: isExpanded ? "block" : "none",
+    boxShadow: theme.shadows.popup,
+    top: inputHeight + 4,
+    padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
+    width: 210 + 2 * theme.spacing,
+    zIndex: theme.baseZIndex + 1000
+  })
+)
+
+export const Toggle: GlamorousComponent<
+  { onClick?: (ev: React.SyntheticEvent<MouseEvent>) => void },
+  {}
+> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   cursor: "pointer",
   top: 1,
@@ -119,7 +133,7 @@ export const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.inpu
   })
 )
 
-export const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(
+export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => void }, {}> = glamorous.div(
   ({ theme }: { theme: Theme }): {} => ({
     width: inputHeight,
     height: inputHeight,
