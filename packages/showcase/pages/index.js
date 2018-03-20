@@ -1,13 +1,10 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import Link from "next/link"
 import { Card, Icon, Button, CardHeader } from "@operational/components"
-import { fetchFromRepo } from "../utils"
 
 import Layout from "../components/Layout"
 import StaticContent from "../components/StaticContent"
 import { Operational } from "../components/Icons"
-import Demo from "../components/Demo"
 
 const TitleBar = glamorous.div(({ theme }) => ({
   label: "showcasetitlebar",
@@ -66,11 +63,6 @@ const BodyContent = glamorous.div({
 })
 
 export default class Intro extends React.Component {
-  static async getInitialProps() {
-    const content = await fetchFromRepo("/README.md")
-    return { content }
-  }
-
   state = {
     rotation: 0
   }
@@ -99,27 +91,15 @@ export default class Intro extends React.Component {
               <h1>Operational UI</h1>
               <h2>Building blocks for effective operational interfaces</h2>
               <TitleBarNav>
-                <Link href="#getting-started">
-                  <a>
-                    <Button color="info">Get started</Button>
-                  </a>
-                </Link>
+                <a>
+                  <Button color="info">Get started</Button>
+                </a>
                 <a href="https://github.com/Contiamo/operational-ui">
                   <Button color="black">GitHub</Button>
                 </a>
               </TitleBarNav>
             </TitleBarContent>
-            <Demo />
           </TitleBar>
-          <BodyContent>
-            <StaticContent markdownContent={this.props.content} />
-          </BodyContent>
-        </Card>
-        <Card>
-          <CardHeader>Quick examples</CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>Documentation</CardHeader>
         </Card>
       </Layout>
     )
