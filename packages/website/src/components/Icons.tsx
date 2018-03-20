@@ -1,6 +1,12 @@
 import * as React from "react"
 
-export const Operational = props => {
+interface Props {
+  size: number
+  color?: string
+  rotation?: number
+}
+
+export const Operational = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -21,7 +27,7 @@ export const Operational = props => {
   )
 }
 
-export const Components = props => {
+export const Components = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -31,7 +37,7 @@ export const Components = props => {
   )
 }
 
-export const Blocks = props => {
+export const Blocks = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -41,7 +47,7 @@ export const Blocks = props => {
   )
 }
 
-export const Visualizations = props => {
+export const Visualizations = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -51,7 +57,7 @@ export const Visualizations = props => {
   )
 }
 
-export const Documentation = props => {
+export const Documentation = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (

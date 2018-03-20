@@ -5,4 +5,4 @@ package-lock.json
 *.log
 out
 .next
-.vscode/settings.json
+.vscode

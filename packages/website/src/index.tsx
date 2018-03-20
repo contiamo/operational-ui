@@ -1,12 +1,13 @@
 import * as React from "react"
+import { render } from "react-dom"
 import glamorous from "glamorous"
-import { Card, Icon, Button, CardHeader } from "@operational/components"
+import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/components"
+import { Theme } from "@operational/theme"
 
-import Layout from "../components/Layout"
-import StaticContent from "../components/StaticContent"
-import { Operational } from "../components/Icons"
+import StaticContent from "./components/StaticContent"
+import { Operational } from "./components/Icons"
 
-const TitleBar = glamorous.div(({ theme }) => ({
+const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "showcasetitlebar",
   padding: `${theme.spacing * 1}px 0`,
   margin: -theme.spacing,
@@ -62,10 +63,12 @@ const BodyContent = glamorous.div({
   margin: "auto"
 })
 
-export default class Intro extends React.Component {
+export default class App extends React.Component<{}, {}> {
   state = {
     rotation: 0
   }
+
+  rotationInterval: any
 
   componentDidMount() {
     setTimeout(() => {
@@ -83,7 +86,7 @@ export default class Intro extends React.Component {
 
   render() {
     return (
-      <Layout pathname={this.props.url.pathname} noNav>
+      <OperationalUI withBaseStyles>
         <Card>
           <TitleBar>
             <TitleBarContent>
@@ -94,14 +97,16 @@ export default class Intro extends React.Component {
                 <a>
                   <Button color="info">Get started</Button>
                 </a>
-                <a href="https://github.com/Contiamo/operational-ui">
+                <a href="https://github.com/contiamo/operational-ui">
                   <Button color="black">GitHub</Button>
                 </a>
               </TitleBarNav>
             </TitleBarContent>
           </TitleBar>
         </Card>
-      </Layout>
+      </OperationalUI>
     )
   }
 }
+
+render(<App />, document.querySelector("#app"))

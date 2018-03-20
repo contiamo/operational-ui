@@ -8,10 +8,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "next",
+    "start": "react-scripts-ts start",
     "build": "rm -rf dist && next build && next export && mv out dist",
-    "prettier": "prettier './{components,pages}/**/*.js' --write",
-    "lint": "echo 'Linter to be added as project matures.'",
+    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "precommit": "npm run prettier",
     "test": "echo 'Tests to be added as project matures.'",
     "test:u": "echo 'Tests to be added as project matures.'",
@@ -19,8 +19,15 @@
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.26.0",
-    "prettier": "1.8.2"
+    "@types/jest": "^22.1.4",
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "prettier": "1.8.2",
+    "react-scripts-ts": "^2.14.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "2.6.2"
   },
   "dependencies": {
     "@operational/blocks": "^0.1.0-20",

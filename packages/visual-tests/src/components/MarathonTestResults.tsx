@@ -5,7 +5,6 @@ import { Icon } from "@operational/components"
 import { Theme } from "@operational/theme"
 
 const Container = glamorous.ul({
-  label: "marathontestresults",
   padding: 0
 })
 
@@ -20,7 +19,7 @@ const Item = glamorous.li({
   }
 })
 
-const Title = glamorous.p(({ theme }) => ({
+const Title = glamorous.p(({ theme }: { theme: Theme }): any => ({
   ...theme.typography.heading1,
   display: "inline-block",
   "& :first-child": {
@@ -34,7 +33,7 @@ const Title = glamorous.p(({ theme }) => ({
   }
 }))
 
-const FailureMessage = glamorous.p(({ theme }) => ({
+const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
   color: theme.colors.error,
   display: "inline-block",
   marginLeft: 8,
@@ -43,9 +42,15 @@ const FailureMessage = glamorous.p(({ theme }) => ({
   }
 }))
 
-const TestResults = ({ tests, completed, theme }) => (
+export interface Props {
+  tests: { description: string; errors: string[] }[]
+  completed: number
+  theme: Theme
+}
+
+const TestResults: React.SFC<Props> = ({ tests, completed, theme }: Props) => (
   <Container>
-    {tests.map((test, index) => {
+    {tests.map((test: any, index: any) => {
       const failed = test.errors.length > 0
       const isCompleted = completed > index
       const content = isCompleted ? (

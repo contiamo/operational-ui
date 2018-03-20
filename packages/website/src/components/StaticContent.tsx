@@ -1,11 +1,17 @@
 import * as React from "react"
-import SyntaxHighlighter from "react-syntax-highlighter"
 import marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
+import { Theme } from "@operational/theme"
 import highlight from "highlight.js"
 
-const Container = glamorous.div(({ theme }) => ({
+interface Props {
+  css?: {}
+  className?: string
+  markdownContent?: string
+}
+
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "showcasestaticcontent",
   "& pre": {
     backgroundColor: "#eee",
@@ -19,7 +25,11 @@ const Container = glamorous.div(({ theme }) => ({
   }
 }))
 
-export default class StaticContent extends React.Component {
+export default class StaticContent extends React.Component<Props, {}> {
+  containerNode: any
+  codeNodes: any
+  codes: any[]
+
   render() {
     return this.props.markdownContent ? (
       <Container
@@ -47,7 +57,7 @@ export default class StaticContent extends React.Component {
     this.codeNodes = this.containerNode.querySelectorAll("pre code")
     this.codes = []
     const n = this.codeNodes.length
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < n; i = i + 1) {
       const code = this.codeNodes[i].innerText
       this.codes.push(code)
       if (code[0] === " ") {
