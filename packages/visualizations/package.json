@@ -1,6 +1,6 @@
 {
   "name": "@operational/visualizations",
-  "version": "0.1.0-19",
+  "version": "0.1.0-20",
   "description": "Contiamo visualization library.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -20,8 +20,8 @@
     "lint": "tslint './src/**/*.{ts,tsx}' --fix"
   },
   "dependencies": {
-    "@operational/theme": "^0.1.0-19",
-    "@operational/utils": "^0.1.0-19",
+    "@operational/theme": "^0.1.0-20",
+    "@operational/utils": "^0.1.0-20",
     "d3": "^4.10.2",
     "glamor": "^2.20.40",
     "glamorous": "^4.8.0",
