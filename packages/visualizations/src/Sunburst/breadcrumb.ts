@@ -31,7 +31,7 @@ class Breadcrumb {
   private updateHoverPath(payload: HoverPayload | ClickPayload): void {
     const computed: Object<any> = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
-    if (!fixedNode) {
+    if (!fixedNode || (payload.d && payload.d.data.empty)) {
       return
     }
     const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()

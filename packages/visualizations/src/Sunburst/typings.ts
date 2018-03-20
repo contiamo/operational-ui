@@ -33,6 +33,7 @@ export interface SunburstConfig extends Config {
 }
 
 export interface RawData {
+  empty?: boolean
   name?: string
   value?: number
   children?: RawData[]

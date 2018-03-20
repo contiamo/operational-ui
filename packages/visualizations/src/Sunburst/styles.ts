@@ -15,6 +15,10 @@ const arcStyle = {
   },
   "&.zoomed.parent": {
     cursor: "default"
+  },
+  "&.empty": {
+    stroke: "#aaa",
+    strokeDasharray: "5"
   }
 }
 

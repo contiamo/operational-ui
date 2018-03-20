@@ -46,8 +46,14 @@ var Renderer = /** @class */ (function () {
                 .attrTween("d", this.removeArcTween.bind(this));
         exitingArcs.remove();
     };
+    Renderer.prototype.isFirstLevelChild = function (d) {
+        return d.parent === (this.zoomNode || this.dataHandler.topNode);
+    };
     Renderer.prototype.arcClass = function (d) {
-        return styles.arc + " " + (!d.parent ? "parent" : "") + " " + (d.zoomable ? "zoomable" : "");
+        var parentClass = !d.parent ? "parent" : "";
+        var zoomClass = d.zoomable ? "zoomable" : "";
+        var emptyClass = d.data.empty && this.isFirstLevelChild(d) ? "empty" : "";
+        return styles.arc + " " + parentClass + " " + zoomClass + " " + emptyClass;
     };
     Renderer.prototype.enterAndUpdate = function (arcs, duration, disableAnimations) {
         var _this = this;
@@ -55,7 +61,7 @@ var Renderer = /** @class */ (function () {
             .enter()
             .append("svg:path")
             .merge(arcs)
-            .attr("class", this.arcClass)
+            .attr("class", this.arcClass.bind(this))
             .style("fill", fp_1.get("color"))
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)))
             .on("click", function (d) { return _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: d, force: true }); });
@@ -74,7 +80,6 @@ var Renderer = /** @class */ (function () {
     };
     // Computations
     Renderer.prototype.compute = function () {
-        var _this = this;
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         this.radius =
             Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin;
@@ -85,19 +90,33 @@ var Renderer = /** @class */ (function () {
             .clamp(true)
             .range([0, this.radius]);
         this.arc = d3_shape_1.arc()
-            .startAngle(function (d) { return _this.angleScale(d.x0); })
+            .startAngle(this.startAngle.bind(this))
             .endAngle(this.endAngle.bind(this))
-            .innerRadius(function (d) { return _this.radiusScale(d.y0); })
-            .outerRadius(function (d) { return _this.radiusScale(d.y1); });
+            .innerRadius(this.innerRadius.bind(this))
+            .outerRadius(this.outerRadius.bind(this));
         this.previous = this.data;
         this.data = this.dataHandler.prepareData();
+    };
+    Renderer.prototype.startAngle = function (d) {
+        var minAngle = Math.asin(1 / this.radiusScale(d.y0)) || 0;
+        var strokeAdjustment = d.data.empty ? minAngle : 0;
+        return this.angleScale(d.x0) + strokeAdjustment;
     };
     Renderer.prototype.endAngle = function (d) {
         // Set a minimum segment angle so that the segment can always be seen,
         // UNLESS the segment is not a descendant of the top or zoomed node (i.e. should not be visible)
         var show = fp_1.findIndex(this.isEqual(this.zoomNode || this.dataHandler.topNode))(d.ancestors()) > -1;
         var minAngle = show ? Math.asin(1 / this.radiusScale(d.y0)) || 0 : 0;
-        return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)));
+        var strokeAdjustment = d.data.empty ? -minAngle : 0;
+        return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1))) + strokeAdjustment;
+    };
+    Renderer.prototype.innerRadius = function (d) {
+        var strokeAdjustment = d.data.empty ? 1 : 0;
+        return this.radiusScale(d.y0) + strokeAdjustment;
+    };
+    Renderer.prototype.outerRadius = function (d) {
+        var strokeAdjustment = d.data.empty ? 1 : 0;
+        return this.radiusScale(d.y1) - strokeAdjustment;
     };
     // Center elements within drawing container
     Renderer.prototype.translate = function () {
@@ -256,6 +275,7 @@ var Renderer = /** @class */ (function () {
             .selectAll("path." + styles.arc)
             .attr("pointer-events", "none")
             .classed("zoomed", function (datum) { return datum === _this.zoomNode; })
+            .classed("empty", function (datum) { return datum.data.empty && _this.isFirstLevelChild(datum); })
             .each(d3_utils_1.withD3Element(function (datum, el) {
             d3.select(el).attr("pointer-events", null);
         }));
@@ -284,6 +304,9 @@ var Renderer = /** @class */ (function () {
     };
     Renderer.prototype.onMouseOver = function (d, el) {
         if (d === this.zoomNode) {
+            return;
+        }
+        if (d.data.empty && !this.isFirstLevelChild(d)) {
             return;
         }
         var centroid = this.translateBack(this.arc.centroid(d));

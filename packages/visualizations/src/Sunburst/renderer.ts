@@ -29,7 +29,6 @@ class Renderer {
   private radius: number
   private state: State
   private stateWriter: StateWriter
-  private topNode: Datum
   private total: number
   private zoomNode: Datum
 
@@ -70,8 +69,15 @@ class Renderer {
     exitingArcs.remove()
   }
 
+  isFirstLevelChild(d: Datum): boolean {
+    return d.parent === (this.zoomNode || this.dataHandler.topNode)
+  }
+
   private arcClass(d: Datum): string {
-    return `${styles.arc} ${!d.parent ? "parent" : ""} ${d.zoomable ? "zoomable" : ""}`
+    const parentClass: string = !d.parent ? "parent" : ""
+    const zoomClass: string = d.zoomable ? "zoomable" : ""
+    const emptyClass: string = d.data.empty && this.isFirstLevelChild(d) ? "empty" : ""
+    return `${styles.arc} ${parentClass} ${zoomClass} ${emptyClass}`
   }
 
   private enterAndUpdate(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
@@ -79,7 +85,7 @@ class Renderer {
       .enter()
       .append("svg:path")
       .merge(arcs)
-      .attr("class", this.arcClass)
+      .attr("class", this.arcClass.bind(this))
       .style("fill", get("color"))
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("click", (d: Datum): void => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
@@ -111,13 +117,19 @@ class Renderer {
       .range([0, this.radius])
 
     this.arc = d3Arc()
-      .startAngle((d: any): number => this.angleScale(d.x0))
+      .startAngle(this.startAngle.bind(this))
       .endAngle(this.endAngle.bind(this))
-      .innerRadius((d: any): number => this.radiusScale(d.y0))
-      .outerRadius((d: any): number => this.radiusScale(d.y1))
+      .innerRadius(this.innerRadius.bind(this))
+      .outerRadius(this.outerRadius.bind(this))
 
     this.previous = this.data
     this.data = this.dataHandler.prepareData()
+  }
+
+  private startAngle(d: Datum): number {
+    const minAngle: number = Math.asin(1 / this.radiusScale(d.y0)) || 0
+    const strokeAdjustment: number = d.data.empty ? minAngle : 0
+    return this.angleScale(d.x0) + strokeAdjustment
   }
 
   private endAngle(d: Datum): number {
@@ -125,7 +137,18 @@ class Renderer {
     // UNLESS the segment is not a descendant of the top or zoomed node (i.e. should not be visible)
     const show: boolean = findIndex(this.isEqual(this.zoomNode || this.dataHandler.topNode))(d.ancestors()) > -1
     const minAngle: number = show ? Math.asin(1 / this.radiusScale(d.y0)) || 0 : 0
-    return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1)))
+    const strokeAdjustment: number = d.data.empty ? -minAngle : 0
+    return Math.max(this.angleScale(d.x0) + minAngle, Math.min(2 * Math.PI, this.angleScale(d.x1))) + strokeAdjustment
+  }
+
+  private innerRadius(d: Datum): number {
+    const strokeAdjustment: number = d.data.empty ? 1 : 0
+    return this.radiusScale(d.y0) + strokeAdjustment
+  }
+
+  private outerRadius(d: Datum): number {
+    const strokeAdjustment: number = d.data.empty ? 1 : 0
+    return this.radiusScale(d.y1) - strokeAdjustment
   }
 
   // Center elements within drawing container
@@ -306,6 +329,7 @@ class Renderer {
       .selectAll(`path.${styles.arc}`)
       .attr("pointer-events", "none")
       .classed("zoomed", (datum: Datum): boolean => datum === this.zoomNode)
+      .classed("empty", (datum: Datum): boolean => datum.data.empty && this.isFirstLevelChild(datum))
       .each(
         withD3Element((datum: Datum, el: Element): void => {
           d3.select(el).attr("pointer-events", null)
@@ -340,6 +364,10 @@ class Renderer {
     if (d === this.zoomNode) {
       return
     }
+    if (d.data.empty && !this.isFirstLevelChild(d)) {
+      return
+    }
+
     const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
     const hideLabel: boolean = d3.select(el).classed(styles.arrow)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, hideLabel, focusPoint: { centroid } })

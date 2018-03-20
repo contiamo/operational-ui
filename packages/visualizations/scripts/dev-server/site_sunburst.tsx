@@ -13,289 +13,308 @@ import { VisualizationWrapper } from "../../src/index"
 
 const config: any = { maxRings: 4, propagateColors: true }
 
-const seriesAccessors = {
-  // color: (d: any, assignColor: any): string => d.value > 10000 ? assignColor("large") : assignColor("small")
-  // color: (d): string => d.value > 10000 ? "#f00" : "#0f0"
-}
-
 import { RawData } from "../../src/Sunburst/typings"
 
 const data: RawData = {
-  name: "All",
-  children: [
-    {
-      name: "Europe",
-      value: 52000,
-      children: [
-        {
-          name: "UK",
-          value: 11500,
-          children: [
+    "name": "Pageviews",
+    "data": {
+        "name": "All",
+        "value": "837398",
+        "children": [
             {
-              name: "London",
-              value: 1500,
-              children: [
-                {
-                  name: "Southwark",
-                  value: 123
-                },
-                {
-                  name: "Lambeth",
-                  value: 523
-                },
-                {
-                  name: "Marylebone",
-                  value: 623
-                }
-              ]
+                "name": "5__gutschein_von_teegschwendner_",
+                "value": "15999",
+                "color": "#ffd94d"
             },
             {
-              name: "Sheffield",
-              value: 1642
+                "name": "cardboard_virtual_reality_brille_geschenkt",
+                "value": "9241",
+                "color": "#f2994d"
             },
             {
-              name: "Exeter",
-              value: 935
+                "name": "exklusiver_vorverkauf_fr_das_eminem_konzert",
+                "value": "25542",
+                "color": "#f2994d"
             },
             {
-              name: "Manchester",
-              value: 2076
+                "name": "gesund_abnehmen_das_buch__geschenkt",
+                "value": "2355",
+                "color": "#66e6ff"
             },
             {
-              name: "Leeds",
-              value: 2970
-            }
-          ]
-        },
-        {
-          name: "Germany",
-          value: 9240,
-          children: [
+                "name": "gratis_fotoshooting",
+                "value": "1217",
+                "color": "#66e6ff"
+            },
             {
-              name: "Berlin",
-              children: [
-                {
-                  name: "Kreuzberg",
-                  value: 693,
-                  children: [
+                "name": "home",
+                "value": "764298",
+                "children": [
                     {
-                      name: "test",
-                      children: [
-                        {
-                          name: "test level 2",
-                          children: [
+                        "name": "5__gutschein_von_teegschwendner_",
+                        "value": "45905",
+                        "children": [
                             {
-                              name: "test level 3",
-                              children: [
-                                {
-                                  name: "test level 4",
-                                  value: 20
-                                }
-                              ]
+                                "name": "redeem-animation",
+                                "value": "9444",
+                                "children": [
+                                    {
+                                        "name": "5__gutschein_von_teegschwendner_",
+                                        "value": "6363",
+                                        "color": "#ffd94d"
+                                    },
+                                    {
+                                        "name": "missing",
+                                        "value": "3081",
+                                        "empty": true
+                                    }
+                                ],
+                                "color": "#ffd94d"
+                            },
+                            {
+                                "name": "missing",
+                                "value": "36461",
+                                "empty": true
                             }
-                          ]
-                        }
-                      ]
+                        ],
+                        "color": "#ffd94d"
+                    },
+                    {
+                        "name": "_personal_training_deluxe_von_pumperlgsund_gewinnen",
+                        "value": "22901",
+                        "color": "#ffd94d"
+                    },
+                    {
+                        "name": "activation-error",
+                        "value": "20354",
+                        "children": [
+                            {
+                                "name": "gesund_abnehmen_das_buch__geschenkt",
+                                "value": "7895",
+                                "color": "#ffd94d"
+                            },
+                            {
+                                "name": "gratis_fotoshooting",
+                                "value": "3249",
+                                "color": "#f2994d"
+                            },
+                            {
+                                "name": "zwei_gewrzdosen_geschenkt",
+                                "value": "8145",
+                                "color": "#40b2a6"
+                            },
+                            {
+                                "name": "missing",
+                                "value": "1065",
+                                "empty": true
+                            }
+                        ],
+                        "color": "#f2994d"
+                    },
+                    {
+                        "name": "apple_music_6_monate_kostenlos_erleben",
+                        "value": "1188",
+                        "color": "#f2994d"
+                    },
+                    {
+                        "name": "cardboard_virtual_reality_brille_geschenkt",
+                        "value": "65412",
+                        "children": [
+                            {
+                                "name": "redeem-animation",
+                                "value": "2307",
+                                "children": [
+                                    {
+                                        "name": "success",
+                                        "value": "2307",
+                                        "children": [
+                                            {
+                                                "name": "cardboard_virtual_reality_brille_geschenkt",
+                                                "value": "2307"
+                                            }
+                                        ],
+                                        "color": "#ffd94d"
+                                    }
+                                ],
+                                "color": "#ffd94d"
+                            },
+                            {
+                                "name": "missing",
+                                "value": "63105",
+                                "empty": true
+                            }
+                        ],
+                        "color": "#f2994d"
+                    },
+                    {
+                        "name": "exklusiver_vorverkauf_fr_das_eminem_konzert",
+                        "value": "30890",
+                        "color": "#f2994d"
+                    },
+                    {
+                        "name": "gesund_abnehmen_das_buch__geschenkt",
+                        "value": "43940",
+                        "color": "#66e6ff"
+                    },
+                    {
+                        "name": "gratis_fotoshooting",
+                        "value": "37456",
+                        "color": "#66e6ff"
+                    },
+                    {
+                        "name": "home.error",
+                        "value": "1782",
+                        "color": "#66e6ff"
+                    },
+                    {
+                        "name": "jbl_clip__fr_995_",
+                        "value": "12607",
+                        "color": "#66e6ff"
+                    },
+                    {
+                        "name": "login.telekom-username",
+                        "value": "6763",
+                        "children": [
+                            {
+                                "name": "login.telekom-password",
+                                "value": "6763",
+                                "children": [
+                                    {
+                                        "name": "exklusiver_vorverkauf_fr_das_eminem_konzert",
+                                        "value": "1009",
+                                        "color": "#ffd94d"
+                                    },
+                                    {
+                                        "name": "gesund_abnehmen_das_buch__geschenkt",
+                                        "value": "1129",
+                                        "color": "#66e6ff"
+                                    },
+                                    {
+                                        "name": "missing",
+                                        "value": "4625",
+                                        "empty": true
+                                    }
+                                ],
+                                "color": "#ffd94d"
+                            }
+                        ],
+                        "color": "#1973cc"
+                    },
+                    {
+                        "name": "mydeals",
+                        "value": "103266",
+                        "children": [
+                            {
+                                "name": "cardboard_virtual_reality_brille_geschenkt",
+                                "value": "2560",
+                                "children": [
+                                    {
+                                        "name": "mydeals",
+                                        "value": "1182",
+                                        "color": "#ffd94d"
+                                    },
+                                    {
+                                        "name": "missing",
+                                        "value": "1378",
+                                        "empty": true
+                                    }
+                                ],
+                                "color": "#ffd94d"
+                            },
+                            {
+                                "name": "gesund_abnehmen_das_buch__geschenkt",
+                                "value": "1330",
+                                "children": [
+                                    {
+                                        "name": "mydeals",
+                                        "value": "1330",
+                                        "color": "#ffd94d"
+                                    }
+                                ],
+                                "color": "#f2994d"
+                            },
+                            {
+                                "name": "jbl_clip__fr_995_",
+                                "value": "1039",
+                                "children": [
+                                    {
+                                        "name": "mydeals",
+                                        "value": "1039",
+                                        "color": "#ffd94d"
+                                    }
+                                ],
+                                "color": "#66e6ff"
+                            },
+                            {
+                                "name": "missing",
+                                "value": "98337",
+                                "empty": true
+                            }
+                        ],
+                        "color": "#1973cc"
+                    },
+                    {
+                        "name": "mydeals.empty",
+                        "value": "7225",
+                        "color": "#1973cc"
+                    },
+                    {
+                        "name": "pumperlgsund_abnehmprogramm_geschenkt",
+                        "value": "44515",
+                        "color": "#40b2a6"
+                    },
+                    {
+                        "name": "readly_zwei_monate_kostenlos",
+                        "value": "4081",
+                        "color": "#40b2a6"
+                    },
+                    {
+                        "name": "teil_1_der_maze_runner_trilogie_geschenkt",
+                        "value": "32469",
+                        "color": "#40b2a6"
+                    },
+                    {
+                        "name": "zwei_gewrzdosen_geschenkt",
+                        "value": "39617",
+                        "color": "#a6d9f2"
+                    },
+                    {
+                        "name": "missing",
+                        "value": "243927",
+                        "empty": true
                     }
-                  ]
-                },
-                {
-                  name: "Prenzlauer Berg",
-                  value: 402
-                },
-                {
-                  name: "Mitte",
-                  value: 573
-                }
-              ]
+                ],
+                "color": "#1973cc"
             },
             {
-              name: "Dortmund",
-              value: 1756
+                "name": "home.error",
+                "value": "10625",
+                "color": "#1973cc"
             },
             {
-              name: "Köln",
-              value: 1902
+                "name": "jbl_clip__fr_995_",
+                "value": "1337",
+                "color": "#40b2a6"
             },
             {
-              name: "München",
-              value: 2340
+                "name": "teil_1_der_maze_runner_trilogie_geschenkt",
+                "value": "6784",
+                "color": "#40b2a6"
             }
-          ]
-        },
-        {
-          name: "Spain",
-          value: 2345,
-          children: [
-            {
-              name: "Madrid",
-              value: 1025
-            },
-            {
-              name: "Barcelona",
-              value: 522
-            }
-          ]
-        },
-        {
-          name: "Italy",
-          value: 830,
-          children: [
-            {
-              name: "Rome",
-              value: 307
-            },
-            {
-              name: "Venice",
-              value: 132
-            },
-            {
-              name: "Naples",
-              value: 196
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Asia",
-      value: 38400,
-      children: [
-        {
-          name: "Japan",
-          value: 8230,
-          children: [
-            {
-              name: "Tokyo",
-              value: 2353
-            },
-            {
-              name: "Osaka",
-              value: 1864
-            }
-          ]
-        },
-        {
-          name: "China",
-          value: 13000,
-          children: [
-            {
-              name: "Beijing",
-              value: 3852
-            },
-            {
-              name: "Shanghai",
-              value: 3623
-            },
-            {
-              name: "Chengdu",
-              value: 2546
-            }
-          ]
-        },
-        {
-          name: "Thailand",
-          value: 2548
-        },
-        {
-          name: "India",
-          value: 1800,
-          children: [
-            {
-              name: "Mumbai",
-              value: 987
-            },
-            {
-              name: "Delhi",
-              value: 632
-            }
-          ]
-        },
-        {
-          name: "Malaysia",
-          value: 1423
-        }
-      ]
-    },
-    {
-      name: "North America",
-      children: [
-        {
-          name: "USA",
-          value: 33218,
-          children: [
-            {
-              name: "Washington DC",
-              value: 5742
-            },
-            {
-              name: "California",
-              value: 19200,
-              children: [
-                {
-                  name: "San Fransisco",
-                  value: 4298
-                },
-                {
-                  name: "Los Angeles",
-                  value: 6528
-                },
-                {
-                  name: "Sacramento",
-                  value: 3908
-                }
-              ]
-            },
-            {
-              name: "New York City",
-              value: 8276
-            }
-          ]
-        },
-        {
-          name: "Canada",
-          value: 6714,
-          children: [
-            {
-              name: "Toronto",
-              value: 2456
-            },
-            {
-              name: "Vancouver",
-              value: 4258
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Africa",
-      value: 4130,
-      children: [
-        {
-          name: "South Africa",
-          value: 1300,
-          children: [
-            {
-              name: "Capetown",
-              value: 1254
-            }
-          ]
-        },
-        {
-          name: "Zimbabwe",
-          value: 636
-        },
-        {
-          name: "Tanzania",
-          value: 132
-        }
-      ]
+        ]
     }
-  ]
 }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} /></OperationalUI>
+const accessors: any = {
+  data: {
+    data: (d: any) => d.data
+  },
+  series: {
+    color: (d: any) => d.color
+  }
+}
+
+const App = () => <OperationalUI><VisualizationWrapper facade={Sunburst} data={data} config={config} accessors={accessors}/></OperationalUI>
 
 render(<App />, containerNode)
 
