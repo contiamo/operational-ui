@@ -13,6 +13,7 @@ import {
   Select,
   Layout,
   Grid,
+  Switch,
   Record,
   Progress,
   Breakdown,
@@ -29,7 +30,7 @@ import {
 } from "../../src"
 
 interface State {
-  isOpen: boolean
+  is: boolean
   value: string | null
 }
 
@@ -43,7 +44,7 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 class Site extends React.Component<{}, State> {
   state: State = {
-    isOpen: true,
+    is: true,
     value: null
   }
 
@@ -63,7 +64,7 @@ class Site extends React.Component<{}, State> {
             <Card css={{ position: "relative" }}>
               <CardHeader>
                 Card One
-                <Button color="info" condensed css={{marginRight: 0}}>
+                <Button color="info" condensed css={{ marginRight: 0 }}>
                   Go somewhere
                 </Button>
               </CardHeader>
@@ -74,6 +75,14 @@ class Site extends React.Component<{}, State> {
             </Card>
             <Card css={{ position: "relative" }}>
               <CardHeader>Card Two</CardHeader>
+              <Switch
+                on={this.state.is}
+                onChange={() => {
+                  this.setState(prevState => ({
+                    is: !prevState.is
+                  }))
+                }}
+              />
             </Card>
             <Card css={{ position: "relative" }}>
               <CardHeader>Card Three</CardHeader>
