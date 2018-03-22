@@ -64,7 +64,7 @@ const BodyContent = glamorous.div({
 })
 
 const customButtonStyles: {} = {
-  fontSize: 18,
+  fontSize: 20,
   margin: "0 6px"
 }
 
@@ -83,14 +83,14 @@ const sexyTheme: Theme = {
       textTransform: "none",
       letterSpacing: "normal",
       lineHeight: "1.6",
-      fontSize: 24
+      fontSize: 20
     },
     body: {
       fontWeight: 400,
       textTransform: "none",
       letterSpacing: "normal",
       lineHeight: "1.6",
-      fontSize: 24
+      fontSize: 20
     }
   }
 }
@@ -141,7 +141,7 @@ export default class App extends React.Component<{}, {}> {
               </TitleBarContent>
             </TitleBar>
             <StaticContent
-              css={{ marginTop: 26 }}
+              css={{ marginTop: 28 }}
               markdownContent={`\`Operational UI\` is a library made for data-driven decision making. It does its best when used for interfaces that assume familiarity through routine use, prioritizing compactness and subtle hierarchies. 
               
 It implements a [design language](https://ui.contiamo.com/docs/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352), and prefers [uncomplicated basics]() and [elaborate dataviz]().
