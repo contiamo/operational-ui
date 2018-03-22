@@ -27,7 +27,7 @@ export interface IMarathon {
   afterEach?: (fn: any) => void
   beforeAll?: (fn: any) => void
   afterAll?: (fn: any) => void
-  container?: HTMLElement
+  container: any
 }
 
 interface ITestWithRunner {

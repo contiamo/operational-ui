@@ -33,6 +33,6 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, gridType = _a.gridType;
     return (__assign({ label: "Grid", width: "100%", height: "100%", display: "grid", padding: theme.spacing * 4 / 3, gridColumnGap: theme.spacing * 4 / 3, gridRowGap: theme.spacing * 4 / 3 }, getGridCSSProperties(gridType)));
 });
-var Grid = function (props) { return React.createElement(Container, { gridType: props.type ? props.type : "3x2" }, props.children); };
+var Grid = function (props) { return (React.createElement(Container, { css: props.css, className: props.className, gridType: props.type ? props.type : "3x2" }, props.children)); };
 exports.default = Grid;
 //# sourceMappingURL=Grid.js.map

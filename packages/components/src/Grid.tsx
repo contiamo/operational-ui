@@ -3,6 +3,8 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface Props {
+  css?: {}
+  className?: string
   type?: string
   children?: React.ReactNode
 }
@@ -40,6 +42,10 @@ const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: 
   ...getGridCSSProperties(gridType)
 }))
 
-const Grid = (props: Props) => <Container gridType={props.type ? props.type : "3x2"}>{props.children}</Container>
+const Grid = (props: Props) => (
+  <Container css={props.css} className={props.className} gridType={props.type ? props.type : "3x2"}>
+    {props.children}
+  </Container>
+)
 
 export default Grid

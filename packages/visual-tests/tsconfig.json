@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "outDir": "lib",
     "target": "ES5",
     "module": "commonjs",
     "sourceMap": true,
-    "strict": true,
     "jsx": "react",
     "lib": ["dom", "es2015", "es5", "es7", "scripthost"],
     "moduleResolution": "node"

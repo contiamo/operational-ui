@@ -1,3 +1,6 @@
-import Marathon from "./components/Marathon"
+import * as React from "react"
+import { render } from "react-dom"
 
-console.log(Marathon)
+import App from "./App"
+
+render(<App />, document.querySelector("#app"))
