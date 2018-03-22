@@ -1,5 +1,5 @@
 import * as React from "react"
-import marked from "marked"
+import * as marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 import { Theme } from "@operational/theme"
@@ -13,6 +13,9 @@ interface Props {
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "showcasestaticcontent",
+  fontSize: "24px",
+  padding: 20,
+  lineHeight: 1.6,
   "& pre": {
     backgroundColor: "#eee",
     color: theme.colors.black,

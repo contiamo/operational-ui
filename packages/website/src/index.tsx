@@ -4,7 +4,7 @@ import glamorous from "glamorous"
 import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/components"
 import { Theme } from "@operational/theme"
 
-import StaticContent from "./components/StaticContent"
+import { Grid, StaticContent } from "./components"
 import { Operational } from "./components/Icons"
 
 const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -31,13 +31,13 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& h1": {
     ...theme.typography.title,
     fontWeight: 400,
-    fontSize: "2.5rem",
+    fontSize: "36px",
     textAlign: "center",
     margin: "10px 0 0 0"
   },
   "& h2": {
     ...theme.typography.body,
-    fontSize: "1.25rem",
+    fontSize: "24px",
     textAlign: "center",
     marginTop: 0
   }
@@ -63,6 +63,11 @@ const BodyContent = glamorous.div({
   margin: "auto"
 })
 
+const customButtonStyles: {} = {
+  fontSize: 18,
+  margin: "0 6px",
+}
+
 export default class App extends React.Component<{}, {}> {
   state = {
     rotation: 0
@@ -87,23 +92,33 @@ export default class App extends React.Component<{}, {}> {
   render() {
     return (
       <OperationalUI withBaseStyles>
-        <Card>
-          <TitleBar>
-            <TitleBarContent>
-              <Operational size={80} rotation={this.state.rotation} />
-              <h1>Operational UI</h1>
-              <h2>Building blocks for effective operational interfaces</h2>
-              <TitleBarNav>
-                <a>
-                  <Button color="info">Get started</Button>
-                </a>
-                <a href="https://github.com/contiamo/operational-ui">
-                  <Button color="black">GitHub</Button>
-                </a>
-              </TitleBarNav>
-            </TitleBarContent>
-          </TitleBar>
-        </Card>
+        <Grid>
+          <Card>
+            <TitleBar>
+              <TitleBarContent>
+                <Operational size={80} rotation={this.state.rotation} />
+                <h1>Operational UI</h1>
+                <h2>Building blocks for effective operational interfaces</h2>
+                <TitleBarNav>
+                  <a>
+                    <Button color="info" css={customButtonStyles}>
+                      Get started
+                    </Button>
+                  </a>
+                  <a href="https://github.com/contiamo/operational-ui">
+                    <Button color="black" css={customButtonStyles}>
+                      GitHub
+                    </Button>
+                  </a>
+                </TitleBarNav>
+              </TitleBarContent>
+            </TitleBar>
+            <StaticContent markdownContent="`Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for data-driven interfaces that assume familiarity through routine use, prioritizing compactness and space-efficiency. It implements a [design language](https://ui.contiamo.com/docs/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout." />
+          </Card>
+          <Card />
+          <Card />
+          <Card />
+        </Grid>
       </OperationalUI>
     )
   }
