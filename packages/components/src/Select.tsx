@@ -1,11 +1,11 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { Label, LabelText } from "./utils/mixins"
 import SelectOption from "./Select/SelectOption"
 import SelectFilter from "./Select/SelectFilter"
 import { Container, Options, OptionsList, DisplayValue } from "./Select/Select.style"
-import withLabel from "./utils/with-label"
 
 export type Value = number | string
 
@@ -23,7 +23,7 @@ const displayOption = (opt: IOption): string => {
 
 export interface Props {
   id?: string
-  css?: any
+  css?: CSSProperties
   className?: string
   options: IOption[]
   value: undefined | Value | Value[]
@@ -34,6 +34,7 @@ export interface Props {
   onFilter?: () => void
   color?: string
   placeholder?: string
+  label?: string
 }
 
 export interface State {
@@ -49,12 +50,12 @@ class Select extends React.Component<Props, State> {
     filter: new RegExp(/./)
   }
 
-  containerNode: any
+  containerNode: Node
 
   // This implements "click outside to close" behavior
-  handleClick(ev: MouseEvent) {
+  handleClick(ev: React.SyntheticEvent<Node>): void {
     // if we're clicking on the Select itself,
-    if (this.containerNode && this.containerNode.contains(ev.target)) {
+    if (this.containerNode && this.containerNode.contains(ev.target as Node)) {
       return
     }
 
@@ -153,44 +154,55 @@ class Select extends React.Component<Props, State> {
   }
 
   render() {
-    return (
+    const { id, color, disabled, value, options, filterable, label } = this.props
+    const { updating, open, filter } = this.state
+
+    const selectWithoutLabel = (
       <Container
-        id={this.props.id}
-        innerRef={containerNode => (this.containerNode = containerNode)}
-        updating={this.state.updating}
-        color={this.props.color}
-        disabled={this.props.disabled}
+        id={id}
+        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
+        updating={updating}
+        color={color}
+        disabled={disabled}
         role="listbox"
         tabIndex={-2}
         onClick={() => this.toggle()}
       >
-        <DisplayValue
-          isPlaceholder={Array.isArray(this.props.value) ? this.props.value.length === 0 : !this.props.value}
-        >
+        <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>
           {this.getDisplayValue()}
         </DisplayValue>
-        {this.props.options.length && this.state.open ? (
-          <Options>
-            {this.props.filterable && <SelectFilter onChange={(e: any) => this.updateFilter(e)} />}
-            <OptionsList>
-              {this.props.options.map(
-                (option: IOption) =>
-                  option.label.match(this.state.filter) && (
-                    <SelectOption
-                      key={String(option.value)}
-                      onClick={() => this.selectOption(option)}
-                      selected={this.isOptionSelected(option)}
-                    >
-                      {option.label}
-                    </SelectOption>
-                  )
+        {options.length &&
+          open && (
+            <Options>
+              {filterable && (
+                <SelectFilter onChange={(e: React.SyntheticEvent<HTMLInputElement>) => this.updateFilter(e)} />
               )}
-            </OptionsList>
-          </Options>
-        ) : (
-          ""
-        )}
+              <OptionsList>
+                {options.map(
+                  (option: IOption) =>
+                    option.label.match(filter) && (
+                      <SelectOption
+                        key={String(option.value)}
+                        onClick={() => this.selectOption(option)}
+                        selected={this.isOptionSelected(option)}
+                      >
+                        {option.label}
+                      </SelectOption>
+                    )
+                )}
+              </OptionsList>
+            </Options>
+          )}
       </Container>
+    )
+
+    return label ? (
+      <Label>
+        <LabelText>{label}</LabelText>
+        {selectWithoutLabel}
+      </Label>
+    ) : (
+      selectWithoutLabel
     )
   }
 }

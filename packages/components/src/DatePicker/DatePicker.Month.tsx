@@ -53,7 +53,8 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
             selected={isSelected(date, { start, end })}
             key={index}
             isPlaceholder
-            onClick={() => {
+            onClick={(ev: any) => {
+              ev.preventDefault()
               onChange && onChange(setNewDate(date, { start, end }))
             }}
           >
@@ -67,7 +68,8 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
           <Day
             selected={isSelected(date, { start, end })}
             key={index}
-            onClick={() => {
+            onClick={(ev: any) => {
+              ev.preventDefault()
               onChange && onChange(setNewDate(date, { start, end }))
             }}
           >
@@ -82,7 +84,8 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
             key={index}
             selected={isSelected(date, { start, end })}
             isPlaceholder
-            onClick={() => {
+            onClick={(ev: any) => {
+              ev.preventDefault()
               onChange && onChange(setNewDate(date, { start, end }))
             }}
           >

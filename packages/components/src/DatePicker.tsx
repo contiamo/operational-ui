@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { Label, LabelText } from "./utils/mixins"
 import Card from "./Card"
 import Icon from "./Icon"
 import {
@@ -12,15 +13,14 @@ import {
   IconContainer,
   Days,
   Day,
-  Input
+  Input,
+  DatePickerCard
 } from "./DatePicker/DatePicker.styles"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker/DatePicker.utils"
 import Month from "./DatePicker/DatePicker.Month"
-import withLabel from "./utils/with-label"
 
 export interface Props {
   id?: string
-  // Injected by withLabel higher-order component
   domId?: string
   label?: string
   start?: string
@@ -40,8 +40,8 @@ export interface State {
 class DatePicker extends React.Component<Props, State> {
   state = {
     isExpanded: false,
-    year: 2017,
-    month: 9
+    year: new Date().getFullYear(),
+    month: new Date().getMonth()
   }
 
   containerNode: any
@@ -91,42 +91,28 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   render() {
-    const { start, end, label, id } = this.props
+    const { onChange, placeholder, start, end, label, id, css, className } = this.props
+    const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
-    const placeholderDays = monthStartDay(this.state.year, this.state.month)
-    const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
-    // `css` and `className` props are not set, as they are set on the wrapped label container.
-    // See ./src/utils/with-label.tsx.
-    return (
+    const placeholderDays = monthStartDay(year, month)
+    const daysInCurrentMonth = daysInMonth(month, year)
+    const datePickerWithoutLabel = (
       <Container
         innerRef={node => {
           this.containerNode = node
         }}
-        key={this.props.id}
-        isExpanded={this.state.isExpanded}
+        key={id}
+        isExpanded={isExpanded}
       >
-        <Toggle
-          onClick={(ev: any) => {
-            this.setState(prevState => ({
-              isExpanded: !prevState.isExpanded
-            }))
-          }}
-        >
-          <Icon name={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} size={14} />
-        </Toggle>
         {!!(start && end) && (
-          <ClearButton
-            onClick={(ev: any) => {
+          <Toggle
+            onClick={(ev: any): void => {
               ev.preventDefault()
-              this.props.onChange &&
-                this.props.onChange({
-                  start: undefined,
-                  end: undefined
-                })
+              onChange && onChange({ start: null, end: null })
             }}
           >
             <Icon name="X" size={14} />
-          </ClearButton>
+          </Toggle>
         )}
         <Input
           id={domId}
@@ -135,43 +121,38 @@ class DatePicker extends React.Component<Props, State> {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
-          placeholder={this.props.placeholder || "Enter date"}
+          placeholder={placeholder || "Enter date"}
           onClick={(ev: any) => {
-            this.setState(prevState => ({
-              isExpanded: !prevState.isExpanded
-            }))
-            this.inputNode && this.inputNode.blur()
+            console.log(ev.target)
+            this.setState(prevState => ({ isExpanded: !prevState.isExpanded }))
+            this.inputNode && this.state.isExpanded && this.inputNode.blur()
           }}
+          css={{ width: "100%" }}
         />
-        <Card className="co_card">
+        <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
-            <IconContainer
-              onClick={() => {
-                this.changeMonth(-1)
-              }}
-            >
+            <IconContainer onClick={() => this.changeMonth(-1)}>
               <Icon name="ChevronLeft" size={14} />
             </IconContainer>
-            <span>{`${months[this.state.month]}, ${this.state.year}`}</span>
-            <IconContainer
-              onClick={() => {
-                this.changeMonth(+1)
-              }}
-            >
+            <span>{`${months[month]}, ${year}`}</span>
+            <IconContainer onClick={() => this.changeMonth(+1)}>
               <Icon name="ChevronRight" size={14} />
             </IconContainer>
           </MonthNav>
-          <Month
-            start={this.props.start}
-            end={this.props.end}
-            year={this.state.year}
-            month={this.state.month}
-            onChange={this.props.onChange}
-          />
-        </Card>
+          <Month start={start} end={end} year={year} month={month} onChange={onChange} />
+        </DatePickerCard>
       </Container>
+    )
+
+    return label ? (
+      <Label>
+        <LabelText>{label}</LabelText>
+        {datePickerWithoutLabel}
+      </Label>
+    ) : (
+      datePickerWithoutLabel
     )
   }
 }
 
-export default withLabel(DatePicker)
+export default DatePicker

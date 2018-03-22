@@ -1,37 +1,57 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
+
+// It is necessary to import the card props so that TypeScript can compile type definitions.
+import Card, { Props as CardProps } from "../Card"
 import * as mixins from "../utils/mixins"
+import { inputDefaultWidth } from "../constants"
 
-const inputHeight: number = 31
+const inputHeight: number = 33
 
-export const Container: GlamorousComponent<{ isExpanded: boolean }, {}> = glamorous.div(
-  ({ isExpanded, theme }: { isExpanded: boolean; theme: Theme }): {} => ({
+export interface ContainerProps {
+  isExpanded: boolean
+}
+
+export const Container: GlamorousComponent<ContainerProps, ContainerProps & { theme: Theme }> = glamorous.div(
+  ({ isExpanded, theme }): CSSProperties => ({
     label: "datepicker",
-    display: "inline-block",
-    width: "auto",
-    position: "relative",
-    "& .co_card": {
-      display: isExpanded ? "block" : "none",
-      position: "absolute",
-      boxShadow: theme.shadows.popup,
-      top: inputHeight + 4,
-      left: 0,
-      padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
-      width: 210 + 2 * theme.spacing,
-      zIndex: theme.baseZIndex + 1000
-    }
+    width: inputDefaultWidth,
+    position: "relative"
   })
 )
 
-export const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+export interface DatePickerCardProps {
+  theme: Theme
+  isExpanded?: boolean
+}
+
+export const DatePickerCard = glamorous(Card)(
+  {
+    position: "absolute",
+    left: 0
+  },
+  ({ theme, isExpanded }: DatePickerCardProps): CSSProperties => ({
+    display: isExpanded ? "block" : "none",
+    boxShadow: theme.shadows.popup,
+    top: inputHeight + 4,
+    padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
+    width: inputDefaultWidth,
+    zIndex: theme.baseZIndex + 1000
+  })
+)
+
+export const Toggle: GlamorousComponent<
+  { onClick?: (ev: React.SyntheticEvent<MouseEvent>) => void },
+  {}
+> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   cursor: "pointer",
   top: 1,
   right: 1,
-  borderTopRightRadius: 2,
-  borderBottomRightRadius: 2,
+  borderTopRightRadius: 4,
+  borderBottomRightRadius: 4,
   width: inputHeight - 2,
   height: inputHeight - 2,
   fontSize: 10,
@@ -40,7 +60,7 @@ export const Toggle: GlamorousComponent<{ onClick?: {} }, {}> = glamorous.div(({
   justifyContent: "center",
   zIndex: theme.baseZIndex + 1000,
   color: theme.colors.gray80,
-  borderLeft: `1px solid ${theme.colors.gray40}`,
+  borderLeft: `1px solid rgb(208, 217, 229)`,
   "& svg": {
     position: "relative",
     pointerEvents: "none"
@@ -98,8 +118,8 @@ export const Day: GlamorousComponent<
   },
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
     ...theme.typography.body,
-    backgroundColor: selected ? theme.colors.success : "transparent",
-    color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray80 : theme.colors.black
+    backgroundColor: selected ? theme.colors.info : "transparent",
+    color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray40 : theme.colors.black
   })
 )
 
@@ -107,19 +127,19 @@ export const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.inpu
   ({ theme }: { theme: Theme }): {} => ({
     ...theme.typography.body,
     userSelect: "none",
-    borderRadius: 2,
+    borderRadius: 4,
     padding: theme.spacing * 2 / 3,
     height: inputHeight,
     cursor: "pointer",
     border: "1px solid",
-    borderColor: theme.colors.gray30,
+    borderColor: "rgb(208, 217, 229)",
     width: 200,
     position: "relative",
     "&:focus": mixins.inputFocus({ theme })
   })
 )
 
-export const ClearButton: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div(
+export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => void }, {}> = glamorous.div(
   ({ theme }: { theme: Theme }): {} => ({
     width: inputHeight,
     height: inputHeight,

@@ -9,6 +9,7 @@ const config = {
     publicPath: "/",
     filename: "bundle.js"
   },
+  devtool: "inline-source-map",
   module: {
     rules: [
       {

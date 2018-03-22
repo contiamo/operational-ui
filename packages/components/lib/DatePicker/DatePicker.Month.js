@@ -31,19 +31,22 @@ var Month = function (_a) {
         DatePicker_utils_1.range(prevPlaceholderDays).map(function (number, index) {
             var day = daysInPreviousMonth + index - prevPlaceholderDays;
             var date = DatePicker_utils_1.toDate(prevYear, prevMonth, day);
-            return (React.createElement(DatePicker_styles_1.Day, { selected: isSelected(date, { start: start, end: end }), key: index, isPlaceholder: true, onClick: function () {
+            return (React.createElement(DatePicker_styles_1.Day, { selected: isSelected(date, { start: start, end: end }), key: index, isPlaceholder: true, onClick: function (ev) {
+                    ev.preventDefault();
                     onChange && onChange(setNewDate(date, { start: start, end: end }));
                 } }, day + 1));
         }),
         DatePicker_utils_1.range(daysInCurrentMonth).map(function (number, index) {
             var date = DatePicker_utils_1.toDate(year, month, index);
-            return (React.createElement(DatePicker_styles_1.Day, { selected: isSelected(date, { start: start, end: end }), key: index, onClick: function () {
+            return (React.createElement(DatePicker_styles_1.Day, { selected: isSelected(date, { start: start, end: end }), key: index, onClick: function (ev) {
+                    ev.preventDefault();
                     onChange && onChange(setNewDate(date, { start: start, end: end }));
                 } }, index + 1));
         }),
         DatePicker_utils_1.range(nextPlaceholderDays).map(function (number, index) {
             var date = DatePicker_utils_1.toDate(nextYear, nextMonth, number);
-            return (React.createElement(DatePicker_styles_1.Day, { key: index, selected: isSelected(date, { start: start, end: end }), isPlaceholder: true, onClick: function () {
+            return (React.createElement(DatePicker_styles_1.Day, { key: index, selected: isSelected(date, { start: start, end: end }), isPlaceholder: true, onClick: function (ev) {
+                    ev.preventDefault();
                     onChange && onChange(setNewDate(date, { start: start, end: end }));
                 } }, number + 1));
         })));

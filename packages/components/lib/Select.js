@@ -46,6 +46,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var mixins_1 = require("./utils/mixins");
 var SelectOption_1 = require("./Select/SelectOption");
 var SelectFilter_1 = require("./Select/SelectFilter");
 var Select_style_1 = require("./Select/Select.style");
@@ -172,13 +173,19 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Select_style_1.Container, { id: this.props.id, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, updating: this.state.updating, color: this.props.color, disabled: this.props.disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
-            React.createElement(Select_style_1.DisplayValue, { isPlaceholder: Array.isArray(this.props.value) ? this.props.value.length === 0 : !this.props.value }, this.getDisplayValue()),
-            this.props.options.length && this.state.open ? (React.createElement(Select_style_1.Options, null,
-                this.props.filterable && React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } }),
-                React.createElement(Select_style_1.OptionsList, null, this.props.options.map(function (option) {
-                    return option.label.match(_this.state.filter) && (React.createElement(SelectOption_1.default, { key: String(option.value), onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
-                })))) : ("")));
+        var _a = this.props, id = _a.id, color = _a.color, disabled = _a.disabled, value = _a.value, options = _a.options, filterable = _a.filterable, label = _a.label;
+        var _b = this.state, updating = _b.updating, open = _b.open, filter = _b.filter;
+        var selectWithoutLabel = (React.createElement(Select_style_1.Container, { id: id, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, updating: updating, color: color, disabled: disabled, role: "listbox", tabIndex: -2, onClick: function () { return _this.toggle(); } },
+            React.createElement(Select_style_1.DisplayValue, { isPlaceholder: Array.isArray(value) ? value.length === 0 : !value }, this.getDisplayValue()),
+            options.length &&
+                open && (React.createElement(Select_style_1.Options, null,
+                filterable && (React.createElement(SelectFilter_1.default, { onChange: function (e) { return _this.updateFilter(e); } })),
+                React.createElement(Select_style_1.OptionsList, null, options.map(function (option) {
+                    return option.label.match(filter) && (React.createElement(SelectOption_1.default, { key: String(option.value), onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
+                }))))));
+        return label ? (React.createElement(mixins_1.Label, null,
+            React.createElement(mixins_1.LabelText, null, label),
+            selectWithoutLabel)) : (selectWithoutLabel);
     };
     return Select;
 }(React.Component));

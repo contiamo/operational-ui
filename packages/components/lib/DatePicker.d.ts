@@ -1,3 +1,5 @@
+/// <reference types="react" />
+import * as React from "react";
 export interface Props {
     id?: string;
     domId?: string;
@@ -17,5 +19,19 @@ export interface State {
     year: number;
     month: number;
 }
-declare const _default: any;
-export default _default;
+declare class DatePicker extends React.Component<Props, State> {
+    state: {
+        isExpanded: boolean;
+        year: number;
+        month: number;
+    };
+    containerNode: any;
+    inputNode: any;
+    keypressHandler: (a: any) => void;
+    outsideClickHandler: (a: any) => void;
+    changeMonth(diff: number): void;
+    componentDidMount(): void;
+    componentWillUnmount(): void;
+    render(): JSX.Element;
+}
+export default DatePicker;
