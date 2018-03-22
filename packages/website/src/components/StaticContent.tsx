@@ -4,6 +4,7 @@ import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 import { Theme } from "@operational/theme"
 import highlight from "highlight.js"
+import { lighten } from "@operational/utils"
 
 interface Props {
   css?: {}
@@ -12,19 +13,17 @@ interface Props {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  ...theme.typography.body,
   label: "showcasestaticcontent",
-  fontSize: "24px",
-  padding: 20,
+  padding: "0 10px",
   lineHeight: 1.6,
-  "& pre": {
-    backgroundColor: "#eee",
-    color: theme.colors.black,
-    borderRadius: 2,
-    padding: theme.spacing,
-    maxWidth: 680
+  "& code": {
+    padding: "0 2px",
+    borderRadius: 3,
+    backgroundColor: lighten(theme.colors.info, 50)
   },
-  "& pre code": {
-    backgroundColor: "transparent"
+  "& > :first-child": {
+    marginTop: 0
   }
 }))
 

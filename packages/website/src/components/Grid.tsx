@@ -29,6 +29,13 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     gridColumnEnd: "span 2",
     gridRowStart: "1",
     gridRowEnd: "span 2"
+  },
+  "& > :nth-child(3)": {
+    gridColumnStart: "4",
+    gridColumnEnd: "span 2",
+    gridRowStart: "3",
+    gridRowEnd: "span 1"
+
   }
 }))
 
