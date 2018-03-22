@@ -1,4 +1,4 @@
-import { Accessors, Facade, InputData, ProcessFlowConfig } from "./typings";
+import { Accessors, Facade, ProcessFlowConfig } from "./typings";
 declare class ProcessFlowFacade implements Facade {
     private __disposed;
     private canvas;
@@ -15,7 +15,7 @@ declare class ProcessFlowFacade implements Facade {
     private insertCanvas();
     private insertComponents();
     private insertSeries();
-    data(data?: InputData): InputData;
+    data(data?: any): any;
     config(config?: Partial<ProcessFlowConfig>): ProcessFlowConfig;
     accessors(type: string, accessors: Accessors<any>): Accessors<any>;
     on(event: string, handler: any): void;

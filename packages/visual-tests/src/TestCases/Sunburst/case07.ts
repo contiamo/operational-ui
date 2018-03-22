@@ -4930,4 +4930,4 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Simple rendering / large dataset"
+export const title: string = "Large dataset"

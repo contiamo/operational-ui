@@ -2,4 +2,8 @@ import pieChartTestCases from "./PieChart"
 import processFlowTestCases from "./ProcessFlow"
 import sunburstTestCases from "./Sunburst"
 
-export default [ pieChartTestCases, processFlowTestCases, sunburstTestCases ]
+export default [
+  { title: "Pie Charts", marathons: pieChartTestCases },
+  { title: "Process Flow", marathons: processFlowTestCases },
+  { title: "Sunburst charts", marathons: sunburstTestCases }
+]

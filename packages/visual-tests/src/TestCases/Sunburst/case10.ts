@@ -321,7 +321,7 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 
   test("Changes the number formatter", () => {
-    viz.config({ numberFormatter: numberFormatter })
+    viz.config({ numberFormatter })
     viz.draw()
   })
 

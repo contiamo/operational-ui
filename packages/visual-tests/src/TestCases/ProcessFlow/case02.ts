@@ -59,7 +59,7 @@ const data2: any = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void  => {
+export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz = new ProcessFlow(container)
 
   test("Focuses a link", () => {
@@ -91,7 +91,10 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void  => {
     })
     viz.accessors("node", {
       label: (node: any) => `Node ${node.id}`,
-      content: [{ key: "Description", value: "This is a node." }, { key: "Comment", value: "This comment is boring." }]
+      content: (node: any) => [
+        { key: "Description", value: "This is a node." },
+        { key: "Comment", value: "This comment is boring." }
+      ]
     })
     viz.draw()
   })

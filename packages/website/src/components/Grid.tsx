@@ -35,7 +35,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     gridColumnEnd: "span 2",
     gridRowStart: "3",
     gridRowEnd: "span 1"
-
   }
 }))
 

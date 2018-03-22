@@ -262,4 +262,4 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Data transitions - exiting"
+export const title: string = "Exiting"

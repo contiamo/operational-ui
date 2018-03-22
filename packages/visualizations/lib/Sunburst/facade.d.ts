@@ -1,4 +1,4 @@
-import { Accessors, Facade, RawData, SunburstConfig } from "./typings";
+import { Accessors, Facade, SunburstConfig } from "./typings";
 declare class SunburstFacade implements Facade {
     private __disposed;
     private canvas;
@@ -15,7 +15,7 @@ declare class SunburstFacade implements Facade {
     private initialComputed();
     private insertCanvas();
     private insertComponents();
-    data(data?: RawData): RawData;
+    data(data?: any): any;
     config(config?: Partial<SunburstConfig>): SunburstConfig;
     accessors(type: string, accessors: Accessors<any>): Accessors<any>;
     on(event: string, handler: any): void;

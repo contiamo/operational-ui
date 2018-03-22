@@ -140,7 +140,7 @@ class ProcessFlowFacade implements Facade {
     )
   }
 
-  data(data?: InputData): InputData {
+  data(data?: any): any {
     return this.state.data(data)
   }
 

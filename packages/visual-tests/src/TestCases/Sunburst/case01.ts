@@ -203,7 +203,7 @@ const data4 = {
       children: [
         {
           name: "USA",
-          value: "33218",
+          value: 33218,
           children: [
             {
               name: "Washington DC",
@@ -286,4 +286,4 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Data transitions - entering and updating"
+export const title: string = "Entering and updating"

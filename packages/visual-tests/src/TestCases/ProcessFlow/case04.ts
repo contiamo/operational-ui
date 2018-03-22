@@ -1,5 +1,6 @@
 import { ProcessFlow, ProcessFlowLoopHandler } from "@operational/visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
+import { IMarathon } from "../../components/Marathon"
 
 const journeys = [
   { path: ["135", "22", "186", "20", "1"], size: 42 },
@@ -104,17 +105,19 @@ const journeys = [
   { path: ["135", "22", "18", "109", "2", "77", "53", "192"], size: 1 }
 ]
 
-const data: IData = {}
-data.unloopedJourneys = ProcessFlowLoopHandler(journeys)
-const nodeList: string[] = flow(map((journey: IJourney): string[] => journey.path), flatten, uniq)(
-  data.unloopedJourneys
-)
-data.nodeList = map((nodeId: string): INode => {
-  return {
-    id: nodeId,
-    size: 0
-  }
-})(nodeList)
+const unloopedJourneys = ProcessFlowLoopHandler(journeys)
+
+const nodeList: string[] = flow(map((journey): string[] => journey.path), flatten, uniq)(unloopedJourneys)
+
+const data = {
+  unloopedJourneys,
+  nodeList: map(nodeId => {
+    return {
+      id: nodeId,
+      size: 0
+    }
+  })(nodeList)
+}
 
 const config = {
   maxNodeSize: 800,
@@ -134,9 +137,12 @@ const accessors = {
       }
       return "#fff"
     },
-    content: [{ key: "Description", value: "This is a node." }, { key: "Comment", value: "This comment is boring." }],
+    content: (d: any) => [
+      { key: "Description", value: "This is a node." },
+      { key: "Comment", value: "This comment is boring." }
+    ],
     label: (d: any) => "N:" + d.id,
-    labelPosition: "top"
+    labelPosition: (d: any) => "top"
   },
   link: {
     stroke: (d: any) => {
