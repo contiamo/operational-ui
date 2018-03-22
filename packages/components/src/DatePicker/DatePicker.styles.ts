@@ -6,6 +6,7 @@ import { fadeIn } from "@operational/utils"
 // It is necessary to import the card props so that TypeScript can compile type definitions.
 import Card, { Props as CardProps } from "../Card"
 import * as mixins from "../utils/mixins"
+import { inputDefaultWidth } from "../constants"
 
 const inputHeight: number = 33
 
@@ -16,7 +17,7 @@ export interface ContainerProps {
 export const Container: GlamorousComponent<ContainerProps, ContainerProps & { theme: Theme }> = glamorous.div(
   ({ isExpanded, theme }): CSSProperties => ({
     label: "datepicker",
-    width: 215 + 2 * theme.spacing,
+    width: inputDefaultWidth,
     position: "relative"
   })
 )
@@ -36,7 +37,7 @@ export const DatePickerCard = glamorous(Card)(
     boxShadow: theme.shadows.popup,
     top: inputHeight + 4,
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
-    width: 215 + 2 * theme.spacing,
+    width: inputDefaultWidth,
     zIndex: theme.baseZIndex + 1000
   })
 )

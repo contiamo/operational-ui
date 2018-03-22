@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
 import { Label, LabelText, inputFocus } from "./utils/mixins"
+import { inputDefaultWidth } from "./constants"
 
 export interface Props {
   css?: {}
@@ -31,7 +32,7 @@ const InputField = glamorous.input(
     // default looks.
     ...isStandalone ? {} : { display: "block" },
     label: "input",
-    minWidth: 240,
+    minWidth: inputDefaultWidth,
     padding: theme.spacing * 2 / 3,
     border: "1px solid",
     opacity: disabled ? 0.6 : 1.0,

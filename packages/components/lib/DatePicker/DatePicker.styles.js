@@ -12,12 +12,13 @@ var glamorous_1 = require("glamorous");
 // It is necessary to import the card props so that TypeScript can compile type definitions.
 var Card_1 = require("../Card");
 var mixins = require("../utils/mixins");
+var constants_1 = require("../constants");
 var inputHeight = 33;
 exports.Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
         label: "datepicker",
-        width: 215 + 2 * theme.spacing,
+        width: constants_1.inputDefaultWidth,
         position: "relative"
     });
 });
@@ -31,7 +32,7 @@ exports.DatePickerCard = glamorous_1.default(Card_1.default)({
         boxShadow: theme.shadows.popup,
         top: inputHeight + 4,
         padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
-        width: 215 + 2 * theme.spacing,
+        width: constants_1.inputDefaultWidth,
         zIndex: theme.baseZIndex + 1000
     });
 });
