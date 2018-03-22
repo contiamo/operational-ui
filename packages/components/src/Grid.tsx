@@ -34,9 +34,9 @@ const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: 
   width: "100%",
   height: "100%",
   display: "grid",
-  padding: theme.spacing,
-  gridColumnGap: theme.spacing,
-  gridRowGap: theme.spacing,
+  padding: theme.spacing * 4 / 3,
+  gridColumnGap: theme.spacing * 4 / 3,
+  gridRowGap: theme.spacing * 4 / 3,
   ...getGridCSSProperties(gridType)
 }))
 

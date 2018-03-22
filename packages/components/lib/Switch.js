@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var width = 32;
+var width = 28;
 var height = 16;
 var railHeight = 16;
 var railOffset = 8;
@@ -11,6 +11,8 @@ var Container = glamorous_1.default.div({
     height: height,
     label: "switch",
     position: "relative",
+    borderRadius: height / 2,
+    overflow: "hidden",
     cursor: "pointer"
 });
 var Button = glamorous_1.default.div({
@@ -18,43 +20,44 @@ var Button = glamorous_1.default.div({
     transition: "transform .3s",
     position: "absolute",
     top: 0,
-    left: 1,
+    left: 0,
     content: " ",
     width: height,
     borderRadius: "50%"
 }, function (_a) {
     var on = _a.on, theme = _a.theme;
     return ({
-        transform: "translate3d(" + (on ? width - height - 2 : 0) + "px, 0, 0)",
+        transform: "translate3d(" + (on ? width - height : 0) + "px, 0, 0)",
         backgroundColor: theme.colors.white,
         border: "1px solid " + (on ? theme.colors.info : theme.colors.gray80),
         zIndex: theme.baseZIndex + 2
     });
 });
 var Rail = glamorous_1.default.div({
-    width: width - 2 * railOffset,
+    width: width,
     height: railHeight,
     backgroundColor: "black",
     position: "absolute",
     top: (height - railHeight) / 2,
-    left: railOffset,
+    left: 0,
     borderRadius: railHeight / 2,
     overflow: "hidden"
 }, function (_a) {
     var on = _a.on, theme = _a.theme;
     return ({
         backgroundColor: theme.colors.gray80,
+        zIndex: theme.baseZIndex,
         "&:after": {
             content: " ",
             position: "absolute",
             width: "100%",
             height: "100%",
             top: 0,
-            left: 0,
+            left: -height / 2,
             backgroundColor: theme.colors.info,
             transition: "transform .3s",
             transform: "translate3d(" + (on ? "0" : "-100%") + ", 0, 0)",
-            zIndex: theme.baseZIndex + 1
+            zIndex: theme.baseZIndex - 1
         }
     });
 });

@@ -37,7 +37,7 @@ const InputField = glamorous.input(
     opacity: disabled ? 0.6 : 1.0,
     borderColor: "rgb(208, 217, 229)",
     font: "inherit",
-    borderRadius: 2,
+    borderRadius: 4,
     WebkitAppearance: "none",
     "&:focus": inputFocus({ theme })
   })

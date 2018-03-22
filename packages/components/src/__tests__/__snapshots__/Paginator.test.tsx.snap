@@ -8,7 +8,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     class="css-1f5s5d co_bgrp"
   >
     <button
-      class="css-1o11w7a"
+      class="css-1exlown"
       disabled=""
     >
       <svg
@@ -31,7 +31,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </svg>
     </button>
     <button
-      class="css-1o11w7a"
+      class="css-1exlown"
       disabled=""
     >
       <svg
@@ -51,32 +51,32 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </svg>
     </button>
     <button
-      class="css-1t4aw6a"
+      class="css-42euqo"
     >
       1
     </button>
     <button
-      class="css-10kwbd9"
+      class="css-1czjbtl"
     >
       2
     </button>
     <button
-      class="css-10kwbd9"
+      class="css-1czjbtl"
     >
       3
     </button>
     <button
-      class="css-10kwbd9"
+      class="css-1czjbtl"
     >
       ...
     </button>
     <button
-      class="css-10kwbd9"
+      class="css-1czjbtl"
     >
       10
     </button>
     <button
-      class="css-12pnl39"
+      class="css-1pl9xga"
     >
       <svg
         fill="none"
@@ -95,7 +95,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </svg>
     </button>
     <button
-      class="css-12pnl39"
+      class="css-1pl9xga"
     >
       <svg
         fill="none"

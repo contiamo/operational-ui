@@ -13,6 +13,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   ...theme.typography.heading1,
   label: "cardheader",
   display: "flex",
+  borderTopLeftRadius: 4,
+  borderTopRightRadius: 4,
   alignItems: "center",
   backgroundColor: theme.colors.cardHeaderBackground,
   // This ensures that the card header text and card controls are placed in opposite corners.

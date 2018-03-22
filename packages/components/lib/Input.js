@@ -13,7 +13,7 @@ var glamorous_1 = require("glamorous");
 var mixins_1 = require("./utils/mixins");
 var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme, disabled = _a.disabled, isStandalone = _a.isStandalone;
-    return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: 240, padding: theme.spacing * 2 / 3, border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: "rgb(208, 217, 229)", font: "inherit", borderRadius: 2, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme }) }));
+    return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: 240, padding: theme.spacing * 2 / 3, border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: "rgb(208, 217, 229)", font: "inherit", borderRadius: 4, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme }) }));
 });
 var Input = function (props) {
     var forAttributeId = props.label && props.inputId;

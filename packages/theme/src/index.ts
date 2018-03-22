@@ -137,15 +137,15 @@ const colors: ThemeColors = {
   gray70: "#808080",
   gray80: "#747474",
   gray90: "#444444",
-  background: "#F1F1F1",
+  background: "#F5F6FA",
   bodyText: "#555f61",
   cardBackground: "#FFFFFF",
-  cardHeaderBackground: "#F5F5F5",
+  cardHeaderBackground: "#F9FAFE",
   border: "#dadada",
   emphasizedText: "#373d3f",
   lightText: "#969696",
   linkText: "#1499CE",
-  sidenavBackground: "#2F3C4F",
+  sidenavBackground: "#105075",
   separator: "#f2f2f2",
   secondarySeparator: "#f8f8f8"
 }
@@ -187,7 +187,7 @@ const typography: ThemeTypography = {
 
 const shadows: ThemeShadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-  card: "0px 1px 3px #d3d1d1",
+  card: "0px 1px 5px #d3d1d1",
   focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
   popup: "0 3px 12px rgba(0, 0, 0, .14)"
 }

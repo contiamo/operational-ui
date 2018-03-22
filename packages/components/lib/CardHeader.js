@@ -12,7 +12,7 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.heading1, { label: "cardheader", display: "flex", alignItems: "center", backgroundColor: theme.colors.cardHeaderBackground, 
+    return (__assign({}, theme.typography.heading1, { label: "cardheader", display: "flex", borderTopLeftRadius: 4, borderTopRightRadius: 4, alignItems: "center", backgroundColor: theme.colors.cardHeaderBackground, 
         // This ensures that the card header text and card controls are placed in opposite corners.
         justifyContent: "space-between", height: 3.5 * theme.spacing, margin: -theme.spacing, marginBottom: theme.spacing, padding: "0 " + theme.spacing + "px", lineHeight: 1, color: theme.colors.emphasizedText }));
 });
