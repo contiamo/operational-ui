@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 
 import { Label, LabelText } from "./utils/mixins"
@@ -23,7 +23,7 @@ const displayOption = (opt: IOption): string => {
 
 export interface Props {
   id?: string
-  css?: any
+  css?: CSSProperties
   className?: string
   options: IOption[]
   value: undefined | Value | Value[]
@@ -50,12 +50,12 @@ class Select extends React.Component<Props, State> {
     filter: new RegExp(/./)
   }
 
-  containerNode: any
+  containerNode: Node
 
   // This implements "click outside to close" behavior
-  handleClick(ev: MouseEvent) {
+  handleClick(ev: React.SyntheticEvent<Node>): void {
     // if we're clicking on the Select itself,
-    if (this.containerNode && this.containerNode.contains(ev.target)) {
+    if (this.containerNode && this.containerNode.contains(ev.target as Node)) {
       return
     }
 
@@ -174,7 +174,9 @@ class Select extends React.Component<Props, State> {
         {options.length &&
           open && (
             <Options>
-              {filterable && <SelectFilter onChange={(e: any) => this.updateFilter(e)} />}
+              {filterable && (
+                <SelectFilter onChange={(e: React.SyntheticEvent<HTMLInputElement>) => this.updateFilter(e)} />
+              )}
               <OptionsList>
                 {options.map(
                   (option: IOption) =>
