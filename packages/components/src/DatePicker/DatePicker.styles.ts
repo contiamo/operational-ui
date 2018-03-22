@@ -3,10 +3,11 @@ import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
-import Card from "../Card"
+// It is necessary to import the card props so that TypeScript can compile type definitions.
+import Card, { Props as CardProps } from "../Card"
 import * as mixins from "../utils/mixins"
 
-const inputHeight: number = 31
+const inputHeight: number = 33
 
 export interface ContainerProps {
   isExpanded: boolean
@@ -15,7 +16,7 @@ export interface ContainerProps {
 export const Container: GlamorousComponent<ContainerProps, ContainerProps & { theme: Theme }> = glamorous.div(
   ({ isExpanded, theme }): CSSProperties => ({
     label: "datepicker",
-    width: 210 + 2 * theme.spacing,
+    width: 215 + 2 * theme.spacing,
     position: "relative"
   })
 )
@@ -35,7 +36,7 @@ export const DatePickerCard = glamorous(Card)(
     boxShadow: theme.shadows.popup,
     top: inputHeight + 4,
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
-    width: 210 + 2 * theme.spacing,
+    width: 215 + 2 * theme.spacing,
     zIndex: theme.baseZIndex + 1000
   })
 )
@@ -48,8 +49,8 @@ export const Toggle: GlamorousComponent<
   cursor: "pointer",
   top: 1,
   right: 1,
-  borderTopRightRadius: 2,
-  borderBottomRightRadius: 2,
+  borderTopRightRadius: 4,
+  borderBottomRightRadius: 4,
   width: inputHeight - 2,
   height: inputHeight - 2,
   fontSize: 10,
@@ -58,7 +59,7 @@ export const Toggle: GlamorousComponent<
   justifyContent: "center",
   zIndex: theme.baseZIndex + 1000,
   color: theme.colors.gray80,
-  borderLeft: `1px solid ${theme.colors.gray40}`,
+  borderLeft: `1px solid rgb(208, 217, 229)`,
   "& svg": {
     position: "relative",
     pointerEvents: "none"
@@ -116,8 +117,8 @@ export const Day: GlamorousComponent<
   },
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
     ...theme.typography.body,
-    backgroundColor: selected ? theme.colors.success : "transparent",
-    color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray80 : theme.colors.black
+    backgroundColor: selected ? theme.colors.info : "transparent",
+    color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray40 : theme.colors.black
   })
 )
 
@@ -125,12 +126,12 @@ export const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.inpu
   ({ theme }: { theme: Theme }): {} => ({
     ...theme.typography.body,
     userSelect: "none",
-    borderRadius: 2,
+    borderRadius: 4,
     padding: theme.spacing * 2 / 3,
     height: inputHeight,
     cursor: "pointer",
     border: "1px solid",
-    borderColor: theme.colors.gray30,
+    borderColor: "rgb(208, 217, 229)",
     width: 200,
     position: "relative",
     "&:focus": mixins.inputFocus({ theme })

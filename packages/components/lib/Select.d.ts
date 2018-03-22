@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
+import { CSSProperties } from "glamorous";
 export declare type Value = number | string;
 export interface IOption {
     label?: string;
@@ -7,7 +8,7 @@ export interface IOption {
 }
 export interface Props {
     id?: string;
-    css?: any;
+    css?: CSSProperties;
     className?: string;
     options: IOption[];
     value: undefined | Value | Value[];
@@ -18,6 +19,7 @@ export interface Props {
     onFilter?: () => void;
     color?: string;
     placeholder?: string;
+    label?: string;
 }
 export interface State {
     open: boolean;
@@ -26,8 +28,8 @@ export interface State {
 }
 declare class Select extends React.Component<Props, State> {
     state: State;
-    containerNode: any;
-    handleClick(ev: MouseEvent): void;
+    containerNode: Node;
+    handleClick(ev: React.SyntheticEvent<Node>): void;
     handleEsc(e: KeyboardEvent): void;
     componentDidMount(): void;
     componentWillUnmount(): void;

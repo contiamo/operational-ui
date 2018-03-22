@@ -12,6 +12,7 @@ import {
   Button,
   Select,
   Layout,
+  DatePicker,
   Grid,
   Switch,
   Record,
@@ -32,6 +33,8 @@ import {
 interface State {
   is: boolean
   value: string | null
+  start?: string
+  end?: string
 }
 
 console.log(lighten(operational.colors.info, 53))
@@ -45,7 +48,9 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 class Site extends React.Component<{}, State> {
   state: State = {
     is: true,
-    value: null
+    value: null,
+    start: null,
+    end: null
   }
 
   render() {
@@ -86,6 +91,17 @@ class Site extends React.Component<{}, State> {
             </Card>
             <Card css={{ position: "relative" }}>
               <CardHeader>Card Three</CardHeader>
+              <DatePicker
+                label="31"
+                start={this.state.start}
+                end={this.state.end}
+                onChange={newDates => {
+                  this.setState(prevState => ({
+                    ...newDates
+                  }))
+                }}
+              />
+              <Input value="1234" label="5678" css={{ marginTop: 20 }} />
             </Card>
             <Card css={{ position: "relative" }}>
               <CardHeader>Card Four</CardHeader>

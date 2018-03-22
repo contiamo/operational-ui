@@ -9,25 +9,30 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
+// It is necessary to import the card props so that TypeScript can compile type definitions.
+var Card_1 = require("../Card");
 var mixins = require("../utils/mixins");
-var inputHeight = 31;
+var inputHeight = 33;
 exports.Container = glamorous_1.default.div(function (_a) {
     var isExpanded = _a.isExpanded, theme = _a.theme;
     return ({
         label: "datepicker",
-        display: "inline-block",
-        width: "auto",
-        position: "relative",
-        "& .co_card": {
-            display: isExpanded ? "block" : "none",
-            position: "absolute",
-            boxShadow: theme.shadows.popup,
-            top: inputHeight + 4,
-            left: 0,
-            padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
-            width: 210 + 2 * theme.spacing,
-            zIndex: theme.baseZIndex + 1000
-        }
+        width: 215 + 2 * theme.spacing,
+        position: "relative"
+    });
+});
+exports.DatePickerCard = glamorous_1.default(Card_1.default)({
+    position: "absolute",
+    left: 0
+}, function (_a) {
+    var theme = _a.theme, isExpanded = _a.isExpanded;
+    return ({
+        display: isExpanded ? "block" : "none",
+        boxShadow: theme.shadows.popup,
+        top: inputHeight + 4,
+        padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
+        width: 215 + 2 * theme.spacing,
+        zIndex: theme.baseZIndex + 1000
     });
 });
 exports.Toggle = glamorous_1.default.div(function (_a) {
@@ -37,8 +42,8 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         cursor: "pointer",
         top: 1,
         right: 1,
-        borderTopRightRadius: 2,
-        borderBottomRightRadius: 2,
+        borderTopRightRadius: 4,
+        borderBottomRightRadius: 4,
         width: inputHeight - 2,
         height: inputHeight - 2,
         fontSize: 10,
@@ -47,7 +52,7 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         justifyContent: "center",
         zIndex: theme.baseZIndex + 1000,
         color: theme.colors.gray80,
-        borderLeft: "1px solid " + theme.colors.gray40,
+        borderLeft: "1px solid rgb(208, 217, 229)",
         "& svg": {
             position: "relative",
             pointerEvents: "none"
@@ -95,11 +100,11 @@ exports.Day = glamorous_1.default.div({
     border: "1px solid #efefef"
 }, function (_a) {
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
-    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.success : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray80 : theme.colors.black }));
+    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.info : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray40 : theme.colors.black }));
 });
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 2, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: theme.colors.gray30, width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }));
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 4, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: "rgb(208, 217, 229)", width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }));
 });
 exports.ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;

@@ -104,25 +104,15 @@ class DatePicker extends React.Component<Props, State> {
         key={id}
         isExpanded={isExpanded}
       >
-        <Toggle
-          onClick={(ev: React.SyntheticEvent<MouseEvent>) =>
-            !label &&
-            this.setState(prevState => ({
-              isExpanded: !prevState.isExpanded
-            }))
-          }
-        >
-          <Icon name={isExpanded ? "ChevronUp" : "ChevronDown"} size={14} />
-        </Toggle>
         {!!(start && end) && (
-          <ClearButton
-            onClick={(ev: MouseEvent): void => {
+          <Toggle
+            onClick={(ev: any): void => {
               ev.preventDefault()
               onChange && onChange({ start: null, end: null })
             }}
           >
             <Icon name="X" size={14} />
-          </ClearButton>
+          </Toggle>
         )}
         <Input
           id={domId}
@@ -133,8 +123,9 @@ class DatePicker extends React.Component<Props, State> {
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={placeholder || "Enter date"}
           onClick={(ev: any) => {
+            console.log(ev.target)
             this.setState(prevState => ({ isExpanded: !prevState.isExpanded }))
-            this.inputNode && this.inputNode.blur()
+            this.inputNode && this.state.isExpanded && this.inputNode.blur()
           }}
           css={{ width: "100%" }}
         />
