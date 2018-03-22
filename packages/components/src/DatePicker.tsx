@@ -94,8 +94,8 @@ class DatePicker extends React.Component<Props, State> {
     const { onChange, placeholder, start, end, label, id, css, className } = this.props
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
-    const placeholderDays = monthStartDay(this.state.year, this.state.month)
-    const daysInCurrentMonth = daysInMonth(this.state.month, this.state.year)
+    const placeholderDays = monthStartDay(year, month)
+    const daysInCurrentMonth = daysInMonth(month, year)
     const datePickerWithoutLabel = (
       <Container
         innerRef={node => {

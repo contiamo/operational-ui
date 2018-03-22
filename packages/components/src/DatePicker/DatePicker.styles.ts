@@ -8,8 +8,12 @@ import * as mixins from "../utils/mixins"
 
 const inputHeight: number = 31
 
-export const Container: GlamorousComponent<{ isExpanded?: boolean }, {}> = glamorous.div(
-  ({ isExpanded, theme }: { isExpanded?: boolean; theme: Theme }): {} => ({
+export interface ContainerProps {
+  isExpanded: boolean
+}
+
+export const Container: GlamorousComponent<ContainerProps, ContainerProps & { theme: Theme }> = glamorous.div(
+  ({ isExpanded, theme }): CSSProperties => ({
     label: "datepicker",
     width: 210 + 2 * theme.spacing,
     position: "relative"
