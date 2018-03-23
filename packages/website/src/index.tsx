@@ -155,7 +155,7 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
             <StaticContent
               css={{ marginTop: 20 }}
               markdownContent={`
-We have some CodeSandbox demos for [simple interface elements](https://codesandbox.io/embed/zq5nm42x84), a [full-featured UI]() and [ visualizations]().
+Head to our CodeSandbox demos for [simple interface elements](https://codesandbox.io/embed/zq5nm42x84), a [full-featured UI]() and [ visualizations]().
               `}
             />
           </Card>

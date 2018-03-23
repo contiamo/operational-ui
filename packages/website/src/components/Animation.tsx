@@ -2,10 +2,9 @@ import * as React from "react"
 import { Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
-const n: number = 10
-
 export interface Props {
   css?: {}
+  size?: number
 }
 
 export interface State {
@@ -13,10 +12,16 @@ export interface State {
   coordinates: { x: number; y: number }[]
 }
 
+// Number of squares in the animation grid
+const n: number = 10
+
+// Return integer random between 0 and range - 1, boundaries included
 const integerRandom = (range: number): number => {
   return Math.floor(Math.random() * range)
 }
 
+// If a coordinate falls out of the (0, n - 1) range,
+// bounce it back into the animation frame.
 const bounce = (coord: number): number => {
   if (coord < 0) {
     return -coord
@@ -37,7 +42,9 @@ class Animation extends React.Component<Props, State> {
 
   animationInterval: any
 
-  shuffle() {
+  // Shift the coordinate of every third tile in a random direction.
+  // Each animation shifts a different set of tiles.
+  shiftSomeTiles() {
     this.setState(prevState => ({
       animationStep: prevState.animationStep + 1,
       coordinates: prevState.coordinates.map((coord: { x: number; y: number }, index: number) => {
@@ -55,7 +62,7 @@ class Animation extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.animationInterval = setInterval(this.shuffle.bind(this), 5000)
+    this.animationInterval = setInterval(this.shiftSomeTiles.bind(this), 5000)
   }
 
   componentWillUnmount() {
@@ -63,12 +70,13 @@ class Animation extends React.Component<Props, State> {
   }
 
   render() {
+    const size = this.props.size || 600
     return (
       <Div
         css={{
           ...(this.props.css || {}),
-          width: 600,
-          height: 600
+          width: size,
+          height: size
         }}
       >
         {this.state.coordinates.map((coord: { x: number; y: number }, index: number) => (
