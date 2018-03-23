@@ -1,3 +1,4 @@
+import { compact, get, map } from "lodash/fp"
 import {
   AreaRendererAccessors,
   D3Selection,
@@ -26,6 +27,15 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   update(data: Datum[], options: RendererOptions<any>): void {}
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map(get(axis))(this.data)
+      .concat(map(get(`${axis}0`))(this.data))
+      .concat(map(get(`${axis}1`))(this.data))
+    return compact(data)
+  }
+
+  draw(): void {}
 }
 
 export default Area

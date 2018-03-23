@@ -1,3 +1,5 @@
+import { compact, get, map } from "lodash/fp"
+
 import {
   LineRendererAccessors,
   D3Selection,
@@ -15,7 +17,7 @@ class Line implements RendererClass<LineRendererAccessors> {
   events: EventBus
   options: RendererOptions<LineRendererAccessors>
   state: any
-  type: RendererType = "bars"
+  type: RendererType = "line"
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: RendererOptions<any>) {
     this.state = state
@@ -26,6 +28,15 @@ class Line implements RendererClass<LineRendererAccessors> {
   }
 
   update(data: Datum[], options: RendererOptions<any>): void {}
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map(get(axis))(this.data)
+      .concat(map(get(`${axis}0`))(this.data))
+      .concat(map(get(`${axis}1`))(this.data))
+    return compact(data)
+  }
+
+  draw(): void {}
 }
 
 export default Line

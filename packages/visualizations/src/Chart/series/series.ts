@@ -1,5 +1,19 @@
 import Renderer from "./renderer"
-import { filter, find, flow, forEach, get, includes, invoke, map, remove } from "lodash/fp"
+import {
+  compact,
+  filter,
+  find,
+  flatten,
+  flow,
+  forEach,
+  get,
+  includes,
+  invoke,
+  map,
+  reduce,
+  remove,
+  uniqBy
+} from "lodash/fp"
 import {
   Accessor,
   D3Selection,
@@ -80,7 +94,7 @@ class ChartSeries {
   }
 
   addRenderer(options: RendererOptions<any>): void {
-    this.renderers.push(new Renderer(this.state, this.events, this.el, this.options.data, options))
+    this.renderers.push(new Renderer(this.state, this.events, this.el, this.options.data, options, this))
   }
 
   remove(renderer: Renderer): void {
@@ -95,6 +109,11 @@ class ChartSeries {
     }
   }
 
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map((renderer: RendererClass<any>): any => renderer.dataForAxis(axis))(this.renderers)
+    return uniqBy(String)(compact(flatten(data)))
+  }
+
   legendPosition(): "top" | "bottom" {
     return this.xAxis() === "x1" ? "top" : "bottom"
   }
@@ -103,10 +122,12 @@ class ChartSeries {
     return this.legendPosition() === "top" && this.yAxis() === "y2" ? "right" : "left"
   }
 
-  draw(): void {}
+  draw(): void {
+    forEach(invoke("draw"))(this.renderers)
+  }
 
   close(): void {
-    invoke("close")(this.renderers)
+    forEach(invoke("close"))(this.renderers)
   }
 }
 

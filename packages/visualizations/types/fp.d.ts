@@ -173,11 +173,16 @@ declare namespace fp {
     isFinite: any
     isFunction: any
     isMatch: any
+    isNil: any
     isObject: any
     last: any
+    mapValues: any
     max: any
     merge: any
     min: any
+    omit: any
+    omitBy: any
+    pickBy: any
     pluck: any
     remove: any
     size: any

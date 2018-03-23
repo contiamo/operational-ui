@@ -16,37 +16,47 @@ const AxesAccessors: any = {
   // y: (d) => d.y
 }
 
+const AreaRenderer: any = {
+  type: "area"
+}
+
 const LineRenderer: any = {
-  ...AxesAccessors,
+  accessors: {
+    ...AxesAccessors
+  },
   type: "line" 
 }
 
 const BarsRenderer: any = {
-  ...AxesAccessors,
+  accessors: {
+    ...AxesAccessors
+  },
   type: "bars"
 }
 
 const StackedRenderer = {
-  ...AxesAccessors,
+  accessors: { 
+    ...AxesAccessors
+  },
   type: "stacked",
   stackAxis: "y",
-  renderAs: [BarsRenderer]
+  renderAs: [AreaRenderer]
 }
 
 const data: any = {
   series: [
     {
       data: [
-        {x: new Date("March 10, 2018"), y: 100},
-        {x: new Date("March 11, 2018"), y: 200},
-        {x: new Date("March 12, 2018"), y: 300},
-        {x: new Date("March 13, 2018"), y: 400},
-        {x: new Date("March 14, 2018"), y: 500}
+        {x: new Date("March 14, 2018"), y: 3000000},
+        {x: new Date("March 10, 2018"), y: 1000000},
+        {x: new Date("March 12, 2018"), y: 3000000},
+        {x: new Date("March 11, 2018"), y: 2000000},
+        {x: new Date("March 13, 2018"), y: 4000000}
       ],
       name: "Line series with very, very, very, very long name",
       key: "unique_key",
       yAxis: "y2",
-      renderAs: [LineRenderer]  	  
+      renderAs: [AreaRenderer]  	  
     },
     {
       data: [
@@ -81,6 +91,9 @@ const data: any = {
       type: "time"
     },
     y1: {
+      type: "quant"
+    },
+    y2: {
       type: "quant"
     }
   }    

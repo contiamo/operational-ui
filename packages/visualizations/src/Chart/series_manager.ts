@@ -1,4 +1,18 @@
-import { filter, find, flow, forEach, get, includes, map, reduce, remove, sortBy, uniqBy, uniqueId } from "lodash/fp"
+import {
+  filter,
+  find,
+  flow,
+  forEach,
+  get,
+  includes,
+  invoke,
+  map,
+  reduce,
+  remove,
+  sortBy,
+  uniqBy,
+  uniqueId
+} from "lodash/fp"
 import { stack as d3Stack } from "d3-shape"
 import Series from "./series/series"
 import {
@@ -19,14 +33,14 @@ import {
   StateWriter
 } from "./typings"
 
-class ChartSeriesManager implements SeriesManager {
+class ChartSeriesManager implements SeriesManager<Series> {
   el: D3Selection
   events: EventBus
   key: SeriesAccessor<string>
-  oldSeries: any = []
+  oldSeries: Series[] = []
   renderAs: Accessor<StackedSeriesOptions | RendererOptions<any>, RendererOptions<any>[]>
-  series: any = []
-  state: any
+  series: Series[] = []
+  state: State
   stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
@@ -41,6 +55,7 @@ class ChartSeriesManager implements SeriesManager {
     this.renderAs = this.state.current.get("accessors").series.renderAs
     this.prepareData()
     this.stateWriter("dataForLegends", this.dataForLegends())
+    this.stateWriter("dataForAxes", this.dataForAxes())
   }
 
   private prepareData(): void {
@@ -178,8 +193,20 @@ class ChartSeriesManager implements SeriesManager {
     return data
   }
 
+  private dataForAxes(): any[] {
+    const data: any = { x1: [], x2: [], y1: [], y2: [] }
+    forEach((series: Series): void => {
+      const xAxis: string = series.xAxis()
+      const yAxis: string = series.yAxis()
+      data[xAxis] = uniqBy(String)(data[xAxis].concat(series.dataForAxis("x")))
+      data[yAxis] = uniqBy(String)(data[yAxis].concat(series.dataForAxis("y")))
+    })(this.series)
+
+    return data
+  }
+
   create(options: SeriesOptions): void {
-    // @TODO Do events, stateWriter, el need to be passed in?
+    // @TODO Does stateWriter need to be passed in?
     this.series.push(new Series(this.state, this.stateWriter, this.events, this.el, options))
   }
 
@@ -188,11 +215,9 @@ class ChartSeriesManager implements SeriesManager {
   // }
 
   draw(): void {
-    //   // Clean up any old stuff
-    //   _.invoke(this.oldSeries, "close")
-    //   this.oldSeries = []
-    //   // Draw the new stuff
-    //   _.invoke(this.series, "draw")
+    forEach(invoke("close"))(this.oldSeries)
+    this.oldSeries = []
+    forEach(invoke("draw"))(this.series)
   }
 }
 

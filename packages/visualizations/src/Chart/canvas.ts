@@ -1,6 +1,7 @@
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
 import {
+  AxisPosition,
   Canvas,
   D3Selection,
   EventBus,
@@ -58,6 +59,7 @@ class ChartCanvas implements Canvas {
     this.insertSeriesDrawingGroups()
     this.insertFocusElements()
     this.stateWriter("elements", this.elements)
+    this.events.on("margins:update", this.draw.bind(this))
   }
 
   // Chart container
@@ -148,13 +150,17 @@ class ChartCanvas implements Canvas {
 
   private insertRules(): void {
     forEach((axis: string): void => {
-      this.elements[axis + "Rules"] = this.elements.drawing.append("svg:g").attr("class", axis + "-rules-group")
+      const rulesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-rules-group`)
+      this.elements[axis + "Rules"] = rulesGroup
+      this.elMap[`${axis}Rules`] = rulesGroup
     })(axes)
   }
 
   private insertAxes(): void {
     forEach((axis: string): void => {
-      this.elements[axis + "Axes"] = this.elements.drawing.append("svg:g").attr("class", axis + "-axes-group")
+      const axesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-axes-group`)
+      this.elements[`${axis}Axes`] = axesGroup
+      this.elMap[`${axis}Axes`] = axesGroup
     })(axes)
   }
 
@@ -220,27 +226,49 @@ class ChartCanvas implements Canvas {
     return this.state.current.get("config").uid + id
   }
 
-  private drawingContainerDims(): { height: number; width: number } {
+  private margin(axis: AxisPosition): number {
+    const config: ChartConfig = this.state.current.get("config")
+    const margins: Object<number> = this.state.current.get("computed").axes.margins || {}
+    return margins[axis] || config[axis].margin
+  }
+
+  private calculateDimensions(): void {
+    this.calculateDrawingContainerDims()
+    this.calculateDrawingDims()
+  }
+
+  private calculateDrawingDims(): void {
+    const drawingContainerDims: { height: number; width: number } = this.state.current.get("computed").canvas
+      .drawingContainerDims
+    this.stateWriter("drawingDims", {
+      width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
+      height: drawingContainerDims.height - this.margin("x1") - this.margin("x2")
+    })
+  }
+
+  private calculateDrawingContainerDims(): void {
     const config = this.state.current.get("config")
-    const dims = {
+    this.stateWriter("drawingContainerDims", {
       height: config.height - this.totalLegendHeight(),
       width: config.width
-    }
-    this.stateWriter("drawingContainerDims", dims)
-    return dims
+    })
   }
 
   // Lifecycle
   draw(): void {
+    this.calculateDimensions()
     this.chartContainer.classed("hidden", this.state.current.get("config").hidden)
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
 
     const config: ChartConfig = this.state.current.get("config")
-    const dims: { width: number; height: number } = this.drawingContainerDims()
+    const dims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
+    const margins: Object<number> = this.state.current.get("computed").axes.margins || {}
 
     this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
     this.el.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
+
+    this.elements.drawing.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
     this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
   }
 

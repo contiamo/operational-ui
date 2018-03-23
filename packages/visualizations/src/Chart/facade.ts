@@ -1,6 +1,7 @@
 import ChartCanvas from "./canvas"
 import ChartSeriesManager from "./series_manager"
 import LegendManager from "./legend_manager"
+import AxesManager from "./axes_manager"
 import Events from "../utils/event_catalog"
 import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
@@ -31,7 +32,8 @@ const xAxisConfig: Partial<XAxisConfig> = {
   margin: 14,
   minTicks: 2,
   noAxisMargin: 3,
-  tickSpacing: 65
+  tickSpacing: 65,
+  outerPadding: 3
 }
 
 const yAxisConfig: Partial<YAxisConfig> = {
@@ -39,7 +41,8 @@ const yAxisConfig: Partial<YAxisConfig> = {
   minTicks: 4,
   minTopOffsetTopTick: 21,
   noAxisMargin: 21,
-  tickSpacing: 40
+  tickSpacing: 40,
+  outerPadding: 3
 }
 
 class ChartFacade implements Facade {
@@ -166,7 +169,7 @@ class ChartFacade implements Facade {
   private insertComponents(): any {
     // Components {
     return {
-      legend: new LegendManager(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
+      legends: new LegendManager(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
         top: {
           left: this.canvas.elementFor("legend-top-left"),
           right: this.canvas.elementFor("legend-top-right")
@@ -174,6 +177,12 @@ class ChartFacade implements Facade {
         bottom: {
           left: this.canvas.elementFor("legend-bottom-left")
         }
+      }),
+      axes: new AxesManager(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
+        xAxes: this.canvas.elementFor("xAxes"),
+        xRules: this.canvas.elementFor("xRules"),
+        yAxes: this.canvas.elementFor("yAxes"),
+        yRules: this.canvas.elementFor("yRules")
       })
       // focus: new ChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
       //   main: this.canvas.elementFor("focus"),
@@ -199,14 +208,14 @@ class ChartFacade implements Facade {
     if (config.palette && !this.customColorAccessor) {
       const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
       this.accessors("series", {
-        color: (d: SeriesOptions): string => assignColors(d.key)
+        legendColor: (d: SeriesOptions): string => assignColors(d.key)
       })
     }
     return this.state.config(config)
   }
 
   accessors(type: string, accessors: Accessors<any>): Accessors<any> {
-    if (type === "series" && has("color")(accessors)) {
+    if (type === "series" && has("legendColor")(accessors)) {
       this.customColorAccessor = true
     }
     return this.state.accessors(type, accessors)
@@ -223,9 +232,10 @@ class ChartFacade implements Facade {
   draw(): Element {
     this.state.captureState()
     this.series.assignData()
-    this.components.legend.draw()
+    this.components.legends.draw()
     this.canvas.draw()
-    // this.series.draw()
+    this.components.axes.draw()
+    this.series.draw()
 
     const focusElement: FocusElement = this.state.config().focusElement
     !isEmpty(focusElement)

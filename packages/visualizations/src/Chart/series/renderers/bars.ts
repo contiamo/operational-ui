@@ -1,3 +1,5 @@
+import { compact, get, map } from "lodash/fp"
+
 import {
   BarsRendererAccessors,
   D3Selection,
@@ -26,6 +28,15 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   update(data: Datum[], options: RendererOptions<any>): void {}
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map(get(axis))(this.data)
+      .concat(map(get(`${axis}0`))(this.data))
+      .concat(map(get(`${axis}1`))(this.data))
+    return compact(data)
+  }
+
+  draw(): void {}
 }
 
 export default Bars

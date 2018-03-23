@@ -1,5 +1,5 @@
 import * as d3 from "d3-selection"
-import { Accessor, Config, Facade, Focus, Legend, Object, SeriesManager } from "../utils/typings"
+import { Accessor, Config, Facade, Focus, Legend, Object } from "../utils/typings"
 
 export {
   Accessor,
@@ -13,6 +13,7 @@ export {
   Partial,
   D3Selection,
   SeriesEl,
+  SeriesManager,
   StateWriter,
   Canvas
 } from "../utils/typings"
@@ -21,6 +22,7 @@ export interface XAxisConfig {
   margin: number
   minTicks: number
   noAxisMargin: number
+  outerPadding: number
   tickOffset: number
   tickSpacing: number
 }
@@ -77,7 +79,8 @@ export interface ChartConfig extends Config {
 // Renderers
 export type RendererType = "area" | "bars" | "flag" | "line" | "range" | "symbol" | "text"
 
-export type RendererAccessor<T> = (series: SeriesOptions, d: Datum) => T
+// @TODO SingleSeries / ChartSeries
+export type RendererAccessor<T> = (series: any, d: Datum) => T
 
 export interface RendererAxesAccessors {
   x: RendererAccessor<number | string | Date>
@@ -137,6 +140,8 @@ export interface RendererOptions<RendererAccessors> {
 }
 
 export interface RendererClass<RendererAccessors> {
+  dataForAxis: (axis: "x" | "y") => any[]
+  draw: () => void
   type: RendererType
   update: (data: Datum[], options: RendererOptions<RendererAccessors>) => void
 }
@@ -190,17 +195,29 @@ export interface SeriesAccessors {
 }
 
 // Axes
+export type AxisPosition = "x1" | "x2" | "y1" | "y2"
+
 export interface AxisOptions {
-  type: "time" | "quant" | "ord"
-  validate?: (value: any) => boolean
-  extent?: [number, number] // @TODO Should this be replaced with start/end?
+  type: "time" | "quant" | "categorical"
+  expand?: "smart" | "zero" | "custom"
+  start?: number | Date
+  end?: number | Date
+  interval?: "hour" | "day" | "week" | "month" | "quarter" | "year" | number
 }
 
 export interface AxesData {
-  x1?: AxisOptions
-  x2?: AxisOptions
-  y1?: AxisOptions
-  y2?: AxisOptions
+  [key: string]: AxisOptions
+}
+
+export interface AxisClass<T> extends AxisOptions {
+  validate: Accessor<any, boolean>
+  compute: () => void
+  computeAligned: (computed: Object<any>) => void
+  // @TODO typing
+  computeInitial: () => Object<any>
+  draw: () => void
+  update: (options: AxisOptions, data: T[]) => void
+  remove: () => void
 }
 
 // Data
@@ -251,11 +268,11 @@ export interface Components {
   // @TODO
   axes: any
   focus: Focus<HoverPayload>
-  legend: Legend
+  legends: Legend
 }
 
 // @TODO - SingleSeries (class, not interface)
-export type SeriesManager = SeriesManager<any>
+// export type SeriesManager = SeriesManager<any>
 
 export type ClipPath = "drawing_clip" | "yrules_clip"
 

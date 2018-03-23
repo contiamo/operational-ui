@@ -15,7 +15,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   events: EventBus
   options: RendererOptions<FlagRendererAccessors>
   state: any
-  type: RendererType = "bars"
+  type: RendererType = "flag"
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: RendererOptions<any>) {
     this.state = state
@@ -26,6 +26,12 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   }
 
   update(data: Datum[], options: RendererOptions<any>): void {}
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    return []
+  }
+
+  draw(): void {}
 }
 
 export default Flag
