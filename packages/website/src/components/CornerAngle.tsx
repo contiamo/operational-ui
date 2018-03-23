@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 
-export const CornerAngle = (props: {}) => (
+const CornerAngle = (props: {}) => (
   <glamorous.Div
     css={{
       position: "relative"
@@ -24,3 +24,5 @@ export const CornerAngle = (props: {}) => (
     />
   </glamorous.Div>
 )
+
+export default CornerAngle

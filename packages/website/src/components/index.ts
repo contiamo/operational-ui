@@ -1,4 +1,6 @@
 export { default as Grid } from "./Grid"
 export { default as Icons } from "./Icons"
 export { default as StaticContent } from "./StaticContent"
-export { CornerAngle } from "./Decoration"
+export { default as CornerAngle } from "./CornerAngle"
+export { default as Animation } from "./Animation"
+export { default as Hero } from "./Hero"
