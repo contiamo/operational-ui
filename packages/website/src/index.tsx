@@ -4,8 +4,7 @@ import glamorous from "glamorous"
 import { Card, Icon, Button, CardHeader, OperationalUI, Chip, Input } from "@operational/components"
 import { operational, Theme } from "@operational/theme"
 
-import { Grid, StaticContent, CornerAngle, Animation, Hero } from "./components"
-import { Operational } from "./components/Icons"
+import { Grid, StaticContent, CornerAngle, Animation, Hero, Logo } from "./components"
 
 const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "showcasetitlebarcontent",
@@ -101,7 +100,7 @@ export default class App extends React.Component<{}, {}> {
           <Card>
             <Hero>
               <TitleBarContent>
-                <Operational size={86} rotation={this.state.rotation} />
+                <Logo size={86} rotation={this.state.rotation} />
                 <h1>Operational UI</h1>
                 <h2>Building blocks for effective operational interfaces</h2>
                 <TitleBarNav>
