@@ -1,4 +1,4 @@
-import { Accessors, Data, Facade, PieChartConfig } from "./typings";
+import { Accessors, Facade, PieChartConfig } from "./typings";
 declare class PieChartFacade implements Facade {
     private __disposed;
     private canvas;
@@ -15,7 +15,7 @@ declare class PieChartFacade implements Facade {
     private insertCanvas();
     private insertComponents();
     private insertSeries();
-    data(data?: Data): Data;
+    data(data?: any): any;
     config(config?: Partial<PieChartConfig>): PieChartConfig;
     accessors(type: string, accessors: Accessors<any>): Accessors<any>;
     on(event: string, handler: any): void;

@@ -10,8 +10,6 @@
   </a>
 </div>
 
-<!-- separator -->
-
 `Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for data-driven interfaces that assume familiarity through routine use, prioritizing compactness and space-efficiency. It implements a [design language](https://ui.contiamo.com/docs/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
 
 ## Getting started
@@ -69,12 +67,6 @@ After you `yarn install`, simply run `yarn dev` inside the `components` or `visu
 To run the showcase, simply run `yarn start` from root. 
 
 To make sure your code is ready for Travis and your reviewers, run `yarn ci:local` from the root of the project.
-
-#### Generators
-
-To create a new `component`, simply run `./scripts/create-component.sh ComponentName`. This will generate all the boilerplate, files like `ComponentName.tsx` and `ComponentName.test.tsx`, and points to a few remaining manual wiring steps to get your component, its tests and its showcase page in place. The boilerplate also tries to guide towards consistent practices around code style, state management and styling. Please ask if anything is unclear.
-
-<!-- separator -->
 
 <h2 align="center">Core Team</h2>
 

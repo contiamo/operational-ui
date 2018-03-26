@@ -1,0 +1,50 @@
+{
+  "name": "@operational/showcase",
+  "version": "0.1.0-21",
+  "description": "Operational UI documentation site",
+  "main": "index.js",
+  "repository": "git@github.com:Contiamo/operational-ui.git",
+  "author": "Tejas Kumar <tejas@contiamo.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "rm -rf dist && next build && next export && mv out dist",
+    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
+    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
+    "precommit": "npm run prettier",
+    "test": "echo 'Tests to be added as project matures.'",
+    "test:u": "echo 'Tests to be added as project matures.'",
+    "package": "echo 'Showcase is not published, hence no package script.'",
+    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.4",
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "prettier": "1.8.2",
+    "react-scripts-ts": "^2.14.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "2.6.2"
+  },
+  "dependencies": {
+    "@operational/blocks": "^0.1.0-20",
+    "@operational/components": "^0.1.0-20",
+    "@operational/theme": "^0.1.0-20",
+    "@operational/utils": "^0.1.0-20",
+    "@operational/visualizations": "^0.1.0-20",
+    "babel-polyfill": "^6.26.0",
+    "component-playground": "^3.0.0",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.6.0",
+    "marked": "^0.3.6",
+    "moment": "^2.19.0",
+    "react": "^16.2.0",
+    "react-color": "^2.13.8",
+    "react-dom": "^16.2.0",
+    "react-feather": "^1.0.7",
+    "react-syntax-highlighter": "^5.7.0"
+  }
+}

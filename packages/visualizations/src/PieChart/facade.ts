@@ -120,7 +120,7 @@ class PieChartFacade implements Facade {
     )
   }
 
-  data(data?: Data): Data {
+  data(data?: any): any {
     return this.state.data(data)
   }
 

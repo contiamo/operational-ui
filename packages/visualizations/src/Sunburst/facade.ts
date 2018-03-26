@@ -116,7 +116,7 @@ class SunburstFacade implements Facade {
     }
   }
 
-  data(data?: RawData): RawData {
+  data(data?: any): any {
     return this.state.data(data)
   }
 
