@@ -21,14 +21,13 @@ import {
   DataForLegends,
   Datum,
   EventBus,
-  StackedSeriesOptions,
+  Object,
   RendererOptions,
   RendererType,
   SeriesAccessor,
   SeriesAccessors,
   SeriesData,
   SeriesManager,
-  SeriesOptions,
   State,
   StateWriter
 } from "./typings"
@@ -38,7 +37,7 @@ class ChartSeriesManager implements SeriesManager<Series> {
   events: EventBus
   key: SeriesAccessor<string>
   oldSeries: Series[] = []
-  renderAs: Accessor<StackedSeriesOptions | RendererOptions<any>, RendererOptions<any>[]>
+  renderAs: Accessor<Object<any> | RendererOptions<any>, RendererOptions<any>[]>
   series: Series[] = []
   state: State
   stateWriter: StateWriter
@@ -63,9 +62,9 @@ class ChartSeriesManager implements SeriesManager<Series> {
       this.state.current.get("accessors").data.series(this.state.current.get("data"))
     )
 
-    const currentKeys: string[] = map((datum: SeriesOptions): string => this.key(datum))(data)
+    const currentKeys: string[] = map((datum: Object<any>): string => this.key(datum))(data)
     this.removeAllExcept(currentKeys)
-    forEach((options: SeriesOptions): void => {
+    forEach((options: Object<any>): void => {
       const series: Series = this.get(this.key(options))
       series ? series.update(options) : this.create(options)
     })(data)
@@ -73,8 +72,8 @@ class ChartSeriesManager implements SeriesManager<Series> {
   }
 
   handleStacks(data: SeriesData): SeriesData {
-    const stacks: StackedSeriesOptions[] = filter((options: SeriesOptions): boolean => {
-      const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(options.renderAs)
+    const stacks: Object<any>[] = filter((options: Object<any>): boolean => {
+      const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(this.renderAs(options))
       const isStacked: boolean = includes("stacked")(rendererTypes)
       if (isStacked && rendererTypes.length > 1) {
         throw new Error("Stacked renderers cannot be combined with non-stacked renderers")
@@ -87,14 +86,15 @@ class ChartSeriesManager implements SeriesManager<Series> {
 
     forEach(this.computeStack.bind(this))(stacks)
 
-    let unstackedSeries: SeriesOptions[] = filter((options: SeriesOptions): boolean => {
-      const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(options.renderAs)
+    let unstackedSeries: Object<any>[] = filter((options: Object<any>): boolean => {
+      const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(this.renderAs(options))
       return !includes("stacked")(rendererTypes)
     })(data)
 
-    forEach((stack: StackedSeriesOptions): void => {
-      forEach((series: SeriesOptions): void => {
-        series.renderAs = stack.renderAs[0].renderAs
+    forEach((stack: Object<any>): void => {
+      forEach((series: Object<any>): void => {
+        // @TODO add missing datapoints to stacked series
+        series.renderAs = this.renderAs(this.renderAs(stack)[0])
         unstackedSeries = unstackedSeries.concat(series)
       })(stack.data)
     })(stacks)
@@ -102,10 +102,10 @@ class ChartSeriesManager implements SeriesManager<Series> {
     return unstackedSeries
   }
 
-  computeStack(stack: StackedSeriesOptions): void {
-    const stackedSeries: SeriesOptions[] = stack.data as SeriesOptions[]
+  computeStack(stack: Object<any>): void {
+    const stackedSeries: Object<any>[] = stack.data as Object<any>[]
     // By default, stacks are vertical
-    const stackAxis: "x" | "y" = stack.renderAs[0].stackAxis || "y"
+    const stackAxis: "x" | "y" = this.renderAs(stack)[0].stackAxis || "y"
     const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
 
     // Transform data into suitable structure for d3 stack
@@ -121,7 +121,7 @@ class ChartSeriesManager implements SeriesManager<Series> {
       sortBy(baseAxis as any)
     )(stackedSeries)
 
-    forEach((series: SeriesOptions) => {
+    forEach((series: Object<any>) => {
       forEach((datum: Datum) => {
         const newDatum = find((d: any) => String(d[baseAxis]) === String(datum[baseAxis]))(dataToStack)
         newDatum[series.key] = datum.y
@@ -138,7 +138,7 @@ class ChartSeriesManager implements SeriesManager<Series> {
     // Return to series data structure
     // @TODO typings
     forEach((series: any) => {
-      const originalSeries: SeriesOptions = find({ key: series.key })(stackedSeries)
+      const originalSeries: Object<any> = find({ key: series.key })(stackedSeries)
       // @TODO typing
       originalSeries.data = map((datum: any): Datum => {
         return {
@@ -205,7 +205,7 @@ class ChartSeriesManager implements SeriesManager<Series> {
     return data
   }
 
-  create(options: SeriesOptions): void {
+  create(options: Object<any>): void {
     // @TODO Does stateWriter need to be passed in?
     this.series.push(new Series(this.state, this.stateWriter, this.events, this.el, options))
   }

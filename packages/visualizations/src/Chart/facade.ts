@@ -20,10 +20,10 @@ import {
   Datum,
   Facade,
   FocusElement,
+  Object,
   Partial,
   RendererOptions,
   SeriesData,
-  SeriesOptions,
   XAxisConfig,
   YAxisConfig
 } from "./typings"
@@ -138,16 +138,16 @@ class ChartFacade implements Facade {
         axes: (d: Data): AxesData => d.axes
       },
       series: {
-        data: (d: SeriesOptions): Datum[] => d.data,
-        hide: (d: SeriesOptions): boolean => false,
-        hideInLegend: (d: SeriesOptions): boolean => false,
-        key: (d: SeriesOptions): string => d.key || uniqueId("key"),
-        legendColor: (d: SeriesOptions): string => assignColors(d.key),
-        legendName: (d: SeriesOptions): string => d.name || d.key || "",
-        renderAs: (d: SeriesOptions): RendererOptions<any>[] => d.renderAs,
-        unit: (d: SeriesOptions): string => d.unit || "",
-        xAxis: (d: SeriesOptions): "x1" | "x2" => d.xAxis || "x1",
-        yAxis: (d: SeriesOptions): "y1" | "y2" => d.yAxis || "y1"
+        data: (d: Object<any>): Datum[] => d.data,
+        hide: (d: Object<any>): boolean => false,
+        hideInLegend: (d: Object<any>): boolean => false,
+        key: (d: Object<any>): string => d.key || uniqueId("key"),
+        legendColor: (d: Object<any>): string => assignColors(d.key),
+        legendName: (d: Object<any>): string => d.name || d.key || "",
+        renderAs: (d: Object<any>): RendererOptions<any>[] => d.renderAs,
+        unit: (d: Object<any>): string => d.unit || "",
+        xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
+        yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1"
       }
     }
   }
@@ -208,7 +208,7 @@ class ChartFacade implements Facade {
     if (config.palette && !this.customColorAccessor) {
       const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
       this.accessors("series", {
-        legendColor: (d: SeriesOptions): string => assignColors(d.key)
+        legendColor: (d: Object<any>): string => assignColors(d.key)
       })
     }
     return this.state.config(config)

@@ -155,35 +155,12 @@ export interface Datum {
   y1?: number
 }
 
-interface BaseSeriesOptions {
-  // Required
-  renderAs: RendererOptions<any>[]
-  // Optional
-  color?: string
-  hide?: boolean // @TODO implement
-  hideInLegend?: boolean // @TODO implement
-  key?: string
-  name?: string
-  unit?: string
-  xAxis?: "x1" | "x2"
-  yAxis?: "y1" | "y2"
-}
+export type SeriesData = Object<any>[]
 
-export interface StackedSeriesOptions extends BaseSeriesOptions {
-  data: SeriesOptions[]
-}
-
-export interface SeriesOptions extends BaseSeriesOptions {
-  data: Datum[]
-  stacked?: boolean
-}
-
-export type SeriesData = SeriesOptions[]
-
-export type SeriesAccessor<T> = Accessor<SeriesOptions, T>
+export type SeriesAccessor<T> = Accessor<Object<any>, T>
 
 export interface SeriesAccessors {
-  data: SeriesAccessor<Datum[] | SeriesOptions[]>
+  data: SeriesAccessor<Datum[] | Object<any>[]>
   hide: SeriesAccessor<boolean>
   hideInLegend: SeriesAccessor<boolean>
   key: SeriesAccessor<string>

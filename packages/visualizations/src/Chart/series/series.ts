@@ -21,12 +21,12 @@ import {
   Datum,
   EventBus,
   LegendDatum,
+  Object,
   RendererClass,
   RendererOptions,
   RendererType,
   SeriesAccessor,
   SeriesAccessors,
-  SeriesOptions,
   State,
   StateWriter
 } from "../typings"
@@ -35,12 +35,12 @@ class ChartSeries {
   el: D3Selection
   events: EventBus
   oldRenderers: Renderer[]
-  options: SeriesOptions
+  options: Object<any>
   renderers: Renderer[] = []
   state: any
   stateWriter: StateWriter
   // Accessors
-  data: () => Datum[] | SeriesOptions[]
+  data: () => Datum[] | Object<any>[]
   hide: () => boolean
   hideInLegend: () => boolean
   key: () => string
@@ -51,7 +51,7 @@ class ChartSeries {
   xAxis: () => "x1" | "x2"
   yAxis: () => "y1" | "y2"
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, options: SeriesOptions) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, options: Object<any>) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -59,7 +59,7 @@ class ChartSeries {
     this.update(options)
   }
 
-  update(options: SeriesOptions): void {
+  update(options: Object<any>): void {
     this.assignAccessors()
     this.options = options
     this.updateRenderers()
