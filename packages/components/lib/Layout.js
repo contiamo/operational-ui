@@ -39,8 +39,16 @@ var Container = glamorous_1.default.div(function (_a) {
 });
 var Layout = function (props) {
     var sidenavProps = React.Children.toArray(props.children)[0].props;
+    /*
+     * This placeholder element is added to the dom in case there is no
+     * <Progress /> element, allowing the CSS to target children by the same
+     * nth-child identifier regardless of whether the loader is present.
+     * Absolute positioning is required to remove it from document flow
+     * so that it doesn't affect the grid.
+     */
+    var cssPlaceholder = React.createElement(glamorous_1.default.Div, { css: { position: "absolute" } });
     return (React.createElement(Container, { css: props.css, className: props.className, isSidenavExpanded: Boolean(sidenavProps.expanded) },
-        props.loading ? React.createElement(Progress_1.default, null) : React.createElement("div", { style: { position: "absolute" } }),
+        props.loading ? React.createElement(Progress_1.default, null) : cssPlaceholder,
         props.children));
 };
 exports.default = Layout;

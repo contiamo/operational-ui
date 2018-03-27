@@ -3,6 +3,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
 import Progress from "./Progress"
+import { Props as SidenavProps } from "./Sidenav"
 import { headerHeight, sidenavWidth, sidenavExpandedWidth } from "./constants"
 
 export interface Props {
@@ -44,16 +45,23 @@ const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; i
 }))
 
 const Layout = (props: Props) => {
-  const sidenavProps = (React.Children.toArray(props.children)[0] as any).props as { expanded?: boolean }
+  const sidenavProps = (React.Children.toArray(props.children)[0] as any).props as SidenavProps
+  /* 
+   * This placeholder element is added to the dom in case there is no
+   * <Progress /> element, allowing the CSS to target children by the same
+   * nth-child identifier regardless of whether the loader is present.
+   * Absolute positioning is required to remove it from document flow
+   * so that it doesn't affect the grid.
+   */
+  const cssPlaceholder = <glamorous.Div css={{ position: "absolute" }} />
   return (
     <Container css={props.css} className={props.className} isSidenavExpanded={Boolean(sidenavProps.expanded)}>
-      {/* Absolute positioning is required in the placeholder in order to remove 
-        * it from document flow and not mess up the grid.
-        * Having it around in the first place is necessary to be able to refer to
-        * layout children using the same `nth-child(n)` selector regardless
-        * of whether there is a <Progress /> element or not.
+      {props.loading ? <Progress /> : cssPlaceholder}
+      {/* Three children are expected, in this order:
+        * Sidenav
+        * Header
+        * any content, automatically sized to fill the entire content area.
         */}
-      {props.loading ? <Progress /> : <div style={{ position: "absolute" }} />}
       {props.children}
     </Container>
   )
