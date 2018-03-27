@@ -1,7 +1,8 @@
 import { setLineAttributes, setRectAttributes } from "../../utils/d3_utils"
-import { AxisClass, AxisPosition, D3Selection, Object } from "../typings"
-import { compact, flow, forEach, get, keys, map, mapValues, uniqBy, values } from "lodash/fp"
+import { AxisClass, AxisComputed, AxisPosition, D3Selection, Object, Partial } from "../typings"
+import { compact, flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
+import * as moment from "moment"
 
 type Dimensions = { width: number; height: number }
 
@@ -46,24 +47,61 @@ export const alignAxes = (axes: Object<AxisClass<any>>): Object<any> => {
     throw new Error(`Axes of types ${axesTypes.join(", ")} cannot be aligned`)
   }
 
-  return axesTypes[0] === "time" ? alignTimeAxes(axes) : alignQuantAxes(axes)
+  axesTypes[0] === "time" ? alignTimeAxes(axes) : alignQuantAxes(axes)
 }
 
-const alignTimeAxes = (axes: Object<AxisClass<Date>>): any => {}
-
-const alignQuantAxes = (axes: Object<AxisClass<number>>): Object<any> => {
-  // @TODO typing
-  const computed: Object<any> = mapValues((axis: AxisClass<number>): any => axis.computeInitial())(axes)
+const alignTimeAxes = (axes: Object<AxisClass<Date>>): void => {
+  const computed: Object<Partial<AxisComputed>> = mapValues((axis: AxisClass<number>): Partial<AxisComputed> =>
+    axis.computeInitial()
+  )(axes)
   const axisKeys: string[] = keys(computed)
-  const stepsOne: number[] = computed[axisKeys[0]].steps
-  const stepsTwo: number[] = computed[axisKeys[1]].steps
+  const intervalOne: any = axes[axisKeys[0]].interval
+  const intervalTwo: any = axes[axisKeys[1]].interval
+  if (intervalOne !== intervalTwo) {
+    throw new Error("Time axes must have the same interval")
+  }
+  const ticksInDomainOne: Date[] = computed[axisKeys[0]].ticksInDomain
+  const ticksInDomainTwo: Date[] = computed[axisKeys[1]].ticksInDomain
+  if (ticksInDomainOne.length === ticksInDomainTwo.length) {
+    return
+  }
+  if (ticksInDomainOne.length < ticksInDomainTwo.length) {
+    times(() => {
+      ticksInDomainOne.push(
+        moment(last(ticksInDomainOne))
+          .add(1, intervalOne)
+          .toDate()
+      )
+    })(ticksInDomainTwo.length - ticksInDomainOne.length)
+  } else {
+    times(() => {
+      ticksInDomainTwo.push(
+        moment(last(ticksInDomainTwo))
+          .add(1, intervalTwo)
+          .toDate()
+      )
+    })(ticksInDomainOne.length - ticksInDomainTwo.length)
+  }
+  computed[axisKeys[0]].ticksInDomain = ticksInDomainOne
+  computed[axisKeys[1]].ticksInDomain = ticksInDomainTwo
+  forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition): void => {
+    axis.computeAligned(computed[key])
+  })(axes)
+}
+
+const alignQuantAxes = (axes: Object<AxisClass<number>>): void => {
+  const computed: Object<Partial<AxisComputed>> = mapValues((axis: AxisClass<number>): Partial<AxisComputed> =>
+    axis.computeInitial()
+  )(axes)
+  const axisKeys: string[] = keys(computed)
+  const stepsOne: [number, number, number] = computed[axisKeys[0]].steps
+  const stepsTwo: [number, number, number] = computed[axisKeys[1]].steps
   alignSteps(stepsOne, stepsTwo)
   computed[axisKeys[0]].steps = stepsOne
   computed[axisKeys[1]].steps = stepsTwo
   forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition): void => {
     axis.computeAligned(computed[key])
   })(axes)
-  return computed
 }
 
 const alignSteps = (one: number[], two: number[]): void => {
@@ -104,13 +142,11 @@ export const positionBackgroundRect = (el: D3Selection, duration: number): void 
     const group: ClientRect = el.node().getBoundingClientRect()
     const rect: ClientRect = (el.selectAll("rect").node() as Element).getBoundingClientRect()
 
-    el
-      .selectAll("rect")
-      .call(setRectAttributes, {
-        x: group.left - rect.left,
-        y: group.top - rect.top,
-        width: group.width,
-        height: group.height
-      })
+    el.selectAll("rect").call(setRectAttributes, {
+      x: group.left - rect.left,
+      y: group.top - rect.top,
+      width: group.width,
+      height: group.height
+    })
   }, duration)
 }

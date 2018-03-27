@@ -13,6 +13,18 @@ const tickStyle = {
   }
 }
 
+const xStyle = {
+  textAnchor: "middle"
+}
+
+const y1Style = {
+  textAnchor: "end"
+}
+
+const y2Style = {
+  textAnchor: "start"
+}
+
 const borderStyle = {
   stroke: theme.colors.gray20,
   shapeRendering: "crispedges"
@@ -23,5 +35,9 @@ const componentRectStyle = {
 }
 
 export const tick = css(tickStyle).toString()
+export const x1 = css(xStyle).toString()
+export const x2 = css(xStyle).toString()
+export const y1 = css(y1Style).toString()
+export const y2 = css(y2Style).toString()
 export const border = css(borderStyle).toString()
 export const componentRect = css(componentRectStyle).toString()

@@ -120,12 +120,15 @@ class ChartCanvas implements Canvas {
     this.elMap[`legend-${options.position}-${options.float}`] = legend
   }
 
+  private legendHeight(position: "top" | "bottom", float: "left" | "right"): number {
+    return this.state.current.get("computed").series.dataForLegends[position][float].length > 0
+      ? this.elementFor(`legend-${position}-${float}`).node().offsetHeight
+      : 0
+  }
+
   private totalLegendHeight(): number {
-    const topLegendHeight: number = Math.max(
-      this.elementFor("legend-top-left").node().offsetHeight,
-      this.elementFor("legend-top-right").node().offsetHeight
-    )
-    return topLegendHeight + this.elementFor("legend-bottom-left").node().offsetHeight
+    const topLegendHeight: number = Math.max(this.legendHeight("top", "left"), this.legendHeight("top", "right"))
+    return topLegendHeight + this.legendHeight("bottom", "left")
   }
 
   // Drawing container
@@ -237,20 +240,20 @@ class ChartCanvas implements Canvas {
     this.calculateDrawingDims()
   }
 
+  private calculateDrawingContainerDims(): void {
+    const config = this.state.current.get("config")
+    this.stateWriter("drawingContainerDims", {
+      height: config.height - this.totalLegendHeight(),
+      width: config.width
+    })
+  }
+
   private calculateDrawingDims(): void {
     const drawingContainerDims: { height: number; width: number } = this.state.current.get("computed").canvas
       .drawingContainerDims
     this.stateWriter("drawingDims", {
       width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
       height: drawingContainerDims.height - this.margin("x1") - this.margin("x2")
-    })
-  }
-
-  private calculateDrawingContainerDims(): void {
-    const config = this.state.current.get("config")
-    this.stateWriter("drawingContainerDims", {
-      height: config.height - this.totalLegendHeight(),
-      width: config.width
     })
   }
 

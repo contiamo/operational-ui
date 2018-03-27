@@ -37,11 +37,12 @@ class ChartLegend implements Legend {
 
   draw(): void {
     // No legend
-    if (!this.state.current.get("config").legend) {
+    if (!this.state.current.get("config").legend || this.data.length === 0) {
       this.remove()
       return
     }
 
+    this.el.attr("visibility", "visible")
     const legends: D3Selection = this.el.selectAll(`div.${globalStyles.seriesLegend}`).data(this.data, get("label"))
 
     legends.exit().remove()
@@ -86,6 +87,7 @@ class ChartLegend implements Legend {
 
   remove(): void {
     this.el.node().innerHTML = ""
+    this.el.attr("visibility", "hidden")
   }
 }
 

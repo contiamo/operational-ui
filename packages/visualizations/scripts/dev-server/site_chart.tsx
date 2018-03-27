@@ -24,7 +24,7 @@ const LineRenderer: any = {
   accessors: {
     ...AxesAccessors
   },
-  type: "line" 
+  type: "line"
 }
 
 const BarsRenderer: any = {
@@ -35,7 +35,7 @@ const BarsRenderer: any = {
 }
 
 const StackedRenderer = {
-  accessors: { 
+  accessors: {
     ...AxesAccessors
   },
   type: "stacked",
@@ -47,16 +47,17 @@ const data: any = {
   series: [
     {
       data: [
-        {x: new Date("March 14, 2018"), y: 3000000},
-        {x: new Date("March 10, 2018"), y: 1000000},
-        {x: new Date("March 12, 2018"), y: 3000000},
-        {x: new Date("March 11, 2018"), y: 2000000},
-        {x: new Date("March 13, 2018"), y: 4000000}
+        {x: new Date("March 14, 2016"), y: 3000},
+        {x: new Date("March 10, 2016"), y: 1000},
+        {x: new Date("March 12, 2016"), y: 3000},
+        {x: new Date("March 11, 2016"), y: 2000},
+        {x: new Date("March 13, 2016"), y: 4000}
       ],
       name: "Line series with very, very, very, very long name",
       key: "unique_key",
-      yAxis: "y2",
-      renderAs: [AreaRenderer]  	  
+      xAxis: "x2",
+      // yAxis: "y2",
+      renderAs: [AreaRenderer]
     },
     {
       data: [
@@ -83,20 +84,74 @@ const data: any = {
           key: "series2"
         }
       ],
-      renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2	  
+      renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2
     }
   ],
+  // series: [
+  //   {
+  //     data: [
+  //       {x: "E", y: 3000000},
+  //       {x: "A", y: 1000000},
+  //       {x: "c", y: 3000000},
+  //       {x: "B", y: 2000000},
+  //       {x: "D", y: 4000000}
+  //     ],
+  //     name: "Line series with very, very, very, very long name",
+  //     key: "unique_key",
+  //     yAxis: "y2",
+  //     renderAs: [AreaRenderer]
+  //   },
+  //   {
+  //     data: [
+  //       {
+  //         data: [
+  //           {x: "A", y: 100},
+  //           {x: 5, y: 200},
+  //           {x: "C", y: 300},
+  //           {x: "D", y: 400},
+  //           {x: "E", y: 500}
+  //         ],
+  //         name: "Stacked series 1 with long name",
+  //         key: "series1"
+  //       },
+  //       {
+  //         data: [
+  //           {x: "A", y: 10},
+  //           {x: "B", y: 20},
+  //           {x: "C", y: 30},
+  //           {x: "D", y: 40},
+  //           {x: "E", y: 50}
+  //         ],
+  //         name: "Stacked series 2 with long name",
+  //         key: "series2"
+  //       }
+  //     ],
+  //     renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2
+  //   }
+  // ],
   axes: {
     x1: {
-      type: "time"
+      type: "time",
+      start: "2018-02-26",
+      end: "2018-03-26",
+      interval: "days"
     },
+    x2: {
+      type: "time",
+      start: "2016-02-26",
+      end: "2016-03-26",
+      interval: "days"
+    },
+    // x1: {
+    //   type: "categorical"
+    // },
     y1: {
       type: "quant"
     },
     y2: {
       type: "quant"
     }
-  }    
+  }
 }
 
 const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} /></OperationalUI>

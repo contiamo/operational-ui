@@ -5,14 +5,17 @@ import { computeDomain, computeScale, computeSteps, computeTicks } from "../../u
 import * as styles from "./styles"
 
 import {
+  AxisAttributes,
   AxisClass,
-  AxisOptions,
+  AxisComputed,
+  QuantAxisOptions,
   AxisPosition,
   ChartConfig,
   Computed,
   D3Selection,
   EventBus,
   Object,
+  Partial,
   State,
   StateWriter,
   XAxisConfig,
@@ -20,7 +23,7 @@ import {
 } from "../typings"
 
 class QuantAxis implements AxisClass<number> {
-  computed: any // @TODO typing
+  computed: AxisComputed
   data: number[]
   end: number
   el: D3Selection
@@ -29,7 +32,7 @@ class QuantAxis implements AxisClass<number> {
   interval: number // @TODO should the use be allowed to define the interval?
   isXAxis: boolean
   position: AxisPosition
-  previous: any // @TODO typing
+  previous: AxisComputed
   start: number
   state: State
   stateWriter: StateWriter
@@ -51,19 +54,18 @@ class QuantAxis implements AxisClass<number> {
     return isFinite(value)
   }
 
-  updateOptions(options: AxisOptions): void {
+  updateOptions(options: QuantAxisOptions): void {
     forEach.convert({ cap: false })((option: any, key: string): void => {
       ;(this as any)[key] = option
     })(options)
   }
 
-  update(options: AxisOptions, data: number[]): void {
+  update(options: QuantAxisOptions, data: number[]): void {
     this.updateOptions(options)
     this.data = flow(filter(this.validate), sortBy(identity))(data)
   }
 
   draw(): void {
-    this.compute()
     this.drawTicks()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
@@ -72,53 +74,51 @@ class QuantAxis implements AxisClass<number> {
   // Computations
   compute(): void {
     this.previous = this.computed
-    const computed: Object<any> = this.computeInitial()
+    const computed: Partial<AxisComputed> = this.computeInitial()
     computed.ticks = computeTicks(computed.steps)
     computed.scale = computeScale(computed.range, computed.ticks)
-    this.computed = computed
+    this.computed = computed as AxisComputed
+    this.previous = defaults(this.previous)(this.computed)
   }
 
   computeRange(): [number, number] {
     const config: ChartConfig = this.state.current.get("config")
     const computed: Computed = this.state.current.get("computed")
+    const computedAxes: Object<number> = computed.axes.margins || {}
     const margin = (axis: AxisPosition): number =>
-      includes(axis)(computed.axes.requiredAxes) ? config[axis].margin : 0
+      includes(axis)(computed.axes.requiredAxes) ? computedAxes[axis] || config[axis].margin : 0
     return this.isXAxis
-      ? [margin("y1"), computed.canvas.drawingContainerDims.width - margin("y2")]
-      : [
-          computed.canvas.drawingContainerDims.height - margin("x1"),
-          margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick
-        ]
+      ? [0, computed.canvas.drawingDims.width]
+      : [computed.canvas.drawingDims.height, margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick]
   }
 
   // @TODO typing
-  computeInitial(): Object<any> {
+  computeInitial(): Partial<AxisComputed> {
     const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    const computed: Object<any> = {}
+    const computed: Partial<AxisComputed> = {}
     computed.range = this.computeRange()
     computed.domain = computeDomain(this.data, this.start, this.end, this.expand)
     computed.steps = computeSteps(computed.domain, computed.range, options.tickSpacing, options.minTicks)
     return computed
   }
 
-  computeAligned(computed: Object<any>): void {
+  computeAligned(computed: Partial<AxisComputed>): void {
     this.previous = this.computed
-    computed.domain = computed.steps.slice(0, 2)
+    computed.domain = computed.steps.slice(0, 2) as [number, number]
     computed.scale = computeScale(computed.range, computed.domain)
     computed.ticks = computeTicks(computed.steps)
     // computed.baseline = this.computeBaseline(computed.domain, computed.scale)
-    this.computed = computed
-    // this.previous = defaults(this.previous, this.computed)
+    this.computed = computed as AxisComputed
+    this.previous = defaults(this.previous)(this.computed)
   }
 
-  // Ticks
   drawTicks(): void {
     const config: ChartConfig = this.state.current.get("config")
-    const attributes: any = this.getAttributes()
-    const startAttributes: any = this.getStartAttributes(attributes)
+    const attributes: AxisAttributes = this.getAttributes()
+    const startAttributes: AxisAttributes = this.getStartAttributes(attributes)
 
     const ticks: any = this.el
-      .selectAll(`text.${styles.tick}`)
+      .selectAll(`text.${styles.tick}.${styles[this.position]}`)
       // @TODO add tick mapper
       .data(this.computed.ticks)
 
@@ -127,9 +127,7 @@ class QuantAxis implements AxisClass<number> {
       .append("svg:text")
       .call(setTextAttributes, startAttributes)
       .merge(ticks)
-      .attr("class", styles.tick)
-      // @TODO only for time axis
-      // .attr("class", (d: string | number, i: number): string => "tick " + this.tickClass(d, i))
+      .attr("class", `${styles.tick} ${styles[this.position]}`)
       .call(setTextAttributes, attributes, config.duration)
 
     ticks
@@ -155,10 +153,10 @@ class QuantAxis implements AxisClass<number> {
     }
     const axisWidth: number = this.el.node().getBBox().width
     requiredMargin = Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding)
-    console.log(requiredMargin)
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
+
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update")
@@ -174,31 +172,30 @@ class QuantAxis implements AxisClass<number> {
     return (x: number): string => (x === unitTick && this.unit ? this.unit : numberFormatter(x))
   }
 
-  getAttributes(): any {
+  getAttributes(): AxisAttributes {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
       dx: this.isXAxis ? 0 : tickOffset,
       dy: this.isXAxis ? tickOffset : "-0.4em",
       text: this.tickFormatter(),
-      textAnchor: this.isXAxis ? "middle" : this.position === "y1" ? "end" : "start", // @TODO can this be moved to css?
       x: this.isXAxis ? this.computed.scale : 0,
       y: this.isXAxis ? 0 : this.computed.scale
     }
   }
 
-  getStartAttributes(attributes: any): any {
+  getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults({
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale
     })(attributes)
   }
 
-  // Border
   drawBorder(): void {
+    const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
     const border: Object<number> = {
       x1: 0,
-      x2: this.isXAxis ? this.computed.range[1] : 0,
-      y1: this.isXAxis ? 0 : this.computed.range[0],
+      x2: this.isXAxis ? drawingDims.width : 0,
+      y1: this.isXAxis ? 0 : drawingDims.height,
       y2: 0
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)

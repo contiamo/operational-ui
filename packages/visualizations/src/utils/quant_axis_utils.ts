@@ -27,7 +27,7 @@ export const computeSteps = (
   range: [number, number],
   spacing: number,
   minTicks: number
-): number[] => {
+): [number, number, number] => {
   const tickNumber: number = this.computeTickNumber(range, spacing, minTicks)
 
   const span: number = domain[1] - domain[0]

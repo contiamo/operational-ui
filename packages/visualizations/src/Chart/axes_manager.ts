@@ -31,8 +31,8 @@ class AxesManager {
   draw(): void {
     this.updateAxes()
     forEach(invoke("remove"))(this.oldAxes)
-    this.drawYAxes()
-    this.drawXAxes()
+    this.drawAxes("y")
+    this.drawAxes("x")
   }
 
   updateAxes(): void {
@@ -69,30 +69,12 @@ class AxesManager {
     this.axes[position].update(options, data)
   }
 
-  drawYAxes(): void {
-    const yAxes: Object<AxisClass<any>> = pickBy((axis: AxisClass<any>, key: AxisPosition): boolean => key[0] === "y")(
-      this.axes
-    )
-    keys(yAxes).length === 2 ? this.align(yAxes) : forEach(invoke("compute"))(yAxes)
-    forEach(invoke("draw"))(yAxes)
-    // - identify which x axes there are -> range for y axes // WITHIN axis class
-    // - identify number of y axes
-    // - if 2 y axes - axes_manager.align()
-    // - if 1 y axis - axis.compute()
-    // - for y axes: axis.draw()
-    // - Update y axis margins as necessary / Trigger event??
-  }
-
-  drawXAxes(): void {
-    // - identify number of x axes
-    // - if 2 x axes - axes_manager.align()
-    // - if 1 x axis - axis.compute()
-    // - for x axes: axis.draw()
-  }
-
-  align(axes: Object<AxisClass<any>>): void {
-    const computed: any = alignAxes(axes)
-    debugger
+  drawAxes(orientation: "x" | "y"): void {
+    const axes: Object<AxisClass<any>> = pickBy((axis: AxisClass<any>): boolean => {
+      return orientation === "x" ? axis.isXAxis : !axis.isXAxis
+    })(this.axes)
+    keys(axes).length === 2 ? alignAxes(axes) : forEach(invoke("compute"))(axes)
+    forEach(invoke("draw"))(axes)
   }
 
   remove(axis: AxisClass<any>, position: AxisPosition): void {

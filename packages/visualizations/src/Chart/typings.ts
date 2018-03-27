@@ -1,5 +1,6 @@
 import * as d3 from "d3-selection"
 import { Accessor, Config, Facade, Focus, Legend, Object } from "../utils/typings"
+import { DateRange } from "moment-range"
 
 export {
   Accessor,
@@ -197,25 +198,62 @@ export interface SeriesAccessors {
 // Axes
 export type AxisPosition = "x1" | "x2" | "y1" | "y2"
 
-export interface AxisOptions {
-  type: "time" | "quant" | "categorical"
-  expand?: "smart" | "zero" | "custom"
-  start?: number | Date
-  end?: number | Date
-  interval?: "hour" | "day" | "week" | "month" | "quarter" | "year" | number
+export interface TimeAxisOptions {
+  type: "time"
+  start: Date
+  end: Date
+  interval: "hours" | "days" | "weeks" | "months" | "quarters" | "years"
 }
+
+export interface QuantAxisOptions {
+  type: "quant"
+  expand?: "smart" | "zero" | "custom"
+  start?: number
+  end?: number
+  interval?: number
+}
+
+export interface CategoricalAxisOptions {
+  type: "categorical"
+  sort?: boolean
+}
+
+export type AxisOptions = TimeAxisOptions | QuantAxisOptions | CategoricalAxisOptions
 
 export interface AxesData {
   [key: string]: AxisOptions
 }
 
-export interface AxisClass<T> extends AxisOptions {
+export interface AxisComputed {
+  domain?: [number, number] | DateRange
+  range: [number, number]
+  scale: any // @TODO typing
+  steps?: [number, number, number]
+  ticks: any[]
+  ticksInDomain?: Date[]
+  tickNumber?: number
+}
+
+export interface AxisAttributes {
+  dx: number | string
+  dy: number | string
+  text: any
+  x: any
+  y: any
+}
+
+export interface AxisClass<T> {
+  type: "time" | "quant" | "categorical"
   validate: Accessor<any, boolean>
   compute: () => void
-  computeAligned: (computed: Object<any>) => void
+  computed: AxisComputed
+  computeAligned?: (computed: Object<any>) => void
   // @TODO typing
-  computeInitial: () => Object<any>
+  computeInitial?: () => Object<any>
   draw: () => void
+  interval?: any
+  isXAxis: boolean
+  previous: AxisComputed
   update: (options: AxisOptions, data: T[]) => void
   remove: () => void
 }
