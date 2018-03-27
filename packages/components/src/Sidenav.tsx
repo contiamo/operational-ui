@@ -13,7 +13,6 @@ export interface Props {
   color?: string
   expanded?: boolean
   expandOnHover?: boolean
-  expandedWidth?: number
 }
 
 export interface State {
@@ -26,14 +25,12 @@ const Container = glamorous.div(
     color,
     fix,
     expanded,
-    expandOnHover,
-    expandedWidth
+    expandOnHover
   }: {
     theme: Theme
     color?: string
     fix?: boolean
     expandOnHover?: boolean
-    expandedWidth: number
     expanded?: boolean
   }): {} => {
     const backgroundColor = expandColor(theme, color) || theme.colors.sidenavBackground
@@ -42,7 +39,7 @@ const Container = glamorous.div(
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
           willChange: "width",
           "&:hover": {
-            width: expandedWidth
+            width: sidenavExpandedWidth
           }
         }
       : {}
@@ -50,12 +47,12 @@ const Container = glamorous.div(
     return {
       backgroundColor,
       label: "sidenav",
-      width: expanded ? expandedWidth : sidenavWidth,
+      width: expanded ? sidenavExpandedWidth : sidenavWidth,
       zIndex: theme.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
-      height: "100vh",
+      height: "100%",
       overflowY: "auto",
       overflowX: "hidden",
       boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
@@ -81,7 +78,6 @@ class Sidenav extends React.Component<Props, State> {
         className={this.props.className}
         color={this.props.color}
         expandOnHover={this.props.expandOnHover}
-        expandedWidth={this.props.expandedWidth || sidenavExpandedWidth}
         expanded={this.props.expanded}
         onMouseEnter={() => {
           this.setState(prevState => ({

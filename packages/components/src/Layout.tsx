@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
 import Progress from "./Progress"
-import { headerHeight, sidenavWidth } from "./constants"
+import { headerHeight, sidenavWidth, sidenavExpandedWidth } from "./constants"
 
 export interface Props {
   css?: {}
@@ -12,12 +12,12 @@ export interface Props {
   loading?: boolean
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; isSidenavExpanded: boolean }): {} => ({
   label: "Layout",
   position: "relative",
   height: "100%",
   display: "grid",
-  gridTemplateColumns: `${sidenavWidth}px auto`,
+  gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : sidenavWidth}px auto`,
   gridTemplateRows: `${headerHeight}px auto`,
   // Side navigation (1st child is always the spinner or a placeholder)
   "& > *:nth-child(2)": {
@@ -43,11 +43,20 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-const Layout = (props: Props) => (
-  <Container css={props.css} className={props.className}>
-    {props.loading ? <Progress /> : <div />}
-    {props.children}
-  </Container>
-)
+const Layout = (props: Props) => {
+  const sidenavProps = (React.Children.toArray(props.children)[0] as any).props as { expanded?: boolean }
+  return (
+    <Container css={props.css} className={props.className} isSidenavExpanded={Boolean(sidenavProps.expanded)}>
+      {/* Absolute positioning is required in the placeholder in order to remove 
+        * it from document flow and not mess up the grid.
+        * Having it around in the first place is necessary to be able to refer to
+        * layout children using the same `nth-child(n)` selector regardless
+        * of whether there is a <Progress /> element or not.
+        */}
+      {props.loading ? <Progress /> : <div style={{ position: "absolute" }} />}
+      {props.children}
+    </Container>
+  )
+}
 
 export default Layout

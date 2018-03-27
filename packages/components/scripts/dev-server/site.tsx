@@ -37,8 +37,6 @@ interface State {
   end?: string
 }
 
-console.log(lighten(operational.colors.info, 53))
-
 const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& > *": {
     marginTop: -1
@@ -57,7 +55,7 @@ class Site extends React.Component<{}, State> {
     return (
       <OperationalUI withBaseStyles>
         <Layout>
-          <Sidenav />
+          <Sidenav expanded />
           <Header>
             <Breadcrumbs>
               <Breadcrumb>One</Breadcrumb>
