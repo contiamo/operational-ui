@@ -184,7 +184,6 @@ export interface TimeAxisOptions {
 
 export interface QuantAxisOptions {
   type: "quant"
-  expand?: "smart" | "zero" | "custom"
   start?: number
   end?: number
   interval?: number

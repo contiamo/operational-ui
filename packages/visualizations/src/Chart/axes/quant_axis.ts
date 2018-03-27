@@ -28,7 +28,6 @@ class QuantAxis implements AxisClass<number> {
   end: number
   el: D3Selection
   events: EventBus
-  expand: "smart" | "zero" | "custom" = "smart"
   interval: number // @TODO should the use be allowed to define the interval?
   isXAxis: boolean
   position: AxisPosition
@@ -97,7 +96,7 @@ class QuantAxis implements AxisClass<number> {
     const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     const computed: Partial<AxisComputed> = {}
     computed.range = this.computeRange()
-    computed.domain = computeDomain(this.data, this.start, this.end, this.expand)
+    computed.domain = computeDomain(this.data, this.start, this.end)
     computed.steps = computeSteps(computed.domain, computed.range, options.tickSpacing, options.minTicks)
     return computed
   }

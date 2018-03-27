@@ -3,16 +3,6 @@ import { extent as d3Extent, range as d3Range } from "d3-array"
 import { find, isNil, last } from "lodash/fp"
 import { scaleLinear } from "d3-scale"
 
-// Expand extent
-export const axisDirection = (extent: [number, number]): [number, number] => {
-  return extent[1] > extent[0] ? [0, 1] : [1, 0]
-}
-
-export const computeDomain = (data: number[], start: number, end: number, expand: string): [number, number] => {
-  const extent: [number, number] = this.guess(data, expand)
-  return [start || extent[0], end || extent[1]]
-}
-
 export const computeScale = (range: [number, number], ticks: number[]): ((val: number) => number) => {
   return scaleLinear()
     .range(range)
@@ -58,50 +48,27 @@ export const computeTicks = (steps: [number, number, number]): number[] => {
   return ticks
 }
 
+export const computeDomain = (data: number[], start: number, end: number): [number, number] => {
+  if (end < start) {
+    throw new Error("Start value cannot be greater than end value.")
+  }
+  const extent: [number, number] = this.guess(data)
+  return [start || extent[0], end || extent[1]]
+}
+
 // Increase the extent by 5% on both sides (so that there's some space
 // between the drawings and the borders of the chart), unless one of the ends
 // equals 0
 export const extentCushion = (extent: [number, number]): [number, number] => {
-  const [i, j]: [number, number] = this.axisDirection(extent)
-  const distance: number = extent[j] - extent[i]
-
-  if (extent[i] !== 0) {
-    extent[i] = extent[i] - 0.05 * distance
-  }
-  if (extent[j] !== 0) {
-    extent[j] = extent[j] + 0.05 * distance
-  }
-
-  return extent
-}
-
-// Decides whether to cut axis to values based on how big the gap between start / end is
-export const extentSmart = (extent: [number, number]): [number, number] => {
-  const [i, j]: [number, number] = this.axisDirection(extent)
-  const distance: number = extent[j] - extent[i]
-
-  const ratio: number = extent[i] > 0 ? distance / extent[i] : distance / Math.abs(extent[j])
-
-  // No ratio if zero is already included
-  return !ratio || ratio < 0.2 ? extent : this.extentZero(extent)
-}
-
-// Expands an extent [start, end] to include zero as start or end
-// if it does not already contain zero
-export const extentZero = (extent: [number, number]): [number, number] => {
-  const [i, j]: [number, number] = this.axisDirection(extent)
-
-  if (extent[i] > 0) {
-    extent[i] = 0
-  } else if (extent[j] < 0) {
-    extent[j] = 0
-  }
-
-  return extent
+  const distance: number = extent[1] - extent[0]
+  return [
+    extent[0] !== 0 ? extent[0] - 0.05 * distance : extent[0],
+    extent[1] !== 0 ? extent[1] + 0.05 * distance : extent[1]
+  ]
 }
 
 // Guess start, end from data
-export const guess = (data: number[] = [], expand: string): number[] => {
+export const guess = (data: number[] = []): number[] => {
   const extent: number[] = d3Extent(data)
 
   // If this axis is user configured but does not currently have any data,
@@ -118,19 +85,14 @@ export const guess = (data: number[] = [], expand: string): number[] => {
     return val === 0
       ? [0, 100]
       : // Make sure axis has right direction
-        val < 0 ? [2 * val, val] : [val, 2 * val]
+        val < 0 ? [2 * val, 0] : [0, 2 * val]
   }
 
-  switch (expand) {
-    case "smart":
-      return this.extentCushion(this.extentSmart(extent))
-    case "zero":
-      return this.extentCushion(this.extentZero(extent))
-    case "cut":
-      return this.extentCushion(extent)
-    default:
-      throw new Error("Invalid expand option '" + expand + "'.")
-  }
+  // Ensure domain includes zero
+  extent[0] = extent[0] > 0 ? 0 : extent[0]
+  extent[1] = extent[1] < 0 ? 0 : extent[1]
+
+  return this.extentCushion(extent)
 }
 
 export const ruleClass = (ruleValue: number, index: number, ticks: number[]): string => {
