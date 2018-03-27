@@ -40,7 +40,7 @@ class AxesManager {
     const data = this.state.current.get("computed").series.dataForAxes
     // Remove axes that are no longer needed, or whose type has changed
     const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition): boolean => {
-      return !axesOptions[key] || axesOptions[key].type !== axis.type || data[key].length === 0
+      return !axesOptions[key] || axesOptions[key].type !== axis.type
     })(this.axes)
     forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove)
     // Create or update currently required axes
@@ -50,9 +50,6 @@ class AxesManager {
 
   private createOrUpdate(options: AxisOptions, position: AxisPosition): void {
     const data = this.state.current.get("computed").series.dataForAxes[position]
-    if (data.length === 0) {
-      return
-    }
     const existing: AxisClass<any> = this.axes[position]
     existing ? this.update(position, options) : this.create(position, options)
   }
