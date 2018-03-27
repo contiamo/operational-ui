@@ -80,6 +80,9 @@ class TimeAxis implements AxisClass<Date> {
     this.start = options.start
     this.end = options.end
     this.interval = options.interval
+    if (!this.start || !this.end || !this.interval) {
+      throw new Error("Values for `start`, `end` and `interval` must always be configured for time axes.")
+    }
   }
 
   update(options: TimeAxisOptions, data: Date[]): void {
