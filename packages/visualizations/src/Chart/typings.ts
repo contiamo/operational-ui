@@ -175,11 +175,15 @@ export interface SeriesAccessors {
 // Axes
 export type AxisPosition = "x1" | "x2" | "y1" | "y2"
 
+export type AxisType = "time" | "quant" | "categorical"
+
+export type TimeIntervals = "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+
 export interface TimeAxisOptions {
   type: "time"
   start: Date
   end: Date
-  interval: "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+  interval: TimeIntervals
 }
 
 export interface QuantAxisOptions {
@@ -191,7 +195,7 @@ export interface QuantAxisOptions {
 
 export interface CategoricalAxisOptions {
   type: "categorical"
-  sort?: boolean
+  values?: string[]
 }
 
 export type AxisOptions = TimeAxisOptions | QuantAxisOptions | CategoricalAxisOptions

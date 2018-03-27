@@ -1,13 +1,13 @@
-import { defaults, filter, flow, forEach, identity, includes, isFinite, last, sortBy } from "lodash/fp"
-import { axisPosition, insertElements, positionBackgroundRect } from "./axis_utils"
+import { defaults, filter, identity, isFinite, last } from "lodash/fp"
+import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeSteps, computeTicks } from "../../utils/quant_axis_utils"
 import * as styles from "./styles"
-
 import {
   AxisAttributes,
   AxisClass,
   AxisComputed,
+  AxisType,
   QuantAxisOptions,
   AxisPosition,
   ChartConfig,
@@ -28,14 +28,14 @@ class QuantAxis implements AxisClass<number> {
   end: number
   el: D3Selection
   events: EventBus
-  interval: number // @TODO should the use be allowed to define the interval?
+  interval: number
   isXAxis: boolean
   position: AxisPosition
   previous: AxisComputed
   start: number
   state: State
   stateWriter: StateWriter
-  type: "time" | "quant" | "categorical" = "quant"
+  type: AxisType = "quant"
   unit: string
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
@@ -54,20 +54,14 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private updateOptions(options: QuantAxisOptions): void {
-    forEach.convert({ cap: false })((option: any, key: string): void => {
-      ;(this as any)[key] = option
-    })(options)
+    this.start = options.start
+    this.end = options.end
+    this.interval = options.interval
   }
 
   update(options: QuantAxisOptions, data: number[]): void {
     this.updateOptions(options)
-    this.data = flow(filter(this.validate), sortBy(identity))(data)
-  }
-
-  draw(): void {
-    this.drawTicks()
-    this.drawBorder()
-    positionBackgroundRect(this.el, this.state.current.get("config").duration)
+    this.data = filter(this.validate)(data)
   }
 
   // Computations
@@ -80,22 +74,12 @@ class QuantAxis implements AxisClass<number> {
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  private computeRange(): [number, number] {
-    const config: ChartConfig = this.state.current.get("config")
-    const computed: Computed = this.state.current.get("computed")
-    const computedAxes: Object<number> = computed.axes.margins || {}
-    const margin = (axis: AxisPosition): number =>
-      includes(axis)(computed.axes.requiredAxes) ? computedAxes[axis] || config[axis].margin : 0
-    return this.isXAxis
-      ? [0, computed.canvas.drawingDims.width]
-      : [computed.canvas.drawingDims.height, margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick]
-  }
-
-  // @TODO typing
   computeInitial(): Partial<AxisComputed> {
+    const config: ChartConfig = this.state.current.get("config")
+    const computedChart: Computed = this.state.current.get("computed")
     const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     const computed: Partial<AxisComputed> = {}
-    computed.range = this.computeRange()
+    computed.range = computeRange(config, computedChart, this.position)
     computed.domain = computeDomain(this.data, this.start, this.end)
     computed.steps = computeSteps(computed.domain, computed.range, options.tickSpacing, options.minTicks)
     return computed
@@ -106,9 +90,15 @@ class QuantAxis implements AxisClass<number> {
     computed.domain = computed.steps.slice(0, 2) as [number, number]
     computed.scale = computeScale(computed.range, computed.domain)
     computed.ticks = computeTicks(computed.steps)
-    // computed.baseline = this.computeBaseline(computed.domain, computed.scale)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.previous)(this.computed)
+  }
+
+  // Drawing
+  draw(): void {
+    this.drawTicks()
+    this.drawBorder()
+    positionBackgroundRect(this.el, this.state.current.get("config").duration)
   }
 
   private drawTicks(): void {
@@ -118,8 +108,7 @@ class QuantAxis implements AxisClass<number> {
 
     const ticks: any = this.el
       .selectAll(`text.${styles.tick}.${styles[this.position]}`)
-      // @TODO add tick mapper
-      .data(this.computed.ticks)
+      .data(this.computed.ticks, String)
 
     ticks
       .enter()
@@ -142,20 +131,10 @@ class QuantAxis implements AxisClass<number> {
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    let requiredMargin: number = config.margin
-
-    // @TODO Adjust for flags
-
-    // Adjust for ticks
-    if (this.isXAxis) {
-      return
-    }
-    const axisWidth: number = this.el.node().getBBox().width
-    requiredMargin = Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding)
+    const requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
-
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update")

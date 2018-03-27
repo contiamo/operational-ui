@@ -1,5 +1,5 @@
-import { defaults, filter, flow, forEach, includes, isDate, last, map, omit, sortBy } from "lodash/fp"
-import { axisPosition, insertElements, positionBackgroundRect } from "./axis_utils"
+import { defaults, filter, flow, isDate, last, map, sortBy } from "lodash/fp"
+import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
@@ -12,6 +12,7 @@ import {
   AxisAttributes,
   AxisClass,
   AxisComputed,
+  AxisType,
   TimeAxisOptions,
   AxisPosition,
   ChartConfig,
@@ -22,13 +23,14 @@ import {
   Partial,
   State,
   StateWriter,
+  TimeIntervals,
   XAxisConfig,
   YAxisConfig
 } from "../typings"
 
-// @TODO - add in more options?
+// @TODO - add in more options
 // Have removed "now", and any formatting to account for change in month/year
-const tickFormatter = (interval: "hours" | "days" | "weeks" | "months" | "quarters" | "years") => {
+const tickFormatter = (interval: TimeIntervals) => {
   switch (interval) {
     case "hours":
       return timeFormat("%b %d %H:00")
@@ -48,19 +50,19 @@ const tickFormatter = (interval: "hours" | "days" | "weeks" | "months" | "quarte
 }
 
 class TimeAxis implements AxisClass<Date> {
-  computed: any // @TODO typing
+  computed: AxisComputed
   data: Date[]
   el: D3Selection
   end: Date
   events: EventBus
-  interval: "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+  interval: TimeIntervals
   isXAxis: boolean
   position: AxisPosition
-  previous: any // @TODO typing
+  previous: AxisComputed
   start: Date
   state: State
   stateWriter: StateWriter
-  type: "time" | "quant" | "categorical" = "time"
+  type: AxisType = "time"
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -87,43 +89,28 @@ class TimeAxis implements AxisClass<Date> {
 
   update(options: TimeAxisOptions, data: Date[]): void {
     this.updateOptions(options)
-    // @TODO validation here does nothing - needs to be validated on render, surely?
     this.data = flow(filter(this.validate), sortBy((value: any): number => value.valueOf()))(data)
   }
 
-  draw(): void {
-    this.drawTicks()
-    this.drawBorder()
-    positionBackgroundRect(this.el, this.state.current.get("config").duration)
-  }
-
+  // Computations
   compute(): void {
     this.previous = this.computed
-    const computed: Object<any> = this.computeInitial()
+    const computed: Partial<AxisComputed> = this.computeInitial()
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
     computed.scale = scaleTime()
       .range(computed.range)
       .domain([computed.ticksInDomain[0], last(computed.ticksInDomain)])
     computed.ticks = this.computeTicks(computed)
-    this.computed = computed
+    this.computed = computed as AxisComputed
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  private computeRange(): [number, number] {
-    const config: ChartConfig = this.state.current.get("config")
-    const computed: Computed = this.state.current.get("computed")
-    const computedAxes: Object<number> = computed.axes.margins || {}
-    const margin = (axis: AxisPosition): number =>
-      includes(axis)(computed.axes.requiredAxes) ? computedAxes[axis] || config[axis].margin : 0
-    return this.isXAxis
-      ? [0, computed.canvas.drawingDims.width]
-      : [computed.canvas.drawingDims.height, margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick]
-  }
-
   computeInitial(): Object<any> {
+    const config: ChartConfig = this.state.current.get("config")
+    const computedChart: Computed = this.state.current.get("computed")
     const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     const computed: Partial<AxisComputed> = {}
-    computed.range = this.computeRange()
+    computed.range = computeRange(config, computedChart, this.position)
     computed.ticksInDomain = map((d: any) => d.toDate())(
       Array.from(moment.range(this.start, this.end).by(this.interval))
     )
@@ -144,15 +131,22 @@ class TimeAxis implements AxisClass<Date> {
     return computed.scale.ticks(computed.tickNumber || 1)
   }
 
-  computeAligned(computed: Object<any>): void {
+  computeAligned(computed: Partial<AxisComputed>): void {
     this.previous = this.computed
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
     computed.scale = scaleTime()
       .range(computed.range)
       .domain([computed.ticksInDomain[0], last(computed.ticksInDomain)])
     computed.ticks = this.computeTicks(computed)
-    this.computed = computed
+    this.computed = computed as AxisComputed
     this.previous = defaults(this.previous)(this.computed)
+  }
+
+  // Drawing
+  draw(): void {
+    this.drawTicks()
+    this.drawBorder()
+    positionBackgroundRect(this.el, this.state.current.get("config").duration)
   }
 
   private drawTicks(): void {
@@ -161,8 +155,7 @@ class TimeAxis implements AxisClass<Date> {
     const startAttributes: AxisAttributes = this.getStartAttributes(attributes)
     const ticks: any = this.el
       .selectAll(`text.${styles.tick}.${styles[this.position]}`)
-      // @TODO add tick mapper
-      .data(this.computed.ticks)
+      .data(this.computed.ticks, String)
 
     ticks
       .enter()
@@ -187,20 +180,10 @@ class TimeAxis implements AxisClass<Date> {
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    let requiredMargin: number = config.margin
-
-    // @TODO Adjust for flags
-
-    // Adjust for ticks
-    if (this.isXAxis) {
-      return
-    }
-    const axisWidth: number = this.el.node().getBBox().width
-    requiredMargin = Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding)
+    const requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
-
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update")

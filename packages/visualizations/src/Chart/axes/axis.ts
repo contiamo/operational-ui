@@ -1,4 +1,4 @@
-import { AxisPosition, D3Selection, EventBus, State, StateWriter } from "../typings"
+import { AxisPosition, AxisType, D3Selection, EventBus, State, StateWriter } from "../typings"
 import QuantAxis from "../axes/quant_axis"
 import TimeAxis from "../axes/time_axis"
 import CategoricalAxis from "../axes/categorical_axis"
@@ -9,7 +9,7 @@ class Axis {
     stateWriter: StateWriter,
     events: EventBus,
     el: D3Selection,
-    type: string,
+    type: AxisType,
     position: AxisPosition
   ) {
     switch (type) {

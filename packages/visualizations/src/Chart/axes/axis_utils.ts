@@ -1,6 +1,17 @@
 import { setLineAttributes, setRectAttributes } from "../../utils/d3_utils"
-import { AxisClass, AxisComputed, AxisPosition, D3Selection, Object, Partial } from "../typings"
-import { compact, flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
+import {
+  AxisClass,
+  AxisComputed,
+  AxisPosition,
+  ChartConfig,
+  Computed,
+  D3Selection,
+  Object,
+  Partial,
+  XAxisConfig,
+  YAxisConfig
+} from "../typings"
+import { compact, flow, forEach, get, includes, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
 import * as moment from "moment"
 
@@ -35,6 +46,31 @@ export const insertElements = (el: D3Selection, position: AxisPosition, drawingD
     .call(setLineAttributes, { x1: 0, x2: 0, y1: 0, y2: 0 })
 
   return axisGroup
+}
+
+export const computeRange = (config: ChartConfig, computed: Computed, position: AxisPosition): [number, number] => {
+  const computedAxes: Object<number> = computed.axes.margins || {}
+  const margin = (axis: AxisPosition): number =>
+    includes(axis)(computed.axes.requiredAxes) ? computedAxes[axis] || config[axis].margin : 0
+  return position[0] === "x"
+    ? [0, computed.canvas.drawingDims.width]
+    : [computed.canvas.drawingDims.height, margin("x2") || (config[position] as YAxisConfig).minTopOffsetTopTick]
+}
+
+export const computeRequiredMargin = (
+  axis: D3Selection,
+  computedMargins: Object<number>,
+  config: XAxisConfig | YAxisConfig,
+  position: AxisPosition
+): number => {
+  const requiredMargin: number = config.margin
+  // @TODO adjust for flags
+  if (position[0] === "x") {
+    return requiredMargin
+  }
+  // Adjust for ticks
+  const axisWidth: number = axis.node().getBBox().width
+  return Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding)
 }
 
 export const alignAxes = (axes: Object<AxisClass<any>>): Object<any> => {
