@@ -72,7 +72,7 @@ class ChartSeries {
     })(accessors)
   }
 
-  updateRenderers(): void {
+  private updateRenderers(): void {
     this.oldRenderers = []
     const rendererTypes: RendererType[] = map(get("type"))(this.renderAs())
     this.removeAllExcept(rendererTypes)
@@ -83,21 +83,21 @@ class ChartSeries {
     })(this.renderAs())
   }
 
-  removeAllExcept(types: RendererType[]): void {
+  private removeAllExcept(types: RendererType[]): void {
     flow(filter((renderer: RendererClass<any>): boolean => !includes(renderer.type)(types)), forEach(this.remove))(
       this.renderers
     )
   }
 
-  get(type: string): RendererClass<any> {
+  private get(type: string): RendererClass<any> {
     return find((renderer: RendererClass<any>): boolean => renderer.type === type)(this.renderers)
   }
 
-  addRenderer(options: RendererOptions<any>): void {
+  private addRenderer(options: RendererOptions<any>): void {
     this.renderers.push(new Renderer(this.state, this.events, this.el, this.options.data, options, this))
   }
 
-  remove(renderer: Renderer): void {
+  private remove(renderer: Renderer): void {
     this.oldRenderers.push(renderer)
     remove(renderer)(this.renderers)
   }
@@ -126,7 +126,7 @@ class ChartSeries {
     forEach(invoke("draw"))(this.renderers)
   }
 
-  close(): void {
+  private close(): void {
     forEach(invoke("close"))(this.renderers)
   }
 }

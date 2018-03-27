@@ -35,7 +35,7 @@ class AxesManager {
     this.drawAxes("x")
   }
 
-  updateAxes(): void {
+  private updateAxes(): void {
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const data = this.state.current.get("computed").series.dataForAxes
     // Remove axes that are no longer needed, or whose type has changed
@@ -48,7 +48,7 @@ class AxesManager {
     this.stateWriter("requiredAxes", keys(this.axes))
   }
 
-  createOrUpdate(options: AxisOptions, position: AxisPosition): void {
+  private createOrUpdate(options: AxisOptions, position: AxisPosition): void {
     const data = this.state.current.get("computed").series.dataForAxes[position]
     if (data.length === 0) {
       return
@@ -57,19 +57,19 @@ class AxesManager {
     existing ? this.update(position, options) : this.create(position, options)
   }
 
-  create(position: AxisPosition, options: AxisOptions): void {
+  private create(position: AxisPosition, options: AxisOptions): void {
     const el: D3Selection = this.els[`${position[0]}Axes`]
     const axis: Axis = new Axis(this.state, this.stateWriter, this.events, el, options.type, position)
     this.axes[position] = axis as AxisClass<any>
     this.update(position, options)
   }
 
-  update(position: AxisPosition, options: AxisOptions): void {
+  private update(position: AxisPosition, options: AxisOptions): void {
     const data = this.state.current.get("computed").series.dataForAxes[position]
     this.axes[position].update(options, data)
   }
 
-  drawAxes(orientation: "x" | "y"): void {
+  private drawAxes(orientation: "x" | "y"): void {
     const axes: Object<AxisClass<any>> = pickBy((axis: AxisClass<any>): boolean => {
       return orientation === "x" ? axis.isXAxis : !axis.isXAxis
     })(this.axes)
@@ -77,7 +77,7 @@ class AxesManager {
     forEach(invoke("draw"))(axes)
   }
 
-  remove(axis: AxisClass<any>, position: AxisPosition): void {
+  private remove(axis: AxisClass<any>, position: AxisPosition): void {
     this.oldAxes[position] = axis
     this.axes[position] = null
   }

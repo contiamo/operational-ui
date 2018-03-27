@@ -54,7 +54,7 @@ class QuantAxis implements AxisClass<number> {
     return isFinite(value)
   }
 
-  updateOptions(options: QuantAxisOptions): void {
+  private updateOptions(options: QuantAxisOptions): void {
     forEach.convert({ cap: false })((option: any, key: string): void => {
       ;(this as any)[key] = option
     })(options)
@@ -81,7 +81,7 @@ class QuantAxis implements AxisClass<number> {
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  computeRange(): [number, number] {
+  private computeRange(): [number, number] {
     const config: ChartConfig = this.state.current.get("config")
     const computed: Computed = this.state.current.get("computed")
     const computedAxes: Object<number> = computed.axes.margins || {}
@@ -112,7 +112,7 @@ class QuantAxis implements AxisClass<number> {
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  drawTicks(): void {
+  private drawTicks(): void {
     const config: ChartConfig = this.state.current.get("config")
     const attributes: AxisAttributes = this.getAttributes()
     const startAttributes: AxisAttributes = this.getStartAttributes(attributes)
@@ -140,7 +140,7 @@ class QuantAxis implements AxisClass<number> {
     this.adjustMargins()
   }
 
-  adjustMargins(): void {
+  private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     let requiredMargin: number = config.margin
@@ -166,13 +166,13 @@ class QuantAxis implements AxisClass<number> {
     )
   }
 
-  tickFormatter(): (x: number) => string {
+  private tickFormatter(): (x: number) => string {
     const numberFormatter: (x: number) => string = this.state.current.get("config").numberFormatter
     const unitTick: number = this.isXAxis ? this.computed.ticks[0] : last(this.computed.ticks)
     return (x: number): string => (x === unitTick && this.unit ? this.unit : numberFormatter(x))
   }
 
-  getAttributes(): AxisAttributes {
+  private getAttributes(): AxisAttributes {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
       dx: this.isXAxis ? 0 : tickOffset,
@@ -183,14 +183,14 @@ class QuantAxis implements AxisClass<number> {
     }
   }
 
-  getStartAttributes(attributes: AxisAttributes): AxisAttributes {
+  private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults({
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale
     })(attributes)
   }
 
-  drawBorder(): void {
+  private drawBorder(): void {
     const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
     const border: Object<number> = {
       x1: 0,

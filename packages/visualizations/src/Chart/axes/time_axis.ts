@@ -76,7 +76,7 @@ class TimeAxis implements AxisClass<Date> {
     return isDate(value)
   }
 
-  updateOptions(options: TimeAxisOptions): void {
+  private updateOptions(options: TimeAxisOptions): void {
     this.start = options.start
     this.end = options.end
     this.interval = options.interval
@@ -109,7 +109,7 @@ class TimeAxis implements AxisClass<Date> {
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  computeRange(): [number, number] {
+  private computeRange(): [number, number] {
     const config: ChartConfig = this.state.current.get("config")
     const computed: Computed = this.state.current.get("computed")
     const computedAxes: Object<number> = computed.axes.margins || {}
@@ -130,13 +130,13 @@ class TimeAxis implements AxisClass<Date> {
     return computed
   }
 
-  computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
+  private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
     const width: number = Math.abs(range[1] - range[0])
     const axisOptions: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     return Math.min(ticksInDomain.length, Math.max(Math.floor(width / axisOptions.tickSpacing), axisOptions.minTicks))
   }
 
-  computeTicks(computed: Partial<AxisComputed>): Date[] {
+  private computeTicks(computed: Partial<AxisComputed>): Date[] {
     if (this.interval === "weeks") {
       const tickInterval: number = Math.ceil(computed.ticksInDomain.length / computed.tickNumber || 1)
       return computed.scale.ticks(timeMonday, tickInterval)
@@ -155,7 +155,7 @@ class TimeAxis implements AxisClass<Date> {
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  drawTicks(): void {
+  private drawTicks(): void {
     const config: ChartConfig = this.state.current.get("config")
     const attributes: AxisAttributes = this.getAttributes()
     const startAttributes: AxisAttributes = this.getStartAttributes(attributes)
@@ -184,7 +184,7 @@ class TimeAxis implements AxisClass<Date> {
     this.adjustMargins()
   }
 
-  adjustMargins(): void {
+  private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     let requiredMargin: number = config.margin
@@ -210,7 +210,7 @@ class TimeAxis implements AxisClass<Date> {
     )
   }
 
-  getAttributes(): AxisAttributes {
+  private getAttributes(): AxisAttributes {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
       dx: this.isXAxis ? 0 : tickOffset,
@@ -221,14 +221,14 @@ class TimeAxis implements AxisClass<Date> {
     }
   }
 
-  getStartAttributes(attributes: AxisAttributes): AxisAttributes {
+  private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults({
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale
     })(attributes)
   }
 
-  drawBorder(): void {
+  private drawBorder(): void {
     const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
     const border: Object<number> = {
       x1: 0,

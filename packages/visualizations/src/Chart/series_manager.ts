@@ -32,7 +32,7 @@ import {
   StateWriter
 } from "./typings"
 
-class ChartSeriesManager implements SeriesManager<Series> {
+class ChartSeriesManager implements SeriesManager {
   el: D3Selection
   events: EventBus
   key: SeriesAccessor<string>
@@ -71,7 +71,7 @@ class ChartSeriesManager implements SeriesManager<Series> {
     this.stateWriter("series", this.series)
   }
 
-  handleStacks(data: SeriesData): SeriesData {
+  private handleStacks(data: SeriesData): SeriesData {
     const stacks: Object<any>[] = filter((options: Object<any>): boolean => {
       const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(this.renderAs(options))
       const isStacked: boolean = includes("stacked")(rendererTypes)
@@ -102,7 +102,7 @@ class ChartSeriesManager implements SeriesManager<Series> {
     return unstackedSeries
   }
 
-  computeStack(stack: Object<any>): void {
+  private computeStack(stack: Object<any>): void {
     const stackedSeries: Object<any>[] = stack.data as Object<any>[]
     // By default, stacks are vertical
     const stackAxis: "x" | "y" = this.renderAs(stack)[0].stackAxis || "y"
@@ -152,15 +152,15 @@ class ChartSeriesManager implements SeriesManager<Series> {
     })(stackedData)
   }
 
-  handleRanges(data: SeriesData): SeriesData {
+  private handleRanges(data: SeriesData): SeriesData {
     return data
   }
 
-  get(key: string): any {
+  private get(key: string): any {
     return find((series: Series): boolean => this.key(series.options) === key)(this.series)
   }
 
-  remove(key: string): void {
+  private remove(key: string): void {
     const series: Series = this.get(key)
     if (!series) {
       return
@@ -205,14 +205,10 @@ class ChartSeriesManager implements SeriesManager<Series> {
     return data
   }
 
-  create(options: Object<any>): void {
+  private create(options: Object<any>): void {
     // @TODO Does stateWriter need to be passed in?
     this.series.push(new Series(this.state, this.stateWriter, this.events, this.el, options))
   }
-
-  // hasData(): boolean {
-  //   return _.any(this.series, function(series: any): boolean { return series.hasData() })
-  // }
 
   draw(): void {
     forEach(invoke("close"))(this.oldSeries)

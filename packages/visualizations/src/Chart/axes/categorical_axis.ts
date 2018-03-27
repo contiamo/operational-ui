@@ -46,7 +46,7 @@ class CategoricalAxis implements AxisClass<string> {
     return !isNil(value)
   }
 
-  updateOptions(options: CategoricalAxisOptions): void {
+  private updateOptions(options: CategoricalAxisOptions): void {
     forEach.convert({ cap: false })((option: any, key: string): void => {
       ;(this as any)[key] = option
     })(options)
@@ -79,7 +79,7 @@ class CategoricalAxis implements AxisClass<string> {
     this.previous = defaults(this.previous)(this.computed)
   }
 
-  computeRange(): [number, number] {
+  private computeRange(): [number, number] {
     const config: ChartConfig = this.state.current.get("config")
     const computed: Computed = this.state.current.get("computed")
     const computedAxes: Object<number> = computed.axes.margins || {}
@@ -93,7 +93,7 @@ class CategoricalAxis implements AxisClass<string> {
         ]
   }
 
-  drawTicks(): void {
+  private drawTicks(): void {
     const config: ChartConfig = this.state.current.get("config")
     const attributes: any = this.getAttributes()
     const startAttributes: any = this.getStartAttributes(attributes)
@@ -123,7 +123,7 @@ class CategoricalAxis implements AxisClass<string> {
     this.adjustMargins()
   }
 
-  getAttributes(): any {
+  private getAttributes(): any {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
       dx: this.isXAxis ? 0 : tickOffset,
@@ -134,14 +134,14 @@ class CategoricalAxis implements AxisClass<string> {
     }
   }
 
-  getStartAttributes(attributes: any): any {
+  private getStartAttributes(attributes: any): any {
     return defaults({
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale
     })(attributes)
   }
 
-  adjustMargins(): void {
+  private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     let requiredMargin: number = config.margin
@@ -167,7 +167,7 @@ class CategoricalAxis implements AxisClass<string> {
     )
   }
 
-  drawBorder(): void {
+  private drawBorder(): void {
     const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
     const border: Object<number> = {
       x1: 0,

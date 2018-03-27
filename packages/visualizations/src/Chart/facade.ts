@@ -191,7 +191,7 @@ class ChartFacade implements Facade {
     }
   }
 
-  insertSeries(): ChartSeriesManager {
+  private insertSeries(): ChartSeriesManager {
     return new ChartSeriesManager(
       this.state.readOnly(),
       this.state.computedWriter(["series"]),

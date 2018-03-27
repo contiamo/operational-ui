@@ -85,7 +85,7 @@ class LegendManager {
     shorter.setWidth(maxShorterWidth)
   }
 
-  calculateMaxWidth(legend: ChartLegend): number {
+  private calculateMaxWidth(legend: ChartLegend): number {
     const nodes: any[] = legend.el.selectAll(`div.${styles.seriesLegend}`).nodes()
     const maxNodeWidth: number = reduce((maxWidth: number, node: any): number => {
       return Math.max(maxWidth, node.getBoundingClientRect().width)
