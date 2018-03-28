@@ -10,7 +10,6 @@ export interface Props {
   css?: {}
   className?: string
   children?: React.ReactNode
-  color?: string
   expanded?: boolean
   expandOnHover?: boolean
 }
@@ -22,7 +21,6 @@ export interface State {
 const Container = glamorous.div(
   ({
     theme,
-    color,
     fix,
     expanded,
     expandOnHover
@@ -33,7 +31,8 @@ const Container = glamorous.div(
     expandOnHover?: boolean
     expanded?: boolean
   }): {} => {
-    const backgroundColor = expandColor(theme, color) || theme.colors.sidenavBackground
+    const backgroundColor = theme.colors.sidenavBackground
+    const color = readableTextColor(backgroundColor, [theme.colors.bodyText, theme.colors.white])
     const hoverWidth = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
@@ -46,6 +45,7 @@ const Container = glamorous.div(
 
     return {
       backgroundColor,
+      color,
       label: "sidenav",
       width: expanded ? sidenavExpandedWidth : sidenavWidth,
       zIndex: theme.baseZIndex + 100,
@@ -55,8 +55,6 @@ const Container = glamorous.div(
       height: "100%",
       overflowY: "auto",
       overflowX: "hidden",
-      boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)",
-      color: readableTextColor(backgroundColor, ["black", "white"]),
       ...hoverWidth,
       "& a:focus": {
         outline: 0
@@ -76,7 +74,6 @@ class Sidenav extends React.Component<Props, State> {
         key={this.props.id}
         css={this.props.css}
         className={this.props.className}
-        color={this.props.color}
         expandOnHover={this.props.expandOnHover}
         expanded={this.props.expanded}
         onMouseEnter={() => {

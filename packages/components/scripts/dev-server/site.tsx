@@ -1,14 +1,14 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
+import { operational, operationalAdmin, Theme } from "@operational/theme"
 import { render } from "react-dom"
-import { operational } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
 import {
   OperationalUI,
   operationalTheme,
   Input,
+  Icon,
   Button,
   Select,
   Layout,
@@ -27,6 +27,7 @@ import {
   Header,
   Table,
   Sidenav,
+  SidenavHeader,
   CardHeader
 } from "../../src"
 
@@ -43,6 +44,11 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
+const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  backgroundColor: theme.colors.white,
+  position: "relative"
+}))
+
 class Site extends React.Component<{}, State> {
   state: State = {
     is: true,
@@ -53,64 +59,43 @@ class Site extends React.Component<{}, State> {
 
   render() {
     return (
-      <OperationalUI withBaseStyles>
+      <OperationalUI withBaseStyles theme={operationalAdmin}>
         <Layout>
-          <Sidenav expanded />
-          <Header>
+          <Sidenav
+            expanded
+            css={{
+            }}
+          >
+            <SidenavHeader
+              label="Pantheon"
+              icon={<Icon name="Pantheon" size={36} />}
+              css={{
+                height: 60,
+                borderBottom: "1px solid #dedede",
+                boxSizing: "border-box"
+              }}
+            />
+            <SidenavHeader label="Saved Queries" icon="Send" />
+            <SidenavHeader label="Data Sources" icon="Database" />
+            <SidenavHeader label="Schemas" icon="Code" />
+            <SidenavHeader label="Executed Queries" icon="Clipboard" />
+          </Sidenav>
+          <Header
+            css={{
+              boxSizing: "border-box",
+              zIndex: "100",
+              boxShadow: "none",
+              borderBottom: "1px solid",
+              borderColor: "#dedede"
+            }}
+          >
             <Breadcrumbs>
               <Breadcrumb>One</Breadcrumb>
               <Breadcrumb>Two</Breadcrumb>
               <Breadcrumb>Three</Breadcrumb>
             </Breadcrumbs>
           </Header>
-          <Grid type="3x2">
-            <Card css={{ position: "relative" }}>
-              <CardHeader>
-                Card One
-                <Button color="info" condensed css={{ marginRight: 0 }}>
-                  Go somewhere
-                </Button>
-              </CardHeader>
-              <glamorous.Div css={{ margin: "20px 0" }}>
-                <Input value="1234" label="5678" />
-              </glamorous.Div>
-              <Button color="info">Button one</Button>
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Two</CardHeader>
-              <Switch
-                on={this.state.is}
-                onChange={() => {
-                  this.setState(prevState => ({
-                    is: !prevState.is
-                  }))
-                }}
-              />
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Three</CardHeader>
-              <DatePicker
-                label="31"
-                start={this.state.start}
-                end={this.state.end}
-                onChange={newDates => {
-                  this.setState(prevState => ({
-                    ...newDates
-                  }))
-                }}
-              />
-              <Input value="1234" label="5678" css={{ marginTop: 20 }} />
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Four</CardHeader>
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Five</CardHeader>
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Six</CardHeader>
-            </Card>
-          </Grid>
+          <Content />
         </Layout>
       </OperationalUI>
     )

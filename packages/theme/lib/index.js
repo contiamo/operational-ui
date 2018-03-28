@@ -52,7 +52,7 @@ var colors = {
     gray80: "#747474",
     gray90: "#444444",
     background: "#F5F6FA",
-    bodyText: "#555f61",
+    bodyText: "#2F3435",
     cardBackground: "#FFFFFF",
     cardHeaderBackground: "#F9FAFE",
     border: "#dadada",
@@ -90,4 +90,6 @@ var operational = {
     baseZIndex: 0
 };
 exports.operational = operational;
+var operationalAdmin = __assign({}, operational, { colors: __assign({}, operational.colors, { sidenavBackground: "#F7F7F9" }) });
+exports.operationalAdmin = operationalAdmin;
 //# sourceMappingURL=index.js.map

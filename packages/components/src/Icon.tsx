@@ -13,6 +13,7 @@ export interface Props {
   name: IconName
   size?: number
   color?: string
+  colored?: boolean
   // OperationalUI needs this prop to animate the inner circle.
   // All other icons should ignore it.
   rotation?: number
@@ -36,19 +37,18 @@ const Icon = (props: PropsWithTheme) => {
     if (props.name === "Labs") {
       Comp = BrandIcons.Labs
     }
-    if (props.name === "Components") {
-      Comp = BrandIcons.Components
+    if (props.name === "Pantheon") {
+      Comp = BrandIcons.Pantheon
     }
-    if (props.name === "Blocks") {
-      Comp = BrandIcons.Blocks
-    }
-    if (props.name === "Visualizations") {
-      Comp = BrandIcons.Visualizations
-    }
-    if (props.name === "Documentation") {
-      Comp = BrandIcons.Documentation
-    }
-    return <Comp key={props.id} size={props.size || defaultSize} color={color_} rotation={props.rotation} />
+    return (
+      <Comp
+        key={props.id}
+        size={props.size || defaultSize}
+        color={color_}
+        rotation={props.rotation}
+        colored={props.colored}
+      />
+    )
   }
 
   return null

@@ -32,7 +32,9 @@ const Content = glamorous.div(
     overflow: "hidden",
     height: sidenavWidth,
     flex: `0 0 ${sidenavWidth}px`,
-    color: isActive ? theme.colors.linkText : theme.colors.white,
+    // Readable text color is calculated in the <Sidenav> component,
+    // and cascades down to both sidenav headers and items.
+    color: isActive ? theme.colors.linkText : "inherit",
     borderBottom: isExpanded ? `1px solid #395568` : "none",
     backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
     ":hover": {
@@ -41,10 +43,12 @@ const Content = glamorous.div(
   })
 )
 
-const Label = glamorous.div({
+const Label = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  ...theme.typography.heading1,
+  fontSize: 14,
   width: "fit-content",
   whiteSpace: "nowrap"
-})
+}))
 
 const IconContainer = glamorous.div({
   width: sidenavWidth,

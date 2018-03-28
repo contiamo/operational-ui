@@ -9,6 +9,7 @@ export interface Props {
     name: IconName;
     size?: number;
     color?: string;
+    colored?: boolean;
     rotation?: number;
 }
 export interface PropsWithTheme extends Props {

@@ -138,7 +138,7 @@ const colors: ThemeColors = {
   gray80: "#747474",
   gray90: "#444444",
   background: "#F5F6FA",
-  bodyText: "#555f61",
+  bodyText: "#2F3435",
   cardBackground: "#FFFFFF",
   cardHeaderBackground: "#F9FAFE",
   border: "#dadada",
@@ -202,4 +202,12 @@ const operational: Theme = {
   baseZIndex: 0
 }
 
-export { operational }
+const operationalAdmin: Theme = {
+  ...operational,
+  colors: {
+    ...operational.colors,
+    sidenavBackground: "#F7F7F9"
+  }
+}
+
+export { operational, operationalAdmin }

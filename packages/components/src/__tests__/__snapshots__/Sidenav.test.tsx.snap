@@ -8,7 +8,7 @@ exports[`Sidenav component renders 1`] = `
       "colors": Object {
         "background": "#F5F6FA",
         "black": "#000000",
-        "bodyText": "#555f61",
+        "bodyText": "#2F3435",
         "border": "#dadada",
         "brand": "#000000",
         "cardBackground": "#FFFFFF",

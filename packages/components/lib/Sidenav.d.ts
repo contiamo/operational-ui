@@ -5,7 +5,6 @@ export interface Props {
     css?: {};
     className?: string;
     children?: React.ReactNode;
-    color?: string;
     expanded?: boolean;
     expandOnHover?: boolean;
 }
