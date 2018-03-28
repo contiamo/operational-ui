@@ -43,7 +43,7 @@ const StackedRenderer = {
   },
   type: "stacked",
   stackAxis: "y",
-  renderAs: [AreaRenderer]
+  renderAs: [LineRenderer, AreaRenderer]
 }
 
 const data: any = {
@@ -61,7 +61,7 @@ const data: any = {
       key: "unique_key",
       // xAxis: "x2",
       yAxis: "y2",
-      renderAs: [AreaRenderer]
+      renderAs: [LineRenderer, AreaRenderer]
     },
     {
       data: [

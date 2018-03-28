@@ -25,7 +25,7 @@ class Renderer {
       case "flag":
         return new Flag(state, events, el.select("g.series-flag"), data, options)
       case "line":
-        return new Line(state, events, el.select("g.series-line"), data, options)
+        return new Line(state, events, el.select("g.series-line"), data, options, series)
       case "range":
         return new Range(state, events, el.select("g.series-range"), data, options)
       case "symbol":

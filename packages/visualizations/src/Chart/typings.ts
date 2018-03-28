@@ -117,7 +117,7 @@ export interface FlagRendererAccessors extends RendererAxesAccessors {
 }
 
 export interface LineRendererAccessors extends LinearRendererAccessors {
-  dashed: RendererAccessor<number | number[]>
+  dashed: RendererAccessor<boolean>
 }
 
 export type RangeRendererAccessors = LinearRendererAccessors
