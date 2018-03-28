@@ -21,7 +21,7 @@ var Icon = function (props) {
         if (props.name === "Pantheon") {
             Comp = BrandIcons.Pantheon;
         }
-        return React.createElement(Comp, { key: props.id, size: props.size || defaultSize, color: color_, rotation: props.rotation, colored: props.colored });
+        return (React.createElement(Comp, { key: props.id, size: props.size || defaultSize, color: color_, rotation: props.rotation, colored: props.colored }));
     }
     return null;
 };

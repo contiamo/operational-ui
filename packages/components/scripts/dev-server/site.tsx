@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { operational, operationalAdmin, Theme } from "@operational/theme"
+import { operational, Theme } from "@operational/theme"
 import { render } from "react-dom"
 import { lighten } from "@operational/utils"
 
@@ -59,7 +59,7 @@ class Site extends React.Component<{}, State> {
 
   render() {
     return (
-      <OperationalUI withBaseStyles theme={operationalAdmin}>
+      <OperationalUI withBaseStyles>
         <Layout>
           <Sidenav
             expanded
@@ -70,8 +70,7 @@ class Site extends React.Component<{}, State> {
               label="Pantheon"
               icon={<Icon name="Pantheon" size={36} />}
               css={{
-                height: 60,
-                borderBottom: "1px solid #dedede",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                 boxSizing: "border-box"
               }}
             />
@@ -83,10 +82,7 @@ class Site extends React.Component<{}, State> {
           <Header
             css={{
               boxSizing: "border-box",
-              zIndex: "100",
               boxShadow: "none",
-              borderBottom: "1px solid",
-              borderColor: "#dedede"
             }}
           >
             <Breadcrumbs>

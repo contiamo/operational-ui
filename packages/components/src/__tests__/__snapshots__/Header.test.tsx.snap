@@ -2,7 +2,7 @@
 
 exports[`Header Header component renders 1`] = `
 <header
-  class="css-a2r9pl hi"
+  class="css-kwjb9 hi"
 >
   Hello
 </header>

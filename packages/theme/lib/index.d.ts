@@ -64,5 +64,4 @@ export interface Theme {
     shadows: ThemeShadows;
 }
 declare const operational: Theme;
-declare const operationalAdmin: Theme;
-export { operational, operationalAdmin };
+export { operational };

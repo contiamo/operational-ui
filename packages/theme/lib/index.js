@@ -59,7 +59,7 @@ var colors = {
     emphasizedText: "#373d3f",
     lightText: "#969696",
     linkText: "#1499CE",
-    sidenavBackground: "#105075",
+    sidenavBackground: "#004A75",
     separator: "#f2f2f2",
     secondarySeparator: "#f8f8f8"
 };
@@ -90,6 +90,4 @@ var operational = {
     baseZIndex: 0
 };
 exports.operational = operational;
-var operationalAdmin = __assign({}, operational, { colors: __assign({}, operational.colors, { sidenavBackground: "#F7F7F9" }) });
-exports.operationalAdmin = operationalAdmin;
 //# sourceMappingURL=index.js.map
