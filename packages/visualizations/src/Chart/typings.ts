@@ -81,7 +81,7 @@ export interface ChartConfig extends Config {
 export type RendererType = "area" | "bars" | "flag" | "line" | "range" | "symbol" | "text"
 
 // @TODO SingleSeries / ChartSeries
-export type RendererAccessor<T> = (series: any, d: Datum) => T
+export type RendererAccessor<T> = (series?: any, d?: Datum) => T
 
 export interface RendererAxesAccessors {
   x: RendererAccessor<number | string | Date>
@@ -150,9 +150,13 @@ export interface RendererClass<RendererAccessors> {
 // Series
 export interface Datum {
   x?: string | number | Date
+  x0?: number
+  x1?: number
   y?: string | number | Date
   y0?: number
   y1?: number
+  injectedX?: string | number | Date
+  injectedY?: string | number | Date
 }
 
 export type SeriesData = Object<any>[]

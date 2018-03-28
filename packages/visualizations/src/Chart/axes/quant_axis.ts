@@ -71,6 +71,7 @@ class QuantAxis implements AxisClass<number> {
     computed.ticks = computeTicks(computed.steps)
     computed.scale = computeScale(computed.range, computed.ticks)
     this.computed = computed as AxisComputed
+    this.stateWriter(this.position, this.computed)
     this.previous = defaults(this.previous)(this.computed)
   }
 
@@ -91,6 +92,7 @@ class QuantAxis implements AxisClass<number> {
     computed.scale = computeScale(computed.range, computed.domain)
     computed.ticks = computeTicks(computed.steps)
     this.computed = computed as AxisComputed
+    this.stateWriter(this.position, this.computed)
     this.previous = defaults(this.previous)(this.computed)
   }
 

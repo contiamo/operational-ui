@@ -154,6 +154,7 @@ declare namespace fp {
     bind: any
     compact: any
     defaults: any
+    difference: any
     drop: any
     dropRight: any
     every: any

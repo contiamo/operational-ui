@@ -102,6 +102,7 @@ class TimeAxis implements AxisClass<Date> {
       .domain([computed.ticksInDomain[0], last(computed.ticksInDomain)])
     computed.ticks = this.computeTicks(computed)
     this.computed = computed as AxisComputed
+    this.stateWriter(this.position, this.computed)
     this.previous = defaults(this.previous)(this.computed)
   }
 
@@ -139,6 +140,7 @@ class TimeAxis implements AxisClass<Date> {
       .domain([computed.ticksInDomain[0], last(computed.ticksInDomain)])
     computed.ticks = this.computeTicks(computed)
     this.computed = computed as AxisComputed
+    this.stateWriter(this.position, this.computed)
     this.previous = defaults(this.previous)(this.computed)
   }
 

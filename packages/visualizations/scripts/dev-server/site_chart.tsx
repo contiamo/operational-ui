@@ -12,11 +12,14 @@ import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
 
 const AxesAccessors: any = {
-  x: (d: any) => d.x
-  // y: (d) => d.y
+  x: (series: any, d: any) => d.x
+  // y: (series: any, d) => d.y
 }
 
 const AreaRenderer: any = {
+  accessors: {
+    ...AxesAccessors
+  },
   type: "area"
 }
 
@@ -47,16 +50,17 @@ const data: any = {
   series: [
     {
       data: [
-        {x: new Date("March 14, 2016"), y: 3000},
-        {x: new Date("March 10, 2016"), y: 1000},
-        {x: new Date("March 12, 2016"), y: 3000},
-        {x: new Date("March 11, 2016"), y: 2000},
-        {x: new Date("March 13, 2016"), y: 4000}
+        {x: new Date("March 15, 2018"), y: 3000},
+        {x: new Date("March 14, 2018"), y: 5000},
+        {x: new Date("March 10, 2018"), y: 1000},
+        {x: new Date("March 12, 2018"), y: undefined},
+        {x: new Date("March 11, 2018"), y: 2000},
+        {x: new Date("March 13, 2018"), y: 4000},
       ],
       name: "Line series with very, very, very, very long name",
       key: "unique_key",
-      xAxis: "x2",
-      // yAxis: "y2",
+      // xAxis: "x2",
+      yAxis: "y2",
       renderAs: [AreaRenderer]
     },
     {
@@ -132,16 +136,22 @@ const data: any = {
   axes: {
     x1: {
       type: "time",
-      start: "2018-02-26",
-      end: "2018-03-26",
+      start: "2018-03-10",
+      end: "2018-03-15",
       interval: "days"
     },
-    x2: {
-      type: "time",
-      start: "2016-02-26",
-      end: "2016-03-26",
-      interval: "days"
-    },
+    // x1: {
+    //   type: "time",
+    //   start: "2018-02-26",
+    //   end: "2018-03-26",
+    //   interval: "days"
+    // },
+    // x2: {
+    //   type: "time",
+    //   start: "2016-02-26",
+    //   end: "2016-03-26",
+    //   interval: "days"
+    // },
     // x1: {
     //   type: "categorical"
     // },
