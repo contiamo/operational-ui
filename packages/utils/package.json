@@ -20,10 +20,6 @@
   },
   "dependencies": {
     "@operational/theme": "^0.1.0-21",
-    "glamor": "^2.20.40",
-    "glamorous": "^4.9.7",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
@@ -33,38 +29,16 @@
     "@types/d3-selection": "1.1.0",
     "@types/d3-shape": "1.2.1",
     "@types/d3-transition": "1.1.0",
-    "@types/enzyme": "3.1.5",
     "@types/jest": "20.0.8",
-    "@types/jquery": "3.2.12",
-    "@types/lodash": "4.14.74",
-    "@types/marked": "0.3.0",
     "@types/node": "8.0.27",
-    "@types/react": "16.0.40",
-    "@types/react-color": "2.13.0",
-    "@types/react-dom": "16.0.0",
-    "@types/react-hot-loader": "3.0.4",
-    "@types/react-icons": "2.2.2",
-    "@types/react-router-dom": "4.2.0",
-    "@types/react-syntax-highlighter": "0.0.3",
     "@types/tinycolor2": "1.4.0",
-    "@types/webpack-env": "1.13.1",
-    "awesome-typescript-loader": "3.4.1",
-    "enzyme": "2.9.1",
-    "enzyme-to-json": "1.5.1",
     "jest": "21.2.1",
-    "jest-enzyme": "3.8.1",
-    "jest-glamor-react": "3.1.0",
-    "jest-serializer-enzyme": "1.0.0",
     "prettier": "1.8.2",
-    "react-test-renderer": "16.0.0",
     "ts-jest": "21.0.0",
     "tslint": "5.7.0",
     "tslint-config-airbnb": "5.2.1",
     "tslint-config-prettier": "1.5.0",
-    "typescript": "2.6.2",
-    "webpack": "3.10.0",
-    "webpack-dev-server": "2.9.7",
-    "webpack-merge": "4.1.1"
+    "typescript": "2.6.2"
   },
   "jest": {
     "setupFiles": [
@@ -80,18 +54,6 @@
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
-    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-enzyme/lib/index.js",
-    "moduleNameMapper": {
-      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
-    ],
     "mapCoverage": true
   }
 }
