@@ -18,19 +18,10 @@ var Icon = function (props) {
         if (props.name === "Labs") {
             Comp = BrandIcons.Labs;
         }
-        if (props.name === "Components") {
-            Comp = BrandIcons.Components;
+        if (props.name === "Pantheon") {
+            Comp = BrandIcons.Pantheon;
         }
-        if (props.name === "Blocks") {
-            Comp = BrandIcons.Blocks;
-        }
-        if (props.name === "Visualizations") {
-            Comp = BrandIcons.Visualizations;
-        }
-        if (props.name === "Documentation") {
-            Comp = BrandIcons.Documentation;
-        }
-        return React.createElement(Comp, { key: props.id, size: props.size || defaultSize, color: color_, rotation: props.rotation });
+        return (React.createElement(Comp, { key: props.id, size: props.size || defaultSize, color: color_, rotation: props.rotation, colored: props.colored }));
     }
     return null;
 };

@@ -22,7 +22,9 @@ var Container = glamorous_1.default.div({
 }, function (_a) {
     var theme = _a.theme, isActive = _a.isActive;
     return ({
-        color: isActive ? theme.colors.linkText : theme.colors.white,
+        // Readable text color is calculated in the <Sidenav> component,
+        // and cascades down to both sidenav headers and items.
+        color: isActive ? theme.colors.linkText : "inherit",
         "& > div:first-child::after": {
             // Connector strip circle color
             backgroundColor: isActive ? theme.colors.linkText : null

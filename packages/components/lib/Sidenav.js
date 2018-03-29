@@ -21,21 +21,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
-var theme_1 = require("@operational/theme");
 var constants_1 = require("./constants");
 var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, color = _a.color, fix = _a.fix, expanded = _a.expanded, expandOnHover = _a.expandOnHover, expandedWidth = _a.expandedWidth;
-    var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.sidenavBackground;
+    var theme = _a.theme, fix = _a.fix, expanded = _a.expanded, expandOnHover = _a.expandOnHover;
+    var backgroundColor = theme.colors.sidenavBackground;
+    var color = utils_1.readableTextColor(backgroundColor, [theme.colors.bodyText, theme.colors.white]);
     var hoverWidth = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
             willChange: "width",
             "&:hover": {
-                width: expandedWidth
+                width: constants_1.sidenavExpandedWidth
             }
         }
         : {};
-    return __assign({ backgroundColor: backgroundColor, label: "sidenav", width: expanded ? expandedWidth : constants_1.sidenavWidth, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100vh", overflowY: "auto", overflowX: "hidden", boxShadow: "1px 0 2px rgba(0, 0, 0, 0.2)", color: utils_1.readableTextColor(backgroundColor, ["black", "white"]) }, hoverWidth, { "& a:focus": {
+    return __assign({ backgroundColor: backgroundColor,
+        color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : constants_1.sidenavWidth, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%", overflowY: "auto", overflowX: "hidden" }, hoverWidth, { "& a:focus": {
             outline: 0
         } });
 });
@@ -50,7 +51,7 @@ var Sidenav = /** @class */ (function (_super) {
     }
     Sidenav.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className, color: this.props.color, expandOnHover: this.props.expandOnHover, expandedWidth: this.props.expandedWidth || constants_1.sidenavExpandedWidth, expanded: this.props.expanded, onMouseEnter: function () {
+        return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className, expandOnHover: this.props.expandOnHover, expanded: this.props.expanded, onMouseEnter: function () {
                 _this.setState(function (prevState) { return ({
                     isHovered: true
                 }); });

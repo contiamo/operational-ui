@@ -1,14 +1,14 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
+import { operational, Theme } from "@operational/theme"
 import { render } from "react-dom"
-import { operational } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
 import {
   OperationalUI,
   operationalTheme,
   Input,
+  Icon,
   Button,
   Select,
   Layout,
@@ -27,6 +27,7 @@ import {
   Header,
   Table,
   Sidenav,
+  SidenavHeader,
   CardHeader
 } from "../../src"
 
@@ -37,12 +38,15 @@ interface State {
   end?: string
 }
 
-console.log(lighten(operational.colors.info, 53))
-
 const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& > *": {
     marginTop: -1
   }
+}))
+
+const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  backgroundColor: theme.colors.white,
+  position: "relative"
 }))
 
 class Site extends React.Component<{}, State> {
@@ -57,62 +61,37 @@ class Site extends React.Component<{}, State> {
     return (
       <OperationalUI withBaseStyles>
         <Layout>
-          <Sidenav />
-          <Header>
+          <Sidenav
+            expanded
+            css={{
+            }}
+          >
+            <SidenavHeader
+              label="Pantheon"
+              icon={<Icon name="Pantheon" size={36} />}
+              css={{
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                boxSizing: "border-box"
+              }}
+            />
+            <SidenavHeader label="Saved Queries" icon="Send" />
+            <SidenavHeader label="Data Sources" icon="Database" />
+            <SidenavHeader label="Schemas" icon="Code" />
+            <SidenavHeader label="Executed Queries" icon="Clipboard" />
+          </Sidenav>
+          <Header
+            css={{
+              boxSizing: "border-box",
+              boxShadow: "none",
+            }}
+          >
             <Breadcrumbs>
               <Breadcrumb>One</Breadcrumb>
               <Breadcrumb>Two</Breadcrumb>
               <Breadcrumb>Three</Breadcrumb>
             </Breadcrumbs>
           </Header>
-          <Grid type="3x2">
-            <Card css={{ position: "relative" }}>
-              <CardHeader>
-                Card One
-                <Button color="info" condensed css={{ marginRight: 0 }}>
-                  Go somewhere
-                </Button>
-              </CardHeader>
-              <glamorous.Div css={{ margin: "20px 0" }}>
-                <Input value="1234" label="5678" />
-              </glamorous.Div>
-              <Button color="info">Button one</Button>
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Two</CardHeader>
-              <Switch
-                on={this.state.is}
-                onChange={() => {
-                  this.setState(prevState => ({
-                    is: !prevState.is
-                  }))
-                }}
-              />
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Three</CardHeader>
-              <DatePicker
-                label="31"
-                start={this.state.start}
-                end={this.state.end}
-                onChange={newDates => {
-                  this.setState(prevState => ({
-                    ...newDates
-                  }))
-                }}
-              />
-              <Input value="1234" label="5678" css={{ marginTop: 20 }} />
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Four</CardHeader>
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Five</CardHeader>
-            </Card>
-            <Card css={{ position: "relative" }}>
-              <CardHeader>Card Six</CardHeader>
-            </Card>
-          </Grid>
+          <Content />
         </Layout>
       </OperationalUI>
     )

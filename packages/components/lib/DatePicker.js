@@ -85,7 +85,6 @@ var DatePicker = /** @class */ (function (_super) {
             React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
                     _this.inputNode = node;
                 }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: placeholder || "Enter date", onClick: function (ev) {
-                    console.log(ev.target);
                     _this.setState(function (prevState) { return ({ isExpanded: !prevState.isExpanded }); });
                     _this.inputNode && _this.state.isExpanded && _this.inputNode.blur();
                 }, css: { width: "100%" } }),

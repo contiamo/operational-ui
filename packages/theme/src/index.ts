@@ -138,14 +138,14 @@ const colors: ThemeColors = {
   gray80: "#747474",
   gray90: "#444444",
   background: "#F5F6FA",
-  bodyText: "#555f61",
+  bodyText: "#2F3435",
   cardBackground: "#FFFFFF",
   cardHeaderBackground: "#F9FAFE",
   border: "#dadada",
   emphasizedText: "#373d3f",
   lightText: "#969696",
   linkText: "#1499CE",
-  sidenavBackground: "#105075",
+  sidenavBackground: "#004A75",
   separator: "#f2f2f2",
   secondarySeparator: "#f8f8f8"
 }

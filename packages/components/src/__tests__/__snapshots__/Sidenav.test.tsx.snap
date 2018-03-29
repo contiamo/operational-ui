@@ -8,7 +8,7 @@ exports[`Sidenav component renders 1`] = `
       "colors": Object {
         "background": "#F5F6FA",
         "black": "#000000",
-        "bodyText": "#555f61",
+        "bodyText": "#2F3435",
         "border": "#dadada",
         "brand": "#000000",
         "cardBackground": "#FFFFFF",
@@ -29,7 +29,7 @@ exports[`Sidenav component renders 1`] = `
         "linkText": "#1499CE",
         "secondarySeparator": "#f8f8f8",
         "separator": "#f2f2f2",
-        "sidenavBackground": "#105075",
+        "sidenavBackground": "#004A75",
         "success": "#00b34d",
         "visualizationPalette": Array [
           "#2ca02c",

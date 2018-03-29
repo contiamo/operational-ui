@@ -123,7 +123,6 @@ class DatePicker extends React.Component<Props, State> {
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={placeholder || "Enter date"}
           onClick={(ev: any) => {
-            console.log(ev.target)
             this.setState(prevState => ({ isExpanded: !prevState.isExpanded }))
             this.inputNode && this.state.isExpanded && this.inputNode.blur()
           }}
