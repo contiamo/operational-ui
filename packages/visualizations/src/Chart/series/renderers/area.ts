@@ -84,8 +84,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   update(data: Datum[], options: Options): void {
     this.options = options
     this.assignAccessors(options.accessors)
-    this.setAxisScales()
-    this.data = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(data)
+    this.data = data
   }
 
   setAxisScales(): void {
@@ -97,8 +96,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
     if (difference(axisTypes)(["time", "quant"]).length > 0) {
       throw new Error(`The area renderer is incompatible with a ${axisTypes[0]} and a ${axisTypes[1]} axis.`)
     }
-    this.xScale = (d: Datum): number => this.state.current.get("computed").axes.computed[this.series.xAxis()].scale(d)
-    this.yScale = (d: Datum): number => this.state.current.get("computed").axes.computed[this.series.yAxis()].scale(d)
+    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
+    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
     this.quantIsY = axisTypes[1] === "quant"
     this.x0 = (d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : d.x0 || 0)
     this.x1 = (d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : d.x1 || this.x(d))
@@ -134,7 +133,6 @@ class Area implements RendererClass<AreaRendererAccessors> {
         }
       })(ticks)
     }
-    this.data = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
   }
 
   startPath(data: Datum[]): string {
@@ -158,9 +156,11 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   draw(): void {
+    this.setAxisScales()
     this.addMissingData()
 
-    const area = this.el.selectAll("path").data([this.data])
+    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
+    const area = this.el.selectAll("path").data([data])
 
     area
       .enter()
