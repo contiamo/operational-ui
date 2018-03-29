@@ -123,7 +123,8 @@ export interface LineRendererAccessors extends LinearRendererAccessors {
 export type RangeRendererAccessors = LinearRendererAccessors
 
 export interface SymbolRendererAccessors extends RendererAxesAccessors {
-  color: RendererAccessor<string>
+  stroke: RendererAccessor<string>
+  fill: RendererAccessor<string>
   symbol: RendererAccessor<string> // @TODO specify possible strings
   size: RendererAccessor<number>
 }

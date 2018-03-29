@@ -29,7 +29,7 @@ class Renderer {
       case "range":
         return new Range(state, events, el.select("g.series-range"), data, options)
       case "symbol":
-        return new Symbol(state, events, el.select("g.series-symbol"), data, options)
+        return new Symbol(state, events, el.select("g.series-symbol"), data, options, series)
       case "text":
         return new Text(state, events, el.select("g.series-text"), data, options)
     }

@@ -18,5 +18,10 @@ const lineStyle = {
   }
 }
 
+const symbolStyle = {
+  strokeWidth: "2px"
+}
+
 export const area = css(areaStyle).toString()
 export const line = css(lineStyle).toString()
+export const symbol = css(symbolStyle).toString()

@@ -37,13 +37,21 @@ const BarsRenderer: any = {
   type: "bars"
 }
 
+const SymbolRenderer: any = {
+  accessors: {
+    ...AxesAccessors,
+    fill: () => "#bbb"
+  },
+  type: "symbol"
+}
+
 const StackedRenderer = {
   accessors: {
     ...AxesAccessors
   },
   type: "stacked",
   stackAxis: "y",
-  renderAs: [LineRenderer, AreaRenderer]
+  renderAs: [LineRenderer, AreaRenderer, SymbolRenderer]
 }
 
 const data: any = {
@@ -61,7 +69,7 @@ const data: any = {
       key: "unique_key",
       // xAxis: "x2",
       yAxis: "y2",
-      renderAs: [LineRenderer, AreaRenderer]
+      renderAs: [LineRenderer, AreaRenderer, SymbolRenderer]
     },
     {
       data: [
