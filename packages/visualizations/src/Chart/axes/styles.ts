@@ -34,6 +34,15 @@ const componentRectStyle = {
   fill: "#fff"
 }
 
+const rulesStyle = {
+  stroke: theme.colors.gray20,
+  strokeWidth: "1",
+  shapeRendering: "crispedges",
+  "&.zero": {
+    strokeWidth: "2"
+  }
+}
+
 export const tick = css(tickStyle).toString()
 export const x1 = css(xStyle).toString()
 export const x2 = css(xStyle).toString()
@@ -41,3 +50,4 @@ export const y1 = css(y1Style).toString()
 export const y2 = css(y2Style).toString()
 export const border = css(borderStyle).toString()
 export const componentRect = css(componentRectStyle).toString()
+export const rules = css(rulesStyle).toString()

@@ -54,8 +54,8 @@ class ChartCanvas implements Canvas {
     this.el = this.insertEl()
     this.insertClipPaths()
     this.insertDrawingGroup()
-    this.insertRules()
     this.insertAxes()
+    this.insertRules()
     this.insertSeriesDrawingGroups()
     this.insertFocusElements()
     this.stateWriter("elements", this.elements)
@@ -151,19 +151,19 @@ class ChartCanvas implements Canvas {
     this.elements.drawing = this.el.append("svg:g").attr("class", "drawing")
   }
 
-  private insertRules(): void {
-    forEach((axis: string): void => {
-      const rulesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-rules-group`)
-      this.elements[axis + "Rules"] = rulesGroup
-      this.elMap[`${axis}Rules`] = rulesGroup
-    })(axes)
-  }
-
   private insertAxes(): void {
     forEach((axis: string): void => {
       const axesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-axes-group`)
       this.elements[`${axis}Axes`] = axesGroup
       this.elMap[`${axis}Axes`] = axesGroup
+    })(axes)
+  }
+
+  private insertRules(): void {
+    forEach((axis: string): void => {
+      const rulesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-rules-group`)
+      this.elements[axis + "Rules"] = rulesGroup
+      this.elMap[`${axis}Rules`] = rulesGroup
     })(axes)
   }
 

@@ -1,11 +1,13 @@
 import Axis from "./axes/axis"
-import { filter, find, flow, forEach, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
+import Rules from "../Chart/axes/rules"
+import { filter, find, flow, forEach, get, includes, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import {
   AxesData,
   AxisClass,
   AxisOptions,
   AxisPosition,
+  AxisType,
   D3Selection,
   EventBus,
   Object,
@@ -18,6 +20,7 @@ class AxesManager {
   els: Object<D3Selection>
   events: EventBus
   oldAxes: Object<AxisClass<any>> = {}
+  rules: Object<Rules> = {}
   state: State
   stateWriter: StateWriter
 
@@ -31,11 +34,12 @@ class AxesManager {
   draw(): void {
     this.updateAxes()
     forEach(invoke("remove"))(this.oldAxes)
-    this.drawAxes("y")
-    this.drawAxes("x")
+    forEach(this.drawAxes.bind(this))(["y", "x"])
   }
 
   private updateAxes(): void {
+    this.stateWriter("previous", {})
+    this.stateWriter("computed", {})
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const data = this.state.current.get("computed").series.dataForAxes
     // Remove axes that are no longer needed, or whose type has changed
@@ -72,6 +76,24 @@ class AxesManager {
     })(this.axes)
     keys(axes).length === 2 ? alignAxes(axes) : forEach(invoke("compute"))(axes)
     forEach(invoke("draw"))(axes)
+
+    // Update rules
+    const hasRules: boolean = includes("quant")(map((axis: AxisClass<any>): AxisType => axis.type)(axes as any))
+    hasRules ? this.updateRules(orientation) : this.removeRules(orientation)
+  }
+
+  updateRules(orientation: "x" | "y"): void {
+    const rules: Rules = this.rules[orientation] || new Rules(this.state, this.els[`${orientation}Rules`], orientation)
+    rules.draw()
+  }
+
+  removeRules(orientation: "x" | "y"): void {
+    const rules: Rules = this.rules[orientation]
+    if (!rules) {
+      return
+    }
+    rules.close()
+    delete this.rules[orientation]
   }
 
   private remove(axis: AxisClass<any>, position: AxisPosition): void {

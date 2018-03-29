@@ -66,8 +66,9 @@ class CategoricalAxis implements AxisClass<string> {
         .range(range)
         .domain(this.data)
     }
-    this.stateWriter(this.position, this.computed)
     this.previous = defaults(this.previous)(this.computed)
+    this.stateWriter(["computed", this.position], this.computed)
+    this.stateWriter(["previous", this.position], this.previous)
   }
 
   // Drawing
