@@ -40,6 +40,9 @@ const Icon = (props: PropsWithTheme) => {
     if (props.name === "Pantheon") {
       Comp = BrandIcons.Pantheon
     }
+    if (props.name === "Contiamo") {
+      Comp = BrandIcons.Contiamo
+    }
     return (
       <Comp
         key={props.id}

@@ -91,7 +91,9 @@ class Site extends React.Component<{}, State> {
               <Breadcrumb>Three</Breadcrumb>
             </Breadcrumbs>
           </Header>
-          <Content />
+          <Content>
+            <Icon size={60} name="Contiamo" />
+          </Content>
         </Layout>
       </OperationalUI>
     )
