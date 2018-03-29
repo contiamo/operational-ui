@@ -53,6 +53,7 @@ const interpolator = {
 class Line implements RendererClass<LineRendererAccessors> {
   closeGaps: RendererAccessor<boolean>
   color: RendererAccessor<string>
+  dashed: RendererAccessor<boolean>
   data: Datum[]
   el: D3Selection
   events: EventBus
@@ -108,6 +109,7 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
     this.color = (d?: Datum): string => accessors.color(this.series, d)
+    this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
     this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
     this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)
   }
@@ -163,6 +165,7 @@ class Line implements RendererClass<LineRendererAccessors> {
       .enter()
       .append("svg:path")
       .attr("d", this.startPath.bind(this))
+      .attr("class", this.dashed() ? "dashed" : "")
       .style("stroke", this.color.bind(this))
       .merge(line)
       .transition()
