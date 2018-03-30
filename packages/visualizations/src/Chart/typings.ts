@@ -61,10 +61,7 @@ export interface ChartConfig extends Config {
   showComponentFocus: boolean
   targetLineColor: string
   textlabels: {
-    offset: {
-      default: number
-      points: number
-    }
+    offset: number
     rotate: {
       horizontal: number
       vertical: number

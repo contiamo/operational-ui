@@ -106,10 +106,7 @@ class ChartFacade implements Facade {
       showComponentFocus: true,
       targetLineColor: "#999",
       textlabels: {
-        offset: {
-          default: 2,
-          points: 5
-        },
+        offset: 2,
         rotate: {
           horizontal: 0,
           vertical: -60

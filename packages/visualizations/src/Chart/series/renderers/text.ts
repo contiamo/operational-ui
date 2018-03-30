@@ -3,6 +3,7 @@ import Series from "../series"
 import * as styles from "./styles"
 import {
   TextRendererAccessors,
+  ChartConfig,
   D3Selection,
   Datum,
   EventBus,
@@ -84,6 +85,7 @@ class Text implements RendererClass<TextRendererAccessors> {
       .attr("y", attributes.y)
       .style("font-size", `${this.size()}px`)
       .text(attributes.text)
+      .attr("transform", attributes.transform)
 
     text
       .exit()
@@ -133,11 +135,17 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   private attributes(): Object<any> {
-    return {
-      x: (d: Datum): number => this.xScale(d.x1 || this.x(d)),
-      y: (d: Datum): number => this.yScale(d.y1 || this.y(d)),
+    const config: ChartConfig = this.state.current.get("config")
+    const offset = (d: Datum) => (this.series.symbolOffset(d) || 0) + config.textlabels.offset
+    const rotate: number = config.textlabels.rotate[this.quantIsY ? "vertical" : "horizontal"]
+
+    const attrs: Object<any> = {
+      x: (d: Datum): number => this.xScale(d.x1 || this.x(d)) + (this.quantIsY ? 0 : offset(d)),
+      y: (d: Datum): number => this.yScale(d.y1 || this.y(d)) + (this.quantIsY ? -offset(d) : 0),
       text: (d: Datum): string => (this.quantIsY ? this.y(d) : this.x(d)).toString()
     }
+    attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
+    return attrs
   }
 }
 

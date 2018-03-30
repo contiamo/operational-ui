@@ -47,6 +47,7 @@ class ChartSeries {
   legendColor: () => string
   legendName: () => string
   renderAs: () => RendererOptions<any>[]
+  symbolOffset: (d: Datum) => number
   unit: () => string
   xAxis: () => "x1" | "x2"
   yAxis: () => "y1" | "y2"
@@ -80,6 +81,9 @@ class ChartSeries {
       // @TODO typing
       const renderer: RendererClass<any> = this.get(options.type)
       renderer ? renderer.update(this.options.data, options) : this.addRenderer(options)
+      if (options.type === "symbol") {
+        this.symbolOffset = (d: Datum) => Math.ceil(Math.sqrt(((renderer || this.get(options.type)) as any).size(d)))
+      }
     })(this.renderAs())
   }
 

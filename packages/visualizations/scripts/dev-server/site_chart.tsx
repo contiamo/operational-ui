@@ -42,6 +42,7 @@ const SymbolRenderer: any = {
   accessors: {
     ...AxesAccessors,
     symbol: (series: any, d: any) => d.y >= 1000 ? "cross" : "diamond",
+    size: (series: any, d: any) => series.key() === "series2" ? 150 : 60,
     fill: () => "#bbb"
   },
   type: "symbol"
