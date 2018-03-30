@@ -25,7 +25,8 @@ const AreaRenderer: any = {
 
 const LineRenderer: any = {
   accessors: {
-    ...AxesAccessors
+    ...AxesAccessors,
+    dashed: (series: any, d: any) => series.key() === "unique_key",
   },
   type: "line"
 }
@@ -40,9 +41,17 @@ const BarsRenderer: any = {
 const SymbolRenderer: any = {
   accessors: {
     ...AxesAccessors,
+    symbol: (series: any, d: any) => d.y >= 1000 ? "cross" : "diamond",
     fill: () => "#bbb"
   },
   type: "symbol"
+}
+
+const TextRenderer: any = {
+  accessors: {
+    ...AxesAccessors
+  },
+  type: "text"
 }
 
 const StackedRenderer = {
@@ -51,7 +60,7 @@ const StackedRenderer = {
   },
   type: "stacked",
   stackAxis: "y",
-  renderAs: [LineRenderer, AreaRenderer, SymbolRenderer]
+  renderAs: [LineRenderer, AreaRenderer, SymbolRenderer, TextRenderer]
 }
 
 const data: any = {
@@ -69,7 +78,7 @@ const data: any = {
       key: "unique_key",
       // xAxis: "x2",
       yAxis: "y2",
-      renderAs: [LineRenderer, AreaRenderer, SymbolRenderer]
+      renderAs: [LineRenderer, AreaRenderer, SymbolRenderer, TextRenderer]
     },
     {
       data: [

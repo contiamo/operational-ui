@@ -22,6 +22,14 @@ const symbolStyle = {
   strokeWidth: "2px"
 }
 
+const textStyle = {
+  "& text": {
+    fill: "#333",
+    fontFamily: theme.fontFamily
+  }
+}
+
 export const area = css(areaStyle).toString()
 export const line = css(lineStyle).toString()
 export const symbol = css(symbolStyle).toString()
+export const text = css(textStyle).toString()
