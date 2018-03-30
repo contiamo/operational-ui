@@ -71,21 +71,74 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     this.update(data, options)
   }
 
-  appendSeriesGroup(el: D3Selection): D3Selection {
-    return el.append("g").attr("class", `series:${this.series.key()} ${styles.symbol}`)
-  }
-
-  validate(d: Datum): boolean {
-    return isFinite(this.xScale(this.x(d))) && isFinite(this.yScale(this.y(d)))
-  }
-
+  // Public methods
   update(data: Datum[], options: Options): void {
     this.options = options
     this.assignAccessors(options.accessors)
     this.data = data
   }
 
-  assignAccessors(customAccessors: Partial<SymbolRendererAccessors>): void {
+  draw(): void {
+    this.setAxisScales()
+    const data: Datum[] = filter(this.validate.bind(this))(this.data)
+    const duration: number = this.state.current.get("config").duration
+
+    const symbols = this.el.selectAll("path").data(data)
+
+    symbols
+      .enter()
+      .append("svg:path")
+      .attr("d", (d: Datum): string =>
+        d3Symbol()
+          .type(this.symbol(d))
+          .size(1)()
+      )
+      .attr("transform", this.startTransform.bind(this))
+      .merge(symbols)
+      .attr("fill", this.fill())
+      .attr("stroke", this.stroke())
+      .transition()
+      .duration(duration)
+      .attr("d", (d: Datum): string =>
+        d3Symbol()
+          .type(this.symbol(d))
+          .size(this.size(d))()
+      )
+      .attr("transform", this.transform.bind(this))
+
+    symbols
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("d", (d: Datum): string =>
+        d3Symbol()
+          .type(this.symbol(d))
+          .size(1)()
+      )
+      .remove()
+  }
+
+  close(): void {
+    this.el.remove()
+  }
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map(get(axis))(this.data)
+      .concat(map(get(`${axis}0`))(this.data))
+      .concat(map(get(`${axis}1`))(this.data))
+    return compact(data)
+  }
+
+  // Private methods
+  private appendSeriesGroup(el: D3Selection): D3Selection {
+    return el.append("g").attr("class", `series:${this.series.key()} ${styles.symbol}`)
+  }
+
+  private validate(d: Datum): boolean {
+    return isFinite(this.xScale(this.x(d))) && isFinite(this.yScale(this.y(d)))
+  }
+
+  private assignAccessors(customAccessors: Partial<SymbolRendererAccessors>): void {
     const accessors: SymbolRendererAccessors = defaults(defaultAccessors)(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
@@ -95,19 +148,12 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     this.size = (d: Datum): number => accessors.size(this.series, d)
   }
 
-  setAxisScales(): void {
+  private setAxisScales(): void {
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
     this.quantIsY =
       this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.yAxis()].type ===
       "quant"
-  }
-
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map(get(axis))(this.data)
-      .concat(map(get(`${axis}0`))(this.data))
-      .concat(map(get(`${axis}1`))(this.data))
-    return compact(data)
   }
 
   private transform(d: Datum): string {
@@ -120,35 +166,6 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     const x: number = this.xScale(this.quantIsY ? d.x1 || this.x(d) : 0)
     const y: number = this.yScale(this.quantIsY ? 0 : d.y1 || this.y(d))
     return `translate(${x}, ${y})`
-  }
-
-  draw(): void {
-    this.setAxisScales()
-    const data: Datum[] = filter(this.validate.bind(this))(this.data)
-    const symbols = this.el.selectAll("path").data(data)
-
-    symbols
-      .enter()
-      .append("svg:path")
-      .attr("d", (d: Datum): string =>
-        d3Symbol()
-          .type(this.symbol(d))
-          .size(1)()
-      )
-      .attr("transform", this.startTransform.bind(this))
-      .attr("fill", this.fill())
-      .attr("stroke", this.stroke())
-      .merge(symbols)
-      .transition()
-      .duration(this.state.current.get("config").duration)
-      .attr("d", (d: Datum): string =>
-        d3Symbol()
-          .type(this.symbol(d))
-          .size(this.size(d))()
-      )
-      .attr("transform", this.transform.bind(this))
-      .attr("fill", this.fill())
-      .attr("stroke", this.stroke())
   }
 }
 

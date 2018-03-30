@@ -77,17 +77,57 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.update(data, options)
   }
 
-  appendSeriesGroup(el: D3Selection): D3Selection {
-    return el.append("g").attr("class", `series:${this.series.key()} ${styles.area}`)
-  }
-
+  // Public methods
   update(data: Datum[], options: Options): void {
     this.options = options
     this.assignAccessors(options.accessors)
     this.data = data
   }
 
-  setAxisScales(): void {
+  draw(): void {
+    this.setAxisScales()
+    this.addMissingData()
+
+    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
+    const duration: number = this.state.current.get("config").duration
+
+    const area = this.el.selectAll("path").data([data])
+
+    area
+      .enter()
+      .append("svg:path")
+      .attr("d", this.startPath.bind(this))
+      .merge(area)
+      .attr("fill", this.color.bind(this))
+      .transition()
+      .duration(duration)
+      .attr("d", this.path.bind(this))
+
+    area
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("d", this.startPath.bind(this))
+      .remove()
+  }
+
+  close(): void {
+    this.el.remove()
+  }
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map(get(axis))(this.data)
+      .concat(map(get(`${axis}0`))(this.data))
+      .concat(map(get(`${axis}1`))(this.data))
+    return compact(data)
+  }
+
+  // Private methods
+  private appendSeriesGroup(el: D3Selection): D3Selection {
+    return el.append("g").attr("class", `series:${this.series.key()} ${styles.area}`)
+  }
+
+  private setAxisScales(): void {
     const axisData: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const axisTypes: AxisType[] = map((axis: AxisPosition): AxisType => axisData[axis].type)([
       this.series.xAxis(),
@@ -105,7 +145,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.y1 = (d: Datum): any => this.yScale(this.quantIsY ? d.y1 || this.y(d) : this.y(d))
   }
 
-  assignAccessors(customAccessors: Partial<AreaRendererAccessors>): void {
+  private assignAccessors(customAccessors: Partial<AreaRendererAccessors>): void {
     const accessors: AreaRendererAccessors = defaults(defaultAccessors)(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
@@ -114,14 +154,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map(get(axis))(this.data)
-      .concat(map(get(`${axis}0`))(this.data))
-      .concat(map(get(`${axis}1`))(this.data))
-    return compact(data)
-  }
-
-  addMissingData(): void {
+  private addMissingData(): void {
     if (this.closeGaps()) {
       return
     }
@@ -135,7 +168,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     }
   }
 
-  startPath(data: Datum[]): string {
+  private startPath(data: Datum[]): string {
     const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Area() as any)
       .x(this.x0)
@@ -144,7 +177,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .defined(isDefined)(data)
   }
 
-  path(data: Datum[]): string {
+  private path(data: Datum[]): string {
     const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Area() as any)
       .x0(this.x0)
@@ -153,36 +186,6 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .y1(this.y1)
       .curve(this.interpolate())
       .defined(isDefined)(data)
-  }
-
-  draw(): void {
-    this.setAxisScales()
-    this.addMissingData()
-
-    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
-    const area = this.el.selectAll("path").data([data])
-
-    area
-      .enter()
-      .append("svg:path")
-      .attr("d", this.startPath.bind(this))
-      .attr("fill", this.color.bind(this))
-      .merge(area)
-      .transition()
-      .duration(this.state.current.get("config").duration)
-      .attr("d", this.path.bind(this))
-      .attr("fill", this.color.bind(this))
-
-    area
-      .exit()
-      .transition()
-      .duration(this.state.current.get("config").duration)
-      .attr("d", this.startPath.bind(this))
-      .remove()
-  }
-
-  close(): void {
-    this.el.remove()
   }
 }
 

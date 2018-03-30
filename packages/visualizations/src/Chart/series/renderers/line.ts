@@ -34,7 +34,6 @@ const defaultAccessors: LineRendererAccessors = {
   x: (series: Series, d: Datum) => d.x,
   y: (series: Series, d: Datum) => d.y,
   color: (series: Series, d: Datum) => series.legendColor(),
-  // @TODO implement
   dashed: (series: Series, d: Datum) => false,
   interpolate: (series: Series, d: Datum) => "linear",
   closeGaps: (series: Series, d: Datum) => true
@@ -78,17 +77,68 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.update(data, options)
   }
 
-  appendSeriesGroup(el: D3Selection): D3Selection {
-    return el.append("g").attr("class", `series:${this.series.key()} ${styles.line}`)
-  }
-
+  // Public methods
   update(data: Datum[], options: Options): void {
     this.options = options
     this.assignAccessors(options.accessors)
     this.data = data
   }
 
-  setAxisScales(): void {
+  draw(): void {
+    this.setAxisScales()
+    this.addMissingData()
+
+    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
+    const duration: number = this.state.current.get("config").duration
+
+    const line = this.el.selectAll("path").data([data])
+
+    line
+      .enter()
+      .append("svg:path")
+      .attr("d", this.startPath.bind(this))
+      .merge(line)
+      .attr("class", this.dashed() ? "dashed" : "")
+      .style("stroke", this.color.bind(this))
+      .transition()
+      .duration(duration)
+      .attr("d", this.path.bind(this))
+
+    line
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("d", this.startPath.bind(this))
+      .remove()
+  }
+
+  close(): void {
+    this.el.remove()
+  }
+
+  dataForAxis(axis: "x" | "y"): any[] {
+    const data: any[] = map(get(axis))(this.data)
+      .concat(map(get(`${axis}0`))(this.data))
+      .concat(map(get(`${axis}1`))(this.data))
+    return compact(data)
+  }
+
+  // Private methods
+  private appendSeriesGroup(el: D3Selection): D3Selection {
+    return el.append("g").attr("class", `series:${this.series.key()} ${styles.line}`)
+  }
+
+  private assignAccessors(customAccessors: Partial<LineRendererAccessors>): void {
+    const accessors: LineRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
+    this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
+    this.color = (d?: Datum): string => accessors.color(this.series, d)
+    this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
+    this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
+    this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)
+  }
+
+  private setAxisScales(): void {
     const axisData: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const axisTypes: AxisType[] = map((axis: AxisPosition): AxisType => axisData[axis].type)([
       this.series.xAxis(),
@@ -104,24 +154,7 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.adjustedY = (d: Datum): any => this.yScale(this.quantIsY ? d.y1 || this.y(d) : this.y(d))
   }
 
-  assignAccessors(customAccessors: Partial<LineRendererAccessors>): void {
-    const accessors: LineRendererAccessors = defaults(defaultAccessors)(customAccessors)
-    this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
-    this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
-    this.color = (d?: Datum): string => accessors.color(this.series, d)
-    this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
-    this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
-    this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)
-  }
-
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map(get(axis))(this.data)
-      .concat(map(get(`${axis}0`))(this.data))
-      .concat(map(get(`${axis}1`))(this.data))
-    return compact(data)
-  }
-
-  addMissingData(): void {
+  private addMissingData(): void {
     if (this.closeGaps()) {
       return
     }
@@ -135,7 +168,7 @@ class Line implements RendererClass<LineRendererAccessors> {
     }
   }
 
-  startPath(data: Datum[]): string {
+  private startPath(data: Datum[]): string {
     const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Line() as any)
       .x(this.quantIsY ? this.adjustedX : this.xScale(0))
@@ -144,45 +177,13 @@ class Line implements RendererClass<LineRendererAccessors> {
       .defined(isDefined)(data)
   }
 
-  path(data: Datum[]): string {
+  private path(data: Datum[]): string {
     const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Line() as any)
       .x(this.adjustedX)
       .y(this.adjustedY)
       .curve(this.interpolate())
       .defined(isDefined)(data)
-  }
-
-  draw(): void {
-    this.setAxisScales()
-    this.addMissingData()
-
-    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
-
-    const line = this.el.selectAll("path").data([data])
-
-    line
-      .enter()
-      .append("svg:path")
-      .attr("d", this.startPath.bind(this))
-      .attr("class", this.dashed() ? "dashed" : "")
-      .style("stroke", this.color.bind(this))
-      .merge(line)
-      .transition()
-      .duration(this.state.current.get("config").duration)
-      .attr("d", this.path.bind(this))
-      .style("stroke", this.color.bind(this))
-
-    line
-      .exit()
-      .transition()
-      .duration(this.state.current.get("config").duration)
-      .attr("d", this.startPath.bind(this))
-      .remove()
-  }
-
-  close(): void {
-    this.el.remove()
   }
 }
 
