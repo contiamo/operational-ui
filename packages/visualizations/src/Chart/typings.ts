@@ -297,7 +297,7 @@ export interface Components {
 // @TODO - SingleSeries (class, not interface)
 // export type SeriesManager = SeriesManager<any>
 
-export type ClipPath = "drawing_clip" | "yrules_clip"
+export type ClipPath = "drawing_clip" | "yrules_clip" | "xyrules_clip"
 
 export type SeriesElements = [RendererType, ClipPath][]
 

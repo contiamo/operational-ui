@@ -21,7 +21,7 @@ const seriesElements: SeriesElements = [
   ["flag", "yrules_clip"],
   ["line", "drawing_clip"],
   ["range", "drawing_clip"],
-  ["symbol", "drawing_clip"],
+  ["symbol", "xyrules_clip"],
   ["text", "yrules_clip"]
 ]
 
@@ -207,13 +207,14 @@ class ChartCanvas implements Canvas {
     this.elements.defs = this.el.append("defs")
     this.insertDrawingClip()
     this.insertYRulesClip()
+    this.insertXYRulesClip()
   }
 
   private insertDrawingClip(): void {
     this.elements.defs
       .append("clipPath")
       .attr("class", "chart-clip-path")
-      .attr("id", this.prefixedId("_xrules_group"))
+      .attr("id", this.prefixedId("_drawing_clip"))
       .append("rect")
   }
 
@@ -222,6 +223,14 @@ class ChartCanvas implements Canvas {
       .append("clipPath")
       .attr("class", "chart-clip-path")
       .attr("id", this.prefixedId("_yrules_clip"))
+      .append("rect")
+  }
+
+  private insertXYRulesClip(): void {
+    this.elements.defs
+      .append("clipPath")
+      .attr("class", "chart-clip-path")
+      .attr("id", this.prefixedId("_xyrules_clip"))
       .append("rect")
   }
 
@@ -265,7 +274,7 @@ class ChartCanvas implements Canvas {
 
     const config: ChartConfig = this.state.current.get("config")
     const dims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
-    const margins: Object<number> = this.state.current.get("computed").axes.margins || {}
+    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingDims
 
     this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
@@ -273,6 +282,21 @@ class ChartCanvas implements Canvas {
 
     this.elements.drawing.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
     this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
+
+    this.elements.defs
+      .select(`#${this.prefixedId("_drawing_clip")} rect`)
+      .attr("width", drawingDims.width)
+      .attr("height", drawingDims.height)
+    this.elements.defs
+      .select(`#${this.prefixedId("_yrules_clip")} rect`)
+      .attr("width", dims.width)
+      .attr("height", drawingDims.height)
+      .attr("transform", `translate(${-this.margin("y1")}, 0)`)
+    this.elements.defs
+      .select(`#${this.prefixedId("_xyrules_clip")} rect`)
+      .attr("width", dims.width)
+      .attr("height", dims.height)
+      .attr("transform", `translate(${-this.margin("y1")}, ${-this.margin("x2")})`)
   }
 
   remove(): void {
