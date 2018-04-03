@@ -1,6 +1,6 @@
 {
   "name": "@operational/visual-tests",
-  "version": "0.1.0-23",
+  "version": "0.1.0-24",
   "description": "Operational UI visual tests site",
   "main": "index.js",
   "repository": "git@github.com:contiamo/operational-ui.git",
@@ -27,11 +27,11 @@
     "typescript": "2.6.2"
   },
   "dependencies": {
-    "@operational/blocks": "^0.1.0-23",
-    "@operational/components": "^0.1.0-23",
-    "@operational/theme": "^0.1.0-23",
-    "@operational/utils": "^0.1.0-23",
-    "@operational/visualizations": "^0.1.0-23",
+    "@operational/blocks": "^0.1.0-24",
+    "@operational/components": "^0.1.0-24",
+    "@operational/theme": "^0.1.0-24",
+    "@operational/utils": "^0.1.0-24",
+    "@operational/visualizations": "^0.1.0-24",
     "babel-polyfill": "^6.26.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
