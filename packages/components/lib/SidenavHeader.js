@@ -55,7 +55,6 @@ var SidenavHeader = function (props) { return (
 React.createElement(Container, { key: props.id, css: props.css, className: ["op_sidenavheader", props.className].filter(function (a) { return !!a; }).join(" ") },
     React.createElement(Content, { isActive: !!props.active, isExpanded: !!props.expanded, onClick: props.onClick },
         React.createElement(IconContainer, null, props.icon === String(props.icon) ? React.createElement(Icon_1.default, { name: props.icon, size: 24 }) : props.icon),
-        React.createElement(Label, null, props.label)),
-    props.expanded ? props.children : null)); };
+        React.createElement(Label, null, props.label)))); };
 exports.default = SidenavHeader;
 //# sourceMappingURL=SidenavHeader.js.map
