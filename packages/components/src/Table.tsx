@@ -12,10 +12,9 @@ export interface Props {
 
 const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   label: "table",
+  width: "100%",
   minWidth: 320,
   borderCollapse: "collapse",
-  border: "1px solid",
-  borderColor: theme.colors.separator,
   textAlign: "left",
   backgroundColor: "white",
   "& th": {
@@ -33,13 +32,33 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
     borderBottom: 0
   },
   "& td": {
-    padding: `${theme.spacing * 2 / 3}px ${theme.spacing * 4 / 3}px`,
+    padding: `${theme.spacing * 4 / 3}px ${theme.spacing}px`,
     ...theme.typography.body
   },
   "& td, & th, & tr": {
     borderColor: theme.colors.separator,
     padding: `${theme.spacing / 2}px ${theme.spacing}px`
+  },
+  "& tfoot": {
+    height: 2 * theme.spacing,
+    position: "relative"
   }
+}))
+
+const EmptyViewTFoot = glamorous.tfoot(({ theme }: { theme: Theme }): {} => ({
+  width: "100%",
+  height: 2 * theme.spacing,
+  position: "relative"
+}))
+
+const EmptyView = glamorous.span(({ theme }: { theme: Theme }): {} => ({
+  display: "inline-block",
+  width: "100%",
+  position: "absolute",
+  top: theme.spacing,
+  left: "50%",
+  transform: "translate3d(-50%, -50%, 0)",
+  ...theme.typography.body
 }))
 
 const Table = (props: Props) => (
@@ -50,6 +69,11 @@ const Table = (props: Props) => (
     <tbody>
       {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
     </tbody>
+    {props.rows.length === 0 ? (
+      <EmptyViewTFoot>
+        <EmptyView>This table is empty</EmptyView>
+      </EmptyViewTFoot>
+    ) : null}
   </Container>
 )
 

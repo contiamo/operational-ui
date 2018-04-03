@@ -2,11 +2,20 @@
 
 exports[`Table Component Should render 1`] = `
 <table
-  class="css-vmfjy9"
+  class="css-ya9qvx"
 >
   <thead>
     <tr />
   </thead>
   <tbody />
+  <tfoot
+    class="css-jpysmv"
+  >
+    <span
+      class="css-rcf3fq"
+    >
+      This table is empty
+    </span>
+  </tfoot>
 </table>
 `;
