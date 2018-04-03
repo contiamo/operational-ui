@@ -17,6 +17,8 @@ var Container = glamorous_1.default.table(function (_a) {
         width: "100%",
         minWidth: 320,
         borderCollapse: "collapse",
+        position: "relative",
+        tableLayout: "auto",
         textAlign: "left",
         backgroundColor: "white",
         "& th": __assign({}, theme.typography.body, { opacity: 0.4 }),
@@ -34,30 +36,19 @@ var Container = glamorous_1.default.table(function (_a) {
         "& td, & th, & tr": {
             borderColor: theme.colors.separator,
             padding: theme.spacing / 2 + "px " + theme.spacing + "px"
-        },
-        "& tfoot": {
-            height: 2 * theme.spacing,
-            position: "relative"
         }
     });
 });
-var EmptyViewTFoot = glamorous_1.default.tfoot(function (_a) {
+var EmptyView = glamorous_1.default.tfoot(function (_a) {
     var theme = _a.theme;
-    return ({
-        width: "100%",
-        height: 2 * theme.spacing,
-        position: "relative"
-    });
-});
-var EmptyView = glamorous_1.default.span(function (_a) {
-    var theme = _a.theme;
-    return (__assign({ display: "inline-block", width: "100%", position: "absolute", top: theme.spacing, left: "50%", transform: "translate3d(-50%, -50%, 0)" }, theme.typography.body));
+    return (__assign({ padding: theme.spacing * 1 / 3 + "px " + theme.spacing + "px", display: "block", width: "100%", top: theme.spacing, backgroundColor: theme.colors.background }, theme.typography.body));
 });
 var Table = function (props) { return (React.createElement(Container, { css: props.css, className: props.className },
     React.createElement("thead", null,
         React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
-    React.createElement("tbody", null, props.rows.map(function (row, index) { return React.createElement("tr", { key: index }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); })); })),
-    props.rows.length === 0 ? (React.createElement(EmptyViewTFoot, null,
-        React.createElement(EmptyView, null, "This table is empty"))) : null)); };
+    props.rows.length === 0 ? (React.createElement(EmptyView, null,
+        React.createElement("tr", null,
+            React.createElement(glamorous_1.default.Td, { colSpan: 9999 }, "There are no records available")))) : null,
+    React.createElement("tbody", null, props.rows.map(function (row, index) { return React.createElement("tr", { key: index }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); })); })))); };
 exports.default = Table;
 //# sourceMappingURL=Table.js.map

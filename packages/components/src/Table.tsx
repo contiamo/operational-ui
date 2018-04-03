@@ -15,6 +15,8 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   width: "100%",
   minWidth: 320,
   borderCollapse: "collapse",
+  position: "relative",
+  tableLayout: "auto",
   textAlign: "left",
   backgroundColor: "white",
   "& th": {
@@ -38,26 +40,15 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   "& td, & th, & tr": {
     borderColor: theme.colors.separator,
     padding: `${theme.spacing / 2}px ${theme.spacing}px`
-  },
-  "& tfoot": {
-    height: 2 * theme.spacing,
-    position: "relative"
   }
 }))
 
-const EmptyViewTFoot = glamorous.tfoot(({ theme }: { theme: Theme }): {} => ({
+const EmptyView = glamorous.tfoot(({ theme }: { theme: Theme }): {} => ({
+  padding: `${theme.spacing * 1 / 3}px ${theme.spacing}px`,
+  display: "block",
   width: "100%",
-  height: 2 * theme.spacing,
-  position: "relative"
-}))
-
-const EmptyView = glamorous.span(({ theme }: { theme: Theme }): {} => ({
-  display: "inline-block",
-  width: "100%",
-  position: "absolute",
   top: theme.spacing,
-  left: "50%",
-  transform: "translate3d(-50%, -50%, 0)",
+  backgroundColor: theme.colors.background,
   ...theme.typography.body
 }))
 
@@ -66,14 +57,16 @@ const Table = (props: Props) => (
     <thead>
       <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
     </thead>
+    {props.rows.length === 0 ? (
+      <EmptyView>
+        <tr>
+          <glamorous.Td colSpan={9999}>There are no records available</glamorous.Td>
+        </tr>
+      </EmptyView>
+    ) : null}
     <tbody>
       {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
     </tbody>
-    {props.rows.length === 0 ? (
-      <EmptyViewTFoot>
-        <EmptyView>This table is empty</EmptyView>
-      </EmptyViewTFoot>
-    ) : null}
   </Container>
 )
 
