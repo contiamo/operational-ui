@@ -53,7 +53,7 @@ var Sidenav = /** @class */ (function (_super) {
     }
     Sidenav.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Container, { key: this.props.id, css: this.props.css, className: this.props.className, expandOnHover: this.props.expandOnHover, expanded: this.props.expanded, onMouseEnter: function () {
+        return (React.createElement(Container, { id: this.props.id, css: this.props.css, className: this.props.className, expandOnHover: this.props.expandOnHover, expanded: this.props.expanded, onMouseEnter: function () {
                 _this.setState(function (prevState) { return ({
                     isHovered: true
                 }); });

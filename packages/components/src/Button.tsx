@@ -14,7 +14,7 @@ export interface IStyleProps {
 }
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   onClick?: any
@@ -75,7 +75,7 @@ const Container = glamorous.button(({ theme, color, active, disabled, condensed 
 const Button = (props: Props) => (
   <Container
     type={props.type}
-    key={props.id}
+    id={props.id}
     css={props.css}
     className={props.className}
     onClick={props.disabled ? null : props.onClick}

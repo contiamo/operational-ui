@@ -4,7 +4,7 @@ import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -71,7 +71,7 @@ const Container = glamorous.li(
 
 const TimelineItem = ({ css, id, className, children, color = "info" }: Props) => {
   return (
-    <Container key={id} css={css} className={className}>
+    <Container id={id} css={css} className={className}>
       <StatusContainer color={color} />
       <Content>{children}</Content>
     </Container>

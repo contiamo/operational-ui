@@ -1,6 +1,6 @@
 /// <reference types="react" />
 export interface Props {
-    id?: string | number;
+    id?: string;
     css?: {};
     className?: string;
     open?: boolean;

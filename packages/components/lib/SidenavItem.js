@@ -58,7 +58,7 @@ var ConnectorStrip = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var SidenavItem = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: ["op_sidenavitem", props.className].filter(function (a) { return !!a; }).join(" "), onClick: props.onClick, isActive: !!props.active },
+var SidenavItem = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: ["op_sidenavitem", props.className].filter(function (a) { return !!a; }).join(" "), onClick: props.onClick, isActive: !!props.active },
     React.createElement(ConnectorStrip, null),
     props.label)); };
 exports.default = SidenavItem;

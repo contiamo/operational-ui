@@ -17,6 +17,6 @@ var Container = glamorous_1.default.div(function (_a) {
         color: theme.colors.gray80
     });
 });
-var Sidebar = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
+var Sidebar = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className }, props.children)); };
 exports.default = Sidebar;
 //# sourceMappingURL=Sidebar.js.map

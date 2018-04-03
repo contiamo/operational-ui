@@ -62,11 +62,10 @@ const Input = (props: Props) => {
   }
   if (props.label) {
     return (
-      <Label htmlFor={forAttributeId} css={props.css} className={props.className} key={props.id}>
+      <Label htmlFor={forAttributeId} css={props.css} className={props.className}>
         <LabelText>{props.label}</LabelText>
         <InputField
           {...commonInputProps}
-          key={props.id}
           id={forAttributeId}
           autoComplete={props.autoComplete}
           css={{ display: "block", width: "100%" }}
@@ -75,13 +74,7 @@ const Input = (props: Props) => {
     )
   }
   return (
-    <InputField
-      {...commonInputProps}
-      css={props.css}
-      className={props.className}
-      key={props.id}
-      autoComplete={props.autoComplete}
-    />
+    <InputField {...commonInputProps} css={props.css} className={props.className} autoComplete={props.autoComplete} />
   )
 }
 

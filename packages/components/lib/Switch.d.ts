@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { Theme } from "@operational/theme";
 export interface Props {
-    id?: string | number;
+    id?: string;
     on: boolean;
     onChange: (on: boolean) => void;
     className?: string;

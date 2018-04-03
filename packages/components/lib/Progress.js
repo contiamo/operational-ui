@@ -67,7 +67,7 @@ var RetryLink = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var Progress = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, fadeParent: !!props.fadeParent },
+var Progress = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, fadeParent: !!props.fadeParent },
     React.createElement(Bar, { isError: Boolean(props.error) }),
     props.error ? (React.createElement(ErrorMessage, null,
         props.error,

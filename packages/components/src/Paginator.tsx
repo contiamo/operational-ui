@@ -7,7 +7,7 @@ import ButtonGroup from "./ButtonGroup"
 import Button from "./Button"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   activeColor?: string
@@ -165,7 +165,7 @@ const Paginator = ({
 }: Props) => {
   const controlProps = { pageCount, page, onChange }
   return (
-    <Container key={id} css={css} className={className}>
+    <Container id={id} css={css} className={className}>
       <ButtonGroup className="co_bgrp">
         <PaginatorControl type="first" {...controlProps}>
           <Icon.ChevronsLeft size="11" />

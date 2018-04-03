@@ -2,7 +2,7 @@
 import * as React from "react";
 import { IconName } from "./Icon";
 export interface Props {
-    id?: string | number;
+    id?: string;
     css?: {};
     className?: string;
     label: string | React.ReactNode;

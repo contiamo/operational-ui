@@ -7,7 +7,7 @@ import Icon, { IconName } from "./Icon"
 import { isWhite } from "./utils/color"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   color?: string
   onClick?: () => void
@@ -67,7 +67,7 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
 })
 
 const Chip = (props: Props) => (
-  <Container key={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>
+  <Container id={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>
     <Content onClick={props.onClick}>{props.children}</Content>
     {props.onIconClick && (
       <Action color={props.color} onClick={props.onIconClick}>

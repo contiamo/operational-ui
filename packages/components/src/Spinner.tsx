@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 import { readableTextColor, darken, transparentize } from "@operational/utils"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
 }
@@ -60,7 +60,7 @@ const PulsingCube = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const Spinner = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} css={props.css} className={props.className}>
     <PulsingCube />
     <PulsingCube />
     <PulsingCube />

@@ -44,7 +44,7 @@ var Modal = /** @class */ (function (_super) {
     Modal.prototype.render = function () {
         var _this = this;
         var props = this.props;
-        return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: function (ev) {
+        return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, onClick: function (ev) {
                 if (_this.contentNode && !_this.contentNode.contains(ev.target)) {
                     props.onClose && props.onClose();
                 }

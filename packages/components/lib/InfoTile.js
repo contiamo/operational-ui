@@ -34,7 +34,7 @@ var Label = glamorous_1.default.small(function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.small, { opacity: 0.6 }));
 });
-var InfoTile = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
+var InfoTile = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className },
     React.createElement(Label, null, props.label),
     React.createElement(Content, null, props.children))); };
 exports.default = InfoTile;

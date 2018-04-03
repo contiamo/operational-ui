@@ -6,7 +6,7 @@ import { lighten } from "@operational/utils"
 import { sidenavWidth } from "./constants"
 
 export interface Props {
-  id?: string | number
+  id?: string
   className?: string
   onClick?: () => void
   active?: boolean
@@ -70,7 +70,7 @@ const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 const SidenavItem = (props: Props) => (
   <Container
-    key={props.id}
+    id={props.id}
     css={props.css}
     className={["op_sidenavitem", props.className].filter(a => !!a).join(" ")}
     onClick={props.onClick}

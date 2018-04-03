@@ -6,7 +6,7 @@ import { readableTextColor } from "@operational/utils"
 import { headerHeight } from "./constants"
 
 export interface Props {
-  id?: string | number
+  id?: string
   className?: string
   css?: {}
   children?: React.ReactNode
@@ -24,7 +24,7 @@ const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const Header = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )

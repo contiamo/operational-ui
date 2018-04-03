@@ -7,7 +7,7 @@ import { lighten } from "@operational/utils"
 import Icon from "./Icon"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   error?: string
@@ -86,7 +86,7 @@ const RetryLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const Progress = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className} fadeParent={!!props.fadeParent}>
+  <Container id={props.id} css={props.css} className={props.className} fadeParent={!!props.fadeParent}>
     <Bar isError={Boolean(props.error)} />
     {props.error ? (
       <ErrorMessage>

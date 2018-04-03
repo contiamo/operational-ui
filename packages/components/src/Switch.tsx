@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface Props {
-  id?: string | number
+  id?: string
   on: boolean
   onChange: (on: boolean) => void
   className?: string
@@ -80,7 +80,7 @@ const Rail = glamorous.div(
 
 const Switch = (props: Props) => (
   <Container
-    key={props.id}
+    id={props.id}
     style={props.style}
     className={props.className}
     onClick={() => {

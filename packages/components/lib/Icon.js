@@ -10,7 +10,7 @@ var Icon = function (props) {
     var defaultSize = props.theme.spacing * 1.5;
     if (ReactFeather.hasOwnProperty(props.name)) {
         var Comp = ReactFeather[props.name];
-        return React.createElement(Comp, { key: props.id, size: props.size || defaultSize, color: color_ });
+        return React.createElement(Comp, { size: props.size || defaultSize, color: color_ });
     }
     // @todo -> type this better
     if (BrandIcons.hasOwnProperty(props.name)) {
@@ -24,7 +24,7 @@ var Icon = function (props) {
         if (props.name === "Contiamo") {
             Comp = BrandIcons.Contiamo;
         }
-        return (React.createElement(Comp, { key: props.id, size: props.size || defaultSize, color: color_, rotation: props.rotation, colored: props.colored }));
+        return React.createElement(Comp, { size: props.size || defaultSize, color: color_, rotation: props.rotation, colored: props.colored });
     }
     return null;
 };

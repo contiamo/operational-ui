@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   childClassName?: string
@@ -37,7 +37,7 @@ class Modal extends React.Component<Props, {}> {
     const { props } = this
     return (
       <Container
-        key={props.id}
+        id={props.id}
         css={props.css}
         className={props.className}
         onClick={ev => {

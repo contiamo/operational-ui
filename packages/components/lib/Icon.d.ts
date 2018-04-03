@@ -5,7 +5,6 @@ import * as BrandIcons from "./Icon/BrandIcon";
 import { ReactFeatherIconName } from "./Icon/ReactFeatherIcon";
 export declare type IconName = ReactFeatherIconName | BrandIcons.BrandIconName;
 export interface Props {
-    id?: string | number;
     name: IconName;
     size?: number;
     color?: string;
