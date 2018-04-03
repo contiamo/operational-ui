@@ -22,6 +22,8 @@ var Container = glamorous_1.default.div(function (_a) {
     };
 });
 var SelectFilter = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
-    React.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: props.onChange, placeholder: props.placeholder || "Filter ..." }))); };
+    React.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: function (e) {
+            props.onChange(e.target.value);
+        }, placeholder: props.placeholder || "Filter ..." }))); };
 exports.default = SelectFilter;
 //# sourceMappingURL=SelectFilter.js.map

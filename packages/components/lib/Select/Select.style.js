@@ -1,31 +1,12 @@
 "use strict";
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var theme_1 = require("@operational/theme");
 var mixins = require("../utils/mixins");
 var Container = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme, color = _a.color, disabled = _a.disabled, updating = _a.updating, style = _a.style;
+    var theme = _a.theme, color = _a.color, disabled = _a.disabled, style = _a.style;
     var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.white;
-    var updatingAfterStyles = updating
-        ? {
-            top: 6,
-            width: 16,
-            height: 16,
-            border: 0,
-            borderRadius: "50%",
-            boxShadow: "1px 0px 0px 0px " + theme.colors.gray70 + " inset",
-            animation: ".7s " + utils_1.spin + " linear infinite"
-        }
-        : {};
     return {
         backgroundColor: backgroundColor,
         label: "select",
@@ -45,7 +26,17 @@ var Container = glamorous_1.default.div(function (_a) {
         outline: "none",
         pointerEvents: disabled ? "none" : "all",
         // downward caret.
-        "&::after": __assign({}, updatingAfterStyles, { content: "''", position: "absolute", top: "50%", right: theme.spacing / 2, width: 0, height: 0, border: "4px solid transparent", borderTopColor: theme.colors.gray70, transform: "translateY(calc(-50% + 2px))" }),
+        "&::after": {
+            content: "''",
+            position: "absolute",
+            top: "50%",
+            right: theme.spacing / 2,
+            width: 0,
+            height: 0,
+            border: "4px solid transparent",
+            borderTopColor: theme.colors.gray70,
+            transform: "translateY(calc(-50% + 2px))"
+        },
         "&:focus": mixins.inputFocus({ theme: theme })
     };
 });

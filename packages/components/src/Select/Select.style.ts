@@ -7,7 +7,6 @@ export interface IContainerProps {
   id?: string
   color?: string
   disabled: boolean
-  updating: boolean
   style?: {}
   role?: string
   tabIndex?: number
@@ -15,20 +14,8 @@ export interface IContainerProps {
 }
 
 const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
-  ({ theme, color, disabled, updating, style }: IContainerProps & { theme: Theme }): {} => {
+  ({ theme, color, disabled, style }: IContainerProps & { theme: Theme }): {} => {
     const backgroundColor = expandColor(theme, color) || theme.colors.white
-
-    const updatingAfterStyles = updating
-      ? {
-          top: 6,
-          width: 16,
-          height: 16,
-          border: 0,
-          borderRadius: "50%",
-          boxShadow: `1px 0px 0px 0px ${theme.colors.gray70} inset`,
-          animation: `.7s ${spin} linear infinite`
-        }
-      : {}
 
     return {
       backgroundColor,
@@ -51,7 +38,6 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
 
       // downward caret.
       "&::after": {
-        ...updatingAfterStyles,
         content: "''",
         position: "absolute",
         top: "50%",

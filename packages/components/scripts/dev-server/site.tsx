@@ -15,18 +15,16 @@ import {
   Layout,
   DatePicker,
   Grid,
+  ContextMenu,
+  ContextMenuItem,
   Switch,
   Record,
   Progress,
-  Breakdown,
-  RecordHeader,
-  RecordBody,
   Breadcrumb,
   Breadcrumbs,
   Card,
   Heading1Type,
   Header,
-  Table,
   Sidenav,
   SidenavHeader,
   CardHeader
@@ -34,7 +32,7 @@ import {
 
 interface State {
   is: boolean
-  value: string | null
+  value: string[]
   start?: string
   end?: string
 }
@@ -47,13 +45,14 @@ const Records = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.white,
-  position: "relative"
+  position: "relative",
+  padding: "40px 20px"
 }))
 
 class Site extends React.Component<{}, State> {
   state: State = {
     is: true,
-    value: null,
+    value: [],
     start: null,
     end: null
   }
@@ -63,28 +62,14 @@ class Site extends React.Component<{}, State> {
       <OperationalUI withBaseStyles>
         <Layout>
           <Sidenav expanded css={{}}>
-            <Div css={{ width: "100%", position: "relative" }}>
-              <SidenavHeader
-                label="Pantheon"
-                icon={<Icon name="Pantheon" size={36} />}
-                css={{
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                  boxSizing: "border-box"
-                }}
-              />
-              <Div
-                css={{
-                  width: 60,
-                  height: 60,
-                  right: -300,
-                  top: 0,
-                  backgroundColor: "teal",
-                  position: "absolute",
-                  overflow: "auto",
-                  zIndex: 10000
-                }}
-              />
-            </Div>
+            <SidenavHeader
+              label="Pantheon"
+              icon={<Icon name="Pantheon" size={36} />}
+              css={{
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                boxSizing: "border-box"
+              }}
+            />
             <SidenavHeader label="Saved Queries" icon="Send" />
             <SidenavHeader label="Data Sources" icon="Database" />
             <SidenavHeader label="Schemas" icon="Code" />
@@ -102,7 +87,32 @@ class Site extends React.Component<{}, State> {
               <Breadcrumb>Three</Breadcrumb>
             </Breadcrumbs>
           </Header>
-          <Content />
+          <Content>
+            <Select
+              label="abcd"
+              options={[
+                {
+                  label: "123",
+                  value: "123"
+                },
+                {
+                  label: "456",
+                  value: "456"
+                }
+              ]}
+              value={this.state.value}
+              filterable
+              onChange={(newValue: string[]) => {
+                this.setState(prevState => ({
+                  value: newValue
+                }))
+              }}
+            />
+            <ContextMenu css={{ marginTop: 40 }}>
+              this is inside a context menu
+              <ContextMenuItem>abcd</ContextMenuItem>
+            </ContextMenu>
+          </Content>
         </Layout>
       </OperationalUI>
     )

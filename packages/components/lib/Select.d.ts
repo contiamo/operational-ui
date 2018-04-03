@@ -11,12 +11,10 @@ export interface Props {
     css?: CSSProperties;
     className?: string;
     options: IOption[];
-    value: undefined | Value | Value[];
+    value: null | Value | Value[];
     filterable?: boolean;
     disabled?: boolean;
-    onChange: (newValue: Value | Value[], changedItem?: Value) => void;
-    onClick?: () => void;
-    onFilter?: () => void;
+    onChange?: (newValue: Value | Value[], changedItem?: Value) => void;
     color?: string;
     placeholder?: string;
     label?: string;
@@ -24,7 +22,7 @@ export interface Props {
 export interface State {
     open: boolean;
     updating: boolean;
-    filter: RegExp;
+    search: string;
 }
 declare class Select extends React.Component<Props, State> {
     state: State;
@@ -36,8 +34,6 @@ declare class Select extends React.Component<Props, State> {
     getDisplayValue(): string;
     selectOption(option: IOption): void;
     isOptionSelected(option: IOption): boolean;
-    updateFilter(event: React.SyntheticEvent<HTMLInputElement>): Promise<void>;
-    toggle(): Promise<void>;
     close(): void;
     render(): JSX.Element;
 }

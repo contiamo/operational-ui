@@ -26,12 +26,10 @@ export interface Props {
   css?: CSSProperties
   className?: string
   options: IOption[]
-  value: undefined | Value | Value[]
+  value: null | Value | Value[]
   filterable?: boolean
   disabled?: boolean
-  onChange: (newValue: Value | Value[], changedItem?: Value) => void
-  onClick?: () => void
-  onFilter?: () => void
+  onChange?: (newValue: Value | Value[], changedItem?: Value) => void
   color?: string
   placeholder?: string
   label?: string
@@ -40,14 +38,14 @@ export interface Props {
 export interface State {
   open: boolean
   updating: boolean
-  filter: RegExp
+  search: string
 }
 
 class Select extends React.Component<Props, State> {
   state: State = {
     open: false,
     updating: false,
-    filter: new RegExp(/./)
+    search: ""
   }
 
   containerNode: Node
@@ -98,20 +96,21 @@ class Select extends React.Component<Props, State> {
   }
 
   selectOption(option: IOption) {
+    const { onChange } = this.props
+    if (!onChange) {
+      return
+    }
     if (!Array.isArray(this.props.value)) {
-      this.props.onChange(this.props.value === option.value ? null : option.value)
+      onChange(this.props.value === option.value ? null : option.value)
       return
     }
 
     const optionIndex: number = this.props.value.indexOf(option.value)
 
     if (optionIndex < 0) {
-      this.props.onChange([...this.props.value, option.value], option.value)
+      onChange([...this.props.value, option.value], option.value)
     } else {
-      this.props.onChange(
-        [...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)],
-        option.value
-      )
+      onChange([...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)], option.value)
     }
   }
 
@@ -123,30 +122,6 @@ class Select extends React.Component<Props, State> {
     return this.props.value.indexOf(option.value) > -1
   }
 
-  async updateFilter(event: React.SyntheticEvent<HTMLInputElement>) {
-    event.persist()
-
-    if (!(event.target instanceof HTMLInputElement)) {
-      throw new Error("<Select>: Your filter field is _not_ an input element and therefore has an unreadable value.")
-    }
-
-    if (this.props.onFilter) {
-      this.setState(() => ({ updating: true }))
-      await this.props.onFilter()
-    }
-
-    const filter = new RegExp(event.target.value, "i")
-    this.setState(() => ({ filter, updating: false }))
-  }
-
-  async toggle() {
-    if (!this.state.open && this.props.onClick) {
-      this.setState(() => ({ updating: true }))
-      await this.props.onClick()
-    }
-    this.setState(prevState => ({ updating: false, open: !prevState.open }))
-  }
-
   close() {
     this.setState(() => ({
       open: false
@@ -155,18 +130,23 @@ class Select extends React.Component<Props, State> {
 
   render() {
     const { id, color, disabled, value, options, filterable, label } = this.props
-    const { updating, open, filter } = this.state
+    const { open, search } = this.state
 
     const selectWithoutLabel = (
       <Container
         id={id}
         innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
-        updating={updating}
         color={color}
         disabled={disabled}
         role="listbox"
         tabIndex={-2}
-        onClick={() => this.toggle()}
+        onClick={() => {
+          if (!this.state.open) {
+            this.setState(prevState => ({
+              open: true
+            }))
+          }
+        }}
       >
         <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>
           {this.getDisplayValue()}
@@ -175,12 +155,18 @@ class Select extends React.Component<Props, State> {
           open && (
             <Options>
               {filterable && (
-                <SelectFilter onChange={(e: React.SyntheticEvent<HTMLInputElement>) => this.updateFilter(e)} />
+                <SelectFilter
+                  onChange={(val: string) => {
+                    this.setState(prevState => ({
+                      search: val
+                    }))
+                  }}
+                />
               )}
               <OptionsList>
                 {options.map(
                   (option: IOption) =>
-                    option.label.match(filter) && (
+                    option.label.match(new RegExp(search)) && (
                       <SelectOption
                         key={String(option.value)}
                         onClick={() => this.selectOption(option)}
