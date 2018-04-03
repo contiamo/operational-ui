@@ -5,8 +5,7 @@ export interface Props {
     id?: string | number;
     css?: {};
     className?: string;
-    children?: React.ReactNode;
-    label: string;
+    label: string | React.ReactNode;
     icon: IconName | React.ReactNode;
     active?: boolean;
     expanded?: boolean;
