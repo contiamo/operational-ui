@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { Div } from "glamorous"
 import { operational, Theme } from "@operational/theme"
 import { render } from "react-dom"
 import { lighten } from "@operational/utils"
@@ -61,19 +61,29 @@ class Site extends React.Component<{}, State> {
     return (
       <OperationalUI withBaseStyles>
         <Layout>
-          <Sidenav
-            expanded
-            css={{
-            }}
-          >
-            <SidenavHeader
-              label="Pantheon"
-              icon={<Icon name="Pantheon" size={36} />}
-              css={{
-                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                boxSizing: "border-box"
-              }}
-            />
+          <Sidenav expanded css={{}}>
+            <Div css={{ width: "100%", position: "relative" }}>
+              <SidenavHeader
+                label="Pantheon"
+                icon={<Icon name="Pantheon" size={36} />}
+                css={{
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                  boxSizing: "border-box"
+                }}
+              />
+              <Div
+                css={{
+                  width: 60,
+                  height: 60,
+                  right: -300,
+                  top: 0,
+                  backgroundColor: "teal",
+                  position: "absolute",
+                  overflow: "auto",
+                  zIndex: 10000
+                }}
+              />
+            </Div>
             <SidenavHeader label="Saved Queries" icon="Send" />
             <SidenavHeader label="Data Sources" icon="Database" />
             <SidenavHeader label="Schemas" icon="Code" />
@@ -82,7 +92,7 @@ class Site extends React.Component<{}, State> {
           <Header
             css={{
               boxSizing: "border-box",
-              boxShadow: "none",
+              boxShadow: "none"
             }}
           >
             <Breadcrumbs>
@@ -91,9 +101,7 @@ class Site extends React.Component<{}, State> {
               <Breadcrumb>Three</Breadcrumb>
             </Breadcrumbs>
           </Header>
-          <Content>
-            <Icon size={60} name="Contiamo" />
-          </Content>
+          <Content />
         </Layout>
       </OperationalUI>
     )

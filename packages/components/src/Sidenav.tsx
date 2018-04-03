@@ -33,12 +33,14 @@ const Container = glamorous.div(
   }): {} => {
     const backgroundColor = theme.colors.sidenavBackground
     const color = readableTextColor(backgroundColor, [theme.colors.bodyText, theme.colors.white])
-    const hoverWidth = expandOnHover
+    const expandOnHoverStyles = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
           willChange: "width",
-          "&:hover": {
-            width: sidenavExpandedWidth
+          overflow: "hidden",
+          ":hover": {
+            width: sidenavExpandedWidth,
+            overflow: "auto"
           }
         }
       : {}
@@ -53,9 +55,7 @@ const Container = glamorous.div(
       flexDirection: "column",
       alignItems: "flex-start",
       height: "100%",
-      overflowY: "auto",
-      overflowX: "hidden",
-      ...hoverWidth,
+      ...expandOnHoverStyles,
       "& a:focus": {
         outline: 0
       }

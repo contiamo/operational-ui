@@ -26,17 +26,19 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, fix = _a.fix, expanded = _a.expanded, expandOnHover = _a.expandOnHover;
     var backgroundColor = theme.colors.sidenavBackground;
     var color = utils_1.readableTextColor(backgroundColor, [theme.colors.bodyText, theme.colors.white]);
-    var hoverWidth = expandOnHover
+    var expandOnHoverStyles = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
             willChange: "width",
-            "&:hover": {
-                width: constants_1.sidenavExpandedWidth
+            overflow: "hidden",
+            ":hover": {
+                width: constants_1.sidenavExpandedWidth,
+                overflow: "auto"
             }
         }
         : {};
     return __assign({ backgroundColor: backgroundColor,
-        color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : constants_1.sidenavWidth, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%", overflowY: "auto", overflowX: "hidden" }, hoverWidth, { "& a:focus": {
+        color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : constants_1.sidenavWidth, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
             outline: 0
         } });
 });
