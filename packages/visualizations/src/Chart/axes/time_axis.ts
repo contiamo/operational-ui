@@ -1,5 +1,27 @@
-import { defaults, filter, flow, isDate, last, map, sortBy } from "lodash/fp"
-import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
+import {
+  compact,
+  defaults,
+  filter,
+  flow,
+  forEach,
+  get,
+  groupBy,
+  identity,
+  includes,
+  isDate,
+  isEmpty,
+  keys,
+  last,
+  map,
+  mapValues,
+  partition,
+  pickBy,
+  reduce,
+  sortBy,
+  uniq,
+  values
+} from "lodash/fp"
+import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
@@ -97,9 +119,7 @@ class TimeAxis implements AxisClass<Date> {
     this.previous = this.computed
     const computed: Partial<AxisComputed> = this.computeInitial()
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
-    computed.scale = scaleTime()
-      .range(computed.range)
-      .domain([computed.ticksInDomain[0], last(computed.ticksInDomain)])
+    computed.scale = this.computeScale(computed.range, computed.ticksInDomain)
     computed.ticks = this.computeTicks(computed)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.previous)(this.computed)
@@ -108,21 +128,85 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   computeInitial(): Object<any> {
-    const config: ChartConfig = this.state.current.get("config")
-    const computedChart: Computed = this.state.current.get("computed")
-    const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
+    const ticksInDomain: any[] = Array.from(moment.range(this.start, this.end).by(this.interval))
     const computed: Partial<AxisComputed> = {}
-    computed.range = computeRange(config, computedChart, this.position)
-    computed.ticksInDomain = map((d: any) => d.toDate())(
-      Array.from(moment.range(this.start, this.end).by(this.interval))
-    )
+    computed.ticksInDomain = map((d: any) => d.toDate())(ticksInDomain)
+    computed.tickWidth = this.computeTickWidth(computed.ticksInDomain)
+    computed.range = this.computeRange(computed.tickWidth, computed.ticksInDomain.length)
     return computed
+  }
+
+  private computeTickWidth(ticksInDomain: Date[]): number {
+    const barSeries = this.state.current.get("computed").series.barSeries
+    if (isEmpty(barSeries)) {
+      return 0
+    }
+
+    const config: ChartConfig = this.state.current.get("config")
+    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const defaultTickWidth: number =
+      this.position[0] === "x" ? drawingDims.width / ticksInDomain.length : drawingDims.height / ticksInDomain.length
+
+    const stacks = groupBy("stackIndex")(barSeries)
+    const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
+      return compact(map(get("barWidth"))(stack)).length > 0
+    })(stacks)
+    const fixedWidthStacks: Object<any>[] = partitionedStacks[0]
+    const variableWidthStacks: Object<any>[] = partitionedStacks[1]
+
+    let requiredTickWidth: number = reduce((sum: number, stack: Object<any>): number => {
+      return sum + stack[0].barWidth
+    }, config.outerBarPadding)(fixedWidthStacks)
+
+    const variableBarWidth: number =
+      variableWidthStacks.length > 0
+        ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
+        : 0
+    requiredTickWidth = requiredTickWidth + variableBarWidth * variableWidthStacks.length
+
+    this.stateWriter("computedBars", this.computeBars(variableBarWidth, requiredTickWidth))
+    return Math.max(requiredTickWidth, defaultTickWidth)
+  }
+
+  private computeBars(defaultBarWidth: number, tickWidth: number): Object<number> {
+    const config: ChartConfig = this.state.current.get("config")
+    const computedSeries: Object<any> = this.state.current.get("computed").series
+    const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
+    let offset: number = -tickWidth / 2 + config.outerBarPadding / 2
+
+    return reduce((memo: Object<any>, index: number): Object<any> => {
+      const seriesAtIndex: string[] = keys(pickBy((d: number): boolean => d === index)(computedSeries.barIndices))
+      const width: number = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
+      forEach((series: string): void => {
+        memo[series] = { width, offset }
+      })(seriesAtIndex)
+      offset = offset + width + config.innerBarPadding
+      return memo
+    }, {})(indices)
+  }
+
+  private computeRange(tickWidth: number, numberOfTicks: number): [number, number] {
+    const config: ChartConfig = this.state.current.get("config")
+    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const width: number = tickWidth * numberOfTicks
+    const offset: number = tickWidth / 2
+    const margin = (axis: AxisPosition): number =>
+      includes(axis)(computedAxes.requiredAxes) ? (computedAxes.margins || {})[axis] || config[axis].margin : 0
+    return this.position[0] === "x"
+      ? [offset, width - offset]
+      : [width - offset, offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)]
   }
 
   private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
     const width: number = Math.abs(range[1] - range[0])
     const axisOptions: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     return Math.min(ticksInDomain.length, Math.max(Math.floor(width / axisOptions.tickSpacing), axisOptions.minTicks))
+  }
+
+  private computeScale(range: [number, number], ticks: Date[]): any {
+    return scaleTime()
+      .range(range)
+      .domain([ticks[0], last(ticks)])
   }
 
   private computeTicks(computed: Partial<AxisComputed>): Date[] {
@@ -136,9 +220,7 @@ class TimeAxis implements AxisClass<Date> {
   computeAligned(computed: Partial<AxisComputed>): void {
     this.previous = this.computed
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
-    computed.scale = scaleTime()
-      .range(computed.range)
-      .domain([computed.ticksInDomain[0], last(computed.ticksInDomain)])
+    computed.scale = this.computeScale(computed.range, computed.ticksInDomain)
     computed.ticks = this.computeTicks(computed)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.previous)(this.computed)

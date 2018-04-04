@@ -16,6 +16,7 @@ import {
 } from "lodash/fp"
 import {
   Accessor,
+  BarsRendererAccessors,
   D3Selection,
   DataForLegends,
   Datum,
@@ -66,7 +67,7 @@ class ChartSeries {
     this.updateRenderers()
   }
 
-  private assignAccessors(): void {
+  assignAccessors(): void {
     const accessors: SeriesAccessors = this.state.current.get("accessors").series
     forEach.convert({ cap: false })((accessor: SeriesAccessor<any>, key: string) => {
       ;(this as any)[key] = (): any => accessor(this.options)
@@ -124,6 +125,21 @@ class ChartSeries {
 
   legendFloat(): "left" | "right" {
     return this.legendPosition() === "top" && this.yAxis() === "y2" ? "right" : "left"
+  }
+
+  getBarsInfo(): Object<any> {
+    const barRenderer: RendererClass<BarsRendererAccessors> = find(
+      (renderer: RendererClass<any>): boolean => renderer.type === "bars"
+    )(this.renderers)
+    if (!barRenderer) {
+      return
+    }
+
+    return {
+      // @TODO
+      barWidth: (barRenderer as any).barWidth(),
+      stackIndex: this.options.stackIndex
+    }
   }
 
   draw(): void {

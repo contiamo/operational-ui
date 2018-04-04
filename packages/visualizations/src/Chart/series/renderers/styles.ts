@@ -5,6 +5,16 @@ const areaStyle = {
   opacity: "0.6"
 }
 
+const barStyle = {
+  "& rect": {
+    opacity: 0.8,
+    shapeRendering: "crispedges"
+  },
+  "& rect.hover": {
+    opacity: 1
+  }
+}
+
 const lineStyle = {
   "& path": {
     strokeWidth: 2,
@@ -30,6 +40,7 @@ const textStyle = {
 }
 
 export const area = css(areaStyle).toString()
+export const bar = css(barStyle).toString()
 export const line = css(lineStyle).toString()
 export const symbol = css(symbolStyle).toString()
 export const text = css(textStyle).toString()

@@ -35,9 +35,9 @@ class Text implements RendererClass<TextRendererAccessors> {
   size: RendererAccessor<number>
   state: State
   type: RendererType = "text"
-  x: RendererAccessor<number | Date>
+  x: RendererAccessor<number>
   xScale: any // @TODO
-  y: RendererAccessor<number | Date>
+  y: RendererAccessor<number>
   yScale: any // @TODO
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series) {
@@ -56,7 +56,7 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map(get(axis))(this.data)
+    const data: any[] = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)
@@ -127,21 +127,25 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   private startAttributes(): Object<any> {
+    const offset: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width / 2 || 0
     return {
-      x: (d: Datum): number => this.xScale(this.quantIsY ? this.x(d) : 0),
-      y: (d: Datum): number => this.yScale(this.quantIsY ? 0 : this.y(d)),
+      x: (d: Datum): number => this.xScale(this.quantIsY ? this.x(d) - offset : 0),
+      y: (d: Datum): number => this.yScale(this.quantIsY ? 0 : this.y(d) - offset),
       text: (d: Datum): string => (this.quantIsY ? this.y(d) : this.x(d)).toString()
     }
   }
 
   private attributes(): Object<any> {
     const config: ChartConfig = this.state.current.get("config")
-    const offset = (d: Datum) => (this.series.symbolOffset(d) || 0) + config.textlabels.offset
+    const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars[this.series.key()]
+    const barOffset: number = computedBars ? computedBars.offset + computedBars.width / 2 : 0
+    const symbolOffset = (d: Datum) =>
+      (this.series.symbolOffset ? this.series.symbolOffset(d) : 0) + config.textlabels.offset
     const rotate: number = config.textlabels.rotate[this.quantIsY ? "vertical" : "horizontal"]
 
     const attrs: Object<any> = {
-      x: (d: Datum): number => this.xScale(d.x1 || this.x(d)) + (this.quantIsY ? 0 : offset(d)),
-      y: (d: Datum): number => this.yScale(d.y1 || this.y(d)) + (this.quantIsY ? -offset(d) : 0),
+      x: (d: Datum): number => this.xScale(d.x1 || this.x(d)) + (this.quantIsY ? barOffset : symbolOffset(d)),
+      y: (d: Datum): number => this.yScale(d.y1 || this.y(d)) + (this.quantIsY ? -symbolOffset(d) : barOffset),
       text: (d: Datum): string => (this.quantIsY ? this.y(d) : this.x(d)).toString()
     }
     attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`

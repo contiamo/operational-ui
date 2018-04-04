@@ -1,4 +1,24 @@
-import { defaults, filter, flow, identity, isNil, map } from "lodash/fp"
+import {
+  compact,
+  defaults,
+  filter,
+  flow,
+  forEach,
+  get,
+  groupBy,
+  identity,
+  includes,
+  isEmpty,
+  isNil,
+  keys,
+  map,
+  partition,
+  pickBy,
+  reduce,
+  sortBy,
+  uniq,
+  values
+} from "lodash/fp"
 import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import { scaleBand } from "d3-scale"
@@ -59,6 +79,7 @@ class CategoricalAxis implements AxisClass<string> {
     const config: ChartConfig = this.state.current.get("config")
     const computedChart: Computed = this.state.current.get("computed")
     const range: [number, number] = computeRange(config, computedChart, this.position)
+    const tickWidth: number = this.computeTickWidth()
     this.computed = {
       range,
       ticks: this.data,
@@ -69,6 +90,67 @@ class CategoricalAxis implements AxisClass<string> {
     this.previous = defaults(this.previous)(this.computed)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
+  }
+
+  private computeTickWidth(): number {
+    const barSeries = this.state.current.get("computed").series.barSeries
+    if (isEmpty(barSeries)) {
+      return 0
+    }
+
+    const config: ChartConfig = this.state.current.get("config")
+    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const defaultTickWidth: number =
+      this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length
+
+    const stacks = groupBy("stackIndex")(barSeries)
+    const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
+      return compact(map(get("barWidth"))(stack)).length > 0
+    })(stacks)
+    const fixedWidthStacks: Object<any>[] = partitionedStacks[0]
+    const variableWidthStacks: Object<any>[] = partitionedStacks[1]
+
+    let requiredTickWidth: number = reduce((sum: number, stack: Object<any>): number => {
+      return sum + stack[0].barWidth
+    }, config.outerBarPadding)(fixedWidthStacks)
+
+    const variableBarWidth: number =
+      variableWidthStacks.length > 0
+        ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
+        : 0
+    requiredTickWidth = requiredTickWidth + variableBarWidth * variableWidthStacks.length
+
+    this.stateWriter("computedBars", this.computeBars(variableBarWidth, requiredTickWidth))
+    return Math.max(requiredTickWidth, defaultTickWidth)
+  }
+
+  private computeBars(defaultBarWidth: number, tickWidth: number): Object<number> {
+    const config: ChartConfig = this.state.current.get("config")
+    const computedSeries: Object<any> = this.state.current.get("computed").series
+    const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
+    let offset: number = -tickWidth / 2 + config.outerBarPadding / 2
+
+    return reduce((memo: Object<any>, index: number): Object<any> => {
+      const seriesAtIndex: string[] = keys(pickBy((d: number): boolean => d === index)(computedSeries.barIndices))
+      const width: number = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
+      forEach((series: string): void => {
+        memo[series] = { width, offset }
+      })(seriesAtIndex)
+      offset = offset + width + config.innerBarPadding
+      return memo
+    }, {})(indices)
+  }
+
+  private computeRange(tickWidth: number): [number, number] {
+    const config: ChartConfig = this.state.current.get("config")
+    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const width: number = tickWidth * this.data.length
+    const offset: number = tickWidth / 2
+    const margin = (axis: AxisPosition): number =>
+      includes(axis)(computedAxes.requiredAxes) ? (computedAxes.margins || {})[axis] || config[axis].margin : 0
+    return this.position[0] === "x"
+      ? [offset, width - offset]
+      : [width - offset, offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)]
   }
 
   // Drawing

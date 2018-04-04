@@ -117,7 +117,7 @@ class Line implements RendererClass<LineRendererAccessors> {
   }
 
   dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map(get(axis))(this.data)
+    const data: any[] = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)

@@ -7,6 +7,7 @@ import {
   includes,
   invoke,
   map,
+  merge,
   reduce,
   remove,
   sortBy,
@@ -55,12 +56,15 @@ class ChartSeriesManager implements SeriesManager {
     this.prepareData()
     this.stateWriter("dataForLegends", this.dataForLegends())
     this.stateWriter("dataForAxes", this.dataForAxes())
+    this.stateWriter("barSeries", this.barSeries())
   }
 
   private prepareData(): void {
-    const data: SeriesData = flow(this.handleStacks.bind(this), this.handleRanges.bind(this))(
-      this.state.current.get("accessors").data.series(this.state.current.get("data"))
-    )
+    const data: SeriesData = flow(
+      this.computeBarIndices.bind(this),
+      this.handleStacks.bind(this),
+      this.handleRanges.bind(this)
+    )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
 
     const currentKeys: string[] = map((datum: Object<any>): string => this.key(datum))(data)
     this.removeAllExcept(currentKeys)
@@ -68,7 +72,39 @@ class ChartSeriesManager implements SeriesManager {
       const series: Series = this.get(this.key(options))
       series ? series.update(options) : this.create(options)
     })(data)
+
     this.stateWriter("series", this.series)
+  }
+
+  private computeBarIndices(data: SeriesData): SeriesData {
+    let i: number = 0
+    const barIndices: Object<number> = {}
+    forEach((series: Object<any>): void => {
+      const hasBars: boolean = !!find((renderOptions: RendererOptions<any>) => renderOptions.type === "bars")(
+        this.renderAs(series)
+      )
+      const stackedRenderer: Object<any> = find(
+        (renderOptions: RendererOptions<any>) => renderOptions.type === "stacked"
+      )(this.renderAs(series))
+      const hasStackedBars: boolean =
+        !!stackedRenderer &&
+        !!find((renderOptions: RendererOptions<any>) => renderOptions.type === "bars")(this.renderAs(stackedRenderer))
+      if (!hasBars && !hasStackedBars) {
+        return
+      }
+      if (hasBars) {
+        barIndices[this.key(series)] = i
+      }
+      if (hasStackedBars) {
+        forEach((stackedSeries: Object<any>) => {
+          barIndices[this.key(stackedSeries)] = i
+        })(series.data)
+      }
+      i = i + 1
+    })(data)
+
+    this.stateWriter("barIndices", barIndices)
+    return data
   }
 
   private handleStacks(data: SeriesData): SeriesData {
@@ -80,11 +116,12 @@ class ChartSeriesManager implements SeriesManager {
       }
       return isStacked
     })(data)
+
     if (stacks.length === 0) {
       return
     }
 
-    forEach(this.computeStack.bind(this))(stacks)
+    forEach.convert({ cap: false })(this.computeStack.bind(this))(stacks)
 
     let unstackedSeries: Object<any>[] = filter((options: Object<any>): boolean => {
       const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(this.renderAs(options))
@@ -102,7 +139,7 @@ class ChartSeriesManager implements SeriesManager {
     return unstackedSeries
   }
 
-  private computeStack(stack: Object<any>): void {
+  private computeStack(stack: Object<any>, index: number): void {
     const stackedSeries: Object<any>[] = stack.data as Object<any>[]
     // By default, stacks are vertical
     const stackAxis: "x" | "y" = this.renderAs(stack)[0].stackAxis || "y"
@@ -149,6 +186,7 @@ class ChartSeriesManager implements SeriesManager {
         }
       })(series)
       originalSeries.stacked = true
+      originalSeries.stackIndex = index
     })(stackedData)
   }
 
@@ -203,6 +241,17 @@ class ChartSeriesManager implements SeriesManager {
     })(this.series)
 
     return data
+  }
+
+  private barSeries(): Object<any> {
+    return reduce((memo: Object<any>, series: Series): Object<any> => {
+      const barsInfo: Object<any> = series.getBarsInfo()
+      if (!barsInfo) {
+        return memo
+      }
+      memo[series.key()] = barsInfo
+      return memo
+    }, {})(this.series)
   }
 
   private create(options: Object<any>): void {

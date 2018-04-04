@@ -37,7 +37,6 @@ export type FocusElement = string
 export interface ChartConfig extends Config {
   axisPaddingForFlags: number
   barLineThickness: number
-  barPadding: number
   dateFocusLabelMargin: number
   durationCollapse: number
   durationRedraw: number
@@ -48,6 +47,7 @@ export interface ChartConfig extends Config {
   focusElement?: FocusElement
   focusDateOptions: string[]
   focusOnHover: boolean
+  innerBarPadding: number
   legend: boolean
   maxBarWidthRatio: number
   maxLabelWidth: number
@@ -58,6 +58,7 @@ export interface ChartConfig extends Config {
   minChartWithLegend: number
   minLegendWidth: number
   numberFormatter: (x: number) => string
+  outerBarPadding: number
   showComponentFocus: boolean
   targetLineColor: string
   textlabels: {
@@ -104,8 +105,7 @@ export type AreaRendererAccessors = LinearRendererAccessors
 
 export interface BarsRendererAccessors extends RendererAxesAccessors {
   color: RendererAccessor<string>
-  minimumBarWidth: RendererAccessor<number>
-  barPadding: RendererAccessor<number>
+  barWidth: RendererAccessor<number>
 }
 
 export interface FlagRendererAccessors extends RendererAxesAccessors {
@@ -214,6 +214,7 @@ export interface AxisComputed {
   ticks: any[]
   ticksInDomain?: Date[]
   tickNumber?: number
+  tickWidth?: number
 }
 
 export interface AxisAttributes {

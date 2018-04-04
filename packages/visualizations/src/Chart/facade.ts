@@ -73,11 +73,11 @@ class ChartFacade implements Facade {
     })
   }
 
+  // @TODO check which of these are actually needed
   private initialConfig(): ChartConfig {
     return {
       axisPaddingForFlags: 15,
       barLineThickness: 2,
-      barPadding: 2,
       dateFocusLabelMargin: 20,
       duration: 1e3,
       durationCollapse: 0.33,
@@ -90,6 +90,7 @@ class ChartFacade implements Facade {
       focusOnHover: true,
       height: 500,
       hidden: false,
+      innerBarPadding: 2,
       legend: true,
       maxBarWidthRatio: 1 / 3,
       maxLabelWidth: 250,
@@ -102,6 +103,7 @@ class ChartFacade implements Facade {
       minChartWithLegend: 100,
       minLegendWidth: 50,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      outerBarPadding: 10,
       palette: operational.colors.visualizationPalette,
       showComponentFocus: true,
       targetLineColor: "#999",

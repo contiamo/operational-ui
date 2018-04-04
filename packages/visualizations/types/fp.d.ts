@@ -183,6 +183,7 @@ declare namespace fp {
     min: any
     omit: any
     omitBy: any
+    partition: any
     pickBy: any
     pluck: any
     remove: any

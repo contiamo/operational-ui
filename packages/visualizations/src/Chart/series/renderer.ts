@@ -21,7 +21,7 @@ class Renderer {
       case "area":
         return new Area(state, events, el.select("g.series-area"), data, options, series)
       case "bars":
-        return new Bars(state, events, el.select("g.series-bars"), data, options)
+        return new Bars(state, events, el.select("g.series-bars"), data, options, series)
       case "flag":
         return new Flag(state, events, el.select("g.series-flag"), data, options)
       case "line":

@@ -12,7 +12,7 @@ import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
 
 const AxesAccessors: any = {
-  x: (series: any, d: any) => d.x
+  // x: (series: any, d: any) => d.x.getDate() + "-" + d.x.getMonth() + 1
   // y: (series: any, d) => d.y
 }
 
@@ -34,6 +34,14 @@ const LineRenderer: any = {
 const BarsRenderer: any = {
   accessors: {
     ...AxesAccessors
+  },
+  type: "bars"
+}
+
+const FixedBarsRenderer: any = {
+  accessors: {
+    ...AxesAccessors,
+    barWidth: () => 20
   },
   type: "bars"
 }
@@ -61,7 +69,7 @@ const StackedRenderer = {
   },
   type: "stacked",
   stackAxis: "y",
-  renderAs: [LineRenderer, AreaRenderer, SymbolRenderer, TextRenderer]
+  renderAs: [BarsRenderer, TextRenderer]
 }
 
 const data: any = {
@@ -79,7 +87,7 @@ const data: any = {
       key: "unique_key",
       // xAxis: "x2",
       yAxis: "y2",
-      renderAs: [LineRenderer, AreaRenderer, SymbolRenderer, TextRenderer]
+      renderAs: [FixedBarsRenderer, TextRenderer]
     },
     {
       data: [
