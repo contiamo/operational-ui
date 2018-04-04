@@ -12,7 +12,7 @@ export interface Props {
   name?: string
   value?: string
   id?: string
-  inputId?: string
+  labelId?: string
   label?: string
   inputRef?: (node: any) => void
   onChange?: (newVal: string) => void
@@ -45,7 +45,7 @@ const InputField = glamorous.input(
 )
 
 const Input = (props: Props) => {
-  const forAttributeId = props.label && props.inputId
+  const forAttributeId = props.label && props.labelId
   const commonInputProps = {
     innerRef: props.inputRef,
     name: props.name,
@@ -62,7 +62,7 @@ const Input = (props: Props) => {
   }
   if (props.label) {
     return (
-      <Label htmlFor={forAttributeId} css={props.css} className={props.className}>
+      <Label id={props.id} htmlFor={forAttributeId} css={props.css} className={props.className}>
         <LabelText>{props.label}</LabelText>
         <InputField
           {...commonInputProps}
@@ -74,7 +74,13 @@ const Input = (props: Props) => {
     )
   }
   return (
-    <InputField {...commonInputProps} css={props.css} className={props.className} autoComplete={props.autoComplete} />
+    <InputField
+      {...commonInputProps}
+      id={props.id}
+      css={props.css}
+      className={props.className}
+      autoComplete={props.autoComplete}
+    />
   )
 }
 

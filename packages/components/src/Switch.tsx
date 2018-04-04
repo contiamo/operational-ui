@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 export interface Props {
   id?: string
   on: boolean
-  onChange: (on: boolean) => void
+  onChange?: (on: boolean) => void
   className?: string
   style?: any
 }
@@ -84,7 +84,7 @@ const Switch = (props: Props) => (
     style={props.style}
     className={props.className}
     onClick={() => {
-      props.onChange(!props.on)
+      props.onChange && props.onChange(!props.on)
     }}
   >
     <Button on={props.on} />

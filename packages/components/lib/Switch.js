@@ -62,7 +62,7 @@ var Rail = glamorous_1.default.div({
     });
 });
 var Switch = function (props) { return (React.createElement(Container, { id: props.id, style: props.style, className: props.className, onClick: function () {
-        props.onChange(!props.on);
+        props.onChange && props.onChange(!props.on);
     } },
     React.createElement(Button, { on: props.on }),
     React.createElement(Rail, { on: props.on }))); };

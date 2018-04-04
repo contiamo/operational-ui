@@ -3,6 +3,7 @@ import glamorous, { Div } from "glamorous"
 import { operational, Theme } from "@operational/theme"
 import { render } from "react-dom"
 import { lighten } from "@operational/utils"
+import Showcase from "./Showcase"
 
 import {
   OperationalUI,
@@ -108,4 +109,4 @@ class Site extends React.Component<{}, State> {
   }
 }
 
-render(<Site />, document.getElementById("app"))
+render(<Showcase />, document.getElementById("app"))

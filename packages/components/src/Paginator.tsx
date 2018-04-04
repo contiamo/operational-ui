@@ -12,7 +12,7 @@ export interface Props {
   className?: string
   activeColor?: string
   disabled?: boolean
-  onChange: (page: number) => void
+  onChange?: (page: number) => void
   maxVisible?: number
   page?: number
   pageCount: number
@@ -20,7 +20,7 @@ export interface Props {
 
 interface ControlProps {
   children: any
-  onChange: (page: number) => void
+  onChange?: (page: number) => void
   page: number
   pageCount: number
   type: "first" | "previous" | "next" | "last"
@@ -29,22 +29,22 @@ interface ControlProps {
 const PaginatorControl = ({ children, onChange, pageCount, page, type }: ControlProps) => {
   const handleFirst = (): void => {
     if (page > 1) {
-      onChange(1)
+      onChange && onChange(1)
     }
   }
   const handlePrevious = (): void => {
     if (page > 1) {
-      onChange(page - 1)
+      onChange && onChange(page - 1)
     }
   }
   const handleNext = (): void => {
     if (page < pageCount) {
-      onChange(page + 1)
+      onChange && onChange(page + 1)
     }
   }
   const handleLast = (): void => {
     if (page < pageCount) {
-      onChange(pageCount)
+      onChange && onChange(pageCount)
     }
   }
 
@@ -102,7 +102,7 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
       condensed
       key={pageNumber}
       onClick={() => {
-        onChange(pageNumber)
+        onChange && onChange(pageNumber)
       }}
       color={pageNumber === page && activeColor}
     >
@@ -128,7 +128,7 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
             condensed
             key={pageCount}
             onClick={() => {
-              onChange(pageCount)
+              onChange && onChange(pageCount)
             }}
           >
             {pageCount}

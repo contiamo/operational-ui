@@ -17,22 +17,22 @@ var PaginatorControl = function (_a) {
     var children = _a.children, onChange = _a.onChange, pageCount = _a.pageCount, page = _a.page, type = _a.type;
     var handleFirst = function () {
         if (page > 1) {
-            onChange(1);
+            onChange && onChange(1);
         }
     };
     var handlePrevious = function () {
         if (page > 1) {
-            onChange(page - 1);
+            onChange && onChange(page - 1);
         }
     };
     var handleNext = function () {
         if (page < pageCount) {
-            onChange(page + 1);
+            onChange && onChange(page + 1);
         }
     };
     var handleLast = function () {
         if (page < pageCount) {
-            onChange(pageCount);
+            onChange && onChange(pageCount);
         }
     };
     var isDisabled = type === "previous" || type === "first" ? page === 1 : page === pageCount;
@@ -77,7 +77,7 @@ var createPagesFragment = function (_a) {
     var end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip;
     var buttonCss = { ":focus": { outline: "0", boxShadow: "none" } };
     var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: pageNumber, onClick: function () {
-            onChange(pageNumber);
+            onChange && onChange(pageNumber);
         }, color: pageNumber === page && activeColor }, pageNumber)); });
     var renderUpperSeparator = function () {
         return remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
@@ -86,7 +86,7 @@ var createPagesFragment = function (_a) {
                         onChange(page + maxVisible);
                     } }, "..."),
                 React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: pageCount, onClick: function () {
-                        onChange(pageCount);
+                        onChange && onChange(pageCount);
                     } }, pageCount)
             ]
             : [];

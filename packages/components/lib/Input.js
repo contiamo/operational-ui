@@ -17,7 +17,7 @@ var InputField = glamorous_1.default.input(function (_a) {
     return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: constants_1.inputDefaultWidth, padding: theme.spacing * 2 / 3, border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: "rgb(208, 217, 229)", font: "inherit", borderRadius: 4, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme }) }));
 });
 var Input = function (props) {
-    var forAttributeId = props.label && props.inputId;
+    var forAttributeId = props.label && props.labelId;
     var commonInputProps = {
         innerRef: props.inputRef,
         name: props.name,
@@ -33,11 +33,11 @@ var Input = function (props) {
         }
     };
     if (props.label) {
-        return (React.createElement(mixins_1.Label, { htmlFor: forAttributeId, css: props.css, className: props.className },
+        return (React.createElement(mixins_1.Label, { id: props.id, htmlFor: forAttributeId, css: props.css, className: props.className },
             React.createElement(mixins_1.LabelText, null, props.label),
             React.createElement(InputField, __assign({}, commonInputProps, { id: forAttributeId, autoComplete: props.autoComplete, css: { display: "block", width: "100%" } }))));
     }
-    return (React.createElement(InputField, __assign({}, commonInputProps, { css: props.css, className: props.className, autoComplete: props.autoComplete })));
+    return (React.createElement(InputField, __assign({}, commonInputProps, { id: props.id, css: props.css, className: props.className, autoComplete: props.autoComplete })));
 };
 exports.default = Input;
 //# sourceMappingURL=Input.js.map

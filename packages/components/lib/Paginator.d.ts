@@ -5,7 +5,7 @@ export interface Props {
     className?: string;
     activeColor?: string;
     disabled?: boolean;
-    onChange: (page: number) => void;
+    onChange?: (page: number) => void;
     maxVisible?: number;
     page?: number;
     pageCount: number;

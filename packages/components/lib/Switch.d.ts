@@ -3,7 +3,7 @@ import { Theme } from "@operational/theme";
 export interface Props {
     id?: string;
     on: boolean;
-    onChange: (on: boolean) => void;
+    onChange?: (on: boolean) => void;
     className?: string;
     style?: any;
 }
