@@ -91,6 +91,7 @@ class ChartFacade implements Facade {
       height: 500,
       hidden: false,
       innerBarPadding: 2,
+      innerBarPaddingCategorical: 0.2,
       legend: true,
       maxBarWidthRatio: 1 / 3,
       maxLabelWidth: 250,

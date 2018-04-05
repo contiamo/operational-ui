@@ -78,14 +78,15 @@ class CategoricalAxis implements AxisClass<string> {
     this.previous = this.computed
     const config: ChartConfig = this.state.current.get("config")
     const computedChart: Computed = this.state.current.get("computed")
-    const range: [number, number] = computeRange(config, computedChart, this.position)
     const tickWidth: number = this.computeTickWidth()
+    const range: [number, number] = this.computeRange(tickWidth)
     this.computed = {
       range,
       ticks: this.data,
       scale: scaleBand()
         .range(range)
         .domain(this.data)
+        .padding(config.innerBarPaddingCategorical)
     }
     this.previous = defaults(this.previous)(this.computed)
     this.stateWriter(["computed", this.position], this.computed)
@@ -101,7 +102,8 @@ class CategoricalAxis implements AxisClass<string> {
     const config: ChartConfig = this.state.current.get("config")
     const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
     const defaultTickWidth: number =
-      this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length
+      (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
+      (1 - config.innerBarPaddingCategorical)
 
     const stacks = groupBy("stackIndex")(barSeries)
     const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
@@ -112,23 +114,25 @@ class CategoricalAxis implements AxisClass<string> {
 
     let requiredTickWidth: number = reduce((sum: number, stack: Object<any>): number => {
       return sum + stack[0].barWidth
-    }, config.outerBarPadding)(fixedWidthStacks)
+    }, config.innerBarPadding * (keys(stacks).length - 1))(fixedWidthStacks)
 
     const variableBarWidth: number =
       variableWidthStacks.length > 0
         ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
         : 0
-    requiredTickWidth = requiredTickWidth + variableBarWidth * variableWidthStacks.length
 
-    this.stateWriter("computedBars", this.computeBars(variableBarWidth, requiredTickWidth))
-    return Math.max(requiredTickWidth, defaultTickWidth)
+    requiredTickWidth =
+      (requiredTickWidth + variableBarWidth * variableWidthStacks.length) / (1 - config.innerBarPaddingCategorical)
+
+    this.stateWriter("computedBars", this.computeBarPositions(variableBarWidth, requiredTickWidth))
+    return Math.max(requiredTickWidth, defaultTickWidth / (1 - config.innerBarPaddingCategorical))
   }
 
-  private computeBars(defaultBarWidth: number, tickWidth: number): Object<number> {
+  private computeBarPositions(defaultBarWidth: number, tickWidth: number): Object<number> {
     const config: ChartConfig = this.state.current.get("config")
     const computedSeries: Object<any> = this.state.current.get("computed").series
     const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
-    let offset: number = -tickWidth / 2 + config.outerBarPadding / 2
+    let offset: number = -tickWidth / 2
 
     return reduce((memo: Object<any>, index: number): Object<any> => {
       const seriesAtIndex: string[] = keys(pickBy((d: number): boolean => d === index)(computedSeries.barIndices))
@@ -142,15 +146,15 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private computeRange(tickWidth: number): [number, number] {
-    const config: ChartConfig = this.state.current.get("config")
     const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const config: ChartConfig = this.state.current.get("config")
     const width: number = tickWidth * this.data.length
     const offset: number = tickWidth / 2
     const margin = (axis: AxisPosition): number =>
       includes(axis)(computedAxes.requiredAxes) ? (computedAxes.margins || {})[axis] || config[axis].margin : 0
     return this.position[0] === "x"
-      ? [offset, width - offset]
-      : [width - offset, offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)]
+      ? [offset, width + offset]
+      : [width + offset, (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick) + offset]
   }
 
   // Drawing
@@ -187,21 +191,30 @@ class CategoricalAxis implements AxisClass<string> {
     this.adjustMargins()
   }
 
+  // Padding added only to end of each step in d3 ordinal band scale
+  private scaleWithOffset(computed: AxisComputed) {
+    const barPadding: number = this.state.current.get("config").innerBarPaddingCategorical
+    const stepWidth: number = computed.scale.step()
+    return (d: string): number => computed.scale(d) - stepWidth * barPadding / 2
+  }
+
   private getAttributes(): AxisAttributes {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
+    const scaleWithOffset = this.scaleWithOffset(this.computed)
     return {
       dx: this.isXAxis ? 0 : tickOffset,
       dy: this.isXAxis ? tickOffset : "-0.4em",
       text: identity,
-      x: this.isXAxis ? this.computed.scale : 0,
-      y: this.isXAxis ? 0 : this.computed.scale
+      x: this.isXAxis ? scaleWithOffset : 0,
+      y: this.isXAxis ? 0 : scaleWithOffset
     }
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
+    const scaleWithOffset = this.scaleWithOffset(this.previous)
     return defaults({
-      x: this.isXAxis ? this.previous.scale : 0,
-      y: this.isXAxis ? 0 : this.previous.scale
+      x: this.isXAxis ? scaleWithOffset : 0,
+      y: this.isXAxis ? 0 : scaleWithOffset
     })(attributes)
   }
 

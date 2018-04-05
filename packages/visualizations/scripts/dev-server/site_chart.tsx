@@ -12,7 +12,7 @@ import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
 
 const AxesAccessors: any = {
-  // x: (series: any, d: any) => d.x.getDate() + "-" + d.x.getMonth() + 1
+  x: (series: any, d: any) => d.x.getDate() + "-" + d.x.getMonth() + 1
   // y: (series: any, d) => d.y
 }
 
@@ -160,12 +160,12 @@ const data: any = {
   //   }
   // ],
   axes: {
-    x1: {
-      type: "time",
-      start: "2018-03-10",
-      end: "2018-03-15",
-      interval: "days"
-    },
+    // x1: {
+    //   type: "time",
+    //   start: "2018-03-10",
+    //   end: "2018-03-15",
+    //   interval: "days"
+    // },
     // x1: {
     //   type: "time",
     //   start: "2018-02-26",
@@ -178,9 +178,9 @@ const data: any = {
     //   end: "2016-03-26",
     //   interval: "days"
     // },
-    // x1: {
-    //   type: "categorical"
-    // },
+    x1: {
+      type: "categorical"
+    },
     y1: {
       type: "quant"
     },

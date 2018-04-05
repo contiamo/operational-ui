@@ -48,6 +48,7 @@ export interface ChartConfig extends Config {
   focusDateOptions: string[]
   focusOnHover: boolean
   innerBarPadding: number
+  innerBarPaddingCategorical: number
   legend: boolean
   maxBarWidthRatio: number
   maxLabelWidth: number
