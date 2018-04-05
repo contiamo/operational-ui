@@ -11,7 +11,6 @@
   * [Select](select.md)
   * [Date Picker](date-picker.md)
   * [Chip](chip.md)
-  * [Color Picker](color-picker.md)
   * [Context Menu](context-menu.md)
   * [Input](input.md)
 * [Blocks](blocks.md)
