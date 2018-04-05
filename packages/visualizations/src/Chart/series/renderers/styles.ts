@@ -2,7 +2,12 @@ import { css } from "glamor"
 import { operational as theme } from "@operational/theme"
 
 const areaStyle = {
-  opacity: "0.6"
+  "& path": {
+    opacity: "0.6"
+  },
+  "& path:hover": {
+    opacity: "0.8"
+  }
 }
 
 const barStyle = {
@@ -10,7 +15,7 @@ const barStyle = {
     opacity: 0.8,
     shapeRendering: "crispedges"
   },
-  "& rect.hover": {
+  "& rect:hover": {
     opacity: 1
   }
 }
@@ -20,7 +25,7 @@ const lineStyle = {
     strokeWidth: 2,
     fill: "none"
   },
-  "& path.hover": {
+  "& path:hover": {
     strokeWidth: 4
   },
   "& path.dashed": {
@@ -29,7 +34,12 @@ const lineStyle = {
 }
 
 const symbolStyle = {
-  strokeWidth: "2px"
+  "& path": {
+    strokeWidth: "2px"
+  },
+  "& path:hover": {
+    strokeWidth: "3px"
+  }
 }
 
 const textStyle = {

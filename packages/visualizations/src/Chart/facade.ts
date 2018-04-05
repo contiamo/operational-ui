@@ -90,6 +90,7 @@ class ChartFacade implements Facade {
       focusOnHover: true,
       height: 500,
       hidden: false,
+      // @TODO improve naming
       innerBarPadding: 2,
       innerBarPaddingCategorical: 0.2,
       legend: true,
