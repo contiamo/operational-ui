@@ -9,7 +9,6 @@ import { ReactFeatherIconName } from "./Icon/ReactFeatherIcon"
 export type IconName = ReactFeatherIconName | BrandIcons.BrandIconName
 
 export interface Props {
-  id?: string | number
   name: IconName
   size?: number
   color?: string
@@ -29,7 +28,7 @@ const Icon = (props: PropsWithTheme) => {
 
   if (ReactFeather.hasOwnProperty(props.name)) {
     const Comp = ReactFeather[props.name]
-    return <Comp key={props.id} size={props.size || defaultSize} color={color_} />
+    return <Comp size={props.size || defaultSize} color={color_} />
   }
   // @todo -> type this better
   if (BrandIcons.hasOwnProperty(props.name)) {
@@ -43,15 +42,7 @@ const Icon = (props: PropsWithTheme) => {
     if (props.name === "Contiamo") {
       Comp = BrandIcons.Contiamo
     }
-    return (
-      <Comp
-        key={props.id}
-        size={props.size || defaultSize}
-        color={color_}
-        rotation={props.rotation}
-        colored={props.colored}
-      />
-    )
+    return <Comp size={props.size || defaultSize} color={color_} rotation={props.rotation} colored={props.colored} />
   }
 
   return null

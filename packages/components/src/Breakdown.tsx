@@ -6,7 +6,7 @@ import { readableTextColor, setBrightness } from "@operational/utils"
 import { IconName } from "./Icon"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   children: React.ReactNode
@@ -72,7 +72,7 @@ const Bar = glamorous.div(
       padding: 2
     },
     ":before": {
-      content: '""',
+      content: "' '",
       position: "absolute",
       top: 0,
       left: 0,
@@ -119,7 +119,7 @@ const Number = glamorous.div(
 
 const Breakdown = (props: Props) => (
   <Container
-    key={props.id}
+    id={props.id}
     css={props.css}
     className={props.className}
     onClick={props.onClick}

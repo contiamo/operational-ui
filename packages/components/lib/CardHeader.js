@@ -16,6 +16,6 @@ var Container = glamorous_1.default.div(function (_a) {
         // This ensures that the card header text and card controls are placed in opposite corners.
         justifyContent: "space-between", height: 3.5 * theme.spacing, margin: -theme.spacing, marginBottom: theme.spacing, padding: "0 " + theme.spacing + "px", lineHeight: 1, color: theme.colors.emphasizedText }));
 });
-var CardHeader = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className }, props.children)); };
+var CardHeader = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className }, props.children)); };
 exports.default = CardHeader;
 //# sourceMappingURL=CardHeader.js.map

@@ -3,6 +3,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface Props {
+  id?: string
   css?: {}
   className?: string
   type?: string
@@ -43,7 +44,7 @@ const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: 
 }))
 
 const Grid = (props: Props) => (
-  <Container css={props.css} className={props.className} gridType={props.type ? props.type : "3x2"}>
+  <Container id={props.id} css={props.css} className={props.className} gridType={props.type ? props.type : "3x2"}>
     {props.children}
   </Container>
 )

@@ -5,7 +5,7 @@ import { fadeIn } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   menuCss?: {}
   className?: string
@@ -99,7 +99,7 @@ class ContextMenu extends React.Component<Props, State> {
         innerRef={node => {
           this.containerNode = node
         }}
-        key={this.props.id}
+        id={this.props.id}
         css={this.props.css}
         className={this.props.className}
       >

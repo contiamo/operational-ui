@@ -21,7 +21,6 @@ import Month from "./DatePicker/DatePicker.Month"
 
 export interface Props {
   id?: string
-  domId?: string
   label?: string
   start?: string
   end?: string

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 export interface Props {
-    id?: string | number;
+    id?: string;
     className?: string;
     onClick?: () => void;
     active?: boolean;

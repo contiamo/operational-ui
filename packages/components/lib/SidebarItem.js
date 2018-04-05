@@ -18,6 +18,6 @@ var Container = glamorous_1.default.div(function (_a) {
             outline: 0
         } }));
 });
-var SidebarItem = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, onClick: props.onClick, className: props.className, isActive: !!props.active, isDisabled: !!props.disabled }, props.children)); };
+var SidebarItem = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, onClick: props.onClick, className: props.className, isActive: !!props.active, isDisabled: !!props.disabled }, props.children)); };
 exports.default = SidebarItem;
 //# sourceMappingURL=SidebarItem.js.map

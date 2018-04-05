@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -42,7 +42,7 @@ const Container = glamorous.div(
 
 const SidebarItem = (props: Props) => (
   <Container
-    key={props.id}
+    id={props.id}
     css={props.css}
     onClick={props.onClick}
     className={props.className}

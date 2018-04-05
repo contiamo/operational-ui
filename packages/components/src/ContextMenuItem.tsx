@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   children?: any
@@ -35,7 +35,7 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
 
 const ContextMenuItem = (props: Props) => (
   <Container
-    key={props.id}
+    id={props.id}
     css={props.css}
     className={props.className}
     clickable={!!props.onClick}

@@ -7,7 +7,7 @@ import { sidenavWidth } from "./constants"
 import Icon, { IconName } from "./Icon"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   className?: string
   label: string | React.ReactNode
@@ -62,11 +62,7 @@ const SidenavHeader = (props: Props) => (
   // See ./SidenavItem.tsx for reason why class name is set.
   // Note that the click listener is set on `<Content>` so it doesn't interfere
   // with click listeners set on the children.
-  <Container
-    key={props.id}
-    css={props.css}
-    className={["op_sidenavheader", props.className].filter(a => !!a).join(" ")}
-  >
+  <Container id={props.id} css={props.css} className={["op_sidenavheader", props.className].filter(a => !!a).join(" ")}>
     <Content isActive={!!props.active} isExpanded={!!props.expanded} onClick={props.onClick}>
       <IconContainer>
         {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={24} /> : props.icon}

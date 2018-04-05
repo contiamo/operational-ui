@@ -6,7 +6,7 @@ export interface Props {
     name?: string;
     value?: string;
     id?: string;
-    inputId?: string;
+    labelId?: string;
     label?: string;
     inputRef?: (node: any) => void;
     onChange?: (newVal: string) => void;

@@ -2,7 +2,7 @@
 import * as React from "react";
 import { RGBColor } from "react-color";
 export interface Props {
-    id?: string | number;
+    id?: string;
     css?: {};
     className?: string;
     color?: string;

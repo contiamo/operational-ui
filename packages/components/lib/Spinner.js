@@ -53,7 +53,7 @@ var PulsingCube = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var Spinner = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },
+var Spinner = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className },
     React.createElement(PulsingCube, null),
     React.createElement(PulsingCube, null),
     React.createElement(PulsingCube, null),

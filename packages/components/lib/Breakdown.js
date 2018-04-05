@@ -54,7 +54,7 @@ var Bar = glamorous_1.default.div({
         padding: 2
     },
     ":before": {
-        content: '""',
+        content: "' '",
         position: "absolute",
         top: 0,
         left: 0,
@@ -92,7 +92,7 @@ var Number = glamorous_1.default.div({
     var theme = _a.theme;
     return (__assign({}, theme.typography.heading1, { flex: "0 0 " + theme.spacing * 2.5 + "px", color: theme.colors.gray20 }));
 });
-var Breakdown = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, onClick: props.onClick, onMouseEnter: props.onMouseEnter, onMouseLeave: props.onMouseLeave },
+var Breakdown = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, onClick: props.onClick, onMouseEnter: props.onMouseEnter, onMouseLeave: props.onMouseLeave },
     React.createElement(Number, null, props.number),
     React.createElement(Content, null,
         React.createElement(Label, null, props.children),

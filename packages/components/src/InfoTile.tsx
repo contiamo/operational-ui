@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   label?: string
@@ -36,7 +36,7 @@ const Label = glamorous.small(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const InfoTile = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} css={props.css} className={props.className}>
     <Label>{props.label}</Label>
     <Content>{props.children}</Content>
   </Container>

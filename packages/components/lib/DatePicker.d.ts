@@ -2,7 +2,6 @@
 import * as React from "react";
 export interface Props {
     id?: string;
-    domId?: string;
     label?: string;
     start?: string;
     end?: string;

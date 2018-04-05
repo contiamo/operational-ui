@@ -1,11 +1,11 @@
 /// <reference types="react" />
 export interface Props {
-    id?: string | number;
+    id?: string;
     css?: any;
     className?: string;
     activeColor?: string;
     disabled?: boolean;
-    onChange: (page: number) => void;
+    onChange?: (page: number) => void;
     maxVisible?: number;
     page?: number;
     pageCount: number;

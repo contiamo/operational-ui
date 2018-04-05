@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   children?: React.ReactNode
@@ -28,7 +28,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
 }))
 
 const CardHeader = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} css={props.css} className={props.className}>
     {props.children}
   </Container>
 )

@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 import { spin } from "@operational/utils"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   className?: string
   open?: boolean
@@ -56,7 +56,7 @@ const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean
     backgroundColor: theme.colors.gray10
   },
   "&::after": {
-    content: '""',
+    content: "' '",
     display: "block",
     width: 0,
     height: 0,
@@ -69,7 +69,7 @@ const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean
 }))
 
 const SidebarHeader = (props: Props) => (
-  <Container css={props.css} key={props.id} className={props.className}>
+  <Container css={props.css} id={props.id} className={props.className}>
     <Header isOpen={!!props.open} onClick={props.onToggle}>
       {props.label}
     </Header>

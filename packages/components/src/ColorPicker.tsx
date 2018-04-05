@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 import Button from "./Button"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   className?: string
   color?: string
@@ -108,7 +108,7 @@ class ColorPicker extends React.Component<Props, State> {
     const { size, color } = this.props
     return (
       <Container
-        key={this.props.id}
+        id={this.props.id}
         css={this.props.css}
         className={this.props.className}
         innerRef={(containerEl: any): void => {

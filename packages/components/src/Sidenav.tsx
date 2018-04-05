@@ -6,7 +6,7 @@ import { Theme, expandColor } from "@operational/theme"
 import { sidenavWidth, sidenavExpandedWidth } from "./constants"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: {}
   className?: string
   children?: React.ReactNode
@@ -71,7 +71,7 @@ class Sidenav extends React.Component<Props, State> {
   render() {
     return (
       <Container
-        key={this.props.id}
+        id={this.props.id}
         css={this.props.css}
         className={this.props.className}
         expandOnHover={this.props.expandOnHover}

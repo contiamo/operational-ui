@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
 export interface Props {
-  id?: string | number
+  id?: string
   css?: any
   className?: string
   children?: React.ReactNode
@@ -33,7 +33,7 @@ const Legend = glamorous.legend(({ theme }: { theme: Theme }): any => ({
 }))
 
 const Fieldset = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} css={props.css} className={props.className}>
     <Legend>{props.legend}</Legend>
     {props.children}
   </Container>

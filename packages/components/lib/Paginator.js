@@ -17,22 +17,22 @@ var PaginatorControl = function (_a) {
     var children = _a.children, onChange = _a.onChange, pageCount = _a.pageCount, page = _a.page, type = _a.type;
     var handleFirst = function () {
         if (page > 1) {
-            onChange(1);
+            onChange && onChange(1);
         }
     };
     var handlePrevious = function () {
         if (page > 1) {
-            onChange(page - 1);
+            onChange && onChange(page - 1);
         }
     };
     var handleNext = function () {
         if (page < pageCount) {
-            onChange(page + 1);
+            onChange && onChange(page + 1);
         }
     };
     var handleLast = function () {
         if (page < pageCount) {
-            onChange(pageCount);
+            onChange && onChange(pageCount);
         }
     };
     var isDisabled = type === "previous" || type === "first" ? page === 1 : page === pageCount;
@@ -77,7 +77,7 @@ var createPagesFragment = function (_a) {
     var end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip;
     var buttonCss = { ":focus": { outline: "0", boxShadow: "none" } };
     var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: pageNumber, onClick: function () {
-            onChange(pageNumber);
+            onChange && onChange(pageNumber);
         }, color: pageNumber === page && activeColor }, pageNumber)); });
     var renderUpperSeparator = function () {
         return remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
@@ -86,7 +86,7 @@ var createPagesFragment = function (_a) {
                         onChange(page + maxVisible);
                     } }, "..."),
                 React.createElement(Button_1.default, { css: buttonCss, condensed: true, key: pageCount, onClick: function () {
-                        onChange(pageCount);
+                        onChange && onChange(pageCount);
                     } }, pageCount)
             ]
             : [];
@@ -109,7 +109,7 @@ var Container = glamorous_1.default.div({
 var Paginator = function (_a) {
     var _b = _a.activeColor, activeColor = _b === void 0 ? "info" : _b, _c = _a.maxVisible, maxVisible = _c === void 0 ? 3 : _c, _d = _a.onChange, onChange = _d === void 0 ? function () { } : _d, pageCount = _a.pageCount, _e = _a.page, page = _e === void 0 ? 1 : _e, id = _a.id, css = _a.css, className = _a.className;
     var controlProps = { pageCount: pageCount, page: page, onChange: onChange };
-    return (React.createElement(Container, { key: id, css: css, className: className },
+    return (React.createElement(Container, { id: id, css: css, className: className },
         React.createElement(ButtonGroup_1.default, { className: "co_bgrp" },
             React.createElement(PaginatorControl, __assign({ type: "first" }, controlProps),
                 React.createElement(Icon.ChevronsLeft, { size: "11" })),
