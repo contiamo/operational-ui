@@ -23,7 +23,7 @@ class Renderer {
       case "bars":
         return new Bars(state, events, el.select("g.series-bars"), data, options, series)
       case "flag":
-        return new Flag(state, events, el.select("g.series-flag"), data, options)
+        return new Flag(state, events, el.select("g.series-flag"), data, options, series)
       case "line":
         return new Line(state, events, el.select("g.series-line"), data, options, series)
       case "range":

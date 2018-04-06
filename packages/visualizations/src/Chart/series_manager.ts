@@ -1,4 +1,5 @@
 import {
+  compact,
   filter,
   find,
   flow,
@@ -11,6 +12,7 @@ import {
   reduce,
   remove,
   sortBy,
+  uniq,
   uniqBy,
   uniqueId
 } from "lodash/fp"
@@ -18,6 +20,7 @@ import { stack as d3Stack } from "d3-shape"
 import Series from "./series/series"
 import {
   Accessor,
+  AxisPosition,
   D3Selection,
   DataForLegends,
   Datum,
@@ -57,6 +60,7 @@ class ChartSeriesManager implements SeriesManager {
     this.stateWriter("dataForLegends", this.dataForLegends())
     this.stateWriter("dataForAxes", this.dataForAxes())
     this.stateWriter("barSeries", this.barSeries())
+    this.stateWriter("axesWithFlags", this.axesWithFlags())
   }
 
   private prepareData(): void {
@@ -252,6 +256,15 @@ class ChartSeriesManager implements SeriesManager {
       memo[series.key()] = barsInfo
       return memo
     }, {})(this.series)
+  }
+
+  private axesWithFlags(): AxisPosition[] {
+    return reduce((axes: AxisPosition[], series: Series): AxisPosition[] => {
+      if (series.hasFlags()) {
+        axes.push(series.axis())
+      }
+      return compact(uniq(axes))
+    }, [])(this.series)
   }
 
   private create(options: Object<any>): void {

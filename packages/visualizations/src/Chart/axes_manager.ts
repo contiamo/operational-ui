@@ -17,6 +17,7 @@ import {
 
 class AxesManager {
   axes: Object<AxisClass<any>> = {}
+  axesDrawn: ("x" | "y")[]
   els: Object<D3Selection>
   events: EventBus
   oldAxes: Object<AxisClass<any>> = {}
@@ -29,6 +30,7 @@ class AxesManager {
     this.stateWriter = stateWriter
     this.events = events
     this.els = els
+    this.events.on("margins:updated", this.onMarginsUpdated.bind(this))
   }
 
   draw(): void {
@@ -40,6 +42,7 @@ class AxesManager {
   private updateAxes(): void {
     this.stateWriter("previous", {})
     this.stateWriter("computed", {})
+    this.axesDrawn = []
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const data = this.state.current.get("computed").series.dataForAxes
     // Remove axes that are no longer needed, or whose type has changed
@@ -80,6 +83,15 @@ class AxesManager {
     // Update rules
     const hasRules: boolean = includes("quant")(map((axis: AxisClass<any>): AxisType => axis.type)(axes as any))
     hasRules ? this.updateRules(orientation) : this.removeRules(orientation)
+
+    this.axesDrawn.push(orientation)
+  }
+
+  private onMarginsUpdated(isXAxis: boolean): void {
+    const axesToUpdate: "x" | "y" = isXAxis ? "y" : "x"
+    if (includes(axesToUpdate)(this.axesDrawn)) {
+      this.drawAxes(axesToUpdate)
+    }
   }
 
   updateRules(orientation: "x" | "y"): void {

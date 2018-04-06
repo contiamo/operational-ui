@@ -16,6 +16,7 @@ import {
 } from "lodash/fp"
 import {
   Accessor,
+  AxisPosition,
   BarsRendererAccessors,
   D3Selection,
   DataForLegends,
@@ -50,6 +51,7 @@ class ChartSeries {
   renderAs: () => RendererOptions<any>[]
   symbolOffset: (d: Datum) => number
   unit: () => string
+  axis: () => AxisPosition // Only used for flags
   xAxis: () => "x1" | "x2"
   yAxis: () => "y1" | "y2"
 
@@ -140,6 +142,10 @@ class ChartSeries {
       barWidth: (barRenderer as any).barWidth(),
       stackIndex: this.options.stackIndex
     }
+  }
+
+  hasFlags(): boolean {
+    return !!this.get("flag")
   }
 
   draw(): void {

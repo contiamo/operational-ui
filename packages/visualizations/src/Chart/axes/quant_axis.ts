@@ -1,4 +1,4 @@
-import { defaults, filter, identity, isFinite, last } from "lodash/fp"
+import { defaults, filter, identity, includes, isFinite, last } from "lodash/fp"
 import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeSteps, computeTicks } from "../../utils/quant_axis_utils"
@@ -135,13 +135,18 @@ class QuantAxis implements AxisClass<number> {
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    const requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+    let requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+
+    // Add space for flags
+    const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+    requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
-    this.events.emit("margins:update")
+    this.events.emit("margins:update", this.isXAxis)
     this.el.attr(
       "transform",
       `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`

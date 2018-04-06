@@ -221,13 +221,18 @@ class CategoricalAxis implements AxisClass<string> {
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    const requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+    let requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+
+    // Add space for flags
+    const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+    requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
-    this.events.emit("margins:update")
+    this.events.emit("margins:update", this.isXAxis)
     this.el.attr(
       "transform",
       `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`

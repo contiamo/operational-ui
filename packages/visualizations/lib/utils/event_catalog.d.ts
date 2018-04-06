@@ -21,6 +21,10 @@ declare const Events: {
             MOUSEOVER: string;
             MOUSEOUT: string;
         };
+        FLAG: {
+            HOVER: string;
+            OUT: string;
+        };
     };
 };
 export default Events;

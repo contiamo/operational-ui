@@ -19,9 +19,13 @@ const Events = {
       HIGHLIGHT: "focus:element:highlight",
       CLICK: "focus:element:click",
       MOUSEOVER: "focus:element:mouseover",
-      MOUSEOUT: "focus:element:mouseout",
+      MOUSEOUT: "focus:element:mouseout"
     },
-  },
+    FLAG: {
+      HOVER: "focus:flag:hover",
+      OUT: "focus:flag:out"
+    }
+  }
 }
 
 export default Events

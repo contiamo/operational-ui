@@ -72,6 +72,10 @@ const StackedRenderer = {
   renderAs: [BarsRenderer, TextRenderer]
 }
 
+const FlagRenderer = {
+  type: "flag"
+}
+
 const data: any = {
   series: [
     {
@@ -115,6 +119,42 @@ const data: any = {
         }
       ],
       renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2
+    },
+    {
+      data: [
+        { 
+          x: new Date("March 12, 2018"), 
+          label: "test flag",
+          description: "Description of flag meaning.",
+          // color: "#f00",
+          direction: "down"
+        },
+        {
+          x: new Date("March 14, 2018"),
+          label: "test 2",
+          description: "Another flag",
+          // color: "#0f0",
+          // direction: "up"
+        }
+      ],
+      name: "Flags",
+      key: "flag_series",
+      renderAs: [FlagRenderer]
+    },
+    {
+      data: [
+        {
+          y: 3500,
+          label: "test horizontal flag",
+          description: "Horizontal flag",
+          color: "#0f0"
+        }
+      ],
+      name: "Horizontal flags",
+      key: "flag_series_2",
+      axis: "y2",
+      yAxis: "y2",
+      renderAs: [FlagRenderer]
     }
   ],
   // series: [

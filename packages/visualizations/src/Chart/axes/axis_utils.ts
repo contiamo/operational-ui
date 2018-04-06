@@ -64,11 +64,9 @@ export const computeRequiredMargin = (
   position: AxisPosition
 ): number => {
   const requiredMargin: number = config.margin
-  // @TODO adjust for flags
   if (position[0] === "x") {
     return requiredMargin
   }
-  // Adjust for ticks
   const axisWidth: number = axis.node().getBBox().width
   return Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding)
 }

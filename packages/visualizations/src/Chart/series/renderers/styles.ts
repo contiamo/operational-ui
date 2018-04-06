@@ -20,6 +20,22 @@ const barStyle = {
   }
 }
 
+const flagStyle = {
+  "& line": {
+    strokeDasharray: "5px 2px"
+  },
+  "& .hover": {
+    strokeWidth: "2px"
+  },
+  "& text": {
+    fontSize: "11px"
+  },
+  "& path.hover-flag": {
+    cursor: "pointer",
+    shapeRendering: "crispedges"
+  }
+}
+
 const lineStyle = {
   "& path": {
     strokeWidth: 2,
@@ -51,6 +67,7 @@ const textStyle = {
 
 export const area = css(areaStyle).toString()
 export const bar = css(barStyle).toString()
+export const flag = css(flagStyle).toString()
 export const line = css(lineStyle).toString()
 export const symbol = css(symbolStyle).toString()
 export const text = css(textStyle).toString()

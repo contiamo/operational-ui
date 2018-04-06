@@ -111,7 +111,9 @@ export interface BarsRendererAccessors extends RendererAxesAccessors {
 
 export interface FlagRendererAccessors extends RendererAxesAccessors {
   color: RendererAccessor<string>
-  size: RendererAccessor<number>
+  description: RendererAccessor<string>
+  direction: RendererAccessor<"up" | "down">
+  label: RendererAccessor<string>
 }
 
 export interface LineRendererAccessors extends LinearRendererAccessors {
@@ -156,6 +158,7 @@ export interface Datum {
   y1?: number
   injectedX?: string | number | Date
   injectedY?: string | number | Date
+  [key: string]: any
 }
 
 export type SeriesData = Object<any>[]
@@ -171,6 +174,7 @@ export interface SeriesAccessors {
   legendName: SeriesAccessor<string>
   renderAs: SeriesAccessor<RendererOptions<any>[]>
   unit: SeriesAccessor<string>
+  axis: SeriesAccessor<AxisPosition>
   xAxis: SeriesAccessor<"x1" | "x2">
   yAxis: SeriesAccessor<"y1" | "y2">
 }

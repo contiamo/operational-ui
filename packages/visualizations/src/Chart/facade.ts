@@ -13,6 +13,7 @@ import {
   Accessors,
   AccessorsObject,
   AxesData,
+  AxisPosition,
   ChartConfig,
   Components,
   Computed,
@@ -147,6 +148,7 @@ class ChartFacade implements Facade {
         legendName: (d: Object<any>): string => d.name || d.key || "",
         renderAs: (d: Object<any>): RendererOptions<any>[] => d.renderAs,
         unit: (d: Object<any>): string => d.unit || "",
+        axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
         xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
         yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1"
       }

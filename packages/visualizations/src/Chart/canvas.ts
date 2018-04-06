@@ -18,7 +18,7 @@ import { forEach, reduce } from "lodash/fp"
 const seriesElements: SeriesElements = [
   ["area", "drawing_clip"],
   ["bars", "drawing_clip"],
-  ["flag", "yrules_clip"],
+  ["flag", "xyrules_clip"],
   ["line", "drawing_clip"],
   ["range", "drawing_clip"],
   ["symbol", "xyrules_clip"],
@@ -59,7 +59,10 @@ class ChartCanvas implements Canvas {
     this.insertSeriesDrawingGroups()
     this.insertFocusElements()
     this.stateWriter("elements", this.elements)
-    this.events.on("margins:update", this.draw.bind(this))
+    this.events.on("margins:update", (isXAxis: boolean): void => {
+      this.draw()
+      this.events.emit("margins:updated", isXAxis)
+    })
   }
 
   // Chart container

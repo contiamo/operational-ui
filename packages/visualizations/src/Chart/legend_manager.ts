@@ -1,6 +1,5 @@
 import ChartLegend from "./legend/legend"
 import * as styles from "../utils/styles"
-import { withD3Element } from "../utils/d3_utils"
 import { forEach, reduce } from "lodash/fp"
 import { D3Selection, EventBus, LegendDatum, Object, State, StateWriter } from "./typings"
 
