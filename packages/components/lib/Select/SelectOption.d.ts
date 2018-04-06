@@ -1,6 +1,5 @@
 /// <reference types="react" />
 import * as React from "react";
-import { Theme } from "@operational/theme";
 export interface Props {
     id?: number | string;
     css?: any;
@@ -10,8 +9,5 @@ export interface Props {
     children?: React.ReactNode;
     color?: string;
 }
-export interface PropsWithTheme extends Props {
-    theme: Theme;
-}
-declare const WrappedSelectOption: React.SFC<Props>;
-export default WrappedSelectOption;
+declare const SelectOption: (props: Props) => JSX.Element;
+export default SelectOption;

@@ -3,7 +3,6 @@ export interface IContainerProps {
     id?: string;
     color?: string;
     disabled: boolean;
-    updating: boolean;
     style?: {};
     role?: string;
     tabIndex?: number;

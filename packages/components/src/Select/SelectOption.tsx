@@ -15,10 +15,6 @@ export interface Props {
   color?: string
 }
 
-export interface PropsWithTheme extends Props {
-  theme: Theme
-}
-
 const Container = glamorous.div(
   ({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }): any => {
     const backgroundColor = expandColor(theme, color) || theme.colors.white
@@ -51,10 +47,14 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
   position: "absolute",
   top: "50%",
   right: 4,
-  transform: "translate3d(-50%, -50%, 0)"
+  transform: "translate3d(-50%, -50%, 0)",
+  "& svg": {
+    width: theme.spacing,
+    height: theme.spacing
+  }
 }))
 
-const SelectOption = (props: PropsWithTheme) => (
+const SelectOption = (props: Props) => (
   <Container
     key={props.id}
     css={props.css}
@@ -69,12 +69,10 @@ const SelectOption = (props: PropsWithTheme) => (
     {props.children}
     {props.selected ? (
       <IconContainer>
-        <X size={props.theme.spacing} />
+        <X />
       </IconContainer>
     ) : null}
   </Container>
 )
 
-const WrappedSelectOption: React.SFC<Props> = withTheme(SelectOption)
-
-export default WrappedSelectOption
+export default SelectOption

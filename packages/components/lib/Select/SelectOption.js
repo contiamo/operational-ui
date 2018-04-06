@@ -34,13 +34,16 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         position: "absolute",
         top: "50%",
         right: 4,
-        transform: "translate3d(-50%, -50%, 0)"
+        transform: "translate3d(-50%, -50%, 0)",
+        "& svg": {
+            width: theme.spacing,
+            height: theme.spacing
+        }
     });
 });
 var SelectOption = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, selected: !!props.selected, color: props.color, tabIndex: -2, role: "option", "aria-selected": props.selected, onClick: props.onClick },
     props.children,
     props.selected ? (React.createElement(IconContainer, null,
-        React.createElement(react_feather_1.X, { size: props.theme.spacing }))) : null)); };
-var WrappedSelectOption = glamorous_1.withTheme(SelectOption);
-exports.default = WrappedSelectOption;
+        React.createElement(react_feather_1.X, null))) : null)); };
+exports.default = SelectOption;
 //# sourceMappingURL=SelectOption.js.map

@@ -8,8 +8,7 @@ export interface Props {
   css?: any
   className?: string
   placeholder?: string
-  onChange?: (e: React.SyntheticEvent<HTMLInputElement>) => Promise<void>
-  theme?: Theme
+  onChange?: (newVal: string) => void
   color?: string
 }
 
@@ -36,7 +35,9 @@ const SelectFilter = (props: Props) => (
   <Container key={props.id} css={props.css} className={props.className}>
     <input
       onClick={e => e.stopPropagation()}
-      onChange={props.onChange}
+      onChange={(e: any) => {
+        props.onChange(e.target.value)
+      }}
       placeholder={props.placeholder || "Filter ..."}
     />
   </Container>
