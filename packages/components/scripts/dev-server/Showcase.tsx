@@ -104,8 +104,19 @@ const Showcase = () => (
         </ContextMenu>
       </Section>
       <Section title="Input">
-        <Input value="Input field" label="Label" labelId="inputid" id="1234" />
-        <Input value="Standalone input field" id="1234" />
+        <Subsection>
+          <Input value="Input field" label="Label" labelId="inputid" id="1234" />
+          <Input
+            value="schema xyz"
+            id="1234"
+            error="Name cannot contain spaces"
+            label="Some label"
+            hint="Should be variable-safe"
+          />
+        </Subsection>
+        <Subsection>
+          <Input value="disabled" label="Some value" disabled onToggle={() => {}} hint="Abcd"/>
+        </Subsection>
       </Section>
       <Section title="Paginator">
         <Paginator page={2} pageCount={10} />

@@ -10,12 +10,15 @@ export interface Props {
     label?: string;
     inputRef?: (node: any) => void;
     onChange?: (newVal: string) => void;
-    disabled?: boolean;
     onFocus?: (ev: any) => void;
     onBlur?: (ev: any) => void;
     type?: string;
     children?: string;
     autoComplete?: string;
+    error?: string;
+    hint?: string;
+    disabled?: boolean;
+    onToggle?: () => void;
 }
 declare const Input: (props: Props) => JSX.Element;
 export default Input;
