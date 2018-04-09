@@ -10,14 +10,18 @@ export interface Props {
   rows: ((string | React.ReactNode)[])[]
 }
 
-const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "table",
-  minWidth: 320,
+  width: "100%",
+  position: "relative",
+  backgroundColor: "white"
+}))
+
+const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
+  width: "100%",
   borderCollapse: "collapse",
-  border: "1px solid",
-  borderColor: theme.colors.separator,
   textAlign: "left",
-  backgroundColor: "white",
+  tableLayout: "auto",
   "& th": {
     ...theme.typography.body,
     opacity: 0.4
@@ -33,7 +37,7 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
     borderBottom: 0
   },
   "& td": {
-    padding: `${theme.spacing * 2 / 3}px ${theme.spacing * 4 / 3}px`,
+    padding: `${theme.spacing * 4 / 3}px ${theme.spacing}px`,
     ...theme.typography.body
   },
   "& td, & th, & tr": {
@@ -42,14 +46,27 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
+const EmptyView = glamorous.tfoot(({ theme }: { theme: Theme }): {} => ({
+  padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
+  display: "block",
+  width: "100%",
+  top: theme.spacing,
+  textAlign: "center",
+  backgroundColor: theme.colors.background,
+  ...theme.typography.body
+}))
+
 const Table = (props: Props) => (
   <Container css={props.css} className={props.className}>
-    <thead>
-      <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
-    </thead>
-    <tbody>
-      {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
-    </tbody>
+    <TableElement>
+      <thead>
+        <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
+      </thead>
+      <tbody>
+        {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
+      </tbody>
+    </TableElement>
+    {props.rows.length === 0 ? <EmptyView>There are no records available</EmptyView> : null}
   </Container>
 )
 

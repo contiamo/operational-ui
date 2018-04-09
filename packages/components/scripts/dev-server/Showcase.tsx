@@ -17,6 +17,7 @@ import {
   Paginator,
   Heading1Type,
   Switch,
+  Table,
   Breadcrumbs,
   Breadcrumb,
   ContextMenu,
@@ -41,6 +42,13 @@ const Section = (props: { title: string; children: React.ReactNode }) => (
   </Card>
 )
 
+const Subsection = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  margin: "30px 0",
+  "& > *": {
+    marginRight:theme.spacing 
+  }
+}))
+
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: theme.spacing,
   maxWidth: 640,
@@ -53,7 +61,9 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 const Showcase = () => (
   <OperationalUI withBaseStyles>
     <Container>
-      <h1 style={{ textAlign: "center" }}><code>@operational/components</code></h1>
+      <h1 style={{ textAlign: "center" }}>
+        <code>@operational/components</code>
+      </h1>
       <Section title="Breadcrumbs">
         <Breadcrumbs>
           <Breadcrumb>Link one</Breadcrumb>
@@ -110,6 +120,14 @@ const Showcase = () => (
       </Section>
       <Section title="Spinners">
         <Spinner />
+      </Section>
+      <Section title="Tables">
+        <Subsection>
+        <Table rows={[["Paul", "The 12th", "Green"]]} columns={["Name", "Birthday", "Favorite color"]} />
+        </Subsection>
+        <Subsection>
+        <Table rows={[]} columns={["Name", "Birthday", "Favorite color"]} />
+        </Subsection>
       </Section>
       <Section title="Tooltip">
         <Div css={{ position: "relative", width: "fit-content" }}>
