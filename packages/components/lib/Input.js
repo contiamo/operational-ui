@@ -21,7 +21,7 @@ var InputField = glamorous_1.default.input(function (_a) {
 });
 var Error = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.small, { color: theme.colors.error, padding: theme.spacing / 6 + "px " + theme.spacing * 3 / 4 + "px", marginTop: theme.spacing / 6, marginBottom: 0, width: "100%", borderRadius: 3, position: "absolute", backgroundColor: utils_1.lighten(theme.colors.error, 45), boxShadow: theme.shadows.card, bottom: -28, left: 0 }));
+    return (__assign({}, theme.typography.small, { color: theme.colors.error, padding: theme.spacing / 6 + "px " + theme.spacing * 3 / 4 + "px", marginTop: theme.spacing / 6, marginBottom: 0, width: "100%", borderRadius: 3, position: "absolute", backgroundColor: utils_1.lighten(theme.colors.error, 45), boxShadow: theme.shadows.card, bottom: theme.spacing * -2.25, left: 0 }));
 });
 var ControlsContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;

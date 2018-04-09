@@ -71,7 +71,7 @@ const Error = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   backgroundColor: lighten(theme.colors.error, 45),
   boxShadow: theme.shadows.card,
-  bottom: -28,
+  bottom: theme.spacing * -2.25,
   left: 0
 }))
 
