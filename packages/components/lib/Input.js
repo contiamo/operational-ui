@@ -32,7 +32,30 @@ var HintContainer = glamorous_1.default.div(function (_a) {
         width: "fit-content",
         marginLeft: 4,
         "& svg": {
-            opacity: 0.4
+            opacity: 0.4,
+            position: "relative",
+            top: -1
+        },
+        // :nth-child(2) refers to the tooltip
+        "& > :nth-child(2)": {
+            display: "none"
+        },
+        ":hover": {
+            "& > :nth-child(2)": {
+                display: "block"
+            }
+        }
+    });
+});
+var ToggleContainer = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        position: "absolute",
+        top: 3,
+        right: theme.spacing,
+        opacity: 0.4,
+        ":hover": {
+            opacity: 1
         }
     });
 });
@@ -59,6 +82,8 @@ var Input = function (props) {
             props.hint ? (React.createElement(HintContainer, null,
                 React.createElement(Icon_1.default, { name: "HelpCircle", size: 14 }),
                 React.createElement(Tooltip_1.default, { right: true, css: { minWidth: 100, width: "fit-content" } }, props.hint))) : null,
+            props.onToggle ? (React.createElement(ToggleContainer, null,
+                React.createElement(Icon_1.default, { name: props.disabled ? "Lock" : "Unlock", size: 12 }))) : null,
             React.createElement(InputField, __assign({}, commonInputProps, { id: forAttributeId, autoComplete: props.autoComplete, css: { display: "block", width: "100%" } })),
             props.error ? React.createElement(Error, null, props.error) : null));
     }

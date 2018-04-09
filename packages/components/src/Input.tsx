@@ -82,7 +82,28 @@ const HintContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: "fit-content",
   marginLeft: 4,
   "& svg": {
-    opacity: 0.4
+    opacity: 0.4,
+    position: "relative",
+    top: -1
+  },
+  // :nth-child(2) refers to the tooltip
+  "& > :nth-child(2)": {
+    display: "none"
+  },
+  ":hover": {
+    "& > :nth-child(2)": {
+      display: "block"
+    }
+  }
+}))
+
+const ToggleContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  position: "absolute",
+  top: 3,
+  right: theme.spacing,
+  opacity: 0.4,
+  ":hover": {
+    opacity: 1
   }
 }))
 
@@ -114,6 +135,11 @@ const Input = (props: Props) => {
               {props.hint}
             </Tooltip>
           </HintContainer>
+        ) : null}
+        {props.onToggle ? (
+          <ToggleContainer>
+            <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
+          </ToggleContainer>
         ) : null}
         <InputField
           {...commonInputProps}
