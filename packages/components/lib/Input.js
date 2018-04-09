@@ -23,7 +23,15 @@ var Error = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.small, { color: theme.colors.error, padding: theme.spacing / 6 + "px " + theme.spacing * 3 / 4 + "px", marginTop: theme.spacing / 6, marginBottom: 0, width: "100%", borderRadius: 3, position: "absolute", backgroundColor: utils_1.lighten(theme.colors.error, 45), boxShadow: theme.shadows.card, bottom: -28, left: 0 }));
 });
-var HintContainer = glamorous_1.default.div(function (_a) {
+var ControlsContainer = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        position: "absolute",
+        top: 3,
+        right: theme.spacing
+    });
+});
+var Control = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "relative",
@@ -41,21 +49,12 @@ var HintContainer = glamorous_1.default.div(function (_a) {
             display: "none"
         },
         ":hover": {
+            "& svg": {
+                opacity: 1
+            },
             "& > :nth-child(2)": {
                 display: "block"
             }
-        }
-    });
-});
-var ToggleContainer = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({
-        position: "absolute",
-        top: 3,
-        right: theme.spacing,
-        opacity: 0.4,
-        ":hover": {
-            opacity: 1
         }
     });
 });
@@ -79,11 +78,14 @@ var Input = function (props) {
     if (props.label) {
         return (React.createElement(mixins_1.Label, { id: props.id, htmlFor: forAttributeId, css: props.css, className: props.className },
             React.createElement(mixins_1.LabelText, null, props.label),
-            props.hint ? (React.createElement(HintContainer, null,
-                React.createElement(Icon_1.default, { name: "HelpCircle", size: 14 }),
-                React.createElement(Tooltip_1.default, { right: true, css: { minWidth: 100, width: "fit-content" } }, props.hint))) : null,
-            props.onToggle ? (React.createElement(ToggleContainer, null,
-                React.createElement(Icon_1.default, { name: props.disabled ? "Lock" : "Unlock", size: 12 }))) : null,
+            React.createElement(ControlsContainer, null,
+                props.hint ? (React.createElement(Control, null,
+                    React.createElement(Icon_1.default, { name: "HelpCircle", size: 14 }),
+                    React.createElement(Tooltip_1.default, { right: true, css: { minWidth: 100, width: "fit-content" } }, props.hint))) : null,
+                props.onToggle ? (React.createElement(Control, { onClick: function () {
+                        props.onToggle();
+                    } },
+                    React.createElement(Icon_1.default, { name: props.disabled ? "Lock" : "Unlock", size: 12 }))) : null),
             React.createElement(InputField, __assign({}, commonInputProps, { id: forAttributeId, autoComplete: props.autoComplete, css: { display: "block", width: "100%" } })),
             props.error ? React.createElement(Error, null, props.error) : null));
     }

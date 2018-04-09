@@ -75,7 +75,13 @@ const Error = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   left: 0
 }))
 
-const HintContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  position: "absolute",
+  top: 3,
+  right: theme.spacing
+}))
+
+const Control = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "relative",
   verticalAlign: "middle",
   display: "inline-block",
@@ -91,19 +97,12 @@ const HintContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     display: "none"
   },
   ":hover": {
+    "& svg": {
+      opacity: 1
+    },
     "& > :nth-child(2)": {
       display: "block"
     }
-  }
-}))
-
-const ToggleContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "absolute",
-  top: 3,
-  right: theme.spacing,
-  opacity: 0.4,
-  ":hover": {
-    opacity: 1
   }
 }))
 
@@ -128,19 +127,25 @@ const Input = (props: Props) => {
     return (
       <Label id={props.id} htmlFor={forAttributeId} css={props.css} className={props.className}>
         <LabelText>{props.label}</LabelText>
-        {props.hint ? (
-          <HintContainer>
-            <Icon name="HelpCircle" size={14} />
-            <Tooltip right css={{ minWidth: 100, width: "fit-content" }}>
-              {props.hint}
-            </Tooltip>
-          </HintContainer>
-        ) : null}
-        {props.onToggle ? (
-          <ToggleContainer>
-            <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
-          </ToggleContainer>
-        ) : null}
+        <ControlsContainer>
+          {props.hint ? (
+            <Control>
+              <Icon name="HelpCircle" size={14} />
+              <Tooltip right css={{ minWidth: 100, width: "fit-content" }}>
+                {props.hint}
+              </Tooltip>
+            </Control>
+          ) : null}
+          {props.onToggle ? (
+            <Control
+              onClick={() => {
+                props.onToggle()
+              }}
+            >
+              <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
+            </Control>
+          ) : null}
+        </ControlsContainer>
         <InputField
           {...commonInputProps}
           id={forAttributeId}

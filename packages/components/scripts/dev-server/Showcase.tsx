@@ -114,7 +114,7 @@ const Showcase = () => (
           />
         </Subsection>
         <Subsection>
-          <Input value="disabled" label="Some value" disabled onToggle={() => {}}/>
+          <Input value="disabled" label="Some value" disabled onToggle={() => {}} hint="Abcd"/>
         </Subsection>
       </Section>
       <Section title="Paginator">
