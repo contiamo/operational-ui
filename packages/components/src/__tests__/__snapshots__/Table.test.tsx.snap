@@ -1,24 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table Component Should render 1`] = `
-<table
-  class="css-1j49rso"
+<div
+  class="css-cmhidp"
 >
-  <thead>
-    <tr />
-  </thead>
-  <tfoot
-    class="css-1e6h5f0"
+  <table
+    class="css-kqd5vo"
   >
-    <tr>
-      <td
-        class="css-nil"
-        colspan="9999"
-      >
-        There are no records available
-      </td>
-    </tr>
+    <thead>
+      <tr />
+    </thead>
+    <tbody />
+  </table>
+  <tfoot
+    class="css-30piuf"
+  >
+    There are no records available
   </tfoot>
-  <tbody />
-</table>
+</div>
 `;

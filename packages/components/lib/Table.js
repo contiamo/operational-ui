@@ -10,17 +10,22 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var Container = glamorous_1.default.table(function (_a) {
+var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "table",
         width: "100%",
-        minWidth: 320,
-        borderCollapse: "collapse",
         position: "relative",
-        tableLayout: "auto",
+        backgroundColor: "white"
+    });
+});
+var TableElement = glamorous_1.default.table(function (_a) {
+    var theme = _a.theme;
+    return ({
+        width: "100%",
+        borderCollapse: "collapse",
         textAlign: "left",
-        backgroundColor: "white",
+        tableLayout: "auto",
         "& th": __assign({}, theme.typography.body, { opacity: 0.4 }),
         "& tr": {
             borderTop: "1px solid",
@@ -41,14 +46,13 @@ var Container = glamorous_1.default.table(function (_a) {
 });
 var EmptyView = glamorous_1.default.tfoot(function (_a) {
     var theme = _a.theme;
-    return (__assign({ padding: theme.spacing * 1 / 3 + "px " + theme.spacing + "px", display: "block", width: "100%", top: theme.spacing, backgroundColor: theme.colors.background }, theme.typography.body));
+    return (__assign({ padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", display: "block", width: "100%", top: theme.spacing, textAlign: "center", backgroundColor: theme.colors.background }, theme.typography.body));
 });
 var Table = function (props) { return (React.createElement(Container, { css: props.css, className: props.className },
-    React.createElement("thead", null,
-        React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
-    props.rows.length === 0 ? (React.createElement(EmptyView, null,
-        React.createElement("tr", null,
-            React.createElement(glamorous_1.default.Td, { colSpan: 9999 }, "There are no records available")))) : null,
-    React.createElement("tbody", null, props.rows.map(function (row, index) { return React.createElement("tr", { key: index }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); })); })))); };
+    React.createElement(TableElement, null,
+        React.createElement("thead", null,
+            React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
+        React.createElement("tbody", null, props.rows.map(function (row, index) { return React.createElement("tr", { key: index }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); })); }))),
+    props.rows.length === 0 ? React.createElement(EmptyView, null, "There are no records available") : null)); };
 exports.default = Table;
 //# sourceMappingURL=Table.js.map

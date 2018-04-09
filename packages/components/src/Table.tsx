@@ -10,15 +10,18 @@ export interface Props {
   rows: ((string | React.ReactNode)[])[]
 }
 
-const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "table",
   width: "100%",
-  minWidth: 320,
-  borderCollapse: "collapse",
   position: "relative",
-  tableLayout: "auto",
+  backgroundColor: "white"
+}))
+
+const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
+  width: "100%",
+  borderCollapse: "collapse",
   textAlign: "left",
-  backgroundColor: "white",
+  tableLayout: "auto",
   "& th": {
     ...theme.typography.body,
     opacity: 0.4
@@ -44,29 +47,26 @@ const Container = glamorous.table(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const EmptyView = glamorous.tfoot(({ theme }: { theme: Theme }): {} => ({
-  padding: `${theme.spacing * 1 / 3}px ${theme.spacing}px`,
+  padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
   display: "block",
   width: "100%",
   top: theme.spacing,
+  textAlign: "center",
   backgroundColor: theme.colors.background,
   ...theme.typography.body
 }))
 
 const Table = (props: Props) => (
   <Container css={props.css} className={props.className}>
-    <thead>
-      <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
-    </thead>
-    {props.rows.length === 0 ? (
-      <EmptyView>
-        <tr>
-          <glamorous.Td colSpan={9999}>There are no records available</glamorous.Td>
-        </tr>
-      </EmptyView>
-    ) : null}
-    <tbody>
-      {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
-    </tbody>
+    <TableElement>
+      <thead>
+        <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
+      </thead>
+      <tbody>
+        {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
+      </tbody>
+    </TableElement>
+    {props.rows.length === 0 ? <EmptyView>There are no records available</EmptyView> : null}
   </Container>
 )
 
