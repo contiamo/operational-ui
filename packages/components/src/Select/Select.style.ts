@@ -27,6 +27,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
       borderRadius: 4,
       paddingRight: theme.spacing / 2 + 40,
       width: "fit-content",
+      minWidth: 240,
       minHeight: 20,
       border: "1px solid",
       borderColor: "rgb(208, 217, 229)",
@@ -67,9 +68,11 @@ const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
 const Options: GlamorousComponent<{}, {}> = glamorous.div(
   {
     position: "absolute",
-    top: "calc(100% + 1px)",
+    top: "calc(100% + 6px)",
     left: 0,
     width: "100%",
+    overflow: "hidden",
+    borderRadius: 4,
     opacity: 0,
     transform: "translateY(-10px)",
     animation: `${fadeIn} .15s forwards ease,

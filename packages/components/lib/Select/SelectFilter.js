@@ -14,7 +14,7 @@ var Container = glamorous_1.default.div(function (_a) {
         borderColor: utils_1.darken(backgroundColor, 10),
         "& > input": {
             width: "100%",
-            padding: theme.spacing / 2,
+            padding: theme.spacing / 2 + "px " + theme.spacing * 3 / 4,
             border: 0,
             outline: "none",
             font: "inherit"
