@@ -54,7 +54,7 @@ var Table = function (props) { return (React.createElement(Container, { css: pro
             React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
         React.createElement("tbody", null, props.rows.map(function (row, index) { return (React.createElement("tr", { key: index, onClick: function () {
                 if (props.onRowClick) {
-                    props.onRowClick(index);
+                    props.onRowClick(row, index);
                 }
             } }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); }))); }))),
     props.rows.length === 0 ? React.createElement(EmptyView, null, "There are no records available") : null)); };

@@ -137,7 +137,6 @@ const Showcase = () => (
           <Table
             rows={[["Paul", "The 12th", "Green"]]}
             columns={["Name", "Birthday", "Favorite color"]}
-            onRowClick={console.log.bind(console)}
           />
         </Subsection>
         <Subsection>

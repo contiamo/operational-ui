@@ -8,7 +8,7 @@ export interface Props {
   children?: React.ReactNode
   columns: string[]
   rows: ((string | React.ReactNode)[])[]
-  onRowClick?: (index: number) => void
+  onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -69,7 +69,7 @@ const Table = (props: Props) => (
             key={index}
             onClick={() => {
               if (props.onRowClick) {
-                props.onRowClick(index)
+                props.onRowClick(row, index)
               }
             }}
           >
