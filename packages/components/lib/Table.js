@@ -44,7 +44,7 @@ var TableElement = glamorous_1.default.table(function (_a) {
         }
     });
 });
-var EmptyView = glamorous_1.default.tfoot(function (_a) {
+var EmptyView = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return (__assign({ padding: theme.spacing * 2 / 3 + "px " + theme.spacing + "px", display: "block", width: "100%", top: theme.spacing, textAlign: "center", backgroundColor: theme.colors.background }, theme.typography.body));
 });
@@ -52,7 +52,11 @@ var Table = function (props) { return (React.createElement(Container, { css: pro
     React.createElement(TableElement, null,
         React.createElement("thead", null,
             React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
-        React.createElement("tbody", null, props.rows.map(function (row, index) { return React.createElement("tr", { key: index }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); })); }))),
+        React.createElement("tbody", null, props.rows.map(function (row, index) { return (React.createElement("tr", { key: index, onClick: function () {
+                if (props.onRowClick) {
+                    props.onRowClick(row, index);
+                }
+            } }, row.map(function (cell, index) { return React.createElement("td", { key: index }, cell); }))); }))),
     props.rows.length === 0 ? React.createElement(EmptyView, null, "There are no records available") : null)); };
 exports.default = Table;
 //# sourceMappingURL=Table.js.map

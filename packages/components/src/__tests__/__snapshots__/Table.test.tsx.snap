@@ -12,10 +12,10 @@ exports[`Table Component Should render 1`] = `
     </thead>
     <tbody />
   </table>
-  <tfoot
+  <div
     class="css-30piuf"
   >
     There are no records available
-  </tfoot>
+  </div>
 </div>
 `;
