@@ -166,7 +166,7 @@ class Select extends React.Component<Props, State> {
               <OptionsList>
                 {options.map(
                   (option: IOption) =>
-                    (option.label || String(option.value)).match(new RegExp(search)) && (
+                    (option.label || String(option.value)).match(RegExp(search)) && (
                       <SelectOption
                         key={String(option.value)}
                         onClick={() => this.selectOption(option)}

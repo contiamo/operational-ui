@@ -51,6 +51,8 @@ var DisplayValue = glamorous_1.default.div(function (_a) {
 exports.DisplayValue = DisplayValue;
 var Options = glamorous_1.default.div({
     position: "absolute",
+    // Push it down 6px so it doesn't overlap with the focus shadow,
+    // and there's a comfortable 2px gap.
     top: "calc(100% + 6px)",
     left: 0,
     width: "100%",
