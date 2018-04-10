@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { render } from "react-dom"
 import { Theme } from "@operational/theme"
-import { OperationalUI, Select, TimelineItem } from "../../src"
+import { OperationalUI, Select, DatePicker } from "../../src"
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: theme.spacing,
@@ -16,25 +16,25 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 export interface Props {}
 
 export interface State {
-  value: string[]
+  start: string
+  end: string
 }
 
 class Explore extends React.Component<Props, State> {
   state = {
-    value: ["123"]
+    start: "2018-01-01",
+    end: "2018-02-02"
   }
 
   render() {
     return (
       <OperationalUI withBaseStyles>
         <Container>
-          <Select
-            value={this.state.value}
-            options={[{ value: "123", label: "321" }, { value: "456" }]}
-            onChange={newVal => {
-              this.setState(prevState => ({
-                value: newVal as string[]
-              }))
+          <DatePicker
+            start={this.state.start}
+            end={this.state.end}
+            onChange={change => {
+              this.setState(prevState => change)
             }}
           />
         </Container>
