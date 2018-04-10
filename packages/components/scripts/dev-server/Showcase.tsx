@@ -45,7 +45,7 @@ const Section = (props: { title: string; children: React.ReactNode }) => (
 const Subsection = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   margin: "30px 0",
   "& > *": {
-    marginRight:theme.spacing 
+    marginRight: theme.spacing
   }
 }))
 
@@ -115,7 +115,7 @@ const Showcase = () => (
           />
         </Subsection>
         <Subsection>
-          <Input value="disabled" label="Some value" disabled onToggle={() => {}} hint="Abcd"/>
+          <Input value="disabled" label="Some value" disabled onToggle={() => {}} hint="Abcd" />
         </Subsection>
       </Section>
       <Section title="Paginator">
@@ -134,10 +134,14 @@ const Showcase = () => (
       </Section>
       <Section title="Tables">
         <Subsection>
-        <Table rows={[["Paul", "The 12th", "Green"]]} columns={["Name", "Birthday", "Favorite color"]} />
+          <Table
+            rows={[["Paul", "The 12th", "Green"]]}
+            columns={["Name", "Birthday", "Favorite color"]}
+            onRowClick={console.log.bind(console)}
+          />
         </Subsection>
         <Subsection>
-        <Table rows={[]} columns={["Name", "Birthday", "Favorite color"]} />
+          <Table rows={[]} columns={["Name", "Birthday", "Favorite color"]} />
         </Subsection>
       </Section>
       <Section title="Tooltip">

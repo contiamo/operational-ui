@@ -8,6 +8,7 @@ export interface Props {
   children?: React.ReactNode
   columns: string[]
   rows: ((string | React.ReactNode)[])[]
+  onRowClick?: (index: number) => void
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -46,7 +47,7 @@ const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-const EmptyView = glamorous.tfoot(({ theme }: { theme: Theme }): {} => ({
+const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
   display: "block",
   width: "100%",
@@ -63,7 +64,18 @@ const Table = (props: Props) => (
         <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
       </thead>
       <tbody>
-        {props.rows.map((row, index) => <tr key={index}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}
+        {props.rows.map((row, index) => (
+          <tr
+            key={index}
+            onClick={() => {
+              if (props.onRowClick) {
+                props.onRowClick(index)
+              }
+            }}
+          >
+            {row.map((cell, index) => <td key={index}>{cell}</td>)}
+          </tr>
+        ))}
       </tbody>
     </TableElement>
     {props.rows.length === 0 ? <EmptyView>There are no records available</EmptyView> : null}
