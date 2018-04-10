@@ -17,6 +17,7 @@ var Container = glamorous_1.default.div(function (_a) {
         borderRadius: 4,
         paddingRight: theme.spacing / 2 + 40,
         width: "fit-content",
+        minWidth: 240,
         minHeight: 20,
         border: "1px solid",
         borderColor: "rgb(208, 217, 229)",
@@ -50,9 +51,13 @@ var DisplayValue = glamorous_1.default.div(function (_a) {
 exports.DisplayValue = DisplayValue;
 var Options = glamorous_1.default.div({
     position: "absolute",
-    top: "calc(100% + 1px)",
+    // Push it down 6px so it doesn't overlap with the focus shadow,
+    // and there's a comfortable 2px gap.
+    top: "calc(100% + 6px)",
     left: 0,
     width: "100%",
+    overflow: "hidden",
+    borderRadius: 4,
     opacity: 0,
     transform: "translateY(-10px)",
     animation: utils_1.fadeIn + " .15s forwards ease,\n    " + utils_1.resetTransform + " .15s forwards ease"

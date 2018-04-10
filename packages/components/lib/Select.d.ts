@@ -14,7 +14,7 @@ export interface Props {
     value: null | Value | Value[];
     filterable?: boolean;
     disabled?: boolean;
-    onChange?: (newValue: Value | Value[], changedItem?: Value) => void;
+    onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void;
     color?: string;
     placeholder?: string;
     label?: string;

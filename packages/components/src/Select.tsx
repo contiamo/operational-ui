@@ -29,7 +29,7 @@ export interface Props {
   value: null | Value | Value[]
   filterable?: boolean
   disabled?: boolean
-  onChange?: (newValue: Value | Value[], changedItem?: Value) => void
+  onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void
   color?: string
   placeholder?: string
   label?: string
@@ -166,13 +166,13 @@ class Select extends React.Component<Props, State> {
               <OptionsList>
                 {options.map(
                   (option: IOption) =>
-                    option.label.match(new RegExp(search)) && (
+                    (option.label || String(option.value)).match(RegExp(search)) && (
                       <SelectOption
                         key={String(option.value)}
                         onClick={() => this.selectOption(option)}
                         selected={this.isOptionSelected(option)}
                       >
-                        {option.label}
+                        {option.label || String(option.value)}
                       </SelectOption>
                     )
                 )}

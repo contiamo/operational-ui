@@ -118,7 +118,7 @@ var Select = /** @class */ (function (_super) {
                         }); });
                     } })),
                 React.createElement(Select_style_1.OptionsList, null, options.map(function (option) {
-                    return option.label.match(new RegExp(search)) && (React.createElement(SelectOption_1.default, { key: String(option.value), onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label));
+                    return (option.label || String(option.value)).match(RegExp(search)) && (React.createElement(SelectOption_1.default, { key: String(option.value), onClick: function () { return _this.selectOption(option); }, selected: _this.isOptionSelected(option) }, option.label || String(option.value)));
                 }))))));
         return label ? (React.createElement(mixins_1.Label, null,
             React.createElement(mixins_1.LabelText, null, label),

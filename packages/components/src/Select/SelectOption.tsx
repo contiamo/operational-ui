@@ -3,7 +3,7 @@ import glamorous, { withTheme, GlamorousComponent } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
-import { X } from "react-feather"
+import Icon from "../Icon"
 
 export interface Props {
   id?: number | string
@@ -23,7 +23,7 @@ const Container = glamorous.div(
       backgroundColor,
       label: "selectoption",
       position: "relative",
-      padding: theme.spacing / 2,
+      padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}`,
       wordWrap: "break-word",
       color: readableTextColor(backgroundColor, ["black", "white"]),
       outline: "none",
@@ -42,15 +42,15 @@ const Container = glamorous.div(
 )
 
 const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  width: 8,
-  height: 8,
+  width: 10,
+  height: 10,
   position: "absolute",
   top: "50%",
   right: 4,
   transform: "translate3d(-50%, -50%, 0)",
   "& svg": {
-    width: theme.spacing,
-    height: theme.spacing
+    width: "100%",
+    height: "100%"
   }
 }))
 
@@ -69,7 +69,7 @@ const SelectOption = (props: Props) => (
     {props.children}
     {props.selected ? (
       <IconContainer>
-        <X />
+        <Icon name="Check" size={10} />
       </IconContainer>
     ) : null}
   </Container>
