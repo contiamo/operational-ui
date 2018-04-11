@@ -19,11 +19,7 @@ export interface State {
     month: number;
 }
 declare class DatePicker extends React.Component<Props, State> {
-    state: {
-        isExpanded: boolean;
-        year: number;
-        month: number;
-    };
+    constructor(props: Props);
     containerNode: any;
     inputNode: any;
     keypressHandler: (a: any) => void;

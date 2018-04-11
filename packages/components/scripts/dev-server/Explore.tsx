@@ -16,8 +16,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 export interface Props {}
 
 export interface State {
-  start: string
-  end: string
+  start?: string
+  end?: string
 }
 
 class Explore extends React.Component<Props, State> {
