@@ -19,6 +19,8 @@ export const months: string[] = [
   "December"
 ]
 
+// A range of numbers pre-filled in an array
+// range(5) -> [ 0, 1, 2, 3, 4 ]
 export const range = (n: number): number[] =>
   Array.apply(null, { length: n }).map((val: number, i: number): number => i)
 
