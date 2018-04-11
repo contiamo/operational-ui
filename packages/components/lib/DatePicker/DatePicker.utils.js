@@ -18,6 +18,8 @@ exports.months = [
     "November",
     "December"
 ];
+// A range of numbers pre-filled in an array
+// range(5) -> [ 0, 1, 2, 3, 4 ]
 exports.range = function (n) {
     return Array.apply(null, { length: n }).map(function (val, i) { return i; });
 };
