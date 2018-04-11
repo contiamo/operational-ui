@@ -12,7 +12,7 @@ var Container = glamorous_1.default.div(function (_a) {
         backgroundColor: backgroundColor,
         label: "selectoption",
         position: "relative",
-        padding: theme.spacing / 2 + "px " + theme.spacing * 3 / 4,
+        padding: theme.spacing / 2 + "px " + theme.spacing * 3 / 4 + "px",
         wordWrap: "break-word",
         color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
         outline: "none",

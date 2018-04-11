@@ -23,7 +23,7 @@ const Container = glamorous.div(
       backgroundColor,
       label: "selectoption",
       position: "relative",
-      padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}`,
+      padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}px`,
       wordWrap: "break-word",
       color: readableTextColor(backgroundColor, ["black", "white"]),
       outline: "none",
