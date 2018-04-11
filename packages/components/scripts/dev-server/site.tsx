@@ -6,4 +6,4 @@ import { lighten } from "@operational/utils"
 import Showcase from "./Showcase"
 import Explore from "./Explore"
 
-render(<Explore />, document.getElementById("app"))
+render(<Showcase />, document.getElementById("app"))
