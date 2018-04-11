@@ -26,13 +26,18 @@ var DatePicker_utils_1 = require("./DatePicker/DatePicker.utils");
 var DatePicker_Month_1 = require("./DatePicker/DatePicker.Month");
 var DatePicker = /** @class */ (function (_super) {
     __extends(DatePicker, _super);
-    function DatePicker() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            isExpanded: false,
+    function DatePicker(props) {
+        var _this = _super.call(this, props) || this;
+        // Start year month is either based on the start date
+        // or the current month if no start date is specified.
+        var yearMonth = props.start && DatePicker_utils_1.toYearMonthDay(props.start) ? {
+            year: DatePicker_utils_1.toYearMonthDay(props.start).year,
+            month: DatePicker_utils_1.toYearMonthDay(props.start).month
+        } : {
             year: new Date().getFullYear(),
             month: new Date().getMonth()
         };
+        _this.state = __assign({}, yearMonth, { isExpanded: false });
         return _this;
     }
     DatePicker.prototype.changeMonth = function (diff) {

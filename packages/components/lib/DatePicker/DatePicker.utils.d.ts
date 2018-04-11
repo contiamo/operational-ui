@@ -1,6 +1,10 @@
-declare const months: string[];
-declare const range: (n: number) => number[];
-declare const toDate: (year: number, month: number, day: number) => string;
-declare const monthStartDay: (year: number, month: number) => number;
-declare const daysInMonth: (month: number, year: number) => number;
-export { months, range, daysInMonth, toDate, monthStartDay };
+export declare const months: string[];
+export declare const range: (n: number) => number[];
+export declare const toDate: (year: number, month: number, day: number) => string;
+export declare const toYearMonthDay: (date: string) => {
+    year: number;
+    month: number;
+    day: number;
+};
+export declare const monthStartDay: (year: number, month: number) => number;
+export declare const daysInMonth: (month: number, year: number) => number;

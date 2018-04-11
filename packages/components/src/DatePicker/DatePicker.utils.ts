@@ -4,7 +4,7 @@ import * as moment_ from "moment"
 // @todo -> find a better solution here
 const moment = typeof moment_ === "function" ? moment_ : (moment_ as any).default
 
-const months: string[] = [
+export const months: string[] = [
   "January",
   "February",
   "March",
@@ -19,15 +19,27 @@ const months: string[] = [
   "December"
 ]
 
-const range = (n: number): number[] => Array.apply(null, { length: n }).map((val: number, i: number): number => i)
+export const range = (n: number): number[] =>
+  Array.apply(null, { length: n }).map((val: number, i: number): number => i)
 
-const toDate = (year: number, month: number, day: number): string =>
+export const toDate = (year: number, month: number, day: number): string =>
   `${year}-${month < 9 ? "0" : ""}${month + 1}-${day < 9 ? "0" : ""}${day + 1}`
 
-const monthStartDay = (year: number, month: number): number => moment(toDate(year, month, 0)).day()
-
-const daysInMonth = (month: number, year: number): number => {
-  return moment(toDate(year, month, 2)).daysInMonth()
+export const toYearMonthDay = (date: string): { year: number; month: number; day: number } | null => {
+  const chunks = date.split("-").map(chunk => Number(chunk))
+  if (chunks.length !== 3 || isNaN(chunks[0]) || isNaN(chunks[1]) || isNaN(chunks[2])) {
+    return null
+  }
+  return {
+    year: chunks[0],
+    // Months and days are numbered starting 0 as a state management convenience
+    month: chunks[1] - 1,
+    day: chunks[2] - 1
+  }
 }
 
-export { months, range, daysInMonth, toDate, monthStartDay }
+export const monthStartDay = (year: number, month: number): number => moment(toDate(year, month, 0)).day()
+
+export const daysInMonth = (month: number, year: number): number => {
+  return moment(toDate(year, month, 2)).daysInMonth()
+}

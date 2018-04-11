@@ -16,7 +16,7 @@ import {
   Input,
   DatePickerCard
 } from "./DatePicker/DatePicker.styles"
-import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker/DatePicker.utils"
+import { months, daysInMonth, range, toDate, monthStartDay, toYearMonthDay } from "./DatePicker/DatePicker.utils"
 import Month from "./DatePicker/DatePicker.Month"
 
 export interface Props {
@@ -37,10 +37,24 @@ export interface State {
 }
 
 class DatePicker extends React.Component<Props, State> {
-  state = {
-    isExpanded: false,
-    year: new Date().getFullYear(),
-    month: new Date().getMonth()
+  constructor(props: Props) {
+    super(props)
+    // Start year month is either based on the start date
+    // or the current month if no start date is specified.
+    const yearMonth =
+      props.start && toYearMonthDay(props.start)
+        ? {
+            year: toYearMonthDay(props.start).year,
+            month: toYearMonthDay(props.start).month
+          }
+        : {
+            year: new Date().getFullYear(),
+            month: new Date().getMonth()
+          }
+    this.state = {
+      ...yearMonth,
+      isExpanded: false
+    }
   }
 
   containerNode: any

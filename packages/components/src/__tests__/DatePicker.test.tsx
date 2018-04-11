@@ -3,6 +3,7 @@ import { render } from "enzyme"
 
 import { DatePicker as ThemelessDatePicker } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
+import { toYearMonthDay } from "../DatePicker/DatePicker.utils"
 
 const DatePicker = wrapDefaultTheme(ThemelessDatePicker)
 
@@ -12,5 +13,11 @@ describe("DatePicker Component", () => {
   xit("Should render", () => {
     const renderedComponent = render(<DatePicker date="2015-11-05" />)
     expect(renderedComponent).toMatchSnapshot()
+  })
+
+  it("Converts date string to a structured year-month-day object", () => {
+    expect(toYearMonthDay("2018-01-01").year).toEqual(2018)
+    expect(toYearMonthDay("2018-01-01").month).toEqual(0)
+    expect(toYearMonthDay("2018-01-01").day).toEqual(0)
   })
 })
