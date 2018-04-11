@@ -41,7 +41,7 @@ class DatePicker extends React.Component<Props, State> {
     super(props)
     // Start year month is either based on the start date
     // or the current month if no start date is specified.
-    const yearMonth =
+    const startYearMonthInWidget =
       props.start && toYearMonthDay(props.start)
         ? {
             year: toYearMonthDay(props.start).year,
@@ -52,7 +52,7 @@ class DatePicker extends React.Component<Props, State> {
             month: new Date().getMonth()
           }
     this.state = {
-      ...yearMonth,
+      ...startYearMonthInWidget,
       isExpanded: false
     }
   }
