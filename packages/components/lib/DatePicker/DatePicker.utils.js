@@ -18,7 +18,9 @@ exports.months = [
     "November",
     "December"
 ];
-exports.range = function (n) { return Array.apply(null, { length: n }).map(function (val, i) { return i; }); };
+exports.range = function (n) {
+    return Array.apply(null, { length: n }).map(function (val, i) { return i; });
+};
 exports.toDate = function (year, month, day) {
     return year + "-" + (month < 9 ? "0" : "") + (month + 1) + "-" + (day < 9 ? "0" : "") + (day + 1);
 };
