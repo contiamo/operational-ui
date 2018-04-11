@@ -104,7 +104,7 @@ export default class App extends React.Component<{}, {}> {
                 <h1>Operational UI</h1>
                 <h2>Building blocks for effective operational interfaces</h2>
                 <TitleBarNav>
-                  <a>
+                  <a href="https://contiamo.gitbooks.io/operational-ui/content/">
                     <Button color="info" css={customButtonStyles}>
                       Read the docs
                     </Button>
@@ -119,17 +119,20 @@ export default class App extends React.Component<{}, {}> {
             </Hero>
             <StaticContent
               css={{ marginTop: 32 }}
-              markdownContent={`\`Operational UI\` is a library made for data-driven decision making. It does its best when used for interfaces that assume familiarity through routine use, prioritizing compactness and subtle hierarchies. 
+              markdownContent={`\`Operational\` is a UI library made that caters to day-to-day operational decision-makig. It does its best when used for interfaces that assume familiarity through routine use, prioritizing compactness and [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352).
               
-It implements a [design language](https://ui.contiamo.com/docs/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352), and prefers [uncomplicated basics]() as much as it loves [elaborate dataviz]().
-
 It is predictable to use, and it lets you and your team breathe. Exhales, not sighs.
               `}
             />
           </Card>
           <Card>
             <CardHeader css={customCardHeaderStyles}>Examples</CardHeader>
-            <StaticContent markdownContent="Curious how this was made?" />
+            <StaticContent
+              css={{ marginTop: 20 }}
+              markdownContent={`
+Head to our CodeSandbox demos for [simple interface elements](https://codesandbox.io/embed/zq5nm42x84), a [full-featured UI]() and [ visualizations]().
+              `}
+            />
             <OperationalUI theme={operational}>
               <div style={{ backgroundColor: "#F5F6FA", padding: 12, borderRadius: 4 }}>
                 <div>
@@ -151,12 +154,6 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
                 </div>
               </div>
             </OperationalUI>
-            <StaticContent
-              css={{ marginTop: 20 }}
-              markdownContent={`
-Head to our CodeSandbox demos for [simple interface elements](https://codesandbox.io/embed/zq5nm42x84), a [full-featured UI]() and [ visualizations]().
-              `}
-            />
           </Card>
           <Card>
             <CardHeader css={customCardHeaderStyles}>Version</CardHeader>
