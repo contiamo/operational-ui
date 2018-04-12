@@ -16,7 +16,7 @@ var Container = glamorous_1.default.div(function (_a) {
         padding: theme.spacing * 1 / 2 + "px " + theme.spacing + "px",
         borderRadius: 4,
         position: "relative",
-        maxWidth: 400,
+        maxWidth: 400
     };
 });
 var Content = glamorous_1.default.div(function (_a) {

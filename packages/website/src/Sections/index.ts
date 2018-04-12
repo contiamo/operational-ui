@@ -11,6 +11,9 @@ import * as progress from "./Progress"
 import * as spinners from "./Spinners"
 import * as switches from "./Switches"
 import * as tables from "./Tables"
+import * as tabs from "./Tabs"
+import * as modals from "./Modals"
+import * as sidebars from "./Sidebars"
 import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
 
@@ -26,8 +29,11 @@ export default [
   paginators,
   progress,
   spinners,
+  sidebars,
   switches,
+  modals,
   tables,
+  tabs,
   timelines,
   tooltips
 ]
