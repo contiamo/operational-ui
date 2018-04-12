@@ -48,7 +48,6 @@ const defaultAccessors: Partial<AreaRendererAccessors> = {
 }
 
 class Area implements RendererClass<AreaRendererAccessors> {
-  clip: D3Selection
   closeGaps: RendererAccessor<boolean>
   color: RendererAccessor<string>
   data: Datum[]
@@ -74,7 +73,6 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.events = events
     this.series = series
     this.el = this.appendSeriesGroup(el)
-    this.clip = this.appendClipPath()
     this.update(data, options)
   }
 
@@ -130,17 +128,16 @@ class Area implements RendererClass<AreaRendererAccessors> {
     return el.append("g").attr("class", `series:${this.series.key()} ${styles.area}`)
   }
 
-  private appendClipPath(): D3Selection {
-    return this.el.append("svg:clipPath").attr("id", `area-clip-${this.series.key()}`)
-  }
-
   private updateClipPath(): void {
     const duration: number = this.state.current.get("config").duration
     const data: Datum[] = this.series.options.clipData ? [this.series.options.clipData] : []
-    const clip: D3Selection = this.clip.selectAll("path").data(data)
+
+    const clip = this.el.selectAll("clipPath path").data(data)
 
     clip
       .enter()
+      .append("svg:clipPath")
+      .attr("id", `area-clip-${this.series.key()}`)
       .append("svg:path")
       .attr("d", this.startClipPath.bind(this))
       .merge(clip)
