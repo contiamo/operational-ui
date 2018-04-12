@@ -20,7 +20,6 @@ const seriesElements: SeriesElements = [
   ["bars", "drawing_clip"],
   ["flag", "xyrules_clip"],
   ["line", "drawing_clip"],
-  ["range", "drawing_clip"],
   ["symbol", "xyrules_clip"],
   ["text", "yrules_clip"]
 ]

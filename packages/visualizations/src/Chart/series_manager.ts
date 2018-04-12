@@ -1,5 +1,6 @@
 import {
   compact,
+  defaults,
   filter,
   find,
   flow,
@@ -66,8 +67,8 @@ class ChartSeriesManager implements SeriesManager {
   private prepareData(): void {
     const data: SeriesData = flow(
       this.computeBarIndices.bind(this),
-      this.handleStacks.bind(this),
-      this.handleRanges.bind(this)
+      this.handleGroupedSeries("stacked", this.computeStack.bind(this)),
+      this.handleGroupedSeries("range", this.computeRange.bind(this))
     )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
 
     const currentKeys: string[] = map((datum: Object<any>): string => this.key(datum))(data)
@@ -111,36 +112,38 @@ class ChartSeriesManager implements SeriesManager {
     return data
   }
 
-  private handleStacks(data: SeriesData): SeriesData {
-    const stacks: Object<any>[] = filter((options: Object<any>): boolean => {
-      const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(this.renderAs(options))
-      const isStacked: boolean = includes("stacked")(rendererTypes)
-      if (isStacked && rendererTypes.length > 1) {
-        throw new Error("Stacked renderers cannot be combined with non-stacked renderers")
+  private handleGroupedSeries(type: "stacked" | "range", compute: any) {
+    return (data: SeriesData): SeriesData => {
+      const groups: Object<any>[] = filter((options: Object<any>): boolean => {
+        const rendererTypes = map(get("type"))(this.renderAs(options))
+        const isGrouped: boolean = includes(type)(rendererTypes)
+        if (isGrouped && rendererTypes.length > 1) {
+          throw new Error(`Renderer of type ${type} cannot be combined with other renderers`)
+        }
+        return isGrouped
+      })(data)
+
+      if (groups.length === 0) {
+        return data
       }
-      return isStacked
-    })(data)
 
-    if (stacks.length === 0) {
-      return
+      forEach.convert({ cap: false })(compute)(groups)
+
+      let ungroupedSeries: Object<any>[] = filter((options: Object<any>): boolean => {
+        const rendererTypes = map(get("type"))(this.renderAs(options))
+        return !includes(type)(rendererTypes)
+      })(data)
+
+      forEach((group: Object<any>): void => {
+        forEach((series: Object<any>): void => {
+          // @TODO add missing datapoints to stacked series
+          series.renderAs = this.renderAs(this.renderAs(group)[0])
+          ungroupedSeries = ungroupedSeries.concat(series)
+        })(group.data)
+      })(groups)
+
+      return ungroupedSeries
     }
-
-    forEach.convert({ cap: false })(this.computeStack.bind(this))(stacks)
-
-    let unstackedSeries: Object<any>[] = filter((options: Object<any>): boolean => {
-      const rendererTypes: (RendererType | "stacked")[] = map(get("type"))(this.renderAs(options))
-      return !includes("stacked")(rendererTypes)
-    })(data)
-
-    forEach((stack: Object<any>): void => {
-      forEach((series: Object<any>): void => {
-        // @TODO add missing datapoints to stacked series
-        series.renderAs = this.renderAs(this.renderAs(stack)[0])
-        unstackedSeries = unstackedSeries.concat(series)
-      })(stack.data)
-    })(stacks)
-
-    return unstackedSeries
   }
 
   private computeStack(stack: Object<any>, index: number): void {
@@ -194,8 +197,19 @@ class ChartSeriesManager implements SeriesManager {
     })(stackedData)
   }
 
-  private handleRanges(data: SeriesData): SeriesData {
-    return data
+  private computeRange(range: Object<any>, index: number): void {
+    const rangeSeries: Object<any>[] = range.data as Object<any>[]
+    if (rangeSeries.length !== 2) {
+      throw new Error("Range renderer must have exactly 2 series.")
+    }
+
+    forEach.convert({ cap: false })((series: Object<any>, i: number) => {
+      series.clipData = rangeSeries[1 - i].data
+      series.clipAxes = {
+        x: this.state.current.get("accessors").series.xAxis(rangeSeries[1 - i]),
+        y: this.state.current.get("accessors").series.yAxis(rangeSeries[1 - i])
+      }
+    })(rangeSeries)
   }
 
   private get(key: string): any {

@@ -187,14 +187,17 @@ class TimeAxis implements AxisClass<Date> {
 
   private computeRange(tickWidth: number, numberOfTicks: number): [number, number] {
     const config: ChartConfig = this.state.current.get("config")
-    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const computed: Computed = this.state.current.get("computed")
     const width: number = tickWidth * numberOfTicks
     const offset: number = tickWidth / 2
     const margin = (axis: AxisPosition): number =>
-      includes(axis)(computedAxes.requiredAxes) ? (computedAxes.margins || {})[axis] || config[axis].margin : 0
+      includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
     return this.position[0] === "x"
-      ? [offset, width - offset]
-      : [width - offset, offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)]
+      ? [offset, (width || computed.canvas.drawingDims.width) - offset]
+      : [
+          (computed.canvas.drawingDims.height || width) - offset,
+          offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)
+        ]
   }
 
   private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {

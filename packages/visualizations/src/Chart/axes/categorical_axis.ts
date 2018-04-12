@@ -146,15 +146,18 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private computeRange(tickWidth: number): [number, number] {
-    const computedAxes: Object<any> = this.state.current.get("computed").axes
     const config: ChartConfig = this.state.current.get("config")
+    const computed: Computed = this.state.current.get("computed")
     const width: number = tickWidth * this.data.length
     const offset: number = tickWidth / 2
     const margin = (axis: AxisPosition): number =>
-      includes(axis)(computedAxes.requiredAxes) ? (computedAxes.margins || {})[axis] || config[axis].margin : 0
+      includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
     return this.position[0] === "x"
-      ? [offset, width + offset]
-      : [width + offset, (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick) + offset]
+      ? [offset, (width || computed.canvas.drawingDims.width) - offset]
+      : [
+          (computed.canvas.drawingDims.height || width) - offset,
+          offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)
+        ]
   }
 
   // Drawing

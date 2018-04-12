@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isNil, map, sortBy } from "lodash/fp"
+import { compact, defaults, difference, find, forEach, get, isNil, map, merge, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   area as d3Area,
@@ -21,6 +21,7 @@ import {
   EventBus,
   Partial,
   RendererAccessor,
+  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -40,15 +41,14 @@ const interpolator = {
   stepBefore: curveStepBefore
 }
 
-const defaultAccessors: AreaRendererAccessors = {
-  x: (series: Series, d: Datum) => d.x,
-  y: (series: Series, d: Datum) => d.y,
+const defaultAccessors: Partial<AreaRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   interpolate: (series: Series, d: Datum) => "linear",
   closeGaps: (series: Series, d: Datum) => true
 }
 
 class Area implements RendererClass<AreaRendererAccessors> {
+  clip: D3Selection
   closeGaps: RendererAccessor<boolean>
   color: RendererAccessor<string>
   data: Datum[]
@@ -74,6 +74,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.events = events
     this.series = series
     this.el = this.appendSeriesGroup(el)
+    this.clip = this.appendClipPath()
     this.update(data, options)
   }
 
@@ -87,21 +88,23 @@ class Area implements RendererClass<AreaRendererAccessors> {
   draw(): void {
     this.setAxisScales()
     this.addMissingData()
+    this.updateClipPath()
 
-    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
     const duration: number = this.state.current.get("config").duration
-
-    const area = this.el.selectAll("path").data([data])
+    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
+    const area = this.el.selectAll("path.main").data([data])
 
     area
       .enter()
       .append("svg:path")
+      .attr("class", "main")
       .attr("d", this.startPath.bind(this))
       .merge(area)
       .attr("fill", this.color.bind(this))
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))
+      .attr("clip-path", `url(#area-clip-${this.series.key()})`)
 
     area
       .exit()
@@ -127,6 +130,32 @@ class Area implements RendererClass<AreaRendererAccessors> {
     return el.append("g").attr("class", `series:${this.series.key()} ${styles.area}`)
   }
 
+  private appendClipPath(): D3Selection {
+    return this.el.append("svg:clipPath").attr("id", `area-clip-${this.series.key()}`)
+  }
+
+  private updateClipPath(): void {
+    const duration: number = this.state.current.get("config").duration
+    const data: Datum[] = this.series.options.clipData ? [this.series.options.clipData] : []
+    const clip: D3Selection = this.clip.selectAll("path").data(data)
+
+    clip
+      .enter()
+      .append("svg:path")
+      .attr("d", this.startClipPath.bind(this))
+      .merge(clip)
+      .transition()
+      .duration(duration)
+      .attr("d", this.clipPath.bind(this))
+
+    clip
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("d", this.startClipPath.bind(this))
+      .remove()
+  }
+
   private setAxisScales(): void {
     const axisData: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const axisTypes: AxisType[] = map((axis: AxisPosition): AxisType => axisData[axis].type)([
@@ -146,7 +175,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<AreaRendererAccessors>): void {
-    const accessors: AreaRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
+    const accessors: AreaRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
     this.color = (d?: Datum): string => accessors.color(this.series, d)
@@ -186,6 +216,22 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .y1(this.y1)
       .curve(this.interpolate())
       .defined(isDefined)(data)
+  }
+
+  private startClipPath(data: Datum[]): string {
+    return (d3Area() as any)
+      .x((d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : 0))
+      .y((d: Datum): any => this.yScale(this.quantIsY ? 0 : this.y(d)))
+      .curve(this.interpolate())(data)
+  }
+
+  private clipPath(data: Datum[]): string {
+    return (d3Area() as any)
+      .x0(this.x0)
+      .x1(this.x1)
+      .y0((d: Datum) => (this.quantIsY ? 0 : this.y0(d)))
+      .y1(this.y1)
+      .curve(this.interpolate())(data)
   }
 }
 

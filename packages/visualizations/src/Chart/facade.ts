@@ -151,6 +151,10 @@ class ChartFacade implements Facade {
         axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
         xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
         yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1"
+      },
+      renderer: {
+        x: (series: any, d: Datum) => d.x,
+        y: (series: any, d: Datum) => d.y
       }
     }
   }

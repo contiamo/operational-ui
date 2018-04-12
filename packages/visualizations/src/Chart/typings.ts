@@ -77,7 +77,7 @@ export interface ChartConfig extends Config {
 }
 
 // Renderers
-export type RendererType = "area" | "bars" | "flag" | "line" | "range" | "symbol" | "text"
+export type RendererType = "area" | "bars" | "flag" | "line" | "symbol" | "text"
 
 // @TODO SingleSeries / ChartSeries
 export type RendererAccessor<T> = (series?: any, d?: Datum) => T
@@ -260,6 +260,7 @@ export interface DataAccessors {
 export interface AccessorsObject {
   data: DataAccessors
   series: SeriesAccessors
+  renderer: RendererAxesAccessors
 }
 
 // State

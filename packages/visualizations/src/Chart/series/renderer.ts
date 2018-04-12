@@ -4,7 +4,6 @@ import Area from "./renderers/area"
 import Bars from "./renderers/bars"
 import Flag from "./renderers/flag"
 import Line from "./renderers/line"
-import Range from "./renderers/range"
 import Symbol from "./renderers/symbol"
 import Text from "./renderers/text"
 
@@ -26,8 +25,6 @@ class Renderer {
         return new Flag(state, events, el.select("g.series-flag"), data, options, series)
       case "line":
         return new Line(state, events, el.select("g.series-line"), data, options, series)
-      case "range":
-        return new Range(state, events, el.select("g.series-range"), data, options)
       case "symbol":
         return new Symbol(state, events, el.select("g.series-symbol"), data, options, series)
       case "text":

@@ -44,7 +44,6 @@ class AxesManager {
     this.stateWriter("computed", {})
     this.axesDrawn = []
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
-    const data = this.state.current.get("computed").series.dataForAxes
     // Remove axes that are no longer needed, or whose type has changed
     const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition): boolean => {
       return !axesOptions[key] || axesOptions[key].type !== axis.type
