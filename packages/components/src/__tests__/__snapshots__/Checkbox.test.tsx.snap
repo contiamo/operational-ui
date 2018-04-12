@@ -8,26 +8,26 @@ exports[`Checkbox Should render 1`] = `
     class="css-1268me8"
   >
     <label
-      class="css-fh9twa"
+      class="css-jmphag"
     >
       <input
         checked=""
         type="checkbox"
       />
       <span
-        class="css-ip0kwy"
+        class="css-4r2799"
       >
         1
       </span>
     </label>
     <label
-      class="css-fh9twa"
+      class="css-jmphag"
     >
       <input
         type="checkbox"
       />
       <span
-        class="css-ip0kwy"
+        class="css-4r2799"
       >
         2
       </span>

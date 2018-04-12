@@ -44,7 +44,7 @@ const Button = glamorous.div(
   ({ on, theme }: IStyleProps) => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
     backgroundColor: theme.colors.white,
-    border: `1px solid ${on ? theme.colors.info : theme.colors.gray80}`,
+    border: `1px solid ${on ? theme.colors.info : theme.colors.gray}`,
     zIndex: theme.baseZIndex + 2
   })
 )
@@ -61,7 +61,7 @@ const Rail = glamorous.div(
     overflow: "hidden"
   },
   ({ on, theme }: IStyleProps) => ({
-    backgroundColor: theme.colors.gray80,
+    backgroundColor: theme.colors.gray,
     zIndex: theme.baseZIndex,
     "&:after": {
       content: " ",

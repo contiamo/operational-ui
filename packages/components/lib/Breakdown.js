@@ -68,9 +68,9 @@ var Bar = glamorous_1.default.div({
     var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.info;
     return {
         padding: theme.spacing / 4 + "px " + theme.spacing / 2 + "px",
-        backgroundColor: theme.colors.gray10,
+        backgroundColor: theme.colors.lightGray,
         "> span": {
-            color: theme.colors.gray70,
+            color: theme.colors.gray,
             fontSize: 12,
             position: "relative",
             top: 1,
@@ -90,7 +90,7 @@ var Number = glamorous_1.default.div({
     justifyContent: "center"
 }, function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.heading1, { flex: "0 0 " + theme.spacing * 2.5 + "px", color: theme.colors.gray20 }));
+    return (__assign({}, theme.typography.heading1, { flex: "0 0 " + theme.spacing * 2.5 + "px", color: theme.colors.lightGray }));
 });
 var Breakdown = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, onClick: props.onClick, onMouseEnter: props.onMouseEnter, onMouseLeave: props.onMouseLeave },
     React.createElement(Number, null, props.number),

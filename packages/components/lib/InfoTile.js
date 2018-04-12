@@ -14,16 +14,15 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "infotile",
-        borderRadius: 2,
+        borderRadius: theme.borderRadius,
         minWidth: 100,
         position: "relative",
         display: "inline-flex",
         flexDirection: "column",
         width: "fit-content",
         marginRight: theme.spacing,
-        padding: theme.spacing / 3 + "px " + theme.spacing + "px",
-        backgroundColor: theme.colors.gray10,
-        border: "1px solid " + theme.colors.gray20
+        padding: theme.spacing / 2 + "px " + theme.spacing + "px",
+        backgroundColor: theme.colors.lighterBackground,
     });
 });
 var Content = glamorous_1.default.div(function (_a) {

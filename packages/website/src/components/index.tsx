@@ -6,7 +6,7 @@ import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/comp
 
 export const DocsLink = glamorous.a(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
-  color: theme.colors.gray60
+  color: theme.colors.gray
 }))
 
 export const Section = (props: { title: string; docsUrl: string; children: React.ReactNode }) => (

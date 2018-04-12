@@ -13,8 +13,13 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         overflow: "hidden",
         scrollBehavior: "smooth",
-        backgroundColor: theme.colors.cardBackground,
-        color: theme.colors.gray80
+        color: theme.colors.text,
+        "& a:link, & a:visited": {
+            width: "100%",
+            display: "block",
+            textDecoration: "none",
+            color: "inherit"
+        }
     });
 });
 var Sidebar = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className }, props.children)); };

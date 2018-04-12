@@ -59,14 +59,15 @@ export const Toggle: GlamorousComponent<
   alignItems: "center",
   justifyContent: "center",
   zIndex: theme.baseZIndex + 1000,
-  color: theme.colors.gray80,
-  borderLeft: `1px solid rgb(208, 217, 229)`,
+  color: theme.colors.inputBorder,
+  borderLeft: "1px solid",
+  borderColor: theme.colors.inputBorder,
   "& svg": {
     position: "relative",
     pointerEvents: "none"
   },
   ":hover": {
-    backgroundColor: theme.colors.gray10
+    backgroundColor: theme.colors.lighterBackground
   }
 }))
 
@@ -119,7 +120,7 @@ export const Day: GlamorousComponent<
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
     ...theme.typography.body,
     backgroundColor: selected ? theme.colors.info : "transparent",
-    color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray40 : theme.colors.black
+    color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black
   })
 )
 

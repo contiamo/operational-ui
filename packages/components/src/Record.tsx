@@ -18,7 +18,9 @@ export interface State {
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "record",
   position: "relative",
-  border: `1px solid ${theme.colors.gray20}`
+  border: "1px solid",
+  borderColor: theme.colors.gray,
+  borderRadius: theme.borderRadius
 }))
 
 const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -26,7 +28,7 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   alignItems: "center",
   justifyContent: "space-between",
   padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-  height: 48
+  height: theme.spacing * 3
 }))
 
 class Record extends React.Component<Props, State> {

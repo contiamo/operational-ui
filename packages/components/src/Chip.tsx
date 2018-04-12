@@ -19,14 +19,14 @@ export interface Props {
 
 const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): {} => {
   const backgroundColor = expandColor(theme, color) || theme.colors.info
-  const border = isWhite(backgroundColor) ? `1px solid ${theme.colors.gray20}` : "0"
+  const border = isWhite(backgroundColor) ? `1px solid ${theme.colors.lightGray}` : "0"
 
   return {
     backgroundColor,
     border,
     label: "chip",
     position: "relative",
-    height: 20,
+    height: theme.spacing * 1.5,
     display: "inline-flex",
     alignItems: "center",
     boxSizing: "border-box",
@@ -51,11 +51,11 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
   const backgroundColor = expandColor(theme, color) || theme.colors.info
-  const borderColor = isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)"
+  const borderColor = isWhite(backgroundColor) ? theme.colors.lightGray : "rgba(255, 255, 255, 0.15)"
   return {
     borderLeft: `1px solid ${borderColor}`,
     color: readableTextColor(backgroundColor, ["black", "white"]),
-    width: theme.spacing * 1.75,
+    width: theme.spacing * 1.5,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

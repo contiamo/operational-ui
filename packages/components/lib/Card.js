@@ -9,7 +9,7 @@ var Container = glamorous_1.default.div(function (_a) {
         padding: theme.spacing,
         borderRadius: 4,
         boxShadow: theme.shadows.card,
-        backgroundColor: theme.colors.cardBackground,
+        backgroundColor: theme.colors.white,
         "& > img": {
             maxWidth: "100%"
         }

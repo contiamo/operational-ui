@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 
 import Progress from "./Progress"
 import { Props as SidenavProps } from "./Sidenav"
-import { headerHeight, sidenavWidth, sidenavExpandedWidth } from "./constants"
+import { sidenavExpandedWidth } from "./constants"
 
 export interface Props {
   css?: {}
@@ -18,8 +18,8 @@ const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; i
   position: "relative",
   height: "100%",
   display: "grid",
-  gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : sidenavWidth}px auto`,
-  gridTemplateRows: `${headerHeight}px auto`,
+  gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : theme.unit}px auto`,
+  gridTemplateRows: `${theme.unit}px auto`,
   // Side navigation (1st child is always the spinner or a placeholder)
   "& > *:nth-child(2)": {
     gridColumnStart: "1",

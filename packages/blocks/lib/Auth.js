@@ -17,7 +17,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "auth",
-        backgroundColor: theme.colors.sidenavBackground,
+        backgroundColor: theme.colors.navBackground,
         width: "100%",
         height: "100%",
         padding: theme.spacing,

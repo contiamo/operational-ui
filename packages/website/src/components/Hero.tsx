@@ -27,7 +27,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     content: "' '",
     right: 0,
     bottom: 0,
-    backgroundColor: theme.colors.sidenavBackground
+    backgroundColor: theme.colors.navBackground
   }
 }))
 

@@ -3,8 +3,6 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
-import { sidenavWidth } from "./constants"
-
 export interface Props {
   id?: string
   className?: string
@@ -24,7 +22,6 @@ const Container = glamorous.div(
     width: "100%",
     display: "flex",
     alignItems: "center",
-    padding: `0 16px 0 ${sidenavWidth}px`,
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
     backgroundColor: "rgba(0, 0, 0, 0.2)",
@@ -35,6 +32,7 @@ const Container = glamorous.div(
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
+    padding: `0 ${theme.spacing}px 0 ${theme.unit}px`,
     color: isActive ? theme.colors.linkText : "inherit",
     "& > div:first-child::after": {
       // Connector strip circle color
@@ -46,7 +44,7 @@ const Container = glamorous.div(
 const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: 1,
   height: size,
-  backgroundColor: lighten(theme.colors.sidenavBackground, 10),
+  backgroundColor: lighten(theme.colors.navBackground, 10),
   position: "absolute",
   top: 0,
   left: 24,
@@ -54,7 +52,7 @@ const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     content: "' '",
     width: 7,
     height: 7,
-    backgroundColor: lighten(theme.colors.sidenavBackground, 10),
+    backgroundColor: lighten(theme.colors.navBackground, 10),
     position: "absolute",
     borderRadius: "50%",
     left: -3,

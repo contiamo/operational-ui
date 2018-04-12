@@ -24,8 +24,8 @@ var utils_1 = require("@operational/utils");
 var constants_1 = require("./constants");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, fix = _a.fix, expanded = _a.expanded, expandOnHover = _a.expandOnHover;
-    var backgroundColor = theme.colors.sidenavBackground;
-    var color = utils_1.readableTextColor(backgroundColor, [theme.colors.bodyText, theme.colors.white]);
+    var backgroundColor = theme.colors.navBackground;
+    var color = utils_1.readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white]);
     var expandOnHoverStyles = expandOnHover
         ? {
             transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
@@ -38,7 +38,7 @@ var Container = glamorous_1.default.div(function (_a) {
         }
         : {};
     return __assign({ backgroundColor: backgroundColor,
-        color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : constants_1.sidenavWidth, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
+        color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : theme.unit, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
             outline: 0
         } });
 });

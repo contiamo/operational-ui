@@ -22,7 +22,7 @@ export interface State {}
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "auth",
-  backgroundColor: theme.colors.sidenavBackground,
+  backgroundColor: theme.colors.navBackground,
   width: "100%",
   height: "100%",
   padding: theme.spacing,

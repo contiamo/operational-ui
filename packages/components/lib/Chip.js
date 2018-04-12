@@ -9,13 +9,13 @@ var color_1 = require("./utils/color");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, hasChip = _a.hasChip;
     var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.info;
-    var border = color_1.isWhite(backgroundColor) ? "1px solid " + theme.colors.gray20 : "0";
+    var border = color_1.isWhite(backgroundColor) ? "1px solid " + theme.colors.lightGray : "0";
     return {
         backgroundColor: backgroundColor,
         border: border,
         label: "chip",
         position: "relative",
-        height: 20,
+        height: theme.spacing * 1.5,
         display: "inline-flex",
         alignItems: "center",
         boxSizing: "border-box",
@@ -42,11 +42,11 @@ var Content = glamorous_1.default.div(function (_a) {
 var Action = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color;
     var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.info;
-    var borderColor = color_1.isWhite(backgroundColor) ? theme.colors.gray20 : "rgba(255, 255, 255, 0.15)";
+    var borderColor = color_1.isWhite(backgroundColor) ? theme.colors.lightGray : "rgba(255, 255, 255, 0.15)";
     return {
         borderLeft: "1px solid " + borderColor,
         color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
-        width: theme.spacing * 1.75,
+        width: theme.spacing * 1.5,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

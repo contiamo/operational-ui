@@ -18,8 +18,13 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "relative",
   overflow: "hidden",
   scrollBehavior: "smooth", // future-proof
-  backgroundColor: theme.colors.cardBackground,
-  color: theme.colors.gray80
+  color: theme.colors.text,
+  "& a:link, & a:visited": {
+    width: "100%",
+    display: "block",
+    textDecoration: "none",
+    color: "inherit"
+  }
 }))
 
 const Sidebar = (props: Props) => (

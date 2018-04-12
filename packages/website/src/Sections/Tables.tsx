@@ -7,7 +7,11 @@ export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/d
 
 export const Component = () => (
   <React.Fragment>
-    <Table rows={[["Paul", "The 12th", "Green"]]} columns={["Name", "Birthday", "Favorite color"]} />
+    <Table
+      onRowClick={console.log.bind(console)}
+      rows={[["Paul", "The 12th", "Green"], ["Patrick", "The 11th", "Black"], ["Patrick", "The 11th", "Black"]]}
+      columns={["Name", "Birthday", "Favorite color"]}
+    />
     <Table rows={[]} columns={["Name", "Birthday", "Favorite color"]} />
   </React.Fragment>
 )

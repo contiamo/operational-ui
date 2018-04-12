@@ -36,7 +36,7 @@ var breakdownBackgroundBarStyle = {
     width: "100%",
     fontSize: 12,
     overflow: "hidden",
-    backgroundColor: theme_1.operational.colors.gray10
+    backgroundColor: theme_1.operational.colors.lightGray
 };
 var breakdownBarStyle = {
     content: "",
@@ -49,7 +49,7 @@ var breakdownBarStyle = {
     pointerEvents: "none",
     backgroundColor: utils_1.setBrightness(theme_1.operational.colors.info, 145)
 };
-var breakdownTextStyle = __assign({}, theme_1.operational.typography.small, { color: theme_1.operational.colors.gray70, position: "relative", top: 1, fontWeight: 400, padding: theme_1.operational.spacing / 4 + "px " + theme_1.operational.spacing / 2 + "px" });
+var breakdownTextStyle = __assign({}, theme_1.operational.typography.small, { color: theme_1.operational.colors.gray, position: "relative", top: 1, fontWeight: 400, padding: theme_1.operational.spacing / 4 + "px " + theme_1.operational.spacing / 2 + "px" });
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",

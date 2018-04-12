@@ -2,120 +2,114 @@
 
 exports[`Paginator Component Should initialize properly 1`] = `
 <div
-  class="css-1ofo1cw"
+  class="css-1ef2t77"
 >
   <div
-    class="css-1f5s5d co_bgrp"
+    class="css-crrhmu"
   >
-    <button
-      class="css-1exlown"
-      disabled=""
+    <svg
+      fill="none"
+      height="11"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewbox="0 0 24 24"
+      width="11"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <svg
-        fill="none"
-        height="11"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewbox="0 0 24 24"
-        width="11"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polyline
-          points="11 17 6 12 11 7"
-        />
-        <polyline
-          points="18 17 13 12 18 7"
-        />
-      </svg>
-    </button>
-    <button
-      class="css-1exlown"
-      disabled=""
+      <polyline
+        points="11 17 6 12 11 7"
+      />
+      <polyline
+        points="18 17 13 12 18 7"
+      />
+    </svg>
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    <svg
+      fill="none"
+      height="11"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewbox="0 0 24 24"
+      width="11"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <svg
-        fill="none"
-        height="11"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewbox="0 0 24 24"
-        width="11"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polyline
-          points="15 18 9 12 15 6"
-        />
-      </svg>
-    </button>
-    <button
-      class="css-42euqo"
+      <polyline
+        points="15 18 9 12 15 6"
+      />
+    </svg>
+  </div>
+  <div
+    class="css-ds4d4z"
+  >
+    1
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    2
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    3
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    ...
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    10
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    <svg
+      fill="none"
+      height="11"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewbox="0 0 24 24"
+      width="11"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      1
-    </button>
-    <button
-      class="css-1czjbtl"
+      <polyline
+        points="9 18 15 12 9 6"
+      />
+    </svg>
+  </div>
+  <div
+    class="css-crrhmu"
+  >
+    <svg
+      fill="none"
+      height="11"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewbox="0 0 24 24"
+      width="11"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      2
-    </button>
-    <button
-      class="css-1czjbtl"
-    >
-      3
-    </button>
-    <button
-      class="css-1czjbtl"
-    >
-      ...
-    </button>
-    <button
-      class="css-1czjbtl"
-    >
-      10
-    </button>
-    <button
-      class="css-1pl9xga"
-    >
-      <svg
-        fill="none"
-        height="11"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewbox="0 0 24 24"
-        width="11"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polyline
-          points="9 18 15 12 9 6"
-        />
-      </svg>
-    </button>
-    <button
-      class="css-1pl9xga"
-    >
-      <svg
-        fill="none"
-        height="11"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewbox="0 0 24 24"
-        width="11"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polyline
-          points="13 17 18 12 13 7"
-        />
-        <polyline
-          points="6 17 11 12 6 7"
-        />
-      </svg>
-    </button>
+      <polyline
+        points="13 17 18 12 13 7"
+      />
+      <polyline
+        points="6 17 11 12 6 7"
+      />
+    </svg>
   </div>
 </div>
 `;

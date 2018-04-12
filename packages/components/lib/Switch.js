@@ -29,7 +29,7 @@ var Button = glamorous_1.default.div({
     return ({
         transform: "translate3d(" + (on ? width - height : 0) + "px, 0, 0)",
         backgroundColor: theme.colors.white,
-        border: "1px solid " + (on ? theme.colors.info : theme.colors.gray80),
+        border: "1px solid " + (on ? theme.colors.info : theme.colors.gray),
         zIndex: theme.baseZIndex + 2
     });
 });
@@ -45,7 +45,7 @@ var Rail = glamorous_1.default.div({
 }, function (_a) {
     var on = _a.on, theme = _a.theme;
     return ({
-        backgroundColor: theme.colors.gray80,
+        backgroundColor: theme.colors.gray,
         zIndex: theme.baseZIndex,
         "&:after": {
             content: " ",

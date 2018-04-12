@@ -86,9 +86,9 @@ const Bar = glamorous.div(
     const backgroundColor: string = expandColor(theme, color) || theme.colors.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
-      backgroundColor: theme.colors.gray10,
+      backgroundColor: theme.colors.lightGray,
       "> span": {
-        color: theme.colors.gray70,
+        color: theme.colors.gray,
         fontSize: 12,
         position: "relative",
         top: 1,
@@ -113,7 +113,7 @@ const Number = glamorous.div(
   ({ theme }: { theme: Theme }): {} => ({
     ...theme.typography.heading1,
     flex: `0 0 ${theme.spacing * 2.5}px`,
-    color: theme.colors.gray20
+    color: theme.colors.lightGray
   })
 )
 

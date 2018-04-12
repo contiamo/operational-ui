@@ -3,20 +3,35 @@ import * as Icon from "react-feather"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import ButtonGroup from "./ButtonGroup"
-import Button from "./Button"
-
 export interface Props {
   id?: string
   css?: any
   className?: string
-  activeColor?: string
   disabled?: boolean
   onChange?: (page: number) => void
   maxVisible?: number
   page?: number
   pageCount: number
 }
+
+const Element = glamorous.div(
+  ({ theme, isActive, isDisabled }: { theme: Theme; isActive?: boolean; isDisabled?: boolean }): {} => ({
+    ...theme.typography.body,
+    padding: theme.spacing / 4,
+    borderRadius: 2,
+    height: theme.spacing * 1.5,
+    display: "inline-flex",
+    cursor: "pointer",
+    userSelect: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    lineHeight: 1,
+    color: isActive ? theme.colors.info : theme.colors.text,
+    ":hover": {
+      backgroundColor: theme.colors.background
+    }
+  })
+)
 
 interface ControlProps {
   children: any
@@ -66,13 +81,13 @@ const PaginatorControl = ({ children, onChange, pageCount, page, type }: Control
   }
 
   return (
-    <Button condensed onClick={handler} disabled={isDisabled}>
+    <Element onClick={handler} isDisabled={isDisabled}>
       {children}
-    </Button>
+    </Element>
   )
 }
 
-const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCount }: Props) => {
+const createPagesFragment = ({ maxVisible, onChange, page, pageCount }: Props) => {
   let skip
   if (page > maxVisible - 1 && page < pageCount) {
     skip = page - maxVisible + 1
@@ -94,45 +109,37 @@ const createPagesFragment = ({ activeColor, maxVisible, onChange, page, pageCoun
   const start = (isCloseToEnd ? pageCount - adjustedMaxVisible : skip + 1) || 1
   const end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip
 
-  const buttonCss: {} = { ":focus": { outline: "0", boxShadow: "none" } }
-
   const fragment = range(start, end).map((pageNumber, i) => (
-    <Button
-      css={buttonCss}
-      condensed
+    <Element
       key={pageNumber}
       onClick={() => {
         onChange && onChange(pageNumber)
       }}
-      color={pageNumber === page && activeColor}
+      isActive={pageNumber === page}
     >
       {pageNumber}
-    </Button>
+    </Element>
   ))
 
   const renderUpperSeparator = () =>
     remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
       ? [
-          <Button
-            css={buttonCss}
-            condensed
+          <Element
             key="upper"
             onClick={() => {
               onChange(page + maxVisible)
             }}
           >
             ...
-          </Button>,
-          <Button
-            css={buttonCss}
-            condensed
+          </Element>,
+          <Element
             key={pageCount}
             onClick={() => {
               onChange && onChange(pageCount)
             }}
           >
             {pageCount}
-          </Button>
+          </Element>
         ]
       : []
 
@@ -146,41 +153,26 @@ const Container = glamorous.div({
     alignItems: "center",
     justifyContent: "center",
     minWidth: 25
-  },
-  "& .co_bgrp": {
-    display: "flex",
-    userSelect: "none"
   }
 })
 
-const Paginator = ({
-  activeColor = "info",
-  maxVisible = 3,
-  onChange = () => {},
-  pageCount,
-  page = 1,
-  id,
-  css,
-  className
-}: Props) => {
+const Paginator = ({ maxVisible = 3, onChange = () => {}, pageCount, page = 1, id, css, className }: Props) => {
   const controlProps = { pageCount, page, onChange }
   return (
     <Container id={id} css={css} className={className}>
-      <ButtonGroup className="co_bgrp">
-        <PaginatorControl type="first" {...controlProps}>
-          <Icon.ChevronsLeft size="11" />
-        </PaginatorControl>
-        <PaginatorControl type="previous" {...controlProps}>
-          <Icon.ChevronLeft size="11" />
-        </PaginatorControl>
-        {createPagesFragment({ activeColor, pageCount, maxVisible, page, onChange })}
-        <PaginatorControl type="next" {...controlProps}>
-          <Icon.ChevronRight size="11" />
-        </PaginatorControl>
-        <PaginatorControl type="last" {...controlProps}>
-          <Icon.ChevronsRight size="11" />
-        </PaginatorControl>
-      </ButtonGroup>
+      <PaginatorControl type="first" {...controlProps}>
+        <Icon.ChevronsLeft size="11" />
+      </PaginatorControl>
+      <PaginatorControl type="previous" {...controlProps}>
+        <Icon.ChevronLeft size="11" />
+      </PaginatorControl>
+      {createPagesFragment({ pageCount, maxVisible, page, onChange })}
+      <PaginatorControl type="next" {...controlProps}>
+        <Icon.ChevronRight size="11" />
+      </PaginatorControl>
+      <PaginatorControl type="last" {...controlProps}>
+        <Icon.ChevronsRight size="11" />
+      </PaginatorControl>
     </Container>
   )
 }

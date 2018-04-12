@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
-var constants_1 = require("./constants");
 var size = 32;
 var Container = glamorous_1.default.div({
     label: "sidenavitem",
@@ -12,7 +11,6 @@ var Container = glamorous_1.default.div({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    padding: "0 16px 0 " + constants_1.sidenavWidth + "px",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
     backgroundColor: "rgba(0, 0, 0, 0.2)",
@@ -24,6 +22,7 @@ var Container = glamorous_1.default.div({
     return ({
         // Readable text color is calculated in the <Sidenav> component,
         // and cascades down to both sidenav headers and items.
+        padding: "0 " + theme.spacing + "px 0 " + theme.unit + "px",
         color: isActive ? theme.colors.linkText : "inherit",
         "& > div:first-child::after": {
             // Connector strip circle color
@@ -36,7 +35,7 @@ var ConnectorStrip = glamorous_1.default.div(function (_a) {
     return ({
         width: 1,
         height: size,
-        backgroundColor: utils_1.lighten(theme.colors.sidenavBackground, 10),
+        backgroundColor: utils_1.lighten(theme.colors.navBackground, 10),
         position: "absolute",
         top: 0,
         left: 24,
@@ -44,7 +43,7 @@ var ConnectorStrip = glamorous_1.default.div(function (_a) {
             content: "' '",
             width: 7,
             height: 7,
-            backgroundColor: utils_1.lighten(theme.colors.sidenavBackground, 10),
+            backgroundColor: utils_1.lighten(theme.colors.navBackground, 10),
             position: "absolute",
             borderRadius: "50%",
             left: -3,

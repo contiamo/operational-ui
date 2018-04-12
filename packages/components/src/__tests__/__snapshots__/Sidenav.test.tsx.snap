@@ -5,32 +5,24 @@ exports[`Sidenav component renders 1`] = `
   theme={
     Object {
       "baseZIndex": 0,
+      "borderRadius": 4,
       "colors": Object {
         "background": "#F5F6FA",
         "black": "#000000",
-        "bodyText": "#2F3435",
-        "border": "#dadada",
+        "border": "#ADADAD",
         "brand": "#000000",
-        "cardBackground": "#FFFFFF",
-        "cardHeaderBackground": "#F9FAFE",
-        "emphasizedText": "#373d3f",
         "error": "#DE1A1A",
-        "gray10": "#F8F8F8",
-        "gray20": "#e8e8e8",
-        "gray30": "#D0D0D0",
-        "gray40": "#C6C6C6",
-        "gray50": "#BBBBBB",
-        "gray60": "#999999",
-        "gray70": "#808080",
-        "gray80": "#747474",
-        "gray90": "#444444",
+        "gray": "#999999",
         "info": "#1499CE",
+        "inputBorder": "#D0D9E5",
+        "lightGray": "#e8e8e8",
         "lightText": "#969696",
+        "lighterBackground": "#F9FAFE",
         "linkText": "#1499CE",
-        "secondarySeparator": "#f8f8f8",
+        "navBackground": "#004A75",
         "separator": "#f2f2f2",
-        "sidenavBackground": "#004A75",
         "success": "#00b34d",
+        "text": "#2F3435",
         "visualizationPalette": Array [
           "#2ca02c",
           "#1f77b4",
@@ -63,7 +55,7 @@ exports[`Sidenav component renders 1`] = `
         "popup": "0 3px 12px rgba(0, 0, 0, .14)",
         "pressed": "inset 0 1px 1px rgba(0,0,0,0.15)",
       },
-      "spacing": 12,
+      "spacing": 16,
       "typography": Object {
         "body": Object {
           "fontSize": 13,
@@ -102,6 +94,7 @@ exports[`Sidenav component renders 1`] = `
           "textTransform": "none",
         },
       },
+      "unit": 64,
     }
   }
 >

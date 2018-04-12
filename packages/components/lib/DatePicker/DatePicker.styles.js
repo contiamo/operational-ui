@@ -52,14 +52,15 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         justifyContent: "center",
         zIndex: theme.baseZIndex + 1000,
-        color: theme.colors.gray80,
-        borderLeft: "1px solid rgb(208, 217, 229)",
+        color: theme.colors.inputBorder,
+        borderLeft: "1px solid",
+        borderColor: theme.colors.inputBorder,
         "& svg": {
             position: "relative",
             pointerEvents: "none"
         },
         ":hover": {
-            backgroundColor: theme.colors.gray10
+            backgroundColor: theme.colors.lighterBackground
         }
     });
 });
@@ -101,7 +102,7 @@ exports.Day = glamorous_1.default.div({
     border: "1px solid #efefef"
 }, function (_a) {
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
-    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.info : "transparent", color: selected ? "#FFF" : isPlaceholder ? theme.colors.gray40 : theme.colors.black }));
+    return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.info : "transparent", color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black }));
 });
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme;
