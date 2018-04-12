@@ -1,10 +1,11 @@
 import * as React from "react"
 import { render } from "react-dom"
 import glamorous from "glamorous"
-import { Card, Icon, Button, CardHeader, OperationalUI, Chip, Input } from "@operational/components"
-import { operational, Theme } from "@operational/theme"
+import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/components"
+import { Theme } from "@operational/theme"
 
-import { Grid, StaticContent, CornerAngle, Animation, Hero, Logo } from "./components"
+import { StaticContent, Animation, Hero, Logo, Footer, Section } from "./components"
+import sections from "./Sections"
 
 const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "showcasetitlebarcontent",
@@ -23,54 +24,15 @@ const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  maxWidth: 760,
+  margin: "auto",
+  padding: 2 * theme.spacing
+}))
+
 const TitleBarNav = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginTop: 20
 }))
-
-const BodyContent = glamorous.div({
-  padding: "32px 16px",
-  maxWidth: 760,
-  margin: "auto"
-})
-
-const customButtonStyles: {} = {
-  margin: "0 6px"
-}
-
-const customCardHeaderStyles: {} = {
-  color: operational.colors.black,
-  height: 48,
-  padding: "0 20px"
-}
-
-const sexyTheme: Theme = {
-  ...operational,
-  spacing: 12,
-  typography: {
-    ...operational.typography,
-    title: {
-      fontWeight: 400,
-      textTransform: "none",
-      letterSpacing: "normal",
-      lineHeight: "1.6",
-      fontSize: 36
-    },
-    heading1: {
-      fontWeight: 400,
-      textTransform: "none",
-      letterSpacing: "normal",
-      lineHeight: "1.6",
-      fontSize: 18
-    },
-    body: {
-      fontWeight: 400,
-      textTransform: "none",
-      letterSpacing: "normal",
-      lineHeight: "1.6",
-      fontSize: 18
-    }
-  }
-}
 
 export default class App extends React.Component<{}, {}> {
   state = {
@@ -95,76 +57,41 @@ export default class App extends React.Component<{}, {}> {
 
   render() {
     return (
-      <OperationalUI withBaseStyles theme={sexyTheme}>
-        <Grid>
-          <Card>
+      <OperationalUI withBaseStyles>
+        <Container>
+          <Card css={{ overflow: "hidden" }}>
             <Hero>
               <TitleBarContent>
                 <Logo size={86} rotation={this.state.rotation} />
                 <h1>Operational UI</h1>
                 <h2>Building blocks for effective operational interfaces</h2>
                 <TitleBarNav>
-                  <a href="https://contiamo.gitbooks.io/operational-ui/content/">
-                    <Button color="info" css={customButtonStyles}>
-                      Read the docs
-                    </Button>
+                  <a href="https://codesandbox.io/s/v84wv1zpq3">
+                    <Button color="info">Try</Button>
                   </a>
                   <a href="https://github.com/contiamo/operational-ui">
-                    <Button color="black" css={customButtonStyles}>
-                      GitHub
-                    </Button>
+                    <Button color="black">GitHub</Button>
                   </a>
                 </TitleBarNav>
               </TitleBarContent>
             </Hero>
             <StaticContent
-              css={{ marginTop: 32 }}
-              markdownContent={`\`Operational\` is a UI library made that caters to day-to-day operational decision-makig. It does its best when used for interfaces that assume familiarity through routine use, prioritizing compactness and [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352).
+              css={{ marginTop: 10, fontSize: 16 }}
+              markdownContent={`\`Operational\` is a UI library optimized for day-to-day operational decision-making. It does its best when used for interfaces that assume familiarity through routine use, prioritizing compactness and [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352).
               
 It is predictable to use, and it lets you and your team breathe. Exhales, not sighs.
               `}
             />
           </Card>
-          <Card>
-            <CardHeader css={customCardHeaderStyles}>Examples</CardHeader>
-            <StaticContent
-              css={{ marginTop: 20 }}
-              markdownContent={`
-Head to our CodeSandbox demos for [simple interface elements](https://codesandbox.io/embed/zq5nm42x84), a [full-featured UI]() and [ visualizations]().
-              `}
-            />
-            <OperationalUI theme={operational}>
-              <div style={{ backgroundColor: "#F5F6FA", padding: 12, borderRadius: 4 }}>
-                <div>
-                  <Input placeholder="How was I made?" />
-                  <Button css={{ marginLeft: 6 }} color="info">
-                    This is how!
-                  </Button>
-                </div>
-                <div style={{ marginTop: 6 }}>
-                  <Chip icon="X" onIconClick={() => {}}>
-                    Tags
-                  </Chip>
-                  <Chip icon="X" onIconClick={() => {}}>
-                    Are
-                  </Chip>
-                  <Chip icon="X" onIconClick={() => {}}>
-                    Nice
-                  </Chip>
-                </div>
-              </div>
-            </OperationalUI>
-          </Card>
-          <Card>
-            <CardHeader css={customCardHeaderStyles}>Version</CardHeader>
-            <a href="https://www.npmjs.com/package/@operational/components">
-              <Button css={customButtonStyles} color="info">
-                0.1.0-21
-              </Button>
-            </a>
-          </Card>
-          <CornerAngle />
-        </Grid>
+          <React.Fragment>
+            {sections.map(({ title, docsUrl, Component }) => (
+              <Section title={title} docsUrl={docsUrl}>
+                <Component />
+              </Section>
+            ))}
+          </React.Fragment>
+          <Footer />
+        </Container>
       </OperationalUI>
     )
   }

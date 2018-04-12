@@ -1,6 +1,0 @@
-export { default as Animation } from "./Animation"
-export { default as CornerAngle } from "./CornerAngle"
-export { default as Grid } from "./Grid"
-export { default as Hero } from "./Hero"
-export { default as Logo } from "./Logo"
-export { default as StaticContent } from "./StaticContent"

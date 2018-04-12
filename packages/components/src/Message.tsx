@@ -13,7 +13,7 @@ export interface Props {
 }
 
 const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const backgroundColor = expandColor(theme, color) || theme.colors.white
+  const backgroundColor = expandColor(theme, color) || theme.colors.info
   const textColor = readableTextColor(backgroundColor, [theme.colors.black, "white"])
 
   return {
@@ -21,10 +21,9 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
     overflow: "hidden",
     color: textColor,
     padding: `${theme.spacing * 1 / 2}px ${theme.spacing}px`,
-    borderRadius: 2,
+    borderRadius: 4,
     position: "relative",
-    maxWidth: 400,
-    border: `1px solid rgba(0, 0, 0, 0.2)`
+    maxWidth: 400
   }
 })
 
