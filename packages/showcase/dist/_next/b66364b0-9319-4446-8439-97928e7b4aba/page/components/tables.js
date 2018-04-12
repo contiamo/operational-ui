@@ -1,6 +1,0 @@
-
-          window.__NEXT_REGISTER_PAGE('/components/tables', function() {
-            var comp = module.exports=webpackJsonp([32],{1245:function(e,n,t){e.exports=t(1246)},1246:function(e,n,t){"use strict";function a(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var l=t(0),r=function(e){if(e&&e.__esModule)return e;var n={};if(null!=e)for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&(n[t]=e[t]);return n.default=e,n}(l),o=t(10),u=t(214),s=a(u),p=t(213),c=a(p),i=t(13),d=a(i),f=[{name:"columns",description:"Table column headings",defaultValue:"-",type:"(string[])[]",optional:!1},{name:"rows",description:"Table rows as an array of array of cells",defaultValue:"-",type:"(string[])[]",optional:!1}];n.default=function(e){return r.createElement(d.default,{pathname:e.url.pathname},r.createElement(o.Card,null,r.createElement("p",null,"Tables simply render a semantic HTML table structure based on raw data."),r.createElement(o.Heading2Type,null,"Usage"),r.createElement(c.default,{snippet:'\n<Table \n  columns={[ "Name", "Title"]}\n  rows={[\n    [ "Max", "Carpenter" ],\n    [ "Moritz", "Baker" ]\n  ]}\n/>\n',components:{Table:o.Table}}),r.createElement(o.Heading2Type,null,"Props"),r.createElement(s.default,{props:f})))}}},[1245]);
-            return { page: comp.default }
-          })
-        

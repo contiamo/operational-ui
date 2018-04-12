@@ -1,14 +1,13 @@
-<div align="center">
-  <img width="120" height="120" src="/packages/showcase/static/favicons/__original.png" alt="Operational UI Logo">
-  <h1>Operational UI</h1>
-  <p>Building blocks for effective operational interfaces</p>
-  <a href="https://travis-ci.org/Contiamo/operational-ui" target="_blank">
-    <img src="https://img.shields.io/travis/Contiamo/operational-ui.svg" alt="Travis CI status">
-  </a>
-  <a href="https://github.com/prettier/prettier" target="_blank">
-    <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="Prettier">
-  </a>
-</div>
+<a href="https://travis-ci.org/Contiamo/operational-ui" target="_blank">
+  <img src="https://img.shields.io/travis/Contiamo/operational-ui.svg" alt="Travis CI status">
+</a>
+<a href="https://github.com/prettier/prettier" target="_blank">
+  <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="Prettier">
+</a>
+
+# Operational UI
+
+Building blocks for effective operational interfaces
 
 `Operational UI` is a set of building blocks optimized for UI's supporting operational decision-making. It does best when used for data-driven interfaces that assume familiarity through routine use, prioritizing compactness and space-efficiency. It implements a [design language](https://ui.contiamo.com/docs/design-guidelines) centered around [small effective differences](https://twitter.com/edwardtufte/status/450076034759524352) and an opinionated layout.
 
@@ -68,37 +67,6 @@ To run the showcase, simply run `yarn start` from root.
 
 To make sure your code is ready for Travis and your reviewers, run `yarn ci:local` from the root of the project.
 
-<h2 align="center">Core Team</h2>
+## License
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top">
-        <img width="150" height="150" src="https://github.com/peterszerzo.png?s=150">
-        <br>
-        <a href="https://github.com/peterszerzo">Peter Szerzo</a>
-        <p>Codebase Handyperson 🔥</p>
-      </td>
-      <td align="center" width="20%" valign="top">
-        <img width="150" height="150" src="https://github.com/ImogenF.png?s=150">
-        <br>
-        <a href="https://github.com/ImogenF">Imogen Mason</a>
-        <p>Visualizations Lead</p>
-      </td>
-      <td align="center" valign="top">
-        <img width="150" height="150" src="https://github.com/TejasQ.png?s=150">
-        <br>
-        <a href="https://github.com/TejasQ">Tejas Kumar</a>
-        <p>Contributor + The Original Creator</p>
-      </td>
-      <td align="center" valign="top">
-        <img width="150" height="150" src="https://github.com/micha-f.png?s=150">
-        <br>
-        <a href="https://github.com/micha-f">Michael Franzkowiak</a>
-        <p>Contributor</p>
-      </td>
-     </tr>
-  </tbody>
-</table>
-
-Made with 🌵 at [Contiamo](https://contiamo.com).
+MIT
