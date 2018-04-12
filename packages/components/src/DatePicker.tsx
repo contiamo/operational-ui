@@ -16,7 +16,15 @@ import {
   Input,
   DatePickerCard
 } from "./DatePicker/DatePicker.styles"
-import { months, daysInMonth, range, toDate, monthStartDay, toYearMonthDay } from "./DatePicker/DatePicker.utils"
+import {
+  months,
+  daysInMonth,
+  range,
+  toDate,
+  monthStartDay,
+  toYearMonthDay,
+  validateDateString
+} from "./DatePicker/DatePicker.utils"
 import Month from "./DatePicker/DatePicker.Month"
 
 export interface Props {
@@ -39,18 +47,18 @@ export interface State {
 class DatePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    this.validate(props)
     // Start year month is either based on the start date
     // or the current month if no start date is specified.
-    const startYearMonthInWidget =
-      props.start && toYearMonthDay(props.start)
-        ? {
-            year: toYearMonthDay(props.start).year,
-            month: toYearMonthDay(props.start).month
-          }
-        : {
-            year: new Date().getFullYear(),
-            month: new Date().getMonth()
-          }
+    const startYearMonthInWidget = props.start
+      ? {
+          year: toYearMonthDay(props.start).year,
+          month: toYearMonthDay(props.start).month
+        }
+      : {
+          year: new Date().getFullYear(),
+          month: new Date().getMonth()
+        }
     this.state = {
       ...startYearMonthInWidget,
       isExpanded: false
@@ -61,6 +69,19 @@ class DatePicker extends React.Component<Props, State> {
   inputNode: any
   keypressHandler: (a: any) => void
   outsideClickHandler: (a: any) => void
+
+  // Throw runtime errors if start/end dates are of the wrong format.
+  // Optional props argument is used when the component doesn't have
+  // these dates on the instance (e.g. constructor).
+  validate(props?: Props) {
+    // Validate start date of
+    if ((props || this.props).start) {
+      validateDateString(props.start)
+    }
+    if ((props || this.props).end) {
+      validateDateString(props.end)
+    }
+  }
 
   changeMonth(diff: number) {
     this.setState(prevState => ({
@@ -96,6 +117,10 @@ class DatePicker extends React.Component<Props, State> {
     }
     document.addEventListener("click", this.outsideClickHandler)
     document.addEventListener("keydown", this.keypressHandler)
+  }
+
+  componentDidUpdate() {
+    this.validate()
   }
 
   componentWillUnmount() {
