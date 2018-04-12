@@ -24,8 +24,10 @@ declare class DatePicker extends React.Component<Props, State> {
     inputNode: any;
     keypressHandler: (a: any) => void;
     outsideClickHandler: (a: any) => void;
+    validate(props?: Props): void;
     changeMonth(diff: number): void;
     componentDidMount(): void;
+    componentDidUpdate(): void;
     componentWillUnmount(): void;
     render(): JSX.Element;
 }
