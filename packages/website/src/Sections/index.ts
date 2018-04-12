@@ -16,6 +16,8 @@ import * as modals from "./Modals"
 import * as sidebars from "./Sidebars"
 import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
+import * as records from "./Records"
+import * as infoTiles from "./InfoTiles"
 
 export default [
   breadcrumbs,
@@ -34,6 +36,8 @@ export default [
   modals,
   tables,
   tabs,
+  records,
+  infoTiles,
   timelines,
   tooltips
 ]
