@@ -1,6 +1,7 @@
 #!/bin/sh
 
 build() {
+  rm -rf dist
   cd packages/website
   yarn build
   cd ../..
@@ -10,7 +11,15 @@ build() {
 deploy() {
   git branch -D gh-pages
   git checkout --orphan gh-pages
-  rm -rf packages scripts docs 
+  rm -rf scripts docs 
+  mv dist/index.html .
+  mv dist/static .
+  mv dist/favicons .
+  rm -rf dist
+  git add .
+  git commit -m "Deploy" --no-verify
+  git push -f origin gh-pages
 }
 
 build
+deploy
