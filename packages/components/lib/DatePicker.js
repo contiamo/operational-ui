@@ -44,15 +44,16 @@ var DatePicker = /** @class */ (function (_super) {
         return _this;
     }
     // Throw runtime errors if start/end dates are of the wrong format.
-    // Optional props argument is used when the component doesn't have 
+    // Optional props argument is used when the component doesn't have
     // these dates on the instance (e.g. constructor).
     DatePicker.prototype.validate = function (props) {
-        // Validate start date of 
-        if ((props || this.props).start) {
-            DatePicker_utils_1.validateDateString(props.start);
+        var validatedProps = props || this.props;
+        // Validate start date of
+        if (validatedProps.start) {
+            DatePicker_utils_1.validateDateString(validatedProps.start);
         }
-        if ((props || this.props).end) {
-            DatePicker_utils_1.validateDateString(props.end);
+        if (validatedProps.end) {
+            DatePicker_utils_1.validateDateString(validatedProps.end);
         }
     };
     DatePicker.prototype.changeMonth = function (diff) {

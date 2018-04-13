@@ -74,12 +74,13 @@ class DatePicker extends React.Component<Props, State> {
   // Optional props argument is used when the component doesn't have
   // these dates on the instance (e.g. constructor).
   validate(props?: Props) {
+    const validatedProps = props || this.props
     // Validate start date of
-    if ((props || this.props).start) {
-      validateDateString(props.start)
+    if (validatedProps.start) {
+      validateDateString(validatedProps.start)
     }
-    if ((props || this.props).end) {
-      validateDateString(props.end)
+    if (validatedProps.end) {
+      validateDateString(validatedProps.end)
     }
   }
 
