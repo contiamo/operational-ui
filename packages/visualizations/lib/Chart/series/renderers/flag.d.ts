@@ -1,0 +1,37 @@
+import Series from "../series";
+import { AxisPosition, D3Selection, Datum, EventBus, FlagRendererAccessors, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
+export declare type Options = RendererOptions<FlagRendererAccessors>;
+declare class Flag implements RendererClass<FlagRendererAccessors> {
+    axis: AxisPosition;
+    color: RendererAccessor<string>;
+    data: Datum[];
+    description: RendererAccessor<string>;
+    direction: RendererAccessor<"up" | "down">;
+    el: D3Selection;
+    events: EventBus;
+    label: RendererAccessor<string>;
+    options: Options;
+    position: "x" | "y";
+    series: Series;
+    state: State;
+    type: RendererType;
+    x: RendererAccessor<number | Date | string>;
+    xScale: any;
+    y: RendererAccessor<number | Date | string>;
+    yScale: any;
+    constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series);
+    update(data: Datum[], options: Options): void;
+    draw(): void;
+    close(): void;
+    dataForAxis(axis: "x" | "y"): any[];
+    private appendSeriesGroup(el);
+    private setAxisScales();
+    private assignAccessors(customAccessors);
+    private getAttributes();
+    private positionLabel(attributes);
+    private flagPath(attributes);
+    private hoverFlagPath(attributes);
+    private onFlagHover(attributes);
+    private onFlagLeave(d, el);
+}
+export default Flag;

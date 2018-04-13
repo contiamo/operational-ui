@@ -1,0 +1,35 @@
+import Series from "../series";
+import { LineRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
+export declare type Options = RendererOptions<LineRendererAccessors>;
+declare class Line implements RendererClass<LineRendererAccessors> {
+    closeGaps: RendererAccessor<boolean>;
+    color: RendererAccessor<string>;
+    dashed: RendererAccessor<boolean>;
+    data: Datum[];
+    el: D3Selection;
+    events: EventBus;
+    interpolate: RendererAccessor<any>;
+    options: Options;
+    quantIsY: boolean;
+    series: Series;
+    state: State;
+    type: RendererType;
+    x: RendererAccessor<number | Date>;
+    adjustedX: RendererAccessor<number>;
+    xScale: any;
+    y: RendererAccessor<number | Date>;
+    adjustedY: RendererAccessor<number>;
+    yScale: any;
+    constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series);
+    update(data: Datum[], options: Options): void;
+    draw(): void;
+    close(): void;
+    dataForAxis(axis: "x" | "y"): any[];
+    private appendSeriesGroup(el);
+    private assignAccessors(customAccessors);
+    private setAxisScales();
+    private addMissingData();
+    private startPath(data);
+    private path(data);
+}
+export default Line;

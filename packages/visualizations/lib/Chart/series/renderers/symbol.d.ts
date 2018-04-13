@@ -1,0 +1,33 @@
+import Series from "../series";
+import { SymbolRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
+export declare type Options = RendererOptions<SymbolRendererAccessors>;
+declare class Symbol implements RendererClass<SymbolRendererAccessors> {
+    data: Datum[];
+    el: D3Selection;
+    events: EventBus;
+    fill: RendererAccessor<string>;
+    options: Options;
+    quantIsY: boolean;
+    series: Series;
+    size: RendererAccessor<number>;
+    state: any;
+    stroke: RendererAccessor<string>;
+    symbol: RendererAccessor<any>;
+    type: RendererType;
+    x: RendererAccessor<number | Date>;
+    xScale: any;
+    y: RendererAccessor<number | Date>;
+    yScale: any;
+    constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series);
+    update(data: Datum[], options: Options): void;
+    draw(): void;
+    close(): void;
+    dataForAxis(axis: "x" | "y"): any[];
+    private appendSeriesGroup(el);
+    private validate(d);
+    private assignAccessors(customAccessors);
+    private setAxisScales();
+    private transform(d);
+    private startTransform(d);
+}
+export default Symbol;

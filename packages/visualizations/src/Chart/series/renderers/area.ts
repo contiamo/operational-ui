@@ -29,7 +29,7 @@ import {
   State
 } from "../../typings"
 
-type Options = RendererOptions<AreaRendererAccessors>
+export type Options = RendererOptions<AreaRendererAccessors>
 
 const interpolator = {
   cardinal: curveCardinal,

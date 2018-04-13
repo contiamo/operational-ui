@@ -27,7 +27,7 @@ const defaultAccessors: FlagRendererAccessors = {
   label: (series: Series, d: Datum) => d.label || ""
 }
 
-type Options = RendererOptions<FlagRendererAccessors>
+export type Options = RendererOptions<FlagRendererAccessors>
 
 class Flag implements RendererClass<FlagRendererAccessors> {
   axis: AxisPosition

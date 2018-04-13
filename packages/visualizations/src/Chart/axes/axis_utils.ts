@@ -5,7 +5,6 @@ import {
   AxisPosition,
   ChartConfig,
   Computed,
-  D3Selection,
   Object,
   Partial,
   XAxisConfig,
@@ -30,8 +29,8 @@ export const axisPosition = (position: AxisPosition, drawingDims: Dimensions): [
   }
 }
 
-export const insertElements = (el: D3Selection, position: AxisPosition, drawingDims: Dimensions): D3Selection => {
-  const axisGroup: D3Selection = el
+export const insertElements = (el: any, position: AxisPosition, drawingDims: Dimensions): any => {
+  const axisGroup: any = el
     .append("svg:g")
     .attr("class", `axis quant-axis ${position}`)
     .attr("transform", `translate(${axisPosition(position, drawingDims).join(",")})`)
@@ -58,7 +57,7 @@ export const computeRange = (config: ChartConfig, computed: Computed, position: 
 }
 
 export const computeRequiredMargin = (
-  axis: D3Selection,
+  axis: any,
   computedMargins: Object<number>,
   config: XAxisConfig | YAxisConfig,
   position: AxisPosition
@@ -166,7 +165,7 @@ const containsZero = (step: number[]): [number, number] => {
   return step[0] <= 0 && step[1] >= 0 ? [Math.abs(step[0] / step[2]), step[1] / step[2]] : undefined
 }
 
-export const positionBackgroundRect = (el: D3Selection, duration: number): void => {
+export const positionBackgroundRect = (el: any, duration: number): void => {
   // Position background rect only once axis has finished transitioning.
   setTimeout((): void => {
     // Remove current background rect attributes so they do not affect the group dimension calculation.

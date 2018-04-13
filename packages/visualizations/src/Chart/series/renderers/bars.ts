@@ -17,7 +17,7 @@ import {
   State
 } from "../../typings"
 
-type Options = RendererOptions<BarsRendererAccessors>
+export type Options = RendererOptions<BarsRendererAccessors>
 
 const defaultAccessors: BarsRendererAccessors = {
   x: (series: Series, d: Datum) => d.x,

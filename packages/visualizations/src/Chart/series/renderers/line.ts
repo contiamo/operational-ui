@@ -28,7 +28,7 @@ import {
   State
 } from "../../typings"
 
-type Options = RendererOptions<LineRendererAccessors>
+export type Options = RendererOptions<LineRendererAccessors>
 
 const defaultAccessors: LineRendererAccessors = {
   x: (series: Series, d: Datum) => d.x,

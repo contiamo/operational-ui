@@ -43,7 +43,7 @@ const symbolOptions: Object<any> = {
   triangle: symbolTriangle
 }
 
-type Options = RendererOptions<SymbolRendererAccessors>
+export type Options = RendererOptions<SymbolRendererAccessors>
 
 class Symbol implements RendererClass<SymbolRendererAccessors> {
   data: Datum[]

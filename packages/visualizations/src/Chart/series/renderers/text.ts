@@ -15,7 +15,7 @@ import {
   State
 } from "../../typings"
 
-type Options = RendererOptions<TextRendererAccessors>
+export type Options = RendererOptions<TextRendererAccessors>
 
 const defaultAccessors: TextRendererAccessors = {
   x: (series: Series, d: Datum) => d.x,

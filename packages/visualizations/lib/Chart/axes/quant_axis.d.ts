@@ -1,0 +1,33 @@
+import { AxisClass, AxisComputed, AxisType, QuantAxisOptions, AxisPosition, D3Selection, EventBus, Partial, State, StateWriter } from "../typings";
+declare class QuantAxis implements AxisClass<number> {
+    computed: AxisComputed;
+    data: number[];
+    end: number;
+    el: D3Selection;
+    events: EventBus;
+    interval: number;
+    isXAxis: boolean;
+    position: AxisPosition;
+    previous: AxisComputed;
+    start: number;
+    state: State;
+    stateWriter: StateWriter;
+    type: AxisType;
+    unit: string;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition);
+    validate(value: any): boolean;
+    private updateOptions(options);
+    update(options: QuantAxisOptions, data: number[]): void;
+    compute(): void;
+    computeInitial(): Partial<AxisComputed>;
+    computeAligned(computed: Partial<AxisComputed>): void;
+    draw(): void;
+    private drawTicks();
+    private adjustMargins();
+    private tickFormatter();
+    private getAttributes();
+    private getStartAttributes(attributes);
+    private drawBorder();
+    remove(): void;
+}
+export default QuantAxis;
