@@ -52,7 +52,7 @@ var colors = {
     lightText: "#969696",
     linkText: "#1499CE",
     navBackground: "#004A75",
-    separator: "#f2f2f2",
+    separator: "#f2f2f2"
 };
 var baseTypography = {
     lineHeight: "1.5",
@@ -77,7 +77,7 @@ var operational = {
     shadows: shadows,
     colors: colors,
     spacing: 16,
-    unit: 64,
+    box: 56,
     borderRadius: 4,
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
     baseZIndex: 0

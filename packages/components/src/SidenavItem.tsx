@@ -32,7 +32,7 @@ const Container = glamorous.div(
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
-    padding: `0 ${theme.spacing}px 0 ${theme.unit}px`,
+    padding: `0 ${theme.spacing}px 0 ${theme.box}px`,
     color: isActive ? theme.colors.linkText : "inherit",
     "& > div:first-child::after": {
       // Connector strip circle color

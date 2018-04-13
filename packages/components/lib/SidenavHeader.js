@@ -23,8 +23,8 @@ var Content = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         width: "100%",
         overflow: "hidden",
-        height: theme.unit,
-        flex: "0 0 " + theme.unit + "px",
+        height: theme.box,
+        flex: "0 0 " + theme.box + "px",
         // Readable text color is calculated in the <Sidenav> component,
         // and cascades down to both sidenav headers and items.
         color: isActive ? theme.colors.linkText : "inherit",
@@ -42,12 +42,12 @@ var Label = glamorous_1.default.div(function (_a) {
 var IconContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        width: theme.unit,
-        height: theme.unit,
+        width: theme.box,
+        height: theme.box,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flex: "0 0 " + theme.unit + "px"
+        flex: "0 0 " + theme.box + "px"
     });
 });
 var SidenavHeader = function (props) { return (

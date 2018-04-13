@@ -20,7 +20,7 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         border: "1px solid",
         borderColor: theme.colors.gray,
-        borderRadius: theme.borderRadius,
+        borderRadius: theme.borderRadius
     });
 });
 var HeaderContainer = glamorous_1.default.div(function (_a) {

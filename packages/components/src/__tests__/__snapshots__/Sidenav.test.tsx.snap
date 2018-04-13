@@ -6,6 +6,7 @@ exports[`Sidenav component renders 1`] = `
     Object {
       "baseZIndex": 0,
       "borderRadius": 4,
+      "box": 56,
       "colors": Object {
         "background": "#F5F6FA",
         "black": "#000000",
@@ -94,7 +95,6 @@ exports[`Sidenav component renders 1`] = `
           "textTransform": "none",
         },
       },
-      "unit": 64,
     }
   }
 >

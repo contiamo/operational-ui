@@ -17,7 +17,7 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
   backgroundColor: theme.colors.white,
   minWidth: 160,
   width: "fit-content",
-  padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
+  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
   border: "1px solid",
   borderColor: theme.colors.separator,
   ...clickable

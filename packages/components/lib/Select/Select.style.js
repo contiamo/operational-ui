@@ -13,14 +13,15 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         display: "flex",
         alignItems: "center",
-        padding: theme.spacing * 2 / 3,
+        padding: theme.spacing / 2 + "px " + (theme.spacing * 2 / 3 + 40) + "px " + theme.spacing / 2 + "px " + theme.spacing *
+            2 /
+            3 + "px ",
         borderRadius: 4,
-        paddingRight: theme.spacing / 2 + 40,
         width: "fit-content",
         minWidth: 240,
         minHeight: 20,
         border: "1px solid",
-        borderColor: theme.colors.border,
+        borderColor: theme.colors.inputBorder,
         opacity: disabled ? 0.5 : 1,
         cursor: "pointer",
         color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),

@@ -14,7 +14,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "sidebarheader",
-        position: "relative",
+        position: "relative"
     });
 });
 var Content = glamorous_1.default.div(function (_a) {

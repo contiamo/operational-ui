@@ -75,7 +75,7 @@ export interface Theme {
   typography: ThemeTypography
   fontFamily: string
   spacing: number
-  unit: number
+  box: number
   borderRadius: number
   baseZIndex: number
   shadows: ThemeShadows
@@ -173,7 +173,7 @@ const operational: Theme = {
   shadows,
   colors,
   spacing: 16,
-  unit: 64,
+  box: 56,
   borderRadius: 4,
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",

@@ -33,6 +33,7 @@ const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isEx
   left: -theme.spacing,
   boxShadow: theme.shadows.popup,
   width: "fit-content",
+  zIndex: theme.baseZIndex + 300,
   ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }
 }))
 

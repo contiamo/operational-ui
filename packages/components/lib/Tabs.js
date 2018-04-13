@@ -71,7 +71,7 @@ var TabTitle = glamorous_1.default.li({
         }
         : {}, disabled
         ? {
-            color: theme.colors.lightGray,
+            color: theme.colors.lightGray
         }
         : {
             "&:hover": {

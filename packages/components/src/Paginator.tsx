@@ -14,7 +14,7 @@ export interface Props {
   pageCount: number
 }
 
-const Element = glamorous.div(
+const PaginatorSpan = glamorous.div(
   ({ theme, isActive, isDisabled }: { theme: Theme; isActive?: boolean; isDisabled?: boolean }): {} => ({
     ...theme.typography.body,
     padding: theme.spacing / 4,
@@ -81,9 +81,9 @@ const PaginatorControl = ({ children, onChange, pageCount, page, type }: Control
   }
 
   return (
-    <Element onClick={handler} isDisabled={isDisabled}>
+    <PaginatorSpan onClick={handler} isDisabled={isDisabled}>
       {children}
-    </Element>
+    </PaginatorSpan>
   )
 }
 
@@ -110,7 +110,7 @@ const createPagesFragment = ({ maxVisible, onChange, page, pageCount }: Props) =
   const end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip
 
   const fragment = range(start, end).map((pageNumber, i) => (
-    <Element
+    <PaginatorSpan
       key={pageNumber}
       onClick={() => {
         onChange && onChange(pageNumber)
@@ -118,28 +118,28 @@ const createPagesFragment = ({ maxVisible, onChange, page, pageCount }: Props) =
       isActive={pageNumber === page}
     >
       {pageNumber}
-    </Element>
+    </PaginatorSpan>
   ))
 
   const renderUpperSeparator = () =>
     remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
       ? [
-          <Element
+          <PaginatorSpan
             key="upper"
             onClick={() => {
               onChange(page + maxVisible)
             }}
           >
             ...
-          </Element>,
-          <Element
+          </PaginatorSpan>,
+          <PaginatorSpan
             key={pageCount}
             onClick={() => {
               onChange && onChange(pageCount)
             }}
           >
             {pageCount}
-          </Element>
+          </PaginatorSpan>
         ]
       : []
 

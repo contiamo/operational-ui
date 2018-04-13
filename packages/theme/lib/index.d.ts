@@ -51,7 +51,7 @@ export interface Theme {
     typography: ThemeTypography;
     fontFamily: string;
     spacing: number;
-    unit: number;
+    box: number;
     borderRadius: number;
     baseZIndex: number;
     shadows: ThemeShadows;

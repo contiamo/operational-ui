@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Icon = require("react-feather");
 var glamorous_1 = require("glamorous");
-var Element = glamorous_1.default.div(function (_a) {
+var PaginatorSpan = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isActive = _a.isActive, isDisabled = _a.isDisabled;
     return (__assign({}, theme.typography.body, { padding: theme.spacing / 4, borderRadius: 2, height: theme.spacing * 1.5, display: "inline-flex", cursor: "pointer", userSelect: "none", alignItems: "center", justifyContent: "center", lineHeight: 1, color: isActive ? theme.colors.info : theme.colors.text, ":hover": {
             backgroundColor: theme.colors.background
@@ -54,7 +54,7 @@ var PaginatorControl = function (_a) {
         default:
             handler = handleLast;
     }
-    return (React.createElement(Element, { onClick: handler, isDisabled: isDisabled }, children));
+    return (React.createElement(PaginatorSpan, { onClick: handler, isDisabled: isDisabled }, children));
 };
 var createPagesFragment = function (_a) {
     var maxVisible = _a.maxVisible, onChange = _a.onChange, page = _a.page, pageCount = _a.pageCount;
@@ -79,16 +79,16 @@ var createPagesFragment = function (_a) {
     var isCloseToEnd = remainingPages < adjustedMaxVisible;
     var start = (isCloseToEnd ? pageCount - adjustedMaxVisible : skip + 1) || 1;
     var end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip;
-    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(Element, { key: pageNumber, onClick: function () {
+    var fragment = range(start, end).map(function (pageNumber, i) { return (React.createElement(PaginatorSpan, { key: pageNumber, onClick: function () {
             onChange && onChange(pageNumber);
         }, isActive: pageNumber === page }, pageNumber)); });
     var renderUpperSeparator = function () {
         return remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
             ? [
-                React.createElement(Element, { key: "upper", onClick: function () {
+                React.createElement(PaginatorSpan, { key: "upper", onClick: function () {
                         onChange(page + maxVisible);
                     } }, "..."),
-                React.createElement(Element, { key: pageCount, onClick: function () {
+                React.createElement(PaginatorSpan, { key: pageCount, onClick: function () {
                         onChange && onChange(pageCount);
                     } }, pageCount)
             ]

@@ -49,7 +49,7 @@ const Container = glamorous.div(
       backgroundColor,
       color,
       label: "sidenav",
-      width: expanded ? sidenavExpandedWidth : theme.unit,
+      width: expanded ? sidenavExpandedWidth : theme.box,
       zIndex: theme.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",

@@ -9,7 +9,7 @@ var Container = glamorous_1.default.header(function (_a) {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: theme.colors.white,
-        height: theme.unit,
+        height: theme.box,
         alignItems: "center",
         padding: "0 " + theme.spacing * 1.25 + "px",
         boxShadow: theme.shadows.card
