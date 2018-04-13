@@ -26,15 +26,36 @@ var DatePicker_utils_1 = require("./DatePicker/DatePicker.utils");
 var DatePicker_Month_1 = require("./DatePicker/DatePicker.Month");
 var DatePicker = /** @class */ (function (_super) {
     __extends(DatePicker, _super);
-    function DatePicker() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            isExpanded: false,
-            year: new Date().getFullYear(),
-            month: new Date().getMonth()
-        };
+    function DatePicker(props) {
+        var _this = _super.call(this, props) || this;
+        _this.validate(props);
+        // Start year month is either based on the start date
+        // or the current month if no start date is specified.
+        var startYearMonthInWidget = props.start
+            ? {
+                year: DatePicker_utils_1.toYearMonthDay(props.start).year,
+                month: DatePicker_utils_1.toYearMonthDay(props.start).month
+            }
+            : {
+                year: new Date().getFullYear(),
+                month: new Date().getMonth()
+            };
+        _this.state = __assign({}, startYearMonthInWidget, { isExpanded: false });
         return _this;
     }
+    // Throw runtime errors if start/end dates are of the wrong format.
+    // Optional props argument is used when the component doesn't have
+    // these dates on the instance (e.g. constructor).
+    DatePicker.prototype.validate = function (props) {
+        var validatedProps = props || this.props;
+        // Validate start date of
+        if (validatedProps.start) {
+            DatePicker_utils_1.validateDateString(validatedProps.start);
+        }
+        if (validatedProps.end) {
+            DatePicker_utils_1.validateDateString(validatedProps.end);
+        }
+    };
     DatePicker.prototype.changeMonth = function (diff) {
         this.setState(function (prevState) { return ({
             month: prevState.month + diff < 0 ? prevState.month + diff + 12 : (prevState.month + diff) % 12,
@@ -62,6 +83,9 @@ var DatePicker = /** @class */ (function (_super) {
         };
         document.addEventListener("click", this.outsideClickHandler);
         document.addEventListener("keydown", this.keypressHandler);
+    };
+    DatePicker.prototype.componentDidUpdate = function () {
+        this.validate();
     };
     DatePicker.prototype.componentWillUnmount = function () {
         document.removeEventListener("click", this.outsideClickHandler);
