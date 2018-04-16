@@ -52,7 +52,7 @@ const Content = glamorous.div(
     padding: 20
   },
   ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.gray10
+    backgroundColor: theme.colors.gray
   })
 )
 

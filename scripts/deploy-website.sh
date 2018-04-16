@@ -6,6 +6,10 @@ build() {
   yarn build
   cd ../..
   mv packages/website/dist .
+  cd packages/visual-tests
+  yarn build
+  cd ../..
+  mv packages/visual-tests/dist ./dist/visual-tests
 }
 
 deploy() {
@@ -15,10 +19,12 @@ deploy() {
   mv dist/index.html .
   mv dist/static .
   mv dist/favicons .
+  mv dist/visual-tests .
   rm -rf dist
   git add .
   git commit -m "Deploy" --no-verify
   git push -f origin gh-pages
+  git checkout master
 }
 
 build
