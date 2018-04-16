@@ -1,7 +1,6 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
-import { readableTextColor } from "@operational/utils"
 
 export interface Props {
   id?: string
@@ -17,7 +16,7 @@ const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.white,
   height: theme.box,
   alignItems: "center",
-  padding: `0 ${theme.spacing * 1.25}px`,
+  padding: `0 ${theme.spacing * 1.5}px`,
   boxShadow: theme.shadows.card
 }))
 

@@ -39,6 +39,7 @@ export { default as Switch } from "./Switch";
 export { default as Tab } from "./Tab";
 export { default as Tabs } from "./Tabs";
 export { default as Table } from "./Table";
+export { default as Textarea } from "./Textarea";
 export { default as Tooltip } from "./Tooltip";
 export { default as Timeline } from "./Timeline";
 export { default as TimelineItem } from "./TimelineItem";

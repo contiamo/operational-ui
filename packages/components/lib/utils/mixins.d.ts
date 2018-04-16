@@ -16,3 +16,18 @@ export declare const LabelText: GlamorousComponent<Pick<{
 }, never> & React.HTMLProps<HTMLSpanElement>, {
     theme: Theme;
 }>;
+export declare const FormFieldControls: GlamorousComponent<Pick<{
+    theme: Theme;
+}, never> & React.HTMLProps<HTMLDivElement>, {
+    theme: Theme;
+}>;
+export declare const FormFieldControl: GlamorousComponent<Pick<{
+    theme: Theme;
+}, never> & React.HTMLProps<HTMLDivElement>, {
+    theme: Theme;
+}>;
+export declare const FormFieldError: GlamorousComponent<Pick<{
+    theme: Theme;
+}, never> & React.HTMLProps<HTMLDivElement>, {
+    theme: Theme;
+}>;

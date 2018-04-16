@@ -10,53 +10,13 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var utils_1 = require("@operational/utils");
 var Icon_1 = require("./Icon");
 var Tooltip_1 = require("./Tooltip");
 var mixins_1 = require("./utils/mixins");
 var constants_1 = require("./constants");
 var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme, disabled = _a.disabled, isStandalone = _a.isStandalone, isError = _a.isError;
-    return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: constants_1.inputDefaultWidth, padding: theme.spacing * 2 / 3, border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: isError ? theme.colors.error : theme.colors.inputBorder, font: "inherit", borderRadius: theme.borderRadius, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme, isError: isError }) }));
-});
-var Error = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return (__assign({}, theme.typography.small, { color: theme.colors.error, padding: theme.spacing / 6 + "px " + theme.spacing * 3 / 4 + "px", marginBottom: 0, width: "100%", borderRadius: theme.borderRadius, position: "absolute", backgroundColor: utils_1.lighten(theme.colors.error, 45), boxShadow: theme.shadows.card, bottom: theme.spacing * -1.75, left: 0 }));
-});
-var ControlsContainer = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({
-        position: "absolute",
-        top: 3,
-        right: 0
-    });
-});
-var Control = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({
-        position: "relative",
-        verticalAlign: "middle",
-        display: "inline-block",
-        width: "fit-content",
-        marginLeft: 4,
-        "& svg": {
-            opacity: 0.4,
-            position: "relative",
-            top: -1
-        },
-        // :nth-child(2) refers to the tooltip
-        "& > :nth-child(2)": {
-            display: "none"
-        },
-        ":hover": {
-            "& svg": {
-                opacity: 1
-            },
-            "& > :nth-child(2)": {
-                display: "block"
-            }
-        }
-    });
+    return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: constants_1.inputDefaultWidth, padding: theme.spacing / 2 + "px " + theme.spacing * 2 / 3 + "px", border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: isError ? theme.colors.error : theme.colors.inputBorder, font: "inherit", borderRadius: theme.borderRadius, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme, isError: isError }) }));
 });
 var Input = function (props) {
     var forAttributeId = props.label && props.labelId;
@@ -78,16 +38,16 @@ var Input = function (props) {
     if (props.label) {
         return (React.createElement(mixins_1.Label, { id: props.id, htmlFor: forAttributeId, css: props.css, className: props.className },
             React.createElement(mixins_1.LabelText, null, props.label),
-            React.createElement(ControlsContainer, null,
-                props.hint ? (React.createElement(Control, null,
+            React.createElement(mixins_1.FormFieldControls, null,
+                props.hint ? (React.createElement(mixins_1.FormFieldControl, null,
                     React.createElement(Icon_1.default, { name: "HelpCircle", size: 14 }),
                     React.createElement(Tooltip_1.default, { right: true, css: { minWidth: 100, width: "fit-content" } }, props.hint))) : null,
-                props.onToggle ? (React.createElement(Control, { onClick: function () {
+                props.onToggle ? (React.createElement(mixins_1.FormFieldControl, { onClick: function () {
                         props.onToggle();
                     } },
                     React.createElement(Icon_1.default, { name: props.disabled ? "Lock" : "Unlock", size: 12 }))) : null),
             React.createElement(InputField, __assign({}, commonInputProps, { id: forAttributeId, autoComplete: props.autoComplete, css: { display: "block", width: "100%" } })),
-            props.error ? React.createElement(Error, null, props.error) : null));
+            props.error ? React.createElement(mixins_1.FormFieldError, null, props.error) : null));
     }
     return (React.createElement(InputField, __assign({}, commonInputProps, { id: props.id, css: props.css, className: props.className, autoComplete: props.autoComplete })));
 };
