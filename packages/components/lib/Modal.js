@@ -51,7 +51,7 @@ var Modal = /** @class */ (function (_super) {
             } },
             React.createElement(Content, { innerRef: function (contentNode) {
                     _this.contentNode = contentNode;
-                }, className: props.childClassName }, props.children)));
+                }, className: props.contentClassName, css: props.contentCss }, props.children)));
     };
     return Modal;
 }(React.Component));

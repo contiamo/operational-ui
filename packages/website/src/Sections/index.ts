@@ -4,22 +4,23 @@ import * as checkboxes from "./Checkboxes"
 import * as chips from "./Chips"
 import * as contextMenus from "./ContextMenus"
 import * as datePickers from "./DatePickers"
+import * as infoTiles from "./InfoTiles"
 import * as inputs from "./Inputs"
+import * as layouts from "./Layouts"
 import * as messages from "./Messages"
+import * as modals from "./Modals"
 import * as paginators from "./Paginators"
 import * as progress from "./Progress"
+import * as records from "./Records"
+import * as selects from "./Selects"
+import * as sidebars from "./Sidebars"
+import * as sidenavs from "./Sidenavs"
 import * as spinners from "./Spinners"
 import * as switches from "./Switches"
 import * as tables from "./Tables"
 import * as tabs from "./Tabs"
-import * as modals from "./Modals"
-import * as sidebars from "./Sidebars"
 import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
-import * as records from "./Records"
-import * as infoTiles from "./InfoTiles"
-import * as sidenavs from "./Sidenavs"
-import * as selects from "./Selects"
 
 export default [
   breadcrumbs,
@@ -28,20 +29,21 @@ export default [
   chips,
   contextMenus,
   datePickers,
+  infoTiles,
   inputs,
+  layouts,
   messages,
+  modals,
   paginators,
   progress,
-  spinners,
+  records,
+  selects,
   sidebars,
+  sidenavs,
+  spinners,
   switches,
-  modals,
   tables,
   tabs,
-  records,
-  infoTiles,
   timelines,
-  tooltips,
-  selects,
-  sidenavs
+  tooltips
 ]

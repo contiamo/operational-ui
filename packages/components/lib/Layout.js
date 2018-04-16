@@ -12,33 +12,25 @@ var Container = glamorous_1.default.div(function (_a) {
         height: "100%",
         display: "grid",
         gridTemplateColumns: (isSidenavExpanded ? constants_1.sidenavExpandedWidth : theme.box) + "px auto",
-        gridTemplateRows: theme.box + "px auto",
+        gridTemplateRows: "auto",
         // Side navigation (1st child is always the spinner or a placeholder)
         "& > *:nth-child(2)": {
             gridColumnStart: "1",
             gridColumnEnd: "span 1",
             gridRowStart: "1",
-            gridRowEnd: "span 2"
-        },
-        // Header
-        "& > *:nth-child(3)": {
-            width: "100%",
-            gridColumnStart: "2",
-            gridColumnEnd: "span 1",
-            gridRowStart: "1",
             gridRowEnd: "span 1"
         },
         // Content
-        "& > *:nth-child(4)": {
+        "& > *:nth-child(3)": {
             gridColumnStart: "2",
             gridColumnEnd: "span 1",
-            gridRowStart: "2",
+            gridRowStart: "1",
             gridRowEnd: "span 1"
         }
     });
 });
 var Layout = function (props) {
-    var sidenavProps = React.Children.toArray(props.children)[0].props;
+    var sidenavProps = React.Children.toArray(props.sidenav)[0].props;
     /*
      * This placeholder element is added to the dom in case there is no
      * <Progress /> element, allowing the CSS to target children by the same
@@ -49,7 +41,8 @@ var Layout = function (props) {
     var cssPlaceholder = React.createElement(glamorous_1.default.Div, { css: { position: "absolute" } });
     return (React.createElement(Container, { css: props.css, className: props.className, isSidenavExpanded: Boolean(sidenavProps.expanded) },
         props.loading ? React.createElement(Progress_1.default, null) : cssPlaceholder,
-        props.children));
+        props.sidenav,
+        props.main));
 };
 exports.default = Layout;
 //# sourceMappingURL=Layout.js.map

@@ -9,7 +9,8 @@ import { sidenavExpandedWidth } from "./constants"
 export interface Props {
   css?: {}
   className?: string
-  children?: React.ReactNode
+  sidenav?: React.ReactNode
+  main?: React.ReactNode
   loading?: boolean
 }
 
@@ -19,33 +20,25 @@ const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; i
   height: "100%",
   display: "grid",
   gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : theme.box}px auto`,
-  gridTemplateRows: `${theme.box}px auto`,
+  gridTemplateRows: "auto",
   // Side navigation (1st child is always the spinner or a placeholder)
   "& > *:nth-child(2)": {
     gridColumnStart: "1",
     gridColumnEnd: "span 1",
     gridRowStart: "1",
-    gridRowEnd: "span 2"
-  },
-  // Header
-  "& > *:nth-child(3)": {
-    width: "100%",
-    gridColumnStart: "2",
-    gridColumnEnd: "span 1",
-    gridRowStart: "1",
     gridRowEnd: "span 1"
   },
   // Content
-  "& > *:nth-child(4)": {
+  "& > *:nth-child(3)": {
     gridColumnStart: "2",
     gridColumnEnd: "span 1",
-    gridRowStart: "2",
+    gridRowStart: "1",
     gridRowEnd: "span 1"
   }
 }))
 
 const Layout = (props: Props) => {
-  const sidenavProps = (React.Children.toArray(props.children)[0] as any).props as SidenavProps
+  const sidenavProps = (React.Children.toArray(props.sidenav)[0] as any).props as SidenavProps
   /* 
    * This placeholder element is added to the dom in case there is no
    * <Progress /> element, allowing the CSS to target children by the same
@@ -57,12 +50,8 @@ const Layout = (props: Props) => {
   return (
     <Container css={props.css} className={props.className} isSidenavExpanded={Boolean(sidenavProps.expanded)}>
       {props.loading ? <Progress /> : cssPlaceholder}
-      {/* Three children are expected, in this order:
-        * Sidenav
-        * Header
-        * any content, automatically sized to fill the entire content area.
-        */}
-      {props.children}
+      {props.sidenav}
+      {props.main}
     </Container>
   )
 }

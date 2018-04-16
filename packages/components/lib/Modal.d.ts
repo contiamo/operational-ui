@@ -2,9 +2,10 @@
 import * as React from "react";
 export interface Props {
     id?: string;
-    css?: any;
+    css?: {};
     className?: string;
-    childClassName?: string;
+    contentCss?: {};
+    contentClassName?: string;
     children: React.ReactNode;
     onClose?: () => void;
 }

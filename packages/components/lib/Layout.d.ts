@@ -3,7 +3,8 @@ import * as React from "react";
 export interface Props {
     css?: {};
     className?: string;
-    children?: React.ReactNode;
+    sidenav?: React.ReactNode;
+    main?: React.ReactNode;
     loading?: boolean;
 }
 declare const Layout: (props: Props) => JSX.Element;
