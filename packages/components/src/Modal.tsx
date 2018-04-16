@@ -4,14 +4,15 @@ import { Theme } from "@operational/theme"
 
 export interface Props {
   id?: string
-  css?: any
+  css?: {}
   className?: string
-  childClassName?: string
+  contentCss?: {}
+  contentClassName?: string
   children: React.ReactNode
   onClose?: () => void
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "modal",
   position: "fixed",
   top: 0,
@@ -25,7 +26,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   backgroundColor: "rgba(0, 0, 0, .6)"
 }))
 
-const Content = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.white,
   padding: theme.spacing,
   boxShadow: theme.shadows.popup
@@ -50,7 +51,8 @@ class Modal extends React.Component<Props, {}> {
           innerRef={contentNode => {
             this.contentNode = contentNode
           }}
-          className={props.childClassName}
+          className={props.contentClassName}
+          css={props.contentCss}
         >
           {props.children}
         </Content>
