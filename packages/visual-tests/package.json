@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "rm -rf dist && next build && next export && mv out dist",
+    "build": "rm -rf dist && PUBLIC_URL='./' react-scripts-ts build && mv build dist",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "precommit": "npm run prettier",
