@@ -24,6 +24,7 @@ deploy() {
   git add .
   git commit -m "Deploy" --no-verify
   git push -f origin gh-pages
+  git checkout master
 }
 
 build
