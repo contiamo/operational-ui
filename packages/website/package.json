@@ -1,6 +1,6 @@
 {
   "name": "@operational/showcase",
-  "version": "0.1.0-27",
+  "version": "0.1.0-28",
   "description": "Operational UI documentation site",
   "main": "index.js",
   "repository": "git@github.com:Contiamo/operational-ui.git",
@@ -30,11 +30,11 @@
     "typescript": "2.6.2"
   },
   "dependencies": {
-    "@operational/blocks": "^0.1.0-27",
-    "@operational/components": "^0.1.0-27",
-    "@operational/theme": "^0.1.0-27",
-    "@operational/utils": "^0.1.0-27",
-    "@operational/visualizations": "^0.1.0-27",
+    "@operational/blocks": "^0.1.0-28",
+    "@operational/components": "^0.1.0-28",
+    "@operational/theme": "^0.1.0-28",
+    "@operational/utils": "^0.1.0-28",
+    "@operational/visualizations": "^0.1.0-28",
     "babel-polyfill": "^6.26.0",
     "component-playground": "^3.0.0",
     "glamor": "^2.20.40",
