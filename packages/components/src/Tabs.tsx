@@ -6,6 +6,9 @@ import { Theme, expandColor } from "@operational/theme"
 import Tab, { Props as TabProps } from "./Tab"
 
 export interface Props {
+  css?: {}
+  className?: string
+  id?: string
   active?: number
   activeColor?: string
   children?: React.ReactNode
@@ -49,7 +52,7 @@ const TabList = glamorous.ul(
   },
   ({ theme }: { theme: Theme }) => ({
     "&:after": {
-      background: darken(theme.colors.gray20, 6)
+      background: darken(theme.colors.lightGray, 6)
     }
   })
 )
@@ -97,8 +100,7 @@ const TabTitle = glamorous.li(
       : {},
     ...disabled
       ? {
-          color: theme.colors.gray60,
-          cursor: "not-allowed"
+          color: theme.colors.lightGray
         }
       : {
           "&:hover": {
@@ -108,17 +110,19 @@ const TabTitle = glamorous.li(
   })
 )
 
-const Tabs = ({ active = 0, activeColor = "info", children, onChange = () => {}, theme }: PropsWithTheme) => {
+const Tabs = (props: PropsWithTheme) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
-    children,
+    props.children,
     (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index })
   )
 
-  const color = expandColor(theme, activeColor) || theme.colors.info
+  const color = expandColor(props.theme, props.activeColor) || props.theme.colors.info
 
   // Display only the active panel based off the children props
-  const { children: panelContent, disabled }: TabProps = childrenProps.find(({ index }) => index === active)
+  const { children: panelContent, disabled }: TabProps = childrenProps.find(
+    ({ index }) => index === (props.active || 0)
+  )
   const activePanel: JSX.Element = disabled ? null : <TabPanel>{panelContent}</TabPanel>
 
   // Build titles fragment based off the children props
@@ -126,10 +130,12 @@ const Tabs = ({ active = 0, activeColor = "info", children, onChange = () => {},
     <TabTitle
       color={color}
       disabled={disabled}
-      isActive={active === index && !disabled}
+      isActive={(props.active || 0) === index && !disabled}
       key={index}
       onClick={() => {
-        if (!disabled) onChange(index)
+        if (!disabled && props.onChange) {
+          props.onChange(index)
+        }
       }}
     >
       {title}
@@ -137,7 +143,7 @@ const Tabs = ({ active = 0, activeColor = "info", children, onChange = () => {},
   ))
 
   return (
-    <Container>
+    <Container css={props.css} className={props.className} id={props.id}>
       <TabList>{tabTitles}</TabList>
       <Content>{activePanel}</Content>
     </Container>

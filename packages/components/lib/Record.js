@@ -18,7 +18,9 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         label: "record",
         position: "relative",
-        border: "1px solid " + theme.colors.gray20
+        border: "1px solid",
+        borderColor: theme.colors.gray,
+        borderRadius: theme.borderRadius
     });
 });
 var HeaderContainer = glamorous_1.default.div(function (_a) {
@@ -28,7 +30,7 @@ var HeaderContainer = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         justifyContent: "space-between",
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
-        height: 48
+        height: theme.spacing * 3
     });
 });
 var Record = /** @class */ (function (_super) {

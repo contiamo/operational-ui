@@ -13,8 +13,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "recordbody",
   borderTop: "1px solid",
   padding: `${theme.spacing}px ${theme.spacing}px`,
-  borderColor: theme.colors.gray20,
-  backgroundColor: theme.colors.gray10,
+  borderColor: theme.colors.border,
   "& > div": {
     display: "inline-block",
     marginRight: theme.spacing

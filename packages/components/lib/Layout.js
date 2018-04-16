@@ -11,8 +11,8 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         height: "100%",
         display: "grid",
-        gridTemplateColumns: (isSidenavExpanded ? constants_1.sidenavExpandedWidth : constants_1.sidenavWidth) + "px auto",
-        gridTemplateRows: constants_1.headerHeight + "px auto",
+        gridTemplateColumns: (isSidenavExpanded ? constants_1.sidenavExpandedWidth : theme.box) + "px auto",
+        gridTemplateRows: theme.box + "px auto",
         // Side navigation (1st child is always the spinner or a placeholder)
         "& > *:nth-child(2)": {
             gridColumnStart: "1",

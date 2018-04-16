@@ -13,14 +13,15 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         display: "flex",
         alignItems: "center",
-        padding: theme.spacing * 2 / 3,
+        padding: theme.spacing / 2 + "px " + (theme.spacing * 2 / 3 + 40) + "px " + theme.spacing / 2 + "px " + theme.spacing *
+            2 /
+            3 + "px ",
         borderRadius: 4,
-        paddingRight: theme.spacing / 2 + 40,
         width: "fit-content",
         minWidth: 240,
         minHeight: 20,
         border: "1px solid",
-        borderColor: "rgb(208, 217, 229)",
+        borderColor: theme.colors.inputBorder,
         opacity: disabled ? 0.5 : 1,
         cursor: "pointer",
         color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
@@ -35,7 +36,7 @@ var Container = glamorous_1.default.div(function (_a) {
             width: 0,
             height: 0,
             border: "4px solid transparent",
-            borderTopColor: theme.colors.gray70,
+            borderTopColor: theme.colors.gray,
             transform: "translateY(calc(-50% + 2px))"
         },
         "&:focus": mixins.inputFocus({ theme: theme })
@@ -45,7 +46,7 @@ exports.Container = Container;
 var DisplayValue = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isPlaceholder = _a.isPlaceholder;
     return ({
-        color: isPlaceholder ? theme.colors.gray60 : theme.colors.black
+        color: isPlaceholder ? theme.colors.gray : theme.colors.black
     });
 });
 exports.DisplayValue = DisplayValue;

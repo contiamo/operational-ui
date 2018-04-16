@@ -26,10 +26,11 @@ var TableElement = glamorous_1.default.table(function (_a) {
         borderCollapse: "collapse",
         textAlign: "left",
         tableLayout: "auto",
-        "& th": __assign({}, theme.typography.body, { opacity: 0.4 }),
+        "& th, & td": __assign({}, theme.typography.body),
         "& tr": {
             borderTop: "1px solid",
-            borderBottom: "1px solid"
+            borderBottom: "1px solid",
+            borderColor: theme.colors.separator
         },
         "& tr:first-child": {
             borderTop: 0
@@ -37,10 +38,20 @@ var TableElement = glamorous_1.default.table(function (_a) {
         "& tbody tr:last-child": {
             borderBottom: 0
         },
-        "& td": __assign({ padding: theme.spacing * 4 / 3 + "px " + theme.spacing + "px" }, theme.typography.body),
-        "& td, & th, & tr": {
-            borderColor: theme.colors.separator,
+        "& td": {
             padding: theme.spacing / 2 + "px " + theme.spacing + "px"
+        },
+        "& th": {
+            padding: theme.spacing / 4 + "px " + theme.spacing + "px",
+            opacity: 0.4
+        }
+    });
+});
+var TableBodyRow = glamorous_1.default.tr(function (_a) {
+    var theme = _a.theme, isClickable = _a.isClickable;
+    return ({
+        ":hover": {
+            backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent"
         }
     });
 });
@@ -52,7 +63,7 @@ var Table = function (props) { return (React.createElement(Container, { css: pro
     React.createElement(TableElement, null,
         React.createElement("thead", null,
             React.createElement("tr", null, props.columns.map(function (column, index) { return React.createElement("th", { key: index }, column); }))),
-        React.createElement("tbody", null, props.rows.map(function (row, index) { return (React.createElement("tr", { key: index, onClick: function () {
+        React.createElement("tbody", null, props.rows.map(function (row, index) { return (React.createElement(TableBodyRow, { isClickable: Boolean(props.onRowClick), key: index, onClick: function () {
                 if (props.onRowClick) {
                     props.onRowClick(row, index);
                 }

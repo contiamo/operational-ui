@@ -15,15 +15,13 @@ var Container = glamorous_1.default.div(function (_a) {
         color: textColor,
         padding: theme.spacing * 1 / 2 + "px " + theme.spacing + "px",
         borderRadius: 4,
+        height: theme.spacing * 2.5,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
         position: "relative",
         maxWidth: 400
     };
-});
-var Content = glamorous_1.default.div(function (_a) {
-    var theme = _a.theme;
-    return ({
-        paddingRight: theme.spacing * 2.5
-    });
 });
 var IconContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
@@ -47,6 +45,6 @@ var IconContainer = glamorous_1.default.div(function (_a) {
 var Message = function (props) { return (React.createElement(Container, { css: props.css, className: props.className, color: props.color },
     React.createElement(IconContainer, { onClick: props.onClose },
         React.createElement(Icon_1.default, { name: "X" })),
-    React.createElement(Content, null, props.children))); };
+    props.children)); };
 exports.default = Message;
 //# sourceMappingURL=Message.js.map

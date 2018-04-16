@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "rm -rf dist && next build && next export && mv out dist",
+    "build": "PUBLIC_URL='./' react-scripts-ts build && mv build dist",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "precommit": "npm run prettier",
@@ -20,8 +20,8 @@
   },
   "devDependencies": {
     "@types/jest": "^22.1.4",
-    "@types/react": "^16.0.40",
-    "@types/react-dom": "^16.0.4",
+    "@types/react": "16.1.0",
+    "@types/react-dom": "16.0.0",
     "prettier": "1.8.2",
     "react-scripts-ts": "^2.14.0",
     "tslint": "^5.9.1",

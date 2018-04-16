@@ -1,5 +1,4 @@
 import * as React from "react"
-import * as ReactFeather from "react-feather"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
@@ -14,16 +13,15 @@ export interface Props {
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "infotile",
-  borderRadius: 2,
+  borderRadius: theme.borderRadius,
   minWidth: 100,
   position: "relative",
   display: "inline-flex",
   flexDirection: "column",
   width: "fit-content",
   marginRight: theme.spacing,
-  padding: `${theme.spacing / 3}px ${theme.spacing}px`,
-  backgroundColor: theme.colors.gray10,
-  border: `1px solid ${theme.colors.gray20}`
+  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+  backgroundColor: theme.colors.lighterBackground
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({

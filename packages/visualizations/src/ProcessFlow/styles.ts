@@ -36,7 +36,7 @@ const breakdownBackgroundBarStyle = {
   width: "100%",
   fontSize: 12,
   overflow: "hidden",
-  backgroundColor: theme.colors.gray10
+  backgroundColor: theme.colors.lightGray
 }
 
 const breakdownBarStyle = {
@@ -53,7 +53,7 @@ const breakdownBarStyle = {
 
 const breakdownTextStyle = {
   ...theme.typography.small,
-  color: theme.colors.gray70,
+  color: theme.colors.gray,
   position: "relative",
   top: 1,
   fontWeight: 400,

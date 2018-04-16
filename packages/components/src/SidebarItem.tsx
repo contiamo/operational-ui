@@ -22,17 +22,17 @@ const Container = glamorous.div(
     fontWeight: isActive ? 600 : 400,
     position: "relative",
     borderBottom: "1px solid",
-    borderColor: theme.colors.secondarySeparator,
+    borderColor: theme.colors.separator,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     padding: `0px ${theme.spacing}px`,
     cursor: "pointer",
     textDecoration: "none",
-    color: isActive ? theme.colors.linkText : theme.colors.gray80,
+    color: isActive ? theme.colors.linkText : theme.colors.text,
     ...isDisabled ? { opacity: 0.25, pointerEvents: "none" } : {},
     ":hover": {
-      backgroundColor: theme.colors.gray10
+      backgroundColor: theme.colors.lighterBackground
     },
     ":focus": {
       outline: 0

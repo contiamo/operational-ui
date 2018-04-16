@@ -19,8 +19,7 @@ export const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
 export const LabelText = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
   verticalAlign: "middle",
-  marginBottom: theme.spacing / 6,
-  marginLeft: theme.spacing * 2 / 3,
+  marginBottom: theme.spacing / 8,
   ...theme.typography.small,
   fontWeight: 400,
   opacity: 0.4

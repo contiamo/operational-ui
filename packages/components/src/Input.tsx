@@ -52,9 +52,9 @@ const InputField = glamorous.input(
     padding: theme.spacing * 2 / 3,
     border: "1px solid",
     opacity: disabled ? 0.6 : 1.0,
-    borderColor: isError ? theme.colors.error : "rgb(208, 217, 229)",
+    borderColor: isError ? theme.colors.error : theme.colors.inputBorder,
     font: "inherit",
-    borderRadius: 4,
+    borderRadius: theme.borderRadius,
     WebkitAppearance: "none",
     "&:focus": inputFocus({ theme, isError })
   })
@@ -64,21 +64,20 @@ const Error = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
   color: theme.colors.error,
   padding: `${theme.spacing / 6}px ${theme.spacing * 3 / 4}px`,
-  marginTop: theme.spacing / 6,
   marginBottom: 0,
   width: "100%",
-  borderRadius: 3,
+  borderRadius: theme.borderRadius,
   position: "absolute",
   backgroundColor: lighten(theme.colors.error, 45),
   boxShadow: theme.shadows.card,
-  bottom: theme.spacing * -2.25,
+  bottom: theme.spacing * -1.75,
   left: 0
 }))
 
 const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   top: 3,
-  right: theme.spacing
+  right: 0
 }))
 
 const Control = glamorous.div(({ theme }: { theme: Theme }): {} => ({

@@ -87,7 +87,7 @@ class Animation extends React.Component<Props, State> {
               transition: "all 0.5s ease-in-out",
               top: `calc(${coord.x / (n - 1) * 100}% + 2px)`,
               left: `calc(${coord.y / (n - 1) * 100}% + 2px)`,
-              borderRadius: 3,
+              borderRadius: 6,
               width: `calc(${100 / (n - 1)}% - 4px)`,
               height: `calc(${100 / (n - 1)}% - 4px)`,
               backgroundColor: "rgba(255, 255, 255, 0.06)"

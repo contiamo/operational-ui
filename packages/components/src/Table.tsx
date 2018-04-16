@@ -23,13 +23,13 @@ const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   borderCollapse: "collapse",
   textAlign: "left",
   tableLayout: "auto",
-  "& th": {
-    ...theme.typography.body,
-    opacity: 0.4
+  "& th, & td": {
+    ...theme.typography.body
   },
   "& tr": {
     borderTop: "1px solid",
-    borderBottom: "1px solid"
+    borderBottom: "1px solid",
+    borderColor: theme.colors.separator
   },
   "& tr:first-child": {
     borderTop: 0
@@ -38,12 +38,17 @@ const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
     borderBottom: 0
   },
   "& td": {
-    padding: `${theme.spacing * 4 / 3}px ${theme.spacing}px`,
-    ...theme.typography.body
-  },
-  "& td, & th, & tr": {
-    borderColor: theme.colors.separator,
     padding: `${theme.spacing / 2}px ${theme.spacing}px`
+  },
+  "& th": {
+    padding: `${theme.spacing / 4}px ${theme.spacing}px`,
+    opacity: 0.4
+  }
+}))
+
+const TableBodyRow = glamorous.tr(({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
+  ":hover": {
+    backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent"
   }
 }))
 
@@ -65,7 +70,8 @@ const Table = (props: Props) => (
       </thead>
       <tbody>
         {props.rows.map((row, index) => (
-          <tr
+          <TableBodyRow
+            isClickable={Boolean(props.onRowClick)}
             key={index}
             onClick={() => {
               if (props.onRowClick) {
@@ -74,7 +80,7 @@ const Table = (props: Props) => (
             }}
           >
             {row.map((cell, index) => <td key={index}>{cell}</td>)}
-          </tr>
+          </TableBodyRow>
         ))}
       </tbody>
     </TableElement>

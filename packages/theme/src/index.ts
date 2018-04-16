@@ -10,23 +10,15 @@ export type ThemeColorName =
   | "error"
   | "white"
   | "black"
-  | "gray10"
-  | "gray20"
-  | "gray30"
-  | "gray40"
-  | "gray50"
-  | "gray60"
-  | "gray70"
-  | "gray80"
-  | "gray90"
-  | "background"
-  | "bodyText"
-  | "emphasizedText"
+  | "gray"
+  | "lightGray"
+  | "text"
   | "lightText"
   | "linkText"
-  | "cardBackground"
+  | "navBackground"
+  | "background"
+  | "lighterBackground"
   | "border"
-  | "sidenavBackground"
   | "secondarySeparator"
   | "separator"
 
@@ -39,25 +31,16 @@ export interface ThemeColors {
   visualizationPalette: string[]
   white: string
   black: string
-  gray10: string
-  gray20: string
-  gray30: string
-  gray40: string
-  gray50: string
-  gray60: string
-  gray70: string
-  gray80: string
-  gray90: string
+  gray: string
+  lightGray: string
   background: string
-  cardHeaderBackground: string
-  bodyText: string
-  emphasizedText: string
+  lighterBackground: string
+  navBackground: string
+  text: string
   lightText: string
   linkText: string
-  cardBackground: string
   border: string
-  sidenavBackground: string
-  secondarySeparator: string
+  inputBorder: string
   separator: string
 }
 
@@ -92,6 +75,8 @@ export interface Theme {
   typography: ThemeTypography
   fontFamily: string
   spacing: number
+  box: number
+  borderRadius: number
   baseZIndex: number
   shadows: ThemeShadows
 }
@@ -128,26 +113,17 @@ const colors: ThemeColors = {
     "#c49c94",
     "#dbdb8d"
   ],
-  gray10: "#F8F8F8",
-  gray20: "#e8e8e8",
-  gray30: "#D0D0D0",
-  gray40: "#C6C6C6",
-  gray50: "#BBBBBB",
-  gray60: "#999999",
-  gray70: "#808080",
-  gray80: "#747474",
-  gray90: "#444444",
+  lightGray: "#e8e8e8",
+  gray: "#999999",
   background: "#F5F6FA",
-  bodyText: "#2F3435",
-  cardBackground: "#FFFFFF",
-  cardHeaderBackground: "#F9FAFE",
-  border: "#dadada",
-  emphasizedText: "#373d3f",
+  lighterBackground: "#F9FAFE",
+  text: "#2F3435",
+  border: "#ADADAD",
+  inputBorder: "#D0D9E5",
   lightText: "#969696",
   linkText: "#1499CE",
-  sidenavBackground: "#004A75",
-  separator: "#f2f2f2",
-  secondarySeparator: "#f8f8f8"
+  navBackground: "#004A75",
+  separator: "#f2f2f2"
 }
 
 const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
@@ -196,7 +172,9 @@ const operational: Theme = {
   typography,
   shadows,
   colors,
-  spacing: 12,
+  spacing: 16,
+  box: 56,
+  borderRadius: 4,
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
   baseZIndex: 0

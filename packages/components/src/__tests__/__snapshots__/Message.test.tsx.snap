@@ -2,20 +2,20 @@
 
 exports[`Message Component Should render 1`] = `
 <div
-  class="css-mn848h"
+  class="css-kr27r"
 >
   <div
-    class="css-1hf92rn"
+    class="css-bef9h7"
   >
     <svg
       fill="none"
-      height="18"
+      height="24"
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
       viewbox="0 0 24 24"
-      width="18"
+      width="24"
       xmlns="http://www.w3.org/2000/svg"
     >
       <line
@@ -32,8 +32,5 @@ exports[`Message Component Should render 1`] = `
       />
     </svg>
   </div>
-  <div
-    class="css-15k2s60"
-  />
 </div>
 `;

@@ -16,15 +16,15 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   borderTopLeftRadius: 4,
   borderTopRightRadius: 4,
   alignItems: "center",
-  backgroundColor: theme.colors.cardHeaderBackground,
+  backgroundColor: theme.colors.lighterBackground,
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
-  height: 3.5 * theme.spacing,
+  height: 2 * theme.spacing,
   margin: -theme.spacing,
   marginBottom: theme.spacing,
   padding: `0 ${theme.spacing}px`,
   lineHeight: 1,
-  color: theme.colors.emphasizedText
+  color: theme.colors.text
 }))
 
 const CardHeader = (props: Props) => (

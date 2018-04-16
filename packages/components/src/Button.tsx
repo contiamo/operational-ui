@@ -30,7 +30,7 @@ const Container = glamorous.button(({ theme, color, active, disabled, condensed 
   const defaultColor: string = theme.colors.white
   const backgroundColor: string = expandColor(theme, color) || defaultColor
   const activeBackgroundColor: string = darken(backgroundColor, 5)
-  const textColor = readableTextColor(backgroundColor, [theme.colors.emphasizedText, "white"])
+  const textColor = readableTextColor(backgroundColor, [theme.colors.text, "white"])
   const activeBoxShadow = theme.shadows.pressed
   const spacing = theme.spacing
 
@@ -38,10 +38,10 @@ const Container = glamorous.button(({ theme, color, active, disabled, condensed 
     label: "button",
     ...theme.typography.body,
     display: "inline-block",
-    padding: condensed ? `${spacing / 4}px ${spacing * 3 / 4}px` : `${spacing / 2}px ${spacing * 1.5}px`,
-    borderRadius: 4,
+    padding: condensed ? `${spacing / 8}px ${spacing / 2}px` : `${spacing / 4}px ${spacing}px`,
+    borderRadius: theme.borderRadius,
     border: "1px solid",
-    borderColor: isWhite(backgroundColor) ? theme.colors.gray30 : active ? activeBackgroundColor : backgroundColor,
+    borderColor: isWhite(backgroundColor) ? theme.colors.gray : active ? activeBackgroundColor : backgroundColor,
     cursor: disabled ? "auto" : "pointer",
     boxShadow: active ? activeBoxShadow : "none",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,

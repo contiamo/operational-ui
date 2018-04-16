@@ -18,6 +18,8 @@ import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
 import * as records from "./Records"
 import * as infoTiles from "./InfoTiles"
+import * as sidenavs from "./Sidenavs"
+import * as selects from "./Selects"
 
 export default [
   breadcrumbs,
@@ -39,5 +41,7 @@ export default [
   records,
   infoTiles,
   timelines,
-  tooltips
+  tooltips,
+  selects,
+  sidenavs
 ]

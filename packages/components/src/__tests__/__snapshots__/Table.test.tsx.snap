@@ -5,7 +5,7 @@ exports[`Table Component Should render 1`] = `
   class="css-cmhidp"
 >
   <table
-    class="css-kqd5vo"
+    class="css-1n8qvxg"
   >
     <thead>
       <tr />
@@ -13,7 +13,7 @@ exports[`Table Component Should render 1`] = `
     <tbody />
   </table>
   <div
-    class="css-30piuf"
+    class="css-1q21a8q"
   >
     There are no records available
   </div>

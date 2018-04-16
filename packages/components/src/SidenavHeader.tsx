@@ -3,7 +3,6 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
-import { sidenavWidth } from "./constants"
 import Icon, { IconName } from "./Icon"
 
 export interface Props {
@@ -29,8 +28,8 @@ const Content = glamorous.div(
     alignItems: "center",
     width: "100%",
     overflow: "hidden",
-    height: sidenavWidth,
-    flex: `0 0 ${sidenavWidth}px`,
+    height: theme.box,
+    flex: `0 0 ${theme.box}px`,
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
     color: isActive ? theme.colors.linkText : "inherit",
@@ -49,14 +48,14 @@ const Label = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   whiteSpace: "nowrap"
 }))
 
-const IconContainer = glamorous.div({
-  width: sidenavWidth,
-  height: sidenavWidth,
+const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  width: theme.box,
+  height: theme.box,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  flex: `0 0 ${sidenavWidth}px`
-})
+  flex: `0 0 ${theme.box}px`
+}))
 
 const SidenavHeader = (props: Props) => (
   // See ./SidenavItem.tsx for reason why class name is set.

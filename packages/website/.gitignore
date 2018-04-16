@@ -4,5 +4,5 @@ package-lock.json
 .idea
 *.log
 coverage
-.next
-out
+dist
+build

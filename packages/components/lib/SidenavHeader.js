@@ -10,7 +10,6 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var constants_1 = require("./constants");
 var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div({
     label: "sidenavheader",
@@ -24,8 +23,8 @@ var Content = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         width: "100%",
         overflow: "hidden",
-        height: constants_1.sidenavWidth,
-        flex: "0 0 " + constants_1.sidenavWidth + "px",
+        height: theme.box,
+        flex: "0 0 " + theme.box + "px",
         // Readable text color is calculated in the <Sidenav> component,
         // and cascades down to both sidenav headers and items.
         color: isActive ? theme.colors.linkText : "inherit",
@@ -40,13 +39,16 @@ var Label = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.heading1, { fontSize: 14, width: "fit-content", whiteSpace: "nowrap" }));
 });
-var IconContainer = glamorous_1.default.div({
-    width: constants_1.sidenavWidth,
-    height: constants_1.sidenavWidth,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flex: "0 0 " + constants_1.sidenavWidth + "px"
+var IconContainer = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        width: theme.box,
+        height: theme.box,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: "0 0 " + theme.box + "px"
+    });
 });
 var SidenavHeader = function (props) { return (
 // See ./SidenavItem.tsx for reason why class name is set.

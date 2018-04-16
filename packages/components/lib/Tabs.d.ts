@@ -2,6 +2,9 @@
 import * as React from "react";
 import { Theme } from "@operational/theme";
 export interface Props {
+    css?: {};
+    className?: string;
+    id?: string;
     active?: number;
     activeColor?: string;
     children?: React.ReactNode;

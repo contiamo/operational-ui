@@ -17,18 +17,18 @@ var mixins_1 = require("./utils/mixins");
 var constants_1 = require("./constants");
 var InputField = glamorous_1.default.input(function (_a) {
     var theme = _a.theme, disabled = _a.disabled, isStandalone = _a.isStandalone, isError = _a.isError;
-    return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: constants_1.inputDefaultWidth, padding: theme.spacing * 2 / 3, border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: isError ? theme.colors.error : "rgb(208, 217, 229)", font: "inherit", borderRadius: 4, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme, isError: isError }) }));
+    return (__assign({}, theme.typography.body, isStandalone ? {} : { display: "block" }, { label: "input", minWidth: constants_1.inputDefaultWidth, padding: theme.spacing * 2 / 3, border: "1px solid", opacity: disabled ? 0.6 : 1.0, borderColor: isError ? theme.colors.error : theme.colors.inputBorder, font: "inherit", borderRadius: theme.borderRadius, WebkitAppearance: "none", "&:focus": mixins_1.inputFocus({ theme: theme, isError: isError }) }));
 });
 var Error = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.small, { color: theme.colors.error, padding: theme.spacing / 6 + "px " + theme.spacing * 3 / 4 + "px", marginTop: theme.spacing / 6, marginBottom: 0, width: "100%", borderRadius: 3, position: "absolute", backgroundColor: utils_1.lighten(theme.colors.error, 45), boxShadow: theme.shadows.card, bottom: theme.spacing * -2.25, left: 0 }));
+    return (__assign({}, theme.typography.small, { color: theme.colors.error, padding: theme.spacing / 6 + "px " + theme.spacing * 3 / 4 + "px", marginBottom: 0, width: "100%", borderRadius: theme.borderRadius, position: "absolute", backgroundColor: utils_1.lighten(theme.colors.error, 45), boxShadow: theme.shadows.card, bottom: theme.spacing * -1.75, left: 0 }));
 });
 var ControlsContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         position: "absolute",
         top: 3,
-        right: theme.spacing
+        right: 0
     });
 });
 var Control = glamorous_1.default.div(function (_a) {

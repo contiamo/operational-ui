@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
-var constants_1 = require("./constants");
 var Container = glamorous_1.default.header(function (_a) {
     var theme = _a.theme;
     return ({
@@ -10,9 +9,9 @@ var Container = glamorous_1.default.header(function (_a) {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: theme.colors.white,
-        height: constants_1.headerHeight,
+        height: theme.box,
         alignItems: "center",
-        padding: "0 " + theme.spacing * 4 / 3 + "px",
+        padding: "0 " + theme.spacing * 1.25 + "px",
         boxShadow: theme.shadows.card
     });
 });

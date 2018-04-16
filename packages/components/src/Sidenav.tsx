@@ -3,7 +3,7 @@ import glamorous from "glamorous"
 import { readableTextColor } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
 
-import { sidenavWidth, sidenavExpandedWidth } from "./constants"
+import { sidenavExpandedWidth } from "./constants"
 
 export interface Props {
   id?: string
@@ -31,8 +31,8 @@ const Container = glamorous.div(
     expandOnHover?: boolean
     expanded?: boolean
   }): {} => {
-    const backgroundColor = theme.colors.sidenavBackground
-    const color = readableTextColor(backgroundColor, [theme.colors.bodyText, theme.colors.white])
+    const backgroundColor = theme.colors.navBackground
+    const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
     const expandOnHoverStyles = expandOnHover
       ? {
           transition: ".3s width cubic-bezier(.8, 0, 0, 1)",
@@ -49,7 +49,7 @@ const Container = glamorous.div(
       backgroundColor,
       color,
       label: "sidenav",
-      width: expanded ? sidenavExpandedWidth : sidenavWidth,
+      width: expanded ? sidenavExpandedWidth : theme.box,
       zIndex: theme.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",

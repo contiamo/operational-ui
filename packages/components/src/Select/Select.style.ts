@@ -23,14 +23,15 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
       position: "relative",
       display: "flex",
       alignItems: "center",
-      padding: theme.spacing * 2 / 3,
+      padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3 + 40}px ${theme.spacing / 2}px ${theme.spacing *
+        2 /
+        3}px `,
       borderRadius: 4,
-      paddingRight: theme.spacing / 2 + 40,
       width: "fit-content",
       minWidth: 240,
       minHeight: 20,
       border: "1px solid",
-      borderColor: "rgb(208, 217, 229)",
+      borderColor: theme.colors.inputBorder,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
       color: readableTextColor(backgroundColor, ["black", "white"]),
@@ -46,7 +47,7 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
         width: 0,
         height: 0,
         border: "4px solid transparent",
-        borderTopColor: theme.colors.gray70,
+        borderTopColor: theme.colors.gray,
         transform: "translateY(calc(-50% + 2px))"
       },
 
@@ -61,7 +62,7 @@ export interface IDisplayValueProps {
 
 const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
   ({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
-    color: isPlaceholder ? theme.colors.gray60 : theme.colors.black
+    color: isPlaceholder ? theme.colors.gray : theme.colors.black
   })
 )
 

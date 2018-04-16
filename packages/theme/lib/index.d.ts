@@ -1,5 +1,5 @@
 export { expandColor } from "./utils";
-export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray10" | "gray20" | "gray30" | "gray40" | "gray50" | "gray60" | "gray70" | "gray80" | "gray90" | "background" | "bodyText" | "emphasizedText" | "lightText" | "linkText" | "cardBackground" | "border" | "sidenavBackground" | "secondarySeparator" | "separator";
+export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray" | "lightGray" | "text" | "lightText" | "linkText" | "navBackground" | "background" | "lighterBackground" | "border" | "secondarySeparator" | "separator";
 export interface ThemeColors {
     brand: string;
     info: string;
@@ -9,25 +9,16 @@ export interface ThemeColors {
     visualizationPalette: string[];
     white: string;
     black: string;
-    gray10: string;
-    gray20: string;
-    gray30: string;
-    gray40: string;
-    gray50: string;
-    gray60: string;
-    gray70: string;
-    gray80: string;
-    gray90: string;
+    gray: string;
+    lightGray: string;
     background: string;
-    cardHeaderBackground: string;
-    bodyText: string;
-    emphasizedText: string;
+    lighterBackground: string;
+    navBackground: string;
+    text: string;
     lightText: string;
     linkText: string;
-    cardBackground: string;
     border: string;
-    sidenavBackground: string;
-    secondarySeparator: string;
+    inputBorder: string;
     separator: string;
 }
 export interface ThemeShadows {
@@ -60,6 +51,8 @@ export interface Theme {
     typography: ThemeTypography;
     fontFamily: string;
     spacing: number;
+    box: number;
+    borderRadius: number;
     baseZIndex: number;
     shadows: ThemeShadows;
 }
