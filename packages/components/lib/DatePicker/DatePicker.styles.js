@@ -9,8 +9,6 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
-// It is necessary to import the card props so that TypeScript can compile type definitions.
-var Card_1 = require("../Card");
 var mixins = require("../utils/mixins");
 var constants_1 = require("../constants");
 var inputHeight = 33;
@@ -22,15 +20,19 @@ exports.Container = glamorous_1.default.div(function (_a) {
         position: "relative"
     });
 });
-exports.DatePickerCard = glamorous_1.default(Card_1.default)({
+exports.DatePickerCard = glamorous_1.default.div({
     position: "absolute",
     left: 0
 }, function (_a) {
     var theme = _a.theme, isExpanded = _a.isExpanded;
     return ({
+        backgroundColor: theme.colors.white,
         display: isExpanded ? "block" : "none",
         boxShadow: theme.shadows.popup,
-        top: inputHeight + 4,
+        borderRadius: theme.borderRadius,
+        // Push down the card to the bottom of the input field,
+        // plus the twice the size of the outside focus shadow.
+        top: inputHeight + 6,
         padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
         width: constants_1.inputDefaultWidth,
         zIndex: theme.baseZIndex + 1000
@@ -74,7 +76,7 @@ exports.MonthNav = glamorous_1.default.div(function (_a) {
             verticalAlign: "middle",
             display: "inline-block"
         },
-        "& > span": __assign({}, theme.typography.body, { userSelect: "none", width: 100, textAlign: "center" })
+        "& > span": __assign({}, theme.typography.body, { userSelect: "none", width: 120, textAlign: "center" })
     });
 });
 exports.IconContainer = glamorous_1.default.div({
@@ -105,8 +107,8 @@ exports.Day = glamorous_1.default.div({
     return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.info : "transparent", color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black }));
 });
 exports.Input = glamorous_1.default.input(function (_a) {
-    var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 4, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: "rgb(208, 217, 229)", width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }));
+    var theme = _a.theme, isExpanded = _a.isExpanded;
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 4, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: "rgb(208, 217, 229)", width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }, isExpanded ? mixins.inputFocus({ theme: theme }) : {}));
 });
 exports.ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;

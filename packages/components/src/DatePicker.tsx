@@ -154,6 +154,7 @@ class DatePicker extends React.Component<Props, State> {
           </Toggle>
         )}
         <Input
+          isExpanded={this.state.isExpanded}
           id={domId}
           readOnly
           innerRef={node => {
@@ -162,18 +163,40 @@ class DatePicker extends React.Component<Props, State> {
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={placeholder || "Enter date"}
           onClick={(ev: any) => {
-            this.setState(prevState => ({ isExpanded: !prevState.isExpanded }))
-            this.inputNode && this.state.isExpanded && this.inputNode.blur()
+            this.setState(
+              prevState => ({ isExpanded: !prevState.isExpanded }),
+              () => {
+                console.log(this.state.isExpanded)
+                if (!this.state.isExpanded) {
+                  this.inputNode.blur()
+                }
+              }
+            )
           }}
           css={{ width: "100%" }}
         />
-        <DatePickerCard isExpanded={isExpanded}>
+        <DatePickerCard
+          isExpanded={isExpanded}
+          onClick={(ev: any) => {
+            console.log(ev)
+          }}
+        >
           <MonthNav>
-            <IconContainer onClick={() => this.changeMonth(-1)}>
+            <IconContainer
+              onClick={(ev: any) => {
+                ev.preventDefault()
+                this.changeMonth(-1)
+              }}
+            >
               <Icon name="ChevronLeft" size={14} />
             </IconContainer>
             <span>{`${months[month]}, ${year}`}</span>
-            <IconContainer onClick={() => this.changeMonth(+1)}>
+            <IconContainer
+              onClick={(ev: any) => {
+                ev.preventDefault()
+                this.changeMonth(+1)
+              }}
+            >
               <Icon name="ChevronRight" size={14} />
             </IconContainer>
           </MonthNav>

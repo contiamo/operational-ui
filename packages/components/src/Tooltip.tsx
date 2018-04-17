@@ -39,10 +39,11 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
     position: "absolute",
     zIndex: theme.baseZIndex + 101,
     width: "fit-content",
-    maxWidth: 200,
+    minWidth: 80,
+    maxWidth: 360,
+    whiteSpace: "no-wrap",
     padding: `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
     borderRadius: 2,
-    wordWrap: "break-word",
     boxShadow: theme.shadows.popup,
     ...(() => {
       if (position === "top") {

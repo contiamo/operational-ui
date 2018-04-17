@@ -22,20 +22,19 @@ export const Container: GlamorousComponent<ContainerProps, ContainerProps & { th
   })
 )
 
-export interface DatePickerCardProps {
-  theme: Theme
-  isExpanded?: boolean
-}
-
-export const DatePickerCard = glamorous(Card)(
+export const DatePickerCard = glamorous.div(
   {
     position: "absolute",
     left: 0
   },
-  ({ theme, isExpanded }: DatePickerCardProps): CSSProperties => ({
+  ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): CSSProperties => ({
+    backgroundColor: theme.colors.white,
     display: isExpanded ? "block" : "none",
     boxShadow: theme.shadows.popup,
-    top: inputHeight + 4,
+    borderRadius: theme.borderRadius,
+    // Push down the card to the bottom of the input field,
+    // plus the twice the size of the outside focus shadow.
+    top: inputHeight + 6,
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
     width: inputDefaultWidth,
     zIndex: theme.baseZIndex + 1000
@@ -82,7 +81,7 @@ export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { 
   "& > span": {
     ...theme.typography.body,
     userSelect: "none",
-    width: 100,
+    width: 120,
     textAlign: "center"
   }
 }))
@@ -124,21 +123,20 @@ export const Day: GlamorousComponent<
   })
 )
 
-export const Input: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.input(
-  ({ theme }: { theme: Theme }): {} => ({
-    ...theme.typography.body,
-    userSelect: "none",
-    borderRadius: 4,
-    padding: theme.spacing * 2 / 3,
-    height: inputHeight,
-    cursor: "pointer",
-    border: "1px solid",
-    borderColor: "rgb(208, 217, 229)",
-    width: 200,
-    position: "relative",
-    "&:focus": mixins.inputFocus({ theme })
-  })
-)
+export const Input = glamorous.input(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
+  ...theme.typography.body,
+  userSelect: "none",
+  borderRadius: 4,
+  padding: theme.spacing * 2 / 3,
+  height: inputHeight,
+  cursor: "pointer",
+  border: "1px solid",
+  borderColor: "rgb(208, 217, 229)",
+  width: 200,
+  position: "relative",
+  "&:focus": mixins.inputFocus({ theme }),
+  ...isExpanded ? mixins.inputFocus({ theme }) : {}
+}))
 
 export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => void }, {}> = glamorous.div(
   ({ theme }: { theme: Theme }): {} => ({

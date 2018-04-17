@@ -1,6 +1,7 @@
 /// <reference types="react" />
+import { CSSProperties } from "glamorous";
 export interface Props {
-    css?: {};
+    css?: CSSProperties;
     className?: string;
     placeholder?: string;
     name?: string;

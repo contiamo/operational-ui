@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous, { CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
@@ -9,7 +9,7 @@ import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, Form
 import { inputDefaultWidth } from "./constants"
 
 export interface Props {
-  css?: {}
+  css?: CSSProperties
   className?: string
   placeholder?: string
   name?: string
