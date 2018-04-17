@@ -119,8 +119,9 @@ class QuantAxis implements AxisClass<number> {
       steps[2] = step
     }
 
-    steps[0] =
-      this.start || (this.end ? this.end % steps[2] - steps[2] : Math.floor(computed.domain[0] / steps[2]) * steps[2])
+    let computedStart: number = this.end % steps[2]
+    computedStart = computedStart - (computedStart > computed.domain[0] ? steps[2] : 0)
+    steps[0] = this.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2]
     steps[1] = this.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0]
     return steps
   }

@@ -12,20 +12,22 @@ const data: any = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: "E", y: 100},
-      {x: "B", y: 200},
-      {x: "D", y: 175},
-      {x: "C", y: 260},
-      {x: "A", y: 100},
-      {x: "F", y: 200}
-    ],
-    renderAs: [BarsRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: "E", y: 100 },
+        { x: "B", y: 200 },
+        { x: "D", y: 175 },
+        { x: "C", y: 260 },
+        { x: "A", y: 100 },
+        { x: "F", y: 200 }
+      ],
+      renderAs: [BarsRenderer]
+    }
+  ]
 }
 
 const data1: any = {
@@ -36,20 +38,22 @@ const data1: any = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: "E", y: 100},
-      {x: "B", y: 200},
-      {x: "D", y: 175},
-      {x: "C", y: 260},
-      {x: "A", y: 100},
-      {x: "F", y: 200}
-    ],
-    renderAs: [BarsRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: "E", y: 100 },
+        { x: "B", y: 200 },
+        { x: "D", y: 175 },
+        { x: "C", y: 260 },
+        { x: "A", y: 100 },
+        { x: "F", y: 200 }
+      ],
+      renderAs: [BarsRenderer]
+    }
+  ]
 }
 
 export const marathon = ({ test, afterAll, container }: IMarathon): void => {

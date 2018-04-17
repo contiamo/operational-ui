@@ -24,22 +24,24 @@ const axes: any = {
   },
   y1: {
     type: "quant"
-  },
+  }
 }
 
 const data = {
   axes,
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date("March 11, 2018"), y: 100},
-      {x: new Date("March 12, 2018"), y: 200},
-      {x: new Date("March 13, 2018"), y: 175},
-      {x: new Date("March 14, 2018"), y: 260},
-      {x: new Date("March 15, 2018"), y: 220}
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date("March 11, 2018"), y: 100 },
+        { x: new Date("March 12, 2018"), y: 200 },
+        { x: new Date("March 13, 2018"), y: 175 },
+        { x: new Date("March 14, 2018"), y: 260 },
+        { x: new Date("March 15, 2018"), y: 220 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 export const marathon = ({ test, afterAll, container }: IMarathon): void => {

@@ -79,7 +79,7 @@ class TimeAxis implements AxisClass<Date> {
   end: Date
   events: EventBus
   interval: TimeIntervals
-  isXAxis: boolean
+  isXAxis: boolean = true
   position: AxisPosition
   previous: AxisComputed
   start: Date
@@ -91,8 +91,10 @@ class TimeAxis implements AxisClass<Date> {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
+    if (position === "y1" || position === "y2") {
+      throw new Error("Time axis must be horizontal")
+    }
     this.position = position
-    this.isXAxis = position[0] === "x"
     this.el = insertElements(el, position, this.state.current.get("computed").canvas.drawingDims)
     // this.el.on("mouseenter", this.onComponentHover(this))  }
   }
@@ -145,8 +147,7 @@ class TimeAxis implements AxisClass<Date> {
 
     const config: ChartConfig = this.state.current.get("config")
     const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
-    const defaultTickWidth: number =
-      this.position[0] === "x" ? drawingDims.width / ticksInDomain.length : drawingDims.height / ticksInDomain.length
+    const defaultTickWidth: number = drawingDims.width / ticksInDomain.length
 
     const stacks = groupBy("stackIndex")(barSeries)
     const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
@@ -187,18 +188,10 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private computeRange(tickWidth: number, numberOfTicks: number): [number, number] {
-    const config: ChartConfig = this.state.current.get("config")
-    const computed: Computed = this.state.current.get("computed")
+    const computedWidth: number = this.state.current.get("computed").canvas.drawingDims.width
     const width: number = tickWidth * numberOfTicks
     const offset: number = tickWidth / 2
-    const margin = (axis: AxisPosition): number =>
-      includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
-    return this.position[0] === "x"
-      ? [offset, (width || computed.canvas.drawingDims.width) - offset]
-      : [
-          (computed.canvas.drawingDims.height || width) - offset,
-          offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)
-        ]
+    return [offset, (width || computedWidth) - offset]
   }
 
   private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
@@ -281,7 +274,7 @@ class TimeAxis implements AxisClass<Date> {
     }
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
-    this.events.emit("margins:update", this.isXAxis)
+    this.events.emit("margins:update", true)
     this.el.attr(
       "transform",
       `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`
@@ -291,27 +284,26 @@ class TimeAxis implements AxisClass<Date> {
   private getAttributes(): AxisAttributes {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
-      dx: this.isXAxis ? 0 : tickOffset,
-      dy: this.isXAxis ? tickOffset : "-0.4em",
+      dx: 0,
+      dy: tickOffset,
       text: tickFormatter(this.interval),
-      x: this.isXAxis ? this.computed.scale : 0,
-      y: this.isXAxis ? 0 : this.computed.scale
+      x: this.computed.scale,
+      y: 0
     }
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults(attributes)({
-      x: this.isXAxis ? this.previous.scale : 0,
-      y: this.isXAxis ? 0 : this.previous.scale
+      x: this.previous.scale,
+      y: 0
     })
   }
 
   private drawBorder(): void {
-    const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
     const border: Object<number> = {
       x1: 0,
-      x2: this.isXAxis ? drawingDims.width : 0,
-      y1: this.isXAxis ? 0 : drawingDims.height,
+      x2: this.state.current.get("computed").canvas.drawingDims.width,
+      y1: 0,
       y2: 0
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)

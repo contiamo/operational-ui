@@ -32,12 +32,15 @@ var tickFormatter = function (interval) {
 };
 var TimeAxis = /** @class */ (function () {
     function TimeAxis(state, stateWriter, events, el, position) {
+        this.isXAxis = true;
         this.type = "time";
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
+        if (position === "y1" || position === "y2") {
+            throw new Error("Time axis must be horizontal");
+        }
         this.position = position;
-        this.isXAxis = position[0] === "x";
         this.el = axis_utils_1.insertElements(el, position, this.state.current.get("computed").canvas.drawingDims);
         // this.el.on("mouseenter", this.onComponentHover(this))  }
     }
@@ -83,7 +86,7 @@ var TimeAxis = /** @class */ (function () {
         }
         var config = this.state.current.get("config");
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
-        var defaultTickWidth = this.position[0] === "x" ? drawingDims.width / ticksInDomain.length : drawingDims.height / ticksInDomain.length;
+        var defaultTickWidth = drawingDims.width / ticksInDomain.length;
         var stacks = fp_1.groupBy("stackIndex")(barSeries);
         var partitionedStacks = fp_1.partition(function (stack) {
             return fp_1.compact(fp_1.map(fp_1.get("barWidth"))(stack)).length > 0;
@@ -116,19 +119,10 @@ var TimeAxis = /** @class */ (function () {
         }, {})(indices);
     };
     TimeAxis.prototype.computeRange = function (tickWidth, numberOfTicks) {
-        var config = this.state.current.get("config");
-        var computed = this.state.current.get("computed");
+        var computedWidth = this.state.current.get("computed").canvas.drawingDims.width;
         var width = tickWidth * numberOfTicks;
         var offset = tickWidth / 2;
-        var margin = function (axis) {
-            return fp_1.includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0;
-        };
-        return this.position[0] === "x"
-            ? [offset, (width || computed.canvas.drawingDims.width) - offset]
-            : [
-                (computed.canvas.drawingDims.height || width) - offset,
-                offset + (margin("x2") || config[this.position].minTopOffsetTopTick)
-            ];
+        return [offset, (width || computedWidth) - offset];
     };
     TimeAxis.prototype.computeTickNumber = function (ticksInDomain, range) {
         var width = Math.abs(range[1] - range[0]);
@@ -197,31 +191,30 @@ var TimeAxis = /** @class */ (function () {
         }
         computedMargins[this.position] = requiredMargin;
         this.stateWriter("margins", computedMargins);
-        this.events.emit("margins:update", this.isXAxis);
+        this.events.emit("margins:update", true);
         this.el.attr("transform", "translate(" + axis_utils_1.axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",") + ")");
     };
     TimeAxis.prototype.getAttributes = function () {
         var tickOffset = this.state.current.get("config")[this.position].tickOffset;
         return {
-            dx: this.isXAxis ? 0 : tickOffset,
-            dy: this.isXAxis ? tickOffset : "-0.4em",
+            dx: 0,
+            dy: tickOffset,
             text: tickFormatter(this.interval),
-            x: this.isXAxis ? this.computed.scale : 0,
-            y: this.isXAxis ? 0 : this.computed.scale
+            x: this.computed.scale,
+            y: 0
         };
     };
     TimeAxis.prototype.getStartAttributes = function (attributes) {
         return fp_1.defaults(attributes)({
-            x: this.isXAxis ? this.previous.scale : 0,
-            y: this.isXAxis ? 0 : this.previous.scale
+            x: this.previous.scale,
+            y: 0
         });
     };
     TimeAxis.prototype.drawBorder = function () {
-        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         var border = {
             x1: 0,
-            x2: this.isXAxis ? drawingDims.width : 0,
-            y1: this.isXAxis ? 0 : drawingDims.height,
+            x2: this.state.current.get("computed").canvas.drawingDims.width,
+            y1: 0,
             y2: 0
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);

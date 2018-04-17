@@ -69,9 +69,6 @@ var alignTimeAxes = function (axes) {
     }
     var ticksInDomainOne = computed[axisKeys[0]].ticksInDomain;
     var ticksInDomainTwo = computed[axisKeys[1]].ticksInDomain;
-    if (ticksInDomainOne.length === ticksInDomainTwo.length) {
-        return;
-    }
     if (ticksInDomainOne.length < ticksInDomainTwo.length) {
         fp_1.times(function () {
             ticksInDomainOne.push(moment(fp_1.last(ticksInDomainOne))

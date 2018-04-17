@@ -25,29 +25,31 @@ const data: any = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2018, 2, 1), y: 100},
-      {x: new Date(2018, 2, 2), y: 200},
-      {x: new Date(2018, 2, 3), y: 175},
-      {x: new Date(2018, 2, 4), y: 260},
-      {x: new Date(2018, 2, 5), y: 100},
-      {x: new Date(2018, 2, 6), y: 200},
-      {x: new Date(2018, 2, 7), y: 175},
-      {x: new Date(2018, 2, 8), y: 260},
-      {x: new Date(2018, 2, 9), y: 100},
-      {x: new Date(2018, 2, 10), y: 200},
-      {x: new Date(2018, 2, 11), y: 175},
-      {x: new Date(2018, 2, 12), y: 260},
-      {x: new Date(2018, 2, 13), y: 220},
-      {x: new Date(2018, 2, 14), y: 220},
-      {x: new Date(2018, 2, 15), y: 220},
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2018, 2, 1), y: 100 },
+        { x: new Date(2018, 2, 2), y: 200 },
+        { x: new Date(2018, 2, 3), y: 175 },
+        { x: new Date(2018, 2, 4), y: 260 },
+        { x: new Date(2018, 2, 5), y: 100 },
+        { x: new Date(2018, 2, 6), y: 200 },
+        { x: new Date(2018, 2, 7), y: 175 },
+        { x: new Date(2018, 2, 8), y: 260 },
+        { x: new Date(2018, 2, 9), y: 100 },
+        { x: new Date(2018, 2, 10), y: 200 },
+        { x: new Date(2018, 2, 11), y: 175 },
+        { x: new Date(2018, 2, 12), y: 260 },
+        { x: new Date(2018, 2, 13), y: 220 },
+        { x: new Date(2018, 2, 14), y: 220 },
+        { x: new Date(2018, 2, 15), y: 220 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 export const marathon = ({ test, afterAll, container }: IMarathon): void => {

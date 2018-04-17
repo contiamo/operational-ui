@@ -87,17 +87,16 @@ const alignTimeAxes = (axes: Object<AxisClass<Date>>): void => {
   const computed: Object<Partial<AxisComputed>> = mapValues((axis: AxisClass<number>): Partial<AxisComputed> =>
     axis.computeInitial()
   )(axes)
+
   const axisKeys: string[] = keys(computed)
   const intervalOne: any = axes[axisKeys[0]].interval
   const intervalTwo: any = axes[axisKeys[1]].interval
   if (intervalOne !== intervalTwo) {
     throw new Error("Time axes must have the same interval")
   }
+
   const ticksInDomainOne: Date[] = computed[axisKeys[0]].ticksInDomain
   const ticksInDomainTwo: Date[] = computed[axisKeys[1]].ticksInDomain
-  if (ticksInDomainOne.length === ticksInDomainTwo.length) {
-    return
-  }
   if (ticksInDomainOne.length < ticksInDomainTwo.length) {
     times(() => {
       ticksInDomainOne.push(
@@ -117,6 +116,7 @@ const alignTimeAxes = (axes: Object<AxisClass<Date>>): void => {
   }
   computed[axisKeys[0]].ticksInDomain = ticksInDomainOne
   computed[axisKeys[1]].ticksInDomain = ticksInDomainTwo
+
   forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition): void => {
     axis.computeAligned(computed[key])
   })(axes)

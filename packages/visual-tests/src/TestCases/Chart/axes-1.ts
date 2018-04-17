@@ -25,30 +25,32 @@ const data_hour = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2018, 2, 8, 0), y: 100},
-      {x: new Date(2018, 2, 8, 1), y: 200},
-      {x: new Date(2018, 2, 8, 2), y: 175},
-      {x: new Date(2018, 2, 8, 3), y: 260},
-      {x: new Date(2018, 2, 8, 4), y: 100},
-      {x: new Date(2018, 2, 8, 5), y: 200},
-      {x: new Date(2018, 2, 8, 9), y: 175},
-      {x: new Date(2018, 2, 8, 10), y: 260},
-      {x: new Date(2018, 2, 8, 11), y: 100},
-      {x: new Date(2018, 2, 8, 13), y: 200},
-      {x: new Date(2018, 2, 8, 17), y: 175},
-      {x: new Date(2018, 2, 8, 18), y: 260},
-      {x: new Date(2018, 2, 8, 19), y: 220},
-      {x: new Date(2018, 2, 8, 20), y: 220},
-      {x: new Date(2018, 2, 8, 21), y: 220},
-      {x: new Date(2018, 2, 8, 22), y: 220}
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2018, 2, 8, 0), y: 100 },
+        { x: new Date(2018, 2, 8, 1), y: 200 },
+        { x: new Date(2018, 2, 8, 2), y: 175 },
+        { x: new Date(2018, 2, 8, 3), y: 260 },
+        { x: new Date(2018, 2, 8, 4), y: 100 },
+        { x: new Date(2018, 2, 8, 5), y: 200 },
+        { x: new Date(2018, 2, 8, 9), y: 175 },
+        { x: new Date(2018, 2, 8, 10), y: 260 },
+        { x: new Date(2018, 2, 8, 11), y: 100 },
+        { x: new Date(2018, 2, 8, 13), y: 200 },
+        { x: new Date(2018, 2, 8, 17), y: 175 },
+        { x: new Date(2018, 2, 8, 18), y: 260 },
+        { x: new Date(2018, 2, 8, 19), y: 220 },
+        { x: new Date(2018, 2, 8, 20), y: 220 },
+        { x: new Date(2018, 2, 8, 21), y: 220 },
+        { x: new Date(2018, 2, 8, 22), y: 220 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 const data_day = {
@@ -61,19 +63,21 @@ const data_day = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2018, 2, 11), y: 100},
-      {x: new Date(2018, 2, 12), y: 200},
-      {x: new Date(2018, 2, 13), y: 175},
-      {x: new Date(2018, 2, 14), y: 260},
-      {x: new Date(2018, 2, 15), y: 220}
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2018, 2, 11), y: 100 },
+        { x: new Date(2018, 2, 12), y: 200 },
+        { x: new Date(2018, 2, 13), y: 175 },
+        { x: new Date(2018, 2, 14), y: 260 },
+        { x: new Date(2018, 2, 15), y: 220 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 const data_week = {
@@ -86,19 +90,21 @@ const data_week = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2018, 2, 11), y: 100},
-      {x: new Date(2018, 2, 12), y: 200},
-      {x: new Date(2018, 2, 13), y: 175},
-      {x: new Date(2018, 2, 14), y: 260},
-      {x: new Date(2018, 2, 15), y: 220}
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2018, 2, 11), y: 100 },
+        { x: new Date(2018, 2, 12), y: 200 },
+        { x: new Date(2018, 2, 13), y: 175 },
+        { x: new Date(2018, 2, 14), y: 260 },
+        { x: new Date(2018, 2, 15), y: 220 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 const data_month = {
@@ -111,18 +117,20 @@ const data_month = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2018, 0), y: 100},
-      {x: new Date(2018, 1), y: 200},
-      {x: new Date(2018, 2), y: 175},
-      {x: new Date(2018, 3), y: 260},
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2018, 0), y: 100 },
+        { x: new Date(2018, 1), y: 200 },
+        { x: new Date(2018, 2), y: 175 },
+        { x: new Date(2018, 3), y: 260 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 const data_quarter = {
@@ -135,21 +143,22 @@ const data_quarter = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2017, 0), y: 100},
-      {x: new Date(2017, 3), y: 200},
-      {x: new Date(2017, 6), y: 175},
-      {x: new Date(2017, 9), y: 260},
-      {x: new Date(2018, 0), y: 200},
-      {x: new Date(2018, 3), y: 70},
-
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2017, 0), y: 100 },
+        { x: new Date(2017, 3), y: 200 },
+        { x: new Date(2017, 6), y: 175 },
+        { x: new Date(2017, 9), y: 260 },
+        { x: new Date(2018, 0), y: 200 },
+        { x: new Date(2018, 3), y: 70 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 const data_year = {
@@ -162,19 +171,20 @@ const data_year = {
     },
     y1: {
       type: "quant"
-    },
+    }
   },
-  series: [{
-    key: "series1",
-    data: [
-      {x: new Date(2015, 0), y: 700},
-      {x: new Date(2016, 0), y: 800},
-      {x: new Date(2017, 0), y: 675},
-      {x: new Date(2018, 0), y: 260},
-
-    ],
-    renderAs: [LineRenderer, AreaRenderer]
-  }]
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2015, 0), y: 700 },
+        { x: new Date(2016, 0), y: 800 },
+        { x: new Date(2017, 0), y: 675 },
+        { x: new Date(2018, 0), y: 260 }
+      ],
+      renderAs: [LineRenderer, AreaRenderer]
+    }
+  ]
 }
 
 export const marathon = ({ test, afterAll, container }: IMarathon): void => {

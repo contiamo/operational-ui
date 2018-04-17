@@ -94,7 +94,10 @@ var CategoricalAxis = /** @class */ (function () {
         };
         var range = this.position[0] === "x"
             ? [0, width || computed.canvas.drawingDims.width]
-            : [computed.canvas.drawingDims.height || width, margin("x2") || config[this.position].minTopOffsetTopTick];
+            : [
+                computed.canvas.drawingDims.height || width,
+                margin("x2") || config[this.position].minTopOffsetTopTick
+            ];
         var adjustedRange = [range[0] + offset, range[1] + offset];
         return adjustedRange;
     };

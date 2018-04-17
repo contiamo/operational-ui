@@ -6,9 +6,7 @@ var d3_utils_1 = require("../../utils/d3_utils");
 var quant_axis_utils_1 = require("../../utils/quant_axis_utils");
 var styles = require("./styles");
 var stepScaleFactors = function (step) {
-    return step === 1
-        ? [10, 5, 2, 1]
-        : fp_1.rangeStep(0.5)(0, 10);
+    return step === 1 ? [10, 5, 2, 1] : fp_1.rangeStep(0.5)(0, 10);
 };
 var QuantAxis = /** @class */ (function () {
     function QuantAxis(state, stateWriter, events, el, position) {
@@ -67,7 +65,7 @@ var QuantAxis = /** @class */ (function () {
             var scaleFactor = void 0;
             if (this.end) {
                 // If a value has been explicitly set for this.end, there must be a tick at this value
-                var validScaleFactors = fp_1.filter(function (val) { return span_1 / (step_1 * val) % 1 === 0; })(stepScaleFactors(step_1));
+                var validScaleFactors = fp_1.filter(function (val) { return (span_1 / (step_1 * val)) % 1 === 0; })(stepScaleFactors(step_1));
                 // Choose scale factor which gives a number of ticks as close as possible to tickNumber
                 scaleFactor = fp_1.sortBy(function (val) { return Math.abs(span_1 / (val * step_1) - tickNumber_1); })(validScaleFactors)[0];
             }
@@ -79,7 +77,9 @@ var QuantAxis = /** @class */ (function () {
             step_1 *= scaleFactor;
             steps[2] = step_1;
         }
-        steps[0] = this.start || (this.end ? this.end % steps[2] - steps[2] : Math.floor(computed.domain[0] / steps[2]) * steps[2]);
+        var computedStart = this.end % steps[2];
+        computedStart = computedStart - (computedStart > computed.domain[0] ? steps[2] : 0);
+        steps[0] = this.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2];
         steps[1] = this.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0];
         return steps;
     };
