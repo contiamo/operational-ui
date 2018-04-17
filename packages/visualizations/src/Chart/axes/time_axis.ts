@@ -20,6 +20,7 @@ import {
   reduce,
   sortBy,
   uniq,
+  uniqueId,
   values
 } from "lodash/fp"
 import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
@@ -149,7 +150,7 @@ class TimeAxis implements AxisClass<Date> {
     const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
     const defaultTickWidth: number = drawingDims.width / ticksInDomain.length
 
-    const stacks = groupBy("stackIndex")(barSeries)
+    const stacks = groupBy((s: Object<any>) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
     const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
       return compact(map(get("barWidth"))(stack)).length > 0
     })(stacks)

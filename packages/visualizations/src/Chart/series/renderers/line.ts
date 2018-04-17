@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isNil, map, sortBy } from "lodash/fp"
+import { compact, defaults, difference, find, forEach, get, isNil, map, merge, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   line as d3Line,
@@ -21,6 +21,7 @@ import {
   EventBus,
   Partial,
   RendererAccessor,
+  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -30,9 +31,7 @@ import {
 
 export type Options = RendererOptions<LineRendererAccessors>
 
-const defaultAccessors: LineRendererAccessors = {
-  x: (series: Series, d: Datum) => d.x,
-  y: (series: Series, d: Datum) => d.y,
+const defaultAccessors: Partial<LineRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   dashed: (series: Series, d: Datum) => false,
   interpolate: (series: Series, d: Datum) => "linear",
@@ -129,7 +128,8 @@ class Line implements RendererClass<LineRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<LineRendererAccessors>): void {
-    const accessors: LineRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
+    const accessors: LineRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
     this.color = (d?: Datum): string => accessors.color(this.series, d)

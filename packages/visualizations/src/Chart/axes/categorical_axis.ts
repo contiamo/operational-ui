@@ -18,6 +18,7 @@ import {
   reduce,
   sortBy,
   uniq,
+  uniqueId,
   values
 } from "lodash/fp"
 import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
@@ -106,7 +107,7 @@ class CategoricalAxis implements AxisClass<string> {
       (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
       (1 - config.innerBarPaddingCategorical)
 
-    const stacks = groupBy("stackIndex")(barSeries)
+    const stacks = groupBy((s: Object<any>) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
     const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
       return compact(map(get("barWidth"))(stack)).length > 0
     })(stacks)

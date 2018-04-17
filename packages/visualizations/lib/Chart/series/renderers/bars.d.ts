@@ -30,6 +30,7 @@ declare class Bars implements RendererClass<BarsRendererAccessors> {
     private validate(d);
     private assignAccessors(customAccessors);
     private seriesTranslation();
+    private startAttributes(attributes);
     private attributes();
 }
 export default Bars;

@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
+var d3_utils_1 = require("../../../utils/d3_utils");
 var defaultAccessors = {
-    x: function (series, d) { return d.x; },
-    y: function (series, d) { return d.y; },
     color: function (series, d) { return series.legendColor(); },
     barWidth: function (series, d) { return undefined; }
 };
@@ -29,22 +28,25 @@ var Bars = /** @class */ (function () {
         var duration = this.state.current.get("config").duration;
         this.el.attr("transform", this.seriesTranslation());
         var attributes = this.attributes();
+        var startAttributes = this.startAttributes(attributes);
         var bars = this.el.selectAll("rect").data(data);
         bars
             .enter()
             .append("svg:rect")
+            .call(d3_utils_1.setRectAttributes, startAttributes)
             .merge(bars)
-            .attr("fill", this.color.bind(this))
             .transition()
             .duration(duration)
-            .attr("x", attributes.x)
-            .attr("y", attributes.y)
-            .attr("width", attributes.width)
-            .attr("height", attributes.height);
+            .call(d3_utils_1.setRectAttributes, attributes);
+        // .attr("x", attributes.x)
+        // .attr("y", attributes.y)
+        // .attr("width", attributes.width)
+        // .attr("height", attributes.height)
         bars
             .exit()
             .transition()
             .duration(duration)
+            .call(d3_utils_1.setRectAttributes, startAttributes)
             .remove();
     };
     Bars.prototype.close = function () {
@@ -83,7 +85,8 @@ var Bars = /** @class */ (function () {
     };
     Bars.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        var axisAcessors = this.state.current.get("accessors").renderer;
+        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
         this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
         this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
         this.color = function (d) { return accessors.color(_this.series, d); };
@@ -93,6 +96,16 @@ var Bars = /** @class */ (function () {
         var seriesBars = this.state.current.get("computed").axes.computedBars[this.series.key()];
         return this.quantIsY ? "translate(" + seriesBars.offset + ", 0)" : "translate(0, " + seriesBars.offset + ")";
     };
+    Bars.prototype.startAttributes = function (attributes) {
+        var _this = this;
+        return {
+            x: attributes.x,
+            y: function (d) { return attributes.y(d) + (_this.quantIsY ? attributes.height(d) : 0); },
+            width: this.quantIsY ? attributes.width : 0,
+            height: this.quantIsY ? 0 : attributes.height,
+            color: attributes.color
+        };
+    };
     Bars.prototype.attributes = function () {
         var _this = this;
         var barWidth = this.state.current.get("computed").axes.computedBars[this.series.key()].width;
@@ -100,7 +113,8 @@ var Bars = /** @class */ (function () {
             x: this.x0,
             y: this.y1,
             width: this.quantIsY ? barWidth : function (d) { return _this.x1(d) - _this.x0(d); },
-            height: this.quantIsY ? function (d) { return _this.y0(d) - _this.y1(d); } : barWidth
+            height: this.quantIsY ? function (d) { return _this.y0(d) - _this.y1(d); } : barWidth,
+            color: this.color.bind(this)
         };
     };
     return Bars;

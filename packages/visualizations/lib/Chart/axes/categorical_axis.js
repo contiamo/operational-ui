@@ -52,7 +52,7 @@ var CategoricalAxis = /** @class */ (function () {
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         var defaultTickWidth = (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
             (1 - config.innerBarPaddingCategorical);
-        var stacks = fp_1.groupBy("stackIndex")(barSeries);
+        var stacks = fp_1.groupBy(function (s) { return s.stackIndex || fp_1.uniqueId("stackIndex"); })(barSeries);
         var partitionedStacks = fp_1.partition(function (stack) {
             return fp_1.compact(fp_1.map(fp_1.get("barWidth"))(stack)).length > 0;
         })(stacks);

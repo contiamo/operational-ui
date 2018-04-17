@@ -6,5 +6,7 @@ import * as axes2 from "./axes-2"
 import * as axes3 from "./axes-3"
 import * as axes4 from "./axes-4"
 import * as axes5 from "./axes-5"
+import * as area1 from "./area-1"
+import * as bars1 from "./bars-1"
 
-export default [general1, general2, general3, axes1, axes2, axes3, axes4, axes5]
+export default [general1, general2, general3, axes1, axes2, axes3, axes4, axes5, area1, bars1]

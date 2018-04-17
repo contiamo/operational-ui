@@ -4,8 +4,6 @@ var fp_1 = require("lodash/fp");
 var d3_shape_1 = require("d3-shape");
 var styles = require("./styles");
 var defaultAccessors = {
-    x: function (series, d) { return d.x; },
-    y: function (series, d) { return d.y; },
     color: function (series, d) { return series.legendColor(); },
     dashed: function (series, d) { return false; },
     interpolate: function (series, d) { return "linear"; },
@@ -74,7 +72,8 @@ var Line = /** @class */ (function () {
     };
     Line.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        var axisAcessors = this.state.current.get("accessors").renderer;
+        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
         this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
         this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
         this.color = function (d) { return accessors.color(_this.series, d); };

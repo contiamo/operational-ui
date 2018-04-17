@@ -1,6 +1,7 @@
-import { compact, defaults, filter, get, includes, isFinite, map } from "lodash/fp"
+import { compact, defaults, filter, get, includes, isFinite, map, merge } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
+import { setRectAttributes } from "../../../utils/d3_utils"
 import {
   AxesData,
   AxisType,
@@ -11,6 +12,7 @@ import {
   EventBus,
   Object,
   RendererAccessor,
+  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -19,9 +21,7 @@ import {
 
 export type Options = RendererOptions<BarsRendererAccessors>
 
-const defaultAccessors: BarsRendererAccessors = {
-  x: (series: Series, d: Datum) => d.x,
-  y: (series: Series, d: Datum) => d.y,
+const defaultAccessors: Partial<BarsRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   barWidth: (series: Series, d: Datum) => undefined
 }
@@ -68,25 +68,24 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
     this.el.attr("transform", this.seriesTranslation())
     const attributes: Object<any> = this.attributes()
+    const startAttributes: Object<any> = this.startAttributes(attributes)
 
     const bars = this.el.selectAll("rect").data(data)
 
     bars
       .enter()
       .append("svg:rect")
+      .call(setRectAttributes, startAttributes)
       .merge(bars)
-      .attr("fill", this.color.bind(this))
       .transition()
       .duration(duration)
-      .attr("x", attributes.x)
-      .attr("y", attributes.y)
-      .attr("width", attributes.width)
-      .attr("height", attributes.height)
+      .call(setRectAttributes, attributes)
 
     bars
       .exit()
       .transition()
       .duration(duration)
+      .call(setRectAttributes, startAttributes)
       .remove()
   }
 
@@ -129,7 +128,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<BarsRendererAccessors>): void {
-    const accessors: BarsRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
+    const accessors: BarsRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
     this.color = (d?: Datum): string => accessors.color(this.series, d)
@@ -141,13 +141,24 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     return this.quantIsY ? `translate(${seriesBars.offset}, 0)` : `translate(0, ${seriesBars.offset})`
   }
 
+  private startAttributes(attributes: Object<any>): Object<any> {
+    return {
+      x: attributes.x,
+      y: (d: Datum): number => attributes.y(d) + (this.quantIsY ? attributes.height(d) : 0),
+      width: this.quantIsY ? attributes.width : 0,
+      height: this.quantIsY ? 0 : attributes.height,
+      color: attributes.color
+    }
+  }
+
   private attributes(): Object<any> {
     const barWidth: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width
     return {
       x: this.x0,
       y: this.y1,
       width: this.quantIsY ? barWidth : (d: Datum): number => this.x1(d) - this.x0(d),
-      height: this.quantIsY ? (d: Datum): number => this.y0(d) - this.y1(d) : barWidth
+      height: this.quantIsY ? (d: Datum): number => this.y0(d) - this.y1(d) : barWidth,
+      color: this.color.bind(this)
     }
   }
 }
