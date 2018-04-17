@@ -24,7 +24,7 @@ var utils_1 = require("@operational/utils");
 var Container = glamorous_1.default.div(function (_a) {
     var position = _a.position, theme = _a.theme;
     var backgroundColor = theme.colors.black;
-    return __assign({ backgroundColor: backgroundColor, label: "tooltip" }, theme.typography.small, { lineHeight: 1.3, position: "absolute", zIndex: theme.baseZIndex + 101, width: "fit-content", maxWidth: 200, padding: theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px", borderRadius: 2, wordWrap: "break-word", boxShadow: theme.shadows.popup }, (function () {
+    return __assign({ backgroundColor: backgroundColor, label: "tooltip" }, theme.typography.small, { lineHeight: 1.3, position: "absolute", zIndex: theme.baseZIndex + 101, width: "fit-content", minWidth: 80, maxWidth: 360, whiteSpace: "no-wrap", padding: theme.spacing / 3 + "px " + theme.spacing * 2 / 3 + "px", borderRadius: 2, boxShadow: theme.shadows.popup }, (function () {
         if (position === "top") {
             return {
                 left: "50%",

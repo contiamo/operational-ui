@@ -11,7 +11,7 @@ var Container = glamorous_1.default.header(function (_a) {
         backgroundColor: theme.colors.white,
         height: theme.box,
         alignItems: "center",
-        padding: "0 " + theme.spacing * 1.25 + "px",
+        padding: "0 " + theme.spacing * 1.5 + "px",
         boxShadow: theme.shadows.card
     });
 });

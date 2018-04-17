@@ -1,15 +1,15 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous, { CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
 import Icon from "./Icon"
 import Tooltip from "./Tooltip"
-import { Label, LabelText, inputFocus } from "./utils/mixins"
+import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "./utils/mixins"
 import { inputDefaultWidth } from "./constants"
 
 export interface Props {
-  css?: {}
+  css?: CSSProperties
   className?: string
   placeholder?: string
   name?: string
@@ -49,7 +49,7 @@ const InputField = glamorous.input(
     ...isStandalone ? {} : { display: "block" },
     label: "input",
     minWidth: inputDefaultWidth,
-    padding: theme.spacing * 2 / 3,
+    padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3}px`,
     border: "1px solid",
     opacity: disabled ? 0.6 : 1.0,
     borderColor: isError ? theme.colors.error : theme.colors.inputBorder,
@@ -59,51 +59,6 @@ const InputField = glamorous.input(
     "&:focus": inputFocus({ theme, isError })
   })
 )
-
-const Error = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.small,
-  color: theme.colors.error,
-  padding: `${theme.spacing / 6}px ${theme.spacing * 3 / 4}px`,
-  marginBottom: 0,
-  width: "100%",
-  borderRadius: theme.borderRadius,
-  position: "absolute",
-  backgroundColor: lighten(theme.colors.error, 45),
-  boxShadow: theme.shadows.card,
-  bottom: theme.spacing * -1.75,
-  left: 0
-}))
-
-const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "absolute",
-  top: 3,
-  right: 0
-}))
-
-const Control = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "relative",
-  verticalAlign: "middle",
-  display: "inline-block",
-  width: "fit-content",
-  marginLeft: 4,
-  "& svg": {
-    opacity: 0.4,
-    position: "relative",
-    top: -1
-  },
-  // :nth-child(2) refers to the tooltip
-  "& > :nth-child(2)": {
-    display: "none"
-  },
-  ":hover": {
-    "& svg": {
-      opacity: 1
-    },
-    "& > :nth-child(2)": {
-      display: "block"
-    }
-  }
-}))
 
 const Input = (props: Props) => {
   const forAttributeId = props.label && props.labelId
@@ -126,32 +81,32 @@ const Input = (props: Props) => {
     return (
       <Label id={props.id} htmlFor={forAttributeId} css={props.css} className={props.className}>
         <LabelText>{props.label}</LabelText>
-        <ControlsContainer>
+        <FormFieldControls>
           {props.hint ? (
-            <Control>
+            <FormFieldControl>
               <Icon name="HelpCircle" size={14} />
               <Tooltip right css={{ minWidth: 100, width: "fit-content" }}>
                 {props.hint}
               </Tooltip>
-            </Control>
+            </FormFieldControl>
           ) : null}
           {props.onToggle ? (
-            <Control
+            <FormFieldControl
               onClick={() => {
                 props.onToggle()
               }}
             >
               <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
-            </Control>
+            </FormFieldControl>
           ) : null}
-        </ControlsContainer>
+        </FormFieldControls>
         <InputField
           {...commonInputProps}
           id={forAttributeId}
           autoComplete={props.autoComplete}
           css={{ display: "block", width: "100%" }}
         />
-        {props.error ? <Error>{props.error}</Error> : null}
+        {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )
   }

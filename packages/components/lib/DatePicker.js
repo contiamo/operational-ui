@@ -106,18 +106,27 @@ var DatePicker = /** @class */ (function (_super) {
                     onChange && onChange({ start: null, end: null });
                 } },
                 React.createElement(Icon_1.default, { name: "X", size: 14 }))),
-            React.createElement(DatePicker_styles_1.Input, { id: domId, readOnly: true, innerRef: function (node) {
+            React.createElement(DatePicker_styles_1.Input, { isExpanded: this.state.isExpanded, id: domId, readOnly: true, innerRef: function (node) {
                     _this.inputNode = node;
                 }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: placeholder || "Enter date", onClick: function (ev) {
-                    _this.setState(function (prevState) { return ({ isExpanded: !prevState.isExpanded }); });
-                    _this.inputNode && _this.state.isExpanded && _this.inputNode.blur();
+                    _this.setState(function (prevState) { return ({ isExpanded: !prevState.isExpanded }); }, function () {
+                        if (!_this.state.isExpanded) {
+                            _this.inputNode.blur();
+                        }
+                    });
                 }, css: { width: "100%" } }),
             React.createElement(DatePicker_styles_1.DatePickerCard, { isExpanded: isExpanded },
                 React.createElement(DatePicker_styles_1.MonthNav, null,
-                    React.createElement(DatePicker_styles_1.IconContainer, { onClick: function () { return _this.changeMonth(-1); } },
+                    React.createElement(DatePicker_styles_1.IconContainer, { onClick: function (ev) {
+                            ev.preventDefault();
+                            _this.changeMonth(-1);
+                        } },
                         React.createElement(Icon_1.default, { name: "ChevronLeft", size: 14 })),
                     React.createElement("span", null, DatePicker_utils_1.months[month] + ", " + year),
-                    React.createElement(DatePicker_styles_1.IconContainer, { onClick: function () { return _this.changeMonth(+1); } },
+                    React.createElement(DatePicker_styles_1.IconContainer, { onClick: function (ev) {
+                            ev.preventDefault();
+                            _this.changeMonth(+1);
+                        } },
                         React.createElement(Icon_1.default, { name: "ChevronRight", size: 14 }))),
                 React.createElement(DatePicker_Month_1.default, { start: start, end: end, year: year, month: month, onChange: onChange }))));
         return label ? (React.createElement(mixins_1.Label, null,

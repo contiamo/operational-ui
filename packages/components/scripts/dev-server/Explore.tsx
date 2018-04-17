@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { render } from "react-dom"
 import { Theme } from "@operational/theme"
-import { OperationalUI, Select, DatePicker } from "../../src"
+import { OperationalUI, Select, DatePicker, Textarea } from "../../src"
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: theme.spacing,
@@ -30,13 +30,7 @@ class Explore extends React.Component<Props, State> {
     return (
       <OperationalUI withBaseStyles>
         <Container>
-          <DatePicker
-            start={this.state.start}
-            end={this.state.end}
-            onChange={change => {
-              this.setState(prevState => change)
-            }}
-          />
+          <Textarea label="Textarea label" value="1234" />
         </Container>
       </OperationalUI>
     )

@@ -2,18 +2,19 @@
 import * as React from "react";
 import { GlamorousComponent } from "glamorous";
 import { Theme } from "@operational/theme";
-import { Props as CardProps } from "../Card";
 export interface ContainerProps {
     isExpanded: boolean;
 }
 export declare const Container: GlamorousComponent<ContainerProps, ContainerProps & {
     theme: Theme;
 }>;
-export interface DatePickerCardProps {
+export declare const DatePickerCard: GlamorousComponent<Pick<{
     theme: Theme;
-    isExpanded?: boolean;
-}
-export declare const DatePickerCard: GlamorousComponent<CardProps & object & Pick<DatePickerCardProps, "isExpanded">, DatePickerCardProps>;
+    isExpanded: boolean;
+}, "isExpanded"> & React.HTMLProps<HTMLDivElement>, {
+    theme: Theme;
+    isExpanded: boolean;
+}>;
 export declare const Toggle: GlamorousComponent<{
     onClick?: (ev: React.SyntheticEvent<MouseEvent>) => void;
 }, {}>;
@@ -24,7 +25,13 @@ export declare const Day: GlamorousComponent<{
     selected?: boolean;
     isPlaceholder?: boolean;
 } & React.HTMLProps<{}>, {}>;
-export declare const Input: GlamorousComponent<React.HTMLProps<{}>, {}>;
+export declare const Input: GlamorousComponent<Pick<{
+    theme: Theme;
+    isExpanded: boolean;
+}, "isExpanded"> & React.HTMLProps<HTMLInputElement>, {
+    theme: Theme;
+    isExpanded: boolean;
+}>;
 export declare const ClearButton: GlamorousComponent<{
     onClick?: (ev: MouseEvent) => void;
 }, {}>;

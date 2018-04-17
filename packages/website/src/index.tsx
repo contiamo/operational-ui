@@ -84,8 +84,8 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
             />
           </Card>
           <React.Fragment>
-            {sections.map(({ title, docsUrl, Component }) => (
-              <Section title={title} docsUrl={docsUrl}>
+            {sections.map(({ title, docsUrl, Component }, index: number) => (
+              <Section key={index} title={title} docsUrl={docsUrl}>
                 <Component />
               </Section>
             ))}

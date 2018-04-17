@@ -19,6 +19,7 @@ import * as spinners from "./Spinners"
 import * as switches from "./Switches"
 import * as tables from "./Tables"
 import * as tabs from "./Tabs"
+import * as textareas from "./Textareas"
 import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
 
@@ -30,12 +31,14 @@ export default [
   contextMenus,
   datePickers,
   infoTiles,
+  infoTiles,
   inputs,
   layouts,
   messages,
   modals,
   paginators,
   progress,
+  records,
   records,
   selects,
   sidebars,
@@ -44,6 +47,7 @@ export default [
   switches,
   tables,
   tabs,
+  textareas,
   timelines,
   tooltips
 ]
