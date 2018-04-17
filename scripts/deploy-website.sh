@@ -13,6 +13,7 @@ build() {
 }
 
 deploy() {
+  COMMIT_HASH=`git rev-parse --verify HEAD`
   git branch -D gh-pages
   git checkout --orphan gh-pages
   rm -rf scripts docs 
@@ -22,7 +23,7 @@ deploy() {
   mv dist/visual-tests .
   rm -rf dist
   git add .
-  git commit -m "Deploy" --no-verify
+  git commit -m "Deploy Commit: ${COMMIT_HASH}" --no-verify
   git push -f origin gh-pages
   git checkout master
 }
