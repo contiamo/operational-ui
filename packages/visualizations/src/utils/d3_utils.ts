@@ -21,6 +21,7 @@ export const onTransitionEnd = (selection: D3Transition, func?: () => void): D3T
   }
   if (selection.empty()) {
     func()
+    return
   }
   let n: number = 0
   return selection.each(() => (n = n + 1)).on("end", (): void => {
