@@ -95,6 +95,7 @@ var QuantAxis = /** @class */ (function () {
     };
     // Drawing
     QuantAxis.prototype.draw = function () {
+        this.el.attr("transform", "translate(" + axis_utils_1.axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",") + ")");
         this.drawTicks();
         this.drawBorder();
         axis_utils_1.positionBackgroundRect(this.el, this.state.current.get("config").duration);
@@ -134,7 +135,6 @@ var QuantAxis = /** @class */ (function () {
         computedMargins[this.position] = requiredMargin;
         this.stateWriter("margins", computedMargins);
         this.events.emit("margins:update", this.isXAxis);
-        this.el.attr("transform", "translate(" + axis_utils_1.axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",") + ")");
     };
     QuantAxis.prototype.tickFormatter = function () {
         var _this = this;

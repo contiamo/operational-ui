@@ -227,6 +227,10 @@ class TimeAxis implements AxisClass<Date> {
 
   // Drawing
   draw(): void {
+    this.el.attr(
+      "transform",
+      `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`
+    )
     this.drawTicks()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
@@ -275,10 +279,6 @@ class TimeAxis implements AxisClass<Date> {
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update", true)
-    this.el.attr(
-      "transform",
-      `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`
-    )
   }
 
   private getAttributes(): AxisAttributes {

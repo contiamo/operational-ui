@@ -153,6 +153,7 @@ var TimeAxis = /** @class */ (function () {
     };
     // Drawing
     TimeAxis.prototype.draw = function () {
+        this.el.attr("transform", "translate(" + axis_utils_1.axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",") + ")");
         this.drawTicks();
         this.drawBorder();
         axis_utils_1.positionBackgroundRect(this.el, this.state.current.get("config").duration);
@@ -192,7 +193,6 @@ var TimeAxis = /** @class */ (function () {
         computedMargins[this.position] = requiredMargin;
         this.stateWriter("margins", computedMargins);
         this.events.emit("margins:update", true);
-        this.el.attr("transform", "translate(" + axis_utils_1.axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",") + ")");
     };
     TimeAxis.prototype.getAttributes = function () {
         var tickOffset = this.state.current.get("config")[this.position].tickOffset;
