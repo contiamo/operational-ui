@@ -69,6 +69,7 @@ class SunburstFacade implements Facade {
       },
       series: {
         color: (d: RawData): string => assignColors(d.name),
+        id: (d: RawData): string => d.name,
         name: (d: RawData): string => d.name || "",
         value: (d: RawData): number => d.value
       }
@@ -145,26 +146,10 @@ class SunburstFacade implements Facade {
     this.events.removeListener(event, handler)
   }
 
-  private findNode = (matchers: Object<any>): RawData => {
-    return find((d: RawData): boolean => {
-      return every.convert({ cap: false })((value: any, key: string): boolean => {
-        return (d.data[key] || d[key]) === value
-      })(matchers)
-    })(this.state.readOnly().current.get("computed").renderer.data)
-  }
-
   draw(): Element {
     this.state.captureState()
     this.canvas.draw()
     this.components.renderer.draw()
-
-    const zoomMatchers: Object<any> = this.state.config().zoomNode
-    const zoomNode: RawData = zoomMatchers ? this.findNode(zoomMatchers) : undefined
-
-    zoomNode
-      ? this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d: zoomNode })
-      : this.events.emit(Events.FOCUS.ELEMENT.CLICK)
-
     return this.canvas.elementFor("series").node()
   }
 

@@ -33,6 +33,7 @@ var DataHandler = /** @class */ (function () {
         var hierarchyData = d3_hierarchy_1.hierarchy(data)
             .each(this.assignColors.bind(this))
             .each(this.assignNames.bind(this))
+            .each(this.assignIDs.bind(this))
             .eachAfter(this.assignValues.bind(this))
             .sort(this.state.current.get("config").sort ? sortingFunction : undefined);
         this.total = hierarchyData.value;
@@ -60,6 +61,9 @@ var DataHandler = /** @class */ (function () {
     };
     DataHandler.prototype.assignNames = function (node) {
         node.name = this.name(node);
+    };
+    DataHandler.prototype.assignIDs = function (node) {
+        node.id = this.id(node);
     };
     DataHandler.prototype.assignValues = function (node) {
         if (this.value(node)) {

@@ -31,20 +31,32 @@ var Renderer = /** @class */ (function () {
             .select("g.arcs")
             .attr("transform", this.translate())
             .selectAll("path." + styles.arc)
-            .data(this.data, fp_1.get("name"));
+            .data(this.data, fp_1.get("id"));
         var config = this.state.current.get("config");
         this.exit(arcs, config.duration, document.hidden || config.disableAnimations);
         this.enterAndUpdate(arcs, config.duration, document.hidden || config.disableAnimations);
     };
     Renderer.prototype.exit = function (arcs, duration, disableAnimations) {
-        var exitingArcs = disableAnimations
-            ? arcs.exit()
+        disableAnimations
+            ? arcs.exit().remove()
             : arcs
                 .exit()
                 .transition()
                 .duration(duration)
-                .attrTween("d", this.removeArcTween.bind(this));
-        exitingArcs.remove();
+                .attrTween("d", this.removeArcTween.bind(this))
+                .style("opacity", 1e-6)
+                .call(d3_utils_1.onTransitionEnd, this.updateZoom.bind(this))
+                .remove();
+    };
+    Renderer.prototype.updateZoom = function () {
+        var matchers = this.state.current.get("config").zoomNode;
+        var zoomNode = fp_1.find(function (d) {
+            return fp_1.every(fp_1.identity)(fp_1.reduce(function (memo, matcher) {
+                memo.push(d.data[matcher] === matchers[matcher]);
+                return memo;
+            }, [])(fp_1.keys(matchers)));
+        })(this.data);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: zoomNode });
     };
     Renderer.prototype.isFirstLevelChild = function (d) {
         return d.parent === (this.zoomNode || this.dataHandler.topNode);
@@ -70,7 +82,6 @@ var Renderer = /** @class */ (function () {
             this.updateTruncationArrows();
         }
         else {
-            // let n: number = 0
             updatingArcs
                 .transition()
                 .duration(duration)

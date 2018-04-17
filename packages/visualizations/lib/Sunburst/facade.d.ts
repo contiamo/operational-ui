@@ -20,7 +20,6 @@ declare class SunburstFacade implements Facade {
     accessors(type: string, accessors: Accessors<any>): Accessors<any>;
     on(event: string, handler: any): void;
     off(event: string, handler: any): void;
-    private findNode;
     draw(): Element;
     close(): void;
 }

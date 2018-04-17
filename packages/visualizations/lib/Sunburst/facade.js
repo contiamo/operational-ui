@@ -5,7 +5,6 @@ var renderer_1 = require("./renderer");
 var breadcrumb_1 = require("./breadcrumb");
 var root_label_1 = require("./root_label");
 var focus_1 = require("./focus");
-var event_catalog_1 = require("../utils/event_catalog");
 var state_handler_1 = require("../utils/state_handler");
 var event_bus_1 = require("../utils/event_bus");
 var fp_1 = require("lodash/fp");
@@ -13,16 +12,8 @@ var utils_1 = require("@operational/utils");
 var theme_1 = require("@operational/theme");
 var SunburstFacade = /** @class */ (function () {
     function SunburstFacade(context) {
-        var _this = this;
         this.__disposed = false;
         this.customColorAccessor = false;
-        this.findNode = function (matchers) {
-            return fp_1.find(function (d) {
-                return fp_1.every.convert({ cap: false })(function (value, key) {
-                    return (d.data[key] || d[key]) === value;
-                })(matchers);
-            })(_this.state.readOnly().current.get("computed").renderer.data);
-        };
         this.context = context;
         this.events = new event_bus_1.default();
         this.state = this.insertState();
@@ -67,6 +58,7 @@ var SunburstFacade = /** @class */ (function () {
             },
             series: {
                 color: function (d) { return assignColors(d.name); },
+                id: function (d) { return d.name; },
                 name: function (d) { return d.name || ""; },
                 value: function (d) { return d.value; }
             }
@@ -118,11 +110,6 @@ var SunburstFacade = /** @class */ (function () {
         this.state.captureState();
         this.canvas.draw();
         this.components.renderer.draw();
-        var zoomMatchers = this.state.config().zoomNode;
-        var zoomNode = zoomMatchers ? this.findNode(zoomMatchers) : undefined;
-        zoomNode
-            ? this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK, { d: zoomNode })
-            : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.CLICK);
         return this.canvas.elementFor("series").node();
     };
     SunburstFacade.prototype.close = function () {
