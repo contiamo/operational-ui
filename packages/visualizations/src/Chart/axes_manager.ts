@@ -35,7 +35,7 @@ class AxesManager {
 
   draw(): void {
     this.updateAxes()
-    forEach(invoke("remove"))(this.oldAxes)
+    forEach(invoke("close"))(this.oldAxes)
     forEach(this.drawAxes.bind(this))(["y", "x"])
   }
 
@@ -46,7 +46,7 @@ class AxesManager {
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     // Remove axes that are no longer needed, or whose type has changed
     const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition): boolean => {
-      return !axesOptions[key] || axesOptions[key].type !== axis.type
+      return !axesOptions[key] || axesOptions[key].type === axis.type
     })(this.axes)
     forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove)
     // Create or update currently required axes

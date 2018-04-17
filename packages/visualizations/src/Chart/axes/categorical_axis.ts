@@ -1,4 +1,5 @@
 import {
+  cloneDeep,
   compact,
   defaults,
   filter,
@@ -75,7 +76,7 @@ class CategoricalAxis implements AxisClass<string> {
 
   // Computations
   compute(): void {
-    this.previous = this.computed
+    this.previous = cloneDeep(this.computed)
     const config: ChartConfig = this.state.current.get("config")
     const computedChart: Computed = this.state.current.get("computed")
     const tickWidth: number = this.computeTickWidth()
@@ -88,7 +89,7 @@ class CategoricalAxis implements AxisClass<string> {
         .domain(this.data)
         .padding(config.innerBarPaddingCategorical)
     }
-    this.previous = defaults(this.previous)(this.computed)
+    this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
   }
@@ -188,7 +189,7 @@ class CategoricalAxis implements AxisClass<string> {
       .exit()
       .transition()
       .duration(config.duration)
-      .call(setTextAttributes, defaults({ opacity: 1e6 })(attributes))
+      .call(setTextAttributes, defaults(attributes)({ opacity: 1e-6 }))
       .remove()
 
     this.adjustMargins()
@@ -253,7 +254,9 @@ class CategoricalAxis implements AxisClass<string> {
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
   }
 
-  remove(): void {}
+  close(): void {
+    this.el.remove()
+  }
 }
 
 export default CategoricalAxis

@@ -32,6 +32,6 @@ declare class TimeAxis implements AxisClass<Date> {
     private getAttributes();
     private getStartAttributes(attributes);
     private drawBorder();
-    remove(): void;
+    close(): void;
 }
 export default TimeAxis;

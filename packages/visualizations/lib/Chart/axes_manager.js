@@ -17,7 +17,7 @@ var AxesManager = /** @class */ (function () {
     }
     AxesManager.prototype.draw = function () {
         this.updateAxes();
-        fp_1.forEach(fp_1.invoke("remove"))(this.oldAxes);
+        fp_1.forEach(fp_1.invoke("close"))(this.oldAxes);
         fp_1.forEach(this.drawAxes.bind(this))(["y", "x"]);
     };
     AxesManager.prototype.updateAxes = function () {
@@ -27,7 +27,7 @@ var AxesManager = /** @class */ (function () {
         var axesOptions = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
         // Remove axes that are no longer needed, or whose type has changed
         var axesToRemove = fp_1.omitBy(function (axis, key) {
-            return !axesOptions[key] || axesOptions[key].type !== axis.type;
+            return !axesOptions[key] || axesOptions[key].type === axis.type;
         })(this.axes);
         fp_1.forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove);
         // Create or update currently required axes

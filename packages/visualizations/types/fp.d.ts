@@ -152,6 +152,7 @@ declare namespace fp {
     any: any
     assign: any
     bind: any
+    cloneDeep: any
     compact: any
     defaults: any
     difference: any

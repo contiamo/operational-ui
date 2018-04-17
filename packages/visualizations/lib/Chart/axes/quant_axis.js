@@ -31,12 +31,12 @@ var QuantAxis = /** @class */ (function () {
     };
     // Computations
     QuantAxis.prototype.compute = function () {
-        this.previous = this.computed;
+        this.previous = fp_1.cloneDeep(this.computed);
         var computed = this.computeInitial();
         computed.ticks = quant_axis_utils_1.computeTicks(computed.steps);
         computed.scale = quant_axis_utils_1.computeScale(computed.range, computed.ticks);
         this.computed = computed;
-        this.previous = fp_1.defaults(this.previous)(this.computed);
+        this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
         this.stateWriter(["previous", this.position], this.previous);
     };
@@ -51,7 +51,7 @@ var QuantAxis = /** @class */ (function () {
         return computed;
     };
     QuantAxis.prototype.computeAligned = function (computed) {
-        this.previous = this.computed;
+        this.previous = fp_1.cloneDeep(this.computed);
         computed.domain = computed.steps.slice(0, 2);
         computed.scale = quant_axis_utils_1.computeScale(computed.range, computed.domain);
         computed.ticks = quant_axis_utils_1.computeTicks(computed.steps);
@@ -84,7 +84,7 @@ var QuantAxis = /** @class */ (function () {
             .exit()
             .transition()
             .duration(config.duration)
-            .call(d3_utils_1.setTextAttributes, fp_1.defaults({ opacity: 1e6 })(attributes))
+            .call(d3_utils_1.setTextAttributes, fp_1.defaults(attributes)({ opacity: 1e-6 }))
             .remove();
         this.adjustMargins();
     };
@@ -120,10 +120,10 @@ var QuantAxis = /** @class */ (function () {
         };
     };
     QuantAxis.prototype.getStartAttributes = function (attributes) {
-        return fp_1.defaults({
+        return fp_1.defaults(attributes)({
             x: this.isXAxis ? this.previous.scale : 0,
             y: this.isXAxis ? 0 : this.previous.scale
-        })(attributes);
+        });
     };
     QuantAxis.prototype.drawBorder = function () {
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
@@ -135,7 +135,9 @@ var QuantAxis = /** @class */ (function () {
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };
-    QuantAxis.prototype.remove = function () { };
+    QuantAxis.prototype.close = function () {
+        this.el.remove();
+    };
     return QuantAxis;
 }());
 exports.default = QuantAxis;

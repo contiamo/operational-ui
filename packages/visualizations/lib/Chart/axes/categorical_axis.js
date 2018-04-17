@@ -26,7 +26,7 @@ var CategoricalAxis = /** @class */ (function () {
     };
     // Computations
     CategoricalAxis.prototype.compute = function () {
-        this.previous = this.computed;
+        this.previous = fp_1.cloneDeep(this.computed);
         var config = this.state.current.get("config");
         var computedChart = this.state.current.get("computed");
         var tickWidth = this.computeTickWidth();
@@ -39,7 +39,7 @@ var CategoricalAxis = /** @class */ (function () {
                 .domain(this.data)
                 .padding(config.innerBarPaddingCategorical)
         };
-        this.previous = fp_1.defaults(this.previous)(this.computed);
+        this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
         this.stateWriter(["previous", this.position], this.previous);
     };
@@ -123,7 +123,7 @@ var CategoricalAxis = /** @class */ (function () {
             .exit()
             .transition()
             .duration(config.duration)
-            .call(d3_utils_1.setTextAttributes, fp_1.defaults({ opacity: 1e6 })(attributes))
+            .call(d3_utils_1.setTextAttributes, fp_1.defaults(attributes)({ opacity: 1e-6 }))
             .remove();
         this.adjustMargins();
     };
@@ -176,7 +176,9 @@ var CategoricalAxis = /** @class */ (function () {
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };
-    CategoricalAxis.prototype.remove = function () { };
+    CategoricalAxis.prototype.close = function () {
+        this.el.remove();
+    };
     return CategoricalAxis;
 }());
 exports.default = CategoricalAxis;

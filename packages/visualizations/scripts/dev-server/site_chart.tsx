@@ -244,7 +244,7 @@ const data: any = {
         type: "time",
         start: "2018-03-10",
         end: "2018-03-15",
-        interval: "days"
+        interval: "day"
       },
     // x1: {
     //   type: "time",

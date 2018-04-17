@@ -25,6 +25,6 @@ declare class CategoricalAxis implements AxisClass<string> {
     private getStartAttributes(attributes);
     private adjustMargins();
     private drawBorder();
-    remove(): void;
+    close(): void;
 }
 export default CategoricalAxis;

@@ -29,6 +29,8 @@ class Renderer {
         return new Symbol(state, events, el.select("g.series-symbol"), data, options, series)
       case "text":
         return new Text(state, events, el.select("g.series-text"), data, options, series)
+      default:
+        throw new Error(`No "${options.type}" renderer is available.`)
     }
   }
 }

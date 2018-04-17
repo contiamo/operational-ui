@@ -9,7 +9,7 @@ class Axis {
     stateWriter: StateWriter,
     events: EventBus,
     el: D3Selection,
-    type: AxisType,
+    type: string,
     position: AxisPosition
   ) {
     switch (type) {
@@ -19,6 +19,8 @@ class Axis {
         return new TimeAxis(state, stateWriter, events, el, position)
       case "categorical":
         return new CategoricalAxis(state, stateWriter, events, el, position)
+      default:
+        throw new Error(`Invalid axis type ${type}`)
     }
   }
 }

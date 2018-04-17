@@ -21,6 +21,8 @@ var Renderer = /** @class */ (function () {
                 return new symbol_1.default(state, events, el.select("g.series-symbol"), data, options, series);
             case "text":
                 return new text_1.default(state, events, el.select("g.series-text"), data, options, series);
+            default:
+                throw new Error("No \"" + options.type + "\" renderer is available.");
         }
     }
     return Renderer;

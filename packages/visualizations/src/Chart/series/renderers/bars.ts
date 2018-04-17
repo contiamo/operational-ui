@@ -108,7 +108,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private setAxisScales(): void {
     const axisData: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
-    const axisTypes: AxisType[] = map((axis: AxisPosition): AxisType => axisData[axis].type)([
+    const axisTypes: AxisType[] = map((axis: AxisPosition): string => axisData[axis].type)([
       this.series.xAxis(),
       this.series.yAxis()
     ])

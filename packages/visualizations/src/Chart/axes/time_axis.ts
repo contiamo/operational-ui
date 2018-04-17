@@ -1,4 +1,5 @@
 import {
+  cloneDeep,
   compact,
   defaults,
   filter,
@@ -25,7 +26,7 @@ import { axisPosition, computeRequiredMargin, insertElements, positionBackground
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
-const moment: any = extendMoment(Moment)
+const moment: any = extendMoment(Moment as any)
 import { scaleTime } from "d3-scale"
 import { timeMonday } from "d3-time"
 import { timeFormat } from "d3-time-format"
@@ -54,17 +55,17 @@ import {
 // Have removed "now", and any formatting to account for change in month/year
 const tickFormatter = (interval: TimeIntervals) => {
   switch (interval) {
-    case "hours":
+    case "hour":
       return timeFormat("%b %d %H:00")
-    case "days":
+    case "day":
       return timeFormat("%b %d")
-    case "weeks":
+    case "week":
       return timeFormat("W%W")
-    case "months":
+    case "month":
       return timeFormat("%b %y")
-    case "quarters":
+    case "quarter":
       return (d: Date): string => timeFormat(`Q${Math.floor((d.getMonth() + 3) / 3)} %Y`)(d)
-    case "years":
+    case "year":
       return timeFormat("%Y")
     default:
       throw new Error(`Interval of length ${interval} is not supported.`)
@@ -116,13 +117,13 @@ class TimeAxis implements AxisClass<Date> {
 
   // Computations
   compute(): void {
-    this.previous = this.computed
+    this.previous = cloneDeep(this.computed)
     const computed: Partial<AxisComputed> = this.computeInitial()
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
     computed.scale = this.computeScale(computed.range, computed.ticksInDomain)
     computed.ticks = this.computeTicks(computed)
     this.computed = computed as AxisComputed
-    this.previous = defaults(this.previous)(this.computed)
+    this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
   }
@@ -213,7 +214,7 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private computeTicks(computed: Partial<AxisComputed>): Date[] {
-    if (this.interval === "weeks") {
+    if (this.interval === "week") {
       const tickInterval: number = Math.ceil(computed.ticksInDomain.length / computed.tickNumber || 1)
       return computed.scale.ticks(timeMonday, tickInterval)
     }
@@ -221,12 +222,12 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   computeAligned(computed: Partial<AxisComputed>): void {
-    this.previous = this.computed
+    this.previous = cloneDeep(this.computed)
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
     computed.scale = this.computeScale(computed.range, computed.ticksInDomain)
     computed.ticks = this.computeTicks(computed)
     this.computed = computed as AxisComputed
-    this.previous = defaults(this.previous)(this.computed)
+    this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
   }
@@ -260,7 +261,7 @@ class TimeAxis implements AxisClass<Date> {
       .exit()
       .transition()
       .duration(config.duration)
-      .call(setTextAttributes, defaults({ opacity: 1e6 })(attributes))
+      .call(setTextAttributes, defaults({ opacity: 1e-6 })(attributes))
       .remove()
 
     this.adjustMargins()
@@ -299,10 +300,10 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
-    return defaults({
+    return defaults(attributes)({
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale
-    })(attributes)
+    })
   }
 
   private drawBorder(): void {
@@ -316,7 +317,9 @@ class TimeAxis implements AxisClass<Date> {
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
   }
 
-  remove(): void {}
+  close(): void {
+    this.el.remove()
+  }
 }
 
 export default TimeAxis

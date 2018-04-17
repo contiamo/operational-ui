@@ -28,6 +28,6 @@ declare class QuantAxis implements AxisClass<number> {
     private getAttributes();
     private getStartAttributes(attributes);
     private drawBorder();
-    remove(): void;
+    close(): void;
 }
 export default QuantAxis;

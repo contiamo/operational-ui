@@ -184,24 +184,24 @@ export type AxisPosition = "x1" | "x2" | "y1" | "y2"
 
 export type AxisType = "time" | "quant" | "categorical"
 
-export type TimeIntervals = "hours" | "days" | "weeks" | "months" | "quarters" | "years"
+export type TimeIntervals = "hour" | "day" | "week" | "month" | "quarter" | "year"
 
 export interface TimeAxisOptions {
-  type: "time"
+  type: string
   start: Date
   end: Date
   interval: TimeIntervals
 }
 
 export interface QuantAxisOptions {
-  type: "quant"
+  type: string
   start?: number
   end?: number
   interval?: number
 }
 
 export interface CategoricalAxisOptions {
-  type: "categorical"
+  type: string
   values?: string[]
 }
 
@@ -243,7 +243,7 @@ export interface AxisClass<T> {
   isXAxis: boolean
   previous: AxisComputed
   update: (options: AxisOptions, data: T[]) => void
-  remove: () => void
+  close: () => void
 }
 
 // Data

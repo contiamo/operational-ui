@@ -1,4 +1,4 @@
-import { defaults, filter, identity, includes, isFinite, last } from "lodash/fp"
+import { cloneDeep, defaults, filter, identity, includes, isFinite, last } from "lodash/fp"
 import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeSteps, computeTicks } from "../../utils/quant_axis_utils"
@@ -66,12 +66,12 @@ class QuantAxis implements AxisClass<number> {
 
   // Computations
   compute(): void {
-    this.previous = this.computed
+    this.previous = cloneDeep(this.computed)
     const computed: Partial<AxisComputed> = this.computeInitial()
     computed.ticks = computeTicks(computed.steps)
     computed.scale = computeScale(computed.range, computed.ticks)
     this.computed = computed as AxisComputed
-    this.previous = defaults(this.previous)(this.computed)
+    this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
   }
@@ -88,7 +88,7 @@ class QuantAxis implements AxisClass<number> {
   }
 
   computeAligned(computed: Partial<AxisComputed>): void {
-    this.previous = this.computed
+    this.previous = cloneDeep(this.computed)
     computed.domain = computed.steps.slice(0, 2) as [number, number]
     computed.scale = computeScale(computed.range, computed.domain)
     computed.ticks = computeTicks(computed.steps)
@@ -126,7 +126,7 @@ class QuantAxis implements AxisClass<number> {
       .exit()
       .transition()
       .duration(config.duration)
-      .call(setTextAttributes, defaults({ opacity: 1e6 })(attributes))
+      .call(setTextAttributes, defaults(attributes)({ opacity: 1e-6 }))
       .remove()
 
     this.adjustMargins()
@@ -171,10 +171,10 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
-    return defaults({
+    return defaults(attributes)({
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale
-    })(attributes)
+    })
   }
 
   private drawBorder(): void {
@@ -188,7 +188,9 @@ class QuantAxis implements AxisClass<number> {
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
   }
 
-  remove(): void {}
+  close(): void {
+    this.el.remove()
+  }
 }
 
 export default QuantAxis

@@ -12,6 +12,8 @@ var Axis = /** @class */ (function () {
                 return new time_axis_1.default(state, stateWriter, events, el, position);
             case "categorical":
                 return new categorical_axis_1.default(state, stateWriter, events, el, position);
+            default:
+                throw new Error("Invalid axis type " + type);
         }
     }
     return Axis;

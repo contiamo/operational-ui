@@ -14,17 +14,17 @@ var styles = require("./styles");
 // Have removed "now", and any formatting to account for change in month/year
 var tickFormatter = function (interval) {
     switch (interval) {
-        case "hours":
+        case "hour":
             return d3_time_format_1.timeFormat("%b %d %H:00");
-        case "days":
+        case "day":
             return d3_time_format_1.timeFormat("%b %d");
-        case "weeks":
+        case "week":
             return d3_time_format_1.timeFormat("W%W");
-        case "months":
+        case "month":
             return d3_time_format_1.timeFormat("%b %y");
-        case "quarters":
+        case "quarter":
             return function (d) { return d3_time_format_1.timeFormat("Q" + Math.floor((d.getMonth() + 3) / 3) + " %Y")(d); };
-        case "years":
+        case "year":
             return d3_time_format_1.timeFormat("%Y");
         default:
             throw new Error("Interval of length " + interval + " is not supported.");
@@ -58,13 +58,13 @@ var TimeAxis = /** @class */ (function () {
     };
     // Computations
     TimeAxis.prototype.compute = function () {
-        this.previous = this.computed;
+        this.previous = fp_1.cloneDeep(this.computed);
         var computed = this.computeInitial();
         computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range);
         computed.scale = this.computeScale(computed.range, computed.ticksInDomain);
         computed.ticks = this.computeTicks(computed);
         this.computed = computed;
-        this.previous = fp_1.defaults(this.previous)(this.computed);
+        this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
         this.stateWriter(["previous", this.position], this.previous);
     };
@@ -141,19 +141,19 @@ var TimeAxis = /** @class */ (function () {
             .domain([ticks[0], fp_1.last(ticks)]);
     };
     TimeAxis.prototype.computeTicks = function (computed) {
-        if (this.interval === "weeks") {
+        if (this.interval === "week") {
             var tickInterval = Math.ceil(computed.ticksInDomain.length / computed.tickNumber || 1);
             return computed.scale.ticks(d3_time_1.timeMonday, tickInterval);
         }
         return computed.scale.ticks(computed.tickNumber || 1);
     };
     TimeAxis.prototype.computeAligned = function (computed) {
-        this.previous = this.computed;
+        this.previous = fp_1.cloneDeep(this.computed);
         computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range);
         computed.scale = this.computeScale(computed.range, computed.ticksInDomain);
         computed.ticks = this.computeTicks(computed);
         this.computed = computed;
-        this.previous = fp_1.defaults(this.previous)(this.computed);
+        this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
         this.stateWriter(["previous", this.position], this.previous);
     };
@@ -181,7 +181,7 @@ var TimeAxis = /** @class */ (function () {
             .exit()
             .transition()
             .duration(config.duration)
-            .call(d3_utils_1.setTextAttributes, fp_1.defaults({ opacity: 1e6 })(attributes))
+            .call(d3_utils_1.setTextAttributes, fp_1.defaults({ opacity: 1e-6 })(attributes))
             .remove();
         this.adjustMargins();
     };
@@ -211,10 +211,10 @@ var TimeAxis = /** @class */ (function () {
         };
     };
     TimeAxis.prototype.getStartAttributes = function (attributes) {
-        return fp_1.defaults({
+        return fp_1.defaults(attributes)({
             x: this.isXAxis ? this.previous.scale : 0,
             y: this.isXAxis ? 0 : this.previous.scale
-        })(attributes);
+        });
     };
     TimeAxis.prototype.drawBorder = function () {
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
@@ -226,7 +226,9 @@ var TimeAxis = /** @class */ (function () {
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };
-    TimeAxis.prototype.remove = function () { };
+    TimeAxis.prototype.close = function () {
+        this.el.remove();
+    };
     return TimeAxis;
 }());
 exports.default = TimeAxis;
