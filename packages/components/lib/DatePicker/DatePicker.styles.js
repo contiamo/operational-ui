@@ -45,8 +45,8 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         cursor: "pointer",
         top: 1,
         right: 1,
-        borderTopRightRadius: 4,
-        borderBottomRightRadius: 4,
+        borderTopRightRadius: theme.borderRadius,
+        borderBottomRightRadius: theme.borderRadius,
         width: inputHeight - 2,
         height: inputHeight - 2,
         fontSize: 10,
@@ -108,7 +108,7 @@ exports.Day = glamorous_1.default.div({
 });
 exports.Input = glamorous_1.default.input(function (_a) {
     var theme = _a.theme, isExpanded = _a.isExpanded;
-    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: 4, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: "rgb(208, 217, 229)", width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }, isExpanded ? mixins.inputFocus({ theme: theme }) : {}));
+    return (__assign({}, theme.typography.body, { userSelect: "none", borderRadius: theme.borderRadius, padding: theme.spacing * 2 / 3, height: inputHeight, cursor: "pointer", border: "1px solid", borderColor: "rgb(208, 217, 229)", width: 200, position: "relative", "&:focus": mixins.inputFocus({ theme: theme }) }, isExpanded ? mixins.inputFocus({ theme: theme }) : {}));
 });
 exports.ClearButton = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;

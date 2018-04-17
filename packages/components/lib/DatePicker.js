@@ -110,15 +110,12 @@ var DatePicker = /** @class */ (function (_super) {
                     _this.inputNode = node;
                 }, value: [start, end].filter(function (s) { return !!s; }).join(" - "), placeholder: placeholder || "Enter date", onClick: function (ev) {
                     _this.setState(function (prevState) { return ({ isExpanded: !prevState.isExpanded }); }, function () {
-                        console.log(_this.state.isExpanded);
                         if (!_this.state.isExpanded) {
                             _this.inputNode.blur();
                         }
                     });
                 }, css: { width: "100%" } }),
-            React.createElement(DatePicker_styles_1.DatePickerCard, { isExpanded: isExpanded, onClick: function (ev) {
-                    console.log(ev);
-                } },
+            React.createElement(DatePicker_styles_1.DatePickerCard, { isExpanded: isExpanded },
                 React.createElement(DatePicker_styles_1.MonthNav, null,
                     React.createElement(DatePicker_styles_1.IconContainer, { onClick: function (ev) {
                             ev.preventDefault();

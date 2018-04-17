@@ -166,7 +166,6 @@ class DatePicker extends React.Component<Props, State> {
             this.setState(
               prevState => ({ isExpanded: !prevState.isExpanded }),
               () => {
-                console.log(this.state.isExpanded)
                 if (!this.state.isExpanded) {
                   this.inputNode.blur()
                 }
@@ -175,12 +174,7 @@ class DatePicker extends React.Component<Props, State> {
           }}
           css={{ width: "100%" }}
         />
-        <DatePickerCard
-          isExpanded={isExpanded}
-          onClick={(ev: any) => {
-            console.log(ev)
-          }}
-        >
+        <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
             <IconContainer
               onClick={(ev: any) => {
