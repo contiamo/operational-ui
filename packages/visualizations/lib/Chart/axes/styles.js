@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var glamor_1 = require("glamor");
 var theme_1 = require("@operational/theme");
 var tickStyle = {
-    fill: theme_1.operational.colors.gray60,
+    fill: theme_1.operational.colors.gray,
     fontSize: "11px",
     fontFamily: theme_1.operational.fontFamily,
     "&.weekend": {
@@ -23,14 +23,14 @@ var y2Style = {
     textAnchor: "start"
 };
 var borderStyle = {
-    stroke: theme_1.operational.colors.gray20,
+    stroke: theme_1.operational.colors.lightGray,
     shapeRendering: "crispedges"
 };
 var componentRectStyle = {
     fill: "#fff"
 };
 var rulesStyle = {
-    stroke: theme_1.operational.colors.gray20,
+    stroke: theme_1.operational.colors.lightGray,
     strokeWidth: "1",
     shapeRendering: "crispedges",
     "&.zero": {

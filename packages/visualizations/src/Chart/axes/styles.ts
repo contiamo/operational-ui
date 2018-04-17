@@ -2,7 +2,7 @@ import { css } from "glamor"
 import { operational as theme } from "@operational/theme"
 
 const tickStyle = {
-  fill: theme.colors.gray60,
+  fill: theme.colors.gray,
   fontSize: "11px",
   fontFamily: theme.fontFamily,
   "&.weekend": {
@@ -26,7 +26,7 @@ const y2Style = {
 }
 
 const borderStyle = {
-  stroke: theme.colors.gray20,
+  stroke: theme.colors.lightGray,
   shapeRendering: "crispedges"
 }
 
@@ -35,7 +35,7 @@ const componentRectStyle = {
 }
 
 const rulesStyle = {
-  stroke: theme.colors.gray20,
+  stroke: theme.colors.lightGray,
   strokeWidth: "1",
   shapeRendering: "crispedges",
   "&.zero": {
