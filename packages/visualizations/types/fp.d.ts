@@ -187,6 +187,7 @@ declare namespace fp {
     partition: any
     pickBy: any
     pluck: any
+    rangeStep: any
     remove: any
     size: any
     some: any

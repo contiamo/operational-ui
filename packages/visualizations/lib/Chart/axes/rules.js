@@ -23,6 +23,7 @@ var Rules = /** @class */ (function () {
             .attr("x2", attributes.x2)
             .attr("y1", attributes.y1)
             .attr("y2", attributes.y2)
+            .style("opacity", 1e-6)
             .remove();
         rules
             .enter()

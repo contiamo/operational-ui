@@ -5,6 +5,11 @@ var axis_utils_1 = require("./axis_utils");
 var d3_utils_1 = require("../../utils/d3_utils");
 var quant_axis_utils_1 = require("../../utils/quant_axis_utils");
 var styles = require("./styles");
+var stepScaleFactors = function (step) {
+    return step === 1
+        ? [10, 5, 2, 1]
+        : fp_1.rangeStep(0.5)(0, 10);
+};
 var QuantAxis = /** @class */ (function () {
     function QuantAxis(state, stateWriter, events, el, position) {
         this.type = "quant";
@@ -43,12 +48,40 @@ var QuantAxis = /** @class */ (function () {
     QuantAxis.prototype.computeInitial = function () {
         var config = this.state.current.get("config");
         var computedChart = this.state.current.get("computed");
-        var options = this.state.current.get("config")[this.position];
         var computed = {};
         computed.range = axis_utils_1.computeRange(config, computedChart, this.position);
         computed.domain = quant_axis_utils_1.computeDomain(this.data, this.start, this.end);
-        computed.steps = quant_axis_utils_1.computeSteps(computed.domain, computed.range, options.tickSpacing, options.minTicks);
+        computed.steps = this.computeSteps(computed);
         return computed;
+    };
+    // Computes nice steps (for ticks) given a domain [start, stop] and a
+    // wanted number of ticks (number of ticks returned might differ
+    // by a few ticks)
+    QuantAxis.prototype.computeSteps = function (computed) {
+        var steps = [this.start, this.end, this.interval];
+        if (!this.interval) {
+            var options = this.state.current.get("config")[this.position];
+            var tickNumber_1 = quant_axis_utils_1.computeTickNumber(computed.range, options.tickSpacing, options.minTicks);
+            var span_1 = computed.domain[1] - computed.domain[0];
+            var step_1 = Math.pow(10, Math.floor(Math.log(Math.abs(span_1) / tickNumber_1) / Math.LN10)) * (span_1 < 0 ? -1 : 1);
+            var scaleFactor = void 0;
+            if (this.end) {
+                // If a value has been explicitly set for this.end, there must be a tick at this value
+                var validScaleFactors = fp_1.filter(function (val) { return span_1 / (step_1 * val) % 1 === 0; })(stepScaleFactors(step_1));
+                // Choose scale factor which gives a number of ticks as close as possible to tickNumber
+                scaleFactor = fp_1.sortBy(function (val) { return Math.abs(span_1 / (val * step_1) - tickNumber_1); })(validScaleFactors)[0];
+            }
+            else {
+                var err = tickNumber_1 / span_1 * step_1;
+                var errorMapper = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]];
+                scaleFactor = fp_1.find(0)(errorMapper)[1];
+            }
+            step_1 *= scaleFactor;
+            steps[2] = step_1;
+        }
+        steps[0] = this.start || (this.end ? this.end % steps[2] - steps[2] : Math.floor(computed.domain[0] / steps[2]) * steps[2]);
+        steps[1] = this.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0];
+        return steps;
     };
     QuantAxis.prototype.computeAligned = function (computed) {
         this.previous = fp_1.cloneDeep(this.computed);

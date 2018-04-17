@@ -215,4 +215,4 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Time axis configuration"
+export const title: string = "Time axis config"

@@ -92,12 +92,11 @@ var CategoricalAxis = /** @class */ (function () {
         var margin = function (axis) {
             return fp_1.includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0;
         };
-        return this.position[0] === "x"
-            ? [offset, (width || computed.canvas.drawingDims.width) - offset]
-            : [
-                (computed.canvas.drawingDims.height || width) - offset,
-                offset + (margin("x2") || config[this.position].minTopOffsetTopTick)
-            ];
+        var range = this.position[0] === "x"
+            ? [0, width || computed.canvas.drawingDims.width]
+            : [computed.canvas.drawingDims.height || width, margin("x2") || config[this.position].minTopOffsetTopTick];
+        var adjustedRange = [range[0] + offset, range[1] + offset];
+        return adjustedRange;
     };
     // Drawing
     CategoricalAxis.prototype.draw = function () {

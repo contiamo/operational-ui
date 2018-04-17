@@ -1,7 +1,7 @@
-import { cloneDeep, defaults, filter, identity, includes, isFinite, last } from "lodash/fp"
+import { cloneDeep, defaults, filter, find, identity, includes, isFinite, last, rangeStep, sortBy } from "lodash/fp"
 import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
-import { computeDomain, computeScale, computeSteps, computeTicks } from "../../utils/quant_axis_utils"
+import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
 import * as styles from "./styles"
 import {
   AxisAttributes,
@@ -21,6 +21,10 @@ import {
   XAxisConfig,
   YAxisConfig
 } from "../typings"
+
+const stepScaleFactors = (step: number): number[] => {
+  return step === 1 ? [10, 5, 2, 1] : rangeStep(0.5)(0, 10)
+}
 
 class QuantAxis implements AxisClass<number> {
   computed: AxisComputed
@@ -79,12 +83,46 @@ class QuantAxis implements AxisClass<number> {
   computeInitial(): Partial<AxisComputed> {
     const config: ChartConfig = this.state.current.get("config")
     const computedChart: Computed = this.state.current.get("computed")
-    const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
     const computed: Partial<AxisComputed> = {}
     computed.range = computeRange(config, computedChart, this.position)
     computed.domain = computeDomain(this.data, this.start, this.end)
-    computed.steps = computeSteps(computed.domain, computed.range, options.tickSpacing, options.minTicks)
+    computed.steps = this.computeSteps(computed)
     return computed
+  }
+
+  // Computes nice steps (for ticks) given a domain [start, stop] and a
+  // wanted number of ticks (number of ticks returned might differ
+  // by a few ticks)
+  computeSteps(computed: Object<any>): [number, number, number] {
+    const steps: [number, number, number] = [this.start, this.end, this.interval]
+    if (!this.interval) {
+      const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
+      const tickNumber: number = computeTickNumber(computed.range, options.tickSpacing, options.minTicks)
+      const span: number = computed.domain[1] - computed.domain[0]
+      let step: number =
+        Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
+
+      let scaleFactor: number
+      if (this.end) {
+        // If a value has been explicitly set for this.end, there must be a tick at this value
+        const validScaleFactors: number[] = filter((val: number): boolean => (span / (step * val)) % 1 === 0)(
+          stepScaleFactors(step)
+        )
+        // Choose scale factor which gives a number of ticks as close as possible to tickNumber
+        scaleFactor = sortBy((val: number): number => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
+      } else {
+        const err: number = tickNumber / span * step
+        const errorMapper: [boolean, number][] = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
+        scaleFactor = find(0)(errorMapper)[1]
+      }
+      step *= scaleFactor
+      steps[2] = step
+    }
+
+    steps[0] =
+      this.start || (this.end ? this.end % steps[2] - steps[2] : Math.floor(computed.domain[0] / steps[2]) * steps[2])
+    steps[1] = this.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0]
+    return steps
   }
 
   computeAligned(computed: Partial<AxisComputed>): void {

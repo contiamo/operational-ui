@@ -153,12 +153,17 @@ class CategoricalAxis implements AxisClass<string> {
     const offset: number = tickWidth / 2
     const margin = (axis: AxisPosition): number =>
       includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
-    return this.position[0] === "x"
-      ? [offset, (width || computed.canvas.drawingDims.width) - offset]
-      : [
-          (computed.canvas.drawingDims.height || width) - offset,
-          offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)
-        ]
+
+    const range: [number, number] =
+      this.position[0] === "x"
+        ? [0, width || computed.canvas.drawingDims.width]
+        : [
+            computed.canvas.drawingDims.height || width,
+            margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick
+          ]
+
+    const adjustedRange: [number, number] = [range[0] + offset, range[1] + offset]
+    return adjustedRange
   }
 
   // Drawing

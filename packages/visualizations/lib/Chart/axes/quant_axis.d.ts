@@ -1,4 +1,4 @@
-import { AxisClass, AxisComputed, AxisType, QuantAxisOptions, AxisPosition, D3Selection, EventBus, Partial, State, StateWriter } from "../typings";
+import { AxisClass, AxisComputed, AxisType, QuantAxisOptions, AxisPosition, D3Selection, EventBus, Object, Partial, State, StateWriter } from "../typings";
 declare class QuantAxis implements AxisClass<number> {
     computed: AxisComputed;
     data: number[];
@@ -20,6 +20,7 @@ declare class QuantAxis implements AxisClass<number> {
     update(options: QuantAxisOptions, data: number[]): void;
     compute(): void;
     computeInitial(): Partial<AxisComputed>;
+    computeSteps(computed: Object<any>): [number, number, number];
     computeAligned(computed: Partial<AxisComputed>): void;
     draw(): void;
     private drawTicks();
