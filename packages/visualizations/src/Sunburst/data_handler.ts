@@ -5,6 +5,7 @@ import { filter, forEach, isEmpty, map, reduce } from "lodash/fp"
 class DataHandler {
   private color: (d: Datum) => string
   private data: Datum[]
+  private id: (d: Datum) => string
   private name: (d: Datum) => string
   private state: State
   private stateWriter: StateWriter
@@ -46,6 +47,7 @@ class DataHandler {
     const hierarchyData: HierarchyNode<RawData> = d3Hierarchy(data)
       .each(this.assignColors.bind(this))
       .each(this.assignNames.bind(this))
+      .each(this.assignIDs.bind(this))
       .eachAfter(this.assignValues.bind(this))
       .sort(this.state.current.get("config").sort ? sortingFunction : undefined)
 
@@ -83,6 +85,10 @@ class DataHandler {
 
   private assignNames(node: any): void {
     node.name = this.name(node)
+  }
+
+  private assignIDs(node: any): void {
+    node.id = this.id(node)
   }
 
   private assignValues(node: any): void {

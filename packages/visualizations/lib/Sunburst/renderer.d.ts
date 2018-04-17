@@ -19,6 +19,7 @@ declare class Renderer {
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
     draw(): void;
     private exit(arcs, duration, disableAnimations);
+    private updateZoom();
     isFirstLevelChild(d: Datum): boolean;
     private arcClass(d);
     private enterAndUpdate(arcs, duration, disableAnimations);

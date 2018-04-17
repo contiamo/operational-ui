@@ -2,6 +2,7 @@ import { Datum, State, StateWriter } from "./typings";
 declare class DataHandler {
     private color;
     private data;
+    private id;
     private name;
     private state;
     private stateWriter;
@@ -13,6 +14,7 @@ declare class DataHandler {
     prepareData(): Datum[];
     private assignColors(node);
     private assignNames(node);
+    private assignIDs(node);
     private assignValues(node);
     private checkDataValidity();
 }

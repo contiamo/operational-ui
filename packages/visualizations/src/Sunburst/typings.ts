@@ -34,6 +34,7 @@ export interface SunburstConfig extends Config {
 
 export interface RawData {
   empty?: boolean
+  id?: string
   name?: string
   value?: number
   children?: RawData[]
@@ -53,6 +54,7 @@ export interface DataAccessors {
 
 export interface SeriesAccessors {
   color: Accessor<Datum, string>
+  id: Accessor<Datum, string>
   name: Accessor<Datum, string>
   value: Accessor<Datum, number>
 }

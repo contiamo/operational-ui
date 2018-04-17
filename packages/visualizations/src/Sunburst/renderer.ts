@@ -1,7 +1,7 @@
 import DataHandler from "./data_handler"
 import Events from "../utils/event_catalog"
 import { ClickPayload, D3Selection, Datum, EventBus, Object, State, StateWriter, SunburstConfig } from "./typings"
-import { every, find, filter, forEach, findIndex, get, identity, map, reduce } from "lodash/fp"
+import { every, find, filter, forEach, findIndex, get, identity, keys, map, reduce } from "lodash/fp"
 import * as styles from "./styles"
 
 // d3 imports
@@ -51,7 +51,7 @@ class Renderer {
       .select("g.arcs")
       .attr("transform", this.translate())
       .selectAll(`path.${styles.arc}`)
-      .data(this.data, get("name"))
+      .data(this.data, get("id"))
 
     const config: SunburstConfig = this.state.current.get("config")
     this.exit(arcs, config.duration, document.hidden || config.disableAnimations)
@@ -59,14 +59,29 @@ class Renderer {
   }
 
   private exit(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
-    const exitingArcs: any = disableAnimations
-      ? arcs.exit()
+    disableAnimations
+      ? arcs.exit().remove()
       : arcs
           .exit()
           .transition()
           .duration(duration)
           .attrTween("d", this.removeArcTween.bind(this))
-    exitingArcs.remove()
+          .style("opacity", 1e-6)
+          .call(onTransitionEnd, this.updateZoom.bind(this))
+          .remove()
+  }
+
+  private updateZoom(): void {
+    const matchers: Object<any> = this.state.current.get("config").zoomNode
+    const zoomNode: Datum = find((d: Datum): boolean => {
+      return every(identity)(
+        reduce((memo: boolean[], matcher: string): boolean[] => {
+          memo.push(d.data[matcher] === matchers[matcher])
+          return memo
+        }, [])(keys(matchers))
+      )
+    })(this.data)
+    this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d: zoomNode })
   }
 
   isFirstLevelChild(d: Datum): boolean {
@@ -94,7 +109,6 @@ class Renderer {
       updatingArcs.attr("d", this.arc.bind(this))
       this.updateTruncationArrows()
     } else {
-      // let n: number = 0
       updatingArcs
         .transition()
         .duration(duration)

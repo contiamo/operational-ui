@@ -18,6 +18,9 @@ exports.onTransitionEnd = function (selection, func) {
     if (!func) {
         return;
     }
+    if (selection.empty()) {
+        func();
+    }
     var n = 0;
     return selection.each(function () { return (n = n + 1); }).on("end", function () {
         n = n - 1;
