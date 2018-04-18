@@ -22,7 +22,7 @@ exports[`Sidenav component renders 1`] = `
         "linkText": "#1499CE",
         "navBackground": "#004A75",
         "separator": "#f2f2f2",
-        "success": "#00b34d",
+        "success": "#00BF3C",
         "text": "#2F3435",
         "visualizationPalette": Array [
           "#2ca02c",

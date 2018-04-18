@@ -2,6 +2,7 @@ import * as breadcrumbs from "./Breadcrumbs"
 import * as buttons from "./Buttons"
 import * as checkboxes from "./Checkboxes"
 import * as chips from "./Chips"
+import * as colors from "./Colors"
 import * as contextMenus from "./ContextMenus"
 import * as datePickers from "./DatePickers"
 import * as infoTiles from "./InfoTiles"
@@ -28,6 +29,7 @@ export default [
   buttons,
   checkboxes,
   chips,
+  colors,
   contextMenus,
   datePickers,
   infoTiles,
