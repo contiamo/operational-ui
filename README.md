@@ -59,13 +59,19 @@ We look forward to your contribution and feedback. Simply open an issue or PR to
 
 Below you find some guides on how to work with the codebase:
 
-### Working on Operational UI
+## Developing locally
 
-After you `yarn install`, simply run `yarn dev` inside the `components` or `visualizations` packages. This spins up a dev server you can use to test packages, by editing the entry point at `./packages/{components,visualizations}/scripts/dev-server/site.tsx`.
+Install dependencies and link internal packages by running `yarn install`.
 
-To run the showcase, simply run `yarn start` from root. 
+Every package defines a `yarn start` command that spins off a dev server where you can test things out. In `components`, `visualizations` and `blocks`, the exploratory code can be found under `/packages/{package}/scripts/dev-server`. For packages that serve as showcases and demos like `website` and `visual-tests`, the project setup should be familiar as a [create-react-app-ts](https://github.com/wmonk/create-react-app-typescript) project.
 
-To make sure your code is ready for Travis and your reviewers, run `yarn ci:local` from the root of the project.
+### Publishing the demos
+
+Simply run `yarn deploy:website` to publish all demos through the `gh-pages` repository (privileges required).
+
+### Publishing to `npm`
+
+Simply run `npm run publish` from an up-to-date local master branch (privileges required).
 
 ## License
 
