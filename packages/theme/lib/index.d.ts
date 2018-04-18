@@ -1,5 +1,5 @@
 export { expandColor } from "./utils";
-export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray" | "lightGray" | "text" | "lightText" | "linkText" | "navBackground" | "background" | "lighterBackground" | "border" | "secondarySeparator" | "separator";
+export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray" | "lightGray" | "text" | "lightText" | "linkText" | "navBackground" | "background" | "lighterBackground" | "border" | "separator";
 export interface ThemeColors {
     brand: string;
     info: string;

@@ -15,7 +15,7 @@ exports.expandColor = utils_1.expandColor;
 var colors = {
     brand: "#000000",
     info: "#1499CE",
-    success: "#00b34d",
+    success: "#00BF3C",
     warning: "#FFAE00",
     error: "#DE1A1A",
     white: "#FFFFFF",

@@ -19,7 +19,6 @@ export type ThemeColorName =
   | "background"
   | "lighterBackground"
   | "border"
-  | "secondarySeparator"
   | "separator"
 
 export interface ThemeColors {
@@ -86,7 +85,7 @@ export interface Theme {
 const colors: ThemeColors = {
   brand: "#000000",
   info: "#1499CE",
-  success: "#00b34d",
+  success: "#00BF3C",
   warning: "#FFAE00",
   error: "#DE1A1A",
   white: "#FFFFFF",
