@@ -1,5 +1,5 @@
 import { Sunburst } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../components/Marathon"
 
 const config = {
   sort: false
@@ -242,7 +242,7 @@ const data2 = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Sunburst(container)
 
   test("Renders a sunburst chart", () => {

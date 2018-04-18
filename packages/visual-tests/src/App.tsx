@@ -13,7 +13,7 @@ import {
   SidebarItem
 } from "@operational/components"
 
-import Marathon, { IMarathon } from "./components/Marathon"
+import Marathon, { MarathonEnvironment } from "./components/Marathon"
 
 import allTestCases from "./TestCases"
 
@@ -38,7 +38,8 @@ const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: bo
 class App extends React.Component<{}, State> {
   state = {
     group: 0,
-    test: 0
+    test: 0,
+    renderMarathon: true
   }
 
   render() {
@@ -64,6 +65,7 @@ class App extends React.Component<{}, State> {
                 >
                   {test.marathons.map((test, testIndex) => (
                     <SidebarItem
+                      key={testIndex}
                       active={groupIndex === this.state.group && testIndex === this.state.test}
                       onClick={() => {
                         this.setState(() => ({
@@ -81,7 +83,9 @@ class App extends React.Component<{}, State> {
           <Card>
             <CardHeader>Canvas</CardHeader>
             <Marathon
-              test={allTestCases[this.state.group].marathons[this.state.test].marathon as ((a: IMarathon) => void)}
+              test={
+                allTestCases[this.state.group].marathons[this.state.test].marathon as ((a: MarathonEnvironment) => void)
+              }
               timeout={2000}
             />
           </Card>

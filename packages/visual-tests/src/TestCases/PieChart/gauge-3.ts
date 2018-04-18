@@ -1,5 +1,5 @@
 import { PieChart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../components/Marathon"
 
 const GaugeRenderer = {
   type: "gauge",
@@ -18,7 +18,7 @@ const data1 = {
   renderAs: [GaugeRenderer]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new PieChart(container)
 
   test("Renders the chart", () => {

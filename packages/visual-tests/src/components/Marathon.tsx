@@ -8,7 +8,7 @@ type TestFn = (done?: ((a: any) => void)) => void
 
 export interface State {
   id: number // the id of the test, incrementing every time a new test prop is passed
-  tests: ITest[]
+  tests: Test[]
   completed: number
 }
 
@@ -16,11 +16,11 @@ export interface Props {
   css?: any
   className?: string
   timeout?: number
-  test: (a: IMarathon) => void
+  test: (testEnvironment: MarathonEnvironment) => void
 }
 
 // Test globals mimicking Jest's API
-export interface IMarathon {
+export interface MarathonEnvironment {
   test?: (description: string, done?: () => void) => void
   expect?: (expected: any) => { toBe: any }
   beforeEach?: (fn: any) => void
@@ -30,12 +30,12 @@ export interface IMarathon {
   container: any
 }
 
-interface ITestWithRunner {
+interface TestWithRunner {
   description: string
   fn: TestFn
 }
 
-export interface ITest {
+export interface Test {
   description: string
   errors: string[]
 }
@@ -62,14 +62,14 @@ class Marathon extends React.Component<Props, State> {
   }
 
   state = {
-    tests: [] as ITest[],
+    tests: [] as Test[],
     completed: 0,
     id: 0
   }
 
   container: HTMLElement
 
-  private _tests: ITestWithRunner[] = []
+  private _tests: TestWithRunner[] = []
 
   setStateById = (updater: (prevState: State, props: Props) => { id: number }, ignoreId?: boolean): Promise<void> => {
     // If the test id's don't match, it means that the setState is called from an uncleared timeout or async action from an old test.
@@ -127,7 +127,7 @@ class Marathon extends React.Component<Props, State> {
         await this.setStateById(prevState => ({
           id: currentTestId,
           tests: prevState.tests.map(
-            (test: ITest, index: number) =>
+            (test: Test, index: number) =>
               index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test
           )
         }))
@@ -208,6 +208,7 @@ class Marathon extends React.Component<Props, State> {
   }
 
   render() {
+    console.log(this.state)
     const { css, className } = this.props
     return (
       <Div css={css} className={className}>

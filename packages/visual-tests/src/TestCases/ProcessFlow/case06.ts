@@ -1,5 +1,5 @@
 import { ProcessFlow } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../components/Marathon"
 
 const data = {
   journeys: [
@@ -182,7 +182,7 @@ const data = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz: ProcessFlow = new ProcessFlow(container)
 
   test("Renders a process flow", () => {
