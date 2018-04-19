@@ -1,6 +1,57 @@
 import { Chart } from "@operational/visualizations"
 import { IMarathon } from "../../components/Marathon"
 
+const AxesAccessors = {
+  x: (series, d) => d.y,
+  y: (series, d) => d.x
+}
+
+const BarsRenderer = {
+  accessors: {
+    ...AxesAccessors
+  },
+  type: "bars"
+}
+
+const data: any = {
+  series: [
+    {
+      data: [
+        { x: new Date(2018, 2, 11), y: 100 },
+        { x: new Date(2018, 2, 12), y: 300 },
+        { x: new Date(2018, 2, 13), y: 500 },
+        { x: new Date(2018, 2, 14), y: undefined },
+        { x: new Date(2018, 2, 15), y: 200 }
+      ],
+      name: "Pageviews",
+      key: "series1",
+      renderAs: [BarsRenderer]
+    },
+    {
+      data: [
+        { x: new Date(2018, 2, 10), y: 500 },
+        { x: new Date(2018, 2, 11), y: 450 },
+        { x: new Date(2018, 2, 12), y: 250 },
+        { x: new Date(2018, 2, 13), y: 425 },
+        { x: new Date(2018, 2, 14), y: 570 },
+        { x: new Date(2018, 2, 16), y: 234 },
+        { x: new Date(2018, 2, 17), y: 123 }
+      ],
+      name: "Users",
+      key: "series2",
+      renderAs: [BarsRenderer]
+    }
+  ],
+  axes: {
+    y1: {
+      type: "categorical"
+    },
+    x1: {
+      type: "quant"
+    }
+  }
+}
+
 const createData = (renderers: any[]) => {
   return {
     series: [
@@ -33,13 +84,13 @@ const createData = (renderers: any[]) => {
       }
     ],
     axes: {
-      x1: {
+      y1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day"
       },
-      y1: {
+      x1: {
         type: "quant"
       }
     }
@@ -50,12 +101,17 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   const viz = new Chart(container)
 
   test("Render", () => {
-    viz.data(createData([{ type: "bars" }]))
+    viz.data(data)
     viz.draw()
   })
 
-  test("Update", () => {
-    viz.data(createData([{ type: "bars" }]))
+  test("Change to time axis", () => {
+    viz.data(createData([{
+      accessors: {
+        ...AxesAccessors
+      },
+      type: "bars"
+    }]))
     viz.draw()
   })
 
@@ -66,60 +122,27 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 
   test("Assign widths", () => {
     const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
-    viz.data(createData([{ type: "bars", accessors: { barWidth } }]))
+    viz.data(createData([{
+      accessors: {
+        ...AxesAccessors,
+        barWidth
+      },
+      type: "bars"
+    }]))
     viz.draw()
   })
 
   test("Color accessors", () => {
     const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
     const color = (series: any, d: any) => d.y > 400 ? "red" : series.legendColor()
-    viz.data(createData([{ type: "bars", accessors: { color, barWidth } }]))
-    viz.draw()
-  })
-
-  test("Remove some bars", () => {
-    const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
-    const color = (series: any, d: any) => d.y > 400 ? "red" : series.legendColor()
-    const data = {
-      series: [
-        {
-          data: [
-            { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 14), y: undefined },
-            { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
-          ],
-          name: "Pageviews 2018",
-          key: "series1",
-          interpolate: "step",
-          renderAs: [{ type: "bars", accessors: { color, barWidth } }]
-        },
-        {
-          data: [
-            { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-          ],
-          name: "Pageviews 2017",
-          key: "series2",
-          renderAs: [{ type: "bars", accessors: { color, barWidth } }]
-        }
-      ],
-      axes: {
-        x1: {
-          type: "time",
-          start: new Date(2018, 2, 11),
-          end: new Date(2018, 2, 15),
-          interval: "day"
-        },
-        y1: {
-          type: "quant"
-        }
-      }
-    }
-    viz.data(data)
+    viz.data(createData([{
+      accessors: {
+        ...AxesAccessors,
+        barWidth,
+        color
+      },
+      type: "bars"
+    }]))
     viz.draw()
   })
 
@@ -128,4 +151,4 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Bars"
+export const title: string = "Bars, horizontal"

@@ -66,7 +66,11 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     const data: Datum[] = filter(this.validate.bind(this))(this.data)
     const duration: number = this.state.current.get("config").duration
 
-    this.el.attr("transform", this.seriesTranslation())
+    this.el
+      .transition()
+      .duration(!!this.el.attr("transform") ? duration : 0)
+      .attr("transform", this.seriesTranslation())
+
     const attributes: Object<any> = this.attributes()
     const startAttributes: Object<any> = this.startAttributes(attributes)
 
@@ -77,9 +81,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       .append("svg:rect")
       .call(setRectAttributes, startAttributes)
       .merge(bars)
-      .transition()
-      .duration(duration)
-      .call(setRectAttributes, attributes)
+      .call(setRectAttributes, attributes, duration)
 
     bars
       .exit()

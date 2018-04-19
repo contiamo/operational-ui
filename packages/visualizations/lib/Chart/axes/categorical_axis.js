@@ -141,7 +141,7 @@ var CategoricalAxis = /** @class */ (function () {
         var scaleWithOffset = this.scaleWithOffset(this.computed);
         return {
             dx: this.isXAxis ? 0 : tickOffset,
-            dy: this.isXAxis ? tickOffset : "-0.4em",
+            dy: this.isXAxis ? tickOffset : "0.35em",
             text: fp_1.identity,
             x: this.isXAxis ? scaleWithOffset : 0,
             y: this.isXAxis ? 0 : scaleWithOffset

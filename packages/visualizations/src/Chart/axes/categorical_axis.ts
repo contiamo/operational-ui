@@ -217,7 +217,7 @@ class CategoricalAxis implements AxisClass<string> {
     const scaleWithOffset = this.scaleWithOffset(this.computed)
     return {
       dx: this.isXAxis ? 0 : tickOffset,
-      dy: this.isXAxis ? tickOffset : "-0.4em",
+      dy: this.isXAxis ? tickOffset : "0.35em",
       text: identity,
       x: this.isXAxis ? scaleWithOffset : 0,
       y: this.isXAxis ? 0 : scaleWithOffset

@@ -80,7 +80,7 @@ class TimeAxis implements AxisClass<Date> {
   end: Date
   events: EventBus
   interval: TimeIntervals
-  isXAxis: boolean = true
+  isXAxis: boolean
   position: AxisPosition
   previous: AxisComputed
   start: Date
@@ -92,10 +92,8 @@ class TimeAxis implements AxisClass<Date> {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
-    if (position === "y1" || position === "y2") {
-      throw new Error("Time axis must be horizontal")
-    }
     this.position = position
+    this.isXAxis = position[0] === "x"
     this.el = insertElements(el, position, this.state.current.get("computed").canvas.drawingDims)
     // this.el.on("mouseenter", this.onComponentHover(this))  }
   }
@@ -132,9 +130,12 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   computeInitial(): Object<any> {
-    const ticksInDomain: any[] = Array.from(moment.range(this.start, this.end).by(this.interval))
+    const negativeRange: boolean = new Date(this.start).valueOf() > new Date(this.end).valueOf()
+    const start = negativeRange ? this.end : this.start
+    const end = negativeRange ? this.start : this.end
+    const ticksInDomain: any[] = Array.from(moment.range(start, end).by(this.interval))
     const computed: Partial<AxisComputed> = {}
-    computed.ticksInDomain = map((d: any) => d.toDate())(ticksInDomain)
+    computed.ticksInDomain = map((d: any) => d.toDate())(negativeRange ? ticksInDomain.reverse() : ticksInDomain)
     computed.tickWidth = this.computeTickWidth(computed.ticksInDomain)
     computed.range = this.computeRange(computed.tickWidth, computed.ticksInDomain.length)
     return computed
@@ -148,7 +149,7 @@ class TimeAxis implements AxisClass<Date> {
 
     const config: ChartConfig = this.state.current.get("config")
     const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
-    const defaultTickWidth: number = drawingDims.width / ticksInDomain.length
+    const defaultTickWidth: number = drawingDims[this.isXAxis ? "width" : "height"] / ticksInDomain.length
 
     const stacks = groupBy((s: Object<any>) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
     const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
@@ -189,10 +190,30 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private computeRange(tickWidth: number, numberOfTicks: number): [number, number] {
-    const computedWidth: number = this.state.current.get("computed").canvas.drawingDims.width
+    return this.isXAxis ? this.computeXRange(tickWidth, numberOfTicks) : this.computeYRange(tickWidth, numberOfTicks)
+  }
+
+  private computeXRange(tickWidth: number, numberOfTicks: number): [number, number] {
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const width: number = tickWidth * numberOfTicks
     const offset: number = tickWidth / 2
-    return [offset, (width || computedWidth) - offset]
+    return [offset, (width || drawingDims.width) - offset]
+  }
+
+  private computeYRange(tickWidth: number, numberOfTicks: number): [number, number] {
+    const config: ChartConfig = this.state.current.get("config")
+    const computed: Computed = this.state.current.get("computed")
+    const margin = (axis: AxisPosition): number => {
+      const isRequired: boolean = includes(axis)(computed.axes.requiredAxes)
+      return isRequired ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
+    }
+    const drawingDims = computed.canvas.drawingDims
+    const width: number = tickWidth * numberOfTicks
+    const offset: number = tickWidth / 2
+    return [
+      (drawingDims.height || width) - offset,
+      offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)
+    ]
   }
 
   private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
@@ -279,32 +300,33 @@ class TimeAxis implements AxisClass<Date> {
     }
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
-    this.events.emit("margins:update", true)
+    this.events.emit("margins:update", this.isXAxis)
   }
 
   private getAttributes(): AxisAttributes {
     const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
-      dx: 0,
-      dy: tickOffset,
+      dx: this.isXAxis ? 0 : tickOffset,
+      dy: this.isXAxis ? tickOffset : "0.35em",
       text: tickFormatter(this.interval),
-      x: this.computed.scale,
-      y: 0
+      x: this.isXAxis ? this.computed.scale : 0,
+      y: this.isXAxis ? 0 : this.computed.scale
     }
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults(attributes)({
-      x: this.previous.scale,
-      y: 0
+      x: this.isXAxis ? this.previous.scale : 0,
+      y: this.isXAxis ? 0 : this.previous.scale
     })
   }
 
   private drawBorder(): void {
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const border: Object<number> = {
       x1: 0,
-      x2: this.state.current.get("computed").canvas.drawingDims.width,
-      y1: 0,
+      x2: this.isXAxis ? drawingDims.width : 0,
+      y1: this.isXAxis ? 0 : drawingDims.height,
       y2: 0
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)

@@ -22,6 +22,8 @@ declare class TimeAxis implements AxisClass<Date> {
     private computeTickWidth(ticksInDomain);
     private computeBars(defaultBarWidth, tickWidth);
     private computeRange(tickWidth, numberOfTicks);
+    private computeXRange(tickWidth, numberOfTicks);
+    private computeYRange(tickWidth, numberOfTicks);
     private computeTickNumber(ticksInDomain, range);
     private computeScale(range, ticks);
     private computeTicks(computed);

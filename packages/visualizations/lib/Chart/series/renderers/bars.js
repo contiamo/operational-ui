@@ -26,7 +26,10 @@ var Bars = /** @class */ (function () {
         this.setAxisScales();
         var data = fp_1.filter(this.validate.bind(this))(this.data);
         var duration = this.state.current.get("config").duration;
-        this.el.attr("transform", this.seriesTranslation());
+        this.el
+            .transition()
+            .duration(!!this.el.attr("transform") ? duration : 0)
+            .attr("transform", this.seriesTranslation());
         var attributes = this.attributes();
         var startAttributes = this.startAttributes(attributes);
         var bars = this.el.selectAll("rect").data(data);
@@ -35,13 +38,7 @@ var Bars = /** @class */ (function () {
             .append("svg:rect")
             .call(d3_utils_1.setRectAttributes, startAttributes)
             .merge(bars)
-            .transition()
-            .duration(duration)
-            .call(d3_utils_1.setRectAttributes, attributes);
-        // .attr("x", attributes.x)
-        // .attr("y", attributes.y)
-        // .attr("width", attributes.width)
-        // .attr("height", attributes.height)
+            .call(d3_utils_1.setRectAttributes, attributes, duration);
         bars
             .exit()
             .transition()

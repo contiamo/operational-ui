@@ -12,14 +12,14 @@ import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
 
 const AxesAccessors: any = {
-  // x: (series: any, d: any) => d.x.getDate() + "-" + d.x.getMonth() + 1
-  // y: (series: any, d) => d.y
+  x: (series: any, d: any) => d.x,
+  y: (series: any, d: any) => d.y
 }
 
 const AreaRenderer: any = {
   accessors: {
     ...AxesAccessors,
-    interpolate: (series: any, d: any) => "monotoneX"
+    interpolate: (series: any, d: any) => "monotoneY"
   },
   type: "area"
 }
@@ -27,7 +27,7 @@ const AreaRenderer: any = {
 const LineRenderer: any = {
   accessors: {
     ...AxesAccessors,
-    interpolate: (series: any, d: any) => "monotoneX",
+    interpolate: (series: any, d: any) => "monotoneY",
     dashed: (series: any, d: any) => series.key() === "unique_key",
   },
   type: "line"
@@ -87,189 +87,55 @@ const RangeRenderer = {
   renderAs: [AreaRenderer, LineRenderer, SymbolRenderer]
 }
 
-const data: any = {
+let data: any = {
   series: [
     {
       data: [
-        {
-          data: [
-            {x: new Date("March 11, 2018"), y: 100},
-            {x: new Date("March 12, 2018"), y: 300},
-            {x: new Date("March 13, 2018"), y: 500},
-            {x: new Date("March 14, 2018"), y: 300},
-            {x: new Date("March 15, 2018"), y: 200}
-          ],
-          name: "Stacked series 1 with long name",
-          key: "series1"
-        },
-        {
-          data: [
-            {x: new Date("March 10, 2018"), y: 500},
-            {x: new Date("March 11, 2018"), y: 450},
-            {x: new Date("March 12, 2018"), y: 250},
-            {x: new Date("March 13, 2018"), y: 425},
-            {x: new Date("March 14, 2018"), y: 570}
-          ],
-          name: "Stacked series 2 with long name",
-          key: "series2"
-        }
+        { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 14), y: undefined },
+        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
       ],
-      renderAs: [RangeRenderer] 
+      name: "Pageviews 2018",
+      key: "series1",
+      interpolate: "step",
+      renderAs: [BarsRenderer]
     },
+    {
+      data: [
+        { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+      ],
+      name: "Pageviews 2017",
+      key: "series2",
+      renderAs: [BarsRenderer]
+    }
   ],
-  // series: [
-  //   {
-  //     data: [
-  //       {x: new Date("March 15, 2018"), y: 3000},
-  //       {x: new Date("March 14, 2018"), y: 5000},
-  //       {x: new Date("March 10, 2018"), y: 1000},
-  //       {x: new Date("March 12, 2018"), y: undefined},
-  //       {x: new Date("March 11, 2018"), y: 2000},
-  //       {x: new Date("March 13, 2018"), y: 4000},
-  //     ],
-  //     name: "Line series with very, very, very, very long name",
-  //     key: "unique_key",
-  //     // xAxis: "x2",
-  //     yAxis: "y2",
-  //     renderAs: [FixedBarsRenderer, TextRenderer, LineRenderer, SymbolRenderer, AreaRenderer]
-  //   },
-  //   {
-  //     data: [
-  //       {
-  //         data: [
-  //           {x: new Date("March 11, 2018"), y: 100},
-  //           {x: new Date("March 12, 2018"), y: 200},
-  //           {x: new Date("March 13, 2018"), y: 300},
-  //           {x: new Date("March 14, 2018"), y: 400},
-  //           {x: new Date("March 15, 2018"), y: 500}
-  //         ],
-  //         name: "Stacked series 1 with long name",
-  //         key: "series1"
-  //       },
-  //       {
-  //         data: [
-  //           {x: new Date("March 10, 2018"), y: 10},
-  //           {x: new Date("March 11, 2018"), y: 20},
-  //           {x: new Date("March 12, 2018"), y: 30},
-  //           {x: new Date("March 13, 2018"), y: 40},
-  //           {x: new Date("March 14, 2018"), y: 50}
-  //         ],
-  //         name: "Stacked series 2 with long name",
-  //         key: "series2"
-  //       }
-  //     ],
-  //     renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2
-  //   },
-  //   {
-  //     data: [
-  //       { 
-  //         x: new Date("March 12, 2018"), 
-  //         label: "test flag",
-  //         description: "Description of flag meaning.",
-  //         // color: "#f00",
-  //         direction: "down"
-  //       },
-  //       {
-  //         x: new Date("March 14, 2018"),
-  //         label: "test 2",
-  //         description: "Another flag",
-  //         // color: "#0f0",
-  //         // direction: "up"
-  //       }
-  //     ],
-  //     name: "Flags",
-  //     key: "flag_series",
-  //     renderAs: [FlagRenderer]
-  //   },
-  //   {
-  //     data: [
-  //       {
-  //         y: 3500,
-  //         label: "test horizontal flag",
-  //         description: "Horizontal flag",
-  //         color: "#0f0"
-  //       }
-  //     ],
-  //     name: "Horizontal flags",
-  //     key: "flag_series_2",
-  //     axis: "y2",
-  //     yAxis: "y2",
-  //     renderAs: [FlagRenderer]
-  //   }
-  // ],
-  // series: [
-  //   {
-  //     data: [
-  //       {x: "E", y: 3000000},
-  //       {x: "A", y: 1000000},
-  //       {x: "c", y: 3000000},
-  //       {x: "B", y: 2000000},
-  //       {x: "D", y: 4000000}
-  //     ],
-  //     name: "Line series with very, very, very, very long name",
-  //     key: "unique_key",
-  //     yAxis: "y2",
-  //     renderAs: [AreaRenderer]
-  //   },
-  //   {
-  //     data: [
-  //       {
-  //         data: [
-  //           {x: "A", y: 100},
-  //           {x: 5, y: 200},
-  //           {x: "C", y: 300},
-  //           {x: "D", y: 400},
-  //           {x: "E", y: 500}
-  //         ],
-  //         name: "Stacked series 1 with long name",
-  //         key: "series1"
-  //       },
-  //       {
-  //         data: [
-  //           {x: "A", y: 10},
-  //           {x: "B", y: 20},
-  //           {x: "C", y: 30},
-  //           {x: "D", y: 40},
-  //           {x: "E", y: 50}
-  //         ],
-  //         name: "Stacked series 2 with long name",
-  //         key: "series2"
-  //       }
-  //     ],
-  //     renderAs: [StackedRenderer]  // Similar concept for range renderer, but data.length === 2
-  //   }
-  // ],
   axes: {
-      x1: {
-        type: "time",
-        start: "2018-03-10",
-        end: "2018-03-15",
-        interval: "day"
-      },
-    // x1: {
-    //   type: "time",
-    //   start: "2018-02-26",
-    //   end: "2018-03-26",
-    //   interval: "days"
-    // },
-    // x2: {
-    //   type: "time",
-    //   start: "2016-02-26",
-    //   end: "2016-03-26",
-    //   interval: "days"
-    // },
-    // x1: {
-    //   type: "categorical"
-    // },
+    x1: {
+      type: "time",
+      start: new Date(2018, 2, 10),
+      end: new Date(2018, 2, 17),
+      interval: "day"
+    },
     y1: {
       type: "quant"
-    },
-    // y2: {
-    //   type: "quant"
-    // }
+    }
   }
 }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data}/></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} /></OperationalUI>
 
 render(<App />, containerNode)
+
+setTimeout(() => {
+  data.series[0].renderAs[0].accessors = { ...AxesAccessors, barWidth: () => 20 }
+  data.series[0].renderAs[0].accessors = { ...AxesAccessors, barWidth: () => 10 }
+  render(<App />, containerNode)
+}, 3000)
