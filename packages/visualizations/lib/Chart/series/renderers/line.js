@@ -37,7 +37,7 @@ var Line = /** @class */ (function () {
         var _this = this;
         this.setAxisScales();
         this.addMissingData();
-        var data = fp_1.sortBy(function (d) { return (_this.quantIsY ? _this.x(d) : _this.y(d)); })(this.data);
+        var data = fp_1.sortBy(function (d) { return (_this.xIsBaseline ? _this.x(d) : _this.y(d)); })(this.data);
         var duration = this.state.current.get("config").duration;
         var line = this.el.selectAll("path").data([data]);
         line
@@ -83,6 +83,7 @@ var Line = /** @class */ (function () {
     };
     Line.prototype.setAxisScales = function () {
         var _this = this;
+        this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
         var axisData = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
         var axisTypes = fp_1.map(function (axis) { return axisData[axis].type; })([
             this.series.xAxis(),
@@ -93,16 +94,15 @@ var Line = /** @class */ (function () {
         }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.quantIsY = axisTypes[1] === "quant";
-        this.adjustedX = function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) : d.x1 || _this.x(d)); };
-        this.adjustedY = function (d) { return _this.yScale(_this.quantIsY ? d.y1 || _this.y(d) : _this.y(d)); };
+        this.adjustedX = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x1 || _this.x(d)); };
+        this.adjustedY = function (d) { return _this.yScale(_this.xIsBaseline ? d.y1 || _this.y(d) : _this.y(d)); };
     };
     Line.prototype.addMissingData = function () {
         var _this = this;
         if (this.closeGaps()) {
             return;
         }
-        if (this.quantIsY && !this.series.options.stacked) {
+        if (this.xIsBaseline && !this.series.options.stacked) {
             var ticks = this.state.current.get("computed").series.dataForAxes[this.series.xAxis()];
             fp_1.forEach(function (tick) {
                 if (!fp_1.find(function (d) { return _this.x(d).toString() === tick.toString(); })(_this.data)) {
@@ -115,7 +115,7 @@ var Line = /** @class */ (function () {
         var _this = this;
         var isDefined = function (d) { return !!_this.x(d) && !!_this.y(d); };
         return d3_shape_1.line()
-            .x(this.quantIsY ? this.adjustedX : this.xScale(0))
+            .x(this.xIsBaseline ? this.adjustedX : this.xScale(0))
             .y(this.adjustedY ? this.yScale(0) : this.adjustedY)
             .curve(this.interpolate())
             .defined(isDefined)(data);

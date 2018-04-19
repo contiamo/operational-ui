@@ -61,6 +61,7 @@ var Bars = /** @class */ (function () {
     };
     Bars.prototype.setAxisScales = function () {
         var _this = this;
+        this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
         var axisData = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
         var axisTypes = fp_1.map(function (axis) { return axisData[axis].type; })([
             this.series.xAxis(),
@@ -71,11 +72,10 @@ var Bars = /** @class */ (function () {
         }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.quantIsY = axisTypes[1] === "quant";
-        this.x0 = function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) : d.x0 || 0); };
-        this.x1 = function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) : d.x1 || _this.x(d)); };
-        this.y0 = function (d) { return _this.yScale(_this.quantIsY ? d.y0 || 0 : _this.y(d)); };
-        this.y1 = function (d) { return _this.yScale(_this.quantIsY ? d.y1 || _this.y(d) : _this.y(d)); };
+        this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x0 || 0); };
+        this.x1 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x1 || _this.x(d)); };
+        this.y0 = function (d) { return _this.yScale(_this.xIsBaseline ? d.y0 || 0 : _this.y(d)); };
+        this.y1 = function (d) { return _this.yScale(_this.xIsBaseline ? d.y1 || _this.y(d) : _this.y(d)); };
     };
     Bars.prototype.validate = function (d) {
         return fp_1.isFinite(this.xScale(this.x(d))) && fp_1.isFinite(this.yScale(this.y(d)));
@@ -91,15 +91,15 @@ var Bars = /** @class */ (function () {
     };
     Bars.prototype.seriesTranslation = function () {
         var seriesBars = this.state.current.get("computed").axes.computedBars[this.series.key()];
-        return this.quantIsY ? "translate(" + seriesBars.offset + ", 0)" : "translate(0, " + seriesBars.offset + ")";
+        return this.xIsBaseline ? "translate(" + seriesBars.offset + ", 0)" : "translate(0, " + seriesBars.offset + ")";
     };
     Bars.prototype.startAttributes = function (attributes) {
         var _this = this;
         return {
             x: attributes.x,
-            y: function (d) { return attributes.y(d) + (_this.quantIsY ? attributes.height(d) : 0); },
-            width: this.quantIsY ? attributes.width : 0,
-            height: this.quantIsY ? 0 : attributes.height,
+            y: function (d) { return attributes.y(d) + (_this.xIsBaseline ? attributes.height(d) : 0); },
+            width: this.xIsBaseline ? attributes.width : 0,
+            height: this.xIsBaseline ? 0 : attributes.height,
             color: attributes.color
         };
     };
@@ -109,8 +109,8 @@ var Bars = /** @class */ (function () {
         return {
             x: this.x0,
             y: this.y1,
-            width: this.quantIsY ? barWidth : function (d) { return _this.x1(d) - _this.x0(d); },
-            height: this.quantIsY ? function (d) { return _this.y0(d) - _this.y1(d); } : barWidth,
+            width: this.xIsBaseline ? barWidth : function (d) { return _this.x1(d) - _this.x0(d); },
+            height: this.xIsBaseline ? function (d) { return _this.y0(d) - _this.y1(d); } : barWidth,
             color: this.color.bind(this)
         };
     };

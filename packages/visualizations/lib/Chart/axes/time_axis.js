@@ -119,9 +119,7 @@ var TimeAxis = /** @class */ (function () {
         }, {})(indices);
     };
     TimeAxis.prototype.computeRange = function (tickWidth, numberOfTicks) {
-        return this.isXAxis
-            ? this.computeXRange(tickWidth, numberOfTicks)
-            : this.computeYRange(tickWidth, numberOfTicks);
+        return this.isXAxis ? this.computeXRange(tickWidth, numberOfTicks) : this.computeYRange(tickWidth, numberOfTicks);
     };
     TimeAxis.prototype.computeXRange = function (tickWidth, numberOfTicks) {
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;

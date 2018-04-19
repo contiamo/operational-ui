@@ -7,13 +7,13 @@ declare class Symbol implements RendererClass<SymbolRendererAccessors> {
     events: EventBus;
     fill: RendererAccessor<string>;
     options: Options;
-    quantIsY: boolean;
     series: Series;
     size: RendererAccessor<number>;
     state: any;
     stroke: RendererAccessor<string>;
     symbol: RendererAccessor<any>;
     type: RendererType;
+    xIsBaseline: boolean;
     x: RendererAccessor<number | Date>;
     xScale: any;
     y: RendererAccessor<number | Date>;

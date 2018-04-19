@@ -76,11 +76,9 @@ var Text = /** @class */ (function () {
         this.size = function (d) { return accessors.size(_this.series, d); };
     };
     Text.prototype.setAxisScales = function () {
+        this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.quantIsY =
-            this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.yAxis()].type ===
-                "quant";
     };
     Text.prototype.validate = function (d) {
         return isFinite(this.xScale(this.x(d))) && isFinite(this.yScale(this.y(d)));
@@ -89,9 +87,9 @@ var Text = /** @class */ (function () {
         var _this = this;
         var offset = this.state.current.get("computed").axes.computedBars[this.series.key()].width / 2 || 0;
         return {
-            x: function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) - offset : 0); },
-            y: function (d) { return _this.yScale(_this.quantIsY ? 0 : _this.y(d) - offset); },
-            text: function (d) { return (_this.quantIsY ? _this.y(d) : _this.x(d)).toString(); }
+            x: function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) - offset : 0); },
+            y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d) - offset); },
+            text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); }
         };
     };
     Text.prototype.attributes = function () {
@@ -102,11 +100,11 @@ var Text = /** @class */ (function () {
         var symbolOffset = function (d) {
             return (_this.series.symbolOffset ? _this.series.symbolOffset(d) : 0) + config.textlabels.offset;
         };
-        var rotate = config.textlabels.rotate[this.quantIsY ? "vertical" : "horizontal"];
+        var rotate = config.textlabels.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
         var attrs = {
-            x: function (d) { return _this.xScale(d.x1 || _this.x(d)) + (_this.quantIsY ? barOffset : symbolOffset(d)); },
-            y: function (d) { return _this.yScale(d.y1 || _this.y(d)) + (_this.quantIsY ? -symbolOffset(d) : barOffset); },
-            text: function (d) { return (_this.quantIsY ? _this.y(d) : _this.x(d)).toString(); }
+            x: function (d) { return _this.xScale(d.x1 || _this.x(d)) + (_this.xIsBaseline ? barOffset : symbolOffset(d)); },
+            y: function (d) { return _this.yScale(d.y1 || _this.y(d)) + (_this.xIsBaseline ? -symbolOffset(d) : barOffset); },
+            text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); }
         };
         attrs.transform = function (d) { return "rotate(" + rotate + ", " + attrs.x(d) + ", " + attrs.y(d) + ")"; };
         return attrs;

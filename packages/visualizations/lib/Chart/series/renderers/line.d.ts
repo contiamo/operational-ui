@@ -10,10 +10,10 @@ declare class Line implements RendererClass<LineRendererAccessors> {
     events: EventBus;
     interpolate: RendererAccessor<any>;
     options: Options;
-    quantIsY: boolean;
     series: Series;
     state: State;
     type: RendererType;
+    xIsBaseline: boolean;
     x: RendererAccessor<number | Date>;
     adjustedX: RendererAccessor<number>;
     xScale: any;

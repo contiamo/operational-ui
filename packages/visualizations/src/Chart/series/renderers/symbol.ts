@@ -51,13 +51,13 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   events: EventBus
   fill: RendererAccessor<string>
   options: Options
-  quantIsY: boolean
   series: Series
   size: RendererAccessor<number>
   state: any
   stroke: RendererAccessor<string>
   symbol: RendererAccessor<any>
   type: RendererType = "symbol"
+  xIsBaseline: boolean
   x: RendererAccessor<number | Date>
   xScale: any // @TODO
   y: RendererAccessor<number | Date>
@@ -149,11 +149,9 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   }
 
   private setAxisScales(): void {
+    this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.quantIsY =
-      this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.yAxis()].type ===
-      "quant"
   }
 
   private transform(d: Datum): string {
@@ -163,8 +161,8 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   }
 
   private startTransform(d: Datum): string {
-    const x: number = this.xScale(this.quantIsY ? d.x1 || this.x(d) : 0)
-    const y: number = this.yScale(this.quantIsY ? 0 : d.y1 || this.y(d))
+    const x: number = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0)
+    const y: number = this.yScale(this.xIsBaseline ? 0 : d.y1 || this.y(d))
     return `translate(${x}, ${y})`
   }
 }

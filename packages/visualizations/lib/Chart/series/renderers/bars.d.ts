@@ -8,13 +8,13 @@ declare class Bars implements RendererClass<BarsRendererAccessors> {
     el: D3Selection;
     events: EventBus;
     options: Options;
-    quantIsY: boolean;
     series: Series;
     state: any;
     type: RendererType;
     x: RendererAccessor<number | Date | string>;
     x0: RendererAccessor<number>;
     x1: RendererAccessor<number>;
+    xIsBaseline: boolean;
     xScale: any;
     y: RendererAccessor<number | Date | string>;
     y0: RendererAccessor<number>;

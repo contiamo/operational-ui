@@ -51,6 +51,7 @@ class AxesManager {
     forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove)
     // Create or update currently required axes
     forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions)
+    this.setBaselines()
     this.stateWriter("requiredAxes", keys(this.axes))
   }
 
@@ -70,6 +71,13 @@ class AxesManager {
   private update(position: AxisPosition, options: AxisOptions): void {
     const data = this.state.current.get("computed").series.dataForAxes[position]
     this.axes[position].update(options, data)
+  }
+
+  private setBaselines(): void {
+    const xType: AxisType = (this.axes.x1 || this.axes.x2).type
+    const yType: AxisType = (this.axes.y1 || this.axes.y2).type
+    const baseline: "x" | "y" = xType === "quant" && yType !== "quant" ? "y" : "x"
+    this.stateWriter("baseline", baseline)
   }
 
   private drawAxes(orientation: "x" | "y"): void {

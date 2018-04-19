@@ -32,6 +32,7 @@ var AxesManager = /** @class */ (function () {
         fp_1.forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove);
         // Create or update currently required axes
         fp_1.forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions);
+        this.setBaselines();
         this.stateWriter("requiredAxes", fp_1.keys(this.axes));
     };
     AxesManager.prototype.createOrUpdate = function (options, position) {
@@ -48,6 +49,12 @@ var AxesManager = /** @class */ (function () {
     AxesManager.prototype.update = function (position, options) {
         var data = this.state.current.get("computed").series.dataForAxes[position];
         this.axes[position].update(options, data);
+    };
+    AxesManager.prototype.setBaselines = function () {
+        var xType = (this.axes.x1 || this.axes.x2).type;
+        var yType = (this.axes.y1 || this.axes.y2).type;
+        var baseline = xType === "quant" && yType !== "quant" ? "y" : "x";
+        this.stateWriter("baseline", baseline);
     };
     AxesManager.prototype.drawAxes = function (orientation) {
         var axes = fp_1.pickBy(function (axis) {

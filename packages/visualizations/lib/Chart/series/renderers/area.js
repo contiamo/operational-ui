@@ -38,7 +38,7 @@ var Area = /** @class */ (function () {
         this.addMissingData();
         this.updateClipPath();
         var duration = this.state.current.get("config").duration;
-        var data = fp_1.sortBy(function (d) { return (_this.quantIsY ? _this.x(d) : _this.y(d)); })(this.data);
+        var data = fp_1.sortBy(function (d) { return (_this.xIsBaseline ? _this.x(d) : _this.y(d)); })(this.data);
         var area = this.el.selectAll("path.main").data([data]);
         area
             .enter()
@@ -94,6 +94,7 @@ var Area = /** @class */ (function () {
     };
     Area.prototype.setAxisScales = function () {
         var _this = this;
+        this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
         var axisData = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
         var axisTypes = fp_1.map(function (axis) { return axisData[axis].type; })([
             this.series.xAxis(),
@@ -104,11 +105,10 @@ var Area = /** @class */ (function () {
         }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.quantIsY = axisTypes[1] === "quant";
-        this.x0 = function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) : d.x0 || 0); };
-        this.x1 = function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) : d.x1 || _this.x(d)); };
-        this.y0 = function (d) { return _this.yScale(_this.quantIsY ? d.y0 || 0 : _this.y(d)); };
-        this.y1 = function (d) { return _this.yScale(_this.quantIsY ? d.y1 || _this.y(d) : _this.y(d)); };
+        this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x0 || 0); };
+        this.x1 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x1 || _this.x(d)); };
+        this.y0 = function (d) { return _this.yScale(_this.xIsBaseline ? d.y0 || 0 : _this.y(d)); };
+        this.y1 = function (d) { return _this.yScale(_this.xIsBaseline ? d.y1 || _this.y(d) : _this.y(d)); };
     };
     Area.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
@@ -125,7 +125,7 @@ var Area = /** @class */ (function () {
         if (this.closeGaps()) {
             return;
         }
-        if (this.quantIsY && !this.series.options.stacked) {
+        if (this.xIsBaseline && !this.series.options.stacked) {
             var ticks = this.state.current.get("computed").series.dataForAxes[this.series.xAxis()];
             fp_1.forEach(function (tick) {
                 if (!fp_1.find(function (d) { return _this.x(d).toString() === tick.toString(); })(_this.data)) {
@@ -157,8 +157,8 @@ var Area = /** @class */ (function () {
     Area.prototype.startClipPath = function (data) {
         var _this = this;
         return d3_shape_1.area()
-            .x(function (d) { return _this.xScale(_this.quantIsY ? _this.x(d) : 0); })
-            .y(function (d) { return _this.yScale(_this.quantIsY ? 0 : _this.y(d)); })
+            .x(function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : 0); })
+            .y(function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d)); })
             .curve(this.interpolate())(data);
     };
     Area.prototype.clipPath = function (data) {
@@ -166,7 +166,7 @@ var Area = /** @class */ (function () {
         return d3_shape_1.area()
             .x0(this.x0)
             .x1(this.x1)
-            .y0(function (d) { return (_this.quantIsY ? 0 : _this.y0(d)); })
+            .y0(function (d) { return (_this.xIsBaseline ? 0 : _this.y0(d)); })
             .y1(this.y1)
             .curve(this.interpolate())(data);
     };

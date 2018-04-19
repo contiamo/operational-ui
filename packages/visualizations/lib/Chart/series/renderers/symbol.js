@@ -99,11 +99,9 @@ var Symbol = /** @class */ (function () {
         this.size = function (d) { return accessors.size(_this.series, d); };
     };
     Symbol.prototype.setAxisScales = function () {
+        this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.quantIsY =
-            this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.yAxis()].type ===
-                "quant";
     };
     Symbol.prototype.transform = function (d) {
         var x = this.xScale(d.x1 || this.x(d));
@@ -111,8 +109,8 @@ var Symbol = /** @class */ (function () {
         return "translate(" + x + ", " + y + ")";
     };
     Symbol.prototype.startTransform = function (d) {
-        var x = this.xScale(this.quantIsY ? d.x1 || this.x(d) : 0);
-        var y = this.yScale(this.quantIsY ? 0 : d.y1 || this.y(d));
+        var x = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0);
+        var y = this.yScale(this.xIsBaseline ? 0 : d.y1 || this.y(d));
         return "translate(" + x + ", " + y + ")";
     };
     return Symbol;

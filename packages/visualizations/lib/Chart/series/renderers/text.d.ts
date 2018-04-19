@@ -7,11 +7,11 @@ declare class Text implements RendererClass<TextRendererAccessors> {
     el: D3Selection;
     events: EventBus;
     options: Options;
-    quantIsY: boolean;
     series: Series;
     size: RendererAccessor<number>;
     state: State;
     type: RendererType;
+    xIsBaseline: boolean;
     x: RendererAccessor<number>;
     xScale: any;
     y: RendererAccessor<number>;

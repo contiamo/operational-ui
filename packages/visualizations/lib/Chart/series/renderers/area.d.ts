@@ -9,10 +9,10 @@ declare class Area implements RendererClass<AreaRendererAccessors> {
     events: EventBus;
     interpolate: RendererAccessor<any>;
     options: Options;
-    quantIsY: boolean;
     series: Series;
     state: State;
     type: RendererType;
+    xIsBaseline: boolean;
     x: RendererAccessor<number | Date>;
     x0: RendererAccessor<number>;
     x1: RendererAccessor<number>;

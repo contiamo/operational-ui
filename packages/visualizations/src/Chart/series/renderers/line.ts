@@ -57,10 +57,10 @@ class Line implements RendererClass<LineRendererAccessors> {
   events: EventBus
   interpolate: RendererAccessor<any>
   options: Options
-  quantIsY: boolean
   series: Series
   state: State
   type: RendererType = "line"
+  xIsBaseline: boolean
   x: RendererAccessor<number | Date>
   adjustedX: RendererAccessor<number>
   xScale: any // @TODO
@@ -87,7 +87,7 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.setAxisScales()
     this.addMissingData()
 
-    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
+    const data: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
     const duration: number = this.state.current.get("config").duration
 
     const line = this.el.selectAll("path").data([data])
@@ -139,6 +139,7 @@ class Line implements RendererClass<LineRendererAccessors> {
   }
 
   private setAxisScales(): void {
+    this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     const axisData: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const axisTypes: AxisType[] = map((axis: AxisPosition): string => axisData[axis].type)([
       this.series.xAxis(),
@@ -149,16 +150,15 @@ class Line implements RendererClass<LineRendererAccessors> {
     }
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.quantIsY = axisTypes[1] === "quant"
-    this.adjustedX = (d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : d.x1 || this.x(d))
-    this.adjustedY = (d: Datum): any => this.yScale(this.quantIsY ? d.y1 || this.y(d) : this.y(d))
+    this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x1 || this.x(d))
+    this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y1 || this.y(d) : this.y(d))
   }
 
   private addMissingData(): void {
     if (this.closeGaps()) {
       return
     }
-    if (this.quantIsY && !this.series.options.stacked) {
+    if (this.xIsBaseline && !this.series.options.stacked) {
       const ticks: Date[] = this.state.current.get("computed").series.dataForAxes[this.series.xAxis()]
       forEach((tick: Date): void => {
         if (!find((d: Datum): boolean => this.x(d).toString() === tick.toString())(this.data)) {
@@ -171,7 +171,7 @@ class Line implements RendererClass<LineRendererAccessors> {
   private startPath(data: Datum[]): string {
     const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Line() as any)
-      .x(this.quantIsY ? this.adjustedX : this.xScale(0))
+      .x(this.xIsBaseline ? this.adjustedX : this.xScale(0))
       .y(this.adjustedY ? this.yScale(0) : this.adjustedY)
       .curve(this.interpolate())
       .defined(isDefined)(data)

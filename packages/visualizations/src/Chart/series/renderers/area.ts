@@ -55,10 +55,10 @@ class Area implements RendererClass<AreaRendererAccessors> {
   events: EventBus
   interpolate: RendererAccessor<any>
   options: Options
-  quantIsY: boolean
   series: Series
   state: State
   type: RendererType = "area"
+  xIsBaseline: boolean
   x: RendererAccessor<number | Date>
   x0: RendererAccessor<number>
   x1: RendererAccessor<number>
@@ -89,7 +89,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.updateClipPath()
 
     const duration: number = this.state.current.get("config").duration
-    const data: Datum[] = sortBy((d: Datum): any => (this.quantIsY ? this.x(d) : this.y(d)))(this.data)
+    const data: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
     const area = this.el.selectAll("path.main").data([data])
 
     area
@@ -154,6 +154,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private setAxisScales(): void {
+    this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     const axisData: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
     const axisTypes: AxisType[] = map((axis: AxisPosition): string => axisData[axis].type)([
       this.series.xAxis(),
@@ -164,11 +165,10 @@ class Area implements RendererClass<AreaRendererAccessors> {
     }
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.quantIsY = axisTypes[1] === "quant"
-    this.x0 = (d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : d.x0 || 0)
-    this.x1 = (d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : d.x1 || this.x(d))
-    this.y0 = (d: Datum): any => this.yScale(this.quantIsY ? d.y0 || 0 : this.y(d))
-    this.y1 = (d: Datum): any => this.yScale(this.quantIsY ? d.y1 || this.y(d) : this.y(d))
+    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x0 || 0)
+    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x1 || this.x(d))
+    this.y0 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y0 || 0 : this.y(d))
+    this.y1 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y1 || this.y(d) : this.y(d))
   }
 
   private assignAccessors(customAccessors: Partial<AreaRendererAccessors>): void {
@@ -185,7 +185,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     if (this.closeGaps()) {
       return
     }
-    if (this.quantIsY && !this.series.options.stacked) {
+    if (this.xIsBaseline && !this.series.options.stacked) {
       const ticks: Date[] = this.state.current.get("computed").series.dataForAxes[this.series.xAxis()]
       forEach((tick: Date): void => {
         if (!find((d: Datum): boolean => this.x(d).toString() === tick.toString())(this.data)) {
@@ -217,8 +217,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
 
   private startClipPath(data: Datum[]): string {
     return (d3Area() as any)
-      .x((d: Datum): any => this.xScale(this.quantIsY ? this.x(d) : 0))
-      .y((d: Datum): any => this.yScale(this.quantIsY ? 0 : this.y(d)))
+      .x((d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : 0))
+      .y((d: Datum): any => this.yScale(this.xIsBaseline ? 0 : this.y(d)))
       .curve(this.interpolate())(data)
   }
 
@@ -226,7 +226,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     return (d3Area() as any)
       .x0(this.x0)
       .x1(this.x1)
-      .y0((d: Datum) => (this.quantIsY ? 0 : this.y0(d)))
+      .y0((d: Datum) => (this.xIsBaseline ? 0 : this.y0(d)))
       .y1(this.y1)
       .curve(this.interpolate())(data)
   }
