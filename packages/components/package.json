@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "node scripts/dev-server/index.js",
+    "start": "node scripts/dev-server/index.js",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "tsc -d -w",
     "test": "jest",
