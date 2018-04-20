@@ -14,12 +14,12 @@ import {
 } from "@operational/components"
 
 import Marathon, { MarathonEnvironment } from "./components/Marathon"
-
 import allTestCases, { fromHash, toHash } from "./TestCases"
 
 export interface State {
   group: number
   test: number
+  isLooping: boolean
 }
 
 const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: boolean }): {} => ({
@@ -36,7 +36,8 @@ const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: bo
 class App extends React.Component<{}, State> {
   state = {
     group: 0,
-    test: 0
+    test: 0,
+    isLooping: false
   }
 
   componentDidMount() {
@@ -112,9 +113,16 @@ class App extends React.Component<{}, State> {
           <Card>
             <CardHeader>Canvas</CardHeader>
             <Marathon
-              test={
-                allTestCases[this.state.group].children[this.state.test].marathon as ((a: MarathonEnvironment) => void)
-              }
+              test={allTestCases[this.state.group].children[this.state.test].marathon}
+              onCompleted={() => {
+                if (this.state.test < allTestCases[this.state.group].children.length - 1) {
+                  setTimeout(() => {
+                    this.setState(prevState => ({
+                      test: prevState.test + 1
+                    }))
+                  }, 2000)
+                }
+              }}
               timeout={2000}
             />
           </Card>

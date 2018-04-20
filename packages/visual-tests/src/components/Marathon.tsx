@@ -16,6 +16,7 @@ export interface Props {
   css?: any
   className?: string
   timeout?: number
+  onCompleted?: () => void
   test: (testEnvironment: MarathonEnvironment) => void
 }
 
@@ -115,10 +116,12 @@ class Marathon extends React.Component<Props, State> {
       return
     }
 
+    const actualTimeout = completed === 0 ? 100 : timeout
+
     const currentTestId = this.state.id
 
     if (test.fn.length === 0) {
-      await sleep(timeout as any)
+      await sleep(actualTimeout)
       try {
         this.beforeEach && this.beforeEach()
         test.fn()
@@ -136,17 +139,17 @@ class Marathon extends React.Component<Props, State> {
         await this.setStateById((prevState: State) => ({ id: currentTestId, completed: prevState.completed + 1 }))
         this.runNext()
       } catch (err) {}
-    } else {
-      await sleep(timeout as any)
-      this.beforeEach && this.beforeEach()
-      test.fn(async () => {
-        this.afterEach && this.afterEach()
-        try {
-          await this.setStateById(prevState => ({ id: currentTestId, completed: prevState.completed + 1 }))
-          this.runNext()
-        } catch (err) {}
-      })
+      return
     }
+    await sleep(actualTimeout)
+    this.beforeEach && this.beforeEach()
+    test.fn(async () => {
+      this.afterEach && this.afterEach()
+      try {
+        await this.setStateById(prevState => ({ id: currentTestId, completed: prevState.completed + 1 }))
+        this.runNext()
+      } catch (err) {}
+    })
   }
 
   startTests() {
@@ -204,6 +207,10 @@ class Marathon extends React.Component<Props, State> {
       ).then(() => {
         this.startTests()
       })
+      return
+    }
+    if (this.state.completed === this.state.tests.length && this.state.completed !== 0 && this.props.onCompleted) {
+      this.props.onCompleted()
     }
   }
 
