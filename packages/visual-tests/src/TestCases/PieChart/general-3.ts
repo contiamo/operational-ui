@@ -30,4 +30,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Missing data"
+export const title = "Missing data"
+
+export const slug = "missing-data"

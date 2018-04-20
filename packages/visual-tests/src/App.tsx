@@ -15,11 +15,9 @@ import {
 
 import Marathon, { MarathonEnvironment } from "./components/Marathon"
 
-import allTestCases from "./TestCases"
+import allTestCases, { fromHash, toHash } from "./TestCases"
 
-const testcases = allTestCases[2].marathons
-
-interface State {
+export interface State {
   group: number
   test: number
 }
@@ -38,8 +36,39 @@ const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: bo
 class App extends React.Component<{}, State> {
   state = {
     group: 0,
-    test: 0,
-    renderMarathon: true
+    test: 0
+  }
+
+  componentDidMount() {
+    this.readRoute()
+    window.addEventListener("popstate", () => {
+      this.readRoute()
+    })
+  }
+
+  componentDidUpdate() {
+    this.syncRoute()
+  }
+
+  readRoute() {
+    const indicesFromHash = fromHash(window.location.hash)(allTestCases)
+    if (indicesFromHash === null) {
+      return
+    }
+    this.setState(() => ({
+      group: indicesFromHash.groupIndex,
+      test: indicesFromHash.testIndex
+    }))
+  }
+
+  syncRoute() {
+    const hash = toHash({
+      groupIndex: this.state.group,
+      testIndex: this.state.test
+    })(allTestCases)
+    if (hash !== window.location.hash) {
+      history.pushState(null, null, hash)
+    }
   }
 
   render() {
@@ -63,7 +92,7 @@ class App extends React.Component<{}, State> {
                     }))
                   }}
                 >
-                  {test.marathons.map((test, testIndex) => (
+                  {test.children.map((test, testIndex) => (
                     <SidebarItem
                       key={testIndex}
                       active={groupIndex === this.state.group && testIndex === this.state.test}
@@ -84,7 +113,7 @@ class App extends React.Component<{}, State> {
             <CardHeader>Canvas</CardHeader>
             <Marathon
               test={
-                allTestCases[this.state.group].marathons[this.state.test].marathon as ((a: MarathonEnvironment) => void)
+                allTestCases[this.state.group].children[this.state.test].marathon as ((a: MarathonEnvironment) => void)
               }
               timeout={2000}
             />

@@ -202,3 +202,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 }
 
 export const title = "Undefined Config Options"
+
+export const slug = "undefined-config-options"

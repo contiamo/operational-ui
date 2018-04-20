@@ -62,3 +62,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 }
 
 export const title = "Data updates"
+
+export const slug = "data-updates"

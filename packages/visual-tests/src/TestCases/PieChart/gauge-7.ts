@@ -26,4 +26,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Multiple datapoints"
+export const title = "Multiple datapoints"
+
+export const slug = "multiple-datapoints"

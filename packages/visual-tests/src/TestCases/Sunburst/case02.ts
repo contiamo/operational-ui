@@ -262,4 +262,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Exiting"
+export const title = "Exiting"
+
+export const slug = "exiting"

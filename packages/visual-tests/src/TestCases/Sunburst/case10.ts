@@ -341,4 +341,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Testing config options"
+export const title = "Testing config options"
+
+export const slug = "testing-config-options"

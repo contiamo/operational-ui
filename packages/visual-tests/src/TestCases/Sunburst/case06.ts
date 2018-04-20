@@ -299,4 +299,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Zooming"
+export const title = "Zooming"
+
+export const slug = "zooming"

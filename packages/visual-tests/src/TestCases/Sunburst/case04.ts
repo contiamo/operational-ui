@@ -291,4 +291,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Small segments"
+export const title = "Small segments"
+
+export const slug = "small-segments"

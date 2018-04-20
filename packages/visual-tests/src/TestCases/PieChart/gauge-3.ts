@@ -36,4 +36,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Comparison (semi)"
+export const title = "Comparison (semi)"
+
+export const slug = "comparison-semi"

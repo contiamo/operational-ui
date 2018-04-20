@@ -296,4 +296,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Truncated view"
+export const title = "Truncated view"
+
+export const slug = "truncated-view"

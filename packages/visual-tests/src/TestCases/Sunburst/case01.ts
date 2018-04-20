@@ -287,3 +287,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 }
 
 export const title: string = "Entering and updating"
+
+export const slug: string = "entering-and-updating"

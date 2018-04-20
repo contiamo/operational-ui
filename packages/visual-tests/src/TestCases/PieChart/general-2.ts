@@ -32,4 +32,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Closing chart"
+export const title = "Closing chart"
+
+export const slug = "closing-chart"

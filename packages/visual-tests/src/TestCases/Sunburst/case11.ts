@@ -149,4 +149,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Series accessors"
+export const title = "Series accessors"
+
+export const slug = "series-accessors"

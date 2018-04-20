@@ -53,4 +53,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Empty/no data"
+export const title = "Empty/no data"
+
+export const slug = "empty-or-no-data"

@@ -208,7 +208,6 @@ class Marathon extends React.Component<Props, State> {
   }
 
   render() {
-    console.log(this.state)
     const { css, className } = this.props
     return (
       <Div css={css} className={className}>

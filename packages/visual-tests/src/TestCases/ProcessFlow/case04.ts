@@ -179,3 +179,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 }
 
 export const title = "Looped data"
+
+export const slug = "looped-data"

@@ -311,4 +311,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Resizing"
+export const title = "Resizing"
+
+export const slug = "resizing"

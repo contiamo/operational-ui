@@ -4930,4 +4930,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Large dataset"
+export const title = "Large dataset"
+
+export const slug = "large-dataset"

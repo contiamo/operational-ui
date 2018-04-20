@@ -103,4 +103,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Accessor Testing"
+export const title = "Accessor Testing"
+
+export const slug = "accessor-testing"
