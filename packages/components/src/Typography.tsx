@@ -6,29 +6,34 @@ export interface Props {
   theme: Theme
 }
 
-const TitleType: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: Props): {} => ({
+const Title: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: Props): {} => ({
   ...theme.typography.title,
+  margin: `${theme.spacing}px 0`,
   label: "titletype"
 }))
 
-const Heading1Type: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: Props): {} => ({
+const Heading1: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: Props): {} => ({
   ...theme.typography.heading1,
+  margin: `${theme.spacing / 2}px 0`,
   label: "heading1type"
 }))
 
-const Heading2Type: GlamorousComponent<{}, {}> = glamorous.h2(({ theme }: Props): {} => ({
+const Heading2: GlamorousComponent<{}, {}> = glamorous.h2(({ theme }: Props): {} => ({
   ...theme.typography.heading2,
+  margin: `${theme.spacing / 2}px 0`,
   label: "heading2type"
 }))
 
-const BodyType: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: Props): {} => ({
+const Body: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: Props): {} => ({
   ...theme.typography.body,
+  margin: `${theme.spacing / 4}px 0`,
   label: "bodytype"
 }))
 
-const SmallType: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: Props): {} => ({
+const Small: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: Props): {} => ({
   ...theme.typography.small,
+  margin: `${theme.spacing / 4}px 0`,
   label: "smalltype"
 }))
 
-export { TitleType, Heading1Type, Heading2Type, BodyType, SmallType }
+export { Title, Heading1, Heading2, Body, Small }

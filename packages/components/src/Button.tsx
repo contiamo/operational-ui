@@ -38,7 +38,7 @@ const Container = glamorous.button(({ theme, color, active, disabled, condensed 
     label: "button",
     ...theme.typography.body,
     display: "inline-block",
-    padding: condensed ? `${spacing / 8}px ${spacing / 2}px` : `${spacing / 4}px ${spacing}px`,
+    padding: condensed ? `${spacing / 8}px ${spacing / 2}px` : `${spacing * 0.375}px ${spacing * 1.5}px`,
     borderRadius: theme.borderRadius,
     border: "1px solid",
     borderColor: isWhite(backgroundColor) ? theme.colors.gray : active ? activeBackgroundColor : backgroundColor,

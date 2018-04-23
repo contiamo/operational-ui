@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 
 import { Theme } from "@operational/theme"
-import { Input, TitleType, Button, Progress, Icon, IconName } from "@operational/components"
+import { Input, Title, Button, Progress, Icon, IconName } from "@operational/components"
 
 export interface Props {
   css?: {}
@@ -89,9 +89,7 @@ export default class Auth extends React.Component<Props, State> {
                 )
               ) : null}
             </glamorous.Div>
-            {this.props.title ? (
-              <TitleType css={{ textAlign: "center", margin: 0 }}>{this.props.title}</TitleType>
-            ) : null}
+            {this.props.title ? <Title css={{ textAlign: "center", margin: 0 }}>{this.props.title}</Title> : null}
             <InputFields>
               {isStringValue(this.props.username) ? (
                 <Input

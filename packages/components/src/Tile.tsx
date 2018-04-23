@@ -33,11 +33,11 @@ const Label = glamorous.small(({ theme }: { theme: Theme }): {} => ({
   opacity: 0.6
 }))
 
-const InfoTile = (props: Props) => (
+const Tile = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className}>
     <Label>{props.label}</Label>
     <Content>{props.children}</Content>
   </Container>
 )
 
-export default InfoTile
+export default Tile

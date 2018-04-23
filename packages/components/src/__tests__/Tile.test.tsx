@@ -1,14 +1,14 @@
 import * as React from "react"
 import { render } from "enzyme"
 
-import { InfoTile as ThemelessInfoTile } from "../index"
+import { Tile as ThemelessTile } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 
-const InfoTile = wrapDefaultTheme(ThemelessInfoTile)
+const Tile = wrapDefaultTheme(ThemelessTile)
 
 describe("InfoTile", () => {
   it("Should render", () => {
-    const renderedComponent = render(<InfoTile label="Country">DE</InfoTile>)
+    const renderedComponent = render(<Tile label="Country">DE</Tile>)
     expect(renderedComponent).toMatchSnapshot()
   })
 })
