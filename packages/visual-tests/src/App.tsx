@@ -5,6 +5,7 @@ import { Theme } from "@operational/theme"
 import {
   OperationalUI,
   Button,
+  Icon,
   Card,
   CardHeader,
   Grid,
@@ -20,6 +21,7 @@ export interface State {
   group: number
   test: number
   isLooping: boolean
+  isIdle: boolean
 }
 
 const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: boolean }): {} => ({
@@ -33,11 +35,27 @@ const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: bo
   borderBottom: "1px solid currentColor"
 }))
 
+const LoopButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  width: 60,
+  height: 60,
+  color: theme.colors.white,
+  position: "fixed",
+  bottom: theme.spacing * 1.5,
+  right: theme.spacing * 1.5,
+  backgroundColor: theme.colors.navBackground,
+  borderRadius: "50%",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
+}))
+
 class App extends React.Component<{}, State> {
   state = {
     group: 0,
     test: 0,
-    isLooping: false
+    isLooping: false,
+    isIdle: false
   }
 
   componentDidMount() {
@@ -72,61 +90,87 @@ class App extends React.Component<{}, State> {
     }
   }
 
+  loop() {
+    const reachedEnd = this.state.test >= allTestCases[this.state.group].children.length - 1
+    setTimeout(() => {
+      this.setState(prevState => ({
+        test: reachedEnd ? 0 : prevState.test + 1
+      }))
+    }, 2000)
+  }
+
   render() {
     return (
       <OperationalUI withBaseStyles>
-        <Grid type="IDE">
-          <Card>
-            <CardHeader>Tests</CardHeader>
-            <Sidebar
-              css={{ margin: -12, width: "calc(100% + 24px)", boxShadow: "none", borderTop: "1px solid #f2f2f2" }}
-            >
-              {allTestCases.map((test, groupIndex) => (
-                <SidebarHeader
-                  key={groupIndex}
-                  label={test.title}
-                  open={groupIndex === this.state.group}
-                  onToggle={() => {
-                    this.setState(() => ({
-                      group: groupIndex,
-                      test: 0
-                    }))
-                  }}
-                >
-                  {test.children.map((test, testIndex) => (
-                    <SidebarItem
-                      key={testIndex}
-                      active={groupIndex === this.state.group && testIndex === this.state.test}
-                      onClick={() => {
-                        this.setState(() => ({
-                          test: testIndex
-                        }))
-                      }}
-                    >
-                      {test.title}
-                    </SidebarItem>
-                  ))}
-                </SidebarHeader>
-              ))}
-            </Sidebar>
-          </Card>
-          <Card>
-            <CardHeader>Canvas</CardHeader>
-            <Marathon
-              test={allTestCases[this.state.group].children[this.state.test].marathon}
-              onCompleted={() => {
-                if (this.state.test < allTestCases[this.state.group].children.length - 1) {
-                  setTimeout(() => {
+        <React.Fragment>
+          <LoopButton
+            onClick={() => {
+              if (!this.state.isLooping && this.state.isIdle) {
+                this.loop()
+              }
+              this.setState(prevState => ({
+                isLooping: !prevState.isLooping,
+                isIdle: !prevState.isLooping ? false : prevState.isIdle
+              }))
+            }}
+          >
+            <Icon name={this.state.isLooping ? "Pause" : "RefreshCcw"} size={30} />
+          </LoopButton>
+          <Grid type="IDE">
+            <Card>
+              <CardHeader>Tests</CardHeader>
+              <Sidebar
+                css={{ margin: -12, width: "calc(100% + 24px)", boxShadow: "none", borderTop: "1px solid #f2f2f2" }}
+              >
+                {allTestCases.map((test, groupIndex) => (
+                  <SidebarHeader
+                    key={groupIndex}
+                    label={test.title}
+                    open={groupIndex === this.state.group}
+                    onToggle={() => {
+                      this.setState(() => ({
+                        group: groupIndex,
+                        test: 0
+                      }))
+                    }}
+                  >
+                    {test.children.map((test, testIndex) => (
+                      <SidebarItem
+                        key={testIndex}
+                        active={groupIndex === this.state.group && testIndex === this.state.test}
+                        onClick={() => {
+                          this.setState(() => ({
+                            test: testIndex
+                          }))
+                        }}
+                      >
+                        {test.title}
+                      </SidebarItem>
+                    ))}
+                  </SidebarHeader>
+                ))}
+              </Sidebar>
+            </Card>
+            <Card>
+              <CardHeader>Canvas</CardHeader>
+              <Marathon
+                test={allTestCases[this.state.group].children[this.state.test].marathon}
+                onCompleted={() => {
+                  if (!this.state.isLooping && !this.state.isIdle) {
                     this.setState(prevState => ({
-                      test: prevState.test + 1
+                      isIdle: true
                     }))
-                  }, 2000)
-                }
-              }}
-              timeout={2000}
-            />
-          </Card>
-        </Grid>
+                    return
+                  }
+                  if (this.state.isLooping) {
+                    this.loop()
+                  }
+                }}
+                timeout={2000}
+              />
+            </Card>
+          </Grid>
+        </React.Fragment>
       </OperationalUI>
     )
   }
