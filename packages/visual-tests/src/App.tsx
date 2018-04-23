@@ -38,25 +38,6 @@ const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: bo
   borderBottom: "1px solid currentColor"
 }))
 
-const LoopButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  width: 60,
-  height: 60,
-  color: theme.colors.white,
-  position: "fixed",
-  bottom: theme.spacing * 1.5,
-  right: theme.spacing * 1.5,
-  backgroundColor: theme.colors.navBackground,
-  borderRadius: "50%",
-  cursor: "pointer",
-  boxShadow: theme.shadows.popup,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  ":hover": {
-    backgroundColor: darken(theme.colors.navBackground, 5)
-  }
-}))
-
 class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props)
@@ -114,24 +95,29 @@ class App extends React.Component<{}, State> {
     return (
       <OperationalUI withBaseStyles>
         <React.Fragment>
-          <LoopButton
-            onClick={() => {
-              if (!this.state.isLooping && this.state.isIdle) {
-                this.loop()
-              }
-              this.setState(prevState => ({
-                isLooping: !prevState.isLooping,
-                isIdle: !prevState.isLooping ? false : prevState.isIdle
-              }))
-            }}
-          >
-            <Icon name={this.state.isLooping ? "Pause" : "RefreshCcw"} size={30} />
-          </LoopButton>
           <Grid type="IDE">
             <Card>
-              <CardHeader>Tests</CardHeader>
+              <CardHeader>
+                Tests
+                <Button
+                  condensed
+                  color={this.state.isLooping ? "white" : "info"}
+                  css={{ marginRight: 0 }}
+                  onClick={() => {
+                    if (!this.state.isLooping && this.state.isIdle) {
+                      this.loop()
+                    }
+                    this.setState(prevState => ({
+                      isLooping: !prevState.isLooping,
+                      isIdle: !prevState.isLooping ? false : prevState.isIdle
+                    }))
+                  }}
+                >
+                  {this.state.isLooping ? "Pause" : "Loop"}
+                </Button>
+              </CardHeader>
               <Sidebar
-                css={{ margin: -12, width: "calc(100% + 24px)", boxShadow: "none", borderTop: "1px solid #f2f2f2" }}
+                css={{ margin: -16, width: "calc(100% + 32px)", boxShadow: "none", borderTop: "1px solid #f2f2f2" }}
               >
                 {allTestCases.map((test, groupIndex) => (
                   <SidebarHeader
