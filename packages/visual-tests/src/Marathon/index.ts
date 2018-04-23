@@ -1,13 +1,5 @@
 import * as React from "react"
 
-type TestFn = (done?: ((a: any) => void)) => void
-
-export interface State {
-  id: number // the id of the test, incrementing every time a new test prop is passed
-  tests: Test[]
-  completed: number
-}
-
 export interface Props {
   timeout?: number
   onCompleted?: () => void
@@ -15,13 +7,24 @@ export interface Props {
   children: (renderer: MarathonRenderer) => React.ReactNode
 }
 
-export interface MarathonRenderer {
-  ref: any
-  tests: any
-  completed: any
+export interface State {
+  // The id of the current running test, incrementing every time a new test prop is passed
+  // this is necessary to intercept and abandon any asynchronous operations
+  // within a test that has been swapped out.
+  id: number
+  // A test object that contains all `test(...)` definitions
+  tests: Test[]
+  completed: number
 }
 
-// Test globals mimicking Jest's API
+export interface MarathonRenderer {
+  ref: (node: HTMLElement) => void
+  results: { description: string; isCompleted: boolean; errors: string[] }[]
+}
+
+type TestFn = (done?: ((a: any) => void)) => void
+
+// Methods available inside test definitions.
 export interface MarathonEnvironment {
   test?: (description: string, done?: () => void) => void
   expect?: (expected: any) => { toBe: any }
@@ -55,7 +58,7 @@ class Marathon extends React.Component<Props, State> {
   }
 
   static defaultProps = {
-    timeout: 0
+    timeout: 2000
   }
 
   state = {
@@ -185,9 +188,6 @@ class Marathon extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    console.log("prev", prevProps.test)
-    console.log("current", this.props.test)
-    console.log(prevProps.test === this.props.test)
     if (prevProps.test !== this.props.test) {
       this.afterAll && this.afterAll()
       this.beforeEach = undefined
@@ -215,8 +215,11 @@ class Marathon extends React.Component<Props, State> {
 
   render() {
     return this.props.children({
-      tests: this.state.tests,
-      completed: this.state.completed,
+      results: this.state.tests.map((test, index) => ({
+        description: test.description,
+        isCompleted: this.state.completed > index,
+        errors: test.errors
+      })),
       ref: (node: HTMLElement) => {
         this.container = node
       }

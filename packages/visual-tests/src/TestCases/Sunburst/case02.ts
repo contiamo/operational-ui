@@ -1,5 +1,5 @@
 import { Sunburst } from "@operational/visualizations"
-import { MarathonEnvironment } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const config = {
   sort: false

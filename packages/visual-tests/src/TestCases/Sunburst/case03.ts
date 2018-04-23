@@ -1,5 +1,5 @@
 import { Sunburst } from "@operational/visualizations"
-import { MarathonEnvironment } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Sunburst(container)

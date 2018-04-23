@@ -1,5 +1,5 @@
 import { PieChart } from "@operational/visualizations"
-import { MarathonEnvironment } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const GaugeRenderer = {
   type: "gauge",

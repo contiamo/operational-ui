@@ -1,4 +1,4 @@
-import { MarathonEnvironment } from "../components/Marathon"
+import { MarathonEnvironment } from "../Marathon"
 
 export interface TestSuiteGroup {
   title: string

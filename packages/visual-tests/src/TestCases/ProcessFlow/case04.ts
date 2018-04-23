@@ -1,6 +1,6 @@
 import { ProcessFlow, ProcessFlowLoopHandler } from "@operational/visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
-import { MarathonEnvironment } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const journeys = [
   { path: ["135", "22", "186", "20", "1"], size: 42 },

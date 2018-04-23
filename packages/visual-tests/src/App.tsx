@@ -16,8 +16,8 @@ import {
 } from "@operational/components"
 import { darken } from "@operational/utils"
 
-import Marathon, { MarathonEnvironment } from "./components/Marathon"
-import MarathonRenderer from "./components/MarathonRenderer"
+import Marathon, { MarathonEnvironment } from "./Marathon"
+import MarathonRenderer from "./MarathonRenderer"
 import allTestCases, { fromHash, toHash } from "./TestCases"
 
 export interface State {

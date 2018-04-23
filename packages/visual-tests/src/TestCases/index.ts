@@ -3,7 +3,7 @@ import processFlowTestCases from "./ProcessFlow"
 import sunburstTestCases from "./Sunburst"
 
 import { TestSuiteGroup } from "./types"
-import { MarathonEnvironment } from "../components/Marathon"
+import { MarathonEnvironment } from "../Marathon"
 
 const testGroups: TestSuiteGroup[] = [
   { folder: "PieChart", title: "Pie Charts", slug: "pie-charts", children: pieChartTestCases },

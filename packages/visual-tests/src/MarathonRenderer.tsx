@@ -3,6 +3,7 @@ import glamorous, { Div, withTheme } from "glamorous"
 
 import { Icon } from "@operational/components"
 import { Theme, operational } from "@operational/theme"
+import { MarathonRenderer } from "./Marathon"
 
 const Container = glamorous.ul({
   padding: 0
@@ -52,20 +53,12 @@ const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
   }
 }))
 
-export interface Props {
-  tests: { description: string; errors: string[] }[]
-  completed: number
-  ref: any
-}
-
-const MarathonRenderer: React.SFC<Props> = ({ tests, completed, ref }: Props) => (
+const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
   <Div>
     <Container>
-      {tests.map((test: any, index: any) => {
-        const failed = test.errors.length > 0
-        const isCompleted = completed > index
-        const content = isCompleted ? (
-          failed ? (
+      {results.map((result, index) => {
+        const content = result.isCompleted ? (
+          result.errors.length > 0 ? (
             <Icon name="X" size={12} color={operational.colors.error} />
           ) : (
             <Icon name="Check" size={12} color={operational.colors.success} />
@@ -77,9 +70,9 @@ const MarathonRenderer: React.SFC<Props> = ({ tests, completed, ref }: Props) =>
           <Item key={index}>
             <Title>
               {content}
-              {test.description}
+              {result.description}
             </Title>
-            {failed && <FailureMessage>{test.errors.concat(" ")}</FailureMessage>}
+            {result.errors.length > 0 ? <FailureMessage>{result.errors.concat(" ")}</FailureMessage> : null}
           </Item>
         )
       })}
@@ -88,4 +81,4 @@ const MarathonRenderer: React.SFC<Props> = ({ tests, completed, ref }: Props) =>
   </Div>
 )
 
-export default MarathonRenderer
+export default MarathonRendererComponent

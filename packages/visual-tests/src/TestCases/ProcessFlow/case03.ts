@@ -1,5 +1,5 @@
 import { ProcessFlow } from "@operational/visualizations"
-import { MarathonEnvironment } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const data = {
   journeyList: [
