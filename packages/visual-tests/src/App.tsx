@@ -17,6 +17,7 @@ import {
 import { darken } from "@operational/utils"
 
 import Marathon, { MarathonEnvironment } from "./components/Marathon"
+import MarathonRenderer from "./components/MarathonRenderer"
 import allTestCases, { fromHash, toHash } from "./TestCases"
 
 export interface State {
@@ -57,15 +58,18 @@ const LoopButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 }))
 
 class App extends React.Component<{}, State> {
-  state = {
-    group: 0,
-    test: 0,
-    isLooping: false,
-    isIdle: false
+  constructor(props: {}) {
+    super(props)
+    const indicesFromHash = fromHash(window.location.hash)(allTestCases)
+    this.state = {
+      group: indicesFromHash ? indicesFromHash.groupIndex : 0,
+      test: indicesFromHash ? indicesFromHash.testIndex : 0,
+      isLooping: false,
+      isIdle: false
+    }
   }
 
   componentDidMount() {
-    this.readRoute()
     window.addEventListener("popstate", () => {
       this.readRoute()
     })
@@ -106,6 +110,7 @@ class App extends React.Component<{}, State> {
   }
 
   render() {
+    const test = allTestCases[this.state.group].children[this.state.test].marathon
     return (
       <OperationalUI withBaseStyles>
         <React.Fragment>
@@ -169,7 +174,7 @@ class App extends React.Component<{}, State> {
                 </a>
               </CardHeader>
               <Marathon
-                test={allTestCases[this.state.group].children[this.state.test].marathon}
+                test={test}
                 onCompleted={() => {
                   if (!this.state.isLooping && !this.state.isIdle) {
                     this.setState(prevState => ({
@@ -182,7 +187,9 @@ class App extends React.Component<{}, State> {
                   }
                 }}
                 timeout={2000}
-              />
+              >
+                {MarathonRenderer}
+              </Marathon>
             </Card>
           </Grid>
         </React.Fragment>

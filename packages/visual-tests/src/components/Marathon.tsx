@@ -1,8 +1,4 @@
 import * as React from "react"
-import glamorous, { Div } from "glamorous"
-
-import TestResults from "./MarathonTestResults"
-import { Theme } from "@operational/theme"
 
 type TestFn = (done?: ((a: any) => void)) => void
 
@@ -13,11 +9,16 @@ export interface State {
 }
 
 export interface Props {
-  css?: any
-  className?: string
   timeout?: number
   onCompleted?: () => void
   test: (testEnvironment: MarathonEnvironment) => void
+  children: (renderer: MarathonRenderer) => React.ReactNode
+}
+
+export interface MarathonRenderer {
+  ref: any
+  tests: any
+  completed: any
 }
 
 // Test globals mimicking Jest's API
@@ -48,17 +49,11 @@ const sleep = (ms: number) =>
     }, ms)
   })
 
-const Content = glamorous.div(
-  {
-    padding: 20
-  },
-  ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.background,
-    borderRadius: 4
-  })
-)
-
 class Marathon extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+  }
+
   static defaultProps = {
     timeout: 0
   }
@@ -190,6 +185,9 @@ class Marathon extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
+    console.log("prev", prevProps.test)
+    console.log("current", this.props.test)
+    console.log(prevProps.test === this.props.test)
     if (prevProps.test !== this.props.test) {
       this.afterAll && this.afterAll()
       this.beforeEach = undefined
@@ -216,17 +214,13 @@ class Marathon extends React.Component<Props, State> {
   }
 
   render() {
-    const { css, className } = this.props
-    return (
-      <Div css={css} className={className}>
-        <TestResults tests={this.state.tests} completed={this.state.completed} />
-        <Content
-          innerRef={(node: HTMLElement) => {
-            this.container = node
-          }}
-        />
-      </Div>
-    )
+    return this.props.children({
+      tests: this.state.tests,
+      completed: this.state.completed,
+      ref: (node: HTMLElement) => {
+        this.container = node
+      }
+    })
   }
 }
 
