@@ -25,4 +25,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title = "No data"
 
-export const slug = "no-data"
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case03"

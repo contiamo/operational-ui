@@ -11,6 +11,7 @@ import {
   Grid,
   Sidebar,
   SidebarHeader,
+  SmallType,
   SidebarItem
 } from "@operational/components"
 
@@ -152,7 +153,16 @@ class App extends React.Component<{}, State> {
               </Sidebar>
             </Card>
             <Card>
-              <CardHeader>Canvas</CardHeader>
+              <CardHeader>
+                Canvas
+                <a
+                  href={`https://github.com/contiamo/operational-ui/tree/master/packages/visual-tests/src/TestCases/${
+                    allTestCases[this.state.group].folder
+                  }/${allTestCases[this.state.group].children[this.state.test].slug}.ts`}
+                >
+                  <SmallType>View code for this test</SmallType>
+                </a>
+              </CardHeader>
               <Marathon
                 test={allTestCases[this.state.group].children[this.state.test].marathon}
                 onCompleted={() => {

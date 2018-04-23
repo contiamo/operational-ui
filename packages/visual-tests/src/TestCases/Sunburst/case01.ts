@@ -288,4 +288,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title: string = "Entering and updating"
 
-export const slug: string = "entering-and-updating"
+// Must match the file name so we can link to the code on GitHub
+export const slug: string = "case01"

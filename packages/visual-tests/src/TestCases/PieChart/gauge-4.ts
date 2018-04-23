@@ -38,4 +38,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title = "Comparison (full)"
 
-export const slug = "comparison-full"
+// Must match the file name so we can link to the code on GitHub
+export const slug = "gauge-4"

@@ -6,9 +6,9 @@ import { TestSuiteGroup } from "./types"
 import { MarathonEnvironment } from "../components/Marathon"
 
 const testGroups: TestSuiteGroup[] = [
-  { title: "Pie Charts", slug: "pie-charts", children: pieChartTestCases },
-  { title: "Process Flow", slug: "process-flow-charts", children: processFlowTestCases },
-  { title: "Sunburst charts", slug: "sunburst", children: sunburstTestCases }
+  { folder: "PieChart", title: "Pie Charts", slug: "pie-charts", children: pieChartTestCases },
+  { folder: "ProcessFlow", title: "Process Flow", slug: "process-flow-charts", children: processFlowTestCases },
+  { folder: "Sunburst", title: "Sunburst charts", slug: "sunburst", children: sunburstTestCases }
 ]
 
 export default testGroups

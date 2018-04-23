@@ -292,4 +292,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title = "Missing values"
 
-export const slug = "missing-values"
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case08"

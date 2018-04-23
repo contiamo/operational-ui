@@ -33,4 +33,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title = "Resizing (full)"
 
-export const slug = "resizing-full"
+// Must match the file name so we can link to the code on GitHub
+export const slug = "gauge-6"

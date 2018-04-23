@@ -34,4 +34,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title = "Closing chart"
 
-export const slug = "closing-chart"
+// Must match the file name so we can link to the code on GitHub
+export const slug = "general-2"

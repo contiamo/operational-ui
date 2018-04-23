@@ -116,4 +116,5 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
 export const title = "Element Focussing"
 
-export const slug = "element-focussing"
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case02"
