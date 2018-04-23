@@ -14,6 +14,7 @@ import {
   SmallType,
   SidebarItem
 } from "@operational/components"
+import { darken } from "@operational/utils"
 
 import Marathon, { MarathonEnvironment } from "./components/Marathon"
 import allTestCases, { fromHash, toHash } from "./TestCases"
@@ -46,9 +47,13 @@ const LoopButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.navBackground,
   borderRadius: "50%",
   cursor: "pointer",
+  boxShadow: theme.shadows.popup,
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
+  ":hover": {
+    backgroundColor: darken(theme.colors.navBackground, 5)
+  }
 }))
 
 class App extends React.Component<{}, State> {
