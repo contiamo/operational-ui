@@ -2,15 +2,15 @@
 
 exports[`InfoTile Should render 1`] = `
 <div
-  class="css-1naufuj"
+  class="css-1ppronz"
 >
   <small
-    class="css-1u50kn8"
+    class="css-6espet"
   >
     Country
   </small>
   <div
-    class="css-1x16d7v"
+    class="css-1bqyp71"
   >
     DE
   </div>

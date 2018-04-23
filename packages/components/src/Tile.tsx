@@ -4,9 +4,9 @@ import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
 export interface Props {
-  id?: string
-  css?: any
+  css?: {}
   className?: string
+  id?: string
   label?: string
   children: React.ReactNode
 }
@@ -14,23 +14,20 @@ export interface Props {
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "infotile",
   borderRadius: theme.borderRadius,
-  minWidth: 100,
+  width: 120,
   position: "relative",
-  display: "inline-flex",
-  flexDirection: "column",
-  width: "fit-content",
   marginRight: theme.spacing,
   padding: `${theme.spacing / 2}px ${theme.spacing}px`,
   backgroundColor: theme.colors.lighterBackground
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.heading2
+  ...theme.typography.heading1
 }))
 
 const Label = glamorous.small(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
-  opacity: 0.6
+  opacity: 0.8
 }))
 
 const Tile = (props: Props) => (

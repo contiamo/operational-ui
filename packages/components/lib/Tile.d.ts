@@ -1,9 +1,9 @@
 /// <reference types="react" />
 import * as React from "react";
 export interface Props {
-    id?: string;
-    css?: any;
+    css?: {};
     className?: string;
+    id?: string;
     label?: string;
     children: React.ReactNode;
 }

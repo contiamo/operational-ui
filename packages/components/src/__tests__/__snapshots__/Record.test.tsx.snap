@@ -2,13 +2,22 @@
 
 exports[`Record Component Should render 1`] = `
 <div
-  class="css-1wwa6ma"
+  class="css-1o3duj"
 >
   <div
-    class="css-i9rxnm"
+    class="css-mihd1c"
   >
-    Titlecontrols
+    Title
+    <div
+      class="css-1pv0s18"
+    >
+      controls
+    </div>
   </div>
-  Some content
+  <div
+    class="css-sr985f"
+  >
+    Some content
+  </div>
 </div>
 `;

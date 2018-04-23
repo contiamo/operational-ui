@@ -14,7 +14,7 @@ export interface Props {
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "record",
   position: "relative",
-  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+  padding: `${theme.spacing / 2}px ${theme.spacing}px ${theme.spacing}px`,
   backgroundColor: theme.colors.background,
   borderRadius: theme.borderRadius
 }))
@@ -24,16 +24,28 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  height: theme.spacing * 3
+  marginBottom: theme.spacing / 2,
+  height: theme.spacing * 2
+}))
+
+const ControlContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  "& > *:last-child": {
+    marginRight: 0
+  }
+}))
+
+const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  opacity: 0.8,
+  ...theme.typography.body
 }))
 
 const Record = (props: Props) => (
   <Container css={props.css} className={props.className}>
     <HeaderContainer>
       {props.title}
-      {props.controls ? props.controls : null}
+      {props.controls ? <ControlContainer>{props.controls}</ControlContainer> : null}
     </HeaderContainer>
-    {props.children}
+    <Content>{props.children}</Content>
   </Container>
 )
 
