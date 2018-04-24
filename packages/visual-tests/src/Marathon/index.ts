@@ -1,26 +1,31 @@
 import * as React from "react"
-import glamorous, { Div } from "glamorous"
 
-import TestResults from "./MarathonTestResults"
-import { Theme } from "@operational/theme"
-
-type TestFn = (done?: ((a: any) => void)) => void
+export interface Props {
+  timeout?: number
+  onCompleted?: () => void
+  test: (testEnvironment: MarathonEnvironment) => void
+  children: (renderer: MarathonRenderer) => React.ReactNode
+}
 
 export interface State {
-  id: number // the id of the test, incrementing every time a new test prop is passed
-  tests: ITest[]
+  // The id of the current running test, incrementing every time a new test prop is passed
+  // this is necessary to intercept and abandon any asynchronous operations
+  // within a test that has been swapped out.
+  id: number
+  // A test object that contains all `test(...)` definitions
+  tests: Test[]
   completed: number
 }
 
-export interface Props {
-  css?: any
-  className?: string
-  timeout?: number
-  test: (a: IMarathon) => void
+export interface MarathonRenderer {
+  ref: (node: HTMLElement) => void
+  results: { description: string; isCompleted: boolean; errors: string[] }[]
 }
 
-// Test globals mimicking Jest's API
-export interface IMarathon {
+type TestFn = (done?: ((a: any) => void)) => void
+
+// Methods available inside test definitions.
+export interface MarathonEnvironment {
   test?: (description: string, done?: () => void) => void
   expect?: (expected: any) => { toBe: any }
   beforeEach?: (fn: any) => void
@@ -30,12 +35,12 @@ export interface IMarathon {
   container: any
 }
 
-interface ITestWithRunner {
+interface TestWithRunner {
   description: string
   fn: TestFn
 }
 
-export interface ITest {
+export interface Test {
   description: string
   errors: string[]
 }
@@ -47,29 +52,24 @@ const sleep = (ms: number) =>
     }, ms)
   })
 
-const Content = glamorous.div(
-  {
-    padding: 20
-  },
-  ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.gray
-  })
-)
-
 class Marathon extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+  }
+
   static defaultProps = {
-    timeout: 0
+    timeout: 2000
   }
 
   state = {
-    tests: [] as ITest[],
+    tests: [] as Test[],
     completed: 0,
     id: 0
   }
 
   container: HTMLElement
 
-  private _tests: ITestWithRunner[] = []
+  private _tests: TestWithRunner[] = []
 
   setStateById = (updater: (prevState: State, props: Props) => { id: number }, ignoreId?: boolean): Promise<void> => {
     // If the test id's don't match, it means that the setState is called from an uncleared timeout or async action from an old test.
@@ -115,10 +115,12 @@ class Marathon extends React.Component<Props, State> {
       return
     }
 
+    const actualTimeout = completed === 0 ? 100 : timeout
+
     const currentTestId = this.state.id
 
     if (test.fn.length === 0) {
-      await sleep(timeout as any)
+      await sleep(actualTimeout)
       try {
         this.beforeEach && this.beforeEach()
         test.fn()
@@ -127,7 +129,7 @@ class Marathon extends React.Component<Props, State> {
         await this.setStateById(prevState => ({
           id: currentTestId,
           tests: prevState.tests.map(
-            (test: ITest, index: number) =>
+            (test: Test, index: number) =>
               index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test
           )
         }))
@@ -136,17 +138,17 @@ class Marathon extends React.Component<Props, State> {
         await this.setStateById((prevState: State) => ({ id: currentTestId, completed: prevState.completed + 1 }))
         this.runNext()
       } catch (err) {}
-    } else {
-      await sleep(timeout as any)
-      this.beforeEach && this.beforeEach()
-      test.fn(async () => {
-        this.afterEach && this.afterEach()
-        try {
-          await this.setStateById(prevState => ({ id: currentTestId, completed: prevState.completed + 1 }))
-          this.runNext()
-        } catch (err) {}
-      })
+      return
     }
+    await sleep(actualTimeout)
+    this.beforeEach && this.beforeEach()
+    test.fn(async () => {
+      this.afterEach && this.afterEach()
+      try {
+        await this.setStateById(prevState => ({ id: currentTestId, completed: prevState.completed + 1 }))
+        this.runNext()
+      } catch (err) {}
+    })
   }
 
   startTests() {
@@ -204,21 +206,24 @@ class Marathon extends React.Component<Props, State> {
       ).then(() => {
         this.startTests()
       })
+      return
+    }
+    if (this.state.completed === this.state.tests.length && this.state.completed !== 0 && this.props.onCompleted) {
+      this.props.onCompleted()
     }
   }
 
   render() {
-    const { css, className } = this.props
-    return (
-      <Div css={css} className={className}>
-        <TestResults tests={this.state.tests} completed={this.state.completed} />
-        <Content
-          innerRef={(node: HTMLElement) => {
-            this.container = node
-          }}
-        />
-      </Div>
-    )
+    return this.props.children({
+      results: this.state.tests.map((test, index) => ({
+        description: test.description,
+        isCompleted: this.state.completed > index,
+        errors: test.errors
+      })),
+      ref: (node: HTMLElement) => {
+        this.container = node
+      }
+    })
   }
 }
 

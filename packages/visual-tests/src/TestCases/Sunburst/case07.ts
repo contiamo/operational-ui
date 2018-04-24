@@ -1,7 +1,7 @@
 import { Sunburst } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Sunburst(container)
 
   const accessors = {
@@ -4930,4 +4930,7 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Large dataset"
+export const title = "Large dataset"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case07"

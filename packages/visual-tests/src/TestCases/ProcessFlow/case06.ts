@@ -1,5 +1,5 @@
 import { ProcessFlow } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const data = {
   journeys: [
@@ -182,7 +182,7 @@ const data = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz: ProcessFlow = new ProcessFlow(container)
 
   test("Renders a process flow", () => {
@@ -202,3 +202,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title = "Undefined Config Options"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case06"

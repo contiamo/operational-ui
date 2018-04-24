@@ -1,6 +1,6 @@
 import { ProcessFlow, ProcessFlowLoopHandler } from "@operational/visualizations"
 import { uniq, flow, map, flatten } from "lodash/fp"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const journeys = [
   { path: ["135", "22", "186", "20", "1"], size: 42 },
@@ -161,7 +161,7 @@ const accessors = {
   }
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new ProcessFlow(container)
 
   test("Renders viz with looped data", () => {
@@ -179,3 +179,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title = "Looped data"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case04"

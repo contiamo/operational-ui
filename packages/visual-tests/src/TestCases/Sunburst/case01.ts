@@ -1,5 +1,5 @@
 import { Sunburst } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const config = {
   sort: false
@@ -256,7 +256,7 @@ const data4 = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Sunburst(container)
 
   test("Renders a sunburst chart", () => {
@@ -287,3 +287,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Entering and updating"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug: string = "case01"

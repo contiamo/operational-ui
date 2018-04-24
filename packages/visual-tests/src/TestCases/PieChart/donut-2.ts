@@ -1,5 +1,5 @@
 import { PieChart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const DonutRenderer = {
   type: "donut"
@@ -17,7 +17,7 @@ const data = {
   renderAs: [DonutRenderer]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new PieChart(container)
 
   test("Renders the chart", () => {
@@ -35,4 +35,7 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Resizing"
+export const title = "Resizing"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "donut-2"

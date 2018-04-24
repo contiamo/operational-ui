@@ -1,5 +1,5 @@
 import { Sunburst } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const data = {
   name: "All",
@@ -286,7 +286,7 @@ const numberFormatter = (x: number): string => {
   return x >= 1000 ? Math.round(x / 100) / 10 + "k" : x.toString()
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Sunburst(container)
 
   test("Renders a sunburst chart", () => {
@@ -341,4 +341,7 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Testing config options"
+export const title = "Testing config options"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case10"

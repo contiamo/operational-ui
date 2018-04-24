@@ -1,5 +1,5 @@
 import { ProcessFlow } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const data1 = {
   journeys: [
@@ -59,7 +59,7 @@ const data2: any = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new ProcessFlow(container)
 
   test("Focuses a link", () => {
@@ -114,4 +114,7 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Element Focussing"
+export const title = "Element Focussing"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "case02"
