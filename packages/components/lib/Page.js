@@ -31,13 +31,27 @@ var TopBar = glamorous_1.default.div(function (_a) {
 });
 var TitleBar = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.title, { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 * theme.spacing }));
+    return (__assign({}, theme.typography.title, { display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: 0.5 * theme.spacing, marginBottom: 2 * theme.spacing }));
 });
 var ControlsContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
+        marginLeft: theme.spacing,
         "& > :last-child": {
             marginRight: 0
+        }
+    });
+});
+var BackLink = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        display: "inline-block",
+        marginTop: 8,
+        opacity: 0.6,
+        "& svg": {
+            marginRight: 4,
+            position: "relative",
+            top: 2
         }
     });
 });

@@ -13,8 +13,8 @@ var Divider = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
     return ({
         display: "inline-block",
-        margin: "0 6px",
-        color: theme.colors.black
+        margin: "0 " + theme.spacing / 2 + "px",
+        color: theme.colors.gray
     });
 });
 var Breadcrumbs = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, (function () {

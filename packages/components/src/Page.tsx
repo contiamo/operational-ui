@@ -1,6 +1,9 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { Div } from "glamorous"
 import { Theme } from "@operational/theme"
+
+import Button from "./Button"
+import Icon from "./Icon"
 
 export interface Props {
   title: string
@@ -28,13 +31,26 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.title,
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
+  marginTop: 0.5 * theme.spacing,
   marginBottom: 2 * theme.spacing
 }))
 
 const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  marginLeft: theme.spacing,
   "& > :last-child": {
     marginRight: 0
+  }
+}))
+
+const BackLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  display: "inline-block",
+  marginTop: 8,
+  opacity: 0.6,
+  "& svg": {
+    marginRight: 4,
+    position: "relative",
+    top: 2
   }
 }))
 

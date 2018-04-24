@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { render } from "react-dom"
 import { Theme } from "@operational/theme"
-import { OperationalUI, Select, DatePicker, Textarea } from "../../src"
+import { OperationalUI, Layout, Page, Sidenav, SidenavHeader, Breadcrumbs, Breadcrumb, Button } from "../../src"
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: theme.spacing,
@@ -15,23 +15,42 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 export interface Props {}
 
-export interface State {
-  start?: string
-  end?: string
-}
+export interface State {}
 
 class Explore extends React.Component<Props, State> {
-  state = {
-    start: "2018-01-01",
-    end: "2018-02-02"
-  }
+  state = {}
 
   render() {
     return (
       <OperationalUI withBaseStyles>
-        <Container>
-          <Textarea label="Textarea label" value="1234" />
-        </Container>
+        <Layout
+          sidenav={
+            <Sidenav expanded>
+              <SidenavHeader label="Labs" icon="Labs" />
+              <SidenavHeader label="Pantheon" icon="Pantheon" />
+            </Sidenav>
+          }
+          main={
+            <Page
+              title="My page"
+              breadcrumbs={
+                <Breadcrumbs>
+                  <Breadcrumb>
+                    <a>Link one</a>
+                  </Breadcrumb>
+                  <Breadcrumb>Link two</Breadcrumb>
+                </Breadcrumbs>
+              }
+              controls={
+                <React.Fragment>
+                  <Button condensed color="info">
+                    Edit
+                  </Button>
+                </React.Fragment>
+              }
+            />
+          }
+        />
       </OperationalUI>
     )
   }
