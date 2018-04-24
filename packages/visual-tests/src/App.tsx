@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Sunburst, VisualizationWrapper } from "@operational/visualizations"
-import { Theme } from "@operational/theme"
+import { operational, Theme } from "@operational/theme"
 import {
   OperationalUI,
   Button,
@@ -117,7 +117,12 @@ class App extends React.Component<{}, State> {
                 </Button>
               </CardHeader>
               <Sidebar
-                css={{ margin: -16, width: "calc(100% + 32px)", boxShadow: "none", borderTop: "1px solid #f2f2f2" }}
+                css={{
+                  margin: -operational.spacing,
+                  width: `calc(100% + ${2 * operational.spacing}px)`,
+                  boxShadow: "none",
+                  borderTop: "1px solid #f2f2f2"
+                }}
               >
                 {allTestCases.map((test, groupIndex) => (
                   <SidebarHeader
