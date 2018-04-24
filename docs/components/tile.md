@@ -1,16 +1,16 @@
-# Info Tiles
+# Tiles
 
-InfoTiles are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
+Tiles are little pieces of information that contain a descriptor and a value of the descriptor. These elements are commonly used to represent KPI data, with strong key-value pairings.
 
 ## Usage
 
 ```js
 <div>
-  <InfoTile label="Use Cases" >Infinite</InfoTile>
-  <InfoTile label="Potential">Unlimited</InfoTile>
-  <InfoTile label="Cool Factor">
+  <Tile label="Use Cases" >Infinite</Tile>
+  <Tile label="Potential">Unlimited</Tile>
+  <Tile label="Cool Factor">
     > 10
-  </InfoTile>
+  </Tile>
 </div>
 ```
 

@@ -1,11 +1,11 @@
 /// <reference types="react" />
 import * as React from "react";
 export interface Props {
-    id?: string;
-    css?: any;
+    css?: {};
     className?: string;
+    id?: string;
     label?: string;
     children: React.ReactNode;
 }
-declare const InfoTile: (props: Props) => JSX.Element;
-export default InfoTile;
+declare const Tile: (props: Props) => JSX.Element;
+export default Tile;

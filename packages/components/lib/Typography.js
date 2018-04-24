@@ -9,29 +9,29 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var glamorous_1 = require("glamorous");
-var TitleType = glamorous_1.default.h1(function (_a) {
+var Title = glamorous_1.default.h1(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.title, { label: "titletype" }));
+    return (__assign({}, theme.typography.title, { margin: theme.spacing + "px 0", label: "titletype" }));
 });
-exports.TitleType = TitleType;
-var Heading1Type = glamorous_1.default.h1(function (_a) {
+exports.Title = Title;
+var Heading1 = glamorous_1.default.h1(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.heading1, { label: "heading1type" }));
+    return (__assign({}, theme.typography.heading1, { margin: theme.spacing / 2 + "px 0", label: "heading1type" }));
 });
-exports.Heading1Type = Heading1Type;
-var Heading2Type = glamorous_1.default.h2(function (_a) {
+exports.Heading1 = Heading1;
+var Heading2 = glamorous_1.default.h2(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.heading2, { label: "heading2type" }));
+    return (__assign({}, theme.typography.heading2, { margin: theme.spacing / 2 + "px 0", label: "heading2type" }));
 });
-exports.Heading2Type = Heading2Type;
-var BodyType = glamorous_1.default.p(function (_a) {
+exports.Heading2 = Heading2;
+var Body = glamorous_1.default.p(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { label: "bodytype" }));
+    return (__assign({}, theme.typography.body, { margin: theme.spacing / 4 + "px 0", label: "bodytype" }));
 });
-exports.BodyType = BodyType;
-var SmallType = glamorous_1.default.p(function (_a) {
+exports.Body = Body;
+var Small = glamorous_1.default.p(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.small, { label: "smalltype" }));
+    return (__assign({}, theme.typography.small, { margin: theme.spacing / 4 + "px 0", label: "smalltype" }));
 });
-exports.SmallType = SmallType;
+exports.Small = Small;
 //# sourceMappingURL=Typography.js.map

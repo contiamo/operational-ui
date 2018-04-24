@@ -6,75 +6,47 @@ import Button from "./Button"
 export interface Props {
   css?: {}
   className?: string
-  children?: React.ReactNode
+  title: string
   controls?: React.ReactNode
-  initiallyExpanded?: boolean
-}
-
-export interface State {
-  isExpanded: boolean
+  children?: React.ReactNode
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "record",
   position: "relative",
-  border: "1px solid",
-  borderColor: theme.colors.gray,
+  padding: `${theme.spacing / 2}px ${theme.spacing}px ${theme.spacing}px`,
+  backgroundColor: theme.colors.background,
   borderRadius: theme.borderRadius
 }))
 
 const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  ...theme.typography.heading1,
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-  height: theme.spacing * 3
+  marginBottom: theme.spacing / 2,
+  height: theme.spacing * 2
 }))
 
-class Record extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      isExpanded: Boolean(props.initiallyExpanded)
-    }
+const ControlContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  "& > *:last-child": {
+    marginRight: 0
   }
+}))
 
-  render() {
-    return (
-      <Container css={this.props.css} className={this.props.className}>
-        <HeaderContainer>
-          {React.Children.map(this.props.children, (child: any, index: number) => {
-            return child.props.__isRecordHeader ? child : null
-          })}
-          {this.props.controls ? (
-            this.props.controls
-          ) : (
-            <Button
-              color={this.state.isExpanded ? "#FFF" : "info"}
-              condensed
-              css={{
-                position: "absolute",
-                top: 24,
-                right: 12,
-                marginRight: 0,
-                transform: "translate3d(0, -50%, 0)"
-              }}
-              onClick={() => {
-                this.setState(prevState => ({
-                  isExpanded: !prevState.isExpanded
-                }))
-              }}
-            >
-              {this.state.isExpanded ? "Hide details" : "Details"}
-            </Button>
-          )}
-        </HeaderContainer>
-        {React.Children.map(this.props.children, (child: any, index: number) => {
-          return child.props.__isRecordBody && this.state.isExpanded ? child : null
-        })}
-      </Container>
-    )
-  }
-}
+const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  opacity: 0.8,
+  ...theme.typography.body
+}))
+
+const Record = (props: Props) => (
+  <Container css={props.css} className={props.className}>
+    <HeaderContainer>
+      {props.title}
+      {props.controls ? <ControlContainer>{props.controls}</ControlContainer> : null}
+    </HeaderContainer>
+    <Content>{props.children}</Content>
+  </Container>
+)
 
 export default Record

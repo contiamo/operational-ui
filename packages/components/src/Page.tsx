@@ -1,7 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
-import { TitleType } from "./Typography"
 
 export interface Props {
   title: string

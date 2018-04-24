@@ -21,7 +21,7 @@ var Container = glamorous_1.default.button(function (_a) {
     var textColor = utils_1.readableTextColor(backgroundColor, [theme.colors.text, "white"]);
     var activeBoxShadow = theme.shadows.pressed;
     var spacing = theme.spacing;
-    return __assign({ label: "button" }, theme.typography.body, { display: "inline-block", padding: condensed ? spacing / 8 + "px " + spacing / 2 + "px" : spacing / 4 + "px " + spacing + "px", borderRadius: theme.borderRadius, border: "1px solid", borderColor: color_1.isWhite(backgroundColor) ? theme.colors.gray : active ? activeBackgroundColor : backgroundColor, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
+    return __assign({ label: "button" }, theme.typography.body, { display: "inline-block", padding: condensed ? spacing / 8 + "px " + spacing / 2 + "px" : spacing * 0.375 + "px " + spacing * 1.5 + "px", borderRadius: theme.borderRadius, border: "1px solid", borderColor: color_1.isWhite(backgroundColor) ? theme.colors.gray : active ? activeBackgroundColor : backgroundColor, cursor: disabled ? "auto" : "pointer", boxShadow: active ? activeBoxShadow : "none", backgroundColor: active ? activeBackgroundColor : backgroundColor, color: textColor, opacity: disabled ? 0.6 : 1.0, outline: "none" }, !disabled
         ? {
             ":hover": {
                 backgroundColor: activeBackgroundColor,

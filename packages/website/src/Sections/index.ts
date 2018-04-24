@@ -5,7 +5,7 @@ import * as chips from "./Chips"
 import * as colors from "./Colors"
 import * as contextMenus from "./ContextMenus"
 import * as datePickers from "./DatePickers"
-import * as infoTiles from "./InfoTiles"
+import * as tiles from "./Tiles"
 import * as inputs from "./Inputs"
 import * as layouts from "./Layouts"
 import * as messages from "./Messages"
@@ -23,6 +23,7 @@ import * as tabs from "./Tabs"
 import * as textareas from "./Textareas"
 import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
+import * as typography from "./Typography"
 
 export default [
   breadcrumbs,
@@ -32,15 +33,13 @@ export default [
   colors,
   contextMenus,
   datePickers,
-  infoTiles,
-  infoTiles,
+  tiles,
   inputs,
   layouts,
   messages,
   modals,
   paginators,
   progress,
-  records,
   records,
   selects,
   sidebars,
@@ -51,5 +50,6 @@ export default [
   tabs,
   textareas,
   timelines,
-  tooltips
+  tooltips,
+  typography
 ]

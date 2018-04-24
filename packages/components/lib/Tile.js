@@ -15,11 +15,8 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         label: "infotile",
         borderRadius: theme.borderRadius,
-        minWidth: 100,
+        width: 120,
         position: "relative",
-        display: "inline-flex",
-        flexDirection: "column",
-        width: "fit-content",
         marginRight: theme.spacing,
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
         backgroundColor: theme.colors.lighterBackground
@@ -27,14 +24,14 @@ var Container = glamorous_1.default.div(function (_a) {
 });
 var Content = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.heading2));
+    return (__assign({}, theme.typography.heading1));
 });
 var Label = glamorous_1.default.small(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.small, { opacity: 0.6 }));
+    return (__assign({}, theme.typography.small, { opacity: 0.8 }));
 });
-var InfoTile = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className },
+var Tile = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className },
     React.createElement(Label, null, props.label),
     React.createElement(Content, null, props.children))); };
-exports.default = InfoTile;
-//# sourceMappingURL=InfoTile.js.map
+exports.default = Tile;
+//# sourceMappingURL=Tile.js.map

@@ -3,15 +3,9 @@ import * as React from "react";
 export interface Props {
     css?: {};
     className?: string;
-    children?: React.ReactNode;
+    title: string;
     controls?: React.ReactNode;
-    initiallyExpanded?: boolean;
+    children?: React.ReactNode;
 }
-export interface State {
-    isExpanded: boolean;
-}
-declare class Record extends React.Component<Props, State> {
-    constructor(props: Props);
-    render(): JSX.Element;
-}
+declare const Record: (props: Props) => JSX.Element;
 export default Record;
