@@ -116,7 +116,7 @@ var Line = /** @class */ (function () {
         var isDefined = function (d) { return !!_this.x(d) && !!_this.y(d); };
         return d3_shape_1.line()
             .x(this.xIsBaseline ? this.adjustedX : this.xScale(0))
-            .y(this.adjustedY ? this.yScale(0) : this.adjustedY)
+            .y(this.xIsBaseline ? this.yScale(0) : this.adjustedY)
             .curve(this.interpolate())
             .defined(isDefined)(data);
     };

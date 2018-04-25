@@ -172,7 +172,7 @@ class Line implements RendererClass<LineRendererAccessors> {
     const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Line() as any)
       .x(this.xIsBaseline ? this.adjustedX : this.xScale(0))
-      .y(this.adjustedY ? this.yScale(0) : this.adjustedY)
+      .y(this.xIsBaseline ? this.yScale(0) : this.adjustedY)
       .curve(this.interpolate())
       .defined(isDefined)(data)
   }

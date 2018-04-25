@@ -1,17 +1,25 @@
 import { Chart } from "@operational/visualizations"
 import { IMarathon } from "../../components/Marathon"
 
+const AxesAccessors = {
+  x: (series, d) => d.y,
+  y: (series, d) => d.x
+}
+
 const AreaRenderer = {
-  type: "area"
+  type: "area",
+  accessors: { ...AxesAccessors }
 }
 
 const LineRenderer = {
-  type: "line"
+  type: "line",
+  accessors: { ...AxesAccessors }
 }
 
 const AreaRendererWithColor = {
   type: "area",
   accessors: {
+    ...AxesAccessors,
     color: () => "#ccc"
   }
 }
@@ -19,23 +27,26 @@ const AreaRendererWithColor = {
 const AreaRendererWithInterpolation = {
   type: "area",
   accessors: {
+    ...AxesAccessors,
     color: () => "#ccc",
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneY"
   }
 }
 
 const LineRendererWithInterpolation = {
   type: "line",
   accessors: {
-    interpolate: () => "monotoneX"
+    ...AxesAccessors,
+    interpolate: () => "monotoneY"
   }
 }
 
 const AreaRendererWithGaps = {
   type: "area",
   accessors: {
+    ...AxesAccessors,
     color: () => "#ccc",
-    interpolate: () => "monotoneX",
+    interpolate: () => "monotoneY",
     closeGaps: () => false
   }
 }
@@ -43,7 +54,8 @@ const AreaRendererWithGaps = {
 const LineRendererWithGaps = {
   type: "line",
   accessors: {
-    interpolate: () => "monotoneX",
+    ...AxesAccessors,
+    interpolate: () => "monotoneY",
     closeGaps: () => false
   }
 }
@@ -51,7 +63,8 @@ const LineRendererWithGaps = {
 const LineRendererDashed = {
   type: "line",
   accessors: {
-    interpolate: () => "monotoneX",
+    ...AxesAccessors,
+    interpolate: () => "monotoneY",
     closeGaps: () => false,
     dashed: () => true
   }
@@ -84,22 +97,22 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 17), y: 123 }
         ],
         name: "Pageviews 2017",
-        yAxis: "y2",
+        xAxis: "x2",
         key: "series2",
         renderAs: renderers
       }
     ],
     axes: {
-      x1: {
+      y1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day"
       },
-      y1: {
+      x1: {
         type: "quant"
       },
-      y2: {
+      x2: {
         type: "quant"
       }
     }
@@ -147,4 +160,4 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 }
 
-export const title: string = "Area/line"
+export const title: string = "Area/line, horizontal"
