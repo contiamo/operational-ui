@@ -20,6 +20,20 @@ var AxesManager = /** @class */ (function () {
         fp_1.forEach(fp_1.invoke("close"))(this.oldAxes);
         fp_1.forEach(this.drawAxes.bind(this))(["y", "x"]);
     };
+    AxesManager.prototype.updateMargins = function () {
+        var _this = this;
+        var config = this.state.current.get("config");
+        var computedMargins = this.state.current.get("computed").axes.onMarginsUpdated;
+        if (!computedMargins) {
+            this.stateWriter("margins", {});
+        }
+        computedMargins = computedMargins || {};
+        fp_1.forEach(function (axis) {
+            if (!computedMargins[axis]) {
+                _this.stateWriter(["margins", axis], config[axis].margin + config.axisPaddingForFlags);
+            }
+        })(this.state.current.get("computed").series.axesWithFlags);
+    };
     AxesManager.prototype.updateAxes = function () {
         this.stateWriter("previous", {});
         this.stateWriter("computed", {});

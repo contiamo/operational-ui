@@ -11,6 +11,7 @@ declare class AxesManager {
     stateWriter: StateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>);
     draw(): void;
+    updateMargins(): void;
     private updateAxes();
     private createOrUpdate(options, position);
     private create(position, options);

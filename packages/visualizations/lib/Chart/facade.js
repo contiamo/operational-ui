@@ -192,6 +192,7 @@ var ChartFacade = /** @class */ (function () {
         this.state.captureState();
         this.series.assignData();
         this.components.legends.draw();
+        this.components.axes.updateMargins();
         this.canvas.draw();
         this.components.axes.draw();
         this.series.draw();

@@ -40,13 +40,12 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   label: RendererAccessor<string>
   options: Options
   position: "x" | "y"
+  scale: any // @TODO
   series: Series
   state: State
   type: RendererType = "flag"
   x: RendererAccessor<number | Date | string>
-  xScale: any // @TODO
   y: RendererAccessor<number | Date | string>
-  yScale: any // @TODO
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series) {
     this.state = state
@@ -139,8 +138,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   }
 
   private setAxisScales(): void {
-    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
-    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    this.scale = this.state.current.get("computed").axes.computed[this.axis].scale
   }
 
   private assignAccessors(customAccessors: Partial<FlagRendererAccessors>): void {
@@ -156,7 +154,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   private getAttributes(): Object<any> {
     const isXAxis: boolean = this.position === "x"
     const value = isXAxis ? this.x : this.y
-    const scale = isXAxis ? this.xScale : this.yScale
+    const scale = this.scale
     const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
     const offset: number = this.state.current.get("config").eventFlagAxisOffset
 
@@ -170,8 +168,8 @@ class Flag implements RendererClass<FlagRendererAccessors> {
       case "x2":
         return {
           x: (d: Datum): number => scale(value(d)),
-          y1: offset,
-          y2: drawingDims.height
+          y1: 0,
+          y2: drawingDims.height - offset
         }
       case "y1":
         return {

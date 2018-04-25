@@ -12,13 +12,12 @@ declare class Flag implements RendererClass<FlagRendererAccessors> {
     label: RendererAccessor<string>;
     options: Options;
     position: "x" | "y";
+    scale: any;
     series: Series;
     state: State;
     type: RendererType;
     x: RendererAccessor<number | Date | string>;
-    xScale: any;
     y: RendererAccessor<number | Date | string>;
-    yScale: any;
     constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series);
     update(data: Datum[], options: Options): void;
     draw(): void;

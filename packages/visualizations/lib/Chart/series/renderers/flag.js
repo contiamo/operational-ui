@@ -91,8 +91,7 @@ var Flag = /** @class */ (function () {
         return el.append("g").attr("class", "series:" + this.series.key() + " " + styles.flag);
     };
     Flag.prototype.setAxisScales = function () {
-        this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
-        this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
+        this.scale = this.state.current.get("computed").axes.computed[this.axis].scale;
     };
     Flag.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
@@ -107,7 +106,7 @@ var Flag = /** @class */ (function () {
     Flag.prototype.getAttributes = function () {
         var isXAxis = this.position === "x";
         var value = isXAxis ? this.x : this.y;
-        var scale = isXAxis ? this.xScale : this.yScale;
+        var scale = this.scale;
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         var offset = this.state.current.get("config").eventFlagAxisOffset;
         switch (this.axis) {
@@ -120,8 +119,8 @@ var Flag = /** @class */ (function () {
             case "x2":
                 return {
                     x: function (d) { return scale(value(d)); },
-                    y1: offset,
-                    y2: drawingDims.height
+                    y1: 0,
+                    y2: drawingDims.height - offset
                 };
             case "y1":
                 return {

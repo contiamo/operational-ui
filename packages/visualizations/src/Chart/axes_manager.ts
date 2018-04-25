@@ -8,6 +8,7 @@ import {
   AxisOptions,
   AxisPosition,
   AxisType,
+  ChartConfig,
   D3Selection,
   EventBus,
   Object,
@@ -37,6 +38,20 @@ class AxesManager {
     this.updateAxes()
     forEach(invoke("close"))(this.oldAxes)
     forEach(this.drawAxes.bind(this))(["y", "x"])
+  }
+
+  updateMargins(): void {
+    const config: ChartConfig = this.state.current.get("config")
+    let computedMargins: Object<number> = this.state.current.get("computed").axes.onMarginsUpdated
+    if (!computedMargins) {
+      this.stateWriter("margins", {})
+    }
+    computedMargins = computedMargins || {}
+    forEach((axis: AxisPosition): void => {
+      if (!computedMargins[axis]) {
+        this.stateWriter(["margins", axis], config[axis].margin + config.axisPaddingForFlags)
+      }
+    })(this.state.current.get("computed").series.axesWithFlags)
   }
 
   private updateAxes(): void {
