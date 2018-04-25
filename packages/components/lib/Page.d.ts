@@ -2,7 +2,7 @@
 import * as React from "react";
 export interface Props {
     title: string;
-    __experimentalBackLink: {
+    __experimentalBackLink?: {
         url: string;
         label?: string;
         onClick?: () => void;

@@ -9,7 +9,7 @@ export interface Props {
   title: string
   // This is an experimental feature that renders a back button into the UI.
   // May change substantially or be removed completely.
-  __experimentalBackLink: {
+  __experimentalBackLink?: {
     url: string
     label?: string
     onClick?: () => void
