@@ -10,6 +10,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
+var Button_1 = require("./Button");
+var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
@@ -42,24 +44,34 @@ var ControlsContainer = glamorous_1.default.div(function (_a) {
         }
     });
 });
-var BackLink = glamorous_1.default.div(function (_a) {
+var BackLinkContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        display: "inline-block",
-        marginTop: 8,
-        opacity: 0.6,
+        marginTop: theme.spacing / 2,
+        marginBottom: theme.spacing,
+        opacity: 0.5,
         "& svg": {
             marginRight: 4,
             position: "relative",
-            top: 2
+            top: 2,
+            left: -1
         }
     });
 });
 var Page = function (props) { return (React.createElement(Container, null,
-    React.createElement(TopBar, null,
-        props.breadcrumbs,
+    React.createElement(TopBar, null, props.breadcrumbs),
+    props.__experimentalBackLinkUrl ? (React.createElement(BackLinkContainer, null,
+        React.createElement("a", { href: props.__experimentalBackLinkUrl, onClick: function (ev) {
+                // Only pushstate routing is supported (experimental feature)
+                ev.preventDefault();
+                history.pushState(null, null, props.__experimentalBackLinkUrl);
+            } },
+            React.createElement(Button_1.default, { condensed: true },
+                React.createElement(Icon_1.default, { name: "ChevronLeft", size: 12 }),
+                props.__experimentalBackLinkLabel || "Back")))) : null,
+    React.createElement(TitleBar, null,
+        props.title,
         React.createElement(ControlsContainer, null, props.controls)),
-    React.createElement(TitleBar, null, props.title),
     props.children)); };
 exports.default = Page;
 //# sourceMappingURL=Page.js.map

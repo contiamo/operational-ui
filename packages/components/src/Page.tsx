@@ -7,6 +7,10 @@ import Icon from "./Icon"
 
 export interface Props {
   title: string
+  // This is an experimental feature that renders a back button into the UI.
+  // May change substantially or be removed completely.
+  __experimentalBackLinkUrl?: string
+  __experimentalBackLinkLabel?: string
   breadcrumbs?: React.ReactNode
   controls?: React.ReactNode
   children?: React.ReactNode
@@ -43,24 +47,42 @@ const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   }
 }))
 
-const BackLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  display: "inline-block",
-  marginTop: 8,
-  opacity: 0.6,
+const BackLinkContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  marginTop: theme.spacing / 2,
+  marginBottom: theme.spacing,
+  opacity: 0.5,
   "& svg": {
     marginRight: 4,
     position: "relative",
-    top: 2
+    top: 2,
+    left: -1
   }
 }))
 
 const Page = (props: Props) => (
   <Container>
-    <TopBar>
-      {props.breadcrumbs}
+    <TopBar>{props.breadcrumbs}</TopBar>
+    {props.__experimentalBackLinkUrl ? (
+      <BackLinkContainer>
+        <a
+          href={props.__experimentalBackLinkUrl}
+          onClick={(ev: any) => {
+            // Only pushstate routing is supported (experimental feature)
+            ev.preventDefault()
+            history.pushState(null, null, props.__experimentalBackLinkUrl)
+          }}
+        >
+          <Button condensed>
+            <Icon name="ChevronLeft" size={12} />
+            {props.__experimentalBackLinkLabel || "Back"}
+          </Button>
+        </a>
+      </BackLinkContainer>
+    ) : null}
+    <TitleBar>
+      {props.title}
       <ControlsContainer>{props.controls}</ControlsContainer>
-    </TopBar>
-    <TitleBar>{props.title}</TitleBar>
+    </TitleBar>
     {props.children}
   </Container>
 )
