@@ -1,6 +1,6 @@
 {
   "name": "@operational/utils",
-  "version": "0.1.0-31",
+  "version": "0.1.0-32",
   "description": "A collection of utilities used within the Contiamo UI suite",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -19,7 +19,7 @@
     "prettier": "prettier './src/**/*.{ts,tsx}' --write"
   },
   "dependencies": {
-    "@operational/theme": "^0.1.0-31",
+    "@operational/theme": "^0.1.0-32",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
