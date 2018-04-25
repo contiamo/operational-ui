@@ -18,8 +18,8 @@ const Container = glamorous.div({
 
 const Divider = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
-  margin: "0 6px",
-  color: theme.colors.black
+  margin: `0 ${theme.spacing / 2}px`,
+  color: theme.colors.gray
 }))
 
 const Breadcrumbs = (props: Props) => (

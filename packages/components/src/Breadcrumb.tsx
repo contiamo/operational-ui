@@ -13,18 +13,19 @@ export interface Props {
 
 const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   label: "breadcrumb",
-  color: theme.colors.linkText,
   "& svg": {
     marginLeft: 4
   },
-  "&:hover": {
-    color: darken(theme.colors.linkText, 5)
+  "& a": {
+    color: theme.colors.linkText,
+    borderBottom: "1px solid currentColor",
+    "&:hover": {
+      color: darken(theme.colors.linkText, 5)
+    }
   }
 }))
 
-const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({
-  borderBottom: "1px solid currentColor"
-}))
+const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({}))
 
 const Breadcrumb = (props: Props) => {
   const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as IconName) : "ChevronDown"

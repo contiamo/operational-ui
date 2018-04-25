@@ -8,20 +8,21 @@ var Container = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
     return ({
         label: "breadcrumb",
-        color: theme.colors.linkText,
         "& svg": {
             marginLeft: 4
         },
-        "&:hover": {
-            color: utils_1.darken(theme.colors.linkText, 5)
+        "& a": {
+            color: theme.colors.linkText,
+            borderBottom: "1px solid currentColor",
+            "&:hover": {
+                color: utils_1.darken(theme.colors.linkText, 5)
+            }
         }
     });
 });
 var Content = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
-    return ({
-        borderBottom: "1px solid currentColor"
-    });
+    return ({});
 });
 var Breadcrumb = function (props) {
     var reactFeatherIcon = props.icon === String(props.icon) ? props.icon : "ChevronDown";

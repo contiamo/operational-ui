@@ -1,9 +1,16 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import glamorous, { Div } from "glamorous"
 import { Theme } from "@operational/theme"
+
+import Button from "./Button"
+import Icon from "./Icon"
 
 export interface Props {
   title: string
+  // This is an experimental feature that renders a back button into the UI.
+  // May change substantially or be removed completely.
+  __experimentalBackLinkUrl?: string
+  __experimentalBackLinkLabel?: string
   breadcrumbs?: React.ReactNode
   controls?: React.ReactNode
   children?: React.ReactNode
@@ -28,23 +35,54 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.title,
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
+  marginTop: 0.5 * theme.spacing,
   marginBottom: 2 * theme.spacing
 }))
 
 const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  marginLeft: theme.spacing,
   "& > :last-child": {
     marginRight: 0
   }
 }))
 
+const BackLinkContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  marginTop: theme.spacing / 2,
+  marginBottom: theme.spacing,
+  opacity: 0.5,
+  "& svg": {
+    marginRight: 4,
+    position: "relative",
+    top: 2,
+    left: -1
+  }
+}))
+
 const Page = (props: Props) => (
   <Container>
-    <TopBar>
-      {props.breadcrumbs}
+    <TopBar>{props.breadcrumbs}</TopBar>
+    {props.__experimentalBackLinkUrl ? (
+      <BackLinkContainer>
+        <a
+          href={props.__experimentalBackLinkUrl}
+          onClick={(ev: any) => {
+            // Only pushstate routing is supported (experimental feature)
+            ev.preventDefault()
+            history.pushState(null, null, props.__experimentalBackLinkUrl)
+          }}
+        >
+          <Button condensed>
+            <Icon name="ChevronLeft" size={12} />
+            {props.__experimentalBackLinkLabel || "Back"}
+          </Button>
+        </a>
+      </BackLinkContainer>
+    ) : null}
+    <TitleBar>
+      {props.title}
       <ControlsContainer>{props.controls}</ControlsContainer>
-    </TopBar>
-    <TitleBar>{props.title}</TitleBar>
+    </TitleBar>
     {props.children}
   </Container>
 )
