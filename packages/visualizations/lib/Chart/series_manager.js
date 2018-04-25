@@ -87,21 +87,29 @@ var ChartSeriesManager = /** @class */ (function () {
         };
     };
     ChartSeriesManager.prototype.computeStack = function (stack, index) {
+        var _this = this;
         var stackedSeries = stack.data;
         // By default, stacks are vertical
         var stackAxis = this.renderAs(stack)[0].stackAxis || "y";
         var baseAxis = stackAxis === "y" ? "x" : "y";
+        var stackAccessors = this.renderAs(stack)[0].accessors;
+        var stackAxisValue = function (d) {
+            return ((stackAccessors || {})[stackAxis] || _this.state.current.get("accessors").renderer[stackAxis])({}, d);
+        };
+        var baseAxisValue = function (d) {
+            return ((stackAccessors || {})[baseAxis] || _this.state.current.get("accessors").renderer[baseAxis])({}, d);
+        };
         // Transform data into suitable structure for d3 stack
         var dataToStack = fp_1.flow(fp_1.map(fp_1.get("data")), fp_1.reduce(function (memo, data) {
-            return memo.concat(fp_1.map(fp_1.get(baseAxis))(data));
+            return memo.concat(fp_1.map(function (d) { return baseAxisValue(d); })(data));
         }, []), fp_1.uniqBy(String), fp_1.map(function (baseValue) {
             return _a = {}, _a[baseAxis] = baseValue, _a;
             var _a;
         }), fp_1.sortBy(baseAxis))(stackedSeries);
         fp_1.forEach(function (series) {
             fp_1.forEach(function (datum) {
-                var newDatum = fp_1.find(function (d) { return String(d[baseAxis]) === String(datum[baseAxis]); })(dataToStack);
-                newDatum[series.key] = datum.y;
+                var newDatum = fp_1.find(function (d) { return String(d[baseAxis]) === String(baseAxisValue(datum)); })(dataToStack);
+                newDatum[series.key] = stackAxisValue(datum);
             })(series.data);
         })(stackedSeries);
         var seriesKeys = fp_1.map(this.key)(stackedSeries);
@@ -124,8 +132,15 @@ var ChartSeriesManager = /** @class */ (function () {
                 var _a;
             })(series);
             originalSeries.stacked = true;
-            originalSeries.stackIndex = index;
+            originalSeries.stackIndex = index + 1;
         })(stackedData);
+        // Reset renderer axis accessors, not applicable to new series
+        fp_1.forEach(function (options) {
+            if (options.accessors) {
+                delete options.accessors.x;
+                delete options.accessors.y;
+            }
+        })(this.renderAs(this.renderAs(stack)[0]));
     };
     ChartSeriesManager.prototype.computeRange = function (range, index) {
         var _this = this;

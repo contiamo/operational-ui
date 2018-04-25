@@ -145,8 +145,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private startAttributes(attributes: Object<any>): Object<any> {
     return {
-      x: attributes.x,
-      y: (d: Datum): number => attributes.y(d) + (this.xIsBaseline ? attributes.height(d) : 0),
+      x: this.xIsBaseline ? this.x0 : 0,
+      y: this.xIsBaseline ? this.yScale(0) : this.y0,
       width: this.xIsBaseline ? attributes.width : 0,
       height: this.xIsBaseline ? 0 : attributes.height,
       color: attributes.color

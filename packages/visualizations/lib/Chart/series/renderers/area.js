@@ -17,6 +17,12 @@ var defaultAccessors = {
     interpolate: function (series, d) { return "linear"; },
     closeGaps: function (series, d) { return true; }
 };
+var hasValue = function (d) {
+    return !!d || d === 0;
+};
+var aOrB = function (a, b) {
+    return hasValue(a) ? a : b;
+};
 var Area = /** @class */ (function () {
     function Area(state, events, el, data, options, series) {
         this.type = "area";
@@ -105,17 +111,17 @@ var Area = /** @class */ (function () {
         }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x0 || 0); };
-        this.x1 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x1 || _this.x(d)); };
-        this.y0 = function (d) { return _this.yScale(_this.xIsBaseline ? d.y0 || 0 : _this.y(d)); };
-        this.y1 = function (d) { return _this.yScale(_this.xIsBaseline ? d.y1 || _this.y(d) : _this.y(d)); };
+        this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : fp_1.isFinite(d.x0) ? d.x0 : 0); };
+        this.x1 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : fp_1.isFinite(d.x1) ? d.x1 : _this.x(d)); };
+        this.y0 = function (d) { return _this.yScale(_this.xIsBaseline ? aOrB(d.y0, 0) : _this.y(d)); };
+        this.y1 = function (d) { return _this.yScale(_this.xIsBaseline ? aOrB(d.y1, _this.y(d)) : _this.y(d)); };
     };
     Area.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
         var axisAcessors = this.state.current.get("accessors").renderer;
         var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
-        this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
-        this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
+        this.x = function (d) { return aOrB(accessors.x(_this.series, d), d.injectedX); };
+        this.y = function (d) { return aOrB(accessors.y(_this.series, d), d.injectedY); };
         this.color = function (d) { return accessors.color(_this.series, d); };
         this.interpolate = function (d) { return interpolator[accessors.interpolate(_this.series, d)]; };
         this.closeGaps = function (d) { return accessors.closeGaps(_this.series, d); };
@@ -134,25 +140,24 @@ var Area = /** @class */ (function () {
             })(ticks);
         }
     };
+    Area.prototype.isDefined = function (d) {
+        return this.series.options.stacked && this.closeGaps() ? true : hasValue(this.x(d)) && hasValue(this.y(d));
+    };
     Area.prototype.startPath = function (data) {
-        var _this = this;
-        var isDefined = function (d) { return !!_this.x(d) && !!_this.y(d); };
         return d3_shape_1.area()
             .x(this.x0)
             .y(this.y0)
             .curve(this.interpolate())
-            .defined(isDefined)(data);
+            .defined(this.isDefined.bind(this))(data);
     };
     Area.prototype.path = function (data) {
-        var _this = this;
-        var isDefined = function (d) { return !!_this.x(d) && !!_this.y(d); };
         return d3_shape_1.area()
             .x0(this.x0)
             .x1(this.x1)
             .y0(this.y0)
             .y1(this.y1)
             .curve(this.interpolate())
-            .defined(isDefined)(data);
+            .defined(this.isDefined.bind(this))(data);
     };
     Area.prototype.startClipPath = function (data) {
         var _this = this;

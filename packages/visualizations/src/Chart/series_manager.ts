@@ -152,11 +152,17 @@ class ChartSeriesManager implements SeriesManager {
     const stackAxis: "x" | "y" = this.renderAs(stack)[0].stackAxis || "y"
     const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
 
+    const stackAccessors: Object<any> = this.renderAs(stack)[0].accessors
+    const stackAxisValue = (d: Datum): number =>
+      ((stackAccessors || {})[stackAxis] || this.state.current.get("accessors").renderer[stackAxis])({}, d)
+    const baseAxisValue = (d: Datum): number =>
+      ((stackAccessors || {})[baseAxis] || this.state.current.get("accessors").renderer[baseAxis])({}, d)
+
     // Transform data into suitable structure for d3 stack
     const dataToStack = flow(
       map(get("data")),
       reduce((memo: any[], data: Datum[]): any[] => {
-        return memo.concat(map(get(baseAxis))(data))
+        return memo.concat(map((d: Datum): any => baseAxisValue(d))(data))
       }, []),
       uniqBy(String),
       map((baseValue: string | number | Date) => {
@@ -167,8 +173,8 @@ class ChartSeriesManager implements SeriesManager {
 
     forEach((series: Object<any>) => {
       forEach((datum: Datum) => {
-        const newDatum = find((d: any) => String(d[baseAxis]) === String(datum[baseAxis]))(dataToStack)
-        newDatum[series.key] = datum.y
+        const newDatum = find((d: any) => String(d[baseAxis]) === String(baseAxisValue(datum)))(dataToStack)
+        newDatum[series.key] = stackAxisValue(datum)
       })(series.data)
     })(stackedSeries)
 
@@ -193,8 +199,16 @@ class ChartSeriesManager implements SeriesManager {
         }
       })(series)
       originalSeries.stacked = true
-      originalSeries.stackIndex = index
+      originalSeries.stackIndex = index + 1
     })(stackedData)
+
+    // Reset renderer axis accessors, not applicable to new series
+    forEach((options: any) => {
+      if (options.accessors) {
+        delete options.accessors.x
+        delete options.accessors.y
+      }
+    })(this.renderAs(this.renderAs(stack)[0]))
   }
 
   private computeRange(range: Object<any>, index: number): void {

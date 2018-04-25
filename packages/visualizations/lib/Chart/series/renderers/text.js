@@ -85,7 +85,8 @@ var Text = /** @class */ (function () {
     };
     Text.prototype.startAttributes = function () {
         var _this = this;
-        var offset = this.state.current.get("computed").axes.computedBars[this.series.key()].width / 2 || 0;
+        var computedBars = this.state.current.get("computed").axes.computedBars;
+        var offset = computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0;
         return {
             x: function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) - offset : 0); },
             y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d) - offset); },
@@ -95,8 +96,10 @@ var Text = /** @class */ (function () {
     Text.prototype.attributes = function () {
         var _this = this;
         var config = this.state.current.get("config");
-        var computedBars = this.state.current.get("computed").axes.computedBars[this.series.key()];
-        var barOffset = computedBars ? computedBars.offset + computedBars.width / 2 : 0;
+        var computedBars = this.state.current.get("computed").axes.computedBars;
+        var barOffset = computedBars && computedBars[this.series.key()]
+            ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
+            : 0;
         var symbolOffset = function (d) {
             return (_this.series.symbolOffset ? _this.series.symbolOffset(d) : 0) + config.textlabels.offset;
         };

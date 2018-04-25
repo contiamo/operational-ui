@@ -18,6 +18,12 @@ var interpolator = {
     stepAfter: d3_shape_1.curveStepAfter,
     stepBefore: d3_shape_1.curveStepBefore
 };
+var hasValue = function (d) {
+    return !!d || d === 0;
+};
+var aOrB = function (a, b) {
+    return hasValue(a) ? a : b;
+};
 var Line = /** @class */ (function () {
     function Line(state, events, el, data, options, series) {
         this.type = "line";
@@ -74,8 +80,8 @@ var Line = /** @class */ (function () {
         var _this = this;
         var axisAcessors = this.state.current.get("accessors").renderer;
         var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
-        this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
-        this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
+        this.x = function (d) { return aOrB(accessors.x(_this.series, d), d.injectedX); };
+        this.y = function (d) { return aOrB(accessors.y(_this.series, d), d.injectedY); };
         this.color = function (d) { return accessors.color(_this.series, d); };
         this.dashed = function (d) { return accessors.dashed(_this.series, d); };
         this.interpolate = function (d) { return interpolator[accessors.interpolate(_this.series, d)]; };
@@ -94,8 +100,8 @@ var Line = /** @class */ (function () {
         }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.adjustedX = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x1 || _this.x(d)); };
-        this.adjustedY = function (d) { return _this.yScale(_this.xIsBaseline ? d.y1 || _this.y(d) : _this.y(d)); };
+        this.adjustedX = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : aOrB(d.x1, _this.x(d))); };
+        this.adjustedY = function (d) { return _this.yScale(_this.xIsBaseline ? aOrB(d.y1, _this.y(d)) : _this.y(d)); };
     };
     Line.prototype.addMissingData = function () {
         var _this = this;
@@ -111,23 +117,22 @@ var Line = /** @class */ (function () {
             })(ticks);
         }
     };
+    Line.prototype.isDefined = function (d) {
+        return this.series.options.stacked && this.closeGaps() ? true : hasValue(this.x(d)) && hasValue(this.y(d));
+    };
     Line.prototype.startPath = function (data) {
-        var _this = this;
-        var isDefined = function (d) { return !!_this.x(d) && !!_this.y(d); };
         return d3_shape_1.line()
             .x(this.xIsBaseline ? this.adjustedX : this.xScale(0))
             .y(this.xIsBaseline ? this.yScale(0) : this.adjustedY)
             .curve(this.interpolate())
-            .defined(isDefined)(data);
+            .defined(this.isDefined.bind(this))(data);
     };
     Line.prototype.path = function (data) {
-        var _this = this;
-        var isDefined = function (d) { return !!_this.x(d) && !!_this.y(d); };
         return d3_shape_1.line()
             .x(this.adjustedX)
             .y(this.adjustedY)
             .curve(this.interpolate())
-            .defined(isDefined)(data);
+            .defined(this.isDefined.bind(this))(data);
     };
     return Line;
 }());

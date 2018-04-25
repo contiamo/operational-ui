@@ -125,7 +125,9 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   private startAttributes(): Object<any> {
-    const offset: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width / 2 || 0
+    const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
+    const offset: number =
+      computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
     return {
       x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) - offset : 0),
       y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d) - offset),
@@ -135,8 +137,11 @@ class Text implements RendererClass<TextRendererAccessors> {
 
   private attributes(): Object<any> {
     const config: ChartConfig = this.state.current.get("config")
-    const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars[this.series.key()]
-    const barOffset: number = computedBars ? computedBars.offset + computedBars.width / 2 : 0
+    const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
+    const barOffset: number =
+      computedBars && computedBars[this.series.key()]
+        ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
+        : 0
     const symbolOffset = (d: Datum) =>
       (this.series.symbolOffset ? this.series.symbolOffset(d) : 0) + config.textlabels.offset
     const rotate: number = config.textlabels.rotate[this.xIsBaseline ? "vertical" : "horizontal"]

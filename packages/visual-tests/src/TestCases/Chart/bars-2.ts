@@ -65,7 +65,6 @@ const createData = (renderers: any[]) => {
         ],
         name: "Pageviews 2018",
         key: "series1",
-        interpolate: "step",
         renderAs: renderers
       },
       {

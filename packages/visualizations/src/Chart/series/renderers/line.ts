@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isNil, map, merge, sortBy } from "lodash/fp"
+import { compact, defaults, difference, find, forEach, get, isFinite, isNil, map, merge, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   line as d3Line,
@@ -46,6 +46,14 @@ const interpolator = {
   step: curveStep,
   stepAfter: curveStepAfter,
   stepBefore: curveStepBefore
+}
+
+const hasValue = (d: any): boolean => {
+  return !!d || d === 0
+}
+
+const aOrB = (a: any, b: any): any => {
+  return hasValue(a) ? a : b
 }
 
 class Line implements RendererClass<LineRendererAccessors> {
@@ -130,8 +138,8 @@ class Line implements RendererClass<LineRendererAccessors> {
   private assignAccessors(customAccessors: Partial<LineRendererAccessors>): void {
     const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
     const accessors: LineRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
-    this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
-    this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
+    this.x = (d: Datum): any => aOrB(accessors.x(this.series, d), d.injectedX)
+    this.y = (d: Datum): any => aOrB(accessors.y(this.series, d), d.injectedY)
     this.color = (d?: Datum): string => accessors.color(this.series, d)
     this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
     this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
@@ -150,8 +158,8 @@ class Line implements RendererClass<LineRendererAccessors> {
     }
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x1 || this.x(d))
-    this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y1 || this.y(d) : this.y(d))
+    this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : aOrB(d.x1, this.x(d)))
+    this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? aOrB(d.y1, this.y(d)) : this.y(d))
   }
 
   private addMissingData(): void {
@@ -168,22 +176,24 @@ class Line implements RendererClass<LineRendererAccessors> {
     }
   }
 
+  private isDefined(d: Datum): boolean {
+    return this.series.options.stacked && this.closeGaps() ? true : hasValue(this.x(d)) && hasValue(this.y(d))
+  }
+
   private startPath(data: Datum[]): string {
-    const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Line() as any)
       .x(this.xIsBaseline ? this.adjustedX : this.xScale(0))
       .y(this.xIsBaseline ? this.yScale(0) : this.adjustedY)
       .curve(this.interpolate())
-      .defined(isDefined)(data)
+      .defined(this.isDefined.bind(this))(data)
   }
 
   private path(data: Datum[]): string {
-    const isDefined = (d: Datum) => !!this.x(d) && !!this.y(d)
     return (d3Line() as any)
       .x(this.adjustedX)
       .y(this.adjustedY)
       .curve(this.interpolate())
-      .defined(isDefined)(data)
+      .defined(this.isDefined.bind(this))(data)
   }
 }
 

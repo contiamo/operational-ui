@@ -94,10 +94,9 @@ var Bars = /** @class */ (function () {
         return this.xIsBaseline ? "translate(" + seriesBars.offset + ", 0)" : "translate(0, " + seriesBars.offset + ")";
     };
     Bars.prototype.startAttributes = function (attributes) {
-        var _this = this;
         return {
-            x: attributes.x,
-            y: function (d) { return attributes.y(d) + (_this.xIsBaseline ? attributes.height(d) : 0); },
+            x: this.xIsBaseline ? this.x0 : 0,
+            y: this.xIsBaseline ? this.yScale(0) : this.y0,
             width: this.xIsBaseline ? attributes.width : 0,
             height: this.xIsBaseline ? 0 : attributes.height,
             color: attributes.color

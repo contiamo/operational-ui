@@ -31,6 +31,7 @@ declare class Area implements RendererClass<AreaRendererAccessors> {
     private setAxisScales();
     private assignAccessors(customAccessors);
     private addMissingData();
+    private isDefined(d);
     private startPath(data);
     private path(data);
     private startClipPath(data);

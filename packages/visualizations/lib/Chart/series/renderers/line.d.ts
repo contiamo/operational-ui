@@ -29,6 +29,7 @@ declare class Line implements RendererClass<LineRendererAccessors> {
     private assignAccessors(customAccessors);
     private setAxisScales();
     private addMissingData();
+    private isDefined(d);
     private startPath(data);
     private path(data);
 }
