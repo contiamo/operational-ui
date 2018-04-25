@@ -9,8 +9,11 @@ export interface Props {
   title: string
   // This is an experimental feature that renders a back button into the UI.
   // May change substantially or be removed completely.
-  __experimentalBackLinkUrl?: string
-  __experimentalBackLinkLabel?: string
+  __experimentalBackLink: {
+    url: string
+    label?: string
+    onClick?: () => void
+  }
   breadcrumbs?: React.ReactNode
   controls?: React.ReactNode
   children?: React.ReactNode
@@ -62,19 +65,19 @@ const BackLinkContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 const Page = (props: Props) => (
   <Container>
     <TopBar>{props.breadcrumbs}</TopBar>
-    {props.__experimentalBackLinkUrl ? (
+    {props.__experimentalBackLink ? (
       <BackLinkContainer>
         <a
-          href={props.__experimentalBackLinkUrl}
+          href={props.__experimentalBackLink.url}
           onClick={(ev: any) => {
             // Only pushstate routing is supported (experimental feature)
             ev.preventDefault()
-            history.pushState(null, null, props.__experimentalBackLinkUrl)
+            props.__experimentalBackLink.onClick && props.__experimentalBackLink.onClick()
           }}
         >
           <Button condensed>
             <Icon name="ChevronLeft" size={12} />
-            {props.__experimentalBackLinkLabel || "Back"}
+            {props.__experimentalBackLink.label || "Back"}
           </Button>
         </a>
       </BackLinkContainer>

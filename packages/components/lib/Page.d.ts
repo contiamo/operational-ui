@@ -2,8 +2,11 @@
 import * as React from "react";
 export interface Props {
     title: string;
-    __experimentalBackLinkUrl?: string;
-    __experimentalBackLinkLabel?: string;
+    __experimentalBackLink: {
+        url: string;
+        label?: string;
+        onClick?: () => void;
+    };
     breadcrumbs?: React.ReactNode;
     controls?: React.ReactNode;
     children?: React.ReactNode;
