@@ -6,6 +6,9 @@ node_js:
 notifications:
   email: false
 
+before_install:
+- npm i -g yarn
+
 # When Travis gets notified of a new build, do this
 script: 
 - yarn ci
