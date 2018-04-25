@@ -60,15 +60,15 @@ var BackLinkContainer = glamorous_1.default.div(function (_a) {
 });
 var Page = function (props) { return (React.createElement(Container, null,
     React.createElement(TopBar, null, props.breadcrumbs),
-    props.__experimentalBackLinkUrl ? (React.createElement(BackLinkContainer, null,
-        React.createElement("a", { href: props.__experimentalBackLinkUrl, onClick: function (ev) {
+    props.__experimentalBackLink ? (React.createElement(BackLinkContainer, null,
+        React.createElement("a", { href: props.__experimentalBackLink.url, onClick: function (ev) {
                 // Only pushstate routing is supported (experimental feature)
                 ev.preventDefault();
-                history.pushState(null, null, props.__experimentalBackLinkUrl);
+                props.__experimentalBackLink.onClick && props.__experimentalBackLink.onClick();
             } },
             React.createElement(Button_1.default, { condensed: true },
                 React.createElement(Icon_1.default, { name: "ChevronLeft", size: 12 }),
-                props.__experimentalBackLinkLabel || "Back")))) : null,
+                props.__experimentalBackLink.label || "Back")))) : null,
     React.createElement(TitleBar, null,
         props.title,
         React.createElement(ControlsContainer, null, props.controls)),

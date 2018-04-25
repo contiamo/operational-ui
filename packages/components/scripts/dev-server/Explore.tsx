@@ -48,8 +48,13 @@ class Explore extends React.Component<Props, State> {
                   </Button>
                 </React.Fragment>
               }
-              __experimentalBackLinkUrl="/abc"
-              __experimentalBackLinkLabel="Back to resources"
+              __experimentalBackLink={{
+                url: "/abc",
+                label: "Back to resources",
+                onClick: () => {
+                  console.log("a")
+                }
+              }}
             />
           }
         />
