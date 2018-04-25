@@ -91,9 +91,10 @@ class ChartSeries {
   }
 
   private removeAllExcept(types: RendererType[]): void {
-    flow(filter((renderer: RendererClass<any>): boolean => !includes(renderer.type)(types)), forEach(this.remove))(
-      this.renderers
-    )
+    flow(
+      filter((renderer: RendererClass<any>): boolean => !includes(renderer.type)(types)),
+      forEach(this.remove.bind(this))
+    )(this.renderers)
   }
 
   private get(type: string): RendererClass<any> {
@@ -104,8 +105,9 @@ class ChartSeries {
     this.renderers.push(new Renderer(this.state, this.events, this.el, this.options.data, options, this))
   }
 
-  private remove(renderer: Renderer): void {
+  private remove(renderer: RendererClass<any>): void {
     this.oldRenderers.push(renderer)
+    renderer.close()
     remove(renderer)(this.renderers)
   }
 

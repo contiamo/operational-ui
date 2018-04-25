@@ -146,6 +146,7 @@ export interface RendererClass<RendererAccessors> {
   draw: () => void
   type: RendererType
   update: (data: Datum[], options: RendererOptions<RendererAccessors>) => void
+  close: () => void
 }
 
 // Series

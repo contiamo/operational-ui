@@ -39,7 +39,7 @@ var ChartSeries = /** @class */ (function () {
         })(this.renderAs());
     };
     ChartSeries.prototype.removeAllExcept = function (types) {
-        fp_1.flow(fp_1.filter(function (renderer) { return !fp_1.includes(renderer.type)(types); }), fp_1.forEach(this.remove))(this.renderers);
+        fp_1.flow(fp_1.filter(function (renderer) { return !fp_1.includes(renderer.type)(types); }), fp_1.forEach(this.remove.bind(this)))(this.renderers);
     };
     ChartSeries.prototype.get = function (type) {
         return fp_1.find(function (renderer) { return renderer.type === type; })(this.renderers);
@@ -49,6 +49,7 @@ var ChartSeries = /** @class */ (function () {
     };
     ChartSeries.prototype.remove = function (renderer) {
         this.oldRenderers.push(renderer);
+        renderer.close();
         fp_1.remove(renderer)(this.renderers);
     };
     ChartSeries.prototype.dataForLegend = function () {

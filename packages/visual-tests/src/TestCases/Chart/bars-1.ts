@@ -91,8 +91,8 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
     viz.draw()
   })
 
-  test("Update", () => {
-    viz.data(createData([{ type: "bars" }, { type: "text" }]))
+  test("Update and remove text labels", () => {
+    viz.data(createData([{ type: "bars" }]))
     viz.draw()
   })
 

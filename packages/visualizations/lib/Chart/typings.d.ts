@@ -104,6 +104,7 @@ export interface RendererClass<RendererAccessors> {
     draw: () => void;
     type: RendererType;
     update: (data: Datum[], options: RendererOptions<RendererAccessors>) => void;
+    close: () => void;
 }
 export interface Datum {
     x?: string | number | Date;

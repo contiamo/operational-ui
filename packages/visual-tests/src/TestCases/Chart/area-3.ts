@@ -16,10 +16,14 @@ const createData = (closeGaps: boolean) => {
     type: "line"
   }
 
+  const TextRenderer = {
+    type: "text"
+  }
+
   const StackedRenderer = {
     type: "stacked",
     stackAxis: "y",
-    renderAs: [AreaRenderer, LineRenderer]
+    renderAs: [AreaRenderer, LineRenderer, TextRenderer]
   }
 
   return {
