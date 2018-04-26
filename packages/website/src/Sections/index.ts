@@ -24,6 +24,7 @@ import * as textareas from "./Textareas"
 import * as timelines from "./Timelines"
 import * as tooltips from "./Tooltips"
 import * as typography from "./Typography"
+import * as visualizations from "./Visualizations"
 
 export default [
   breadcrumbs,
