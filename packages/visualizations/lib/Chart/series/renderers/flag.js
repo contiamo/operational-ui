@@ -6,8 +6,6 @@ var d3_utils_1 = require("../../../utils/d3_utils");
 var d3 = require("d3-selection");
 var event_catalog_1 = require("../../../utils/event_catalog");
 var defaultAccessors = {
-    x: function (series, d) { return d.x; },
-    y: function (series, d) { return d.y; },
     color: function (series, d) { return d.color || series.legendColor(); },
     description: function (series, d) { return d.description || ""; },
     direction: function (series, d) { return d.direction || "up"; },
@@ -95,7 +93,8 @@ var Flag = /** @class */ (function () {
     };
     Flag.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        var axisAcessors = this.state.current.get("accessors").renderer;
+        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
         this.x = function (d) { return accessors.x(_this.series, d); };
         this.y = function (d) { return accessors.y(_this.series, d); };
         this.color = function (d) { return accessors.color(_this.series, d); };

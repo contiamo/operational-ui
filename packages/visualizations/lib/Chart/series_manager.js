@@ -78,7 +78,6 @@ var ChartSeriesManager = /** @class */ (function () {
             })(data);
             fp_1.forEach(function (group) {
                 fp_1.forEach(function (series) {
-                    // @TODO add missing datapoints to stacked series
                     series.renderAs = _this.renderAs(_this.renderAs(group)[0]);
                     ungroupedSeries = ungroupedSeries.concat(series);
                 })(group.data);
@@ -143,17 +142,12 @@ var ChartSeriesManager = /** @class */ (function () {
         })(this.renderAs(this.renderAs(stack)[0]));
     };
     ChartSeriesManager.prototype.computeRange = function (range, index) {
-        var _this = this;
         var rangeSeries = range.data;
         if (rangeSeries.length !== 2) {
             throw new Error("Range renderer must have exactly 2 series.");
         }
         fp_1.forEach.convert({ cap: false })(function (series, i) {
             series.clipData = rangeSeries[1 - i].data;
-            series.clipAxes = {
-                x: _this.state.current.get("accessors").series.xAxis(rangeSeries[1 - i]),
-                y: _this.state.current.get("accessors").series.yAxis(rangeSeries[1 - i])
-            };
         })(rangeSeries);
     };
     ChartSeriesManager.prototype.get = function (key) {

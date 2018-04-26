@@ -1,6 +1,6 @@
 import Series from "../series"
 import * as styles from "./styles"
-import { compact, defaults, map, reduce } from "lodash/fp"
+import { compact, defaults, map, merge, reduce } from "lodash/fp"
 import { withD3Element } from "../../../utils/d3_utils"
 import * as d3 from "d3-selection"
 import Events from "../../../utils/event_catalog"
@@ -12,15 +12,14 @@ import {
   FlagRendererAccessors,
   Object,
   RendererAccessor,
+  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
   State
 } from "../../typings"
 
-const defaultAccessors: FlagRendererAccessors = {
-  x: (series: Series, d: Datum) => d.x,
-  y: (series: Series, d: Datum) => d.y,
+const defaultAccessors: Partial<FlagRendererAccessors> = {
   color: (series: Series, d: Datum) => d.color || series.legendColor(),
   description: (series: Series, d: Datum) => d.description || "",
   direction: (series: Series, d: Datum) => d.direction || "up",
@@ -142,7 +141,8 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<FlagRendererAccessors>): void {
-    const accessors: FlagRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
+    const accessors: FlagRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d)
     this.y = (d: Datum): any => accessors.y(this.series, d)
     this.color = (d: Datum): string => accessors.color(this.series, d)

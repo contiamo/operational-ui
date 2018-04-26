@@ -1,4 +1,4 @@
-import { compact, defaults, filter, get, map } from "lodash/fp"
+import { compact, defaults, filter, get, map, merge } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import {
@@ -18,29 +18,49 @@ import {
   EventBus,
   Object,
   RendererAccessor,
+  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
   State
 } from "../../typings"
 
-const defaultAccessors: SymbolRendererAccessors = {
+const defaultAccessors: Partial<SymbolRendererAccessors> = {
   fill: (series: Series, d: Datum) => "#fff",
   size: (series: Series, d: Datum) => 50,
   stroke: (series: Series, d: Datum) => series.legendColor(),
-  symbol: (series: Series, d: Datum) => "circle",
-  x: (series: Series, d: Datum) => d.x,
-  y: (series: Series, d: Datum) => d.y
+  symbol: (series: Series, d: Datum) => "circle"
 }
 
 const symbolOptions: Object<any> = {
-  circle: symbolCircle,
-  cross: symbolCross,
-  diamond: symbolDiamond,
-  square: symbolSquare,
-  squareDiamond: symbolSquare, // @TODO rotation
-  star: symbolStar,
-  triangle: symbolTriangle
+  circle: {
+    symbol: symbolCircle,
+    rotation: 0
+  },
+  cross: {
+    symbol: symbolCross,
+    rotation: 0
+  },
+  diamond: {
+    symbol: symbolDiamond,
+    rotation: 0
+  },
+  square: {
+    symbol: symbolSquare,
+    rotation: 0
+  },
+  squareDiamond: {
+    symbol: symbolSquare,
+    rotation: 45
+  },
+  star: {
+    symbol: symbolStar,
+    rotation: 0
+  },
+  triangle: {
+    symbol: symbolTriangle,
+    rotation: 0
+  }
 }
 
 export type Options = RendererOptions<SymbolRendererAccessors>
@@ -90,18 +110,18 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .append("svg:path")
       .attr("d", (d: Datum): string =>
         d3Symbol()
-          .type(this.symbol(d))
+          .type(this.symbol(d).symbol)
           .size(1)()
       )
       .attr("transform", this.startTransform.bind(this))
       .merge(symbols)
-      .attr("fill", this.fill())
-      .attr("stroke", this.stroke())
+      .attr("fill", this.fill.bind(this))
+      .attr("stroke", this.stroke.bind(this))
       .transition()
       .duration(duration)
       .attr("d", (d: Datum): string =>
         d3Symbol()
-          .type(this.symbol(d))
+          .type(this.symbol(d).symbol)
           .size(this.size(d))()
       )
       .attr("transform", this.transform.bind(this))
@@ -112,7 +132,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .duration(duration)
       .attr("d", (d: Datum): string =>
         d3Symbol()
-          .type(this.symbol(d))
+          .type(this.symbol(d).symbol)
           .size(1)()
       )
       .remove()
@@ -139,11 +159,12 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<SymbolRendererAccessors>): void {
-    const accessors: SymbolRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
+    const accessors: SymbolRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
-    this.fill = (d?: Datum): string => accessors.fill(this.series, d)
-    this.stroke = (d?: Datum): string => accessors.stroke(this.series, d)
+    this.fill = (d: Datum): string => accessors.fill(this.series, d)
+    this.stroke = (d: Datum): string => accessors.stroke(this.series, d)
     this.symbol = (d: Datum): any => symbolOptions[accessors.symbol(this.series, d)]
     this.size = (d: Datum): number => accessors.size(this.series, d)
   }
@@ -157,7 +178,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   private transform(d: Datum): string {
     const x: number = this.xScale(d.x1 || this.x(d))
     const y: number = this.yScale(d.y1 || this.y(d))
-    return `translate(${x}, ${y})`
+    return `translate(${x}, ${y}) rotate(${this.symbol(d).rotation})`
   }
 
   private startTransform(d: Datum): string {

@@ -18,5 +18,28 @@ import * as flag1 from "./flag-1"
 import * as symbol1 from "./symbol-1"
 import * as symbol2 from "./symbol-2"
 import * as range1 from "./range-1"
+import * as range2 from "./range-2"
 
-export default [general1, general2, general3, axes1, axes2, axes3, axes4, axes5, area1, area2, area3, area4, bars1, bars2, bars3, bars4, flag1]
+export default [
+  general1,
+  general2,
+  general3,
+  axes1,
+  axes2,
+  axes3,
+  axes4,
+  axes5,
+  area1,
+  area2,
+  area3,
+  area4,
+  bars1,
+  bars2,
+  bars3,
+  bars4,
+  flag1,
+  symbol1,
+  symbol2,
+  range1,
+  range2
+]

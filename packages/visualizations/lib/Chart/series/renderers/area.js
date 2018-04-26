@@ -111,8 +111,8 @@ var Area = /** @class */ (function () {
         }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
-        this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : fp_1.isFinite(d.x0) ? d.x0 : 0); };
-        this.x1 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : fp_1.isFinite(d.x1) ? d.x1 : _this.x(d)); };
+        this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : aOrB(d.x0, 0)); };
+        this.x1 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : aOrB(d.x1, _this.x(d))); };
         this.y0 = function (d) { return _this.yScale(_this.xIsBaseline ? aOrB(d.y0, 0) : _this.y(d)); };
         this.y1 = function (d) { return _this.yScale(_this.xIsBaseline ? aOrB(d.y1, _this.y(d)) : _this.y(d)); };
     };
@@ -164,16 +164,18 @@ var Area = /** @class */ (function () {
         return d3_shape_1.area()
             .x(function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : 0); })
             .y(function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d)); })
-            .curve(this.interpolate())(data);
+            .curve(this.interpolate())
+            .defined(this.isDefined.bind(this))(data);
     };
     Area.prototype.clipPath = function (data) {
         var _this = this;
         return d3_shape_1.area()
-            .x0(this.x0)
+            .x0(this.xIsBaseline ? this.x0 : this.xScale.range()[1])
             .x1(this.x1)
             .y0(function (d) { return (_this.xIsBaseline ? 0 : _this.y0(d)); })
             .y1(this.y1)
-            .curve(this.interpolate())(data);
+            .curve(this.interpolate())
+            .defined(this.isDefined.bind(this))(data);
     };
     return Area;
 }());

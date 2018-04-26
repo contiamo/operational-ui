@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isNil, isFinite, map, merge, sortBy } from "lodash/fp"
+import { compact, defaults, difference, find, forEach, get, isNil, map, merge, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   area as d3Area,
@@ -173,8 +173,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
     }
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : isFinite(d.x0) ? d.x0 : 0)
-    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : isFinite(d.x1) ? d.x1 : this.x(d))
+    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : aOrB(d.x0, 0))
+    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : aOrB(d.x1, this.x(d)))
     this.y0 = (d: Datum): any => this.yScale(this.xIsBaseline ? aOrB(d.y0, 0) : this.y(d))
     this.y1 = (d: Datum): any => this.yScale(this.xIsBaseline ? aOrB(d.y1, this.y(d)) : this.y(d))
   }
@@ -229,16 +229,18 @@ class Area implements RendererClass<AreaRendererAccessors> {
     return (d3Area() as any)
       .x((d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : 0))
       .y((d: Datum): any => this.yScale(this.xIsBaseline ? 0 : this.y(d)))
-      .curve(this.interpolate())(data)
+      .curve(this.interpolate())
+      .defined(this.isDefined.bind(this))(data)
   }
 
   private clipPath(data: Datum[]): string {
     return (d3Area() as any)
-      .x0(this.x0)
+      .x0(this.xIsBaseline ? this.x0 : this.xScale.range()[1])
       .x1(this.x1)
       .y0((d: Datum) => (this.xIsBaseline ? 0 : this.y0(d)))
       .y1(this.y1)
-      .curve(this.interpolate())(data)
+      .curve(this.interpolate())
+      .defined(this.isDefined.bind(this))(data)
   }
 }
 

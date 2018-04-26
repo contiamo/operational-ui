@@ -136,7 +136,6 @@ class ChartSeriesManager implements SeriesManager {
 
       forEach((group: Object<any>): void => {
         forEach((series: Object<any>): void => {
-          // @TODO add missing datapoints to stacked series
           series.renderAs = this.renderAs(this.renderAs(group)[0])
           ungroupedSeries = ungroupedSeries.concat(series)
         })(group.data)
@@ -219,10 +218,6 @@ class ChartSeriesManager implements SeriesManager {
 
     forEach.convert({ cap: false })((series: Object<any>, i: number) => {
       series.clipData = rangeSeries[1 - i].data
-      series.clipAxes = {
-        x: this.state.current.get("accessors").series.xAxis(rangeSeries[1 - i]),
-        y: this.state.current.get("accessors").series.yAxis(rangeSeries[1 - i])
-      }
     })(rangeSeries)
   }
 

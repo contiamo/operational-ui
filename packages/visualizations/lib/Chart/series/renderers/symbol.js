@@ -8,17 +8,36 @@ var defaultAccessors = {
     size: function (series, d) { return 50; },
     stroke: function (series, d) { return series.legendColor(); },
     symbol: function (series, d) { return "circle"; },
-    x: function (series, d) { return d.x; },
-    y: function (series, d) { return d.y; }
 };
 var symbolOptions = {
-    circle: d3_shape_1.symbolCircle,
-    cross: d3_shape_1.symbolCross,
-    diamond: d3_shape_1.symbolDiamond,
-    square: d3_shape_1.symbolSquare,
-    squareDiamond: d3_shape_1.symbolSquare,
-    star: d3_shape_1.symbolStar,
-    triangle: d3_shape_1.symbolTriangle
+    circle: {
+        symbol: d3_shape_1.symbolCircle,
+        rotation: 0
+    },
+    cross: {
+        symbol: d3_shape_1.symbolCross,
+        rotation: 0
+    },
+    diamond: {
+        symbol: d3_shape_1.symbolDiamond,
+        rotation: 0
+    },
+    square: {
+        symbol: d3_shape_1.symbolSquare,
+        rotation: 0
+    },
+    squareDiamond: {
+        symbol: d3_shape_1.symbolSquare,
+        rotation: 45
+    },
+    star: {
+        symbol: d3_shape_1.symbolStar,
+        rotation: 0
+    },
+    triangle: {
+        symbol: d3_shape_1.symbolTriangle,
+        rotation: 0
+    }
 };
 var Symbol = /** @class */ (function () {
     function Symbol(state, events, el, data, options, series) {
@@ -46,18 +65,18 @@ var Symbol = /** @class */ (function () {
             .append("svg:path")
             .attr("d", function (d) {
             return d3_shape_1.symbol()
-                .type(_this.symbol(d))
+                .type(_this.symbol(d).symbol)
                 .size(1)();
         })
             .attr("transform", this.startTransform.bind(this))
             .merge(symbols)
-            .attr("fill", this.fill())
-            .attr("stroke", this.stroke())
+            .attr("fill", this.fill.bind(this))
+            .attr("stroke", this.stroke.bind(this))
             .transition()
             .duration(duration)
             .attr("d", function (d) {
             return d3_shape_1.symbol()
-                .type(_this.symbol(d))
+                .type(_this.symbol(d).symbol)
                 .size(_this.size(d))();
         })
             .attr("transform", this.transform.bind(this));
@@ -67,7 +86,7 @@ var Symbol = /** @class */ (function () {
             .duration(duration)
             .attr("d", function (d) {
             return d3_shape_1.symbol()
-                .type(_this.symbol(d))
+                .type(_this.symbol(d).symbol)
                 .size(1)();
         })
             .remove();
@@ -90,7 +109,8 @@ var Symbol = /** @class */ (function () {
     };
     Symbol.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        var axisAcessors = this.state.current.get("accessors").renderer;
+        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
         this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
         this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
         this.fill = function (d) { return accessors.fill(_this.series, d); };
@@ -106,7 +126,7 @@ var Symbol = /** @class */ (function () {
     Symbol.prototype.transform = function (d) {
         var x = this.xScale(d.x1 || this.x(d));
         var y = this.yScale(d.y1 || this.y(d));
-        return "translate(" + x + ", " + y + ")";
+        return "translate(" + x + ", " + y + ") rotate(" + this.symbol(d).rotation + ")";
     };
     Symbol.prototype.startTransform = function (d) {
         var x = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0);

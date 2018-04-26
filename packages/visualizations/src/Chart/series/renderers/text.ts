@@ -1,4 +1,4 @@
-import { compact, defaults, filter, get, map } from "lodash/fp"
+import { compact, defaults, filter, get, map, merge } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import {
@@ -9,6 +9,7 @@ import {
   EventBus,
   Object,
   RendererAccessor,
+  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -17,9 +18,7 @@ import {
 
 export type Options = RendererOptions<TextRendererAccessors>
 
-const defaultAccessors: TextRendererAccessors = {
-  x: (series: Series, d: Datum) => d.x,
-  y: (series: Series, d: Datum) => d.y,
+const defaultAccessors: Partial<TextRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   size: (series: Series, d: Datum) => 10
 }
@@ -107,7 +106,8 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<TextRendererAccessors>): void {
-    const accessors: TextRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
+    const accessors: TextRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
     this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
     this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
     this.color = (d?: Datum): string => accessors.color(this.series, d)
