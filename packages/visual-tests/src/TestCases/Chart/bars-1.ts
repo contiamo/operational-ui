@@ -1,5 +1,5 @@
 import { Chart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const createSingleSeries = (renderers: any[]) => {
   return {
@@ -78,7 +78,7 @@ const createData = (renderers: any[]) => {
   }
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
 
   test("Render", () => {
@@ -102,21 +102,21 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 
   test("Assign widths", () => {
-    const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
     viz.data(createData([{ type: "bars", accessors: { barWidth } }]))
     viz.draw()
   })
 
   test("Color accessors", () => {
-    const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
-    const color = (series: any, d: any) => d.y > 400 ? "red" : series.legendColor()
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
     viz.data(createData([{ type: "bars", accessors: { color, barWidth } }]))
     viz.draw()
   })
 
   test("Remove some bars", () => {
-    const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
-    const color = (series: any, d: any) => d.y > 400 ? "red" : series.legendColor()
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
     const data = {
       series: [
         {
@@ -137,7 +137,7 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
             { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
             { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
             { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
+            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) }
           ],
           name: "Pageviews 2017",
           key: "series2",
@@ -166,3 +166,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Bars"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "bars-1"

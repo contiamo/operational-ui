@@ -1,5 +1,5 @@
 import { Chart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const AxesAccessors = {
   x: (series, d) => d.y,
@@ -119,7 +119,7 @@ const createData = (renderers: any[]) => {
   }
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
 
   test("Render", () => {
@@ -161,3 +161,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Area/line, horizontal"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "area-2"

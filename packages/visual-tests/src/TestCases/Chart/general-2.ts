@@ -1,5 +1,5 @@
 import { Chart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const LineRenderer = {
   accessors: {
@@ -44,7 +44,7 @@ const data = {
   ]
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
 
   test("Renders a chart", () => {
@@ -62,3 +62,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Closing chart"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "general-2"

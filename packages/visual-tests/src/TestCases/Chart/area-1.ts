@@ -1,5 +1,5 @@
 import { Chart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const AreaRenderer = {
   type: "area"
@@ -106,7 +106,7 @@ const createData = (renderers: any[]) => {
   }
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
 
   test("Render", () => {
@@ -148,3 +148,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Area/line"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "area-1"

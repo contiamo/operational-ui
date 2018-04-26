@@ -1,46 +1,36 @@
 import { Chart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const data: any = {
   series: [
     {
-      data: [
-        { x: new Date(2018, 2, 12) },
-        { x: new Date(2018, 2, 15) }
-      ],
+      data: [{ x: new Date(2018, 2, 12) }, { x: new Date(2018, 2, 15) }],
       name: "Pageviews 2018",
       axis: "x1",
       key: "series1",
       renderAs: [{ type: "flag" }]
     },
     {
-      data: [
-        { y: 100 },
-        { y: 400 }
-      ],
+      data: [{ y: 100 }, { y: 400 }],
       name: "Pageviews 2017",
       axis: "y1",
       key: "series2",
       renderAs: [{ type: "flag" }]
     },
     {
-      data: [
-        { x: new Date(2017, 2, 13) }
-      ],
+      data: [{ x: new Date(2017, 2, 13) }],
       name: "Pageviews 2017",
       axis: "x2",
       key: "series3",
       renderAs: [{ type: "flag" }]
     },
     {
-      data: [
-        { y: 300 }
-      ],
+      data: [{ y: 300 }],
       name: "Pageviews 2017",
       axis: "y2",
       key: "series4",
       renderAs: [{ type: "flag" }]
-    },
+    }
   ],
   axes: {
     x1: {
@@ -68,7 +58,7 @@ const data: any = {
   }
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
 
   test("Render", () => {
@@ -82,3 +72,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Flags"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "flag-1"

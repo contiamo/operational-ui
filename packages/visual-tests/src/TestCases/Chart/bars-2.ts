@@ -1,5 +1,5 @@
 import { Chart } from "@operational/visualizations"
-import { IMarathon } from "../../components/Marathon"
+import { MarathonEnvironment } from "../../Marathon"
 
 const AxesAccessors = {
   x: (series, d) => d.y,
@@ -96,7 +96,7 @@ const createData = (renderers: any[]) => {
   }
 }
 
-export const marathon = ({ test, afterAll, container }: IMarathon): void => {
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
 
   test("Render", () => {
@@ -105,12 +105,16 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 
   test("Change to time axis", () => {
-    viz.data(createData([{
-      accessors: {
-        ...AxesAccessors
-      },
-      type: "bars"
-    }]))
+    viz.data(
+      createData([
+        {
+          accessors: {
+            ...AxesAccessors
+          },
+          type: "bars"
+        }
+      ])
+    )
     viz.draw()
   })
 
@@ -120,28 +124,36 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
   })
 
   test("Assign widths", () => {
-    const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
-    viz.data(createData([{
-      accessors: {
-        ...AxesAccessors,
-        barWidth
-      },
-      type: "bars"
-    }]))
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    viz.data(
+      createData([
+        {
+          accessors: {
+            ...AxesAccessors,
+            barWidth
+          },
+          type: "bars"
+        }
+      ])
+    )
     viz.draw()
   })
 
   test("Color accessors", () => {
-    const barWidth = (series: any, d: any) => series.key() === "series1" ? 20 : 10
-    const color = (series: any, d: any) => d.y > 400 ? "red" : series.legendColor()
-    viz.data(createData([{
-      accessors: {
-        ...AxesAccessors,
-        barWidth,
-        color
-      },
-      type: "bars"
-    }]))
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
+    viz.data(
+      createData([
+        {
+          accessors: {
+            ...AxesAccessors,
+            barWidth,
+            color
+          },
+          type: "bars"
+        }
+      ])
+    )
     viz.draw()
   })
 
@@ -151,3 +163,6 @@ export const marathon = ({ test, afterAll, container }: IMarathon): void => {
 }
 
 export const title: string = "Bars, horizontal"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "bars-2"
