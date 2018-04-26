@@ -18,7 +18,7 @@
     "precommit": "npm run ci:local && git add .",
     "package": "lerna run package",
     "publish": "lerna publish",
-    "next": "lerna publish --canary=next",
+    "next": "lerna publish --canary=next --npm-tag=next --yes",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
     "ci:local": "lerna run package && lerna run test && lerna run lint && lerna run prettier",
     "ci": "npm run ci:local && npm run ensure:clean:repo",
