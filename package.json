@@ -18,17 +18,15 @@
     "precommit": "npm run ci:local && git add .",
     "package": "lerna run package",
     "publish": "lerna publish",
-    "next": "lerna publish --canary=next --npm-tag=next --yes",
+    "next": "./scripts/next.sh",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
     "ci:local": "lerna run package && lerna run test && lerna run lint && lerna run prettier",
-    "ci": "npm run ci:local && npm run ensure:clean:repo",
+    "ci": "./scripts/ci.sh",
     "deploy:website": "./scripts/deploy-website.sh"
   },
   "devDependencies": {
     "husky": "^0.14.3",
     "lerna": "^2.7.1"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
