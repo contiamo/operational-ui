@@ -2,85 +2,13 @@ import * as React from "react"
 import { VisualizationWrapper, PieChart, Sunburst, ProcessFlow } from "@operational/visualizations"
 import { Div } from "glamorous"
 
-export const title = "Visualizations"
+export const title = "Sunburst Charts"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/visualizations"
+export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/visualizations/sunburst.md"
 
 const config = {
-  width: 220,
-  height: 220
-}
-
-const pieData = {
-  name: "Metric",
-  data: [
-    { key: "Berlin", value: 12 },
-    { key: "Dortmund", value: 5 },
-    { key: "Bonn", value: 7 },
-    { key: "Cologne", value: 11 }
-  ],
-  renderAs: [{ type: "donut" }]
-}
-
-const processFlowData = {
-  journeys: [
-    { path: ["1", "3", "4", "5"], size: 1500 },
-    { path: ["1", "3", "6"], size: 700 },
-    { path: ["2", "3", "4", "6"], size: 1200 },
-    { path: ["2", "6"], size: 300 }
-  ],
-  nodes: [
-    { id: "1", group: "start" },
-    { id: "2", group: "start" },
-    { id: "3" },
-    { id: "4" },
-    { id: "5", group: "end" },
-    { id: "6", group: "end" }
-  ]
-}
-
-const processFlowConfig = {
-  width: 200,
-  height: 220,
-  maxNodeSize: 300,
-  nodeBorderWidth: 4
-}
-
-const processFlowAccessors = {
-  node: {
-    color: (node: any) => {
-      if (node.group === "start") {
-        return "lightgreen"
-      }
-      if (node.group === "end") {
-        return "lightcoral"
-      }
-      return "#fff"
-    },
-    shape: (node: any) => {
-      if (node.group === "start") {
-        return "square"
-      }
-      if (node.group === "end") {
-        return "circle"
-      }
-      return "squareDiamond"
-    },
-    stroke: (node: any) => {
-      return node.group ? "none" : "#000"
-    }
-  },
-  link: {
-    stroke: (link: any) => {
-      if (link.source.attributes.group === "start") {
-        return "lightgreen"
-      }
-      if (link.target.attributes.group === "end") {
-        return "lightcoral"
-      }
-      return "#bbb"
-    }
-  }
+  width: 240,
+  height: 240
 }
 
 const sunburstData = {
@@ -342,24 +270,6 @@ const sunburstData = {
 
 export const Component = () => (
   <React.Fragment>
-    <Div css={{ height: "250px" }}>
-      <Div css={{ width: "fit-content", float: "left" }}>
-        <p style={{ marginTop: "0px" }}>Pie Charts</p>
-        <VisualizationWrapper facade={PieChart} data={pieData} config={config} />
-      </Div>
-      <Div css={{ width: "fit-content", float: "left" }}>
-        <p style={{ marginTop: "0px" }}>Process Flow</p>
-        <VisualizationWrapper
-          facade={ProcessFlow}
-          data={processFlowData}
-          config={processFlowConfig}
-          accessors={processFlowAccessors}
-        />
-      </Div>
-      <Div css={{ width: "fit-content", float: "left" }}>
-        <p style={{ marginTop: "0px" }}>Sunburst</p>
-        <VisualizationWrapper facade={Sunburst} data={sunburstData} config={config} />
-      </Div>
-    </Div>
+    <VisualizationWrapper facade={Sunburst} data={sunburstData} config={config} />
   </React.Fragment>
 )
