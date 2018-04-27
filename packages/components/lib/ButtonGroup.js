@@ -6,15 +6,15 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "buttongroup",
-        "& > div": {
+        "& > button": {
             margin: 0,
         },
-        "& > div:not(:first-child)": {
+        "& > button:not(:first-child)": {
             borderLeft: 0,
             borderTopLeftRadius: 0,
             borderBottomLeftRadius: 0,
         },
-        "& > div:not(:last-child)": {
+        "& > button:not(:last-child)": {
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
         },
