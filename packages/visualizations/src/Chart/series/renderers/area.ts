@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isNil, map, merge, sortBy } from "lodash/fp"
+import { compact, defaults, difference, find, forEach, get, isNil, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   area as d3Area,
@@ -21,7 +21,6 @@ import {
   EventBus,
   Partial,
   RendererAccessor,
-  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -180,10 +179,9 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<AreaRendererAccessors>): void {
-    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
-    const accessors: AreaRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
-    this.x = (d: Datum): any => aOrB(accessors.x(this.series, d), d.injectedX)
-    this.y = (d: Datum): any => aOrB(accessors.y(this.series, d), d.injectedY)
+    const accessors: AreaRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    this.x = (d: Datum): any => aOrB(this.series.x(d), d.injectedX)
+    this.y = (d: Datum): any => aOrB(this.series.y(d), d.injectedY)
     this.color = (d?: Datum): string => accessors.color(this.series, d)
     this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
     this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)

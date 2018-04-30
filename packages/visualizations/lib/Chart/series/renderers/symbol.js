@@ -109,10 +109,9 @@ var Symbol = /** @class */ (function () {
     };
     Symbol.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var axisAcessors = this.state.current.get("accessors").renderer;
-        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
-        this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
-        this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
+        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        this.x = function (d) { return _this.series.x(d) || d.injectedX; };
+        this.y = function (d) { return _this.series.y(d) || d.injectedY; };
         this.fill = function (d) { return accessors.fill(_this.series, d); };
         this.stroke = function (d) { return accessors.stroke(_this.series, d); };
         this.symbol = function (d) { return symbolOptions[accessors.symbol(_this.series, d)]; };

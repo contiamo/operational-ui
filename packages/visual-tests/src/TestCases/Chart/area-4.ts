@@ -1,15 +1,9 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const AxesAccessors = {
-  x: (series: any, d: any) => d.y,
-  y: (series: any, d: any) => d.x
-}
-
 const createData = (closeGaps: boolean) => {
   const AreaRenderer = {
     accessors: {
-      ...AxesAccessors,
       closeGaps: () => closeGaps
     },
     type: "area"
@@ -17,16 +11,12 @@ const createData = (closeGaps: boolean) => {
 
   const LineRenderer = {
     accessors: {
-      ...AxesAccessors,
       closeGaps: () => closeGaps
     },
     type: "line"
   }
 
   const StackedRenderer = {
-    accessors: {
-      ...AxesAccessors
-    },
     type: "stacked",
     stackAxis: "x",
     renderAs: [AreaRenderer, LineRenderer]
@@ -47,6 +37,8 @@ const createData = (closeGaps: boolean) => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
             ],
+            xAttribute: "y",
+            yAttribute: "x",
             name: "New Users",
             key: "series1"
           },
@@ -61,6 +53,8 @@ const createData = (closeGaps: boolean) => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
             ],
+            xAttribute: "y",
+            yAttribute: "x",
             name: "Existing Users",
             key: "series2"
           }

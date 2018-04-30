@@ -2,10 +2,6 @@ import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const StackedRenderer = {
-  accessors: {
-    x: (series: any, d: any) => d.y,
-    y: (series: any, d: any) => d.x
-  },
   type: "stacked",
   stackAxis: "x",
   renderAs: [{ type: "bars" }, { type: "text" }]
@@ -24,6 +20,8 @@ const createData = () => {
               { x: new Date(2018, 2, 14), y: undefined },
               { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
             ],
+            xAttribute: "y",
+            yAttribute: "x",
             name: "Users",
             key: "series1"
           },
@@ -37,6 +35,8 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
             ],
+            xAttribute: "y",
+            yAttribute: "x",
             name: "New Users",
             key: "series2"
           }

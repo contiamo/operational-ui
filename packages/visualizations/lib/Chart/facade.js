@@ -116,12 +116,10 @@ var ChartFacade = /** @class */ (function () {
                 renderAs: function (d) { return d.renderAs; },
                 unit: function (d) { return d.unit || ""; },
                 axis: function (d) { return d.axis || "x1"; },
+                xAttribute: function (d) { return d.xAttribute || "x"; },
+                yAttribute: function (d) { return d.yAttribute || "y"; },
                 xAxis: function (d) { return d.xAxis || "x1"; },
                 yAxis: function (d) { return d.yAxis || "y1"; }
-            },
-            renderer: {
-                x: function (series, d) { return d.x; },
-                y: function (series, d) { return d.y; }
             }
         };
     };

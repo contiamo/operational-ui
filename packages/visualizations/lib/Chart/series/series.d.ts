@@ -20,6 +20,10 @@ declare class ChartSeries {
     axis: () => AxisPosition;
     xAxis: () => "x1" | "x2";
     yAxis: () => "y1" | "y2";
+    xAttribute: () => string;
+    yAttribute: () => string;
+    x: (d: Datum) => number | string | Date;
+    y: (d: Datum) => number | string | Date;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, options: Object<any>);
     update(options: Object<any>): void;
     assignAccessors(): void;

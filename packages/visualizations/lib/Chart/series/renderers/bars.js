@@ -82,10 +82,9 @@ var Bars = /** @class */ (function () {
     };
     Bars.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var axisAcessors = this.state.current.get("accessors").renderer;
-        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
-        this.x = function (d) { return accessors.x(_this.series, d) || d.injectedX; };
-        this.y = function (d) { return accessors.y(_this.series, d) || d.injectedY; };
+        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        this.x = function (d) { return _this.series.x(d) || d.injectedX; };
+        this.y = function (d) { return _this.series.y(d) || d.injectedY; };
         this.color = function (d) { return accessors.color(_this.series, d); };
         this.barWidth = function (d) { return accessors.barWidth(_this.series, d); };
     };

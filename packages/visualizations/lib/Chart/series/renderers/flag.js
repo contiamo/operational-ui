@@ -93,10 +93,9 @@ var Flag = /** @class */ (function () {
     };
     Flag.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var axisAcessors = this.state.current.get("accessors").renderer;
-        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
-        this.x = function (d) { return accessors.x(_this.series, d); };
-        this.y = function (d) { return accessors.y(_this.series, d); };
+        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        this.x = this.series.x;
+        this.y = this.series.y;
         this.color = function (d) { return accessors.color(_this.series, d); };
         this.description = function (d) { return accessors.description(_this.series, d); };
         this.direction = function (d) { return accessors.direction(_this.series, d); };

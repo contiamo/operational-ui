@@ -1,15 +1,7 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const AxesAccessors = {
-  x: (series, d) => d.y,
-  y: (series, d) => d.x
-}
-
 const BarsRenderer = {
-  accessors: {
-    ...AxesAccessors
-  },
   type: "bars"
 }
 
@@ -23,6 +15,8 @@ const data: any = {
         { x: new Date(2018, 2, 14), y: undefined },
         { x: new Date(2018, 2, 15), y: 200 }
       ],
+      xAttribute: "y",
+      yAttribute: "x",
       name: "Pageviews",
       key: "series1",
       renderAs: [BarsRenderer]
@@ -37,6 +31,8 @@ const data: any = {
         { x: new Date(2018, 2, 16), y: 234 },
         { x: new Date(2018, 2, 17), y: 123 }
       ],
+      xAttribute: "y",
+      yAttribute: "x",
       name: "Users",
       key: "series2",
       renderAs: [BarsRenderer]
@@ -63,6 +59,8 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 14), y: undefined },
           { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
         ],
+        xAttribute: "y",
+        yAttribute: "x",
         name: "Pageviews 2018",
         key: "series1",
         renderAs: renderers
@@ -77,6 +75,8 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
         ],
+        xAttribute: "y",
+        yAttribute: "x",
         name: "Pageviews 2017",
         key: "series2",
         renderAs: renderers
@@ -105,16 +105,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 
   test("Change to time axis", () => {
-    viz.data(
-      createData([
-        {
-          accessors: {
-            ...AxesAccessors
-          },
-          type: "bars"
-        }
-      ])
-    )
+    viz.data(createData([{ type: "bars" }]))
     viz.draw()
   })
 
@@ -129,7 +120,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       createData([
         {
           accessors: {
-            ...AxesAccessors,
             barWidth
           },
           type: "bars"
@@ -146,7 +136,6 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       createData([
         {
           accessors: {
-            ...AxesAccessors,
             barWidth,
             color
           },

@@ -1,4 +1,4 @@
-import { compact, defaults, filter, get, map, merge } from "lodash/fp"
+import { compact, defaults, filter, get, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import {
@@ -18,7 +18,6 @@ import {
   EventBus,
   Object,
   RendererAccessor,
-  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -159,10 +158,9 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<SymbolRendererAccessors>): void {
-    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
-    const accessors: SymbolRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
-    this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
-    this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
+    const accessors: SymbolRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    this.x = (d: Datum): any => this.series.x(d) || d.injectedX
+    this.y = (d: Datum): any => this.series.y(d) || d.injectedY
     this.fill = (d: Datum): string => accessors.fill(this.series, d)
     this.stroke = (d: Datum): string => accessors.stroke(this.series, d)
     this.symbol = (d: Datum): any => symbolOptions[accessors.symbol(this.series, d)]

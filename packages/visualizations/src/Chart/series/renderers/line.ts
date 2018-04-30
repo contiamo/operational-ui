@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isFinite, isNil, map, merge, sortBy } from "lodash/fp"
+import { compact, defaults, difference, find, forEach, get, isFinite, isNil, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   line as d3Line,
@@ -21,7 +21,6 @@ import {
   EventBus,
   Partial,
   RendererAccessor,
-  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -136,10 +135,9 @@ class Line implements RendererClass<LineRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<LineRendererAccessors>): void {
-    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
-    const accessors: LineRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
-    this.x = (d: Datum): any => aOrB(accessors.x(this.series, d), d.injectedX)
-    this.y = (d: Datum): any => aOrB(accessors.y(this.series, d), d.injectedY)
+    const accessors: LineRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    this.x = (d: Datum): any => aOrB(this.series.x(d), d.injectedX)
+    this.y = (d: Datum): any => aOrB(this.series.y(d), d.injectedY)
     this.color = (d?: Datum): string => accessors.color(this.series, d)
     this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
     this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]

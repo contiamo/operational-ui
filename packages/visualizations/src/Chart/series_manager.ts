@@ -151,29 +151,30 @@ class ChartSeriesManager implements SeriesManager {
     const stackAxis: "x" | "y" = this.renderAs(stack)[0].stackAxis || "y"
     const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
 
-    const stackAccessors: Object<any> = this.renderAs(stack)[0].accessors
-    const stackAxisValue = (d: Datum): number =>
-      ((stackAccessors || {})[stackAxis] || this.state.current.get("accessors").renderer[stackAxis])({}, d)
-    const baseAxisValue = (d: Datum): number =>
-      ((stackAccessors || {})[baseAxis] || this.state.current.get("accessors").renderer[baseAxis])({}, d)
+    const value = (series: Object<any>, axis: "x" | "y") => {
+      const seriesAccessors: SeriesAccessors = this.state.current.get("accessors").series
+      const attribute: any = (axis === "x" ? seriesAccessors.xAttribute : seriesAccessors.yAttribute)(series)
+      return get(attribute)
+    }
 
     // Transform data into suitable structure for d3 stack
+    const seriesAccessors: SeriesAccessors = this.state.current.get("accessors").series
+    const baseValues = reduce((memo: any[], series: Object<any>): any => {
+      return memo.concat(map(value(series, baseAxis))(series.data))
+    }, [])(stackedSeries)
+
     const dataToStack = flow(
-      map(get("data")),
-      reduce((memo: any[], data: Datum[]): any[] => {
-        return memo.concat(map((d: Datum): any => baseAxisValue(d))(data))
-      }, []),
       uniqBy(String),
       map((baseValue: string | number | Date) => {
         return { [baseAxis]: baseValue }
       }),
       sortBy(baseAxis as any)
-    )(stackedSeries)
+    )(baseValues)
 
     forEach((series: Object<any>) => {
       forEach((datum: Datum) => {
-        const newDatum = find((d: any) => String(d[baseAxis]) === String(baseAxisValue(datum)))(dataToStack)
-        newDatum[series.key] = stackAxisValue(datum)
+        const newDatum = find((d: any) => String(d[baseAxis]) === String(value(series, baseAxis)(datum)))(dataToStack)
+        newDatum[series.key] = value(series, stackAxis)(datum)
       })(series.data)
     })(stackedSeries)
 
@@ -189,6 +190,9 @@ class ChartSeriesManager implements SeriesManager {
     forEach((series: any) => {
       const originalSeries: Object<any> = find({ key: series.key })(stackedSeries)
       // @TODO typing
+      const xAttribute: string = this.state.current.get("accessors").series.xAttribute(originalSeries)
+      const yAttribute: string = this.state.current.get("accessors").series.yAttribute(originalSeries)
+
       originalSeries.data = map((datum: any): Datum => {
         return {
           [baseAxis]: datum.data[baseAxis],
@@ -199,15 +203,9 @@ class ChartSeriesManager implements SeriesManager {
       })(series)
       originalSeries.stacked = true
       originalSeries.stackIndex = index + 1
+      originalSeries.xAttribute = "x"
+      originalSeries.yAttribute = "y"
     })(stackedData)
-
-    // Reset renderer axis accessors, not applicable to new series
-    forEach((options: any) => {
-      if (options.accessors) {
-        delete options.accessors.x
-        delete options.accessors.y
-      }
-    })(this.renderAs(this.renderAs(stack)[0]))
   }
 
   private computeRange(range: Object<any>, index: number): void {

@@ -78,10 +78,9 @@ var Line = /** @class */ (function () {
     };
     Line.prototype.assignAccessors = function (customAccessors) {
         var _this = this;
-        var axisAcessors = this.state.current.get("accessors").renderer;
-        var accessors = fp_1.defaults(fp_1.merge(defaultAccessors)(axisAcessors))(customAccessors);
-        this.x = function (d) { return aOrB(accessors.x(_this.series, d), d.injectedX); };
-        this.y = function (d) { return aOrB(accessors.y(_this.series, d), d.injectedY); };
+        var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
+        this.x = function (d) { return aOrB(_this.series.x(d), d.injectedX); };
+        this.y = function (d) { return aOrB(_this.series.y(d), d.injectedY); };
         this.color = function (d) { return accessors.color(_this.series, d); };
         this.dashed = function (d) { return accessors.dashed(_this.series, d); };
         this.interpolate = function (d) { return interpolator[accessors.interpolate(_this.series, d)]; };

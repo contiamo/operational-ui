@@ -18,11 +18,12 @@ var ChartSeries = /** @class */ (function () {
     };
     ChartSeries.prototype.assignAccessors = function () {
         var _this = this;
-        var accessors = this.state.current.get("accessors").series;
         fp_1.forEach.convert({ cap: false })(function (accessor, key) {
             ;
             _this[key] = function () { return accessor(_this.options); };
-        })(accessors);
+        })(this.state.current.get("accessors").series);
+        this.x = function (d) { return d[_this.xAttribute()]; };
+        this.y = function (d) { return d[_this.yAttribute()]; };
     };
     ChartSeries.prototype.updateRenderers = function () {
         var _this = this;

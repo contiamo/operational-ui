@@ -1,4 +1,4 @@
-import { compact, defaults, filter, get, includes, isFinite, map, merge } from "lodash/fp"
+import { compact, defaults, filter, get, includes, isFinite, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import { setRectAttributes } from "../../../utils/d3_utils"
@@ -12,7 +12,6 @@ import {
   EventBus,
   Object,
   RendererAccessor,
-  RendererAxesAccessors,
   RendererClass,
   RendererOptions,
   RendererType,
@@ -130,10 +129,9 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<BarsRendererAccessors>): void {
-    const axisAcessors: RendererAxesAccessors = this.state.current.get("accessors").renderer
-    const accessors: BarsRendererAccessors = defaults(merge(defaultAccessors)(axisAcessors))(customAccessors)
-    this.x = (d: Datum): any => accessors.x(this.series, d) || d.injectedX
-    this.y = (d: Datum): any => accessors.y(this.series, d) || d.injectedY
+    const accessors: BarsRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    this.x = (d: Datum): any => this.series.x(d) || d.injectedX
+    this.y = (d: Datum): any => this.series.y(d) || d.injectedY
     this.color = (d?: Datum): string => accessors.color(this.series, d)
     this.barWidth = (d?: Datum): number => accessors.barWidth(this.series, d)
   }

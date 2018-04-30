@@ -58,22 +58,18 @@ export interface ChartConfig extends Config {
 }
 export declare type RendererType = "area" | "bars" | "flag" | "line" | "symbol" | "text";
 export declare type RendererAccessor<T> = (series?: any, d?: Datum) => T;
-export interface RendererAxesAccessors {
-    x: RendererAccessor<number | string | Date>;
-    y: RendererAccessor<number | string | Date>;
-}
 export declare type InterpolationOption = "cardinal" | "linear" | "monotoneX" | "monotoneY" | "step" | "stepAfter" | "stepBefore";
-export interface LinearRendererAccessors extends RendererAxesAccessors {
+export interface LinearRendererAccessors {
     color: RendererAccessor<string>;
     interpolate: RendererAccessor<InterpolationOption>;
     closeGaps: RendererAccessor<boolean>;
 }
 export declare type AreaRendererAccessors = LinearRendererAccessors;
-export interface BarsRendererAccessors extends RendererAxesAccessors {
+export interface BarsRendererAccessors {
     color: RendererAccessor<string>;
     barWidth: RendererAccessor<number>;
 }
-export interface FlagRendererAccessors extends RendererAxesAccessors {
+export interface FlagRendererAccessors {
     color: RendererAccessor<string>;
     description: RendererAccessor<string>;
     direction: RendererAccessor<"up" | "down">;
@@ -83,13 +79,13 @@ export interface LineRendererAccessors extends LinearRendererAccessors {
     dashed: RendererAccessor<boolean>;
 }
 export declare type RangeRendererAccessors = LinearRendererAccessors;
-export interface SymbolRendererAccessors extends RendererAxesAccessors {
+export interface SymbolRendererAccessors {
     stroke: RendererAccessor<string>;
     fill: RendererAccessor<string>;
     symbol: RendererAccessor<string>;
     size: RendererAccessor<number>;
 }
-export interface TextRendererAccessors extends RendererAxesAccessors {
+export interface TextRendererAccessors {
     color: RendererAccessor<string>;
     size: RendererAccessor<number>;
 }
@@ -129,6 +125,8 @@ export interface SeriesAccessors {
     renderAs: SeriesAccessor<RendererOptions<any>[]>;
     unit: SeriesAccessor<string>;
     axis: SeriesAccessor<AxisPosition>;
+    xAttribute: SeriesAccessor<string>;
+    yAttribute: SeriesAccessor<string>;
     xAxis: SeriesAccessor<"x1" | "x2">;
     yAxis: SeriesAccessor<"y1" | "y2">;
 }
@@ -197,7 +195,6 @@ export interface DataAccessors {
 export interface AccessorsObject {
     data: DataAccessors;
     series: SeriesAccessors;
-    renderer: RendererAxesAccessors;
 }
 export interface Computed {
     axes: Object<any>;

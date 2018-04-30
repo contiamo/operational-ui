@@ -54,6 +54,10 @@ class ChartSeries {
   axis: () => AxisPosition // Only used for flags
   xAxis: () => "x1" | "x2"
   yAxis: () => "y1" | "y2"
+  xAttribute: () => string
+  yAttribute: () => string
+  x: (d: Datum) => number | string | Date
+  y: (d: Datum) => number | string | Date
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, options: Object<any>) {
     this.state = state
@@ -70,10 +74,11 @@ class ChartSeries {
   }
 
   assignAccessors(): void {
-    const accessors: SeriesAccessors = this.state.current.get("accessors").series
     forEach.convert({ cap: false })((accessor: SeriesAccessor<any>, key: string) => {
       ;(this as any)[key] = (): any => accessor(this.options)
-    })(accessors)
+    })(this.state.current.get("accessors").series)
+    this.x = (d: Datum) => d[this.xAttribute()]
+    this.y = (d: Datum) => d[this.yAttribute()]
   }
 
   private updateRenderers(): void {

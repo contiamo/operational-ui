@@ -1,25 +1,17 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const AxesAccessors = {
-  x: (series, d) => d.y,
-  y: (series, d) => d.x
-}
-
 const AreaRenderer = {
   type: "area",
-  accessors: { ...AxesAccessors }
 }
 
 const LineRenderer = {
   type: "line",
-  accessors: { ...AxesAccessors }
 }
 
 const AreaRendererWithColor = {
   type: "area",
   accessors: {
-    ...AxesAccessors,
     color: () => "#ccc"
   }
 }
@@ -27,7 +19,6 @@ const AreaRendererWithColor = {
 const AreaRendererWithInterpolation = {
   type: "area",
   accessors: {
-    ...AxesAccessors,
     color: () => "#ccc",
     interpolate: () => "monotoneY"
   }
@@ -36,7 +27,6 @@ const AreaRendererWithInterpolation = {
 const LineRendererWithInterpolation = {
   type: "line",
   accessors: {
-    ...AxesAccessors,
     interpolate: () => "monotoneY"
   }
 }
@@ -44,7 +34,6 @@ const LineRendererWithInterpolation = {
 const AreaRendererWithGaps = {
   type: "area",
   accessors: {
-    ...AxesAccessors,
     color: () => "#ccc",
     interpolate: () => "monotoneY",
     closeGaps: () => false
@@ -54,7 +43,6 @@ const AreaRendererWithGaps = {
 const LineRendererWithGaps = {
   type: "line",
   accessors: {
-    ...AxesAccessors,
     interpolate: () => "monotoneY",
     closeGaps: () => false
   }
@@ -63,7 +51,6 @@ const LineRendererWithGaps = {
 const LineRendererDashed = {
   type: "line",
   accessors: {
-    ...AxesAccessors,
     interpolate: () => "monotoneY",
     closeGaps: () => false,
     dashed: () => true
@@ -81,6 +68,8 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 14), y: undefined },
           { x: new Date(2018, 2, 15), y: 200 }
         ],
+        xAttribute: "y",
+        yAttribute: "x",
         name: "Pageviews 2018",
         key: "series1",
         interpolate: "step",
@@ -96,6 +85,8 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 16), y: 234 },
           { x: new Date(2018, 2, 17), y: 123 }
         ],
+        xAttribute: "y",
+        yAttribute: "x",
         name: "Pageviews 2017",
         xAxis: "x2",
         key: "series2",

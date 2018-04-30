@@ -1,15 +1,9 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const AxesAccessors = {
-  x: (series: any, d: any) => d.y,
-  y: (series: any, d: any) => d.x
-}
-
 const LineRenderer = {
   type: "line",
   accessors: {
-    ...AxesAccessors,
     interpolate: () => "monotoneY"
   }
 }
@@ -17,7 +11,6 @@ const LineRenderer = {
 const AreaRenderer = {
   type: "area",
   accessors: {
-    ...AxesAccessors,
     interpolate: () => "monotoneY"
   }
 }
@@ -25,7 +18,6 @@ const AreaRenderer = {
 const SymbolRenderer = {
   type: "symbol",
   accessors: {
-    ...AxesAccessors,
     size: (seris: any, d: any) => 10
   }
 }
@@ -51,6 +43,8 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 200 + 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 + 500) }
             ],
+            xAttribute: "y",
+            yAttribute: "x",
             name: "New Users",
             key: "series1"
           },
@@ -65,6 +59,8 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 200 + 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 + 500) }
             ],
+            xAttribute: "y",
+            yAttribute: "x",
             name: "Existing Users",
             key: "series2"
           }

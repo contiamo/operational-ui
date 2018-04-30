@@ -91,24 +91,24 @@ var ChartSeriesManager = /** @class */ (function () {
         // By default, stacks are vertical
         var stackAxis = this.renderAs(stack)[0].stackAxis || "y";
         var baseAxis = stackAxis === "y" ? "x" : "y";
-        var stackAccessors = this.renderAs(stack)[0].accessors;
-        var stackAxisValue = function (d) {
-            return ((stackAccessors || {})[stackAxis] || _this.state.current.get("accessors").renderer[stackAxis])({}, d);
-        };
-        var baseAxisValue = function (d) {
-            return ((stackAccessors || {})[baseAxis] || _this.state.current.get("accessors").renderer[baseAxis])({}, d);
+        var value = function (series, axis) {
+            var seriesAccessors = _this.state.current.get("accessors").series;
+            var attribute = (axis === "x" ? seriesAccessors.xAttribute : seriesAccessors.yAttribute)(series);
+            return fp_1.get(attribute);
         };
         // Transform data into suitable structure for d3 stack
-        var dataToStack = fp_1.flow(fp_1.map(fp_1.get("data")), fp_1.reduce(function (memo, data) {
-            return memo.concat(fp_1.map(function (d) { return baseAxisValue(d); })(data));
-        }, []), fp_1.uniqBy(String), fp_1.map(function (baseValue) {
+        var seriesAccessors = this.state.current.get("accessors").series;
+        var baseValues = fp_1.reduce(function (memo, series) {
+            return memo.concat(fp_1.map(value(series, baseAxis))(series.data));
+        }, [])(stackedSeries);
+        var dataToStack = fp_1.flow(fp_1.uniqBy(String), fp_1.map(function (baseValue) {
             return _a = {}, _a[baseAxis] = baseValue, _a;
             var _a;
-        }), fp_1.sortBy(baseAxis))(stackedSeries);
+        }), fp_1.sortBy(baseAxis))(baseValues);
         fp_1.forEach(function (series) {
             fp_1.forEach(function (datum) {
-                var newDatum = fp_1.find(function (d) { return String(d[baseAxis]) === String(baseAxisValue(datum)); })(dataToStack);
-                newDatum[series.key] = stackAxisValue(datum);
+                var newDatum = fp_1.find(function (d) { return String(d[baseAxis]) === String(value(series, baseAxis)(datum)); })(dataToStack);
+                newDatum[series.key] = value(series, stackAxis)(datum);
             })(series.data);
         })(stackedSeries);
         var seriesKeys = fp_1.map(this.key)(stackedSeries);
@@ -121,6 +121,8 @@ var ChartSeriesManager = /** @class */ (function () {
         fp_1.forEach(function (series) {
             var originalSeries = fp_1.find({ key: series.key })(stackedSeries);
             // @TODO typing
+            var xAttribute = _this.state.current.get("accessors").series.xAttribute(originalSeries);
+            var yAttribute = _this.state.current.get("accessors").series.yAttribute(originalSeries);
             originalSeries.data = fp_1.map(function (datum) {
                 return _a = {},
                     _a[baseAxis] = datum.data[baseAxis],
@@ -132,14 +134,9 @@ var ChartSeriesManager = /** @class */ (function () {
             })(series);
             originalSeries.stacked = true;
             originalSeries.stackIndex = index + 1;
+            originalSeries.xAttribute = "x";
+            originalSeries.yAttribute = "y";
         })(stackedData);
-        // Reset renderer axis accessors, not applicable to new series
-        fp_1.forEach(function (options) {
-            if (options.accessors) {
-                delete options.accessors.x;
-                delete options.accessors.y;
-            }
-        })(this.renderAs(this.renderAs(stack)[0]));
     };
     ChartSeriesManager.prototype.computeRange = function (range, index) {
         var rangeSeries = range.data;
