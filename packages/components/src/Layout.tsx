@@ -26,15 +26,15 @@ const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; i
     gridColumnStart: "1",
     gridColumnEnd: "span 1",
     gridRowStart: "1",
-    gridRowEnd: "span 1"
+    gridRowEnd: "span 1",
   },
   // Content
   "& > *:nth-child(3)": {
     gridColumnStart: "2",
     gridColumnEnd: "span 1",
     gridRowStart: "1",
-    gridRowEnd: "span 1"
-  }
+    gridRowEnd: "span 1",
+  },
 }))
 
 const Layout = (props: Props) => {

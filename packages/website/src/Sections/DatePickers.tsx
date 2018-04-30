@@ -13,7 +13,7 @@ export interface State {
 export class Component extends React.Component<{}, State> {
   state = {
     start: "2018-04-04",
-    end: "2018-04-14"
+    end: "2018-04-14",
   }
   render() {
     return (
@@ -23,7 +23,7 @@ export class Component extends React.Component<{}, State> {
           end={this.state.end}
           onChange={(change: { start?: string; end?: string }) => {
             this.setState(prevState => ({
-              ...change
+              ...change,
             }))
           }}
           label="Date picker label"

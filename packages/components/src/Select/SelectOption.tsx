@@ -30,13 +30,13 @@ const Container = glamorous.div(
 
       ":hover": {
         backgroundColor: darken(backgroundColor, 5),
-        color: readableTextColor(darken(backgroundColor, 5), ["black", "white"])
+        color: readableTextColor(darken(backgroundColor, 5), ["black", "white"]),
       },
 
       "&:not(:first-child)": {
         borderTop: "1px solid",
-        borderColor: darken(backgroundColor, 10)
-      }
+        borderColor: darken(backgroundColor, 10),
+      },
     }
   }
 )
@@ -50,8 +50,8 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
   transform: "translate3d(-50%, -50%, 0)",
   "& svg": {
     width: "100%",
-    height: "100%"
-  }
+    height: "100%",
+  },
 }))
 
 const SelectOption = (props: Props) => (

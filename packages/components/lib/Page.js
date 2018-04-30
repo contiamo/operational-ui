@@ -19,7 +19,7 @@ var Container = glamorous_1.default.div(function (_a) {
         backgroundColor: theme.colors.white,
         padding: "0px " + theme.spacing * 1.5 + "px",
         overflow: "auto",
-        height: "100%"
+        height: "100%",
     });
 });
 var TopBar = glamorous_1.default.div(function (_a) {
@@ -28,7 +28,7 @@ var TopBar = glamorous_1.default.div(function (_a) {
         height: theme.box,
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     });
 });
 var TitleBar = glamorous_1.default.div(function (_a) {
@@ -40,8 +40,8 @@ var ControlsContainer = glamorous_1.default.div(function (_a) {
     return ({
         marginLeft: theme.spacing,
         "& > :last-child": {
-            marginRight: 0
-        }
+            marginRight: 0,
+        },
     });
 });
 var BackLinkContainer = glamorous_1.default.div(function (_a) {
@@ -54,8 +54,8 @@ var BackLinkContainer = glamorous_1.default.div(function (_a) {
             marginRight: 4,
             position: "relative",
             top: 2,
-            left: -1
-        }
+            left: -1,
+        },
     });
 });
 var Page = function (props) { return (React.createElement(Container, null,

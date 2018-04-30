@@ -16,7 +16,7 @@ exports.inputFocus = function (_a) {
         outline: 0,
         border: "1px solid",
         borderColor: isError ? theme.colors.error : theme.colors.info,
-        boxShadow: "0 0 0 3px " + utils_1.lighten(isError ? theme.colors.error : theme.colors.info, 40)
+        boxShadow: "0 0 0 3px " + utils_1.lighten(isError ? theme.colors.error : theme.colors.info, 40),
     });
 };
 exports.Label = glamorous_1.default.label(function (_a) {
@@ -24,7 +24,7 @@ exports.Label = glamorous_1.default.label(function (_a) {
     return ({
         display: "inline-block",
         position: "relative",
-        minWidth: 240
+        minWidth: 240,
     });
 });
 exports.LabelText = glamorous_1.default.span(function (_a) {
@@ -39,7 +39,7 @@ exports.FormFieldControls = glamorous_1.default.div(function (_a) {
     return ({
         position: "absolute",
         top: 3,
-        right: 0
+        right: 0,
     });
 });
 exports.FormFieldControl = glamorous_1.default.div(function (_a) {
@@ -53,20 +53,20 @@ exports.FormFieldControl = glamorous_1.default.div(function (_a) {
         "& svg": {
             opacity: 0.4,
             position: "relative",
-            top: -1
+            top: -1,
         },
         // :nth-child(2) refers to the tooltip
         "& > :nth-child(2)": {
-            display: "none"
+            display: "none",
         },
         ":hover": {
             "& svg": {
-                opacity: 1
+                opacity: 1,
             },
             "& > :nth-child(2)": {
-                display: "block"
-            }
-        }
+                display: "block",
+            },
+        },
     });
 });
 exports.FormFieldError = glamorous_1.default.div(function (_a) {

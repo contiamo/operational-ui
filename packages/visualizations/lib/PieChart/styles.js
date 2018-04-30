@@ -10,18 +10,18 @@ var comparisonLegendStyle = {
         width: "10px",
         height: "10px",
         margin: "2px 3px 0 0",
-        float: "left"
+        float: "left",
     },
     "& div.name": {
-        float: "left"
-    }
+        float: "left",
+    },
 };
 var comparisonLegendLineStyle = {
     width: "4px",
     height: "0px",
     border: "1px solid #747474",
     margin: "5px 3px 3px 3px",
-    float: "left"
+    float: "left",
 };
 exports.comparisonLegend = styles_1.seriesLegend;
 exports.comparisonLegendLine = glamor_1.css(comparisonLegendLineStyle).toString();

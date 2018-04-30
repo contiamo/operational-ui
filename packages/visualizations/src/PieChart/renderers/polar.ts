@@ -25,7 +25,7 @@ import {
   Renderer,
   RendererAccessor,
   RendererAccessors,
-  State
+  State,
 } from "../typings"
 
 const ANGLE_RANGE: [number, number] = [0, 2 * Math.PI]
@@ -113,7 +113,7 @@ class Polar implements Renderer {
   private arcAttributes(): Object<any> {
     return {
       path: this.arcTween.bind(this),
-      fill: this.color.bind(this)
+      fill: this.color.bind(this),
     }
   }
 
@@ -142,7 +142,7 @@ class Polar implements Renderer {
 
     this.currentTranslation = [
       (drawing.width - newCurrent.width) / 2 + drawing.left - newCurrent.left,
-      (drawing.height - newCurrent.height) / 2 + drawing.top - newCurrent.top
+      (drawing.height - newCurrent.height) / 2 + drawing.top - newCurrent.top,
     ]
     this.el.attr("transform", Utils.translateString(this.currentTranslation))
   }
@@ -192,7 +192,7 @@ class Polar implements Renderer {
 
     const d: ComputedInitial = {
       layout: Utils.layout(this.angleValue, ANGLE_RANGE),
-      total: Utils.computeTotal(this.data, this.value)
+      total: Utils.computeTotal(this.data, this.value),
     }
 
     // data should not become part of this.previousComputed in first computation
@@ -204,7 +204,7 @@ class Polar implements Renderer {
     this.computed = {
       ...d,
       ...this.computeArcs({ data, ...d }),
-      data
+      data,
     }
   }
 
@@ -229,7 +229,7 @@ class Polar implements Renderer {
         .outerRadius(r),
       arcOver: d3Arc()
         .innerRadius(rInnerHover)
-        .outerRadius(rHover)
+        .outerRadius(rHover),
     }
   }
 
@@ -238,7 +238,7 @@ class Polar implements Renderer {
     const scale: any = d3ScaleSqrt()
       .range([
         this.state.current.get("config").minInnerRadius,
-        Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin
+        Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin,
       ])
       .domain([0, domainMax])
     return (d: Datum): number => scale(this.value(d)) * scaleFactor
@@ -263,7 +263,7 @@ class Polar implements Renderer {
     const datumInfo: DatumInfo = {
       key: this.key(d),
       value: this.value(d),
-      percentage: d.data.percentage
+      percentage: d.data.percentage,
     }
     const centroid: [number, number] = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
@@ -300,7 +300,7 @@ class Polar implements Renderer {
     return map((datum: Datum): LegendDatum => {
       return {
         label: this.key(datum),
-        color: this.color(datum)
+        color: this.color(datum),
       }
     })(this.data)
   }

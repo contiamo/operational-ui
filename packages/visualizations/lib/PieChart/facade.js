@@ -24,7 +24,7 @@ var PieChartFacade = /** @class */ (function () {
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
-            computed: this.initialComputed()
+            computed: this.initialComputed(),
         });
     };
     PieChartFacade.prototype.initialConfig = function () {
@@ -48,25 +48,25 @@ var PieChartFacade = /** @class */ (function () {
             showComponentFocus: false,
             uid: fp_1.uniqueId("piechart"),
             visualizationName: "piechart",
-            width: 500
+            width: 500,
         };
     };
     PieChartFacade.prototype.initialAccessors = function () {
         return {
             data: {
-                data: function (d) { return d.data; }
+                data: function (d) { return d.data; },
             },
             series: {
                 name: function (d) { return d.name || ""; },
-                renderAs: function (d) { return d.renderAs; }
-            }
+                renderAs: function (d) { return d.renderAs; },
+            },
         };
     };
     PieChartFacade.prototype.initialComputed = function () {
         return {
             canvas: {},
             focus: {},
-            series: {}
+            series: {},
         };
     };
     PieChartFacade.prototype.insertCanvas = function () {
@@ -77,8 +77,8 @@ var PieChartFacade = /** @class */ (function () {
             legend: new legend_1.default(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, this.canvas.elementFor("legend")),
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
                 main: this.canvas.elementFor("focus"),
-                component: this.canvas.elementFor("componentFocus")
-            })
+                component: this.canvas.elementFor("componentFocus"),
+            }),
         };
     };
     PieChartFacade.prototype.insertSeries = function () {

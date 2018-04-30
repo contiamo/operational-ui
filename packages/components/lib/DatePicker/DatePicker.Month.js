@@ -10,7 +10,7 @@ var setNewDate = function (date, current) {
     var _a = [newStart, newEnd].sort(), sortedNewStart = _a[0], sortedNewEnd = _a[1];
     return {
         start: sortedNewStart,
-        end: sortedNewEnd
+        end: sortedNewEnd,
     };
 };
 var isSelected = function (date, current) {

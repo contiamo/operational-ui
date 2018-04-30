@@ -13,7 +13,7 @@ var glamorous_1 = require("glamorous");
 var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div({
     label: "sidenavheader",
-    width: "100%"
+    width: "100%",
 });
 var Content = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isActive = _a.isActive, isExpanded = _a.isExpanded;
@@ -31,8 +31,8 @@ var Content = glamorous_1.default.div(function (_a) {
         borderBottom: isExpanded ? "1px solid #395568" : "none",
         backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
         ":hover": {
-            backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)"
-        }
+            backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)",
+        },
     });
 });
 var Label = glamorous_1.default.div(function (_a) {
@@ -47,7 +47,7 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flex: "0 0 " + theme.box + "px"
+        flex: "0 0 " + theme.box + "px",
     });
 });
 var SidenavHeader = function (props) { return (

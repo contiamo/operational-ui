@@ -72,7 +72,7 @@ var Links = /** @class */ (function () {
             type: "link",
             x: (d.source().x + d.target().x) / 2,
             y: (d.source().y + d.target().y) / 2,
-            id: d.sourceId() + "->" + d.targetId()
+            id: d.sourceId() + "->" + d.targetId(),
         };
     };
     Links.prototype.onMouseOut = function () {

@@ -5,11 +5,11 @@ var glamorous_1 = require("glamorous");
 var glamor_1 = require("glamor");
 var spin = glamor_1.css.keyframes({
     "0%": {
-        transform: "scale(1)"
+        transform: "scale(1)",
     },
     "100%": {
-        transform: "scale(0.75)"
-    }
+        transform: "scale(0.75)",
+    },
 });
 var size = 30;
 var Container = glamorous_1.default.div(function (_a) {
@@ -17,7 +17,7 @@ var Container = glamorous_1.default.div(function (_a) {
     return ({
         label: "spinner",
         width: size,
-        height: size
+        height: size,
     });
 });
 var animationTimeUnit = 0.6;
@@ -40,17 +40,17 @@ var PulsingCube = glamorous_1.default.div(function (_a) {
         backgroundColor: theme.colors.info,
         // Increasing the negative animation delay clockwise
         "&:nth-child(1)": {
-            animationDelay: "0s"
+            animationDelay: "0s",
         },
         "&:nth-child(2)": {
-            animationDelay: -1 * f * animationTimeUnit + "s"
+            animationDelay: -1 * f * animationTimeUnit + "s",
         },
         "&:nth-child(4)": {
-            animationDelay: -2 * f * animationTimeUnit + "s"
+            animationDelay: -2 * f * animationTimeUnit + "s",
         },
         "&:nth-child(3)": {
-            animationDelay: -3 * f * animationTimeUnit + "s"
-        }
+            animationDelay: -3 * f * animationTimeUnit + "s",
+        },
     });
 });
 var Spinner = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className },

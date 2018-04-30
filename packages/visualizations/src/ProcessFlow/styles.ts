@@ -5,30 +5,30 @@ import { setBrightness } from "@operational/utils"
 const breakdownStyle = {
   maxWidth: "350px",
   padding: "6px",
-  background: "white"
+  background: "white",
 }
 
 const breakdownsContainerStyle = {
   width: "350px",
   float: "left",
-  padding: "7px 0"
+  padding: "7px 0",
 }
 
 const breakdownContainerStyle = {
   padding: `${theme.spacing / 2}px`,
   background: theme.colors.white,
   width: "49%",
-  float: "left"
+  float: "left",
 }
 
 const breakdownLabelStyle = {
   ...theme.typography.small,
   display: "block",
-  marginBottom: theme.spacing / 4
+  marginBottom: theme.spacing / 4,
 }
 
 const breakdownCommentLabelStyle = {
-  marginLeft: "6px"
+  marginLeft: "6px",
 }
 
 const breakdownBackgroundBarStyle = {
@@ -36,7 +36,7 @@ const breakdownBackgroundBarStyle = {
   width: "100%",
   fontSize: 12,
   overflow: "hidden",
-  backgroundColor: theme.colors.lightGray
+  backgroundColor: theme.colors.lightGray,
 }
 
 const breakdownBarStyle = {
@@ -48,7 +48,7 @@ const breakdownBarStyle = {
   display: "block",
   height: "100%",
   pointerEvents: "none",
-  backgroundColor: setBrightness(theme.colors.info, 145)
+  backgroundColor: setBrightness(theme.colors.info, 145),
 }
 
 const breakdownTextStyle = {
@@ -57,19 +57,19 @@ const breakdownTextStyle = {
   position: "relative",
   top: 1,
   fontWeight: 400,
-  padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`
+  padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
 }
 
 const titleStyle = {
   fontWeight: "bold",
   color: "#555",
   "& span": {
-    fontWeight: "normal"
-  }
+    fontWeight: "normal",
+  },
 }
 
 const contentStyle = {
-  paddingTop: "15px"
+  paddingTop: "15px",
 }
 
 export const breakdown = css(breakdownStyle).toString()

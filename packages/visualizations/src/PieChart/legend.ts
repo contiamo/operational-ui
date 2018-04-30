@@ -1,6 +1,5 @@
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import * as $ from "jquery"
 import { every, filter, find, forEach, get, groupBy, keys, map, some } from "lodash/fp"
 import * as localStyles from "./styles"
 import * as globalStyles from "../utils/styles"
@@ -14,7 +13,7 @@ import {
   LegendDatum,
   PieChartConfig,
   State,
-  StateWriter
+  StateWriter,
 } from "./typings"
 
 class PieChartLegend implements Legend {
@@ -108,17 +107,17 @@ class PieChartLegend implements Legend {
     return datum.comparison
       ? {
           options: {
-            key: datum.label
+            key: datum.label,
           },
           seriesType: "comparison",
-          type: "series"
+          type: "series",
         }
       : {
           options: {
             color: datum.color,
-            key: datum.label
+            key: datum.label,
           },
-          type: "config"
+          type: "config",
         }
   }
 

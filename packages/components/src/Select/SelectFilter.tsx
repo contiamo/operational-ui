@@ -26,8 +26,8 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
       padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}`,
       border: 0,
       outline: "none",
-      font: "inherit"
-    }
+      font: "inherit",
+    },
   }
 })
 

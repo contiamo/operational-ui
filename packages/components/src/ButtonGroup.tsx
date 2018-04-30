@@ -12,17 +12,17 @@ export interface Props {
 const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   label: "buttongroup",
   "& > div": {
-    margin: 0
+    margin: 0,
   },
   "& > div:not(:first-child)": {
     borderLeft: 0,
     borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0
+    borderBottomLeftRadius: 0,
   },
   "& > div:not(:last-child)": {
     borderTopRightRadius: 0,
-    borderBottomRightRadius: 0
-  }
+    borderBottomRightRadius: 0,
+  },
 }))
 
 const ButtonGroup = (props: Props) => (

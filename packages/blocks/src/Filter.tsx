@@ -13,25 +13,25 @@ export interface State {
 }
 
 const Container = glamorous.div({
-  label: "filter"
+  label: "filter",
 })
 
 const FilterBar = glamorous.div({
   "& > div": {
-    display: "inline-flex"
-  }
+    display: "inline-flex",
+  },
 })
 
 const FormFields = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& > label, & > div": {
     margin: `${theme.spacing}px 0`,
-    display: "block"
-  }
+    display: "block",
+  },
 }))
 
 class Filter extends React.Component<Props, State> {
   state: State = {
-    isExpanded: false
+    isExpanded: false,
   }
 
   render() {
@@ -87,7 +87,7 @@ class Filter extends React.Component<Props, State> {
             color="#efefef"
             onIconClick={() => {
               this.setState(prevState => ({
-                isExpanded: true
+                isExpanded: true,
               }))
             }}
             icon="Plus"
@@ -99,7 +99,7 @@ class Filter extends React.Component<Props, State> {
           <Modal
             onClose={() => {
               this.setState(prevState => ({
-                isExpanded: false
+                isExpanded: false,
               }))
             }}
           >

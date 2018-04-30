@@ -19,7 +19,7 @@ import {
   SeriesEl,
   State,
   TLink,
-  TNode
+  TNode,
 } from "../typings"
 
 const MINOPACITY: number = 0.5,
@@ -107,7 +107,7 @@ class Links implements Renderer {
       type: "link",
       x: (d.source().x + d.target().x) / 2,
       y: (d.source().y + d.target().y) / 2,
-      id: `${d.sourceId()}->${d.targetId()}`
+      id: `${d.sourceId()}->${d.targetId()}`,
     }
   }
 

@@ -18,15 +18,15 @@ var Container = glamorous_1.default.div(function (_a) {
             gridColumnStart: "1",
             gridColumnEnd: "span 1",
             gridRowStart: "1",
-            gridRowEnd: "span 1"
+            gridRowEnd: "span 1",
         },
         // Content
         "& > *:nth-child(3)": {
             gridColumnStart: "2",
             gridColumnEnd: "span 1",
             gridRowStart: "1",
-            gridRowEnd: "span 1"
-        }
+            gridRowEnd: "span 1",
+        },
     });
 });
 var Layout = function (props) {

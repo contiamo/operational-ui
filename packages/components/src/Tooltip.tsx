@@ -49,28 +49,28 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
       if (position === "top") {
         return {
           left: "50%",
-          transform: "translate3d(-50%, calc(-100% - 6px), 0)"
+          transform: "translate3d(-50%, calc(-100% - 6px), 0)",
         }
       }
       if (position === "bottom") {
         return {
           left: "50%",
           top: "100%",
-          transform: "translate3d(-50%, 6px, 0)"
+          transform: "translate3d(-50%, 6px, 0)",
         }
       }
       if (position === "left") {
         return {
           top: "50%",
           left: -6,
-          transform: "translate3d(-100%, -50%, 0)"
+          transform: "translate3d(-100%, -50%, 0)",
         }
       }
       if (position === "right") {
         return {
           top: "50%",
           right: -6,
-          transform: "translate3d(100%, -50%, 0)"
+          transform: "translate3d(100%, -50%, 0)",
         }
       }
       return {}
@@ -85,7 +85,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
       left: theme.spacing * -2,
       display: "block",
       width: theme.spacing * 2,
-      height: "100%"
+      height: "100%",
     },
 
     // They say behind every great tooltip is a great caret.
@@ -102,7 +102,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
             left: `calc(50% - 6px)`,
             borderLeft: "6px solid transparent",
             borderRight: "6px solid transparent",
-            borderTop: `6px solid ${backgroundColor}`
+            borderTop: `6px solid ${backgroundColor}`,
           }
         }
         if (position === "bottom") {
@@ -111,7 +111,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
             left: `calc(50% - 6px)`,
             borderLeft: "6px solid transparent",
             borderRight: "6px solid transparent",
-            borderBottom: `6px solid ${backgroundColor}`
+            borderBottom: `6px solid ${backgroundColor}`,
           }
         }
         if (position === "left") {
@@ -120,7 +120,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
             top: `calc(50% - 6px)`,
             borderTop: "6px solid transparent",
             borderBottom: "6px solid transparent",
-            borderLeft: `6px solid ${backgroundColor}`
+            borderLeft: `6px solid ${backgroundColor}`,
           }
         }
         if (position === "right") {
@@ -129,12 +129,12 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
             top: `calc(50% - 6px)`,
             borderTop: "6px solid transparent",
             borderBottom: "6px solid transparent",
-            borderRight: `6px solid ${backgroundColor}`
+            borderRight: `6px solid ${backgroundColor}`,
           }
         }
         return {}
-      })()
-    }
+      })(),
+    },
   }
 })
 
@@ -143,7 +143,7 @@ class Tooltip extends React.Component<Props, State> {
     bbTop: 0,
     bbLeft: 0,
     bbRight: 0,
-    bbBottom: 0
+    bbBottom: 0,
   }
   containerNode: HTMLElement
   render() {
@@ -186,7 +186,7 @@ class Tooltip extends React.Component<Props, State> {
       bbTop: bbRect.top,
       bbBottom: bbRect.bottom,
       bbLeft: bbRect.left,
-      bbRight: bbRect.right
+      bbRight: bbRect.right,
     }))
   }
 }

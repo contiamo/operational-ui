@@ -6,5 +6,5 @@ export interface Props {
     index?: number;
     title?: string;
 }
-declare const Tab: ({children, ...rest}: Props) => JSX.Element;
+declare const Tab: ({ children, ...rest }: Props) => JSX.Element;
 export default Tab;
