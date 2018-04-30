@@ -94,7 +94,7 @@ class SunburstCanvas implements Canvas {
     const config: SunburstConfig = this.state.current.get("config")
     const dims: Object<number> = {
       width: config.width,
-      height: config.height - this.breadcrumb.node().getBoundingClientRect().height,
+      height: config.height - this.breadcrumb.node().getBoundingClientRect().height
     }
     this.stateWriter("drawingDims", dims)
     return dims

@@ -18,14 +18,14 @@ export const Container: GlamorousComponent<ContainerProps, ContainerProps & { th
   ({ isExpanded, theme }): CSSProperties => ({
     label: "datepicker",
     width: inputDefaultWidth,
-    position: "relative",
+    position: "relative"
   })
 )
 
 export const DatePickerCard = glamorous.div(
   {
     position: "absolute",
-    left: 0,
+    left: 0
   },
   ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): CSSProperties => ({
     backgroundColor: theme.colors.white,
@@ -37,7 +37,7 @@ export const DatePickerCard = glamorous.div(
     top: inputHeight + 6,
     padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
     width: inputDefaultWidth,
-    zIndex: theme.baseZIndex + 1000,
+    zIndex: theme.baseZIndex + 1000
   })
 )
 
@@ -63,11 +63,11 @@ export const Toggle: GlamorousComponent<
   borderColor: theme.colors.inputBorder,
   "& svg": {
     position: "relative",
-    pointerEvents: "none",
+    pointerEvents: "none"
   },
   ":hover": {
-    backgroundColor: theme.colors.lighterBackground,
-  },
+    backgroundColor: theme.colors.lighterBackground
+  }
 }))
 
 export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -76,14 +76,14 @@ export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { 
   "& > *": {
     margin: `0 6px`,
     verticalAlign: "middle",
-    display: "inline-block",
+    display: "inline-block"
   },
   "& > span": {
     ...theme.typography.body,
     userSelect: "none",
     width: 120,
-    textAlign: "center",
-  },
+    textAlign: "center"
+  }
 }))
 
 export const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
@@ -91,13 +91,13 @@ export const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamor
   padding: 4,
   height: "auto",
   width: "fit-content",
-  cursor: "pointer",
+  cursor: "pointer"
 })
 
 export const Days: GlamorousComponent<{}, {}> = glamorous.div({
   textAlign: "center",
   width: 210,
-  margin: "auto -1px",
+  margin: "auto -1px"
 })
 
 export const Day: GlamorousComponent<
@@ -114,12 +114,12 @@ export const Day: GlamorousComponent<
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    border: "1px solid #efefef",
+    border: "1px solid #efefef"
   },
   ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
     ...theme.typography.body,
     backgroundColor: selected ? theme.colors.info : "transparent",
-    color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black,
+    color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black
   })
 )
 
@@ -135,7 +135,7 @@ export const Input = glamorous.input(({ theme, isExpanded }: { theme: Theme; isE
   width: 200,
   position: "relative",
   "&:focus": mixins.inputFocus({ theme }),
-  ...isExpanded ? mixins.inputFocus({ theme }) : {},
+  ...isExpanded ? mixins.inputFocus({ theme }) : {}
 }))
 
 export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => void }, {}> = glamorous.div(
@@ -155,8 +155,8 @@ export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => voi
     "&:hover": {
       opacity: 1,
       "& svg": {
-        stroke: theme.colors.warning,
-      },
-    },
+        stroke: theme.colors.warning
+      }
+    }
   })
 )

@@ -24,7 +24,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
-  width: "fit-content",
+  width: "fit-content"
 }))
 
 const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
@@ -34,12 +34,12 @@ const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isEx
   boxShadow: theme.shadows.popup,
   width: "fit-content",
   zIndex: theme.baseZIndex + 300,
-  ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" },
+  ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }
 }))
 
 class ContextMenu extends React.Component<Props, State> {
   state = {
-    isOpen: false,
+    isOpen: false
   }
 
   containerNode: any
@@ -57,7 +57,7 @@ class ContextMenu extends React.Component<Props, State> {
     }
     const newIsActive = isTargetInsideMenu ? this.state.isOpen : isTargetInsideContainer ? !this.state.isOpen : false
     this.setState(prevState => ({
-      isOpen: newIsActive,
+      isOpen: newIsActive
     }))
   }
 
@@ -83,11 +83,11 @@ class ContextMenu extends React.Component<Props, State> {
               (() => {
                 if (!this.props.keepOpenOnItemClick) {
                   this.setState(prevState => ({
-                    isOpen: false,
+                    isOpen: false
                   }))
                 }
                 onClick()
-              }),
+              })
           })
         )
       } else {

@@ -17,7 +17,7 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         padding: theme.spacing / 2 + "px " + theme.spacing + "px " + theme.spacing + "px",
         backgroundColor: theme.colors.background,
-        borderRadius: theme.borderRadius,
+        borderRadius: theme.borderRadius
     });
 });
 var HeaderContainer = glamorous_1.default.div(function (_a) {
@@ -28,8 +28,8 @@ var ControlContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         "& > *:last-child": {
-            marginRight: 0,
-        },
+            marginRight: 0
+        }
     });
 });
 var Content = glamorous_1.default.div(function (_a) {

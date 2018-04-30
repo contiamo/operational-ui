@@ -25,7 +25,7 @@ var Container = glamorous_1.default.div(function (_a) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(0, 0, 0, .6)",
+        backgroundColor: "rgba(0, 0, 0, .6)"
     });
 });
 var Content = glamorous_1.default.div(function (_a) {
@@ -33,7 +33,7 @@ var Content = glamorous_1.default.div(function (_a) {
     return ({
         backgroundColor: theme.colors.white,
         padding: theme.spacing,
-        boxShadow: theme.shadows.popup,
+        boxShadow: theme.shadows.popup
     });
 });
 var Modal = /** @class */ (function (_super) {
@@ -43,14 +43,15 @@ var Modal = /** @class */ (function (_super) {
     }
     Modal.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Container, { id: this.props.id, css: this.props.css, className: this.props.className, onClick: function (ev) {
+        var props = this.props;
+        return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, onClick: function (ev) {
                 if (_this.contentNode && !_this.contentNode.contains(ev.target)) {
-                    _this.props.onClose && _this.props.onClose();
+                    props.onClose && props.onClose();
                 }
             } },
             React.createElement(Content, { innerRef: function (contentNode) {
                     _this.contentNode = contentNode;
-                }, className: this.props.contentClassName, css: this.props.contentCss }, this.props.children)));
+                }, className: props.contentClassName, css: props.contentCss }, props.children)));
     };
     return Modal;
 }(React.Component));

@@ -16,7 +16,7 @@ var Container = glamorous_1.default.div(function (_a) {
         label: "table",
         width: "100%",
         position: "relative",
-        backgroundColor: "white",
+        backgroundColor: "white"
     });
 });
 var TableElement = glamorous_1.default.table(function (_a) {
@@ -30,29 +30,29 @@ var TableElement = glamorous_1.default.table(function (_a) {
         "& tr": {
             borderTop: "1px solid",
             borderBottom: "1px solid",
-            borderColor: theme.colors.separator,
+            borderColor: theme.colors.separator
         },
         "& tr:first-child": {
-            borderTop: 0,
+            borderTop: 0
         },
         "& tbody tr:last-child": {
-            borderBottom: 0,
+            borderBottom: 0
         },
         "& td": {
-            padding: theme.spacing / 2 + "px " + theme.spacing + "px",
+            padding: theme.spacing / 2 + "px " + theme.spacing + "px"
         },
         "& th": {
             padding: theme.spacing / 4 + "px " + theme.spacing + "px",
-            opacity: 0.4,
-        },
+            opacity: 0.4
+        }
     });
 });
 var TableBodyRow = glamorous_1.default.tr(function (_a) {
     var theme = _a.theme, isClickable = _a.isClickable;
     return ({
         ":hover": {
-            backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
-        },
+            backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent"
+        }
     });
 });
 var EmptyView = glamorous_1.default.div(function (_a) {

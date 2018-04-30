@@ -8,36 +8,36 @@ const arcStyle = {
   opacity: 0.8,
   fill: "#eee",
   "&.zoomable": {
-    cursor: "zoom-in",
+    cursor: "zoom-in"
   },
   "&.zoomed": {
-    cursor: "zoom-out",
+    cursor: "zoom-out"
   },
   "&.zoomed.parent": {
-    cursor: "default",
+    cursor: "default"
   },
   "&.empty": {
     stroke: "#aaa",
-    strokeDasharray: "5",
-  },
+    strokeDasharray: "5"
+  }
 }
 
 const labelStyle = {
   fill: "#333",
   stroke: "none",
-  ...theme.typography.small,
+  ...theme.typography.small
 }
 
 const totalStyle = {
   fill: "#4c4c4c",
-  ...theme.typography.small,
+  ...theme.typography.small
 }
 
 const breadcrumbStyle = {
   width: "100%",
   height: "40px",
   position: "relative",
-  overflow: "hidden",
+  overflow: "hidden"
 }
 
 const breadcrumbItemStyle = {
@@ -50,10 +50,10 @@ const breadcrumbItemStyle = {
   cursor: "pointer",
   margin: "5px 0",
   "&:first-child": {
-    paddingLeft: "5px",
+    paddingLeft: "5px"
   },
   "&.hops": {
-    width: "40px",
+    width: "40px"
   },
   "& .label": {
     pointerEvents: "none",
@@ -62,7 +62,7 @@ const breadcrumbItemStyle = {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
-    width: "65px",
+    width: "65px"
   },
   "& .background-arrow": {
     content: "''",
@@ -75,7 +75,7 @@ const breadcrumbItemStyle = {
     top: "50%",
     left: "100%",
     marginTop: "-16px",
-    zIndex: "2",
+    zIndex: "2"
   },
   "& .arrow": {
     content: "''",
@@ -88,13 +88,13 @@ const breadcrumbItemStyle = {
     top: "50%",
     left: "100%",
     marginTop: "-13px",
-    zIndex: "3",
-  },
+    zIndex: "3"
+  }
 }
 
 const centerCircleStyle = {
   fill: "#fff",
-  pointerEvents: "none",
+  pointerEvents: "none"
 }
 
 const rootLabelStyle = {
@@ -104,11 +104,11 @@ const rootLabelStyle = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   "& .name": {
-    ...theme.typography.small,
+    ...theme.typography.small
   },
   "& .value": {
-    ...theme.typography.heading1,
-  },
+    ...theme.typography.heading1
+  }
 }
 
 const arrowStyle = {
@@ -117,8 +117,8 @@ const arrowStyle = {
   strokeWidth: "1px",
   cursor: "zoom-in",
   "&:hover": {
-    stroke: "#aaa",
-  },
+    stroke: "#aaa"
+  }
 }
 
 export const arc = css(arcStyle).toString()

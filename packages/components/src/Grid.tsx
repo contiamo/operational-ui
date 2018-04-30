@@ -14,7 +14,7 @@ const getGridCSSProperties = (gridType: string): {} => {
   if (gridType === "IDE") {
     return {
       gridTemplateColumns: "200px auto",
-      gridTemplateRows: "auto",
+      gridTemplateRows: "auto"
     }
   }
   // Handle NxM case
@@ -24,7 +24,7 @@ const getGridCSSProperties = (gridType: string): {} => {
   if (!isNaN(cols) && !isNaN(rows)) {
     return {
       gridTemplateColumns: `repeat(${cols}, 1fr)`,
-      gridTemplateRows: `repeat(${rows}, 1fr)`,
+      gridTemplateRows: `repeat(${rows}, 1fr)`
     }
   }
   throw new Error(
@@ -40,7 +40,7 @@ const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: 
   padding: theme.spacing * 4 / 3,
   gridColumnGap: theme.spacing * 4 / 3,
   gridRowGap: theme.spacing * 4 / 3,
-  ...getGridCSSProperties(gridType),
+  ...getGridCSSProperties(gridType)
 }))
 
 const Grid = (props: Props) => (

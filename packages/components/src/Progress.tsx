@@ -27,21 +27,21 @@ const Container = glamorous.div(
     textAlign: "center",
     top: 0,
     left: 0,
-    position: "absolute",
+    position: "absolute"
   },
   ({ theme, fadeParent }: { theme: Theme; fadeParent: boolean }) => ({
     zIndex: theme.baseZIndex + 300,
-    backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent",
+    backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent"
   })
 )
 
 const fillProgress = css.keyframes({
   from: {
-    transform: "translate3d(-100%, 0, 0)",
+    transform: "translate3d(-100%, 0, 0)"
   },
   to: {
-    transform: "translate3d(0, 0, 0)",
-  },
+    transform: "translate3d(0, 0, 0)"
+  }
 })
 
 const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean }) => ({
@@ -50,11 +50,11 @@ const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean
   backgroundColor: theme.colors.info,
   ...isError
     ? {
-        backgroundColor: theme.colors.error,
+        backgroundColor: theme.colors.error
       }
     : {
-        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
-      },
+        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`
+      }
 }))
 
 const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -69,7 +69,7 @@ const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   zIndex: theme.baseZIndex + 301,
   textAlign: "center",
   backgroundColor: theme.colors.error,
-  color: theme.colors.white,
+  color: theme.colors.white
 }))
 
 const RetryLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -78,11 +78,11 @@ const RetryLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginLeft: theme.spacing * 3 / 4,
   userSelect: "none",
   "& svg": {
-    marginRight: theme.spacing / 3,
+    marginRight: theme.spacing / 3
   },
   ":hover": {
-    opacity: 1,
-  },
+    opacity: 1
+  }
 }))
 
 const Progress = (props: Props) => (

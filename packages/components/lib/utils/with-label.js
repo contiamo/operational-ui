@@ -13,7 +13,7 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        display: "inline-block",
+        display: "inline-block"
     });
 });
 var Label = glamorous_1.default.label(function (_a) {

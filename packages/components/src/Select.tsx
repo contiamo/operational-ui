@@ -45,7 +45,7 @@ class Select extends React.Component<Props, State> {
   state: State = {
     open: false,
     updating: false,
-    search: "",
+    search: ""
   }
 
   containerNode: Node
@@ -124,7 +124,7 @@ class Select extends React.Component<Props, State> {
 
   close() {
     this.setState(() => ({
-      open: false,
+      open: false
     }))
   }
 
@@ -143,7 +143,7 @@ class Select extends React.Component<Props, State> {
         onClick={() => {
           if (!this.state.open) {
             this.setState(prevState => ({
-              open: true,
+              open: true
             }))
           }
         }}
@@ -158,7 +158,7 @@ class Select extends React.Component<Props, State> {
                 <SelectFilter
                   onChange={(val: string) => {
                     this.setState(prevState => ({
-                      search: val,
+                      search: val
                     }))
                   }}
                 />

@@ -29,7 +29,7 @@ export default class StateHandler<Config, Data> {
   readOnly(): ChartStateReadOnly<ChartStateObject> {
     return {
       current: this.state.current.readOnly(),
-      previous: this.state.previous.readOnly(),
+      previous: this.state.previous.readOnly()
     }
   }
 

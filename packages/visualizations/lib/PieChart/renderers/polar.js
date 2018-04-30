@@ -80,7 +80,7 @@ var Polar = /** @class */ (function () {
     Polar.prototype.arcAttributes = function () {
         return {
             path: this.arcTween.bind(this),
-            fill: this.color.bind(this),
+            fill: this.color.bind(this)
         };
     };
     Polar.prototype.fitToCanvas = function () {
@@ -100,7 +100,7 @@ var Polar = /** @class */ (function () {
         var topOffset = this.state.current.get("computed").canvas.legend.node().offsetHeight;
         this.currentTranslation = [
             (drawing.width - newCurrent.width) / 2 + drawing.left - newCurrent.left,
-            (drawing.height - newCurrent.height) / 2 + drawing.top - newCurrent.top,
+            (drawing.height - newCurrent.height) / 2 + drawing.top - newCurrent.top
         ];
         this.el.attr("transform", Utils.translateString(this.currentTranslation));
     };
@@ -146,7 +146,7 @@ var Polar = /** @class */ (function () {
         this.previousComputed = this.computed;
         var d = {
             layout: Utils.layout(this.angleValue, ANGLE_RANGE),
-            total: Utils.computeTotal(this.data, this.value),
+            total: Utils.computeTotal(this.data, this.value)
         };
         // data should not become part of this.previousComputed in first computation
         this.previousComputed = fp_1.defaults(d)(this.previousComputed);
@@ -170,7 +170,7 @@ var Polar = /** @class */ (function () {
                 .outerRadius(r),
             arcOver: d3_shape_1.arc()
                 .innerRadius(rInnerHover)
-                .outerRadius(rHover),
+                .outerRadius(rHover)
         };
     };
     Polar.prototype.computeOuterRadius = function (drawingDims, scaleFactor) {
@@ -180,7 +180,7 @@ var Polar = /** @class */ (function () {
         var scale = d3_scale_1.scaleSqrt()
             .range([
             this.state.current.get("config").minInnerRadius,
-            Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin,
+            Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin
         ])
             .domain([0, domainMax]);
         return function (d) { return scale(_this.value(d)) * scaleFactor; };
@@ -202,7 +202,7 @@ var Polar = /** @class */ (function () {
         var datumInfo = {
             key: this.key(d),
             value: this.value(d),
-            percentage: d.data.percentage,
+            percentage: d.data.percentage
         };
         var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
@@ -236,7 +236,7 @@ var Polar = /** @class */ (function () {
         return fp_1.map(function (datum) {
             return {
                 label: _this.key(datum),
-                color: _this.color(datum),
+                color: _this.color(datum)
             };
         })(this.data);
     };

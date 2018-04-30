@@ -34,11 +34,11 @@ var DatePicker = /** @class */ (function (_super) {
         var startYearMonthInWidget = props.start
             ? {
                 year: DatePicker_utils_1.toYearMonthDay(props.start).year,
-                month: DatePicker_utils_1.toYearMonthDay(props.start).month,
+                month: DatePicker_utils_1.toYearMonthDay(props.start).month
             }
             : {
                 year: new Date().getFullYear(),
-                month: new Date().getMonth(),
+                month: new Date().getMonth()
             };
         _this.state = __assign({}, startYearMonthInWidget, { isExpanded: false });
         return _this;
@@ -61,7 +61,7 @@ var DatePicker = /** @class */ (function (_super) {
             month: prevState.month + diff < 0 ? prevState.month + diff + 12 : (prevState.month + diff) % 12,
             year: prevState.month + diff < 0
                 ? prevState.year - 1
-                : prevState.month + diff > 11 ? prevState.year + 1 : prevState.year,
+                : prevState.month + diff > 11 ? prevState.year + 1 : prevState.year
         }); });
     };
     DatePicker.prototype.componentDidMount = function () {

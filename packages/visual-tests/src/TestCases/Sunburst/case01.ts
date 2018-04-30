@@ -2,7 +2,7 @@ import { Sunburst } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const config = {
-  sort: false,
+  sort: false
 }
 
 const data = {
@@ -11,17 +11,17 @@ const data = {
   children: [
     {
       name: "Europe",
-      value: 50000,
+      value: 50000
     },
     {
       name: "Asia",
-      value: 38400,
+      value: 38400
     },
     {
       name: "North America",
-      value: 36780,
-    },
-  ],
+      value: 36780
+    }
+  ]
 }
 
 const data1 = {
@@ -30,21 +30,21 @@ const data1 = {
   children: [
     {
       name: "Europe",
-      value: 50000,
+      value: 50000
     },
     {
       name: "Asia",
-      value: 38400,
+      value: 38400
     },
     {
       name: "North America",
-      value: 36780,
+      value: 36780
     },
     {
       name: "Africa",
-      value: 25200,
-    },
-  ],
+      value: 25200
+    }
+  ]
 }
 
 const data2 = {
@@ -53,25 +53,25 @@ const data2 = {
   children: [
     {
       name: "Europe",
-      value: 50000,
+      value: 50000
     },
     {
       name: "Asia",
-      value: 38400,
+      value: 38400
     },
     {
       name: "Australia",
-      value: 18000,
+      value: 18000
     },
     {
       name: "North America",
-      value: 36780,
+      value: 36780
     },
     {
       name: "Africa",
-      value: 25200,
-    },
-  ],
+      value: 25200
+    }
+  ]
 }
 
 const data3 = {
@@ -84,21 +84,21 @@ const data3 = {
       children: [
         {
           name: "UK",
-          value: 11500,
+          value: 11500
         },
         {
           name: "Germany",
-          value: 9240,
+          value: 9240
         },
         {
           name: "Spain",
-          value: 12345,
+          value: 12345
         },
         {
           name: "Italy",
-          value: 1830,
-        },
-      ],
+          value: 1830
+        }
+      ]
     },
     {
       name: "Asia",
@@ -106,39 +106,39 @@ const data3 = {
       children: [
         {
           name: "Japan",
-          value: 8230,
+          value: 8230
         },
         {
           name: "China",
-          value: 13000,
+          value: 13000
         },
         {
           name: "Thailand",
-          value: 2548,
+          value: 2548
         },
         {
           name: "India",
-          value: 1800,
+          value: 1800
         },
         {
           name: "Malaysia",
-          value: 1423,
-        },
-      ],
+          value: 1423
+        }
+      ]
     },
     {
       name: "Australia",
-      value: 18000,
+      value: 18000
     },
     {
       name: "North America",
-      value: 36780,
+      value: 36780
     },
     {
       name: "Africa",
-      value: 25200,
-    },
-  ],
+      value: 25200
+    }
+  ]
 }
 
 const data4 = {
@@ -151,21 +151,21 @@ const data4 = {
       children: [
         {
           name: "UK",
-          value: 11500,
+          value: 11500
         },
         {
           name: "Germany",
-          value: 9240,
+          value: 9240
         },
         {
           name: "Spain",
-          value: 12345,
+          value: 12345
         },
         {
           name: "Italy",
-          value: 1830,
-        },
-      ],
+          value: 1830
+        }
+      ]
     },
     {
       name: "Asia",
@@ -173,29 +173,29 @@ const data4 = {
       children: [
         {
           name: "Japan",
-          value: 8230,
+          value: 8230
         },
         {
           name: "China",
-          value: 13000,
+          value: 13000
         },
         {
           name: "Thailand",
-          value: 2548,
+          value: 2548
         },
         {
           name: "India",
-          value: 1800,
+          value: 1800
         },
         {
           name: "Malaysia",
-          value: 1423,
-        },
-      ],
+          value: 1423
+        }
+      ]
     },
     {
       name: "Australia",
-      value: 18000,
+      value: 18000
     },
     {
       name: "North America",
@@ -207,7 +207,7 @@ const data4 = {
           children: [
             {
               name: "Washington DC",
-              value: 5742,
+              value: 5742
             },
             {
               name: "California",
@@ -215,23 +215,23 @@ const data4 = {
               children: [
                 {
                   name: "San Fransisco",
-                  value: 4298,
+                  value: 4298
                 },
                 {
                   name: "Los Angeles",
-                  value: 6528,
+                  value: 6528
                 },
                 {
                   name: "Sacramento",
-                  value: 3908,
-                },
-              ],
+                  value: 3908
+                }
+              ]
             },
             {
               name: "New York City",
-              value: 8276,
-            },
-          ],
+              value: 8276
+            }
+          ]
         },
         {
           name: "Canada",
@@ -239,21 +239,21 @@ const data4 = {
           children: [
             {
               name: "Toronto",
-              value: 2456,
+              value: 2456
             },
             {
               name: "Vancouver",
-              value: 4258,
-            },
-          ],
-        },
-      ],
+              value: 4258
+            }
+          ]
+        }
+      ]
     },
     {
       name: "Africa",
-      value: 25200,
-    },
-  ],
+      value: 25200
+    }
+  ]
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

@@ -37,7 +37,7 @@ exports.defaultAccessors = function (ctx) {
     return {
         value: function (d) { return d.value; },
         key: function (d) { return d.key; },
-        color: function (d) { return (d.unfilled ? undefined : assignColor(ctx.key(d))); },
+        color: function (d) { return (d.unfilled ? undefined : assignColor(ctx.key(d))); }
     };
 };
 exports.assignAccessors = function (ctx, customAccessors) {
@@ -60,7 +60,7 @@ exports.textAttributes = function (computed) {
     return {
         transform: function (d) { return exports.translateString(computed.arcOver.centroid(d)); },
         text: exports.percentageString,
-        textAnchor: "middle",
+        textAnchor: "middle"
     };
 };
 exports.percentageString = function (d) {

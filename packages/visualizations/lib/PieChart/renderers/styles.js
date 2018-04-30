@@ -14,14 +14,14 @@ var arcStyle = {
     stroke: "#fff",
     strokeWidth: "1",
     opacity: 0.8,
-    fill: "#eee",
+    fill: "#eee"
 };
 var labelStyle = __assign({ fill: "#333", stroke: "none", pointerEvents: "none" }, theme_1.operational.typography.small);
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var comparisonStyle = {
     stroke: "#747474",
     strokeWidth: 2,
-    strokeDasharray: "6 4",
+    strokeDasharray: "6 4"
 };
 exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();

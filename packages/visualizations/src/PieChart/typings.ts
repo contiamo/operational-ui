@@ -16,7 +16,7 @@ export {
   Partial,
   SeriesEl,
   State,
-  StateWriter,
+  StateWriter
 } from "../utils/typings"
 
 export type FocusElement = string

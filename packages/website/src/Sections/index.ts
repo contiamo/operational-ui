@@ -51,5 +51,5 @@ export default [
   textareas,
   timelines,
   tooltips,
-  typography,
+  typography
 ]

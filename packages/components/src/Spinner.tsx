@@ -12,11 +12,11 @@ export interface Props {
 
 const spin = css.keyframes({
   "0%": {
-    transform: "scale(1)",
+    transform: "scale(1)"
   },
   "100%": {
-    transform: "scale(0.75)",
-  },
+    transform: "scale(0.75)"
+  }
 })
 
 const size = 30
@@ -24,7 +24,7 @@ const size = 30
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "spinner",
   width: size,
-  height: size,
+  height: size
 }))
 
 const animationTimeUnit: number = 0.6
@@ -46,17 +46,17 @@ const PulsingCube = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.info,
   // Increasing the negative animation delay clockwise
   "&:nth-child(1)": {
-    animationDelay: "0s",
+    animationDelay: "0s"
   },
   "&:nth-child(2)": {
-    animationDelay: `${-1 * f * animationTimeUnit}s`,
+    animationDelay: `${-1 * f * animationTimeUnit}s`
   },
   "&:nth-child(4)": {
-    animationDelay: `${-2 * f * animationTimeUnit}s`,
+    animationDelay: `${-2 * f * animationTimeUnit}s`
   },
   "&:nth-child(3)": {
-    animationDelay: `${-3 * f * animationTimeUnit}s`,
-  },
+    animationDelay: `${-3 * f * animationTimeUnit}s`
+  }
 }))
 
 const Spinner = (props: Props) => (

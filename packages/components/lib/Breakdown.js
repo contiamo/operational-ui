@@ -18,30 +18,30 @@ var Container = glamorous_1.default.div({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    maxWidth: 300,
+    maxWidth: 300
 }, function (_a) {
     var theme = _a.theme, onClick = _a.onClick;
     return (__assign({ padding: theme.spacing * 3 / 4 + "px 0" }, onClick
         ? {
             cursor: "pointer",
             "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.01)",
-            },
+                backgroundColor: "rgba(0, 0, 0, 0.01)"
+            }
         }
         : {}, { background: theme.colors.white, ":not(:first-child)": {
-            borderTop: "1px solid " + theme.colors.separator,
+            borderTop: "1px solid " + theme.colors.separator
         } }));
 });
 var Content = glamorous_1.default.div({
-    width: "100%",
+    width: "100%"
 });
 var Label = glamorous_1.default.label({
-    display: "block",
+    display: "block"
 }, function (_a) {
     var theme = _a.theme;
     return ({
         marginBottom: theme.spacing / 4,
-        fontSize: theme.typography.small.fontSize,
+        fontSize: theme.typography.small.fontSize
     });
 });
 var Bar = glamorous_1.default.div({
@@ -51,7 +51,7 @@ var Bar = glamorous_1.default.div({
     overflow: "hidden",
     "& > span": {
         position: "relative",
-        padding: 2,
+        padding: 2
     },
     ":before": {
         content: "' '",
@@ -61,8 +61,8 @@ var Bar = glamorous_1.default.div({
         zIndex: 0,
         display: "block",
         height: "100%",
-        pointerEvents: "none",
-    },
+        pointerEvents: "none"
+    }
 }, function (_a) {
     var theme = _a.theme, fill = _a.fill, color = _a.color;
     var backgroundColor = theme_1.expandColor(theme, color) || theme.colors.info;
@@ -74,20 +74,20 @@ var Bar = glamorous_1.default.div({
             fontSize: 12,
             position: "relative",
             top: 1,
-            fontWeight: 400,
+            fontWeight: 400
         },
         ":before": {
             backgroundColor: utils_1.setBrightness(backgroundColor, 155),
             transition: "all 0.3s ease-in-out",
-            width: fill * 100 + "%",
-        },
+            width: fill * 100 + "%"
+        }
     };
 });
 var Number = glamorous_1.default.div({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
 }, function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.heading1, { flex: "0 0 " + theme.spacing * 2.5 + "px", color: theme.colors.lightGray }));

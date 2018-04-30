@@ -16,8 +16,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
   boxShadow: theme.shadows.card,
   backgroundColor: theme.colors.white,
   "& > img": {
-    maxWidth: "100%",
-  },
+    maxWidth: "100%"
+  }
 }))
 
 const Card = (props: Props) => (

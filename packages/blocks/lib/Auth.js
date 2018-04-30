@@ -23,7 +23,7 @@ var Container = glamorous_1.default.div(function (_a) {
         padding: theme.spacing,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center"
     });
 });
 var AuthCard = glamorous_1.default.div(function (_a) {
@@ -36,14 +36,14 @@ var AuthCard = glamorous_1.default.div(function (_a) {
         backgroundColor: theme.colors.white,
         padding: 3 * theme.spacing + "px " + 1.5 * theme.spacing + "px",
         width: "100%",
-        maxWidth: 360,
+        maxWidth: 360
     });
 });
 var Content = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isEnabled = _a.isEnabled;
     return ({
         opacity: 1,
-        pointerEvents: isEnabled ? "all" : "none",
+        pointerEvents: isEnabled ? "all" : "none"
     });
 });
 var SubmitContainer = glamorous_1.default.div(function (_a) {
@@ -52,19 +52,19 @@ var SubmitContainer = glamorous_1.default.div(function (_a) {
         marginTop: 2.5 * theme.spacing,
         textAlign: "center",
         "& > *": {
-            width: "100%",
-        },
+            width: "100%"
+        }
     });
 });
 var InputFields = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        margin: 1 * theme.spacing + "px 0",
+        margin: 1 * theme.spacing + "px 0"
     });
 });
 var inputStyle = {
     display: "block",
-    margin: "20px 0",
+    margin: "20px 0"
 };
 /*
  * Checks whether a string value exists or not (same as !!stringValue, except it also returns
@@ -91,19 +91,19 @@ var Auth = /** @class */ (function (_super) {
                         isStringValue(this.props.username) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.username, label: "User name", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
-                                        username: v,
+                                        username: v
                                     });
                             } })) : null,
                         isStringValue(this.props.password) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.password, placeholder: "******", type: "password", label: "Password", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
-                                        password: v,
+                                        password: v
                                     });
                             } })) : null,
                         isStringValue(this.props.passwordConfirmation) ? (React.createElement(components_1.Input, { css: inputStyle, value: this.props.passwordConfirmation, placeholder: "******", type: "password", label: "Password confirmation", onChange: function (v) {
                                 _this.props.onChange &&
                                     _this.props.onChange({
-                                        passwordConfirmation: v,
+                                        passwordConfirmation: v
                                     });
                             } })) : null),
                     React.createElement(SubmitContainer, null,

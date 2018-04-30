@@ -33,7 +33,7 @@ var Input = function (props) {
         isError: Boolean(props.error),
         onChange: function (e) {
             props.onChange && props.onChange(e.target.value);
-        },
+        }
     };
     if (props.label) {
         return (React.createElement(mixins_1.Label, { id: props.id, htmlFor: forAttributeId, css: props.css, className: props.className },

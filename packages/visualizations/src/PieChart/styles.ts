@@ -10,11 +10,11 @@ const comparisonLegendStyle = {
     width: "10px",
     height: "10px",
     margin: "2px 3px 0 0",
-    float: "left",
+    float: "left"
   },
   "& div.name": {
-    float: "left",
-  },
+    float: "left"
+  }
 }
 
 const comparisonLegendLineStyle = {
@@ -22,7 +22,7 @@ const comparisonLegendLineStyle = {
   height: "0px",
   border: "1px solid #747474",
   margin: "5px 3px 3px 3px",
-  float: "left",
+  float: "left"
 }
 
 export const comparisonLegend = seriesLegend

@@ -35,7 +35,7 @@ const InputField = glamorous.input(
     theme,
     disabled,
     isStandalone,
-    isError,
+    isError
   }: {
     theme: Theme
     disabled: boolean
@@ -56,7 +56,7 @@ const InputField = glamorous.input(
     font: "inherit",
     borderRadius: theme.borderRadius,
     WebkitAppearance: "none",
-    "&:focus": inputFocus({ theme, isError }),
+    "&:focus": inputFocus({ theme, isError })
   })
 )
 
@@ -75,7 +75,7 @@ const Input = (props: Props) => {
     isError: Boolean(props.error),
     onChange: (e: any) => {
       props.onChange && props.onChange(e.target.value)
-    },
+    }
   }
   if (props.label) {
     return (

@@ -37,7 +37,7 @@ class Animation extends React.Component<Props, State> {
     animationStep: 0,
     coordinates: Array.apply(null, { length: 30 })
       .map(Number.call, Number)
-      .map((i: number) => ({ x: integerRandom(n), y: integerRandom(n) })),
+      .map((i: number) => ({ x: integerRandom(n), y: integerRandom(n) }))
   }
 
   animationInterval: any
@@ -53,11 +53,11 @@ class Animation extends React.Component<Props, State> {
           const dy = integerRandom(3) - 1
           return {
             x: bounce(coord.x + dx),
-            y: bounce(coord.y - dy),
+            y: bounce(coord.y - dy)
           }
         }
         return coord
-      }),
+      })
     }))
   }
 
@@ -76,7 +76,7 @@ class Animation extends React.Component<Props, State> {
         css={{
           ...(this.props.css || {}),
           width: size,
-          height: size,
+          height: size
         }}
       >
         {this.state.coordinates.map((coord: { x: number; y: number }, index: number) => (
@@ -90,7 +90,7 @@ class Animation extends React.Component<Props, State> {
               borderRadius: 6,
               width: `calc(${100 / (n - 1)}% - 4px)`,
               height: `calc(${100 / (n - 1)}% - 4px)`,
-              backgroundColor: "rgba(255, 255, 255, 0.06)",
+              backgroundColor: "rgba(255, 255, 255, 0.06)"
             }}
           />
         ))}

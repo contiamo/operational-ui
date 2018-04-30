@@ -8,7 +8,7 @@ var OperationalUI = function (props) {
     return (React.createElement(glamorous_1.ThemeProvider, { theme: props.theme || theme_1.operational },
         React.createElement(React.Fragment, null,
             props.withBaseStyles ? (React.createElement("style", { dangerouslySetInnerHTML: {
-                    __html: utils_1.baseStylesheet(props.theme || theme_1.operational),
+                    __html: utils_1.baseStylesheet(props.theme || theme_1.operational)
                 } })) : null,
             props.children)));
 };

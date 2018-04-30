@@ -17,7 +17,7 @@ import {
   NodeAttrs,
   Object,
   ProcessFlowConfig,
-  TNode,
+  TNode
 } from "./typings"
 
 class ProcessFlowFacade implements Facade {
@@ -43,7 +43,7 @@ class ProcessFlowFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      computed: this.initialComputed()
     })
   }
 
@@ -69,7 +69,7 @@ class ProcessFlowFacade implements Facade {
       uid: uniqueId("processflow"),
       verticalNodeSpacing: 100,
       visualizationName: "processflow",
-      width: Infinity,
+      width: Infinity
     }
   }
 
@@ -77,7 +77,7 @@ class ProcessFlowFacade implements Facade {
     return {
       data: {
         nodes: (d: InputData) => d.nodes,
-        journeys: (d: InputData) => d.journeys,
+        journeys: (d: InputData) => d.journeys
       },
       node: {
         color: (d: NodeAttrs): string => d.color || "#fff",
@@ -87,7 +87,7 @@ class ProcessFlowFacade implements Facade {
         stroke: (d: NodeAttrs): string => d.stroke || "#000",
         id: (d: NodeAttrs): string => d.id || uniqueId("node"),
         label: (d: NodeAttrs): string => d.label || d.id || "",
-        labelPosition: (d: NodeAttrs): string => d.labelPosition || "right",
+        labelPosition: (d: NodeAttrs): string => d.labelPosition || "right"
       },
       link: {
         content: (d: NodeAttrs): Object<any>[] => d.content || [],
@@ -98,8 +98,8 @@ class ProcessFlowFacade implements Facade {
         source: (d: LinkAttrs): TNode | undefined => d.source,
         sourceId: (d: LinkAttrs): string | undefined => d.sourceId,
         target: (d: LinkAttrs): TNode | undefined => d.target,
-        targetId: (d: LinkAttrs): string | undefined => d.targetId,
-      },
+        targetId: (d: LinkAttrs): string | undefined => d.targetId
+      }
     }
   }
 
@@ -107,7 +107,7 @@ class ProcessFlowFacade implements Facade {
     return {
       canvas: {},
       focus: {},
-      series: {},
+      series: {}
     }
   }
 
@@ -127,7 +127,7 @@ class ProcessFlowFacade implements Facade {
         this.state.computedWriter(["focus"]),
         this.events,
         this.canvas.elementFor("focus")
-      ),
+      )
     }
   }
 

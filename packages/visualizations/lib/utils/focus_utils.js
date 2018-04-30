@@ -33,27 +33,27 @@ var FocusUtils = {
         var rect = focusEl.node().getBoundingClientRect();
         return {
             height: rect.height,
-            width: rect.width,
+            width: rect.width
         };
     },
     // Position focus label according to desired position relative to focus point.
     // Use label and drawing dimensions to ensure focus label does not overflow drawing.
     positionLabel: function (el, 
-    // @TODO
-    focus, label, drawing, offset, position) {
+        // @TODO
+        focus, label, drawing, offset, position) {
         if (offset === void 0) { offset = 0; }
         if (position === void 0) { position = "toRight"; }
         var x = {
             farLeft: drawing.xMin + offset,
             farRight: drawing.xMax - offset - label.width,
             left: drawing.xMin + focus.x - offset - label.width,
-            right: drawing.xMin + focus.x + offset,
+            right: drawing.xMin + focus.x + offset
         };
         var y = {
             above: drawing.yMin + focus.y - offset - label.height,
             below: drawing.yMin + focus.y + offset,
             bottom: drawing.yMin + drawing.yMax - offset - label.height,
-            top: drawing.yMin + offset,
+            top: drawing.yMin + offset
         };
         var top;
         var left;
@@ -83,7 +83,7 @@ var FocusUtils = {
     // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
     verticalCentre: function (focus, label, drawing) {
         return Math.min(Math.max(focus.y + drawing.yMin - label.height / 2, drawing.yMin), drawing.yMax);
-    },
+    }
 };
 exports.default = FocusUtils;
 //# sourceMappingURL=focus_utils.js.map

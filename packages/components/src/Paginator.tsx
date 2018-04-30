@@ -28,8 +28,8 @@ const PaginatorSpan = glamorous.div(
     lineHeight: 1,
     color: isActive ? theme.colors.info : theme.colors.text,
     ":hover": {
-      backgroundColor: theme.colors.background,
-    },
+      backgroundColor: theme.colors.background
+    }
   })
 )
 
@@ -139,7 +139,7 @@ const createPagesFragment = ({ maxVisible, onChange, page, pageCount }: Props) =
             }}
           >
             {pageCount}
-          </PaginatorSpan>,
+          </PaginatorSpan>
         ]
       : []
 
@@ -152,8 +152,8 @@ const Container = glamorous.div({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    minWidth: 25,
-  },
+    minWidth: 25
+  }
 })
 
 const Paginator = ({ maxVisible = 3, onChange = () => {}, pageCount, page = 1, id, css, className }: Props) => {

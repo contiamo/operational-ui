@@ -1,15 +1,15 @@
 import { css } from "glamor"
 
 const elementStyle = {
-  pointerEvents: "none",
+  pointerEvents: "none"
 }
 
 const borderStyle = {
-  cursor: "pointer",
+  cursor: "pointer"
 }
 
 const labelStyle = {
-  fillOpacity: 0.7,
+  fillOpacity: 0.7
 }
 
 export const element = css(elementStyle).toString()

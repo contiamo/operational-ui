@@ -23,8 +23,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     width: "100%",
     display: "block",
     textDecoration: "none",
-    color: "inherit",
-  },
+    color: "inherit"
+  }
 }))
 
 const Sidebar = (props: Props) => (

@@ -76,7 +76,7 @@ var SunburstCanvas = /** @class */ (function () {
         var config = this.state.current.get("config");
         var dims = {
             width: config.width,
-            height: config.height - this.breadcrumb.node().getBoundingClientRect().height,
+            height: config.height - this.breadcrumb.node().getBoundingClientRect().height
         };
         this.stateWriter("drawingDims", dims);
         return dims;

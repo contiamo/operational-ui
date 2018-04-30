@@ -16,7 +16,7 @@ exports.months = [
     "September",
     "October",
     "November",
-    "December",
+    "December"
 ];
 // A range of numbers pre-filled in an array
 // range(5) -> [ 0, 1, 2, 3, 4 ]
@@ -47,7 +47,7 @@ exports.toYearMonthDay = function (date) {
         year: chunks[0],
         // Months and days are numbered starting 0 as a state management convenience
         month: chunks[1] - 1,
-        day: chunks[2] - 1,
+        day: chunks[2] - 1
     };
 };
 exports.monthStartDay = function (year, month) { return moment(exports.toDate(year, month, 0)).day(); };

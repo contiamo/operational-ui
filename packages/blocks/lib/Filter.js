@@ -14,20 +14,20 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var components_1 = require("@operational/components");
 var Container = glamorous_1.default.div({
-    label: "filter",
+    label: "filter"
 });
 var FilterBar = glamorous_1.default.div({
     "& > div": {
-        display: "inline-flex",
-    },
+        display: "inline-flex"
+    }
 });
 var FormFields = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         "& > label, & > div": {
             margin: theme.spacing + "px 0",
-            display: "block",
-        },
+            display: "block"
+        }
     });
 });
 var Filter = /** @class */ (function (_super) {
@@ -35,7 +35,7 @@ var Filter = /** @class */ (function (_super) {
     function Filter() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            isExpanded: false,
+            isExpanded: false
         };
         return _this;
     }
@@ -71,12 +71,12 @@ var Filter = /** @class */ (function (_super) {
                 }),
                 React.createElement(components_1.Chip, { color: "#efefef", onIconClick: function () {
                         _this.setState(function (prevState) { return ({
-                            isExpanded: true,
+                            isExpanded: true
                         }); });
                     }, icon: "Plus" }, "Add filter")),
             this.state.isExpanded ? (React.createElement(components_1.Modal, { onClose: function () {
                     _this.setState(function (prevState) { return ({
-                        isExpanded: false,
+                        isExpanded: false
                     }); });
                 } },
                 React.createElement(FormFields, null, this.props.children))) : null));

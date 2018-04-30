@@ -48,7 +48,7 @@ class PieChartFocus implements Focus {
     const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
       labelPlacement: { left: number; top: number } = {
         left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
-        top: payload.focusPoint.centroid[1],
+        top: payload.focusPoint.centroid[1]
       }
 
     FocusUtils.drawVisible(this.el, labelPlacement)

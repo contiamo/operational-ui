@@ -48,10 +48,10 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
         height: 0,
         border: "4px solid transparent",
         borderTopColor: theme.colors.gray,
-        transform: "translateY(calc(-50% + 2px))",
+        transform: "translateY(calc(-50% + 2px))"
       },
 
-      "&:focus": mixins.inputFocus({ theme }),
+      "&:focus": mixins.inputFocus({ theme })
     }
   }
 )
@@ -62,7 +62,7 @@ export interface IDisplayValueProps {
 
 const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
   ({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
-    color: isPlaceholder ? theme.colors.gray : theme.colors.black,
+    color: isPlaceholder ? theme.colors.gray : theme.colors.black
   })
 )
 
@@ -79,18 +79,18 @@ const Options: GlamorousComponent<{}, {}> = glamorous.div(
     opacity: 0,
     transform: "translateY(-10px)",
     animation: `${fadeIn} .15s forwards ease,
-    ${resetTransform} .15s forwards ease`,
+    ${resetTransform} .15s forwards ease`
   },
   ({ theme }: { theme: Theme }): {} => ({
     boxShadow: theme.shadows.popup,
-    zIndex: theme.baseZIndex + 100,
+    zIndex: theme.baseZIndex + 100
   })
 )
 
 const OptionsList: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   // whole number + 3/4 ratio here ensures options don't get cut off
   maxHeight: theme.spacing * 12.75,
-  overflow: "auto",
+  overflow: "auto"
 }))
 
 export { Container, Options, OptionsList, DisplayValue }

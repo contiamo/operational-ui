@@ -11,7 +11,7 @@ const data1 = {
     { path: ["1", "2", "3", "6", "11"], size: 130 },
     { path: ["1", "2", "3", "4", "10"], size: 290 },
     { path: ["1", "2", "3", "12", "10"], size: 120 },
-    { path: ["1", "2", "3", "4", "13"], size: 620 },
+    { path: ["1", "2", "3", "4", "13"], size: 620 }
   ],
   nodes: [
     { id: "1", group: "start" },
@@ -26,8 +26,8 @@ const data1 = {
     { id: "10", group: "end" },
     { id: "11", group: "end" },
     { id: "12" },
-    { id: "13", group: "end" },
-  ],
+    { id: "13", group: "end" }
+  ]
 }
 
 const data2: any = {
@@ -41,7 +41,7 @@ const data2: any = {
     { path: ["1", "2", "3", "4", "11"], size: 290 },
     { path: ["1", "2", "3", "12", "11"], size: 120 },
     { path: ["1", "2", "3", "4", "13"], size: 620 },
-    { path: ["4"], size: 23 },
+    { path: ["4"], size: 23 }
   ],
   nodes: [
     { id: "1", group: "start" },
@@ -55,8 +55,8 @@ const data2: any = {
     { id: "9", group: "start" },
     { id: "11", group: "end" },
     { id: "12" },
-    { id: "13", group: "end" },
-  ],
+    { id: "13", group: "end" }
+  ]
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
@@ -67,11 +67,11 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     viz.config({
       focusElement: {
         type: "link",
-        matchers: { sourceId: "3", targetId: "5" },
-      },
+        matchers: { sourceId: "3", targetId: "5" }
+      }
     })
     viz.accessors("node", {
-      label: (node: any) => `Node ${node.id}`,
+      label: (node: any) => `Node ${node.id}`
     })
     viz.draw()
   })
@@ -86,15 +86,15 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     viz.config({
       focusElement: {
         type: "node",
-        matchers: { id: "3" },
-      },
+        matchers: { id: "3" }
+      }
     })
     viz.accessors("node", {
       label: (node: any) => `Node ${node.id}`,
       content: (node: any) => [
         { key: "Description", value: "This is a node." },
-        { key: "Comment", value: "This comment is boring." },
-      ],
+        { key: "Comment", value: "This comment is boring." }
+      ]
     })
     viz.draw()
   })
@@ -103,8 +103,8 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     viz.config({
       focusElement: {
         type: "path",
-        matchers: { path: ["9", "2", "3", "8"] },
-      },
+        matchers: { path: ["9", "2", "3", "8"] }
+      }
     })
     viz.draw()
   })

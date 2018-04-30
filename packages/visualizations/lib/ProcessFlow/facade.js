@@ -22,7 +22,7 @@ var ProcessFlowFacade = /** @class */ (function () {
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
-            computed: this.initialComputed(),
+            computed: this.initialComputed()
         });
     };
     ProcessFlowFacade.prototype.initialConfig = function () {
@@ -47,14 +47,14 @@ var ProcessFlowFacade = /** @class */ (function () {
             uid: fp_1.uniqueId("processflow"),
             verticalNodeSpacing: 100,
             visualizationName: "processflow",
-            width: Infinity,
+            width: Infinity
         };
     };
     ProcessFlowFacade.prototype.initialAccessors = function () {
         return {
             data: {
                 nodes: function (d) { return d.nodes; },
-                journeys: function (d) { return d.journeys; },
+                journeys: function (d) { return d.journeys; }
             },
             node: {
                 color: function (d) { return d.color || "#fff"; },
@@ -64,7 +64,7 @@ var ProcessFlowFacade = /** @class */ (function () {
                 stroke: function (d) { return d.stroke || "#000"; },
                 id: function (d) { return d.id || fp_1.uniqueId("node"); },
                 label: function (d) { return d.label || d.id || ""; },
-                labelPosition: function (d) { return d.labelPosition || "right"; },
+                labelPosition: function (d) { return d.labelPosition || "right"; }
             },
             link: {
                 content: function (d) { return d.content || []; },
@@ -75,15 +75,15 @@ var ProcessFlowFacade = /** @class */ (function () {
                 source: function (d) { return d.source; },
                 sourceId: function (d) { return d.sourceId; },
                 target: function (d) { return d.target; },
-                targetId: function (d) { return d.targetId; },
-            },
+                targetId: function (d) { return d.targetId; }
+            }
         };
     };
     ProcessFlowFacade.prototype.initialComputed = function () {
         return {
             canvas: {},
             focus: {},
-            series: {},
+            series: {}
         };
     };
     ProcessFlowFacade.prototype.insertCanvas = function () {
@@ -91,7 +91,7 @@ var ProcessFlowFacade = /** @class */ (function () {
     };
     ProcessFlowFacade.prototype.insertComponents = function () {
         return {
-            focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus")),
+            focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus"))
         };
     };
     ProcessFlowFacade.prototype.insertSeries = function () {

@@ -20,15 +20,14 @@
   },
   "devDependencies": {
     "@types/jest": "^22.1.4",
-    "@types/node": "9.6.7",
-    "@types/react": "16.3.13",
-    "@types/react-dom": "16.0.5",
-    "prettier": "1.12.1",
+    "@types/react": "16.1.0",
+    "@types/react-dom": "16.0.0",
+    "prettier": "1.8.2",
     "react-scripts-ts": "^2.14.0",
-    "tslint": "5.9.1",
-    "tslint-config-airbnb": "5.8.0",
-    "tslint-config-prettier": "1.12.0",
-    "typescript": "2.8.3"
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "2.6.2"
   },
   "dependencies": {
     "@operational/blocks": "^0.1.0-35",
@@ -44,6 +43,7 @@
     "react": "^16.2.0",
     "react-color": "^2.13.8",
     "react-dom": "^16.2.0",
-    "react-feather": "^1.0.7"
+    "react-feather": "^1.0.7",
+    "react-syntax-highlighter": "^5.7.0"
   }
 }

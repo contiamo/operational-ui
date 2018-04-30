@@ -15,7 +15,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "table",
   width: "100%",
   position: "relative",
-  backgroundColor: "white",
+  backgroundColor: "white"
 }))
 
 const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
@@ -24,32 +24,32 @@ const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
   textAlign: "left",
   tableLayout: "auto",
   "& th, & td": {
-    ...theme.typography.body,
+    ...theme.typography.body
   },
   "& tr": {
     borderTop: "1px solid",
     borderBottom: "1px solid",
-    borderColor: theme.colors.separator,
+    borderColor: theme.colors.separator
   },
   "& tr:first-child": {
-    borderTop: 0,
+    borderTop: 0
   },
   "& tbody tr:last-child": {
-    borderBottom: 0,
+    borderBottom: 0
   },
   "& td": {
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+    padding: `${theme.spacing / 2}px ${theme.spacing}px`
   },
   "& th": {
     padding: `${theme.spacing / 4}px ${theme.spacing}px`,
-    opacity: 0.4,
-  },
+    opacity: 0.4
+  }
 }))
 
 const TableBodyRow = glamorous.tr(({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
   ":hover": {
-    backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
-  },
+    backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent"
+  }
 }))
 
 const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -59,7 +59,7 @@ const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   top: theme.spacing,
   textAlign: "center",
   backgroundColor: theme.colors.background,
-  ...theme.typography.body,
+  ...theme.typography.body
 }))
 
 const Table = (props: Props) => (

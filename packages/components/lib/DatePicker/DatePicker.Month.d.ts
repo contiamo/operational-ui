@@ -10,5 +10,5 @@ export interface Props {
     end?: string;
     onChange?: (date: IDatePair) => void;
 }
-declare const Month: ({ year, month, start, end, onChange }: Props) => JSX.Element;
+declare const Month: ({year, month, start, end, onChange}: Props) => JSX.Element;
 export default Month;
