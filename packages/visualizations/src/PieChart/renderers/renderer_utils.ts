@@ -8,7 +8,7 @@ import {
   Object,
   Renderer,
   RendererAccessor,
-  RendererAccessors
+  RendererAccessors,
 } from "../typings"
 import { defaults, forEach, reduce } from "lodash/fp"
 import * as styles from "./styles"
@@ -53,7 +53,7 @@ export const defaultAccessors = (ctx: Renderer): RendererAccessors => {
   return {
     value: (d: Datum): number => d.value,
     key: (d: Datum): string => d.key,
-    color: (d: Datum): string => (d.unfilled ? undefined : assignColor(ctx.key(d)))
+    color: (d: Datum): string => (d.unfilled ? undefined : assignColor(ctx.key(d))),
   }
 }
 
@@ -81,7 +81,7 @@ export const textAttributes = (computed: ComputedArcs): Object<any> => {
   return {
     transform: (d: Datum): string => translateString(computed.arcOver.centroid(d)),
     text: percentageString,
-    textAnchor: "middle"
+    textAnchor: "middle",
   }
 }
 

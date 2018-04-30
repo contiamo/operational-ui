@@ -18,7 +18,7 @@ export interface Props {
 
 const Container = glamorous.div({
   label: "sidenavheader",
-  width: "100%"
+  width: "100%",
 })
 
 const Content = glamorous.div(
@@ -36,8 +36,8 @@ const Content = glamorous.div(
     borderBottom: isExpanded ? `1px solid #395568` : "none",
     backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
     ":hover": {
-      backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)"
-    }
+      backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)",
+    },
   })
 )
 
@@ -45,7 +45,7 @@ const Label = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.heading1,
   fontSize: 14,
   width: "fit-content",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 }))
 
 const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -54,7 +54,7 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  flex: `0 0 ${theme.box}px`
+  flex: `0 0 ${theme.box}px`,
 }))
 
 const SidenavHeader = (props: Props) => (

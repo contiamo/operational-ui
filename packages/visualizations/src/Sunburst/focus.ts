@@ -11,7 +11,7 @@ import {
   Object,
   SeriesEl,
   State,
-  StateWriter
+  StateWriter,
 } from "./typings"
 
 const dataName = (d: Datum): string => d.data.name,
@@ -67,7 +67,7 @@ class SunburstFocus implements Focus {
     const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
       labelPlacement: { left: number; top: number } = {
         left: focusPoint.centroid[0] - labelDimensions.width / 2,
-        top: focusPoint.centroid[1]
+        top: focusPoint.centroid[1],
       }
 
     FocusUtils.drawVisible(this.el, labelPlacement)

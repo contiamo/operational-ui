@@ -19,7 +19,7 @@ import {
   SeriesEl,
   State,
   TLink,
-  TNode
+  TNode,
 } from "../typings"
 
 const nodeLabelOptions: Object<Object<any>> = {
@@ -27,51 +27,51 @@ const nodeLabelOptions: Object<Object<any>> = {
     dy: "0",
     textAnchor: "middle",
     x: 0,
-    y: -1
+    y: -1,
   },
   bottom: {
     dy: "1em",
     textAnchor: "middle",
     x: 0,
-    y: 1
+    y: 1,
   },
   middle: {
     dy: "0.35em",
     textAnchor: "middle",
     x: 0,
-    y: 0
+    y: 0,
   },
   left: {
     dy: "0.35em",
     textAnchor: "end",
     x: -1,
-    y: 0
+    y: 0,
   },
   right: {
     dy: "0.35em",
     textAnchor: "start",
     x: 1,
-    y: 0
-  }
+    y: 0,
+  },
 }
 
 const nodeShapeOptions: Object<Object<any>> = {
   squareDiamond: {
     symbol: symbolSquare,
-    rotation: 45
+    rotation: 45,
   },
   square: {
     symbol: symbolSquare,
-    rotation: 0
+    rotation: 0,
   },
   diamond: {
     symbol: symbolDiamond,
-    rotation: 0
+    rotation: 0,
   },
   circle: {
     symbol: symbolCircle,
-    rotation: 0
-  }
+    rotation: 0,
+  },
 }
 
 class Nodes implements Renderer {
@@ -131,7 +131,7 @@ class Nodes implements Renderer {
       type: "node",
       x: d.x,
       y: d.y,
-      id: d.id()
+      id: d.id(),
     }
   }
 

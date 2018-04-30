@@ -16,7 +16,7 @@ export const months: string[] = [
   "September",
   "October",
   "November",
-  "December"
+  "December",
 ]
 
 // A range of numbers pre-filled in an array
@@ -51,7 +51,7 @@ export const toYearMonthDay = (date: string): { year: number; month: number; day
     year: chunks[0],
     // Months and days are numbered starting 0 as a state management convenience
     month: chunks[1] - 1,
-    day: chunks[2] - 1
+    day: chunks[2] - 1,
   }
 }
 

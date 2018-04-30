@@ -5,12 +5,12 @@ const GaugeRenderer = {
   type: "gauge",
   extent: "semi",
   comparison: { key: "Last month", value: 29 },
-  target: 50
+  target: 50,
 }
 
 const data = {
   data: [{ key: "Berlin", value: 35 }],
-  renderAs: [GaugeRenderer]
+  renderAs: [GaugeRenderer],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

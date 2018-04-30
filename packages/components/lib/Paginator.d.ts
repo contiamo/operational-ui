@@ -9,5 +9,5 @@ export interface Props {
     page?: number;
     pageCount: number;
 }
-declare const Paginator: ({maxVisible, onChange, pageCount, page, id, css, className}: Props) => JSX.Element;
+declare const Paginator: ({ maxVisible, onChange, pageCount, page, id, css, className }: Props) => JSX.Element;
 export default Paginator;

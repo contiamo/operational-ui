@@ -24,7 +24,7 @@ var Container = glamorous_1.default.div(function (_a) {
         cursor: "pointer",
         overflow: "hidden",
         color: utils_1.readableTextColor(backgroundColor, ["black", "white"]),
-        margin: "0px " + theme.spacing / 2 + "px 0px 0px"
+        margin: "0px " + theme.spacing / 2 + "px 0px 0px",
     };
 });
 var Content = glamorous_1.default.div(function (_a) {
@@ -35,8 +35,8 @@ var Content = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         padding: "0px " + theme.spacing / 2 + "px",
         "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.1)"
-        }
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+        },
     });
 });
 var Action = glamorous_1.default.div(function (_a) {
@@ -52,8 +52,8 @@ var Action = glamorous_1.default.div(function (_a) {
         justifyContent: "center",
         height: "100%",
         "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.1)"
-        }
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+        },
     };
 });
 var Chip = function (props) { return (React.createElement(Container, { id: props.id, className: props.className, css: props.css, color: props.color, hasChip: !!props.onClick },

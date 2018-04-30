@@ -24,7 +24,7 @@ import {
   Renderer,
   RendererAccessor,
   RendererAccessors,
-  State
+  State,
 } from "../typings"
 
 const ANGLE_RANGE: [number, number] = [0, 2 * Math.PI]
@@ -110,7 +110,7 @@ class Donut implements Renderer {
   private arcAttributes(): Object<any> {
     return {
       path: this.arcTween.bind(this),
-      fill: this.color.bind(this)
+      fill: this.color.bind(this),
     }
   }
 
@@ -145,7 +145,7 @@ class Donut implements Renderer {
         innerRadius: this.computed.rInner,
         outerRadius: this.computed.r,
         endAngle: d.endAngle,
-        startAngle: d.startAngle
+        startAngle: d.startAngle,
       }
     )
     return (t: number): string => this.computed.arc(f(t))
@@ -169,7 +169,7 @@ class Donut implements Renderer {
 
     const d: ComputedInitial = {
       layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
-      total: Utils.computeTotal(this.data, this.value)
+      total: Utils.computeTotal(this.data, this.value),
     }
 
     // data should not become part of this.previousComputed in first computation
@@ -180,7 +180,7 @@ class Donut implements Renderer {
     this.computed = {
       ...d,
       ...this.computeArcs(d),
-      data: d.layout(this.data)
+      data: d.layout(this.data),
     }
   }
 
@@ -203,7 +203,7 @@ class Donut implements Renderer {
       arc: d3Arc(),
       arcOver: d3Arc()
         .innerRadius(rInnerHover)
-        .outerRadius(rHover)
+        .outerRadius(rHover),
     }
   }
 
@@ -224,7 +224,7 @@ class Donut implements Renderer {
     const datumInfo: DatumInfo = {
       key: this.key(d),
       value: this.value(d),
-      percentage: d.data.percentage
+      percentage: d.data.percentage,
     }
     const centroid: [number, number] = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
@@ -261,7 +261,7 @@ class Donut implements Renderer {
     return map((datum: Datum): LegendDatum => {
       return {
         label: this.key(datum),
-        color: this.color(datum)
+        color: this.color(datum),
       }
     })(this.data)
   }

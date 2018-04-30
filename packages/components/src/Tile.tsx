@@ -18,16 +18,16 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "relative",
   marginRight: theme.spacing,
   padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-  backgroundColor: theme.colors.lighterBackground
+  backgroundColor: theme.colors.lighterBackground,
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.heading1
+  ...theme.typography.heading1,
 }))
 
 const Label = glamorous.small(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
-  opacity: 0.8
+  opacity: 0.8,
 }))
 
 const Tile = (props: Props) => (

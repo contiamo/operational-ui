@@ -24,7 +24,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
   marginBottom: theme.spacing,
   padding: `0 ${theme.spacing}px`,
   lineHeight: 1,
-  color: theme.colors.text
+  color: theme.colors.text,
 }))
 
 const CardHeader = (props: Props) => (

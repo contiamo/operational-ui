@@ -32,7 +32,7 @@ export const fromHash = (hash: string) => (testGroups: TestSuiteGroup[]): Curren
   }
   return {
     groupIndex,
-    testIndex
+    testIndex,
   }
 }
 

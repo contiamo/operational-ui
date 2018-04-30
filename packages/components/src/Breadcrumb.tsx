@@ -14,15 +14,15 @@ export interface Props {
 const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   label: "breadcrumb",
   "& svg": {
-    marginLeft: 4
+    marginLeft: 4,
   },
   "& a": {
     color: theme.colors.linkText,
     borderBottom: "1px solid currentColor",
     "&:hover": {
-      color: darken(theme.colors.linkText, 5)
-    }
-  }
+      color: darken(theme.colors.linkText, 5),
+    },
+  },
 }))
 
 const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({}))

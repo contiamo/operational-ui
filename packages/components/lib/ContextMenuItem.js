@@ -17,17 +17,17 @@ var Container = glamorous_1.default.div(function (_a) {
         ? {
             cursor: "pointer",
             "&:hover": {
-                backgroundColor: utils_1.darken(theme.colors.white, 2)
-            }
+                backgroundColor: utils_1.darken(theme.colors.white, 2),
+            },
         }
         : {}, { "&:not(:first-child)": {
-            borderTop: 0
+            borderTop: 0,
         } }));
 });
 var ContextMenuItem = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, clickable: !!props.onClick, onClick: props.onClick }, props.children)); };
 exports.default = Object.assign(ContextMenuItem, {
     defaultProps: {
-        __isContextMenuItem: true
-    }
+        __isContextMenuItem: true,
+    },
 });
 //# sourceMappingURL=ContextMenuItem.js.map

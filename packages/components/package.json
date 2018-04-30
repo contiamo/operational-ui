@@ -39,12 +39,11 @@
     "@types/core-js": "0.9.43",
     "@types/enzyme": "3.1.5",
     "@types/jest": "20.0.8",
-    "@types/lodash": "4.14.74",
+    "@types/lodash": "4.14.108",
     "@types/marked": "0.3.0",
-    "@types/node": "8.0.27",
-    "@types/react": "16.1.0",
-    "@types/react-dom": "16.0.0",
-    "@types/react-icons": "2.2.2",
+    "@types/node": "9.6.7",
+    "@types/react": "16.3.13",
+    "@types/react-dom": "16.0.5",
     "awesome-typescript-loader": "3.4.1",
     "enzyme": "2.9.1",
     "enzyme-to-json": "1.5.1",
@@ -55,10 +54,10 @@
     "prettier": "1.8.2",
     "react-test-renderer": "16.0.0",
     "ts-jest": "21.0.0",
-    "tslint": "5.7.0",
-    "tslint-config-airbnb": "5.2.1",
-    "tslint-config-prettier": "1.5.0",
-    "typescript": "2.6.2"
+    "tslint": "5.9.1",
+    "tslint-config-airbnb": "5.8.0",
+    "tslint-config-prettier": "1.12.0",
+    "typescript": "2.8.3"
   },
   "jest": {
     "setupFiles": [

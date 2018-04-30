@@ -15,7 +15,7 @@ export interface Props {
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "sidebarheader",
-  position: "relative"
+  position: "relative",
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -29,8 +29,8 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     top: 0,
     left: theme.spacing * 1,
     borderLeft: "1px solid",
-    borderColor: theme.colors.separator
-  }
+    borderColor: theme.colors.separator,
+  },
 }))
 
 const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean }): {} => ({
@@ -47,11 +47,11 @@ const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean
   ...isOpen
     ? {
         borderBottom: "1px solid",
-        borderBottomColor: theme.colors.separator
+        borderBottomColor: theme.colors.separator,
       }
     : {},
   "&:hover": {
-    backgroundColor: theme.colors.lighterBackground
+    backgroundColor: theme.colors.lighterBackground,
   },
   "&::after": {
     content: "' '",
@@ -62,8 +62,8 @@ const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean
     border: "4px solid transparent",
     borderLeftColor: theme.colors.lightGray,
     transition: ".15s transform ease",
-    transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null
-  }
+    transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null,
+  },
 }))
 
 const SidebarHeader = (props: Props) => (

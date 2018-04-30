@@ -17,7 +17,7 @@ const OperationalUI = (props: Props) => {
         {props.withBaseStyles ? (
           <style
             dangerouslySetInnerHTML={{
-              __html: baseStylesheet(props.theme || operational)
+              __html: baseStylesheet(props.theme || operational),
             }}
           />
         ) : null}

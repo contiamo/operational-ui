@@ -17,11 +17,11 @@ var StatusContainer = glamorous_1.default.div({
     height: 11,
     position: "absolute",
     top: 6,
-    width: 11
+    width: 11,
 }, function (_a) {
     var theme = _a.theme, color = _a.color;
     return {
-        backgroundColor: theme_1.expandColor(theme, color) || theme.colors.info
+        backgroundColor: theme_1.expandColor(theme, color) || theme.colors.info,
     };
 });
 var Content = glamorous_1.default.div({
@@ -29,11 +29,11 @@ var Content = glamorous_1.default.div({
     position: "relative",
     top: 0,
     "& > *": {
-        margin: 0
+        margin: 0,
     },
     "& p": {
-        marginBottom: 0
-    }
+        marginBottom: 0,
+    },
 }, function (_a) {
     var theme = _a.theme;
     return (__assign({}, theme.typography.body));
@@ -48,18 +48,18 @@ var Container = glamorous_1.default.li({
         position: "absolute",
         left: 5,
         top: 6,
-        height: "100%"
+        height: "100%",
     },
     "&:last-child::before": {
-        display: "none"
-    }
+        display: "none",
+    },
 }, function (_a) {
     var theme = _a.theme;
     return ({
         paddingBottom: theme.spacing,
         "&::before": {
-            borderLeft: "1px solid " + theme.colors.separator
-        }
+            borderLeft: "1px solid " + theme.colors.separator,
+        },
     });
 });
 var TimelineItem = function (_a) {

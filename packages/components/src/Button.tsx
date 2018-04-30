@@ -54,21 +54,21 @@ const Container = glamorous.button(({ theme, color, active, disabled, condensed 
       ? {
           ":hover": {
             backgroundColor: activeBackgroundColor,
-            color: readableTextColor(activeBackgroundColor, ["white", "#222"])
+            color: readableTextColor(activeBackgroundColor, ["white", "#222"]),
           },
 
           ":focus": {
             outline: 0,
-            boxShadow: `0 0 0 3px ${lighten(backgroundColor, 35)}`
+            boxShadow: `0 0 0 3px ${lighten(backgroundColor, 35)}`,
           },
 
           ":active": {
-            boxShadow: activeBoxShadow
-          }
+            boxShadow: activeBoxShadow,
+          },
         }
       : {},
 
-    marginRight: spacing / 2
+    marginRight: spacing / 2,
   }
 })
 

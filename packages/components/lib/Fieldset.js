@@ -22,11 +22,11 @@ var Container = glamorous_1.default.fieldset(function (_a) {
         "& > *:not(legend)": {
             display: "block",
             marginTop: theme.spacing,
-            marginBottom: theme.spacing
+            marginBottom: theme.spacing,
         },
         "&:first-child": {
-            marginTop: 0
-        }
+            marginTop: 0,
+        },
     });
 });
 var Legend = glamorous_1.default.legend(function (_a) {

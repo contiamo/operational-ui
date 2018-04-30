@@ -102,7 +102,7 @@ const journeys = [
   { path: ["135", "22", "18", "109", "262", "117", "4"], size: 1 },
   { path: ["135", "22", "18", "109", "2", "117"], size: 1 },
   { path: ["135", "22", "18", "109", "2", "117", "190"], size: 1 },
-  { path: ["135", "22", "18", "109", "2", "77", "53", "192"], size: 1 }
+  { path: ["135", "22", "18", "109", "2", "77", "53", "192"], size: 1 },
 ]
 
 const unloopedJourneys = ProcessFlowLoopHandler(journeys)
@@ -114,16 +114,16 @@ const data = {
   nodeList: map(nodeId => {
     return {
       id: nodeId,
-      size: 0
+      size: 0,
     }
-  })(nodeList)
+  })(nodeList),
 }
 
 const config = {
   maxNodeSize: 800,
   nodeBorderWidth: 6,
   horizontalNodeSpacing: 60,
-  verticalNodeSpacing: 60
+  verticalNodeSpacing: 60,
 }
 
 const accessors = {
@@ -139,10 +139,10 @@ const accessors = {
     },
     content: (d: any) => [
       { key: "Description", value: "This is a node." },
-      { key: "Comment", value: "This comment is boring." }
+      { key: "Comment", value: "This comment is boring." },
     ],
     label: (d: any) => "N:" + d.id,
-    labelPosition: (d: any) => "top"
+    labelPosition: (d: any) => "top",
   },
   link: {
     stroke: (d: any) => {
@@ -153,12 +153,12 @@ const accessors = {
         return "lightcoral"
       }
       return "#bbb"
-    }
+    },
   },
   data: {
     journeys: (d: any) => d.unloopedJourneys,
-    nodes: (d: any) => d.nodeList
-  }
+    nodes: (d: any) => d.nodeList,
+  },
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

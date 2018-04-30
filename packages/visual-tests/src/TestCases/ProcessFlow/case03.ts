@@ -11,7 +11,7 @@ const data = {
     { path: ["1", "2", "3", "6", "11"], size: 130 },
     { path: ["1", "2", "3", "4", "10"], size: 290 },
     { path: ["1", "2", "3", "12", "10"], size: 120 },
-    { path: ["1", "2", "3", "4", "13"], size: 620 }
+    { path: ["1", "2", "3", "4", "13"], size: 620 },
   ],
   nodeList: [
     { id: "1", group: "start" },
@@ -26,8 +26,8 @@ const data = {
     { id: "10", group: "end" },
     { id: "11", group: "end" },
     { id: "12" },
-    { id: "13", group: "end" }
-  ]
+    { id: "13", group: "end" },
+  ],
 }
 
 const groupAccessorValue: any = {
@@ -36,20 +36,20 @@ const groupAccessorValue: any = {
     shape: "diamond",
     size: 500,
     stroke: "darkgreen",
-    labelPosition: "top"
+    labelPosition: "top",
   },
   end: {
     color: "red",
     shape: "square",
     size: 800,
     stroke: "darkred",
-    labelPosition: "bottom"
-  }
+    labelPosition: "bottom",
+  },
 }
 
 const dataAccessors: any = {
   nodes: (data: any) => data.nodeList,
-  journeys: (data: any) => data.journeyList
+  journeys: (data: any) => data.journeyList,
 }
 
 const nodeAccessors: any = {
@@ -70,13 +70,13 @@ const nodeAccessors: any = {
   },
   label: (d: any) => {
     return `${d.id}: an excessively long label to check overlap behaviour`
-  }
+  },
 }
 
 const linkAccessors: any = {
   stroke: (link: any) => (link.size > 1000 ? "blue" : "#bbb"),
   dash: "10 2",
-  size: 2
+  size: 2,
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

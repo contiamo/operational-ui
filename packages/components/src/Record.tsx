@@ -16,7 +16,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "relative",
   padding: `${theme.spacing / 2}px ${theme.spacing}px ${theme.spacing}px`,
   backgroundColor: theme.colors.background,
-  borderRadius: theme.borderRadius
+  borderRadius: theme.borderRadius,
 }))
 
 const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -25,18 +25,18 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   alignItems: "center",
   justifyContent: "space-between",
   marginBottom: theme.spacing / 2,
-  height: theme.spacing * 2
+  height: theme.spacing * 2,
 }))
 
 const ControlContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& > *:last-child": {
-    marginRight: 0
-  }
+    marginRight: 0,
+  },
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   opacity: 0.8,
-  ...theme.typography.body
+  ...theme.typography.body,
 }))
 
 const Record = (props: Props) => (

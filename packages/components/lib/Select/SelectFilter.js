@@ -17,8 +17,8 @@ var Container = glamorous_1.default.div(function (_a) {
             padding: theme.spacing / 2 + "px " + theme.spacing * 3 / 4,
             border: 0,
             outline: "none",
-            font: "inherit"
-        }
+            font: "inherit",
+        },
     };
 });
 var SelectFilter = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className },

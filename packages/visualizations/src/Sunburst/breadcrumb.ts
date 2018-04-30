@@ -9,7 +9,7 @@ const dims: Object<number> = {
   width: 70,
   height: 20,
   space: 3,
-  tip: 7
+  tip: 7,
 }
 
 class Breadcrumb {
@@ -45,11 +45,10 @@ class Breadcrumb {
   private truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
     if (nodeArray.length <= 5) {
       return nodeArray
-    } else {
-      const firstNodes: (Datum | string)[] = nodeArray.slice(0, 2)
-      const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - 2)
-      return firstNodes.concat(["hops"]).concat(lastNodes)
     }
+    const firstNodes: (Datum | string)[] = nodeArray.slice(0, 2)
+    const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - 2)
+    return firstNodes.concat(["hops"]).concat(lastNodes)
   }
 
   private backgroundColor(d: any): string {
