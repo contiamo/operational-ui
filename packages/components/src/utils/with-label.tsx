@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  display: "inline-block"
+  display: "inline-block",
 }))
 
 const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
@@ -11,7 +11,7 @@ const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
   fontWeight: 600,
   opacity: 0.7,
   display: "inline-block",
-  marginBottom: theme.spacing / 4
+  marginBottom: theme.spacing / 4,
 }))
 
 const withLabel = (Component: any): any => {

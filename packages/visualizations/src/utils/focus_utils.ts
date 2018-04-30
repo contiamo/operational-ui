@@ -37,7 +37,7 @@ const FocusUtils: Object<any> = {
     const rect: ClientRect = focusEl.node().getBoundingClientRect()
     return {
       height: rect.height,
-      width: rect.width
+      width: rect.width,
     }
   },
 
@@ -56,14 +56,14 @@ const FocusUtils: Object<any> = {
       farLeft: drawing.xMin + offset,
       farRight: drawing.xMax - offset - label.width,
       left: drawing.xMin + focus.x - offset - label.width,
-      right: drawing.xMin + focus.x + offset
+      right: drawing.xMin + focus.x + offset,
     }
 
     const y: Object<number> = {
       above: drawing.yMin + focus.y - offset - label.height,
       below: drawing.yMin + focus.y + offset,
       bottom: drawing.yMin + drawing.yMax - offset - label.height,
-      top: drawing.yMin + offset
+      top: drawing.yMin + offset,
     }
 
     let top: number
@@ -95,7 +95,7 @@ const FocusUtils: Object<any> = {
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
   verticalCentre: (focus: Object<number>, label: Object<number>, drawing: Object<number>): number => {
     return Math.min(Math.max(focus.y + drawing.yMin - label.height / 2, drawing.yMin), drawing.yMax)
-  }
+  },
 }
 
 export default FocusUtils

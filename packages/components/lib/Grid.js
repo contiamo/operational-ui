@@ -14,7 +14,7 @@ var getGridCSSProperties = function (gridType) {
     if (gridType === "IDE") {
         return {
             gridTemplateColumns: "200px auto",
-            gridTemplateRows: "auto"
+            gridTemplateRows: "auto",
         };
     }
     // Handle NxM case
@@ -24,7 +24,7 @@ var getGridCSSProperties = function (gridType) {
     if (!isNaN(cols) && !isNaN(rows)) {
         return {
             gridTemplateColumns: "repeat(" + cols + ", 1fr)",
-            gridTemplateRows: "repeat(" + rows + ", 1fr)"
+            gridTemplateRows: "repeat(" + rows + ", 1fr)",
         };
     }
     throw new Error("Grid type can be either 'IDE' or of an `MxN` format, e.g. `1x2` or `5x6`. See https://ui.contiamo.com/components/grids/.");

@@ -39,9 +39,8 @@ export default class State<T> {
     return path.reduce((currentStateChunk: any, currentPath: string) => {
       if (currentStateChunk !== null && typeof currentStateChunk === "object") {
         return currentStateChunk[currentPath]
-      } else {
-        throw new Error(`Path [${path.join(", ")}] not found in object`)
       }
+      throw new Error(`Path [${path.join(", ")}] not found in object`)
     }, this.state)
   }
 
@@ -52,9 +51,8 @@ export default class State<T> {
           currentStateChunk[currentPath] = value
         }
         return currentStateChunk[currentPath]
-      } else {
-        throw new Error(`Path [${path.join(", ")}] not found in object`)
       }
+      throw new Error(`Path [${path.join(", ")}] not found in object`)
     }, this.state)
   }
 
@@ -65,9 +63,8 @@ export default class State<T> {
           currentStateChunk[currentPath] = defaults(currentStateChunk[currentPath])(value)
         }
         return currentStateChunk[currentPath]
-      } else {
-        throw new Error(`Path [${path.join(", ")}] not found in object`)
       }
+      throw new Error(`Path [${path.join(", ")}] not found in object`)
     }, this.state)
   }
 }

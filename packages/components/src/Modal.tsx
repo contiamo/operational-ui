@@ -23,27 +23,26 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "rgba(0, 0, 0, .6)"
+  backgroundColor: "rgba(0, 0, 0, .6)",
 }))
 
 const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.white,
   padding: theme.spacing,
-  boxShadow: theme.shadows.popup
+  boxShadow: theme.shadows.popup,
 }))
 
 class Modal extends React.Component<Props, {}> {
   contentNode: any
   render() {
-    const { props } = this
     return (
       <Container
-        id={props.id}
-        css={props.css}
-        className={props.className}
+        id={this.props.id}
+        css={this.props.css}
+        className={this.props.className}
         onClick={ev => {
           if (this.contentNode && !this.contentNode.contains(ev.target)) {
-            props.onClose && props.onClose()
+            this.props.onClose && this.props.onClose()
           }
         }}
       >
@@ -51,10 +50,10 @@ class Modal extends React.Component<Props, {}> {
           innerRef={contentNode => {
             this.contentNode = contentNode
           }}
-          className={props.contentClassName}
-          css={props.contentCss}
+          className={this.props.contentClassName}
+          css={this.props.contentCss}
         >
-          {props.children}
+          {this.props.children}
         </Content>
       </Container>
     )

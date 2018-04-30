@@ -24,7 +24,7 @@ const setNewDate = (date: string, current: IDatePair): IDatePair => {
   const [sortedNewStart, sortedNewEnd] = [newStart, newEnd].sort()
   return {
     start: sortedNewStart,
-    end: sortedNewEnd
+    end: sortedNewEnd,
   }
 }
 

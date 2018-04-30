@@ -37,7 +37,7 @@ const TextareaComp = glamorous.textarea(
     isCode,
     isError,
     css_,
-    disabled
+    disabled,
   }: {
     theme: Theme
     isCode: boolean
@@ -57,7 +57,7 @@ const TextareaComp = glamorous.textarea(
       padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3}px`,
       fontFamily: isCode ? "monospace" : "inherit",
       opacity: disabled ? 0.6 : 1.0,
-      ":focus": inputFocus({ theme, isError })
+      ":focus": inputFocus({ theme, isError }),
     }
   }
 )

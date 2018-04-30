@@ -12,31 +12,31 @@ const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   textAlign: "center",
   position: "relative",
   "& svg": {
-    margin: "auto"
+    margin: "auto",
   },
   "& h1": {
     ...theme.typography.title,
-    margin: "10px 0 0 0"
+    margin: "10px 0 0 0",
   },
   "& h2": {
     ...theme.typography.heading1,
-    marginTop: 0
-  }
+    marginTop: 0,
+  },
 }))
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   maxWidth: 760,
   margin: "auto",
-  padding: 2 * theme.spacing
+  padding: 2 * theme.spacing,
 }))
 
 const TitleBarNav = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  marginTop: 20
+  marginTop: 20,
 }))
 
 export default class App extends React.Component<{}, {}> {
   state = {
-    rotation: 0
+    rotation: 0,
   }
 
   rotationInterval: any

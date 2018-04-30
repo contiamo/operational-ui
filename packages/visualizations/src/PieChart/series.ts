@@ -10,7 +10,7 @@ import {
   SeriesAccessors,
   SeriesEl,
   State,
-  StateWriter
+  StateWriter,
 } from "./typings"
 import { flow, filter, forEach } from "lodash/fp"
 

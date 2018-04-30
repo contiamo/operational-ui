@@ -23,7 +23,7 @@ const Container = glamorous.div(
     theme,
     fix,
     expanded,
-    expandOnHover
+    expandOnHover,
   }: {
     theme: Theme
     color?: string
@@ -40,8 +40,8 @@ const Container = glamorous.div(
           overflow: "hidden",
           ":hover": {
             width: sidenavExpandedWidth,
-            overflow: "auto"
-          }
+            overflow: "auto",
+          },
         }
       : {}
 
@@ -57,15 +57,15 @@ const Container = glamorous.div(
       height: "100%",
       ...expandOnHoverStyles,
       "& a:focus": {
-        outline: 0
-      }
+        outline: 0,
+      },
     }
   }
 )
 
 class Sidenav extends React.Component<Props, State> {
   state = {
-    isHovered: false
+    isHovered: false,
   }
 
   render() {
@@ -78,12 +78,12 @@ class Sidenav extends React.Component<Props, State> {
         expanded={this.props.expanded}
         onMouseEnter={() => {
           this.setState(prevState => ({
-            isHovered: true
+            isHovered: true,
           }))
         }}
         onMouseLeave={() => {
           this.setState(prevState => ({
-            isHovered: false
+            isHovered: false,
           }))
         }}
       >

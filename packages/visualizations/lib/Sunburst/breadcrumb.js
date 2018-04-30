@@ -7,7 +7,7 @@ var dims = {
     width: 70,
     height: 20,
     space: 3,
-    tip: 7
+    tip: 7,
 };
 var Breadcrumb = /** @class */ (function () {
     function Breadcrumb(state, stateWriter, events, el) {
@@ -35,11 +35,9 @@ var Breadcrumb = /** @class */ (function () {
         if (nodeArray.length <= 5) {
             return nodeArray;
         }
-        else {
-            var firstNodes = nodeArray.slice(0, 2);
-            var lastNodes = nodeArray.slice(nodeArray.length - 2);
-            return firstNodes.concat(["hops"]).concat(lastNodes);
-        }
+        var firstNodes = nodeArray.slice(0, 2);
+        var lastNodes = nodeArray.slice(nodeArray.length - 2);
+        return firstNodes.concat(["hops"]).concat(lastNodes);
     };
     Breadcrumb.prototype.backgroundColor = function (d) {
         return d === "hops" ? "#fff" : d.color || "#eee";

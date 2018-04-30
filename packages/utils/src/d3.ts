@@ -3,7 +3,7 @@
  * from context as a second argument, passing any remaining ones
  * from the spread.
  */
-export const handleWithD3Element = (handler: () => {}): {} => {
+export const handleWithD3Element = (handler: (datum: {}, context: any, ...rest: any[]) => {}): {} => {
   return function(datum: {}, ...args: any[]) {
     handler(datum, this, ...args)
   }

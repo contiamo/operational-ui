@@ -18,12 +18,12 @@ var Container = glamorous_1.default.div(function (_a) {
         outline: "none",
         ":hover": {
             backgroundColor: utils_1.darken(backgroundColor, 5),
-            color: utils_1.readableTextColor(utils_1.darken(backgroundColor, 5), ["black", "white"])
+            color: utils_1.readableTextColor(utils_1.darken(backgroundColor, 5), ["black", "white"]),
         },
         "&:not(:first-child)": {
             borderTop: "1px solid",
-            borderColor: utils_1.darken(backgroundColor, 10)
-        }
+            borderColor: utils_1.darken(backgroundColor, 10),
+        },
     };
 });
 var IconContainer = glamorous_1.default.div(function (_a) {
@@ -37,8 +37,8 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         transform: "translate3d(-50%, -50%, 0)",
         "& svg": {
             width: "100%",
-            height: "100%"
-        }
+            height: "100%",
+        },
     });
 });
 var SelectOption = function (props) { return (React.createElement(Container, { key: props.id, css: props.css, className: props.className, selected: !!props.selected, color: props.color, tabIndex: -2, role: "option", "aria-selected": props.selected, onClick: props.onClick },

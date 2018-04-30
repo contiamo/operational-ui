@@ -16,7 +16,7 @@ export {
   D3Selection,
   SeriesEl,
   StateWriter,
-  Canvas
+  Canvas,
 } from "../utils/typings"
 
 export interface SunburstConfig extends Config {

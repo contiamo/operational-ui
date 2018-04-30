@@ -14,29 +14,29 @@ var utils_1 = require("@operational/utils");
 var breakdownStyle = {
     maxWidth: "350px",
     padding: "6px",
-    background: "white"
+    background: "white",
 };
 var breakdownsContainerStyle = {
     width: "350px",
     float: "left",
-    padding: "7px 0"
+    padding: "7px 0",
 };
 var breakdownContainerStyle = {
     padding: theme_1.operational.spacing / 2 + "px",
     background: theme_1.operational.colors.white,
     width: "49%",
-    float: "left"
+    float: "left",
 };
 var breakdownLabelStyle = __assign({}, theme_1.operational.typography.small, { display: "block", marginBottom: theme_1.operational.spacing / 4 });
 var breakdownCommentLabelStyle = {
-    marginLeft: "6px"
+    marginLeft: "6px",
 };
 var breakdownBackgroundBarStyle = {
     position: "relative",
     width: "100%",
     fontSize: 12,
     overflow: "hidden",
-    backgroundColor: theme_1.operational.colors.lightGray
+    backgroundColor: theme_1.operational.colors.lightGray,
 };
 var breakdownBarStyle = {
     content: "",
@@ -47,18 +47,18 @@ var breakdownBarStyle = {
     display: "block",
     height: "100%",
     pointerEvents: "none",
-    backgroundColor: utils_1.setBrightness(theme_1.operational.colors.info, 145)
+    backgroundColor: utils_1.setBrightness(theme_1.operational.colors.info, 145),
 };
 var breakdownTextStyle = __assign({}, theme_1.operational.typography.small, { color: theme_1.operational.colors.gray, position: "relative", top: 1, fontWeight: 400, padding: theme_1.operational.spacing / 4 + "px " + theme_1.operational.spacing / 2 + "px" });
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",
     "& span": {
-        fontWeight: "normal"
-    }
+        fontWeight: "normal",
+    },
 };
 var contentStyle = {
-    paddingTop: "15px"
+    paddingTop: "15px",
 };
 exports.breakdown = glamor_1.css(breakdownStyle).toString();
 exports.breakdownsContainer = glamor_1.css(breakdownsContainerStyle).toString();

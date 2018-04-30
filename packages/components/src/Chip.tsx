@@ -35,7 +35,7 @@ const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; colo
     cursor: "pointer",
     overflow: "hidden",
     color: readableTextColor(backgroundColor, ["black", "white"]),
-    margin: `0px ${theme.spacing / 2}px 0px 0px`
+    margin: `0px ${theme.spacing / 2}px 0px 0px`,
   }
 })
 
@@ -45,8 +45,8 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   alignItems: "center",
   padding: `0px ${theme.spacing / 2}px`,
   "&:hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.1)"
-  }
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
 }))
 
 const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
@@ -61,8 +61,8 @@ const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }
     justifyContent: "center",
     height: "100%",
     "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.1)"
-    }
+      backgroundColor: "rgba(0, 0, 0, 0.1)",
+    },
   }
 })
 

@@ -32,11 +32,11 @@ const Container = glamorous.div(
     color: isActive ? theme.colors.linkText : theme.colors.text,
     ...isDisabled ? { opacity: 0.25, pointerEvents: "none" } : {},
     ":hover": {
-      backgroundColor: theme.colors.lighterBackground
+      backgroundColor: theme.colors.lighterBackground,
     },
     ":focus": {
-      outline: 0
-    }
+      outline: 0,
+    },
   })
 )
 

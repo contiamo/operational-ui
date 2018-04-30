@@ -33,7 +33,7 @@ class SunburstFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed()
+      computed: this.initialComputed(),
     })
   }
 
@@ -53,7 +53,7 @@ class SunburstFacade implements Facade {
       sort: true,
       uid: uniqueId("sunburst"),
       visualizationName: "sunburst",
-      width: 500
+      width: 500,
     }
   }
 
@@ -65,14 +65,14 @@ class SunburstFacade implements Facade {
     const assignColors: (key: string) => string = this.defaultColorAssigner(this.initialConfig().palette)
     return {
       data: {
-        data: (data: any): RawData => data
+        data: (data: any): RawData => data,
       },
       series: {
         color: (d: RawData): string => assignColors(d.name),
         id: (d: RawData): string => d.name,
         name: (d: RawData): string => d.name || "",
-        value: (d: RawData): number => d.value
-      }
+        value: (d: RawData): number => d.value,
+      },
     }
   }
 
@@ -80,7 +80,7 @@ class SunburstFacade implements Facade {
     return {
       canvas: {},
       focus: {},
-      renderer: {}
+      renderer: {},
     }
   }
 
@@ -113,7 +113,7 @@ class SunburstFacade implements Facade {
         this.state.computedWriter(["rootLabel"]),
         this.events,
         this.canvas.elementFor("rootLabel")
-      )
+      ),
     }
   }
 
@@ -125,7 +125,7 @@ class SunburstFacade implements Facade {
     if (config.palette && !this.customColorAccessor) {
       const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
       this.accessors("series", {
-        color: (d: RawData): string => assignColors(d.name, d.color)
+        color: (d: RawData): string => assignColors(d.name, d.color),
       })
     }
     return this.state.config(config)
