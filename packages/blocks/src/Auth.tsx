@@ -28,7 +28,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: theme.spacing,
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 }))
 
 const AuthCard = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -39,29 +39,29 @@ const AuthCard = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.white,
   padding: `${3 * theme.spacing}px ${1.5 * theme.spacing}px`,
   width: "100%",
-  maxWidth: 360
+  maxWidth: 360,
 }))
 
 const Content = glamorous.div(({ theme, isEnabled }: { theme: Theme; isEnabled: boolean }): {} => ({
   opacity: 1,
-  pointerEvents: isEnabled ? "all" : "none"
+  pointerEvents: isEnabled ? "all" : "none",
 }))
 
 const SubmitContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginTop: 2.5 * theme.spacing,
   textAlign: "center",
   "& > *": {
-    width: "100%"
-  }
+    width: "100%",
+  },
 }))
 
 const InputFields = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  margin: `${1 * theme.spacing}px 0`
+  margin: `${1 * theme.spacing}px 0`,
 }))
 
 const inputStyle: {} = {
   display: "block",
-  margin: "20px 0"
+  margin: "20px 0",
 }
 
 /*
@@ -99,7 +99,7 @@ export default class Auth extends React.Component<Props, State> {
                   onChange={(v: string) => {
                     this.props.onChange &&
                       this.props.onChange({
-                        username: v
+                        username: v,
                       })
                   }}
                 />
@@ -114,7 +114,7 @@ export default class Auth extends React.Component<Props, State> {
                   onChange={(v: string) => {
                     this.props.onChange &&
                       this.props.onChange({
-                        password: v
+                        password: v,
                       })
                   }}
                 />
@@ -129,7 +129,7 @@ export default class Auth extends React.Component<Props, State> {
                   onChange={(v: string) => {
                     this.props.onChange &&
                       this.props.onChange({
-                        passwordConfirmation: v
+                        passwordConfirmation: v,
                       })
                   }}
                 />

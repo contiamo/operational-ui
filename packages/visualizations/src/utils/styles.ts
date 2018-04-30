@@ -3,14 +3,14 @@ import { css } from "glamor"
 const legendStyle = {
   fontSize: "11px",
   position: "relative",
-  overflow: "hidden"
+  overflow: "hidden",
 }
 
 const legendTopBottomStyle = {
   padding: "3px 7px",
   "& .series-legend, .comparison-legend": {
-    float: "left"
-  }
+    float: "left",
+  },
 }
 
 const seriesLegendStyle = {
@@ -21,16 +21,16 @@ const seriesLegendStyle = {
     width: "6px",
     height: "6px",
     margin: "2px 3px 0 0",
-    float: "left"
+    float: "left",
   },
   "& div.name": {
-    float: "left"
-  }
+    float: "left",
+  },
 }
 
 const drawingContainerStyle = {
   position: "relative",
-  overflow: "hidden"
+  overflow: "hidden",
 }
 
 const ruleStyle = {
@@ -38,12 +38,12 @@ const ruleStyle = {
   strokeWidth: "1px",
   shapeRendering: "crispedges",
   "& .zero": {
-    strokeWidth: "2px"
+    strokeWidth: "2px",
   },
   "& .now": {
     stroke: "#71a934",
-    strokeDasharray: "2, 4"
-  }
+    strokeDasharray: "2, 4",
+  },
 }
 
 const componentFocusStyle = {
@@ -53,7 +53,7 @@ const componentFocusStyle = {
   borderRadius: "3px",
   border: "1px solid #dcf1ff",
   padding: 0,
-  cursor: "pointer"
+  cursor: "pointer",
 }
 
 const chartContainerStyle = {
@@ -61,8 +61,8 @@ const chartContainerStyle = {
   display: "block",
   backgroundColor: "#fff",
   "&.hidden": {
-    display: "none"
-  }
+    display: "none",
+  },
 }
 
 const focusLegendStyle = {
@@ -79,36 +79,36 @@ const focusLegendStyle = {
     listStyle: "none",
     fontSize: 12,
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   "& li.title, span.title": {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   "& span.title": {
-    paddingRight: "6px"
+    paddingRight: "6px",
   },
   "&::before,::after": {
     content: "''",
     position: "absolute",
     width: 0,
-    height: 0
+    height: 0,
   },
   "&.above::before,.above::after": {
     top: "100%",
-    left: "50%"
+    left: "50%",
   },
   "&.above::before": {
     borderLeft: "solid 8px transparent",
     borderRight: "solid 8px transparent",
     borderTop: "solid 8px #cdcdcd",
-    marginLeft: "-8px"
+    marginLeft: "-8px",
   },
   "&.above::after": {
     borderLeft: "solid 7px transparent",
     borderRight: "solid 7px transparent",
     borderTop: "solid 7px #fff",
-    marginLeft: "-7px"
-  }
+    marginLeft: "-7px",
+  },
 }
 
 export const chartContainer = css(chartContainerStyle).toString()

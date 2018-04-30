@@ -13,7 +13,7 @@ import {
   State,
   StateWriter,
   TLink,
-  TNode
+  TNode,
 } from "./typings"
 import * as styles from "./styles"
 
@@ -165,7 +165,7 @@ class ProcessFlowFocus implements Focus {
       xMax: drawingContainer.left + config.width,
       xMin: drawingContainer.left,
       yMax: drawingContainer.top + config.height,
-      yMin: drawingContainer.top
+      yMin: drawingContainer.top,
     }
   }
 
@@ -190,7 +190,7 @@ function computeBreakdowns(node: TNode): Breakdowns {
     return {
       size,
       label: link.source().label(),
-      percentage: Math.round(size * 100 / node.size())
+      percentage: Math.round(size * 100 / node.size()),
     }
   })(node.targetLinks)
   const outputs: Breakdown[] = map((link: TLink): Breakdown => {
@@ -198,20 +198,20 @@ function computeBreakdowns(node: TNode): Breakdowns {
     return {
       size,
       label: link.target().label(),
-      percentage: Math.round(size * 100 / node.size())
+      percentage: Math.round(size * 100 / node.size()),
     }
   })(node.sourceLinks)
   const startsHere: Breakdown[] = [
     {
       size: node.journeyStarts,
-      percentage: Math.round(node.journeyStarts * 100 / node.size())
-    }
+      percentage: Math.round(node.journeyStarts * 100 / node.size()),
+    },
   ]
   const endsHere: Breakdown[] = [
     {
       size: node.journeyEnds,
-      percentage: Math.round(node.journeyEnds * 100 / node.size())
-    }
+      percentage: Math.round(node.journeyEnds * 100 / node.size()),
+    },
   ]
   return { inputs, outputs, startsHere, endsHere }
 }

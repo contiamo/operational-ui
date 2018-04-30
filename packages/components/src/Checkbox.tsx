@@ -13,18 +13,18 @@ export interface Props {
 }
 
 const Container = glamorous.div({
-  label: "checkbox"
+  label: "checkbox",
 })
 
 const OptionLabel = glamorous.label(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
-  marginRight: theme.spacing
+  marginRight: theme.spacing,
 }))
 
 const OptionText = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
   display: "inline-block",
-  marginLeft: theme.spacing / 6
+  marginLeft: theme.spacing / 6,
 }))
 
 const Checkbox = (props: Props) => (

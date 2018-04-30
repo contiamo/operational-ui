@@ -13,10 +13,10 @@ var glamorous_1 = require("glamorous");
 var utils_1 = require("@operational/utils");
 var theme_1 = require("@operational/theme");
 var Container = glamorous_1.default.div({
-    label: "tabs"
+    label: "tabs",
 });
 var Content = glamorous_1.default.div({
-    marginTop: 18
+    marginTop: 18,
 });
 var TabList = glamorous_1.default.ul({
     listStyle: "none",
@@ -34,25 +34,27 @@ var TabList = glamorous_1.default.ul({
         left: 0,
         bottom: 0,
         background: "red",
-        zIndex: 1
+        zIndex: 1,
     },
     "> *:not(:last-child)": {
-        marginRight: 20
-    }
+        marginRight: 20,
+    },
 }, function (_a) {
     var theme = _a.theme;
     return ({
         "&:after": {
-            background: utils_1.darken(theme.colors.lightGray, 6)
-        }
+            background: utils_1.darken(theme.colors.lightGray, 6),
+        },
     });
 });
-var TabPanel = glamorous_1.default.div({});
+var TabPanel = glamorous_1.default.div({
+/* Add any styles to the TabPanel */
+});
 var overflowEllipsis = {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
-    wordWrap: "normal"
+    wordWrap: "normal",
 };
 var TabTitle = glamorous_1.default.li({
     cursor: "pointer",
@@ -61,22 +63,22 @@ var TabTitle = glamorous_1.default.li({
     maxWidth: "100%",
     position: "relative",
     padding: "5px 15px",
-    zIndex: 10
+    zIndex: 10,
 }, function (_a) {
     var theme = _a.theme, color = _a.color, isActive = _a.isActive, disabled = _a.disabled;
     return (__assign({}, theme.typography.body, overflowEllipsis, { borderBottom: "2px solid transparent" }, isActive
         ? {
             color: color,
-            borderColor: color
+            borderColor: color,
         }
         : {}, disabled
         ? {
-            color: theme.colors.lightGray
+            color: theme.colors.lightGray,
         }
         : {
             "&:hover": {
-                color: color
-            }
+                color: color,
+            },
         }));
 });
 var Tabs = function (props) {

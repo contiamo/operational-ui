@@ -18,11 +18,11 @@ const StatusContainer = glamorous.div(
     height: 11,
     position: "absolute",
     top: 6,
-    width: 11
+    width: 11,
   },
   ({ theme, color }: { theme: Theme; color?: string }) => {
     return {
-      backgroundColor: expandColor(theme, color) || theme.colors.info
+      backgroundColor: expandColor(theme, color) || theme.colors.info,
     }
   }
 )
@@ -33,14 +33,14 @@ const Content = glamorous.div(
     position: "relative",
     top: 0,
     "& > *": {
-      margin: 0
+      margin: 0,
     },
     "& p": {
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
   ({ theme }: { theme: Theme }): {} => ({
-    ...theme.typography.body
+    ...theme.typography.body,
   })
 )
 
@@ -55,17 +55,17 @@ const Container = glamorous.li(
       position: "absolute",
       left: 5,
       top: 6,
-      height: "100%"
+      height: "100%",
     },
     "&:last-child::before": {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   ({ theme }: { theme: Theme }): {} => ({
     paddingBottom: theme.spacing,
     "&::before": {
-      borderLeft: `1px solid ${theme.colors.separator}`
-    }
+      borderLeft: `1px solid ${theme.colors.separator}`,
+    },
   })
 )
 

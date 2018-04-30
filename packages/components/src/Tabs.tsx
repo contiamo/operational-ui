@@ -20,11 +20,11 @@ export interface PropsWithTheme extends Props {
 }
 
 const Container = glamorous.div({
-  label: "tabs"
+  label: "tabs",
 })
 
 const Content = glamorous.div({
-  marginTop: 18
+  marginTop: 18,
 })
 
 const TabList = glamorous.ul(
@@ -44,16 +44,16 @@ const TabList = glamorous.ul(
       left: 0,
       bottom: 0,
       background: "red",
-      zIndex: 1
+      zIndex: 1,
     },
     "> *:not(:last-child)": {
-      marginRight: 20
-    }
+      marginRight: 20,
+    },
   },
   ({ theme }: { theme: Theme }) => ({
     "&:after": {
-      background: darken(theme.colors.lightGray, 6)
-    }
+      background: darken(theme.colors.lightGray, 6),
+    },
   })
 )
 
@@ -65,7 +65,7 @@ const overflowEllipsis = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  wordWrap: "normal"
+  wordWrap: "normal",
 }
 
 const TabTitle = glamorous.li(
@@ -76,13 +76,13 @@ const TabTitle = glamorous.li(
     maxWidth: "100%",
     position: "relative",
     padding: "5px 15px",
-    zIndex: 10
+    zIndex: 10,
   },
   ({
     theme,
     color,
     isActive,
-    disabled
+    disabled,
   }: {
     theme: Theme
     color: string
@@ -95,18 +95,18 @@ const TabTitle = glamorous.li(
     ...isActive
       ? {
           color,
-          borderColor: color
+          borderColor: color,
         }
       : {},
     ...disabled
       ? {
-          color: theme.colors.lightGray
+          color: theme.colors.lightGray,
         }
       : {
           "&:hover": {
-            color
-          }
-        }
+            color,
+          },
+        },
   })
 )
 

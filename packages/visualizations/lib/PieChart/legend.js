@@ -71,17 +71,17 @@ var PieChartLegend = /** @class */ (function () {
         return datum.comparison
             ? {
                 options: {
-                    key: datum.label
+                    key: datum.label,
                 },
                 seriesType: "comparison",
-                type: "series"
+                type: "series",
             }
             : {
                 options: {
                     color: datum.color,
-                    key: datum.label
+                    key: datum.label,
                 },
-                type: "config"
+                type: "config",
             };
     };
     PieChartLegend.prototype.updateDimensions = function () {

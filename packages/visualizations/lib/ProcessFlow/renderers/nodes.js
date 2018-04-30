@@ -12,50 +12,50 @@ var nodeLabelOptions = {
         dy: "0",
         textAnchor: "middle",
         x: 0,
-        y: -1
+        y: -1,
     },
     bottom: {
         dy: "1em",
         textAnchor: "middle",
         x: 0,
-        y: 1
+        y: 1,
     },
     middle: {
         dy: "0.35em",
         textAnchor: "middle",
         x: 0,
-        y: 0
+        y: 0,
     },
     left: {
         dy: "0.35em",
         textAnchor: "end",
         x: -1,
-        y: 0
+        y: 0,
     },
     right: {
         dy: "0.35em",
         textAnchor: "start",
         x: 1,
-        y: 0
-    }
+        y: 0,
+    },
 };
 var nodeShapeOptions = {
     squareDiamond: {
         symbol: d3_shape_1.symbolSquare,
-        rotation: 45
+        rotation: 45,
     },
     square: {
         symbol: d3_shape_1.symbolSquare,
-        rotation: 0
+        rotation: 0,
     },
     diamond: {
         symbol: d3_shape_1.symbolDiamond,
-        rotation: 0
+        rotation: 0,
     },
     circle: {
         symbol: d3_shape_1.symbolCircle,
-        rotation: 0
-    }
+        rotation: 0,
+    },
 };
 var Nodes = /** @class */ (function () {
     function Nodes(state, events, el) {
@@ -104,7 +104,7 @@ var Nodes = /** @class */ (function () {
             type: "node",
             x: d.x,
             y: d.y,
-            id: d.id()
+            id: d.id(),
         };
     };
     Nodes.prototype.onMouseOut = function () {
@@ -149,6 +149,8 @@ var Nodes = /** @class */ (function () {
         })
             .attr("transform", this.rotate)
             .attr("fill", this.config.borderColor)
+            // @TODO delegate to a single event listener at the SVG root and locate the node in question by an attribute.
+            // Single event handlers should be attached to a non-svg node.
             .on("mouseenter", d3_utils_1.withD3Element(this.onMouseOver.bind(this)));
         enteringGroups
             .append("path")
@@ -173,6 +175,8 @@ var Nodes = /** @class */ (function () {
             .selectAll("path.node." + styles.border)
             .transition()
             .duration(this.config.duration)
+            // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
+            // but doesn't break the viz.
             .attr("d", function (d) {
             return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)
@@ -184,6 +188,8 @@ var Nodes = /** @class */ (function () {
             .selectAll("path.node." + styles.element)
             .transition()
             .duration(this.config.duration)
+            // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
+            // but doesn't break the viz.
             .attr("d", function (d) {
             return d3_shape_1.symbol()
                 .type(nodeShapeOptions[d.shape()].symbol)

@@ -13,7 +13,7 @@ const Container = glamorous.ul({
   label: "timeline",
   listStyle: "none",
   padding: "0",
-  margin: "0"
+  margin: "0",
 })
 
 const Timeline = (props: Props) => (

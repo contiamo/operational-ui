@@ -7,13 +7,13 @@ export const inputFocus = ({ theme, isError }: { theme: Theme; isError?: boolean
   outline: 0,
   border: "1px solid",
   borderColor: isError ? theme.colors.error : theme.colors.info,
-  boxShadow: `0 0 0 3px ${lighten(isError ? theme.colors.error : theme.colors.info, 40)}`
+  boxShadow: `0 0 0 3px ${lighten(isError ? theme.colors.error : theme.colors.info, 40)}`,
 })
 
 export const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
   position: "relative",
-  minWidth: 240
+  minWidth: 240,
 }))
 
 export const LabelText = glamorous.span(({ theme }: { theme: Theme }): {} => ({
@@ -24,13 +24,13 @@ export const LabelText = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   // Set font explicitly so it doesn't inherit overrides on the parent
   // (e.g. monospaced code in text areas)
   fontFamily: theme.fontFamily,
-  opacity: 0.4
+  opacity: 0.4,
 }))
 
 export const FormFieldControls = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   top: 3,
-  right: 0
+  right: 0,
 }))
 
 export const FormFieldControl = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -42,20 +42,20 @@ export const FormFieldControl = glamorous.div(({ theme }: { theme: Theme }): {} 
   "& svg": {
     opacity: 0.4,
     position: "relative",
-    top: -1
+    top: -1,
   },
   // :nth-child(2) refers to the tooltip
   "& > :nth-child(2)": {
-    display: "none"
+    display: "none",
   },
   ":hover": {
     "& svg": {
-      opacity: 1
+      opacity: 1,
     },
     "& > :nth-child(2)": {
-      display: "block"
-    }
-  }
+      display: "block",
+    },
+  },
 }))
 
 export const FormFieldError = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -69,5 +69,5 @@ export const FormFieldError = glamorous.div(({ theme }: { theme: Theme }): {} =>
   backgroundColor: lighten(theme.colors.error, 45),
   boxShadow: theme.shadows.card,
   bottom: theme.spacing * -1.75,
-  left: 0
+  left: 0,
 }))

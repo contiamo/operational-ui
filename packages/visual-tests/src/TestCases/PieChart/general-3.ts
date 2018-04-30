@@ -2,7 +2,7 @@ import { PieChart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const DonutRenderer = {
-  type: "donut"
+  type: "donut",
 }
 
 const data = {
@@ -12,9 +12,9 @@ const data = {
     { key: "Bonn", value: 5 },
     { key: "Cologne", value: 17 },
     { key: "Munich", value: null },
-    { key: "Potsdam", value: 2 }
+    { key: "Potsdam", value: 2 },
   ],
-  renderAs: [DonutRenderer]
+  renderAs: [DonutRenderer],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

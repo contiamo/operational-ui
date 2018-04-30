@@ -15,7 +15,7 @@ export {
   D3Selection,
   SeriesEl,
   StateWriter,
-  Canvas
+  Canvas,
 } from "../utils/typings"
 
 export interface ProcessFlowConfig extends Config {

@@ -17,12 +17,12 @@ exports.Container = glamorous_1.default.div(function (_a) {
     return ({
         label: "datepicker",
         width: constants_1.inputDefaultWidth,
-        position: "relative"
+        position: "relative",
     });
 });
 exports.DatePickerCard = glamorous_1.default.div({
     position: "absolute",
-    left: 0
+    left: 0,
 }, function (_a) {
     var theme = _a.theme, isExpanded = _a.isExpanded;
     return ({
@@ -35,7 +35,7 @@ exports.DatePickerCard = glamorous_1.default.div({
         top: inputHeight + 6,
         padding: theme.spacing * 3 / 4 + "px " + theme.spacing + "px " + theme.spacing * 4 / 3 + "px",
         width: constants_1.inputDefaultWidth,
-        zIndex: theme.baseZIndex + 1000
+        zIndex: theme.baseZIndex + 1000,
     });
 });
 exports.Toggle = glamorous_1.default.div(function (_a) {
@@ -59,11 +59,11 @@ exports.Toggle = glamorous_1.default.div(function (_a) {
         borderColor: theme.colors.inputBorder,
         "& svg": {
             position: "relative",
-            pointerEvents: "none"
+            pointerEvents: "none",
         },
         ":hover": {
-            backgroundColor: theme.colors.lighterBackground
-        }
+            backgroundColor: theme.colors.lighterBackground,
+        },
     });
 });
 exports.MonthNav = glamorous_1.default.div(function (_a) {
@@ -74,9 +74,9 @@ exports.MonthNav = glamorous_1.default.div(function (_a) {
         "& > *": {
             margin: "0 6px",
             verticalAlign: "middle",
-            display: "inline-block"
+            display: "inline-block",
         },
-        "& > span": __assign({}, theme.typography.body, { userSelect: "none", width: 120, textAlign: "center" })
+        "& > span": __assign({}, theme.typography.body, { userSelect: "none", width: 120, textAlign: "center" }),
     });
 });
 exports.IconContainer = glamorous_1.default.div({
@@ -84,12 +84,12 @@ exports.IconContainer = glamorous_1.default.div({
     padding: 4,
     height: "auto",
     width: "fit-content",
-    cursor: "pointer"
+    cursor: "pointer",
 });
 exports.Days = glamorous_1.default.div({
     textAlign: "center",
     width: 210,
-    margin: "auto -1px"
+    margin: "auto -1px",
 });
 exports.Day = glamorous_1.default.div({
     userSelect: "none",
@@ -101,7 +101,7 @@ exports.Day = glamorous_1.default.div({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    border: "1px solid #efefef"
+    border: "1px solid #efefef",
 }, function (_a) {
     var theme = _a.theme, selected = _a.selected, isPlaceholder = _a.isPlaceholder;
     return (__assign({}, theme.typography.body, { backgroundColor: selected ? theme.colors.info : "transparent", color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black }));
@@ -128,9 +128,9 @@ exports.ClearButton = glamorous_1.default.div(function (_a) {
         "&:hover": {
             opacity: 1,
             "& svg": {
-                stroke: theme.colors.warning
-            }
-        }
+                stroke: theme.colors.warning,
+            },
+        },
     });
 });
 //# sourceMappingURL=DatePicker.styles.js.map

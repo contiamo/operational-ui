@@ -4,27 +4,27 @@ import { MarathonEnvironment } from "../../Marathon"
 const GaugeRenderer = {
   type: "gauge",
   extent: "full",
-  target: 50
+  target: 50,
 }
 
 const data = {
   data: [{ key: "Berlin", value: 35 }],
-  renderAs: [GaugeRenderer]
+  renderAs: [GaugeRenderer],
 }
 
 const data1 = {
   data: [{ key: "Berlin", value: 14 }],
-  renderAs: [GaugeRenderer]
+  renderAs: [GaugeRenderer],
 }
 
 const data2 = {
   data: [{ key: "Berlin", value: 72 }],
-  renderAs: [GaugeRenderer]
+  renderAs: [GaugeRenderer],
 }
 
 const data3 = {
   data: [{ key: "Berlin", value: 41 }],
-  renderAs: [GaugeRenderer]
+  renderAs: [GaugeRenderer],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

@@ -14,24 +14,24 @@ exports.injectStylesheet = function (cssString) {
 exports.fadeIn = glamor_1.css.keyframes({
     from: {
         opacity: 0,
-        transform: "translate3d(0, -6px, 0)"
+        transform: "translate3d(0, -6px, 0)",
     },
     to: {
         opacity: 1,
-        transform: "translate3d(0, 0, 0)"
-    }
+        transform: "translate3d(0, 0, 0)",
+    },
 });
 exports.resetTransform = glamor_1.css.keyframes({
     to: {
-        transform: "none"
-    }
+        transform: "none",
+    },
 });
 exports.spin = glamor_1.css.keyframes({
     from: {
-        transform: "rotate(0deg)"
+        transform: "rotate(0deg)",
     },
     to: {
-        transform: "rotate(359deg)"
-    }
+        transform: "rotate(359deg)",
+    },
 });
 //# sourceMappingURL=styles.js.map

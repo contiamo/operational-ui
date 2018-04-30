@@ -6,16 +6,16 @@ import { Theme, operational } from "@operational/theme"
 import { MarathonRenderer } from "./Marathon"
 
 const Container = glamorous.ul({
-  padding: 0
+  padding: 0,
 })
 
 const Content = glamorous.div(
   {
-    padding: 20
+    padding: 20,
   },
   ({ theme }: { theme: Theme }) => ({
     backgroundColor: theme.colors.background,
-    borderRadius: 4
+    borderRadius: 4,
   })
 )
 
@@ -26,8 +26,8 @@ const Item = glamorous.li({
     display: "inline-block",
     verticalAlign: "middle",
     marginTop: 2,
-    marginBottom: 2
-  }
+    marginBottom: 2,
+  },
 })
 
 const Title = glamorous.p(({ theme }: { theme: Theme }): any => ({
@@ -36,12 +36,12 @@ const Title = glamorous.p(({ theme }: { theme: Theme }): any => ({
   "& :first-child": {
     position: "relative",
     top: -2,
-    marginRight: 6
+    marginRight: 6,
   },
   "& > *": {
     display: "inline-block",
-    verticalAlign: "middle"
-  }
+    verticalAlign: "middle",
+  },
 }))
 
 const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
@@ -49,8 +49,8 @@ const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
   display: "inline-block",
   marginLeft: 8,
   "&::before": {
-    content: " → "
-  }
+    content: " → ",
+  },
 }))
 
 const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (

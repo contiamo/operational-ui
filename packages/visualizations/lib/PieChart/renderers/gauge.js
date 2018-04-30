@@ -79,7 +79,7 @@ var Gauge = /** @class */ (function () {
     Gauge.prototype.arcAttributes = function () {
         return {
             path: this.arcTween.bind(this),
-            fill: this.arcColor.bind(this)
+            fill: this.arcColor.bind(this),
         };
     };
     Gauge.prototype.arcColor = function (d) {
@@ -145,7 +145,7 @@ var Gauge = /** @class */ (function () {
             innerRadius: this.computed.rInner,
             outerRadius: this.computed.r,
             endAngle: d.endAngle,
-            startAngle: d.startAngle
+            startAngle: d.startAngle,
         });
         return function (t) { return _this.computed.arc(f(t)); };
     };
@@ -170,7 +170,7 @@ var Gauge = /** @class */ (function () {
         var f = d3_interpolate_1.interpolateObject({
             inner: this.previousComputed.rInner || this.computed.rInner,
             r: this.previousComputed.r || this.computed.r,
-            value: oldValue
+            value: oldValue,
         }, { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) });
         return function (t) { return path(f(t)); };
     };
@@ -205,7 +205,7 @@ var Gauge = /** @class */ (function () {
         var d = {
             layout: Utils.layout(this.angleValue.bind(this), this.angleRange()),
             total: this.total,
-            target: this.target
+            target: this.target,
         };
         // data should not become part of this.previousComputed in first computation
         this.previousComputed = fp_1.defaults(d)(this.previousComputed);
@@ -236,7 +236,7 @@ var Gauge = /** @class */ (function () {
         else {
             this.data.push({
                 unfilled: true,
-                value: this.target - this.total
+                value: this.target - this.total,
             });
         }
     };
@@ -258,7 +258,7 @@ var Gauge = /** @class */ (function () {
             arc: d3_shape_1.arc(),
             arcOver: d3_shape_1.arc()
                 .innerRadius(rInnerHover)
-                .outerRadius(rHover)
+                .outerRadius(rHover),
         };
     };
     Gauge.prototype.computeOuterRadius = function (drawingDims, margin) {
@@ -281,7 +281,7 @@ var Gauge = /** @class */ (function () {
         var datumInfo = {
             key: this.key(d),
             value: this.value(d),
-            percentage: d.data.percentage
+            percentage: d.data.percentage,
         };
         var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
@@ -315,13 +315,13 @@ var Gauge = /** @class */ (function () {
         var data = fp_1.map(function (datum) {
             return {
                 label: _this.key(datum),
-                color: _this.color(datum)
+                color: _this.color(datum),
             };
         })(this.data);
         if (this.comparison) {
             data.push({
                 label: this.key(this.comparison),
-                comparison: true
+                comparison: true,
             });
         }
         return data;

@@ -58,13 +58,13 @@ class Marathon extends React.Component<Props, State> {
   }
 
   static defaultProps = {
-    timeout: 2000
+    timeout: 2000,
   }
 
   state = {
     tests: [] as Test[],
     completed: 0,
-    id: 0
+    id: 0,
   }
 
   container: HTMLElement
@@ -94,9 +94,11 @@ class Marathon extends React.Component<Props, State> {
         const error = actual === expected ? null : `Expected ${String(actual)} to equal ${String(expected)}`
         this.setStateById(({ id, tests, completed }: State) => ({
           id,
-          tests: tests.map((test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test))
+          tests: tests.map(
+            (test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test)
+          ),
         }))
-      }
+      },
     }
   }
 
@@ -131,7 +133,7 @@ class Marathon extends React.Component<Props, State> {
           tests: prevState.tests.map(
             (test: Test, index: number) =>
               index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test
-          )
+          ),
         }))
       }
       try {
@@ -170,13 +172,13 @@ class Marathon extends React.Component<Props, State> {
       },
       afterAll: (fn: any): void => {
         this.afterAll = fn
-      }
+      },
     } as any)
 
     // Pin the test array on state, run first one when ready.
     this.setStateById((prevState: State) => ({
       id: prevState.id,
-      tests: this._tests.map(test => ({ description: test.description, errors: [] }))
+      tests: this._tests.map(test => ({ description: test.description, errors: [] })),
     })).then(() => {
       this.beforeAll && this.beforeAll()
       this.runNext()
@@ -199,7 +201,7 @@ class Marathon extends React.Component<Props, State> {
         prevState => ({
           id: prevState.id + 1,
           tests: [],
-          completed: 0
+          completed: 0,
           // Set ignoreId flag to true to proceed with the state update even though test ids don't match.
         }),
         true
@@ -218,11 +220,11 @@ class Marathon extends React.Component<Props, State> {
       results: this.state.tests.map((test, index) => ({
         description: test.description,
         isCompleted: this.state.completed > index,
-        errors: test.errors
+        errors: test.errors,
       })),
       ref: (node: HTMLElement) => {
         this.container = node
-      }
+      },
     })
   }
 }

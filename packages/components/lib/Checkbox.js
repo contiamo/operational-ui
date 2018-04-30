@@ -12,13 +12,13 @@ var React = require("react");
 var glamorous_1 = require("glamorous");
 var with_label_1 = require("./utils/with-label");
 var Container = glamorous_1.default.div({
-    label: "checkbox"
+    label: "checkbox",
 });
 var OptionLabel = glamorous_1.default.label(function (_a) {
     var theme = _a.theme;
     return ({
         display: "inline-block",
-        marginRight: theme.spacing
+        marginRight: theme.spacing,
     });
 });
 var OptionText = glamorous_1.default.span(function (_a) {

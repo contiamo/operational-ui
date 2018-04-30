@@ -26,7 +26,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
     alignItems: "center",
     justifyContent: "space-between",
     position: "relative",
-    maxWidth: 400
+    maxWidth: 400,
   }
 })
 
@@ -40,11 +40,11 @@ const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   padding: theme.spacing * 0.5,
   "& svg": {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   ":hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.1)"
-  }
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
 }))
 
 const Message = (props: Props) => (

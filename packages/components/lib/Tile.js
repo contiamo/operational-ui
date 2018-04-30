@@ -19,7 +19,7 @@ var Container = glamorous_1.default.div(function (_a) {
         position: "relative",
         marginRight: theme.spacing,
         padding: theme.spacing / 2 + "px " + theme.spacing + "px",
-        backgroundColor: theme.colors.lighterBackground
+        backgroundColor: theme.colors.lighterBackground,
     });
 });
 var Content = glamorous_1.default.div(function (_a) {

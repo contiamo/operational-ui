@@ -12,7 +12,7 @@ var Container = glamorous_1.default.header(function (_a) {
         height: theme.box,
         alignItems: "center",
         padding: "0 " + theme.spacing * 1.5 + "px",
-        boxShadow: theme.shadows.card
+        boxShadow: theme.shadows.card,
     });
 });
 var Header = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className }, props.children)); };

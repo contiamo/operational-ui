@@ -11,7 +11,7 @@ const data1 = {
     { path: ["1", "2", "3", "6", "11"], size: 130 },
     { path: ["1", "2", "3", "4", "10"], size: 290 },
     { path: ["1", "2", "3", "12", "10"], size: 120 },
-    { path: ["1", "2", "3", "4", "13"], size: 620 }
+    { path: ["1", "2", "3", "4", "13"], size: 620 },
   ],
   nodes: [
     { id: "1", group: "start" },
@@ -26,8 +26,8 @@ const data1 = {
     { id: "10", group: "end" },
     { id: "11", group: "end" },
     { id: "12" },
-    { id: "13", group: "end" }
-  ]
+    { id: "13", group: "end" },
+  ],
 }
 
 const data2 = {
@@ -40,7 +40,7 @@ const data2 = {
     { path: ["1", "2", "3", "6", "11"], size: 130 },
     { path: ["1", "2", "3", "4", "11"], size: 290 },
     { path: ["1", "10", "2", "3", "12", "11"], size: 120 },
-    { path: ["1", "10", "2", "3", "4", "13"], size: 620 }
+    { path: ["1", "10", "2", "3", "4", "13"], size: 620 },
   ],
   nodes: [
     { id: "1", group: "start" },
@@ -55,8 +55,8 @@ const data2 = {
     { id: "10" },
     { id: "11", group: "end" },
     { id: "12" },
-    { id: "13", group: "end" }
-  ]
+    { id: "13", group: "end" },
+  ],
 }
 
 const data3 = {
@@ -64,7 +64,7 @@ const data3 = {
     { path: ["1", "10", "2", "3", "4"], size: 1500 },
     { path: ["1", "10", "2", "3", "5", "4"], size: 1200 },
     { path: ["9", "7", "5", "8"], size: 700 },
-    { path: ["9", "2", "3", "8"], size: 600 }
+    { path: ["9", "2", "3", "8"], size: 600 },
   ],
   nodes: [
     { id: "1", group: "start" },
@@ -75,8 +75,8 @@ const data3 = {
     { id: "7" },
     { id: "8", group: "end" },
     { id: "9", group: "start" },
-    { id: "10" }
-  ]
+    { id: "10" },
+  ],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

@@ -17,7 +17,7 @@ const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
   height: theme.box,
   alignItems: "center",
   padding: `0 ${theme.spacing * 1.5}px`,
-  boxShadow: theme.shadows.card
+  boxShadow: theme.shadows.card,
 }))
 
 const Header = (props: Props) => (

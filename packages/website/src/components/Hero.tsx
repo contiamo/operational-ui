@@ -27,8 +27,8 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     content: "' '",
     right: 0,
     bottom: 0,
-    backgroundColor: theme.colors.navBackground
-  }
+    backgroundColor: theme.colors.navBackground,
+  },
 }))
 
 const Hero = (props: Props) => (

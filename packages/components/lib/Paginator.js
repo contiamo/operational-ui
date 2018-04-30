@@ -14,7 +14,7 @@ var glamorous_1 = require("glamorous");
 var PaginatorSpan = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isActive = _a.isActive, isDisabled = _a.isDisabled;
     return (__assign({}, theme.typography.body, { padding: theme.spacing / 4, borderRadius: 2, height: theme.spacing * 1.5, display: "inline-flex", cursor: "pointer", userSelect: "none", alignItems: "center", justifyContent: "center", lineHeight: 1, color: isActive ? theme.colors.info : theme.colors.text, ":hover": {
-            backgroundColor: theme.colors.background
+            backgroundColor: theme.colors.background,
         } }));
 });
 var PaginatorControl = function (_a) {
@@ -90,7 +90,7 @@ var createPagesFragment = function (_a) {
                     } }, "..."),
                 React.createElement(PaginatorSpan, { key: pageCount, onClick: function () {
                         onChange && onChange(pageCount);
-                    } }, pageCount)
+                    } }, pageCount),
             ]
             : [];
     };
@@ -102,8 +102,8 @@ var Container = glamorous_1.default.div({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        minWidth: 25
-    }
+        minWidth: 25,
+    },
 });
 var Paginator = function (_a) {
     var _b = _a.maxVisible, maxVisible = _b === void 0 ? 3 : _b, _c = _a.onChange, onChange = _c === void 0 ? function () { } : _c, pageCount = _a.pageCount, _d = _a.page, page = _d === void 0 ? 1 : _d, id = _a.id, css = _a.css, className = _a.className;

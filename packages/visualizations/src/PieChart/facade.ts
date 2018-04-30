@@ -17,7 +17,7 @@ import {
   Facade,
   FocusElement,
   PieChartConfig,
-  RendererOptions
+  RendererOptions,
 } from "./typings"
 
 class PieChartFacade implements Facade {
@@ -43,7 +43,7 @@ class PieChartFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed()
+      computed: this.initialComputed(),
     })
   }
 
@@ -68,19 +68,19 @@ class PieChartFacade implements Facade {
       showComponentFocus: false,
       uid: uniqueId("piechart"),
       visualizationName: "piechart",
-      width: 500
+      width: 500,
     }
   }
 
   private initialAccessors(): AccessorsObject {
     return {
       data: {
-        data: (d: any): Data => d.data
+        data: (d: any): Data => d.data,
       },
       series: {
         name: (d: any): string => d.name || "",
-        renderAs: (d: any): RendererOptions[] => d.renderAs
-      }
+        renderAs: (d: any): RendererOptions[] => d.renderAs,
+      },
     }
   }
 
@@ -88,7 +88,7 @@ class PieChartFacade implements Facade {
     return {
       canvas: {},
       focus: {},
-      series: {}
+      series: {},
     }
   }
 
@@ -106,8 +106,8 @@ class PieChartFacade implements Facade {
       ),
       focus: new PieChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
         main: this.canvas.elementFor("focus"),
-        component: this.canvas.elementFor("componentFocus")
-      })
+        component: this.canvas.elementFor("componentFocus"),
+      }),
     }
   }
 

@@ -29,9 +29,7 @@ var State = /** @class */ (function () {
             if (currentStateChunk !== null && typeof currentStateChunk === "object") {
                 return currentStateChunk[currentPath];
             }
-            else {
-                throw new Error("Path [" + path.join(", ") + "] not found in object");
-            }
+            throw new Error("Path [" + path.join(", ") + "] not found in object");
         }, this.state);
     };
     State.prototype.setPath = function (path, value) {
@@ -42,9 +40,7 @@ var State = /** @class */ (function () {
                 }
                 return currentStateChunk[currentPath];
             }
-            else {
-                throw new Error("Path [" + path.join(", ") + "] not found in object");
-            }
+            throw new Error("Path [" + path.join(", ") + "] not found in object");
         }, this.state);
     };
     State.prototype.mergePath = function (path, value) {
@@ -55,9 +51,7 @@ var State = /** @class */ (function () {
                 }
                 return currentStateChunk[currentPath];
             }
-            else {
-                throw new Error("Path [" + path.join(", ") + "] not found in object");
-            }
+            throw new Error("Path [" + path.join(", ") + "] not found in object");
         }, this.state);
     };
     return State;

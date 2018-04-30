@@ -25,15 +25,15 @@ var Container = glamorous_1.default.button(function (_a) {
         ? {
             ":hover": {
                 backgroundColor: activeBackgroundColor,
-                color: utils_1.readableTextColor(activeBackgroundColor, ["white", "#222"])
+                color: utils_1.readableTextColor(activeBackgroundColor, ["white", "#222"]),
             },
             ":focus": {
                 outline: 0,
-                boxShadow: "0 0 0 3px " + utils_1.lighten(backgroundColor, 35)
+                boxShadow: "0 0 0 3px " + utils_1.lighten(backgroundColor, 35),
             },
             ":active": {
-                boxShadow: activeBoxShadow
-            }
+                boxShadow: activeBoxShadow,
+            },
         }
         : {}, { marginRight: spacing / 2 });
 });

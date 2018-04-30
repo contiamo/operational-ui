@@ -25,7 +25,7 @@ import {
   Renderer,
   RendererAccessor,
   RendererAccessors,
-  State
+  State,
 } from "../typings"
 
 class Gauge implements Renderer {
@@ -114,7 +114,7 @@ class Gauge implements Renderer {
   private arcAttributes(): Object<any> {
     return {
       path: this.arcTween.bind(this),
-      fill: this.arcColor.bind(this)
+      fill: this.arcColor.bind(this),
     }
   }
 
@@ -182,7 +182,7 @@ class Gauge implements Renderer {
         innerRadius: this.computed.rInner,
         outerRadius: this.computed.r,
         endAngle: d.endAngle,
-        startAngle: d.startAngle
+        startAngle: d.startAngle,
       }
     )
     return (t: number): string => this.computed.arc(f(t))
@@ -207,7 +207,7 @@ class Gauge implements Renderer {
       {
         inner: this.previousComputed.rInner || this.computed.rInner,
         r: this.previousComputed.r || this.computed.r,
-        value: oldValue
+        value: oldValue,
       },
       { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) }
     )
@@ -254,7 +254,7 @@ class Gauge implements Renderer {
     const d: ComputedInitial = {
       layout: Utils.layout(this.angleValue.bind(this), this.angleRange()),
       total: this.total,
-      target: this.target
+      target: this.target,
     }
 
     // data should not become part of this.previousComputed in first computation
@@ -266,7 +266,7 @@ class Gauge implements Renderer {
       ...d,
       ...this.computeArcs(d),
       data: d.layout(this.data),
-      comparison: this.comparison
+      comparison: this.comparison,
     }
   }
 
@@ -293,7 +293,7 @@ class Gauge implements Renderer {
     } else {
       this.data.push({
         unfilled: true,
-        value: this.target - this.total
+        value: this.target - this.total,
       })
     }
   }
@@ -322,7 +322,7 @@ class Gauge implements Renderer {
       arc: d3Arc(),
       arcOver: d3Arc()
         .innerRadius(rInnerHover)
-        .outerRadius(rHover)
+        .outerRadius(rHover),
     }
   }
 
@@ -348,7 +348,7 @@ class Gauge implements Renderer {
     const datumInfo: DatumInfo = {
       key: this.key(d),
       value: this.value(d),
-      percentage: d.data.percentage
+      percentage: d.data.percentage,
     }
     const centroid: [number, number] = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
@@ -385,13 +385,13 @@ class Gauge implements Renderer {
     const data: LegendDatum[] = map((datum: ComputedDatum): LegendDatum => {
       return {
         label: this.key(datum),
-        color: this.color(datum)
+        color: this.color(datum),
       }
     })(this.data)
     if (this.comparison) {
       data.push({
         label: this.key(this.comparison),
-        comparison: true
+        comparison: true,
       })
     }
     return data
