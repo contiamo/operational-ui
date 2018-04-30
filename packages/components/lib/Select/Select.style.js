@@ -66,7 +66,7 @@ var Options = glamorous_1.default.div({
     var theme = _a.theme;
     return ({
         boxShadow: theme.shadows.popup,
-        zIndex: theme.baseZIndex + 100,
+        zIndex: theme.baseZIndex + 300,
     });
 });
 exports.Options = Options;

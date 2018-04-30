@@ -1,11 +1,23 @@
 import * as React from "react"
 import { render } from "react-dom"
-import glamorous from "glamorous"
-import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/components"
+import glamorous, { Hr, CSSProperties } from "glamorous"
+import { Card, Icon, Button, ButtonGroup, CardHeader, OperationalUI } from "@operational/components"
 import { Theme } from "@operational/theme"
 
 import { StaticContent, Animation, Hero, Logo, Footer, Section } from "./components"
-import sections from "./Sections"
+import componentsSections from "./Sections/Components"
+import visualizationsSections from "./Sections/Visualizations"
+
+export interface State {
+  rotation: number
+  page: "components" | "visualizations"
+}
+
+export interface SectionData {
+  title: string
+  docsUrl: string
+  Component: React.SFC<{}>
+}
 
 const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   label: "showcasetitlebarcontent",
@@ -24,19 +36,26 @@ const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   },
 }))
 
+const Separator = glamorous.hr(({ theme }: { theme: Theme }): {} => ({
+  margin: `${theme.spacing * 2.5}px auto`,
+  width: 80,
+  opacity: 0.7,
+}))
+
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   maxWidth: 760,
   margin: "auto",
-  padding: 2 * theme.spacing,
+  padding: 2.5 * theme.spacing,
 }))
 
 const TitleBarNav = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginTop: 20,
 }))
 
-export default class App extends React.Component<{}, {}> {
-  state = {
+export default class App extends React.Component<{}, State> {
+  state: State = {
     rotation: 0,
+    page: "components",
   }
 
   rotationInterval: any
@@ -56,6 +75,10 @@ export default class App extends React.Component<{}, {}> {
   }
 
   render() {
+    const sections: SectionData[] =
+      this.state.page === "components"
+        ? (componentsSections as SectionData[])
+        : (visualizationsSections as SectionData[])
     return (
       <OperationalUI withBaseStyles>
         <Container>
@@ -83,6 +106,34 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
               `}
             />
           </Card>
+          <Separator />
+          <ButtonGroup
+            css={({ theme }: { theme: Theme }) => ({
+              marginLeft: "auto",
+              marginRight: "auto",
+              display: "block",
+              textAlign: "center",
+            })}
+          >
+            <Button
+              css={{ ":focus": { boxShadow: "none" } }}
+              color={this.state.page === "components" ? "info" : "white"}
+              onClick={() => {
+                this.setState(() => ({ page: "components" }))
+              }}
+            >
+              Components
+            </Button>
+            <Button
+              css={{ ":focus": { boxShadow: "none" } }}
+              color={this.state.page === "visualizations" ? "info" : "white"}
+              onClick={() => {
+                this.setState(() => ({ page: "visualizations" }))
+              }}
+            >
+              Visualizations
+            </Button>
+          </ButtonGroup>
           <React.Fragment>
             {sections.map(({ title, docsUrl, Component }, index: number) => (
               <Section key={index} title={title} docsUrl={docsUrl}>

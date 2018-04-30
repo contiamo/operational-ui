@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Input } from "@operational/components"
 
-import { Subsection } from "../components"
+import { Subsection } from "../../components"
 
 export const title = "Inputs"
 

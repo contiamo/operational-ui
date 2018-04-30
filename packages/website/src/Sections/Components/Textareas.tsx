@@ -2,7 +2,7 @@ import * as React from "react"
 import { Textarea } from "@operational/components"
 import { Theme } from "@operational/theme"
 
-import { Subsection } from "../components"
+import { Subsection } from "../../components"
 
 export const title = "Textareas"
 

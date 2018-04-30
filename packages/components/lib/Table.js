@@ -49,11 +49,9 @@ var TableElement = glamorous_1.default.table(function (_a) {
 });
 var TableBodyRow = glamorous_1.default.tr(function (_a) {
     var theme = _a.theme, isClickable = _a.isClickable;
-    return ({
-        ":hover": {
+    return (__assign({}, isClickable ? { cursor: "pointer" } : {}, { ":hover": {
             backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
-        },
-    });
+        } }));
 });
 var EmptyView = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;

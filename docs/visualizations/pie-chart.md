@@ -1,173 +1,3 @@
-const propDescription = {
-  Config: [
-    {
-      name: "duration",
-      description: "Speed at which transitions are animated",
-      defaultValue: "`1e3`",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "focusElement",
-      description: "Key of segment to be manually focussed.",
-      defaultValue: undefined,
-      type: "string",
-      optional: true
-    },
-    {
-      name: "height",
-      description: "Visualization height",
-      defaultValue: "500",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "hidden",
-      description: "Hide/show the visualization div",
-      defaultValue: "false",
-      type: "boolean",
-      optional: true
-    },
-    {
-      name: "legend",
-      description: "Show/hide legend",
-      defaultValue: "true",
-      type: "boolean",
-      optional: true
-    },
-    {
-      name: "maxWidth",
-      description: "Maximum radial width of segments",
-      defaultValue: "100",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "maxLegendRatio",
-      description: "Maximum legend:chart ratio",
-      defaultValue: "1/2",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "maxLegendWidth",
-      description: "Maximum legend width",
-      defaultValue: "200",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "maxTotalFontSize",
-      description: "Maximum font size of total displayed in centre of chart",
-      defaultValue: "80",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "minChartWithLegend",
-      description: "Minimum width/height of chart for which legend is still rendered",
-      defaultValue: "1500",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "minWidth",
-      description: "Minimum radial width of segments",
-      defaultValue: "30",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "minInnerRadius",
-      description: "Minimum inner radius for which inner circle is still rendered",
-      defaultValue: "30",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "minLegendWidth",
-      description: "Minimum legend width",
-      defaultValue: "50",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "minTotalFontSize",
-      description: "Minimum font size of total displayed in centre of chart",
-      defaultValue: "11",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "numberFormatter",
-      description: "Number formatter",
-      defaultValue: "`(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, \",\")`",
-      type: "function",
-      optional: true
-    },
-    {
-      name: "outerBorderMargin",
-      description: "Margin between edge of chart and drawing area",
-      defaultValue: "1",
-      type: "number",
-      optional: true
-    },
-    {
-      name: "showComponentFocus",
-      description: "Toggle component focus - if `true`, enables hover and click events on configurable items, in this case series items in legend",
-      defaultValue: false,
-      type: "boolean",
-      optional: true
-    },
-    {
-      name: "uid",
-      description: "Unique identifier for the visualization, normally generated automatically from the visualization name",
-      defaultValue: "",
-      type: "string",
-      optional: true
-    },
-    {
-      name: "visualizationName",
-      description: "Name of visualization",
-      defaultValue: "piechart",
-      type: "string",
-      optional: true
-    },
-    {
-      name: "width",
-      description: "Visualization width",
-      defaultValue: "500",
-      type: "number",
-      optional: true
-    }
-  ],
-  DataAccessors: [
-    {
-      name: "data",
-      description: "Provides the attribute name for accessing data array from the input data",
-      defaultValue: "`d => d.data`",
-      type: "any",
-      optional: true
-    }
-  ],
-  SeriesAccessors: [
-    {
-      name: "name",
-      description: "Series name",
-      defaultValue: "`d => d.name || \"\"`",
-      type: "string",
-      optional: true
-    },
-    {
-      name: "renderAs",
-      description: "Renderer options",
-      defaultValue: "`d => d.renderAs`",
-      type: "`IObject[]`",
-      optional: true
-    }
-  ]
-}
-
 # Pie Charts
 
 The PieChart visualization encompasses 3 distinct renderers: donuts, gauges and polar area charts.
@@ -273,8 +103,9 @@ The input data should be an object with the following properties:
  * key - the name of the item
  * value - the value of the item
 
-'renderAs' is an array containing a single renderer object. Each renderer object must have the following properties:
+'renderAs' is an array containing a single renderer object. Each renderer object must have the following propertie:
 * type - "donut", "gauge" or "polar"
+and may have any of the following accessors:
 * key - key accessor
 * value - value accessor
 * color - color accessor
@@ -296,20 +127,20 @@ Accessors can take 2 forms: a function with single parameter 'd', or a constant 
 
 Data accessors are required if the data can not be accessed from the input data via a property called 'data'.
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | data | Provides the attribute name for accessing data array from the input data | any | `d => d.data` | Yes |
 
 ## Series Accessors
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | name | Series name | string | `d => d.name || ""` | Yes |
 | renderAs | Renderer options | `IObject[]` | `d => d.renderAs` | Yes |
 
 ## Config
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | duration | Speed at which transitions are animated | number | `1e3` | Yes |
 | focusElement | Key of segment to be manually focussed. | string | undefined | Yes |
