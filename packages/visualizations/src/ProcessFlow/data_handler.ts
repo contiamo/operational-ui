@@ -14,7 +14,7 @@ import {
   State,
   StateWriter,
   TLink,
-  TNode,
+  TNode
 } from "./typings"
 
 class DataHandler {
@@ -44,7 +44,7 @@ class DataHandler {
     return {
       nodes: this.nodes,
       journeys: this.journeys,
-      links: this.links,
+      links: this.links
     }
   }
 
@@ -126,7 +126,7 @@ class DataHandler {
             sourceId: sourceNode.id(),
             target: targetNode,
             targetId: targetNode.id(),
-            size: journey.size,
+            size: journey.size
           }
           const newLink: TLink = this.addLink(linkAttrs)
           this.links.push(newLink)

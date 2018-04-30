@@ -37,16 +37,16 @@ var Container = glamorous_1.default.div(function (_a) {
             height: 0,
             border: "4px solid transparent",
             borderTopColor: theme.colors.gray,
-            transform: "translateY(calc(-50% + 2px))",
+            transform: "translateY(calc(-50% + 2px))"
         },
-        "&:focus": mixins.inputFocus({ theme: theme }),
+        "&:focus": mixins.inputFocus({ theme: theme })
     };
 });
 exports.Container = Container;
 var DisplayValue = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isPlaceholder = _a.isPlaceholder;
     return ({
-        color: isPlaceholder ? theme.colors.gray : theme.colors.black,
+        color: isPlaceholder ? theme.colors.gray : theme.colors.black
     });
 });
 exports.DisplayValue = DisplayValue;
@@ -61,12 +61,12 @@ var Options = glamorous_1.default.div({
     borderRadius: 4,
     opacity: 0,
     transform: "translateY(-10px)",
-    animation: utils_1.fadeIn + " .15s forwards ease,\n    " + utils_1.resetTransform + " .15s forwards ease",
+    animation: utils_1.fadeIn + " .15s forwards ease,\n    " + utils_1.resetTransform + " .15s forwards ease"
 }, function (_a) {
     var theme = _a.theme;
     return ({
         boxShadow: theme.shadows.popup,
-        zIndex: theme.baseZIndex + 100,
+        zIndex: theme.baseZIndex + 100
     });
 });
 exports.Options = Options;
@@ -75,7 +75,7 @@ var OptionsList = glamorous_1.default.div(function (_a) {
     return ({
         // whole number + 3/4 ratio here ensures options don't get cut off
         maxHeight: theme.spacing * 12.75,
-        overflow: "auto",
+        overflow: "auto"
     });
 });
 exports.OptionsList = OptionsList;

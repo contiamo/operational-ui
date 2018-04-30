@@ -43,10 +43,10 @@ function removeLoops(path) {
     checkForLoops(newPath);
     return newPath;
 }
-exports.default = (function (journeys) {
+exports.default = function (journeys) {
     fp_1.forEach(function (journey) {
         journey.path = removeLoops(journey.path);
     })(journeys);
     return journeys;
-});
+};
 //# sourceMappingURL=process_flow_loop_handler.js.map

@@ -2,7 +2,7 @@
 import React from "react";
 import { GlamorousComponent } from "glamorous";
 import { Theme } from "@operational/theme";
-export declare const inputFocus: ({ theme, isError }: {
+export declare const inputFocus: ({theme, isError}: {
     theme: Theme;
     isError?: boolean;
 }) => {};

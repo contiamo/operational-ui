@@ -12,7 +12,7 @@ const Container = glamorous.footer(({ theme }: { theme: Theme }): {} => ({
   padding: 1.5 * theme.spacing,
   textAlign: "center",
   ...theme.typography.body,
-  backgroundColor: theme.colors.navBackground,
+  backgroundColor: theme.colors.navBackground
 }))
 
 const Footer = (props: Props) => <Container>Made in Berlin at Contiamo</Container>

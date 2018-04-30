@@ -9,15 +9,15 @@ var Container = glamorous_1.default.span(function (_a) {
     return ({
         label: "breadcrumb",
         "& svg": {
-            marginLeft: 4,
+            marginLeft: 4
         },
         "& a": {
             color: theme.colors.linkText,
             borderBottom: "1px solid currentColor",
             "&:hover": {
-                color: utils_1.darken(theme.colors.linkText, 5),
-            },
-        },
+                color: utils_1.darken(theme.colors.linkText, 5)
+            }
+        }
     });
 });
 var Content = glamorous_1.default.span(function (_a) {

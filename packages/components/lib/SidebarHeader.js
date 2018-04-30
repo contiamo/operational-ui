@@ -14,7 +14,7 @@ var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         label: "sidebarheader",
-        position: "relative",
+        position: "relative"
     });
 });
 var Content = glamorous_1.default.div(function (_a) {
@@ -30,8 +30,8 @@ var Content = glamorous_1.default.div(function (_a) {
             top: 0,
             left: theme.spacing * 1,
             borderLeft: "1px solid",
-            borderColor: theme.colors.separator,
-        },
+            borderColor: theme.colors.separator
+        }
     });
 });
 var Header = glamorous_1.default.div(function (_a) {
@@ -39,10 +39,10 @@ var Header = glamorous_1.default.div(function (_a) {
     return (__assign({ position: "relative", display: "flex", height: 30, alignItems: "center", padding: "0px " + theme.spacing + "px", borderBottom: "1px solid", borderBottomColor: theme.colors.separator, cursor: "pointer", outline: "none", backgroundColor: theme.colors.white }, isOpen
         ? {
             borderBottom: "1px solid",
-            borderBottomColor: theme.colors.separator,
+            borderBottomColor: theme.colors.separator
         }
         : {}, { "&:hover": {
-            backgroundColor: theme.colors.lighterBackground,
+            backgroundColor: theme.colors.lighterBackground
         }, "&::after": {
             content: "' '",
             display: "block",
@@ -52,7 +52,7 @@ var Header = glamorous_1.default.div(function (_a) {
             border: "4px solid transparent",
             borderLeftColor: theme.colors.lightGray,
             transition: ".15s transform ease",
-            transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null,
+            transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null
         } }));
 });
 var SidebarHeader = function (props) { return (React.createElement(Container, { css: props.css, id: props.id, className: props.className },

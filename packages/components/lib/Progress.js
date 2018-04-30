@@ -22,30 +22,30 @@ var Container = glamorous_1.default.div({
     textAlign: "center",
     top: 0,
     left: 0,
-    position: "absolute",
+    position: "absolute"
 }, function (_a) {
     var theme = _a.theme, fadeParent = _a.fadeParent;
     return ({
         zIndex: theme.baseZIndex + 300,
-        backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent",
+        backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent"
     });
 });
 var fillProgress = glamor_1.css.keyframes({
     from: {
-        transform: "translate3d(-100%, 0, 0)",
+        transform: "translate3d(-100%, 0, 0)"
     },
     to: {
-        transform: "translate3d(0, 0, 0)",
-    },
+        transform: "translate3d(0, 0, 0)"
+    }
 });
 var Bar = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isError = _a.isError;
     return (__assign({ width: "100%", height: 3, backgroundColor: theme.colors.info }, isError
         ? {
-            backgroundColor: theme.colors.error,
+            backgroundColor: theme.colors.error
         }
         : {
-            animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 20s",
+            animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 20s"
         }));
 });
 var ErrorMessage = glamorous_1.default.div(function (_a) {
@@ -60,11 +60,11 @@ var RetryLink = glamorous_1.default.div(function (_a) {
         marginLeft: theme.spacing * 3 / 4,
         userSelect: "none",
         "& svg": {
-            marginRight: theme.spacing / 3,
+            marginRight: theme.spacing / 3
         },
         ":hover": {
-            opacity: 1,
-        },
+            opacity: 1
+        }
     });
 });
 var Progress = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className, fadeParent: !!props.fadeParent },

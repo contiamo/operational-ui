@@ -7,7 +7,7 @@ export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/d
 
 export class Component extends React.Component<{}, { isExpanded: boolean }> {
   state = {
-    isExpanded: false,
+    isExpanded: false
   }
   render() {
     return (
@@ -15,7 +15,7 @@ export class Component extends React.Component<{}, { isExpanded: boolean }> {
         <Button
           onClick={() => {
             this.setState(prevState => ({
-              isExpanded: true,
+              isExpanded: true
             }))
           }}
         >
@@ -26,11 +26,11 @@ export class Component extends React.Component<{}, { isExpanded: boolean }> {
             contentCss={{
               padding: 0,
               width: "80vw",
-              height: "80vh",
+              height: "80vh"
             }}
             onClose={() => {
               this.setState(prevState => ({
-                isExpanded: false,
+                isExpanded: false
               }))
             }}
           >

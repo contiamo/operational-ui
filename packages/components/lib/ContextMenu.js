@@ -27,7 +27,7 @@ var Container = glamorous_1.default.div(function (_a) {
         label: "contextmenu",
         cursor: "pointer",
         position: "relative",
-        width: "fit-content",
+        width: "fit-content"
     });
 });
 var MenuContainer = glamorous_1.default.div(function (_a) {
@@ -39,7 +39,7 @@ var ContextMenu = /** @class */ (function (_super) {
     function ContextMenu() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            isOpen: false,
+            isOpen: false
         };
         _this.handleClick = function (ev) {
             var isTargetInsideMenu = _this.menuContainerNode.contains(ev.target);
@@ -52,7 +52,7 @@ var ContextMenu = /** @class */ (function (_super) {
             }
             var newIsActive = isTargetInsideMenu ? _this.state.isOpen : isTargetInsideContainer ? !_this.state.isOpen : false;
             _this.setState(function (prevState) { return ({
-                isOpen: newIsActive,
+                isOpen: newIsActive
             }); });
         };
         return _this;
@@ -76,11 +76,11 @@ var ContextMenu = /** @class */ (function (_super) {
                         (function () {
                             if (!_this.props.keepOpenOnItemClick) {
                                 _this.setState(function (prevState) { return ({
-                                    isOpen: false,
+                                    isOpen: false
                                 }); });
                             }
                             onClick_1();
-                        }),
+                        })
                 }));
             }
             else {

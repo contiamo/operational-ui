@@ -6,7 +6,7 @@ import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/comp
 
 export const DocsLink = glamorous.a(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
-  color: theme.colors.gray,
+  color: theme.colors.gray
 }))
 
 export const Section = (props: { title: string; docsUrl: string; children: React.ReactNode }) => (
@@ -19,8 +19,8 @@ export const Section = (props: { title: string; docsUrl: string; children: React
       css={{
         "& > *": {
           marginRight: 6,
-          marginBottom: 6,
-        },
+          marginBottom: 6
+        }
       }}
     >
       {props.children}
@@ -31,8 +31,8 @@ export const Section = (props: { title: string; docsUrl: string; children: React
 export const Subsection = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   margin: "30px 0",
   "& > *": {
-    marginRight: theme.spacing,
-  },
+    marginRight: theme.spacing
+  }
 }))
 
 export { default as Animation } from "./Animation"

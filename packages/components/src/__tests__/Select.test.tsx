@@ -11,7 +11,7 @@ const options: IOption[] = [
   { label: "John", value: -10 },
   { label: "Joey", value: "Nein" },
   { label: "Tupac", value: "true" },
-  { label: "Chandler", value: 10 },
+  { label: "Chandler", value: 10 }
 ]
 
 describe("Select", () => {

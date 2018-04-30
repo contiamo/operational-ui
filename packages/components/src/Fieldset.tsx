@@ -20,16 +20,16 @@ const Container = glamorous.fieldset(({ theme }: { theme: Theme }): any => ({
   "& > *:not(legend)": {
     display: "block",
     marginTop: theme.spacing,
-    marginBottom: theme.spacing,
+    marginBottom: theme.spacing
   },
   "&:first-child": {
-    marginTop: 0,
-  },
+    marginTop: 0
+  }
 }))
 
 const Legend = glamorous.legend(({ theme }: { theme: Theme }): any => ({
   ...theme.typography.heading1,
-  paddingLeft: 0,
+  paddingLeft: 0
 }))
 
 const Fieldset = (props: Props) => (

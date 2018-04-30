@@ -28,7 +28,7 @@ var Select = /** @class */ (function (_super) {
         _this.state = {
             open: false,
             updating: false,
-            search: "",
+            search: ""
         };
         return _this;
     }
@@ -95,7 +95,7 @@ var Select = /** @class */ (function (_super) {
     };
     Select.prototype.close = function () {
         this.setState(function () { return ({
-            open: false,
+            open: false
         }); });
     };
     Select.prototype.render = function () {
@@ -105,7 +105,7 @@ var Select = /** @class */ (function (_super) {
         var selectWithoutLabel = (React.createElement(Select_style_1.Container, { id: id, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, color: color, disabled: disabled, role: "listbox", tabIndex: -2, onClick: function () {
                 if (!_this.state.open) {
                     _this.setState(function (prevState) { return ({
-                        open: true,
+                        open: true
                     }); });
                 }
             } },
@@ -114,7 +114,7 @@ var Select = /** @class */ (function (_super) {
                 open && (React.createElement(Select_style_1.Options, null,
                 filterable && (React.createElement(SelectFilter_1.default, { onChange: function (val) {
                         _this.setState(function (prevState) { return ({
-                            search: val,
+                            search: val
                         }); });
                     } })),
                 React.createElement(Select_style_1.OptionsList, null, options.map(function (option) {

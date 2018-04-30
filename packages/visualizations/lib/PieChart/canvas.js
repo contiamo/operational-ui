@@ -120,7 +120,7 @@ var PieChartCanvas = /** @class */ (function () {
         var config = this.state.current.get("config");
         var dims = {
             height: config.height - this.elMap.legend.node().offsetHeight,
-            width: config.width,
+            width: config.width
         };
         this.stateWriter("drawingContainerDims", dims);
         return dims;

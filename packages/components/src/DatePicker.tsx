@@ -14,7 +14,7 @@ import {
   Days,
   Day,
   Input,
-  DatePickerCard,
+  DatePickerCard
 } from "./DatePicker/DatePicker.styles"
 import {
   months,
@@ -23,7 +23,7 @@ import {
   toDate,
   monthStartDay,
   toYearMonthDay,
-  validateDateString,
+  validateDateString
 } from "./DatePicker/DatePicker.utils"
 import Month from "./DatePicker/DatePicker.Month"
 
@@ -53,15 +53,15 @@ class DatePicker extends React.Component<Props, State> {
     const startYearMonthInWidget = props.start
       ? {
           year: toYearMonthDay(props.start).year,
-          month: toYearMonthDay(props.start).month,
+          month: toYearMonthDay(props.start).month
         }
       : {
           year: new Date().getFullYear(),
-          month: new Date().getMonth(),
+          month: new Date().getMonth()
         }
     this.state = {
       ...startYearMonthInWidget,
-      isExpanded: false,
+      isExpanded: false
     }
   }
 
@@ -90,7 +90,7 @@ class DatePicker extends React.Component<Props, State> {
       year:
         prevState.month + diff < 0
           ? prevState.year - 1
-          : prevState.month + diff > 11 ? prevState.year + 1 : prevState.year,
+          : prevState.month + diff > 11 ? prevState.year + 1 : prevState.year
     }))
   }
 
@@ -101,7 +101,7 @@ class DatePicker extends React.Component<Props, State> {
       }
       this.setState(prevState => ({
         ...prevState,
-        isExpanded: false,
+        isExpanded: false
       }))
       if (this.inputNode) {
         this.inputNode.blur()
@@ -113,7 +113,7 @@ class DatePicker extends React.Component<Props, State> {
       }
       this.setState(prevState => ({
         ...prevState,
-        isExpanded: false,
+        isExpanded: false
       }))
     }
     document.addEventListener("click", this.outsideClickHandler)

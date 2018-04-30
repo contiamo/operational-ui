@@ -20,7 +20,7 @@ var Container = glamorous_1.default.div(function (_a) {
         alignItems: "center",
         justifyContent: "space-between",
         position: "relative",
-        maxWidth: 400,
+        maxWidth: 400
     };
 });
 var IconContainer = glamorous_1.default.div(function (_a) {
@@ -35,11 +35,11 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         padding: theme.spacing * 0.5,
         "& svg": {
             width: "100%",
-            height: "100%",
+            height: "100%"
         },
         ":hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
-        },
+            backgroundColor: "rgba(0, 0, 0, 0.1)"
+        }
     });
 });
 var Message = function (props) { return (React.createElement(Container, { css: props.css, className: props.className, color: props.color },

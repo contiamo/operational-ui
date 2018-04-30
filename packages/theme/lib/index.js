@@ -40,7 +40,7 @@ var colors = {
         "#c7c7c7",
         "#f7b6d2",
         "#c49c94",
-        "#dbdb8d",
+        "#dbdb8d"
     ],
     lightGray: "#e8e8e8",
     gray: "#999999",
@@ -52,25 +52,25 @@ var colors = {
     lightText: "#969696",
     linkText: "#1499CE",
     navBackground: "#004A75",
-    separator: "#f2f2f2",
+    separator: "#f2f2f2"
 };
 var baseTypography = {
     lineHeight: "1.5",
     textTransform: "none",
-    letterSpacing: "normal",
+    letterSpacing: "normal"
 };
 var typography = {
     title: __assign({}, baseTypography, { fontSize: 24, fontWeight: 400 }),
     heading1: __assign({}, baseTypography, { fontSize: 16, fontWeight: 400 }),
     heading2: __assign({}, baseTypography, { fontSize: 16, opacity: 0.7, fontWeight: 400 }),
     body: __assign({}, baseTypography, { fontSize: 13, fontWeight: 400 }),
-    small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 }),
+    small: __assign({}, baseTypography, { fontSize: 12, fontWeight: 400 })
 };
 var shadows = {
     pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
     card: "0px 1px 5px #d3d1d1",
     focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
-    popup: "0 3px 12px rgba(0, 0, 0, .14)",
+    popup: "0 3px 12px rgba(0, 0, 0, .14)"
 };
 var operational = {
     typography: typography,
@@ -80,7 +80,7 @@ var operational = {
     box: 56,
     borderRadius: 4,
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    baseZIndex: 0,
+    baseZIndex: 0
 };
 exports.operational = operational;
 //# sourceMappingURL=index.js.map

@@ -18,8 +18,8 @@ var Container = glamorous_1.default.div(function (_a) {
             width: "100%",
             display: "block",
             textDecoration: "none",
-            color: "inherit",
-        },
+            color: "inherit"
+        }
     });
 });
 var Sidebar = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className }, props.children)); };

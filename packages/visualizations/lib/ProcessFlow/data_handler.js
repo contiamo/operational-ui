@@ -21,7 +21,7 @@ var DataHandler = /** @class */ (function () {
         return {
             nodes: this.nodes,
             journeys: this.journeys,
-            links: this.links,
+            links: this.links
         };
     };
     DataHandler.prototype.initializeNodes = function (nodeAttrs) {
@@ -98,7 +98,7 @@ var DataHandler = /** @class */ (function () {
                         sourceId: sourceNode.id(),
                         target: targetNode,
                         targetId: targetNode.id(),
-                        size: journey.size,
+                        size: journey.size
                     };
                     var newLink = _this.addLink(linkAttrs);
                     _this.links.push(newLink);

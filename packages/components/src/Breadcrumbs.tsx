@@ -12,14 +12,14 @@ const Container = glamorous.div({
   label: "breadcrumbs",
   "& a": {
     textDecoration: "none",
-    color: "inherit",
-  },
+    color: "inherit"
+  }
 })
 
 const Divider = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
   margin: `0 ${theme.spacing / 2}px`,
-  color: theme.colors.gray,
+  color: theme.colors.gray
 }))
 
 const Breadcrumbs = (props: Props) => (

@@ -33,13 +33,13 @@ var Container = glamorous_1.default.div(function (_a) {
             overflow: "hidden",
             ":hover": {
                 width: constants_1.sidenavExpandedWidth,
-                overflow: "auto",
-            },
+                overflow: "auto"
+            }
         }
         : {};
     return __assign({ backgroundColor: backgroundColor,
         color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : theme.box, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
-            outline: 0,
+            outline: 0
         } });
 });
 var Sidenav = /** @class */ (function (_super) {
@@ -47,7 +47,7 @@ var Sidenav = /** @class */ (function (_super) {
     function Sidenav() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            isHovered: false,
+            isHovered: false
         };
         return _this;
     }
@@ -55,11 +55,11 @@ var Sidenav = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement(Container, { id: this.props.id, css: this.props.css, className: this.props.className, expandOnHover: this.props.expandOnHover, expanded: this.props.expanded, onMouseEnter: function () {
                 _this.setState(function (prevState) { return ({
-                    isHovered: true,
+                    isHovered: true
                 }); });
             }, onMouseLeave: function () {
                 _this.setState(function (prevState) { return ({
-                    isHovered: false,
+                    isHovered: false
                 }); });
             } }, this.props.children));
     };

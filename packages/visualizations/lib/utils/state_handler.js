@@ -13,7 +13,7 @@ var StateHandler = /** @class */ (function () {
     StateHandler.prototype.readOnly = function () {
         return {
             current: this.state.current.readOnly(),
-            previous: this.state.previous.readOnly(),
+            previous: this.state.previous.readOnly()
         };
     };
     // Data

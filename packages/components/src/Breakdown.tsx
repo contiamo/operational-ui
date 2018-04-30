@@ -28,7 +28,7 @@ const Container = glamorous.div(
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    maxWidth: 300,
+    maxWidth: 300
   },
   ({ theme, onClick }: { theme?: Theme; onClick: () => void }) => ({
     padding: `${theme.spacing * 3 / 4}px 0`,
@@ -36,28 +36,28 @@ const Container = glamorous.div(
       ? {
           cursor: "pointer",
           "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.01)",
-          },
+            backgroundColor: "rgba(0, 0, 0, 0.01)"
+          }
         }
       : {},
     background: theme.colors.white,
     ":not(:first-child)": {
-      borderTop: `1px solid ${theme.colors.separator}`,
-    },
+      borderTop: `1px solid ${theme.colors.separator}`
+    }
   })
 )
 
 const Content = glamorous.div({
-  width: "100%",
+  width: "100%"
 })
 
 const Label = glamorous.label(
   {
-    display: "block",
+    display: "block"
   },
   ({ theme }: { theme?: Theme }) => ({
     marginBottom: theme.spacing / 4,
-    fontSize: theme.typography.small.fontSize,
+    fontSize: theme.typography.small.fontSize
   })
 )
 
@@ -69,7 +69,7 @@ const Bar = glamorous.div(
     overflow: "hidden",
     "& > span": {
       position: "relative",
-      padding: 2,
+      padding: 2
     },
     ":before": {
       content: "' '",
@@ -79,8 +79,8 @@ const Bar = glamorous.div(
       zIndex: 0,
       display: "block",
       height: "100%",
-      pointerEvents: "none",
-    },
+      pointerEvents: "none"
+    }
   },
   ({ theme, fill, color }: { theme: Theme; fill: number; color: string }) => {
     const backgroundColor: string = expandColor(theme, color) || theme.colors.info
@@ -92,13 +92,13 @@ const Bar = glamorous.div(
         fontSize: 12,
         position: "relative",
         top: 1,
-        fontWeight: 400,
+        fontWeight: 400
       },
       ":before": {
         backgroundColor: setBrightness(backgroundColor, 155),
         transition: "all 0.3s ease-in-out",
-        width: `${fill * 100}%`,
-      },
+        width: `${fill * 100}%`
+      }
     }
   }
 )
@@ -108,12 +108,12 @@ const Number = glamorous.div(
     height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   ({ theme }: { theme: Theme }): {} => ({
     ...theme.typography.heading1,
     flex: `0 0 ${theme.spacing * 2.5}px`,
-    color: theme.colors.lightGray,
+    color: theme.colors.lightGray
   })
 )
 

@@ -4,13 +4,13 @@ var glamor_1 = require("glamor");
 var legendStyle = {
     fontSize: "11px",
     position: "relative",
-    overflow: "hidden",
+    overflow: "hidden"
 };
 var legendTopBottomStyle = {
     padding: "3px 7px",
     "& .series-legend, .comparison-legend": {
-        float: "left",
-    },
+        float: "left"
+    }
 };
 var seriesLegendStyle = {
     padding: "1px 3px 0 3px",
@@ -20,27 +20,27 @@ var seriesLegendStyle = {
         width: "6px",
         height: "6px",
         margin: "2px 3px 0 0",
-        float: "left",
+        float: "left"
     },
     "& div.name": {
-        float: "left",
-    },
+        float: "left"
+    }
 };
 var drawingContainerStyle = {
     position: "relative",
-    overflow: "hidden",
+    overflow: "hidden"
 };
 var ruleStyle = {
     stroke: "#eee",
     strokeWidth: "1px",
     shapeRendering: "crispedges",
     "& .zero": {
-        strokeWidth: "2px",
+        strokeWidth: "2px"
     },
     "& .now": {
         stroke: "#71a934",
-        strokeDasharray: "2, 4",
-    },
+        strokeDasharray: "2, 4"
+    }
 };
 var componentFocusStyle = {
     position: "absolute",
@@ -49,15 +49,15 @@ var componentFocusStyle = {
     borderRadius: "3px",
     border: "1px solid #dcf1ff",
     padding: 0,
-    cursor: "pointer",
+    cursor: "pointer"
 };
 var chartContainerStyle = {
     position: "relative",
     display: "block",
     backgroundColor: "#fff",
     "&.hidden": {
-        display: "none",
-    },
+        display: "none"
+    }
 };
 var focusLegendStyle = {
     userSelect: "none",
@@ -73,36 +73,36 @@ var focusLegendStyle = {
         listStyle: "none",
         fontSize: 12,
         margin: 0,
-        padding: 0,
+        padding: 0
     },
     "& li.title, span.title": {
-        fontWeight: "bold",
+        fontWeight: "bold"
     },
     "& span.title": {
-        paddingRight: "6px",
+        paddingRight: "6px"
     },
     "&::before,::after": {
         content: "''",
         position: "absolute",
         width: 0,
-        height: 0,
+        height: 0
     },
     "&.above::before,.above::after": {
         top: "100%",
-        left: "50%",
+        left: "50%"
     },
     "&.above::before": {
         borderLeft: "solid 8px transparent",
         borderRight: "solid 8px transparent",
         borderTop: "solid 8px #cdcdcd",
-        marginLeft: "-8px",
+        marginLeft: "-8px"
     },
     "&.above::after": {
         borderLeft: "solid 7px transparent",
         borderRight: "solid 7px transparent",
         borderTop: "solid 7px #fff",
-        marginLeft: "-7px",
-    },
+        marginLeft: "-7px"
+    }
 };
 exports.chartContainer = glamor_1.css(chartContainerStyle).toString();
 exports.focusLegend = glamor_1.css(focusLegendStyle).toString();

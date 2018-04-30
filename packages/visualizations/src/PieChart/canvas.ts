@@ -145,7 +145,7 @@ class PieChartCanvas implements Canvas {
     const config = this.state.current.get("config")
     const dims = {
       height: config.height - this.elMap.legend.node().offsetHeight,
-      width: config.width,
+      width: config.width
     }
     this.stateWriter("drawingContainerDims", dims)
     return dims

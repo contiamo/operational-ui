@@ -35,10 +35,10 @@
     "jest": "21.2.1",
     "prettier": "1.8.2",
     "ts-jest": "21.0.0",
-    "tslint": "5.9.1",
-    "tslint-config-airbnb": "5.8.0",
-    "tslint-config-prettier": "1.12.0",
-    "typescript": "2.8.3"
+    "tslint": "5.7.0",
+    "tslint-config-airbnb": "5.2.1",
+    "tslint-config-prettier": "1.5.0",
+    "typescript": "2.6.2"
   },
   "jest": {
     "setupFiles": [

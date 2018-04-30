@@ -84,7 +84,7 @@ var ProcessFlowFocus = /** @class */ (function () {
             xMax: drawingContainer.left + config.width,
             xMin: drawingContainer.left,
             yMax: drawingContainer.top + config.height,
-            yMin: drawingContainer.top,
+            yMin: drawingContainer.top
         };
     };
     ProcessFlowFocus.prototype.onElementOut = function () {
@@ -106,7 +106,7 @@ function computeBreakdowns(node) {
         return {
             size: size,
             label: link.source().label(),
-            percentage: Math.round(size * 100 / node.size()),
+            percentage: Math.round(size * 100 / node.size())
         };
     })(node.targetLinks);
     var outputs = fp_1.map(function (link) {
@@ -114,20 +114,20 @@ function computeBreakdowns(node) {
         return {
             size: size,
             label: link.target().label(),
-            percentage: Math.round(size * 100 / node.size()),
+            percentage: Math.round(size * 100 / node.size())
         };
     })(node.sourceLinks);
     var startsHere = [
         {
             size: node.journeyStarts,
-            percentage: Math.round(node.journeyStarts * 100 / node.size()),
-        },
+            percentage: Math.round(node.journeyStarts * 100 / node.size())
+        }
     ];
     var endsHere = [
         {
             size: node.journeyEnds,
-            percentage: Math.round(node.journeyEnds * 100 / node.size()),
-        },
+            percentage: Math.round(node.journeyEnds * 100 / node.size())
+        }
     ];
     return { inputs: inputs, outputs: outputs, startsHere: startsHere, endsHere: endsHere };
 }

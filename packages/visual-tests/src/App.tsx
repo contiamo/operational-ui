@@ -12,7 +12,7 @@ import {
   Sidebar,
   SidebarHeader,
   SmallType,
-  SidebarItem,
+  SidebarItem
 } from "@operational/components"
 import { darken } from "@operational/utils"
 
@@ -35,7 +35,7 @@ const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: bo
   borderRadius: active ? 2 : 0,
   color: active ? theme.colors.white : theme.colors.linkText,
   backgroundColor: active ? theme.colors.linkText : theme.colors.white,
-  borderBottom: "1px solid currentColor",
+  borderBottom: "1px solid currentColor"
 }))
 
 class App extends React.Component<{}, State> {
@@ -46,7 +46,7 @@ class App extends React.Component<{}, State> {
       group: indicesFromHash ? indicesFromHash.groupIndex : 0,
       test: indicesFromHash ? indicesFromHash.testIndex : 0,
       isLooping: false,
-      isIdle: false,
+      isIdle: false
     }
   }
 
@@ -67,14 +67,14 @@ class App extends React.Component<{}, State> {
     }
     this.setState(() => ({
       group: indicesFromHash.groupIndex,
-      test: indicesFromHash.testIndex,
+      test: indicesFromHash.testIndex
     }))
   }
 
   syncRoute() {
     const hash = toHash({
       groupIndex: this.state.group,
-      testIndex: this.state.test,
+      testIndex: this.state.test
     })(allTestCases)
     if (hash !== window.location.hash) {
       history.pushState(null, null, hash)
@@ -85,7 +85,7 @@ class App extends React.Component<{}, State> {
     const reachedEnd = this.state.test >= allTestCases[this.state.group].children.length - 1
     setTimeout(() => {
       this.setState(prevState => ({
-        test: reachedEnd ? 0 : prevState.test + 1,
+        test: reachedEnd ? 0 : prevState.test + 1
       }))
     }, 2000)
   }
@@ -109,7 +109,7 @@ class App extends React.Component<{}, State> {
                     }
                     this.setState(prevState => ({
                       isLooping: !prevState.isLooping,
-                      isIdle: !prevState.isLooping ? false : prevState.isIdle,
+                      isIdle: !prevState.isLooping ? false : prevState.isIdle
                     }))
                   }}
                 >
@@ -121,7 +121,7 @@ class App extends React.Component<{}, State> {
                   margin: -operational.spacing,
                   width: `calc(100% + ${2 * operational.spacing}px)`,
                   boxShadow: "none",
-                  borderTop: "1px solid #f2f2f2",
+                  borderTop: "1px solid #f2f2f2"
                 }}
               >
                 {allTestCases.map((test, groupIndex) => (
@@ -132,7 +132,7 @@ class App extends React.Component<{}, State> {
                     onToggle={() => {
                       this.setState(() => ({
                         group: groupIndex,
-                        test: 0,
+                        test: 0
                       }))
                     }}
                   >
@@ -142,7 +142,7 @@ class App extends React.Component<{}, State> {
                         active={groupIndex === this.state.group && testIndex === this.state.test}
                         onClick={() => {
                           this.setState(() => ({
-                            test: testIndex,
+                            test: testIndex
                           }))
                         }}
                       >
@@ -169,7 +169,7 @@ class App extends React.Component<{}, State> {
                 onCompleted={() => {
                   if (!this.state.isLooping && !this.state.isIdle) {
                     this.setState(prevState => ({
-                      isIdle: true,
+                      isIdle: true
                     }))
                     return
                   }

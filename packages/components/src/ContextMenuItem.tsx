@@ -24,13 +24,13 @@ const Container = glamorous.div(({ theme, clickable }: { theme: Theme; clickable
     ? {
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: darken(theme.colors.white, 2),
-        },
+          backgroundColor: darken(theme.colors.white, 2)
+        }
       }
     : {},
   "&:not(:first-child)": {
-    borderTop: 0,
-  },
+    borderTop: 0
+  }
 }))
 
 const ContextMenuItem = (props: Props) => (
@@ -47,6 +47,6 @@ const ContextMenuItem = (props: Props) => (
 
 export default Object.assign(ContextMenuItem, {
   defaultProps: {
-    __isContextMenuItem: true,
-  },
+    __isContextMenuItem: true
+  }
 })

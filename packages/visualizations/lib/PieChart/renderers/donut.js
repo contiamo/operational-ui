@@ -78,7 +78,7 @@ var Donut = /** @class */ (function () {
     Donut.prototype.arcAttributes = function () {
         return {
             path: this.arcTween.bind(this),
-            fill: this.color.bind(this),
+            fill: this.color.bind(this)
         };
     };
     // Interpolate the arcs in data space.
@@ -109,7 +109,7 @@ var Donut = /** @class */ (function () {
             innerRadius: this.computed.rInner,
             outerRadius: this.computed.r,
             endAngle: d.endAngle,
-            startAngle: d.startAngle,
+            startAngle: d.startAngle
         });
         return function (t) { return _this.computed.arc(f(t)); };
     };
@@ -129,7 +129,7 @@ var Donut = /** @class */ (function () {
         this.previousComputed = this.computed;
         var d = {
             layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
-            total: Utils.computeTotal(this.data, this.value),
+            total: Utils.computeTotal(this.data, this.value)
         };
         // data should not become part of this.previousComputed in first computation
         this.previousComputed = fp_1.defaults(d)(this.previousComputed);
@@ -150,7 +150,7 @@ var Donut = /** @class */ (function () {
             arc: d3_shape_1.arc(),
             arcOver: d3_shape_1.arc()
                 .innerRadius(rInnerHover)
-                .outerRadius(rHover),
+                .outerRadius(rHover)
         };
     };
     Donut.prototype.computeOuterRadius = function (drawingDims) {
@@ -168,7 +168,7 @@ var Donut = /** @class */ (function () {
         var datumInfo = {
             key: this.key(d),
             value: this.value(d),
-            percentage: d.data.percentage,
+            percentage: d.data.percentage
         };
         var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
@@ -202,7 +202,7 @@ var Donut = /** @class */ (function () {
         return fp_1.map(function (datum) {
             return {
                 label: _this.key(datum),
-                color: _this.color(datum),
+                color: _this.color(datum)
             };
         })(this.data);
     };

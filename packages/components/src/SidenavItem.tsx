@@ -26,8 +26,8 @@ const Container = glamorous.div(
     whiteSpace: "nowrap",
     backgroundColor: "rgba(0, 0, 0, 0.2)",
     "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.25)",
-    },
+      backgroundColor: "rgba(0, 0, 0, 0.25)"
+    }
   },
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
     // Readable text color is calculated in the <Sidenav> component,
@@ -36,8 +36,8 @@ const Container = glamorous.div(
     color: isActive ? theme.colors.linkText : "inherit",
     "& > div:first-child::after": {
       // Connector strip circle color
-      backgroundColor: isActive ? theme.colors.linkText : null,
-    },
+      backgroundColor: isActive ? theme.colors.linkText : null
+    }
   })
 )
 
@@ -56,14 +56,14 @@ const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     position: "absolute",
     borderRadius: "50%",
     left: -3,
-    top: size / 2 - 4,
+    top: size / 2 - 4
   },
   // Only half-height for last element - selectors cover both the case
   // when the side nav item is wrapped inside a <Link/> element (e.g. react-router)
   // and when it isn't. This is also why the class names are necessary.
   ".op_sidenavheader > .op_sidenavitem:last-child > &, .op_sidenavheader > *:last-child > .op_sidenavitem > &": {
-    height: size / 2,
-  },
+    height: size / 2
+  }
 }))
 
 const SidenavItem = (props: Props) => (

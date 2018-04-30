@@ -20,17 +20,17 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   "& code": {
     padding: "0 2px",
     borderRadius: 3,
-    backgroundColor: lighten(theme.colors.info, 50),
+    backgroundColor: lighten(theme.colors.info, 50)
   },
   "& > :first-child": {
-    marginTop: 0,
-  },
+    marginTop: 0
+  }
 }))
 
 export default class StaticContent extends React.Component<Props, {}> {
   containerNode: any
   codeNodes: any
-  codes: any[] = []
+  codes: any[]
 
   render() {
     return this.props.markdownContent ? (

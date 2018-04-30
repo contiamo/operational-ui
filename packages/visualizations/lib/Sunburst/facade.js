@@ -25,7 +25,7 @@ var SunburstFacade = /** @class */ (function () {
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
-            computed: this.initialComputed(),
+            computed: this.initialComputed()
         });
     };
     SunburstFacade.prototype.initialConfig = function () {
@@ -44,7 +44,7 @@ var SunburstFacade = /** @class */ (function () {
             sort: true,
             uid: fp_1.uniqueId("sunburst"),
             visualizationName: "sunburst",
-            width: 500,
+            width: 500
         };
     };
     SunburstFacade.prototype.defaultColorAssigner = function (palette) {
@@ -54,21 +54,21 @@ var SunburstFacade = /** @class */ (function () {
         var assignColors = this.defaultColorAssigner(this.initialConfig().palette);
         return {
             data: {
-                data: function (data) { return data; },
+                data: function (data) { return data; }
             },
             series: {
                 color: function (d) { return assignColors(d.name); },
                 id: function (d) { return d.name; },
                 name: function (d) { return d.name || ""; },
-                value: function (d) { return d.value; },
-            },
+                value: function (d) { return d.value; }
+            }
         };
     };
     SunburstFacade.prototype.initialComputed = function () {
         return {
             canvas: {},
             focus: {},
-            renderer: {},
+            renderer: {}
         };
     };
     SunburstFacade.prototype.insertCanvas = function () {
@@ -79,7 +79,7 @@ var SunburstFacade = /** @class */ (function () {
             breadcrumb: new breadcrumb_1.default(this.state.readOnly(), this.state.computedWriter(["breadcrumb"]), this.events, this.canvas.elementFor("breadcrumb")),
             focus: new focus_1.default(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, this.canvas.elementFor("focus")),
             renderer: new renderer_1.default(this.state.readOnly(), this.state.computedWriter(["renderer"]), this.events, this.canvas.elementFor("series")),
-            rootLabel: new root_label_1.default(this.state.readOnly(), this.state.computedWriter(["rootLabel"]), this.events, this.canvas.elementFor("rootLabel")),
+            rootLabel: new root_label_1.default(this.state.readOnly(), this.state.computedWriter(["rootLabel"]), this.events, this.canvas.elementFor("rootLabel"))
         };
     };
     SunburstFacade.prototype.data = function (data) {
@@ -89,7 +89,7 @@ var SunburstFacade = /** @class */ (function () {
         if (config.palette && !this.customColorAccessor) {
             var assignColors_1 = this.defaultColorAssigner(config.palette);
             this.accessors("series", {
-                color: function (d) { return assignColors_1(d.name, d.color); },
+                color: function (d) { return assignColors_1(d.name, d.color); }
             });
         }
         return this.state.config(config);

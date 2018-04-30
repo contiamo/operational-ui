@@ -11,7 +11,7 @@ describe("Breakdown Component", () => {
     const props = {
       number: 3,
       count: 20,
-      percentage: "50%",
+      percentage: "50%"
     }
     expect(render(<Breakdown {...props}>hi</Breakdown>)).toMatchSnapshot()
   })

@@ -24,14 +24,14 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.white,
   padding: `0px ${theme.spacing * 1.5}px`,
   overflow: "auto",
-  height: "100%",
+  height: "100%"
 }))
 
 const TopBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   height: theme.box,
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "space-between"
 }))
 
 const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -40,14 +40,14 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   alignItems: "center",
   justifyContent: "flex-start",
   marginTop: 0.5 * theme.spacing,
-  marginBottom: 2 * theme.spacing,
+  marginBottom: 2 * theme.spacing
 }))
 
 const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginLeft: theme.spacing,
   "& > :last-child": {
-    marginRight: 0,
-  },
+    marginRight: 0
+  }
 }))
 
 const BackLinkContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -58,8 +58,8 @@ const BackLinkContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
     marginRight: 4,
     position: "relative",
     top: 2,
-    left: -1,
-  },
+    left: -1
+  }
 }))
 
 const Page = (props: Props) => (

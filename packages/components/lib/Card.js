@@ -11,8 +11,8 @@ var Container = glamorous_1.default.div(function (_a) {
         boxShadow: theme.shadows.card,
         backgroundColor: theme.colors.white,
         "& > img": {
-            maxWidth: "100%",
-        },
+            maxWidth: "100%"
+        }
     });
 });
 var Card = function (props) { return (React.createElement(Container, { id: props.id, css: props.css, className: props.className }, props.children)); };

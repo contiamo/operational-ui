@@ -9,31 +9,31 @@ export interface Props {
 const Title: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: Props): {} => ({
   ...theme.typography.title,
   margin: `${theme.spacing}px 0`,
-  label: "titletype",
+  label: "titletype"
 }))
 
 const Heading1: GlamorousComponent<{}, {}> = glamorous.h1(({ theme }: Props): {} => ({
   ...theme.typography.heading1,
   margin: `${theme.spacing / 2}px 0`,
-  label: "heading1type",
+  label: "heading1type"
 }))
 
 const Heading2: GlamorousComponent<{}, {}> = glamorous.h2(({ theme }: Props): {} => ({
   ...theme.typography.heading2,
   margin: `${theme.spacing / 2}px 0`,
-  label: "heading2type",
+  label: "heading2type"
 }))
 
 const Body: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: Props): {} => ({
   ...theme.typography.body,
   margin: `${theme.spacing / 4}px 0`,
-  label: "bodytype",
+  label: "bodytype"
 }))
 
 const Small: GlamorousComponent<{}, {}> = glamorous.p(({ theme }: Props): {} => ({
   ...theme.typography.small,
   margin: `${theme.spacing / 4}px 0`,
-  label: "smalltype",
+  label: "smalltype"
 }))
 
 export { Title, Heading1, Heading2, Body, Small }
