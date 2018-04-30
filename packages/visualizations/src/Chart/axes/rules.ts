@@ -81,7 +81,7 @@ class Rules {
   }
 
   close(): void {
-    // @TODO
+    this.el.node().remove()
   }
 }
 

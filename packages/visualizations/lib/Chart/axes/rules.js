@@ -67,7 +67,7 @@ var Rules = /** @class */ (function () {
         return this.state.current.get("computed").axes.margins[axis] || this.state.current.get("config")[axis].margin;
     };
     Rules.prototype.close = function () {
-        // @TODO
+        this.el.node().remove();
     };
     return Rules;
 }());

@@ -48,7 +48,7 @@ class QuantAxis implements AxisClass<number> {
     this.events = events
     this.position = position
     this.isXAxis = position[0] === "x"
-    this.el = insertElements(el, position, this.state.current.get("computed").canvas.drawingDims)
+    this.el = insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims)
     // this.el.on("mouseenter", this.onComponentHover(this))
   }
 
@@ -228,7 +228,7 @@ class QuantAxis implements AxisClass<number> {
   }
 
   close(): void {
-    this.el.remove()
+    this.el.node().remove()
   }
 }
 

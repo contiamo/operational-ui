@@ -1,72 +1,12 @@
-import * as React from "react"
-import { render } from "react-dom"
-import { injectStylesheet, baseStylesheet } from "@operational/utils"
-import { operational } from "@operational/theme"
-import { OperationalUI } from "@operational/components"
+import { Chart } from "@operational/visualizations"
+import { MarathonEnvironment } from "../../Marathon"
 
-injectStylesheet(baseStylesheet(operational))
-
-const containerNode = document.getElementById("app")
-
-import Chart from "../../src/Chart/facade"
-import { VisualizationWrapper } from "../../src/index"
-
-const AreaRenderer: any = {
-  accessors: {
-    interpolate: (series: any, d: any) => "monotoneY"
-  },
-  type: "area"
-}
-
-const LineRenderer: any = {
-  accessors: {
-    interpolate: (series: any, d: any) => "monotoneY",
-    dashed: (series: any, d: any) => series.key() === "unique_key",
-  },
-  type: "line"
-}
-
-const BarsRenderer: any = {
+const BarsRenderer = {
   type: "bars"
 }
 
-const FixedBarsRenderer: any = {
-  accessors: {
-    barWidth: () => 20
-  },
-  type: "bars"
-}
 
-const SymbolRenderer: any = {
-  accessors: {
-    symbol: (series: any, d: any) => d.y >= 1000 ? "cross" : "diamond",
-    size: (series: any, d: any) => series.key() === "series2" ? 150 : 60,
-    fill: () => "#bbb"
-  },
-  type: "symbol"
-}
-
-const TextRenderer: any = {
-  type: "text"
-}
-
-const StackedRenderer = {
-  type: "stacked",
-  stackAxis: "y",
-  renderAs: [BarsRenderer, TextRenderer]
-}
-
-const FlagRenderer = {
-  type: "flag"
-}
-
-const RangeRenderer = {
-  type: "range",
-  stackAxis: "y",
-  renderAs: [AreaRenderer, LineRenderer, SymbolRenderer]
-}
-
-let data: any = {
+const data: any = {
   series: [
     {
       data: [
@@ -156,11 +96,26 @@ const data1: any = {
   }
 }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} /></OperationalUI>
 
-render(<App />, containerNode)
+export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
+  const viz = new Chart(container)
 
-setTimeout(() => {
-  data = data1
-  render(<App />, containerNode)
-}, 3000)
+  test("Automatic axes", () => {
+    viz.data(data)
+    viz.draw()
+  })
+
+  test("Defined axes", () => {
+    viz.data(data1)
+    viz.draw()
+  })
+
+  afterAll(() => {
+    viz.close()
+  })
+}
+
+export const title: string = "Switching axes"
+
+// Must match the file name so we can link to the code on GitHub
+export const slug = "axes-6"

@@ -3,7 +3,7 @@ export declare const axisPosition: (position: AxisPosition, drawingDims: {
     width: number;
     height: number;
 }) => [number, number];
-export declare const insertElements: (el: any, position: AxisPosition, drawingDims: {
+export declare const insertElements: (el: any, type: string, position: AxisPosition, drawingDims: {
     width: number;
     height: number;
 }) => any;

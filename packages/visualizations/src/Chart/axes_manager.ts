@@ -63,7 +63,7 @@ class AxesManager {
     const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition): boolean => {
       return !axesOptions[key] || axesOptions[key].type === axis.type
     })(this.axes)
-    forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove)
+    forEach.convert({ cap: false })(this.removeAxis.bind(this))(axesToRemove)
     // Create or update currently required axes
     forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions)
     this.setBaselines()
@@ -118,10 +118,11 @@ class AxesManager {
 
   updateRules(orientation: "x" | "y"): void {
     const rules: Rules = this.rules[orientation] || new Rules(this.state, this.els[`${orientation}Rules`], orientation)
+    this.rules[orientation] = rules
     rules.draw()
   }
 
-  removeRules(orientation: "x" | "y"): void {
+  private removeRules(orientation: "x" | "y"): void {
     const rules: Rules = this.rules[orientation]
     if (!rules) {
       return
@@ -130,7 +131,7 @@ class AxesManager {
     delete this.rules[orientation]
   }
 
-  private remove(axis: AxisClass<any>, position: AxisPosition): void {
+  private removeAxis(axis: AxisClass<any>, position: AxisPosition): void {
     this.oldAxes[position] = axis
     this.axes[position] = null
   }

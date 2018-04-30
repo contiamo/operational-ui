@@ -16,10 +16,10 @@ exports.axisPosition = function (position, drawingDims) {
             return [drawingDims.width, 0];
     }
 };
-exports.insertElements = function (el, position, drawingDims) {
+exports.insertElements = function (el, type, position, drawingDims) {
     var axisGroup = el
         .append("svg:g")
-        .attr("class", "axis quant-axis " + position)
+        .attr("class", "axis " + type + "-axis " + position)
         .attr("transform", "translate(" + exports.axisPosition(position, drawingDims).join(",") + ")");
     // Background rect for component hover
     axisGroup.append("svg:rect").attr("class", styles.componentRect);

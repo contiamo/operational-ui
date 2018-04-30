@@ -29,10 +29,10 @@ export const axisPosition = (position: AxisPosition, drawingDims: Dimensions): [
   }
 }
 
-export const insertElements = (el: any, position: AxisPosition, drawingDims: Dimensions): any => {
+export const insertElements = (el: any, type: string, position: AxisPosition, drawingDims: Dimensions): any => {
   const axisGroup: any = el
     .append("svg:g")
-    .attr("class", `axis quant-axis ${position}`)
+    .attr("class", `axis ${type}-axis ${position}`)
     .attr("transform", `translate(${axisPosition(position, drawingDims).join(",")})`)
 
   // Background rect for component hover

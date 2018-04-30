@@ -16,7 +16,7 @@ var QuantAxis = /** @class */ (function () {
         this.events = events;
         this.position = position;
         this.isXAxis = position[0] === "x";
-        this.el = axis_utils_1.insertElements(el, position, this.state.current.get("computed").canvas.drawingDims);
+        this.el = axis_utils_1.insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims);
         // this.el.on("mouseenter", this.onComponentHover(this))
     }
     // Quant axis only supports finite numbers
@@ -169,7 +169,7 @@ var QuantAxis = /** @class */ (function () {
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };
     QuantAxis.prototype.close = function () {
-        this.el.remove();
+        this.el.node().remove();
     };
     return QuantAxis;
 }());

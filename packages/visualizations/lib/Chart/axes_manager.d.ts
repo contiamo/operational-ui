@@ -20,7 +20,7 @@ declare class AxesManager {
     private drawAxes(orientation);
     private onMarginsUpdated(isXAxis);
     updateRules(orientation: "x" | "y"): void;
-    removeRules(orientation: "x" | "y"): void;
-    private remove(axis, position);
+    private removeRules(orientation);
+    private removeAxis(axis, position);
 }
 export default AxesManager;

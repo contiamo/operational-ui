@@ -43,7 +43,7 @@ var AxesManager = /** @class */ (function () {
         var axesToRemove = fp_1.omitBy(function (axis, key) {
             return !axesOptions[key] || axesOptions[key].type === axis.type;
         })(this.axes);
-        fp_1.forEach.convert({ cap: false })(this.remove.bind(this))(axesToRemove);
+        fp_1.forEach.convert({ cap: false })(this.removeAxis.bind(this))(axesToRemove);
         // Create or update currently required axes
         fp_1.forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions);
         this.setBaselines();
@@ -89,6 +89,7 @@ var AxesManager = /** @class */ (function () {
     };
     AxesManager.prototype.updateRules = function (orientation) {
         var rules = this.rules[orientation] || new rules_1.default(this.state, this.els[orientation + "Rules"], orientation);
+        this.rules[orientation] = rules;
         rules.draw();
     };
     AxesManager.prototype.removeRules = function (orientation) {
@@ -99,7 +100,7 @@ var AxesManager = /** @class */ (function () {
         rules.close();
         delete this.rules[orientation];
     };
-    AxesManager.prototype.remove = function (axis, position) {
+    AxesManager.prototype.removeAxis = function (axis, position) {
         this.oldAxes[position] = axis;
         this.axes[position] = null;
     };

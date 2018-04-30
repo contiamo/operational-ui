@@ -38,7 +38,7 @@ var TimeAxis = /** @class */ (function () {
         this.events = events;
         this.position = position;
         this.isXAxis = position[0] === "x";
-        this.el = axis_utils_1.insertElements(el, position, this.state.current.get("computed").canvas.drawingDims);
+        this.el = axis_utils_1.insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims);
         // this.el.on("mouseenter", this.onComponentHover(this))  }
     }
     TimeAxis.prototype.validate = function (value) {
@@ -241,7 +241,7 @@ var TimeAxis = /** @class */ (function () {
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };
     TimeAxis.prototype.close = function () {
-        this.el.remove();
+        this.el.node().remove();
     };
     return TimeAxis;
 }());

@@ -14,7 +14,7 @@ var CategoricalAxis = /** @class */ (function () {
         this.events = events;
         this.position = position;
         this.isXAxis = position[0] === "x";
-        this.el = axis_utils_1.insertElements(el, position, this.state.current.get("computed").canvas.drawingDims);
+        this.el = axis_utils_1.insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims);
         // this.el.on("mouseenter", this.onComponentHover(this))  }
     }
     // Categorical axis supports everything that supports ".toString()"
@@ -179,7 +179,7 @@ var CategoricalAxis = /** @class */ (function () {
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };
     CategoricalAxis.prototype.close = function () {
-        this.el.remove();
+        this.el.node().remove();
     };
     return CategoricalAxis;
 }());
