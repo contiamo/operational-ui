@@ -7,8 +7,14 @@ export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/d
 
 export const Component = () => (
   <Breadcrumbs>
-    <Breadcrumb>Link one</Breadcrumb>
-    <Breadcrumb>Link two</Breadcrumb>
+    {null}
+    {null}
+    <Breadcrumb>
+      <a>Link one</a>
+    </Breadcrumb>
+    <Breadcrumb>
+      <a>Link two</a>
+    </Breadcrumb>
     <Breadcrumb>Link three</Breadcrumb>
   </Breadcrumbs>
 )

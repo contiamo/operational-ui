@@ -39,13 +39,13 @@ const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 const Separator = glamorous.hr(({ theme }: { theme: Theme }): {} => ({
   margin: `${theme.spacing * 2.5}px auto`,
   width: 80,
-  opacity: 0.7
+  opacity: 0.7,
 }))
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   maxWidth: 760,
   margin: "auto",
-  padding: 2.5 * theme.spacing
+  padding: 2.5 * theme.spacing,
 }))
 
 const TitleBarNav = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -112,7 +112,7 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
               marginLeft: "auto",
               marginRight: "auto",
               display: "block",
-              textAlign: "center"
+              textAlign: "center",
             })}
           >
             <Button

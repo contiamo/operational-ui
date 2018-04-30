@@ -21,9 +21,14 @@ var Breadcrumbs = function (props) { return (React.createElement(Container, { cl
     /* This IIFE adds the divider elements containing slashes between children, e.g:
      * <Breadcrumb>1</Breadcrumb> <Breadcrumb>2</Breadcrumb> -> <span>1</span> <span>/</span> <span>2</span>
      */
-    var newChildren = [];
+    var newChildren = [
+        React.createElement(Divider, { key: "breadcrumbdivider-leading" }, "/")
+    ];
     var childrenCount = React.Children.count(props.children);
     React.Children.forEach(props.children, function (child, index) {
+        if (child === null || child === undefined || child === false) {
+            return;
+        }
         newChildren.push(child);
         if (index < childrenCount - 1) {
             newChildren.push(React.createElement(Divider, { key: "breadcrumbdivider-" + index }, "/"));
