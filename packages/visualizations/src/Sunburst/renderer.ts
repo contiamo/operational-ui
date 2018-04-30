@@ -44,7 +44,7 @@ class Renderer {
   draw(): void {
     this.compute()
     // Remove focus and truncation markers before updating chart
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
     this.removeTruncationArrows()
 
     const arcs: D3Selection = this.el
@@ -384,7 +384,7 @@ class Renderer {
 
     const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
     const hideLabel: boolean = d3.select(el).classed(styles.arrow)
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, hideLabel, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { d, hideLabel, focusPoint: { centroid } })
 
     this.mouseOverDatum = d
     this.highlightPath(d, el)
@@ -427,7 +427,7 @@ class Renderer {
       this.mouseOverDatum = null
 
       // Remove focus label
-      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+      this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
       this.el
         .selectAll(`path.${styles.arc}`)

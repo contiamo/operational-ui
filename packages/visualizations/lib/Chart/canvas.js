@@ -52,10 +52,10 @@ var ChartCanvas = /** @class */ (function () {
         return d3.select(container).attr("class", styles.chartContainer);
     };
     ChartCanvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
+        this.events.emit(event_catalog_1.default.CHART.HOVER);
     };
     ChartCanvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.CHART.OUT);
     };
     ChartCanvas.prototype.onClick = function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);

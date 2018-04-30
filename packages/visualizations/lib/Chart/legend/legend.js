@@ -46,7 +46,7 @@ var ChartLegend = /** @class */ (function () {
         this.el.style("width", width);
     };
     ChartLegend.prototype.onComponentHover = function (d, el) {
-        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) });
+        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) });
     };
     ChartLegend.prototype.currentOptions = function (datum) {
         return {

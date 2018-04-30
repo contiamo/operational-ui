@@ -1,25 +1,26 @@
 declare const Events: {
     CHART: {
         CLICK: string;
-        MOUSEOVER: string;
+        HOVER: string;
         MOVE: string;
-        MOUSEOUT: string;
+        OUT: string;
     };
     FOCUS: {
         CLEAR: string;
         COMPONENT: {
             CLICK: string;
-            MOUSEOVER: string;
-            MOUSEOUT: string;
+            HOVER: string;
+            OUT: string;
             LABEL: {
-                MOUSEOUT: string;
+                OUT: string;
             };
         };
+        DATE: string;
         ELEMENT: {
             HIGHLIGHT: string;
             CLICK: string;
-            MOUSEOVER: string;
-            MOUSEOUT: string;
+            HOVER: string;
+            OUT: string;
         };
         FLAG: {
             HOVER: string;

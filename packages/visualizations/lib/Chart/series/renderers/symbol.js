@@ -7,7 +7,7 @@ var defaultAccessors = {
     fill: function (series, d) { return "#fff"; },
     size: function (series, d) { return 50; },
     stroke: function (series, d) { return series.legendColor(); },
-    symbol: function (series, d) { return "circle"; },
+    symbol: function (series, d) { return "circle"; }
 };
 var symbolOptions = {
     circle: {

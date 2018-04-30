@@ -29,10 +29,10 @@ var PieChartCanvas = /** @class */ (function () {
         return d3.select(container).attr("class", styles.chartContainer);
     };
     PieChartCanvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
+        this.events.emit(event_catalog_1.default.CHART.HOVER);
     };
     PieChartCanvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.CHART.OUT);
     };
     PieChartCanvas.prototype.onClick = function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);

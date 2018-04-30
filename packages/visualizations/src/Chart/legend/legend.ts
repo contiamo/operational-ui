@@ -75,7 +75,7 @@ class ChartLegend implements Legend {
   }
 
   private onComponentHover(d: LegendDatum, el: HTMLElement): void {
-    this.events.emit(Events.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) })
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
   }
 
   private currentOptions(datum: LegendDatum): ComponentConfigOptions {

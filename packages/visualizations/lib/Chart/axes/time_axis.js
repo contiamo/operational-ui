@@ -189,6 +189,8 @@ var TimeAxis = /** @class */ (function () {
             .call(d3_utils_1.setTextAttributes, startAttributes)
             .merge(ticks)
             .attr("class", styles.tick + " " + styles[this.position])
+            // @TODO
+            // .attr("class", (d: string | number, i: number): string => "tick " + this.tickClass(d, i))
             .call(d3_utils_1.setTextAttributes, attributes, config.duration);
         ticks
             .exit()
