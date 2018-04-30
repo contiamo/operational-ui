@@ -103,7 +103,7 @@ The input data should be an object with the following properties:
  * key - the name of the item
  * value - the value of the item
 
-'renderAs' is an array containing a single renderer object. Each renderer object must have the following propertie:
+'renderAs' is an array containing a single renderer object. Each renderer object must have the following properties:
 * type - "donut", "gauge" or "polar"
 and may have any of the following accessors:
 * key - key accessor

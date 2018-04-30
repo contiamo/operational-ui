@@ -1,9 +1,9 @@
 import * as React from "react"
 import { Select } from "@operational/components"
 
-export const title = "Records"
+export const title = "Select"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/record.md"
+export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/select.md"
 
 export const Component = () => (
   <React.Fragment>

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Progress } from "@operational/components"
 
-export const title = "Progresss"
+export const title = "Progress"
 
 export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/progress.md"
 
