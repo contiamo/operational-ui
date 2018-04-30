@@ -47,6 +47,7 @@ const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
 }))
 
 const TableBodyRow = glamorous.tr(({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
+  ...isClickable ? { cursor: "pointer" } : {},
   ":hover": {
     backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
   },

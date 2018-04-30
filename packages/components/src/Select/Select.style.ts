@@ -83,7 +83,7 @@ const Options: GlamorousComponent<{}, {}> = glamorous.div(
   },
   ({ theme }: { theme: Theme }): {} => ({
     boxShadow: theme.shadows.popup,
-    zIndex: theme.baseZIndex + 100,
+    zIndex: theme.baseZIndex + 300,
   })
 )
 
