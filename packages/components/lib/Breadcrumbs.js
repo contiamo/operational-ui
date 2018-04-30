@@ -9,7 +9,7 @@ var Container = glamorous_1.default.div({
         color: "inherit",
     },
 });
-var Divider = glamorous_1.default.span(function (_a) {
+var Slash = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
     return ({
         display: "inline-block",
@@ -17,22 +17,14 @@ var Divider = glamorous_1.default.span(function (_a) {
         color: theme.colors.gray,
     });
 });
-var Breadcrumbs = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, (function () {
-    /* This IIFE adds the divider elements containing slashes between children, e.g:
-     * <Breadcrumb>1</Breadcrumb> <Breadcrumb>2</Breadcrumb> -> <span>1</span> <span>/</span> <span>2</span>
-     */
-    var newChildren = [React.createElement(Divider, { key: "breadcrumbdivider-leading" }, "/")];
-    var childrenCount = React.Children.count(props.children);
-    React.Children.forEach(props.children, function (child, index) {
-        if (child === null || child === undefined || child === false) {
-            return;
-        }
-        newChildren.push(child);
-        if (index < childrenCount - 1) {
-            newChildren.push(React.createElement(Divider, { key: "breadcrumbdivider-" + index }, "/"));
-        }
-    });
-    return newChildren;
-})())); };
+/*
+ * Intersperse slash elements between children.
+ * Curried first argument is used as an incremented index for keys.
+ */
+var intersperseSlashes = function (index) { return function (_a) {
+    var head = _a[0], tail = _a.slice(1);
+    return head ? [React.createElement(Slash, { key: "breadcrumbdivider-" + index }, "/"), head].concat(intersperseSlashes(index + 1)(tail)) : [];
+}; };
+var Breadcrumbs = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, intersperseSlashes(0)(React.Children.toArray(props.children)))); };
 exports.default = Breadcrumbs;
 //# sourceMappingURL=Breadcrumbs.js.map
