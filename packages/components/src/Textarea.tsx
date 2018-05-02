@@ -80,7 +80,7 @@ const Textarea = (props: Props) => {
           * glamorous component as opposed to as actual styles to be injected into the component.
           */}
       <TextareaComp
-        css_={props.css}
+        css_={props.css || {}}
         disabled={Boolean(props.disabled)}
         isCode={Boolean(props.code)}
         value={props.value}

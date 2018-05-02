@@ -31,7 +31,7 @@ var Textarea = function (props) {
         React.createElement(mixins_1.FormFieldControls, null, props.hint ? (React.createElement(mixins_1.FormFieldControl, null,
             React.createElement(Icon_1.default, { name: "HelpCircle", size: 14 }),
             React.createElement(Tooltip_1.default, { right: true, css: { minWidth: 100, width: "fit-content" } }, props.hint))) : null),
-        React.createElement(TextareaComp, { css_: props.css, disabled: Boolean(props.disabled), isCode: Boolean(props.code), value: props.value, isError: Boolean(props.error), onChange: function (e) {
+        React.createElement(TextareaComp, { css_: props.css || {}, disabled: Boolean(props.disabled), isCode: Boolean(props.code), value: props.value, isError: Boolean(props.error), onChange: function (e) {
                 if (props.onChange) {
                     props.onChange(e.target.value);
                 }
