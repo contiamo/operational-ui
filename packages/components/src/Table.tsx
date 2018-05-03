@@ -8,6 +8,8 @@ export interface Props {
   children?: React.ReactNode
   columns: string[]
   rows: ((string | React.ReactNode)[])[]
+  __experimentalColumnCss?: {}[]
+  __experimentalRowActions?: React.ReactNode[]
   onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
 }
 
@@ -18,39 +20,54 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: "white",
 }))
 
-const TableElement = glamorous.table(({ theme }: { theme: Theme }): {} => ({
+const TableElement = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   width: "100%",
-  borderCollapse: "collapse",
   textAlign: "left",
-  tableLayout: "auto",
-  "& th, & td": {
-    ...theme.typography.body,
-  },
-  "& tr": {
-    borderTop: "1px solid",
-    borderBottom: "1px solid",
-    borderColor: theme.colors.separator,
-  },
   "& tr:first-child": {
     borderTop: 0,
   },
   "& tbody tr:last-child": {
     borderBottom: 0,
   },
-  "& td": {
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-  },
+  "& td": {},
   "& th": {
-    padding: `${theme.spacing / 4}px ${theme.spacing}px`,
     opacity: 0.4,
   },
 }))
 
-const TableBodyRow = glamorous.tr(({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
+const TableBody = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  display: "block",
+}))
+
+const TableBodyRow = glamorous.div(({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
   ...isClickable ? { cursor: "pointer" } : {},
+  position: "relative",
+  display: "flex",
+  borderTop: "1px solid",
+  borderColor: theme.colors.separator,
+  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
   ":hover": {
     backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
+    "& .opui-row-actions-container": {
+      display: "block",
+    },
   },
+}))
+
+const TableHead = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  display: "flex",
+  opacity: 0.4,
+  padding: `${theme.spacing / 4}px ${theme.spacing}px`,
+}))
+
+const TableHeadCell = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  ...theme.typography.body,
+  flex: 1,
+}))
+
+const TableCell = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  ...theme.typography.body,
+  flex: 1,
 }))
 
 const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -63,13 +80,26 @@ const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
 }))
 
+const RowActionsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  width: "fit-content",
+  position: "absolute",
+  top: "50%",
+  right: theme.spacing / 2,
+  transform: "translate3d(0, -50%, 0)",
+  display: "none",
+}))
+
 const Table = (props: Props) => (
   <Container css={props.css} className={props.className}>
     <TableElement>
-      <thead>
-        <tr>{props.columns.map((column, index) => <th key={index}>{column}</th>)}</tr>
-      </thead>
-      <tbody>
+      <TableHead>
+        {props.columns.map((column, index) => (
+          <TableHeadCell key={index} css={props.__experimentalColumnCss && props.__experimentalColumnCss[index]}>
+            {column}
+          </TableHeadCell>
+        ))}
+      </TableHead>
+      <TableBody>
         {props.rows.map((row, index) => (
           <TableBodyRow
             isClickable={Boolean(props.onRowClick)}
@@ -80,10 +110,20 @@ const Table = (props: Props) => (
               }
             }}
           >
-            {row.map((cell, index) => <td key={index}>{cell}</td>)}
+            {row.map((cell, index) => (
+              <TableCell key={index} css={props.__experimentalColumnCss && props.__experimentalColumnCss[index]}>
+                {cell}
+              </TableCell>
+            ))}
+            {props.__experimentalRowActions &&
+              props.__experimentalRowActions[index] && (
+                <RowActionsContainer className="opui-row-actions-container">
+                  {props.__experimentalRowActions[index]}
+                </RowActionsContainer>
+              )}
           </TableBodyRow>
         ))}
-      </tbody>
+      </TableBody>
     </TableElement>
     {props.rows.length === 0 ? <EmptyView>There are no records available</EmptyView> : null}
   </Container>

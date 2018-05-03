@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { render } from "react-dom"
 import { Theme } from "@operational/theme"
-import { OperationalUI, Layout, Page, Sidenav, SidenavHeader, Breadcrumbs, Breadcrumb, Button } from "../../src"
+import { OperationalUI, Layout, Page, Sidenav, SidenavHeader, Breadcrumbs, Breadcrumb, Button, Table } from "../../src"
 
 export interface Props {}
 
@@ -39,7 +39,9 @@ class Explore extends React.Component<Props, State> {
                   </Button>
                 </React.Fragment>
               }
-            />
+            >
+              <Table columns={["a", "b"]} rows={[["a1", "b1"], ["a2", "b2"]]} __experimentalRowActions={["a", "b"]} />
+            </Page>
           }
         />
       </OperationalUI>
