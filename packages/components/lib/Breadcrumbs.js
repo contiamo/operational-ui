@@ -16,8 +16,8 @@ var Slash = glamorous_1.default.span(function (_a) {
         margin: "0 " + theme.spacing / 2 + "px",
         color: theme.colors.gray,
         ":first-child": {
-            marginLeft: 0
-        }
+            marginLeft: 0,
+        },
     });
 });
 // Intersperse slashes between the children (`<Breadcrumb />` elements)

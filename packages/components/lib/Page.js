@@ -10,6 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
+var Icon_1 = require("./Icon");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
@@ -29,7 +30,11 @@ var TopBar = glamorous_1.default.div(function (_a) {
 });
 var TitleBar = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.title, { display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: 0.5 * theme.spacing, marginBottom: 2 * theme.spacing }));
+    return (__assign({}, theme.typography.title, { display: "flex", alignItems: "center", justifyContent: "flex-start", marginTop: 0.5 * theme.spacing, marginBottom: 2 * theme.spacing, "& svg": {
+            width: theme.spacing * 1.75,
+            height: theme.spacing * 1.75,
+            marginRight: theme.spacing * 0.5,
+        } }));
 });
 var ControlsContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
@@ -46,6 +51,8 @@ var ControlsContainer = glamorous_1.default.div(function (_a) {
 var Page = function (props) { return (React.createElement(Container, null,
     React.createElement(TopBar, null, props.breadcrumbs),
     React.createElement(TitleBar, null,
+        props.titleIcon &&
+            (props.titleIcon === String(props.titleIcon) ? React.createElement(Icon_1.default, { name: props.titleIcon }) : props.titleIcon),
         props.title,
         React.createElement(ControlsContainer, null, props.controls)),
     props.children)); };

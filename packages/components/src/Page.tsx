@@ -3,10 +3,11 @@ import glamorous, { Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
 import Button from "./Button"
-import Icon from "./Icon"
+import Icon, { IconName } from "./Icon"
 
 export interface Props {
   title: string
+  titleIcon?: IconName
   breadcrumbs?: React.ReactNode
   controls?: React.ReactNode
   children?: React.ReactNode
@@ -32,6 +33,11 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   justifyContent: "flex-start",
   marginTop: 0.5 * theme.spacing,
   marginBottom: 2 * theme.spacing,
+  "& svg": {
+    width: theme.spacing * 1.75,
+    height: theme.spacing * 1.75,
+    marginRight: theme.spacing * 0.5,
+  },
 }))
 
 const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -48,6 +54,8 @@ const Page = (props: Props) => (
   <Container>
     <TopBar>{props.breadcrumbs}</TopBar>
     <TitleBar>
+      {props.titleIcon &&
+        (props.titleIcon === String(props.titleIcon) ? <Icon name={props.titleIcon} /> : props.titleIcon)}
       {props.title}
       <ControlsContainer>{props.controls}</ControlsContainer>
     </TitleBar>
