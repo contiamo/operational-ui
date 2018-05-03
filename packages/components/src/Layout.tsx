@@ -18,9 +18,10 @@ const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; i
   label: "Layout",
   position: "relative",
   height: "100%",
+  overflow: "hidden",
   display: "grid",
   gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : theme.box}px auto`,
-  gridTemplateRows: "auto",
+  gridTemplateRows: "100%",
   // Side navigation (1st child is always the spinner or a placeholder)
   "& > *:nth-child(2)": {
     gridColumnStart: "1",
@@ -37,6 +38,14 @@ const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; i
   },
 }))
 
+const Main = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  label: "layout-main",
+  display: "block",
+  height: "100%",
+  overflow: "auto",
+  backgroundColor: theme.colors.white,
+}))
+
 const Layout = (props: Props) => {
   const sidenavProps = (React.Children.toArray(props.sidenav)[0] as any).props as SidenavProps
   /* 
@@ -51,7 +60,7 @@ const Layout = (props: Props) => {
     <Container css={props.css} className={props.className} isSidenavExpanded={Boolean(sidenavProps.expanded)}>
       {props.loading ? <Progress /> : cssPlaceholder}
       {props.sidenav}
-      {props.main}
+      <Main>{props.main}</Main>
     </Container>
   )
 }

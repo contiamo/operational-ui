@@ -10,9 +10,10 @@ var Container = glamorous_1.default.div(function (_a) {
         label: "Layout",
         position: "relative",
         height: "100%",
+        overflow: "hidden",
         display: "grid",
         gridTemplateColumns: (isSidenavExpanded ? constants_1.sidenavExpandedWidth : theme.box) + "px auto",
-        gridTemplateRows: "auto",
+        gridTemplateRows: "100%",
         // Side navigation (1st child is always the spinner or a placeholder)
         "& > *:nth-child(2)": {
             gridColumnStart: "1",
@@ -29,6 +30,16 @@ var Container = glamorous_1.default.div(function (_a) {
         },
     });
 });
+var Main = glamorous_1.default.div(function (_a) {
+    var theme = _a.theme;
+    return ({
+        label: "layout-main",
+        display: "block",
+        height: "100%",
+        overflow: "auto",
+        backgroundColor: theme.colors.white,
+    });
+});
 var Layout = function (props) {
     var sidenavProps = React.Children.toArray(props.sidenav)[0].props;
     /*
@@ -42,7 +53,7 @@ var Layout = function (props) {
     return (React.createElement(Container, { css: props.css, className: props.className, isSidenavExpanded: Boolean(sidenavProps.expanded) },
         props.loading ? React.createElement(Progress_1.default, null) : cssPlaceholder,
         props.sidenav,
-        props.main));
+        React.createElement(Main, null, props.main)));
 };
 exports.default = Layout;
 //# sourceMappingURL=Layout.js.map

@@ -13,11 +13,9 @@ export interface Props {
 }
 
 const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  label: "page-content",
+  label: "page",
   backgroundColor: theme.colors.white,
-  padding: `0px ${theme.spacing * 1.5}px`,
-  overflow: "auto",
-  height: "100%",
+  padding: `0px ${theme.spacing * 1.5}px ${theme.spacing * 1.5}px`,
 }))
 
 const TopBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
@@ -38,6 +36,9 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   marginLeft: theme.spacing,
+  // Offset the line-height setting inherited from being inside a
+  // typography component/mixin.
+  lineHeight: 1,
   "& > :last-child": {
     marginRight: 0,
   },

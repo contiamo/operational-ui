@@ -9,30 +9,24 @@ var Container = glamorous_1.default.div({
         color: "inherit",
     },
 });
-var Divider = glamorous_1.default.span(function (_a) {
+var Slash = glamorous_1.default.span(function (_a) {
     var theme = _a.theme;
     return ({
         display: "inline-block",
         margin: "0 " + theme.spacing / 2 + "px",
         color: theme.colors.gray,
+        ":first-child": {
+            marginLeft: 0
+        }
     });
 });
-var Breadcrumbs = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, (function () {
-    /* This IIFE adds the divider elements containing slashes between children, e.g:
-     * <Breadcrumb>1</Breadcrumb> <Breadcrumb>2</Breadcrumb> -> <span>1</span> <span>/</span> <span>2</span>
-     */
-    var newChildren = [React.createElement(Divider, { key: "breadcrumbdivider-leading" }, "/")];
-    var childrenCount = React.Children.count(props.children);
-    React.Children.forEach(props.children, function (child, index) {
-        if (child === null || child === undefined || child === false) {
-            return;
-        }
-        newChildren.push(child);
-        if (index < childrenCount - 1) {
-            newChildren.push(React.createElement(Divider, { key: "breadcrumbdivider-" + index }, "/"));
-        }
-    });
-    return newChildren;
-})())); };
+// Intersperse slashes between the children (`<Breadcrumb />` elements)
+// Curried first argument is necessary to give unique auto-incrementing
+// keys to the slash elements.
+var intersperseSlashes = function (index) { return function (_a) {
+    var head = _a[0], tail = _a.slice(1);
+    return head ? [React.createElement(Slash, { key: "divider-" + index }, "/"), head].concat(intersperseSlashes(index + 1)(tail)) : [];
+}; };
+var Breadcrumbs = function (props) { return (React.createElement(Container, { className: props.className, css: props.css }, intersperseSlashes(0)(React.Children.toArray(props.children)))); };
 exports.default = Breadcrumbs;
 //# sourceMappingURL=Breadcrumbs.js.map

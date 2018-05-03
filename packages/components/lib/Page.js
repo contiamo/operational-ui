@@ -13,11 +13,9 @@ var glamorous_1 = require("glamorous");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
-        label: "page-content",
+        label: "page",
         backgroundColor: theme.colors.white,
-        padding: "0px " + theme.spacing * 1.5 + "px",
-        overflow: "auto",
-        height: "100%",
+        padding: "0px " + theme.spacing * 1.5 + "px " + theme.spacing * 1.5 + "px",
     });
 });
 var TopBar = glamorous_1.default.div(function (_a) {
@@ -37,6 +35,9 @@ var ControlsContainer = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         marginLeft: theme.spacing,
+        // Offset the line-height setting inherited from being inside a
+        // typography component/mixin.
+        lineHeight: 1,
         "& > :last-child": {
             marginRight: 0,
         },

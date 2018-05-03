@@ -5,7 +5,7 @@ exports[`Breadcrumbs Component Should initialize properly 1`] = `
   class="css-i84p3g"
 >
   <span
-    class="css-in5uyg"
+    class="css-lnjicu"
   >
     /
   </span>
@@ -23,7 +23,7 @@ exports[`Breadcrumbs Component Should initialize properly 1`] = `
     </span>
   </span>
   <span
-    class="css-in5uyg"
+    class="css-lnjicu"
   >
     /
   </span>
