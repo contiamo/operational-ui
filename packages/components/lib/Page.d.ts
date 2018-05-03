@@ -1,12 +1,9 @@
 /// <reference types="react" />
 import * as React from "react";
+import { IconName } from "./Icon";
 export interface Props {
     title: string;
-    __experimentalBackLink?: {
-        url: string;
-        label?: string;
-        onClick?: () => void;
-    };
+    titleIcon?: IconName;
     breadcrumbs?: React.ReactNode;
     controls?: React.ReactNode;
     children?: React.ReactNode;

@@ -4,15 +4,6 @@ import { render } from "react-dom"
 import { Theme } from "@operational/theme"
 import { OperationalUI, Layout, Page, Sidenav, SidenavHeader, Breadcrumbs, Breadcrumb, Button } from "../../src"
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  padding: theme.spacing,
-  maxWidth: 640,
-  margin: "auto",
-  "& h1": {
-    ...theme.typography.title
-  }
-}))
-
 export interface Props {}
 
 export interface State {}
@@ -48,13 +39,6 @@ class Explore extends React.Component<Props, State> {
                   </Button>
                 </React.Fragment>
               }
-              __experimentalBackLink={{
-                url: "/abc",
-                label: "Back to resources",
-                onClick: () => {
-                  console.log("a")
-                }
-              }}
             />
           }
         />
