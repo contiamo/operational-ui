@@ -18,7 +18,7 @@ class Explore extends React.Component<Props, State> {
         <Layout
           sidenav={
             <Sidenav expanded>
-              <SidenavHeader label="Labs" icon="Labs" />
+              <a href="/"><SidenavHeader label="Labs" icon="Labs" /></a>
               <SidenavHeader label="Pantheon" icon="Pantheon" />
             </Sidenav>
           }

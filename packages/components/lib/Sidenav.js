@@ -40,6 +40,11 @@ var Container = glamorous_1.default.div(function (_a) {
     return __assign({ backgroundColor: backgroundColor,
         color: color, label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : theme.box, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
             outline: 0,
+        }, "& > a:link, & > a:visited": {
+            width: "100%",
+            display: "block",
+            textDecoration: "none",
+            color: "inherit",
         } });
 });
 var Sidenav = /** @class */ (function (_super) {
