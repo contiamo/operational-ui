@@ -4,18 +4,16 @@ import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
 import { OperationalUI } from "@operational/components"
 
-injectStylesheet(baseStylesheet(operational))
-
 const containerNode = document.getElementById("app")
 
 import PieChart from "../../src/PieChart/facade"
 import { VisualizationWrapper } from "../../src/index"
 
 const colors: any = {
-  "Berlin": operational.colors.info,
-  "Dortmund": operational.colors.success,
-  "Bonn": operational.colors.warning,
-  "Cologne": operational.colors.error,
+  Berlin: operational.colors.info,
+  Dortmund: operational.colors.success,
+  Bonn: operational.colors.warning,
+  Cologne: operational.colors.error,
 }
 
 const accessors: any = {
@@ -25,21 +23,21 @@ const accessors: any = {
 }
 
 const DonutRenderer: any = {
+  accessors,
   type: "donut",
-  accessors
 }
 
 const GaugeRenderer: any = {
+  accessors,
   type: "gauge",
   extent: "semi",
   comparison: { id: "Last month", size: 18 },
   target: 50,
-  accessors
 }
 
 const PolarRenderer: any = {
+  accessors,
   type: "polar",
-  accessors
 }
 
 const data: any = {
@@ -52,13 +50,17 @@ const data: any = {
     { id: "", size: 50 },
     { id: undefined, size: 70 },
     { id: "test", size: 0 },
-    { id: "test2", size: undefined }
+    { id: "test2", size: undefined },
   ],
-  renderAs: [GaugeRenderer]
+  renderAs: [GaugeRenderer],
 }
 
 const config: any = { focusElement: "Berlin" }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={PieChart} data={data} config={config} /></OperationalUI>
+const App = () => (
+  <OperationalUI withBaseStyles>
+    <VisualizationWrapper facade={PieChart} data={data} config={config} />
+  </OperationalUI>
+)
 
 render(<App />, containerNode)
