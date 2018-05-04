@@ -59,6 +59,12 @@ const Container = glamorous.div(
       "& a:focus": {
         outline: 0,
       },
+      "& > a:link, & > a:visited": {
+        width: "100%",
+        display: "block",
+        textDecoration: "none",
+        color: "inherit",
+      },
     }
   }
 )
