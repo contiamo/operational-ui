@@ -1,7 +1,8 @@
 import * as React from "react"
-import glamorous, { Div } from "glamorous"
 import { render } from "react-dom"
-import { Theme } from "@operational/theme"
+import glamorous, { Div } from "glamorous"
+import { operational, Theme } from "@operational/theme"
+import { transparentize } from "@operational/utils"
 import { OperationalUI, Layout, Page, Sidenav, SidenavHeader, Breadcrumbs, Breadcrumb, Button, Table } from "../../src"
 
 export interface Props {}
@@ -49,4 +50,4 @@ class Explore extends React.Component<Props, State> {
   }
 }
 
-export default Explore
+render(<Explore />, document.querySelector("#app"))

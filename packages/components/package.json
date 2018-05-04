@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "start": "node scripts/dev-server/index.js",
+    "start": "parcel scripts/dev-server/index.html",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "tsc -d -w",
     "test": "jest",
@@ -44,13 +44,13 @@
     "@types/node": "9.6.7",
     "@types/react": "16.3.13",
     "@types/react-dom": "16.0.5",
-    "awesome-typescript-loader": "3.4.1",
     "enzyme": "2.9.1",
     "enzyme-to-json": "1.5.1",
     "jest": "21.2.1",
     "jest-enzyme": "3.8.1",
     "jest-glamor-react": "3.1.0",
     "jest-serializer-enzyme": "1.0.0",
+    "parcel-bundler": "^1.8.1",
     "prettier": "1.8.2",
     "react-test-renderer": "16.0.0",
     "ts-jest": "21.0.0",

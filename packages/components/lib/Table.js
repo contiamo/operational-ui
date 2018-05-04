@@ -44,7 +44,7 @@ var TableBody = glamorous_1.default.div(function (_a) {
 });
 var TableBodyRow = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isClickable = _a.isClickable;
-    return (__assign({}, (isClickable ? { cursor: "pointer" } : {}), { position: "relative", display: "flex", borderTop: "1px solid", borderColor: theme.colors.separator, padding: theme.spacing / 2 + "px " + theme.spacing + "px", ":hover": {
+    return (__assign({}, isClickable ? { cursor: "pointer" } : {}, { position: "relative", display: "flex", borderTop: "1px solid", borderColor: theme.colors.separator, padding: theme.spacing / 2 + "px " + theme.spacing + "px", ":hover": {
             backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
             "& .opui-row-actions-container": {
                 display: "block",

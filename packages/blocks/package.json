@@ -8,7 +8,7 @@
   "author": "Peter Szerzo <peter@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node scripts/dev-server/index.js",
+    "start": "parcel scripts/dev-server/index.html",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "tsc -d -w",
     "test": "jest",
@@ -73,22 +73,19 @@
     "@types/react": "16.3.13",
     "@types/react-dom": "16.0.5",
     "@types/tinycolor2": "1.4.0",
-    "awesome-typescript-loader": "3.4.1",
     "enzyme": "2.9.1",
     "enzyme-to-json": "1.5.1",
     "jest": "21.2.1",
     "jest-enzyme": "3.8.1",
     "jest-glamor-react": "3.1.0",
     "jest-serializer-enzyme": "1.0.0",
+    "parcel-bundler": "^1.8.1",
     "prettier": "1.8.2",
     "react-test-renderer": "16.0.0",
     "ts-jest": "21.0.0",
     "tslint": "5.9.1",
     "tslint-config-airbnb": "5.8.0",
     "tslint-config-prettier": "1.12.0",
-    "typescript": "2.8.3",
-    "webpack": "3.10.0",
-    "webpack-dev-server": "2.9.7",
-    "webpack-merge": "4.1.1"
+    "typescript": "2.8.3"
   }
 }
