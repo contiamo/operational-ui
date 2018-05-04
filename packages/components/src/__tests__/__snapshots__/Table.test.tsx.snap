@@ -4,14 +4,16 @@ exports[`Table Component Should render 1`] = `
 <div
   class="css-cmhidp"
 >
-  <table
-    class="css-1n8qvxg"
+  <div
+    class="css-199zlg3"
   >
-    <thead>
-      <tr />
-    </thead>
-    <tbody />
-  </table>
+    <div
+      class="css-1gtjylf"
+    />
+    <div
+      class="css-fisw11"
+    />
+  </div>
   <div
     class="css-1q21a8q"
   >

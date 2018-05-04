@@ -6,6 +6,8 @@ export interface Props {
     children?: React.ReactNode;
     columns: string[];
     rows: ((string | React.ReactNode)[])[];
+    __experimentalColumnCss?: {}[];
+    __experimentalRowActions?: React.ReactNode[];
     onRowClick?: (row: (string | React.ReactNode)[], index: number) => void;
 }
 declare const Table: (props: Props) => JSX.Element;
