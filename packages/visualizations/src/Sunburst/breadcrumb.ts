@@ -29,6 +29,11 @@ class Breadcrumb {
   }
 
   private updateHoverPath(payload: HoverPayload | ClickPayload): void {
+    // Only display breadcrumb if drawing area is wide enough.
+    if (this.state.current.get("config").width < 330) {
+      return
+    }
+
     const computed: Object<any> = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
     if (!fixedNode || (payload.d && payload.d.data.empty)) {
