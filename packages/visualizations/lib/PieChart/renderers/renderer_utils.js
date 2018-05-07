@@ -128,9 +128,8 @@ exports.updateTotal = function (el, label, duration, options) {
             total = total.data([]);
         }
         else {
-            // change font size until bounding box is completely filled
-            // @TODO CHECK THIS
-            mergedTotal.style("font-size", exports.approxZero(y, options.minTotalFontSize) + "px");
+            // change font size until bounding box is completely filled or max font size is reached
+            mergedTotal.style("font-size", Math.min(options.maxTotalFontSize, exports.approxZero(y, options.minTotalFontSize)) + "px");
             mergedTotal.attr("dy", options.yOffset);
         }
     }

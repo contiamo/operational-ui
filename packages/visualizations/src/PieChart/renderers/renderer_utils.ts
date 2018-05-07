@@ -136,7 +136,7 @@ export const updateTotal = (
   el: D3Selection,
   label: string,
   duration: number,
-  options: { minTotalFontSize: number; innerRadius: number; yOffset: string }
+  options: { maxTotalFontSize: number; minTotalFontSize: number; innerRadius: number; yOffset: string }
 ): void => {
   let total: any = el
     .select(`g.${styles.total}`)
@@ -168,9 +168,8 @@ export const updateTotal = (
       // Not enough room - do not show total
       total = total.data([])
     } else {
-      // change font size until bounding box is completely filled
-      // @TODO CHECK THIS
-      mergedTotal.style("font-size", approxZero(y, options.minTotalFontSize) + "px")
+      // change font size until bounding box is completely filled or max font size is reached
+      mergedTotal.style("font-size", Math.min(options.maxTotalFontSize, approxZero(y, options.minTotalFontSize)) + "px")
       mergedTotal.attr("dy", options.yOffset)
     }
   }

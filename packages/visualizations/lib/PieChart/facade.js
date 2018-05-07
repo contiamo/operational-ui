@@ -36,7 +36,7 @@ var PieChartFacade = /** @class */ (function () {
             maxWidth: 100,
             maxLegendRatio: 1 / 2,
             maxLegendWidth: 200,
-            maxTotalFontSize: 80,
+            maxTotalFontSize: 54,
             minChartWithLegend: 50,
             minWidth: 30,
             minInnerRadius: 30,

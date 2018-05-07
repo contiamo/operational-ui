@@ -83,6 +83,7 @@ class Gauge implements Renderer {
   private updateDraw(): void {
     const config: PieChartConfig = this.state.current.get("config")
     const duration: number = config.duration
+    const maxTotalFontSize: number = config.maxTotalFontSize
     const minTotalFontSize: number = config.minTotalFontSize
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
       .drawingContainerDims
@@ -105,7 +106,12 @@ class Gauge implements Renderer {
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
     setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
     // Total / center text
-    const options = { minTotalFontSize, innerRadius: this.computed.rInner, yOffset: this.totalYOffset() }
+    const options = {
+      maxTotalFontSize,
+      minTotalFontSize,
+      innerRadius: this.computed.rInner,
+      yOffset: this.totalYOffset(),
+    }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
     // Comparison line
     this.updateComparison()

@@ -53,6 +53,7 @@ var Donut = /** @class */ (function () {
     Donut.prototype.updateDraw = function () {
         var config = this.state.current.get("config");
         var duration = config.duration;
+        var maxTotalFontSize = config.maxTotalFontSize;
         var minTotalFontSize = config.minTotalFontSize;
         var drawingDims = this.state.current.get("computed").canvas
             .drawingContainerDims;
@@ -72,7 +73,7 @@ var Donut = /** @class */ (function () {
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
         d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
         // Total / center text
-        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
+        var options = { maxTotalFontSize: maxTotalFontSize, minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
     };
     Donut.prototype.arcAttributes = function () {

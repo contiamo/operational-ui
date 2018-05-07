@@ -17,6 +17,7 @@ export declare const createArcGroups: (el: Selection<any, any, any, any>, data: 
 export declare const exitArcs: (arcs: Selection<any, any, any, any>, duration: number, path: any) => void;
 export declare const enterArcs: (arcs: Selection<any, any, any, any>, mouseOverHandler: any, mouseOutHandler: any) => void;
 export declare const updateTotal: (el: Selection<any, any, any, any>, label: string, duration: number, options: {
+    maxTotalFontSize: number;
     minTotalFontSize: number;
     innerRadius: number;
     yOffset: string;
