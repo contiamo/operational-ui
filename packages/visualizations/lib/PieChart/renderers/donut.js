@@ -51,6 +51,7 @@ var Donut = /** @class */ (function () {
         this.drawn = true;
     };
     Donut.prototype.updateDraw = function () {
+        var _this = this;
         var config = this.state.current.get("config");
         var duration = config.duration;
         var maxTotalFontSize = config.maxTotalFontSize;
@@ -71,7 +72,9 @@ var Donut = /** @class */ (function () {
         // Update
         var updatingArcs = arcs.merge(arcs.enter().selectAll("g." + styles.arc));
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
-        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
+        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, function () {
+            return Utils.updateBackgroundRects(updatingArcs, _this.computed.arcOver.centroid);
+        });
         // Total / center text
         var options = { maxTotalFontSize: maxTotalFontSize, minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);

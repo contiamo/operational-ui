@@ -53,6 +53,7 @@ var Polar = /** @class */ (function () {
         this.drawn = true;
     };
     Polar.prototype.updateDraw = function () {
+        var _this = this;
         var config = this.state.current.get("config");
         var duration = config.duration;
         var maxTotalFontSize = config.maxTotalFontSize;
@@ -73,7 +74,9 @@ var Polar = /** @class */ (function () {
         // Update
         var updatingArcs = arcs.merge(arcs.enter().selectAll("g." + styles.arc));
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration, this.fitToCanvas.bind(this));
-        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
+        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, function () {
+            return Utils.updateBackgroundRects(updatingArcs, _this.computed.arcOver.centroid);
+        });
         // Total / center text
         var options = { maxTotalFontSize: maxTotalFontSize, minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);

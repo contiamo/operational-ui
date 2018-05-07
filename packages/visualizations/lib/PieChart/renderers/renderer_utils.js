@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
+var d3_selection_1 = require("d3-selection");
 var d3_shape_1 = require("d3-shape");
 var d3_interpolate_1 = require("d3-interpolate");
 var utils_1 = require("@operational/utils");
+var d3_utils_1 = require("../../utils/d3_utils");
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
 exports.approxZero = function (y, initialX) {
@@ -97,9 +99,21 @@ exports.enterArcs = function (arcs, mouseOverHandler, mouseOutHandler) {
         .on("mouseenter", mouseOverHandler)
         .on("mouseout", mouseOutHandler);
     enteringArcs.append("svg:path");
+    enteringArcs.append("svg:rect").attr("class", styles.labelBackground);
     enteringArcs.append("svg:text").attr("class", styles.label);
 };
-// @TODO move last 3 parameters into object
+exports.updateBackgroundRects = function (updatingArcs, centroid) {
+    updatingArcs.each(d3_utils_1.withD3Element(function (d, el) {
+        var element = d3_selection_1.select(el);
+        var textDimensions = element.select("text").node().getBBox();
+        var transform = [centroid(d)[0] + textDimensions.x, centroid(d)[1] + textDimensions.y];
+        element
+            .select("rect")
+            .attr("width", textDimensions.width)
+            .attr("height", textDimensions.height)
+            .attr("transform", exports.translateString(transform));
+    }));
+};
 exports.updateTotal = function (el, label, duration, options) {
     var total = el
         .select("g." + styles.total)

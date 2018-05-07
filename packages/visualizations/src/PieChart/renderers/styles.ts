@@ -14,6 +14,13 @@ const labelStyle = {
   ...theme.typography.small,
 }
 
+const labelBackgroundStyle = {
+  fill: "rgba(255, 255, 255, 0.2)",
+  pointerEvents: "none",
+  stroke: "none",
+  borderRadius: theme.borderRadius,
+}
+
 const totalStyle = {
   fill: "#4c4c4c",
   ...theme.typography.small,
@@ -27,5 +34,6 @@ const comparisonStyle = {
 
 export const arc = css(arcStyle).toString()
 export const label = css(labelStyle).toString()
+export const labelBackground = css(labelBackgroundStyle).toString()
 export const total = css(totalStyle).toString()
 export const comparison = css(comparisonStyle).toString()

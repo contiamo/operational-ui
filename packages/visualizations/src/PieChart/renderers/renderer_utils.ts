@@ -12,10 +12,11 @@ import {
 } from "../typings"
 import { defaults, forEach, merge, reduce } from "lodash/fp"
 import * as styles from "./styles"
-import { Selection } from "d3-selection"
+import { Selection, select } from "d3-selection"
 import { arc as d3Arc, Arc, pie as d3Pie, Pie, PieArcDatum } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
 import { colorAssigner } from "@operational/utils"
+import { withD3Element } from "../../utils/d3_utils"
 
 // y is a step-function (with two x values resulting in the same y value)
 // on the positive integer domain which is monotonic decreasing
@@ -127,11 +128,26 @@ export const enterArcs = (arcs: D3Selection, mouseOverHandler: any, mouseOutHand
     .on("mouseout", mouseOutHandler)
 
   enteringArcs.append("svg:path")
-
+  enteringArcs.append("svg:rect").attr("class", styles.labelBackground)
   enteringArcs.append("svg:text").attr("class", styles.label)
 }
 
-// @TODO move last 3 parameters into object
+export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any): void => {
+  updatingArcs.each(
+    withD3Element((d: Datum, el: HTMLElement): void => {
+      const element: D3Selection = select(el)
+      const textDimensions: any = (element.select("text").node() as any).getBBox()
+      const transform: [number, number] = [centroid(d)[0] + textDimensions.x, centroid(d)[1] + textDimensions.y]
+
+      element
+        .select("rect")
+        .attr("width", textDimensions.width)
+        .attr("height", textDimensions.height)
+        .attr("transform", translateString(transform))
+    })
+  )
+}
+
 export const updateTotal = (
   el: D3Selection,
   label: string,

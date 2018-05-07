@@ -16,6 +16,7 @@ export declare const translateString: (values: [number, number]) => string;
 export declare const createArcGroups: (el: Selection<any, any, any, any>, data: PieArcDatum<Datum>[], key: Accessor<Datum | PieArcDatum<Datum>, string>) => Selection<any, any, any, any>;
 export declare const exitArcs: (arcs: Selection<any, any, any, any>, duration: number, path: any) => void;
 export declare const enterArcs: (arcs: Selection<any, any, any, any>, mouseOverHandler: any, mouseOutHandler: any) => void;
+export declare const updateBackgroundRects: (updatingArcs: Selection<any, any, any, any>, centroid: any) => void;
 export declare const updateTotal: (el: Selection<any, any, any, any>, label: string, duration: number, options: {
     maxTotalFontSize: number;
     minTotalFontSize: number;
