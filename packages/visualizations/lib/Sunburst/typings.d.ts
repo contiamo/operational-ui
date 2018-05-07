@@ -50,6 +50,7 @@ export interface Computed {
 }
 export interface FocusPoint {
     centroid: [number, number];
+    labelPosition: string;
 }
 export interface HoverPayload {
     d: Datum;

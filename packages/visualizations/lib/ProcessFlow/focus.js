@@ -27,7 +27,8 @@ var ProcessFlowFocus = /** @class */ (function () {
             return;
         }
         // Render the focus label hidden initially to allow placement calculations
-        focus_utils_1.default.drawHidden(this.el, "element").style("pointer-events", "none");
+        var labelPosition = this.state.current.get("config").focusLabelPosition;
+        focus_utils_1.default.drawHidden(this.el, "element", labelPosition).style("pointer-events", "none");
         var content = this.el.append("xhtml:ul");
         content
             .append("xhtml:li")
@@ -44,8 +45,10 @@ var ProcessFlowFocus = /** @class */ (function () {
             this.addSingleNodeVisitsComment(content, datum);
         }
         // Get label dimensions (has to be actually rendered in the page to do this) and position label
-        var labelDimensions = focus_utils_1.default.labelDimensions(this.el), drawingDimensions = this.getDrawingDimensions(), offset = focusPoint.offset + config.nodeBorderWidth + config.labelOffset;
-        focus_utils_1.default.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset);
+        var labelDimensions = focus_utils_1.default.labelDimensions(this.el);
+        var drawingDimensions = this.getDrawingDimensions();
+        var offset = focusPoint.offset + config.nodeBorderWidth;
+        focus_utils_1.default.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset, labelPosition);
     };
     ProcessFlowFocus.prototype.appendContent = function (container, content) {
         var contentContainer = container.append("div").attr("class", styles.content);
@@ -79,11 +82,12 @@ var ProcessFlowFocus = /** @class */ (function () {
             .text("[!] " + datum.singleNodeJourneys + " single node visits (not included in the above stats)");
     };
     ProcessFlowFocus.prototype.getDrawingDimensions = function () {
-        var drawingContainer = this.state.current.get("computed").canvas.elRect, config = this.state.current.get("config");
+        var drawingContainer = this.state.current.get("computed").canvas.elRect;
+        var computedSeries = this.state.current.get("computed").series;
         return {
-            xMax: drawingContainer.left + config.width,
+            xMax: drawingContainer.left + computedSeries.width,
             xMin: drawingContainer.left,
-            yMax: drawingContainer.top + config.height,
+            yMax: drawingContainer.top + computedSeries.height,
             yMin: drawingContainer.top,
         };
     };

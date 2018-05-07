@@ -97,25 +97,87 @@ var focusLegendStyle = {
         width: 0,
         height: 0,
     },
-    "&.above::before,.above::after": {
+};
+var focusLegendAboveStyle = {
+    "&::before,::after": {
         top: "100%",
         left: "50%",
     },
-    "&.above::before": {
+    "&::before": {
         borderLeft: "solid 8px transparent",
         borderRight: "solid 8px transparent",
         borderTop: "solid 8px #cdcdcd",
         marginLeft: "-8px",
     },
-    "&.above::after": {
+    "&::after": {
         borderLeft: "solid 7px transparent",
         borderRight: "solid 7px transparent",
         borderTop: "solid 7px #fff",
         marginLeft: "-7px",
     },
 };
+var focusLegendBelowStyle = {
+    "&::before,::after": {
+        bottom: "100%",
+        left: "50%",
+    },
+    "&::before": {
+        borderLeft: "solid 8px transparent",
+        borderRight: "solid 8px transparent",
+        borderBottom: "solid 8px #cdcdcd",
+        marginLeft: "-8px",
+    },
+    "&::after": {
+        borderLeft: "solid 7px transparent",
+        borderRight: "solid 7px transparent",
+        borderBottom: "solid 7px #fff",
+        marginLeft: "-7px",
+    },
+};
+var focusLegendRightStyle = {
+    "&::before,::after": {
+        top: "50%",
+        left: "0%",
+    },
+    "&::before": {
+        borderTop: "solid 8px transparent",
+        borderBottom: "solid 8px transparent",
+        borderRight: "solid 8px #cdcdcd",
+        marginTop: "-8px",
+        marginLeft: "-8px",
+    },
+    "&::after": {
+        borderTop: "solid 7px transparent",
+        borderBottom: "solid 7px transparent",
+        borderRight: "solid 7px #fff",
+        marginTop: "-7px",
+        marginLeft: "-7px",
+    },
+};
+var focusLegendLeftStyle = {
+    "&::before,::after": {
+        top: "50%",
+        left: "100%",
+    },
+    "&::before": {
+        borderTop: "solid 8px transparent",
+        borderBottom: "solid 8px transparent",
+        borderLeft: "solid 8px #cdcdcd",
+        marginTop: "-8px",
+    },
+    "&::after": {
+        borderTop: "solid 7px transparent",
+        borderBottom: "solid 7px transparent",
+        borderLeft: "solid 7px #fff",
+        marginTop: "-7px",
+    },
+};
 exports.chartContainer = glamor_1.css(chartContainerStyle).toString();
 exports.focusLegend = glamor_1.css(focusLegendStyle).toString();
+exports.focusLegendAbove = glamor_1.css(focusLegendAboveStyle).toString();
+exports.focusLegendBelow = glamor_1.css(focusLegendBelowStyle).toString();
+exports.focusLegendRight = glamor_1.css(focusLegendRightStyle).toString();
+exports.focusLegendLeft = glamor_1.css(focusLegendLeftStyle).toString();
 exports.legend = glamor_1.css(legendStyle).toString();
 exports.legendTopBottom = glamor_1.css(legendTopBottomStyle).toString();
 exports.seriesLegend = glamor_1.css(seriesLegendStyle).toString();

@@ -13,7 +13,6 @@ var theme_1 = require("@operational/theme");
 var arcStyle = {
     stroke: "#fff",
     strokeWidth: "1",
-    opacity: 0.8,
     fill: "#eee",
 };
 var labelStyle = __assign({ fill: "#333", stroke: "none", pointerEvents: "none" }, theme_1.operational.typography.small);

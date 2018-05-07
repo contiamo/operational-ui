@@ -4,7 +4,6 @@ import { operational as theme } from "@operational/theme"
 const arcStyle = {
   stroke: "#fff",
   strokeWidth: "1",
-  opacity: 0.8,
   fill: "#eee",
 }
 

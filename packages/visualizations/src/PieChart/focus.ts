@@ -27,7 +27,7 @@ class PieChartFocus implements Focus {
   private onElementHover(payload: HoverPayload): void {
     this.remove()
 
-    FocusUtils.drawHidden(this.el, "element")
+    FocusUtils.drawHidden(this.el, "element", "above")
 
     const content: D3Selection = this.el.append("xhtml:ul")
 
@@ -51,7 +51,7 @@ class PieChartFocus implements Focus {
         top: payload.focusPoint.centroid[1],
       }
 
-    FocusUtils.drawVisible(this.el, labelPlacement)
+    FocusUtils.drawVisible(this.el, labelPlacement, "above")
   }
 
   private onElementOut(): void {

@@ -21,6 +21,7 @@ export {
 export interface ProcessFlowConfig extends Config {
   borderColor: string
   focusElement?: FocusElement
+  focusLabelPosition: string
   highlightColor: string
   horizontalNodeSpacing: number
   labelOffset: number

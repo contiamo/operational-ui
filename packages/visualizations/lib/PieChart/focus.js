@@ -17,7 +17,7 @@ var PieChartFocus = /** @class */ (function () {
     }
     PieChartFocus.prototype.onElementHover = function (payload) {
         this.remove();
-        focus_utils_1.default.drawHidden(this.el, "element");
+        focus_utils_1.default.drawHidden(this.el, "element", "above");
         var content = this.el.append("xhtml:ul");
         content
             .append("xhtml:li")
@@ -32,7 +32,7 @@ var PieChartFocus = /** @class */ (function () {
             left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
             top: payload.focusPoint.centroid[1],
         };
-        focus_utils_1.default.drawVisible(this.el, labelPlacement);
+        focus_utils_1.default.drawVisible(this.el, labelPlacement, "above");
     };
     PieChartFocus.prototype.onElementOut = function () {
         this.remove();

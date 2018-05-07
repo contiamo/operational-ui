@@ -83,7 +83,7 @@ class SunburstCanvas implements Canvas {
   private renderFocus(): D3Selection {
     const focus = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-      .attr("class", `${styles.focusLegend}`)
+      .attr("class", `${styles.focusLegend} ${styles.focusLegendAbove}`)
       .style("visibility", "hidden")
     this.chartContainer.node().appendChild(focus.node())
     this.elMap.focus = focus

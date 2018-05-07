@@ -40,6 +40,7 @@ declare class Renderer {
     private onClick(payload);
     private zoomOut(payload);
     private onMouseOver(d, el);
+    private getFocusPoint(d);
     private highlightPath(d, el);
     private onMouseLeave(d, el);
     private removeTruncationArrows();

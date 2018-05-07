@@ -382,12 +382,22 @@ class Renderer {
       return
     }
 
-    const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
+    const labelPosition: string = this.arc.centroid(d)[1] > 0 ? "below" : "above"
     const hideLabel: boolean = d3.select(el).classed(styles.arrow)
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, hideLabel, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, {
+      d,
+      hideLabel,
+      focusPoint: { labelPosition, centroid: this.getFocusPoint(d) },
+    })
 
     this.mouseOverDatum = d
     this.highlightPath(d, el)
+  }
+
+  private getFocusPoint(d: Datum): [number, number] {
+    const r: number = this.arc.outerRadius()(d)
+    const a: number = (this.arc.startAngle()(d) + this.arc.endAngle()(d)) / 2 - Math.PI / 2
+    return this.translateBack([Math.cos(a) * r, Math.sin(a) * r])
   }
 
   private highlightPath(d: Datum, el: Element) {
@@ -408,7 +418,7 @@ class Renderer {
     this.el
       .selectAll(`path.${styles.arc}`)
       .filter((d: Datum): boolean => d !== this.zoomNode)
-      .style("opacity", 0.3)
+      .style("opacity", 0.5)
 
     // Then highlight only those that are an ancestor of the current segment.
     this.el

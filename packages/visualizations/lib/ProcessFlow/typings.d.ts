@@ -6,6 +6,7 @@ export { Accessor, Accessors, EventBus, Object, State, Partial, D3Selection, Ser
 export interface ProcessFlowConfig extends Config {
     borderColor: string;
     focusElement?: FocusElement;
+    focusLabelPosition: string;
     highlightColor: string;
     horizontalNodeSpacing: number;
     labelOffset: number;

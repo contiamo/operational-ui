@@ -98,17 +98,20 @@ const focusLegendStyle = {
     width: 0,
     height: 0,
   },
-  "&.above::before,.above::after": {
+}
+
+const focusLegendAboveStyle = {
+  "&::before,::after": {
     top: "100%",
     left: "50%",
   },
-  "&.above::before": {
+  "&::before": {
     borderLeft: "solid 8px transparent",
     borderRight: "solid 8px transparent",
     borderTop: "solid 8px #cdcdcd",
     marginLeft: "-8px",
   },
-  "&.above::after": {
+  "&::after": {
     borderLeft: "solid 7px transparent",
     borderRight: "solid 7px transparent",
     borderTop: "solid 7px #fff",
@@ -116,8 +119,71 @@ const focusLegendStyle = {
   },
 }
 
+const focusLegendBelowStyle = {
+  "&::before,::after": {
+    bottom: "100%",
+    left: "50%",
+  },
+  "&::before": {
+    borderLeft: "solid 8px transparent",
+    borderRight: "solid 8px transparent",
+    borderBottom: "solid 8px #cdcdcd",
+    marginLeft: "-8px",
+  },
+  "&::after": {
+    borderLeft: "solid 7px transparent",
+    borderRight: "solid 7px transparent",
+    borderBottom: "solid 7px #fff",
+    marginLeft: "-7px",
+  },
+}
+
+const focusLegendRightStyle = {
+  "&::before,::after": {
+    top: "50%",
+    left: "0%",
+  },
+  "&::before": {
+    borderTop: "solid 8px transparent",
+    borderBottom: "solid 8px transparent",
+    borderRight: "solid 8px #cdcdcd",
+    marginTop: "-8px",
+    marginLeft: "-8px",
+  },
+  "&::after": {
+    borderTop: "solid 7px transparent",
+    borderBottom: "solid 7px transparent",
+    borderRight: "solid 7px #fff",
+    marginTop: "-7px",
+    marginLeft: "-7px",
+  },
+}
+
+const focusLegendLeftStyle = {
+  "&::before,::after": {
+    top: "50%",
+    left: "100%",
+  },
+  "&::before": {
+    borderTop: "solid 8px transparent",
+    borderBottom: "solid 8px transparent",
+    borderLeft: "solid 8px #cdcdcd",
+    marginTop: "-8px",
+  },
+  "&::after": {
+    borderTop: "solid 7px transparent",
+    borderBottom: "solid 7px transparent",
+    borderLeft: "solid 7px #fff",
+    marginTop: "-7px",
+  },
+}
+
 export const chartContainer = css(chartContainerStyle).toString()
 export const focusLegend = css(focusLegendStyle).toString()
+export const focusLegendAbove = css(focusLegendAboveStyle).toString()
+export const focusLegendBelow = css(focusLegendBelowStyle).toString()
+export const focusLegendRight = css(focusLegendRightStyle).toString()
+export const focusLegendLeft = css(focusLegendLeftStyle).toString()
 export const legend = css(legendStyle).toString()
 export const legendTopBottom = css(legendTopBottomStyle).toString()
 export const seriesLegend = css(seriesLegendStyle).toString()

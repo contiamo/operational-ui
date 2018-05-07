@@ -48,7 +48,7 @@ class SunburstFocus implements Focus {
     const focusPoint: FocusPoint = payload.focusPoint,
       datum: Datum = payload.d
 
-    FocusUtils.drawHidden(this.el, "element", "above")
+    FocusUtils.drawHidden(this.el, "element", focusPoint.labelPosition)
 
     const content: D3Selection = this.el.append("xhtml:ul")
 
@@ -63,14 +63,15 @@ class SunburstFocus implements Focus {
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
     content.append("xhtml:li").text(this.percentageString(datum))
 
-    // Get label dimensions
-    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
-      labelPlacement: { left: number; top: number } = {
-        left: focusPoint.centroid[0] - labelDimensions.width / 2,
-        top: focusPoint.centroid[1],
-      }
+    FocusUtils.drawVisible(this.el, this.labelPlacement(focusPoint), focusPoint.labelPosition)
+  }
 
-    FocusUtils.drawVisible(this.el, labelPlacement)
+  private labelPlacement(focusPoint: FocusPoint): { left: number; top: number } {
+    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el)
+    return {
+      left: focusPoint.centroid[0] - labelDimensions.width / 2,
+      top: focusPoint.centroid[1] + (focusPoint.labelPosition === "below" ? labelDimensions.height : 0),
+    }
   }
 
   private percentageString(datum: Datum): string {
