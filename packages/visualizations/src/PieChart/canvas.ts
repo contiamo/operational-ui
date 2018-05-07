@@ -21,7 +21,6 @@ class PieChartCanvas implements Canvas {
     this.renderLegend()
     this.drawingContainer = this.renderDrawingContainer()
     this.el = this.renderEl()
-    this.renderShadows()
     this.renderDrawingGroup()
     this.renderFocusElements()
     this.stateWriter("elements", this.elements)
@@ -76,42 +75,6 @@ class PieChartCanvas implements Canvas {
     this.drawingContainer.node().appendChild(el)
     this.elMap.series = d3.select(el)
     return this.elMap.series
-  }
-
-  // Defs
-  private renderShadows(): void {
-    this.elements.defs = this.el.append("defs")
-    const shadow: D3Selection = this.elements.defs
-      .append("filter")
-      .attr("id", this.shadowDefinitionId())
-      .attr("height", "130%")
-    shadow
-      .append("feGaussianBlur")
-      .attr("in", "SourceAlpha")
-      .attr("stdDeviation", "3")
-    shadow
-      .append("feOffset")
-      .attr("dx", "2")
-      .attr("dy", "2")
-      .attr("result", "offsetblur")
-    shadow
-      .append("feComponentTransfer")
-      .append("feFuncA")
-      .attr("type", "linear")
-      .attr("slope", "0.5")
-
-    const shadowFeMerge: D3Selection = shadow.append("feMerge")
-    shadowFeMerge.append("feMergeNode")
-    shadowFeMerge.append("feMergeNode").attr("in", "SourceGraphic")
-    this.stateWriter("shadowDefinitionId", this.shadowDefinitionId())
-  }
-
-  private prefixedId(id: string): string {
-    return this.state.current.get("config").uid + id
-  }
-
-  private shadowDefinitionId(): string {
-    return this.prefixedId("_shadow")
   }
 
   // Drawing group

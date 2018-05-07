@@ -84,7 +84,10 @@ var Donut = /** @class */ (function () {
     // Interpolate the arcs in data space.
     Donut.prototype.arcTween = function (d) {
         var _this = this;
-        var previousData = this.previousComputed.data || [], old = fp_1.find(function (datum) { return datum.index === d.index; })(previousData), previous = fp_1.find(function (datum) { return datum.index === d.index - 1; })(previousData), last = previousData[previousData.length - 1];
+        var previousData = this.previousComputed.data || [];
+        var old = fp_1.find(function (datum) { return datum.index === d.index; })(previousData);
+        var previous = fp_1.find(function (datum) { return datum.index === d.index - 1; })(previousData);
+        var last = previousData[previousData.length - 1];
         var s0;
         var e0;
         if (old) {
@@ -141,7 +144,11 @@ var Donut = /** @class */ (function () {
     };
     Donut.prototype.computeArcs = function (computed) {
         var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, r = this.computeOuterRadius(drawingDims), rInner = this.computeInnerRadius(r), rHover = r + 1, rInnerHover = Math.max(rInner - 1, 0);
+            .drawingContainerDims;
+        var r = this.computeOuterRadius(drawingDims);
+        var rInner = this.computeInnerRadius(r);
+        var rHover = r + 1;
+        var rInnerHover = Math.max(rInner - 1, 0);
         return {
             r: r,
             rInner: rInner,
@@ -181,9 +188,8 @@ var Donut = /** @class */ (function () {
         var arcs = this.el.select("g.arcs").selectAll("g");
         var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
         var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
-        var shadowDefinitionId = this.state.current.get("computed").canvas.shadowDefinitionId;
-        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId);
-        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc);
+        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver);
+        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r));
     };
     Donut.prototype.highlightElement = function (key) {
         var _this = this;

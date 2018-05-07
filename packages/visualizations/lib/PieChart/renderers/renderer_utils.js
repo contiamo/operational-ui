@@ -161,10 +161,11 @@ exports.removeArcTween = function (computed, angleRange) {
         return function (t) { return computed.arc(f(t)); };
     };
 };
-exports.updateFilteredPathAttributes = function (selection, filterFunc, path, shadowDef) {
+exports.updateFilteredPathAttributes = function (selection, filterFunc, path, arcInfo) {
+    if (arcInfo === void 0) { arcInfo = {}; }
     selection
         .filter(filterFunc)
-        .attr("d", path)
-        .attr("filter", shadowDef ? "url(#" + shadowDef + ")" : null);
+        .select("path")
+        .attr("d", path);
 };
 //# sourceMappingURL=renderer_utils.js.map

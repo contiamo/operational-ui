@@ -248,8 +248,12 @@ var Gauge = /** @class */ (function () {
         }, [])(this.data);
     };
     Gauge.prototype.computeArcs = function (computed) {
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, outerBorderMargin = this.state.current.get("config").outerBorderMargin, r = this.computeOuterRadius(drawingDims, outerBorderMargin), rInner = this.computeInnerRadius(r), rHover = r + 1, rInnerHover = Math.max(rInner - 1, 0);
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDim;
+        var outerBorderMargin = this.state.current.get("config").outerBorderMargin;
+        var r = this.computeOuterRadius(drawingDims, outerBorderMargin);
+        var rInner = this.computeInnerRadius(r);
+        var rHover = r + 1;
+        var rInnerHover = Math.max(rInner - 1, 0);
         return {
             r: r,
             rInner: rInner,
@@ -294,9 +298,8 @@ var Gauge = /** @class */ (function () {
         var arcs = this.el.select("g.arcs").selectAll("g");
         var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
         var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
-        var shadowDefinitionId = this.state.current.get("computed").canvas.shadowDefinitionId;
-        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId);
-        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc);
+        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver);
+        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r));
     };
     Gauge.prototype.highlightElement = function (key) {
         var _this = this;

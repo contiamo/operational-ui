@@ -159,7 +159,11 @@ var Polar = /** @class */ (function () {
     };
     Polar.prototype.computeArcs = function (computed) {
         var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, r = this.computeOuterRadius(drawingDims), rInner = this.computeInnerRadius(computed.data, r), rHover = this.hoverOuterRadius(r), rInnerHover = Math.max(rInner - 1, 0);
+            .drawingContainerDims;
+        var r = this.computeOuterRadius(drawingDims);
+        var rInner = this.computeInnerRadius(computed.data, r);
+        var rHover = this.hoverOuterRadius(r);
+        var rInnerHover = Math.max(rInner - 5, 0);
         return {
             r: r,
             rInner: rInner,
@@ -195,7 +199,7 @@ var Polar = /** @class */ (function () {
         return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth);
     };
     Polar.prototype.hoverOuterRadius = function (radius) {
-        return function (d) { return radius(d) + 1; };
+        return function (d) { return radius(d) + 5; };
     };
     // Event listeners / handlers
     Polar.prototype.onMouseOver = function (d) {
@@ -215,9 +219,8 @@ var Polar = /** @class */ (function () {
         var arcs = this.el.select("g.arcs").selectAll("g");
         var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
         var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
-        var shadowDefinitionId = this.state.current.get("computed").canvas.shadowDefinitionId;
-        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId);
-        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc);
+        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver);
+        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r));
     };
     Polar.prototype.highlightElement = function (key) {
         var _this = this;

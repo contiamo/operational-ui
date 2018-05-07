@@ -10,7 +10,7 @@ import {
   RendererAccessor,
   RendererAccessors,
 } from "../typings"
-import { defaults, forEach, reduce } from "lodash/fp"
+import { defaults, forEach, merge, reduce } from "lodash/fp"
 import * as styles from "./styles"
 import { Selection } from "d3-selection"
 import { arc as d3Arc, Arc, pie as d3Pie, Pie, PieArcDatum } from "d3-shape"
@@ -213,10 +213,10 @@ export const updateFilteredPathAttributes = (
   selection: D3Selection,
   filterFunc: RendererAccessor<boolean>,
   path: any,
-  shadowDef?: string
+  arcInfo: Object<any> = {}
 ): void => {
   selection
     .filter(filterFunc)
+    .select("path")
     .attr("d", path)
-    .attr("filter", shadowDef ? `url(#${shadowDef})` : null)
 }

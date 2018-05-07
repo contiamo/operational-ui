@@ -116,10 +116,10 @@ class Donut implements Renderer {
 
   // Interpolate the arcs in data space.
   private arcTween(d: ComputedDatum): (t: number) => string {
-    const previousData: ComputedDatum[] = this.previousComputed.data || [],
-      old: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index)(previousData),
-      previous: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index - 1)(previousData),
-      last: ComputedDatum = previousData[previousData.length - 1]
+    const previousData: ComputedDatum[] = this.previousComputed.data || []
+    const old: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index)(previousData)
+    const previous: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index - 1)(previousData)
+    const last: ComputedDatum = previousData[previousData.length - 1]
 
     let s0: number
     let e0: number
@@ -190,11 +190,12 @@ class Donut implements Renderer {
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
     const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-        .drawingContainerDims,
-      r: number = this.computeOuterRadius(drawingDims),
-      rInner: number = this.computeInnerRadius(r),
-      rHover: number = r + 1,
-      rInnerHover: number = Math.max(rInner - 1, 0)
+      .drawingContainerDims
+    const r: number = this.computeOuterRadius(drawingDims)
+    const rInner: number = this.computeInnerRadius(r)
+    const rHover: number = r + 1
+    const rInnerHover: number = Math.max(rInner - 1, 0)
+
     return {
       r,
       rInner,
@@ -238,10 +239,13 @@ class Donut implements Renderer {
     const arcs: any = this.el.select("g.arcs").selectAll("g")
     const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
     const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
-    const shadowDefinitionId: string = this.state.current.get("computed").canvas.shadowDefinitionId
 
-    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId)
-    Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
+    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver)
+    Utils.updateFilteredPathAttributes(
+      arcs,
+      filterUnFocused,
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+    )
   }
 
   private highlightElement(key: string): void {

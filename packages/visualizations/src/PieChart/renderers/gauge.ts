@@ -307,13 +307,13 @@ class Gauge implements Renderer {
   }
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-        .drawingContainerDims,
-      outerBorderMargin: number = this.state.current.get("config").outerBorderMargin,
-      r: number = this.computeOuterRadius(drawingDims, outerBorderMargin),
-      rInner: number = this.computeInnerRadius(r),
-      rHover: number = r + 1,
-      rInnerHover: number = Math.max(rInner - 1, 0)
+    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDim
+    const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
+    const r: number = this.computeOuterRadius(drawingDims, outerBorderMargin)
+    const rInner: number = this.computeInnerRadius(r)
+    const rHover: number = r + 1
+    const rInnerHover: number = Math.max(rInner - 1, 0)
+
     return {
       r,
       rInner,
@@ -362,10 +362,13 @@ class Gauge implements Renderer {
     const arcs: any = this.el.select("g.arcs").selectAll("g")
     const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
     const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
-    const shadowDefinitionId: string = this.state.current.get("computed").canvas.shadowDefinitionId
 
-    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId)
-    Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
+    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver)
+    Utils.updateFilteredPathAttributes(
+      arcs,
+      filterUnFocused,
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+    )
   }
 
   private highlightElement(key: string): void {

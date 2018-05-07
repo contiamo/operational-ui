@@ -25,4 +25,4 @@ export declare const computeTotal: (data: Datum[], valueAccessor: Accessor<Datum
 export declare const calculatePercentages: (data: Datum[], valueAccessor: Accessor<Datum | PieArcDatum<Datum>, number>, total: number) => void;
 export declare const layout: (valueAccessor: Accessor<any, number>, angleRange: [number, number]) => Pie<any, any>;
 export declare const removeArcTween: (computed: ComputedData, angleRange: [number, number]) => (d: PieArcDatum<Datum>, i: number) => (t: number) => string;
-export declare const updateFilteredPathAttributes: (selection: Selection<any, any, any, any>, filterFunc: Accessor<Datum | PieArcDatum<Datum>, boolean>, path: any, shadowDef?: string) => void;
+export declare const updateFilteredPathAttributes: (selection: Selection<any, any, any, any>, filterFunc: Accessor<Datum | PieArcDatum<Datum>, boolean>, path: any, arcInfo?: Object<any>) => void;
