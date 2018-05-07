@@ -37,22 +37,11 @@ var breadcrumbStyle = {
     position: "relative",
     overflow: "hidden",
 };
-var breadcrumbItemStyle = {
-    float: "left",
-    width: "80px",
-    height: "26px",
-    position: "relative",
-    paddingLeft: "20px",
-    lineHeight: "26px",
-    cursor: "pointer",
-    margin: "5px 0",
-    "&:first-child": {
-        paddingLeft: "5px",
-    },
-    "&.hops": {
+var breadcrumbItemStyle = __assign({ float: "left", width: "80px", height: "18px", position: "relative", paddingLeft: "14px", lineHeight: "18px", cursor: "pointer", margin: "5px 0" }, theme_1.operational.typography.small, { "&:first-child": {
+        paddingLeft: "8px",
+    }, "&.hops": {
         width: "40px",
-    },
-    "& .label": {
+    }, "& .label": {
         pointerEvents: "none",
         float: "left",
         display: "block",
@@ -60,34 +49,31 @@ var breadcrumbItemStyle = {
         whiteSpace: "nowrap",
         textOverflow: "ellipsis",
         width: "65px",
-    },
-    "& .background-arrow": {
+    }, "& .background-arrow": {
         content: "''",
         position: "absolute",
         width: 0,
         height: 0,
-        borderLeft: "solid 16px #fff",
-        borderTop: "solid 16px transparent",
-        borderBottom: "solid 16px transparent",
+        borderLeft: "solid 7px #fff",
+        borderTop: "solid 11px transparent",
+        borderBottom: "solid 11px transparent",
         top: "50%",
         left: "100%",
-        marginTop: "-16px",
+        marginTop: "-11px",
         zIndex: "2",
-    },
-    "& .arrow": {
+    }, "& .arrow": {
         content: "''",
         position: "absolute",
         width: 0,
         height: 0,
-        borderLeft: "solid 13px #fff",
-        borderTop: "solid 13px transparent",
-        borderBottom: "solid 13px transparent",
+        borderLeft: "solid 5px #fff",
+        borderTop: "solid 9px transparent",
+        borderBottom: "solid 9px transparent",
         top: "50%",
         left: "100%",
-        marginTop: "-13px",
+        marginTop: "-9px",
         zIndex: "3",
-    },
-};
+    } });
 var centerCircleStyle = {
     fill: "#fff",
     pointerEvents: "none",

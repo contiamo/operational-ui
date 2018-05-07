@@ -32,10 +32,10 @@ var Breadcrumb = /** @class */ (function () {
         return d === "hops" ? "..." : d.name;
     };
     Breadcrumb.prototype.truncateNodeArray = function (nodeArray) {
-        if (nodeArray.length <= 5) {
+        if (nodeArray.length <= 4) {
             return nodeArray;
         }
-        var firstNodes = nodeArray.slice(0, 2);
+        var firstNodes = nodeArray.slice(0, 1);
         var lastNodes = nodeArray.slice(nodeArray.length - 2);
         return firstNodes.concat(["hops"]).concat(lastNodes);
     };
