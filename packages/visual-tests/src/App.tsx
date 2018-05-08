@@ -11,7 +11,7 @@ import {
   Grid,
   Sidebar,
   SidebarHeader,
-  SmallType,
+  Small,
   SidebarItem,
 } from "@operational/components"
 import { darken } from "@operational/utils"
@@ -161,7 +161,7 @@ class App extends React.Component<{}, State> {
                     allTestCases[this.state.group].folder
                   }/${allTestCases[this.state.group].children[this.state.test].slug}.ts`}
                 >
-                  <SmallType>View code for this test</SmallType>
+                  <Small>View code for this test</Small>
                 </a>
               </CardHeader>
               <Marathon
