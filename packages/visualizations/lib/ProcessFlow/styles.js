@@ -24,7 +24,7 @@ var breakdownsContainerStyle = {
 var breakdownContainerStyle = {
     padding: theme_1.operational.spacing / 2 + "px",
     background: theme_1.operational.colors.white,
-    width: "49%",
+    width: "45%",
     float: "left",
 };
 var breakdownLabelStyle = __assign({}, theme_1.operational.typography.small, { display: "block", marginBottom: theme_1.operational.spacing / 4 });

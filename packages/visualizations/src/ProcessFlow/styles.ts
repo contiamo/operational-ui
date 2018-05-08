@@ -17,7 +17,7 @@ const breakdownsContainerStyle = {
 const breakdownContainerStyle = {
   padding: `${theme.spacing / 2}px`,
   background: theme.colors.white,
-  width: "49%",
+  width: "45%",
   float: "left",
 }
 
