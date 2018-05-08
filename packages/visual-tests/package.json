@@ -33,14 +33,9 @@
     "@operational/theme": "^0.1.0-37",
     "@operational/utils": "^0.1.0-37",
     "@operational/visualizations": "^0.1.0-37",
-    "babel-polyfill": "^6.26.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
-    "moment": "^2.19.0",
     "react": "^16.2.0",
-    "react-color": "^2.13.8",
-    "react-dom": "^16.2.0",
-    "react-feather": "^1.0.7",
-    "react-syntax-highlighter": "^5.7.0"
+    "react-dom": "^16.2.0"
   }
 }
