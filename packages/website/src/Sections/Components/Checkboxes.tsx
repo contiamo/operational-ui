@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Checkbox } from "@operational/components"
 
-export const title = "Checkboxs"
+export const title = "Checkboxes"
 
 export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/checkbox.md"
 
