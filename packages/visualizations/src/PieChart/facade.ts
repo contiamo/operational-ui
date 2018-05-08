@@ -150,7 +150,7 @@ class PieChartFacade implements Facade {
     const focusElement: FocusElement = this.state.config().focusElement
     !isEmpty(focusElement)
       ? this.events.emit(Events.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
-      : this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+      : this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
     return this.canvas.elementFor("series").node()
   }

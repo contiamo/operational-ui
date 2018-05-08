@@ -52,9 +52,9 @@ class Gauge implements Renderer {
     this.el = el
     this.updateOptions(options)
     this.events.on(Events.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this))
-    this.events.on(Events.CHART.MOUSEOUT, this.updateElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this))
+    this.events.on(Events.CHART.OUT, this.updateElementHover.bind(this))
   }
 
   // Initialization and updating config or accessors
@@ -88,7 +88,7 @@ class Gauge implements Renderer {
       .drawingContainerDims
 
     // Remove focus before updating chart
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
     // Center coordinate system
     this.currentTranslation = Utils.computeTranslate(drawingDims, this.extent === "semi" ? this.computed.r : 0)
@@ -342,7 +342,7 @@ class Gauge implements Renderer {
   // Event listeners / handlers
   private onMouseOver(d: ComputedDatum): void {
     if (d.data.unfilled) {
-      this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+      this.events.emit(Events.FOCUS.ELEMENT.OUT)
       return
     }
     const datumInfo: DatumInfo = {
@@ -351,7 +351,7 @@ class Gauge implements Renderer {
       percentage: d.data.percentage,
     }
     const centroid: [number, number] = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { d: datumInfo, focusPoint: { centroid } })
   }
 
   private updateElementHover(datapoint: HoverPayload): void {
@@ -377,7 +377,7 @@ class Gauge implements Renderer {
   }
 
   private onMouseOut(): void {
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
   }
 
   // External methods

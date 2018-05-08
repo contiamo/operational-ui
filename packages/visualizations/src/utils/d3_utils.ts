@@ -53,7 +53,7 @@ export const setPathAttributes = (
     .call(onTransitionEnd, onEnd)
 }
 
-export const setTextAttributes = (selection: any, attributes: any, duration?: number): void => {
+export const setTextAttributes = (selection: D3Selection, attributes: Object<any>, duration?: number): void => {
   transitionOrSelection(selection, duration)
     .attr("x", attributes.x)
     .attr("y", attributes.y)
@@ -63,4 +63,23 @@ export const setTextAttributes = (selection: any, attributes: any, duration?: nu
     .attr("transform", attributes.transform)
     .text(attributes.text)
     .style("opacity", attributes.opacity || 1)
+}
+
+export const setLineAttributes = (selection: D3Selection, attributes: Object<any>, duration?: number): void => {
+  transitionOrSelection(selection, duration)
+    .style("stroke", attributes.color)
+    .attr("x1", attributes.x1)
+    .attr("x2", attributes.x2)
+    .attr("y1", attributes.y1)
+    .attr("y2", attributes.y2)
+}
+
+export const setRectAttributes = (selection: any, attributes: any, duration?: number): void => {
+  transitionOrSelection(selection, duration)
+    .attr("x", attributes.x)
+    .attr("y", attributes.y)
+    .attr("width", attributes.width)
+    .attr("height", attributes.height)
+    .style("fill", attributes.color)
+    .style("stroke", attributes.stroke)
 }

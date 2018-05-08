@@ -25,7 +25,7 @@ var Renderer = /** @class */ (function () {
     Renderer.prototype.draw = function () {
         this.compute();
         // Remove focus and truncation markers before updating chart
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         this.removeTruncationArrows();
         var arcs = this.el
             .select("g.arcs")
@@ -322,7 +322,7 @@ var Renderer = /** @class */ (function () {
         }
         var centroid = this.translateBack(this.arc.centroid(d));
         var hideLabel = d3.select(el).classed(styles.arrow);
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: d, hideLabel: hideLabel, focusPoint: { centroid: centroid } });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { d: d, hideLabel: hideLabel, focusPoint: { centroid: centroid } });
         this.mouseOverDatum = d;
         this.highlightPath(d, el);
     };
@@ -357,7 +357,7 @@ var Renderer = /** @class */ (function () {
             }
             _this.mouseOverDatum = null;
             // Remove focus label
-            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+            _this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
             _this.el
                 .selectAll("path." + styles.arc)
                 .filter(function (d) { return d !== _this.zoomNode; })

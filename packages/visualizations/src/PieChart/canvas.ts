@@ -38,11 +38,11 @@ class PieChartCanvas implements Canvas {
   }
 
   private onMouseEnter(): void {
-    this.events.emit(Events.CHART.MOUSEOVER)
+    this.events.emit(Events.CHART.HOVER)
   }
 
   private onMouseLeave(): void {
-    this.events.emit(Events.CHART.MOUSEOUT)
+    this.events.emit(Events.CHART.OUT)
   }
 
   private onClick(): void {

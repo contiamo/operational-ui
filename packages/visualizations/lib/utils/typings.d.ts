@@ -63,3 +63,7 @@ export interface ComponentConfigOptions {
     seriesType?: string;
     type: "series" | "config";
 }
+export interface SeriesManager {
+    assignData: () => void;
+    draw: () => void;
+}

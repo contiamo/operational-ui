@@ -42,7 +42,7 @@ class Renderer {
   }
 
   private highlightPath(focusElement: FocusElement): void {
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
     const path: string[] = focusElement.matchers.path
     const links: [string, string][] = zip(initial(path))(tail(path))
