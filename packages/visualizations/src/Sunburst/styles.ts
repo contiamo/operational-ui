@@ -107,9 +107,6 @@ const rootLabelStyle = {
   "& .name": {
     ...theme.typography.small,
   },
-  "& .value": {
-    ...theme.typography.heading1,
-  },
 }
 
 const arrowStyle = {

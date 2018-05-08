@@ -315,7 +315,8 @@ class Gauge implements Renderer {
   }
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
+    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
+      .drawingContainerDims
     const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
     const r: number = this.computeOuterRadius(drawingDims, outerBorderMargin)
     const rInner: number = this.computeInnerRadius(r)

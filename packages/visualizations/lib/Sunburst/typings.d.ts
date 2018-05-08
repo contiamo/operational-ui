@@ -9,6 +9,8 @@ export interface SunburstConfig extends Config {
     centerCircleRadius: number;
     disableAnimations: boolean;
     maxRings: number;
+    maxTotalFontSize: number;
+    minTotalFontSize: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
     palette: string[];

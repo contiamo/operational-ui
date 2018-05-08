@@ -37,6 +37,8 @@ var SunburstFacade = /** @class */ (function () {
             height: 500,
             hidden: false,
             maxRings: 10,
+            maxTotalFontSize: 54,
+            minTotalFontSize: theme_1.operational.typography.small.fontSize,
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBorderMargin: 1,
             palette: theme_1.operational.colors.visualizationPalette,

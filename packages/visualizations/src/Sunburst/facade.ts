@@ -8,7 +8,7 @@ import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { every, find, has, isEmpty, uniqueId } from "lodash/fp"
 import { colorAssigner } from "@operational/utils"
-import { operational } from "@operational/theme"
+import { operational as theme } from "@operational/theme"
 import { Accessors, AccessorsObject, Components, Computed, Facade, Object, RawData, SunburstConfig } from "./typings"
 
 class SunburstFacade implements Facade {
@@ -46,9 +46,11 @@ class SunburstFacade implements Facade {
       height: 500,
       hidden: false,
       maxRings: 10,
+      maxTotalFontSize: 54,
+      minTotalFontSize: theme.typography.small.fontSize,
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBorderMargin: 1,
-      palette: operational.colors.visualizationPalette,
+      palette: theme.colors.visualizationPalette,
       propagateColors: true,
       sort: true,
       uid: uniqueId("sunburst"),

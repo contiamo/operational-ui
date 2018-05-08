@@ -84,8 +84,7 @@ var rootLabelStyle = {
     pointerEvents: "none",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    "& .name": __assign({}, theme_1.operational.typography.small),
-    "& .value": __assign({}, theme_1.operational.typography.heading1),
+    "& .name": __assign({}, theme_1.operational.typography.small)
 };
 var arrowStyle = {
     fill: "transparent",
