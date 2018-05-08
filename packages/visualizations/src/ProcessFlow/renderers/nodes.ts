@@ -85,7 +85,7 @@ class Nodes implements Renderer {
     this.state = state
     this.events = events
     this.el = el
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.removeHighlights.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.OUT, this.removeHighlights.bind(this))
   }
 
   private onMouseOver(d: TNode, element: HTMLElement): void {
@@ -95,7 +95,7 @@ class Nodes implements Renderer {
   private mouseOver(element: NodeSelection, d: TNode, hideLabel: boolean = false): void {
     this.highlight(element, d)
     const focusPoint: FocusPoint = this.focusPoint(element, d)
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { focusPoint, d, hideLabel })
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d, hideLabel })
     element.on("mouseleave", this.onMouseOut.bind(this))
   }
 
@@ -136,7 +136,7 @@ class Nodes implements Renderer {
   }
 
   private onMouseOut(): void {
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
   }
 
   draw(data: TNode[]): void {

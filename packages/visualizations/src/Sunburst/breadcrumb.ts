@@ -24,8 +24,8 @@ class Breadcrumb {
     this.events = events
     this.el = el
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.updateHoverPath.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.updateHoverPath.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.updateHoverPath.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.OUT, this.updateHoverPath.bind(this))
   }
 
   private updateHoverPath(payload: HoverPayload | ClickPayload): void {

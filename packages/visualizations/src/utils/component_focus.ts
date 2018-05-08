@@ -11,12 +11,15 @@ class ComponentFocus {
     this.state = state
     this.el = el.append("xhtml:div").attr("class", `${styles.focusLegend} ${styles.componentFocus}`)
     this.events = events
-    this.events.on(Events.FOCUS.COMPONENT.MOUSEOVER, this.onComponentHover.bind(this))
+    this.events.on(Events.FOCUS.COMPONENT.HOVER, this.onComponentHover.bind(this))
   }
 
   onComponentHover(payload: ComponentHoverPayload): void {
+    if (!this.state.current.get("config").showComponentFocus) {
+      return
+    }
     this.remove()
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
     this.draw(payload)
   }
 

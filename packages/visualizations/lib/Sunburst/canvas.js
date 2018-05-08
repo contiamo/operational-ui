@@ -44,10 +44,10 @@ var SunburstCanvas = /** @class */ (function () {
         return el;
     };
     SunburstCanvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
+        this.events.emit(event_catalog_1.default.CHART.HOVER);
     };
     SunburstCanvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.CHART.OUT);
     };
     SunburstCanvas.prototype.onClick = function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);

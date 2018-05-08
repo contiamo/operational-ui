@@ -65,7 +65,7 @@ var PieChartLegend = /** @class */ (function () {
         return fp_1.filter(function (d) { return !d.comparison; })(this.state.current.get("computed").series.dataForLegend);
     };
     PieChartLegend.prototype.onComponentHover = function (d, el) {
-        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, { component: d3.select(el), options: this.currentOptions(d) });
+        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) });
     };
     PieChartLegend.prototype.currentOptions = function (datum) {
         return datum.comparison
