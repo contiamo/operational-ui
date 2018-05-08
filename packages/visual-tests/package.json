@@ -8,8 +8,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "rm -rf dist && PUBLIC_URL='./' react-scripts-ts build && mv build dist",
+    "start": "parcel src/index.html",
+    "build": "rm -rf dist && parcel build src/index.html --public-url ./",
     "prettier": "prettier './src/**/*.{ts,tsx}' --write",
     "lint": "tslint './src/**/*.{ts,tsx}' --fix",
     "precommit": "npm run prettier",
