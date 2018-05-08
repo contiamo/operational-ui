@@ -9,9 +9,9 @@ var SunburstFocus = /** @class */ (function () {
         this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
-        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.OUT, this.onMouseLeave.bind(this));
     }
     SunburstFocus.prototype.onElementHover = function (payload) {
         this.remove();
@@ -61,7 +61,7 @@ var SunburstFocus = /** @class */ (function () {
         this.remove();
     };
     SunburstFocus.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
     SunburstFocus.prototype.remove = function () {
         this.el.node().innerHTML = "";

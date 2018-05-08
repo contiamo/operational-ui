@@ -62,7 +62,7 @@ var Nodes = /** @class */ (function () {
         this.state = state;
         this.events = events;
         this.el = el;
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.removeHighlights.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.removeHighlights.bind(this));
     }
     Nodes.prototype.onMouseOver = function (d, element) {
         this.mouseOver(d3.select(element), d);
@@ -71,7 +71,7 @@ var Nodes = /** @class */ (function () {
         if (hideLabel === void 0) { hideLabel = false; }
         this.highlight(element, d);
         var focusPoint = this.focusPoint(element, d);
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { focusPoint: focusPoint, d: d, hideLabel: hideLabel });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { focusPoint: focusPoint, d: d, hideLabel: hideLabel });
         element.on("mouseleave", this.onMouseOut.bind(this));
     };
     Nodes.prototype.focusElement = function (focusElement) {
@@ -108,7 +108,7 @@ var Nodes = /** @class */ (function () {
         };
     };
     Nodes.prototype.onMouseOut = function () {
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
     Nodes.prototype.draw = function (data) {
         this.data = data;

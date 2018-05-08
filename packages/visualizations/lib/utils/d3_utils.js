@@ -55,4 +55,21 @@ exports.setTextAttributes = function (selection, attributes, duration, onEnd) {
         .style("opacity", attributes.opacity || 1)
         .call(exports.onTransitionEnd, onEnd);
 };
+exports.setLineAttributes = function (selection, attributes, duration) {
+    transitionOrSelection(selection, duration)
+        .style("stroke", attributes.color)
+        .attr("x1", attributes.x1)
+        .attr("x2", attributes.x2)
+        .attr("y1", attributes.y1)
+        .attr("y2", attributes.y2);
+};
+exports.setRectAttributes = function (selection, attributes, duration) {
+    transitionOrSelection(selection, duration)
+        .attr("x", attributes.x)
+        .attr("y", attributes.y)
+        .attr("width", attributes.width)
+        .attr("height", attributes.height)
+        .style("fill", attributes.color)
+        .style("stroke", attributes.stroke);
+};
 //# sourceMappingURL=d3_utils.js.map

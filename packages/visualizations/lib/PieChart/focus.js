@@ -11,9 +11,9 @@ var PieChartFocus = /** @class */ (function () {
         this.events = events;
         this.el = els.main;
         this.componentFocus = new component_focus_1.default(this.state, els.component, this.events);
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this));
-        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.onMouseLeave.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.onElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this));
+        this.events.on(event_catalog_1.default.CHART.OUT, this.onMouseLeave.bind(this));
     }
     PieChartFocus.prototype.onElementHover = function (payload) {
         this.remove();
@@ -39,7 +39,7 @@ var PieChartFocus = /** @class */ (function () {
         this.remove();
     };
     PieChartFocus.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
     PieChartFocus.prototype.remove = function () {
         this.el.node().innerHTML = "";

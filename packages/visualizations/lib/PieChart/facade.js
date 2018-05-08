@@ -110,7 +110,7 @@ var PieChartFacade = /** @class */ (function () {
         var focusElement = this.state.config().focusElement;
         !fp_1.isEmpty(focusElement)
             ? this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, focusElement)
-            : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+            : this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         return this.canvas.elementFor("series").node();
     };
     PieChartFacade.prototype.close = function () {

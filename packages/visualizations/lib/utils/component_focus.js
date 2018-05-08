@@ -7,11 +7,14 @@ var ComponentFocus = /** @class */ (function () {
         this.state = state;
         this.el = el.append("xhtml:div").attr("class", styles.focusLegend + " " + styles.componentFocus);
         this.events = events;
-        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.MOUSEOVER, this.onComponentHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.COMPONENT.HOVER, this.onComponentHover.bind(this));
     }
     ComponentFocus.prototype.onComponentHover = function (payload) {
+        if (!this.state.current.get("config").showComponentFocus) {
+            return;
+        }
         this.remove();
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         this.draw(payload);
     };
     ComponentFocus.prototype.draw = function (payload) {
