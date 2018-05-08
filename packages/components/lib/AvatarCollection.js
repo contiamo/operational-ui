@@ -8,12 +8,12 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var glamorous_1 = require("glamorous");
 var _1 = require("./");
 var AvatarCollection = function (_a) {
     var _b = _a.people, people = _b === void 0 ? [] : _b, _c = _a.size, size = _c === void 0 ? 32 : _c, _d = _a.css, css = _d === void 0 ? {} : _d;
-    return (react_1.default.createElement(glamorous_1.Div, { css: __assign({ display: "flex" }, css) }, people.map(function (person, index) { return (react_1.default.createElement(_1.Avatar, { key: index, css: function (_a) {
+    return (React.createElement(glamorous_1.Div, { css: __assign({ display: "flex" }, css) }, people.map(function (person, index) { return (React.createElement(_1.Avatar, { key: index, css: function (_a) {
             var theme = _a.theme;
             return ({
                 ":not(:first-child)": { marginLeft: theme.spacing * -0.5, boxShadow: "-2px 0 0 1px white" },

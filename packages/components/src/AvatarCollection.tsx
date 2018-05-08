@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import glamorous, { CSSProperties, Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
@@ -12,7 +12,7 @@ export interface AvatarCollectionProps {
     photo?: string
   }[]
   size?: number
-  css?: CSSProperties
+  css?: (props: WithTheme) => CSSProperties | CSSProperties
 }
 const AvatarCollection = ({ people = [], size = 32, css = {} }: AvatarCollectionProps) => (
   <Div css={{ display: "flex", ...css }}>

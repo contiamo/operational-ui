@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import React from "react";
+import * as React from "react";
 import { CSSProperties } from "glamorous";
 import { Theme } from "@operational/theme";
 export declare type WithTheme = {

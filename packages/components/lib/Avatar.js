@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var glamorous_1 = require("glamorous");
 var Avatar = function (_a) {
     var name = _a.name, photo = _a.photo, css = _a.css, _b = _a.withName, withName = _b === void 0 ? false : _b, _c = _a.size, size = _c === void 0 ? 50 : _c;
@@ -38,10 +38,10 @@ var Avatar = function (_a) {
         var splitName = name.split(" ");
         return splitName[0].slice(0, 1) + splitName[splitName.length - 1].slice(0, 1);
     };
-    return withName ? (react_1.default.createElement(Container, null,
-        react_1.default.createElement(PictureContainer, null,
-            react_1.default.createElement(Avatar, { name: name, photo: photo, size: size })),
-        react_1.default.createElement(glamorous_1.Div, null, name))) : (react_1.default.createElement(Container, { css: css, size: size }, !photo && getInitials(name)));
+    return withName ? (React.createElement(Container, null,
+        React.createElement(PictureContainer, null,
+            React.createElement(Avatar, { name: name, photo: photo, size: size })),
+        React.createElement(glamorous_1.Div, null, name))) : (React.createElement(Container, { css: css, size: size }, !photo && getInitials(name)));
 };
 exports.default = Avatar;
 //# sourceMappingURL=Avatar.js.map

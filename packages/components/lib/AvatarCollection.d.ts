@@ -10,7 +10,7 @@ export interface AvatarCollectionProps {
         photo?: string;
     }[];
     size?: number;
-    css?: CSSProperties;
+    css?: (props: WithTheme) => CSSProperties | CSSProperties;
 }
 declare const AvatarCollection: ({ people, size, css }: AvatarCollectionProps) => JSX.Element;
 export default AvatarCollection;

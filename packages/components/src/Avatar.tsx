@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import glamorous, { CSSProperties, Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
