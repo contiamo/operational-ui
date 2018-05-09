@@ -3,13 +3,13 @@ import { operational as theme } from "@operational/theme"
 import { setBrightness } from "@operational/utils"
 
 const breakdownStyle = {
-  maxWidth: "350px",
+  maxWidth: "300px",
   padding: "6px",
   background: "white",
 }
 
 const breakdownsContainerStyle = {
-  width: "350px",
+  width: "300px",
   float: "left",
   padding: "7px 0",
 }
@@ -53,6 +53,7 @@ const breakdownBarStyle = {
 
 const breakdownTextStyle = {
   ...theme.typography.small,
+  lineHeight: 1,
   color: theme.colors.gray,
   position: "relative",
   top: 1,

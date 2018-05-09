@@ -405,7 +405,7 @@ class Renderer {
   }
 
   private getFocusPoint(d: Datum): [number, number] {
-    const r: number = this.arc.outerRadius()(d)
+    const r: number = (3 * this.arc.outerRadius()(d) + this.arc.innerRadius()(d)) / 4
     const a: number = (this.arc.startAngle()(d) + this.arc.endAngle()(d)) / 2 - Math.PI / 2
     return this.translateBack([Math.cos(a) * r, Math.sin(a) * r])
   }

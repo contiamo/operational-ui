@@ -4,6 +4,7 @@ export { Accessor, Accessors, Canvas, ComponentConfigOptions, D3Selection, D3Tra
 export declare type FocusElement = string;
 export interface PieChartConfig extends Config {
     focusElement?: FocusElement;
+    focusOffset: number;
     legend: true;
     maxWidth: number;
     maxLegendRatio: number;

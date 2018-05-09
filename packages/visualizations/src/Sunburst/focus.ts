@@ -70,9 +70,12 @@ class SunburstFocus implements Focus {
 
   private labelPlacement(focusPoint: FocusPoint): Position {
     const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const verticalOffset: number = this.state.current.get("config").focusOffset
     return {
       left: focusPoint.centroid[0] - labelDimensions.width / 2,
-      top: focusPoint.centroid[1] + (focusPoint.labelPosition === "below" ? labelDimensions.height : 0),
+      top:
+        focusPoint.centroid[1] +
+        (focusPoint.labelPosition === "below" ? labelDimensions.height + verticalOffset : -verticalOffset),
     }
   }
 

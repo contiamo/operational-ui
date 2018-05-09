@@ -25,6 +25,7 @@ export type FocusElement = string
 
 export interface PieChartConfig extends Config {
   focusElement?: FocusElement
+  focusOffset: number
   legend: true
   maxWidth: number
   maxLegendRatio: number

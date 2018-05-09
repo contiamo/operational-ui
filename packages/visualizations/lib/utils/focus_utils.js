@@ -56,7 +56,7 @@ var FocusUtils = {
     },
     // Move the focus label to the desired position and make it visible.
     drawVisible: function (focusEl, labelPlacement, position) {
-        var arrowOffset = 5;
+        var arrowOffset = 8;
         var xArrowOffset = arrowOffset * xArrowOffsetPosition[position];
         var yArrowOffset = arrowOffset * yArrowOffsetPosition[position];
         focusEl

@@ -43,6 +43,7 @@ class SunburstFacade implements Facade {
       centerCircleRadius: 0.9,
       disableAnimations: false,
       duration: 1e3,
+      focusOffset: 5,
       height: 500,
       hidden: false,
       maxRings: 10,

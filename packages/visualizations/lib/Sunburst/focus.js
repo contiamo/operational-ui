@@ -37,9 +37,10 @@ var SunburstFocus = /** @class */ (function () {
     };
     SunburstFocus.prototype.labelPlacement = function (focusPoint) {
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el);
+        var verticalOffset = this.state.current.get("config").focusOffset;
         return {
             left: focusPoint.centroid[0] - labelDimensions.width / 2,
-            top: focusPoint.centroid[1] + (focusPoint.labelPosition === "below" ? labelDimensions.height : 0),
+            top: focusPoint.centroid[1] + (focusPoint.labelPosition === "below" ? labelDimensions.height + verticalOffset : -verticalOffset),
         };
     };
     SunburstFocus.prototype.percentageString = function (datum) {

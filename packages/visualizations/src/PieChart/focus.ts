@@ -59,7 +59,7 @@ class PieChartFocus implements Focus {
     const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
     const labelPlacement: Position = {
       left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
-      top: payload.focusPoint.centroid[1],
+      top: payload.focusPoint.centroid[1] - labelDimensions.height / 2 - this.state.current.get("config").focusOffset,
     }
 
     FocusUtils.drawVisible(this.el, labelPlacement, "above")

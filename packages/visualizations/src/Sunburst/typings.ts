@@ -25,6 +25,7 @@ export interface SunburstConfig extends Config {
   arrowOffset: number
   centerCircleRadius: number
   disableAnimations: boolean
+  focusOffset: number
   maxRings: number
   maxTotalFontSize: number
   minTotalFontSize: number

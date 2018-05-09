@@ -31,7 +31,7 @@ var PieChartFocus = /** @class */ (function () {
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el);
         var labelPlacement = {
             left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
-            top: payload.focusPoint.centroid[1],
+            top: payload.focusPoint.centroid[1] - labelDimensions.height / 2 - this.state.current.get("config").focusOffset,
         };
         focus_utils_1.default.drawVisible(this.el, labelPlacement, "above");
     };

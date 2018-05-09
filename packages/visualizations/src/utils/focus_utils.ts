@@ -63,7 +63,7 @@ const FocusUtils: Object<any> = {
 
   // Move the focus label to the desired position and make it visible.
   drawVisible: (focusEl: D3Selection, labelPlacement: Position, position: string): void => {
-    const arrowOffset: number = 5
+    const arrowOffset: number = 8
     const xArrowOffset: number = arrowOffset * xArrowOffsetPosition[position]
     const yArrowOffset: number = arrowOffset * yArrowOffsetPosition[position]
 
