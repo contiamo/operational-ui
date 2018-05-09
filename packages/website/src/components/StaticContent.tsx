@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as marked from "marked"
+import marked from "marked"
 import glamorous from "glamorous"
 import { Box, BarChart2, Grid } from "react-feather"
 import { Theme } from "@operational/theme"
