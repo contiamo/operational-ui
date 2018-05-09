@@ -1,5 +1,5 @@
 import * as React from "react"
-import { VisualizationWrapper, PieChart, Sunburst, ProcessFlow } from "@operational/visualizations"
+import { VisualizationWrapper, ProcessFlow } from "@operational/visualizations"
 import { Div } from "glamorous"
 
 export const title = "Process Flow"
@@ -34,10 +34,10 @@ const processFlowAccessors = {
   node: {
     color: (node: any) => {
       if (node.group === "start") {
-        return "lightgreen"
+        return "#f2dd41"
       }
       if (node.group === "end") {
-        return "lightcoral"
+        return "#2b99d5"
       }
       return "#fff"
     },
@@ -60,10 +60,10 @@ const processFlowAccessors = {
   link: {
     stroke: (link: any) => {
       if (link.source.attributes.group === "start") {
-        return "lightgreen"
+        return "#f2dd41"
       }
       if (link.target.attributes.group === "end") {
-        return "lightcoral"
+        return "#2b99d5"
       }
       return "#bbb"
     },

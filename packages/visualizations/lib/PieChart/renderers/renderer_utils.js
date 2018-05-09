@@ -90,7 +90,10 @@ exports.updateBackgroundRects = function (updatingArcs, centroid) {
     updatingArcs.each(d3_utils_1.withD3Element(function (d, el) {
         var element = d3_selection_1.select(el);
         var textDimensions = element.select("text").node().getBBox();
-        var transform = [centroid(d)[0] + textDimensions.x - RECT_PADDING, centroid(d)[1] + textDimensions.y - RECT_PADDING];
+        var transform = [
+            centroid(d)[0] + textDimensions.x - RECT_PADDING,
+            centroid(d)[1] + textDimensions.y - RECT_PADDING,
+        ];
         element
             .select("rect")
             .attr("width", textDimensions.width + RECT_PADDING * 2)

@@ -2,7 +2,7 @@ import * as React from "react"
 import { VisualizationWrapper, PieChart } from "@operational/visualizations"
 import { Div } from "glamorous"
 
-export const title = "Pie Charts"
+export const title = "Polar Area Charts"
 
 export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/visualizations/pie-chart.md"
 
@@ -31,7 +31,7 @@ const pieData = {
     { key: "Bonn", value: 7 },
     { key: "Cologne", value: 11 },
   ],
-  renderAs: [{ type: "donut" }],
+  renderAs: [{ type: "polar" }],
 }
 
 export const Component = () => (

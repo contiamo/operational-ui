@@ -1,5 +1,5 @@
 import * as React from "react"
-import { VisualizationWrapper, PieChart, Sunburst, ProcessFlow } from "@operational/visualizations"
+import { VisualizationWrapper, Sunburst } from "@operational/visualizations"
 import { Div } from "glamorous"
 
 export const title = "Sunburst Charts"
@@ -10,6 +10,7 @@ const config = {
   width: 330,
   height: 330,
   maxRings: 2,
+  sort: false,
   palette: [
     "#f2dd41",
     "#2b99d5",
