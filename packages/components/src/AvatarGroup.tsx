@@ -6,7 +6,7 @@ import { Avatar } from "./"
 
 export type WithTheme = { theme: Theme }
 
-export interface AvatarCollectionProps {
+export interface Props {
   people: {
     name: string
     photo?: string
@@ -14,8 +14,14 @@ export interface AvatarCollectionProps {
   size?: number
   css?: (props: WithTheme) => CSSProperties | CSSProperties
 }
-const AvatarCollection = ({ people = [], size = 32, css = {} }: AvatarCollectionProps) => (
-  <Div css={{ display: "flex", ...css }}>
+
+const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  label: "avatar-group",
+  display: "flex",
+}))
+
+const AvatarGroup = ({ people = [], size = 32, css = {} }: Props) => (
+  <Container>
     {people.map((person, index) => (
       <Avatar
         key={index}
@@ -27,7 +33,7 @@ const AvatarCollection = ({ people = [], size = 32, css = {} }: AvatarCollection
         photo={person.photo}
       />
     ))}
-  </Div>
+  </Container>
 )
 
-export default AvatarCollection
+export default AvatarGroup

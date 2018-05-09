@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme";
 export declare type WithTheme = {
     theme: Theme;
 };
-export interface AvatarCollectionProps {
+export interface Props {
     people: {
         name: string;
         photo?: string;
@@ -12,5 +12,5 @@ export interface AvatarCollectionProps {
     size?: number;
     css?: (props: WithTheme) => CSSProperties | CSSProperties;
 }
-declare const AvatarCollection: ({ people, size, css }: AvatarCollectionProps) => JSX.Element;
-export default AvatarCollection;
+declare const AvatarGroup: ({ people, size, css }: Props) => JSX.Element;
+export default AvatarGroup;
