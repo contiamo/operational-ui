@@ -1,7 +1,6 @@
 import { Accessor, ComputedArcs, ComputedData, Datum, Object, Renderer, RendererAccessors } from "../typings";
 import { Selection } from "d3-selection";
 import { Pie, PieArcDatum } from "d3-shape";
-export declare const approxZero: (y: (x: number) => number, initialX: number) => number;
 export declare const assignOptions: (ctx: Renderer, options: Object<any>) => void;
 export declare const defaultAccessors: (ctx: Renderer) => RendererAccessors;
 export declare const assignAccessors: (ctx: Renderer, customAccessors: Partial<RendererAccessors>) => void;

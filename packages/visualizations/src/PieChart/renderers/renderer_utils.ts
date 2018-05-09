@@ -17,28 +17,7 @@ import { arc as d3Arc, Arc, pie as d3Pie, Pie, PieArcDatum } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
 import { colorAssigner } from "@operational/utils"
 import { withD3Element } from "../../utils/d3_utils"
-
-// y is a step-function (with two x values resulting in the same y value)
-// on the positive integer domain which is monotonic decreasing
-export const approxZero = (y: (x: number) => number, initialX: number): number => {
-  // make sure to get points with different y value
-  const p0: { x: number; y: number } = { x: initialX, y: y(initialX) }
-  const p1: { x: number; y: number } = { x: initialX + 2, y: y(initialX + 2) }
-
-  // Solve for 0
-  const m: number = (p0.y - p1.y) / (p0.x - p1.x)
-  const xZero: number = -p0.y / m + p0.x
-
-  // Find nearest integer value for x that has y > 0
-  let xInt: number = Math.round(xZero)
-  for (let i: number = 0; i <= 10; i = i + 1) {
-    if (y(xInt) <= 0) {
-      xInt = xInt - 1
-    }
-  }
-
-  return xInt
-}
+import { approxZero, stepFunction } from "../../utils/font_sizing_utils"
 
 export const assignOptions = (ctx: Renderer, options: Object<any>): void => {
   forEach.convert({ cap: false })((option: any, key: string): void => {
@@ -173,12 +152,7 @@ export const updateTotal = (
 
   const node: any = mergedTotal.node()
   if (node) {
-    const y = (x: number): number => {
-      mergedTotal.style("font-size", x + "px")
-      // Text should fill half of available width (0.5 * diameter = radius)
-      return options.innerRadius - node.getBBox().width
-    }
-
+    const y: (x: number) => number = stepFunction(mergedTotal, options.innerRadius)
     // start with min font size
     if (y(options.minTotalFontSize) < 0) {
       // Not enough room - do not show total

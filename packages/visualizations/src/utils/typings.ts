@@ -78,3 +78,8 @@ export interface ComponentConfigOptions {
   seriesType?: string
   type: "series" | "config"
 }
+
+export interface Point {
+  x: number
+  y: number
+}

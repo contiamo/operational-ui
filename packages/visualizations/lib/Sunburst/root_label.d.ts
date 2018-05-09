@@ -1,5 +1,4 @@
 import { D3Selection, EventBus, State, StateWriter } from "./typings";
-export declare const approxZero: (y: (x: number) => number, initialX: number) => number;
 declare class RootLabel {
     private el;
     private events;

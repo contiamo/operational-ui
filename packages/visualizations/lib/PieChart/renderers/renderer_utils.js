@@ -7,24 +7,7 @@ var d3_shape_1 = require("d3-shape");
 var d3_interpolate_1 = require("d3-interpolate");
 var utils_1 = require("@operational/utils");
 var d3_utils_1 = require("../../utils/d3_utils");
-// y is a step-function (with two x values resulting in the same y value)
-// on the positive integer domain which is monotonic decreasing
-exports.approxZero = function (y, initialX) {
-    // make sure to get points with different y value
-    var p0 = { x: initialX, y: y(initialX) };
-    var p1 = { x: initialX + 2, y: y(initialX + 2) };
-    // Solve for 0
-    var m = (p0.y - p1.y) / (p0.x - p1.x);
-    var xZero = -p0.y / m + p0.x;
-    // Find nearest integer value for x that has y > 0
-    var xInt = Math.round(xZero);
-    for (var i = 0; i <= 10; i = i + 1) {
-        if (y(xInt) <= 0) {
-            xInt = xInt - 1;
-        }
-    }
-    return xInt;
-};
+var font_sizing_utils_1 = require("../../utils/font_sizing_utils");
 exports.assignOptions = function (ctx, options) {
     fp_1.forEach.convert({ cap: false })(function (option, key) {
         if (key !== "accessors") {
@@ -131,11 +114,7 @@ exports.updateTotal = function (el, label, duration, options) {
         .text(String);
     var node = mergedTotal.node();
     if (node) {
-        var y = function (x) {
-            mergedTotal.style("font-size", x + "px");
-            // Text should fill half of available width (0.5 * diameter = radius)
-            return options.innerRadius - node.getBBox().width;
-        };
+        var y = font_sizing_utils_1.stepFunction(mergedTotal, options.innerRadius);
         // start with min font size
         if (y(options.minTotalFontSize) < 0) {
             // Not enough room - do not show total
@@ -143,7 +122,7 @@ exports.updateTotal = function (el, label, duration, options) {
         }
         else {
             // change font size until bounding box is completely filled or max font size is reached
-            mergedTotal.style("font-size", Math.min(options.maxTotalFontSize, exports.approxZero(y, options.minTotalFontSize)) + "px");
+            mergedTotal.style("font-size", Math.min(options.maxTotalFontSize, font_sizing_utils_1.approxZero(y, options.minTotalFontSize)) + "px");
             mergedTotal.attr("dy", options.yOffset);
         }
     }
