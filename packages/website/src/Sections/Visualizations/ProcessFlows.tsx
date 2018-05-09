@@ -24,8 +24,8 @@ const processFlowData = {
 }
 
 const processFlowConfig = {
-  width: 240,
-  height: 240,
+  width: 660,
+  height: 330,
   maxNodeSize: 200,
   nodeBorderWidth: 4,
 }
@@ -52,6 +52,9 @@ const processFlowAccessors = {
     },
     stroke: (node: any) => {
       return node.group ? "none" : "#000"
+    },
+    label: (node: any) => {
+      return `Node ${node.id}`
     },
   },
   link: {
