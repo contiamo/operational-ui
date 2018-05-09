@@ -32,7 +32,7 @@ const Container = glamorous.div(
     expanded?: boolean
   }): {} => {
     const backgroundColor = theme.colors.navBackground
-    const lighterBackgroundColor = lighten(theme.colors.navBackground, 6)
+    const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
     const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
     const expandOnHoverStyles = expandOnHover
       ? {
@@ -48,7 +48,7 @@ const Container = glamorous.div(
 
     return {
       color,
-      background: `linear-gradient(to bottom, ${backgroundColor}, ${lighterBackgroundColor})`,
+      background: `linear-gradient(to bottom right, ${backgroundColor}, ${lighterBackgroundColor})`,
       label: "sidenav",
       width: expanded ? sidenavExpandedWidth : theme.box,
       zIndex: theme.baseZIndex + 100,

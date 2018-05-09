@@ -25,7 +25,7 @@ var constants_1 = require("./constants");
 var Container = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, fix = _a.fix, expanded = _a.expanded, expandOnHover = _a.expandOnHover;
     var backgroundColor = theme.colors.navBackground;
-    var lighterBackgroundColor = utils_1.lighten(theme.colors.navBackground, 6);
+    var lighterBackgroundColor = utils_1.lighten(theme.colors.navBackground, 8);
     var color = utils_1.readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white]);
     var expandOnHoverStyles = expandOnHover
         ? {
@@ -38,7 +38,7 @@ var Container = glamorous_1.default.div(function (_a) {
             },
         }
         : {};
-    return __assign({ color: color, background: "linear-gradient(to bottom, " + backgroundColor + ", " + lighterBackgroundColor + ")", label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : theme.box, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
+    return __assign({ color: color, background: "linear-gradient(to bottom right, " + backgroundColor + ", " + lighterBackgroundColor + ")", label: "sidenav", width: expanded ? constants_1.sidenavExpandedWidth : theme.box, zIndex: theme.baseZIndex + 100, display: "flex", flexDirection: "column", alignItems: "flex-start", height: "100%" }, expandOnHoverStyles, { "& a:focus": {
             outline: 0,
         }, "& > a:link, & > a:visited": {
             width: "100%",
