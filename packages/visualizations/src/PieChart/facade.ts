@@ -49,6 +49,7 @@ class PieChartFacade implements Facade {
 
   private initialConfig(): PieChartConfig {
     return {
+      displayPercentages: true,
       duration: 1e3,
       focusOffset: 5,
       height: 500,

@@ -3,6 +3,7 @@ import { Accessor, Config, Facade, Focus, Legend, Object, State } from "../utils
 export { Accessor, Accessors, Canvas, ComponentConfigOptions, D3Selection, D3Transition, Dimensions, EventBus, Legend, Object, Partial, Position, SeriesEl, State, StateWriter } from "../utils/typings";
 export declare type FocusElement = string;
 export interface PieChartConfig extends Config {
+    displayPercentages: boolean;
     focusElement?: FocusElement;
     focusOffset: number;
     legend: true;

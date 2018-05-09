@@ -109,17 +109,24 @@ export const enterArcs = (arcs: D3Selection, mouseOverHandler: any, mouseOutHand
   enteringArcs.append("svg:text").attr("class", styles.label)
 }
 
+const RECT_PADDING: number = 2
+
 export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any): void => {
   updatingArcs.each(
     withD3Element((d: Datum, el: HTMLElement): void => {
       const element: D3Selection = select(el)
       const textDimensions: any = (element.select("text").node() as any).getBBox()
-      const transform: [number, number] = [centroid(d)[0] + textDimensions.x, centroid(d)[1] + textDimensions.y]
+      const transform: [number, number] = [
+        centroid(d)[0] + textDimensions.x - RECT_PADDING,
+        centroid(d)[1] + textDimensions.y - RECT_PADDING,
+      ]
 
       element
         .select("rect")
-        .attr("width", textDimensions.width)
-        .attr("height", textDimensions.height)
+        .attr("width", textDimensions.width + RECT_PADDING * 2)
+        .attr("height", textDimensions.height + RECT_PADDING * 2)
+        .attr("rx", 5)
+        .attr("ry", 5)
         .attr("transform", translateString(transform))
     })
   )

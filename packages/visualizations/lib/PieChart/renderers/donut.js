@@ -74,6 +74,8 @@ var Donut = /** @class */ (function () {
         d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, function () {
             return Utils.updateBackgroundRects(updatingArcs, _this.computed.arcOver.centroid);
         });
+        updatingArcs.select("text").attr("visibility", config.displayPercentages ? "visible" : "hidden");
+        updatingArcs.select("rect").attr("visibility", config.displayPercentages ? "visible" : "hidden");
         // Total / center text
         var options = { maxTotalFontSize: maxTotalFontSize, minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);

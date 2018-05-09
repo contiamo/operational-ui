@@ -29,6 +29,7 @@ var PieChartFacade = /** @class */ (function () {
     };
     PieChartFacade.prototype.initialConfig = function () {
         return {
+            displayPercentages: true,
             duration: 1e3,
             focusOffset: 5,
             height: 500,

@@ -105,6 +105,10 @@ class Donut implements Renderer {
     setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, () =>
       Utils.updateBackgroundRects(updatingArcs, this.computed.arcOver.centroid)
     )
+
+    updatingArcs.select("text").attr("visibility", config.displayPercentages ? "visible" : "hidden")
+    updatingArcs.select("rect").attr("visibility", config.displayPercentages ? "visible" : "hidden")
+
     // Total / center text
     const options = { maxTotalFontSize, minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)

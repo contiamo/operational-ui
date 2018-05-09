@@ -24,6 +24,7 @@ export {
 export type FocusElement = string
 
 export interface PieChartConfig extends Config {
+  displayPercentages: boolean
   focusElement?: FocusElement
   focusOffset: number
   legend: true

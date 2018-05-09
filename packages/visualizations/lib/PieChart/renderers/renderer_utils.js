@@ -85,15 +85,18 @@ exports.enterArcs = function (arcs, mouseOverHandler, mouseOutHandler) {
     enteringArcs.append("svg:rect").attr("class", styles.labelBackground);
     enteringArcs.append("svg:text").attr("class", styles.label);
 };
+var RECT_PADDING = 2;
 exports.updateBackgroundRects = function (updatingArcs, centroid) {
     updatingArcs.each(d3_utils_1.withD3Element(function (d, el) {
         var element = d3_selection_1.select(el);
         var textDimensions = element.select("text").node().getBBox();
-        var transform = [centroid(d)[0] + textDimensions.x, centroid(d)[1] + textDimensions.y];
+        var transform = [centroid(d)[0] + textDimensions.x - RECT_PADDING, centroid(d)[1] + textDimensions.y - RECT_PADDING];
         element
             .select("rect")
-            .attr("width", textDimensions.width)
-            .attr("height", textDimensions.height)
+            .attr("width", textDimensions.width + RECT_PADDING * 2)
+            .attr("height", textDimensions.height + RECT_PADDING * 2)
+            .attr("rx", 5)
+            .attr("ry", 5)
             .attr("transform", exports.translateString(transform));
     }));
 };
