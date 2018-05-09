@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { readableTextColor } from "@operational/utils"
+import { lighten, readableTextColor } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
 
 import { sidenavExpandedWidth } from "./constants"
@@ -32,6 +32,7 @@ const Container = glamorous.div(
     expanded?: boolean
   }): {} => {
     const backgroundColor = theme.colors.navBackground
+    const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
     const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
     const expandOnHoverStyles = expandOnHover
       ? {
@@ -46,8 +47,8 @@ const Container = glamorous.div(
       : {}
 
     return {
-      backgroundColor,
       color,
+      background: `linear-gradient(to bottom right, ${backgroundColor}, ${lighterBackgroundColor})`,
       label: "sidenav",
       width: expanded ? sidenavExpandedWidth : theme.box,
       zIndex: theme.baseZIndex + 100,
