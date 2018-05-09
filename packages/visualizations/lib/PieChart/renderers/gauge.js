@@ -55,8 +55,7 @@ var Gauge = /** @class */ (function () {
         var duration = config.duration;
         var maxTotalFontSize = config.maxTotalFontSize;
         var minTotalFontSize = config.minTotalFontSize;
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         // Center coordinate system
@@ -257,8 +256,7 @@ var Gauge = /** @class */ (function () {
         }, [])(this.data);
     };
     Gauge.prototype.computeArcs = function (computed) {
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         var outerBorderMargin = this.state.current.get("config").outerBorderMargin;
         var r = this.computeOuterRadius(drawingDims, outerBorderMargin);
         var rInner = this.computeInnerRadius(r);

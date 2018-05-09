@@ -67,3 +67,11 @@ export interface Point {
     x: number;
     y: number;
 }
+export interface Dimensions {
+    height: number;
+    width: number;
+}
+export interface Position {
+    left: number;
+    top: number;
+}

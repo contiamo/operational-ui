@@ -3,6 +3,7 @@ import Events from "../utils/event_catalog"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
 import {
   D3Selection,
+  Dimensions,
   EventBus,
   Focus,
   FocusPoint,
@@ -87,7 +88,7 @@ class ProcessFlowFocus implements Focus {
     }
 
     // Get label dimensions (has to be actually rendered in the page to do this) and position label
-    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el)
+    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
     const drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions()
     const offset: number = focusPoint.offset + config.nodeBorderWidth
 
@@ -160,7 +161,7 @@ class ProcessFlowFocus implements Focus {
 
   private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect
-    const computedSeries: any = this.state.current.get("computed").series
+    const computedSeries: Object<any> = this.state.current.get("computed").series
 
     return {
       xMax: drawingContainer.left + computedSeries.width,

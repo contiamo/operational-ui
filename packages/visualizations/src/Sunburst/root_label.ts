@@ -1,4 +1,14 @@
-import { ClickPayload, D3Selection, Datum, EventBus, Object, State, StateWriter, SunburstConfig } from "./typings"
+import {
+  ClickPayload,
+  D3Selection,
+  Datum,
+  Dimensions,
+  EventBus,
+  Object,
+  State,
+  StateWriter,
+  SunburstConfig,
+} from "./typings"
 import Events from "../utils/event_catalog"
 import { approxZero, stepFunction } from "../utils/font_sizing_utils"
 
@@ -20,7 +30,7 @@ class RootLabel {
     const computed: Object<any> = this.state.current.get("computed")
     const config: SunburstConfig = this.state.current.get("config")
     const renderer: Object<any> = computed.renderer
-    const drawingDims: Object<number> = computed.canvas.drawingDims
+    const drawingDims: Dimensions = computed.canvas.drawingDims
     const fixedNode: any = renderer.zoomNode || renderer.topNode
     const availableWidth: number = renderer.innerRadius * config.centerCircleRadius * 2
 

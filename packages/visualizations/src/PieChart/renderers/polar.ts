@@ -16,6 +16,7 @@ import {
   D3Selection,
   Datum,
   DatumInfo,
+  Dimensions,
   EventBus,
   HoverPayload,
   LegendDatum,
@@ -86,8 +87,7 @@ class Polar implements Renderer {
     const duration: number = config.duration
     const maxTotalFontSize: number = config.maxTotalFontSize
     const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -216,8 +216,7 @@ class Polar implements Renderer {
   }
 
   private computeArcs(computed: Partial<ComputedData>): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
     const r: any = this.computeOuterRadius(drawingDims)
     const rInner: any = this.computeInnerRadius(computed.data, r)
     const rHover: number = this.hoverOuterRadius(r)
@@ -237,7 +236,7 @@ class Polar implements Renderer {
     }
   }
 
-  private computeOuterRadius(drawingDims: { width: number; height: number }, scaleFactor: number = 1) {
+  private computeOuterRadius(drawingDims: Dimensions, scaleFactor: number = 1) {
     const domainMax: number = max(map((datum: Datum): number => this.value(datum))(this.data))
     const scale: any = d3ScaleSqrt()
       .range([

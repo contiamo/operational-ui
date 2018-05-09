@@ -2,7 +2,7 @@ import * as d3 from "d3-selection";
 import Nodes from "./node";
 import Link from "./link";
 import { Accessor, Config, Object, Focus, Facade } from "../utils/typings";
-export { Accessor, Accessors, EventBus, Object, State, Partial, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
+export { Accessor, Accessors, Dimensions, EventBus, Object, State, Partial, Position, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
 export interface ProcessFlowConfig extends Config {
     borderColor: string;
     focusElement?: FocusElement;

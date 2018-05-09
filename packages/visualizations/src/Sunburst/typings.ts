@@ -9,10 +9,12 @@ import { Accessor, Config, Object, Focus, Facade } from "../utils/typings"
 export {
   Accessor,
   Accessors,
+  Dimensions,
   EventBus,
   Object,
   State,
   Partial,
+  Position,
   D3Selection,
   SeriesEl,
   StateWriter,

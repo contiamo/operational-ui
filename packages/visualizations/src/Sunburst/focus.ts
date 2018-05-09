@@ -4,11 +4,13 @@ import Events from "../utils/event_catalog"
 import {
   D3Selection,
   Datum,
+  Dimensions,
   EventBus,
   Focus,
   FocusPoint,
   HoverPayload,
   Object,
+  Position,
   SeriesEl,
   State,
   StateWriter,
@@ -66,8 +68,8 @@ class SunburstFocus implements Focus {
     FocusUtils.drawVisible(this.el, this.labelPlacement(focusPoint), focusPoint.labelPosition)
   }
 
-  private labelPlacement(focusPoint: FocusPoint): { left: number; top: number } {
-    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el)
+  private labelPlacement(focusPoint: FocusPoint): Position {
+    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
     return {
       left: focusPoint.centroid[0] - labelDimensions.width / 2,
       top: focusPoint.centroid[1] + (focusPoint.labelPosition === "below" ? labelDimensions.height : 0),

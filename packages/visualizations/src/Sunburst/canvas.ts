@@ -1,6 +1,16 @@
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter, SunburstConfig } from "./typings"
+import {
+  Canvas,
+  D3Selection,
+  Dimensions,
+  EventBus,
+  Object,
+  SeriesEl,
+  State,
+  StateWriter,
+  SunburstConfig,
+} from "./typings"
 import * as styles from "../utils/styles"
 import * as localStyles from "./styles"
 
@@ -90,9 +100,9 @@ class SunburstCanvas implements Canvas {
     return focus
   }
 
-  private drawingDims(): Object<number> {
+  private drawingDims(): Dimensions {
     const config: SunburstConfig = this.state.current.get("config")
-    const dims: Object<number> = {
+    const dims: Dimensions = {
       width: config.width,
       height: config.height - this.breadcrumb.node().getBoundingClientRect().height,
     }
@@ -103,7 +113,7 @@ class SunburstCanvas implements Canvas {
   // Lifecycle
   draw(): void {
     const config: SunburstConfig = this.state.current.get("config"),
-      drawingDims: Object<number> = this.drawingDims()
+      drawingDims: Dimensions = this.drawingDims()
 
     this.chartContainer
       .style("visibility", this.state.current.get("config").hidden ? "hidden" : "visible")

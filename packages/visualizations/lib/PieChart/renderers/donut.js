@@ -56,8 +56,7 @@ var Donut = /** @class */ (function () {
         var duration = config.duration;
         var maxTotalFontSize = config.maxTotalFontSize;
         var minTotalFontSize = config.minTotalFontSize;
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         // Center coordinate system
@@ -147,8 +146,7 @@ var Donut = /** @class */ (function () {
         return this.value(d) || d.value;
     };
     Donut.prototype.computeArcs = function (computed) {
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         var r = this.computeOuterRadius(drawingDims);
         var rInner = this.computeInnerRadius(r);
         var rHover = r + 1;

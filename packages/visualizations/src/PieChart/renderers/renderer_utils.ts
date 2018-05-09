@@ -5,6 +5,7 @@ import {
   ComputedDatum,
   D3Selection,
   Datum,
+  Dimensions,
   Object,
   Renderer,
   RendererAccessor,
@@ -45,10 +46,7 @@ export const assignAccessors = (ctx: Renderer, customAccessors: Partial<Renderer
 }
 
 // Establish coordinate system with 0,0 being the center of the width, height rectangle
-export const computeTranslate = (
-  drawingDims: { width: number; height: number },
-  yOffset: number = 0
-): [number, number] => {
+export const computeTranslate = (drawingDims: Dimensions, yOffset: number = 0): [number, number] => {
   return [drawingDims.width / 2, (drawingDims.height + yOffset) / 2]
 }
 

@@ -1,6 +1,16 @@
 import DataHandler from "./data_handler"
 import Events from "../utils/event_catalog"
-import { ClickPayload, D3Selection, Datum, EventBus, Object, State, StateWriter, SunburstConfig } from "./typings"
+import {
+  ClickPayload,
+  D3Selection,
+  Datum,
+  Dimensions,
+  EventBus,
+  Object,
+  State,
+  StateWriter,
+  SunburstConfig,
+} from "./typings"
 import { every, find, filter, forEach, findIndex, get, identity, keys, map, reduce } from "lodash/fp"
 import * as styles from "./styles"
 
@@ -167,7 +177,7 @@ class Renderer {
 
   // Center elements within drawing container
   private translate(): string {
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingDims
     this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return `translate(${this.currentTranslation.join(", ")})`
   }

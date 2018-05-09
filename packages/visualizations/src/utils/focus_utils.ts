@@ -1,7 +1,7 @@
 import { find, last } from "lodash/fp"
 import * as d3 from "d3-selection"
 import * as styles from "./styles"
-import { D3Selection, Object } from "./typings"
+import { D3Selection, Dimensions, Object, Point, Position } from "./typings"
 
 function optimalPosition(possibilities: number[], min: number, max: number, dimension: number): number {
   function withinRange(value: number): boolean {
@@ -62,7 +62,7 @@ const FocusUtils: Object<any> = {
   },
 
   // Move the focus label to the desired position and make it visible.
-  drawVisible: (focusEl: D3Selection, labelPlacement: { top: number; left: number }, position: string): void => {
+  drawVisible: (focusEl: D3Selection, labelPlacement: Position, position: string): void => {
     const arrowOffset: number = 5
     const xArrowOffset: number = arrowOffset * xArrowOffsetPosition[position]
     const yArrowOffset: number = arrowOffset * yArrowOffsetPosition[position]
@@ -74,7 +74,7 @@ const FocusUtils: Object<any> = {
   },
 
   // Return dimensions of focus label, including width of any margins or borders.
-  labelDimensions: (focusEl: D3Selection): { height: number; width: number } => {
+  labelDimensions: (focusEl: D3Selection): Dimensions => {
     const rect: ClientRect = focusEl.node().getBoundingClientRect()
     return {
       height: rect.height,
@@ -86,9 +86,8 @@ const FocusUtils: Object<any> = {
   // Use label and drawing dimensions to ensure focus label does not overflow drawing.
   positionLabel: (
     el: D3Selection,
-    // @TODO
-    focus: Object<any>,
-    label: Object<any>,
+    focus: Point,
+    label: Dimensions,
     drawing: Object<any>,
     offset: number = 0,
     position: string = "toRight"
@@ -148,11 +147,11 @@ const FocusUtils: Object<any> = {
   },
 
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
-  verticalCenter: (focus: Object<number>, label: Object<number>, drawing: Object<number>): number => {
+  verticalCenter: (focus: Point, label: Dimensions, drawing: Object<number>): number => {
     return Math.min(Math.max(focus.y + drawing.yMin - label.height / 2, drawing.yMin), drawing.yMax)
   },
 
-  horizontalCenter: (focus: Object<number>, label: Object<number>, drawing: Object<number>): number => {
+  horizontalCenter: (focus: Point, label: Dimensions, drawing: Object<number>): number => {
     return Math.min(Math.max(focus.x + drawing.xMin - label.width / 2, drawing.xMin), drawing.xMax)
   },
 }

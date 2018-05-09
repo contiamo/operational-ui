@@ -1,13 +1,10 @@
-import { Accessor, ComputedArcs, ComputedData, Datum, Object, Renderer, RendererAccessors } from "../typings";
+import { Accessor, ComputedArcs, ComputedData, Datum, Dimensions, Object, Renderer, RendererAccessors } from "../typings";
 import { Selection } from "d3-selection";
 import { Pie, PieArcDatum } from "d3-shape";
 export declare const assignOptions: (ctx: Renderer, options: Object<any>) => void;
 export declare const defaultAccessors: (ctx: Renderer) => RendererAccessors;
 export declare const assignAccessors: (ctx: Renderer, customAccessors: Partial<RendererAccessors>) => void;
-export declare const computeTranslate: (drawingDims: {
-    width: number;
-    height: number;
-}, yOffset?: number) => [number, number];
+export declare const computeTranslate: (drawingDims: Dimensions, yOffset?: number) => [number, number];
 export declare const translateBack: (point: [number, number], currentTranslation: [number, number]) => [number, number];
 export declare const textAttributes: (computed: ComputedArcs) => Object<any>;
 export declare const percentageString: (d: PieArcDatum<Datum>) => string;

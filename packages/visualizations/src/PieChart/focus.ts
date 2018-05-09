@@ -2,7 +2,18 @@ import FocusUtils from "../utils/focus_utils"
 import Events from "../utils/event_catalog"
 import ComponentFocus from "../utils/component_focus"
 import * as d3 from "d3-selection"
-import { D3Selection, EventBus, Focus, HoverPayload, Object, SeriesEl, State, StateWriter } from "./typings"
+import {
+  D3Selection,
+  Dimensions,
+  EventBus,
+  Focus,
+  HoverPayload,
+  Object,
+  Position,
+  SeriesEl,
+  State,
+  StateWriter,
+} from "./typings"
 
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
@@ -45,11 +56,11 @@ class PieChartFocus implements Focus {
       )
 
     // Get label dimensions
-    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
-      labelPlacement: { left: number; top: number } = {
-        left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
-        top: payload.focusPoint.centroid[1],
-      }
+    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelPlacement: Position = {
+      left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
+      top: payload.focusPoint.centroid[1],
+    }
 
     FocusUtils.drawVisible(this.el, labelPlacement, "above")
   }

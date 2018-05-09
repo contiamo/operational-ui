@@ -16,6 +16,7 @@ import {
   D3Selection,
   Datum,
   DatumInfo,
+  Dimensions,
   EventBus,
   HoverPayload,
   LegendDatum,
@@ -85,8 +86,7 @@ class Gauge implements Renderer {
     const duration: number = config.duration
     const maxTotalFontSize: number = config.maxTotalFontSize
     const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -315,8 +315,7 @@ class Gauge implements Renderer {
   }
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
     const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
     const r: number = this.computeOuterRadius(drawingDims, outerBorderMargin)
     const rInner: number = this.computeInnerRadius(r)
@@ -335,7 +334,7 @@ class Gauge implements Renderer {
     }
   }
 
-  private computeOuterRadius(drawingDims: { width: number; height: number }, margin: number): number {
+  private computeOuterRadius(drawingDims: Dimensions, margin: number): number {
     return this.extent === "full"
       ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
       : Math.min(drawingDims.width / 2, drawingDims.height) - margin

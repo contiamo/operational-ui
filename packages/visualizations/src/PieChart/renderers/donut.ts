@@ -15,6 +15,7 @@ import {
   D3Selection,
   Datum,
   DatumInfo,
+  Dimensions,
   EventBus,
   HoverPayload,
   LegendDatum,
@@ -83,8 +84,7 @@ class Donut implements Renderer {
     const duration: number = config.duration
     const maxTotalFontSize: number = config.maxTotalFontSize
     const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -192,8 +192,7 @@ class Donut implements Renderer {
   }
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
     const r: number = this.computeOuterRadius(drawingDims)
     const rInner: number = this.computeInnerRadius(r)
     const rHover: number = r + 1
@@ -211,7 +210,7 @@ class Donut implements Renderer {
     }
   }
 
-  private computeOuterRadius(drawingDims: { width: number; height: number }): number {
+  private computeOuterRadius(drawingDims: Dimensions): number {
     const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
     return Math.min(drawingDims.width, drawingDims.height) / 2 - outerBorderMargin
   }

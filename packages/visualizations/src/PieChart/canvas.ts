@@ -1,6 +1,16 @@
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, EventBus, Object, PieChartConfig, SeriesEl, State, StateWriter } from "./typings"
+import {
+  Canvas,
+  D3Selection,
+  Dimensions,
+  EventBus,
+  Object,
+  PieChartConfig,
+  SeriesEl,
+  State,
+  StateWriter,
+} from "./typings"
 import * as styles from "../utils/styles"
 
 class PieChartCanvas implements Canvas {
@@ -104,7 +114,7 @@ class PieChartCanvas implements Canvas {
     return focusEl
   }
 
-  private drawingContainerDims(): { height: number; width: number } {
+  private drawingContainerDims(): Dimensions {
     const config = this.state.current.get("config")
     const dims = {
       height: config.height - this.elMap.legend.node().offsetHeight,
@@ -120,7 +130,7 @@ class PieChartCanvas implements Canvas {
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
 
     const config: PieChartConfig = this.state.current.get("config")
-    const dims: { width: number; height: number } = this.drawingContainerDims()
+    const dims: Dimensions = this.drawingContainerDims()
 
     this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
