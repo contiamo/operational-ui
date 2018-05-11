@@ -12,8 +12,8 @@ var Container = glamorous_1.default.div(function (_a) {
             "& > .opui_avatar-picture": { boxShadow: "-1px 0 0 1px white" },
         },
         "& .opui_name-container": {
-            display: "none"
-        }
+            display: "none",
+        },
     });
 });
 var AvatarGroup = function (props) { return (React.createElement(Container, { css: props.css, className: props.className }, props.children)); };

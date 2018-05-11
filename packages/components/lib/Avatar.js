@@ -38,17 +38,19 @@ var Picture = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, color = _a.color, colorAssignment = _a.colorAssignment, photo = _a.photo;
     var defaultColor = theme.colors.info;
     var fixedBackgroundColor = color ? theme_1.expandColor(theme, color) || defaultColor : defaultColor;
-    var assignedBackgroundColor = colorAssignment ? theme.colors.visualizationPalette[colorAssignment % theme.colors.visualizationPalette.length] : null;
+    var assignedBackgroundColor = colorAssignment
+        ? theme.colors.visualizationPalette[colorAssignment % theme.colors.visualizationPalette.length]
+        : null;
     var backgroundColor = assignedBackgroundColor || fixedBackgroundColor;
     var textColor = utils_1.readableTextColor(backgroundColor, [theme.colors.text, "white"]);
-    return __assign({}, theme.typography.heading1, { textTransform: "uppercase", marginRight: theme.spacing * 0.5, width: theme.spacing * 2.75, height: theme.spacing * 2.75, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }, (photo
+    return __assign({}, theme.typography.heading1, { textTransform: "uppercase", marginRight: theme.spacing * 0.5, width: theme.spacing * 2.75, height: theme.spacing * 2.75, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }, photo
         ? {
             background: "url(" + photo + ")",
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
             color: theme.colors.white,
         }
-        : { backgroundColor: backgroundColor, color: textColor }));
+        : { backgroundColor: backgroundColor, color: textColor });
 });
 var getInitials = function (name) {
     if (!name) {
@@ -59,7 +61,9 @@ var getInitials = function (name) {
 };
 var Avatar = function (props) {
     var initials = getInitials(props.name);
-    var colorAssignmentNumber = props.assignColor ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(function (accumulator, current) { return accumulator + (!current || isNaN(current) ? 0 : current); }, 0) : undefined;
+    var colorAssignmentNumber = props.assignColor
+        ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(function (accumulator, current) { return accumulator + (!current || isNaN(current) ? 0 : current); }, 0)
+        : undefined;
     return (React.createElement(Container, { css: props.css, className: props.className },
         React.createElement(Picture, { photo: props.photo, color: props.color, colorAssignment: colorAssignmentNumber, className: "opui_avatar-picture" }, props.hideInitials || props.photo ? "" : initials),
         props.showName && (React.createElement(NameContainer, { className: "opui_name-container" },
