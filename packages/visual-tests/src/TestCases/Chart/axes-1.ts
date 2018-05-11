@@ -3,16 +3,16 @@ import { MarathonEnvironment } from "../../Marathon"
 
 const LineRenderer = {
   accessors: {
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneX",
   },
-  type: "line"
+  type: "line",
 }
 
 const AreaRenderer = {
   accessors: {
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneX",
   },
-  type: "area"
+  type: "area",
 }
 
 const data_hour = {
@@ -21,11 +21,11 @@ const data_hour = {
       type: "time",
       start: new Date(2018, 2, 8, 0),
       end: new Date(2018, 2, 8, 23),
-      interval: "hour"
+      interval: "hour",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -46,11 +46,11 @@ const data_hour = {
         { x: new Date(2018, 2, 8, 19), y: 220 },
         { x: new Date(2018, 2, 8, 20), y: 220 },
         { x: new Date(2018, 2, 8, 21), y: 220 },
-        { x: new Date(2018, 2, 8, 22), y: 220 }
+        { x: new Date(2018, 2, 8, 22), y: 220 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 const data_day = {
@@ -59,11 +59,11 @@ const data_day = {
       type: "time",
       start: new Date("March 8, 2018"),
       end: new Date("March 20, 2018"),
-      interval: "day"
+      interval: "day",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -73,11 +73,11 @@ const data_day = {
         { x: new Date(2018, 2, 12), y: 200 },
         { x: new Date(2018, 2, 13), y: 175 },
         { x: new Date(2018, 2, 14), y: 260 },
-        { x: new Date(2018, 2, 15), y: 220 }
+        { x: new Date(2018, 2, 15), y: 220 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 const data_week = {
@@ -86,11 +86,11 @@ const data_week = {
       type: "time",
       start: new Date(2018, 2, 1),
       end: new Date(2018, 2, 31),
-      interval: "week"
+      interval: "week",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -100,11 +100,11 @@ const data_week = {
         { x: new Date(2018, 2, 12), y: 200 },
         { x: new Date(2018, 2, 13), y: 175 },
         { x: new Date(2018, 2, 14), y: 260 },
-        { x: new Date(2018, 2, 15), y: 220 }
+        { x: new Date(2018, 2, 15), y: 220 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 const data_month = {
@@ -113,11 +113,11 @@ const data_month = {
       type: "time",
       start: new Date(2018, 0),
       end: new Date(2018, 3),
-      interval: "month"
+      interval: "month",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -126,11 +126,11 @@ const data_month = {
         { x: new Date(2018, 0), y: 100 },
         { x: new Date(2018, 1), y: 200 },
         { x: new Date(2018, 2), y: 175 },
-        { x: new Date(2018, 3), y: 260 }
+        { x: new Date(2018, 3), y: 260 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 const data_quarter = {
@@ -139,11 +139,11 @@ const data_quarter = {
       type: "time",
       start: new Date(2017, 0),
       end: new Date(2018, 3),
-      interval: "quarter"
+      interval: "quarter",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -154,11 +154,11 @@ const data_quarter = {
         { x: new Date(2017, 6), y: 175 },
         { x: new Date(2017, 9), y: 260 },
         { x: new Date(2018, 0), y: 200 },
-        { x: new Date(2018, 3), y: 70 }
+        { x: new Date(2018, 3), y: 70 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 const data_year = {
@@ -167,11 +167,11 @@ const data_year = {
       type: "time",
       start: new Date(2015, 0),
       end: new Date(2018, 0),
-      interval: "year"
+      interval: "year",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -180,11 +180,11 @@ const data_year = {
         { x: new Date(2015, 0), y: 700 },
         { x: new Date(2016, 0), y: 800 },
         { x: new Date(2017, 0), y: 675 },
-        { x: new Date(2018, 0), y: 260 }
+        { x: new Date(2018, 0), y: 260 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

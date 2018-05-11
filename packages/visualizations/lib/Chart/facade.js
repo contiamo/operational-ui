@@ -13,14 +13,14 @@ var xAxisConfig = {
     margin: 14,
     minTicks: 2,
     tickSpacing: 65,
-    outerPadding: 3
+    outerPadding: 3,
 };
 var yAxisConfig = {
     margin: 34,
     minTicks: 4,
     minTopOffsetTopTick: 21,
     tickSpacing: 40,
-    outerPadding: 3
+    outerPadding: 3,
 };
 var ChartFacade = /** @class */ (function () {
     function ChartFacade(context) {
@@ -37,7 +37,7 @@ var ChartFacade = /** @class */ (function () {
             data: {},
             config: this.initialConfig(),
             accessors: this.initialAccessors(),
-            computed: this.initialComputed()
+            computed: this.initialComputed(),
         });
     };
     ChartFacade.prototype.initialConfig = function () {
@@ -57,8 +57,8 @@ var ChartFacade = /** @class */ (function () {
                 offset: 2,
                 rotate: {
                     horizontal: 0,
-                    vertical: -60
-                }
+                    vertical: -60,
+                },
             },
             timeAxisPriority: ["x1", "x2", "y1", "y2"],
             uid: fp_1.uniqueId("chart"),
@@ -67,7 +67,7 @@ var ChartFacade = /** @class */ (function () {
             x1: fp_1.assign({ tickOffset: 12 })(xAxisConfig),
             x2: fp_1.assign({ tickOffset: -4 })(xAxisConfig),
             y1: fp_1.assign({ tickOffset: -4 })(yAxisConfig),
-            y2: fp_1.assign({ tickOffset: 4 })(yAxisConfig)
+            y2: fp_1.assign({ tickOffset: 4 })(yAxisConfig),
         };
     };
     ChartFacade.prototype.defaultColorAssigner = function (palette) {
@@ -78,7 +78,7 @@ var ChartFacade = /** @class */ (function () {
         return {
             data: {
                 series: function (d) { return d.series; },
-                axes: function (d) { return d.axes; }
+                axes: function (d) { return d.axes; },
             },
             series: {
                 data: function (d) { return d.data; },
@@ -92,8 +92,8 @@ var ChartFacade = /** @class */ (function () {
                 xAttribute: function (d) { return d.xAttribute || "x"; },
                 yAttribute: function (d) { return d.yAttribute || "y"; },
                 xAxis: function (d) { return d.xAxis || "x1"; },
-                yAxis: function (d) { return d.yAxis || "y1"; }
-            }
+                yAxis: function (d) { return d.yAxis || "y1"; },
+            },
         };
     };
     ChartFacade.prototype.initialComputed = function () {
@@ -101,7 +101,7 @@ var ChartFacade = /** @class */ (function () {
             axes: {},
             canvas: {},
             focus: {},
-            series: {}
+            series: {},
         };
     };
     ChartFacade.prototype.insertCanvas = function () {
@@ -112,17 +112,17 @@ var ChartFacade = /** @class */ (function () {
             legends: new legend_manager_1.default(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
                 top: {
                     left: this.canvas.elementFor("legend-top-left"),
-                    right: this.canvas.elementFor("legend-top-right")
+                    right: this.canvas.elementFor("legend-top-right"),
                 },
                 bottom: {
-                    left: this.canvas.elementFor("legend-bottom-left")
-                }
+                    left: this.canvas.elementFor("legend-bottom-left"),
+                },
             }),
             axes: new axes_manager_1.default(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
                 xAxes: this.canvas.elementFor("xAxes"),
                 xRules: this.canvas.elementFor("xRules"),
                 yAxes: this.canvas.elementFor("yAxes"),
-                yRules: this.canvas.elementFor("yRules")
+                yRules: this.canvas.elementFor("yRules"),
             }),
         };
     };
@@ -136,7 +136,7 @@ var ChartFacade = /** @class */ (function () {
         if (config.palette && !this.customColorAccessor) {
             var assignColors_1 = this.defaultColorAssigner(config.palette);
             this.accessors("series", {
-                legendColor: function (d) { return assignColors_1(d.key); }
+                legendColor: function (d) { return assignColors_1(d.key); },
             });
         }
         return this.state.config(config);

@@ -15,7 +15,7 @@ export {
   SeriesEl,
   SeriesManager,
   StateWriter,
-  Canvas
+  Canvas,
 } from "../utils/typings"
 
 export interface XAxisConfig {
@@ -285,6 +285,6 @@ export type SeriesElements = [RendererType, ClipPath][]
 export type Facade = Facade<ChartConfig, AccessorsObject, Computed, Components, Data>
 
 export interface MousePosition {
-  x: number,
+  x: number
   y: number
 }

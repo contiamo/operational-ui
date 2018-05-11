@@ -3,7 +3,7 @@ const Events = {
     CLICK: "chart:click",
     HOVER: "chart:hover",
     MOVE: "chart:mousemove",
-    OUT: "chart:out"
+    OUT: "chart:out",
   },
   FOCUS: {
     CLEAR: "focus:clear",
@@ -12,21 +12,21 @@ const Events = {
       HOVER: "focus:component:hover",
       OUT: "focus:component:out",
       LABEL: {
-        OUT: "focus:component:label:out"
-      }
+        OUT: "focus:component:label:out",
+      },
     },
     DATE: "focus:date",
     ELEMENT: {
       HIGHLIGHT: "focus:element:highlight",
       CLICK: "focus:element:click",
       HOVER: "focus:element:hover",
-      OUT: "focus:element:out"
+      OUT: "focus:element:out",
     },
     FLAG: {
       HOVER: "focus:flag:hover",
-      OUT: "focus:flag:out"
-    }
-  }
+      OUT: "focus:flag:out",
+    },
+  },
 }
 
 export default Events

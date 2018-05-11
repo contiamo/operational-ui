@@ -7,31 +7,31 @@ var defaultAccessors = {
     fill: function (series, d) { return "#fff"; },
     size: function (series, d) { return 50; },
     stroke: function (series, d) { return series.legendColor(); },
-    symbol: function (series, d) { return "circle"; }
+    symbol: function (series, d) { return "circle"; },
 };
 var symbolOptions = {
     circle: {
-        symbol: d3_shape_1.symbolCircle
+        symbol: d3_shape_1.symbolCircle,
     },
     cross: {
-        symbol: d3_shape_1.symbolCross
+        symbol: d3_shape_1.symbolCross,
     },
     diamond: {
-        symbol: d3_shape_1.symbolDiamond
+        symbol: d3_shape_1.symbolDiamond,
     },
     square: {
-        symbol: d3_shape_1.symbolSquare
+        symbol: d3_shape_1.symbolSquare,
     },
     squareDiamond: {
         symbol: d3_shape_1.symbolSquare,
-        rotation: 45
+        rotation: 45,
     },
     star: {
-        symbol: d3_shape_1.symbolStar
+        symbol: d3_shape_1.symbolStar,
     },
     triangle: {
-        symbol: d3_shape_1.symbolTriangle
-    }
+        symbol: d3_shape_1.symbolTriangle,
+    },
 };
 var Symbol = /** @class */ (function () {
     function Symbol(state, events, el, data, options, series) {

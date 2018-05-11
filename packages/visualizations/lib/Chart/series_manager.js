@@ -79,11 +79,11 @@ var ChartSeriesManager = /** @class */ (function () {
         var data = {
             top: {
                 left: [],
-                right: []
+                right: [],
             },
             bottom: {
-                left: []
-            }
+                left: [],
+            },
         };
         fp_1.forEach(function (series) {
             if (series.hideInLegend()) {

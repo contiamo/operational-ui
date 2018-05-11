@@ -3,16 +3,16 @@ import { MarathonEnvironment } from "../../Marathon"
 
 const LineRenderer = {
   accessors: {
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneX",
   },
-  type: "line"
+  type: "line",
 }
 
 const AreaRenderer = {
   accessors: {
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneX",
   },
-  type: "area"
+  type: "area",
 }
 
 const axes: any = {
@@ -20,11 +20,11 @@ const axes: any = {
     type: "time",
     start: new Date("March 8, 2018"),
     end: new Date("March 20, 2018"),
-    interval: "day"
+    interval: "day",
   },
   y1: {
-    type: "quant"
-  }
+    type: "quant",
+  },
 }
 
 const data = {
@@ -37,11 +37,11 @@ const data = {
         { x: new Date("March 12, 2018"), y: 200 },
         { x: new Date("March 13, 2018"), y: 175 },
         { x: new Date("March 14, 2018"), y: 260 },
-        { x: new Date("March 15, 2018"), y: 220 }
+        { x: new Date("March 15, 2018"), y: 220 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

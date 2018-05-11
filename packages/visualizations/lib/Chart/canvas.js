@@ -10,13 +10,13 @@ var seriesElements = [
     ["flag", "xyrules_clip"],
     ["line", "drawing_clip"],
     ["symbol", "xyrules_clip"],
-    ["text", "yrules_clip"]
+    ["text", "yrules_clip"],
 ];
 var axes = ["y", "x"];
 var legends = [
     { position: "top", float: "left" },
     { position: "top", float: "right" },
-    { position: "bottom", float: "left" }
+    { position: "bottom", float: "left" },
 ];
 var ChartCanvas = /** @class */ (function () {
     function ChartCanvas(state, stateWriter, events, context) {
@@ -190,7 +190,7 @@ var ChartCanvas = /** @class */ (function () {
         var config = this.state.current.get("config");
         this.stateWriter("drawingContainerDims", {
             height: config.height - this.totalLegendHeight(),
-            width: config.width
+            width: config.width,
         });
     };
     ChartCanvas.prototype.calculateDrawingDims = function () {
@@ -198,7 +198,7 @@ var ChartCanvas = /** @class */ (function () {
             .drawingContainerDims;
         this.stateWriter("drawingDims", {
             width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
-            height: drawingContainerDims.height - this.margin("x1") - this.margin("x2")
+            height: drawingContainerDims.height - this.margin("x1") - this.margin("x2"),
         });
     };
     // Lifecycle

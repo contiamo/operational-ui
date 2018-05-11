@@ -43,5 +43,5 @@ export default [
   symbol1,
   symbol2,
   range1,
-  range2
+  range2,
 ]

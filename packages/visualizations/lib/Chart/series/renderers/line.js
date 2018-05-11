@@ -7,7 +7,7 @@ var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
     dashed: function (series, d) { return false; },
     interpolate: function (series, d) { return "linear"; },
-    closeGaps: function (series, d) { return true; }
+    closeGaps: function (series, d) { return true; },
 };
 var interpolator = {
     cardinal: d3_shape_1.curveCardinal,
@@ -16,7 +16,7 @@ var interpolator = {
     monotoneY: d3_shape_1.curveMonotoneY,
     step: d3_shape_1.curveStep,
     stepAfter: d3_shape_1.curveStepAfter,
-    stepBefore: d3_shape_1.curveStepBefore
+    stepBefore: d3_shape_1.curveStepBefore,
 };
 var hasValue = function (d) {
     return !!d || d === 0;

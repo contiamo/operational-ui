@@ -21,7 +21,7 @@ import {
   State,
   StateWriter,
   XAxisConfig,
-  YAxisConfig
+  YAxisConfig,
 } from "../typings"
 
 const stepScaleFactors = (step: number): number[] => {
@@ -207,14 +207,14 @@ class QuantAxis implements AxisClass<number> {
       dy: this.isXAxis ? tickOffset : "-0.4em",
       text: this.tickFormatter(),
       x: this.isXAxis ? this.computed.scale : 0,
-      y: this.isXAxis ? 0 : this.computed.scale
+      y: this.isXAxis ? 0 : this.computed.scale,
     }
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults(attributes)({
       x: this.isXAxis ? this.previous.scale : 0,
-      y: this.isXAxis ? 0 : this.previous.scale
+      y: this.isXAxis ? 0 : this.previous.scale,
     })
   }
 
@@ -224,7 +224,7 @@ class QuantAxis implements AxisClass<number> {
       x1: 0,
       x2: this.isXAxis ? drawingDims.width : 0,
       y1: this.isXAxis ? 0 : drawingDims.height,
-      y2: 0
+      y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
   }

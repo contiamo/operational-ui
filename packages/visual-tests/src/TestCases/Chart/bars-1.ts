@@ -12,24 +12,24 @@ const createSingleSeries = (renderers: any[]) => {
           { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
         ],
         name: "Pageviews 2017",
         key: "series2",
-        renderAs: renderers
-      }
+        renderAs: renderers,
+      },
     ],
     axes: {
       x1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
-        interval: "day"
+        interval: "day",
       },
       y1: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 
@@ -42,12 +42,12 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 14), y: undefined },
-          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
         ],
         name: "Pageviews 2018",
         key: "series1",
         interpolate: "step",
-        renderAs: renderers
+        renderAs: renderers,
       },
       {
         data: [
@@ -57,24 +57,24 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
         ],
         name: "Pageviews 2017",
         key: "series2",
-        renderAs: renderers
-      }
+        renderAs: renderers,
+      },
     ],
     axes: {
       x1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
-        interval: "day"
+        interval: "day",
       },
       y1: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 
@@ -125,36 +125,36 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
             { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
             { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
             { x: new Date(2018, 2, 14), y: undefined },
-            { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
+            { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
           ],
           name: "Pageviews 2018",
           key: "series1",
           interpolate: "step",
-          renderAs: [{ type: "bars", accessors: { color, barWidth } }]
+          renderAs: [{ type: "bars", accessors: { color, barWidth } }],
         },
         {
           data: [
             { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
             { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
             { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) }
+            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
           ],
           name: "Pageviews 2017",
           key: "series2",
-          renderAs: [{ type: "bars", accessors: { color, barWidth } }]
-        }
+          renderAs: [{ type: "bars", accessors: { color, barWidth } }],
+        },
       ],
       axes: {
         x1: {
           type: "time",
           start: new Date(2018, 2, 11),
           end: new Date(2018, 2, 15),
-          interval: "day"
+          interval: "day",
         },
         y1: {
-          type: "quant"
-        }
-      }
+          type: "quant",
+        },
+      },
     }
     viz.data(data)
     viz.draw()

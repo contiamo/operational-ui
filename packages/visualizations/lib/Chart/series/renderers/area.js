@@ -10,12 +10,12 @@ var interpolator = {
     monotoneY: d3_shape_1.curveMonotoneY,
     step: d3_shape_1.curveStep,
     stepAfter: d3_shape_1.curveStepAfter,
-    stepBefore: d3_shape_1.curveStepBefore
+    stepBefore: d3_shape_1.curveStepBefore,
 };
 var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
     interpolate: function (series, d) { return "linear"; },
-    closeGaps: function (series, d) { return true; }
+    closeGaps: function (series, d) { return true; },
 };
 var hasValue = function (d) {
     return !!d || d === 0;

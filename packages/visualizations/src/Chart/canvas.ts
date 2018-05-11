@@ -10,7 +10,7 @@ import {
   SeriesEl,
   SeriesElements,
   State,
-  StateWriter
+  StateWriter,
 } from "./typings"
 import * as styles from "../utils/styles"
 import { forEach, reduce } from "lodash/fp"
@@ -21,7 +21,7 @@ const seriesElements: SeriesElements = [
   ["flag", "xyrules_clip"],
   ["line", "drawing_clip"],
   ["symbol", "xyrules_clip"],
-  ["text", "yrules_clip"]
+  ["text", "yrules_clip"],
 ]
 
 const axes: string[] = ["y", "x"]
@@ -29,7 +29,7 @@ const axes: string[] = ["y", "x"]
 const legends: { position: "top" | "bottom"; float: "left" | "right" }[] = [
   { position: "top", float: "left" },
   { position: "top", float: "right" },
-  { position: "bottom", float: "left" }
+  { position: "bottom", float: "left" },
 ]
 
 class ChartCanvas implements Canvas {
@@ -232,7 +232,7 @@ class ChartCanvas implements Canvas {
     const config = this.state.current.get("config")
     this.stateWriter("drawingContainerDims", {
       height: config.height - this.totalLegendHeight(),
-      width: config.width
+      width: config.width,
     })
   }
 
@@ -241,7 +241,7 @@ class ChartCanvas implements Canvas {
       .drawingContainerDims
     this.stateWriter("drawingDims", {
       width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
-      height: drawingContainerDims.height - this.margin("x1") - this.margin("x2")
+      height: drawingContainerDims.height - this.margin("x1") - this.margin("x2"),
     })
   }
 
@@ -295,7 +295,6 @@ class ChartCanvas implements Canvas {
   elementFor(component: string): D3Selection {
     return this.elMap[component]
   }
-
 }
 
 export default ChartCanvas

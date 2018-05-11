@@ -54,7 +54,7 @@ var ChartSeries = /** @class */ (function () {
     ChartSeries.prototype.dataForLegend = function () {
         return {
             color: this.legendColor(),
-            label: this.legendName()
+            label: this.legendName(),
         };
     };
     ChartSeries.prototype.dataForAxis = function (axis) {
@@ -74,7 +74,7 @@ var ChartSeries = /** @class */ (function () {
         }
         return {
             barWidth: barRenderer.barWidth(),
-            stackIndex: this.options.stackIndex
+            stackIndex: this.options.stackIndex,
         };
     };
     ChartSeries.prototype.hasData = function () {

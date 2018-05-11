@@ -2,33 +2,33 @@ import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const AreaRenderer = {
-  type: "area"
+  type: "area",
 }
 
 const LineRenderer = {
-  type: "line"
+  type: "line",
 }
 
 const AreaRendererWithColor = {
   type: "area",
   accessors: {
-    color: () => "#ccc"
-  }
+    color: () => "#ccc",
+  },
 }
 
 const AreaRendererWithInterpolation = {
   type: "area",
   accessors: {
     color: () => "#ccc",
-    interpolate: () => "monotoneX"
-  }
+    interpolate: () => "monotoneX",
+  },
 }
 
 const LineRendererWithInterpolation = {
   type: "line",
   accessors: {
-    interpolate: () => "monotoneX"
-  }
+    interpolate: () => "monotoneX",
+  },
 }
 
 const AreaRendererWithGaps = {
@@ -36,16 +36,16 @@ const AreaRendererWithGaps = {
   accessors: {
     color: () => "#ccc",
     interpolate: () => "monotoneX",
-    closeGaps: () => false
-  }
+    closeGaps: () => false,
+  },
 }
 
 const LineRendererWithGaps = {
   type: "line",
   accessors: {
     interpolate: () => "monotoneX",
-    closeGaps: () => false
-  }
+    closeGaps: () => false,
+  },
 }
 
 const LineRendererDashed = {
@@ -53,8 +53,8 @@ const LineRendererDashed = {
   accessors: {
     interpolate: () => "monotoneX",
     closeGaps: () => false,
-    dashed: () => true
-  }
+    dashed: () => true,
+  },
 }
 
 const createData = (renderers: any[]) => {
@@ -66,12 +66,12 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 12), y: 300 },
           { x: new Date(2018, 2, 13), y: 500 },
           { x: new Date(2018, 2, 14), y: undefined },
-          { x: new Date(2018, 2, 15), y: 200 }
+          { x: new Date(2018, 2, 15), y: 200 },
         ],
         name: "Pageviews 2018",
         key: "series1",
         interpolate: "step",
-        renderAs: renderers
+        renderAs: renderers,
       },
       {
         data: [
@@ -81,28 +81,28 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 13), y: 425 },
           { x: new Date(2018, 2, 14), y: 570 },
           { x: new Date(2018, 2, 16), y: 234 },
-          { x: new Date(2018, 2, 17), y: 123 }
+          { x: new Date(2018, 2, 17), y: 123 },
         ],
         name: "Pageviews 2017",
         yAxis: "y2",
         key: "series2",
-        renderAs: renderers
-      }
+        renderAs: renderers,
+      },
     ],
     axes: {
       x1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
-        interval: "day"
+        interval: "day",
       },
       y1: {
-        type: "quant"
+        type: "quant",
       },
       y2: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 
@@ -137,7 +137,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Resize", () => {
     viz.config({
       width: 600,
-      height: 300
+      height: 300,
     })
     viz.draw()
   })

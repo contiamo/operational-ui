@@ -11,7 +11,7 @@ interface LegendOption {
 const legendOptions: LegendOption[] = [
   { position: "top", float: "left" },
   { position: "top", float: "right" },
-  { position: "bottom", float: "left" }
+  { position: "bottom", float: "left" },
 ]
 
 class LegendManager {

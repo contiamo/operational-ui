@@ -139,7 +139,7 @@ var TimeAxis = /** @class */ (function () {
         var offset = tickWidth / 2;
         return [
             (drawingDims.height || width) - offset,
-            offset + (margin("x2") || config[this.position].minTopOffsetTopTick)
+            offset + (margin("x2") || config[this.position].minTopOffsetTopTick),
         ];
     };
     TimeAxis.prototype.computeTickNumber = function (ticksInDomain, range) {
@@ -222,13 +222,13 @@ var TimeAxis = /** @class */ (function () {
             dy: this.isXAxis ? tickOffset : "0.35em",
             text: this.computed.tickFormatter,
             x: this.isXAxis ? this.computed.scale : 0,
-            y: this.isXAxis ? 0 : this.computed.scale
+            y: this.isXAxis ? 0 : this.computed.scale,
         };
     };
     TimeAxis.prototype.getStartAttributes = function (attributes) {
         return fp_1.defaults(attributes)({
             x: this.isXAxis ? this.previous.scale : 0,
-            y: this.isXAxis ? 0 : this.previous.scale
+            y: this.isXAxis ? 0 : this.previous.scale,
         });
     };
     TimeAxis.prototype.drawBorder = function () {
@@ -237,7 +237,7 @@ var TimeAxis = /** @class */ (function () {
             x1: 0,
             x2: this.isXAxis ? drawingDims.width : 0,
             y1: this.isXAxis ? 0 : drawingDims.height,
-            y2: 0
+            y2: 0,
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };

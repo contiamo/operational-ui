@@ -24,14 +24,14 @@ import {
   RendererOptions,
   SeriesData,
   XAxisConfig,
-  YAxisConfig
+  YAxisConfig,
 } from "./typings"
 
 const xAxisConfig: Partial<XAxisConfig> = {
   margin: 14,
   minTicks: 2,
   tickSpacing: 65,
-  outerPadding: 3
+  outerPadding: 3,
 }
 
 const yAxisConfig: Partial<YAxisConfig> = {
@@ -39,7 +39,7 @@ const yAxisConfig: Partial<YAxisConfig> = {
   minTicks: 4,
   minTopOffsetTopTick: 21,
   tickSpacing: 40,
-  outerPadding: 3
+  outerPadding: 3,
 }
 
 class ChartFacade implements Facade {
@@ -66,7 +66,7 @@ class ChartFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed()
+      computed: this.initialComputed(),
     })
   }
 
@@ -87,8 +87,8 @@ class ChartFacade implements Facade {
         offset: 2,
         rotate: {
           horizontal: 0,
-          vertical: -60
-        }
+          vertical: -60,
+        },
       },
       timeAxisPriority: ["x1", "x2", "y1", "y2"],
       uid: uniqueId("chart"),
@@ -97,7 +97,7 @@ class ChartFacade implements Facade {
       x1: assign({ tickOffset: 12 })(xAxisConfig),
       x2: assign({ tickOffset: -4 })(xAxisConfig),
       y1: assign({ tickOffset: -4 })(yAxisConfig),
-      y2: assign({ tickOffset: 4 })(yAxisConfig)
+      y2: assign({ tickOffset: 4 })(yAxisConfig),
     }
   }
 
@@ -110,7 +110,7 @@ class ChartFacade implements Facade {
     return {
       data: {
         series: (d: Data): SeriesData => d.series,
-        axes: (d: Data): AxesData => d.axes
+        axes: (d: Data): AxesData => d.axes,
       },
       series: {
         data: (d: Object<any>): Datum[] => d.data,
@@ -124,8 +124,8 @@ class ChartFacade implements Facade {
         xAttribute: (d: Object<any>): string => d.xAttribute || "x",
         yAttribute: (d: Object<any>): string => d.yAttribute || "y",
         xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
-        yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1"
-      }
+        yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
+      },
     }
   }
 
@@ -134,7 +134,7 @@ class ChartFacade implements Facade {
       axes: {},
       canvas: {},
       focus: {},
-      series: {}
+      series: {},
     }
   }
 
@@ -147,17 +147,17 @@ class ChartFacade implements Facade {
       legends: new LegendManager(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
         top: {
           left: this.canvas.elementFor("legend-top-left"),
-          right: this.canvas.elementFor("legend-top-right")
+          right: this.canvas.elementFor("legend-top-right"),
         },
         bottom: {
-          left: this.canvas.elementFor("legend-bottom-left")
-        }
+          left: this.canvas.elementFor("legend-bottom-left"),
+        },
       }),
       axes: new AxesManager(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
         xAxes: this.canvas.elementFor("xAxes"),
         xRules: this.canvas.elementFor("xRules"),
         yAxes: this.canvas.elementFor("yAxes"),
-        yRules: this.canvas.elementFor("yRules")
+        yRules: this.canvas.elementFor("yRules"),
       }),
     }
   }
@@ -179,7 +179,7 @@ class ChartFacade implements Facade {
     if (config.palette && !this.customColorAccessor) {
       const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
       this.accessors("series", {
-        legendColor: (d: Object<any>): string => assignColors(d.key)
+        legendColor: (d: Object<any>): string => assignColors(d.key),
       })
     }
     return this.state.config(config)

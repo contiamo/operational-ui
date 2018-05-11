@@ -142,7 +142,7 @@ exports.positionBackgroundRect = function (el, duration) {
             x: group.left - rect.left,
             y: group.top - rect.top,
             width: group.width,
-            height: group.height
+            height: group.height,
         });
     }, duration);
 };

@@ -5,7 +5,7 @@ var styles = require("./styles");
 var d3_utils_1 = require("../../../utils/d3_utils");
 var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
-    barWidth: function (series, d) { return undefined; }
+    barWidth: function (series, d) { return undefined; },
 };
 var Bars = /** @class */ (function () {
     function Bars(state, events, el, data, options, series) {
@@ -90,7 +90,7 @@ var Bars = /** @class */ (function () {
             y: this.xIsBaseline ? this.yScale(0) : this.y0,
             width: this.xIsBaseline ? attributes.width : 0,
             height: this.xIsBaseline ? 0 : attributes.height,
-            color: attributes.color
+            color: attributes.color,
         };
     };
     Bars.prototype.attributes = function () {
@@ -101,7 +101,7 @@ var Bars = /** @class */ (function () {
             y: this.y1,
             width: this.xIsBaseline ? barWidth : function (d) { return _this.x1(d) - _this.x0(d); },
             height: this.xIsBaseline ? function (d) { return _this.y0(d) - _this.y1(d); } : barWidth,
-            color: this.color.bind(this)
+            color: this.color.bind(this),
         };
     };
     return Bars;

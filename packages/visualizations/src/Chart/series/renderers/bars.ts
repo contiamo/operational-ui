@@ -15,14 +15,14 @@ import {
   RendererClass,
   RendererOptions,
   RendererType,
-  State
+  State,
 } from "../../typings"
 
 export type Options = RendererOptions<BarsRendererAccessors>
 
 const defaultAccessors: Partial<BarsRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
-  barWidth: (series: Series, d: Datum) => undefined
+  barWidth: (series: Series, d: Datum) => undefined,
 }
 
 class Bars implements RendererClass<BarsRendererAccessors> {
@@ -139,7 +139,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       y: this.xIsBaseline ? this.yScale(0) : this.y0,
       width: this.xIsBaseline ? attributes.width : 0,
       height: this.xIsBaseline ? 0 : attributes.height,
-      color: attributes.color
+      color: attributes.color,
     }
   }
 
@@ -150,7 +150,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       y: this.y1,
       width: this.xIsBaseline ? barWidth : (d: Datum): number => this.x1(d) - this.x0(d),
       height: this.xIsBaseline ? (d: Datum): number => this.y0(d) - this.y1(d) : barWidth,
-      color: this.color.bind(this)
+      color: this.color.bind(this),
     }
   }
 }

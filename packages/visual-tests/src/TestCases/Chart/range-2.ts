@@ -4,27 +4,27 @@ import { MarathonEnvironment } from "../../Marathon"
 const LineRenderer = {
   type: "line",
   accessors: {
-    interpolate: () => "monotoneY"
-  }
+    interpolate: () => "monotoneY",
+  },
 }
 
 const AreaRenderer = {
   type: "area",
   accessors: {
-    interpolate: () => "monotoneY"
-  }
+    interpolate: () => "monotoneY",
+  },
 }
 
 const SymbolRenderer = {
   type: "symbol",
   accessors: {
-    size: (seris: any, d: any) => 10
-  }
+    size: (seris: any, d: any) => 10,
+  },
 }
 
 const RangeRenderer = {
   type: "range",
-  renderAs: [AreaRenderer, LineRenderer, SymbolRenderer]
+  renderAs: [AreaRenderer, LineRenderer, SymbolRenderer],
 }
 
 const createData = () => {
@@ -41,12 +41,12 @@ const createData = () => {
               { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 200 + 500) },
               { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 200 + 500) },
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 200 + 500) },
-              { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 + 500) }
+              { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 + 500) },
             ],
             xAttribute: "y",
             yAttribute: "x",
             name: "New Users",
-            key: "series1"
+            key: "series1",
           },
           {
             data: [
@@ -57,28 +57,28 @@ const createData = () => {
               { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 200 + 500) },
               { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 200 + 500) },
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 200 + 500) },
-              { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 + 500) }
+              { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 + 500) },
             ],
             xAttribute: "y",
             yAttribute: "x",
             name: "Existing Users",
-            key: "series2"
-          }
+            key: "series2",
+          },
         ],
-        renderAs: [RangeRenderer]
-      }
+        renderAs: [RangeRenderer],
+      },
     ],
     axes: {
       y1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
-        interval: "day"
+        interval: "day",
       },
       x1: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 

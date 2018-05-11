@@ -7,35 +7,35 @@ var tickStyle = {
     fontSize: "11px",
     fontFamily: theme_1.operational.fontFamily,
     "&.weekend": {
-        fill: "#9d261d"
+        fill: "#9d261d",
     },
     "&.now": {
-        fill: "#71a934"
-    }
+        fill: "#71a934",
+    },
 };
 var xStyle = {
-    textAnchor: "middle"
+    textAnchor: "middle",
 };
 var y1Style = {
-    textAnchor: "end"
+    textAnchor: "end",
 };
 var y2Style = {
-    textAnchor: "start"
+    textAnchor: "start",
 };
 var borderStyle = {
     stroke: theme_1.operational.colors.lightGray,
-    shapeRendering: "crispedges"
+    shapeRendering: "crispedges",
 };
 var componentRectStyle = {
-    fill: "#fff"
+    fill: "#fff",
 };
 var rulesStyle = {
     stroke: theme_1.operational.colors.lightGray,
     strokeWidth: "1",
     shapeRendering: "crispedges",
     "&.zero": {
-        strokeWidth: "2"
-    }
+        strokeWidth: "2",
+    },
 };
 exports.tick = glamor_1.css(tickStyle).toString();
 exports.x1 = glamor_1.css(xStyle).toString();

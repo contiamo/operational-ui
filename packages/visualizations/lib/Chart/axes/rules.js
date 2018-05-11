@@ -49,7 +49,7 @@ var Rules = /** @class */ (function () {
             x1: this.yRules ? -this.margin("y1") / 2 : axisPrevious.scale,
             x2: this.yRules ? drawingDims.width + this.margin("y2") / 2 : axisPrevious.scale,
             y1: this.yRules ? axisPrevious.scale : 0,
-            y2: this.yRules ? axisPrevious.scale : drawingDims.height
+            y2: this.yRules ? axisPrevious.scale : drawingDims.height,
         };
     };
     Rules.prototype.attributes = function () {
@@ -60,7 +60,7 @@ var Rules = /** @class */ (function () {
             x1: this.yRules ? -this.margin("y1") / 2 : axisComputed.scale,
             x2: this.yRules ? drawingDims.width + this.margin("y2") / 2 : axisComputed.scale,
             y1: this.yRules ? axisComputed.scale : 0,
-            y2: this.yRules ? axisComputed.scale : drawingDims.height
+            y2: this.yRules ? axisComputed.scale : drawingDims.height,
         };
     };
     Rules.prototype.margin = function (axis) {
