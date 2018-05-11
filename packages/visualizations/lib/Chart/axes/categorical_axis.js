@@ -15,7 +15,6 @@ var CategoricalAxis = /** @class */ (function () {
         this.position = position;
         this.isXAxis = position[0] === "x";
         this.el = axis_utils_1.insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims);
-        // this.el.on("mouseenter", this.onComponentHover(this))  }
     }
     // Categorical axis supports everything that supports ".toString()"
     CategoricalAxis.prototype.validate = function (value) {
@@ -37,7 +36,7 @@ var CategoricalAxis = /** @class */ (function () {
             scale: d3_scale_1.scaleBand()
                 .range(range)
                 .domain(this.data)
-                .padding(config.innerBarPaddingCategorical)
+                .padding(config.innerBarPaddingCategorical),
         };
         this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
@@ -96,7 +95,7 @@ var CategoricalAxis = /** @class */ (function () {
             ? [0, width || computed.canvas.drawingDims.width]
             : [
                 computed.canvas.drawingDims.height || width,
-                margin("x2") || config[this.position].minTopOffsetTopTick
+                margin("x2") || config[this.position].minTopOffsetTopTick,
             ];
         var adjustedRange = [range[0] + offset, range[1] + offset];
         return adjustedRange;
@@ -144,14 +143,14 @@ var CategoricalAxis = /** @class */ (function () {
             dy: this.isXAxis ? tickOffset : "0.35em",
             text: fp_1.identity,
             x: this.isXAxis ? scaleWithOffset : 0,
-            y: this.isXAxis ? 0 : scaleWithOffset
+            y: this.isXAxis ? 0 : scaleWithOffset,
         };
     };
     CategoricalAxis.prototype.getStartAttributes = function (attributes) {
         var scaleWithOffset = this.scaleWithOffset(this.previous);
         return fp_1.defaults({
             x: this.isXAxis ? scaleWithOffset : 0,
-            y: this.isXAxis ? 0 : scaleWithOffset
+            y: this.isXAxis ? 0 : scaleWithOffset,
         })(attributes);
     };
     CategoricalAxis.prototype.adjustMargins = function () {
@@ -174,7 +173,7 @@ var CategoricalAxis = /** @class */ (function () {
             x1: 0,
             x2: this.isXAxis ? drawingDims.width : 0,
             y1: this.isXAxis ? 0 : drawingDims.height,
-            y2: 0
+            y2: 0,
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };

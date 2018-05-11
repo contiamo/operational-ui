@@ -10,8 +10,6 @@ declare class ChartLegend implements Legend {
     setData(data: LegendDatum[]): void;
     draw(): void;
     setWidth(width: number): void;
-    private onComponentHover(d, el);
-    private currentOptions(datum);
     remove(): void;
 }
 export default ChartLegend;

@@ -21,7 +21,7 @@ import {
   sortBy,
   uniq,
   uniqueId,
-  values
+  values,
 } from "lodash/fp"
 import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
@@ -49,7 +49,7 @@ import {
   StateWriter,
   TimeIntervals,
   XAxisConfig,
-  YAxisConfig
+  YAxisConfig,
 } from "../typings"
 
 // @TODO - add in more options
@@ -165,12 +165,9 @@ class TimeAxis implements AxisClass<Date> {
     const variableBarWidth: number =
       variableWidthStacks.length > 0
         ? Math.min(
-          Math.max(
-            config.minBarWidth,
-            (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length
-          ),
-          config.maxBarWidthRatio * drawingDims[this.isXAxis ? "width" : "height"]
-        )
+            Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length),
+            config.maxBarWidthRatio * drawingDims[this.isXAxis ? "width" : "height"]
+          )
         : 0
     requiredTickWidth = requiredTickWidth + variableBarWidth * variableWidthStacks.length
 
@@ -218,7 +215,7 @@ class TimeAxis implements AxisClass<Date> {
     const offset: number = tickWidth / 2
     return [
       (drawingDims.height || width) - offset,
-      offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick)
+      offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick),
     ]
   }
 
@@ -317,14 +314,14 @@ class TimeAxis implements AxisClass<Date> {
       dy: this.isXAxis ? tickOffset : "0.35em",
       text: this.computed.tickFormatter,
       x: this.isXAxis ? this.computed.scale : 0,
-      y: this.isXAxis ? 0 : this.computed.scale
+      y: this.isXAxis ? 0 : this.computed.scale,
     }
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     return defaults(attributes)({
       x: this.isXAxis ? this.previous.scale : 0,
-      y: this.isXAxis ? 0 : this.previous.scale
+      y: this.isXAxis ? 0 : this.previous.scale,
     })
   }
 
@@ -334,7 +331,7 @@ class TimeAxis implements AxisClass<Date> {
       x1: 0,
       x2: this.isXAxis ? drawingDims.width : 0,
       y1: this.isXAxis ? 0 : drawingDims.height,
-      y2: 0
+      y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
   }

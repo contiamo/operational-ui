@@ -33,7 +33,7 @@ export const computeSteps = (
   return [
     Math.floor(domain[0] / step) * step, // start
     Math.ceil(domain[1] / step) * step, // stop
-    step // step
+    step, // step
   ]
 }
 
@@ -63,7 +63,7 @@ export const extentCushion = (extent: [number, number]): [number, number] => {
   const distance: number = extent[1] - extent[0]
   return [
     extent[0] !== 0 ? extent[0] - 0.05 * distance : extent[0],
-    extent[1] !== 0 ? extent[1] + 0.05 * distance : extent[1]
+    extent[1] !== 0 ? extent[1] + 0.05 * distance : extent[1],
   ]
 }
 

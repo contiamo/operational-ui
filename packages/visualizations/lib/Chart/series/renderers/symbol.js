@@ -7,37 +7,31 @@ var defaultAccessors = {
     fill: function (series, d) { return "#fff"; },
     size: function (series, d) { return 50; },
     stroke: function (series, d) { return series.legendColor(); },
-    symbol: function (series, d) { return "circle"; }
+    symbol: function (series, d) { return "circle"; },
 };
 var symbolOptions = {
     circle: {
         symbol: d3_shape_1.symbolCircle,
-        rotation: 0
     },
     cross: {
         symbol: d3_shape_1.symbolCross,
-        rotation: 0
     },
     diamond: {
         symbol: d3_shape_1.symbolDiamond,
-        rotation: 0
     },
     square: {
         symbol: d3_shape_1.symbolSquare,
-        rotation: 0
     },
     squareDiamond: {
         symbol: d3_shape_1.symbolSquare,
-        rotation: 45
+        rotation: 45,
     },
     star: {
         symbol: d3_shape_1.symbolStar,
-        rotation: 0
     },
     triangle: {
         symbol: d3_shape_1.symbolTriangle,
-        rotation: 0
-    }
+    },
 };
 var Symbol = /** @class */ (function () {
     function Symbol(state, events, el, data, options, series) {
@@ -125,7 +119,7 @@ var Symbol = /** @class */ (function () {
     Symbol.prototype.transform = function (d) {
         var x = this.xScale(d.x1 || this.x(d));
         var y = this.yScale(d.y1 || this.y(d));
-        return "translate(" + x + ", " + y + ") rotate(" + this.symbol(d).rotation + ")";
+        return "translate(" + x + ", " + y + ") rotate(" + (this.symbol(d).rotation || 0) + ")";
     };
     Symbol.prototype.startTransform = function (d) {
         var x = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0);

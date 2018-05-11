@@ -39,7 +39,6 @@ var TimeAxis = /** @class */ (function () {
         this.position = position;
         this.isXAxis = position[0] === "x";
         this.el = axis_utils_1.insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims);
-        // this.el.on("mouseenter", this.onComponentHover(this))  }
     }
     TimeAxis.prototype.validate = function (value) {
         return fp_1.isDate(value);
@@ -74,6 +73,7 @@ var TimeAxis = /** @class */ (function () {
         var end = negativeRange ? this.start : this.end;
         var ticksInDomain = Array.from(moment.range(start, end).by(this.interval));
         var computed = {};
+        computed.tickFormatter = tickFormatter(this.interval);
         computed.ticksInDomain = fp_1.map(function (d) { return d.toDate(); })(negativeRange ? ticksInDomain.reverse() : ticksInDomain);
         computed.tickWidth = this.computeTickWidth(computed.ticksInDomain);
         computed.range = this.computeRange(computed.tickWidth, computed.ticksInDomain.length);
@@ -86,7 +86,7 @@ var TimeAxis = /** @class */ (function () {
         }
         var config = this.state.current.get("config");
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
-        var defaultTickWidth = drawingDims[this.isXAxis ? "width" : "height"] / ticksInDomain.length;
+        var defaultTickWidth = Math.min(drawingDims[this.isXAxis ? "width" : "height"] / ticksInDomain.length);
         var stacks = fp_1.groupBy(function (s) { return s.stackIndex || fp_1.uniqueId("stackIndex"); })(barSeries);
         var partitionedStacks = fp_1.partition(function (stack) {
             return fp_1.compact(fp_1.map(fp_1.get("barWidth"))(stack)).length > 0;
@@ -97,7 +97,7 @@ var TimeAxis = /** @class */ (function () {
             return sum + stack[0].barWidth;
         }, config.outerBarPadding)(fixedWidthStacks);
         var variableBarWidth = variableWidthStacks.length > 0
-            ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
+            ? Math.min(Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length), config.maxBarWidthRatio * drawingDims[this.isXAxis ? "width" : "height"])
             : 0;
         requiredTickWidth = requiredTickWidth + variableBarWidth * variableWidthStacks.length;
         this.stateWriter("computedBars", this.computeBars(variableBarWidth, requiredTickWidth));
@@ -139,7 +139,7 @@ var TimeAxis = /** @class */ (function () {
         var offset = tickWidth / 2;
         return [
             (drawingDims.height || width) - offset,
-            offset + (margin("x2") || config[this.position].minTopOffsetTopTick)
+            offset + (margin("x2") || config[this.position].minTopOffsetTopTick),
         ];
     };
     TimeAxis.prototype.computeTickNumber = function (ticksInDomain, range) {
@@ -157,7 +157,8 @@ var TimeAxis = /** @class */ (function () {
             var tickInterval = Math.ceil(computed.ticksInDomain.length / computed.tickNumber || 1);
             return computed.scale.ticks(d3_time_1.timeMonday, tickInterval);
         }
-        return computed.scale.ticks(computed.tickNumber || 1);
+        var ticks = computed.scale.ticks(computed.tickNumber || 1);
+        return ticks.length > computed.ticksInDomain.length ? computed.ticksInDomain : ticks;
     };
     TimeAxis.prototype.computeAligned = function (computed) {
         this.previous = fp_1.cloneDeep(this.computed);
@@ -219,15 +220,15 @@ var TimeAxis = /** @class */ (function () {
         return {
             dx: this.isXAxis ? 0 : tickOffset,
             dy: this.isXAxis ? tickOffset : "0.35em",
-            text: tickFormatter(this.interval),
+            text: this.computed.tickFormatter,
             x: this.isXAxis ? this.computed.scale : 0,
-            y: this.isXAxis ? 0 : this.computed.scale
+            y: this.isXAxis ? 0 : this.computed.scale,
         };
     };
     TimeAxis.prototype.getStartAttributes = function (attributes) {
         return fp_1.defaults(attributes)({
             x: this.isXAxis ? this.previous.scale : 0,
-            y: this.isXAxis ? 0 : this.previous.scale
+            y: this.isXAxis ? 0 : this.previous.scale,
         });
     };
     TimeAxis.prototype.drawBorder = function () {
@@ -236,7 +237,7 @@ var TimeAxis = /** @class */ (function () {
             x1: 0,
             x2: this.isXAxis ? drawingDims.width : 0,
             y1: this.isXAxis ? 0 : drawingDims.height,
-            y2: 0
+            y2: 0,
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };

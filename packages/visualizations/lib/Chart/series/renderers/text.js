@@ -4,7 +4,7 @@ var fp_1 = require("lodash/fp");
 var styles = require("./styles");
 var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
-    size: function (series, d) { return 10; }
+    size: function (series, d) { return 10; },
 };
 var Text = /** @class */ (function () {
     function Text(state, events, el, data, options, series) {
@@ -88,7 +88,7 @@ var Text = /** @class */ (function () {
         return {
             x: function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) - offset : 0); },
             y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d) - offset); },
-            text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); }
+            text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); },
         };
     };
     Text.prototype.attributes = function () {
@@ -105,7 +105,7 @@ var Text = /** @class */ (function () {
         var attrs = {
             x: function (d) { return _this.xScale(d.x1 || _this.x(d)) + (_this.xIsBaseline ? barOffset : symbolOffset(d)); },
             y: function (d) { return _this.yScale(d.y1 || _this.y(d)) + (_this.xIsBaseline ? -symbolOffset(d) : barOffset); },
-            text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); }
+            text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); },
         };
         attrs.transform = function (d) { return "rotate(" + rotate + ", " + attrs.x(d) + ", " + attrs.y(d) + ")"; };
         return attrs;

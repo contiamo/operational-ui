@@ -4,7 +4,7 @@ import { MarathonEnvironment } from "../../Marathon"
 const StackedRenderer = {
   type: "stacked",
   stackAxis: "x",
-  renderAs: [{ type: "bars" }, { type: "text" }]
+  renderAs: [{ type: "bars" }, { type: "text" }],
 }
 
 const createData = () => {
@@ -18,12 +18,12 @@ const createData = () => {
               { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 14), y: undefined },
-              { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
+              { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
             ],
             xAttribute: "y",
             yAttribute: "x",
             name: "Users",
-            key: "series1"
+            key: "series1",
           },
           {
             data: [
@@ -33,28 +33,28 @@ const createData = () => {
               { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-              { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+              { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
             ],
             xAttribute: "y",
             yAttribute: "x",
             name: "New Users",
-            key: "series2"
-          }
+            key: "series2",
+          },
         ],
-        renderAs: [StackedRenderer]
-      }
+        renderAs: [StackedRenderer],
+      },
     ],
     axes: {
       y1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
-        interval: "day"
+        interval: "day",
       },
       x1: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 

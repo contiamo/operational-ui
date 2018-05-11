@@ -13,7 +13,7 @@ import {
   EventBus,
   Object,
   State,
-  StateWriter
+  StateWriter,
 } from "./typings"
 
 class AxesManager {
@@ -90,7 +90,9 @@ class AxesManager {
   }
 
   private priorityTimeAxis(): AxisPosition {
-    return find((axis: AxisPosition): boolean => this.axes[axis] && this.axes[axis].type === "time")(this.state.current.get("config").timeAxisPriority)
+    return find((axis: AxisPosition): boolean => this.axes[axis] && this.axes[axis].type === "time")(
+      this.state.current.get("config").timeAxisPriority
+    )
   }
 
   private drawAxes(orientation: "x" | "y"): void {

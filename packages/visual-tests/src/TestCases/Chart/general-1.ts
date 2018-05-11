@@ -2,21 +2,21 @@ import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const BarRenderer = {
-  type: "bars"
+  type: "bars",
 }
 
 const axes: any = {
   x1: {
-    type: "categorical"
+    type: "categorical",
   },
   y1: {
-    type: "quant"
-  }
+    type: "quant",
+  },
 }
 
 const data = {
   axes,
-  series: []
+  series: [],
 }
 
 const data1 = {
@@ -25,9 +25,9 @@ const data1 = {
     {
       key: "series1",
       data: [{ x: "Berlin", y: null }, { x: "Dortmund", y: null }, { x: "Bonn", y: null }, { x: "Cologne", y: null }],
-      renderAs: [BarRenderer]
-    }
-  ]
+      renderAs: [BarRenderer],
+    },
+  ],
 }
 
 const data2 = {
@@ -36,9 +36,9 @@ const data2 = {
     {
       key: "series1",
       data: [{ x: "Berlin", y: 0 }, { x: "Dortmund", y: 0 }, { x: "Bonn", y: 0 }, { x: "Cologne", y: 0 }],
-      renderAs: [BarRenderer]
-    }
-  ]
+      renderAs: [BarRenderer],
+    },
+  ],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {

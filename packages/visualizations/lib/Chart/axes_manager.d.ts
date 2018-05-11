@@ -17,6 +17,7 @@ declare class AxesManager {
     private create(position, options);
     private update(position, options);
     private setBaselines();
+    private priorityTimeAxis();
     private drawAxes(orientation);
     private onMarginsUpdated(isXAxis);
     updateRules(orientation: "x" | "y"): void;

@@ -2,7 +2,7 @@ import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const BarsRenderer = {
-  type: "bars"
+  type: "bars",
 }
 
 const data: any = {
@@ -13,13 +13,13 @@ const data: any = {
         { x: new Date(2018, 2, 12), y: 300 },
         { x: new Date(2018, 2, 13), y: 500 },
         { x: new Date(2018, 2, 14), y: undefined },
-        { x: new Date(2018, 2, 15), y: 200 }
+        { x: new Date(2018, 2, 15), y: 200 },
       ],
       xAttribute: "y",
       yAttribute: "x",
       name: "Pageviews",
       key: "series1",
-      renderAs: [BarsRenderer]
+      renderAs: [BarsRenderer],
     },
     {
       data: [
@@ -29,23 +29,23 @@ const data: any = {
         { x: new Date(2018, 2, 13), y: 425 },
         { x: new Date(2018, 2, 14), y: 570 },
         { x: new Date(2018, 2, 16), y: 234 },
-        { x: new Date(2018, 2, 17), y: 123 }
+        { x: new Date(2018, 2, 17), y: 123 },
       ],
       xAttribute: "y",
       yAttribute: "x",
       name: "Users",
       key: "series2",
-      renderAs: [BarsRenderer]
-    }
+      renderAs: [BarsRenderer],
+    },
   ],
   axes: {
     y1: {
-      type: "categorical"
+      type: "categorical",
     },
     x1: {
-      type: "quant"
-    }
-  }
+      type: "quant",
+    },
+  },
 }
 
 const createData = (renderers: any[]) => {
@@ -57,13 +57,13 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 14), y: undefined },
-          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
         ],
         xAttribute: "y",
         yAttribute: "x",
         name: "Pageviews 2018",
         key: "series1",
-        renderAs: renderers
+        renderAs: renderers,
       },
       {
         data: [
@@ -73,26 +73,26 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
           { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
         ],
         xAttribute: "y",
         yAttribute: "x",
         name: "Pageviews 2017",
         key: "series2",
-        renderAs: renderers
-      }
+        renderAs: renderers,
+      },
     ],
     axes: {
       y1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
-        interval: "day"
+        interval: "day",
       },
       x1: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 
@@ -120,10 +120,10 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       createData([
         {
           accessors: {
-            barWidth
+            barWidth,
           },
-          type: "bars"
-        }
+          type: "bars",
+        },
       ])
     )
     viz.draw()
@@ -137,10 +137,10 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         {
           accessors: {
             barWidth,
-            color
+            color,
           },
-          type: "bars"
-        }
+          type: "bars",
+        },
       ])
     )
     viz.draw()

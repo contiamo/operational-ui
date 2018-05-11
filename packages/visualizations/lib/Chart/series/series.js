@@ -3,10 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var renderer_1 = require("./renderer");
 var fp_1 = require("lodash/fp");
 var ChartSeries = /** @class */ (function () {
-    function ChartSeries(state, stateWriter, events, el, options) {
+    function ChartSeries(state, events, el, options) {
         this.renderers = [];
         this.state = state;
-        this.stateWriter = stateWriter;
         this.events = events;
         this.el = el;
         this.update(options);
@@ -31,7 +30,6 @@ var ChartSeries = /** @class */ (function () {
         var rendererTypes = fp_1.map(fp_1.get("type"))(this.renderAs());
         this.removeAllExcept(rendererTypes);
         fp_1.forEach(function (options) {
-            // @TODO typing
             var renderer = _this.get(options.type);
             renderer ? renderer.update(_this.options.data, options) : _this.addRenderer(options);
             if (options.type === "symbol") {
@@ -56,7 +54,7 @@ var ChartSeries = /** @class */ (function () {
     ChartSeries.prototype.dataForLegend = function () {
         return {
             color: this.legendColor(),
-            label: this.legendName()
+            label: this.legendName(),
         };
     };
     ChartSeries.prototype.dataForAxis = function (axis) {
@@ -75,13 +73,12 @@ var ChartSeries = /** @class */ (function () {
             return;
         }
         return {
-            // @TODO
             barWidth: barRenderer.barWidth(),
-            stackIndex: this.options.stackIndex
+            stackIndex: this.options.stackIndex,
         };
     };
-    ChartSeries.prototype.hasFlags = function () {
-        return !!this.get("flag");
+    ChartSeries.prototype.hasData = function () {
+        return !!this.data() && this.data().length > 0;
     };
     ChartSeries.prototype.draw = function () {
         fp_1.forEach(fp_1.invoke("draw"))(this.renderers);

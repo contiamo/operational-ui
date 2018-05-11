@@ -3,50 +3,50 @@ import { operational as theme } from "@operational/theme"
 
 const areaStyle = {
   "& path": {
-    opacity: "0.6"
+    opacity: "0.6",
   },
   "& path:hover": {
-    opacity: "0.8"
-  }
+    opacity: "0.8",
+  },
 }
 
 const barStyle = {
   "& rect": {
     opacity: 0.8,
-    shapeRendering: "crispedges"
+    shapeRendering: "crispedges",
   },
   "& rect:hover": {
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }
 
 const lineStyle = {
   "& path": {
     strokeWidth: 2,
-    fill: "none"
+    fill: "none",
   },
   "& path:hover": {
-    strokeWidth: 4
+    strokeWidth: 4,
   },
   "& path.dashed": {
-    strokeDasharray: "6, 4"
-  }
+    strokeDasharray: "6, 4",
+  },
 }
 
 const symbolStyle = {
   "& path": {
-    strokeWidth: "2px"
+    strokeWidth: "2px",
   },
   "& path:hover": {
-    strokeWidth: "3px"
-  }
+    strokeWidth: "3px",
+  },
 }
 
 const textStyle = {
   "& text": {
     fill: "#333",
-    fontFamily: theme.fontFamily
-  }
+    fontFamily: theme.fontFamily,
+  },
 }
 
 export const area = css(areaStyle).toString()

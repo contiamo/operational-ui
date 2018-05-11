@@ -8,7 +8,7 @@ import {
   curveMonotoneY,
   curveStep,
   curveStepAfter,
-  curveStepBefore
+  curveStepBefore,
 } from "d3-shape"
 import * as styles from "./styles"
 import {
@@ -25,7 +25,7 @@ import {
   RendererOptions,
   RendererType,
   SeriesAccessors,
-  State
+  State,
 } from "../../typings"
 
 export type Options = RendererOptions<LineRendererAccessors>
@@ -34,7 +34,7 @@ const defaultAccessors: Partial<LineRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   dashed: (series: Series, d: Datum) => false,
   interpolate: (series: Series, d: Datum) => "linear",
-  closeGaps: (series: Series, d: Datum) => true
+  closeGaps: (series: Series, d: Datum) => true,
 }
 
 const interpolator = {
@@ -44,7 +44,7 @@ const interpolator = {
   monotoneY: curveMonotoneY,
   step: curveStep,
   stepAfter: curveStepAfter,
-  stepBefore: curveStepBefore
+  stepBefore: curveStepBefore,
 }
 
 const hasValue = (d: any): boolean => {

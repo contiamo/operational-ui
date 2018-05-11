@@ -6,32 +6,32 @@ const tickStyle = {
   fontSize: "11px",
   fontFamily: theme.fontFamily,
   "&.weekend": {
-    fill: "#9d261d"
+    fill: "#9d261d",
   },
   "&.now": {
-    fill: "#71a934"
-  }
+    fill: "#71a934",
+  },
 }
 
 const xStyle = {
-  textAnchor: "middle"
+  textAnchor: "middle",
 }
 
 const y1Style = {
-  textAnchor: "end"
+  textAnchor: "end",
 }
 
 const y2Style = {
-  textAnchor: "start"
+  textAnchor: "start",
 }
 
 const borderStyle = {
   stroke: theme.colors.lightGray,
-  shapeRendering: "crispedges"
+  shapeRendering: "crispedges",
 }
 
 const componentRectStyle = {
-  fill: "#fff"
+  fill: "#fff",
 }
 
 const rulesStyle = {
@@ -39,8 +39,8 @@ const rulesStyle = {
   strokeWidth: "1",
   shapeRendering: "crispedges",
   "&.zero": {
-    strokeWidth: "2"
-  }
+    strokeWidth: "2",
+  },
 }
 
 export const tick = css(tickStyle).toString()

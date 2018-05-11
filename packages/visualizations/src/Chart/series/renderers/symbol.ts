@@ -8,7 +8,7 @@ import {
   symbolDiamond,
   symbolSquare,
   symbolStar,
-  symbolTriangle
+  symbolTriangle,
 } from "d3-shape"
 
 import {
@@ -21,39 +21,39 @@ import {
   RendererClass,
   RendererOptions,
   RendererType,
-  State
+  State,
 } from "../../typings"
 
 const defaultAccessors: Partial<SymbolRendererAccessors> = {
   fill: (series: Series, d: Datum) => "#fff",
   size: (series: Series, d: Datum) => 50,
   stroke: (series: Series, d: Datum) => series.legendColor(),
-  symbol: (series: Series, d: Datum) => "circle"
+  symbol: (series: Series, d: Datum) => "circle",
 }
 
 const symbolOptions: Object<any> = {
   circle: {
-    symbol: symbolCircle
+    symbol: symbolCircle,
   },
   cross: {
-    symbol: symbolCross
+    symbol: symbolCross,
   },
   diamond: {
-    symbol: symbolDiamond
+    symbol: symbolDiamond,
   },
   square: {
-    symbol: symbolSquare
+    symbol: symbolSquare,
   },
   squareDiamond: {
     symbol: symbolSquare,
-    rotation: 45
+    rotation: 45,
   },
   star: {
-    symbol: symbolStar
+    symbol: symbolStar,
   },
   triangle: {
-    symbol: symbolTriangle
-  }
+    symbol: symbolTriangle,
+  },
 }
 
 export type Options = RendererOptions<SymbolRendererAccessors>

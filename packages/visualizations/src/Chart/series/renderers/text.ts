@@ -12,14 +12,14 @@ import {
   RendererClass,
   RendererOptions,
   RendererType,
-  State
+  State,
 } from "../../typings"
 
 export type Options = RendererOptions<TextRendererAccessors>
 
 const defaultAccessors: Partial<TextRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
-  size: (series: Series, d: Datum) => 10
+  size: (series: Series, d: Datum) => 10,
 }
 
 class Text implements RendererClass<TextRendererAccessors> {
@@ -129,7 +129,7 @@ class Text implements RendererClass<TextRendererAccessors> {
     return {
       x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) - offset : 0),
       y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d) - offset),
-      text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString()
+      text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
     }
   }
 
@@ -147,7 +147,7 @@ class Text implements RendererClass<TextRendererAccessors> {
     const attrs: Object<any> = {
       x: (d: Datum): number => this.xScale(d.x1 || this.x(d)) + (this.xIsBaseline ? barOffset : symbolOffset(d)),
       y: (d: Datum): number => this.yScale(d.y1 || this.y(d)) + (this.xIsBaseline ? -symbolOffset(d) : barOffset),
-      text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString()
+      text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
     }
     attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
     return attrs

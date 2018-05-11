@@ -5,7 +5,7 @@ var styles = require("./styles");
 var d3_utils_1 = require("../../../utils/d3_utils");
 var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
-    barWidth: function (series, d) { return undefined; }
+    barWidth: function (series, d) { return undefined; },
 };
 var Bars = /** @class */ (function () {
     function Bars(state, events, el, data, options, series) {
@@ -62,14 +62,6 @@ var Bars = /** @class */ (function () {
     Bars.prototype.setAxisScales = function () {
         var _this = this;
         this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
-        var axisData = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
-        var axisTypes = fp_1.map(function (axis) { return axisData[axis].type; })([
-            this.series.xAxis(),
-            this.series.yAxis()
-        ]);
-        if (!fp_1.includes("quant")(axisTypes)) {
-            throw new Error("The bar renderer requires a quant axis.");
-        }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
         this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : d.x0 || 0); };
@@ -98,7 +90,7 @@ var Bars = /** @class */ (function () {
             y: this.xIsBaseline ? this.yScale(0) : this.y0,
             width: this.xIsBaseline ? attributes.width : 0,
             height: this.xIsBaseline ? 0 : attributes.height,
-            color: attributes.color
+            color: attributes.color,
         };
     };
     Bars.prototype.attributes = function () {
@@ -109,7 +101,7 @@ var Bars = /** @class */ (function () {
             y: this.y1,
             width: this.xIsBaseline ? barWidth : function (d) { return _this.x1(d) - _this.x0(d); },
             height: this.xIsBaseline ? function (d) { return _this.y0(d) - _this.y1(d); } : barWidth,
-            color: this.color.bind(this)
+            color: this.color.bind(this),
         };
     };
     return Bars;

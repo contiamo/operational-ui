@@ -21,18 +21,10 @@ var AxesManager = /** @class */ (function () {
         fp_1.forEach(this.drawAxes.bind(this))(["y", "x"]);
     };
     AxesManager.prototype.updateMargins = function () {
-        var _this = this;
-        var config = this.state.current.get("config");
         var computedMargins = this.state.current.get("computed").axes.onMarginsUpdated;
         if (!computedMargins) {
             this.stateWriter("margins", {});
         }
-        computedMargins = computedMargins || {};
-        fp_1.forEach(function (axis) {
-            if (!computedMargins[axis]) {
-                _this.stateWriter(["margins", axis], config[axis].margin + config.axisPaddingForFlags);
-            }
-        })(this.state.current.get("computed").series.axesWithFlags);
     };
     AxesManager.prototype.updateAxes = function () {
         this.stateWriter("previous", {});
@@ -48,6 +40,7 @@ var AxesManager = /** @class */ (function () {
         fp_1.forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions);
         this.setBaselines();
         this.stateWriter("requiredAxes", fp_1.keys(this.axes));
+        this.stateWriter("priorityTimeAxis", this.priorityTimeAxis());
     };
     AxesManager.prototype.createOrUpdate = function (options, position) {
         var data = this.state.current.get("computed").series.dataForAxes[position];
@@ -69,6 +62,10 @@ var AxesManager = /** @class */ (function () {
         var yType = (this.axes.y1 || this.axes.y2).type;
         var baseline = xType === "quant" && yType !== "quant" ? "y" : "x";
         this.stateWriter("baseline", baseline);
+    };
+    AxesManager.prototype.priorityTimeAxis = function () {
+        var _this = this;
+        return fp_1.find(function (axis) { return _this.axes[axis] && _this.axes[axis].type === "time"; })(this.state.current.get("config").timeAxisPriority);
     };
     AxesManager.prototype.drawAxes = function (orientation) {
         var axes = fp_1.pickBy(function (axis) {

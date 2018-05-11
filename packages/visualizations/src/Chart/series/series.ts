@@ -1,18 +1,5 @@
 import Renderer from "./renderer"
-import {
-  compact,
-  filter,
-  find,
-  flatten,
-  flow,
-  forEach,
-  get,
-  includes,
-  invoke,
-  map,
-  remove,
-  uniqBy
-} from "lodash/fp"
+import { compact, filter, find, flatten, flow, forEach, get, includes, invoke, map, remove, uniqBy } from "lodash/fp"
 import {
   BarsRendererAccessors,
   D3Selection,
@@ -24,7 +11,7 @@ import {
   RendererOptions,
   RendererType,
   SeriesAccessor,
-  State
+  State,
 } from "../typings"
 
 class ChartSeries {
@@ -108,7 +95,7 @@ class ChartSeries {
   dataForLegend(): LegendDatum {
     return {
       color: this.legendColor(),
-      label: this.legendName()
+      label: this.legendName(),
     }
   }
 
@@ -135,7 +122,7 @@ class ChartSeries {
 
     return {
       barWidth: (barRenderer as any).barWidth(),
-      stackIndex: this.options.stackIndex
+      stackIndex: this.options.stackIndex,
     }
   }
 

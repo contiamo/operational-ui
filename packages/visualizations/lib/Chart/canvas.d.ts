@@ -6,7 +6,6 @@ declare class ChartCanvas implements Canvas {
     private elements;
     private elMap;
     private events;
-    private mousePosition;
     private state;
     private stateWriter;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
@@ -25,9 +24,6 @@ declare class ChartCanvas implements Canvas {
     private insertAxes();
     private insertRules();
     private insertSeriesDrawingGroups();
-    private insertFocusElements();
-    private insertFocusLabel();
-    private insertComponentFocus();
     private insertClipPaths();
     private insertDrawingClip();
     private insertYRulesClip();

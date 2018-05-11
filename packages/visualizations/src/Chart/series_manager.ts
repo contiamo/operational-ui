@@ -14,7 +14,7 @@ import {
   sortBy,
   uniq,
   uniqBy,
-  uniqueId
+  uniqueId,
 } from "lodash/fp"
 import { stack as d3Stack } from "d3-shape"
 import Series from "./series/series"
@@ -29,9 +29,9 @@ import {
   SeriesData,
   SeriesManager,
   State,
-  StateWriter
+  StateWriter,
 } from "./typings"
-import { SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER } from "constants";
+import { SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER } from "constants"
 
 class ChartSeriesManager implements SeriesManager {
   el: D3Selection
@@ -61,10 +61,9 @@ class ChartSeriesManager implements SeriesManager {
 
   private prepareData(): void {
     const isHidden = this.state.current.get("accessors").series.hide
-    const data: SeriesData = flow(
-      omitBy(isHidden),
-      this.computeBarIndices.bind(this)
-    )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
+    const data: SeriesData = flow(omitBy(isHidden), this.computeBarIndices.bind(this))(
+      this.state.current.get("accessors").data.series(this.state.current.get("data"))
+    )
 
     const currentKeys: string[] = map((datum: Object<any>): string => this.key(datum))(data)
     this.removeAllExcept(currentKeys)
@@ -137,15 +136,17 @@ class ChartSeriesManager implements SeriesManager {
     const data: any = {
       top: {
         left: [],
-        right: []
+        right: [],
       },
       bottom: {
-        left: []
-      }
+        left: [],
+      },
     }
 
     forEach((series: Series): void => {
-      if (series.hideInLegend()) { return }
+      if (series.hideInLegend()) {
+        return
+      }
       data[series.legendPosition()][series.legendFloat()].push(series.dataForLegend())
     })(this.series)
 

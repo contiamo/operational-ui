@@ -27,7 +27,7 @@ exports.computeSteps = function (domain, range, spacing, minTicks) {
     return [
         Math.floor(domain[0] / step) * step,
         Math.ceil(domain[1] / step) * step,
-        step // step
+        step,
     ];
 };
 exports.computeTickNumber = function (range, tickSpacing, minTicks) {
@@ -54,7 +54,7 @@ exports.extentCushion = function (extent) {
     var distance = extent[1] - extent[0];
     return [
         extent[0] !== 0 ? extent[0] - 0.05 * distance : extent[0],
-        extent[1] !== 0 ? extent[1] + 0.05 * distance : extent[1]
+        extent[1] !== 0 ? extent[1] + 0.05 * distance : extent[1],
     ];
 };
 // Guess start, end from data

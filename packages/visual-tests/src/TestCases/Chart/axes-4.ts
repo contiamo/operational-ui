@@ -2,7 +2,7 @@ import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const LineRenderer = {
-  type: "line"
+  type: "line",
 }
 
 const data: any = {
@@ -13,11 +13,11 @@ const data: any = {
         { x: new Date(2018, 2, 12), y: 300 },
         { x: new Date(2018, 2, 13), y: 500 },
         { x: new Date(2018, 2, 14), y: 300 },
-        { x: new Date(2018, 2, 15), y: 200 }
+        { x: new Date(2018, 2, 15), y: 200 },
       ],
       name: "Pageviews 2018",
       key: "series1",
-      renderAs: [LineRenderer]
+      renderAs: [LineRenderer],
     },
     {
       data: [
@@ -25,31 +25,31 @@ const data: any = {
         { x: new Date(2017, 2, 11), y: 450 },
         { x: new Date(2017, 2, 12), y: 250 },
         { x: new Date(2017, 2, 13), y: 425 },
-        { x: new Date(2017, 2, 14), y: 570 }
+        { x: new Date(2017, 2, 14), y: 570 },
       ],
       name: "Pageviews 2017",
       xAxis: "x2",
       key: "series2",
-      renderAs: [LineRenderer]
-    }
+      renderAs: [LineRenderer],
+    },
   ],
   axes: {
     x1: {
       type: "time",
       start: new Date(2018, 2, 10),
       end: new Date(2018, 2, 15),
-      interval: "day"
+      interval: "day",
     },
     x2: {
       type: "time",
       start: new Date(2017, 2, 10),
       end: new Date(2017, 2, 15),
-      interval: "day"
+      interval: "day",
     },
     y1: {
-      type: "quant"
-    }
-  }
+      type: "quant",
+    },
+  },
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
@@ -65,7 +65,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       type: "time",
       start: new Date(2018, 2, 8),
       end: new Date(2018, 2, 17),
-      interval: "day"
+      interval: "day",
     }
     viz.data(data)
     viz.draw()

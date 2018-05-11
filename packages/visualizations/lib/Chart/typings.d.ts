@@ -4,7 +4,6 @@ export { Accessor, Accessors, ComponentConfigOptions, ComponentHoverPayload, Eve
 export interface XAxisConfig {
     margin: number;
     minTicks: number;
-    noAxisMargin: number;
     outerPadding: number;
     tickOffset: number;
     tickSpacing: number;
@@ -14,35 +13,13 @@ export interface YAxisConfig extends XAxisConfig {
 }
 export declare type FocusElement = string;
 export interface ChartConfig extends Config {
-    axisPaddingForFlags: number;
-    barLineThickness: number;
-    dateFocusLabelMargin: number;
-    durationCollapse: number;
-    durationRedraw: number;
-    elementFocusLabelMargin: number;
-    eventFlagAxisOffset: number;
-    flagHeight: number;
-    flagWidth: number;
-    focusElement?: FocusElement;
-    focusDateOptions: string[];
-    focusOnHover: boolean;
     innerBarPadding: number;
     innerBarPaddingCategorical: number;
     legend: boolean;
     maxBarWidthRatio: number;
-    maxLabelWidth: number;
-    maxLegendRatio: number;
-    maxLegendWidth: number;
-    minBarTickWidth: {
-        ord: number;
-    };
     minBarWidth: number;
-    minChartWithLegend: number;
-    minLegendWidth: number;
     numberFormatter: (x: number) => string;
     outerBarPadding: number;
-    showComponentFocus: boolean;
-    targetLineColor: string;
     textlabels: {
         offset: number;
         rotate: {
@@ -82,7 +59,7 @@ export declare type RangeRendererAccessors = LinearRendererAccessors;
 export interface SymbolRendererAccessors {
     stroke: RendererAccessor<string>;
     fill: RendererAccessor<string>;
-    symbol: RendererAccessor<string>;
+    symbol: RendererAccessor<any>;
     size: RendererAccessor<number>;
 }
 export interface TextRendererAccessors {
@@ -123,7 +100,6 @@ export interface SeriesAccessors {
     legendColor: SeriesAccessor<string>;
     legendName: SeriesAccessor<string>;
     renderAs: SeriesAccessor<RendererOptions<any>[]>;
-    unit: SeriesAccessor<string>;
     axis: SeriesAccessor<AxisPosition>;
     xAttribute: SeriesAccessor<string>;
     yAttribute: SeriesAccessor<string>;
@@ -144,6 +120,7 @@ export interface QuantAxisOptions {
     start?: number;
     end?: number;
     interval?: number;
+    unit?: string;
 }
 export interface CategoricalAxisOptions {
     type: string;
@@ -158,6 +135,7 @@ export interface AxisComputed {
     range: [number, number];
     scale: any;
     steps?: [number, number, number];
+    tickFormatter?: (d: any) => string;
     ticks: any[];
     ticksInDomain?: Date[];
     tickNumber?: number;
@@ -217,11 +195,15 @@ export interface DataForLegends {
 }
 export interface HoverPayload {
 }
+export declare type Focus = Focus<HoverPayload>;
 export interface Components {
     axes: any;
-    focus: Focus<HoverPayload>;
     legends: Legend;
 }
 export declare type ClipPath = "drawing_clip" | "yrules_clip" | "xyrules_clip";
 export declare type SeriesElements = [RendererType, ClipPath][];
 export declare type Facade = Facade<ChartConfig, AccessorsObject, Computed, Components, Data>;
+export interface MousePosition {
+    x: number;
+    y: number;
+}

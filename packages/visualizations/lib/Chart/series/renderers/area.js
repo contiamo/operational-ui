@@ -10,12 +10,12 @@ var interpolator = {
     monotoneY: d3_shape_1.curveMonotoneY,
     step: d3_shape_1.curveStep,
     stepAfter: d3_shape_1.curveStepAfter,
-    stepBefore: d3_shape_1.curveStepBefore
+    stepBefore: d3_shape_1.curveStepBefore,
 };
 var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
     interpolate: function (series, d) { return "linear"; },
-    closeGaps: function (series, d) { return true; }
+    closeGaps: function (series, d) { return true; },
 };
 var hasValue = function (d) {
     return !!d || d === 0;
@@ -42,7 +42,6 @@ var Area = /** @class */ (function () {
         var _this = this;
         this.setAxisScales();
         this.addMissingData();
-        this.updateClipPath();
         var duration = this.state.current.get("config").duration;
         var data = fp_1.sortBy(function (d) { return (_this.xIsBaseline ? _this.x(d) : _this.y(d)); })(this.data);
         var area = this.el.selectAll("path.main").data([data]);
@@ -55,8 +54,7 @@ var Area = /** @class */ (function () {
             .attr("fill", this.color.bind(this))
             .transition()
             .duration(duration)
-            .attr("d", this.path.bind(this))
-            .attr("clip-path", "url(#area-clip-" + this.series.key() + ")");
+            .attr("d", this.path.bind(this));
         area
             .exit()
             .transition()
@@ -77,38 +75,9 @@ var Area = /** @class */ (function () {
     Area.prototype.appendSeriesGroup = function (el) {
         return el.append("g").attr("class", "series:" + this.series.key() + " " + styles.area);
     };
-    Area.prototype.updateClipPath = function () {
-        var duration = this.state.current.get("config").duration;
-        var data = this.series.options.clipData ? [this.series.options.clipData] : [];
-        var clip = this.el.selectAll("clipPath path").data(data);
-        clip
-            .enter()
-            .append("svg:clipPath")
-            .attr("id", "area-clip-" + this.series.key())
-            .append("svg:path")
-            .attr("d", this.startClipPath.bind(this))
-            .merge(clip)
-            .transition()
-            .duration(duration)
-            .attr("d", this.clipPath.bind(this));
-        clip
-            .exit()
-            .transition()
-            .duration(duration)
-            .attr("d", this.startClipPath.bind(this))
-            .remove();
-    };
     Area.prototype.setAxisScales = function () {
         var _this = this;
         this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
-        var axisData = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
-        var axisTypes = fp_1.map(function (axis) { return axisData[axis].type; })([
-            this.series.xAxis(),
-            this.series.yAxis()
-        ]);
-        if (fp_1.difference(axisTypes)(["time", "quant"]).length > 0) {
-            throw new Error("The area renderer is incompatible with a " + axisTypes[0] + " and a " + axisTypes[1] + " axis.");
-        }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
         this.x0 = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : aOrB(d.x0, 0)); };
@@ -154,24 +123,6 @@ var Area = /** @class */ (function () {
             .x0(this.x0)
             .x1(this.x1)
             .y0(this.y0)
-            .y1(this.y1)
-            .curve(this.interpolate())
-            .defined(this.isDefined.bind(this))(data);
-    };
-    Area.prototype.startClipPath = function (data) {
-        var _this = this;
-        return d3_shape_1.area()
-            .x(function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : 0); })
-            .y(function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d)); })
-            .curve(this.interpolate())
-            .defined(this.isDefined.bind(this))(data);
-    };
-    Area.prototype.clipPath = function (data) {
-        var _this = this;
-        return d3_shape_1.area()
-            .x0(this.xIsBaseline ? this.x0 : this.xScale.range()[1])
-            .x1(this.x1)
-            .y0(function (d) { return (_this.xIsBaseline ? 0 : _this.y0(d)); })
             .y1(this.y1)
             .curve(this.interpolate())
             .defined(this.isDefined.bind(this))(data);

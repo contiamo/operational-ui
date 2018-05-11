@@ -1,5 +1,5 @@
 import Renderer from "./renderer";
-import { AxisPosition, D3Selection, Datum, EventBus, LegendDatum, Object, RendererOptions, State, StateWriter } from "../typings";
+import { D3Selection, Datum, EventBus, LegendDatum, Object, RendererOptions, State } from "../typings";
 declare class ChartSeries {
     el: D3Selection;
     events: EventBus;
@@ -7,7 +7,6 @@ declare class ChartSeries {
     options: Object<any>;
     renderers: Renderer[];
     state: any;
-    stateWriter: StateWriter;
     data: () => Datum[] | Object<any>[];
     hide: () => boolean;
     hideInLegend: () => boolean;
@@ -16,15 +15,13 @@ declare class ChartSeries {
     legendName: () => string;
     renderAs: () => RendererOptions<any>[];
     symbolOffset: (d: Datum) => number;
-    unit: () => string;
-    axis: () => AxisPosition;
     xAxis: () => "x1" | "x2";
     yAxis: () => "y1" | "y2";
     xAttribute: () => string;
     yAttribute: () => string;
     x: (d: Datum) => number | string | Date;
     y: (d: Datum) => number | string | Date;
-    constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, options: Object<any>);
+    constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>);
     update(options: Object<any>): void;
     assignAccessors(): void;
     private updateRenderers();
@@ -37,7 +34,7 @@ declare class ChartSeries {
     legendPosition(): "top" | "bottom";
     legendFloat(): "left" | "right";
     getBarsInfo(): Object<any>;
-    hasFlags(): boolean;
+    hasData(): boolean;
     draw(): void;
     private close();
 }

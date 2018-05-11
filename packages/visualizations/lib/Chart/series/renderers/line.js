@@ -7,7 +7,7 @@ var defaultAccessors = {
     color: function (series, d) { return series.legendColor(); },
     dashed: function (series, d) { return false; },
     interpolate: function (series, d) { return "linear"; },
-    closeGaps: function (series, d) { return true; }
+    closeGaps: function (series, d) { return true; },
 };
 var interpolator = {
     cardinal: d3_shape_1.curveCardinal,
@@ -16,7 +16,7 @@ var interpolator = {
     monotoneY: d3_shape_1.curveMonotoneY,
     step: d3_shape_1.curveStep,
     stepAfter: d3_shape_1.curveStepAfter,
-    stepBefore: d3_shape_1.curveStepBefore
+    stepBefore: d3_shape_1.curveStepBefore,
 };
 var hasValue = function (d) {
     return !!d || d === 0;
@@ -89,14 +89,6 @@ var Line = /** @class */ (function () {
     Line.prototype.setAxisScales = function () {
         var _this = this;
         this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
-        var axisData = this.state.current.get("accessors").data.axes(this.state.current.get("data"));
-        var axisTypes = fp_1.map(function (axis) { return axisData[axis].type; })([
-            this.series.xAxis(),
-            this.series.yAxis()
-        ]);
-        if (fp_1.difference(axisTypes)(["time", "quant"]).length > 0) {
-            throw new Error("The line renderer is incompatible with a " + axisTypes[0] + " and a " + axisTypes[1] + " axis.");
-        }
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
         this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale;
         this.adjustedX = function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : aOrB(d.x1, _this.x(d))); };

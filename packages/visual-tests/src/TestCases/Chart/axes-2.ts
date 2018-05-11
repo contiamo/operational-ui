@@ -3,16 +3,16 @@ import { MarathonEnvironment } from "../../Marathon"
 
 const LineRenderer = {
   accessors: {
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneX",
   },
-  type: "line"
+  type: "line",
 }
 
 const AreaRenderer = {
   accessors: {
-    interpolate: () => "monotoneX"
+    interpolate: () => "monotoneX",
   },
-  type: "area"
+  type: "area",
 }
 
 const data: any = {
@@ -21,11 +21,11 @@ const data: any = {
       type: "time",
       start: new Date(2018, 2, 1),
       end: new Date(2018, 2, 15),
-      interval: "day"
+      interval: "day",
     },
     y1: {
-      type: "quant"
-    }
+      type: "quant",
+    },
   },
   series: [
     {
@@ -45,11 +45,11 @@ const data: any = {
         { x: new Date(2018, 2, 12), y: 260 },
         { x: new Date(2018, 2, 13), y: 220 },
         { x: new Date(2018, 2, 14), y: 220 },
-        { x: new Date(2018, 2, 15), y: 220 }
+        { x: new Date(2018, 2, 15), y: 220 },
       ],
-      renderAs: [LineRenderer, AreaRenderer]
-    }
-  ]
+      renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
 }
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
@@ -63,7 +63,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined start", () => {
     data.axes.y1 = {
       type: "quant",
-      start: 75
+      start: 75,
     }
     viz.data(data)
     viz.draw()
@@ -72,7 +72,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined end", () => {
     data.axes.y1 = {
       type: "quant",
-      end: 375
+      end: 375,
     }
     viz.data(data)
     viz.draw()
@@ -82,7 +82,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     data.axes.y1 = {
       type: "quant",
       start: 75,
-      end: 375
+      end: 375,
     }
     viz.data(data)
     viz.draw()
@@ -91,7 +91,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined interval", () => {
     data.axes.y1 = {
       type: "quant",
-      interval: 30
+      interval: 30,
     }
     viz.data(data)
     viz.draw()
@@ -101,7 +101,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     data.axes.y1 = {
       type: "quant",
       interval: 30,
-      start: 75
+      start: 75,
     }
     viz.data(data)
     viz.draw()
@@ -111,7 +111,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     data.axes.y1 = {
       type: "quant",
       interval: 30,
-      end: 375
+      end: 375,
     }
     viz.data(data)
     viz.draw()
@@ -122,7 +122,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       type: "quant",
       interval: 30,
       start: 75,
-      end: 375
+      end: 375,
     }
     viz.data(data)
     viz.draw()

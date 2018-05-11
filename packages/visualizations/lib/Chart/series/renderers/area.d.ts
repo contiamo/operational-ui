@@ -27,14 +27,11 @@ declare class Area implements RendererClass<AreaRendererAccessors> {
     close(): void;
     dataForAxis(axis: "x" | "y"): any[];
     private appendSeriesGroup(el);
-    private updateClipPath();
     private setAxisScales();
     private assignAccessors(customAccessors);
     private addMissingData();
     private isDefined(d);
     private startPath(data);
     private path(data);
-    private startClipPath(data);
-    private clipPath(data);
 }
 export default Area;

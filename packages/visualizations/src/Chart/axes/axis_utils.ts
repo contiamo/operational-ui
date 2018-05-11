@@ -8,7 +8,7 @@ import {
   Object,
   Partial,
   XAxisConfig,
-  YAxisConfig
+  YAxisConfig,
 } from "../typings"
 import { compact, flow, forEach, get, includes, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
@@ -179,7 +179,7 @@ export const positionBackgroundRect = (el: any, duration: number): void => {
       x: group.left - rect.left,
       y: group.top - rect.top,
       width: group.width,
-      height: group.height
+      height: group.height,
     })
   }, duration)
 }

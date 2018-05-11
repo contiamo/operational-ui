@@ -17,7 +17,6 @@ var QuantAxis = /** @class */ (function () {
         this.position = position;
         this.isXAxis = position[0] === "x";
         this.el = axis_utils_1.insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims);
-        // this.el.on("mouseenter", this.onComponentHover(this))
     }
     // Quant axis only supports finite numbers
     QuantAxis.prototype.validate = function (value) {
@@ -27,6 +26,7 @@ var QuantAxis = /** @class */ (function () {
         this.start = options.start;
         this.end = options.end;
         this.interval = options.interval;
+        this.unit = options.unit;
     };
     QuantAxis.prototype.update = function (options, data) {
         this.updateOptions(options);
@@ -149,13 +149,13 @@ var QuantAxis = /** @class */ (function () {
             dy: this.isXAxis ? tickOffset : "-0.4em",
             text: this.tickFormatter(),
             x: this.isXAxis ? this.computed.scale : 0,
-            y: this.isXAxis ? 0 : this.computed.scale
+            y: this.isXAxis ? 0 : this.computed.scale,
         };
     };
     QuantAxis.prototype.getStartAttributes = function (attributes) {
         return fp_1.defaults(attributes)({
             x: this.isXAxis ? this.previous.scale : 0,
-            y: this.isXAxis ? 0 : this.previous.scale
+            y: this.isXAxis ? 0 : this.previous.scale,
         });
     };
     QuantAxis.prototype.drawBorder = function () {
@@ -164,7 +164,7 @@ var QuantAxis = /** @class */ (function () {
             x1: 0,
             x2: this.isXAxis ? drawingDims.width : 0,
             y1: this.isXAxis ? 0 : drawingDims.height,
-            y2: 0
+            y2: 0,
         };
         this.el.select("line." + styles.border).call(d3_utils_1.setLineAttributes, border);
     };

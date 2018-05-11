@@ -10,13 +10,13 @@ var seriesElements = [
     ["flag", "xyrules_clip"],
     ["line", "drawing_clip"],
     ["symbol", "xyrules_clip"],
-    ["text", "yrules_clip"]
+    ["text", "yrules_clip"],
 ];
 var axes = ["y", "x"];
 var legends = [
     { position: "top", float: "left" },
     { position: "top", float: "right" },
-    { position: "bottom", float: "left" }
+    { position: "bottom", float: "left" },
 ];
 var ChartCanvas = /** @class */ (function () {
     function ChartCanvas(state, stateWriter, events, context) {
@@ -35,7 +35,6 @@ var ChartCanvas = /** @class */ (function () {
         this.insertAxes();
         this.insertRules();
         this.insertSeriesDrawingGroups();
-        this.insertFocusElements();
         this.stateWriter("elements", this.elements);
         this.events.on("margins:update", function (isXAxis) {
             _this.draw();
@@ -51,6 +50,7 @@ var ChartCanvas = /** @class */ (function () {
         container.addEventListener("click", this.onClick.bind(this));
         return d3.select(container).attr("class", styles.chartContainer);
     };
+    // Event listeners
     ChartCanvas.prototype.onMouseEnter = function () {
         this.events.emit(event_catalog_1.default.CHART.HOVER);
     };
@@ -146,25 +146,6 @@ var ChartCanvas = /** @class */ (function () {
             return memo;
         }, {})(seriesElements);
     };
-    // Focus elements
-    ChartCanvas.prototype.insertFocusElements = function () {
-        this.elMap.focus = this.insertFocusLabel();
-        this.elMap.componentFocus = this.insertComponentFocus();
-    };
-    ChartCanvas.prototype.insertFocusLabel = function () {
-        var focusEl = d3
-            .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", "" + styles.focusLegend)
-            .style("visibility", "hidden");
-        this.chartContainer.node().appendChild(focusEl.node());
-        return focusEl;
-    };
-    ChartCanvas.prototype.insertComponentFocus = function () {
-        var focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus");
-        var ref = this.chartContainer.node();
-        ref.insertBefore(focusEl.node(), ref.nextSibling);
-        return focusEl;
-    };
     // Clip paths
     ChartCanvas.prototype.insertClipPaths = function () {
         this.elements.defs = this.el.append("defs");
@@ -209,7 +190,7 @@ var ChartCanvas = /** @class */ (function () {
         var config = this.state.current.get("config");
         this.stateWriter("drawingContainerDims", {
             height: config.height - this.totalLegendHeight(),
-            width: config.width
+            width: config.width,
         });
     };
     ChartCanvas.prototype.calculateDrawingDims = function () {
@@ -217,7 +198,7 @@ var ChartCanvas = /** @class */ (function () {
             .drawingContainerDims;
         this.stateWriter("drawingDims", {
             width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
-            height: drawingContainerDims.height - this.margin("x1") - this.margin("x2")
+            height: drawingContainerDims.height - this.margin("x1") - this.margin("x2"),
         });
     };
     // Lifecycle

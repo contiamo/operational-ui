@@ -19,7 +19,7 @@ import {
   sortBy,
   uniq,
   uniqueId,
-  values
+  values,
 } from "lodash/fp"
 import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
@@ -40,7 +40,7 @@ import {
   State,
   StateWriter,
   XAxisConfig,
-  YAxisConfig
+  YAxisConfig,
 } from "../typings"
 
 class CategoricalAxis implements AxisClass<string> {
@@ -87,7 +87,7 @@ class CategoricalAxis implements AxisClass<string> {
       scale: scaleBand()
         .range(range)
         .domain(this.data)
-        .padding(config.innerBarPaddingCategorical)
+        .padding(config.innerBarPaddingCategorical),
     }
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
@@ -159,7 +159,7 @@ class CategoricalAxis implements AxisClass<string> {
         ? [0, width || computed.canvas.drawingDims.width]
         : [
             computed.canvas.drawingDims.height || width,
-            margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick
+            margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick,
           ]
 
     const adjustedRange: [number, number] = [range[0] + offset, range[1] + offset]
@@ -219,7 +219,7 @@ class CategoricalAxis implements AxisClass<string> {
       dy: this.isXAxis ? tickOffset : "0.35em",
       text: identity,
       x: this.isXAxis ? scaleWithOffset : 0,
-      y: this.isXAxis ? 0 : scaleWithOffset
+      y: this.isXAxis ? 0 : scaleWithOffset,
     }
   }
 
@@ -227,7 +227,7 @@ class CategoricalAxis implements AxisClass<string> {
     const scaleWithOffset = this.scaleWithOffset(this.previous)
     return defaults({
       x: this.isXAxis ? scaleWithOffset : 0,
-      y: this.isXAxis ? 0 : scaleWithOffset
+      y: this.isXAxis ? 0 : scaleWithOffset,
     })(attributes)
   }
 
@@ -254,7 +254,7 @@ class CategoricalAxis implements AxisClass<string> {
       x1: 0,
       x2: this.isXAxis ? drawingDims.width : 0,
       y1: this.isXAxis ? 0 : drawingDims.height,
-      y2: 0
+      y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
   }

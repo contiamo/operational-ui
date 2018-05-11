@@ -21,8 +21,8 @@
   "devDependencies": {
     "@types/jest": "^22.1.4",
     "@types/node": "9.6.7",
-    "@types/react": "16.3.13",
-    "@types/react-dom": "16.0.5",
+    "@types/react": "^16.3.13",
+    "@types/react-dom": "^16.0.5",
     "parcel-bundler": "^1.8.1",
     "prettier": "1.12.1",
     "tslint": "5.9.1",

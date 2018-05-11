@@ -13,16 +13,12 @@ declare class ChartSeriesManager implements SeriesManager {
     assignData(): void;
     private prepareData();
     private computeBarIndices(data);
-    private handleGroupedSeries(type, compute);
-    private computeStack(stack, index);
-    private computeRange(range, index);
     private get(key);
     private remove(key);
     private removeAllExcept(keys);
     private dataForLegends();
     private dataForAxes();
     private barSeries();
-    private axesWithFlags();
     private create(options);
     draw(): void;
 }

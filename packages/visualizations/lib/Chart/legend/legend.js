@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var event_catalog_1 = require("../../utils/event_catalog");
 var d3 = require("d3-selection");
 var fp_1 = require("lodash/fp");
-var globalStyles = require("../../utils/styles");
+var styles = require("../../utils/styles");
 var d3_utils_1 = require("../../utils/d3_utils");
 var ChartLegend = /** @class */ (function () {
     function ChartLegend(state, stateWriter, events, el) {
@@ -22,14 +21,13 @@ var ChartLegend = /** @class */ (function () {
             return;
         }
         this.el.attr("visibility", "visible");
-        var legends = this.el.selectAll("div." + globalStyles.seriesLegend).data(this.data, fp_1.get("label"));
+        var legends = this.el.selectAll("div." + styles.seriesLegend).data(this.data, fp_1.get("label"));
         legends.exit().remove();
         legends
             .enter()
             .append("div")
-            .attr("class", globalStyles.seriesLegend)
+            .attr("class", styles.seriesLegend)
             .style("float", "left")
-            .on("mouseenter", d3_utils_1.withD3Element(this.onComponentHover.bind(this)))
             .each(d3_utils_1.withD3Element(function (d, el) {
             var element = d3.select(el);
             element.append("div").attr("class", "color");
@@ -44,15 +42,6 @@ var ChartLegend = /** @class */ (function () {
     };
     ChartLegend.prototype.setWidth = function (width) {
         this.el.style("width", width);
-    };
-    ChartLegend.prototype.onComponentHover = function (d, el) {
-        this.events.emit(event_catalog_1.default.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) });
-    };
-    ChartLegend.prototype.currentOptions = function (datum) {
-        return {
-            options: datum,
-            type: "series"
-        };
     };
     ChartLegend.prototype.remove = function () {
         this.el.node().innerHTML = "";

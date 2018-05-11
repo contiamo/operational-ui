@@ -6,7 +6,7 @@ var fp_1 = require("lodash/fp");
 var legendOptions = [
     { position: "top", float: "left" },
     { position: "top", float: "right" },
-    { position: "bottom", float: "left" }
+    { position: "bottom", float: "left" },
 ];
 var LegendManager = /** @class */ (function () {
     function LegendManager(state, stateWriter, events, els) {
