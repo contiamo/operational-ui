@@ -9,17 +9,10 @@ import * as axes5 from "./axes-5"
 import * as axes6 from "./axes-6"
 import * as area1 from "./area-1"
 import * as area2 from "./area-2"
-import * as area3 from "./area-3"
-import * as area4 from "./area-4"
 import * as bars1 from "./bars-1"
 import * as bars2 from "./bars-2"
-import * as bars3 from "./bars-3"
-import * as bars4 from "./bars-4"
-import * as flag1 from "./flag-1"
 import * as symbol1 from "./symbol-1"
 import * as symbol2 from "./symbol-2"
-import * as range1 from "./range-1"
-import * as range2 from "./range-2"
 
 export default [
   general1,
@@ -33,15 +26,8 @@ export default [
   axes6,
   area1,
   area2,
-  area3,
-  area4,
   bars1,
   bars2,
-  bars3,
-  bars4,
-  flag1,
   symbol1,
   symbol2,
-  range1,
-  range2,
 ]
