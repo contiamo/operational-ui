@@ -20,11 +20,11 @@ Breakdowns are a means of representing aggregated data in a way that should be r
 
 ## Props
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| number | A number by which the breakdown is represented. | number | - | No |
-| label | A statistic number label within the bar of the breakdown | string | - | No |
-| fill | The percentage to fill the bar. This is typically passed in from a container component that calculates percentages at large. | number | - | No |
-| color | A theme palette color name, or a hex code that the bar will be colored with. | string | *info* | Yes |
-| icon | An icon that is displayed on the breakdown | string | - | Yes |
-| onMouseEnter/onMouseLeave | Functions that are invoked when the mouse enters and/or leaves the breakdown. Useful for tooltips/infowindows | func | - | Yes |
+| Name                      | Description                                                                                                                  | Type   | Default | Required |
+| :------------------------ | :--------------------------------------------------------------------------------------------------------------------------- | :----- | :------ | :------- |
+| number                    | A number by which the breakdown is represented.                                                                              | number | -       | No       |
+| label                     | A statistic number label within the bar of the breakdown                                                                     | string | -       | No       |
+| fill                      | The percentage to fill the bar. This is typically passed in from a container component that calculates percentages at large. | number | -       | No       |
+| color                     | A theme palette color name, or a hex code that the bar will be colored with.                                                 | string | _info_  | Yes      |
+| icon                      | An icon that is displayed on the breakdown                                                                                   | string | -       | Yes      |
+| onMouseEnter/onMouseLeave | Functions that are invoked when the mouse enters and/or leaves the breakdown. Useful for tooltips/infowindows                | func   | -       | Yes      |

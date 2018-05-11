@@ -2,6 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var theme_1 = require("@operational/theme");
 exports.operationalTheme = theme_1.operational;
+var Avatar_1 = require("./Avatar");
+exports.Avatar = Avatar_1.default;
+var AvatarGroup_1 = require("./AvatarGroup");
+exports.AvatarGroup = AvatarGroup_1.default;
 var Breadcrumb_1 = require("./Breadcrumb");
 exports.Breadcrumb = Breadcrumb_1.default;
 var Breadcrumbs_1 = require("./Breadcrumbs");
