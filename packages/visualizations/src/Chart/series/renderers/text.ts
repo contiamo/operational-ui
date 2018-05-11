@@ -76,6 +76,7 @@ class Text implements RendererClass<TextRendererAccessors> {
       .attr("y", startAttributes.y)
       .style("font-size", `${this.size()}px`)
       .text(startAttributes.text)
+      .attr("transform", startAttributes.transform)
       .merge(text)
       .transition()
       .duration(duration)
@@ -126,11 +127,17 @@ class Text implements RendererClass<TextRendererAccessors> {
     const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
     const offset: number =
       computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
-    return {
+    const rotate: number = this.state.current.get("config").textlabels.rotate[
+      this.xIsBaseline ? "vertical" : "horizontal"
+    ]
+
+    const attrs: Object<any> = {
       x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) - offset : 0),
       y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d) - offset),
       text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
     }
+    attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
+    return attrs
   }
 
   private attributes(): Object<any> {

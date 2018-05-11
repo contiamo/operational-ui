@@ -41,6 +41,7 @@ var Text = /** @class */ (function () {
             .attr("y", startAttributes.y)
             .style("font-size", this.size() + "px")
             .text(startAttributes.text)
+            .attr("transform", startAttributes.transform)
             .merge(text)
             .transition()
             .duration(duration)
@@ -85,11 +86,14 @@ var Text = /** @class */ (function () {
         var _this = this;
         var computedBars = this.state.current.get("computed").axes.computedBars;
         var offset = computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0;
-        return {
+        var rotate = this.state.current.get("config").textlabels.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
+        var attrs = {
             x: function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) - offset : 0); },
             y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d) - offset); },
             text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); },
         };
+        attrs.transform = function (d) { return "rotate(" + rotate + ", " + attrs.x(d) + ", " + attrs.y(d) + ")"; };
+        return attrs;
     };
     Text.prototype.attributes = function () {
         var _this = this;
