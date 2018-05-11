@@ -17,7 +17,8 @@ deploy() {
   git branch -D gh-pages
   git checkout --orphan gh-pages
   rm -rf scripts docs 
-  cp -a dist/**/* .
+  cp -a dist/* .
+  mv dist/visual-tests .
   rm -rf dist
   git add .
   git commit -m "Deploy Commit: ${COMMIT_HASH}" --no-verify
