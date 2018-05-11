@@ -1,5 +1,4 @@
-import * as avatar from "./Avatar"
-import * as avatarCollection from "./AvatarCollection"
+import * as avatars from "./Avatars"
 import * as breadcrumbs from "./Breadcrumbs"
 import * as buttons from "./Buttons"
 import * as checkboxes from "./Checkboxes"
@@ -28,8 +27,7 @@ import * as tooltips from "./Tooltips"
 import * as typography from "./Typography"
 
 export default [
-  avatar,
-  avatarCollection,
+  avatars,
   breadcrumbs,
   buttons,
   checkboxes,

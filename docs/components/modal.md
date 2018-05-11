@@ -20,15 +20,15 @@ class ContentWithModal extends React.Component {
               }))
             }}
           >
-            <div style={{ width: 300, height: 240 }}>
-              Hello
-            </div>
+            <div style={{ width: 300, height: 240 }}>Hello</div>
           </Modal>
         ) : null}
         <Button
           color="info"
           onClick={ev => {
-            this.setState(prevState => ({ isModalOpen: !prevState.isModalOpen }))
+            this.setState(prevState => ({
+              isModalOpen: !prevState.isModalOpen
+            }))
           }}
         >
           Expand your modal!
@@ -41,8 +41,8 @@ class ContentWithModal extends React.Component {
 
 ## Props
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| childCss | Glamor CSS object passed down to the container's immediate child, which holds the content. Use to specify/override styles | string | - | Yes |
-| childClassName | Class name for the modal container's immediate child, which holds the content. Use to specify/override styles. | string | - | Yes |
-| onClose | Callback called when the modal is closed (outside area is clicked). | string | - | Yes |
+| Name           | Description                                                                                                               | Type   | Default | Required |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------ | :----- | :------ | :------- |
+| childCss       | Glamor CSS object passed down to the container's immediate child, which holds the content. Use to specify/override styles | string | -       | Yes      |
+| childClassName | Class name for the modal container's immediate child, which holds the content. Use to specify/override styles.            | string | -       | Yes      |
+| onClose        | Callback called when the modal is closed (outside area is clicked).                                                       | string | -       | Yes      |

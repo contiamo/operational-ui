@@ -6,7 +6,9 @@ Breadcrumbs are typically a series of links showing the path to a particular pag
 
 ```js
 <Breadcrumbs>
-  <a href="http://home.com"><Breadcrumb>Home</Breadcrumb></a>
+  <a href="http://home.com">
+    <Breadcrumb>Home</Breadcrumb>
+  </a>
   <Breadcrumb>Page 1</Breadcrumb>
   <Breadcrumb>Subpage 1</Breadcrumb>
 </Breadcrumbs>
@@ -16,7 +18,7 @@ Breadcrumbs are typically a series of links showing the path to a particular pag
 
 ```js
 <Breadcrumbs>
-  <ContextMenu css={{display: "inline-block", margin: 0}}>
+  <ContextMenu css={{ display: "inline-block", margin: 0 }}>
     <Breadcrumb icon="ChevronDown">Hello</Breadcrumb>
     <ContextMenuItem>Item 1</ContextMenuItem>
     <ContextMenuItem>Item 2</ContextMenuItem>
@@ -28,6 +30,6 @@ Breadcrumbs are typically a series of links showing the path to a particular pag
 
 ## Props
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| children | Child elements, typically <Breadcrumb> | ReactElement | null | Yes |
+| Name     | Description                            | Type         | Default | Required |
+| :------- | :------------------------------------- | :----------- | :------ | :------- |
+| children | Child elements, typically <Breadcrumb> | ReactElement | null    | Yes      |

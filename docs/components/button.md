@@ -33,17 +33,19 @@ Buttons can be condensed, and further grouped to achieve, among other things, th
 ```js
 <ButtonGroup>
   <Button condensed>1</Button>
-  <Button condensed color="success">2</Button>
+  <Button condensed color="success">
+    2
+  </Button>
   <Button condensed>3</Button>
 </ButtonGroup>
 ```
 
 ## Props
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| color | What color of button would you like? It can be a hex value or a named theme color. | string | white | Yes |
-| onClick | What happens when the button is clicked? | func |  | Yes |
-| active | Active state. | boolean |  | Yes |
-| condensed | Condensed option | boolean |  | Yes |
-| disabled | Disabled option | boolean |  | No |
+| Name      | Description                                                                        | Type    | Default | Required |
+| :-------- | :--------------------------------------------------------------------------------- | :------ | :------ | :------- |
+| color     | What color of button would you like? It can be a hex value or a named theme color. | string  | white   | Yes      |
+| onClick   | What happens when the button is clicked?                                           | func    |         | Yes      |
+| active    | Active state.                                                                      | boolean |         | Yes      |
+| condensed | Condensed option                                                                   | boolean |         | Yes      |
+| disabled  | Disabled option                                                                    | boolean |         | No       |

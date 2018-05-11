@@ -27,9 +27,9 @@ class ComponentWithDatePicker extends React.Component {
 
 ## Props
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| start | Start date in the format 2012-10-01. | string | - | Yes |
-| end | End date in the format 2012-10-01. | string | - | Yes |
-| onChange | Triggered every time the start or end dates change. | (change: {start: string, end: string}) => void | - | Yes |
-| placeholder | Placeholder text when no dates selected | string |  | Yes |
+| Name        | Description                                         | Type                                           | Default | Required |
+| :---------- | :-------------------------------------------------- | :--------------------------------------------- | :------ | :------- |
+| start       | Start date in the format 2012-10-01.                | string                                         | -       | Yes      |
+| end         | End date in the format 2012-10-01.                  | string                                         | -       | Yes      |
+| onChange    | Triggered every time the start or end dates change. | (change: {start: string, end: string}) => void | -       | Yes      |
+| placeholder | Placeholder text when no dates selected             | string                                         |         | Yes      |

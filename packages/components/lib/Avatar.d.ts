@@ -6,11 +6,14 @@ export declare type WithTheme = {
 };
 export interface Props {
     name: string;
-    withName?: boolean;
+    title?: string;
+    showName?: boolean;
+    hideInitials?: boolean;
     photo?: string;
     css?: CSSProperties | (<T>(props: T & WithTheme) => CSSProperties);
     className?: string;
-    size?: number;
+    color?: string;
+    assignColor?: boolean;
 }
 declare const Avatar: (props: Props) => JSX.Element;
 export default Avatar;
