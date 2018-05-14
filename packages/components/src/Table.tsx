@@ -2,25 +2,27 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css } from "./types"
+
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   children?: React.ReactNode
   columns: string[]
   rows: ((string | React.ReactNode)[])[]
-  __experimentalColumnCss?: {}[]
+  __experimentalColumnCss?: Css[]
   __experimentalRowActions?: React.ReactNode[]
   onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): {} => ({
   label: "table",
   width: "100%",
   position: "relative",
   backgroundColor: "white",
 }))
 
-const TableElement = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TableElement = glamorous.div(({ theme }: WithTheme): {} => ({
   width: "100%",
   textAlign: "left",
   "& tr:first-child": {
@@ -35,7 +37,7 @@ const TableElement = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   },
 }))
 
-const TableBody = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TableBody = glamorous.div(({ theme }: WithTheme): {} => ({
   display: "block",
 }))
 
@@ -54,23 +56,23 @@ const TableBodyRow = glamorous.div(({ theme, isClickable }: { theme: Theme; isCl
   },
 }))
 
-const TableHead = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TableHead = glamorous.div(({ theme }: WithTheme): {} => ({
   display: "flex",
   opacity: 0.4,
   padding: `${theme.spacing / 4}px ${theme.spacing}px`,
 }))
 
-const TableHeadCell = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TableHeadCell = glamorous.div(({ theme }: WithTheme): {} => ({
   ...theme.typography.body,
   flex: 1,
 }))
 
-const TableCell = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TableCell = glamorous.div(({ theme }: WithTheme): {} => ({
   ...theme.typography.body,
   flex: 1,
 }))
 
-const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const EmptyView = glamorous.div(({ theme }: WithTheme): {} => ({
   padding: `${theme.spacing * 2 / 3}px ${theme.spacing}px`,
   display: "block",
   width: "100%",
@@ -80,7 +82,7 @@ const EmptyView = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.body,
 }))
 
-const RowActionsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const RowActionsContainer = glamorous.div(({ theme }: WithTheme): {} => ({
   width: "fit-content",
   position: "absolute",
   top: "50%",

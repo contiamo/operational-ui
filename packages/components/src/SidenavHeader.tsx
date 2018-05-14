@@ -4,10 +4,11 @@ import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
 import Icon, { IconName } from "./Icon"
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
   label: string | React.ReactNode
   icon: IconName | React.ReactNode
@@ -22,7 +23,7 @@ const Container = glamorous.div({
 })
 
 const Content = glamorous.div(
-  ({ theme, isActive, isExpanded }: { theme: Theme; isActive: boolean; isExpanded: boolean }): {} => ({
+  ({ theme, isActive, isExpanded }: { theme: Theme; isActive: boolean; isExpanded: boolean }): CssStatic => ({
     position: "relative",
     display: "flex",
     alignItems: "center",
@@ -41,14 +42,14 @@ const Content = glamorous.div(
   })
 )
 
-const Label = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Label = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.heading1,
   fontSize: 14,
   width: "fit-content",
   whiteSpace: "nowrap",
 }))
 
-const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const IconContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   width: theme.box,
   height: theme.box,
   display: "flex",

@@ -1,4 +1,5 @@
 export { expandColor } from "./utils";
+export declare type TextTransform = "capitalize" | "full-width" | "lowercase" | "none" | "uppercase";
 export declare type ThemeColorName = "brand" | "info" | "success" | "warning" | "error" | "white" | "black" | "gray" | "lightGray" | "text" | "lightText" | "linkText" | "navBackground" | "background" | "lighterBackground" | "border" | "separator";
 export interface ThemeColors {
     brand: string;
@@ -30,7 +31,7 @@ export interface ThemeShadows {
 export interface ThemeTypographyElement {
     fontSize: number;
     fontWeight: 100 | 300 | 400 | 600 | 700 | "normal" | "bold" | "bolder" | "lighter" | "initial" | "inherit";
-    textTransform: string;
+    textTransform: TextTransform;
     letterSpacing: number | "normal";
     lineHeight: string;
     opacity?: number;

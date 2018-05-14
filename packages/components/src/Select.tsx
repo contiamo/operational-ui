@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous, { CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css } from "./types"
 import { Label, LabelText } from "./utils/mixins"
 import SelectOption from "./Select/SelectOption"
 import SelectFilter from "./Select/SelectFilter"
@@ -23,7 +24,7 @@ const displayOption = (opt: IOption): string => {
 
 export interface Props {
   id?: string
-  css?: CSSProperties
+  css?: Css
   className?: string
   options: IOption[]
   value: null | Value | Value[]

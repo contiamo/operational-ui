@@ -2,15 +2,17 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
   type?: string
   children?: React.ReactNode
 }
 
-const getGridCSSProperties = (gridType: string): {} => {
+const getGridCSSProperties = (gridType: string): CssStatic => {
   if (gridType === "IDE") {
     return {
       gridTemplateColumns: "200px auto",

@@ -1,15 +1,16 @@
 import * as React from "react"
-import glamorous, { CSSProperties } from "glamorous"
+import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
 import Icon from "./Icon"
 import Tooltip from "./Tooltip"
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "./utils/mixins"
 import { inputDefaultWidth } from "./constants"
 
 export interface Props {
-  css?: CSSProperties
+  css?: Css
   className?: string
   placeholder?: string
   name?: string
@@ -41,7 +42,7 @@ const InputField = glamorous.input(
     disabled: boolean
     isStandalone: boolean
     isError: boolean
-  }): {} => ({
+  }): CssStatic => ({
     ...theme.typography.body,
     // If the input field is standalone without a label, it should not specify any display properties
     // to avoid input fields that span the screen. Min width should take care of presentable

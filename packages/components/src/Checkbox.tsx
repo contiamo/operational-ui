@@ -3,9 +3,11 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import withLabel from "./utils/with-label"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: {}
   options: string[]
   selected: string[]
@@ -16,12 +18,12 @@ const Container = glamorous.div({
   label: "checkbox",
 })
 
-const OptionLabel = glamorous.label(({ theme }: { theme: Theme }): {} => ({
+const OptionLabel = glamorous.label(({ theme }: WithTheme): CssStatic => ({
   display: "inline-block",
   marginRight: theme.spacing,
 }))
 
-const OptionText = glamorous.span(({ theme }: { theme: Theme }): {} => ({
+const OptionText = glamorous.span(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.body,
   display: "inline-block",
   marginLeft: theme.spacing / 6,

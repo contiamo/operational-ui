@@ -2,6 +2,8 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   className?: string
   css?: {}
@@ -16,7 +18,7 @@ const Container = glamorous.div({
   },
 })
 
-const Slash = glamorous.span(({ theme }: { theme: Theme }): {} => ({
+const Slash = glamorous.span(({ theme }: WithTheme): CssStatic => ({
   display: "inline-block",
   margin: `0 ${theme.spacing / 2}px`,
   color: theme.colors.gray,

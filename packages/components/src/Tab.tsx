@@ -1,13 +1,21 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous, { Div } from "glamorous"
+
+import { WithTheme, Css } from "./types"
 
 export interface Props {
+  css?: Css
+  className?: string
   children?: React.ReactNode
   disabled?: boolean
   index?: number
   title?: string
 }
 
-const Tab = ({ children, ...rest }: Props) => <div>{children}</div>
+const Tab = (props: Props) => (
+  <Div css={props.css} className={props.className}>
+    {props.children}
+  </Div>
+)
 
 export default Tab

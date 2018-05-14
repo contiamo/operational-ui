@@ -3,12 +3,14 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
   className?: string
   onClick?: () => void
   active?: boolean
-  css?: {}
+  css?: Css
   label: string
 }
 
@@ -29,7 +31,7 @@ const Container = glamorous.div(
       backgroundColor: "rgba(0, 0, 0, 0.25)",
     },
   },
-  ({ theme, isActive }: { theme: Theme; isActive: boolean }): {} => ({
+  ({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
     padding: `0 ${theme.spacing}px 0 ${theme.box}px`,
@@ -41,7 +43,7 @@ const Container = glamorous.div(
   })
 )
 
-const ConnectorStrip = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const ConnectorStrip = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   width: 1,
   height: size,
   backgroundColor: lighten(theme.colors.navBackground, 10),

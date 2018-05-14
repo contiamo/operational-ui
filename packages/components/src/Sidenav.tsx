@@ -4,10 +4,11 @@ import { lighten, readableTextColor } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
 
 import { sidenavExpandedWidth } from "./constants"
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
   children?: React.ReactNode
   expanded?: boolean
@@ -30,7 +31,7 @@ const Container = glamorous.div(
     fix?: boolean
     expandOnHover?: boolean
     expanded?: boolean
-  }): {} => {
+  }): CssStatic => {
     const backgroundColor = theme.colors.navBackground
     const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
     const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])

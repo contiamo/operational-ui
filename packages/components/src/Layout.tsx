@@ -2,43 +2,46 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
 import Progress from "./Progress"
 import { Props as SidenavProps } from "./Sidenav"
 import { sidenavExpandedWidth } from "./constants"
 
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   sidenav?: React.ReactNode
   main?: React.ReactNode
   loading?: boolean
 }
 
-const Container = glamorous.div(({ theme, isSidenavExpanded }: { theme: Theme; isSidenavExpanded: boolean }): {} => ({
-  label: "Layout",
-  position: "relative",
-  height: "100%",
-  overflow: "hidden",
-  display: "grid",
-  gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : theme.box}px auto`,
-  gridTemplateRows: "100%",
-  // Side navigation (1st child is always the spinner or a placeholder)
-  "& > *:nth-child(2)": {
-    gridColumnStart: "1",
-    gridColumnEnd: "span 1",
-    gridRowStart: "1",
-    gridRowEnd: "span 1",
-  },
-  // Content
-  "& > *:nth-child(3)": {
-    gridColumnStart: "2",
-    gridColumnEnd: "span 1",
-    gridRowStart: "1",
-    gridRowEnd: "span 1",
-  },
-}))
+const Container = glamorous.div(
+  ({ theme, isSidenavExpanded }: { theme: Theme; isSidenavExpanded: boolean }): CssStatic => ({
+    label: "Layout",
+    position: "relative",
+    height: "100%",
+    overflow: "hidden",
+    display: "grid",
+    gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : theme.box}px auto`,
+    gridTemplateRows: "100%",
+    // Side navigation (1st child is always the spinner or a placeholder)
+    "& > *:nth-child(2)": {
+      gridColumnStart: "1",
+      gridColumnEnd: "span 1",
+      gridRowStart: "1",
+      gridRowEnd: "span 1",
+    },
+    // Content
+    "& > *:nth-child(3)": {
+      gridColumnStart: "2",
+      gridColumnEnd: "span 1",
+      gridRowStart: "1",
+      gridRowEnd: "span 1",
+    },
+  })
+)
 
-const Main = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Main = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "layout-main",
   display: "block",
   height: "100%",

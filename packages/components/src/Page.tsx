@@ -4,6 +4,7 @@ import { Theme } from "@operational/theme"
 
 import Button from "./Button"
 import Icon, { IconName } from "./Icon"
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
   title: string
@@ -13,20 +14,20 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   label: "page",
   backgroundColor: theme.colors.white,
   padding: `0px ${theme.spacing * 1.5}px ${theme.spacing * 1.5}px`,
 }))
 
-const TopBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TopBar = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   height: theme.box,
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
 }))
 
-const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const TitleBar = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   ...theme.typography.title,
   display: "flex",
   alignItems: "center",
@@ -40,7 +41,7 @@ const TitleBar = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   },
 }))
 
-const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const ControlsContainer = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   marginLeft: theme.spacing,
   // Offset the line-height setting inherited from being inside a
   // typography component/mixin.

@@ -4,10 +4,12 @@ import { css } from "glamor"
 import { fadeIn } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
-  menuCss?: {}
+  css?: Css
+  menuCss?: Css
   className?: string
   children: React.ReactNode
   open?: boolean
@@ -20,7 +22,7 @@ export interface State {
   isOpen: boolean
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): {} => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",

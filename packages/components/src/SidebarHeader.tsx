@@ -3,22 +3,24 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { spin } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
   open?: boolean
   onToggle?: () => void
   label?: string
-  children?: any
+  children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "sidebarheader",
   position: "relative",
 }))
 
-const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Content = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   position: "relative",
   paddingLeft: theme.spacing * 1,
   "::after": {
@@ -33,7 +35,7 @@ const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   },
 }))
 
-const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean }): {} => ({
+const Header = glamorous.div(({ theme, isOpen }: { theme: Theme; isOpen: boolean }): CssStatic => ({
   position: "relative",
   display: "flex",
   height: 30,

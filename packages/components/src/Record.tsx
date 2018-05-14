@@ -3,15 +3,17 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import Button from "./Button"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   title: string
   controls?: React.ReactNode
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "record",
   position: "relative",
   padding: `${theme.spacing / 2}px ${theme.spacing}px ${theme.spacing}px`,
@@ -19,7 +21,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   borderRadius: theme.borderRadius,
 }))
 
-const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const HeaderContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.heading1,
   display: "flex",
   alignItems: "center",
@@ -28,13 +30,13 @@ const HeaderContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   height: theme.spacing * 2,
 }))
 
-const ControlContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const ControlContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   "& > *:last-child": {
     marginRight: 0,
   },
 }))
 
-const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Content = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   opacity: 0.8,
   ...theme.typography.body,
 }))

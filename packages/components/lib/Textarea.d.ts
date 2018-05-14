@@ -1,12 +1,8 @@
 /// <reference types="react" />
-import { CSSProperties } from "glamorous";
-import { Theme } from "@operational/theme";
-export declare type ThemedCSSProperties = (a: {
-    theme: Theme;
-}) => CSSProperties;
+import { Css } from "./types";
 export interface Props {
     id?: string;
-    css?: CSSProperties | ThemedCSSProperties;
+    css?: Css;
     className?: string;
     value: string;
     label?: string;

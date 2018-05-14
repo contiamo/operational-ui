@@ -2,15 +2,17 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
+  css?: Css
   on: boolean
   onChange?: (on: boolean) => void
   className?: string
-  style?: any
 }
 
-export interface IStyleProps {
+export interface StyleProps {
   on: boolean
   theme: Theme
 }
@@ -41,7 +43,7 @@ const Button = glamorous.div(
     width: height,
     borderRadius: "50%",
   },
-  ({ on, theme }: IStyleProps) => ({
+  ({ on, theme }: StyleProps): CssStatic => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
     backgroundColor: theme.colors.white,
     border: `1px solid ${on ? theme.colors.info : theme.colors.gray}`,
@@ -60,7 +62,7 @@ const Rail = glamorous.div(
     borderRadius: railHeight / 2,
     overflow: "hidden",
   },
-  ({ on, theme }: IStyleProps) => ({
+  ({ on, theme }: StyleProps): CssStatic => ({
     backgroundColor: theme.colors.gray,
     zIndex: theme.baseZIndex,
     "&:after": {
@@ -81,7 +83,7 @@ const Rail = glamorous.div(
 const Switch = (props: Props) => (
   <Container
     id={props.id}
-    style={props.style}
+    css={props.css}
     className={props.className}
     onClick={() => {
       props.onChange && props.onChange(!props.on)

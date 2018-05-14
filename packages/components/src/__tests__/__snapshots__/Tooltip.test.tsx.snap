@@ -2,7 +2,7 @@
 
 exports[`Tooltip Component Should intialize without problems 1`] = `
 <div
-  class="css-1h0g2i9 test"
+  class="css-1cnszgd test"
 >
   Hello
 </div>

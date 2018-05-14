@@ -5,14 +5,11 @@ import { Theme } from "@operational/theme"
 import { Label, LabelText, FormFieldControls, FormFieldControl, FormFieldError, inputFocus } from "./utils/mixins"
 import Icon from "./Icon"
 import Tooltip from "./Tooltip"
-
-// This type is a testbed for this component to test reliability.
-// TODO: adopt across components once battle-tested.
-export type ThemedCSSProperties = (a: { theme: Theme }) => CSSProperties
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
   id?: string
-  css?: CSSProperties | ThemedCSSProperties
+  css?: Css
   className?: string
   value: string
   label?: string
@@ -23,7 +20,7 @@ export interface Props {
   disabled?: boolean
 }
 
-const numericalHeight = (css: CSSProperties | ThemedCSSProperties, theme: Theme): number | null => {
+const numericalHeight = (css: Css, theme: Theme): number | null => {
   const workingCss = typeof css === "function" ? css({ theme }) : css
   if (!workingCss.height || typeof workingCss.height !== "number") {
     return null
@@ -42,9 +39,9 @@ const TextareaComp = glamorous.textarea(
     theme: Theme
     isCode: boolean
     isError: boolean
-    css_: CSSProperties | ThemedCSSProperties
+    css_: Css
     disabled: boolean
-  }): {} => {
+  }): CssStatic => {
     const numericalHeightSetting = numericalHeight(css_, theme)
     return {
       ...theme.typography.body,

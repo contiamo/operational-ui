@@ -5,10 +5,11 @@ import { Theme, expandColor } from "@operational/theme"
 
 import Icon, { IconName } from "./Icon"
 import { isWhite } from "./utils/color"
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   color?: string
   onClick?: () => void
   onIconClick?: () => void
@@ -39,7 +40,7 @@ const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; colo
   }
 })
 
-const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Content = glamorous.div(({ theme }: WithTheme): {} => ({
   height: "100%",
   display: "flex",
   alignItems: "center",

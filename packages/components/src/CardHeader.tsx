@@ -2,6 +2,8 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
   css?: any
@@ -9,7 +11,7 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.heading1,
   label: "cardheader",
   display: "flex",

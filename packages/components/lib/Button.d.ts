@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { Theme } from "@operational/theme";
+import { Css } from "./types";
 export interface IStyleProps {
     theme?: Theme;
     color?: string;
@@ -10,7 +11,7 @@ export interface IStyleProps {
 }
 export interface Props {
     id?: string;
-    css?: any;
+    css?: Css;
     className?: string;
     onClick?: any;
     type?: string;

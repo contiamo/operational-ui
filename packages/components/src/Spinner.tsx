@@ -4,9 +4,11 @@ import { css } from "glamor"
 import { Theme } from "@operational/theme"
 import { readableTextColor, darken, transparentize } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
 }
 
@@ -21,7 +23,7 @@ const spin = css.keyframes({
 
 const size = 30
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "spinner",
   width: size,
   height: size,
@@ -30,7 +32,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 const animationTimeUnit: number = 0.6
 const f: number = 0.25
 
-const PulsingCube = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const PulsingCube = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   fontSize: 0,
   letterSpacing: 0,
   float: "left",

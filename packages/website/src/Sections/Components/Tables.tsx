@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Table } from "@operational/components"
+import { Theme } from "@operational/theme"
 
 export const title = "Tables"
 

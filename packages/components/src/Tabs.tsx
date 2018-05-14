@@ -3,10 +3,11 @@ import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { darken } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
 import Tab, { Props as TabProps } from "./Tab"
 
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   id?: string
   active?: number
@@ -50,7 +51,7 @@ const TabList = glamorous.ul(
       marginRight: 20,
     },
   },
-  ({ theme }: { theme: Theme }) => ({
+  ({ theme }: WithTheme): CssStatic => ({
     "&:after": {
       background: darken(theme.colors.lightGray, 6),
     },

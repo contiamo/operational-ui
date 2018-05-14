@@ -3,9 +3,11 @@ import * as Icon from "react-feather"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
   disabled?: boolean
   onChange?: (page: number) => void
@@ -15,7 +17,7 @@ export interface Props {
 }
 
 const PaginatorSpan = glamorous.div(
-  ({ theme, isActive, isDisabled }: { theme: Theme; isActive?: boolean; isDisabled?: boolean }): {} => ({
+  ({ theme, isActive, isDisabled }: { theme: Theme; isActive?: boolean; isDisabled?: boolean }): CssStatic => ({
     ...theme.typography.body,
     padding: theme.spacing / 4,
     borderRadius: 2,

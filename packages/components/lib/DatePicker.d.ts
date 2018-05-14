@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
+import { Css } from "./types";
 export interface Props {
     id?: string;
     label?: string;
@@ -9,7 +10,7 @@ export interface Props {
         start?: string;
         end?: string;
     }) => void;
-    css?: any;
+    css?: Css;
     className?: string;
     placeholder?: string;
 }
