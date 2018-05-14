@@ -26,7 +26,7 @@ const AnchorLink = glamorous.h2(({ theme }: { theme: Theme }): {} => ({
 }))
 
 export const Section = (props: { title: string; docsUrl: string; snippetUrl: string; children: React.ReactNode }) => {
-  const slug = props.title.toLowerCase()
+  const slug = props.title.toLowerCase().replace(/ /g, "-")
   return (
     <Card css={{ margin: "24px 0" }} id={slug}>
       <CardHeader>

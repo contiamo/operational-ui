@@ -6,6 +6,8 @@ This component is typically used inside a layout component along with a sidenav.
 
 ## Usage
 
+Here is a simple usage example:
+
 ```js
 <Page
   title="Settings Page"
@@ -25,6 +27,7 @@ This component is typically used inside a layout component along with a sidenav.
     </>
   }
 >
+  {/* Do not use the <Header /> component here */}
   <p>Hello, this is page content</p>
 </Page>
 ```
