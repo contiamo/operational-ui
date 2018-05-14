@@ -84,6 +84,7 @@ var Text = /** @class */ (function () {
     Text.prototype.assignConfig = function (customConfig) {
         var _this = this;
         fp_1.forEach.convert({ cap: false })(function (value, key) {
+            ;
             _this[key] = value;
         })(customConfig);
     };
@@ -114,9 +115,7 @@ var Text = /** @class */ (function () {
         var barOffset = computedBars && computedBars[this.series.key()]
             ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
             : 0;
-        var symbolOffset = function (d) {
-            return (_this.series.symbolOffset ? _this.series.symbolOffset(d) : 0) + _this.offset;
-        };
+        var symbolOffset = function (d) { return (_this.series.symbolOffset ? _this.series.symbolOffset(d) : 0) + _this.offset; };
         var rotate = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
         var attrs = {
             x: function (d) { return _this.xScale(d.x1 || _this.x(d)) + (_this.xIsBaseline ? barOffset : symbolOffset(d)); },
