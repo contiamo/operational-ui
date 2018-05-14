@@ -19,12 +19,10 @@ import {
 export type Options = RendererOptions<TextRendererAccessors>
 
 const defaultAccessors: Partial<TextRendererAccessors> = {
-  color: (series: Series, d: Datum) => series.legendColor(),
   size: (series: Series, d: Datum) => 10,
 }
 
 class Text implements RendererClass<TextRendererAccessors> {
-  color: RendererAccessor<string>
   data: Datum[]
   el: D3Selection
   events: EventBus
@@ -117,7 +115,6 @@ class Text implements RendererClass<TextRendererAccessors> {
     const accessors: TextRendererAccessors = defaults(defaultAccessors)(customAccessors)
     this.x = (d: Datum): any => this.series.x(d) || d.injectedX
     this.y = (d: Datum): any => this.series.y(d) || d.injectedY
-    this.color = (d?: Datum): string => accessors.color(this.series, d)
     this.size = (d?: Datum): number => accessors.size(this.series, d)
   }
 

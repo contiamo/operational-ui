@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
 var defaultAccessors = {
-    color: function (series, d) { return series.legendColor(); },
     size: function (series, d) { return 10; },
 };
 var Text = /** @class */ (function () {
@@ -78,7 +77,6 @@ var Text = /** @class */ (function () {
         var accessors = fp_1.defaults(defaultAccessors)(customAccessors);
         this.x = function (d) { return _this.series.x(d) || d.injectedX; };
         this.y = function (d) { return _this.series.y(d) || d.injectedY; };
-        this.color = function (d) { return accessors.color(_this.series, d); };
         this.size = function (d) { return accessors.size(_this.series, d); };
     };
     Text.prototype.assignConfig = function (customConfig) {

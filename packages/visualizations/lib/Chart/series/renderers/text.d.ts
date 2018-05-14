@@ -2,7 +2,6 @@ import Series from "../series";
 import { TextRendererAccessors, D3Selection, Datum, EventBus, Object, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
 export declare type Options = RendererOptions<TextRendererAccessors>;
 declare class Text implements RendererClass<TextRendererAccessors> {
-    color: RendererAccessor<string>;
     data: Datum[];
     el: D3Selection;
     events: EventBus;
