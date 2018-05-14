@@ -1,8 +1,9 @@
-import { compact, defaults, filter, get, map } from "lodash/fp"
+import { compact, defaults, filter, forEach, get, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import {
   TextRendererAccessors,
+  TextRendererConfig,
   ChartConfig,
   D3Selection,
   Datum,
@@ -37,6 +38,12 @@ class Text implements RendererClass<TextRendererAccessors> {
   xScale: any
   y: RendererAccessor<number>
   yScale: any
+  // Config
+  offset: number = 2
+  rotate: Object<number> = {
+    horizontal: 0,
+    vertical: -60,
+  }
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series) {
     this.state = state
@@ -50,6 +57,7 @@ class Text implements RendererClass<TextRendererAccessors> {
   update(data: Datum[], options: Options): void {
     this.options = options
     this.assignAccessors(options.accessors)
+    this.assignConfig(options.config)
     this.data = data
   }
 
@@ -113,6 +121,12 @@ class Text implements RendererClass<TextRendererAccessors> {
     this.size = (d?: Datum): number => accessors.size(this.series, d)
   }
 
+  private assignConfig(customConfig: Partial<TextRendererConfig>): void {
+    forEach.convert({ cap: false })((value: any, key: string): void => {
+      ;(this as any)[key] = value
+    })(customConfig)
+  }
+
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
@@ -127,9 +141,7 @@ class Text implements RendererClass<TextRendererAccessors> {
     const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
     const offset: number =
       computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
-    const rotate: number = this.state.current.get("config").textlabels.rotate[
-      this.xIsBaseline ? "vertical" : "horizontal"
-    ]
+    const rotate: number = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"]
 
     const attrs: Object<any> = {
       x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) - offset : 0),
@@ -141,15 +153,13 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   private attributes(): Object<any> {
-    const config: ChartConfig = this.state.current.get("config")
     const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
     const barOffset: number =
       computedBars && computedBars[this.series.key()]
         ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
         : 0
-    const symbolOffset = (d: Datum) =>
-      (this.series.symbolOffset ? this.series.symbolOffset(d) : 0) + config.textlabels.offset
-    const rotate: number = config.textlabels.rotate[this.xIsBaseline ? "vertical" : "horizontal"]
+    const symbolOffset = (d: Datum) => (this.series.symbolOffset ? this.series.symbolOffset(d) : 0) + this.offset
+    const rotate: number = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"]
 
     const attrs: Object<any> = {
       x: (d: Datum): number => this.xScale(d.x1 || this.x(d)) + (this.xIsBaseline ? barOffset : symbolOffset(d)),

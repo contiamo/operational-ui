@@ -47,7 +47,14 @@ const SymbolRenderer: any = {
 }
 
 const TextRenderer: any = {
-  type: "text"
+  type: "text",
+  config: {
+    offset: 5,
+    rotate: {
+      horizontal: 0,
+      vertical: -45
+    }
+  }
 }
 
 const StackedRenderer = {
@@ -79,7 +86,7 @@ const data: any = {
       name: "Pageviews 2018",
       key: "series1",
       interpolate: "step",
-      renderAs: [BarsRenderer],
+      renderAs: [BarsRenderer, TextRenderer],
       hide: false
     },
     {
@@ -94,7 +101,7 @@ const data: any = {
       ],
       name: "Pageviews 2017",
       key: "series2",
-      renderAs: [BarsRenderer]
+      renderAs: [BarsRenderer, TextRenderer]
     }
   ],
   axes: {

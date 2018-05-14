@@ -9,6 +9,12 @@ var defaultAccessors = {
 var Text = /** @class */ (function () {
     function Text(state, events, el, data, options, series) {
         this.type = "text";
+        // Config
+        this.offset = 2;
+        this.rotate = {
+            horizontal: 0,
+            vertical: -60,
+        };
         this.state = state;
         this.events = events;
         this.series = series;
@@ -19,6 +25,7 @@ var Text = /** @class */ (function () {
     Text.prototype.update = function (data, options) {
         this.options = options;
         this.assignAccessors(options.accessors);
+        this.assignConfig(options.config);
         this.data = data;
     };
     Text.prototype.dataForAxis = function (axis) {
@@ -74,6 +81,12 @@ var Text = /** @class */ (function () {
         this.color = function (d) { return accessors.color(_this.series, d); };
         this.size = function (d) { return accessors.size(_this.series, d); };
     };
+    Text.prototype.assignConfig = function (customConfig) {
+        var _this = this;
+        fp_1.forEach.convert({ cap: false })(function (value, key) {
+            _this[key] = value;
+        })(customConfig);
+    };
     Text.prototype.setAxisScales = function () {
         this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x";
         this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale;
@@ -86,7 +99,7 @@ var Text = /** @class */ (function () {
         var _this = this;
         var computedBars = this.state.current.get("computed").axes.computedBars;
         var offset = computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0;
-        var rotate = this.state.current.get("config").textlabels.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
+        var rotate = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
         var attrs = {
             x: function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) - offset : 0); },
             y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d) - offset); },
@@ -97,15 +110,14 @@ var Text = /** @class */ (function () {
     };
     Text.prototype.attributes = function () {
         var _this = this;
-        var config = this.state.current.get("config");
         var computedBars = this.state.current.get("computed").axes.computedBars;
         var barOffset = computedBars && computedBars[this.series.key()]
             ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
             : 0;
         var symbolOffset = function (d) {
-            return (_this.series.symbolOffset ? _this.series.symbolOffset(d) : 0) + config.textlabels.offset;
+            return (_this.series.symbolOffset ? _this.series.symbolOffset(d) : 0) + _this.offset;
         };
-        var rotate = config.textlabels.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
+        var rotate = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"];
         var attrs = {
             x: function (d) { return _this.xScale(d.x1 || _this.x(d)) + (_this.xIsBaseline ? barOffset : symbolOffset(d)); },
             y: function (d) { return _this.yScale(d.y1 || _this.y(d)) + (_this.xIsBaseline ? -symbolOffset(d) : barOffset); },

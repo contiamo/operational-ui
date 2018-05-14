@@ -23,13 +23,6 @@ export interface ChartConfig extends Config {
     minBarWidth: number;
     numberFormatter: (x: number) => string;
     outerBarPadding: number;
-    textlabels: {
-        offset: number;
-        rotate: {
-            horizontal: number;
-            vertical: number;
-        };
-    };
     timeAxisPriority: string[];
 }
 export declare type RendererType = "area" | "bars" | "flag" | "line" | "symbol" | "text";
@@ -65,9 +58,17 @@ export interface TextRendererAccessors {
     color: RendererAccessor<string>;
     size: RendererAccessor<number>;
 }
+export interface TextRendererConfig {
+    offset: number;
+    rotate: {
+        horizontal: number;
+        vertical: number;
+    };
+}
 export interface RendererOptions<RendererAccessors> {
     type: RendererType | "stacked";
     accessors?: Partial<RendererAccessors>;
+    config?: Object<any>;
     renderAs?: RendererOptions<any>[];
     stackAxis?: "x" | "y";
 }

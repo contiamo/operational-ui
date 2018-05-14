@@ -40,13 +40,6 @@ var ChartFacade = /** @class */ (function () {
             numberFormatter: function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); },
             outerBarPadding: 10,
             palette: theme_1.operational.colors.visualizationPalette,
-            textlabels: {
-                offset: 2,
-                rotate: {
-                    horizontal: 0,
-                    vertical: -60,
-                },
-            },
             timeAxisPriority: ["x1", "x2", "y1", "y2"],
             uid: fp_1.uniqueId("chart"),
             visualizationName: "chart",
