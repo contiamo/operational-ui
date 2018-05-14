@@ -51,7 +51,7 @@ var FocusUtils = {
     // before the label is made visible.
     drawHidden: function (canvasEl, type, position) {
         return canvasEl
-            .attr("class", styles.focusLegend + " " + getPositionClass(position) + " focus-legend-" + type)
+            .attr("class", styles.focusLegend + " focus-legend-" + type)
             .style("visibility", "hidden");
     },
     // Move the focus label to the desired position and make it visible.
@@ -63,6 +63,14 @@ var FocusUtils = {
             .style("top", labelPlacement.top + yArrowOffset + "px")
             .style("left", labelPlacement.left + xArrowOffset + "px")
             .style("visibility", "visible");
+    },
+    drawArrow: function (el, coordinates, position) {
+        el.append("div")
+            .attr("class", getPositionClass(position))
+            .style("left", coordinates.x + "px")
+            .style("top", coordinates.y + "px")
+            .append("div")
+            .attr("class", "arrowFill");
     },
     // Return dimensions of focus label, including width of any margins or borders.
     labelDimensions: function (focusEl) {
@@ -91,42 +99,64 @@ var FocusUtils = {
         };
         var top;
         var left;
+        var arrowX;
+        var arrowY;
         var newPosition;
         switch (position) {
             case "above":
                 top = optimalPosition([y.above, y.below, y.top], drawing.yMin, drawing.yMax, label.height);
                 left = _this.default.horizontalCenter(focus, label, drawing);
-                if (top !== y.above) {
+                arrowX = focus.x - left;
+                if (y.above < 0) {
                     newPosition = "below";
+                    arrowY = 0;
+                }
+                else {
+                    arrowY = label.height;
                 }
                 break;
             case "below":
                 top = optimalPosition([y.below, y.above, y.bottom], drawing.yMin, drawing.yMax, label.height);
                 left = _this.default.horizontalCenter(focus, label, drawing);
-                if (top !== y.above) {
+                arrowX = focus.x - left;
+                if (top === y.above) {
                     newPosition = "above";
+                    arrowY = label.height;
+                }
+                else {
+                    arrowY = 0;
                 }
                 break;
             case "toLeft":
                 top = _this.default.verticalCenter(focus, label, drawing);
-                left = optimalPosition([x.left, x.right, x.farRight], drawing.yMin, drawing.yMax, label.height);
+                left = optimalPosition([x.left, x.right, x.farRight], drawing.xMin, drawing.xMax, label.width);
+                arrowY = focus.y - top;
                 if (left !== x.left) {
                     newPosition = "toRight";
+                    arrowX = 0;
+                }
+                else {
+                    arrowX = label.width;
                 }
                 break;
             case "toRight":
                 top = _this.default.verticalCenter(focus, label, drawing);
                 left = optimalPosition([x.right, x.left, x.farLeft], drawing.xMin, drawing.xMax, label.width);
+                arrowY = focus.y - top;
                 if (left === x.left) {
                     newPosition = "toLeft";
+                    arrowX = label.width;
+                }
+                else {
+                    arrowX = 0;
                 }
                 break;
             default:
                 throw new Error("Invalid label position '" + position + "'.");
         }
         // Finally. Done.
-        switchSides(el, position, newPosition || position);
         _this.default.drawVisible(el, { left: left, top: top }, newPosition || position);
+        _this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position);
     },
     // Finds the y value that centres the focus label vertically (without overflowing the drawing area).
     verticalCenter: function (focus, label, drawing) {

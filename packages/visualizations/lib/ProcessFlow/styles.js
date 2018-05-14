@@ -22,9 +22,9 @@ var breakdownsContainerStyle = {
     padding: "7px 0",
 };
 var breakdownContainerStyle = {
-    padding: theme_1.operational.spacing / 2 + "px",
+    padding: "2%",
     background: theme_1.operational.colors.white,
-    width: "45%",
+    width: "46%",
     float: "left",
 };
 var breakdownLabelStyle = __assign({}, theme_1.operational.typography.small, { display: "block", marginBottom: theme_1.operational.spacing / 4 });
