@@ -1,9 +1,12 @@
 import * as React from "react"
 import { Modal, Button } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "Modals"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/modal.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/modal.md`
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/Modals.tsx`
 
 export class Component extends React.Component<{}, { isExpanded: boolean }> {
   state = {

@@ -1,10 +1,13 @@
 import * as React from "react"
 import { VisualizationWrapper, PieChart, Sunburst, ProcessFlow } from "@operational/visualizations"
 import { Div } from "glamorous"
+import * as constants from "../../constants"
 
 export const title = "Process Flow"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/visualizations/process-flow.md"
+export const docsUrl = `${constants.docsBaseUrl}/visualizations/process-flow.md`
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Visualizations/ProcessFlows.tsx`
 
 const processFlowData = {
   journeys: [

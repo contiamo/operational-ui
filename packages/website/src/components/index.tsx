@@ -7,13 +7,17 @@ import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/comp
 export const DocsLink = glamorous.a(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
   color: theme.colors.gray,
+  marginLeft: theme.spacing * 3 / 4,
 }))
 
-export const Section = (props: { title: string; docsUrl: string; children: React.ReactNode }) => (
+export const Section = (props: { title: string; docsUrl: string; snippetUrl: string; children: React.ReactNode }) => (
   <Card css={{ margin: "24px 0" }} id={props.title.toLowerCase()}>
     <CardHeader>
       {props.title}
-      <DocsLink href={props.docsUrl}>Docs</DocsLink>
+      <div>
+        <DocsLink href={props.snippetUrl}>View code</DocsLink>
+        <DocsLink href={props.docsUrl}>Docs</DocsLink>
+      </div>
     </CardHeader>
     <glamorous.Div
       css={{

@@ -11,6 +11,7 @@ import * as inputs from "./Inputs"
 import * as layouts from "./Layouts"
 import * as messages from "./Messages"
 import * as modals from "./Modals"
+import * as pages from "./Pages"
 import * as paginators from "./Paginators"
 import * as progress from "./Progress"
 import * as records from "./Records"
@@ -40,7 +41,7 @@ export default [
   layouts,
   messages,
   modals,
-  paginators,
+  pages,
   progress,
   records,
   selects,

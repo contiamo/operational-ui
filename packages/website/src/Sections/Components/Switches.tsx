@@ -1,12 +1,22 @@
 import * as React from "react"
 import { Switch } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "Switches"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/switch.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/switch.md`
 
-export const Component = () => (
-  <React.Fragment>
-    <Switch on />
-  </React.Fragment>
-)
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/Switches.tsx`
+
+export class Component extends React.Component<{}, { on: boolean }> {
+  state = {
+    on: true,
+  }
+  render() {
+    return (
+      <>
+        <Switch on={this.state.on} onChange={(on: boolean) => this.setState(() => ({ on }))} />
+      </>
+    )
+  }
+}

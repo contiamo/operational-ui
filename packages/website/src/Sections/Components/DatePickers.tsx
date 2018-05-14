@@ -1,9 +1,12 @@
 import * as React from "react"
 import { DatePicker } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "DatePickers"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/date-picker.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/date-picker.md`
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/DatePickers.tsx`
 
 export interface State {
   start?: string
@@ -17,7 +20,7 @@ export class Component extends React.Component<{}, State> {
   }
   render() {
     return (
-      <React.Fragment>
+      <>
         <DatePicker
           start={this.state.start}
           end={this.state.end}
@@ -28,7 +31,7 @@ export class Component extends React.Component<{}, State> {
           }}
           label="Date picker label"
         />
-      </React.Fragment>
+      </>
     )
   }
 }

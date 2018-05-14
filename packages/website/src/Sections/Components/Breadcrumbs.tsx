@@ -1,14 +1,15 @@
 import * as React from "react"
 import { Breadcrumbs, Breadcrumb } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "Breadcrumbs"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/breadcrumb.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/breadcrumb.md`
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/Breadcrumbs.tsx`
 
 export const Component = () => (
   <Breadcrumbs>
-    {null}
-    {null}
     <Breadcrumb>
       <a>Link one</a>
     </Breadcrumb>
