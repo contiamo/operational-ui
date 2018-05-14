@@ -17,8 +17,8 @@ export const Component = () => (
         onRowClick={console.log.bind(console)}
         rows={[["Paul", "The 12th", "Green"], ["Patrick", "The 11th", "Black"], ["Patrick", "The 11th", "Black"]]}
         columns={["Name", "Birthday", "Favorite color"]}
-        __experimentalColumnCss={({ theme }: { theme: Theme }) => [
-          { flex: `0 0 ${theme.spacing * 10}px` },
+        __experimentalColumnCss={[
+          ({ theme }: { theme: Theme }) => ({ flex: `0 0 ${theme.spacing * 10}px` }),
           { flex: "0 0 120px" },
         ]}
         __experimentalRowActions={[
