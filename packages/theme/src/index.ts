@@ -2,6 +2,8 @@
 
 export { expandColor } from "./utils"
 
+export type TextTransform = "capitalize" | "full-width" | "lowercase" | "none" | "uppercase"
+
 export type ThemeColorName =
   | "brand"
   | "info"
@@ -53,7 +55,7 @@ export interface ThemeShadows {
 export interface ThemeTypographyElement {
   fontSize: number
   fontWeight: 100 | 300 | 400 | 600 | 700 | "normal" | "bold" | "bolder" | "lighter" | "initial" | "inherit"
-  textTransform: string
+  textTransform: TextTransform
   letterSpacing: number | "normal"
   lineHeight: string
   opacity?: number
@@ -125,7 +127,7 @@ const colors: ThemeColors = {
   separator: "#f2f2f2",
 }
 
-const baseTypography: { lineHeight: string; textTransform: string; letterSpacing: number | "normal" } = {
+const baseTypography: { lineHeight: string; textTransform: TextTransform; letterSpacing: number | "normal" } = {
   lineHeight: "1.5",
   textTransform: "none",
   letterSpacing: "normal",

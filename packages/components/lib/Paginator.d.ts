@@ -1,7 +1,8 @@
 /// <reference types="react" />
+import { Css } from "./types";
 export interface Props {
     id?: string;
-    css?: any;
+    css?: Css;
     className?: string;
     disabled?: boolean;
     onChange?: (page: number) => void;

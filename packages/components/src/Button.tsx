@@ -1,9 +1,10 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-
 import { readableTextColor, darken, lighten } from "@operational/utils"
 import { Theme, expandColor } from "@operational/theme"
+
 import { isWhite } from "./utils/color"
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface IStyleProps {
   theme?: Theme
@@ -15,7 +16,7 @@ export interface IStyleProps {
 
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
   onClick?: any
   type?: string
@@ -26,7 +27,7 @@ export interface Props {
   condensed?: boolean
 }
 
-const Container = glamorous.button(({ theme, color, active, disabled, condensed }: IStyleProps): any => {
+const Container = glamorous.button(({ theme, color, active, disabled, condensed }: IStyleProps): CssStatic => {
   const defaultColor: string = theme.colors.white
   const backgroundColor: string = expandColor(theme, color) || defaultColor
   const activeBackgroundColor: string = darken(backgroundColor, 5)

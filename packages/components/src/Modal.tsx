@@ -2,17 +2,19 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
-  contentCss?: {}
+  contentCss?: Css
   contentClassName?: string
   children: React.ReactNode
   onClose?: () => void
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "modal",
   position: "fixed",
   top: 0,
@@ -26,7 +28,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: "rgba(0, 0, 0, .6)",
 }))
 
-const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Content = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   backgroundColor: theme.colors.white,
   padding: theme.spacing,
   boxShadow: theme.shadows.popup,

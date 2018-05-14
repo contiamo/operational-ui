@@ -2,15 +2,17 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
   children?: React.ReactNode
   legend: string
 }
 
-const Container = glamorous.fieldset(({ theme }: { theme: Theme }): any => ({
+const Container = glamorous.fieldset(({ theme }: WithTheme): any => ({
   label: "fieldset",
   verticalAlign: "top",
   padding: 0,
@@ -27,7 +29,7 @@ const Container = glamorous.fieldset(({ theme }: { theme: Theme }): any => ({
   },
 }))
 
-const Legend = glamorous.legend(({ theme }: { theme: Theme }): any => ({
+const Legend = glamorous.legend(({ theme }: WithTheme): any => ({
   ...theme.typography.heading1,
   paddingLeft: 0,
 }))

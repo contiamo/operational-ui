@@ -1,7 +1,8 @@
 /// <reference types="react" />
+import { Css } from "./types";
 export interface Props {
     id?: string;
-    css?: {};
+    css?: Css;
     className?: string;
     children: any;
 }

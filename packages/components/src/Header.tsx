@@ -2,14 +2,16 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
   className?: string
-  css?: {}
+  css?: Css
   children?: React.ReactNode
 }
 
-const Container = glamorous.header(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.header(({ theme }: WithTheme): CssStatic => ({
   label: "header",
   display: "flex",
   justifyContent: "space-between",

@@ -1,8 +1,9 @@
 /// <reference types="react" />
 import * as React from "react";
 import { Theme } from "@operational/theme";
+import { Css } from "./types";
 export interface Props {
-    css?: {};
+    css?: Css;
     className?: string;
     id?: string;
     active?: number;

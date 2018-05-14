@@ -1,9 +1,10 @@
 /// <reference types="react" />
 import * as React from "react";
+import { Css } from "./types";
 export interface Props {
     id?: string;
     className?: string;
-    css?: {};
+    css?: Css;
     children?: React.ReactNode;
 }
 declare const Header: (props: Props) => JSX.Element;

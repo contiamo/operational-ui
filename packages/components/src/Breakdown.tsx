@@ -3,6 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 import { readableTextColor, setBrightness } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
 import { IconName } from "./Icon"
 
 export interface Props {
@@ -30,7 +31,7 @@ const Container = glamorous.div(
     position: "relative",
     maxWidth: 300,
   },
-  ({ theme, onClick }: { theme?: Theme; onClick: () => void }) => ({
+  ({ theme, onClick }: { theme?: Theme; onClick: () => void }): CssStatic => ({
     padding: `${theme.spacing * 3 / 4}px 0`,
     ...onClick
       ? {
@@ -82,7 +83,7 @@ const Bar = glamorous.div(
       pointerEvents: "none",
     },
   },
-  ({ theme, fill, color }: { theme: Theme; fill: number; color: string }) => {
+  ({ theme, fill, color }: { theme: Theme; fill: number; color: string }): CssStatic => {
     const backgroundColor: string = expandColor(theme, color) || theme.colors.info
     return {
       padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
@@ -110,7 +111,7 @@ const Number = glamorous.div(
     alignItems: "center",
     justifyContent: "center",
   },
-  ({ theme }: { theme: Theme }): {} => ({
+  ({ theme }: WithTheme): CssStatic => ({
     ...theme.typography.heading1,
     flex: `0 0 ${theme.spacing * 2.5}px`,
     color: theme.colors.lightGray,

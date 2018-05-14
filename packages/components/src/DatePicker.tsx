@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
 import { Label, LabelText } from "./utils/mixins"
 import Card from "./Card"
 import Icon from "./Icon"
@@ -33,7 +34,7 @@ export interface Props {
   start?: string
   end?: string
   onChange?: (date: { start?: string; end?: string }) => void
-  css?: any
+  css?: Css
   className?: string
   placeholder?: string
 }

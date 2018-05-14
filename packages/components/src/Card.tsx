@@ -2,14 +2,16 @@ import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }) => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "card",
   padding: theme.spacing,
   borderRadius: 4,

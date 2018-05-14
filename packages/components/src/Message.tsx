@@ -4,15 +4,17 @@ import { Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 import Icon from "./Icon"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   children?: React.ReactNode
   color?: string
   onClose?: () => void
 }
 
-const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
+const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): CssStatic => {
   const backgroundColor = expandColor(theme, color) || theme.colors.info
   const textColor = readableTextColor(backgroundColor, [theme.colors.black, "white"])
   return {
@@ -30,7 +32,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   }
 })
 
-const IconContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const IconContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   position: "absolute",
   top: 0,
   right: 0,

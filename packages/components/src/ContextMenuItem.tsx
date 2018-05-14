@@ -3,9 +3,11 @@ import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
   children?: any
   onClick?: () => void

@@ -3,13 +3,15 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { readableTextColor } from "@operational/utils"
 import { Theme } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 // Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:
 // <Tooltip top/>, as opposed to <Tooltip position="top"/>
 // It gets translated into the Position type inside the component, so it allows for a more
 // straightforward implementation.
 
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   children?: React.ReactNode
   smart?: boolean
@@ -29,7 +31,7 @@ export interface State {
 
 type Position = "top" | "left" | "right" | "bottom"
 
-const Container = glamorous.div(({ position, theme }: { position: Position; theme: Theme }): {} => {
+const Container = glamorous.div(({ position, theme }: { position: Position; theme: Theme }): CssStatic => {
   const backgroundColor = theme.colors.black
   return {
     backgroundColor,
@@ -41,7 +43,7 @@ const Container = glamorous.div(({ position, theme }: { position: Position; them
     width: "fit-content",
     minWidth: 80,
     maxWidth: 360,
-    whiteSpace: "no-wrap",
+    whiteSpace: "nowrap",
     padding: `${theme.spacing / 3}px ${theme.spacing * 2 / 3}px`,
     borderRadius: 2,
     boxShadow: theme.shadows.popup,

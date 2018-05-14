@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import { CSSProperties } from "glamorous";
+import { Css } from "./types";
 export declare type Value = number | string;
 export interface IOption {
     label?: string;
@@ -8,7 +8,7 @@ export interface IOption {
 }
 export interface Props {
     id?: string;
-    css?: CSSProperties;
+    css?: Css;
     className?: string;
     options: IOption[];
     value: null | Value | Value[];

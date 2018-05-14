@@ -2,16 +2,18 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
+
 import Icon, { IconName } from "./Icon"
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
+  css?: Css
   className?: string
-  css?: {}
   children?: React.ReactNode
   icon?: IconName | React.ReactNode
 }
 
-const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.span(({ theme }: WithTheme): CssStatic => ({
   label: "breadcrumb",
   "& svg": {
     marginLeft: 4,
@@ -25,7 +27,7 @@ const Container = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   },
 }))
 
-const Content = glamorous.span(({ theme }: { theme: Theme }): {} => ({}))
+const Content = glamorous.span(({ theme }: WithTheme): CssStatic => ({}))
 
 const Breadcrumb = (props: Props) => {
   const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as IconName) : "ChevronDown"

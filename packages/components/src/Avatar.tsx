@@ -3,7 +3,7 @@ import glamorous, { CSSProperties, Div } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 import { darken, readableTextColor } from "@operational/utils"
 
-export type WithTheme = { theme: Theme }
+import { WithTheme, Css, CssStatic } from "./types"
 
 export interface Props {
   name: string
@@ -11,13 +11,13 @@ export interface Props {
   showName?: boolean
   hideInitials?: boolean
   photo?: string
-  css?: CSSProperties | (<T>(props: T & WithTheme) => CSSProperties)
+  css?: Css
   className?: string
   color?: string
   assignColor?: boolean
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "avatar",
   display: "flex",
   alignItems: "center",
@@ -25,18 +25,18 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   maxWidth: 180,
 }))
 
-const NameContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const NameContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.body,
   display: "block",
 }))
 
-const Name = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Name = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   ...theme.typography.body,
   lineHeight: 1.25,
   margin: 0,
 }))
 
-const Title = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Title = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   ...theme.typography.body,
   color: theme.colors.gray,
   lineHeight: 1.25,

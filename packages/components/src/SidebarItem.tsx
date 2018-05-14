@@ -3,9 +3,11 @@ import glamorous, { Div, GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
   children?: React.ReactNode
   onClick?: () => void
@@ -14,7 +16,7 @@ export interface Props {
 }
 
 const Container = glamorous.div(
-  ({ theme, isDisabled, isActive }: { theme: Theme; isDisabled: boolean; isActive: boolean }): {} => ({
+  ({ theme, isDisabled, isActive }: { theme: Theme; isDisabled: boolean; isActive: boolean }): CssStatic => ({
     label: "sidebaritem",
     backgroundColor: theme.colors.white,
     height: 30,

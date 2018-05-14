@@ -3,9 +3,11 @@ import * as ReactFeather from "react-feather"
 import glamorous, { GlamorousComponent, withTheme } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
   id?: string
-  css?: {}
+  css?: Css
   className?: string
   children?: React.ReactNode
   color?: string
@@ -20,7 +22,7 @@ const StatusContainer = glamorous.div(
     top: 6,
     width: 11,
   },
-  ({ theme, color }: { theme: Theme; color?: string }) => {
+  ({ theme, color }: { theme: Theme; color?: string }): CssStatic => {
     return {
       backgroundColor: expandColor(theme, color) || theme.colors.info,
     }
@@ -39,7 +41,7 @@ const Content = glamorous.div(
       marginBottom: 0,
     },
   },
-  ({ theme }: { theme: Theme }): {} => ({
+  ({ theme }: WithTheme): CssStatic => ({
     ...theme.typography.body,
   })
 )
@@ -61,7 +63,7 @@ const Container = glamorous.li(
       display: "none",
     },
   },
-  ({ theme }: { theme: Theme }): {} => ({
+  ({ theme }: WithTheme): CssStatic => ({
     paddingBottom: theme.spacing,
     "&::before": {
       borderLeft: `1px solid ${theme.colors.separator}`,

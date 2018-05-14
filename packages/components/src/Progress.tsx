@@ -4,11 +4,12 @@ import { css } from "glamor"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
 import Icon from "./Icon"
 
 export interface Props {
   id?: string
-  css?: any
+  css?: Css
   className?: string
   error?: string
   onRetry?: () => void
@@ -29,7 +30,7 @@ const Container = glamorous.div(
     left: 0,
     position: "absolute",
   },
-  ({ theme, fadeParent }: { theme: Theme; fadeParent: boolean }) => ({
+  ({ theme, fadeParent }: { theme: Theme; fadeParent: boolean }): CssStatic => ({
     zIndex: theme.baseZIndex + 300,
     backgroundColor: fadeParent ? "rgba(255, 255, 255, 0.8)" : "transparent",
   })
@@ -44,7 +45,7 @@ const fillProgress = css.keyframes({
   },
 })
 
-const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean }) => ({
+const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean }): CssStatic => ({
   width: "100%",
   height: 3,
   backgroundColor: theme.colors.info,
@@ -57,7 +58,7 @@ const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean
       },
 }))
 
-const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const ErrorMessage = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.body,
   minWidth: 160,
   maxWidth: 480,
@@ -72,7 +73,7 @@ const ErrorMessage = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   color: theme.colors.white,
 }))
 
-const RetryLink = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const RetryLink = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   opacity: 0.7,
   display: "inline-block",
   marginLeft: theme.spacing * 3 / 4,

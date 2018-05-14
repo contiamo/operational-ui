@@ -3,15 +3,17 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
+import { WithTheme, Css, CssStatic } from "./types"
+
 export interface Props {
-  css?: {}
+  css?: Css
   className?: string
   id?: string
   label?: string
   children: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "infotile",
   borderRadius: theme.borderRadius,
   width: 120,
@@ -21,11 +23,11 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   backgroundColor: theme.colors.lighterBackground,
 }))
 
-const Content = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const Content = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.heading1,
 }))
 
-const Label = glamorous.small(({ theme }: { theme: Theme }): {} => ({
+const Label = glamorous.small(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.small,
   opacity: 0.8,
 }))
