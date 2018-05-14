@@ -23,10 +23,11 @@ var QuantAxis = /** @class */ (function () {
         return fp_1.isFinite(value);
     };
     QuantAxis.prototype.updateOptions = function (options) {
-        this.start = options.start;
-        this.end = options.end;
-        this.interval = options.interval;
-        this.unit = options.unit;
+        var _this = this;
+        fp_1.forEach.convert({ cap: false })(function (value, key) {
+            ;
+            _this[key] = value;
+        })(options);
     };
     QuantAxis.prototype.update = function (options, data) {
         this.updateOptions(options);
@@ -44,13 +45,20 @@ var QuantAxis = /** @class */ (function () {
         this.stateWriter(["previous", this.position], this.previous);
     };
     QuantAxis.prototype.computeInitial = function () {
-        var config = this.state.current.get("config");
-        var computedChart = this.state.current.get("computed");
         var computed = {};
-        computed.range = axis_utils_1.computeRange(config, computedChart, this.position);
+        computed.range = this.computeRange();
         computed.domain = quant_axis_utils_1.computeDomain(this.data, this.start, this.end);
         computed.steps = this.computeSteps(computed);
         return computed;
+    };
+    QuantAxis.prototype.computeRange = function () {
+        var computed = this.state.current.get("computed");
+        var margin = function (axis) {
+            return fp_1.includes(axis)(computed.axes.requiredAxes) ? computed.axes.margins[axis] || 0 : 0;
+        };
+        return this.isXAxis
+            ? [0, computed.canvas.drawingDims.width]
+            : [computed.canvas.drawingDims.height, margin("x2") || this.minTopOffsetTopTick];
     };
     // Computes nice steps (for ticks) given a domain [start, stop] and a
     // wanted number of ticks (number of ticks returned might differ
@@ -58,8 +66,7 @@ var QuantAxis = /** @class */ (function () {
     QuantAxis.prototype.computeSteps = function (computed) {
         var steps = [this.start, this.end, this.interval];
         if (!this.interval) {
-            var options = this.state.current.get("config")[this.position];
-            var tickNumber_1 = quant_axis_utils_1.computeTickNumber(computed.range, options.tickSpacing, options.minTicks);
+            var tickNumber_1 = quant_axis_utils_1.computeTickNumber(computed.range, this.tickSpacing, this.minTicks);
             var span_1 = computed.domain[1] - computed.domain[0];
             var step_1 = Math.pow(10, Math.floor(Math.log(Math.abs(span_1) / tickNumber_1) / Math.LN10)) * (span_1 < 0 ? -1 : 1);
             var scaleFactor = void 0;
@@ -124,11 +131,10 @@ var QuantAxis = /** @class */ (function () {
     };
     QuantAxis.prototype.adjustMargins = function () {
         var computedMargins = this.state.current.get("computed").axes.margins || {};
-        var config = this.state.current.get("config")[this.position];
-        var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, config, this.position);
-        // Add space for flags
-        var hasFlags = fp_1.includes(this.position)(this.state.current.get("computed").series.axesWithFlags);
-        requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0);
+        var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, this.margin, this.outerPadding, this.position);
+        // // Add space for flags
+        // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+        // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
         if (computedMargins[this.position] === requiredMargin) {
             return;
         }
@@ -143,10 +149,9 @@ var QuantAxis = /** @class */ (function () {
         return function (x) { return (x === unitTick && _this.unit ? _this.unit : numberFormatter(x)); };
     };
     QuantAxis.prototype.getAttributes = function () {
-        var tickOffset = this.state.current.get("config")[this.position].tickOffset;
         return {
-            dx: this.isXAxis ? 0 : tickOffset,
-            dy: this.isXAxis ? tickOffset : "-0.4em",
+            dx: this.isXAxis ? 0 : this.tickOffset,
+            dy: this.isXAxis ? this.tickOffset : "-0.4em",
             text: this.tickFormatter(),
             x: this.isXAxis ? this.computed.scale : 0,
             y: this.isXAxis ? 0 : this.computed.scale,

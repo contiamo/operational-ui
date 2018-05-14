@@ -30,22 +30,13 @@ exports.insertElements = function (el, type, position, drawingDims) {
         .call(d3_utils_1.setLineAttributes, { x1: 0, x2: 0, y1: 0, y2: 0 });
     return axisGroup;
 };
-exports.computeRange = function (config, computed, position) {
-    var computedAxes = computed.axes.margins || {};
-    var margin = function (axis) {
-        return fp_1.includes(axis)(computed.axes.requiredAxes) ? computedAxes[axis] || config[axis].margin : 0;
-    };
-    return position[0] === "x"
-        ? [0, computed.canvas.drawingDims.width]
-        : [computed.canvas.drawingDims.height, margin("x2") || config[position].minTopOffsetTopTick];
-};
-exports.computeRequiredMargin = function (axis, computedMargins, config, position) {
-    var requiredMargin = config.margin;
+exports.computeRequiredMargin = function (axis, computedMargins, configuredMargin, outerPadding, position) {
+    var requiredMargin = configuredMargin;
     if (position[0] === "x") {
         return requiredMargin;
     }
     var axisWidth = axis.node().getBBox().width;
-    return Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding);
+    return Math.max(requiredMargin, Math.ceil(axisWidth) + outerPadding);
 };
 exports.alignAxes = function (axes) {
     if (fp_1.keys(axes).length !== 2) {

@@ -1,7 +1,19 @@
 import Events from "../../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { cloneDeep, defaults, filter, find, identity, includes, isFinite, last, rangeStep, sortBy } from "lodash/fp"
-import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
+import {
+  cloneDeep,
+  defaults,
+  filter,
+  find,
+  forEach,
+  identity,
+  includes,
+  isFinite,
+  last,
+  rangeStep,
+  sortBy,
+} from "lodash/fp"
+import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes, withD3Element } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
 import * as styles from "./styles"
@@ -31,18 +43,25 @@ const stepScaleFactors = (step: number): number[] => {
 class QuantAxis implements AxisClass<number> {
   computed: AxisComputed
   data: number[]
-  end: number
   el: D3Selection
   events: EventBus
-  interval: number
   isXAxis: boolean
   position: AxisPosition
   previous: AxisComputed
-  start: number
   state: State
   stateWriter: StateWriter
   type: AxisType = "quant"
+  // Options
+  start: number
+  end: number
+  interval: number
   unit: string
+  margin: number
+  minTicks: number
+  minTopOffsetTopTick: number
+  tickOffset: number
+  tickSpacing: number
+  outerPadding: number
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -59,10 +78,9 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private updateOptions(options: QuantAxisOptions): void {
-    this.start = options.start
-    this.end = options.end
-    this.interval = options.interval
-    this.unit = options.unit
+    forEach.convert({ cap: false })((value: any, key: string): void => {
+      ;(this as any)[key] = value
+    })(options)
   }
 
   update(options: QuantAxisOptions, data: number[]): void {
@@ -83,13 +101,20 @@ class QuantAxis implements AxisClass<number> {
   }
 
   computeInitial(): Partial<AxisComputed> {
-    const config: ChartConfig = this.state.current.get("config")
-    const computedChart: Computed = this.state.current.get("computed")
     const computed: Partial<AxisComputed> = {}
-    computed.range = computeRange(config, computedChart, this.position)
+    computed.range = this.computeRange()
     computed.domain = computeDomain(this.data, this.start, this.end)
     computed.steps = this.computeSteps(computed)
     return computed
+  }
+
+  private computeRange(): [number, number] {
+    const computed: Computed = this.state.current.get("computed")
+    const margin = (axis: AxisPosition): number =>
+      includes(axis)(computed.axes.requiredAxes) ? computed.axes.margins[axis] || 0 : 0
+    return this.isXAxis
+      ? [0, computed.canvas.drawingDims.width]
+      : [computed.canvas.drawingDims.height, margin("x2") || this.minTopOffsetTopTick]
   }
 
   // Computes nice steps (for ticks) given a domain [start, stop] and a
@@ -98,8 +123,7 @@ class QuantAxis implements AxisClass<number> {
   computeSteps(computed: Object<any>): [number, number, number] {
     const steps: [number, number, number] = [this.start, this.end, this.interval]
     if (!this.interval) {
-      const options: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-      const tickNumber: number = computeTickNumber(computed.range, options.tickSpacing, options.minTicks)
+      const tickNumber: number = computeTickNumber(computed.range, this.tickSpacing, this.minTicks)
       const span: number = computed.domain[1] - computed.domain[0]
       let step: number =
         Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
@@ -179,12 +203,17 @@ class QuantAxis implements AxisClass<number> {
 
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    let requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+    const requiredMargin: number = computeRequiredMargin(
+      this.el,
+      computedMargins,
+      this.margin,
+      this.outerPadding,
+      this.position
+    )
 
-    // Add space for flags
-    const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
-    requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+    // // Add space for flags
+    // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+    // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
 
     if (computedMargins[this.position] === requiredMargin) {
       return
@@ -201,10 +230,9 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private getAttributes(): AxisAttributes {
-    const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
-      dx: this.isXAxis ? 0 : tickOffset,
-      dy: this.isXAxis ? tickOffset : "-0.4em",
+      dx: this.isXAxis ? 0 : this.tickOffset,
+      dy: this.isXAxis ? this.tickOffset : "-0.4em",
       text: this.tickFormatter(),
       x: this.isXAxis ? this.computed.scale : 0,
       y: this.isXAxis ? 0 : this.computed.scale,

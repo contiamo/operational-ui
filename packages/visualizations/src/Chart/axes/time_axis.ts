@@ -77,16 +77,23 @@ class TimeAxis implements AxisClass<Date> {
   computed: AxisComputed
   data: Date[]
   el: D3Selection
-  end: Date
   events: EventBus
-  interval: TimeIntervals
   isXAxis: boolean
   position: AxisPosition
   previous: AxisComputed
-  start: Date
   state: State
   stateWriter: StateWriter
   type: AxisType = "time"
+  // Options
+  start: Date
+  end: Date
+  interval: TimeIntervals
+  margin: number
+  minTicks: number
+  minTopOffsetTopTick: number
+  tickOffset: number
+  tickSpacing: number
+  outerPadding: number
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -102,12 +109,13 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private updateOptions(options: TimeAxisOptions): void {
-    this.start = options.start
-    this.end = options.end
-    this.interval = options.interval
+    forEach.convert({ cap: false })((value: any, key: string): void => {
+      ;(this as any)[key] = value
+    })(options)
     if (!this.start || !this.end || !this.interval) {
       throw new Error("Values for `start`, `end` and `interval` must always be configured for time axes.")
     }
+    this.adjustMargins()
   }
 
   update(options: TimeAxisOptions, data: Date[]): void {
@@ -204,25 +212,20 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private computeYRange(tickWidth: number, numberOfTicks: number): [number, number] {
-    const config: ChartConfig = this.state.current.get("config")
     const computed: Computed = this.state.current.get("computed")
     const margin = (axis: AxisPosition): number => {
       const isRequired: boolean = includes(axis)(computed.axes.requiredAxes)
-      return isRequired ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
+      return isRequired ? (computed.axes.margins || {})[axis] || 0 : 0
     }
     const drawingDims = computed.canvas.drawingDims
     const width: number = tickWidth * numberOfTicks
     const offset: number = tickWidth / 2
-    return [
-      (drawingDims.height || width) - offset,
-      offset + (margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick),
-    ]
+    return [(drawingDims.height || width) - offset, offset + (margin("x2") || this.minTopOffsetTopTick)]
   }
 
   private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
     const width: number = Math.abs(range[1] - range[0])
-    const axisOptions: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    return Math.min(ticksInDomain.length, Math.max(Math.floor(width / axisOptions.tickSpacing), axisOptions.minTicks))
+    return Math.min(ticksInDomain.length, Math.max(Math.floor(width / this.tickSpacing), this.minTicks))
   }
 
   private computeScale(range: [number, number], ticks: Date[]): any {
@@ -292,12 +295,17 @@ class TimeAxis implements AxisClass<Date> {
 
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    let requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+    const requiredMargin: number = computeRequiredMargin(
+      this.el,
+      computedMargins,
+      this.margin,
+      this.outerPadding,
+      this.position
+    )
 
-    // Add space for flags
-    const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
-    requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+    // // Add space for flags
+    // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+    // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
 
     if (computedMargins[this.position] === requiredMargin) {
       return
@@ -308,10 +316,9 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private getAttributes(): AxisAttributes {
-    const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     return {
-      dx: this.isXAxis ? 0 : tickOffset,
-      dy: this.isXAxis ? tickOffset : "0.35em",
+      dx: this.isXAxis ? 0 : this.tickOffset,
+      dy: this.isXAxis ? this.tickOffset : "0.35em",
       text: this.computed.tickFormatter,
       x: this.isXAxis ? this.computed.scale : 0,
       y: this.isXAxis ? 0 : this.computed.scale,

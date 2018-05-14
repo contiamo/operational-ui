@@ -44,12 +44,15 @@ var TimeAxis = /** @class */ (function () {
         return fp_1.isDate(value);
     };
     TimeAxis.prototype.updateOptions = function (options) {
-        this.start = options.start;
-        this.end = options.end;
-        this.interval = options.interval;
+        var _this = this;
+        fp_1.forEach.convert({ cap: false })(function (value, key) {
+            ;
+            _this[key] = value;
+        })(options);
         if (!this.start || !this.end || !this.interval) {
             throw new Error("Values for `start`, `end` and `interval` must always be configured for time axes.");
         }
+        this.adjustMargins();
     };
     TimeAxis.prototype.update = function (options, data) {
         this.updateOptions(options);
@@ -128,24 +131,19 @@ var TimeAxis = /** @class */ (function () {
         return [offset, (width || drawingDims.width) - offset];
     };
     TimeAxis.prototype.computeYRange = function (tickWidth, numberOfTicks) {
-        var config = this.state.current.get("config");
         var computed = this.state.current.get("computed");
         var margin = function (axis) {
             var isRequired = fp_1.includes(axis)(computed.axes.requiredAxes);
-            return isRequired ? (computed.axes.margins || {})[axis] || config[axis].margin : 0;
+            return isRequired ? (computed.axes.margins || {})[axis] || 0 : 0;
         };
         var drawingDims = computed.canvas.drawingDims;
         var width = tickWidth * numberOfTicks;
         var offset = tickWidth / 2;
-        return [
-            (drawingDims.height || width) - offset,
-            offset + (margin("x2") || config[this.position].minTopOffsetTopTick),
-        ];
+        return [(drawingDims.height || width) - offset, offset + (margin("x2") || this.minTopOffsetTopTick)];
     };
     TimeAxis.prototype.computeTickNumber = function (ticksInDomain, range) {
         var width = Math.abs(range[1] - range[0]);
-        var axisOptions = this.state.current.get("config")[this.position];
-        return Math.min(ticksInDomain.length, Math.max(Math.floor(width / axisOptions.tickSpacing), axisOptions.minTicks));
+        return Math.min(ticksInDomain.length, Math.max(Math.floor(width / this.tickSpacing), this.minTicks));
     };
     TimeAxis.prototype.computeScale = function (range, ticks) {
         return d3_scale_1.scaleTime()
@@ -203,11 +201,10 @@ var TimeAxis = /** @class */ (function () {
     };
     TimeAxis.prototype.adjustMargins = function () {
         var computedMargins = this.state.current.get("computed").axes.margins || {};
-        var config = this.state.current.get("config")[this.position];
-        var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, config, this.position);
-        // Add space for flags
-        var hasFlags = fp_1.includes(this.position)(this.state.current.get("computed").series.axesWithFlags);
-        requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0);
+        var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, this.margin, this.outerPadding, this.position);
+        // // Add space for flags
+        // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+        // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
         if (computedMargins[this.position] === requiredMargin) {
             return;
         }
@@ -216,10 +213,9 @@ var TimeAxis = /** @class */ (function () {
         this.events.emit("margins:update", this.isXAxis);
     };
     TimeAxis.prototype.getAttributes = function () {
-        var tickOffset = this.state.current.get("config")[this.position].tickOffset;
         return {
-            dx: this.isXAxis ? 0 : tickOffset,
-            dy: this.isXAxis ? tickOffset : "0.35em",
+            dx: this.isXAxis ? 0 : this.tickOffset,
+            dy: this.isXAxis ? this.tickOffset : "0.35em",
             text: this.computed.tickFormatter,
             x: this.isXAxis ? this.computed.scale : 0,
             y: this.isXAxis ? 0 : this.computed.scale,

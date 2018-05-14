@@ -47,27 +47,19 @@ export const insertElements = (el: any, type: string, position: AxisPosition, dr
   return axisGroup
 }
 
-export const computeRange = (config: ChartConfig, computed: Computed, position: AxisPosition): [number, number] => {
-  const computedAxes: Object<number> = computed.axes.margins || {}
-  const margin = (axis: AxisPosition): number =>
-    includes(axis)(computed.axes.requiredAxes) ? computedAxes[axis] || config[axis].margin : 0
-  return position[0] === "x"
-    ? [0, computed.canvas.drawingDims.width]
-    : [computed.canvas.drawingDims.height, margin("x2") || (config[position] as YAxisConfig).minTopOffsetTopTick]
-}
-
 export const computeRequiredMargin = (
   axis: any,
   computedMargins: Object<number>,
-  config: XAxisConfig | YAxisConfig,
+  configuredMargin: number,
+  outerPadding: number,
   position: AxisPosition
 ): number => {
-  const requiredMargin: number = config.margin
+  const requiredMargin: number = configuredMargin
   if (position[0] === "x") {
     return requiredMargin
   }
   const axisWidth: number = axis.node().getBBox().width
-  return Math.max(requiredMargin, Math.ceil(axisWidth) + config.outerPadding)
+  return Math.max(requiredMargin, Math.ceil(axisWidth) + outerPadding)
 }
 
 export const alignAxes = (axes: Object<AxisClass<any>>): Object<any> => {

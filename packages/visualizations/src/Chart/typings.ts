@@ -30,6 +30,10 @@ export interface YAxisConfig extends XAxisConfig {
   minTopOffsetTopTick: number
 }
 
+export interface AxisConfig extends XAxisConfig {
+  minTopOffsetTopTick?: number
+}
+
 export type FocusElement = string
 
 export interface ChartConfig extends Config {
@@ -48,10 +52,6 @@ export interface ChartConfig extends Config {
     }
   }
   timeAxisPriority: string[]
-  x1: XAxisConfig
-  x2: XAxisConfig
-  y1: YAxisConfig
-  y2: YAxisConfig
 }
 
 // Renderers
@@ -160,14 +160,14 @@ export type AxisType = "time" | "quant" | "categorical"
 
 export type TimeIntervals = "hour" | "day" | "week" | "month" | "quarter" | "year"
 
-export interface TimeAxisOptions {
+export interface TimeAxisOptions extends AxisConfig {
   type: string
   start: Date
   end: Date
   interval: TimeIntervals
 }
 
-export interface QuantAxisOptions {
+export interface QuantAxisOptions extends AxisConfig {
   type: string
   start?: number
   end?: number
@@ -175,7 +175,7 @@ export interface QuantAxisOptions {
   unit?: string
 }
 
-export interface CategoricalAxisOptions {
+export interface CategoricalAxisOptions extends AxisConfig {
   type: string
   values?: string[]
 }

@@ -1,10 +1,11 @@
 import Axis from "./axes/axis"
 import Rules from "../Chart/axes/rules"
-import { find, forEach, get, includes, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
+import { assign, defaults, find, forEach, get, includes, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import {
   AxesData,
   AxisClass,
+  AxisConfig,
   AxisOptions,
   AxisPosition,
   AxisType,
@@ -14,7 +15,31 @@ import {
   Object,
   State,
   StateWriter,
+  XAxisConfig,
+  YAxisConfig,
 } from "./typings"
+
+const xAxisConfig: Partial<XAxisConfig> = {
+  margin: 14,
+  minTicks: 2,
+  tickSpacing: 65,
+  outerPadding: 3,
+}
+
+const yAxisConfig: Partial<YAxisConfig> = {
+  margin: 34,
+  minTicks: 4,
+  minTopOffsetTopTick: 21,
+  tickSpacing: 40,
+  outerPadding: 3,
+}
+
+const axisConfig: Object<AxisConfig> = {
+  x1: assign({ tickOffset: 12 })(xAxisConfig),
+  x2: assign({ tickOffset: -4 })(xAxisConfig),
+  y1: assign({ tickOffset: -4 })(yAxisConfig),
+  y2: assign({ tickOffset: 4 })(yAxisConfig),
+}
 
 class AxesManager {
   axes: Object<AxisClass<any>> = {}
@@ -41,10 +66,16 @@ class AxesManager {
   }
 
   updateMargins(): void {
-    const computedMargins: Object<number> = this.state.current.get("computed").axes.onMarginsUpdated
-    if (!computedMargins) {
-      this.stateWriter("margins", {})
+    const defaultMargins: Object<number> = {
+      x1: xAxisConfig.margin,
+      x2: xAxisConfig.margin,
+      y1: yAxisConfig.margin,
+      y2: yAxisConfig.margin,
     }
+    const computedMargins: Object<number> = defaults(defaultMargins)(
+      this.state.current.get("computed").axes.margins || {}
+    )
+    this.stateWriter("margins", computedMargins)
   }
 
   private updateAxes(): void {
@@ -64,10 +95,11 @@ class AxesManager {
     this.stateWriter("priorityTimeAxis", this.priorityTimeAxis())
   }
 
-  private createOrUpdate(options: AxisOptions, position: AxisPosition): void {
+  private createOrUpdate(options: Partial<AxisOptions>, position: AxisPosition): void {
+    const fullOptions: AxisOptions = defaults(axisConfig[position])(options)
     const data = this.state.current.get("computed").series.dataForAxes[position]
     const existing: AxisClass<any> = this.axes[position]
-    existing ? this.update(position, options) : this.create(position, options)
+    existing ? this.update(position, fullOptions) : this.create(position, fullOptions)
   }
 
   private create(position: AxisPosition, options: AxisOptions): void {

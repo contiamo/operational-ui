@@ -23,24 +23,7 @@ import {
   Partial,
   RendererOptions,
   SeriesData,
-  XAxisConfig,
-  YAxisConfig,
 } from "./typings"
-
-const xAxisConfig: Partial<XAxisConfig> = {
-  margin: 14,
-  minTicks: 2,
-  tickSpacing: 65,
-  outerPadding: 3,
-}
-
-const yAxisConfig: Partial<YAxisConfig> = {
-  margin: 34,
-  minTicks: 4,
-  minTopOffsetTopTick: 21,
-  tickSpacing: 40,
-  outerPadding: 3,
-}
 
 class ChartFacade implements Facade {
   private __disposed: boolean = false
@@ -94,10 +77,6 @@ class ChartFacade implements Facade {
       uid: uniqueId("chart"),
       visualizationName: "chart",
       width: 500,
-      x1: assign({ tickOffset: 12 })(xAxisConfig),
-      x2: assign({ tickOffset: -4 })(xAxisConfig),
-      y1: assign({ tickOffset: -4 })(yAxisConfig),
-      y2: assign({ tickOffset: 4 })(yAxisConfig),
     }
   }
 

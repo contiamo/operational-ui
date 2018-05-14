@@ -7,8 +7,8 @@ var d3_scale_1 = require("d3-scale");
 var styles = require("./styles");
 var CategoricalAxis = /** @class */ (function () {
     function CategoricalAxis(state, stateWriter, events, el, position) {
-        this.sort = true;
         this.type = "categorical";
+        this.sort = true;
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;
@@ -20,8 +20,17 @@ var CategoricalAxis = /** @class */ (function () {
     CategoricalAxis.prototype.validate = function (value) {
         return !fp_1.isNil(value);
     };
+    CategoricalAxis.prototype.updateOptions = function (options) {
+        var _this = this;
+        fp_1.forEach.convert({ cap: false })(function (value, key) {
+            ;
+            _this[key] = value;
+        })(options);
+        this.adjustMargins();
+    };
     CategoricalAxis.prototype.update = function (options, data) {
-        this.data = fp_1.flow(fp_1.filter(this.validate), fp_1.map(String))(options.values || data);
+        this.updateOptions(options);
+        this.data = fp_1.flow(fp_1.filter(this.validate), fp_1.map(String))(this.values || data);
     };
     // Computations
     CategoricalAxis.prototype.compute = function () {
@@ -84,19 +93,15 @@ var CategoricalAxis = /** @class */ (function () {
         }, {})(indices);
     };
     CategoricalAxis.prototype.computeRange = function (tickWidth) {
-        var config = this.state.current.get("config");
         var computed = this.state.current.get("computed");
         var width = tickWidth * this.data.length;
         var offset = tickWidth / 2;
         var margin = function (axis) {
-            return fp_1.includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0;
+            return fp_1.includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || 0 : 0;
         };
         var range = this.position[0] === "x"
             ? [0, width || computed.canvas.drawingDims.width]
-            : [
-                computed.canvas.drawingDims.height || width,
-                margin("x2") || config[this.position].minTopOffsetTopTick,
-            ];
+            : [computed.canvas.drawingDims.height || width, margin("x2") || this.minTopOffsetTopTick];
         var adjustedRange = [range[0] + offset, range[1] + offset];
         return adjustedRange;
     };
@@ -155,11 +160,10 @@ var CategoricalAxis = /** @class */ (function () {
     };
     CategoricalAxis.prototype.adjustMargins = function () {
         var computedMargins = this.state.current.get("computed").axes.margins || {};
-        var config = this.state.current.get("config")[this.position];
-        var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, config, this.position);
-        // Add space for flags
-        var hasFlags = fp_1.includes(this.position)(this.state.current.get("computed").series.axesWithFlags);
-        requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0);
+        var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, this.margin, this.outerPadding, this.position);
+        // // Add space for flags
+        // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+        // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
         if (computedMargins[this.position] === requiredMargin) {
             return;
         }

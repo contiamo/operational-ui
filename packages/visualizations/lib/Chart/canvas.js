@@ -38,6 +38,7 @@ var ChartCanvas = /** @class */ (function () {
         this.stateWriter("elements", this.elements);
         this.events.on("margins:update", function (isXAxis) {
             _this.draw();
+            _this.calculateDrawingDims();
             _this.events.emit("margins:updated", isXAxis);
         });
     }
@@ -178,9 +179,8 @@ var ChartCanvas = /** @class */ (function () {
         return this.state.current.get("config").uid + id;
     };
     ChartCanvas.prototype.margin = function (axis) {
-        var config = this.state.current.get("config");
         var margins = this.state.current.get("computed").axes.margins || {};
-        return margins[axis] || config[axis].margin;
+        return margins[axis] || 0;
     };
     ChartCanvas.prototype.calculateDimensions = function () {
         this.calculateDrawingContainerDims();

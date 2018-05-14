@@ -58,6 +58,7 @@ class ChartCanvas implements Canvas {
     this.stateWriter("elements", this.elements)
     this.events.on("margins:update", (isXAxis: boolean): void => {
       this.draw()
+      this.calculateDrawingDims()
       this.events.emit("margins:updated", isXAxis)
     })
   }
@@ -218,9 +219,8 @@ class ChartCanvas implements Canvas {
   }
 
   private margin(axis: AxisPosition): number {
-    const config: ChartConfig = this.state.current.get("config")
     const margins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    return margins[axis] || config[axis].margin
+    return margins[axis] || 0
   }
 
   private calculateDimensions(): void {
