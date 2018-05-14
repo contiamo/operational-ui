@@ -66,13 +66,6 @@ class ChartFacade implements Facade {
       numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       outerBarPadding: 10,
       palette: theme.colors.visualizationPalette,
-      textlabels: {
-        offset: 2,
-        rotate: {
-          horizontal: 0,
-          vertical: -60,
-        },
-      },
       timeAxisPriority: ["x1", "x2", "y1", "y2"],
       uid: uniqueId("chart"),
       visualizationName: "chart",

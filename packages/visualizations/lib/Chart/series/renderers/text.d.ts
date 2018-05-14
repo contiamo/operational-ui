@@ -1,5 +1,5 @@
 import Series from "../series";
-import { TextRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
+import { TextRendererAccessors, D3Selection, Datum, EventBus, Object, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
 export declare type Options = RendererOptions<TextRendererAccessors>;
 declare class Text implements RendererClass<TextRendererAccessors> {
     color: RendererAccessor<string>;
@@ -16,6 +16,8 @@ declare class Text implements RendererClass<TextRendererAccessors> {
     xScale: any;
     y: RendererAccessor<number>;
     yScale: any;
+    offset: number;
+    rotate: Object<number>;
     constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series);
     update(data: Datum[], options: Options): void;
     dataForAxis(axis: "x" | "y"): any[];
@@ -23,6 +25,7 @@ declare class Text implements RendererClass<TextRendererAccessors> {
     close(): void;
     private appendSeriesGroup(el);
     private assignAccessors(customAccessors);
+    private assignConfig(customConfig);
     private setAxisScales();
     private validate(d);
     private startAttributes();

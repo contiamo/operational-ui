@@ -44,13 +44,6 @@ export interface ChartConfig extends Config {
   minBarWidth: number
   numberFormatter: (x: number) => string
   outerBarPadding: number
-  textlabels: {
-    offset: number
-    rotate: {
-      horizontal: number
-      vertical: number
-    }
-  }
   timeAxisPriority: string[]
 }
 
@@ -106,9 +99,18 @@ export interface TextRendererAccessors {
   size: RendererAccessor<number>
 }
 
+export interface TextRendererConfig {
+  offset: number
+  rotate: {
+    horizontal: number
+    vertical: number
+  }
+}
+
 export interface RendererOptions<RendererAccessors> {
   type: RendererType | "stacked"
   accessors?: Partial<RendererAccessors>
+  config?: Object<any>
   renderAs?: RendererOptions<any>[] // Used only in case of type: "stacked"
   stackAxis?: "x" | "y"
 }
