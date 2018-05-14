@@ -95,7 +95,6 @@ export interface SymbolRendererAccessors {
 }
 
 export interface TextRendererAccessors {
-  color: RendererAccessor<string>
   size: RendererAccessor<number>
 }
 
