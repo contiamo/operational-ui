@@ -64,7 +64,7 @@ var Rules = /** @class */ (function () {
         };
     };
     Rules.prototype.margin = function (axis) {
-        return this.state.current.get("computed").axes.margins[axis] || this.state.current.get("config")[axis].margin;
+        return this.state.current.get("computed").axes.margins[axis];
     };
     Rules.prototype.close = function () {
         this.el.node().remove();

@@ -9,19 +9,6 @@ var event_bus_1 = require("../utils/event_bus");
 var utils_1 = require("@operational/utils");
 var theme_1 = require("@operational/theme");
 var fp_1 = require("lodash/fp");
-var xAxisConfig = {
-    margin: 14,
-    minTicks: 2,
-    tickSpacing: 65,
-    outerPadding: 3,
-};
-var yAxisConfig = {
-    margin: 34,
-    minTicks: 4,
-    minTopOffsetTopTick: 21,
-    tickSpacing: 40,
-    outerPadding: 3,
-};
 var ChartFacade = /** @class */ (function () {
     function ChartFacade(context) {
         this.__disposed = false;
@@ -64,10 +51,6 @@ var ChartFacade = /** @class */ (function () {
             uid: fp_1.uniqueId("chart"),
             visualizationName: "chart",
             width: 500,
-            x1: fp_1.assign({ tickOffset: 12 })(xAxisConfig),
-            x2: fp_1.assign({ tickOffset: -4 })(xAxisConfig),
-            y1: fp_1.assign({ tickOffset: -4 })(yAxisConfig),
-            y2: fp_1.assign({ tickOffset: 4 })(yAxisConfig),
         };
     };
     ChartFacade.prototype.defaultColorAssigner = function (palette) {

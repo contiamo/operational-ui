@@ -73,24 +73,24 @@ const data: any = {
         { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 14), y: undefined },
+        { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
       ],
       name: "Pageviews 2018",
       key: "series1",
       interpolate: "step",
       renderAs: [BarsRenderer],
-      hide: true
+      hide: false
     },
     {
       data: [
-        { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
+        // { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
+        // { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
       ],
       name: "Pageviews 2017",
       key: "series2",
@@ -100,13 +100,15 @@ const data: any = {
   axes: {
     x1: {
       type: "time",
-      start: new Date(2018, 2, 10),
-      end: new Date(2018, 2, 20),
-      interval: "day"
+      start: new Date(2018, 2, 11),
+      end: new Date(2018, 2, 15),
+      interval: "day",
+      margin: 30
     },
     y1: {
       type: "quant",
-      unit: "EUR"
+      unit: "EUR",
+      margin: 50
     }
   }
 }
@@ -158,7 +160,7 @@ const data1: any = {
   }
 }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} /></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} config={{outerBarPadding: 35}}/></OperationalUI>
 
 render(<App />, containerNode)
 

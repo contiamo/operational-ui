@@ -11,6 +11,9 @@ export interface XAxisConfig {
 export interface YAxisConfig extends XAxisConfig {
     minTopOffsetTopTick: number;
 }
+export interface AxisConfig extends XAxisConfig {
+    minTopOffsetTopTick?: number;
+}
 export declare type FocusElement = string;
 export interface ChartConfig extends Config {
     innerBarPadding: number;
@@ -28,10 +31,6 @@ export interface ChartConfig extends Config {
         };
     };
     timeAxisPriority: string[];
-    x1: XAxisConfig;
-    x2: XAxisConfig;
-    y1: YAxisConfig;
-    y2: YAxisConfig;
 }
 export declare type RendererType = "area" | "bars" | "flag" | "line" | "symbol" | "text";
 export declare type RendererAccessor<T> = (series?: any, d?: Datum) => T;
@@ -109,20 +108,20 @@ export interface SeriesAccessors {
 export declare type AxisPosition = "x1" | "x2" | "y1" | "y2";
 export declare type AxisType = "time" | "quant" | "categorical";
 export declare type TimeIntervals = "hour" | "day" | "week" | "month" | "quarter" | "year";
-export interface TimeAxisOptions {
+export interface TimeAxisOptions extends AxisConfig {
     type: string;
     start: Date;
     end: Date;
     interval: TimeIntervals;
 }
-export interface QuantAxisOptions {
+export interface QuantAxisOptions extends AxisConfig {
     type: string;
     start?: number;
     end?: number;
     interval?: number;
     unit?: string;
 }
-export interface CategoricalAxisOptions {
+export interface CategoricalAxisOptions extends AxisConfig {
     type: string;
     values?: string[];
 }

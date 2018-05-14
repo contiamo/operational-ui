@@ -21,7 +21,7 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
-import { axisPosition, computeRange, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
+import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import { scaleBand } from "d3-scale"
 import * as styles from "./styles"
@@ -51,10 +51,18 @@ class CategoricalAxis implements AxisClass<string> {
   isXAxis: boolean
   position: AxisPosition
   previous: AxisComputed
-  sort: boolean = true
   state: State
   stateWriter: StateWriter
   type: AxisType = "categorical"
+  // Options
+  margin: number
+  minTicks: number
+  minTopOffsetTopTick: number
+  tickOffset: number
+  tickSpacing: number
+  outerPadding: number
+  sort: boolean = true
+  values: string[]
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -70,8 +78,16 @@ class CategoricalAxis implements AxisClass<string> {
     return !isNil(value)
   }
 
+  private updateOptions(options: CategoricalAxisOptions): void {
+    forEach.convert({ cap: false })((value: any, key: string): void => {
+      ;(this as any)[key] = value
+    })(options)
+    this.adjustMargins()
+  }
+
   update(options: CategoricalAxisOptions, data: string[]): void {
-    this.data = flow(filter(this.validate), map(String))(options.values || data)
+    this.updateOptions(options)
+    this.data = flow(filter(this.validate), map(String))(this.values || data)
   }
 
   // Computations
@@ -147,20 +163,16 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private computeRange(tickWidth: number): [number, number] {
-    const config: ChartConfig = this.state.current.get("config")
     const computed: Computed = this.state.current.get("computed")
     const width: number = tickWidth * this.data.length
     const offset: number = tickWidth / 2
     const margin = (axis: AxisPosition): number =>
-      includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || config[axis].margin : 0
+      includes(axis)(computed.axes.requiredAxes) ? (computed.axes.margins || {})[axis] || 0 : 0
 
     const range: [number, number] =
       this.position[0] === "x"
         ? [0, width || computed.canvas.drawingDims.width]
-        : [
-            computed.canvas.drawingDims.height || width,
-            margin("x2") || (config[this.position] as YAxisConfig).minTopOffsetTopTick,
-          ]
+        : [computed.canvas.drawingDims.height || width, margin("x2") || this.minTopOffsetTopTick]
 
     const adjustedRange: [number, number] = [range[0] + offset, range[1] + offset]
     return adjustedRange
@@ -233,12 +245,17 @@ class CategoricalAxis implements AxisClass<string> {
 
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    const config: XAxisConfig | YAxisConfig = this.state.current.get("config")[this.position]
-    let requiredMargin: number = computeRequiredMargin(this.el, computedMargins, config, this.position)
+    const requiredMargin: number = computeRequiredMargin(
+      this.el,
+      computedMargins,
+      this.margin,
+      this.outerPadding,
+      this.position
+    )
 
-    // Add space for flags
-    const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
-    requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+    // // Add space for flags
+    // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
+    // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
 
     if (computedMargins[this.position] === requiredMargin) {
       return

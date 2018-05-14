@@ -4,6 +4,25 @@ var axis_1 = require("./axes/axis");
 var rules_1 = require("../Chart/axes/rules");
 var fp_1 = require("lodash/fp");
 var axis_utils_1 = require("./axes/axis_utils");
+var xAxisConfig = {
+    margin: 14,
+    minTicks: 2,
+    tickSpacing: 65,
+    outerPadding: 3,
+};
+var yAxisConfig = {
+    margin: 34,
+    minTicks: 4,
+    minTopOffsetTopTick: 21,
+    tickSpacing: 40,
+    outerPadding: 3,
+};
+var axisConfig = {
+    x1: fp_1.assign({ tickOffset: 12 })(xAxisConfig),
+    x2: fp_1.assign({ tickOffset: -4 })(xAxisConfig),
+    y1: fp_1.assign({ tickOffset: -4 })(yAxisConfig),
+    y2: fp_1.assign({ tickOffset: 4 })(yAxisConfig),
+};
 var AxesManager = /** @class */ (function () {
     function AxesManager(state, stateWriter, events, els) {
         this.axes = {};
@@ -21,10 +40,14 @@ var AxesManager = /** @class */ (function () {
         fp_1.forEach(this.drawAxes.bind(this))(["y", "x"]);
     };
     AxesManager.prototype.updateMargins = function () {
-        var computedMargins = this.state.current.get("computed").axes.onMarginsUpdated;
-        if (!computedMargins) {
-            this.stateWriter("margins", {});
-        }
+        var defaultMargins = {
+            x1: xAxisConfig.margin,
+            x2: xAxisConfig.margin,
+            y1: yAxisConfig.margin,
+            y2: yAxisConfig.margin,
+        };
+        var computedMargins = fp_1.defaults(defaultMargins)(this.state.current.get("computed").axes.margins || {});
+        this.stateWriter("margins", computedMargins);
     };
     AxesManager.prototype.updateAxes = function () {
         this.stateWriter("previous", {});
@@ -43,9 +66,10 @@ var AxesManager = /** @class */ (function () {
         this.stateWriter("priorityTimeAxis", this.priorityTimeAxis());
     };
     AxesManager.prototype.createOrUpdate = function (options, position) {
+        var fullOptions = fp_1.defaults(axisConfig[position])(options);
         var data = this.state.current.get("computed").series.dataForAxes[position];
         var existing = this.axes[position];
-        existing ? this.update(position, options) : this.create(position, options);
+        existing ? this.update(position, fullOptions) : this.create(position, fullOptions);
     };
     AxesManager.prototype.create = function (position, options) {
         var el = this.els[position[0] + "Axes"];

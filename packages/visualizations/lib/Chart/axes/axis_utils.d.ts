@@ -1,4 +1,4 @@
-import { AxisClass, AxisPosition, ChartConfig, Computed, Object, XAxisConfig, YAxisConfig } from "../typings";
+import { AxisClass, AxisPosition, Object } from "../typings";
 export declare const axisPosition: (position: AxisPosition, drawingDims: {
     width: number;
     height: number;
@@ -7,7 +7,6 @@ export declare const insertElements: (el: any, type: string, position: AxisPosit
     width: number;
     height: number;
 }) => any;
-export declare const computeRange: (config: ChartConfig, computed: Computed, position: AxisPosition) => [number, number];
-export declare const computeRequiredMargin: (axis: any, computedMargins: Object<number>, config: XAxisConfig | YAxisConfig, position: AxisPosition) => number;
+export declare const computeRequiredMargin: (axis: any, computedMargins: Object<number>, configuredMargin: number, outerPadding: number, position: AxisPosition) => number;
 export declare const alignAxes: (axes: Object<AxisClass<any>>) => Object<any>;
 export declare const positionBackgroundRect: (el: any, duration: number) => void;
