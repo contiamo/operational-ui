@@ -10,10 +10,6 @@ declare class ChartFacade implements Facade {
     private state;
     constructor(context: Element);
     private insertState();
-    private initialConfig();
-    private defaultColorAssigner(palette);
-    private initialAccessors();
-    private initialComputed();
     private insertCanvas();
     private insertComponents();
     private insertSeries();

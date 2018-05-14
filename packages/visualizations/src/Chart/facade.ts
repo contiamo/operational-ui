@@ -22,8 +22,60 @@ import {
   Object,
   Partial,
   RendererOptions,
+  SeriesAccessors,
   SeriesData,
 } from "./typings"
+
+const defaultConfig: ChartConfig = {
+  duration: 1e3,
+  height: 500,
+  hidden: false,
+  innerBarPadding: 2,
+  innerBarPaddingCategorical: 0.2,
+  legend: true,
+  maxBarWidthRatio: 1 / 3,
+  minBarWidth: 3,
+  numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+  outerBarPadding: 10,
+  palette: theme.colors.visualizationPalette,
+  timeAxisPriority: ["x1", "x2", "y1", "y2"],
+  uid: uniqueId("chart"),
+  visualizationName: "chart",
+  width: 500,
+}
+
+const defaultDataAccessors = {
+  series: (d: Data): SeriesData => d.series,
+  axes: (d: Data): AxesData => d.axes,
+}
+
+const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
+  return colorAssigner(palette)
+}
+
+const initialColorAssigner: (key: string) => string = defaultColorAssigner(defaultConfig.palette)
+
+const defaultSeriesAccessors: SeriesAccessors = {
+  data: (d: Object<any>): Datum[] => d.data,
+  hide: (d: Object<any>): boolean => d.hide || false,
+  hideInLegend: (d: Object<any>): boolean => d.hideInLegend || false,
+  key: (d: Object<any>): string => d.key || uniqueId("key"),
+  legendColor: (d: Object<any>): string => initialColorAssigner(d.key),
+  legendName: (d: Object<any>): string => d.name || d.key || "",
+  renderAs: (d: Object<any>): RendererOptions<any>[] => d.renderAs,
+  axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
+  xAttribute: (d: Object<any>): string => d.xAttribute || "x",
+  yAttribute: (d: Object<any>): string => d.yAttribute || "y",
+  xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
+  yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
+}
+
+const initialComputed: Computed = {
+  axes: {},
+  canvas: {},
+  focus: {},
+  series: {},
+}
 
 class ChartFacade implements Facade {
   private __disposed: boolean = false
@@ -47,67 +99,10 @@ class ChartFacade implements Facade {
   private insertState(): StateHandler<ChartConfig, Data> {
     return new StateHandler({
       data: {},
-      config: this.initialConfig(),
-      accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      config: defaultConfig,
+      accessors: { data: defaultDataAccessors, series: defaultSeriesAccessors },
+      computed: initialComputed,
     })
-  }
-
-  private initialConfig(): ChartConfig {
-    return {
-      duration: 1e3,
-      height: 500,
-      hidden: false,
-      innerBarPadding: 2,
-      innerBarPaddingCategorical: 0.2,
-      legend: true,
-      maxBarWidthRatio: 1 / 3,
-      minBarWidth: 3,
-      numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-      outerBarPadding: 10,
-      palette: theme.colors.visualizationPalette,
-      timeAxisPriority: ["x1", "x2", "y1", "y2"],
-      uid: uniqueId("chart"),
-      visualizationName: "chart",
-      width: 500,
-    }
-  }
-
-  private defaultColorAssigner(palette: string[]): (key: string) => string {
-    return colorAssigner(palette)
-  }
-
-  private initialAccessors(): AccessorsObject {
-    const assignColors: (key: string) => string = this.defaultColorAssigner(this.initialConfig().palette)
-    return {
-      data: {
-        series: (d: Data): SeriesData => d.series,
-        axes: (d: Data): AxesData => d.axes,
-      },
-      series: {
-        data: (d: Object<any>): Datum[] => d.data,
-        hide: (d: Object<any>): boolean => d.hide || false,
-        hideInLegend: (d: Object<any>): boolean => d.hideInLegend || false,
-        key: (d: Object<any>): string => d.key || uniqueId("key"),
-        legendColor: (d: Object<any>): string => assignColors(d.key),
-        legendName: (d: Object<any>): string => d.name || d.key || "",
-        renderAs: (d: Object<any>): RendererOptions<any>[] => d.renderAs,
-        axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
-        xAttribute: (d: Object<any>): string => d.xAttribute || "x",
-        yAttribute: (d: Object<any>): string => d.yAttribute || "y",
-        xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
-        yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
-      },
-    }
-  }
-
-  private initialComputed(): Computed {
-    return {
-      axes: {},
-      canvas: {},
-      focus: {},
-      series: {},
-    }
   }
 
   private insertCanvas(): ChartCanvas {
@@ -149,7 +144,7 @@ class ChartFacade implements Facade {
 
   config(config?: Partial<ChartConfig>): ChartConfig {
     if (config.palette && !this.customColorAccessor) {
-      const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
+      const assignColors: (key: string, color?: string) => string = defaultColorAssigner(config.palette)
       this.accessors("series", {
         legendColor: (d: Object<any>): string => assignColors(d.key),
       })
