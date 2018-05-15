@@ -1,6 +1,6 @@
 import Axis from "./axes/axis"
 import Rules from "../Chart/axes/rules"
-import { any, assign, defaults, find, forEach, get, includes, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
+import { any, assign, defaults, find, forEach, get, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import {
   AxesData,
@@ -143,9 +143,7 @@ class AxesManager {
 
   private onMarginsUpdated(isXAxis: boolean): void {
     const axesToUpdate: "x" | "y" = isXAxis ? "y" : "x"
-    if (includes(axesToUpdate)(this.axesDrawn)) {
-      this.drawAxes(axesToUpdate)
-    }
+    this.drawAxes(axesToUpdate)
   }
 
   updateRules(orientation: "x" | "y"): void {

@@ -125,7 +125,7 @@ var Text = /** @class */ (function () {
             y: function (d) { return _this.yScale(d.y1 || _this.y(d)) + (_this.xIsBaseline ? -symbolOffset(d) : barOffset); },
             text: function (d) { return (_this.xIsBaseline ? _this.y(d) : _this.x(d)).toString(); },
             anchor: this.xIsBaseline && !this.tilt ? "middle" : "start",
-            baseline: this.xIsBaseline ? "initial" : "central"
+            baseline: this.xIsBaseline ? "initial" : "central",
         };
         attrs.transform = function (d) { return "rotate(" + rotate + ", " + attrs.x(d) + ", " + attrs.y(d) + ")"; };
         return attrs;

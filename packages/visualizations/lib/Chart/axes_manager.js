@@ -104,9 +104,7 @@ var AxesManager = /** @class */ (function () {
     };
     AxesManager.prototype.onMarginsUpdated = function (isXAxis) {
         var axesToUpdate = isXAxis ? "y" : "x";
-        if (fp_1.includes(axesToUpdate)(this.axesDrawn)) {
-            this.drawAxes(axesToUpdate);
-        }
+        this.drawAxes(axesToUpdate);
     };
     AxesManager.prototype.updateRules = function (orientation) {
         var rules = this.rules[orientation] || new rules_1.default(this.state, this.els[orientation + "Rules"], orientation);
