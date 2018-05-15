@@ -169,7 +169,7 @@ class TimeAxis implements AxisClass<Date> {
 
     let requiredTickWidth: number = reduce((sum: number, stack: Object<any>): number => {
       return sum + stack[0].barWidth
-    }, config.outerBarPadding)(fixedWidthStacks)
+    }, config.outerBarSpacing)(fixedWidthStacks)
 
     const variableBarWidth: number =
       variableWidthStacks.length > 0
@@ -188,7 +188,7 @@ class TimeAxis implements AxisClass<Date> {
     const config: ChartConfig = this.state.current.get("config")
     const computedSeries: Object<any> = this.state.current.get("computed").series
     const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
-    let offset: number = -tickWidth / 2 + config.outerBarPadding / 2
+    let offset: number = -tickWidth / 2 + config.outerBarSpacing / 2
 
     return reduce((memo: Object<any>, index: number): Object<any> => {
       const seriesAtIndex: string[] = keys(pickBy((d: number): boolean => d === index)(computedSeries.barIndices))
@@ -196,7 +196,7 @@ class TimeAxis implements AxisClass<Date> {
       forEach((series: string): void => {
         memo[series] = { width, offset }
       })(seriesAtIndex)
-      offset = offset + width + config.innerBarPadding
+      offset = offset + width + config.innerBarSpacing
       return memo
     }, {})(indices)
   }

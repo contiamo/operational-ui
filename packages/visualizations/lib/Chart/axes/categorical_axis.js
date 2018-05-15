@@ -46,7 +46,7 @@ var CategoricalAxis = /** @class */ (function () {
             scale: d3_scale_1.scaleBand()
                 .range(range)
                 .domain(this.data)
-                .padding(config.innerBarPaddingCategorical),
+                .padding(config.innerBarSpacingCategorical),
         };
         this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
@@ -60,7 +60,7 @@ var CategoricalAxis = /** @class */ (function () {
         var config = this.state.current.get("config");
         var drawingDims = this.state.current.get("computed").canvas.drawingDims;
         var defaultTickWidth = (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
-            (1 - config.innerBarPaddingCategorical);
+            (1 - config.innerBarSpacingCategorical);
         var stacks = fp_1.groupBy(function (s) { return s.stackIndex || fp_1.uniqueId("stackIndex"); })(barSeries);
         var partitionedStacks = fp_1.partition(function (stack) {
             return fp_1.compact(fp_1.map(fp_1.get("barWidth"))(stack)).length > 0;
@@ -69,14 +69,14 @@ var CategoricalAxis = /** @class */ (function () {
         var variableWidthStacks = partitionedStacks[1];
         var requiredTickWidth = fp_1.reduce(function (sum, stack) {
             return sum + stack[0].barWidth;
-        }, config.innerBarPadding * (fp_1.keys(stacks).length - 1))(fixedWidthStacks);
+        }, config.innerBarSpacing * (fp_1.keys(stacks).length - 1))(fixedWidthStacks);
         var variableBarWidth = variableWidthStacks.length > 0
             ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
             : 0;
         requiredTickWidth =
-            (requiredTickWidth + variableBarWidth * variableWidthStacks.length) / (1 - config.innerBarPaddingCategorical);
+            (requiredTickWidth + variableBarWidth * variableWidthStacks.length) / (1 - config.innerBarSpacingCategorical);
         this.stateWriter("computedBars", this.computeBarPositions(variableBarWidth, requiredTickWidth));
-        return Math.max(requiredTickWidth, defaultTickWidth / (1 - config.innerBarPaddingCategorical));
+        return Math.max(requiredTickWidth, defaultTickWidth / (1 - config.innerBarSpacingCategorical));
     };
     CategoricalAxis.prototype.computeBarPositions = function (defaultBarWidth, tickWidth) {
         var config = this.state.current.get("config");
@@ -89,7 +89,7 @@ var CategoricalAxis = /** @class */ (function () {
             fp_1.forEach(function (series) {
                 memo[series] = { width: width, offset: offset };
             })(seriesAtIndex);
-            offset = offset + width + config.innerBarPadding;
+            offset = offset + width + config.innerBarSpacing;
             return memo;
         }, {})(indices);
     };
@@ -137,7 +137,7 @@ var CategoricalAxis = /** @class */ (function () {
     };
     // Padding added only to end of each step in d3 ordinal band scale
     CategoricalAxis.prototype.scaleWithOffset = function (computed) {
-        var barPadding = this.state.current.get("config").innerBarPaddingCategorical;
+        var barPadding = this.state.current.get("config").innerBarSpacingCategorical;
         var stepWidth = computed.scale.step();
         return function (d) { return computed.scale(d) - stepWidth * barPadding / 2; };
     };

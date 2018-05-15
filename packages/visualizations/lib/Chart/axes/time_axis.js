@@ -99,7 +99,7 @@ var TimeAxis = /** @class */ (function () {
         var variableWidthStacks = partitionedStacks[1];
         var requiredTickWidth = fp_1.reduce(function (sum, stack) {
             return sum + stack[0].barWidth;
-        }, config.outerBarPadding)(fixedWidthStacks);
+        }, config.outerBarSpacing)(fixedWidthStacks);
         var variableBarWidth = variableWidthStacks.length > 0
             ? Math.min(Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length), config.maxBarWidthRatio * drawingDims[this.isXAxis ? "width" : "height"])
             : 0;
@@ -111,14 +111,14 @@ var TimeAxis = /** @class */ (function () {
         var config = this.state.current.get("config");
         var computedSeries = this.state.current.get("computed").series;
         var indices = fp_1.sortBy(fp_1.identity)(fp_1.uniq(fp_1.values(computedSeries.barIndices)));
-        var offset = -tickWidth / 2 + config.outerBarPadding / 2;
+        var offset = -tickWidth / 2 + config.outerBarSpacing / 2;
         return fp_1.reduce(function (memo, index) {
             var seriesAtIndex = fp_1.keys(fp_1.pickBy(function (d) { return d === index; })(computedSeries.barIndices));
             var width = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth;
             fp_1.forEach(function (series) {
                 memo[series] = { width: width, offset: offset };
             })(seriesAtIndex);
-            offset = offset + width + config.innerBarPadding;
+            offset = offset + width + config.innerBarSpacing;
             return memo;
         }, {})(indices);
     };

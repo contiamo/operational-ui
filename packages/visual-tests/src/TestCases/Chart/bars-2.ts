@@ -110,7 +110,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 
   test("Increase tick padding", () => {
-    viz.config({ outerBarPadding: 20 })
+    viz.config({ outerBarSpacing: 20 })
     viz.draw()
   })
 

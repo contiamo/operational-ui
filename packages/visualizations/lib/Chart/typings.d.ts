@@ -17,13 +17,13 @@ export interface AxisConfig extends XAxisConfig {
 }
 export declare type FocusElement = string;
 export interface ChartConfig extends Config {
-    innerBarPadding: number;
-    innerBarPaddingCategorical: number;
+    innerBarSpacing: number;
+    innerBarSpacingCategorical: number;
     legend: boolean;
     maxBarWidthRatio: number;
     minBarWidth: number;
     numberFormatter: (x: number) => string;
-    outerBarPadding: number;
+    outerBarSpacing: number;
     timeAxisPriority: string[];
 }
 export declare type RendererType = "area" | "bars" | "flag" | "line" | "symbol" | "text";

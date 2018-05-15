@@ -38,13 +38,13 @@ export interface AxisConfig extends XAxisConfig {
 export type FocusElement = string
 
 export interface ChartConfig extends Config {
-  innerBarPadding: number
-  innerBarPaddingCategorical: number
+  innerBarSpacing: number
+  innerBarSpacingCategorical: number
   legend: boolean
   maxBarWidthRatio: number
   minBarWidth: number
   numberFormatter: (x: number) => string
-  outerBarPadding: number
+  outerBarSpacing: number
   timeAxisPriority: string[]
 }
 

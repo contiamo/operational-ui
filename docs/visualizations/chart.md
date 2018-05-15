@@ -235,13 +235,13 @@ Symbol options are: "circle", "cross", "diamond", "square", "squareDiamond", "st
 | focusElement | Key of segment to be manually focussed. | string | undefined 
 | height | Visualization height | number | 500 
 | hidden | Hide/show the visualization div | boolean | false 
-| innerBarPadding | Padding between bars for same tick in px | number | 2 
-| innerBarPaddingCategorical | Padding between bars for same categorical tick as a percentage | number | 0.2 
+| innerBarSpacing | Padding between bars for same tick in px | number | 2 
+| innerBarSpacingCategorical | Padding between bars for same categorical tick as a percentage | number | 0.2 
 | legend | Show/hide legend | boolean | true 
 | maxBarWidthRatio | Maximum bar width as proportion of total width | number | 1 / 3 
 | minBarWidth | Minimum bar width | number | 3
 | numberFormatter | Number formatter | function | `(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, ",")` 
-| outerBarPadding | Padding between groups of bars | number | 10 
+| outerBarSpacing | Padding between groups of bars | number | 10 
 | palette | Default color palette | string[] | theme.colors.visualizationPalette
 | showComponentFocus | Toggle component focus - if `true`, enables hover and click events on configurable items, in this case series items in legend | boolean | false 
 | timeAxisPriority | Order of priority of time axes | string[] | ["x1", "x2", "y1", "y2"]
