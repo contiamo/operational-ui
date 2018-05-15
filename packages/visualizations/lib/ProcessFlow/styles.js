@@ -12,19 +12,19 @@ var glamor_1 = require("glamor");
 var theme_1 = require("@operational/theme");
 var utils_1 = require("@operational/utils");
 var breakdownStyle = {
-    maxWidth: "350px",
+    maxWidth: "300px",
     padding: "6px",
     background: "white",
 };
 var breakdownsContainerStyle = {
-    width: "350px",
+    width: "300px",
     float: "left",
     padding: "7px 0",
 };
 var breakdownContainerStyle = {
-    padding: theme_1.operational.spacing / 2 + "px",
+    padding: "2%",
     background: theme_1.operational.colors.white,
-    width: "49%",
+    width: "46%",
     float: "left",
 };
 var breakdownLabelStyle = __assign({}, theme_1.operational.typography.small, { display: "block", marginBottom: theme_1.operational.spacing / 4 });
@@ -49,7 +49,7 @@ var breakdownBarStyle = {
     pointerEvents: "none",
     backgroundColor: utils_1.setBrightness(theme_1.operational.colors.info, 145),
 };
-var breakdownTextStyle = __assign({}, theme_1.operational.typography.small, { color: theme_1.operational.colors.gray, position: "relative", top: 1, fontWeight: 400, padding: theme_1.operational.spacing / 4 + "px " + theme_1.operational.spacing / 2 + "px" });
+var breakdownTextStyle = __assign({}, theme_1.operational.typography.small, { lineHeight: 1, color: theme_1.operational.colors.gray, position: "relative", top: 1, fontWeight: 400, padding: theme_1.operational.spacing / 4 + "px " + theme_1.operational.spacing / 2 + "px" });
 var titleStyle = {
     fontWeight: "bold",
     color: "#555",

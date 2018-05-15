@@ -1,5 +1,9 @@
 export declare const chartContainer: string;
 export declare const focusLegend: string;
+export declare const focusLegendAbove: string;
+export declare const focusLegendBelow: string;
+export declare const focusLegendRight: string;
+export declare const focusLegendLeft: string;
 export declare const legend: string;
 export declare const legendTopBottom: string;
 export declare const seriesLegend: string;

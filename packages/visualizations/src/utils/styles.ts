@@ -1,4 +1,5 @@
 import { css } from "glamor"
+import { operational as theme } from "@operational/theme"
 
 const legendStyle = {
   fontSize: "11px",
@@ -14,17 +15,20 @@ const legendTopBottomStyle = {
 }
 
 const seriesLegendStyle = {
-  padding: "1px 3px 0 3px",
+  padding: "1px 4px 0 4px",
+  marginRight: "2px",
   float: "left",
   lineHeight: "14px",
   "& div.color": {
-    width: "6px",
-    height: "6px",
-    margin: "2px 3px 0 0",
+    width: "10px",
+    height: "10px",
+    margin: "3px 3px 0 0",
     float: "left",
+    borderRadius: "2px",
   },
   "& div.name": {
     float: "left",
+    ...theme.typography.small,
   },
 }
 
@@ -49,9 +53,9 @@ const ruleStyle = {
 const componentFocusStyle = {
   position: "absolute",
   pointerEvents: "all",
-  backgroundColor: "rgba(190, 255, 255, 0.1)",
-  borderRadius: "3px",
-  border: "1px solid #dcf1ff",
+  backgroundColor: "rgba(0, 74, 117, 0.05)",
+  borderRadius: theme.borderRadius,
+  border: 0,
   padding: 0,
   cursor: "pointer",
 }
@@ -75,6 +79,7 @@ const focusLegendStyle = {
   zIndex: 3000,
   maxWidth: "350px",
   backgroundColor: "#fff",
+  borderRadius: theme.borderRadius,
   "& ul": {
     listStyle: "none",
     fontSize: 12,
@@ -93,26 +98,82 @@ const focusLegendStyle = {
     width: 0,
     height: 0,
   },
-  "&.above::before,.above::after": {
-    top: "100%",
-    left: "50%",
-  },
-  "&.above::before": {
-    borderLeft: "solid 8px transparent",
-    borderRight: "solid 8px transparent",
-    borderTop: "solid 8px #cdcdcd",
-    marginLeft: "-8px",
-  },
-  "&.above::after": {
+}
+
+const focusLegendAboveStyle = {
+  position: "absolute",
+  borderLeft: "solid 8px transparent",
+  borderRight: "solid 8px transparent",
+  borderTop: "solid 8px #cdcdcd",
+  marginLeft: "-8px",
+  marginTop: "-2px",
+  "& div.arrowFill": {
+    position: "absolute",
     borderLeft: "solid 7px transparent",
     borderRight: "solid 7px transparent",
     borderTop: "solid 7px #fff",
     marginLeft: "-7px",
+    marginTop: "-9px",
+  },
+}
+
+const focusLegendBelowStyle = {
+  position: "absolute",
+  borderLeft: "solid 8px transparent",
+  borderRight: "solid 8px transparent",
+  borderBottom: "solid 8px #cdcdcd",
+  marginLeft: "-8px",
+  marginTop: "-8px",
+  "& div.arrowFill": {
+    position: "absolute",
+    borderLeft: "solid 7px transparent",
+    borderRight: "solid 7px transparent",
+    borderBottom: "solid 7px #fff",
+    marginLeft: "-7px",
+    marginTop: "1px",
+  },
+}
+
+const focusLegendRightStyle = {
+  position: "absolute",
+  borderTop: "solid 8px transparent",
+  borderBottom: "solid 8px transparent",
+  borderRight: "solid 8px #cdcdcd",
+  marginTop: "-8px",
+  marginLeft: "-8px",
+  "& div.arrowFill": {
+    position: "absolute",
+    borderTop: "solid 7px transparent",
+    borderBottom: "solid 7px transparent",
+    borderRight: "solid 7px #fff",
+    marginTop: "-7px",
+    marginLeft: "1px",
+  },
+}
+
+const focusLegendLeftStyle = {
+  position: "absolute",
+  borderTop: "solid 8px transparent",
+  borderBottom: "solid 8px transparent",
+  borderLeft: "solid 8px #cdcdcd",
+  marginTop: "-8px",
+  marginLeft: "-2px",
+  "& div.arrowFill": {
+    position: "absolute",
+    borderTop: "solid 7px transparent",
+    borderBottom: "solid 7px transparent",
+    borderLeft: "solid 7px #fff",
+    marginTop: "-7px",
+    marginLeft: "-9px",
   },
 }
 
 export const chartContainer = css(chartContainerStyle).toString()
 export const focusLegend = css(focusLegendStyle).toString()
+export const focusLegendAbove = css(focusLegendAboveStyle).toString()
+export const focusLegendBelow = css(focusLegendBelowStyle).toString()
+export const focusLegendRight = css(focusLegendRightStyle).toString()
+export const focusLegendLeft = css(focusLegendLeftStyle).toString()
 export const legend = css(legendStyle).toString()
 export const legendTopBottom = css(legendTopBottomStyle).toString()
 export const seriesLegend = css(seriesLegendStyle).toString()

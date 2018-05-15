@@ -1,6 +1,16 @@
 import Events from "../utils/event_catalog"
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, EventBus, Object, PieChartConfig, SeriesEl, State, StateWriter } from "./typings"
+import {
+  Canvas,
+  D3Selection,
+  Dimensions,
+  EventBus,
+  Object,
+  PieChartConfig,
+  SeriesEl,
+  State,
+  StateWriter,
+} from "./typings"
 import * as styles from "../utils/styles"
 
 class PieChartCanvas implements Canvas {
@@ -21,7 +31,6 @@ class PieChartCanvas implements Canvas {
     this.renderLegend()
     this.drawingContainer = this.renderDrawingContainer()
     this.el = this.renderEl()
-    this.renderShadows()
     this.renderDrawingGroup()
     this.renderFocusElements()
     this.stateWriter("elements", this.elements)
@@ -78,42 +87,6 @@ class PieChartCanvas implements Canvas {
     return this.elMap.series
   }
 
-  // Defs
-  private renderShadows(): void {
-    this.elements.defs = this.el.append("defs")
-    const shadow: D3Selection = this.elements.defs
-      .append("filter")
-      .attr("id", this.shadowDefinitionId())
-      .attr("height", "130%")
-    shadow
-      .append("feGaussianBlur")
-      .attr("in", "SourceAlpha")
-      .attr("stdDeviation", "3")
-    shadow
-      .append("feOffset")
-      .attr("dx", "2")
-      .attr("dy", "2")
-      .attr("result", "offsetblur")
-    shadow
-      .append("feComponentTransfer")
-      .append("feFuncA")
-      .attr("type", "linear")
-      .attr("slope", "0.5")
-
-    const shadowFeMerge: D3Selection = shadow.append("feMerge")
-    shadowFeMerge.append("feMergeNode")
-    shadowFeMerge.append("feMergeNode").attr("in", "SourceGraphic")
-    this.stateWriter("shadowDefinitionId", this.shadowDefinitionId())
-  }
-
-  private prefixedId(id: string): string {
-    return this.state.current.get("config").uid + id
-  }
-
-  private shadowDefinitionId(): string {
-    return this.prefixedId("_shadow")
-  }
-
   // Drawing group
   private renderDrawingGroup(): void {
     this.elements.drawing = this.el.append("svg:g").attr("class", "drawing")
@@ -141,7 +114,7 @@ class PieChartCanvas implements Canvas {
     return focusEl
   }
 
-  private drawingContainerDims(): { height: number; width: number } {
+  private drawingContainerDims(): Dimensions {
     const config = this.state.current.get("config")
     const dims = {
       height: config.height - this.elMap.legend.node().offsetHeight,
@@ -157,7 +130,7 @@ class PieChartCanvas implements Canvas {
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
 
     const config: PieChartConfig = this.state.current.get("config")
-    const dims: { width: number; height: number } = this.drawingContainerDims()
+    const dims: Dimensions = this.drawingContainerDims()
 
     this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)

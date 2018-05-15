@@ -63,3 +63,15 @@ export interface ComponentConfigOptions {
     seriesType?: string;
     type: "series" | "config";
 }
+export interface Point {
+    x: number;
+    y: number;
+}
+export interface Dimensions {
+    height: number;
+    width: number;
+}
+export interface Position {
+    left: number;
+    top: number;
+}

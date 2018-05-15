@@ -1,6 +1,16 @@
 import DataHandler from "./data_handler"
 import Events from "../utils/event_catalog"
-import { ClickPayload, D3Selection, Datum, EventBus, Object, State, StateWriter, SunburstConfig } from "./typings"
+import {
+  ClickPayload,
+  D3Selection,
+  Datum,
+  Dimensions,
+  EventBus,
+  Object,
+  State,
+  StateWriter,
+  SunburstConfig,
+} from "./typings"
 import { every, find, filter, forEach, findIndex, get, identity, keys, map, reduce } from "lodash/fp"
 import * as styles from "./styles"
 
@@ -167,7 +177,7 @@ class Renderer {
 
   // Center elements within drawing container
   private translate(): string {
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingDims
     this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return `translate(${this.currentTranslation.join(", ")})`
   }
@@ -382,12 +392,22 @@ class Renderer {
       return
     }
 
-    const centroid: [number, number] = this.translateBack(this.arc.centroid(d))
+    const labelPosition: string = this.arc.centroid(d)[1] > 0 ? "below" : "above"
     const hideLabel: boolean = d3.select(el).classed(styles.arrow)
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, { d, hideLabel, focusPoint: { centroid } })
+    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOVER, {
+      d,
+      hideLabel,
+      focusPoint: { labelPosition, centroid: this.getFocusPoint(d) },
+    })
 
     this.mouseOverDatum = d
     this.highlightPath(d, el)
+  }
+
+  private getFocusPoint(d: Datum): [number, number] {
+    const r: number = (3 * this.arc.outerRadius()(d) + this.arc.innerRadius()(d)) / 4
+    const a: number = (this.arc.startAngle()(d) + this.arc.endAngle()(d)) / 2 - Math.PI / 2
+    return this.translateBack([Math.cos(a) * r, Math.sin(a) * r])
   }
 
   private highlightPath(d: Datum, el: Element) {
@@ -408,7 +428,7 @@ class Renderer {
     this.el
       .selectAll(`path.${styles.arc}`)
       .filter((d: Datum): boolean => d !== this.zoomNode)
-      .style("opacity", 0.3)
+      .style("opacity", 0.5)
 
     // Then highlight only those that are an ancestor of the current segment.
     this.el

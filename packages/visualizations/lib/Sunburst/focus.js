@@ -23,7 +23,7 @@ var SunburstFocus = /** @class */ (function () {
             return;
         }
         var focusPoint = payload.focusPoint, datum = payload.d;
-        focus_utils_1.default.drawHidden(this.el, "element", "above");
+        focus_utils_1.default.drawHidden(this.el, "element", focusPoint.labelPosition);
         var content = this.el.append("xhtml:ul");
         content
             .append("span")
@@ -33,12 +33,16 @@ var SunburstFocus = /** @class */ (function () {
         var comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode;
         var percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3);
         content.append("xhtml:li").text(this.percentageString(datum));
-        // Get label dimensions
-        var labelDimensions = focus_utils_1.default.labelDimensions(this.el), labelPlacement = {
+        focus_utils_1.default.drawVisible(this.el, this.labelPlacement(focusPoint), focusPoint.labelPosition);
+    };
+    SunburstFocus.prototype.labelPlacement = function (focusPoint) {
+        var labelDimensions = focus_utils_1.default.labelDimensions(this.el);
+        var verticalOffset = this.state.current.get("config").focusOffset;
+        return {
             left: focusPoint.centroid[0] - labelDimensions.width / 2,
-            top: focusPoint.centroid[1],
+            top: focusPoint.centroid[1] +
+                (focusPoint.labelPosition === "below" ? labelDimensions.height + verticalOffset : -verticalOffset),
         };
-        focus_utils_1.default.drawVisible(this.el, labelPlacement);
     };
     SunburstFocus.prototype.percentageString = function (datum) {
         var computed = this.state.current.get("computed");

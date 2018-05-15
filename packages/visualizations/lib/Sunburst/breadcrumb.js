@@ -20,6 +20,10 @@ var Breadcrumb = /** @class */ (function () {
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateHoverPath.bind(this));
     }
     Breadcrumb.prototype.updateHoverPath = function (payload) {
+        // Only display breadcrumb if drawing area is wide enough.
+        if (this.state.current.get("config").width < 330) {
+            return;
+        }
         var computed = this.state.current.get("computed").renderer;
         var fixedNode = computed.zoomNode || computed.topNode;
         if (!fixedNode || (payload.d && payload.d.data.empty)) {
@@ -32,10 +36,10 @@ var Breadcrumb = /** @class */ (function () {
         return d === "hops" ? "..." : d.name;
     };
     Breadcrumb.prototype.truncateNodeArray = function (nodeArray) {
-        if (nodeArray.length <= 5) {
+        if (nodeArray.length <= 4) {
             return nodeArray;
         }
-        var firstNodes = nodeArray.slice(0, 2);
+        var firstNodes = nodeArray.slice(0, 1);
         var lastNodes = nodeArray.slice(nodeArray.length - 2);
         return firstNodes.concat(["hops"]).concat(lastNodes);
     };

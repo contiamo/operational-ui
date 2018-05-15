@@ -320,11 +320,20 @@ var Renderer = /** @class */ (function () {
         if (d.data.empty && !this.isFirstLevelChild(d)) {
             return;
         }
-        var centroid = this.translateBack(this.arc.centroid(d));
+        var labelPosition = this.arc.centroid(d)[1] > 0 ? "below" : "above";
         var hideLabel = d3.select(el).classed(styles.arrow);
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: d, hideLabel: hideLabel, focusPoint: { centroid: centroid } });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, {
+            d: d,
+            hideLabel: hideLabel,
+            focusPoint: { labelPosition: labelPosition, centroid: this.getFocusPoint(d) },
+        });
         this.mouseOverDatum = d;
         this.highlightPath(d, el);
+    };
+    Renderer.prototype.getFocusPoint = function (d) {
+        var r = (3 * this.arc.outerRadius()(d) + this.arc.innerRadius()(d)) / 4;
+        var a = (this.arc.startAngle()(d) + this.arc.endAngle()(d)) / 2 - Math.PI / 2;
+        return this.translateBack([Math.cos(a) * r, Math.sin(a) * r]);
     };
     Renderer.prototype.highlightPath = function (d, el) {
         var _this = this;
@@ -341,7 +350,7 @@ var Renderer = /** @class */ (function () {
         this.el
             .selectAll("path." + styles.arc)
             .filter(function (d) { return d !== _this.zoomNode; })
-            .style("opacity", 0.3);
+            .style("opacity", 0.5);
         // Then highlight only those that are an ancestor of the current segment.
         this.el
             .selectAll("path." + styles.arc)

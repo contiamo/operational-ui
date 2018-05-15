@@ -13,10 +13,15 @@ var theme_1 = require("@operational/theme");
 var arcStyle = {
     stroke: "#fff",
     strokeWidth: "1",
-    opacity: 0.8,
     fill: "#eee",
 };
 var labelStyle = __assign({ fill: "#333", stroke: "none", pointerEvents: "none" }, theme_1.operational.typography.small);
+var labelBackgroundStyle = {
+    fill: "rgba(255, 255, 255, 0.2)",
+    pointerEvents: "none",
+    stroke: "none",
+    borderRadius: theme_1.operational.borderRadius,
+};
 var totalStyle = __assign({ fill: "#4c4c4c" }, theme_1.operational.typography.small);
 var comparisonStyle = {
     stroke: "#747474",
@@ -25,6 +30,7 @@ var comparisonStyle = {
 };
 exports.arc = glamor_1.css(arcStyle).toString();
 exports.label = glamor_1.css(labelStyle).toString();
+exports.labelBackground = glamor_1.css(labelBackgroundStyle).toString();
 exports.total = glamor_1.css(totalStyle).toString();
 exports.comparison = glamor_1.css(comparisonStyle).toString();
 //# sourceMappingURL=styles.js.map

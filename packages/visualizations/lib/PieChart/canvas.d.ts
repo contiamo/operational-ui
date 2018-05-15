@@ -16,9 +16,6 @@ declare class PieChartCanvas implements Canvas {
     private renderLegend();
     private renderDrawingContainer();
     private renderEl();
-    private renderShadows();
-    private prefixedId(id);
-    private shadowDefinitionId();
     private renderDrawingGroup();
     private renderFocusElements();
     private renderFocusLabel();

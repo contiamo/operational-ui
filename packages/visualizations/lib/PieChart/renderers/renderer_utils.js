@@ -2,27 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
 var styles = require("./styles");
+var d3_selection_1 = require("d3-selection");
 var d3_shape_1 = require("d3-shape");
 var d3_interpolate_1 = require("d3-interpolate");
 var utils_1 = require("@operational/utils");
-// y is a step-function (with two x values resulting in the same y value)
-// on the positive integer domain which is monotonic decreasing
-exports.approxZero = function (y, initialX) {
-    // make sure to get points with different y value
-    var p0 = { x: initialX, y: y(initialX) };
-    var p1 = { x: initialX + 2, y: y(initialX + 2) };
-    // Solve for 0
-    var m = (p0.y - p1.y) / (p0.x - p1.x);
-    var xZero = -p0.y / m + p0.x;
-    // Find nearest integer value for x that has y > 0
-    var xInt = Math.round(xZero);
-    for (var i = 0; i <= 10; i = i + 1) {
-        if (y(xInt) <= 0) {
-            xInt = xInt - 1;
-        }
-    }
-    return xInt;
-};
+var d3_utils_1 = require("../../utils/d3_utils");
+var font_sizing_utils_1 = require("../../utils/font_sizing_utils");
 exports.assignOptions = function (ctx, options) {
     fp_1.forEach.convert({ cap: false })(function (option, key) {
         if (key !== "accessors") {
@@ -97,9 +82,27 @@ exports.enterArcs = function (arcs, mouseOverHandler, mouseOutHandler) {
         .on("mouseenter", mouseOverHandler)
         .on("mouseout", mouseOutHandler);
     enteringArcs.append("svg:path");
+    enteringArcs.append("svg:rect").attr("class", styles.labelBackground);
     enteringArcs.append("svg:text").attr("class", styles.label);
 };
-// @TODO move last 3 parameters into object
+var RECT_PADDING = 2;
+exports.updateBackgroundRects = function (updatingArcs, centroid) {
+    updatingArcs.each(d3_utils_1.withD3Element(function (d, el) {
+        var element = d3_selection_1.select(el);
+        var textDimensions = element.select("text").node().getBBox();
+        var transform = [
+            centroid(d)[0] + textDimensions.x - RECT_PADDING,
+            centroid(d)[1] + textDimensions.y - RECT_PADDING,
+        ];
+        element
+            .select("rect")
+            .attr("width", textDimensions.width + RECT_PADDING * 2)
+            .attr("height", textDimensions.height + RECT_PADDING * 2)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("transform", exports.translateString(transform));
+    }));
+};
 exports.updateTotal = function (el, label, duration, options) {
     var total = el
         .select("g." + styles.total)
@@ -117,20 +120,15 @@ exports.updateTotal = function (el, label, duration, options) {
         .text(String);
     var node = mergedTotal.node();
     if (node) {
-        var y = function (x) {
-            mergedTotal.style("font-size", x + "px");
-            // Text should fill half of available width (0.5 * diameter = radius)
-            return options.innerRadius - node.getBBox().width;
-        };
+        var y = font_sizing_utils_1.stepFunction(mergedTotal, options.innerRadius);
         // start with min font size
         if (y(options.minTotalFontSize) < 0) {
             // Not enough room - do not show total
             total = total.data([]);
         }
         else {
-            // change font size until bounding box is completely filled
-            // @TODO CHECK THIS
-            mergedTotal.style("font-size", exports.approxZero(y, options.minTotalFontSize) + "px");
+            // change font size until bounding box is completely filled or max font size is reached
+            mergedTotal.style("font-size", Math.min(options.maxTotalFontSize, font_sizing_utils_1.approxZero(y, options.minTotalFontSize)) + "px");
             mergedTotal.attr("dy", options.yOffset);
         }
     }
@@ -161,10 +159,11 @@ exports.removeArcTween = function (computed, angleRange) {
         return function (t) { return computed.arc(f(t)); };
     };
 };
-exports.updateFilteredPathAttributes = function (selection, filterFunc, path, shadowDef) {
+exports.updateFilteredPathAttributes = function (selection, filterFunc, path, arcInfo) {
+    if (arcInfo === void 0) { arcInfo = {}; }
     selection
         .filter(filterFunc)
-        .attr("d", path)
-        .attr("filter", shadowDef ? "url(#" + shadowDef + ")" : null);
+        .select("path")
+        .attr("d", path);
 };
 //# sourceMappingURL=renderer_utils.js.map

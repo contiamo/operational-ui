@@ -43,7 +43,7 @@ exports.setPathAttributes = function (selection, attributes, duration, onEnd) {
         .style("opacity", attributes.opacity)
         .call(exports.onTransitionEnd, onEnd);
 };
-exports.setTextAttributes = function (selection, attributes, duration) {
+exports.setTextAttributes = function (selection, attributes, duration, onEnd) {
     transitionOrSelection(selection, duration)
         .attr("x", attributes.x)
         .attr("y", attributes.y)
@@ -52,6 +52,7 @@ exports.setTextAttributes = function (selection, attributes, duration) {
         .style("text-anchor", attributes.textAnchor)
         .attr("transform", attributes.transform)
         .text(attributes.text)
-        .style("opacity", attributes.opacity || 1);
+        .style("opacity", attributes.opacity || 1)
+        .call(exports.onTransitionEnd, onEnd);
 };
 //# sourceMappingURL=d3_utils.js.map

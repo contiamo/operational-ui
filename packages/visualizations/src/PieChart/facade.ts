@@ -49,14 +49,16 @@ class PieChartFacade implements Facade {
 
   private initialConfig(): PieChartConfig {
     return {
+      displayPercentages: true,
       duration: 1e3,
+      focusOffset: 5,
       height: 500,
       hidden: false,
       legend: true,
       maxWidth: 100,
       maxLegendRatio: 1 / 2,
       maxLegendWidth: 200,
-      maxTotalFontSize: 80,
+      maxTotalFontSize: 54,
       minChartWithLegend: 50,
       minWidth: 30,
       minInnerRadius: 30,

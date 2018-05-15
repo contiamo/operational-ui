@@ -43,14 +43,15 @@ const breadcrumbStyle = {
 const breadcrumbItemStyle = {
   float: "left",
   width: "80px",
-  height: "26px",
+  height: "18px",
   position: "relative",
-  paddingLeft: "20px",
-  lineHeight: "26px",
+  paddingLeft: "14px",
+  lineHeight: "18px",
   cursor: "pointer",
   margin: "5px 0",
+  ...theme.typography.small,
   "&:first-child": {
-    paddingLeft: "5px",
+    paddingLeft: "8px",
   },
   "&.hops": {
     width: "40px",
@@ -69,12 +70,12 @@ const breadcrumbItemStyle = {
     position: "absolute",
     width: 0,
     height: 0,
-    borderLeft: "solid 16px #fff",
-    borderTop: "solid 16px transparent",
-    borderBottom: "solid 16px transparent",
+    borderLeft: "solid 7px #fff",
+    borderTop: "solid 11px transparent",
+    borderBottom: "solid 11px transparent",
     top: "50%",
     left: "100%",
-    marginTop: "-16px",
+    marginTop: "-11px",
     zIndex: "2",
   },
   "& .arrow": {
@@ -82,12 +83,12 @@ const breadcrumbItemStyle = {
     position: "absolute",
     width: 0,
     height: 0,
-    borderLeft: "solid 13px #fff",
-    borderTop: "solid 13px transparent",
-    borderBottom: "solid 13px transparent",
+    borderLeft: "solid 5px #fff",
+    borderTop: "solid 9px transparent",
+    borderBottom: "solid 9px transparent",
     top: "50%",
     left: "100%",
-    marginTop: "-13px",
+    marginTop: "-9px",
     zIndex: "3",
   },
 }
@@ -105,9 +106,6 @@ const rootLabelStyle = {
   textOverflow: "ellipsis",
   "& .name": {
     ...theme.typography.small,
-  },
-  "& .value": {
-    ...theme.typography.heading1,
   },
 }
 

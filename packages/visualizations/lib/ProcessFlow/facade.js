@@ -30,6 +30,7 @@ var ProcessFlowFacade = /** @class */ (function () {
             borderColor: "#fff",
             duration: 1e3,
             focusElement: {},
+            focusLabelPosition: "toRight",
             height: Infinity,
             hidden: false,
             highlightColor: "#1499CE",

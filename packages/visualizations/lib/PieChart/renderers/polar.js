@@ -53,11 +53,12 @@ var Polar = /** @class */ (function () {
         this.drawn = true;
     };
     Polar.prototype.updateDraw = function () {
+        var _this = this;
         var config = this.state.current.get("config");
         var duration = config.duration;
+        var maxTotalFontSize = config.maxTotalFontSize;
         var minTotalFontSize = config.minTotalFontSize;
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims;
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         // Remove focus before updating chart
         this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
         // Center coordinate system
@@ -72,9 +73,11 @@ var Polar = /** @class */ (function () {
         // Update
         var updatingArcs = arcs.merge(arcs.enter().selectAll("g." + styles.arc));
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration, this.fitToCanvas.bind(this));
-        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration);
+        d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, function () {
+            return Utils.updateBackgroundRects(updatingArcs, _this.computed.arcOver.centroid);
+        });
         // Total / center text
-        var options = { minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
+        var options = { maxTotalFontSize: maxTotalFontSize, minTotalFontSize: minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET };
         Utils.updateTotal(this.el, this.centerDisplayString(), duration, options);
     };
     Polar.prototype.arcAttributes = function () {
@@ -158,8 +161,11 @@ var Polar = /** @class */ (function () {
         return 1;
     };
     Polar.prototype.computeArcs = function (computed) {
-        var drawingDims = this.state.current.get("computed").canvas
-            .drawingContainerDims, r = this.computeOuterRadius(drawingDims), rInner = this.computeInnerRadius(computed.data, r), rHover = this.hoverOuterRadius(r), rInnerHover = Math.max(rInner - 1, 0);
+        var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
+        var r = this.computeOuterRadius(drawingDims);
+        var rInner = this.computeInnerRadius(computed.data, r);
+        var rHover = this.hoverOuterRadius(r);
+        var rInnerHover = Math.max(rInner - 5, 0);
         return {
             r: r,
             rInner: rInner,
@@ -195,7 +201,7 @@ var Polar = /** @class */ (function () {
         return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth);
     };
     Polar.prototype.hoverOuterRadius = function (radius) {
-        return function (d) { return radius(d) + 1; };
+        return function (d) { return radius(d) + 5; };
     };
     // Event listeners / handlers
     Polar.prototype.onMouseOver = function (d) {
@@ -215,9 +221,8 @@ var Polar = /** @class */ (function () {
         var arcs = this.el.select("g.arcs").selectAll("g");
         var filterFocused = function (d) { return datapoint.d && _this.key(d) === datapoint.d.key; };
         var filterUnFocused = function (d) { return (datapoint.d ? _this.key(d) !== datapoint.d.key : true); };
-        var shadowDefinitionId = this.state.current.get("computed").canvas.shadowDefinitionId;
-        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId);
-        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc);
+        Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver);
+        Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r));
     };
     Polar.prototype.highlightElement = function (key) {
         var _this = this;

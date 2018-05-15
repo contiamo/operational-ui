@@ -3,12 +3,15 @@ import Renderer from "./renderer";
 import RootLabel from "./root_label";
 import { HierarchyRectangularNode } from "d3-hierarchy";
 import { Accessor, Config, Object, Focus, Facade } from "../utils/typings";
-export { Accessor, Accessors, EventBus, Object, State, Partial, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
+export { Accessor, Accessors, Dimensions, EventBus, Object, State, Partial, Position, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
 export interface SunburstConfig extends Config {
     arrowOffset: number;
     centerCircleRadius: number;
     disableAnimations: boolean;
+    focusOffset: number;
     maxRings: number;
+    maxTotalFontSize: number;
+    minTotalFontSize: number;
     numberFormatter: (x: number) => string;
     outerBorderMargin: number;
     palette: string[];
@@ -50,6 +53,7 @@ export interface Computed {
 }
 export interface FocusPoint {
     centroid: [number, number];
+    labelPosition: string;
 }
 export interface HoverPayload {
     d: Datum;

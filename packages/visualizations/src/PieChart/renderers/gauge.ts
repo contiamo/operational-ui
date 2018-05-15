@@ -16,6 +16,7 @@ import {
   D3Selection,
   Datum,
   DatumInfo,
+  Dimensions,
   EventBus,
   HoverPayload,
   LegendDatum,
@@ -83,9 +84,9 @@ class Gauge implements Renderer {
   private updateDraw(): void {
     const config: PieChartConfig = this.state.current.get("config")
     const duration: number = config.duration
+    const maxTotalFontSize: number = config.maxTotalFontSize
     const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -103,9 +104,16 @@ class Gauge implements Renderer {
     // Update
     const updatingArcs: D3Selection = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
-    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
+    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, () =>
+      Utils.updateBackgroundRects(updatingArcs, this.computed.arcOver.centroid)
+    )
     // Total / center text
-    const options = { minTotalFontSize, innerRadius: this.computed.rInner, yOffset: this.totalYOffset() }
+    const options = {
+      maxTotalFontSize,
+      minTotalFontSize,
+      innerRadius: this.computed.rInner,
+      yOffset: this.totalYOffset(),
+    }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
     // Comparison line
     this.updateComparison()
@@ -307,13 +315,13 @@ class Gauge implements Renderer {
   }
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-        .drawingContainerDims,
-      outerBorderMargin: number = this.state.current.get("config").outerBorderMargin,
-      r: number = this.computeOuterRadius(drawingDims, outerBorderMargin),
-      rInner: number = this.computeInnerRadius(r),
-      rHover: number = r + 1,
-      rInnerHover: number = Math.max(rInner - 1, 0)
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
+    const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
+    const r: number = this.computeOuterRadius(drawingDims, outerBorderMargin)
+    const rInner: number = this.computeInnerRadius(r)
+    const rHover: number = r + 1
+    const rInnerHover: number = Math.max(rInner - 1, 0)
+
     return {
       r,
       rInner,
@@ -326,7 +334,7 @@ class Gauge implements Renderer {
     }
   }
 
-  private computeOuterRadius(drawingDims: { width: number; height: number }, margin: number): number {
+  private computeOuterRadius(drawingDims: Dimensions, margin: number): number {
     return this.extent === "full"
       ? Math.min(drawingDims.width, drawingDims.height) / 2 - margin
       : Math.min(drawingDims.width / 2, drawingDims.height) - margin
@@ -362,10 +370,13 @@ class Gauge implements Renderer {
     const arcs: any = this.el.select("g.arcs").selectAll("g")
     const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
     const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
-    const shadowDefinitionId: string = this.state.current.get("computed").canvas.shadowDefinitionId
 
-    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId)
-    Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
+    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver)
+    Utils.updateFilteredPathAttributes(
+      arcs,
+      filterUnFocused,
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+    )
   }
 
   private highlightElement(key: string): void {

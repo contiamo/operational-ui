@@ -66,7 +66,7 @@ var SunburstCanvas = /** @class */ (function () {
     SunburstCanvas.prototype.renderFocus = function () {
         var focus = d3
             .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
-            .attr("class", "" + styles.focusLegend)
+            .attr("class", styles.focusLegend + " " + styles.focusLegendAbove)
             .style("visibility", "hidden");
         this.chartContainer.node().appendChild(focus.node());
         this.elMap.focus = focus;

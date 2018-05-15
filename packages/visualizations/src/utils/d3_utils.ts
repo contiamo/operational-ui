@@ -53,7 +53,7 @@ export const setPathAttributes = (
     .call(onTransitionEnd, onEnd)
 }
 
-export const setTextAttributes = (selection: any, attributes: any, duration?: number): void => {
+export const setTextAttributes = (selection: any, attributes: any, duration?: number, onEnd?: () => void): void => {
   transitionOrSelection(selection, duration)
     .attr("x", attributes.x)
     .attr("y", attributes.y)
@@ -63,4 +63,5 @@ export const setTextAttributes = (selection: any, attributes: any, duration?: nu
     .attr("transform", attributes.transform)
     .text(attributes.text)
     .style("opacity", attributes.opacity || 1)
+    .call(onTransitionEnd, onEnd)
 }

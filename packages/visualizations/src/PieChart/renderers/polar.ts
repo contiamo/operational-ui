@@ -16,6 +16,7 @@ import {
   D3Selection,
   Datum,
   DatumInfo,
+  Dimensions,
   EventBus,
   HoverPayload,
   LegendDatum,
@@ -84,9 +85,9 @@ class Polar implements Renderer {
   private updateDraw(): void {
     const config: PieChartConfig = this.state.current.get("config")
     const duration: number = config.duration
+    const maxTotalFontSize: number = config.maxTotalFontSize
     const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-      .drawingContainerDims
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
@@ -104,9 +105,11 @@ class Polar implements Renderer {
     // Update
     const updatingArcs: D3Selection = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration, this.fitToCanvas.bind(this))
-    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration)
+    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, () =>
+      Utils.updateBackgroundRects(updatingArcs, this.computed.arcOver.centroid)
+    )
     // Total / center text
-    const options = { minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET }
+    const options = { maxTotalFontSize, minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET }
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
@@ -213,12 +216,12 @@ class Polar implements Renderer {
   }
 
   private computeArcs(computed: Partial<ComputedData>): ComputedArcs {
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas
-        .drawingContainerDims,
-      r: any = this.computeOuterRadius(drawingDims),
-      rInner: any = this.computeInnerRadius(computed.data, r),
-      rHover: number = this.hoverOuterRadius(r),
-      rInnerHover: number = Math.max(rInner - 1, 0)
+    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
+    const r: any = this.computeOuterRadius(drawingDims)
+    const rInner: any = this.computeInnerRadius(computed.data, r)
+    const rHover: number = this.hoverOuterRadius(r)
+    const rInnerHover: number = Math.max(rInner - 5, 0)
+
     return {
       r,
       rInner,
@@ -233,7 +236,7 @@ class Polar implements Renderer {
     }
   }
 
-  private computeOuterRadius(drawingDims: { width: number; height: number }, scaleFactor: number = 1) {
+  private computeOuterRadius(drawingDims: Dimensions, scaleFactor: number = 1) {
     const domainMax: number = max(map((datum: Datum): number => this.value(datum))(this.data))
     const scale: any = d3ScaleSqrt()
       .range([
@@ -255,7 +258,7 @@ class Polar implements Renderer {
   }
 
   private hoverOuterRadius(radius: any): any {
-    return (d: Datum): number => radius(d) + 1
+    return (d: Datum): number => radius(d) + 5
   }
 
   // Event listeners / handlers
@@ -277,10 +280,13 @@ class Polar implements Renderer {
     const arcs: any = this.el.select("g.arcs").selectAll("g")
     const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
     const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
-    const shadowDefinitionId: string = this.state.current.get("computed").canvas.shadowDefinitionId
 
-    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver, shadowDefinitionId)
-    Utils.updateFilteredPathAttributes(arcs, filterUnFocused, this.computed.arc)
+    Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver)
+    Utils.updateFilteredPathAttributes(
+      arcs,
+      filterUnFocused,
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+    )
   }
 
   private highlightElement(key: string): void {

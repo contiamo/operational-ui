@@ -6,6 +6,7 @@ declare class SunburstFocus implements Focus {
     private events;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection);
     private onElementHover(payload);
+    private labelPlacement(focusPoint);
     private percentageString(datum);
     private singlePercentageString(datum, comparison);
     private onElementOut();

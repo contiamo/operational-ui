@@ -29,6 +29,11 @@ class Breadcrumb {
   }
 
   private updateHoverPath(payload: HoverPayload | ClickPayload): void {
+    // Only display breadcrumb if drawing area is wide enough.
+    if (this.state.current.get("config").width < 330) {
+      return
+    }
+
     const computed: Object<any> = this.state.current.get("computed").renderer
     const fixedNode: any = computed.zoomNode || computed.topNode
     if (!fixedNode || (payload.d && payload.d.data.empty)) {
@@ -43,10 +48,10 @@ class Breadcrumb {
   }
 
   private truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
-    if (nodeArray.length <= 5) {
+    if (nodeArray.length <= 4) {
       return nodeArray
     }
-    const firstNodes: (Datum | string)[] = nodeArray.slice(0, 2)
+    const firstNodes: (Datum | string)[] = nodeArray.slice(0, 1)
     const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - 2)
     return firstNodes.concat(["hops"]).concat(lastNodes)
   }

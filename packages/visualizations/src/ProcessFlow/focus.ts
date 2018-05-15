@@ -3,6 +3,7 @@ import Events from "../utils/event_catalog"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
 import {
   D3Selection,
+  Dimensions,
   EventBus,
   Focus,
   FocusPoint,
@@ -65,7 +66,8 @@ class ProcessFlowFocus implements Focus {
     }
 
     // Render the focus label hidden initially to allow placement calculations
-    FocusUtils.drawHidden(this.el, "element").style("pointer-events", "none")
+    const labelPosition: string = this.state.current.get("config").focusLabelPosition
+    FocusUtils.drawHidden(this.el, "element", labelPosition).style("pointer-events", "none")
     const content: SeriesEl = this.el.append("xhtml:ul")
 
     content
@@ -86,11 +88,11 @@ class ProcessFlowFocus implements Focus {
     }
 
     // Get label dimensions (has to be actually rendered in the page to do this) and position label
-    const labelDimensions: { height: number; width: number } = FocusUtils.labelDimensions(this.el),
-      drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions(),
-      offset: number = focusPoint.offset + config.nodeBorderWidth + config.labelOffset
+    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions()
+    const offset: number = focusPoint.offset + config.nodeBorderWidth
 
-    FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset)
+    FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset, labelPosition)
   }
 
   private appendContent(container: D3Selection, content: Object<any>[]): void {
@@ -158,13 +160,13 @@ class ProcessFlowFocus implements Focus {
   }
 
   private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
-    const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect,
-      config: ProcessFlowConfig = this.state.current.get("config")
+    const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect
+    const computedSeries: Object<any> = this.state.current.get("computed").series
 
     return {
-      xMax: drawingContainer.left + config.width,
+      xMax: drawingContainer.left + computedSeries.width,
       xMin: drawingContainer.left,
-      yMax: drawingContainer.top + config.height,
+      yMax: drawingContainer.top + computedSeries.height,
       yMin: drawingContainer.top,
     }
   }

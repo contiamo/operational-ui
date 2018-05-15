@@ -1,5 +1,5 @@
 import * as React from "react"
-import { VisualizationWrapper, PieChart, Sunburst, ProcessFlow } from "@operational/visualizations"
+import { VisualizationWrapper, ProcessFlow } from "@operational/visualizations"
 import { Div } from "glamorous"
 import * as constants from "../../constants"
 
@@ -27,8 +27,8 @@ const processFlowData = {
 }
 
 const processFlowConfig = {
-  width: 240,
-  height: 240,
+  width: 660,
+  height: 330,
   maxNodeSize: 200,
   nodeBorderWidth: 4,
 }
@@ -37,10 +37,10 @@ const processFlowAccessors = {
   node: {
     color: (node: any) => {
       if (node.group === "start") {
-        return "lightgreen"
+        return "#f2dd41"
       }
       if (node.group === "end") {
-        return "lightcoral"
+        return "#2b99d5"
       }
       return "#fff"
     },
@@ -56,14 +56,17 @@ const processFlowAccessors = {
     stroke: (node: any) => {
       return node.group ? "none" : "#000"
     },
+    label: (node: any) => {
+      return `Node ${node.id}`
+    },
   },
   link: {
     stroke: (link: any) => {
       if (link.source.attributes.group === "start") {
-        return "lightgreen"
+        return "#f2dd41"
       }
       if (link.target.attributes.group === "end") {
-        return "lightcoral"
+        return "#2b99d5"
       }
       return "#bbb"
     },
