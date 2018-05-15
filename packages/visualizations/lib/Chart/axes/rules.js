@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var styles = require("./styles");
+var fp_1 = require("lodash/fp");
 var Rules = /** @class */ (function () {
     function Rules(state, el, orientation) {
         this.state = state;
@@ -11,7 +12,14 @@ var Rules = /** @class */ (function () {
     Rules.prototype.draw = function () {
         var computedAxes = this.state.current.get("computed").axes.computed;
         var axisComputed = computedAxes[this.orientation + "1"] || computedAxes[this.orientation + "2"];
+        var requiredAxes = this.state.current.get("computed").axes.requiredAxes;
         var data = axisComputed.ticks;
+        if (fp_1.includes(this.yRules ? "x1" : "y1")(requiredAxes)) {
+            data.shift();
+        }
+        if (fp_1.includes(this.yRules ? "x2" : "y2")(requiredAxes)) {
+            data.pop();
+        }
         var startAttributes = this.startAttributes();
         var attributes = this.attributes();
         var rules = this.el.selectAll("line." + styles.rules).data(data, String);
@@ -64,7 +72,8 @@ var Rules = /** @class */ (function () {
         };
     };
     Rules.prototype.margin = function (axis) {
-        return this.state.current.get("computed").axes.margins[axis];
+        var computedAxes = this.state.current.get("computed").axes;
+        return fp_1.includes(axis)(computedAxes.requiredAxes) ? computedAxes.margins[axis] : 0;
     };
     Rules.prototype.close = function () {
         this.el.node().remove();
