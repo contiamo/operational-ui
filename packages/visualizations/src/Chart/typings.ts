@@ -101,10 +101,7 @@ export interface TextRendererAccessors {
 
 export interface TextRendererConfig {
   offset: number
-  rotate: {
-    horizontal: number
-    vertical: number
-  }
+  tilt: boolean
 }
 
 export interface RendererOptions<RendererAccessors> {

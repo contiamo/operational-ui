@@ -256,4 +256,4 @@ Currently, the only renderer with specific config is the text renderer.
 | Name | Description | Type | Default 
 | :--- | :--- | :--- | :---
 | offset | Label offset from rendered element | number | 2
-| rotate | Label rotation (degreed) by chart orientation | { horizontal: number, vertical: number } | { horizontal: 0, vertical: -60 }
+| tilt | Toggle label tilting | boolean | depends on orientation of chart
