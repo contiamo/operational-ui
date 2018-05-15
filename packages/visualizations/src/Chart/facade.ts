@@ -27,20 +27,29 @@ import {
 } from "./typings"
 
 const defaultConfig: ChartConfig = {
+  // R transitionDuration?
   duration: 1e3,
   height: 500,
+  // R what is hidden?
   hidden: false,
+  // R innerBarSpacing?
   innerBarPadding: 2,
+  // R do we need this to be separate? Wouldn't the user already be aware of whether
+  //   they set up a categorical axis?
   innerBarPaddingCategorical: 0.2,
   legend: true,
   maxBarWidthRatio: 1 / 3,
   minBarWidth: 3,
   numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+  // R barSpacing? I feel like people will understand that this is the outer one
   outerBarPadding: 10,
   palette: theme.colors.visualizationPalette,
   timeAxisPriority: ["x1", "x2", "y1", "y2"],
+  // R what do we need the uid for? Would a unique one be generated if we render multiple charts
+  //   on the same page?
   uid: uniqueId("chart"),
   visualizationName: "chart",
+  // R is there a way to set this to take up the width of the container?
   width: 500,
 }
 
@@ -60,7 +69,7 @@ const defaultSeriesAccessors: SeriesAccessors = {
   hide: (d: Object<any>): boolean => d.hide || false,
   hideInLegend: (d: Object<any>): boolean => d.hideInLegend || false,
   key: (d: Object<any>): string => d.key || uniqueId("key"),
-  legendColor: (d: Object<any>): string => initialColorAssigner(d.key),
+  legendColor: (d: Object<any>): string => initialColorAssigner(d.key), // R this can just be colorAssigner(defaultConfig.palette)(d.key) right? I find myself wondering why the two const declarations above are there
   legendName: (d: Object<any>): string => d.name || d.key || "",
   renderAs: (d: Object<any>): RendererOptions<any>[] => d.renderAs,
   axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
