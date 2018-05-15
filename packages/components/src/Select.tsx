@@ -51,6 +51,10 @@ class Select extends React.Component<Props, State> {
 
   containerNode: Node
 
+  static defaultProps: Partial<Props> = {
+    placeholder: "No entries selected",
+  }
+
   // This implements "click outside to close" behavior
   handleClick(ev: React.SyntheticEvent<Node>): void {
     // if we're clicking on the Select itself,
@@ -79,7 +83,7 @@ class Select extends React.Component<Props, State> {
   }
 
   getDisplayValue(): string {
-    const placeholder = this.props.placeholder || "No entries selected"
+    const { placeholder } = this.props
     if (!this.props.value) {
       return placeholder
     }
@@ -93,7 +97,7 @@ class Select extends React.Component<Props, State> {
       .map(option => ((this.props.value as Value[]).indexOf(option.value) > -1 ? displayOption(option) : null))
       .filter(a => !!a)
       .join(", ")
-    return listDisplay === "" ? this.props.placeholder || "No entries selected" : listDisplay
+    return listDisplay === "" ? this.props.placeholder : listDisplay
   }
 
   selectOption(option: IOption) {
