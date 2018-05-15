@@ -1,6 +1,6 @@
 import Axis from "./axes/axis"
 import Rules from "../Chart/axes/rules"
-import { assign, defaults, find, forEach, get, includes, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
+import { any, assign, defaults, find, forEach, get, includes, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import {
   AxesData,
@@ -135,7 +135,7 @@ class AxesManager {
     forEach(invoke("draw"))(axes)
 
     // Update rules
-    const hasRules: boolean = includes("quant")(map((axis: AxisClass<any>): AxisType => axis.type)(axes as any))
+    const hasRules: boolean = any((axis: AxisClass<any>): boolean => axis.showRules)(axes as any)
     hasRules ? this.updateRules(orientation) : this.removeRules(orientation)
 
     this.axesDrawn.push(orientation)

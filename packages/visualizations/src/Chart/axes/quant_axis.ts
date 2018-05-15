@@ -56,6 +56,7 @@ class QuantAxis implements AxisClass<number> {
   end: number
   interval: number
   unit: string
+  showRules: boolean = true
   margin: number
   minTicks: number
   minTopOffsetTopTick: number

@@ -98,7 +98,7 @@ var AxesManager = /** @class */ (function () {
         fp_1.keys(axes).length === 2 ? axis_utils_1.alignAxes(axes) : fp_1.forEach(fp_1.invoke("compute"))(axes);
         fp_1.forEach(fp_1.invoke("draw"))(axes);
         // Update rules
-        var hasRules = fp_1.includes("quant")(fp_1.map(function (axis) { return axis.type; })(axes));
+        var hasRules = fp_1.any(function (axis) { return axis.showRules; })(axes);
         hasRules ? this.updateRules(orientation) : this.removeRules(orientation);
         this.axesDrawn.push(orientation);
     };

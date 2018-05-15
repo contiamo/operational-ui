@@ -115,7 +115,8 @@ const data: any = {
     y1: {
       type: "quant",
       unit: "EUR",
-      margin: 50
+      margin: 50,
+      showRules: false
     }
   }
 }

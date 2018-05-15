@@ -11,6 +11,7 @@ var stepScaleFactors = function (step) {
 var QuantAxis = /** @class */ (function () {
     function QuantAxis(state, stateWriter, events, el, position) {
         this.type = "quant";
+        this.showRules = true;
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;

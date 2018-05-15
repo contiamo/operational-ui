@@ -9,6 +9,7 @@ var CategoricalAxis = /** @class */ (function () {
     function CategoricalAxis(state, stateWriter, events, el, position) {
         this.type = "categorical";
         this.sort = true;
+        this.showRules = false;
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;

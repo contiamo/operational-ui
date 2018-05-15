@@ -14,6 +14,7 @@ declare class QuantAxis implements AxisClass<number> {
     end: number;
     interval: number;
     unit: string;
+    showRules: boolean;
     margin: number;
     minTicks: number;
     minTopOffsetTopTick: number;

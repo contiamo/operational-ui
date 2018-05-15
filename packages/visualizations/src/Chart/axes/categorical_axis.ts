@@ -63,6 +63,7 @@ class CategoricalAxis implements AxisClass<string> {
   outerPadding: number
   sort: boolean = true
   values: string[]
+  showRules: boolean = false
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state

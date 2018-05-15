@@ -13,6 +13,7 @@ declare class TimeAxis implements AxisClass<Date> {
     start: Date;
     end: Date;
     interval: TimeIntervals;
+    showRules: boolean;
     margin: number;
     minTicks: number;
     minTopOffsetTopTick: number;

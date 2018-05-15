@@ -128,6 +128,7 @@ The 'series' and 'axes' properties can have different names, if the data accesso
 * minTopOffsetTopTick - default: 21 (only applicable to y axes) 
 * tickSpacing - default: 40
 * outerPadding - default: 3
+* showRules - defaults to true for quant axes, false for time and categorical
 
 Quant axes _may_ additionally have any of the following configurations:
 * start: number
