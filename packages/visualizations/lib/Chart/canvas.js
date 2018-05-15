@@ -49,7 +49,7 @@ var ChartCanvas = /** @class */ (function () {
         container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
         container.addEventListener("click", this.onClick.bind(this));
-        return d3.select(container).attr("class", styles.chartContainer);
+        return d3.select(container);
     };
     // Event listeners
     ChartCanvas.prototype.onMouseEnter = function () {
@@ -150,29 +150,12 @@ var ChartCanvas = /** @class */ (function () {
     // Clip paths
     ChartCanvas.prototype.insertClipPaths = function () {
         this.elements.defs = this.el.append("defs");
-        this.insertDrawingClip();
-        this.insertYRulesClip();
-        this.insertXYRulesClip();
+        fp_1.forEach(this.insertClipPath.bind(this))(["drawing", "yrules", "xyrules"]);
     };
-    ChartCanvas.prototype.insertDrawingClip = function () {
+    ChartCanvas.prototype.insertClipPath = function (clip) {
         this.elements.defs
             .append("clipPath")
-            .attr("class", "chart-clip-path")
-            .attr("id", this.prefixedId("_drawing_clip"))
-            .append("rect");
-    };
-    ChartCanvas.prototype.insertYRulesClip = function () {
-        this.elements.defs
-            .append("clipPath")
-            .attr("class", "chart-clip-path")
-            .attr("id", this.prefixedId("_yrules_clip"))
-            .append("rect");
-    };
-    ChartCanvas.prototype.insertXYRulesClip = function () {
-        this.elements.defs
-            .append("clipPath")
-            .attr("class", "chart-clip-path")
-            .attr("id", this.prefixedId("_xyrules_clip"))
+            .attr("class", "chart-clip-path " + clip)
             .append("rect");
     };
     ChartCanvas.prototype.prefixedId = function (id) {
@@ -204,7 +187,13 @@ var ChartCanvas = /** @class */ (function () {
     // Lifecycle
     ChartCanvas.prototype.draw = function () {
         this.calculateDimensions();
+        // Set classes
+        this.chartContainer.attr("class", styles.chartContainer + " " + this.state.current.get("config").uid);
         this.chartContainer.classed("hidden", this.state.current.get("config").hidden);
+        // Set clip path ids
+        this.elements.defs.select("clipPath.drawing").attr("id", this.prefixedId("_drawing_clip"));
+        this.elements.defs.select("clipPath.yrules").attr("id", this.prefixedId("_yrules_clip"));
+        this.elements.defs.select("clipPath.xyrules").attr("id", this.prefixedId("_xyrules_clip"));
         this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect());
         var config = this.state.current.get("config");
         var dims = this.state.current.get("computed").canvas.drawingContainerDims;

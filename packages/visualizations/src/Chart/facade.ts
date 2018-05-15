@@ -7,7 +7,7 @@ import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { assign, has, uniqueId } from "lodash/fp"
+import { assign, defaults, has, uniqueId } from "lodash/fp"
 import {
   Accessors,
   AccessorsObject,
@@ -26,7 +26,7 @@ import {
   SeriesData,
 } from "./typings"
 
-const defaultConfig: ChartConfig = {
+const defaultConfig: Partial<ChartConfig> = {
   duration: 1e3,
   height: 500,
   hidden: false,
@@ -39,7 +39,6 @@ const defaultConfig: ChartConfig = {
   outerBarPadding: 10,
   palette: theme.colors.visualizationPalette,
   timeAxisPriority: ["x1", "x2", "y1", "y2"],
-  uid: uniqueId("chart"),
   visualizationName: "chart",
   width: 500,
 }
@@ -99,7 +98,7 @@ class ChartFacade implements Facade {
   private insertState(): StateHandler<ChartConfig, Data> {
     return new StateHandler({
       data: {},
-      config: defaultConfig,
+      config: defaults({ uid: uniqueId("chart") })(defaultConfig),
       accessors: { data: defaultDataAccessors, series: defaultSeriesAccessors },
       computed: initialComputed,
     })

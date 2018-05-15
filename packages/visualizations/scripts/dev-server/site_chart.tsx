@@ -7,6 +7,7 @@ import { OperationalUI } from "@operational/components"
 injectStylesheet(baseStylesheet(operational))
 
 const containerNode = document.getElementById("app")
+const containerNode2 = document.getElementById("app2")
 
 import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
@@ -20,8 +21,7 @@ const AreaRenderer: any = {
 
 const LineRenderer: any = {
   accessors: {
-    interpolate: (series: any, d: any) => "monotoneY",
-    dashed: (series: any, d: any) => series.key() === "unique_key",
+    interpolate: (series: any, d: any) => "monotoneX",
   },
   type: "line"
 }
@@ -80,39 +80,19 @@ const data: any = {
         { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
       ],
       name: "Pageviews 2018",
-      xAttribute: "y",
-      yAttribute: "x",
       key: "series1",
-      interpolate: "step",
-      renderAs: [BarsRenderer, TextRenderer],
-      hide: false
+      renderAs: [LineRenderer, TextRenderer],
     },
-    {
-      data: [
-        // { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
-        // { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
-      ],
-      name: "Pageviews 2017",
-      xAttribute: "y",
-      yAttribute: "x",
-      key: "series2",
-      renderAs: [BarsRenderer, TextRenderer]
-    }
   ],
   axes: {
-    y1: {
+    x1: {
       type: "time",
       start: new Date(2018, 2, 11),
       end: new Date(2018, 2, 15),
       interval: "day",
       margin: 30
     },
-    x1: {
+    y1: {
       type: "quant",
       unit: "EUR",
       margin: 50,
@@ -125,54 +105,39 @@ const data1: any = {
   series: [
     {
       data: [
-        { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 14), y: undefined },
-        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
-      ],
-      xAttribute: "y",
-      yAttribute: "x",
-      name: "Pageviews 2018",
-      key: "series1",
-      interpolate: "step",
-      renderAs: [BarsRenderer],
-    },
-    {
-      data: [
-        { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 9), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },        
         { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
+        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
         { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
       ],
-      xAttribute: "y",
-      yAttribute: "x",
-      name: "Pageviews 2017",
-      key: "series2",
-      renderAs: [BarsRenderer]
-    }
+      name: "Pageviews 2018",
+      key: "series1",
+      renderAs: [LineRenderer, TextRenderer],
+    },
   ],
   axes: {
-    y1: {
-      type: "time",
-      start: new Date(2018, 2, 10),
-      end: new Date(2018, 2, 17),
-      interval: "day"
-    },
     x1: {
-      type: "quant"
+      type: "time",
+      start: new Date(2018, 2, 9),
+      end: new Date(2018, 2, 17),
+      interval: "day",
+      margin: 30
+    },
+    y1: {
+      type: "quant",
+      unit: "EUR",
+      margin: 50,
+      // showRules: false
     }
   }
 }
 
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} config={{outerBarPadding: 35}}/></OperationalUI>
-
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} config={{uid: "TEST"}}/></OperationalUI>
+const App2 = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data1}/></OperationalUI>
 render(<App />, containerNode)
-
-// setTimeout(() => {
-//   data = data1
-//   render(<App />, containerNode)
-// }, 3000)
+render(<App2 />, containerNode2)

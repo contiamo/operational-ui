@@ -22,7 +22,6 @@ var defaultConfig = {
     outerBarPadding: 10,
     palette: theme_1.operational.colors.visualizationPalette,
     timeAxisPriority: ["x1", "x2", "y1", "y2"],
-    uid: fp_1.uniqueId("chart"),
     visualizationName: "chart",
     width: 500,
 };
@@ -67,7 +66,7 @@ var ChartFacade = /** @class */ (function () {
     ChartFacade.prototype.insertState = function () {
         return new state_handler_1.default({
             data: {},
-            config: defaultConfig,
+            config: fp_1.defaults({ uid: fp_1.uniqueId("chart") })(defaultConfig),
             accessors: { data: defaultDataAccessors, series: defaultSeriesAccessors },
             computed: initialComputed,
         });

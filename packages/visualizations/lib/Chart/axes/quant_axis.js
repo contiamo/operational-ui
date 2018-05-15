@@ -97,7 +97,7 @@ var QuantAxis = /** @class */ (function () {
         computed.scale = quant_axis_utils_1.computeScale(computed.range, computed.domain);
         computed.ticks = quant_axis_utils_1.computeTicks(computed.steps);
         this.computed = computed;
-        this.previous = fp_1.defaults(this.previous)(this.computed);
+        this.previous = fp_1.defaults(this.computed)(this.previous);
         this.stateWriter(["computed", this.position], this.computed);
         this.stateWriter(["previous", this.position], this.previous);
     };

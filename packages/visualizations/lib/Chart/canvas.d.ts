@@ -25,9 +25,7 @@ declare class ChartCanvas implements Canvas {
     private insertRules();
     private insertSeriesDrawingGroups();
     private insertClipPaths();
-    private insertDrawingClip();
-    private insertYRulesClip();
-    private insertXYRulesClip();
+    private insertClipPath(clip);
     private prefixedId(id);
     private margin(axis);
     private calculateDimensions();

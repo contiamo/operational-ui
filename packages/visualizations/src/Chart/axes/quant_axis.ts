@@ -159,7 +159,7 @@ class QuantAxis implements AxisClass<number> {
     computed.scale = computeScale(computed.range, computed.domain)
     computed.ticks = computeTicks(computed.steps)
     this.computed = computed as AxisComputed
-    this.previous = defaults(this.previous)(this.computed)
+    this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
   }

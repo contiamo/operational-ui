@@ -70,7 +70,7 @@ class ChartCanvas implements Canvas {
     container.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     container.addEventListener("mouseleave", this.onMouseLeave.bind(this))
     container.addEventListener("click", this.onClick.bind(this))
-    return d3.select(container).attr("class", styles.chartContainer)
+    return d3.select(container)
   }
 
   // Event listeners
@@ -185,32 +185,13 @@ class ChartCanvas implements Canvas {
   // Clip paths
   private insertClipPaths(): void {
     this.elements.defs = this.el.append("defs")
-    this.insertDrawingClip()
-    this.insertYRulesClip()
-    this.insertXYRulesClip()
+    forEach(this.insertClipPath.bind(this))(["drawing", "yrules", "xyrules"])
   }
 
-  private insertDrawingClip(): void {
+  private insertClipPath(clip: string): void {
     this.elements.defs
       .append("clipPath")
-      .attr("class", "chart-clip-path")
-      .attr("id", this.prefixedId("_drawing_clip"))
-      .append("rect")
-  }
-
-  private insertYRulesClip(): void {
-    this.elements.defs
-      .append("clipPath")
-      .attr("class", "chart-clip-path")
-      .attr("id", this.prefixedId("_yrules_clip"))
-      .append("rect")
-  }
-
-  private insertXYRulesClip(): void {
-    this.elements.defs
-      .append("clipPath")
-      .attr("class", "chart-clip-path")
-      .attr("id", this.prefixedId("_xyrules_clip"))
+      .attr("class", `chart-clip-path ${clip}`)
       .append("rect")
   }
 
@@ -248,7 +229,16 @@ class ChartCanvas implements Canvas {
   // Lifecycle
   draw(): void {
     this.calculateDimensions()
+
+    // Set classes
+    this.chartContainer.attr("class", `${styles.chartContainer} ${this.state.current.get("config").uid}`)
     this.chartContainer.classed("hidden", this.state.current.get("config").hidden)
+
+    // Set clip path ids
+    this.elements.defs.select("clipPath.drawing").attr("id", this.prefixedId("_drawing_clip"))
+    this.elements.defs.select("clipPath.yrules").attr("id", this.prefixedId("_yrules_clip"))
+    this.elements.defs.select("clipPath.xyrules").attr("id", this.prefixedId("_xyrules_clip"))
+
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
 
     const config: ChartConfig = this.state.current.get("config")
