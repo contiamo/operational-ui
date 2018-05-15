@@ -167,7 +167,7 @@ const FocusUtils: Object<any> = {
       default:
         throw new Error(`Invalid label position '${position}'.`)
     }
-    // Finally. Done.
+
     this.default.drawVisible(el, { left, top }, newPosition || position)
     this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position)
   },

@@ -111,7 +111,7 @@ var focusLegendAboveStyle = {
         borderRight: "solid 7px transparent",
         borderTop: "solid 7px #fff",
         marginLeft: "-7px",
-        marginTop: "-9px"
+        marginTop: "-9px",
     },
 };
 var focusLegendBelowStyle = {
@@ -127,7 +127,7 @@ var focusLegendBelowStyle = {
         borderRight: "solid 7px transparent",
         borderBottom: "solid 7px #fff",
         marginLeft: "-7px",
-        marginTop: "1px"
+        marginTop: "1px",
     },
 };
 var focusLegendRightStyle = {

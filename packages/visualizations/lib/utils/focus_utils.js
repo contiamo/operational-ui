@@ -50,9 +50,7 @@ var FocusUtils = {
     // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
     // before the label is made visible.
     drawHidden: function (canvasEl, type, position) {
-        return canvasEl
-            .attr("class", styles.focusLegend + " focus-legend-" + type)
-            .style("visibility", "hidden");
+        return canvasEl.attr("class", styles.focusLegend + " focus-legend-" + type).style("visibility", "hidden");
     },
     // Move the focus label to the desired position and make it visible.
     drawVisible: function (focusEl, labelPlacement, position) {
@@ -65,7 +63,8 @@ var FocusUtils = {
             .style("visibility", "visible");
     },
     drawArrow: function (el, coordinates, position) {
-        el.append("div")
+        el
+            .append("div")
             .attr("class", getPositionClass(position))
             .style("left", coordinates.x + "px")
             .style("top", coordinates.y + "px")
@@ -154,7 +153,6 @@ var FocusUtils = {
             default:
                 throw new Error("Invalid label position '" + position + "'.");
         }
-        // Finally. Done.
         _this.default.drawVisible(el, { left: left, top: top }, newPosition || position);
         _this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position);
     },
