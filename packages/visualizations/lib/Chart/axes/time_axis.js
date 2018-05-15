@@ -33,6 +33,7 @@ var tickFormatter = function (interval) {
 var TimeAxis = /** @class */ (function () {
     function TimeAxis(state, stateWriter, events, el, position) {
         this.type = "time";
+        this.showRules = false;
         this.state = state;
         this.stateWriter = stateWriter;
         this.events = events;

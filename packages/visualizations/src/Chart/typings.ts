@@ -22,6 +22,7 @@ export interface XAxisConfig {
   margin: number
   minTicks: number
   outerPadding: number
+  showRules: boolean
   tickOffset: number
   tickSpacing: number
 }
@@ -218,6 +219,7 @@ export interface AxisClass<T> {
   interval?: any
   isXAxis: boolean
   previous: AxisComputed
+  showRules: boolean
   update: (options: AxisOptions, data: T[]) => void
   close: () => void
 }

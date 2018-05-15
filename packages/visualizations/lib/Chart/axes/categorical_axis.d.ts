@@ -18,6 +18,7 @@ declare class CategoricalAxis implements AxisClass<string> {
     outerPadding: number;
     sort: boolean;
     values: string[];
+    showRules: boolean;
     constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition);
     validate(value: any): boolean;
     private updateOptions(options);
