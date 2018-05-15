@@ -50,10 +50,6 @@ const TextRenderer: any = {
   type: "text",
   config: {
     offset: 5,
-    rotate: {
-      horizontal: 0,
-      vertical: -45
-    }
   }
 }
 
@@ -84,6 +80,8 @@ const data: any = {
         { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
       ],
       name: "Pageviews 2018",
+      xAttribute: "y",
+      yAttribute: "x",
       key: "series1",
       interpolate: "step",
       renderAs: [BarsRenderer, TextRenderer],
@@ -100,23 +98,25 @@ const data: any = {
         // { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
       ],
       name: "Pageviews 2017",
+      xAttribute: "y",
+      yAttribute: "x",
       key: "series2",
       renderAs: [BarsRenderer, TextRenderer]
     }
   ],
   axes: {
-    x1: {
+    y1: {
       type: "time",
       start: new Date(2018, 2, 11),
       end: new Date(2018, 2, 15),
       interval: "day",
       margin: 30
     },
-    y1: {
+    x1: {
       type: "quant",
       unit: "EUR",
       margin: 50,
-      showRules: false
+      // showRules: false
     }
   }
 }
