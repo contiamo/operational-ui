@@ -33,7 +33,16 @@ var SunburstFocus = /** @class */ (function () {
         var comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode;
         var percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3);
         content.append("xhtml:li").text(this.percentageString(datum));
-        focus_utils_1.default.drawVisible(this.el, this.labelPlacement(focusPoint), focusPoint.labelPosition);
+        var focus = { x: focusPoint.centroid[0], y: focusPoint.centroid[1] };
+        var labelDimensions = focus_utils_1.default.labelDimensions(this.el);
+        var drawingDims = this.state.current.get("computed").canvas.drawingDims;
+        var drawingDimensions = {
+            xMin: 0,
+            yMin: this.state.current.get("config").height - drawingDims.height,
+            xMax: drawingDims.width,
+            yMax: drawingDims.height,
+        };
+        focus_utils_1.default.positionLabel(this.el, focus, labelDimensions, drawingDimensions, this.state.current.get("config").focusOffset, focusPoint.labelPosition);
     };
     SunburstFocus.prototype.labelPlacement = function (focusPoint) {
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el);

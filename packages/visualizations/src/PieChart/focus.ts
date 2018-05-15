@@ -9,6 +9,7 @@ import {
   Focus,
   HoverPayload,
   Object,
+  Point,
   Position,
   SeriesEl,
   State,
@@ -55,14 +56,24 @@ class PieChartFocus implements Focus {
         <span class="percentage">(${percentageString(payload.d.percentage)})</span>`
       )
 
-    // Get label dimensions
     const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
-    const labelPlacement: Position = {
-      left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
-      top: payload.focusPoint.centroid[1] - labelDimensions.height / 2 - this.state.current.get("config").focusOffset,
+    const drawingContainerRect = this.state.current.get("computed").canvas.drawingContainerRect
+    const drawingDimensions = {
+      xMin: drawingContainerRect.x,
+      yMin: drawingContainerRect.y,
+      xMax: drawingContainerRect.right,
+      yMax: drawingContainerRect.bottom,
     }
 
-    FocusUtils.drawVisible(this.el, labelPlacement, "above")
+    const focus: Point = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] }
+    FocusUtils.positionLabel(
+      this.el,
+      focus,
+      labelDimensions,
+      drawingDimensions,
+      this.state.current.get("config").focusOffset,
+      "above"
+    )
   }
 
   private onElementOut(): void {

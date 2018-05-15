@@ -14,6 +14,7 @@ export {
   Object,
   State,
   Partial,
+  Point,
   Position,
   D3Selection,
   SeriesEl,

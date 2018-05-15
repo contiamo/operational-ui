@@ -27,13 +27,16 @@ var PieChartFocus = /** @class */ (function () {
             .append("xhtml:li")
             .attr("class", "series")
             .html("<span class=\"value\">" + payload.d.value + "</span>\n        <span class=\"percentage\">(" + percentageString(payload.d.percentage) + ")</span>");
-        // Get label dimensions
         var labelDimensions = focus_utils_1.default.labelDimensions(this.el);
-        var labelPlacement = {
-            left: payload.focusPoint.centroid[0] - labelDimensions.width / 2,
-            top: payload.focusPoint.centroid[1] - labelDimensions.height / 2 - this.state.current.get("config").focusOffset,
+        var drawingContainerRect = this.state.current.get("computed").canvas.drawingContainerRect;
+        var drawingDimensions = {
+            xMin: drawingContainerRect.x,
+            yMin: drawingContainerRect.y,
+            xMax: drawingContainerRect.right,
+            yMax: drawingContainerRect.bottom,
         };
-        focus_utils_1.default.drawVisible(this.el, labelPlacement, "above");
+        var focus = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] };
+        focus_utils_1.default.positionLabel(this.el, focus, labelDimensions, drawingDimensions, this.state.current.get("config").focusOffset, "above");
     };
     PieChartFocus.prototype.onElementOut = function () {
         this.remove();
