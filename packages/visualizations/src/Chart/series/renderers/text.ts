@@ -1,4 +1,4 @@
-import { compact, defaults, filter, forEach, get, map } from "lodash/fp"
+import { compact, defaults, filter, forEach, get, isBoolean, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import {
@@ -22,6 +22,9 @@ const defaultAccessors: Partial<TextRendererAccessors> = {
   size: (series: Series, d: Datum) => 10,
 }
 
+const verticalTiltAngle: number = -60
+const horizontalTiltAngle: number = -30
+
 class Text implements RendererClass<TextRendererAccessors> {
   data: Datum[]
   el: D3Selection
@@ -38,10 +41,7 @@ class Text implements RendererClass<TextRendererAccessors> {
   yScale: any
   // Config
   offset: number = 2
-  rotate: Object<number> = {
-    horizontal: 0,
-    vertical: -60,
-  }
+  tilt: boolean
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series) {
     this.state = state
@@ -82,12 +82,16 @@ class Text implements RendererClass<TextRendererAccessors> {
       .attr("y", startAttributes.y)
       .style("font-size", `${this.size()}px`)
       .text(startAttributes.text)
+      .attr("text-anchor", attributes.anchor)
       .attr("transform", startAttributes.transform)
+      .attr("dominant-baseline", attributes.baseline)
       .merge(text)
       .transition()
       .duration(duration)
       .attr("x", attributes.x)
       .attr("y", attributes.y)
+      .attr("text-anchor", attributes.anchor)
+      .attr("dominant-baseline", attributes.baseline)
       .style("font-size", `${this.size()}px`)
       .text(attributes.text)
       .attr("transform", attributes.transform)
@@ -128,6 +132,9 @@ class Text implements RendererClass<TextRendererAccessors> {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    if (!isBoolean(this.tilt)) {
+      this.tilt = this.xIsBaseline
+    }
   }
 
   private validate(d: Datum): boolean {
@@ -138,7 +145,7 @@ class Text implements RendererClass<TextRendererAccessors> {
     const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
     const offset: number =
       computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
-    const rotate: number = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"]
+    const rotate: number = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
 
     const attrs: Object<any> = {
       x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) - offset : 0),
@@ -156,12 +163,14 @@ class Text implements RendererClass<TextRendererAccessors> {
         ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
         : 0
     const symbolOffset = (d: Datum) => (this.series.symbolOffset ? this.series.symbolOffset(d) : 0) + this.offset
-    const rotate: number = this.rotate[this.xIsBaseline ? "vertical" : "horizontal"]
+    const rotate: number = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
 
     const attrs: Object<any> = {
       x: (d: Datum): number => this.xScale(d.x1 || this.x(d)) + (this.xIsBaseline ? barOffset : symbolOffset(d)),
       y: (d: Datum): number => this.yScale(d.y1 || this.y(d)) + (this.xIsBaseline ? -symbolOffset(d) : barOffset),
       text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
+      anchor: this.xIsBaseline && !this.tilt ? "middle" : "start",
+      baseline: this.xIsBaseline ? "initial" : "central",
     }
     attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
     return attrs

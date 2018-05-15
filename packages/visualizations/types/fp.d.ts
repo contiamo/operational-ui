@@ -171,6 +171,7 @@ declare namespace fp {
     indexOf: any
     initial: any
     invoke: any
+    isBoolean: any
     isDate: any
     isFinite: any
     isFunction: any
