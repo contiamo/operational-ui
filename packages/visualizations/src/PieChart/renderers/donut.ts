@@ -102,12 +102,15 @@ class Donut implements Renderer {
     // Update
     const updatingArcs: D3Selection = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
-    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, () =>
-      Utils.updateBackgroundRects(updatingArcs, this.computed.arcOver.centroid)
-    )
 
-    updatingArcs.select("text").attr("visibility", config.displayPercentages ? "visible" : "hidden")
-    updatingArcs.select("rect").attr("visibility", config.displayPercentages ? "visible" : "hidden")
+    updatingArcs.select("rect").attr("visibility", "hidden")
+    setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, () =>
+      Utils.updateBackgroundRects(
+        updatingArcs,
+        this.computed.arcOver.centroid,
+        config.displayPercentages ? "visible" : "hidden"
+      )
+    )
 
     // Total / center text
     const options = { maxTotalFontSize, minTotalFontSize, innerRadius: this.computed.rInner, yOffset: TOTAL_Y_OFFSET }

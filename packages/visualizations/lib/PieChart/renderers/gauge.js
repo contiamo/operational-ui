@@ -70,8 +70,9 @@ var Gauge = /** @class */ (function () {
         // Update
         var updatingArcs = arcs.merge(arcs.enter().selectAll("g." + styles.arc));
         d3_utils_1.setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration);
+        updatingArcs.select("rect").attr("visibility", "hidden");
         d3_utils_1.setTextAttributes(updatingArcs.select("text"), Utils.textAttributes(this.computed), duration, function () {
-            return Utils.updateBackgroundRects(updatingArcs, _this.computed.arcOver.centroid);
+            return Utils.updateBackgroundRects(updatingArcs, _this.computed.arcOver.centroid, config.displayPercentages ? "visible" : "hidden");
         });
         // Total / center text
         var options = {
