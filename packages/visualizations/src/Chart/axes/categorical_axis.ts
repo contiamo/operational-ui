@@ -224,11 +224,10 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private getAttributes(): AxisAttributes {
-    const tickOffset: number = this.state.current.get("config")[this.position].tickOffset
     const scaleWithOffset = this.scaleWithOffset(this.computed)
     return {
-      dx: this.isXAxis ? 0 : tickOffset,
-      dy: this.isXAxis ? tickOffset : "0.35em",
+      dx: this.isXAxis ? 0 : this.tickOffset,
+      dy: this.isXAxis ? this.tickOffset : "0.35em",
       text: identity,
       x: this.isXAxis ? scaleWithOffset : 0,
       y: this.isXAxis ? 0 : scaleWithOffset,
