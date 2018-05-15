@@ -141,11 +141,10 @@ var CategoricalAxis = /** @class */ (function () {
         return function (d) { return computed.scale(d) - stepWidth * barPadding / 2; };
     };
     CategoricalAxis.prototype.getAttributes = function () {
-        var tickOffset = this.state.current.get("config")[this.position].tickOffset;
         var scaleWithOffset = this.scaleWithOffset(this.computed);
         return {
-            dx: this.isXAxis ? 0 : tickOffset,
-            dy: this.isXAxis ? tickOffset : "0.35em",
+            dx: this.isXAxis ? 0 : this.tickOffset,
+            dy: this.isXAxis ? this.tickOffset : "0.35em",
             text: fp_1.identity,
             x: this.isXAxis ? scaleWithOffset : 0,
             y: this.isXAxis ? 0 : scaleWithOffset,
