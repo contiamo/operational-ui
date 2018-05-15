@@ -150,9 +150,12 @@ declare namespace fp {
 
     all: any
     any: any
+    assign: any
     bind: any
+    cloneDeep: any
     compact: any
     defaults: any
+    difference: any
     drop: any
     dropRight: any
     every: any
@@ -168,21 +171,31 @@ declare namespace fp {
     indexOf: any
     initial: any
     invoke: any
+    isBoolean: any
     isDate: any
     isFinite: any
     isFunction: any
     isMatch: any
+    isNil: any
     isObject: any
     last: any
+    mapValues: any
     max: any
     merge: any
     min: any
+    omit: any
+    omitBy: any
+    partition: any
+    pickBy: any
     pluck: any
+    rangeStep: any
+    remove: any
     size: any
     some: any
     tail: any
     times: any
     uniq: any
+    uniqBy: any
     uniqueId: any
     zip: any
   }

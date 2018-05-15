@@ -93,3 +93,8 @@ export interface Position {
   left: number
   top: number
 }
+
+export interface SeriesManager {
+  assignData: () => void
+  draw: () => void
+}

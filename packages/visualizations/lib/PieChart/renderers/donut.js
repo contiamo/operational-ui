@@ -27,9 +27,9 @@ var Donut = /** @class */ (function () {
         this.el = el;
         this.updateOptions(options);
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this));
-        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.CHART.OUT, this.updateElementHover.bind(this));
     }
     // Initialization and updating config or accessors
     Donut.prototype.updateOptions = function (options) {
@@ -58,7 +58,7 @@ var Donut = /** @class */ (function () {
         var minTotalFontSize = config.minTotalFontSize;
         var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         // Remove focus before updating chart
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         // Center coordinate system
         this.currentTranslation = Utils.computeTranslate(drawingDims);
         this.el.attr("transform", Utils.translateString(this.currentTranslation));
@@ -182,7 +182,7 @@ var Donut = /** @class */ (function () {
             percentage: d.data.percentage,
         };
         var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
     };
     Donut.prototype.updateElementHover = function (datapoint) {
         var _this = this;
@@ -204,7 +204,7 @@ var Donut = /** @class */ (function () {
         this.onMouseOver(d);
     };
     Donut.prototype.onMouseOut = function () {
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
     // External methods
     Donut.prototype.dataForLegend = function () {

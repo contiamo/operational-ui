@@ -34,7 +34,7 @@ var Renderer = /** @class */ (function () {
     };
     Renderer.prototype.highlightPath = function (focusElement) {
         var _this = this;
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         var path = focusElement.matchers.path;
         var links = fp_1.zip(fp_1.initial(path))(fp_1.tail(path));
         fp_1.forEach(function (link) {

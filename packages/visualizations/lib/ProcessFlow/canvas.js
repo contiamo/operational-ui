@@ -33,10 +33,10 @@ var ProcessFlowCanvas = /** @class */ (function () {
         return d3.select(el);
     };
     ProcessFlowCanvas.prototype.onMouseEnter = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOVER);
+        this.events.emit(event_catalog_1.default.CHART.HOVER);
     };
     ProcessFlowCanvas.prototype.onMouseLeave = function () {
-        this.events.emit(event_catalog_1.default.CHART.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.CHART.OUT);
     };
     ProcessFlowCanvas.prototype.onClick = function () {
         this.events.emit(event_catalog_1.default.CHART.CLICK);

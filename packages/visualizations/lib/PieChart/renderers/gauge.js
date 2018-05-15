@@ -26,9 +26,9 @@ var Gauge = /** @class */ (function () {
         this.el = el;
         this.updateOptions(options);
         this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HIGHLIGHT, this.highlightElement.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, this.updateElementHover.bind(this));
-        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT, this.updateElementHover.bind(this));
-        this.events.on(event_catalog_1.default.CHART.MOUSEOUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.HOVER, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.FOCUS.ELEMENT.OUT, this.updateElementHover.bind(this));
+        this.events.on(event_catalog_1.default.CHART.OUT, this.updateElementHover.bind(this));
     }
     // Initialization and updating config or accessors
     Gauge.prototype.updateOptions = function (options) {
@@ -57,7 +57,7 @@ var Gauge = /** @class */ (function () {
         var minTotalFontSize = config.minTotalFontSize;
         var drawingDims = this.state.current.get("computed").canvas.drawingContainerDims;
         // Remove focus before updating chart
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
         // Center coordinate system
         this.currentTranslation = Utils.computeTranslate(drawingDims, this.extent === "semi" ? this.computed.r : 0);
         this.el.attr("transform", Utils.translateString(this.currentTranslation));
@@ -287,7 +287,7 @@ var Gauge = /** @class */ (function () {
     // Event listeners / handlers
     Gauge.prototype.onMouseOver = function (d) {
         if (d.data.unfilled) {
-            this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+            this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
             return;
         }
         var datumInfo = {
@@ -296,7 +296,7 @@ var Gauge = /** @class */ (function () {
             percentage: d.data.percentage,
         };
         var centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation);
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.HOVER, { d: datumInfo, focusPoint: { centroid: centroid } });
     };
     Gauge.prototype.updateElementHover = function (datapoint) {
         var _this = this;
@@ -318,7 +318,7 @@ var Gauge = /** @class */ (function () {
         this.onMouseOver(d);
     };
     Gauge.prototype.onMouseOut = function () {
-        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.MOUSEOUT);
+        this.events.emit(event_catalog_1.default.FOCUS.ELEMENT.OUT);
     };
     // External methods
     Gauge.prototype.dataForLegend = function () {

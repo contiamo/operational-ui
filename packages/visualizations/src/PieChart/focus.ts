@@ -30,9 +30,9 @@ class PieChartFocus implements Focus {
     this.events = events
     this.el = els.main
     this.componentFocus = new ComponentFocus(this.state, els.component, this.events)
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOVER, this.onElementHover.bind(this))
-    this.events.on(Events.FOCUS.ELEMENT.MOUSEOUT, this.onElementOut.bind(this))
-    this.events.on(Events.CHART.MOUSEOUT, this.onMouseLeave.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.HOVER, this.onElementHover.bind(this))
+    this.events.on(Events.FOCUS.ELEMENT.OUT, this.onElementOut.bind(this))
+    this.events.on(Events.CHART.OUT, this.onMouseLeave.bind(this))
   }
 
   private onElementHover(payload: HoverPayload): void {
@@ -70,7 +70,7 @@ class PieChartFocus implements Focus {
   }
 
   private onMouseLeave(): void {
-    this.events.emit(Events.FOCUS.ELEMENT.MOUSEOUT)
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
   }
 
   remove(): void {

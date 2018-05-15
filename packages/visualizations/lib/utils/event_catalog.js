@@ -3,25 +3,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Events = {
     CHART: {
         CLICK: "chart:click",
-        MOUSEOVER: "chart:mouseover",
+        HOVER: "chart:hover",
         MOVE: "chart:mousemove",
-        MOUSEOUT: "chart:mouseout",
+        OUT: "chart:out",
     },
     FOCUS: {
         CLEAR: "focus:clear",
         COMPONENT: {
             CLICK: "focus:component:click",
-            MOUSEOVER: "focus:component:mouseover",
-            MOUSEOUT: "focus:component:mouseout",
+            HOVER: "focus:component:hover",
+            OUT: "focus:component:out",
             LABEL: {
-                MOUSEOUT: "focus:component:label:mouseout",
+                OUT: "focus:component:label:out",
             },
         },
+        DATE: "focus:date",
         ELEMENT: {
             HIGHLIGHT: "focus:element:highlight",
             CLICK: "focus:element:click",
-            MOUSEOVER: "focus:element:mouseover",
-            MOUSEOUT: "focus:element:mouseout",
+            HOVER: "focus:element:hover",
+            OUT: "focus:element:out",
+        },
+        FLAG: {
+            HOVER: "focus:flag:hover",
+            OUT: "focus:flag:out",
         },
     },
 };
