@@ -7,26 +7,55 @@ import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/comp
 export const DocsLink = glamorous.a(({ theme }: { theme: Theme }): {} => ({
   ...theme.typography.small,
   color: theme.colors.gray,
+  marginLeft: theme.spacing * 3 / 4,
 }))
 
-export const Section = (props: { title: string; docsUrl: string; children: React.ReactNode }) => (
-  <Card css={{ margin: "24px 0" }} id={props.title.toLowerCase()}>
-    <CardHeader>
-      {props.title}
-      <DocsLink href={props.docsUrl}>Docs</DocsLink>
-    </CardHeader>
-    <glamorous.Div
-      css={{
-        "& > *": {
-          marginRight: 6,
-          marginBottom: 6,
-        },
-      }}
-    >
-      {props.children}
-    </glamorous.Div>
-  </Card>
-)
+const AnchorLink = glamorous.h2(({ theme }: { theme: Theme }): {} => ({
+  ...theme.typography.heading1,
+  cursor: "pointer",
+  "& svg": {
+    opacity: 0,
+    color: theme.colors.info,
+    marginLeft: theme.spacing / 2,
+    width: theme.spacing * 3 / 4,
+    height: theme.spacing * 3 / 4,
+  },
+  ":hover svg": {
+    opacity: 1,
+  },
+}))
+
+export const Section = (props: { title: string; docsUrl: string; snippetUrl: string; children: React.ReactNode }) => {
+  const slug = props.title.toLowerCase().replace(/ /g, "-")
+  return (
+    <Card css={{ margin: "24px 0" }} id={slug}>
+      <CardHeader>
+        <AnchorLink
+          onClick={() => {
+            ;(history as any).pushState(null, null, `#${slug}`)
+          }}
+        >
+          {props.title}
+          <Icon name="Link" />
+        </AnchorLink>
+        <div>
+          <DocsLink href={props.snippetUrl}>View code</DocsLink>
+          <DocsLink href={props.docsUrl}>Docs</DocsLink>
+        </div>
+      </CardHeader>
+      <glamorous.Div
+        css={{
+          "& > *": {
+            marginRight: 6,
+            marginBottom: 6,
+          },
+        }}
+      >
+        {props.children}
+      </glamorous.Div>
+    </Card>
+  )
+}
 
 export const Subsection = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   margin: "30px 0",

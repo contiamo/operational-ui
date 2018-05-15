@@ -1,12 +1,15 @@
 import * as React from "react"
 import { Message } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "Messages"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/message.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/message.md`
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/Messages.tsx`
 
 export const Component = () => (
-  <React.Fragment>
-    <Message>abcd</Message>
-  </React.Fragment>
+  <>
+    <Message>Keep your belongings in sight at all times.</Message>
+  </>
 )

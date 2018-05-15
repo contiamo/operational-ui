@@ -1,8 +1,8 @@
 import * as React from "react"
 import { render } from "react-dom"
 import glamorous, { Hr, CSSProperties } from "glamorous"
-import { Card, Icon, Button, ButtonGroup, CardHeader, OperationalUI } from "@operational/components"
-import { Theme } from "@operational/theme"
+import { Card, Icon, Button, ButtonGroup, CardHeader, OperationalUI, Input } from "@operational/components"
+import { operational, Theme } from "@operational/theme"
 
 import { StaticContent, Animation, Hero, Logo, Footer, Section } from "./components"
 import componentsSections from "./Sections/Components"
@@ -11,11 +11,13 @@ import visualizationsSections from "./Sections/Visualizations"
 export interface State {
   rotation: number
   page: "components" | "visualizations"
+  search: string
 }
 
 export interface SectionData {
   title: string
   docsUrl: string
+  snippetUrl: string
   Component: React.SFC<{}>
 }
 
@@ -56,6 +58,7 @@ export default class App extends React.Component<{}, State> {
   state: State = {
     rotation: 0,
     page: "components",
+    search: "",
   }
 
   rotationInterval: any
@@ -134,13 +137,28 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
               Visualizations
             </Button>
           </ButtonGroup>
-          <React.Fragment>
-            {sections.map(({ title, docsUrl, Component }, index: number) => (
-              <Section key={index} title={title} docsUrl={docsUrl}>
-                <Component />
-              </Section>
-            ))}
-          </React.Fragment>
+          <Input
+            value={this.state.search}
+            onChange={(search: string) => {
+              this.setState(() => ({ search }))
+            }}
+            css={{ marginTop: operational.spacing * 1.5, width: "100%" }}
+            placeholder={`Search ${this.state.page}`}
+          />
+          <>
+            {sections
+              .filter(
+                ({ title, docsUrl }) =>
+                  title.toLowerCase().match(new RegExp(this.state.search)) ||
+                  docsUrl.toLowerCase().match(new RegExp(this.state.search))
+              )
+              .sort(({ title: title1 }, { title: title2 }) => (title1 < title2 ? -1 : title1 === title2 ? 0 : 1))
+              .map(({ title, docsUrl, snippetUrl, Component }, index: number) => (
+                <Section key={index} title={title} docsUrl={docsUrl} snippetUrl={snippetUrl}>
+                  <Component />
+                </Section>
+              ))}
+          </>
           <Footer />
         </Container>
       </OperationalUI>

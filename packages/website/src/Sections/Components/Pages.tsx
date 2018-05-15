@@ -2,11 +2,11 @@ import * as React from "react"
 import { Modal, Layout, Sidenav, Page, Button, Breadcrumbs, Breadcrumb } from "@operational/components"
 import * as constants from "../../constants"
 
-export const title = "Layouts"
+export const title = "Pages"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/layout.md`
+export const docsUrl = `${constants.docsBaseUrl}/components/page.md`
 
-export const snippetUrl = `${constants.snippetBaseUrl}/Components/Layouts.tsx`
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/Pages.tsx`
 
 export class Component extends React.Component<{}, { isExpanded: boolean }> {
   state = {
@@ -39,26 +39,21 @@ export class Component extends React.Component<{}, { isExpanded: boolean }> {
               }))
             }}
           >
-            <Layout
-              sidenav={<Sidenav expanded />}
-              main={
-                <Page
-                  title="Page Title"
-                  breadcrumbs={
-                    <Breadcrumbs>
-                      <Breadcrumb>One</Breadcrumb>
-                      <Breadcrumb>One</Breadcrumb>
-                      <Breadcrumb>One</Breadcrumb>
-                    </Breadcrumbs>
-                  }
-                  controls={
-                    <>
-                      <Button condensed color="info">
-                        Help
-                      </Button>
-                    </>
-                  }
-                />
+            <Page
+              title="Page Title"
+              breadcrumbs={
+                <Breadcrumbs>
+                  <Breadcrumb>One</Breadcrumb>
+                  <Breadcrumb>One</Breadcrumb>
+                  <Breadcrumb>One</Breadcrumb>
+                </Breadcrumbs>
+              }
+              controls={
+                <>
+                  <Button condensed color="info">
+                    Help
+                  </Button>
+                </>
               }
             />
           </Modal>

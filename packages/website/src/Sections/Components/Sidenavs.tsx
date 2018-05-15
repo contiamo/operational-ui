@@ -1,13 +1,16 @@
 import * as React from "react"
 import { Div } from "glamorous"
 import { Sidenav, SidenavHeader } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "Sidenavs"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/sidenav.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/sidenav.md`
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/Sidenavs.tsx`
 
 export const Component = () => (
-  <React.Fragment>
+  <>
     <Div css={{ height: 220 }}>
       <Sidenav expanded>
         <SidenavHeader label="The Prize" icon="Award" />
@@ -15,5 +18,5 @@ export const Component = () => (
         <SidenavHeader label="Hello" icon="Settings" />
       </Sidenav>
     </Div>
-  </React.Fragment>
+  </>
 )

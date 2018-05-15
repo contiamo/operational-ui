@@ -1,17 +1,36 @@
 import * as React from "react"
-import { ContextMenu, ContextMenuItem } from "@operational/components"
+import { ContextMenu, ContextMenuItem, Button } from "@operational/components"
+import * as constants from "../../constants"
 
 export const title = "Context Menus"
 
-export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/components/context-menu.md"
+export const docsUrl = `${constants.docsBaseUrl}/components/context-menu.md`
 
-export const Component = () => (
-  <React.Fragment>
-    <ContextMenu>
-      <span>Change me!</span>
-      <ContextMenuItem>To this</ContextMenuItem>
-      <ContextMenuItem>..this</ContextMenuItem>
-      <ContextMenuItem>...or this</ContextMenuItem>
-    </ContextMenu>
-  </React.Fragment>
-)
+export const snippetUrl = `${constants.snippetBaseUrl}/Components/ContextMenus.tsx`
+
+export class Component extends React.Component<{}, { content: string }> {
+  state = {
+    content: "I am open to change",
+  }
+
+  render() {
+    return (
+      <>
+        <ContextMenu>
+          <Button>{this.state.content}</Button>
+          {["To this content", "Or this content", "Ooor this content"].map(content => (
+            <ContextMenuItem
+              onClick={() => {
+                this.setState(() => ({
+                  content,
+                }))
+              }}
+            >
+              {content}
+            </ContextMenuItem>
+          ))}
+        </ContextMenu>
+      </>
+    )
+  }
+}
