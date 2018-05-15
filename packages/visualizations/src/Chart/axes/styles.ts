@@ -26,7 +26,7 @@ const y2Style = {
 }
 
 const borderStyle = {
-  stroke: theme.colors.lightGray,
+  stroke: theme.colors.border,
   shapeRendering: "crispedges",
 }
 

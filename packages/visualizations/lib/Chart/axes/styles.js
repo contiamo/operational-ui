@@ -23,7 +23,7 @@ var y2Style = {
     textAnchor: "start",
 };
 var borderStyle = {
-    stroke: theme_1.operational.colors.lightGray,
+    stroke: theme_1.operational.colors.border,
     shapeRendering: "crispedges",
 };
 var componentRectStyle = {

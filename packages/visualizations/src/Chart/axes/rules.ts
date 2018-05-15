@@ -1,5 +1,6 @@
 import { AxisComputed, AxisPosition, D3Selection, Object, State } from "../typings"
 import * as styles from "./styles"
+import { includes } from "lodash/fp"
 
 class Rules {
   el: D3Selection
@@ -17,8 +18,14 @@ class Rules {
   draw(): void {
     const computedAxes: Object<any> = this.state.current.get("computed").axes.computed
     const axisComputed: AxisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
+    const requiredAxes: AxisPosition[] = this.state.current.get("computed").axes.requiredAxes
     const data: number[] = axisComputed.ticks
-
+    if (includes(this.yRules ? "x1" : "y1")(requiredAxes)) {
+      data.shift()
+    }
+    if (includes(this.yRules ? "x2" : "y2")(requiredAxes)) {
+      data.pop()
+    }
     const startAttributes: Object<number> = this.startAttributes()
     const attributes: Object<number> = this.attributes()
 
@@ -77,7 +84,8 @@ class Rules {
   }
 
   private margin(axis: AxisPosition): number {
-    return this.state.current.get("computed").axes.margins[axis]
+    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    return includes(axis)(computedAxes.requiredAxes) ? computedAxes.margins[axis] : 0
   }
 
   close(): void {
