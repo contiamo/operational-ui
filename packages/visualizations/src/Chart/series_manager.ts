@@ -85,6 +85,8 @@ class ChartSeriesManager implements SeriesManager {
     const barIndices: Object<number> = {}
     forEach((series: Object<any>): void => {
       const hasBars: boolean = !!find((renderOptions: RendererOptions<any>) => renderOptions.type === "bars")(
+        // R is there actual drawing happening here? The name `computeBarIndices` would be
+        //   confusing in that case.
         this.renderAs(series)
       )
       const stackedRenderer: Object<any> = find(

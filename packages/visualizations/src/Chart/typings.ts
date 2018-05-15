@@ -264,6 +264,7 @@ export interface DataForLegends {
 }
 
 // @TODO
+// R what is this TODO for?
 export interface HoverPayload {}
 
 // export interface HoverPayload {
@@ -274,6 +275,7 @@ export interface HoverPayload {}
 export type Focus = Focus<HoverPayload>
 
 // @TODO
+// R what is this TODO for?
 export interface Components {
   axes: any
   // focus: Focus<HoverPayload>
