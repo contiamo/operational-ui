@@ -111,7 +111,7 @@ export const enterArcs = (arcs: D3Selection, mouseOverHandler: any, mouseOutHand
 
 const RECT_PADDING: number = 2
 
-export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any): void => {
+export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any, visibility: string): void => {
   updatingArcs.each(
     withD3Element((d: Datum, el: HTMLElement): void => {
       const element: D3Selection = select(el)
@@ -128,6 +128,9 @@ export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any):
         .attr("rx", 5)
         .attr("ry", 5)
         .attr("transform", translateString(transform))
+        .attr("visibility", visibility)
+
+      element.select("text").attr("visibility", visibility)
     })
   )
 }

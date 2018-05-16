@@ -47,12 +47,8 @@ const data: any = {
     { id: "Dortmund", size: 5 },
     { id: "Bonn", size: 7 },
     { id: "Cologne", size: 11 },
-    { id: "", size: 50 },
-    { id: undefined, size: 70 },
-    { id: "test", size: 0 },
-    { id: "test2", size: undefined },
   ],
-  renderAs: [GaugeRenderer],
+  renderAs: [DonutRenderer],
 }
 
 const config: any = { focusElement: "Berlin" }
@@ -64,3 +60,13 @@ const App = () => (
 )
 
 render(<App />, containerNode)
+
+setTimeout(() => {
+  data.data = [
+    { id: "Berlin", size: 5 },
+    { id: "Dortmund", size: 17 },
+    { id: "Bonn", size: 27 },
+    { id: "Cologne", size: 10 },
+    ]
+  render(<App />, containerNode)
+}, 3000)

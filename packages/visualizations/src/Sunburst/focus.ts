@@ -10,6 +10,7 @@ import {
   FocusPoint,
   HoverPayload,
   Object,
+  Point,
   Position,
   SeriesEl,
   State,
@@ -65,7 +66,23 @@ class SunburstFocus implements Focus {
     const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
     content.append("xhtml:li").text(this.percentageString(datum))
 
-    FocusUtils.drawVisible(this.el, this.labelPlacement(focusPoint), focusPoint.labelPosition)
+    const focus: Point = { x: focusPoint.centroid[0], y: focusPoint.centroid[1] }
+    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
+    const drawingDimensions = {
+      xMin: 0,
+      yMin: this.state.current.get("config").height - drawingDims.height,
+      xMax: drawingDims.width,
+      yMax: drawingDims.height,
+    }
+    FocusUtils.positionLabel(
+      this.el,
+      focus,
+      labelDimensions,
+      drawingDimensions,
+      this.state.current.get("config").focusOffset,
+      focusPoint.labelPosition
+    )
   }
 
   private labelPlacement(focusPoint: FocusPoint): Position {

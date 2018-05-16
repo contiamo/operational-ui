@@ -3,7 +3,7 @@ import Renderer from "./renderer";
 import RootLabel from "./root_label";
 import { HierarchyRectangularNode } from "d3-hierarchy";
 import { Accessor, Config, Object, Focus, Facade } from "../utils/typings";
-export { Accessor, Accessors, Dimensions, EventBus, Object, State, Partial, Position, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
+export { Accessor, Accessors, Dimensions, EventBus, Object, State, Partial, Point, Position, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
 export interface SunburstConfig extends Config {
     arrowOffset: number;
     centerCircleRadius: number;

@@ -15,6 +15,7 @@ export {
   Legend,
   Object,
   Partial,
+  Point,
   Position,
   SeriesEl,
   State,
