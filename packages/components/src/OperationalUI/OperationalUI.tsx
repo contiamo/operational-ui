@@ -5,8 +5,11 @@ import { Theme, operational } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
 
 export interface Props {
+  /** Theme */
   theme?: Theme
+  /** Children */
   children?: React.ReactNode
+  /** Use the base styles */
   withBaseStyles?: boolean
 }
 
