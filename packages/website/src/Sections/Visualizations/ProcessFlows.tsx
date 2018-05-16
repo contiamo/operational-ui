@@ -1,6 +1,5 @@
 import * as React from "react"
 import { VisualizationWrapper, ProcessFlow } from "@operational/visualizations"
-import { Div } from "glamorous"
 import * as constants from "../../constants"
 
 export const title = "Process Flow"

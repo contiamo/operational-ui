@@ -1,10 +1,12 @@
 import * as React from "react"
 import { VisualizationWrapper, PieChart } from "@operational/visualizations"
-import { Div } from "glamorous"
+import * as constants from "../../constants"
 
 export const title = "Gauges"
 
 export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/visualizations/pie-chart.md"
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Visualizations/Gauges.tsx`
 
 const config = {
   width: 330,
