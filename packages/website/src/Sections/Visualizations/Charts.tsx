@@ -1,10 +1,12 @@
 import * as React from "react"
 import { VisualizationWrapper, Chart } from "@operational/visualizations"
-import { Div } from "glamorous"
+import * as constants from "../../constants"
 
 export const title = "Charts"
 
 export const docsUrl = "https://github.com/contiamo/operational-ui/blob/master/docs/visualizations/chart.md"
+
+export const snippetUrl = `${constants.snippetBaseUrl}/Visualizations/Charts.tsx`
 
 const config = {
   width: 330,
