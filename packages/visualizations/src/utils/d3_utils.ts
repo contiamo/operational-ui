@@ -32,12 +32,12 @@ export const onTransitionEnd = (selection: D3Transition, func?: () => void): D3T
   })
 }
 
-const transitionOrSelection = (selection: D3Selection, duration?: number): any => {
+const transitionOrSelection = (selection: D3Selection | D3Transition, duration?: number): any => {
   return duration != null ? selection.transition().duration(duration) : selection
 }
 
 export const setPathAttributes = (
-  selection: D3Selection,
+  selection: D3Selection | D3Transition,
   attributes: Object<any>,
   duration?: number,
   onEnd?: () => void
@@ -54,7 +54,7 @@ export const setPathAttributes = (
 }
 
 export const setTextAttributes = (
-  selection: D3Selection,
+  selection: D3Selection | D3Transition,
   attributes: Object<any>,
   duration?: number,
   onEnd?: () => void
@@ -71,16 +71,20 @@ export const setTextAttributes = (
     .call(onTransitionEnd, onEnd)
 }
 
-export const setLineAttributes = (selection: D3Selection, attributes: Object<any>, duration?: number): void => {
+export const setLineAttributes = (
+  selection: D3Selection | D3Transition,
+  attributes: Object<any>,
+  duration?: number
+): void => {
   transitionOrSelection(selection, duration)
     .style("stroke", attributes.color)
-    .attr("x1", attributes.x1)
-    .attr("x2", attributes.x2)
-    .attr("y1", attributes.y1)
-    .attr("y2", attributes.y2)
+    .attr("x1", attributes.x || attributes.x1)
+    .attr("x2", attributes.x || attributes.x2)
+    .attr("y1", attributes.y || attributes.y1)
+    .attr("y2", attributes.y || attributes.y2)
 }
 
-export const setRectAttributes = (selection: any, attributes: any, duration?: number): void => {
+export const setRectAttributes = (selection: D3Selection | D3Transition, attributes: any, duration?: number): void => {
   transitionOrSelection(selection, duration)
     .attr("x", attributes.x)
     .attr("y", attributes.y)

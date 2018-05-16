@@ -18,6 +18,7 @@ var ChartSeriesManager = /** @class */ (function () {
         this.stateWriter("dataForLegends", this.dataForLegends());
         this.stateWriter("dataForAxes", this.dataForAxes());
         this.stateWriter("barSeries", this.barSeries());
+        this.stateWriter("axesWithFlags", this.axesWithFlags());
     };
     ChartSeriesManager.prototype.prepareData = function () {
         var _this = this;
@@ -111,6 +112,16 @@ var ChartSeriesManager = /** @class */ (function () {
             }
             memo[series.key()] = barsInfo;
             return memo;
+        }, {})(this.series);
+    };
+    ChartSeriesManager.prototype.axesWithFlags = function () {
+        return fp_1.reduce(function (axes, series) {
+            if (series.hasFlags()) {
+                var flag = series.get("flag");
+                axes[flag.axis] = axes[flag.axis] || { axisPadding: 0 };
+                axes[flag.axis].axisPadding = Math.max(axes[flag.axis].axisPadding, flag.axisPadding);
+            }
+            return axes;
         }, {})(this.series);
     };
     ChartSeriesManager.prototype.create = function (options) {

@@ -245,7 +245,7 @@ class CategoricalAxis implements AxisClass<string> {
 
   private adjustMargins(): void {
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    const requiredMargin: number = computeRequiredMargin(
+    let requiredMargin: number = computeRequiredMargin(
       this.el,
       computedMargins,
       this.margin,
@@ -253,9 +253,9 @@ class CategoricalAxis implements AxisClass<string> {
       this.position
     )
 
-    // // Add space for flags
-    // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
-    // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+    // Add space for flags
+    const flagAxis: Object<any> = this.state.current.get("computed").series.axesWithFlags[this.position]
+    requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
     if (computedMargins[this.position] === requiredMargin) {
       return

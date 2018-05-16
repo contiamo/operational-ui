@@ -13,6 +13,7 @@ import * as bars1 from "./bars-1"
 import * as bars2 from "./bars-2"
 import * as symbol1 from "./symbol-1"
 import * as symbol2 from "./symbol-2"
+import * as flags1 from "./flags-1"
 
 export default [
   general1,
@@ -30,4 +31,5 @@ export default [
   bars2,
   symbol1,
   symbol2,
+  flags1,
 ]

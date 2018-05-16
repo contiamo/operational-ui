@@ -19,6 +19,7 @@ declare class ChartSeriesManager implements SeriesManager {
     private dataForLegends();
     private dataForAxes();
     private barSeries();
+    private axesWithFlags();
     private create(options);
     draw(): void;
 }

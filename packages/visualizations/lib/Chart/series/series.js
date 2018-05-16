@@ -77,6 +77,9 @@ var ChartSeries = /** @class */ (function () {
             stackIndex: this.options.stackIndex,
         };
     };
+    ChartSeries.prototype.hasFlags = function () {
+        return !!this.get("flag");
+    };
     ChartSeries.prototype.hasData = function () {
         return !!this.data() && this.data().length > 0;
     };
