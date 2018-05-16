@@ -1,5 +1,5 @@
 export { Theme, operational as operationalTheme } from "@operational/theme"
-export { default as Avatar } from "./Avatar"
+export { default as Avatar } from "./Avatar/Avatar"
 export { default as AvatarGroup } from "./AvatarGroup"
 export { default as Breadcrumb } from "./Breadcrumb"
 export { default as Breadcrumbs } from "./Breadcrumbs"
