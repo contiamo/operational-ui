@@ -13,60 +13,56 @@ export interface IContainerProps {
   onClick?: () => void
 }
 
-const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
-  ({ theme, color, disabled, style }: IContainerProps & { theme: Theme }): {} => {
-    const backgroundColor = expandColor(theme, color) || theme.colors.white
+const Container = glamorous.div(({ theme, color, disabled, style }: IContainerProps & { theme: Theme }): {} => {
+  const backgroundColor = expandColor(theme, color) || theme.colors.white
 
-    return {
-      backgroundColor,
-      label: "select",
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3 + 40}px ${theme.spacing / 2}px ${theme.spacing *
-        2 /
-        3}px `,
-      borderRadius: 4,
-      width: "fit-content",
-      minWidth: 240,
-      minHeight: 20,
-      border: "1px solid",
-      borderColor: theme.colors.inputBorder,
-      opacity: disabled ? 0.5 : 1,
-      cursor: "pointer",
-      color: readableTextColor(backgroundColor, ["black", "white"]),
-      outline: "none",
-      pointerEvents: disabled ? "none" : "all",
+  return {
+    backgroundColor,
+    label: "select",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3 + 40}px ${theme.spacing / 2}px ${theme.spacing *
+      2 /
+      3}px `,
+    borderRadius: 4,
+    width: "fit-content",
+    minWidth: 240,
+    minHeight: 20,
+    border: "1px solid",
+    borderColor: theme.colors.inputBorder,
+    opacity: disabled ? 0.5 : 1,
+    cursor: "pointer",
+    color: readableTextColor(backgroundColor, ["black", "white"]),
+    outline: "none",
+    pointerEvents: disabled ? "none" : "all",
 
-      // downward caret.
-      "&::after": {
-        content: "''",
-        position: "absolute",
-        top: "50%",
-        right: theme.spacing / 2,
-        width: 0,
-        height: 0,
-        border: "4px solid transparent",
-        borderTopColor: theme.colors.gray,
-        transform: "translateY(calc(-50% + 2px))",
-      },
+    // downward caret.
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: "50%",
+      right: theme.spacing / 2,
+      width: 0,
+      height: 0,
+      border: "4px solid transparent",
+      borderTopColor: theme.colors.gray,
+      transform: "translateY(calc(-50% + 2px))",
+    },
 
-      "&:focus": mixins.inputFocus({ theme }),
-    }
+    "&:focus": mixins.inputFocus({ theme }),
   }
-)
+})
 
 export interface IDisplayValueProps {
   isPlaceholder: boolean
 }
 
-const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
-  ({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
-    color: isPlaceholder ? theme.colors.gray : theme.colors.black,
-  })
-)
+const DisplayValue = glamorous.div(({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
+  color: isPlaceholder ? theme.colors.gray : theme.colors.black,
+}))
 
-const Options: GlamorousComponent<{}, {}> = glamorous.div(
+const Options = glamorous.div(
   {
     position: "absolute",
     // Push it down 6px so it doesn't overlap with the focus shadow,
@@ -87,7 +83,7 @@ const Options: GlamorousComponent<{}, {}> = glamorous.div(
   })
 )
 
-const OptionsList: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const OptionsList = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   // whole number + 3/4 ratio here ensures options don't get cut off
   maxHeight: theme.spacing * 12.75,
   overflow: "auto",
