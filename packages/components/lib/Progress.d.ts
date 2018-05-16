@@ -6,6 +6,7 @@ export interface Props {
     className?: string;
     error?: string;
     onRetry?: () => void;
+    onClose?: () => void;
     fadeParent?: boolean;
 }
 declare const Progress: (props: Props) => JSX.Element;

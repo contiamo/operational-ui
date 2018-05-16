@@ -13,6 +13,7 @@ export interface Props {
   className?: string
   error?: string
   onRetry?: () => void
+  onClose?: () => void
   fadeParent?: boolean
 }
 
@@ -60,26 +61,36 @@ const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean
 
 const ErrorMessage = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.body,
-  minWidth: 160,
-  maxWidth: 480,
-  padding: `${theme.spacing / 6}px ${theme.spacing / 2}px`,
-  borderBottomLeftRadius: 2,
-  borderBottomRightRadius: 2,
-  display: "inline-block",
+  padding: `${theme.spacing / 2}px ${theme.spacing / 2}px`,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   position: "relative",
   zIndex: theme.baseZIndex + 301,
   textAlign: "center",
-  backgroundColor: theme.colors.error,
+  backgroundColor: lighten(theme.colors.error, 15),
   color: theme.colors.white,
 }))
 
-const RetryLink = glamorous.div(({ theme }: WithTheme): CssStatic => ({
+const Action = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   opacity: 0.7,
   display: "inline-block",
-  marginLeft: theme.spacing * 3 / 4,
+  marginLeft: theme.spacing,
   userSelect: "none",
+  "& > *": {
+    display: "inline-block",
+    verticalAlign: "middle",
+  },
   "& svg": {
-    marginRight: theme.spacing / 3,
+    width: theme.spacing,
+    height: theme.spacing,
+    marginRight: theme.spacing / 4,
+  },
+  // Temporary hack since feather icons for refresh and close
+  // have a mismatch in size.
+  ":first-of-type svg": {
+    width: theme.spacing * 3 / 4,
+    height: theme.spacing * 3 / 4,
   },
   ":hover": {
     opacity: 1,
@@ -92,12 +103,18 @@ const Progress = (props: Props) => (
     {props.error ? (
       <ErrorMessage>
         {props.error}
-        {props.onRetry ? (
-          <RetryLink onClick={props.onRetry}>
-            <Icon name="RefreshCw" size={10} />
-            Retry
-          </RetryLink>
-        ) : null}
+        {props.onRetry && (
+          <Action onClick={props.onRetry}>
+            <Icon name="RefreshCw" />
+            <span>Retry</span>
+          </Action>
+        )}
+        {props.onClose && (
+          <Action>
+            <Icon name="X" />
+            <span>Dismiss</span>
+          </Action>
+        )}
       </ErrorMessage>
     ) : null}
   </Container>

@@ -7,6 +7,7 @@ import {
   OperationalUI,
   Layout,
   Page,
+  Progress,
   Sidenav,
   SidenavHeader,
   Breadcrumbs,
@@ -55,6 +56,15 @@ class Explore extends React.Component<Props, State> {
                 </React.Fragment>
               }
             >
+              <Progress
+                error="There was an error"
+                onRetry={() => {
+                  console.log("retry")
+                }}
+                onClose={() => {
+                  console.log("error")
+                }}
+              />
               <AvatarGroup>
                 <Avatar name="Alfred Black" title="1234" showName assignColor />
                 <Avatar
