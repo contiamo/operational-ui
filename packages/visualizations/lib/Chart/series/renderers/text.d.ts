@@ -1,6 +1,6 @@
 import Series from "../series";
-import { TextRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
-export declare type Options = RendererOptions<TextRendererAccessors>;
+import { TextRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererType, SingleRendererOptions, State } from "../../typings";
+export declare type Options = SingleRendererOptions<TextRendererAccessors>;
 declare class Text implements RendererClass<TextRendererAccessors> {
     data: Datum[];
     el: D3Selection;

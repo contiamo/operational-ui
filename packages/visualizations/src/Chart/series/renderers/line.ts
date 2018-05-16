@@ -22,13 +22,13 @@ import {
   Partial,
   RendererAccessor,
   RendererClass,
-  RendererOptions,
   RendererType,
+  SingleRendererOptions,
   SeriesAccessors,
   State,
 } from "../../typings"
 
-export type Options = RendererOptions<LineRendererAccessors>
+export type Options = SingleRendererOptions<LineRendererAccessors>
 
 const defaultAccessors: Partial<LineRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),

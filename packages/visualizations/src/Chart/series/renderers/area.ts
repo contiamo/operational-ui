@@ -23,12 +23,12 @@ import {
   Partial,
   RendererAccessor,
   RendererClass,
-  RendererOptions,
   RendererType,
+  SingleRendererOptions,
   State,
 } from "../../typings"
 
-export type Options = RendererOptions<AreaRendererAccessors>
+export type Options = SingleRendererOptions<AreaRendererAccessors>
 
 const interpolator = {
   cardinal: curveCardinal,

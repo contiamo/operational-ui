@@ -1,6 +1,6 @@
 import Series from "../series";
-import { AreaRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
-export declare type Options = RendererOptions<AreaRendererAccessors>;
+import { AreaRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererType, SingleRendererOptions, State } from "../../typings";
+export declare type Options = SingleRendererOptions<AreaRendererAccessors>;
 declare class Area implements RendererClass<AreaRendererAccessors> {
     closeGaps: RendererAccessor<boolean>;
     color: RendererAccessor<string>;

@@ -14,8 +14,8 @@ import {
   Object,
   RendererAccessor,
   RendererClass,
-  RendererOptions,
   RendererType,
+  SingleRendererOptions,
   State,
 } from "../../typings"
 
@@ -26,7 +26,7 @@ const defaultAccessors: Partial<FlagRendererAccessors> = {
   label: (series: Series, d: Datum) => d.label || "",
 }
 
-export type Options = RendererOptions<FlagRendererAccessors>
+export type Options = SingleRendererOptions<FlagRendererAccessors>
 
 class Flag implements RendererClass<FlagRendererAccessors> {
   data: Datum[]

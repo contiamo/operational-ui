@@ -8,7 +8,7 @@ import {
   LegendDatum,
   Object,
   RendererClass,
-  RendererOptions,
+  SingleRendererOptions,
   RendererType,
   SeriesAccessor,
   State,
@@ -28,7 +28,7 @@ class ChartSeries {
   key: () => string
   legendColor: () => string
   legendName: () => string
-  renderAs: () => RendererOptions<any>[]
+  renderAs: () => SingleRendererOptions<any>[]
   symbolOffset: (d: Datum) => number
   xAxis: () => "x1" | "x2"
   yAxis: () => "y1" | "y2"
@@ -62,7 +62,7 @@ class ChartSeries {
     this.oldRenderers = []
     const rendererTypes: RendererType[] = map(get("type"))(this.renderAs())
     this.removeAllExcept(rendererTypes)
-    forEach((options: RendererOptions<any>): void => {
+    forEach((options: SingleRendererOptions<any>): void => {
       const renderer: RendererClass<any> = this.get(options.type)
       renderer ? renderer.update(this.options.data, options) : this.addRenderer(options)
       if (options.type === "symbol") {
@@ -82,7 +82,7 @@ class ChartSeries {
     return find((renderer: RendererClass<any>): boolean => renderer.type === type)(this.renderers)
   }
 
-  private addRenderer(options: RendererOptions<any>): void {
+  private addRenderer(options: SingleRendererOptions<any>): void {
     this.renderers.push(new Renderer(this.state, this.events, this.el, this.options.data, options, this))
   }
 

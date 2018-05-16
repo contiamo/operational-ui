@@ -153,7 +153,7 @@ var Area = /** @class */ (function () {
         var _this = this;
         var attributes = {
             x: function (d) { return _this.xScale(_this.xIsBaseline ? _this.x(d) : 0); },
-            y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d)); }
+            y: function (d) { return _this.yScale(_this.xIsBaseline ? 0 : _this.y(d)); },
         };
         return this.createAreaPath(attributes)(data);
     };
@@ -163,7 +163,7 @@ var Area = /** @class */ (function () {
             x0: this.xIsBaseline ? this.x0 : this.xScale.range()[1],
             x1: this.x1,
             y0: function (d) { return (_this.xIsBaseline ? 0 : _this.y0(d)); },
-            y1: this.y1
+            y1: this.y1,
         };
         return this.createAreaPath(attributes)(data);
     };

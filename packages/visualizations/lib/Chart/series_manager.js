@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fp_1 = require("lodash/fp");
+var d3_shape_1 = require("d3-shape");
 var series_1 = require("./series/series");
 var ChartSeriesManager = /** @class */ (function () {
     function ChartSeriesManager(state, stateWriter, events, el) {
@@ -23,7 +24,7 @@ var ChartSeriesManager = /** @class */ (function () {
     ChartSeriesManager.prototype.prepareData = function () {
         var _this = this;
         var isHidden = this.state.current.get("accessors").series.hide;
-        var data = fp_1.flow(fp_1.omitBy(isHidden), this.computeBarIndices.bind(this), this.handleGroupedSeries("range", this.computeRange.bind(this)))(this.state.current.get("accessors").data.series(this.state.current.get("data")));
+        var data = fp_1.flow(fp_1.omitBy(isHidden), this.computeBarIndices.bind(this), this.handleGroupedSeries("stacked", this.computeStack.bind(this)), this.handleGroupedSeries("range", this.computeRange.bind(this)))(this.state.current.get("accessors").data.series(this.state.current.get("data")));
         var currentKeys = fp_1.map(function (datum) { return _this.key(datum); })(data);
         this.removeAllExcept(currentKeys);
         fp_1.forEach(function (options) {
@@ -52,7 +53,7 @@ var ChartSeriesManager = /** @class */ (function () {
             if (hasStackedBars) {
                 fp_1.forEach(function (stackedSeries) {
                     barIndices[_this.key(stackedSeries)] = i;
-                })(series.data);
+                })(series.series);
             }
             i = i + 1;
         })(data);
@@ -94,6 +95,58 @@ var ChartSeriesManager = /** @class */ (function () {
         fp_1.forEach.convert({ cap: false })(function (series, i) {
             series.clipData = range.series[1 - i].data;
         })(range.series);
+    };
+    ChartSeriesManager.prototype.computeStack = function (stack, index) {
+        var _this = this;
+        // By default, stacks are vertical
+        var stackAxis = this.renderAs(stack)[0].stackAxis || "y";
+        var baseAxis = stackAxis === "y" ? "x" : "y";
+        var value = function (series, axis) {
+            var seriesAccessors = _this.state.current.get("accessors").series;
+            var attribute = (axis === "x" ? seriesAccessors.xAttribute : seriesAccessors.yAttribute)(series);
+            return fp_1.get(attribute);
+        };
+        // Transform data into suitable structure for d3 stack
+        var seriesAccessors = this.state.current.get("accessors").series;
+        var baseValues = fp_1.reduce(function (memo, series) {
+            return memo.concat(fp_1.map(value(series, baseAxis))(series.data));
+        }, [])(stack.series);
+        var dataToStack = fp_1.flow(fp_1.uniqBy(String), fp_1.map(function (baseValue) {
+            return _a = {}, _a[baseAxis] = baseValue, _a;
+            var _a;
+        }), fp_1.sortBy(baseAxis))(baseValues);
+        fp_1.forEach(function (series) {
+            fp_1.forEach(function (datum) {
+                var newDatum = fp_1.find(function (d) { return String(d[baseAxis]) === String(value(series, baseAxis)(datum)); })(dataToStack);
+                newDatum[series.key] = value(series, stackAxis)(datum);
+            })(series.data);
+        })(stack.series);
+        var seriesKeys = fp_1.map(this.key)(stack.series);
+        // Stack data
+        var stackedData = d3_shape_1.stack()
+            .value(function (d, key) { return d[key] || 0; })
+            .keys(seriesKeys)(dataToStack);
+        // Return to series data structure
+        // @TODO typings
+        fp_1.forEach(function (series) {
+            var originalSeries = fp_1.find({ key: series.key })(stack.series);
+            // @TODO typing
+            var xAttribute = _this.state.current.get("accessors").series.xAttribute(originalSeries);
+            var yAttribute = _this.state.current.get("accessors").series.yAttribute(originalSeries);
+            originalSeries.data = fp_1.map(function (datum) {
+                return _a = {},
+                    _a[baseAxis] = datum.data[baseAxis],
+                    _a[stackAxis] = datum.data[series.key],
+                    _a["" + stackAxis + 0] = datum[0],
+                    _a["" + stackAxis + 1] = datum[1],
+                    _a;
+                var _a;
+            })(series);
+            originalSeries.stacked = true;
+            originalSeries.stackIndex = index + 1;
+            originalSeries.xAttribute = "x";
+            originalSeries.yAttribute = "y";
+        })(stackedData);
     };
     ChartSeriesManager.prototype.get = function (key) {
         var _this = this;

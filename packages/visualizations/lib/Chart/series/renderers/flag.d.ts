@@ -1,6 +1,6 @@
 import Series from "../series";
-import { AxisPosition, D3Selection, Datum, EventBus, FlagRendererAccessors, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
-export declare type Options = RendererOptions<FlagRendererAccessors>;
+import { AxisPosition, D3Selection, Datum, EventBus, FlagRendererAccessors, RendererAccessor, RendererClass, RendererType, SingleRendererOptions, State } from "../../typings";
+export declare type Options = SingleRendererOptions<FlagRendererAccessors>;
 declare class Flag implements RendererClass<FlagRendererAccessors> {
     data: Datum[];
     el: D3Selection;

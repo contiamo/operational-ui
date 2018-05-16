@@ -1,5 +1,5 @@
-import { D3Selection, Datum, EventBus, RendererOptions, State } from "../typings";
+import { D3Selection, Datum, EventBus, SingleRendererOptions, State } from "../typings";
 declare class Renderer {
-    constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: RendererOptions<any>, series: any);
+    constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: SingleRendererOptions<any>, series: any);
 }
 export default Renderer;

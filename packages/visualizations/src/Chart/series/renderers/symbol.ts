@@ -19,8 +19,8 @@ import {
   Object,
   RendererAccessor,
   RendererClass,
-  RendererOptions,
   RendererType,
+  SingleRendererOptions,
   State,
 } from "../../typings"
 
@@ -56,7 +56,7 @@ const symbolOptions: Object<any> = {
   },
 }
 
-export type Options = RendererOptions<SymbolRendererAccessors>
+export type Options = SingleRendererOptions<SymbolRendererAccessors>
 
 class Symbol implements RendererClass<SymbolRendererAccessors> {
   data: Datum[]

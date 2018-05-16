@@ -1,11 +1,11 @@
 import Series from "./series/series";
-import { Accessor, D3Selection, EventBus, Object, RangeRendererOptions, RendererOptions, SeriesAccessor, SeriesManager, State, StateWriter } from "./typings";
+import { Accessor, D3Selection, EventBus, Object, RendererOptions, SeriesAccessor, SeriesManager, State, StateWriter } from "./typings";
 declare class ChartSeriesManager implements SeriesManager {
     el: D3Selection;
     events: EventBus;
     key: SeriesAccessor<string>;
     oldSeries: Series[];
-    renderAs: Accessor<Object<any> | RendererOptions<any>, (RendererOptions<any> | RangeRendererOptions)[]>;
+    renderAs: Accessor<Object<any> | RendererOptions, RendererOptions[]>;
     series: Series[];
     state: State;
     stateWriter: StateWriter;
@@ -15,6 +15,7 @@ declare class ChartSeriesManager implements SeriesManager {
     private computeBarIndices(data);
     private handleGroupedSeries(type, compute);
     private computeRange(range, index);
+    private computeStack(stack, index);
     private get(key);
     private remove(key);
     private removeAllExcept(keys);

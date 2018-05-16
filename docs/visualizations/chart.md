@@ -172,6 +172,9 @@ A grouped renderer object _must_ have the following properties:
 * type - "range" | "stacked"
 * renderAs - an array of single renderer config objects as defined [above](#renderer-objects)
 
+A stacked renderer object _may_ also have:
+* stackAxis - "y" (default) or "x"
+
 ## Accessors
 Accessors are used to tell the visualization about data structure (data accessors), and to determine how the data should be rendered (series accessors).
 

@@ -55,7 +55,6 @@ const TextRenderer: any = {
 
 const StackedRenderer = {
   type: "stacked",
-  stackAxis: "y",
   renderAs: [BarsRenderer, TextRenderer]
 }
 
@@ -79,7 +78,6 @@ const YFlagRenderer = {
 
 const RangeRenderer = {
   type: "range",
-  // stackAxis: "y",
   renderAs: [AreaRenderer, LineRenderer, SymbolRenderer]
 }
 
@@ -99,8 +97,6 @@ const createData: any = () => {
         ],
         name: "Pageviews 2018",
         key: "series1",
-        xAttribute: "y",
-        yAttribute: "x",
         renderAs: [BarsRenderer, TextRenderer],
       },
       {
@@ -116,8 +112,6 @@ const createData: any = () => {
         ],
         name: "Users 2018",
         key: "series2",
-        xAttribute: "y",
-        yAttribute: "x",
         renderAs: [BarsRenderer, TextRenderer],
       },
       {
@@ -134,9 +128,9 @@ const createData: any = () => {
             ],
             name: "Metric 1",
             key: "series3",
-            // xAttribute: "y",
-            // yAttribute: "x",
-            xAxis: "x2"
+            xAttribute: "y",
+            yAttribute: "x",
+            yAxis: "y2"
           },
           {
             data: [
@@ -151,25 +145,25 @@ const createData: any = () => {
             ],
             name: "Metric 2",
             key: "series4",
-            // xAttribute: "y",
-            // yAttribute: "x",
-            xAxis: "x2"
+            xAttribute: "y",
+            yAttribute: "x",
+            yAxis: "y2"
           }
         ],
-        renderAs: [RangeRenderer]
+        renderAs: [StackedRenderer]
       },
     ],
     axes: {
-      y1: {
+      x1: {
         type: "time",
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
       },
-      x1: {
+      y1: {
         type: "quant"
       },
-      x2: {
+      y2: {
         type: "quant"
       }
     }
@@ -177,7 +171,7 @@ const createData: any = () => {
 }
 
 let data = createData()
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST"}}/></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 1000}}/></OperationalUI>
 render(<App />, containerNode)
 
 setTimeout(() => {

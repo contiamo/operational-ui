@@ -23,11 +23,13 @@ import {
   Accessor,
   D3Selection,
   DataForLegends,
+  Datum,
   EventBus,
+  GroupedRendererOptions,
   Object,
-  RangeRendererOptions,
   RendererOptions,
   SeriesAccessor,
+  SeriesAccessors,
   SeriesData,
   SeriesManager,
   State,
@@ -40,7 +42,7 @@ class ChartSeriesManager implements SeriesManager {
   events: EventBus
   key: SeriesAccessor<string>
   oldSeries: Series[] = []
-  renderAs: Accessor<Object<any> | RendererOptions<any>, (RendererOptions<any> | RangeRendererOptions)[]>
+  renderAs: Accessor<Object<any> | RendererOptions, RendererOptions[]>
   series: Series[] = []
   state: State
   stateWriter: StateWriter
@@ -67,6 +69,7 @@ class ChartSeriesManager implements SeriesManager {
     const data: SeriesData = flow(
       omitBy(isHidden),
       this.computeBarIndices.bind(this),
+      this.handleGroupedSeries("stacked", this.computeStack.bind(this)),
       this.handleGroupedSeries("range", this.computeRange.bind(this))
     )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
 
@@ -89,15 +92,16 @@ class ChartSeriesManager implements SeriesManager {
     let i: number = 0
     const barIndices: Object<number> = {}
     forEach((series: Object<any>): void => {
-      const hasBars: boolean = !!find((renderOptions: RendererOptions<any>) => renderOptions.type === "bars")(
+      const hasBars: boolean = !!find((renderOptions: RendererOptions) => renderOptions.type === "bars")(
         this.renderAs(series)
       )
-      const stackedRenderer: Object<any> = find(
-        (renderOptions: RendererOptions<any>) => renderOptions.type === "stacked"
-      )(this.renderAs(series))
+      const stackedRenderer: Object<any> = find((renderOptions: RendererOptions) => renderOptions.type === "stacked")(
+        this.renderAs(series)
+      )
       const hasStackedBars: boolean =
         !!stackedRenderer &&
-        !!find((renderOptions: RendererOptions<any>) => renderOptions.type === "bars")(this.renderAs(stackedRenderer))
+        !!find((renderOptions: RendererOptions) => renderOptions.type === "bars")(this.renderAs(stackedRenderer))
+
       if (!hasBars && !hasStackedBars) {
         return
       }
@@ -107,7 +111,7 @@ class ChartSeriesManager implements SeriesManager {
       if (hasStackedBars) {
         forEach((stackedSeries: Object<any>) => {
           barIndices[this.key(stackedSeries)] = i
-        })(series.data)
+        })(series.series)
       }
       i = i + 1
     })(data)
@@ -157,6 +161,68 @@ class ChartSeriesManager implements SeriesManager {
     forEach.convert({ cap: false })((series: Object<any>, i: number) => {
       series.clipData = range.series[1 - i].data
     })(range.series)
+  }
+
+  private computeStack(stack: Object<any>, index: number): void {
+    // By default, stacks are vertical
+    const stackAxis: "x" | "y" = (this.renderAs(stack)[0] as GroupedRendererOptions).stackAxis || "y"
+    const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
+
+    const value = (series: Object<any>, axis: "x" | "y") => {
+      const seriesAccessors: SeriesAccessors = this.state.current.get("accessors").series
+      const attribute: any = (axis === "x" ? seriesAccessors.xAttribute : seriesAccessors.yAttribute)(series)
+      return get(attribute)
+    }
+
+    // Transform data into suitable structure for d3 stack
+    const seriesAccessors: SeriesAccessors = this.state.current.get("accessors").series
+    const baseValues = reduce((memo: any[], series: Object<any>): any => {
+      return memo.concat(map(value(series, baseAxis))(series.data))
+    }, [])(stack.series)
+
+    const dataToStack = flow(
+      uniqBy(String),
+      map((baseValue: string | number | Date) => {
+        return { [baseAxis]: baseValue }
+      }),
+      sortBy(baseAxis as any)
+    )(baseValues)
+
+    forEach((series: Object<any>) => {
+      forEach((datum: Datum) => {
+        const newDatum = find((d: any) => String(d[baseAxis]) === String(value(series, baseAxis)(datum)))(dataToStack)
+        newDatum[series.key] = value(series, stackAxis)(datum)
+      })(series.data)
+    })(stack.series)
+
+    const seriesKeys = map(this.key)(stack.series)
+
+    // Stack data
+    const stackedData = d3Stack()
+      .value((d, key) => d[key] || 0)
+      .keys(seriesKeys)(dataToStack)
+
+    // Return to series data structure
+    // @TODO typings
+    forEach((series: any) => {
+      const originalSeries: Object<any> = find({ key: series.key })(stack.series)
+      // @TODO typing
+      const xAttribute: string = this.state.current.get("accessors").series.xAttribute(originalSeries)
+      const yAttribute: string = this.state.current.get("accessors").series.yAttribute(originalSeries)
+
+      originalSeries.data = map((datum: any): Datum => {
+        return {
+          [baseAxis]: datum.data[baseAxis],
+          [stackAxis]: datum.data[series.key],
+          [`${stackAxis}${0}`]: datum[0],
+          [`${stackAxis}${1}`]: datum[1],
+        }
+      })(series)
+      originalSeries.stacked = true
+      originalSeries.stackIndex = index + 1
+      originalSeries.xAttribute = "x"
+      originalSeries.yAttribute = "y"
+    })(stackedData)
   }
 
   private get(key: string): any {
