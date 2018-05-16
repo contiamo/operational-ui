@@ -53,7 +53,12 @@ export const setPathAttributes = (
     .call(onTransitionEnd, onEnd)
 }
 
-export const setTextAttributes = (selection: D3Selection, attributes: Object<any>, duration?: number, onEnd?: () => void): void => {
+export const setTextAttributes = (
+  selection: D3Selection,
+  attributes: Object<any>,
+  duration?: number,
+  onEnd?: () => void
+): void => {
   transitionOrSelection(selection, duration)
     .attr("x", attributes.x)
     .attr("y", attributes.y)

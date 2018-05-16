@@ -154,7 +154,7 @@ Categorical axes _may_ have:
  
  Variation in these property names needs to be defined in the series accessors.
 
-### <a name="renderer-objects"></>Renderer objects
+### <a name="renderer-objects"></a>Renderer objects
 The 'renderAs' property of a series (or the returned value of the 'renderAs' series accessor) should be an array of renderer objects. The only property that each of these _must_ have is:
 * type - "area" | "bars" | "flag" | "line" | "symbol" | "text"
 

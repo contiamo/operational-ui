@@ -1,6 +1,5 @@
 import * as React from "react"
 import { VisualizationWrapper, PieChart } from "@operational/visualizations"
-import { Div } from "glamorous"
 import * as constants from "../../constants"
 
 export const title = "Pie Charts"
