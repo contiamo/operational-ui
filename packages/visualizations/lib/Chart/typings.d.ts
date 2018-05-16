@@ -73,8 +73,10 @@ export interface RendererOptions<RendererAccessors> {
     type: RendererType | "stacked";
     accessors?: Partial<RendererAccessors>;
     config?: Object<any>;
-    renderAs?: RendererOptions<any>[];
-    stackAxis?: "x" | "y";
+}
+export interface RangeRendererOptions {
+    type: "range";
+    renderAs: RendererOptions<any>[];
 }
 export interface RendererClass<RendererAccessors> {
     dataForAxis: (axis: "x" | "y") => any[];
@@ -103,7 +105,7 @@ export interface SeriesAccessors {
     key: SeriesAccessor<string>;
     legendColor: SeriesAccessor<string>;
     legendName: SeriesAccessor<string>;
-    renderAs: SeriesAccessor<RendererOptions<any>[]>;
+    renderAs: SeriesAccessor<(RendererOptions<any> | RangeRendererOptions)[]>;
     axis: SeriesAccessor<AxisPosition>;
     xAttribute: SeriesAccessor<string>;
     yAttribute: SeriesAccessor<string>;

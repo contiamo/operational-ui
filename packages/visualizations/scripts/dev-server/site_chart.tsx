@@ -79,98 +79,108 @@ const YFlagRenderer = {
 
 const RangeRenderer = {
   type: "range",
-  stackAxis: "y",
+  // stackAxis: "y",
   renderAs: [AreaRenderer, LineRenderer, SymbolRenderer]
 }
 
-const data: any = {
-  series: [
-    {
-      data: [
-        { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
-      ],
-      name: "Pageviews 2018",
-      key: "series1",
-      renderAs: [LineRenderer, TextRenderer],
-    },
-    {
-      data: [
-        { x: new Date(2018, 2, 12), description: "Event flag 1", direction: "up", label: "Flag 1" },
-        { x: new Date(2018, 2, 14), description: "Event flag 2", direction: "down", label: "Flag 2" }
-      ],
-      hideInLegend: true,
-      key: "series_flags_x"
-      renderAs: [XFlagRenderer]
-    },
-    {
-      data: [
-        { y: 300, description: "Event flag 4", direction: "up", label: "Flag 4" },
-        { y: 200, description: "Event flag 3", direction: "down", label: "Flag 3" },
-      ],
-      hideInLegend: true,
-      key: "series_flags_y"
-      renderAs: [YFlagRenderer]
-    },
-  ],
-  axes: {
-    x1: {
-      type: "time",
-      start: new Date(2018, 2, 11),
-      end: new Date(2018, 2, 15),
-      interval: "day",
-    },
-    y1: {
-      type: "quant",
-      unit: "EUR",
-      showRules: false
+const createData: any = () => {
+  return {
+    series: [
+      {
+        data: [
+          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+        ],
+        name: "Pageviews 2018",
+        key: "series1",
+        xAttribute: "y",
+        yAttribute: "x",
+        renderAs: [BarsRenderer, TextRenderer],
+      },
+      {
+        data: [
+          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 300) },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 300) },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 300) },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 300) },
+          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 300) },
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) }
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+        ],
+        name: "Users 2018",
+        key: "series2",
+        xAttribute: "y",
+        yAttribute: "x",
+        renderAs: [BarsRenderer, TextRenderer],
+      },
+      {
+        series: [
+          {
+            data: [
+              { y: new Date(2018, 2, 10), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 11), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 13), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 14), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 15), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 16), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 17), x: Math.floor(Math.random() * 200 + 1000) }
+            ],
+            name: "Metric 1",
+            key: "series3",
+            // xAttribute: "y",
+            // yAttribute: "x",
+            xAxis: "x2"
+          },
+          {
+            data: [
+              { y: new Date(2018, 2, 10), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 11), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 12), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 13), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 14), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 15), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 16), x: Math.floor(Math.random() * 200 + 1000) },
+              { y: new Date(2018, 2, 17), x: Math.floor(Math.random() * 200 + 1000) }
+            ],
+            name: "Metric 2",
+            key: "series4",
+            // xAttribute: "y",
+            // yAttribute: "x",
+            xAxis: "x2"
+          }
+        ],
+        renderAs: [RangeRenderer]
+      },
+    ],
+    axes: {
+      y1: {
+        type: "time",
+        start: new Date(2018, 2, 10),
+        end: new Date(2018, 2, 17),
+        interval: "day",
+      },
+      x1: {
+        type: "quant"
+      },
+      x2: {
+        type: "quant"
+      }
     }
   }
 }
 
-const data1: any = {
-  series: [
-    {
-      data: [
-        { x: new Date(2018, 2, 9), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },        
-        { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-        { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
-      ],
-      name: "Pageviews 2018",
-      key: "series1",
-      renderAs: [LineRenderer, TextRenderer],
-    },
-  ],
-  axes: {
-    x1: {
-      type: "time",
-      start: new Date(2018, 2, 9),
-      end: new Date(2018, 2, 17),
-      interval: "day",
-    },
-    y1: {
-      type: "quant",
-      unit: "EUR",
-    }
-  }
-}
-
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data} config={{uid: "TEST"}}/></OperationalUI>
-const App2 = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data1}/></OperationalUI>
+let data = createData()
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST"}}/></OperationalUI>
 render(<App />, containerNode)
-render(<App2 />, containerNode2)
 
 setTimeout(() => {
-  data.series[2].data[0].y = 450
-  data.series[2].data[1].y = 120
+  data = createData()
   render(<App />, containerNode)
 }, 3000);

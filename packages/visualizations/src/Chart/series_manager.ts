@@ -25,6 +25,7 @@ import {
   DataForLegends,
   EventBus,
   Object,
+  RangeRendererOptions,
   RendererOptions,
   SeriesAccessor,
   SeriesData,
@@ -39,7 +40,7 @@ class ChartSeriesManager implements SeriesManager {
   events: EventBus
   key: SeriesAccessor<string>
   oldSeries: Series[] = []
-  renderAs: Accessor<Object<any> | RendererOptions<any>, RendererOptions<any>[]>
+  renderAs: Accessor<Object<any> | RendererOptions<any>, (RendererOptions<any> | RangeRendererOptions)[]>
   series: Series[] = []
   state: State
   stateWriter: StateWriter
@@ -63,9 +64,11 @@ class ChartSeriesManager implements SeriesManager {
 
   private prepareData(): void {
     const isHidden = this.state.current.get("accessors").series.hide
-    const data: SeriesData = flow(omitBy(isHidden), this.computeBarIndices.bind(this))(
-      this.state.current.get("accessors").data.series(this.state.current.get("data"))
-    )
+    const data: SeriesData = flow(
+      omitBy(isHidden),
+      this.computeBarIndices.bind(this),
+      this.handleGroupedSeries("range", this.computeRange.bind(this))
+    )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
 
     const currentKeys: string[] = map((datum: Object<any>): string => this.key(datum))(data)
     this.removeAllExcept(currentKeys)
@@ -111,6 +114,49 @@ class ChartSeriesManager implements SeriesManager {
 
     this.stateWriter("barIndices", barIndices)
     return data
+  }
+
+  private handleGroupedSeries(type: "stacked" | "range", compute: any) {
+    return (data: SeriesData): SeriesData => {
+      const groups: Object<any>[] = filter((options: Object<any>): boolean => {
+        const rendererTypes = map(get("type"))(this.renderAs(options))
+        const isGrouped: boolean = includes(type)(rendererTypes)
+        if (isGrouped && rendererTypes.length > 1) {
+          throw new Error(`Renderer of type ${type} cannot be combined with other renderers`)
+        }
+        return isGrouped
+      })(data)
+
+      if (groups.length === 0) {
+        return data
+      }
+
+      forEach.convert({ cap: false })(compute)(groups)
+
+      let ungroupedSeries: Object<any>[] = filter((options: Object<any>): boolean => {
+        const rendererTypes = map(get("type"))(this.renderAs(options))
+        return !includes(type)(rendererTypes)
+      })(data)
+
+      forEach((group: Object<any>): void => {
+        forEach((series: Object<any>): void => {
+          series.renderAs = this.renderAs(this.renderAs(group)[0])
+          ungroupedSeries = ungroupedSeries.concat(series)
+        })(group.series)
+      })(groups)
+
+      return ungroupedSeries
+    }
+  }
+
+  private computeRange(range: Object<any>, index: number): void {
+    if (range.series.length !== 2) {
+      throw new Error("Range renderer must have exactly 2 series.")
+    }
+
+    forEach.convert({ cap: false })((series: Object<any>, i: number) => {
+      series.clipData = range.series[1 - i].data
+    })(range.series)
   }
 
   private get(key: string): any {

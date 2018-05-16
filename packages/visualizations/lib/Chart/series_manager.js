@@ -23,7 +23,7 @@ var ChartSeriesManager = /** @class */ (function () {
     ChartSeriesManager.prototype.prepareData = function () {
         var _this = this;
         var isHidden = this.state.current.get("accessors").series.hide;
-        var data = fp_1.flow(fp_1.omitBy(isHidden), this.computeBarIndices.bind(this))(this.state.current.get("accessors").data.series(this.state.current.get("data")));
+        var data = fp_1.flow(fp_1.omitBy(isHidden), this.computeBarIndices.bind(this), this.handleGroupedSeries("range", this.computeRange.bind(this)))(this.state.current.get("accessors").data.series(this.state.current.get("data")));
         var currentKeys = fp_1.map(function (datum) { return _this.key(datum); })(data);
         this.removeAllExcept(currentKeys);
         fp_1.forEach(function (options) {
@@ -58,6 +58,42 @@ var ChartSeriesManager = /** @class */ (function () {
         })(data);
         this.stateWriter("barIndices", barIndices);
         return data;
+    };
+    ChartSeriesManager.prototype.handleGroupedSeries = function (type, compute) {
+        var _this = this;
+        return function (data) {
+            var groups = fp_1.filter(function (options) {
+                var rendererTypes = fp_1.map(fp_1.get("type"))(_this.renderAs(options));
+                var isGrouped = fp_1.includes(type)(rendererTypes);
+                if (isGrouped && rendererTypes.length > 1) {
+                    throw new Error("Renderer of type " + type + " cannot be combined with other renderers");
+                }
+                return isGrouped;
+            })(data);
+            if (groups.length === 0) {
+                return data;
+            }
+            fp_1.forEach.convert({ cap: false })(compute)(groups);
+            var ungroupedSeries = fp_1.filter(function (options) {
+                var rendererTypes = fp_1.map(fp_1.get("type"))(_this.renderAs(options));
+                return !fp_1.includes(type)(rendererTypes);
+            })(data);
+            fp_1.forEach(function (group) {
+                fp_1.forEach(function (series) {
+                    series.renderAs = _this.renderAs(_this.renderAs(group)[0]);
+                    ungroupedSeries = ungroupedSeries.concat(series);
+                })(group.series);
+            })(groups);
+            return ungroupedSeries;
+        };
+    };
+    ChartSeriesManager.prototype.computeRange = function (range, index) {
+        if (range.series.length !== 2) {
+            throw new Error("Range renderer must have exactly 2 series.");
+        }
+        fp_1.forEach.convert({ cap: false })(function (series, i) {
+            series.clipData = range.series[1 - i].data;
+        })(range.series);
     };
     ChartSeriesManager.prototype.get = function (key) {
         var _this = this;
