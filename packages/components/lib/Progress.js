@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var glamorous_1 = require("glamorous");
 var glamor_1 = require("glamor");
+var utils_1 = require("@operational/utils");
 var Icon_1 = require("./Icon");
 var width = 120;
 var height = 45;
@@ -40,27 +41,39 @@ var fillProgress = glamor_1.css.keyframes({
 });
 var Bar = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isError = _a.isError;
-    return (__assign({ width: "100%", height: 3, backgroundColor: theme.colors.info }, isError
+    return (__assign({ width: "100%", height: 3, backgroundColor: theme.colors.info }, (isError
         ? {
             backgroundColor: theme.colors.error,
         }
         : {
             animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 20s",
-        }));
+        })));
 });
 var ErrorMessage = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
-    return (__assign({}, theme.typography.body, { minWidth: 160, maxWidth: 480, padding: theme.spacing / 6 + "px " + theme.spacing / 2 + "px", borderBottomLeftRadius: 2, borderBottomRightRadius: 2, display: "inline-block", position: "relative", zIndex: theme.baseZIndex + 301, textAlign: "center", backgroundColor: theme.colors.error, color: theme.colors.white }));
+    return (__assign({}, theme.typography.body, { padding: theme.spacing / 2 + "px " + theme.spacing / 2 + "px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", zIndex: theme.baseZIndex + 301, textAlign: "center", backgroundColor: utils_1.lighten(theme.colors.error, 15), color: theme.colors.white }));
 });
-var RetryLink = glamorous_1.default.div(function (_a) {
+var Action = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
     return ({
         opacity: 0.7,
         display: "inline-block",
-        marginLeft: theme.spacing * 3 / 4,
+        marginLeft: theme.spacing,
         userSelect: "none",
+        "& > *": {
+            display: "inline-block",
+            verticalAlign: "middle"
+        },
         "& svg": {
-            marginRight: theme.spacing / 3,
+            width: theme.spacing,
+            height: theme.spacing,
+            marginRight: theme.spacing / 4,
+        },
+        // Temporary hack since feather icons for refresh and close
+        // have a mismatch in size.
+        ":first-of-type svg": {
+            width: theme.spacing * 3 / 4,
+            height: theme.spacing * 3 / 4,
         },
         ":hover": {
             opacity: 1,
@@ -71,8 +84,11 @@ var Progress = function (props) { return (React.createElement(Container, { id: p
     React.createElement(Bar, { isError: Boolean(props.error) }),
     props.error ? (React.createElement(ErrorMessage, null,
         props.error,
-        props.onRetry ? (React.createElement(RetryLink, { onClick: props.onRetry },
-            React.createElement(Icon_1.default, { name: "RefreshCw", size: 10 }),
-            "Retry")) : null)) : null)); };
+        props.onRetry && (React.createElement(Action, { onClick: props.onRetry },
+            React.createElement(Icon_1.default, { name: "RefreshCw" }),
+            React.createElement("span", null, "Retry"))),
+        props.onClose && (React.createElement(Action, null,
+            React.createElement(Icon_1.default, { name: "X" }),
+            React.createElement("span", null, "Dismiss"))))) : null)); };
 exports.default = Progress;
 //# sourceMappingURL=Progress.js.map
