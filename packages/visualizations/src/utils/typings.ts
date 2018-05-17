@@ -70,13 +70,13 @@ export interface Facade<Config, AccessorsObject, Computed, Components, Data> {
 
 export interface ComponentHoverPayload {
   component: D3Selection
-  options: Object<any>
+  options: ComponentConfigInfo
 }
 
-export interface ComponentConfigOptions {
-  options: Object<any>
+export interface ComponentConfigInfo {
+  key: string
   seriesType?: string
-  type: "series" | "config"
+  type: "series" | "axis"
 }
 
 export interface Point {

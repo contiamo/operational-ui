@@ -171,7 +171,7 @@ const createData: any = () => {
 }
 
 let data = createData()
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 1000}}/></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 1000, showComponentFocus: true}}/></OperationalUI>
 render(<App />, containerNode)
 
 setTimeout(() => {

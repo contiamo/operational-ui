@@ -7,7 +7,7 @@ export {
   Accessor,
   Accessors,
   Canvas,
-  ComponentConfigOptions,
+  ComponentConfigInfo,
   D3Selection,
   D3Transition,
   Dimensions,

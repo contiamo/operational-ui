@@ -1,5 +1,6 @@
 import ChartCanvas from "./canvas"
 import ChartSeriesManager from "./series_manager"
+import ChartFocus from "./focus"
 import LegendManager from "./legend_manager"
 import AxesManager from "./axes_manager"
 import Events from "../utils/event_catalog"
@@ -38,6 +39,7 @@ const defaultConfig: Partial<ChartConfig> = {
   numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   outerBarSpacing: 10,
   palette: theme.colors.visualizationPalette,
+  showComponentFocus: false,
   timeAxisPriority: ["x1", "x2", "y1", "y2"],
   visualizationName: "chart",
   width: 500,
@@ -110,6 +112,12 @@ class ChartFacade implements Facade {
 
   private insertComponents(): any {
     return {
+      axes: new AxesManager(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
+        xAxes: this.canvas.elementFor("xAxes"),
+        xRules: this.canvas.elementFor("xRules"),
+        yAxes: this.canvas.elementFor("yAxes"),
+        yRules: this.canvas.elementFor("yRules"),
+      }),
       legends: new LegendManager(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
         top: {
           left: this.canvas.elementFor("legend-top-left"),
@@ -119,11 +127,9 @@ class ChartFacade implements Facade {
           left: this.canvas.elementFor("legend-bottom-left"),
         },
       }),
-      axes: new AxesManager(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
-        xAxes: this.canvas.elementFor("xAxes"),
-        xRules: this.canvas.elementFor("xRules"),
-        yAxes: this.canvas.elementFor("yAxes"),
-        yRules: this.canvas.elementFor("yRules"),
+      focus: new ChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
+        main: this.canvas.elementFor("focus"),
+        component: this.canvas.elementFor("componentFocus"),
       }),
     }
   }

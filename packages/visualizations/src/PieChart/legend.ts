@@ -6,7 +6,7 @@ import * as globalStyles from "../utils/styles"
 import { withD3Element } from "../utils/d3_utils"
 import { roundedUpHeight, widthPadding, heightMargin, totalWidth } from "../utils/legend_utils"
 import {
-  ComponentConfigOptions,
+  ComponentConfigInfo,
   D3Selection,
   EventBus,
   Legend,
@@ -103,21 +103,16 @@ class PieChartLegend implements Legend {
     this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
   }
 
-  private currentOptions(datum: LegendDatum): ComponentConfigOptions {
+  private currentOptions(datum: LegendDatum): ComponentConfigInfo {
     return datum.comparison
       ? {
-          options: {
-            key: datum.label,
-          },
+          key: datum.label,
           seriesType: "comparison",
           type: "series",
         }
       : {
-          options: {
-            color: datum.color,
-            key: datum.label,
-          },
-          type: "config",
+          key: datum.label,
+          type: "series",
         }
   }
 

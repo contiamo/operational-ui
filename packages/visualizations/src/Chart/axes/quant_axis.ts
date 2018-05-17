@@ -25,6 +25,7 @@ import {
   QuantAxisOptions,
   AxisPosition,
   ChartConfig,
+  ComponentConfigInfo,
   Computed,
   D3Selection,
   EventBus,
@@ -71,6 +72,7 @@ class QuantAxis implements AxisClass<number> {
     this.position = position
     this.isXAxis = position[0] === "x"
     this.el = insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims)
+    this.el.on("mouseenter", this.onComponentHover.bind(this))
   }
 
   // Quant axis only supports finite numbers
@@ -256,6 +258,17 @@ class QuantAxis implements AxisClass<number> {
       y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
+  }
+
+  private onComponentHover(): void {
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: this.el, options: this.hoverInfo() })
+  }
+
+  private hoverInfo(): ComponentConfigInfo {
+    return {
+      key: this.position,
+      type: "axis",
+    }
   }
 
   close(): void {

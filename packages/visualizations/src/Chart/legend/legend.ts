@@ -3,7 +3,7 @@ import * as d3 from "d3-selection"
 import { get } from "lodash/fp"
 import * as styles from "../../utils/styles"
 import { withD3Element } from "../../utils/d3_utils"
-import { ComponentConfigOptions, D3Selection, EventBus, Legend, LegendDatum, State, StateWriter } from "../typings"
+import { ComponentConfigInfo, D3Selection, EventBus, Legend, LegendDatum, State, StateWriter } from "../typings"
 
 class ChartLegend implements Legend {
   private data: LegendDatum[]
@@ -41,6 +41,7 @@ class ChartLegend implements Legend {
       .append("div")
       .attr("class", styles.seriesLegend)
       .style("float", "left")
+      .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
         withD3Element((d: LegendDatum, el: HTMLElement): void => {
           const element: D3Selection = d3.select(el)
@@ -65,6 +66,17 @@ class ChartLegend implements Legend {
   remove(): void {
     this.el.node().innerHTML = ""
     this.el.attr("visibility", "hidden")
+  }
+
+  private onComponentHover(d: LegendDatum, el: HTMLElement): void {
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
+  }
+
+  private currentOptions(datum: LegendDatum): ComponentConfigInfo {
+    return {
+      key: datum.key,
+      type: "series",
+    }
   }
 }
 

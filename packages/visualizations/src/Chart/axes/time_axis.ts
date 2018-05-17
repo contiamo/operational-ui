@@ -25,6 +25,7 @@ import {
 } from "lodash/fp"
 import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
+import Events from "../../utils/event_catalog"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
 const moment: any = extendMoment(Moment as any)
@@ -40,6 +41,7 @@ import {
   TimeAxisOptions,
   AxisPosition,
   ChartConfig,
+  ComponentConfigInfo,
   Computed,
   D3Selection,
   EventBus,
@@ -103,6 +105,7 @@ class TimeAxis implements AxisClass<Date> {
     this.position = position
     this.isXAxis = position[0] === "x"
     this.el = insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims)
+    this.el.on("mouseenter", this.onComponentHover.bind(this))
   }
 
   validate(value: any): boolean {
@@ -342,6 +345,17 @@ class TimeAxis implements AxisClass<Date> {
       y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
+  }
+
+  private onComponentHover(): void {
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: this.el, options: this.hoverInfo() })
+  }
+
+  private hoverInfo(): ComponentConfigInfo {
+    return {
+      key: this.position,
+      type: "axis",
+    }
   }
 
   close(): void {

@@ -96,6 +96,7 @@ class ChartSeries {
     return {
       color: this.legendColor(),
       label: this.legendName(),
+      key: this.key(),
     }
   }
 

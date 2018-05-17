@@ -4,13 +4,16 @@ import { DateRange } from "moment-range"
 export {
   Accessor,
   Accessors,
-  ComponentConfigOptions,
+  ComponentConfigInfo,
   ComponentHoverPayload,
+  Dimensions,
   EventBus,
   Legend,
   Object,
   State,
   Partial,
+  Point,
+  Position,
   D3Selection,
   SeriesEl,
   SeriesManager,
@@ -45,6 +48,7 @@ export interface ChartConfig extends Config {
   minBarWidth: number
   numberFormatter: (x: number) => string
   outerBarSpacing: number
+  showComponentFocus: boolean
   timeAxisPriority: string[]
 }
 
@@ -263,6 +267,7 @@ export interface Computed {
 export interface LegendDatum {
   label: string
   color: string
+  key: string
 }
 
 export interface DataForLegends {
