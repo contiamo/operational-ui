@@ -271,7 +271,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         const y0: number = attributes.y2
         const y1: number = y0 + sign * this.flagHeight / 2
         const y2: number = y0 + sign * this.flagHeight
-        return (d: Datum): string => "M" + line(d) + "," + y0 + "L" + tip(d) + "," + y1 + "L" + line(d) + "," + y2
+        return (d: Datum): string => `M${line(d)}, ${y0} L${tip(d)}, ${y1} L${line(d)}, ${y2}`
       case "y":
         line = (d: Datum) => attributes.y(d)
         sign = attributes.x2 < attributes.x1 ? 1 : -1
@@ -281,7 +281,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         const x0: number = attributes.x2
         const x1: number = x0 + sign * this.flagHeight / 2
         const x2: number = x0 + sign * this.flagHeight
-        return (d: Datum): string => "M" + x0 + "," + line(d) + "L" + x1 + "," + tip(d) + "L" + x2 + "," + line(d) + "Z"
+        return (d: Datum): string => `M${x0}, ${line(d)} L${x1}, ${tip(d)} L${x2}, ${line(d)} Z`
       default:
         throw new Error("Invalid axis name '" + this.axis + "'.")
     }
@@ -316,10 +316,10 @@ class Flag implements RendererClass<FlagRendererAccessors> {
           left = line - width / 2
       }
 
-      const top: number = bottom - height
-      const middle: number = (top + bottom) / 2
-      const right: number = left + width
-      return `M${left},${bottom}L${left},${top}L${right},${top}L${right},${middle}L${left},${middle}`
+      const top = bottom - height
+      const middle = (top + bottom) / 2
+      const right = left + width
+      return `M${left},${bottom} L${left},${top} L${right},${top} L${right},${middle} L${left},${middle}`
     }
   }
 

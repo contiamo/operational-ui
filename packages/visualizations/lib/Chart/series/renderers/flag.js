@@ -213,7 +213,7 @@ var Flag = /** @class */ (function () {
                 var y0_1 = attributes.y2;
                 var y1_1 = y0_1 + sign * this.flagHeight / 2;
                 var y2_1 = y0_1 + sign * this.flagHeight;
-                return function (d) { return "M" + line(d) + "," + y0_1 + "L" + tip(d) + "," + y1_1 + "L" + line(d) + "," + y2_1; };
+                return function (d) { return "M" + line(d) + ", " + y0_1 + " L" + tip(d) + ", " + y1_1 + " L" + line(d) + ", " + y2_1; };
             case "y":
                 line = function (d) { return attributes.y(d); };
                 sign = attributes.x2 < attributes.x1 ? 1 : -1;
@@ -224,7 +224,7 @@ var Flag = /** @class */ (function () {
                 var x0_1 = attributes.x2;
                 var x1_1 = x0_1 + sign * this.flagHeight / 2;
                 var x2_1 = x0_1 + sign * this.flagHeight;
-                return function (d) { return "M" + x0_1 + "," + line(d) + "L" + x1_1 + "," + tip(d) + "L" + x2_1 + "," + line(d) + "Z"; };
+                return function (d) { return "M" + x0_1 + ", " + line(d) + " L" + x1_1 + ", " + tip(d) + " L" + x2_1 + ", " + line(d) + " Z"; };
             default:
                 throw new Error("Invalid axis name '" + this.axis + "'.");
         }
@@ -258,7 +258,7 @@ var Flag = /** @class */ (function () {
             var top = bottom - height;
             var middle = (top + bottom) / 2;
             var right = left + width;
-            return "M" + left + "," + bottom + "L" + left + "," + top + "L" + right + "," + top + "L" + right + "," + middle + "L" + left + "," + middle;
+            return "M" + left + "," + bottom + " L" + left + "," + top + " L" + right + "," + top + " L" + right + "," + middle + " L" + left + "," + middle;
         };
     };
     Flag.prototype.onFlagHover = function (attributes) {
