@@ -58,10 +58,10 @@ exports.setTextAttributes = function (selection, attributes, duration, onEnd) {
 exports.setLineAttributes = function (selection, attributes, duration) {
     transitionOrSelection(selection, duration)
         .style("stroke", attributes.color)
-        .attr("x1", attributes.x1)
-        .attr("x2", attributes.x2)
-        .attr("y1", attributes.y1)
-        .attr("y2", attributes.y2);
+        .attr("x1", attributes.x || attributes.x1)
+        .attr("x2", attributes.x || attributes.x2)
+        .attr("y1", attributes.y || attributes.y1)
+        .attr("y2", attributes.y || attributes.y2);
 };
 exports.setRectAttributes = function (selection, attributes, duration) {
     transitionOrSelection(selection, duration)

@@ -59,8 +59,22 @@ const StackedRenderer = {
   renderAs: [BarsRenderer, TextRenderer]
 }
 
-const FlagRenderer = {
-  type: "flag"
+const XFlagRenderer = {
+  type: "flag",
+  config: {
+    axis: "x1",
+    axisPadding: 30
+  }
+}
+
+const YFlagRenderer = {
+  type: "flag",
+  accessors: {
+    color: (series, d) => d.y > 250 ? "red" : "purple"
+  },
+  config: {
+    axis: "y1"
+  }
 }
 
 const RangeRenderer = {
@@ -83,6 +97,24 @@ const data: any = {
       key: "series1",
       renderAs: [LineRenderer, TextRenderer],
     },
+    {
+      data: [
+        { x: new Date(2018, 2, 12), description: "Event flag 1", direction: "up", label: "Flag 1" },
+        { x: new Date(2018, 2, 14), description: "Event flag 2", direction: "down", label: "Flag 2" }
+      ],
+      hideInLegend: true,
+      key: "series_flags_x"
+      renderAs: [XFlagRenderer]
+    },
+    {
+      data: [
+        { y: 300, description: "Event flag 4", direction: "up", label: "Flag 4" },
+        { y: 200, description: "Event flag 3", direction: "down", label: "Flag 3" },
+      ],
+      hideInLegend: true,
+      key: "series_flags_y"
+      renderAs: [YFlagRenderer]
+    },
   ],
   axes: {
     x1: {
@@ -90,13 +122,11 @@ const data: any = {
       start: new Date(2018, 2, 11),
       end: new Date(2018, 2, 15),
       interval: "day",
-      margin: 30
     },
     y1: {
       type: "quant",
       unit: "EUR",
-      margin: 50,
-      // showRules: false
+      showRules: false
     }
   }
 }
@@ -126,13 +156,10 @@ const data1: any = {
       start: new Date(2018, 2, 9),
       end: new Date(2018, 2, 17),
       interval: "day",
-      margin: 30
     },
     y1: {
       type: "quant",
       unit: "EUR",
-      margin: 50,
-      // showRules: false
     }
   }
 }
@@ -141,3 +168,9 @@ const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data
 const App2 = () => <OperationalUI><VisualizationWrapper facade={Chart} data={data1}/></OperationalUI>
 render(<App />, containerNode)
 render(<App2 />, containerNode2)
+
+setTimeout(() => {
+  data.series[2].data[0].y = 450
+  data.series[2].data[1].y = 120
+  render(<App />, containerNode)
+}, 3000);

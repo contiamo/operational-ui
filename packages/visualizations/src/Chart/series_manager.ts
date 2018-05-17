@@ -1,4 +1,5 @@
 import {
+  compact,
   filter,
   find,
   flow,
@@ -57,6 +58,7 @@ class ChartSeriesManager implements SeriesManager {
     this.stateWriter("dataForLegends", this.dataForLegends())
     this.stateWriter("dataForAxes", this.dataForAxes())
     this.stateWriter("barSeries", this.barSeries())
+    this.stateWriter("axesWithFlags", this.axesWithFlags())
   }
 
   private prepareData(): void {
@@ -173,6 +175,17 @@ class ChartSeriesManager implements SeriesManager {
       }
       memo[series.key()] = barsInfo
       return memo
+    }, {})(this.series)
+  }
+
+  private axesWithFlags(): Object<any> {
+    return reduce((axes: Object<any>, series: Series): Object<any> => {
+      if (series.hasFlags()) {
+        const flag: any = series.get("flag")
+        axes[flag.axis] = axes[flag.axis] || { axisPadding: 0 }
+        axes[flag.axis].axisPadding = Math.max(axes[flag.axis].axisPadding, flag.axisPadding)
+      }
+      return axes
     }, {})(this.series)
   }
 

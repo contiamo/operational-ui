@@ -82,6 +82,14 @@ export interface FlagRendererAccessors {
   label: RendererAccessor<string>
 }
 
+export interface FlagRendererConfig {
+  axis: AxisPosition
+  axisOffset: number
+  axisPadding: number
+  flagHeight: number
+  flagWidth: number
+}
+
 export interface LineRendererAccessors extends LinearRendererAccessors {
   dashed: RendererAccessor<boolean>
 }

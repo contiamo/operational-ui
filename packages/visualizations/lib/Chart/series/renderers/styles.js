@@ -19,6 +19,22 @@ var barStyle = {
         opacity: 1,
     },
 };
+var flagStyle = {
+    "& line": {
+        strokeDasharray: "5px 2px",
+    },
+    "& .hover": {
+        strokeWidth: "2px",
+    },
+    "& text": {
+        fontSize: "11px",
+        dominantBaseline: "central",
+    },
+    "& path.hover-flag": {
+        cursor: "pointer",
+        shapeRendering: "crispedges",
+    },
+};
 var lineStyle = {
     "& path": {
         strokeWidth: 2,
@@ -47,6 +63,7 @@ var textStyle = {
 };
 exports.area = glamor_1.css(areaStyle).toString();
 exports.bar = glamor_1.css(barStyle).toString();
+exports.flag = glamor_1.css(flagStyle).toString();
 exports.line = glamor_1.css(lineStyle).toString();
 exports.symbol = glamor_1.css(symbolStyle).toString();
 exports.text = glamor_1.css(textStyle).toString();

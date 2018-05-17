@@ -203,9 +203,9 @@ var TimeAxis = /** @class */ (function () {
     TimeAxis.prototype.adjustMargins = function () {
         var computedMargins = this.state.current.get("computed").axes.margins || {};
         var requiredMargin = axis_utils_1.computeRequiredMargin(this.el, computedMargins, this.margin, this.outerPadding, this.position);
-        // // Add space for flags
-        // const hasFlags: boolean = includes(this.position)(this.state.current.get("computed").series.axesWithFlags)
-        // requiredMargin = requiredMargin + (hasFlags ? this.state.current.get("config").axisPaddingForFlags : 0)
+        // Add space for flags
+        var flagAxis = this.state.current.get("computed").series.axesWithFlags[this.position];
+        requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0);
         if (computedMargins[this.position] === requiredMargin) {
             return;
         }

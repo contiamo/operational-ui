@@ -2,6 +2,7 @@ import { D3Selection, Datum, EventBus, RendererOptions, State } from "../typings
 import * as d3 from "d3-selection"
 import Area from "./renderers/area"
 import Bars from "./renderers/bars"
+import Flag from "./renderers/flag"
 import Line from "./renderers/line"
 import Symbol from "./renderers/symbol"
 import Text from "./renderers/text"
@@ -20,6 +21,8 @@ class Renderer {
         return new Area(state, events, el.select("g.series-area"), data, options, series)
       case "bars":
         return new Bars(state, events, el.select("g.series-bars"), data, options, series)
+      case "flag":
+        return new Flag(state, events, el.select("g.series-flag"), data, options, series)
       case "line":
         return new Line(state, events, el.select("g.series-line"), data, options, series)
       case "symbol":

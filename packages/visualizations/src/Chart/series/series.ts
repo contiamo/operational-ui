@@ -78,7 +78,7 @@ class ChartSeries {
     )(this.renderers)
   }
 
-  private get(type: string): RendererClass<any> {
+  get(type: string): RendererClass<any> {
     return find((renderer: RendererClass<any>): boolean => renderer.type === type)(this.renderers)
   }
 
@@ -124,6 +124,10 @@ class ChartSeries {
       barWidth: (barRenderer as any).barWidth(),
       stackIndex: this.options.stackIndex,
     }
+  }
+
+  hasFlags(): boolean {
+    return !!this.get("flag")
   }
 
   hasData(): boolean {

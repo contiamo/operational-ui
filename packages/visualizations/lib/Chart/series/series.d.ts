@@ -1,5 +1,5 @@
 import Renderer from "./renderer";
-import { D3Selection, Datum, EventBus, LegendDatum, Object, RendererOptions, State } from "../typings";
+import { D3Selection, Datum, EventBus, LegendDatum, Object, RendererClass, RendererOptions, State } from "../typings";
 declare class ChartSeries {
     el: D3Selection;
     events: EventBus;
@@ -26,7 +26,7 @@ declare class ChartSeries {
     assignAccessors(): void;
     private updateRenderers();
     private removeAllExcept(types);
-    private get(type);
+    get(type: string): RendererClass<any>;
     private addRenderer(options);
     private remove(renderer);
     dataForLegend(): LegendDatum;
@@ -34,6 +34,7 @@ declare class ChartSeries {
     legendPosition(): "top" | "bottom";
     legendFloat(): "left" | "right";
     getBarsInfo(): Object<any>;
+    hasFlags(): boolean;
     hasData(): boolean;
     draw(): void;
     private close();
