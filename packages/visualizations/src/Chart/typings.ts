@@ -112,19 +112,25 @@ export interface TextRendererConfig {
   tilt: boolean
 }
 
-export interface RendererOptions<RendererAccessors> {
-  type: RendererType | "stacked"
+export interface SingleRendererOptions<RendererAccessors> {
+  type: RendererType
   accessors?: Partial<RendererAccessors>
   config?: Object<any>
-  renderAs?: RendererOptions<any>[] // Used only in case of type: "stacked"
-  stackAxis?: "x" | "y"
 }
+
+export interface GroupedRendererOptions {
+  type: "range" | "stacked"
+  stackAxis?: "x" | "y"
+  renderAs: SingleRendererOptions<any>[]
+}
+
+export type RendererOptions = SingleRendererOptions<any> | GroupedRendererOptions
 
 export interface RendererClass<RendererAccessors> {
   dataForAxis: (axis: "x" | "y") => any[]
   draw: () => void
   type: RendererType
-  update: (data: Datum[], options: RendererOptions<RendererAccessors>) => void
+  update: (data: Datum[], options: SingleRendererOptions<RendererAccessors>) => void
   close: () => void
 }
 
@@ -152,7 +158,7 @@ export interface SeriesAccessors {
   key: SeriesAccessor<string>
   legendColor: SeriesAccessor<string>
   legendName: SeriesAccessor<string>
-  renderAs: SeriesAccessor<RendererOptions<any>[]>
+  renderAs: SeriesAccessor<RendererOptions[]>
   axis: SeriesAccessor<AxisPosition>
   xAttribute: SeriesAccessor<string>
   yAttribute: SeriesAccessor<string>

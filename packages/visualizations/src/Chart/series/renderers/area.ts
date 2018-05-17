@@ -23,12 +23,12 @@ import {
   Partial,
   RendererAccessor,
   RendererClass,
-  RendererOptions,
   RendererType,
+  SingleRendererOptions,
   State,
 } from "../../typings"
 
-export type Options = RendererOptions<AreaRendererAccessors>
+export type Options = SingleRendererOptions<AreaRendererAccessors>
 
 const interpolator = {
   cardinal: curveCardinal,
@@ -93,6 +93,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   draw(): void {
     this.setAxisScales()
     this.addMissingData()
+    this.updateClipPath()
 
     const duration: number = this.state.current.get("config").duration
     const data: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
@@ -108,6 +109,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))
+      .attr("clip-path", `url(#area-clip-${this.series.key()}`)
 
     area
       .exit()
@@ -166,26 +168,69 @@ class Area implements RendererClass<AreaRendererAccessors> {
     }
   }
 
+  private updateClipPath(): void {
+    const duration: number = this.state.current.get("config").duration
+    const data: Datum[] = this.series.options.clipData ? [this.series.options.clipData] : []
+
+    const clip = this.el.selectAll("clipPath path").data(data)
+
+    clip
+      .enter()
+      .append("svg:clipPath")
+      .attr("id", `area-clip-${this.series.key()}`)
+      .append("svg:path")
+      .attr("d", this.startClipPath.bind(this))
+      .merge(clip)
+      .transition()
+      .duration(duration)
+      .attr("d", this.clipPath.bind(this))
+
+    clip
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("d", this.startClipPath.bind(this))
+      .remove()
+  }
+
   private isDefined(d: Datum): boolean {
     return this.series.options.stacked && this.closeGaps() ? true : hasValue(this.x(d)) && hasValue(this.y(d))
   }
 
-  private startPath(data: Datum[]): string {
-    return (d3Area() as any)
-      .x(this.x0)
-      .y(this.y0)
+  private createAreaPath(attributes: any): any {
+    return d3Area()
+      .x0(attributes.x0 || attributes.x)
+      .x1(attributes.x1 || attributes.x)
+      .y0(attributes.y0 || attributes.y)
+      .y1(attributes.y1 || attributes.y)
       .curve(this.interpolate())
-      .defined(this.isDefined.bind(this))(data)
+      .defined(this.isDefined.bind(this))
+  }
+
+  private startPath(data: Datum[]): string {
+    return this.createAreaPath({ x: this.x0, y: this.y0 })(data)
   }
 
   private path(data: Datum[]): string {
-    return (d3Area() as any)
-      .x0(this.x0)
-      .x1(this.x1)
-      .y0(this.y0)
-      .y1(this.y1)
-      .curve(this.interpolate())
-      .defined(this.isDefined.bind(this))(data)
+    return this.createAreaPath(this)(data)
+  }
+
+  private startClipPath(data: Datum[]): string {
+    const attributes: Object<any> = {
+      x: (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : 0),
+      y: (d: Datum): any => this.yScale(this.xIsBaseline ? 0 : this.y(d)),
+    }
+    return this.createAreaPath(attributes)(data)
+  }
+
+  private clipPath(data: Datum[]): string {
+    const attributes: Object<any> = {
+      x0: this.xIsBaseline ? this.x0 : this.xScale.range()[1],
+      x1: this.x1,
+      y0: (d: Datum) => (this.xIsBaseline ? 0 : this.y0(d)),
+      y1: this.y1,
+    }
+    return this.createAreaPath(attributes)(data)
   }
 }
 

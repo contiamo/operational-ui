@@ -1,5 +1,5 @@
 import Renderer from "./renderer";
-import { D3Selection, Datum, EventBus, LegendDatum, Object, RendererClass, RendererOptions, State } from "../typings";
+import { D3Selection, Datum, EventBus, LegendDatum, Object, RendererClass, SingleRendererOptions, State } from "../typings";
 declare class ChartSeries {
     el: D3Selection;
     events: EventBus;
@@ -13,7 +13,7 @@ declare class ChartSeries {
     key: () => string;
     legendColor: () => string;
     legendName: () => string;
-    renderAs: () => RendererOptions<any>[];
+    renderAs: () => SingleRendererOptions<any>[];
     symbolOffset: (d: Datum) => number;
     xAxis: () => "x1" | "x2";
     yAxis: () => "y1" | "y2";

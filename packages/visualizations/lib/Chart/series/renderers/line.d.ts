@@ -1,6 +1,6 @@
 import Series from "../series";
-import { LineRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererOptions, RendererType, State } from "../../typings";
-export declare type Options = RendererOptions<LineRendererAccessors>;
+import { LineRendererAccessors, D3Selection, Datum, EventBus, RendererAccessor, RendererClass, RendererType, SingleRendererOptions, State } from "../../typings";
+export declare type Options = SingleRendererOptions<LineRendererAccessors>;
 declare class Line implements RendererClass<LineRendererAccessors> {
     closeGaps: RendererAccessor<boolean>;
     color: RendererAccessor<string>;

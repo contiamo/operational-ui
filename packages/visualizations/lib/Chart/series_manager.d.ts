@@ -5,7 +5,7 @@ declare class ChartSeriesManager implements SeriesManager {
     events: EventBus;
     key: SeriesAccessor<string>;
     oldSeries: Series[];
-    renderAs: Accessor<Object<any> | RendererOptions<any>, RendererOptions<any>[]>;
+    renderAs: Accessor<Object<any> | RendererOptions, RendererOptions[]>;
     series: Series[];
     state: State;
     stateWriter: StateWriter;
@@ -13,6 +13,9 @@ declare class ChartSeriesManager implements SeriesManager {
     assignData(): void;
     private prepareData();
     private computeBarIndices(data);
+    private handleGroupedSeries(type, compute);
+    private computeRange(range, index);
+    private computeStack(stack, index);
     private get(key);
     private remove(key);
     private removeAllExcept(keys);

@@ -1,4 +1,4 @@
-import { D3Selection, Datum, EventBus, RendererOptions, State } from "../typings"
+import { D3Selection, Datum, EventBus, SingleRendererOptions, State } from "../typings"
 import * as d3 from "d3-selection"
 import Area from "./renderers/area"
 import Bars from "./renderers/bars"
@@ -13,7 +13,7 @@ class Renderer {
     events: EventBus,
     el: D3Selection,
     data: Datum[],
-    options: RendererOptions<any>,
+    options: SingleRendererOptions<any>,
     series: any
   ) {
     switch (options.type) {

@@ -11,12 +11,12 @@ import {
   Object,
   RendererAccessor,
   RendererClass,
-  RendererOptions,
   RendererType,
+  SingleRendererOptions,
   State,
 } from "../../typings"
 
-export type Options = RendererOptions<TextRendererAccessors>
+export type Options = SingleRendererOptions<TextRendererAccessors>
 
 const defaultAccessors: Partial<TextRendererAccessors> = {
   size: (series: Series, d: Datum) => 10,
