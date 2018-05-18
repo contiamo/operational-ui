@@ -42,7 +42,6 @@ const breadcrumbStyle = {
 
 const breadcrumbItemStyle = {
   float: "left",
-  width: "80px",
   height: "18px",
   position: "relative",
   paddingLeft: "14px",

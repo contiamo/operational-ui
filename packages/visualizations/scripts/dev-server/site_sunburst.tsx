@@ -9,7 +9,12 @@ const containerNode = document.getElementById("app")
 import Sunburst from "../../src/Sunburst/facade"
 import { VisualizationWrapper } from "../../src/index"
 
-const config: any = { maxRings: 4, propagateColors: true }
+const config: any = {
+  maxRings: 4,
+  propagateColors: true,
+  width: 400,
+  breadcrumbItemWidth: 98
+}
 
 import { RawData } from "../../src/Sunburst/typings"
 

@@ -321,35 +321,37 @@ Accessors can take 2 forms: a function with single parameter 'd', or a constant 
 
 Data accessors are required if the data can not be accessed from the input data via a property called 'data'.
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| data | Provides the attribute name for accessing data array from the input data | any | `d => d.data` | Yes |
+| Name | Description | Type | Default | 
+| :--- | :--- | :--- | :---| 
+| data | Provides the attribute name for accessing data array from the input data | any | `d => d.data` |
 
 ## Series Accessors
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| color | Node color | string | `d => d.color` | Yes |
-| name | Node name | string | `d => d.name || ""` | Yes |
-| value | Node value | number | `d => d.value` | Yes |
+| Name | Description | Type | Default | 
+| :--- | :--- | :--- | :---| 
+| color | Node color | string | `d => d.color` | 
+| name | Node name | string | `d => d.name || ""` | 
+| value | Node value | number | `d => d.value` | 
 
 ## Config
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| arrowOffset | Offset of truncation arrows from edge of visualization | number | 10 | Yes |
-| centerCircleRadius | Percentage of inner circle filled in white / controls width of inner ring | number | 0.9 | Yes |
-| duration | Speed at which transitions are animated | number | 1e3 | Yes |
-| height | Visualization height | number | 500 | Yes |
-| hidden | Hide/show the visualization div | boolean | false | Yes |
-| maxRings | Maximum number of rings to display | number | 10 | Yes |
-| numberFormatter | Number formatter | function | `(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, ",")` | Yes |
-| outerBorderMargin | Margin between edge of chart and drawing area | number | 1 | Yes |
-| palette | Color palette for visualization | number | [#bbb] || theme visualization palette | Yes |
-| propagateColors | If true, child nodes take same color as their parent unless color is already defined | boolean | true | Yes |
-| disableAnimations | If true, animations when 'draw' is called are disabled. Improves speed for large datasets. | boolean | false | Yes |
-| sort | Whether to sort nodes by size | boolean | true | Yes |
-| uid | Unique identifier for the visualization, normally generated automatically from the visualization name | string |  | Yes |
-| visualizationName | Name of visualization | string | piechart | Yes |
-| width | Visualization width | number | 500 | Yes |
-| zoomNode | Key/value pairs to identify node to zoom | object | undefined | Yes |
+| Name | Description | Type | Default | 
+| :--- | :--- | :--- | :---| 
+| arrowOffset | Offset of truncation arrows from edge of visualization | number | 10 | 
+| breadcrumbItemWidth | Width of each breadcrumb item (excluding arrow) | number | 80 | 
+| centerCircleRadius | Percentage of inner circle filled in white / controls width of inner ring | number | 0.9 | 
+| duration | Speed at which transitions are animated | number | 1e3 | 
+| height | Visualization height | number | 500 | 
+| hidden | Hide/show the visualization div | boolean | false | 
+| maxBreadcrumbLength | Max number of breadcrumb items to display before truncation | number | 4 |
+| maxRings | Maximum number of rings to display | number | 10 | 
+| numberFormatter | Number formatter | function | `(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, ",")` | 
+| outerBorderMargin | Margin between edge of chart and drawing area | number | 1 | 
+| palette | Color palette for visualization | number | [#bbb] || theme visualization palette | 
+| propagateColors | If true, child nodes take same color as their parent unless color is already defined | boolean | true | 
+| disableAnimations | If true, animations when 'draw' is called are disabled. Improves speed for large datasets. | boolean | false | 
+| sort | Whether to sort nodes by size | boolean | true | 
+| uid | Unique identifier for the visualization, normally generated automatically from the visualization name | string |  | 
+| visualizationName | Name of visualization | string | piechart | 
+| width | Visualization width | number | 500 | 
+| zoomNode | Key/value pairs to identify node to zoom | object | undefined | 

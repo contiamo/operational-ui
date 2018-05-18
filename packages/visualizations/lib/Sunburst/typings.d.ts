@@ -6,9 +6,11 @@ import { Accessor, Config, Object, Focus, Facade } from "../utils/typings";
 export { Accessor, Accessors, Dimensions, EventBus, Object, State, Partial, Point, Position, D3Selection, SeriesEl, StateWriter, Canvas } from "../utils/typings";
 export interface SunburstConfig extends Config {
     arrowOffset: number;
+    breadcrumbItemWidth: number;
     centerCircleRadius: number;
     disableAnimations: boolean;
     focusOffset: number;
+    maxBreadcrumbLength: number;
     maxRings: number;
     maxTotalFontSize: number;
     minTotalFontSize: number;

@@ -1,16 +1,22 @@
 import * as d3 from "d3-selection"
-import { ClickPayload, D3Selection, Datum, EventBus, HoverPayload, Object, State, StateWriter } from "./typings"
+import {
+  ClickPayload,
+  D3Selection,
+  Datum,
+  EventBus,
+  HoverPayload,
+  Object,
+  State,
+  StateWriter,
+  SunburstConfig,
+} from "./typings"
 import Events from "../utils/event_catalog"
 import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
 import { readableTextColor } from "@operational/utils"
 
-const dims: Object<number> = {
-  width: 70,
-  height: 20,
-  space: 3,
-  tip: 7,
-}
+const ARROW_WIDTH: number = 7
+const HOPS_WIDTH: number = 40
 
 class Breadcrumb {
   private el: D3Selection
@@ -30,7 +36,9 @@ class Breadcrumb {
 
   private updateHoverPath(payload: HoverPayload | ClickPayload): void {
     // Only display breadcrumb if drawing area is wide enough.
-    if (this.state.current.get("config").width < 330) {
+    const config: SunburstConfig = this.state.current.get("config")
+    const maxBreadcrumbWidth: number = config.breadcrumbItemWidth * config.maxBreadcrumbLength + ARROW_WIDTH
+    if (this.state.current.get("config").width < maxBreadcrumbWidth) {
       return
     }
 
@@ -48,11 +56,12 @@ class Breadcrumb {
   }
 
   private truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
-    if (nodeArray.length <= 4) {
+    const maxLength: number = this.state.current.get("config").maxBreadcrumbLength
+    if (nodeArray.length <= maxLength) {
       return nodeArray
     }
     const firstNodes: (Datum | string)[] = nodeArray.slice(0, 1)
-    const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - 2)
+    const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - (maxLength - 2))
     return firstNodes.concat(["hops"]).concat(lastNodes)
   }
 
@@ -76,11 +85,14 @@ class Breadcrumb {
     trail.exit().remove()
 
     // Add breadcrumb and label for entering nodes.
+    const itemWidth = (d: any): number =>
+      d === "hops" ? HOPS_WIDTH : this.state.current.get("config").breadcrumbItemWidth
     const entering: D3Selection = trail
       .enter()
       .append("div")
       .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
       .style("background-color", this.backgroundColor)
+      .style("width", (d: any) => `${itemWidth(d)}px`)
       .attr("title", this.label)
 
     entering

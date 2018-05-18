@@ -41,13 +41,13 @@ var fillProgress = glamor_1.css.keyframes({
 });
 var Bar = glamorous_1.default.div(function (_a) {
     var theme = _a.theme, isError = _a.isError;
-    return (__assign({ width: "100%", height: 3, backgroundColor: theme.colors.info }, (isError
+    return (__assign({ width: "100%", height: 3, backgroundColor: theme.colors.info }, isError
         ? {
             backgroundColor: theme.colors.error,
         }
         : {
             animation: fillProgress + " cubic-bezier(0, 0.9, 0.26, 1) forwards 20s",
-        })));
+        }));
 });
 var ErrorMessage = glamorous_1.default.div(function (_a) {
     var theme = _a.theme;
@@ -62,7 +62,7 @@ var Action = glamorous_1.default.div(function (_a) {
         userSelect: "none",
         "& > *": {
             display: "inline-block",
-            verticalAlign: "middle"
+            verticalAlign: "middle",
         },
         "& svg": {
             width: theme.spacing,
