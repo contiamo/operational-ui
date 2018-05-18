@@ -3,7 +3,7 @@ import { Transition } from "d3-transition"
 import { D3Selection, D3Transition, Object } from "./typings"
 import { isFunction } from "lodash/fp"
 
-//#Michael: Would be nice to have a comment here - why do we need this?
+// #Michael: Would be nice to have a comment here - why do we need this?
 export const withD3Element = (func: (datum: any, ...args: any[]) => any) => {
   // This may NOT be an arrow function as we need to capture 'this'
   return function(datum: any, ...args: any[]): any {
@@ -31,7 +31,7 @@ export const transitionIfVisible = (selection: D3Selection, duration: number) =>
 }
 
 // Helper function to trigger a callback function when all elements of a selection have finished transitioning
-//#Michael: Would be nice to have a simple unit test for this to avoid off-by-one errors
+// #Michael: Would be nice to have a simple unit test for this to avoid off-by-one errors
 const onTransitionEnd = (selection: D3Transition, func?: () => void): any => {
   if (!func) {
     return
@@ -40,11 +40,14 @@ const onTransitionEnd = (selection: D3Transition, func?: () => void): any => {
     func()
     return
   }
-  // This immediately invoked function expression nicely hides the counting code and avoids `n + 1` stuff
-  const counter = ((count: number = 0) => ({
-    incr: () => ++count,
-    decr: () => --count
-  }))()
+  // This immediately invoked function expression nicely encapsules the counting code
+  const counter = (() => {
+    let count = 0
+    return {
+      incr: () => count = count + 1,
+      decr: () => count = count - 1
+    }
+  })()
   return selection.each(counter.incr).on("end", () => counter.decr() === 0 && func())
 }
 
