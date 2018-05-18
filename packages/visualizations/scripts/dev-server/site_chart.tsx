@@ -58,21 +58,31 @@ const StackedRenderer = {
   renderAs: [BarsRenderer, TextRenderer]
 }
 
-const XFlagRenderer = {
+const X1FlagRenderer = {
   type: "flag",
   config: {
-    axis: "x1",
-    axisPadding: 30
+    axis: "x1"
   }
 }
 
-const YFlagRenderer = {
+const X2FlagRenderer = {
   type: "flag",
-  accessors: {
-    color: (series, d) => d.y > 250 ? "red" : "purple"
-  },
+  config: {
+    axis: "x2"
+  }
+}
+
+const Y1FlagRenderer = {
+  type: "flag",
   config: {
     axis: "y1"
+  }
+}
+
+const Y2FlagRenderer = {
+  type: "flag",
+  config: {
+    axis: "y2"
   }
 }
 
@@ -152,6 +162,42 @@ const createData: any = () => {
         ],
         renderAs: [StackedRenderer]
       },
+      { 
+        data: [
+          { x: new Date(2018, 2, 12), label: "Event 2", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." },
+        ],
+        name: "Event flags",
+        key: "flagsX1",
+        hideInLegend: true,
+        renderAs: [X1FlagRenderer]
+      },
+      { 
+        data: [
+          { x: new Date(2017, 2, 14), label: "Event 1", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." }
+        ],
+        name: "Event flags",
+        key: "flagsX2",
+        hideInLegend: true,
+        renderAs: [X2FlagRenderer]
+      },
+      { 
+        data: [
+          { y: 400, label: "Event 3", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." },
+        ],
+        name: "Event flags",
+        key: "flagsY1",
+        hideInLegend: true,
+        renderAs: [Y1FlagRenderer]
+      },
+      { 
+        data: [
+          { y: 2000, label: "Event 4", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." }
+        ],
+        name: "Event flags",
+        key: "flagsY2",
+        hideInLegend: true,
+        renderAs: [Y2FlagRenderer]
+      }
     ],
     axes: {
       x1: {
@@ -160,6 +206,12 @@ const createData: any = () => {
         end: new Date(2018, 2, 17),
         interval: "day",
       },
+      x2: {
+        type: "time",
+        start: new Date(2017, 2, 10),
+        end: new Date(2017, 2, 17),
+        interval: "day"
+      }
       y1: {
         type: "quant"
       },
@@ -171,7 +223,7 @@ const createData: any = () => {
 }
 
 let data = createData()
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 1000, showComponentFocus: true}}/></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200}}/></OperationalUI>
 render(<App />, containerNode)
 
 setTimeout(() => {

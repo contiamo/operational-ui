@@ -131,7 +131,10 @@ class ChartCanvas implements Canvas {
 
   private totalLegendHeight(): number {
     const topLegendHeight: number = Math.max(this.legendHeight("top", "left"), this.legendHeight("top", "right"))
-    return topLegendHeight + this.legendHeight("bottom", "left")
+    const bottomLegendHeight: number = this.legendHeight("bottom", "left")
+    this.stateWriter("topLegendHeight", topLegendHeight)
+    this.stateWriter("bottomLegendHeight", bottomLegendHeight)
+    return topLegendHeight + bottomLegendHeight
   }
 
   // Drawing container

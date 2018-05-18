@@ -108,6 +108,7 @@ class QuantAxis implements AxisClass<number> {
     computed.range = this.computeRange()
     computed.domain = computeDomain(this.data, this.start, this.end)
     computed.steps = this.computeSteps(computed)
+    computed.tickFormatter = this.state.current.get("config").numberFormatter
     return computed
   }
 

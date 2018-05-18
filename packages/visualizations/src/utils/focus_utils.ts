@@ -60,14 +60,10 @@ const FocusUtils: Object<any> = {
   },
 
   // Move the focus label to the desired position and make it visible.
-  drawVisible: (focusEl: D3Selection, labelPlacement: Position, position: string): void => {
-    const arrowOffset: number = 8
-    const xArrowOffset: number = arrowOffset * xArrowOffsetPosition[position]
-    const yArrowOffset: number = arrowOffset * yArrowOffsetPosition[position]
-
+  drawVisible: (focusEl: D3Selection, labelPlacement: Position): void => {
     focusEl
-      .style("top", labelPlacement.top + yArrowOffset + "px")
-      .style("left", labelPlacement.left + xArrowOffset + "px")
+      .style("top", `${labelPlacement.top}px`)
+      .style("left", `${labelPlacement.left}px`)
       .style("visibility", "visible")
   },
 
@@ -98,7 +94,8 @@ const FocusUtils: Object<any> = {
     label: Dimensions,
     drawing: Object<any>,
     offset: number = 0,
-    position: string = "toRight"
+    position: string = "toRight",
+    drawArrow: boolean = true
   ): void => {
     const x: Object<number> = {
       farLeft: drawing.xMin + offset,
@@ -168,8 +165,14 @@ const FocusUtils: Object<any> = {
         throw new Error(`Invalid label position '${position}'.`)
     }
 
-    this.default.drawVisible(el, { left, top }, newPosition || position)
-    this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position)
+    const arrowOffset: number = 8
+    left = left + (drawArrow ? arrowOffset * xArrowOffsetPosition[position] : 0)
+    top = top + (drawArrow ? arrowOffset * yArrowOffsetPosition[position] : 0)
+
+    this.default.drawVisible(el, { left, top })
+    if (drawArrow) {
+      this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position)
+    }
   },
 
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).

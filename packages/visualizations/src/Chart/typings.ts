@@ -41,6 +41,8 @@ export interface AxisConfig extends XAxisConfig {
 export type FocusElement = string
 
 export interface ChartConfig extends Config {
+  flagFocusOffset: number
+  focusOffset: number
   innerBarSpacing: number
   innerBarSpacingCategorical: number
   legend: boolean

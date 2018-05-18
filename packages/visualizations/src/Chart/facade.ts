@@ -29,12 +29,15 @@ import {
 
 const defaultConfig: Partial<ChartConfig> = {
   duration: 1e3,
+  flagFocusOffset: 15,
+  focusOffset: 5,
   height: 500,
   hidden: false,
   innerBarSpacing: 2,
   innerBarSpacingCategorical: 0.2,
   legend: true,
   maxBarWidthRatio: 1 / 3,
+  maxFocusLabelWidth: 350,
   minBarWidth: 3,
   numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   outerBarSpacing: 10,
