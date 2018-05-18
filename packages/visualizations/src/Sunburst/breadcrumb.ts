@@ -16,6 +16,7 @@ import * as styles from "./styles"
 import { readableTextColor } from "@operational/utils"
 
 const ARROW_WIDTH: number = 7
+const HOPS_WIDTH: number = 40
 
 class Breadcrumb {
   private el: D3Selection
@@ -36,10 +37,8 @@ class Breadcrumb {
   private updateHoverPath(payload: HoverPayload | ClickPayload): void {
     // Only display breadcrumb if drawing area is wide enough.
     const config: SunburstConfig = this.state.current.get("config")
-    if (
-      this.state.current.get("config").width <
-      config.breadcrumbItemWidth * config.maxBreadcrumbLength + ARROW_WIDTH
-    ) {
+    const maxBreadcrumbWidth: number = config.breadcrumbItemWidth * config.maxBreadcrumbLength + ARROW_WIDTH
+    if (this.state.current.get("config").width < maxBreadcrumbWidth) {
       return
     }
 
@@ -86,7 +85,8 @@ class Breadcrumb {
     trail.exit().remove()
 
     // Add breadcrumb and label for entering nodes.
-    const itemWidth = (d: any): number => (d === "hops" ? 40 : this.state.current.get("config").breadcrumbItemWidth)
+    const itemWidth = (d: any): number =>
+      d === "hops" ? HOPS_WIDTH : this.state.current.get("config").breadcrumbItemWidth
     const entering: D3Selection = trail
       .enter()
       .append("div")

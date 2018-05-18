@@ -4,6 +4,7 @@ var event_catalog_1 = require("../utils/event_catalog");
 var styles = require("./styles");
 var utils_1 = require("@operational/utils");
 var ARROW_WIDTH = 7;
+var HOPS_WIDTH = 40;
 var Breadcrumb = /** @class */ (function () {
     function Breadcrumb(state, stateWriter, events, el) {
         this.state = state;
@@ -17,7 +18,8 @@ var Breadcrumb = /** @class */ (function () {
     Breadcrumb.prototype.updateHoverPath = function (payload) {
         // Only display breadcrumb if drawing area is wide enough.
         var config = this.state.current.get("config");
-        if (this.state.current.get("config").width < config.breadcrumbItemWidth * config.maxBreadcrumbLength + ARROW_WIDTH) {
+        var maxBreadcrumbWidth = config.breadcrumbItemWidth * config.maxBreadcrumbLength + ARROW_WIDTH;
+        if (this.state.current.get("config").width < maxBreadcrumbWidth) {
             return;
         }
         var computed = this.state.current.get("computed").renderer;
@@ -56,7 +58,7 @@ var Breadcrumb = /** @class */ (function () {
         // Remove exiting nodes.
         trail.exit().remove();
         // Add breadcrumb and label for entering nodes.
-        var itemWidth = function (d) { return d === "hops" ? 40 : _this.state.current.get("config").breadcrumbItemWidth; };
+        var itemWidth = function (d) { return (d === "hops" ? HOPS_WIDTH : _this.state.current.get("config").breadcrumbItemWidth); };
         var entering = trail
             .enter()
             .append("div")
