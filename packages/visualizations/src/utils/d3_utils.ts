@@ -11,8 +11,7 @@ export const withD3Element = (func: (datum: any, ...args: any[]) => any) => {
   }
 }
 
-
-type D3SelectionOrTransition = D3Selection | D3Transition
+export type D3SelectionOrTransition = D3Selection | D3Transition
 
 // Type guard: We need some way to discriminate transitions from selections
 function isTransition(element: D3SelectionOrTransition): element is D3Transition {
@@ -32,7 +31,7 @@ export const transitionIfVisible = (selection: D3Selection, duration: number) =>
 
 // Helper function to trigger a callback function when all elements of a selection have finished transitioning
 // #Michael: Would be nice to have a simple unit test for this to avoid off-by-one errors
-const onTransitionEnd = (selection: D3Transition, func?: () => void): any => {
+export const onTransitionEnd = (selection: D3Transition, func?: () => void): any => {
   if (!func) {
     return
   }
@@ -54,18 +53,18 @@ const onTransitionEnd = (selection: D3Transition, func?: () => void): any => {
 /*
  * Attribute Setter Helpers
  */
-type AttributeSetter<A> = (
+export type AttributeSetter<A> = (
   selection: D3SelectionOrTransition,
-  attributes: A,
+  attributes: Partial<A>,
   duration?: number,
   onEnd?: () => void
 ) => void
 
 export const setPathAttributes: AttributeSetter<{
   path: any,
-  fill: string,
-  stroke: string,
-  opacity: number
+  fill: string | any,
+  stroke: string | any,
+  opacity: number | any,
 }> = (selection, attributes, duration, onEnd) => {
   const elements = transitionIfDuration(selection, duration)
     .style("fill", attributes.fill)
@@ -83,14 +82,14 @@ export const setPathAttributes: AttributeSetter<{
 }
 
 export const setTextAttributes: AttributeSetter<{
-  x: number,
-  y: number,
-  dx: number,
-  dy: number,
-  textAnchor: string,
-  transform: string,
-  text: string,
-  opacity?: number
+  x: number | any,
+  y: number | any,
+  dx: number | any,
+  dy: number | any,
+  textAnchor: string | any,
+  transform: string | any,
+  text: string | any,
+  opacity?: number | any,
 }> = (selection, attributes, duration, onEnd) => {
   const elements = transitionIfDuration(selection, duration)
     .attr("x", attributes.x)
@@ -108,15 +107,14 @@ export const setTextAttributes: AttributeSetter<{
 }
 
 export const setLineAttributes: AttributeSetter<{
-  color: string
-} & Partial<{
-  x: number,
-  y: number
-  y1: number,
-  y2: number
-  x1: number,
-  x2: number,
-}>> = (selection, attributes, duration, onEnd) => {
+  color: string | any,
+  x: number | any,
+  y: number | any,
+  y1: number | any,
+  y2: number | any,
+  x1: number | any,
+  x2: number | any,
+}> = (selection, attributes, duration, onEnd) => {
   const elements = transitionIfDuration(selection, duration)
     .style("stroke", attributes.color)
     .attr("x1", attributes.x || attributes.x1)
@@ -130,12 +128,12 @@ export const setLineAttributes: AttributeSetter<{
 }
 
 export const setRectAttributes: AttributeSetter<{
-  color: string,
-  stroke: string,
-  x: number,
-  y: number,
-  width: number,
-  height: number
+  color: string | any,
+  stroke: string | any,
+  x: number | any,
+  y: number | any,
+  width: number | any,
+  height: number,
 }> = (selection, attributes, duration, onEnd) => {
   const elements = transitionIfDuration(selection, duration)
     .attr("x", attributes.x)
