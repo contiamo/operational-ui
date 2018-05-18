@@ -31,12 +31,14 @@ var SunburstFacade = /** @class */ (function () {
     SunburstFacade.prototype.initialConfig = function () {
         return {
             arrowOffset: 10,
+            breadcrumbItemWidth: 80,
             centerCircleRadius: 0.9,
             disableAnimations: false,
             duration: 1e3,
             focusOffset: 5,
             height: 500,
             hidden: false,
+            maxBreadcrumbLength: 4,
             maxRings: 10,
             maxTotalFontSize: 54,
             minTotalFontSize: theme_1.operational.typography.small.fontSize,

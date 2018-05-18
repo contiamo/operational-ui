@@ -24,9 +24,11 @@ export {
 
 export interface SunburstConfig extends Config {
   arrowOffset: number
+  breadcrumbItemWidth: number
   centerCircleRadius: number
   disableAnimations: boolean
   focusOffset: number
+  maxBreadcrumbLength: number
   maxRings: number
   maxTotalFontSize: number
   minTotalFontSize: number

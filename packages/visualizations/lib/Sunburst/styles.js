@@ -37,7 +37,7 @@ var breadcrumbStyle = {
     position: "relative",
     overflow: "hidden",
 };
-var breadcrumbItemStyle = __assign({ float: "left", width: "80px", height: "18px", position: "relative", paddingLeft: "14px", lineHeight: "18px", cursor: "pointer", margin: "5px 0" }, theme_1.operational.typography.small, { "&:first-child": {
+var breadcrumbItemStyle = __assign({ float: "left", height: "18px", position: "relative", paddingLeft: "14px", lineHeight: "18px", cursor: "pointer", margin: "5px 0" }, theme_1.operational.typography.small, { "&:first-child": {
         paddingLeft: "8px",
     }, "&.hops": {
         width: "40px",
