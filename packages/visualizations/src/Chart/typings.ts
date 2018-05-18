@@ -10,7 +10,6 @@ export {
   Legend,
   Object,
   State,
-  Partial,
   D3Selection,
   SeriesEl,
   SeriesManager,

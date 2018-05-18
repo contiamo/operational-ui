@@ -29,7 +29,6 @@ import {
   D3Selection,
   EventBus,
   Object,
-  Partial,
   State,
   StateWriter,
   XAxisConfig,

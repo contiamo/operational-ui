@@ -14,7 +14,6 @@ export {
   EventBus,
   Legend,
   Object,
-  Partial,
   Point,
   Position,
   SeriesEl,

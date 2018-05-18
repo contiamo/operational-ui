@@ -21,7 +21,6 @@ import {
   HoverPayload,
   LegendDatum,
   Object,
-  Partial,
   PieChartConfig,
   Renderer,
   RendererAccessor,
