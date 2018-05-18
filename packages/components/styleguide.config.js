@@ -12,4 +12,7 @@ module.exports = {
   propsParser: require("react-docgen-typescript").withDefaultConfig({ propFilter: { skipPropsWithoutDoc: true } })
     .parse,
   skipComponentsWithoutExample: true,
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, "styleguide/ThemeWrapper"),
+  },
 }

@@ -3,8 +3,7 @@ import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
 import { Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
-// It is necessary to import the card props so that TypeScript can compile type definitions.
-import Card, { Props as CardProps } from "../Card"
+import { Card } from "../"
 import * as mixins from "../utils/mixins"
 import { inputDefaultWidth } from "../constants"
 
