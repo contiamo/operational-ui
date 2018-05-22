@@ -56,12 +56,8 @@ class FlagFocus {
     const offset: number = this.state.current.get("config").flagFocusOffset
 
     const labelPosition: Position = {
-      left: focusData.x + this.focusDX(focusData, labelDimensions.width, offset) + this.margin("y1"),
-      top:
-        focusData.y +
-        this.focusDY(focusData, labelDimensions.height, offset) +
-        this.margin("x2") +
-        this.state.current.get("computed").canvas.topLegendHeight,
+      left: focusData.x + this.margin("y1") + this.focusDX(focusData, labelDimensions.width, offset),
+      top: focusData.y + this.margin("x2") + this.focusDY(focusData, labelDimensions.height, offset),
     }
 
     FocusUtils.drawVisible(this.el, labelPosition)

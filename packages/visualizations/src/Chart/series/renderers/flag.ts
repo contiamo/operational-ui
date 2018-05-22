@@ -132,13 +132,13 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     enteringGroups
       .append("svg:path")
       .attr("class", "hover-flag")
-      .on("mouseenter", withD3Element(this.onFlagHover(attributes).bind(this)))
       .on("mouseleave", withD3Element(this.onFlagLeave.bind(this)))
       .call(setPathAttributes, hoverFlagAttributes)
 
     groups
       .merge(enteringGroups)
       .select("path.hover-flag")
+      .on("mouseenter", withD3Element(this.onFlagHover(attributes).bind(this)))
       .transition()
       .duration(duration)
       .call(setPathAttributes, hoverFlagAttributes)
@@ -332,7 +332,6 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         axisType: this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.axis].type,
         direction: this.direction(d),
         color: this.color(d),
-        // @TODO access axis formatter, format datum
         datum: this.axis[0] === "x" ? this.x(d) : this.y(d),
         formatter: this.state.current.get("computed").axes.computed[this.axis].tickFormatter || identity,
         label: this.label(d),
