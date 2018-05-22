@@ -5,10 +5,6 @@ module.exports = {
   title: "Operational UI",
   sections: [
     {
-      name: "Getting started",
-      content: "docs/getting-started.md",
-    },
-    {
       name: "Components",
       components: function() {
         return glob.sync(path.resolve(__dirname, "src/**/*.tsx")).filter(function(module) {
