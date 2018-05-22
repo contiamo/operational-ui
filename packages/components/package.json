@@ -12,8 +12,8 @@
   },
   "scripts": {
     "start": "parcel scripts/dev-server/index.html",
-    "styleguidist:server": "styleguidist server",
-    "styleguidist:build": "styleguidist build",
+    "docs:start": "styleguidist server",
+    "docs:build": "styleguidist build",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "tsc -d -w",
     "test": "jest",

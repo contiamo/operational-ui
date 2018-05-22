@@ -27,7 +27,7 @@ var withLabel = function (Component) {
         return (React.createElement(Container, { className: props.className, css: props.css },
             props.label && React.createElement(Label, { htmlFor: domId }, props.label),
             props.label && React.createElement("br", null),
-            React.createElement(Component, __assign({}, props, { domId: domId }))));
+            React.createElement(Component, __assign({}, props, { id: domId }))));
     };
 };
 exports.default = withLabel;

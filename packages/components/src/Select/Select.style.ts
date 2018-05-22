@@ -3,62 +3,64 @@ import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/ut
 import { Theme, expandColor } from "@operational/theme"
 import * as mixins from "../utils/mixins"
 
-export interface IContainerProps {
-  id?: string
-  color?: string
-  disabled: boolean
-  style?: {}
-  role?: string
-  tabIndex?: number
-  onClick?: () => void
-}
+const Container = glamorous.div(
+  ({
+    theme,
+    color,
+    disabled,
+    style,
+  }: {
+    id?: string
+    color?: string
+    disabled: boolean
+    style?: {}
+    role?: string
+    tabIndex?: number
+    onClick?: () => void
+    theme: Theme
+  }): {} => {
+    const backgroundColor = expandColor(theme, color) || theme.colors.white
 
-const Container = glamorous.div(({ theme, color, disabled, style }: IContainerProps & { theme: Theme }): {} => {
-  const backgroundColor = expandColor(theme, color) || theme.colors.white
+    return {
+      backgroundColor,
+      label: "select",
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3 + 40}px ${theme.spacing / 2}px ${theme.spacing *
+        2 /
+        3}px `,
+      borderRadius: 4,
+      width: "fit-content",
+      minWidth: 240,
+      minHeight: 20,
+      border: "1px solid",
+      borderColor: theme.colors.inputBorder,
+      opacity: disabled ? 0.5 : 1,
+      cursor: "pointer",
+      color: readableTextColor(backgroundColor, ["black", "white"]),
+      outline: "none",
+      pointerEvents: disabled ? "none" : "all",
 
-  return {
-    backgroundColor,
-    label: "select",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3 + 40}px ${theme.spacing / 2}px ${theme.spacing *
-      2 /
-      3}px `,
-    borderRadius: 4,
-    width: "fit-content",
-    minWidth: 240,
-    minHeight: 20,
-    border: "1px solid",
-    borderColor: theme.colors.inputBorder,
-    opacity: disabled ? 0.5 : 1,
-    cursor: "pointer",
-    color: readableTextColor(backgroundColor, ["black", "white"]),
-    outline: "none",
-    pointerEvents: disabled ? "none" : "all",
+      // downward caret.
+      "&::after": {
+        content: "''",
+        position: "absolute",
+        top: "50%",
+        right: theme.spacing / 2,
+        width: 0,
+        height: 0,
+        border: "4px solid transparent",
+        borderTopColor: theme.colors.gray,
+        transform: "translateY(calc(-50% + 2px))",
+      },
 
-    // downward caret.
-    "&::after": {
-      content: "''",
-      position: "absolute",
-      top: "50%",
-      right: theme.spacing / 2,
-      width: 0,
-      height: 0,
-      border: "4px solid transparent",
-      borderTopColor: theme.colors.gray,
-      transform: "translateY(calc(-50% + 2px))",
-    },
-
-    "&:focus": mixins.inputFocus({ theme }),
+      "&:focus": mixins.inputFocus({ theme }),
+    }
   }
-})
+)
 
-export interface IDisplayValueProps {
-  isPlaceholder: boolean
-}
-
-const DisplayValue = glamorous.div(({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
+const DisplayValue = glamorous.div(({ theme, isPlaceholder }: { isPlaceholder: boolean; theme: Theme }): {} => ({
   color: isPlaceholder ? theme.colors.gray : theme.colors.black,
 }))
 

@@ -10,6 +10,10 @@ build() {
   yarn build
   cd ../..
   mv packages/visual-tests/dist ./dist/visual-tests
+  cd packages/components
+  yarn docs:build
+  cd ../..
+  cp -r packages/styleguide ./dist/docs
 }
 
 deploy() {

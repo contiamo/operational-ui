@@ -58,7 +58,9 @@ var Breadcrumb = /** @class */ (function () {
         // Remove exiting nodes.
         trail.exit().remove();
         // Add breadcrumb and label for entering nodes.
-        var itemWidth = function (d) { return (d === "hops" ? HOPS_WIDTH : _this.state.current.get("config").breadcrumbItemWidth); };
+        var itemWidth = function (d) {
+            return d === "hops" ? HOPS_WIDTH : _this.state.current.get("config").breadcrumbItemWidth;
+        };
         var entering = trail
             .enter()
             .append("div")

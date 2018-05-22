@@ -7,3 +7,4 @@ package-lock.json
 .vscode
 dist
 build
+packages/components/styleguide/index.html
