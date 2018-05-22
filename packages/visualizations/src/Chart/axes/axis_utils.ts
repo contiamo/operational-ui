@@ -1,20 +1,21 @@
 import { setLineAttributes, setRectAttributes } from "../../utils/d3_utils"
+import { Selection } from "d3-selection"
 import {
   AxisClass,
   AxisComputed,
   AxisPosition,
   ChartConfig,
   Computed,
+  Dimensions,
   Object,
   Partial,
   XAxisConfig,
   YAxisConfig,
+  D3Selection,
 } from "../typings"
 import { compact, flow, forEach, get, includes, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
 import * as moment from "moment"
-
-type Dimensions = { width: number; height: number }
 
 export const axisPosition = (position: AxisPosition, drawingDims: Dimensions): [number, number] => {
   switch (position) {
@@ -29,7 +30,7 @@ export const axisPosition = (position: AxisPosition, drawingDims: Dimensions): [
   }
 }
 
-export const insertElements = (el: any, type: string, position: AxisPosition, drawingDims: Dimensions): any => {
+export const insertElements = (el: D3Selection, type: string, position: AxisPosition, drawingDims: Dimensions): any => {
   const axisGroup: any = el
     .append("svg:g")
     .attr("class", `axis ${type}-axis ${position}`)
@@ -48,7 +49,7 @@ export const insertElements = (el: any, type: string, position: AxisPosition, dr
 }
 
 export const computeRequiredMargin = (
-  axis: any,
+  axis: D3Selection,
   computedMargins: Object<number>,
   configuredMargin: number,
   outerPadding: number,
@@ -60,6 +61,10 @@ export const computeRequiredMargin = (
   }
   const axisWidth: number = axis.node().getBBox().width
   return Math.max(requiredMargin, Math.ceil(axisWidth) + outerPadding)
+}
+
+export const translateAxis = (el: D3Selection, position: AxisPosition, drawingDims: Dimensions): void => {
+  el.attr("transform", `translate(${axisPosition(position, drawingDims).join(",")})`)
 }
 
 export const alignAxes = (axes: Object<AxisClass<any>>): Object<any> => {

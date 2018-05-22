@@ -21,7 +21,7 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
-import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
+import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import Events from "../../utils/event_catalog"
 import { scaleBand } from "d3-scale"
@@ -184,10 +184,7 @@ class CategoricalAxis implements AxisClass<string> {
 
   // Drawing
   draw(): void {
-    this.el.attr(
-      "transform",
-      `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`
-    )
+    translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
     this.drawTicks()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
@@ -266,6 +263,7 @@ class CategoricalAxis implements AxisClass<string> {
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update", this.isXAxis)
+    translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
   }
 
   private drawBorder(): void {

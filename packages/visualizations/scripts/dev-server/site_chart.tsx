@@ -226,7 +226,7 @@ let data = createData()
 const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200}}/></OperationalUI>
 render(<App />, containerNode)
 
-setTimeout(() => {
-  data = createData()
-  render(<App />, containerNode)
-}, 3000);
+// setTimeout(() => {
+//   // data = createData()
+//   render(<App />, containerNode)
+// }, 3000);
