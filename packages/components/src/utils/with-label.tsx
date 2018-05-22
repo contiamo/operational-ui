@@ -17,7 +17,7 @@ const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
 
 type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id"> & { css?: Css }
 
-function withLabel<T extends React.StatelessComponent<P>, P extends IComponent>(Component: T): React.SFC<P> {
+const withLabel = <T extends React.StatelessComponent<P>, P extends IComponent>(Component: T): React.SFC<P> => {
   return (props: P) => {
     const { id, label } = props
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
