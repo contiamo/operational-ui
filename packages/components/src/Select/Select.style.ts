@@ -3,18 +3,22 @@ import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/ut
 import { Theme, expandColor } from "@operational/theme"
 import * as mixins from "../utils/mixins"
 
-export interface IContainerProps {
-  id?: string
-  color?: string
-  disabled: boolean
-  style?: {}
-  role?: string
-  tabIndex?: number
-  onClick?: () => void
-}
-
-const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
-  ({ theme, color, disabled, style }: IContainerProps & { theme: Theme }): {} => {
+const Container = glamorous.div(
+  ({
+    theme,
+    color,
+    disabled,
+    style,
+  }: {
+    id?: string
+    color?: string
+    disabled: boolean
+    style?: {}
+    role?: string
+    tabIndex?: number
+    onClick?: () => void
+    theme: Theme
+  }): {} => {
     const backgroundColor = expandColor(theme, color) || theme.colors.white
 
     return {
@@ -56,17 +60,11 @@ const Container: GlamorousComponent<IContainerProps, {}> = glamorous.div(
   }
 )
 
-export interface IDisplayValueProps {
-  isPlaceholder: boolean
-}
+const DisplayValue = glamorous.div(({ theme, isPlaceholder }: { isPlaceholder: boolean; theme: Theme }): {} => ({
+  color: isPlaceholder ? theme.colors.gray : theme.colors.black,
+}))
 
-const DisplayValue: GlamorousComponent<IDisplayValueProps, {}> = glamorous.div(
-  ({ theme, isPlaceholder }: IDisplayValueProps & { theme: Theme }): {} => ({
-    color: isPlaceholder ? theme.colors.gray : theme.colors.black,
-  })
-)
-
-const Options: GlamorousComponent<{}, {}> = glamorous.div(
+const Options = glamorous.div(
   {
     position: "absolute",
     // Push it down 6px so it doesn't overlap with the focus shadow,
@@ -87,7 +85,7 @@ const Options: GlamorousComponent<{}, {}> = glamorous.div(
   })
 )
 
-const OptionsList: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+const OptionsList = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   // whole number + 3/4 ratio here ensures options don't get cut off
   maxHeight: theme.spacing * 12.75,
   overflow: "auto",
