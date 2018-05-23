@@ -1,6 +1,31 @@
 import { css } from "glamor"
 import { operational as theme } from "@operational/theme"
 
+const dateFocusStyle = {
+  "& li": {
+    width: "max-content",
+    lineHeight: "16px",
+  },
+  "& .title": {
+    padding: "7px 0 3px 0",
+  },
+  "& .title:first-child": {
+    paddingTop: 0,
+  },
+  "& .series-color": {
+    width: "10px",
+    height: "10px",
+    margin: "3px 3px 0 0",
+    float: "left",
+    borderRadius: "2px",
+  },
+  "& .series-value": {
+    fontWeight: "bold",
+    float: "right",
+    marginLeft: "6px",
+  },
+}
+
 const flagFocusStyle = {
   fontFamily: theme.fontFamily,
   color: theme.colors.text,
@@ -13,4 +38,5 @@ const flagFocusStyle = {
   },
 }
 
+export const dateFocus = css(dateFocusStyle).toString()
 export const flagFocus = css(flagFocusStyle).toString()

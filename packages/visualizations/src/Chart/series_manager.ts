@@ -34,6 +34,7 @@ import {
   SeriesManager,
   State,
   StateWriter,
+  AxisPosition,
 } from "./typings"
 import { SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER } from "constants"
 
@@ -62,6 +63,7 @@ class ChartSeriesManager implements SeriesManager {
     this.stateWriter("dataForAxes", this.dataForAxes())
     this.stateWriter("barSeries", this.barSeries())
     this.stateWriter("axesWithFlags", this.axesWithFlags())
+    this.stateWriter("dataForFocus", this.dataForFocus.bind(this))
   }
 
   private prepareData(): void {
@@ -206,7 +208,6 @@ class ChartSeriesManager implements SeriesManager {
     // @TODO typings
     forEach((series: any) => {
       const originalSeries: Object<any> = find({ key: series.key })(stack.series)
-      // @TODO typing
       const xAttribute: string = this.state.current.get("accessors").series.xAttribute(originalSeries)
       const yAttribute: string = this.state.current.get("accessors").series.yAttribute(originalSeries)
 
@@ -299,6 +300,24 @@ class ChartSeriesManager implements SeriesManager {
       }
       return axes
     }, {})(this.series)
+  }
+
+  private dataForFocus(focusDates: Object<any>): Object<any> {
+    const seriesWithoutFlags: Series[] = filter((series: Series): boolean => !series.get("flag"))(this.series)
+
+    return map((series: Series): Object<any> => {
+      const isMainAxis: boolean = includes(focusDates.main.axis)([series.xAxis(), series.yAxis()])
+      const axisPriority: string = isMainAxis ? "main" : "comparison"
+
+      return {
+        ...series.valueAtFocus(focusDates[axisPriority].date),
+        axisPriority,
+        color: series.legendColor(),
+        label: series.legendName(),
+        displayPoint: series.displayFocusPoint(),
+        stack: series.options.stackIndex,
+      }
+    })(seriesWithoutFlags)
   }
 
   private create(options: Object<any>): void {

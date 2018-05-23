@@ -30,6 +30,7 @@ import {
 const defaultConfig: Partial<ChartConfig> = {
   duration: 1e3,
   flagFocusOffset: 15,
+  focusDateOptions: ["line", "points", "label"],
   focusOffset: 5,
   height: 500,
   hidden: false,
@@ -133,6 +134,7 @@ class ChartFacade implements Facade {
       focus: new ChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
         main: this.canvas.elementFor("focus"),
         component: this.canvas.elementFor("componentFocus"),
+        group: this.canvas.elementFor("focusGroup"),
       }),
     }
   }

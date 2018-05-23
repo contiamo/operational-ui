@@ -15,20 +15,22 @@ class FlagFocus {
     this.el = el
     this.events = events
     this.events.on(Events.FOCUS.FLAG.HOVER, this.draw.bind(this))
+    this.events.on(Events.FOCUS.FLAG.OUT, this.remove.bind(this))
   }
 
   // Focus Label (hidden initially)
   private draw(focusData: any): void {
-    this.remove()
+    // Remove old focus (may also be a different type of focus)
+    this.events.emit(Events.FOCUS.CLEAR)
 
-    this.el.style("max-width", this.state.current.get("config").maxFocusLabelWidth)
+    this.el.classed("flag", true).style("max-width", this.state.current.get("config").maxFocusLabelWidth)
 
     const position =
       focusData.axis[0] === "x"
         ? focusData.direction === "up" ? "toRight" : "toLeft"
         : focusData.direction === "up" ? "above" : "below"
 
-    FocusUtils.drawHidden(this.el, "element", position)
+    FocusUtils.drawHidden(this.el, "flag", position)
 
     const content: D3Selection = this.el.append("xhtml:ul").attr("class", styles.flagFocus)
 
@@ -105,6 +107,7 @@ class FlagFocus {
   }
 
   remove(): void {
+    this.el.classed("focus-legend-flag", false)
     this.el.node().innerHTML = ""
     this.el.style("visibility", "hidden")
   }

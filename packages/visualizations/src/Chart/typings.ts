@@ -42,6 +42,7 @@ export type FocusElement = string
 
 export interface ChartConfig extends Config {
   flagFocusOffset: number
+  focusDateOptions: string[]
   focusOffset: number
   innerBarSpacing: number
   innerBarSpacingCategorical: number

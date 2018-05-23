@@ -7,12 +7,14 @@ import {
   EventBus,
   Object,
   ChartConfig,
+  MousePosition,
   SeriesEl,
   SeriesElements,
   State,
   StateWriter,
 } from "./typings"
 import * as styles from "../utils/styles"
+import * as localStyles from "./styles"
 import { forEach, reduce } from "lodash/fp"
 
 const seriesElements: SeriesElements = [
@@ -39,6 +41,7 @@ class ChartCanvas implements Canvas {
   private elements: Object<D3Selection> = {}
   private elMap: Object<D3Selection> = {}
   private events: EventBus
+  private mousePosition: MousePosition
   private state: State
   private stateWriter: StateWriter
 
@@ -77,14 +80,26 @@ class ChartCanvas implements Canvas {
   // Event listeners
   private onMouseEnter(): void {
     this.events.emit(Events.CHART.HOVER)
+    this.el.on("mousemove", this.onMouseMove.bind(this))
   }
 
   private onMouseLeave(): void {
     this.events.emit(Events.CHART.OUT)
+    this.el.on("mousemove")
   }
 
   private onClick(): void {
     this.events.emit(Events.CHART.CLICK)
+  }
+
+  private onMouseMove(): void {
+    const event: any = d3.event
+    const mouse: [number, number] = d3.mouse(this.el.node() as any)
+    this.mousePosition = {
+      x: mouse[0] - this.margin("y1"),
+      y: mouse[1] - this.margin("x2"),
+    }
+    this.events.emit(Events.CHART.MOVE, this.mousePosition)
   }
 
   // Legends
@@ -188,8 +203,13 @@ class ChartCanvas implements Canvas {
 
   // Focus elements
   private renderFocusElements(): void {
+    this.elMap.focusGroup = this.renderFocusGroup()
     this.elMap.focus = this.renderFocusLabel()
     this.elMap.componentFocus = this.renderComponentFocus()
+  }
+
+  private renderFocusGroup(): D3Selection {
+    return this.elements.drawing.append("svg:g").attr("class", localStyles.focusGroup)
   }
 
   private renderFocusLabel(): D3Selection {
@@ -197,12 +217,15 @@ class ChartCanvas implements Canvas {
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", `${styles.focusLegend}`)
       .style("visibility", "hidden")
-    this.chartContainer.node().appendChild(focusEl.node())
+    this.drawingContainer.node().insertBefore(focusEl.node(), this.el.node())
     return focusEl
   }
 
   private renderComponentFocus(): D3Selection {
-    const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
+    const focusEl = d3
+      .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
+      .attr("class", "component-focus")
+      .style("visibility", "hidden")
     const ref: Node = this.chartContainer.node()
     ref.insertBefore(focusEl.node(), ref.nextSibling)
     return focusEl
@@ -252,6 +275,35 @@ class ChartCanvas implements Canvas {
     })
   }
 
+  private updateClipPaths() {
+    // Set clip path ids
+    const dims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
+    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingDims
+
+    this.elements.defs
+      .select("clipPath.drawing")
+      .attr("id", this.prefixedId("_drawing_clip"))
+      .select("rect")
+      .attr("width", drawingDims.width)
+      .attr("height", drawingDims.height)
+
+    this.elements.defs
+      .select("clipPath.yrules")
+      .attr("id", this.prefixedId("_yrules_clip"))
+      .select("rect")
+      .attr("width", dims.width)
+      .attr("height", drawingDims.height)
+      .attr("transform", `translate(${-this.margin("y1")}, 0)`)
+
+    this.elements.defs
+      .select("clipPath.xyrules")
+      .attr("id", this.prefixedId("_xyrules_clip"))
+      .select("rect")
+      .attr("width", dims.width)
+      .attr("height", dims.height)
+      .attr("transform", `translate(${-this.margin("y1")}, ${-this.margin("x2")})`)
+  }
+
   // Lifecycle
   draw(): void {
     this.calculateDimensions()
@@ -260,16 +312,10 @@ class ChartCanvas implements Canvas {
     this.chartContainer.attr("class", `${styles.chartContainer} ${this.state.current.get("config").uid}`)
     this.chartContainer.classed("hidden", this.state.current.get("config").hidden)
 
-    // Set clip path ids
-    this.elements.defs.select("clipPath.drawing").attr("id", this.prefixedId("_drawing_clip"))
-    this.elements.defs.select("clipPath.yrules").attr("id", this.prefixedId("_yrules_clip"))
-    this.elements.defs.select("clipPath.xyrules").attr("id", this.prefixedId("_xyrules_clip"))
-
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
 
     const config: ChartConfig = this.state.current.get("config")
     const dims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingDims
 
     this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
@@ -278,20 +324,8 @@ class ChartCanvas implements Canvas {
     this.elements.drawing.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
     this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
 
-    this.elements.defs
-      .select(`#${this.prefixedId("_drawing_clip")} rect`)
-      .attr("width", drawingDims.width)
-      .attr("height", drawingDims.height)
-    this.elements.defs
-      .select(`#${this.prefixedId("_yrules_clip")} rect`)
-      .attr("width", dims.width)
-      .attr("height", drawingDims.height)
-      .attr("transform", `translate(${-this.margin("y1")}, 0)`)
-    this.elements.defs
-      .select(`#${this.prefixedId("_xyrules_clip")} rect`)
-      .attr("width", dims.width)
-      .attr("height", dims.height)
-      .attr("transform", `translate(${-this.margin("y1")}, ${-this.margin("x2")})`)
+    this.updateClipPaths()
+    this.el.on("mousemove", this.onMouseMove.bind(this))
   }
 
   remove(): void {

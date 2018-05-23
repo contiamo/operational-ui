@@ -18,7 +18,7 @@ class ComponentFocus {
     if (!this.state.current.get("config").showComponentFocus) {
       return
     }
-    this.remove()
+    this.events.emit(Events.FOCUS.CLEAR)
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
     this.draw(payload)
   }
