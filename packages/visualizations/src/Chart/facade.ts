@@ -8,7 +8,7 @@ import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { assign, defaults, has, uniqueId } from "lodash/fp"
+import { assign, defaults, has, isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
   AccessorsObject,
@@ -20,6 +20,7 @@ import {
   Data,
   Datum,
   Facade,
+  FocusElement,
   Object,
   Partial,
   RendererOptions,
@@ -186,6 +187,11 @@ class ChartFacade implements Facade {
     this.components.axes.draw()
     this.series.draw()
 
+    const focus: FocusElement = this.state.config().focus
+    console.log(focus)
+    !isEmpty(focus)
+      ? this.events.emit(focus.type === "date" ? Events.FOCUS.DATE : Events.FOCUS.ELEMENT.HIGHLIGHT, focus.value)
+      : this.events.emit(Events.FOCUS.CLEAR)
     return this.canvas.elementFor("series").node()
   }
 

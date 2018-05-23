@@ -38,10 +38,11 @@ export interface AxisConfig extends XAxisConfig {
   minTopOffsetTopTick?: number
 }
 
-export type FocusElement = string
+export type FocusElement = { type: "element" | "date"; value: string | Date }
 
 export interface ChartConfig extends Config {
   flagFocusOffset: number
+  focus?: FocusElement
   focusDateOptions: string[]
   focusOffset: number
   innerBarSpacing: number

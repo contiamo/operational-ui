@@ -162,7 +162,7 @@ const createData: any = () => {
         ],
         renderAs: [StackedRenderer]
       },
-      { 
+      {
         data: [
           { x: new Date(2018, 2, 12), label: "Event 2", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." },
         ],
@@ -171,7 +171,7 @@ const createData: any = () => {
         hideInLegend: true,
         renderAs: [X1FlagRenderer]
       },
-      { 
+      {
         data: [
           { x: new Date(2017, 2, 14), label: "Event 1", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." }
         ],
@@ -180,7 +180,7 @@ const createData: any = () => {
         hideInLegend: true,
         renderAs: [X2FlagRenderer]
       },
-      { 
+      {
         data: [
           { y: 400, label: "Event 3", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." },
         ],
@@ -189,7 +189,7 @@ const createData: any = () => {
         hideInLegend: true,
         renderAs: [Y1FlagRenderer]
       },
-      { 
+      {
         data: [
           { y: 2000, label: "Event 4", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." }
         ],
@@ -223,7 +223,7 @@ const createData: any = () => {
 }
 
 let data = createData()
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200}}/></OperationalUI>
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200, focus: { type: "date", value: new Date(2018, 2, 14)}}}/></OperationalUI>
 render(<App />, containerNode)
 
 // setTimeout(() => {

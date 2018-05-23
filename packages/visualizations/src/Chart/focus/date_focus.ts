@@ -88,6 +88,10 @@ class DateFocus {
     const mainAxis: AxisPosition = computedAxes.priorityTimeAxis
     const mainAxisComputed: AxisComputed = computedAxes.computed[mainAxis]
 
+    if (!includes(date.toString())(map(String)(mainAxisComputed.ticks))) {
+      return
+    }
+
     const focusDates: any = {
       main: {
         date,
