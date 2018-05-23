@@ -12,45 +12,43 @@ export interface Props {
   selected?: boolean
   onClick?: () => void
   children?: React.ReactNode
-  color?: string
 }
 
-const Container = glamorous.div(
-  ({ theme, color, selected }: { theme: Theme; color?: string; selected: boolean }): any => {
-    const backgroundColor = expandColor(theme, color) || theme.colors.white
+const Container = glamorous.div(({ theme, selected }: { theme: Theme; selected: boolean }): any => {
+  const backgroundColor = selected ? theme.colors.background : theme.colors.white
 
-    return {
-      backgroundColor,
-      label: "selectoption",
-      position: "relative",
-      padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}px`,
-      wordWrap: "break-word",
-      color: readableTextColor(backgroundColor, ["black", "white"]),
-      outline: "none",
+  return {
+    backgroundColor,
+    label: "selectoption",
+    position: "relative",
+    padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}px`,
+    wordWrap: "break-word",
+    outline: "none",
+    borderTop: "1px solid",
+    borderColor: darken(theme.colors.background, 10),
 
-      ":hover": {
-        backgroundColor: darken(backgroundColor, 5),
-        color: readableTextColor(darken(backgroundColor, 5), ["black", "white"]),
-      },
-
-      "&:not(:first-child)": {
-        borderTop: "1px solid",
-        borderColor: darken(backgroundColor, 10),
-      },
-    }
+    ":hover": {
+      backgroundColor: darken(theme.colors.background, 5),
+    },
   }
-)
+})
 
 const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
-  width: 10,
-  height: 10,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: theme.spacing * 1.25,
+  height: theme.spacing * 1.25,
+  backgroundColor: theme.colors.info,
   position: "absolute",
   top: "50%",
   right: 4,
-  transform: "translate3d(-50%, -50%, 0)",
+  borderRadius: "50%",
+  transform: "translate3d(0, -50%, 0)",
   "& svg": {
-    width: "100%",
-    height: "100%",
+    color: theme.colors.white,
+    width: theme.spacing * 0.75,
+    height: theme.spacing * 0.75,
   },
 }))
 
@@ -59,12 +57,14 @@ const SelectOption = (props: Props) => (
     key={props.id}
     css={props.css}
     className={props.className}
-    selected={!!props.selected}
-    color={props.color}
+    selected={Boolean(props.selected)}
     tabIndex={-2}
     role="option"
     aria-selected={props.selected}
-    onClick={props.onClick}
+    onClick={(ev: React.SyntheticEvent<Node>) => {
+      ev.stopPropagation()
+      props.onClick && props.onClick()
+    }}
   >
     {props.children}
     {props.selected ? (

@@ -17,13 +17,10 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
 
   return {
     label: "selectfilter",
-    padding: 0,
-    borderBottom: "1px solid",
-    borderColor: darken(backgroundColor, 10),
 
     "& > input": {
       width: "100%",
-      padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}`,
+      padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}px`,
       border: 0,
       outline: "none",
       font: "inherit",
