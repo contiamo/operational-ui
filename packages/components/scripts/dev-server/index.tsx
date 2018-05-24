@@ -14,6 +14,8 @@ import {
   Breadcrumb,
   Button,
   Table,
+  Messages,
+  Message,
   AvatarGroup,
   Avatar,
 } from "../../src"
@@ -76,6 +78,11 @@ class Explore extends React.Component<Props, State> {
                 <Avatar name="Alfred Gray" title="1234" showName />
               </AvatarGroup>
               <Avatar name="Alfred Gray" title="1234" showName />
+              <Messages>
+                <Message>1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad 1234 jasdfjldsafjldajfh1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad jasdfjldsafjldajfh1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad jasdfjldsafjldajfh1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad jasdfjldsafjldajfh</Message>
+                <Message>1234</Message>
+                <Message>1234</Message>
+              </Messages>
             </Page>
           }
         />

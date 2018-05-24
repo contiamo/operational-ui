@@ -22,9 +22,9 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
   const textColor = readableTextColor(backgroundColor, [theme.colors.black, "white"])
   return {
     backgroundColor,
-    overflow: "hidden",
     color: textColor,
-    padding: `${theme.spacing * 1 / 2}px ${theme.spacing}px`,
+    overflow: "hidden",
+    padding: `${theme.spacing * 1 / 2}px ${theme.spacing * 3.5}px ${theme.spacing / 2} ${theme.spacing}`,
     paddingRight: theme.spacing * 2.5, // Icon space
     borderRadius: 4,
     minHeight: theme.spacing * 2.5,
@@ -44,6 +44,8 @@ const IconContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   width: theme.spacing * 2.5,
   height: theme.spacing * 2.5,
   padding: theme.spacing * 0.5,
+  borderBottomLeftRadius: theme.borderRadius,
+  borderTopRightRadius: theme.borderRadius,
   "& svg": {
     width: "100%",
     height: "100%",
