@@ -8,8 +8,8 @@ ci() {
     fi
 
     # Otherwise, publish the next release and the website
-    yarn next
     yarn deploy:website
+    yarn next
 }
 
 ci
