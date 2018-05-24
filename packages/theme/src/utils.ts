@@ -8,7 +8,7 @@ export const expandColor = (theme: Theme, color?: string): string | null => {
   if (!color) {
     return null
   }
-  const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i
+  const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)|currentColor/i
   const isHex = hexRegEx.test(color)
   if (isHex) {
     return color

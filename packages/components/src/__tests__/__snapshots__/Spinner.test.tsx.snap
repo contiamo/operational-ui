@@ -2,19 +2,19 @@
 
 exports[`Spinner Component Should render 1`] = `
 <div
-  class="css-1qxromz"
+  class="css-q2j2x7"
 >
   <div
-    class="css-18d5o69"
+    class="css-g70rat"
   />
   <div
-    class="css-18d5o69"
+    class="css-g70rat"
   />
   <div
-    class="css-18d5o69"
+    class="css-g70rat"
   />
   <div
-    class="css-18d5o69"
+    class="css-g70rat"
   />
 </div>
 `;
