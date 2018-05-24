@@ -1,0 +1,29 @@
+FROM node:10.0.0
+
+# cd Jenkins-Pipeline
+# docker build -t node:latest -f Dockerfile-node .
+
+# Install Docker and other tools:
+RUN apt-get update && \
+apt-get -y install apt-transport-https \
+     ca-certificates \
+     gnupg2 \
+     software-properties-common && \
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable" && \
+apt-get update && \
+apt-get -y install docker-ce expect-dev
+
+COPY npm-login.sh /usr/local/bin/npm-login.sh
+RUN chmod +x /usr/local/bin/npm-login.sh
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin
+
+# Install gcloud:
+RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-199.0.0-linux-x86_64.tar.gz && \
+    tar xzvf google-cloud-sdk-199.0.0-linux-x86_64.tar.gz && \
+    ./google-cloud-sdk/install.sh --additional-components docker-credential-gcr --quiet && \
+    rm -rf google-cloud-sdk-199.0.0-linux-x86_64.tar.gz
+ENV PATH="$PATH:/google-cloud-sdk/bin"
