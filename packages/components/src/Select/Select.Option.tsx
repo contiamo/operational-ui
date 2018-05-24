@@ -4,6 +4,7 @@ import { Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 
 import { Icon } from "../"
+import { CssStatic } from "../types"
 
 export interface Props {
   id?: number | string
@@ -14,7 +15,7 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme, selected }: { theme: Theme; selected: boolean }): any => {
+const Container = glamorous.div(({ theme, selected }: { theme: Theme; selected: boolean }): CssStatic => {
   const backgroundColor = selected ? theme.colors.background : theme.colors.white
 
   return {
@@ -33,7 +34,7 @@ const Container = glamorous.div(({ theme, selected }: { theme: Theme; selected: 
   }
 })
 
-const IconContainer = glamorous.div(({ theme }: { theme: Theme }): any => ({
+const IconContainer = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
