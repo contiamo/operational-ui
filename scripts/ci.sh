@@ -1,5 +1,5 @@
 ci() {
-    yarn ci:local
+    yarn verify
     yarn ensure:clean:repo
 
     # If it's not a push to master, exit nicely
@@ -7,7 +7,8 @@ ci() {
         exit 0
     fi
 
-    # Otherwise, publish a next release
+    # Otherwise, publish the next release and the website
+    yarn deploy:website
     yarn next
 }
 
