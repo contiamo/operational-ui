@@ -23,6 +23,7 @@ class ComponentWithSelect extends React.Component {
   render() {
     return (
       <Select
+        label="Select label"
         value={this.state.value}
         options={options}
         filterable

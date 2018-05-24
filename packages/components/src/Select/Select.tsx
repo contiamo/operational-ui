@@ -245,11 +245,9 @@ class Select extends React.Component<Props, State> {
         role="listbox"
         tabIndex={-2}
         onClick={() => {
-          if (!this.state.open) {
-            this.setState(prevState => ({
-              open: true,
-            }))
-          }
+          this.setState(prevState => ({
+            open: !prevState.open,
+          }))
         }}
       >
         <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>

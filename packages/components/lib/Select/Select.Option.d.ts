@@ -7,7 +7,6 @@ export interface Props {
     selected?: boolean;
     onClick?: () => void;
     children?: React.ReactNode;
-    color?: string;
 }
 declare const SelectOption: (props: Props) => JSX.Element;
 export default SelectOption;

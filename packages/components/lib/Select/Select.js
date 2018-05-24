@@ -176,11 +176,9 @@ var Select = /** @class */ (function (_super) {
         var _a = this.props, id = _a.id, color = _a.color, disabled = _a.disabled, value = _a.value, options = _a.options, filterable = _a.filterable, label = _a.label;
         var _b = this.state, open = _b.open, search = _b.search;
         var selectWithoutLabel = (React.createElement(Container, { id: id, innerRef: function (containerNode) { return (_this.containerNode = containerNode); }, color: color, disabled: disabled, role: "listbox", tabIndex: -2, onClick: function () {
-                if (!_this.state.open) {
-                    _this.setState(function (prevState) { return ({
-                        open: true,
-                    }); });
-                }
+                _this.setState(function (prevState) { return ({
+                    open: !prevState.open,
+                }); });
             } },
             React.createElement(DisplayValue, { isPlaceholder: Array.isArray(value) ? value.length === 0 : !value }, this.getDisplayValue()),
             options.length &&
