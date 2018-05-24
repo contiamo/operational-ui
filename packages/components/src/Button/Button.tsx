@@ -102,6 +102,7 @@ const Button = (props: Props) => (
     active={props.active}
     disabled={props.disabled}
     condensed={props.condensed}
+    title={props.loading && props.children === String(props.children) ? String(props.children) : undefined}
   >
     {props.children}
     {props.loading && (
