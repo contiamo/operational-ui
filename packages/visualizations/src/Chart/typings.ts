@@ -284,13 +284,18 @@ export interface DataForLegends {
   }
 }
 
-// @TODO
-export interface HoverPayload {}
-
-// export interface HoverPayload {
-//   focusPoint: { centroid: [number, number] }
-//   d: any
-// }
+export interface HoverPayload {
+  position: string
+  element: any
+  value: number
+  seriesName: string
+  seriesColor: string
+  offset: number
+  focus: {
+    x: number
+    y: number
+  }
+}
 
 export type Focus = Focus<HoverPayload>
 

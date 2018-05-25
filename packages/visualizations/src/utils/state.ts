@@ -16,7 +16,7 @@ export default class State<T> {
 
   get = (path: Path): any => {
     return this.getPath([].concat(path))
-  };
+  }
 
   set(path: Path, value: any) {
     return this.setPath([].concat(path), value)

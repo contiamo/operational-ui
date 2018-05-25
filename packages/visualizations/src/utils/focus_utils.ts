@@ -120,7 +120,7 @@ const FocusUtils: Object<any> = {
       case "above":
         top = optimalPosition([y.above, y.below, y.top], drawing.yMin, drawing.yMax, label.height)
         left = this.default.horizontalCenter(focus, label, drawing)
-        arrowX = focus.x - left
+        arrowX = focus.x + drawing.xMin - left
         if (y.above < 0) {
           newPosition = "below"
           arrowY = 0
@@ -131,7 +131,7 @@ const FocusUtils: Object<any> = {
       case "below":
         top = optimalPosition([y.below, y.above, y.bottom], drawing.yMin, drawing.yMax, label.height)
         left = this.default.horizontalCenter(focus, label, drawing)
-        arrowX = focus.x - left
+        arrowX = focus.x + drawing.xMin - left
         if (top === y.above) {
           newPosition = "above"
           arrowY = label.height
@@ -142,7 +142,7 @@ const FocusUtils: Object<any> = {
       case "toLeft":
         top = this.default.verticalCenter(focus, label, drawing)
         left = optimalPosition([x.left, x.right, x.farRight], drawing.xMin, drawing.xMax, label.width)
-        arrowY = focus.y - top
+        arrowY = focus.y + drawing.yMin - top
         if (left !== x.left) {
           newPosition = "toRight"
           arrowX = 0
@@ -153,7 +153,7 @@ const FocusUtils: Object<any> = {
       case "toRight":
         top = this.default.verticalCenter(focus, label, drawing)
         left = optimalPosition([x.right, x.left, x.farLeft], drawing.xMin, drawing.xMax, label.width)
-        arrowY = focus.y - top
+        arrowY = focus.y + drawing.yMin - top
         if (left === x.left) {
           newPosition = "toLeft"
           arrowX = label.width
@@ -166,8 +166,8 @@ const FocusUtils: Object<any> = {
     }
 
     const arrowOffset: number = 8
-    left = left + (drawArrow ? arrowOffset * xArrowOffsetPosition[position] : 0)
-    top = top + (drawArrow ? arrowOffset * yArrowOffsetPosition[position] : 0)
+    left = left + (drawArrow ? arrowOffset * xArrowOffsetPosition[newPosition || position] : 0)
+    top = top + (drawArrow ? arrowOffset * yArrowOffsetPosition[newPosition || position] : 0)
 
     this.default.drawVisible(el, { left, top })
     if (drawArrow) {

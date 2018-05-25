@@ -1,6 +1,7 @@
 import { compact, defaults, filter, get, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
+import { withD3Element } from "../../../utils/d3_utils"
 import {
   symbol as d3Symbol,
   symbolCircle,
@@ -10,6 +11,7 @@ import {
   symbolStar,
   symbolTriangle,
 } from "d3-shape"
+import Events from "../../../utils/event_catalog"
 
 import {
   SymbolRendererAccessors,
@@ -108,6 +110,9 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       )
       .attr("transform", this.startTransform.bind(this))
       .merge(symbols)
+      .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
+      .on("mouseout", this.onMouseOut.bind(this))
+      .on("click", withD3Element(this.onClick.bind(this)))
       .attr("fill", this.fill.bind(this))
       .attr("stroke", this.stroke.bind(this))
       .transition()
@@ -177,6 +182,31 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     const x: number = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0)
     const y: number = this.yScale(this.xIsBaseline ? 0 : d.y1 || this.y(d))
     return `translate(${x}, ${y})`
+  }
+
+  private onMouseOver(d: Datum, el: HTMLElement): void {
+    const focusPoint = {
+      position: "toRight",
+      element: this.xIsBaseline ? this.x(d) : this.y(d),
+      value: this.xIsBaseline ? this.y(d) : this.x(d),
+      seriesName: this.series.legendName(),
+      seriesColor: this.series.legendColor(),
+      offset: this.series.symbolOffset(d),
+      focus: {
+        x: this.xScale(this.x(d)),
+        y: this.yScale(this.y(d)),
+      },
+    }
+
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, focusPoint)
+  }
+
+  private onMouseOut(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
+  }
+
+  private onClick(d: Datum, el: HTMLElement): void {
+    this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, el })
   }
 }
 

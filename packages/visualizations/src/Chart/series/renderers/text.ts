@@ -148,8 +148,8 @@ class Text implements RendererClass<TextRendererAccessors> {
     const rotate: number = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
 
     const attrs: Object<any> = {
-      x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) - offset : 0),
-      y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d) - offset),
+      x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) : 0) - (this.xIsBaseline ? offset : 0),
+      y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d)) - (this.xIsBaseline ? 0 : offset),
       text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
     }
     attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`

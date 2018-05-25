@@ -31,8 +31,6 @@ import * as styles from "./styles"
 import * as globalStyles from "../../utils/styles"
 
 class DateFocus {
-  currentComparisonFocus: Date
-  currentFocus: Date
   el: D3Selection
   els: Object<D3Selection>
   elGroup: D3Selection

@@ -188,7 +188,6 @@ class ChartFacade implements Facade {
     this.series.draw()
 
     const focus: FocusElement = this.state.config().focus
-    console.log(focus)
     !isEmpty(focus)
       ? this.events.emit(focus.type === "date" ? Events.FOCUS.DATE : Events.FOCUS.ELEMENT.HIGHLIGHT, focus.value)
       : this.events.emit(Events.FOCUS.CLEAR)

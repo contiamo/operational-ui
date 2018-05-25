@@ -26,6 +26,25 @@ const dateFocusStyle = {
   },
 }
 
+const elementFocusStyle = {
+  "& li": {
+    width: "max-content",
+    lineHeight: "16px",
+  },
+  "& .series-color": {
+    width: "10px",
+    height: "10px",
+    margin: "3px 3px 0 0",
+    float: "left",
+    borderRadius: "2px",
+  },
+  "& .series-value": {
+    fontWeight: "bold",
+    float: "right",
+    marginLeft: "6px",
+  },
+}
+
 const flagFocusStyle = {
   fontFamily: theme.fontFamily,
   color: theme.colors.text,
@@ -39,4 +58,5 @@ const flagFocusStyle = {
 }
 
 export const dateFocus = css(dateFocusStyle).toString()
+export const elementFocus = css(elementFocusStyle).toString()
 export const flagFocus = css(flagFocusStyle).toString()
