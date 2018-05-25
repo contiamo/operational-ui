@@ -19,7 +19,6 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Partial,
   RendererAccessor,
   RendererClass,
   RendererType,

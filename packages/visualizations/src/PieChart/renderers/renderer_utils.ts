@@ -55,7 +55,7 @@ export const translateBack = (point: [number, number], currentTranslation: [numb
   return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
 }
 
-export const textAttributes = (computed: ComputedArcs): Object<any> => {
+export const textAttributes = (computed: ComputedArcs) => {
   return {
     transform: (d: Datum): string => translateString(computed.arcOver.centroid(d)),
     text: percentageString,

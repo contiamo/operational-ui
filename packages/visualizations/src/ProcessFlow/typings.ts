@@ -12,7 +12,6 @@ export {
   EventBus,
   Object,
   State,
-  Partial,
   Position,
   D3Selection,
   SeriesEl,

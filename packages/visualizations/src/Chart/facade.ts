@@ -20,7 +20,6 @@ import {
   Datum,
   Facade,
   Object,
-  Partial,
   RendererOptions,
   SeriesAccessors,
   SeriesData,

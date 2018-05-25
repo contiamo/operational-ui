@@ -6,7 +6,6 @@ import {
   ChartConfig,
   Computed,
   Object,
-  Partial,
   XAxisConfig,
   YAxisConfig,
 } from "../typings"

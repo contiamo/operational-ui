@@ -20,7 +20,6 @@ import {
   HoverPayload,
   LegendDatum,
   Object,
-  Partial,
   PieChartConfig,
   Renderer,
   RendererAccessor,
@@ -117,7 +116,7 @@ class Donut implements Renderer {
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
-  private arcAttributes(): Object<any> {
+  private arcAttributes() {
     return {
       path: this.arcTween.bind(this),
       fill: this.color.bind(this),
