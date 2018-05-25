@@ -112,7 +112,7 @@ const Progress = (props: Props) => (
           </Action>
         )}
         {props.onClose && (
-          <Action>
+          <Action onClick={props.onClose}>
             <Icon name="X" />
             <span>Dismiss</span>
           </Action>
