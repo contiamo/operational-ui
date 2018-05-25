@@ -24,7 +24,7 @@ const Container = glamorous.div(({ theme, color }: { theme: Theme; color?: strin
     backgroundColor,
     color: textColor,
     overflow: "hidden",
-    padding: `${theme.spacing * 1 / 2}px ${theme.spacing * 3.5}px ${theme.spacing / 2} ${theme.spacing}`,
+    padding: `${theme.spacing * 1 / 2}px ${theme.spacing * 3.5}px ${theme.spacing / 2}px ${theme.spacing}px`,
     paddingRight: theme.spacing * 2.5, // Icon space
     borderRadius: 4,
     minHeight: theme.spacing * 2.5,
