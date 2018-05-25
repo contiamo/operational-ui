@@ -62,7 +62,6 @@ const breadcrumbItemStyle = {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
-    width: "65px",
   },
   "& .background-arrow": {
     content: "''",

@@ -12,8 +12,9 @@ import { VisualizationWrapper } from "../../src/index"
 const config: any = {
   maxRings: 4,
   propagateColors: true,
-  width: 400,
-  breadcrumbItemWidth: 98
+  width: 800,
+  breadcrumbItemWidth: 250,
+  maxBreadcrumbLength: 3
 }
 
 import { RawData } from "../../src/Sunburst/typings"

@@ -98,6 +98,7 @@ class Breadcrumb {
     entering
       .append("div")
       .attr("class", "label")
+      .style("width", (d: any) => `${itemWidth(d) - ARROW_WIDTH * 3}px`)
       .html(this.label)
       .style("color", this.labelColor.bind(this))
 
