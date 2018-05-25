@@ -11,9 +11,9 @@ var Container = glamorous_1.default.div(function (_a) {
     var textColor = utils_1.readableTextColor(backgroundColor, [theme.colors.black, "white"]);
     return {
         backgroundColor: backgroundColor,
-        overflow: "hidden",
         color: textColor,
-        padding: theme.spacing * 1 / 2 + "px " + theme.spacing + "px",
+        overflow: "hidden",
+        padding: theme.spacing * 1 / 2 + "px " + theme.spacing * 3.5 + "px " + theme.spacing / 2 + " " + theme.spacing,
         paddingRight: theme.spacing * 2.5,
         borderRadius: 4,
         minHeight: theme.spacing * 2.5,
@@ -34,6 +34,8 @@ var IconContainer = glamorous_1.default.div(function (_a) {
         width: theme.spacing * 2.5,
         height: theme.spacing * 2.5,
         padding: theme.spacing * 0.5,
+        borderBottomLeftRadius: theme.borderRadius,
+        borderTopRightRadius: theme.borderRadius,
         "& svg": {
             width: "100%",
             height: "100%",
