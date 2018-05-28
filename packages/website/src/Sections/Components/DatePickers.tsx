@@ -4,7 +4,7 @@ import * as constants from "../../constants"
 
 export const title = "DatePickers"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/date-picker.md`
+export const docsUrl = `${constants.docsBaseUrl}/#datepicker`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/DatePickers.tsx`
 

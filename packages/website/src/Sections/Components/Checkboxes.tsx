@@ -4,7 +4,7 @@ import * as constants from "../../constants"
 
 export const title = "Checkboxes"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/checkbox.md`
+export const docsUrl = `${constants.docsBaseUrl}/#checkbox`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Checkboxes.tsx`
 

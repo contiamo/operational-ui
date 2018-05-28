@@ -6,7 +6,7 @@ import { Subsection } from "../../components"
 
 export const title = "Tables"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/table.md`
+export const docsUrl = `${constants.docsBaseUrl}/#table`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Tables.tsx`
 

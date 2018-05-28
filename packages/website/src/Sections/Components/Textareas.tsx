@@ -6,7 +6,7 @@ import { Subsection } from "../../components"
 
 export const title = "Text Areas"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/textarea.md`
+export const docsUrl = `${constants.docsBaseUrl}/#textarea`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Textareas.tsx`
 

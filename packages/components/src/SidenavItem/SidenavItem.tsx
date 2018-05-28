@@ -14,7 +14,7 @@ export interface Props {
   label: string
 }
 
-const size: number = 32
+const size: number = 36
 
 const Container = glamorous.div(
   {

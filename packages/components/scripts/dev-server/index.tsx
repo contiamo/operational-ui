@@ -10,6 +10,7 @@ import {
   Progress,
   Sidenav,
   SidenavHeader,
+  SidenavItem,
   Breadcrumbs,
   Breadcrumb,
   Button,
@@ -33,10 +34,13 @@ class Explore extends React.Component<Props, State> {
         <Layout
           sidenav={
             <Sidenav expanded>
-              <a href="/">
-                <SidenavHeader label="Labs" icon="Labs" />
-              </a>
-              <SidenavHeader label="Pantheon" icon="Pantheon" />
+              <SidenavHeader label="The Prize" icon="Award">
+                <SidenavItem label="The First Prize" />
+                <SidenavItem label="The First Prize" />
+                <SidenavItem label="The First Prize" />
+              </SidenavHeader>
+              <SidenavHeader label="Let It Snow" icon="CloudSnow" />
+              <SidenavHeader label="Hello" icon="Settings" />
             </Sidenav>
           }
           main={
@@ -58,15 +62,6 @@ class Explore extends React.Component<Props, State> {
                 </React.Fragment>
               }
             >
-              <Progress
-                error="There was an error"
-                onRetry={() => {
-                  console.log("retry")
-                }}
-                onClose={() => {
-                  console.log("error")
-                }}
-              />
               <AvatarGroup>
                 <Avatar name="Alfred Black" title="1234" showName assignColor />
                 <Avatar
@@ -79,7 +74,6 @@ class Explore extends React.Component<Props, State> {
               </AvatarGroup>
               <Avatar name="Alfred Gray" title="1234" showName />
               <Messages>
-                <Message>1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad 1234 jasdfjldsafjldajfh1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad jasdfjldsafjldajfh1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad jasdfjldsafjldajfh1234 asdjfljgfasdijlfgasd  jlasdfjldsjlafjdlsajflisad jasdfjldsafjldajfh</Message>
                 <Message>1234</Message>
                 <Message>1234</Message>
               </Messages>

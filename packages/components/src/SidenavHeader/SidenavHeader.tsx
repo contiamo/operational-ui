@@ -15,6 +15,7 @@ export interface Props {
   active?: boolean
   expanded?: boolean
   onClick?: () => void
+  children?: React.ReactNode
 }
 
 const Container = glamorous.div({
@@ -69,6 +70,7 @@ const SidenavHeader = (props: Props) => (
       </IconContainer>
       <Label>{props.label}</Label>
     </Content>
+    {props.children}
   </Container>
 )
 
