@@ -179,7 +179,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .append("svg:clipPath")
       .attr("id", `area-clip-${this.series.key()}`)
       .append("svg:path")
-      .attr("d", this.startClipPath.bind(this))
+      .attr("d", this.startPath.bind(this))
       .merge(clip)
       .transition()
       .duration(duration)
@@ -189,7 +189,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .exit()
       .transition()
       .duration(duration)
-      .attr("d", this.startClipPath.bind(this))
+      .attr("d", this.startPath.bind(this))
       .remove()
   }
 
@@ -208,29 +208,23 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private startPath(data: Datum[]): string {
-    return this.createAreaPath({ x: this.x0, y: this.y0 })(data)
+    return this.createAreaPath({
+      x: (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : 0),
+      y: (d: Datum): any => this.yScale(this.xIsBaseline ? 0 : this.y(d)),
+    })(data)
   }
 
   private path(data: Datum[]): string {
     return this.createAreaPath(this)(data)
   }
 
-  private startClipPath(data: Datum[]): string {
-    const attributes: Object<any> = {
-      x: (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : 0),
-      y: (d: Datum): any => this.yScale(this.xIsBaseline ? 0 : this.y(d)),
-    }
-    return this.createAreaPath(attributes)(data)
-  }
-
   private clipPath(data: Datum[]): string {
-    const attributes: Object<any> = {
+    return this.createAreaPath({
       x0: this.xIsBaseline ? this.x0 : this.xScale.range()[1],
       x1: this.x1,
       y0: (d: Datum) => (this.xIsBaseline ? 0 : this.y0(d)),
       y1: this.y1,
-    }
-    return this.createAreaPath(attributes)(data)
+    })(data)
   }
 }
 
