@@ -62,30 +62,18 @@ const createData = (renderers: any[]) => {
     series: [
       {
         data: [
-          { x: new Date(2018, 2, 11), y: 100 },
-          { x: new Date(2018, 2, 12), y: 300 },
-          { x: new Date(2018, 2, 13), y: 500 },
-          { x: new Date(2018, 2, 14), y: undefined },
-          { x: new Date(2018, 2, 15), y: 200 },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 18), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 19), y: Math.floor(Math.random() * 500) - 250 },
         ],
         name: "Pageviews 2018",
         key: "series1",
         interpolate: "step",
-        renderAs: renderers,
-      },
-      {
-        data: [
-          { x: new Date(2018, 2, 10), y: 500 },
-          { x: new Date(2018, 2, 11), y: 450 },
-          { x: new Date(2018, 2, 12), y: 250 },
-          { x: new Date(2018, 2, 13), y: 425 },
-          { x: new Date(2018, 2, 14), y: 570 },
-          { x: new Date(2018, 2, 16), y: 234 },
-          { x: new Date(2018, 2, 17), y: 123 },
-        ],
-        name: "Pageviews 2017",
-        yAxis: "y2",
-        key: "series2",
         renderAs: renderers,
       },
     ],
@@ -93,13 +81,10 @@ const createData = (renderers: any[]) => {
       x1: {
         type: "time",
         start: new Date(2018, 2, 10),
-        end: new Date(2018, 2, 17),
+        end: new Date(2018, 2, 19),
         interval: "day",
       },
       y1: {
-        type: "quant",
-      },
-      y2: {
         type: "quant",
       },
     },

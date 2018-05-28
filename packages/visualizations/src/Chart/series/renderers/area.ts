@@ -50,10 +50,6 @@ const hasValue = (d: any): boolean => {
   return !!d || d === 0
 }
 
-const aOrB = (a: any, b: any): any => {
-  return hasValue(a) ? a : b
-}
-
 class Area implements RendererClass<AreaRendererAccessors> {
   closeGaps: RendererAccessor<boolean>
   color: RendererAccessor<string>
@@ -61,16 +57,17 @@ class Area implements RendererClass<AreaRendererAccessors> {
   el: D3Selection
   events: EventBus
   interpolate: RendererAccessor<any>
+  isRange: boolean
   options: Options
   series: Series
   state: State
   type: RendererType = "area"
   xIsBaseline: boolean
-  x: RendererAccessor<number | Date>
+  x: RendererAccessor<string | number | Date>
   x0: RendererAccessor<number>
   x1: RendererAccessor<number>
   xScale: any
-  y: RendererAccessor<number | Date>
+  y: RendererAccessor<string | number | Date>
   y0: RendererAccessor<number>
   y1: RendererAccessor<number>
   yScale: any
@@ -88,6 +85,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.options = options
     this.assignAccessors(options.accessors)
     this.data = data
+    this.isRange = !!this.series.options.clipData
   }
 
   draw(): void {
@@ -139,38 +137,49 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : aOrB(d.x0, 0))
-    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : aOrB(d.x1, this.x(d)))
-    this.y0 = (d: Datum): any => this.yScale(this.xIsBaseline ? aOrB(d.y0, 0) : this.y(d))
-    this.y1 = (d: Datum): any => this.yScale(this.xIsBaseline ? aOrB(d.y1, this.y(d)) : this.y(d))
+    this.x0 = (d: Datum) => {
+      const baseline = this.isRange ? this.xScale.domain()[0] : 0
+      return this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x0) ? d.x0 : baseline)
+    }
+    this.x1 = (d: Datum) => this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x1) ? d.x1 : this.x(d))
+    this.y0 = (d: Datum) => {
+      const baseline = this.isRange ? this.yScale.domain()[0] : 0
+      return this.yScale(this.xIsBaseline ? (hasValue(d.y0) ? d.y0 : baseline) : this.y(d))
+    }
+    this.y1 = (d: Datum) => this.yScale(this.xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : this.y(d))
   }
 
   private assignAccessors(customAccessors: Partial<AreaRendererAccessors>): void {
     const accessors: AreaRendererAccessors = defaults(defaultAccessors)(customAccessors)
-    this.x = (d: Datum): any => aOrB(this.series.x(d), d.injectedX)
-    this.y = (d: Datum): any => aOrB(this.series.y(d), d.injectedY)
-    this.color = (d?: Datum): string => accessors.color(this.series, d)
-    this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
-    this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)
+    this.x = (d: Datum) => (hasValue(this.series.x(d)) ? this.series.x(d) : d.injectedX)
+    this.y = (d: Datum) => (hasValue(this.series.y(d)) ? this.series.y(d) : d.injectedY)
+    this.color = (d?: Datum) => accessors.color(this.series, d)
+    this.interpolate = (d?: Datum) => interpolator[accessors.interpolate(this.series, d)]
+    this.closeGaps = (d?: Datum) => accessors.closeGaps(this.series, d)
   }
 
   private addMissingData(): void {
-    if (this.closeGaps()) {
+    if (this.closeGaps() || this.series.options.stacked) {
       return
     }
-    if (this.xIsBaseline && !this.series.options.stacked) {
-      const ticks: Date[] = this.state.current.get("computed").series.dataForAxes[this.series.xAxis()]
-      forEach((tick: Date): void => {
-        if (!find((d: Datum): boolean => this.x(d).toString() === tick.toString())(this.data)) {
-          this.data.push({ injectedX: tick, injectedY: undefined })
-        }
-      })(ticks)
-    }
+    const ticks: Date[] = this.state.current.get("computed").axes.computed[
+      this.xIsBaseline ? this.series.xAxis() : this.series.yAxis()
+    ].ticksInDomain
+    forEach((tick: Date): void => {
+      if (
+        !find((d: Datum): boolean => (this.xIsBaseline ? this.x : this.y)(d).toString() === tick.toString())(this.data)
+      ) {
+        this.data.push({
+          [this.xIsBaseline ? "injectedX" : "injectedY"]: tick,
+        })
+      }
+    })(ticks)
   }
 
   private updateClipPath(): void {
     const duration: number = this.state.current.get("config").duration
-    const data: Datum[] = this.series.options.clipData ? [this.series.options.clipData] : []
+    const mainData: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
+    const data: Datum[] = this.isRange ? [this.series.options.clipData] : []
 
     const clip = this.el.selectAll("clipPath path").data(data)
 
@@ -215,7 +224,12 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private path(data: Datum[]): string {
-    return this.createAreaPath(this)(data)
+    return this.createAreaPath({
+      x0: this.x0,
+      x1: this.x1,
+      y0: this.y0,
+      y1: this.y1,
+    })(data)
   }
 
   private clipPath(data: Datum[]): string {
