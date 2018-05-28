@@ -13,7 +13,7 @@ import {
   rangeStep,
   sortBy,
 } from "lodash/fp"
-import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
+import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes, withD3Element } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
 import * as styles from "./styles"
@@ -25,6 +25,7 @@ import {
   QuantAxisOptions,
   AxisPosition,
   ChartConfig,
+  ComponentConfigInfo,
   Computed,
   D3Selection,
   EventBus,
@@ -71,6 +72,7 @@ class QuantAxis implements AxisClass<number> {
     this.position = position
     this.isXAxis = position[0] === "x"
     this.el = insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims)
+    this.el.on("mouseenter", this.onComponentHover.bind(this))
   }
 
   // Quant axis only supports finite numbers
@@ -106,6 +108,7 @@ class QuantAxis implements AxisClass<number> {
     computed.range = this.computeRange()
     computed.domain = computeDomain(this.data, this.start, this.end)
     computed.steps = this.computeSteps(computed)
+    computed.tickFormatter = this.state.current.get("config").numberFormatter
     return computed
   }
 
@@ -166,10 +169,7 @@ class QuantAxis implements AxisClass<number> {
 
   // Drawing
   draw(): void {
-    this.el.attr(
-      "transform",
-      `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`
-    )
+    translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
     this.drawTicks()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
@@ -222,6 +222,7 @@ class QuantAxis implements AxisClass<number> {
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update", this.isXAxis)
+    translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
   }
 
   private tickFormatter(): (x: number) => string {
@@ -256,6 +257,17 @@ class QuantAxis implements AxisClass<number> {
       y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
+  }
+
+  private onComponentHover(): void {
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: this.el, options: this.hoverInfo() })
+  }
+
+  private hoverInfo(): ComponentConfigInfo {
+    return {
+      key: this.position,
+      type: "axis",
+    }
   }
 
   close(): void {

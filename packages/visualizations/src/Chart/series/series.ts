@@ -1,5 +1,19 @@
 import Renderer from "./renderer"
-import { compact, filter, find, flatten, flow, forEach, get, includes, invoke, map, remove, uniqBy } from "lodash/fp"
+import {
+  compact,
+  filter,
+  find,
+  flatten,
+  flow,
+  forEach,
+  get,
+  includes,
+  invoke,
+  isNil,
+  map,
+  remove,
+  uniqBy,
+} from "lodash/fp"
 import {
   BarsRendererAccessors,
   D3Selection,
@@ -13,6 +27,14 @@ import {
   SeriesAccessor,
   State,
 } from "../typings"
+
+const hasValue = (d: any): boolean => {
+  return !!d || d === 0
+}
+
+const aOrB = (a: any, b: any): any => {
+  return hasValue(a) ? a : b
+}
 
 class ChartSeries {
   el: D3Selection
@@ -96,6 +118,7 @@ class ChartSeries {
     return {
       color: this.legendColor(),
       label: this.legendName(),
+      key: this.key(),
     }
   }
 
@@ -126,12 +149,36 @@ class ChartSeries {
     }
   }
 
+  displayFocusPoint(): boolean {
+    return (
+      filter((renderer: RendererClass<any>): boolean => {
+        return renderer.type === "area" || renderer.type === "line"
+      })(this.renderers).length > 0
+    )
+  }
+
   hasFlags(): boolean {
     return !!this.get("flag")
   }
 
   hasData(): boolean {
     return !!this.data() && this.data().length > 0
+  }
+
+  valueAtFocus(focus: any): any {
+    const xIsBaseline: boolean = this.state.current.get("computed").axes.baseline === "x"
+    const baselineAccessor = (d: Datum) => (xIsBaseline ? this.x(d) || d.injectedX : this.y(d) || d.injectedY)
+    const valueAccessor = xIsBaseline ? this.y : this.x
+    const positionAccessor = (d: Datum): any => (xIsBaseline ? aOrB(d.y1, this.y(d)) : aOrB(d.x1, this.x(d)))
+    const valueScale = this.state.current.get("computed").axes.computed[xIsBaseline ? this.yAxis() : this.xAxis()].scale
+    const datum: Datum = find((d: Datum): boolean => {
+      return baselineAccessor(d).toString() === focus.toString()
+    })(this.data())
+
+    return {
+      value: !datum || isNil(valueAccessor(datum)) ? "-" : valueAccessor(datum),
+      valuePosition: !datum || isNil(valueAccessor(datum)) ? undefined : valueScale(positionAccessor(datum)),
+    }
   }
 
   draw(): void {

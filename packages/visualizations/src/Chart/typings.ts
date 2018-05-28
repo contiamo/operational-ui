@@ -4,13 +4,16 @@ import { DateRange } from "moment-range"
 export {
   Accessor,
   Accessors,
-  ComponentConfigOptions,
+  ComponentConfigInfo,
   ComponentHoverPayload,
+  Dimensions,
   EventBus,
   Legend,
   Object,
   State,
   Partial,
+  Point,
+  Position,
   D3Selection,
   SeriesEl,
   SeriesManager,
@@ -35,9 +38,13 @@ export interface AxisConfig extends XAxisConfig {
   minTopOffsetTopTick?: number
 }
 
-export type FocusElement = string
+export type FocusElement = { type: "element" | "date"; value: string | Date }
 
 export interface ChartConfig extends Config {
+  flagFocusOffset: number
+  focus?: FocusElement
+  focusDateOptions: string[]
+  focusOffset: number
   innerBarSpacing: number
   innerBarSpacingCategorical: number
   legend: boolean
@@ -45,6 +52,7 @@ export interface ChartConfig extends Config {
   minBarWidth: number
   numberFormatter: (x: number) => string
   outerBarSpacing: number
+  showComponentFocus: boolean
   timeAxisPriority: string[]
 }
 
@@ -263,6 +271,7 @@ export interface Computed {
 export interface LegendDatum {
   label: string
   color: string
+  key: string
 }
 
 export interface DataForLegends {
@@ -275,13 +284,18 @@ export interface DataForLegends {
   }
 }
 
-// @TODO
-export interface HoverPayload {}
-
-// export interface HoverPayload {
-//   focusPoint: { centroid: [number, number] }
-//   d: any
-// }
+export interface HoverPayload {
+  position: string
+  element: any
+  value: number
+  seriesName: string
+  seriesColor: string
+  offset: number
+  focus: {
+    x: number
+    y: number
+  }
+}
 
 export type Focus = Focus<HoverPayload>
 

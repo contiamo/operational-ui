@@ -60,14 +60,10 @@ const FocusUtils: Object<any> = {
   },
 
   // Move the focus label to the desired position and make it visible.
-  drawVisible: (focusEl: D3Selection, labelPlacement: Position, position: string): void => {
-    const arrowOffset: number = 8
-    const xArrowOffset: number = arrowOffset * xArrowOffsetPosition[position]
-    const yArrowOffset: number = arrowOffset * yArrowOffsetPosition[position]
-
+  drawVisible: (focusEl: D3Selection, labelPlacement: Position): void => {
     focusEl
-      .style("top", labelPlacement.top + yArrowOffset + "px")
-      .style("left", labelPlacement.left + xArrowOffset + "px")
+      .style("top", `${labelPlacement.top}px`)
+      .style("left", `${labelPlacement.left}px`)
       .style("visibility", "visible")
   },
 
@@ -98,7 +94,8 @@ const FocusUtils: Object<any> = {
     label: Dimensions,
     drawing: Object<any>,
     offset: number = 0,
-    position: string = "toRight"
+    position: string = "toRight",
+    drawArrow: boolean = true
   ): void => {
     const x: Object<number> = {
       farLeft: drawing.xMin + offset,
@@ -123,7 +120,7 @@ const FocusUtils: Object<any> = {
       case "above":
         top = optimalPosition([y.above, y.below, y.top], drawing.yMin, drawing.yMax, label.height)
         left = this.default.horizontalCenter(focus, label, drawing)
-        arrowX = focus.x - left
+        arrowX = focus.x + drawing.xMin - left
         if (y.above < 0) {
           newPosition = "below"
           arrowY = 0
@@ -134,7 +131,7 @@ const FocusUtils: Object<any> = {
       case "below":
         top = optimalPosition([y.below, y.above, y.bottom], drawing.yMin, drawing.yMax, label.height)
         left = this.default.horizontalCenter(focus, label, drawing)
-        arrowX = focus.x - left
+        arrowX = focus.x + drawing.xMin - left
         if (top === y.above) {
           newPosition = "above"
           arrowY = label.height
@@ -145,7 +142,7 @@ const FocusUtils: Object<any> = {
       case "toLeft":
         top = this.default.verticalCenter(focus, label, drawing)
         left = optimalPosition([x.left, x.right, x.farRight], drawing.xMin, drawing.xMax, label.width)
-        arrowY = focus.y - top
+        arrowY = focus.y + drawing.yMin - top
         if (left !== x.left) {
           newPosition = "toRight"
           arrowX = 0
@@ -156,7 +153,7 @@ const FocusUtils: Object<any> = {
       case "toRight":
         top = this.default.verticalCenter(focus, label, drawing)
         left = optimalPosition([x.right, x.left, x.farLeft], drawing.xMin, drawing.xMax, label.width)
-        arrowY = focus.y - top
+        arrowY = focus.y + drawing.yMin - top
         if (left === x.left) {
           newPosition = "toLeft"
           arrowX = label.width
@@ -168,8 +165,14 @@ const FocusUtils: Object<any> = {
         throw new Error(`Invalid label position '${position}'.`)
     }
 
-    this.default.drawVisible(el, { left, top }, newPosition || position)
-    this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position)
+    const arrowOffset: number = 8
+    left = left + (drawArrow ? arrowOffset * xArrowOffsetPosition[newPosition || position] : 0)
+    top = top + (drawArrow ? arrowOffset * yArrowOffsetPosition[newPosition || position] : 0)
+
+    this.default.drawVisible(el, { left, top })
+    if (drawArrow) {
+      this.default.drawArrow(el, { x: arrowX, y: arrowY }, newPosition || position)
+    }
   },
 
   // Finds the y value that centres the focus label vertically (without overflowing the drawing area).

@@ -17,6 +17,7 @@ import {
   SingleRendererOptions,
   State,
 } from "../../typings"
+import Events from "../../../utils/event_catalog"
 
 export type Options = SingleRendererOptions<BarsRendererAccessors>
 
@@ -80,6 +81,9 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       .append("svg:rect")
       .call(setRectAttributes, startAttributes)
       .merge(bars)
+      .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
+      .on("mouseout", this.onMouseOut.bind(this))
+      .on("click", withD3Element(this.onClick.bind(this)))
       .call(setRectAttributes, attributes, duration)
 
     bars
@@ -152,6 +156,36 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       height: this.xIsBaseline ? (d: Datum): number => this.y0(d) - this.y1(d) : barWidth,
       color: this.color.bind(this),
     }
+  }
+
+  private onMouseOver(d: Datum, el: HTMLElement): void {
+    const isNegative: boolean = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
+    const position: string = this.xIsBaseline ? (isNegative ? "below" : "above") : isNegative ? "toLeft" : "toRight"
+    const dimensions = el.getBoundingClientRect()
+    const barOffset = this.state.current.get("computed").axes.computedBars[this.series.key()].offset
+
+    const focusPoint = {
+      position,
+      element: this.xIsBaseline ? this.x(d) : this.y(d),
+      value: this.xIsBaseline ? this.y(d) : this.x(d),
+      seriesName: this.series.legendName(),
+      seriesColor: this.series.legendColor(),
+      offset: 0,
+      focus: {
+        x: this.x1(d) + (this.xIsBaseline ? barOffset + dimensions.width / 2 : 0), // @TODO check if works for isNegative (stacked and non-stacked)
+        y: this.y1(d) + (this.xIsBaseline ? 0 : barOffset + dimensions.height / 2),
+      },
+    }
+
+    this.events.emit(Events.FOCUS.ELEMENT.HOVER, focusPoint)
+  }
+
+  private onMouseOut(): void {
+    this.events.emit(Events.FOCUS.ELEMENT.OUT)
+  }
+
+  private onClick(d: Datum, el: HTMLElement): void {
+    this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, el })
   }
 }
 

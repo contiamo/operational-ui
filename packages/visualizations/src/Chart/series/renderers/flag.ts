@@ -1,6 +1,6 @@
 import Series from "../series"
 import * as styles from "./styles"
-import { assign, compact, defaults, filter, forEach, map, reduce } from "lodash/fp"
+import { assign, compact, defaults, filter, forEach, identity, map, reduce } from "lodash/fp"
 import { setLineAttributes, setPathAttributes, withD3Element } from "../../../utils/d3_utils"
 import * as d3 from "d3-selection"
 import Events from "../../../utils/event_catalog"
@@ -34,7 +34,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   events: EventBus
   options: Options
   position: "x" | "y"
-  scale: any // @TODO
+  scale: any
   series: Series
   state: State
   type: RendererType = "flag"
@@ -132,13 +132,13 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     enteringGroups
       .append("svg:path")
       .attr("class", "hover-flag")
-      .on("mouseenter", withD3Element(this.onFlagHover(attributes).bind(this)))
       .on("mouseleave", withD3Element(this.onFlagLeave.bind(this)))
       .call(setPathAttributes, hoverFlagAttributes)
 
     groups
       .merge(enteringGroups)
       .select("path.hover-flag")
+      .on("mouseenter", withD3Element(this.onFlagHover(attributes).bind(this)))
       .transition()
       .duration(duration)
       .call(setPathAttributes, hoverFlagAttributes)
@@ -328,17 +328,17 @@ class Flag implements RendererClass<FlagRendererAccessors> {
       d3.select(el.parentNode).classed("hover", true)
 
       const focusPoint: any = {
-        axisOrientation: this.axis[0],
+        axis: this.axis,
+        axisType: this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.axis].type,
+        direction: this.direction(d),
         color: this.color(d),
-        // @TODO access axis formatter, format datum
         datum: this.axis[0] === "x" ? this.x(d) : this.y(d),
+        formatter: this.state.current.get("computed").axes.computed[this.axis].tickFormatter || identity,
+        label: this.label(d),
         description: this.description(d),
         x: attributes.x ? attributes.x(d) : attributes.x2,
         y: attributes.y ? attributes.y(d) : attributes.y2,
       }
-
-      // @TODO check if this is still required / what it does?
-      // focusPoint.name = this.axis.type !== "quant" ? focusPoint.datum + ": " + options.name : options.name + ": " + focusPoint.datum
       this.events.emit(Events.FOCUS.FLAG.HOVER, focusPoint)
     }
   }

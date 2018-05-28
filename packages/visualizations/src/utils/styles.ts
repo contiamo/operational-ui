@@ -58,6 +58,7 @@ const componentFocusStyle = {
   border: 0,
   padding: 0,
   cursor: "pointer",
+  maxWidth: "initial",
 }
 
 const chartContainerStyle = {

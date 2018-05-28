@@ -11,6 +11,7 @@ const containerNode2 = document.getElementById("app2")
 
 import Chart from "../../src/Chart/facade"
 import { VisualizationWrapper } from "../../src/index"
+import { timeFormat } from "d3-time-format"
 
 const AreaRenderer: any = {
   accessors: {
@@ -27,7 +28,7 @@ const LineRenderer: any = {
 }
 
 const BarsRenderer: any = {
-  type: "bars"
+  type: "bars",
 }
 
 const FixedBarsRenderer: any = {
@@ -50,30 +51,40 @@ const TextRenderer: any = {
   type: "text",
   config: {
     offset: 5,
-  }
+  },
 }
 
 const StackedRenderer = {
   type: "stacked",
-  renderAs: [BarsRenderer, TextRenderer]
+  renderAs: [BarsRenderer, TextRenderer],
 }
 
-const XFlagRenderer = {
+const X1FlagRenderer = {
   type: "flag",
   config: {
-    axis: "x1",
-    axisPadding: 30
-  }
+    axis: "x1"
+  },
 }
 
-const YFlagRenderer = {
+const X2FlagRenderer = {
   type: "flag",
-  accessors: {
-    color: (series, d) => d.y > 250 ? "red" : "purple"
+  config: {
+    axis: "x2"
   },
+}
+
+const Y1FlagRenderer = {
+  type: "flag",
   config: {
     axis: "y1"
-  }
+  },
+}
+
+const Y2FlagRenderer = {
+  type: "flag",
+  config: {
+    axis: "y2"
+  },
 }
 
 const RangeRenderer = {
@@ -86,45 +97,45 @@ const createData: any = () => {
     series: [
       {
         data: [
-          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
-          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) }
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+          { x: "March 10th", y: Math.floor(Math.random() * 500) },
+          { x: "March 11th", y: Math.floor(Math.random() * 500) },
+          { x: "March 12th", y: Math.floor(Math.random() * 500) },
+          { x: "March 13th", y: Math.floor(Math.random() * 500) },
+          { x: "March 14th", y: Math.floor(Math.random() * 500) },
+          { x: "March 15th", y: Math.floor(Math.random() * 500) },
+          { x: "March 16th", y: Math.floor(Math.random() * 500) },
+          { x: "March 17th", y: Math.floor(Math.random() * 500) }
         ],
         name: "Pageviews 2018",
         key: "series1",
-        renderAs: [BarsRenderer, TextRenderer],
+        renderAs: [TextRenderer, SymbolRenderer],
       },
       {
         data: [
-          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 300) },
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 300) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 300) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 300) },
-          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 300) },
-          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) }
-          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) }
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) }
+          { x: "March 10th", y: Math.floor(Math.random() * 300) },
+          { x: "March 11th", y: Math.floor(Math.random() * 300) },
+          { x: "March 12th", y: Math.floor(Math.random() * 300) },
+          { x: "March 13th", y: Math.floor(Math.random() * 300) },
+          { x: "March 14th", y: Math.floor(Math.random() * 300) },
+          { x: "March 15th", y: Math.floor(Math.random() * 500) },
+          { x: "March 16th", y: Math.floor(Math.random() * 500) },
+          { x: "March 17th", y: Math.floor(Math.random() * 500) },
         ],
         name: "Users 2018",
         key: "series2",
-        renderAs: [BarsRenderer, TextRenderer],
+        renderAs: [TextRenderer, SymbolRenderer],
       },
       {
         series: [
           {
             data: [
-              { y: new Date(2018, 2, 10), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 11), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 13), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 14), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 15), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 16), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 17), x: Math.floor(Math.random() * 200 + 1000) }
+              { y: "March 10th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 11th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 13th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 14th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 15th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 16th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 17th", x: Math.floor(Math.random() * 200 + 1000) }
             ],
             name: "Metric 1",
             key: "series3",
@@ -134,14 +145,14 @@ const createData: any = () => {
           },
           {
             data: [
-              { y: new Date(2018, 2, 10), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 11), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 12), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 13), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 14), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 15), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 16), x: Math.floor(Math.random() * 200 + 1000) },
-              { y: new Date(2018, 2, 17), x: Math.floor(Math.random() * 200 + 1000) }
+              { y: "March 10th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 11th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 12th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 13th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 14th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 15th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 16th", x: Math.floor(Math.random() * 200 + 1000) },
+              { y: "March 17th", x: Math.floor(Math.random() * 200 + 1000) }
             ],
             name: "Metric 2",
             key: "series4",
@@ -152,13 +163,28 @@ const createData: any = () => {
         ],
         renderAs: [StackedRenderer]
       },
+      {
+        data: [
+          { y: 400, label: "Event 3", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." },
+        ],
+        name: "Event flags",
+        key: "flagsY1",
+        hideInLegend: true,
+        renderAs: [Y1FlagRenderer]
+      },
+      {
+        data: [
+          { y: 2000, label: "Event 4", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." }
+        ],
+        name: "Event flags",
+        key: "flagsY2",
+        hideInLegend: true,
+        renderAs: [Y2FlagRenderer]
+      }
     ],
     axes: {
       x1: {
-        type: "time",
-        start: new Date(2018, 2, 10),
-        end: new Date(2018, 2, 17),
-        interval: "day",
+        type: "categorical",
       },
       y1: {
         type: "quant"
@@ -170,11 +196,11 @@ const createData: any = () => {
   }
 }
 
-let data = createData()
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 1000}}/></OperationalUI>
+const data = createData()
+const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200}}/></OperationalUI>
 render(<App />, containerNode)
 
-setTimeout(() => {
-  data = createData()
-  render(<App />, containerNode)
-}, 3000);
+// setTimeout(() => {
+//   // data = createData()
+//   render(<App />, containerNode)
+// }, 3000);

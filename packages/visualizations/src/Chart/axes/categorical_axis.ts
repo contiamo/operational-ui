@@ -21,8 +21,9 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
-import { axisPosition, computeRequiredMargin, insertElements, positionBackgroundRect } from "./axis_utils"
+import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
+import Events from "../../utils/event_catalog"
 import { scaleBand } from "d3-scale"
 import * as styles from "./styles"
 import {
@@ -33,6 +34,7 @@ import {
   AxisType,
   CategoricalAxisOptions,
   ChartConfig,
+  ComponentConfigInfo,
   Computed,
   D3Selection,
   EventBus,
@@ -72,6 +74,7 @@ class CategoricalAxis implements AxisClass<string> {
     this.position = position
     this.isXAxis = position[0] === "x"
     this.el = insertElements(el, this.type, position, this.state.current.get("computed").canvas.drawingDims)
+    this.el.on("mouseenter", this.onComponentHover.bind(this))
   }
 
   // Categorical axis supports everything that supports ".toString()"
@@ -181,10 +184,7 @@ class CategoricalAxis implements AxisClass<string> {
 
   // Drawing
   draw(): void {
-    this.el.attr(
-      "transform",
-      `translate(${axisPosition(this.position, this.state.current.get("computed").canvas.drawingDims).join(",")})`
-    )
+    translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
     this.drawTicks()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
@@ -263,6 +263,7 @@ class CategoricalAxis implements AxisClass<string> {
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
     this.events.emit("margins:update", this.isXAxis)
+    translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
   }
 
   private drawBorder(): void {
@@ -274,6 +275,17 @@ class CategoricalAxis implements AxisClass<string> {
       y2: 0,
     }
     this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
+  }
+
+  private onComponentHover(): void {
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: this.el, options: this.hoverInfo() })
+  }
+
+  private hoverInfo(): ComponentConfigInfo {
+    return {
+      key: this.position,
+      type: "axis",
+    }
   }
 
   close(): void {

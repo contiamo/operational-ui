@@ -101,6 +101,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
   test("Render", () => {
     viz.data(data)
+    viz.config({ width: 1500 })
     viz.draw()
   })
 

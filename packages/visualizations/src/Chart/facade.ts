@@ -1,5 +1,6 @@
 import ChartCanvas from "./canvas"
 import ChartSeriesManager from "./series_manager"
+import ChartFocus from "./focus"
 import LegendManager from "./legend_manager"
 import AxesManager from "./axes_manager"
 import Events from "../utils/event_catalog"
@@ -7,7 +8,7 @@ import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { assign, defaults, has, uniqueId } from "lodash/fp"
+import { assign, defaults, has, isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
   AccessorsObject,
@@ -19,6 +20,7 @@ import {
   Data,
   Datum,
   Facade,
+  FocusElement,
   Object,
   Partial,
   RendererOptions,
@@ -28,16 +30,21 @@ import {
 
 const defaultConfig: Partial<ChartConfig> = {
   duration: 1e3,
+  flagFocusOffset: 15,
+  focusDateOptions: ["line", "points", "label"],
+  focusOffset: 5,
   height: 500,
   hidden: false,
   innerBarSpacing: 2,
   innerBarSpacingCategorical: 0.2,
   legend: true,
   maxBarWidthRatio: 1 / 3,
+  maxFocusLabelWidth: 350,
   minBarWidth: 3,
   numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   outerBarSpacing: 10,
   palette: theme.colors.visualizationPalette,
+  showComponentFocus: false,
   timeAxisPriority: ["x1", "x2", "y1", "y2"],
   visualizationName: "chart",
   width: 500,
@@ -110,6 +117,12 @@ class ChartFacade implements Facade {
 
   private insertComponents(): any {
     return {
+      axes: new AxesManager(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
+        xAxes: this.canvas.elementFor("xAxes"),
+        xRules: this.canvas.elementFor("xRules"),
+        yAxes: this.canvas.elementFor("yAxes"),
+        yRules: this.canvas.elementFor("yRules"),
+      }),
       legends: new LegendManager(this.state.readOnly(), this.state.computedWriter(["legend"]), this.events, {
         top: {
           left: this.canvas.elementFor("legend-top-left"),
@@ -119,11 +132,10 @@ class ChartFacade implements Facade {
           left: this.canvas.elementFor("legend-bottom-left"),
         },
       }),
-      axes: new AxesManager(this.state.readOnly(), this.state.computedWriter("axes"), this.events, {
-        xAxes: this.canvas.elementFor("xAxes"),
-        xRules: this.canvas.elementFor("xRules"),
-        yAxes: this.canvas.elementFor("yAxes"),
-        yRules: this.canvas.elementFor("yRules"),
+      focus: new ChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
+        main: this.canvas.elementFor("focus"),
+        component: this.canvas.elementFor("componentFocus"),
+        group: this.canvas.elementFor("focusGroup"),
       }),
     }
   }
@@ -175,6 +187,10 @@ class ChartFacade implements Facade {
     this.components.axes.draw()
     this.series.draw()
 
+    const focus: FocusElement = this.state.config().focus
+    !isEmpty(focus)
+      ? this.events.emit(focus.type === "date" ? Events.FOCUS.DATE : Events.FOCUS.ELEMENT.HIGHLIGHT, focus.value)
+      : this.events.emit(Events.FOCUS.CLEAR)
     return this.canvas.elementFor("series").node()
   }
 

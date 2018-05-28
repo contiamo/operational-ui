@@ -245,6 +245,8 @@ Symbol options are: "circle", "cross", "diamond", "square", "squareDiamond", "st
 | Name | Description | Type | Default
 | :--- | :--- | :--- | :---
 | duration | Speed at which transitions are animated | number | `1e3`
+| flagFocusOffset | Offset of focus label from event flags | number | 15
+| focusOffset | Offset of element or date focus label from focus point | number | 5
 | focusElement | Key of segment to be manually focussed. | string | undefined
 | height | Visualization height | number | 500
 | hidden | Hide/show the visualization div | boolean | false
@@ -253,6 +255,7 @@ Symbol options are: "circle", "cross", "diamond", "square", "squareDiamond", "st
 | legend | Show/hide legend | boolean | true
 | maxBarWidthRatio | Maximum bar width as proportion of total width | number | 1 / 3
 | minBarWidth | Minimum bar width | number | 3
+| maxFocusLabelWidth | Maximum width of focus labels | number | 350 
 | numberFormatter | Number formatter | function | `(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, ",")`
 | outerBarSpacing | Padding between groups of bars | number | 10
 | palette | Default color palette | string[] | theme.colors.visualizationPalette
