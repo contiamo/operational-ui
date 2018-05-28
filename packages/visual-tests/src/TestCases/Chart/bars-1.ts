@@ -6,13 +6,13 @@ const createSingleSeries = (renderers: any[]) => {
     series: [
       {
         data: [
-          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) - 250 },
         ],
         name: "Pageviews 2017",
         key: "series2",
@@ -38,11 +38,11 @@ const createData = (renderers: any[]) => {
     series: [
       {
         data: [
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
           { x: new Date(2018, 2, 14), y: undefined },
-          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) - 250 },
         ],
         name: "Pageviews 2018",
         key: "series1",
@@ -51,13 +51,13 @@ const createData = (renderers: any[]) => {
       },
       {
         data: [
-          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) - 250 },
         ],
         name: "Pageviews 2017",
         key: "series2",
@@ -121,11 +121,11 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       series: [
         {
           data: [
-            { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
+            { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+            { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+            { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
             { x: new Date(2018, 2, 14), y: undefined },
-            { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
+            { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) - 250 },
           ],
           name: "Pageviews 2018",
           key: "series1",
@@ -134,10 +134,10 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         },
         {
           data: [
-            { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
+            { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+            { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+            { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
+            { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) - 250 },
           ],
           name: "Pageviews 2017",
           key: "series2",

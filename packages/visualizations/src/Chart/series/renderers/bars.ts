@@ -114,10 +114,10 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x0 || 0)
-    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x1 || this.x(d))
-    this.y0 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y0 || 0 : this.y(d))
-    this.y1 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y1 || this.y(d) : this.y(d))
+    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x0 || (this.x(d) > 0 ? 0 : this.x(d)))
+    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x1 || (this.x(d) > 0 ? this.x(d) : 0))
+    this.y0 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y0 || (this.y(d) > 0 ? 0 : this.y(d)) : this.y(d))
+    this.y1 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y1 || (this.y(d) > 0 ? this.y(d) : 0) : this.y(d))
   }
 
   private validate(d: Datum): boolean {
