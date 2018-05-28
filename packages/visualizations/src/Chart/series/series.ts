@@ -32,10 +32,6 @@ const hasValue = (d: any): boolean => {
   return !!d || d === 0
 }
 
-const aOrB = (a: any, b: any): any => {
-  return hasValue(a) ? a : b
-}
-
 class ChartSeries {
   el: D3Selection
   events: EventBus
@@ -169,7 +165,8 @@ class ChartSeries {
     const xIsBaseline: boolean = this.state.current.get("computed").axes.baseline === "x"
     const baselineAccessor = (d: Datum) => (xIsBaseline ? this.x(d) || d.injectedX : this.y(d) || d.injectedY)
     const valueAccessor = xIsBaseline ? this.y : this.x
-    const positionAccessor = (d: Datum): any => (xIsBaseline ? aOrB(d.y1, this.y(d)) : aOrB(d.x1, this.x(d)))
+    const positionAccessor = (d: Datum): any =>
+      xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : hasValue(d.x1) ? d.x1 : this.x(d)
     const valueScale = this.state.current.get("computed").axes.computed[xIsBaseline ? this.yAxis() : this.xAxis()].scale
     const datum: Datum = find((d: Datum): boolean => {
       return baselineAccessor(d).toString() === focus.toString()
