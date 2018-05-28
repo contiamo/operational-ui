@@ -52,7 +52,7 @@ class Explore extends React.Component<Props, State> {
               }
               controls={
                 <React.Fragment>
-                  <Button condensed color="info">
+                  <Button color="info" loading>
                     Edit
                   </Button>
                 </React.Fragment>
