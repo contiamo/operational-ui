@@ -105,47 +105,47 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     viz.draw()
   })
 
-  // test("Change to time axis", () => {
-  //   viz.data(createData([{ type: "bars" }]))
-  //   viz.draw()
-  // })
+  test("Change to time axis", () => {
+    viz.data(createData([{ type: "bars" }]))
+    viz.draw()
+  })
 
-  // test("Increase tick padding", () => {
-  //   viz.config({ outerBarSpacing: 20 })
-  //   viz.draw()
-  // })
+  test("Increase tick padding", () => {
+    viz.config({ outerBarSpacing: 20 })
+    viz.draw()
+  })
 
-  // test("Assign widths", () => {
-  //   const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
-  //   viz.data(
-  //     createData([
-  //       {
-  //         accessors: {
-  //           barWidth,
-  //         },
-  //         type: "bars",
-  //       },
-  //     ])
-  //   )
-  //   viz.draw()
-  // })
+  test("Assign widths", () => {
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    viz.data(
+      createData([
+        {
+          accessors: {
+            barWidth,
+          },
+          type: "bars",
+        },
+      ])
+    )
+    viz.draw()
+  })
 
-  // test("Color accessors", () => {
-  //   const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
-  //   const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
-  //   viz.data(
-  //     createData([
-  //       {
-  //         accessors: {
-  //           barWidth,
-  //           color,
-  //         },
-  //         type: "bars",
-  //       },
-  //     ])
-  //   )
-  //   viz.draw()
-  // })
+  test("Color accessors", () => {
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
+    viz.data(
+      createData([
+        {
+          accessors: {
+            barWidth,
+            color,
+          },
+          type: "bars",
+        },
+      ])
+    )
+    viz.draw()
+  })
 
   afterAll(() => {
     viz.close()
