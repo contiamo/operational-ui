@@ -99,7 +99,7 @@ const Action = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   },
 }))
 
-const Progress = (props: Props) => (
+const Progress: React.SFC<Props> = props => (
   <Container id={props.id} css={props.css} className={props.className}>
     <Bar isError={Boolean(props.error)} />
     {props.error ? (
