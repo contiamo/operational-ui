@@ -3,7 +3,6 @@ import { operational as theme } from "@operational/theme"
 
 const tickStyle = {
   fill: theme.colors.gray,
-  fontSize: "11px",
   fontFamily: theme.fontFamily,
   "&.weekend": {
     fill: "#9d261d",

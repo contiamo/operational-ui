@@ -7,6 +7,7 @@ import * as axes3 from "./axes-3"
 import * as axes4 from "./axes-4"
 import * as axes5 from "./axes-5"
 import * as axes6 from "./axes-6"
+import * as axes7 from "./axes-7"
 import * as area1 from "./area-1"
 import * as area2 from "./area-2"
 import * as area3 from "./area-3"
@@ -31,6 +32,7 @@ export default [
   axes4,
   axes5,
   axes6,
+  axes7,
   area1,
   area2,
   area3,

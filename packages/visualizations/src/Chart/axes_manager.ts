@@ -20,13 +20,15 @@ import {
 } from "./typings"
 
 const xAxisConfig: Partial<XAxisConfig> = {
-  margin: 14,
+  fontSize: 11,
+  margin: 15,
   minTicks: 2,
   tickSpacing: 65,
   outerPadding: 3,
 }
 
 const yAxisConfig: Partial<YAxisConfig> = {
+  fontSize: 11,
   margin: 34,
   minTicks: 4,
   minTopOffsetTopTick: 21,
@@ -35,7 +37,7 @@ const yAxisConfig: Partial<YAxisConfig> = {
 }
 
 const axisConfig: Object<AxisConfig> = {
-  x1: assign({ tickOffset: 12 })(xAxisConfig),
+  x1: assign({ tickOffset: 4 })(xAxisConfig),
   x2: assign({ tickOffset: -4 })(xAxisConfig),
   y1: assign({ tickOffset: -4 })(yAxisConfig),
   y2: assign({ tickOffset: 4 })(yAxisConfig),
@@ -142,6 +144,14 @@ class AxesManager {
   }
 
   private onMarginsUpdated(isXAxis: boolean): void {
+    const computed = this.state.current.get("computed").axes
+    forEach((position: AxisPosition) => {
+      const axis = this.axes[position]
+      if (!axis) {
+        return
+      }
+      axis.updateOptions({ margin: computed.margins[position] })
+    })(isXAxis ? ["x1", "x2"] : ["y1", "y2"])
     const axesToUpdate: "x" | "y" = isXAxis ? "y" : "x"
     this.drawAxes(axesToUpdate)
   }

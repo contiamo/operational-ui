@@ -58,6 +58,7 @@ class QuantAxis implements AxisClass<number> {
   interval: number
   unit: string
   showRules: boolean = true
+  fontSize: number
   margin: number
   minTicks: number
   minTopOffsetTopTick: number
@@ -80,7 +81,7 @@ class QuantAxis implements AxisClass<number> {
     return isFinite(value)
   }
 
-  private updateOptions(options: QuantAxisOptions): void {
+  updateOptions(options: Partial<QuantAxisOptions>): void {
     forEach.convert({ cap: false })((value: any, key: string): void => {
       ;(this as any)[key] = value
     })(options)
@@ -190,6 +191,7 @@ class QuantAxis implements AxisClass<number> {
       .call(setTextAttributes, startAttributes)
       .merge(ticks)
       .attr("class", `${styles.tick} ${styles[this.position]}`)
+      .style("font-size", `${this.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
     ticks
@@ -203,19 +205,13 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private adjustMargins(): void {
-    const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    let requiredMargin: number = computeRequiredMargin(
-      this.el,
-      computedMargins,
-      this.margin,
-      this.outerPadding,
-      this.position
-    )
+    let requiredMargin: number = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
 
     // Add space for flags
     const flagAxis: Object<any> = this.state.current.get("computed").series.axesWithFlags[this.position]
     requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
+    const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
@@ -234,7 +230,7 @@ class QuantAxis implements AxisClass<number> {
   private getAttributes(): AxisAttributes {
     return {
       dx: this.isXAxis ? 0 : this.tickOffset,
-      dy: this.isXAxis ? this.tickOffset : "-0.4em",
+      dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : "-0.4em",
       text: this.tickFormatter(),
       x: this.isXAxis ? this.computed.scale : 0,
       y: this.isXAxis ? 0 : this.computed.scale,
