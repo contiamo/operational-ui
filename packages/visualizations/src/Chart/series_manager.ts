@@ -269,12 +269,12 @@ class ChartSeriesManager implements SeriesManager {
   }
 
   private dataForAxes(): any[] {
-    const data: any = { x1: [], x2: [], y1: [], y2: [] }
+    const data: any = {}
     forEach((series: Series): void => {
       const xAxis: string = series.xAxis()
       const yAxis: string = series.yAxis()
-      data[xAxis] = uniqBy(String)(data[xAxis].concat(series.dataForAxis("x")))
-      data[yAxis] = uniqBy(String)(data[yAxis].concat(series.dataForAxis("y")))
+      data[xAxis] = uniqBy(String)((data[xAxis] || []).concat(series.dataForAxis("x")))
+      data[yAxis] = uniqBy(String)((data[yAxis] || []).concat(series.dataForAxis("y")))
     })(this.series)
 
     return data

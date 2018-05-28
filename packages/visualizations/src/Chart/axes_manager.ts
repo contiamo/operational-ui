@@ -1,6 +1,6 @@
 import Axis from "./axes/axis"
 import Rules from "../Chart/axes/rules"
-import { any, assign, defaults, find, forEach, get, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
+import { any, assign, defaults, difference, find, forEach, get, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import {
   AxesData,
@@ -84,7 +84,16 @@ class AxesManager {
     this.stateWriter("previous", {})
     this.stateWriter("computed", {})
     this.axesDrawn = []
+
+    // Check all required axes have been configured
+    const requiredAxes = keys(this.state.current.get("computed").series.dataForAxes)
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
+    const undefinedAxes: AxisPosition[] = difference(requiredAxes)(keys(axesOptions))
+    if (undefinedAxes.length) {
+      throw new Error(`The following axes have not been configured: ${undefinedAxes.join(", ")}`)
+    }
+    this.stateWriter("requiredAxes", requiredAxes)
+
     // Remove axes that are no longer needed, or whose type has changed
     const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition): boolean => {
       return !axesOptions[key] || axesOptions[key].type === axis.type
@@ -93,7 +102,6 @@ class AxesManager {
     // Create or update currently required axes
     forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions)
     this.setBaselines()
-    this.stateWriter("requiredAxes", keys(this.axes))
     this.stateWriter("priorityTimeAxis", this.priorityTimeAxis())
   }
 
