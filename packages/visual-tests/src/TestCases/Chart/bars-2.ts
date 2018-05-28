@@ -5,6 +5,10 @@ const BarsRenderer = {
   type: "bars",
 }
 
+const TextRenderer = {
+  type: "text",
+}
+
 const data: any = {
   series: [
     {
@@ -19,7 +23,7 @@ const data: any = {
       yAttribute: "x",
       name: "Pageviews",
       key: "series1",
-      renderAs: [BarsRenderer],
+      renderAs: [BarsRenderer, TextRenderer],
     },
     {
       data: [
@@ -35,7 +39,7 @@ const data: any = {
       yAttribute: "x",
       name: "Users",
       key: "series2",
-      renderAs: [BarsRenderer],
+      renderAs: [BarsRenderer, TextRenderer],
     },
   ],
   axes: {
@@ -106,7 +110,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 
   test("Change to time axis", () => {
-    viz.data(createData([{ type: "bars" }]))
+    viz.data(createData([BarsRenderer, TextRenderer]))
     viz.draw()
   })
 

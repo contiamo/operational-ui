@@ -63,6 +63,7 @@ const textStyle = {
   "& text": {
     fill: "#333",
     fontFamily: theme.fontFamily,
+    dominantBaseline: "middle",
   },
 }
 
