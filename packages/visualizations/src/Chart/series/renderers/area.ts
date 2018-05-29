@@ -224,12 +224,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private path(data: Datum[]): string {
-    return this.createAreaPath({
-      x0: this.x0,
-      x1: this.x1,
-      y0: this.y0,
-      y1: this.y1,
-    })(data)
+    return this.createAreaPath(this)(data)
   }
 
   private clipPath(data: Datum[]): string {

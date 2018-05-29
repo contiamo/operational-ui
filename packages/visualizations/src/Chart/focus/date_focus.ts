@@ -4,7 +4,6 @@ import {
   D3Selection,
   Dimensions,
   EventBus,
-  HoverPayload,
   Object,
   Point,
   State,
@@ -32,12 +31,12 @@ import * as globalStyles from "../../utils/styles"
 
 class DateFocus {
   el: D3Selection
-  els: Object<D3Selection>
+  els: { [key: string]: D3Selection }
   elGroup: D3Selection
   events: EventBus
   state: State
 
-  constructor(state: State, els: Object<D3Selection>, events: EventBus) {
+  constructor(state: State, els: { [key: string]: D3Selection }, events: EventBus) {
     this.state = state
     this.els = els
     this.el = els.main

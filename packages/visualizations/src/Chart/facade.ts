@@ -8,7 +8,7 @@ import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { assign, defaults, has, isEmpty, uniqueId } from "lodash/fp"
+import { defaults, has, isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
   AccessorsObject,
@@ -18,6 +18,7 @@ import {
   Components,
   Computed,
   Data,
+  DataAccessors,
   Datum,
   Facade,
   FocusElement,
@@ -28,29 +29,31 @@ import {
   SeriesData,
 } from "./typings"
 
-const defaultConfig: Partial<ChartConfig> = {
-  duration: 1e3,
-  flagFocusOffset: 15,
-  focusDateOptions: ["line", "points", "label"],
-  focusOffset: 5,
-  height: 500,
-  hidden: false,
-  innerBarSpacing: 2,
-  innerBarSpacingCategorical: 0.2,
-  legend: true,
-  maxBarWidthRatio: 1 / 3,
-  maxFocusLabelWidth: 350,
-  minBarWidth: 3,
-  numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-  outerBarSpacing: 10,
-  palette: theme.colors.visualizationPalette,
-  showComponentFocus: false,
-  timeAxisPriority: ["x1", "x2", "y1", "y2"],
-  visualizationName: "chart",
-  width: 500,
+const defaultConfig = (): Partial<ChartConfig> => {
+  return {
+    duration: 1e3,
+    flagFocusOffset: 15,
+    focusDateOptions: ["line", "points", "label"],
+    focusOffset: 5,
+    height: 500,
+    hidden: false,
+    innerBarSpacing: 2,
+    innerBarSpacingCategorical: 0.2,
+    legend: true,
+    maxBarWidthRatio: 1 / 3,
+    maxFocusLabelWidth: 350,
+    minBarWidth: 3,
+    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    outerBarSpacing: 10,
+    palette: theme.colors.visualizationPalette,
+    showComponentFocus: false,
+    timeAxisPriority: ["x1", "x2", "y1", "y2"],
+    visualizationName: "chart",
+    width: 500,
+  }
 }
 
-const defaultDataAccessors = {
+const defaultDataAccessors: DataAccessors = {
   series: (d: Data): SeriesData => d.series,
   axes: (d: Data): AxesData => d.axes,
 }
@@ -59,7 +62,7 @@ const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
   return colorAssigner(palette)
 }
 
-const initialColorAssigner: (key: string) => string = defaultColorAssigner(defaultConfig.palette)
+const initialColorAssigner: (key: string) => string = defaultColorAssigner(defaultConfig().palette)
 
 const defaultSeriesAccessors: SeriesAccessors = {
   data: (d: Object<any>): Datum[] => d.data,
@@ -105,7 +108,7 @@ class ChartFacade implements Facade {
   private insertState(): StateHandler<ChartConfig, Data> {
     return new StateHandler({
       data: {},
-      config: defaults({ uid: uniqueId("chart") })(defaultConfig),
+      config: defaults({ uid: uniqueId("chart") })(defaultConfig()),
       accessors: { data: defaultDataAccessors, series: defaultSeriesAccessors },
       computed: initialComputed,
     })

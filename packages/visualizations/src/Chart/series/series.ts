@@ -97,7 +97,7 @@ class ChartSeries {
   }
 
   get(type: string): RendererClass<any> {
-    return find((renderer: RendererClass<any>): boolean => renderer.type === type)(this.renderers)
+    return find({ type })(this.renderers)
   }
 
   private addRenderer(options: SingleRendererOptions<any>): void {
@@ -132,9 +132,7 @@ class ChartSeries {
   }
 
   getBarsInfo(): Object<any> {
-    const barRenderer: RendererClass<BarsRendererAccessors> = find(
-      (renderer: RendererClass<any>): boolean => renderer.type === "bars"
-    )(this.renderers)
+    const barRenderer: RendererClass<BarsRendererAccessors> = find({ type: "bars" })(this.renderers)
     if (!barRenderer) {
       return
     }

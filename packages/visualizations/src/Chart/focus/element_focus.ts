@@ -8,7 +8,6 @@ import {
   Object,
   Point,
   State,
-  MousePosition,
   AxisPosition,
 } from "../typings"
 import Events from "../../utils/event_catalog"
@@ -32,11 +31,11 @@ import * as globalStyles from "../../utils/styles"
 
 class ElementFocus {
   el: D3Selection
-  els: Object<D3Selection>
+  els: { [key: string]: D3Selection }
   events: EventBus
   state: State
 
-  constructor(state: State, els: Object<D3Selection>, events: EventBus) {
+  constructor(state: State, els: { [key: string]: D3Selection }, events: EventBus) {
     this.state = state
     this.el = els.main
     this.els = els

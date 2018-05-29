@@ -191,6 +191,7 @@ declare namespace fp {
     pluck: any
     rangeStep: any
     remove: any
+    set: any
     size: any
     some: any
     tail: any

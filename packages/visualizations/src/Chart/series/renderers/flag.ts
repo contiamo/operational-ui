@@ -241,13 +241,13 @@ class Flag implements RendererClass<FlagRendererAccessors> {
 
       // Unless an event flag is at the top of the chart, move label to below the line.
       const dx: number = this.axis[1] === "1" ? -dimensions.width : 0
-      let dy: number
+      let dy: number = dimensions.height / 2
       switch (this.position) {
         case "x":
-          dy = this.direction(d) === "down" ? -dimensions.height / 2 : dimensions.height / 2
+          dy = dy * (this.direction(d) === "down" ? -1 : 1)
           break
         case "y":
-          dy = this.direction(d) === "down" || coordinates.y === 0 ? dimensions.height / 2 : -dimensions.height / 2
+          dy = dy * (this.direction(d) === "down" || coordinates.y === 0 ? 1 : -1)
           break
         default:
           throw new Error(`Invalid axis name ${this.axis}.`)
