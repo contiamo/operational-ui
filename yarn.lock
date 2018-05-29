@@ -18,6 +18,20 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@operational/blocks@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@operational/blocks/-/blocks-0.1.2.tgz#876de4b023980474c6dd0beea72902aeafaa37e7"
+  dependencies:
+    "@operational/components" "^0.1.2"
+    "@operational/theme" "^0.1.2"
+    "@operational/utils" "^0.1.2"
+    glamor "^2.20.40"
+    glamorous "^4.6.0"
+    moment "^2.19.0"
+    react "^16.2.0"
+    react-color "^2.13.8"
+    react-dom "^16.2.0"
+
 "@types/cheerio@*":
   version "0.22.7"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.7.tgz#4a92eafedfb2b9f4437d3a4410006d81114c66ce"

@@ -4,6 +4,7 @@ import { css } from "glamor"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
+import deprecate from "../utils/deprecate"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon } from "../"
 
@@ -99,7 +100,7 @@ const Action = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   },
 }))
 
-const Progress = (props: Props) => (
+const Progress: React.SFC<Props> = props => (
   <Container id={props.id} css={props.css} className={props.className}>
     <Bar isError={Boolean(props.error)} />
     {props.error ? (

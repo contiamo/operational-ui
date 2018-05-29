@@ -27,12 +27,8 @@ class FlagFocus {
 
     const position =
       focusData.axis[0] === "x"
-        ? focusData.direction === "up"
-          ? "toRight"
-          : "toLeft"
-        : focusData.direction === "up"
-          ? "above"
-          : "below"
+        ? focusData.direction === "up" ? "toRight" : "toLeft"
+        : focusData.direction === "up" ? "above" : "below"
 
     FocusUtils.drawHidden(this.el, "flag", position)
 

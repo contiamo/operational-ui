@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Theme } from "@operational/theme"
 
-import { WithTheme, Css } from "../types"
+import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   css?: Css
@@ -18,7 +18,7 @@ export interface Props {
   onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): {} => ({
+const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "table",
   width: "100%",
   position: "relative",
