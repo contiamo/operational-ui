@@ -14,17 +14,21 @@ import * as React from "react"
  *   ...(props.oldProp ? [ "oldProp is deprecated, use newProp instead" ] : [])
  * ])(Comp)
  *
+ * Typing caveats may arise. For functional components, the easiest fix is
+ * to type them explicitly as React.SFC.
  */
 function deprecate<P>(createWarning: (props: P) => string[]) {
   return (Component: React.ComponentType<P>): React.ComponentType<P> => {
-    let logCount = 0
-    return (props: P) => {
-      const deprecation = createWarning(props)
-      if (process.env.NODE_ENV === "development" && deprecation.length > 0 && logCount === 0) {
-        console.log(`Operational UI warnings:\n\n  * ${deprecation.join("\n  * ")}`)
-        logCount = logCount + 1
+    return class extends React.Component<P> {
+      componentDidMount() {
+        const warnings = createWarning(this.props)
+        if (process.env.NODE_ENV === "development" && warnings.length > 0) {
+          console.warn(`Operational UI deprecation warnings:\n  * ${warnings.join("\n  * ")}`)
+        }
       }
-      return <Component {...props} />
+      render() {
+        return <Component {...this.props} />
+      }
     }
   }
 }

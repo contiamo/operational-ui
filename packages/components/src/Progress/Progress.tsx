@@ -4,6 +4,7 @@ import { css } from "glamor"
 import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
+import deprecate from "../utils/deprecate"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon } from "../"
 
