@@ -22,7 +22,7 @@ function deprecate<P>(createWarning: (props: P) => string[]) {
     return class extends React.Component<P> {
       componentDidMount() {
         const warnings = createWarning(this.props)
-        if (process.env.NODE_ENV === "development" && warnings.length > 0) {
+        if (process.env.NODE_ENV !== "production" && warnings.length > 0) {
           console.warn(`Operational UI deprecation warnings:\n  * ${warnings.join("\n  * ")}`)
         }
       }
