@@ -152,14 +152,6 @@ class AxesManager {
   }
 
   private onMarginsUpdated(isXAxis: boolean): void {
-    const computed = this.state.current.get("computed").axes
-    forEach((position: AxisPosition) => {
-      const axis = this.axes[position]
-      if (!axis) {
-        return
-      }
-      axis.updateOptions({ margin: computed.margins[position] })
-    })(isXAxis ? ["x1", "x2"] : ["y1", "y2"])
     const axesToUpdate: "x" | "y" = isXAxis ? "y" : "x"
     this.drawAxes(axesToUpdate)
   }

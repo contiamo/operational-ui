@@ -241,7 +241,6 @@ export interface AxisClass<T> {
   previous: AxisComputed
   showRules: boolean
   update: (options: AxisOptions, data: T[]) => void
-  updateOptions: (options: Partial<AxisOptions>) => void
   close: () => void
 }
 

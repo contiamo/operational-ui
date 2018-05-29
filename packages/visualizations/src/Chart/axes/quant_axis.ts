@@ -81,7 +81,7 @@ class QuantAxis implements AxisClass<number> {
     return isFinite(value)
   }
 
-  updateOptions(options: Partial<QuantAxisOptions>): void {
+  private updateOptions(options: QuantAxisOptions): void {
     forEach.convert({ cap: false })((value: any, key: string): void => {
       ;(this as any)[key] = value
     })(options)

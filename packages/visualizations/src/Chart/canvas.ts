@@ -62,7 +62,6 @@ class ChartCanvas implements Canvas {
     this.stateWriter("elements", this.elements)
     this.events.on("margins:update", (isXAxis: boolean): void => {
       this.draw()
-      this.calculateDrawingDims()
       this.events.emit("margins:updated", isXAxis)
     })
   }
@@ -253,11 +252,6 @@ class ChartCanvas implements Canvas {
     return margins[axis] || 0
   }
 
-  private calculateDimensions(): void {
-    this.calculateDrawingContainerDims()
-    this.calculateDrawingDims()
-  }
-
   private calculateDrawingContainerDims(): void {
     const config = this.state.current.get("config")
     this.stateWriter("drawingContainerDims", {
@@ -306,7 +300,7 @@ class ChartCanvas implements Canvas {
 
   // Lifecycle
   draw(): void {
-    this.calculateDimensions()
+    this.calculateDrawingContainerDims()
 
     // Set classes
     this.chartContainer.attr("class", `${styles.chartContainer} ${this.state.current.get("config").uid}`)
@@ -324,6 +318,7 @@ class ChartCanvas implements Canvas {
     this.elements.drawing.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
     this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
 
+    this.calculateDrawingDims()
     this.updateClipPaths()
     this.el.on("mousemove", this.onMouseMove.bind(this))
   }

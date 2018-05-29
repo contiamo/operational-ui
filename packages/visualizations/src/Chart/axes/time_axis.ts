@@ -113,7 +113,7 @@ class TimeAxis implements AxisClass<Date> {
     return isDate(value)
   }
 
-  updateOptions(options: Partial<TimeAxisOptions>): void {
+  private updateOptions(options: TimeAxisOptions): void {
     forEach.convert({ cap: false })((value: any, key: string): void => {
       ;(this as any)[key] = value
     })(options)

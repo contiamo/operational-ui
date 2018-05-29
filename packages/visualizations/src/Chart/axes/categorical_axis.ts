@@ -83,7 +83,7 @@ class CategoricalAxis implements AxisClass<string> {
     return !isNil(value)
   }
 
-  updateOptions(options: Partial<CategoricalAxisOptions>): void {
+  private updateOptions(options: CategoricalAxisOptions): void {
     forEach.convert({ cap: false })((value: any, key: string): void => {
       ;(this as any)[key] = value
     })(options)
