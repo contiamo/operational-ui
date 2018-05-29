@@ -8,6 +8,7 @@ import { Props as SidenavProps } from "../Sidenav/Sidenav"
 import { sidenavExpandedWidth } from "../constants"
 
 export interface Props {
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Side navigation, see `Sidenav` component */

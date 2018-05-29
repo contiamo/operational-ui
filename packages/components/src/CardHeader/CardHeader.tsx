@@ -6,8 +6,10 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: any
   className?: string
+  /** Children, typically a single string serving as a title. A controls element such as a condensed works well as a second child. */
   children?: React.ReactNode
 }
 

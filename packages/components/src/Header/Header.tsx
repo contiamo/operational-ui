@@ -6,8 +6,9 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  className?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
+  className?: string
   children?: React.ReactNode
 }
 

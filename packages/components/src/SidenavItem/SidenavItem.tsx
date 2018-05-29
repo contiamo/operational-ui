@@ -7,10 +7,11 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
+  css?: Css
   className?: string
   onClick?: () => void
   active?: boolean
-  css?: Css
   label: string
 }
 

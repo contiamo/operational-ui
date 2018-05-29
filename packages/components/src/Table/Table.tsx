@@ -5,6 +5,7 @@ import { Theme } from "@operational/theme"
 import { WithTheme, Css } from "../types"
 
 export interface Props {
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   children?: React.ReactNode

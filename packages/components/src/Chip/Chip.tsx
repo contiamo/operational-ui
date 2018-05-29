@@ -10,7 +10,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   /** Id */
   id?: string
-  /** Glamorous CSS */
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   /**
    * What color of chip would you like? It can be a hex value or a named theme color
@@ -19,7 +19,7 @@ export interface Props {
   color?: string
   /** Handle clicks on the chip's body. This is never triggered when the icon bar is clicked. When an icon is not specified, however, this basically turns into a full element click handler. */
   onClick?: () => void
-  /** Handle clicks on the chip's icon area on the right  */
+  /** Handle clicks on the chip's icon area on the right. */
   onIconClick?: () => void
   /** Class name */
   className?: string

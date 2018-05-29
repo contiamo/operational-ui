@@ -9,6 +9,7 @@ import { Icon } from "../"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Show an error instead of the progress */

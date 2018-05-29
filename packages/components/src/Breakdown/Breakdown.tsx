@@ -9,7 +9,7 @@ import { IconName } from "../"
 export interface Props {
   /** Id */
   id?: string
-  /** Glamorous CSS */
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   /** Class name */
   className?: string
