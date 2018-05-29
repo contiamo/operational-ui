@@ -28,7 +28,6 @@ const Container = glamorous.div(
     expandOnHover,
   }: {
     theme: Theme
-    color?: string
     fix?: boolean
     expandOnHover?: boolean
     expanded?: boolean
@@ -50,7 +49,7 @@ const Container = glamorous.div(
 
     return {
       color,
-      background: `linear-gradient(to bottom right, ${backgroundColor}, ${lighterBackgroundColor})`,
+      background: theme.colors.white,
       label: "sidenav",
       width: expanded ? sidenavExpandedWidth : theme.box,
       zIndex: theme.baseZIndex + 100,

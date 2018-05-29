@@ -46,6 +46,7 @@ const Content = glamorous.div(
 
 const Label = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   ...theme.typography.heading1,
+  color: theme.colors.black,
   fontSize: 14,
   width: "fit-content",
   whiteSpace: "nowrap",

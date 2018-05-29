@@ -40,7 +40,6 @@ class Explore extends React.Component<Props, State> {
                 <SidenavItem label="The First Prize" />
               </SidenavHeader>
               <SidenavHeader label="Let It Snow" icon="CloudSnow" />
-              <SidenavHeader label="Hello" icon="Settings" />
             </Sidenav>
           }
           main={
