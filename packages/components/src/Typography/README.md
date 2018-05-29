@@ -7,7 +7,7 @@ Their recommended use:
 * `<Body/>`: ordinary body text.
 * `<Small/>`: small text reserved for form labels and other secondary content. Consider combining them with an opacity or a lighter color.
 
-## Usage
+### Usage
 
 ```js
 <>

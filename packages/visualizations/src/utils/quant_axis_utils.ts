@@ -85,9 +85,7 @@ export const guess = (data: number[] = []): number[] => {
     return val === 0
       ? [0, 100]
       : // Make sure axis has right direction
-        val < 0
-        ? [2 * val, 0]
-        : [0, 2 * val]
+        val < 0 ? [2 * val, 0] : [0, 2 * val]
   }
 
   // Ensure domain includes zero

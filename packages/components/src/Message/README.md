@@ -1,15 +1,17 @@
 Messages are the primitive building blocks for notification systems common in frontend applications. A single message simply includes some body (any html/React element) and an optional close icon.
 
-## Usage
+### Usage
 
-### Short message
+#### Short message
+
 ```jsx
 <Message color="error">
   Oh no… An error occured :(
 </Message>
 ```
 
-### Long message
+#### Long message
+
 ```jsx
 <Message color="info">
   This is an important message from the New York City Police Department. Keep
