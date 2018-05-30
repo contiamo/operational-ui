@@ -34,8 +34,9 @@ export interface Props {
   start?: string
   /** End date in the format YYYY-MM-DD. */
   end?: string
-  /** Triggered every time the start or end dates change. */
+  /** Triggered every time the start or end dates change. `undefined` values clear start or end values. */
   onChange?: (date: { start?: string; end?: string }) => void
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Placeholder text when no dates selected */

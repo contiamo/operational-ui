@@ -7,6 +7,7 @@ import { Icon, IconName } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   children?: React.ReactNode

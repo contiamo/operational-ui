@@ -5,7 +5,9 @@ import { Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
+  /** DOM id attribute, useful for hash linking */
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   children?: React.ReactNode

@@ -7,6 +7,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"
 
 export interface Props {
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   id?: string

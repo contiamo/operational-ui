@@ -8,6 +8,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   label: string | React.ReactNode
@@ -15,6 +16,7 @@ export interface Props {
   active?: boolean
   expanded?: boolean
   onClick?: () => void
+  children?: React.ReactNode
 }
 
 const Container = glamorous.div({
@@ -69,6 +71,7 @@ const SidenavHeader = (props: Props) => (
       </IconContainer>
       <Label>{props.label}</Label>
     </Content>
+    {props.children}
   </Container>
 )
 

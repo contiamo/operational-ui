@@ -10,17 +10,17 @@ export interface Props {
   name: string
   /** Title of the person */
   title?: string
-  /** Optionally display the full name next to the avatar */
+  /** Optionally display the name and title next to the avatar circle */
   showName?: boolean
-  /** Hide initials if is true */
+  /** Hide initials from inside the avatar circle. Set automatically if a `photo` prop is set */
   hideInitials?: boolean
   /** A URL to an image of the person */
   photo?: string
-  /** Glamorous CSS */
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   /** Class name */
   className?: string
-  /** Color assigned to the avatar circle */
+  /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
   assignColor?: boolean

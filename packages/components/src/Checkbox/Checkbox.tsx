@@ -7,10 +7,14 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
+  /** Checkbox options */
   options: string[]
+  /** Selected options */
   selected: string[]
+  /** Callback fired when the selection options change. */
   onChange?: (newOptions: string[]) => void
 }
 

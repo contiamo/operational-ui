@@ -7,10 +7,11 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   /** Id */
   id?: string
-  /** Glamorous CSS */
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   /** Class name */
   className?: string
+  /** Children as a list of `Button` elements. Avoid mixing condensed and full-height buttons. */
   children?: React.ReactNode
 }
 

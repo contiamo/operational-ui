@@ -2,14 +2,16 @@ Messages are the primitive building blocks for notification systems common in fr
 
 ### Usage
 
-### Short message
+#### Short message
+
 ```jsx
 <Message color="error">
   Oh no… An error occured :(
 </Message>
 ```
 
-### Long message
+#### Long message
+
 ```jsx
 <Message color="info">
   This is an important message from the New York City Police Department. Keep

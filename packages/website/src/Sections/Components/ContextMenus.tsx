@@ -4,7 +4,7 @@ import * as constants from "../../constants"
 
 export const title = "Context Menus"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/context-menu.md`
+export const docsUrl = `${constants.docsBaseUrl}/#contextmenu`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/ContextMenus.tsx`
 

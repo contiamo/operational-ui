@@ -6,9 +6,10 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
-  /** Content CSS override */
+  /** `css` prop for the content inside the backdrop */
   contentCss?: Css
   /** Content class name */
   contentClassName?: string

@@ -9,6 +9,7 @@ import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, Form
 import { inputDefaultWidth } from "../constants"
 
 export interface Props {
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Text displayed when the input field has no value. */
@@ -25,7 +26,9 @@ export interface Props {
   inputRef?: (node: any) => void
   /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
   onChange?: (newVal: string) => void
+  /** Focus handler */
   onFocus?: (ev: any) => void
+  /** Blur handler */
   onBlur?: (ev: any) => void
   type?: string
   children?: string

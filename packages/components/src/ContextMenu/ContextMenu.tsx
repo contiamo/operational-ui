@@ -9,9 +9,9 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   /** Id */
   id?: string
-  /** Glamorous CSS */
+  /** `css` prop as expected in a glamorous component */
   css?: Css
-  /** Styling overrides for the menu's container */
+  /** `css` prop for the menu's popup container */
   menuCss?: Css
   /** Class name */
   className?: string

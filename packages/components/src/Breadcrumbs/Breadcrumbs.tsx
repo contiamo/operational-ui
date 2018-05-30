@@ -6,7 +6,9 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   className?: string
-  css?: {}
+  /** `css` prop as expected in a glamorous component */
+  css?: Css
+  /** Children as `Breadcrumb` elements */
   children?: React.ReactNode
 }
 

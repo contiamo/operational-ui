@@ -6,7 +6,7 @@ import { Subsection } from "../../components"
 
 export const title = "Inputs"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/input.md`
+export const docsUrl = `${constants.docsBaseUrl}/#input`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Inputs.tsx`
 

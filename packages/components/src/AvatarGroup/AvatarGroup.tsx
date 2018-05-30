@@ -5,7 +5,7 @@ import { Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
-  /** Glamorous CSS */
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   /** Class name */
   className?: string

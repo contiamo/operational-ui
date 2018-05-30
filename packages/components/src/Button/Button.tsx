@@ -9,16 +9,14 @@ import Spinner from "../Spinner/Spinner"
 
 export interface Props {
   id?: string
+  /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Invoked when you click on the button */
   onClick?: React.HTMLProps<HTMLButtonElement>["onClick"]
   type?: string
   children?: React.ReactNode
-  /**
-   * What color of button would you like? It can be a hex value or a named theme color
-   * @default white
-   */
+  /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
   color?: string
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
   loading?: boolean

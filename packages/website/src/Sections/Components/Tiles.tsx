@@ -4,7 +4,7 @@ import * as constants from "../../constants"
 
 export const title = "Tiles"
 
-export const docsUrl = `${constants.docsBaseUrl}/components/tile.md`
+export const docsUrl = `${constants.docsBaseUrl}/#tile`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Tiles.tsx`
 
