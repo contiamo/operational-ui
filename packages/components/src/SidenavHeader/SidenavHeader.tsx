@@ -12,31 +12,43 @@ export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
+  /** Main label for the header */
   label: string | React.ReactNode
   /**
-   * Side nav icons are no longer rendered.
+   * Specifies an icon to render on the left of the label
    *
-   * @deprecated
+   * @deprecated this prop is ignored as per design decision
    */
   icon?: IconName | React.ReactNode
   /** Color used in highlights and the side strip (hex or named color from `theme.colors`) */
   color?: string
+  /** Active state - renders colored strip on the left */
   active?: boolean
+  /** Expanded state */
   expanded?: boolean
+  /** Click handler */
   onClick?: () => void
+  /** Close handler (via chevron button on the top right) */
+  onClose?: () => void
   children?: React.ReactNode
 }
 
+export interface State {
+  isOpen: boolean
+}
+
 const Container = glamorous.div(
-  ({ theme, color, active }: { theme: Theme; color?: string; active?: boolean }): CssStatic => {
+  ({ theme, color, isActive }: { theme: Theme; color?: string; isActive: boolean }): CssStatic => {
     const stripColor: string = expandColor(theme, color) || theme.colors.info
     return {
       label: "sidenavheader",
       width: "100%",
+      position: "relative",
       borderBottom: "1px solid",
       borderLeft: "4px solid",
-      borderLeftColor: active ? stripColor : "transparent",
+      borderLeftColor: isActive ? stripColor : "transparent",
       borderBottomColor: theme.colors.separator,
+      backgroundColor: isActive ? "#F9F9F9" : "transparent",
     }
   }
 )
@@ -53,7 +65,7 @@ const Content = glamorous.div(
     padding: `0 ${theme.spacing}px`,
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
-    color: isActive ? theme.colors.linkText : "#333333",
+    color: "#333333",
     fontWeight: 600,
     fontSize: 14,
     textTransform: "uppercase",
@@ -69,23 +81,58 @@ const ItemsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   top: -theme.spacing / 2,
 }))
 
-const SidenavHeader = (props: Props) => (
-  // See ./SidenavItem.tsx for reason why class name is set.
-  // Note that the click listener is set on `<Content>` so it doesn't interfere
-  // with click listeners set on the children.
-  <Container
-    id={props.id}
-    css={props.css}
-    color={props.color}
-    active={props.active}
-    className={["op_sidenavheader", props.className].filter(a => !!a).join(" ")}
-  >
-    <Content isActive={!!props.active} isExpanded={!!props.expanded} onClick={props.onClick}>
-      {props.label}
-    </Content>
-    <ItemsContainer>{props.children}</ItemsContainer>
-  </Container>
-)
+const CloseButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  position: "absolute",
+  cursor: "pointer",
+  width: theme.spacing,
+  height: theme.spacing,
+  top: theme.spacing * 1.25,
+  right: theme.spacing,
+  color: theme.colors.info,
+  "& svg": {
+    width: "100%",
+    height: "100%",
+  },
+}))
+
+class SidenavHeader extends React.Component<Props, State> {
+  state = {
+    isOpen: true,
+  }
+
+  render() {
+    const isActive = Boolean(this.props.active)
+    // See ./SidenavItem.tsx for reason why class name is set.
+    // Note that the click listener is set on `<Content>` so it doesn't interfere
+    // with click listeners set on the children.
+    return (
+      <Container
+        id={this.props.id}
+        css={this.props.css}
+        color={this.props.color}
+        isActive={isActive}
+        className={["op_sidenavheader", this.props.className].filter(a => !!a).join(" ")}
+      >
+        <Content isActive={!!this.props.active} isExpanded={!!this.props.expanded} onClick={this.props.onClick}>
+          {this.props.label}
+        </Content>
+        {isActive &&
+          React.Children.count(this.props.children) > 0 && (
+            <CloseButton
+              onClick={() => {
+                this.setState(prevState => ({
+                  isOpen: !prevState.isOpen,
+                }))
+              }}
+            >
+              <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
+            </CloseButton>
+          )}
+        {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
+      </Container>
+    )
+  }
+}
 
 export default deprecate<Props>(
   props =>

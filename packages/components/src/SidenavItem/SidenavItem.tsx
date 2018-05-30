@@ -31,7 +31,7 @@ const Container = glamorous.div(
     whiteSpace: "nowrap",
     fontSize: 12,
     "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.05)",
+      backgroundColor: "#F4F4F4",
     },
   },
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
