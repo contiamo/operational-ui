@@ -4,6 +4,7 @@ import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
 import { WithTheme, Css, CssStatic } from "../types"
+import { Icon, IconName } from "../"
 
 export interface Props {
   id?: string
@@ -12,6 +13,7 @@ export interface Props {
   className?: string
   onClick?: () => void
   active?: boolean
+  icon?: IconName | React.ReactNode
   label: string
 }
 
@@ -27,15 +29,15 @@ const Container = glamorous.div(
     alignItems: "center",
     justifyContent: "flex-start",
     whiteSpace: "nowrap",
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    fontSize: 12,
     "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.25)",
+      backgroundColor: "#F4F4F4",
     },
   },
   ({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
-    padding: `0 ${theme.spacing}px 0 ${theme.box}px`,
+    padding: `0 ${theme.spacing * 0.5}px`,
     color: isActive ? theme.colors.linkText : "inherit",
     "& > div:first-child::after": {
       // Connector strip circle color
@@ -44,29 +46,13 @@ const Container = glamorous.div(
   })
 )
 
-const ConnectorStrip = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  width: 1,
+const IconContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
+  width: size,
   height: size,
-  backgroundColor: lighten(theme.colors.navBackground, 10),
-  position: "absolute",
-  top: 0,
-  left: 24,
-  "&::after": {
-    content: "' '",
-    width: 7,
-    height: 7,
-    backgroundColor: lighten(theme.colors.navBackground, 10),
-    position: "absolute",
-    borderRadius: "50%",
-    left: -3,
-    top: size / 2 - 4,
-  },
-  // Only half-height for last element - selectors cover both the case
-  // when the side nav item is wrapped inside a <Link/> element (e.g. react-router)
-  // and when it isn't. This is also why the class names are necessary.
-  ".op_sidenavheader > .op_sidenavitem:last-child > &, .op_sidenavheader > *:last-child > .op_sidenavitem > &": {
-    height: size / 2,
-  },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flex: `0 0 ${size}px`,
 }))
 
 const SidenavItem = (props: Props) => (
@@ -77,7 +63,9 @@ const SidenavItem = (props: Props) => (
     onClick={props.onClick}
     isActive={!!props.active}
   >
-    <ConnectorStrip />
+    <IconContainer>
+      {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
+    </IconContainer>
     {props.label}
   </Container>
 )
