@@ -77,8 +77,8 @@ class Renderer {
           .duration(duration)
           .attrTween("d", this.removeArcTween.bind(this))
           .style("opacity", 1e-6)
-          .call(onTransitionEnd, this.updateZoom.bind(this))
           .remove()
+          .call(onTransitionEnd, this.updateZoom.bind(this))
   }
 
   private updateZoom(): void {
