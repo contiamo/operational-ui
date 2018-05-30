@@ -37,7 +37,7 @@ class Explore extends React.Component<Props, State> {
       <OperationalUI withBaseStyles>
         <Layout
           sidenav={
-            <Sidenav expanded>
+            <Sidenav>
               <SidenavHeader
                 label="The Prize"
                 active={Boolean(this.state.path.match("/one"))}
@@ -57,7 +57,7 @@ class Explore extends React.Component<Props, State> {
                     }))
                   }}
                 />
-                <SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/one/2"} />
+                <a href="/asdf"><SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/one/2"} /></a>
                 <SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/one/3"} />
               </SidenavHeader>
               <SidenavHeader

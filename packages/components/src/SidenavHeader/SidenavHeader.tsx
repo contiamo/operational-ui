@@ -24,7 +24,11 @@ export interface Props {
   color?: string
   /** Active state - renders colored strip on the left */
   active?: boolean
-  /** Expanded state */
+  /**
+   * Expanded state
+   *
+   * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
+   */
   expanded?: boolean
   /** Click handler */
   onClick?: () => void
@@ -48,33 +52,31 @@ const Container = glamorous.div(
       borderLeft: "4px solid",
       borderLeftColor: isActive ? stripColor : "transparent",
       borderBottomColor: theme.colors.separator,
-      backgroundColor: isActive ? "#F9F9F9" : "transparent",
+      backgroundColor: isActive ? "#F8F8F8" : "transparent",
     }
   }
 )
 
-const Content = glamorous.div(
-  ({ theme, isActive, isExpanded }: { theme: Theme; isActive: boolean; isExpanded: boolean }): CssStatic => ({
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    overflow: "hidden",
-    width: "100%",
-    height: theme.box,
-    padding: `0 ${theme.spacing}px`,
-    // Readable text color is calculated in the <Sidenav> component,
-    // and cascades down to both sidenav headers and items.
-    color: "#333333",
-    fontWeight: 600,
-    fontSize: 14,
-    textTransform: "uppercase",
-    whiteSpace: "nowrap",
-    ":hover": {
-      backgroundColor: isActive ? "transparent" : "rgba(0, 0, 0, 0.05)",
-    },
-  })
-)
+const Content = glamorous.div(({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  overflow: "hidden",
+  width: "100%",
+  height: theme.box,
+  padding: `0 ${theme.spacing}px`,
+  // Readable text color is calculated in the <Sidenav> component,
+  // and cascades down to both sidenav headers and items.
+  color: "#333333",
+  fontWeight: 600,
+  fontSize: 14,
+  textTransform: "uppercase",
+  whiteSpace: "nowrap",
+  ":hover": {
+    backgroundColor: isActive ? "transparent" : "rgba(0, 0, 0, 0.05)",
+  },
+}))
 
 const ItemsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "relative",
@@ -113,7 +115,7 @@ class SidenavHeader extends React.Component<Props, State> {
         isActive={isActive}
         className={["op_sidenavheader", this.props.className].filter(a => !!a).join(" ")}
       >
-        <Content isActive={!!this.props.active} isExpanded={!!this.props.expanded} onClick={this.props.onClick}>
+        <Content isActive={!!this.props.active} onClick={this.props.onClick}>
           {this.props.label}
         </Content>
         {isActive &&

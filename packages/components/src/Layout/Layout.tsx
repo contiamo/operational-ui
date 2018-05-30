@@ -19,31 +19,29 @@ export interface Props {
   loading?: boolean
 }
 
-const Container = glamorous.div(
-  ({ theme, isSidenavExpanded }: { theme: Theme; isSidenavExpanded: boolean }): CssStatic => ({
-    label: "Layout",
-    position: "relative",
-    height: "100%",
-    overflow: "hidden",
-    display: "grid",
-    gridTemplateColumns: `${isSidenavExpanded ? sidenavExpandedWidth : theme.box}px auto`,
-    gridTemplateRows: "100%",
-    // Side navigation (1st child is always the spinner or a placeholder)
-    "& > *:nth-child(2)": {
-      gridColumnStart: "1",
-      gridColumnEnd: "span 1",
-      gridRowStart: "1",
-      gridRowEnd: "span 1",
-    },
-    // Content
-    "& > *:nth-child(3)": {
-      gridColumnStart: "2",
-      gridColumnEnd: "span 1",
-      gridRowStart: "1",
-      gridRowEnd: "span 1",
-    },
-  })
-)
+const Container = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
+  label: "Layout",
+  position: "relative",
+  height: "100%",
+  overflow: "hidden",
+  display: "grid",
+  gridTemplateColumns: `${sidenavExpandedWidth}px auto`,
+  gridTemplateRows: "100%",
+  // Side navigation (1st child is always the spinner or a placeholder)
+  "& > *:nth-child(2)": {
+    gridColumnStart: "1",
+    gridColumnEnd: "span 1",
+    gridRowStart: "1",
+    gridRowEnd: "span 1",
+  },
+  // Content
+  "& > *:nth-child(3)": {
+    gridColumnStart: "2",
+    gridColumnEnd: "span 1",
+    gridRowStart: "1",
+    gridRowEnd: "span 1",
+  },
+}))
 
 const Main = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "layout-main",
@@ -54,7 +52,6 @@ const Main = glamorous.div(({ theme }: WithTheme): CssStatic => ({
 }))
 
 const Layout = (props: Props) => {
-  const sidenavProps = (React.Children.toArray(props.sidenav)[0] as any).props as SidenavProps
   /* 
    * This placeholder element is added to the dom in case there is no
    * <Progress /> element, allowing the CSS to target children by the same
@@ -64,7 +61,7 @@ const Layout = (props: Props) => {
    */
   const cssPlaceholder = <glamorous.Div css={{ position: "absolute" }} />
   return (
-    <Container css={props.css} className={props.className} isSidenavExpanded={Boolean(sidenavProps.expanded)}>
+    <Container css={props.css} className={props.className}>
       {props.loading ? <Progress /> : cssPlaceholder}
       {props.sidenav}
       <Main>{props.main}</Main>
