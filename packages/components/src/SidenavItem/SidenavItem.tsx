@@ -4,7 +4,7 @@ import { Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
 import { WithTheme, Css, CssStatic } from "../types"
-import { Icon, IconName } from "../"
+import { Icon, IconName, ContextConsumer, Context } from "../"
 
 export interface Props {
   id?: string
@@ -63,19 +63,33 @@ const SidenavItem = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
   const isActive = !!props.active || window.location.pathname === props.to
   return (
-    <ContainerComponent
-      href={props.to}
-      id={props.id}
-      css={props.css}
-      className={props.className}
-      onClick={props.onClick}
-      isActive={isActive}
-    >
-      <IconContainer>
-        {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
-      </IconContainer>
-      <Label>{props.label}</Label>
-    </ContainerComponent>
+    <ContextConsumer>
+      {(ctx: Context) => {
+        return (
+          <ContainerComponent
+            href={props.to}
+            id={props.id}
+            css={props.css}
+            className={props.className}
+            onClick={(ev: React.SyntheticEvent<Node>) => {
+              props.onClick && props.onClick()
+              if (props.to && ctx.pushState) {
+                ev.preventDefault()
+                // Stopping propagation to prevent parent side nav header from triggering its own redirect
+                ev.stopPropagation()
+                ctx.pushState(props.to)
+              }
+            }}
+            isActive={isActive}
+          >
+            <IconContainer>
+              {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
+            </IconContainer>
+            <Label>{props.label}</Label>
+          </ContainerComponent>
+        )
+      }}
+    </ContextConsumer>
   )
 }
 

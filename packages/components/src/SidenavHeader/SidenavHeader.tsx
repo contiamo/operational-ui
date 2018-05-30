@@ -4,7 +4,7 @@ import { Theme, expandColor } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
 import deprecate from "../utils/deprecate"
-import { Icon, IconName } from "../"
+import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -121,35 +121,49 @@ class SidenavHeader extends React.Component<Props, State> {
     const isActive = Boolean(
       this.props.active || (this.props.to && window.location.pathname.match(`^${this.props.to}`))
     )
-    // `to` prop should invalidate if the element has sublinks and is active
+    // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
     const ContainerComponent = to ? ContainerLink : Container
     return (
-      <ContainerComponent
-        id={this.props.id}
-        href={to}
-        css={this.props.css}
-        color={this.props.color}
-        isActive={isActive}
-        className={this.props.className}
-      >
-        <Content isActive={!!this.props.active} onClick={this.props.onClick}>
-          {this.props.label}
-        </Content>
-        {isActive &&
-          React.Children.count(this.props.children) > 0 && (
-            <CloseButton
-              onClick={() => {
-                this.setState(prevState => ({
-                  isOpen: !prevState.isOpen,
-                }))
+      <ContextConsumer>
+        {(ctx: Context) => {
+          return (
+            <ContainerComponent
+              id={this.props.id}
+              href={to}
+              css={this.props.css}
+              color={this.props.color}
+              isActive={isActive}
+              className={this.props.className}
+              onClick={(ev: React.SyntheticEvent<Node>) => {
+                this.props.onClick && this.props.onClick()
+                if (ctx.pushState) {
+                  ev.preventDefault()
+                  // Even if the `props.to` prop was ignored, redirect should still happen here
+                  ctx.pushState(this.props.to)
+                }
               }}
             >
-              <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
-            </CloseButton>
-          )}
-        {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
-      </ContainerComponent>
+              <Content isActive={!!this.props.active} onClick={this.props.onClick}>
+                {this.props.label}
+              </Content>
+              {isActive &&
+                React.Children.count(this.props.children) > 0 && (
+                  <CloseButton
+                    onClick={() => {
+                      this.setState(prevState => ({
+                        isOpen: !prevState.isOpen,
+                      }))
+                    }}
+                  >
+                    <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
+                  </CloseButton>
+                )}
+              {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
+            </ContainerComponent>
+          )
+        }}
+      </ContextConsumer>
     )
   }
 }

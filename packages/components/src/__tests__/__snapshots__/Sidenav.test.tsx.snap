@@ -98,6 +98,6 @@ exports[`Sidenav component renders 1`] = `
     }
   }
 >
-  <Sidenav />
+  <class_1 />
 </ThemeProvider>
 `;
