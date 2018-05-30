@@ -16,7 +16,6 @@ export interface Props {
 const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "card",
   padding: theme.spacing,
-  borderRadius: 4,
   boxShadow: theme.shadows.card,
   backgroundColor: theme.colors.white,
   "& > img": {
