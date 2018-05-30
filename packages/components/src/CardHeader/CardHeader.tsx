@@ -18,7 +18,10 @@ const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   label: "cardheader",
   display: "flex",
   alignItems: "center",
+  /** @todo Add to theme once colors are updated across codebase */
   backgroundColor: "#F9F9F9",
+  /** @todo Add to theme once colors are updated across codebase */
+  color: "#747474",
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
   height: 2 * theme.spacing,
@@ -26,7 +29,6 @@ const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
   marginBottom: theme.spacing,
   padding: `0 ${theme.spacing}px`,
   lineHeight: 1,
-  color: "#747474",
 }))
 
 const CardHeader = (props: Props) => (
