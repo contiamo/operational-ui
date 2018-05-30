@@ -14,6 +14,8 @@ export interface Props {
   className?: string
   /** Main label for the header */
   label: string | React.ReactNode
+  /** Navigation property a'la react-router <Link/> */
+  to?: string
   /**
    * Specifies an icon to render on the left of the label
    *
@@ -41,23 +43,35 @@ export interface State {
   isOpen: boolean
 }
 
-const Container = glamorous.div(
-  ({ theme, color, isActive }: { theme: Theme; color?: string; isActive: boolean }): CssStatic => {
-    const stripColor: string = expandColor(theme, color) || theme.colors.info
-    return {
-      label: "sidenavheader",
-      width: "100%",
-      position: "relative",
-      borderBottom: "1px solid",
-      borderLeft: "4px solid",
-      borderLeftColor: isActive ? stripColor : "transparent",
-      borderBottomColor: theme.colors.separator,
-      backgroundColor: isActive ? "#F8F8F8" : "transparent",
-    }
+const containerStyles = ({
+  theme,
+  color,
+  isActive,
+}: {
+  theme: Theme
+  color?: string
+  isActive: boolean
+}): CssStatic => {
+  const stripColor: string = expandColor(theme, color) || theme.colors.info
+  return {
+    label: "sidenavheader",
+    textDecoration: "none",
+    width: "100%",
+    position: "relative",
+    borderBottom: "1px solid",
+    borderLeft: "4px solid",
+    borderLeftColor: isActive ? stripColor : "transparent",
+    borderBottomColor: theme.colors.separator,
+    backgroundColor: isActive ? "#F8F8F8" : "transparent",
   }
-)
+}
+
+const Container = glamorous.div(containerStyles)
+
+const ContainerLink = glamorous.a(containerStyles)
 
 const Content = glamorous.div(({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
+  textDecoration: "none",
   position: "relative",
   display: "flex",
   alignItems: "center",
@@ -103,17 +117,21 @@ class SidenavHeader extends React.Component<Props, State> {
   }
 
   render() {
-    const isActive = Boolean(this.props.active)
-    // See ./SidenavItem.tsx for reason why class name is set.
-    // Note that the click listener is set on `<Content>` so it doesn't interfere
-    // with click listeners set on the children.
+    const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
+    const isActive = Boolean(
+      this.props.active || (this.props.to && window.location.pathname.match(`^${this.props.to}`))
+    )
+    // `to` prop should invalidate if the element has sublinks and is active
+    const to = isActive && hasChildLinks ? undefined : this.props.to
+    const ContainerComponent = to ? ContainerLink : Container
     return (
-      <Container
+      <ContainerComponent
         id={this.props.id}
+        href={to}
         css={this.props.css}
         color={this.props.color}
         isActive={isActive}
-        className={["op_sidenavheader", this.props.className].filter(a => !!a).join(" ")}
+        className={this.props.className}
       >
         <Content isActive={!!this.props.active} onClick={this.props.onClick}>
           {this.props.label}
@@ -131,7 +149,7 @@ class SidenavHeader extends React.Component<Props, State> {
             </CloseButton>
           )}
         {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
-      </Container>
+      </ContainerComponent>
     )
   }
 }

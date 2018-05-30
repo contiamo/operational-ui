@@ -29,7 +29,7 @@ export interface State {
 
 class Explore extends React.Component<Props, State> {
   state = {
-    path: "/one/1",
+    path: window.location.pathname,
   }
 
   render() {
@@ -38,49 +38,15 @@ class Explore extends React.Component<Props, State> {
         <Layout
           sidenav={
             <Sidenav>
-              <SidenavHeader
-                label="The Prize"
-                active={Boolean(this.state.path.match("/one"))}
-                onClick={() => {
-                  this.setState(() => ({
-                    path: "/one",
-                  }))
-                }}
-              >
-                <SidenavItem
-                  label="The First Prize"
-                  icon="Settings"
-                  active={this.state.path === "/one/1"}
-                  onClick={() => {
-                    this.setState(() => ({
-                      path: "/one/1",
-                    }))
-                  }}
-                />
-                <a href="/asdf"><SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/one/2"} /></a>
-                <SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/one/3"} />
+              <SidenavHeader to="/one" label="The Prize">
+                <SidenavItem label="The First Prize" icon="Settings" to="/one/1" />
+                <SidenavItem label="The Second Prize" icon="Settings" to="/one/2" />
+                <SidenavItem label="The Third Prize" icon="Settings" to="/one/3" />
               </SidenavHeader>
-              <SidenavHeader
-                label="Let It Snow"
-                active={Boolean(this.state.path.match("/two"))}
-                onClick={() => {
-                  this.setState(() => ({
-                    path: "/two",
-                  }))
-                }}
-              >
-                <SidenavItem
-                  label="The First Prize"
-                  icon="Settings"
-                  active={this.state.path === "/two/1"}
-                  onClick={() => {
-                    this.setState(() => ({
-                      path: "/two/1",
-                    }))
-                  }}
-                />
-                <SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/two/2"} />
-                <SidenavItem label="The First Prize" icon="Settings" active={this.state.path === "/two/3"} />
+              <SidenavHeader label="Let It Snow" to="/two">
+                <SidenavItem label="The First Prize" icon="Settings" to="/two/1" />
+                <SidenavItem label="The Second Prize" icon="Settings" to="/two/2" />
+                <SidenavItem label="The Third Prize" icon="Settings" to="/two/3" />
               </SidenavHeader>
             </Sidenav>
           }

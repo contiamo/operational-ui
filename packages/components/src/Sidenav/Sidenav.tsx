@@ -48,15 +48,6 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): CssStatic => {
     flexDirection: "column",
     alignItems: "flex-start",
     height: "100%",
-    "& a:focus": {
-      outline: 0,
-    },
-    "& a:link, & a:visited": {
-      width: "100%",
-      display: "block",
-      textDecoration: "none",
-      color: "inherit",
-    },
   }
 })
 
