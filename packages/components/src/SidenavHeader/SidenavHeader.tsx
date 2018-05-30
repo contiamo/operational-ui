@@ -1,8 +1,9 @@
 import * as React from "react"
 import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import { Theme, expandColor } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
+import deprecate from "../utils/deprecate"
 import { Icon, IconName } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
@@ -12,68 +13,81 @@ export interface Props {
   css?: Css
   className?: string
   label: string | React.ReactNode
-  icon: IconName | React.ReactNode
+  /**
+   * Side nav icons are no longer rendered.
+   *
+   * @deprecated
+   */
+  icon?: IconName | React.ReactNode
+  /** Color used in highlights and the side strip (hex or named color from `theme.colors`) */
+  color?: string
   active?: boolean
   expanded?: boolean
   onClick?: () => void
   children?: React.ReactNode
 }
 
-const Container = glamorous.div({
-  label: "sidenavheader",
-  width: "100%",
-})
+const Container = glamorous.div(
+  ({ theme, color, active }: { theme: Theme; color?: string; active?: boolean }): CssStatic => {
+    const stripColor: string = expandColor(theme, color) || theme.colors.info
+    return {
+      label: "sidenavheader",
+      width: "100%",
+      borderBottom: "1px solid",
+      borderLeft: "4px solid",
+      borderLeftColor: active ? stripColor : "transparent",
+      borderBottomColor: theme.colors.separator,
+    }
+  }
+)
 
 const Content = glamorous.div(
   ({ theme, isActive, isExpanded }: { theme: Theme; isActive: boolean; isExpanded: boolean }): CssStatic => ({
     position: "relative",
     display: "flex",
     alignItems: "center",
-    width: "100%",
+    justifyContent: "flex-start",
     overflow: "hidden",
+    width: "100%",
     height: theme.box,
-    flex: `0 0 ${theme.box}px`,
+    padding: `0 ${theme.spacing}px`,
     // Readable text color is calculated in the <Sidenav> component,
     // and cascades down to both sidenav headers and items.
-    color: isActive ? theme.colors.linkText : "inherit",
-    borderBottom: isExpanded ? `1px solid #395568` : "none",
-    backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0)",
+    color: isActive ? theme.colors.linkText : "#333333",
+    fontWeight: 600,
+    fontSize: 14,
+    textTransform: "uppercase",
+    whiteSpace: "nowrap",
     ":hover": {
-      backgroundColor: isExpanded ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)",
+      backgroundColor: isActive ? "transparent" : "rgba(0, 0, 0, 0.05)",
     },
   })
 )
 
-const Label = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.heading1,
-  color: theme.colors.black,
-  fontSize: 14,
-  width: "fit-content",
-  whiteSpace: "nowrap",
-}))
-
-const IconContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  width: theme.box,
-  height: theme.box,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flex: `0 0 ${theme.box}px`,
+const ItemsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
+  position: "relative",
+  top: -theme.spacing / 2,
 }))
 
 const SidenavHeader = (props: Props) => (
   // See ./SidenavItem.tsx for reason why class name is set.
   // Note that the click listener is set on `<Content>` so it doesn't interfere
   // with click listeners set on the children.
-  <Container id={props.id} css={props.css} className={["op_sidenavheader", props.className].filter(a => !!a).join(" ")}>
+  <Container
+    id={props.id}
+    css={props.css}
+    color={props.color}
+    active={props.active}
+    className={["op_sidenavheader", props.className].filter(a => !!a).join(" ")}
+  >
     <Content isActive={!!props.active} isExpanded={!!props.expanded} onClick={props.onClick}>
-      <IconContainer>
-        {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={24} /> : props.icon}
-      </IconContainer>
-      <Label>{props.label}</Label>
+      {props.label}
     </Content>
-    {props.children}
+    <ItemsContainer>{props.children}</ItemsContainer>
   </Container>
 )
 
-export default SidenavHeader
+export default deprecate<Props>(
+  props =>
+    props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : []
+)(SidenavHeader)

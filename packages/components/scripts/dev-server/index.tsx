@@ -34,8 +34,8 @@ class Explore extends React.Component<Props, State> {
         <Layout
           sidenav={
             <Sidenav expanded>
-              <SidenavHeader label="The Prize" icon="Award">
-                <SidenavItem label="The First Prize" />
+              <SidenavHeader label="The Prize" icon="Award" active>
+                <SidenavItem label="The First Prize" icon="Settings" />
                 <SidenavItem label="The First Prize" />
                 <SidenavItem label="The First Prize" />
               </SidenavHeader>

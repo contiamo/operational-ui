@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "start": "parcel scripts/dev-server/index.html",
+    "start": "parcel scripts/dev-server/index.html --no-hmr",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
     "package": "rm -rf lib && tsc -d",

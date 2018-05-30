@@ -32,7 +32,7 @@ const Container = glamorous.div(
     expandOnHover?: boolean
     expanded?: boolean
   }): CssStatic => {
-    const backgroundColor = theme.colors.navBackground
+    const backgroundColor = theme.colors.white
     const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
     const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
     const expandOnHoverStyles = expandOnHover
@@ -52,6 +52,8 @@ const Container = glamorous.div(
       background: theme.colors.white,
       label: "sidenav",
       width: expanded ? sidenavExpandedWidth : theme.box,
+      borderRight: "1px solid",
+      borderRightColor: theme.colors.separator,
       zIndex: theme.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",
