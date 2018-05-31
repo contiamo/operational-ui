@@ -5,6 +5,7 @@ import { lighten } from "@operational/utils"
 
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon, IconName, ContextConsumer, Context } from "../"
+import { isModifiedEvent } from "../utils"
 
 export interface Props {
   id?: string
@@ -73,7 +74,7 @@ const SidenavItem = (props: Props) => {
             className={props.className}
             onClick={(ev: React.SyntheticEvent<Node>) => {
               props.onClick && props.onClick()
-              if (props.to && ctx.pushState) {
+              if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
                 ev.preventDefault()
                 // Stopping propagation to prevent parent side nav header from triggering its own redirect
                 ev.stopPropagation()

@@ -3,7 +3,7 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
 
-import deprecate from "../utils/deprecate"
+import { deprecate, isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
@@ -137,7 +137,7 @@ class SidenavHeader extends React.Component<Props, State> {
               className={this.props.className}
               onClick={(ev: React.SyntheticEvent<Node>) => {
                 this.props.onClick && this.props.onClick()
-                if (ctx.pushState) {
+                if (!isModifiedEvent(ev) && ctx.pushState) {
                   ev.preventDefault()
                   // Even if the `props.to` prop was ignored, redirect should still happen here
                   ctx.pushState(this.props.to)
