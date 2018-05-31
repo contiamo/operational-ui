@@ -11,6 +11,50 @@ import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
 import { Accessors, AccessorsObject, Components, Facade, Object, RawData, SunburstConfig } from "./typings"
 
+const defaultConfig = (): SunburstConfig => {
+  return {
+    arrowOffset: 10,
+    breadcrumbItemWidth: 80,
+    centerCircleRadius: 0.9,
+    disableAnimations: false,
+    duration: 1e3,
+    focusOffset: 5,
+    height: 500,
+    hidden: false,
+    maxBreadcrumbLength: 4,
+    maxRings: 10,
+    maxTotalFontSize: 54,
+    minTotalFontSize: theme.typography.small.fontSize,
+    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    outerBorderMargin: 1,
+    palette: theme.colors.visualizationPalette,
+    propagateColors: true,
+    sort: true,
+    uid: uniqueId("sunburst"),
+    visualizationName: "sunburst",
+    width: 500,
+  }
+}
+
+const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
+  return colorAssigner(palette)
+}
+
+const defaultAccessors = (): AccessorsObject => {
+  const assignColors: (key: string) => string = defaultColorAssigner(defaultConfig().palette)
+  return {
+    data: {
+      data: (data: any): RawData => data,
+    },
+    series: {
+      color: (d: RawData): string => assignColors(d.name),
+      id: (d: RawData): string => d.name,
+      name: (d: RawData): string => d.name || "",
+      value: (d: RawData): number => d.value,
+    },
+  }
+}
+
 class SunburstFacade implements Facade {
   private __disposed: boolean = false
   private canvas: SunburstCanvas
@@ -31,54 +75,10 @@ class SunburstFacade implements Facade {
   private insertState(): StateHandler<SunburstConfig, RawData> {
     return new StateHandler({
       data: {},
-      config: this.initialConfig(),
-      accessors: this.initialAccessors(),
+      config: defaultConfig(),
+      accessors: defaultAccessors(),
       computed: {},
     })
-  }
-
-  private initialConfig(): SunburstConfig {
-    return {
-      arrowOffset: 10,
-      breadcrumbItemWidth: 80,
-      centerCircleRadius: 0.9,
-      disableAnimations: false,
-      duration: 1e3,
-      focusOffset: 5,
-      height: 500,
-      hidden: false,
-      maxBreadcrumbLength: 4,
-      maxRings: 10,
-      maxTotalFontSize: 54,
-      minTotalFontSize: theme.typography.small.fontSize,
-      numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-      outerBorderMargin: 1,
-      palette: theme.colors.visualizationPalette,
-      propagateColors: true,
-      sort: true,
-      uid: uniqueId("sunburst"),
-      visualizationName: "sunburst",
-      width: 500,
-    }
-  }
-
-  private defaultColorAssigner(palette: string[]): (key: string) => string {
-    return colorAssigner(palette)
-  }
-
-  private initialAccessors(): AccessorsObject {
-    const assignColors: (key: string) => string = this.defaultColorAssigner(this.initialConfig().palette)
-    return {
-      data: {
-        data: (data: any): RawData => data,
-      },
-      series: {
-        color: (d: RawData): string => assignColors(d.name),
-        id: (d: RawData): string => d.name,
-        name: (d: RawData): string => d.name || "",
-        value: (d: RawData): number => d.value,
-      },
-    }
   }
 
   private insertCanvas(): SunburstCanvas {
@@ -120,7 +120,7 @@ class SunburstFacade implements Facade {
 
   config(config?: Partial<SunburstConfig>): SunburstConfig {
     if (config.palette && !this.customColorAccessor) {
-      const assignColors: (key: string, color?: string) => string = this.defaultColorAssigner(config.palette)
+      const assignColors: (key: string, color?: string) => string = defaultColorAssigner(config.palette)
       this.accessors("series", {
         color: (d: RawData): string => assignColors(d.name, d.color),
       })

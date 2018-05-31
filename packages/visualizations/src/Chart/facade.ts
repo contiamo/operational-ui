@@ -8,7 +8,7 @@ import StateHandler from "../utils/state_handler"
 import EventEmitter from "../utils/event_bus"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { defaults, has, isEmpty, uniqueId } from "lodash/fp"
+import { has, isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
   AccessorsObject,
@@ -28,7 +28,7 @@ import {
   SeriesData,
 } from "./typings"
 
-const defaultConfig = (): Partial<ChartConfig> => {
+const defaultConfig = (): ChartConfig => {
   return {
     duration: 1e3,
     flagFocusOffset: 15,
@@ -47,14 +47,10 @@ const defaultConfig = (): Partial<ChartConfig> => {
     palette: theme.colors.visualizationPalette,
     showComponentFocus: false,
     timeAxisPriority: ["x1", "x2", "y1", "y2"],
+    uid: uniqueId("chart"),
     visualizationName: "chart",
     width: 500,
   }
-}
-
-const defaultDataAccessors: DataAccessors = {
-  series: (d: Data): SeriesData => d.series,
-  axes: (d: Data): AxesData => d.axes,
 }
 
 const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
@@ -63,19 +59,27 @@ const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
 
 const initialColorAssigner: (key: string) => string = defaultColorAssigner(defaultConfig().palette)
 
-const defaultSeriesAccessors: SeriesAccessors = {
-  data: (d: Object<any>): Datum[] => d.data,
-  hide: (d: Object<any>): boolean => d.hide || false,
-  hideInLegend: (d: Object<any>): boolean => d.hideInLegend || false,
-  key: (d: Object<any>): string => d.key || uniqueId("key"),
-  legendColor: (d: Object<any>): string => initialColorAssigner(d.key),
-  legendName: (d: Object<any>): string => d.name || d.key || "",
-  renderAs: (d: Object<any>): RendererOptions[] => d.renderAs,
-  axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
-  xAttribute: (d: Object<any>): string => d.xAttribute || "x",
-  yAttribute: (d: Object<any>): string => d.yAttribute || "y",
-  xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
-  yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
+const defaultAccessors = () => {
+  return {
+    data: {
+      series: (d: Data): SeriesData => d.series,
+      axes: (d: Data): AxesData => d.axes,
+    },
+    series: {
+      data: (d: Object<any>): Datum[] => d.data,
+      hide: (d: Object<any>): boolean => d.hide || false,
+      hideInLegend: (d: Object<any>): boolean => d.hideInLegend || false,
+      key: (d: Object<any>): string => d.key || uniqueId("key"),
+      legendColor: (d: Object<any>): string => initialColorAssigner(d.key),
+      legendName: (d: Object<any>): string => d.name || d.key || "",
+      renderAs: (d: Object<any>): RendererOptions[] => d.renderAs,
+      axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
+      xAttribute: (d: Object<any>): string => d.xAttribute || "x",
+      yAttribute: (d: Object<any>): string => d.yAttribute || "y",
+      xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
+      yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
+    },
+  }
 }
 
 class ChartFacade implements Facade {
@@ -100,8 +104,8 @@ class ChartFacade implements Facade {
   private insertState(): StateHandler<ChartConfig, Data> {
     return new StateHandler({
       data: {},
-      config: defaults({ uid: uniqueId("chart") })(defaultConfig()),
-      accessors: { data: defaultDataAccessors, series: defaultSeriesAccessors },
+      config: defaultConfig(),
+      accessors: defaultAccessors(),
       computed: {},
     })
   }
