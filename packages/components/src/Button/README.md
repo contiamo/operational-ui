@@ -9,3 +9,11 @@ Using buttons is as simple as including the component with a text node as a chil
 <Button color="#393939">Button Two</Button>
 <Button disabled>Button Three</Button>
 ```
+
+### Usage with links
+
+Using a `to` prop navigates automatically, and render proper anchor tags with hrefs. See `OperationalUI` docs for a one-time configuration you need to do to have pushstate navigation working out-of-the-box.
+
+```jsx
+<Button color="info" to="/some-url">Button One</Button>
+```
