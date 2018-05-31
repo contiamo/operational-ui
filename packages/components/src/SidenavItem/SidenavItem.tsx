@@ -32,11 +32,12 @@ const containerStyles = ({ theme, isActive }: { theme: Theme; isActive: boolean 
   alignItems: "center",
   justifyContent: "flex-start",
   whiteSpace: "nowrap",
-  fontSize: 12,
+  fontSize: 14,
+  fontWeight: 400,
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
     textDecoration: "none",
-    color: isActive ? theme.colors.linkText : "#666666",
+    color: isActive ? theme.colors.linkText : "#888",
   },
   "&:hover": {
     backgroundColor: "#F4F4F4",
@@ -58,6 +59,7 @@ const IconContainer = glamorous.span(({ theme }: WithTheme): CssStatic => ({
 
 const Label = glamorous.span(({ theme }: { theme: Theme }): {} => ({
   display: "inline-block",
+  paddingLeft: theme.spacing / 4,
 }))
 
 const SidenavItem = (props: Props) => {

@@ -64,6 +64,9 @@ const containerStyles = ({
     borderBottomColor: theme.colors.separator,
     /** @todo Add to theme once colors are updated across codebase */
     backgroundColor: isActive ? "#F8F8F8" : "transparent",
+    ":hover": {
+      backgroundColor: "#F8F8F8",
+    },
   }
 }
 
@@ -73,6 +76,7 @@ const ContainerLink = glamorous.a(containerStyles)
 
 const Content = glamorous.div(({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
   textDecoration: "none",
+  cursor: "pointer",
   position: "relative",
   display: "flex",
   alignItems: "center",
@@ -81,46 +85,48 @@ const Content = glamorous.div(({ theme, isActive }: { theme: Theme; isActive: bo
   width: "100%",
   height: theme.box,
   padding: `0 ${theme.spacing}px`,
-  // Readable text color is calculated in the <Sidenav> component,
-  // and cascades down to both sidenav headers and items.
   color: "#333333",
-  fontWeight: 600,
+  fontWeight: 500,
+  letterSpacing: 0.25,
   fontSize: 14,
   textTransform: "uppercase",
   whiteSpace: "nowrap",
-  ":hover": {
-    backgroundColor: isActive ? "transparent" : "rgba(0, 0, 0, 0.05)",
-  },
 }))
 
 const ItemsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "relative",
-  top: -theme.spacing / 2,
+  top: -theme.spacing,
 }))
 
 const CloseButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
   position: "absolute",
   cursor: "pointer",
-  width: theme.spacing,
-  height: theme.spacing,
-  top: theme.spacing * 1.25,
+  display: "none",
+  alignItems: "center",
+  justifyContent: "center",
+  width: theme.spacing * 1.5,
+  height: theme.spacing * 1.5,
+  top: theme.spacing * 1.5,
   right: theme.spacing,
   color: theme.colors.info,
+  ".op_sidenavheader:hover &": {
+    display: "flex",
+  },
   "& svg": {
-    width: "100%",
-    height: "100%",
+    width: theme.spacing,
+    height: theme.spacing,
   },
 }))
 
 class SidenavHeader extends React.Component<Props, State> {
   state = {
-    isOpen: true,
+    isOpen: false,
   }
 
   render() {
     const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
     const isActive = Boolean(
-      this.props.active || (this.props.to && window.location.pathname.match(`^${this.props.to}`))
+      this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`))
     )
     // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
@@ -135,10 +141,13 @@ class SidenavHeader extends React.Component<Props, State> {
               css={this.props.css}
               color={this.props.color}
               isActive={isActive}
-              className={this.props.className}
+              className={[this.props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
               onClick={(ev: React.SyntheticEvent<Node>) => {
                 this.props.onClick && this.props.onClick()
-                if (!isModifiedEvent(ev) && ctx.pushState) {
+                this.setState(prevState => ({
+                  isOpen: !prevState.isOpen,
+                }))
+                if (!isModifiedEvent(ev) && ctx.pushState && this.props.to) {
                   ev.preventDefault()
                   // Even if the `props.to` prop was ignored, redirect should still happen here
                   ctx.pushState(this.props.to)
@@ -148,18 +157,19 @@ class SidenavHeader extends React.Component<Props, State> {
               <Content isActive={!!this.props.active} onClick={this.props.onClick}>
                 {this.props.label}
               </Content>
-              {isActive &&
-                React.Children.count(this.props.children) > 0 && (
-                  <CloseButton
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        isOpen: !prevState.isOpen,
-                      }))
-                    }}
-                  >
-                    <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
-                  </CloseButton>
-                )}
+              {React.Children.count(this.props.children) > 0 && (
+                <CloseButton
+                  onClick={(ev: React.SyntheticEvent<Node>) => {
+                    // Prevent clicks on parent in order to avoid conflicting behavior
+                    ev.stopPropagation()
+                    this.setState(prevState => ({
+                      isOpen: !prevState.isOpen,
+                    }))
+                  }}
+                >
+                  <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
+                </CloseButton>
+              )}
               {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
             </ContainerComponent>
           )
