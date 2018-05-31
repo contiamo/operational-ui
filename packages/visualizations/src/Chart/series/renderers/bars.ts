@@ -185,20 +185,19 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private onMouseOver(d: Datum, el: HTMLElement): void {
     const isNegative: boolean = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
-    const position: string = this.xIsBaseline ? (isNegative ? "below" : "above") : isNegative ? "toLeft" : "toRight"
     const dimensions = el.getBoundingClientRect()
     const barOffset = this.state.current.get("computed").axes.computedBars[this.series.key()].offset
 
     const focusPoint = {
-      position,
       element: this.xIsBaseline ? this.x(d) : this.y(d),
       value: this.xIsBaseline ? this.y(d) : this.x(d),
+      position: this.xIsBaseline ? (isNegative ? "below" : "above") : isNegative ? "toLeft" : "toRight",
       seriesName: this.series.legendName(),
       seriesColor: this.series.legendColor(),
       offset: 0,
       focus: {
-        x: this.x1(d) + (this.xIsBaseline ? barOffset + dimensions.width / 2 : 0), // @TODO check if works for isNegative (stacked and non-stacked)
-        y: this.y1(d) + (this.xIsBaseline ? 0 : barOffset + dimensions.height / 2),
+        x: this.xIsBaseline ? this.x1(d) + barOffset + dimensions.width / 2 : isNegative ? this.x0(d) : this.x1(d),
+        y: this.xIsBaseline ? (isNegative ? this.y0(d) : this.y1(d)) : this.y1(d) + barOffset + dimensions.height / 2,
       },
     }
 
