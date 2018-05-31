@@ -1,21 +1,21 @@
 import {
   filter,
   find,
-  flatten,
   flow,
   forEach,
   get,
   groupBy,
   includes,
+  indexOf,
   invoke,
   map,
-  mapValues,
+  mapKeys,
+  merge,
   omitBy,
   reduce,
   remove,
   set,
   uniqBy,
-  values,
 } from "lodash/fp"
 import { stack as d3Stack } from "d3-shape"
 import Series from "./series/series"
@@ -159,20 +159,22 @@ class ChartSeriesManager implements SeriesManager {
     const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
 
     const accessors = this.state.current.get("accessors").series
-    const baseValue = (series: any) => get(accessors[`${baseAxis}Attribute`](series))
-    const stackValue = (series: any) => get(accessors[`${stackAxis}Attribute`](series))
+    const baseAttribute = accessors[`${baseAxis}Attribute`]
+    const stackAttribute = accessors[`${stackAxis}Attribute`]
+    const baseValue = (series: any) => get(baseAttribute(series))
+    const stackValue = (series: any) => get(stackAttribute(series))
 
     // Transform data into suitable structure for d3 stack
-    const dataToStack = flow(
-      reduce((memo: any, series: any) => {
-        forEach((d: any) => {
-          const newMemo = set([baseValue(series)(d), series.key])(stackValue(series)(d))(memo)
-        })(series.data)
-        return newMemo
-      }, {}),
-      mapValues.convert({ cap: false })((value: any, key: string) => set(baseAxis)(key)(value)),
-      values
-    )(stack.series)
+    const dataToStack = reduce((memo: any[], series: any) => {
+      forEach((d: any) => {
+        const datum = mapKeys.convert({ cap: false })(
+          (val: any, key: string) => (val === baseValue(series)(d) ? baseAxis : this.key(series))
+        )(d)
+        const existingDatum = find({ [baseAxis]: baseValue(series)(d) })(memo)
+        existingDatum ? (memo[indexOf(existingDatum)(memo)] = merge(datum)(existingDatum)) : memo.push(datum)
+      })(series.data)
+      return memo
+    }, [])(stack.series)
 
     // Stack data
     const stackedData = d3Stack()

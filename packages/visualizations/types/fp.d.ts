@@ -181,6 +181,7 @@ declare namespace fp {
     isObject: any
     last: any
     mapValues: any
+    mapKeys: any
     max: any
     merge: any
     min: any
