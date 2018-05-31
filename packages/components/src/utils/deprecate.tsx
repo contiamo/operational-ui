@@ -19,7 +19,7 @@ import * as React from "react"
  */
 function deprecate<P>(createWarning: (props: P) => string[]) {
   return (Component: React.ComponentType<P>): React.ComponentType<P> => {
-    return class extends React.Component<P> {
+    return class DeprecatedComponent extends React.Component<P> {
       componentDidMount() {
         const warnings = createWarning(this.props)
         if (process.env.NODE_ENV !== "production" && warnings.length > 0) {

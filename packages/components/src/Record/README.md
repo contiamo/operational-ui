@@ -6,9 +6,7 @@ Records are general-purpose displays of resources, composed of a header element 
 const { Tile } = require("../");
 
 <Record title="Deutsche Bahn (German Railway Company)">
-  <Tile label="Founded">1994</Tile>
-  <Tile label="Employees">~300,000</Tile>
-  <Tile label="Annual Revenue">A lot!</Tile>
+  Deutsche Bahn AG is a German railway company. It is federally owned and employs around 300,000 people.
 </Record>
 ```
 

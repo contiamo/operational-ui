@@ -3,8 +3,37 @@ The messages component gives opinionated layout and positioning to a list of mes
 ### Usage
 
 ```jsx
-<Messages>
-  <Message color="error">Oh no… An error occured :(</Message>
-  <Message>All is well</Message>
-</Messages>
+class MessagesContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      messages: [
+        {
+          body: "Success message",
+          isError: false
+        },
+        {
+          body: "Error message",
+          isError: true
+        }
+      ]
+    }
+  }
+  
+  render() {
+    return (
+      <Messages>
+        {this.state.messages.map((message, currentIndex) => (
+          <Message key={currentIndex} color={message.isError ? "error" : "info"} onClose={() => {
+            this.setState(prevState => ({
+              messages: prevState.messages.filter((message, messageIndex) => messageIndex !== currentIndex)
+            }))
+          }}>{message.body}</Message>
+        ))}
+      </Messages>
+    )
+  }
+}
+
+<MessagesContainer />
 ```
