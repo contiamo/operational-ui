@@ -1,8 +1,9 @@
 # Operational UI Components
 
-<!-- separator -->
+The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on. 
 
-The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on.
+* [Demo](https://operational-ui.js.org/)
+* [Docs](https://operational-ui.js.org/docs/)
 
 ## Getting Started
 
@@ -25,10 +26,3 @@ const App = () => (
   </OperationalUI>
 )
 ```
-
-<!-- separator -->
-
-## Documentation
-
-Head to the components section of the [documentation site](https://ui.contiamo.com/components) to see what you can do with components.
-
