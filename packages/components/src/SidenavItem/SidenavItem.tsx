@@ -65,31 +65,29 @@ const SidenavItem = (props: Props) => {
   const isActive = !!props.active || window.location.pathname === props.to
   return (
     <ContextConsumer>
-      {(ctx: Context) => {
-        return (
-          <ContainerComponent
-            href={props.to}
-            id={props.id}
-            css={props.css}
-            className={props.className}
-            onClick={(ev: React.SyntheticEvent<Node>) => {
-              props.onClick && props.onClick()
-              if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
-                ev.preventDefault()
-                // Stopping propagation to prevent parent side nav header from triggering its own redirect
-                ev.stopPropagation()
-                ctx.pushState(props.to)
-              }
-            }}
-            isActive={isActive}
-          >
-            <IconContainer>
-              {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
-            </IconContainer>
-            <Label>{props.label}</Label>
-          </ContainerComponent>
-        )
-      }}
+      {(ctx: Context) => (
+        <ContainerComponent
+          href={props.to}
+          id={props.id}
+          css={props.css}
+          className={props.className}
+          onClick={(ev: React.SyntheticEvent<Node>) => {
+            props.onClick && props.onClick()
+            if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
+              ev.preventDefault()
+              // Stopping propagation to prevent parent side nav header from triggering its own redirect
+              ev.stopPropagation()
+              ctx.pushState(props.to)
+            }
+          }}
+          isActive={isActive}
+        >
+          <IconContainer>
+            {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
+          </IconContainer>
+          <Label>{props.label}</Label>
+        </ContainerComponent>
+      )}
     </ContextConsumer>
   )
 }

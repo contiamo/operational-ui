@@ -63,15 +63,14 @@ class Explore extends React.Component<Props, State> {
               title={`We're at ${this.state.path}`}
               breadcrumbs={
                 <Breadcrumbs>
-                  <Breadcrumb>
-                    <a>Link one</a>
-                  </Breadcrumb>
-                  <Breadcrumb>Link two</Breadcrumb>
+                  <Breadcrumb to="/one">Link one</Breadcrumb>
+                  <Breadcrumb to="/one/1">Link one in one</Breadcrumb>
+                  <Breadcrumb>Link one in one</Breadcrumb>
                 </Breadcrumbs>
               }
               controls={
                 <React.Fragment>
-                  <Button color="info" loading>
+                  <Button color="info" condensed to="/two/1">
                     Edit
                   </Button>
                 </React.Fragment>
