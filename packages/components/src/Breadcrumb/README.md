@@ -1,15 +1,15 @@
-Used as headers (top-level links) inside a `Sidenav`.
+The `Breadcrumb` component is nested inside the `<Breadcrumbs/>` to provide breadcrumb navigation. Note that in-between slashes are interspersed automatically.
 
 ### Usage
 
-```js
-<SidenavHeader label="Chapter One"/>
+```jsx
+<Breadcrumb>Home</Breadcrumb>
 ```
 
 ### Usage with links
 
 Using a `to` prop navigates automatically, and render proper anchor tags with hrefs. See `OperationalUI` docs for a one-time configuration you need to do to have pushstate navigation working out-of-the-box.
 
-```js
-<SidenavHeader label="Chapter One" to="/one" />
+```jsx
+<Breadcrumb to="/some-url">Home</Breadcrumb>
 ```

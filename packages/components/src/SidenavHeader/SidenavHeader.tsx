@@ -14,7 +14,7 @@ export interface Props {
   className?: string
   /** Main label for the header */
   label: string | React.ReactNode
-  /** Navigation property a'la react-router <Link/> */
+  /** Navigation property à la react-router <Link/> */
   to?: string
   /**
    * Specifies an icon to render on the left of the label
@@ -62,6 +62,7 @@ const containerStyles = ({
     borderLeft: "4px solid",
     borderLeftColor: isActive ? stripColor : "transparent",
     borderBottomColor: theme.colors.separator,
+    /** @todo Add to theme once colors are updated across codebase */
     backgroundColor: isActive ? "#F8F8F8" : "transparent",
   }
 }

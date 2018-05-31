@@ -11,7 +11,7 @@ export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
-  /** Navigation property a'la react-router <Link/> */
+  /** Navigation property à la react-router <Link/> */
   to?: string
   children?: React.ReactNode
   icon?: IconName | React.ReactNode

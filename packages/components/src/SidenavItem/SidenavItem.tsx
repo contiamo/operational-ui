@@ -13,7 +13,7 @@ export interface Props {
   css?: Css
   className?: string
   onClick?: () => void
-  /** Navigation property a'la react-router <Link/> */
+  /** Navigation property à la react-router <Link/> */
   to?: string
   active?: boolean
   icon?: IconName | React.ReactNode

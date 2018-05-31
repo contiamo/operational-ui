@@ -13,14 +13,10 @@ export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
-  /* 
-   * Invoked when you click on the button 
-   *
-   * @todo Adjust typings to be compatible with React.SyntheticEvent
-   */
-  onClick?: (ev: any) => void
+  /** Invoked when you click on the button */
+  onClick?: () => void
   type?: string
-  /** Navigation property a'la react-router <Link/> */
+  /** Navigation property à la react-router <Link/> */
   to?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
   color?: string
@@ -118,7 +114,7 @@ const Button = (props: Props) => {
               ev.preventDefault()
               return
             }
-            props.onClick && props.onClick(ev)
+            props.onClick && props.onClick()
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
               ev.preventDefault()
               ctx.pushState(props.to)
