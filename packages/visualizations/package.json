@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "parcel scripts/dev-server/index.html",
-    "test": "echo 'No automated tests for now. Make sure to re-add `jest` here once there are tests.'",
+    "test": "jest",
     "test:u": "jest -u",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "rm -rf lib && tsc -w",

@@ -25,7 +25,7 @@ import {
   reduce,
   sortBy,
 } from "lodash/fp"
-import FocusUtils from "../../utils/focus_utils"
+import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import * as styles from "./styles"
 import * as globalStyles from "../../utils/styles"
 
@@ -67,7 +67,7 @@ class ElementFocus {
     // Remove old focus (may also be a different type of focus)
     this.events.emit(Events.FOCUS.CLEAR)
 
-    FocusUtils.drawHidden(this.el, "element")
+    drawHidden(this.el, "element")
 
     const label = this.el.append("xhtml:ul").attr("class", styles.elementFocus)
 
@@ -91,19 +91,11 @@ class ElementFocus {
       .text(payload.value)
 
     // Get label dimensions
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const drawingDimensions: Dimensions = this.state.current.get("computed").canvas.drawingDims
     const offset: number = this.state.current.get("config").focusOffset + payload.offset
 
-    FocusUtils.positionLabel(
-      this.el,
-      payload.focus,
-      labelDimensions,
-      this.getDrawingPosition(),
-      offset,
-      payload.position,
-      true
-    )
+    positionLabel(this.el, payload.focus, labelDims, this.getDrawingPosition(), offset, payload.position, true)
   }
 
   private getDrawingPosition(): { xMax: number; xMin: number; yMax: number; yMin: number } {

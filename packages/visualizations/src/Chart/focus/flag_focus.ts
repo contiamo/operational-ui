@@ -1,4 +1,4 @@
-import FocusUtils from "../../utils/focus_utils"
+import { drawHidden, drawVisible, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import Events from "../../utils/event_catalog"
 import { AxisPosition, Computed, D3Selection, Dimensions, EventBus, Object, Position, State } from "../typings"
 import * as d3 from "d3-selection"
@@ -30,7 +30,7 @@ class FlagFocus {
         ? focusData.direction === "up" ? "toRight" : "toLeft"
         : focusData.direction === "up" ? "above" : "below"
 
-    FocusUtils.drawHidden(this.el, "flag", position)
+    drawHidden(this.el, "flag", position)
 
     const content: D3Selection = this.el.append("xhtml:ul").attr("class", styles.flagFocus)
 
@@ -53,16 +53,16 @@ class FlagFocus {
     content.select("li.name").style("border-bottom", `1px solid ${focusData.color}`)
 
     // Get label dimensions
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions()
     const offset: number = this.state.current.get("config").flagFocusOffset
 
     const labelPosition: Position = {
-      left: focusData.x + this.margin("y1") + this.focusDX(focusData, labelDimensions.width, offset),
-      top: focusData.y + this.margin("x2") + this.focusDY(focusData, labelDimensions.height, offset),
+      left: focusData.x + this.margin("y1") + this.focusDX(focusData, labelDims.width, offset),
+      top: focusData.y + this.margin("x2") + this.focusDY(focusData, labelDims.height, offset),
     }
 
-    FocusUtils.drawVisible(this.el, labelPosition)
+    drawVisible(this.el, labelPosition)
   }
 
   private margin(axis: AxisPosition): number {

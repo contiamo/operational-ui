@@ -1,4 +1,4 @@
-import FocusUtils from "../utils/focus_utils"
+import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
 import * as d3 from "d3-selection"
 import Events from "../utils/event_catalog"
 import {
@@ -51,7 +51,7 @@ class SunburstFocus implements Focus {
     const focusPoint: FocusPoint = payload.focusPoint,
       datum: Datum = payload.d
 
-    FocusUtils.drawHidden(this.el, "element", focusPoint.labelPosition)
+    drawHidden(this.el, "element", focusPoint.labelPosition)
 
     const content: D3Selection = this.el.append("xhtml:ul")
 
@@ -67,7 +67,7 @@ class SunburstFocus implements Focus {
     content.append("xhtml:li").text(this.percentageString(datum))
 
     const focus: Point = { x: focusPoint.centroid[0], y: focusPoint.centroid[1] }
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const drawingDimensions = {
       xMin: 0,
@@ -75,10 +75,10 @@ class SunburstFocus implements Focus {
       xMax: drawingDims.width,
       yMax: drawingDims.height,
     }
-    FocusUtils.positionLabel(
+    positionLabel(
       this.el,
       focus,
-      labelDimensions,
+      labelDims,
       drawingDimensions,
       this.state.current.get("config").focusOffset,
       focusPoint.labelPosition
@@ -86,13 +86,13 @@ class SunburstFocus implements Focus {
   }
 
   private labelPlacement(focusPoint: FocusPoint): Position {
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const verticalOffset: number = this.state.current.get("config").focusOffset
     return {
-      left: focusPoint.centroid[0] - labelDimensions.width / 2,
+      left: focusPoint.centroid[0] - labelDims.width / 2,
       top:
         focusPoint.centroid[1] +
-        (focusPoint.labelPosition === "below" ? labelDimensions.height + verticalOffset : -verticalOffset),
+        (focusPoint.labelPosition === "below" ? labelDims.height + verticalOffset : -verticalOffset),
     }
   }
 

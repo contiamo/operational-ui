@@ -25,7 +25,7 @@ import {
   reduce,
   sortBy,
 } from "lodash/fp"
-import FocusUtils from "../../utils/focus_utils"
+import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import * as styles from "./styles"
 import * as globalStyles from "../../utils/styles"
 
@@ -161,7 +161,7 @@ class DateFocus {
   }
 
   private drawLabel(dates: Object<any>, focusData: Object<any>[], isVertical: boolean, position: number): void {
-    const label = FocusUtils.drawHidden(this.el, "date")
+    const label = drawHidden(this.el, "date")
 
     const labels: D3Selection = label
       .selectAll("ul")
@@ -177,18 +177,18 @@ class DateFocus {
     }
 
     // Get label dimensions
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const drawingDimensions: Dimensions = this.state.current.get("computed").canvas.drawingDims
     const offset: number = this.state.current.get("config").focusOffset
     const labelPosition: string = isVertical ? "toRight" : "above"
 
     // Positioning of focus elements depends on orientation
     const focus: Point = {
-      x: isVertical ? position : drawingDimensions.width - labelDimensions.width / 2 - offset,
-      y: isVertical ? offset + labelDimensions.height / 2 : position,
+      x: isVertical ? position : drawingDimensions.width - labelDims.width / 2 - offset,
+      y: isVertical ? offset + labelDims.height / 2 : position,
     }
 
-    FocusUtils.positionLabel(label, focus, labelDimensions, this.getDrawingPosition(), offset, labelPosition, false)
+    positionLabel(label, focus, labelDims, this.getDrawingPosition(), offset, labelPosition, false)
   }
 
   private drawItemsForAxis(labels: D3Selection, data: any, date: Date, axis: AxisPosition) {

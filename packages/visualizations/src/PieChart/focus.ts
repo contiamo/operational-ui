@@ -1,4 +1,4 @@
-import FocusUtils from "../utils/focus_utils"
+import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
 import Events from "../utils/event_catalog"
 import ComponentFocus from "../utils/component_focus"
 import * as d3 from "d3-selection"
@@ -40,7 +40,7 @@ class PieChartFocus implements Focus {
   private onElementHover(payload: HoverPayload): void {
     this.remove()
 
-    FocusUtils.drawHidden(this.el, "element", "above")
+    drawHidden(this.el, "element", "above")
 
     const content: D3Selection = this.el.append("xhtml:ul")
 
@@ -57,7 +57,7 @@ class PieChartFocus implements Focus {
         <span class="percentage">(${percentageString(payload.d.percentage)})</span>`
       )
 
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const drawingContainerRect = this.state.current.get("computed").canvas.drawingContainerRect
     const drawingDimensions = {
       xMin: drawingContainerRect.x,
@@ -67,14 +67,7 @@ class PieChartFocus implements Focus {
     }
 
     const focus: Point = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] }
-    FocusUtils.positionLabel(
-      this.el,
-      focus,
-      labelDimensions,
-      drawingDimensions,
-      this.state.current.get("config").focusOffset,
-      "above"
-    )
+    positionLabel(this.el, focus, labelDims, drawingDimensions, this.state.current.get("config").focusOffset, "above")
   }
 
   private onElementOut(): void {
