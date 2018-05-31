@@ -89,9 +89,11 @@ class ChartSeriesManager implements SeriesManager {
     const barIndices: Object<number> = {}
     forEach((series: Object<any>): void => {
       const hasBars: boolean = !!find({ type: "bars" })(this.renderAs(series))
-      const stackedRenderer: RendererOptions = find({ type: "stacked" })(this.renderAs(series))
-      const hasStackedBars: boolean = !!stackedRenderer && !!find({ type: "bars" })(this.renderAs(stackedRenderer))
 
+      const groupedRenderer: RendererOptions = find((options: any) => includes(options.type)(["stacked", "range"]))(
+        this.renderAs(series)
+      )
+      const hasStackedBars: boolean = !!groupedRenderer && !!find({ type: "bars" })(this.renderAs(groupedRenderer))
       if (!hasBars && !hasStackedBars) {
         return
       }
@@ -142,7 +144,7 @@ class ChartSeriesManager implements SeriesManager {
     }
   }
 
-  private computeRange(range: Object<any>): void {
+  private computeRange(range: Object<any>, index: number): void {
     if (range.series.length !== 2) {
       throw new Error("Range renderer must have exactly 2 series.")
     }
@@ -150,6 +152,7 @@ class ChartSeriesManager implements SeriesManager {
     // Each series is assigned the data from the other series to be used for defining clip paths.
     forEach.convert({ cap: false })((series: Object<any>, i: number) => {
       series.clipData = range.series[1 - i].data
+      series.stackIndex = `range${index + 1}`
     })(range.series)
   }
 

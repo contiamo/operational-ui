@@ -21,6 +21,8 @@ import * as symbol2 from "./symbol-2"
 import * as flags1 from "./flags-1"
 import * as range1 from "./range-1"
 import * as range2 from "./range-2"
+import * as range3 from "./range-3"
+import * as range4 from "./range-4"
 
 export default [
   general1,
@@ -46,4 +48,6 @@ export default [
   flags1,
   range1,
   range2,
+  range3,
+  range4,
 ]
