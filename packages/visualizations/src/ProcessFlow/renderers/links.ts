@@ -183,7 +183,7 @@ class Links implements Renderer {
   // Paths start as a single point at the source node. If the source node has already been rendered,
   // use its position at the start of the transition.
   private startPath(link: TLink): string {
-    const previousData: Data = this.state.previous.get("computed").series.data,
+    const previousData: Data = this.state.previous.get(["computed", "series", "data"]),
       previousNodes: TNode[] = previousData ? previousData.nodes : [],
       existingSource: TNode = find((node: TNode): boolean => node.id() === link.sourceId())(previousNodes),
       x: number = existingSource ? existingSource.x : link.source().x,

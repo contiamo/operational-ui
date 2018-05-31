@@ -103,7 +103,7 @@ export interface Components {
   legend: Legend
 }
 
-export type Facade = Facade<PieChartConfig, AccessorsObject, Computed, Components, Data>
+export type Facade = Facade<PieChartConfig, AccessorsObject, Components, Data>
 
 export interface RendererOptions {
   type: "donut" | "polar" | "gauge"

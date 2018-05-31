@@ -9,7 +9,7 @@ import EventEmitter from "../utils/event_bus"
 import { every, find, has, isEmpty, uniqueId } from "lodash/fp"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { Accessors, AccessorsObject, Components, Computed, Facade, Object, RawData, SunburstConfig } from "./typings"
+import { Accessors, AccessorsObject, Components, Facade, Object, RawData, SunburstConfig } from "./typings"
 
 class SunburstFacade implements Facade {
   private __disposed: boolean = false
@@ -33,7 +33,7 @@ class SunburstFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      computed: {},
     })
   }
 
@@ -78,14 +78,6 @@ class SunburstFacade implements Facade {
         name: (d: RawData): string => d.name || "",
         value: (d: RawData): number => d.value,
       },
-    }
-  }
-
-  private initialComputed(): Computed {
-    return {
-      canvas: {},
-      focus: {},
-      renderer: {},
     }
   }
 

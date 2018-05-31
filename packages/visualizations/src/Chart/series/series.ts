@@ -165,7 +165,13 @@ class ChartSeries {
     const valueAccessor = xIsBaseline ? this.y : this.x
     const positionAccessor = (d: Datum): any =>
       xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : hasValue(d.x1) ? d.x1 : this.x(d)
-    const valueScale = this.state.current.get("computed").axes.computed[xIsBaseline ? this.yAxis() : this.xAxis()].scale
+    const valueScale = this.state.current.get([
+      "computed",
+      "axes",
+      "computed",
+      xIsBaseline ? this.yAxis() : this.xAxis(),
+      "scale",
+    ])
     const datum: Datum = find((d: Datum): boolean => {
       return baselineAccessor(d).toString() === focus.toString()
     })(this.data())

@@ -162,7 +162,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   }
 
   private setAxisScales(): void {
-    this.scale = this.state.current.get("computed").axes.computed[this.axis].scale
+    this.scale = this.state.current.get(["computed", "axes", "computed", this.axis, "scale"])
   }
 
   private assignAccessors(customAccessors: Partial<FlagRendererAccessors>): void {
@@ -293,7 +293,8 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     let bottom: number
     let left: any
     const margin = (axis: AxisPosition): number =>
-      this.state.current.get("computed").axes.margins[axis] || this.state.current.get("config")[axis].margin
+      this.state.current.get(["computed", "axes", "margins", axis]) ||
+      this.state.current.get(["config", axis, "margin"])
 
     return (d: Datum): string => {
       const line = Math.round(attributes[this.position](d))
@@ -333,7 +334,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         direction: this.direction(d),
         color: this.color(d),
         datum: this.axis[0] === "x" ? this.x(d) : this.y(d),
-        formatter: this.state.current.get("computed").axes.computed[this.axis].tickFormatter || identity,
+        formatter: this.state.current.get(["computed", "axes", "computed", this.axis, "tickFormatter"]) || identity,
         label: this.label(d),
         description: this.description(d),
         x: attributes.x ? attributes.x(d) : attributes.x2,

@@ -99,7 +99,6 @@ class CategoricalAxis implements AxisClass<string> {
   compute(): void {
     this.previous = cloneDeep(this.computed)
     const config: ChartConfig = this.state.current.get("config")
-    const computedChart: Computed = this.state.current.get("computed")
     const tickWidth: number = this.computeTickWidth()
     const range: [number, number] = this.computeRange(tickWidth)
     this.computed = {
@@ -249,7 +248,7 @@ class CategoricalAxis implements AxisClass<string> {
     let requiredMargin: number = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
 
     // Add space for flags
-    const flagAxis: Object<any> = this.state.current.get("computed").series.axesWithFlags[this.position]
+    const flagAxis: Object<any> = this.state.current.get(["computed", "series", "axesWithFlags", this.position])
     requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
     const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}

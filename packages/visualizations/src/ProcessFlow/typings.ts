@@ -151,7 +151,7 @@ export interface HoverPayload {
 
 export type Focus = Focus<HoverPayload>
 
-export type Facade = Facade<ProcessFlowConfig, AccessorsObject, Computed, Components, InputData>
+export type Facade = Facade<ProcessFlowConfig, AccessorsObject, Components, InputData>
 
 export interface Components {
   focus: Focus<HoverPayload>

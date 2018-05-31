@@ -5,7 +5,6 @@ import {
   AxisComputed,
   AxisPosition,
   ChartConfig,
-  Computed,
   Dimensions,
   Object,
   Partial,

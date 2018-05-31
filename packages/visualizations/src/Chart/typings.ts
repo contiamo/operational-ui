@@ -262,10 +262,10 @@ export interface AccessorsObject {
 
 // State
 export interface Computed {
-  axes: Object<any>
-  canvas: Object<any>
-  focus: Object<any>
-  series: Object<any>
+  axes?: Object<any>
+  canvas?: Object<any>
+  focus?: Object<any>
+  series?: Object<any>
 }
 
 // Legend
@@ -311,7 +311,7 @@ export type ClipPath = "drawing_clip" | "yrules_clip" | "xyrules_clip"
 
 export type SeriesElements = [RendererType, ClipPath][]
 
-export type Facade = Facade<ChartConfig, AccessorsObject, Computed, Components, Data>
+export type Facade = Facade<ChartConfig, AccessorsObject, Components, Data>
 
 export interface MousePosition {
   x: number

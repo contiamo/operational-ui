@@ -117,8 +117,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
-    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
-    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
+    this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
     this.x0 = (d: Datum): any => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(
@@ -158,7 +158,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private seriesTranslation(): string {
-    const seriesBars: Object<any> = this.state.current.get("computed").axes.computedBars[this.series.key()]
+    const seriesBars: Object<any> = this.state.current.get(["computed", "axes", "computedBars", this.series.key()])
     return this.xIsBaseline ? `translate(${seriesBars.offset}, 0)` : `translate(0, ${seriesBars.offset})`
   }
 
@@ -173,7 +173,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private attributes(): Object<any> {
-    const barWidth: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width
+    const barWidth: number = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "width"])
     return {
       x: this.x0,
       y: this.y1,
@@ -186,7 +186,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   private onMouseOver(d: Datum, el: HTMLElement): void {
     const isNegative: boolean = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
     const dimensions = el.getBoundingClientRect()
-    const barOffset = this.state.current.get("computed").axes.computedBars[this.series.key()].offset
+    const barOffset = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "offset"])
 
     const focusPoint = {
       element: this.xIsBaseline ? this.x(d) : this.y(d),

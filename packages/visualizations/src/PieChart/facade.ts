@@ -11,7 +11,6 @@ import {
   Accessors,
   AccessorsObject,
   Components,
-  Computed,
   Data,
   Datum,
   Facade,
@@ -43,7 +42,7 @@ class PieChartFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      computed: {},
     })
   }
 
@@ -83,14 +82,6 @@ class PieChartFacade implements Facade {
         name: (d: any): string => d.name || "",
         renderAs: (d: any): RendererOptions[] => d.renderAs,
       },
-    }
-  }
-
-  private initialComputed(): Computed {
-    return {
-      canvas: {},
-      focus: {},
-      series: {},
     }
   }
 

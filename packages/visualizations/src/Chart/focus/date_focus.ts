@@ -119,7 +119,7 @@ class DateFocus {
     // Draw focus line and points
     const isVertical: boolean = dates.main.axis[0] === "x"
     const position: number = Math.round(
-      this.state.current.get("computed").axes.computed[dates.main.axis].scale(dates.main.date)
+      this.state.current.get(["computed", "axes", "computed", dates.main.axis, "scale"])(dates.main.date)
     )
     const options: string[] = this.state.current.get("config").focusDateOptions
 
@@ -192,7 +192,7 @@ class DateFocus {
   }
 
   private drawItemsForAxis(labels: D3Selection, data: any, date: Date, axis: AxisPosition) {
-    const formatter = this.state.current.get("computed").axes.computed[axis].tickFormatter
+    const formatter = this.state.current.get(["computed", "axes", "computed", axis, "tickFormatter"])
     this.addTitle(labels, formatter(date))
 
     const partitionedStacks: any[] = partition(get("stack"))(data)
@@ -211,7 +211,10 @@ class DateFocus {
   }
 
   private margin(axis: AxisPosition): number {
-    return this.state.current.get("computed").axes.margins[axis] || this.state.current.get("config")[axis].margin
+    return (
+      this.state.current.get(["computed", "axes", "margins", axis]) ||
+      this.state.current.get(["config", axis, "margin"])
+    )
   }
 
   private getDrawingPosition(): { xMax: number; xMin: number; yMax: number; yMin: number } {

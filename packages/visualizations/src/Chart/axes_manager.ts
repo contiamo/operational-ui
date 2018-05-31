@@ -74,7 +74,7 @@ class AxesManager {
       y2: yAxisConfig.margin,
     }
     const computedMargins: Object<number> = defaults(defaultMargins)(
-      this.state.current.get("computed").axes.margins || {}
+      this.state.current.get(["computed", "axes", "margins"]) || {}
     )
     this.stateWriter("margins", computedMargins)
   }
@@ -106,8 +106,8 @@ class AxesManager {
 
   private createOrUpdate(options: Partial<AxisOptions>, position: AxisPosition): void {
     const fullOptions: AxisOptions = defaults(axisConfig[position])(options)
-    const data = this.state.current.get("computed").series.dataForAxes[position]
-    const existing = this.axes[position]
+    const data = this.state.current.get(["computed", "series", "dataForAxes", position])
+    const existing: AxisClass<any> = this.axes[position]
     existing ? this.update(position, fullOptions) : this.create(position, fullOptions)
   }
 
@@ -119,7 +119,7 @@ class AxesManager {
   }
 
   private update(position: AxisPosition, options: AxisOptions): void {
-    const data = this.state.current.get("computed").series.dataForAxes[position]
+    const data = this.state.current.get(["computed", "series", "dataForAxes", position])
     this.axes[position].update(options, data)
   }
 

@@ -130,8 +130,8 @@ class Text implements RendererClass<TextRendererAccessors> {
 
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
-    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
-    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
+    this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
     if (!isBoolean(this.tilt)) {
       this.tilt = this.xIsBaseline
     }

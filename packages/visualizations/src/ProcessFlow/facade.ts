@@ -9,7 +9,6 @@ import {
   Accessors,
   AccessorsObject,
   Components,
-  Computed,
   Facade,
   FocusElement,
   InputData,
@@ -43,7 +42,7 @@ class ProcessFlowFacade implements Facade {
       data: {},
       config: this.initialConfig(),
       accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      computed: {},
     })
   }
 
@@ -101,14 +100,6 @@ class ProcessFlowFacade implements Facade {
         target: (d: LinkAttrs): TNode | undefined => d.target,
         targetId: (d: LinkAttrs): string | undefined => d.targetId,
       },
-    }
-  }
-
-  private initialComputed(): Computed {
-    return {
-      canvas: {},
-      focus: {},
-      series: {},
     }
   }
 

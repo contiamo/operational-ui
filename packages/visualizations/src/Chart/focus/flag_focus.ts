@@ -66,7 +66,10 @@ class FlagFocus {
   }
 
   private margin(axis: AxisPosition): number {
-    return this.state.current.get("computed").axes.margins[axis] || this.state.current.get("config")[axis].margin
+    return (
+      this.state.current.get(["computed", "axes", "margins", axis]) ||
+      this.state.current.get(["config", axis, "margin"])
+    )
   }
 
   private focusDX(focusData: any, width: number, offset: number): number {

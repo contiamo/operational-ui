@@ -16,7 +16,6 @@ import {
   AxisPosition,
   ChartConfig,
   Components,
-  Computed,
   Data,
   DataAccessors,
   Datum,
@@ -79,13 +78,6 @@ const defaultSeriesAccessors: SeriesAccessors = {
   yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
 }
 
-const initialComputed: Computed = {
-  axes: {},
-  canvas: {},
-  focus: {},
-  series: {},
-}
-
 class ChartFacade implements Facade {
   private __disposed: boolean = false
   private canvas: ChartCanvas
@@ -110,7 +102,7 @@ class ChartFacade implements Facade {
       data: {},
       config: defaults({ uid: uniqueId("chart") })(defaultConfig()),
       accessors: { data: defaultDataAccessors, series: defaultSeriesAccessors },
-      computed: initialComputed,
+      computed: {},
     })
   }
 
