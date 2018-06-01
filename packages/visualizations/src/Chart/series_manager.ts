@@ -279,7 +279,7 @@ class ChartSeriesManager implements SeriesManager {
         color: series.legendColor(),
         label: series.legendName(),
         displayPoint: series.displayFocusPoint(),
-        stack: series.options.stackIndex,
+        stack: !series.options.clipData ? series.options.stackIndex : undefined,
       }
     })(seriesWithoutFlags)
   }
