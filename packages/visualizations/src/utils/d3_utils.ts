@@ -1,6 +1,6 @@
 import { Selection } from "d3-selection"
 import { Transition } from "d3-transition"
-import { D3Selection, D3Transition, Object } from "../shared/typings"
+import { D3Selection, D3Transition } from "../shared/typings"
 import { isFunction } from "lodash/fp"
 
 // Method to explicitly pass the selected element to a method called on a D3 selection

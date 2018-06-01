@@ -11,7 +11,6 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Object,
   RendererAccessor,
   RendererClass,
   RendererType,
@@ -75,8 +74,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       .duration(!!this.el.attr("transform") ? duration : 0)
       .attr("transform", this.seriesTranslation())
 
-    const attributes: Object<any> = this.attributes()
-    const startAttributes: Object<any> = this.startAttributes(attributes)
+    const attributes: { [key: string]: any } = this.attributes()
+    const startAttributes: { [key: string]: any } = this.startAttributes(attributes)
 
     const bars = this.el.selectAll("rect").data(data)
 
@@ -158,11 +157,16 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private seriesTranslation(): string {
-    const seriesBars: Object<any> = this.state.current.get(["computed", "axes", "computedBars", this.series.key()])
+    const seriesBars: { [key: string]: any } = this.state.current.get([
+      "computed",
+      "axes",
+      "computedBars",
+      this.series.key(),
+    ])
     return this.xIsBaseline ? `translate(${seriesBars.offset}, 0)` : `translate(0, ${seriesBars.offset})`
   }
 
-  private startAttributes(attributes: Object<any>): Object<any> {
+  private startAttributes(attributes: { [key: string]: any }): { [key: string]: any } {
     return {
       x: this.xIsBaseline ? this.x0 : this.xScale(0),
       y: this.xIsBaseline ? this.yScale(0) : this.y0,
@@ -172,7 +176,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     }
   }
 
-  private attributes(): Object<any> {
+  private attributes(): { [key: string]: any } {
     const barWidth: number = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "width"])
     return {
       x: this.x0,

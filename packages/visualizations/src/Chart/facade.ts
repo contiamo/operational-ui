@@ -21,7 +21,6 @@ import {
   Datum,
   Facade,
   FocusElement,
-  Object,
   RendererOptions,
   SeriesAccessors,
   SeriesData,
@@ -65,18 +64,18 @@ const defaultAccessors = () => {
       axes: (d: Data): AxesData => d.axes,
     },
     series: {
-      data: (d: Object<any>): Datum[] => d.data,
-      hide: (d: Object<any>): boolean => d.hide || false,
-      hideInLegend: (d: Object<any>): boolean => d.hideInLegend || false,
-      key: (d: Object<any>): string => d.key || uniqueId("key"),
-      legendColor: (d: Object<any>): string => initialColorAssigner(d.key),
-      legendName: (d: Object<any>): string => d.name || d.key || "",
-      renderAs: (d: Object<any>): RendererOptions[] => d.renderAs,
-      axis: (d: Object<any>): AxisPosition => d.axis || "x1", // Only used for flags
-      xAttribute: (d: Object<any>): string => d.xAttribute || "x",
-      yAttribute: (d: Object<any>): string => d.yAttribute || "y",
-      xAxis: (d: Object<any>): "x1" | "x2" => d.xAxis || "x1",
-      yAxis: (d: Object<any>): "y1" | "y2" => d.yAxis || "y1",
+      data: (d: { [key: string]: any }): Datum[] => d.data,
+      hide: (d: { [key: string]: any }): boolean => d.hide || false,
+      hideInLegend: (d: { [key: string]: any }): boolean => d.hideInLegend || false,
+      key: (d: { [key: string]: any }): string => d.key || uniqueId("key"),
+      legendColor: (d: { [key: string]: any }): string => initialColorAssigner(d.key),
+      legendName: (d: { [key: string]: any }): string => d.name || d.key || "",
+      renderAs: (d: { [key: string]: any }): RendererOptions[] => d.renderAs,
+      axis: (d: { [key: string]: any }): AxisPosition => d.axis || "x1", // Only used for flags
+      xAttribute: (d: { [key: string]: any }): string => d.xAttribute || "x",
+      yAttribute: (d: { [key: string]: any }): string => d.yAttribute || "y",
+      xAxis: (d: { [key: string]: any }): "x1" | "x2" => d.xAxis || "x1",
+      yAxis: (d: { [key: string]: any }): "y1" | "y2" => d.yAxis || "y1",
     },
   }
 }
@@ -155,7 +154,7 @@ class ChartFacade implements Facade {
     if (config.palette && !this.customColorAccessor) {
       const assignColors: (key: string, color?: string) => string = defaultColorAssigner(config.palette)
       this.accessors("series", {
-        legendColor: (d: Object<any>): string => assignColors(d.key),
+        legendColor: (d: { [key: string]: any }): string => assignColors(d.key),
       })
     }
     return this.state.config(config)

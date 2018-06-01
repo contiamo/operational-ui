@@ -23,7 +23,7 @@ class DataHandler {
 
     // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
     forEach.convert({ cap: false })((accessor: Accessor<any, any>, key: string): void => {
-      ;(this as any)[key] = (d: Datum): any => (d.data ? accessor(d.data) : accessor(d))
+      ;(this as any)[key] = (d: Datum) => (d.data ? accessor(d.data) : accessor(d))
     })(accessors)
   }
 
@@ -32,7 +32,7 @@ class DataHandler {
 
     const data: RawData = this.state.current.get("accessors").data.data(this.state.current.get("data")) || {}
 
-    const sortingFunction: any = (a: Datum, b: Datum) => {
+    const sortingFunction = (a: Datum, b: Datum) => {
       // Empty segments should always be last
       if (a.data.empty) {
         return 1
@@ -73,7 +73,7 @@ class DataHandler {
     return this.data
   }
 
-  private assignColors(node: any): void {
+  private assignColors(node: Datum): void {
     if (node.data.empty) {
       node.color = "#fff"
       return
@@ -83,15 +83,15 @@ class DataHandler {
     node.color = propagateColors && node.depth > 1 ? node.parent.color : node.depth > 0 ? this.color(node) : undefined
   }
 
-  private assignNames(node: any): void {
+  private assignNames(node: Datum): void {
     node.name = this.name(node)
   }
 
-  private assignIDs(node: any): void {
+  private assignIDs(node: Datum): void {
     node.id = this.id(node)
   }
 
-  private assignValues(node: any): void {
+  private assignValues(node: Datum): void {
     if (this.value(node)) {
       node.value = +this.value(node)
       return

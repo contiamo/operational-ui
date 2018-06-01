@@ -1,6 +1,6 @@
 import Nodes from "../node"
 import Link from "../link"
-import { TNode, TLink, Scale, Object, NodeSelection, LinkSelection } from "../typings"
+import { TNode, TLink, Scale, NodeSelection, LinkSelection } from "../typings"
 import { every, invoke, map } from "lodash/fp"
 import { scaleLinear } from "d3-scale"
 import * as d3 from "d3-selection"
@@ -12,7 +12,7 @@ export const sizeScale = (range: [number, number], data: TNode[] | TLink[]): Sca
     .range(range)
 }
 
-export const filterByMatchers = (matchers: Object<any>): ((d: TNode | TLink) => boolean) => {
+export const filterByMatchers = (matchers: { [key: string]: any }): ((d: TNode | TLink) => boolean) => {
   return (d: TNode | TLink): boolean => {
     return every.convert({ cap: false })((value: any, matcher: string): boolean => {
       return invoke(matcher)(d) === value

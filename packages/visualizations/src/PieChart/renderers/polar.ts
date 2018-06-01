@@ -20,7 +20,6 @@ import {
   EventBus,
   HoverPayload,
   LegendDatum,
-  Object,
   PieChartConfig,
   Renderer,
   RendererAccessor,
@@ -47,7 +46,7 @@ class Polar implements Renderer {
   type: "donut" | "polar" | "gauge" = "polar"
   value: RendererAccessor<number>
 
-  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: { [key: string]: any }) {
     this.state = state
     this.events = events
     this.el = el
@@ -59,7 +58,7 @@ class Polar implements Renderer {
   }
 
   // Initialization and updating config or accessors
-  updateOptions(options: Object<any>): void {
+  updateOptions(options: { [key: string]: any }): void {
     Utils.assignOptions(this, options)
   }
 
@@ -119,7 +118,7 @@ class Polar implements Renderer {
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
-  private arcAttributes(): Object<any> {
+  private arcAttributes(): { [key: string]: any } {
     return {
       path: this.arcTween.bind(this),
       fill: this.color.bind(this),

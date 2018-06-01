@@ -4,14 +4,13 @@ import Renderer from "./renderer"
 import RootLabel from "./root_label"
 import * as d3 from "d3-selection"
 import { HierarchyRectangularNode } from "d3-hierarchy"
-import { Accessor, Config, Object, Focus, Facade } from "../shared/typings"
+import { Accessor, Config, Focus, Facade } from "../shared/typings"
 
 export {
   Accessor,
   Accessors,
   Dimensions,
   EventBus,
-  Object,
   State,
   Point,
   Position,
@@ -36,7 +35,7 @@ export interface SunburstConfig extends Config {
   palette: string[]
   propagateColors: boolean
   sort: boolean
-  zoomNode?: Object<any>
+  zoomNode?: { [key: string]: any }
 }
 
 export interface RawData {
@@ -49,6 +48,8 @@ export interface RawData {
 }
 
 export interface Datum extends HierarchyRectangularNode<RawData> {
+  id?: string
+  value?: number
   color?: string
   name?: string
   zoomable?: boolean
@@ -72,9 +73,9 @@ export interface AccessorsObject {
 }
 
 export interface Computed {
-  canvas: Object<any>
-  focus: Object<any>
-  renderer: Object<any>
+  canvas: { [key: string]: any }
+  focus: { [key: string]: any }
+  renderer: { [key: string]: any }
 }
 
 export interface FocusPoint {

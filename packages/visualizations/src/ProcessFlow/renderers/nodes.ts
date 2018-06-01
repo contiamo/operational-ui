@@ -12,7 +12,6 @@ import {
   FocusElement,
   FocusPoint,
   NodeSelection,
-  Object,
   ProcessFlowConfig,
   Renderer,
   Scale,
@@ -22,7 +21,7 @@ import {
   TNode,
 } from "../typings"
 
-const nodeLabelOptions: Object<Object<any>> = {
+const nodeLabelOptions: { [key: string]: { [key: string]: any } } = {
   top: {
     dy: "0",
     textAnchor: "middle",
@@ -55,7 +54,7 @@ const nodeLabelOptions: Object<Object<any>> = {
   },
 }
 
-const nodeShapeOptions: Object<Object<any>> = {
+const nodeShapeOptions: { [key: string]: { [key: string]: any } } = {
   squareDiamond: {
     symbol: symbolSquare,
     rotation: 45,

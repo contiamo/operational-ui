@@ -1,8 +1,3 @@
-// Generally useful types
-export interface Object<T> {
-  [key: string]: T
-}
-
 // d3 types
 import { Selection } from "d3-selection"
 import { Transition } from "d3-transition"
@@ -26,9 +21,9 @@ export { StateWriter } from "./state_handler"
 export type State = ChartStateReadOnly<ChartStateObject>
 export interface ChartStateObject {
   data: any
-  config: Object<any>
+  config: Config
   accessors: any
-  computed: Object<any>
+  computed: { [key: string]: number }
 }
 
 // Viz elements
@@ -53,7 +48,7 @@ export interface Legend {
 
 export interface Canvas {
   draw: () => void
-  elementFor: (component: string) => any
+  elementFor: (component: string) => D3Selection
   remove: () => void
 }
 

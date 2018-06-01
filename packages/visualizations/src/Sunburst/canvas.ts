@@ -1,16 +1,6 @@
 import Events from "../shared/event_catalog"
 import * as d3 from "d3-selection"
-import {
-  Canvas,
-  D3Selection,
-  Dimensions,
-  EventBus,
-  Object,
-  SeriesEl,
-  State,
-  StateWriter,
-  SunburstConfig,
-} from "./typings"
+import { Canvas, D3Selection, Dimensions, EventBus, SeriesEl, State, StateWriter, SunburstConfig } from "./typings"
 import * as styles from "../shared/styles"
 import * as localStyles from "./styles"
 
@@ -18,7 +8,7 @@ class SunburstCanvas implements Canvas {
   private breadcrumb: D3Selection
   private chartContainer: D3Selection
   private el: SeriesEl
-  private elMap: Object<D3Selection> = {}
+  private elMap: { [key: string]: D3Selection } = {}
   private events: EventBus
   private rootLabel: D3Selection
   private state: State

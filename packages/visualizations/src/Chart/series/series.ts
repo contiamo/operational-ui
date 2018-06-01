@@ -20,7 +20,6 @@ import {
   Datum,
   EventBus,
   LegendDatum,
-  Object,
   RendererClass,
   SingleRendererOptions,
   RendererType,
@@ -36,11 +35,11 @@ class ChartSeries {
   el: D3Selection
   events: EventBus
   oldRenderers: Renderer[]
-  options: Object<any>
+  options: { [key: string]: any }
   renderers: Renderer[] = []
   state: any
   // Accessors
-  data: () => Datum[] | Object<any>[]
+  data: () => Datum[] | { [key: string]: any }[]
   hide: () => boolean
   hideInLegend: () => boolean
   key: () => string
@@ -55,14 +54,14 @@ class ChartSeries {
   x: (d: Datum) => number | string | Date
   y: (d: Datum) => number | string | Date
 
-  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: { [key: string]: any }) {
     this.state = state
     this.events = events
     this.el = el
     this.update(options)
   }
 
-  update(options: Object<any>): void {
+  update(options: { [key: string]: any }): void {
     this.assignAccessors()
     this.options = options
     this.updateRenderers()
@@ -131,7 +130,7 @@ class ChartSeries {
     return this.legendPosition() === "top" && this.yAxis() === "y2" ? "right" : "left"
   }
 
-  getBarsInfo(): Object<any> {
+  getBarsInfo(): { [key: string]: any } {
     const barRenderer: RendererClass<BarsRendererAccessors> = find({ type: "bars" })(this.renderers)
     if (!barRenderer) {
       return

@@ -5,7 +5,6 @@ import {
   Dimensions,
   EventBus,
   HoverPayload,
-  Object,
   Point,
   State,
   AxisPosition,
@@ -45,7 +44,7 @@ class ElementFocus {
   }
 
   private onMouseOver(payload: HoverPayload) {
-    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes
     // Only render a date focus if there isn't a time axis
     const timeAxis: AxisPosition = computedAxes.priorityTimeAxis
     if (timeAxis) {
@@ -100,7 +99,7 @@ class ElementFocus {
 
   private getDrawingPosition(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const computed: Computed = this.state.current.get("computed")
-    const margins: Object<number> = computed.axes.margins
+    const margins: { [key: string]: number } = computed.axes.margins
     return {
       xMin: margins.y1,
       xMax: margins.y1 + computed.canvas.drawingDims.width,

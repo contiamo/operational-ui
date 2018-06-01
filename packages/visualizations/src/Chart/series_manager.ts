@@ -26,7 +26,6 @@ import {
   Datum,
   EventBus,
   GroupedRendererOptions,
-  Object,
   RendererOptions,
   SeriesAccessor,
   SeriesAccessors,
@@ -86,8 +85,8 @@ class ChartSeriesManager implements SeriesManager {
   // The bar indices are used to determine where bars are rendered respective to each tick.
   private assignBarIndices(data: SeriesData): SeriesData {
     let index: number = 0
-    const barIndices: Object<number> = {}
-    forEach((series: Object<any>): void => {
+    const barIndices: { [key: string]: number } = {}
+    forEach((series: { [key: string]: any }): void => {
       const hasBars: boolean = !!find({ type: "bars" })(this.renderAs(series))
 
       const groupedRenderer: RendererOptions = find((options: any) => includes(options.type)(["stacked", "range"]))(
@@ -101,7 +100,7 @@ class ChartSeriesManager implements SeriesManager {
         barIndices[this.key(series)] = index
       }
       if (hasStackedBars) {
-        forEach((stackedSeries: Object<any>) => {
+        forEach((stackedSeries: { [key: string]: any }) => {
           barIndices[this.key(stackedSeries)] = index
         })(series.series)
       }
@@ -131,10 +130,10 @@ class ChartSeriesManager implements SeriesManager {
       forEach.convert({ cap: false })(compute)(groups)
 
       // Flatten data structure by appending each processed individual series of each group to the list of ungrouped series
-      let ungroupedSeries: Object<any>[] = splitData.false || []
+      let ungroupedSeries: { [key: string]: any }[] = splitData.false || []
 
-      forEach((group: Object<any>): void => {
-        forEach((series: Object<any>): void => {
+      forEach((group: { [key: string]: any }): void => {
+        forEach((series: { [key: string]: any }): void => {
           series.renderAs = this.renderAs(this.renderAs(group)[0])
           ungroupedSeries = ungroupedSeries.concat(series)
         })(group.series)
@@ -144,19 +143,19 @@ class ChartSeriesManager implements SeriesManager {
     }
   }
 
-  private computeRange(range: Object<any>, index: number): void {
+  private computeRange(range: { [key: string]: any }, index: number): void {
     if (range.series.length !== 2) {
       throw new Error("Range renderer must have exactly 2 series.")
     }
 
     // Each series is assigned the data from the other series to be used for defining clip paths.
-    forEach.convert({ cap: false })((series: Object<any>, i: number) => {
+    forEach.convert({ cap: false })((series: { [key: string]: any }, i: number) => {
       series.clipData = range.series[1 - i].data
       series.stackIndex = `range${index + 1}`
     })(range.series)
   }
 
-  private computeStack(stack: Object<any>, index: number): void {
+  private computeStack(stack: { [key: string]: any }, index: number): void {
     // By default, stacks are vertical
     const stackAxis: "x" | "y" = (this.renderAs(stack)[0] as GroupedRendererOptions).stackAxis || "y"
     const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
@@ -186,7 +185,7 @@ class ChartSeriesManager implements SeriesManager {
 
     // Return to required series data structure
     forEach((series: any) => {
-      const originalSeries: Object<any> = find({ key: series.key })(stack.series)
+      const originalSeries: { [key: string]: any } = find({ key: series.key })(stack.series)
       originalSeries.data = map((datum: any): Datum => {
         return {
           [baseAxis]: datum.data[baseAxis],
@@ -244,9 +243,9 @@ class ChartSeriesManager implements SeriesManager {
     }, {})(this.series)
   }
 
-  private barSeries(): Object<any> {
-    return reduce((memo: Object<any>, series: Series): Object<any> => {
-      const barsInfo: Object<any> = series.getBarsInfo()
+  private barSeries(): { [key: string]: any } {
+    return reduce((memo: { [key: string]: any }, series: Series): { [key: string]: any } => {
+      const barsInfo: { [key: string]: any } = series.getBarsInfo()
       if (!barsInfo) {
         return memo
       }
@@ -255,8 +254,8 @@ class ChartSeriesManager implements SeriesManager {
     }, {})(this.series)
   }
 
-  private axesWithFlags(): Object<any> {
-    return reduce((axes: Object<any>, series: Series): Object<any> => {
+  private axesWithFlags(): { [key: string]: any } {
+    return reduce((axes: { [key: string]: any }, series: Series): { [key: string]: any } => {
       if (series.hasFlags()) {
         const flag: any = series.get("flag")
         axes[flag.axis] = axes[flag.axis] || { axisPadding: 0 }
@@ -266,10 +265,10 @@ class ChartSeriesManager implements SeriesManager {
     }, {})(this.series)
   }
 
-  private dataForFocus(focusDates: Object<any>): Object<any> {
+  private dataForFocus(focusDates: { [key: string]: any }): { [key: string]: any } {
     const seriesWithoutFlags: Series[] = filter((series: Series): boolean => !series.get("flag"))(this.series)
 
-    return map((series: Series): Object<any> => {
+    return map((series: Series): { [key: string]: any } => {
       const isMainAxis: boolean = includes(focusDates.main.axis)([series.xAxis(), series.yAxis()])
       const axisPriority: string = isMainAxis ? "main" : "comparison"
 
@@ -284,7 +283,7 @@ class ChartSeriesManager implements SeriesManager {
     })(seriesWithoutFlags)
   }
 
-  private create(options: Object<any>): void {
+  private create(options: { [key: string]: any }): void {
     this.series.push(new Series(this.state, this.events, this.el, options))
   }
 

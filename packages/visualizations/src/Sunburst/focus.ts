@@ -9,7 +9,6 @@ import {
   Focus,
   FocusPoint,
   HoverPayload,
-  Object,
   Point,
   Position,
   SeriesEl,
@@ -43,7 +42,7 @@ class SunburstFocus implements Focus {
       return
     }
 
-    const computed: Object<any> = this.state.current.get("computed")
+    const computed = this.state.current.get("computed")
     if (payload.d === computed.renderer.topNode) {
       return
     }
@@ -97,7 +96,7 @@ class SunburstFocus implements Focus {
   }
 
   private percentageString(datum: Datum): string {
-    const computed: Object<any> = this.state.current.get("computed")
+    const computed = this.state.current.get("computed")
     const topNode: Datum = computed.renderer.topNode
     const zoomNode: Datum = computed.renderer.zoomNode
     return !zoomNode || topNode === zoomNode

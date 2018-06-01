@@ -19,7 +19,6 @@ import {
   EventBus,
   HoverPayload,
   LegendDatum,
-  Object,
   PieChartConfig,
   Renderer,
   RendererAccessor,
@@ -44,7 +43,7 @@ class Donut implements Renderer {
   type: "donut" | "polar" | "gauge" = "donut"
   value: RendererAccessor<number>
 
-  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: { [key: string]: any }) {
     this.state = state
     this.events = events
     this.el = el
@@ -56,7 +55,7 @@ class Donut implements Renderer {
   }
 
   // Initialization and updating config or accessors
-  updateOptions(options: Object<any>): void {
+  updateOptions(options: { [key: string]: any }): void {
     Utils.assignOptions(this, options)
   }
 

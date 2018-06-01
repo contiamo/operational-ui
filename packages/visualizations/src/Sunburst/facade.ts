@@ -9,7 +9,7 @@ import EventEmitter from "../shared/event_bus"
 import { every, find, has, isEmpty, uniqueId } from "lodash/fp"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
-import { Accessors, AccessorsObject, Components, Facade, Object, RawData, SunburstConfig } from "./typings"
+import { Accessors, AccessorsObject, Components, Facade, RawData, SunburstConfig } from "./typings"
 
 const defaultConfig = (): SunburstConfig => {
   return {

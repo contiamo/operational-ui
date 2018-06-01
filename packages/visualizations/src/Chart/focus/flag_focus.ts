@@ -1,6 +1,6 @@
 import { drawHidden, drawVisible, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import Events from "../../shared/event_catalog"
-import { AxisPosition, Computed, D3Selection, Dimensions, EventBus, Object, Position, State } from "../typings"
+import { AxisPosition, Computed, D3Selection, Dimensions, EventBus, Position, State } from "../typings"
 import * as d3 from "d3-selection"
 import * as styles from "./styles"
 
@@ -91,7 +91,7 @@ class FlagFocus {
 
   private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const computed: Computed = this.state.current.get("computed")
-    const margins: Object<number> = computed.axes.margins
+    const margins: { [key: string]: number } = computed.axes.margins
     return {
       xMin: margins.y1,
       xMax: margins.y1 + computed.canvas.drawingDims.width,

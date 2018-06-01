@@ -14,7 +14,6 @@ import {
   InputData,
   LinkAttrs,
   NodeAttrs,
-  Object,
   ProcessFlowConfig,
   TNode,
 } from "./typings"
@@ -54,7 +53,7 @@ const defaultAccessors = (): AccessorsObject => {
     },
     node: {
       color: (d: NodeAttrs): string => d.color || "#fff",
-      content: (d: NodeAttrs): Object<any>[] => d.content || [],
+      content: (d: NodeAttrs): { [key: string]: any }[] => d.content || [],
       shape: (d: NodeAttrs): string => d.shape || "squareDiamond",
       size: (d: NodeAttrs): number => d.size || 1,
       stroke: (d: NodeAttrs): string => d.stroke || "#000",
@@ -63,7 +62,7 @@ const defaultAccessors = (): AccessorsObject => {
       labelPosition: (d: NodeAttrs): string => d.labelPosition || "right",
     },
     link: {
-      content: (d: NodeAttrs): Object<any>[] => d.content || [],
+      content: (d: NodeAttrs): { [key: string]: any }[] => d.content || [],
       dash: (d: LinkAttrs): string => d.dash || "0",
       label: (d: LinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
       size: (d: LinkAttrs): number => d.size || 1,

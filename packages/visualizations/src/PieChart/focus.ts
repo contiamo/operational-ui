@@ -8,7 +8,6 @@ import {
   EventBus,
   Focus,
   HoverPayload,
-  Object,
   Point,
   Position,
   SeriesEl,
@@ -25,7 +24,7 @@ class PieChartFocus implements Focus {
   private stateWriter: StateWriter
   private events: EventBus
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: { [key: string]: D3Selection }) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events

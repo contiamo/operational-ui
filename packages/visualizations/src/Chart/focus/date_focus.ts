@@ -4,7 +4,6 @@ import {
   D3Selection,
   Dimensions,
   EventBus,
-  Object,
   Point,
   State,
   MousePosition,
@@ -48,7 +47,7 @@ class DateFocus {
 
   private onMouseMove(mousePosition: MousePosition) {
     // Identify nearest date tick and snap focus to this
-    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes
 
     // Only render a date focus if there is a time axis
     const timeAxis: AxisPosition = computedAxes.priorityTimeAxis
@@ -80,7 +79,7 @@ class DateFocus {
   }
 
   private focusDate(date: Date): void {
-    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes
 
     const mainAxis: AxisPosition = computedAxes.priorityTimeAxis
     const mainAxisComputed: AxisComputed = computedAxes.computed[mainAxis]
@@ -111,11 +110,11 @@ class DateFocus {
     this.focus(focusDates)
   }
 
-  private focus(dates: Object<any>): void {
+  private focus(dates: { [key: string]: any }): void {
     // Remove old focus (may also be a different type of focus)
     this.events.emit(Events.FOCUS.CLEAR)
     // Get focus data
-    const focusData: Object<any>[] = this.state.current.get("computed").series.dataForFocus(dates)
+    const focusData: { [key: string]: any }[] = this.state.current.get("computed").series.dataForFocus(dates)
     // Draw focus line and points
     const isVertical: boolean = dates.main.axis[0] === "x"
     const position: number = Math.round(
@@ -135,7 +134,7 @@ class DateFocus {
   }
 
   private drawLine(isVertical: boolean, position: number): void {
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: { [key: string]: number } = this.state.current.get("computed").canvas.drawingDims
     this.elGroup
       .append("svg:line")
       .attr("x1", isVertical ? position : 0)
@@ -145,7 +144,7 @@ class DateFocus {
       .attr("stroke", "black")
   }
 
-  private drawPoints(focusData: Object<any>[], isVertical: boolean, position: number): void {
+  private drawPoints(focusData: { [key: string]: any }[], isVertical: boolean, position: number): void {
     const pointData: number[] = filter((series: any) => series.displayPoint && isFinite(series.valuePosition))(
       focusData
     )
@@ -160,7 +159,12 @@ class DateFocus {
       .attr("cy", isVertical ? get("valuePosition") : position)
   }
 
-  private drawLabel(dates: Object<any>, focusData: Object<any>[], isVertical: boolean, position: number): void {
+  private drawLabel(
+    dates: { [key: string]: any },
+    focusData: { [key: string]: any }[],
+    isVertical: boolean,
+    position: number
+  ): void {
     const label = drawHidden(this.el, "date")
 
     const labels: D3Selection = label
@@ -202,7 +206,7 @@ class DateFocus {
     // Add stacked items
     const stacks: any = groupBy(get("stack"))(partitionedStacks[0])
     forEach((stack: any) => {
-      const total: number = reduce((sum: number, series: Object<any>) => {
+      const total: number = reduce((sum: number, series: { [key: string]: any }) => {
         return sum + (isFinite(series.value) ? series.value : 0)
       }, 0)(stack)
       this.addTitle(labels, `Stacked total: ${total}`)
@@ -219,7 +223,7 @@ class DateFocus {
 
   private getDrawingPosition(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const computed: Computed = this.state.current.get("computed")
-    const margins: Object<number> = computed.axes.margins
+    const margins: { [key: string]: number } = computed.axes.margins
     return {
       xMin: margins.y1,
       xMax: margins.y1 + computed.canvas.drawingDims.width,
@@ -239,7 +243,7 @@ class DateFocus {
 
   private addSeriesItems(el: D3Selection, data: any[]): void {
     const sortedData = sortBy((d: any) => d.valuePosition)(data)
-    forEach((series: Object<any>): void => this.addSeriesItem(el, series))(sortedData)
+    forEach((series: { [key: string]: any }): void => this.addSeriesItem(el, series))(sortedData)
   }
 
   private addSeriesItem(el: D3Selection, data: any): void {

@@ -20,7 +20,6 @@ import {
   EventBus,
   HoverPayload,
   LegendDatum,
-  Object,
   PieChartConfig,
   Renderer,
   RendererAccessor,
@@ -46,7 +45,7 @@ class Gauge implements Renderer {
   type: "donut" | "polar" | "gauge" = "gauge"
   value: RendererAccessor<number>
 
-  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: { [key: string]: any }) {
     this.state = state
     this.events = events
     this.el = el
@@ -58,7 +57,7 @@ class Gauge implements Renderer {
   }
 
   // Initialization and updating config or accessors
-  updateOptions(options: Object<any>): void {
+  updateOptions(options: { [key: string]: any }): void {
     Utils.assignOptions(this, options)
   }
 
@@ -125,7 +124,7 @@ class Gauge implements Renderer {
     this.updateComparison()
   }
 
-  private arcAttributes(): Object<any> {
+  private arcAttributes(): { [key: string]: any } {
     return {
       path: this.arcTween.bind(this),
       fill: this.arcColor.bind(this),
@@ -202,19 +201,19 @@ class Gauge implements Renderer {
     return (t: number): string => this.computed.arc(f(t))
   }
 
-  private lineTween(comparison: Object<any>): (t: number) => string {
+  private lineTween(comparison: { [key: string]: any }): (t: number) => string {
     // Need to rotate range by 90 degrees, since in d3 pie layout, '0' is vertical above origin.
     // Here, we need '0' to be horizontal to left of origin.
     const range: number[] = map((value: number): number => value + Math.PI / 2)(this.angleRange())
-    const angle = (d: Object<number>): number =>
+    const angle = (d: { [key: string]: number }): number =>
       d3ScaleLinear()
         .range(range)
         .domain([0, this.target])(d.value)
-    const xOuter = (d: Object<number>): number => -d.r * Math.cos(angle(d))
-    const yOuter = (d: Object<number>): number => -d.r * Math.sin(angle(d))
-    const xInner = (d: Object<number>): number => -d.inner * Math.cos(angle(d))
-    const yInner = (d: Object<number>): number => -d.inner * Math.sin(angle(d))
-    const path = (d: Object<number>): string =>
+    const xOuter = (d: { [key: string]: number }): number => -d.r * Math.cos(angle(d))
+    const yOuter = (d: { [key: string]: number }): number => -d.r * Math.sin(angle(d))
+    const xInner = (d: { [key: string]: number }): number => -d.inner * Math.cos(angle(d))
+    const yInner = (d: { [key: string]: number }): number => -d.inner * Math.sin(angle(d))
+    const path = (d: { [key: string]: number }): string =>
       `M${[xInner(d), yInner(d)].join(",")}L${[xOuter(d), yOuter(d)].join(",")}`
     const oldValue: number = this.previousComputed.comparison ? this.value(this.previousComputed.comparison) : 0
     const f = interpolateObject(

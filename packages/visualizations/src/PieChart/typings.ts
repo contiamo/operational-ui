@@ -1,7 +1,7 @@
 // Type definitions for the Contiamo Process Flow visualization
 import * as d3 from "d3-selection"
 import { Arc, Pie, PieArcDatum } from "d3-shape"
-import { Accessor, Config, Facade, Focus, Legend, Object, State } from "../shared/typings"
+import { Accessor, Config, Facade, Focus, Legend, State } from "../shared/typings"
 
 export {
   Accessor,
@@ -13,7 +13,6 @@ export {
   Dimensions,
   EventBus,
   Legend,
-  Object,
   Point,
   Position,
   SeriesEl,
@@ -79,9 +78,9 @@ export interface RendererAccessors {
 }
 
 export interface Computed {
-  canvas: Object<any>
-  focus: Object<any>
-  series: Object<any>
+  canvas: { [key: string]: any }
+  focus: { [key: string]: any }
+  series: { [key: string]: any }
 }
 
 export interface DatumInfo {
@@ -106,7 +105,7 @@ export type Facade = Facade<PieChartConfig, AccessorsObject, Components, Data>
 
 export interface RendererOptions {
   type: "donut" | "polar" | "gauge"
-  accessors?: Object<Accessor<Datum, any>>
+  accessors?: { [key: string]: Accessor<Datum, any> }
   extent?: "semi" | "full"
   comparison?: Datum
   target?: number
@@ -142,6 +141,6 @@ export interface Renderer {
   setData: (data: Datum[]) => void
   state: State
   type: "donut" | "gauge" | "polar"
-  updateOptions: (options: Object<any>) => void
+  updateOptions: (options: { [key: string]: any }) => void
   value: Accessor<Datum | ComputedDatum, number>
 }

@@ -8,7 +8,6 @@ import {
   Focus,
   FocusPoint,
   HoverPayload,
-  Object,
   ProcessFlowConfig,
   SeriesEl,
   State,
@@ -95,9 +94,9 @@ class ProcessFlowFocus implements Focus {
     positionLabel(this.el, focusPoint, labelDims, drawingDimensions, offset, labelPosition)
   }
 
-  private appendContent(container: D3Selection, content: Object<any>[]): void {
+  private appendContent(container: D3Selection, content: { [key: string]: any }[]): void {
     const contentContainer: D3Selection = container.append("div").attr("class", styles.content)
-    forEach((contentItem: Object<any>): void => {
+    forEach((contentItem: { [key: string]: any }): void => {
       contentContainer
         .append("xhtml:li")
         .attr("class", styles.title)
@@ -161,7 +160,7 @@ class ProcessFlowFocus implements Focus {
 
   private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect
-    const computedSeries: Object<any> = this.state.current.get("computed").series
+    const computedSeries: { [key: string]: any } = this.state.current.get("computed").series
 
     return {
       xMax: drawingContainer.left + computedSeries.width,

@@ -18,7 +18,6 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Object,
   RendererAccessor,
   RendererClass,
   RendererType,
@@ -33,7 +32,7 @@ const defaultAccessors: Partial<SymbolRendererAccessors> = {
   symbol: (series: Series, d: Datum) => "circle",
 }
 
-const symbolOptions: Object<any> = {
+const symbolOptions: { [key: string]: any } = {
   circle: {
     symbol: symbolCircle,
   },

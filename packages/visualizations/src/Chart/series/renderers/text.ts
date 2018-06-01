@@ -8,7 +8,6 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Object,
   RendererAccessor,
   RendererClass,
   RendererType,
@@ -70,8 +69,8 @@ class Text implements RendererClass<TextRendererAccessors> {
     this.setAxisScales()
     const data: Datum[] = filter(this.validate.bind(this))(this.data)
     const duration: number = this.state.current.get("config").duration
-    const startAttributes: Object<any> = this.startAttributes()
-    const attributes: Object<any> = this.attributes()
+    const startAttributes: { [key: string]: any } = this.startAttributes()
+    const attributes: { [key: string]: any } = this.attributes()
 
     const text = this.el.selectAll("text").data(data)
 
@@ -141,13 +140,13 @@ class Text implements RendererClass<TextRendererAccessors> {
     return isFinite(this.xScale(this.x(d))) && isFinite(this.yScale(this.y(d)))
   }
 
-  private startAttributes(): Object<any> {
-    const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
+  private startAttributes(): { [key: string]: any } {
+    const computedBars: { [key: string]: any } = this.state.current.get("computed").axes.computedBars
     const offset: number =
       computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
     const rotate: number = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
 
-    const attrs: Object<any> = {
+    const attrs: { [key: string]: any } = {
       x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) : 0) - (this.xIsBaseline ? offset : 0),
       y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d)) - (this.xIsBaseline ? 0 : offset),
       text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
@@ -156,8 +155,8 @@ class Text implements RendererClass<TextRendererAccessors> {
     return attrs
   }
 
-  private attributes(): Object<any> {
-    const computedBars: Object<any> = this.state.current.get("computed").axes.computedBars
+  private attributes(): { [key: string]: any } {
+    const computedBars: { [key: string]: any } = this.state.current.get("computed").axes.computedBars
     const barOffset: number =
       computedBars && computedBars[this.series.key()]
         ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
@@ -168,7 +167,7 @@ class Text implements RendererClass<TextRendererAccessors> {
     const y = (d: Datum): number => d.y1 || this.y(d)
     const isPositive = (d: Datum): boolean => (this.xIsBaseline ? y(d) >= 0 : x(d) >= 0)
 
-    const attrs: Object<any> = {
+    const attrs: { [key: string]: any } = {
       x: (d: Datum): number =>
         this.xScale(x(d)) + (this.xIsBaseline ? barOffset : symbolOffset(d) * (isPositive(d) ? 1 : -1)),
       y: (d: Datum): number =>

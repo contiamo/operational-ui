@@ -1,5 +1,5 @@
 import * as d3 from "d3-selection"
-import { Accessor, Config, Facade, Focus, Legend, Object } from "../shared/typings"
+import { Accessor, Config, Facade, Focus, Legend } from "../shared/typings"
 import { DateRange } from "moment-range"
 export {
   Accessor,
@@ -9,7 +9,6 @@ export {
   Dimensions,
   EventBus,
   Legend,
-  Object,
   State,
   Point,
   Position,
@@ -123,7 +122,7 @@ export interface TextRendererConfig {
 export interface SingleRendererOptions<RendererAccessors> {
   type: RendererType
   accessors?: Partial<RendererAccessors>
-  config?: Object<any>
+  config?: { [key: string]: any }
 }
 
 export interface GroupedRendererOptions {
@@ -155,12 +154,12 @@ export interface Datum {
   [key: string]: any
 }
 
-export type SeriesData = Object<any>[]
+export type SeriesData = { [key: string]: any }[]
 
-export type SeriesAccessor<T> = Accessor<Object<any>, T>
+export type SeriesAccessor<T> = Accessor<{ [key: string]: any }, T>
 
 export interface SeriesAccessors {
-  data: SeriesAccessor<Datum[] | Object<any>[]>
+  data: SeriesAccessor<Datum[] | { [key: string]: any }[]>
   hide: SeriesAccessor<boolean>
   hideInLegend: SeriesAccessor<boolean>
   key: SeriesAccessor<string>
@@ -232,8 +231,8 @@ export interface AxisClass<T> {
   validate: Accessor<any, boolean>
   compute: () => void
   computed: AxisComputed
-  computeAligned?: (computed: Object<any>) => void
-  computeInitial?: () => Object<any>
+  computeAligned?: (computed: { [key: string]: any }) => void
+  computeInitial?: () => { [key: string]: any }
   draw: () => void
   interval?: any
   isXAxis: boolean
@@ -261,10 +260,10 @@ export interface AccessorsObject {
 
 // State
 export interface Computed {
-  axes?: Object<any>
-  canvas?: Object<any>
-  focus?: Object<any>
-  series?: Object<any>
+  axes?: { [key: string]: any }
+  canvas?: { [key: string]: any }
+  focus?: { [key: string]: any }
+  series?: { [key: string]: any }
 }
 
 // Legend

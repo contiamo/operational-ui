@@ -11,7 +11,6 @@ import {
   AxisType,
   D3Selection,
   EventBus,
-  Object,
   State,
   StateWriter,
   XAxisConfig,
@@ -35,7 +34,7 @@ const yAxisConfig: Partial<YAxisConfig> = {
   outerPadding: 3,
 }
 
-const axisConfig: Object<AxisConfig> = {
+const axisConfig: { [key: string]: AxisConfig } = {
   x1: assign({ tickOffset: 4 })(xAxisConfig),
   x2: assign({ tickOffset: -4 })(xAxisConfig),
   y1: assign({ tickOffset: -4 })(yAxisConfig),
@@ -43,12 +42,12 @@ const axisConfig: Object<AxisConfig> = {
 }
 
 class AxesManager {
-  axes: Object<AxisClass<any>> = {}
+  axes: { [key: string]: AxisClass<any> } = {}
   axesDrawn: ("x" | "y")[]
   els: { [key: string]: D3Selection }
   events: EventBus
-  oldAxes: Object<AxisClass<any>> = {}
-  rules: Object<Rules> = {}
+  oldAxes: { [key: string]: AxisClass<any> } = {}
+  rules: { [key: string]: Rules } = {}
   state: State
   stateWriter: StateWriter
 
@@ -67,13 +66,13 @@ class AxesManager {
   }
 
   updateMargins(): void {
-    const defaultMargins: Object<number> = {
+    const defaultMargins: { [key: string]: number } = {
       x1: xAxisConfig.margin,
       x2: xAxisConfig.margin,
       y1: yAxisConfig.margin,
       y2: yAxisConfig.margin,
     }
-    const computedMargins: Object<number> = defaults(defaultMargins)(
+    const computedMargins: { [key: string]: number } = defaults(defaultMargins)(
       this.state.current.get(["computed", "axes", "margins"]) || {}
     )
     this.stateWriter("margins", computedMargins)
@@ -137,7 +136,7 @@ class AxesManager {
   }
 
   private drawAxes(orientation: "x" | "y"): void {
-    const axes: Object<AxisClass<any>> = pickBy((axis: AxisClass<any>): boolean => {
+    const axes: { [key: string]: AxisClass<any> } = pickBy((axis: AxisClass<any>): boolean => {
       return orientation === "x" ? axis.isXAxis : !axis.isXAxis
     })(this.axes)
     keys(axes).length === 2 ? alignAxes(axes) : forEach(invoke("compute"))(axes)

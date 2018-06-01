@@ -11,7 +11,6 @@ import {
   EventBus,
   FlagRendererAccessors,
   FlagRendererConfig,
-  Object,
   RendererAccessor,
   RendererClass,
   RendererType,
@@ -73,7 +72,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     this.setAxisScales()
 
     const data: Datum[] = this.data
-    const attributes: Object<any> = assign({ color: this.color })(this.getAttributes())
+    const attributes: { [key: string]: any } = assign({ color: this.color })(this.getAttributes())
     const duration: number = this.state.current.get("config").duration
     const groups = this.el.selectAll("g").data(data)
 
@@ -90,7 +89,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
       .call(setLineAttributes, attributes, duration)
 
     // Flags
-    const flagAttributes: Object<any> = {
+    const flagAttributes: { [key: string]: any } = {
       stroke: this.color,
       fill: this.color,
       path: this.flagPath(attributes),
@@ -181,11 +180,11 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     })(customConfig)
   }
 
-  private getAttributes(): Object<any> {
+  private getAttributes(): { [key: string]: any } {
     const isXAxis: boolean = this.position === "x"
     const value = isXAxis ? this.x : this.y
     const scale = this.scale
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: { [key: string]: number } = this.state.current.get("computed").canvas.drawingDims
 
     switch (this.axis) {
       case "x1":
@@ -217,7 +216,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     }
   }
 
-  private positionLabel(attributes: Object<any>) {
+  private positionLabel(attributes: { [key: string]: any }) {
     return (d: Datum, el: HTMLElement): void => {
       const label: D3Selection = d3.select(el).attr("transform", "rotate(0)") // Undo any previous rotation before calculating label dimensions.
 
@@ -226,7 +225,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
       const y: number = attributes.y ? attributes.y(d) : attributes.y2
       const isXAxis: boolean = this.position === "x"
       const sign: number = isXAxis ? (attributes.y2 < attributes.y1 ? 1 : -1) : attributes.x2 < attributes.x1 ? 1 : -1
-      const coordinates: Object<number> = {
+      const coordinates: { [key: string]: number } = {
         x: isXAxis ? x : x + sign * this.flagHeight,
         y: isXAxis ? y + sign * this.flagHeight : y,
       }
@@ -258,7 +257,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     }
   }
 
-  private flagPath(attributes: Object<any>): (d: Datum) => string {
+  private flagPath(attributes: { [key: string]: any }): (d: Datum) => string {
     let line: (d: Datum) => number
     let sign: number
     let tip: (d: Datum) => number
@@ -287,7 +286,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     }
   }
 
-  private hoverFlagPath(attributes: Object<any>) {
+  private hoverFlagPath(attributes: { [key: string]: any }) {
     const height: number = 12
     const width: number = 8
     let bottom: number
@@ -324,7 +323,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     }
   }
 
-  private onFlagHover(attributes: Object<any>) {
+  private onFlagHover(attributes: { [key: string]: any }) {
     return (d: Datum, el: any): void => {
       d3.select(el.parentNode).classed("hover", true)
 

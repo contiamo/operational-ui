@@ -10,7 +10,6 @@ import {
   EventBus,
   Focus,
   HoverPayload,
-  Object,
   Point,
   Position,
   SeriesEl,

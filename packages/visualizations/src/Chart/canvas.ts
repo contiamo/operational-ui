@@ -6,7 +6,6 @@ import {
   D3Selection,
   Dimensions,
   EventBus,
-  Object,
   ChartConfig,
   SeriesEl,
   SeriesElements,
@@ -274,7 +273,7 @@ class ChartCanvas implements Canvas {
   }
 
   private margin(axis: AxisPosition): number {
-    const margins: Object<number> = this.state.current.get("computed").axes.margins || {}
+    const margins: { [key: string]: number } = this.state.current.get("computed").axes.margins || {}
     return margins[axis] || 0
   }
 

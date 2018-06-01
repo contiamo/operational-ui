@@ -2,7 +2,7 @@
 import { find, last } from "lodash/fp"
 import * as d3 from "d3-selection"
 import * as styles from "../shared/styles"
-import { D3Selection, Dimensions, Object, Point, Position } from "../shared/typings"
+import { D3Selection, Dimensions, Point, Position } from "../shared/typings"
 
 // Private constants
 const positionClass: { [key: string]: string } = {
@@ -14,14 +14,14 @@ const positionClass: { [key: string]: string } = {
 
 const ARROW_OFFSET: number = 8
 
-const xArrowOffset: any = {
+const xArrowOffset: { [key: string]: number } = {
   above: 0,
   below: 0,
   toLeft: -ARROW_OFFSET,
   toRight: ARROW_OFFSET,
 }
 
-const yArrowOffset: any = {
+const yArrowOffset: { [key: string]: number } = {
   above: -ARROW_OFFSET,
   below: ARROW_OFFSET,
   toLeft: 0,
@@ -41,13 +41,13 @@ const optimalPosition = (possibilities: number[], min: number, max: number, dime
 export const calculateLabelPosition = (
   focus: Point,
   label: Dimensions,
-  drawing: any,
+  drawing: { [key: string]: number },
   offset: number,
   position: string,
   displayArrow: boolean
 ) => {
   // Options for x coordinates
-  const x: Object<number> = {
+  const x: { [key: string]: number } = {
     farLeft: drawing.xMin + offset,
     farRight: drawing.xMax - offset - label.width,
     left: drawing.xMin + focus.x - offset - label.width,
@@ -55,7 +55,7 @@ export const calculateLabelPosition = (
   }
 
   // Options for y coordinates
-  const y: Object<number> = {
+  const y: { [key: string]: number } = {
     above: drawing.yMin + focus.y - offset - label.height,
     below: drawing.yMin + focus.y + offset,
     bottom: drawing.yMax - offset - label.height,
@@ -108,12 +108,12 @@ const drawArrow = (el: D3Selection, coordinates: Point, position: string): void 
 }
 
 // Find the y value that centres the focus label vertically where possible, without overflowing the drawing area.
-export const verticalCenter = (focus: Point, label: Dimensions, drawing: Object<number>): number => {
+export const verticalCenter = (focus: Point, label: Dimensions, drawing: { [key: string]: number }): number => {
   return Math.min(Math.max(focus.y + drawing.yMin - label.height / 2, drawing.yMin), drawing.yMax)
 }
 
 // Find the x value that centres the focus label horizontally where possible, without overflowing the drawing area.
-export const horizontalCenter = (focus: Point, label: Dimensions, drawing: Object<number>): number => {
+export const horizontalCenter = (focus: Point, label: Dimensions, drawing: { [key: string]: number }): number => {
   return Math.min(Math.max(focus.x + drawing.xMin - label.width / 2, drawing.xMin), drawing.xMax)
 }
 
@@ -141,7 +141,7 @@ export const positionLabel = (
   el: D3Selection,
   focus: Point,
   label: Dimensions,
-  drawing: Object<any>,
+  drawing: { [key: string]: number },
   offset: number = 0,
   position: string = "toRight",
   displayArrow: boolean = true

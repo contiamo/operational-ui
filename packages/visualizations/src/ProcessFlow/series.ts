@@ -1,6 +1,6 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
-import { Data, EventBus, Object, SeriesEl, State, StateWriter } from "./typings"
+import { Data, EventBus, SeriesEl, State, StateWriter } from "./typings"
 
 class Series {
   private data: Data
@@ -28,7 +28,7 @@ class Series {
   }
 
   draw(): void {
-    const seriesConfig: Object<any> = this.state.current.get("computed").series
+    const seriesConfig: { [key: string]: any } = this.state.current.get("computed").series
     this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)
     this.renderer.draw(this.data)
     this.drawn = true
