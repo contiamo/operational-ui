@@ -22,7 +22,6 @@ import {
   Facade,
   FocusElement,
   Object,
-  Partial,
   RendererOptions,
   SeriesAccessors,
   SeriesData,

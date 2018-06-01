@@ -46,7 +46,6 @@ import {
   D3Selection,
   EventBus,
   Object,
-  Partial,
   State,
   StateWriter,
   TimeIntervals,

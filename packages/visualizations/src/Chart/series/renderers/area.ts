@@ -20,7 +20,6 @@ import {
   Datum,
   EventBus,
   Object,
-  Partial,
   RendererAccessor,
   RendererClass,
   RendererType,

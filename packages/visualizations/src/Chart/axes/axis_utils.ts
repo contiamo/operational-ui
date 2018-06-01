@@ -7,7 +7,6 @@ import {
   ChartConfig,
   Dimensions,
   Object,
-  Partial,
   XAxisConfig,
   YAxisConfig,
   D3Selection,

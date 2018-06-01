@@ -1,5 +1,4 @@
 // Generally useful types
-export type Partial<T> = { [P in keyof T]?: T[P] }
 export interface Object<T> {
   [key: string]: T
 }

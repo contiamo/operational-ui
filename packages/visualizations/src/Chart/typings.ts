@@ -11,7 +11,6 @@ export {
   Legend,
   Object,
   State,
-  Partial,
   Point,
   Position,
   D3Selection,
