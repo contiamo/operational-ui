@@ -174,10 +174,10 @@ const operational: Theme = {
   shadows,
   colors,
   spacing: 16,
-  box: 56,
+  box: 72,
   borderRadius: 4,
   fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
   baseZIndex: 0,
 }
 

@@ -11,7 +11,7 @@
     "build": "cd packages/website && npm run build",
     "bootstrap": "lerna bootstrap",
     "postinstall": "npm run bootstrap",
-    "clean": "rm -rf node_modules && rm -rf packages/*/node_modules",
+    "clean": "rm -rf node_modules && rm -rf packages/*/node_modules && rm -f packages/*/package-lock.json && rm -f packages/*/yarn.lock && rm -f yarn.lock",
     "test": "lerna run test",
     "lint": "lerna run lint",
     "prettier": "lerna run prettier",
