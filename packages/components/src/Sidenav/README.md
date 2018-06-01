@@ -4,7 +4,7 @@ Sidenavs render a two-level hierarchical navigation element comprised of headers
 
 Typical usage includes `to` props to navigate and to manage highlighted/active state automatically.
 
-```js
+```jsx
 <Sidenav>
   <SidenavHeader to="/one" label="The Prize">
     <SidenavItem label="The First Prize" icon="Settings" to="/one/1" />

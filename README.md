@@ -30,7 +30,8 @@ import { render } from "react-dom"
 import { OperationalUI, Button } from "@operational/components"
 
 // Always wrap your interface in the `OperationalUI` wrapper, 
-// which does important setup work, and requires a single child element.
+// which does groundwork, applies base styles, and allows some 
+// advanced customizations later. Note that it requires a single child element.
 // See https://www.npmjs.com/package/@operational/components
 const MyInterface = () => (
   <OperationalUI>
@@ -47,11 +48,9 @@ You have your first simple button. Head to our [getting started](https://ui.cont
 
 Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with small packages covering various facets of data-driven UI's:
 1. [Components](https://ui.contiamo.com/components), used in the example above, are the smallest and simplest building blocks, implemented as presentational, [controlled](https://reactjs.org/docs/forms.html#controlled-components) React components. Buttons, input fields, modals, date pickers, and the like.
-1. [Blocks](https://ui.contiamo.com/blocks) hold more state, more side effects, more opinions. They are our work-in-progress selection of widgets that worked well with client projects and which seemed like a good enough abstraction for a library.
 1. [Visualizations](https://ui.contiamo.com/visualizations) are full-featured d3 apps, 
-1. The [theme](https://github.com/Contiamo/operational-ui/tree/master/packages/theme) package exports a plain object you can use to customize the designs of components and visualizations.
+1. [Theme](https://github.com/Contiamo/operational-ui/tree/master/packages/theme) package exports a plain object you can use to customize the designs of components and visualizations.
 1. [Utils](https://github.com/Contiamo/operational-ui/tree/master/packages/utils) contain helper methods for color manipulation, creating specific higher-order React components, and d3 helpers.
-1. [Showcase](https://github.com/Contiamo/operational-ui/tree/master/packages/showcase) is the documentation website for the modules.
 
 ## Contributing
 
@@ -59,19 +58,23 @@ We look forward to your contribution and feedback. Simply open an issue or PR to
 
 Below you find some guides on how to work with the codebase:
 
-## Developing locally
+### Developing locally
 
-Install dependencies and link internal packages by running `yarn install`.
+To run the project locally, install dependencies and link internal packages by simply running `yarn install`.
 
-Every package defines a `yarn start` command that spins off a dev server where you can test things out. In `components`, `visualizations` and `blocks`, the exploratory code can be found under `/packages/{package}/scripts/dev-server`. For packages that serve as showcases and demos like `website` and `visual-tests`, the project setup should be familiar as a [create-react-app-ts](https://github.com/wmonk/create-react-app-typescript) project.
+Every package defines a `yarn start` command that spins off a dev server where you can test things out. In `components`, `visualizations` and `blocks`, the exploratory code can be found under `/packages/{package}/scripts/dev-server`. Dev servers are set up as simple [parcel](https://parceljs.org) projects.
 
-### Publishing the demos
+### Semver
 
-Simply run `yarn deploy:website` to publish all demos through the `gh-pages` repository (privileges required).
+`Operational UI` follows semantic versioning for React props. There is a `deprecate` higher-order component that allows to deprecate old props with a warning, making sure the API doesn't break dependant projects even if it might cause layout issues.
 
 ### Publishing to `npm`
 
 Simply run `npm run publish` from an up-to-date local master branch (privileges required).
+
+### Publishing the demos
+
+Simply run `yarn deploy:website` to publish all demos through the `gh-pages` repository (privileges required).
 
 ## License
 

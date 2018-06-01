@@ -1,3 +1,5 @@
+// DO NOT DELETE THIS FILE (styleguidist needs it)
+
 const path = require("path")
 
 module.exports = {

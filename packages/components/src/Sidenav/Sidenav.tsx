@@ -51,7 +51,7 @@ const Container = glamorous.div(({ theme }: { theme: Theme }): CssStatic => {
   }
 })
 
-class Sidenav extends React.Component<Props, State> {
+export class Sidenav extends React.Component<Props, State> {
   render() {
     return (
       <Container id={this.props.id} css={this.props.css} className={this.props.className}>
