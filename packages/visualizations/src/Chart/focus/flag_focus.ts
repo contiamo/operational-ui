@@ -1,5 +1,5 @@
 import { drawHidden, drawVisible, labelDimensions, positionLabel } from "../../utils/focus_utils"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import { AxisPosition, Computed, D3Selection, Dimensions, EventBus, Object, Position, State } from "../typings"
 import * as d3 from "d3-selection"
 import * as styles from "./styles"

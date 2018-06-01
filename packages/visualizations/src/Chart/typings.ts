@@ -1,5 +1,5 @@
 import * as d3 from "d3-selection"
-import { Accessor, Config, Facade, Focus, Legend, Object } from "../utils/typings"
+import { Accessor, Config, Facade, Focus, Legend, Object } from "../shared/typings"
 import { DateRange } from "moment-range"
 export {
   Accessor,
@@ -19,7 +19,7 @@ export {
   SeriesManager,
   StateWriter,
   Canvas,
-} from "../utils/typings"
+} from "../shared/typings"
 
 export interface XAxisConfig {
   fontSize: number

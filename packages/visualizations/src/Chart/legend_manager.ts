@@ -1,5 +1,5 @@
 import ChartLegend from "./legend/legend"
-import * as styles from "../utils/styles"
+import * as styles from "../shared/styles"
 import { forEach, get, reduce } from "lodash/fp"
 import { D3Selection, EventBus, LegendDatum, Object, State, StateWriter } from "./typings"
 

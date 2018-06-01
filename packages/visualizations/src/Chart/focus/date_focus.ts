@@ -10,7 +10,7 @@ import {
   MousePosition,
   AxisPosition,
 } from "../typings"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import {
   includes,
   filter,
@@ -27,7 +27,7 @@ import {
 } from "lodash/fp"
 import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import * as styles from "./styles"
-import * as globalStyles from "../../utils/styles"
+import * as globalStyles from "../../shared/styles"
 
 class DateFocus {
   el: D3Selection

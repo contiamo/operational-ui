@@ -1,8 +1,8 @@
 // Util methods to help position and format focus labels
 import { find, last } from "lodash/fp"
 import * as d3 from "d3-selection"
-import * as styles from "./styles"
-import { D3Selection, Dimensions, Object, Point, Position } from "./typings"
+import * as styles from "../shared/styles"
+import { D3Selection, Dimensions, Object, Point, Position } from "../shared/typings"
 
 // Private constants
 const positionClass: { [key: string]: string } = {

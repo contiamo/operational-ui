@@ -1,7 +1,7 @@
 // Type definitions for the Contiamo Process Flow visualization
 import * as d3 from "d3-selection"
 import { Arc, Pie, PieArcDatum } from "d3-shape"
-import { Accessor, Config, Facade, Focus, Legend, Object, State } from "../utils/typings"
+import { Accessor, Config, Facade, Focus, Legend, Object, State } from "../shared/typings"
 
 export {
   Accessor,
@@ -20,7 +20,7 @@ export {
   SeriesEl,
   State,
   StateWriter,
-} from "../utils/typings"
+} from "../shared/typings"
 
 export type FocusElement = string
 

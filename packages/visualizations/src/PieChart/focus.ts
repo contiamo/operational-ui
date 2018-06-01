@@ -1,6 +1,6 @@
 import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
-import Events from "../utils/event_catalog"
-import ComponentFocus from "../utils/component_focus"
+import Events from "../shared/event_catalog"
+import ComponentFocus from "../shared/component_focus"
 import * as d3 from "d3-selection"
 import {
   D3Selection,

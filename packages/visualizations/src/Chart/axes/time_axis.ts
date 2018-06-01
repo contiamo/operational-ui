@@ -25,7 +25,7 @@ import {
 } from "lodash/fp"
 import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
 const moment: any = extendMoment(Moment as any)

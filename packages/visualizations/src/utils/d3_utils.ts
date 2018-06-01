@@ -1,6 +1,6 @@
 import { Selection } from "d3-selection"
 import { Transition } from "d3-transition"
-import { D3Selection, D3Transition, Object } from "./typings"
+import { D3Selection, D3Transition, Object } from "../shared/typings"
 import { isFunction } from "lodash/fp"
 
 export const withD3Element = (func: any) => {

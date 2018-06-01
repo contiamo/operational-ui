@@ -3,7 +3,7 @@ import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { withD3Element, onTransitionEnd } from "../../utils/d3_utils"
 import * as styles from "./styles"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import { every, invoke, map } from "lodash/fp"
 import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
 import {

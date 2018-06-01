@@ -1,5 +1,5 @@
 import DataHandler from "./data_handler"
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import {
   ClickPayload,
   D3Selection,

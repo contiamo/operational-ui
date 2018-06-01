@@ -1,4 +1,4 @@
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import * as d3 from "d3-selection"
 import {
   Canvas,
@@ -11,7 +11,7 @@ import {
   StateWriter,
   SunburstConfig,
 } from "./typings"
-import * as styles from "../utils/styles"
+import * as styles from "../shared/styles"
 import * as localStyles from "./styles"
 
 class SunburstCanvas implements Canvas {

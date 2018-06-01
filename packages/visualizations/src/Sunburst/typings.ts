@@ -4,7 +4,7 @@ import Renderer from "./renderer"
 import RootLabel from "./root_label"
 import * as d3 from "d3-selection"
 import { HierarchyRectangularNode } from "d3-hierarchy"
-import { Accessor, Config, Object, Focus, Facade } from "../utils/typings"
+import { Accessor, Config, Object, Focus, Facade } from "../shared/typings"
 
 export {
   Accessor,
@@ -20,7 +20,7 @@ export {
   SeriesEl,
   StateWriter,
   Canvas,
-} from "../utils/typings"
+} from "../shared/typings"
 
 export interface SunburstConfig extends Config {
   arrowOffset: number

@@ -11,7 +11,7 @@ import {
   symbolStar,
   symbolTriangle,
 } from "d3-shape"
-import Events from "../../../utils/event_catalog"
+import Events from "../../../shared/event_catalog"
 
 import {
   SymbolRendererAccessors,

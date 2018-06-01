@@ -3,7 +3,7 @@ import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-import { Accessor, Config, Object, Focus, Facade } from "../utils/typings"
+import { Accessor, Config, Object, Focus, Facade } from "../shared/typings"
 
 export {
   Accessor,
@@ -18,7 +18,7 @@ export {
   SeriesEl,
   StateWriter,
   Canvas,
-} from "../utils/typings"
+} from "../shared/typings"
 
 export interface ProcessFlowConfig extends Config {
   borderColor: string

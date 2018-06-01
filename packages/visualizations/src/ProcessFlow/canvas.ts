@@ -1,7 +1,7 @@
 import * as d3 from "d3-selection"
 import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter } from "./typings"
-import Events from "../utils/event_catalog"
-import * as styles from "../utils/styles"
+import Events from "../shared/event_catalog"
+import * as styles from "../shared/styles"
 import { forEach } from "lodash/fp"
 
 class ProcessFlowCanvas implements Canvas {

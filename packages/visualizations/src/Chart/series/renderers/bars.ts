@@ -18,7 +18,7 @@ import {
   SingleRendererOptions,
   State,
 } from "../../typings"
-import Events from "../../../utils/event_catalog"
+import Events from "../../../shared/event_catalog"
 
 export type Options = SingleRendererOptions<BarsRendererAccessors>
 

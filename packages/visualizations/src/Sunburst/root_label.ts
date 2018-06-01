@@ -9,7 +9,7 @@ import {
   StateWriter,
   SunburstConfig,
 } from "./typings"
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import { approxZero, stepFunction } from "../utils/font_sizing_utils"
 
 class RootLabel {

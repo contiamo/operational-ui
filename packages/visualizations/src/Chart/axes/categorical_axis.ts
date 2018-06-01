@@ -23,7 +23,7 @@ import {
 } from "lodash/fp"
 import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import { scaleBand } from "d3-scale"
 import * as styles from "./styles"
 import {

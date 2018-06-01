@@ -1,5 +1,5 @@
 import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
 import {
   D3Selection,

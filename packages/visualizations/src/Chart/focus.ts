@@ -1,5 +1,5 @@
-import Events from "../utils/event_catalog"
-import ComponentFocus from "../utils/component_focus"
+import Events from "../shared/event_catalog"
+import ComponentFocus from "../shared/component_focus"
 import DateFocus from "./focus/date_focus"
 import ElementFocus from "./focus/element_focus"
 import FlagFocus from "./focus/flag_focus"

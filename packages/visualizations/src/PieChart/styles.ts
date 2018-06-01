@@ -1,6 +1,6 @@
 import { css } from "glamor"
 import { operational as theme } from "@operational/theme"
-import { seriesLegend } from "../utils/styles"
+import { seriesLegend } from "../shared/styles"
 
 const comparisonLegendStyle = {
   padding: "1px 3px 0 3px",

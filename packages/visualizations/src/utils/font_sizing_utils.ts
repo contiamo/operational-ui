@@ -1,4 +1,4 @@
-import { D3Selection, Point } from "./typings"
+import { D3Selection, Point } from "../shared/typings"
 import { Selection } from "d3-selection"
 
 export const stepFunction = (element: D3Selection, availableWidth: number) => {

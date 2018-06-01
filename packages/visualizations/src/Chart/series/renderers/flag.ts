@@ -3,7 +3,7 @@ import * as styles from "./styles"
 import { assign, compact, defaults, filter, forEach, identity, map, reduce } from "lodash/fp"
 import { setLineAttributes, setPathAttributes, withD3Element } from "../../../utils/d3_utils"
 import * as d3 from "d3-selection"
-import Events from "../../../utils/event_catalog"
+import Events from "../../../shared/event_catalog"
 import {
   AxisPosition,
   D3Selection,

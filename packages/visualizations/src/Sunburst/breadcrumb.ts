@@ -10,7 +10,7 @@ import {
   StateWriter,
   SunburstConfig,
 } from "./typings"
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
 import { readableTextColor } from "@operational/utils"

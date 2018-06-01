@@ -1,9 +1,9 @@
 import ProcessFlowCanvas from "./canvas"
 import Series from "./series"
 import ProcessFlowFocus from "./focus"
-import Events from "../utils/event_catalog"
-import StateHandler from "../utils/state_handler"
-import EventEmitter from "../utils/event_bus"
+import Events from "../shared/event_catalog"
+import StateHandler from "../shared/state_handler"
+import EventEmitter from "../shared/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,

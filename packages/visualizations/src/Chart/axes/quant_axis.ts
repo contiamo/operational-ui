@@ -1,4 +1,4 @@
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import * as d3 from "d3-selection"
 import {
   cloneDeep,
