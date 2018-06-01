@@ -25,12 +25,7 @@ class FlagFocus {
 
     this.el.classed("flag", true).style("max-width", this.state.current.get("config").maxFocusLabelWidth)
 
-    const position =
-      focusData.axis[0] === "x"
-        ? focusData.direction === "up" ? "toRight" : "toLeft"
-        : focusData.direction === "up" ? "above" : "below"
-
-    drawHidden(this.el, "flag", position)
+    drawHidden(this.el, "flag")
 
     const content: D3Selection = this.el.append("xhtml:ul").attr("class", styles.flagFocus)
 

@@ -67,7 +67,7 @@ class ProcessFlowFocus implements Focus {
 
     // Render the focus label hidden initially to allow placement calculations
     const labelPosition: string = this.state.current.get("config").focusLabelPosition
-    drawHidden(this.el, "element", labelPosition).style("pointer-events", "none")
+    drawHidden(this.el, "element").style("pointer-events", "none")
     const content: SeriesEl = this.el.append("xhtml:ul")
 
     content

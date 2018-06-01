@@ -122,7 +122,7 @@ export const horizontalCenter = (focus: Point, label: Dimensions, drawing: Objec
 // Initial, hidden rendering of the focus label.
 // Allows the dimensions of the focus label to be calculated, and hence allows label positioning,
 // before the label is made visible.
-export const drawHidden = (canvasEl: D3Selection, type: string, position?: string): D3Selection => {
+export const drawHidden = (canvasEl: D3Selection, type: string): D3Selection => {
   return canvasEl.attr("class", `${styles.focusLegend} focus-legend-${type}`).style("visibility", "hidden")
 }
 

@@ -40,16 +40,16 @@ class PieChartFocus implements Focus {
   private onElementHover(payload: HoverPayload): void {
     this.remove()
 
-    drawHidden(this.el, "element", "above")
+    drawHidden(this.el, "element")
 
-    const content: D3Selection = this.el.append("xhtml:ul")
+    const label = this.el.append("xhtml:ul")
 
-    content
+    label
       .append("xhtml:li")
       .attr("class", "title")
       .text(payload.d.key)
 
-    content
+    label
       .append("xhtml:li")
       .attr("class", "series")
       .html(
@@ -58,12 +58,13 @@ class PieChartFocus implements Focus {
       )
 
     const labelDims: Dimensions = labelDimensions(this.el)
-    const drawingContainerRect = this.state.current.get("computed").canvas.drawingContainerRect
+    const drawingContainerDims = this.state.current.get("computed").canvas.drawingContainerDims
+
     const drawingDimensions = {
-      xMin: drawingContainerRect.x,
-      yMin: drawingContainerRect.y,
-      xMax: drawingContainerRect.right,
-      yMax: drawingContainerRect.bottom,
+      xMin: 0,
+      yMin: this.state.current.get("config").height - drawingContainerDims.height,
+      xMax: drawingContainerDims.width,
+      yMax: this.state.current.get("config").height,
     }
 
     const focus: Point = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] }

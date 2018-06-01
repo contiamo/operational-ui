@@ -51,7 +51,7 @@ class SunburstFocus implements Focus {
     const focusPoint: FocusPoint = payload.focusPoint,
       datum: Datum = payload.d
 
-    drawHidden(this.el, "element", focusPoint.labelPosition)
+    drawHidden(this.el, "element")
 
     const content: D3Selection = this.el.append("xhtml:ul")
 
