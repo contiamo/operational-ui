@@ -37,9 +37,11 @@ const containerStyles = ({ theme, isActive }: { theme: Theme; isActive: boolean 
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
     textDecoration: "none",
-    color: isActive ? theme.colors.linkText : "#888",
+    /** @todo Add to theme once colors are updated across codebase */
+    color: isActive ? theme.colors.linkText : "#888888",
   },
   "&:hover": {
+    /** @todo Add to theme once colors are updated across codebase */
     backgroundColor: "#F4F4F4",
   },
 })
