@@ -120,7 +120,7 @@ const CloseButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
 
 class SidenavHeader extends React.Component<Props, State> {
   state = {
-    isOpen: false,
+    isOpen: true,
   }
 
   render() {
