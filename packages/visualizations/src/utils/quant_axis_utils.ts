@@ -52,7 +52,7 @@ export const computeDomain = (data: number[], start: number, end: number): [numb
   if (end < start) {
     throw new Error("Start value cannot be greater than end value.")
   }
-  const extent: [number, number] = this.guess(data)
+  const extent: [number, number] = this.extentCushion(this.guess(data))
   return [start || extent[0], end || extent[1]]
 }
 
@@ -92,18 +92,11 @@ export const guess = (data: number[] = []): number[] => {
   extent[0] = extent[0] > 0 ? 0 : extent[0]
   extent[1] = extent[1] < 0 ? 0 : extent[1]
 
-  return this.extentCushion(extent)
+  return extent
 }
 
 export const ruleClass = (ruleValue: number, index: number, ticks: number[]): string => {
   return index === ticks.indexOf(0) ? "zero" : ""
-}
-
-const suffixes: { [key: number]: string } = {
-  0: "",
-  3: "k",
-  6: "m",
-  9: "bn",
 }
 
 // Formats the numbers on a quant axis and replaces the last tick with a unit tick, if provided.
@@ -115,7 +108,7 @@ export const tickFormatter = (
   const exp: number = -Math.floor(Math.log(step) / Math.LN10)
   const expMatch: number = 3 * Math.round(exp / 3)
   const expMax: number = Math.max(exp, expMatch)
-  const suffix: string = suffixes[-expMatch]
+  const suffix: string = ({ 0: "", 3: "k", 6: "m", 9: "bn" } as any)[-expMatch]
 
   return suffix != null
     ? function(num: number): number | string {
