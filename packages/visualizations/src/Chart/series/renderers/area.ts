@@ -39,6 +39,7 @@ const defaultAccessors: Partial<AreaRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   interpolate: (series: Series, d: Datum) => "linear",
   closeGaps: (series: Series, d: Datum) => true,
+  opacity: (series: Series, d: Datum) => 0.6,
 }
 
 const hasValue = (d: any): boolean => {
@@ -53,6 +54,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   events: EventBus
   interpolate: RendererAccessor<any>
   isRange: boolean
+  opacity: RendererAccessor<number>
   options: Options
   series: Series
   state: State
@@ -102,6 +104,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))
+      .attr("opacity", this.opacity.bind(this))
       .attr("clip-path", `url(#area-clip-${this.series.key()}`)
 
     area
@@ -151,6 +154,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.color = (d?: Datum) => accessors.color(this.series, d)
     this.interpolate = (d?: Datum) => interpolator[accessors.interpolate(this.series, d)]
     this.closeGaps = (d?: Datum) => accessors.closeGaps(this.series, d)
+    this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
   }
 
   private addMissingData(): void {

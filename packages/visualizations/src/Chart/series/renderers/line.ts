@@ -30,6 +30,7 @@ const defaultAccessors: Partial<LineRendererAccessors> = {
   dashed: (series: Series, d: Datum) => false,
   interpolate: (series: Series, d: Datum) => "linear",
   closeGaps: (series: Series, d: Datum) => true,
+  opacity: (series: Series, d: Datum) => 1,
 }
 
 const interpolator = {
@@ -54,6 +55,7 @@ class Line implements RendererClass<LineRendererAccessors> {
   el: D3Selection
   events: EventBus
   interpolate: RendererAccessor<any>
+  opacity: RendererAccessor<number>
   options: Options
   series: Series
   state: State
@@ -100,6 +102,7 @@ class Line implements RendererClass<LineRendererAccessors> {
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))
+      .attr("opacity", this.opacity.bind(this))
 
     line
       .exit()
@@ -133,6 +136,7 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.dashed = (d?: Datum) => accessors.dashed(this.series, d)
     this.interpolate = (d?: Datum) => interpolator[accessors.interpolate(this.series, d)]
     this.closeGaps = (d?: Datum) => accessors.closeGaps(this.series, d)
+    this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
   }
 
   private setAxisScales(): void {

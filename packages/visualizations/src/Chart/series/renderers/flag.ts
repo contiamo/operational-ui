@@ -23,6 +23,7 @@ const defaultAccessors: Partial<FlagRendererAccessors> = {
   description: (series: Series, d: Datum) => d.description || "",
   direction: (series: Series, d: Datum) => d.direction || "up",
   label: (series: Series, d: Datum) => d.label || "",
+  opacity: (series: Series, d: Datum) => 1,
 }
 
 export type Options = SingleRendererOptions<FlagRendererAccessors>
@@ -42,6 +43,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   description: RendererAccessor<string>
   direction: RendererAccessor<"up" | "down">
   label: RendererAccessor<string>
+  opacity: RendererAccessor<number>
   x: RendererAccessor<number | Date | string>
   y: RendererAccessor<number | Date | string>
   // Config
@@ -79,6 +81,8 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     groups.exit().remove()
 
     const enteringGroups = groups.enter().append("svg:g")
+
+    groups.merge(enteringGroups).attr("opacity", this.opacity.bind(this))
 
     // Lines
     enteringGroups.append("line").call(setLineAttributes, attributes)
@@ -172,6 +176,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     this.description = (d: Datum) => accessors.description(this.series, d)
     this.direction = (d: Datum) => accessors.direction(this.series, d)
     this.label = (d: Datum) => accessors.label(this.series, d)
+    this.opacity = (d: Datum) => accessors.opacity(this.series, d)
   }
 
   private assignConfig(customConfig: Partial<FlagRendererConfig>): void {

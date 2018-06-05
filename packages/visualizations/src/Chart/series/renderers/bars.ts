@@ -21,6 +21,7 @@ export type Options = SingleRendererOptions<BarsRendererAccessors>
 const defaultAccessors: Partial<BarsRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   barWidth: (series: Series, d: Datum) => undefined,
+  opacity: (series: Series, d: Datum) => 0.8,
 }
 
 class Bars implements RendererClass<BarsRendererAccessors> {
@@ -34,6 +35,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   series: Series
   state: any
   type: RendererType = "bars"
+  opacity: RendererAccessor<number>
   x: RendererAccessor<number | Date | string>
   x0: RendererAccessor<number>
   x1: RendererAccessor<number>
@@ -85,6 +87,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       .on("mouseout", this.onMouseOut.bind(this))
       .on("click", withD3Element(this.onClick.bind(this)))
       .attr("clip-path", `url(#area-clip-${this.series.key()}`)
+      .attr("opacity", this.opacity.bind(this))
       .call(setRectAttributes, attributes, duration)
 
     bars
@@ -151,6 +154,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.y = (d: Datum) => this.series.y(d) || d.injectedY
     this.color = (d?: Datum) => accessors.color(this.series, d)
     this.barWidth = (d?: Datum) => accessors.barWidth(this.series, d)
+    this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
   }
 
   private seriesTranslation(): string {

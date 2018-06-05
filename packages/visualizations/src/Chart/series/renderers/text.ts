@@ -18,6 +18,7 @@ export type Options = SingleRendererOptions<TextRendererAccessors>
 
 const defaultAccessors: Partial<TextRendererAccessors> = {
   size: (series: Series, d: Datum) => 10,
+  opacity: (series: Series, d: Datum) => 1,
 }
 
 const verticalTiltAngle = -60
@@ -27,6 +28,7 @@ class Text implements RendererClass<TextRendererAccessors> {
   data: Datum[]
   el: D3Selection
   events: EventBus
+  opacity: RendererAccessor<number>
   options: Options
   series: Series
   size: RendererAccessor<number>
@@ -91,6 +93,7 @@ class Text implements RendererClass<TextRendererAccessors> {
       .attr("text-anchor", attributes.anchor)
       .attr("dominant-baseline", attributes.baseline)
       .style("font-size", `${this.size()}px`)
+      .attr("opacity", this.opacity.bind(this))
       .text(attributes.text)
       .attr("transform", attributes.transform)
 
@@ -118,6 +121,7 @@ class Text implements RendererClass<TextRendererAccessors> {
     this.x = (d: Datum): any => this.series.x(d) || d.injectedX
     this.y = (d: Datum): any => this.series.y(d) || d.injectedY
     this.size = (d?: Datum) => accessors.size(this.series, d)
+    this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
   }
 
   private assignConfig(customConfig: Partial<TextRendererConfig>): void {

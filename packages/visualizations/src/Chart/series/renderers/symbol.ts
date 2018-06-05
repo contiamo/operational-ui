@@ -30,6 +30,7 @@ const defaultAccessors: Partial<SymbolRendererAccessors> = {
   size: (series: Series, d: Datum) => 50,
   stroke: (series: Series, d: Datum) => series.legendColor(),
   symbol: (series: Series, d: Datum) => "circle",
+  opacity: (series: Series, d: Datum) => 0.8,
 }
 
 const symbolOptions: { [key: string]: any } = {
@@ -64,6 +65,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   el: D3Selection
   events: EventBus
   fill: RendererAccessor<string>
+  opacity: RendererAccessor<number>
   options: Options
   series: Series
   size: RendererAccessor<number>
@@ -114,6 +116,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .on("click", withD3Element(this.onClick.bind(this)))
       .attr("fill", this.fill.bind(this))
       .attr("stroke", this.stroke.bind(this))
+      .attr("opacity", this.opacity.bind(this))
       .transition()
       .duration(duration)
       .attr("d", (d: Datum) =>
@@ -163,6 +166,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     this.stroke = (d: Datum) => accessors.stroke(this.series, d)
     this.symbol = (d: Datum) => symbolOptions[accessors.symbol(this.series, d)]
     this.size = (d: Datum) => accessors.size(this.series, d)
+    this.opacity = (d: Datum) => accessors.opacity(this.series, d)
   }
 
   private setAxisScales(): void {

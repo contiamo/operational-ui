@@ -69,6 +69,7 @@ export interface LinearRendererAccessors {
   color: RendererAccessor<string>
   interpolate: RendererAccessor<InterpolationOption>
   closeGaps: RendererAccessor<boolean>
+  opacity: RendererAccessor<number>
 }
 
 export type AreaRendererAccessors = LinearRendererAccessors
@@ -76,6 +77,7 @@ export type AreaRendererAccessors = LinearRendererAccessors
 export interface BarsRendererAccessors {
   color: RendererAccessor<string>
   barWidth: RendererAccessor<number>
+  opacity: RendererAccessor<number>
 }
 
 export interface FlagRendererAccessors {
@@ -83,6 +85,7 @@ export interface FlagRendererAccessors {
   description: RendererAccessor<string>
   direction: RendererAccessor<"up" | "down">
   label: RendererAccessor<string>
+  opacity: RendererAccessor<number>
 }
 
 export interface FlagRendererConfig {
@@ -104,10 +107,12 @@ export interface SymbolRendererAccessors {
   fill: RendererAccessor<string>
   symbol: RendererAccessor<any>
   size: RendererAccessor<number>
+  opacity: RendererAccessor<number>
 }
 
 export interface TextRendererAccessors {
   size: RendererAccessor<number>
+  opacity: RendererAccessor<number>
 }
 
 export interface TextRendererConfig {
