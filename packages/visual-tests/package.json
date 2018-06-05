@@ -10,9 +10,9 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "rm -rf dist && parcel build src/index.html --public-url ./",
-    "prettier": "prettier './src/**/*.{ts,tsx}' --write",
-    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
-    "precommit": "npm run prettier",
+    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
+    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
+    "precommit": "lint-staged",
     "test": "echo 'no tests'",
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
@@ -20,6 +20,7 @@
     "@types/node": "9.6.7",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "lint-staged": "^7.1.3",
     "parcel-bundler": "^1.8.1",
     "prettier": "1.8.2",
     "tslint": "5.9.1",
@@ -37,5 +38,11 @@
     "glamorous": "^4.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

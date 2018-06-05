@@ -12,14 +12,15 @@
   },
   "scripts": {
     "start": "parcel scripts/dev-server/index.html --no-hmr",
+    "precommit": "lint-staged",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
     "package": "rm -rf lib && tsc -d",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:u": "jest -u",
-    "lint": "tslint './src/**/*.{ts,tsx}' --fix",
-    "prettier": "prettier './src/**/*.{ts,tsx}' --write"
+    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
+    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write"
   },
   "peerDependencies": {
     "glamor": "^2.20.40",
@@ -52,6 +53,7 @@
     "jest-enzyme": "3.8.1",
     "jest-glamor-react": "3.1.0",
     "jest-serializer-enzyme": "1.0.0",
+    "lint-staged": "^7.1.3",
     "parcel-bundler": "^1.8.1",
     "prettier": "1.8.2",
     "react-docgen-typescript": "^1.5.0",
@@ -92,5 +94,11 @@
       "jest-enzyme"
     ],
     "mapCoverage": true
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
