@@ -99,6 +99,13 @@ export const ruleClass = (ruleValue: number, index: number, ticks: number[]): st
   return index === ticks.indexOf(0) ? "zero" : ""
 }
 
+const suffixes: { [key: number]: string } = {
+  0: "",
+  3: "k",
+  6: "m",
+  9: "bn",
+}
+
 // Formats the numbers on a quant axis and replaces the last tick with a unit tick, if provided.
 export const tickFormatter = (
   step: number,
@@ -108,7 +115,7 @@ export const tickFormatter = (
   const exp: number = -Math.floor(Math.log(step) / Math.LN10)
   const expMatch: number = 3 * Math.round(exp / 3)
   const expMax: number = Math.max(exp, expMatch)
-  const suffix: string = ({ 0: "", 3: "k", 6: "m", 9: "bn" } as any)[-expMatch]
+  const suffix: string = suffixes[-expMatch]
 
   return suffix != null
     ? function(num: number): number | string {
