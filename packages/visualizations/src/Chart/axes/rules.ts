@@ -1,6 +1,6 @@
 import { AxisComputed, AxisPosition, D3Selection, Object, State } from "../typings"
 import * as styles from "./styles"
-import { includes } from "lodash/fp"
+import { clone, includes } from "lodash/fp"
 
 class Rules {
   el: D3Selection
@@ -19,7 +19,7 @@ class Rules {
     const computedAxes: Object<any> = this.state.current.get("computed").axes.computed
     const axisComputed: AxisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
     const requiredAxes: AxisPosition[] = this.state.current.get("computed").axes.requiredAxes
-    const data: number[] = axisComputed.ticks
+    const data: number[] = clone(axisComputed.ticks)
     if (includes(this.yRules ? "x1" : "y1")(requiredAxes)) {
       data.shift()
     }

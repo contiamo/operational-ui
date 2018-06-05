@@ -50,17 +50,12 @@ export const insertElements = (el: D3Selection, type: string, position: AxisPosi
 
 export const computeRequiredMargin = (
   axis: D3Selection,
-  computedMargins: Object<number>,
   configuredMargin: number,
   outerPadding: number,
   position: AxisPosition
 ): number => {
-  const requiredMargin: number = configuredMargin
-  if (position[0] === "x") {
-    return requiredMargin
-  }
-  const axisWidth: number = axis.node().getBBox().width
-  return Math.max(requiredMargin, Math.ceil(axisWidth) + outerPadding)
+  const axisDimension: number = axis.node().getBBox()[position[0] === "x" ? "height" : "width"]
+  return Math.max(configuredMargin, Math.ceil(axisDimension) + outerPadding)
 }
 
 export const translateAxis = (el: D3Selection, position: AxisPosition, drawingDims: Dimensions): void => {
@@ -163,11 +158,11 @@ const containsZero = (step: number[]): [number, number] => {
 }
 
 export const positionBackgroundRect = (el: any, duration: number): void => {
+  el.selectAll(`rect.${styles.componentRect}`).call(setRectAttributes, {})
+  // Remove current background rect attributes so they do not affect the group dimension calculation.
+
   // Position background rect only once axis has finished transitioning.
   setTimeout((): void => {
-    // Remove current background rect attributes so they do not affect the group dimension calculation.
-    el.selectAll(`rect.${styles.componentRect}`).call(setRectAttributes, {})
-
     // Position background rect
     const group: ClientRect = el.node().getBoundingClientRect()
     const rect: ClientRect = (el.selectAll("rect").node() as Element).getBoundingClientRect()

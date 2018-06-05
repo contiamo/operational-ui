@@ -51,10 +51,6 @@ const hasValue = (d: any): boolean => {
   return !!d || d === 0
 }
 
-const aOrB = (a: any, b: any): any => {
-  return hasValue(a) ? a : b
-}
-
 class Line implements RendererClass<LineRendererAccessors> {
   closeGaps: RendererAccessor<boolean>
   color: RendererAccessor<string>
@@ -136,8 +132,8 @@ class Line implements RendererClass<LineRendererAccessors> {
 
   private assignAccessors(customAccessors: Partial<LineRendererAccessors>): void {
     const accessors: LineRendererAccessors = defaults(defaultAccessors)(customAccessors)
-    this.x = (d: Datum): any => aOrB(this.series.x(d), d.injectedX)
-    this.y = (d: Datum): any => aOrB(this.series.y(d), d.injectedY)
+    this.x = (d: Datum): any => (hasValue(this.series.x(d)) ? this.series.x(d) : d.injectedX)
+    this.y = (d: Datum): any => (hasValue(this.series.y(d)) ? this.series.y(d) : d.injectedY)
     this.color = (d?: Datum): string => accessors.color(this.series, d)
     this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
     this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
@@ -148,8 +144,8 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : aOrB(d.x1, this.x(d)))
-    this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? aOrB(d.y1, this.y(d)) : this.y(d))
+    this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x1) ? d.x1 : this.x(d))
+    this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : this.y(d))
   }
 
   private addMissingData(): void {

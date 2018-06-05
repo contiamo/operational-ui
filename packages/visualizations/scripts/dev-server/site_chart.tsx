@@ -97,33 +97,33 @@ const createData: any = () => {
     series: [
       {
         data: [
-          { x: "March 10th", y: Math.floor(Math.random() * 500) },
-          { x: "March 11th", y: Math.floor(Math.random() * 500) },
-          { x: "March 12th", y: Math.floor(Math.random() * 500) },
-          { x: "March 13th", y: Math.floor(Math.random() * 500) },
-          { x: "March 14th", y: Math.floor(Math.random() * 500) },
-          { x: "March 15th", y: Math.floor(Math.random() * 500) },
-          { x: "March 16th", y: Math.floor(Math.random() * 500) },
-          { x: "March 17th", y: Math.floor(Math.random() * 500) }
+          { x: "March 10th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 11th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 12th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 13th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 14th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 15th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 16th", y: Math.floor(Math.random() * 500) - 250 },
+          { x: "March 17th", y: Math.floor(Math.random() * 500) - 250 }
         ],
         name: "Pageviews 2018",
         key: "series1",
-        renderAs: [TextRenderer, SymbolRenderer],
+        renderAs: [TextRenderer, BarsRenderer],
       },
       {
         data: [
-          { x: "March 10th", y: Math.floor(Math.random() * 300) },
-          { x: "March 11th", y: Math.floor(Math.random() * 300) },
-          { x: "March 12th", y: Math.floor(Math.random() * 300) },
-          { x: "March 13th", y: Math.floor(Math.random() * 300) },
-          { x: "March 14th", y: Math.floor(Math.random() * 300) },
-          { x: "March 15th", y: Math.floor(Math.random() * 500) },
-          { x: "March 16th", y: Math.floor(Math.random() * 500) },
-          { x: "March 17th", y: Math.floor(Math.random() * 500) },
+          { x: "March 10th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 11th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 12th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 13th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 14th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 15th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 16th", y: Math.floor(Math.random() * 300) - 150 },
+          { x: "March 17th", y: Math.floor(Math.random() * 300) - 150 },
         ],
         name: "Users 2018",
         key: "series2",
-        renderAs: [TextRenderer, SymbolRenderer],
+        renderAs: [TextRenderer, BarsRenderer],
       },
       {
         series: [

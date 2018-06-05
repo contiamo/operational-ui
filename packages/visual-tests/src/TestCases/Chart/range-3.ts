@@ -9,24 +9,17 @@ const LineRenderer = {
   },
 }
 
-const AreaRenderer = {
-  type: "area",
-  accessors: {
-    interpolate: () => "monotoneX",
-    closeGaps: () => true,
-  },
+const BarsRenderer = {
+  type: "bars",
 }
 
-const SymbolRenderer = {
-  type: "symbol",
-  accessors: {
-    size: (series: any, d: any) => 10,
-  },
+const TextRenderer = {
+  type: "text",
 }
 
 const RangeRenderer = {
   type: "range",
-  renderAs: [AreaRenderer, LineRenderer, SymbolRenderer],
+  renderAs: [BarsRenderer, LineRenderer, TextRenderer],
 }
 
 const createData = () => {
@@ -38,6 +31,7 @@ const createData = () => {
             data: [
               { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 200 - 100) },
               { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 200 - 100) },
+              { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 200 - 100) },
               { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 200 - 100) },
               { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 200 - 100) },
               { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 200 - 100) },
@@ -97,7 +91,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 }
 
-export const title: string = "Range"
+export const title: string = "Range, bars"
 
 // Must match the file name so we can link to the code on GitHub
-export const slug = "range-1"
+export const slug = "range-3"

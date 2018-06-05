@@ -152,6 +152,7 @@ declare namespace fp {
     any: any
     assign: any
     bind: any
+    clone: any
     cloneDeep: any
     compact: any
     defaults: any
@@ -180,6 +181,7 @@ declare namespace fp {
     isObject: any
     last: any
     mapValues: any
+    mapKeys: any
     max: any
     merge: any
     min: any
@@ -190,6 +192,7 @@ declare namespace fp {
     pluck: any
     rangeStep: any
     remove: any
+    set: any
     size: any
     some: any
     tail: any

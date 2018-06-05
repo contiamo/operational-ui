@@ -22,6 +22,7 @@ export {
 } from "../utils/typings"
 
 export interface XAxisConfig {
+  fontSize: number
   margin: number
   minTicks: number
   outerPadding: number

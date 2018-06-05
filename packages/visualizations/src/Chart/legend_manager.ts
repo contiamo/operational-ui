@@ -1,6 +1,6 @@
 import ChartLegend from "./legend/legend"
 import * as styles from "../utils/styles"
-import { forEach, reduce } from "lodash/fp"
+import { forEach, get, reduce } from "lodash/fp"
 import { D3Selection, EventBus, LegendDatum, Object, State, StateWriter } from "./typings"
 
 interface LegendOption {
@@ -20,7 +20,7 @@ class LegendManager {
   stateWriter: StateWriter
   events: EventBus
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<Object<D3Selection>>) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<{ [key: string]: D3Selection }>) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -33,9 +33,9 @@ class LegendManager {
 
   draw(): void {
     forEach((option: LegendOption): void => {
-      const data: LegendDatum[] = this.state.current.get("computed").series.dataForLegends[option.position][
-        option.float
-      ]
+      const data: LegendDatum[] = get([option.position, option.float])(
+        this.state.current.get("computed").series.dataForLegends
+      )
       this.legends[option.position][option.float].setData(data)
       this.legends[option.position][option.float].draw()
     })(legendOptions)
@@ -85,7 +85,7 @@ class LegendManager {
   }
 
   private calculateMaxWidth(legend: ChartLegend): number {
-    const nodes: any[] = legend.el.selectAll(`div.${styles.seriesLegend}`).nodes()
+    const nodes = legend.el.selectAll(`div.${styles.seriesLegend}`).nodes()
     const maxNodeWidth: number = reduce((maxWidth: number, node: any): number => {
       return Math.max(maxWidth, node.getBoundingClientRect().width)
     }, 0)(nodes)

@@ -5,6 +5,10 @@ const BarsRenderer = {
   type: "bars",
 }
 
+const TextRenderer = {
+  type: "text",
+}
+
 const data: any = {
   series: [
     {
@@ -19,7 +23,7 @@ const data: any = {
       yAttribute: "x",
       name: "Pageviews",
       key: "series1",
-      renderAs: [BarsRenderer],
+      renderAs: [BarsRenderer, TextRenderer],
     },
     {
       data: [
@@ -35,7 +39,7 @@ const data: any = {
       yAttribute: "x",
       name: "Users",
       key: "series2",
-      renderAs: [BarsRenderer],
+      renderAs: [BarsRenderer, TextRenderer],
     },
   ],
   axes: {
@@ -53,11 +57,11 @@ const createData = (renderers: any[]) => {
     series: [
       {
         data: [
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
           { x: new Date(2018, 2, 14), y: undefined },
-          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 500) - 250 },
         ],
         xAttribute: "y",
         yAttribute: "x",
@@ -67,13 +71,13 @@ const createData = (renderers: any[]) => {
       },
       {
         data: [
-          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
-          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
+          { x: new Date(2018, 2, 10), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 11), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 12), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 13), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 14), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) - 250 },
+          { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) - 250 },
         ],
         xAttribute: "y",
         yAttribute: "x",
@@ -106,7 +110,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 
   test("Change to time axis", () => {
-    viz.data(createData([{ type: "bars" }]))
+    viz.data(createData([BarsRenderer, TextRenderer]))
     viz.draw()
   })
 

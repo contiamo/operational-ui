@@ -1,6 +1,6 @@
 import Axis from "./axes/axis"
 import Rules from "../Chart/axes/rules"
-import { any, assign, defaults, find, forEach, get, invoke, keys, map, omitBy, pickBy } from "lodash/fp"
+import { any, assign, defaults, difference, find, forEach, get, invoke, keys, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import {
   AxesData,
@@ -9,7 +9,6 @@ import {
   AxisOptions,
   AxisPosition,
   AxisType,
-  ChartConfig,
   D3Selection,
   EventBus,
   Object,
@@ -20,13 +19,15 @@ import {
 } from "./typings"
 
 const xAxisConfig: Partial<XAxisConfig> = {
-  margin: 14,
+  fontSize: 11,
+  margin: 15,
   minTicks: 2,
   tickSpacing: 65,
   outerPadding: 3,
 }
 
 const yAxisConfig: Partial<YAxisConfig> = {
+  fontSize: 11,
   margin: 34,
   minTicks: 4,
   minTopOffsetTopTick: 21,
@@ -35,7 +36,7 @@ const yAxisConfig: Partial<YAxisConfig> = {
 }
 
 const axisConfig: Object<AxisConfig> = {
-  x1: assign({ tickOffset: 12 })(xAxisConfig),
+  x1: assign({ tickOffset: 4 })(xAxisConfig),
   x2: assign({ tickOffset: -4 })(xAxisConfig),
   y1: assign({ tickOffset: -4 })(yAxisConfig),
   y2: assign({ tickOffset: 4 })(yAxisConfig),
@@ -44,14 +45,14 @@ const axisConfig: Object<AxisConfig> = {
 class AxesManager {
   axes: Object<AxisClass<any>> = {}
   axesDrawn: ("x" | "y")[]
-  els: Object<D3Selection>
+  els: { [key: string]: D3Selection }
   events: EventBus
   oldAxes: Object<AxisClass<any>> = {}
   rules: Object<Rules> = {}
   state: State
   stateWriter: StateWriter
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: { [key: string]: D3Selection }) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -82,7 +83,16 @@ class AxesManager {
     this.stateWriter("previous", {})
     this.stateWriter("computed", {})
     this.axesDrawn = []
+
+    // Check all required axes have been configured
+    const requiredAxes = keys(this.state.current.get("computed").series.dataForAxes)
     const axesOptions: AxesData = this.state.current.get("accessors").data.axes(this.state.current.get("data"))
+    const undefinedAxes: AxisPosition[] = difference(requiredAxes)(keys(axesOptions))
+    if (undefinedAxes.length) {
+      throw new Error(`The following axes have not been configured: ${undefinedAxes.join(", ")}`)
+    }
+    this.stateWriter("requiredAxes", requiredAxes)
+
     // Remove axes that are no longer needed, or whose type has changed
     const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition): boolean => {
       return !axesOptions[key] || axesOptions[key].type === axis.type
@@ -91,20 +101,19 @@ class AxesManager {
     // Create or update currently required axes
     forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions)
     this.setBaselines()
-    this.stateWriter("requiredAxes", keys(this.axes))
     this.stateWriter("priorityTimeAxis", this.priorityTimeAxis())
   }
 
   private createOrUpdate(options: Partial<AxisOptions>, position: AxisPosition): void {
     const fullOptions: AxisOptions = defaults(axisConfig[position])(options)
     const data = this.state.current.get("computed").series.dataForAxes[position]
-    const existing: AxisClass<any> = this.axes[position]
+    const existing = this.axes[position]
     existing ? this.update(position, fullOptions) : this.create(position, fullOptions)
   }
 
   private create(position: AxisPosition, options: AxisOptions): void {
     const el: D3Selection = this.els[`${position[0]}Axes`]
-    const axis: Axis = new Axis(this.state, this.stateWriter, this.events, el, options.type, position)
+    const axis = new Axis(this.state, this.stateWriter, this.events, el, options.type, position)
     this.axes[position] = axis as AxisClass<any>
     this.update(position, options)
   }

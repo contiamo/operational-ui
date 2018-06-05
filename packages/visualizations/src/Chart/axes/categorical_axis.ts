@@ -57,6 +57,7 @@ class CategoricalAxis implements AxisClass<string> {
   stateWriter: StateWriter
   type: AxisType = "categorical"
   // Options
+  fontSize: number
   margin: number
   minTicks: number
   minTopOffsetTopTick: number
@@ -205,12 +206,13 @@ class CategoricalAxis implements AxisClass<string> {
       .call(setTextAttributes, startAttributes)
       .merge(ticks)
       .attr("class", `${styles.tick} ${styles[this.position]}`)
+      .style("font-size", `${this.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
     ticks
       .exit()
       .transition()
-      .duration(config.duration)
+      .duration(config.duration / 2)
       .call(setTextAttributes, defaults(attributes)({ opacity: 1e-6 }))
       .remove()
 
@@ -228,7 +230,7 @@ class CategoricalAxis implements AxisClass<string> {
     const scaleWithOffset = this.scaleWithOffset(this.computed)
     return {
       dx: this.isXAxis ? 0 : this.tickOffset,
-      dy: this.isXAxis ? this.tickOffset : "0.35em",
+      dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : "-0.4em",
       text: identity,
       x: this.isXAxis ? scaleWithOffset : 0,
       y: this.isXAxis ? 0 : scaleWithOffset,
@@ -244,19 +246,13 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private adjustMargins(): void {
-    const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
-    let requiredMargin: number = computeRequiredMargin(
-      this.el,
-      computedMargins,
-      this.margin,
-      this.outerPadding,
-      this.position
-    )
+    let requiredMargin: number = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
 
     // Add space for flags
     const flagAxis: Object<any> = this.state.current.get("computed").series.axesWithFlags[this.position]
     requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
+    const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
     if (computedMargins[this.position] === requiredMargin) {
       return
     }

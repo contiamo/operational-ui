@@ -1,7 +1,8 @@
-import { compact, defaults, filter, get, includes, isFinite, map } from "lodash/fp"
+import { clone, compact, defaults, filter, get, includes, isFinite, last, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import { withD3Element, setRectAttributes } from "../../../utils/d3_utils"
+import { area as d3Area, curveStepAfter } from "d3-shape"
 import {
   AxesData,
   AxisType,
@@ -32,6 +33,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   data: Datum[]
   el: D3Selection
   events: EventBus
+  isRange: boolean
   options: Options
   series: Series
   state: any
@@ -59,13 +61,15 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.options = options
     this.assignAccessors(options.accessors)
     this.data = data
+    this.isRange = !!this.series.options.clipData
   }
 
   draw(): void {
     this.setAxisScales()
+    this.updateClipPath()
+
     const data: Datum[] = filter(this.validate.bind(this))(this.data)
     const duration: number = this.state.current.get("config").duration
-
     this.el
       .transition()
       .duration(!!this.el.attr("transform") ? duration : 0)
@@ -84,6 +88,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
       .on("mouseout", this.onMouseOut.bind(this))
       .on("click", withD3Element(this.onClick.bind(this)))
+      .attr("clip-path", `url(#area-clip-${this.series.key()}`)
       .call(setRectAttributes, attributes, duration)
 
     bars
@@ -114,10 +119,30 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
     this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
-    this.x0 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x0 || 0)
-    this.x1 = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : d.x1 || this.x(d))
-    this.y0 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y0 || 0 : this.y(d))
-    this.y1 = (d: Datum): any => this.yScale(this.xIsBaseline ? d.y1 || this.y(d) : this.y(d))
+    this.x0 = (d: Datum): any => {
+      const baseline = this.isRange ? this.xScale.domain()[0] : 0
+      return this.xScale(
+        this.xIsBaseline ? this.x(d) : Math.min(d.x0, d.x1) || (this.x(d) > baseline ? baseline : this.x(d))
+      )
+    }
+    this.x1 = (d: Datum): any => {
+      const baseline = this.isRange ? this.xScale.domain()[0] : 0
+      return this.xScale(
+        this.xIsBaseline ? this.x(d) : Math.max(d.x0, d.x1) || (this.x(d) > baseline ? this.x(d) : baseline)
+      )
+    }
+    this.y0 = (d: Datum): any => {
+      const baseline = this.isRange ? this.yScale.domain()[0] : 0
+      return this.yScale(
+        this.xIsBaseline ? Math.min(d.y0, d.y1) || (this.y(d) > baseline ? baseline : this.y(d)) : this.y(d)
+      )
+    }
+    this.y1 = (d: Datum): any => {
+      const baseline = this.isRange ? this.yScale.domain()[0] : 0
+      return this.yScale(
+        this.xIsBaseline ? Math.max(d.y0, d.y1) || (this.y(d) > baseline ? this.y(d) : baseline) : this.y(d)
+      )
+    }
   }
 
   private validate(d: Datum): boolean {
@@ -139,7 +164,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private startAttributes(attributes: Object<any>): Object<any> {
     return {
-      x: this.xIsBaseline ? this.x0 : 0,
+      x: this.xIsBaseline ? this.x0 : this.xScale(0),
       y: this.xIsBaseline ? this.yScale(0) : this.y0,
       width: this.xIsBaseline ? attributes.width : 0,
       height: this.xIsBaseline ? 0 : attributes.height,
@@ -160,20 +185,19 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private onMouseOver(d: Datum, el: HTMLElement): void {
     const isNegative: boolean = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
-    const position: string = this.xIsBaseline ? (isNegative ? "below" : "above") : isNegative ? "toLeft" : "toRight"
     const dimensions = el.getBoundingClientRect()
     const barOffset = this.state.current.get("computed").axes.computedBars[this.series.key()].offset
 
     const focusPoint = {
-      position,
       element: this.xIsBaseline ? this.x(d) : this.y(d),
       value: this.xIsBaseline ? this.y(d) : this.x(d),
+      position: this.xIsBaseline ? (isNegative ? "below" : "above") : isNegative ? "toLeft" : "toRight",
       seriesName: this.series.legendName(),
       seriesColor: this.series.legendColor(),
       offset: 0,
       focus: {
-        x: this.x1(d) + (this.xIsBaseline ? barOffset + dimensions.width / 2 : 0), // @TODO check if works for isNegative (stacked and non-stacked)
-        y: this.y1(d) + (this.xIsBaseline ? 0 : barOffset + dimensions.height / 2),
+        x: this.xIsBaseline ? this.x1(d) + barOffset + dimensions.width / 2 : isNegative ? this.x0(d) : this.x1(d),
+        y: this.xIsBaseline ? (isNegative ? this.y0(d) : this.y1(d)) : this.y1(d) + barOffset + dimensions.height / 2,
       },
     }
 
@@ -186,6 +210,45 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private onClick(d: Datum, el: HTMLElement): void {
     this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, el })
+  }
+
+  private updateClipPath(): void {
+    if (!this.isRange) {
+      return
+    }
+    const duration: number = this.state.current.get("config").duration
+    const mainData: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
+    let data: Datum[] = this.series.options.clipData
+
+    // The curveStepAfter interpolation does not account for the width of the bars.
+    // A dummy point is added to the data to prevent the clip-path from cutting off the last point.
+    const dummyPoint = clone(this.xIsBaseline ? last(data) : data[0])
+    delete dummyPoint[this.xIsBaseline ? this.series.xAttribute() : this.series.yAttribute()]
+    this.xIsBaseline ? data.push(dummyPoint) : (data = [dummyPoint].concat(data))
+
+    const clip = this.el.selectAll("clipPath path").data([data])
+
+    clip
+      .enter()
+      .append("svg:clipPath")
+      .attr("id", `area-clip-${this.series.key()}`)
+      .append("svg:path")
+      .merge(clip)
+      .transition()
+      .duration(duration)
+      .attr("d", this.clipPath.bind(this))
+
+    clip.exit().remove()
+  }
+
+  private clipPath(data: any[]): string {
+    const barWidth: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width
+    return d3Area()
+      .x0(this.xIsBaseline ? (d: Datum) => this.x0(d) || this.xScale.range()[1] + barWidth : this.xScale.range()[1])
+      .x1((d: Datum) => this.x1(d) || this.xScale.range()[1] + barWidth)
+      .y0(this.xIsBaseline ? this.yScale.range()[1] : (d: Datum) => this.y0(d) || this.yScale.range()[0] + barWidth)
+      .y1((d: Datum) => this.y1(d) || this.yScale.range()[0] + barWidth)
+      .curve(curveStepAfter)(data)
   }
 }
 

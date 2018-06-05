@@ -4,10 +4,10 @@ import {
   AxisPosition,
   Canvas,
   D3Selection,
+  Dimensions,
   EventBus,
   Object,
   ChartConfig,
-  MousePosition,
   SeriesEl,
   SeriesElements,
   State,
@@ -15,7 +15,7 @@ import {
 } from "./typings"
 import * as styles from "../utils/styles"
 import * as localStyles from "./styles"
-import { forEach, reduce } from "lodash/fp"
+import { forEach, get, reduce } from "lodash/fp"
 
 const seriesElements: SeriesElements = [
   ["area", "drawing_clip"],
@@ -37,11 +37,10 @@ const legends: { position: "top" | "bottom"; float: "left" | "right" }[] = [
 class ChartCanvas implements Canvas {
   private chartContainer: D3Selection
   private drawingContainer: D3Selection
+  private drawingGroup: D3Selection
   private el: SeriesEl
-  private elements: Object<D3Selection> = {}
-  private elMap: Object<D3Selection> = {}
+  private elMap: { [key: string]: D3Selection } = {}
   private events: EventBus
-  private mousePosition: MousePosition
   private state: State
   private stateWriter: StateWriter
 
@@ -54,19 +53,60 @@ class ChartCanvas implements Canvas {
     this.renderLegends()
     this.el = this.renderEl()
     this.renderClipPaths()
-    this.renderDrawingGroup()
+    this.drawingGroup = this.renderDrawingGroup()
     this.renderAxes()
     this.renderRules()
     this.renderSeriesDrawingGroups()
     this.renderFocusElements()
-    this.stateWriter("elements", this.elements)
-    this.events.on("margins:update", (isXAxis: boolean): void => {
-      this.draw()
-      this.calculateDrawingDims()
-      this.events.emit("margins:updated", isXAxis)
-    })
+    this.events.on("margins:update", this.onMarginUpdate.bind(this))
   }
 
+  // Lifecycle
+  draw(): void {
+    const config: ChartConfig = this.state.current.get("config")
+    const dims: Dimensions = this.calculateDrawingContainerDims()
+
+    // Resize elements
+    this.chartContainer
+      .attr("class", `${styles.chartContainer} ${this.state.current.get("config").uid}`)
+      .classed("hidden", this.state.current.get("config").hidden)
+      .style("width", `${config.width}px`)
+      .style("height", `${config.height}px`)
+    this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
+
+    this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
+
+    this.el.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
+
+    this.drawingGroup.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
+
+    const drawingDims: Dimensions = this.calculateDrawingDims()
+    this.updateClipPaths(dims, drawingDims)
+    this.el.on("mousemove", this.onMouseMove.bind(this))
+  }
+
+  remove(): void {
+    this.chartContainer.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this))
+    this.chartContainer.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this))
+    this.chartContainer.node().removeEventListener("click", this.onClick.bind(this))
+    this.chartContainer.remove()
+    this.chartContainer = undefined
+    this.el = undefined
+    this.drawingContainer.remove()
+    this.drawingContainer = undefined
+  }
+
+  // Helper methods
+  elementFor(component: string): D3Selection {
+    return this.elMap[component]
+  }
+
+  onMarginUpdate(isXAxis: boolean): void {
+    this.draw()
+    this.events.emit("margins:updated", isXAxis)
+  }
+
+  // Rendering
   // Chart container
   private renderChartContainer(context: Element): D3Selection {
     const container = document.createElementNS(d3.namespaces["xhtml"], "div")
@@ -93,63 +133,11 @@ class ChartCanvas implements Canvas {
   }
 
   private onMouseMove(): void {
-    const event: any = d3.event
     const mouse: [number, number] = d3.mouse(this.el.node() as any)
-    this.mousePosition = {
+    this.events.emit(Events.CHART.MOVE, {
       x: mouse[0] - this.margin("y1"),
       y: mouse[1] - this.margin("x2"),
-    }
-    this.events.emit(Events.CHART.MOVE, this.mousePosition)
-  }
-
-  // Legends
-  private renderLegends(): void {
-    forEach((options: any): void => {
-      if (options.position === "top") {
-        this.renderLegendBefore(options)
-      } else {
-        this.renderLegendAfter(options)
-      }
-    })(legends)
-  }
-
-  private renderLegendBefore(options: { position: "top" | "bottom"; float: "left" | "right" }): void {
-    const legendNode: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
-    const ref: Node = this.drawingContainer.node()
-    ref.parentNode.insertBefore(legendNode, ref)
-
-    const legend: D3Selection = d3
-      .select(legendNode)
-      .attr("class", `${styles.legend} ${styles.legendTopBottom} ${options.float}`)
-      .style("float", options.float)
-
-    this.elMap[`legend-${options.position}-${options.float}`] = legend
-  }
-
-  private renderLegendAfter(options: { position: "top" | "bottom"; float: "left" | "right" }): void {
-    const legendNode: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
-    this.chartContainer.node().appendChild(legendNode)
-
-    const legend: D3Selection = d3
-      .select(legendNode)
-      .attr("class", `${styles.legend} ${styles.legendTopBottom} ${options.float}`)
-      .style("float", options.float)
-
-    this.elMap[`legend-${options.position}-${options.float}`] = legend
-  }
-
-  private legendHeight(position: "top" | "bottom", float: "left" | "right"): number {
-    return this.state.current.get("computed").series.dataForLegends[position][float].length > 0
-      ? this.elementFor(`legend-${position}-${float}`).node().offsetHeight
-      : 0
-  }
-
-  private totalLegendHeight(): number {
-    const topLegendHeight: number = Math.max(this.legendHeight("top", "left"), this.legendHeight("top", "right"))
-    const bottomLegendHeight: number = this.legendHeight("bottom", "left")
-    this.stateWriter("topLegendHeight", topLegendHeight)
-    this.stateWriter("bottomLegendHeight", bottomLegendHeight)
-    return topLegendHeight + bottomLegendHeight
+    })
   }
 
   // Drawing container
@@ -157,6 +145,44 @@ class ChartCanvas implements Canvas {
     const drawingContainer = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(drawingContainer)
     return d3.select(drawingContainer).attr("class", styles.drawingContainer)
+  }
+
+  // Legends
+  private renderLegends(): void {
+    forEach(this.renderLegend.bind(this))(legends)
+  }
+
+  private renderLegend(options: { position: "top" | "bottom"; float: "left" | "right" }): void {
+    const legendNode: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
+    options.position === "top" ? this.insertLegend(legendNode) : this.appendLegend(legendNode)
+
+    const legend: D3Selection = d3
+      .select(legendNode)
+      .attr("class", `${styles.legend} ${styles.legendTopBottom} ${options.float}`)
+      .style("float", options.float)
+
+    this.elMap[`legend-${options.position}-${options.float}`] = legend
+  }
+
+  private insertLegend(legendNode: Element): void {
+    const ref: Node = this.drawingContainer.node()
+    ref.parentNode.insertBefore(legendNode, ref)
+  }
+
+  private appendLegend(legendNode: Element): void {
+    this.chartContainer.node().appendChild(legendNode)
+  }
+
+  private legendHeight(position: "top" | "bottom", float: "left" | "right"): number {
+    return get([position, float])(this.state.current.get("computed").series.dataForLegends)
+      ? this.elementFor(`legend-${position}-${float}`).node().offsetHeight
+      : 0
+  }
+
+  private totalLegendHeight(): number {
+    const topLegendHeight: number = Math.max(this.legendHeight("top", "left"), this.legendHeight("top", "right"))
+    const bottomLegendHeight: number = this.legendHeight("bottom", "left")
+    return topLegendHeight + bottomLegendHeight
   }
 
   // El
@@ -168,29 +194,27 @@ class ChartCanvas implements Canvas {
   }
 
   // Drawing group
-  private renderDrawingGroup(): void {
-    this.elements.drawing = this.el.append("svg:g").attr("class", "drawing")
+  private renderDrawingGroup(): D3Selection {
+    return this.el.append("svg:g").attr("class", "drawing")
   }
 
   private renderAxes(): void {
     forEach((axis: string): void => {
-      const axesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-axes-group`)
-      this.elements[`${axis}Axes`] = axesGroup
+      const axesGroup: D3Selection = this.drawingGroup.append("svg:g").attr("class", `${axis}-axes-group`)
       this.elMap[`${axis}Axes`] = axesGroup
     })(axes)
   }
 
   private renderRules(): void {
     forEach((axis: string): void => {
-      const rulesGroup: D3Selection = this.elements.drawing.append("svg:g").attr("class", `${axis}-rules-group`)
-      this.elements[axis + "Rules"] = rulesGroup
+      const rulesGroup: D3Selection = this.drawingGroup.append("svg:g").attr("class", `${axis}-rules-group`)
       this.elMap[`${axis}Rules`] = rulesGroup
     })(axes)
   }
 
   private renderSeriesDrawingGroups(): void {
-    const series: D3Selection = this.elements.drawing.append("svg:g").attr("class", "series-drawings-group")
-    this.elements.series = reduce((memo: Object<D3Selection>, se: string[]): Object<D3Selection> => {
+    const series: D3Selection = this.drawingGroup.append("svg:g").attr("class", "series-drawings-group")
+    reduce((memo: { [key: string]: D3Selection }, se: string[]): { [key: string]: D3Selection } => {
       const renderer: string = se[0]
       const clip: string = se[1]
       memo[renderer] = series
@@ -209,7 +233,7 @@ class ChartCanvas implements Canvas {
   }
 
   private renderFocusGroup(): D3Selection {
-    return this.elements.drawing.append("svg:g").attr("class", localStyles.focusGroup)
+    return this.drawingGroup.append("svg:g").attr("class", localStyles.focusGroup)
   }
 
   private renderFocusLabel(): D3Selection {
@@ -233,12 +257,13 @@ class ChartCanvas implements Canvas {
 
   // Clip paths
   private renderClipPaths(): void {
-    this.elements.defs = this.el.append("defs")
+    this.el.append("defs")
     forEach(this.renderClipPath.bind(this))(["drawing", "yrules", "xyrules"])
   }
 
   private renderClipPath(clip: string): void {
-    this.elements.defs
+    this.el
+      .select("defs")
       .append("clipPath")
       .attr("class", `chart-clip-path ${clip}`)
       .append("rect")
@@ -253,41 +278,38 @@ class ChartCanvas implements Canvas {
     return margins[axis] || 0
   }
 
-  private calculateDimensions(): void {
-    this.calculateDrawingContainerDims()
-    this.calculateDrawingDims()
-  }
-
-  private calculateDrawingContainerDims(): void {
+  private calculateDrawingContainerDims(): Dimensions {
     const config = this.state.current.get("config")
-    this.stateWriter("drawingContainerDims", {
+    const dims: Dimensions = {
       height: config.height - this.totalLegendHeight(),
       width: config.width,
-    })
+    }
+    this.stateWriter("drawingContainerDims", dims)
+    return dims
   }
 
-  private calculateDrawingDims(): void {
+  private calculateDrawingDims(): Dimensions {
     const drawingContainerDims: { height: number; width: number } = this.state.current.get("computed").canvas
       .drawingContainerDims
-    this.stateWriter("drawingDims", {
+    const dims: Dimensions = {
       width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
       height: drawingContainerDims.height - this.margin("x1") - this.margin("x2"),
-    })
+    }
+    this.stateWriter("drawingDims", dims)
+    return dims
   }
 
-  private updateClipPaths() {
-    // Set clip path ids
-    const dims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
-    const drawingDims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingDims
-
-    this.elements.defs
+  private updateClipPaths(dims: Dimensions, drawingDims: Dimensions) {
+    this.el
+      .select("defs")
       .select("clipPath.drawing")
       .attr("id", this.prefixedId("_drawing_clip"))
       .select("rect")
       .attr("width", drawingDims.width)
       .attr("height", drawingDims.height)
 
-    this.elements.defs
+    this.el
+      .select("defs")
       .select("clipPath.yrules")
       .attr("id", this.prefixedId("_yrules_clip"))
       .select("rect")
@@ -295,55 +317,14 @@ class ChartCanvas implements Canvas {
       .attr("height", drawingDims.height)
       .attr("transform", `translate(${-this.margin("y1")}, 0)`)
 
-    this.elements.defs
+    this.el
+      .select("defs")
       .select("clipPath.xyrules")
       .attr("id", this.prefixedId("_xyrules_clip"))
       .select("rect")
       .attr("width", dims.width)
       .attr("height", dims.height)
       .attr("transform", `translate(${-this.margin("y1")}, ${-this.margin("x2")})`)
-  }
-
-  // Lifecycle
-  draw(): void {
-    this.calculateDimensions()
-
-    // Set classes
-    this.chartContainer.attr("class", `${styles.chartContainer} ${this.state.current.get("config").uid}`)
-    this.chartContainer.classed("hidden", this.state.current.get("config").hidden)
-
-    this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
-
-    const config: ChartConfig = this.state.current.get("config")
-    const dims: { width: number; height: number } = this.state.current.get("computed").canvas.drawingContainerDims
-
-    this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
-    this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
-    this.el.style("width", `${dims.width}px`).style("height", `${dims.height}px`)
-
-    this.elements.drawing.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
-    this.stateWriter("drawingContainerRect", this.drawingContainer.node().getBoundingClientRect())
-
-    this.updateClipPaths()
-    this.el.on("mousemove", this.onMouseMove.bind(this))
-  }
-
-  remove(): void {
-    this.chartContainer.node().removeEventListener("mouseenter", this.onMouseEnter.bind(this))
-    this.chartContainer.node().removeEventListener("mouseleave", this.onMouseLeave.bind(this))
-    this.chartContainer.node().removeEventListener("click", this.onClick.bind(this))
-    this.elements = {}
-    this.chartContainer.remove()
-    this.chartContainer = undefined
-    this.el = undefined
-    this.elements = {}
-    this.drawingContainer.remove()
-    this.drawingContainer = undefined
-  }
-
-  // Helper method
-  elementFor(component: string): D3Selection {
-    return this.elMap[component]
   }
 }
 
