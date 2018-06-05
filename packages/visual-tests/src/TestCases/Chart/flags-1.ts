@@ -26,13 +26,14 @@ const YFlagRenderer = {
   type: "flag",
   accessors: {
     color: (series, d) => (d.y > 250 ? "red" : "purple"),
+    opacity: (series, d) => 0.4,
   },
   config: {
     axis: "y1",
   },
 }
 
-const createData = () => {
+const createData = (): any => {
   return {
     series: [
       {

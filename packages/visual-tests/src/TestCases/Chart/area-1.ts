@@ -57,7 +57,27 @@ const LineRendererDashed = {
   },
 }
 
-const createData = (renderers: any[]) => {
+const AreaRendererOpacity = {
+  type: "area",
+  accessors: {
+    color: () => "#ccc",
+    interpolate: () => "monotoneX",
+    closeGaps: () => false,
+    opacity: () => 0.2,
+  },
+}
+
+const LineRendererOpacity = {
+  type: "line",
+  accessors: {
+    interpolate: () => "monotoneX",
+    closeGaps: () => false,
+    dashed: () => true,
+    opacity: () => 0.3,
+  },
+}
+
+const createData = (renderers: any[]): any => {
   return {
     series: [
       {
@@ -116,6 +136,11 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
   test("Dashed lines", () => {
     viz.data(createData([AreaRendererWithGaps, LineRendererDashed]))
+    viz.draw()
+  })
+
+  test("Reduce opacity", () => {
+    viz.data(createData([AreaRendererOpacity, LineRendererOpacity]))
     viz.draw()
   })
 

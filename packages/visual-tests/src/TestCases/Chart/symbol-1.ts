@@ -9,11 +9,12 @@ const createRenderer = (options: any) => {
       size: options.size || ((series: any, d: any) => 50),
       stroke: options.stroke || ((series: any, d: any) => series.legendColor()),
       symbol: options.symbol || ((series: any, d: any) => "circle"),
+      opacity: options.opacity || ((series: any, d: any) => 0.8),
     },
   }
 }
 
-const createData = (options: any) => {
+const createData = (options: any): any => {
   return {
     series: [
       {
@@ -96,6 +97,19 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         size: (series: any, d: any) => 25 * d.y,
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         fill: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
+      })
+    )
+    viz.draw()
+  })
+
+  test("Change opacities", () => {
+    viz.data(
+      createData({
+        symbol: (series: any, d: any) => symbols[d.y],
+        size: (series: any, d: any) => 25 * d.y,
+        stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
+        fill: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
+        opacity: (series: any, d: any) => (d.y % 2 === 1 ? 0.4 : 0.6),
       })
     )
     viz.draw()
