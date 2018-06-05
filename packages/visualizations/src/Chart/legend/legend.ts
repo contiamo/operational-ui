@@ -1,7 +1,7 @@
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import * as d3 from "d3-selection"
 import { get } from "lodash/fp"
-import * as styles from "../../utils/styles"
+import * as styles from "../../shared/styles"
 import { withD3Element } from "../../utils/d3_utils"
 import { ComponentConfigInfo, D3Selection, EventBus, Legend, LegendDatum, State, StateWriter } from "../typings"
 

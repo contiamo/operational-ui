@@ -3,7 +3,7 @@ import "d3-transition"
 import { symbol as d3Symbol, symbolDiamond, symbolSquare, symbolCircle } from "d3-shape"
 import { withD3Element, onTransitionEnd } from "../../utils/d3_utils"
 import * as styles from "./styles"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import { every, invoke, map } from "lodash/fp"
 import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
 import {
@@ -12,7 +12,6 @@ import {
   FocusElement,
   FocusPoint,
   NodeSelection,
-  Object,
   ProcessFlowConfig,
   Renderer,
   Scale,
@@ -22,7 +21,7 @@ import {
   TNode,
 } from "../typings"
 
-const nodeLabelOptions: Object<Object<any>> = {
+const nodeLabelOptions: { [key: string]: { [key: string]: any } } = {
   top: {
     dy: "0",
     textAnchor: "middle",
@@ -55,7 +54,7 @@ const nodeLabelOptions: Object<Object<any>> = {
   },
 }
 
-const nodeShapeOptions: Object<Object<any>> = {
+const nodeShapeOptions: { [key: string]: { [key: string]: any } } = {
   squareDiamond: {
     symbol: symbolSquare,
     rotation: 45,

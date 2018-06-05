@@ -1,7 +1,7 @@
 import ChartLegend from "./legend/legend"
-import * as styles from "../utils/styles"
+import * as styles from "../shared/styles"
 import { forEach, get, reduce } from "lodash/fp"
-import { D3Selection, EventBus, LegendDatum, Object, State, StateWriter } from "./typings"
+import { D3Selection, EventBus, LegendDatum, State, StateWriter } from "./typings"
 
 interface LegendOption {
   position: "top" | "bottom"
@@ -15,12 +15,17 @@ const legendOptions: LegendOption[] = [
 ]
 
 class LegendManager {
-  legends: Object<Object<ChartLegend>> = { top: {}, bottom: {} }
+  legends: { [key: string]: { [key: string]: ChartLegend } } = { top: {}, bottom: {} }
   state: State
   stateWriter: StateWriter
   events: EventBus
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<{ [key: string]: D3Selection }>) {
+  constructor(
+    state: State,
+    stateWriter: StateWriter,
+    events: EventBus,
+    els: { [key: string]: { [key: string]: D3Selection } }
+  ) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events

@@ -1,4 +1,4 @@
-import { AxisComputed, AxisPosition, D3Selection, Object, State } from "../typings"
+import { AxisComputed, AxisPosition, D3Selection, State } from "../typings"
 import * as styles from "./styles"
 import { clone, includes } from "lodash/fp"
 
@@ -16,7 +16,7 @@ class Rules {
   }
 
   draw(): void {
-    const computedAxes: Object<any> = this.state.current.get("computed").axes.computed
+    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes.computed
     const axisComputed: AxisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
     const requiredAxes: AxisPosition[] = this.state.current.get("computed").axes.requiredAxes
     const data: number[] = clone(axisComputed.ticks)
@@ -26,8 +26,8 @@ class Rules {
     if (includes(this.yRules ? "x2" : "y2")(requiredAxes)) {
       data.pop()
     }
-    const startAttributes: Object<number> = this.startAttributes()
-    const attributes: Object<number> = this.attributes()
+    const startAttributes: { [key: string]: number } = this.startAttributes()
+    const attributes: { [key: string]: number } = this.attributes()
 
     const rules: any = this.el.selectAll(`line.${styles.rules}`).data(data, String)
 
@@ -59,10 +59,10 @@ class Rules {
       .attr("y2", attributes.y2)
   }
 
-  private startAttributes(): Object<number> {
-    const previousAxes: Object<any> = this.state.current.get("computed").axes.previous
+  private startAttributes(): { [key: string]: number } {
+    const previousAxes: { [key: string]: any } = this.state.current.get("computed").axes.previous
     const axisPrevious: AxisComputed = previousAxes[`${this.orientation}1`] || previousAxes[`${this.orientation}2`]
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: { [key: string]: number } = this.state.current.get("computed").canvas.drawingDims
     return {
       x1: this.yRules ? -this.margin("y1") / 2 : axisPrevious.scale,
       x2: this.yRules ? drawingDims.width + this.margin("y2") / 2 : axisPrevious.scale,
@@ -71,10 +71,10 @@ class Rules {
     }
   }
 
-  private attributes(): Object<number> {
-    const computedAxes: Object<any> = this.state.current.get("computed").axes.computed
+  private attributes(): { [key: string]: number } {
+    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes.computed
     const axisComputed: AxisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: { [key: string]: number } = this.state.current.get("computed").canvas.drawingDims
     return {
       x1: this.yRules ? -this.margin("y1") / 2 : axisComputed.scale,
       x2: this.yRules ? drawingDims.width + this.margin("y2") / 2 : axisComputed.scale,
@@ -84,7 +84,7 @@ class Rules {
   }
 
   private margin(axis: AxisPosition): number {
-    const computedAxes: Object<any> = this.state.current.get("computed").axes
+    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes
     return includes(axis)(computedAxes.requiredAxes) ? computedAxes.margins[axis] : 0
   }
 

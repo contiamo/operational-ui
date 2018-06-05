@@ -19,7 +19,6 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Partial,
   RendererAccessor,
   RendererClass,
   RendererType,
@@ -142,8 +141,8 @@ class Line implements RendererClass<LineRendererAccessors> {
 
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
-    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
-    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
+    this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
     this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x1) ? d.x1 : this.x(d))
     this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : this.y(d))
   }
@@ -153,7 +152,7 @@ class Line implements RendererClass<LineRendererAccessors> {
       return
     }
     if (this.xIsBaseline && !this.series.options.stacked) {
-      const ticks: Date[] = this.state.current.get("computed").series.dataForAxes[this.series.xAxis()]
+      const ticks: Date[] = this.state.current.get(["computed", "series", "dataForAxes", this.series.xAxis()])
       forEach((tick: Date): void => {
         if (!find((d: Datum): boolean => this.x(d).toString() === tick.toString())(this.data)) {
           this.data.push({ injectedX: tick, injectedY: undefined })

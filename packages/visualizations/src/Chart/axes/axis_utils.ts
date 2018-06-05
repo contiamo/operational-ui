@@ -5,10 +5,7 @@ import {
   AxisComputed,
   AxisPosition,
   ChartConfig,
-  Computed,
   Dimensions,
-  Object,
-  Partial,
   XAxisConfig,
   YAxisConfig,
   D3Selection,
@@ -62,7 +59,7 @@ export const translateAxis = (el: D3Selection, position: AxisPosition, drawingDi
   el.attr("transform", `translate(${axisPosition(position, drawingDims).join(",")})`)
 }
 
-export const alignAxes = (axes: Object<AxisClass<any>>): Object<any> => {
+export const alignAxes = (axes: { [key: string]: AxisClass<any> }): { [key: string]: any } => {
   if (keys(axes).length !== 2) {
     return
   }
@@ -75,10 +72,10 @@ export const alignAxes = (axes: Object<AxisClass<any>>): Object<any> => {
   axesTypes[0] === "time" ? alignTimeAxes(axes) : alignQuantAxes(axes)
 }
 
-const alignTimeAxes = (axes: Object<AxisClass<Date>>): void => {
-  const computed: Object<Partial<AxisComputed>> = mapValues((axis: AxisClass<number>): Partial<AxisComputed> =>
-    axis.computeInitial()
-  )(axes)
+const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
+  const computed: { [key: string]: Partial<AxisComputed> } = mapValues((axis: AxisClass<number>): Partial<
+    AxisComputed
+  > => axis.computeInitial())(axes)
 
   const axisKeys: string[] = keys(computed)
   const intervalOne: any = axes[axisKeys[0]].interval
@@ -114,10 +111,10 @@ const alignTimeAxes = (axes: Object<AxisClass<Date>>): void => {
   })(axes)
 }
 
-const alignQuantAxes = (axes: Object<AxisClass<number>>): void => {
-  const computed: Object<Partial<AxisComputed>> = mapValues((axis: AxisClass<number>): Partial<AxisComputed> =>
-    axis.computeInitial()
-  )(axes)
+const alignQuantAxes = (axes: { [key: string]: AxisClass<number> }): void => {
+  const computed: { [key: string]: Partial<AxisComputed> } = mapValues((axis: AxisClass<number>): Partial<
+    AxisComputed
+  > => axis.computeInitial())(axes)
   const axisKeys: string[] = keys(computed)
   const stepsOne: [number, number, number] = computed[axisKeys[0]].steps
   const stepsTwo: [number, number, number] = computed[axisKeys[1]].steps

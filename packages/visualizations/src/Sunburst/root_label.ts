@@ -1,15 +1,5 @@
-import {
-  ClickPayload,
-  D3Selection,
-  Datum,
-  Dimensions,
-  EventBus,
-  Object,
-  State,
-  StateWriter,
-  SunburstConfig,
-} from "./typings"
-import Events from "../utils/event_catalog"
+import { ClickPayload, D3Selection, Datum, Dimensions, EventBus, State, StateWriter, SunburstConfig } from "./typings"
+import Events from "../shared/event_catalog"
 import { approxZero, stepFunction } from "../utils/font_sizing_utils"
 
 class RootLabel {
@@ -27,11 +17,11 @@ class RootLabel {
   }
 
   private update(payload: ClickPayload): void {
-    const computed: Object<any> = this.state.current.get("computed")
+    const computed = this.state.current.get("computed")
     const config: SunburstConfig = this.state.current.get("config")
-    const renderer: Object<any> = computed.renderer
+    const renderer = computed.renderer
     const drawingDims: Dimensions = computed.canvas.drawingDims
-    const fixedNode: any = renderer.zoomNode || renderer.topNode
+    const fixedNode: Datum = renderer.zoomNode || renderer.topNode
     const availableWidth: number = renderer.innerRadius * config.centerCircleRadius * 2
 
     this.el.select("span.value").text(renderer.data.length > 0 ? config.numberFormatter(fixedNode.value) : null)
@@ -53,7 +43,7 @@ class RootLabel {
       this.el.style("width", `${availableWidth}px`)
     }
 
-    const elDims: any = this.el.node().getBoundingClientRect()
+    const elDims: Dimensions = this.el.node().getBoundingClientRect()
     const top: number = config.height - drawingDims.height + drawingDims.height / 2 - elDims.height / 2
     const left: number = drawingDims.width / 2 - renderer.innerRadius * config.centerCircleRadius
     this.el.style("top", `${top}px`).style("left", `${left}px`)

@@ -4,7 +4,6 @@ import {
   Data,
   Datum,
   EventBus,
-  Object,
   Renderer as RendererInterface,
   RendererOptions,
   SeriesAccessors,

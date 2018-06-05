@@ -3,22 +3,20 @@ import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-import { Accessor, Config, Object, Focus, Facade } from "../utils/typings"
+import { Accessor, Config, Focus, Facade } from "../shared/typings"
 
 export {
   Accessor,
   Accessors,
   Dimensions,
   EventBus,
-  Object,
   State,
-  Partial,
   Position,
   D3Selection,
   SeriesEl,
   StateWriter,
   Canvas,
-} from "../utils/typings"
+} from "../shared/typings"
 
 export interface ProcessFlowConfig extends Config {
   borderColor: string
@@ -50,7 +48,7 @@ export type Scale = (size: number) => number
 
 export interface FocusElement {
   type?: "node" | "link" | "path"
-  matchers?: Object<any>
+  matchers?: { [key: string]: any }
   hideLabel?: boolean
 }
 
@@ -60,7 +58,7 @@ export interface Journey {
 }
 
 export interface LinkAttrs {
-  content?: Object<any>[]
+  content?: { [key: string]: any }[]
   dash?: string
   focusLabel?: any
   label?: string
@@ -74,7 +72,7 @@ export interface LinkAttrs {
 
 export interface NodeAttrs {
   color?: string
-  content?: Object<any>[]
+  content?: { [key: string]: any }[]
   shape?: string
   size?: number
   stroke?: string
@@ -91,7 +89,7 @@ export interface DataAccessors {
 
 export interface NodeAccessors {
   color: Accessor<NodeAttrs, string>
-  content: Accessor<NodeAttrs, Object<any>[]>
+  content: Accessor<NodeAttrs, { [key: string]: any }[]>
   shape: Accessor<NodeAttrs, string>
   size: Accessor<NodeAttrs, number>
   stroke: Accessor<NodeAttrs, string>
@@ -101,7 +99,7 @@ export interface NodeAccessors {
 }
 
 export interface LinkAccessors {
-  content: (d: LinkAttrs) => Object<any>[]
+  content: (d: LinkAttrs) => { [key: string]: any }[]
   dash: (d: LinkAttrs) => string
   label: (d: LinkAttrs) => string
   size: (d: LinkAttrs) => number
@@ -124,9 +122,9 @@ export interface InputData {
 }
 
 export interface Computed {
-  canvas: Object<any>
-  focus: Object<any>
-  series: Object<any>
+  canvas: { [key: string]: any }
+  focus: { [key: string]: any }
+  series: { [key: string]: any }
 }
 
 export interface Data {
@@ -151,7 +149,7 @@ export interface HoverPayload {
 
 export type Focus = Focus<HoverPayload>
 
-export type Facade = Facade<ProcessFlowConfig, AccessorsObject, Computed, Components, InputData>
+export type Facade = Facade<ProcessFlowConfig, AccessorsObject, Components, InputData>
 
 export interface Components {
   focus: Focus<HoverPayload>

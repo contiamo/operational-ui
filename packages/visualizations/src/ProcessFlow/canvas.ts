@@ -1,7 +1,7 @@
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, EventBus, Object, SeriesEl, State, StateWriter } from "./typings"
-import Events from "../utils/event_catalog"
-import * as styles from "../utils/styles"
+import { Canvas, D3Selection, EventBus, SeriesEl, State, StateWriter } from "./typings"
+import Events from "../shared/event_catalog"
+import * as styles from "../shared/styles"
 import { forEach } from "lodash/fp"
 
 class ProcessFlowCanvas implements Canvas {
@@ -9,7 +9,7 @@ class ProcessFlowCanvas implements Canvas {
   private el: SeriesEl
   private events: EventBus
   private state: State
-  private elMap: Object<D3Selection> = {}
+  private elMap: { [key: string]: D3Selection } = {}
   private stateWriter: StateWriter
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element) {

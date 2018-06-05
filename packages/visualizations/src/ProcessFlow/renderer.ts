@@ -1,7 +1,7 @@
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
 import { Data, EventBus, FocusElement, SeriesEl, State, TLink } from "./typings"
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import { forEach, initial, reduce, tail, zip } from "lodash/fp"
 import * as styles from "./renderers/styles"
 import { withD3Element } from "../utils/d3_utils"

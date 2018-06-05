@@ -1,9 +1,3 @@
-// Generally useful types
-export type Partial<T> = { [P in keyof T]?: T[P] }
-export interface Object<T> {
-  [key: string]: T
-}
-
 // d3 types
 import { Selection } from "d3-selection"
 import { Transition } from "d3-transition"
@@ -27,9 +21,9 @@ export { StateWriter } from "./state_handler"
 export type State = ChartStateReadOnly<ChartStateObject>
 export interface ChartStateObject {
   data: any
-  config: Object<any>
+  config: Config
   accessors: any
-  computed: Object<any>
+  computed: { [key: string]: number }
 }
 
 // Viz elements
@@ -54,11 +48,11 @@ export interface Legend {
 
 export interface Canvas {
   draw: () => void
-  elementFor: (component: string) => any
+  elementFor: (component: string) => D3Selection
   remove: () => void
 }
 
-export interface Facade<Config, AccessorsObject, Computed, Components, Data> {
+export interface Facade<Config, AccessorsObject, Components, Data> {
   data: (data?: Data) => Data
   config: (config?: Partial<Config>) => Config
   accessors: (type: string, accessors: Accessors<any>) => Accessors<any>

@@ -1,4 +1,4 @@
-import { ComponentHoverPayload, Config, D3Selection, EventBus, Object, State } from "./typings"
+import { ComponentHoverPayload, Config, D3Selection, EventBus, State } from "./typings"
 import Events from "./event_catalog"
 import * as styles from "./styles"
 
@@ -67,7 +67,7 @@ class ComponentFocus {
     this.remove()
   }
 
-  onClick(configOptions: Object<any>): () => void {
+  onClick(configOptions: { [key: string]: any }): () => void {
     return (): void => {
       console.log(configOptions)
     }

@@ -1,4 +1,4 @@
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import * as d3 from "d3-selection"
 import {
   AxisPosition,
@@ -6,14 +6,13 @@ import {
   D3Selection,
   Dimensions,
   EventBus,
-  Object,
   ChartConfig,
   SeriesEl,
   SeriesElements,
   State,
   StateWriter,
 } from "./typings"
-import * as styles from "../utils/styles"
+import * as styles from "../shared/styles"
 import * as localStyles from "./styles"
 import { forEach, get, reduce } from "lodash/fp"
 
@@ -274,7 +273,7 @@ class ChartCanvas implements Canvas {
   }
 
   private margin(axis: AxisPosition): number {
-    const margins: Object<number> = this.state.current.get("computed").axes.margins || {}
+    const margins: { [key: string]: number } = this.state.current.get("computed").axes.margins || {}
     return margins[axis] || 0
   }
 

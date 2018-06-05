@@ -1,5 +1,5 @@
-import FocusUtils from "../utils/focus_utils"
-import Events from "../utils/event_catalog"
+import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
+import Events from "../shared/event_catalog"
 import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
 import {
   D3Selection,
@@ -8,7 +8,6 @@ import {
   Focus,
   FocusPoint,
   HoverPayload,
-  Object,
   ProcessFlowConfig,
   SeriesEl,
   State,
@@ -67,7 +66,7 @@ class ProcessFlowFocus implements Focus {
 
     // Render the focus label hidden initially to allow placement calculations
     const labelPosition: string = this.state.current.get("config").focusLabelPosition
-    FocusUtils.drawHidden(this.el, "element", labelPosition).style("pointer-events", "none")
+    drawHidden(this.el, "element").style("pointer-events", "none")
     const content: SeriesEl = this.el.append("xhtml:ul")
 
     content
@@ -88,16 +87,16 @@ class ProcessFlowFocus implements Focus {
     }
 
     // Get label dimensions (has to be actually rendered in the page to do this) and position label
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
+    const labelDims: Dimensions = labelDimensions(this.el)
     const drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions()
     const offset: number = focusPoint.offset + config.nodeBorderWidth
 
-    FocusUtils.positionLabel(this.el, focusPoint, labelDimensions, drawingDimensions, offset, labelPosition)
+    positionLabel(this.el, focusPoint, labelDims, drawingDimensions, offset, labelPosition)
   }
 
-  private appendContent(container: D3Selection, content: Object<any>[]): void {
+  private appendContent(container: D3Selection, content: { [key: string]: any }[]): void {
     const contentContainer: D3Selection = container.append("div").attr("class", styles.content)
-    forEach((contentItem: Object<any>): void => {
+    forEach((contentItem: { [key: string]: any }): void => {
       contentContainer
         .append("xhtml:li")
         .attr("class", styles.title)
@@ -161,7 +160,7 @@ class ProcessFlowFocus implements Focus {
 
   private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
     const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect
-    const computedSeries: Object<any> = this.state.current.get("computed").series
+    const computedSeries: { [key: string]: any } = this.state.current.get("computed").series
 
     return {
       xMax: drawingContainer.left + computedSeries.width,

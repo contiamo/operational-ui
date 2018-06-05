@@ -1,8 +1,8 @@
-import Events from "../utils/event_catalog"
+import Events from "../shared/event_catalog"
 import * as d3 from "d3-selection"
 import { every, filter, find, forEach, get, groupBy, keys, map, some } from "lodash/fp"
 import * as localStyles from "./styles"
-import * as globalStyles from "../utils/styles"
+import * as globalStyles from "../shared/styles"
 import { withD3Element } from "../utils/d3_utils"
 import { roundedUpHeight, widthPadding, heightMargin, totalWidth } from "../utils/legend_utils"
 import {

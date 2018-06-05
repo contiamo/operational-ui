@@ -25,7 +25,7 @@ import {
 } from "lodash/fp"
 import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
 const moment: any = extendMoment(Moment as any)
@@ -45,8 +45,6 @@ import {
   Computed,
   D3Selection,
   EventBus,
-  Object,
-  Partial,
   State,
   StateWriter,
   TimeIntervals,
@@ -141,7 +139,7 @@ class TimeAxis implements AxisClass<Date> {
     this.stateWriter(["previous", this.position], this.previous)
   }
 
-  computeInitial(): Object<any> {
+  computeInitial(): { [key: string]: any } {
     const negativeRange: boolean = new Date(this.start).valueOf() > new Date(this.end).valueOf()
     const start = negativeRange ? this.end : this.start
     const end = negativeRange ? this.start : this.end
@@ -161,17 +159,17 @@ class TimeAxis implements AxisClass<Date> {
     }
 
     const config: ChartConfig = this.state.current.get("config")
-    const drawingDims: Object<number> = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims: { [key: string]: number } = this.state.current.get("computed").canvas.drawingDims
     const defaultTickWidth: number = Math.min(drawingDims[this.isXAxis ? "width" : "height"] / ticksInDomain.length)
 
-    const stacks = groupBy((s: Object<any>) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
-    const partitionedStacks: Object<any>[][] = partition((stack: any): boolean => {
+    const stacks = groupBy((s: { [key: string]: any }) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
+    const partitionedStacks: { [key: string]: any }[][] = partition((stack: any): boolean => {
       return compact(map(get("barWidth"))(stack)).length > 0
     })(stacks)
-    const fixedWidthStacks: Object<any>[] = partitionedStacks[0]
-    const variableWidthStacks: Object<any>[] = partitionedStacks[1]
+    const fixedWidthStacks: { [key: string]: any }[] = partitionedStacks[0]
+    const variableWidthStacks: { [key: string]: any }[] = partitionedStacks[1]
 
-    let requiredTickWidth: number = reduce((sum: number, stack: Object<any>): number => {
+    let requiredTickWidth: number = reduce((sum: number, stack: { [key: string]: any }): number => {
       return sum + stack[0].barWidth
     }, config.outerBarSpacing)(fixedWidthStacks)
 
@@ -188,13 +186,13 @@ class TimeAxis implements AxisClass<Date> {
     return Math.max(requiredTickWidth, defaultTickWidth)
   }
 
-  private computeBars(defaultBarWidth: number, tickWidth: number): Object<number> {
+  private computeBars(defaultBarWidth: number, tickWidth: number): { [key: string]: number } {
     const config: ChartConfig = this.state.current.get("config")
-    const computedSeries: Object<any> = this.state.current.get("computed").series
+    const computedSeries: { [key: string]: any } = this.state.current.get("computed").series
     const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
     let offset: number = -tickWidth / 2 + config.outerBarSpacing / 2
 
-    return reduce((memo: Object<any>, index: number): Object<any> => {
+    return reduce((memo: { [key: string]: any }, index: number): { [key: string]: any } => {
       const seriesAtIndex: string[] = keys(pickBy((d: number): boolean => d === index)(computedSeries.barIndices))
       const width: number = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
       forEach((series: string): void => {
@@ -300,10 +298,15 @@ class TimeAxis implements AxisClass<Date> {
     let requiredMargin: number = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
 
     // Add space for flags
-    const flagAxis: Object<any> = this.state.current.get("computed").series.axesWithFlags[this.position]
+    const flagAxis: { [key: string]: any } = this.state.current.get([
+      "computed",
+      "series",
+      "axesWithFlags",
+      this.position,
+    ])
     requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
-    const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
+    const computedMargins: { [key: string]: number } = this.state.current.get("computed").axes.margins || {}
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
@@ -332,7 +335,7 @@ class TimeAxis implements AxisClass<Date> {
 
   private drawBorder(): void {
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
-    const border: Object<number> = {
+    const border: { [key: string]: number } = {
       x1: 0,
       x2: this.isXAxis ? drawingDims.width : 0,
       y1: this.isXAxis ? 0 : drawingDims.height,

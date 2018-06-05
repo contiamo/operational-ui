@@ -6,7 +6,6 @@ import {
   D3Selection,
   Datum,
   Dimensions,
-  Object,
   Renderer,
   RendererAccessor,
   RendererAccessors,
@@ -20,7 +19,7 @@ import { colorAssigner } from "@operational/utils"
 import { withD3Element } from "../../utils/d3_utils"
 import { approxZero, stepFunction } from "../../utils/font_sizing_utils"
 
-export const assignOptions = (ctx: Renderer, options: Object<any>): void => {
+export const assignOptions = (ctx: Renderer, options: { [key: string]: any }): void => {
   forEach.convert({ cap: false })((option: any, key: string): void => {
     if (key !== "accessors") {
       ;(ctx as any)[key] = option
@@ -55,7 +54,7 @@ export const translateBack = (point: [number, number], currentTranslation: [numb
   return [point[0] + currentTranslation[0], point[1] + currentTranslation[1]]
 }
 
-export const textAttributes = (computed: ComputedArcs): Object<any> => {
+export const textAttributes = (computed: ComputedArcs) => {
   return {
     transform: (d: Datum): string => translateString(computed.arcOver.centroid(d)),
     text: percentageString,
@@ -210,7 +209,7 @@ export const updateFilteredPathAttributes = (
   selection: D3Selection,
   filterFunc: RendererAccessor<boolean>,
   path: any,
-  arcInfo: Object<any> = {}
+  arcInfo: { [key: string]: any } = {}
 ): void => {
   selection
     .filter(filterFunc)

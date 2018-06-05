@@ -1,4 +1,4 @@
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import * as d3 from "d3-selection"
 import {
   cloneDeep,
@@ -29,8 +29,6 @@ import {
   Computed,
   D3Selection,
   EventBus,
-  Object,
-  Partial,
   State,
   StateWriter,
   XAxisConfig,
@@ -125,7 +123,7 @@ class QuantAxis implements AxisClass<number> {
   // Computes nice steps (for ticks) given a domain [start, stop] and a
   // wanted number of ticks (number of ticks returned might differ
   // by a few ticks)
-  computeSteps(computed: Object<any>): [number, number, number] {
+  computeSteps(computed: { [key: string]: any }): [number, number, number] {
     const steps: [number, number, number] = [this.start, this.end, this.interval]
     if (!this.interval) {
       const tickNumber: number = computeTickNumber(computed.range, this.tickSpacing, this.minTicks)
@@ -208,10 +206,15 @@ class QuantAxis implements AxisClass<number> {
     let requiredMargin: number = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
 
     // Add space for flags
-    const flagAxis: Object<any> = this.state.current.get("computed").series.axesWithFlags[this.position]
+    const flagAxis: { [key: string]: any } = this.state.current.get([
+      "computed",
+      "series",
+      "axesWithFlags",
+      this.position,
+    ])
     requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
-    const computedMargins: Object<number> = this.state.current.get("computed").axes.margins || {}
+    const computedMargins: { [key: string]: number } = this.state.current.get("computed").axes.margins || {}
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
@@ -246,7 +249,7 @@ class QuantAxis implements AxisClass<number> {
 
   private drawBorder(): void {
     const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
-    const border: Object<number> = {
+    const border: { [key: string]: number } = {
       x1: 0,
       x2: this.isXAxis ? drawingDims.width : 0,
       y1: this.isXAxis ? 0 : drawingDims.height,

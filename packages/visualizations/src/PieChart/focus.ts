@@ -1,6 +1,6 @@
-import FocusUtils from "../utils/focus_utils"
-import Events from "../utils/event_catalog"
-import ComponentFocus from "../utils/component_focus"
+import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
+import Events from "../shared/event_catalog"
+import ComponentFocus from "../shared/component_focus"
 import * as d3 from "d3-selection"
 import {
   D3Selection,
@@ -8,7 +8,6 @@ import {
   EventBus,
   Focus,
   HoverPayload,
-  Object,
   Point,
   Position,
   SeriesEl,
@@ -25,7 +24,7 @@ class PieChartFocus implements Focus {
   private stateWriter: StateWriter
   private events: EventBus
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: Object<D3Selection>) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, els: { [key: string]: D3Selection }) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -40,16 +39,16 @@ class PieChartFocus implements Focus {
   private onElementHover(payload: HoverPayload): void {
     this.remove()
 
-    FocusUtils.drawHidden(this.el, "element", "above")
+    drawHidden(this.el, "element")
 
-    const content: D3Selection = this.el.append("xhtml:ul")
+    const label = this.el.append("xhtml:ul")
 
-    content
+    label
       .append("xhtml:li")
       .attr("class", "title")
       .text(payload.d.key)
 
-    content
+    label
       .append("xhtml:li")
       .attr("class", "series")
       .html(
@@ -57,24 +56,18 @@ class PieChartFocus implements Focus {
         <span class="percentage">(${percentageString(payload.d.percentage)})</span>`
       )
 
-    const labelDimensions: Dimensions = FocusUtils.labelDimensions(this.el)
-    const drawingContainerRect = this.state.current.get("computed").canvas.drawingContainerRect
+    const labelDims: Dimensions = labelDimensions(this.el)
+    const drawingContainerDims = this.state.current.get("computed").canvas.drawingContainerDims
+
     const drawingDimensions = {
-      xMin: drawingContainerRect.x,
-      yMin: drawingContainerRect.y,
-      xMax: drawingContainerRect.right,
-      yMax: drawingContainerRect.bottom,
+      xMin: 0,
+      yMin: this.state.current.get("config").height - drawingContainerDims.height,
+      xMax: drawingContainerDims.width,
+      yMax: this.state.current.get("config").height,
     }
 
     const focus: Point = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] }
-    FocusUtils.positionLabel(
-      this.el,
-      focus,
-      labelDimensions,
-      drawingDimensions,
-      this.state.current.get("config").focusOffset,
-      "above"
-    )
+    positionLabel(this.el, focus, labelDims, drawingDimensions, this.state.current.get("config").focusOffset, "above")
   }
 
   private onElementOut(): void {

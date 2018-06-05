@@ -2,16 +2,15 @@ import PieChartCanvas from "./canvas"
 import Series from "./series"
 import PieChartFocus from "./focus"
 import PieChartLegend from "./legend"
-import Events from "../utils/event_catalog"
-import StateHandler from "../utils/state_handler"
-import EventEmitter from "../utils/event_bus"
+import Events from "../shared/event_catalog"
+import StateHandler from "../shared/state_handler"
+import EventEmitter from "../shared/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import { operational } from "@operational/theme"
 import {
   Accessors,
   AccessorsObject,
   Components,
-  Computed,
   Data,
   Datum,
   Facade,
@@ -19,6 +18,45 @@ import {
   PieChartConfig,
   RendererOptions,
 } from "./typings"
+
+const defaultConfig = (): PieChartConfig => {
+  return {
+    displayPercentages: true,
+    duration: 1e3,
+    focusOffset: 5,
+    height: 500,
+    hidden: false,
+    legend: true,
+    maxWidth: 100,
+    maxLegendRatio: 1 / 2,
+    maxLegendWidth: 200,
+    maxTotalFontSize: 54,
+    minChartWithLegend: 50,
+    minWidth: 30,
+    minInnerRadius: 30,
+    minLegendWidth: 50,
+    minTotalFontSize: 11,
+    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    outerBorderMargin: 1,
+    palette: operational.colors.visualizationPalette,
+    showComponentFocus: false,
+    uid: uniqueId("piechart"),
+    visualizationName: "piechart",
+    width: 500,
+  }
+}
+
+const defaultAccessors = (): AccessorsObject => {
+  return {
+    data: {
+      data: (d: any): Data => d.data,
+    },
+    series: {
+      name: (d: any): string => d.name || "",
+      renderAs: (d: any): RendererOptions[] => d.renderAs,
+    },
+  }
+}
 
 class PieChartFacade implements Facade {
   private __disposed: boolean = false
@@ -41,57 +79,10 @@ class PieChartFacade implements Facade {
   private insertState(): StateHandler<PieChartConfig, Data> {
     return new StateHandler({
       data: {},
-      config: this.initialConfig(),
-      accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      config: defaultConfig(),
+      accessors: defaultAccessors(),
+      computed: {},
     })
-  }
-
-  private initialConfig(): PieChartConfig {
-    return {
-      displayPercentages: true,
-      duration: 1e3,
-      focusOffset: 5,
-      height: 500,
-      hidden: false,
-      legend: true,
-      maxWidth: 100,
-      maxLegendRatio: 1 / 2,
-      maxLegendWidth: 200,
-      maxTotalFontSize: 54,
-      minChartWithLegend: 50,
-      minWidth: 30,
-      minInnerRadius: 30,
-      minLegendWidth: 50,
-      minTotalFontSize: 11,
-      numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-      outerBorderMargin: 1,
-      palette: operational.colors.visualizationPalette,
-      showComponentFocus: false,
-      uid: uniqueId("piechart"),
-      visualizationName: "piechart",
-      width: 500,
-    }
-  }
-
-  private initialAccessors(): AccessorsObject {
-    return {
-      data: {
-        data: (d: any): Data => d.data,
-      },
-      series: {
-        name: (d: any): string => d.name || "",
-        renderAs: (d: any): RendererOptions[] => d.renderAs,
-      },
-    }
-  }
-
-  private initialComputed(): Computed {
-    return {
-      canvas: {},
-      focus: {},
-      series: {},
-    }
   }
 
   private insertCanvas(): PieChartCanvas {

@@ -1,16 +1,6 @@
 import DataHandler from "./data_handler"
-import Events from "../utils/event_catalog"
-import {
-  ClickPayload,
-  D3Selection,
-  Datum,
-  Dimensions,
-  EventBus,
-  Object,
-  State,
-  StateWriter,
-  SunburstConfig,
-} from "./typings"
+import Events from "../shared/event_catalog"
+import { ClickPayload, D3Selection, Datum, Dimensions, EventBus, State, StateWriter, SunburstConfig } from "./typings"
 import { every, find, filter, forEach, findIndex, get, identity, keys, map, reduce } from "lodash/fp"
 import * as styles from "./styles"
 
@@ -82,7 +72,7 @@ class Renderer {
   }
 
   private updateZoom(): void {
-    const matchers: Object<any> = this.state.current.get("config").zoomNode
+    const matchers = this.state.current.get("config").zoomNode
     const zoomNode: Datum = find((d: Datum): boolean => {
       return every(identity)(
         reduce((memo: boolean[], matcher: string): boolean[] => {
@@ -373,7 +363,7 @@ class Renderer {
             this.radiusScale.domain(radiusDomain(t))
           }
         })
-        .attrTween("d", (datum: Datum): any => {
+        .attrTween("d", (datum: Datum) => {
           return () => this.arc(datum)
         })
         .call(onTransitionEnd, this.updateTruncationArrows.bind(this))
@@ -439,7 +429,7 @@ class Renderer {
     d3.select(el).on("mouseleave", this.onMouseLeave.bind(this)(d, el))
   }
 
-  private onMouseLeave(d: Datum, el: Element): any {
+  private onMouseLeave(d: Datum, el: Element) {
     return () => {
       if (this.mouseOverDatum !== d) {
         return

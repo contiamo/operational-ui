@@ -1,4 +1,4 @@
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import { defaults, find, map } from "lodash/fp"
 import * as d3 from "d3-selection"
 import "d3-transition"
@@ -19,8 +19,6 @@ import {
   EventBus,
   HoverPayload,
   LegendDatum,
-  Object,
-  Partial,
   PieChartConfig,
   Renderer,
   RendererAccessor,
@@ -45,7 +43,7 @@ class Donut implements Renderer {
   type: "donut" | "polar" | "gauge" = "donut"
   value: RendererAccessor<number>
 
-  constructor(state: State, events: EventBus, el: D3Selection, options: Object<any>) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: { [key: string]: any }) {
     this.state = state
     this.events = events
     this.el = el
@@ -57,7 +55,7 @@ class Donut implements Renderer {
   }
 
   // Initialization and updating config or accessors
-  updateOptions(options: Object<any>): void {
+  updateOptions(options: { [key: string]: any }): void {
     Utils.assignOptions(this, options)
   }
 
@@ -117,7 +115,7 @@ class Donut implements Renderer {
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
-  private arcAttributes(): Object<any> {
+  private arcAttributes() {
     return {
       path: this.arcTween.bind(this),
       fill: this.color.bind(this),

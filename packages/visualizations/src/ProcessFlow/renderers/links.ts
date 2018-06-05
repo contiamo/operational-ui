@@ -4,7 +4,7 @@ import { easeCubicInOut } from "d3-ease"
 import { withD3Element } from "../../utils/d3_utils"
 import * as styles from "./styles"
 import { every, find, invoke, map } from "lodash/fp"
-import Events from "../../utils/event_catalog"
+import Events from "../../shared/event_catalog"
 import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
 import {
   D3Selection,
@@ -183,7 +183,7 @@ class Links implements Renderer {
   // Paths start as a single point at the source node. If the source node has already been rendered,
   // use its position at the start of the transition.
   private startPath(link: TLink): string {
-    const previousData: Data = this.state.previous.get("computed").series.data,
+    const previousData: Data = this.state.previous.get(["computed", "series", "data"]),
       previousNodes: TNode[] = previousData ? previousData.nodes : [],
       existingSource: TNode = find((node: TNode): boolean => node.id() === link.sourceId())(previousNodes),
       x: number = existingSource ? existingSource.x : link.source().x,

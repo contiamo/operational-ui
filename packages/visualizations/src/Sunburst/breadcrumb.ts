@@ -1,16 +1,6 @@
 import * as d3 from "d3-selection"
-import {
-  ClickPayload,
-  D3Selection,
-  Datum,
-  EventBus,
-  HoverPayload,
-  Object,
-  State,
-  StateWriter,
-  SunburstConfig,
-} from "./typings"
-import Events from "../utils/event_catalog"
+import { ClickPayload, D3Selection, Datum, EventBus, HoverPayload, State, StateWriter, SunburstConfig } from "./typings"
+import Events from "../shared/event_catalog"
 import { isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
 import { readableTextColor } from "@operational/utils"
@@ -42,12 +32,12 @@ class Breadcrumb {
       return
     }
 
-    const computed: Object<any> = this.state.current.get("computed").renderer
-    const fixedNode: any = computed.zoomNode || computed.topNode
+    const computed = this.state.current.get("computed").renderer
+    const fixedNode = computed.zoomNode || computed.topNode
     if (!fixedNode || (payload.d && payload.d.data.empty)) {
       return
     }
-    const nodeArray: any[] = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
+    const nodeArray = payload.d ? payload.d.ancestors().reverse() : fixedNode.ancestors().reverse()
     this.update(nodeArray)
   }
 

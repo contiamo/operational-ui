@@ -19,8 +19,6 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Object,
-  Partial,
   RendererAccessor,
   RendererClass,
   RendererType,
@@ -135,8 +133,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
 
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
-    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
-    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
+    this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
     this.x0 = (d: Datum) => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x0) ? d.x0 : baseline)
@@ -162,9 +160,13 @@ class Area implements RendererClass<AreaRendererAccessors> {
     if (this.closeGaps() || this.series.options.stacked) {
       return
     }
-    const ticks: Date[] = this.state.current.get("computed").axes.computed[
-      this.xIsBaseline ? this.series.xAxis() : this.series.yAxis()
-    ].ticksInDomain
+    const ticks: Date[] = this.state.current.get([
+      "computed",
+      "axes",
+      "computed",
+      this.xIsBaseline ? this.series.xAxis() : this.series.yAxis(),
+      "ticksInDomain",
+    ])
     forEach((tick: Date): void => {
       if (
         !find((d: Datum): boolean => (this.xIsBaseline ? this.x : this.y)(d).toString() === tick.toString())(this.data)

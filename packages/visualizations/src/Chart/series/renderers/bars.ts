@@ -11,14 +11,13 @@ import {
   D3Selection,
   Datum,
   EventBus,
-  Object,
   RendererAccessor,
   RendererClass,
   RendererType,
   SingleRendererOptions,
   State,
 } from "../../typings"
-import Events from "../../../utils/event_catalog"
+import Events from "../../../shared/event_catalog"
 
 export type Options = SingleRendererOptions<BarsRendererAccessors>
 
@@ -75,8 +74,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       .duration(!!this.el.attr("transform") ? duration : 0)
       .attr("transform", this.seriesTranslation())
 
-    const attributes: Object<any> = this.attributes()
-    const startAttributes: Object<any> = this.startAttributes(attributes)
+    const attributes: { [key: string]: any } = this.attributes()
+    const startAttributes: { [key: string]: any } = this.startAttributes(attributes)
 
     const bars = this.el.selectAll("rect").data(data)
 
@@ -117,8 +116,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
-    this.xScale = this.state.current.get("computed").axes.computed[this.series.xAxis()].scale
-    this.yScale = this.state.current.get("computed").axes.computed[this.series.yAxis()].scale
+    this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
+    this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
     this.x0 = (d: Datum): any => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(
@@ -158,11 +157,16 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private seriesTranslation(): string {
-    const seriesBars: Object<any> = this.state.current.get("computed").axes.computedBars[this.series.key()]
+    const seriesBars: { [key: string]: any } = this.state.current.get([
+      "computed",
+      "axes",
+      "computedBars",
+      this.series.key(),
+    ])
     return this.xIsBaseline ? `translate(${seriesBars.offset}, 0)` : `translate(0, ${seriesBars.offset})`
   }
 
-  private startAttributes(attributes: Object<any>): Object<any> {
+  private startAttributes(attributes: { [key: string]: any }): { [key: string]: any } {
     return {
       x: this.xIsBaseline ? this.x0 : this.xScale(0),
       y: this.xIsBaseline ? this.yScale(0) : this.y0,
@@ -172,8 +176,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     }
   }
 
-  private attributes(): Object<any> {
-    const barWidth: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width
+  private attributes(): { [key: string]: any } {
+    const barWidth: number = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "width"])
     return {
       x: this.x0,
       y: this.y1,
@@ -186,7 +190,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   private onMouseOver(d: Datum, el: HTMLElement): void {
     const isNegative: boolean = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
     const dimensions = el.getBoundingClientRect()
-    const barOffset = this.state.current.get("computed").axes.computedBars[this.series.key()].offset
+    const barOffset = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "offset"])
 
     const focusPoint = {
       element: this.xIsBaseline ? this.x(d) : this.y(d),

@@ -1,24 +1,79 @@
 import ProcessFlowCanvas from "./canvas"
 import Series from "./series"
 import ProcessFlowFocus from "./focus"
-import Events from "../utils/event_catalog"
-import StateHandler from "../utils/state_handler"
-import EventEmitter from "../utils/event_bus"
+import Events from "../shared/event_catalog"
+import StateHandler from "../shared/state_handler"
+import EventEmitter from "../shared/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
   AccessorsObject,
   Components,
-  Computed,
   Facade,
   FocusElement,
   InputData,
   LinkAttrs,
   NodeAttrs,
-  Object,
   ProcessFlowConfig,
   TNode,
 } from "./typings"
+
+const defaultConfig = (): ProcessFlowConfig => {
+  return {
+    borderColor: "#fff",
+    duration: 1e3,
+    focusElement: {},
+    focusLabelPosition: "toRight",
+    height: Infinity,
+    hidden: false,
+    highlightColor: "#1499CE",
+    horizontalNodeSpacing: 100,
+    labelOffset: 1,
+    linkBorderWidth: 4,
+    maxLinkWidth: 8,
+    maxNodeSize: 1500,
+    minLinkWidth: 1,
+    minNodeSize: 100,
+    nodeBorderWidth: 10,
+    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    showLinkFocusLabels: true,
+    showNodeFocusLabels: true,
+    uid: uniqueId("processflow"),
+    verticalNodeSpacing: 100,
+    visualizationName: "processflow",
+    width: Infinity,
+  }
+}
+
+const defaultAccessors = (): AccessorsObject => {
+  return {
+    data: {
+      nodes: (d: InputData) => d.nodes,
+      journeys: (d: InputData) => d.journeys,
+    },
+    node: {
+      color: (d: NodeAttrs): string => d.color || "#fff",
+      content: (d: NodeAttrs): { [key: string]: any }[] => d.content || [],
+      shape: (d: NodeAttrs): string => d.shape || "squareDiamond",
+      size: (d: NodeAttrs): number => d.size || 1,
+      stroke: (d: NodeAttrs): string => d.stroke || "#000",
+      id: (d: NodeAttrs): string => d.id || uniqueId("node"),
+      label: (d: NodeAttrs): string => d.label || d.id || "",
+      labelPosition: (d: NodeAttrs): string => d.labelPosition || "right",
+    },
+    link: {
+      content: (d: NodeAttrs): { [key: string]: any }[] => d.content || [],
+      dash: (d: LinkAttrs): string => d.dash || "0",
+      label: (d: LinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
+      size: (d: LinkAttrs): number => d.size || 1,
+      stroke: (d: LinkAttrs): string => d.stroke || "#bbb",
+      source: (d: LinkAttrs): TNode | undefined => d.source,
+      sourceId: (d: LinkAttrs): string | undefined => d.sourceId,
+      target: (d: LinkAttrs): TNode | undefined => d.target,
+      targetId: (d: LinkAttrs): string | undefined => d.targetId,
+    },
+  }
+}
 
 class ProcessFlowFacade implements Facade {
   private __disposed: boolean = false
@@ -41,75 +96,10 @@ class ProcessFlowFacade implements Facade {
   private insertState(): StateHandler<ProcessFlowConfig, InputData> {
     return new StateHandler({
       data: {},
-      config: this.initialConfig(),
-      accessors: this.initialAccessors(),
-      computed: this.initialComputed(),
+      config: defaultConfig(),
+      accessors: defaultAccessors(),
+      computed: {},
     })
-  }
-
-  private initialConfig(): ProcessFlowConfig {
-    return {
-      borderColor: "#fff",
-      duration: 1e3,
-      focusElement: {},
-      focusLabelPosition: "toRight",
-      height: Infinity,
-      hidden: false,
-      highlightColor: "#1499CE",
-      horizontalNodeSpacing: 100,
-      labelOffset: 1,
-      linkBorderWidth: 4,
-      maxLinkWidth: 8,
-      maxNodeSize: 1500,
-      minLinkWidth: 1,
-      minNodeSize: 100,
-      nodeBorderWidth: 10,
-      numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-      showLinkFocusLabels: true,
-      showNodeFocusLabels: true,
-      uid: uniqueId("processflow"),
-      verticalNodeSpacing: 100,
-      visualizationName: "processflow",
-      width: Infinity,
-    }
-  }
-
-  private initialAccessors(): AccessorsObject {
-    return {
-      data: {
-        nodes: (d: InputData) => d.nodes,
-        journeys: (d: InputData) => d.journeys,
-      },
-      node: {
-        color: (d: NodeAttrs): string => d.color || "#fff",
-        content: (d: NodeAttrs): Object<any>[] => d.content || [],
-        shape: (d: NodeAttrs): string => d.shape || "squareDiamond",
-        size: (d: NodeAttrs): number => d.size || 1,
-        stroke: (d: NodeAttrs): string => d.stroke || "#000",
-        id: (d: NodeAttrs): string => d.id || uniqueId("node"),
-        label: (d: NodeAttrs): string => d.label || d.id || "",
-        labelPosition: (d: NodeAttrs): string => d.labelPosition || "right",
-      },
-      link: {
-        content: (d: NodeAttrs): Object<any>[] => d.content || [],
-        dash: (d: LinkAttrs): string => d.dash || "0",
-        label: (d: LinkAttrs): string => `${d.label || d.source.label()} → ${d.target.label() || ""}`,
-        size: (d: LinkAttrs): number => d.size || 1,
-        stroke: (d: LinkAttrs): string => d.stroke || "#bbb",
-        source: (d: LinkAttrs): TNode | undefined => d.source,
-        sourceId: (d: LinkAttrs): string | undefined => d.sourceId,
-        target: (d: LinkAttrs): TNode | undefined => d.target,
-        targetId: (d: LinkAttrs): string | undefined => d.targetId,
-      },
-    }
-  }
-
-  private initialComputed(): Computed {
-    return {
-      canvas: {},
-      focus: {},
-      series: {},
-    }
   }
 
   private insertCanvas(): ProcessFlowCanvas {
