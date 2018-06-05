@@ -3,10 +3,9 @@ import Renderer from "./renderer"
 import Breadcrumb from "./breadcrumb"
 import RootLabel from "./root_label"
 import SunburstFocus from "./focus"
-import Events from "../shared/event_catalog"
 import StateHandler from "../shared/state_handler"
 import EventEmitter from "../shared/event_bus"
-import { every, find, has, isEmpty, uniqueId } from "lodash/fp"
+import { has, uniqueId } from "lodash/fp"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
 import { Accessors, AccessorsObject, Components, Facade, RawData, SunburstConfig } from "./typings"
@@ -114,7 +113,7 @@ class SunburstFacade implements Facade {
     }
   }
 
-  data(data?: any): any {
+  data(data?: RawData): RawData {
     return this.state.data(data)
   }
 

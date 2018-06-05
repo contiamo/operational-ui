@@ -22,7 +22,6 @@ import {
   Facade,
   FocusElement,
   RendererOptions,
-  SeriesAccessors,
   SeriesData,
 } from "./typings"
 

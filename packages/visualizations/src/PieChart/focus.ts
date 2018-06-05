@@ -2,23 +2,12 @@ import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils
 import Events from "../shared/event_catalog"
 import ComponentFocus from "../shared/component_focus"
 import * as d3 from "d3-selection"
-import {
-  D3Selection,
-  Dimensions,
-  EventBus,
-  Focus,
-  HoverPayload,
-  Point,
-  Position,
-  SeriesEl,
-  State,
-  StateWriter,
-} from "./typings"
+import { D3Selection, EventBus, Focus, HoverPayload, State, StateWriter } from "./typings"
 
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
 class PieChartFocus implements Focus {
-  private el: SeriesEl
+  private el: D3Selection
   private componentFocus: ComponentFocus
   private state: State
   private stateWriter: StateWriter
@@ -56,7 +45,7 @@ class PieChartFocus implements Focus {
         <span class="percentage">(${percentageString(payload.d.percentage)})</span>`
       )
 
-    const labelDims: Dimensions = labelDimensions(this.el)
+    const labelDims = labelDimensions(this.el)
     const drawingContainerDims = this.state.current.get("computed").canvas.drawingContainerDims
 
     const drawingDimensions = {
@@ -66,7 +55,7 @@ class PieChartFocus implements Focus {
       yMax: this.state.current.get("config").height,
     }
 
-    const focus: Point = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] }
+    const focus = { x: payload.focusPoint.centroid[0], y: payload.focusPoint.centroid[1] }
     positionLabel(this.el, focus, labelDims, drawingDimensions, this.state.current.get("config").focusOffset, "above")
   }
 

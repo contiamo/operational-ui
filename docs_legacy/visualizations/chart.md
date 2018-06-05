@@ -210,12 +210,14 @@ Data accessors are required if the input data does not have the standard 'series
 | closeGaps | Interpolate across missing data | `(series, d) => boolean` | `(series, d) => true`
 | color | Renderer color | `(series, d) => string` | `(series, d) => series.legendColor()`
 | interpolate | Line interpolation | `(series, d) => "cardinal" | "linear" | "monotoneX" | "monotoneY" | "step" | "stepAfter" | "stepBefore"` | `(series, d) => "linear"`
+| opacity | Color opacity | `(series, d) => number` | `(series, d) => 0.6`
 
 ### Bars renderer accessors
 | Name | Description | Type | Default
 | :--- | :--- | :--- | :---
 | barWidth | Width of bars - `undefined` results in automatic sizing | `(series, d) => number` | `(series, d) => undefined`
 | color | Renderer color | `(series, d) => string` | `(series, d) => series.legendColor()`
+| opacity | Color opacity | `(series, d) => number` | `(series, d) => 0.8`
 
 ### Line renderer accessors
 | Name | Description | Type | Default
@@ -224,6 +226,7 @@ Data accessors are required if the input data does not have the standard 'series
 | color | Renderer color | `(series, d) => string` | `(series, d) => series.legendColor()`
 | dashed | Toggle line dashing | `(series, d) => boolean` | `(series, d) => false`
 | interpolate | Line interpolation | `(series, d) => "cardinal" | "linear" | "monotoneX" | "monotoneY" | "step" | "stepAfter" | "stepBefore"` | `(series, d) => "linear"`
+| opacity | Color opacity | `(series, d) => number` | `(series, d) => 1`
 
 ### Symbol renderer accessors
 | Name | Description | Type | Default
@@ -232,6 +235,7 @@ Data accessors are required if the input data does not have the standard 'series
 | size | | `(series: Series, d: Datum) => number` | `(series: Series, d: Datum) => 50`
 | stroke | | `(series: Series, d: Datum) => string` | `(series: Series, d: Datum) => series.legendColor()`
 | symbol | | `(series: Series, d: Datum) => string` | `(series: Series, d: Datum) => "circle"`
+| opacity | Color opacity | `(series, d) => number` | `(series, d) => 0.8`
 
 Symbol options are: "circle", "cross", "diamond", "square", "squareDiamond", "star", "triangle"
 
@@ -239,6 +243,7 @@ Symbol options are: "circle", "cross", "diamond", "square", "squareDiamond", "st
 | Name | Description | Type | Default
 | :--- | :--- | :--- | :---
 | size | Font size | `(series, d) => number` | `(series, d) => 10`
+| opacity | Color opacity | `(series, d) => number` | `(series, d) => 1`
 
 ## Config
 
@@ -255,7 +260,7 @@ Symbol options are: "circle", "cross", "diamond", "square", "squareDiamond", "st
 | legend | Show/hide legend | boolean | true
 | maxBarWidthRatio | Maximum bar width as proportion of total width | number | 1 / 3
 | minBarWidth | Minimum bar width | number | 3
-| maxFocusLabelWidth | Maximum width of focus labels | number | 350 
+| maxFocusLabelWidth | Maximum width of focus labels | number | 350
 | numberFormatter | Number formatter | function | `(x: number): string => x.toString().replace(/B(?=(d{3})+(?!d))/g, ",")`
 | outerBarSpacing | Padding between groups of bars | number | 10
 | palette | Default color palette | string[] | theme.colors.visualizationPalette

@@ -15,7 +15,6 @@ import {
   uniqBy,
 } from "lodash/fp"
 import {
-  BarsRendererAccessors,
   D3Selection,
   Datum,
   EventBus,
@@ -54,14 +53,14 @@ class ChartSeries {
   x: (d: Datum) => number | string | Date
   y: (d: Datum) => number | string | Date
 
-  constructor(state: State, events: EventBus, el: D3Selection, options: { [key: string]: any }) {
+  constructor(state: State, events: EventBus, el: D3Selection, options: any) {
     this.state = state
     this.events = events
     this.el = el
     this.update(options)
   }
 
-  update(options: { [key: string]: any }): void {
+  update(options: any): void {
     this.assignAccessors()
     this.options = options
     this.updateRenderers()
@@ -69,7 +68,7 @@ class ChartSeries {
 
   assignAccessors(): void {
     forEach.convert({ cap: false })((accessor: SeriesAccessor<any>, key: string) => {
-      ;(this as any)[key] = (): any => accessor(this.options)
+      ;(this as any)[key] = () => accessor(this.options)
     })(this.state.current.get("accessors").series)
     this.x = (d: Datum) => d[this.xAttribute()]
     this.y = (d: Datum) => d[this.yAttribute()]
@@ -77,9 +76,9 @@ class ChartSeries {
 
   private updateRenderers(): void {
     this.oldRenderers = []
-    const rendererTypes: RendererType[] = map(get("type"))(this.renderAs())
+    const rendererTypes = map(get("type"))(this.renderAs())
     this.removeAllExcept(rendererTypes)
-    forEach((options: SingleRendererOptions<any>): void => {
+    forEach((options: SingleRendererOptions<any>) => {
       const renderer: RendererClass<any> = this.get(options.type)
       renderer ? renderer.update(this.options.data, options) : this.addRenderer(options)
       if (options.type === "symbol") {
@@ -89,10 +88,9 @@ class ChartSeries {
   }
 
   private removeAllExcept(types: RendererType[]): void {
-    flow(
-      filter((renderer: RendererClass<any>): boolean => !includes(renderer.type)(types)),
-      forEach(this.remove.bind(this))
-    )(this.renderers)
+    flow(filter((renderer: RendererClass<any>) => !includes(renderer.type)(types)), forEach(this.remove.bind(this)))(
+      this.renderers
+    )
   }
 
   get(type: string): RendererClass<any> {
@@ -117,8 +115,8 @@ class ChartSeries {
     }
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map((renderer: RendererClass<any>): any => renderer.dataForAxis(axis))(this.renderers)
+  dataForAxis(axis: "x" | "y") {
+    const data = map((renderer: RendererClass<any>) => renderer.dataForAxis(axis))(this.renderers)
     return uniqBy(String)(compact(flatten(data)))
   }
 
@@ -130,8 +128,8 @@ class ChartSeries {
     return this.legendPosition() === "top" && this.yAxis() === "y2" ? "right" : "left"
   }
 
-  getBarsInfo(): { [key: string]: any } {
-    const barRenderer: RendererClass<BarsRendererAccessors> = find({ type: "bars" })(this.renderers)
+  getBarsInfo() {
+    const barRenderer = find({ type: "bars" })(this.renderers)
     if (!barRenderer) {
       return
     }
@@ -144,7 +142,7 @@ class ChartSeries {
 
   displayFocusPoint(): boolean {
     return (
-      filter((renderer: RendererClass<any>): boolean => {
+      filter((renderer: RendererClass<any>) => {
         return renderer.type === "area" || renderer.type === "line"
       })(this.renderers).length > 0
     )
@@ -159,10 +157,10 @@ class ChartSeries {
   }
 
   valueAtFocus(focus: any): any {
-    const xIsBaseline: boolean = this.state.current.get("computed").axes.baseline === "x"
+    const xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     const baselineAccessor = (d: Datum) => (xIsBaseline ? this.x(d) || d.injectedX : this.y(d) || d.injectedY)
     const valueAccessor = xIsBaseline ? this.y : this.x
-    const positionAccessor = (d: Datum): any =>
+    const positionAccessor = (d: Datum) =>
       xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : hasValue(d.x1) ? d.x1 : this.x(d)
     const valueScale = this.state.current.get([
       "computed",
@@ -171,7 +169,7 @@ class ChartSeries {
       xIsBaseline ? this.yAxis() : this.xAxis(),
       "scale",
     ])
-    const datum: Datum = find((d: Datum): boolean => {
+    const datum = find((d: Datum) => {
       return baselineAccessor(d).toString() === focus.toString()
     })(this.data())
 

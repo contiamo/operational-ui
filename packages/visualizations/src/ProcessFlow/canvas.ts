@@ -1,12 +1,12 @@
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, EventBus, SeriesEl, State, StateWriter } from "./typings"
+import { Canvas, D3Selection, EventBus, State, StateWriter } from "./typings"
 import Events from "../shared/event_catalog"
 import * as styles from "../shared/styles"
 import { forEach } from "lodash/fp"
 
 class ProcessFlowCanvas implements Canvas {
   private chartContainer: D3Selection
-  private el: SeriesEl
+  private el: D3Selection
   private events: EventBus
   private state: State
   private elMap: { [key: string]: D3Selection } = {}
@@ -30,7 +30,7 @@ class ProcessFlowCanvas implements Canvas {
   }
 
   // El
-  private renderEl(): SeriesEl {
+  private renderEl(): D3Selection {
     const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     el.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     el.addEventListener("mouseleave", this.onMouseLeave.bind(this))
@@ -86,7 +86,7 @@ class ProcessFlowCanvas implements Canvas {
   }
 
   // Helper method
-  elementFor(component: string): any {
+  elementFor(component: string): D3Selection {
     return this.elMap[component]
   }
 }

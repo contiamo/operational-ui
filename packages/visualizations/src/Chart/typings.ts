@@ -13,13 +13,11 @@ export {
   Point,
   Position,
   D3Selection,
-  SeriesEl,
-  SeriesManager,
   StateWriter,
   Canvas,
 } from "../shared/typings"
 
-export interface XAxisConfig {
+export interface AxisConfig {
   fontSize: number
   margin: number
   minTicks: number
@@ -27,13 +25,6 @@ export interface XAxisConfig {
   showRules: boolean
   tickOffset: number
   tickSpacing: number
-}
-
-export interface YAxisConfig extends XAxisConfig {
-  minTopOffsetTopTick: number
-}
-
-export interface AxisConfig extends XAxisConfig {
   minTopOffsetTopTick?: number
 }
 
@@ -55,6 +46,11 @@ export interface ChartConfig extends Config {
   timeAxisPriority: string[]
 }
 
+export interface SeriesManager {
+  assignData: () => void
+  draw: () => void
+}
+
 // Renderers
 export type RendererType = "area" | "bars" | "flag" | "line" | "symbol" | "text"
 
@@ -73,6 +69,7 @@ export interface LinearRendererAccessors {
   color: RendererAccessor<string>
   interpolate: RendererAccessor<InterpolationOption>
   closeGaps: RendererAccessor<boolean>
+  opacity: RendererAccessor<number>
 }
 
 export type AreaRendererAccessors = LinearRendererAccessors
@@ -80,6 +77,7 @@ export type AreaRendererAccessors = LinearRendererAccessors
 export interface BarsRendererAccessors {
   color: RendererAccessor<string>
   barWidth: RendererAccessor<number>
+  opacity: RendererAccessor<number>
 }
 
 export interface FlagRendererAccessors {
@@ -87,6 +85,7 @@ export interface FlagRendererAccessors {
   description: RendererAccessor<string>
   direction: RendererAccessor<"up" | "down">
   label: RendererAccessor<string>
+  opacity: RendererAccessor<number>
 }
 
 export interface FlagRendererConfig {
@@ -108,10 +107,12 @@ export interface SymbolRendererAccessors {
   fill: RendererAccessor<string>
   symbol: RendererAccessor<any>
   size: RendererAccessor<number>
+  opacity: RendererAccessor<number>
 }
 
 export interface TextRendererAccessors {
   size: RendererAccessor<number>
+  opacity: RendererAccessor<number>
 }
 
 export interface TextRendererConfig {

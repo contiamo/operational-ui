@@ -19,15 +19,13 @@ import {
   EventBus,
   HoverPayload,
   LegendDatum,
-  PieChartConfig,
   Renderer,
   RendererAccessor,
-  RendererAccessors,
   State,
 } from "../typings"
 
 const ANGLE_RANGE: [number, number] = [0, 2 * Math.PI]
-const TOTAL_Y_OFFSET: string = "0.35em"
+const TOTAL_Y_OFFSET = "0.35em"
 
 class Donut implements Renderer {
   private color: RendererAccessor<string>
@@ -78,11 +76,11 @@ class Donut implements Renderer {
   }
 
   private updateDraw(): void {
-    const config: PieChartConfig = this.state.current.get("config")
-    const duration: number = config.duration
-    const maxTotalFontSize: number = config.maxTotalFontSize
-    const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
+    const config = this.state.current.get("config")
+    const duration = config.duration
+    const maxTotalFontSize = config.maxTotalFontSize
+    const minTotalFontSize = config.minTotalFontSize
+    const drawingDims = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
@@ -92,13 +90,13 @@ class Donut implements Renderer {
     this.el.attr("transform", Utils.translateString(this.currentTranslation))
 
     // Arcs
-    const arcs: D3Selection = Utils.createArcGroups(this.el, this.computed.data, this.key)
+    const arcs = Utils.createArcGroups(this.el, this.computed.data, this.key)
     // Exit
     Utils.exitArcs(arcs, duration, this.removeArcTween.bind(this))
     // Enter
     Utils.enterArcs(arcs, this.onMouseOver.bind(this), this.onMouseOut.bind(this))
     // Update
-    const updatingArcs: D3Selection = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
+    const updatingArcs = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration)
 
     updatingArcs.select("rect").attr("visibility", "hidden")
@@ -124,10 +122,10 @@ class Donut implements Renderer {
 
   // Interpolate the arcs in data space.
   private arcTween(d: ComputedDatum): (t: number) => string {
-    const previousData: ComputedDatum[] = this.previousComputed.data || []
-    const old: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index)(previousData)
-    const previous: ComputedDatum = find((datum: ComputedDatum): boolean => datum.index === d.index - 1)(previousData)
-    const last: ComputedDatum = previousData[previousData.length - 1]
+    const previousData = this.previousComputed.data || []
+    const old = find((datum: ComputedDatum) => datum.index === d.index)(previousData)
+    const previous = find((datum: ComputedDatum) => datum.index === d.index - 1)(previousData)
+    const last = previousData[previousData.length - 1]
 
     let s0: number
     let e0: number
@@ -145,8 +143,8 @@ class Donut implements Renderer {
       e0 = 0
     }
 
-    const innerRadius: number = this.previousComputed.rInner || this.computed.rInner
-    const outerRadius: number = this.previousComputed.r || this.computed.r
+    const innerRadius = this.previousComputed.rInner || this.computed.rInner
+    const outerRadius = this.previousComputed.r || this.computed.r
     const f = interpolateObject(
       { innerRadius, outerRadius, endAngle: e0, startAngle: s0 },
       {
@@ -175,7 +173,7 @@ class Donut implements Renderer {
   private compute(): void {
     this.previousComputed = this.computed
 
-    const d: ComputedInitial = {
+    const d = {
       layout: Utils.layout(this.angleValue.bind(this), ANGLE_RANGE),
       total: Utils.computeTotal(this.data, this.value),
     }
@@ -197,11 +195,11 @@ class Donut implements Renderer {
   }
 
   private computeArcs(computed: ComputedInitial): ComputedArcs {
-    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
-    const r: number = this.computeOuterRadius(drawingDims)
-    const rInner: number = this.computeInnerRadius(r)
-    const rHover: number = r + 1
-    const rInnerHover: number = Math.max(rInner - 1, 0)
+    const drawingDims = this.state.current.get("computed").canvas.drawingContainerDims
+    const r = this.computeOuterRadius(drawingDims)
+    const rInner = this.computeInnerRadius(r)
+    const rHover = r + 1
+    const rInnerHover = Math.max(rInner - 1, 0)
 
     return {
       r,
@@ -216,13 +214,13 @@ class Donut implements Renderer {
   }
 
   private computeOuterRadius(drawingDims: Dimensions): number {
-    const outerBorderMargin: number = this.state.current.get("config").outerBorderMargin
+    const outerBorderMargin = this.state.current.get("config").outerBorderMargin
     return Math.min(drawingDims.width, drawingDims.height) / 2 - outerBorderMargin
   }
 
   private computeInnerRadius(outerRadius: number): number {
-    const config: PieChartConfig = this.state.current.get("config")
-    const width: number = outerRadius - config.minInnerRadius
+    const config = this.state.current.get("config")
+    const width = outerRadius - config.minInnerRadius
     // If there isn't enough space, don't render inner circle
     return width < config.minWidth ? 0 : outerRadius - Math.min(width, config.maxWidth)
   }
@@ -234,7 +232,7 @@ class Donut implements Renderer {
       value: this.value(d),
       percentage: d.data.percentage,
     }
-    const centroid: [number, number] = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
+    const centroid = Utils.translateBack(this.computed.arcOver.centroid(d), this.currentTranslation)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { d: datumInfo, focusPoint: { centroid } })
   }
 
@@ -243,9 +241,9 @@ class Donut implements Renderer {
       return
     }
 
-    const arcs: any = this.el.select("g.arcs").selectAll("g")
-    const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
-    const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
+    const arcs = this.el.select("g.arcs").selectAll("g")
+    const filterFocused = (d: Datum) => datapoint.d && this.key(d) === datapoint.d.key
+    const filterUnFocused = (d: Datum) => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
 
     Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver)
     Utils.updateFilteredPathAttributes(
@@ -256,7 +254,7 @@ class Donut implements Renderer {
   }
 
   private highlightElement(key: string): void {
-    const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
+    const d = find((datum: ComputedDatum) => this.key(datum) === key)(this.computed.data)
     if (!d) {
       return
     }
@@ -269,7 +267,7 @@ class Donut implements Renderer {
 
   // External methods
   dataForLegend(): LegendDatum[] {
-    return map((datum: Datum): LegendDatum => {
+    return map((datum: Datum) => {
       return {
         label: this.key(datum),
         color: this.color(datum),

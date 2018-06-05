@@ -3,19 +3,18 @@ import * as d3 from "d3-selection"
 import Nodes from "./node"
 import Link from "./link"
 
-import { Accessor, Config, Focus, Facade } from "../shared/typings"
+import { Accessor, Config, D3Selection, Focus, Facade } from "../shared/typings"
 
 export {
   Accessor,
   Accessors,
+  Canvas,
+  D3Selection,
   Dimensions,
   EventBus,
-  State,
   Position,
-  D3Selection,
-  SeriesEl,
+  State,
   StateWriter,
-  Canvas,
 } from "../shared/typings"
 
 export interface ProcessFlowConfig extends Config {
@@ -40,10 +39,6 @@ export interface ProcessFlowConfig extends Config {
 export type TLink = Link
 export type TNode = Nodes
 
-export type LinkSelection = d3.Selection<any, TLink, d3.BaseType, any>
-export type NodeSelection = d3.Selection<any, TNode, d3.BaseType, any>
-
-// @TODO Import the d3 scale types
 export type Scale = (size: number) => number
 
 export interface FocusElement {
@@ -158,5 +153,5 @@ export interface Components {
 export interface Renderer {
   draw: (data: TLink[] | TNode[]) => void
   focusElement: (focusElement: FocusElement) => void
-  highlight: (element: LinkSelection | NodeSelection, d: TLink | TNode, keepCurrent: boolean) => void
+  highlight: (element: D3Selection, d: TLink | TNode, keepCurrent: boolean) => void
 }

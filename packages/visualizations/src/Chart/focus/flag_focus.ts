@@ -1,6 +1,6 @@
 import { drawHidden, drawVisible, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import Events from "../../shared/event_catalog"
-import { AxisPosition, Computed, D3Selection, Dimensions, EventBus, Position, State } from "../typings"
+import { AxisPosition, D3Selection, EventBus, State } from "../typings"
 import * as d3 from "d3-selection"
 import * as styles from "./styles"
 
@@ -27,9 +27,9 @@ class FlagFocus {
 
     drawHidden(this.el, "flag")
 
-    const content: D3Selection = this.el.append("xhtml:ul").attr("class", styles.flagFocus)
+    const content = this.el.append("xhtml:ul").attr("class", styles.flagFocus)
 
-    const name: string =
+    const name =
       focusData.axisType !== "quant"
         ? `${focusData.formatter(focusData.datum)}: ${focusData.label}`
         : `${focusData.label}: ${focusData.formatter(focusData.datum)}`
@@ -48,11 +48,11 @@ class FlagFocus {
     content.select("li.name").style("border-bottom", `1px solid ${focusData.color}`)
 
     // Get label dimensions
-    const labelDims: Dimensions = labelDimensions(this.el)
-    const drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions()
-    const offset: number = this.state.current.get("config").flagFocusOffset
+    const labelDims = labelDimensions(this.el)
+    const drawingDimensions = this.getDrawingDimensions()
+    const offset = this.state.current.get("config").flagFocusOffset
 
-    const labelPosition: Position = {
+    const labelPosition = {
       left: focusData.x + this.margin("y1") + this.focusDX(focusData, labelDims.width, offset),
       top: focusData.y + this.margin("x2") + this.focusDY(focusData, labelDims.height, offset),
     }
@@ -89,9 +89,9 @@ class FlagFocus {
     }
   }
 
-  private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
-    const computed: Computed = this.state.current.get("computed")
-    const margins: { [key: string]: number } = computed.axes.margins
+  private getDrawingDimensions() {
+    const computed = this.state.current.get("computed")
+    const margins = computed.axes.margins
     return {
       xMin: margins.y1,
       xMax: margins.y1 + computed.canvas.drawingDims.width,

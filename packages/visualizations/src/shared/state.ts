@@ -22,7 +22,7 @@ export default class State<T> {
     this.state = set(path)(value)(this.state)
   }
 
-  merge(path: Path, value: Object = {}) {
+  merge(path: Path, value: { [key: string]: any } = {}) {
     return this.mergePath([].concat(path), value)
   }
 
@@ -35,7 +35,7 @@ export default class State<T> {
     return new State<T>(this.state)
   }
 
-  private mergePath(path: string[], value: Object) {
+  private mergePath(path: string[], value: { [key: string]: any }) {
     return path.reduce((currentStateChunk: any, currentPath: string, index: number) => {
       if (currentStateChunk !== null && typeof currentStateChunk === "object") {
         if (index === path.length - 1) {

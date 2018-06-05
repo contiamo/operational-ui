@@ -2,9 +2,6 @@ import { css } from "glamor"
 import { operational as theme } from "@operational/theme"
 
 const areaStyle = {
-  "& path": {
-    opacity: "0.6",
-  },
   "& path:hover": {
     opacity: "0.8",
   },
@@ -12,7 +9,6 @@ const areaStyle = {
 
 const barStyle = {
   "& rect": {
-    opacity: 0.8,
     shapeRendering: "crispedges",
   },
   "& rect:hover": {
@@ -25,6 +21,7 @@ const flagStyle = {
     strokeDasharray: "5px 2px",
   },
   "& .hover": {
+    opacity: 1,
     strokeWidth: "2px",
   },
   "& text": {
@@ -44,6 +41,7 @@ const lineStyle = {
   },
   "& path:hover": {
     strokeWidth: 4,
+    opacity: 1,
   },
   "& path.dashed": {
     strokeDasharray: "6, 4",
@@ -56,6 +54,7 @@ const symbolStyle = {
   },
   "& path:hover": {
     strokeWidth: "3px",
+    opacity: 1,
   },
 }
 
@@ -64,6 +63,9 @@ const textStyle = {
     fill: "#333",
     fontFamily: theme.fontFamily,
     dominantBaseline: "middle",
+  },
+  "& text:hover": {
+    opacity: 1,
   },
 }
 

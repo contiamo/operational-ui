@@ -114,10 +114,19 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     viz.draw()
   })
 
+  test("Opacity", () => {
+    const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
+    const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
+    const opacity = (series: any, d: any) => 0.4
+    viz.data(createData([{ type: "bars", accessors: { color, barWidth, opacity } }]))
+    viz.draw()
+  })
+
   test("Remove some bars", () => {
     const barWidth = (series: any, d: any) => (series.key() === "series1" ? 20 : 10)
     const color = (series: any, d: any) => (d.y > 400 ? "red" : series.legendColor())
-    const data = {
+    const opacity = (series: any, d: any) => 0.4
+    const data: any = {
       series: [
         {
           data: [
@@ -130,7 +139,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           name: "Pageviews 2018",
           key: "series1",
           interpolate: "step",
-          renderAs: [{ type: "bars", accessors: { color, barWidth } }],
+          renderAs: [{ type: "bars", accessors: { color, barWidth, opacity } }],
         },
         {
           data: [
@@ -141,7 +150,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           ],
           name: "Pageviews 2017",
           key: "series2",
-          renderAs: [{ type: "bars", accessors: { color, barWidth } }],
+          renderAs: [{ type: "bars", accessors: { color, barWidth, opacity } }],
         },
       ],
       axes: {

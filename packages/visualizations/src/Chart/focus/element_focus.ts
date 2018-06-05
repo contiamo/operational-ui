@@ -1,29 +1,5 @@
-import {
-  AxisComputed,
-  Computed,
-  D3Selection,
-  Dimensions,
-  EventBus,
-  HoverPayload,
-  Point,
-  State,
-  AxisPosition,
-} from "../typings"
+import { D3Selection, EventBus, HoverPayload, State } from "../typings"
 import Events from "../../shared/event_catalog"
-import {
-  includes,
-  filter,
-  find,
-  flow,
-  forEach,
-  get,
-  groupBy,
-  isFinite,
-  map,
-  partition,
-  reduce,
-  sortBy,
-} from "lodash/fp"
 import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import * as styles from "./styles"
 import * as globalStyles from "../../shared/styles"
@@ -44,9 +20,9 @@ class ElementFocus {
   }
 
   private onMouseOver(payload: HoverPayload) {
-    const computedAxes: { [key: string]: any } = this.state.current.get("computed").axes
+    const computedAxes = this.state.current.get("computed").axes
     // Only render a date focus if there isn't a time axis
-    const timeAxis: AxisPosition = computedAxes.priorityTimeAxis
+    const timeAxis = computedAxes.priorityTimeAxis
     if (timeAxis) {
       return
     }
@@ -90,16 +66,16 @@ class ElementFocus {
       .text(payload.value)
 
     // Get label dimensions
-    const labelDims: Dimensions = labelDimensions(this.el)
-    const drawingDimensions: Dimensions = this.state.current.get("computed").canvas.drawingDims
-    const offset: number = this.state.current.get("config").focusOffset + payload.offset
+    const labelDims = labelDimensions(this.el)
+    const drawingDimensions = this.state.current.get("computed").canvas.drawingDims
+    const offset = this.state.current.get("config").focusOffset + payload.offset
 
     positionLabel(this.el, payload.focus, labelDims, this.getDrawingPosition(), offset, payload.position, true)
   }
 
-  private getDrawingPosition(): { xMax: number; xMin: number; yMax: number; yMin: number } {
-    const computed: Computed = this.state.current.get("computed")
-    const margins: { [key: string]: number } = computed.axes.margins
+  private getDrawingPosition() {
+    const computed = this.state.current.get("computed")
+    const margins = computed.axes.margins
     return {
       xMin: margins.y1,
       xMax: margins.y1 + computed.canvas.drawingDims.width,

@@ -4,6 +4,7 @@ import { LinkAccessors, LinkAttrs, TNode } from "./typings"
 class Link {
   accessors: LinkAccessors
   attributes: LinkAttrs
+  content: () => { [key: string]: any }[]
   dash: () => string
   label: () => string
   size: () => number

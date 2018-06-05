@@ -1,26 +1,13 @@
 import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
 import * as d3 from "d3-selection"
 import Events from "../shared/event_catalog"
-import {
-  D3Selection,
-  Datum,
-  Dimensions,
-  EventBus,
-  Focus,
-  FocusPoint,
-  HoverPayload,
-  Point,
-  Position,
-  SeriesEl,
-  State,
-  StateWriter,
-} from "./typings"
+import { D3Selection, Datum, EventBus, Focus, HoverPayload, State, StateWriter } from "./typings"
 
 const dataName = (d: Datum): string => d.data.name,
   dataValue = (d: Datum): number => d.value
 
 class SunburstFocus implements Focus {
-  private el: SeriesEl
+  private el: D3Selection
   private state: State
   private stateWriter: StateWriter
   private events: EventBus
@@ -43,16 +30,16 @@ class SunburstFocus implements Focus {
     }
 
     const computed = this.state.current.get("computed")
-    if (payload.d === computed.renderer.topNode) {
+    const datum = payload.d
+    const focusPoint = payload.focusPoint
+
+    if (datum === computed.renderer.topNode) {
       return
     }
 
-    const focusPoint: FocusPoint = payload.focusPoint,
-      datum: Datum = payload.d
-
     drawHidden(this.el, "element")
 
-    const content: D3Selection = this.el.append("xhtml:ul")
+    const content = this.el.append("xhtml:ul")
 
     content
       .append("span")
@@ -61,12 +48,12 @@ class SunburstFocus implements Focus {
 
     content.append("span").text(`(${this.state.current.get("config").numberFormatter(dataValue(datum))})`)
 
-    const comparisonNode: Datum = computed.renderer.zoomNode || computed.renderer.topNode
-    const percentage: string = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
+    const comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode
+    const percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
     content.append("xhtml:li").text(this.percentageString(datum))
 
-    const focus: Point = { x: focusPoint.centroid[0], y: focusPoint.centroid[1] }
-    const labelDims: Dimensions = labelDimensions(this.el)
+    const focus = { x: focusPoint.centroid[0], y: focusPoint.centroid[1] }
+    const labelDims = labelDimensions(this.el)
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const drawingDimensions = {
       xMin: 0,
@@ -74,6 +61,7 @@ class SunburstFocus implements Focus {
       xMax: drawingDims.width,
       yMax: drawingDims.height,
     }
+
     positionLabel(
       this.el,
       focus,
@@ -84,29 +72,18 @@ class SunburstFocus implements Focus {
     )
   }
 
-  private labelPlacement(focusPoint: FocusPoint): Position {
-    const labelDims: Dimensions = labelDimensions(this.el)
-    const verticalOffset: number = this.state.current.get("config").focusOffset
-    return {
-      left: focusPoint.centroid[0] - labelDims.width / 2,
-      top:
-        focusPoint.centroid[1] +
-        (focusPoint.labelPosition === "below" ? labelDims.height + verticalOffset : -verticalOffset),
-    }
-  }
-
   private percentageString(datum: Datum): string {
     const computed = this.state.current.get("computed")
-    const topNode: Datum = computed.renderer.topNode
-    const zoomNode: Datum = computed.renderer.zoomNode
+    const topNode = computed.renderer.topNode
+    const zoomNode = computed.renderer.zoomNode
     return !zoomNode || topNode === zoomNode
       ? `${this.singlePercentageString(datum, topNode)}`
       : `${this.singlePercentageString(datum, zoomNode)} / ${this.singlePercentageString(datum, topNode)}`
   }
 
   private singlePercentageString(datum: Datum, comparison: Datum): string {
-    const topNode: Datum = this.state.current.get("computed").renderer.topNode
-    const percentage: string = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3)
+    const topNode = this.state.current.get("computed").renderer.topNode
+    const percentage = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3)
     return `${percentage}% of ${dataName(comparison)}`
   }
 

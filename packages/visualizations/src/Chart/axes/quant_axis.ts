@@ -1,18 +1,6 @@
 import Events from "../../shared/event_catalog"
 import * as d3 from "d3-selection"
-import {
-  cloneDeep,
-  defaults,
-  filter,
-  find,
-  forEach,
-  identity,
-  includes,
-  isFinite,
-  last,
-  rangeStep,
-  sortBy,
-} from "lodash/fp"
+import { cloneDeep, defaults, filter, find, forEach, includes, isFinite, last, rangeStep, sortBy } from "lodash/fp"
 import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
 import { setTextAttributes, setLineAttributes, withD3Element } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
@@ -22,17 +10,14 @@ import {
   AxisClass,
   AxisComputed,
   AxisType,
-  QuantAxisOptions,
   AxisPosition,
-  ChartConfig,
   ComponentConfigInfo,
-  Computed,
+  ComponentHoverPayload,
   D3Selection,
   EventBus,
+  QuantAxisOptions,
   State,
   StateWriter,
-  XAxisConfig,
-  YAxisConfig,
 } from "../typings"
 
 const stepScaleFactors = (step: number): number[] => {
@@ -93,7 +78,7 @@ class QuantAxis implements AxisClass<number> {
   // Computations
   compute(): void {
     this.previous = cloneDeep(this.computed)
-    const computed: Partial<AxisComputed> = this.computeInitial()
+    const computed = this.computeInitial()
     computed.ticks = computeTicks(computed.steps)
     computed.scale = computeScale(computed.range, computed.ticks)
     this.computed = computed as AxisComputed
@@ -112,8 +97,8 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private computeRange(): [number, number] {
-    const computed: Computed = this.state.current.get("computed")
-    const margin = (axis: AxisPosition): number =>
+    const computed = this.state.current.get("computed")
+    const margin = (axis: AxisPosition) =>
       includes(axis)(computed.axes.requiredAxes) ? computed.axes.margins[axis] || 0 : 0
     return this.isXAxis
       ? [0, computed.canvas.drawingDims.width]
@@ -126,29 +111,26 @@ class QuantAxis implements AxisClass<number> {
   computeSteps(computed: { [key: string]: any }): [number, number, number] {
     const steps: [number, number, number] = [this.start, this.end, this.interval]
     if (!this.interval) {
-      const tickNumber: number = computeTickNumber(computed.range, this.tickSpacing, this.minTicks)
-      const span: number = computed.domain[1] - computed.domain[0]
-      let step: number =
-        Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
+      const tickNumber = computeTickNumber(computed.range, this.tickSpacing, this.minTicks)
+      const span = computed.domain[1] - computed.domain[0]
+      let step = Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
 
       let scaleFactor: number
       if (this.end) {
         // If a value has been explicitly set for this.end, there must be a tick at this value
-        const validScaleFactors: number[] = filter((val: number): boolean => (span / (step * val)) % 1 === 0)(
-          stepScaleFactors(step)
-        )
+        const validScaleFactors = filter((val: number) => (span / (step * val)) % 1 === 0)(stepScaleFactors(step))
         // Choose scale factor which gives a number of ticks as close as possible to tickNumber
-        scaleFactor = sortBy((val: number): number => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
+        scaleFactor = sortBy((val: number) => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
       } else {
-        const err: number = tickNumber / span * step
-        const errorMapper: [boolean, number][] = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
+        const err = tickNumber / span * step
+        const errorMapper = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
         scaleFactor = find(0)(errorMapper)[1]
       }
       step *= scaleFactor
       steps[2] = step
     }
 
-    let computedStart: number = this.end % steps[2]
+    let computedStart = this.end % steps[2]
     computedStart = computedStart - (computedStart > computed.domain[0] ? steps[2] : 0)
     steps[0] = this.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2]
     steps[1] = this.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0]
@@ -175,13 +157,11 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private drawTicks(): void {
-    const config: ChartConfig = this.state.current.get("config")
-    const attributes: AxisAttributes = this.getAttributes()
-    const startAttributes: AxisAttributes = this.getStartAttributes(attributes)
+    const config = this.state.current.get("config")
+    const attributes = this.getAttributes()
+    const startAttributes = this.getStartAttributes(attributes)
 
-    const ticks: any = this.el
-      .selectAll(`text.${styles.tick}.${styles[this.position]}`)
-      .data(this.computed.ticks, String)
+    const ticks = this.el.selectAll(`text.${styles.tick}.${styles[this.position]}`).data(this.computed.ticks, String)
 
     ticks
       .enter()
@@ -203,18 +183,13 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private adjustMargins(): void {
-    let requiredMargin: number = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
+    let requiredMargin = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
 
     // Add space for flags
-    const flagAxis: { [key: string]: any } = this.state.current.get([
-      "computed",
-      "series",
-      "axesWithFlags",
-      this.position,
-    ])
+    const flagAxis = this.state.current.get(["computed", "series", "axesWithFlags", this.position])
     requiredMargin = requiredMargin + (flagAxis ? flagAxis.axisPadding : 0)
 
-    const computedMargins: { [key: string]: number } = this.state.current.get("computed").axes.margins || {}
+    const computedMargins = this.state.current.get("computed").axes.margins || {}
     if (computedMargins[this.position] === requiredMargin) {
       return
     }
@@ -225,8 +200,8 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private tickFormatter(): (x: number) => string {
-    const numberFormatter: (x: number) => string = this.state.current.get("config").numberFormatter
-    const unitTick: number = this.isXAxis ? this.computed.ticks[0] : last(this.computed.ticks)
+    const numberFormatter = this.state.current.get("config").numberFormatter
+    const unitTick = this.isXAxis ? this.computed.ticks[0] : last(this.computed.ticks)
     return (x: number): string => (x === unitTick && this.unit ? this.unit : numberFormatter(x))
   }
 
@@ -248,8 +223,8 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private drawBorder(): void {
-    const drawingDims: any = this.state.current.get("computed").canvas.drawingDims
-    const border: { [key: string]: number } = {
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
+    const border = {
       x1: 0,
       x2: this.isXAxis ? drawingDims.width : 0,
       y1: this.isXAxis ? 0 : drawingDims.height,
@@ -259,7 +234,8 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private onComponentHover(): void {
-    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: this.el, options: this.hoverInfo() })
+    const payload: ComponentHoverPayload = { component: this.el, options: this.hoverInfo() }
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, payload)
   }
 
   private hoverInfo(): ComponentConfigInfo {

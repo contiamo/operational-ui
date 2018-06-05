@@ -1,14 +1,14 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const AreaRenderer: any = {
+const AreaRenderer = {
   accessors: {
     interpolate: (series: any, d: any) => "monotoneX",
   },
   type: "area",
 }
 
-const LineRenderer: any = {
+const LineRenderer = {
   accessors: {
     interpolate: (series: any, d: any) => "monotoneX",
   },
@@ -26,6 +26,7 @@ const YFlagRenderer = {
   type: "flag",
   accessors: {
     color: (series, d) => (d.y > 250 ? "red" : "purple"),
+    opacity: (series, d) => 0.4,
   },
   config: {
     axis: "y1",

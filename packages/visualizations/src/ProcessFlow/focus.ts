@@ -1,20 +1,7 @@
 import { drawHidden, labelDimensions, positionLabel } from "../utils/focus_utils"
 import Events from "../shared/event_catalog"
-import { flow, forEach, map, reduce, sortBy, uniqueId } from "lodash/fp"
-import {
-  D3Selection,
-  Dimensions,
-  EventBus,
-  Focus,
-  FocusPoint,
-  HoverPayload,
-  ProcessFlowConfig,
-  SeriesEl,
-  State,
-  StateWriter,
-  TLink,
-  TNode,
-} from "./typings"
+import { flow, forEach, map, reduce, sortBy } from "lodash/fp"
+import { D3Selection, EventBus, Focus, HoverPayload, State, StateWriter, TLink, TNode } from "./typings"
 import * as styles from "./styles"
 
 interface Breakdown {
@@ -32,7 +19,7 @@ interface Breakdowns {
 
 // There can only be an element focus in process flow diagrams
 class ProcessFlowFocus implements Focus {
-  private el: SeriesEl
+  private el: D3Selection
   private state: State
   private stateWriter: StateWriter
   private events: EventBus
@@ -55,19 +42,19 @@ class ProcessFlowFocus implements Focus {
     }
 
     // Check if focus labels should be displayed for the element type.
-    const focusPoint: FocusPoint = payload.focusPoint,
-      datum: any = payload.d,
-      isNode: boolean = focusPoint.type === "node",
-      config: ProcessFlowConfig = this.state.current.get("config")
+    const focusPoint = payload.focusPoint
+    const datum = payload.d
+    const isNode = focusPoint.type === "node"
+    const config = this.state.current.get("config")
 
     if (isNode ? !config.showNodeFocusLabels : !config.showLinkFocusLabels) {
       return
     }
 
     // Render the focus label hidden initially to allow placement calculations
-    const labelPosition: string = this.state.current.get("config").focusLabelPosition
     drawHidden(this.el, "element").style("pointer-events", "none")
-    const content: SeriesEl = this.el.append("xhtml:ul")
+
+    const content = this.el.append("xhtml:ul")
 
     content
       .append("xhtml:li")
@@ -82,21 +69,22 @@ class ProcessFlowFocus implements Focus {
     }
 
     if (isNode) {
-      this.addNodeBreakdowns(content, datum)
-      this.addSingleNodeVisitsComment(content, datum)
+      this.addNodeBreakdowns(content, datum as TNode)
+      this.addSingleNodeVisitsComment(content, datum as TNode)
     }
 
     // Get label dimensions (has to be actually rendered in the page to do this) and position label
-    const labelDims: Dimensions = labelDimensions(this.el)
-    const drawingDimensions: { xMax: number; xMin: number; yMax: number; yMin: number } = this.getDrawingDimensions()
-    const offset: number = focusPoint.offset + config.nodeBorderWidth
+    const labelDims = labelDimensions(this.el)
+    const drawingDimensions = this.getDrawingDimensions()
+    const offset = focusPoint.offset + config.nodeBorderWidth
+    const labelPosition = this.state.current.get("config").focusLabelPosition
 
     positionLabel(this.el, focusPoint, labelDims, drawingDimensions, offset, labelPosition)
   }
 
   private appendContent(container: D3Selection, content: { [key: string]: any }[]): void {
-    const contentContainer: D3Selection = container.append("div").attr("class", styles.content)
-    forEach((contentItem: { [key: string]: any }): void => {
+    const contentContainer = container.append("div").attr("class", styles.content)
+    forEach((contentItem: { [key: string]: any }) => {
       contentContainer
         .append("xhtml:li")
         .attr("class", styles.title)
@@ -106,16 +94,16 @@ class ProcessFlowFocus implements Focus {
     })(content)
   }
 
-  private addNodeBreakdowns(content: SeriesEl, datum: TNode): void {
-    const breakdowns: Breakdowns = computeBreakdowns(datum),
-      container: D3Selection = content.append("div").attr("class", styles.breakdownsContainer),
-      inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),
-      outputsTotal: number = computeBreakdownTotal(breakdowns.outputs),
-      startsHerePercentage: number = Math.round(datum.journeyStarts * 100 / outputsTotal),
-      endsHerePercentage: number = Math.round(datum.journeyEnds * 100 / inputsTotal),
-      startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
-      endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all inputs` : " ",
-      numberFormatter: (x: number) => string = this.state.current.get("config").numberFormatter
+  private addNodeBreakdowns(content: D3Selection, datum: TNode): void {
+    const breakdowns = computeBreakdowns(datum)
+    const container = content.append("div").attr("class", styles.breakdownsContainer)
+    const inputsTotal = computeBreakdownTotal(breakdowns.inputs)
+    const outputsTotal = computeBreakdownTotal(breakdowns.outputs)
+    const startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal)
+    const endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal)
+    const startsHereString = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " "
+    const endsHereString = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all inputs` : " "
+    const numberFormatter = this.state.current.get("config").numberFormatter
 
     // Add "Starts here" breakdown
     flow(
@@ -148,7 +136,7 @@ class ProcessFlowFocus implements Focus {
     )(container)
   }
 
-  private addSingleNodeVisitsComment(content: SeriesEl, datum: TNode): void {
+  private addSingleNodeVisitsComment(content: D3Selection, datum: TNode): void {
     if (datum.singleNodeJourneys === 0) {
       return
     }
@@ -159,8 +147,8 @@ class ProcessFlowFocus implements Focus {
   }
 
   private getDrawingDimensions(): { xMax: number; xMin: number; yMax: number; yMin: number } {
-    const drawingContainer: ClientRect = this.state.current.get("computed").canvas.elRect
-    const computedSeries: { [key: string]: any } = this.state.current.get("computed").series
+    const drawingContainer = this.state.current.get("computed").canvas.elRect
+    const computedSeries = this.state.current.get("computed").series
 
     return {
       xMax: drawingContainer.left + computedSeries.width,
@@ -186,39 +174,43 @@ class ProcessFlowFocus implements Focus {
 
 // Helper functions
 function computeBreakdowns(node: TNode): Breakdowns {
-  const inputs: Breakdown[] = map((link: TLink): Breakdown => {
-    const size: number = link.size()
+  const inputs = map((link: TLink) => {
+    const size = link.size()
     return {
       size,
       label: link.source().label(),
       percentage: Math.round(size * 100 / node.size()),
     }
   })(node.targetLinks)
-  const outputs: Breakdown[] = map((link: TLink): Breakdown => {
-    const size: number = link.size()
+
+  const outputs = map((link: TLink) => {
+    const size = link.size()
     return {
       size,
       label: link.target().label(),
       percentage: Math.round(size * 100 / node.size()),
     }
   })(node.sourceLinks)
-  const startsHere: Breakdown[] = [
+
+  const startsHere = [
     {
       size: node.journeyStarts,
       percentage: Math.round(node.journeyStarts * 100 / node.size()),
     },
   ]
-  const endsHere: Breakdown[] = [
+
+  const endsHere = [
     {
       size: node.journeyEnds,
       percentage: Math.round(node.journeyEnds * 100 / node.size()),
     },
   ]
+
   return { inputs, outputs, startsHere, endsHere }
 }
 
 function computeBreakdownTotal(breakdowns: Breakdown[]): number {
-  return reduce((sum: number, item: Breakdown): number => {
+  return reduce((sum: number, item: Breakdown) => {
     return sum + item.size
   }, 0)(breakdowns)
 }
@@ -228,7 +220,7 @@ function addBreakdownContainer(content: D3Selection): D3Selection {
 }
 
 function addBreakdownTitle(title: string, subtitle?: string) {
-  return (container: D3Selection): D3Selection => {
+  return (container: D3Selection) => {
     container
       .append("span")
       .attr("class", styles.title)
@@ -240,8 +232,8 @@ function addBreakdownTitle(title: string, subtitle?: string) {
 }
 
 function addBreakdownBars(breakdownItems: Breakdown[], numberFormatter: (x: number) => string) {
-  const sortedItems: Breakdown[] = sortBy((item: Breakdown): number => -item.size)(breakdownItems)
-  return (container: D3Selection): D3Selection => {
+  const sortedItems = sortBy((item: Breakdown) => -item.size)(breakdownItems)
+  return (container: D3Selection) => {
     forEach(appendBreakdown(container, numberFormatter))(sortedItems)
     return container
   }
@@ -249,7 +241,7 @@ function addBreakdownBars(breakdownItems: Breakdown[], numberFormatter: (x: numb
 
 function appendBreakdown(container: D3Selection, numberFormatter: (x: number) => string) {
   return (item: Breakdown): void => {
-    const breakdown: D3Selection = container.append("div").attr("class", styles.breakdown)
+    const breakdown = container.append("div").attr("class", styles.breakdown)
 
     if (item.label) {
       breakdown
@@ -258,7 +250,7 @@ function appendBreakdown(container: D3Selection, numberFormatter: (x: number) =>
         .text(item.label)
     }
 
-    const backgroundBar: D3Selection = breakdown.append("div").attr("class", styles.breakdownBackgroundBar)
+    const backgroundBar = breakdown.append("div").attr("class", styles.breakdownBackgroundBar)
 
     backgroundBar
       .append("div")
@@ -273,7 +265,7 @@ function appendBreakdown(container: D3Selection, numberFormatter: (x: number) =>
 }
 
 function addBreakdownComment(comment: string) {
-  return (container: D3Selection): D3Selection => {
+  return (container: D3Selection) => {
     container
       .append("label")
       .attr("class", styles.breakdownCommentLabel)

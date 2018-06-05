@@ -22,17 +22,6 @@ const arcStyle = {
   },
 }
 
-const labelStyle = {
-  fill: "#333",
-  stroke: "none",
-  ...theme.typography.small,
-}
-
-const totalStyle = {
-  fill: "#4c4c4c",
-  ...theme.typography.small,
-}
-
 const breadcrumbStyle = {
   width: "100%",
   height: "40px",
@@ -118,8 +107,6 @@ const arrowStyle = {
 }
 
 export const arc = css(arcStyle).toString()
-export const label = css(labelStyle).toString()
-export const total = css(totalStyle).toString()
 export const breadcrumb = css(breadcrumbStyle).toString()
 export const breadcrumbItem = css(breadcrumbItemStyle).toString()
 export const centerCircle = css(centerCircleStyle).toString()

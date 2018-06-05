@@ -1,4 +1,4 @@
-import { ComponentHoverPayload, Config, D3Selection, EventBus, State } from "./typings"
+import { ComponentHoverPayload, Config, D3Selection, EventBus, State, ComponentConfigInfo } from "./typings"
 import Events from "./event_catalog"
 import * as styles from "./styles"
 
@@ -26,8 +26,9 @@ class ComponentFocus {
   draw(payload: ComponentHoverPayload): void {
     const componentPosition: ClientRect = payload.component.node().getBoundingClientRect()
     const canvasPosition: ClientRect = this.state.current.get("computed").canvas.containerRect
-    const topBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-top-width"], 10)
-    const leftBorderWidth: number = parseInt((window.getComputedStyle(this.el.node()) as any)["border-left-width"], 10)
+    const elStyle: { [key: string]: any } = window.getComputedStyle(this.el.node())
+    const topBorderWidth: number = parseInt(elStyle["border-top-width"], 10)
+    const leftBorderWidth: number = parseInt(elStyle["border-left-width"], 10)
     const config: Config = this.state.current.get("config")
 
     // Prevent component focus from going out of canvas.
@@ -52,10 +53,10 @@ class ComponentFocus {
     }
 
     this.el
-      .style("width", componentPosition.width + "px")
-      .style("height", componentPosition.height + "px")
-      .style("top", top + "px")
-      .style("left", left + "px")
+      .style("width", `${componentPosition.width}px`)
+      .style("height", `${componentPosition.height}px`)
+      .style("top", `${top}px`)
+      .style("left", `${left}px`)
       .style("visibility", "visible")
 
     // Track mouseover status (mouse over label)
@@ -67,9 +68,9 @@ class ComponentFocus {
     this.remove()
   }
 
-  onClick(configOptions: { [key: string]: any }): () => void {
+  onClick(configOptions: ComponentConfigInfo): () => void {
     return (): void => {
-      console.log(configOptions)
+      this.events.emit(Events.FOCUS.COMPONENT.CLICK, configOptions)
     }
   }
 

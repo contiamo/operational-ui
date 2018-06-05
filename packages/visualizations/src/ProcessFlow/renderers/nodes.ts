@@ -11,11 +11,9 @@ import {
   EventBus,
   FocusElement,
   FocusPoint,
-  NodeSelection,
   ProcessFlowConfig,
   Renderer,
   Scale,
-  SeriesEl,
   State,
   TLink,
   TNode,
@@ -76,11 +74,11 @@ const nodeShapeOptions: { [key: string]: { [key: string]: any } } = {
 class Nodes implements Renderer {
   private config: ProcessFlowConfig
   private data: TNode[]
-  private el: SeriesEl
+  private el: D3Selection
   private events: EventBus
   private state: State
 
-  constructor(state: State, events: EventBus, el: SeriesEl) {
+  constructor(state: State, events: EventBus, el: D3Selection) {
     this.state = state
     this.events = events
     this.el = el
@@ -91,9 +89,9 @@ class Nodes implements Renderer {
     this.mouseOver(d3.select(element), d)
   }
 
-  private mouseOver(element: NodeSelection, d: TNode, hideLabel: boolean = false): void {
+  private mouseOver(element: D3Selection, d: TNode, hideLabel: boolean = false): void {
     this.highlight(element, d)
-    const focusPoint: FocusPoint = this.focusPoint(element, d)
+    const focusPoint = this.focusPoint(element, d)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, { focusPoint, d, hideLabel })
     element.on("mouseleave", this.onMouseOut.bind(this))
   }
@@ -109,7 +107,7 @@ class Nodes implements Renderer {
       )
   }
 
-  highlight(element: NodeSelection, d: TNode, keepCurrent: boolean = false): void {
+  highlight(element: D3Selection, d: TNode, keepCurrent: boolean = false): void {
     if (!keepCurrent) {
       this.removeHighlights()
     }
@@ -122,9 +120,9 @@ class Nodes implements Renderer {
     this.el.selectAll(`path.link.${styles.element}`).attr("stroke", (d: TLink): string => d.stroke())
   }
 
-  private focusPoint(element: NodeSelection, d: TNode): FocusPoint {
+  private focusPoint(element: D3Selection, d: TNode): FocusPoint {
     if (d == null) return
-    const offset: number = this.getNodeBoundingRect(element.node()).width / 2
+    const offset = this.getNodeBoundingRect(element.node()).width / 2
     return {
       offset,
       type: "node",
@@ -141,17 +139,17 @@ class Nodes implements Renderer {
   draw(data: TNode[]): void {
     this.data = data
     this.config = this.state.current.get("config")
-    const groups: NodeSelection = this.el
+    const groups = this.el
       .select("g.nodes-group")
       .selectAll("g.node-group")
-      .data(this.data, (node: TNode): string => node.id())
+      .data(this.data, (node: TNode) => node.id())
 
     exitGroups(groups)
     this.enterAndUpdate(groups)
   }
 
   private borderScale(scale: Scale): Scale {
-    return (size: number): number => {
+    return (size: number) => {
       return Math.pow(Math.sqrt(scale(size)) + this.config.nodeBorderWidth, 2)
     }
   }
@@ -164,11 +162,11 @@ class Nodes implements Renderer {
     return `rotate(${nodeShapeOptions[d.shape()].rotation})`
   }
 
-  private enterAndUpdate(groups: NodeSelection): void {
-    const scale: Scale = sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data),
-      borderScale: Scale = this.borderScale(scale)
+  private enterAndUpdate(groups: D3Selection): void {
+    const scale = sizeScale([this.config.minNodeSize, this.config.maxNodeSize], this.data)
+    const borderScale = this.borderScale(scale)
 
-    const enteringGroups: D3Selection = groups
+    const enteringGroups = groups
       .enter()
       .append("g")
       .attr("class", "node-group")
@@ -177,7 +175,7 @@ class Nodes implements Renderer {
     enteringGroups
       .append("path")
       .attr("class", `node ${styles.border}`)
-      .attr("d", (d: TNode): string =>
+      .attr("d", (d: TNode) =>
         d3Symbol()
           .type(nodeShapeOptions[d.shape()].symbol)
           .size(borderScale(d.size()))()
@@ -191,14 +189,14 @@ class Nodes implements Renderer {
     enteringGroups
       .append("path")
       .attr("class", `node ${styles.element}`)
-      .attr("d", (d: TNode): string =>
+      .attr("d", (d: TNode) =>
         d3Symbol()
           .type(nodeShapeOptions[d.shape()].symbol)
           .size(scale(d.size()))()
       )
       .attr("transform", this.rotate)
-      .attr("fill", (d: TNode): string => d.color())
-      .attr("stroke", (d: TNode): string => d.stroke())
+      .attr("fill", (d: TNode) => d.color())
+      .attr("stroke", (d: TNode) => d.stroke())
       .attr("opacity", 0)
 
     enteringGroups.append("text").attr("class", styles.label)
@@ -216,7 +214,7 @@ class Nodes implements Renderer {
       .duration(this.config.duration)
       // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
       // but doesn't break the viz.
-      .attr("d", (d: TNode): string =>
+      .attr("d", (d: TNode) =>
         d3Symbol()
           .type(nodeShapeOptions[d.shape()].symbol)
           .size(borderScale(d.size()))()
@@ -230,14 +228,14 @@ class Nodes implements Renderer {
       .duration(this.config.duration)
       // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
       // but doesn't break the viz.
-      .attr("d", (d: TNode): string =>
+      .attr("d", (d: TNode) =>
         d3Symbol()
           .type(nodeShapeOptions[d.shape()].symbol)
           .size(scale(d.size()))()
       )
       .attr("transform", this.rotate)
-      .attr("fill", (d: TNode): string => d.color())
-      .attr("stroke", (d: TNode): string => d.stroke())
+      .attr("fill", (d: TNode) => d.color())
+      .attr("stroke", (d: TNode) => d.stroke())
       .attr("opacity", 1)
       .call(onTransitionEnd, this.updateNodeLabels.bind(this))
   }
@@ -255,34 +253,32 @@ class Nodes implements Renderer {
   }
 
   private getAutomaticLabelPosition(d: TNode): string {
-    const columnSpacing: number = this.state.current.get("computed").series.horizontalNodeSpacing
+    const columnSpacing = this.state.current.get("computed").series.horizontalNodeSpacing
     return (d.x / columnSpacing) % 2 === 1 ? "top" : "bottom"
   }
 
   private getNodeLabelX(d: TNode, el: HTMLElement): number {
-    const offset: number =
-      this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
+    const offset = this.getNodeBoundingRect(el).width / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[this.getLabelPosition(d)].x * offset
   }
 
   private getNodeLabelY(d: TNode, el: HTMLElement): number {
-    const offset: number =
-      this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
+    const offset = this.getNodeBoundingRect(el).height / 2 + this.config.nodeBorderWidth + this.config.labelOffset
     return nodeLabelOptions[this.getLabelPosition(d)].y * offset
   }
 
   private getLabelText(d: TNode): string {
     // Pixel width of character approx 1/2 of font-size - allow 7px per character
-    const desiredPixelWidth: number = this.state.current.get("computed").series.horizontalNodeSpacing,
-      numberOfCharacters: number = desiredPixelWidth / 7
+    const desiredPixelWidth = this.state.current.get("computed").series.horizontalNodeSpacing
+    const numberOfCharacters = desiredPixelWidth / 7
     return d.label().substring(0, numberOfCharacters) + (d.label().length > numberOfCharacters ? "..." : "")
   }
 
   private updateNodeLabels(): void {
-    const labels: NodeSelection = this.el
+    const labels: D3Selection = this.el
       .select("g.nodes-group")
       .selectAll(`text.${styles.label}`)
-      .data(this.data, (node: TNode): string => node.id())
+      .data(this.data, (node: TNode) => node.id())
 
     labels
       .enter()
@@ -290,8 +286,8 @@ class Nodes implements Renderer {
       .text(d => this.getLabelText(d))
       .attr("x", withD3Element(this.getNodeLabelX.bind(this)))
       .attr("y", withD3Element(this.getNodeLabelY.bind(this)))
-      .attr("dy", (d: TNode): number => nodeLabelOptions[this.getLabelPosition(d)].dy)
-      .attr("text-anchor", (d: TNode): string => nodeLabelOptions[this.getLabelPosition(d)].textAnchor)
+      .attr("dy", (d: TNode) => nodeLabelOptions[this.getLabelPosition(d)].dy)
+      .attr("text-anchor", (d: TNode) => nodeLabelOptions[this.getLabelPosition(d)].textAnchor)
   }
 }
 

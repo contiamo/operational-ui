@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, map, sortBy } from "lodash/fp"
+import { compact, defaults, find, forEach, get, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   area as d3Area,
@@ -13,9 +13,6 @@ import {
 import * as styles from "./styles"
 import {
   AreaRendererAccessors,
-  AxesData,
-  AxisPosition,
-  AxisType,
   D3Selection,
   Datum,
   EventBus,
@@ -42,6 +39,7 @@ const defaultAccessors: Partial<AreaRendererAccessors> = {
   color: (series: Series, d: Datum) => series.legendColor(),
   interpolate: (series: Series, d: Datum) => "linear",
   closeGaps: (series: Series, d: Datum) => true,
+  opacity: (series: Series, d: Datum) => 0.6,
 }
 
 const hasValue = (d: any): boolean => {
@@ -56,6 +54,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   events: EventBus
   interpolate: RendererAccessor<any>
   isRange: boolean
+  opacity: RendererAccessor<number>
   options: Options
   series: Series
   state: State
@@ -91,8 +90,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.addMissingData()
     this.updateClipPath()
 
-    const duration: number = this.state.current.get("config").duration
-    const data: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
+    const duration = this.state.current.get("config").duration
+    const data = sortBy((d: Datum) => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
     const area = this.el.selectAll("path.main").data([data])
 
     area
@@ -105,6 +104,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))
+      .attr("opacity", this.opacity.bind(this))
       .attr("clip-path", `url(#area-clip-${this.series.key()}`)
 
     area
@@ -120,7 +120,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map((this as any)[axis])(this.data)
+    const data = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)
@@ -154,23 +154,22 @@ class Area implements RendererClass<AreaRendererAccessors> {
     this.color = (d?: Datum) => accessors.color(this.series, d)
     this.interpolate = (d?: Datum) => interpolator[accessors.interpolate(this.series, d)]
     this.closeGaps = (d?: Datum) => accessors.closeGaps(this.series, d)
+    this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
   }
 
   private addMissingData(): void {
     if (this.closeGaps() || this.series.options.stacked) {
       return
     }
-    const ticks: Date[] = this.state.current.get([
+    const ticks = this.state.current.get([
       "computed",
       "axes",
       "computed",
       this.xIsBaseline ? this.series.xAxis() : this.series.yAxis(),
       "ticksInDomain",
     ])
-    forEach((tick: Date): void => {
-      if (
-        !find((d: Datum): boolean => (this.xIsBaseline ? this.x : this.y)(d).toString() === tick.toString())(this.data)
-      ) {
+    forEach((tick: Date) => {
+      if (!find((d: Datum) => (this.xIsBaseline ? this.x : this.y)(d).toString() === tick.toString())(this.data)) {
         this.data.push({
           [this.xIsBaseline ? "injectedX" : "injectedY"]: tick,
         })
@@ -179,9 +178,9 @@ class Area implements RendererClass<AreaRendererAccessors> {
   }
 
   private updateClipPath(): void {
-    const duration: number = this.state.current.get("config").duration
-    const mainData: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
-    const data: Datum[] = this.isRange ? [this.series.options.clipData] : []
+    const duration = this.state.current.get("config").duration
+    const mainData = sortBy((d: Datum) => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
+    const data = this.isRange ? [this.series.options.clipData] : []
 
     const clip = this.el.selectAll("clipPath path").data(data)
 
@@ -220,8 +219,8 @@ class Area implements RendererClass<AreaRendererAccessors> {
 
   private startPath(data: Datum[]): string {
     return this.createAreaPath({
-      x: (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : 0),
-      y: (d: Datum): any => this.yScale(this.xIsBaseline ? 0 : this.y(d)),
+      x: (d: Datum) => this.xScale(this.xIsBaseline ? this.x(d) : 0),
+      y: (d: Datum) => this.yScale(this.xIsBaseline ? 0 : this.y(d)),
     })(data)
   }
 

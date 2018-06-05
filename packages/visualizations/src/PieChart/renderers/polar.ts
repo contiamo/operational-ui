@@ -12,24 +12,20 @@ import {
   ComputedArcs,
   ComputedData,
   ComputedDatum,
-  ComputedInitial,
   D3Selection,
   Datum,
-  DatumInfo,
   Dimensions,
   EventBus,
   HoverPayload,
   LegendDatum,
-  PieChartConfig,
   Renderer,
   RendererAccessor,
-  RendererAccessors,
   State,
 } from "../typings"
 
 const ANGLE_RANGE: [number, number] = [0, 2 * Math.PI]
-const MIN_SEGMENT_WIDTH: number = 5
-const TOTAL_Y_OFFSET: string = "0.35em"
+const MIN_SEGMENT_WIDTH = 5
+const TOTAL_Y_OFFSET = "0.35em"
 
 class Polar implements Renderer {
   private color: RendererAccessor<string>
@@ -81,11 +77,11 @@ class Polar implements Renderer {
   }
 
   private updateDraw(): void {
-    const config: PieChartConfig = this.state.current.get("config")
-    const duration: number = config.duration
-    const maxTotalFontSize: number = config.maxTotalFontSize
-    const minTotalFontSize: number = config.minTotalFontSize
-    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
+    const config = this.state.current.get("config")
+    const duration = config.duration
+    const maxTotalFontSize = config.maxTotalFontSize
+    const minTotalFontSize = config.minTotalFontSize
+    const drawingDims = this.state.current.get("computed").canvas.drawingContainerDims
 
     // Remove focus before updating chart
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
@@ -95,13 +91,13 @@ class Polar implements Renderer {
     this.el.attr("transform", Utils.translateString(this.currentTranslation))
 
     // Arcs
-    const arcs: D3Selection = Utils.createArcGroups(this.el, this.computed.data, this.key)
+    const arcs = Utils.createArcGroups(this.el, this.computed.data, this.key)
     // Exit
     Utils.exitArcs(arcs, duration, this.removeArcTween.bind(this))
     // Enter
     Utils.enterArcs(arcs, this.onMouseOver.bind(this), this.onMouseOut.bind(this))
     // Update
-    const updatingArcs: D3Selection = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
+    const updatingArcs = arcs.merge(arcs.enter().selectAll(`g.${styles.arc}`))
     setPathAttributes(updatingArcs.select("path"), this.arcAttributes(), duration, this.fitToCanvas.bind(this))
 
     updatingArcs.select("rect").attr("visibility", "hidden")
@@ -118,7 +114,7 @@ class Polar implements Renderer {
     Utils.updateTotal(this.el, this.centerDisplayString(), duration, options)
   }
 
-  private arcAttributes(): { [key: string]: any } {
+  private arcAttributes() {
     return {
       path: this.arcTween.bind(this),
       fill: this.color.bind(this),
@@ -130,23 +126,20 @@ class Polar implements Renderer {
     this.currentTranslation = [0, 0]
     this.el.attr("transform", Utils.translateString(this.currentTranslation))
 
-    const current: ClientRect = (this.el.node() as any).getBoundingClientRect()
-    const drawing: ClientRect = this.state.current.get("computed").canvas.drawingContainerRect
+    const current = (this.el.node() as any).getBoundingClientRect()
+    const drawing = this.state.current.get("computed").canvas.drawingContainerRect
     if (current.width === 0 && current.height === 0) {
       return
     }
-    const margin: number = this.state.current.get("config").outerBorderMargin
+    const margin = this.state.current.get("config").outerBorderMargin
 
-    const scale: number = Math.min(
-      (drawing.width - 2 * margin) / current.width,
-      (drawing.height - 2 * margin) / current.height
-    )
+    const scale = Math.min((drawing.width - 2 * margin) / current.width, (drawing.height - 2 * margin) / current.height)
 
     this.computeArcs(this.computed)
     this.el.selectAll("path").attr("d", this.computed.arc)
 
-    const newCurrent: ClientRect = (this.el.node() as any).getBoundingClientRect()
-    const topOffset: number = this.state.current.get("computed").canvas.legend.node().offsetHeight
+    const newCurrent = (this.el.node() as any).getBoundingClientRect()
+    const topOffset = this.state.current.get("computed").canvas.legend.node().offsetHeight
 
     this.currentTranslation = [
       (drawing.width - newCurrent.width) / 2 + drawing.left - newCurrent.left,
@@ -157,7 +150,7 @@ class Polar implements Renderer {
 
   // Interpolate the arcs in data space.
   private arcTween(d: ComputedDatum, i: number): (t: number) => string {
-    const old: any = this.previousComputed.data || []
+    const old = this.previousComputed.data || []
     let s0: number
     let e0: number
     if (old[i]) {
@@ -198,7 +191,7 @@ class Polar implements Renderer {
   private compute(): void {
     this.previousComputed = this.computed
 
-    const d: ComputedInitial = {
+    const d = {
       layout: Utils.layout(this.angleValue, ANGLE_RANGE),
       total: Utils.computeTotal(this.data, this.value),
     }
@@ -208,7 +201,7 @@ class Polar implements Renderer {
 
     Utils.calculatePercentages(this.data, this.angleValue, d.total)
 
-    const data: ComputedDatum[] = d.layout(this.data)
+    const data = d.layout(this.data)
     this.computed = {
       ...d,
       ...this.computeArcs({ data, ...d }),
@@ -221,11 +214,11 @@ class Polar implements Renderer {
   }
 
   private computeArcs(computed: Partial<ComputedData>): ComputedArcs {
-    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingContainerDims
-    const r: any = this.computeOuterRadius(drawingDims)
-    const rInner: any = this.computeInnerRadius(computed.data, r)
-    const rHover: number = this.hoverOuterRadius(r)
-    const rInnerHover: number = Math.max(rInner - 5, 0)
+    const drawingDims = this.state.current.get("computed").canvas.drawingContainerDims
+    const r = this.computeOuterRadius(drawingDims)
+    const rInner = this.computeInnerRadius(computed.data, r)
+    const rHover = this.hoverOuterRadius(r)
+    const rInnerHover = Math.max(rInner - 5, 0)
 
     return {
       r,
@@ -241,9 +234,9 @@ class Polar implements Renderer {
     }
   }
 
-  private computeOuterRadius(drawingDims: Dimensions, scaleFactor: number = 1) {
-    const domainMax: number = max(map((datum: Datum): number => this.value(datum))(this.data))
-    const scale: any = d3ScaleSqrt()
+  private computeOuterRadius(drawingDims: Dimensions, scaleFactor: number = 1): any {
+    const domainMax = max(map((datum: Datum) => this.value(datum))(this.data))
+    const scale = d3ScaleSqrt()
       .range([
         this.state.current.get("config").minInnerRadius,
         Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin,
@@ -253,12 +246,12 @@ class Polar implements Renderer {
   }
 
   private computeInnerRadius(data: ComputedDatum[], outerRadius: (d: Datum) => number): number {
-    const options: PieChartConfig = this.state.current.get("config")
-    const minWidth: number = this.minSegmentWidth || MIN_SEGMENT_WIDTH
-    const maxWidth: number = options.maxWidth
-    const minOuterRadius: number = min(map(outerRadius)(data))
+    const options = this.state.current.get("config")
+    const minWidth = this.minSegmentWidth || MIN_SEGMENT_WIDTH
+    const maxWidth = options.maxWidth
+    const minOuterRadius = min(map(outerRadius)(data))
     // Space is not enough, don't render
-    const width: number = minOuterRadius - options.minInnerRadius
+    const width = minOuterRadius - options.minInnerRadius
     return width < minWidth ? 0 : minOuterRadius - Math.min(width, maxWidth)
   }
 
@@ -268,7 +261,7 @@ class Polar implements Renderer {
 
   // Event listeners / handlers
   private onMouseOver(d: ComputedDatum): void {
-    const datumInfo: DatumInfo = {
+    const datumInfo = {
       key: this.key(d),
       value: this.value(d),
       percentage: d.data.percentage,
@@ -282,9 +275,9 @@ class Polar implements Renderer {
       return
     }
 
-    const arcs: any = this.el.select("g.arcs").selectAll("g")
-    const filterFocused: any = (d: Datum): boolean => datapoint.d && this.key(d) === datapoint.d.key
-    const filterUnFocused: any = (d: Datum): boolean => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
+    const arcs = this.el.select("g.arcs").selectAll("g")
+    const filterFocused = (d: Datum) => datapoint.d && this.key(d) === datapoint.d.key
+    const filterUnFocused = (d: Datum) => (datapoint.d ? this.key(d) !== datapoint.d.key : true)
 
     Utils.updateFilteredPathAttributes(arcs, filterFocused, this.computed.arcOver)
     Utils.updateFilteredPathAttributes(
@@ -295,7 +288,7 @@ class Polar implements Renderer {
   }
 
   private highlightElement(key: string): void {
-    const d: ComputedDatum = find((datum: ComputedDatum): boolean => this.key(datum) === key)(this.computed.data)
+    const d = find((datum: ComputedDatum) => this.key(datum) === key)(this.computed.data)
     if (!d) {
       return
     }
@@ -308,7 +301,7 @@ class Polar implements Renderer {
 
   // External methods
   dataForLegend(): LegendDatum[] {
-    return map((datum: Datum): LegendDatum => {
+    return map((datum: Datum) => {
       return {
         label: this.key(datum),
         color: this.color(datum),

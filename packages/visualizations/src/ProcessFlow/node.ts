@@ -5,6 +5,7 @@ class Node {
   accessors: NodeAccessors
   attributes: NodeAttrs
   color: () => string
+  content: () => { [key: string]: any }[]
   id: () => string
   journeyEnds: number = 0
   journeyStarts: number = 0

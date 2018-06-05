@@ -1,4 +1,4 @@
-import { compact, defaults, difference, find, forEach, get, isFinite, isNil, map, sortBy } from "lodash/fp"
+import { compact, defaults, find, forEach, get, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import {
   line as d3Line,
@@ -13,9 +13,6 @@ import {
 import * as styles from "./styles"
 import {
   LineRendererAccessors,
-  AxesData,
-  AxisPosition,
-  AxisType,
   D3Selection,
   Datum,
   EventBus,
@@ -23,7 +20,6 @@ import {
   RendererClass,
   RendererType,
   SingleRendererOptions,
-  SeriesAccessors,
   State,
 } from "../../typings"
 
@@ -34,6 +30,7 @@ const defaultAccessors: Partial<LineRendererAccessors> = {
   dashed: (series: Series, d: Datum) => false,
   interpolate: (series: Series, d: Datum) => "linear",
   closeGaps: (series: Series, d: Datum) => true,
+  opacity: (series: Series, d: Datum) => 1,
 }
 
 const interpolator = {
@@ -58,6 +55,7 @@ class Line implements RendererClass<LineRendererAccessors> {
   el: D3Selection
   events: EventBus
   interpolate: RendererAccessor<any>
+  opacity: RendererAccessor<number>
   options: Options
   series: Series
   state: State
@@ -89,8 +87,8 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.setAxisScales()
     this.addMissingData()
 
-    const data: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
-    const duration: number = this.state.current.get("config").duration
+    const data = sortBy((d: Datum) => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
+    const duration = this.state.current.get("config").duration
 
     const line = this.el.selectAll("path").data([data])
 
@@ -104,6 +102,7 @@ class Line implements RendererClass<LineRendererAccessors> {
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))
+      .attr("opacity", this.opacity.bind(this))
 
     line
       .exit()
@@ -117,8 +116,8 @@ class Line implements RendererClass<LineRendererAccessors> {
     this.el.remove()
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map((this as any)[axis])(this.data)
+  dataForAxis(axis: "x" | "y") {
+    const data = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)
@@ -133,18 +132,19 @@ class Line implements RendererClass<LineRendererAccessors> {
     const accessors: LineRendererAccessors = defaults(defaultAccessors)(customAccessors)
     this.x = (d: Datum): any => (hasValue(this.series.x(d)) ? this.series.x(d) : d.injectedX)
     this.y = (d: Datum): any => (hasValue(this.series.y(d)) ? this.series.y(d) : d.injectedY)
-    this.color = (d?: Datum): string => accessors.color(this.series, d)
-    this.dashed = (d?: Datum): boolean => accessors.dashed(this.series, d)
-    this.interpolate = (d?: Datum): any => interpolator[accessors.interpolate(this.series, d)]
-    this.closeGaps = (d?: Datum): boolean => accessors.closeGaps(this.series, d)
+    this.color = (d?: Datum) => accessors.color(this.series, d)
+    this.dashed = (d?: Datum) => accessors.dashed(this.series, d)
+    this.interpolate = (d?: Datum) => interpolator[accessors.interpolate(this.series, d)]
+    this.closeGaps = (d?: Datum) => accessors.closeGaps(this.series, d)
+    this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
   }
 
   private setAxisScales(): void {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
     this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
-    this.adjustedX = (d: Datum): any => this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x1) ? d.x1 : this.x(d))
-    this.adjustedY = (d: Datum): any => this.yScale(this.xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : this.y(d))
+    this.adjustedX = (d: Datum) => this.xScale(this.xIsBaseline ? this.x(d) : hasValue(d.x1) ? d.x1 : this.x(d))
+    this.adjustedY = (d: Datum) => this.yScale(this.xIsBaseline ? (hasValue(d.y1) ? d.y1 : this.y(d)) : this.y(d))
   }
 
   private addMissingData(): void {
@@ -152,9 +152,9 @@ class Line implements RendererClass<LineRendererAccessors> {
       return
     }
     if (this.xIsBaseline && !this.series.options.stacked) {
-      const ticks: Date[] = this.state.current.get(["computed", "series", "dataForAxes", this.series.xAxis()])
-      forEach((tick: Date): void => {
-        if (!find((d: Datum): boolean => this.x(d).toString() === tick.toString())(this.data)) {
+      const ticks = this.state.current.get(["computed", "series", "dataForAxes", this.series.xAxis()])
+      forEach((tick: any) => {
+        if (!find((d: Datum) => this.x(d).toString() === tick.toString())(this.data)) {
           this.data.push({ injectedX: tick, injectedY: undefined })
         }
       })(ticks)
