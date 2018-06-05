@@ -4,7 +4,7 @@ import { OperationalUI, Header } from "../../src/"
 
 const Logo = () => "Contiamo"
 
-const ProjectSelector = ({ projects }: any) => <div>hi</div>
+const ProjectSelector = ({ projecsts }: any) => <div>hi</div>
 
 const UserMenu = () => <div>lmao</div>
 
