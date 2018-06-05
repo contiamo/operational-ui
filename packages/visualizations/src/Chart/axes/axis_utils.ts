@@ -158,11 +158,11 @@ const containsZero = (step: number[]): [number, number] => {
 }
 
 export const positionBackgroundRect = (el: any, duration: number): void => {
+  el.selectAll(`rect.${styles.componentRect}`).call(setRectAttributes, {})
+  // Remove current background rect attributes so they do not affect the group dimension calculation.
+
   // Position background rect only once axis has finished transitioning.
   setTimeout((): void => {
-    // Remove current background rect attributes so they do not affect the group dimension calculation.
-    el.selectAll(`rect.${styles.componentRect}`).call(setRectAttributes, {})
-
     // Position background rect
     const group: ClientRect = el.node().getBoundingClientRect()
     const rect: ClientRect = (el.selectAll("rect").node() as Element).getBoundingClientRect()

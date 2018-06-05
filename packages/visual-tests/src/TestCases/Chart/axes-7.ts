@@ -46,6 +46,7 @@ const createData = axes => {
 
 export const marathon = ({ test, afterAll, container }: MarathonEnvironment): void => {
   const viz = new Chart(container)
+  viz.config({ showComponentFocus: true })
 
   test("Automatic axis config", () => {
     viz.data(

@@ -197,7 +197,7 @@ class QuantAxis implements AxisClass<number> {
     ticks
       .exit()
       .transition()
-      .duration(config.duration)
+      .duration(config.duration / 2)
       .call(setTextAttributes, defaults(attributes)({ opacity: 1e-6 }))
       .remove()
 

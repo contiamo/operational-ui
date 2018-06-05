@@ -289,7 +289,7 @@ class TimeAxis implements AxisClass<Date> {
     ticks
       .exit()
       .transition()
-      .duration(config.duration)
+      .duration(config.duration / 2)
       .call(setTextAttributes, defaults({ opacity: 1e-6 })(attributes))
       .remove()
 
