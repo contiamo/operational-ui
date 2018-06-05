@@ -27,8 +27,7 @@ const Container = glamorous.div(
       position: "relative",
       display: "flex",
       alignItems: "center",
-      padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3 + 40}px ${theme.spacing / 2}px ${theme.spacing *
-        2 /
+      padding: `${theme.spacing / 2}px ${(theme.spacing * 2) / 3 + 40}px ${theme.spacing / 2}px ${(theme.spacing * 2) /
         3}px `,
       borderRadius: 4,
       width: "fit-content",
@@ -57,12 +56,14 @@ const Container = glamorous.div(
 
       "&:focus": mixins.inputFocus({ theme }),
     }
-  }
+  },
 )
 
-const DisplayValue = glamorous.div(({ theme, isPlaceholder }: { isPlaceholder: boolean; theme: Theme }): {} => ({
-  color: isPlaceholder ? theme.colors.gray : theme.colors.black,
-}))
+const DisplayValue = glamorous.div(
+  ({ theme, isPlaceholder }: { isPlaceholder: boolean; theme: Theme }): {} => ({
+    color: isPlaceholder ? theme.colors.gray : theme.colors.black,
+  }),
+)
 
 const Options = glamorous.div(
   {
@@ -82,13 +83,15 @@ const Options = glamorous.div(
   ({ theme }: { theme: Theme }): {} => ({
     boxShadow: theme.shadows.popup,
     zIndex: theme.baseZIndex + 300,
-  })
+  }),
 )
 
-const OptionsList = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  // whole number + 3/4 ratio here ensures options don't get cut off
-  maxHeight: theme.spacing * 12.75,
-  overflow: "auto",
-}))
+const OptionsList = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    // whole number + 3/4 ratio here ensures options don't get cut off
+    maxHeight: theme.spacing * 12.75,
+    overflow: "auto",
+  }),
+)
 
 export { Container, Options, OptionsList, DisplayValue }

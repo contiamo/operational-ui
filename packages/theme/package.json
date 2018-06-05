@@ -19,19 +19,6 @@
     "test": "jest",
     "test:u": "jest -u"
   },
-  "devDependencies": {
-    "@types/core-js": "0.9.43",
-    "@types/jest": "20.0.8",
-    "@types/node": "8.0.27",
-    "jest": "21.2.1",
-    "lint-staged": "^7.1.3",
-    "prettier": "1.8.2",
-    "ts-jest": "21.0.0",
-    "tslint": "5.9.1",
-    "tslint-config-airbnb": "5.8.0",
-    "tslint-config-prettier": "1.12.0",
-    "typescript": "2.8.3"
-  },
   "jest": {
     "setupFiles": [
       "./test-polyfills.js"

@@ -108,9 +108,11 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private updateOptions(options: TimeAxisOptions): void {
-    forEach.convert({ cap: false })((value: any, key: string) => {
-      ;(this as any)[key] = value
-    })(options)
+    forEach.convert({ cap: false })(
+      (value: any, key: string): void => {
+        ;(this as any)[key] = value
+      },
+    )(options)
     if (!this.start || !this.end || !this.interval) {
       throw new Error("Values for `start`, `end` and `interval` must always be configured for time axes.")
     }
@@ -119,7 +121,10 @@ class TimeAxis implements AxisClass<Date> {
 
   update(options: TimeAxisOptions, data: Date[]): void {
     this.updateOptions(options)
-    this.data = flow(filter(this.validate), sortBy((value: any) => value.valueOf()))(data)
+    this.data = flow(
+      filter(this.validate),
+      sortBy((value: any): number => value.valueOf()),
+    )(data)
   }
 
   // Computations
@@ -158,12 +163,14 @@ class TimeAxis implements AxisClass<Date> {
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const defaultTickWidth = Math.min(drawingDims[this.isXAxis ? "width" : "height"] / ticksInDomain.length)
 
-    const stacks = groupBy((s: any) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
-    const partitionedStacks = partition((stack: any) => {
-      return compact(map(get("barWidth"))(stack)).length > 0
-    })(stacks)
-    const fixedWidthStacks = partitionedStacks[0]
-    const variableWidthStacks = partitionedStacks[1]
+    const stacks = groupBy((s: { [key: string]: any }) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
+    const partitionedStacks: { [key: string]: any }[][] = partition(
+      (stack: any): boolean => {
+        return compact(map(get("barWidth"))(stack)).length > 0
+      },
+    )(stacks)
+    const fixedWidthStacks: { [key: string]: any }[] = partitionedStacks[0]
+    const variableWidthStacks: { [key: string]: any }[] = partitionedStacks[1]
 
     let requiredTickWidth: number = reduce((sum: number, stack: any) => {
       return sum + stack[0].barWidth
@@ -173,7 +180,7 @@ class TimeAxis implements AxisClass<Date> {
       variableWidthStacks.length > 0
         ? Math.min(
             Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length),
-            config.maxBarWidthRatio * drawingDims[this.isXAxis ? "width" : "height"]
+            config.maxBarWidthRatio * drawingDims[this.isXAxis ? "width" : "height"],
           )
         : 0
     requiredTickWidth = requiredTickWidth + variableBarWidth * variableWidthStacks.length
@@ -191,9 +198,11 @@ class TimeAxis implements AxisClass<Date> {
     return reduce((memo: { [key: string]: any }, index: number) => {
       const seriesAtIndex = keys(pickBy((d: number) => d === index)(computedSeries.barIndices))
       const width: number = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
-      forEach((series: string) => {
-        memo[series] = { width, offset }
-      })(seriesAtIndex)
+      forEach(
+        (series: string): void => {
+          memo[series] = { width, offset }
+        },
+      )(seriesAtIndex)
       offset = offset + width + config.innerBarSpacing
       return memo
     }, {})(indices)

@@ -76,7 +76,7 @@ const containerStyles = ({
       color: foregroundColor,
     },
 
-    ...!disabled
+    ...(!disabled
       ? {
           ":hover": {
             backgroundColor: activeBackgroundColor,
@@ -88,7 +88,7 @@ const containerStyles = ({
             boxShadow: `0 0 0 3px ${lighten(backgroundColor, 35)}`,
           },
         }
-      : {},
+      : {}),
 
     marginRight: spacing / 2,
   }

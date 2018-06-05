@@ -51,7 +51,7 @@ const Button = glamorous.div(
     backgroundColor: theme.colors.white,
     border: `1px solid ${on ? theme.colors.info : theme.colors.gray}`,
     zIndex: theme.baseZIndex + 2,
-  })
+  }),
 )
 
 const Rail = glamorous.div(
@@ -80,7 +80,7 @@ const Rail = glamorous.div(
       transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
       zIndex: theme.baseZIndex - 1,
     },
-  })
+  }),
 )
 
 const Switch = (props: Props) => (

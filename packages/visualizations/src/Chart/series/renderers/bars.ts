@@ -121,25 +121,25 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.x0 = (d: Datum) => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(
-        this.xIsBaseline ? this.x(d) : Math.min(d.x0, d.x1) || (this.x(d) > baseline ? baseline : this.x(d))
+        this.xIsBaseline ? this.x(d) : Math.min(d.x0, d.x1) || (this.x(d) > baseline ? baseline : this.x(d)),
       )
     }
     this.x1 = (d: Datum) => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(
-        this.xIsBaseline ? this.x(d) : Math.max(d.x0, d.x1) || (this.x(d) > baseline ? this.x(d) : baseline)
+        this.xIsBaseline ? this.x(d) : Math.max(d.x0, d.x1) || (this.x(d) > baseline ? this.x(d) : baseline),
       )
     }
     this.y0 = (d: Datum) => {
       const baseline = this.isRange ? this.yScale.domain()[0] : 0
       return this.yScale(
-        this.xIsBaseline ? Math.min(d.y0, d.y1) || (this.y(d) > baseline ? baseline : this.y(d)) : this.y(d)
+        this.xIsBaseline ? Math.min(d.y0, d.y1) || (this.y(d) > baseline ? baseline : this.y(d)) : this.y(d),
       )
     }
     this.y1 = (d: Datum) => {
       const baseline = this.isRange ? this.yScale.domain()[0] : 0
       return this.yScale(
-        this.xIsBaseline ? Math.max(d.y0, d.y1) || (this.y(d) > baseline ? this.y(d) : baseline) : this.y(d)
+        this.xIsBaseline ? Math.max(d.y0, d.y1) || (this.y(d) > baseline ? this.y(d) : baseline) : this.y(d),
       )
     }
   }

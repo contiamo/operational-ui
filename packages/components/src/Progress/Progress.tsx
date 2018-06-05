@@ -38,7 +38,7 @@ const Container = glamorous.div(
   ({ theme }: { theme: Theme }): CssStatic => ({
     zIndex: theme.baseZIndex + 300,
     backgroundColor: "transparent",
-  })
+  }),
 )
 
 const fillProgress = css.keyframes({
@@ -50,56 +50,62 @@ const fillProgress = css.keyframes({
   },
 })
 
-const Bar = glamorous.div(({ theme, isError }: { theme?: Theme; isError: boolean }): CssStatic => ({
-  width: "100%",
-  height: 3,
-  backgroundColor: theme.colors.info,
-  ...isError
-    ? {
-        backgroundColor: theme.colors.error,
-      }
-    : {
-        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
-      },
-}))
+const Bar = glamorous.div(
+  ({ theme, isError }: { theme?: Theme; isError: boolean }): CssStatic => ({
+    width: "100%",
+    height: 3,
+    backgroundColor: theme.colors.info,
+    ...(isError
+      ? {
+          backgroundColor: theme.colors.error,
+        }
+      : {
+          animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
+        }),
+  }),
+)
 
-const ErrorMessage = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.body,
-  padding: `${theme.spacing / 2}px ${theme.spacing / 2}px`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  position: "relative",
-  zIndex: theme.baseZIndex + 301,
-  textAlign: "center",
-  backgroundColor: lighten(theme.colors.error, 15),
-  color: theme.colors.white,
-}))
+const ErrorMessage = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    ...theme.typography.body,
+    padding: `${theme.spacing / 2}px ${theme.spacing / 2}px`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+    zIndex: theme.baseZIndex + 301,
+    textAlign: "center",
+    backgroundColor: lighten(theme.colors.error, 15),
+    color: theme.colors.white,
+  }),
+)
 
-const Action = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  opacity: 0.7,
-  display: "inline-block",
-  marginLeft: theme.spacing,
-  userSelect: "none",
-  "& > *": {
+const Action = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    opacity: 0.7,
     display: "inline-block",
-    verticalAlign: "middle",
-  },
-  "& svg": {
-    width: theme.spacing,
-    height: theme.spacing,
-    marginRight: theme.spacing / 4,
-  },
-  // Temporary hack since feather icons for refresh and close
-  // have a mismatch in size.
-  ":first-of-type svg": {
-    width: theme.spacing * 3 / 4,
-    height: theme.spacing * 3 / 4,
-  },
-  ":hover": {
-    opacity: 1,
-  },
-}))
+    marginLeft: theme.spacing,
+    userSelect: "none",
+    "& > *": {
+      display: "inline-block",
+      verticalAlign: "middle",
+    },
+    "& svg": {
+      width: theme.spacing,
+      height: theme.spacing,
+      marginRight: theme.spacing / 4,
+    },
+    // Temporary hack since feather icons for refresh and close
+    // have a mismatch in size.
+    ":first-of-type svg": {
+      width: (theme.spacing * 3) / 4,
+      height: (theme.spacing * 3) / 4,
+    },
+    ":hover": {
+      opacity: 1,
+    },
+  }),
+)
 
 const Progress: React.SFC<Props> = props => (
   <Container id={props.id} css={props.css} className={props.className}>

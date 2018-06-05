@@ -106,8 +106,8 @@ class Gauge implements Renderer {
       Utils.updateBackgroundRects(
         updatingArcs,
         this.computed.arcOver.centroid,
-        config.displayPercentages ? "visible" : "hidden"
-      )
+        config.displayPercentages ? "visible" : "hidden",
+      ),
     )
 
     // Total / center text
@@ -152,9 +152,11 @@ class Gauge implements Renderer {
     // Segments transition to and from the start/left of the gauge.
     if (!d.data.unfilled) {
       old =
-        filter((datapoint: ComputedDatum) => {
-          return !datapoint.data.unfilled
-        })(this.previousComputed.data) || []
+        filter(
+          (datapoint: ComputedDatum): boolean => {
+            return !datapoint.data.unfilled
+          },
+        )(this.previousComputed.data) || []
 
       if (old[i]) {
         s0 = old[i].startAngle
@@ -171,9 +173,11 @@ class Gauge implements Renderer {
       }
       // The unfilled part of the gauge transitions to and from the end/right of the gauge.
     } else {
-      old = find((datapoint: ComputedDatum) => {
-        return datapoint.data.unfilled
-      })(this.previousComputed.data)
+      old = find(
+        (datapoint: ComputedDatum): boolean => {
+          return datapoint.data.unfilled
+        },
+      )(this.previousComputed.data)
       if (old) {
         s0 = old.startAngle
         e0 = old.endAngle
@@ -195,7 +199,7 @@ class Gauge implements Renderer {
         outerRadius: this.computed.r,
         endAngle: d.endAngle,
         startAngle: d.startAngle,
-      }
+      },
     )
     return (t: number): string => this.computed.arc(f(t))
   }
@@ -220,7 +224,7 @@ class Gauge implements Renderer {
         r: this.previousComputed.r || this.computed.r,
         value: oldValue,
       },
-      { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) }
+      { inner: this.computed.rInner, r: this.computed.r, value: this.value(comparison) },
     )
     return (t: number): string => path(f(t))
   }
@@ -289,14 +293,16 @@ class Gauge implements Renderer {
 
     // If target has been exceeded, reduce last value(s)
     if (this.total >= this.target) {
-      const index = findIndex((value: number) => value >= this.target)(runningTotal)
-      forEach((datapoint: Datum, i: number) => {
-        if (i === index) {
-          datapoint.value = i > 0 ? this.target - runningTotal[i - 1] : this.target
-        } else if (i > index) {
-          datapoint.value = 0
-        }
-      })(this.data)
+      const index: number = findIndex((value: number): boolean => value >= this.target)(runningTotal)
+      forEach(
+        (datapoint: Datum, i: number): void => {
+          if (i === index) {
+            datapoint.value = i > 0 ? this.target - runningTotal[i - 1] : this.target
+          } else if (i > index) {
+            datapoint.value = 0
+          }
+        },
+      )(this.data)
       // If target has not been reached, add an "unfilled" segment which will have no color,
       // and will not be hoverable.
     } else {
@@ -376,7 +382,7 @@ class Gauge implements Renderer {
     Utils.updateFilteredPathAttributes(
       arcs,
       filterUnFocused,
-      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r),
     )
   }
 
@@ -394,12 +400,14 @@ class Gauge implements Renderer {
 
   // External methods
   dataForLegend(): LegendDatum[] {
-    const data = map((datum: ComputedDatum) => {
-      return {
-        label: this.key(datum),
-        color: this.color(datum),
-      }
-    })(this.data)
+    const data: LegendDatum[] = map(
+      (datum: ComputedDatum): LegendDatum => {
+        return {
+          label: this.key(datum),
+          color: this.color(datum),
+        }
+      },
+    )(this.data)
     if (this.comparison) {
       data.push({
         label: this.key(this.comparison),

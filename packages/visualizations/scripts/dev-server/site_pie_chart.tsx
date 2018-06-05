@@ -42,12 +42,7 @@ const PolarRenderer: any = {
 
 const data: any = {
   name: "Name",
-  data: [
-    { id: "Berlin", size: 12 },
-    { id: "Dortmund", size: 5 },
-    { id: "Bonn", size: 7 },
-    { id: "Cologne", size: 11 },
-  ],
+  data: [{ id: "Berlin", size: 12 }, { id: "Dortmund", size: 5 }, { id: "Bonn", size: 7 }, { id: "Cologne", size: 11 }],
   renderAs: [DonutRenderer],
 }
 
@@ -67,6 +62,6 @@ setTimeout(() => {
     { id: "Dortmund", size: 17 },
     { id: "Bonn", size: 27 },
     { id: "Cologne", size: 10 },
-    ]
+  ]
   render(<App />, containerNode)
 }, 3000)

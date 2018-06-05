@@ -60,7 +60,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         y1: {
           type: "quant",
         },
-      })
+      }),
     )
     viz.draw()
   })
@@ -79,7 +79,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           type: "quant",
           fontSize: 17,
         },
-      })
+      }),
     )
     viz.draw()
   })
@@ -100,7 +100,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           fontSize: 17,
           margin: 50,
         },
-      })
+      }),
     )
     viz.draw()
   })
@@ -122,7 +122,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           fontSize: 17,
           margin: 50,
         },
-      })
+      }),
     )
     viz.draw()
   })
@@ -139,7 +139,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         y1: {
           type: "quant",
         },
-      })
+      }),
     )
     viz.draw()
   })

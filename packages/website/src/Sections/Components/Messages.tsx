@@ -15,7 +15,7 @@ export interface State {
 }
 
 export class Component extends React.Component<{}, State> {
-  state = {
+  readonly state: State = {
     messages: [],
   }
 

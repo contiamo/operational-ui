@@ -105,8 +105,8 @@ class Polar implements Renderer {
       Utils.updateBackgroundRects(
         updatingArcs,
         this.computed.arcOver.centroid,
-        config.displayPercentages ? "visible" : "hidden"
-      )
+        config.displayPercentages ? "visible" : "hidden",
+      ),
     )
 
     // Total / center text
@@ -134,7 +134,10 @@ class Polar implements Renderer {
     }
     const margin = this.state.current.get("config").outerBorderMargin
 
-    const scale = Math.min((drawing.width - 2 * margin) / current.width, (drawing.height - 2 * margin) / current.height)
+    const scale: number = Math.min(
+      (drawing.width - 2 * margin) / current.width,
+      (drawing.height - 2 * margin) / current.height,
+    )
 
     this.computeArcs(this.computed)
     this.el.selectAll("path").attr("d", this.computed.arc)
@@ -179,7 +182,7 @@ class Polar implements Renderer {
     // Value is needed to interpolate the radius as well as the angles.
     const f = interpolateObject(
       { endAngle: d.endAngle, startAngle: d.startAngle, value: d.value },
-      { endAngle: e0, startAngle: s0, value: d.value }
+      { endAngle: e0, startAngle: s0, value: d.value },
     )
     return (t: number): string => this.computed.arc(f(t))
   }
@@ -284,7 +287,7 @@ class Polar implements Renderer {
     Utils.updateFilteredPathAttributes(
       arcs,
       filterUnFocused,
-      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r),
     )
   }
 
@@ -302,12 +305,14 @@ class Polar implements Renderer {
 
   // External methods
   dataForLegend(): LegendDatum[] {
-    return map((datum: Datum) => {
-      return {
-        label: this.key(datum),
-        color: this.color(datum),
-      }
-    })(this.data)
+    return map(
+      (datum: Datum): LegendDatum => {
+        return {
+          label: this.key(datum),
+          color: this.color(datum),
+        }
+      },
+    )(this.data)
   }
 
   // Remove & clean up

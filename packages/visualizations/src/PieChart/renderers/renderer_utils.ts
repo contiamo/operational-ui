@@ -20,11 +20,13 @@ import { withD3Element } from "../../utils/d3_utils"
 import { approxZero, stepFunction } from "../../utils/font_sizing_utils"
 
 export const assignOptions = (ctx: Renderer, options: { [key: string]: any }): void => {
-  forEach.convert({ cap: false })((option: any, key: string): void => {
-    if (key !== "accessors") {
-      ;(ctx as any)[key] = option
-    }
-  })(options)
+  forEach.convert({ cap: false })(
+    (option: any, key: string): void => {
+      if (key !== "accessors") {
+        ;(ctx as any)[key] = option
+      }
+    },
+  )(options)
   assignAccessors(ctx, options.accessors)
 }
 
@@ -38,10 +40,12 @@ export const defaultAccessors = (ctx: Renderer): RendererAccessors => {
 }
 
 export const assignAccessors = (ctx: Renderer, customAccessors: Partial<RendererAccessors>): void => {
-  const accessors = defaults(defaultAccessors(ctx))(customAccessors)
-  forEach.convert({ cap: false })((option: any, key: string) => {
-    ;(ctx as any)[key] = (d: any) => option(d.data || d)
-  })(accessors)
+  const accessors: RendererAccessors = defaults(defaultAccessors(ctx))(customAccessors)
+  forEach.convert({ cap: false })(
+    (option: any, key: string): void => {
+      ;(ctx as any)[key] = (d: any): any => option(d.data || d)
+    },
+  )(accessors)
 }
 
 // Establish coordinate system with 0,0 being the center of the width, height rectangle
@@ -112,25 +116,27 @@ const RECT_PADDING = 2
 
 export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any, visibility: string): void => {
   updatingArcs.each(
-    withD3Element((d: Datum, el: HTMLElement) => {
-      const element = select(el)
-      const textDimensions = (element.select("text").node() as any).getBBox()
-      const transform: [number, number] = [
-        centroid(d)[0] + textDimensions.x - RECT_PADDING,
-        centroid(d)[1] + textDimensions.y - RECT_PADDING,
-      ]
+    withD3Element(
+      (d: Datum, el: HTMLElement): void => {
+        const element: D3Selection = select(el)
+        const textDimensions: any = (element.select("text").node() as any).getBBox()
+        const transform: [number, number] = [
+          centroid(d)[0] + textDimensions.x - RECT_PADDING,
+          centroid(d)[1] + textDimensions.y - RECT_PADDING,
+        ]
 
-      element
-        .select("rect")
-        .attr("width", textDimensions.width + RECT_PADDING * 2)
-        .attr("height", textDimensions.height + RECT_PADDING * 2)
-        .attr("rx", 5)
-        .attr("ry", 5)
-        .attr("transform", translateString(transform))
-        .attr("visibility", visibility)
+        element
+          .select("rect")
+          .attr("width", textDimensions.width + RECT_PADDING * 2)
+          .attr("height", textDimensions.height + RECT_PADDING * 2)
+          .attr("rx", 5)
+          .attr("ry", 5)
+          .attr("transform", translateString(transform))
+          .attr("visibility", visibility)
 
-      element.select("text").attr("visibility", visibility)
-    })
+        element.select("text").attr("visibility", visibility)
+      },
+    ),
   )
 }
 
@@ -138,7 +144,7 @@ export const updateTotal = (
   el: D3Selection,
   label: string,
   duration: number,
-  options: { maxTotalFontSize: number; minTotalFontSize: number; innerRadius: number; yOffset: string }
+  options: { maxTotalFontSize: number; minTotalFontSize: number; innerRadius: number; yOffset: string },
 ): void => {
   let total = el
     .select(`g.${styles.total}`)
@@ -180,9 +186,11 @@ export const computeTotal = (data: Datum[], valueAccessor: RendererAccessor<numb
 }
 
 export const calculatePercentages = (data: Datum[], valueAccessor: RendererAccessor<number>, total: number): void => {
-  forEach((datum: Datum) => {
-    datum.percentage = valueAccessor(datum) / total * 100
-  })(data)
+  forEach(
+    (datum: Datum): void => {
+      datum.percentage = (valueAccessor(datum) / total) * 100
+    },
+  )(data)
 }
 
 export const layout = (valueAccessor: Accessor<any, number>, angleRange: [number, number]): Pie<any, any> => {
@@ -199,7 +207,7 @@ export const removeArcTween = (computed: ComputedData, angleRange: [number, numb
     const outerRadius = computed.r
     const f = interpolateObject(
       { endAngle: d.endAngle, startAngle: d.startAngle },
-      { innerRadius, outerRadius, endAngle: angleRange[1], startAngle: angleRange[1] }
+      { innerRadius, outerRadius, endAngle: angleRange[1], startAngle: angleRange[1] },
     )
     return (t: number): string => computed.arc(f(t))
   }
@@ -209,7 +217,7 @@ export const updateFilteredPathAttributes = (
   selection: D3Selection,
   filterFunc: RendererAccessor<boolean>,
   path: any,
-  arcInfo: { [key: string]: any } = {}
+  arcInfo: { [key: string]: any } = {},
 ): void => {
   selection
     .filter(filterFunc)

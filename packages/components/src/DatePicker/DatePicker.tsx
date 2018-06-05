@@ -98,7 +98,9 @@ class DatePicker extends React.Component<Props, State> {
       year:
         prevState.month + diff < 0
           ? prevState.year - 1
-          : prevState.month + diff > 11 ? prevState.year + 1 : prevState.year,
+          : prevState.month + diff > 11
+            ? prevState.year + 1
+            : prevState.year,
     }))
   }
 
@@ -177,7 +179,7 @@ class DatePicker extends React.Component<Props, State> {
                 if (!this.state.isExpanded) {
                   this.inputNode.blur()
                 }
-              }
+              },
             )
           }}
           css={{ width: "100%" }}

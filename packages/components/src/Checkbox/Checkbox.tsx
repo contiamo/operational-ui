@@ -22,18 +22,22 @@ const Container = glamorous.div({
   label: "checkbox",
 })
 
-const OptionLabel = glamorous.label(({ theme }: WithTheme): CssStatic => ({
-  display: "inline-block",
-  marginRight: theme.spacing,
-}))
+const OptionLabel = glamorous.label(
+  ({ theme }: WithTheme): CssStatic => ({
+    display: "inline-block",
+    marginRight: theme.spacing,
+  }),
+)
 
-const OptionText = glamorous.span(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.body,
-  display: "inline-block",
-  marginLeft: theme.spacing / 6,
-}))
+const OptionText = glamorous.span(
+  ({ theme }: WithTheme): CssStatic => ({
+    ...theme.typography.body,
+    display: "inline-block",
+    marginLeft: theme.spacing / 6,
+  }),
+)
 
-const Checkbox: React.SFC<Props> = (props: Props) => (
+const Checkbox: React.SFC<Props> = props => (
   // `css` and `className` props are not set, as they are set on the wrapped label container.
   // See ./utils/with-label.tsx.
   <Container>
@@ -47,7 +51,7 @@ const Checkbox: React.SFC<Props> = (props: Props) => (
               props.onChange(
                 props.selected.indexOf(option) > -1
                   ? props.selected.filter((option_: string) => option !== option_)
-                  : [...props.selected, option]
+                  : [...props.selected, option],
               )
           }}
         />

@@ -11,7 +11,7 @@ describe("Record Component", () => {
     const renderedComponent = render(
       <Record title="Title" controls="controls">
         Some content
-      </Record>
+      </Record>,
     )
     expect(renderedComponent).toMatchSnapshot()
   })

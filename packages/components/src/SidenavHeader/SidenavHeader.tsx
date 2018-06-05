@@ -74,49 +74,55 @@ const Container = glamorous.div(containerStyles)
 
 const ContainerLink = glamorous.a(containerStyles)
 
-const Content = glamorous.div(({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
-  textDecoration: "none",
-  cursor: "pointer",
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
-  overflow: "hidden",
-  width: "100%",
-  height: theme.box,
-  padding: `0 ${theme.spacing}px`,
-  color: "#333333",
-  fontWeight: 500,
-  letterSpacing: 0.25,
-  fontSize: 14,
-  textTransform: "uppercase",
-  whiteSpace: "nowrap",
-}))
-
-const ItemsContainer = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "relative",
-  top: -theme.spacing,
-}))
-
-const CloseButton = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "absolute",
-  cursor: "pointer",
-  display: "none",
-  alignItems: "center",
-  justifyContent: "center",
-  width: theme.spacing * 1.5,
-  height: theme.spacing * 1.5,
-  top: theme.spacing * 1.5,
-  right: theme.spacing,
-  color: theme.colors.info,
-  ".op_sidenavheader:hover &": {
+const Content = glamorous.div(
+  ({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
+    textDecoration: "none",
+    cursor: "pointer",
+    position: "relative",
     display: "flex",
-  },
-  "& svg": {
-    width: theme.spacing,
-    height: theme.spacing,
-  },
-}))
+    alignItems: "center",
+    justifyContent: "flex-start",
+    overflow: "hidden",
+    width: "100%",
+    height: theme.box,
+    padding: `0 ${theme.spacing}px`,
+    color: "#333333",
+    fontWeight: 500,
+    letterSpacing: 0.25,
+    fontSize: 14,
+    textTransform: "uppercase",
+    whiteSpace: "nowrap",
+  }),
+)
+
+const ItemsContainer = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    position: "relative",
+    top: -theme.spacing,
+  }),
+)
+
+const CloseButton = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    position: "absolute",
+    cursor: "pointer",
+    display: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    width: theme.spacing * 1.5,
+    height: theme.spacing * 1.5,
+    top: theme.spacing * 1.5,
+    right: theme.spacing,
+    color: theme.colors.info,
+    ".op_sidenavheader:hover &": {
+      display: "flex",
+    },
+    "& svg": {
+      width: theme.spacing,
+      height: theme.spacing,
+    },
+  }),
+)
 
 export class SidenavHeader extends React.Component<Props, State> {
   state = {
@@ -126,7 +132,7 @@ export class SidenavHeader extends React.Component<Props, State> {
   render() {
     const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
     const isActive = Boolean(
-      this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`))
+      this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`)),
     )
     // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
@@ -181,5 +187,5 @@ export class SidenavHeader extends React.Component<Props, State> {
 
 export default deprecate<Props>(
   props =>
-    props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : []
+    props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : [],
 )(SidenavHeader)

@@ -37,16 +37,22 @@ class DataHandler {
 
   private initializeNodes(nodeAttrs: {}[]): void {
     this.nodes = map(this.addNode.bind(this))(nodeAttrs)
-    forEach((node: TNode) => {
-      node.sourceLinks = []
-      node.targetLinks = []
-    })(this.nodes)
+    forEach(
+      (node: TNode): void => {
+        node.sourceLinks = []
+        node.targetLinks = []
+      },
+    )(this.nodes)
     this.calculateNodeSizes()
     this.calculateStartsAndEnds()
   }
 
   private findNode(nodeId: string): TNode {
-    const node: TNode = find((node: TNode) => node.id() === nodeId)(this.nodes)
+    const node: TNode = find(
+      (node: TNode): boolean => {
+        return node.id() === nodeId
+      },
+    )(this.nodes)
     if (!node) {
       throw new Error(`No node with id '${nodeId}' defined.`)
     }
@@ -59,22 +65,28 @@ class DataHandler {
   }
 
   private calculateNodeSizes(): void {
-    forEach((journey: Journey) => {
-      forEach((nodeId: string) => {
-        this.findNode(nodeId).attributes.size += journey.size
-      })(journey.path)
-    })(this.journeys)
+    forEach(
+      (journey: Journey): void => {
+        forEach(
+          (nodeId: string): void => {
+            this.findNode(nodeId).attributes.size += journey.size
+          },
+        )(journey.path)
+      },
+    )(this.journeys)
   }
 
   private calculateStartsAndEnds(): void {
-    forEach((journey: Journey) => {
-      if (journey.path.length > 1) {
-        this.findNode(journey.path[0]).journeyStarts += journey.size
-        this.findNode(journey.path[journey.path.length - 1]).journeyEnds += journey.size
-      } else {
-        this.findNode(journey.path[0]).singleNodeJourneys += journey.size
-      }
-    })(this.journeys)
+    forEach(
+      (journey: Journey): void => {
+        if (journey.path.length > 1) {
+          this.findNode(journey.path[0]).journeyStarts += journey.size
+          this.findNode(journey.path[journey.path.length - 1]).journeyEnds += journey.size
+        } else {
+          this.findNode(journey.path[0]).singleNodeJourneys += journey.size
+        }
+      },
+    )(this.journeys)
   }
 
   private initializeLinks(): void {
@@ -92,33 +104,35 @@ class DataHandler {
   }
 
   private computeLinks(): void {
-    forEach((journey: Journey) => {
-      const path = journey.path
-      const computeLink = (i: number) => {
-        const sourceId = path[i]
-        const targetId = path[i + 1]
-        const sourceNode = this.findNode(sourceId)
-        const targetNode = this.findNode(targetId)
+    forEach(
+      (journey: Journey): void => {
+        const path: string[] = journey.path
+        const computeLink = (i: number): void => {
+          const sourceId: string = path[i]
+          const targetId: string = path[i + 1]
+          const sourceNode: TNode = this.findNode(sourceId)
+          const targetNode: TNode = this.findNode(targetId)
 
-        const existingLink = this.findLink(sourceId, targetId)
-        if (existingLink) {
-          existingLink.attributes.size += journey.size
-        } else {
-          const linkAttrs = {
-            source: sourceNode,
-            sourceId: sourceNode.id(),
-            target: targetNode,
-            targetId: targetNode.id(),
-            size: journey.size,
+          const existingLink: TLink = this.findLink(sourceId, targetId)
+          if (existingLink) {
+            existingLink.attributes.size += journey.size
+          } else {
+            const linkAttrs: LinkAttrs = {
+              source: sourceNode,
+              sourceId: sourceNode.id(),
+              target: targetNode,
+              targetId: targetNode.id(),
+              size: journey.size,
+            }
+            const newLink: TLink = this.addLink(linkAttrs)
+            this.links.push(newLink)
+            sourceNode.sourceLinks.push(newLink)
+            targetNode.targetLinks.push(newLink)
           }
-          const newLink = this.addLink(linkAttrs)
-          this.links.push(newLink)
-          sourceNode.sourceLinks.push(newLink)
-          targetNode.targetLinks.push(newLink)
         }
-      }
-      times(computeLink)(path.length - 1)
-    })(this.journeys)
+        times(computeLink)(path.length - 1)
+      },
+    )(this.journeys)
   }
 
   private xGridSpacing(): number {
@@ -153,19 +167,25 @@ class DataHandler {
     const yGridSpacing = this.yGridSpacing(rows.length)
 
     // Assign y values
-    forEach((node: TNode) => {
-      node.y = (node.y + 1) * yGridSpacing
-    })(this.layout.nodes)
+    forEach(
+      (node: TNode): void => {
+        node.y = (node.y + 1) * yGridSpacing
+      },
+    )(this.layout.nodes)
 
     // Assign x values
-    forEach((row: string) => {
-      flow(
-        sortBy(get("x")),
-        forEach((node: TNode) => {
-          node.x *= xGridSpacing
-        })
-      )(nodesByRow[parseInt(row, 10)])
-    })(rows)
+    forEach(
+      (row: string): void => {
+        flow(
+          sortBy(get("x")),
+          forEach(
+            (node: TNode): void => {
+              node.x *= xGridSpacing
+            },
+          ),
+        )(nodesByRow[parseInt(row, 10)])
+      },
+    )(rows)
   }
 }
 

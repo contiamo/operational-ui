@@ -12,8 +12,8 @@ describe("ButtonGroup Component", () => {
       render(
         <ButtonGroup>
           <Button>Hello</Button>
-        </ButtonGroup>
-      )
+        </ButtonGroup>,
+      ),
     ).toMatchSnapshot()
   })
 })

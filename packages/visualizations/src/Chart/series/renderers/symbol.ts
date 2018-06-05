@@ -104,10 +104,12 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     symbols
       .enter()
       .append("svg:path")
-      .attr("d", (d: Datum) =>
-        d3Symbol()
-          .type(this.symbol(d).symbol)
-          .size(1)()
+      .attr(
+        "d",
+        (d: Datum): string =>
+          d3Symbol()
+            .type(this.symbol(d).symbol)
+            .size(1)(),
       )
       .attr("transform", this.startTransform.bind(this))
       .merge(symbols)
@@ -119,10 +121,12 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .attr("opacity", this.opacity.bind(this))
       .transition()
       .duration(duration)
-      .attr("d", (d: Datum) =>
-        d3Symbol()
-          .type(this.symbol(d).symbol)
-          .size(this.size(d))()
+      .attr(
+        "d",
+        (d: Datum): string =>
+          d3Symbol()
+            .type(this.symbol(d).symbol)
+            .size(this.size(d))(),
       )
       .attr("transform", this.transform.bind(this))
 
@@ -130,10 +134,12 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .exit()
       .transition()
       .duration(duration)
-      .attr("d", (d: Datum) =>
-        d3Symbol()
-          .type(this.symbol(d).symbol)
-          .size(1)()
+      .attr(
+        "d",
+        (d: Datum): string =>
+          d3Symbol()
+            .type(this.symbol(d).symbol)
+            .size(1)(),
       )
       .remove()
   }

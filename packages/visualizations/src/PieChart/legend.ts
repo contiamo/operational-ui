@@ -47,19 +47,23 @@ class PieChartLegend implements Legend {
       .style("float", "left")
       .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
-        withD3Element((d: LegendDatum, el: HTMLElement) => {
-          const element = d3.select(el)
-          element.append("div").attr("class", "color")
-          element.append("div").attr("class", "name")
-        })
+        withD3Element(
+          (d: LegendDatum, el: HTMLElement): void => {
+            const element: D3Selection = d3.select(el)
+            element.append("div").attr("class", "color")
+            element.append("div").attr("class", "name")
+          },
+        ),
       )
       .merge(legends)
       .each(
-        withD3Element((d: LegendDatum, el: HTMLElement) => {
-          const element = d3.select(el)
-          element.select("div.color").style("background-color", get("color"))
-          element.select("div.name").html(get("label"))
-        })
+        withD3Element(
+          (d: LegendDatum, el: HTMLElement): void => {
+            const element: D3Selection = d3.select(el)
+            element.select("div.color").style("background-color", get("color"))
+            element.select("div.name").html(get("label"))
+          },
+        ),
       )
 
     this.updateComparisonLegend()
@@ -69,7 +73,9 @@ class PieChartLegend implements Legend {
 
   private updateComparisonLegend(): void {
     // Only needed for gauges, if comparison value is given.
-    const data = filter((d: LegendDatum) => d.comparison)(this.state.current.get("computed").series.dataForLegend)
+    const data: LegendDatum[] = filter((d: LegendDatum): boolean => d.comparison)(
+      this.state.current.get("computed").series.dataForLegend,
+    )
 
     const legends = this.legend.selectAll(`div.comparison`).data(data)
 

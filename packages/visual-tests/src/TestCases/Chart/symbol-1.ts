@@ -74,7 +74,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       createData({
         symbol: (series: any, d: any) => symbols[d.y],
         size: (series: any, d: any) => 25 * d.y,
-      })
+      }),
     )
     viz.draw()
   })
@@ -85,7 +85,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         symbol: (series: any, d: any) => symbols[d.y],
         size: (series: any, d: any) => 25 * d.y,
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
-      })
+      }),
     )
     viz.draw()
   })
@@ -97,7 +97,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         size: (series: any, d: any) => 25 * d.y,
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         fill: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
-      })
+      }),
     )
     viz.draw()
   })

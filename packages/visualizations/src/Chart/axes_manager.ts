@@ -59,7 +59,9 @@ class AxesManager {
       y1: yAxisConfig.margin,
       y2: yAxisConfig.margin,
     }
-    const computedMargins = defaults(defaultMargins)(this.state.current.get(["computed", "axes", "margins"]) || {})
+    const computedMargins: { [key: string]: number } = defaults(defaultMargins)(
+      this.state.current.get(["computed", "axes", "margins"]) || {},
+    )
     this.stateWriter("margins", computedMargins)
   }
 
@@ -78,9 +80,11 @@ class AxesManager {
     this.stateWriter("requiredAxes", requiredAxes)
 
     // Remove axes that are no longer needed, or whose type has changed
-    const axesToRemove = omitBy((axis: AxisClass<any>, key: AxisPosition) => {
-      return !axesOptions[key] || axesOptions[key].type === axis.type
-    })(this.axes)
+    const axesToRemove = omitBy(
+      (axis: AxisClass<any>, key: AxisPosition): boolean => {
+        return !axesOptions[key] || axesOptions[key].type === axis.type
+      },
+    )(this.axes)
     forEach.convert({ cap: false })(this.removeAxis.bind(this))(axesToRemove)
     // Create or update currently required axes
     forEach.convert({ cap: false })(this.createOrUpdate.bind(this))(axesOptions)
@@ -115,15 +119,17 @@ class AxesManager {
   }
 
   private priorityTimeAxis(): AxisPosition {
-    return find((axis: AxisPosition) => this.axes[axis] && this.axes[axis].type === "time")(
-      this.state.current.get("config").timeAxisPriority
+    return find((axis: AxisPosition): boolean => this.axes[axis] && this.axes[axis].type === "time")(
+      this.state.current.get("config").timeAxisPriority,
     )
   }
 
   private drawAxes(orientation: "x" | "y"): void {
-    const axes: { [key: string]: AxisClass<any> } = pickBy((axis: AxisClass<any>) => {
-      return orientation === "x" ? axis.isXAxis : !axis.isXAxis
-    })(this.axes)
+    const axes: { [key: string]: AxisClass<any> } = pickBy(
+      (axis: AxisClass<any>): boolean => {
+        return orientation === "x" ? axis.isXAxis : !axis.isXAxis
+      },
+    )(this.axes)
     keys(axes).length === 2 ? alignAxes(axes) : forEach(invoke("compute"))(axes)
     forEach(invoke("draw"))(axes)
 

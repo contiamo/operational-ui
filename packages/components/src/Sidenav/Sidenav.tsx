@@ -31,25 +31,27 @@ export interface State {
   isHovered: boolean
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): CssStatic => {
-  const backgroundColor = theme.colors.white
-  const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
-  const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
+const Container = glamorous.div(
+  ({ theme }: { theme: Theme }): CssStatic => {
+    const backgroundColor = theme.colors.white
+    const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
+    const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
 
-  return {
-    color,
-    background: theme.colors.white,
-    label: "sidenav",
-    width: sidenavExpandedWidth,
-    borderRight: "1px solid",
-    borderRightColor: theme.colors.separator,
-    zIndex: theme.baseZIndex + 100,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    height: "100%",
-  }
-})
+    return {
+      color,
+      background: theme.colors.white,
+      label: "sidenav",
+      width: sidenavExpandedWidth,
+      borderRight: "1px solid",
+      borderRightColor: theme.colors.separator,
+      zIndex: theme.baseZIndex + 100,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      height: "100%",
+    }
+  },
+)
 
 export class Sidenav extends React.Component<Props, State> {
   render() {
@@ -65,5 +67,5 @@ export default deprecate<Props>(
   props =>
     props.expanded || props.expandOnHover
       ? ["`expanded` and `expandOnHover` props are no longer supported. Sidenavs are expanded by default."]
-      : []
+      : [],
 )(Sidenav)

@@ -104,8 +104,8 @@ class Donut implements Renderer {
       Utils.updateBackgroundRects(
         updatingArcs,
         this.computed.arcOver.centroid,
-        config.displayPercentages ? "visible" : "hidden"
-      )
+        config.displayPercentages ? "visible" : "hidden",
+      ),
     )
 
     // Total / center text
@@ -153,7 +153,7 @@ class Donut implements Renderer {
         outerRadius: this.computed.r,
         endAngle: d.endAngle,
         startAngle: d.startAngle,
-      }
+      },
     )
     return (t: number): string => this.computed.arc(f(t))
   }
@@ -250,7 +250,7 @@ class Donut implements Renderer {
     Utils.updateFilteredPathAttributes(
       arcs,
       filterUnFocused,
-      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r)
+      this.computed.arc.innerRadius(this.computed.rInner).outerRadius(this.computed.r),
     )
   }
 
@@ -268,12 +268,14 @@ class Donut implements Renderer {
 
   // External methods
   dataForLegend(): LegendDatum[] {
-    return map((datum: Datum) => {
-      return {
-        label: this.key(datum),
-        color: this.color(datum),
-      }
-    })(this.data)
+    return map(
+      (datum: Datum): LegendDatum => {
+        return {
+          label: this.key(datum),
+          color: this.color(datum),
+        }
+      },
+    )(this.data)
   }
 
   // Remove & clean up

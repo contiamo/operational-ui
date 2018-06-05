@@ -45,7 +45,7 @@ export const computeRequiredMargin = (
   axis: D3Selection,
   configuredMargin: number,
   outerPadding: number,
-  position: AxisPosition
+  position: AxisPosition,
 ): number => {
   const axisDimension = axis.node().getBBox()[position[0] === "x" ? "height" : "width"]
   return Math.max(configuredMargin, Math.ceil(axisDimension) + outerPadding)
@@ -59,7 +59,11 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
   if (keys(axes).length !== 2) {
     return
   }
-  const axesTypes = flow(values, map(get("type")), uniqBy(String))(axes)
+  const axesTypes: ("time" | "quant" | "categorical")[] = flow(
+    values,
+    map(get("type")),
+    uniqBy(String),
+  )(axes)
 
   if (axesTypes.length > 1 || axesTypes[0] === "categorical") {
     throw new Error(`Axes of types ${axesTypes.join(", ")} cannot be aligned`)
@@ -69,10 +73,13 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
 }
 
 const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
-  const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
-  const axisKeys = keys(computed)
-  const intervalOne = axes[axisKeys[0]].interval
-  const intervalTwo = axes[axisKeys[1]].interval
+  const computed: { [key: string]: Partial<AxisComputed> } = mapValues(
+    (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
+  )(axes)
+
+  const axisKeys: string[] = keys(computed)
+  const intervalOne: any = axes[axisKeys[0]].interval
+  const intervalTwo: any = axes[axisKeys[1]].interval
   if (intervalOne !== intervalTwo) {
     throw new Error("Time axes must have the same interval")
   }
@@ -84,7 +91,7 @@ const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
       ticksInDomainOne.push(
         moment(last(ticksInDomainOne))
           .add(1, intervalOne)
-          .toDate()
+          .toDate(),
       )
     })(ticksInDomainTwo.length - ticksInDomainOne.length)
   } else {
@@ -92,29 +99,35 @@ const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
       ticksInDomainTwo.push(
         moment(last(ticksInDomainTwo))
           .add(1, intervalTwo)
-          .toDate()
+          .toDate(),
       )
     })(ticksInDomainOne.length - ticksInDomainTwo.length)
   }
   computed[axisKeys[0]].ticksInDomain = ticksInDomainOne
   computed[axisKeys[1]].ticksInDomain = ticksInDomainTwo
 
-  forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition) => {
-    axis.computeAligned(computed[key])
-  })(axes)
+  forEach.convert({ cap: false })(
+    (axis: AxisClass<number>, key: AxisPosition): void => {
+      axis.computeAligned(computed[key])
+    },
+  )(axes)
 }
 
 const alignQuantAxes = (axes: { [key: string]: AxisClass<number> }): void => {
-  const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
-  const axisKeys = keys(computed)
-  const stepsOne = computed[axisKeys[0]].steps
-  const stepsTwo = computed[axisKeys[1]].steps
+  const computed: { [key: string]: Partial<AxisComputed> } = mapValues(
+    (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
+  )(axes)
+  const axisKeys: string[] = keys(computed)
+  const stepsOne: [number, number, number] = computed[axisKeys[0]].steps
+  const stepsTwo: [number, number, number] = computed[axisKeys[1]].steps
   alignSteps(stepsOne, stepsTwo)
   computed[axisKeys[0]].steps = stepsOne
   computed[axisKeys[1]].steps = stepsTwo
-  forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition) => {
-    axis.computeAligned(computed[key])
-  })(axes)
+  forEach.convert({ cap: false })(
+    (axis: AxisClass<number>, key: AxisPosition): void => {
+      axis.computeAligned(computed[key])
+    },
+  )(axes)
 }
 
 const alignSteps = (one: number[], two: number[]): void => {

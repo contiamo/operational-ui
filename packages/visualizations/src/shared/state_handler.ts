@@ -54,11 +54,13 @@ export default class StateHandler<Config, Data> {
         }
         return memo
       },
-      []
+      [],
     )(config)
-    forEach((option: string): void => {
-      console.warn(`Warning: invalid config option '${option}: reverting to default.`)
-    })(invalidOptions)
+    forEach(
+      (option: string): void => {
+        console.warn(`Warning: invalid config option '${option}: reverting to default.`)
+      },
+    )(invalidOptions)
 
     return this.state.current.merge("config", config)
   }
@@ -71,7 +73,7 @@ export default class StateHandler<Config, Data> {
         memo[key] = typeof accessor === "function" ? accessor : () => accessor
         return memo
       },
-      {}
+      {},
     )(accessors)
     return this.state.current.merge(["accessors", type], accessorFuncs)
   }

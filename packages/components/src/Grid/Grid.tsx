@@ -32,20 +32,22 @@ const getGridCSSProperties = (gridType: string): CssStatic => {
     }
   }
   throw new Error(
-    "Grid type can be either 'IDE' or of an `MxN` format, e.g. `1x2` or `5x6`. See https://ui.contiamo.com/components/grids/."
+    "Grid type can be either 'IDE' or of an `MxN` format, e.g. `1x2` or `5x6`. See https://ui.contiamo.com/components/grids/.",
   )
 }
 
-const Container = glamorous.div(({ theme, gridType }: { theme: Theme; gridType: string }): {} => ({
-  label: "Grid",
-  width: "100%",
-  height: "100%",
-  display: "grid",
-  padding: theme.spacing * 4 / 3,
-  gridColumnGap: theme.spacing * 4 / 3,
-  gridRowGap: theme.spacing * 4 / 3,
-  ...getGridCSSProperties(gridType),
-}))
+const Container = glamorous.div(
+  ({ theme, gridType }: { theme: Theme; gridType: string }): {} => ({
+    label: "Grid",
+    width: "100%",
+    height: "100%",
+    display: "grid",
+    padding: (theme.spacing * 4) / 3,
+    gridColumnGap: (theme.spacing * 4) / 3,
+    gridRowGap: (theme.spacing * 4) / 3,
+    ...getGridCSSProperties(gridType),
+  }),
+)
 
 const Grid: React.SFC<Props> = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className} gridType={props.type}>

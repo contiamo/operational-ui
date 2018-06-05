@@ -42,7 +42,7 @@ class PieChartFocus implements Focus {
       .attr("class", "series")
       .html(
         `<span class="value">${payload.d.value}</span>
-        <span class="percentage">(${percentageString(payload.d.percentage)})</span>`
+        <span class="percentage">(${percentageString(payload.d.percentage)})</span>`,
       )
 
     const labelDims = labelDimensions(this.el)

@@ -65,9 +65,11 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private updateOptions(options: QuantAxisOptions): void {
-    forEach.convert({ cap: false })((value: any, key: string): void => {
-      ;(this as any)[key] = value
-    })(options)
+    forEach.convert({ cap: false })(
+      (value: any, key: string): void => {
+        ;(this as any)[key] = value
+      },
+    )(options)
   }
 
   update(options: QuantAxisOptions, data: number[]): void {
@@ -118,12 +120,14 @@ class QuantAxis implements AxisClass<number> {
       let scaleFactor: number
       if (this.end) {
         // If a value has been explicitly set for this.end, there must be a tick at this value
-        const validScaleFactors = filter((val: number) => (span / (step * val)) % 1 === 0)(stepScaleFactors(step))
+        const validScaleFactors: number[] = filter((val: number): boolean => (span / (step * val)) % 1 === 0)(
+          stepScaleFactors(step),
+        )
         // Choose scale factor which gives a number of ticks as close as possible to tickNumber
         scaleFactor = sortBy((val: number) => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
       } else {
-        const err = tickNumber / span * step
-        const errorMapper = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
+        const err: number = (tickNumber / span) * step
+        const errorMapper: [boolean, number][] = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
         scaleFactor = find(0)(errorMapper)[1]
       }
       step *= scaleFactor

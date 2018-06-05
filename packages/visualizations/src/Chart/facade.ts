@@ -141,7 +141,7 @@ class ChartFacade implements Facade {
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
       this.events,
-      this.canvas.elementFor("series")
+      this.canvas.elementFor("series"),
     )
   }
 

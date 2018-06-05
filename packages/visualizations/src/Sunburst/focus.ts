@@ -48,8 +48,8 @@ class SunburstFocus implements Focus {
 
     content.append("span").text(`(${this.state.current.get("config").numberFormatter(dataValue(datum))})`)
 
-    const comparisonNode = computed.renderer.zoomNode || computed.renderer.topNode
-    const percentage = (dataValue(datum) * 100 / dataValue(comparisonNode)).toPrecision(3)
+    const comparisonNode: Datum = computed.renderer.zoomNode || computed.renderer.topNode
+    const percentage: string = ((dataValue(datum) * 100) / dataValue(comparisonNode)).toPrecision(3)
     content.append("xhtml:li").text(this.percentageString(datum))
 
     const focus = { x: focusPoint.centroid[0], y: focusPoint.centroid[1] }
@@ -68,7 +68,7 @@ class SunburstFocus implements Focus {
       labelDims,
       drawingDimensions,
       this.state.current.get("config").focusOffset,
-      focusPoint.labelPosition
+      focusPoint.labelPosition,
     )
   }
 
@@ -82,8 +82,8 @@ class SunburstFocus implements Focus {
   }
 
   private singlePercentageString(datum: Datum, comparison: Datum): string {
-    const topNode = this.state.current.get("computed").renderer.topNode
-    const percentage = (dataValue(datum) * 100 / dataValue(comparison)).toPrecision(3)
+    const topNode: Datum = this.state.current.get("computed").renderer.topNode
+    const percentage: string = ((dataValue(datum) * 100) / dataValue(comparison)).toPrecision(3)
     return `${percentage}% of ${dataName(comparison)}`
   }
 

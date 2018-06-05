@@ -62,7 +62,7 @@ export type AttributeSetter<A> = (
   selection: D3SelectionOrTransition,
   attributes: Partial<A>,
   duration?: number,
-  onEnd?: () => void
+  onEnd?: () => void,
 ) => void
 
 export const setPathAttributes: AttributeSetter<{

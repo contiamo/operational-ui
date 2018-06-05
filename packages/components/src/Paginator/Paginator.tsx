@@ -37,7 +37,7 @@ const PaginatorSpan = glamorous.div(
     ":hover": {
       backgroundColor: theme.colors.background,
     },
-  })
+  }),
 )
 
 interface ControlProps {
