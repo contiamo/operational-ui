@@ -18,6 +18,7 @@ import * as bars3 from "./bars-3"
 import * as bars4 from "./bars-4"
 import * as symbol1 from "./symbol-1"
 import * as symbol2 from "./symbol-2"
+import * as symbol3 from "./symbol-3"
 import * as flags1 from "./flags-1"
 import * as range1 from "./range-1"
 import * as range2 from "./range-2"
@@ -45,6 +46,7 @@ export default [
   bars4,
   symbol1,
   symbol2,
+  symbol3,
   flags1,
   range1,
   range2,
