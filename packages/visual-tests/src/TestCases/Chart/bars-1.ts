@@ -1,7 +1,7 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const createSingleSeries = (renderers: any[]): any => {
+const createSingleSeries = (renderers: any[]) => {
   return {
     series: [
       {
@@ -33,7 +33,7 @@ const createSingleSeries = (renderers: any[]): any => {
   }
 }
 
-const createData = (renderers: any[]): any => {
+const createData = (renderers: any[]) => {
   return {
     series: [
       {

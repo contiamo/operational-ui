@@ -77,7 +77,7 @@ const LineRendererOpacity = {
   },
 }
 
-const createData = (renderers: any[]): any => {
+const createData = (renderers: any[]) => {
   return {
     series: [
       {

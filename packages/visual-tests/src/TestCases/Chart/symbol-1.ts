@@ -14,7 +14,7 @@ const createRenderer = (options: any) => {
   }
 }
 
-const createData = (options: any): any => {
+const createData = (options: any) => {
   return {
     series: [
       {
