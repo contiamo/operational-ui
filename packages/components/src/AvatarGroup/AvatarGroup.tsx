@@ -2,14 +2,21 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
+import { Avatar } from "../../"
 import { WithTheme, Css, CssStatic } from "../types"
 
+export interface AvatarItem {
+  photo?: string
+  name: string
+}
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   /** Class name */
   className?: string
   children?: React.ReactNode
+  /** Avatars list */
+  avatars?: AvatarItem[]
 }
 
 const Container = glamorous.div(
@@ -28,7 +35,7 @@ const Container = glamorous.div(
 
 const AvatarGroup = (props: Props) => (
   <Container css={props.css} className={props.className}>
-    {props.children}
+    {props.avatars ? props.avatars.map(avatar => <Avatar {...avatar} />) : props.children}
   </Container>
 )
 
