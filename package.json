@@ -12,18 +12,16 @@
     "build": "run-s build:*",
     "build:clean": "rimraf dist",
     "build:website": "cd packages/website && npm run build && cp -r dist ../..",
-    "build:visual-test":
-      "cd packages/visual-tests && npm run build && cp -r dist ../../dist/visual-tests",
-    "build:components":
-      "cd packages/components && npm run docs:build && cp -r styleguide ../../dist/docs",
-    "clean": "lerna clean",
-    "test": "lerna run test",
-    "lint": "lerna run lint",
-    "prettier": "lerna run prettier",
+    "build:visual-test": "cd packages/visual-tests && npm run build && cp -r dist ../../dist/visual-tests",
+    "build:components": "cd packages/components && npm run docs:build && cp -r styleguide ../../dist/docs",
+    "clean": "lerna clean --parallel",
+    "test": "lerna run test --parallel",
+    "lint": "lerna run lint --parallel",
+    "prettier": "lerna run prettier --parallel",
     "precommit": "lint-staged",
-    "postinstall": "lerna bootstrap --stream",
-    "package": "lerna run package",
-    "prepublish": "npm run package",
+    "postinstall": "lerna bootstrap --hoist --parallel",
+    "package": "lerna run package --parallel",
+    "preversion": "npm run package",
     "publish": "lerna publish",
     "next": "./scripts/next.sh",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
@@ -32,7 +30,7 @@
     "deploy:website": "./scripts/deploy-website.sh"
   },
   "lint-staged": {
-    "*.(ts|tsx|js|jsx|json)": ["prettier --write", "git add"]
+    "*.(ts|tsx|js|jsx|json|html)": ["prettier --write", "git add"]
   },
   "devDependencies": {
     "husky": "^0.14.3",
