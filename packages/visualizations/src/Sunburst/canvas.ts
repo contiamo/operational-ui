@@ -70,7 +70,7 @@ class SunburstCanvas implements Canvas {
 
   // Root label
   private renderRootLabel(): D3Selection {
-    const el: D3Selection = d3
+    const el = d3
       .select(document.createElementNS(d3.namespaces["xhtml"], "div"))
       .attr("class", localStyles.rootLabel)
       .html("<span class='value'></span><br><span class='name'></span>")
@@ -91,19 +91,18 @@ class SunburstCanvas implements Canvas {
   }
 
   private drawingDims(): Dimensions {
-    const config: SunburstConfig = this.state.current.get("config")
-    const dims: Dimensions = {
+    const config = this.state.current.get("config")
+    return {
       width: config.width,
       height: config.height - this.breadcrumb.node().getBoundingClientRect().height,
     }
-    this.stateWriter("drawingDims", dims)
-    return dims
   }
 
   // Lifecycle
   draw(): void {
-    const config: SunburstConfig = this.state.current.get("config"),
-      drawingDims: Dimensions = this.drawingDims()
+    const config = this.state.current.get("config")
+    const drawingDims = this.drawingDims()
+    this.stateWriter("drawingDims", drawingDims)
 
     this.chartContainer
       .style("visibility", this.state.current.get("config").hidden ? "hidden" : "visible")
