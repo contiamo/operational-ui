@@ -118,6 +118,7 @@ class Polar implements Renderer {
     return {
       path: this.arcTween.bind(this),
       fill: this.color.bind(this),
+      isTween: true,
     }
   }
 

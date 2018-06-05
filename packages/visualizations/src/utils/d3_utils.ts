@@ -70,16 +70,21 @@ export const setPathAttributes: AttributeSetter<{
   fill: string | any
   stroke: string | any
   opacity: number | any
+  // If a custom path transition interpolation is provided (e.g. for pie chart arc transitions),
+  // the path attribute "d" needs to be updated using `attrTween` rather than `attr`
+  isTween: boolean
 }> = (selection, attributes, duration, onEnd) => {
   const elements = transitionIfDuration(selection, duration)
     .style("fill", attributes.fill)
     .style("stroke", attributes.stroke)
     .style("opacity", attributes.opacity)
 
+  isTransition(elements) && attributes.isTween
+    ? elements.attrTween("d", attributes.path)
+    : elements.attr("d", attributes.path)
+
   if (isTransition(elements)) {
-    elements.attrTween("d", attributes.path).call(onTransitionEnd, onEnd)
-  } else {
-    elements.attr("d", attributes.path)
+    elements.call(onTransitionEnd, onEnd)
   }
 }
 

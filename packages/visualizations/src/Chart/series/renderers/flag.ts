@@ -107,9 +107,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     groups
       .merge(enteringGroups)
       .select("path.flag")
-      .transition()
-      .duration(duration)
-      .call(setPathAttributes, flagAttributes)
+      .call(setPathAttributes, flagAttributes, duration)
 
     // Labels
     enteringGroups
@@ -142,9 +140,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
       .merge(enteringGroups)
       .select("path.hover-flag")
       .on("mouseenter", withD3Element(this.onFlagHover(attributes).bind(this)))
-      .transition()
-      .duration(duration)
-      .call(setPathAttributes, hoverFlagAttributes)
+      .call(setPathAttributes, hoverFlagAttributes, duration)
   }
 
   close(): void {

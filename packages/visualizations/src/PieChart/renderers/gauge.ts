@@ -126,6 +126,7 @@ class Gauge implements Renderer {
     return {
       path: this.arcTween.bind(this),
       fill: this.arcColor.bind(this),
+      isTween: true,
     }
   }
 
