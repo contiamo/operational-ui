@@ -7,27 +7,35 @@
   "author": "Tejas Kumar <tejas@contiamo.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cd packages/website && yarn start",
-    "build": "cd packages/website && npm run build",
-    "bootstrap": "lerna bootstrap",
-    "postinstall": "npm run bootstrap",
-    "clean": "rm -rf node_modules && rm -rf packages/*/node_modules && rm -f packages/*/package-lock.json && rm -f packages/*/yarn.lock && rm -f yarn.lock",
+    "start": "cd packages/website && npm run start",
+    "prebuild": "npm run package",
+    "build": "run-s build:*",
+    "build:clean": "rimraf dist",
+    "build:website": "cd packages/website && npm run build && cp -r dist ../..",
+    "build:visual-test": "cd packages/visual-tests && npm run build && cp -r dist ../../dist/visual-tests",
+    "build:components": "cd packages/components && npm run docs:build && cp -r styleguide ../../dist/docs",
+    "clean": "lerna clean",
     "test": "lerna run test",
     "lint": "lerna run lint",
     "prettier": "lerna run prettier",
-    "precommit": "lerna run lint && lerna run prettier && git add .",
+    "precommit": "lerna run --concurrency 1 --stream precommit",
+    "postinstall": "lerna bootstrap --stream",
     "package": "lerna run package",
-    "prepublish": "lerna run package",
+    "prepublish": "npm run package",
     "publish": "lerna publish",
     "next": "./scripts/next.sh",
     "ensure:clean:repo": "./scripts/ensure-clean-repo.sh",
-    "verify": "lerna run package && lerna run test && lerna run lint && lerna run prettier",
+    "verify": "run-s lint prettier test",
     "ci": "./scripts/ci.sh",
     "deploy:website": "./scripts/deploy-website.sh"
   },
   "devDependencies": {
     "husky": "^0.14.3",
-    "lerna": "^2.7.1"
+    "lerna": "^2.7.1",
+    "npm-run-all": "^4.1.3",
+    "rimraf": "^2.6.2"
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }
