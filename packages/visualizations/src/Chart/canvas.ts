@@ -53,6 +53,7 @@ class ChartCanvas implements Canvas {
   draw(): void {
     const config = this.state.current.get("config")
     const dims = this.calculateDrawingContainerDims()
+    this.stateWriter("drawingContainerDims", dims)
 
     // Resize elements
     this.chartContainer
@@ -69,6 +70,8 @@ class ChartCanvas implements Canvas {
     this.drawingGroup.attr("transform", `translate(${this.margin("y1")}, ${this.margin("x2")})`)
 
     const drawingDims = this.calculateDrawingDims()
+    this.stateWriter("drawingDims", drawingDims)
+
     this.updateClipPaths(dims, drawingDims)
     this.el.on("mousemove", this.onMouseMove.bind(this))
   }
@@ -268,22 +271,18 @@ class ChartCanvas implements Canvas {
 
   private calculateDrawingContainerDims(): Dimensions {
     const config = this.state.current.get("config")
-    const dims = {
+    return {
       height: config.height - this.totalLegendHeight(),
       width: config.width,
     }
-    this.stateWriter("drawingContainerDims", dims)
-    return dims
   }
 
   private calculateDrawingDims(): Dimensions {
     const drawingContainerDims = this.state.current.get("computed").canvas.drawingContainerDims
-    const dims = {
+    return {
       width: drawingContainerDims.width - this.margin("y1") - this.margin("y2"),
       height: drawingContainerDims.height - this.margin("x1") - this.margin("x2"),
     }
-    this.stateWriter("drawingDims", dims)
-    return dims
   }
 
   private updateClipPaths(dims: Dimensions, drawingDims: Dimensions): void {
