@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "package": "rm -rf lib && tsc -d",
+    "package": "rm -rf lib && tsc",
     "precommit": "lint-staged",
     "package:watch": "tsc -d -w",
     "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
