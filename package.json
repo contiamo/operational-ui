@@ -32,7 +32,7 @@
     "deploy:website": "./scripts/deploy-website.sh"
   },
   "lint-staged": {
-    "*.(ts|tsx|js|jsx|json|html)": ["prettier --write", "git add"]
+    "*.(ts|tsx|js|jsx|json)": ["prettier --write", "git add"]
   },
   "devDependencies": {
     "husky": "^0.14.3",
