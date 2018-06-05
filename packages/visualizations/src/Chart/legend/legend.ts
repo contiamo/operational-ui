@@ -3,7 +3,16 @@ import * as d3 from "d3-selection"
 import { get } from "lodash/fp"
 import * as styles from "../../shared/styles"
 import { withD3Element } from "../../utils/d3_utils"
-import { ComponentConfigInfo, D3Selection, EventBus, Legend, LegendDatum, State, StateWriter } from "../typings"
+import {
+  ComponentConfigInfo,
+  ComponentHoverPayload,
+  D3Selection,
+  EventBus,
+  Legend,
+  LegendDatum,
+  State,
+  StateWriter,
+} from "../typings"
 
 class ChartLegend implements Legend {
   private data: LegendDatum[]
@@ -32,7 +41,7 @@ class ChartLegend implements Legend {
     }
 
     this.el.attr("visibility", "visible")
-    const legends: D3Selection = this.el.selectAll(`div.${styles.seriesLegend}`).data(this.data, get("label"))
+    const legends = this.el.selectAll(`div.${styles.seriesLegend}`).data(this.data, get("label"))
 
     legends.exit().remove()
 
@@ -43,16 +52,16 @@ class ChartLegend implements Legend {
       .style("float", "left")
       .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
-        withD3Element((d: LegendDatum, el: HTMLElement): void => {
-          const element: D3Selection = d3.select(el)
+        withD3Element((d: LegendDatum, el: HTMLElement) => {
+          const element = d3.select(el)
           element.append("div").attr("class", "color")
           element.append("div").attr("class", "name")
         })
       )
       .merge(legends)
       .each(
-        withD3Element((d: LegendDatum, el: HTMLElement): void => {
-          const element: D3Selection = d3.select(el)
+        withD3Element((d: LegendDatum, el: HTMLElement) => {
+          const element = d3.select(el)
           element.select("div.color").style("background-color", get("color"))
           element.select("div.name").html(get("label"))
         })
@@ -69,7 +78,8 @@ class ChartLegend implements Legend {
   }
 
   private onComponentHover(d: LegendDatum, el: HTMLElement): void {
-    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
+    const payload: ComponentHoverPayload = { component: d3.select(el), options: this.currentOptions(d) }
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, payload)
   }
 
   private currentOptions(datum: LegendDatum): ComponentConfigInfo {

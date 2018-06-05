@@ -1,13 +1,13 @@
 import Events from "../shared/event_catalog"
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, Dimensions, EventBus, PieChartConfig, SeriesEl, State, StateWriter } from "./typings"
+import { Canvas, D3Selection, Dimensions, EventBus, State, StateWriter } from "./typings"
 import * as styles from "../shared/styles"
 
 class PieChartCanvas implements Canvas {
   private drawingContainer: D3Selection
   private elements: { [key: string]: D3Selection } = {}
   private chartContainer: D3Selection
-  private el: SeriesEl
+  private el: D3Selection
   private events: EventBus
   private state: State
   private elMap: { [key: string]: D3Selection } = {}
@@ -50,10 +50,10 @@ class PieChartCanvas implements Canvas {
 
   // Legend
   private renderLegend(): void {
-    const legendNode: Element = document.createElementNS(d3.namespaces["xhtml"], "div")
+    const legendNode = document.createElementNS(d3.namespaces["xhtml"], "div")
     this.chartContainer.node().appendChild(legendNode)
 
-    const legend: D3Selection = d3
+    const legend = d3
       .select(legendNode)
       .attr("class", `${styles.legend} ${styles.legendTopBottom} left`)
       .style("float", "left")
@@ -70,8 +70,8 @@ class PieChartCanvas implements Canvas {
   }
 
   // El
-  private renderEl(): SeriesEl {
-    const el: Element = document.createElementNS(d3.namespaces["svg"], "svg")
+  private renderEl(): D3Selection {
+    const el = document.createElementNS(d3.namespaces["svg"], "svg")
     this.drawingContainer.node().appendChild(el)
     this.elMap.series = d3.select(el)
     return this.elMap.series
@@ -99,7 +99,7 @@ class PieChartCanvas implements Canvas {
 
   private renderComponentFocus(): D3Selection {
     const focusEl = d3.select(document.createElementNS(d3.namespaces["xhtml"], "div")).attr("class", "component-focus")
-    const ref: Node = this.chartContainer.node()
+    const ref = this.chartContainer.node()
     ref.insertBefore(focusEl.node(), ref.nextSibling)
     return focusEl
   }
@@ -119,8 +119,8 @@ class PieChartCanvas implements Canvas {
     this.chartContainer.classed("hidden", this.state.current.get("config").hidden)
     this.stateWriter(["containerRect"], this.chartContainer.node().getBoundingClientRect())
 
-    const config: PieChartConfig = this.state.current.get("config")
-    const dims: Dimensions = this.drawingContainerDims()
+    const config = this.state.current.get("config")
+    const dims = this.drawingContainerDims()
 
     this.chartContainer.style("width", `${config.width}px`).style("height", `${config.height}px`)
     this.drawingContainer.style("width", `${dims.width}px`).style("height", `${dims.height}px`)

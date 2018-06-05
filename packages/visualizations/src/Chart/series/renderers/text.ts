@@ -4,7 +4,6 @@ import * as styles from "./styles"
 import {
   TextRendererAccessors,
   TextRendererConfig,
-  ChartConfig,
   D3Selection,
   Datum,
   EventBus,
@@ -21,8 +20,8 @@ const defaultAccessors: Partial<TextRendererAccessors> = {
   size: (series: Series, d: Datum) => 10,
 }
 
-const verticalTiltAngle: number = -60
-const horizontalTiltAngle: number = -30
+const verticalTiltAngle = -60
+const horizontalTiltAngle = -30
 
 class Text implements RendererClass<TextRendererAccessors> {
   data: Datum[]
@@ -58,8 +57,8 @@ class Text implements RendererClass<TextRendererAccessors> {
     this.data = data
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map((this as any)[axis])(this.data)
+  dataForAxis(axis: "x" | "y") {
+    const data = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)
@@ -67,10 +66,10 @@ class Text implements RendererClass<TextRendererAccessors> {
 
   draw(): void {
     this.setAxisScales()
-    const data: Datum[] = filter(this.validate.bind(this))(this.data)
-    const duration: number = this.state.current.get("config").duration
-    const startAttributes: { [key: string]: any } = this.startAttributes()
-    const attributes: { [key: string]: any } = this.attributes()
+    const data = filter(this.validate.bind(this))(this.data)
+    const duration = this.state.current.get("config").duration
+    const startAttributes = this.startAttributes()
+    const attributes = this.attributes()
 
     const text = this.el.selectAll("text").data(data)
 
@@ -115,14 +114,14 @@ class Text implements RendererClass<TextRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<TextRendererAccessors>): void {
-    const accessors: TextRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const accessors = defaults(defaultAccessors)(customAccessors)
     this.x = (d: Datum): any => this.series.x(d) || d.injectedX
     this.y = (d: Datum): any => this.series.y(d) || d.injectedY
-    this.size = (d?: Datum): number => accessors.size(this.series, d)
+    this.size = (d?: Datum) => accessors.size(this.series, d)
   }
 
   private assignConfig(customConfig: Partial<TextRendererConfig>): void {
-    forEach.convert({ cap: false })((value: any, key: string): void => {
+    forEach.convert({ cap: false })((value: any, key: string) => {
       ;(this as any)[key] = value
     })(customConfig)
   }
@@ -140,43 +139,40 @@ class Text implements RendererClass<TextRendererAccessors> {
     return isFinite(this.xScale(this.x(d))) && isFinite(this.yScale(this.y(d)))
   }
 
-  private startAttributes(): { [key: string]: any } {
-    const computedBars: { [key: string]: any } = this.state.current.get("computed").axes.computedBars
-    const offset: number =
-      computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
-    const rotate: number = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
+  private startAttributes() {
+    const computedBars = this.state.current.get("computed").axes.computedBars
+    const offset = computedBars && computedBars[this.series.key()] ? computedBars[this.series.key()].width / 2 : 0
+    const rotate = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
 
-    const attrs: { [key: string]: any } = {
-      x: (d: Datum): number => this.xScale(this.xIsBaseline ? this.x(d) : 0) - (this.xIsBaseline ? offset : 0),
-      y: (d: Datum): number => this.yScale(this.xIsBaseline ? 0 : this.y(d)) - (this.xIsBaseline ? 0 : offset),
-      text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
+    const attrs: any = {
+      x: (d: Datum) => this.xScale(this.xIsBaseline ? this.x(d) : 0) - (this.xIsBaseline ? offset : 0),
+      y: (d: Datum) => this.yScale(this.xIsBaseline ? 0 : this.y(d)) - (this.xIsBaseline ? 0 : offset),
+      text: (d: Datum) => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
     }
-    attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
+    attrs.transform = (d: Datum) => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
     return attrs
   }
 
-  private attributes(): { [key: string]: any } {
-    const computedBars: { [key: string]: any } = this.state.current.get("computed").axes.computedBars
-    const barOffset: number =
+  private attributes() {
+    const computedBars = this.state.current.get("computed").axes.computedBars
+    const barOffset =
       computedBars && computedBars[this.series.key()]
         ? computedBars[this.series.key()].offset + computedBars[this.series.key()].width / 2
         : 0
     const symbolOffset = (d: Datum) => (this.series.symbolOffset ? this.series.symbolOffset(d) : 0) + this.offset
-    const rotate: number = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
-    const x = (d: Datum): number => d.x1 || this.x(d)
-    const y = (d: Datum): number => d.y1 || this.y(d)
-    const isPositive = (d: Datum): boolean => (this.xIsBaseline ? y(d) >= 0 : x(d) >= 0)
+    const rotate = this.tilt ? (this.xIsBaseline ? verticalTiltAngle : horizontalTiltAngle) : 0
+    const x = (d: Datum) => d.x1 || this.x(d)
+    const y = (d: Datum) => d.y1 || this.y(d)
+    const isPositive = (d: Datum) => (this.xIsBaseline ? y(d) >= 0 : x(d) >= 0)
 
-    const attrs: { [key: string]: any } = {
-      x: (d: Datum): number =>
-        this.xScale(x(d)) + (this.xIsBaseline ? barOffset : symbolOffset(d) * (isPositive(d) ? 1 : -1)),
-      y: (d: Datum): number =>
-        this.yScale(y(d)) + (this.xIsBaseline ? symbolOffset(d) * (isPositive(d) ? -1 : 1) : barOffset),
-      text: (d: Datum): string => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
-      anchor: (d: Datum): string => (this.xIsBaseline && !this.tilt ? "middle" : isPositive(d) ? "start" : "end"),
+    const attrs: any = {
+      x: (d: Datum) => this.xScale(x(d)) + (this.xIsBaseline ? barOffset : symbolOffset(d) * (isPositive(d) ? 1 : -1)),
+      y: (d: Datum) => this.yScale(y(d)) + (this.xIsBaseline ? symbolOffset(d) * (isPositive(d) ? -1 : 1) : barOffset),
+      text: (d: Datum) => (this.xIsBaseline ? this.y(d) : this.x(d)).toString(),
+      anchor: (d: Datum) => (this.xIsBaseline && !this.tilt ? "middle" : isPositive(d) ? "start" : "end"),
       baseline: this.xIsBaseline ? "initial" : "central",
     }
-    attrs.transform = (d: Datum): string => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
+    attrs.transform = (d: Datum) => `rotate(${rotate}, ${attrs.x(d)}, ${attrs.y(d)})`
     return attrs
   }
 }

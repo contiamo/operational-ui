@@ -29,18 +29,18 @@ export const assignOptions = (ctx: Renderer, options: { [key: string]: any }): v
 }
 
 export const defaultAccessors = (ctx: Renderer): RendererAccessors => {
-  const assignColor: (key: string) => string = colorAssigner(ctx.state.current.get("config").palette)
+  const assignColor = colorAssigner(ctx.state.current.get("config").palette)
   return {
-    value: (d: Datum): number => d.value,
-    key: (d: Datum): string => d.key,
-    color: (d: Datum): string => (d.unfilled ? undefined : assignColor(ctx.key(d))),
+    value: (d: Datum) => d.value,
+    key: (d: Datum) => d.key,
+    color: (d: Datum) => (d.unfilled ? undefined : assignColor(ctx.key(d))),
   }
 }
 
 export const assignAccessors = (ctx: Renderer, customAccessors: Partial<RendererAccessors>): void => {
-  const accessors: RendererAccessors = defaults(defaultAccessors(ctx))(customAccessors)
-  forEach.convert({ cap: false })((option: any, key: string): void => {
-    ;(ctx as any)[key] = (d: any): any => option(d.data || d)
+  const accessors = defaults(defaultAccessors(ctx))(customAccessors)
+  forEach.convert({ cap: false })((option: any, key: string) => {
+    ;(ctx as any)[key] = (d: any) => option(d.data || d)
   })(accessors)
 }
 
@@ -56,13 +56,13 @@ export const translateBack = (point: [number, number], currentTranslation: [numb
 
 export const textAttributes = (computed: ComputedArcs) => {
   return {
-    transform: (d: Datum): string => translateString(computed.arcOver.centroid(d)),
+    transform: (d: Datum) => translateString(computed.arcOver.centroid(d)),
     text: percentageString,
     textAnchor: "middle",
   }
 }
 
-export const percentageString = (d: ComputedDatum): string | null => {
+export const percentageString = (d: ComputedDatum) => {
   return d.data.percentage ? d.data.percentage.toFixed(1) + "%" : null
 }
 
@@ -78,7 +78,7 @@ export const createArcGroups = (el: D3Selection, data: ComputedDatum[], key: Ren
 }
 
 export const exitArcs = (arcs: D3Selection, duration: number, path: any): void => {
-  const exitingArcs: D3Selection = arcs.exit()
+  const exitingArcs = arcs.exit()
 
   exitingArcs
     .transition()
@@ -96,7 +96,7 @@ export const exitArcs = (arcs: D3Selection, duration: number, path: any): void =
 }
 
 export const enterArcs = (arcs: D3Selection, mouseOverHandler: any, mouseOutHandler: any): void => {
-  const enteringArcs: D3Selection = arcs
+  const enteringArcs = arcs
     .enter()
     .append("svg:g")
     .attr("class", styles.arc)
@@ -108,13 +108,13 @@ export const enterArcs = (arcs: D3Selection, mouseOverHandler: any, mouseOutHand
   enteringArcs.append("svg:text").attr("class", styles.label)
 }
 
-const RECT_PADDING: number = 2
+const RECT_PADDING = 2
 
 export const updateBackgroundRects = (updatingArcs: D3Selection, centroid: any, visibility: string): void => {
   updatingArcs.each(
-    withD3Element((d: Datum, el: HTMLElement): void => {
-      const element: D3Selection = select(el)
-      const textDimensions: any = (element.select("text").node() as any).getBBox()
+    withD3Element((d: Datum, el: HTMLElement) => {
+      const element = select(el)
+      const textDimensions = (element.select("text").node() as any).getBBox()
       const transform: [number, number] = [
         centroid(d)[0] + textDimensions.x - RECT_PADDING,
         centroid(d)[1] + textDimensions.y - RECT_PADDING,
@@ -140,7 +140,7 @@ export const updateTotal = (
   duration: number,
   options: { maxTotalFontSize: number; minTotalFontSize: number; innerRadius: number; yOffset: string }
 ): void => {
-  let total: any = el
+  let total = el
     .select(`g.${styles.total}`)
     .selectAll("text")
     .data([label])
@@ -150,16 +150,16 @@ export const updateTotal = (
     .style("font-size", "1px")
     .remove()
 
-  const mergedTotal: D3Selection = total
+  const mergedTotal = total
     .enter()
     .append("svg:text")
     .attr("text-anchor", "middle")
     .merge(total)
     .text(String)
 
-  const node: any = mergedTotal.node()
+  const node = mergedTotal.node()
   if (node) {
-    const y: (x: number) => number = stepFunction(mergedTotal, options.innerRadius)
+    const y = stepFunction(mergedTotal, options.innerRadius)
     // start with min font size
     if (y(options.minTotalFontSize) < 0) {
       // Not enough room - do not show total
@@ -173,14 +173,14 @@ export const updateTotal = (
 }
 
 export const computeTotal = (data: Datum[], valueAccessor: RendererAccessor<number>): number => {
-  return reduce((memo: number, datum: Datum): number => {
-    const value: number = valueAccessor(datum)
+  return reduce((memo: number, datum: Datum) => {
+    const value = valueAccessor(datum)
     return memo + (value || 0)
   }, 0)(data)
 }
 
 export const calculatePercentages = (data: Datum[], valueAccessor: RendererAccessor<number>, total: number): void => {
-  forEach((datum: Datum): void => {
+  forEach((datum: Datum) => {
     datum.percentage = valueAccessor(datum) / total * 100
   })(data)
 }
@@ -194,9 +194,9 @@ export const layout = (valueAccessor: Accessor<any, number>, angleRange: [number
 }
 
 export const removeArcTween = (computed: ComputedData, angleRange: [number, number]) => {
-  return (d: ComputedDatum, i: number): ((t: number) => string) => {
-    const innerRadius: number = computed.rInner
-    const outerRadius: number = computed.r
+  return (d: ComputedDatum, i: number) => {
+    const innerRadius = computed.rInner
+    const outerRadius = computed.r
     const f = interpolateObject(
       { endAngle: d.endAngle, startAngle: d.startAngle },
       { innerRadius, outerRadius, endAngle: angleRange[1], startAngle: angleRange[1] }

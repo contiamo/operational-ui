@@ -1,18 +1,18 @@
 import DataHandler from "./data_handler"
 import Renderer from "./renderer"
-import { Data, EventBus, SeriesEl, State, StateWriter } from "./typings"
+import { D3Selection, Data, EventBus, State, StateWriter } from "./typings"
 
 class Series {
   private data: Data
   private dataHandler: DataHandler
   private drawn: boolean
-  private el: SeriesEl
+  private el: D3Selection
   private events: EventBus
   private renderer: Renderer
   private state: State
   private stateWriter: StateWriter
 
-  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: SeriesEl) {
+  constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
@@ -28,7 +28,7 @@ class Series {
   }
 
   draw(): void {
-    const seriesConfig: { [key: string]: any } = this.state.current.get("computed").series
+    const seriesConfig = this.state.current.get("computed").series
     this.el.attr("width", seriesConfig.width).attr("height", seriesConfig.height)
     this.renderer.draw(this.data)
     this.drawn = true

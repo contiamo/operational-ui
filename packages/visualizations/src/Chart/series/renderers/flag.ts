@@ -1,6 +1,6 @@
 import Series from "../series"
 import * as styles from "./styles"
-import { assign, compact, defaults, filter, forEach, identity, map, reduce } from "lodash/fp"
+import { assign, compact, defaults, filter, forEach, identity, map } from "lodash/fp"
 import { setLineAttributes, setPathAttributes, withD3Element } from "../../../utils/d3_utils"
 import * as d3 from "d3-selection"
 import Events from "../../../shared/event_catalog"
@@ -65,20 +65,20 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     this.assignAccessors(options.accessors)
     this.assignConfig(options.config)
     this.position = this.axis[0] as "x" | "y"
-    this.data = filter((d: Datum): boolean => this.validate(this.position === "x" ? this.x(d) : this.y(d)))(data)
+    this.data = filter((d: Datum) => this.validate(this.position === "x" ? this.x(d) : this.y(d)))(data)
   }
 
   draw(): void {
     this.setAxisScales()
 
-    const data: Datum[] = this.data
-    const attributes: { [key: string]: any } = assign({ color: this.color })(this.getAttributes())
-    const duration: number = this.state.current.get("config").duration
+    const data = this.data
+    const attributes = assign({ color: this.color })(this.getAttributes())
+    const duration = this.state.current.get("config").duration
     const groups = this.el.selectAll("g").data(data)
 
     groups.exit().remove()
 
-    const enteringGroups: D3Selection = groups.enter().append("svg:g")
+    const enteringGroups = groups.enter().append("svg:g")
 
     // Lines
     enteringGroups.append("line").call(setLineAttributes, attributes)
@@ -89,7 +89,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
       .call(setLineAttributes, attributes, duration)
 
     // Flags
-    const flagAttributes: { [key: string]: any } = {
+    const flagAttributes = {
       stroke: this.color,
       fill: this.color,
       path: this.flagPath(attributes),
@@ -110,19 +110,19 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     // Labels
     enteringGroups
       .append("svg:text")
-      .style("fill", (d: Datum): string => this.color(d))
-      .text((d: Datum): string => this.label(d))
+      .style("fill", (d: Datum) => this.color(d))
+      .text((d: Datum) => this.label(d))
       .each(withD3Element(this.positionLabel(attributes).bind(this)))
 
     groups
       .merge(enteringGroups)
       .select("text")
-      .style("fill", (d: Datum): string => this.color(d))
-      .text((d: Datum): string => this.label(d))
+      .style("fill", (d: Datum) => this.color(d))
+      .text((d: Datum) => this.label(d))
       .each(withD3Element(this.positionLabel(attributes).bind(this)))
 
     // Hoverable flags
-    const hoverFlagAttributes: any = {
+    const hoverFlagAttributes = {
       fill: this.color,
       stroke: this.color,
       path: this.hoverFlagPath(attributes).bind(this),
@@ -147,7 +147,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     this.el.remove()
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
+  dataForAxis(axis: "x" | "y") {
     return this.position === axis ? compact(map(this[axis])(this.data)) : []
   }
 
@@ -165,49 +165,49 @@ class Flag implements RendererClass<FlagRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<FlagRendererAccessors>): void {
-    const accessors: FlagRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const accessors = defaults(defaultAccessors)(customAccessors)
     this.x = this.series.x
     this.y = this.series.y
-    this.color = (d: Datum): string => accessors.color(this.series, d)
-    this.description = (d: Datum): string => accessors.description(this.series, d)
-    this.direction = (d: Datum): "up" | "down" => accessors.direction(this.series, d)
-    this.label = (d: Datum): string => accessors.label(this.series, d)
+    this.color = (d: Datum) => accessors.color(this.series, d)
+    this.description = (d: Datum) => accessors.description(this.series, d)
+    this.direction = (d: Datum) => accessors.direction(this.series, d)
+    this.label = (d: Datum) => accessors.label(this.series, d)
   }
 
   private assignConfig(customConfig: Partial<FlagRendererConfig>): void {
-    forEach.convert({ cap: false })((value: any, key: string): void => {
+    forEach.convert({ cap: false })((value: any, key: string) => {
       ;(this as any)[key] = value
     })(customConfig)
   }
 
   private getAttributes(): { [key: string]: any } {
-    const isXAxis: boolean = this.position === "x"
+    const isXAxis = this.position === "x"
     const value = isXAxis ? this.x : this.y
     const scale = this.scale
-    const drawingDims: { [key: string]: number } = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
 
     switch (this.axis) {
       case "x1":
         return {
-          x: (d: Datum): number => scale(value(d)),
+          x: (d: Datum) => scale(value(d)),
           y1: drawingDims.height,
           y2: this.axisOffset,
         }
       case "x2":
         return {
-          x: (d: Datum): number => scale(value(d)),
+          x: (d: Datum) => scale(value(d)),
           y1: 0,
           y2: drawingDims.height - this.axisOffset,
         }
       case "y1":
         return {
-          y: (d: Datum): number => scale(value(d)),
+          y: (d: Datum) => scale(value(d)),
           x1: 0,
           x2: drawingDims.width - this.axisOffset,
         }
       case "y2":
         return {
-          y: (d: Datum): number => scale(value(d)),
+          y: (d: Datum) => scale(value(d)),
           x1: drawingDims.width,
           x2: this.axisOffset,
         }
@@ -216,16 +216,16 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     }
   }
 
-  private positionLabel(attributes: { [key: string]: any }) {
+  private positionLabel(attributes: any) {
     return (d: Datum, el: HTMLElement): void => {
-      const label: D3Selection = d3.select(el).attr("transform", "rotate(0)") // Undo any previous rotation before calculating label dimensions.
+      const label = d3.select(el).attr("transform", "rotate(0)") // Undo any previous rotation before calculating label dimensions.
 
-      const dimensions: ClientRect = el.getBoundingClientRect()
-      const x: number = attributes.x ? attributes.x(d) : attributes.x2
-      const y: number = attributes.y ? attributes.y(d) : attributes.y2
-      const isXAxis: boolean = this.position === "x"
-      const sign: number = isXAxis ? (attributes.y2 < attributes.y1 ? 1 : -1) : attributes.x2 < attributes.x1 ? 1 : -1
-      const coordinates: { [key: string]: number } = {
+      const dimensions = el.getBoundingClientRect()
+      const x = attributes.x ? attributes.x(d) : attributes.x2
+      const y = attributes.y ? attributes.y(d) : attributes.y2
+      const isXAxis = this.position === "x"
+      const sign = isXAxis ? (attributes.y2 < attributes.y1 ? 1 : -1) : attributes.x2 < attributes.x1 ? 1 : -1
+      const coordinates = {
         x: isXAxis ? x : x + sign * this.flagHeight,
         y: isXAxis ? y + sign * this.flagHeight : y,
       }
@@ -236,11 +236,11 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         .attr("x", coordinates.x)
         .attr("y", coordinates.y)
 
-      const rotation: string = `rotate(${isXAxis ? -90 : 0}, ${coordinates.x}, ${coordinates.y})`
+      const rotation = `rotate(${isXAxis ? -90 : 0}, ${coordinates.x}, ${coordinates.y})`
 
       // Unless an event flag is at the top of the chart, move label to below the line.
-      const dx: number = this.axis[1] === "1" ? -dimensions.width : 0
-      let dy: number = dimensions.height / 2
+      const dx = this.axis[1] === "1" ? -dimensions.width : 0
+      let dy = dimensions.height / 2
       switch (this.position) {
         case "x":
           dy = dy * (this.direction(d) === "down" ? -1 : 1)
@@ -251,13 +251,13 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         default:
           throw new Error(`Invalid axis name ${this.axis}.`)
       }
-      const translation: string = `translate(${dx}, ${dy})`
+      const translation = `translate(${dx}, ${dy})`
 
       label.attr("transform", `${rotation} ${translation}`)
     }
   }
 
-  private flagPath(attributes: { [key: string]: any }): (d: Datum) => string {
+  private flagPath(attributes: any): (d: Datum) => string {
     let line: (d: Datum) => number
     let sign: number
     let tip: (d: Datum) => number
@@ -267,40 +267,40 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         line = (d: Datum) => attributes.x(d) + (this.direction(d) === "up" ? -1 : 1)
         sign = attributes.y2 < attributes.y1 ? 1 : -1
         tip = (d: Datum) => (this.direction(d) === "down" ? line(d) - this.flagWidth : line(d) + this.flagWidth)
-        const y0: number = attributes.y2
-        const y1: number = y0 + sign * this.flagHeight / 2
-        const y2: number = y0 + sign * this.flagHeight
-        return (d: Datum): string => `M${line(d)}, ${y0} L${tip(d)}, ${y1} L${line(d)}, ${y2}`
+        const y0 = attributes.y2
+        const y1 = y0 + sign * this.flagHeight / 2
+        const y2 = y0 + sign * this.flagHeight
+        return (d: Datum) => `M${line(d)}, ${y0} L${tip(d)}, ${y1} L${line(d)}, ${y2}`
       case "y":
         line = (d: Datum) => attributes.y(d)
         sign = attributes.x2 < attributes.x1 ? 1 : -1
         // If an event flag coincides with the x-axis, move the flag to the other side.
         tip = (d: Datum) =>
           line(d) === 0 || this.direction(d) === "down" ? line(d) + this.flagWidth : line(d) - this.flagWidth
-        const x0: number = attributes.x2
-        const x1: number = x0 + sign * this.flagHeight / 2
-        const x2: number = x0 + sign * this.flagHeight
-        return (d: Datum): string => `M${x0}, ${line(d)} L${x1}, ${tip(d)} L${x2}, ${line(d)} Z`
+        const x0 = attributes.x2
+        const x1 = x0 + sign * this.flagHeight / 2
+        const x2 = x0 + sign * this.flagHeight
+        return (d: Datum) => `M${x0}, ${line(d)} L${x1}, ${tip(d)} L${x2}, ${line(d)} Z`
       default:
         throw new Error("Invalid axis name '" + this.axis + "'.")
     }
   }
 
-  private hoverFlagPath(attributes: { [key: string]: any }) {
-    const height: number = 12
-    const width: number = 8
+  private hoverFlagPath(attributes: any) {
+    const height = 12
+    const width = 8
     let bottom: number
     let left: any
-    const margin = (axis: AxisPosition): number =>
+    const margin = (axis: AxisPosition) =>
       this.state.current.get(["computed", "axes", "margins", axis]) ||
       this.state.current.get(["config", axis, "margin"])
 
-    return (d: Datum): string => {
+    return (d: Datum) => {
       const line = Math.round(attributes[this.position](d))
 
       switch (this.position) {
         case "y":
-          const dx: number =
+          const dx =
             this.axis === "y1"
               ? -margin("y1") + (this.axisPadding - width) / 2 + 1
               : margin("y2") - width - (this.axisPadding - width) / 2
@@ -308,7 +308,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
           left = attributes.x1 + dx
           break
         default:
-          const dy: number =
+          const dy =
             this.axis === "x1"
               ? margin("x1") - (this.axisPadding - height) / 2
               : height - margin("x2") + (this.axisPadding - height) / 2
@@ -323,11 +323,11 @@ class Flag implements RendererClass<FlagRendererAccessors> {
     }
   }
 
-  private onFlagHover(attributes: { [key: string]: any }) {
+  private onFlagHover(attributes: any) {
     return (d: Datum, el: any): void => {
       d3.select(el.parentNode).classed("hover", true)
 
-      const focusPoint: any = {
+      const focusPoint = {
         axis: this.axis,
         axisType: this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.axis].type,
         direction: this.direction(d),

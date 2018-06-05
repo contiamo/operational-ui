@@ -4,23 +4,12 @@ import DateFocus from "./focus/date_focus"
 import ElementFocus from "./focus/element_focus"
 import FlagFocus from "./focus/flag_focus"
 import * as d3 from "d3-selection"
-import {
-  D3Selection,
-  Dimensions,
-  EventBus,
-  Focus,
-  HoverPayload,
-  Point,
-  Position,
-  SeriesEl,
-  State,
-  StateWriter,
-} from "./typings"
+import { D3Selection, Dimensions, EventBus, Focus, HoverPayload, Point, Position, State, StateWriter } from "./typings"
 
 const percentageString = (percentage: number): string => percentage.toFixed(1) + "%"
 
 class ChartFocus implements Focus {
-  private el: SeriesEl
+  private el: D3Selection
   private componentFocus: ComponentFocus
   private dateFocus: DateFocus
   private elementFocus: ElementFocus

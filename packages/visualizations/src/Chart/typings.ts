@@ -13,13 +13,11 @@ export {
   Point,
   Position,
   D3Selection,
-  SeriesEl,
-  SeriesManager,
   StateWriter,
   Canvas,
 } from "../shared/typings"
 
-export interface XAxisConfig {
+export interface AxisConfig {
   fontSize: number
   margin: number
   minTicks: number
@@ -27,13 +25,6 @@ export interface XAxisConfig {
   showRules: boolean
   tickOffset: number
   tickSpacing: number
-}
-
-export interface YAxisConfig extends XAxisConfig {
-  minTopOffsetTopTick: number
-}
-
-export interface AxisConfig extends XAxisConfig {
   minTopOffsetTopTick?: number
 }
 
@@ -53,6 +44,11 @@ export interface ChartConfig extends Config {
   outerBarSpacing: number
   showComponentFocus: boolean
   timeAxisPriority: string[]
+}
+
+export interface SeriesManager {
+  assignData: () => void
+  draw: () => void
 }
 
 // Renderers

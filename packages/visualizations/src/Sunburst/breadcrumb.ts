@@ -1,7 +1,6 @@
-import * as d3 from "d3-selection"
 import { ClickPayload, D3Selection, Datum, EventBus, HoverPayload, State, StateWriter, SunburstConfig } from "./typings"
 import Events from "../shared/event_catalog"
-import { isEmpty, isObject, last } from "lodash/fp"
+import { clone, defaults, isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
 import { readableTextColor } from "@operational/utils"
 
@@ -42,7 +41,7 @@ class Breadcrumb {
   }
 
   private label(d: any, i: number): string {
-    return d === "hops" ? "..." : d.name
+    return d.hops ? "..." : d.name
   }
 
   private truncateNodeArray(nodeArray: Datum[]): (Datum | string)[] {
@@ -50,13 +49,14 @@ class Breadcrumb {
     if (nodeArray.length <= maxLength) {
       return nodeArray
     }
-    const firstNodes: (Datum | string)[] = nodeArray.slice(0, 1)
-    const lastNodes: (Datum | string)[] = nodeArray.slice(nodeArray.length - (maxLength - 2))
-    return firstNodes.concat(["hops"]).concat(lastNodes)
+    const firstNodes: (Datum)[] = nodeArray.slice(0, 1)
+    const lastNodes: (Datum)[] = nodeArray.slice(nodeArray.length - (maxLength - 2))
+    const dummyHopsNode = defaults({ hops: true })(clone(firstNodes[0]))
+    return firstNodes.concat([dummyHopsNode]).concat(lastNodes)
   }
 
-  private backgroundColor(d: any): string {
-    return d === "hops" ? "#fff" : d.color || "#eee"
+  private backgroundColor(d: Datum): string {
+    return d.hops ? "#fff" : d.color || "#eee"
   }
 
   private labelColor(d: Datum): string {
@@ -67,28 +67,26 @@ class Breadcrumb {
     const data: any[] = nodeArray.length > 1 ? this.truncateNodeArray(nodeArray) : []
 
     // Data join; key function combines name and depth (= position in sequence).
-    const trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => {
-      return d === "hops" ? d : d.name + d.depth
-    })
+    const trail = this.el.selectAll(`div.${styles.breadcrumbItem}`).data(data, d => (d.hops ? d : d.name + d.depth))
 
     // Remove exiting nodes.
     trail.exit().remove()
 
     // Add breadcrumb and label for entering nodes.
-    const itemWidth = (d: any): number =>
-      d === "hops" ? HOPS_WIDTH : this.state.current.get("config").breadcrumbItemWidth
+    const itemWidth = (d: Datum): number => (d.hops ? HOPS_WIDTH : this.state.current.get("config").breadcrumbItemWidth)
+
     const entering: D3Selection = trail
       .enter()
       .append("div")
-      .attr("class", (d: any): string => `${styles.breadcrumbItem} ${d === "hops" ? d : ""}`)
+      .attr("class", (d: Datum): string => `${styles.breadcrumbItem} ${d.hops ? "hops" : ""}`)
       .style("background-color", this.backgroundColor)
-      .style("width", (d: any) => `${itemWidth(d)}px`)
+      .style("width", (d: Datum) => `${itemWidth(d)}px`)
       .attr("title", this.label)
 
     entering
       .append("div")
       .attr("class", "label")
-      .style("width", (d: any) => `${itemWidth(d) - ARROW_WIDTH * 3}px`)
+      .style("width", (d: Datum) => `${itemWidth(d) - ARROW_WIDTH * 3}px`)
       .html(this.label)
       .style("color", this.labelColor.bind(this))
 
@@ -102,8 +100,8 @@ class Breadcrumb {
     entering.merge(trail).on("click", this.onClick.bind(this))
   }
 
-  private onClick(d: Datum | string): void {
-    if (d === "hops") {
+  private onClick(d: Datum): void {
+    if (d.hops) {
       return
     }
     this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d })

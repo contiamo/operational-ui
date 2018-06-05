@@ -1,6 +1,6 @@
 import DataHandler from "./data_handler"
 import Events from "../shared/event_catalog"
-import { ClickPayload, D3Selection, Datum, Dimensions, EventBus, State, StateWriter, SunburstConfig } from "./typings"
+import { ClickPayload, D3Selection, Datum, EventBus, State, StateWriter } from "./typings"
 import { every, find, filter, forEach, findIndex, get, identity, keys, map, reduce } from "lodash/fp"
 import * as styles from "./styles"
 
@@ -47,13 +47,13 @@ class Renderer {
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
     this.removeTruncationArrows()
 
-    const arcs: D3Selection = this.el
+    const arcs = this.el
       .select("g.arcs")
       .attr("transform", this.translate())
       .selectAll(`path.${styles.arc}`)
       .data(this.data, get("id"))
 
-    const config: SunburstConfig = this.state.current.get("config")
+    const config = this.state.current.get("config")
     this.exit(arcs, config.duration, document.hidden || config.disableAnimations)
     this.enterAndUpdate(arcs, config.duration, document.hidden || config.disableAnimations)
   }
@@ -73,7 +73,7 @@ class Renderer {
 
   private updateZoom(): void {
     const matchers = this.state.current.get("config").zoomNode
-    const zoomNode: Datum = find((d: Datum): boolean => {
+    const zoomNode = find((d: Datum): boolean => {
       return every(identity)(
         reduce((memo: boolean[], matcher: string): boolean[] => {
           memo.push(d.data[matcher] === matchers[matcher])
@@ -89,9 +89,9 @@ class Renderer {
   }
 
   private arcClass(d: Datum): string {
-    const parentClass: string = !d.parent ? "parent" : ""
-    const zoomClass: string = d.zoomable ? "zoomable" : ""
-    const emptyClass: string = d.data.empty && this.isFirstLevelChild(d) ? "empty" : ""
+    const parentClass = !d.parent ? "parent" : ""
+    const zoomClass = d.zoomable ? "zoomable" : ""
+    const emptyClass = d.data.empty && this.isFirstLevelChild(d) ? "empty" : ""
     return `${styles.arc} ${parentClass} ${zoomClass} ${emptyClass}`
   }
 
@@ -119,13 +119,14 @@ class Renderer {
 
   // Computations
   private compute(): void {
-    const drawingDims: SunburstConfig = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
     this.radius =
       Math.min(drawingDims.width, drawingDims.height) / 2 - this.state.current.get("config").outerBorderMargin
 
     this.angleScale = d3ScaleLinear()
       .clamp(true)
       .range([0, 2 * Math.PI])
+
     this.radiusScale = d3ScaleLinear()
       .clamp(true)
       .range([0, this.radius])
@@ -167,7 +168,7 @@ class Renderer {
 
   // Center elements within drawing container
   private translate(): string {
-    const drawingDims: Dimensions = this.state.current.get("computed").canvas.drawingDims
+    const drawingDims = this.state.current.get("computed").canvas.drawingDims
     this.currentTranslation = [drawingDims.width / 2, drawingDims.height / 2]
     return `translate(${this.currentTranslation.join(", ")})`
   }
@@ -202,7 +203,7 @@ class Renderer {
     if (!d) {
       return
     }
-    const parent: Datum = find(this.isEqual(d.parent))(data)
+    const parent = find(this.isEqual(d.parent))(data)
     return parent || this.findAncestor(data, d.parent)
   }
 
@@ -211,7 +212,7 @@ class Renderer {
   }
 
   // Arc interpolations for entering segments
-  private arcTween(d: Datum): (t: number) => string {
+  private arcTween(d: Datum) {
     const previousData: Datum[] = this.previous || [],
       // old version of same datum
       old: Datum = find(this.isEqual(d))(previousData),
@@ -250,16 +251,16 @@ class Renderer {
 
   // Arc interpolations for exiting segments
   private removeArcTween(d: Datum): (t: number) => string {
-    const oldSiblings: Datum[] = this.findSiblings(this.previous || [], d)
-    const currentSiblings: Datum[] = this.findSiblings(this.data, d)
-    const oldSiblingIndex: number = findIndex(this.isEqual(d))(oldSiblings)
-    const oldPrecedingSibling: Datum = filter
+    const oldSiblings = this.findSiblings(this.previous || [], d)
+    const currentSiblings = this.findSiblings(this.data, d)
+    const oldSiblingIndex = findIndex(this.isEqual(d))(oldSiblings)
+    const oldPrecedingSibling = filter
       .convert({ cap: false })((sibling: Datum, i: number): boolean => {
         return i < oldSiblingIndex && !!this.findDatum(currentSiblings, sibling)
       })(oldSiblings)
       .pop()
-    const precedingSibling: Datum = this.findDatum(this.data, oldPrecedingSibling)
-    const parent: Datum = this.findAncestor(this.data.concat([this.dataHandler.topNode]), d)
+    const precedingSibling = this.findDatum(this.data, oldPrecedingSibling)
+    const parent = this.findAncestor(this.data.concat([this.dataHandler.topNode]), d)
 
     let x: number
     if (precedingSibling) {
@@ -281,7 +282,7 @@ class Renderer {
       return
     }
 
-    const zoomNode: Datum = payload.d || this.dataHandler.topNode
+    const zoomNode = payload.d || this.dataHandler.topNode
 
     // If the center node is clicked, zoom out by one level
     if (zoomNode === this.zoomNode && payload && payload.force) {
@@ -290,10 +291,10 @@ class Renderer {
     }
 
     // Set new scale domains
-    const config: SunburstConfig = this.state.current.get("config")
+    const config = this.state.current.get("config")
 
-    let maxChildRadius: number = 0
-    let truncated: boolean = false
+    let maxChildRadius = 0
+    let truncated = false
     forEach((child: Datum): void => {
       if (child.depth - zoomNode.depth <= this.state.current.get("config").maxRings) {
         maxChildRadius = Math.max(maxChildRadius, child.y1)
@@ -311,16 +312,16 @@ class Renderer {
 
     // Save new inner radius to facilitate sizing and positioning of root label
     this.radiusScale.domain(radiusDomain(1))
-    const innerRadius: number = this.radiusScale(zoomNode.y1)
+    const innerRadius = this.radiusScale(zoomNode.y1)
     this.stateWriter("innerRadius", innerRadius)
 
     // If the sunburst is not zoomed in and the root node is fully surrounded by children,
     // make the radius of the central white circle equal to the inner radius of the first ring,
     // to avoid an extra grey ring around the root node.
-    const totalRootChildValue: number = reduce((memo: number, child: Datum): number => {
+    const totalRootChildValue = reduce((memo: number, child: Datum) => {
       return memo + child.value
     }, 0)(this.dataHandler.topNode.children)
-    const isSurrounded: boolean = zoomNode === this.dataHandler.topNode && zoomNode.value === totalRootChildValue
+    const isSurrounded = zoomNode === this.dataHandler.topNode && zoomNode.value === totalRootChildValue
 
     transitionIfVisible(this.el.select(`circle.${styles.centerCircle}`), config.duration).attr(
       "r",
@@ -339,11 +340,11 @@ class Renderer {
 
     this.removeTruncationArrows()
 
-    const paths: D3Selection = this.el
+    const paths = this.el
       .selectAll(`path.${styles.arc}`)
       .attr("pointer-events", "none")
-      .classed("zoomed", (datum: Datum): boolean => datum === this.zoomNode)
-      .classed("empty", (datum: Datum): boolean => datum.data.empty && this.isFirstLevelChild(datum))
+      .classed("zoomed", (datum: Datum) => datum === this.zoomNode)
+      .classed("empty", (datum: Datum) => datum.data.empty && this.isFirstLevelChild(datum))
       .each(
         withD3Element((datum: Datum, el: Element): void => {
           d3.select(el).attr("pointer-events", null)
@@ -382,8 +383,8 @@ class Renderer {
       return
     }
 
-    const labelPosition: string = this.arc.centroid(d)[1] > 0 ? "below" : "above"
-    const hideLabel: boolean = d3.select(el).classed(styles.arrow)
+    const labelPosition = this.arc.centroid(d)[1] > 0 ? "below" : "above"
+    const hideLabel = d3.select(el).classed(styles.arrow)
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, {
       d,
       hideLabel,
@@ -395,19 +396,15 @@ class Renderer {
   }
 
   private getFocusPoint(d: Datum): [number, number] {
-    const r: number = (3 * this.arc.outerRadius()(d) + this.arc.innerRadius()(d)) / 4
-    const a: number = (this.arc.startAngle()(d) + this.arc.endAngle()(d)) / 2 - Math.PI / 2
+    const r = (3 * this.arc.outerRadius()(d) + this.arc.innerRadius()(d)) / 4
+    const a = (this.arc.startAngle()(d) + this.arc.endAngle()(d)) / 2 - Math.PI / 2
     return this.translateBack([Math.cos(a) * r, Math.sin(a) * r])
   }
 
-  private highlightPath(d: Datum, el: Element) {
-    const percentage: number = Number((100 * d.value / this.total).toPrecision(3))
-    let percentageString: string = percentage + "%"
-    if (percentage < 0.1) {
-      percentageString = "< 0.1%"
-    }
+  private highlightPath(d: Datum, el: Element): void {
+    const percentage = Number((100 * d.value / this.total).toPrecision(3))
 
-    this.el.select("span.percentage").text(percentageString)
+    this.el.select("span.percentage").text(percentage < 0.1 ? "< 0.1%" : `${percentage}%`)
 
     this.el.select("div.explanation").style("visibility", "")
 
@@ -417,13 +414,13 @@ class Renderer {
     // Fade all the segments (leave inner circle as is).
     this.el
       .selectAll(`path.${styles.arc}`)
-      .filter((d: Datum): boolean => d !== this.zoomNode)
+      .filter((d: Datum) => d !== this.zoomNode)
       .style("opacity", 0.5)
 
     // Then highlight only those that are an ancestor of the current segment.
     this.el
       .selectAll(`path.${styles.arc}`)
-      .filter((d: Datum): boolean => sequenceArray.indexOf(d) >= 0 && d !== this.zoomNode)
+      .filter((d: Datum) => sequenceArray.indexOf(d) >= 0 && d !== this.zoomNode)
       .style("opacity", 1)
 
     d3.select(el).on("mouseleave", this.onMouseLeave.bind(this)(d, el))
@@ -441,7 +438,7 @@ class Renderer {
 
       this.el
         .selectAll(`path.${styles.arc}`)
-        .filter((d: Datum): boolean => d !== this.zoomNode)
+        .filter((d: Datum) => d !== this.zoomNode)
         .style("opacity", 1)
 
       this.el.select("div.explanation").style("visibility", "hidden")
@@ -457,23 +454,23 @@ class Renderer {
   }
 
   private arrowTransformation(d: Datum): string {
-    const radAngle: number = d3Interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5)
-    const degAngle: number = radAngle * 180 / Math.PI
-    const r: number = this.radiusScale(d.y1) + this.state.current.get("config").arrowOffset
+    const radAngle = d3Interpolate(this.angleScale(d.x0), this.angleScale(d.x1))(0.5)
+    const degAngle = radAngle * 180 / Math.PI
+    const r = this.radiusScale(d.y1) + this.state.current.get("config").arrowOffset
     return `translate(0, ${-r}) rotate(${degAngle} 0 ${r})`
   }
 
   private updateTruncationArrows(): void {
-    const centerNode: Datum = this.zoomNode || this.dataHandler.topNode,
-      config: SunburstConfig = this.state.current.get("config")
+    const centerNode = this.zoomNode || this.dataHandler.topNode
+    const config = this.state.current.get("config")
 
-    const data: Datum[] = map(get("parent"))(
-      filter((d: Datum): boolean => {
+    const data = map(get("parent"))(
+      filter((d: Datum) => {
         return d.depth - centerNode.depth > config.maxRings && d.parent.depth - centerNode.depth <= config.maxRings
       })(this.data)
     )
 
-    const arrows: D3Selection = this.el
+    const arrows = this.el
       .select("g.arrows")
       .attr("transform", this.translate())
       .selectAll(`path.${styles.arrow}`)
@@ -488,7 +485,7 @@ class Renderer {
       .merge(arrows)
       .attr("d", arrowPath)
       .on("mouseenter", withD3Element(this.onMouseOver.bind(this)))
-      .on("click", (d: Datum): void => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
+      .on("click", (d: Datum) => this.events.emit(Events.FOCUS.ELEMENT.CLICK, { d, force: true }))
       .attr("transform", this.arrowTransformation.bind(this))
   }
 }

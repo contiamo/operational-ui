@@ -2,22 +2,20 @@
 import Breadcrumb from "./breadcrumb"
 import Renderer from "./renderer"
 import RootLabel from "./root_label"
-import * as d3 from "d3-selection"
 import { HierarchyRectangularNode } from "d3-hierarchy"
 import { Accessor, Config, Focus, Facade } from "../shared/typings"
 
 export {
   Accessor,
   Accessors,
+  Canvas,
+  D3Selection,
   Dimensions,
   EventBus,
-  State,
   Point,
   Position,
-  D3Selection,
-  SeriesEl,
+  State,
   StateWriter,
-  Canvas,
 } from "../shared/typings"
 
 export interface SunburstConfig extends Config {
@@ -53,6 +51,7 @@ export interface Datum extends HierarchyRectangularNode<RawData> {
   color?: string
   name?: string
   zoomable?: boolean
+  hops?: boolean
   parent: Datum | null
 }
 

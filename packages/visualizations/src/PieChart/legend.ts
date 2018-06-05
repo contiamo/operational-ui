@@ -7,11 +7,11 @@ import { withD3Element } from "../utils/d3_utils"
 import { roundedUpHeight, widthPadding, heightMargin, totalWidth } from "../utils/legend_utils"
 import {
   ComponentConfigInfo,
+  ComponentHoverPayload,
   D3Selection,
   EventBus,
   Legend,
   LegendDatum,
-  PieChartConfig,
   State,
   StateWriter,
 } from "./typings"
@@ -36,9 +36,7 @@ class PieChartLegend implements Legend {
       return
     }
 
-    const legends: D3Selection = this.legend
-      .selectAll(`div.${globalStyles.seriesLegend}`)
-      .data(this.data(), get("label"))
+    const legends = this.legend.selectAll(`div.${globalStyles.seriesLegend}`).data(this.data(), get("label"))
 
     legends.exit().remove()
 
@@ -49,16 +47,16 @@ class PieChartLegend implements Legend {
       .style("float", "left")
       .on("mouseenter", withD3Element(this.onComponentHover.bind(this)))
       .each(
-        withD3Element((d: LegendDatum, el: HTMLElement): void => {
-          const element: D3Selection = d3.select(el)
+        withD3Element((d: LegendDatum, el: HTMLElement) => {
+          const element = d3.select(el)
           element.append("div").attr("class", "color")
           element.append("div").attr("class", "name")
         })
       )
       .merge(legends)
       .each(
-        withD3Element((d: LegendDatum, el: HTMLElement): void => {
-          const element: D3Selection = d3.select(el)
+        withD3Element((d: LegendDatum, el: HTMLElement) => {
+          const element = d3.select(el)
           element.select("div.color").style("background-color", get("color"))
           element.select("div.name").html(get("label"))
         })
@@ -71,15 +69,13 @@ class PieChartLegend implements Legend {
 
   private updateComparisonLegend(): void {
     // Only needed for gauges, if comparison value is given.
-    const data: LegendDatum[] = filter((d: LegendDatum): boolean => d.comparison)(
-      this.state.current.get("computed").series.dataForLegend
-    )
+    const data = filter((d: LegendDatum) => d.comparison)(this.state.current.get("computed").series.dataForLegend)
 
-    const legends: D3Selection = this.legend.selectAll(`div.comparison`).data(data)
+    const legends = this.legend.selectAll(`div.comparison`).data(data)
 
     legends.exit().remove()
 
-    const enter: D3Selection = legends
+    const enter = legends
       .enter()
       .append("div")
       .attr("class", `comparison ${localStyles.comparisonLegend}`)
@@ -92,15 +88,16 @@ class PieChartLegend implements Legend {
     enter
       .merge(legends)
       .select("div.name")
-      .html((d: LegendDatum): string => d.label)
+      .html((d: LegendDatum) => d.label)
   }
 
   private data(): LegendDatum[] {
-    return filter((d: LegendDatum): boolean => !d.comparison)(this.state.current.get("computed").series.dataForLegend)
+    return filter((d: LegendDatum) => !d.comparison)(this.state.current.get("computed").series.dataForLegend)
   }
 
   private onComponentHover(d: LegendDatum, el: HTMLElement): void {
-    this.events.emit(Events.FOCUS.COMPONENT.HOVER, { component: d3.select(el), options: this.currentOptions(d) })
+    const payload: ComponentHoverPayload = { component: d3.select(el), options: this.currentOptions(d) }
+    this.events.emit(Events.FOCUS.COMPONENT.HOVER, payload)
   }
 
   private currentOptions(datum: LegendDatum): ComponentConfigInfo {
@@ -117,10 +114,10 @@ class PieChartLegend implements Legend {
   }
 
   private updateDimensions(): void {
-    const legendNode: Element = this.legend.node()
-    const config: PieChartConfig = this.state.current.get("config")
-    const h: number = config.height
-    const lh: number = roundedUpHeight(legendNode) + heightMargin(legendNode)
+    const legendNode = this.legend.node()
+    const config = this.state.current.get("config")
+    const h = config.height
+    const lh = roundedUpHeight(legendNode) + heightMargin(legendNode)
 
     // Legend is higher than legend ratio or chart is smaller than chart min
     if (lh / h > config.maxLegendRatio || h - lh < config.minChartWithLegend) {

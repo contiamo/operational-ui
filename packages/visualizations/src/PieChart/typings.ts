@@ -8,14 +8,13 @@ export {
   Accessors,
   Canvas,
   ComponentConfigInfo,
+  ComponentHoverPayload,
   D3Selection,
-  D3Transition,
   Dimensions,
   EventBus,
   Legend,
   Point,
   Position,
-  SeriesEl,
   State,
   StateWriter,
 } from "../shared/typings"
@@ -120,10 +119,10 @@ export interface ComputedInitial {
 export interface ComputedArcs {
   arc: Arc<any, any>
   arcOver: Arc<any, any>
-  rInner: number
-  rInnerHover: number
-  r: number
-  rHover: number
+  rInner: any
+  rInnerHover: any
+  r: any
+  rHover: any
 }
 
 export type ComputedDatum = PieArcDatum<Datum>

@@ -1,13 +1,13 @@
 import Events from "../shared/event_catalog"
 import * as d3 from "d3-selection"
-import { Canvas, D3Selection, Dimensions, EventBus, SeriesEl, State, StateWriter, SunburstConfig } from "./typings"
+import { Canvas, D3Selection, Dimensions, EventBus, State, StateWriter, SunburstConfig } from "./typings"
 import * as styles from "../shared/styles"
 import * as localStyles from "./styles"
 
 class SunburstCanvas implements Canvas {
   private breadcrumb: D3Selection
   private chartContainer: D3Selection
-  private el: SeriesEl
+  private el: D3Selection
   private elMap: { [key: string]: D3Selection } = {}
   private events: EventBus
   private rootLabel: D3Selection
@@ -41,14 +41,14 @@ class SunburstCanvas implements Canvas {
   }
 
   // El
-  private renderEl(): SeriesEl {
+  private renderEl(): D3Selection {
     const elNode: Element = document.createElementNS(d3.namespaces["svg"], "svg")
     elNode.addEventListener("mouseenter", this.onMouseEnter.bind(this))
     elNode.addEventListener("mouseleave", this.onMouseLeave.bind(this))
     elNode.addEventListener("click", this.onClick.bind(this))
     this.chartContainer.node().appendChild(elNode)
 
-    const el: SeriesEl = d3.select(elNode)
+    const el: D3Selection = d3.select(elNode)
     el.append("svg:g").attr("class", "arcs")
     el.append("svg:g").attr("class", "arrows")
     el.append("circle").attr("class", localStyles.centerCircle)

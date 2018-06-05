@@ -94,15 +94,15 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
 
   draw(): void {
     this.setAxisScales()
-    const data: Datum[] = filter(this.validate.bind(this))(this.data)
-    const duration: number = this.state.current.get("config").duration
+    const data = filter(this.validate.bind(this))(this.data)
+    const duration = this.state.current.get("config").duration
 
     const symbols = this.el.selectAll("path").data(data)
 
     symbols
       .enter()
       .append("svg:path")
-      .attr("d", (d: Datum): string =>
+      .attr("d", (d: Datum) =>
         d3Symbol()
           .type(this.symbol(d).symbol)
           .size(1)()
@@ -116,7 +116,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .attr("stroke", this.stroke.bind(this))
       .transition()
       .duration(duration)
-      .attr("d", (d: Datum): string =>
+      .attr("d", (d: Datum) =>
         d3Symbol()
           .type(this.symbol(d).symbol)
           .size(this.size(d))()
@@ -127,7 +127,7 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
       .exit()
       .transition()
       .duration(duration)
-      .attr("d", (d: Datum): string =>
+      .attr("d", (d: Datum) =>
         d3Symbol()
           .type(this.symbol(d).symbol)
           .size(1)()
@@ -139,8 +139,8 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     this.el.remove()
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map((this as any)[axis])(this.data)
+  dataForAxis(axis: "x" | "y") {
+    const data = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)
@@ -156,13 +156,13 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   }
 
   private assignAccessors(customAccessors: Partial<SymbolRendererAccessors>): void {
-    const accessors: SymbolRendererAccessors = defaults(defaultAccessors)(customAccessors)
+    const accessors = defaults(defaultAccessors)(customAccessors)
     this.x = (d: Datum): any => this.series.x(d) || d.injectedX
     this.y = (d: Datum): any => this.series.y(d) || d.injectedY
-    this.fill = (d: Datum): string => accessors.fill(this.series, d)
-    this.stroke = (d: Datum): string => accessors.stroke(this.series, d)
-    this.symbol = (d: Datum): any => symbolOptions[accessors.symbol(this.series, d)]
-    this.size = (d: Datum): number => accessors.size(this.series, d)
+    this.fill = (d: Datum) => accessors.fill(this.series, d)
+    this.stroke = (d: Datum) => accessors.stroke(this.series, d)
+    this.symbol = (d: Datum) => symbolOptions[accessors.symbol(this.series, d)]
+    this.size = (d: Datum) => accessors.size(this.series, d)
   }
 
   private setAxisScales(): void {
@@ -172,14 +172,14 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   }
 
   private transform(d: Datum): string {
-    const x: number = this.xScale(d.x1 || this.x(d))
-    const y: number = this.yScale(d.y1 || this.y(d))
+    const x = this.xScale(d.x1 || this.x(d))
+    const y = this.yScale(d.y1 || this.y(d))
     return `translate(${x}, ${y}) rotate(${this.symbol(d).rotation || 0})`
   }
 
   private startTransform(d: Datum): string {
-    const x: number = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0)
-    const y: number = this.yScale(this.xIsBaseline ? 0 : d.y1 || this.y(d))
+    const x = this.xScale(this.xIsBaseline ? d.x1 || this.x(d) : 0)
+    const y = this.yScale(this.xIsBaseline ? 0 : d.y1 || this.y(d))
     return `translate(${x}, ${y})`
   }
 

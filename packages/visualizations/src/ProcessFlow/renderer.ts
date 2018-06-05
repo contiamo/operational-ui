@@ -1,8 +1,8 @@
 import Nodes from "./renderers/nodes"
 import Links from "./renderers/links"
-import { Data, EventBus, FocusElement, SeriesEl, State, TLink } from "./typings"
+import { D3Selection, Data, EventBus, FocusElement, State, TLink } from "./typings"
 import Events from "../shared/event_catalog"
-import { forEach, initial, reduce, tail, zip } from "lodash/fp"
+import { forEach, initial, tail, zip } from "lodash/fp"
 import * as styles from "./renderers/styles"
 import { withD3Element } from "../utils/d3_utils"
 import * as d3 from "d3-selection"
@@ -11,10 +11,10 @@ class Renderer {
   private links: Links
   private nodes: Nodes
   private state: State
-  private el: SeriesEl
+  private el: D3Selection
   private events: EventBus
 
-  constructor(state: State, events: EventBus, el: SeriesEl) {
+  constructor(state: State, events: EventBus, el: D3Selection) {
     this.events = events
     this.el = el
     this.links = new Links(state, events, el)
@@ -44,15 +44,15 @@ class Renderer {
   private highlightPath(focusElement: FocusElement): void {
     this.events.emit(Events.FOCUS.ELEMENT.OUT)
 
-    const path: string[] = focusElement.matchers.path
-    const links: [string, string][] = zip(initial(path))(tail(path))
+    const path = focusElement.matchers.path
+    const links = zip(initial(path))(tail(path))
 
-    forEach((link: [string, string]): void => {
+    forEach((link: [string, string]) => {
       this.el
         .selectAll(`path.link.${styles.element}`)
-        .filter((d: TLink): boolean => d.sourceId() === link[0] && d.targetId() === link[1])
+        .filter((d: TLink) => d.sourceId() === link[0] && d.targetId() === link[1])
         .each(
-          withD3Element((d: TLink, el: HTMLElement): void => {
+          withD3Element((d: TLink, el: HTMLElement) => {
             this.links.highlight(d3.select(el), d, true)
           })
         )

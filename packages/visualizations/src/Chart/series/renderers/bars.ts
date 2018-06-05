@@ -1,12 +1,9 @@
-import { clone, compact, defaults, filter, get, includes, isFinite, last, map, sortBy } from "lodash/fp"
+import { clone, compact, defaults, filter, get, isFinite, last, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import { withD3Element, setRectAttributes } from "../../../utils/d3_utils"
 import { area as d3Area, curveStepAfter } from "d3-shape"
 import {
-  AxesData,
-  AxisType,
-  AxisPosition,
   BarsRendererAccessors,
   D3Selection,
   Datum,
@@ -67,15 +64,15 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.setAxisScales()
     this.updateClipPath()
 
-    const data: Datum[] = filter(this.validate.bind(this))(this.data)
-    const duration: number = this.state.current.get("config").duration
+    const data = filter(this.validate.bind(this))(this.data)
+    const duration = this.state.current.get("config").duration
     this.el
       .transition()
       .duration(!!this.el.attr("transform") ? duration : 0)
       .attr("transform", this.seriesTranslation())
 
-    const attributes: { [key: string]: any } = this.attributes()
-    const startAttributes: { [key: string]: any } = this.startAttributes(attributes)
+    const attributes = this.attributes()
+    const startAttributes = this.startAttributes(attributes)
 
     const bars = this.el.selectAll("rect").data(data)
 
@@ -102,8 +99,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.el.remove()
   }
 
-  dataForAxis(axis: "x" | "y"): any[] {
-    const data: any[] = map((this as any)[axis])(this.data)
+  dataForAxis(axis: "x" | "y") {
+    const data = map((this as any)[axis])(this.data)
       .concat(map(get(`${axis}0`))(this.data))
       .concat(map(get(`${axis}1`))(this.data))
     return compact(data)
@@ -118,25 +115,25 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.xIsBaseline = this.state.current.get("computed").axes.baseline === "x"
     this.xScale = this.state.current.get(["computed", "axes", "computed", this.series.xAxis(), "scale"])
     this.yScale = this.state.current.get(["computed", "axes", "computed", this.series.yAxis(), "scale"])
-    this.x0 = (d: Datum): any => {
+    this.x0 = (d: Datum) => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(
         this.xIsBaseline ? this.x(d) : Math.min(d.x0, d.x1) || (this.x(d) > baseline ? baseline : this.x(d))
       )
     }
-    this.x1 = (d: Datum): any => {
+    this.x1 = (d: Datum) => {
       const baseline = this.isRange ? this.xScale.domain()[0] : 0
       return this.xScale(
         this.xIsBaseline ? this.x(d) : Math.max(d.x0, d.x1) || (this.x(d) > baseline ? this.x(d) : baseline)
       )
     }
-    this.y0 = (d: Datum): any => {
+    this.y0 = (d: Datum) => {
       const baseline = this.isRange ? this.yScale.domain()[0] : 0
       return this.yScale(
         this.xIsBaseline ? Math.min(d.y0, d.y1) || (this.y(d) > baseline ? baseline : this.y(d)) : this.y(d)
       )
     }
-    this.y1 = (d: Datum): any => {
+    this.y1 = (d: Datum) => {
       const baseline = this.isRange ? this.yScale.domain()[0] : 0
       return this.yScale(
         this.xIsBaseline ? Math.max(d.y0, d.y1) || (this.y(d) > baseline ? this.y(d) : baseline) : this.y(d)
@@ -150,23 +147,18 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private assignAccessors(customAccessors: Partial<BarsRendererAccessors>): void {
     const accessors: BarsRendererAccessors = defaults(defaultAccessors)(customAccessors)
-    this.x = (d: Datum): any => this.series.x(d) || d.injectedX
-    this.y = (d: Datum): any => this.series.y(d) || d.injectedY
-    this.color = (d?: Datum): string => accessors.color(this.series, d)
-    this.barWidth = (d?: Datum): number => accessors.barWidth(this.series, d)
+    this.x = (d: Datum) => this.series.x(d) || d.injectedX
+    this.y = (d: Datum) => this.series.y(d) || d.injectedY
+    this.color = (d?: Datum) => accessors.color(this.series, d)
+    this.barWidth = (d?: Datum) => accessors.barWidth(this.series, d)
   }
 
   private seriesTranslation(): string {
-    const seriesBars: { [key: string]: any } = this.state.current.get([
-      "computed",
-      "axes",
-      "computedBars",
-      this.series.key(),
-    ])
+    const seriesBars = this.state.current.get(["computed", "axes", "computedBars", this.series.key()])
     return this.xIsBaseline ? `translate(${seriesBars.offset}, 0)` : `translate(0, ${seriesBars.offset})`
   }
 
-  private startAttributes(attributes: { [key: string]: any }): { [key: string]: any } {
+  private startAttributes(attributes: any) {
     return {
       x: this.xIsBaseline ? this.x0 : this.xScale(0),
       y: this.xIsBaseline ? this.yScale(0) : this.y0,
@@ -176,19 +168,19 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     }
   }
 
-  private attributes(): { [key: string]: any } {
-    const barWidth: number = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "width"])
+  private attributes() {
+    const barWidth = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "width"])
     return {
       x: this.x0,
       y: this.y1,
-      width: this.xIsBaseline ? barWidth : (d: Datum): number => this.x1(d) - this.x0(d),
-      height: this.xIsBaseline ? (d: Datum): number => this.y0(d) - this.y1(d) : barWidth,
+      width: this.xIsBaseline ? barWidth : (d: Datum) => this.x1(d) - this.x0(d),
+      height: this.xIsBaseline ? (d: Datum) => this.y0(d) - this.y1(d) : barWidth,
       color: this.color.bind(this),
     }
   }
 
   private onMouseOver(d: Datum, el: HTMLElement): void {
-    const isNegative: boolean = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
+    const isNegative = this.xIsBaseline ? this.y(d) < 0 : this.x(d) < 0
     const dimensions = el.getBoundingClientRect()
     const barOffset = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "offset"])
 
@@ -220,9 +212,9 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     if (!this.isRange) {
       return
     }
-    const duration: number = this.state.current.get("config").duration
-    const mainData: Datum[] = sortBy((d: Datum): any => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
-    let data: Datum[] = this.series.options.clipData
+    const duration = this.state.current.get("config").duration
+    const mainData = sortBy((d: Datum) => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
+    let data = this.series.options.clipData
 
     // The curveStepAfter interpolation does not account for the width of the bars.
     // A dummy point is added to the data to prevent the clip-path from cutting off the last point.
@@ -246,7 +238,7 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   }
 
   private clipPath(data: any[]): string {
-    const barWidth: number = this.state.current.get("computed").axes.computedBars[this.series.key()].width
+    const barWidth = this.state.current.get("computed").axes.computedBars[this.series.key()].width
     return d3Area()
       .x0(this.xIsBaseline ? (d: Datum) => this.x0(d) || this.xScale.range()[1] + barWidth : this.xScale.range()[1])
       .x1((d: Datum) => this.x1(d) || this.xScale.range()[1] + barWidth)

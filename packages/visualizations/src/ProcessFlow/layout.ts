@@ -20,11 +20,11 @@ class Layout {
   private computeNodeYPositions(): void {
     let nextNodes: TNode[]
     let i: number = 0
-    const assignNextNodes = (nodes: TNode[]): void => {
+    const assignNextNodes = (nodes: TNode[]) => {
       nextNodes = []
-      forEach((node: TNode): void => {
+      forEach((node: TNode) => {
         node.y = i
-        forEach((link: TLink): void => {
+        forEach((link: TLink) => {
           if (indexOf(link.target())(nextNodes) < 0) {
             nextNodes.push(link.target())
           }
@@ -44,9 +44,9 @@ class Layout {
   }
 
   private placeMultipleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
-    const multipleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length > 1)(nodesInRow)
-    forEach((node: TNode): void => {
-      const sourcePositions: number[] = map((link: TLink): number => link.source().x)(node.targetLinks)
+    const multipleSourceNodes = filter((node: TNode) => node.targetLinks.length > 1)(nodesInRow)
+    forEach((node: TNode) => {
+      const sourcePositions = map((link: TLink) => link.source().x)(node.targetLinks)
       // A node should be placed directly under a source node if possible:
       // Calculate possible node x positions that satisfy the following conditions
       const possiblePositions = flow(
@@ -58,11 +58,8 @@ class Layout {
         filter(xPositionAvailable(nodePositions))
       )(sourcePositions)
 
-      const calculated: { xPosition: number; newColumn: boolean } = calculateXPosition(
-        sourcePositions,
-        possiblePositions
-      )
-      if (calculated.newColumn) {
+      const calculated = calculateXPosition(sourcePositions, possiblePositions)
+      if (calculated.isNewColumn) {
         shiftNodesToRight(calculated.xPosition)(this.nodes)
       }
       node.x = calculated.xPosition
@@ -71,13 +68,13 @@ class Layout {
   }
 
   private computeNodeXPositions(): void {
-    const rows: number[] = flow(map(get("y")), sortBy(identity), uniq)(this.nodes)
+    const rows = flow(map(get("y")), sortBy(identity), uniq)(this.nodes)
 
-    forEach((row: number): void => {
-      const nodesInRow: TNode[] = filter({ y: row })(this.nodes)
+    forEach((row: number) => {
+      const nodesInRow = filter({ y: row })(this.nodes)
       if (row === 0) {
         // For the top row, spread nodes out equally
-        forEach.convert({ cap: false })((node: TNode, i: number): void => {
+        forEach.convert({ cap: false })((node: TNode, i: number) => {
           node.x = i + 1
         })(nodesInRow)
       } else {
@@ -103,27 +100,27 @@ function placeNode(used: number[], x: number, node: TNode): void {
 }
 
 function placeSingleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
-  const singleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length === 1)(nodesInRow)
-  forEach((node: TNode): void => {
-    const sourceNodePosition: number = node.targetLinks[0].source().x
+  const singleSourceNodes = filter((node: TNode): boolean => node.targetLinks.length === 1)(nodesInRow)
+  forEach((node: TNode) => {
+    const sourceNodePosition = node.targetLinks[0].source().x
     placeNode(nodePositions, sourceNodePosition, node)
   })(singleSourceNodes)
 }
 
 function singleSourceAbove(sourcePositions: number[]) {
-  function sourceNodesAbove(x: number): any {
-    return filter((position: number): boolean => position === x)(sourcePositions)
+  function sourceNodesAbove(x: number) {
+    return filter((position: number) => position === x)(sourcePositions)
   }
-  return (x: number): boolean => sourceNodesAbove(x).length === 1
+  return (x: number) => sourceNodesAbove(x).length === 1
 }
 
 // Check that there isn't a non-source node vertically between 2 linked nodes.
 function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
-  return (xValue: number): boolean => {
+  return (xValue: number) => {
     const findSourceNodeAtX = find((link: TLink): boolean => link.source().x === xValue)
-    const maxYVal: any = flow(
+    const maxYVal = flow(
       filter({ x: xValue }),
-      reduce((max: number, n: TNode): number => {
+      reduce((max: number, n: TNode) => {
         return Math.max(max, n.y)
       }, 0)
     )(nodes)
@@ -132,39 +129,36 @@ function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
 }
 
 function xPositionAvailable(nodePositions: number[]) {
-  return (x: number): boolean => indexOf(x)(nodePositions) === -1
+  return (x: number) => indexOf(x)(nodePositions) === -1
 }
 
 // Shift all nodes that have an x-value >= the given value to the right by one place
 function shiftNodesToRight(x: number) {
   return flow(
-    filter((n: TNode): boolean => n.x >= x),
-    forEach((n: TNode): void => {
+    filter((n: TNode) => n.x >= x),
+    forEach((n: TNode) => {
       n.x += 1
     })
   )
 }
 
 // The mean source node position is calculated as a starting point for positioning the node
-function calculateXPosition(
-  sourcePositions: number[],
-  possiblePositions: number[]
-): { xPosition: number; newColumn: boolean } {
-  let newColumn: boolean = false
-  const sourcePositionsSum: number = reduce((sum: number, val: number): number => {
+function calculateXPosition(sourcePositions: number[], possiblePositions: number[]) {
+  let isNewColumn = false
+  const sourcePositionsSum = reduce((sum: number, val: number) => {
     return sum + val
   }, 0)(sourcePositions)
-  const meanSourcePosition: number = sourcePositionsSum / sourcePositions.length
+  const meanSourcePosition = sourcePositionsSum / sourcePositions.length
   let xPosition: number
   if (possiblePositions.length > 0) {
-    const sortedPossibilities = sortBy((x: number): number => Math.abs(x - meanSourcePosition))(possiblePositions)
+    const sortedPossibilities = sortBy((x: number) => Math.abs(x - meanSourcePosition))(possiblePositions)
     xPosition = sortedPossibilities[0]
   } else {
     xPosition = Math.round(meanSourcePosition)
     // Shift nodes to the right by one place to make space for new node column
-    newColumn = true
+    isNewColumn = true
   }
-  return { xPosition, newColumn }
+  return { xPosition, isNewColumn }
 }
 
 export default Layout
