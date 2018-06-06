@@ -1,6 +1,6 @@
 import { setLineAttributes, setRectAttributes } from "../../utils/d3_utils"
 import { Selection } from "d3-selection"
-import { AxisClass, AxisPosition, Dimensions, D3Selection } from "../typings"
+import { AxisClass, AxisPosition, Dimensions, D3Selection, AxisComputed } from "../typings"
 import { flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
 import * as moment from "moment"
@@ -22,7 +22,7 @@ export const insertElements = (
   el: D3Selection,
   type: string,
   position: AxisPosition,
-  drawingDims: Dimensions
+  drawingDims: Dimensions,
 ): D3Selection => {
   const axisGroup = el
     .append("svg:g")

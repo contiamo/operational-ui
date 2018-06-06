@@ -21,18 +21,22 @@ export const colorAssigner = (palette: string[]) => {
       return memo
     }, {})
 
-    usedColors.forEach((color: string): void => {
-      usageCount[color] += 1
-    })
+    usedColors.forEach(
+      (color: string): void => {
+        usageCount[color] += 1
+      },
+    )
 
     const min: number = palette.reduce((memo: number, color: string): number => {
       return memo ? Math.min(memo, usageCount[color]) : usageCount[color]
     }, undefined)
 
     // Find a color with the minimum usage count
-    return palette.find((color: string): boolean => {
-      return usageCount[color] === min
-    })
+    return palette.find(
+      (color: string): boolean => {
+        return usageCount[color] === min
+      },
+    )
   }
 
   const assignColor = (key: string): string => {

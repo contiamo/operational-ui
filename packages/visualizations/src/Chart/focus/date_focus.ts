@@ -1,4 +1,4 @@
-import { D3Selection, EventBus, State, MousePosition, AxisPosition } from "../typings"
+import { D3Selection, EventBus, State, MousePosition, AxisPosition, AxisComputed } from "../typings"
 import Events from "../../shared/event_catalog"
 import { includes, filter, find, forEach, get, groupBy, isFinite, map, partition, reduce, sortBy } from "lodash/fp"
 import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"

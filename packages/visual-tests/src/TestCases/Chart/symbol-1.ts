@@ -111,7 +111,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         fill: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         opacity: (series: any, d: any) => (d.y % 2 === 1 ? 0.4 : 0.6),
-      })
+      }),
     )
     viz.draw()
   })

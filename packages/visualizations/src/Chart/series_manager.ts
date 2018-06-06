@@ -31,6 +31,7 @@ import {
   SeriesManager,
   State,
   StateWriter,
+  Datum,
 } from "./typings"
 
 class ChartSeriesManager implements SeriesManager {

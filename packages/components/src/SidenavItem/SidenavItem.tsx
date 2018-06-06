@@ -50,19 +50,23 @@ const Container = glamorous.div(containerStyles)
 
 const ContainerLink = glamorous.a(containerStyles)
 
-const IconContainer = glamorous.span(({ theme }: WithTheme): CssStatic => ({
-  width: size,
-  height: size,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flex: `0 0 ${size}px`,
-}))
+const IconContainer = glamorous.span(
+  ({ theme }: WithTheme): CssStatic => ({
+    width: size,
+    height: size,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: `0 0 ${size}px`,
+  }),
+)
 
-const Label = glamorous.span(({ theme }: { theme: Theme }): {} => ({
-  display: "inline-block",
-  paddingLeft: theme.spacing / 4,
-}))
+const Label = glamorous.span(
+  ({ theme }: { theme: Theme }): {} => ({
+    display: "inline-block",
+    paddingLeft: theme.spacing / 4,
+  }),
+)
 
 const SidenavItem = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container

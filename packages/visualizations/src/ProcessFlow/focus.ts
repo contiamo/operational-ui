@@ -96,7 +96,7 @@ class ProcessFlowFocus implements Focus {
     )(content)
   }
 
-  private addNodeBreakdowns(content: SeriesEl, datum: TNode): void {
+  private addNodeBreakdowns(content: D3Selection, datum: TNode): void {
     const breakdowns: Breakdowns = computeBreakdowns(datum),
       container: D3Selection = content.append("div").attr("class", styles.breakdownsContainer),
       inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),

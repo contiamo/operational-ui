@@ -38,6 +38,7 @@ import {
   EventBus,
   State,
   StateWriter,
+  ComponentHoverPayload,
 } from "../typings"
 
 class CategoricalAxis implements AxisClass<string> {

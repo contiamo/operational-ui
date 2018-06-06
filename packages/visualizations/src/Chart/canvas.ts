@@ -190,17 +190,21 @@ class ChartCanvas implements Canvas {
   }
 
   private renderAxes(): void {
-    forEach((axis: string): void => {
-      const axesGroup = this.drawingGroup.append("svg:g").attr("class", `${axis}-axes-group`)
-      this.elMap[`${axis}Axes`] = axesGroup
-    })(axes)
+    forEach(
+      (axis: string): void => {
+        const axesGroup = this.drawingGroup.append("svg:g").attr("class", `${axis}-axes-group`)
+        this.elMap[`${axis}Axes`] = axesGroup
+      },
+    )(axes)
   }
 
   private renderRules(): void {
-    forEach((axis: string): void => {
-      const rulesGroup = this.drawingGroup.append("svg:g").attr("class", `${axis}-rules-group`)
-      this.elMap[`${axis}Rules`] = rulesGroup
-    })(axes)
+    forEach(
+      (axis: string): void => {
+        const rulesGroup = this.drawingGroup.append("svg:g").attr("class", `${axis}-rules-group`)
+        this.elMap[`${axis}Rules`] = rulesGroup
+      },
+    )(axes)
   }
 
   private renderSeriesDrawingGroups(): void {

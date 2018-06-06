@@ -28,54 +28,60 @@ export interface Props {
   icon?: IconName | React.ReactNode
 }
 
-const Container = glamorous.div(({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): {} => {
-  const backgroundColor = expandColor(theme, color) || theme.colors.info
-  const border = isWhite(backgroundColor) ? `1px solid ${theme.colors.lightGray}` : "0"
+const Container = glamorous.div(
+  ({ theme, color, hasChip }: { theme: Theme; color?: string; hasChip: boolean }): {} => {
+    const backgroundColor = expandColor(theme, color) || theme.colors.info
+    const border = isWhite(backgroundColor) ? `1px solid ${theme.colors.lightGray}` : "0"
 
-  return {
-    backgroundColor,
-    border,
-    label: "chip",
-    position: "relative",
-    height: theme.spacing * 1.5,
-    display: "inline-flex",
-    alignItems: "center",
-    boxSizing: "border-box",
-    width: "fit-content",
-    borderRadius: 2,
-    cursor: "pointer",
-    overflow: "hidden",
-    color: readableTextColor(backgroundColor, ["black", "white"]),
-    margin: `0px ${theme.spacing / 2}px 0px 0px`,
-  }
-})
-
-const Content = glamorous.div(({ theme }: WithTheme): {} => ({
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  padding: `0px ${theme.spacing / 2}px`,
-  "&:hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    return {
+      backgroundColor,
+      border,
+      label: "chip",
+      position: "relative",
+      height: theme.spacing * 1.5,
+      display: "inline-flex",
+      alignItems: "center",
+      boxSizing: "border-box",
+      width: "fit-content",
+      borderRadius: 2,
+      cursor: "pointer",
+      overflow: "hidden",
+      color: readableTextColor(backgroundColor, ["black", "white"]),
+      margin: `0px ${theme.spacing / 2}px 0px 0px`,
+    }
   },
-}))
+)
 
-const Action = glamorous.div(({ theme, color }: { theme: Theme; color?: string }): {} => {
-  const backgroundColor = expandColor(theme, color) || theme.colors.info
-  const borderColor = isWhite(backgroundColor) ? theme.colors.lightGray : "rgba(255, 255, 255, 0.15)"
-  return {
-    borderLeft: `1px solid ${borderColor}`,
-    color: readableTextColor(backgroundColor, ["black", "white"]),
-    width: theme.spacing * 1.5,
+const Content = glamorous.div(
+  ({ theme }: WithTheme): {} => ({
+    height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
+    padding: `0px ${theme.spacing / 2}px`,
     "&:hover": {
       backgroundColor: "rgba(0, 0, 0, 0.1)",
     },
-  }
-})
+  }),
+)
+
+const Action = glamorous.div(
+  ({ theme, color }: { theme: Theme; color?: string }): {} => {
+    const backgroundColor = expandColor(theme, color) || theme.colors.info
+    const borderColor = isWhite(backgroundColor) ? theme.colors.lightGray : "rgba(255, 255, 255, 0.15)"
+    return {
+      borderLeft: `1px solid ${borderColor}`,
+      color: readableTextColor(backgroundColor, ["black", "white"]),
+      width: theme.spacing * 1.5,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100%",
+      "&:hover": {
+        backgroundColor: "rgba(0, 0, 0, 0.1)",
+      },
+    }
+  },
+)
 
 const Chip = (props: Props) => (
   <Container id={props.id} className={props.className} css={props.css} color={props.color} hasChip={!!props.onClick}>

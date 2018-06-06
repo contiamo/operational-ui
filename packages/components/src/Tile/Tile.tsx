@@ -15,24 +15,30 @@ export interface Props {
   children: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  label: "infotile",
-  borderRadius: theme.borderRadius,
-  width: 120,
-  position: "relative",
-  marginRight: theme.spacing,
-  padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-  backgroundColor: theme.colors.lighterBackground,
-}))
+const Container = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    label: "infotile",
+    borderRadius: theme.borderRadius,
+    width: 120,
+    position: "relative",
+    marginRight: theme.spacing,
+    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+    backgroundColor: theme.colors.lighterBackground,
+  }),
+)
 
-const Content = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.heading1,
-}))
+const Content = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    ...theme.typography.heading1,
+  }),
+)
 
-const Label = glamorous.small(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.small,
-  opacity: 0.8,
-}))
+const Label = glamorous.small(
+  ({ theme }: WithTheme): CssStatic => ({
+    ...theme.typography.small,
+    opacity: 0.8,
+  }),
+)
 
 const Tile = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className}>

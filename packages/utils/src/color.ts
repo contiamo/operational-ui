@@ -36,10 +36,10 @@ export const getBrightness = (color: string): number => {
 export const setBrightness = (color: string, targetBrightness: number): string => {
   const c = colorCalculator(color)
   const brightness = c.getBrightness()
-  return c.brighten(targetBrightness / brightness * 100 - 100).toString()
+  return c.brighten((targetBrightness / brightness) * 100 - 100).toString()
 }
 
 export const transparentize = (color: string) => (percentage: number): string =>
   (({ r, g, b }) => {
-    return `rgba(${r}, ${g}, ${b}, ${255 * (100 - percentage) / 100})`
+    return `rgba(${r}, ${g}, ${b}, ${(255 * (100 - percentage)) / 100})`
   })(colorCalculator(color).toRgb())

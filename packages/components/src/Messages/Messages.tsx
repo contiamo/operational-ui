@@ -11,18 +11,20 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  label: "Messages",
-  position: "fixed",
-  zIndex: theme.baseZIndex + 500,
-  bottom: 2 * theme.spacing,
-  right: 2 * theme.spacing,
-  "& > *": {
-    width: 400,
-    height: "auto",
-    marginTop: theme.spacing / 2,
-  },
-}))
+const Container = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    label: "Messages",
+    position: "fixed",
+    zIndex: theme.baseZIndex + 500,
+    bottom: 2 * theme.spacing,
+    right: 2 * theme.spacing,
+    "& > *": {
+      width: 400,
+      height: "auto",
+      marginTop: theme.spacing / 2,
+    },
+  }),
+)
 
 const Messages = (props: Props) => (
   <Container css={props.css} className={props.className}>

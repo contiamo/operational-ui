@@ -13,15 +13,17 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  label: "card",
-  padding: theme.spacing,
-  boxShadow: theme.shadows.card,
-  backgroundColor: theme.colors.white,
-  "& > img": {
-    maxWidth: "100%",
-  },
-}))
+const Container = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    label: "card",
+    padding: theme.spacing,
+    boxShadow: theme.shadows.card,
+    backgroundColor: theme.colors.white,
+    "& > img": {
+      maxWidth: "100%",
+    },
+  }),
+)
 
 const Card = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className}>

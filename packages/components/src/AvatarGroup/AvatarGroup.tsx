@@ -12,17 +12,19 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  label: "avatar-group",
-  display: "flex",
-  "& :not(:first-child)": {
-    marginLeft: theme.spacing * -1,
-    "& > .opui_avatar-picture": { boxShadow: "-1px 0 0 1px white" },
-  },
-  "& .opui_name-container": {
-    display: "none",
-  },
-}))
+const Container = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    label: "avatar-group",
+    display: "flex",
+    "& :not(:first-child)": {
+      marginLeft: theme.spacing * -1,
+      "& > .opui_avatar-picture": { boxShadow: "-1px 0 0 1px white" },
+    },
+    "& .opui_name-container": {
+      display: "none",
+    },
+  }),
+)
 
 const AvatarGroup = (props: Props) => (
   <Container css={props.css} className={props.className}>

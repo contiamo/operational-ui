@@ -63,11 +63,8 @@ class Layout {
           filter(xPositionAvailable(nodePositions)),
         )(sourcePositions)
 
-        const calculated: { xPosition: number; newColumn: boolean } = calculateXPosition(
-          sourcePositions,
-          possiblePositions,
-        )
-        if (calculated.newColumn) {
+        const calculated = calculateXPosition(sourcePositions, possiblePositions)
+        if (calculated.isNewColumn) {
           shiftNodesToRight(calculated.xPosition)(this.nodes)
         }
         node.x = calculated.xPosition
@@ -167,8 +164,8 @@ function shiftNodesToRight(x: number) {
 function calculateXPosition(
   sourcePositions: number[],
   possiblePositions: number[],
-): { xPosition: number; newColumn: boolean } {
-  let newColumn: boolean = false
+): { xPosition: number; isNewColumn: boolean } {
+  let isNewColumn = false
   const sourcePositionsSum: number = reduce((sum: number, val: number): number => {
     return sum + val
   }, 0)(sourcePositions)
