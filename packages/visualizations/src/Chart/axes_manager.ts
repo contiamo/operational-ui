@@ -8,6 +8,7 @@ const xAxisConfig = {
   fontSize: 11,
   margin: 15,
   minTicks: 2,
+  rotateLabels: false,
   tickSpacing: 65,
   outerPadding: 3,
 }
@@ -17,15 +18,16 @@ const yAxisConfig = {
   margin: 34,
   minTicks: 4,
   minTopOffsetTopTick: 21,
+  rotateLabels: false,
   tickSpacing: 40,
   outerPadding: 3,
 }
 
 const axisConfig: { [key: string]: AxisConfig } = {
-  x1: assign({ tickOffset: 4 })(xAxisConfig),
-  x2: assign({ tickOffset: -4 })(xAxisConfig),
-  y1: assign({ tickOffset: -4 })(yAxisConfig),
-  y2: assign({ tickOffset: 4 })(yAxisConfig),
+  x1: assign({ tickOffset: 8 })(xAxisConfig),
+  x2: assign({ tickOffset: -8 })(xAxisConfig),
+  y1: assign({ tickOffset: -8 })(yAxisConfig),
+  y2: assign({ tickOffset: 8 })(yAxisConfig),
 }
 
 class AxesManager {

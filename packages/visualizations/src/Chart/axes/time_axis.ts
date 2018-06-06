@@ -22,7 +22,13 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
-import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
+import {
+  computeRequiredMargin,
+  insertElements,
+  positionBackgroundRect,
+  translateAxis,
+  getTextAnchor,
+} from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import Events from "../../shared/event_catalog"
 import * as Moment from "moment"
@@ -89,6 +95,7 @@ class TimeAxis implements AxisClass<Date> {
   margin: number
   minTicks: number
   minTopOffsetTopTick: number
+  rotateLabels: boolean
   tickOffset: number
   tickSpacing: number
   outerPadding: number
@@ -267,29 +274,29 @@ class TimeAxis implements AxisClass<Date> {
   // Drawing
   draw(): void {
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
-    this.drawTicks()
+    this.drawLabels()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
   }
 
-  private drawTicks(): void {
+  private drawLabels(): void {
     const config = this.state.current.get("config")
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
-    const ticks = this.el.selectAll(`text.${styles.tick}.${styles[this.position]}`).data(this.computed.ticks, String)
+    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.ticks, String)
 
-    ticks
+    labels
       .enter()
       .append("svg:text")
       .call(setTextAttributes, startAttributes)
-      .merge(ticks)
-      .attr("class", `${styles.tick} ${styles[this.position]}`)
+      .merge(labels)
+      .attr("class", styles.label)
       // @TODO
       // .attr("class", (d: string | number, i: number): string => "tick " + this.tickClass(d, i))
       .style("font-size", `${this.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
-    ticks
+    labels
       .exit()
       .transition()
       .duration(config.duration / 2)
@@ -317,13 +324,18 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private getAttributes(): AxisAttributes {
-    return {
+    let attrs: any = {
+      x: this.isXAxis ? this.computed.scale : (d: Date) => 0,
+      y: this.isXAxis ? (d: Date) => 0 : this.computed.scale,
       dx: this.isXAxis ? 0 : this.tickOffset,
       dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : "-0.4em",
       text: this.computed.tickFormatter,
-      x: this.isXAxis ? this.computed.scale : 0,
-      y: this.isXAxis ? 0 : this.computed.scale,
+      textAnchor: getTextAnchor(this.position, this.rotateLabels),
     }
+    attrs.transform = this.rotateLabels
+      ? (d: Date) => `rotate(-45, ${attrs.x(d) + attrs.dx}, ${attrs.y(d) + attrs.dy})`
+      : ""
+    return attrs
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {

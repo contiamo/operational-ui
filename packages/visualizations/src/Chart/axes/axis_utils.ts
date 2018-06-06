@@ -176,3 +176,14 @@ export const positionBackgroundRect = (el: any, duration: number): void => {
     })
   }, duration)
 }
+
+const textAnchor = {
+  x1: (rotateLabels: boolean) => (rotateLabels ? "end" : "middle"),
+  x2: (rotateLabels: boolean) => (rotateLabels ? "start" : "middle"),
+  y1: (rotateLabels: boolean) => "end",
+  y2: (rotateLabels: boolean) => "start",
+}
+
+export const getTextAnchor = (axis: AxisPosition, isRotated: boolean): string => {
+  return textAnchor[axis](isRotated)
+}

@@ -16,21 +16,15 @@ export {
   Canvas,
 } from "../shared/typings"
 
-export interface XAxisConfig {
-  fontSize?: number
-  margin?: number
-  minTicks?: number
-  outerPadding?: number
-  showRules?: boolean
-  tickOffset?: number
-  tickSpacing?: number
-}
-
-export interface YAxisConfig extends XAxisConfig {
-  minTopOffsetTopTick?: number
-}
-
-export interface AxisConfig extends XAxisConfig {
+export interface AxisConfig {
+  fontSize: number
+  margin: number
+  minTicks: number
+  outerPadding: number
+  rotateLabels: boolean
+  showRules: boolean
+  tickOffset: number
+  tickSpacing: number
   minTopOffsetTopTick?: number
 }
 

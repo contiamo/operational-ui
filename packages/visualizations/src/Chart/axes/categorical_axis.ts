@@ -21,7 +21,13 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
-import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
+import {
+  computeRequiredMargin,
+  insertElements,
+  positionBackgroundRect,
+  translateAxis,
+  getTextAnchor,
+} from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import Events from "../../shared/event_catalog"
 import { scaleBand } from "d3-scale"
@@ -60,9 +66,10 @@ class CategoricalAxis implements AxisClass<string> {
   tickOffset: number
   tickSpacing: number
   outerPadding: number
+  rotateLabels: boolean
+  showRules: boolean = false
   sort: boolean = true
   values: string[]
-  showRules: boolean = false
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -192,28 +199,28 @@ class CategoricalAxis implements AxisClass<string> {
   // Drawing
   draw(): void {
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
-    this.drawTicks()
+    this.drawLabels()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
   }
 
-  private drawTicks(): void {
+  private drawLabels(): void {
     const config = this.state.current.get("config")
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
 
-    const ticks = this.el.selectAll(`text.${styles.tick}.${styles[this.position]}`).data(this.computed.ticks, String)
+    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.ticks, String)
 
-    ticks
+    labels
       .enter()
       .append("svg:text")
       .call(setTextAttributes, startAttributes)
-      .merge(ticks)
-      .attr("class", `${styles.tick} ${styles[this.position]}`)
+      .merge(labels)
+      .attr("class", styles.label)
       .style("font-size", `${this.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
-    ticks
+    labels
       .exit()
       .transition()
       .duration(config.duration / 2)
@@ -232,13 +239,18 @@ class CategoricalAxis implements AxisClass<string> {
 
   private getAttributes(): AxisAttributes {
     const scaleWithOffset = this.scaleWithOffset(this.computed)
-    return {
+    let attrs: any = {
+      x: this.isXAxis ? scaleWithOffset : (d: string) => 0,
+      y: this.isXAxis ? (d: string) => 0 : scaleWithOffset,
       dx: this.isXAxis ? 0 : this.tickOffset,
       dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : "-0.4em",
       text: identity,
-      x: this.isXAxis ? scaleWithOffset : 0,
-      y: this.isXAxis ? 0 : scaleWithOffset,
+      textAnchor: getTextAnchor(this.position, this.rotateLabels),
     }
+    attrs.transform = this.rotateLabels
+      ? (d: any) => `rotate(-45, ${attrs.x(d) + attrs.dx}, ${attrs.y(d) + attrs.dy})`
+      : ""
+    return attrs
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {

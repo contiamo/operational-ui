@@ -1,7 +1,13 @@
 import Events from "../../shared/event_catalog"
 import * as d3 from "d3-selection"
 import { cloneDeep, defaults, filter, find, forEach, includes, isFinite, last, rangeStep, sortBy } from "lodash/fp"
-import { computeRequiredMargin, insertElements, positionBackgroundRect, translateAxis } from "./axis_utils"
+import {
+  computeRequiredMargin,
+  insertElements,
+  positionBackgroundRect,
+  translateAxis,
+  getTextAnchor,
+} from "./axis_utils"
 import { setTextAttributes, setLineAttributes, withD3Element } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
 import * as styles from "./styles"
@@ -45,6 +51,7 @@ class QuantAxis implements AxisClass<number> {
   margin: number
   minTicks: number
   minTopOffsetTopTick: number
+  rotateLabels: boolean
   tickOffset: number
   tickSpacing: number
   outerPadding: number
@@ -155,28 +162,28 @@ class QuantAxis implements AxisClass<number> {
   // Drawing
   draw(): void {
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
-    this.drawTicks()
+    this.drawLabels()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
   }
 
-  private drawTicks(): void {
+  private drawLabels(): void {
     const config = this.state.current.get("config")
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
 
-    const ticks = this.el.selectAll(`text.${styles.tick}.${styles[this.position]}`).data(this.computed.ticks, String)
+    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.ticks, String)
 
-    ticks
+    labels
       .enter()
       .append("svg:text")
       .call(setTextAttributes, startAttributes)
-      .merge(ticks)
-      .attr("class", `${styles.tick} ${styles[this.position]}`)
+      .merge(labels)
+      .attr("class", styles.label)
       .style("font-size", `${this.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
-    ticks
+    labels
       .exit()
       .transition()
       .duration(config.duration / 2)
@@ -210,13 +217,16 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private getAttributes(): AxisAttributes {
-    return {
+    let attrs: any = {
+      x: this.isXAxis ? this.computed.scale : (d: number) => 0,
+      y: this.isXAxis ? (d: number) => 0 : this.computed.scale,
       dx: this.isXAxis ? 0 : this.tickOffset,
       dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : "-0.4em",
       text: this.tickFormatter(),
-      x: this.isXAxis ? this.computed.scale : 0,
-      y: this.isXAxis ? 0 : this.computed.scale,
+      textAnchor: getTextAnchor(this.position, this.rotateLabels),
     }
+    attrs.transform = this.rotateLabels ? (d: number) => `rotate(-45, ${attrs.x(d) + attrs.dx}, ${attrs.y(d)})` : ""
+    return attrs
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
