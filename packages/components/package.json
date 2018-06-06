@@ -11,16 +11,13 @@
     "access": "public"
   },
   "scripts": {
-    "start": "parcel scripts/dev-server/index.html --no-hmr",
-    "precommit": "lint-staged",
+    "start": "run-p docs:start test:watch",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
     "package": "rimraf lib && tsc",
     "package:watch": "tsc -d -w",
     "test": "jest",
-    "test:u": "jest -u",
-    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
-    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write"
+    "test:watch": "jest --watch"
   },
   "peerDependencies": {
     "glamor": "^2.20.40",
@@ -71,11 +68,5 @@
       "jest-enzyme"
     ],
     "mapCoverage": true
-  },
-  "lint-staged": {
-    "*.(ts|tsx)": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }

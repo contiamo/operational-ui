@@ -11,11 +11,7 @@
     "start": "parcel src/index.html",
     "build": "rimraf dist && parcel build src/index.html --public-url ./",
     "package": "npm run build",
-    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
-    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
-    "precommit": "lint-staged",
-    "test": "echo 'no tests'",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "test": "echo 'no tests'"
   },
   "dependencies": {
     "@operational/components": "^0.2.2",
@@ -26,11 +22,5 @@
     "glamorous": "^4.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
-  },
-  "lint-staged": {
-    "*.(ts|tsx)": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }

@@ -10,13 +10,8 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "rimraf dist && parcel build --no-cache ./src/index.html --public-url ./",
-    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
-    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
-    "precommit": "lint-staged",
     "test": "echo 'Tests to be added as project matures.'",
-    "test:u": "echo 'Tests to be added as project matures.'",
-    "package": "npm run build",
-    "ci": "npm run test && npm run lint && npm run prettier && npm run package"
+    "package": "npm run build"
   },
   "dependencies": {
     "@operational/blocks": "^0.1.2",
@@ -30,11 +25,5 @@
     "marked": "^0.3.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
-  },
-  "lint-staged": {
-    "*.(ts|tsx)": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }

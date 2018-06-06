@@ -14,10 +14,8 @@
     "package": "rimraf lib && tsc",
     "precommit": "lint-staged",
     "package:watch": "tsc -d -w",
-    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
-    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
     "test": "jest",
-    "test:u": "jest -u"
+    "test:watch": "jest --watch"
   },
   "jest": {
     "setupFiles": [
@@ -34,11 +32,5 @@
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
     "mapCoverage": true
-  },
-  "lint-staged": {
-    "*.(ts|tsx)": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }

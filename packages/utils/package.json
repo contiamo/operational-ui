@@ -11,13 +11,10 @@
     "access": "public"
   },
   "scripts": {
-    "precommit": "lint-staged",
     "package": "rimraf lib && tsc",
     "package:watch": "rimraf lib && tsc -w",
-    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
     "test": "jest",
-    "test:u": "jest -u",
-    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@operational/theme": "^0.2.2",
@@ -39,12 +36,6 @@
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
     "mapCoverage": true
-  },
-  "lint-staged": {
-    "*.(ts|tsx)": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "devDependencies": {
     "prettier": "^1.13.4"

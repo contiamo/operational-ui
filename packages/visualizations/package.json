@@ -13,12 +13,9 @@
   "scripts": {
     "start": "parcel scripts/dev-server/index.html",
     "test": "jest",
-    "test:u": "jest -u",
+    "test:watch": "jest --watch",
     "package": "rimraf lib && tsc",
-    "package:watch": "rimraf lib && tsc -w",
-    "precommit": "lint-staged",
-    "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
-    "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix"
+    "package:watch": "rimraf lib && tsc -w"
   },
   "dependencies": {
     "@operational/theme": "^0.2.2",
@@ -58,11 +55,5 @@
       "jest-enzyme"
     ],
     "mapCoverage": true
-  },
-  "lint-staged": {
-    "*.(ts|tsx)": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }
