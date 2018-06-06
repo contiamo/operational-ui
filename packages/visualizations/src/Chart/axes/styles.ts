@@ -18,7 +18,7 @@ const borderStyle = {
 }
 
 const componentRectStyle = {
-  fill: "#fff",
+  opacity: 0,
 }
 
 const rulesStyle = {

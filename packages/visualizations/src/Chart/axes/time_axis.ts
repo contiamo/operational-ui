@@ -278,7 +278,7 @@ class TimeAxis implements AxisClass<Date> {
     this.drawTicks()
     this.drawLabels()
     this.drawBorder()
-    positionBackgroundRect(this.el, this.state.current.get("config").duration)
+    positionBackgroundRect(this.el, this.position, this.state.current.get("config").duration)
   }
 
   private drawTicks(): void {
