@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import { Avatar } from "../../"
+import Avatar, { Picture as AvatarPicture, Container as AvatarContainer } from "../Avatar/Avatar"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface AvatarItem {
@@ -17,6 +17,10 @@ export interface Props {
   children?: React.ReactNode
   /** Avatars list */
   avatars?: AvatarItem[]
+  /** Maximum avatar to be display on screen */
+  maximumToDisplay?: number
+  /** More button handlere */
+  onMoreClick?: () => void
 }
 
 const Container = glamorous.div(
@@ -33,10 +37,27 @@ const Container = glamorous.div(
   }),
 )
 
-const AvatarGroup = (props: Props) => (
-  <Container css={props.css} className={props.className}>
-    {props.avatars ? props.avatars.map(avatar => <Avatar {...avatar} />) : props.children}
-  </Container>
+const More: React.SFC<{ onClick: () => void }> = ({ children, onClick }) => (
+  <AvatarContainer onClick={onClick}>
+    <AvatarPicture className="opui_avatar-picture">{children}</AvatarPicture>
+  </AvatarContainer>
 )
+
+const AvatarGroup: React.SFC<Props> = props => {
+  const avatarsToDisplay = props.avatars ? props.avatars.map(avatar => <Avatar {...avatar} />) : props.children
+  const count = React.Children.count(avatarsToDisplay)
+  const mustSlice = props.maximumToDisplay < count
+
+  return (
+    <Container css={props.css} className={props.className}>
+      {mustSlice ? React.Children.toArray(avatarsToDisplay).slice(0, props.maximumToDisplay - 1) : avatarsToDisplay}
+      {mustSlice && <More onClick={props.onMoreClick}>+{count - props.maximumToDisplay + 1}</More>}
+    </Container>
+  )
+}
+
+AvatarGroup.defaultProps = {
+  maximumToDisplay: 4,
+}
 
 export default AvatarGroup

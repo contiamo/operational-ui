@@ -60,7 +60,7 @@ const Title = glamorous.div(
   }),
 )
 
-const Picture = glamorous.div(
+export const Picture = glamorous.div(
   ({
     theme,
     color,
@@ -103,14 +103,12 @@ const Picture = glamorous.div(
 )
 
 const getInitials = (name: string): string => {
-  if (!name) {
-    return ""
-  }
+  if (!name) return ""
   const splitName = name.split(" ")
   return splitName[0].slice(0, 1) + splitName[splitName.length - 1].slice(0, 1)
 }
 
-const Avatar = (props: Props) => {
+const Avatar: React.SFC<Props> = props => {
   const initials = getInitials(props.name)
   const colorAssignmentNumber = props.assignColor
     ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
@@ -129,13 +127,17 @@ const Avatar = (props: Props) => {
         {props.hideInitials || props.photo ? "" : initials}
       </Picture>
       {props.showName && (
-        <NameContainer className="opui_name-container">
+        <NameContainer>
           <Name>{props.name}</Name>
           {props.title && <Title>{props.title}</Title>}
         </NameContainer>
       )}
     </Container>
   )
+}
+
+Avatar.defaultProps = {
+  assignColor: true,
 }
 
 export default Avatar
