@@ -1,18 +1,9 @@
 {
+  "extends": "./tsconfig.base",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "outDir": "lib",
-    "target": "ES5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "jsx": "react",
-    "lib": ["dom", "es2016", "dom.iterable", "scripthost", "es2017.object"],
     "baseUrl": "./packages",
     "paths": {
       "@operational/*": ["./*/src"]
     }
-  },
-  "include": ["packages"]
+  }
 }

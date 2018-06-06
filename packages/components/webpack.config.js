@@ -4,7 +4,7 @@ const path = require("path")
 
 module.exports = {
   entry: {
-    bundle: ["./src/index.ts"],
+    bundle: [path.resolve(__dirname, "./src/index.ts")],
   },
   context: path.resolve(__dirname),
   output: {
@@ -15,8 +15,15 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader",
         exclude: /node_modules/,
+        use: [
+          {
+            loader: "awesome-typescript-loader",
+            options: {
+              configFileName: "./tsconfig.styleguide.json",
+            },
+          },
+        ],
       },
     ],
   },

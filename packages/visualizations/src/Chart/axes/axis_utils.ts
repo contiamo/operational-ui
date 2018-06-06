@@ -77,7 +77,7 @@ const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
     (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
   )(axes)
 
-  const axisKeys: string[] = keys(computed)
+  const axisKeys: string[] = keys(computed) as string[]
   const intervalOne: any = axes[axisKeys[0]].interval
   const intervalTwo: any = axes[axisKeys[1]].interval
   if (intervalOne !== intervalTwo) {
@@ -117,7 +117,7 @@ const alignQuantAxes = (axes: { [key: string]: AxisClass<number> }): void => {
   const computed: { [key: string]: Partial<AxisComputed> } = mapValues(
     (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
   )(axes)
-  const axisKeys: string[] = keys(computed)
+  const axisKeys: string[] = keys(computed) as string[]
   const stepsOne: [number, number, number] = computed[axisKeys[0]].steps
   const stepsTwo: [number, number, number] = computed[axisKeys[1]].steps
   alignSteps(stepsOne, stepsTwo)

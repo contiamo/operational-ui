@@ -1,4 +1,4 @@
-import { Chart } from "@operational/visualizations"
+import { Chart, AxesData } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const LineRenderer = {
@@ -15,7 +15,7 @@ const AreaRenderer = {
   type: "area",
 }
 
-const createData = axes => {
+const createData = (axes: AxesData) => {
   return {
     axes,
     series: [

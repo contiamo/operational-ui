@@ -107,11 +107,18 @@ const journeys = [
 
 const unloopedJourneys = ProcessFlowLoopHandler(journeys)
 
-const nodeList: string[] = flow(map((journey: any): string[] => journey.path), flatten, uniq)(unloopedJourneys)
+const nodeList: string[] = flow(
+  map((journey: any): string[] => journey.path),
+  flatten,
+  uniq,
+)(unloopedJourneys)
 
+/**
+ * @todo please add a ProcessFlowData type to better document this
+ */
 const data = {
   unloopedJourneys,
-  nodeList: map(nodeId => {
+  nodeList: map((nodeId: any) => {
     return {
       id: nodeId,
       size: 0,

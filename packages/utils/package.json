@@ -12,8 +12,8 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "package": "rm -rf lib && tsc",
-    "package:watch": "rm -rf lib && tsc -w",
+    "package": "rimraf lib && tsc",
+    "package:watch": "rimraf lib && tsc -w",
     "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
     "test": "jest",
     "test:u": "jest -u",

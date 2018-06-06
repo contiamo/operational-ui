@@ -4,26 +4,30 @@ import { Theme } from "@operational/theme"
 
 import { Card, Icon, Button, CardHeader, OperationalUI } from "@operational/components"
 
-export const DocsLink = glamorous.a(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.small,
-  color: theme.colors.gray,
-  marginLeft: theme.spacing * 3 / 4,
-}))
+export const DocsLink = glamorous.a(
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.small,
+    color: theme.colors.gray,
+    marginLeft: (theme.spacing * 3) / 4,
+  }),
+)
 
-const AnchorLink = glamorous.h2(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.heading1,
-  cursor: "pointer",
-  "& svg": {
-    opacity: 0,
-    color: theme.colors.info,
-    marginLeft: theme.spacing / 2,
-    width: theme.spacing * 3 / 4,
-    height: theme.spacing * 3 / 4,
-  },
-  ":hover svg": {
-    opacity: 1,
-  },
-}))
+const AnchorLink = glamorous.h2(
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.heading1,
+    cursor: "pointer",
+    "& svg": {
+      opacity: 0,
+      color: theme.colors.info,
+      marginLeft: theme.spacing / 2,
+      width: (theme.spacing * 3) / 4,
+      height: (theme.spacing * 3) / 4,
+    },
+    ":hover svg": {
+      opacity: 1,
+    },
+  }),
+)
 
 export const Section = (props: { title: string; docsUrl: string; snippetUrl: string; children: React.ReactNode }) => {
   const slug = props.title.toLowerCase().replace(/ /g, "-")
@@ -43,7 +47,7 @@ export const Section = (props: { title: string; docsUrl: string; snippetUrl: str
           <DocsLink href={props.docsUrl}>Docs</DocsLink>
         </div>
       </CardHeader>
-      <glamorous.Div
+      <Div
         css={{
           "& > *": {
             marginRight: 6,
@@ -52,17 +56,19 @@ export const Section = (props: { title: string; docsUrl: string; snippetUrl: str
         }}
       >
         {props.children}
-      </glamorous.Div>
+      </Div>
     </Card>
   )
 }
 
-export const Subsection = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  margin: "30px 0",
-  "& > *": {
-    marginRight: theme.spacing,
-  },
-}))
+export const Subsection = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    margin: "30px 0",
+    "& > *": {
+      marginRight: theme.spacing,
+    },
+  }),
+)
 
 export { default as Animation } from "./Animation"
 export { default as Hero } from "./Hero"

@@ -38,7 +38,6 @@ import {
   EventBus,
   State,
   StateWriter,
-  ComponentHoverPayload,
 } from "../typings"
 
 class CategoricalAxis implements AxisClass<string> {
@@ -80,15 +79,20 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private updateOptions(options: CategoricalAxisOptions): void {
-    forEach.convert({ cap: false })((value: any, key: string) => {
-      ;(this as any)[key] = value
-    })(options)
+    forEach.convert({ cap: false })(
+      (value: any, key: string): void => {
+        ;(this as any)[key] = value
+      },
+    )(options)
     this.adjustMargins()
   }
 
   update(options: CategoricalAxisOptions, data: string[]): void {
     this.updateOptions(options)
-    this.data = flow(filter(this.validate), map(String))(this.values || data)
+    this.data = flow(
+      filter(this.validate),
+      map(String),
+    )(this.values || data)
   }
 
   // Computations
@@ -122,12 +126,14 @@ class CategoricalAxis implements AxisClass<string> {
       (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
       (1 - config.innerBarSpacingCategorical)
 
-    const stacks = groupBy((s: any) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
-    const partitionedStacks = partition((stack: any) => {
-      return compact(map(get("barWidth"))(stack)).length > 0
-    })(stacks)
-    const fixedWidthStacks = partitionedStacks[0]
-    const variableWidthStacks = partitionedStacks[1]
+    const stacks = groupBy((s: { [key: string]: any }) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
+    const partitionedStacks: { [key: string]: any }[][] = partition(
+      (stack: any): boolean => {
+        return compact(map(get("barWidth"))(stack)).length > 0
+      },
+    )(stacks)
+    const fixedWidthStacks: { [key: string]: any }[] = partitionedStacks[0]
+    const variableWidthStacks: { [key: string]: any }[] = partitionedStacks[1]
 
     let requiredTickWidth = reduce((sum: number, stack: any) => {
       return sum + stack[0].barWidth
@@ -151,12 +157,16 @@ class CategoricalAxis implements AxisClass<string> {
     const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
     let offset = -tickWidth / 2
 
-    return reduce((memo: { [key: string]: any }, index: number) => {
-      const seriesAtIndex = keys(pickBy((d: number) => d === index)(computedSeries.barIndices))
-      const width = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
-      forEach((series: string) => {
-        memo[series] = { width, offset }
-      })(seriesAtIndex)
+    return reduce((memo: { [key: string]: any }, index: number): { [key: string]: any } => {
+      const seriesAtIndex: string[] = keys(
+        pickBy((d: number): boolean => d === index)(computedSeries.barIndices),
+      ) as string[]
+      const width: number = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
+      forEach(
+        (series: string): void => {
+          memo[series] = { width, offset }
+        },
+      )(seriesAtIndex)
       offset = offset + width + config.innerBarSpacing
       return memo
     }, {})(indices)
@@ -214,9 +224,9 @@ class CategoricalAxis implements AxisClass<string> {
 
   // Padding added only to end of each step in d3 ordinal band scale
   private scaleWithOffset(computed: AxisComputed) {
-    const barPadding = this.state.current.get("config").innerBarSpacingCategorical
-    const stepWidth = computed.scale.step()
-    return (d: string) => computed.scale(d) - stepWidth * barPadding / 2
+    const barPadding: number = this.state.current.get("config").innerBarSpacingCategorical
+    const stepWidth: number = computed.scale.step()
+    return (d: string): number => computed.scale(d) - (stepWidth * barPadding) / 2
   }
 
   private getAttributes(): AxisAttributes {

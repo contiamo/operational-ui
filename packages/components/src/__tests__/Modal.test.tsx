@@ -8,7 +8,7 @@ const Modal = wrapDefaultTheme(ThemelessModal)
 
 describe("Modal Component", () => {
   it("Should render", () => {
-    const renderedComponent = render(<Modal value="SomeValue" />)
+    const renderedComponent = render(<Modal>i love you</Modal>)
     expect(renderedComponent).toMatchSnapshot()
   })
 })

@@ -8,8 +8,4 @@ export const docsUrl = `${constants.docsBaseUrl}/#tile`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Tiles.tsx`
 
-export const Component = () => (
-  <>
-    <Tile label="Label">Value</Tile>
-  </>
-)
+export const Component = () => <Tile label="Label">Value</Tile>

@@ -9,7 +9,8 @@
   "private": true,
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "rm -rf dist && parcel build src/index.html --public-url ./",
+    "build": "rimraf dist && parcel build src/index.html --public-url ./",
+    "package": "npm run build",
     "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
     "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
     "precommit": "lint-staged",
@@ -17,7 +18,6 @@
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "dependencies": {
-    "@operational/blocks": "^0.1.2",
     "@operational/components": "^0.2.2",
     "@operational/theme": "^0.2.2",
     "@operational/utils": "^0.2.2",

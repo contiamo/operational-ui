@@ -6,7 +6,7 @@ module.exports = {
   sections: [
     {
       name: "Components",
-      components: function() {
+      components: function components() {
         return glob.sync(path.resolve(__dirname, "src/**/*.tsx")).filter(function(module) {
           return /\/[A-Z]\w*\.tsx$/.test(module)
         })
@@ -15,8 +15,9 @@ module.exports = {
     },
   ],
   resolver: require("react-docgen").resolver.findAllComponentDefinitions,
-  propsParser: require("react-docgen-typescript").withDefaultConfig({ propFilter: { skipPropsWithoutDoc: true } })
-    .parse,
+  propsParser: require("react-docgen-typescript").withCustomConfig("./tsconfig.styleguide.json", {
+    propFilter: { skipPropsWithoutDoc: true },
+  }).parse,
   skipComponentsWithoutExample: true,
   styleguideComponents: {
     Wrapper: path.join(__dirname, "styleguide/ThemeWrapper"),

@@ -9,13 +9,13 @@
   "private": true,
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "rm -rf dist && parcel build src/index.html --public-url ./",
+    "build": "rimraf dist && parcel build --no-cache ./src/index.html --public-url ./",
     "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix",
     "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
     "precommit": "lint-staged",
     "test": "echo 'Tests to be added as project matures.'",
     "test:u": "echo 'Tests to be added as project matures.'",
-    "package": "echo 'Showcase is not published, hence no package script.'",
+    "package": "npm run build",
     "ci": "npm run test && npm run lint && npm run prettier && npm run package"
   },
   "dependencies": {

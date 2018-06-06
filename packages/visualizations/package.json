@@ -14,8 +14,8 @@
     "start": "parcel scripts/dev-server/index.html",
     "test": "jest",
     "test:u": "jest -u",
-    "package": "rm -rf lib && tsc",
-    "package:watch": "rm -rf lib && tsc -w",
+    "package": "rimraf lib && tsc",
+    "package:watch": "rimraf lib && tsc -w",
     "precommit": "lint-staged",
     "prettier": "prettier \"./src/**/*.{ts,tsx}\" --write",
     "lint": "tslint \"./src/**/*.{ts,tsx}\" --fix"
@@ -26,7 +26,6 @@
     "d3": "^4.10.2",
     "glamor": "^2.20.40",
     "glamorous": "^4.8.0",
-    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "moment": "^2.21.0",
     "moment-range": "^3.1.1",

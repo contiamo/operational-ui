@@ -1,6 +1,5 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
 import withLabel from "../utils/with-label"
 
 import { WithTheme, Css, CssStatic } from "../types"

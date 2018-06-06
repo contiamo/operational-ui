@@ -1,11 +1,12 @@
-import { Chart } from "@operational/visualizations"
+import { Chart, AxesData } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
 const BarRenderer = {
   type: "bars",
 }
 
-const axes: any = {
+/** @todo @imogenf please improve the typings here. */
+const axes: AxesData = {
   x1: {
     type: "categorical",
   },
@@ -14,12 +15,12 @@ const axes: any = {
   },
 }
 
-const data = {
+const data: any = {
   axes,
   series: [],
 }
 
-const data1 = {
+const data1: any = {
   axes,
   series: [
     {

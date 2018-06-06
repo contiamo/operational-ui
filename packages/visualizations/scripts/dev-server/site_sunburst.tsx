@@ -1,8 +1,6 @@
 import * as React from "react"
 import { render } from "react-dom"
-import { injectStylesheet, baseStylesheet } from "@operational/utils"
-import { operational } from "@operational/theme"
-import { OperationalUI, Progress, Spinner } from "@operational/components"
+import { OperationalUI } from "@operational/components"
 
 const containerNode = document.getElementById("app")
 
@@ -19,7 +17,22 @@ const config: any = {
 
 import { RawData } from "../../src/Sunburst/typings"
 
-const data: RawData = {
+/**
+ * This variable is assigned here and then re-assigned in the
+ * setTimeout block later in this file.
+ *
+ * There are a couple of things wrong with this:
+ * - Reassigning variables is generally dangerous and so we prefer to work with constants
+ * - Assigning variables on the GLOBAL scope, like this, is also dangerous because of naming collisions
+ *
+ * As a general rule, let's use consts everywhere and avoid
+ * re-assignments.
+ *
+ * This has been a delightful essay.
+ *
+ * God bless you all.
+ */
+var data: RawData = {
   sunburst_data: {
     name: "Pageviews",
     data: {

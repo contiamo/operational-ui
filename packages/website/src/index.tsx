@@ -153,20 +153,18 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
             css={{ marginTop: operational.spacing * 1.5, width: "100%" }}
             placeholder={`Search ${this.state.page}`}
           />
-          <>
-            {sections
-              .filter(
-                ({ title, docsUrl }) =>
-                  title.toLowerCase().match(new RegExp(this.state.search)) ||
-                  docsUrl.toLowerCase().match(new RegExp(this.state.search)),
-              )
-              .sort(({ title: title1 }, { title: title2 }) => (title1 < title2 ? -1 : title1 === title2 ? 0 : 1))
-              .map(({ title, docsUrl, snippetUrl, Component }, index: number) => (
-                <Section key={index} title={title} docsUrl={docsUrl} snippetUrl={snippetUrl}>
-                  <Component />
-                </Section>
-              ))}
-          </>
+          {sections
+            .filter(
+              ({ title, docsUrl }) =>
+                title.toLowerCase().match(new RegExp(this.state.search)) ||
+                docsUrl.toLowerCase().match(new RegExp(this.state.search)),
+            )
+            .sort(({ title: title1 }, { title: title2 }) => (title1 < title2 ? -1 : title1 === title2 ? 0 : 1))
+            .map(({ title, docsUrl, snippetUrl, Component }, index: number) => (
+              <Section key={index} title={title} docsUrl={docsUrl} snippetUrl={snippetUrl}>
+                <Component />
+              </Section>
+            ))}
           <Footer />
         </Container>
       </OperationalUI>

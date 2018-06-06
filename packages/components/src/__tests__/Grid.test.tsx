@@ -8,7 +8,7 @@ const Grid = wrapDefaultTheme(ThemelessGrid)
 
 describe("Grid Component", () => {
   it("Should render", () => {
-    const renderedComponent = render(<Grid value="SomeValue" />)
+    const renderedComponent = render(<Grid />)
     expect(renderedComponent).toMatchSnapshot()
   })
 })

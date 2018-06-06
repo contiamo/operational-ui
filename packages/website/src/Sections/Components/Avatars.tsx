@@ -9,8 +9,6 @@ export const docsUrl = `${constants.docsBaseUrl}/#avatar`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Avatars.tsx`
 
-const MiddleSection = glamorous.div(({ theme }: { theme: Theme }) => ({ margin: `${theme.spacing * 2}px 0` }))
-
 export const Component = () => (
   <>
     <Avatar

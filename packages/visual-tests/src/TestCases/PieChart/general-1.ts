@@ -5,7 +5,8 @@ const DonutRenderer = {
   type: "donut",
 }
 
-const data = {
+/** @todo please add a PieChartData type that describes what it expects. */
+const data: any = {
   data: [
     { key: "Berlin", value: null },
     { key: "Dortmund", value: null },

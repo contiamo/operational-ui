@@ -46,7 +46,8 @@ const createData = (options: any) => {
   }
 }
 
-const symbols = {
+/** @todo @imogenf please type this better */
+const symbols: any = {
   1: "circle",
   2: "cross",
   3: "diamond",

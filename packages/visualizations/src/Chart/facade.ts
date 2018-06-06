@@ -11,13 +11,11 @@ import { operational as theme } from "@operational/theme"
 import { has, isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
-  AccessorsObject,
   AxesData,
   AxisPosition,
   ChartConfig,
   Components,
   Data,
-  DataAccessors,
   Datum,
   Facade,
   FocusElement,

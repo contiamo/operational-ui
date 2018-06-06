@@ -9,9 +9,7 @@ export const docsUrl = `${constants.docsBaseUrl}/#progress`
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Progress.tsx`
 
 export const Component = () => (
-  <>
-    <div style={{ position: "relative" }}>
-      <Progress />
-    </div>
-  </>
+  <div style={{ position: "relative" }}>
+    <Progress />
+  </div>
 )

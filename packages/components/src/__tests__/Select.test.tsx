@@ -16,6 +16,6 @@ const options: IOption[] = [
 
 describe("Select", () => {
   it("Should render correctly", () => {
-    expect(render(<Select options={options} disabled filterable multiple placeholder="Select me" />)).toMatchSnapshot()
+    expect(render(<Select value="hello" options={options} placeholder="Select me" />)).toMatchSnapshot()
   })
 })

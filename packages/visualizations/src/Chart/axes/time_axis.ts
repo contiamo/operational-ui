@@ -195,8 +195,10 @@ class TimeAxis implements AxisClass<Date> {
     const indices = sortBy(identity)(uniq(values(computedSeries.barIndices)))
     let offset = -tickWidth / 2 + config.outerBarSpacing / 2
 
-    return reduce((memo: { [key: string]: any }, index: number) => {
-      const seriesAtIndex = keys(pickBy((d: number) => d === index)(computedSeries.barIndices))
+    return reduce((memo: { [key: string]: any }, index: number): { [key: string]: any } => {
+      const seriesAtIndex: string[] = keys(
+        pickBy((d: number): boolean => d === index)(computedSeries.barIndices),
+      ) as string[]
       const width: number = computedSeries.barSeries[seriesAtIndex[0]].barWidth || defaultBarWidth
       forEach(
         (series: string): void => {

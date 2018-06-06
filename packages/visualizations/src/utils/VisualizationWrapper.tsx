@@ -22,11 +22,13 @@ class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
 
   render() {
     return (
-      <div
-        style={this.props.style}
-        className={`${this.props.className ? `${this.props.className} ` : ""}Visualization`}
-        ref={containerNode => (this.containerNode = containerNode)}
-      />
+      <>
+        <div
+          style={this.props.style}
+          className={`${this.props.className ? `${this.props.className} ` : ""}Visualization`}
+          ref={containerNode => (this.containerNode = containerNode)}
+        />
+      </>
     )
   }
 
@@ -44,9 +46,11 @@ class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
 
   updateViz() {
     this.viz.data(this.props.data || {})
-    forEach.convert({ cap: false })((accessors: any, key: string): void => {
-      this.viz.accessors(key, accessors)
-    })(this.props.accessors)
+    forEach.convert({ cap: false })(
+      (accessors: any, key: string): void => {
+        this.viz.accessors(key, accessors)
+      },
+    )(this.props.accessors)
     this.viz.config(defaults({ palette: this.props.theme.colors.visualizationPalette })(this.props.config || {}))
   }
 
