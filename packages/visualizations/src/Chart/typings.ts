@@ -23,6 +23,7 @@ export interface AxisConfig {
   outerPadding: number
   rotateLabels: boolean
   showRules: boolean
+  showTicks: boolean
   tickOffset: number
   tickSpacing: number
   minTopOffsetTopTick?: number

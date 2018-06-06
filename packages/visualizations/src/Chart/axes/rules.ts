@@ -64,8 +64,8 @@ class Rules {
     const axisPrevious = previousAxes[`${this.orientation}1`] || previousAxes[`${this.orientation}2`]
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     return {
-      x1: this.yRules ? -this.margin("y1") / 2 : axisPrevious.scale,
-      x2: this.yRules ? drawingDims.width + this.margin("y2") / 2 : axisPrevious.scale,
+      x1: this.yRules ? 0 : axisPrevious.scale,
+      x2: this.yRules ? drawingDims.width : axisPrevious.scale,
       y1: this.yRules ? axisPrevious.scale : 0,
       y2: this.yRules ? axisPrevious.scale : drawingDims.height,
     }
@@ -76,16 +76,11 @@ class Rules {
     const axisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     return {
-      x1: this.yRules ? -this.margin("y1") / 2 : axisComputed.scale,
-      x2: this.yRules ? drawingDims.width + this.margin("y2") / 2 : axisComputed.scale,
+      x1: this.yRules ? 0 : axisComputed.scale,
+      x2: this.yRules ? drawingDims.width : axisComputed.scale,
       y1: this.yRules ? axisComputed.scale : 0,
       y2: this.yRules ? axisComputed.scale : drawingDims.height,
     }
-  }
-
-  private margin(axis: AxisPosition): number {
-    const computedAxes = this.state.current.get("computed").axes
-    return includes(axis)(computedAxes.requiredAxes) ? computedAxes.margins[axis] : 0
   }
 
   close(): void {

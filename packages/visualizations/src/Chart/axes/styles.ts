@@ -30,7 +30,17 @@ const rulesStyle = {
   },
 }
 
+const tickStyle = {
+  stroke: theme.colors.border,
+  strokeWidth: "1",
+  shapeRendering: "crispedges",
+  "&.zero": {
+    strokeWidth: "2",
+  },
+}
+
 export const label = css(labelStyle).toString()
 export const border = css(borderStyle).toString()
 export const componentRect = css(componentRectStyle).toString()
 export const rules = css(rulesStyle).toString()
+export const tick = css(tickStyle).toString()

@@ -91,6 +91,7 @@ class TimeAxis implements AxisClass<Date> {
   end: Date
   interval: TimeIntervals
   showRules: boolean = false
+  showTicks: boolean = true
   fontSize: number
   margin: number
   minTicks: number
@@ -274,9 +275,32 @@ class TimeAxis implements AxisClass<Date> {
   // Drawing
   draw(): void {
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
+    this.drawTicks()
     this.drawLabels()
     this.drawBorder()
     positionBackgroundRect(this.el, this.state.current.get("config").duration)
+  }
+
+  private drawTicks(): void {
+    const config = this.state.current.get("config")
+    const attributes = this.getTickAttributes()
+
+    const ticks = this.el.selectAll(`line.${styles.tick}`).data(this.showTicks ? this.computed.ticks : [], String)
+
+    ticks
+      .enter()
+      .append("svg:line")
+      .call(setLineAttributes, attributes)
+      .merge(ticks)
+      .attr("class", styles.tick)
+      .call(setLineAttributes, attributes, config.duration)
+
+    ticks
+      .exit()
+      .transition()
+      .duration(config.duration / 2)
+      .call(setLineAttributes, defaults(attributes)({ opacity: 1e-6 }))
+      .remove()
   }
 
   private drawLabels(): void {
@@ -328,7 +352,7 @@ class TimeAxis implements AxisClass<Date> {
       x: this.isXAxis ? this.computed.scale : (d: Date) => 0,
       y: this.isXAxis ? (d: Date) => 0 : this.computed.scale,
       dx: this.isXAxis ? 0 : this.tickOffset,
-      dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : "-0.4em",
+      dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : 0,
       text: this.computed.tickFormatter,
       textAnchor: getTextAnchor(this.position, this.rotateLabels),
     }
@@ -343,6 +367,15 @@ class TimeAxis implements AxisClass<Date> {
       x: this.isXAxis ? this.previous.scale : 0,
       y: this.isXAxis ? 0 : this.previous.scale,
     })
+  }
+
+  private getTickAttributes() {
+    return {
+      x1: this.isXAxis ? this.computed.scale : 0,
+      x2: this.isXAxis ? this.computed.scale : this.tickOffset * 0.6,
+      y1: this.isXAxis ? 0 : this.computed.scale,
+      y2: this.isXAxis ? this.tickOffset * 0.6 : this.computed.scale,
+    }
   }
 
   private drawBorder(): void {
