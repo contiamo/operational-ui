@@ -32,7 +32,7 @@ import { RawData } from "../../src/Sunburst/typings"
  *
  * God bless you all.
  */
-var data: RawData = {
+let data: RawData = {
   sunburst_data: {
     name: "Pageviews",
     data: {

@@ -16,7 +16,7 @@
     "build:components": "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist/docs",
     "clean": "lerna clean --parallel",
     "test": "lerna run test --parallel",
-    "lint": "tslint",
+    "lint": "tslint ./packages/**/*.{json,js,jsx,ts,tsx}",
     "prettify": "prettier ./packages/**/*.{json,js,jsx,ts,tsx} --write",
     "postinstall": "run-s package:*",
     "package:theme": "lerna run --scope @operational/theme package",
