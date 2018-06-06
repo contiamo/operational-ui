@@ -23,7 +23,7 @@
   },
   "jest": {
     "setupFiles": [
-      "./test-polyfills.js"
+      "../../test-polyfills.js"
     ],
     "moduleFileExtensions": [
       "ts",
@@ -32,8 +32,11 @@
       "jsx"
     ],
     "transform": {
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "<rootDir>/../../node_modules/ts-jest/preprocessor.js"
     },
+    "roots": [
+      "<rootDir>/src"
+    ],
     "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
     "mapCoverage": true
   },

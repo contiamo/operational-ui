@@ -4,8 +4,51 @@ exports[`ContextMenu Component Should render 1`] = `
 <div
   class="css-1gsi2vm"
 >
+  <svg
+    fill="none"
+    height="16"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewbox="0 0 24 24"
+    width="16"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="1"
+    />
+    <circle
+      cx="19"
+      cy="12"
+      r="1"
+    />
+    <circle
+      cx="5"
+      cy="12"
+      r="1"
+    />
+  </svg>
   <div
     class="css-1taffx9"
-  />
+  >
+    <div
+      class="css-1czenb6"
+    >
+      Menu 1
+    </div>
+    <div
+      class="css-83h9h0"
+    >
+      Menu 2
+    </div>
+    <div
+      class="css-83h9h0"
+    >
+      Menu 3
+    </div>
+  </div>
 </div>
 `;

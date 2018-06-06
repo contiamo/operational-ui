@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header Header component renders 1`] = `
-<header
-  class="css-1uo2xnf hi"
->
-  Hello
-</header>
+<div
+  class="css-cecpbi"
+/>
 `;

@@ -6,6 +6,8 @@ exports[`Modal Component Should render 1`] = `
 >
   <div
     class="css-1vrapo1"
-  />
+  >
+    i love you
+  </div>
 </div>
 `;

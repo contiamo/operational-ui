@@ -18,11 +18,13 @@ exports[`Breakdown Component Should initialize properly 1`] = `
       hi
     </label>
     <div
-      class="css-ux488o"
+      class="css-15s804f"
     >
       <span
         class="css-qotq2o"
-      />
+      >
+        hello
+      </span>
     </div>
   </div>
 </div>

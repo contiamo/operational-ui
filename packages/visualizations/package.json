@@ -30,7 +30,7 @@
   },
   "jest": {
     "setupFiles": [
-      "./test-polyfills.js"
+      "../../test-polyfills.js"
     ],
     "moduleFileExtensions": [
       "ts",
@@ -39,20 +39,15 @@
       "jsx"
     ],
     "transform": {
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "<rootDir>/../../node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
-    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-enzyme/lib/index.js",
-    "moduleNameMapper": {
-      "\\.(css|jpg|png)$": "<rootDir>/empty-module.js"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
+    "roots": [
+      "<rootDir>/src"
     ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme",
-      "jest-enzyme"
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
+    "setupTestFrameworkScriptFile": "<rootDir>/../../node_modules/jest-enzyme/lib/index.js",
+    "snapshotSerializers": [
+      "<rootDir>/../../node_modules/jest-serializer-enzyme"
     ],
     "mapCoverage": true
   }

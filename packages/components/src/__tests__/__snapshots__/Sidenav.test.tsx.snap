@@ -98,6 +98,6 @@ exports[`Sidenav component renders 1`] = `
     }
   }
 >
-  <class_1 />
+  <DeprecatedComponent />
 </ThemeProvider>
 `;
