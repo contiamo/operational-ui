@@ -143,8 +143,7 @@ class AxesManager {
   }
 
   private onMarginsUpdated(isXAxis: boolean): void {
-    const axesToUpdate: "x" | "y" = isXAxis ? "y" : "x"
-    this.drawAxes(axesToUpdate)
+    forEach(this.drawAxes.bind(this))(["y", "x"])
   }
 
   updateRules(orientation: "x" | "y"): void {
