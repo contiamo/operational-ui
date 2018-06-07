@@ -19,7 +19,7 @@ class Rules {
     const computedAxes = this.state.current.get("computed").axes.computed
     const axisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
     const requiredAxes = this.state.current.get("computed").axes.requiredAxes
-    const data = clone(axisComputed.ticks)
+    const data = clone(axisComputed.ruleTicks || axisComputed.ticks)
     if (includes(this.yRules ? "x1" : "y1")(requiredAxes)) {
       data.shift()
     }

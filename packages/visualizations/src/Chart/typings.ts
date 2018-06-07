@@ -194,6 +194,8 @@ export interface QuantAxisOptions extends AxisConfig {
   start?: number
   end?: number
   interval?: number
+  ruleInterval?: number
+  tickInterval: number
   unit?: string
 }
 
@@ -210,9 +212,13 @@ export interface AxesData {
 
 export interface AxisComputed {
   domain?: [number, number] | DateRange
+  labelSteps?: [number, number, number]
+  labelTicks?: any[]
   range: [number, number]
+  ruleSteps?: [number, number, number]
+  ruleTicks?: any[]
   scale: any
-  steps?: [number, number, number]
+  tickSteps?: [number, number, number]
   tickFormatter?: (d: any) => string
   ticks: any[]
   ticksInDomain?: Date[]

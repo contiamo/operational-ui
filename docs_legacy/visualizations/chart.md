@@ -129,11 +129,14 @@ The 'series' and 'axes' properties can have different names, if the data accesso
 * tickSpacing - default: 40
 * outerPadding - default: 3
 * showRules - defaults to true for quant axes, false for time and categorical
+* showTicks - default: true
 
 Quant axes _may_ additionally have any of the following configurations:
 * start: number
 * end: number
-* interval: number
+* interval: number - default interval for rules, labels and ticks
+* tickInterval: number - custom interval for ticks
+* ruleInterval: number - custom interval for rules
 * unit: string
 
 Time axes _must_ have:

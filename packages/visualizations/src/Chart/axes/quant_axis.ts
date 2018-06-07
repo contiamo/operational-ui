@@ -72,8 +72,10 @@ class QuantAxis implements AxisClass<number> {
   compute(): void {
     this.previous = cloneDeep(this.computed)
     const computed = this.computeInitial()
-    computed.ticks = computeTicks(computed.steps)
-    computed.scale = computeScale(computed.range, computed.ticks)
+    computed.labelTicks = computeTicks(computed.labelSteps)
+    computed.ruleTicks = computeTicks(computed.ruleSteps)
+    computed.ticks = computeTicks(computed.tickSteps)
+    computed.scale = computeScale(computed.range, computed.labelTicks)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
@@ -83,8 +85,10 @@ class QuantAxis implements AxisClass<number> {
   computeInitial(): Partial<AxisComputed> {
     const computed: Partial<AxisComputed> = {}
     computed.range = this.computeRange()
-    computed.steps = this.computeSteps(computed)
     computed.domain = computeDomain(this.data, this.options.start, this.options.end)
+    computed.tickSteps = this.computeTickSteps(computed)
+    computed.ruleSteps = this.computeRuleSteps(computed)
+    computed.labelSteps = this.computeLabelSteps(computed)
     computed.tickFormatter = this.state.current.get("config").numberFormatter
     return computed
   }
@@ -104,28 +108,46 @@ class QuantAxis implements AxisClass<number> {
   // Computes nice steps (for ticks) given a domain [start, stop] and a
   // wanted number of ticks (number of ticks returned might differ
   // by a few ticks)
-  computeSteps(computed: { [key: string]: any }): [number, number, number] {
-    const steps: [number, number, number] = [this.options.start, this.options.end, this.options.interval]
-    if (!this.options.interval) {
-      const tickNumber = computeTickNumber(computed.range, this.options.tickSpacing, this.options.minTicks)
-      const span = computed.domain[1] - computed.domain[0]
-      let step = Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
+  computeInterval(computed: any): number {
+    const tickNumber = computeTickNumber(computed.range, this.options.tickSpacing, this.options.minTicks)
+    const span = computed.domain[1] - computed.domain[0]
+    let step = Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
 
-      let scaleFactor: number
-      if (this.options.end) {
-        // If a value has been explicitly set for this.options.end, there must be a tick at this value
-        const validScaleFactors = filter((val: number) => (span / (step * val)) % 1 === 0)(stepScaleFactors(step))
-        // Choose scale factor which gives a number of ticks as close as possible to tickNumber
-        scaleFactor = sortBy((val: number) => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
-      } else {
-        const err = (tickNumber / span) * step
-        const errorMapper = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
-        scaleFactor = find(0)(errorMapper)[1]
-      }
-      step *= scaleFactor
-      steps[2] = step
+    let scaleFactor: number
+    if (this.options.end) {
+      // If a value has been explicitly set for this.end, there must be a tick at this value
+      const validScaleFactors = filter((val: number) => (span / (step * val)) % 1 === 0)(stepScaleFactors(step))
+      // Choose scale factor which gives a number of ticks as close as possible to tickNumber
+      scaleFactor = sortBy((val: number) => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
+    } else {
+      const err = (tickNumber / span) * step
+      const errorMapper = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
+      scaleFactor = find(0)(errorMapper)[1]
     }
+    step *= scaleFactor
+    return step
+  }
 
+  computeTickSteps(computed: any): [number, number, number] {
+    const defaultInterval = this.options.interval || this.computeInterval(computed)
+    const interval = this.options.tickInterval ? Math.min(this.options.tickInterval, defaultInterval) : defaultInterval
+
+    return this.computeSteps(computed, interval)
+  }
+
+  computeRuleSteps(computed: any): [number, number, number] {
+    return this.computeSteps(
+      computed,
+      this.options.ruleInterval || this.options.interval || this.computeInterval(computed)
+    )
+  }
+
+  computeLabelSteps(computed: any): [number, number, number] {
+    return this.computeSteps(computed, this.options.interval || this.computeInterval(computed))
+  }
+
+  computeSteps(computed: { [key: string]: any }, interval: number): [number, number, number] {
+    const steps: [number, number, number] = [this.options.start, this.options.end, interval]
     let computedStart = this.options.end % steps[2]
     computedStart = computedStart - (computedStart > computed.domain[0] ? steps[2] : 0)
     steps[0] = this.options.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2]
@@ -135,9 +157,11 @@ class QuantAxis implements AxisClass<number> {
 
   computeAligned(computed: Partial<AxisComputed>): void {
     this.previous = cloneDeep(this.computed)
-    computed.domain = computed.steps.slice(0, 2) as [number, number]
+    computed.domain = computed.labelSteps.slice(0, 2) as [number, number]
     computed.scale = computeScale(computed.range, computed.domain)
-    computed.ticks = computeTicks(computed.steps)
+    computed.labelTicks = computeTicks(computed.labelSteps)
+    computed.ruleTicks = computeTicks(computed.ruleSteps)
+    computed.ticks = computeTicks(computed.tickSteps)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
@@ -182,7 +206,7 @@ class QuantAxis implements AxisClass<number> {
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
 
-    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.ticks, String)
+    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.labelTicks, String)
 
     labels
       .enter()

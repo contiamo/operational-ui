@@ -81,8 +81,8 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined start and end", () => {
     data.axes.y1 = {
       type: "quant",
-      start: 75,
-      end: 375,
+      start: 50,
+      end: 350,
     }
     viz.data(data)
     viz.draw()
@@ -123,6 +123,17 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       interval: 30,
       start: 75,
       end: 375,
+    }
+    viz.data(data)
+    viz.draw()
+  })
+
+  test("Defined intervals", () => {
+    data.axes.y1 = {
+      type: "quant",
+      interval: 50,
+      tickInterval: 25,
+      ruleInterval: 100,
     }
     viz.data(data)
     viz.draw()
