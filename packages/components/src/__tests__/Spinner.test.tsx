@@ -8,7 +8,7 @@ const Spinner = wrapDefaultTheme(ThemelessSpinner)
 
 describe("Spinner Component", () => {
   it("Should render", () => {
-    const renderedComponent = render(<Spinner value="SomeValue" />)
+    const renderedComponent = render(<Spinner />)
     expect(renderedComponent).toMatchSnapshot()
   })
 })

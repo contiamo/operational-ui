@@ -26,31 +26,39 @@ export interface Props {
   assignColor?: boolean
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  label: "avatar",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
-  maxWidth: 180,
-}))
+const Container = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    label: "avatar",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    maxWidth: 180,
+  }),
+)
 
-const NameContainer = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.body,
-  display: "block",
-}))
+const NameContainer = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    ...theme.typography.body,
+    display: "block",
+  }),
+)
 
-const Name = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
-  ...theme.typography.body,
-  lineHeight: 1.25,
-  margin: 0,
-}))
+const Name = glamorous.div(
+  ({ theme }: { theme: Theme }): CssStatic => ({
+    ...theme.typography.body,
+    lineHeight: 1.25,
+    margin: 0,
+  }),
+)
 
-const Title = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
-  ...theme.typography.body,
-  color: theme.colors.gray,
-  lineHeight: 1.25,
-  margin: 0,
-}))
+const Title = glamorous.div(
+  ({ theme }: { theme: Theme }): CssStatic => ({
+    ...theme.typography.body,
+    color: theme.colors.gray,
+    lineHeight: 1.25,
+    margin: 0,
+  }),
+)
 
 const Picture = glamorous.div(
   ({
@@ -82,16 +90,16 @@ const Picture = glamorous.div(
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      ...photo
+      ...(photo
         ? {
             background: `url(${photo})`,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
             color: theme.colors.white,
           }
-        : { backgroundColor, color: textColor },
+        : { backgroundColor, color: textColor }),
     }
-  }
+  },
 )
 
 const getInitials = (name: string): string => {
@@ -107,7 +115,7 @@ const Avatar = (props: Props) => {
   const colorAssignmentNumber = props.assignColor
     ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
         (accumulator, current) => accumulator + (!current || isNaN(current) ? 0 : current),
-        0
+        0,
       )
     : undefined
   return (

@@ -19,37 +19,41 @@ export interface Props {
   loading?: boolean
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
-  label: "Layout",
-  position: "relative",
-  height: "100%",
-  overflow: "hidden",
-  display: "grid",
-  gridTemplateColumns: `${sidenavExpandedWidth}px auto`,
-  gridTemplateRows: "100%",
-  // Side navigation (1st child is always the spinner or a placeholder)
-  "& > *:nth-child(2)": {
-    gridColumnStart: "1",
-    gridColumnEnd: "span 1",
-    gridRowStart: "1",
-    gridRowEnd: "span 1",
-  },
-  // Content
-  "& > *:nth-child(3)": {
-    gridColumnStart: "2",
-    gridColumnEnd: "span 1",
-    gridRowStart: "1",
-    gridRowEnd: "span 1",
-  },
-}))
+const Container = glamorous.div(
+  ({ theme }: { theme: Theme }): CssStatic => ({
+    label: "Layout",
+    position: "relative",
+    height: "100%",
+    overflow: "hidden",
+    display: "grid",
+    gridTemplateColumns: `${sidenavExpandedWidth}px auto`,
+    gridTemplateRows: "100%",
+    // Side navigation (1st child is always the spinner or a placeholder)
+    "& > *:nth-child(2)": {
+      gridColumnStart: "1",
+      gridColumnEnd: "span 1",
+      gridRowStart: "1",
+      gridRowEnd: "span 1",
+    },
+    // Content
+    "& > *:nth-child(3)": {
+      gridColumnStart: "2",
+      gridColumnEnd: "span 1",
+      gridRowStart: "1",
+      gridRowEnd: "span 1",
+    },
+  }),
+)
 
-const Main = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  label: "layout-main",
-  display: "block",
-  height: "100%",
-  overflow: "auto",
-  backgroundColor: theme.colors.white,
-}))
+const Main = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    label: "layout-main",
+    display: "block",
+    height: "100%",
+    overflow: "auto",
+    backgroundColor: theme.colors.white,
+  }),
+)
 
 const Layout = (props: Props) => {
   /* 

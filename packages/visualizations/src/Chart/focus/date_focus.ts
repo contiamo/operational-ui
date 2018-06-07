@@ -1,4 +1,4 @@
-import { D3Selection, EventBus, State, MousePosition, AxisPosition } from "../typings"
+import { D3Selection, EventBus, State, MousePosition, AxisPosition, AxisComputed } from "../typings"
 import Events from "../../shared/event_catalog"
 import { includes, filter, find, forEach, get, groupBy, isFinite, map, partition, reduce, sortBy } from "lodash/fp"
 import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"
@@ -32,9 +32,11 @@ class DateFocus {
       return
     }
 
-    const timeAxisComputed = computedAxes.computed[timeAxis]
-    const orientation = timeAxis[0] as "x" | "y"
-    const focusDate = this.clampDate(timeAxisComputed.ticks)(timeAxisComputed.scale.invert(mousePosition[orientation]))
+    const timeAxisComputed: AxisComputed = computedAxes.computed[timeAxis]
+    const orientation: "x" | "y" = timeAxis[0] as "x" | "y"
+    const focusDate: Date = this.clampDate(timeAxisComputed.ticks)(
+      timeAxisComputed.scale.invert(mousePosition[orientation]),
+    )
 
     // If a component focus or flag focus is being displayed, do not render a date focus
     if (
@@ -70,9 +72,9 @@ class DateFocus {
       },
     }
 
-    const comparisonAxis = find((axisName: AxisPosition) => axisName !== mainAxis && axisName[0] === mainAxis[0])(
-      computedAxes.requiredAxes
-    )
+    const comparisonAxis: AxisPosition = find(
+      (axisName: AxisPosition) => axisName !== mainAxis && axisName[0] === mainAxis[0],
+    )(computedAxes.requiredAxes)
 
     if (comparisonAxis) {
       const comparisonDate = computedAxes.computed[comparisonAxis].scale.invert(mainAxisComputed.scale(date))
@@ -91,9 +93,9 @@ class DateFocus {
     // Get focus data
     const focusData = this.state.current.get("computed").series.dataForFocus(dates)
     // Draw focus line and points
-    const isVertical = dates.main.axis[0] === "x"
-    const position = Math.round(
-      this.state.current.get(["computed", "axes", "computed", dates.main.axis, "scale"])(dates.main.date)
+    const isVertical: boolean = dates.main.axis[0] === "x"
+    const position: number = Math.round(
+      this.state.current.get(["computed", "axes", "computed", dates.main.axis, "scale"])(dates.main.date),
     )
     const options = this.state.current.get("config").focusDateOptions
 
@@ -120,8 +122,9 @@ class DateFocus {
   }
 
   private drawPoints(focusData: { [key: string]: any }[], isVertical: boolean, position: number): void {
-    const pointData = filter((series: any) => series.displayPoint && isFinite(series.valuePosition))(focusData)
-
+    const pointData: number[] = filter((series: any) => series.displayPoint && isFinite(series.valuePosition))(
+      focusData,
+    )
     this.elGroup
       .selectAll("circle")
       .data(pointData)
@@ -137,7 +140,7 @@ class DateFocus {
     dates: { [key: string]: any },
     focusData: { [key: string]: any }[],
     isVertical: boolean,
-    position: number
+    position: number,
   ): void {
     const label = drawHidden(this.el, "date")
 
@@ -207,8 +210,7 @@ class DateFocus {
   }
 
   private addTitle(el: D3Selection, title: string, total?: number): void {
-    el
-      .append("xhtml:li")
+    el.append("xhtml:li")
       .attr("class", "title")
       .text(title)
       .append("span")

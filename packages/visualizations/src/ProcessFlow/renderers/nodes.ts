@@ -101,9 +101,11 @@ class Nodes implements Renderer {
       .selectAll(`path.node.${styles.border}`)
       .filter(filterByMatchers(focusElement.matchers))
       .each(
-        withD3Element((d: TNode, el: HTMLElement): void => {
-          this.mouseOver(d3.select(el), d, focusElement.hideLabel)
-        })
+        withD3Element(
+          (d: TNode, el: HTMLElement): void => {
+            this.mouseOver(d3.select(el), d, focusElement.hideLabel)
+          },
+        ),
       )
   }
 
@@ -175,10 +177,12 @@ class Nodes implements Renderer {
     enteringGroups
       .append("path")
       .attr("class", `node ${styles.border}`)
-      .attr("d", (d: TNode) =>
-        d3Symbol()
-          .type(nodeShapeOptions[d.shape()].symbol)
-          .size(borderScale(d.size()))()
+      .attr(
+        "d",
+        (d: TNode): string =>
+          d3Symbol()
+            .type(nodeShapeOptions[d.shape()].symbol)
+            .size(borderScale(d.size()))(),
       )
       .attr("transform", this.rotate)
       .attr("fill", this.config.borderColor)
@@ -189,10 +193,12 @@ class Nodes implements Renderer {
     enteringGroups
       .append("path")
       .attr("class", `node ${styles.element}`)
-      .attr("d", (d: TNode) =>
-        d3Symbol()
-          .type(nodeShapeOptions[d.shape()].symbol)
-          .size(scale(d.size()))()
+      .attr(
+        "d",
+        (d: TNode): string =>
+          d3Symbol()
+            .type(nodeShapeOptions[d.shape()].symbol)
+            .size(scale(d.size()))(),
       )
       .attr("transform", this.rotate)
       .attr("fill", (d: TNode) => d.color())
@@ -214,10 +220,12 @@ class Nodes implements Renderer {
       .duration(this.config.duration)
       // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
       // but doesn't break the viz.
-      .attr("d", (d: TNode) =>
-        d3Symbol()
-          .type(nodeShapeOptions[d.shape()].symbol)
-          .size(borderScale(d.size()))()
+      .attr(
+        "d",
+        (d: TNode): string =>
+          d3Symbol()
+            .type(nodeShapeOptions[d.shape()].symbol)
+            .size(borderScale(d.size()))(),
       )
       .attr("transform", this.rotate)
 
@@ -228,10 +236,12 @@ class Nodes implements Renderer {
       .duration(this.config.duration)
       // NOTE: changing shape from one with straight edges to a circle/one with curved edges throws errors,
       // but doesn't break the viz.
-      .attr("d", (d: TNode) =>
-        d3Symbol()
-          .type(nodeShapeOptions[d.shape()].symbol)
-          .size(scale(d.size()))()
+      .attr(
+        "d",
+        (d: TNode): string =>
+          d3Symbol()
+            .type(nodeShapeOptions[d.shape()].symbol)
+            .size(scale(d.size()))(),
       )
       .attr("transform", this.rotate)
       .attr("fill", (d: TNode) => d.color())

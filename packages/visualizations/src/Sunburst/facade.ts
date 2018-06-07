@@ -90,25 +90,25 @@ class SunburstFacade implements Facade {
         this.state.readOnly(),
         this.state.computedWriter(["breadcrumb"]),
         this.events,
-        this.canvas.elementFor("breadcrumb")
+        this.canvas.elementFor("breadcrumb"),
       ),
       focus: new SunburstFocus(
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
         this.events,
-        this.canvas.elementFor("focus")
+        this.canvas.elementFor("focus"),
       ),
       renderer: new Renderer(
         this.state.readOnly(),
         this.state.computedWriter(["renderer"]),
         this.events,
-        this.canvas.elementFor("series")
+        this.canvas.elementFor("series"),
       ),
       rootLabel: new RootLabel(
         this.state.readOnly(),
         this.state.computedWriter(["rootLabel"]),
         this.events,
-        this.canvas.elementFor("rootLabel")
+        this.canvas.elementFor("rootLabel"),
       ),
     }
   }

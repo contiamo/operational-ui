@@ -31,7 +31,7 @@ export const validateDateString = (date: string): void => {
   const chunks = date.split("-").map(chunk => Number(chunk))
   if (chunks.length !== 3) {
     throw new Error(
-      "Date must be of the format YYYY-MM-DD. You seem to have supplied fewer numbers separated by dashes."
+      "Date must be of the format YYYY-MM-DD. You seem to have supplied fewer numbers separated by dashes.",
     )
   }
   if (isNaN(chunks[0])) {

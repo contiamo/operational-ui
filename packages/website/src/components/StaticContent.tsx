@@ -12,20 +12,22 @@ interface Props {
   markdownContent?: string
 }
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.body,
-  label: "showcasestaticcontent",
-  padding: "0 10px",
-  lineHeight: 1.6,
-  "& code": {
-    padding: "0 2px",
-    borderRadius: 3,
-    backgroundColor: lighten(theme.colors.info, 50),
-  },
-  "& > :first-child": {
-    marginTop: 0,
-  },
-}))
+const Container = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.body,
+    label: "showcasestaticcontent",
+    padding: "0 10px",
+    lineHeight: 1.6,
+    "& code": {
+      padding: "0 2px",
+      borderRadius: 3,
+      backgroundColor: lighten(theme.colors.info, 50),
+    },
+    "& > :first-child": {
+      marginTop: 0,
+    },
+  }),
+)
 
 export default class StaticContent extends React.Component<Props, {}> {
   containerNode: any

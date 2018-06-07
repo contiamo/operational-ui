@@ -95,7 +95,7 @@ class PieChartFacade implements Facade {
         this.state.readOnly(),
         this.state.computedWriter(["legend"]),
         this.events,
-        this.canvas.elementFor("legend")
+        this.canvas.elementFor("legend"),
       ),
       focus: new PieChartFocus(this.state.readOnly(), this.state.computedWriter(["focus"]), this.events, {
         main: this.canvas.elementFor("focus"),
@@ -109,7 +109,7 @@ class PieChartFacade implements Facade {
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
       this.events,
-      this.canvas.elementFor("series")
+      this.canvas.elementFor("series"),
     )
   }
 

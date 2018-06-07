@@ -1,4 +1,3 @@
-import * as d3 from "d3-selection"
 import { Accessor, Config, Facade, Focus, Legend } from "../shared/typings"
 import { DateRange } from "moment-range"
 export {
@@ -17,14 +16,21 @@ export {
   Canvas,
 } from "../shared/typings"
 
-export interface AxisConfig {
-  fontSize: number
-  margin: number
-  minTicks: number
-  outerPadding: number
-  showRules: boolean
-  tickOffset: number
-  tickSpacing: number
+export interface XAxisConfig {
+  fontSize?: number
+  margin?: number
+  minTicks?: number
+  outerPadding?: number
+  showRules?: boolean
+  tickOffset?: number
+  tickSpacing?: number
+}
+
+export interface YAxisConfig extends XAxisConfig {
+  minTopOffsetTopTick?: number
+}
+
+export interface AxisConfig extends XAxisConfig {
   minTopOffsetTopTick?: number
 }
 

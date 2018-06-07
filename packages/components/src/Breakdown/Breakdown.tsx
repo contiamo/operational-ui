@@ -1,7 +1,7 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import glamorous from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
-import { readableTextColor, setBrightness } from "@operational/utils"
+import { setBrightness } from "@operational/utils"
 
 import { WithTheme, Css, CssStatic } from "../types"
 import { IconName } from "../"
@@ -44,20 +44,20 @@ const Container = glamorous.div(
     maxWidth: 300,
   },
   ({ theme, onClick }: { theme?: Theme; onClick: () => void }): CssStatic => ({
-    padding: `${theme.spacing * 3 / 4}px 0`,
-    ...onClick
+    padding: `${(theme.spacing * 3) / 4}px 0`,
+    ...(onClick
       ? {
           cursor: "pointer",
           "&:hover": {
             backgroundColor: "rgba(0, 0, 0, 0.01)",
           },
         }
-      : {},
+      : {}),
     background: theme.colors.white,
     ":not(:first-child)": {
       borderTop: `1px solid ${theme.colors.separator}`,
     },
-  })
+  }),
 )
 
 const Content = glamorous.div({
@@ -71,7 +71,7 @@ const Label = glamorous.label(
   ({ theme }: { theme?: Theme }) => ({
     marginBottom: theme.spacing / 4,
     fontSize: theme.typography.small.fontSize,
-  })
+  }),
 )
 
 const Bar = glamorous.div(
@@ -113,7 +113,7 @@ const Bar = glamorous.div(
         width: `${fill * 100}%`,
       },
     }
-  }
+  },
 )
 
 const Number = glamorous.div(
@@ -127,10 +127,10 @@ const Number = glamorous.div(
     ...theme.typography.heading1,
     flex: `0 0 ${theme.spacing * 2.5}px`,
     color: theme.colors.lightGray,
-  })
+  }),
 )
 
-const Breakdown = (props: Props) => (
+const Breakdown: React.SFC<Props> = props => (
   <Container
     id={props.id}
     css={props.css}

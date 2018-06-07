@@ -56,10 +56,10 @@ const InputField = glamorous.input(
     // If the input field is standalone without a label, it should not specify any display properties
     // to avoid input fields that span the screen. Min width should take care of presentable
     // default looks.
-    ...isStandalone ? {} : { display: "block" },
+    ...(isStandalone ? {} : { display: "block" }),
     label: "input",
     minWidth: inputDefaultWidth,
-    padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3}px`,
+    padding: `${theme.spacing / 2}px ${(theme.spacing * 2) / 3}px`,
     border: "1px solid",
     opacity: disabled ? 0.6 : 1.0,
     borderColor: isError ? theme.colors.error : theme.colors.inputBorder,
@@ -67,7 +67,7 @@ const InputField = glamorous.input(
     borderRadius: theme.borderRadius,
     WebkitAppearance: "none",
     "&:focus": inputFocus({ theme, isError }),
-  })
+  }),
 )
 
 const Input = (props: Props) => {

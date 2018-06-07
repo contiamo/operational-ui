@@ -83,34 +83,36 @@ class ProcessFlowFocus implements Focus {
   }
 
   private appendContent(container: D3Selection, content: { [key: string]: any }[]): void {
-    const contentContainer = container.append("div").attr("class", styles.content)
-    forEach((contentItem: { [key: string]: any }) => {
-      contentContainer
-        .append("xhtml:li")
-        .attr("class", styles.title)
-        .text(`${contentItem.key}: `)
-        .append("span")
-        .text(contentItem.value)
-    })(content)
+    const contentContainer: D3Selection = container.append("div").attr("class", styles.content)
+    forEach(
+      (contentItem: { [key: string]: any }): void => {
+        contentContainer
+          .append("xhtml:li")
+          .attr("class", styles.title)
+          .text(`${contentItem.key}: `)
+          .append("span")
+          .text(contentItem.value)
+      },
+    )(content)
   }
 
   private addNodeBreakdowns(content: D3Selection, datum: TNode): void {
-    const breakdowns = computeBreakdowns(datum)
-    const container = content.append("div").attr("class", styles.breakdownsContainer)
-    const inputsTotal = computeBreakdownTotal(breakdowns.inputs)
-    const outputsTotal = computeBreakdownTotal(breakdowns.outputs)
-    const startsHerePercentage = Math.round(datum.journeyStarts * 100 / outputsTotal)
-    const endsHerePercentage = Math.round(datum.journeyEnds * 100 / inputsTotal)
-    const startsHereString = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " "
-    const endsHereString = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all inputs` : " "
-    const numberFormatter = this.state.current.get("config").numberFormatter
+    const breakdowns: Breakdowns = computeBreakdowns(datum),
+      container: D3Selection = content.append("div").attr("class", styles.breakdownsContainer),
+      inputsTotal: number = computeBreakdownTotal(breakdowns.inputs),
+      outputsTotal: number = computeBreakdownTotal(breakdowns.outputs),
+      startsHerePercentage: number = Math.round((datum.journeyStarts * 100) / outputsTotal),
+      endsHerePercentage: number = Math.round((datum.journeyEnds * 100) / inputsTotal),
+      startsHereString: string = !isNaN(startsHerePercentage) ? `${startsHerePercentage}% of all outputs` : " ",
+      endsHereString: string = !isNaN(endsHerePercentage) ? `${endsHerePercentage}% of all inputs` : " ",
+      numberFormatter: (x: number) => string = this.state.current.get("config").numberFormatter
 
     // Add "Starts here" breakdown
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Starts here"),
       addBreakdownBars(breakdowns.startsHere, numberFormatter),
-      addBreakdownComment(startsHereString)
+      addBreakdownComment(startsHereString),
     )(container)
 
     // Add "Ends here" breakdown
@@ -118,21 +120,21 @@ class ProcessFlowFocus implements Focus {
       addBreakdownContainer,
       addBreakdownTitle("Ends here"),
       addBreakdownBars(breakdowns.endsHere, numberFormatter),
-      addBreakdownComment(endsHereString)
+      addBreakdownComment(endsHereString),
     )(container)
 
     // Add inputs breakdown
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Inputs", ` (${numberFormatter(inputsTotal)})`),
-      addBreakdownBars(breakdowns.inputs, numberFormatter)
+      addBreakdownBars(breakdowns.inputs, numberFormatter),
     )(container)
 
     // Add outputs breakdown
     flow(
       addBreakdownContainer,
       addBreakdownTitle("Outputs", ` (${numberFormatter(outputsTotal)})`),
-      addBreakdownBars(breakdowns.outputs, numberFormatter)
+      addBreakdownBars(breakdowns.outputs, numberFormatter),
     )(container)
   }
 
@@ -174,35 +176,37 @@ class ProcessFlowFocus implements Focus {
 
 // Helper functions
 function computeBreakdowns(node: TNode): Breakdowns {
-  const inputs = map((link: TLink) => {
-    const size = link.size()
-    return {
-      size,
-      label: link.source().label(),
-      percentage: Math.round(size * 100 / node.size()),
-    }
-  })(node.targetLinks)
-
-  const outputs = map((link: TLink) => {
-    const size = link.size()
-    return {
-      size,
-      label: link.target().label(),
-      percentage: Math.round(size * 100 / node.size()),
-    }
-  })(node.sourceLinks)
-
-  const startsHere = [
+  const inputs: Breakdown[] = map(
+    (link: TLink): Breakdown => {
+      const size: number = link.size()
+      return {
+        size,
+        label: link.source().label(),
+        percentage: Math.round((size * 100) / node.size()),
+      }
+    },
+  )(node.targetLinks)
+  const outputs: Breakdown[] = map(
+    (link: TLink): Breakdown => {
+      const size: number = link.size()
+      return {
+        size,
+        label: link.target().label(),
+        percentage: Math.round((size * 100) / node.size()),
+      }
+    },
+  )(node.sourceLinks)
+  const startsHere: Breakdown[] = [
     {
       size: node.journeyStarts,
-      percentage: Math.round(node.journeyStarts * 100 / node.size()),
+      percentage: Math.round((node.journeyStarts * 100) / node.size()),
     },
   ]
 
   const endsHere = [
     {
       size: node.journeyEnds,
-      percentage: Math.round(node.journeyEnds * 100 / node.size()),
+      percentage: Math.round((node.journeyEnds * 100) / node.size()),
     },
   ]
 

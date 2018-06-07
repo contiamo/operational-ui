@@ -9,7 +9,7 @@ const Header = wrapDefaultTheme(ThemelessHeader)
 
 describe("Header", () => {
   it("Header component renders", () => {
-    const output = render(<Header className="hi">Hello</Header>)
+    const output = render(<Header>Hello</Header>)
     expect(output).toMatchSnapshot()
   })
 })

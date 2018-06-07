@@ -15,43 +15,47 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme, selected }: { theme: Theme; selected: boolean }): CssStatic => {
-  const backgroundColor = selected ? theme.colors.background : theme.colors.white
+const Container = glamorous.div(
+  ({ theme, selected }: { theme: Theme; selected: boolean }): CssStatic => {
+    const backgroundColor = selected ? theme.colors.background : theme.colors.white
 
-  return {
-    backgroundColor,
-    label: "selectoption",
-    position: "relative",
-    padding: `${theme.spacing / 2}px ${theme.spacing * 3 / 4}px`,
-    wordWrap: "break-word",
-    outline: "none",
-    borderTop: "1px solid",
-    borderColor: darken(theme.colors.background, 10),
+    return {
+      backgroundColor,
+      label: "selectoption",
+      position: "relative",
+      padding: `${theme.spacing / 2}px ${(theme.spacing * 3) / 4}px`,
+      wordWrap: "break-word",
+      outline: "none",
+      borderTop: "1px solid",
+      borderColor: darken(theme.colors.background, 10),
 
-    ":hover": {
-      backgroundColor: darken(theme.colors.background, 5),
-    },
-  }
-})
-
-const IconContainer = glamorous.div(({ theme }: { theme: Theme }): CssStatic => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: theme.spacing * 1.25,
-  height: theme.spacing * 1.25,
-  backgroundColor: theme.colors.info,
-  position: "absolute",
-  top: "50%",
-  right: 4,
-  borderRadius: "50%",
-  transform: "translate3d(0, -50%, 0)",
-  "& svg": {
-    color: theme.colors.white,
-    width: theme.spacing * 0.75,
-    height: theme.spacing * 0.75,
+      ":hover": {
+        backgroundColor: darken(theme.colors.background, 5),
+      },
+    }
   },
-}))
+)
+
+const IconContainer = glamorous.div(
+  ({ theme }: { theme: Theme }): CssStatic => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: theme.spacing * 1.25,
+    height: theme.spacing * 1.25,
+    backgroundColor: theme.colors.info,
+    position: "absolute",
+    top: "50%",
+    right: 4,
+    borderRadius: "50%",
+    transform: "translate3d(0, -50%, 0)",
+    "& svg": {
+      color: theme.colors.white,
+      width: theme.spacing * 0.75,
+      height: theme.spacing * 0.75,
+    },
+  }),
+)
 
 const SelectOption = (props: Props) => (
   <Container

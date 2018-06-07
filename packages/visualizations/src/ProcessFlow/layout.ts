@@ -22,18 +22,22 @@ class Layout {
     let i: number = 0
     const assignNextNodes = (nodes: TNode[]) => {
       nextNodes = []
-      forEach((node: TNode) => {
-        node.y = i
-        forEach((link: TLink) => {
-          if (indexOf(link.target())(nextNodes) < 0) {
-            nextNodes.push(link.target())
-          }
-        })(node.sourceLinks)
-      })(nodes)
+      forEach(
+        (node: TNode): void => {
+          node.y = i
+          forEach(
+            (link: TLink): void => {
+              if (indexOf(link.target())(nextNodes) < 0) {
+                nextNodes.push(link.target())
+              }
+            },
+          )(node.sourceLinks)
+        },
+      )(nodes)
       if (nextNodes.length > 0 && i < this.nodes.length) {
         if (nodes.length === nextNodes.length) {
           throw new Error(
-            "The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the `contiamo-visualizations` package."
+            "The data contains at least one loop. Handle loops before rendering, by passing the journeys through the ProcessFlowLoopHandler from the `contiamo-visualizations` package.",
           )
         }
         i = i + 1
@@ -44,48 +48,58 @@ class Layout {
   }
 
   private placeMultipleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
-    const multipleSourceNodes = filter((node: TNode) => node.targetLinks.length > 1)(nodesInRow)
-    forEach((node: TNode) => {
-      const sourcePositions = map((link: TLink) => link.source().x)(node.targetLinks)
-      // A node should be placed directly under a source node if possible:
-      // Calculate possible node x positions that satisfy the following conditions
-      const possiblePositions = flow(
-        // 1) there can only be one source node directly above
-        filter(singleSourceAbove(sourcePositions)),
-        // 2) there cannot be another (non-source) node in between the node and the source node above
-        filter(isSourceDirectlyAbove(node, this.nodes)),
-        // 3) there can't already be another node on the same row in that position
-        filter(xPositionAvailable(nodePositions))
-      )(sourcePositions)
+    const multipleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length > 1)(nodesInRow)
+    forEach(
+      (node: TNode): void => {
+        const sourcePositions: number[] = map((link: TLink): number => link.source().x)(node.targetLinks)
+        // A node should be placed directly under a source node if possible:
+        // Calculate possible node x positions that satisfy the following conditions
+        const possiblePositions = flow(
+          // 1) there can only be one source node directly above
+          filter(singleSourceAbove(sourcePositions)),
+          // 2) there cannot be another (non-source) node in between the node and the source node above
+          filter(isSourceDirectlyAbove(node, this.nodes)),
+          // 3) there can't already be another node on the same row in that position
+          filter(xPositionAvailable(nodePositions)),
+        )(sourcePositions)
 
-      const calculated = calculateXPosition(sourcePositions, possiblePositions)
-      if (calculated.isNewColumn) {
-        shiftNodesToRight(calculated.xPosition)(this.nodes)
-      }
-      node.x = calculated.xPosition
-      nodePositions.push(calculated.xPosition)
-    })(multipleSourceNodes)
+        const calculated = calculateXPosition(sourcePositions, possiblePositions)
+        if (calculated.isNewColumn) {
+          shiftNodesToRight(calculated.xPosition)(this.nodes)
+        }
+        node.x = calculated.xPosition
+        nodePositions.push(calculated.xPosition)
+      },
+    )(multipleSourceNodes)
   }
 
   private computeNodeXPositions(): void {
-    const rows = flow(map(get("y")), sortBy(identity), uniq)(this.nodes)
+    const rows: number[] = flow(
+      map(get("y")),
+      sortBy(identity),
+      uniq,
+    )(this.nodes)
 
-    forEach((row: number) => {
-      const nodesInRow = filter({ y: row })(this.nodes)
-      if (row === 0) {
-        // For the top row, spread nodes out equally
-        forEach.convert({ cap: false })((node: TNode, i: number) => {
-          node.x = i + 1
-        })(nodesInRow)
-      } else {
-        const nodePositions: number[] = []
-        // Place nodes with only one incoming link directly below their source node, if possible.
-        placeSingleSourceNodes(nodesInRow, nodePositions)
-        // If there are more than 1 incoming links, calculate optimal x position for node,
-        //  and move other nodes as required.
-        this.placeMultipleSourceNodes(nodesInRow, nodePositions)
-      }
-    })(rows)
+    forEach(
+      (row: number): void => {
+        const nodesInRow: TNode[] = filter({ y: row })(this.nodes)
+        if (row === 0) {
+          // For the top row, spread nodes out equally
+          forEach.convert({ cap: false })(
+            (node: TNode, i: number): void => {
+              node.x = i + 1
+            },
+          )(nodesInRow)
+        } else {
+          const nodePositions: number[] = []
+          // Place nodes with only one incoming link directly below their source node, if possible.
+          placeSingleSourceNodes(nodesInRow, nodePositions)
+          // If there are more than 1 incoming links, calculate optimal x position for node,
+          //  and move other nodes as required.
+          this.placeMultipleSourceNodes(nodesInRow, nodePositions)
+        }
+      },
+    )(rows)
   }
 }
 
@@ -100,11 +114,13 @@ function placeNode(used: number[], x: number, node: TNode): void {
 }
 
 function placeSingleSourceNodes(nodesInRow: TNode[], nodePositions: number[]): void {
-  const singleSourceNodes = filter((node: TNode): boolean => node.targetLinks.length === 1)(nodesInRow)
-  forEach((node: TNode) => {
-    const sourceNodePosition = node.targetLinks[0].source().x
-    placeNode(nodePositions, sourceNodePosition, node)
-  })(singleSourceNodes)
+  const singleSourceNodes: TNode[] = filter((node: TNode): boolean => node.targetLinks.length === 1)(nodesInRow)
+  forEach(
+    (node: TNode): void => {
+      const sourceNodePosition: number = node.targetLinks[0].source().x
+      placeNode(nodePositions, sourceNodePosition, node)
+    },
+  )(singleSourceNodes)
 }
 
 function singleSourceAbove(sourcePositions: number[]) {
@@ -122,7 +138,7 @@ function isSourceDirectlyAbove(node: TNode, nodes: TNode[]) {
       filter({ x: xValue }),
       reduce((max: number, n: TNode) => {
         return Math.max(max, n.y)
-      }, 0)
+      }, 0),
     )(nodes)
     return maxYVal === findSourceNodeAtX(node.targetLinks).source().y
   }
@@ -135,17 +151,22 @@ function xPositionAvailable(nodePositions: number[]) {
 // Shift all nodes that have an x-value >= the given value to the right by one place
 function shiftNodesToRight(x: number) {
   return flow(
-    filter((n: TNode) => n.x >= x),
-    forEach((n: TNode) => {
-      n.x += 1
-    })
+    filter((n: TNode): boolean => n.x >= x),
+    forEach(
+      (n: TNode): void => {
+        n.x += 1
+      },
+    ),
   )
 }
 
 // The mean source node position is calculated as a starting point for positioning the node
-function calculateXPosition(sourcePositions: number[], possiblePositions: number[]) {
+function calculateXPosition(
+  sourcePositions: number[],
+  possiblePositions: number[],
+): { xPosition: number; isNewColumn: boolean } {
   let isNewColumn = false
-  const sourcePositionsSum = reduce((sum: number, val: number) => {
+  const sourcePositionsSum: number = reduce((sum: number, val: number): number => {
     return sum + val
   }, 0)(sourcePositions)
   const meanSourcePosition = sourcePositionsSum / sourcePositions.length

@@ -3,22 +3,26 @@ import glamorous, { GlamorousComponent } from "glamorous"
 import { Theme } from "@operational/theme"
 import { Css } from "../types"
 
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  display: "inline-block",
-}))
+const Container = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    display: "inline-block",
+  }),
+)
 
-const Label = glamorous.label(({ theme }: { theme: Theme }): {} => ({
-  ...theme.typography.small,
-  fontWeight: 600,
-  opacity: 0.7,
-  display: "inline-block",
-  marginBottom: theme.spacing / 4,
-}))
+const Label = glamorous.label(
+  ({ theme }: { theme: Theme }): {} => ({
+    ...theme.typography.small,
+    fontWeight: 600,
+    opacity: 0.7,
+    display: "inline-block",
+    marginBottom: theme.spacing / 4,
+  }),
+)
 
 type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id"> & { css?: Css }
 
-const withLabel = <T extends React.StatelessComponent<P>, P extends IComponent>(Component: T): React.SFC<P> => {
-  return (props: P) => {
+function withLabel<T extends IComponent>(Component: React.ComponentType<T>): React.SFC<T> {
+  return (props: T & IComponent) => {
     const { id, label } = props
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
     return (

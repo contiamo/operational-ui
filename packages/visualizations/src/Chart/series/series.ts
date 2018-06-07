@@ -78,19 +78,22 @@ class ChartSeries {
     this.oldRenderers = []
     const rendererTypes = map(get("type"))(this.renderAs())
     this.removeAllExcept(rendererTypes)
-    forEach((options: SingleRendererOptions<any>) => {
-      const renderer: RendererClass<any> = this.get(options.type)
-      renderer ? renderer.update(this.options.data, options) : this.addRenderer(options)
-      if (options.type === "symbol") {
-        this.symbolOffset = (d: Datum) => Math.ceil(Math.sqrt(((renderer || this.get(options.type)) as any).size(d)))
-      }
-    })(this.renderAs())
+    forEach(
+      (options: SingleRendererOptions<any>): void => {
+        const renderer: RendererClass<any> = this.get(options.type)
+        renderer ? renderer.update(this.options.data, options) : this.addRenderer(options)
+        if (options.type === "symbol") {
+          this.symbolOffset = (d: Datum) => Math.ceil(Math.sqrt(((renderer || this.get(options.type)) as any).size(d)))
+        }
+      },
+    )(this.renderAs())
   }
 
   private removeAllExcept(types: RendererType[]): void {
-    flow(filter((renderer: RendererClass<any>) => !includes(renderer.type)(types)), forEach(this.remove.bind(this)))(
-      this.renderers
-    )
+    flow(
+      filter((renderer: RendererClass<any>): boolean => !includes(renderer.type)(types)),
+      forEach(this.remove.bind(this)),
+    )(this.renderers)
   }
 
   get(type: string): RendererClass<any> {
@@ -142,9 +145,11 @@ class ChartSeries {
 
   displayFocusPoint(): boolean {
     return (
-      filter((renderer: RendererClass<any>) => {
-        return renderer.type === "area" || renderer.type === "line"
-      })(this.renderers).length > 0
+      filter(
+        (renderer: RendererClass<any>): boolean => {
+          return renderer.type === "area" || renderer.type === "line"
+        },
+      )(this.renderers).length > 0
     )
   }
 
@@ -169,9 +174,11 @@ class ChartSeries {
       xIsBaseline ? this.yAxis() : this.xAxis(),
       "scale",
     ])
-    const datum = find((d: Datum) => {
-      return baselineAccessor(d).toString() === focus.toString()
-    })(this.data())
+    const datum: Datum = find(
+      (d: Datum): boolean => {
+        return baselineAccessor(d).toString() === focus.toString()
+      },
+    )(this.data())
 
     return {
       value: !datum || isNil(valueAccessor(datum)) ? "-" : valueAccessor(datum),

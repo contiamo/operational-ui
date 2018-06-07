@@ -1,32 +1,18 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-
-import { WithTheme, Css, CssStatic } from "../types"
+import glamorous from "glamorous"
 
 export interface Props {
-  id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
-  className?: string
-  children?: React.ReactNode
+  start: any
+  middle: any
+  end: any
 }
 
-const Container = glamorous.header(({ theme }: WithTheme): CssStatic => ({
-  label: "header",
-  display: "flex",
-  justifyContent: "space-between",
-  backgroundColor: theme.colors.white,
-  height: theme.box,
-  alignItems: "center",
-  padding: `0 ${theme.spacing * 1.5}px`,
-  boxShadow: theme.shadows.card,
-}))
+const HeaderBar = glamorous.div({
+  width: "100vw",
+  height: 44,
+  background: "#3e3e3e" /** @todo themeify when final */,
+})
 
-const Header = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
-    {props.children}
-  </Container>
-)
+const Header = () => <HeaderBar />
 
 export default Header

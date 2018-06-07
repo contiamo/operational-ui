@@ -29,7 +29,7 @@ const StatusContainer = glamorous.div(
     return {
       backgroundColor: expandColor(theme, color) || theme.colors.info,
     }
-  }
+  },
 )
 
 const Content = glamorous.div(
@@ -46,7 +46,7 @@ const Content = glamorous.div(
   },
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.typography.body,
-  })
+  }),
 )
 
 const Container = glamorous.li(
@@ -71,7 +71,7 @@ const Container = glamorous.li(
     "&::before": {
       borderLeft: `1px solid ${theme.colors.separator}`,
     },
-  })
+  }),
 )
 
 const TimelineItem = ({ css, id, className, children, color = "info" }: Props) => {

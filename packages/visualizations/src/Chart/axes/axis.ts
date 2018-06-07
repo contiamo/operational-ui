@@ -10,7 +10,7 @@ class Axis {
     events: EventBus,
     el: D3Selection,
     type: string,
-    position: AxisPosition
+    position: AxisPosition,
   ) {
     switch (type) {
       case "quant":

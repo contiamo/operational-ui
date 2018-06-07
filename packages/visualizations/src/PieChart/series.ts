@@ -41,9 +41,11 @@ class Series {
 
   private prepareData(): void {
     this.data = flow(
-      filter((datum: Datum) => {
-        return this.renderer.key(datum) && this.renderer.key(datum).length > 0 && this.renderer.value(datum) > 0
-      })
+      filter(
+        (datum: Datum): boolean => {
+          return this.renderer.key(datum) && this.renderer.key(datum).length > 0 && this.renderer.value(datum) > 0
+        },
+      ),
     )(this.state.current.get("accessors").data.data(this.attributes))
     this.renderer.setData(this.data)
     this.stateWriter("data", this.data)

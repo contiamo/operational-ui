@@ -13,23 +13,25 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): CssStatic => ({
-  ...theme.typography.heading1,
-  label: "cardheader",
-  display: "flex",
-  alignItems: "center",
-  /** @todo Add to theme once colors are updated across codebase */
-  backgroundColor: "#F9F9F9",
-  /** @todo Add to theme once colors are updated across codebase */
-  color: "#747474",
-  // This ensures that the card header text and card controls are placed in opposite corners.
-  justifyContent: "space-between",
-  height: 2 * theme.spacing,
-  margin: -theme.spacing,
-  marginBottom: theme.spacing,
-  padding: `0 ${theme.spacing}px`,
-  lineHeight: 1,
-}))
+const Container = glamorous.div(
+  ({ theme }: WithTheme): CssStatic => ({
+    ...theme.typography.heading1,
+    label: "cardheader",
+    display: "flex",
+    alignItems: "center",
+    /** @todo Add to theme once colors are updated across codebase */
+    backgroundColor: "#F9F9F9",
+    /** @todo Add to theme once colors are updated across codebase */
+    color: "#747474",
+    // This ensures that the card header text and card controls are placed in opposite corners.
+    justifyContent: "space-between",
+    height: 2 * theme.spacing,
+    margin: -theme.spacing,
+    marginBottom: theme.spacing,
+    padding: `0 ${theme.spacing}px`,
+    lineHeight: 1,
+  }),
+)
 
 const CardHeader = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className}>

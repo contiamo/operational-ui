@@ -25,8 +25,7 @@ const XFlagRenderer = {
 const YFlagRenderer = {
   type: "flag",
   accessors: {
-    color: (series, d) => (d.y > 250 ? "red" : "purple"),
-    opacity: (series, d) => 0.4,
+    color: (series: any, d: any) => (d.y > 250 ? "red" : "purple"),
   },
   config: {
     axis: "y1",

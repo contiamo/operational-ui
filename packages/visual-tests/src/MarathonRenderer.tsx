@@ -16,7 +16,7 @@ const Content = glamorous.div(
   ({ theme }: { theme: Theme }) => ({
     backgroundColor: theme.colors.background,
     borderRadius: 4,
-  })
+  }),
 )
 
 const Item = glamorous.li({
@@ -30,28 +30,32 @@ const Item = glamorous.li({
   },
 })
 
-const Title = glamorous.p(({ theme }: { theme: Theme }): any => ({
-  ...theme.typography.heading1,
-  display: "inline-block",
-  "& :first-child": {
-    position: "relative",
-    top: -2,
-    marginRight: 6,
-  },
-  "& > *": {
+const Title = glamorous.p(
+  ({ theme }: { theme: Theme }): any => ({
+    ...theme.typography.heading1,
     display: "inline-block",
-    verticalAlign: "middle",
-  },
-}))
+    "& :first-child": {
+      position: "relative",
+      top: -2,
+      marginRight: 6,
+    },
+    "& > *": {
+      display: "inline-block",
+      verticalAlign: "middle",
+    },
+  }),
+)
 
-const FailureMessage = glamorous.p(({ theme }: { theme: Theme }): any => ({
-  color: theme.colors.error,
-  display: "inline-block",
-  marginLeft: 8,
-  "&::before": {
-    content: " → ",
-  },
-}))
+const FailureMessage = glamorous.p(
+  ({ theme }: { theme: Theme }): any => ({
+    color: theme.colors.error,
+    display: "inline-block",
+    marginLeft: 8,
+    "&::before": {
+      content: " → ",
+    },
+  }),
+)
 
 const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
   <Div>

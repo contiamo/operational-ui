@@ -55,15 +55,15 @@ const TextareaComp = glamorous.textarea(
       display: "block",
       width: "100%",
       minHeight: 120,
-      ...numericalHeightSetting === null ? {} : { height: numericalHeightSetting - 20 },
+      ...(numericalHeightSetting === null ? {} : { height: numericalHeightSetting - 20 }),
       borderRadius: 4,
       borderColor: isError ? theme.colors.error : theme.colors.inputBorder,
-      padding: `${theme.spacing / 2}px ${theme.spacing * 2 / 3}px`,
+      padding: `${theme.spacing / 2}px ${(theme.spacing * 2) / 3}px`,
       fontFamily: isCode ? "monospace" : "inherit",
       opacity: disabled ? 0.6 : 1.0,
       ":focus": inputFocus({ theme, isError }),
     }
-  }
+  },
 )
 
 const Textarea = (props: Props) => {

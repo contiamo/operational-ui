@@ -129,7 +129,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           },
           type: "bars",
         },
-      ])
+      ]),
     )
     viz.draw()
   })
@@ -146,7 +146,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           },
           type: "bars",
         },
-      ])
+      ]),
     )
     viz.draw()
   })

@@ -29,22 +29,26 @@ export interface State {
   isOpen: boolean
 }
 
-const Container = glamorous.div(({ theme }: WithTheme): {} => ({
-  label: "contextmenu",
-  cursor: "pointer",
-  position: "relative",
-  width: "fit-content",
-}))
+const Container = glamorous.div(
+  ({ theme }: WithTheme): {} => ({
+    label: "contextmenu",
+    cursor: "pointer",
+    position: "relative",
+    width: "fit-content",
+  }),
+)
 
-const MenuContainer = glamorous.div(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
-  position: "absolute",
-  top: `calc(100% + ${theme.spacing / 2}px)`,
-  left: -theme.spacing,
-  boxShadow: theme.shadows.popup,
-  width: "fit-content",
-  zIndex: theme.baseZIndex + 300,
-  ...isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" },
-}))
+const MenuContainer = glamorous.div(
+  ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
+    position: "absolute",
+    top: `calc(100% + ${theme.spacing / 2}px)`,
+    left: -theme.spacing,
+    boxShadow: theme.shadows.popup,
+    width: "fit-content",
+    zIndex: theme.baseZIndex + 300,
+    ...(isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }),
+  }),
+)
 
 class ContextMenu extends React.Component<Props, State> {
   state = {
@@ -81,28 +85,31 @@ class ContextMenu extends React.Component<Props, State> {
   render() {
     const menuItems: any = []
     const children: any = []
-    React.Children.forEach(this.props.children, (child: any, index: number): void => {
-      if (child.props && child.props.__isContextMenuItem) {
-        const { onClick } = child.props
-        menuItems.push(
-          React.cloneElement(child, {
-            key: "contextmenu-" + index,
-            onClick:
-              onClick &&
-              (() => {
-                if (!this.props.keepOpenOnItemClick) {
-                  this.setState(prevState => ({
-                    isOpen: false,
-                  }))
-                }
-                onClick()
-              }),
-          })
-        )
-      } else {
-        children.push(child)
-      }
-    })
+    React.Children.forEach(
+      this.props.children,
+      (child: any, index: number): void => {
+        if (child.props && child.props.__isContextMenuItem) {
+          const { onClick } = child.props
+          menuItems.push(
+            React.cloneElement(child, {
+              key: "contextmenu-" + index,
+              onClick:
+                onClick &&
+                (() => {
+                  if (!this.props.keepOpenOnItemClick) {
+                    this.setState(prevState => ({
+                      isOpen: false,
+                    }))
+                  }
+                  onClick()
+                }),
+            }),
+          )
+        } else {
+          children.push(child)
+        }
+      },
+    )
 
     return (
       <Container

@@ -42,7 +42,7 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
   const daysInCurrentMonth = daysInMonth(month, year)
   const daysInPreviousMonth = daysInMonth(prevMonth, prevYear)
   const nextPlaceholderDays =
-    (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0 ? 0 : 7 - (daysInCurrentMonth + prevPlaceholderDays) % 7
+    (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0 ? 0 : 7 - ((daysInCurrentMonth + prevPlaceholderDays) % 7)
   return (
     <Days>
       {range(prevPlaceholderDays).map((number, index) => {

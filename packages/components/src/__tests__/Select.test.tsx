@@ -2,7 +2,7 @@ import * as React from "react"
 import { render } from "enzyme"
 
 import { Select as ThemelessSelect } from "../index"
-import { IOption } from "../Select"
+import { IOption } from "../Select/Select"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 
 const Select = wrapDefaultTheme(ThemelessSelect)
@@ -16,6 +16,6 @@ const options: IOption[] = [
 
 describe("Select", () => {
   it("Should render correctly", () => {
-    expect(render(<Select options={options} disabled filterable multiple placeholder="Select me" />)).toMatchSnapshot()
+    expect(render(<Select value="hello" options={options} placeholder="Select me" />)).toMatchSnapshot()
   })
 })

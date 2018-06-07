@@ -59,7 +59,7 @@ const TabList = glamorous.ul(
     "&:after": {
       background: darken(theme.colors.lightGray, 6),
     },
-  })
+  }),
 )
 
 const TabPanel = glamorous.div({
@@ -97,13 +97,13 @@ const TabTitle = glamorous.li(
     ...theme.typography.body,
     ...overflowEllipsis,
     borderBottom: `2px solid transparent`,
-    ...isActive
+    ...(isActive
       ? {
           color,
           borderColor: color,
         }
-      : {},
-    ...disabled
+      : {}),
+    ...(disabled
       ? {
           color: theme.colors.lightGray,
         }
@@ -111,22 +111,22 @@ const TabTitle = glamorous.li(
           "&:hover": {
             color,
           },
-        },
-  })
+        }),
+  }),
 )
 
 const Tabs = (props: PropsWithTheme) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
     props.children,
-    (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index })
+    (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index }),
   )
 
   const color = expandColor(props.theme, props.activeColor) || props.theme.colors.info
 
   // Display only the active panel based off the children props
   const { children: panelContent, disabled }: TabProps = childrenProps.find(
-    ({ index }) => index === (props.active || 0)
+    ({ index }) => index === (props.active || 0),
   )
   const activePanel: JSX.Element = disabled ? null : <TabPanel>{panelContent}</TabPanel>
 

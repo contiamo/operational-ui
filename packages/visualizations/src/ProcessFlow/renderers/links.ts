@@ -63,9 +63,11 @@ class Links implements Renderer {
       .selectAll(`path.link.${styles.element}`)
       .filter(filterByMatchers(focusElement.matchers))
       .each(
-        withD3Element((d: TLink, el: HTMLElement) => {
-          this.mouseOver(d3.select(el), d, focusElement.hideLabel)
-        })
+        withD3Element(
+          (d: TLink, el: HTMLElement): void => {
+            this.mouseOver(d3.select(el), d, focusElement.hideLabel)
+          },
+        ),
       )
   }
 
@@ -74,9 +76,11 @@ class Links implements Renderer {
       this.removeHighlights()
     }
     // Highlight path.element when `path.${styles.border}` is hovered
-    const pathEl = this.el.selectAll(`path.link.${styles.element}`).filter((link: TLink): boolean => {
-      return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
-    })
+    const pathEl: D3Selection = this.el.selectAll(`path.link.${styles.element}`).filter(
+      (link: TLink): boolean => {
+        return link.sourceId() === d.sourceId() && link.targetId() === d.targetId()
+      },
+    )
     pathEl.attr("stroke", this.config.highlightColor)
 
     // Highlight source and target nodes as well as link
@@ -84,9 +88,11 @@ class Links implements Renderer {
       .selectAll(`path.node.${styles.border}`)
       .filter((node: TNode) => node.id() === d.sourceId() || node.id() === d.targetId())
       .each(
-        withD3Element((node: TNode, el: HTMLElement) => {
-          d3.select(el).attr("stroke", this.config.highlightColor)
-        })
+        withD3Element(
+          (node: TNode, el: HTMLElement): void => {
+            d3.select(el).attr("stroke", this.config.highlightColor)
+          },
+        ),
       )
   }
 

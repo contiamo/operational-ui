@@ -20,14 +20,16 @@ const Container = glamorous.div({
   },
 })
 
-const Slash = glamorous.span(({ theme }: WithTheme): CssStatic => ({
-  display: "inline-block",
-  margin: `0 ${theme.spacing / 2}px`,
-  color: theme.colors.gray,
-  ":first-child": {
-    marginLeft: 0,
-  },
-}))
+const Slash = glamorous.span(
+  ({ theme }: WithTheme): CssStatic => ({
+    display: "inline-block",
+    margin: `0 ${theme.spacing / 2}px`,
+    color: theme.colors.gray,
+    ":first-child": {
+      marginLeft: 0,
+    },
+  }),
+)
 
 // Intersperse slashes between the children (`<Breadcrumb />` elements)
 // Curried first argument is necessary to give unique auto-incrementing

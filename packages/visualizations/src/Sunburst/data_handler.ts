@@ -22,9 +22,11 @@ class DataHandler {
     const accessors: Accessors<Datum> = this.state.current.get("accessors").series
 
     // In prepared data, original data is saved in d.data, so accessors need to be modified accordingly
-    forEach.convert({ cap: false })((accessor: Accessor<any, any>, key: string): void => {
-      ;(this as any)[key] = (d: Datum) => (d.data ? accessor(d.data) : accessor(d))
-    })(accessors)
+    forEach.convert({ cap: false })(
+      (accessor: Accessor<any, any>, key: string): void => {
+        ;(this as any)[key] = (d: Datum) => (d.data ? accessor(d.data) : accessor(d))
+      },
+    )(accessors)
   }
 
   prepareData(): Datum[] {
@@ -65,9 +67,11 @@ class DataHandler {
 
     this.checkDataValidity()
 
-    forEach((d: Datum): void => {
-      d.zoomable = d.parent && !!d.children
-    })(this.data)
+    forEach(
+      (d: Datum): void => {
+        d.zoomable = d.parent && !!d.children
+      },
+    )(this.data)
 
     this.stateWriter("data", this.data)
     return this.data
@@ -115,14 +119,16 @@ class DataHandler {
     }
 
     // Parent nodes cannot be smaller than the sum of their children
-    const childrenExceedParent: Datum[] = filter((d: Datum): boolean => {
-      const childSum: number = reduce((sum: number, child: Datum): number => sum + child.value, 0)(d.children)
-      return d.value < childSum
-    })(this.data)
+    const childrenExceedParent: Datum[] = filter(
+      (d: Datum): boolean => {
+        const childSum: number = reduce((sum: number, child: Datum): number => sum + child.value, 0)(d.children)
+        return d.value < childSum
+      },
+    )(this.data)
 
     if (childrenExceedParent.length > 0) {
       throw new Error(
-        `The following nodes are smaller than the sum of their child nodes: ${map(this.name)(childrenExceedParent)}`
+        `The following nodes are smaller than the sum of their child nodes: ${map(this.name)(childrenExceedParent)}`,
       )
     }
   }

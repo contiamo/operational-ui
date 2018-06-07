@@ -46,7 +46,8 @@ const createData = (options: any) => {
   }
 }
 
-const symbols = {
+/** @todo @imogenf please type this better */
+const symbols: any = {
   1: "circle",
   2: "cross",
   3: "diamond",
@@ -74,7 +75,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       createData({
         symbol: (series: any, d: any) => symbols[d.y],
         size: (series: any, d: any) => 25 * d.y,
-      })
+      }),
     )
     viz.draw()
   })
@@ -85,7 +86,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         symbol: (series: any, d: any) => symbols[d.y],
         size: (series: any, d: any) => 25 * d.y,
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
-      })
+      }),
     )
     viz.draw()
   })
@@ -97,7 +98,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         size: (series: any, d: any) => 25 * d.y,
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         fill: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
-      })
+      }),
     )
     viz.draw()
   })
@@ -110,7 +111,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         stroke: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         fill: (series: any, d: any) => (d.y % 2 === 0 ? series.legendColor() : "red"),
         opacity: (series: any, d: any) => (d.y % 2 === 1 ? 0.4 : 0.6),
-      })
+      }),
     )
     viz.draw()
   })

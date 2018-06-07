@@ -11,13 +11,11 @@ import { operational as theme } from "@operational/theme"
 import { has, isEmpty, uniqueId } from "lodash/fp"
 import {
   Accessors,
-  AccessorsObject,
   AxesData,
   AxisPosition,
   ChartConfig,
   Components,
   Data,
-  DataAccessors,
   Datum,
   Facade,
   FocusElement,
@@ -141,7 +139,7 @@ class ChartFacade implements Facade {
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
       this.events,
-      this.canvas.elementFor("series")
+      this.canvas.elementFor("series"),
     )
   }
 

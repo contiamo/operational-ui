@@ -25,9 +25,11 @@ function findNode(nodeId: string): Node {
 function getSourcesRecursively(sources: NodesList): NodesList {
   const numberOfLinks: number = sources.length
   let sourcesList: NodesList = sources
-  forEach((sourceId: string): void => {
-    sourcesList = sourcesList.concat(findNode(sourceId).linkedToFrom)
-  })(sources)
+  forEach(
+    (sourceId: string): void => {
+      sourcesList = sourcesList.concat(findNode(sourceId).linkedToFrom)
+    },
+  )(sources)
   const uniqueSources = uniq(sourcesList)
 
   return uniqueSources.length > numberOfLinks ? getSourcesRecursively(uniqueSources) : uniqueSources
@@ -64,8 +66,10 @@ function removeLoops(path: Path): Path {
 }
 
 export default (journeys: Journey[]): Journey[] => {
-  forEach((journey: Journey): void => {
-    journey.path = removeLoops(journey.path)
-  })(journeys)
+  forEach(
+    (journey: Journey): void => {
+      journey.path = removeLoops(journey.path)
+    },
+  )(journeys)
   return journeys
 }

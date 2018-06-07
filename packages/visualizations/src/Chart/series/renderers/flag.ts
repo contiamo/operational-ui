@@ -269,7 +269,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         sign = attributes.y2 < attributes.y1 ? 1 : -1
         tip = (d: Datum) => (this.direction(d) === "down" ? line(d) - this.flagWidth : line(d) + this.flagWidth)
         const y0 = attributes.y2
-        const y1 = y0 + sign * this.flagHeight / 2
+        const y1 = y0 + (sign * this.flagHeight) / 2
         const y2 = y0 + sign * this.flagHeight
         return (d: Datum) => `M${line(d)}, ${y0} L${tip(d)}, ${y1} L${line(d)}, ${y2}`
       case "y":
@@ -279,7 +279,7 @@ class Flag implements RendererClass<FlagRendererAccessors> {
         tip = (d: Datum) =>
           line(d) === 0 || this.direction(d) === "down" ? line(d) + this.flagWidth : line(d) - this.flagWidth
         const x0 = attributes.x2
-        const x1 = x0 + sign * this.flagHeight / 2
+        const x1 = x0 + (sign * this.flagHeight) / 2
         const x2 = x0 + sign * this.flagHeight
         return (d: Datum) => `M${x0}, ${line(d)} L${x1}, ${tip(d)} L${x2}, ${line(d)} Z`
       default:

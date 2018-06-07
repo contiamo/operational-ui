@@ -95,7 +95,7 @@ class Marathon extends React.Component<Props, State> {
         this.setStateById(({ id, tests, completed }: State) => ({
           id,
           tests: tests.map(
-            (test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test)
+            (test, index) => (index === completed ? { ...test, errors: [...test.errors, error] } : test),
           ),
         }))
       },
@@ -132,7 +132,7 @@ class Marathon extends React.Component<Props, State> {
           id: currentTestId,
           tests: prevState.tests.map(
             (test: Test, index: number) =>
-              index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test
+              index === prevState.completed ? { ...test, errors: [...test.errors, String(err)] } : test,
           ),
         }))
       }
@@ -204,7 +204,7 @@ class Marathon extends React.Component<Props, State> {
           completed: 0,
           // Set ignoreId flag to true to proceed with the state update even though test ids don't match.
         }),
-        true
+        true,
       ).then(() => {
         this.startTests()
       })

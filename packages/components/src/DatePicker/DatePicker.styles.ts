@@ -18,7 +18,7 @@ export const Container: GlamorousComponent<ContainerProps, ContainerProps & { th
     label: "datepicker",
     width: inputDefaultWidth,
     position: "relative",
-  })
+  }),
 )
 
 export const DatePickerCard = glamorous.div(
@@ -34,56 +34,60 @@ export const DatePickerCard = glamorous.div(
     // Push down the card to the bottom of the input field,
     // plus the twice the size of the outside focus shadow.
     top: inputHeight + 6,
-    padding: `${theme.spacing * 3 / 4}px ${theme.spacing}px ${theme.spacing * 4 / 3}px`,
+    padding: `${(theme.spacing * 3) / 4}px ${theme.spacing}px ${(theme.spacing * 4) / 3}px`,
     width: inputDefaultWidth,
     zIndex: theme.baseZIndex + 1000,
-  })
+  }),
 )
 
 export const Toggle: GlamorousComponent<
   { onClick?: (ev: React.SyntheticEvent<MouseEvent>) => void },
   {}
-> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  position: "absolute",
-  cursor: "pointer",
-  top: 1,
-  right: 1,
-  borderTopRightRadius: theme.borderRadius,
-  borderBottomRightRadius: theme.borderRadius,
-  width: inputHeight - 2,
-  height: inputHeight - 2,
-  fontSize: 10,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: theme.baseZIndex + 1000,
-  color: theme.colors.inputBorder,
-  borderLeft: "1px solid",
-  borderColor: theme.colors.inputBorder,
-  "& svg": {
-    position: "relative",
-    pointerEvents: "none",
-  },
-  ":hover": {
-    backgroundColor: theme.colors.lighterBackground,
-  },
-}))
+> = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    position: "absolute",
+    cursor: "pointer",
+    top: 1,
+    right: 1,
+    borderTopRightRadius: theme.borderRadius,
+    borderBottomRightRadius: theme.borderRadius,
+    width: inputHeight - 2,
+    height: inputHeight - 2,
+    fontSize: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: theme.baseZIndex + 1000,
+    color: theme.colors.inputBorder,
+    borderLeft: "1px solid",
+    borderColor: theme.colors.inputBorder,
+    "& svg": {
+      position: "relative",
+      pointerEvents: "none",
+    },
+    ":hover": {
+      backgroundColor: theme.colors.lighterBackground,
+    },
+  }),
+)
 
-export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  marginBottom: theme.spacing / 2,
-  textAlign: "center",
-  "& > *": {
-    margin: `0 6px`,
-    verticalAlign: "middle",
-    display: "inline-block",
-  },
-  "& > span": {
-    ...theme.typography.body,
-    userSelect: "none",
-    width: 120,
+export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    marginBottom: theme.spacing / 2,
     textAlign: "center",
-  },
-}))
+    "& > *": {
+      margin: `0 6px`,
+      verticalAlign: "middle",
+      display: "inline-block",
+    },
+    "& > span": {
+      ...theme.typography.body,
+      userSelect: "none",
+      width: 120,
+      textAlign: "center",
+    },
+  }),
+)
 
 export const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
   backgroundColor: "#FFFFFF",
@@ -119,23 +123,25 @@ export const Day: GlamorousComponent<
     ...theme.typography.body,
     backgroundColor: selected ? theme.colors.info : "transparent",
     color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black,
-  })
+  }),
 )
 
-export const Input = glamorous.input(({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
-  ...theme.typography.body,
-  userSelect: "none",
-  borderRadius: theme.borderRadius,
-  padding: theme.spacing * 2 / 3,
-  height: inputHeight,
-  cursor: "pointer",
-  border: "1px solid",
-  borderColor: "rgb(208, 217, 229)",
-  width: 200,
-  position: "relative",
-  "&:focus": mixins.inputFocus({ theme }),
-  ...isExpanded ? mixins.inputFocus({ theme }) : {},
-}))
+export const Input = glamorous.input(
+  ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
+    ...theme.typography.body,
+    userSelect: "none",
+    borderRadius: theme.borderRadius,
+    padding: (theme.spacing * 2) / 3,
+    height: inputHeight,
+    cursor: "pointer",
+    border: "1px solid",
+    borderColor: "rgb(208, 217, 229)",
+    width: 200,
+    position: "relative",
+    "&:focus": mixins.inputFocus({ theme }),
+    ...(isExpanded ? mixins.inputFocus({ theme }) : {}),
+  }),
+)
 
 export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => void }, {}> = glamorous.div(
   ({ theme }: { theme: Theme }): {} => ({
@@ -157,5 +163,5 @@ export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => voi
         stroke: theme.colors.warning,
       },
     },
-  })
+  }),
 )

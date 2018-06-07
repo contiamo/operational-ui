@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "@operational/*": ["./*/src"]
+    }
+  }
+}

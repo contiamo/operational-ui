@@ -21,38 +21,46 @@ export interface SectionData {
   Component: React.SFC<{}>
 }
 
-const TitleBarContent = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  label: "showcasetitlebarcontent",
-  textAlign: "center",
-  position: "relative",
-  "& svg": {
+const TitleBarContent = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    label: "showcasetitlebarcontent",
+    textAlign: "center",
+    position: "relative",
+    "& svg": {
+      margin: "auto",
+    },
+    "& h1": {
+      ...theme.typography.title,
+      margin: "10px 0 0 0",
+    },
+    "& h2": {
+      ...theme.typography.heading1,
+      marginTop: 0,
+    },
+  }),
+)
+
+const Separator = glamorous.hr(
+  ({ theme }: { theme: Theme }): {} => ({
+    margin: `${theme.spacing * 2.5}px auto`,
+    width: 80,
+    opacity: 0.7,
+  }),
+)
+
+const Container = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    maxWidth: 760,
     margin: "auto",
-  },
-  "& h1": {
-    ...theme.typography.title,
-    margin: "10px 0 0 0",
-  },
-  "& h2": {
-    ...theme.typography.heading1,
-    marginTop: 0,
-  },
-}))
+    padding: 2.5 * theme.spacing,
+  }),
+)
 
-const Separator = glamorous.hr(({ theme }: { theme: Theme }): {} => ({
-  margin: `${theme.spacing * 2.5}px auto`,
-  width: 80,
-  opacity: 0.7,
-}))
-
-const Container = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  maxWidth: 760,
-  margin: "auto",
-  padding: 2.5 * theme.spacing,
-}))
-
-const TitleBarNav = glamorous.div(({ theme }: { theme: Theme }): {} => ({
-  marginTop: 20,
-}))
+const TitleBarNav = glamorous.div(
+  ({ theme }: { theme: Theme }): {} => ({
+    marginTop: 20,
+  }),
+)
 
 export default class App extends React.Component<{}, State> {
   state: State = {
@@ -68,7 +76,7 @@ export default class App extends React.Component<{}, State> {
       this.setState(() => ({ rotation: 360 }))
       this.rotationInterval = setInterval(
         () => this.setState(() => ({ rotation: this.state.rotation === 0 ? 360 : 0 })),
-        10000
+        10000,
       )
     }, 5000)
   }
@@ -145,20 +153,18 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
             css={{ marginTop: operational.spacing * 1.5, width: "100%" }}
             placeholder={`Search ${this.state.page}`}
           />
-          <>
-            {sections
-              .filter(
-                ({ title, docsUrl }) =>
-                  title.toLowerCase().match(new RegExp(this.state.search)) ||
-                  docsUrl.toLowerCase().match(new RegExp(this.state.search))
-              )
-              .sort(({ title: title1 }, { title: title2 }) => (title1 < title2 ? -1 : title1 === title2 ? 0 : 1))
-              .map(({ title, docsUrl, snippetUrl, Component }, index: number) => (
-                <Section key={index} title={title} docsUrl={docsUrl} snippetUrl={snippetUrl}>
-                  <Component />
-                </Section>
-              ))}
-          </>
+          {sections
+            .filter(
+              ({ title, docsUrl }) =>
+                title.toLowerCase().match(new RegExp(this.state.search)) ||
+                docsUrl.toLowerCase().match(new RegExp(this.state.search)),
+            )
+            .sort(({ title: title1 }, { title: title2 }) => (title1 < title2 ? -1 : title1 === title2 ? 0 : 1))
+            .map(({ title, docsUrl, snippetUrl, Component }, index: number) => (
+              <Section key={index} title={title} docsUrl={docsUrl} snippetUrl={snippetUrl}>
+                <Component />
+              </Section>
+            ))}
           <Footer />
         </Container>
       </OperationalUI>

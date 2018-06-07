@@ -15,8 +15,8 @@ describe("Breadcrumbs Component", () => {
             <a href="http://ui.contiamo.com">Home</a>
           </Breadcrumb>
           <Breadcrumb>Link 1</Breadcrumb>
-        </Breadcrumbs>
-      )
+        </Breadcrumbs>,
+      ),
     ).toMatchSnapshot()
   })
 })

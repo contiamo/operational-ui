@@ -44,7 +44,7 @@ export const calculateLabelPosition = (
   drawing: { [key: string]: number },
   offset: number,
   position: string,
-  displayArrow: boolean
+  displayArrow: boolean,
 ) => {
   // Options for x coordinates
   const x: { [key: string]: number } = {
@@ -98,8 +98,7 @@ export const calculateLabelPosition = (
 
 // Draws an arrow on the correct edge of a focus label pointing to focus point.
 const drawArrow = (el: D3Selection, coordinates: Point, position: string): void => {
-  el
-    .append("div")
+  el.append("div")
     .attr("class", positionClass[position])
     .style("left", `${coordinates.x}px`)
     .style("top", `${coordinates.y}px`)
@@ -144,7 +143,7 @@ export const positionLabel = (
   drawing: { [key: string]: number },
   offset: number = 0,
   position: string = "toRight",
-  displayArrow: boolean = true
+  displayArrow: boolean = true,
 ): void => {
   const labelPosition = calculateLabelPosition(focus, label, drawing, offset, position, displayArrow)
 

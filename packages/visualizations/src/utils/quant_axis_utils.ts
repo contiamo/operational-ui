@@ -16,7 +16,7 @@ export const computeSteps = (
   domain: [number, number],
   range: [number, number],
   spacing: number,
-  minTicks: number
+  minTicks: number,
 ): [number, number, number] => {
   const tickNumber: number = this.computeTickNumber(range, spacing, minTicks)
 
@@ -25,7 +25,7 @@ export const computeSteps = (
   if (span < 0) {
     step = step * -1
   }
-  const err: number = tickNumber / span * step
+  const err: number = (tickNumber / span) * step
   const errorMapper: [boolean, number][] = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
   const multiplier: number = find(0)(errorMapper)[1]
 
@@ -85,7 +85,9 @@ export const guess = (data: number[] = []): number[] => {
     return val === 0
       ? [0, 100]
       : // Make sure axis has right direction
-        val < 0 ? [2 * val, 0] : [0, 2 * val]
+        val < 0
+        ? [2 * val, 0]
+        : [0, 2 * val]
   }
 
   // Ensure domain includes zero
@@ -110,7 +112,7 @@ const suffixes: { [key: number]: string } = {
 export const tickFormatter = (
   step: number,
   unitTick: number,
-  displayUnit: string
+  displayUnit: string,
 ): ((num: number) => number | string) => {
   const exp: number = -Math.floor(Math.log(step) / Math.LN10)
   const expMatch: number = 3 * Math.round(exp / 3)

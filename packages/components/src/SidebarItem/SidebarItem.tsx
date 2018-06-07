@@ -35,14 +35,14 @@ const Container = glamorous.div(
     cursor: "pointer",
     textDecoration: "none",
     color: isActive ? theme.colors.linkText : theme.colors.text,
-    ...isDisabled ? { opacity: 0.25, pointerEvents: "none" } : {},
+    ...(isDisabled ? { opacity: 0.25, pointerEvents: "none" } : {}),
     ":hover": {
       backgroundColor: theme.colors.lighterBackground,
     },
     ":focus": {
       outline: 0,
     },
-  })
+  }),
 )
 
 const SidebarItem = (props: Props) => (

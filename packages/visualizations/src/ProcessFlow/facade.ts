@@ -107,7 +107,7 @@ class ProcessFlowFacade implements Facade {
       this.state.readOnly(),
       this.state.computedWriter(["canvas"]),
       this.events,
-      this.context
+      this.context,
     )
   }
 
@@ -117,7 +117,7 @@ class ProcessFlowFacade implements Facade {
         this.state.readOnly(),
         this.state.computedWriter(["focus"]),
         this.events,
-        this.canvas.elementFor("focus")
+        this.canvas.elementFor("focus"),
       ),
     }
   }
@@ -127,7 +127,7 @@ class ProcessFlowFacade implements Facade {
       this.state.readOnly(),
       this.state.computedWriter(["series"]),
       this.events,
-      this.canvas.elementFor("series")
+      this.canvas.elementFor("series"),
     )
   }
 

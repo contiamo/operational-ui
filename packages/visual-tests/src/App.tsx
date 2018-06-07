@@ -27,16 +27,18 @@ export interface State {
   isIdle: boolean
 }
 
-const TestToggle = glamorous.span(({ theme, active }: { theme: Theme; active: boolean }): {} => ({
-  display: "inline-block",
-  marginRight: 16,
-  padding: "2px 4px",
-  cursor: "pointer",
-  borderRadius: active ? 2 : 0,
-  color: active ? theme.colors.white : theme.colors.linkText,
-  backgroundColor: active ? theme.colors.linkText : theme.colors.white,
-  borderBottom: "1px solid currentColor",
-}))
+const TestToggle = glamorous.span(
+  ({ theme, active }: { theme: Theme; active: boolean }): {} => ({
+    display: "inline-block",
+    marginRight: 16,
+    padding: "2px 4px",
+    cursor: "pointer",
+    borderRadius: active ? 2 : 0,
+    color: active ? theme.colors.white : theme.colors.linkText,
+    backgroundColor: active ? theme.colors.linkText : theme.colors.white,
+    borderBottom: "1px solid currentColor",
+  }),
+)
 
 class App extends React.Component<{}, State> {
   constructor(props: {}) {

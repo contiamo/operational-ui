@@ -31,6 +31,7 @@ import {
   SeriesManager,
   State,
   StateWriter,
+  Datum,
 } from "./typings"
 
 class ChartSeriesManager implements SeriesManager {
@@ -66,7 +67,7 @@ class ChartSeriesManager implements SeriesManager {
       omitBy(this.state.current.get("accessors").series.hide),
       this.assignBarIndices.bind(this),
       this.handleGroupedSeries("stacked", this.computeStack.bind(this)),
-      this.handleGroupedSeries("range", this.computeRange.bind(this))
+      this.handleGroupedSeries("range", this.computeRange.bind(this)),
     )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
 
     this.removeAllExcept(map(this.key)(data))
@@ -84,26 +85,28 @@ class ChartSeriesManager implements SeriesManager {
   private assignBarIndices(data: SeriesData): SeriesData {
     let index = 0
     const barIndices: { [key: string]: number } = {}
-    forEach((series: any) => {
-      const hasBars = !!find({ type: "bars" })(this.renderAs(series))
+    forEach(
+      (series: { [key: string]: any }): void => {
+        const hasBars: boolean = !!find({ type: "bars" })(this.renderAs(series))
 
-      const groupedRenderer = find((options: any) => includes(options.type)(["stacked", "range"]))(
-        this.renderAs(series)
-      )
-      const hasStackedBars = !!groupedRenderer && !!find({ type: "bars" })(this.renderAs(groupedRenderer))
-      if (!hasBars && !hasStackedBars) {
-        return
-      }
-      if (hasBars) {
-        barIndices[this.key(series)] = index
-      }
-      if (hasStackedBars) {
-        forEach((stackedSeries: any) => {
-          barIndices[this.key(stackedSeries)] = index
-        })(series.series)
-      }
-      index = index + 1
-    })(data)
+        const groupedRenderer: RendererOptions = find((options: any) => includes(options.type)(["stacked", "range"]))(
+          this.renderAs(series),
+        )
+        const hasStackedBars: boolean = !!groupedRenderer && !!find({ type: "bars" })(this.renderAs(groupedRenderer))
+        if (!hasBars && !hasStackedBars) {
+          return
+        }
+        if (hasBars) {
+          barIndices[this.key(series)] = index
+        }
+        if (hasStackedBars) {
+          forEach((stackedSeries: { [key: string]: any }) => {
+            barIndices[this.key(stackedSeries)] = index
+          })(series.series)
+        }
+        index = index + 1
+      },
+    )(data)
 
     this.stateWriter("barIndices", barIndices)
     return data
@@ -130,12 +133,16 @@ class ChartSeriesManager implements SeriesManager {
       // Flatten data structure by appending each processed individual series of each group to the list of ungrouped series
       let ungroupedSeries = splitData.false || []
 
-      forEach((group: any) => {
-        forEach((series: any) => {
-          series.renderAs = this.renderAs(this.renderAs(group)[0])
-          ungroupedSeries = ungroupedSeries.concat(series)
-        })(group.series)
-      })(groups)
+      forEach(
+        (group: { [key: string]: any }): void => {
+          forEach(
+            (series: { [key: string]: any }): void => {
+              series.renderAs = this.renderAs(this.renderAs(group)[0])
+              ungroupedSeries = ungroupedSeries.concat(series)
+            },
+          )(group.series)
+        },
+      )(groups)
 
       return ungroupedSeries
     }
@@ -168,7 +175,7 @@ class ChartSeriesManager implements SeriesManager {
     const dataToStack = reduce((memo: any[], series: any) => {
       forEach((d: any) => {
         const datum = mapKeys.convert({ cap: false })(
-          (val: any, key: string) => (val === baseValue(series)(d) ? baseAxis : this.key(series))
+          (val: any, key: string) => (val === baseValue(series)(d) ? baseAxis : this.key(series)),
         )(d)
         const existingDatum = find({ [baseAxis]: baseValue(series)(d) })(memo)
         existingDatum ? (memo[indexOf(existingDatum)(memo)] = merge(datum)(existingDatum)) : memo.push(datum)
@@ -183,15 +190,17 @@ class ChartSeriesManager implements SeriesManager {
 
     // Return to required series data structure
     forEach((series: any) => {
-      const originalSeries = find({ key: series.key })(stack.series)
-      originalSeries.data = map((datum: any) => {
-        return {
-          [baseAxis]: datum.data[baseAxis],
-          [stackAxis]: datum.data[series.key],
-          [`${stackAxis}${0}`]: datum[0],
-          [`${stackAxis}${1}`]: datum[1],
-        }
-      })(series)
+      const originalSeries: { [key: string]: any } = find({ key: series.key })(stack.series)
+      originalSeries.data = map(
+        (datum: any): Datum => {
+          return {
+            [baseAxis]: datum.data[baseAxis],
+            [stackAxis]: datum.data[series.key],
+            [`${stackAxis}${0}`]: datum[0],
+            [`${stackAxis}${1}`]: datum[1],
+          }
+        },
+      )(series)
       originalSeries.stacked = true
       originalSeries.stackIndex = index + 1
       originalSeries.xAttribute = "x"
@@ -214,9 +223,9 @@ class ChartSeriesManager implements SeriesManager {
 
   private removeAllExcept(keys: string[]): void {
     flow(
-      filter((series: Series) => !includes(this.key(series.options))(keys)),
-      map((series: Series) => this.key(series.options)),
-      forEach(this.remove.bind(this))
+      filter((series: Series): boolean => !includes(this.key(series.options))(keys)),
+      map((series: Series): string => this.key(series.options)),
+      forEach(this.remove.bind(this)),
     )(this.series)
   }
 
@@ -266,19 +275,21 @@ class ChartSeriesManager implements SeriesManager {
   private dataForFocus(focusDates: { [key: string]: any }) {
     const seriesWithoutFlags = filter((series: Series) => !series.get("flag"))(this.series)
 
-    return map((series: Series) => {
-      const isMainAxis = includes(focusDates.main.axis)([series.xAxis(), series.yAxis()])
-      const axisPriority = isMainAxis ? "main" : "comparison"
+    return map(
+      (series: Series): { [key: string]: any } => {
+        const isMainAxis: boolean = includes(focusDates.main.axis)([series.xAxis(), series.yAxis()])
+        const axisPriority: string = isMainAxis ? "main" : "comparison"
 
-      return {
-        ...series.valueAtFocus(focusDates[axisPriority].date),
-        axisPriority,
-        color: series.legendColor(),
-        label: series.legendName(),
-        displayPoint: series.displayFocusPoint(),
-        stack: !series.options.clipData ? series.options.stackIndex : undefined,
-      }
-    })(seriesWithoutFlags)
+        return {
+          ...series.valueAtFocus(focusDates[axisPriority].date),
+          axisPriority,
+          color: series.legendColor(),
+          label: series.legendName(),
+          displayPoint: series.displayFocusPoint(),
+          stack: !series.options.clipData ? series.options.stackIndex : undefined,
+        }
+      },
+    )(seriesWithoutFlags)
   }
 
   private create(options: { [key: string]: any }): void {

@@ -65,9 +65,11 @@ class ProcessFlowCanvas implements Canvas {
 
   // Drawing groups
   private renderDrawingGroups(): void {
-    forEach((group: string): void => {
-      this.el.append("svg:g").attr("class", `${group}-group`)
-    })(["links", "nodes"])
+    forEach(
+      (group: string): void => {
+        this.el.append("svg:g").attr("class", `${group}-group`)
+      },
+    )(["links", "nodes"])
   }
 
   // Lifecycle

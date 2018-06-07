@@ -15,16 +15,16 @@ import { timeFormat } from "d3-time-format"
 
 const AreaRenderer: any = {
   accessors: {
-    interpolate: (series: any, d: any) => "monotoneX"
+    interpolate: (series: any, d: any) => "monotoneX",
   },
-  type: "area"
+  type: "area",
 }
 
 const LineRenderer: any = {
   accessors: {
     interpolate: (series: any, d: any) => "monotoneX",
   },
-  type: "line"
+  type: "line",
 }
 
 const BarsRenderer: any = {
@@ -33,18 +33,18 @@ const BarsRenderer: any = {
 
 const FixedBarsRenderer: any = {
   accessors: {
-    barWidth: () => 20
+    barWidth: () => 20,
   },
-  type: "bars"
+  type: "bars",
 }
 
 const SymbolRenderer: any = {
   accessors: {
-    symbol: (series: any, d: any) => d.y >= 1000 ? "cross" : "diamond",
-    size: (series: any, d: any) => series.key() === "series2" ? 150 : 60,
-    fill: () => "#bbb"
+    symbol: (series: any, d: any) => (d.y >= 1000 ? "cross" : "diamond"),
+    size: (series: any, d: any) => (series.key() === "series2" ? 150 : 60),
+    fill: () => "#bbb",
   },
-  type: "symbol"
+  type: "symbol",
 }
 
 const TextRenderer: any = {
@@ -62,34 +62,34 @@ const StackedRenderer = {
 const X1FlagRenderer = {
   type: "flag",
   config: {
-    axis: "x1"
+    axis: "x1",
   },
 }
 
 const X2FlagRenderer = {
   type: "flag",
   config: {
-    axis: "x2"
+    axis: "x2",
   },
 }
 
 const Y1FlagRenderer = {
   type: "flag",
   config: {
-    axis: "y1"
+    axis: "y1",
   },
 }
 
 const Y2FlagRenderer = {
   type: "flag",
   config: {
-    axis: "y2"
+    axis: "y2",
   },
 }
 
 const RangeRenderer = {
   type: "range",
-  renderAs: [AreaRenderer, LineRenderer, SymbolRenderer]
+  renderAs: [AreaRenderer, LineRenderer, SymbolRenderer],
 }
 
 const createData: any = () => {
@@ -104,7 +104,7 @@ const createData: any = () => {
           { x: "March 14th", y: Math.floor(Math.random() * 500) - 250 },
           { x: "March 15th", y: Math.floor(Math.random() * 500) - 250 },
           { x: "March 16th", y: Math.floor(Math.random() * 500) - 250 },
-          { x: "March 17th", y: Math.floor(Math.random() * 500) - 250 }
+          { x: "March 17th", y: Math.floor(Math.random() * 500) - 250 },
         ],
         name: "Pageviews 2018",
         key: "series1",
@@ -135,13 +135,13 @@ const createData: any = () => {
               { y: "March 14th", x: Math.floor(Math.random() * 200 + 1000) },
               { y: "March 15th", x: Math.floor(Math.random() * 200 + 1000) },
               { y: "March 16th", x: Math.floor(Math.random() * 200 + 1000) },
-              { y: "March 17th", x: Math.floor(Math.random() * 200 + 1000) }
+              { y: "March 17th", x: Math.floor(Math.random() * 200 + 1000) },
             ],
             name: "Metric 1",
             key: "series3",
             xAttribute: "y",
             yAttribute: "x",
-            yAxis: "y2"
+            yAxis: "y2",
           },
           {
             data: [
@@ -152,52 +152,70 @@ const createData: any = () => {
               { y: "March 14th", x: Math.floor(Math.random() * 200 + 1000) },
               { y: "March 15th", x: Math.floor(Math.random() * 200 + 1000) },
               { y: "March 16th", x: Math.floor(Math.random() * 200 + 1000) },
-              { y: "March 17th", x: Math.floor(Math.random() * 200 + 1000) }
+              { y: "March 17th", x: Math.floor(Math.random() * 200 + 1000) },
             ],
             name: "Metric 2",
             key: "series4",
             xAttribute: "y",
             yAttribute: "x",
-            yAxis: "y2"
-          }
+            yAxis: "y2",
+          },
         ],
-        renderAs: [StackedRenderer]
+        renderAs: [StackedRenderer],
       },
       {
         data: [
-          { y: 400, label: "Event 3", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." },
+          {
+            y: 400,
+            label: "Event 3",
+            description:
+              "Insert very long, long, long description here to see how the labels wrap when the description is very long.",
+          },
         ],
         name: "Event flags",
         key: "flagsY1",
         hideInLegend: true,
-        renderAs: [Y1FlagRenderer]
+        renderAs: [Y1FlagRenderer],
       },
       {
         data: [
-          { y: 2000, label: "Event 4", description: "Insert very long, long, long description here to see how the labels wrap when the description is very long." }
+          {
+            y: 2000,
+            label: "Event 4",
+            description:
+              "Insert very long, long, long description here to see how the labels wrap when the description is very long.",
+          },
         ],
         name: "Event flags",
         key: "flagsY2",
         hideInLegend: true,
-        renderAs: [Y2FlagRenderer]
-      }
+        renderAs: [Y2FlagRenderer],
+      },
     ],
     axes: {
       x1: {
         type: "categorical",
       },
       y1: {
-        type: "quant"
+        type: "quant",
       },
       y2: {
-        type: "quant"
-      }
-    }
+        type: "quant",
+      },
+    },
   }
 }
 
 const data = createData()
-const App = () => <OperationalUI><VisualizationWrapper facade={Chart} data={createData()} config={{uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200}}/></OperationalUI>
+const App = () => (
+  <OperationalUI>
+    <VisualizationWrapper
+      facade={Chart}
+      data={createData()}
+      config={{ uid: "TEST", width: 700, showComponentFocus: true, maxFocusLabelWidth: 200 }}
+    />
+  </OperationalUI>
+)
 render(<App />, containerNode)
 
 // setTimeout(() => {

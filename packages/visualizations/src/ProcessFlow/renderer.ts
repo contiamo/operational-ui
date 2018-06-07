@@ -47,16 +47,20 @@ class Renderer {
     const path = focusElement.matchers.path
     const links = zip(initial(path))(tail(path))
 
-    forEach((link: [string, string]) => {
-      this.el
-        .selectAll(`path.link.${styles.element}`)
-        .filter((d: TLink) => d.sourceId() === link[0] && d.targetId() === link[1])
-        .each(
-          withD3Element((d: TLink, el: HTMLElement) => {
-            this.links.highlight(d3.select(el), d, true)
-          })
-        )
-    })(links)
+    forEach(
+      (link: [string, string]): void => {
+        this.el
+          .selectAll(`path.link.${styles.element}`)
+          .filter((d: TLink): boolean => d.sourceId() === link[0] && d.targetId() === link[1])
+          .each(
+            withD3Element(
+              (d: TLink, el: HTMLElement): void => {
+                this.links.highlight(d3.select(el), d, true)
+              },
+            ),
+          )
+      },
+    )(links)
   }
 
   close(): void {

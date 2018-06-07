@@ -24,24 +24,30 @@ class LegendManager {
     state: State,
     stateWriter: StateWriter,
     events: EventBus,
-    els: { [key: string]: { [key: string]: D3Selection } }
+    els: { [key: string]: { [key: string]: D3Selection } },
   ) {
     this.state = state
     this.stateWriter = stateWriter
     this.events = events
 
-    forEach((option: LegendOption) => {
-      const el = els[option.position][option.float]
-      this.legends[option.position][option.float] = new ChartLegend(state, stateWriter, events, el)
-    })(legendOptions)
+    forEach(
+      (option: LegendOption): void => {
+        const el: D3Selection = els[option.position][option.float]
+        this.legends[option.position][option.float] = new ChartLegend(state, stateWriter, events, el)
+      },
+    )(legendOptions)
   }
 
   draw(): void {
-    forEach((option: LegendOption) => {
-      const data = get([option.position, option.float])(this.state.current.get("computed").series.dataForLegends)
-      this.legends[option.position][option.float].setData(data)
-      this.legends[option.position][option.float].draw()
-    })(legendOptions)
+    forEach(
+      (option: LegendOption): void => {
+        const data: LegendDatum[] = get([option.position, option.float])(
+          this.state.current.get("computed").series.dataForLegends,
+        )
+        this.legends[option.position][option.float].setData(data)
+        this.legends[option.position][option.float].draw()
+      },
+    )(legendOptions)
     this.arrangeTopLegends()
   }
 
@@ -81,7 +87,7 @@ class LegendManager {
       drawingWidth -
         maxLongerWidth -
         parseInt(shorter.el.style(`padding-left`), 10) -
-        parseInt(shorter.el.style(`padding-right`), 10)
+        parseInt(shorter.el.style(`padding-right`), 10),
     )
     const maxShorterWidth = this.calculateMaxWidth(shorter)
     shorter.setWidth(maxShorterWidth)

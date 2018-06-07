@@ -11,7 +11,7 @@ describe("DatePicker Component", () => {
   // @todo: this fails because of the way TypeScript imports are handled between Jest and the compiler.
   // Add this back once a stable solution is found.
   xit("Should render", () => {
-    const renderedComponent = render(<DatePicker date="2015-11-05" />)
+    const renderedComponent = render(<DatePicker start="2018-01-02" end="2018-01-23" placeholder="Pick a date" />)
     expect(renderedComponent).toMatchSnapshot()
   })
 

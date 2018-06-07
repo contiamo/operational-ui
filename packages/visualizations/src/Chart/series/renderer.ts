@@ -14,7 +14,7 @@ class Renderer {
     el: D3Selection,
     data: Datum[],
     options: SingleRendererOptions<any>,
-    series: any
+    series: any,
   ) {
     switch (options.type) {
       case "area":

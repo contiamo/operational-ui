@@ -404,7 +404,11 @@ const data = {
 }
 
 const journeys = unloop(data.journeys)
-const nodeIds = flow(map((journey: any): string[] => journey.path), flatten, uniq)(journeys)
+const nodeIds = flow(
+  map((journey: any): string[] => journey.path),
+  flatten,
+  uniq,
+)(journeys)
 const nodes = map((nodeId: string) => {
   const baseId: string = nodeId.split("+")[0]
   const baseNode = data.nodes.find(d => d.id === baseId)
