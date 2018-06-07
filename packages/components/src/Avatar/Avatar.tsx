@@ -24,6 +24,8 @@ export interface Props {
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
   assignColor?: boolean
+  children?: React.ReactNode
+  onClick?: () => void
 }
 
 const Container = glamorous.div(
@@ -60,7 +62,7 @@ const Title = glamorous.div(
   }),
 )
 
-export const Picture = glamorous.div(
+const Picture = glamorous.div(
   ({
     theme,
     color,
@@ -117,14 +119,14 @@ const Avatar: React.SFC<Props> = props => {
       )
     : undefined
   return (
-    <Container css={props.css} className={props.className}>
+    <Container css={props.css} className={props.className} onClick={props.onClick}>
       <Picture
         photo={props.photo}
         color={props.color}
         colorAssignment={colorAssignmentNumber}
         className="opui_avatar-picture"
       >
-        {props.hideInitials || props.photo ? "" : initials}
+        {props.children ? props.children : props.hideInitials || props.photo ? "" : initials}
       </Picture>
       {props.showName && (
         <NameContainer>
@@ -138,6 +140,7 @@ const Avatar: React.SFC<Props> = props => {
 
 Avatar.defaultProps = {
   assignColor: true,
+  onClick: () => ({}),
 }
 
 export default Avatar

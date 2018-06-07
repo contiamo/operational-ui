@@ -65,8 +65,6 @@ const avatars = [
 
 ### Should also works with the old API
 ```jsx
-const Avatar = require("../Avatar/Avatar").default;
-
 const avatars = [
     {name: "Peter Pan", photo: "http://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg"},
     {name: "Wendy Darling"},

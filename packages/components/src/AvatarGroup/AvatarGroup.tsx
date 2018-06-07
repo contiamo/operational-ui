@@ -2,7 +2,7 @@ import * as React from "react"
 import glamorous, { Div } from "glamorous"
 import { Theme } from "@operational/theme"
 
-import Avatar, { Picture as AvatarPicture, Container as AvatarContainer } from "../Avatar/Avatar"
+import Avatar from "../Avatar/Avatar"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface AvatarItem {
@@ -37,12 +37,6 @@ const Container = glamorous.div(
   }),
 )
 
-const More: React.SFC<{ onClick: () => void }> = ({ children, onClick }) => (
-  <AvatarContainer onClick={onClick}>
-    <AvatarPicture className="opui_avatar-picture">{children}</AvatarPicture>
-  </AvatarContainer>
-)
-
 const AvatarGroup: React.SFC<Props> = props => {
   const avatarsToDisplay = props.avatars ? props.avatars.map(avatar => <Avatar {...avatar} />) : props.children
   const count = React.Children.count(avatarsToDisplay)
@@ -51,7 +45,11 @@ const AvatarGroup: React.SFC<Props> = props => {
   return (
     <Container css={props.css} className={props.className}>
       {mustSlice ? React.Children.toArray(avatarsToDisplay).slice(0, props.maximumToDisplay - 1) : avatarsToDisplay}
-      {mustSlice && <More onClick={props.onMoreClick}>+{count - props.maximumToDisplay + 1}</More>}
+      {mustSlice && (
+        <Avatar onClick={props.onMoreClick} name="more" assignColor={false}>
+          +{count - props.maximumToDisplay + 1}
+        </Avatar>
+      )}
     </Container>
   )
 }
