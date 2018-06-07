@@ -37,7 +37,9 @@ const dataPoint = (country: Country) => {
 }
 
 const generateData = (country: Country, amount = 100) => {
-  return [...Array(amount).fill(0)].map(i => dataPoint(country))
+  return Array(amount)
+    .fill(0)
+    .map(i => dataPoint(country))
 }
 
 const renderer = {
