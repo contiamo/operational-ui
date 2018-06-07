@@ -59,10 +59,11 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
   if (keys(axes).length !== 2) {
     return
   }
-  const axesTypes: ("time" | "quant" | "categorical")[] = flow(
+
+  const axesTypes = flow(
     values,
     map(get("type")),
-    uniqBy(String),
+    uniqBy(String)
   )(axes)
 
   if (axesTypes.length > 1 || axesTypes[0] === "categorical") {
@@ -73,13 +74,10 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
 }
 
 const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
-  const computed: { [key: string]: Partial<AxisComputed> } = mapValues(
-    (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
-  )(axes)
-
-  const axisKeys: string[] = keys(computed) as string[]
-  const intervalOne: any = axes[axisKeys[0]].interval
-  const intervalTwo: any = axes[axisKeys[1]].interval
+  const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
+  const axisKeys = keys(computed) as string[]
+  const intervalOne = axes[axisKeys[0]].interval
+  const intervalTwo = axes[axisKeys[1]].interval
   if (intervalOne !== intervalTwo) {
     throw new Error("Time axes must have the same interval")
   }

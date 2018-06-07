@@ -136,7 +136,7 @@ class AxesManager {
     forEach(invoke("draw"))(axes)
 
     // Update rules
-    const hasRules = any((axis: AxisClass<any>) => axis.showRules)(axes as any)
+    const hasRules = any((axis: AxisClass<any>) => axis.options.showRules)(axes as any)
     hasRules ? this.updateRules(orientation) : this.removeRules(orientation)
 
     this.axesDrawn.push(orientation)

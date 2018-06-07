@@ -75,31 +75,23 @@ const tickFormatter = (interval: TimeIntervals) => {
   }
 }
 
+const defaultOptions: Partial<TimeAxisOptions> = {
+  showRules: false,
+  showTicks: true,
+}
+
 class TimeAxis implements AxisClass<Date> {
   computed: AxisComputed
   data: Date[]
   el: D3Selection
   events: EventBus
   isXAxis: boolean
+  options: TimeAxisOptions
   position: AxisPosition
   previous: AxisComputed
   state: State
   stateWriter: StateWriter
   type: AxisType = "time"
-  // Options
-  start: Date
-  end: Date
-  interval: TimeIntervals
-  showRules: boolean = false
-  showTicks: boolean = true
-  fontSize: number
-  margin: number
-  minTicks: number
-  minTopOffsetTopTick: number
-  rotateLabels: boolean
-  tickOffset: number
-  tickSpacing: number
-  outerPadding: number
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -115,13 +107,9 @@ class TimeAxis implements AxisClass<Date> {
     return isDate(value)
   }
 
-  private updateOptions(options: TimeAxisOptions): void {
-    forEach.convert({ cap: false })(
-      (value: any, key: string): void => {
-        ;(this as any)[key] = value
-      },
-    )(options)
-    if (!this.start || !this.end || !this.interval) {
+  private updateOptions(options: Partial<TimeAxisOptions>): void {
+    this.options = defaults(defaultOptions)(options)
+    if (!this.options.start || !this.options.end || !this.options.interval) {
       throw new Error("Values for `start`, `end` and `interval` must always be configured for time axes.")
     }
     this.adjustMargins()
@@ -131,7 +119,7 @@ class TimeAxis implements AxisClass<Date> {
     this.updateOptions(options)
     this.data = flow(
       filter(this.validate),
-      sortBy((value: any): number => value.valueOf()),
+      sortBy((value: any) => value.valueOf())
     )(data)
   }
 
@@ -149,12 +137,12 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   computeInitial(): { [key: string]: any } {
-    const isRangeNegative = new Date(this.start).valueOf() > new Date(this.end).valueOf()
-    const start = isRangeNegative ? this.end : this.start
-    const end = isRangeNegative ? this.start : this.end
-    const ticksInDomain = Array.from(moment.range(start, end).by(this.interval))
+    const isRangeNegative = new Date(this.options.start).valueOf() > new Date(this.options.end).valueOf()
+    const start = isRangeNegative ? this.options.end : this.options.start
+    const end = isRangeNegative ? this.options.start : this.options.end
+    const ticksInDomain = Array.from(moment.range(start, end).by(this.options.interval))
     const computed: Partial<AxisComputed> = {}
-    computed.tickFormatter = tickFormatter(this.interval)
+    computed.tickFormatter = tickFormatter(this.options.interval)
     computed.ticksInDomain = map((d: any) => d.toDate())(isRangeNegative ? ticksInDomain.reverse() : ticksInDomain)
     computed.tickWidth = this.computeTickWidth(computed.ticksInDomain)
     computed.range = this.computeRange(computed.tickWidth, computed.ticksInDomain.length)
@@ -238,12 +226,12 @@ class TimeAxis implements AxisClass<Date> {
     const drawingDims = computed.canvas.drawingDims
     const width = tickWidth * numberOfTicks
     const offset = tickWidth / 2
-    return [(drawingDims.height || width) - offset, offset + (margin("x2") || this.minTopOffsetTopTick)]
+    return [(drawingDims.height || width) - offset, offset + (margin("x2") || this.options.minTopOffsetTopTick)]
   }
 
   private computeTickNumber(ticksInDomain: Date[], range: [number, number]): number {
     const width = Math.abs(range[1] - range[0])
-    return Math.min(ticksInDomain.length, Math.max(Math.floor(width / this.tickSpacing), this.minTicks))
+    return Math.min(ticksInDomain.length, Math.max(Math.floor(width / this.options.tickSpacing), this.options.minTicks))
   }
 
   private computeScale(range: [number, number], ticks: Date[]) {
@@ -253,7 +241,7 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private computeTicks(computed: Partial<AxisComputed>): Date[] {
-    if (this.interval === "week") {
+    if (this.options.interval === "week") {
       const tickInterval = Math.ceil(computed.ticksInDomain.length / computed.tickNumber || 1)
       return computed.scale.ticks(timeMonday, tickInterval)
     }
@@ -285,7 +273,9 @@ class TimeAxis implements AxisClass<Date> {
     const config = this.state.current.get("config")
     const attributes = this.getTickAttributes()
 
-    const ticks = this.el.selectAll(`line.${styles.tick}`).data(this.showTicks ? this.computed.ticks : [], String)
+    const ticks = this.el
+      .selectAll(`line.${styles.tick}`)
+      .data(this.options.showTicks ? this.computed.ticks : [], String)
 
     ticks
       .enter()
@@ -317,7 +307,7 @@ class TimeAxis implements AxisClass<Date> {
       .attr("class", styles.label)
       // @TODO
       // .attr("class", (d: string | number, i: number): string => "tick " + this.tickClass(d, i))
-      .style("font-size", `${this.fontSize}px`)
+      .style("font-size", `${this.options.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
     labels
@@ -331,7 +321,7 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private adjustMargins(): void {
-    let requiredMargin = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
+    let requiredMargin = computeRequiredMargin(this.el, this.options.margin, this.options.outerPadding, this.position)
 
     // Add space for flags
     const flagAxis = this.state.current.get(["computed", "series", "axesWithFlags", this.position])
@@ -351,12 +341,12 @@ class TimeAxis implements AxisClass<Date> {
     let attrs: any = {
       x: this.isXAxis ? this.computed.scale : (d: Date) => 0,
       y: this.isXAxis ? (d: Date) => 0 : this.computed.scale,
-      dx: this.isXAxis ? 0 : this.tickOffset,
-      dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : 0,
+      dx: this.isXAxis ? 0 : this.options.tickOffset,
+      dy: this.isXAxis ? this.options.tickOffset + (this.position === "x1" ? this.options.fontSize : 0) : 0,
       text: this.computed.tickFormatter,
-      textAnchor: getTextAnchor(this.position, this.rotateLabels),
+      textAnchor: getTextAnchor(this.position, this.options.rotateLabels),
     }
-    attrs.transform = this.rotateLabels
+    attrs.transform = this.options.rotateLabels
       ? (d: Date) => `rotate(-45, ${attrs.x(d) + attrs.dx}, ${attrs.y(d) + attrs.dy})`
       : ""
     return attrs
@@ -372,9 +362,9 @@ class TimeAxis implements AxisClass<Date> {
   private getTickAttributes() {
     return {
       x1: this.isXAxis ? this.computed.scale : 0,
-      x2: this.isXAxis ? this.computed.scale : this.tickOffset * 0.6,
+      x2: this.isXAxis ? this.computed.scale : this.options.tickOffset * 0.6,
       y1: this.isXAxis ? 0 : this.computed.scale,
-      y2: this.isXAxis ? this.tickOffset * 0.6 : this.computed.scale,
+      y2: this.isXAxis ? this.options.tickOffset * 0.6 : this.computed.scale,
     }
   }
 

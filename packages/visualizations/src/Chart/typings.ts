@@ -238,9 +238,9 @@ export interface AxisClass<T> {
   draw: () => void
   interval?: any
   isXAxis: boolean
+  options: AxisOptions
   previous: AxisComputed
-  showRules: boolean
-  update: (options: AxisOptions, data: T[]) => void
+  update: (options: Partial<AxisOptions>, data: T[]) => void
   close: () => void
 }
 

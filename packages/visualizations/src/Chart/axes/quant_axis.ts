@@ -30,32 +30,23 @@ const stepScaleFactors = (step: number): number[] => {
   return step === 1 ? [10, 5, 2, 1] : rangeStep(0.5)(0, 10)
 }
 
+const defaultOptions: Partial<QuantAxisOptions> = {
+  showRules: true,
+  showTicks: true,
+}
+
 class QuantAxis implements AxisClass<number> {
   computed: AxisComputed
   data: number[]
   el: D3Selection
   events: EventBus
   isXAxis: boolean
+  options: QuantAxisOptions
   position: AxisPosition
   previous: AxisComputed
   state: State
   stateWriter: StateWriter
   type: AxisType = "quant"
-  // Options
-  start: number
-  end: number
-  interval: number
-  unit: string
-  showRules: boolean = true
-  showTicks: boolean = true
-  fontSize: number
-  margin: number
-  minTicks: number
-  minTopOffsetTopTick: number
-  rotateLabels: boolean
-  tickOffset: number
-  tickSpacing: number
-  outerPadding: number
 
   constructor(state: State, stateWriter: StateWriter, events: EventBus, el: D3Selection, position: AxisPosition) {
     this.state = state
@@ -72,16 +63,8 @@ class QuantAxis implements AxisClass<number> {
     return isFinite(value)
   }
 
-  private updateOptions(options: QuantAxisOptions): void {
-    forEach.convert({ cap: false })(
-      (value: any, key: string): void => {
-        ;(this as any)[key] = value
-      },
-    )(options)
-  }
-
-  update(options: QuantAxisOptions, data: number[]): void {
-    this.updateOptions(options)
+  update(options: Partial<QuantAxisOptions>, data: number[]): void {
+    this.options = defaults(defaultOptions)(options)
     this.data = filter(this.validate)(data)
   }
 
@@ -100,8 +83,8 @@ class QuantAxis implements AxisClass<number> {
   computeInitial(): Partial<AxisComputed> {
     const computed: Partial<AxisComputed> = {}
     computed.range = this.computeRange()
-    computed.domain = computeDomain(this.data, this.start, this.end)
     computed.steps = this.computeSteps(computed)
+    computed.domain = computeDomain(this.data, this.options.start, this.options.end)
     computed.tickFormatter = this.state.current.get("config").numberFormatter
     return computed
   }
@@ -112,40 +95,41 @@ class QuantAxis implements AxisClass<number> {
       includes(axis)(computed.axes.requiredAxes) ? computed.axes.margins[axis] || 0 : 0
     return this.isXAxis
       ? [0, computed.canvas.drawingDims.width]
-      : [computed.canvas.drawingDims.height, includes("x2")(computed.axes.requiredAxes) ? 0 : this.minTopOffsetTopTick]
+      : [
+          computed.canvas.drawingDims.height,
+          includes("x2")(computed.axes.requiredAxes) ? 0 : this.options.minTopOffsetTopTick,
+        ]
   }
 
   // Computes nice steps (for ticks) given a domain [start, stop] and a
   // wanted number of ticks (number of ticks returned might differ
   // by a few ticks)
   computeSteps(computed: { [key: string]: any }): [number, number, number] {
-    const steps: [number, number, number] = [this.start, this.end, this.interval]
-    if (!this.interval) {
-      const tickNumber = computeTickNumber(computed.range, this.tickSpacing, this.minTicks)
+    const steps: [number, number, number] = [this.options.start, this.options.end, this.options.interval]
+    if (!this.options.interval) {
+      const tickNumber = computeTickNumber(computed.range, this.options.tickSpacing, this.options.minTicks)
       const span = computed.domain[1] - computed.domain[0]
       let step = Math.pow(10, Math.floor(Math.log(Math.abs(span) / tickNumber) / Math.LN10)) * (span < 0 ? -1 : 1)
 
       let scaleFactor: number
-      if (this.end) {
-        // If a value has been explicitly set for this.end, there must be a tick at this value
-        const validScaleFactors: number[] = filter((val: number): boolean => (span / (step * val)) % 1 === 0)(
-          stepScaleFactors(step),
-        )
+      if (this.options.end) {
+        // If a value has been explicitly set for this.options.end, there must be a tick at this value
+        const validScaleFactors = filter((val: number) => (span / (step * val)) % 1 === 0)(stepScaleFactors(step))
         // Choose scale factor which gives a number of ticks as close as possible to tickNumber
         scaleFactor = sortBy((val: number) => Math.abs(span / (val * step) - tickNumber))(validScaleFactors)[0]
       } else {
-        const err: number = (tickNumber / span) * step
-        const errorMapper: [boolean, number][] = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
+        const err = (tickNumber / span) * step
+        const errorMapper = [[err <= 0.15, 10], [err <= 0.35, 5], [err <= 0.75, 2], [true, 1]]
         scaleFactor = find(0)(errorMapper)[1]
       }
       step *= scaleFactor
       steps[2] = step
     }
 
-    let computedStart = this.end % steps[2]
+    let computedStart = this.options.end % steps[2]
     computedStart = computedStart - (computedStart > computed.domain[0] ? steps[2] : 0)
-    steps[0] = this.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2]
-    steps[1] = this.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0]
+    steps[0] = this.options.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2]
+    steps[1] = this.options.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0]
     return steps
   }
 
@@ -173,7 +157,9 @@ class QuantAxis implements AxisClass<number> {
     const config = this.state.current.get("config")
     const attributes = this.getTickAttributes()
 
-    const ticks = this.el.selectAll(`line.${styles.tick}`).data(this.showTicks ? this.computed.ticks : [], String)
+    const ticks = this.el
+      .selectAll(`line.${styles.tick}`)
+      .data(this.options.showTicks ? this.computed.ticks : [], String)
 
     ticks
       .enter()
@@ -204,7 +190,7 @@ class QuantAxis implements AxisClass<number> {
       .call(setTextAttributes, startAttributes)
       .merge(labels)
       .attr("class", styles.label)
-      .style("font-size", `${this.fontSize}px`)
+      .style("font-size", `${this.options.fontSize}px`)
       .call(setTextAttributes, attributes, config.duration)
 
     labels
@@ -218,7 +204,7 @@ class QuantAxis implements AxisClass<number> {
   }
 
   private adjustMargins(): void {
-    let requiredMargin = computeRequiredMargin(this.el, this.margin, this.outerPadding, this.position)
+    let requiredMargin = computeRequiredMargin(this.el, this.options.margin, this.options.outerPadding, this.position)
 
     // Add space for flags
     const flagAxis = this.state.current.get(["computed", "series", "axesWithFlags", this.position])
@@ -237,19 +223,23 @@ class QuantAxis implements AxisClass<number> {
   private tickFormatter(): (x: number) => string {
     const numberFormatter = this.state.current.get("config").numberFormatter
     const unitTick = this.isXAxis ? this.computed.ticks[0] : last(this.computed.ticks)
-    return (x: number): string => (x === unitTick && this.unit ? this.unit : numberFormatter(x))
+    return (x: number): string => (x === unitTick && this.options.unit ? this.options.unit : numberFormatter(x))
   }
 
   private getAttributes(): AxisAttributes {
-    let attrs: any = {
+    const attrs: any = {
       x: this.isXAxis ? this.computed.scale : (d: number) => 0,
       y: this.isXAxis ? (d: number) => 0 : this.computed.scale,
-      dx: this.isXAxis ? 0 : this.tickOffset,
-      dy: this.isXAxis ? this.tickOffset + (this.position === "x1" ? this.fontSize : 0) : Math.abs(this.tickOffset / 2),
+      dx: this.isXAxis ? 0 : this.options.tickOffset,
+      dy: this.isXAxis
+        ? this.options.tickOffset + (this.position === "x1" ? this.options.fontSize : 0)
+        : Math.abs(this.options.tickOffset / 2),
       text: this.tickFormatter(),
-      textAnchor: getTextAnchor(this.position, this.rotateLabels),
+      textAnchor: getTextAnchor(this.position, this.options.rotateLabels),
     }
-    attrs.transform = this.rotateLabels ? (d: number) => `rotate(-45, ${attrs.x(d) + attrs.dx}, ${attrs.y(d)})` : ""
+    attrs.transform = this.options.rotateLabels
+      ? (d: number) => `rotate(-45, ${attrs.x(d) + attrs.dx}, ${attrs.y(d)})`
+      : ""
     return attrs
   }
 
@@ -263,9 +253,9 @@ class QuantAxis implements AxisClass<number> {
   private getTickAttributes() {
     return {
       x1: this.isXAxis ? this.computed.scale : 0,
-      x2: this.isXAxis ? this.computed.scale : this.tickOffset * 0.6,
+      x2: this.isXAxis ? this.computed.scale : this.options.tickOffset * 0.6,
       y1: this.isXAxis ? 0 : this.computed.scale,
-      y2: this.isXAxis ? this.tickOffset * 0.6 : this.computed.scale,
+      y2: this.isXAxis ? this.options.tickOffset * 0.6 : this.computed.scale,
     }
   }
 
