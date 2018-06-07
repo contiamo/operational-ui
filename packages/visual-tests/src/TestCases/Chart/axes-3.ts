@@ -9,6 +9,7 @@ const data: any = {
   axes: {
     x1: {
       type: "categorical",
+      showRules: true,
     },
     y1: {
       type: "quant",
@@ -35,6 +36,7 @@ const data1: any = {
     x1: {
       type: "categorical",
       values: ["A", "B", "C", "D", "E", "F", "G", "H"],
+      showRules: true,
     },
     y1: {
       type: "quant",

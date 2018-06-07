@@ -18,14 +18,7 @@ class Rules {
   draw(): void {
     const computedAxes = this.state.current.get("computed").axes.computed
     const axisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
-    const requiredAxes = this.state.current.get("computed").axes.requiredAxes
     const data = clone(axisComputed.ruleTicks || axisComputed.ticks)
-    if (includes(this.yRules ? "x1" : "y1")(requiredAxes)) {
-      data.shift()
-    }
-    if (includes(this.yRules ? "x2" : "y2")(requiredAxes)) {
-      data.pop()
-    }
     const startAttributes = this.startAttributes()
     const attributes = this.attributes()
 
@@ -75,11 +68,13 @@ class Rules {
     const computedAxes = this.state.current.get("computed").axes.computed
     const axisComputed = computedAxes[`${this.orientation}1`] || computedAxes[`${this.orientation}2`]
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
+    const scale: any = (d: any) => axisComputed.scale(d) + (axisComputed.ruleOffset || 0)
+
     return {
-      x1: this.yRules ? 0 : axisComputed.scale,
-      x2: this.yRules ? drawingDims.width : axisComputed.scale,
-      y1: this.yRules ? axisComputed.scale : 0,
-      y2: this.yRules ? axisComputed.scale : drawingDims.height,
+      x1: this.yRules ? 0 : scale,
+      x2: this.yRules ? drawingDims.width : scale,
+      y1: this.yRules ? scale : 0,
+      y2: this.yRules ? scale : drawingDims.height,
     }
   }
 

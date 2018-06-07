@@ -73,7 +73,7 @@ class QuantAxis implements AxisClass<number> {
     this.previous = cloneDeep(this.computed)
     const computed = this.computeInitial()
     computed.labelTicks = computeTicks(computed.labelSteps)
-    computed.ruleTicks = computeTicks(computed.ruleSteps)
+    computed.ruleTicks = this.computeRuleTicks(computed.ruleSteps)
     computed.ticks = computeTicks(computed.tickSteps)
     computed.scale = computeScale(computed.range, computed.labelTicks)
     this.computed = computed as AxisComputed
@@ -138,7 +138,7 @@ class QuantAxis implements AxisClass<number> {
   computeRuleSteps(computed: any): [number, number, number] {
     return this.computeSteps(
       computed,
-      this.options.ruleInterval || this.options.interval || this.computeInterval(computed)
+      this.options.ruleInterval || this.options.interval || this.computeInterval(computed),
     )
   }
 
@@ -153,6 +153,18 @@ class QuantAxis implements AxisClass<number> {
     steps[0] = this.options.start || computedStart || Math.floor(computed.domain[0] / steps[2]) * steps[2]
     steps[1] = this.options.end || Math.ceil((computed.domain[1] - steps[0]) / steps[2]) * steps[2] + steps[0]
     return steps
+  }
+
+  computeRuleTicks(steps: [number, number, number]): number[] {
+    let ruleTicks = computeTicks(steps)
+    const requiredAxes = this.state.current.get("computed").axes.requiredAxes
+    if (includes(this.isXAxis ? "y1" : "x1")(requiredAxes)) {
+      ruleTicks.shift()
+    }
+    if (includes(this.isXAxis ? "y2" : "x2")(requiredAxes)) {
+      ruleTicks.pop()
+    }
+    return ruleTicks
   }
 
   computeAligned(computed: Partial<AxisComputed>): void {

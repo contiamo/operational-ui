@@ -217,6 +217,7 @@ export interface AxisComputed {
   range: [number, number]
   ruleSteps?: [number, number, number]
   ruleTicks?: any[]
+  ruleOffset?: number
   scale: any
   tickSteps?: [number, number, number]
   tickFormatter?: (d: any) => string

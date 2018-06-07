@@ -85,7 +85,7 @@ class CategoricalAxis implements AxisClass<string> {
     this.adjustMargins()
     this.data = flow(
       filter(this.validate),
-      map(String)
+      map(String),
     )(this.options.values || data)
   }
 
@@ -103,6 +103,7 @@ class CategoricalAxis implements AxisClass<string> {
         .domain(this.data)
         .padding(config.innerBarSpacingCategorical),
     }
+    this.computed.ruleOffset = this.computed.scale.bandwidth() / 2
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)

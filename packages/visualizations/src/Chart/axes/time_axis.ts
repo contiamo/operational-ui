@@ -119,7 +119,7 @@ class TimeAxis implements AxisClass<Date> {
     this.updateOptions(options)
     this.data = flow(
       filter(this.validate),
-      sortBy((value: any) => value.valueOf())
+      sortBy((value: any) => value.valueOf()),
     )(data)
   }
 
@@ -130,6 +130,7 @@ class TimeAxis implements AxisClass<Date> {
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
     computed.scale = this.computeScale(computed.range, computed.ticksInDomain)
     computed.ticks = this.computeTicks(computed)
+    computed.ruleTicks = this.computeRuleTicks(computed)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
@@ -247,6 +248,18 @@ class TimeAxis implements AxisClass<Date> {
     }
     const ticks = computed.scale.ticks(computed.tickNumber || 1)
     return ticks.length > computed.ticksInDomain.length ? computed.ticksInDomain : ticks
+  }
+
+  private computeRuleTicks(computed: Partial<AxisComputed>): Date[] {
+    const ticks = this.options.interval === "week" ? computed.scale.ticks(timeMonday, 1) : computed.ticksInDomain
+    const tickValues = map(computed.scale)(ticks)
+    const ruleValues = reduce.convert({ cap: false })((memo: number[], tick: number, i: number) => {
+      if (i > 0) {
+        memo.push((tickValues[i - 1] + tick) / 2)
+      }
+      return memo
+    }, [])(tickValues)
+    return map(computed.scale.invert)(ruleValues)
   }
 
   computeAligned(computed: Partial<AxisComputed>): void {
