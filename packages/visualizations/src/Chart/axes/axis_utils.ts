@@ -116,11 +116,13 @@ const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
 const alignQuantAxes = (axes: { [key: string]: AxisClass<number> }): void => {
   const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
   const axisKeys = keys(computed)
-  const stepsOne = computed[axisKeys[0]].tickSteps
-  const stepsTwo = computed[axisKeys[1]].tickSteps
-  alignSteps(stepsOne, stepsTwo)
-  computed[axisKeys[0]].tickSteps = stepsOne
-  computed[axisKeys[1]].tickSteps = stepsTwo
+  forEach((name: string) => {
+    const stepsOne = computed[axisKeys[0]][name]
+    const stepsTwo = computed[axisKeys[1]][name]
+    alignSteps(stepsOne, stepsTwo)
+    computed[axisKeys[0]][name] = stepsOne
+    computed[axisKeys[1]][name] = stepsTwo
+  })(["tickSteps", "labelSteps", "ruleSteps"])
   forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition) => {
     axis.computeAligned(computed[key])
   })(axes)

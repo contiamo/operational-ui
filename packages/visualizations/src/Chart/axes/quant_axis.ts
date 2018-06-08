@@ -173,7 +173,7 @@ class QuantAxis implements AxisClass<number> {
     computed.domain = computed.labelSteps.slice(0, 2) as [number, number]
     computed.scale = computeScale(computed.range, computed.domain)
     computed.labelTicks = computeTicks(computed.labelSteps)
-    computed.ruleTicks = computeTicks(computed.ruleSteps)
+    computed.ruleTicks = this.computeRuleTicks(computed.ruleSteps)
     computed.ticks = computeTicks(computed.tickSteps)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.computed)(this.previous)
