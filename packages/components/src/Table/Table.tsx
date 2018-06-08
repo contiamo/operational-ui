@@ -87,6 +87,8 @@ const TableCell = glamorous.div(
   ({ theme }: WithTheme): {} => ({
     ...theme.typography.body,
     flex: 1,
+    display: "flex",
+    alignItems: "center",
   }),
 )
 
