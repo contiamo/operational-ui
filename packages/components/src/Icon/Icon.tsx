@@ -40,7 +40,7 @@ const Icon = (props: PropsWithTheme) => {
 
   if (ReactFeather.hasOwnProperty(props.name)) {
     const Comp = ReactFeather[props.name]
-    return <Comp size={props.size || defaultSize} color={color} />
+    return <Comp size={props.size || defaultSize} color={color} style={{ marginRight: 5 }} />
   }
   // @todo -> type this better
   if (BrandIcons.hasOwnProperty(props.name)) {
