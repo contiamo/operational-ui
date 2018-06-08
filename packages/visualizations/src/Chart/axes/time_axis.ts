@@ -268,6 +268,7 @@ class TimeAxis implements AxisClass<Date> {
     computed.tickNumber = this.computeTickNumber(computed.ticksInDomain, computed.range)
     computed.scale = this.computeScale(computed.range, computed.ticksInDomain)
     computed.ticks = this.computeTicks(computed)
+    computed.ruleTicks = this.computeRuleTicks(computed)
     this.computed = computed as AxisComputed
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)

@@ -3,7 +3,7 @@ import { Selection } from "d3-selection"
 import { AxisClass, AxisOptions, AxisPosition, Dimensions, D3Selection, AxisComputed } from "../typings"
 import { flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
-import * as moment from "moment"
+import moment from "moment"
 
 export const axisPosition = (position: AxisPosition, drawingDims: Dimensions): [number, number] => {
   switch (position) {
@@ -78,8 +78,8 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
 const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
   const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
   const axisKeys = keys(computed) as string[]
-  const intervalOne = axes[axisKeys[0]].interval
-  const intervalTwo = axes[axisKeys[1]].interval
+  const intervalOne = axes[axisKeys[0]].options.interval
+  const intervalTwo = axes[axisKeys[1]].options.interval
   if (intervalOne !== intervalTwo) {
     throw new Error("Time axes must have the same interval")
   }
