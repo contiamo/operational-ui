@@ -4,24 +4,27 @@ import { any, assign, defaults, difference, find, forEach, get, invoke, keys, om
 import { alignAxes } from "./axes/axis_utils"
 import { AxisClass, AxisConfig, AxisOptions, AxisPosition, D3Selection, EventBus, State, StateWriter } from "./typings"
 
-const xAxisConfig = {
+const generalAxisConfig = {
   fontSize: 11,
+  titleFontSize: 12,
+}
+
+const xAxisConfig = defaults(generalAxisConfig)({
   margin: 15,
   minTicks: 2,
   rotateLabels: false,
   tickSpacing: 65,
   outerPadding: 3,
-}
+})
 
-const yAxisConfig = {
-  fontSize: 11,
+const yAxisConfig = defaults(generalAxisConfig)({
   margin: 34,
   minTicks: 4,
   minTopOffsetTopTick: 21,
   rotateLabels: false,
   tickSpacing: 40,
   outerPadding: 3,
-}
+})
 
 const axisConfig: { [key: string]: AxisConfig } = {
   x1: assign({ tickOffset: 8 })(xAxisConfig),

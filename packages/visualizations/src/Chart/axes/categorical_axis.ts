@@ -27,6 +27,7 @@ import {
   positionBackgroundRect,
   translateAxis,
   getTextAnchor,
+  drawTitle,
 } from "./axis_utils"
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import Events from "../../shared/event_catalog"
@@ -190,6 +191,7 @@ class CategoricalAxis implements AxisClass<string> {
     this.drawLabels()
     this.drawBorder()
     positionBackgroundRect(this.el, this.position, this.state.current.get("config").duration)
+    drawTitle(this.el, this.options, this.position, this.computed.range)
   }
 
   private drawTicks(): void {
@@ -197,6 +199,7 @@ class CategoricalAxis implements AxisClass<string> {
     const attributes = this.getTickAttributes()
 
     const ticks = this.el
+      .select("g.axis-elements")
       .selectAll(`line.${styles.tick}`)
       .data(this.options.showTicks ? this.computed.ticks : [], String)
 
@@ -221,7 +224,10 @@ class CategoricalAxis implements AxisClass<string> {
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
 
-    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.ticks, String)
+    const labels = this.el
+      .select("g.axis-elements")
+      .selectAll(`text.${styles.label}`)
+      .data(this.computed.ticks, String)
 
     labels
       .enter()

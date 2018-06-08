@@ -7,6 +7,7 @@ import {
   positionBackgroundRect,
   translateAxis,
   getTextAnchor,
+  drawTitle,
 } from "./axis_utils"
 import { setTextAttributes, setLineAttributes, withD3Element } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
@@ -187,6 +188,7 @@ class QuantAxis implements AxisClass<number> {
     this.drawLabels()
     this.drawBorder()
     positionBackgroundRect(this.el, this.position, this.state.current.get("config").duration)
+    drawTitle(this.el, this.options, this.position, this.computed.range)
   }
 
   private drawTicks(): void {
@@ -194,6 +196,7 @@ class QuantAxis implements AxisClass<number> {
     const attributes = this.getTickAttributes()
 
     const ticks = this.el
+      .select("g.axis-elements")
       .selectAll(`line.${styles.tick}`)
       .data(this.options.showTicks ? this.computed.ticks : [], String)
 
@@ -218,7 +221,10 @@ class QuantAxis implements AxisClass<number> {
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
 
-    const labels = this.el.selectAll(`text.${styles.label}`).data(this.computed.labelTicks, String)
+    const labels = this.el
+      .select("g.axis-elements")
+      .selectAll(`text.${styles.label}`)
+      .data(this.computed.labelTicks, String)
 
     labels
       .enter()

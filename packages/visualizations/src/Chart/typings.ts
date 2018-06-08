@@ -26,6 +26,8 @@ export interface AxisConfig {
   showTicks: boolean
   tickOffset: number
   tickSpacing: number
+  title: string
+  titleFontSize: number
   minTopOffsetTopTick?: number
 }
 
