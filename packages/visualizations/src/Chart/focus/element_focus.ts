@@ -3,6 +3,7 @@ import Events from "../../shared/event_catalog"
 import { drawHidden, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import * as styles from "./styles"
 import * as globalStyles from "../../shared/styles"
+import { identity, isFinite, forEach } from "lodash/fp"
 
 class ElementFocus {
   el: D3Selection
@@ -46,24 +47,22 @@ class ElementFocus {
 
     const label = this.el.append("xhtml:ul").attr("class", styles.elementFocus)
 
-    label
-      .append("xhtml:li")
-      .attr("class", "title")
-      .text(payload.element)
+    forEach(
+      (item: { name: string; value: any }): void => {
+        const formatter = isFinite(item.value) ? this.state.current.get(["config", "numberFormatter"]) : identity
+        const listItem = label.append("xhtml:li")
 
-    const item = label.append("xhtml:li")
+        listItem
+          .append("span")
+          .attr("class", "name")
+          .text(item.name)
 
-    item.text(payload.seriesName)
-
-    item
-      .append("div")
-      .attr("class", "series-color")
-      .style("background-color", payload.seriesColor)
-
-    item
-      .append("div")
-      .attr("class", "series-value")
-      .text(payload.value)
+        listItem
+          .append("span")
+          .attr("class", "value")
+          .text(formatter(item.value))
+      },
+    )(payload.content)
 
     // Get label dimensions
     const labelDims = labelDimensions(this.el)

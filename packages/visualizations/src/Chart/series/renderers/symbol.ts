@@ -64,20 +64,22 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
   data: Datum[]
   el: D3Selection
   events: EventBus
-  fill: RendererAccessor<string>
-  opacity: RendererAccessor<number>
   options: Options
   series: Series
-  size: RendererAccessor<number>
   state: any
-  stroke: RendererAccessor<string>
-  symbol: RendererAccessor<any>
   type: RendererType = "symbol"
   xIsBaseline: boolean
-  x: RendererAccessor<number | Date>
   xScale: any
-  y: RendererAccessor<number | Date>
   yScale: any
+  // Accessors
+  fill: RendererAccessor<string>
+  focusContent: RendererAccessor<any>
+  opacity: RendererAccessor<number>
+  size: RendererAccessor<number>
+  stroke: RendererAccessor<string>
+  symbol: RendererAccessor<any>
+  x: RendererAccessor<number | Date>
+  y: RendererAccessor<number | Date>
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series) {
     this.state = state
@@ -169,10 +171,29 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
     this.x = (d: Datum): any => this.series.x(d) || d.injectedX
     this.y = (d: Datum): any => this.series.y(d) || d.injectedY
     this.fill = (d: Datum) => accessors.fill(this.series, d)
+    this.focusContent = (d: Datum) =>
+      accessors.focusContent ? accessors.focusContent(this.series, d) : this.defaultFocusContent(d)
     this.stroke = (d: Datum) => accessors.stroke(this.series, d)
     this.symbol = (d: Datum) => symbolOptions[accessors.symbol(this.series, d)]
     this.size = (d: Datum) => accessors.size(this.series, d)
     this.opacity = (d: Datum) => accessors.opacity(this.series, d)
+  }
+
+  defaultFocusContent(d: Datum): { name: string; value: any }[] {
+    const xTitle = this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.xAxis()]
+      .title
+    const yTitle = this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.yAxis()]
+      .title
+    return [
+      {
+        name: xTitle || "X",
+        value: this.x(d),
+      },
+      {
+        name: yTitle || "Y",
+        value: this.y(d),
+      },
+    ]
   }
 
   private setAxisScales(): void {
@@ -195,18 +216,14 @@ class Symbol implements RendererClass<SymbolRendererAccessors> {
 
   private onMouseOver(d: Datum, el: HTMLElement): void {
     const focusPoint = {
+      content: this.focusContent(d),
       position: "toRight",
-      element: this.xIsBaseline ? this.x(d) : this.y(d),
-      value: this.xIsBaseline ? this.y(d) : this.x(d),
-      seriesName: this.series.legendName(),
-      seriesColor: this.series.legendColor(),
       offset: this.series.symbolOffset(d),
       focus: {
         x: this.xScale(this.x(d)),
         y: this.yScale(this.y(d)),
       },
     }
-
     this.events.emit(Events.FOCUS.ELEMENT.HOVER, focusPoint)
   }
 
