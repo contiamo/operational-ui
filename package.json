@@ -37,7 +37,7 @@
     "publish": "lerna publish",
     "next": "./scripts/next.sh",
     "verify": "run-s lint prettify test",
-    "ci": "npm run verify",
+    "ci": "export NODE_ENV=ci && npm run verify",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
