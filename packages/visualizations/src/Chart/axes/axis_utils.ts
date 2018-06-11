@@ -11,7 +11,7 @@ import {
 } from "../typings"
 import { flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
-import moment from "moment"
+import * as moment from "moment"
 
 export const axisPosition = (position: AxisPosition, drawingDims: Dimensions): [number, number] => {
   switch (position) {
