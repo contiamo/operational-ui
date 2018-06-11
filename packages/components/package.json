@@ -61,7 +61,6 @@
     "setupTestFrameworkScriptFile": "<rootDir>/../../node_modules/jest-enzyme/lib/index.js",
     "snapshotSerializers": [
       "<rootDir>/../../node_modules/jest-serializer-enzyme"
-    ],
-    "mapCoverage": true
+    ]
   }
 }
