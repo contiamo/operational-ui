@@ -33,7 +33,6 @@
     "roots": [
       "<rootDir>/src"
     ],
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
-    "mapCoverage": true
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$"
   }
 }
