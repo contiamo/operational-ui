@@ -16,19 +16,20 @@ export interface Props {
 const Container = glamorous.div(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.typography.heading1,
+    fontSize: 14,
     label: "cardheader",
     display: "flex",
     alignItems: "center",
     /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: "#F9F9F9",
+    backgroundColor: "#F8F8F8",
     /** @todo Add to theme once colors are updated across codebase */
     color: "#747474",
     // This ensures that the card header text and card controls are placed in opposite corners.
     justifyContent: "space-between",
-    height: 2 * theme.spacing,
+    height: 40,
     margin: -theme.spacing,
     marginBottom: theme.spacing,
-    padding: `0 ${theme.spacing}px`,
+    padding: `0 20px`,
     lineHeight: 1,
   }),
 )
