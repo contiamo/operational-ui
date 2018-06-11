@@ -39,15 +39,15 @@ const data: any = {
       start: new Date(2018, 2, 10),
       end: new Date(2018, 2, 15),
       interval: "day",
-      title: "Axis title",
+      title: "X1 axis title",
     },
     y1: {
       type: "quant",
-      title: "Axis title",
+      title: "Y1 axis title",
     },
     y2: {
       type: "quant",
-      title: "Axis title",
+      title: "Y2 axis title",
     },
   },
 }
@@ -64,10 +64,12 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
     data.axes.y1 = {
       type: "quant",
       end: 700,
+      title: "New axis title",
     }
     data.axes.y2 = {
       type: "quant",
       end: 650,
+      title: "New axis title",
     }
     viz.data(data)
     viz.draw()

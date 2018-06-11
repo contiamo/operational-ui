@@ -69,6 +69,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
       start: new Date(2018, 2, 8),
       end: new Date(2018, 2, 17),
       interval: "day",
+      title: "Axis title",
     }
     viz.data(data)
     viz.draw()
