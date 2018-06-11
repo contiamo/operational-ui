@@ -5,7 +5,7 @@ Cards are used to group and lay out content on the interface - in fact, non-scro
 Simply add any content inside the card.
 
 ```jsx
-<Card>
+<Card title="Card title" action={<>More details: <a href="#card">click here</a> </>}>
     <p>Here is a bare card with custom padding.</p>
     <img
         alt="Cat"
