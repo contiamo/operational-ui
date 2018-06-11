@@ -1,6 +1,5 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import glamorous from "glamorous"
 import { CardHeader } from "../index"
 
 import { WithTheme, Css, CssStatic } from "../types"
