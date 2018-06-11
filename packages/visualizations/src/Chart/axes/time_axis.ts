@@ -358,7 +358,7 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private getAttributes(): AxisAttributes {
-    let attrs: any = {
+    const attrs: any = {
       x: this.isXAxis ? this.computed.scale : (d: Date) => 0,
       y: this.isXAxis ? (d: Date) => 0 : this.computed.scale,
       dx: this.isXAxis ? 0 : this.options.tickOffset,

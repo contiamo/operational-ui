@@ -157,7 +157,7 @@ class QuantAxis implements AxisClass<number> {
   }
 
   computeRuleTicks(steps: [number, number, number]): number[] {
-    let ruleTicks = computeTicks(steps)
+    const ruleTicks = computeTicks(steps)
     const requiredAxes = this.state.current.get("computed").axes.requiredAxes
     if (includes(this.isXAxis ? "y1" : "x1")(requiredAxes)) {
       ruleTicks.shift()

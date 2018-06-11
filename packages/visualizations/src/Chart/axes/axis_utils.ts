@@ -208,9 +208,9 @@ const getTitleAttributes = (el: D3Selection, position: AxisPosition, fontSize: n
   const y = height * titlePosition.y
   const rotation = position[0] === "y" ? -90 : 0
   return {
-    text: String,
-    x: x,
+    x,
     y: y + (position === "x1" ? fontSize : 0),
+    text: String,
     textAnchor: "center",
     transform: `rotate(${rotation}, ${x}, ${y})`,
   }
