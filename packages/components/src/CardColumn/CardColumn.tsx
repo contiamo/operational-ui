@@ -38,8 +38,9 @@ const Container = glamorous.div(
 const Title = glamorous.div(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.typography.heading1,
+    color: "#545454",
     fontSize: 14,
-    borderBottom: `1px solid ${theme.colors.lightGray}`,
+    borderBottom: "1px solid #ececec",
     marginBottom: theme.spacing,
   }),
 )
