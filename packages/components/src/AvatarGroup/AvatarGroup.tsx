@@ -17,9 +17,9 @@ export interface Props {
   children?: React.ReactNode
   /** Avatars list */
   avatars?: AvatarItem[]
-  /** Maximum avatar to be display on screen */
+  /** Maximum number of avatars to display */
   maximumToDisplay?: number
-  /** More button handlere */
+  /** More button handler */
   onMoreClick?: () => void
 }
 
