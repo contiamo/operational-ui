@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { CSSProperties, Div } from "glamorous"
-import { Theme, expandColor } from "@operational/theme/lib"
-import { readableTextColor, getInitials } from "@operational/utils/lib"
+import { Theme, expandColor } from "@operational/theme"
+import { readableTextColor, getInitials } from "@operational/utils"
 
 import { WithTheme, Css, CssStatic } from "../types"
 
@@ -33,7 +33,6 @@ const Container = glamorous.div({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-start",
-  maxWidth: 180,
 })
 
 const NameContainer = glamorous.div(
