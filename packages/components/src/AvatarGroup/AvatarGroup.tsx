@@ -1,6 +1,6 @@
 import * as React from "react"
 import glamorous, { Div } from "glamorous"
-import { Theme } from "@operational/theme"
+import { Theme } from "../../../theme/lib"
 
 import Avatar from "../Avatar/Avatar"
 import { WithTheme, Css, CssStatic } from "../types"
@@ -29,7 +29,9 @@ const Container = glamorous.div(
     display: "flex",
     "& :not(:first-child)": {
       marginLeft: theme.spacing * -1,
-      "& > .opui_avatar-picture": { boxShadow: "-1px 0 0 1px white" },
+    },
+    "& .opui_avatar-picture": {
+      border: "2px white solid",
     },
     "& .opui_name-container": {
       display: "none",

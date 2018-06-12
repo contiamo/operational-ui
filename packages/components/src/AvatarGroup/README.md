@@ -16,7 +16,6 @@ const avatars = [
   { name: "Captain Hook" },
   { name: "Mr. Smee" },
 ]
-
 ;<>
   <AvatarGroup avatars={avatars.slice(0, 3)} />
   <AvatarGroup avatars={avatars.slice(0, 4)} />
@@ -43,7 +42,6 @@ const avatars = [
   { name: "Captain Hook" },
   { name: "Mr. Smee" },
 ]
-
 ;<>
   <AvatarGroup avatars={avatars} onMoreClick={() => alert("onMore was clicked!")} />
 </>
@@ -67,7 +65,6 @@ const avatars = [
   { name: "Captain Hook" },
   { name: "Mr. Smee" },
 ]
-
 ;<>
   <AvatarGroup avatars={avatars} maximumToDisplay={2} />
   <AvatarGroup avatars={avatars} maximumToDisplay={5} />
@@ -78,6 +75,8 @@ const avatars = [
 ### Should also work with the old API
 
 ```jsx
+const { Avatar } = require("..")
+
 const avatars = [
   {
     name: "Peter Pan",
@@ -93,6 +92,5 @@ const avatars = [
   { name: "Captain Hook" },
   { name: "Mr. Smee" },
 ]
-
 ;<AvatarGroup>{avatars.map(({ name, photo }) => <Avatar name={name} photo={photo} />)}</AvatarGroup>
 ```

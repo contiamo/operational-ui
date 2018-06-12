@@ -28,15 +28,13 @@ export interface Props {
   onClick?: () => void
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "avatar",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    maxWidth: 180,
-  }),
-)
+const Container = glamorous.div({
+  label: "avatar",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  maxWidth: 180,
+})
 
 const NameContainer = glamorous.div(
   ({ theme }: WithTheme): CssStatic => ({
@@ -48,7 +46,6 @@ const NameContainer = glamorous.div(
 const Name = glamorous.div(
   ({ theme }: { theme: Theme }): CssStatic => ({
     ...theme.typography.body,
-    lineHeight: 1.25,
     margin: 0,
   }),
 )
@@ -57,7 +54,6 @@ const Title = glamorous.div(
   ({ theme }: { theme: Theme }): CssStatic => ({
     ...theme.typography.body,
     color: theme.colors.gray,
-    lineHeight: 1.25,
     margin: 0,
   }),
 )
@@ -83,9 +79,9 @@ const Picture = glamorous.div(
     const textColor = readableTextColor(backgroundColor, [theme.colors.text, "white"])
 
     return {
-      ...theme.typography.heading1,
+      fontSize: 9,
       textTransform: "uppercase",
-      marginRight: theme.spacing * 0.5,
+      marginRight: theme.spacing * 0.5, // use for offset the display name
       width: theme.spacing * 2,
       height: theme.spacing * 2,
       borderRadius: "50%",
