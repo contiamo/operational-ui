@@ -19,16 +19,22 @@
 ### Automatically assign colors that are deterministic by name
 
 ```jsx
-<Avatar showName assignColor name="Franklin Green" />
+<>
+  <Avatar showName name="Franklin Green" />
+  <Avatar showName name="Tejas Kumar" />
+  <Avatar showName name="Fabien Bernard" />
+</>
 ```
 
-### Display a photo instead of solid colors. This will automatically hide the initials
+### Display a photo instead of solid colors.
+
+This will automatically hide the initials
 
 ```jsx
 <Avatar photo="http://thecatapi.com/api/images/get?format=src&size=small" name="Franklin Green" />
 ```
 
-### Should be also beautifull on a dark background
+### Should be also beautiful on a dark background
 
 ```jsx
 <div style={{ backgroundColor: "#333333", padding: 10 }}>
