@@ -1,6 +1,5 @@
 import * as React from "react"
-import glamorous, { Div } from "glamorous"
-import { Theme } from "../../../theme/lib"
+import glamorous from "glamorous"
 
 import Avatar from "../Avatar/Avatar"
 import { WithTheme, Css, CssStatic } from "../types"
@@ -21,6 +20,8 @@ export interface Props {
   maximumToDisplay?: number
   /** More button handler */
   onMoreClick?: () => void
+  /** Size of avatars */
+  size?: "small" | "medium"
 }
 
 const Container = glamorous.div(
@@ -44,8 +45,19 @@ const AvatarGroup: React.SFC<Props> = props => {
   const count = React.Children.count(avatarsToDisplay)
   const mustSlice = props.maximumToDisplay < count
 
+  const sizeCss =
+    props.size === "medium"
+      ? {
+          "& .opui_avatar-picture": {
+            fontSize: 13,
+            height: 48,
+            width: 48,
+          },
+        }
+      : {}
+
   return (
-    <Container css={props.css} className={props.className}>
+    <Container css={{ ...props.css, ...sizeCss }} className={props.className}>
       {mustSlice ? React.Children.toArray(avatarsToDisplay).slice(0, props.maximumToDisplay - 1) : avatarsToDisplay}
       {mustSlice && (
         <Avatar onClick={props.onMoreClick} name="more" assignColor={false}>
