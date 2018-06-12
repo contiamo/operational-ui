@@ -12,9 +12,9 @@ export interface Props {
   css?: Css
   className?: string
   children?: React.ReactNode
-  /** buttons/links/actions assigned to the card */
+  /** Component containing buttons/links/actions assigned to the card */
   action?: React.ComponentType
-  /** shortcut for adding a title to the card header */
+  /** Shortcut for adding a title to the card header */
   title?: string
 }
 
