@@ -102,12 +102,13 @@ const Picture = glamorous.div(
 
 const Avatar: React.SFC<Props> = props => {
   const initials = getInitials(props.name)
-  const colorAssignmentNumber = props.assignColor
-    ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
-        (accumulator, current) => accumulator + (!current || isNaN(current) ? 0 : current),
-        0,
-      )
-    : undefined
+  const colorAssignmentNumber =
+    props.assignColor && !props.color
+      ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
+          (accumulator, current) => accumulator + (!current || isNaN(current) ? 0 : current),
+          0,
+        )
+      : undefined
   return (
     <Container css={props.css} className={props.className} onClick={props.onClick}>
       <Picture

@@ -1,7 +1,11 @@
 ### Simple avatar with name (initial only)
 
 ```jsx
-<Avatar name="Franklin Green" />
+<>
+  <Avatar showName name="Franklin Green" />
+  <Avatar showName name="Tejas Kumar" />
+  <Avatar showName name="Fabien Bernard" />
+</>
 ```
 
 ### Show full name next to the avatar circle
@@ -10,19 +14,13 @@
 <Avatar showName name="Franklin Green" />
 ```
 
-### Color the avatar circle with a custom or named color
-
-```jsx
-<Avatar showName color="#142222" name="Franklin Green" />
-```
-
-### Automatically assign colors that are deterministic by name
+### Color the avatar circle with a custom or named theme color
 
 ```jsx
 <>
-  <Avatar showName name="Franklin Green" />
-  <Avatar showName name="Tejas Kumar" />
-  <Avatar showName name="Fabien Bernard" />
+  <Avatar showName color="#002395" name="Franklin Green" />
+  <Avatar showName color="#FFFFFF" name="Franklin Green" />
+  <Avatar showName color="#ED2939" name="Franklin Green" />
 </>
 ```
 
