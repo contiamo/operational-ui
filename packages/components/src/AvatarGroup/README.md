@@ -75,8 +75,6 @@ const avatars = [
 ### Should also work with the old API
 
 ```jsx
-const { Avatar } = require("..")
-
 const avatars = [
   {
     name: "Peter Pan",

@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { CSSProperties, Div } from "glamorous"
 import { Theme, expandColor } from "@operational/theme/lib"
-import { readableTextColor } from "@operational/utils/lib"
+import { readableTextColor, getInitials } from "@operational/utils/lib"
 
 import { WithTheme, Css, CssStatic } from "../types"
 
@@ -99,17 +99,6 @@ const Picture = glamorous.div(
     }
   },
 )
-
-export const getInitials = (name: string): string => {
-  if (!name) return ""
-  const fullInitials = name
-    .split(" ")
-    .map(([firstLetter]) => firstLetter.toUpperCase())
-    .join("")
-
-  const [firstInitial, , lastInitial] = fullInitials
-  return fullInitials.length > 2 ? firstInitial + lastInitial : fullInitials
-}
 
 const Avatar: React.SFC<Props> = props => {
   const initials = getInitials(props.name)
