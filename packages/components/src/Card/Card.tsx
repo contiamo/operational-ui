@@ -13,7 +13,7 @@ export interface Props {
   className?: string
   children?: React.ReactNode
   /** buttons/links/actions assigned to the card */
-  actionComponents?: React.ComponentType
+  action?: React.ComponentType
   /** shortcut for adding a title to the card header */
   title?: string
 }
@@ -33,10 +33,10 @@ const Container = glamorous.div(
 
 const Card = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className}>
-    {(props.title || props.actionComponents) && (
+    {(props.title || props.action) && (
       <CardHeader>
         {props.title && props.title}
-        {props.actionComponents && <div>{<props.actionComponents />}</div>}
+        {props.action && <div>{<props.action />}</div>}
       </CardHeader>
     )}
     {props.children}
