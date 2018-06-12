@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous, { CSSProperties, Div } from "glamorous"
 import { Theme, expandColor } from "@operational/theme"
-import { darken, readableTextColor } from "@operational/utils"
+import { readableTextColor, getInitials } from "@operational/utils"
 
 import { WithTheme, Css, CssStatic } from "../types"
 
@@ -24,17 +24,16 @@ export interface Props {
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
   assignColor?: boolean
+  children?: React.ReactNode
+  onClick?: () => void
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "avatar",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    maxWidth: 180,
-  }),
-)
+const Container = glamorous.div({
+  label: "avatar",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+})
 
 const NameContainer = glamorous.div(
   ({ theme }: WithTheme): CssStatic => ({
@@ -46,7 +45,6 @@ const NameContainer = glamorous.div(
 const Name = glamorous.div(
   ({ theme }: { theme: Theme }): CssStatic => ({
     ...theme.typography.body,
-    lineHeight: 1.25,
     margin: 0,
   }),
 )
@@ -55,7 +53,6 @@ const Title = glamorous.div(
   ({ theme }: { theme: Theme }): CssStatic => ({
     ...theme.typography.body,
     color: theme.colors.gray,
-    lineHeight: 1.25,
     margin: 0,
   }),
 )
@@ -81,11 +78,11 @@ const Picture = glamorous.div(
     const textColor = readableTextColor(backgroundColor, [theme.colors.text, "white"])
 
     return {
-      ...theme.typography.heading1,
+      fontSize: 9,
       textTransform: "uppercase",
-      marginRight: theme.spacing * 0.5,
-      width: theme.spacing * 2.75,
-      height: theme.spacing * 2.75,
+      marginRight: theme.spacing * 0.5, // use for offset the display name
+      width: theme.spacing * 2,
+      height: theme.spacing * 2,
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
@@ -102,40 +99,38 @@ const Picture = glamorous.div(
   },
 )
 
-const getInitials = (name: string): string => {
-  if (!name) {
-    return ""
-  }
-  const splitName = name.split(" ")
-  return splitName[0].slice(0, 1) + splitName[splitName.length - 1].slice(0, 1)
-}
-
-const Avatar = (props: Props) => {
+const Avatar: React.SFC<Props> = props => {
   const initials = getInitials(props.name)
-  const colorAssignmentNumber = props.assignColor
-    ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
-        (accumulator, current) => accumulator + (!current || isNaN(current) ? 0 : current),
-        0,
-      )
-    : undefined
+  const colorAssignmentNumber =
+    props.assignColor && !props.color
+      ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
+          (accumulator, current) => accumulator + (!current || isNaN(current) ? 0 : current),
+          0,
+        )
+      : undefined
   return (
-    <Container css={props.css} className={props.className}>
+    <Container css={props.css} className={props.className} onClick={props.onClick}>
       <Picture
         photo={props.photo}
         color={props.color}
         colorAssignment={colorAssignmentNumber}
         className="opui_avatar-picture"
       >
-        {props.hideInitials || props.photo ? "" : initials}
+        {props.children ? props.children : props.hideInitials || props.photo ? "" : initials}
       </Picture>
       {props.showName && (
-        <NameContainer className="opui_name-container">
+        <NameContainer>
           <Name>{props.name}</Name>
           {props.title && <Title>{props.title}</Title>}
         </NameContainer>
       )}
     </Container>
   )
+}
+
+Avatar.defaultProps = {
+  assignColor: true,
+  onClick: () => ({}),
 }
 
 export default Avatar
