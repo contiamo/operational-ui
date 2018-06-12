@@ -17,7 +17,7 @@
     "build:visual-test": "lerna run --scope @operational/visual-tests build && cp -r packages/visual-tests/dist/ ./dist/visual-tests",
     "build:components": "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist/docs",
     "clean": "lerna clean",
-    "test": "run-s test:*",
+    "test": "run-s \"test:* -- -- --maxWorkers=$JEST_MAX_WORKERS\"",
     "test:components": "cd packages/components && npm run test",
     "test:theme": "cd packages/theme && npm run test",
     "test:utils": "cd packages/utils && npm run test",
