@@ -40,7 +40,7 @@ const Title = glamorous.div(
     ...theme.typography.heading1,
     color: "#545454",
     fontSize: 14,
-    borderBottom: "1px solid #ececec",
+    borderBottom: "1px solid #e8e8e8",
     marginBottom: theme.spacing,
   }),
 )
