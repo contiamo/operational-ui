@@ -21,7 +21,7 @@ const myData = {
   updated: "tomorrow",
   repo: "https://git.com/hellp.git",
 }
-;<CardData title="Details" data={myData} titleFormatter={title => title.toUppercase()} />
+;<CardData title="Details" data={myData} keyFormatter={title => title.toUpperCase()} />
 ```
 
 ### With value formatters
@@ -43,22 +43,22 @@ const myData = {
 />
 ```
 
-### With `pick`
+### With `keys`
 
 ```jsx
-// const myData = {
-//   deployedSha: "oiuhaeg",
-//   deployed: "last Friday",
-//   updated: "tomorrow",
-//   repo: "https://git.com/hellp.git",
-// }
-// ;<CardData
-//   title="Details"
-//   data={myData}
-//   pick=["repo", "deployed"]
-//   valueFormatters={{
-//     deployedSha: val => "******",
-//     repo: val => val.split(".com")[1],
-//   }}
-// />
+const myData = {
+  deployedSha: "oiuhaeg",
+  deployed: "last Friday",
+  updated: "tomorrow",
+  repo: "https://git.com/hellp.git",
+}
+;<CardData
+  title="Details"
+  data={myData}
+  keys={["repo", "deployed"]}
+  valueFormatters={{
+    deployedSha: val => "******",
+    repo: val => val.split(".com")[1],
+  }}
+/>
 ```
