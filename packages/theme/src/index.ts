@@ -164,7 +164,7 @@ const typography: ThemeTypography = {
 
 const shadows: ThemeShadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-  card: "0px 1px 5px #d3d1d1",
+  card: "0px 1px 3px rgba(0,0,0,.16)",
   focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
   popup: "0 3px 12px rgba(0, 0, 0, .14)",
 }
