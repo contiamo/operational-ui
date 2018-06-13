@@ -27,11 +27,26 @@ const myData = {
 ### With value formatters
 
 ```jsx
+const DeployedStatus = ({ deployed }) => (
+  <div
+    style={{
+      position: "relative",
+      display: "inline-block",
+      marginRight: 7,
+      borderRadius: "50%",
+      width: 8,
+      height: 8,
+      background: deployed ? "green" : "red",
+    }}
+  />
+)
+
 const myData = {
   deployedSha: "oiuhaeg",
   deployed: "last Friday",
   updated: "tomorrow",
   repo: "https://git.com/hellp.git",
+  status: "deployed",
 }
 ;<CardData
   title="Details"
@@ -39,6 +54,12 @@ const myData = {
   valueFormatters={{
     deployedSha: val => "******",
     repo: val => val.split(".com")[1],
+    status: val => (
+      <div>
+        <DeployedStatus deployed={val === "deployed"} />
+        {val}
+      </div>
+    ),
   }}
 />
 ```
