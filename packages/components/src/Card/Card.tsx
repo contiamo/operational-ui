@@ -54,7 +54,7 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
     return (
       <Container id={id} css={css} className={className}>
         {(title || action) && <CardHeader title={title} action={action && <this.props.action />} />}
-        {data && titles.map((title, i) => <CardItem value={values[i]} title={title} />)}
+        {data && titles.map((title, i) => <CardItem key={i} value={values[i]} title={title} />)}
         {children}
       </Container>
     )

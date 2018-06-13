@@ -41,7 +41,9 @@ const Container = glamorous.div(
 )
 
 const AvatarGroup: React.SFC<Props> = props => {
-  const avatarsToDisplay = props.avatars ? props.avatars.map(avatar => <Avatar {...avatar} />) : props.children
+  const avatarsToDisplay = props.avatars
+    ? props.avatars.map((avatar, i) => <Avatar key={i} {...avatar} />)
+    : props.children
   const count = React.Children.count(avatarsToDisplay)
   const mustSlice = props.maximumToDisplay < count
 
