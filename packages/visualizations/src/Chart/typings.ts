@@ -16,21 +16,18 @@ export {
   Canvas,
 } from "../shared/typings"
 
-export interface XAxisConfig {
-  fontSize?: number
-  margin?: number
-  minTicks?: number
-  outerPadding?: number
-  showRules?: boolean
-  tickOffset?: number
-  tickSpacing?: number
-}
-
-export interface YAxisConfig extends XAxisConfig {
-  minTopOffsetTopTick?: number
-}
-
-export interface AxisConfig extends XAxisConfig {
+export interface AxisConfig {
+  fontSize: number
+  margin: number
+  minTicks: number
+  outerPadding: number
+  rotateLabels: boolean
+  showRules: boolean
+  showTicks: boolean
+  tickOffset: number
+  tickSpacing: number
+  title: string
+  titleFontSize: number
   minTopOffsetTopTick?: number
 }
 
@@ -199,6 +196,8 @@ export interface QuantAxisOptions extends AxisConfig {
   start?: number
   end?: number
   interval?: number
+  ruleInterval?: number
+  tickInterval: number
   unit?: string
 }
 
@@ -215,9 +214,14 @@ export interface AxesData {
 
 export interface AxisComputed {
   domain?: [number, number] | DateRange
+  labelSteps?: [number, number, number]
+  labelTicks?: any[]
   range: [number, number]
+  ruleSteps?: [number, number, number]
+  ruleTicks?: any[]
+  ruleOffset?: number
   scale: any
-  steps?: [number, number, number]
+  tickSteps?: [number, number, number]
   tickFormatter?: (d: any) => string
   ticks: any[]
   ticksInDomain?: Date[]
@@ -243,9 +247,9 @@ export interface AxisClass<T> {
   draw: () => void
   interval?: any
   isXAxis: boolean
+  options: AxisOptions
   previous: AxisComputed
-  showRules: boolean
-  update: (options: AxisOptions, data: T[]) => void
+  update: (options: Partial<AxisOptions>, data: T[]) => void
   close: () => void
 }
 

@@ -1,6 +1,14 @@
-import { setLineAttributes, setRectAttributes } from "../../utils/d3_utils"
+import { setLineAttributes, setRectAttributes, setTextAttributes } from "../../utils/d3_utils"
 import { Selection } from "d3-selection"
-import { AxisClass, AxisPosition, Dimensions, D3Selection, AxisComputed } from "../typings"
+import {
+  AxisClass,
+  AxisOptions,
+  AxisPosition,
+  Dimensions,
+  D3Selection,
+  AxisComputed,
+  TimeAxisOptions,
+} from "../typings"
 import { flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
 import * as moment from "moment"
@@ -29,11 +37,13 @@ export const insertElements = (
     .attr("class", `axis ${type}-axis ${position}`)
     .attr("transform", `translate(${axisPosition(position, drawingDims).join(",")})`)
 
+  const elementGroup = axisGroup.append("svg:g").attr("class", "axis-elements")
+
   // Background rect for component hover
-  axisGroup.append("svg:rect").attr("class", styles.componentRect)
+  elementGroup.append("svg:rect").attr("class", styles.componentRect)
 
   // Border
-  axisGroup
+  elementGroup
     .append("svg:line")
     .attr("class", styles.border)
     .call(setLineAttributes, { x1: 0, x2: 0, y1: 0, y2: 0 })
@@ -59,7 +69,8 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
   if (keys(axes).length !== 2) {
     return
   }
-  const axesTypes: ("time" | "quant" | "categorical")[] = flow(
+
+  const axesTypes = flow(
     values,
     map(get("type")),
     uniqBy(String),
@@ -73,13 +84,10 @@ export const alignAxes = (axes: { [key: string]: AxisClass<any> }) => {
 }
 
 const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
-  const computed: { [key: string]: Partial<AxisComputed> } = mapValues(
-    (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
-  )(axes)
-
-  const axisKeys: string[] = keys(computed) as string[]
-  const intervalOne: any = axes[axisKeys[0]].interval
-  const intervalTwo: any = axes[axisKeys[1]].interval
+  const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
+  const axisKeys = keys(computed) as string[]
+  const intervalOne = (axes[axisKeys[0]].options as TimeAxisOptions).interval
+  const intervalTwo = (axes[axisKeys[1]].options as TimeAxisOptions).interval
   if (intervalOne !== intervalTwo) {
     throw new Error("Time axes must have the same interval")
   }
@@ -114,20 +122,18 @@ const alignTimeAxes = (axes: { [key: string]: AxisClass<Date> }): void => {
 }
 
 const alignQuantAxes = (axes: { [key: string]: AxisClass<number> }): void => {
-  const computed: { [key: string]: Partial<AxisComputed> } = mapValues(
-    (axis: AxisClass<number>): Partial<AxisComputed> => axis.computeInitial(),
-  )(axes)
-  const axisKeys: string[] = keys(computed) as string[]
-  const stepsOne: [number, number, number] = computed[axisKeys[0]].steps
-  const stepsTwo: [number, number, number] = computed[axisKeys[1]].steps
-  alignSteps(stepsOne, stepsTwo)
-  computed[axisKeys[0]].steps = stepsOne
-  computed[axisKeys[1]].steps = stepsTwo
-  forEach.convert({ cap: false })(
-    (axis: AxisClass<number>, key: AxisPosition): void => {
-      axis.computeAligned(computed[key])
-    },
-  )(axes)
+  const computed = mapValues((axis: AxisClass<number>) => axis.computeInitial())(axes)
+  const axisKeys = keys(computed)
+  forEach((name: string) => {
+    const stepsOne = computed[axisKeys[0]][name]
+    const stepsTwo = computed[axisKeys[1]][name]
+    alignSteps(stepsOne, stepsTwo)
+    computed[axisKeys[0]][name] = stepsOne
+    computed[axisKeys[1]][name] = stepsTwo
+  })(["tickSteps", "labelSteps", "ruleSteps"])
+  forEach.convert({ cap: false })((axis: AxisClass<number>, key: AxisPosition) => {
+    axis.computeAligned(computed[key])
+  })(axes)
 }
 
 const alignSteps = (one: number[], two: number[]): void => {
@@ -158,21 +164,75 @@ const containsZero = (step: number[]): [number, number] => {
   return step[0] <= 0 && step[1] >= 0 ? [Math.abs(step[0] / step[2]), step[1] / step[2]] : undefined
 }
 
-export const positionBackgroundRect = (el: any, duration: number): void => {
-  el.selectAll(`rect.${styles.componentRect}`).call(setRectAttributes, {})
+export const positionBackgroundRect = (el: D3Selection, position: string, duration: number): void => {
   // Remove current background rect attributes so they do not affect the group dimension calculation.
+  el.selectAll(`rect.${styles.componentRect}`).call(setRectAttributes, {})
 
   // Position background rect only once axis has finished transitioning.
   setTimeout((): void => {
     // Position background rect
-    const group = el.node().getBoundingClientRect()
-    const rect = (el.selectAll("rect").node() as Element).getBoundingClientRect()
-
+    const group = el.node().getBBox()
     el.selectAll("rect").call(setRectAttributes, {
-      x: group.left - rect.left,
-      y: group.top - rect.top,
+      x: position === "y1" ? -group.width : group.x,
+      y: position === "x2" ? -group.height : group.y,
       width: group.width,
       height: group.height,
     })
   }, duration)
+}
+
+const textAnchor = {
+  x1: (rotateLabels: boolean) => (rotateLabels ? "end" : "middle"),
+  x2: (rotateLabels: boolean) => (rotateLabels ? "start" : "middle"),
+  y1: (rotateLabels: boolean) => "end",
+  y2: (rotateLabels: boolean) => "start",
+}
+
+export const getTextAnchor = (axis: AxisPosition, isRotated: boolean): string => {
+  return textAnchor[axis](isRotated)
+}
+
+const titlePositions = {
+  x1: { x: 0.5, y: 1.2 },
+  x2: { x: 0.5, y: -1.2 },
+  y1: { x: -1.2, y: 0.5 },
+  y2: { x: 1.2, y: 0.5 },
+}
+
+const getTitleAttributes = (el: D3Selection, position: AxisPosition, fontSize: number, range: [number, number]) => {
+  const elBox = (el.select("g.axis-elements").node() as any).getBBox()
+  const titlePosition = titlePositions[position]
+  const width = position[0] === "x" ? range[1] - range[0] : elBox.width
+  const height = position[0] === "x" ? elBox.height : Math.abs(range[1] - range[0])
+  const x = width * titlePosition.x + (position === "y2" ? fontSize : 0)
+  const y = height * titlePosition.y
+  const rotation = position[0] === "y" ? -90 : 0
+  return {
+    x,
+    y: y + (position === "x1" ? fontSize : 0),
+    text: String,
+    textAnchor: "center",
+    transform: `rotate(${rotation}, ${x}, ${y})`,
+  }
+}
+
+export const drawTitle = (
+  el: D3Selection,
+  axisOptions: AxisOptions,
+  position: AxisPosition,
+  range: [number, number],
+): void => {
+  const attributes = getTitleAttributes(el, position, axisOptions.titleFontSize, range)
+
+  const title = el.selectAll("text.title").data(axisOptions.title ? [axisOptions.title] : [])
+
+  title.exit().remove()
+
+  title
+    .enter()
+    .append("svg:text")
+    .attr("class", "title")
+    .merge(title)
+    .attr("font-size", axisOptions.titleFontSize)
+    .call(setTextAttributes, attributes)
 }

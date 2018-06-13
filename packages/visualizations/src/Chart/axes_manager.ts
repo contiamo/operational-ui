@@ -4,28 +4,33 @@ import { any, assign, defaults, difference, find, forEach, get, invoke, keys, om
 import { alignAxes } from "./axes/axis_utils"
 import { AxisClass, AxisConfig, AxisOptions, AxisPosition, D3Selection, EventBus, State, StateWriter } from "./typings"
 
-const xAxisConfig = {
+const generalAxisConfig = {
   fontSize: 11,
-  margin: 15,
-  minTicks: 2,
-  tickSpacing: 65,
-  outerPadding: 3,
+  titleFontSize: 12,
 }
 
-const yAxisConfig = {
-  fontSize: 11,
+const xAxisConfig = defaults(generalAxisConfig)({
+  margin: 15,
+  minTicks: 2,
+  rotateLabels: false,
+  tickSpacing: 65,
+  outerPadding: 3,
+})
+
+const yAxisConfig = defaults(generalAxisConfig)({
   margin: 34,
   minTicks: 4,
   minTopOffsetTopTick: 21,
+  rotateLabels: false,
   tickSpacing: 40,
   outerPadding: 3,
-}
+})
 
 const axisConfig: { [key: string]: AxisConfig } = {
-  x1: assign({ tickOffset: 4 })(xAxisConfig),
-  x2: assign({ tickOffset: -4 })(xAxisConfig),
-  y1: assign({ tickOffset: -4 })(yAxisConfig),
-  y2: assign({ tickOffset: 4 })(yAxisConfig),
+  x1: assign({ tickOffset: 8 })(xAxisConfig),
+  x2: assign({ tickOffset: -8 })(xAxisConfig),
+  y1: assign({ tickOffset: -8 })(yAxisConfig),
+  y2: assign({ tickOffset: 8 })(yAxisConfig),
 }
 
 class AxesManager {
@@ -134,15 +139,14 @@ class AxesManager {
     forEach(invoke("draw"))(axes)
 
     // Update rules
-    const hasRules = any((axis: AxisClass<any>) => axis.showRules)(axes as any)
+    const hasRules = any((axis: AxisClass<any>) => axis.options.showRules)(axes as any)
     hasRules ? this.updateRules(orientation) : this.removeRules(orientation)
 
     this.axesDrawn.push(orientation)
   }
 
   private onMarginsUpdated(isXAxis: boolean): void {
-    const axesToUpdate: "x" | "y" = isXAxis ? "y" : "x"
-    this.drawAxes(axesToUpdate)
+    forEach(this.drawAxes.bind(this))(["y", "x"])
   }
 
   updateRules(orientation: "x" | "y"): void {

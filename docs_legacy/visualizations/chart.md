@@ -123,17 +123,25 @@ The 'series' and 'axes' properties can have different names, if the data accesso
 
 ### Axes
 'axes' is an object containing axis configurations. Each axis _must_ have a 'type' property ('quant', 'time' or 'categorical') and _may_ also have axis specific or general axis configuration properties. The general axis configuration properties available are:
+* fontSize - default: 11
 * margin - default: 34
 * minTicks - default: 4
 * minTopOffsetTopTick - default: 21 (only applicable to y axes)
+* rotateLabels - default: false
+* tickOffset - axis specific
 * tickSpacing - default: 40
 * outerPadding - default: 3
 * showRules - defaults to true for quant axes, false for time and categorical
+* showTicks - default: true
+* title - default: none
+* titleFontSize - default: 12
 
 Quant axes _may_ additionally have any of the following configurations:
 * start: number
 * end: number
-* interval: number
+* interval: number - default interval for rules, labels and ticks
+* tickInterval: number - custom interval for ticks
+* ruleInterval: number - custom interval for rules
 * unit: string
 
 Time axes _must_ have:

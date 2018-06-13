@@ -19,6 +19,7 @@ const data_hour = {
   axes: {
     x1: {
       type: "time",
+      showRules: true,
       start: new Date(2018, 2, 8, 0),
       end: new Date(2018, 2, 8, 23),
       interval: "hour",
@@ -57,6 +58,7 @@ const data_day = {
   axes: {
     x1: {
       type: "time",
+      showRules: true,
       start: new Date("March 8, 2018"),
       end: new Date("March 20, 2018"),
       interval: "day",
@@ -84,6 +86,7 @@ const data_week = {
   axes: {
     x1: {
       type: "time",
+      showRules: true,
       start: new Date(2018, 2, 1),
       end: new Date(2018, 2, 31),
       interval: "week",
@@ -111,6 +114,7 @@ const data_month = {
   axes: {
     x1: {
       type: "time",
+      showRules: true,
       start: new Date(2018, 0),
       end: new Date(2018, 3),
       interval: "month",
@@ -137,6 +141,7 @@ const data_quarter = {
   axes: {
     x1: {
       type: "time",
+      showRules: true,
       start: new Date(2017, 0),
       end: new Date(2018, 3),
       interval: "quarter",
@@ -165,6 +170,7 @@ const data_year = {
   axes: {
     x1: {
       type: "time",
+      showRules: true,
       start: new Date(2015, 0),
       end: new Date(2018, 0),
       interval: "year",
