@@ -1,5 +1,3 @@
-// Default constants
-
 /**
  * # Operational UI's styling constants.
  *
@@ -17,6 +15,23 @@
  */
 
 /**
+ * Operational UI uses a selection of greys
+ * to achieve subtle, yet effective shading
+ * effects and readable typography.
+ */
+export type Grey =
+  | 96 // #f6f6f6
+  | 93 // #ececec
+  | 91 // #e8e8e8
+  | 75 // #c0c0c0
+  | 56 // #909090
+  | 45 // #747474
+  | 40 // #666
+  | 33 // #545454
+  | 24 // #3e3e3e
+  | 20 // #333
+
+/**
  * A collection of colors used throughout the library.
  * We've chosen HSL syntax for color descriptions because they
  * allow for fine tuning and allow a more transparent way to
@@ -25,7 +40,7 @@
  *
  * hsla is used where alpha blending is involved.
  */
-export const color = {
+export const colors = {
   primary: {
     main: "hsl(197, 82%, 44%)",
     contrast: "hsl(0, 0, 100%)",
@@ -57,7 +72,7 @@ export const color = {
    * Current _official_ greys are:
    * 96, 93, 56, 45, 40, 33, 24, 20
    */
-  grey: (lightness: 96 | 93 | 56 | 45 | 40 | 33 | 24 | 20) => ({
+  grey: (lightness: Grey) => ({
     main: `hsl(0, 0, ${lightness}%)`,
 
     /**
@@ -68,6 +83,47 @@ export const color = {
   }),
 }
 
+/**
+ * A specialized color palette for shadows.
+ */
+export const shadowColor = {
+  dark: colors.grey(24),
+  light: colors.grey(93),
+  lighter: colors.grey(96),
+}
+
+/**
+ * A specialized color palette for separators.
+ */
+export const separatorColor = {
+  default: colors.grey(91),
+  light: colors.grey(93),
+}
+
+/**
+ * A specialized color palette for typography.
+ */
+export const fontColor = {
+  dark: colors.grey(20),
+  default: colors.grey(33),
+  light: colors.grey(40),
+  lighter: colors.grey(45),
+  lightest: colors.grey(56),
+  action: colors.primary,
+}
+
+/**
+ * A specialized color palette for borders.
+ */
+export const borderColor = {
+  default: colors.grey(75),
+  disabled: colors.grey(91),
+}
+
+/**
+ * Font definitions and sizes available for use
+ * throughout Operational UI.
+ */
 export const font = {
   family: {
     main: "'Helvetica Neue', Helvetica, Arial, sans-serif",
@@ -81,6 +137,10 @@ export const font = {
   },
 }
 
+/**
+ * A container of space-related constants to be
+ * used throughout Operational UI.
+ */
 export const space = {
   wide: 28,
   default: 20,
