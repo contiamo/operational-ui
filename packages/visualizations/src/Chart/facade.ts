@@ -37,7 +37,7 @@ const defaultConfig = (): ChartConfig => {
     maxBarWidthRatio: 1 / 3,
     maxFocusLabelWidth: 350,
     minBarWidth: 3,
-    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    numberFormatter: (x: number): string => (+x.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     outerBarSpacing: 10,
     palette: theme.colors.visualizationPalette,
     showComponentFocus: false,
