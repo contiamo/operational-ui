@@ -19,37 +19,31 @@ export interface Props {
   onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "table",
-    width: "100%",
-    position: "relative",
-    backgroundColor: "white",
-  }),
-)
+const Container = glamorous.div({
+  label: "table",
+  width: "100%",
+  position: "relative",
+  backgroundColor: "white",
+})
 
-const TableElement = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    width: "100%",
-    textAlign: "left",
-    "& tr:first-child": {
-      borderTop: 0,
-    },
-    "& tbody tr:last-child": {
-      borderBottom: 0,
-    },
-    "& td": {},
-    "& th": {
-      opacity: 0.4,
-    },
-  }),
-)
+const TableElement = glamorous.div({
+  width: "100%",
+  textAlign: "left",
+  "& tr:first-child": {
+    borderTop: 0,
+  },
+  "& tbody tr:last-child": {
+    borderBottom: 0,
+  },
+  "& td": {},
+  "& th": {
+    opacity: 0.4,
+  },
+})
 
-const TableBody = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    display: "block",
-  }),
-)
+const TableBody = glamorous.div({
+  display: "block",
+})
 
 const TableBodyRow = glamorous.div(
   ({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
