@@ -31,17 +31,13 @@ const elementFocusStyle = {
     width: "max-content",
     lineHeight: "16px",
   },
-  "& .series-color": {
-    width: "10px",
-    height: "10px",
-    margin: "3px 3px 0 0",
+  "& .name": {
+    marginRight: "6px",
     float: "left",
-    borderRadius: "2px",
   },
-  "& .series-value": {
+  "& .value": {
     fontWeight: "bold",
-    float: "right",
-    marginLeft: "6px",
+    float: "left",
   },
 }
 

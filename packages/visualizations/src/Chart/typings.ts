@@ -78,8 +78,9 @@ export interface LinearRendererAccessors {
 export type AreaRendererAccessors = LinearRendererAccessors
 
 export interface BarsRendererAccessors {
-  color: RendererAccessor<string>
   barWidth: RendererAccessor<number>
+  color: RendererAccessor<string>
+  focusContent: RendererAccessor<any>
   opacity: RendererAccessor<number>
 }
 
@@ -108,6 +109,7 @@ export type RangeRendererAccessors = LinearRendererAccessors
 export interface SymbolRendererAccessors {
   stroke: RendererAccessor<string>
   fill: RendererAccessor<string>
+  focusContent: RendererAccessor<any>
   symbol: RendererAccessor<any>
   size: RendererAccessor<number>
   opacity: RendererAccessor<number>
@@ -296,10 +298,7 @@ export interface DataForLegends {
 
 export interface HoverPayload {
   position: string
-  element: any
-  value: number
-  seriesName: string
-  seriesColor: string
+  content: { name: string; value: any }[]
   offset: number
   focus: {
     x: number

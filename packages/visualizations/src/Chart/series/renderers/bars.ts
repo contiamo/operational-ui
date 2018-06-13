@@ -25,8 +25,6 @@ const defaultAccessors: Partial<BarsRendererAccessors> = {
 }
 
 class Bars implements RendererClass<BarsRendererAccessors> {
-  barWidth: RendererAccessor<number>
-  color: RendererAccessor<string>
   data: Datum[]
   el: D3Selection
   events: EventBus
@@ -35,16 +33,20 @@ class Bars implements RendererClass<BarsRendererAccessors> {
   series: Series
   state: any
   type: RendererType = "bars"
+  xIsBaseline: boolean
+  xScale: any
+  yScale: any
+  // Accessors
+  barWidth: RendererAccessor<number>
+  color: RendererAccessor<string>
+  focusContent: RendererAccessor<any>
   opacity: RendererAccessor<number>
   x: RendererAccessor<number | Date | string>
   x0: RendererAccessor<number>
   x1: RendererAccessor<number>
-  xIsBaseline: boolean
-  xScale: any
   y: RendererAccessor<number | Date | string>
   y0: RendererAccessor<number>
   y1: RendererAccessor<number>
-  yScale: any
 
   constructor(state: State, events: EventBus, el: D3Selection, data: Datum[], options: Options, series: Series) {
     this.state = state
@@ -154,7 +156,26 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     this.y = (d: Datum) => this.series.y(d) || d.injectedY
     this.color = (d?: Datum) => accessors.color(this.series, d)
     this.barWidth = (d?: Datum) => accessors.barWidth(this.series, d)
+    this.focusContent = (d: Datum) =>
+      accessors.focusContent ? accessors.focusContent(this.series, d) : this.defaultFocusContent(d)
     this.opacity = (d?: Datum) => accessors.opacity(this.series, d)
+  }
+
+  defaultFocusContent(d: Datum): { name: string; value: any }[] {
+    const xTitle = this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.xAxis()]
+      .title
+    const yTitle = this.state.current.get("accessors").data.axes(this.state.current.get("data"))[this.series.yAxis()]
+      .title
+    return [
+      {
+        name: xTitle || "X",
+        value: this.x(d),
+      },
+      {
+        name: yTitle || "Y",
+        value: this.y(d),
+      },
+    ]
   }
 
   private seriesTranslation(): string {
@@ -189,11 +210,8 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     const barOffset = this.state.current.get(["computed", "axes", "computedBars", this.series.key(), "offset"])
 
     const focusPoint = {
-      element: this.xIsBaseline ? this.x(d) : this.y(d),
-      value: this.xIsBaseline ? this.y(d) : this.x(d),
+      content: this.focusContent(d),
       position: this.xIsBaseline ? (isNegative ? "below" : "above") : isNegative ? "toLeft" : "toRight",
-      seriesName: this.series.legendName(),
-      seriesColor: this.series.legendColor(),
       offset: 0,
       focus: {
         x: this.xIsBaseline ? this.x1(d) + barOffset + dimensions.width / 2 : isNegative ? this.x0(d) : this.x1(d),

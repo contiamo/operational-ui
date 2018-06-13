@@ -33,6 +33,7 @@ class ChartFocus implements Focus {
 
   remove(): void {
     this.componentFocus.remove()
+    this.elementFocus.remove()
     this.dateFocus.remove()
     this.flagFocus.remove()
   }

@@ -225,6 +225,7 @@ Data accessors are required if the input data does not have the standard 'series
 | :--- | :--- | :--- | :---
 | barWidth | Width of bars - `undefined` results in automatic sizing | `(series, d) => number` | `(series, d) => undefined`
 | color | Renderer color | `(series, d) => string` | `(series, d) => series.legendColor()`
+| focusContent | Key/value pairs to display in focus label | `(series, d) => { name: string, value: any }[]` |
 | opacity | Color opacity | `(series, d) => number` | `(series, d) => 0.8`
 
 ### Line renderer accessors
@@ -240,6 +241,7 @@ Data accessors are required if the input data does not have the standard 'series
 | Name | Description | Type | Default
 | :--- | :--- | :--- | :---
 | fill | | `(series: Series, d: Datum) => string` | `(series: Series, d: Datum) => "#fff"`
+| focusContent | Key/value pairs to display in focus label | `(series, d) => { name: string, value: any }[]` |
 | size | | `(series: Series, d: Datum) => number` | `(series: Series, d: Datum) => 50`
 | stroke | | `(series: Series, d: Datum) => string` | `(series: Series, d: Datum) => series.legendColor()`
 | symbol | | `(series: Series, d: Datum) => string` | `(series: Series, d: Datum) => "circle"`

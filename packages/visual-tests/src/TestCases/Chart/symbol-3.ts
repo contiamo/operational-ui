@@ -46,6 +46,13 @@ const renderer = {
   type: "symbol",
   accessors: {
     fill: (series: any, d: any) => series.legendColor(),
+    focusContent: (series: any, d: any) => [
+      { name: "Country", value: d.country },
+      { name: "Profit", value: d.profit },
+      { name: "Sales", value: d.sales },
+      { name: "Size", value: d.size },
+      { name: "Store", value: d.store },
+    ],
     size: (series: any, d: any) => {
       const range = [5, 80]
       const domain = [0, 1.5 * 1e6]
