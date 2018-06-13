@@ -1,20 +1,27 @@
 import * as React from "react"
 import glamorous from "glamorous"
-import { CardHeader } from "../index"
-
+import { CardHeader, CardItem } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
-export interface Props {
+export interface Props<T = {}> {
+  /** Any object to show. The key is the title of the data. */
+  data?: T
+  /**  A function to format keys of `data` */
+  keyFormatter?: (key: string) => string
+  /** A key-value object to format values of `data`. */
+  valueFormatters?: { [P in Extract<keyof T, string>]?: (value: string) => React.ReactNode }
+  /** An ordered array to pick only some keys to display  */
+  keys?: (Extract<keyof T, string>)[]
+  /** Title of the card */
+  title?: string
+  /** Component containing buttons/links/actions assigned to the card */
+  action?: React.ComponentType
   /** DOM id attribute, useful for hash linking */
   id?: string
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   children?: React.ReactNode
-  /** Component containing buttons/links/actions assigned to the card */
-  action?: React.ComponentType
-  /** Shortcut for adding a title to the card header */
-  title?: string
 }
 
 const Container = glamorous.div(
@@ -30,16 +37,33 @@ const Container = glamorous.div(
   }),
 )
 
-const Card = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
-    {(props.title || props.action) && (
-      <CardHeader>
-        {props.title && props.title}
-        {props.action && <div>{<props.action />}</div>}
-      </CardHeader>
-    )}
-    {props.children}
-  </Container>
-)
+class Card<T = {}> extends React.PureComponent<Props<T>> {
+  static defaultProps = {
+    keyFormatter: (title: string) => title,
+  }
+
+  render() {
+    const { title, keyFormatter, valueFormatters = {}, data, keys, id, css, className, children, action } = this.props
+
+    const _keys = keys ? keys : Object.keys(data || {})
+    const titles = _keys.map(keyFormatter)
+    const values = _keys.map(
+      (i: Extract<keyof T, string>) => (valueFormatters[i] ? valueFormatters[i](data[i] as any) : data[i]),
+    )
+
+    return (
+      <Container id={id} css={css} className={className}>
+        {(title || action) && (
+          <CardHeader>
+            {title}
+            {action && <div>{<this.props.action />}</div>}
+          </CardHeader>
+        )}
+        {data && titles.map((title, i) => <CardItem value={values[i]} title={title} />)}
+        {children}
+      </Container>
+    )
+  }
+}
 
 export default Card
