@@ -31,6 +31,92 @@ export type Grey =
   | 24 // #3e3e3e
   | 20 // #333
 
+export type HslValue = string
+
+export interface OperationalBackgroundColors {
+  dark: HslValue
+  light: HslValue
+  lighter: HslValue
+}
+
+export interface OperationalSeparatorColors {
+  default: HslValue
+  light: HslValue
+}
+
+export interface OperationalTextColors {
+  dark: HslValue
+  default: HslValue
+  light: HslValue
+  lighter: HslValue
+  lightest: HslValue
+  action: HslValue
+}
+
+export interface OperationalBorderColors {
+  default: HslValue
+  disabled: HslValue
+}
+
+export interface OperationalColors {
+  primary: HslValue
+  disabled: HslValue
+  success: HslValue
+  error: HslValue
+  basic: HslValue
+  ghost: HslValue
+  white: HslValue
+  black: HslValue
+  shadows: OperationalBackgroundColors
+  separators: OperationalSeparatorColors
+  text: OperationalTextColors
+  border: OperationalBorderColors
+  grey: (grey: Grey) => HslValue
+}
+
+export interface OperationalFontFamily {
+  main: string
+  code: string
+}
+
+export interface OperationalFontSize {
+  title: number
+  body: number
+  small: number
+  fineprint: number
+}
+
+export interface OperationalFont {
+  family: OperationalFontFamily
+  size: OperationalFontSize
+}
+
+export interface OperationalSpace {
+  base: number
+  small: number
+  content: number
+  element: number
+  big: number
+}
+
+export interface OperationalStyleConstants {
+  colors: OperationalColors
+  font: OperationalFont
+  space: OperationalSpace
+}
+
+export const makeConstants = (): OperationalStyleConstants => ({
+  colors: {
+    ...colors,
+    shadows: backgroundColors,
+    separators: separatorColors,
+    text: textColors,
+    border: borderColors,
+  },
+  font,
+  space,
+})
+
 /**
  * A collection of colors used throughout the library.
  * We've chosen HSL syntax for color descriptions because they
@@ -40,61 +126,28 @@ export type Grey =
  *
  * hsla is used where alpha blending is involved.
  */
-export const colors = {
-  primary: {
-    main: "hsl(197, 82%, 44%)",
-    contrast: "hsl(0, 0, 100%)",
-  },
-  disabled: {
-    main: "hsl(0, 0, 96%)",
-    contrast: "hsl(0, 0, 56%)",
-  },
-  success: {
-    main: "hsl(127, 86%, 36%)",
-    contrast: "hsl(0, 0, 100%)",
-  },
-  error: {
-    main: "hsl(0, 100%, 30%)",
-    contrast: "hsl(0, 0, 100%)",
-  },
-  basic: {
-    main: "hsl(0, 0, 39%)",
-    contrast: "hsl(197, 82%, 44%)",
-  },
-  ghost: {
-    main: "hsla(0, 0, 100%, 0.2)",
-    contrast: "hsl(0, 0, 100%)",
-  },
-  white: {
-    main: "hsl(0, 0, 100%)",
-    contrast: "hsl(0, 0, 0)",
-  },
-  black: {
-    main: "hsl(0, 0, 0)",
-    contrast: "hsl(0, 0, 100%)",
-  },
-
+const colors = {
+  primary: "hsl(197, 82%, 44%)",
+  disabled: "hsl(0, 0, 96%)",
+  success: "hsl(127, 86%, 36%)",
+  error: "hsl(0, 100%, 30%)",
+  basic: "hsl(0, 0, 39%)",
+  ghost: "hsla(0, 0, 100%, 0.2)",
+  white: "hsl(0, 0, 100%)",
+  black: "hsl(0, 0, 0)",
   /**
    * Greys exist on a spectrum of 0-100.
    *
    * Current _official_ greys are:
    * 96, 93, 56, 45, 40, 33, 24, 20
    */
-  grey: (lightness: Grey) => ({
-    main: `hsl(0, 0, ${lightness}%)`,
-
-    /**
-     * This is a _really_ naïve contrast check.
-     * @todo reconsider this as needs arise.
-     */
-    contrast: lightness > 50 ? "hsl(0, 0, 0)" : "hsl(0, 0, 100%)",
-  }),
+  grey: (lightness: Grey) => `hsl(0, 0, ${lightness}%)`,
 }
 
 /**
- * A specialized color palette for shadows.
+ * A specialized color palette for backgrounds.
  */
-export const shadowColor = {
+const backgroundColors: OperationalBackgroundColors = {
   dark: colors.grey(24),
   light: colors.grey(93),
   lighter: colors.grey(96),
@@ -103,7 +156,7 @@ export const shadowColor = {
 /**
  * A specialized color palette for separators.
  */
-export const separatorColor = {
+const separatorColors: OperationalSeparatorColors = {
   default: colors.grey(91),
   light: colors.grey(93),
 }
@@ -111,7 +164,7 @@ export const separatorColor = {
 /**
  * A specialized color palette for typography.
  */
-export const fontColor = {
+const textColors: OperationalTextColors = {
   dark: colors.grey(20),
   default: colors.grey(33),
   light: colors.grey(40),
@@ -123,7 +176,7 @@ export const fontColor = {
 /**
  * A specialized color palette for borders.
  */
-export const borderColor = {
+const borderColors: OperationalBorderColors = {
   default: colors.grey(75),
   disabled: colors.grey(91),
 }
@@ -132,7 +185,7 @@ export const borderColor = {
  * Font definitions and sizes available for use
  * throughout Operational UI.
  */
-export const font = {
+const font: OperationalFont = {
   family: {
     main: "'Helvetica Neue', Helvetica, Arial, sans-serif",
     code: "Menlo, monospace",
@@ -149,9 +202,10 @@ export const font = {
  * A container of space-related constants to be
  * used throughout Operational UI.
  */
-export const space = {
-  wide: 28,
-  default: 20,
+const space: OperationalSpace = {
+  base: 4,
+  small: 8,
   content: 16,
-  basic: 8,
+  element: 20,
+  big: 28,
 }
