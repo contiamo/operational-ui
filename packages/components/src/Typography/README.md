@@ -11,7 +11,7 @@ Their recommended use:
 ### Usage
 
 ```js
-const { Title, Heading1, Heading2, Body, Small } = require("./Typography")
+const { Title, Heading1, Heading2, Body, Small } = require("../")
 ;<>
   <Title>Title</Title>
   <Heading1>Heading1</Heading1>
