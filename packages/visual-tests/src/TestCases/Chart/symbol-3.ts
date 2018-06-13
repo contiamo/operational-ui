@@ -47,6 +47,7 @@ const renderer = {
   accessors: {
     fill: (series: any, d: any) => series.legendColor(),
     focusContent: (series: any, d: any) => [
+      { name: "Country", value: d.country },
       { name: "Profit", value: d.profit },
       { name: "Sales", value: d.sales },
       { name: "Size", value: d.size },
