@@ -21,7 +21,7 @@ const myData = {
   updated: "tomorrow",
   repo: "https://git.com/hellp.git",
 }
-;<CardData title="Details" data={myData} keyFormatter={title => title.toUpperCase()} />
+;<CardData title="Details" data={myData} keyFormatter={title => `-- ${title} --`} />
 ```
 
 ### With value formatters

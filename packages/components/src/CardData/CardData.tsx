@@ -41,7 +41,7 @@ class CardData<T = {}> extends React.PureComponent<Props<T>> {
     return (
       <Card>
         {title && <CardHeader>{title}</CardHeader>}
-        {titles.map((title, i) => <CardItem value={values[i] as any} title={title} />)}
+        {titles.map((title, i) => <CardItem value={values[i]} title={title} />)}
       </Card>
     )
   }
