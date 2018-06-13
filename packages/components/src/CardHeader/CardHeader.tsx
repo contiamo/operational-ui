@@ -27,10 +27,14 @@ const Container = glamorous.div(
     // This ensures that the card header text and card controls are placed in opposite corners.
     justifyContent: "space-between",
     height: 40,
-    margin: -theme.spacing,
-    marginBottom: theme.spacing,
+    margin: -20,
+    marginBottom: 20,
     padding: `0 20px`,
     lineHeight: 1,
+    "& > *": {
+      fontSize: 12,
+      color: "#909090",
+    },
   }),
 )
 
