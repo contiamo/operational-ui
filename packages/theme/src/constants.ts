@@ -62,7 +62,15 @@ export const colors = {
     contrast: "hsl(197, 82%, 44%)",
   },
   ghost: {
-    main: "hlsa(0, 0, 100%, 0.2)",
+    main: "hsla(0, 0, 100%, 0.2)",
+    contrast: "hsl(0, 0, 100%)",
+  },
+  white: {
+    main: "hsl(0, 0, 100%)",
+    contrast: "hsl(0, 0, 0)",
+  },
+  black: {
+    main: "hsl(0, 0, 0)",
     contrast: "hsl(0, 0, 100%)",
   },
 
