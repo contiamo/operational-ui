@@ -9,8 +9,12 @@ export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: any
   className?: string
-  /** Children, typically a single string serving as a title. A controls element such as a condensed works well as a second child. */
+  /** As title, please note that is override by `title` if provided */
   children?: React.ReactNode
+  /** Main title */
+  title?: React.ReactNode
+  /** Action part (right side), this is typically where to put a button */
+  action?: React.ReactNode
 }
 
 const Container = glamorous.div(
@@ -31,7 +35,7 @@ const Container = glamorous.div(
     marginBottom: 20,
     padding: `0 20px`,
     lineHeight: 1,
-    "& > *": {
+    "& > :not(:first-child)": {
       fontSize: 12,
       color: "#909090",
     },
@@ -40,7 +44,8 @@ const Container = glamorous.div(
 
 const CardHeader = (props: Props) => (
   <Container id={props.id} css={props.css} className={props.className}>
-    {props.children}
+    <div>{props.title || props.children}</div>
+    <div>{props.action}</div>
   </Container>
 )
 

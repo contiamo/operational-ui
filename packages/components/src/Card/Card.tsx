@@ -13,7 +13,7 @@ export interface Props<T = {}> {
   /** An ordered array to pick only some keys to display  */
   keys?: (Extract<keyof T, string>)[]
   /** Title of the card */
-  title?: string
+  title?: React.ReactNode
   /** Component containing buttons/links/actions assigned to the card */
   action?: React.ComponentType
   /** DOM id attribute, useful for hash linking */
@@ -53,12 +53,7 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
 
     return (
       <Container id={id} css={css} className={className}>
-        {(title || action) && (
-          <CardHeader>
-            {title}
-            {action && <div>{<this.props.action />}</div>}
-          </CardHeader>
-        )}
+        {(title || action) && <CardHeader title={title} action={action && <this.props.action />} />}
         {data && titles.map((title, i) => <CardItem value={values[i]} title={title} />)}
         {children}
       </Container>

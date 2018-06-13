@@ -5,15 +5,67 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
 
 ```jsx
 <Card>
-    <CardHeader>
-      Title for my card
+  <CardHeader>Title for my card</CardHeader>
+  <p>Here is a bare card with custom padding.</p>
+  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+</Card>
+```
+
+### With action
+
+```jsx
+<Card>
+  <CardHeader
+    action={
       <div>
         <Button condensed>Button</Button>
         <a href="#">Link</a>
       </div>
+    }
+  >
+    Title for my card
+  </CardHeader>
+  <p>Here is a bare card with custom padding.</p>
+  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+</Card>
+```
 
-</CardHeader>
-    <p>Here is a bare card with custom padding.</p>
-    <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+### With title prop
+
+```jsx
+<Card>
+  <CardHeader
+    action={
+      <div>
+        <Button condensed>Button</Button>
+        <a href="#">Link</a>
+      </div>
+    }
+    title="Title for my card"
+  />
+  <p>Here is a bare card with custom padding.</p>
+  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+</Card>
+```
+
+### With component as title
+
+```jsx
+<Card>
+  <CardHeader
+    action={
+      <div>
+        <Button condensed>Button</Button>
+        <a href="#">Link</a>
+      </div>
+    }
+    title={
+      <>
+        This is <b> a bold</b> title
+      </>
+    }
+  />
+  <p>Here is a bare card with custom padding.</p>
+  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
 </Card>
 ```
