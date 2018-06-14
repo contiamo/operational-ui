@@ -16,10 +16,6 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
       <Chip>agent-view</Chip>
       <Chip>production</Chip>
     </CardColumn>
-    <CardColumn title="Tags">
-      <Chip>agent-view</Chip>
-      <Chip>production</Chip>
-    </CardColumn>
   </CardColumns>
 </Card>
 ```
