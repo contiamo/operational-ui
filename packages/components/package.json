@@ -40,6 +40,10 @@
     "tinycolor": "^0.0.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-emotion": "^9.2.0",
+    "jest-emotion": "^9.2.2",
     "react-docgen-typescript": "^1.5.0",
     "react-styleguidist": "^7.0.14",
     "ts-loader": "^4.3.0",
@@ -64,7 +68,8 @@
     "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
     "setupTestFrameworkScriptFile": "<rootDir>/../../node_modules/jest-enzyme/lib/index.js",
     "snapshotSerializers": [
-      "<rootDir>/../../node_modules/jest-serializer-enzyme"
+      "<rootDir>/../../node_modules/jest-serializer-enzyme",
+      "<rootDir>/../../node_modules/jest-emotion"
     ]
   }
 }

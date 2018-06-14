@@ -21,6 +21,10 @@ module.exports = {
             loader: "awesome-typescript-loader",
             options: {
               configFileName: "./tsconfig.styleguide.json",
+              useBabel: true,
+              babelOptions: {
+                babelrc: true,
+              },
             },
           },
         ],
