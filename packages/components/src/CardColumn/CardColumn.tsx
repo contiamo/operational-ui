@@ -15,25 +15,15 @@ export interface Props {
   title?: string
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "card-column",
-    flex: "1 0 auto",
-    paddingTop: theme.spacing,
-    paddingBottom: theme.spacing,
-    paddingLeft: theme.spacing * 2,
-    paddingRight: theme.spacing * 2,
-    "& > img": {
-      maxWidth: "100%",
-    },
-    "&:first-child": {
-      paddingLeft: 0,
-    },
-    "&:last-child": {
-      paddingRight: 0,
-    },
-  }),
-)
+const Container = glamorous.div({
+  label: "card-column",
+  minWidth: 280 / 2,
+  padding: 11,
+  flex: "1 0",
+  " img": {
+    maxWidth: "100%",
+  },
+})
 
 const Title = glamorous.div(
   ({ theme }: WithTheme): CssStatic => ({

@@ -14,9 +14,13 @@ export interface Props {
 }
 
 const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
+  ({ children, theme }: Props & WithTheme): CssStatic => ({
     display: "flex",
-    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    margin: -11,
+    "& > *": {
+      flexBasis: `${React.Children.count(children)}%`,
+    },
   }),
 )
 
