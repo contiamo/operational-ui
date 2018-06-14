@@ -212,7 +212,7 @@ export interface CategoricalAxisOptions extends AxisConfig {
 export type AxisOptions = TimeAxisOptions | QuantAxisOptions | CategoricalAxisOptions
 
 export interface AxesData {
-  [key: string]: AxisOptions
+  [key: string]: Partial<AxisOptions>
 }
 
 export interface AxisComputed {
