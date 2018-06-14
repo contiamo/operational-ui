@@ -34,75 +34,75 @@ export type Grey =
 export type HslValue = string
 
 export interface OperationalBackgroundColors {
-  dark: HslValue
-  light: HslValue
-  lighter: HslValue
+  readonly dark: HslValue
+  readonly light: HslValue
+  readonly lighter: HslValue
 }
 
 export interface OperationalSeparatorColors {
-  default: HslValue
-  light: HslValue
+  readonly default: HslValue
+  readonly light: HslValue
 }
 
 export interface OperationalTextColors {
-  dark: HslValue
-  default: HslValue
-  light: HslValue
-  lighter: HslValue
-  lightest: HslValue
-  action: HslValue
+  readonly dark: HslValue
+  readonly default: HslValue
+  readonly light: HslValue
+  readonly lighter: HslValue
+  readonly lightest: HslValue
+  readonly action: HslValue
 }
 
 export interface OperationalBorderColors {
-  default: HslValue
-  disabled: HslValue
+  readonly default: HslValue
+  readonly disabled: HslValue
 }
 
 export interface OperationalColors {
-  primary: HslValue
-  disabled: HslValue
-  success: HslValue
-  error: HslValue
-  basic: HslValue
-  ghost: HslValue
-  white: HslValue
-  black: HslValue
-  shadows: OperationalBackgroundColors
-  separators: OperationalSeparatorColors
-  text: OperationalTextColors
-  border: OperationalBorderColors
-  grey: (grey: Grey) => HslValue
+  readonly primary: HslValue
+  readonly disabled: HslValue
+  readonly success: HslValue
+  readonly error: HslValue
+  readonly basic: HslValue
+  readonly ghost: HslValue
+  readonly white: HslValue
+  readonly black: HslValue
+  readonly shadows: OperationalBackgroundColors
+  readonly separators: OperationalSeparatorColors
+  readonly text: OperationalTextColors
+  readonly border: OperationalBorderColors
+  readonly grey: (grey: Grey) => HslValue
 }
 
 export interface OperationalFontFamily {
-  main: string
-  code: string
+  readonly main: string
+  readonly code: string
 }
 
 export interface OperationalFontSize {
-  title: number
-  body: number
-  small: number
-  fineprint: number
+  readonly title: number
+  readonly body: number
+  readonly small: number
+  readonly fineprint: number
 }
 
 export interface OperationalFont {
-  family: OperationalFontFamily
-  size: OperationalFontSize
+  readonly family: OperationalFontFamily
+  readonly size: OperationalFontSize
 }
 
 export interface OperationalSpace {
-  base: number
-  small: number
-  content: number
-  element: number
-  big: number
+  readonly base: number
+  readonly small: number
+  readonly content: number
+  readonly element: number
+  readonly big: number
 }
 
 export interface OperationalStyleConstants {
-  colors: OperationalColors
-  font: OperationalFont
-  space: OperationalSpace
+  readonly colors: OperationalColors
+  readonly font: OperationalFont
+  readonly space: OperationalSpace
 }
 
 export const makeConstants = (): OperationalStyleConstants => ({
