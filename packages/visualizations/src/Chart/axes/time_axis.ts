@@ -258,6 +258,10 @@ class TimeAxis implements AxisClass<Date> {
 
   private computeRuleTicks(computed: Partial<AxisComputed>): Date[] {
     const ticks = this.options.interval === "week" ? computed.scale.ticks(timeMonday, 1) : computed.ticksInDomain
+    if (!computed.tickWidth) {
+      return ticks
+    }
+
     const tickValues = map(computed.scale)(ticks)
     const ruleValues = reduce.convert({ cap: false })((memo: number[], tick: number, i: number) => {
       if (i > 0) {

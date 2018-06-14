@@ -101,13 +101,14 @@ class CategoricalAxis implements AxisClass<string> {
     const range = this.computeRange(tickWidth)
     this.computed = {
       range,
+      tickWidth,
       ticks: this.data,
       scale: scaleBand()
         .range(range)
         .domain(this.data)
         .padding(config.innerBarSpacingCategorical),
     }
-    this.computed.ruleOffset = this.computed.scale.bandwidth() / 2
+    this.computed.ruleOffset = tickWidth ? this.computed.scale.bandwidth() / 2 : 0
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
@@ -255,7 +256,7 @@ class CategoricalAxis implements AxisClass<string> {
   private scaleWithOffset(computed: AxisComputed) {
     const barPadding = this.state.current.get("config").innerBarSpacingCategorical
     const stepWidth = computed.scale.step()
-    return (d: string) => computed.scale(d) - (stepWidth * barPadding) / 2
+    return (d: string) => computed.scale(d) - (computed.tickWidth ? (stepWidth * barPadding) / 2 : 0)
   }
 
   private getAttributes(): AxisAttributes {
