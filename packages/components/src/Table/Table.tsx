@@ -22,7 +22,6 @@ export interface Props {
    * Add actions on the end of each row
    */
   __experimentalRowActions?: React.ReactNode[]
-  theme: OperationalStyleConstants
 }
 
 interface CompProps {
