@@ -106,6 +106,8 @@ export interface OperationalStyleConstants {
 }
 
 export const makeConstants = (): OperationalStyleConstants => ({
+  font,
+  space,
   colors: {
     ...colors,
     shadows: backgroundColors,
@@ -113,8 +115,6 @@ export const makeConstants = (): OperationalStyleConstants => ({
     text: textColors,
     border: borderColors,
   },
-  font,
-  space,
 })
 
 /**
@@ -208,4 +208,10 @@ const space: OperationalSpace = {
   content: 16,
   element: 20,
   big: 28,
+}
+
+export default {
+  colors,
+  space,
+  font,
 }

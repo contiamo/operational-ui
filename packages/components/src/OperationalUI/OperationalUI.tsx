@@ -1,10 +1,13 @@
 import * as React from "react"
 import { ThemeProvider } from "glamorous"
 
-import { Theme, operational } from "@operational/theme"
+/** @todo
+ * remove operational when constants are in
+ * place and operational is no longer themable
+ * https://trello.com/c/06WFxrhp
+ */
+import { Theme, operational, constants } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
-
-import { Context } from "../types"
 
 export interface Props {
   /** Theme */
@@ -22,19 +25,20 @@ export interface Props {
 const { Provider, Consumer } = React.createContext({})
 
 const OperationalUI = (props: Props) => {
+  const styles = { ...operational, constants }
   return (
-    <ThemeProvider theme={props.theme || operational}>
+    <ThemeProvider theme={styles}>
       <Provider value={{ pushState: props.pushState, replaceState: props.replaceState }}>
-        <React.Fragment>
-          {props.withBaseStyles ? (
+        <>
+          {props.withBaseStyles && (
             <style
               dangerouslySetInnerHTML={{
                 __html: baseStylesheet(props.theme || operational),
               }}
             />
-          ) : null}
+          )}
           {props.children}
-        </React.Fragment>
+        </>
       </Provider>
     </ThemeProvider>
   )
