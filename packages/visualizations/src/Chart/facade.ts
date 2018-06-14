@@ -9,6 +9,7 @@ import EventEmitter from "../shared/event_bus"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
 import { has, isEmpty, uniqueId } from "lodash/fp"
+import { format } from "d3-format"
 import {
   Accessors,
   AxesData,
@@ -37,7 +38,7 @@ const defaultConfig = (): ChartConfig => {
     maxBarWidthRatio: 1 / 3,
     maxFocusLabelWidth: 350,
     minBarWidth: 3,
-    numberFormatter: (x: number): string => (+x.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    numberFormatter: (x: number) => format(",")(+format(".2f")(x)),
     outerBarSpacing: 10,
     palette: theme.colors.visualizationPalette,
     showComponentFocus: false,
