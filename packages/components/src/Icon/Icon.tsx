@@ -36,14 +36,13 @@ export interface PropsWithTheme extends Props {
 
 const Icon = (props: PropsWithTheme) => {
   const color: string = expandColor(props.theme, props.color) || "currentColor"
-  const defaultSize: number = props.theme.spacing * 1.5
+  const defaultSize = props.theme.spacing * 1.5
 
   if (ReactFeather.hasOwnProperty(props.name)) {
     const Comp = ReactFeather[props.name]
     return <Comp size={props.size || defaultSize} color={color} />
   }
-  // @todo -> type this better
-  if (BrandIcons.hasOwnProperty(props.name)) {
+  if (!!(BrandIcons as { [key: string]: React.ReactNode })[props.name]) {
     let Comp = BrandIcons.OperationalUI
     if (props.name === "Labs") {
       Comp = BrandIcons.Labs

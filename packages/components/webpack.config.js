@@ -14,17 +14,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)?$/,
         exclude: /node_modules/,
         use: [
+          "babel-loader",
           {
-            loader: "awesome-typescript-loader",
+            loader: "ts-loader",
             options: {
-              configFileName: "./tsconfig.styleguide.json",
-              useBabel: true,
-              babelOptions: {
-                babelrc: true,
-              },
+              configFile: path.resolve(__dirname, "tsconfig.styleguide.json"),
             },
           },
         ],

@@ -5,7 +5,7 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "lib",
-    "module": "commonjs",
+    "module": "es2015",
     "sourceMap": true,
     "noImplicitAny": true,
     "jsx": "react",
@@ -13,5 +13,5 @@
     "baseUrl": "."
   },
   "include": ["src", "types", "styleguide"],
-  "files": ["src/index.tsx"]
+  "files": ["src/index.ts"]
 }
