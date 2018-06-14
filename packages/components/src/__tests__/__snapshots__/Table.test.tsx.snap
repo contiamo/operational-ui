@@ -2,10 +2,13 @@
 
 exports[`Table Component Should render 1`] = `
 <table
-  class="css-hp6zz3"
+  class="css-12fqnoa"
 >
-  <tr
-    class="css-szcvmb"
-  />
+  <thead>
+    <tr
+      class="css-szcvmb"
+    />
+  </thead>
+  <tbody />
 </table>
 `;

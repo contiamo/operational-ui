@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { css } from "react-emotion"
-import { operational } from "@operational/theme"
+import { OperationalStyleConstants } from "@operational/theme"
 
 export interface Props {
   /** Table columns headings */
@@ -22,64 +22,69 @@ export interface Props {
    * Add actions on the end of each row
    */
   __experimentalRowActions?: React.ReactNode[]
+  theme: OperationalStyleConstants
 }
 
-const Container = styled("table")({
+interface CompProps {
+  theme?: OperationalStyleConstants
+}
+
+const Container = styled("table")(({ theme }: CompProps) => ({
   width: "100%",
-  backgroundColor: "white",
+  backgroundColor: theme.color.white,
   textAlign: "left",
   borderCollapse: "collapse",
-  fontSize: 13,
-  fontFamily: operational.fontFamily,
-})
+  fontSize: theme.font.size.small,
+  fontFamily: theme.font.family.main,
+}))
 
-const Tr = styled("tr")(({ hover }: { hover?: boolean }) => ({
+const Tr = styled("tr")(({ hover, theme }: { hover?: boolean } & CompProps) => ({
   height: 50,
   ":hover": hover && {
-    backgroundColor: "#F6F6F6",
+    backgroundColor: theme.color.background.lighter,
     cursor: "pointer",
   },
 }))
 
-const Th = styled("th")({
+const Th = styled("th")(({ theme }: CompProps) => ({
   verticalAlign: "bottom",
-  borderBottom: "1px solid #e8e8e8",
-  color: "#909090",
-  paddingBottom: 5,
+  borderBottom: `1px solid ${theme.color.separators.default}`,
+  color: theme.color.text.lightest,
+  paddingBottom: theme.space.base,
   "&:first-child": {
-    paddingLeft: 12,
+    paddingLeft: theme.space.small,
   },
-})
+}))
 
-const Td = styled("td")({
+const Td = styled("td")(({ theme }: CompProps) => ({
   verticalAlign: "center",
-  borderBottom: "1px solid #e8e8e8",
-  color: "#545454",
+  borderBottom: `1px solid ${theme.color.separators.default}`,
+  color: theme.color.text.default,
   "&:first-child": {
-    paddingLeft: 12,
+    paddingLeft: theme.space.small,
   },
-})
+}))
 
-const Action = styled(Td)({
+const Action = styled(Td)(({ theme }: CompProps) => ({
   textAlign: "right",
-  paddingRight: 10,
+  paddingRight: theme.space.content,
   color: "transparent",
-  "tr:hover &, :hover": { color: "#1499CE" },
-})
+  "tr:hover &, :hover": { color: theme.color.text.action },
+}))
 
-const Actions = styled(Td)({
+const Actions = styled(Td)(({ theme }: CompProps) => ({
   textAlign: "right",
-  paddingRight: 10,
+  paddingRight: theme.space.small,
   opacity: 0,
   "tr:hover &, :hover": { opacity: 1 },
-})
+}))
 
-const EmptyView = styled("div")({
-  color: "#545454",
+const EmptyView = styled("div")(({ theme }: CompProps) => ({
+  color: theme.color.text.default || "red",
   height: 50,
   lineHeight: "50px",
   textAlign: "center",
-})
+}))
 
 const Table: React.SFC<Props> = ({ rows, columns, onRowClick, rowActionName, __experimentalRowActions, ...props }) => {
   return (
