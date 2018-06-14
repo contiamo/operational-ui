@@ -35,7 +35,6 @@ export interface PieChartConfig extends Config {
   minInnerRadius: number
   minLegendWidth: number
   minTotalFontSize: number
-  numberFormatter: (x: number) => string
   outerBorderMargin: number
   palette: string[]
   showComponentFocus: boolean
