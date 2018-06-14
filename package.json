@@ -42,8 +42,13 @@
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
-    "*.(ts|tsx|js|jsx|json|html)": [
+    "*.(js|jsx|json|html)": [
       "prettier --write",
+      "git add"
+    ],
+    "*.(ts|tsx)": [
+      "prettier --write",
+      "tslint",
       "git add"
     ]
   },
