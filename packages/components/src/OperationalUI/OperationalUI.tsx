@@ -1,11 +1,11 @@
 import * as React from "react"
+
+/** @todo rename this import once we're fully in emotion */
+import { ThemeProvider as EmotionThemeProvider } from "emotion-theming"
+
+/** @todo remove this once we're fully in emotion */
 import { ThemeProvider } from "glamorous"
 
-/** @todo
- * remove operational when constants are in
- * place and operational is no longer themable
- * https://trello.com/c/06WFxrhp
- */
 import { Theme, operational, constants } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
 
@@ -25,21 +25,22 @@ export interface Props {
 const { Provider, Consumer } = React.createContext({})
 
 const OperationalUI = (props: Props) => {
-  const styles = { ...operational, constants }
   return (
-    <ThemeProvider theme={styles}>
-      <Provider value={{ pushState: props.pushState, replaceState: props.replaceState }}>
-        <>
-          {props.withBaseStyles && (
-            <style
-              dangerouslySetInnerHTML={{
-                __html: baseStylesheet(props.theme || operational),
-              }}
-            />
-          )}
-          {props.children}
-        </>
-      </Provider>
+    <ThemeProvider theme={props.theme || operational}>
+      <EmotionThemeProvider theme={constants}>
+        <Provider value={{ pushState: props.pushState, replaceState: props.replaceState }}>
+          <React.Fragment>
+            {props.withBaseStyles ? (
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: baseStylesheet(props.theme || operational),
+                }}
+              />
+            ) : null}
+            {props.children}
+          </React.Fragment>
+        </Provider>
+      </EmotionThemeProvider>
     </ThemeProvider>
   )
 }

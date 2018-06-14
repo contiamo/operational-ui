@@ -67,7 +67,7 @@ export interface OperationalColors {
   readonly ghost: HslValue
   readonly white: HslValue
   readonly black: HslValue
-  readonly shadows: OperationalBackgroundColors
+  readonly background: OperationalBackgroundColors
   readonly separators: OperationalSeparatorColors
   readonly text: OperationalTextColors
   readonly border: OperationalBorderColors
@@ -100,17 +100,17 @@ export interface OperationalSpace {
 }
 
 export interface OperationalStyleConstants {
-  readonly colors: OperationalColors
+  readonly color: OperationalColors
   readonly font: OperationalFont
   readonly space: OperationalSpace
 }
 
-export const makeConstants = (): OperationalStyleConstants => ({
+const makeConstants = (): OperationalStyleConstants => ({
   font,
   space,
-  colors: {
+  color: {
     ...colors,
-    shadows: backgroundColors,
+    background: backgroundColors,
     separators: separatorColors,
     text: textColors,
     border: borderColors,
@@ -128,20 +128,20 @@ export const makeConstants = (): OperationalStyleConstants => ({
  */
 const colors = {
   primary: "hsl(197, 82%, 44%)",
-  disabled: "hsl(0, 0, 96%)",
+  disabled: "hsl(0, 0%, 96%)",
   success: "hsl(127, 86%, 36%)",
   error: "hsl(0, 100%, 30%)",
-  basic: "hsl(0, 0, 39%)",
-  ghost: "hsla(0, 0, 100%, 0.2)",
-  white: "hsl(0, 0, 100%)",
-  black: "hsl(0, 0, 0)",
+  basic: "hsl(0, 0%, 39%)",
+  ghost: "hsla(0, 0%, 100%, 0.2)",
+  white: "hsl(0, 0%, 100%)",
+  black: "hsl(0, 0%, 0%)",
   /**
    * Greys exist on a spectrum of 0-100.
    *
    * Current _official_ greys are:
    * 96, 93, 56, 45, 40, 33, 24, 20
    */
-  grey: (lightness: Grey) => `hsl(0, 0, ${lightness}%)`,
+  grey: (lightness: Grey) => `hsl(0, 0%, ${lightness}%)`,
 }
 
 /**
@@ -210,8 +210,4 @@ const space: OperationalSpace = {
   big: 28,
 }
 
-export default {
-  colors,
-  space,
-  font,
-}
+export default makeConstants()

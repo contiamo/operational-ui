@@ -1,5 +1,3 @@
-export { expandColor } from "./utils" /** <- why is this not in @operational/utils? */
-
 export type TextTransform = "capitalize" | "full-width" | "lowercase" | "none" | "uppercase"
 
 export type ThemeColorName =
@@ -180,4 +178,5 @@ const operational: Theme = {
 }
 
 export { operational }
-export { default as constants } from "./constants"
+export { default as constants, OperationalStyleConstants } from "./constants"
+export { expandColor } from "./utils" /** <- @peterszerzo, why is this not in @operational/utils? */

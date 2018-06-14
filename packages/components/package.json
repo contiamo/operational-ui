@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "start": "run-p docs:start test:watch",
+    "start": "npm run docs:start",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
     "package": "rimraf lib && tsc",
@@ -28,6 +28,7 @@
     "@operational/theme": "^0.2.2",
     "@operational/utils": "^0.2.2",
     "emotion": "^9.2.3",
+    "emotion-theming": "^9.2.3",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "moment": "^2.19.0",
@@ -35,7 +36,8 @@
     "react-dom": "^16.2.0",
     "react-emotion": "^9.2.3",
     "react-feather": "^1.1.0",
-    "react-icons": "^2.2.5"
+    "react-icons": "^2.2.5",
+    "tinycolor": "^0.0.1"
   },
   "devDependencies": {
     "react-docgen-typescript": "^1.5.0",
