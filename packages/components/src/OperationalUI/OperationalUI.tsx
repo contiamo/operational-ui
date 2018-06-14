@@ -31,7 +31,7 @@ const OperationalUI = (props: Props) => {
   return (
     <DeprecatedThemeProvider theme={theme || operational}>
       <ThemeProvider theme={constants}>
-        <Provider value={{ pushState: pushState, replaceState: replaceState }}>{children}</Provider>
+        <Provider value={{ pushState, replaceState }}>{children}</Provider>
       </ThemeProvider>
     </DeprecatedThemeProvider>
   )
