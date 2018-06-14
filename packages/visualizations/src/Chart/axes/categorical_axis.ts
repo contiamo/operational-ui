@@ -123,7 +123,9 @@ class CategoricalAxis implements AxisClass<string> {
     const config = this.state.current.get("config")
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const defaultTickWidth =
-      (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
+      (this.position[0] === "x"
+        ? drawingDims.width / (this.data.length || 1)
+        : drawingDims.height / (this.data.length || 1)) *
       (1 - config.innerBarSpacingCategorical)
 
     const stacks = groupBy((s: { [key: string]: any }) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
@@ -141,7 +143,7 @@ class CategoricalAxis implements AxisClass<string> {
 
     const variableBarWidth =
       variableWidthStacks.length > 0
-        ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
+        ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / (variableWidthStacks.length || 1))
         : 0
 
     requiredTickWidth =

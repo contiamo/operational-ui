@@ -8,9 +8,11 @@ const BarRenderer = {
 const axes = {
   x1: {
     type: "categorical",
+    title: "Country: Germany",
   },
   y1: {
     type: "quant",
+    title: "New users",
   },
 }
 
