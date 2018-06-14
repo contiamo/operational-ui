@@ -1,156 +1,122 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
-
-import { WithTheme, Css, CssStatic } from "../types"
+import styled, { css } from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
-  className?: string
-  children?: React.ReactNode
   /** Table columns headings */
   columns: string[]
   /** Table rows as an array of cells */
   rows: ((string | React.ReactNode)[])[]
-  __experimentalColumnCss?: Css[]
-  __experimentalRowActions?: React.ReactNode[]
   /** Called on row click */
   onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
+  /**
+   * Text to display on right on row hover
+   */
+  rowActionName?: string
+  /**
+   * This will not work anymore!
+   * @deprecated
+   */
+  __experimentalColumnCss?: any
+  /**
+   * Add actions on the end of each row
+   */
+  __experimentalRowActions?: React.ReactNode[]
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "table",
-    width: "100%",
-    position: "relative",
-    backgroundColor: "white",
-  }),
-)
+interface CompProps {
+  theme?: OperationalStyleConstants
+}
 
-const TableElement = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    width: "100%",
-    textAlign: "left",
-    "& tr:first-child": {
-      borderTop: 0,
-    },
-    "& tbody tr:last-child": {
-      borderBottom: 0,
-    },
-    "& td": {},
-    "& th": {
-      opacity: 0.4,
-    },
-  }),
-)
+const Container = styled("table")(({ theme }: CompProps) => ({
+  width: "100%",
+  backgroundColor: theme.color.white,
+  textAlign: "left",
+  borderCollapse: "collapse",
+  fontSize: theme.font.size.small,
+  fontFamily: theme.font.family.main,
+}))
 
-const TableBody = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    display: "block",
-  }),
-)
+const Tr = styled("tr")(({ hover, theme }: { hover?: boolean } & CompProps) => ({
+  height: 50,
+  ":hover": hover && {
+    backgroundColor: theme.color.background.lighter,
+    cursor: "pointer",
+  },
+}))
 
-const TableBodyRow = glamorous.div(
-  ({ theme, isClickable }: { theme: Theme; isClickable: boolean }): {} => ({
-    ...(isClickable ? { cursor: "pointer" } : {}),
-    position: "relative",
-    display: "flex",
-    borderTop: "1px solid",
-    borderColor: theme.colors.separator,
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-    ":hover": {
-      backgroundColor: isClickable ? theme.colors.lighterBackground : "transparent",
-      "& .opui-row-actions-container": {
-        display: "block",
-      },
-    },
-  }),
-)
+const Th = styled("th")(({ theme }: CompProps) => ({
+  verticalAlign: "bottom",
+  borderBottom: `1px solid ${theme.color.separators.default}`,
+  color: theme.color.text.lightest,
+  paddingBottom: theme.space.base,
+  "&:first-child": {
+    paddingLeft: theme.space.small,
+  },
+}))
 
-const TableHead = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    display: "flex",
-    opacity: 0.4,
-    padding: `${theme.spacing / 4}px ${theme.spacing}px`,
-  }),
-)
+const Td = styled("td")(({ theme }: CompProps) => ({
+  verticalAlign: "center",
+  borderBottom: `1px solid ${theme.color.separators.default}`,
+  color: theme.color.text.default,
+  "&:first-child": {
+    paddingLeft: theme.space.small,
+  },
+}))
 
-const TableHeadCell = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    ...theme.typography.body,
-    flex: 1,
-  }),
-)
+const Action = styled(Td)(({ theme }: CompProps) => ({
+  textAlign: "right",
+  paddingRight: theme.space.content,
+  color: "transparent",
+  "tr:hover &, :hover": { color: theme.color.text.action },
+}))
 
-const TableCell = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    ...theme.typography.body,
-    flex: 1,
-  }),
-)
+const Actions = styled(Td)(({ theme }: CompProps) => ({
+  textAlign: "right",
+  paddingRight: theme.space.small,
 
-const EmptyView = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    padding: `${(theme.spacing * 2) / 3}px ${theme.spacing}px`,
-    display: "block",
-    width: "100%",
-    top: theme.spacing,
-    textAlign: "center",
-    backgroundColor: theme.colors.background,
-    ...theme.typography.body,
-  }),
-)
+  /**
+   * We use opacity here instead of display: none; or
+   * visibility: hidden; because both mess with
+   * the box model of the Td while opacity does not.
+   */
+  opacity: 0,
+  "tr:hover &, :hover": { opacity: 1 },
+}))
 
-const RowActionsContainer = glamorous.div(
-  ({ theme }: WithTheme): {} => ({
-    width: "fit-content",
-    position: "absolute",
-    top: "50%",
-    right: theme.spacing / 2,
-    transform: "translate3d(0, -50%, 0)",
-    display: "none",
-  }),
-)
+const EmptyView = styled(Td)(({ theme }: CompProps) => ({
+  color: theme.color.text.default,
+  height: 50,
+  lineHeight: "50px",
+  textAlign: "center",
+}))
 
-const Table = (props: Props) => (
-  <Container css={props.css} className={props.className}>
-    <TableElement>
-      <TableHead>
-        {props.columns.map((column, index) => (
-          <TableHeadCell key={index} css={props.__experimentalColumnCss && props.__experimentalColumnCss[index]}>
-            {column}
-          </TableHeadCell>
-        ))}
-      </TableHead>
-      <TableBody>
-        {props.rows.map((row, index) => (
-          <TableBodyRow
-            isClickable={Boolean(props.onRowClick)}
-            key={index}
-            onClick={() => {
-              if (props.onRowClick) {
-                props.onRowClick(row, index)
-              }
-            }}
-          >
-            {row.map((cell, index) => (
-              <TableCell key={index} css={props.__experimentalColumnCss && props.__experimentalColumnCss[index]}>
-                {cell}
-              </TableCell>
-            ))}
-            {props.__experimentalRowActions &&
-              props.__experimentalRowActions[index] && (
-                <RowActionsContainer className="opui-row-actions-container">
-                  {props.__experimentalRowActions[index]}
-                </RowActionsContainer>
-              )}
-          </TableBodyRow>
-        ))}
-      </TableBody>
-    </TableElement>
-    {props.rows.length === 0 ? <EmptyView>There are no records available</EmptyView> : null}
-  </Container>
-)
+const Table: React.SFC<Props> = ({ rows, columns, onRowClick, rowActionName, __experimentalRowActions, ...props }) => {
+  return (
+    <Container {...props}>
+      <thead>
+        <Tr>
+          {columns.map((title, i) => <Th key={i}>{title}</Th>)}
+          {Boolean(__experimentalRowActions || rowActionName) && <Th />}
+        </Tr>
+      </thead>
+      <tbody>
+        {rows.length ? (
+          rows.map((row, i) => (
+            <Tr hover={Boolean(onRowClick)} key={i} onClick={() => onRowClick(row, i)}>
+              {row.map((data, j) => <Td key={j}>{data}</Td>)}
+              {rowActionName && <Action>{rowActionName}</Action>}
+              {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
+            </Tr>
+          ))
+        ) : (
+          <Tr>
+            <EmptyView colSpan={columns.length}>There are no records available</EmptyView>
+          </Tr>
+        )}
+      </tbody>
+    </Container>
+  )
+}
 
 export default Table
