@@ -1,10 +1,12 @@
 import * as React from "react"
-import { ThemeProvider } from "glamorous"
+import { injectGlobal } from "emotion"
+import { ThemeProvider } from "emotion-theming"
 
-import { Theme, operational } from "@operational/theme"
+/** @todo remove this once we're fully in emotion */
+import { ThemeProvider as DeprecatedThemeProvider } from "glamorous"
+
+import { Theme, operational, constants } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
-
-import { Context } from "../types"
 
 export interface Props {
   /** Theme */
@@ -22,21 +24,16 @@ export interface Props {
 const { Provider, Consumer } = React.createContext({})
 
 const OperationalUI = (props: Props) => {
+  const { withBaseStyles, pushState, replaceState, children, theme } = props
+
+  withBaseStyles && injectGlobal(baseStylesheet(theme || operational))
+
   return (
-    <ThemeProvider theme={props.theme || operational}>
-      <Provider value={{ pushState: props.pushState, replaceState: props.replaceState }}>
-        <React.Fragment>
-          {props.withBaseStyles ? (
-            <style
-              dangerouslySetInnerHTML={{
-                __html: baseStylesheet(props.theme || operational),
-              }}
-            />
-          ) : null}
-          {props.children}
-        </React.Fragment>
-      </Provider>
-    </ThemeProvider>
+    <DeprecatedThemeProvider theme={theme || operational}>
+      <ThemeProvider theme={constants}>
+        <Provider value={{ pushState, replaceState }}>{children}</Provider>
+      </ThemeProvider>
+    </DeprecatedThemeProvider>
   )
 }
 

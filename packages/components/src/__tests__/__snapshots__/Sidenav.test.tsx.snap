@@ -51,7 +51,7 @@ exports[`Sidenav component renders 1`] = `
       },
       "fontFamily": "Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
       "shadows": Object {
-        "card": "0px 1px 3px rgba(0,0,0,.16)",
+        "card": "0px 1px 5px #d3d1d1",
         "focus": "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
         "popup": "0 3px 12px rgba(0, 0, 0, .14)",
         "pressed": "inset 0 1px 1px rgba(0,0,0,0.15)",
