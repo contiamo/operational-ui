@@ -20,7 +20,7 @@ const getColorFromProps = ({ success, error, theme }: Props): string => {
   return theme.color.background.dark
 }
 
-const Status = styled("div")`
+const Status = styled.div`
   display: inline-block;
   margin-right: 8px;
   width: 8px;
