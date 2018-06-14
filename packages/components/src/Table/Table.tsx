@@ -85,17 +85,21 @@ const Table: React.SFC<Props> = ({ rows, columns, onRowClick, rowActionName, __e
   return (
     <>
       <Container {...props}>
-        <Tr>
-          {columns.map((title, i) => <Th key={i}>{title}</Th>)}
-          {Boolean(__experimentalRowActions || rowActionName) && <Th />}
-        </Tr>
-        {rows.map((row, i) => (
-          <Tr hover={Boolean(onRowClick)} key={i} onClick={() => onRowClick(row, i)}>
-            {row.map((data, j) => <Td key={j}>{data}</Td>)}
-            {rowActionName && <Action>{rowActionName}</Action>}
-            {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
+        <thead>
+          <Tr>
+            {columns.map((title, i) => <Th key={i}>{title}</Th>)}
+            {Boolean(__experimentalRowActions || rowActionName) && <Th />}
           </Tr>
-        ))}
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <Tr hover={Boolean(onRowClick)} key={i} onClick={() => onRowClick(row, i)}>
+              {row.map((data, j) => <Td key={j}>{data}</Td>)}
+              {rowActionName && <Action>{rowActionName}</Action>}
+              {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
+            </Tr>
+          ))}
+        </tbody>
       </Container>
       {rows.length < 1 && <EmptyView>There are no records available</EmptyView>}
     </>
