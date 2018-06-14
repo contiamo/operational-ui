@@ -74,12 +74,18 @@ const Action = styled(Td)(({ theme }: CompProps) => ({
 const Actions = styled(Td)(({ theme }: CompProps) => ({
   textAlign: "right",
   paddingRight: theme.space.small,
+
+  /**
+   * We use opacity here instead of display: none; or
+   * visibility: hidden; because both mess with
+   * the box model of the Td while opacity does not.
+   */
   opacity: 0,
   "tr:hover &, :hover": { opacity: 1 },
 }))
 
-const EmptyView = styled("div")(({ theme }: CompProps) => ({
-  color: theme.color.text.default || "red",
+const EmptyView = styled(Td)(({ theme }: CompProps) => ({
+  color: theme.color.text.default,
   height: 50,
   lineHeight: "50px",
   textAlign: "center",
@@ -87,26 +93,29 @@ const EmptyView = styled("div")(({ theme }: CompProps) => ({
 
 const Table: React.SFC<Props> = ({ rows, columns, onRowClick, rowActionName, __experimentalRowActions, ...props }) => {
   return (
-    <>
-      <Container {...props}>
-        <thead>
-          <Tr>
-            {columns.map((title, i) => <Th key={i}>{title}</Th>)}
-            {Boolean(__experimentalRowActions || rowActionName) && <Th />}
-          </Tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
+    <Container {...props}>
+      <thead>
+        <Tr>
+          {columns.map((title, i) => <Th key={i}>{title}</Th>)}
+          {Boolean(__experimentalRowActions || rowActionName) && <Th />}
+        </Tr>
+      </thead>
+      <tbody>
+        {rows.length ? (
+          rows.map((row, i) => (
             <Tr hover={Boolean(onRowClick)} key={i} onClick={() => onRowClick(row, i)}>
               {row.map((data, j) => <Td key={j}>{data}</Td>)}
               {rowActionName && <Action>{rowActionName}</Action>}
               {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
             </Tr>
-          ))}
-        </tbody>
-      </Container>
-      {rows.length < 1 && <EmptyView>There are no records available</EmptyView>}
-    </>
+          ))
+        ) : (
+          <Tr>
+            <EmptyView colSpan={columns.length}>There are no records available</EmptyView>
+          </Tr>
+        )}
+      </tbody>
+    </Container>
   )
 }
 

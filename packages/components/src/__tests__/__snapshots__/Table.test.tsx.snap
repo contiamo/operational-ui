@@ -9,6 +9,17 @@ exports[`Table Component Should render 1`] = `
       class="css-szcvmb"
     />
   </thead>
-  <tbody />
+  <tbody>
+    <tr
+      class="css-szcvmb"
+    >
+      <td
+        class="css-if432c"
+        colspan="0"
+      >
+        There are no records available
+      </td>
+    </tr>
+  </tbody>
 </table>
 `;
