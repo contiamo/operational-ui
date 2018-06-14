@@ -3,7 +3,8 @@ import { CSSProperties } from "glamorous"
 
 export type WithTheme = { theme: Theme }
 
-export type Css = CSSProperties | (<T>(props: T & WithTheme) => CSSProperties)
+/** @todo Rethink this line with Emotion */
+export type Css = any
 
 // TODO: make this stricter to disallow { margin: 20, fruit: "much much" }
 export type CssStatic = CSSProperties
