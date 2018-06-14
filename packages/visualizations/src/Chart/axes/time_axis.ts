@@ -322,12 +322,12 @@ class TimeAxis implements AxisClass<Date> {
     labels
       .enter()
       .append("svg:text")
-      .call(setTextAttributes, startAttributes)
-      .merge(labels)
       .attr("class", styles.label)
+      .merge(labels)
       // @TODO
       // .attr("class", (d: string | number, i: number): string => "tick " + this.tickClass(d, i))
       .style("font-size", `${this.options.fontSize}px`)
+      .call(setTextAttributes, startAttributes)
       .call(setTextAttributes, attributes, config.duration)
 
     labels
@@ -373,10 +373,9 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
-    return defaults(attributes)({
-      x: this.isXAxis ? this.previous.scale : 0,
-      y: this.isXAxis ? 0 : this.previous.scale,
-    })
+    const startAttributes = cloneDeep(attributes)
+    startAttributes[this.isXAxis ? "x" : "y"] = this.previous.scale
+    return startAttributes
   }
 
   private getTickAttributes() {
