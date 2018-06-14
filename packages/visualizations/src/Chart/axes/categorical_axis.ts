@@ -273,7 +273,8 @@ class CategoricalAxis implements AxisClass<string> {
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     const startAttributes = cloneDeep(attributes)
-    startAttributes[this.isXAxis ? "x" : "y"] = this.scaleWithOffset(this.previous)
+    startAttributes[this.isXAxis ? "x" : "y"] = (d: string) =>
+      this.scaleWithOffset(this.previous)(d) || this.scaleWithOffset(this.computed)(d)
     return startAttributes
   }
 
