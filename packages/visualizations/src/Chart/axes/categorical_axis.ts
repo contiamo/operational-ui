@@ -232,10 +232,10 @@ class CategoricalAxis implements AxisClass<string> {
     labels
       .enter()
       .append("svg:text")
-      .call(setTextAttributes, startAttributes)
-      .merge(labels)
       .attr("class", styles.label)
+      .merge(labels)
       .style("font-size", `${this.options.fontSize}px`)
+      .call(setTextAttributes, startAttributes)
       .call(setTextAttributes, attributes, config.duration)
 
     labels
@@ -272,11 +272,10 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
-    const scaleWithOffset = this.scaleWithOffset(this.previous)
-    return defaults({
-      x: this.isXAxis ? scaleWithOffset : 0,
-      y: this.isXAxis ? 0 : scaleWithOffset,
-    })(attributes)
+    const startAttributes = cloneDeep(attributes)
+    startAttributes[this.isXAxis ? "x" : "y"] = (d: string) =>
+      this.scaleWithOffset(this.previous)(d) || this.scaleWithOffset(this.computed)(d)
+    return startAttributes
   }
 
   private getTickAttributes() {

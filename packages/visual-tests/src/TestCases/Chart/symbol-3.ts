@@ -95,9 +95,12 @@ const createData = () => {
     axes: {
       x1: {
         type: "quant",
+        title: "Profit",
+        rotateLabels: true,
       },
       y1: {
         type: "quant",
+        title: "Sales",
       },
     },
   }
