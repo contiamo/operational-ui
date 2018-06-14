@@ -9,6 +9,13 @@ const LineRenderer = {
   type: "line",
 }
 
+const PointsRenderer = {
+  type: "symbol",
+  accessors: {
+    size: (series: any, d: any) => 20,
+  },
+}
+
 const AreaRendererWithColor = {
   type: "area",
   accessors: {
@@ -114,27 +121,27 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   const viz = new Chart(container)
 
   test("Render", () => {
-    viz.data(createData([AreaRenderer, LineRenderer]))
+    viz.data(createData([AreaRenderer, LineRenderer, PointsRenderer]))
     viz.draw()
   })
 
   test("Update colors", () => {
-    viz.data(createData([AreaRendererWithColor, LineRenderer]))
+    viz.data(createData([AreaRendererWithColor, LineRenderer, PointsRenderer]))
     viz.draw()
   })
 
   test("Change interpolation", () => {
-    viz.data(createData([AreaRendererWithInterpolation, LineRendererWithInterpolation]))
+    viz.data(createData([AreaRendererWithInterpolation, LineRendererWithInterpolation, PointsRenderer]))
     viz.draw()
   })
 
   test("Turn off `closeGaps`", () => {
-    viz.data(createData([AreaRendererWithGaps, LineRendererWithGaps]))
+    viz.data(createData([AreaRendererWithGaps, LineRendererWithGaps, PointsRenderer]))
     viz.draw()
   })
 
   test("Dashed lines", () => {
-    viz.data(createData([AreaRendererWithGaps, LineRendererDashed]))
+    viz.data(createData([AreaRendererWithGaps, LineRendererDashed, PointsRenderer]))
     viz.draw()
   })
 
