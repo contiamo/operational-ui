@@ -1,10 +1,9 @@
 import * as React from "react"
-
-/** @todo rename this import once we're fully in emotion */
-import { ThemeProvider as EmotionThemeProvider } from "emotion-theming"
+import { injectGlobal } from "emotion"
+import { ThemeProvider } from "emotion-theming"
 
 /** @todo remove this once we're fully in emotion */
-import { ThemeProvider } from "glamorous"
+import { ThemeProvider as DeprecatedThemeProvider } from "glamorous"
 
 import { Theme, operational, constants } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
@@ -25,23 +24,16 @@ export interface Props {
 const { Provider, Consumer } = React.createContext({})
 
 const OperationalUI = (props: Props) => {
+  const { withBaseStyles, pushState, replaceState, children, theme } = props
+
+  withBaseStyles && injectGlobal(baseStylesheet(theme || operational))
+
   return (
-    <ThemeProvider theme={props.theme || operational}>
-      <EmotionThemeProvider theme={constants}>
-        <Provider value={{ pushState: props.pushState, replaceState: props.replaceState }}>
-          <React.Fragment>
-            {props.withBaseStyles ? (
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: baseStylesheet(props.theme || operational),
-                }}
-              />
-            ) : null}
-            {props.children}
-          </React.Fragment>
-        </Provider>
-      </EmotionThemeProvider>
-    </ThemeProvider>
+    <DeprecatedThemeProvider theme={theme || operational}>
+      <ThemeProvider theme={constants}>
+        <Provider value={{ pushState: pushState, replaceState: replaceState }}>{children}</Provider>
+      </ThemeProvider>
+    </DeprecatedThemeProvider>
   )
 }
 
