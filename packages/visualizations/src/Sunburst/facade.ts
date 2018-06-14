@@ -8,6 +8,7 @@ import EventEmitter from "../shared/event_bus"
 import { has, uniqueId } from "lodash/fp"
 import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
+import defaultNumberFormatter from "../utils/number_formatter"
 import { Accessors, AccessorsObject, Components, Facade, RawData, SunburstConfig } from "./typings"
 
 const defaultConfig = (): SunburstConfig => {
@@ -24,7 +25,7 @@ const defaultConfig = (): SunburstConfig => {
     maxRings: 10,
     maxTotalFontSize: 54,
     minTotalFontSize: theme.typography.small.fontSize,
-    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    numberFormatter: defaultNumberFormatter,
     outerBorderMargin: 1,
     palette: theme.colors.visualizationPalette,
     propagateColors: true,

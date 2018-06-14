@@ -5,6 +5,7 @@ import Events from "../shared/event_catalog"
 import StateHandler from "../shared/state_handler"
 import EventEmitter from "../shared/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
+import defaultNumberFormatter from "../utils/number_formatter"
 import {
   Accessors,
   AccessorsObject,
@@ -35,7 +36,7 @@ const defaultConfig = (): ProcessFlowConfig => {
     minLinkWidth: 1,
     minNodeSize: 100,
     nodeBorderWidth: 10,
-    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    numberFormatter: defaultNumberFormatter,
     showLinkFocusLabels: true,
     showNodeFocusLabels: true,
     uid: uniqueId("processflow"),

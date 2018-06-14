@@ -36,7 +36,6 @@ const defaultConfig = (): PieChartConfig => {
     minInnerRadius: 30,
     minLegendWidth: 50,
     minTotalFontSize: 11,
-    numberFormatter: (x: number): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     outerBorderMargin: 1,
     palette: operational.colors.visualizationPalette,
     showComponentFocus: false,
