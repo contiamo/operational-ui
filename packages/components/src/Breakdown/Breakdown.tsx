@@ -130,6 +130,8 @@ const Number = glamorous.div(
   }),
 )
 
+const Span = glamorous.span()
+
 const Breakdown: React.SFC<Props> = props => (
   <Container
     id={props.id}
@@ -143,7 +145,7 @@ const Breakdown: React.SFC<Props> = props => (
     <Content>
       <Label>{props.children}</Label>
       <Bar color={props.color} fill={props.fill}>
-        <glamorous.Span css={{ fontFeatureSettings: "'tnum'" }}>{props.label}</glamorous.Span>
+        <Span css={{ fontFeatureSettings: "'tnum'" }}>{props.label}</Span>
       </Bar>
     </Content>
   </Container>

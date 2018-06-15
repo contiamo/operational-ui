@@ -27,13 +27,10 @@ const OperationalUI = (props: Props) => {
   const { withBaseStyles, pushState, replaceState, children, theme } = props
 
   withBaseStyles && injectGlobal(baseStylesheet(theme || operational))
-
   return (
-    <DeprecatedThemeProvider theme={theme || operational}>
-      <ThemeProvider theme={constants}>
-        <Provider value={{ pushState, replaceState }}>{children}</Provider>
-      </ThemeProvider>
-    </DeprecatedThemeProvider>
+    <ThemeProvider theme={{ ...constants, deprecated: operational }}>
+      <Provider value={{ pushState, replaceState }}>{children}</Provider>
+    </ThemeProvider>
   )
 }
 

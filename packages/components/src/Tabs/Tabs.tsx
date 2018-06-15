@@ -155,6 +155,6 @@ const Tabs = (props: PropsWithTheme) => {
   )
 }
 
-const WrappedTabs: React.SFC<Props> = withTheme(Tabs)
+const WrappedTabs: React.SFC<Props> = Tabs
 
 export default WrappedTabs

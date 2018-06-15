@@ -54,7 +54,7 @@ const Main = glamorous.div(
     backgroundColor: theme.colors.white,
   }),
 )
-
+const Div = glamorous.div()
 const Layout = (props: Props) => {
   /* 
    * This placeholder element is added to the dom in case there is no
@@ -63,7 +63,7 @@ const Layout = (props: Props) => {
    * Absolute positioning is required to remove it from document flow
    * so that it doesn't affect the grid.
    */
-  const cssPlaceholder = <glamorous.Div css={{ position: "absolute" }} />
+  const cssPlaceholder = <Div css={{ position: "absolute" }} />
   return (
     <Container css={props.css} className={props.className}>
       {props.loading ? <Progress /> : cssPlaceholder}

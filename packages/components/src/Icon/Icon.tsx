@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
-import { withTheme } from "glamorous"
+import { withTheme } from "emotion-theming"
 import { Theme, expandColor } from "@operational/theme"
 
 import * as BrandIcons from "./Icon.Brand"
@@ -31,7 +31,7 @@ export interface Props {
 }
 
 export interface PropsWithTheme extends Props {
-  theme: Theme
+  theme?: Theme
 }
 
 const Icon = (props: PropsWithTheme) => {
@@ -53,7 +53,7 @@ const Icon = (props: PropsWithTheme) => {
     if (props.name === "Contiamo") {
       Comp = BrandIcons.Contiamo
     }
-    return <Comp size={props.size || defaultSize} color={color} rotation={props.rotation} colored={props.colored} />
+    return <Comp {...props} />
   }
 
   return null
