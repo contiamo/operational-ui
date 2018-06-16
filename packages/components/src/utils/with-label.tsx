@@ -1,25 +1,24 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { Theme, OperationalStyleConstants } from "@operational/theme"
 import { Css } from "../types"
-
-const Container = glamorous.div(
-  ({ theme }: { theme: Theme }): {} => ({
+const Container = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
     display: "inline-block",
   }),
 )
-
-const Label = glamorous.label(
-  ({ theme }: { theme: Theme }): {} => ({
-    ...theme.typography.small,
+const Label = styled("label")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+    ...theme.deprecated.typography.small,
     fontWeight: 600,
     opacity: 0.7,
     display: "inline-block",
-    marginBottom: theme.spacing / 4,
+    marginBottom: theme.deprecated.spacing / 4,
   }),
 )
-
-type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id"> & { css?: Css }
+type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id"> & {
+  css?: Css
+}
 
 function withLabel<T extends IComponent>(Component: React.ComponentType<T>): React.SFC<T> {
   return (props: T & IComponent) => {

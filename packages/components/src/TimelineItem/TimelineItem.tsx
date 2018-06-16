@@ -1,22 +1,22 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
-import glamorous, { GlamorousComponent, withTheme } from "glamorous"
-import { Theme, expandColor } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Content */
+
   children?: React.ReactNode
   /** Color */
+
   color?: string
 }
-
-const StatusContainer = glamorous.div(
+const StatusContainer = styled("div")(
   {
     border: "2px solid transparent",
     borderRadius: "50%",
@@ -25,14 +25,13 @@ const StatusContainer = glamorous.div(
     top: 6,
     width: 11,
   },
-  ({ theme, color }: { theme: Theme; color?: string }): CssStatic => {
+  ({ theme, color }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }): CssStatic => {
     return {
-      backgroundColor: expandColor(theme, color) || theme.colors.info,
+      backgroundColor: expandColor(theme.deprecated, color) || theme.deprecated.colors.info,
     }
   },
 )
-
-const Content = glamorous.div(
+const Content = styled("div")(
   {
     padding: "0 0 5px 26px",
     position: "relative",
@@ -45,11 +44,10 @@ const Content = glamorous.div(
     },
   },
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.body,
+    ...theme.deprecated.typography.body,
   }),
 )
-
-const Container = glamorous.li(
+const Container = styled("li")(
   {
     label: "timelineitem",
     listStyle: "none",
@@ -67,9 +65,9 @@ const Container = glamorous.li(
     },
   },
   ({ theme }: WithTheme): CssStatic => ({
-    paddingBottom: theme.spacing,
+    paddingBottom: theme.deprecated.spacing,
     "&::before": {
-      borderLeft: `1px solid ${theme.colors.separator}`,
+      borderLeft: `1px solid ${theme.deprecated.colors.separator}`,
     },
   }),
 )

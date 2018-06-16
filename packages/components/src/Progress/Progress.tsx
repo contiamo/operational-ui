@@ -1,31 +1,31 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import styled from "react-emotion"
 import { css } from "glamor"
-import { Theme } from "@operational/theme"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
-
 import deprecate from "../utils/deprecate"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon } from "../"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Show an error instead of the progress */
+
   error?: string
   /** Provide a button to retry the action to load */
+
   onRetry?: () => void
   /** OnClose callback */
+
   onClose?: () => void
 }
-
 const width = 120
 const height = 45
 const padding = 15
-
-const Container = glamorous.div(
+const Container = styled("div")(
   {
     label: "progress",
     width: "100%",
@@ -35,12 +35,11 @@ const Container = glamorous.div(
     left: 0,
     position: "absolute",
   },
-  ({ theme }: { theme: Theme }): CssStatic => ({
-    zIndex: theme.baseZIndex + 300,
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+    zIndex: theme.deprecated.baseZIndex + 300,
     backgroundColor: "transparent",
   }),
 )
-
 const fillProgress = css.keyframes({
   from: {
     transform: "translate3d(-100%, 0, 0)",
@@ -49,57 +48,54 @@ const fillProgress = css.keyframes({
     transform: "translate3d(0, 0, 0)",
   },
 })
-
-const Bar = glamorous.div(
-  ({ theme, isError }: { theme?: Theme; isError: boolean }): CssStatic => ({
+const Bar = styled("div")(
+  ({ theme, isError }: { theme?: OperationalStyleConstants & { deprecated: Theme }; isError: boolean }): CssStatic => ({
     width: "100%",
     height: 3,
-    backgroundColor: theme.colors.info,
+    backgroundColor: theme.deprecated.colors.info,
     ...(isError
       ? {
-          backgroundColor: theme.colors.error,
+          backgroundColor: theme.deprecated.colors.error,
         }
       : {
           animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
         }),
   }),
 )
-
-const ErrorMessage = glamorous.div(
+const ErrorMessage = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.body,
-    padding: `${theme.spacing / 2}px ${theme.spacing / 2}px`,
+    ...theme.deprecated.typography.body,
+    padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing / 2}px`,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    zIndex: theme.baseZIndex + 301,
+    zIndex: theme.deprecated.baseZIndex + 301,
     textAlign: "center",
-    backgroundColor: lighten(theme.colors.error, 15),
-    color: theme.colors.white,
+    backgroundColor: lighten(theme.deprecated.colors.error, 15),
+    color: theme.deprecated.colors.white,
   }),
 )
-
-const Action = glamorous.div(
+const Action = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     opacity: 0.7,
     display: "inline-block",
-    marginLeft: theme.spacing,
+    marginLeft: theme.deprecated.spacing,
     userSelect: "none",
     "& > *": {
       display: "inline-block",
       verticalAlign: "middle",
     },
     "& svg": {
-      width: theme.spacing,
-      height: theme.spacing,
-      marginRight: theme.spacing / 4,
+      width: theme.deprecated.spacing,
+      height: theme.deprecated.spacing,
+      marginRight: theme.deprecated.spacing / 4,
     },
     // Temporary hack since feather icons for refresh and close
     // have a mismatch in size.
     ":first-of-type svg": {
-      width: (theme.spacing * 3) / 4,
-      height: (theme.spacing * 3) / 4,
+      width: (theme.deprecated.spacing * 3) / 4,
+      height: (theme.deprecated.spacing * 3) / 4,
     },
     ":hover": {
       opacity: 1,

@@ -1,35 +1,37 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import styled from "react-emotion"
 import { css } from "glamor"
 import { fadeIn } from "@operational/utils"
-import { Theme } from "@operational/theme"
-
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   /** Id */
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   /** `css` prop for the menu's popup container */
+
   menuCss?: Css
   /** Class name */
+
   className?: string
   children: React.ReactNode
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
+
   open?: boolean
   onClick?: () => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
+
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
+
   keepOpenOnItemClick?: boolean
 }
-
 export interface State {
   isOpen: boolean
 }
-
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): {} => ({
     label: "contextmenu",
     cursor: "pointer",
@@ -37,16 +39,22 @@ const Container = glamorous.div(
     width: "fit-content",
   }),
 )
-
-const MenuContainer = glamorous.div(
-  ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
+const MenuContainer = styled("div")(
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants & { deprecated: Theme }; isExpanded: boolean }): {} => ({
     position: "absolute",
-    top: `calc(100% + ${theme.spacing / 2}px)`,
-    left: -theme.spacing,
-    boxShadow: theme.shadows.popup,
+    top: `calc(100% + ${theme.deprecated.spacing / 2}px)`,
+    left: -theme.deprecated.spacing,
+    boxShadow: theme.deprecated.shadows.popup,
     width: "fit-content",
-    zIndex: theme.baseZIndex + 300,
-    ...(isExpanded ? { display: "block", animation: `${fadeIn} ease-in-out forwards 0.2s` } : { display: "none" }),
+    zIndex: theme.deprecated.baseZIndex + 300,
+    ...(isExpanded
+      ? {
+          display: "block",
+          animation: `${fadeIn} ease-in-out forwards 0.2s`,
+        }
+      : {
+          display: "none",
+        }),
   }),
 )
 
@@ -54,20 +62,21 @@ class ContextMenu extends React.Component<Props, State> {
   state = {
     isOpen: false,
   }
-
   containerNode: any
   menuContainerNode: any
   outsideClickHandler: any
-
   handleClick = (ev: any): void => {
     const isTargetInsideMenu = this.menuContainerNode.contains(ev.target)
     const isTargetInsideContainer = this.containerNode.contains(ev.target)
+
     if (!isTargetInsideContainer && this.props.onOutsideClick) {
       this.props.onOutsideClick()
     }
+
     if (isTargetInsideContainer && this.props.onClick) {
       this.props.onClick()
     }
+
     const newIsActive = isTargetInsideMenu ? this.state.isOpen : isTargetInsideContainer ? !this.state.isOpen : false
     this.setState(prevState => ({
       isOpen: newIsActive,
@@ -101,6 +110,7 @@ class ContextMenu extends React.Component<Props, State> {
                       isOpen: false,
                     }))
                   }
+
                   onClick()
                 }),
             }),
@@ -110,7 +120,6 @@ class ContextMenu extends React.Component<Props, State> {
         }
       },
     )
-
     return (
       <Container
         innerRef={node => {

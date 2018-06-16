@@ -1,34 +1,32 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   children?: any
   onClick?: () => void
   __isContextMenuItem?: boolean
 }
-
-const Container = glamorous.div(
-  ({ theme, clickable }: { theme: Theme; clickable: boolean }): any => ({
+const Container = styled("div")(
+  ({ theme, clickable }: { theme?: OperationalStyleConstants & { deprecated: Theme }; clickable: boolean }): any => ({
     label: "contextmenuitem",
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.deprecated.colors.white,
     minWidth: 160,
     width: "fit-content",
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
+    padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing}px`,
     border: "1px solid",
-    borderColor: theme.colors.separator,
+    borderColor: theme.deprecated.colors.separator,
     ...(clickable
       ? {
           cursor: "pointer",
           "&:hover": {
-            backgroundColor: darken(theme.colors.white, 2),
+            backgroundColor: darken(theme.deprecated.colors.white, 2),
           },
         }
       : {}),
@@ -53,5 +51,4 @@ const ContextMenuItem: React.SFC<Props> = (props: Props) => (
 ContextMenuItem.defaultProps = {
   __isContextMenuItem: true,
 }
-
 export default ContextMenuItem

@@ -1,40 +1,48 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme, expandColor } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { setBrightness } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
 import { IconName } from "../"
-
 export interface Props {
   /** Id */
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   /** Class name */
+
   className?: string
   children: React.ReactNode
   /** A number by which the breakdown is represented */
+
   number?: number
   /** A statistic number label within the bar of the breakdown */
+
   label: string
   /** The percentage to fill the bar. This is typically passed in from a container component that calculates percentages at large */
+
   fill: number
   /** A theme palette color name, or a hex code that the bar will be colored with */
+
   color?: string
   /** Bar color */
+
   barColor?: string
   /** An icon that is displayed on the breakdown */
+
   icon?: IconName
   /** Invoked weth the mouse click the breakdown */
+
   onClick?: () => void
   /** Invoked when the mouse enters the breakdown. Useful for tooltips/infowindows */
+
   onMouseEnter?: () => void
   /** Invoked when the mouse leaves the breakdown. Useful for tooltips/infowindows */
+
   onMouseLeave?: () => void
 }
-
-const Container = glamorous.div(
+const Container = styled("div")(
   {
     label: "breakdown",
     display: "flex",
@@ -43,8 +51,14 @@ const Container = glamorous.div(
     position: "relative",
     maxWidth: 300,
   },
-  ({ theme, onClick }: { theme?: Theme; onClick: () => void }): CssStatic => ({
-    padding: `${(theme.spacing * 3) / 4}px 0`,
+  ({
+    theme,
+    onClick,
+  }: {
+    theme?: OperationalStyleConstants & { deprecated: Theme }
+    onClick: () => void
+  }): CssStatic => ({
+    padding: `${(theme.deprecated.spacing * 3) / 4}px 0`,
     ...(onClick
       ? {
           cursor: "pointer",
@@ -53,28 +67,25 @@ const Container = glamorous.div(
           },
         }
       : {}),
-    background: theme.colors.white,
+    background: theme.deprecated.colors.white,
     ":not(:first-child)": {
-      borderTop: `1px solid ${theme.colors.separator}`,
+      borderTop: `1px solid ${theme.deprecated.colors.separator}`,
     },
   }),
 )
-
-const Content = glamorous.div({
+const Content = styled("div")({
   width: "100%",
 })
-
-const Label = glamorous.label(
+const Label = styled("label")(
   {
     display: "block",
   },
-  ({ theme }: { theme?: Theme }) => ({
-    marginBottom: theme.spacing / 4,
-    fontSize: theme.typography.small.fontSize,
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }) => ({
+    marginBottom: theme.deprecated.spacing / 4,
+    fontSize: theme.deprecated.typography.small.fontSize,
   }),
 )
-
-const Bar = glamorous.div(
+const Bar = styled("div")(
   {
     position: "relative",
     width: "100%",
@@ -95,13 +106,21 @@ const Bar = glamorous.div(
       pointerEvents: "none",
     },
   },
-  ({ theme, fill, color }: { theme: Theme; fill: number; color: string }): CssStatic => {
-    const backgroundColor: string = expandColor(theme, color) || theme.colors.info
+  ({
+    theme,
+    fill,
+    color,
+  }: {
+    theme?: OperationalStyleConstants & { deprecated: Theme }
+    fill: number
+    color: string
+  }): CssStatic => {
+    const backgroundColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
-      padding: `${theme.spacing / 4}px ${theme.spacing / 2}px`,
-      backgroundColor: theme.colors.lightGray,
+      padding: `${theme.deprecated.spacing / 4}px ${theme.deprecated.spacing / 2}px`,
+      backgroundColor: theme.deprecated.colors.lightGray,
       "> span": {
-        color: theme.colors.gray,
+        color: theme.deprecated.colors.gray,
         fontSize: 12,
         position: "relative",
         top: 1,
@@ -115,8 +134,7 @@ const Bar = glamorous.div(
     }
   },
 )
-
-const Number = glamorous.div(
+const Number = styled("div")(
   {
     height: "100%",
     display: "flex",
@@ -124,13 +142,12 @@ const Number = glamorous.div(
     justifyContent: "center",
   },
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading1,
-    flex: `0 0 ${theme.spacing * 2.5}px`,
-    color: theme.colors.lightGray,
+    ...theme.deprecated.typography.heading1,
+    flex: `0 0 ${theme.deprecated.spacing * 2.5}px`,
+    color: theme.deprecated.colors.lightGray,
   }),
 )
-
-const Span = glamorous.span()
+const Span = styled("span")()
 
 const Breakdown: React.SFC<Props> = props => (
   <Container
@@ -145,7 +162,13 @@ const Breakdown: React.SFC<Props> = props => (
     <Content>
       <Label>{props.children}</Label>
       <Bar color={props.color} fill={props.fill}>
-        <Span css={{ fontFeatureSettings: "'tnum'" }}>{props.label}</Span>
+        <Span
+          css={{
+            fontFeatureSettings: "'tnum'",
+          }}
+        >
+          {props.label}
+        </Span>
       </Bar>
     </Content>
   </Container>

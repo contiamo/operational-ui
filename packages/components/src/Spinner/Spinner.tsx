@@ -1,19 +1,17 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import styled from "react-emotion"
 import { css } from "glamor"
-import { Theme, expandColor } from "@operational/theme"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken, transparentize } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   color?: string
 }
-
 const spin = css.keyframes({
   "0%": {
     transform: "scale(1)",
@@ -22,23 +20,19 @@ const spin = css.keyframes({
     transform: "scale(0.75)",
   },
 })
-
 const size = 20
-
 const animationTimeUnit: number = 0.6
 const f: number = 0.25
-
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "spinner",
     width: size,
     height: size,
   }),
 )
-
-const PulsingCube = glamorous.div(
-  ({ color, theme }: { theme: Theme; color?: string }): CssStatic => {
-    const backgroundColor: string = expandColor(theme, color) || theme.colors.info
+const PulsingCube = styled("div")(
+  ({ color, theme }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }): CssStatic => {
+    const backgroundColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
       backgroundColor,
       fontSize: 0,
