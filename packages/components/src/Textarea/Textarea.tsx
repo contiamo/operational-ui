@@ -1,41 +1,54 @@
 import * as React from "react"
-import glamorous, { CSSProperties } from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Label, LabelText, FormFieldControls, FormFieldControl, FormFieldError, inputFocus } from "../utils/mixins"
 import { Icon, Tooltip } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Controlled value of the field */
+
   value: string
   /** Label of the field */
+
   label?: string
   /** OnChange handler */
+
   onChange?: (val: string) => void
   /** Change the font to monospace to better display of code */
+
   code?: boolean
   /** Text for a hint */
+
   hint?: string
   /** Error text */
+
   error?: string
   /** Is it disabled? */
+
   disabled?: boolean
 }
 
-const numericalHeight = (css: Css, theme: Theme): number | null => {
-  const workingCss = typeof css === "function" ? css({ theme }) : css
+const numericalHeight = (css: Css, theme?: OperationalStyleConstants & { deprecated: Theme }): number | null => {
+  const workingCss =
+    typeof css === "function"
+      ? css({
+          theme,
+        })
+      : css
+
   if (!workingCss.height || typeof workingCss.height !== "number") {
     return null
   }
+
   return workingCss.height
 }
 
-const TextareaComp = glamorous.textarea(
+const TextareaComp = styled("textarea")(
   ({
     theme,
     isCode,
@@ -43,7 +56,7 @@ const TextareaComp = glamorous.textarea(
     css_,
     disabled,
   }: {
-    theme: Theme
+    theme?: OperationalStyleConstants & { deprecated: Theme }
     isCode: boolean
     isError: boolean
     css_: Css
@@ -51,17 +64,24 @@ const TextareaComp = glamorous.textarea(
   }): CssStatic => {
     const numericalHeightSetting = numericalHeight(css_, theme)
     return {
-      ...theme.typography.body,
+      ...theme.deprecated.typography.body,
       display: "block",
       width: "100%",
       minHeight: 120,
-      ...(numericalHeightSetting === null ? {} : { height: numericalHeightSetting - 20 }),
+      ...(numericalHeightSetting === null
+        ? {}
+        : {
+            height: numericalHeightSetting - 20,
+          }),
       borderRadius: 4,
-      borderColor: isError ? theme.colors.error : theme.colors.inputBorder,
-      padding: `${theme.spacing / 2}px ${(theme.spacing * 2) / 3}px`,
+      borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.inputBorder,
+      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
       fontFamily: isCode ? "monospace" : "inherit",
       opacity: disabled ? 0.6 : 1.0,
-      ":focus": inputFocus({ theme, isError }),
+      ":focus": inputFocus({
+        theme,
+        isError,
+      }),
     }
   },
 )
@@ -74,15 +94,21 @@ const Textarea = (props: Props) => {
         {props.hint ? (
           <FormFieldControl>
             <Icon name="HelpCircle" size={14} />
-            <Tooltip right css={{ minWidth: 100, width: "fit-content" }}>
+            <Tooltip
+              right
+              css={{
+                minWidth: 100,
+                width: "fit-content",
+              }}
+            >
               {props.hint}
             </Tooltip>
           </FormFieldControl>
         ) : null}
       </FormFieldControls>
       {/* The prop `css_` is used because the prop is used merely for some computation inside the
-          * glamorous component as opposed to as actual styles to be injected into the component.
-          */}
+         * glamorous component as opposed to as actual styles to be injected into the component.
+         */}
       <TextareaComp
         css_={props.css || {}}
         disabled={Boolean(props.disabled)}

@@ -1,31 +1,29 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   /** Is the switch on? */
+
   on: boolean
   /** A change handler. Passes the new `on` boolean */
+
   onChange?: (on: boolean) => void
   className?: string
 }
-
 export interface StyleProps {
   on: boolean
-  theme: Theme
+  theme?: OperationalStyleConstants & { deprecated: Theme }
 }
-
 const width: number = 28
 const height: number = 16
 const railHeight: number = 16
 const railOffset: number = 8
-
-const Container = glamorous.div({
+const Container = styled("div")({
   width,
   height,
   label: "switch",
@@ -34,8 +32,7 @@ const Container = glamorous.div({
   overflow: "hidden",
   cursor: "pointer",
 })
-
-const Button = glamorous.div(
+const Button = styled("div")(
   {
     height,
     transition: "transform .3s",
@@ -48,13 +45,12 @@ const Button = glamorous.div(
   },
   ({ on, theme }: StyleProps): CssStatic => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
-    backgroundColor: theme.colors.white,
-    border: `1px solid ${on ? theme.colors.info : theme.colors.gray}`,
-    zIndex: theme.baseZIndex + 2,
+    backgroundColor: theme.deprecated.colors.white,
+    border: `1px solid ${on ? theme.deprecated.colors.info : theme.deprecated.colors.gray}`,
+    zIndex: theme.deprecated.baseZIndex + 2,
   }),
 )
-
-const Rail = glamorous.div(
+const Rail = styled("div")(
   {
     width,
     height: railHeight,
@@ -66,8 +62,8 @@ const Rail = glamorous.div(
     overflow: "hidden",
   },
   ({ on, theme }: StyleProps): CssStatic => ({
-    backgroundColor: theme.colors.gray,
-    zIndex: theme.baseZIndex,
+    backgroundColor: theme.deprecated.colors.gray,
+    zIndex: theme.deprecated.baseZIndex,
     "&:after": {
       content: " ",
       position: "absolute",
@@ -75,10 +71,10 @@ const Rail = glamorous.div(
       height: "100%",
       top: 0,
       left: -height / 2,
-      backgroundColor: theme.colors.info,
+      backgroundColor: theme.deprecated.colors.info,
       transition: "transform .3s",
       transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
-      zIndex: theme.baseZIndex - 1,
+      zIndex: theme.deprecated.baseZIndex - 1,
     },
   }),
 )

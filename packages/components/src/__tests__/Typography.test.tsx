@@ -1,8 +1,6 @@
 import * as React from "react"
-
 import { Title, Heading1, Heading2, Body, Small } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
-
 describe("Timeline", () => {
   it("Title should render properly", () => {
     expect(React.createElement(wrapDefaultTheme(Title))).toMatchSnapshot()

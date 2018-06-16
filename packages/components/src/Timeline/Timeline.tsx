@@ -1,18 +1,15 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-
-import { WithTheme, Css, CssStatic } from "../types"
-
+import styled from "react-emotion"
+import { Css } from "../types"
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   children: React.ReactNode
 }
-
-const Container = glamorous.ul({
+const Container = styled("ul")({
   label: "timeline",
   listStyle: "none",
   padding: "0",

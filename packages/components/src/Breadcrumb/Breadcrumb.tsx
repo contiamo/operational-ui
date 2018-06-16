@@ -1,17 +1,16 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
-
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 import { isModifiedEvent } from "../utils"
-
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Navigation property à la react-router <Link/> */
+
   to?: string
   children?: React.ReactNode
   icon?: IconName | React.ReactNode
@@ -23,23 +22,21 @@ const containerStyles = ({ theme }: WithTheme): CssStatic => ({
     marginLeft: 4,
   },
   "a&": {
-    color: theme.colors.linkText,
+    color: theme.deprecated.colors.linkText,
     borderBottom: "1px solid currentColor",
     "&:hover": {
-      color: darken(theme.colors.linkText, 5),
+      color: darken(theme.deprecated.colors.linkText, 5),
     },
   },
 })
 
-const Container = glamorous.span(containerStyles)
-
-const ContainerLink = glamorous.a(containerStyles)
-
-const Content = glamorous.span(({ theme }: WithTheme): CssStatic => ({}))
+const Container = styled("span")(containerStyles)
+const ContainerLink = styled("a")(containerStyles)
+const Content = styled("span")(({ theme }: WithTheme): CssStatic => ({}))
 
 const Breadcrumb = (props: Props) => {
   const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as IconName) : "ChevronDown"
-  const ContainerComponent = props.to ? ContainerLink : Container
+  const ContainerComponent: any = props.to ? ContainerLink : Container
   return (
     <ContextConsumer>
       {(ctx: Context) => (

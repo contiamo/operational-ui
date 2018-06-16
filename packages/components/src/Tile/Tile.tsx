@@ -1,41 +1,37 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   id?: string
   /** The label of the tile */
+
   label?: string
   children: React.ReactNode
 }
-
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "infotile",
-    borderRadius: theme.borderRadius,
+    borderRadius: theme.deprecated.borderRadius,
     width: 120,
     position: "relative",
-    marginRight: theme.spacing,
-    padding: `${theme.spacing / 2}px ${theme.spacing}px`,
-    backgroundColor: theme.colors.lighterBackground,
+    marginRight: theme.deprecated.spacing,
+    padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing}px`,
+    backgroundColor: theme.deprecated.colors.lighterBackground,
   }),
 )
-
-const Content = glamorous.div(
+const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading1,
+    ...theme.deprecated.typography.heading1,
   }),
 )
-
-const Label = glamorous.small(
+const Label = styled("small")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.small,
+    ...theme.deprecated.typography.small,
     opacity: 0.8,
   }),
 )

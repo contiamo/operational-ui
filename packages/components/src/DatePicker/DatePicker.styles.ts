@@ -1,79 +1,88 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent, CSSProperties } from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
-
 import { Card } from "../"
 import * as mixins from "../utils/mixins"
 import { inputDefaultWidth } from "../constants"
-
 const inputHeight: number = 33
-
 export interface ContainerProps {
   isExpanded: boolean
 }
-
-export const Container: GlamorousComponent<ContainerProps, ContainerProps & { theme: Theme }> = glamorous.div(
-  ({ isExpanded, theme }): CSSProperties => ({
-    label: "datepicker",
-    width: inputDefaultWidth,
-    position: "relative",
-  }),
-)
-
-export const DatePickerCard = glamorous.div(
+export const Container = styled("div")(({ isExpanded, theme }: any) => ({
+  label: "datepicker",
+  width: inputDefaultWidth,
+  position: "relative",
+}))
+export const DatePickerCard = styled("div")(
   {
     position: "absolute",
     left: 0,
   },
-  ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): CSSProperties => ({
-    backgroundColor: theme.colors.white,
+  ({
+    theme,
+    isExpanded,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    isExpanded: boolean
+  }) => ({
+    backgroundColor: theme.deprecated.colors.white,
     display: isExpanded ? "block" : "none",
-    boxShadow: theme.shadows.popup,
-    borderRadius: theme.borderRadius,
+    boxShadow: theme.deprecated.shadows.popup,
+    borderRadius: theme.deprecated.borderRadius,
     // Push down the card to the bottom of the input field,
     // plus the twice the size of the outside focus shadow.
     top: inputHeight + 6,
-    padding: `${(theme.spacing * 3) / 4}px ${theme.spacing}px ${(theme.spacing * 4) / 3}px`,
+    padding: `${(theme.deprecated.spacing * 3) / 4}px ${theme.deprecated.spacing}px ${(theme.deprecated.spacing * 4) /
+      3}px`,
     width: inputDefaultWidth,
-    zIndex: theme.baseZIndex + 1000,
+    zIndex: theme.deprecated.baseZIndex + 1000,
   }),
 )
-
-export const Toggle: GlamorousComponent<
-  { onClick?: (ev: React.SyntheticEvent<MouseEvent>) => void },
-  {}
-> = glamorous.div(
-  ({ theme }: { theme: Theme }): {} => ({
+export const Toggle = styled("div")(
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     position: "absolute",
     cursor: "pointer",
     top: 1,
     right: 1,
-    borderTopRightRadius: theme.borderRadius,
-    borderBottomRightRadius: theme.borderRadius,
+    borderTopRightRadius: theme.deprecated.borderRadius,
+    borderBottomRightRadius: theme.deprecated.borderRadius,
     width: inputHeight - 2,
     height: inputHeight - 2,
     fontSize: 10,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    zIndex: theme.baseZIndex + 1000,
-    color: theme.colors.inputBorder,
+    zIndex: theme.deprecated.baseZIndex + 1000,
+    color: theme.deprecated.colors.inputBorder,
     borderLeft: "1px solid",
-    borderColor: theme.colors.inputBorder,
+    borderColor: theme.deprecated.colors.inputBorder,
     "& svg": {
       position: "relative",
       pointerEvents: "none",
     },
     ":hover": {
-      backgroundColor: theme.colors.lighterBackground,
+      backgroundColor: theme.deprecated.colors.lighterBackground,
     },
   }),
 )
-
-export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(
-  ({ theme }: { theme: Theme }): {} => ({
-    marginBottom: theme.spacing / 2,
+export const MonthNav = styled("div")(
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
+    marginBottom: theme.deprecated.spacing / 2,
     textAlign: "center",
     "& > *": {
       margin: `0 6px`,
@@ -81,32 +90,26 @@ export const MonthNav: GlamorousComponent<{}, {}> = glamorous.div(
       display: "inline-block",
     },
     "& > span": {
-      ...theme.typography.body,
+      ...theme.deprecated.typography.body,
       userSelect: "none",
       width: 120,
       textAlign: "center",
     },
   }),
 )
-
-export const IconContainer: GlamorousComponent<React.HTMLProps<{}>, {}> = glamorous.div({
+export const IconContainer = styled("div")({
   backgroundColor: "#FFFFFF",
   padding: 4,
   height: "auto",
   width: "fit-content",
   cursor: "pointer",
 })
-
-export const Days: GlamorousComponent<{}, {}> = glamorous.div({
+export const Days = styled("div")({
   textAlign: "center",
   width: 210,
   margin: "auto -1px",
 })
-
-export const Day: GlamorousComponent<
-  { selected?: boolean; isPlaceholder?: boolean } & React.HTMLProps<{}>,
-  {}
-> = glamorous.div(
+export const Day = styled("div")(
   {
     userSelect: "none",
     width: 30,
@@ -119,32 +122,64 @@ export const Day: GlamorousComponent<
     justifyContent: "center",
     border: "1px solid #efefef",
   },
-  ({ theme, selected, isPlaceholder }: { theme: Theme; selected?: boolean; isPlaceholder?: boolean }): {} => ({
-    ...theme.typography.body,
-    backgroundColor: selected ? theme.colors.info : "transparent",
-    color: selected ? theme.colors.white : isPlaceholder ? theme.colors.gray : theme.colors.black,
+  ({
+    theme,
+    selected,
+    isPlaceholder,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    selected?: boolean
+    isPlaceholder?: boolean
+  }): {} => ({
+    ...theme.deprecated.typography.body,
+    backgroundColor: selected ? theme.deprecated.colors.info : "transparent",
+    color: selected
+      ? theme.deprecated.colors.white
+      : isPlaceholder
+        ? theme.deprecated.colors.gray
+        : theme.deprecated.colors.black,
   }),
 )
-
-export const Input = glamorous.input(
-  ({ theme, isExpanded }: { theme: Theme; isExpanded: boolean }): {} => ({
-    ...theme.typography.body,
+export const Input = styled("input")(
+  ({
+    theme,
+    isExpanded,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    isExpanded: boolean
+  }): {} => ({
+    ...theme.deprecated.typography.body,
     userSelect: "none",
-    borderRadius: theme.borderRadius,
-    padding: (theme.spacing * 2) / 3,
+    borderRadius: theme.deprecated.borderRadius,
+    padding: (theme.deprecated.spacing * 2) / 3,
     height: inputHeight,
     cursor: "pointer",
     border: "1px solid",
     borderColor: "rgb(208, 217, 229)",
     width: 200,
     position: "relative",
-    "&:focus": mixins.inputFocus({ theme }),
-    ...(isExpanded ? mixins.inputFocus({ theme }) : {}),
+    "&:focus": mixins.inputFocus({
+      theme,
+    }),
+    ...(isExpanded
+      ? mixins.inputFocus({
+          theme,
+        })
+      : {}),
   }),
 )
-
-export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => void }, {}> = glamorous.div(
-  ({ theme }: { theme: Theme }): {} => ({
+export const ClearButton = styled("div")(
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     width: inputHeight,
     height: inputHeight,
     cursor: "pointer",
@@ -156,11 +191,11 @@ export const ClearButton: GlamorousComponent<{ onClick?: (ev: MouseEvent) => voi
     right: -inputHeight + 1,
     opacity: 0.3,
     textAlign: "center",
-    zIndex: theme.baseZIndex + 100,
+    zIndex: theme.deprecated.baseZIndex + 100,
     "&:hover": {
       opacity: 1,
       "& svg": {
-        stroke: theme.colors.warning,
+        stroke: theme.deprecated.colors.warning,
       },
     },
   }),

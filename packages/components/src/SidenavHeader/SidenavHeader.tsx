@@ -1,44 +1,50 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme, expandColor } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { fadeIn } from "@operational/utils"
-
 import { deprecate, isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Main label for the header */
+
   label: string | React.ReactNode
   /** Navigation property à la react-router <Link/> */
+
   to?: string
   /**
    * Specifies an icon to render on the left of the label
    *
    * @deprecated this prop is ignored as per design decision
    */
+
   icon?: IconName | React.ReactNode
   /** Color used in highlights and the side strip (hex or named color from `theme.colors`) */
+
   color?: string
   /** Active state - renders colored strip on the left */
+
   active?: boolean
   /**
    * Expanded state
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
+
   expanded?: boolean
   /** Click handler */
+
   onClick?: () => void
   /** Close handler (via chevron button on the top right) */
+
   onClose?: () => void
   children?: React.ReactNode
 }
-
 export interface State {
   isOpen: boolean
 }
@@ -48,11 +54,11 @@ const containerStyles = ({
   color,
   isActive,
 }: {
-  theme: Theme
+  theme?: OperationalStyleConstants & { deprecated: Theme }
   color?: string
   isActive: boolean
 }): CssStatic => {
-  const stripColor: string = expandColor(theme, color) || theme.colors.info
+  const stripColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
   return {
     label: "sidenavheader",
     textDecoration: "none",
@@ -61,7 +67,8 @@ const containerStyles = ({
     borderBottom: "1px solid",
     borderLeft: "4px solid",
     borderLeftColor: isActive ? stripColor : "transparent",
-    borderBottomColor: theme.colors.separator,
+    borderBottomColor: theme.deprecated.colors.separator,
+
     /** @todo Add to theme once colors are updated across codebase */
     backgroundColor: isActive ? "#F8F8F8" : "transparent",
     ":hover": {
@@ -70,12 +77,16 @@ const containerStyles = ({
   }
 }
 
-const Container = glamorous.div(containerStyles)
-
-const ContainerLink = glamorous.a(containerStyles)
-
-const Content = glamorous.div(
-  ({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
+const Container = styled("div")(containerStyles)
+const ContainerLink = styled("a")(containerStyles)
+const Content = styled("div")(
+  ({
+    theme,
+    isActive,
+  }: {
+    theme?: OperationalStyleConstants & { deprecated: Theme }
+    isActive: boolean
+  }): CssStatic => ({
     textDecoration: "none",
     cursor: "pointer",
     position: "relative",
@@ -84,8 +95,8 @@ const Content = glamorous.div(
     justifyContent: "flex-start",
     overflow: "hidden",
     width: "100%",
-    height: theme.box,
-    padding: `0 ${theme.spacing}px`,
+    height: theme.deprecated.box,
+    padding: `0 ${theme.deprecated.spacing}px`,
     color: "#333333",
     fontWeight: 500,
     letterSpacing: 0.25,
@@ -94,36 +105,33 @@ const Content = glamorous.div(
     whiteSpace: "nowrap",
   }),
 )
-
-const ItemsContainer = glamorous.div(
-  ({ theme }: { theme: Theme }): {} => ({
+const ItemsContainer = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
     position: "relative",
-    top: -theme.spacing,
+    top: -theme.deprecated.spacing,
   }),
 )
-
-const CloseButton = glamorous.div(
-  ({ theme }: { theme: Theme }): {} => ({
+const CloseButton = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
     position: "absolute",
     cursor: "pointer",
     display: "none",
     alignItems: "center",
     justifyContent: "center",
-    width: theme.spacing * 1.5,
-    height: theme.spacing * 1.5,
-    top: theme.spacing * 1.5,
-    right: theme.spacing,
-    color: theme.colors.info,
+    width: theme.deprecated.spacing * 1.5,
+    height: theme.deprecated.spacing * 1.5,
+    top: theme.deprecated.spacing * 1.5,
+    right: theme.deprecated.spacing,
+    color: theme.deprecated.colors.info,
     ".op_sidenavheader:hover &": {
       display: "flex",
     },
     "& svg": {
-      width: theme.spacing,
-      height: theme.spacing,
+      width: theme.deprecated.spacing,
+      height: theme.deprecated.spacing,
     },
   }),
 )
-
 export class SidenavHeader extends React.Component<Props, State> {
   state = {
     isOpen: false,
@@ -133,8 +141,8 @@ export class SidenavHeader extends React.Component<Props, State> {
     const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
     const isActive = Boolean(
       this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`)),
-    )
-    // Actual `to` prop should invalidate if the element has sublinks and is active
+    ) // Actual `to` prop should invalidate if the element has sublinks and is active
+
     const to = isActive && hasChildLinks ? undefined : this.props.to
     const ContainerComponent = to ? ContainerLink : Container
     return (
@@ -153,9 +161,10 @@ export class SidenavHeader extends React.Component<Props, State> {
                 this.setState(prevState => ({
                   isOpen: !prevState.isOpen,
                 }))
+
                 if (!isModifiedEvent(ev) && ctx.pushState && this.props.to) {
-                  ev.preventDefault()
-                  // Even if the `props.to` prop was ignored, redirect should still happen here
+                  ev.preventDefault() // Even if the `props.to` prop was ignored, redirect should still happen here
+
                   ctx.pushState(this.props.to)
                 }
               }}
@@ -184,7 +193,6 @@ export class SidenavHeader extends React.Component<Props, State> {
     )
   }
 }
-
 export default deprecate<Props>(
   props =>
     props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : [],

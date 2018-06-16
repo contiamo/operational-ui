@@ -1,68 +1,67 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { spin } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Is it open? */
+
   open?: boolean
   /** Toggle callback */
+
   onToggle?: () => void
   /** Header label */
+
   label?: string
   children?: React.ReactNode
 }
-
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "sidebarheader",
     position: "relative",
   }),
 )
-
-const Content = glamorous.div(
+const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     position: "relative",
-    paddingLeft: theme.spacing * 1,
+    paddingLeft: theme.deprecated.spacing * 1,
     "::after": {
       content: "' '",
       position: "absolute",
       width: 1,
       height: "100%",
       top: 0,
-      left: theme.spacing * 1,
+      left: theme.deprecated.spacing * 1,
       borderLeft: "1px solid",
-      borderColor: theme.colors.separator,
+      borderColor: theme.deprecated.colors.separator,
     },
   }),
 )
-
-const Header = glamorous.div(
-  ({ theme, isOpen }: { theme: Theme; isOpen: boolean }): CssStatic => ({
+const Header = styled("div")(
+  ({ theme, isOpen }: { theme?: OperationalStyleConstants & { deprecated: Theme }; isOpen: boolean }): CssStatic => ({
     position: "relative",
     display: "flex",
     height: 30,
     alignItems: "center",
-    padding: `0px ${theme.spacing}px`,
+    padding: `0px ${theme.deprecated.spacing}px`,
     borderBottom: "1px solid",
-    borderBottomColor: theme.colors.separator,
+    borderBottomColor: theme.deprecated.colors.separator,
     cursor: "pointer",
     outline: "none",
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.deprecated.colors.white,
     ...(isOpen
       ? {
           borderBottom: "1px solid",
-          borderBottomColor: theme.colors.separator,
+          borderBottomColor: theme.deprecated.colors.separator,
         }
       : {}),
     "&:hover": {
-      backgroundColor: theme.colors.lighterBackground,
+      backgroundColor: theme.deprecated.colors.lighterBackground,
     },
     "&::after": {
       content: "' '",
@@ -71,7 +70,7 @@ const Header = glamorous.div(
       height: 0,
       marginLeft: "auto",
       border: "4px solid transparent",
-      borderLeftColor: theme.colors.lightGray,
+      borderLeftColor: theme.deprecated.colors.lightGray,
       transition: ".15s transform ease",
       transform: isOpen ? "translate3d(-2px, 1px, 0) rotate(90deg)" : null,
     },

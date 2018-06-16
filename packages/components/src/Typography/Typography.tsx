@@ -1,47 +1,40 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
-
-const Title: GlamorousComponent<{}, {}> = glamorous.h1(
+const Title = styled("h1")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.title,
-    margin: `${theme.spacing}px 0`,
+    ...theme.deprecated.typography.title,
+    margin: `${theme.deprecated.spacing}px 0`,
     label: "titletype",
   }),
 )
-
-const Heading1: GlamorousComponent<{}, {}> = glamorous.h1(
+const Heading1 = styled("h1")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading1,
-    margin: `${theme.spacing / 2}px 0`,
+    ...theme.deprecated.typography.heading1,
+    margin: `${theme.deprecated.spacing / 2}px 0`,
     label: "heading1type",
   }),
 )
-
-const Heading2: GlamorousComponent<{}, {}> = glamorous.h2(
+const Heading2 = styled("h2")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading2,
-    margin: `${theme.spacing / 2}px 0`,
+    ...theme.deprecated.typography.heading2,
+    margin: `${theme.deprecated.spacing / 2}px 0`,
     label: "heading2type",
   }),
 )
-
-const Body: GlamorousComponent<{}, {}> = glamorous.p(
+const Body = styled("p")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.body,
-    margin: `${theme.spacing / 4}px 0`,
+    ...theme.deprecated.typography.body,
+    margin: `${theme.deprecated.spacing / 4}px 0`,
     label: "bodytype",
   }),
 )
-
-const Small: GlamorousComponent<{}, {}> = glamorous.p(
+const Small = styled("p")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.small,
-    margin: `${theme.spacing / 4}px 0`,
+    ...theme.deprecated.typography.small,
+    margin: `${theme.deprecated.spacing / 4}px 0`,
     label: "smalltype",
   }),
 )
-
 export { Title, Heading1, Heading2, Body, Small }

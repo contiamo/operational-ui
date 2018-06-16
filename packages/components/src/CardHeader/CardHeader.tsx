@@ -1,27 +1,28 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: any
   className?: string
   /** Children, typically a single string serving as a title. A controls element such as a condensed works well as a second child. */
+
   children?: React.ReactNode
 }
-
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading1,
+    ...theme.deprecated.typography.heading1,
     fontSize: 14,
     label: "cardheader",
     display: "flex",
     alignItems: "center",
+
     /** @todo Add to theme once colors are updated across codebase */
     backgroundColor: "#F8F8F8",
+
     /** @todo Add to theme once colors are updated across codebase */
     color: "#747474",
     // This ensures that the card header text and card controls are placed in opposite corners.

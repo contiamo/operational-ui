@@ -1,88 +1,91 @@
 import * as React from "react"
-import glamorous, { CSSProperties, Div } from "glamorous"
-import { Theme, expandColor } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { readableTextColor, getInitials } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   /** Name of the person */
   name: string
   /** Title of the person */
+
   title?: string
   /** Optionally display the name and title next to the avatar circle */
+
   showName?: boolean
   /** Hide initials from inside the avatar circle. Set automatically if a `photo` prop is set */
+
   hideInitials?: boolean
   /** A URL to an image of the person */
+
   photo?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   /** Class name */
+
   className?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
+
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
+
   assignColor?: boolean
   children?: React.ReactNode
   onClick?: () => void
 }
-
-const Container = glamorous.div({
+const Container = styled("div")({
   label: "avatar",
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-start",
 })
-
-const NameContainer = glamorous.div(
+const NameContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.body,
+    ...theme.deprecated.typography.body,
     display: "block",
   }),
 )
-
-const Name = glamorous.div(
-  ({ theme }: { theme: Theme }): CssStatic => ({
-    ...theme.typography.body,
+const Name = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+    ...theme.deprecated.typography.body,
     margin: 0,
   }),
 )
-
-const Title = glamorous.div(
-  ({ theme }: { theme: Theme }): CssStatic => ({
-    ...theme.typography.body,
-    color: theme.colors.gray,
+const Title = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+    ...theme.deprecated.typography.body,
+    color: theme.deprecated.colors.gray,
     margin: 0,
   }),
 )
-
-const Picture = glamorous.div(
+const Picture = styled("div")(
   ({
     theme,
     color,
     colorAssignment,
     photo,
   }: {
-    theme: Theme
+    theme?: OperationalStyleConstants & { deprecated: Theme }
     color?: string
     colorAssignment?: number
     photo?: string
   }): {} => {
-    const defaultColor: string = theme.colors.info
-    const fixedBackgroundColor: string = color ? expandColor(theme, color) || defaultColor : defaultColor
+    const defaultColor: string = theme.deprecated.colors.info
+    const fixedBackgroundColor: string = color ? expandColor(theme.deprecated, color) || defaultColor : defaultColor
     const assignedBackgroundColor: null | string = colorAssignment
-      ? theme.colors.visualizationPalette[colorAssignment % theme.colors.visualizationPalette.length]
+      ? theme.deprecated.colors.visualizationPalette[
+          colorAssignment % theme.deprecated.colors.visualizationPalette.length
+        ]
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
-    const textColor = readableTextColor(backgroundColor, [theme.colors.text, "white"])
-
+    const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.text, "white"])
     return {
       fontSize: 9,
       textTransform: "uppercase",
-      marginRight: theme.spacing * 0.5, // use for offset the display name
-      width: theme.spacing * 2,
-      height: theme.spacing * 2,
+      marginRight: theme.deprecated.spacing * 0.5,
+      // use for offset the display name
+      width: theme.deprecated.spacing * 2,
+      height: theme.deprecated.spacing * 2,
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
@@ -92,9 +95,12 @@ const Picture = glamorous.div(
             background: `url(${photo})`,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
-            color: theme.colors.white,
+            color: theme.deprecated.colors.white,
           }
-        : { backgroundColor, color: textColor }),
+        : {
+            backgroundColor,
+            color: textColor,
+          }),
     }
   },
 )
@@ -132,5 +138,4 @@ Avatar.defaultProps = {
   assignColor: true,
   onClick: () => ({}),
 }
-
 export default Avatar

@@ -1,26 +1,26 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Progress } from "../"
 import { Props as SidenavProps } from "../Sidenav/Sidenav"
 import { sidenavExpandedWidth } from "../constants"
-
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
   className?: string
   /** Side navigation, see `Sidenav` component */
+
   sidenav?: React.ReactNode
   /** Main content, see `Page` component */
+
   main?: React.ReactNode
   /** Sets whether a loading progress bar should be rendered */
+
   loading?: boolean
 }
-
-const Container = glamorous.div(
-  ({ theme }: { theme: Theme }): CssStatic => ({
+const Container = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
     label: "Layout",
     position: "relative",
     height: "100%",
@@ -44,17 +44,17 @@ const Container = glamorous.div(
     },
   }),
 )
-
-const Main = glamorous.div(
+const Main = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "layout-main",
     display: "block",
     height: "100%",
     overflow: "auto",
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.deprecated.colors.white,
   }),
 )
-const Div = glamorous.div()
+const Div = styled("div")()
+
 const Layout = (props: Props) => {
   /* 
    * This placeholder element is added to the dom in case there is no
@@ -63,7 +63,13 @@ const Layout = (props: Props) => {
    * Absolute positioning is required to remove it from document flow
    * so that it doesn't affect the grid.
    */
-  const cssPlaceholder = <Div css={{ position: "absolute" }} />
+  const cssPlaceholder = (
+    <Div
+      css={{
+        position: "absolute",
+      }}
+    />
+  )
   return (
     <Container css={props.css} className={props.className}>
       {props.loading ? <Progress /> : cssPlaceholder}

@@ -1,30 +1,30 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
 import { WithTheme, Css, CssStatic } from "../types"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** `css` prop for the content inside the backdrop */
+
   contentCss?: Css
   /** Content class name */
+
   contentClassName?: string
   /** Children */
+
   children: React.ReactNode
   onClose?: () => void
 }
-
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "modal",
     position: "fixed",
     top: 0,
     left: 0,
-    zIndex: theme.baseZIndex + 100,
+    zIndex: theme.deprecated.baseZIndex + 100,
     width: "100vw",
     height: "100vh",
     display: "flex",
@@ -33,17 +33,17 @@ const Container = glamorous.div(
     backgroundColor: "rgba(0, 0, 0, .6)",
   }),
 )
-
-const Content = glamorous.div(
+const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
-    backgroundColor: theme.colors.white,
-    padding: theme.spacing,
-    boxShadow: theme.shadows.popup,
+    backgroundColor: theme.deprecated.colors.white,
+    padding: theme.deprecated.spacing,
+    boxShadow: theme.deprecated.shadows.popup,
   }),
 )
 
 class Modal extends React.Component<Props, {}> {
   contentNode: any
+
   render() {
     return (
       <Container

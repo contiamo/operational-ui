@@ -1,32 +1,38 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
+import styled from "react-emotion"
 import { readableTextColor, darken, lighten } from "@operational/utils"
-import { Theme, expandColor } from "@operational/theme"
-
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { isWhite, isModifiedEvent } from "../utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { ContextConsumer, Context } from "../"
 import Spinner from "../Spinner/Spinner"
-
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Invoked when you click on the button */
+
   onClick?: () => void
   type?: string
   /** Navigation property à la react-router <Link/> */
+
   to?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
+
   color?: string
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
+
   loading?: boolean
   /** Active state */
+
   active?: boolean
   /** Disabled option */
+
   disabled?: boolean
   /** Condensed option */
+
   condensed?: boolean
   children?: React.ReactNode
 }
@@ -39,64 +45,61 @@ const containerStyles = ({
   condensed,
   loading,
 }: {
-  theme: Theme
+  theme?: OperationalStyleConstants & { deprecated: Theme }
   color?: string
   active?: boolean
   disabled?: boolean
   condensed?: boolean
   loading?: boolean
 }): CssStatic => {
-  const defaultColor: string = theme.colors.white
-  const backgroundColor: string = expandColor(theme, color) || defaultColor
+  const defaultColor: string = theme.deprecated.colors.white
+  const backgroundColor: string = expandColor(theme.deprecated, color) || defaultColor
   const activeBackgroundColor: string = darken(backgroundColor, 5)
-  const foregroundColor = readableTextColor(backgroundColor, [theme.colors.text, "white"])
-  const spacing = theme.spacing
-
+  const foregroundColor = readableTextColor(backgroundColor, [theme.deprecated.colors.text, "white"])
+  const spacing = theme.deprecated.spacing
   return {
     label: "button",
-    ...theme.typography.body,
+    ...theme.deprecated.typography.body,
     display: "inline-block",
     padding: condensed ? `${spacing / 8}px ${spacing / 2}px` : `${spacing * 0.375}px ${spacing * 1.5}px`,
-    borderRadius: theme.borderRadius,
+    borderRadius: theme.deprecated.borderRadius,
     border: "1px solid",
-    borderColor: isWhite(backgroundColor) ? theme.colors.gray : active ? activeBackgroundColor : backgroundColor,
+    borderColor: isWhite(backgroundColor)
+      ? theme.deprecated.colors.gray
+      : active
+        ? activeBackgroundColor
+        : backgroundColor,
     cursor: disabled ? "auto" : "pointer",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
     position: "relative",
-
     // Apply styles with increased specificity to override defaults
     "&, a:link&, a:visited&": {
       textDecoration: "none",
       color: loading ? "transparent" : foregroundColor,
     },
-
     "& .op_button-spinner": {
       color: foregroundColor,
     },
-
     ...(!disabled
       ? {
           ":hover": {
             backgroundColor: activeBackgroundColor,
             color: loading ? "transparent" : readableTextColor(activeBackgroundColor, ["white", "#222"]),
           },
-
           ":focus": {
             outline: 0,
             boxShadow: `0 0 0 3px ${lighten(backgroundColor, 35)}`,
           },
         }
       : {}),
-
     marginRight: spacing / 2,
   }
 }
 
-const Container = glamorous.button(containerStyles)
-
-const ContainerLink = glamorous.a(containerStyles)
+const Container = styled("button")(containerStyles)
+const ContainerLink = styled("a")(containerStyles)
 
 const Button = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
@@ -114,7 +117,9 @@ const Button = (props: Props) => {
               ev.preventDefault()
               return
             }
+
             props.onClick && props.onClick()
+
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
               ev.preventDefault()
               ctx.pushState(props.to)

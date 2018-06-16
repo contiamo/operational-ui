@@ -1,11 +1,9 @@
 import * as React from "react"
-import glamorous, { withTheme, GlamorousComponent } from "glamorous"
-import { Theme, expandColor } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
-
 import { Icon } from "../"
 import { CssStatic } from "../types"
-
 export interface Props {
   id?: number | string
   css?: any
@@ -14,45 +12,47 @@ export interface Props {
   onClick?: () => void
   children?: React.ReactNode
 }
-
-const Container = glamorous.div(
-  ({ theme, selected }: { theme: Theme; selected: boolean }): CssStatic => {
-    const backgroundColor = selected ? theme.colors.background : theme.colors.white
-
+const Container = styled("div")(
+  ({
+    theme,
+    selected,
+  }: {
+    theme?: OperationalStyleConstants & { deprecated: Theme }
+    selected: boolean
+  }): CssStatic => {
+    const backgroundColor = selected ? theme.deprecated.colors.background : theme.deprecated.colors.white
     return {
       backgroundColor,
       label: "selectoption",
       position: "relative",
-      padding: `${theme.spacing / 2}px ${(theme.spacing * 3) / 4}px`,
+      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 3) / 4}px`,
       wordWrap: "break-word",
       outline: "none",
       borderTop: "1px solid",
-      borderColor: darken(theme.colors.background, 10),
-
+      borderColor: darken(theme.deprecated.colors.background, 10),
       ":hover": {
-        backgroundColor: darken(theme.colors.background, 5),
+        backgroundColor: darken(theme.deprecated.colors.background, 5),
       },
     }
   },
 )
-
-const IconContainer = glamorous.div(
-  ({ theme }: { theme: Theme }): CssStatic => ({
+const IconContainer = styled("div")(
+  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: theme.spacing * 1.25,
-    height: theme.spacing * 1.25,
-    backgroundColor: theme.colors.info,
+    width: theme.deprecated.spacing * 1.25,
+    height: theme.deprecated.spacing * 1.25,
+    backgroundColor: theme.deprecated.colors.info,
     position: "absolute",
     top: "50%",
     right: 4,
     borderRadius: "50%",
     transform: "translate3d(0, -50%, 0)",
     "& svg": {
-      color: theme.colors.white,
-      width: theme.spacing * 0.75,
-      height: theme.spacing * 0.75,
+      color: theme.deprecated.colors.white,
+      width: theme.deprecated.spacing * 0.75,
+      height: theme.deprecated.spacing * 0.75,
     },
   }),
 )
