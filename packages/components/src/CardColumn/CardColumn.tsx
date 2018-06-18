@@ -1,54 +1,34 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent, withTheme } from "glamorous"
-import { Theme } from "@operational/theme"
-
-import { WithTheme, Css, CssStatic } from "../types"
+import styled from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 
 export interface Props {
-  /** DOM id attribute, useful for hash linking */
-  id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
-  className?: string
-  children?: React.ReactNode
   /** Column title */
   title?: string
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "card-column",
-    flex: "1 0 auto",
-    paddingTop: theme.spacing,
-    paddingBottom: theme.spacing,
-    paddingLeft: theme.spacing * 2,
-    paddingRight: theme.spacing * 2,
-    "& > img": {
-      maxWidth: "100%",
-    },
-    "&:first-child": {
-      paddingLeft: 0,
-    },
-    "&:last-child": {
-      paddingRight: 0,
-    },
-  }),
-)
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  label: "card-column",
+  minWidth: 280 / 2,
+  padding: theme.space.element / 2,
+  flex: "1 0",
+  " img": {
+    maxWidth: "100%",
+  },
+}))
 
-const Title = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading1,
-    color: "#545454",
-    fontSize: 14,
-    borderBottom: "1px solid #e8e8e8",
-    marginBottom: theme.spacing,
-  }),
-)
+const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  fontFamily: theme.font.family.main,
+  color: theme.color.text.default,
+  fontSize: 14,
+  borderBottom: `1px solid ${theme.color.separators.default}`,
+  marginBottom: theme.space.content,
+}))
 
-const CardColumn = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
-    {props.title && <Title>{props.title}</Title>}
-    {props.children}
+const CardColumn: React.SFC<Props> = ({ title, children, ...props }) => (
+  <Container {...props}>
+    {title && <Title>{title}</Title>}
+    {children}
   </Container>
 )
 

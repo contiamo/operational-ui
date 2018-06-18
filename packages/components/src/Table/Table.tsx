@@ -1,5 +1,5 @@
 import * as React from "react"
-import styled, { css } from "react-emotion"
+import styled from "react-emotion"
 import { OperationalStyleConstants } from "@operational/theme"
 
 export interface Props {

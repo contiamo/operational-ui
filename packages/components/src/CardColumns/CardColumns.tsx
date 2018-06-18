@@ -1,29 +1,14 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 
-import { WithTheme, Css, CssStatic } from "../types"
-
-export interface Props {
-  /** DOM id attribute, useful for hash linking */
-  id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
-  className?: string
-  children?: React.ReactNode
-}
-
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    display: "flex",
-    justifyContent: "flex-start",
-  }),
-)
-
-const CardColumn = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
-    {props.children}
-  </Container>
-)
+const CardColumn = styled("div")(({ children, theme }: React.Props<{}> & { theme?: OperationalStyleConstants }) => ({
+  display: "flex",
+  flexWrap: "wrap",
+  margin: -(theme.space.element / 2),
+  "& > *": {
+    flexBasis: `${React.Children.count(children)}%`,
+  },
+}))
 
 export default CardColumn

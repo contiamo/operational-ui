@@ -1,46 +1,60 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-import { CardHeader } from "../index"
+import styled from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
+import { CardHeader, CardItem } from "../"
 
-import { WithTheme, Css, CssStatic } from "../types"
-
-export interface Props {
-  /** DOM id attribute, useful for hash linking */
-  id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
-  className?: string
-  children?: React.ReactNode
+export interface Props<T = {}> {
+  /** Any object to show. The key is the title of the data. */
+  data?: T
+  /**  A function to format keys of `data` */
+  keyFormatter?: (key: string) => string
+  /** A key-value object to format values of `data`. */
+  valueFormatters?: { [P in Extract<keyof T, string>]?: (value: string) => React.ReactNode }
+  /** An ordered array to pick only some keys to display  */
+  keys?: (Extract<keyof T, string>)[]
+  /** Title of the card */
+  title?: React.ReactNode
   /** Component containing buttons/links/actions assigned to the card */
   action?: React.ComponentType
-  /** Shortcut for adding a title to the card header */
-  title?: string
+  /** DOM id attribute, useful for hash linking */
+  id?: string
+  className?: string
+  children?: React.ReactNode
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "card",
-    borderTop: "1px solid #ececec",
-    padding: 20,
-    boxShadow: theme.shadows.card,
-    backgroundColor: theme.colors.white,
-    "& > img": {
-      maxWidth: "100%",
-    },
-  }),
-)
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  label: "card",
+  borderTop: `1px solid ${theme.color.separators.light}`,
+  padding: 20,
+  boxShadow: `0px 1px 5px #d3d1d1`,
+  backgroundColor: theme.color.white,
+  "& > img": {
+    maxWidth: "100%",
+  },
+}))
 
-const Card = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
-    {(props.title || props.action) && (
-      <CardHeader>
-        {props.title && props.title}
-        {props.action && <div>{<props.action />}</div>}
-      </CardHeader>
-    )}
-    {props.children}
-  </Container>
-)
+class Card<T = {}> extends React.PureComponent<Props<T>> {
+  static defaultProps = {
+    keyFormatter: (title: string) => title,
+  }
+
+  render() {
+    const { title, keyFormatter, valueFormatters = {}, data, keys, children, action, ...props } = this.props
+
+    const _keys = keys ? keys : Object.keys(data || {})
+    const titles = _keys.map(keyFormatter)
+    const values = _keys.map(
+      (i: Extract<keyof T, string>) => (valueFormatters[i] ? valueFormatters[i](data[i] as any) : data[i]),
+    )
+
+    return (
+      <Container {...props}>
+        {(title || action) && <CardHeader title={title} action={action && <this.props.action />} />}
+        {data && titles.map((title, i) => <CardItem key={i} value={values[i]} title={title} />)}
+        {children}
+      </Container>
+    )
+  }
+}
 
 export default Card

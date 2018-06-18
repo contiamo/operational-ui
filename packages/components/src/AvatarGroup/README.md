@@ -113,5 +113,5 @@ const avatars = [
   { name: "Captain Hook" },
   { name: "Mr. Smee" },
 ]
-;<AvatarGroup>{avatars.map(({ name, photo }) => <Avatar name={name} photo={photo} />)}</AvatarGroup>
+;<AvatarGroup>{avatars.map(({ name, photo }, i) => <Avatar key={i} name={name} photo={photo} />)}</AvatarGroup>
 ```
