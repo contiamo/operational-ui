@@ -5,6 +5,7 @@ import { OperationalStyleConstants, Theme, expandColor } from "@operational/them
 import { Icon, IconName } from "../"
 import { isWhite } from "../utils/color"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** Id */
   id?: string
@@ -31,6 +32,7 @@ export interface Props {
 
   icon?: IconName | React.ReactNode
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -63,6 +65,7 @@ const Container = styled("div")(
     }
   },
 )
+
 const Content = styled("div")(
   ({ theme }: WithTheme): {} => ({
     height: "100%",
@@ -74,6 +77,7 @@ const Content = styled("div")(
     },
   }),
 )
+
 const Action = styled("div")(
   ({
     theme,

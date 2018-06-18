@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { spin } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -20,12 +21,14 @@ export interface Props {
   label?: string
   children?: React.ReactNode
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "sidebarheader",
     position: "relative",
   }),
 )
+
 const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     position: "relative",
@@ -42,6 +45,7 @@ const Content = styled("div")(
     },
   }),
 )
+
 const Header = styled("div")(
   ({
     theme,

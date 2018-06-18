@@ -27,9 +27,11 @@ export interface Props {
 
   __experimentalRowActions?: React.ReactNode[]
 }
+
 interface CompProps {
   theme?: OperationalStyleConstants & { deprecated: Theme }
 }
+
 const Container = styled("table")(({ theme }: CompProps) => ({
   width: "100%",
   backgroundColor: theme.color.white,
@@ -38,6 +40,7 @@ const Container = styled("table")(({ theme }: CompProps) => ({
   fontSize: theme.font.size.small,
   fontFamily: theme.font.family.main,
 }))
+
 const Tr = styled("tr")(({ hover, theme }: { hover?: boolean } & CompProps) => ({
   height: 50,
   ":hover": hover && {
@@ -45,6 +48,7 @@ const Tr = styled("tr")(({ hover, theme }: { hover?: boolean } & CompProps) => (
     cursor: "pointer",
   },
 }))
+
 const Th = styled("th")(({ theme }: CompProps) => ({
   verticalAlign: "bottom",
   borderBottom: `1px solid ${theme.color.separators.default}`,
@@ -54,6 +58,7 @@ const Th = styled("th")(({ theme }: CompProps) => ({
     paddingLeft: theme.space.small,
   },
 }))
+
 const Td = styled("td")(({ theme }: CompProps) => ({
   verticalAlign: "center",
   borderBottom: `1px solid ${theme.color.separators.default}`,
@@ -62,6 +67,7 @@ const Td = styled("td")(({ theme }: CompProps) => ({
     paddingLeft: theme.space.small,
   },
 }))
+
 const Action = styled(Td)(({ theme }: CompProps) => ({
   textAlign: "right",
   paddingRight: theme.space.content,
@@ -70,6 +76,7 @@ const Action = styled(Td)(({ theme }: CompProps) => ({
     color: theme.color.text.action,
   },
 }))
+
 const Actions = styled(Td)(({ theme }: CompProps) => ({
   textAlign: "right",
   paddingRight: theme.space.small,
@@ -84,6 +91,7 @@ const Actions = styled(Td)(({ theme }: CompProps) => ({
     opacity: 1,
   },
 }))
+
 const EmptyView = styled(Td)(({ theme }: CompProps) => ({
   color: theme.color.text.default,
   height: 50,

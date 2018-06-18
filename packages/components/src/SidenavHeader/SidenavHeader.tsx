@@ -5,6 +5,7 @@ import { fadeIn } from "@operational/utils"
 import { deprecate, isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -45,6 +46,7 @@ export interface Props {
   onClose?: () => void
   children?: React.ReactNode
 }
+
 export interface State {
   isOpen: boolean
 }
@@ -81,6 +83,7 @@ const containerStyles = ({
 
 const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
+
 const Content = styled("div")(
   ({
     theme,
@@ -109,6 +112,7 @@ const Content = styled("div")(
     whiteSpace: "nowrap",
   }),
 )
+
 const ItemsContainer = styled("div")(
   ({
     theme,
@@ -121,6 +125,7 @@ const ItemsContainer = styled("div")(
     top: -theme.deprecated.spacing,
   }),
 )
+
 const CloseButton = styled("div")(
   ({
     theme,
@@ -148,6 +153,7 @@ const CloseButton = styled("div")(
     },
   }),
 )
+
 export class SidenavHeader extends React.Component<Props, State> {
   state = {
     isOpen: false,
@@ -209,6 +215,7 @@ export class SidenavHeader extends React.Component<Props, State> {
     )
   }
 }
+
 export default deprecate<Props>(
   props =>
     props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : [],

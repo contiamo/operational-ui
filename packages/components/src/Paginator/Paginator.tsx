@@ -3,6 +3,7 @@ import * as Icon from "react-feather"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -23,6 +24,7 @@ export interface Props {
 
   pageCount: number
 }
+
 const PaginatorSpan = styled("div")(
   ({
     theme,
@@ -51,6 +53,7 @@ const PaginatorSpan = styled("div")(
     },
   }),
 )
+
 interface ControlProps {
   children: any
   onChange?: (page: number) => void

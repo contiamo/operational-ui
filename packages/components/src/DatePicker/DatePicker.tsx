@@ -4,6 +4,7 @@ import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Label, LabelText } from "../utils/mixins"
 import { Card, Icon } from "../"
+
 import {
   Container,
   ClearButton,
@@ -15,6 +16,7 @@ import {
   Input,
   DatePickerCard,
 } from "./DatePicker.styles"
+
 import {
   months,
   daysInMonth,
@@ -24,7 +26,9 @@ import {
   toYearMonthDay,
   validateDateString,
 } from "./DatePicker.utils"
+
 import Month from "./DatePicker.Month"
+
 export interface Props {
   id?: string
   label?: string
@@ -50,6 +54,7 @@ export interface Props {
 
   placeholder?: string
 }
+
 export interface State {
   isExpanded: boolean
   year: number
@@ -85,6 +90,7 @@ class DatePicker extends React.Component<Props, State> {
   inputNode: any
   keypressHandler: (a: any) => void
   outsideClickHandler: (a: any) => void // Throw runtime errors if start/end dates are of the wrong format.
+
   // Optional props argument is used when the component doesn't have
   // these dates on the instance (e.g. constructor).
 

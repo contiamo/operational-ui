@@ -5,6 +5,7 @@ import { lighten } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { isModifiedEvent } from "../utils"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -19,6 +20,7 @@ export interface Props {
   icon?: IconName | React.ReactNode
   label: string
 }
+
 const size: number = 36
 
 const containerStyles = ({
@@ -56,6 +58,7 @@ const containerStyles = ({
 
 const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
+
 const IconContainer = styled("span")(
   ({ theme }: WithTheme): CssStatic => ({
     width: size,
@@ -66,6 +69,7 @@ const IconContainer = styled("span")(
     flex: `0 0 ${size}px`,
   }),
 )
+
 const Label = styled("span")(
   ({
     theme,

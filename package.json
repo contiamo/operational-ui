@@ -47,8 +47,8 @@
       "git add"
     ],
     "*.(ts|tsx)": [
+      "tslint --fix",
       "prettier --write",
-      "tslint",
       "git add"
     ]
   },
@@ -64,6 +64,7 @@
     "@types/d3-time-format": "^2.1.0",
     "@types/d3-transition": "^1.1.0",
     "@types/enzyme": "^3.1.5",
+    "@types/highlight.js": "^9.12.3",
     "@types/jest": "^23.0.0",
     "@types/lodash": "^4.14.109",
     "@types/marked": "^0.3.0",
@@ -78,7 +79,6 @@
     "@types/react-syntax-highlighter": "^0.0.3",
     "@types/tinycolor2": "1.4.0",
     "@types/webpack-env": "^1.13.1",
-    "@types/highlight.js": "^9.12.3",
     "awesome-typescript-loader": "^5.0.0",
     "enzyme": "2.9.1",
     "enzyme-to-json": "1.5.1",
@@ -98,6 +98,7 @@
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "5.8.0",
     "tslint-config-prettier": "1.12.0",
+    "tslint-plugin-blank-line": "^0.0.8",
     "typescript": "next"
   },
   "workspaces": [

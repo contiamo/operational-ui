@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
+
 const Title = styled("h1")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.title,
@@ -9,6 +10,7 @@ const Title = styled("h1")(
     label: "titletype",
   }),
 )
+
 const Heading1 = styled("h1")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.heading1,
@@ -16,6 +18,7 @@ const Heading1 = styled("h1")(
     label: "heading1type",
   }),
 )
+
 const Heading2 = styled("h2")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.heading2,
@@ -23,6 +26,7 @@ const Heading2 = styled("h2")(
     label: "heading2type",
   }),
 )
+
 const Body = styled("p")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.body,
@@ -30,6 +34,7 @@ const Body = styled("p")(
     label: "bodytype",
   }),
 )
+
 const Small = styled("p")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.small,
@@ -37,4 +42,5 @@ const Small = styled("p")(
     label: "smalltype",
   }),
 )
+
 export { Title, Heading1, Heading2, Body, Small }

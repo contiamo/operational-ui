@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -18,6 +19,7 @@ export interface Props {
   children: React.ReactNode
   onClose?: () => void
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "modal",
@@ -33,6 +35,7 @@ const Container = styled("div")(
     backgroundColor: "rgba(0, 0, 0, .6)",
   }),
 )
+
 const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     backgroundColor: theme.deprecated.colors.white,

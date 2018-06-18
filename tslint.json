@@ -1,6 +1,7 @@
 {
-  "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+  "extends": ["tslint-config-airbnb", "tslint-config-prettier", "tslint-plugin-blank-line"],
   "rules": {
+    "blank-line": true,
     "one-variable-per-declaration": false,
     "semicolon": false,
     "quotemark": "double",

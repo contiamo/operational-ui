@@ -4,6 +4,7 @@ import { css } from "glamor"
 import { fadeIn } from "@operational/utils"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** Id */
   id?: string
@@ -28,9 +29,11 @@ export interface Props {
 
   keepOpenOnItemClick?: boolean
 }
+
 export interface State {
   isOpen: boolean
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): {} => ({
     label: "contextmenu",
@@ -39,6 +42,7 @@ const Container = styled("div")(
     width: "fit-content",
   }),
 )
+
 const MenuContainer = styled("div")(
   ({
     theme,
@@ -70,9 +74,11 @@ class ContextMenu extends React.Component<Props, State> {
   state = {
     isOpen: false,
   }
+
   containerNode: any
   menuContainerNode: any
   outsideClickHandler: any
+
   handleClick = (ev: any): void => {
     const isTargetInsideMenu = this.menuContainerNode.contains(ev.target)
     const isTargetInsideContainer = this.containerNode.contains(ev.target)

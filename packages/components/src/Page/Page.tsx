@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Button, Icon, IconName } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** Page title */
   title: string
@@ -19,6 +20,7 @@ export interface Props {
 
   children?: React.ReactNode
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -32,6 +34,7 @@ const Container = styled("div")(
     padding: `0px ${theme.deprecated.spacing * 1.5}px ${theme.deprecated.spacing * 1.5}px`,
   }),
 )
+
 const TopBar = styled("div")(
   ({
     theme,
@@ -46,6 +49,7 @@ const TopBar = styled("div")(
     justifyContent: "space-between",
   }),
 )
+
 const TitleBar = styled("div")(
   ({
     theme,
@@ -67,6 +71,7 @@ const TitleBar = styled("div")(
     },
   }),
 )
+
 const ControlsContainer = styled("div")(
   ({
     theme,

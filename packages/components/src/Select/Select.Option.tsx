@@ -4,6 +4,7 @@ import { OperationalStyleConstants, Theme, expandColor } from "@operational/them
 import { readableTextColor, darken } from "@operational/utils"
 import { Icon } from "../"
 import { CssStatic } from "../types"
+
 export interface Props {
   id?: number | string
   css?: any
@@ -12,6 +13,7 @@ export interface Props {
   onClick?: () => void
   children?: React.ReactNode
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -38,6 +40,7 @@ const Container = styled("div")(
     }
   },
 )
+
 const IconContainer = styled("div")(
   ({
     theme,

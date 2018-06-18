@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { readableTextColor } from "@operational/utils"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types" // Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:
+
 // <Tooltip top/>, as opposed to <Tooltip position="top"/>
 // It gets translated into the Position type inside the component, so it allows for a more
 // straightforward implementation.
@@ -35,7 +36,9 @@ export interface State {
   bbLeft: number
   bbRight: number
 }
+
 type Position = "top" | "left" | "right" | "bottom"
+
 const Container = styled("div")(
   ({
     position,
@@ -168,6 +171,7 @@ class Tooltip extends React.Component<Props, State> {
     bbRight: 0,
     bbBottom: 0,
   }
+
   containerNode: HTMLElement
 
   render() {

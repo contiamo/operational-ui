@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -13,6 +14,7 @@ export interface Props {
   label?: string
   children: React.ReactNode
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "infotile",
@@ -24,11 +26,13 @@ const Container = styled("div")(
     backgroundColor: theme.deprecated.colors.lighterBackground,
   }),
 )
+
 const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.heading1,
   }),
 )
+
 const Label = styled("small")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.small,

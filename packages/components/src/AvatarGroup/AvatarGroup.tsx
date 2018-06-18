@@ -2,10 +2,12 @@ import * as React from "react"
 import styled from "react-emotion"
 import Avatar from "../Avatar/Avatar"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface AvatarItem {
   photo?: string
   name: string
 }
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -26,6 +28,7 @@ export interface Props {
 
   size?: "small" | "medium"
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "avatar-group",
@@ -79,4 +82,5 @@ const AvatarGroup: React.SFC<Props> = props => {
 AvatarGroup.defaultProps = {
   maximumToDisplay: 4,
 }
+
 export default AvatarGroup

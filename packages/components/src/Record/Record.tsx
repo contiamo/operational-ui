@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Button } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -13,6 +14,7 @@ export interface Props {
   controls?: React.ReactNode
   children?: React.ReactNode
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "record",
@@ -22,6 +24,7 @@ const Container = styled("div")(
     borderRadius: theme.deprecated.borderRadius,
   }),
 )
+
 const HeaderContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.heading1,
@@ -32,6 +35,7 @@ const HeaderContainer = styled("div")(
     height: theme.deprecated.spacing * 2,
   }),
 )
+
 const ControlContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     "& > *:last-child": {
@@ -39,6 +43,7 @@ const ControlContainer = styled("div")(
     },
   }),
 )
+
 const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     opacity: 0.8,

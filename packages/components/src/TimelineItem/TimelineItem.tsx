@@ -3,6 +3,7 @@ import * as ReactFeather from "react-feather"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -16,6 +17,7 @@ export interface Props {
 
   color?: string
 }
+
 const StatusContainer = styled("div")(
   {
     border: "2px solid transparent",
@@ -39,6 +41,7 @@ const StatusContainer = styled("div")(
     }
   },
 )
+
 const Content = styled("div")(
   {
     padding: "0 0 5px 26px",
@@ -55,6 +58,7 @@ const Content = styled("div")(
     ...theme.deprecated.typography.body,
   }),
 )
+
 const Container = styled("li")(
   {
     label: "timelineitem",
