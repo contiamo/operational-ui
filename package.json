@@ -24,7 +24,7 @@
     "test:visual-tests": "cd packages/utils && npm run test",
     "test:visualizations": "cd packages/visualizations && npm run test",
     "test:website": "cd packages/website && npm run test",
-    "lint": "tslint ./packages/**/*.{json,ts,tsx}",
+    "lint": "tslint ./packages/*/src/**/*.{json,ts,tsx}",
     "prettify": "prettier ./packages/**/*.{json,ts,tsx} --write",
     "package": "run-s package:*",
     "package:theme": "lerna run --scope @operational/theme package",
