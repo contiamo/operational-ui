@@ -1,9 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor, darken, lighten } from "@operational/utils"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { readableTextColor, darken, lighten, expandColor } from "@operational/utils"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { isWhite, isModifiedEvent } from "../utils"
-import { WithTheme, Css, CssStatic } from "../types"
+import { Css, CssStatic } from "../types"
 import { ContextConsumer, Context } from "../"
 import Spinner from "../Spinner/Spinner"
 
@@ -20,7 +20,7 @@ export interface Props {
   /** Navigation property à la react-router <Link/> */
 
   to?: string
-  /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
+  /** Color assigned to the avatar circle (hex or named color from `theme.color`) */
 
   color?: string
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
@@ -46,29 +46,32 @@ const containerStyles = ({
   condensed,
   loading,
 }: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+  theme?: OperationalStyleConstants
   color?: string
   active?: boolean
   disabled?: boolean
   condensed?: boolean
   loading?: boolean
 }): CssStatic => {
-  const defaultColor: string = theme.deprecated.colors.white
-  const backgroundColor: string = expandColor(theme.deprecated, color) || defaultColor
+  const defaultColor: string = theme.color.white
+  const backgroundColor: string = expandColor(theme, color) || defaultColor
   const activeBackgroundColor: string = darken(backgroundColor, 5)
-  const foregroundColor = readableTextColor(backgroundColor, [theme.deprecated.colors.text, "white"])
-  const spacing = theme.deprecated.spacing
+  const foregroundColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
+  const spacing = theme.space.content
+  const height = condensed ? 28 : 36
+
   return {
+    height,
+    lineHeight: `${height}px`,
     label: "button",
-    ...theme.deprecated.typography.body,
+    fontSize: theme.font.size.small,
+    fontFamily: theme.font.family.main,
     display: "inline-block",
-    padding: condensed ? `${spacing / 8}px ${spacing / 2}px` : `${spacing * 0.375}px ${spacing * 1.5}px`,
-    borderRadius: theme.deprecated.borderRadius,
+    padding: `0 ${condensed ? theme.space.small : spacing}px`,
+    borderRadius: theme.borderRadius,
     border: "1px solid",
     borderColor: isWhite(backgroundColor)
-      ? theme.deprecated.colors.gray
+      ? theme.color.border.default
       : active
         ? activeBackgroundColor
         : backgroundColor,
