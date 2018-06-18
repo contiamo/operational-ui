@@ -62,12 +62,10 @@ const containerStyles = ({
   const activeBackgroundColor: string = darken(backgroundColor, 5)
   const foregroundColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
   const spacing = theme.space.content
-  const height = condensed ? 28 : 36
   const padding = condensed ? theme.space.small : spacing
 
   return {
-    height,
-    lineHeight: `${height}px`,
+    lineHeight: `${condensed ? 26 : 34}px`,
     label: "button",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
