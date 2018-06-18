@@ -96,3 +96,10 @@ const myData = {
   }}
 />
 ```
+
+### Stacked Cards
+
+```jsx
+<Card title="Hello">Hi, I'm a Tourist 🇫🇷</Card>
+<Card>I'm a local</Card>
+```
