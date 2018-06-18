@@ -4,8 +4,14 @@
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/operational-ui.git",
-  "author": "Tejas Kumar <tejas@contiamo.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:contiamo/operational-ui.git"
+  },
+  "author": {
+    "name": "Tejas Kumar",
+    "email": "tejas@contiamo.com"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -14,7 +20,7 @@
     "start": "npm run docs:start",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
-    "package": "rimraf lib && webpack",
+    "package": "rimraf lib && webpack --env package",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch"

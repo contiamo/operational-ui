@@ -3,8 +3,7 @@ import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
 /** @todo remove this once we're fully in emotion */
 
-import { ThemeProvider as DeprecatedThemeProvider } from "glamorous"
-import { OperationalStyleConstants, Theme, operational, constants } from "@operational/theme"
+import { Theme, operational, constants } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
 
 export interface Props {

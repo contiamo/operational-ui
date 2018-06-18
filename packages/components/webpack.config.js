@@ -2,8 +2,8 @@
 
 const path = require("path")
 
-module.exports = {
-  mode: process.env.NODE_ENV || "development",
+module.exports = env => ({
+  mode: process.env.NODE_ENV,
   devtool: "inline-source-map",
   entry: {
     bundle: [path.resolve(__dirname, "./src/index.ts")],
@@ -25,10 +25,7 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              configFile: path.resolve(
-                __dirname,
-                process.env.PURPOSE === "build" ? "tsconfig.json" : "tsconfig.styleguide.json",
-              ),
+              configFile: path.resolve(__dirname, env === "package" ? "tsconfig.json" : "tsconfig.styleguide.json"),
             },
           },
         ],
@@ -38,4 +35,4 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-}
+})

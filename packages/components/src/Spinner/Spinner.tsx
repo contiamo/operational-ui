@@ -2,7 +2,6 @@ import * as React from "react"
 import styled from "react-emotion"
 import { css } from "glamor"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
-import { readableTextColor, darken, transparentize } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -28,7 +27,7 @@ const animationTimeUnit: number = 0.6
 const f: number = 0.25
 
 const Container = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
+  (): CssStatic => ({
     label: "spinner",
     width: size,
     height: size,
