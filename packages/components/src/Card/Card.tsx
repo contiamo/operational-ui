@@ -1,7 +1,7 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import styled from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 import { CardHeader, CardItem } from "../"
-import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props<T = {}> {
   /** Any object to show. The key is the title of the data. */
@@ -18,24 +18,20 @@ export interface Props<T = {}> {
   action?: React.ComponentType
   /** DOM id attribute, useful for hash linking */
   id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "card",
-    borderTop: "1px solid #ececec",
-    padding: 20,
-    boxShadow: theme.shadows.card,
-    backgroundColor: theme.colors.white,
-    "& > img": {
-      maxWidth: "100%",
-    },
-  }),
-)
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  label: "card",
+  borderTop: `1px solid ${theme.color.separators.light}`,
+  padding: 20,
+  boxShadow: `0px 1px 5px #d3d1d1`,
+  backgroundColor: theme.color.white,
+  "& > img": {
+    maxWidth: "100%",
+  },
+}))
 
 class Card<T = {}> extends React.PureComponent<Props<T>> {
   static defaultProps = {
@@ -43,7 +39,7 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
   }
 
   render() {
-    const { title, keyFormatter, valueFormatters = {}, data, keys, id, css, className, children, action } = this.props
+    const { title, keyFormatter, valueFormatters = {}, data, keys, children, action, ...props } = this.props
 
     const _keys = keys ? keys : Object.keys(data || {})
     const titles = _keys.map(keyFormatter)
@@ -52,7 +48,7 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
     )
 
     return (
-      <Container id={id} css={css} className={className}>
+      <Container {...props}>
         {(title || action) && <CardHeader title={title} action={action && <this.props.action />} />}
         {data && titles.map((title, i) => <CardItem key={i} value={values[i]} title={title} />)}
         {children}
