@@ -67,8 +67,7 @@
     "testRegex": "/__tests__/.*\\.(ts|tsx|js|jsx)$",
     "setupTestFrameworkScriptFile": "<rootDir>/../../node_modules/jest-enzyme/lib/index.js",
     "snapshotSerializers": [
-      "<rootDir>/../../node_modules/jest-serializer-enzyme",
-      "<rootDir>/../../node_modules/jest-emotion"
+      "<rootDir>/../../node_modules/jest-serializer-enzyme"
     ]
   }
 }

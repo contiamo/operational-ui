@@ -2,6 +2,6 @@
 
 exports[`Grid Component Should render 1`] = `
 <div
-  class="css-1sgzaeg"
+  class="css-1k5aedh-Grid"
 />
 `;

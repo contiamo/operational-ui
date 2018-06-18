@@ -2,10 +2,10 @@
 
 exports[`Paginator Component Should initialize properly 1`] = `
 <div
-  class="css-1ef2t77"
+  class="css-1pxqklq-paginator"
 >
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     <svg
       fill="none"
@@ -27,7 +27,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     <svg
       fill="none"
@@ -46,32 +46,32 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </div>
   <div
-    class="css-ds4d4z"
+    class="css-1x7rcf2"
   >
     1
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     2
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     3
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     ...
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     10
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     <svg
       fill="none"
@@ -90,7 +90,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </div>
   <div
-    class="css-crrhmu"
+    class="css-1yc9hmn"
   >
     <svg
       fill="none"

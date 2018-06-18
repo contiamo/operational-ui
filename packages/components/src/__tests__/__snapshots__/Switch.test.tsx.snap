@@ -2,13 +2,13 @@
 
 exports[`Switch Should render 1`] = `
 <div
-  class="css-sya2lo"
+  class="css-1bzrg5j-switch"
 >
   <div
-    class="css-ctowjf"
+    class="css-kabsqu"
   />
   <div
-    class="css-180xf1n"
+    class="css-8qt210"
   />
 </div>
 `;
