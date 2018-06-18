@@ -112,7 +112,7 @@ const containerStyles = ({
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const IconContainer = styled("div")(({ theme, condensed }: CompProps) => ({
+const IconContainer = styled("div")(({ theme, condensed }: Css) => ({
   marginLeft: condensed ? theme.space.small : theme.space.small,
   float: "right",
   "& svg": {
