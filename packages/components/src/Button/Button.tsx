@@ -6,6 +6,7 @@ import { isWhite, isModifiedEvent } from "../utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { ContextConsumer, Context } from "../"
 import Spinner from "../Spinner/Spinner"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */

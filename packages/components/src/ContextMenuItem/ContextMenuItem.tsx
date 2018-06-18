@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { darken } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -13,6 +14,7 @@ export interface Props {
   onClick?: () => void
   __isContextMenuItem?: boolean
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -59,4 +61,5 @@ const ContextMenuItem: React.SFC<Props> = (props: Props) => (
 ContextMenuItem.defaultProps = {
   __isContextMenuItem: true,
 }
+
 export default ContextMenuItem

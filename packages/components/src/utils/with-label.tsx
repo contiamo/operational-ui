@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { Theme, OperationalStyleConstants } from "@operational/theme"
 import { Css } from "../types"
+
 const Container = styled("div")(
   ({
     theme,
@@ -13,6 +14,7 @@ const Container = styled("div")(
     display: "inline-block",
   }),
 )
+
 const Label = styled("label")(
   ({
     theme,
@@ -28,6 +30,7 @@ const Label = styled("label")(
     marginBottom: theme.deprecated.spacing / 4,
   }),
 )
+
 type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id"> & {
   css?: Css
 }

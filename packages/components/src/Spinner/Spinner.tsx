@@ -4,6 +4,7 @@ import { css } from "glamor"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken, transparentize } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -12,6 +13,7 @@ export interface Props {
   className?: string
   color?: string
 }
+
 const spin = css.keyframes({
   "0%": {
     transform: "scale(1)",
@@ -20,9 +22,11 @@ const spin = css.keyframes({
     transform: "scale(0.75)",
   },
 })
+
 const size = 20
 const animationTimeUnit: number = 0.6
 const f: number = 0.25
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "spinner",
@@ -30,6 +34,7 @@ const Container = styled("div")(
     height: size,
   }),
 )
+
 const PulsingCube = styled("div")(
   ({
     color,

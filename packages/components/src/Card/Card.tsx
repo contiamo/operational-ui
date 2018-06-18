@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { CardHeader } from "../index"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** DOM id attribute, useful for hash linking */
   id?: string
@@ -18,6 +19,7 @@ export interface Props {
 
   title?: string
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "card",

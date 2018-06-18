@@ -6,6 +6,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 import { Icon, Tooltip } from "../"
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
 import { inputDefaultWidth } from "../constants"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -46,6 +47,7 @@ export interface Props {
   disabled?: boolean
   onToggle?: () => void
 }
+
 const InputField = styled("input")(
   ({
     theme,

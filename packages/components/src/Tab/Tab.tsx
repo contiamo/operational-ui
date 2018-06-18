@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { WithTheme, Css } from "../types"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -14,6 +15,7 @@ export interface Props {
 
   title?: string
 }
+
 const Div = styled("div")()
 
 const Tab = (props: Props) => (

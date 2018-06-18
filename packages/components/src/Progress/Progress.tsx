@@ -6,6 +6,7 @@ import { lighten } from "@operational/utils"
 import deprecate from "../utils/deprecate"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon } from "../"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -22,9 +23,11 @@ export interface Props {
 
   onClose?: () => void
 }
+
 const width = 120
 const height = 45
 const padding = 15
+
 const Container = styled("div")(
   {
     label: "progress",
@@ -46,6 +49,7 @@ const Container = styled("div")(
     backgroundColor: "transparent",
   }),
 )
+
 const fillProgress = css.keyframes({
   from: {
     transform: "translate3d(-100%, 0, 0)",
@@ -54,6 +58,7 @@ const fillProgress = css.keyframes({
     transform: "translate3d(0, 0, 0)",
   },
 })
+
 const Bar = styled("div")(
   ({
     theme,
@@ -76,6 +81,7 @@ const Bar = styled("div")(
         }),
   }),
 )
+
 const ErrorMessage = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.body,
@@ -90,6 +96,7 @@ const ErrorMessage = styled("div")(
     color: theme.deprecated.colors.white,
   }),
 )
+
 const Action = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     opacity: 0.7,

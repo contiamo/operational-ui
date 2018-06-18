@@ -2,10 +2,12 @@ import * as React from "react"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Days, Day } from "./DatePicker.styles"
+
 export interface IDatePair {
   start?: string
   end?: string
 }
+
 export interface Props {
   year: number
   month: number

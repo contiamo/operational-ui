@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -15,16 +16,19 @@ export interface Props {
   onChange?: (on: boolean) => void
   className?: string
 }
+
 export interface StyleProps {
   on: boolean
   theme?: OperationalStyleConstants & {
     deprecated: Theme
   }
 }
+
 const width: number = 28
 const height: number = 16
 const railHeight: number = 16
 const railOffset: number = 8
+
 const Container = styled("div")({
   width,
   height,
@@ -34,6 +38,7 @@ const Container = styled("div")({
   overflow: "hidden",
   cursor: "pointer",
 })
+
 const Button = styled("div")(
   {
     height,
@@ -52,6 +57,7 @@ const Button = styled("div")(
     zIndex: theme.deprecated.baseZIndex + 2,
   }),
 )
+
 const Rail = styled("div")(
   {
     width,

@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** DOM id attribute, useful for hash linking */
   id?: string
@@ -13,6 +14,7 @@ export interface Props {
 
   title?: string
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "card-column",
@@ -32,6 +34,7 @@ const Container = styled("div")(
     },
   }),
 )
+
 const Title = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.heading1,

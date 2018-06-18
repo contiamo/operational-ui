@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { darken } from "@operational/utils"
+
 export interface Props {
   id?: string | number
   css?: any
@@ -10,6 +11,7 @@ export interface Props {
   onChange?: (newVal: string) => void
   color?: string
 }
+
 const Container = styled("div")(
   ({
     theme,

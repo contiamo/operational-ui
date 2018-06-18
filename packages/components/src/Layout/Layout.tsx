@@ -5,6 +5,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 import { Progress } from "../"
 import { Props as SidenavProps } from "../Sidenav/Sidenav"
 import { sidenavExpandedWidth } from "../constants"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -19,6 +20,7 @@ export interface Props {
 
   loading?: boolean
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -50,6 +52,7 @@ const Container = styled("div")(
     },
   }),
 )
+
 const Main = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "layout-main",
@@ -59,6 +62,7 @@ const Main = styled("div")(
     backgroundColor: theme.deprecated.colors.white,
   }),
 )
+
 const Div = styled("div")()
 
 const Layout = (props: Props) => {

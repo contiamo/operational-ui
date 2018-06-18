@@ -1,7 +1,9 @@
 import * as React from "react"
 import { Props as IconProps } from "./Icon"
+
 export type Props = Pick<IconProps, Exclude<keyof IconProps, "name">>
 export type BrandIconName = "OperationalUI" | "Pantheon" | "Labs" | "Contiamo"
+
 export const OperationalUI = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
@@ -25,6 +27,7 @@ export const OperationalUI = (props: Props) => {
     </svg>
   )
 }
+
 export const Contiamo = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
@@ -39,6 +42,7 @@ export const Contiamo = (props: Props) => {
     </svg>
   )
 }
+
 export const Labs = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
@@ -48,6 +52,7 @@ export const Labs = (props: Props) => {
     </svg>
   )
 }
+
 export const Pantheon = (props: Props) => (
   <svg viewBox="0 0 565.18 565.18" width={props.size} height={props.size}>
     <title>Pantheon-Logo-CMYK</title>

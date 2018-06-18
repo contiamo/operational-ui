@@ -4,7 +4,9 @@ import { withTheme } from "emotion-theming"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import * as BrandIcons from "./Icon.Brand"
 import { ReactFeatherIconName } from "./Icon.ReactFeather"
+
 export type IconName = ReactFeatherIconName | BrandIcons.BrandIconName
+
 export interface Props {
   /**
    * Icon name. See https://feathericons.com (convert name to PascalCase) for feather icons.
@@ -30,6 +32,7 @@ export interface Props {
 
   rotation?: number
 }
+
 export interface PropsWithTheme extends Props {
   theme?: OperationalStyleConstants & {
     deprecated: Theme

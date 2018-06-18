@@ -4,6 +4,7 @@ import { OperationalStyleConstants, Theme, expandColor } from "@operational/them
 import { setBrightness } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { IconName } from "../"
+
 export interface Props {
   /** Id */
   id?: string
@@ -42,6 +43,7 @@ export interface Props {
 
   onMouseLeave?: () => void
 }
+
 const Container = styled("div")(
   {
     label: "breakdown",
@@ -75,9 +77,11 @@ const Container = styled("div")(
     },
   }),
 )
+
 const Content = styled("div")({
   width: "100%",
 })
+
 const Label = styled("label")(
   {
     display: "block",
@@ -93,6 +97,7 @@ const Label = styled("label")(
     fontSize: theme.deprecated.typography.small.fontSize,
   }),
 )
+
 const Bar = styled("div")(
   {
     position: "relative",
@@ -144,6 +149,7 @@ const Bar = styled("div")(
     }
   },
 )
+
 const Number = styled("div")(
   {
     height: "100%",
@@ -157,6 +163,7 @@ const Number = styled("div")(
     color: theme.deprecated.colors.lightGray,
   }),
 )
+
 const Span = styled("span")()
 
 const Breakdown: React.SFC<Props> = props => (

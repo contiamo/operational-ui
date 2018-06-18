@@ -5,6 +5,7 @@ import { darken } from "@operational/utils"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -21,17 +22,21 @@ export interface Props {
 
   onChange?: (index: number) => void
 }
+
 export interface PropsWithTheme extends Props {
   theme?: OperationalStyleConstants & {
     deprecated: Theme
   }
 }
+
 const Container = styled("div")({
   label: "tabs",
 })
+
 const Content = styled("div")({
   marginTop: 18,
 })
+
 const TabList = styled("ul")(
   {
     listStyle: "none",
@@ -61,15 +66,18 @@ const TabList = styled("ul")(
     },
   }),
 )
+
 const TabPanel = styled("div")({
   /* Add any styles to the TabPanel */
 })
+
 const overflowEllipsis = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   wordWrap: "normal",
 }
+
 const TabTitle = styled("li")(
   {
     cursor: "pointer",

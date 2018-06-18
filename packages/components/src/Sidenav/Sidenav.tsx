@@ -5,6 +5,7 @@ import { OperationalStyleConstants, Theme, expandColor } from "@operational/them
 import deprecate from "../utils/deprecate"
 import { sidenavExpandedWidth } from "../constants"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -27,9 +28,11 @@ export interface Props {
 
   expandOnHover?: boolean
 }
+
 export interface State {
   isHovered: boolean
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -56,6 +59,7 @@ const Container = styled("div")(
     }
   },
 )
+
 export class Sidenav extends React.Component<Props, State> {
   render() {
     return (
@@ -65,6 +69,7 @@ export class Sidenav extends React.Component<Props, State> {
     )
   }
 }
+
 export default deprecate<Props>(
   props =>
     props.expanded || props.expandOnHover

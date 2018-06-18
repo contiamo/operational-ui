@@ -6,6 +6,7 @@ import { ThemeProvider } from "emotion-theming"
 import { ThemeProvider as DeprecatedThemeProvider } from "glamorous"
 import { OperationalStyleConstants, Theme, operational, constants } from "@operational/theme"
 import { baseStylesheet } from "@operational/utils"
+
 export interface Props {
   /** Theme */
   theme?: Theme
@@ -22,6 +23,7 @@ export interface Props {
 
   replaceState?: (path: string) => void
 }
+
 const { Provider, Consumer } = React.createContext({})
 
 const OperationalUI = (props: Props) => {
@@ -47,4 +49,5 @@ const OperationalUI = (props: Props) => {
 }
 
 export default OperationalUI
+
 export { Consumer }

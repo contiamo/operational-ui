@@ -3,7 +3,9 @@ import { render } from "enzyme"
 import { DatePicker as ThemelessDatePicker } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 import { toYearMonthDay } from "../DatePicker/DatePicker.utils"
+
 const DatePicker = wrapDefaultTheme(ThemelessDatePicker)
+
 describe("DatePicker Component", () => {
   // @todo: this fails because of the way TypeScript imports are handled between Jest and the compiler.
   // Add this back once a stable solution is found.

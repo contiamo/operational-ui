@@ -5,6 +5,7 @@ import { darken } from "@operational/utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 import { isModifiedEvent } from "../utils"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css

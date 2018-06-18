@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import withLabel from "../utils/with-label"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
@@ -18,15 +19,18 @@ export interface Props {
 
   onChange?: (newOptions: string[]) => void
 }
+
 const Container = styled("div")({
   label: "checkbox",
 })
+
 const OptionLabel = styled("label")(
   ({ theme }: WithTheme): CssStatic => ({
     display: "inline-block",
     marginRight: theme.deprecated.spacing,
   }),
 )
+
 const OptionText = styled("span")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.body,

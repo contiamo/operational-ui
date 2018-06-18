@@ -4,6 +4,7 @@ import { OperationalStyleConstants, Theme, expandColor } from "@operational/them
 import { readableTextColor, darken } from "@operational/utils"
 import { Icon } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -18,6 +19,7 @@ export interface Props {
 
   onClose?: () => void
 }
+
 const Container = styled("div")(
   ({
     theme,
@@ -48,6 +50,7 @@ const Container = styled("div")(
     }
   },
 )
+
 const IconContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     position: "absolute",

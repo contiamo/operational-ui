@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { readableTextColor, getInitials } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** Name of the person */
   name: string
@@ -33,18 +34,21 @@ export interface Props {
   children?: React.ReactNode
   onClick?: () => void
 }
+
 const Container = styled("div")({
   label: "avatar",
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-start",
 })
+
 const NameContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     ...theme.deprecated.typography.body,
     display: "block",
   }),
 )
+
 const Name = styled("div")(
   ({
     theme,
@@ -57,6 +61,7 @@ const Name = styled("div")(
     margin: 0,
   }),
 )
+
 const Title = styled("div")(
   ({
     theme,
@@ -70,6 +75,7 @@ const Title = styled("div")(
     margin: 0,
   }),
 )
+
 const Picture = styled("div")(
   ({
     theme,
@@ -152,4 +158,5 @@ Avatar.defaultProps = {
   assignColor: true,
   onClick: () => ({}),
 }
+
 export default Avatar

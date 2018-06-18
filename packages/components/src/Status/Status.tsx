@@ -1,6 +1,7 @@
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import * as tinycolor from "tinycolor2"
+
 export interface Props {
   success?: boolean
   error?: boolean
@@ -32,4 +33,5 @@ const Status = styled.div`
         .toHslString()};
   background-color: ${getColorFromProps};
 `
+
 export default Status

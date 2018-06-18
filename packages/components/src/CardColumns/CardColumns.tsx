@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   /** DOM id attribute, useful for hash linking */
   id?: string
@@ -11,6 +12,7 @@ export interface Props {
   className?: string
   children?: React.ReactNode
 }
+
 const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     display: "flex",
