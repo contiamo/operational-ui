@@ -25,7 +25,15 @@ const StatusContainer = styled("div")(
     top: 6,
     width: 11,
   },
-  ({ theme, color }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }): CssStatic => {
+  ({
+    theme,
+    color,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    color?: string
+  }): CssStatic => {
     return {
       backgroundColor: expandColor(theme.deprecated, color) || theme.deprecated.colors.info,
     }

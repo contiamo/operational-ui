@@ -28,7 +28,7 @@ export interface Props {
   __experimentalRowActions?: React.ReactNode[]
 }
 interface CompProps {
-  theme?: OperationalStyleConstants
+  theme?: OperationalStyleConstants & { deprecated: Theme }
 }
 const Container = styled("table")(({ theme }: CompProps) => ({
   width: "100%",

@@ -20,7 +20,13 @@ export interface Props {
   loading?: boolean
 }
 const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     label: "Layout",
     position: "relative",
     height: "100%",

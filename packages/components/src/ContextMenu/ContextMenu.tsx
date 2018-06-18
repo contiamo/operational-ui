@@ -40,7 +40,15 @@ const Container = styled("div")(
   }),
 )
 const MenuContainer = styled("div")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants & { deprecated: Theme }; isExpanded: boolean }): {} => ({
+  ({
+    theme,
+    isExpanded,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    isExpanded: boolean
+  }): {} => ({
     position: "absolute",
     top: `calc(100% + ${theme.deprecated.spacing / 2}px)`,
     left: -theme.deprecated.spacing,

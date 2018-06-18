@@ -39,7 +39,15 @@ const getGridCSSProperties = (gridType: string): CssStatic => {
 }
 
 const Container = styled("div")(
-  ({ theme, gridType }: { theme?: OperationalStyleConstants & { deprecated: Theme }; gridType: string }): {} => ({
+  ({
+    theme,
+    gridType,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    gridType: string
+  }): {} => ({
     label: "Grid",
     width: "100%",
     height: "100%",

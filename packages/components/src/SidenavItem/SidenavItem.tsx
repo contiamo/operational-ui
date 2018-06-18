@@ -25,7 +25,9 @@ const containerStyles = ({
   theme,
   isActive,
 }: {
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
   isActive: boolean
 }): CssStatic => ({
   display: "flex",
@@ -65,7 +67,13 @@ const IconContainer = styled("span")(
   }),
 )
 const Label = styled("span")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     display: "inline-block",
     paddingLeft: theme.deprecated.spacing / 4,
   }),

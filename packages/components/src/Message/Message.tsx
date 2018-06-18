@@ -19,7 +19,15 @@ export interface Props {
   onClose?: () => void
 }
 const Container = styled("div")(
-  ({ theme, color }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }): CssStatic => {
+  ({
+    theme,
+    color,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    color?: string
+  }): CssStatic => {
     const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
     const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.black, "white"])
     return {

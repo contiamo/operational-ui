@@ -35,7 +35,13 @@ const Container = styled("div")(
     left: 0,
     position: "absolute",
   },
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     zIndex: theme.deprecated.baseZIndex + 300,
     backgroundColor: "transparent",
   }),
@@ -49,7 +55,15 @@ const fillProgress = css.keyframes({
   },
 })
 const Bar = styled("div")(
-  ({ theme, isError }: { theme?: OperationalStyleConstants & { deprecated: Theme }; isError: boolean }): CssStatic => ({
+  ({
+    theme,
+    isError,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    isError: boolean
+  }): CssStatic => ({
     width: "100%",
     height: 3,
     backgroundColor: theme.deprecated.colors.info,

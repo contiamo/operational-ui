@@ -22,7 +22,9 @@ export interface Props {
   onChange?: (index: number) => void
 }
 export interface PropsWithTheme extends Props {
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
 }
 const Container = styled("div")({
   label: "tabs",
@@ -84,7 +86,9 @@ const TabTitle = styled("li")(
     isActive,
     disabled,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     color: string
     isActive: boolean
     disabled: boolean
@@ -119,9 +123,7 @@ const Tabs = (props: PropsWithTheme) => {
       index,
     }),
   )
-
   console.log(props)
-
   const color = expandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary // Display only the active panel based off the children props
 
   const { children: panelContent, disabled }: TabProps = childrenProps.find(

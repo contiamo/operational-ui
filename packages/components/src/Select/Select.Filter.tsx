@@ -11,7 +11,15 @@ export interface Props {
   color?: string
 }
 const Container = styled("div")(
-  ({ theme, color }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }) => {
+  ({
+    theme,
+    color,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    color?: string
+  }) => {
     const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.white
     return {
       label: "selectfilter",

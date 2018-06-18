@@ -45,7 +45,9 @@ const containerStyles = ({
   condensed,
   loading,
 }: {
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
   color?: string
   active?: boolean
   disabled?: boolean

@@ -54,7 +54,9 @@ const containerStyles = ({
   color,
   isActive,
 }: {
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
   color?: string
   isActive: boolean
 }): CssStatic => {
@@ -84,7 +86,9 @@ const Content = styled("div")(
     theme,
     isActive,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     isActive: boolean
   }): CssStatic => ({
     textDecoration: "none",
@@ -106,13 +110,25 @@ const Content = styled("div")(
   }),
 )
 const ItemsContainer = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     position: "relative",
     top: -theme.deprecated.spacing,
   }),
 )
 const CloseButton = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     position: "absolute",
     cursor: "pointer",
     display: "none",
