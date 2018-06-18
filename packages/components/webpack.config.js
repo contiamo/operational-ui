@@ -3,13 +3,17 @@
 const path = require("path")
 
 module.exports = {
+  mode: process.env.NODE_ENV || "development",
+  devtool: "inline-source-map",
   entry: {
     bundle: [path.resolve(__dirname, "./src/index.ts")],
   },
   context: path.resolve(__dirname),
   output: {
-    filename: "bundle.js",
-    path: path.join(__dirname, "temp"),
+    filename: "index.js",
+    path: path.join(__dirname, "lib"),
+    library: "@operational/components",
+    libraryTarget: "umd",
   },
   module: {
     rules: [
@@ -21,7 +25,10 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              configFile: path.resolve(__dirname, "tsconfig.styleguide.json"),
+              configFile: path.resolve(
+                __dirname,
+                process.env.PURPOSE === "build" ? "tsconfig.json" : "tsconfig.styleguide.json",
+              ),
             },
           },
         ],

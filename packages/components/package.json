@@ -14,7 +14,7 @@
     "start": "npm run docs:start",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
-    "package": "rimraf lib && tsc",
+    "package": "rimraf lib && webpack",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -46,7 +46,8 @@
     "react-docgen-typescript": "^1.6.1",
     "react-styleguidist": "^7.0.14",
     "ts-loader": "^4.3.0",
-    "webpack": "^4.8.3"
+    "webpack": "^4.8.3",
+    "webpack-cli": "^3.0.8"
   },
   "jest": {
     "setupFiles": [

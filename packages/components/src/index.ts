@@ -46,3 +46,5 @@ export { default as TimelineItem } from "./TimelineItem/TimelineItem"
 export { default as Tooltip } from "./Tooltip/Tooltip"
 export { Title, Heading1, Heading2, Small, Body } from "./Typography/Typography"
 export { Context } from "./types"
+
+export default require("./OperationalUI/OperationalUI").default

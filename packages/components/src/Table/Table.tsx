@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 
 export interface Props {
   /** Table columns headings */
