@@ -2,10 +2,10 @@
 
 exports[`Modal Component Should render 1`] = `
 <div
-  class="css-ntf5r4"
+  class="css-fmmjp4-modal"
 >
   <div
-    class="css-1vrapo1"
+    class="css-bovtwh"
   >
     i love you
   </div>

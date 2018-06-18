@@ -2,32 +2,32 @@
 
 exports[`Checkbox Should render 1`] = `
 <div
-  class="css-w0yocm"
+  class="css-1baulvz"
 >
   <div
-    class="css-1268me8"
+    class="css-1t3b2j5-checkbox"
   >
     <label
-      class="css-jmphag"
+      class="css-126cxia"
     >
       <input
         checked=""
         type="checkbox"
       />
       <span
-        class="css-4r2799"
+        class="css-101i1vj"
       >
         1
       </span>
     </label>
     <label
-      class="css-jmphag"
+      class="css-126cxia"
     >
       <input
         type="checkbox"
       />
       <span
-        class="css-4r2799"
+        class="css-101i1vj"
       >
         2
       </span>

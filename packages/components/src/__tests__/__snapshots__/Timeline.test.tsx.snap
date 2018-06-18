@@ -2,16 +2,17 @@
 
 exports[`Timeline Should render 1`] = `
 <ul
-  class="css-wv56s3"
+  class="css-3bt8m9-timeline"
 >
   <li
-    class="css-rtn9it"
+    class="css-hjo7dx-timelineitem"
   >
     <div
-      class="css-jf5r4e"
+      class="css-fwuidw"
+      color="info"
     />
     <div
-      class="css-1ppmdou"
+      class="css-tbrnde"
     >
       Test
     </div>

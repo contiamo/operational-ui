@@ -2,20 +2,21 @@
 
 exports[`Tabs Should render 1`] = `
 <div
-  class="css-1268me8"
+  class="css-8s7da5-tabs"
 >
   <ul
-    class="css-w7us1u"
+    class="css-12uwcce"
   >
     <li
-      class="css-1hidt5t"
+      class="css-1v7kwch"
+      color="hsl(197, 82%, 44%)"
     />
   </ul>
   <div
-    class="css-10id2qb"
+    class="css-1647809"
   >
     <div
-      class="css-nil"
+      class="css-0"
     >
       Test
     </div>
