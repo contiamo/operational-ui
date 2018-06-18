@@ -1,10 +1,11 @@
 import * as React from "react"
 import styled from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 
-const CardColumn = styled("div")(({ children }: React.Props<{}>) => ({
+const CardColumn = styled("div")(({ children, theme }: React.Props<{}> & { theme?: OperationalStyleConstants }) => ({
   display: "flex",
   flexWrap: "wrap",
-  margin: -11,
+  margin: -(theme.space.element / 2),
   "& > *": {
     flexBasis: `${React.Children.count(children)}%`,
   },

@@ -7,21 +7,21 @@ export interface Props {
   title?: string
 }
 
-const Container = styled("div")({
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   label: "card-column",
   minWidth: 280 / 2,
-  padding: 11,
+  padding: theme.space.element / 2,
   flex: "1 0",
   " img": {
     maxWidth: "100%",
   },
-})
+}))
 
 const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontFamily: theme.font.family.main,
   color: theme.color.text.default,
   fontSize: 14,
-  borderBottom: "1px solid #e8e8e8",
+  borderBottom: `1px solid ${theme.color.separators.default}`,
   marginBottom: theme.space.content,
 }))
 

@@ -1,7 +1,6 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Heading2, Body } from "../"
-import { WithTheme, CssStatic } from "../types"
+import styled from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 
 export interface Props {
   /** Title of the item */
@@ -10,25 +9,20 @@ export interface Props {
   value: React.ReactNode
 }
 
-const CardItemTitle = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    color: "#909090",
-    fontFamily: theme.fontFamily,
-    textTransform: "uppercase",
-    fontSize: theme.typography.small.fontSize,
-  }),
-)
+const CardItemTitle = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  color: theme.color.text.lightest,
+  fontFamily: theme.font.family.main,
+  textTransform: "uppercase",
+  fontSize: theme.font.size.fineprint,
+}))
 
-const CardItemBody = glamorous.div(
-  ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.body,
-    color: "#545454",
-    fontFamily: theme.fontFamily,
-    fontSize: 14,
-    marginTop: 5,
-    marginBottom: 16,
-  }),
-)
+const CardItemBody = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  color: theme.color.text.default,
+  fontFamily: theme.font.family.main,
+  fontSize: theme.font.size.body,
+  marginTop: theme.space.base,
+  marginBottom: theme.space.content,
+}))
 
 const CardItem: React.SFC<Props> = ({ title, value }) => (
   <div>

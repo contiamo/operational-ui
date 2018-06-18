@@ -21,18 +21,18 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   label: "cardheader",
   display: "flex",
   alignItems: "center",
-  backgroundColor: theme.color.background.lighter, // "#F8F8F8",
+  backgroundColor: theme.color.background.lighter,
   color: theme.color.text.lighter,
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
-  height: 40,
-  margin: -20,
-  marginBottom: 20,
-  padding: `0 20px`,
+  height: theme.space.element * 2,
+  margin: -theme.space.element,
+  marginBottom: theme.space.element,
+  padding: `0 ${theme.space.element}px`,
   lineHeight: 1,
   "& > :not(:first-child)": {
-    fontSize: 12,
-    color: "#909090",
+    fontSize: theme.font.size.fineprint,
+    color: theme.color.text.lightest,
   },
 }))
 
