@@ -2,6 +2,7 @@ import { compact, defaults, filter, get, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import { withD3Element } from "../../../utils/d3_utils"
+
 import {
   symbol as d3Symbol,
   symbolCircle,
@@ -11,6 +12,7 @@ import {
   symbolStar,
   symbolTriangle,
 } from "d3-shape"
+
 import Events from "../../../shared/event_catalog"
 
 import {

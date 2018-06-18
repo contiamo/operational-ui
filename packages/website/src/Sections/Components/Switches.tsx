@@ -12,6 +12,7 @@ export class Component extends React.Component<{}, { on: boolean }> {
   state = {
     on: true,
   }
+
   render() {
     return (
       <>

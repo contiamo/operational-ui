@@ -1,21 +1,27 @@
 // d3 types
 import { Selection } from "d3-selection"
+
 export type D3Selection = Selection<any, any, any, any>
 
 // Event bus
 import EventEmitter from "./event_bus"
+
 export type EventBus = EventEmitter
 
 // Accessors
 export type Accessor<D, T> = (d: D) => T
+
 export interface Accessors<D> {
   [key: string]: Accessor<D, any>
 }
 
 // State
 import StateHandler, { ChartStateReadOnly } from "./state_handler"
+
 export { StateWriter } from "./state_handler"
+
 export type State = ChartStateReadOnly<ChartStateObject>
+
 export interface ChartStateObject {
   data: any
   config: Config

@@ -1,5 +1,6 @@
 import { Accessor, Config, Facade, Focus, Legend } from "../shared/typings"
 import { DateRange } from "moment-range"
+
 export {
   Accessor,
   Accessors,

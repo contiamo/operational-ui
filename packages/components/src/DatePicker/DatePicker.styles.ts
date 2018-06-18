@@ -5,15 +5,19 @@ import { fadeIn } from "@operational/utils"
 import { Card } from "../"
 import * as mixins from "../utils/mixins"
 import { inputDefaultWidth } from "../constants"
+
 const inputHeight: number = 33
+
 export interface ContainerProps {
   isExpanded: boolean
 }
+
 export const Container = styled("div")(({ isExpanded, theme }: any) => ({
   label: "datepicker",
   width: inputDefaultWidth,
   position: "relative",
 }))
+
 export const DatePickerCard = styled("div")(
   {
     position: "absolute",
@@ -41,6 +45,7 @@ export const DatePickerCard = styled("div")(
     zIndex: theme.deprecated.baseZIndex + 1000,
   }),
 )
+
 export const Toggle = styled("div")(
   ({
     theme,
@@ -74,6 +79,7 @@ export const Toggle = styled("div")(
     },
   }),
 )
+
 export const MonthNav = styled("div")(
   ({
     theme,
@@ -97,6 +103,7 @@ export const MonthNav = styled("div")(
     },
   }),
 )
+
 export const IconContainer = styled("div")({
   backgroundColor: "#FFFFFF",
   padding: 4,
@@ -104,11 +111,13 @@ export const IconContainer = styled("div")({
   width: "fit-content",
   cursor: "pointer",
 })
+
 export const Days = styled("div")({
   textAlign: "center",
   width: 210,
   margin: "auto -1px",
 })
+
 export const Day = styled("div")(
   {
     userSelect: "none",
@@ -142,6 +151,7 @@ export const Day = styled("div")(
         : theme.deprecated.colors.black,
   }),
 )
+
 export const Input = styled("input")(
   ({
     theme,
@@ -172,6 +182,7 @@ export const Input = styled("input")(
       : {}),
   }),
 )
+
 export const ClearButton = styled("div")(
   ({
     theme,

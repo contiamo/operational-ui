@@ -2,6 +2,7 @@ import React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
+
 export const inputFocus = ({
   theme,
   isError,
@@ -16,6 +17,7 @@ export const inputFocus = ({
   borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.info,
   boxShadow: `0 0 0 3px ${lighten(isError ? theme.deprecated.colors.error : theme.deprecated.colors.info, 40)}`,
 })
+
 export const Label = styled("label")(
   ({
     theme,
@@ -29,6 +31,7 @@ export const Label = styled("label")(
     minWidth: 240,
   }),
 )
+
 export const LabelText = styled("span")(
   ({
     theme,
@@ -47,6 +50,7 @@ export const LabelText = styled("span")(
     opacity: 0.4,
   }),
 )
+
 export const FormFieldControls = styled("div")(
   ({
     theme,
@@ -60,6 +64,7 @@ export const FormFieldControls = styled("div")(
     right: 0,
   }),
 )
+
 export const FormFieldControl = styled("div")(
   ({
     theme,
@@ -92,6 +97,7 @@ export const FormFieldControl = styled("div")(
     },
   }),
 )
+
 export const FormFieldError = styled("div")(
   ({
     theme,

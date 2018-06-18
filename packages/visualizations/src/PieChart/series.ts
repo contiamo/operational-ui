@@ -1,5 +1,6 @@
 // import DataHandler from "./data_handler"
 import Renderer from "./renderers/renderer"
+
 import {
   D3Selection,
   Data,
@@ -10,6 +11,7 @@ import {
   State,
   StateWriter,
 } from "./typings"
+
 import { flow, filter, forEach } from "lodash/fp"
 
 class Series {

@@ -3,6 +3,7 @@ import Series from "../series"
 import * as styles from "./styles"
 import { withD3Element, setRectAttributes } from "../../../utils/d3_utils"
 import { area as d3Area, curveStepAfter } from "d3-shape"
+
 import {
   BarsRendererAccessors,
   D3Selection,
@@ -14,6 +15,7 @@ import {
   SingleRendererOptions,
   State,
 } from "../../typings"
+
 import Events from "../../../shared/event_catalog"
 
 export type Options = SingleRendererOptions<BarsRendererAccessors>

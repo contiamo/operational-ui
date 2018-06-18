@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import * as mixins from "../utils/mixins"
+
 const Container = styled("div")(
   ({
     theme,
@@ -59,6 +60,7 @@ const Container = styled("div")(
     }
   },
 )
+
 const DisplayValue = styled("div")(
   ({
     theme,
@@ -72,6 +74,7 @@ const DisplayValue = styled("div")(
     color: isPlaceholder ? theme.deprecated.colors.gray : theme.deprecated.colors.black,
   }),
 )
+
 const Options = styled("div")(
   {
     position: "absolute",
@@ -98,6 +101,7 @@ const Options = styled("div")(
     zIndex: theme.deprecated.baseZIndex + 300,
   }),
 )
+
 const OptionsList = styled("div")(
   ({
     theme,
@@ -111,4 +115,5 @@ const OptionsList = styled("div")(
     overflow: "auto",
   }),
 )
+
 export { Container, Options, OptionsList, DisplayValue }

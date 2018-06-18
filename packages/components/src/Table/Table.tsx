@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "@operational/theme"
+
 export interface Props {
   /** Table columns headings */
   columns: string[]

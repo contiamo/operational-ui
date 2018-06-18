@@ -2,6 +2,7 @@ import * as React from "react"
 import glamorous from "glamorous"
 import { Sunburst, VisualizationWrapper } from "@operational/visualizations"
 import { operational, Theme } from "@operational/theme"
+
 import {
   OperationalUI,
   Button,
@@ -14,6 +15,7 @@ import {
   Small,
   SidebarItem,
 } from "@operational/components"
+
 import { darken } from "@operational/utils"
 
 import Marathon, { MarathonEnvironment } from "./Marathon"
