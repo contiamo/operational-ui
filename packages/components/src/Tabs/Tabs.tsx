@@ -48,7 +48,7 @@ const TabList = styled("ul")(
     "&:after": {
       position: "absolute",
       display: "block",
-      content: " ",
+      content: `" "`,
       width: "100%",
       height: 1,
       left: 0,
@@ -131,7 +131,6 @@ const Tabs = (props: PropsWithTheme) => {
       index,
     }),
   )
-  console.log(props)
   const color = expandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary // Display only the active panel based off the children props
 
   const { children: panelContent, disabled }: TabProps = childrenProps.find(

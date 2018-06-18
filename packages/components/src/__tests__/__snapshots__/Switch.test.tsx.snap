@@ -5,10 +5,10 @@ exports[`Switch Should render 1`] = `
   class="css-1bzrg5j-switch"
 >
   <div
-    class="css-kabsqu"
+    class="css-ioiph6"
   />
   <div
-    class="css-8qt210"
+    class="css-lobscw"
   />
 </div>
 `;

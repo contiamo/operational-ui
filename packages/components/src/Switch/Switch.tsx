@@ -46,7 +46,7 @@ const Button = styled("div")(
     position: "absolute",
     top: 0,
     left: 0,
-    content: " ",
+    content: `" "`,
     width: height,
     borderRadius: "50%",
   },
@@ -73,7 +73,7 @@ const Rail = styled("div")(
     backgroundColor: theme.deprecated.colors.gray,
     zIndex: theme.deprecated.baseZIndex,
     "&:after": {
-      content: " ",
+      content: `" "`,
       position: "absolute",
       width: "100%",
       height: "100%",
