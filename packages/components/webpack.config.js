@@ -8,7 +8,7 @@ module.exports = env => ({
   entry: {
     bundle: [path.resolve(__dirname, "./src/index.ts")],
   },
-  context: path.resolve(__dirname),
+  context: path.resolve(__dirname, "./src"),
   output: {
     filename: "index.js",
     path: path.join(__dirname, "lib"),

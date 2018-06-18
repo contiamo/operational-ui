@@ -30,13 +30,16 @@ const Slash = styled("span")(
       marginLeft: 0,
     },
   }),
-) // Intersperse slashes between the children (`<Breadcrumb />` elements)
+)
 
-// Curried first argument is necessary to give unique auto-incrementing
-// keys to the slash elements.
+/**
+ * Intersperse slashes between the children (`<Breadcrumb />` elements)
+ * Curried first argument is necessary to give unique auto-incrementing
+ *  keys to the slash elements.
+ */
 
 const intersperseSlashes = (index: number) => ([head, ...tail]: React.ReactNode[]): React.ReactNode[] =>
-  head ? [<Slash key={`divider-${index}`}>{"/"}</Slash>, head, ...intersperseSlashes(index + 1)(tail)] : []
+  head ? [<Slash key={`divider-${index}`}>/</Slash>, head, ...intersperseSlashes(index + 1)(tail)] : []
 
 const Breadcrumbs = (props: Props) => (
   <Container className={props.className} css={props.css}>

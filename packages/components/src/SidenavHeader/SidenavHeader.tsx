@@ -163,8 +163,9 @@ export class SidenavHeader extends React.Component<Props, State> {
     const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
     const isActive = Boolean(
       this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`)),
-    ) // Actual `to` prop should invalidate if the element has sublinks and is active
+    )
 
+    // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
     const ContainerComponent = to ? ContainerLink : Container
     return (
@@ -185,8 +186,9 @@ export class SidenavHeader extends React.Component<Props, State> {
                 }))
 
                 if (!isModifiedEvent(ev) && ctx.pushState && this.props.to) {
-                  ev.preventDefault() // Even if the `props.to` prop was ignored, redirect should still happen here
+                  ev.preventDefault()
 
+                  // Even if the `props.to` prop was ignored, redirect should still happen here
                   ctx.pushState(this.props.to)
                 }
               }}

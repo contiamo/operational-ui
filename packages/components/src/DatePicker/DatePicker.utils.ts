@@ -1,7 +1,6 @@
 import * as moment_ from "moment" // Temporary hack to work around inconsistent exports/imports between tsc and awesome-typescript-loader
 
-// @todo -> find a better solution here
-
+/** @todo -> find a better solution here */
 const moment = typeof moment_ === "function" ? moment_ : (moment_ as any).default
 
 export const months: string[] = [
@@ -17,14 +16,15 @@ export const months: string[] = [
   "October",
   "November",
   "December",
-] // A range of numbers pre-filled in an array
+]
 
-// range(5) -> [ 0, 1, 2, 3, 4 ]
-
+/** A range of numbers pre-filled in an array
+ * range(5) -> [ 0, 1, 2, 3, 4 ]
+ */
 export const range = (n: number): number[] =>
   Array.apply(null, {
     length: n,
-  }).map((val: number, i: number): number => i)
+  }).map((_: number, i: number): number => i)
 
 export const toDate = (year: number, month: number, day: number): string =>
   `${year}-${month < 9 ? "0" : ""}${month + 1}-${day < 9 ? "0" : ""}${day + 1}`

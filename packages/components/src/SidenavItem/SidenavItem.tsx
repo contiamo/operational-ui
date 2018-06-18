@@ -48,27 +48,25 @@ const containerStyles = ({
     textDecoration: "none",
 
     /** @todo Add to theme once colors are updated across codebase */
-    color: isActive ? theme.deprecated.colors.linkText : "#888888",
+    color: isActive ? theme.deprecated.colors.linkText : theme.color.text.lightest,
   },
   "&:hover": {
     /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: "#F4F4F4",
+    backgroundColor: theme.color.background.light,
   },
 })
 
 const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const IconContainer = styled("span")(
-  ({ theme }: WithTheme): CssStatic => ({
-    width: size,
-    height: size,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flex: `0 0 ${size}px`,
-  }),
-)
+const IconContainer = styled("span")(() => ({
+  width: size,
+  height: size,
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flex: `0 0 ${size}px`,
+}))
 
 const Label = styled("span")(
   ({
@@ -98,8 +96,7 @@ const SidenavItem = (props: Props) => {
             props.onClick && props.onClick()
 
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
-              ev.preventDefault() // Stopping propagation to prevent parent side nav header from triggering its own redirect
-
+              ev.preventDefault()
               ev.stopPropagation()
               ctx.pushState(props.to)
             }

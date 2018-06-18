@@ -2,12 +2,14 @@ import * as React from "react"
 import styled from "react-emotion"
 import { readableTextColor } from "@operational/utils"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { WithTheme, Css, CssStatic } from "../types" // Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:
+import { Css, CssStatic } from "../types"
 
-// <Tooltip top/>, as opposed to <Tooltip position="top"/>
-// It gets translated into the Position type inside the component, so it allows for a more
-// straightforward implementation.
-
+/**
+ * Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:
+ * <Tooltip top/>, as opposed to <Tooltip position="top"/>
+ * It gets translated into the Position type inside the component, so it allows for a more
+ * straightforward implementation.
+ */
 export interface Props {
   /** `css` prop as expected in a glamorous component */
   css?: Css
@@ -190,8 +192,9 @@ class Tooltip extends React.Component<Props, State> {
     }
 
     if (this.props.smart) {
-      // TODO: implement bounding box checks for right- and bottom-placed tooltips.
-      // This should be easier once the OperationalUI provides window dimensions in context.
+      /** @todo implement bounding box checks for right- and bottom-placed tooltips.
+       * This should be easier once the OperationalUI provides window dimensions in context.
+       */
       if (this.state.bbLeft < 0 && String(position) === "left") {
         position = "right"
       }

@@ -131,13 +131,15 @@ const Tabs = (props: PropsWithTheme) => {
       index,
     }),
   )
-  const color = expandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary // Display only the active panel based off the children props
+  const color = expandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary
 
+  // Display only the active panel based off the children props
   const { children: panelContent, disabled }: TabProps = childrenProps.find(
     ({ index }) => index === (props.active || 0),
   )
-  const activePanel: JSX.Element = disabled ? null : <TabPanel>{panelContent}</TabPanel> // Build titles fragment based off the children props
+  const activePanel: JSX.Element = disabled ? null : <TabPanel>{panelContent}</TabPanel>
 
+  // Build titles fragment based off the children props
   const tabTitles: JSX.Element[] = childrenProps.map(({ disabled, index, title }) => (
     <TabTitle
       color={color}
