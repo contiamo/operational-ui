@@ -1,7 +1,7 @@
 import * as React from "react"
 import glamorous from "glamorous"
 import { Button } from "@operational/components"
-import { operational } from "@operational/theme"
+import { constants as styleConstants } from "@operational/theme"
 import * as constants from "../../constants"
 
 export const title = "Colors"
@@ -13,20 +13,20 @@ export const snippetUrl = `${constants.snippetBaseUrl}/Components/Colors.tsx`
 export const Component = () => (
   <>
     <div>
-      <Button color="info">{`info / ${operational.colors.info}`}</Button>
-      <Button color="navBackground">{`nav / ${operational.colors.navBackground}`}</Button>
-      <Button color="background">{`background / ${operational.colors.background}`}</Button>
+      <Button condensed color="primary">{`primary / ${styleConstants.color.primary}`}</Button>
+      <Button condensed color="disabled">{`disabled / ${styleConstants.color.disabled}`}</Button>
     </div>
     <div>
-      <Button color="success">{`success / ${operational.colors.success}`}</Button>
-      <Button color="warning">{`warning / ${operational.colors.warning}`}</Button>
-      <Button color="error">{`error / ${operational.colors.error}`}</Button>
+      <Button condensed color="success">{`success / ${styleConstants.color.success}`}</Button>
+      <Button condensed color="error">{`error / ${styleConstants.color.error}`}</Button>
     </div>
     <div>
-      <Button color="gray">{`gray / ${operational.colors.gray}`}</Button>
-      <Button color="lightGray">{`lightGray / ${operational.colors.lightGray}`}</Button>
-      <Button color="border">{`border / ${operational.colors.border}`}</Button>
-      <Button color="separator">{`separator / ${operational.colors.separator}`}</Button>
+      <Button condensed color="basic">{`basic / ${styleConstants.color.basic}`}</Button>
+      <Button condensed color="ghost">{`ghost / ${styleConstants.color.ghost}`}</Button>
+    </div>
+    <div>
+      <Button condensed color="white">{`white / ${styleConstants.color.white}`}</Button>
+      <Button condensed color="black">{`black / ${styleConstants.color.black}`}</Button>
     </div>
   </>
 )
