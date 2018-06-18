@@ -31,7 +31,15 @@ const Container = styled("div")(
   }),
 )
 const PulsingCube = styled("div")(
-  ({ color, theme }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }): CssStatic => {
+  ({
+    color,
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    color?: string
+  }): CssStatic => {
     const backgroundColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
       backgroundColor,

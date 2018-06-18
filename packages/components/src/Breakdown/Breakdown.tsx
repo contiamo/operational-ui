@@ -55,7 +55,9 @@ const Container = styled("div")(
     theme,
     onClick,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     onClick: () => void
   }): CssStatic => ({
     padding: `${(theme.deprecated.spacing * 3) / 4}px 0`,
@@ -80,7 +82,13 @@ const Label = styled("label")(
   {
     display: "block",
   },
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }) => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }) => ({
     marginBottom: theme.deprecated.spacing / 4,
     fontSize: theme.deprecated.typography.small.fontSize,
   }),
@@ -111,7 +119,9 @@ const Bar = styled("div")(
     fill,
     color,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     fill: number
     color: string
   }): CssStatic => {

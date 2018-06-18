@@ -42,7 +42,9 @@ const Container = styled("div")(
     theme,
   }: {
     position: Position
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
   }): CssStatic => {
     const backgroundColor = theme.deprecated.colors.black
     return {

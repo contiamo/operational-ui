@@ -17,7 +17,9 @@ const Container = styled("div")(
     theme,
     selected,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     selected: boolean
   }): CssStatic => {
     const backgroundColor = selected ? theme.deprecated.colors.background : theme.deprecated.colors.white
@@ -37,7 +39,13 @@ const Container = styled("div")(
   },
 )
 const IconContainer = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

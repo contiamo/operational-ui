@@ -24,7 +24,9 @@ const Container = styled("div")(
     isDisabled,
     isActive,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     isDisabled: boolean
     isActive: boolean
   }): CssStatic => ({

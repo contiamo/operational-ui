@@ -33,7 +33,12 @@ export interface Props {
   disabled?: boolean
 }
 
-const numericalHeight = (css: Css, theme?: OperationalStyleConstants & { deprecated: Theme }): number | null => {
+const numericalHeight = (
+  css: Css,
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  },
+): number | null => {
   const workingCss =
     typeof css === "function"
       ? css({
@@ -56,7 +61,9 @@ const TextareaComp = styled("textarea")(
     css_,
     disabled,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     isCode: boolean
     isError: boolean
     css_: Css
@@ -107,8 +114,8 @@ const Textarea = (props: Props) => {
         ) : null}
       </FormFieldControls>
       {/* The prop `css_` is used because the prop is used merely for some computation inside the
-         * glamorous component as opposed to as actual styles to be injected into the component.
-         */}
+        * glamorous component as opposed to as actual styles to be injected into the component.
+        */}
       <TextareaComp
         css_={props.css || {}}
         disabled={Boolean(props.disabled)}

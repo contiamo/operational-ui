@@ -14,7 +14,6 @@ export interface Props {
 
   title?: string
 }
-
 const Div = styled("div")()
 
 const Tab = (props: Props) => (

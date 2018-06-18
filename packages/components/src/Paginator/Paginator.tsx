@@ -29,7 +29,9 @@ const PaginatorSpan = styled("div")(
     isActive,
     isDisabled,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     isActive?: boolean
     isDisabled?: boolean
   }): CssStatic => ({

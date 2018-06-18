@@ -53,7 +53,9 @@ const InputField = styled("input")(
     isStandalone,
     isError,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     disabled: boolean
     isStandalone: boolean
     isError: boolean

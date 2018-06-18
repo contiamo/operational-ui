@@ -46,13 +46,25 @@ const NameContainer = styled("div")(
   }),
 )
 const Name = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     ...theme.deprecated.typography.body,
     margin: 0,
   }),
 )
 const Title = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     ...theme.deprecated.typography.body,
     color: theme.deprecated.colors.gray,
     margin: 0,
@@ -65,7 +77,9 @@ const Picture = styled("div")(
     colorAssignment,
     photo,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     color?: string
     colorAssignment?: number
     photo?: string

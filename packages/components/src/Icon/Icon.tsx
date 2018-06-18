@@ -31,7 +31,9 @@ export interface Props {
   rotation?: number
 }
 export interface PropsWithTheme extends Props {
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
 }
 
 const Icon = (props: PropsWithTheme) => {

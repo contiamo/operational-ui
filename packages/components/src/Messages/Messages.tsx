@@ -9,7 +9,13 @@ export interface Props {
   children?: React.ReactNode
 }
 const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     label: "Messages",
     position: "fixed",
     zIndex: theme.deprecated.baseZIndex + 500,

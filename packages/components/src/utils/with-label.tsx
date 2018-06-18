@@ -3,12 +3,24 @@ import styled from "react-emotion"
 import { Theme, OperationalStyleConstants } from "@operational/theme"
 import { Css } from "../types"
 const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     display: "inline-block",
   }),
 )
 const Label = styled("label")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     ...theme.deprecated.typography.small,
     fontWeight: 600,
     opacity: 0.7,

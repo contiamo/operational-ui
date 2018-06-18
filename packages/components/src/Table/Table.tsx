@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { css } from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 export interface Props {
   /** Table columns headings */
   columns: string[]
@@ -28,7 +28,7 @@ export interface Props {
   __experimentalRowActions?: React.ReactNode[]
 }
 interface CompProps {
-  theme?: OperationalStyleConstants
+  theme?: OperationalStyleConstants & { deprecated: Theme }
 }
 const Container = styled("table")(({ theme }: CompProps) => ({
   width: "100%",

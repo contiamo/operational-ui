@@ -1,10 +1,10 @@
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import * as tinycolor from "tinycolor2"
 export interface Props {
   success?: boolean
   error?: boolean
-  theme: OperationalStyleConstants
+  theme?: OperationalStyleConstants & { deprecated: Theme }
 }
 
 const getColorFromProps = ({ success, error, theme }: Props): string => {

@@ -37,7 +37,9 @@ const Container = styled("div")(
     color,
     hasChip,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     color?: string
     hasChip: boolean
   }): {} => {
@@ -73,7 +75,15 @@ const Content = styled("div")(
   }),
 )
 const Action = styled("div")(
-  ({ theme, color }: { theme?: OperationalStyleConstants & { deprecated: Theme }; color?: string }): {} => {
+  ({
+    theme,
+    color,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    color?: string
+  }): {} => {
     const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
     const borderColor = isWhite(backgroundColor) ? theme.deprecated.colors.lightGray : "rgba(255, 255, 255, 0.15)"
     return {

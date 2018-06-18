@@ -14,7 +14,15 @@ export interface Props {
   __isContextMenuItem?: boolean
 }
 const Container = styled("div")(
-  ({ theme, clickable }: { theme?: OperationalStyleConstants & { deprecated: Theme }; clickable: boolean }): any => ({
+  ({
+    theme,
+    clickable,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    clickable: boolean
+  }): any => ({
     label: "contextmenuitem",
     backgroundColor: theme.deprecated.colors.white,
     minWidth: 160,

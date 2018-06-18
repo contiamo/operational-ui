@@ -31,7 +31,13 @@ export interface State {
   isHovered: boolean
 }
 const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => {
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => {
     const backgroundColor = theme.deprecated.colors.white
     const lighterBackgroundColor = lighten(theme.deprecated.colors.navBackground, 8)
     const color = readableTextColor(backgroundColor, [theme.deprecated.colors.text, theme.deprecated.colors.white])

@@ -20,14 +20,26 @@ export interface Props {
   children?: React.ReactNode
 }
 const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     label: "page",
     backgroundColor: theme.deprecated.colors.white,
     padding: `0px ${theme.deprecated.spacing * 1.5}px ${theme.deprecated.spacing * 1.5}px`,
   }),
 )
 const TopBar = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     height: theme.deprecated.box,
     display: "flex",
     alignItems: "center",
@@ -35,7 +47,13 @@ const TopBar = styled("div")(
   }),
 )
 const TitleBar = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     ...theme.deprecated.typography.title,
     display: "flex",
     alignItems: "center",
@@ -50,7 +68,13 @@ const TitleBar = styled("div")(
   }),
 )
 const ControlsContainer = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants & { deprecated: Theme } }): CssStatic => ({
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => ({
     marginLeft: theme.deprecated.spacing,
     // Offset the line-height setting inherited from being inside a
     // typography component/mixin.

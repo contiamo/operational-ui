@@ -43,7 +43,15 @@ const Content = styled("div")(
   }),
 )
 const Header = styled("div")(
-  ({ theme, isOpen }: { theme?: OperationalStyleConstants & { deprecated: Theme }; isOpen: boolean }): CssStatic => ({
+  ({
+    theme,
+    isOpen,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    isOpen: boolean
+  }): CssStatic => ({
     position: "relative",
     display: "flex",
     height: 30,

@@ -17,7 +17,9 @@ export interface Props {
 }
 export interface StyleProps {
   on: boolean
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
 }
 const width: number = 28
 const height: number = 16
