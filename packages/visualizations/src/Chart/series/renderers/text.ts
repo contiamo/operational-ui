@@ -1,6 +1,7 @@
 import { compact, defaults, filter, forEach, get, isBoolean, map } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
+
 import {
   TextRendererAccessors,
   TextRendererConfig,

@@ -2,18 +2,18 @@
 
 exports[`Breadcrumbs Component Should initialize properly 1`] = `
 <div
-  class="css-i84p3g"
+  class="css-m4pzpm-breadcrumbs"
 >
   <span
-    class="css-lnjicu"
+    class="css-udjxb6"
   >
     /
   </span>
   <span
-    class="css-f37n4n"
+    class="css-1azijc6-breadcrumb"
   >
     <span
-      class="css-nil"
+      class="css-0"
     >
       <a
         href="http://ui.contiamo.com"
@@ -23,15 +23,15 @@ exports[`Breadcrumbs Component Should initialize properly 1`] = `
     </span>
   </span>
   <span
-    class="css-lnjicu"
+    class="css-udjxb6"
   >
     /
   </span>
   <span
-    class="css-f37n4n"
+    class="css-1azijc6-breadcrumb"
   >
     <span
-      class="css-nil"
+      class="css-0"
     >
       Link 1
     </span>

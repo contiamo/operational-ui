@@ -2,20 +2,20 @@
 
 exports[`Record Component Should render 1`] = `
 <div
-  class="css-1o3duj"
+  class="css-pp6hf6-record"
 >
   <div
-    class="css-mihd1c"
+    class="css-iq9a13"
   >
     Title
     <div
-      class="css-1pv0s18"
+      class="css-zqbql9"
     >
       controls
     </div>
   </div>
   <div
-    class="css-sr985f"
+    class="css-3hhcrm"
   >
     Some content
   </div>

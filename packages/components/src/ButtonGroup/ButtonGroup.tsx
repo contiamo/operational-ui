@@ -1,21 +1,23 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   /** Id */
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   /** Class name */
+
   className?: string
   /** Children as a list of `Button` elements. Avoid mixing condensed and full-height buttons. */
+
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "buttongroup",
     "& > button": {

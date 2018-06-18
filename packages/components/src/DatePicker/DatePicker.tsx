@@ -1,10 +1,10 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
-
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 import { Label, LabelText } from "../utils/mixins"
 import { Card, Icon } from "../"
+
 import {
   Container,
   ClearButton,
@@ -16,6 +16,7 @@ import {
   Input,
   DatePickerCard,
 } from "./DatePicker.styles"
+
 import {
   months,
   daysInMonth,
@@ -25,21 +26,32 @@ import {
   toYearMonthDay,
   validateDateString,
 } from "./DatePicker.utils"
+
 import Month from "./DatePicker.Month"
 
 export interface Props {
   id?: string
   label?: string
   /** Start date in the format YYYY-MM-DD. */
+
   start?: string
   /** End date in the format YYYY-MM-DD. */
+
   end?: string
   /** Triggered every time the start or end dates change. `undefined` values clear start or end values. */
-  onChange?: (date: { start?: string; end?: string }) => void
+
+  onChange?: (
+    date: {
+      start?: string
+      end?: string
+    },
+  ) => void
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   /** Placeholder text when no dates selected */
+
   placeholder?: string
 }
 
@@ -53,11 +65,12 @@ class DatePicker extends React.Component<Props, State> {
   static defaultProps = {
     placeholder: "Enter date",
   }
+
   constructor(props: Props) {
     super(props)
-    this.validate(props)
-    // Start year month is either based on the start date
+    this.validate(props) // Start year month is either based on the start date
     // or the current month if no start date is specified.
+
     const startYearMonthInWidget = props.start
       ? {
           year: toYearMonthDay(props.start).year,
@@ -76,17 +89,18 @@ class DatePicker extends React.Component<Props, State> {
   containerNode: any
   inputNode: any
   keypressHandler: (a: any) => void
-  outsideClickHandler: (a: any) => void
+  outsideClickHandler: (a: any) => void // Throw runtime errors if start/end dates are of the wrong format.
 
-  // Throw runtime errors if start/end dates are of the wrong format.
   // Optional props argument is used when the component doesn't have
   // these dates on the instance (e.g. constructor).
+
   validate(props?: Props) {
-    const validatedProps = props || this.props
-    // Validate start date of
+    const validatedProps = props || this.props // Validate start date of
+
     if (validatedProps.start) {
       validateDateString(validatedProps.start)
     }
+
     if (validatedProps.end) {
       validateDateString(validatedProps.end)
     }
@@ -109,23 +123,28 @@ class DatePicker extends React.Component<Props, State> {
       if (ev.keyCode !== 27) {
         return
       }
+
       this.setState(prevState => ({
         ...prevState,
         isExpanded: false,
       }))
+
       if (this.inputNode) {
         this.inputNode.blur()
       }
     }
+
     this.outsideClickHandler = (ev: any) => {
       if (this.containerNode && (this.containerNode === ev.target || this.containerNode.contains(ev.target))) {
         return
       }
+
       this.setState(prevState => ({
         ...prevState,
         isExpanded: false,
       }))
     }
+
     document.addEventListener("click", this.outsideClickHandler)
     document.addEventListener("keydown", this.keypressHandler)
   }
@@ -147,7 +166,7 @@ class DatePicker extends React.Component<Props, State> {
     const daysInCurrentMonth = daysInMonth(month, year)
     const datePickerWithoutLabel = (
       <Container
-        innerRef={node => {
+        innerRef={(node: React.ReactNode) => {
           this.containerNode = node
         }}
         key={id}
@@ -157,7 +176,11 @@ class DatePicker extends React.Component<Props, State> {
           <Toggle
             onClick={(ev: any): void => {
               ev.preventDefault()
-              onChange && onChange({ start: null, end: null })
+              onChange &&
+                onChange({
+                  start: null,
+                  end: null,
+                })
             }}
           >
             <Icon name="X" size={14} />
@@ -174,7 +197,9 @@ class DatePicker extends React.Component<Props, State> {
           placeholder={placeholder}
           onClick={(ev: any) => {
             this.setState(
-              prevState => ({ isExpanded: !prevState.isExpanded }),
+              prevState => ({
+                isExpanded: !prevState.isExpanded,
+              }),
               () => {
                 if (!this.state.isExpanded) {
                   this.inputNode.blur()
@@ -182,7 +207,9 @@ class DatePicker extends React.Component<Props, State> {
               },
             )
           }}
-          css={{ width: "100%" }}
+          css={{
+            width: "100%",
+          }}
         />
         <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
@@ -208,7 +235,6 @@ class DatePicker extends React.Component<Props, State> {
         </DatePickerCard>
       </Container>
     )
-
     return label ? (
       <Label>
         <LabelText>{label}</LabelText>

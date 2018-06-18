@@ -1,31 +1,36 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 
 export interface Props {
   /** Table columns headings */
   columns: string[]
   /** Table rows as an array of cells */
+
   rows: ((string | React.ReactNode)[])[]
   /** Called on row click */
+
   onRowClick?: (row: (string | React.ReactNode)[], index: number) => void
   /**
    * Text to display on right on row hover
    */
+
   rowActionName?: string
   /**
    * This will not work anymore!
    * @deprecated
    */
+
   __experimentalColumnCss?: any
   /**
    * Add actions on the end of each row
    */
+
   __experimentalRowActions?: React.ReactNode[]
 }
 
 interface CompProps {
-  theme?: OperationalStyleConstants
+  theme?: OperationalStyleConstants & { deprecated: Theme }
 }
 
 const Container = styled("table")(({ theme }: CompProps) => ({
@@ -68,7 +73,9 @@ const Action = styled(Td)(({ theme }: CompProps) => ({
   textAlign: "right",
   paddingRight: theme.space.content,
   color: "transparent",
-  "tr:hover &, :hover": { color: theme.color.text.action },
+  "tr:hover &, :hover": {
+    color: theme.color.text.action,
+  },
 }))
 
 const Actions = styled(Td)(({ theme }: CompProps) => ({
@@ -81,7 +88,9 @@ const Actions = styled(Td)(({ theme }: CompProps) => ({
    * the box model of the Td while opacity does not.
    */
   opacity: 0,
-  "tr:hover &, :hover": { opacity: 1 },
+  "tr:hover &, :hover": {
+    opacity: 1,
+  },
 }))
 
 const EmptyView = styled(Td)(({ theme }: CompProps) => ({

@@ -12,12 +12,16 @@ export interface Props {
   /** Theme */
   theme?: Theme
   /** Children */
+
   children?: React.ReactNode
   /** Use the base styles */
+
   withBaseStyles?: boolean
   /** Custom push state method expecting a single string */
+
   pushState?: (path: string) => void
   /** Custom replace state method expecting a single string */
+
   replaceState?: (path: string) => void
 }
 
@@ -25,17 +29,28 @@ const { Provider, Consumer } = React.createContext({})
 
 const OperationalUI = (props: Props) => {
   const { withBaseStyles, pushState, replaceState, children, theme } = props
-
   withBaseStyles && injectGlobal(baseStylesheet(theme || operational))
-
   return (
-    <DeprecatedThemeProvider theme={theme || operational}>
-      <ThemeProvider theme={constants}>
-        <Provider value={{ pushState, replaceState }}>{children}</Provider>
-      </ThemeProvider>
-    </DeprecatedThemeProvider>
+    <ThemeProvider
+      theme={{
+        ...constants,
+        deprecated: operational,
+      }}
+    >
+      <DeprecatedThemeProvider theme={operational}>
+        <Provider
+          value={{
+            pushState,
+            replaceState,
+          }}
+        >
+          {children}
+        </Provider>
+      </DeprecatedThemeProvider>
+    </ThemeProvider>
   )
 }
 
 export default OperationalUI
+
 export { Consumer }

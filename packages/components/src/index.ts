@@ -35,6 +35,7 @@ export { default as Sidenav } from "./Sidenav/Sidenav"
 export { default as SidenavHeader } from "./SidenavHeader/SidenavHeader"
 export { default as SidenavItem } from "./SidenavItem/SidenavItem"
 export { default as Spinner } from "./Spinner/Spinner"
+export { default as Status } from "./Status/Status"
 export { default as Switch } from "./Switch/Switch"
 export { default as Tab } from "./Tab/Tab"
 export { default as Tabs } from "./Tabs/Tabs"
@@ -46,3 +47,5 @@ export { default as TimelineItem } from "./TimelineItem/TimelineItem"
 export { default as Tooltip } from "./Tooltip/Tooltip"
 export { Title, Heading1, Heading2, Small, Body } from "./Typography/Typography"
 export { Context } from "./types"
+
+export default require("./OperationalUI/OperationalUI").default

@@ -1,7 +1,6 @@
 import * as React from "react"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
-import { Theme } from "@operational/theme"
-
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Days, Day } from "./DatePicker.styles"
 
 export interface IDatePair {
@@ -50,12 +49,21 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
         const date = toDate(prevYear, prevMonth, day)
         return (
           <Day
-            selected={isSelected(date, { start, end })}
+            selected={isSelected(date, {
+              start,
+              end,
+            })}
             key={index}
             isPlaceholder
             onClick={(ev: any) => {
               ev.preventDefault()
-              onChange && onChange(setNewDate(date, { start, end }))
+              onChange &&
+                onChange(
+                  setNewDate(date, {
+                    start,
+                    end,
+                  }),
+                )
             }}
           >
             {day + 1}
@@ -66,11 +74,20 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
         const date = toDate(year, month, index)
         return (
           <Day
-            selected={isSelected(date, { start, end })}
+            selected={isSelected(date, {
+              start,
+              end,
+            })}
             key={index}
             onClick={(ev: any) => {
               ev.preventDefault()
-              onChange && onChange(setNewDate(date, { start, end }))
+              onChange &&
+                onChange(
+                  setNewDate(date, {
+                    start,
+                    end,
+                  }),
+                )
             }}
           >
             {index + 1}
@@ -82,11 +99,20 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
         return (
           <Day
             key={index}
-            selected={isSelected(date, { start, end })}
+            selected={isSelected(date, {
+              start,
+              end,
+            })}
             isPlaceholder
             onClick={(ev: any) => {
               ev.preventDefault()
-              onChange && onChange(setNewDate(date, { start, end }))
+              onChange &&
+                onChange(
+                  setNewDate(date, {
+                    start,
+                    end,
+                  }),
+                )
             }}
           >
             {number + 1}

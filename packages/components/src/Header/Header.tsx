@@ -1,5 +1,5 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import styled from "react-emotion"
 
 export interface Props {
   start: any
@@ -7,10 +7,11 @@ export interface Props {
   end: any
 }
 
-const HeaderBar = glamorous.div({
+const HeaderBar = styled("div")({
   width: "100vw",
   height: 44,
-  background: "#3e3e3e" /** @todo themeify when final */,
+  background: "#3e3e3e",
+  /** @todo themeify when final */
 })
 
 const Header = () => <HeaderBar />

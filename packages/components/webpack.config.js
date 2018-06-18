@@ -2,25 +2,30 @@
 
 const path = require("path")
 
-module.exports = {
+module.exports = env => ({
+  mode: process.env.NODE_ENV,
+  devtool: "inline-source-map",
   entry: {
     bundle: [path.resolve(__dirname, "./src/index.ts")],
   },
-  context: path.resolve(__dirname),
+  context: path.resolve(__dirname, "./src"),
   output: {
-    filename: "bundle.js",
-    path: path.join(__dirname, "temp"),
+    filename: "index.js",
+    path: path.join(__dirname, "lib"),
+    library: "@operational/components",
+    libraryTarget: "umd",
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)?$/,
         exclude: /node_modules/,
         use: [
+          "babel-loader",
           {
-            loader: "awesome-typescript-loader",
+            loader: "ts-loader",
             options: {
-              configFileName: "./tsconfig.styleguide.json",
+              configFile: path.resolve(__dirname, env === "package" ? "tsconfig.json" : "tsconfig.styleguide.json"),
             },
           },
         ],
@@ -30,4 +35,4 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-}
+})

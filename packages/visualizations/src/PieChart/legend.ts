@@ -5,6 +5,7 @@ import * as localStyles from "./styles"
 import * as globalStyles from "../shared/styles"
 import { withD3Element } from "../utils/d3_utils"
 import { roundedUpHeight, widthPadding, heightMargin, totalWidth } from "../utils/legend_utils"
+
 import {
   ComponentConfigInfo,
   ComponentHoverPayload,

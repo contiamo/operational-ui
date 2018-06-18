@@ -1,8 +1,8 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent, withTheme } from "glamorous"
+import styled from "react-emotion"
+import { withTheme } from "emotion-theming"
 import { darken } from "@operational/utils"
-import { Theme, expandColor } from "@operational/theme"
-
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"
 
@@ -12,27 +12,32 @@ export interface Props {
   className?: string
   id?: string
   /** Index of the active tab. */
+
   active?: number
   /** Active color. It can be a hex value or a named theme color. */
+
   activeColor?: string
   children?: React.ReactNode
   /** Function to be called once the tab index changes. */
+
   onChange?: (index: number) => void
 }
 
 export interface PropsWithTheme extends Props {
-  theme: Theme
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
 }
 
-const Container = glamorous.div({
+const Container = styled("div")({
   label: "tabs",
 })
 
-const Content = glamorous.div({
+const Content = styled("div")({
   marginTop: 18,
 })
 
-const TabList = glamorous.ul(
+const TabList = styled("ul")(
   {
     listStyle: "none",
     margin: 0,
@@ -43,7 +48,7 @@ const TabList = glamorous.ul(
     "&:after": {
       position: "absolute",
       display: "block",
-      content: " ",
+      content: `" "`,
       width: "100%",
       height: 1,
       left: 0,
@@ -57,12 +62,12 @@ const TabList = glamorous.ul(
   },
   ({ theme }: WithTheme): CssStatic => ({
     "&:after": {
-      background: darken(theme.colors.lightGray, 6),
+      background: darken(theme.deprecated.colors.lightGray, 6),
     },
   }),
 )
 
-const TabPanel = glamorous.div({
+const TabPanel = styled("div")({
   /* Add any styles to the TabPanel */
 })
 
@@ -73,7 +78,7 @@ const overflowEllipsis = {
   wordWrap: "normal",
 }
 
-const TabTitle = glamorous.li(
+const TabTitle = styled("li")(
   {
     cursor: "pointer",
     flex: "0 0 auto",
@@ -89,12 +94,14 @@ const TabTitle = glamorous.li(
     isActive,
     disabled,
   }: {
-    theme: Theme
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     color: string
     isActive: boolean
     disabled: boolean
   }): {} => ({
-    ...theme.typography.body,
+    ...theme.deprecated.typography.body,
     ...overflowEllipsis,
     borderBottom: `2px solid transparent`,
     ...(isActive
@@ -105,7 +112,7 @@ const TabTitle = glamorous.li(
       : {}),
     ...(disabled
       ? {
-          color: theme.colors.lightGray,
+          color: theme.deprecated.colors.lightGray,
         }
       : {
           "&:hover": {
@@ -119,10 +126,12 @@ const Tabs = (props: PropsWithTheme) => {
   // Get all children properties and add an index value to each of them
   const childrenProps: TabProps[] = React.Children.map(
     props.children,
-    (child: React.ReactElement<TabProps>, index: number) => ({ ...child.props, index }),
+    (child: React.ReactElement<TabProps>, index: number) => ({
+      ...child.props,
+      index,
+    }),
   )
-
-  const color = expandColor(props.theme, props.activeColor) || props.theme.colors.info
+  const color = expandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary
 
   // Display only the active panel based off the children props
   const { children: panelContent, disabled }: TabProps = childrenProps.find(
@@ -146,7 +155,6 @@ const Tabs = (props: PropsWithTheme) => {
       {title}
     </TabTitle>
   ))
-
   return (
     <Container css={props.css} className={props.className} id={props.id}>
       <TabList>{tabTitles}</TabList>
@@ -155,6 +163,4 @@ const Tabs = (props: PropsWithTheme) => {
   )
 }
 
-const WrappedTabs: React.SFC<Props> = withTheme(Tabs)
-
-export default WrappedTabs
+export default withTheme(Tabs)

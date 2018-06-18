@@ -17,8 +17,10 @@ import {
   set,
   uniqBy,
 } from "lodash/fp"
+
 import { stack as d3Stack } from "d3-shape"
 import Series from "./series/series"
+
 import {
   Accessor,
   D3Selection,

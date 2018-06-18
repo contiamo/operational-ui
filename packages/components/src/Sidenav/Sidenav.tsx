@@ -1,8 +1,7 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import styled from "react-emotion"
 import { lighten, readableTextColor } from "@operational/utils"
-import { Theme, expandColor } from "@operational/theme"
-
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import deprecate from "../utils/deprecate"
 import { sidenavExpandedWidth } from "../constants"
 import { WithTheme, Css, CssStatic } from "../types"
@@ -10,6 +9,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   children?: React.ReactNode
@@ -18,12 +18,14 @@ export interface Props {
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
+
   expanded?: boolean
   /**
    * Specifies whether sidenav should expand on hover
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
+
   expandOnHover?: boolean
 }
 
@@ -31,20 +33,25 @@ export interface State {
   isHovered: boolean
 }
 
-const Container = glamorous.div(
-  ({ theme }: { theme: Theme }): CssStatic => {
-    const backgroundColor = theme.colors.white
-    const lighterBackgroundColor = lighten(theme.colors.navBackground, 8)
-    const color = readableTextColor(backgroundColor, [theme.colors.text, theme.colors.white])
-
+const Container = styled("div")(
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): CssStatic => {
+    const backgroundColor = theme.deprecated.colors.white
+    const lighterBackgroundColor = lighten(theme.deprecated.colors.navBackground, 8)
+    const color = readableTextColor(backgroundColor, [theme.deprecated.colors.text, theme.deprecated.colors.white])
     return {
       color,
-      background: theme.colors.white,
+      background: theme.deprecated.colors.white,
       label: "sidenav",
       width: sidenavExpandedWidth,
       borderRight: "1px solid",
-      borderRightColor: theme.colors.separator,
-      zIndex: theme.baseZIndex + 100,
+      borderRightColor: theme.deprecated.colors.separator,
+      zIndex: theme.deprecated.baseZIndex + 100,
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",

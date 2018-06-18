@@ -32,8 +32,15 @@ const AnchorLink = glamorous.h2(
 export const Section = (props: { title: string; docsUrl: string; snippetUrl: string; children: React.ReactNode }) => {
   const slug = props.title.toLowerCase().replace(/ /g, "-")
   return (
-    <Card css={{ margin: "24px 0" }} id={slug}>
-      <CardHeader>
+    <Card id={slug}>
+      <CardHeader
+        action={
+          <div>
+            <DocsLink href={props.snippetUrl}>View code</DocsLink>
+            <DocsLink href={props.docsUrl}>Docs</DocsLink>
+          </div>
+        }
+      >
         <AnchorLink
           onClick={() => {
             ;(history as any).pushState(null, null, `#${slug}`)
@@ -42,10 +49,6 @@ export const Section = (props: { title: string; docsUrl: string; snippetUrl: str
           {props.title}
           <Icon name="Link" />
         </AnchorLink>
-        <div>
-          <DocsLink href={props.snippetUrl}>View code</DocsLink>
-          <DocsLink href={props.docsUrl}>Docs</DocsLink>
-        </div>
       </CardHeader>
       <Div
         css={{

@@ -8,6 +8,7 @@ import { scaleLinear as d3ScaleLinear } from "d3-scale"
 import { setPathAttributes, setTextAttributes } from "../../utils/d3_utils"
 import * as styles from "./styles"
 import * as Utils from "./renderer_utils"
+
 import {
   ComputedArcs,
   ComputedData,

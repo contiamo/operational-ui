@@ -2,7 +2,7 @@
 
 exports[`ContextMenu Component Should render 1`] = `
 <div
-  class="css-1gsi2vm"
+  class="css-3223hv-contextmenu"
 >
   <svg
     fill="none"
@@ -32,20 +32,20 @@ exports[`ContextMenu Component Should render 1`] = `
     />
   </svg>
   <div
-    class="css-1taffx9"
+    class="css-1by8gdf"
   >
     <div
-      class="css-1czenb6"
+      class="css-15fb3br-contextmenuitem"
     >
       Menu 1
     </div>
     <div
-      class="css-83h9h0"
+      class="css-4rbfm8-contextmenuitem"
     >
       Menu 2
     </div>
     <div
-      class="css-83h9h0"
+      class="css-4rbfm8-contextmenuitem"
     >
       Menu 3
     </div>

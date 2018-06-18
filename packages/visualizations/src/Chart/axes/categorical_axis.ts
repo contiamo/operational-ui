@@ -21,6 +21,7 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
+
 import {
   computeRequiredMargin,
   insertElements,
@@ -29,10 +30,12 @@ import {
   getTextAnchor,
   drawTitle,
 } from "./axis_utils"
+
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import Events from "../../shared/event_catalog"
 import { scaleBand } from "d3-scale"
 import * as styles from "./styles"
+
 import {
   AxisAttributes,
   AxisClass,

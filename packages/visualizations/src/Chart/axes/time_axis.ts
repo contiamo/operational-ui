@@ -22,6 +22,7 @@ import {
   uniqueId,
   values,
 } from "lodash/fp"
+
 import {
   computeRequiredMargin,
   insertElements,
@@ -30,15 +31,19 @@ import {
   getTextAnchor,
   drawTitle,
 } from "./axis_utils"
+
 import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
 import Events from "../../shared/event_catalog"
 import * as Moment from "moment"
 import { extendMoment } from "moment-range"
+
 const moment: any = extendMoment(Moment as any)
+
 import { scaleTime } from "d3-scale"
 import { timeMonday } from "d3-time"
 import { timeFormat } from "d3-time-format"
 import * as styles from "./styles"
+
 import {
   AxisAttributes,
   AxisClass,

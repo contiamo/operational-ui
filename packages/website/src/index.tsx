@@ -1,10 +1,10 @@
 import * as React from "react"
 import { render } from "react-dom"
-import glamorous, { Hr, CSSProperties } from "glamorous"
-import { Card, Icon, Button, ButtonGroup, CardHeader, OperationalUI, Input } from "@operational/components"
+import glamorous, { Div } from "glamorous"
+import { Card, Button, ButtonGroup, OperationalUI, Input } from "@operational/components"
 import { operational, Theme } from "@operational/theme"
 
-import { StaticContent, Animation, Hero, Logo, Footer, Section } from "./components"
+import { StaticContent, Hero, Logo, Footer, Section } from "./components"
 import componentsSections from "./Sections/Components"
 import visualizationsSections from "./Sections/Visualizations"
 
@@ -91,9 +91,9 @@ export default class App extends React.Component<{}, State> {
         ? (componentsSections as SectionData[])
         : (visualizationsSections as SectionData[])
     return (
-      <OperationalUI withBaseStyles>
+      <OperationalUI withBaseStyles theme={operational}>
         <Container>
-          <Card css={{ overflow: "hidden" }}>
+          <Card>
             <Hero>
               <TitleBarContent>
                 <Logo size={86} rotation={this.state.rotation} />
@@ -118,41 +118,36 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
             />
           </Card>
           <Separator />
-          <ButtonGroup
-            css={({ theme }: { theme: Theme }) => ({
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              textAlign: "center",
-            })}
-          >
-            <Button
-              css={{ ":focus": { boxShadow: "none" } }}
-              color={this.state.page === "components" ? "info" : "white"}
-              onClick={() => {
-                this.setState(() => ({ page: "components" }))
-              }}
-            >
-              Components
-            </Button>
-            <Button
-              css={{ ":focus": { boxShadow: "none" } }}
-              color={this.state.page === "visualizations" ? "info" : "white"}
-              onClick={() => {
-                this.setState(() => ({ page: "visualizations" }))
-              }}
-            >
-              Visualizations
-            </Button>
-          </ButtonGroup>
-          <Input
-            value={this.state.search}
-            onChange={(search: string) => {
-              this.setState(() => ({ search }))
-            }}
-            css={{ marginTop: operational.spacing * 1.5, width: "100%" }}
-            placeholder={`Search ${this.state.page}`}
-          />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <ButtonGroup>
+              <Button
+                color={this.state.page === "components" ? "info" : "white"}
+                onClick={() => {
+                  this.setState(() => ({ page: "components" }))
+                }}
+              >
+                Components
+              </Button>
+              <Button
+                color={this.state.page === "visualizations" ? "info" : "white"}
+                onClick={() => {
+                  this.setState(() => ({ page: "visualizations" }))
+                }}
+              >
+                Visualizations
+              </Button>
+            </ButtonGroup>
+            <div style={{ marginTop: 8 }}>
+              <Input
+                value={this.state.search}
+                onChange={(search: string) => {
+                  this.setState(() => ({ search }))
+                }}
+                placeholder={`Search ${this.state.page}`}
+              />
+            </div>
+          </div>
+          <Separator />
           {sections
             .filter(
               ({ title, docsUrl }) =>

@@ -1,9 +1,8 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme, expandColor } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import { readableTextColor, darken } from "@operational/utils"
 import { Icon } from "../"
-
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -11,25 +10,38 @@ export interface Props {
   css?: Css
   className?: string
   /** Message contents, can be any html element/React fragment. */
+
   children?: React.ReactNode
   /** Background message color */
+
   color?: string
   /** Called when close icon is clicked. Icon is not rendered at all if this prop is not specified. */
+
   onClose?: () => void
 }
 
-const Container = glamorous.div(
-  ({ theme, color }: { theme: Theme; color?: string }): CssStatic => {
-    const backgroundColor = expandColor(theme, color) || theme.colors.info
-    const textColor = readableTextColor(backgroundColor, [theme.colors.black, "white"])
+const Container = styled("div")(
+  ({
+    theme,
+    color,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+    color?: string
+  }): CssStatic => {
+    const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+    const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.black, "white"])
     return {
       backgroundColor,
       color: textColor,
       overflow: "hidden",
-      padding: `${(theme.spacing * 1) / 2}px ${theme.spacing * 3.5}px ${theme.spacing / 2}px ${theme.spacing}px`,
-      paddingRight: theme.spacing * 2.5, // Icon space
+      padding: `${(theme.deprecated.spacing * 1) / 2}px ${theme.deprecated.spacing * 3.5}px ${theme.deprecated.spacing /
+        2}px ${theme.deprecated.spacing}px`,
+      paddingRight: theme.deprecated.spacing * 2.5,
+      // Icon space
       borderRadius: 4,
-      minHeight: theme.spacing * 2.5,
+      minHeight: theme.deprecated.spacing * 2.5,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
@@ -39,17 +51,17 @@ const Container = glamorous.div(
   },
 )
 
-const IconContainer = glamorous.div(
+const IconContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     position: "absolute",
     top: 0,
     right: 0,
     cursor: "pointer",
-    width: theme.spacing * 2.5,
-    height: theme.spacing * 2.5,
-    padding: theme.spacing * 0.5,
-    borderBottomLeftRadius: theme.borderRadius,
-    borderTopRightRadius: theme.borderRadius,
+    width: theme.deprecated.spacing * 2.5,
+    height: theme.deprecated.spacing * 2.5,
+    padding: theme.deprecated.spacing * 0.5,
+    borderBottomLeftRadius: theme.deprecated.borderRadius,
+    borderTopRightRadius: theme.deprecated.borderRadius,
     "& svg": {
       width: "100%",
       height: "100%",

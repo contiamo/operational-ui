@@ -1,8 +1,7 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Button } from "../"
-
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -10,33 +9,34 @@ export interface Props {
   css?: Css
   className?: string
   /** Record title */
+
   title: string
   controls?: React.ReactNode
   children?: React.ReactNode
 }
 
-const Container = glamorous.div(
+const Container = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     label: "record",
     position: "relative",
-    padding: `${theme.spacing / 2}px ${theme.spacing}px ${theme.spacing}px`,
-    backgroundColor: theme.colors.background,
-    borderRadius: theme.borderRadius,
+    padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing}px ${theme.deprecated.spacing}px`,
+    backgroundColor: theme.deprecated.colors.background,
+    borderRadius: theme.deprecated.borderRadius,
   }),
 )
 
-const HeaderContainer = glamorous.div(
+const HeaderContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
-    ...theme.typography.heading1,
+    ...theme.deprecated.typography.heading1,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: theme.spacing / 2,
-    height: theme.spacing * 2,
+    marginBottom: theme.deprecated.spacing / 2,
+    height: theme.deprecated.spacing * 2,
   }),
 )
 
-const ControlContainer = glamorous.div(
+const ControlContainer = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     "& > *:last-child": {
       marginRight: 0,
@@ -44,10 +44,10 @@ const ControlContainer = glamorous.div(
   }),
 )
 
-const Content = glamorous.div(
+const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
     opacity: 0.8,
-    ...theme.typography.body,
+    ...theme.deprecated.typography.body,
   }),
 )
 

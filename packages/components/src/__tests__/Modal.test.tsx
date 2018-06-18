@@ -1,6 +1,5 @@
 import * as React from "react"
 import { render } from "enzyme"
-
 import { Modal as ThemelessModal } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 

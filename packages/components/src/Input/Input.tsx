@@ -1,8 +1,7 @@
 import * as React from "react"
-import glamorous from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon, Tooltip } from "../"
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
@@ -13,22 +12,30 @@ export interface Props {
   css?: Css
   className?: string
   /** Text displayed when the input field has no value. */
+
   placeholder?: string
   /** The name used to refer to the input, for forms. */
+
   name?: string
   /** The current value of the input field. You must always supply this from the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
+
   value?: string
   id?: string
   /** Specifies the id that should be used when hooking up label for attributes with input id attributes, if a label is present. */
+
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
+
   label?: string
   inputRef?: (node: any) => void
   /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
+
   onChange?: (newVal: string) => void
   /** Focus handler */
+
   onFocus?: (ev: any) => void
   /** Blur handler */
+
   onBlur?: (ev: any) => void
   type?: string
   children?: string
@@ -36,37 +43,47 @@ export interface Props {
   error?: string
   hint?: string
   /** Disabled input */
+
   disabled?: boolean
   onToggle?: () => void
 }
 
-const InputField = glamorous.input(
+const InputField = styled("input")(
   ({
     theme,
     disabled,
     isStandalone,
     isError,
   }: {
-    theme: Theme
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
     disabled: boolean
     isStandalone: boolean
     isError: boolean
   }): CssStatic => ({
-    ...theme.typography.body,
+    ...theme.deprecated.typography.body,
     // If the input field is standalone without a label, it should not specify any display properties
     // to avoid input fields that span the screen. Min width should take care of presentable
     // default looks.
-    ...(isStandalone ? {} : { display: "block" }),
+    ...(isStandalone
+      ? {}
+      : {
+          display: "block",
+        }),
     label: "input",
     minWidth: inputDefaultWidth,
-    padding: `${theme.spacing / 2}px ${(theme.spacing * 2) / 3}px`,
+    padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
     border: "1px solid",
     opacity: disabled ? 0.6 : 1.0,
-    borderColor: isError ? theme.colors.error : theme.colors.inputBorder,
+    borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.inputBorder,
     font: "inherit",
-    borderRadius: theme.borderRadius,
+    borderRadius: theme.deprecated.borderRadius,
     WebkitAppearance: "none",
-    "&:focus": inputFocus({ theme, isError }),
+    "&:focus": inputFocus({
+      theme,
+      isError,
+    }),
   }),
 )
 
@@ -87,6 +104,7 @@ const Input = (props: Props) => {
       props.onChange && props.onChange(e.target.value)
     },
   }
+
   if (props.label) {
     return (
       <Label id={props.id} htmlFor={forAttributeId} css={props.css} className={props.className}>
@@ -95,7 +113,13 @@ const Input = (props: Props) => {
           {props.hint ? (
             <FormFieldControl>
               <Icon name="HelpCircle" size={14} />
-              <Tooltip right css={{ minWidth: 100, width: "fit-content" }}>
+              <Tooltip
+                right
+                css={{
+                  minWidth: 100,
+                  width: "fit-content",
+                }}
+              >
                 {props.hint}
               </Tooltip>
             </FormFieldControl>
@@ -114,12 +138,16 @@ const Input = (props: Props) => {
           {...commonInputProps}
           id={forAttributeId}
           autoComplete={props.autoComplete}
-          css={{ display: "block", width: "100%" }}
+          css={{
+            display: "block",
+            width: "100%",
+          }}
         />
         {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )
   }
+
   return (
     <InputField
       {...commonInputProps}

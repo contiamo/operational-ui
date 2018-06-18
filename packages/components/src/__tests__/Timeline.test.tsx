@@ -1,6 +1,5 @@
 import * as React from "react"
 import { render } from "enzyme"
-
 import { Timeline as ThemelessTimeline, TimelineItem } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 
@@ -13,7 +12,6 @@ describe("Timeline", () => {
         <TimelineItem>Test</TimelineItem>
       </Timeline>
     )
-
     const renderedComponent = render(component)
     expect(renderedComponent).toMatchSnapshot()
   })

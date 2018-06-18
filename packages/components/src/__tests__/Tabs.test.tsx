@@ -1,6 +1,5 @@
 import * as React from "react"
 import { render } from "enzyme"
-
 import { Tabs as ThemelessTabs, Tab } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 
@@ -13,7 +12,6 @@ describe("Tabs", () => {
         <Tab>Test</Tab>
       </Tabs>
     )
-
     const renderedComponent = render(component)
     expect(renderedComponent).toMatchSnapshot()
   })

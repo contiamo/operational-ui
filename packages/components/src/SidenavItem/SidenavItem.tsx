@@ -1,8 +1,7 @@
 import * as React from "react"
-import glamorous, { GlamorousComponent } from "glamorous"
-import { Theme } from "@operational/theme"
+import styled from "react-emotion"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
-
 import { WithTheme, Css, CssStatic } from "../types"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { isModifiedEvent } from "../utils"
@@ -10,10 +9,12 @@ import { isModifiedEvent } from "../utils"
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
   className?: string
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
+
   to?: string
   active?: boolean
   icon?: IconName | React.ReactNode
@@ -22,9 +23,17 @@ export interface Props {
 
 const size: number = 36
 
-const containerStyles = ({ theme, isActive }: { theme: Theme; isActive: boolean }): CssStatic => ({
+const containerStyles = ({
+  theme,
+  isActive,
+}: {
+  theme?: OperationalStyleConstants & {
+    deprecated: Theme
+  }
+  isActive: boolean
+}): CssStatic => ({
   display: "flex",
-  padding: `0 ${theme.spacing * 0.5}px`,
+  padding: `0 ${theme.deprecated.spacing * 0.5}px`,
   label: "sidenavitem",
   height: size,
   position: "relative",
@@ -37,34 +46,38 @@ const containerStyles = ({ theme, isActive }: { theme: Theme; isActive: boolean 
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
     textDecoration: "none",
+
     /** @todo Add to theme once colors are updated across codebase */
-    color: isActive ? theme.colors.linkText : "#888888",
+    color: isActive ? theme.deprecated.colors.linkText : theme.color.text.lightest,
   },
   "&:hover": {
     /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: "#F4F4F4",
+    backgroundColor: theme.color.background.light,
   },
 })
 
-const Container = glamorous.div(containerStyles)
+const Container = styled("div")(containerStyles)
+const ContainerLink = styled("a")(containerStyles)
 
-const ContainerLink = glamorous.a(containerStyles)
+const IconContainer = styled("span")(() => ({
+  width: size,
+  height: size,
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flex: `0 0 ${size}px`,
+}))
 
-const IconContainer = glamorous.span(
-  ({ theme }: WithTheme): CssStatic => ({
-    width: size,
-    height: size,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flex: `0 0 ${size}px`,
-  }),
-)
-
-const Label = glamorous.span(
-  ({ theme }: { theme: Theme }): {} => ({
+const Label = styled("span")(
+  ({
+    theme,
+  }: {
+    theme?: OperationalStyleConstants & {
+      deprecated: Theme
+    }
+  }): {} => ({
     display: "inline-block",
-    paddingLeft: theme.spacing / 4,
+    paddingLeft: theme.deprecated.spacing / 4,
   }),
 )
 
@@ -81,9 +94,9 @@ const SidenavItem = (props: Props) => {
           className={props.className}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             props.onClick && props.onClick()
+
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
               ev.preventDefault()
-              // Stopping propagation to prevent parent side nav header from triggering its own redirect
               ev.stopPropagation()
               ctx.pushState(props.to)
             }

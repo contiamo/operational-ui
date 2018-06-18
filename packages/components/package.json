@@ -4,8 +4,14 @@
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "repository": "git@github.com:Contiamo/operational-ui.git",
-  "author": "Tejas Kumar <tejas@contiamo.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:contiamo/operational-ui.git"
+  },
+  "author": {
+    "name": "Tejas Kumar",
+    "email": "tejas@contiamo.com"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -14,7 +20,7 @@
     "start": "npm run docs:start",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
-    "package": "rimraf lib && tsc",
+    "package": "rimraf lib && webpack --env package",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -36,14 +42,18 @@
     "react-dom": "^16.2.0",
     "react-emotion": "^9.2.3",
     "react-feather": "^1.1.0",
-    "react-icons": "^2.2.5",
-    "tinycolor": "^0.0.1"
+    "react-icons": "^2.2.5"
   },
   "devDependencies": {
-    "react-docgen-typescript": "^1.5.0",
+    "@babel/core": "^7.0.0-beta.51",
+    "babel-loader": "^8.0.0-beta.3",
+    "babel-plugin-emotion": "^9.0.0-3",
+    "jest-emotion": "^9.2.2",
+    "react-docgen-typescript": "^1.6.1",
     "react-styleguidist": "^7.0.14",
     "ts-loader": "^4.3.0",
-    "webpack": "^4.8.3"
+    "webpack": "^4.8.3",
+    "webpack-cli": "^3.0.8"
   },
   "jest": {
     "setupFiles": [

@@ -1,5 +1,6 @@
 import { compact, defaults, find, forEach, get, map, sortBy } from "lodash/fp"
 import Series from "../series"
+
 import {
   line as d3Line,
   curveCardinal,
@@ -10,7 +11,9 @@ import {
   curveStepAfter,
   curveStepBefore,
 } from "d3-shape"
+
 import * as styles from "./styles"
+
 import {
   LineRendererAccessors,
   D3Selection,

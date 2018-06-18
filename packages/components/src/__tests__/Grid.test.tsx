@@ -1,6 +1,5 @@
 import * as React from "react"
 import { render } from "enzyme"
-
 import { Grid as ThemelessGrid } from "../index"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 
