@@ -54,20 +54,6 @@ const myData = {
 ### With value formatters
 
 ```jsx
-const DeployedStatus = ({ deployed }) => (
-  <div
-    style={{
-      position: "relative",
-      display: "inline-block",
-      marginRight: 7,
-      borderRadius: "50%",
-      width: 8,
-      height: 8,
-      background: deployed ? "green" : "red",
-    }}
-  />
-)
-
 const myData = {
   deployedSha: "oiuhaeg",
   deployed: "last Friday",
@@ -83,7 +69,7 @@ const myData = {
     repo: val => val.split(".com")[1],
     status: val => (
       <div>
-        <DeployedStatus deployed={val === "deployed"} />
+        <Status success={val === "deployed"} />
         {val}
       </div>
     ),
