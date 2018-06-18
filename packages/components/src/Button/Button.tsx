@@ -63,6 +63,7 @@ const containerStyles = ({
   const foregroundColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
   const spacing = theme.space.content
   const padding = condensed ? theme.space.small : spacing
+  const computedBorderColor = active ? activeBackgroundColor : backgroundColor
 
   return {
     lineHeight: `${condensed ? 26 : 34}px`,
@@ -73,11 +74,7 @@ const containerStyles = ({
     padding: `0 ${icon ? padding / 2 : padding}px 0 ${padding}px`,
     borderRadius: theme.borderRadius,
     border: "1px solid",
-    borderColor: isWhite(backgroundColor)
-      ? theme.color.border.default
-      : active
-        ? activeBackgroundColor
-        : backgroundColor,
+    borderColor: isWhite(backgroundColor) ? theme.color.border.default : computedBorderColor,
     cursor: disabled ? "auto" : "pointer",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     opacity: disabled ? 0.6 : 1.0,
