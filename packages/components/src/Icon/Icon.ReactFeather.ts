@@ -239,6 +239,7 @@ export type ReactFeatherIconName =
   | "Zap"
   | "ZoomIn"
   | "ZoomOut"
+
 export interface ReactFeather {
   Activity: any
   Airplay: any

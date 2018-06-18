@@ -12,6 +12,7 @@ export class Component extends React.Component<{}, { isExpanded: boolean }> {
   state = {
     isExpanded: false,
   }
+
   render() {
     return (
       <React.Fragment>

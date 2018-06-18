@@ -6,6 +6,7 @@ import StateHandler from "../shared/state_handler"
 import EventEmitter from "../shared/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
 import defaultNumberFormatter from "../utils/number_formatter"
+
 import {
   Accessors,
   AccessorsObject,

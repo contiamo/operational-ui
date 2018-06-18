@@ -46,6 +46,7 @@ export type Datum = {
   percentage?: number
   unfilled?: boolean
 }
+
 export type Data = Datum[]
 
 export interface LegendDatum {
@@ -57,6 +58,7 @@ export interface LegendDatum {
 export interface DataAccessors {
   data: Accessor<any, Data>
 }
+
 export interface SeriesAccessors {
   name: Accessor<Datum, string>
   renderAs: Accessor<Datum, any>

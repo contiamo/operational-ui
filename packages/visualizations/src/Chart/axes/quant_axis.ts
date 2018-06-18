@@ -1,6 +1,7 @@
 import Events from "../../shared/event_catalog"
 import * as d3 from "d3-selection"
 import { cloneDeep, defaults, filter, find, forEach, includes, isFinite, last, rangeStep, sortBy } from "lodash/fp"
+
 import {
   computeRequiredMargin,
   insertElements,
@@ -9,9 +10,11 @@ import {
   getTextAnchor,
   drawTitle,
 } from "./axis_utils"
+
 import { setTextAttributes, setLineAttributes, withD3Element } from "../../utils/d3_utils"
 import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
 import * as styles from "./styles"
+
 import {
   AxisAttributes,
   AxisClass,

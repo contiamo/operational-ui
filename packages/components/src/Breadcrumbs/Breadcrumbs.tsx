@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
+
 export interface Props {
   className?: string
   /** `css` prop as expected in a glamorous component */
@@ -11,6 +12,7 @@ export interface Props {
 
   children?: React.ReactNode
 }
+
 const Container = styled("div")({
   label: "breadcrumbs",
   "& a": {
@@ -18,6 +20,7 @@ const Container = styled("div")({
     color: "inherit",
   },
 })
+
 const Slash = styled("span")(
   ({ theme }: WithTheme): CssStatic => ({
     display: "inline-block",
@@ -28,6 +31,7 @@ const Slash = styled("span")(
     },
   }),
 ) // Intersperse slashes between the children (`<Breadcrumb />` elements)
+
 // Curried first argument is necessary to give unique auto-incrementing
 // keys to the slash elements.
 

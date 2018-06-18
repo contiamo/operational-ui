@@ -10,6 +10,7 @@ import { colorAssigner } from "@operational/utils"
 import { operational as theme } from "@operational/theme"
 import { has, isEmpty, uniqueId } from "lodash/fp"
 import defaultNumberFormatter from "../utils/number_formatter"
+
 import {
   Accessors,
   AxesData,

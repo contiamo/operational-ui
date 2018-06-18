@@ -1,4 +1,5 @@
 import Renderer from "./renderer"
+
 import {
   compact,
   filter,
@@ -14,6 +15,7 @@ import {
   remove,
   uniqBy,
 } from "lodash/fp"
+
 import {
   D3Selection,
   Datum,

@@ -6,6 +6,7 @@ import * as styles from "./styles"
 import { every, find, invoke, map } from "lodash/fp"
 import Events from "../../shared/event_catalog"
 import { exitGroups, filterByMatchers, sizeScale } from "./renderer_utils"
+
 import {
   D3Selection,
   Data,

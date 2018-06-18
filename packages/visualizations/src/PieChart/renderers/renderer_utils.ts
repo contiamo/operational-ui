@@ -10,6 +10,7 @@ import {
   RendererAccessor,
   RendererAccessors,
 } from "../typings"
+
 import { defaults, forEach, merge, reduce } from "lodash/fp"
 import * as styles from "./styles"
 import { Selection, select } from "d3-selection"
