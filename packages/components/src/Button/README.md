@@ -5,12 +5,15 @@ Buttons are used heavily throughout an operational interface, and they often req
 Using buttons is as simple as including the component with a text node as a child. Colors may be specified as hex strings, or as a pre-defined color key from the theme.
 
 ```jsx
-<Button>Default button</Button>
-<Button color="primary">Predefined color</Button>
+<Button>Default</Button>
+<Button color="primary">Set color</Button>
 <Button color="#393939">Custom color</Button>
 <Button color="success" disabled>Disabled</Button>
 <Button disabled>Disabled</Button>
 <Button condensed>Condensed</Button>
+<Button color="success" icon="ExternalLink">Icon</Button>
+<Button condensed icon="ExternalLink">Icon</Button>
+<Button loading>Loading</Button>
 ```
 
 ### Usage with links

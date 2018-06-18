@@ -4,7 +4,7 @@ import { readableTextColor, darken, lighten, expandColor } from "@operational/ut
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { isWhite, isModifiedEvent } from "../utils"
 import { Css, CssStatic } from "../types"
-import { ContextConsumer, Context } from "../"
+import { ContextConsumer, Context, Icon, IconName } from "../"
 import Spinner from "../Spinner/Spinner"
 
 export interface Props {
@@ -23,6 +23,8 @@ export interface Props {
   /** Color assigned to the avatar circle (hex or named color from `theme.color`) */
 
   color?: string
+  /** Icon to display on right of button (optional) */
+  icon?: string | React.ReactNode
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
 
   loading?: boolean
@@ -45,6 +47,7 @@ const containerStyles = ({
   disabled,
   condensed,
   loading,
+  icon,
 }: {
   theme?: OperationalStyleConstants
   color?: string
@@ -52,6 +55,7 @@ const containerStyles = ({
   disabled?: boolean
   condensed?: boolean
   loading?: boolean
+  icon?: string | React.ReactNode
 }): CssStatic => {
   const defaultColor: string = theme.color.white
   const backgroundColor: string = expandColor(theme, color) || defaultColor
@@ -59,6 +63,7 @@ const containerStyles = ({
   const foregroundColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
   const spacing = theme.space.content
   const height = condensed ? 28 : 36
+  const padding = condensed ? theme.space.small : spacing
 
   return {
     height,
@@ -67,7 +72,7 @@ const containerStyles = ({
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
     display: "inline-block",
-    padding: `0 ${condensed ? theme.space.small : spacing}px`,
+    padding: `0 ${icon ? padding / 2 : padding}px 0 ${padding}px`,
     borderRadius: theme.borderRadius,
     border: "1px solid",
     borderColor: isWhite(backgroundColor)
@@ -107,6 +112,14 @@ const containerStyles = ({
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
+const IconContainer = styled("div")(({ theme, condensed }: CompProps) => ({
+  marginLeft: condensed ? theme.space.small : theme.space.small,
+  float: "right",
+  "& svg": {
+    verticalAlign: "text-bottom",
+  },
+}))
+
 const Button = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
   return (
@@ -136,9 +149,19 @@ const Button = (props: Props) => {
           active={props.active}
           disabled={props.disabled}
           condensed={props.condensed}
+          icon={props.icon}
           title={props.loading && props.children === String(props.children) ? String(props.children) : undefined}
         >
           {props.children}
+          {props.icon && (
+            <IconContainer condensed={props.condensed}>
+              {typeof props.icon === "string" ? (
+                <Icon name={props.icon as IconName} size={props.condensed ? 16 : 20} />
+              ) : (
+                props.icon
+              )}
+            </IconContainer>
+          )}
           {props.loading && (
             <Spinner
               className="op_button-spinner"
