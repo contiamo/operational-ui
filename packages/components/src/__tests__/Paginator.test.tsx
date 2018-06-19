@@ -7,6 +7,6 @@ const Paginator = wrapDefaultTheme(ThemelessPaginator)
 
 describe("Paginator Component", () => {
   it("Should initialize properly", () => {
-    expect(render(<Paginator pageCount={10} />)).toMatchSnapshot()
+    expect(render(<Paginator page={3} itemCount={258} itemsPerPage={50} />)).toMatchSnapshot()
   })
 })
