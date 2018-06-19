@@ -51,6 +51,7 @@ export interface OperationalTextColors {
   readonly lighter: HslValue
   readonly lightest: HslValue
   readonly action: HslValue
+  readonly white: HslValue
 }
 
 export interface OperationalBorderColors {
@@ -173,6 +174,7 @@ const textColors: OperationalTextColors = {
   lighter: colors.grey(45),
   lightest: colors.grey(56),
   action: colors.primary,
+  white: colors.white,
 }
 
 /**
