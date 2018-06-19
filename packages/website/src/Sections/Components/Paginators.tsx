@@ -8,8 +8,27 @@ export const docsUrl = `${constants.docsBaseUrl}/#paginator`
 
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Paginators.tsx`
 
-export const Component = () => (
-  <>
-    <Paginator page={2} pageCount={10} />
-  </>
-)
+export interface State {
+  page: number
+}
+
+export class Component extends React.Component<{}, State> {
+  state = {
+    page: 2,
+  }
+
+  render() {
+    return (
+      <>
+        <Paginator
+          page={this.state.page}
+          itemCount={345}
+          itemsPerPage={100}
+          onChange={(page: number) => {
+            this.setState(prevState => ({ page }))
+          }}
+        />
+      </>
+    )
+  }
+}

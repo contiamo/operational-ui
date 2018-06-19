@@ -42,6 +42,7 @@ export default [
   messages,
   modals,
   pages,
+  paginators,
   progress,
   records,
   selects,
