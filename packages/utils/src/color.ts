@@ -1,5 +1,5 @@
 import * as colorCalculator from "tinycolor2"
-import { OperationalStyleConstants, constants } from "@operational/theme"
+import { OperationalStyleConstants, Theme, constants } from "@operational/theme"
 
 const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
   colors.reduce((acc, curr) => {
@@ -52,7 +52,10 @@ export const transparentize = (color: string) => (percentage: number): string =>
  * Expands a color expressed either as a custom hex value
  * or a color key to pick from within the style constants object.
 */
-export const expandColor = (theme: OperationalStyleConstants, color?: string): string | null => {
+export const expandColor = (
+  theme: OperationalStyleConstants & { deprecated?: Theme },
+  color?: keyof OperationalStyleConstants["color"] | string,
+): string | null => {
   if (!color) {
     return null
   }
@@ -62,5 +65,5 @@ export const expandColor = (theme: OperationalStyleConstants, color?: string): s
     return color
   }
   // || null is necessary to coerce undefineds into nulls
-  return (theme.color as any)[color] || (null as string | null)
+  return (theme.color as any)[color] || ""
 }

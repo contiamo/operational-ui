@@ -1,9 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { expandColor } from "@operational/utils"
 
-type WithTheme = { theme?: OperationalStyleConstants }
+type WithTheme = { theme?: OperationalStyleConstants & { deprecated: Theme } }
 
 export interface LogoProps {
   /** Size, in pixels, that the logomark should be */
@@ -17,17 +17,20 @@ const LogoContainer = styled("div")(
   {
     display: "flex",
     alignItems: "center",
+    height: "100%",
   },
-  ({ size, color, theme }: LogoProps & WithTheme) => ({
-    padding: `${theme.space.small}px ${theme.space.content}px`,
+  ({ size, theme }: LogoProps & WithTheme) => ({
+    marginLeft: theme.space.content,
     width: size,
   }),
 )
 
-const LogoMark = styled("svg")(({ theme, color }: LogoProps & WithTheme) => ({
+const LogoMark = styled("svg")(({ theme, size, color }: LogoProps & WithTheme) => ({
+  width: size,
+  height: size,
   marginRight: theme.space.small,
   stroke: expandColor(theme, color) || theme.color.white,
-  strokeWidth: 15,
+  strokeWidth: 10,
 }))
 
 const LogoType = styled("svg")(({ theme, color }: LogoProps & WithTheme) => ({
@@ -36,17 +39,15 @@ const LogoType = styled("svg")(({ theme, color }: LogoProps & WithTheme) => ({
 
 const ContiamoLogo: React.SFC<LogoProps> = ({ size, color }) => (
   <LogoContainer>
-    <div>
-      <LogoMark color={color} width={size} height={size} viewBox="200 160 675 780" fill="none">
-        <path d="M318.6,540c0-150.1,121.7-271.7,271.7-271.7c72.1-0.1,141.2,28.6,192.2,79.6l64-64  c-67.9-68.1-160-106.3-256.2-106.2c-200.1,0-362.3,162.2-362.3,362.3L318.6,540z" />
-        <path d="M405.3,540c0-100,81.1-181.2,181.2-181.2c49,0,95.8,19.9,129.8,55.1l66.2-66.2c-50.9-51-120.1-79.7-192.2-79.6  c-150.1,0-271.7,121.7-271.7,271.8H405.3z" />
-        <path d="M318.6,540h-90.6c-0.1,96.1,38.1,188.3,106.1,256.2l64-64.1C347.2,681.2,318.5,612.1,318.6,540z" />
-        <path d="M460.5,669.8c-35.3-34-55.2-80.9-55.2-129.8h-86.7c-0.1,72.1,28.5,141.2,79.6,192.2L460.5,669.8z" />
-        <path d="M782.2,732.4l-66.1-66.1c-69.3,71.5-183.6,73.3-255.1,4c-0.1-0.1-0.3-0.3-0.4-0.4l-62.3,62.3  C504.2,838.2,676.1,838.3,782.2,732.4L782.2,732.4z" />
-        <path d="M590.4,811.7c-72.1,0.1-141.2-28.5-192.1-79.6l-64.1,64.1c141.4,141.4,370.6,141.5,512.1,0.3l-64-64.1  C731.3,783.3,662.3,811.8,590.4,811.7z" />
-      </LogoMark>
-    </div>
-    <LogoType color={color} width={size * 3} viewBox="650 255 1800 215" fill="currentColor">
+    <LogoMark color={color} width={size} height={size} viewBox="200 160 675 780" fill="none">
+      <path d="M318.6,540c0-150.1,121.7-271.7,271.7-271.7c72.1-0.1,141.2,28.6,192.2,79.6l64-64  c-67.9-68.1-160-106.3-256.2-106.2c-200.1,0-362.3,162.2-362.3,362.3L318.6,540z" />
+      <path d="M405.3,540c0-100,81.1-181.2,181.2-181.2c49,0,95.8,19.9,129.8,55.1l66.2-66.2c-50.9-51-120.1-79.7-192.2-79.6  c-150.1,0-271.7,121.7-271.7,271.8H405.3z" />
+      <path d="M318.6,540h-90.6c-0.1,96.1,38.1,188.3,106.1,256.2l64-64.1C347.2,681.2,318.5,612.1,318.6,540z" />
+      <path d="M460.5,669.8c-35.3-34-55.2-80.9-55.2-129.8h-86.7c-0.1,72.1,28.5,141.2,79.6,192.2L460.5,669.8z" />
+      <path d="M782.2,732.4l-66.1-66.1c-69.3,71.5-183.6,73.3-255.1,4c-0.1-0.1-0.3-0.3-0.4-0.4l-62.3,62.3  C504.2,838.2,676.1,838.3,782.2,732.4L782.2,732.4z" />
+      <path d="M590.4,811.7c-72.1,0.1-141.2-28.5-192.1-79.6l-64.1,64.1c141.4,141.4,370.6,141.5,512.1,0.3l-64-64.1  C731.3,783.3,662.3,811.8,590.4,811.7z" />
+    </LogoMark>
+    <LogoType color={color} width={size * 3.5} viewBox="650 255 1800 215" fill="currentColor">
       <g transform="matrix(1.3333333,0,0,-1.3333333,0,737.64133)">
         <g transform="translate(783.6366,282.649)">
           <path d="m 0,0 c 0,-31.84 -22.648,-48.499 -45.024,-48.499 -22.373,0 -45.022,16.659 -45.022,48.499 0,31.61 22.649,48.151 45.022,48.151 C -22.648,48.151 0,31.61 0,0 m -123.88,0 c 0,-54.855 40.816,-79.841 78.74,-79.841 37.925,0 78.741,24.986 78.741,79.841 0,54.737 -40.816,79.666 -78.741,79.666 -37.924,0 -78.74,-24.929 -78.74,-79.666" />
@@ -76,7 +77,7 @@ const ContiamoLogo: React.SFC<LogoProps> = ({ size, color }) => (
 )
 
 ContiamoLogo.defaultProps = {
-  size: 32,
+  size: 26,
   color: "white",
 }
 

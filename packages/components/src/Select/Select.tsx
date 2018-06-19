@@ -4,8 +4,8 @@ import styled from "react-emotion"
 import { Label, LabelText, inputFocus } from "../utils/mixins"
 import SelectOption from "./Select.Option"
 import SelectFilter from "./Select.Filter"
-import { readableTextColor, fadeIn, resetTransform } from "@operational/utils"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { readableTextColor, fadeIn, resetTransform, expandColor } from "@operational/utils"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 
 export type Value = number | string
 
@@ -27,28 +27,27 @@ export interface Props {
   id?: string
 
   /** Options available */
-
   options: IOption[]
+
   /** Current value */
-
   value: null | Value | Value[]
+
   /** Make the list filterable */
-
   filterable?: boolean
+
   /** Disable the component */
-
   disabled?: boolean
+
   /** Callback trigger on any changes */
-
   onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void
+
   /** Text color */
-
   color?: string
+
   /** Text to display when no active selection */
-
   placeholder?: string
-  /** Label text */
 
+  /** Label text */
   label?: string
 
   /** Should the Select be rendered with a full box style? */
@@ -68,9 +67,7 @@ const Container = styled("div")(
     disabled,
     naked,
   }: Partial<Props> & { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => {
-    const backgroundColor = naked
-      ? "transparent"
-      : expandColor(theme.deprecated, color) || theme.deprecated.colors.white
+    const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.deprecated.colors.white
     return {
       backgroundColor,
       label: "select",
@@ -81,7 +78,7 @@ const Container = styled("div")(
         .spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px `,
       borderRadius: 4,
       width: "fit-content",
-      minWidth: 240,
+      minWidth: !naked && 240,
       minHeight: 20,
       border: naked ? 0 : "1px solid",
       borderColor: theme.deprecated.colors.inputBorder,
