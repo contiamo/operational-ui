@@ -72,7 +72,7 @@ const containerStyles: Interpolation<Props> = ({
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
     display: "inline-block",
-    padding: `0 ${icon ? padding / 2 : padding}px 0 ${padding}px`,
+    padding: `0 ${padding}px`,
     borderRadius: theme.borderRadius,
     border: "1px solid",
     borderColor: isWhite(backgroundColor) ? theme.color.border.default : computedBorderColor,
@@ -106,7 +106,7 @@ const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
 const IconContainer = styled("div")(({ theme, condensed }: Css) => ({
-  marginLeft: condensed ? theme.space.small : theme.space.small,
+  marginLeft: theme.space.small,
   float: "right",
   "& svg": {
     verticalAlign: "text-bottom",
