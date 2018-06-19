@@ -1,10 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { darken, readableTextColor, expandColor } from "@operational/utils"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { readableTextColor, expandColor } from "@operational/utils"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Icon, IconName } from "../"
-import { isWhite } from "../utils/color"
-import { WithTheme, Css, CssStatic } from "../types"
+import { WithTheme, Css } from "../types"
 
 export interface Props {
   /** Id */
