@@ -25,6 +25,21 @@ In this case `PageArea` is implicit
 </Page>
 ```
 
+### With 2 columns (reverse areas)
+
+```jsx
+<Page areas="side main">
+  <PageArea name="main">
+    <Card title="My bundle">I'm in the right!</Card>
+  </PageArea>
+  <PageArea name="side">
+    <Card title="Deploy functions" />
+    <Card title="Sync" />
+    <Card title="Repository" />
+  </PageArea>
+</Page>
+```
+
 ### With 2 columns and full width
 
 ```jsx

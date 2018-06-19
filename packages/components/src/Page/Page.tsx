@@ -63,13 +63,18 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
 }))
 
 const Grid = styled("div")(
-  (props: { children?: React.ReactNode; fill?: boolean; theme?: OperationalStyleConstants }) => {
+  (props: {
+    children?: React.ReactNode
+    fill?: boolean
+    theme?: OperationalStyleConstants
+    areas?: Props["areas"]
+  }) => {
     const grid = React.Children.count(props.children) > 1 ? "main side" : "main"
 
     return {
       display: "grid",
       gridTemplateColumns: grid.split(" ").length > 1 ? "auto 280px" : "auto",
-      gridTemplateAreas: `"${grid}"`,
+      gridTemplateAreas: props.areas ? `"${props.areas}"` : `"${grid}"`,
       gridGap: props.theme.space.content,
       maxWidth: props.fill ? "none" : 1150,
       minWidth: 800,
@@ -103,7 +108,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   }
 
   render() {
-    const { children, title, actions, tabs, fill } = this.props
+    const { children, title, actions, tabs, fill, areas } = this.props
     const { activeTab } = this.state
     const onlyOneChild = React.Children.count(children) === 1
     const CurrentTab = tabs && tabs[activeTab].component
@@ -128,7 +133,9 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
             <CurrentTab />
           </>
         ) : (
-          <Grid fill={fill}>{onlyOneChild ? <PageArea>{children}</PageArea> : children}</Grid>
+          <Grid areas={areas} fill={fill}>
+            {onlyOneChild ? <PageArea>{children}</PageArea> : children}
+          </Grid>
         )}
       </Container>
     )
