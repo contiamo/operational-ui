@@ -17,9 +17,7 @@ export interface Props {
   /** Function to be executed after changing page */
 
   onChange?: (page: number) => void
-  /** Index of the current selected page
-   * @default 1
-   */
+  /** Index of the current selected page */
 
   page?: number
   /** Total number of items */
@@ -118,17 +116,17 @@ const Container = styled("div")({
   },
 })
 
-const Paginator = ({ itemCount, page = 1, itemsPerPage, onChange, id, css, className }: Props) => {
+const Paginator: React.SFC<Props> = props => {
   const controlProps = {
-    itemCount,
-    itemsPerPage,
-    page,
-    onChange,
+    itemCount: props.itemCount,
+    itemsPerPage: props.itemsPerPage,
+    page: props.page,
+    onChange: props.onChange,
   }
-  const displayFirst = page !== 1
-  const displayLast = itemsPerPage * page < itemCount
+  const displayFirst = props.page !== 1
+  const displayLast = props.itemsPerPage * props.page < props.itemCount
   return (
-    <Container id={id} css={css} className={className}>
+    <Container id={props.id} css={props.css} className={props.className}>
       {displayFirst && (
         <PaginatorControl type="first" {...controlProps}>
           first
@@ -139,8 +137,9 @@ const Paginator = ({ itemCount, page = 1, itemsPerPage, onChange, id, css, class
           <Icon.ChevronsLeft size="11" /> prev
         </PaginatorControl>
       )}
-      <PaginatorSpan key={page}>
-        <span>{getRange({ page, itemCount, itemsPerPage })}</span> of {itemCount}
+      <PaginatorSpan key={props.page}>
+        <span>{getRange({ page: props.page, itemCount: props.itemCount, itemsPerPage: props.itemsPerPage })}</span> of{" "}
+        {props.itemCount}
       </PaginatorSpan>
       {displayLast && (
         <PaginatorControl type="next" {...controlProps}>
@@ -154,6 +153,10 @@ const Paginator = ({ itemCount, page = 1, itemsPerPage, onChange, id, css, class
       )}
     </Container>
   )
+}
+
+Paginator.defaultProps = {
+  page: 1,
 }
 
 export default Paginator
