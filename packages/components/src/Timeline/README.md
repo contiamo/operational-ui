@@ -1,10 +1,4 @@
-# Timelines
-
-Display information vertically on a timeline from top to bottom.
-
-## Usage
-
-A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component. Items may contain any children.
+Display information vertically on a timeline from top to bottom. A timeline is composed of multiple TimeLineItem componenets nested inside a container Timeline component. Items may contain any children.
 
 ```jsx
 <Timeline>
@@ -27,9 +21,9 @@ A timeline is composed of multiple TimeLineItem componenets nested inside a cont
 </Timeline>
 ```
 
-## Props
+### Props
 
-| Name | Description | Type | Default | Required | 
-| :--- | :--- | :--- | :---| :--- |
-| color | It can be a named theme color or a hex value. | string | info | Yes |
-| icon | Icon name, see https://feathericons.com/ (convert name to PascalCase) | string | '' | Yes |
+| Name  | Description                                                           | Type   | Default | Required |
+| :---- | :-------------------------------------------------------------------- | :----- | :------ | :------- |
+| color | It can be a named theme color or a hex value.                         | string | info    | Yes      |
+| icon  | Icon name, see https://feathericons.com/ (convert name to PascalCase) | string | ''      | Yes      |

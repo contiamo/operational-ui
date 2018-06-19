@@ -71,7 +71,7 @@ const Main = styled("div")(
  * so that it doesn't affect the grid.
  */
 const CssPlaceholder = styled("div")({
-  position: "absolute"
+  position: "absolute",
 })
 
 const Layout = (props: Props) => {

@@ -1,9 +1,11 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
+
 import { Label, LabelText, FormFieldControls, FormFieldControl, FormFieldError, inputFocus } from "../utils/mixins"
-import { Icon, Tooltip } from "../"
-import { WithTheme, Css, CssStatic } from "../types"
+import { Icon } from "../"
+import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
+import { Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
@@ -94,10 +96,10 @@ const TextareaComp = styled("textarea")(
   },
 )
 
-const HelpTooltip = styled(Tooltip)`
-  min-width: 100px;
-  width: fit-content;
-`
+const HelpTooltip = styled(Tooltip)({
+  minWidth: 100,
+  width: "fit-content",
+})
 
 const Textarea = (props: Props) => {
   return (
@@ -107,11 +109,7 @@ const Textarea = (props: Props) => {
         {props.hint ? (
           <FormFieldControl>
             <Icon name="HelpCircle" size={14} />
-            <HelpTooltip
-              right
-            >
-              {props.hint}
-            </HelpTooltip>
+            <HelpTooltip right>{props.hint}</HelpTooltip>
           </FormFieldControl>
         ) : null}
       </FormFieldControls>

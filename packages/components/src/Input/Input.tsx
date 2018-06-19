@@ -1,9 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { lighten } from "@operational/utils"
-import { WithTheme, Css, CssStatic } from "../types"
-import { Icon, Tooltip } from "../"
+import { Css } from "../types"
+import { Icon } from "../"
+import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
 import { inputDefaultWidth } from "../constants"
 
@@ -61,11 +61,14 @@ const InputField = styled("input")(
     disabled: boolean
     isStandalone: boolean
     isError: boolean
-  }): CssStatic => ({
+  }) => ({
     ...theme.deprecated.typography.body,
-    // If the input field is standalone without a label, it should not specify any display properties
-    // to avoid input fields that span the screen. Min width should take care of presentable
-    // default looks.
+    /**
+     * If the input field is standalone without a label, it should not specify any display properties
+     * to avoid input fields that span the screen. Min width should take care of presentable
+     * default looks.
+     */
+
     ...(isStandalone
       ? {}
       : {
@@ -88,10 +91,10 @@ const InputField = styled("input")(
   }),
 )
 
-const HelpTooltip = styled(Tooltip)`
-  min-width: 100px;
-  width: fit-content;
-`
+const HelpTooltip = styled(Tooltip)({
+  minWidth: 100,
+  width: "fit-content",
+})
 
 const Input = (props: Props) => {
   const forAttributeId = props.label && props.labelId
@@ -110,7 +113,6 @@ const Input = (props: Props) => {
       props.onChange && props.onChange(e.target.value)
     },
   }
-
 
   if (props.label) {
     return (
