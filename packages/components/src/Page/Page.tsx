@@ -1,9 +1,8 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { Icon, IconName, Title } from ".."
+import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
-import { CssStatic } from "../types"
 
 export interface Props {
   /** Page title */
@@ -16,6 +15,21 @@ export interface Props {
   areas?: "main" | "main side" | "side main"
   /** Fill the entire width */
   fill?: boolean
+  /**
+   * List of tabs
+   * This will disable any children to render `tabs[i].component` instead
+   */
+  tabs?: { name: string; component: React.ComponentType }[]
+  /**
+   * Active tab name
+   *
+   * Useful for easy router mapping
+   */
+  activeTabName?: string
+  /**
+   * Send the active name tab on each tab change (in lowercase).
+   */
+  onTabChange?: (name: string) => void
 }
 
 const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
@@ -26,6 +40,26 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
+  padding: `${theme.space.base}px 0`,
+}))
+
+const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  backgroundColor: theme.color.primary,
+  display: "flex",
+}))
+
+const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstants; active?: boolean }) => ({
+  color: theme.color.white,
+  opacity: active ? 1 : 0.8,
+  textTransform: "uppercase",
+  fontFamily: theme.font.family.main,
+  fontSize: theme.font.size.small,
+  padding: `${theme.space.element / 2}px ${theme.space.element}px`,
+  borderBottom: active ? `2px solid ${theme.color.white}` : `2px solid transparent`,
+  ":hover": {
+    cursor: "pointer",
+    opacity: 1,
+  },
 }))
 
 const Grid = styled("div")(
@@ -45,20 +79,60 @@ const Grid = styled("div")(
   },
 )
 
-const Page = (props: Props) => {
-  const onlyOneChild = React.Children.count(props.children) === 1
+const initialState = {
+  activeTab: 0,
+}
 
-  return (
-    <Container>
-      {props.title && (
-        <TitleBar>
-          <Title color="white">{props.title}</Title>
-          {props.actions}
-        </TitleBar>
-      )}
-      <Grid fill={props.fill}>{onlyOneChild ? <PageArea>{props.children}</PageArea> : props.children}</Grid>
-    </Container>
-  )
+class Page extends React.Component<Props, Readonly<typeof initialState>> {
+  constructor(props: Props) {
+    super(props)
+    if (props.activeTabName && props.tabs) {
+      const index = props.tabs.findIndex(({ name }) => name.toLowerCase() === props.activeTabName.toLowerCase())
+      this.state = {
+        ...initialState,
+        activeTab: index === -1 ? 0 : index,
+      }
+    } else {
+      this.state = initialState
+    }
+  }
+
+  onTabClick(index: number) {
+    this.setState({ activeTab: index })
+    this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].name.toLowerCase())
+  }
+
+  render() {
+    const { children, title, actions, tabs, fill } = this.props
+    const { activeTab } = this.state
+    const onlyOneChild = React.Children.count(children) === 1
+    const CurrentTab = tabs && tabs[activeTab].component
+
+    return (
+      <Container>
+        {title && (
+          <TitleBar>
+            <Title color="white">{title}</Title>
+            {actions}
+          </TitleBar>
+        )}
+        {tabs ? (
+          <>
+            <TabsBar>
+              {tabs.map(({ name }, i) => (
+                <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
+                  {name}
+                </Tab>
+              ))}
+            </TabsBar>
+            <CurrentTab />
+          </>
+        ) : (
+          <Grid fill={fill}>{onlyOneChild ? <PageArea>{children}</PageArea> : children}</Grid>
+        )}
+      </Container>
+    )
+  }
 }
 
 export default Page
