@@ -92,7 +92,7 @@ const containerStyles: Interpolation<Props> = ({
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const IconContainer = styled("div")(({ theme, condensed }: Css) => ({
+const IconContainer = styled("div")(({ theme }: Css) => ({
   marginLeft: theme.space.small,
   float: "right",
   "& svg": {

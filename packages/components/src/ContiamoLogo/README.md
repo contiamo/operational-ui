@@ -5,7 +5,7 @@ This component provides a Contiamo logo for use out of the box. It is typically 
 #### With Colors
 
 ```jsx
-<div style={{ display: "flex" }}>
+<div style={{ display: "flex", justifyContent: "space-around" }}>
   <ContiamoLogo color="primary" />
   <ContiamoLogo color="error" />
   <ContiamoLogo color="success" />

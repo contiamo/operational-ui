@@ -1,36 +1,29 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
-import { readableTextColor, getInitials } from "@operational/utils"
-import { WithTheme, Css, CssStatic } from "../types"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { readableTextColor, getInitials, expandColor } from "@operational/utils"
 
 export interface Props {
   /** Name of the person */
   name: string
   /** Title of the person */
-
   title?: string
   /** Optionally display the name and title next to the avatar circle */
-
   showName?: boolean
   /** Hide initials from inside the avatar circle. Set automatically if a `photo` prop is set */
-
   hideInitials?: boolean
   /** A URL to an image of the person */
-
   photo?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   /** Class name */
-
   className?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
-
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
-
   assignColor?: boolean
+  /** Size of avatars */
+  size?: "small" | "medium"
+  /** Add a border to the Avatar? */
+  addBorder?: boolean
   children?: React.ReactNode
   onClick?: () => void
 }
@@ -42,39 +35,18 @@ const Container = styled("div")({
   justifyContent: "flex-start",
 })
 
-const NameContainer = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    ...theme.deprecated.typography.body,
-    display: "block",
-  }),
-)
+const NameContainer = styled("div")({
+  display: "block",
+})
 
-const Name = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): CssStatic => ({
-    ...theme.deprecated.typography.body,
-    margin: 0,
-  }),
-)
+const Name = styled("div")({
+  margin: 0,
+})
 
-const Title = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): CssStatic => ({
-    ...theme.deprecated.typography.body,
-    color: theme.deprecated.colors.gray,
-    margin: 0,
-  }),
-)
+const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  color: theme.color.text.lighter,
+  margin: 0,
+}))
 
 const Picture = styled("div")(
   ({
@@ -82,30 +54,34 @@ const Picture = styled("div")(
     color,
     colorAssignment,
     photo,
+    showName,
+    size,
+    addBorder,
   }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    color?: string
+    theme?: OperationalStyleConstants & { deprecated: Theme }
+    color?: Props["color"]
     colorAssignment?: number
-    photo?: string
+    photo?: Props["photo"]
+    showName: Props["showName"]
+    size: Props["size"]
+    addBorder: Props["addBorder"]
   }): {} => {
-    const defaultColor: string = theme.deprecated.colors.info
-    const fixedBackgroundColor: string = color ? expandColor(theme.deprecated, color) || defaultColor : defaultColor
+    const defaultColor: string = theme.color.primary
+    const fixedBackgroundColor: string = color ? expandColor(theme, color) || defaultColor : defaultColor
     const assignedBackgroundColor: null | string = colorAssignment
       ? theme.deprecated.colors.visualizationPalette[
           colorAssignment % theme.deprecated.colors.visualizationPalette.length
         ]
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
-    const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.text, "white"])
+    const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
     return {
-      fontSize: 9,
+      fontSize: size === "medium" ? 13 : 9,
       textTransform: "uppercase",
-      marginRight: theme.deprecated.spacing * 0.5,
-      // use for offset the display name
-      width: theme.deprecated.spacing * 2,
-      height: theme.deprecated.spacing * 2,
+      marginRight: showName ? theme.space.small : 0, // use for offset the display name
+      width: size === "medium" ? 48 : 32,
+      height: size === "medium" ? 48 : 32,
+      border: addBorder ? "2px solid white" : 0,
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
@@ -115,7 +91,7 @@ const Picture = styled("div")(
             background: `url(${photo})`,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
-            color: theme.deprecated.colors.white,
+            color: theme.color.white,
           }
         : {
             backgroundColor,
@@ -135,12 +111,14 @@ const Avatar: React.SFC<Props> = props => {
         )
       : undefined
   return (
-    <Container css={props.css} className={props.className} onClick={props.onClick}>
+    <Container {...props}>
       <Picture
         photo={props.photo}
         color={props.color}
         colorAssignment={colorAssignmentNumber}
-        className="opui_avatar-picture"
+        showName={props.showName}
+        size={props.size}
+        addBorder={props.addBorder}
       >
         {props.children ? props.children : props.hideInitials || props.photo ? "" : initials}
       </Picture>
@@ -156,6 +134,8 @@ const Avatar: React.SFC<Props> = props => {
 
 Avatar.defaultProps = {
   assignColor: true,
+  addBorder: false,
+  size: "small",
   onClick: () => ({}),
 }
 

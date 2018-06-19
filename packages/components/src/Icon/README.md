@@ -3,7 +3,7 @@ Operational's SVG icon set as a single component. It abstracts over different ty
 ### Usage
 
 ```jsx
-<div>
+<>
   <p>
     Here are some <a href="https://feathericons.com">Feather Icons</a>:
   </p>
@@ -15,5 +15,19 @@ Operational's SVG icon set as a single component. It abstracts over different ty
   <Icon name="OperationalUI" size={36} />
   <Icon name="Pantheon" size={36} colored />
   <Icon name="Labs" size={36} />
+</>
+```
+
+#### With margins for content
+
+```jsx
+<div style={{ display: "flex", alignItems: "center" }}>
+  <Icon name="Play" left /> Play that song!
+</div>
+```
+
+```jsx
+<div style={{ display: "flex", alignItems: "center" }}>
+  I'm on the right! <Icon name="AlignRight" right />
 </div>
 ```

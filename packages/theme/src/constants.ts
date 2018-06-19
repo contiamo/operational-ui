@@ -31,96 +31,45 @@ export type Grey =
   | 24 // #3e3e3e
   | 20 // #333
 
-export type HslValue = string
+const grey = (lightness: Grey) => `hsl(0, 0%, ${lightness}%)`
+const primaryColor = "hsl(197, 82%, 44%)"
 
-export interface OperationalBackgroundColors {
-  readonly dark: HslValue
-  readonly light: HslValue
-  readonly lighter: HslValue
+/**
+ * A specialized color palette for backgrounds.
+ */
+const backgroundColors = {
+  dark: grey(24),
+  light: grey(93),
+  lighter: grey(96),
 }
 
-export interface OperationalSeparatorColors {
-  readonly default: HslValue
-  readonly light: HslValue
+/**
+ * A specialized color palette for separators.
+ */
+const separatorColors = {
+  default: grey(91),
+  light: grey(93),
 }
 
-export interface OperationalTextColors {
-  readonly dark: HslValue
-  readonly default: HslValue
-  readonly light: HslValue
-  readonly lighter: HslValue
-  readonly lightest: HslValue
-  readonly action: HslValue
-  readonly white: HslValue
+/**
+ * A specialized color palette for typography.
+ */
+const textColors = {
+  dark: grey(20),
+  default: grey(33),
+  light: grey(40),
+  lighter: grey(45),
+  lightest: grey(56),
+  action: primaryColor,
 }
 
-export interface OperationalBorderColors {
-  readonly default: HslValue
-  readonly disabled: HslValue
+/**
+ * A specialized color palette for borders.
+ */
+const borderColors = {
+  default: grey(75),
+  disabled: grey(91),
 }
-
-export interface OperationalColors {
-  readonly primary: HslValue
-  readonly disabled: HslValue
-  readonly success: HslValue
-  readonly error: HslValue
-  readonly basic: HslValue
-  readonly ghost: HslValue
-  readonly white: HslValue
-  readonly black: HslValue
-  readonly background: OperationalBackgroundColors
-  readonly separators: OperationalSeparatorColors
-  readonly text: OperationalTextColors
-  readonly border: OperationalBorderColors
-  readonly grey: (grey: Grey) => HslValue
-}
-
-export interface OperationalFontFamily {
-  readonly main: string
-  readonly code: string
-}
-
-export interface OperationalFontSize {
-  readonly title: number
-  readonly body: number
-  readonly small: number
-  readonly fineprint: number
-}
-
-export interface OperationalFont {
-  readonly family: OperationalFontFamily
-  readonly size: OperationalFontSize
-}
-
-export interface OperationalSpace {
-  readonly base: number
-  readonly small: number
-  readonly content: number
-  readonly element: number
-  readonly big: number
-}
-
-export interface OperationalStyleConstants {
-  readonly color: OperationalColors
-  readonly font: OperationalFont
-  readonly space: OperationalSpace
-  readonly borderRadius: number
-  readonly sidebarWidth: number
-}
-
-const makeConstants = (): OperationalStyleConstants => ({
-  font,
-  space,
-  color: {
-    ...colors,
-    background: backgroundColors,
-    separators: separatorColors,
-    text: textColors,
-    border: borderColors,
-  },
-  borderRadius: 2,
-  sidebarWidth: 256,
-})
 
 /**
  * A collection of colors used throughout the library.
@@ -131,8 +80,15 @@ const makeConstants = (): OperationalStyleConstants => ({
  *
  * hsla is used where alpha blending is involved.
  */
-const colors = {
-  primary: "hsl(197, 82%, 44%)",
+const color = {
+  /**
+   * Greys exist on a spectrum of 0-100.
+   *
+   * Current _official_ greys are:
+   * 96, 93, 56, 45, 40, 33, 24, 20
+   */
+  grey,
+  primary: primaryColor,
   disabled: "hsl(0, 0%, 96%)",
   success: "hsl(127, 86%, 36%)",
   error: "hsl(0, 100%, 30%)",
@@ -140,66 +96,32 @@ const colors = {
   ghost: "hsla(0, 0%, 100%, 0.2)",
   white: "hsl(0, 0%, 100%)",
   black: "hsl(0, 0%, 0%)",
-  /**
-   * Greys exist on a spectrum of 0-100.
-   *
-   * Current _official_ greys are:
-   * 96, 93, 56, 45, 40, 33, 24, 20
-   */
-  grey: (lightness: Grey) => `hsl(0, 0%, ${lightness}%)`,
-}
-
-/**
- * A specialized color palette for backgrounds.
- */
-const backgroundColors: OperationalBackgroundColors = {
-  dark: colors.grey(24),
-  light: colors.grey(93),
-  lighter: colors.grey(96),
-}
-
-/**
- * A specialized color palette for separators.
- */
-const separatorColors: OperationalSeparatorColors = {
-  default: colors.grey(91),
-  light: colors.grey(93),
-}
-
-/**
- * A specialized color palette for typography.
- */
-const textColors: OperationalTextColors = {
-  dark: colors.grey(20),
-  default: colors.grey(33),
-  light: colors.grey(40),
-  lighter: colors.grey(45),
-  lightest: colors.grey(56),
-  action: colors.primary,
-  white: colors.white,
-}
-
-/**
- * A specialized color palette for borders.
- */
-const borderColors: OperationalBorderColors = {
-  default: colors.grey(75),
-  disabled: colors.grey(91),
+  background: backgroundColors,
+  separators: separatorColors,
+  text: textColors,
+  border: borderColors,
 }
 
 /**
  * Font definitions and sizes available for use
  * throughout Operational UI.
  */
-const font: OperationalFont = {
+const font = {
   family: {
     main: "'Helvetica Neue', Helvetica, Arial, sans-serif",
     code: "Menlo, monospace",
   },
   size: {
+    /** 18px */
     title: 18,
+
+    /** 14px */
     body: 14,
+
+    /** 13px */
     small: 13,
+
+    /** 12px */
     fineprint: 12,
   },
 }
@@ -208,12 +130,41 @@ const font: OperationalFont = {
  * A container of space-related constants to be
  * used throughout Operational UI.
  */
-const space: OperationalSpace = {
+const space = {
+  /** Base space is `4px` */
   base: 4,
+
+  /** Small space is `8px` */
   small: 8,
+
+  /** Content space is `16px` */
   content: 16,
+
+  /** Element space is `20px` */
   element: 20,
+
+  /** Big space is `28px` */
   big: 28,
 }
 
-export default makeConstants()
+/**
+ * One zIndex to rule them all
+ */
+const zIndex = {
+  default: 0,
+  selectOptions: 300,
+  formFieldError: 299,
+}
+
+const constants = {
+  font,
+  space,
+  zIndex,
+  color,
+  borderRadius: 2,
+  sidebarWidth: 256,
+}
+
+export type OperationalStyleConstants = Readonly<typeof constants>
+
+export default constants

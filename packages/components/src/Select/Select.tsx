@@ -61,27 +61,22 @@ export interface State {
 }
 
 const Container = styled("div")(
-  ({
-    theme,
-    color,
-    disabled,
-    naked,
-  }: Partial<Props> & { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => {
-    const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.deprecated.colors.white
+  ({ theme, color, disabled, naked }: Partial<Props> & { theme?: OperationalStyleConstants }): {} => {
+    const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
+    const dropdownArrowWidth = 23
     return {
       backgroundColor,
       label: "select",
       position: "relative",
       display: "flex",
       alignItems: "center",
-      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3 + 40}px ${theme.deprecated
-        .spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px `,
+      padding: `${theme.space.small}px ${dropdownArrowWidth}px ${theme.space.small}px ${theme.space.content}px`,
       borderRadius: 4,
       width: "fit-content",
       minWidth: !naked && 240,
       minHeight: 20,
       border: naked ? 0 : "1px solid",
-      borderColor: theme.deprecated.colors.inputBorder,
+      borderColor: theme.color.border.default,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
       color: readableTextColor(backgroundColor, ["black", "white"]),
@@ -92,11 +87,11 @@ const Container = styled("div")(
         content: "''",
         position: "absolute",
         top: "50%",
-        right: theme.deprecated.spacing / 2,
+        right: theme.space.small,
         width: 0,
         height: 0,
         border: "4px solid transparent",
-        borderTopColor: theme.deprecated.colors.gray,
+        borderTopColor: theme.color.border.default,
         transform: "translateY(calc(-50% + 2px))",
       },
       "&:focus":
@@ -109,15 +104,7 @@ const Container = styled("div")(
 )
 
 const DisplayValue = styled("div")(
-  ({
-    theme,
-    isPlaceholder,
-  }: {
-    isPlaceholder: boolean
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }) => {
+  ({ theme, isPlaceholder }: { isPlaceholder: boolean; theme?: OperationalStyleConstants }) => {
     if (isPlaceholder) {
       return {
         color: theme.color.text.lightest,
@@ -133,8 +120,10 @@ const DisplayValue = styled("div")(
 const Options = styled("div")(
   {
     position: "absolute",
-    // Push it down 6px so it doesn't overlap with the focus shadow,
-    // and there's a comfortable 2px gap.
+    /**
+     * Push it down 6px so it doesn't overlap with the focus shadow,
+     * and there's a comfortable 2px gap.
+     */
     top: "calc(100% + 6px)",
     left: 0,
     width: "100%",
@@ -145,28 +134,15 @@ const Options = styled("div")(
     animation: `${fadeIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`,
   },
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }) => ({
-    boxShadow: theme.deprecated.shadows.popup,
-    zIndex: theme.deprecated.baseZIndex + 300,
+  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+    boxShadow: "0 3px 12px rgba(0, 0, 0, .14)",
+    zIndex: theme.zIndex.selectOptions,
   }),
 )
 
 const OptionsList = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    // whole number + 3/4 ratio here ensures options don't get cut off
-    maxHeight: theme.deprecated.spacing * 12.75,
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
+    maxHeight: 200,
     overflow: "auto",
   }),
 )
@@ -181,10 +157,11 @@ class Select extends React.Component<Props, State> {
   containerNode: Node
 
   static defaultProps: Partial<Props> = {
-    placeholder: "No entries selected", // This implements "click outside to close" behavior
+    placeholder: "No entries selected",
     naked: false,
   }
 
+  // This implements "click outside to close" behavior
   handleClick(ev: React.SyntheticEvent<Node>): void {
     // if we're clicking on the Select itself,
     if (this.containerNode && this.containerNode.contains(ev.target as Node)) {

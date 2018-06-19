@@ -2,7 +2,7 @@
 
 exports[`Select Should render correctly 1`] = `
 <div
-  class="css-1fl693e-select"
+  class="css-1ew8ynt-select"
   role="listbox"
   tabindex="-2"
 >

@@ -4,14 +4,13 @@ import { OperationalStyleConstants } from "@operational/theme"
 
 export interface HeaderProps {
   /**
-   * The "start" element of the HeaderBar.
-   * In left-to-right locales, this is the
-   * leftmost thing.
+   * The "logo" element of the HeaderBar.
+   * Typically, the leftmost element.
    */
-  start: React.ReactNode
+  logo: React.ReactNode
 
   /** The center of the HeaderBar. */
-  center?: React.ReactNode
+  main?: React.ReactNode
 
   /** The "end" element of the HeaderBar. */
   end?: React.ReactNode
@@ -32,6 +31,7 @@ const Bar = styled("div")(
 
     return {
       height,
+      padding: `0 ${theme.space.content}px`,
       gridTemplateColumns: `${theme.sidebarWidth}px auto 50px`,
       backgroundColor: theme.color.background.dark,
       color: theme.color.white,
@@ -46,10 +46,10 @@ const StartContainer = styled("div")()
 const CenterContainer = styled("div")()
 const EndContainer = styled("div")({ justifyContent: "flex-end" })
 
-const HeaderBar: React.SFC<HeaderProps> = ({ start, center, end }) => (
+const HeaderBar: React.SFC<HeaderProps> = ({ logo, main, end }) => (
   <Bar>
-    <StartContainer>{start}</StartContainer>
-    <CenterContainer>{center}</CenterContainer>
+    <StartContainer>{logo}</StartContainer>
+    <CenterContainer>{main}</CenterContainer>
     <EndContainer>{end}</EndContainer>
   </Bar>
 )

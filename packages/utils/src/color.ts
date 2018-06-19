@@ -64,6 +64,11 @@ export const expandColor = (
   if (isHex) {
     return color
   }
-  // || null is necessary to coerce undefineds into nulls
+
+  /**
+   * This function is typically used in checks.
+   * If falsy, it returns a fallback color, hence
+   * the empty string return for a falsy value.
+   */
   return (theme.color as any)[color] || ""
 }

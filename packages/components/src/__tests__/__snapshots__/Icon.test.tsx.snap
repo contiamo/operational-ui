@@ -2,14 +2,16 @@
 
 exports[`Icon Component Renders an <svg> tag 1`] = `
 <svg
+  class="css-1jl4146"
   fill="none"
-  height="24"
+  height="32"
+  name="Play"
   stroke="currentColor"
   stroke-linecap="round"
   stroke-linejoin="round"
   stroke-width="2"
   viewbox="0 0 24 24"
-  width="24"
+  width="32"
   xmlns="http://www.w3.org/2000/svg"
 >
   <polygon

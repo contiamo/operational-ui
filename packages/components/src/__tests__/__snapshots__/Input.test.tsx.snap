@@ -2,7 +2,7 @@
 
 exports[`Input Should initialize 1`] = `
 <input
-  class="hi css-ap3rfr-input"
+  class="hi css-nxgewh-input"
   name="bienvenue"
   placeholder="hello"
   value="How are you?"
