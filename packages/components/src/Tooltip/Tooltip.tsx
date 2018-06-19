@@ -1,8 +1,8 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor } from "@operational/utils"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { Css, CssStatic } from "../types"
+import { readableTextColor } from "@operational/utils"
+import { Css } from "../types"
 
 /**
  * Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:
@@ -50,7 +50,7 @@ const Container = styled("div")(
     theme?: OperationalStyleConstants & {
       deprecated: Theme
     }
-  }): CssStatic => {
+  }) => {
     const backgroundColor = theme.deprecated.colors.black
     return {
       backgroundColor,
@@ -176,6 +176,16 @@ class Tooltip extends React.Component<Props, State> {
 
   containerNode: HTMLElement
 
+  componentDidMount() {
+    const bbRect = this.containerNode.getBoundingClientRect()
+    this.setState(prevState => ({
+      bbTop: bbRect.top,
+      bbBottom: bbRect.bottom,
+      bbLeft: bbRect.left,
+      bbRight: bbRect.right,
+    }))
+  }
+
   render() {
     let position: Position = "top"
 
@@ -206,8 +216,6 @@ class Tooltip extends React.Component<Props, State> {
 
     return (
       <Container
-        className={this.props.className}
-        css={this.props.css}
         position={position}
         innerRef={node => {
           this.containerNode = node
@@ -216,16 +224,6 @@ class Tooltip extends React.Component<Props, State> {
         {this.props.children}
       </Container>
     )
-  }
-
-  componentDidMount() {
-    const bbRect = this.containerNode.getBoundingClientRect()
-    this.setState(prevState => ({
-      bbTop: bbRect.top,
-      bbBottom: bbRect.bottom,
-      bbLeft: bbRect.left,
-      bbRight: bbRect.right,
-    }))
   }
 }
 

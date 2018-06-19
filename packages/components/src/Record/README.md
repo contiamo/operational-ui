@@ -4,13 +4,12 @@ Records are general-purpose displays of resources, composed of a header element 
 
 ```js
 const { Tile } = require("../")
-
 ;<Record title="Deutsche Bahn (German Railway Company)">
   Deutsche Bahn AG is a German railway company. It is federally owned and employs around 300,000 people.
 </Record>
 ```
 
-## Props
+### Props
 
 | Name              | Description                                                                                           | Type               | Default | Required |
 | :---------------- | :---------------------------------------------------------------------------------------------------- | :----------------- | :------ | :------- |

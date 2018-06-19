@@ -164,7 +164,7 @@ const Number = styled("div")(
   }),
 )
 
-const Span = styled("span")()
+const Span = styled("span")({ fontFeatureSettings: "'tnum'" })
 
 const Breakdown: React.SFC<Props> = props => (
   <Container
@@ -179,13 +179,7 @@ const Breakdown: React.SFC<Props> = props => (
     <Content>
       <Label>{props.children}</Label>
       <Bar color={props.color} fill={props.fill}>
-        <Span
-          css={{
-            fontFeatureSettings: "'tnum'",
-          }}
-        >
-          {props.label}
-        </Span>
+        <Span>{props.label}</Span>
       </Bar>
     </Content>
   </Container>

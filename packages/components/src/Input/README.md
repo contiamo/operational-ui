@@ -26,3 +26,9 @@ class StatefulInput extends React.Component {
 
 <StatefulInput />
 ```
+
+### With help tooltip
+
+```jsx
+<Input value="12" label="Phone number" hint="Please use country code" />
+```

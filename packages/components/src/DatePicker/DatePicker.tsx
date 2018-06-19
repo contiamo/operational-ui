@@ -1,31 +1,12 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { WithTheme, Css, CssStatic } from "../types"
+import { Css } from "../types"
 import { Label, LabelText } from "../utils/mixins"
 import { Card, Icon } from "../"
 
-import {
-  Container,
-  ClearButton,
-  Toggle,
-  MonthNav,
-  IconContainer,
-  Days,
-  Day,
-  Input,
-  DatePickerCard,
-} from "./DatePicker.styles"
+import { Container, Toggle, MonthNav, IconContainer, Input, DatePickerCard } from "./DatePicker.styles"
 
-import {
-  months,
-  daysInMonth,
-  range,
-  toDate,
-  monthStartDay,
-  toYearMonthDay,
-  validateDateString,
-} from "./DatePicker.utils"
+import { months, toYearMonthDay, validateDateString } from "./DatePicker.utils"
 
 import Month from "./DatePicker.Month"
 
@@ -162,8 +143,8 @@ class DatePicker extends React.Component<Props, State> {
     const { onChange, placeholder, start, end, label, id, css, className } = this.props
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
-    const placeholderDays = monthStartDay(year, month)
-    const daysInCurrentMonth = daysInMonth(month, year)
+    const FullWidthInput = styled(Input)({ width: "100%" })
+
     const datePickerWithoutLabel = (
       <Container
         innerRef={(node: React.ReactNode) => {
@@ -186,7 +167,7 @@ class DatePicker extends React.Component<Props, State> {
             <Icon name="X" size={14} />
           </Toggle>
         )}
-        <Input
+        <FullWidthInput
           isExpanded={this.state.isExpanded}
           id={domId}
           readOnly
@@ -206,9 +187,6 @@ class DatePicker extends React.Component<Props, State> {
                 }
               },
             )
-          }}
-          css={{
-            width: "100%",
           }}
         />
         <DatePickerCard isExpanded={isExpanded}>
