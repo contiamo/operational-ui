@@ -7,26 +7,17 @@ This component is typically used inside a layout component along with a sidenav.
 Here is a simple usage example:
 
 ```jsx
-const  Breadcrumb = require("../Breadcrumb/Breadcrumb").default
+;<Page title="Settings Page">
+  <Card>Hello, this is page content</Card>
+</Page>
+```
 
-const breadcrumbs = (
-  <Breadcrumbs>
-    <Breadcrumb>
-      <a>Link One</a>
-    </Breadcrumb>
-    <Breadcrumb>Link Two</Breadcrumb>
-  </Breadcrumbs>
-)
+### With actions
 
-/* Always use condensed buttons in page controls */
-const controls = (<Button condensed>Go somewhere else</Button>);
-
-<Page
-  title="Settings Page"
-  titleIcon="Settings"
-  breadcrumbs={breadcrumbs}
-  controls={controls}
->
-  <p>Hello, this is page content</p>
+```jsx
+/* Always use condensed buttons in page actions */
+const actions = <Button condensed>Go somewhere else</Button>
+;<Page title="Settings Page" actions={actions}>
+  <Card>Hello, this is page content</Card>
 </Page>
 ```
