@@ -1,10 +1,10 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { readableTextColor, darken, lighten } from "@operational/utils"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import styled, { Interpolation } from "react-emotion"
+import { readableTextColor, darken, lighten, expandColor } from "@operational/utils"
+import { OperationalStyleConstants } from "@operational/theme"
 import { isWhite, isModifiedEvent } from "../utils"
-import { WithTheme, Css, CssStatic } from "../types"
-import { ContextConsumer, Context } from "../"
+import { Css, CssStatic } from "../types"
+import { ContextConsumer, Context, Icon, IconName } from "../"
 import Spinner from "../Spinner/Spinner"
 
 export interface Props {
@@ -15,14 +15,16 @@ export interface Props {
   className?: string
   /** Invoked when you click on the button */
 
-  onClick?: () => void
+  onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
   type?: string
   /** Navigation property à la react-router <Link/> */
 
   to?: string
-  /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
+  /** Color assigned to the avatar circle (hex or named color from `theme.color`) */
 
   color?: string
+  /** Icon to display on right of button (optional) */
+  icon?: string | React.ReactNode
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
 
   loading?: boolean
@@ -38,40 +40,46 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const containerStyles = ({
+type PropsWithTheme = Props & { theme?: OperationalStyleConstants }
+
+const makeColors = (theme: OperationalStyleConstants, color: string, active?: boolean) => {
+  const defaultColor: string = theme.color.white
+  const grey: string = theme.color.background[active ? "light" : "lighter"]
+  const greyText: string = theme.color.text[active ? "action" : "lightest"]
+  const backgroundColor: string = color === "grey" ? grey : expandColor(theme, color) || defaultColor
+  const textColor: string =
+    color === "grey" ? greyText : readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
+  return {
+    background: backgroundColor,
+    foreground: textColor,
+  }
+}
+
+const containerStyles: Interpolation<Props> = ({
   theme,
   color,
   active,
   disabled,
   condensed,
   loading,
-}: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
-  color?: string
-  active?: boolean
-  disabled?: boolean
-  condensed?: boolean
-  loading?: boolean
-}): CssStatic => {
-  const defaultColor: string = theme.deprecated.colors.white
-  const backgroundColor: string = expandColor(theme.deprecated, color) || defaultColor
+  icon,
+}: PropsWithTheme) => {
+  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color, active)
   const activeBackgroundColor: string = darken(backgroundColor, 5)
-  const foregroundColor = readableTextColor(backgroundColor, [theme.deprecated.colors.text, "white"])
-  const spacing = theme.deprecated.spacing
+  const spacing = theme.space.content
+  const padding = condensed ? theme.space.small : spacing
+  const computedBorderColor = active ? activeBackgroundColor : backgroundColor
+
   return {
+    lineHeight: `${condensed ? 26 : 34}px`,
     label: "button",
-    ...theme.deprecated.typography.body,
+    fontSize: theme.font.size.small,
+    fontFamily: theme.font.family.main,
     display: "inline-block",
-    padding: condensed ? `${spacing / 8}px ${spacing / 2}px` : `${spacing * 0.375}px ${spacing * 1.5}px`,
-    borderRadius: theme.deprecated.borderRadius,
+    padding: `0 ${padding}px`,
+    borderRadius: theme.borderRadius,
     border: "1px solid",
-    borderColor: isWhite(backgroundColor)
-      ? theme.deprecated.colors.gray
-      : active
-        ? activeBackgroundColor
-        : backgroundColor,
+    borderColor: isWhite(backgroundColor) ? theme.color.border.default : computedBorderColor,
     cursor: disabled ? "auto" : "pointer",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     opacity: disabled ? 0.6 : 1.0,
@@ -81,9 +89,6 @@ const containerStyles = ({
     "&, a:link&, a:visited&": {
       textDecoration: "none",
       color: loading ? "transparent" : foregroundColor,
-    },
-    "& .op_button-spinner": {
-      color: foregroundColor,
     },
     ...(!disabled
       ? {
@@ -103,6 +108,24 @@ const containerStyles = ({
 
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
+
+const IconContainer = styled("div")(({ theme, condensed }: Css) => ({
+  marginLeft: theme.space.small,
+  float: "right",
+  "& svg": {
+    verticalAlign: "text-bottom",
+  },
+}))
+
+const ButtonSpinner = styled(Spinner)(
+  ({ theme, containerColor }: { theme?: OperationalStyleConstants; containerColor: string }) => ({
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate3d(-50%, -50%, 0)",
+    color: makeColors(theme, containerColor).foreground,
+  }),
+)
 
 const Button = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
@@ -133,21 +156,16 @@ const Button = (props: Props) => {
           active={props.active}
           disabled={props.disabled}
           condensed={props.condensed}
+          icon={props.icon}
           title={props.loading && props.children === String(props.children) ? String(props.children) : undefined}
         >
           {props.children}
-          {props.loading && (
-            <Spinner
-              className="op_button-spinner"
-              color="currentColor"
-              css={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate3d(-50%, -50%, 0)",
-              }}
-            />
+          {props.icon && (
+            <IconContainer condensed={props.condensed}>
+              {typeof props.icon === "string" ? <Icon name={props.icon as IconName} size={16} /> : props.icon}
+            </IconContainer>
           )}
+          {props.loading && <ButtonSpinner containerColor={props.color} />}
         </ContainerComponent>
       )}
     </ContextConsumer>

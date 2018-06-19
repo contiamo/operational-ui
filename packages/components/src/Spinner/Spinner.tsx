@@ -7,9 +7,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
-
-  css?: Css
-  className?: string
   color?: string
 }
 
@@ -26,13 +23,11 @@ const size = 20
 const animationTimeUnit: number = 0.6
 const f: number = 0.25
 
-const Container = styled("div")(
-  (): CssStatic => ({
-    label: "spinner",
-    width: size,
-    height: size,
-  }),
-)
+const Container = styled("div")({
+  label: "spinner",
+  width: size,
+  height: size,
+})
 
 const PulsingCube = styled("div")(
   ({
@@ -44,7 +39,7 @@ const PulsingCube = styled("div")(
     }
     color?: string
   }): CssStatic => {
-    const backgroundColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+    const backgroundColor: string = expandColor(theme.deprecated, color) || "currentColor"
     return {
       backgroundColor,
       fontSize: 0,
@@ -77,9 +72,7 @@ const PulsingCube = styled("div")(
 )
 
 const Spinner = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className} color={props.color}>
-    {[0, 1, 2, 3].map(index => <PulsingCube key={index} color={props.color} />)}
-  </Container>
+  <Container {...props}>{[0, 1, 2, 3].map(index => <PulsingCube key={index} color={props.color} />)}</Container>
 )
 
 export default Spinner

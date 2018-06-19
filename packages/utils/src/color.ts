@@ -1,4 +1,5 @@
 import * as colorCalculator from "tinycolor2"
+import { OperationalStyleConstants } from "@operational/theme"
 
 const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
   colors.reduce((acc, curr) => {
@@ -43,3 +44,20 @@ export const transparentize = (color: string) => (percentage: number): string =>
   (({ r, g, b }) => {
     return `rgba(${r}, ${g}, ${b}, ${(255 * (100 - percentage)) / 100})`
   })(colorCalculator(color).toRgb())
+
+/*
+ * Expands a color expressed either as a custom hex value
+ * or a color key to pick from within the style constants object.
+*/
+export const expandColor = (theme: OperationalStyleConstants, color?: string): string | null => {
+  if (!color) {
+    return null
+  }
+  const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)|currentColor/i
+  const isHex = hexRegEx.test(color)
+  if (isHex) {
+    return color
+  }
+  // || null is necessary to coerce undefineds into nulls
+  return (theme.color as any)[color] || (null as string | null)
+}

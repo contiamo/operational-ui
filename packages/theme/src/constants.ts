@@ -103,6 +103,7 @@ export interface OperationalStyleConstants {
   readonly color: OperationalColors
   readonly font: OperationalFont
   readonly space: OperationalSpace
+  readonly borderRadius: number
 }
 
 const makeConstants = (): OperationalStyleConstants => ({
@@ -115,6 +116,7 @@ const makeConstants = (): OperationalStyleConstants => ({
     text: textColors,
     border: borderColors,
   },
+  borderRadius: 2,
 })
 
 /**
