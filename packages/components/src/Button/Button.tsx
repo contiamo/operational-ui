@@ -10,7 +10,6 @@ import Spinner from "../Spinner/Spinner"
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
-
   css?: Css
   className?: string
   /** Invoked when you click on the button */
@@ -24,8 +23,6 @@ export interface Props {
   icon?: string | React.ReactNode
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
   loading?: boolean
-  /** Active state */
-  active?: boolean
   /** Disabled option */
   disabled?: boolean
   /** Condensed option */
@@ -35,10 +32,10 @@ export interface Props {
 
 type PropsWithTheme = Props & { theme?: OperationalStyleConstants }
 
-const makeColors = (theme: OperationalStyleConstants, color: string, active?: boolean) => {
+const makeColors = (theme: OperationalStyleConstants, color: string) => {
   const defaultColor: string = theme.color.white
-  const grey: string = theme.color.background[active ? "light" : "lighter"]
-  const greyText: string = theme.color.text[active ? "action" : "lightest"]
+  const grey: string = theme.color.background.light
+  const greyText: string = theme.color.text.action
   const backgroundColor: string = color === "grey" ? grey : expandColor(theme, color) || defaultColor
   const textColor: string =
     color === "grey" ? greyText : readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
@@ -51,29 +48,24 @@ const makeColors = (theme: OperationalStyleConstants, color: string, active?: bo
 const containerStyles: Interpolation<Props> = ({
   theme,
   color,
-  active,
   disabled,
   condensed,
   loading,
   icon,
 }: PropsWithTheme) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color, active)
-  const activeBackgroundColor: string = darken(backgroundColor, 5)
-  const spacing = theme.space.content
-  const padding = condensed ? theme.space.small : spacing
-
+  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color)
   return {
+    backgroundColor,
     lineHeight: `${condensed ? 26 : 34}px`,
     label: "button",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
     display: "inline-block",
-    padding: `0 ${padding}px`,
+    padding: `0 ${condensed ? theme.space.small : theme.space.content}px`,
     borderRadius: theme.borderRadius,
     border: 0,
     boxShadow: isWhite(backgroundColor) && `0 0 0 1px ${theme.color.border.default} inset`,
     cursor: disabled ? "auto" : "pointer",
-    backgroundColor: active ? activeBackgroundColor : backgroundColor,
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
     position: "relative",
@@ -85,8 +77,7 @@ const containerStyles: Interpolation<Props> = ({
     ...(!disabled
       ? {
           ":hover": {
-            backgroundColor: activeBackgroundColor,
-            color: loading ? "transparent" : readableTextColor(activeBackgroundColor, ["white", "#222"]),
+            backgroundColor: darken(backgroundColor, 5),
           },
           ":focus": {
             outline: 0,
@@ -94,7 +85,7 @@ const containerStyles: Interpolation<Props> = ({
           },
         }
       : {}),
-    marginRight: spacing / 2,
+    marginRight: theme.space.small,
   }
 }
 
@@ -145,7 +136,6 @@ const Button = (props: Props) => {
           }}
           color={props.color}
           loading={props.loading}
-          active={props.active}
           disabled={props.disabled}
           condensed={props.condensed}
           icon={props.icon}

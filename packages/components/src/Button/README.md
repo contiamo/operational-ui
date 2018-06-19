@@ -19,8 +19,8 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button loading>Loading</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
-  <Button color="grey">Update</Button>
-  <Button color="grey" active>Test</Button>
+  <Button color="grey" disabled>Update</Button>
+  <Button color="grey">Test</Button>
   <Button color="error">Delete this bundle</Button>
 </div>
 <div style={{ backgroundColor: "#1499ce", padding: 5 }}>
