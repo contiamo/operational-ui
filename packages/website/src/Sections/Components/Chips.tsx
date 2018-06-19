@@ -11,13 +11,13 @@ export const snippetUrl = `${constants.snippetBaseUrl}/Components/Chips.tsx`
 export const Component = () => (
   <>
     <Chip icon="X" onIconClick={() => {}}>
-      Simple
+      Default color
     </Chip>
-    <Chip icon="X" color="white" onIconClick={() => {}}>
-      Lighter
+    <Chip icon="X" colorIndex="1" onIconClick={() => {}}>
+      2nd default color
     </Chip>
     <Chip icon="X" color="#454545" onIconClick={() => {}}>
-      Darker
+      Custom color
     </Chip>
   </>
 )
