@@ -94,6 +94,11 @@ const TextareaComp = styled("textarea")(
   },
 )
 
+const HelpTooltip = styled(Tooltip)`
+  min-width: 100px;
+  width: fit-content;
+`
+
 const Textarea = (props: Props) => {
   return (
     <Label css={props.css} className={props.className} id={props.id}>
@@ -102,15 +107,11 @@ const Textarea = (props: Props) => {
         {props.hint ? (
           <FormFieldControl>
             <Icon name="HelpCircle" size={14} />
-            <Tooltip
+            <HelpTooltip
               right
-              css={{
-                minWidth: 100,
-                width: "fit-content",
-              }}
             >
               {props.hint}
-            </Tooltip>
+            </HelpTooltip>
           </FormFieldControl>
         ) : null}
       </FormFieldControls>

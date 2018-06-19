@@ -3,7 +3,7 @@ import styled, { Interpolation } from "react-emotion"
 import { readableTextColor, darken, lighten, expandColor } from "@operational/utils"
 import { OperationalStyleConstants } from "@operational/theme"
 import { isWhite, isModifiedEvent } from "../utils"
-import { Css, CssStatic } from "../types"
+import { Css } from "../types"
 import { ContextConsumer, Context, Icon, IconName } from "../"
 import Spinner from "../Spinner/Spinner"
 

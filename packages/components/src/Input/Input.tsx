@@ -70,6 +70,7 @@ const InputField = styled("input")(
       ? {}
       : {
           display: "block",
+          width: "100%",
         }),
     label: "input",
     minWidth: inputDefaultWidth,
@@ -86,6 +87,11 @@ const InputField = styled("input")(
     }),
   }),
 )
+
+const HelpTooltip = styled(Tooltip)`
+  min-width: 100px;
+  width: fit-content;
+`
 
 const Input = (props: Props) => {
   const forAttributeId = props.label && props.labelId
@@ -105,6 +111,7 @@ const Input = (props: Props) => {
     },
   }
 
+
   if (props.label) {
     return (
       <Label id={props.id} htmlFor={forAttributeId} css={props.css} className={props.className}>
@@ -113,15 +120,7 @@ const Input = (props: Props) => {
           {props.hint ? (
             <FormFieldControl>
               <Icon name="HelpCircle" size={14} />
-              <Tooltip
-                right
-                css={{
-                  minWidth: 100,
-                  width: "fit-content",
-                }}
-              >
-                {props.hint}
-              </Tooltip>
+              <HelpTooltip right>{props.hint}</HelpTooltip>
             </FormFieldControl>
           ) : null}
           {props.onToggle ? (
@@ -134,15 +133,7 @@ const Input = (props: Props) => {
             </FormFieldControl>
           ) : null}
         </FormFieldControls>
-        <InputField
-          {...commonInputProps}
-          id={forAttributeId}
-          autoComplete={props.autoComplete}
-          css={{
-            display: "block",
-            width: "100%",
-          }}
-        />
+        <InputField {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
         {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )

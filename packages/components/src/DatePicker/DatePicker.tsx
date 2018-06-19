@@ -164,6 +164,9 @@ class DatePicker extends React.Component<Props, State> {
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
     const placeholderDays = monthStartDay(year, month)
     const daysInCurrentMonth = daysInMonth(month, year)
+    const FullWidthInput = styled(Input)`
+      width: 100%;
+    `
     const datePickerWithoutLabel = (
       <Container
         innerRef={(node: React.ReactNode) => {
@@ -186,7 +189,7 @@ class DatePicker extends React.Component<Props, State> {
             <Icon name="X" size={14} />
           </Toggle>
         )}
-        <Input
+        <FullWidthInput
           isExpanded={this.state.isExpanded}
           id={domId}
           readOnly
@@ -206,9 +209,6 @@ class DatePicker extends React.Component<Props, State> {
                 }
               },
             )
-          }}
-          css={{
-            width: "100%",
           }}
         />
         <DatePickerCard isExpanded={isExpanded}>

@@ -63,26 +63,21 @@ const Main = styled("div")(
   }),
 )
 
-const Div = styled("div")()
+/* 
+ * This placeholder element is added to the dom in case there is no
+ * <Progress /> element, allowing the CSS to target children by the same
+ * nth-child identifier regardless of whether the loader is present.
+ * Absolute positioning is required to remove it from document flow
+ * so that it doesn't affect the grid.
+ */
+const CssPlaceholder = styled("div")({
+  position: "absolute"
+})
 
 const Layout = (props: Props) => {
-  /* 
-   * This placeholder element is added to the dom in case there is no
-   * <Progress /> element, allowing the CSS to target children by the same
-   * nth-child identifier regardless of whether the loader is present.
-   * Absolute positioning is required to remove it from document flow
-   * so that it doesn't affect the grid.
-   */
-  const cssPlaceholder = (
-    <Div
-      css={{
-        position: "absolute",
-      }}
-    />
-  )
   return (
     <Container css={props.css} className={props.className}>
-      {props.loading ? <Progress /> : cssPlaceholder}
+      {props.loading ? <Progress /> : <CssPlaceholder />}
       {props.sidenav}
       <Main>{props.main}</Main>
     </Container>
