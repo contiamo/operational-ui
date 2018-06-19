@@ -42,12 +42,16 @@ export interface Props {
 
 type PropsWithTheme = Props & { theme?: OperationalStyleConstants }
 
-const makeColors = (theme: OperationalStyleConstants, color: string) => {
+const makeColors = (theme: OperationalStyleConstants, color: string, active?: boolean) => {
   const defaultColor: string = theme.color.white
-  const backgroundColor: string = expandColor(theme, color) || defaultColor
+  const grey: string = theme.color.background[active ? "light" : "lighter"]
+  const greyText: string = theme.color.text[active ? "action" : "lightest"]
+  const backgroundColor: string = color === "grey" ? grey : expandColor(theme, color) || defaultColor
+  const textColor: string =
+    color === "grey" ? greyText : readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
   return {
     background: backgroundColor,
-    foreground: readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white]),
+    foreground: textColor,
   }
 }
 
@@ -60,7 +64,7 @@ const containerStyles: Interpolation<Props> = ({
   loading,
   icon,
 }: PropsWithTheme) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color)
+  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color, active)
   const activeBackgroundColor: string = darken(backgroundColor, 5)
   const spacing = theme.space.content
   const padding = condensed ? theme.space.small : spacing
