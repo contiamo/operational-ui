@@ -18,10 +18,15 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button condensed icon="ExternalLink">Icon</Button>
   <Button loading>Loading</Button>
 </div>
-<div>
+<div style={{marginBottom:"10px"}}>
   <Button color="grey">Update</Button>
   <Button color="grey" active>Test</Button>
   <Button color="error">Delete this bundle</Button>
+</div>
+<div style={{backgroundColor: "#1499ce", padding: 5}}>
+  <Button color="ghost">Ghost</Button>
+  <Button color="ghost" icon="ExternalLink">Ghost with icon</Button>
+  <Button color="ghost" icon="ExternalLink" condensed>Ghost condensed</Button>
 </div>
 ```
 

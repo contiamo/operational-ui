@@ -12,6 +12,9 @@ const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
 export const readableTextColor = (backgroundColor: string, workingColors: string[]): string => {
   const backgroundHsl = colorCalculator(backgroundColor).toHsl()
   const workingColorHsls = workingColors.map(color => colorCalculator(color).toHsl())
+  if (backgroundHsl.a < 0.5) {
+    return "#ffffff"
+  }
   // For reasonably saturated colors on the bright side, still pick the lightest color.
   if (backgroundHsl.s > 0.4 && backgroundHsl.l < 0.75) {
     return colorCalculator(getBrightestColor(workingColorHsls)).toHexString()
