@@ -1,10 +1,10 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { WithTheme, Css } from "../types"
+
 import { Label, LabelText, inputFocus } from "../utils/mixins"
 import SelectOption from "./Select.Option"
 import SelectFilter from "./Select.Filter"
-import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
+import { readableTextColor, fadeIn, resetTransform } from "@operational/utils"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 
 export type Value = number | string
@@ -25,12 +25,7 @@ const displayOption = (opt: IOption): string => {
 export interface Props {
   /** Id */
   id?: string
-  /** Glamorous css */
 
-  css?: Css
-  /** ClassName */
-
-  className?: string
   /** Options available */
 
   options: IOption[]
@@ -55,6 +50,9 @@ export interface Props {
   /** Label text */
 
   label?: string
+
+  /** Should the Select be rendered with a full box style? */
+  naked?: boolean
 }
 
 export interface State {
@@ -68,20 +66,11 @@ const Container = styled("div")(
     theme,
     color,
     disabled,
-    style,
-  }: {
-    id?: string
-    color?: string
-    disabled: boolean
-    style?: {}
-    role?: string
-    tabIndex?: number
-    onClick?: () => void
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => {
-    const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.white
+    naked,
+  }: Partial<Props> & { theme?: OperationalStyleConstants & { deprecated: Theme } }): {} => {
+    const backgroundColor = naked
+      ? "transparent"
+      : expandColor(theme.deprecated, color) || theme.deprecated.colors.white
     return {
       backgroundColor,
       label: "select",
@@ -94,7 +83,7 @@ const Container = styled("div")(
       width: "fit-content",
       minWidth: 240,
       minHeight: 20,
-      border: "1px solid",
+      border: naked ? 0 : "1px solid",
       borderColor: theme.deprecated.colors.inputBorder,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
@@ -113,9 +102,11 @@ const Container = styled("div")(
         borderTopColor: theme.deprecated.colors.gray,
         transform: "translateY(calc(-50% + 2px))",
       },
-      "&:focus": inputFocus({
-        theme,
-      }),
+      "&:focus":
+        !naked &&
+        inputFocus({
+          theme,
+        }),
     }
   },
 )
@@ -129,9 +120,17 @@ const DisplayValue = styled("div")(
     theme?: OperationalStyleConstants & {
       deprecated: Theme
     }
-  }): {} => ({
-    color: isPlaceholder ? theme.deprecated.colors.gray : theme.deprecated.colors.black,
-  }),
+  }) => {
+    if (isPlaceholder) {
+      return {
+        color: theme.color.text.lightest,
+      }
+    }
+
+    return {
+      color: "currentColor",
+    }
+  },
 )
 
 const Options = styled("div")(
@@ -155,7 +154,7 @@ const Options = styled("div")(
     theme?: OperationalStyleConstants & {
       deprecated: Theme
     }
-  }): {} => ({
+  }) => ({
     boxShadow: theme.deprecated.shadows.popup,
     zIndex: theme.deprecated.baseZIndex + 300,
   }),
@@ -186,6 +185,7 @@ class Select extends React.Component<Props, State> {
 
   static defaultProps: Partial<Props> = {
     placeholder: "No entries selected", // This implements "click outside to close" behavior
+    naked: false,
   }
 
   handleClick(ev: React.SyntheticEvent<Node>): void {
@@ -268,14 +268,15 @@ class Select extends React.Component<Props, State> {
   }
 
   render() {
-    const { id, color, disabled, value, options, filterable, label } = this.props
+    const { id, color, disabled, naked, value, options, filterable, label } = this.props
     const { open, search } = this.state
     const selectWithoutLabel = (
       <Container
         id={id}
-        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
         color={color}
         disabled={disabled}
+        naked={naked}
+        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
         role="listbox"
         tabIndex={-2}
         onClick={() => {
