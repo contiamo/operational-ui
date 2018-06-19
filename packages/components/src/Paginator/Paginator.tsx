@@ -1,8 +1,9 @@
 import * as React from "react"
 import * as Icon from "react-feather"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Css, CssStatic } from "../types"
+import { Button } from "../"
 
 export interface Props {
   id?: string
@@ -16,40 +17,29 @@ export interface Props {
   /** Function to be executed after changing page */
 
   onChange?: (page: number) => void
-  maxVisible?: number
-  /** Index of the current selected page */
+  /** Index of the current selected page
+   * @default 1
+   */
 
   page?: number
-  /** Total number of pages */
+  /** Total number of items */
 
-  pageCount: number
+  itemCount: number
+  /** Number of items per page */
+
+  itemsPerPage: number
 }
 
 const PaginatorSpan = styled("div")(
-  ({
-    theme,
-    isActive,
-    isDisabled,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isActive?: boolean
-    isDisabled?: boolean
-  }): CssStatic => ({
-    ...theme.deprecated.typography.body,
-    padding: theme.deprecated.spacing / 4,
-    borderRadius: 2,
-    height: theme.deprecated.spacing * 1.5,
+  ({ theme }: { theme?: OperationalStyleConstants }): CssStatic => ({
+    fontFamily: theme.font.family.main,
+    fontSize: theme.font.size.small,
+    padding: `0 ${theme.space.content}px`,
     display: "inline-flex",
-    cursor: "pointer",
-    userSelect: "none",
-    alignItems: "center",
-    justifyContent: "center",
-    lineHeight: 1,
-    color: isActive ? theme.deprecated.colors.info : theme.deprecated.colors.text,
-    ":hover": {
-      backgroundColor: theme.deprecated.colors.background,
+    color: theme.color.text.lighter,
+    "& span": {
+      color: theme.color.text.dark,
+      paddingRight: 3,
     },
   }),
 )
@@ -58,36 +48,34 @@ interface ControlProps {
   children: any
   onChange?: (page: number) => void
   page: number
-  pageCount: number
+  itemCount: number
+  itemsPerPage: number
   type: "first" | "previous" | "next" | "last"
 }
 
-const PaginatorControl = ({ children, onChange, pageCount, page, type }: ControlProps) => {
+const NavigationButton = styled(Button)(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  width: "56px",
+  marginRight: "2px",
+  padding: `0 ${theme.space.base}px`,
+}))
+
+const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, type }: ControlProps) => {
   const handleFirst = (): void => {
-    if (page > 1) {
-      onChange && onChange(1)
-    }
+    onChange && onChange(1)
   }
 
   const handlePrevious = (): void => {
-    if (page > 1) {
-      onChange && onChange(page - 1)
-    }
+    onChange && onChange(page - 1)
   }
 
   const handleNext = (): void => {
-    if (page < pageCount) {
-      onChange && onChange(page + 1)
-    }
+    onChange && onChange(page + 1)
   }
 
   const handleLast = (): void => {
-    if (page < pageCount) {
-      onChange && onChange(pageCount)
-    }
+    onChange && onChange(Math.ceil(itemCount / itemsPerPage))
   }
 
-  const isDisabled = type === "previous" || type === "first" ? page === 1 : page === pageCount
   let handler
 
   switch (type) {
@@ -108,67 +96,16 @@ const PaginatorControl = ({ children, onChange, pageCount, page, type }: Control
   }
 
   return (
-    <PaginatorSpan onClick={handler} isDisabled={isDisabled}>
+    <NavigationButton condensed onClick={handler}>
       {children}
-    </PaginatorSpan>
+    </NavigationButton>
   )
 }
 
-const createPagesFragment = ({ maxVisible, onChange, page, pageCount }: Props) => {
-  let skip
-
-  if (page > maxVisible - 1 && page < pageCount) {
-    skip = page - maxVisible + 1
-  } else if (page === pageCount) {
-    skip = page - maxVisible
-  } else {
-    skip = 0
-  } // Creates an array of numbers (positive/negative) progressing from `start` up to `end`
-
-  const range = (start: number, end: number, acc: number[] = []): number[] =>
-    start > end ? acc : range(start + 1, end, [...acc, start])
-
-  const hasEnoughPages = pageCount > maxVisible
-  const adjustedMaxVisible = hasEnoughPages ? maxVisible : pageCount
-  const remainingPages = pageCount - page
-  const isCloseToEnd = remainingPages < adjustedMaxVisible
-  const start = (isCloseToEnd ? pageCount - adjustedMaxVisible : skip + 1) || 1
-  const end = isCloseToEnd ? pageCount : adjustedMaxVisible + skip
-  const fragment = range(start, end).map((pageNumber, i) => (
-    <PaginatorSpan
-      key={pageNumber}
-      onClick={() => {
-        onChange && onChange(pageNumber)
-      }}
-      isActive={pageNumber === page}
-    >
-      {pageNumber}
-    </PaginatorSpan>
-  ))
-
-  const renderUpperSeparator = () =>
-    remainingPages >= maxVisible && hasEnoughPages && pageCount - adjustedMaxVisible > 1
-      ? [
-          <PaginatorSpan
-            key="upper"
-            onClick={() => {
-              onChange(page + maxVisible)
-            }}
-          >
-            ...
-          </PaginatorSpan>,
-          <PaginatorSpan
-            key={pageCount}
-            onClick={() => {
-              onChange && onChange(pageCount)
-            }}
-          >
-            {pageCount}
-          </PaginatorSpan>,
-        ]
-      : []
-
-  return [...fragment, ...renderUpperSeparator()]
+const getRange = ({ page, itemCount, itemsPerPage }: Props) => {
+  const start = 1 + (page - 1) * itemsPerPage
+  const end = Math.min(itemCount, page * itemsPerPage)
+  return `${start}-${end}`
 }
 
 const Container = styled("div")({
@@ -181,32 +118,40 @@ const Container = styled("div")({
   },
 })
 
-const Paginator = ({ maxVisible = 3, onChange = () => {}, pageCount, page = 1, id, css, className }: Props) => {
+const Paginator = ({ itemCount, page = 1, itemsPerPage, onChange, id, css, className }: Props) => {
   const controlProps = {
-    pageCount,
+    itemCount,
+    itemsPerPage,
     page,
     onChange,
   }
+  const displayFirst = page !== 1
+  const displayLast = itemsPerPage * page < itemCount
   return (
     <Container id={id} css={css} className={className}>
-      <PaginatorControl type="first" {...controlProps}>
-        <Icon.ChevronsLeft size="11" />
-      </PaginatorControl>
-      <PaginatorControl type="previous" {...controlProps}>
-        <Icon.ChevronLeft size="11" />
-      </PaginatorControl>
-      {createPagesFragment({
-        pageCount,
-        maxVisible,
-        page,
-        onChange,
-      })}
-      <PaginatorControl type="next" {...controlProps}>
-        <Icon.ChevronRight size="11" />
-      </PaginatorControl>
-      <PaginatorControl type="last" {...controlProps}>
-        <Icon.ChevronsRight size="11" />
-      </PaginatorControl>
+      {displayFirst && (
+        <PaginatorControl type="first" {...controlProps}>
+          first
+        </PaginatorControl>
+      )}
+      {displayFirst && (
+        <PaginatorControl type="previous" {...controlProps}>
+          <Icon.ChevronsLeft size="11" /> prev
+        </PaginatorControl>
+      )}
+      <PaginatorSpan key={page}>
+        <span>{getRange({ page, itemCount, itemsPerPage })}</span> of {itemCount}
+      </PaginatorSpan>
+      {displayLast && (
+        <PaginatorControl type="next" {...controlProps}>
+          next<Icon.ChevronsRight size="11" />
+        </PaginatorControl>
+      )}
+      {displayLast && (
+        <PaginatorControl type="last" {...controlProps}>
+          last
+        </PaginatorControl>
+      )}
     </Container>
   )
 }
