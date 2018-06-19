@@ -6,7 +6,30 @@ along with a symbol for the button that will be displayed if click behavior is d
 
 ```jsx
 <div style={{ display: "flex" }}>
-  <Chip color="info">Hello!</Chip>
-  <Chip color="success" icon="X" onIconClick={() => window.alert("Buonasera")} onClick={() => window.alert("Good evening!")}>Ciao!</Chip>
+  <Chip>Hello!</Chip>
+  <Chip
+    colorIndex="1"
+    icon="X"
+    onIconClick={() => window.alert("Buonasera")}
+    onClick={() => window.alert("Good evening!")}
+  >
+    Ciao!
+  </Chip>
+  <Chip
+    colorIndex="2"
+    icon="X"
+    onIconClick={() => window.alert("Buonasera")}
+    onClick={() => window.alert("Good evening!")}
+  >
+    Ciao!
+  </Chip>
+  <Chip
+    color="primary"
+    icon="X"
+    onIconClick={() => window.alert("Buonasera")}
+    onClick={() => window.alert("Good evening!")}
+  >
+    Ciao!
+  </Chip>
 </div>
 ```
