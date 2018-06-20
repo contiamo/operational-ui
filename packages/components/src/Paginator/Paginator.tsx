@@ -52,8 +52,8 @@ interface ControlProps {
 }
 
 const NavigationButton = styled(Button)(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  width: "56px",
-  marginRight: "2px",
+  width: 56,
+  marginRight: 2,
   padding: `0 ${theme.space.base}px`,
 }))
 
@@ -123,16 +123,16 @@ const Paginator: React.SFC<Props> = props => {
     page: props.page,
     onChange: props.onChange,
   }
-  const displayFirst = props.page !== 1
-  const displayLast = props.itemsPerPage * props.page < props.itemCount
+  const shouldDisplayFirst = props.page !== 1
+  const shouldDisplayLast = props.itemsPerPage * props.page < props.itemCount
   return (
     <Container id={props.id} css={props.css} className={props.className}>
-      {displayFirst && (
+      {shouldDisplayFirst && (
         <PaginatorControl type="first" {...controlProps}>
           first
         </PaginatorControl>
       )}
-      {displayFirst && (
+      {shouldDisplayFirst && (
         <PaginatorControl type="previous" {...controlProps}>
           <Icon.ChevronsLeft size="11" /> prev
         </PaginatorControl>
@@ -141,12 +141,12 @@ const Paginator: React.SFC<Props> = props => {
         <span>{getRange({ page: props.page, itemCount: props.itemCount, itemsPerPage: props.itemsPerPage })}</span> of{" "}
         {props.itemCount}
       </PaginatorSpan>
-      {displayLast && (
+      {shouldDisplayLast && (
         <PaginatorControl type="next" {...controlProps}>
           next<Icon.ChevronsRight size="11" />
         </PaginatorControl>
       )}
-      {displayLast && (
+      {shouldDisplayLast && (
         <PaginatorControl type="last" {...controlProps}>
           last
         </PaginatorControl>
