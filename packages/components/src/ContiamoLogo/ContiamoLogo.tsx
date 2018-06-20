@@ -33,6 +33,7 @@ const ContiamoLogo: React.SFC<LogoProps> = ({ size, color }) => (
   <LogoContainer>
     <Icon left name="Contiamo" size={size} color={color} />
     <LogoType color={color} width={size * 3.5} viewBox="650 255 1800 215" fill="currentColor">
+      <title>Contiamo</title>
       <g transform="matrix(1.3333333,0,0,-1.3333333,0,737.64133)">
         <g transform="translate(783.6366,282.649)">
           <path d="m 0,0 c 0,-31.84 -22.648,-48.499 -45.024,-48.499 -22.373,0 -45.022,16.659 -45.022,48.499 0,31.61 22.649,48.151 45.022,48.151 C -22.648,48.151 0,31.61 0,0 m -123.88,0 c 0,-54.855 40.816,-79.841 78.74,-79.841 37.925,0 78.741,24.986 78.741,79.841 0,54.737 -40.816,79.666 -78.741,79.666 -37.924,0 -78.74,-24.929 -78.74,-79.666" />
