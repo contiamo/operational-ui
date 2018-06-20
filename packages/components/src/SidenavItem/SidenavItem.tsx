@@ -11,7 +11,6 @@ export interface Props {
   className?: string
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
-
   to?: string
   active?: boolean
   icon?: IconName | React.ReactNode

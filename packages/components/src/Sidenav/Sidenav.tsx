@@ -8,6 +8,11 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+<<<<<<< HEAD
+=======
+  /** `css` prop as expected in a glamorous component */
+  css?: Css
+>>>>>>> Add truncated summary
   className?: string
   children?: React.ReactNode
   /**
@@ -15,14 +20,12 @@ export interface Props {
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
-
   expanded?: boolean
   /**
    * Specifies whether sidenav should expand on hover
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
-
   expandOnHover?: boolean
 }
 

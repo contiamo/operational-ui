@@ -10,36 +10,26 @@ export interface Props {
   id?: string
   className?: string
   /** Main label for the header */
-
   label: string | React.ReactNode
   /** Navigation property à la react-router <Link/> */
-
   to?: string
-  /**
-   * Specifies an icon to render on the left of the label
-   *
-   * @deprecated this prop is ignored as per design decision
-   */
-
+  /** Specifies an icon to render on the left of the label, displayed only if the `condensed` option is used. */
   icon?: IconName | React.ReactNode
   /** Color used in highlights and the side strip (hex or named color from `theme.colors`) */
-
   color?: string
+  /** Condensed option  */
+  condensed?: boolean
   /** Active state - renders colored strip on the left */
-
   active?: boolean
   /**
    * Expanded state
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
-
   expanded?: boolean
   /** Click handler */
-
   onClick?: () => void
   /** Close handler (via chevron button on the top right) */
-
   onClose?: () => void
   children?: React.ReactNode
 }
@@ -84,31 +74,43 @@ const ContainerLink = styled("a")(containerStyles)
 const Content = styled("div")(
   ({
     theme,
-    isActive,
   }: {
     theme?: OperationalStyleConstants & {
       deprecated: Theme
     }
-    isActive: boolean
   }): CssStatic => ({
     textDecoration: "none",
     cursor: "pointer",
     position: "relative",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    height: 73,
     overflow: "hidden",
+    padding: `0 ${theme.space.content}px`,
     width: "100%",
-    height: theme.deprecated.box,
-    padding: `0 ${theme.deprecated.spacing}px`,
-    color: "#333333",
-    fontWeight: 500,
-    letterSpacing: 0.25,
-    fontSize: 14,
-    textTransform: "uppercase",
-    whiteSpace: "nowrap",
   }),
 )
+
+const LabelText = styled("p")`
+  position: relative;
+  color: #333333;
+  font-weight: 500;
+  letter-spacing: 0.25;
+  font-size: 14;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+  ${({ isActive }: { isActive: boolean }) =>
+    isActive
+      ? `
+    top: -5px;
+    `
+      : `
+    margin-top: 8px;
+  `};
+`
 
 const ItemsContainer = styled("div")(
   ({
@@ -119,7 +121,7 @@ const ItemsContainer = styled("div")(
     }
   }): {} => ({
     position: "relative",
-    top: -theme.deprecated.spacing,
+    top: -theme.space.content - 6,
   }),
 )
 
@@ -136,10 +138,10 @@ const CloseButton = styled("div")(
     display: "none",
     alignItems: "center",
     justifyContent: "center",
-    width: theme.deprecated.spacing * 1.5,
-    height: theme.deprecated.spacing * 1.5,
-    top: theme.deprecated.spacing * 1.5,
-    right: theme.deprecated.spacing,
+    width: theme.space.content * 1.5,
+    height: theme.space.content * 1.5,
+    top: theme.space.content * 1.5,
+    right: theme.space.content,
     color: theme.deprecated.colors.info,
     ".op_sidenavheader:hover &": {
       display: "flex",
@@ -150,6 +152,25 @@ const CloseButton = styled("div")(
     },
   }),
 )
+
+const Summary = styled("div")`
+  display: block;
+  font-weight: normal;
+  text-transform: none;
+  margin-top: 4px;
+  ${({ theme }: { theme?: OperationalStyleConstants }) => `
+    font-size: ${theme.font.size.fineprint}px;
+    color: ${theme.color.text.lightest};
+    left: ${theme.space.content}px;
+  `};
+`
+
+const truncate = (maxLength: number) => (text: string) => {
+  if (text.length < maxLength) {
+    return text
+  }
+  return text.slice(0, maxLength) + "..."
+}
 
 export class SidenavHeader extends React.Component<Props, State> {
   state = {
@@ -165,6 +186,7 @@ export class SidenavHeader extends React.Component<Props, State> {
     // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
     const ContainerComponent = to ? ContainerLink : Container
+    const childLabels: string[] = React.Children.map(this.props.children, child => (child as any).props.label) || []
     return (
       <ContextConsumer>
         {(ctx: Context) => {
@@ -189,8 +211,9 @@ export class SidenavHeader extends React.Component<Props, State> {
                 }
               }}
             >
-              <Content isActive={!!this.props.active} onClick={this.props.onClick}>
-                {this.props.label}
+              <Content onClick={this.props.onClick}>
+                <LabelText isActive={isActive}>{this.props.label}</LabelText>
+                {!isActive && <Summary>{truncate(24)(childLabels.join(", "))}</Summary>}
               </Content>
               {React.Children.count(this.props.children) > 0 && (
                 <CloseButton
@@ -214,7 +237,4 @@ export class SidenavHeader extends React.Component<Props, State> {
   }
 }
 
-export default deprecate<Props>(
-  props =>
-    props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : [],
-)(SidenavHeader)
+export default SidenavHeader

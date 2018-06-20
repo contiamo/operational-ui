@@ -6,15 +6,15 @@ Typical usage includes `to` props to navigate and to manage highlighted/active s
 
 ```jsx
 <Sidenav>
-  <SidenavHeader to="/one" label="The Prize">
-    <SidenavItem label="The First Prize" icon="Settings" to="/one/1" />
-    <SidenavItem label="The Second Prize" icon="Settings" to="/one/2" />
-    <SidenavItem label="The Third Prize" icon="Settings" to="/one/3" />
+  <SidenavHeader label="The Prize">
+    <SidenavItem label="The First Prize" icon="Settings" />
+    <SidenavItem label="The Second Prize" icon="Settings" />
+    <SidenavItem label="The Third Prize" icon="Settings" />
   </SidenavHeader>
-  <SidenavHeader label="Let It Snow" to="/two">
-    <SidenavItem label="The First Prize" icon="Settings" to="/two/1" />
-    <SidenavItem label="The Second Prize" icon="Settings" to="/two/2" />
-    <SidenavItem label="The Third Prize" icon="Settings" to="/two/3" />
+  <SidenavHeader label="Let It Snow">
+    <SidenavItem label="The First Prize" icon="Settings" />
+    <SidenavItem label="The Second Prize" icon="Settings" />
+    <SidenavItem label="The Third Prize" icon="Settings" />
   </SidenavHeader>
 </Sidenav>
 ```
