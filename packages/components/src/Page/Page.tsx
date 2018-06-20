@@ -1,106 +1,145 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { Button, Icon, IconName } from "../"
-import { WithTheme, Css, CssStatic } from "../types"
+import { Title } from ".."
+import PageArea from "../PageArea/PageArea"
 
 export interface Props {
   /** Page title */
   title: string
-  /** Icon displayed next to the title. Should match related sidenav icons */
-
-  titleIcon?: IconName
-  /** Page breadcrumbs, using the `Breadcrumbs` component */
-
-  breadcrumbs?: React.ReactNode
-  /** Page controls, typically `condensed button` component inside a fragment */
-
-  controls?: React.ReactNode
+  /** Page actions, typically `condensed button` component inside a fragment */
+  actions?: React.ReactNode
   /** Content of the page */
-
   children?: React.ReactNode
+  /** Areas template for `PageArea` disposition */
+  areas?: "main" | "main side" | "side main"
+  /** Fill the entire width */
+  fill?: boolean
+  /**
+   * List of tabs
+   * This will disable any children to render `tabs[i].component` instead
+   */
+  tabs?: { name: string; component: React.ComponentType }[]
+  /**
+   * Active tab name
+   *
+   * Useful for easy router mapping
+   */
+  activeTabName?: string
+  /**
+   * Send the active name tab on each tab change (in lowercase).
+   */
+  onTabChange?: (name: string) => void
 }
 
-const Container = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  backgroundColor: theme.color.background.lighter,
+}))
+
+const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  backgroundColor: theme.color.primary,
+  display: "flex",
+  alignItems: "center",
+  padding: `${theme.space.base}px 0`,
+}))
+
+const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  backgroundColor: theme.color.primary,
+  display: "flex",
+}))
+
+const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstants; active?: boolean }) => ({
+  color: theme.color.white,
+  opacity: active ? 1 : 0.8,
+  textTransform: "uppercase",
+  fontFamily: theme.font.family.main,
+  fontSize: theme.font.size.small,
+  padding: `${theme.space.element / 2}px ${theme.space.element}px`,
+  borderBottom: active ? `2px solid ${theme.color.white}` : `2px solid transparent`,
+  ":hover": {
+    cursor: "pointer",
+    opacity: 1,
+  },
+}))
+
+const Grid = styled("div")(
+  (props: {
+    children?: React.ReactNode
+    fill?: boolean
+    theme?: OperationalStyleConstants
+    areas?: Props["areas"]
+  }) => {
+    const grid = React.Children.count(props.children) > 1 ? "main side" : "main"
+
+    return {
+      display: "grid",
+      gridTemplateColumns: grid.split(" ").length > 1 ? "auto 280px" : "auto",
+      gridTemplateAreas: props.areas ? `"${props.areas}"` : `"${grid}"`,
+      gridGap: props.theme.space.content,
+      maxWidth: props.fill ? "none" : 1150,
+      minWidth: 800,
+      width: "100%",
+      padding: props.theme.space.element,
     }
-  }): CssStatic => ({
-    label: "page",
-    backgroundColor: theme.deprecated.colors.white,
-    padding: `0px ${theme.deprecated.spacing * 1.5}px ${theme.deprecated.spacing * 1.5}px`,
-  }),
+  },
 )
 
-const TopBar = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): CssStatic => ({
-    height: theme.deprecated.box,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  }),
-)
+const initialState = {
+  activeTab: 0,
+}
 
-const TitleBar = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
+class Page extends React.Component<Props, Readonly<typeof initialState>> {
+  constructor(props: Props) {
+    super(props)
+    if (props.activeTabName && props.tabs) {
+      const index = props.tabs.findIndex(({ name }) => name.toLowerCase() === props.activeTabName.toLowerCase())
+      this.state = {
+        ...initialState,
+        activeTab: index === -1 ? 0 : index,
+      }
+    } else {
+      this.state = initialState
     }
-  }): CssStatic => ({
-    ...theme.deprecated.typography.title,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    marginTop: 0.5 * theme.deprecated.spacing,
-    marginBottom: 2 * theme.deprecated.spacing,
-    "& svg": {
-      width: theme.deprecated.spacing * 1.75,
-      height: theme.deprecated.spacing * 1.75,
-      marginRight: theme.deprecated.spacing * 0.5,
-    },
-  }),
-)
+  }
 
-const ControlsContainer = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): CssStatic => ({
-    marginLeft: theme.deprecated.spacing,
-    // Offset the line-height setting inherited from being inside a
-    // typography component/mixin.
-    lineHeight: 1,
-    "& > :last-child": {
-      marginRight: 0,
-    },
-  }),
-)
+  onTabClick(index: number) {
+    this.setState({ activeTab: index })
+    this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].name.toLowerCase())
+  }
 
-const Page = (props: Props) => (
-  <Container>
-    <TopBar>{props.breadcrumbs}</TopBar>
-    <TitleBar>
-      {props.titleIcon &&
-        (props.titleIcon === String(props.titleIcon) ? <Icon name={props.titleIcon} /> : props.titleIcon)}
-      {props.title}
-      <ControlsContainer>{props.controls}</ControlsContainer>
-    </TitleBar>
-    {props.children}
-  </Container>
-)
+  render() {
+    const { children, title, actions, tabs, fill, areas } = this.props
+    const { activeTab } = this.state
+    const hasOnlyOneChild = React.Children.count(children) === 1
+    const CurrentTab = tabs && tabs[activeTab].component
+
+    return (
+      <Container>
+        {title && (
+          <TitleBar>
+            <Title color="white">{title}</Title>
+            {actions}
+          </TitleBar>
+        )}
+        {tabs ? (
+          <>
+            <TabsBar>
+              {tabs.map(({ name }, i) => (
+                <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
+                  {name}
+                </Tab>
+              ))}
+            </TabsBar>
+            <CurrentTab />
+          </>
+        ) : (
+          <Grid areas={areas} fill={fill}>
+            {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
+          </Grid>
+        )}
+      </Container>
+    )
+  }
+}
 
 export default Page

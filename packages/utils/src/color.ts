@@ -1,5 +1,5 @@
 import * as colorCalculator from "tinycolor2"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants, constants } from "@operational/theme"
 
 const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
   colors.reduce((acc, curr) => {
@@ -12,6 +12,9 @@ const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
 export const readableTextColor = (backgroundColor: string, workingColors: string[]): string => {
   const backgroundHsl = colorCalculator(backgroundColor).toHsl()
   const workingColorHsls = workingColors.map(color => colorCalculator(color).toHsl())
+  if (backgroundHsl.a < 0.5) {
+    return constants.color.white
+  }
   // For reasonably saturated colors on the bright side, still pick the lightest color.
   if (backgroundHsl.s > 0.4 && backgroundHsl.l < 0.75) {
     return colorCalculator(getBrightestColor(workingColorHsls)).toHexString()

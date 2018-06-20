@@ -5,7 +5,7 @@ Buttons are used heavily throughout an operational interface, and they often req
 Using buttons is as simple as including the component with a text node as a child. Colors may be specified as hex strings, or as a pre-defined color key from the theme.
 
 ```jsx
-<div style={{marginBottom:"10px"}}>
+<div style={{ marginBottom: 10 }}>
   <Button>Default</Button>
   <Button color="primary">Set color</Button>
   <Button color="#393939">Custom color</Button>
@@ -13,15 +13,20 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button disabled>Disabled</Button>
   <Button condensed>Condensed</Button>
 </div>
-<div style={{marginBottom:"10px"}}>
+<div style={{ marginBottom: 10 }}>
   <Button color="success" icon="ExternalLink">Icon</Button>
   <Button condensed icon="ExternalLink">Icon</Button>
   <Button loading>Loading</Button>
 </div>
-<div>
+<div style={{ marginBottom: 10 }}>
   <Button color="grey">Update</Button>
   <Button color="grey" active>Test</Button>
   <Button color="error">Delete this bundle</Button>
+</div>
+<div style={{ backgroundColor: "#1499ce", padding: 5 }}>
+  <Button color="ghost">Ghost</Button>
+  <Button color="ghost" icon="ExternalLink">Ghost with icon</Button>
+  <Button color="ghost" icon="ExternalLink" condensed>Ghost condensed</Button>
 </div>
 ```
 

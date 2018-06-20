@@ -14,28 +14,21 @@ export interface Props {
   css?: Css
   className?: string
   /** Invoked when you click on the button */
-
   onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
   type?: string
   /** Navigation property à la react-router <Link/> */
-
   to?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.color`) */
-
   color?: string
   /** Icon to display on right of button (optional) */
   icon?: string | React.ReactNode
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
-
   loading?: boolean
   /** Active state */
-
   active?: boolean
   /** Disabled option */
-
   disabled?: boolean
   /** Condensed option */
-
   condensed?: boolean
   children?: React.ReactNode
 }
@@ -68,7 +61,6 @@ const containerStyles: Interpolation<Props> = ({
   const activeBackgroundColor: string = darken(backgroundColor, 5)
   const spacing = theme.space.content
   const padding = condensed ? theme.space.small : spacing
-  const computedBorderColor = active ? activeBackgroundColor : backgroundColor
 
   return {
     lineHeight: `${condensed ? 26 : 34}px`,
@@ -78,8 +70,8 @@ const containerStyles: Interpolation<Props> = ({
     display: "inline-block",
     padding: `0 ${padding}px`,
     borderRadius: theme.borderRadius,
-    border: "1px solid",
-    borderColor: isWhite(backgroundColor) ? theme.color.border.default : computedBorderColor,
+    border: 0,
+    boxShadow: isWhite(backgroundColor) && `0 0 0 1px ${theme.color.border.default} inset`,
     cursor: disabled ? "auto" : "pointer",
     backgroundColor: active ? activeBackgroundColor : backgroundColor,
     opacity: disabled ? 0.6 : 1.0,
