@@ -74,30 +74,40 @@ const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, t
     onChange && onChange(Math.ceil(itemCount / itemsPerPage))
   }
 
-  let handler
-
   switch (type) {
     case "previous":
-      handler = handlePrevious
-      break
+      return (
+        <NavigationButton condensed onClick={handlePrevious}>
+          {children}
+        </NavigationButton>
+      )
 
     case "first":
-      handler = handleFirst
-      break
+      return (
+        <NavigationButton condensed onClick={handleFirst}>
+          {children}
+        </NavigationButton>
+      )
 
     case "next":
-      handler = handleNext
-      break
+      return (
+        <NavigationButton condensed onClick={handleNext}>
+          {children}
+        </NavigationButton>
+      )
+
+    case "last":
+      return (
+        <NavigationButton condensed onClick={handleLast}>
+          {children}
+        </NavigationButton>
+      )
 
     default:
-      handler = handleLast
+      throw new Error(
+        "No handler specified for NavigationButton in Paginator component\nPlease refer to the docs: http://operational-ui.js.org/docs/#paginator",
+      )
   }
-
-  return (
-    <NavigationButton condensed onClick={handler}>
-      {children}
-    </NavigationButton>
-  )
 }
 
 const getRange = ({ page, itemCount, itemsPerPage }: Props) => {
