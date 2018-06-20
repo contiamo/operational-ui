@@ -49,23 +49,31 @@ const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) =
 }))
 
 const Picture = styled("div")(
+  {
+    textTransform: "uppercase",
+
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   ({
     theme,
     color,
     colorAssignment,
     photo,
     showName,
-    size,
     addBorder,
+    size,
   }: {
     theme?: OperationalStyleConstants & { deprecated: Theme }
     color?: Props["color"]
     colorAssignment?: number
     photo?: Props["photo"]
     showName: Props["showName"]
-    size: Props["size"]
     addBorder: Props["addBorder"]
-  }): {} => {
+    size: Props["size"]
+  }) => {
     const defaultColor: string = theme.color.primary
     const fixedBackgroundColor: string = color ? expandColor(theme, color) || defaultColor : defaultColor
     const assignedBackgroundColor: null | string = colorAssignment
@@ -75,28 +83,39 @@ const Picture = styled("div")(
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
     const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
-    return {
-      fontSize: size === "medium" ? 13 : 9,
-      textTransform: "uppercase",
-      marginRight: showName ? theme.space.small : 0, // use for offset the display name
-      width: size === "medium" ? 48 : 32,
-      height: size === "medium" ? 48 : 32,
-      border: addBorder ? "2px solid white" : 0,
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      ...(photo
+
+    // Calculate sizes based on the state of the size prop
+    const sizes =
+      size === "medium"
         ? {
-            background: `url(${photo})`,
-            backgroundSize: "cover",
-            backgroundPosition: "50% 50%",
-            color: theme.color.white,
+            fontSize: 13,
+            width: 48,
+            height: 48,
           }
         : {
-            backgroundColor,
-            color: textColor,
-          }),
+            fontSize: 9,
+            width: 32,
+            height: 32,
+          }
+
+    // Calculate background based on the state of the photo prop
+    const background = photo
+      ? {
+          background: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "50% 50%",
+          color: theme.color.white,
+        }
+      : {
+          backgroundColor,
+          color: textColor,
+        }
+
+    return {
+      ...sizes,
+      ...background,
+      marginRight: showName ? theme.space.small : 0, // use for offset the display name
+      border: addBorder ? "2px solid white" : 0,
     }
   },
 )
