@@ -56,7 +56,7 @@ const containerStyles: Interpolation<Props> = ({
   const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color)
   return {
     backgroundColor,
-    lineHeight: `${condensed ? 26 : 34}px`,
+    lineHeight: `${condensed ? 28 : 36}px`,
     label: "button",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
