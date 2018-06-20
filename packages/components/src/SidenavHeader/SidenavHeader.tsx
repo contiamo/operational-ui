@@ -5,6 +5,7 @@ import { fadeIn } from "@operational/utils"
 import { deprecate, isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
+import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 
 export interface Props {
   id?: string
@@ -97,20 +98,14 @@ const Content = styled("div")(
 
 const LabelText = styled("p")`
   position: relative;
-  color: #333333;
   font-weight: 500;
   letter-spacing: 0.25;
-  font-size: 14;
   text-transform: uppercase;
   white-space: nowrap;
   margin: 0;
-  ${({ isActive }: { isActive: boolean }) =>
-    isActive
-      ? `
-    top: -5px;
-    `
-      : `
-    margin-top: 8px;
+  ${({ isActive, theme }: { isActive: boolean; theme?: OperationalStyleConstants }) => `
+    color: ${theme.color.text.dark},
+    font-size: ${theme.font.size.body}px,
   `};
 `
 
@@ -123,7 +118,8 @@ const ItemsContainer = styled("div")(
     }
   }): {} => ({
     position: "relative",
-    top: -theme.space.content - 6,
+    top: -16,
+    marginTop: -10,
   }),
 )
 
@@ -142,7 +138,7 @@ const CloseButton = styled("div")(
     justifyContent: "center",
     width: theme.space.content * 1.5,
     height: theme.space.content * 1.5,
-    top: theme.space.content * 1.5,
+    top: theme.space.content * 1,
     right: theme.space.content,
     color: theme.deprecated.colors.info,
     ".op_sidenavheader:hover &": {
@@ -158,8 +154,7 @@ const CloseButton = styled("div")(
 const IconContainer = styled("p")`
   display: inline-block;
   vertical-align: middle;
-  margin: 0 0 0 8px;
-  width: 18px;
+  ${({ theme }: { theme?: OperationalStyleConstants }) => `margin: 0 0 0 ${theme.space.small}px;`} width: 18px;
   height: 18px;
   & > svg {
     position: relative;
@@ -172,10 +167,11 @@ const Summary = styled("div")`
   font-weight: normal;
   text-transform: none;
   margin-top: 4px;
-  ${({ theme }: { theme?: OperationalStyleConstants }) => `
+  ${({ theme, isActive }: { theme?: OperationalStyleConstants; isActive: boolean }) => `
     font-size: ${theme.font.size.fineprint}px;
     color: ${theme.color.text.lightest};
     left: ${theme.space.content}px;
+    visibility: ${isActive ? "hidden" : "visible"};
   `};
 `
 
@@ -192,8 +188,10 @@ export class SidenavHeader extends React.Component<Props, State> {
   }
 
   render() {
-    const hasChildren = React.Children.count(this.props.children) > 0
-    const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
+    const hasChildren = Boolean(this.props.children)
+    const hasChildLinks = React.Children.toArray(this.props.children).some(child =>
+      Boolean((child as { props: SidenavItemProps }).props.to),
+    )
     const isActive =
       Boolean(this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`))) &&
       hasChildren
@@ -237,7 +235,7 @@ export class SidenavHeader extends React.Component<Props, State> {
                     )}
                   </IconContainer>
                 </LabelText>
-                {!isActive && <Summary>{truncate(24)(childLabels.join(", "))}</Summary>}
+                {!this.props.condensed && <Summary isActive={isActive}>{truncate(24)(childLabels.join(", "))}</Summary>}
               </Content>
               {React.Children.count(this.props.children) > 0 && (
                 <CloseButton
@@ -252,7 +250,7 @@ export class SidenavHeader extends React.Component<Props, State> {
                   <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
                 </CloseButton>
               )}
-              {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
+              {isActive && <ItemsContainer>{this.props.children}</ItemsContainer>}
             </ContainerComponent>
           )
         }}
