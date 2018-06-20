@@ -17,37 +17,41 @@ const Container = styled("div")(({ theme, selected }: { theme?: OperationalStyle
   const backgroundColor = selected ? theme.color.background.lighter : theme.color.white
   return {
     backgroundColor,
+    display: "flex",
+    alignItems: "center",
     position: "relative",
     padding: `${theme.space.small}px ${theme.space.content}px`,
     wordWrap: "break-word",
     outline: "none",
     borderTop: "1px solid",
-    borderColor: darken(theme.color.background.lighter, 10),
+    borderColor: darken(backgroundColor, 10),
     color: theme.color.text.default,
     ":hover": {
-      backgroundColor: darken(theme.color.background.lighter, 5),
+      backgroundColor: darken(backgroundColor, 5),
     },
   }
 })
 
-const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: 20,
-  height: 20,
-  backgroundColor: theme.color.primary,
-  position: "absolute",
-  top: "50%",
-  right: 4,
-  borderRadius: "50%",
-  transform: "translate3d(0, -50%, 0)",
-  "& svg": {
-    color: theme.color.white,
-    width: 12,
-    height: 12,
-  },
-}))
+const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+  const size = 14
+  return {
+    display: "flex",
+    alignItems: "center",
+    flex: "1 0",
+    flexBasis: size,
+    justifyContent: "center",
+    maxWidth: size,
+    height: size,
+    backgroundColor: theme.color.primary,
+    borderRadius: "50%",
+    marginLeft: "auto",
+    "& svg": {
+      color: theme.color.white,
+      width: 12,
+      height: 12,
+    },
+  }
+})
 
 const SelectOption = (props: Props) => (
   <Container

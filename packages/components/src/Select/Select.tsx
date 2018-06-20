@@ -63,7 +63,7 @@ export interface State {
 const Container = styled("div")(
   ({ theme, color, disabled, naked }: Partial<Props> & { theme?: OperationalStyleConstants }) => {
     const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
-    const dropdownArrowWidth = 23
+    const dropdownArrowWidth = 56
     return {
       backgroundColor,
       label: "select",
@@ -126,7 +126,7 @@ const Options = styled("div")(
      */
     top: "calc(100% + 6px)",
     left: 0,
-    width: "100%",
+    minWidth: "100%",
     overflow: "hidden",
     borderRadius: 4,
     opacity: 0,
@@ -140,12 +140,10 @@ const Options = styled("div")(
   }),
 )
 
-const OptionsList = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    maxHeight: 200,
-    overflow: "auto",
-  }),
-)
+const OptionsList = styled("div")({
+  maxHeight: 200,
+  overflow: "auto",
+})
 
 class Select extends React.Component<Props, State> {
   state: State = {
