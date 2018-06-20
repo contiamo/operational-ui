@@ -8074,6 +8074,12 @@ react-group@^1.0.5:
   dependencies:
     prop-types "^15.6.0"
 
+react-highlight@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-highlight/-/react-highlight-0.12.0.tgz#34de986a0bfdf228904d0c269b69538d95b35802"
+  dependencies:
+    highlight.js "^9.11.0"
+
 react-html-attributes@^1.4.2:
   version "1.4.2"
   resolved "https://registry.npmjs.org/react-html-attributes/-/react-html-attributes-1.4.2.tgz#0d2ccf134fc79b2d3543837dc1591d32b7b903f9"
