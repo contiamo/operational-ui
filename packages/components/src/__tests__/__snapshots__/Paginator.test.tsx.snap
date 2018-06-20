@@ -4,8 +4,13 @@ exports[`Paginator Component Should initialize properly 1`] = `
 <div
   class="css-1pxqklq-paginator"
 >
-  <div
-    class="css-1yc9hmn"
+  <button
+    class="css-1yysifb-button"
+  >
+    first
+  </button>
+  <button
+    class="css-1yysifb-button"
   >
     <svg
       fill="none"
@@ -25,73 +30,24 @@ exports[`Paginator Component Should initialize properly 1`] = `
         points="18 17 13 12 18 7"
       />
     </svg>
-  </div>
+    <span>
+      prev
+    </span>
+  </button>
   <div
-    class="css-1yc9hmn"
+    class="css-f4o2iy"
   >
-    <svg
-      fill="none"
-      height="11"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewbox="0 0 24 24"
-      width="11"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline
-        points="15 18 9 12 15 6"
-      />
-    </svg>
+    <span>
+      101-150
+    </span>
+     of 258
   </div>
-  <div
-    class="css-1x7rcf2"
+  <button
+    class="css-1yysifb-button"
   >
-    1
-  </div>
-  <div
-    class="css-1yc9hmn"
-  >
-    2
-  </div>
-  <div
-    class="css-1yc9hmn"
-  >
-    3
-  </div>
-  <div
-    class="css-1yc9hmn"
-  >
-    ...
-  </div>
-  <div
-    class="css-1yc9hmn"
-  >
-    10
-  </div>
-  <div
-    class="css-1yc9hmn"
-  >
-    <svg
-      fill="none"
-      height="11"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewbox="0 0 24 24"
-      width="11"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline
-        points="9 18 15 12 9 6"
-      />
-    </svg>
-  </div>
-  <div
-    class="css-1yc9hmn"
-  >
+    <span>
+      next
+    </span>
     <svg
       fill="none"
       height="11"
@@ -110,6 +66,11 @@ exports[`Paginator Component Should initialize properly 1`] = `
         points="6 17 11 12 6 7"
       />
     </svg>
-  </div>
+  </button>
+  <button
+    class="css-1yysifb-button"
+  >
+    last
+  </button>
 </div>
 `;
