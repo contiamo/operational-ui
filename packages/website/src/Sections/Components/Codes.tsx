@@ -9,7 +9,7 @@ export const docsUrl = `${constants.docsBaseUrl}/#code`
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Codes.tsx`
 
 export const Component = () => (
-  <Code syntax="ts">
+  <Code syntax="typescript">
     {`
 interface Person {
   firstName: string;

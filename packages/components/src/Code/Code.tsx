@@ -22,12 +22,14 @@ const Pre = styled("pre")(
   },
 )
 
+const StyledHighlight = styled(Highlight)({ background: "transparent" })
+
 const Code = (props: Props) => {
   return (
     <Pre>
-      <Highlight style={{ background: "transparent" }} className={props.syntax}>
+      <StyledHighlight style={{ background: "transparent" }} className={props.syntax}>
         {props.children}
-      </Highlight>
+      </StyledHighlight>
     </Pre>
   )
 }
