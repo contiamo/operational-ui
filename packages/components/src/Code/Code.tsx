@@ -19,15 +19,22 @@ export interface Props {
   children?: any
 }
 
+const Pre = styled("pre")(
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => {
+    return {
+      backgroundColor: "rgba(20, 153, 206, 0.05)",
+      border: "1px solid rgba(20, 153, 206, 0.1)",
+      borderRadius: theme.borderRadius,
+      padding: theme.space.small,
+    }
+  },
+)
+
 const Container = styled("code")(
   ({ theme }: { theme?: OperationalStyleConstants }): {} => {
     return {
-      border: "1px solid rgba(20, 153, 206, 0.1)",
-      borderRadius: theme.borderRadius,
       overflow: "hidden",
-      padding: theme.space.small,
-      backgroundColor: "rgba(20, 153, 206, 0.05)",
-      minWidth: 500,
+      backgroundColor: "transparent",
       fontSize: theme.font.size.body,
       fontFamily: theme.font.family.code,
     }
@@ -37,9 +44,9 @@ const Container = styled("code")(
 const Code = (props: Props) => {
   hljs.initHighlightingOnLoad()
   return (
-    <pre>
+    <Pre>
       <Container className={props.syntax}>{props.children}</Container>
-    </pre>
+    </Pre>
   )
 }
 
