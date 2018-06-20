@@ -1,6 +1,6 @@
 {
   "name": "@operational/components",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -31,8 +31,8 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@operational/theme": "^0.3.0",
-    "@operational/utils": "^0.3.0",
+    "@operational/theme": "^1.0.0",
+    "@operational/utils": "^1.0.0",
     "emotion": "^9.2.3",
     "emotion-theming": "^9.2.3",
     "glamor": "^2.20.40",
