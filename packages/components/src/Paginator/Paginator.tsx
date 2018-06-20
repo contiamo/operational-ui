@@ -49,10 +49,12 @@ interface ControlProps {
 const NavigationButton = styled(Button)(({ theme }: { theme?: OperationalStyleConstants }) => ({
   width: 56,
   marginRight: 3,
-  padding: `0 ${theme.space.base}px`,
+  padding: 0,
   "& svg": {
     verticalAlign: "middle",
-    margin: "0 0 0 3px",
+  },
+  "& span": {
+    padding: "0 3px",
   },
 }))
 
@@ -106,7 +108,8 @@ const Paginator: React.SFC<Props> = props => {
         first
       </PaginatorControl>
       <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
-        <Icon.ChevronsLeft size="11" /> <span>prev</span>
+        <Icon.ChevronsLeft size="11" />
+        <span>prev</span>
       </PaginatorControl>
       <PaginatorSpan key={props.page}>
         <span>{getRange({ page: props.page, itemCount: props.itemCount, itemsPerPage: props.itemsPerPage })}</span> of{" "}

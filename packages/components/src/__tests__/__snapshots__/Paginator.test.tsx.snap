@@ -5,12 +5,12 @@ exports[`Paginator Component Should initialize properly 1`] = `
   class="css-1pxqklq-paginator"
 >
   <button
-    class="css-1mxdzwt-button"
+    class="css-1yysifb-button"
   >
     first
   </button>
   <button
-    class="css-1mxdzwt-button"
+    class="css-1yysifb-button"
   >
     <svg
       fill="none"
@@ -30,7 +30,6 @@ exports[`Paginator Component Should initialize properly 1`] = `
         points="18 17 13 12 18 7"
       />
     </svg>
-     
     <span>
       prev
     </span>
@@ -44,7 +43,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
      of 258
   </div>
   <button
-    class="css-1mxdzwt-button"
+    class="css-1yysifb-button"
   >
     <span>
       next
@@ -69,7 +68,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </svg>
   </button>
   <button
-    class="css-1mxdzwt-button"
+    class="css-1yysifb-button"
   >
     last
   </button>
