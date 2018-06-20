@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { expandColor } from "@operational/utils"
-import Icon from "../../../../node_modules/@operational/components/src/Icon/Icon"
+import { Icon } from ".."
 
 type WithTheme = { theme?: OperationalStyleConstants & { deprecated: Theme } }
 
@@ -11,7 +11,7 @@ export interface LogoProps {
   size?: number
 
   /** A color from the constants, or an arbitrary hex value */
-  color?: keyof OperationalStyleConstants["color"]
+  color?: keyof OperationalStyleConstants["color"] | string
 }
 
 const LogoContainer = styled("div")(
@@ -20,7 +20,7 @@ const LogoContainer = styled("div")(
     alignItems: "center",
     height: "100%",
   },
-  ({ size, theme }: LogoProps & WithTheme) => ({
+  ({ size }: LogoProps & WithTheme) => ({
     width: size,
   }),
 )

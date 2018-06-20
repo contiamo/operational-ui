@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, OperationalTextColors } from "@operational/theme"
+import { OperationalStyleConstants } from "@operational/theme"
 import { WithTheme, CssStatic } from "../types"
 
 const Title = styled("h1")(
@@ -10,7 +10,7 @@ const Title = styled("h1")(
   }: {
     theme?: OperationalStyleConstants
     children?: React.ReactNode
-    color?: keyof OperationalTextColors
+    color?: keyof OperationalStyleConstants["color"]["text"]
   }) => ({
     fontSize: theme.font.size.title,
     fontFamily: theme.font.family.main,

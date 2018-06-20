@@ -61,7 +61,7 @@ export interface State {
 }
 
 const Container = styled("div")(
-  ({ theme, color, disabled, naked }: Partial<Props> & { theme?: OperationalStyleConstants }): {} => {
+  ({ theme, color, disabled, naked }: Partial<Props> & { theme?: OperationalStyleConstants }) => {
     const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
     const dropdownArrowWidth = 23
     return {

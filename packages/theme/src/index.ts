@@ -178,5 +178,5 @@ const operational: Theme = {
 }
 
 export { operational }
-export { default as constants, OperationalStyleConstants, OperationalTextColors } from "./constants"
+export { default as constants, OperationalStyleConstants } from "./constants"
 export { expandColor } from "./utils" /** <- @peterszerzo, why is this not in @operational/utils? */

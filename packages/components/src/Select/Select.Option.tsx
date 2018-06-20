@@ -17,7 +17,6 @@ const Container = styled("div")(({ theme, selected }: { theme?: OperationalStyle
   const backgroundColor = selected ? theme.color.background.lighter : theme.color.white
   return {
     backgroundColor,
-    label: "selectoption",
     position: "relative",
     padding: `${theme.space.small}px ${theme.space.content}px`,
     wordWrap: "break-word",

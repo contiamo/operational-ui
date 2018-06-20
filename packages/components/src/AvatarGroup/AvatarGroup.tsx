@@ -24,7 +24,6 @@ export interface Props {
 }
 
 const Container = styled("div")({
-  label: "avatar-group",
   display: "flex",
 })
 

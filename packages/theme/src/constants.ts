@@ -31,8 +31,10 @@ export type Grey =
   | 24 // #3e3e3e
   | 20 // #333
 
+// These constants are shared across many object definitions.
 const grey = (lightness: Grey) => `hsl(0, 0%, ${lightness}%)`
 const primaryColor = "hsl(197, 82%, 44%)"
+const whiteColor = "hsl(0, 0%, 100%)"
 
 /**
  * A specialized color palette for backgrounds.
@@ -61,6 +63,7 @@ const textColors = {
   lighter: grey(45),
   lightest: grey(56),
   action: primaryColor,
+  white: whiteColor,
 }
 
 /**
@@ -94,7 +97,7 @@ const color = {
   error: "hsl(0, 100%, 30%)",
   basic: "hsl(0, 0%, 39%)",
   ghost: "hsla(0, 0%, 100%, 0.2)",
-  white: "hsl(0, 0%, 100%)",
+  white: whiteColor,
   black: "hsl(0, 0%, 0%)",
   background: backgroundColors,
   separators: separatorColors,
