@@ -7,29 +7,25 @@ import { Button } from "../"
 
 export interface Props {
   id?: string
-
   /** `css` prop as expected in a glamorous component */
+
   css?: Css
-
   className?: string
-
-  /** Disable the component */
-  disabled?: boolean
-
   /** Function to be executed after changing page */
+
   onChange?: (page: number) => void
-
   /** Index of the current selected page */
+
   page?: number
-
   /** Total number of items */
-  itemCount: number
 
+  itemCount: number
   /** Number of items per page */
+
   itemsPerPage: number
 }
 
-const ItemSummary = styled("div")(
+const PaginatorSpan = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }): CssStatic => ({
     fontFamily: theme.font.family.main,
     fontSize: theme.font.size.small,
@@ -47,6 +43,7 @@ interface ControlProps {
   children: any
   onChange?: (page: number) => void
   page: number
+  isDisabled: boolean
   itemCount: number
   itemsPerPage: number
   type: "first" | "previous" | "next" | "last"
@@ -54,61 +51,27 @@ interface ControlProps {
 
 const NavigationButton = styled(Button)(({ theme }: { theme?: OperationalStyleConstants }) => ({
   width: 56,
-  marginRight: 2,
+  marginRight: 3,
   padding: `0 ${theme.space.base}px`,
 }))
 
-const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, type }: ControlProps) => {
-  const handleFirst = (): void => {
-    onChange && onChange(1)
+const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, type, isDisabled }: ControlProps) => {
+  const pageChanges = {
+    first: 1,
+    previous: page - 1,
+    next: page + 1,
+    last: Math.ceil(itemCount / itemsPerPage),
   }
 
-  const handlePrevious = (): void => {
-    onChange && onChange(page - 1)
+  const clickHandler = (): void => {
+    onChange && onChange(pageChanges[type])
   }
 
-  const handleNext = (): void => {
-    onChange && onChange(page + 1)
-  }
-
-  const handleLast = (): void => {
-    onChange && onChange(Math.ceil(itemCount / itemsPerPage))
-  }
-
-  switch (type) {
-    case "previous":
-      return (
-        <NavigationButton condensed onClick={handlePrevious}>
-          {children}
-        </NavigationButton>
-      )
-
-    case "first":
-      return (
-        <NavigationButton condensed onClick={handleFirst}>
-          {children}
-        </NavigationButton>
-      )
-
-    case "next":
-      return (
-        <NavigationButton condensed onClick={handleNext}>
-          {children}
-        </NavigationButton>
-      )
-
-    case "last":
-      return (
-        <NavigationButton condensed onClick={handleLast}>
-          {children}
-        </NavigationButton>
-      )
-
-    default:
-      throw new Error(
-        "No handler specified for NavigationButton in Paginator component\nPlease refer to the docs: http://operational-ui.js.org/docs/#paginator",
-      )
-  }
+  return (
+    <NavigationButton disabled={isDisabled} condensed onClick={clickHandler}>
+      {children}
+    </NavigationButton>
+  )
 }
 
 const getRange = ({ page, itemCount, itemsPerPage }: Props) => {
@@ -134,34 +97,26 @@ const Paginator: React.SFC<Props> = props => {
     page: props.page,
     onChange: props.onChange,
   }
-  const shouldDisplayFirst = props.page !== 1
-  const shouldDisplayLast = props.itemsPerPage * props.page < props.itemCount
+  const isFirstDisabled = props.page === 1
+  const isLastDisabled = props.itemsPerPage * props.page >= props.itemCount
   return (
     <Container id={props.id} css={props.css} className={props.className}>
-      {shouldDisplayFirst && (
-        <PaginatorControl type="first" {...controlProps}>
-          first
-        </PaginatorControl>
-      )}
-      {shouldDisplayFirst && (
-        <PaginatorControl type="previous" {...controlProps}>
-          <Icon.ChevronsLeft size="11" /> prev
-        </PaginatorControl>
-      )}
-      <ItemSummary key={props.page}>
+      <PaginatorControl type="first" {...controlProps} isDisabled={isFirstDisabled}>
+        first
+      </PaginatorControl>
+      <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
+        <Icon.ChevronsLeft size="11" /> prev
+      </PaginatorControl>
+      <PaginatorSpan key={props.page}>
         <span>{getRange({ page: props.page, itemCount: props.itemCount, itemsPerPage: props.itemsPerPage })}</span> of{" "}
         {props.itemCount}
-      </ItemSummary>
-      {shouldDisplayLast && (
-        <PaginatorControl type="next" {...controlProps}>
-          next<Icon.ChevronsRight size="11" />
-        </PaginatorControl>
-      )}
-      {shouldDisplayLast && (
-        <PaginatorControl type="last" {...controlProps}>
-          last
-        </PaginatorControl>
-      )}
+      </PaginatorSpan>
+      <PaginatorControl type="next" {...controlProps} isDisabled={isLastDisabled}>
+        next<Icon.ChevronsRight size="11" />
+      </PaginatorControl>
+      <PaginatorControl type="last" {...controlProps} isDisabled={isLastDisabled}>
+        last
+      </PaginatorControl>
     </Container>
   )
 }
