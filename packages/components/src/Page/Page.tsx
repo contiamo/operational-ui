@@ -110,7 +110,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   render() {
     const { children, title, actions, tabs, fill, areas } = this.props
     const { activeTab } = this.state
-    const onlyOneChild = React.Children.count(children) === 1
+    const hasOnlyOneChild = React.Children.count(children) === 1
     const CurrentTab = tabs && tabs[activeTab].component
 
     return (
@@ -134,7 +134,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
           </>
         ) : (
           <Grid areas={areas} fill={fill}>
-            {onlyOneChild ? <PageArea>{children}</PageArea> : children}
+            {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
           </Grid>
         )}
       </Container>

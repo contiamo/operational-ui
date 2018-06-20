@@ -1,8 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { WithTheme, Css, CssStatic } from "../types"
-import { OperationalTextColors } from "../../../theme/lib/constants"
+import { OperationalStyleConstants, OperationalTextColors } from "@operational/theme"
+import { WithTheme, CssStatic } from "../types"
 
 const Title = styled("h1")(
   ({
