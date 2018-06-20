@@ -37,6 +37,7 @@
     "emotion-theming": "^9.2.3",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
+    "highlight.js": "^9.12.0",
     "moment": "^2.19.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
+    "@types/highlight.js": "^9.12.3",
     "babel-loader": "^8.0.0-beta.3",
     "babel-plugin-emotion": "^9.0.0-3",
     "jest-emotion": "^9.2.2",
