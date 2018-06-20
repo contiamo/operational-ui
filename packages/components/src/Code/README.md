@@ -3,6 +3,7 @@ Box for displaying formatted code snippets.
 ### Usage
 
 ```jsx
+<h3>JSON</h3>
 <Code syntax="json">
   {`{
   "properties": {
@@ -16,5 +17,25 @@ Box for displaying formatted code snippets.
     }
   }
 }`}
+</Code>
+```
+
+```jsx
+<h3>TypeScript</h3>
+<Code syntax="ts">
+  {`
+interface Person {
+  firstName: string;
+  lastName: string;
+}
+
+function greeter(person: Person) {
+  return "Hello, " + person.firstName + " " + person.lastName;
+}
+
+let user = { firstName: "Jane", lastName: "User" };
+
+document.body.innerHTML = greeter(user);
+  `}
 </Code>
 ```
