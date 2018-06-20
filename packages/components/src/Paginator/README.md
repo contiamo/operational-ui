@@ -6,9 +6,7 @@ Pagination is a predictable and expressive way to handle datasets that don't fit
 class ComponentWithPaginator extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      page: undefined,
-    }
+    this.state = {}
   }
 
   handleChange(page) {

@@ -7,28 +7,29 @@ import { Button } from "../"
 
 export interface Props {
   id?: string
+
   /** `css` prop as expected in a glamorous component */
-
   css?: Css
+
   className?: string
+
   /** Disable the component */
-
   disabled?: boolean
+
   /** Function to be executed after changing page */
-
   onChange?: (page: number) => void
+
   /** Index of the current selected page */
-
   page?: number
+
   /** Total number of items */
-
   itemCount: number
-  /** Number of items per page */
 
+  /** Number of items per page */
   itemsPerPage: number
 }
 
-const PaginatorSpan = styled("div")(
+const ItemSummary = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }): CssStatic => ({
     fontFamily: theme.font.family.main,
     fontSize: theme.font.size.small,
@@ -147,10 +148,10 @@ const Paginator: React.SFC<Props> = props => {
           <Icon.ChevronsLeft size="11" /> prev
         </PaginatorControl>
       )}
-      <PaginatorSpan key={props.page}>
+      <ItemSummary key={props.page}>
         <span>{getRange({ page: props.page, itemCount: props.itemCount, itemsPerPage: props.itemsPerPage })}</span> of{" "}
         {props.itemCount}
-      </PaginatorSpan>
+      </ItemSummary>
       {shouldDisplayLast && (
         <PaginatorControl type="next" {...controlProps}>
           next<Icon.ChevronsRight size="11" />
