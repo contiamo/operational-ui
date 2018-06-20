@@ -19,8 +19,7 @@ export interface HeaderProps {
 const Bar = styled("div")(
   {
     display: "grid",
-    width: "100vw",
-    maxWidth: "100%",
+    width: "100%",
     " > *": {
       display: "flex",
       alignItems: "center",

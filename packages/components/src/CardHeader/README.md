@@ -19,7 +19,9 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
     action={
       <div>
         <Button condensed>Button</Button>
-        <a href="#">Link</a>
+        <a href="#">
+          Link <Icon name="ExternalLink" />
+        </a>
       </div>
     }
   >

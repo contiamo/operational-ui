@@ -12,6 +12,29 @@ Here is a simple usage example:
 </Page>
 ```
 
+### Sticky Header
+
+Here is a simple usage example:
+
+```jsx
+;<div style={{ height: 200 }}>
+  <Page title="Settings Page">
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+    <Card>Hello, this is page content</Card>
+  </Page>
+</div>
+```
+
 ### With actions
 
 ```jsx

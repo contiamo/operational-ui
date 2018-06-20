@@ -24,10 +24,10 @@ const CardItemBody = styled("div")(({ theme }: { theme?: OperationalStyleConstan
   marginBottom: theme.space.content,
 }))
 
-const CardItem: React.SFC<Props> = ({ title, value }) => (
+const CardItem: React.SFC<Props> = ({ title, value, children }) => (
   <div>
     <CardItemTitle>{title}</CardItemTitle>
-    <CardItemBody>{value}</CardItemBody>
+    <CardItemBody>{children || value}</CardItemBody>
   </div>
 )
 

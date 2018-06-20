@@ -33,14 +33,18 @@ export interface Props {
 }
 
 const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  height: "100%",
   backgroundColor: theme.color.background.lighter,
 }))
+
+const titleBarHeight = 45
 
 const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: `${theme.space.base}px 0`,
+  height: titleBarHeight,
 }))
 
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
@@ -62,6 +66,11 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   },
 }))
 
+const ViewContainer = styled("div")`
+  height: calc(100% - ${titleBarHeight}px);
+  overflow: auto;
+`
+
 const Grid = styled("div")(
   (props: {
     children?: React.ReactNode
@@ -79,6 +88,7 @@ const Grid = styled("div")(
       maxWidth: props.fill ? "none" : 1150,
       minWidth: 800,
       width: "100%",
+      height: `calc(100% - ${titleBarHeight}px)`,
       padding: props.theme.space.element,
     }
   },
@@ -133,9 +143,11 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
             <CurrentTab />
           </>
         ) : (
-          <Grid areas={areas} fill={fill}>
-            {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
-          </Grid>
+          <ViewContainer>
+            <Grid areas={areas} fill={fill}>
+              {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
+            </Grid>
+          </ViewContainer>
         )}
       </Container>
     )
