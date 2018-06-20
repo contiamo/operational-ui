@@ -8,9 +8,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   children?: React.ReactNode
   /**
@@ -63,7 +60,7 @@ const Container = styled("div")(
 export class Sidenav extends React.Component<Props, State> {
   render() {
     return (
-      <Container id={this.props.id} css={this.props.css} className={this.props.className}>
+      <Container id={this.props.id} className={this.props.className}>
         {this.props.children}
       </Container>
     )

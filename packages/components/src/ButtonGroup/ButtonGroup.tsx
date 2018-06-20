@@ -6,9 +6,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   /** Id */
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   /** Class name */
 
   className?: string
@@ -36,7 +33,7 @@ const Container = styled("div")(
 )
 
 const ButtonGroup = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} className={props.className}>
     {props.children}
   </Container>
 )

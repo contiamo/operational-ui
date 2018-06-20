@@ -8,8 +8,6 @@ import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, Form
 import { inputDefaultWidth } from "../constants"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Text displayed when the input field has no value. */
 
@@ -116,7 +114,7 @@ const Input = (props: Props) => {
 
   if (props.label) {
     return (
-      <Label id={props.id} htmlFor={forAttributeId} css={props.css} className={props.className}>
+      <Label id={props.id} htmlFor={forAttributeId} className={props.className}>
         <LabelText>{props.label}</LabelText>
         <FormFieldControls>
           {props.hint ? (
@@ -142,13 +140,7 @@ const Input = (props: Props) => {
   }
 
   return (
-    <InputField
-      {...commonInputProps}
-      id={props.id}
-      css={props.css}
-      className={props.className}
-      autoComplete={props.autoComplete}
-    />
+    <InputField {...commonInputProps} id={props.id} className={props.className} autoComplete={props.autoComplete} />
   )
 }
 

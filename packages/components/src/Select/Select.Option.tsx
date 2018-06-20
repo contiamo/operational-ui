@@ -6,7 +6,6 @@ import { Icon } from "../"
 
 export interface Props {
   id?: number | string
-  css?: any
   className?: string
   selected?: boolean
   onClick?: () => void
@@ -56,7 +55,6 @@ const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConsta
 const SelectOption = (props: Props) => (
   <Container
     key={props.id}
-    css={props.css}
     className={props.className}
     selected={Boolean(props.selected)}
     tabIndex={-2}

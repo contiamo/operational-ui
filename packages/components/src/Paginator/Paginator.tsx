@@ -7,8 +7,6 @@ import Button from "../Button/Button"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Function to be executed after changing page */
   onChange?: (page: number) => void
@@ -103,7 +101,7 @@ const Paginator: React.SFC<Props> = props => {
   const isFirstDisabled = props.page === 1
   const isLastDisabled = props.itemsPerPage * props.page >= props.itemCount
   return (
-    <Container id={props.id} css={props.css} className={props.className}>
+    <Container id={props.id} className={props.className}>
       <PaginatorControl type="first" {...controlProps} isDisabled={isFirstDisabled}>
         first
       </PaginatorControl>

@@ -5,9 +5,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   /** Is the switch on? */
 
   on: boolean
@@ -90,7 +87,6 @@ const Rail = styled("div")(
 const Switch = (props: Props) => (
   <Container
     id={props.id}
-    css={props.css}
     className={props.className}
     onClick={() => {
       props.onChange && props.onChange(!props.on)

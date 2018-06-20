@@ -11,8 +11,6 @@ import { Css } from "../types"
  * straightforward implementation.
  */
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   children?: React.ReactNode
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */

@@ -5,8 +5,6 @@ import { Button } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Record title */
 
@@ -52,7 +50,7 @@ const Content = styled("div")(
 )
 
 const Record = (props: Props) => (
-  <Container css={props.css} className={props.className}>
+  <Container className={props.className}>
     <HeaderContainer>
       {props.title}
       {props.controls ? <ControlContainer>{props.controls}</ControlContainer> : null}

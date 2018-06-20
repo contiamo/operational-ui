@@ -4,13 +4,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
-  /** `css` prop for the content inside the backdrop */
-
-  contentCss?: Css
   /** Content class name */
 
   contentClassName?: string
@@ -51,7 +45,6 @@ class Modal extends React.Component<Props, {}> {
     return (
       <Container
         id={this.props.id}
-        css={this.props.css}
         className={this.props.className}
         onClick={ev => {
           if (this.contentNode && !this.contentNode.contains(ev.target)) {
@@ -64,7 +57,6 @@ class Modal extends React.Component<Props, {}> {
             this.contentNode = contentNode
           }}
           className={this.props.contentClassName}
-          css={this.props.contentCss}
         >
           {this.props.children}
         </Content>

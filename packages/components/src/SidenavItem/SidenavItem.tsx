@@ -8,9 +8,6 @@ import { isModifiedEvent } from "../utils"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
@@ -90,7 +87,6 @@ const SidenavItem = (props: Props) => {
         <ContainerComponent
           href={props.to}
           id={props.id}
-          css={props.css}
           className={props.className}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             props.onClick && props.onClick()

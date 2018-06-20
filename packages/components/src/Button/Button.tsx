@@ -9,8 +9,6 @@ import Spinner from "../Spinner/Spinner"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Invoked when you click on the button */
   onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
@@ -115,7 +113,6 @@ const Button = (props: Props) => {
           type={props.type}
           id={props.id}
           href={props.to}
-          css={props.css}
           className={props.className}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             if (props.disabled) {

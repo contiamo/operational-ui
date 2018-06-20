@@ -6,9 +6,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   children?: any
   onClick?: () => void
@@ -47,13 +44,7 @@ const Container = styled("div")(
 )
 
 const ContextMenuItem: React.SFC<Props> = (props: Props) => (
-  <Container
-    id={props.id}
-    css={props.css}
-    className={props.className}
-    clickable={!!props.onClick}
-    onClick={props.onClick}
-  >
+  <Container id={props.id} className={props.className} clickable={!!props.onClick} onClick={props.onClick}>
     {props.children}
   </Container>
 )

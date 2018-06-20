@@ -9,9 +9,6 @@ import { Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Controlled value of the field */
 
@@ -36,32 +33,11 @@ export interface Props {
   disabled?: boolean
 }
 
-const numericalHeight = (
-  css: Css,
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  },
-): number | null => {
-  const workingCss =
-    typeof css === "function"
-      ? css({
-          theme,
-        })
-      : css
-
-  if (!workingCss.height || typeof workingCss.height !== "number") {
-    return null
-  }
-
-  return workingCss.height
-}
-
 const TextareaComp = styled("textarea")(
   ({
     theme,
     isCode,
     isError,
-    css_,
     disabled,
   }: {
     theme?: OperationalStyleConstants & {
@@ -69,20 +45,13 @@ const TextareaComp = styled("textarea")(
     }
     isCode: boolean
     isError: boolean
-    css_: Css
     disabled: boolean
   }): CssStatic => {
-    const numericalHeightSetting = numericalHeight(css_, theme)
     return {
       ...theme.deprecated.typography.body,
       display: "block",
       width: "100%",
       minHeight: 120,
-      ...(numericalHeightSetting === null
-        ? {}
-        : {
-            height: numericalHeightSetting - 20,
-          }),
       borderRadius: 4,
       borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.inputBorder,
       padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
@@ -103,7 +72,7 @@ const HelpTooltip = styled(Tooltip)({
 
 const Textarea = (props: Props) => {
   return (
-    <Label css={props.css} className={props.className} id={props.id}>
+    <Label className={props.className} id={props.id}>
       {props.label ? <LabelText>{props.label}</LabelText> : null}
       <FormFieldControls>
         {props.hint ? (
@@ -117,7 +86,6 @@ const Textarea = (props: Props) => {
         * glamorous component as opposed to as actual styles to be injected into the component.
         */}
       <TextareaComp
-        css_={props.css || {}}
         disabled={Boolean(props.disabled)}
         isCode={Boolean(props.code)}
         value={props.value}

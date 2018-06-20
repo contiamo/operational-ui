@@ -4,9 +4,6 @@ import { WithTheme, Css } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   children?: React.ReactNode
 }
@@ -33,7 +30,7 @@ const Container = styled("div")(
 )
 
 const Sidebar = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} className={props.className}>
     {props.children}
   </Container>
 )

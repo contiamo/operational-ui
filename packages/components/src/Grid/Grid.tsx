@@ -5,9 +5,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Either 'IDE', or of an `MxN` format, with `M` and `N` as integers. */
 
@@ -61,7 +58,7 @@ const Container = styled("div")(
 )
 
 const Grid: React.SFC<Props> = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className} gridType={props.type}>
+  <Container id={props.id} className={props.className} gridType={props.type}>
     {props.children}
   </Container>
 )

@@ -5,11 +5,7 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   className?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   /** Children as `Breadcrumb` elements */
-
   children?: React.ReactNode
 }
 
@@ -42,9 +38,7 @@ const intersperseSlashes = (index: number) => ([head, ...tail]: React.ReactNode[
   head ? [<Slash key={`divider-${index}`}>/</Slash>, head, ...intersperseSlashes(index + 1)(tail)] : []
 
 const Breadcrumbs = (props: Props) => (
-  <Container className={props.className} css={props.css}>
-    {intersperseSlashes(0)(React.Children.toArray(props.children))}
-  </Container>
+  <Container className={props.className}>{intersperseSlashes(0)(React.Children.toArray(props.children))}</Container>
 )
 
 export default Breadcrumbs

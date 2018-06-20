@@ -7,8 +7,6 @@ import { Props as SidenavProps } from "../Sidenav/Sidenav"
 import { sidenavExpandedWidth } from "../constants"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Side navigation, see `Sidenav` component */
 
@@ -76,7 +74,7 @@ const CssPlaceholder = styled("div")({
 
 const Layout = (props: Props) => {
   return (
-    <Container css={props.css} className={props.className}>
+    <Container className={props.className}>
       {props.loading ? <Progress /> : <CssPlaceholder />}
       {props.sidenav}
       <Main>{props.main}</Main>

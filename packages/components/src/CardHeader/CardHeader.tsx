@@ -5,9 +5,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: any
   className?: string
   /** As title, please note that is override by `title` if provided */
   children?: React.ReactNode
@@ -39,7 +36,7 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
 }))
 
 const CardHeader = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} className={props.className}>
     <div>{props.title || props.children}</div>
     <div>{props.action}</div>
   </Container>

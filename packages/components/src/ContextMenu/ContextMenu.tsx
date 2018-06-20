@@ -8,14 +8,8 @@ import { WithTheme, Css, CssStatic } from "../types"
 export interface Props {
   /** Id */
   id?: string
-  /** `css` prop as expected in a glamorous component */
 
-  css?: Css
-  /** `css` prop for the menu's popup container */
-
-  menuCss?: Css
   /** Class name */
-
   className?: string
   children: React.ReactNode
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
@@ -140,12 +134,10 @@ class ContextMenu extends React.Component<Props, State> {
           this.containerNode = node
         }}
         id={this.props.id}
-        css={this.props.css}
         className={this.props.className}
       >
         {children}
         <MenuContainer
-          css={this.props.menuCss}
           innerRef={node => {
             this.menuContainerNode = node
           }}
