@@ -79,10 +79,6 @@ const containerStyles: Interpolation<Props> = ({
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
           },
-          ":focus": {
-            outline: 0,
-            boxShadow: `0 0 0 3px ${lighten(backgroundColor, 35)}`,
-          },
         }
       : {}),
     marginRight: theme.space.small,
