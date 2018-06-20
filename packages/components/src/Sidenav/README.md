@@ -7,7 +7,7 @@ Typical usage includes `to` props to navigate and to manage highlighted/active s
 ```jsx
 <Sidenav>
   <SidenavHeader condensed icon="Home" label="Project Home" />
-  <SidenavHeader label="The Prize">
+  <SidenavHeader label="The Prize" active>
     <SidenavItem label="The First Prize" icon="Settings" />
     <SidenavItem label="The Second Prize" icon="Settings" />
     <SidenavItem label="The Third Prize" icon="Settings" />

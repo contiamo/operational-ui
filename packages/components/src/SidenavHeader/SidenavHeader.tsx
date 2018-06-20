@@ -22,6 +22,8 @@ export interface Props {
   condensed?: boolean
   /** Active state - renders colored strip on the left */
   active?: boolean
+  /** Callback called when the active state changes */
+  onToggle?: (newActiveState: boolean) => void
   /**
    * Expanded state
    *
@@ -35,9 +37,7 @@ export interface Props {
   children?: React.ReactNode
 }
 
-export interface State {
-  isOpen: boolean
-}
+export interface State {}
 
 const containerStyles = ({
   theme,
@@ -183,18 +183,15 @@ const truncate = (maxLength: number) => (text: string) => {
 }
 
 export class SidenavHeader extends React.Component<Props, State> {
-  state = {
-    isOpen: false,
-  }
+  state = {}
 
   render() {
     const hasChildren = Boolean(this.props.children)
     const hasChildLinks = React.Children.toArray(this.props.children).some(child =>
       Boolean((child as { props: SidenavItemProps }).props.to),
     )
-    const isActive =
-      Boolean(this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`))) &&
-      hasChildren
+
+    const isActive = Boolean(this.props.active)
 
     // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
@@ -212,9 +209,7 @@ export class SidenavHeader extends React.Component<Props, State> {
               className={[this.props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
               onClick={(ev: React.SyntheticEvent<Node>) => {
                 this.props.onClick && this.props.onClick()
-                this.setState(prevState => ({
-                  isOpen: !prevState.isOpen,
-                }))
+                this.props.onToggle && this.props.onToggle(!this.props.active)
 
                 if (!isModifiedEvent(ev) && ctx.pushState && this.props.to) {
                   ev.preventDefault()
@@ -242,12 +237,10 @@ export class SidenavHeader extends React.Component<Props, State> {
                   onClick={(ev: React.SyntheticEvent<Node>) => {
                     // Prevent clicks on parent in order to avoid conflicting behavior
                     ev.stopPropagation()
-                    this.setState(prevState => ({
-                      isOpen: !prevState.isOpen,
-                    }))
+                    this.props.onToggle && this.props.onToggle(!this.props.active)
                   }}
                 >
-                  <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
+                  <Icon name={this.props.active ? "ChevronUp" : "ChevronDown"} />
                 </CloseButton>
               )}
               {isActive && <ItemsContainer>{this.props.children}</ItemsContainer>}
