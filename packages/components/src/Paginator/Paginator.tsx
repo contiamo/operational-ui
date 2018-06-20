@@ -27,6 +27,8 @@ const PaginatorSpan = styled("div")(
     padding: `0 ${theme.space.content}px`,
     display: "inline-flex",
     color: theme.color.text.lighter,
+    minWidth: 120,
+    justifyContent: "center",
     "& span": {
       color: theme.color.text.dark,
       paddingRight: 3,
