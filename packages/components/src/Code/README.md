@@ -3,7 +3,7 @@ Box for displaying formatted code snippets.
 ### Usage
 
 ```jsx
-<Code language="json">
+<Code syntax="json">
   {`{
   "properties": {
     "startAt": {

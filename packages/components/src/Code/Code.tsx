@@ -12,7 +12,7 @@ export interface Props {
   css?: Css
 
   /** Language for syntax highlighting */
-  language?: string
+  syntax?: string
 
   className?: string
 
@@ -38,7 +38,7 @@ const Code = (props: Props) => {
   hljs.initHighlightingOnLoad()
   return (
     <pre>
-      <Container className={props.language}>{props.children}</Container>
+      <Container className={props.syntax}>{props.children}</Container>
     </pre>
   )
 }

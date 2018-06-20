@@ -9,7 +9,7 @@ describe("Code", () => {
   it("Should render", () => {
     expect(
       render(
-        <Code language="json">
+        <Code syntax="json">
           {`{
   "properties": {
     "startAt": {
