@@ -1,31 +1,17 @@
 import React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "@operational/theme"
 import { lighten } from "@operational/utils"
 
-export const inputFocus = ({
-  theme,
-  isError,
-}: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
-  isError?: boolean
-}): {} => ({
+export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }): {} => ({
   outline: 0,
   border: "1px solid",
-  borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.info,
-  boxShadow: `0 0 0 3px ${lighten(isError ? theme.deprecated.colors.error : theme.deprecated.colors.info, 40)}`,
+  borderColor: isError ? theme.color.error : theme.color.primary,
+  boxShadow: `0 0 0 3px ${lighten(isError ? theme.color.error : theme.color.primary, 40)}`,
 })
 
 export const Label = styled("label")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     display: "inline-block",
     position: "relative",
     minWidth: 240,
@@ -33,46 +19,27 @@ export const Label = styled("label")(
 )
 
 export const LabelText = styled("span")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    ...theme.deprecated.typography.small,
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
+    fontSize: theme.font.size.fineprint,
     display: "inline-block",
     verticalAlign: "middle",
-    marginBottom: theme.deprecated.spacing / 8,
-    // Set font explicitly so it doesn't inherit overrides on the parent
-    // (e.g. monospaced code in text areas)
-    fontFamily: theme.deprecated.fontFamily,
+    marginBottom: theme.space.base,
+    /**
+     * Set font explicitly so it doesn't inherit overrides on the parent
+     * (e.g. monospaced code in text areas)
+     */
     opacity: 0.4,
   }),
 )
 
-export const FormFieldControls = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    position: "absolute",
-    top: 3,
-    right: 0,
-  }),
-)
+export const FormFieldControls = styled("div")({
+  position: "absolute",
+  top: 3,
+  right: 0,
+})
 
 export const FormFieldControl = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     position: "relative",
     verticalAlign: "middle",
     display: "inline-block",
@@ -99,23 +66,18 @@ export const FormFieldControl = styled("div")(
 )
 
 export const FormFieldError = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    ...theme.deprecated.typography.small,
-    color: theme.deprecated.colors.error,
-    padding: `${theme.deprecated.spacing / 6}px ${(theme.deprecated.spacing * 3) / 4}px`,
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
+    fontSize: theme.font.size.fineprint,
+    color: theme.color.error,
+    padding: `${theme.space.base / 2}px ${theme.space.element}px`,
     marginBottom: 0,
     width: "100%",
-    borderRadius: theme.deprecated.borderRadius,
+    borderRadius: theme.borderRadius,
     position: "absolute",
-    backgroundColor: lighten(theme.deprecated.colors.error, 45),
-    boxShadow: theme.deprecated.shadows.card,
-    bottom: theme.deprecated.spacing * -1.75,
+    backgroundColor: lighten(theme.color.error, 45),
+    boxShadow: `0px 1px 5px #d3d1d3`,
+    bottom: -theme.space.big,
     left: 0,
+    zIndex: theme.zIndex.formFieldError,
   }),
 )

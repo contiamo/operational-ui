@@ -5,8 +5,10 @@ exports[`ContextMenu Component Should render 1`] = `
   class="css-3223hv-contextmenu"
 >
   <svg
+    class="css-1jl4146"
     fill="none"
     height="16"
+    name="MoreHorizontal"
     stroke="currentColor"
     stroke-linecap="round"
     stroke-linejoin="round"

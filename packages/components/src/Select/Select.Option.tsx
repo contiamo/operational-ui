@@ -1,9 +1,8 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
-import { readableTextColor, darken } from "@operational/utils"
+import { OperationalStyleConstants } from "@operational/theme"
+import { darken } from "@operational/utils"
 import { Icon } from "../"
-import { CssStatic } from "../types"
 
 export interface Props {
   id?: number | string
@@ -14,59 +13,45 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = styled("div")(
-  ({
-    theme,
-    selected,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    selected: boolean
-  }): CssStatic => {
-    const backgroundColor = selected ? theme.deprecated.colors.background : theme.deprecated.colors.white
-    return {
-      backgroundColor,
-      label: "selectoption",
-      position: "relative",
-      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 3) / 4}px`,
-      wordWrap: "break-word",
-      outline: "none",
-      borderTop: "1px solid",
-      borderColor: darken(theme.deprecated.colors.background, 10),
-      ":hover": {
-        backgroundColor: darken(theme.deprecated.colors.background, 5),
-      },
-    }
-  },
-)
-
-const IconContainer = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): CssStatic => ({
+const Container = styled("div")(({ theme, selected }: { theme?: OperationalStyleConstants; selected: boolean }) => {
+  const backgroundColor = selected ? theme.color.background.lighter : theme.color.white
+  return {
+    backgroundColor,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    width: theme.deprecated.spacing * 1.25,
-    height: theme.deprecated.spacing * 1.25,
-    backgroundColor: theme.deprecated.colors.info,
-    position: "absolute",
-    top: "50%",
-    right: 4,
-    borderRadius: "50%",
-    transform: "translate3d(0, -50%, 0)",
-    "& svg": {
-      color: theme.deprecated.colors.white,
-      width: theme.deprecated.spacing * 0.75,
-      height: theme.deprecated.spacing * 0.75,
+    position: "relative",
+    padding: `${theme.space.small}px ${theme.space.content}px`,
+    wordWrap: "break-word",
+    outline: "none",
+    borderTop: "1px solid",
+    borderColor: darken(backgroundColor, 10),
+    color: theme.color.text.default,
+    ":hover": {
+      backgroundColor: darken(backgroundColor, 5),
     },
-  }),
-)
+  }
+})
+
+const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+  const size = 14
+  return {
+    display: "flex",
+    alignItems: "center",
+    flex: "1 0",
+    flexBasis: size,
+    justifyContent: "center",
+    maxWidth: size,
+    height: size,
+    backgroundColor: theme.color.primary,
+    borderRadius: "50%",
+    marginLeft: "auto",
+    "& svg": {
+      color: theme.color.white,
+      width: 12,
+      height: 12,
+    },
+  }
+})
 
 const SelectOption = (props: Props) => (
   <Container

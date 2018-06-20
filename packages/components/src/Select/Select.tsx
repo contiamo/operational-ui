@@ -1,11 +1,11 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { WithTheme, Css } from "../types"
+
 import { Label, LabelText, inputFocus } from "../utils/mixins"
 import SelectOption from "./Select.Option"
 import SelectFilter from "./Select.Filter"
-import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { readableTextColor, fadeIn, resetTransform, expandColor } from "@operational/utils"
+import { OperationalStyleConstants, Theme } from "@operational/theme"
 
 export type Value = number | string
 
@@ -25,36 +25,33 @@ const displayOption = (opt: IOption): string => {
 export interface Props {
   /** Id */
   id?: string
-  /** Glamorous css */
 
-  css?: Css
-  /** ClassName */
-
-  className?: string
   /** Options available */
-
   options: IOption[]
+
   /** Current value */
-
   value: null | Value | Value[]
+
   /** Make the list filterable */
-
   filterable?: boolean
+
   /** Disable the component */
-
   disabled?: boolean
+
   /** Callback trigger on any changes */
-
   onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void
+
   /** Text color */
-
   color?: string
+
   /** Text to display when no active selection */
-
   placeholder?: string
-  /** Label text */
 
+  /** Label text */
   label?: string
+
+  /** Should the Select be rendered with a full box style? */
+  naked?: boolean
 }
 
 export interface State {
@@ -64,38 +61,22 @@ export interface State {
 }
 
 const Container = styled("div")(
-  ({
-    theme,
-    color,
-    disabled,
-    style,
-  }: {
-    id?: string
-    color?: string
-    disabled: boolean
-    style?: {}
-    role?: string
-    tabIndex?: number
-    onClick?: () => void
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => {
-    const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.white
+  ({ theme, color, disabled, naked }: Partial<Props> & { theme?: OperationalStyleConstants }) => {
+    const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
+    const dropdownArrowWidth = 56
     return {
       backgroundColor,
       label: "select",
       position: "relative",
       display: "flex",
       alignItems: "center",
-      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3 + 40}px ${theme.deprecated
-        .spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px `,
+      padding: `${theme.space.small}px ${dropdownArrowWidth}px ${theme.space.small}px ${theme.space.content}px`,
       borderRadius: 4,
       width: "fit-content",
-      minWidth: 240,
+      minWidth: !naked && 240,
       minHeight: 20,
-      border: "1px solid",
-      borderColor: theme.deprecated.colors.inputBorder,
+      border: naked ? 0 : "1px solid",
+      borderColor: theme.color.border.default,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
       color: readableTextColor(backgroundColor, ["black", "white"]),
@@ -106,42 +87,46 @@ const Container = styled("div")(
         content: "''",
         position: "absolute",
         top: "50%",
-        right: theme.deprecated.spacing / 2,
+        right: theme.space.small,
         width: 0,
         height: 0,
         border: "4px solid transparent",
-        borderTopColor: theme.deprecated.colors.gray,
+        borderTopColor: theme.color.border.default,
         transform: "translateY(calc(-50% + 2px))",
       },
-      "&:focus": inputFocus({
-        theme,
-      }),
+      "&:focus":
+        !naked &&
+        inputFocus({
+          theme,
+        }),
     }
   },
 )
 
 const DisplayValue = styled("div")(
-  ({
-    theme,
-    isPlaceholder,
-  }: {
-    isPlaceholder: boolean
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
+  ({ theme, isPlaceholder }: { isPlaceholder: boolean; theme?: OperationalStyleConstants }) => {
+    if (isPlaceholder) {
+      return {
+        color: theme.color.text.lightest,
+      }
     }
-  }): {} => ({
-    color: isPlaceholder ? theme.deprecated.colors.gray : theme.deprecated.colors.black,
-  }),
+
+    return {
+      color: "currentColor",
+    }
+  },
 )
 
 const Options = styled("div")(
   {
     position: "absolute",
-    // Push it down 6px so it doesn't overlap with the focus shadow,
-    // and there's a comfortable 2px gap.
+    /**
+     * Push it down 6px so it doesn't overlap with the focus shadow,
+     * and there's a comfortable 2px gap.
+     */
     top: "calc(100% + 6px)",
     left: 0,
-    width: "100%",
+    minWidth: "100%",
     overflow: "hidden",
     borderRadius: 4,
     opacity: 0,
@@ -149,31 +134,16 @@ const Options = styled("div")(
     animation: `${fadeIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`,
   },
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    boxShadow: theme.deprecated.shadows.popup,
-    zIndex: theme.deprecated.baseZIndex + 300,
+  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+    boxShadow: "0 3px 12px rgba(0, 0, 0, .14)",
+    zIndex: theme.zIndex.selectOptions,
   }),
 )
 
-const OptionsList = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    // whole number + 3/4 ratio here ensures options don't get cut off
-    maxHeight: theme.deprecated.spacing * 12.75,
-    overflow: "auto",
-  }),
-)
+const OptionsList = styled("div")({
+  maxHeight: 200,
+  overflow: "auto",
+})
 
 class Select extends React.Component<Props, State> {
   state: State = {
@@ -185,9 +155,11 @@ class Select extends React.Component<Props, State> {
   containerNode: Node
 
   static defaultProps: Partial<Props> = {
-    placeholder: "No entries selected", // This implements "click outside to close" behavior
+    placeholder: "No entries selected",
+    naked: false,
   }
 
+  // This implements "click outside to close" behavior
   handleClick(ev: React.SyntheticEvent<Node>): void {
     // if we're clicking on the Select itself,
     if (this.containerNode && this.containerNode.contains(ev.target as Node)) {
@@ -268,14 +240,15 @@ class Select extends React.Component<Props, State> {
   }
 
   render() {
-    const { id, color, disabled, value, options, filterable, label } = this.props
+    const { id, color, disabled, naked, value, options, filterable, label } = this.props
     const { open, search } = this.state
     const selectWithoutLabel = (
       <Container
         id={id}
-        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
         color={color}
         disabled={disabled}
+        naked={naked}
+        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
         role="listbox"
         tabIndex={-2}
         onClick={() => {

@@ -4,11 +4,16 @@ import { Props as IconProps } from "./Icon"
 export type Props = Pick<IconProps, Exclude<keyof IconProps, "name">>
 export type BrandIconName = "OperationalUI" | "Pantheon" | "Labs" | "Contiamo"
 
-export const OperationalUI = (props: Props) => {
+export interface BrandIcons {
+  [key: string]: React.SFC<Props>
+}
+
+const OperationalUI: React.SFC<Props> = props => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
     <svg
+      className={props.className}
       width={size}
       height={size}
       viewBox="0 0 1000 1000"
@@ -28,11 +33,19 @@ export const OperationalUI = (props: Props) => {
   )
 }
 
-export const Contiamo = (props: Props) => {
+const Contiamo: React.SFC<Props> = props => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
-    <svg width={size} height={size} viewBox="200 160 675 780" strokeWidth="30" fill="none" stroke={color}>
+    <svg
+      className={props.className}
+      width={size}
+      height={size}
+      viewBox="200 160 675 780"
+      strokeWidth="15"
+      fill="none"
+      stroke={color}
+    >
       <path d="M318.6,540c0-150.1,121.7-271.7,271.7-271.7c72.1-0.1,141.2,28.6,192.2,79.6l64-64  c-67.9-68.1-160-106.3-256.2-106.2c-200.1,0-362.3,162.2-362.3,362.3L318.6,540z" />
       <path d="M405.3,540c0-100,81.1-181.2,181.2-181.2c49,0,95.8,19.9,129.8,55.1l66.2-66.2c-50.9-51-120.1-79.7-192.2-79.6  c-150.1,0-271.7,121.7-271.7,271.8H405.3z" />
       <path d="M318.6,540h-90.6c-0.1,96.1,38.1,188.3,106.1,256.2l64-64.1C347.2,681.2,318.5,612.1,318.6,540z" />
@@ -43,18 +56,18 @@ export const Contiamo = (props: Props) => {
   )
 }
 
-export const Labs = (props: Props) => {
+const Labs: React.SFC<Props> = props => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
-    <svg width={size} height={size} viewBox="0 0 1000 1000" fill={color}>
+    <svg className={props.className} width={size} height={size} viewBox="0 0 1000 1000" fill={color}>
       <path d="M500.583,145c66.173,0.154 132.93,17.498 187.467,53.809c9.683,6.447 18.757,13.904 27.439,21.445c21.344,18.427 51.434,23.712 78.618,32.299c23.234,7.339 46.399,16.334 64.746,32.698c21.012,18.743 36.724,42.908 51.13,67.199c22.213,37.456 40.965,77.165 55.529,118.032c6.417,18.008 12.643,36.554 12.406,55.514c-0.427,34.169 -18.943,66.346 -42.878,91.882c-12.919,13.784 -27.744,25.957 -43.122,36.613c-15.253,10.655 -23.217,29.508 -31.93,45.893c-7.142,13.431 -16.302,26.706 -30.863,32.304c-10.592,4.072 -22.853,4.125 -32.755,-1.326c-15.452,-8.506 -23.949,-26.331 -29.856,-43.929c-12.882,-38.383 -15.598,-79.907 -13.813,-120.003c1.078,-24.244 6.756,-47.9 6.279,-72.152c-0.423,-21.514 -4.643,-43.181 -14.737,-62.122c0,0 0.788,4.03 1.386,7.484c5.774,33.362 2.853,67.911 -4.711,101.223c-6.977,30.727 -18.961,60.968 -16.476,92.061c0.372,4.654 1.078,9.289 1.383,13.958c4.221,64.749 -27.336,130.932 -81.906,167.924c-50.935,34.528 -117.16,43.186 -177.158,37.874c-44.513,-3.941 -89.322,-17.681 -124.77,-46.399c-47.434,-38.43 -73.531,-101.342 -67.52,-163.505c0.501,-5.184 1.293,-10.362 1.391,-15.59c0.516,-27.295 -9.324,-53.844 -16.038,-80.838c-8.942,-35.945 -12.97,-73.07 -5.704,-110.256l0.082,-0.415c-13.348,27.929 -15.673,60.919 -10.949,91.023c7.359,46.891 6.454,95.936 -4.813,142.4c-4.381,18.063 -10.391,36.413 -21.856,50.23c-8.804,10.611 -22.216,17.14 -37.177,14.666c-12.182,-2.014 -22.826,-9.622 -30.397,-19.891c-14.156,-19.202 -19.963,-44.471 -38.816,-59.063c-3.468,-2.684 -7.185,-5.026 -10.721,-7.632c-36.346,-26.798 -68.327,-63.102 -75.842,-105.973c-2.903,-16.559 -1.106,-33.557 3.637,-49.831c13.64,-46.801 34.862,-91.737 58.745,-133.298c13.348,-23.225 27.863,-45.99 46.271,-65.415c20.851,-22.004 50.122,-34.215 78.831,-42.959c26.075,-7.941 53.761,-13.235 74.081,-31.28c56.984,-50.606 136.948,-74.236 213.057,-74.65c0.777,-0.003 1.553,-0.004 2.33,-0.004Zm-0.583,555c39.84,0 69.411,-49.713 50,-70c-19.411,-20.287 -79.691,-20.06 -100,0c-20.309,20.06 10.16,70 50,70Z" />
     </svg>
   )
 }
 
-export const Pantheon = (props: Props) => (
-  <svg viewBox="0 0 565.18 565.18" width={props.size} height={props.size}>
+const Pantheon: React.SFC<Props> = props => (
+  <svg className={props.className} viewBox="0 0 565.18 565.18" width={props.size} height={props.size}>
     <title>Pantheon-Logo-CMYK</title>
     <g fill={props.colored ? "#344fa0" : "currentColor"}>
       <path d="M74.47,338.72A3.35,3.35,0,0,0,72.08,343l8.26,23.65a3.35,3.35,0,0,0,4.52,1.84L99.13,362a3.79,3.79,0,0,0,1.94-4.76l-6.95-19.91a3.79,3.79,0,0,0-4.49-2.51Z" />
@@ -128,3 +141,12 @@ export const Pantheon = (props: Props) => (
     </g>
   </svg>
 )
+
+const BrandIcons: BrandIcons = {
+  OperationalUI,
+  Contiamo,
+  Labs,
+  Pantheon,
+}
+
+export default BrandIcons
