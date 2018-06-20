@@ -74,10 +74,12 @@ const ContainerLink = styled("a")(containerStyles)
 const Content = styled("div")(
   ({
     theme,
+    isCondensed,
   }: {
     theme?: OperationalStyleConstants & {
       deprecated: Theme
     }
+    isCondensed: boolean
   }): CssStatic => ({
     textDecoration: "none",
     cursor: "pointer",
@@ -86,7 +88,7 @@ const Content = styled("div")(
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-    height: 73,
+    height: isCondensed ? 60 : 73,
     overflow: "hidden",
     padding: `0 ${theme.space.content}px`,
     width: "100%",
@@ -224,7 +226,7 @@ export class SidenavHeader extends React.Component<Props, State> {
                 }
               }}
             >
-              <Content onClick={this.props.onClick}>
+              <Content onClick={this.props.onClick} isCondensed={Boolean(this.props.condensed)}>
                 <LabelText isActive={isActive}>
                   {this.props.label}
                   <IconContainer>
