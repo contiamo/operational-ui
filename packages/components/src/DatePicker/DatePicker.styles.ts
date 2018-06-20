@@ -170,7 +170,7 @@ export const Input = styled("input")(
     cursor: "pointer",
     border: "1px solid",
     borderColor: "rgb(208, 217, 229)",
-    width: 200,
+    width: "100%",
     position: "relative",
     "&:focus": mixins.inputFocus({
       theme,

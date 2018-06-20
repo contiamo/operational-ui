@@ -143,7 +143,6 @@ class DatePicker extends React.Component<Props, State> {
     const { onChange, placeholder, start, end, label, id, css, className } = this.props
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
-    const FullWidthInput = styled(Input)({ width: "100%" })
 
     const datePickerWithoutLabel = (
       <Container
@@ -167,11 +166,11 @@ class DatePicker extends React.Component<Props, State> {
             <Icon name="X" size={14} />
           </Toggle>
         )}
-        <FullWidthInput
+        <Input
           isExpanded={this.state.isExpanded}
           id={domId}
           readOnly
-          innerRef={node => {
+          innerRef={(node: HTMLElement) => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
