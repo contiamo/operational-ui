@@ -153,6 +153,18 @@ const CloseButton = styled("div")(
   }),
 )
 
+const IconContainer = styled("p")`
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 8px;
+  width: 18px;
+  height: 18px;
+  & > svg {
+    position: relative;
+    top: -2px;
+  }
+`
+
 const Summary = styled("div")`
   display: block;
   font-weight: normal;
@@ -178,10 +190,11 @@ export class SidenavHeader extends React.Component<Props, State> {
   }
 
   render() {
+    const hasChildren = React.Children.count(this.props.children) > 0
     const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
-    const isActive = Boolean(
-      this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`)),
-    )
+    const isActive =
+      Boolean(this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`))) &&
+      hasChildren
 
     // Actual `to` prop should invalidate if the element has sublinks and is active
     const to = isActive && hasChildLinks ? undefined : this.props.to
@@ -212,7 +225,16 @@ export class SidenavHeader extends React.Component<Props, State> {
               }}
             >
               <Content onClick={this.props.onClick}>
-                <LabelText isActive={isActive}>{this.props.label}</LabelText>
+                <LabelText isActive={isActive}>
+                  {this.props.label}
+                  <IconContainer>
+                    {this.props.icon === String(this.props.icon) ? (
+                      <Icon name={this.props.icon as IconName} size={18} />
+                    ) : (
+                      this.props.icon
+                    )}
+                  </IconContainer>
+                </LabelText>
                 {!isActive && <Summary>{truncate(24)(childLabels.join(", "))}</Summary>}
               </Content>
               {React.Children.count(this.props.children) > 0 && (

@@ -6,6 +6,12 @@ Used as headers (top-level links) inside a `Sidenav`.
 <SidenavHeader label="Chapter One" />
 ```
 
+### Usage with icon
+
+```jsx
+<SidenavHeader label="Chapter One" icon="User" />
+```
+
 ### Usage with items
 
 ```jsx
