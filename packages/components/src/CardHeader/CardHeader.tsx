@@ -14,7 +14,7 @@ export interface Props {
   action?: React.ReactNode
 }
 
-const Container = styled.div(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   label: "cardheader",
