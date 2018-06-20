@@ -1,11 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Code Should render 1`] = `
-<pre>
-  <code
-    class="json css-gs8u2g"
-  >
-    {
+<pre
+  class="css-14k7z6c"
+>
+  <pre>
+    <code
+      class="json css-1408fvk"
+    >
+      {
   "properties": {
     "startAt": {
       "type": "string",
@@ -17,6 +20,7 @@ exports[`Code Should render 1`] = `
     }
   }
 }
-  </code>
+    </code>
+  </pre>
 </pre>
 `;
