@@ -3,25 +3,20 @@ import * as Icon from "react-feather"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "@operational/theme"
 import { Css, CssStatic } from "../types"
-import { Button } from "../"
+import Button from "../Button/Button"
 
 export interface Props {
   id?: string
   /** `css` prop as expected in a glamorous component */
-
   css?: Css
   className?: string
   /** Function to be executed after changing page */
-
   onChange?: (page: number) => void
   /** Index of the current selected page */
-
   page?: number
   /** Total number of items */
-
   itemCount: number
   /** Number of items per page */
-
   itemsPerPage: number
 }
 

@@ -19,16 +19,14 @@ export class Component extends React.Component<{}, State> {
 
   render() {
     return (
-      <>
-        <Paginator
-          page={this.state.page}
-          itemCount={345}
-          itemsPerPage={100}
-          onChange={(page: number) => {
-            this.setState(prevState => ({ page }))
-          }}
-        />
-      </>
+      <Paginator
+        page={this.state.page}
+        itemCount={345}
+        itemsPerPage={100}
+        onChange={(page: number) => {
+          this.setState({ page })
+        }}
+      />
     )
   }
 }
