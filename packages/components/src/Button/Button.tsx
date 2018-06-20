@@ -64,7 +64,7 @@ const containerStyles: Interpolation<Props> = ({
     padding: `0 ${condensed ? theme.space.small : theme.space.content}px`,
     borderRadius: theme.borderRadius,
     border: 0,
-    boxShadow: isWhite(backgroundColor) && `0 0 0 1px ${theme.color.border.default} inset`,
+    boxShadow: isWhite(backgroundColor) && `0 0 0 1px ${theme.color.border.disabled} inset`,
     cursor: disabled ? "auto" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
