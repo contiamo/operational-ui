@@ -6,7 +6,7 @@ import PageArea from "../PageArea/PageArea"
 
 export interface Props {
   /** Page title */
-  title: string
+  title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
   /** Content of the page */
