@@ -9,9 +9,9 @@ export const docsUrl = `${constants.docsBaseUrl}/#code`
 export const snippetUrl = `${constants.snippetBaseUrl}/Components/Codes.tsx`
 
 export const Component = () => (
-  <Code syntax="typescript">
-    {`
-interface Person {
+  <Code
+    syntax="typescript"
+    code={`interface Person {
   firstName: string;
   lastName: string;
 }
@@ -22,7 +22,6 @@ function greeter(person: Person) {
 
 let user = { firstName: "Jane", lastName: "User" };
 
-document.body.innerHTML = greeter(user);
-    `}
-  </Code>
+document.body.innerHTML = greeter(user);`}
+  />
 )

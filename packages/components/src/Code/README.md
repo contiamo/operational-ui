@@ -4,8 +4,7 @@ Box for displaying formatted code snippets.
 
 ```jsx
 <h3>JSON</h3>
-<Code syntax="json">
-  {`{
+<Code syntax="json" code={`{
   "properties": {
     "startAt": {
       "type": "string",
@@ -16,15 +15,12 @@ Box for displaying formatted code snippets.
       "format": "date-time"
     }
   }
-}`}
-</Code>
+}`}></Code>
 ```
 
 ```jsx
 <h3>TypeScript</h3>
-<Code syntax="ts">
-  {`
-interface Person {
+<Code syntax="ts" code={`interface Person {
   firstName: string;
   lastName: string;
 }
@@ -35,7 +31,5 @@ function greeter(person: Person) {
 
 let user = { firstName: "Jane", lastName: "User" };
 
-document.body.innerHTML = greeter(user);
-  `}
-</Code>
+document.body.innerHTML = greeter(user);`}></Code>
 ```

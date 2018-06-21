@@ -83,6 +83,8 @@ export interface Props {
   id?: string
   /** Language for syntax highlighting */
   syntax?: string
+  /** Code string to highlight */
+  code?: string
   children?: any
 }
 
@@ -98,13 +100,10 @@ const StyledHighlight = styled(Highlight)(
   },
 )
 
-
-const Code = (props: Props) => {
-  return (
-    <StyledHighlight style={{ background: "transparent" }} className={props.syntax}>
-      {props.children}
-    </StyledHighlight>
-  )
-}
+const Code = (props: Props) => (
+  <StyledHighlight style={{ background: "transparent" }} className={props.syntax}>
+    {props.code}
+  </StyledHighlight>
+)
 
 export default Code
