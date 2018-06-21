@@ -14,20 +14,30 @@ export interface Props {
   children?: any
 }
 
-const StyledHighlight = styled(Highlight)(
+const Container = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }): {} => {
     return {
       margin: 0,
       backgroundColor: "rgba(20, 153, 206, 0.05)",
       border: "1px solid rgba(20, 153, 206, 0.1)",
       borderRadius: theme.borderRadius,
-      padding: theme.space.small,
+      padding: `0 ${theme.space.small}px`,
+    }
+  },
+)
+
+const StyledHighlight = styled(Highlight)(
+  (): {} => {
+    return {
+      background: "transparent",
     }
   },
 )
 
 const Code = (props: Props) => (
-  <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{props.code}</StyledHighlight>
+  <Container>
+    <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{props.code}</StyledHighlight>
+  </Container>
 )
 
 export default Code
