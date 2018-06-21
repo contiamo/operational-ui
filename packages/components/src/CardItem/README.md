@@ -4,10 +4,8 @@ A card item.
 
 ```jsx
 <Card title="My Bundle">
-  <CardItem title="Bundle Name">
-    <Input left placeholder="My Bundle" />
-    <Button color="grey">Save</Button>
-  </CardItem>
+  <Input label="Hello World" placeholder="My Bundle" />
+  <Button color="grey">Save</Button>
   <CardItem title="Deployed" value="Last friday" />
   <CardItem title="Updated" value="Last monday" />
 </Card>

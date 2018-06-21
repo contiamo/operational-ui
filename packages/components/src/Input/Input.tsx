@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { Css } from "../types"
 import { Icon } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
@@ -61,9 +60,7 @@ const InputField = styled("input")(
       ? {}
       : {
           display: "block",
-          width: "100%",
         }),
-    label: "input",
     minWidth: 300,
     height: 36,
     padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,

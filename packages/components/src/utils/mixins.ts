@@ -24,11 +24,8 @@ export const LabelText = styled("span")(
     display: "inline-block",
     verticalAlign: "middle",
     marginBottom: theme.space.base,
-    /**
-     * Set font explicitly so it doesn't inherit overrides on the parent
-     * (e.g. monospaced code in text areas)
-     */
-    opacity: 0.4,
+    fontWeight: "bold",
+    color: theme.color.text.lightest,
   }),
 )
 

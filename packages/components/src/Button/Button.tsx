@@ -60,6 +60,7 @@ const containerStyles: Interpolation<Props> = ({
     fontFamily: theme.font.family.main,
     display: "inline-flex",
     alignItems: "center",
+    justifyContent: "center",
     padding: `0 ${condensed ? theme.space.small : theme.space.content}px`,
     borderRadius: theme.borderRadius,
     border: 0,
