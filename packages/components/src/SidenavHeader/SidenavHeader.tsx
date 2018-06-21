@@ -58,12 +58,6 @@ const containerStyles = ({
     borderLeft: "4px solid",
     borderLeftColor: isActive ? stripColor : "transparent",
     borderBottomColor: theme.deprecated.colors.separator,
-
-    /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: isActive ? "#F8F8F8" : "transparent",
-    ":hover": {
-      backgroundColor: "#F8F8F8",
-    },
   }
 }
 
@@ -116,6 +110,7 @@ const ItemsContainer = styled("div")(
       deprecated: Theme
     }
   }): {} => ({
+    animation: `${fadeIn} .15s forwards ease`,
     position: "relative",
     top: -16,
     marginTop: -10,

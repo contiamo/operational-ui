@@ -31,6 +31,7 @@ const containerStyles = ({
   display: "flex",
   padding: `0 ${theme.space.content * 0.5}px`,
   height: size,
+  cursor: "pointer",
   position: "relative",
   width: "100%",
   alignItems: "center",
@@ -43,13 +44,11 @@ const containerStyles = ({
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
     textDecoration: "none",
-
-    /** @todo Add to theme once colors are updated across codebase */
-    color: isActive ? theme.deprecated.colors.linkText : theme.color.text.lightest,
+    color: isActive ? theme.color.primary : theme.color.text.lightest,
   },
   "&:hover": {
-    /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: theme.color.background.light,
+    backgroundColor: theme.color.background.lighter,
+    color: isActive ? theme.color.primary : theme.color.text.dark,
   },
 })
 
