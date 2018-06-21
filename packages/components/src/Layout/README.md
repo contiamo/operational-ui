@@ -21,7 +21,7 @@ const sidebar = (
 
 // Container must set the height explicitly.
 // This component will set height to 100%.
-;<div style={{ height: 300 }}>
+;<div style={{ height: 400 }}>
   <Layout
     sidenav={sidebar}
     header={
@@ -67,7 +67,7 @@ const sidebar = (
     </SidenavHeader>
   </Sidenav>
 )
-;<div style={{ height: 300 }}>
+;<div style={{ height: 400 }}>
   <Layout
     loading
     sidenav={sidebar}
