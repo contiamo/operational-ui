@@ -53,9 +53,9 @@ const actions = (
 
 ```jsx
 const Tab = n => () => (
-  <Page>
+  <PageContent>
     <Card title={`${n} Tab`} />
-  </Page>
+  </PageContent>
 )
 ;<Page
   title="Bundle detail"
@@ -71,9 +71,9 @@ const Tab = n => () => (
 
 ```jsx
 const Tab = n => () => (
-  <Page>
+  <PageContent>
     <Card title={`${n} Tab`} />
-  </Page>
+  </PageContent>
 )
 ;<Page
   title="Bundle detail"
@@ -85,4 +85,17 @@ const Tab = n => () => (
     { name: "functions", component: Tab("functions") },
   ]}
 />
+```
+
+### With different layout
+
+```jsx
+;<Page title="Side on left!" areas="side main" fill>
+  <PageArea name="side">
+    <Card title="Side part">I'm on the side part</Card>
+  </PageArea>
+  <PageArea name="main">
+    <Card title="Main part">I'm on the main part</Card>
+  </PageArea>
+</Page>
 ```

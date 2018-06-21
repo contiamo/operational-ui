@@ -1,8 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
+import PageContent from "../PageContent/PageContent"
 
 export interface Props {
   /** Page title */
@@ -70,29 +71,6 @@ const ViewContainer = styled("div")(({ theme }: { theme?: OperationalStyleConsta
   overflow: "auto",
 }))
 
-const Grid = styled("div")(
-  (props: {
-    children?: React.ReactNode
-    fill?: boolean
-    theme?: OperationalStyleConstants
-    areas?: Props["areas"]
-  }) => {
-    const grid = React.Children.count(props.children) > 1 ? "main side" : "main"
-
-    return {
-      display: "grid",
-      gridTemplateColumns: grid.split(" ").length > 1 ? "auto 280px" : "auto",
-      gridTemplateAreas: props.areas ? `"${props.areas}"` : `"${grid}"`,
-      gridGap: props.theme.space.content,
-      maxWidth: props.fill ? "none" : 1150,
-      minWidth: 800,
-      width: "100%",
-      height: `calc(100% - ${props.theme.titleHeight}px)`,
-      padding: props.theme.space.element,
-    }
-  },
-)
-
 const initialState = {
   activeTab: 0,
 }
@@ -117,7 +95,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   }
 
   render() {
-    const { children, title, actions, tabs, fill = false, areas } = this.props
+    const { children, title, actions, tabs, areas, fill = false } = this.props
     const { activeTab } = this.state
     const hasOnlyOneChild = React.Children.count(children) === 1
     const CurrentTab = tabs && tabs[activeTab].component
@@ -143,9 +121,9 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
           </>
         ) : (
           <ViewContainer>
-            <Grid areas={areas} fill={fill}>
+            <PageContent areas={areas} fill={fill}>
               {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
-            </Grid>
+            </PageContent>
           </ViewContainer>
         )}
       </Container>

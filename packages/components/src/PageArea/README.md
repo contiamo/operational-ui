@@ -5,15 +5,15 @@ The way to give more structure to your page
 In this case `PageArea` is implicit
 
 ```jsx
-<Page>
+<PageContent>
   <Card title="Bundles" />
-</Page>
+</PageContent>
 ```
 
 ### With 2 columns
 
 ```jsx
-<Page areas="main side">
+<PageContent areas="main side">
   <PageArea name="main">
     <Card title="My bundle" />
   </PageArea>
@@ -22,13 +22,13 @@ In this case `PageArea` is implicit
     <Card title="Sync" />
     <Card title="Repository" />
   </PageArea>
-</Page>
+</PageContent>
 ```
 
 ### With 2 columns (reverse areas)
 
 ```jsx
-<Page areas="side main">
+<PageContent areas="side main">
   <PageArea name="main">
     <Card title="My bundle">I'm in the right!</Card>
   </PageArea>
@@ -37,13 +37,13 @@ In this case `PageArea` is implicit
     <Card title="Sync" />
     <Card title="Repository" />
   </PageArea>
-</Page>
+</PageContent>
 ```
 
 ### With 2 columns and full width
 
 ```jsx
-<Page areas="side main" fill>
+<PageContent areas="side main" fill>
   <PageArea name="main">
     <Card title="My bundle" />
   </PageArea>
@@ -52,14 +52,14 @@ In this case `PageArea` is implicit
     <Card title="Sync" />
     <Card title="Repository" />
   </PageArea>
-</Page>
+</PageContent>
 ```
 
 ### Inside tabs
 
 ```jsx
 const Overview = () => (
-  <Page areas="side main" fill>
+  <PageContent areas="side main" fill>
     <PageArea name="main">
       <Card title="My bundle" />
     </PageArea>
@@ -68,7 +68,7 @@ const Overview = () => (
       <Card title="Sync" />
       <Card title="Repository" />
     </PageArea>
-  </Page>
+  </PageContent>
 )
 ;<Page title="Bundle detail" compactHeader tabs={[{ name: "overview", component: Overview }]} />
 ```

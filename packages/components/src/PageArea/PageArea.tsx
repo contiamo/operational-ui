@@ -3,7 +3,7 @@ import styled from "react-emotion"
 
 export interface PageAreaProps {
   /** Name of the area */
-  name?: string
+  name?: "main" | "side"
   /** Your content */
   children?: React.ReactNode
 }
