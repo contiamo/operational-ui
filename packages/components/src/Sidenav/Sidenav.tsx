@@ -47,7 +47,6 @@ const Container = styled("div")(
     return {
       color,
       background: theme.deprecated.colors.white,
-      label: "sidenav",
       width: sidenavExpandedWidth,
       borderRight: "1px solid",
       borderRightColor: theme.deprecated.colors.separator,

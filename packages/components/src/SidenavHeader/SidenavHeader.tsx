@@ -37,8 +37,6 @@ export interface Props {
   children?: React.ReactNode
 }
 
-export interface State {}
-
 const containerStyles = ({
   theme,
   color,
@@ -102,10 +100,11 @@ const LabelText = styled("p")`
   letter-spacing: 0.25;
   text-transform: uppercase;
   white-space: nowrap;
+  user-select: none;
   margin: 0;
   ${({ isActive, theme }: { isActive: boolean; theme?: OperationalStyleConstants }) => `
-    color: ${theme.color.text.dark},
-    font-size: ${theme.font.size.body}px,
+    color: ${theme.color.text.dark};
+    font-size: ${theme.font.size.body}px;
   `};
 `
 
@@ -136,9 +135,9 @@ const CloseButton = styled("div")(
     display: "none",
     alignItems: "center",
     justifyContent: "center",
-    width: theme.space.content * 1.5,
-    height: theme.space.content * 1.5,
-    top: theme.space.content * 1,
+    width: 24,
+    height: 24,
+    top: 16,
     right: theme.space.content,
     color: theme.deprecated.colors.info,
     ".op_sidenavheader:hover &": {
@@ -166,6 +165,7 @@ const Summary = styled("div")`
   display: block;
   font-weight: normal;
   text-transform: none;
+  user-select: none;
   margin-top: 4px;
   ${({ theme, isActive }: { theme?: OperationalStyleConstants; isActive: boolean }) => `
     font-size: ${theme.font.size.fineprint}px;
@@ -182,74 +182,71 @@ const truncate = (maxLength: number) => (text: string) => {
   return text.slice(0, maxLength) + "..."
 }
 
-export class SidenavHeader extends React.Component<Props, State> {
-  state = {}
+const SidenavHeader = (props: Props) => {
+  const isActive = Boolean(props.active)
 
-  render() {
-    const hasChildren = Boolean(this.props.children)
-    const hasChildLinks = React.Children.toArray(this.props.children).some(child =>
-      Boolean((child as { props: SidenavItemProps }).props.to),
-    )
+  // The implementation of this component relies on the fact that it only has valid
+  // `SidenavItem` components as children. The type casting here expresses that assumption.
+  const childSidenavItems = (React.Children.toArray(props.children) || []) as { props: SidenavItemProps }[]
 
-    const isActive = Boolean(this.props.active)
+  const hasChildLinks = childSidenavItems.some(child => Boolean(child.props.to))
 
-    // Actual `to` prop should invalidate if the element has sublinks and is active
-    const to = isActive && hasChildLinks ? undefined : this.props.to
-    const ContainerComponent = to ? ContainerLink : Container
-    const childLabels: string[] = React.Children.map(this.props.children, child => (child as any).props.label) || []
-    return (
-      <ContextConsumer>
-        {(ctx: Context) => {
-          return (
-            <ContainerComponent
-              id={this.props.id}
-              href={to}
-              color={this.props.color}
-              isActive={isActive}
-              className={[this.props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
-              onClick={(ev: React.SyntheticEvent<Node>) => {
-                this.props.onClick && this.props.onClick()
-                this.props.onToggle && this.props.onToggle(!this.props.active)
+  // Actual `to` prop should invalidate if the element has sublinks and is active
+  const to = isActive && hasChildLinks ? undefined : props.to
+  const ContainerComponent = to ? ContainerLink : Container
 
-                if (!isModifiedEvent(ev) && ctx.pushState && this.props.to) {
-                  ev.preventDefault()
+  return (
+    <ContextConsumer>
+      {(ctx: Context) => {
+        return (
+          <ContainerComponent
+            id={props.id}
+            href={to}
+            color={props.color}
+            isActive={isActive}
+            className={[props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
+            onClick={(ev: React.SyntheticEvent<Node>) => {
+              props.onClick && props.onClick()
+              props.onToggle && props.onToggle(!props.active)
 
-                  // Even if the `props.to` prop was ignored, redirect should still happen here
-                  ctx.pushState(this.props.to)
-                }
-              }}
-            >
-              <Content onClick={this.props.onClick} isCondensed={Boolean(this.props.condensed)}>
-                <LabelText isActive={isActive}>
-                  {this.props.label}
-                  <IconContainer>
-                    {this.props.icon === String(this.props.icon) ? (
-                      <Icon name={this.props.icon as IconName} size={18} />
-                    ) : (
-                      this.props.icon
-                    )}
-                  </IconContainer>
-                </LabelText>
-                {!this.props.condensed && <Summary isActive={isActive}>{truncate(24)(childLabels.join(", "))}</Summary>}
-              </Content>
-              {React.Children.count(this.props.children) > 0 && (
-                <CloseButton
-                  onClick={(ev: React.SyntheticEvent<Node>) => {
-                    // Prevent clicks on parent in order to avoid conflicting behavior
-                    ev.stopPropagation()
-                    this.props.onToggle && this.props.onToggle(!this.props.active)
-                  }}
-                >
-                  <Icon name={this.props.active ? "ChevronUp" : "ChevronDown"} />
-                </CloseButton>
+              if (!isModifiedEvent(ev) && ctx.pushState && props.to) {
+                ev.preventDefault()
+
+                // Even if the `props.to` prop was ignored, redirect should still happen here
+                ctx.pushState(props.to)
+              }
+            }}
+          >
+            <Content onClick={props.onClick} isCondensed={Boolean(props.condensed)}>
+              <LabelText isActive={isActive}>
+                {props.label}
+                <IconContainer>
+                  {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
+                </IconContainer>
+              </LabelText>
+              {!props.condensed && (
+                <Summary isActive={isActive}>
+                  {truncate(24)(childSidenavItems.map(child => child.props.label).join(", "))}
+                </Summary>
               )}
-              {isActive && <ItemsContainer>{this.props.children}</ItemsContainer>}
-            </ContainerComponent>
-          )
-        }}
-      </ContextConsumer>
-    )
-  }
+            </Content>
+            {childSidenavItems.length > 0 && (
+              <CloseButton
+                onClick={(ev: React.SyntheticEvent<Node>) => {
+                  // Prevent clicks on parent in order to avoid conflicting behavior
+                  ev.stopPropagation()
+                  props.onToggle && props.onToggle(!props.active)
+                }}
+              >
+                <Icon name={props.active ? "ChevronUp" : "ChevronDown"} />
+              </CloseButton>
+            )}
+            {isActive && <ItemsContainer>{props.children}</ItemsContainer>}
+          </ContainerComponent>
+        )
+      }}
+    </ContextConsumer>
+  )
 }
 
 export default SidenavHeader

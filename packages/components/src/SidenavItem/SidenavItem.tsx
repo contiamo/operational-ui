@@ -29,15 +29,16 @@ const containerStyles = ({
   isActive: boolean
 }): CssStatic => ({
   display: "flex",
-  padding: `0 ${theme.deprecated.spacing * 0.5}px`,
-  label: "sidenavitem",
+  padding: `0 ${theme.space.content * 0.5}px`,
   height: size,
   position: "relative",
   width: "100%",
   alignItems: "center",
   justifyContent: "flex-start",
   whiteSpace: "nowrap",
-  fontSize: 14,
+  color: theme.color.text.light,
+  userSelect: "none",
+  fontSize: theme.font.size.body,
   fontWeight: 400,
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
@@ -88,11 +89,11 @@ const SidenavItem = (props: Props) => {
           id={props.id}
           className={props.className}
           onClick={(ev: React.SyntheticEvent<Node>) => {
+            ev.stopPropagation()
             props.onClick && props.onClick()
 
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
               ev.preventDefault()
-              ev.stopPropagation()
               ctx.pushState(props.to)
             }
           }}
