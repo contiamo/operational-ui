@@ -1,10 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { WithTheme, Css, CssStatic } from "../types"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Progress } from "../"
-import { Props as SidenavProps } from "../Sidenav/Sidenav"
-import { sidenavExpandedWidth } from "../constants"
 
 export interface Props {
   /** Side navigation, see `Sidenav` component */
@@ -27,13 +24,11 @@ const Content = styled("div")(
   }),
 )
 
-const Main = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    display: "block",
-    overflow: "auto",
-    backgroundColor: theme.deprecated.colors.white,
-  }),
-)
+const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  display: "block",
+  overflow: "auto",
+  backgroundColor: theme.color.white,
+}))
 
 const Container = styled("div")(
   {
