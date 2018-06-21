@@ -7,8 +7,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   id?: string
   /** Index of the active tab. */
@@ -156,7 +154,7 @@ const Tabs = (props: PropsWithTheme) => {
     </TabTitle>
   ))
   return (
-    <Container css={props.css} className={props.className} id={props.id}>
+    <Container className={props.className} id={props.id}>
       <TabList>{tabTitles}</TabList>
       <Content>{activePanel}</Content>
     </Container>

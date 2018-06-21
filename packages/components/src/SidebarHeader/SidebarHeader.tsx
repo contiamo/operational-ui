@@ -6,9 +6,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Is it open? */
 
@@ -90,7 +87,7 @@ const Header = styled("div")(
 )
 
 const SidebarHeader = (props: Props) => (
-  <Container css={props.css} id={props.id} className={props.className}>
+  <Container id={props.id} className={props.className}>
     <Header isOpen={!!props.open} onClick={props.onToggle}>
       {props.label}
     </Header>

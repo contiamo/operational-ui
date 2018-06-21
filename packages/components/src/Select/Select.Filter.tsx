@@ -5,7 +5,6 @@ import { darken } from "@operational/utils"
 
 export interface Props {
   id?: string | number
-  css?: any
   className?: string
   placeholder?: string
   onChange?: (newVal: string) => void
@@ -37,7 +36,7 @@ const Container = styled("div")(
 )
 
 const SelectFilter = (props: Props) => (
-  <Container key={props.id} css={props.css} className={props.className}>
+  <Container key={props.id} className={props.className}>
     <input
       onClick={e => e.stopPropagation()}
       onChange={(e: any) => {

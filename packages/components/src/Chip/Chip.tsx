@@ -9,9 +9,6 @@ export interface Props {
   /** Id */
   id?: string
 
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
-
   /** Chip color, provided as a hex value or a named theme color */
   color?: string
 
@@ -81,7 +78,7 @@ const Action = styled("div")(
 )
 
 const Chip: React.SFC<Props> = (props: Props) => (
-  <Container id={props.id} className={props.className} css={props.css} color={props.color}>
+  <Container id={props.id} className={props.className} color={props.color}>
     <Content onClick={props.onClick}>{props.children}</Content>
     {props.onIconClick && (
       <Action onClick={props.onIconClick}>

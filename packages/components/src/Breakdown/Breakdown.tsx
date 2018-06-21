@@ -8,9 +8,6 @@ import { IconName } from "../"
 export interface Props {
   /** Id */
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   /** Class name */
 
   className?: string
@@ -169,7 +166,6 @@ const Span = styled("span")({ fontFeatureSettings: "'tnum'" })
 const Breakdown: React.SFC<Props> = props => (
   <Container
     id={props.id}
-    css={props.css}
     className={props.className}
     onClick={props.onClick}
     onMouseEnter={props.onMouseEnter}

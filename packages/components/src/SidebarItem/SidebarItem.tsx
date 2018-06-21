@@ -6,9 +6,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   children?: React.ReactNode
   onClick?: () => void
@@ -65,7 +62,6 @@ const Container = styled("div")(
 const SidebarItem = (props: Props) => (
   <Container
     id={props.id}
-    css={props.css}
     onClick={props.onClick}
     className={props.className}
     isActive={!!props.active}

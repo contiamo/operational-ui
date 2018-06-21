@@ -9,9 +9,6 @@ import { Icon } from "../"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Show an error instead of the progress */
 
@@ -125,7 +122,7 @@ const Action = styled("div")(
 )
 
 const Progress: React.SFC<Props> = props => (
-  <Container id={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} className={props.className}>
     <Bar isError={Boolean(props.error)} />
     {props.error ? (
       <ErrorMessage>

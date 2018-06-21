@@ -8,9 +8,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Main label for the header */
 
@@ -175,7 +172,6 @@ export class SidenavHeader extends React.Component<Props, State> {
             <ContainerComponent
               id={this.props.id}
               href={to}
-              css={this.props.css}
               color={this.props.color}
               isActive={isActive}
               className={[this.props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}

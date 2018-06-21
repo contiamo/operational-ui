@@ -6,9 +6,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Content */
 
@@ -84,9 +81,9 @@ const Container = styled("li")(
   }),
 )
 
-const TimelineItem = ({ css, id, className, children, color = "info" }: Props) => {
+const TimelineItem = ({ id, className, children, color = "info" }: Props) => {
   return (
-    <Container id={id} css={css} className={className}>
+    <Container id={id} className={className}>
       <StatusContainer color={color} />
       <Content>{children}</Content>
     </Container>

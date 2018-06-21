@@ -7,11 +7,8 @@ import { WithTheme, Css, CssStatic } from "../types"
 import { isModifiedEvent } from "../utils"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Navigation property à la react-router <Link/> */
-
   to?: string
   children?: React.ReactNode
   icon?: IconName | React.ReactNode
@@ -43,7 +40,6 @@ const Breadcrumb = (props: Props) => {
       {(ctx: Context) => (
         <ContainerComponent
           className={props.className}
-          css={props.css}
           href={props.to}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {

@@ -5,8 +5,6 @@ import { readableTextColor, darken } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   id?: string
   /** The label of the tile */
@@ -41,7 +39,7 @@ const Label = styled("small")(
 )
 
 const Tile = (props: Props) => (
-  <Container id={props.id} css={props.css} className={props.className}>
+  <Container id={props.id} className={props.className}>
     <Label>{props.label}</Label>
     <Content>{props.children}</Content>
   </Container>

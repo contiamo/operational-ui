@@ -6,8 +6,6 @@ import { Icon } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   /** Message contents, can be any html element/React fragment. */
 
@@ -73,7 +71,7 @@ const IconContainer = styled("div")(
 )
 
 const Message = (props: Props) => (
-  <Container css={props.css} className={props.className} color={props.color}>
+  <Container className={props.className} color={props.color}>
     <IconContainer onClick={props.onClose}>
       <Icon name="X" />
     </IconContainer>

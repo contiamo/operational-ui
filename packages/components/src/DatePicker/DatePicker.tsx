@@ -27,9 +27,6 @@ export interface Props {
       end?: string
     },
   ) => void
-  /** `css` prop as expected in a glamorous component */
-
-  css?: Css
   className?: string
   /** Placeholder text when no dates selected */
 
@@ -140,7 +137,7 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   render() {
-    const { onChange, placeholder, start, end, label, id, css, className } = this.props
+    const { onChange, placeholder, start, end, label, id, className } = this.props
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
 

@@ -4,8 +4,6 @@ import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
   className?: string
   children?: React.ReactNode
 }
@@ -31,10 +29,6 @@ const Container = styled("div")(
   }),
 )
 
-const Messages = (props: Props) => (
-  <Container css={props.css} className={props.className}>
-    {props.children}
-  </Container>
-)
+const Messages = (props: Props) => <Container className={props.className}>{props.children}</Container>
 
 export default Messages
