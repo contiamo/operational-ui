@@ -9,35 +9,19 @@ export interface Props {
   id?: string
   /** Language for syntax highlighting */
   syntax?: string
-  /** Code string to highlight */
-  code?: string
-  children?: any
+  children?: string | string[]
 }
 
-const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => {
-    return {
-      margin: 0,
-      backgroundColor: "rgba(20, 153, 206, 0.05)",
-      border: "1px solid rgba(20, 153, 206, 0.1)",
-      borderRadius: theme.borderRadius,
-      padding: `0 ${theme.space.small}px`,
-    }
-  },
-)
+const Code = styled(Highlight)(({ theme }: { theme?: OperationalStyleConstants }) => {
+  return {
+    margin: 0,
+    backgroundColor: "rgba(20, 153, 206, 0.05)",
+    border: "1px solid rgba(20, 153, 206, 0.1)",
+    borderRadius: theme.borderRadius,
+    padding: `${theme.space.small}px`,
+  }
+})
 
-const StyledHighlight = styled(Highlight)(
-  (): {} => {
-    return {
-      background: "transparent",
-    }
-  },
-)
+const StyledCode = (props: Props) => <Code className={`${css(styles)} ${props.syntax}`}>{props.children}</Code>
 
-const Code = (props: Props) => (
-  <Container>
-    <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{props.code}</StyledHighlight>
-  </Container>
-)
-
-export default Code
+export default StyledCode
