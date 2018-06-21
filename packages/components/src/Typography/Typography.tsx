@@ -14,9 +14,8 @@ const Title = styled("h1")(
   }) => ({
     fontSize: theme.font.size.title,
     fontFamily: theme.font.family.main,
-    padding: `${theme.space.element / 2}px ${theme.space.element}px`,
     label: "title",
-    fontWeight: 400,
+    fontWeight: 500,
     margin: 0,
     color: theme.color.text[color || "default"],
   }),

@@ -42,15 +42,16 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
-  padding: `${theme.space.base}px 0`,
+  padding: theme.space.content,
   height: theme.titleHeight,
   fontWeight: 500,
 }))
 
-const tabsBarHeight = 37
+const tabsBarHeight = 55
 
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   display: "flex",
+  alignItems: "flex-end",
   height: tabsBarHeight,
   backgroundColor: theme.color.primary,
 }))
@@ -61,6 +62,7 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   textTransform: "uppercase",
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.small,
+  fontWeight: 500,
   padding: `${theme.space.element / 2}px ${theme.space.element}px`,
   borderBottom: active ? `2px solid ${theme.color.white}` : `2px solid transparent`,
   ":hover": {
@@ -72,6 +74,10 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
 const ViewContainer = styled("div")(({ theme, isInTab }: { theme?: OperationalStyleConstants; isInTab?: boolean }) => ({
   height: `calc(100% - ${isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
   overflow: "auto",
+}))
+
+const ActionsContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  marginLeft: theme.space.element,
 }))
 
 const initialState = {
@@ -108,7 +114,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         {title && (
           <TitleBar>
             <Title color="white">{title}</Title>
-            {actions}
+            <ActionsContainer>{actions}</ActionsContainer>
           </TitleBar>
         )}
         {tabs ? (

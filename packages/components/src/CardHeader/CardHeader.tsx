@@ -43,7 +43,7 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
     alignItems: "center",
     textDecoration: "none",
   },
-  [`& ${Icon}`]: {
+  "& svg": {
     marginTop: -3,
     marginLeft: theme.space.base,
     width: 12,

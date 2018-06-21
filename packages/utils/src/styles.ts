@@ -27,6 +27,7 @@ body {
 a:link,
 a:visited {
   color: ${theme.colors.info};
+  text-decoration: none;
 }
 
 a:hover: {

@@ -58,6 +58,7 @@ const containerStyles: Interpolation<Props> = ({
     label: "button",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
+    fontWeight: 500,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
