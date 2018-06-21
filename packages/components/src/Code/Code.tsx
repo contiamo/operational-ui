@@ -1,11 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled, { css } from "react-emotion"
 import { OperationalStyleConstants } from "@operational/theme"
 import Highlight from "react-highlight"
-import { injectGlobal } from "emotion"
-import styles from "./global_styles"
-
-injectGlobal`${styles}`
+import styles from "./styles"
 
 export interface Props {
   /** Id */
@@ -30,9 +27,7 @@ const StyledHighlight = styled(Highlight)(
 )
 
 const Code = (props: Props) => (
-  <StyledHighlight style={{ background: "transparent" }} className={props.syntax}>
-    {props.code}
-  </StyledHighlight>
+  <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{props.code}</StyledHighlight>
 )
 
 export default Code
