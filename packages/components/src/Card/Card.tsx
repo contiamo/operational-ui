@@ -23,12 +23,12 @@ export interface Props<T = {}> {
 }
 
 const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  label: "card",
   marginBottom: theme.space.element,
   borderTop: `1px solid ${theme.color.separators.light}`,
   padding: 20,
   boxShadow: `0px 1px 5px #d3d1d1`,
   backgroundColor: theme.color.white,
+  wordWrap: "break-word",
   "& > img": {
     maxWidth: "100%",
   },

@@ -111,7 +111,7 @@ const color = {
  */
 const font = {
   family: {
-    main: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    main: `"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif`,
     code: "Menlo, monospace",
   },
   size: {
@@ -166,6 +166,7 @@ const constants = {
   color,
   borderRadius: 2,
   sidebarWidth: 256,
+  titleHeight: 45,
 }
 
 export type OperationalStyleConstants = Readonly<typeof constants>

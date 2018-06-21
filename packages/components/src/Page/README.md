@@ -12,6 +12,20 @@ Here is a simple usage example:
 </Page>
 ```
 
+### Sticky Header
+
+Here is a simple usage example:
+
+```jsx
+;<div style={{ height: 200 }}>
+  <Page title="Settings Page">
+    {Array(50)
+      .fill("Hello, this is page content")
+      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+  </Page>
+</div>
+```
+
 ### With actions
 
 ```jsx
@@ -30,9 +44,9 @@ const actions = (
 
 ```jsx
 const Tab = n => () => (
-  <Page>
+  <PageContent>
     <Card title={`${n} Tab`} />
-  </Page>
+  </PageContent>
 )
 ;<Page
   title="Bundle detail"
@@ -44,13 +58,40 @@ const Tab = n => () => (
 />
 ```
 
+### Sticky Header with Tabs
+
+```jsx
+const Tab = n => () => (
+  <PageContent>
+    {Array(50)
+      .fill("Hello, this is page content")
+      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+  </PageContent>
+)
+;<div style={{ height: 200 }}>
+  <Page
+    actions={
+      <Button condensed icon="ExternalLink" color="ghost">
+        Go somewhere else
+      </Button>
+    }
+    title="Bundle detail"
+    tabs={[
+      { name: "overview", component: Tab("overview") },
+      { name: "jobs", component: Tab("jobs") },
+      { name: "functions", component: Tab("functions") },
+    ]}
+  />
+</div>
+```
+
 ### With tabs and handlers
 
 ```jsx
 const Tab = n => () => (
-  <Page>
+  <PageContent>
     <Card title={`${n} Tab`} />
-  </Page>
+  </PageContent>
 )
 ;<Page
   title="Bundle detail"
@@ -62,4 +103,17 @@ const Tab = n => () => (
     { name: "functions", component: Tab("functions") },
   ]}
 />
+```
+
+### With different layout
+
+```jsx
+;<Page title="Side on left!" areas="side main" fill>
+  <PageArea name="side">
+    <Card title="Side part">I'm on the side part</Card>
+  </PageArea>
+  <PageArea name="main">
+    <Card title="Main part">I'm on the main part</Card>
+  </PageArea>
+</Page>
 ```

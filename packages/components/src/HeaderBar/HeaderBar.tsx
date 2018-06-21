@@ -19,24 +19,21 @@ export interface HeaderProps {
 const Bar = styled("div")(
   {
     display: "grid",
-    width: "100vw",
-    maxWidth: "100%",
+    width: "100%",
     " > *": {
       display: "flex",
       alignItems: "center",
     },
   },
   ({ theme }: { theme?: OperationalStyleConstants }) => {
-    const height = 45
-
     return {
-      height,
+      height: theme.titleHeight,
       padding: `0 ${theme.space.content}px`,
       gridTemplateColumns: `${theme.sidebarWidth}px auto 50px`,
       backgroundColor: theme.color.background.dark,
       color: theme.color.white,
       " > *": {
-        height,
+        height: theme.titleHeight,
       },
     }
   },

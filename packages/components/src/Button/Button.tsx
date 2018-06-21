@@ -58,7 +58,8 @@ const containerStyles: Interpolation<Props> = ({
     label: "button",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
-    display: "inline-block",
+    display: "inline-flex",
+    alignItems: "center",
     padding: `0 ${condensed ? theme.space.small : theme.space.content}px`,
     borderRadius: theme.borderRadius,
     border: 0,
@@ -87,11 +88,8 @@ const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
 const IconContainer = styled("div")(({ theme }: Css) => ({
-  marginLeft: theme.space.small,
-  float: "right",
-  "& svg": {
-    verticalAlign: "text-bottom",
-  },
+  display: "flex",
+  alignItems: "center",
 }))
 
 const ButtonSpinner = styled(Spinner)(
@@ -137,7 +135,7 @@ const Button = (props: Props) => {
           {props.children}
           {props.icon && (
             <IconContainer condensed={props.condensed}>
-              {typeof props.icon === "string" ? <Icon name={props.icon as IconName} size={16} /> : props.icon}
+              {typeof props.icon === "string" ? <Icon right name={props.icon as IconName} size={16} /> : props.icon}
             </IconContainer>
           )}
           {props.loading && <ButtonSpinner containerColor={props.color} />}

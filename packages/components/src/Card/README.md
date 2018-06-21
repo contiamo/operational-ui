@@ -18,7 +18,7 @@ Simply add any content inside the card.
   title="Card title"
   action={() => (
     <>
-      More details: <a href="#card">click here</a>{" "}
+      More details: <a href="#card">click here</a>
     </>
   )}
 >
@@ -102,4 +102,19 @@ const myData = {
 ```jsx
 <Card title="Hello">Hi, I'm a Tourist 🇫🇷</Card>
 <Card>I'm a local</Card>
+```
+
+### With overflowy content
+
+```jsx
+<div style={{ display: "flex" }}>
+  <div style={{ width: 200 }}>
+    <Card>zOMGWTFBBQ!!!11!!1https://github.com/contiamo/operational-ui</Card>
+  </div>
+  <div style={{ marginLeft: 16, width: 200 }}>
+    <Card title="I have a Header">
+      <CardItem title="Hello">loremipsumdolorsitametconseceteuradispicingelit</CardItem>
+    </Card>
+  </div>
+</div>
 ```

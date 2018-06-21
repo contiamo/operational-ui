@@ -6,6 +6,9 @@ import { darken } from "./color"
 export const baseStylesheet = (theme: Theme): string => `
 * {
   box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
 html,

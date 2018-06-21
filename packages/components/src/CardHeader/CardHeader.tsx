@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { WithTheme, Css, CssStatic } from "../types"
+import { OperationalStyleConstants } from "@operational/theme"
+import Icon from "../Icon/Icon"
 
 export interface Props {
   id?: string
@@ -32,6 +32,19 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   "& > :not(:first-child)": {
     fontSize: theme.font.size.fineprint,
     color: theme.color.text.lightest,
+  },
+
+  /**
+   * Use case: External Links typically have <Icon/>s next to them.
+   */
+  "& > a": {
+    display: "inline-flex",
+    alignItems: "center",
+    textDecoration: "none",
+  },
+  [`${Icon}`]: {
+    width: 12,
+    height: 12,
   },
 }))
 

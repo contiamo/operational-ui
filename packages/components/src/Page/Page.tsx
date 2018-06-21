@@ -1,8 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
+import PageContent from "../PageContent/PageContent"
 
 export interface Props {
   /** Page title */
@@ -33,6 +34,7 @@ export interface Props {
 }
 
 const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  height: "100%",
   backgroundColor: theme.color.background.lighter,
 }))
 
@@ -41,11 +43,16 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   display: "flex",
   alignItems: "center",
   padding: `${theme.space.base}px 0`,
+  height: theme.titleHeight,
+  fontWeight: 500,
 }))
 
+const tabsBarHeight = 37
+
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  backgroundColor: theme.color.primary,
   display: "flex",
+  height: tabsBarHeight,
+  backgroundColor: theme.color.primary,
 }))
 
 const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstants; active?: boolean }) => ({
@@ -62,27 +69,10 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   },
 }))
 
-const Grid = styled("div")(
-  (props: {
-    children?: React.ReactNode
-    fill?: boolean
-    theme?: OperationalStyleConstants
-    areas?: Props["areas"]
-  }) => {
-    const grid = React.Children.count(props.children) > 1 ? "main side" : "main"
-
-    return {
-      display: "grid",
-      gridTemplateColumns: grid.split(" ").length > 1 ? "auto 280px" : "auto",
-      gridTemplateAreas: props.areas ? `"${props.areas}"` : `"${grid}"`,
-      gridGap: props.theme.space.content,
-      maxWidth: props.fill ? "none" : 1150,
-      minWidth: 800,
-      width: "100%",
-      padding: props.theme.space.element,
-    }
-  },
-)
+const ViewContainer = styled("div")(({ theme, isInTab }: { theme?: OperationalStyleConstants; isInTab?: boolean }) => ({
+  height: `calc(100% - ${isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
+  overflow: "auto",
+}))
 
 const initialState = {
   activeTab: 0,
@@ -108,7 +98,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   }
 
   render() {
-    const { children, title, actions, tabs, fill, areas } = this.props
+    const { children, title, actions, tabs, areas, fill = false } = this.props
     const { activeTab } = this.state
     const hasOnlyOneChild = React.Children.count(children) === 1
     const CurrentTab = tabs && tabs[activeTab].component
@@ -130,12 +120,16 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
                 </Tab>
               ))}
             </TabsBar>
-            <CurrentTab />
+            <ViewContainer isInTab>
+              <CurrentTab />
+            </ViewContainer>
           </>
         ) : (
-          <Grid areas={areas} fill={fill}>
-            {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
-          </Grid>
+          <ViewContainer>
+            <PageContent areas={areas} fill={fill}>
+              {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
+            </PageContent>
+          </ViewContainer>
         )}
       </Container>
     )
