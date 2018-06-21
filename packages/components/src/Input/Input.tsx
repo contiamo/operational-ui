@@ -18,6 +18,10 @@ export interface Props {
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
   label?: string
+  /** Icon to display in an adjacent icon button */
+  icon?: string
+  /** Click handler on the icon */
+  onIconClick?: () => void
   inputRef?: (node: any) => void
   /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
   onChange?: (newVal: string) => void
@@ -34,6 +38,22 @@ export interface Props {
   disabled?: boolean
   onToggle?: () => void
 }
+
+const InputFieldContainer = styled("div")`
+  position: relative;
+  ${({ standalone, theme }: { standalone?: boolean, theme?: OperationalStyleConstants }) => `
+    margin-right: ${standalone ? theme.space.small : 0}px;
+  `}
+`
+
+const InputButton = styled("div")`
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #f2f2f2;
+`
 
 const InputField = styled("input")(
   ({
@@ -70,7 +90,6 @@ const InputField = styled("input")(
     borderRadius: theme.deprecated.borderRadius,
     boxShadow: `0 0 0 1px inset ${isError ? theme.color.error : theme.color.border.default}`,
     WebkitAppearance: "none",
-    marginRight: theme.space.small,
     "&:focus": inputFocus({
       theme,
       isError,
@@ -103,7 +122,7 @@ const Input: React.SFC<Props> = props => {
 
   if (props.label) {
     return (
-      <Label id={props.id} htmlFor={forAttributeId} className={props.className}>
+      <Label id={props.id} htmlFor={forAttributeId} className={props.className} left>
         <LabelText>{props.label}</LabelText>
         <FormFieldControls>
           {props.hint ? (
@@ -122,14 +141,20 @@ const Input: React.SFC<Props> = props => {
             </FormFieldControl>
           ) : null}
         </FormFieldControls>
-        <InputField {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
+        <InputFieldContainer>
+          {props.icon && props.onIconClick && <InputButton />}
+          <InputField {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
+        </InputFieldContainer>
         {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )
   }
 
   return (
-    <InputField {...commonInputProps} id={props.id} className={props.className} autoComplete={props.autoComplete} />
+    <InputFieldContainer standalone>
+      {props.icon && props.onIconClick && <InputButton />}
+      <InputField {...commonInputProps} id={props.id} className={props.className} autoComplete={props.autoComplete} />
+    </InputFieldContainer>
   )
 }
 

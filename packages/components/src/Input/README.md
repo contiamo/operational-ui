@@ -3,9 +3,9 @@
 ```jsx
 class StatefulInput extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      value: ""
+      value: "",
     }
   }
   render() {
@@ -24,11 +24,31 @@ class StatefulInput extends React.Component {
   }
 }
 
-<StatefulInput />
+;<StatefulInput />
 ```
 
 ### With help tooltip
 
 ```jsx
 <Input value="12" label="Phone number" hint="Please use country code" />
+```
+
+### With Error
+
+```jsx
+<Input value="12" label="Phone number" hint="Please use country code" error="Must be less than 12 characters" />
+```
+
+### With button
+
+```jsx
+<Input
+  value="12"
+  label="Phone number"
+  hint="Please use country code"
+  icon="User"
+  onIconClick={() => {
+    console.log("clicked icon")
+  }}
+/>
 ```
