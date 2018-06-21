@@ -72,10 +72,10 @@ const InputField = styled("input")(
     height: 36,
     padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
     opacity: disabled ? 0.6 : 1.0,
-    boxShadow: `0 0 0 1px inset ${isError ? theme.color.error : theme.color.border.default}`,
     font: "inherit",
     border: 0,
     borderRadius: theme.deprecated.borderRadius,
+    boxShadow: `0 0 0 1px inset ${isError ? theme.color.error : theme.color.border.default}`,
     WebkitAppearance: "none",
     marginRight: left ? theme.space.small : 0,
     "&:focus": inputFocus({

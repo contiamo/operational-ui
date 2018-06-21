@@ -127,7 +127,13 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         ) : (
           <ViewContainer>
             <PageContent areas={areas} fill={fill}>
-              {hasOnlyOneChild ? <PageArea>{children}</PageArea> : children}
+              {hasOnlyOneChild ? (
+                <PageArea>
+                  <div>{children}</div>
+                </PageArea>
+              ) : (
+                children
+              )}
             </PageContent>
           </ViewContainer>
         )}
