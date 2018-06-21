@@ -1,8 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { lighten } from "@operational/utils"
-import { WithTheme, Css, CssStatic } from "../types"
+import styled, { Interpolation } from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { isModifiedEvent } from "../utils"
 
@@ -19,15 +17,10 @@ export interface Props {
 
 const size: number = 36
 
-const containerStyles = ({
-  theme,
-  isActive,
-}: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+const containerStyles: Interpolation<{
+  theme?: OperationalStyleConstants
   isActive: boolean
-}): CssStatic => ({
+}> = ({ theme, isActive }) => ({
   display: "flex",
   padding: `0 ${theme.space.content * 0.5}px`,
   height: size,
@@ -55,25 +48,19 @@ const containerStyles = ({
 const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const IconContainer = styled("span")(() => ({
+const IconContainer = styled("span")({
   width: size,
   height: size,
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
   flex: `0 0 ${size}px`,
-}))
+})
 
 const Label = styled("span")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     display: "inline-block",
-    paddingLeft: theme.deprecated.spacing / 4,
+    paddingLeft: theme.space.base,
   }),
 )
 

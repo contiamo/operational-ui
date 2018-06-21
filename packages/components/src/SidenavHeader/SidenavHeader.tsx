@@ -1,10 +1,9 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
-import { fadeIn } from "@operational/utils"
-import { deprecate, isModifiedEvent } from "../utils"
+import styled, { Interpolation } from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
+import { expandColor, fadeIn } from "@operational/utils"
+import { isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
-import { WithTheme, Css, CssStatic } from "../types"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 
 export interface Props {
@@ -37,18 +36,12 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const containerStyles = ({
-  theme,
-  color,
-  isActive,
-}: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+const containerStyles: Interpolation<{
+  theme?: OperationalStyleConstants
   color?: string
   isActive: boolean
-}): CssStatic => {
-  const stripColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+}> = ({ theme, color, isActive }) => {
+  const stripColor: string = expandColor(theme, color) || theme.color.primary
   return {
     label: "sidenavheader",
     textDecoration: "none",
@@ -57,7 +50,7 @@ const containerStyles = ({
     borderBottom: "1px solid",
     borderLeft: "4px solid",
     borderLeftColor: isActive ? stripColor : "transparent",
-    borderBottomColor: theme.deprecated.colors.separator,
+    borderBottomColor: theme.color.separators.default,
   }
 }
 
@@ -65,15 +58,7 @@ const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
 const Content = styled("div")(
-  ({
-    theme,
-    isCondensed,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isCondensed: boolean
-  }): CssStatic => ({
+  ({ theme, isCondensed }: { theme?: OperationalStyleConstants; isCondensed: boolean }) => ({
     textDecoration: "none",
     cursor: "pointer",
     position: "relative",
@@ -96,35 +81,21 @@ const LabelText = styled("p")`
   white-space: nowrap;
   user-select: none;
   margin: 0;
-  ${({ isActive, theme }: { isActive: boolean; theme?: OperationalStyleConstants }) => `
+  ${({ theme }: { isActive: boolean; theme?: OperationalStyleConstants }) => `
     color: ${theme.color.text.dark};
     font-size: ${theme.font.size.body}px;
   `};
 `
 
-const ItemsContainer = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    animation: `${fadeIn} .15s forwards ease`,
-    position: "relative",
-    top: -16,
-    marginTop: -10,
-  }),
-)
+const ItemsContainer = styled("div")({
+  animation: `${fadeIn} .15s forwards ease`,
+  position: "relative",
+  top: -16,
+  marginTop: -10,
+})
 
 const CloseButton = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     position: "absolute",
     cursor: "pointer",
     display: "none",
@@ -134,13 +105,13 @@ const CloseButton = styled("div")(
     height: 24,
     top: 16,
     right: theme.space.content,
-    color: theme.deprecated.colors.info,
+    color: theme.color.primary,
     ".op_sidenavheader:hover &": {
       display: "flex",
     },
     "& svg": {
-      width: theme.deprecated.spacing,
-      height: theme.deprecated.spacing,
+      width: 16,
+      height: 16,
     },
   }),
 )

@@ -1,9 +1,8 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { lighten, readableTextColor } from "@operational/utils"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { readableTextColor } from "@operational/utils"
+import { OperationalStyleConstants } from "@operational/theme"
 import deprecate from "../utils/deprecate"
-import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
@@ -27,31 +26,21 @@ export interface State {
   isHovered: boolean
 }
 
-const Container = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): CssStatic => {
-    const backgroundColor = theme.deprecated.colors.white
-    const lighterBackgroundColor = lighten(theme.deprecated.colors.navBackground, 8)
-    const color = readableTextColor(backgroundColor, [theme.deprecated.colors.text, theme.deprecated.colors.white])
-    return {
-      color,
-      background: theme.deprecated.colors.white,
-      width: theme.sidebarWidth,
-      borderRight: "1px solid",
-      borderRightColor: theme.deprecated.colors.separator,
-      zIndex: theme.deprecated.baseZIndex + 100,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      height: "100%",
-    }
-  },
-)
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+  const backgroundColor = theme.color.white
+  const color = readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
+  return {
+    color,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: theme.sidebarWidth,
+    height: "100%",
+    borderRight: "1px solid",
+    borderRightColor: theme.color.separators.default,
+    background: theme.color.white,
+  }
+})
 
 export class Sidenav extends React.Component<Props, State> {
   render() {
