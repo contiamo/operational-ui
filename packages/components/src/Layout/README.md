@@ -4,22 +4,19 @@ This component lays out an opinionated application frame with side navigation, a
 
 ```jsx
 const sidebar = (
-  <Sidebar expanded>
-    <SidebarHeader label="Links">
-      <SidebarItem
-        onClick={() => {
-          window.alert("Hello!")
-        }}
-      >
-        Link 1
-      </SidebarItem>
-      <SidebarItem>Link 2</SidebarItem>
-    </SidebarHeader>
-    <SidebarHeader label="Links 2" open>
-      <SidebarItem active>Link 3</SidebarItem>
-      <SidebarItem>Link 4</SidebarItem>
-    </SidebarHeader>
-  </Sidebar>
+  <Sidenav>
+    <SidenavHeader condensed icon="Home" label="Project Home" />
+    <SidenavHeader label="The Prize" active>
+      <SidenavItem label="The First Prize" icon="Settings" />
+      <SidenavItem label="The Second Prize" icon="Settings" />
+      <SidenavItem label="The Third Prize" icon="Settings" />
+    </SidenavHeader>
+    <SidenavHeader label="Let It Snow">
+      <SidenavItem label="The First Prize" icon="Settings" />
+      <SidenavItem label="The Second Prize" icon="Settings" />
+      <SidenavItem label="The Third Prize" icon="Settings" />
+    </SidenavHeader>
+  </Sidenav>
 )
 
 // Container must set the height explicitly.
@@ -56,22 +53,19 @@ const sidebar = (
 
 ```jsx
 const sidebar = (
-  <Sidebar expanded>
-    <SidebarHeader label="Links">
-      <SidebarItem
-        onClick={() => {
-          window.alert("Hello!")
-        }}
-      >
-        Link 1
-      </SidebarItem>
-      <SidebarItem>Link 2</SidebarItem>
-    </SidebarHeader>
-    <SidebarHeader label="Links 2" open>
-      <SidebarItem active>Link 3</SidebarItem>
-      <SidebarItem>Link 4</SidebarItem>
-    </SidebarHeader>
-  </Sidebar>
+  <Sidenav>
+    <SidenavHeader condensed icon="Home" label="Project Home" />
+    <SidenavHeader label="The Prize" active>
+      <SidenavItem label="The First Prize" icon="Settings" />
+      <SidenavItem label="The Second Prize" icon="Settings" />
+      <SidenavItem label="The Third Prize" icon="Settings" />
+    </SidenavHeader>
+    <SidenavHeader label="Let It Snow">
+      <SidenavItem label="The First Prize" icon="Settings" />
+      <SidenavItem label="The Second Prize" icon="Settings" />
+      <SidenavItem label="The Third Prize" icon="Settings" />
+    </SidenavHeader>
+  </Sidenav>
 )
 ;<div style={{ height: 300 }}>
   <Layout

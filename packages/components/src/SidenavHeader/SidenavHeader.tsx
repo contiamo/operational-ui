@@ -1,65 +1,47 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
-import { fadeIn } from "@operational/utils"
-import { deprecate, isModifiedEvent } from "../utils"
+import styled, { Interpolation } from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
+import { expandColor, fadeIn } from "@operational/utils"
+import { isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"
-import { WithTheme, Css, CssStatic } from "../types"
+import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 
 export interface Props {
   id?: string
   className?: string
   /** Main label for the header */
-
   label: string | React.ReactNode
   /** Navigation property à la react-router <Link/> */
-
   to?: string
-  /**
-   * Specifies an icon to render on the left of the label
-   *
-   * @deprecated this prop is ignored as per design decision
-   */
-
+  /** Specifies an icon to render on the left of the label, displayed only if the `condensed` option is used. */
   icon?: IconName | React.ReactNode
   /** Color used in highlights and the side strip (hex or named color from `theme.colors`) */
-
   color?: string
+  /** Condensed option  */
+  condensed?: boolean
   /** Active state - renders colored strip on the left */
-
   active?: boolean
+  /** Callback called when the active state changes */
+  onToggle?: (newActiveState: boolean) => void
   /**
    * Expanded state
    *
    * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
    */
-
   expanded?: boolean
   /** Click handler */
-
   onClick?: () => void
   /** Close handler (via chevron button on the top right) */
-
   onClose?: () => void
   children?: React.ReactNode
 }
 
-export interface State {
-  isOpen: boolean
-}
-
-const containerStyles = ({
-  theme,
-  color,
-  isActive,
-}: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+const containerStyles: Interpolation<{
+  theme?: OperationalStyleConstants
   color?: string
   isActive: boolean
-}): CssStatic => {
-  const stripColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+}> = ({ theme, color, isActive }) => {
+  const stripColor: string = expandColor(theme, color) || theme.color.primary
   return {
     label: "sidenavheader",
     textDecoration: "none",
@@ -68,13 +50,7 @@ const containerStyles = ({
     borderBottom: "1px solid",
     borderLeft: "4px solid",
     borderLeftColor: isActive ? stripColor : "transparent",
-    borderBottomColor: theme.deprecated.colors.separator,
-
-    /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: isActive ? "#F8F8F8" : "transparent",
-    ":hover": {
-      backgroundColor: "#F8F8F8",
-    },
+    borderBottomColor: theme.color.separators.default,
   }
 }
 
@@ -82,139 +58,161 @@ const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
 const Content = styled("div")(
-  ({
-    theme,
-    isActive,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isActive: boolean
-  }): CssStatic => ({
+  ({ theme, isCondensed }: { theme?: OperationalStyleConstants; isCondensed: boolean }) => ({
     textDecoration: "none",
     cursor: "pointer",
     position: "relative",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    height: isCondensed ? 60 : 73,
     overflow: "hidden",
+    padding: `0 ${theme.space.content}px`,
     width: "100%",
-    height: theme.deprecated.box,
-    padding: `0 ${theme.deprecated.spacing}px`,
-    color: "#333333",
-    fontWeight: 500,
-    letterSpacing: 0.25,
-    fontSize: 14,
-    textTransform: "uppercase",
-    whiteSpace: "nowrap",
   }),
 )
 
-const ItemsContainer = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
-    position: "relative",
-    top: -theme.deprecated.spacing,
-  }),
-)
+const LabelText = styled("p")`
+  position: relative;
+  font-weight: 500;
+  letter-spacing: 0.25;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  margin: 0;
+  ${({ theme }: { isActive: boolean; theme?: OperationalStyleConstants }) => `
+    color: ${theme.color.text.dark};
+    font-size: ${theme.font.size.body}px;
+  `};
+`
+
+const ItemsContainer = styled("div")({
+  animation: `${fadeIn} .15s forwards ease`,
+  position: "relative",
+  top: -16,
+  marginTop: -10,
+})
 
 const CloseButton = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     position: "absolute",
     cursor: "pointer",
     display: "none",
     alignItems: "center",
     justifyContent: "center",
-    width: theme.deprecated.spacing * 1.5,
-    height: theme.deprecated.spacing * 1.5,
-    top: theme.deprecated.spacing * 1.5,
-    right: theme.deprecated.spacing,
-    color: theme.deprecated.colors.info,
+    width: 24,
+    height: 24,
+    top: 16,
+    right: theme.space.content,
+    color: theme.color.primary,
     ".op_sidenavheader:hover &": {
       display: "flex",
     },
     "& svg": {
-      width: theme.deprecated.spacing,
-      height: theme.deprecated.spacing,
+      width: 16,
+      height: 16,
     },
   }),
 )
 
-export class SidenavHeader extends React.Component<Props, State> {
-  state = {
-    isOpen: false,
+const IconContainer = styled("p")`
+  display: inline-block;
+  vertical-align: middle;
+  ${({ theme }: { theme?: OperationalStyleConstants }) => `margin: 0 0 0 ${theme.space.small}px;`} width: 18px;
+  height: 18px;
+  & > svg {
+    position: relative;
+    top: -2px;
   }
+`
 
-  render() {
-    const hasChildLinks = React.Children.toArray(this.props.children).some(child => (child as any).props.to)
-    const isActive = Boolean(
-      this.state.isOpen || (this.props.to && window.location.pathname.match(`^${this.props.to}`)),
-    )
+const Summary = styled("div")`
+  display: block;
+  font-weight: normal;
+  text-transform: none;
+  user-select: none;
+  margin-top: 4px;
+  ${({ theme, isActive }: { theme?: OperationalStyleConstants; isActive: boolean }) => `
+    font-size: ${theme.font.size.fineprint}px;
+    color: ${theme.color.text.lightest};
+    left: ${theme.space.content}px;
+    visibility: ${isActive ? "hidden" : "visible"};
+  `};
+`
 
-    // Actual `to` prop should invalidate if the element has sublinks and is active
-    const to = isActive && hasChildLinks ? undefined : this.props.to
-    const ContainerComponent = to ? ContainerLink : Container
-    return (
-      <ContextConsumer>
-        {(ctx: Context) => {
-          return (
-            <ContainerComponent
-              id={this.props.id}
-              href={to}
-              color={this.props.color}
-              isActive={isActive}
-              className={[this.props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
-              onClick={(ev: React.SyntheticEvent<Node>) => {
-                this.props.onClick && this.props.onClick()
-                this.setState(prevState => ({
-                  isOpen: !prevState.isOpen,
-                }))
-
-                if (!isModifiedEvent(ev) && ctx.pushState && this.props.to) {
-                  ev.preventDefault()
-
-                  // Even if the `props.to` prop was ignored, redirect should still happen here
-                  ctx.pushState(this.props.to)
-                }
-              }}
-            >
-              <Content isActive={!!this.props.active} onClick={this.props.onClick}>
-                {this.props.label}
-              </Content>
-              {React.Children.count(this.props.children) > 0 && (
-                <CloseButton
-                  onClick={(ev: React.SyntheticEvent<Node>) => {
-                    // Prevent clicks on parent in order to avoid conflicting behavior
-                    ev.stopPropagation()
-                    this.setState(prevState => ({
-                      isOpen: !prevState.isOpen,
-                    }))
-                  }}
-                >
-                  <Icon name={this.state.isOpen ? "ChevronUp" : "ChevronDown"} />
-                </CloseButton>
-              )}
-              {isActive && this.state.isOpen && <ItemsContainer>{this.props.children}</ItemsContainer>}
-            </ContainerComponent>
-          )
-        }}
-      </ContextConsumer>
-    )
+const truncate = (maxLength: number) => (text: string) => {
+  if (text.length < maxLength) {
+    return text
   }
+  return text.slice(0, maxLength) + "..."
 }
 
-export default deprecate<Props>(
-  props =>
-    props.icon ? ["By design, this component doesn't render the icon you specify in the `icon` prop anymore."] : [],
-)(SidenavHeader)
+const SidenavHeader = (props: Props) => {
+  const isActive = Boolean(props.active)
+
+  // The implementation of this component relies on the fact that it only has valid
+  // `SidenavItem` components as children. The type casting here expresses that assumption.
+  const childSidenavItems = (React.Children.toArray(props.children) || []) as { props: SidenavItemProps }[]
+
+  const hasChildLinks = childSidenavItems.some(child => Boolean(child.props.to))
+
+  // Actual `to` prop should invalidate if the element has sublinks and is active
+  const to = isActive && hasChildLinks ? undefined : props.to
+  const ContainerComponent = to ? ContainerLink : Container
+
+  return (
+    <ContextConsumer>
+      {(ctx: Context) => {
+        return (
+          <ContainerComponent
+            id={props.id}
+            href={to}
+            color={props.color}
+            isActive={isActive}
+            className={[props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
+            onClick={(ev: React.SyntheticEvent<Node>) => {
+              props.onClick && props.onClick()
+              props.onToggle && props.onToggle(!props.active)
+
+              if (!isModifiedEvent(ev) && ctx.pushState && props.to) {
+                ev.preventDefault()
+
+                // Even if the `props.to` prop was ignored, redirect should still happen here
+                ctx.pushState(props.to)
+              }
+            }}
+          >
+            <Content onClick={props.onClick} isCondensed={Boolean(props.condensed)}>
+              <LabelText isActive={isActive}>
+                {props.label}
+                <IconContainer>
+                  {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
+                </IconContainer>
+              </LabelText>
+              {!props.condensed && (
+                <Summary isActive={isActive}>
+                  {truncate(24)(childSidenavItems.map(child => child.props.label).join(", "))}
+                </Summary>
+              )}
+            </Content>
+            {childSidenavItems.length > 0 && (
+              <CloseButton
+                onClick={(ev: React.SyntheticEvent<Node>) => {
+                  // Prevent clicks on parent in order to avoid conflicting behavior
+                  ev.stopPropagation()
+                  props.onToggle && props.onToggle(!props.active)
+                }}
+              >
+                <Icon name={props.active ? "ChevronUp" : "ChevronDown"} />
+              </CloseButton>
+            )}
+            {isActive && <ItemsContainer>{props.children}</ItemsContainer>}
+          </ContainerComponent>
+        )
+      }}
+    </ContextConsumer>
+  )
+}
+
+export default SidenavHeader

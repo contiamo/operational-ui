@@ -1,8 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { lighten } from "@operational/utils"
-import { WithTheme, Css, CssStatic } from "../types"
+import styled, { Interpolation } from "react-emotion"
+import { OperationalStyleConstants } from "@operational/theme"
 import { Icon, IconName, ContextConsumer, Context } from "../"
 import { isModifiedEvent } from "../utils"
 
@@ -11,7 +9,6 @@ export interface Props {
   className?: string
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
-
   to?: string
   active?: boolean
   icon?: IconName | React.ReactNode
@@ -20,61 +17,50 @@ export interface Props {
 
 const size: number = 36
 
-const containerStyles = ({
-  theme,
-  isActive,
-}: {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+const containerStyles: Interpolation<{
+  theme?: OperationalStyleConstants
   isActive: boolean
-}): CssStatic => ({
+}> = ({ theme, isActive }) => ({
   display: "flex",
-  padding: `0 ${theme.deprecated.spacing * 0.5}px`,
-  label: "sidenavitem",
+  padding: `0 ${theme.space.content * 0.5}px`,
   height: size,
+  cursor: "pointer",
   position: "relative",
   width: "100%",
   alignItems: "center",
   justifyContent: "flex-start",
   whiteSpace: "nowrap",
-  fontSize: 14,
+  color: theme.color.text.light,
+  userSelect: "none",
+  fontSize: theme.font.size.body,
   fontWeight: 400,
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
     textDecoration: "none",
-
-    /** @todo Add to theme once colors are updated across codebase */
-    color: isActive ? theme.deprecated.colors.linkText : theme.color.text.lightest,
+    color: isActive ? theme.color.primary : theme.color.text.lightest,
   },
   "&:hover": {
-    /** @todo Add to theme once colors are updated across codebase */
-    backgroundColor: theme.color.background.light,
+    backgroundColor: theme.color.background.lighter,
+    color: isActive ? theme.color.primary : theme.color.text.dark,
   },
 })
 
 const Container = styled("div")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const IconContainer = styled("span")(() => ({
+const IconContainer = styled("span")({
   width: size,
   height: size,
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
   flex: `0 0 ${size}px`,
-}))
+})
 
 const Label = styled("span")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     display: "inline-block",
-    paddingLeft: theme.deprecated.spacing / 4,
+    paddingLeft: theme.space.base,
   }),
 )
 
@@ -89,11 +75,11 @@ const SidenavItem = (props: Props) => {
           id={props.id}
           className={props.className}
           onClick={(ev: React.SyntheticEvent<Node>) => {
+            ev.stopPropagation()
             props.onClick && props.onClick()
 
             if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
               ev.preventDefault()
-              ev.stopPropagation()
               ctx.pushState(props.to)
             }
           }}
