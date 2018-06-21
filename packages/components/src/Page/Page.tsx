@@ -47,9 +47,12 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   fontWeight: 500,
 }))
 
+const tabsBarHeight = 37
+
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  backgroundColor: theme.color.primary,
   display: "flex",
+  height: tabsBarHeight,
+  backgroundColor: theme.color.primary,
 }))
 
 const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstants; active?: boolean }) => ({
@@ -66,8 +69,8 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   },
 }))
 
-const ViewContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  height: `calc(100% - ${theme.titleHeight}px)`,
+const ViewContainer = styled("div")(({ theme, isInTab }: { theme?: OperationalStyleConstants; isInTab?: boolean }) => ({
+  height: `calc(100% - ${isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
   overflow: "auto",
 }))
 
@@ -117,7 +120,9 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
                 </Tab>
               ))}
             </TabsBar>
-            <CurrentTab />
+            <ViewContainer isInTab>
+              <CurrentTab />
+            </ViewContainer>
           </>
         ) : (
           <ViewContainer>

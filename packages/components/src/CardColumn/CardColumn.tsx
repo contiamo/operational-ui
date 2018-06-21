@@ -19,9 +19,11 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
 
 const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontFamily: theme.font.family.main,
-  color: theme.color.text.default,
+  fontWeight: 500,
+  color: theme.color.text.dark,
   fontSize: 14,
   borderBottom: `1px solid ${theme.color.separators.default}`,
+  paddingBottom: theme.space.small,
   marginBottom: theme.space.content,
 }))
 

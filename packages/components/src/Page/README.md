@@ -19,18 +19,9 @@ Here is a simple usage example:
 ```jsx
 ;<div style={{ height: 200 }}>
   <Page title="Settings Page">
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
-    <Card>Hello, this is page content</Card>
+    {Array(50)
+      .fill("Hello, this is page content")
+      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
   </Page>
 </div>
 ```
@@ -65,6 +56,33 @@ const Tab = n => () => (
     { name: "functions", component: Tab("functions") },
   ]}
 />
+```
+
+### Sticky Header with Tabs
+
+```jsx
+const Tab = n => () => (
+  <PageContent>
+    {Array(50)
+      .fill("Hello, this is page content")
+      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+  </PageContent>
+)
+;<div style={{ height: 200 }}>
+  <Page
+    actions={
+      <Button condensed icon="ExternalLink" color="ghost">
+        Go somewhere else
+      </Button>
+    }
+    title="Bundle detail"
+    tabs={[
+      { name: "overview", component: Tab("overview") },
+      { name: "jobs", component: Tab("jobs") },
+      { name: "functions", component: Tab("functions") },
+    ]}
+  />
+</div>
 ```
 
 ### With tabs and handlers
