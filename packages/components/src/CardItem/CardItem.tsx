@@ -20,7 +20,7 @@ const CardItemBody = styled("div")(({ theme }: { theme?: OperationalStyleConstan
   color: theme.color.text.default,
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
-  marginTop: theme.space.base,
+  marginTop: 5,
   marginBottom: theme.space.content,
 }))
 

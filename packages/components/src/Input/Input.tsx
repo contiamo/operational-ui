@@ -5,35 +5,26 @@ import { Css } from "../types"
 import { Icon } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
-import { inputDefaultWidth } from "../constants"
 
 export interface Props {
   className?: string
   /** Text displayed when the input field has no value. */
-
   placeholder?: string
   /** The name used to refer to the input, for forms. */
-
   name?: string
   /** The current value of the input field. You must always supply this from the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
-
   value?: string
   id?: string
   /** Specifies the id that should be used when hooking up label for attributes with input id attributes, if a label is present. */
-
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
-
   label?: string
   inputRef?: (node: any) => void
   /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
-
   onChange?: (newVal: string) => void
   /** Focus handler */
-
   onFocus?: (ev: any) => void
   /** Blur handler */
-
   onBlur?: (ev: any) => void
   type?: string
   children?: string
@@ -41,9 +32,10 @@ export interface Props {
   error?: string
   hint?: string
   /** Disabled input */
-
   disabled?: boolean
   onToggle?: () => void
+  /** Is this element placed to the left of something? */
+  left?: boolean
 }
 
 const InputField = styled("input")(
@@ -52,6 +44,7 @@ const InputField = styled("input")(
     disabled,
     isStandalone,
     isError,
+    left,
   }: {
     theme?: OperationalStyleConstants & {
       deprecated: Theme
@@ -59,6 +52,7 @@ const InputField = styled("input")(
     disabled: boolean
     isStandalone: boolean
     isError: boolean
+    left: boolean
   }) => ({
     ...theme.deprecated.typography.body,
     /**
@@ -74,14 +68,16 @@ const InputField = styled("input")(
           width: "100%",
         }),
     label: "input",
-    minWidth: inputDefaultWidth,
+    minWidth: 300,
+    height: 36,
     padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
-    border: "1px solid",
     opacity: disabled ? 0.6 : 1.0,
-    borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.inputBorder,
+    boxShadow: `0 0 0 1px inset ${isError ? theme.color.error : theme.color.border.default}`,
     font: "inherit",
+    border: 0,
     borderRadius: theme.deprecated.borderRadius,
     WebkitAppearance: "none",
+    marginRight: left ? theme.space.small : 0,
     "&:focus": inputFocus({
       theme,
       isError,
@@ -133,14 +129,20 @@ const Input = (props: Props) => {
             </FormFieldControl>
           ) : null}
         </FormFieldControls>
-        <InputField {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
+        <InputField left={props.left} {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
         {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )
   }
 
   return (
-    <InputField {...commonInputProps} id={props.id} className={props.className} autoComplete={props.autoComplete} />
+    <InputField
+      {...commonInputProps}
+      left={props.left}
+      id={props.id}
+      className={props.className}
+      autoComplete={props.autoComplete}
+    />
   )
 }
 
