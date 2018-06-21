@@ -30,9 +30,9 @@ const containerStyles: Interpolation<{
   alignItems: "center",
   justifyContent: "flex-start",
   whiteSpace: "nowrap",
-  color: theme.color.text.light,
   userSelect: "none",
   fontSize: theme.font.size.body,
+  color: isActive ? theme.color.primary : theme.color.text.lightest,
   fontWeight: 400,
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
@@ -66,7 +66,7 @@ const Label = styled("span")(
 
 const SidenavItem = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
-  const isActive = !!props.active || window.location.pathname === props.to
+  const isActive = !!props.active
   return (
     <ContextConsumer>
       {(ctx: Context) => (
