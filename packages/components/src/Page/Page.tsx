@@ -42,12 +42,12 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
-  padding: theme.space.content,
+  padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: 500,
 }))
 
-const tabsBarHeight = 55
+const tabsBarHeight = 43
 
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   display: "flex",

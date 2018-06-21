@@ -166,7 +166,7 @@ const constants = {
   color,
   borderRadius: 2,
   sidebarWidth: 256,
-  titleHeight: 45,
+  titleHeight: 50,
 }
 
 export type OperationalStyleConstants = Readonly<typeof constants>
