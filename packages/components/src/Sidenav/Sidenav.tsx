@@ -8,11 +8,6 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
-<<<<<<< HEAD
-=======
-  /** `css` prop as expected in a glamorous component */
-  css?: Css
->>>>>>> Add truncated summary
   className?: string
   children?: React.ReactNode
   /**
@@ -47,7 +42,7 @@ const Container = styled("div")(
     return {
       color,
       background: theme.deprecated.colors.white,
-      width: sidenavExpandedWidth,
+      width: theme.sidebarWidth,
       borderRight: "1px solid",
       borderRightColor: theme.deprecated.colors.separator,
       zIndex: theme.deprecated.baseZIndex + 100,
