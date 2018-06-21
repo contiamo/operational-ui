@@ -4,6 +4,36 @@ import { OperationalStyleConstants } from "@operational/theme"
 import Highlight from "react-highlight"
 import { injectGlobal } from "emotion"
 
+export interface Props {
+  /** Id */
+  id?: string
+  /** Language for syntax highlighting */
+  syntax?: string
+  /** Code string to highlight */
+  code?: string
+  children?: any
+}
+
+const StyledHighlight = styled(Highlight)(
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => {
+    return {
+      margin: 0,
+      backgroundColor: "rgba(20, 153, 206, 0.05)",
+      border: "1px solid rgba(20, 153, 206, 0.1)",
+      borderRadius: theme.borderRadius,
+      padding: theme.space.small,
+    }
+  },
+)
+
+const Code = (props: Props) => (
+  <StyledHighlight style={{ background: "transparent" }} className={props.syntax}>
+    {props.code}
+  </StyledHighlight>
+)
+
+export default Code
+
 injectGlobal`
 /*
 This stylesheet must be injected into the document in order for the syntax highlighting to work
@@ -77,33 +107,3 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
   font-weight: bold;
 }
 `
-
-export interface Props {
-  /** Id */
-  id?: string
-  /** Language for syntax highlighting */
-  syntax?: string
-  /** Code string to highlight */
-  code?: string
-  children?: any
-}
-
-const StyledHighlight = styled(Highlight)(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => {
-    return {
-      margin: 0,
-      backgroundColor: "rgba(20, 153, 206, 0.05)",
-      border: "1px solid rgba(20, 153, 206, 0.1)",
-      borderRadius: theme.borderRadius,
-      padding: theme.space.small,
-    }
-  },
-)
-
-const Code = (props: Props) => (
-  <StyledHighlight style={{ background: "transparent" }} className={props.syntax}>
-    {props.code}
-  </StyledHighlight>
-)
-
-export default Code
