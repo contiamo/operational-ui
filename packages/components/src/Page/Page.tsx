@@ -43,6 +43,7 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   alignItems: "center",
   padding: `${theme.space.base}px 0`,
   height: theme.titleHeight,
+  fontWeight: 500,
 }))
 
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
