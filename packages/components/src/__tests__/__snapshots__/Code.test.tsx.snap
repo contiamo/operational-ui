@@ -1,26 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Code Should render 1`] = `
-<pre
-  class="css-14k7z6c"
->
-  <pre>
-    <code
-      class="json css-1408fvk"
-    >
-      {
-  "properties": {
-    "startAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "endAt": {
-      "type": "string",
-      "format": "date-time"
-    }
-  }
-}
-    </code>
-  </pre>
+<pre>
+  <code
+    class="json css-10528nz"
+  />
 </pre>
 `;
