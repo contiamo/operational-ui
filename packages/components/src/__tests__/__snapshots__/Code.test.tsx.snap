@@ -4,6 +4,19 @@ exports[`Code Should render 1`] = `
 <pre>
   <code
     class="json css-10528nz"
-  />
+  >
+    {
+  "properties": {
+    "startAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
+  </code>
 </pre>
 `;
