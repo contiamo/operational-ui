@@ -11,10 +11,10 @@ export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstan
 })
 
 export const Label = styled("label")(
-  ({ theme, left }: { theme?: OperationalStyleConstants, left?: boolean }): {} => ({
+  ({ theme, left }: { theme?: OperationalStyleConstants; left?: boolean }): {} => ({
     display: "inline-block",
     position: "relative",
-    minWidth: 240,
+    minWidth: 360,
     marginRight: left ? theme.space.small : 0,
   }),
 )
