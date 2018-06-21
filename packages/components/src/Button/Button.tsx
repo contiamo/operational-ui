@@ -90,7 +90,6 @@ const ContainerLink = styled("a")(containerStyles)
 const IconContainer = styled("div")(({ theme }: Css) => ({
   display: "flex",
   alignItems: "center",
-  marginLeft: theme.space.small,
 }))
 
 const ButtonSpinner = styled(Spinner)(
@@ -136,7 +135,7 @@ const Button = (props: Props) => {
           {props.children}
           {props.icon && (
             <IconContainer condensed={props.condensed}>
-              {typeof props.icon === "string" ? <Icon name={props.icon as IconName} size={16} /> : props.icon}
+              {typeof props.icon === "string" ? <Icon right name={props.icon as IconName} size={16} /> : props.icon}
             </IconContainer>
           )}
           {props.loading && <ButtonSpinner containerColor={props.color} />}

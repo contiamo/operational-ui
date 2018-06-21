@@ -37,12 +37,13 @@ const Main = styled("div")(
 
 const Container = styled("div")(
   {
+    position: "relative",
     display: "grid",
     width: "100%",
     height: "100%",
   },
   ({ theme }: { theme?: OperationalStyleConstants }) => ({
-    gridTemplateRows: `45px auto`,
+    gridTemplateRows: `${theme.titleHeight}px auto`,
   }),
 )
 
@@ -50,8 +51,11 @@ const Layout = (props: Props) => {
   return (
     <Container>
       {props.loading && <Progress />}
-      {props.sidenav}
-      <Main>{props.main}</Main>
+      {props.header}
+      <Content>
+        {props.sidenav}
+        <Main>{props.main}</Main>
+      </Content>
     </Container>
   )
 }

@@ -37,14 +37,12 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   backgroundColor: theme.color.background.lighter,
 }))
 
-const titleBarHeight = 45
-
 const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: `${theme.space.base}px 0`,
-  height: titleBarHeight,
+  height: theme.titleHeight,
 }))
 
 const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
@@ -66,10 +64,10 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   },
 }))
 
-const ViewContainer = styled("div")`
-  height: calc(100% - ${titleBarHeight}px);
-  overflow: auto;
-`
+const ViewContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  height: `calc(100% - ${theme.titleHeight}px)`,
+  overflow: "auto",
+}))
 
 const Grid = styled("div")(
   (props: {
@@ -88,7 +86,7 @@ const Grid = styled("div")(
       maxWidth: props.fill ? "none" : 1150,
       minWidth: 800,
       width: "100%",
-      height: `calc(100% - ${titleBarHeight}px)`,
+      height: `calc(100% - ${props.theme.titleHeight}px)`,
       padding: props.theme.space.element,
     }
   },
@@ -118,7 +116,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   }
 
   render() {
-    const { children, title, actions, tabs, fill, areas } = this.props
+    const { children, title, actions, tabs, fill = false, areas } = this.props
     const { activeTab } = this.state
     const hasOnlyOneChild = React.Children.count(children) === 1
     const CurrentTab = tabs && tabs[activeTab].component

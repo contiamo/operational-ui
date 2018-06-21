@@ -26,16 +26,14 @@ const Bar = styled("div")(
     },
   },
   ({ theme }: { theme?: OperationalStyleConstants }) => {
-    const height = 45
-
     return {
-      height,
+      height: theme.titleHeight,
       padding: `0 ${theme.space.content}px`,
       gridTemplateColumns: `${theme.sidebarWidth}px auto 50px`,
       backgroundColor: theme.color.background.dark,
       color: theme.color.white,
       " > *": {
-        height,
+        height: theme.titleHeight,
       },
     }
   },
