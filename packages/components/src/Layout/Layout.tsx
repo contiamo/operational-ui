@@ -19,9 +19,6 @@ const Content = styled("div")(
     display: "grid",
     overflow: "auto",
   },
-  ({ theme }: { theme?: OperationalStyleConstants }) => ({
-    gridTemplateColumns: `${theme.sidebarWidth}px auto`,
-  }),
 )
 
 const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({

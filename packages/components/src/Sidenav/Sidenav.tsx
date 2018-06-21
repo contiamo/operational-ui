@@ -3,7 +3,6 @@ import styled from "react-emotion"
 import { lighten, readableTextColor } from "@operational/utils"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
 import deprecate from "../utils/deprecate"
-import { sidenavExpandedWidth } from "../constants"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
