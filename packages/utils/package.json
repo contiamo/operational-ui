@@ -1,6 +1,6 @@
 {
   "name": "@operational/utils",
-  "version": "2.0.0",
+  "version": "2.0.9",
   "description": "A collection of utilities used within the Contiamo UI suite",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
