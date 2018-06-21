@@ -15,11 +15,14 @@ Simply add any content inside the card.
 
 ```jsx
 <Card
-  title="Card title"
+  title="Functions"
   action={() => (
-    <>
-      More details: <a href="#card">click here</a>
-    </>
+    <div>
+      You can configure Functions in your bundle.yaml:
+      <a href="#">
+        Learn how <Icon name="ExternalLink" />
+      </a>
+    </div>
   )}
 >
   <p>Here is a bare card with custom padding.</p>

@@ -34,8 +34,6 @@ export interface Props {
   /** Disabled input */
   disabled?: boolean
   onToggle?: () => void
-  /** Is this element placed to the left of something? */
-  left?: boolean
 }
 
 const InputField = styled("input")(
@@ -44,7 +42,6 @@ const InputField = styled("input")(
     disabled,
     isStandalone,
     isError,
-    left,
   }: {
     theme?: OperationalStyleConstants & {
       deprecated: Theme
@@ -52,7 +49,6 @@ const InputField = styled("input")(
     disabled: boolean
     isStandalone: boolean
     isError: boolean
-    left: boolean
   }) => ({
     ...theme.deprecated.typography.body,
     /**
@@ -77,7 +73,7 @@ const InputField = styled("input")(
     borderRadius: theme.deprecated.borderRadius,
     boxShadow: `0 0 0 1px inset ${isError ? theme.color.error : theme.color.border.default}`,
     WebkitAppearance: "none",
-    marginRight: left ? theme.space.small : 0,
+    marginRight: theme.space.small,
     "&:focus": inputFocus({
       theme,
       isError,
@@ -90,7 +86,7 @@ const HelpTooltip = styled(Tooltip)({
   width: "fit-content",
 })
 
-const Input = (props: Props) => {
+const Input: React.SFC<Props> = props => {
   const forAttributeId = props.label && props.labelId
   const commonInputProps = {
     innerRef: props.inputRef,
@@ -129,20 +125,14 @@ const Input = (props: Props) => {
             </FormFieldControl>
           ) : null}
         </FormFieldControls>
-        <InputField left={props.left} {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
+        <InputField {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
         {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )
   }
 
   return (
-    <InputField
-      {...commonInputProps}
-      left={props.left}
-      id={props.id}
-      className={props.className}
-      autoComplete={props.autoComplete}
-    />
+    <InputField {...commonInputProps} id={props.id} className={props.className} autoComplete={props.autoComplete} />
   )
 }
 

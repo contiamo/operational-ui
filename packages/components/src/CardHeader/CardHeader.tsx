@@ -38,12 +38,14 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   /**
    * Use case: External Links typically have <Icon/>s next to them.
    */
-  "& > a": {
+  "& a": {
     display: "inline-flex",
     alignItems: "center",
     textDecoration: "none",
   },
-  [`${Icon}`]: {
+  [`& ${Icon}`]: {
+    marginTop: -3,
+    marginLeft: theme.space.base,
     width: 12,
     height: 12,
   },
