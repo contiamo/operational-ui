@@ -10,6 +10,7 @@ import {
   Icon,
   Card,
   CardHeader,
+  HeaderBar,
   Sidenav,
   SidenavHeader,
   SidenavItem,
@@ -99,7 +100,7 @@ class App extends React.Component<{}, State> {
     return (
       <OperationalUI withBaseStyles>
         <Layout
-          header={<div />}
+          header={<HeaderBar logo={<div />} />}
           sidenav={
             <Sidenav>
               {allTestCases.map((test, groupIndex) => (
