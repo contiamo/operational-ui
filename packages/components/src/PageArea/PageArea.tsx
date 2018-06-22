@@ -8,7 +8,7 @@ export interface PageAreaProps {
   children?: React.ReactNode
 }
 
-const Area = styled("div")(({ name = "main" }: PageAreaProps) => ({
+const Area = styled("div")(({ name }: PageAreaProps) => ({
   gridArea: name,
 }))
 
