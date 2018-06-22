@@ -22,6 +22,7 @@
     "clean": "lerna clean",
     "test": "run-s \"test:* -- -- --maxWorkers=$JEST_MAX_WORKERS\"",
     "test:components": "cd packages/components && npm run test",
+    "test:components:update": "npm run test:components -- -- -u",
     "test:theme": "cd packages/theme && npm run test",
     "test:utils": "cd packages/utils && npm run test",
     "test:visual-tests": "cd packages/utils && npm run test",

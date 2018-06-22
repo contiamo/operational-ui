@@ -85,6 +85,11 @@ const initialState = {
 }
 
 class Page extends React.Component<Props, Readonly<typeof initialState>> {
+  static defaultProps = {
+    areas: "main",
+    fill: false,
+  }
+
   constructor(props: Props) {
     super(props)
     if (props.activeTabName && props.tabs) {
@@ -104,9 +109,9 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   }
 
   render() {
-    const { children, title, actions, tabs, areas, fill = false } = this.props
+    const { children, title, actions, tabs, areas, fill } = this.props
     const { activeTab } = this.state
-    const hasOnlyOneChild = React.Children.count(children) === 1
+    const grid = React.Children.count(children) > 1 ? "main side" : "main"
     const CurrentTab = tabs && tabs[activeTab].component
 
     return (
@@ -132,14 +137,8 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
           </>
         ) : (
           <ViewContainer>
-            <PageContent areas={areas} fill={fill}>
-              {hasOnlyOneChild ? (
-                <PageArea>
-                  <div>{children}</div>
-                </PageArea>
-              ) : (
-                children
-              )}
+            <PageContent areas={areas ? areas : grid} fill={fill}>
+              {areas === "main" ? <PageArea>{children}</PageArea> : children}
             </PageContent>
           </ViewContainer>
         )}
