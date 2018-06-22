@@ -29,13 +29,19 @@ import React from "react"
 import { render } from "react-dom"
 import { OperationalUI, Button } from "@operational/components"
 
-// Always wrap your interface in the `OperationalUI` wrapper, 
-// which does groundwork, applies base styles, and allows some 
+// Always wrap your interface in the `OperationalUI` wrapper,
+// which does groundwork, applies base styles, and allows some
 // advanced customizations later. Note that it requires a single child element.
 // See https://www.npmjs.com/package/@operational/components
 const MyInterface = () => (
   <OperationalUI>
-    <Button onClick={() => { alert("Hello!") }}>Say hello!</Button>
+    <Button
+      onClick={() => {
+        alert("Hello!")
+      }}
+    >
+      Say hello!
+    </Button>
   </OperationalUI>
 )
 
@@ -47,10 +53,11 @@ You have your first simple button. Head to our [getting started](https://ui.cont
 ## Next Steps: the `@operational` Package Family
 
 Operational UI is shipped as a [monorepo](https://danluu.com/monorepo/), with small packages covering various facets of data-driven UI's:
-1. [Components](https://ui.contiamo.com/components), used in the example above, are the smallest and simplest building blocks, implemented as presentational, [controlled](https://reactjs.org/docs/forms.html#controlled-components) React components. Buttons, input fields, modals, date pickers, and the like.
-1. [Visualizations](https://ui.contiamo.com/visualizations) are full-featured d3 apps, 
-1. [Theme](https://github.com/Contiamo/operational-ui/tree/master/packages/theme) package exports a plain object you can use to customize the designs of components and visualizations.
-1. [Utils](https://github.com/Contiamo/operational-ui/tree/master/packages/utils) contain helper methods for color manipulation, creating specific higher-order React components, and d3 helpers.
+
+1.  [Components](https://ui.contiamo.com/components), used in the example above, are the smallest and simplest building blocks, implemented as presentational, [controlled](https://reactjs.org/docs/forms.html#controlled-components) React components. Buttons, input fields, modals, date pickers, and the like.
+1.  [Visualizations](https://ui.contiamo.com/visualizations) are full-featured d3 apps,
+1.  [Theme](https://github.com/Contiamo/operational-ui/tree/master/packages/theme) package exports a plain object you can use to customize the designs of components and visualizations.
+1.  [Utils](https://github.com/Contiamo/operational-ui/tree/master/packages/utils) contain helper methods for color manipulation, creating specific higher-order React components, and d3 helpers.
 
 ## Contributing
 
@@ -60,9 +67,14 @@ Below you find some guides on how to work with the codebase:
 
 ### Developing locally
 
-To run the project locally, install dependencies and link internal packages by simply running `yarn install`.
+To run the project locally, install dependencies and link internal packages by simply running `yarn`.
 
-Every package defines a `yarn start` command that spins off a dev server where you can test things out. In `components`, `visualizations` and `blocks`, the exploratory code can be found under `/packages/{package}/scripts/dev-server`. Dev servers are set up as simple [parcel](https://parceljs.org) projects.
+The best way to have a nice DX to add/improve operational components is to execute `yarn start` and the root level. This will:
+
+- start styleguidist docs as playground
+- watch/compile `packages/theme` and `packages/utils`
+
+Every package defines a `yarn start` command that spins off a dev server where you can test things out.
 
 ### Semver
 
