@@ -10,7 +10,7 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
 </Card>
 ```
 
-### With actions
+### With `action` prop
 
 ```jsx
 <Card>
@@ -33,7 +33,7 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
 </Card>
 ```
 
-### With a Title prop
+### With `title` prop
 
 ```jsx
 <Card>
