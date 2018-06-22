@@ -7,14 +7,15 @@ export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstan
   outline: 0,
   border: "1px solid",
   borderColor: isError ? theme.color.error : theme.color.primary,
-  boxShadow: `0 0 0 3px ${lighten(isError ? theme.color.error : theme.color.primary, 40)}`,
+  boxShadow: `0 0 0 3px ${isError ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`,
 })
 
 export const Label = styled("label")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
+  ({ theme, left }: { theme?: OperationalStyleConstants; left?: boolean }): {} => ({
     display: "inline-block",
     position: "relative",
-    minWidth: 240,
+    minWidth: 360,
+    marginRight: left ? theme.space.small : 0,
   }),
 )
 
@@ -71,7 +72,7 @@ export const FormFieldError = styled("div")(
     width: "100%",
     borderRadius: theme.borderRadius,
     position: "absolute",
-    backgroundColor: lighten(theme.color.error, 45),
+    backgroundColor: lighten(theme.color.error, 60),
     boxShadow: `0px 1px 5px #d3d1d3`,
     bottom: -theme.space.big,
     left: 0,

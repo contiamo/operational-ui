@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { Icon } from "../"
+import { Icon, IconName } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
 
@@ -18,6 +18,10 @@ export interface Props {
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
   label?: string
+  /** Icon to display in an adjacent icon button */
+  icon?: string
+  /** Click handler on the icon */
+  onIconClick?: () => void
   inputRef?: (node: any) => void
   /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
   onChange?: (newVal: string) => void
@@ -35,42 +39,65 @@ export interface Props {
   onToggle?: () => void
 }
 
+// Rendered height taking into account paddings, font-sizes and line-height
+const inputHeight = 36
+
+const InputFieldContainer = styled("div")`
+  position: relative;
+  min-width: 360px;
+  align-items: center;
+  justify-content: center;
+  ${({ withLabel, theme }: { withLabel?: boolean; theme?: OperationalStyleConstants }) => `
+    margin-right: ${withLabel ? 0 : theme.space.small}px;
+    display: ${withLabel ? "flex" : "inline-flex"};
+  `};
+`
+
+const InputButton = styled("div")`
+  width: ${inputHeight}px;
+  height: ${inputHeight}px;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${({ theme }: { theme?: OperationalStyleConstants }) => `
+    background-color: ${theme.color.background.lighter};
+    border-top-left-radius: ${theme.borderRadius}px;
+    border-bottom-left-radius: ${theme.borderRadius}px;
+    border: 1px solid;
+    border-color: ${theme.color.border.default};
+    color: ${theme.color.text.light};
+  `};
+`
+
 const InputField = styled("input")(
   ({
     theme,
     disabled,
     isStandalone,
     isError,
+    withIconButton,
   }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
+    theme?: OperationalStyleConstants
     disabled: boolean
     isStandalone: boolean
     isError: boolean
+    withIconButton: boolean
   }) => ({
-    ...theme.deprecated.typography.body,
-    /**
-     * If the input field is standalone without a label, it should not specify any display properties
-     * to avoid input fields that span the screen. Min width should take care of presentable
-     * default looks.
-     */
-
-    ...(isStandalone
-      ? {}
-      : {
-          display: "block",
-        }),
-    minWidth: 300,
-    height: 36,
-    padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
+    ...(withIconButton
+      ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
+      : { borderRadius: theme.borderRadius }),
+    fontSize: theme.font.size.body,
+    height: inputHeight,
+    label: "input",
+    flexGrow: 1,
+    padding: "8px 12px",
     opacity: disabled ? 0.6 : 1.0,
     font: "inherit",
-    border: 0,
-    borderRadius: theme.deprecated.borderRadius,
-    boxShadow: `0 0 0 1px inset ${isError ? theme.color.error : theme.color.border.default}`,
+    border: "1px solid",
+    borderColor: isError ? theme.color.error : theme.color.border.default,
     WebkitAppearance: "none",
-    marginRight: theme.space.small,
     "&:focus": inputFocus({
       theme,
       isError,
@@ -101,9 +128,21 @@ const Input: React.SFC<Props> = props => {
     },
   }
 
+  const withIconButton = Boolean(props.icon && props.onIconClick)
+
+  const inputButtonElement = withIconButton && (
+    <InputButton
+      onClick={() => {
+        props.onIconClick()
+      }}
+    >
+      {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={16} /> : props.icon}
+    </InputButton>
+  )
+
   if (props.label) {
     return (
-      <Label id={props.id} htmlFor={forAttributeId} className={props.className}>
+      <Label id={props.id} htmlFor={forAttributeId} className={props.className} left>
         <LabelText>{props.label}</LabelText>
         <FormFieldControls>
           {props.hint ? (
@@ -122,14 +161,31 @@ const Input: React.SFC<Props> = props => {
             </FormFieldControl>
           ) : null}
         </FormFieldControls>
-        <InputField {...commonInputProps} id={forAttributeId} autoComplete={props.autoComplete} />
+        <InputFieldContainer withLabel>
+          {inputButtonElement}
+          <InputField
+            {...commonInputProps}
+            id={forAttributeId}
+            autoComplete={props.autoComplete}
+            withIconButton={withIconButton}
+          />
+        </InputFieldContainer>
         {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
       </Label>
     )
   }
 
   return (
-    <InputField {...commonInputProps} id={props.id} className={props.className} autoComplete={props.autoComplete} />
+    <InputFieldContainer>
+      {inputButtonElement}
+      <InputField
+        {...commonInputProps}
+        id={props.id}
+        className={props.className}
+        autoComplete={props.autoComplete}
+        withIconButton={withIconButton}
+      />
+    </InputFieldContainer>
   )
 }
 
