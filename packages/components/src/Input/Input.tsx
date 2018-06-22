@@ -47,9 +47,9 @@ const InputFieldContainer = styled("div")`
   min-width: 360px;
   align-items: center;
   justify-content: center;
-  ${({ standalone, theme }: { standalone?: boolean; theme?: OperationalStyleConstants }) => `
-    margin-right: ${standalone ? theme.space.small : 0}px;
-    display: ${standalone ? "inline-flex" : "flex"};
+  ${({ withLabel, theme }: { withLabel?: boolean; theme?: OperationalStyleConstants }) => `
+    margin-right: ${withLabel ? 0 : theme.space.small}px;
+    display: ${withLabel ? "flex" : "inline-flex"};
   `};
 `
 
@@ -161,7 +161,7 @@ const Input: React.SFC<Props> = props => {
             </FormFieldControl>
           ) : null}
         </FormFieldControls>
-        <InputFieldContainer>
+        <InputFieldContainer withLabel>
           {inputButtonElement}
           <InputField
             {...commonInputProps}
@@ -176,7 +176,7 @@ const Input: React.SFC<Props> = props => {
   }
 
   return (
-    <InputFieldContainer standalone>
+    <InputFieldContainer>
       {inputButtonElement}
       <InputField
         {...commonInputProps}
