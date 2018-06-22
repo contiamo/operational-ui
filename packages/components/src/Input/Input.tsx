@@ -40,7 +40,7 @@ export interface Props {
 }
 
 // Rendered height taking into account paddings, font-sizes and line-height
-const height = 36
+const inputHeight = 36
 
 const InputFieldContainer = styled("div")`
   position: relative;
@@ -54,20 +54,14 @@ const InputFieldContainer = styled("div")`
 `
 
 const InputButton = styled("div")`
-  width: ${height}px;
-  height: ${height}px;
+  width: ${inputHeight}px;
+  height: ${inputHeight}px;
   top: 0px;
   left: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }) => `
+  ${({ theme }: { theme?: OperationalStyleConstants }) => `
     background-color: ${theme.color.background.lighter};
     border-top-left-radius: ${theme.borderRadius}px;
     border-bottom-left-radius: ${theme.borderRadius}px;
@@ -85,22 +79,20 @@ const InputField = styled("input")(
     isError,
     withIconButton,
   }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
+    theme?: OperationalStyleConstants
     disabled: boolean
     isStandalone: boolean
     isError: boolean
     withIconButton: boolean
   }) => ({
-    ...theme.deprecated.typography.body,
     ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
-    height,
+    fontSize: theme.font.size.body,
+    height: inputHeight,
     label: "input",
     flexGrow: 1,
-    padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
+    padding: "8px 12px",
     opacity: disabled ? 0.6 : 1.0,
     font: "inherit",
     border: "1px solid",
