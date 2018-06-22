@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "@operational/theme"
-import Icon from "../Icon/Icon"
 
 export interface Props {
   id?: string
@@ -44,7 +43,6 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
     textDecoration: "none",
   },
   "& svg": {
-    marginTop: -3,
     marginLeft: theme.space.base,
     width: 12,
     height: 12,

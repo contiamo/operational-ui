@@ -6,12 +6,11 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
 ```jsx
 <Card>
   <CardHeader>Title for my card</CardHeader>
-  <p>Here is a bare card with custom padding.</p>
-  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+  <p>Content for my card</p>
 </Card>
 ```
 
-### With action
+### With actions
 
 ```jsx
 <Card>
@@ -19,6 +18,9 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
     action={
       <div>
         <Button condensed>Button</Button>
+        <Button condensed color="primary">
+          Button <Icon name="Plus" />
+        </Button>
         <a href="#">
           Link <Icon name="ExternalLink" />
         </a>
@@ -27,26 +29,16 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
   >
     Title for my card
   </CardHeader>
-  <p>Here is a bare card with custom padding.</p>
-  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+  <p>Content for my card</p>
 </Card>
 ```
 
-### With title prop
+### With a Title prop
 
 ```jsx
 <Card>
-  <CardHeader
-    action={
-      <div>
-        <Button condensed>Button</Button>
-        <a href="#">Link</a>
-      </div>
-    }
-    title="Title for my card"
-  />
-  <p>Here is a bare card with custom padding.</p>
-  <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
+  <CardHeader title="Title for my card" />
+  <p>Content for my card</p>
 </Card>
 ```
 
@@ -63,7 +55,16 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
     }
     title={
       <>
-        This is <b> a bold</b> title
+        This is a{" "}
+        <span style={{ color: "#feb901" }}>
+          <strong>
+            <em>
+              <u>special</u>
+            </em>{" "}
+            ✨
+          </strong>
+        </span>{" "}
+        title
       </>
     }
   />
