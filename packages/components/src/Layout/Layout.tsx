@@ -5,11 +5,11 @@ import { Progress } from "../"
 
 export interface Props {
   /** Side navigation, see `Sidenav` component */
-  sidenav?: React.ReactNode
+  sidenav: React.ReactNode
   /** Header content, see `Page` component */
-  header?: React.ReactNode
+  header: React.ReactNode
   /** Main content, see `Page` component */
-  main?: React.ReactNode
+  main: React.ReactNode
   /** Sets whether a loading progress bar should be rendered */
   loading?: boolean
 }

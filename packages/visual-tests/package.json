@@ -17,10 +17,13 @@
     "@operational/components": "^2.1.0",
     "@operational/theme": "^2.0.10",
     "@operational/utils": "^2.0.10",
-    "@operational/visualizations": "^2.1.0",
+    "@operational/visualizations": "^2.0.10",
+    "emotion": "^9.2.3",
+    "emotion-theming": "^9.2.3",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-emotion": "^9.2.3"
   }
 }

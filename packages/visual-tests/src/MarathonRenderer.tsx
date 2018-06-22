@@ -1,25 +1,25 @@
 import * as React from "react"
-import glamorous, { Div, withTheme } from "glamorous"
+import styled from "react-emotion"
 
 import { Icon } from "@operational/components"
-import { Theme, operational } from "@operational/theme"
+import { OperationalStyleConstants, operational } from "@operational/theme"
 import { MarathonRenderer } from "./Marathon"
 
-const Container = glamorous.ul({
+const Container = styled("ul")({
   padding: 0,
 })
 
-const Content = glamorous.div(
+const Content = styled("div")(
   {
     padding: 20,
   },
-  ({ theme }: { theme: Theme }) => ({
-    backgroundColor: theme.colors.background,
+  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+    backgroundColor: theme.color.background.lighter,
     borderRadius: 4,
   }),
 )
 
-const Item = glamorous.li({
+const Item = styled("li")({
   listStyle: "none",
   margin: 0,
   "& > *": {
@@ -30,35 +30,31 @@ const Item = glamorous.li({
   },
 })
 
-const Title = glamorous.p(
-  ({ theme }: { theme: Theme }): any => ({
-    ...theme.typography.heading1,
+const Title = styled("p")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  fontSize: theme.font.size.title,
+  display: "inline-block",
+  "& :first-child": {
+    position: "relative",
+    top: -2,
+    marginRight: 6,
+  },
+  "& > *": {
     display: "inline-block",
-    "& :first-child": {
-      position: "relative",
-      top: -2,
-      marginRight: 6,
-    },
-    "& > *": {
-      display: "inline-block",
-      verticalAlign: "middle",
-    },
-  }),
-)
+    verticalAlign: "middle",
+  },
+}))
 
-const FailureMessage = glamorous.p(
-  ({ theme }: { theme: Theme }): any => ({
-    color: theme.colors.error,
-    display: "inline-block",
-    marginLeft: 8,
-    "&::before": {
-      content: " → ",
-    },
-  }),
-)
+const FailureMessage = styled("p")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  color: theme.color.error,
+  display: "inline-block",
+  marginLeft: 8,
+  "&::before": {
+    content: " → ",
+  },
+}))
 
 const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
-  <Div>
+  <div>
     <Container>
       {results.map((result, index) => {
         const content = result.isCompleted ? (
@@ -76,13 +72,13 @@ const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
               {content}
               {result.description}
             </Title>
-            {result.errors.length > 0 ? <FailureMessage>{result.errors.concat(" ")}</FailureMessage> : null}
+            {result.errors.length > 0 && <FailureMessage>{result.errors.concat(" ")}</FailureMessage>}
           </Item>
         )
       })}
     </Container>
     <Content innerRef={ref} />
-  </Div>
+  </div>
 )
 
 export default MarathonRendererComponent
