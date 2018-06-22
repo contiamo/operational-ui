@@ -12,6 +12,20 @@ Here is a simple usage example:
 </Page>
 ```
 
+### Properly handles grid rows
+
+Here is a simple usage example:
+
+```jsx
+;<div style={{ height: 400 }}>
+  <Page title="Settings Page">
+    {Array(2)
+      .fill("Hello, this is page content")
+      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+  </Page>
+</div>
+```
+
 ### Sticky Header
 
 Here is a simple usage example:
@@ -62,7 +76,7 @@ const Tab = n => () => (
 
 ```jsx
 const Tab = n => () => (
-  <PageContent>
+  <PageContent areas="side main">
     {Array(50)
       .fill("Hello, this is page content")
       .map(({ text, index }) => <Card key={index}>{text}</Card>)}

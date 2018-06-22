@@ -16,19 +16,17 @@ const StyledPageContent = styled("div")(
       theme?: OperationalStyleConstants
     } & Props,
   ) => {
-    const grid = React.Children.count(props.children) > 1 ? "main side" : "main"
-    const areas = props.areas ? props.areas : grid
     const gridTemplateColumns = {
       main: "auto",
       "main side": "auto 280px",
       "side main": "280px auto",
-    }[areas]
+    }[props.areas]
 
     return {
       gridTemplateColumns,
       display: "grid",
       alignItems: "start",
-      gridTemplateAreas: `"${areas}"`,
+      gridTemplateAreas: `"${props.areas}"`,
       gridGap: props.theme.space.content,
       maxWidth: props.fill ? "none" : 1150,
       minWidth: 800,
