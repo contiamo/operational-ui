@@ -247,7 +247,7 @@ export interface AxisClass<T> {
   computed: AxisComputed
   computeAligned?: (computed: { [key: string]: any }) => void
   computeInitial?: () => { [key: string]: any }
-  draw: () => void
+  draw: (duration?: number) => void
   interval?: any
   isXAxis: boolean
   options: AxisOptions
