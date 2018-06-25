@@ -28,7 +28,7 @@ export interface Props {
   /**
    * Active tab name
    *
-   * Useful for easy router mapping
+   * If set, the component become controlled
    */
   activeTabName?: string
   /**
@@ -155,7 +155,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
 
       return index === -1 ? 0 : index
     }
-    return 0
+    return this.state.activeTab
   }
 }
 
