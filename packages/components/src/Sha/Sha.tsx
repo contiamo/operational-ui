@@ -7,10 +7,6 @@ interface ShaProps {
   children: string
 }
 
-const Span = styled("span")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  fontFamily: theme.font.family.code,
-}))
-
-const Sha: React.SFC<ShaProps> = ({ children, short }) => <Span>{short ? children.slice(0, 11) : children}</Span>
+const Sha: React.SFC<ShaProps> = ({ children, short }) => <span>{short ? children.slice(0, 11) : children}</span>
 
 export default Sha
