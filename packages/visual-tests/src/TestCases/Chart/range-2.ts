@@ -78,6 +78,7 @@ const createData = () => {
       },
       x1: {
         type: "quant",
+        rotateLabels: true,
         title: "Total users",
       },
     },

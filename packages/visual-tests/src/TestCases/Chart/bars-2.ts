@@ -94,6 +94,7 @@ const createData = (renderers: any[]) => {
         end: new Date(2018, 2, 17),
         interval: "day",
         title: "2018",
+        rotateLabels: true,
       },
       x1: {
         type: "quant",

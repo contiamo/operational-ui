@@ -40,6 +40,7 @@ const data: any = {
       end: new Date(2018, 2, 15),
       interval: "day",
       title: "2018",
+      rotateLabels: true,
     },
     y1: {
       type: "quant",

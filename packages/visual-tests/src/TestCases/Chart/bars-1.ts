@@ -72,10 +72,12 @@ const createData = (renderers: any[]) => {
         end: new Date(2018, 2, 17),
         interval: "day",
         title: "2018",
+        rotateLabels: true,
       },
       y1: {
         type: "quant",
         title: "Total pageviews",
+        rotateLabels: true,
       },
     },
   }
