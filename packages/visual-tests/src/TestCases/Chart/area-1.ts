@@ -98,7 +98,7 @@ const createData = (renderers: any[]) => {
           { x: new Date(2018, 2, 18), y: Math.floor(Math.random() * 500) - 250 },
           { x: new Date(2018, 2, 19), y: Math.floor(Math.random() * 500) - 250 },
         ],
-        name: "Pageviews 2018",
+        name: "Profit 2018",
         key: "series1",
         interpolate: "step",
         renderAs: renderers,
@@ -110,9 +110,12 @@ const createData = (renderers: any[]) => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 19),
         interval: "day",
+        title: "2018",
       },
       y1: {
         type: "quant",
+        title: "Profit",
+        unit: "k€",
       },
     },
   }

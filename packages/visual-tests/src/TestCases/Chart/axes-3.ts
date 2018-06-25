@@ -37,6 +37,7 @@ const data1: any = {
       type: "categorical",
       values: ["A", "B", "C", "D", "E", "F", "G", "H"],
       showRules: true,
+      title: "Category name",
     },
     y1: {
       type: "quant",

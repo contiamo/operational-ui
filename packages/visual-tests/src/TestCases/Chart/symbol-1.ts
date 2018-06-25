@@ -27,7 +27,7 @@ const createData = (options: any) => {
           { x: new Date(2018, 2, 15), y: 6 },
           { x: new Date(2018, 2, 16), y: 7 },
         ],
-        name: "Pageviews 2017",
+        name: "Pageviews",
         key: "series2",
         renderAs: [createRenderer(options)],
       },
@@ -38,16 +38,17 @@ const createData = (options: any) => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 16),
         interval: "day",
+        title: "March 2018",
       },
       y1: {
         type: "quant",
+        title: "Daily pageviews",
       },
     },
   }
 }
 
-/** @todo @imogenf please type this better */
-const symbols: any = {
+const symbols: { [key: number]: string } = {
   1: "circle",
   2: "cross",
   3: "diamond",

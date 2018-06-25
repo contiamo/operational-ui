@@ -20,7 +20,7 @@ const createData = () => {
         ],
         xAttribute: "y",
         yAttribute: "x",
-        name: "Pageviews 2017",
+        name: "Pageviews",
         key: "series2",
         renderAs: [SymbolRenderer],
       },
@@ -31,9 +31,11 @@ const createData = () => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 16),
         interval: "day",
+        title: "2018",
       },
       x1: {
         type: "quant",
+        title: "Pageviews",
       },
     },
   }

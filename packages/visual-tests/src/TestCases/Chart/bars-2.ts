@@ -38,13 +38,14 @@ const data: any = {
       xAttribute: "y",
       yAttribute: "x",
       name: "Users",
-      key: "series2",
+      key: "series1",
       renderAs: [BarsRenderer, TextRenderer],
     },
   ],
   axes: {
     y1: {
       type: "categorical",
+      title: "2018",
     },
     x1: {
       type: "quant",
@@ -65,7 +66,7 @@ const createData = (renderers: any[]) => {
         ],
         xAttribute: "y",
         yAttribute: "x",
-        name: "Pageviews 2018",
+        name: "Pageviews: homepage",
         key: "series1",
         renderAs: renderers,
       },
@@ -81,7 +82,7 @@ const createData = (renderers: any[]) => {
         ],
         xAttribute: "y",
         yAttribute: "x",
-        name: "Pageviews 2017",
+        name: "Pageviews: explore view",
         key: "series2",
         renderAs: renderers,
       },
@@ -92,6 +93,7 @@ const createData = (renderers: any[]) => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "2018",
       },
       x1: {
         type: "quant",

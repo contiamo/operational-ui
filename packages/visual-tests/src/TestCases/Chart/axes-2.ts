@@ -22,9 +22,11 @@ const data: any = {
       start: new Date(2018, 2, 1),
       end: new Date(2018, 2, 15),
       interval: "day",
+      title: "2018",
     },
     y1: {
       type: "quant",
+      title: "New users",
     },
   },
   series: [
@@ -63,6 +65,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined start", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       start: 75,
     }
     viz.data(data)
@@ -72,6 +75,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined end", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       end: 375,
     }
     viz.data(data)
@@ -81,6 +85,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined start and end", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       start: 50,
       end: 350,
     }
@@ -91,6 +96,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined interval", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       interval: 30,
     }
     viz.data(data)
@@ -100,6 +106,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined interval and start", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       interval: 30,
       start: 75,
     }
@@ -110,6 +117,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined interval and end", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       interval: 30,
       end: 375,
     }
@@ -120,6 +128,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined interval, start and end", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       interval: 30,
       start: 75,
       end: 375,
@@ -131,6 +140,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   test("Defined intervals", () => {
     data.axes.y1 = {
       type: "quant",
+      title: "New Users",
       interval: 50,
       tickInterval: 25,
       ruleInterval: 100,

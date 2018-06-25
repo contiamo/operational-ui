@@ -23,9 +23,11 @@ const data_hour = {
       start: new Date(2018, 2, 8, 0),
       end: new Date(2018, 2, 8, 23),
       interval: "hour",
+      title: "Hourly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -62,9 +64,11 @@ const data_day = {
       start: new Date("March 8, 2018"),
       end: new Date("March 20, 2018"),
       interval: "day",
+      title: "Daily",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -90,9 +94,11 @@ const data_week = {
       start: new Date(2018, 2, 1),
       end: new Date(2018, 2, 31),
       interval: "week",
+      title: "Weekly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -118,9 +124,11 @@ const data_month = {
       start: new Date(2018, 0),
       end: new Date(2018, 3),
       interval: "month",
+      title: "Monthly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -145,9 +153,11 @@ const data_quarter = {
       start: new Date(2017, 0),
       end: new Date(2018, 3),
       interval: "quarter",
+      title: "Quarterly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -174,9 +184,11 @@ const data_year = {
       start: new Date(2015, 0),
       end: new Date(2018, 0),
       interval: "year",
+      title: "Annual",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
