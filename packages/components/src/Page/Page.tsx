@@ -94,20 +94,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     fill: false,
   }
 
-  constructor(props: Props) {
-    super(props)
-    if (props.activeTabName && props.tabs) {
-      const index = isStringArray(props.tabs)
-        ? props.tabs.findIndex(name => name.toLowerCase() === props.activeTabName.toLowerCase())
-        : props.tabs.findIndex(({ name }) => name.toLowerCase() === props.activeTabName.toLowerCase())
-      this.state = {
-        ...initialState,
-        activeTab: index === -1 ? 0 : index,
-      }
-    } else {
-      this.state = initialState
-    }
-  }
+  state = initialState
 
   onTabClick(index: number) {
     this.setState({ activeTab: index })
@@ -120,7 +107,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
 
   render() {
     const { children, title, actions, tabs, areas, fill } = this.props
-    const { activeTab } = this.state
+    const activeTab = this.getActiveTabIndex()
     const grid = React.Children.count(children) > 1 ? "main side" : "main"
     const CurrentTab = tabs && !isStringArray(tabs) && tabs[activeTab].component
 
@@ -158,6 +145,17 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         )}
       </Container>
     )
+  }
+
+  private getActiveTabIndex = () => {
+    if (this.props.activeTabName && this.props.tabs) {
+      const index = isStringArray(this.props.tabs)
+        ? this.props.tabs.findIndex(name => name.toLowerCase() === this.props.activeTabName.toLowerCase())
+        : this.props.tabs.findIndex(({ name }) => name.toLowerCase() === this.props.activeTabName.toLowerCase())
+
+      return index === -1 ? 0 : index
+    }
+    return 0
   }
 }
 

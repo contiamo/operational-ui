@@ -157,19 +157,19 @@ class Routes extends React.Component {
       jobs: () => <Card title="Jobs" />,
       functions: () => (
         <Card title="Functions">
-          <Button color="primary" onClick={() => this.onChange("functionDetail")}>
+          <Button color="primary" onClick={() => this.onChange("functions/myfunction")}>
             Go to function detail
           </Button>
         </Card>
       ),
-      functionDetail: () => <Card title="Function Detail" />,
+      "functions/myfunction": () => <Card title="Function Detail" />,
     }[this.state.currentRoute]
 
     return (
       <Page
         title="With a router"
         onTabChange={this.onChange}
-        activeTabName={this.state.currentRoute}
+        activeTabName={this.state.currentRoute.split("/")[0]}
         tabs={["overview", "jobs", "functions"]}
       >
         <PageContent>
