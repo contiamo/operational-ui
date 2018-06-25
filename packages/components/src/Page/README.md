@@ -131,3 +131,54 @@ const Tab = n => () => (
   </PageArea>
 </Page>
 ```
+
+### With tabs and router
+
+The idea here is to just give strings as tabs, and give the switch responsability to react-router for example.
+
+```jsx
+class Routes extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentRoute: "overview",
+    }
+
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(name) {
+    this.setState({ currentRoute: name })
+  }
+
+  render() {
+    const Switch = {
+      overview: () => <Card title="Overview" />,
+      jobs: () => <Card title="Jobs" />,
+      functions: () => (
+        <Card title="Functions">
+          <Button color="primary" onClick={() => this.onChange("functions/myfunction")}>
+            Go to function detail
+          </Button>
+        </Card>
+      ),
+      "functions/myfunction": () => <Card title="Function Detail" />,
+    }[this.state.currentRoute]
+
+    return (
+      <Page
+        title="With a router"
+        onTabChange={this.onChange}
+        activeTabName={this.state.currentRoute.split("/")[0]}
+        tabs={["overview", "jobs", "functions"]}
+      >
+        <PageContent>
+          <Switch />
+        </PageContent>
+      </Page>
+    )
+  }
+}
+
+;<Routes />
+```
