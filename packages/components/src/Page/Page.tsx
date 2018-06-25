@@ -5,6 +5,10 @@ import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
 import PageContent from "../PageContent/PageContent"
 
+const isStringArray = (value: any): value is string[] => {
+  return value && typeof value[0] === "string"
+}
+
 export interface Props {
   /** Page title */
   title?: string
@@ -20,7 +24,7 @@ export interface Props {
    * List of tabs
    * This will disable any children to render `tabs[i].component` instead
    */
-  tabs?: { name: string; component: React.ComponentType }[]
+  tabs?: { name: string; component: React.ComponentType }[] | string[]
   /**
    * Active tab name
    *
@@ -93,7 +97,9 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   constructor(props: Props) {
     super(props)
     if (props.activeTabName && props.tabs) {
-      const index = props.tabs.findIndex(({ name }) => name.toLowerCase() === props.activeTabName.toLowerCase())
+      const index = isStringArray(props.tabs)
+        ? props.tabs.findIndex(name => name.toLowerCase() === props.activeTabName.toLowerCase())
+        : props.tabs.findIndex(({ name }) => name.toLowerCase() === props.activeTabName.toLowerCase())
       this.state = {
         ...initialState,
         activeTab: index === -1 ? 0 : index,
@@ -105,14 +111,18 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
 
   onTabClick(index: number) {
     this.setState({ activeTab: index })
-    this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].name.toLowerCase())
+    if (isStringArray(this.props.tabs)) {
+      this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].toLowerCase())
+    } else {
+      this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].name.toLowerCase())
+    }
   }
 
   render() {
     const { children, title, actions, tabs, areas, fill } = this.props
     const { activeTab } = this.state
     const grid = React.Children.count(children) > 1 ? "main side" : "main"
-    const CurrentTab = tabs && tabs[activeTab].component
+    const CurrentTab = tabs && !isStringArray(tabs) && tabs[activeTab].component
 
     return (
       <Container>
@@ -125,15 +135,19 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         {tabs ? (
           <>
             <TabsBar>
-              {tabs.map(({ name }, i) => (
-                <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
-                  {name}
-                </Tab>
-              ))}
+              {isStringArray(tabs)
+                ? tabs.map((name, i) => (
+                    <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
+                      {name}
+                    </Tab>
+                  ))
+                : tabs.map(({ name }, i) => (
+                    <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
+                      {name}
+                    </Tab>
+                  ))}
             </TabsBar>
-            <ViewContainer isInTab>
-              <CurrentTab />
-            </ViewContainer>
+            <ViewContainer isInTab>{isStringArray(tabs) ? children : <CurrentTab />}</ViewContainer>
           </>
         ) : (
           <ViewContainer>
