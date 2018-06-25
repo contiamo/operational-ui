@@ -18,7 +18,6 @@ import {
 class ChartLegend implements Legend {
   private data: LegendDatum[]
   private events: EventBus
-  private legend: D3Selection
   private state: State
   private stateWriter: StateWriter
   el: D3Selection
