@@ -1,21 +1,5 @@
 import Renderer from "./renderer"
-
-import {
-  compact,
-  filter,
-  find,
-  flatten,
-  flow,
-  forEach,
-  get,
-  includes,
-  invoke,
-  isNil,
-  map,
-  remove,
-  uniqBy,
-} from "lodash/fp"
-
+import { compact, filter, find, flatten, flow, forEach, get, includes, invoke, isNil, map, uniqBy } from "lodash/fp"
 import {
   D3Selection,
   Datum,
@@ -109,7 +93,7 @@ class ChartSeries {
   private remove(renderer: RendererClass<any>): void {
     this.oldRenderers.push(renderer)
     renderer.close()
-    remove(renderer)(this.renderers)
+    this.renderers = filter((r: RendererClass<any>) => r !== renderer)(this.renderers)
   }
 
   dataForLegend(): LegendDatum {
