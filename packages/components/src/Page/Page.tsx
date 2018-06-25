@@ -94,7 +94,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     fill: false,
   }
 
-  state = initialState
+  readonly state = initialState
 
   onTabClick(index: number) {
     this.setState({ activeTab: index })
