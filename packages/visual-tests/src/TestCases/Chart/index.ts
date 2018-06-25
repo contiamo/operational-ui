@@ -24,6 +24,7 @@ import * as range1 from "./range-1"
 import * as range2 from "./range-2"
 import * as range3 from "./range-3"
 import * as range4 from "./range-4"
+import * as trendline1 from "./trendline-1"
 
 export default [
   general1,
@@ -52,4 +53,5 @@ export default [
   range2,
   range3,
   range4,
+  trendline1,
 ]

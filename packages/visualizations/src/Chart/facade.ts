@@ -67,7 +67,7 @@ const defaultAccessors = () => {
       hide: (d: { [key: string]: any }): boolean => d.hide || false,
       hideInLegend: (d: { [key: string]: any }): boolean => d.hideInLegend || false,
       key: (d: { [key: string]: any }): string => d.key || uniqueId("key"),
-      legendColor: (d: { [key: string]: any }): string => initialColorAssigner(d.key),
+      legendColor: (d: { [key: string]: any }): string => d.legendColor || initialColorAssigner(d.key),
       legendName: (d: { [key: string]: any }): string => d.name || d.key || "",
       renderAs: (d: { [key: string]: any }): RendererOptions[] => d.renderAs,
       axis: (d: { [key: string]: any }): AxisPosition => d.axis || "x1", // Only used for flags
