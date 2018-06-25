@@ -110,6 +110,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     const activeTab = this.getActiveTabIndex()
     const grid = React.Children.count(children) > 1 ? "main side" : "main"
     const CurrentTab = tabs && !isStringArray(tabs) && tabs[activeTab].component
+    const tabsNames = tabs && (isStringArray(tabs) ? tabs : tabs.map(({ name }) => name))
 
     return (
       <Container>
@@ -122,17 +123,11 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         {tabs ? (
           <>
             <TabsBar>
-              {isStringArray(tabs)
-                ? tabs.map((name, i) => (
-                    <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
-                      {name}
-                    </Tab>
-                  ))
-                : tabs.map(({ name }, i) => (
-                    <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
-                      {name}
-                    </Tab>
-                  ))}
+              {tabsNames.map((name, i) => (
+                <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
+                  {name}
+                </Tab>
+              ))}
             </TabsBar>
             <ViewContainer isInTab>{isStringArray(tabs) ? children : <CurrentTab />}</ViewContainer>
           </>
