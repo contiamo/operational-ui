@@ -12,7 +12,7 @@ export interface State {
 }
 
 // Number of squares in the animation grid
-const n: number = 10
+const n: number = 12
 
 // Return integer random between 0 and range - 1, boundaries included
 const integerRandom = (range: number): number => {

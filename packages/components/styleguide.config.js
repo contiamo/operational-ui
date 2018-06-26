@@ -21,6 +21,6 @@ module.exports = {
   skipComponentsWithoutExample: true,
   styleguideComponents: {
     Wrapper: path.join(__dirname, "styleguide/ThemeWrapper"),
-    LogoRenderer: path.join(__dirname, "styleguide/Logo"),
+    LogoRenderer: path.join(__dirname, "styleguide/LogoAndBanner"),
   },
 }

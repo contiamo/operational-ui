@@ -89,7 +89,7 @@ const LogoType = styled("h1")`
 
 const operationalBannerContainerId = "operational-banner-container"
 
-class Logo extends React.Component<Props, State> {
+class LogoAndBanner extends React.Component<Props, State> {
   state = {
     isOpen: !window.location.hash,
     isPortalRendered: false,
@@ -147,7 +147,7 @@ class Logo extends React.Component<Props, State> {
                       >
                         Docs
                       </Button>
-                      <Button>GitHub</Button>
+                      <Button to="https://github.com/contiamo/operational-ui/">GitHub</Button>
                     </div>
                   </TitleBarContent>
                 </TitleBar>
@@ -181,4 +181,4 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
   }
 }
 
-export default Logo
+export default LogoAndBanner
