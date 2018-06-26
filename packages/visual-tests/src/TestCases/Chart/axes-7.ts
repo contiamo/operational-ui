@@ -147,6 +147,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
         },
         y1: {
           type: "quant",
+          title: "Unique users",
         },
       }),
     )
