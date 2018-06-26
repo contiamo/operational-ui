@@ -22,9 +22,11 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
             ],
-            xAttribute: "y",
-            yAttribute: "x",
             name: "Existing Users",
+            datumAccessors: {
+              x: (d: any) => d.y,
+              y: (d: any) => d.x,
+            },
             key: "series1",
           },
           {
@@ -38,8 +40,10 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
             ],
-            xAttribute: "y",
-            yAttribute: "x",
+            datumAccessors: {
+              x: (d: any) => d.y,
+              y: (d: any) => d.x,
+            },
             name: "New Users",
             key: "series2",
           },

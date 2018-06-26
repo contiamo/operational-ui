@@ -17,6 +17,11 @@ const hasValue = (d: any): boolean => {
   return !!d || d === 0
 }
 
+const defaultDatumAccessors = {
+  x: (d: Datum): number | string | Date => d.x,
+  y: (d: Datum): number | string | Date => d.y,
+}
+
 class ChartSeries {
   el: D3Selection
   events: EventBus
@@ -35,8 +40,6 @@ class ChartSeries {
   symbolOffset: (d: Datum) => number
   xAxis: () => "x1" | "x2"
   yAxis: () => "y1" | "y2"
-  xAttribute: () => string
-  yAttribute: () => string
   x: (d: Datum) => number | string | Date
   y: (d: Datum) => number | string | Date
 
@@ -48,17 +51,19 @@ class ChartSeries {
   }
 
   update(options: any): void {
-    this.assignAccessors()
+    this.assignAccessors(options.datumAccessors)
     this.options = options
     this.updateRenderers()
   }
 
-  assignAccessors(): void {
+  assignAccessors(datumAccessors: any): void {
+    // Assign series accessors
     forEach.convert({ cap: false })((accessor: SeriesAccessor<any>, key: string) => {
       ;(this as any)[key] = () => accessor(this.options)
     })(this.state.current.get("accessors").series)
-    this.x = (d: Datum) => d[this.xAttribute()]
-    this.y = (d: Datum) => d[this.yAttribute()]
+    // Assign series-specific datum accessors
+    this.x = (datumAccessors && datumAccessors.x) || defaultDatumAccessors.x
+    this.y = (datumAccessors && datumAccessors.y) || defaultDatumAccessors.y
   }
 
   private updateRenderers(): void {

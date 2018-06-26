@@ -174,8 +174,6 @@ export interface SeriesAccessors {
   legendName: SeriesAccessor<string>
   renderAs: SeriesAccessor<RendererOptions[]>
   axis: SeriesAccessor<AxisPosition>
-  xAttribute: SeriesAccessor<string>
-  yAttribute: SeriesAccessor<string>
   xAxis: SeriesAccessor<"x1" | "x2">
   yAxis: SeriesAccessor<"y1" | "y2">
 }
