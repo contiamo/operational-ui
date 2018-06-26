@@ -1,5 +1,9 @@
 import Events from "../../shared/event_catalog"
 import { cloneDeep, defaults, filter, find, includes, isFinite, last, rangeStep, sortBy } from "lodash/fp"
+import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
+import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
+import * as styles from "./styles"
+
 import {
   computeRequiredMargin,
   insertElements,
@@ -8,9 +12,6 @@ import {
   getTextAnchor,
   drawTitle,
 } from "./axis_utils"
-import { setTextAttributes, setLineAttributes } from "../../utils/d3_utils"
-import { computeDomain, computeScale, computeTickNumber, computeTicks } from "../../utils/quant_axis_utils"
-import * as styles from "./styles"
 
 import {
   AxisAttributes,

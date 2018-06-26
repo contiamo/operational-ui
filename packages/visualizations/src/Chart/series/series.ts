@@ -1,5 +1,6 @@
 import Renderer from "./renderer"
 import { compact, filter, find, flatten, flow, forEach, get, includes, invoke, isNil, map, uniqBy } from "lodash/fp"
+
 import {
   D3Selection,
   Datum,
