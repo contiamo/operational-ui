@@ -1,6 +1,6 @@
 import Axis from "./axes/axis"
 import Rules from "../Chart/axes/rules"
-import { any, assign, defaults, difference, find, forEach, get, invoke, keys, omitBy, pickBy } from "lodash/fp"
+import { any, assign, defaults, difference, find, forEach, includes, invoke, keys, omitBy, pickBy } from "lodash/fp"
 import { alignAxes } from "./axes/axis_utils"
 import { AxisClass, AxisConfig, AxisOptions, AxisPosition, D3Selection, EventBus, State, StateWriter } from "./typings"
 
@@ -48,12 +48,14 @@ class AxesManager {
     this.stateWriter = stateWriter
     this.events = events
     this.els = els
-    this.events.on("margins:updated", this.onMarginsUpdated.bind(this))
   }
 
   draw(): void {
     this.updateAxes()
     forEach(invoke("close"))(this.oldAxes)
+    forEach(this.drawAxes.bind(this))(["y", "x"])
+    forEach(invoke("adjustMargins"))(this.axes)
+    this.events.emit("margins:update")
     forEach(this.drawAxes.bind(this))(["y", "x"])
   }
 
@@ -136,17 +138,19 @@ class AxesManager {
       },
     )(this.axes)
     keys(axes).length === 2 ? alignAxes(axes) : forEach(invoke("compute"))(axes)
-    forEach(invoke("draw"))(axes)
 
     // Update rules
     const hasRules = any((axis: AxisClass<any>) => axis.options.showRules)(axes as any)
     hasRules ? this.updateRules(orientation) : this.removeRules(orientation)
 
-    this.axesDrawn.push(orientation)
-  }
-
-  private onMarginsUpdated(isXAxis: boolean): void {
-    forEach(this.drawAxes.bind(this))(["y", "x"])
+    if (includes(orientation)(this.axesDrawn)) {
+      forEach((axis: AxisClass<any>) => {
+        axis.draw(this.state.current.get(["config", "duration"]))
+      })(axes)
+    } else {
+      forEach(invoke("draw"))(axes)
+      this.axesDrawn.push(orientation)
+    }
   }
 
   updateRules(orientation: "x" | "y"): void {

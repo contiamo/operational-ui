@@ -118,7 +118,6 @@ class TimeAxis implements AxisClass<Date> {
     if (!this.options.start || !this.options.end || !this.options.interval) {
       throw new Error("Values for `start`, `end` and `interval` must always be configured for time axes.")
     }
-    this.adjustMargins()
   }
 
   update(options: TimeAxisOptions, data: Date[]): void {
@@ -258,6 +257,10 @@ class TimeAxis implements AxisClass<Date> {
 
   private computeRuleTicks(computed: Partial<AxisComputed>): Date[] {
     const ticks = this.options.interval === "week" ? computed.scale.ticks(timeMonday, 1) : computed.ticksInDomain
+    if (!computed.tickWidth) {
+      return ticks
+    }
+
     const tickValues = map(computed.scale)(ticks)
     const ruleValues = reduce.convert({ cap: false })((memo: number[], tick: number, i: number) => {
       if (i > 0) {
@@ -281,17 +284,17 @@ class TimeAxis implements AxisClass<Date> {
   }
 
   // Drawing
-  draw(): void {
+  draw(duration?: number): void {
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
-    this.drawTicks()
-    this.drawLabels()
-    this.drawBorder()
+    this.drawTicks(duration)
+    this.drawLabels(duration)
+    this.drawBorder(duration)
     positionBackgroundRect(this.el, this.position, this.state.current.get("config").duration)
     drawTitle(this.el, this.options, this.position, this.computed.range)
   }
 
-  private drawTicks(): void {
-    const config = this.state.current.get("config")
+  private drawTicks(duration?: number): void {
+    const startAttributes = this.getTickStartAttributes()
     const attributes = this.getTickAttributes()
 
     const ticks = this.el
@@ -299,53 +302,47 @@ class TimeAxis implements AxisClass<Date> {
       .selectAll(`line.${styles.tick}`)
       .data(this.options.showTicks ? this.computed.ticks : [], String)
 
-    ticks
+    const updateTicks = ticks
       .enter()
       .append("svg:line")
-      .call(setLineAttributes, attributes)
+      .call(setLineAttributes, startAttributes)
       .merge(ticks)
       .attr("class", styles.tick)
-      .call(setLineAttributes, attributes, config.duration)
 
-    ticks
-      .exit()
-      .transition()
-      .duration(config.duration / 2)
-      .call(setLineAttributes, defaults(attributes)({ opacity: 1e-6 }))
-      .remove()
+    if (duration) {
+      updateTicks.call(setLineAttributes, attributes, duration)
+    }
+
+    ticks.exit().remove()
   }
 
-  private drawLabels(): void {
-    const config = this.state.current.get("config")
+  private drawLabels(duration?: number): void {
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
+
     const labels = this.el
       .select("g.axis-elements")
       .selectAll(`text.${styles.label}`)
       .data(this.computed.ticks, String)
 
-    labels
+    const updateLabels = labels
       .enter()
       .append("svg:text")
       .attr("class", styles.label)
       .merge(labels)
+      .call(setTextAttributes, startAttributes)
       // @TODO
       // .attr("class", (d: string | number, i: number): string => "tick " + this.tickClass(d, i))
       .style("font-size", `${this.options.fontSize}px`)
-      .call(setTextAttributes, startAttributes)
-      .call(setTextAttributes, attributes, config.duration)
 
-    labels
-      .exit()
-      .transition()
-      .duration(config.duration / 2)
-      .call(setTextAttributes, defaults({ opacity: 1e-6 })(attributes))
-      .remove()
+    if (duration) {
+      updateLabels.call(setTextAttributes, attributes, duration)
+    }
 
-    this.adjustMargins()
+    labels.exit().remove()
   }
 
-  private adjustMargins(): void {
+  adjustMargins(): void {
     let requiredMargin = computeRequiredMargin(this.el, this.options.margin, this.options.outerPadding, this.position)
 
     // Add space for flags
@@ -358,7 +355,6 @@ class TimeAxis implements AxisClass<Date> {
     }
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
-    this.events.emit("margins:update", this.isXAxis)
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
   }
 
@@ -380,6 +376,10 @@ class TimeAxis implements AxisClass<Date> {
   private getStartAttributes(attributes: AxisAttributes): AxisAttributes {
     const startAttributes = cloneDeep(attributes)
     startAttributes[this.isXAxis ? "x" : "y"] = this.previous.scale
+    startAttributes.transform = this.options.rotateLabels
+      ? (d: Date) =>
+          `rotate(-45, ${startAttributes.x(d) + startAttributes.dx}, ${startAttributes.y(d) + startAttributes.dy})`
+      : ""
     return startAttributes
   }
 
@@ -392,7 +392,16 @@ class TimeAxis implements AxisClass<Date> {
     }
   }
 
-  private drawBorder(): void {
+  private getTickStartAttributes() {
+    return {
+      x1: this.isXAxis ? this.previous.scale : 0,
+      x2: this.isXAxis ? this.previous.scale : this.options.tickOffset * 0.6,
+      y1: this.isXAxis ? 0 : this.previous.scale,
+      y2: this.isXAxis ? this.options.tickOffset * 0.6 : this.previous.scale,
+    }
+  }
+
+  private drawBorder(duration?: number): void {
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const border = {
       x1: 0,
@@ -400,7 +409,7 @@ class TimeAxis implements AxisClass<Date> {
       y1: this.isXAxis ? 0 : drawingDims.height,
       y2: 0,
     }
-    this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
+    this.el.select(`line.${styles.border}`).call(setLineAttributes, border, duration)
   }
 
   private onComponentHover(): void {

@@ -86,7 +86,6 @@ class CategoricalAxis implements AxisClass<string> {
 
   update(options: Partial<CategoricalAxisOptions>, data: string[]): void {
     this.options = defaults(defaultOptions)(options)
-    this.adjustMargins()
     this.data = flow(
       filter(this.validate),
       map(String),
@@ -101,13 +100,14 @@ class CategoricalAxis implements AxisClass<string> {
     const range = this.computeRange(tickWidth)
     this.computed = {
       range,
+      tickWidth,
       ticks: this.data,
       scale: scaleBand()
         .range(range)
         .domain(this.data)
         .padding(config.innerBarSpacingCategorical),
     }
-    this.computed.ruleOffset = this.computed.scale.bandwidth() / 2
+    this.computed.ruleOffset = tickWidth ? this.computed.scale.bandwidth() / 2 : 0
     this.previous = defaults(this.computed)(this.previous)
     this.stateWriter(["computed", this.position], this.computed)
     this.stateWriter(["previous", this.position], this.previous)
@@ -122,7 +122,9 @@ class CategoricalAxis implements AxisClass<string> {
     const config = this.state.current.get("config")
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const defaultTickWidth =
-      (this.position[0] === "x" ? drawingDims.width / this.data.length : drawingDims.height / this.data.length) *
+      (this.position[0] === "x"
+        ? drawingDims.width / (this.data.length || 1)
+        : drawingDims.height / (this.data.length || 1)) *
       (1 - config.innerBarSpacingCategorical)
 
     const stacks = groupBy((s: { [key: string]: any }) => s.stackIndex || uniqueId("stackIndex"))(barSeries)
@@ -140,7 +142,7 @@ class CategoricalAxis implements AxisClass<string> {
 
     const variableBarWidth =
       variableWidthStacks.length > 0
-        ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / variableWidthStacks.length)
+        ? Math.max(config.minBarWidth, (defaultTickWidth - requiredTickWidth) / (variableWidthStacks.length || 1))
         : 0
 
     requiredTickWidth =
@@ -188,17 +190,16 @@ class CategoricalAxis implements AxisClass<string> {
   }
 
   // Drawing
-  draw(): void {
+  draw(duration?: number): void {
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
-    this.drawTicks()
-    this.drawLabels()
-    this.drawBorder()
+    this.drawTicks(duration)
+    this.drawLabels(duration)
+    this.drawBorder(duration)
     positionBackgroundRect(this.el, this.position, this.state.current.get("config").duration)
     drawTitle(this.el, this.options, this.position, this.computed.range)
   }
 
-  private drawTicks(): void {
-    const config = this.state.current.get("config")
+  private drawTicks(duration?: number): void {
     const attributes = this.getTickAttributes()
 
     const ticks = this.el
@@ -206,24 +207,21 @@ class CategoricalAxis implements AxisClass<string> {
       .selectAll(`line.${styles.tick}`)
       .data(this.options.showTicks ? this.computed.ticks : [], String)
 
-    ticks
+    const updateTicks = ticks
       .enter()
       .append("svg:line")
       .call(setLineAttributes, attributes)
       .merge(ticks)
       .attr("class", (d: any) => `${styles.tick} ${d === 0 ? "zero" : ""}`)
-      .call(setLineAttributes, attributes, config.duration)
 
-    ticks
-      .exit()
-      .transition()
-      .duration(config.duration / 2)
-      .call(setLineAttributes, defaults(attributes)({ opacity: 1e-6 }))
-      .remove()
+    if (duration) {
+      updateTicks.call(setLineAttributes, attributes, duration)
+    }
+
+    ticks.exit().remove()
   }
 
-  private drawLabels(): void {
-    const config = this.state.current.get("config")
+  private drawLabels(duration?: number): void {
     const attributes = this.getAttributes()
     const startAttributes = this.getStartAttributes(attributes)
 
@@ -232,30 +230,26 @@ class CategoricalAxis implements AxisClass<string> {
       .selectAll(`text.${styles.label}`)
       .data(this.computed.ticks, String)
 
-    labels
+    const updateLabels = labels
       .enter()
       .append("svg:text")
       .attr("class", styles.label)
       .merge(labels)
-      .style("font-size", `${this.options.fontSize}px`)
       .call(setTextAttributes, startAttributes)
-      .call(setTextAttributes, attributes, config.duration)
+      .style("font-size", `${this.options.fontSize}px`)
 
-    labels
-      .exit()
-      .transition()
-      .duration(config.duration / 2)
-      .call(setTextAttributes, defaults(attributes)({ opacity: 1e-6 }))
-      .remove()
+    if (duration) {
+      updateLabels.call(setTextAttributes, attributes, duration)
+    }
 
-    this.adjustMargins()
+    labels.exit().remove()
   }
 
   // Padding added only to end of each step in d3 ordinal band scale
   private scaleWithOffset(computed: AxisComputed) {
     const barPadding = this.state.current.get("config").innerBarSpacingCategorical
     const stepWidth = computed.scale.step()
-    return (d: string) => computed.scale(d) - (stepWidth * barPadding) / 2
+    return (d: string) => computed.scale(d) - (computed.tickWidth ? (stepWidth * barPadding) / 2 : 0)
   }
 
   private getAttributes(): AxisAttributes {
@@ -278,6 +272,10 @@ class CategoricalAxis implements AxisClass<string> {
     const startAttributes = cloneDeep(attributes)
     startAttributes[this.isXAxis ? "x" : "y"] = (d: string) =>
       this.scaleWithOffset(this.previous)(d) || this.scaleWithOffset(this.computed)(d)
+    startAttributes.transform = this.options.rotateLabels
+      ? (d: any) =>
+          `rotate(-45, ${startAttributes.x(d) + startAttributes.dx}, ${startAttributes.y(d) + startAttributes.dy})`
+      : ""
     return startAttributes
   }
 
@@ -291,7 +289,7 @@ class CategoricalAxis implements AxisClass<string> {
     }
   }
 
-  private adjustMargins(): void {
+  adjustMargins(): void {
     let requiredMargin = computeRequiredMargin(this.el, this.options.margin, this.options.outerPadding, this.position)
 
     // Add space for flags
@@ -304,11 +302,10 @@ class CategoricalAxis implements AxisClass<string> {
     }
     computedMargins[this.position] = requiredMargin
     this.stateWriter("margins", computedMargins)
-    this.events.emit("margins:update", this.isXAxis)
     translateAxis(this.el, this.position, this.state.current.get("computed").canvas.drawingDims)
   }
 
-  private drawBorder(): void {
+  private drawBorder(duration?: number): void {
     const drawingDims = this.state.current.get("computed").canvas.drawingDims
     const border = {
       x1: 0,
@@ -316,7 +313,7 @@ class CategoricalAxis implements AxisClass<string> {
       y1: this.isXAxis ? 0 : drawingDims.height,
       y2: 0,
     }
-    this.el.select(`line.${styles.border}`).call(setLineAttributes, border)
+    this.el.select(`line.${styles.border}`).call(setLineAttributes, border, duration)
   }
 
   private onComponentHover(): void {

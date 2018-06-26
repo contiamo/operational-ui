@@ -1,14 +1,6 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const LineRenderer = {
-  type: "line",
-  accessors: {
-    interpolate: () => "monotoneX",
-    closeGaps: () => true,
-  },
-}
-
 const BarsRenderer = {
   type: "bars",
 }
@@ -19,7 +11,7 @@ const TextRenderer = {
 
 const RangeRenderer = {
   type: "range",
-  renderAs: [BarsRenderer, LineRenderer, TextRenderer],
+  renderAs: [BarsRenderer, TextRenderer],
 }
 
 const createData = () => {
@@ -38,7 +30,7 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 200 - 100) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 - 100) },
             ],
-            name: "New Users",
+            name: "Profit: product 1",
             key: "series1",
           },
           {
@@ -52,7 +44,7 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 200 - 100) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 200 - 100) },
             ],
-            name: "Existing Users",
+            name: "Profit: product 2",
             key: "series2",
           },
         ],
@@ -65,9 +57,12 @@ const createData = () => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "March 2018",
       },
       y1: {
         type: "quant",
+        title: "Profit",
+        unit: "k $",
       },
     },
   }

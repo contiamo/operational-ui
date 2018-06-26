@@ -74,9 +74,12 @@ const createData = () => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "2018",
       },
       x1: {
         type: "quant",
+        rotateLabels: true,
+        title: "Total users",
       },
     },
   }

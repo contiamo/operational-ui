@@ -1,5 +1,4 @@
 import { D3Selection, Datum, EventBus, SingleRendererOptions, State } from "../typings"
-import * as d3 from "d3-selection"
 import Area from "./renderers/area"
 import Bars from "./renderers/bars"
 import Flag from "./renderers/flag"

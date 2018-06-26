@@ -15,6 +15,10 @@ const AreaRenderer = {
   type: "area",
 }
 
+const BarsRenderer = {
+  type: "bars",
+}
+
 const data_hour = {
   axes: {
     x1: {
@@ -23,9 +27,11 @@ const data_hour = {
       start: new Date(2018, 2, 8, 0),
       end: new Date(2018, 2, 8, 23),
       interval: "hour",
+      title: "Hourly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -62,9 +68,11 @@ const data_day = {
       start: new Date("March 8, 2018"),
       end: new Date("March 20, 2018"),
       interval: "day",
+      title: "Daily",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -90,9 +98,11 @@ const data_week = {
       start: new Date(2018, 2, 1),
       end: new Date(2018, 2, 31),
       interval: "week",
+      title: "Weekly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -118,9 +128,11 @@ const data_month = {
       start: new Date(2018, 0),
       end: new Date(2018, 3),
       interval: "month",
+      title: "Monthly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -145,9 +157,11 @@ const data_quarter = {
       start: new Date(2017, 0),
       end: new Date(2018, 3),
       interval: "quarter",
+      title: "Quarterly",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -174,9 +188,11 @@ const data_year = {
       start: new Date(2015, 0),
       end: new Date(2018, 0),
       interval: "year",
+      title: "Annual",
     },
     y1: {
       type: "quant",
+      title: "Pageviews",
     },
   },
   series: [
@@ -189,6 +205,35 @@ const data_year = {
         { x: new Date(2018, 0), y: 260 },
       ],
       renderAs: [LineRenderer, AreaRenderer],
+    },
+  ],
+}
+
+const data_year_bars = {
+  axes: {
+    x1: {
+      type: "time",
+      showRules: true,
+      start: new Date(2015, 0),
+      end: new Date(2018, 0),
+      interval: "year",
+      title: "Annual",
+    },
+    y1: {
+      type: "quant",
+      title: "Pageviews",
+    },
+  },
+  series: [
+    {
+      key: "series1",
+      data: [
+        { x: new Date(2015, 0), y: 700 },
+        { x: new Date(2016, 0), y: 800 },
+        { x: new Date(2017, 0), y: 675 },
+        { x: new Date(2018, 0), y: 260 },
+      ],
+      renderAs: [BarsRenderer],
     },
   ],
 }
@@ -223,6 +268,11 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
 
   test("Interval: year", () => {
     viz.data(data_year)
+    viz.draw()
+  })
+
+  test("Change renderer", () => {
+    viz.data(data_year_bars)
     viz.draw()
   })
 

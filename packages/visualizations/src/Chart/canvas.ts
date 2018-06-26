@@ -46,7 +46,7 @@ class ChartCanvas implements Canvas {
     this.renderRules()
     this.renderSeriesDrawingGroups()
     this.renderFocusElements()
-    this.events.on("margins:update", this.onMarginUpdate.bind(this))
+    this.events.on("margins:update", this.draw.bind(this))
   }
 
   // Lifecycle
@@ -90,11 +90,6 @@ class ChartCanvas implements Canvas {
   // Helper methods
   elementFor(component: string): D3Selection {
     return this.elMap[component]
-  }
-
-  onMarginUpdate(isXAxis: boolean): void {
-    this.draw()
-    this.events.emit("margins:updated", isXAxis)
   }
 
   // Rendering

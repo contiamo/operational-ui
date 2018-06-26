@@ -104,6 +104,7 @@ class Area implements RendererClass<AreaRendererAccessors> {
       .attr("d", this.startPath.bind(this))
       .merge(area)
       .attr("fill", this.color.bind(this))
+      .attr("stroke", this.color.bind(this))
       .transition()
       .duration(duration)
       .attr("d", this.path.bind(this))

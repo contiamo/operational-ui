@@ -24,7 +24,7 @@ const createData = () => {
             ],
             xAttribute: "y",
             yAttribute: "x",
-            name: "Users",
+            name: "Existing Users",
             key: "series1",
           },
           {
@@ -53,9 +53,12 @@ const createData = () => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "2018",
+        rotateLabels: true,
       },
       x1: {
         type: "quant",
+        title: "Total users",
       },
     },
   }

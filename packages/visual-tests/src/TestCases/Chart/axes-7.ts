@@ -56,9 +56,11 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           start: new Date(2018, 2, 1),
           end: new Date(2018, 2, 15),
           interval: "day",
+          title: "2018",
         },
         y1: {
           type: "quant",
+          title: "Unique users",
         },
       }),
     )
@@ -74,10 +76,12 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           end: new Date(2018, 2, 15),
           interval: "day",
           fontSize: 25,
+          title: "2018",
         },
         y1: {
           type: "quant",
           fontSize: 17,
+          title: "Unique users",
         },
       }),
     )
@@ -93,12 +97,14 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           end: new Date(2018, 2, 15),
           interval: "day",
           fontSize: 25,
-          margin: 50,
+          margin: 100,
+          title: "2018",
         },
         y1: {
           type: "quant",
           fontSize: 17,
-          margin: 50,
+          margin: 100,
+          title: "Unique users",
         },
       }),
     )
@@ -114,13 +120,15 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           end: new Date(2018, 2, 15),
           interval: "day",
           fontSize: 25,
-          margin: 50,
+          margin: 100,
           tickSpacing: 150,
+          title: "2018",
         },
         y1: {
           type: "quant",
           fontSize: 17,
-          margin: 50,
+          margin: 100,
+          title: "Unique users",
         },
       }),
     )
@@ -135,9 +143,11 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
           start: new Date(2018, 2, 1),
           end: new Date(2018, 2, 15),
           interval: "day",
+          title: "2018",
         },
         y1: {
           type: "quant",
+          title: "Unique users",
         },
       }),
     )

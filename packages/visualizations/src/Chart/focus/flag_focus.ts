@@ -1,7 +1,6 @@
 import { drawHidden, drawVisible, labelDimensions, positionLabel } from "../../utils/focus_utils"
 import Events from "../../shared/event_catalog"
 import { AxisPosition, D3Selection, EventBus, State } from "../typings"
-import * as d3 from "d3-selection"
 import * as styles from "./styles"
 
 class FlagFocus {

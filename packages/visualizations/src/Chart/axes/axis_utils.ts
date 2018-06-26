@@ -1,16 +1,5 @@
 import { setLineAttributes, setRectAttributes, setTextAttributes } from "../../utils/d3_utils"
-import { Selection } from "d3-selection"
-
-import {
-  AxisClass,
-  AxisOptions,
-  AxisPosition,
-  Dimensions,
-  D3Selection,
-  AxisComputed,
-  TimeAxisOptions,
-} from "../typings"
-
+import { AxisClass, AxisOptions, AxisPosition, Dimensions, D3Selection, TimeAxisOptions } from "../typings"
 import { flow, forEach, get, keys, last, map, mapValues, times, uniqBy, values } from "lodash/fp"
 import * as styles from "./styles"
 import * as moment from "moment"
@@ -195,10 +184,10 @@ export const getTextAnchor = (axis: AxisPosition, isRotated: boolean): string =>
 }
 
 const titlePositions = {
-  x1: { x: 0.5, y: 1.2 },
-  x2: { x: 0.5, y: -1.2 },
-  y1: { x: -1.2, y: 0.5 },
-  y2: { x: 1.2, y: 0.5 },
+  x1: { x: 0.5, y: 1 },
+  x2: { x: 0.5, y: -1 },
+  y1: { x: -1, y: 0.5 },
+  y2: { x: 1, y: 0.5 },
 }
 
 const getTitleAttributes = (el: D3Selection, position: AxisPosition, fontSize: number, range: [number, number]) => {
@@ -206,14 +195,14 @@ const getTitleAttributes = (el: D3Selection, position: AxisPosition, fontSize: n
   const titlePosition = titlePositions[position]
   const width = position[0] === "x" ? range[1] - range[0] : elBox.width
   const height = position[0] === "x" ? elBox.height : Math.abs(range[1] - range[0])
-  const x = width * titlePosition.x + (position === "y2" ? fontSize : 0)
-  const y = height * titlePosition.y
+  const x = (width + (position[0] === "y" ? fontSize : 0)) * titlePosition.x
+  const y = (height + (position[0] === "x" ? fontSize : 0)) * titlePosition.y
   const rotation = position[0] === "y" ? -90 : 0
   return {
     x,
-    y: y + (position === "x1" ? fontSize : 0),
+    y,
     text: String,
-    textAnchor: "center",
+    textAnchor: "middle",
     transform: `rotate(${rotation}, ${x}, ${y})`,
   }
 }

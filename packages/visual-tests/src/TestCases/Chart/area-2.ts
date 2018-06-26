@@ -9,6 +9,13 @@ const LineRenderer = {
   type: "line",
 }
 
+const PointsRenderer = {
+  type: "symbol",
+  accessors: {
+    size: (series: any, d: any) => 20,
+  },
+}
+
 const AreaRendererWithColor = {
   type: "area",
   accessors: {
@@ -70,7 +77,7 @@ const createData = (renderers: any[]) => {
         ],
         xAttribute: "y",
         yAttribute: "x",
-        name: "Pageviews 2018",
+        name: "Product 1",
         key: "series1",
         interpolate: "step",
         renderAs: renderers,
@@ -87,7 +94,7 @@ const createData = (renderers: any[]) => {
         ],
         xAttribute: "y",
         yAttribute: "x",
-        name: "Pageviews 2017",
+        name: "Product 2",
         xAxis: "x2",
         key: "series2",
         renderAs: renderers,
@@ -99,12 +106,17 @@ const createData = (renderers: any[]) => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "2018",
       },
       x1: {
         type: "quant",
+        title: "Profit",
+        unit: "k€",
       },
       x2: {
         type: "quant",
+        title: "Profit",
+        unit: "k€",
       },
     },
   }
@@ -114,27 +126,27 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   const viz = new Chart(container)
 
   test("Render", () => {
-    viz.data(createData([AreaRenderer, LineRenderer]))
+    viz.data(createData([AreaRenderer, LineRenderer, PointsRenderer]))
     viz.draw()
   })
 
   test("Update colors", () => {
-    viz.data(createData([AreaRendererWithColor, LineRenderer]))
+    viz.data(createData([AreaRendererWithColor, LineRenderer, PointsRenderer]))
     viz.draw()
   })
 
   test("Change interpolation", () => {
-    viz.data(createData([AreaRendererWithInterpolation, LineRendererWithInterpolation]))
+    viz.data(createData([AreaRendererWithInterpolation, LineRendererWithInterpolation, PointsRenderer]))
     viz.draw()
   })
 
   test("Turn off `closeGaps`", () => {
-    viz.data(createData([AreaRendererWithGaps, LineRendererWithGaps]))
+    viz.data(createData([AreaRendererWithGaps, LineRendererWithGaps, PointsRenderer]))
     viz.draw()
   })
 
   test("Dashed lines", () => {
-    viz.data(createData([AreaRendererWithGaps, LineRendererDashed]))
+    viz.data(createData([AreaRendererWithGaps, LineRendererDashed, PointsRenderer]))
     viz.draw()
   })
 

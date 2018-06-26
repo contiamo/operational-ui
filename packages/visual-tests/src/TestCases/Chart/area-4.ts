@@ -1,6 +1,13 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
+const PointsRenderer = {
+  type: "symbol",
+  accessors: {
+    size: (series: any, d: any) => 20,
+  },
+}
+
 const createData = (closeGaps: boolean) => {
   const AreaRenderer = {
     accessors: {
@@ -19,7 +26,7 @@ const createData = (closeGaps: boolean) => {
   const StackedRenderer = {
     type: "stacked",
     stackAxis: "x",
-    renderAs: [AreaRenderer, LineRenderer],
+    renderAs: [AreaRenderer, LineRenderer, PointsRenderer],
   }
 
   return {
@@ -68,9 +75,11 @@ const createData = (closeGaps: boolean) => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "2018",
       },
       x1: {
         type: "quant",
+        title: "Users",
       },
     },
   }

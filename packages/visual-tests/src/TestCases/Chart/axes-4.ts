@@ -39,18 +39,18 @@ const data: any = {
       start: new Date(2018, 2, 10),
       end: new Date(2018, 2, 15),
       interval: "day",
-      title: "Axis title",
+      title: "2018",
     },
     x2: {
       type: "time",
       start: new Date(2017, 2, 10),
       end: new Date(2017, 2, 15),
       interval: "day",
-      title: "Axis title",
+      title: "2017",
     },
     y1: {
       type: "quant",
-      title: "Axis title",
+      title: "Profit",
     },
   },
 }

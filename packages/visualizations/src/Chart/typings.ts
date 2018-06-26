@@ -212,7 +212,7 @@ export interface CategoricalAxisOptions extends AxisConfig {
 export type AxisOptions = TimeAxisOptions | QuantAxisOptions | CategoricalAxisOptions
 
 export interface AxesData {
-  [key: string]: AxisOptions
+  [key: string]: Partial<AxisOptions>
 }
 
 export interface AxisComputed {
@@ -247,7 +247,7 @@ export interface AxisClass<T> {
   computed: AxisComputed
   computeAligned?: (computed: { [key: string]: any }) => void
   computeInitial?: () => { [key: string]: any }
-  draw: () => void
+  draw: (duration?: number) => void
   interval?: any
   isXAxis: boolean
   options: AxisOptions

@@ -21,7 +21,7 @@ const createData = () => {
               { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 500) },
               { x: new Date(2018, 2, 17), y: Math.floor(Math.random() * 500) },
             ],
-            name: "Users",
+            name: "Existing Users",
             key: "series1",
           },
           {
@@ -48,9 +48,11 @@ const createData = () => {
         start: new Date(2018, 2, 10),
         end: new Date(2018, 2, 17),
         interval: "day",
+        title: "2018",
       },
       y1: {
         type: "quant",
+        title: "Total Users",
       },
     },
   }
