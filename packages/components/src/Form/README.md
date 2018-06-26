@@ -29,7 +29,15 @@ const { name, gitUrl, branch, isCreating, isValid } = {
     <Input label="Name" value={name} />
     <Input label="Git URL" value={gitUrl} />
   </div>
-  <Input label="Branch" value={branch} />
-  <Button color="primary">Import</Button>
+  <div>
+    <Input label="Branch" value={branch} />
+    <Button color="primary">Import</Button>
+  </div>
+  <div>
+    <Input label="Branch" value={branch} />
+    <Button color="primary">Import</Button>
+    <Button color="grey">Import</Button>
+  </div>
+  <p>This is a footer!</p>
 </Form>
 ```
