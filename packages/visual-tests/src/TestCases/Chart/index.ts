@@ -14,6 +14,7 @@ import * as area1 from "./area-1"
 import * as area2 from "./area-2"
 import * as area3 from "./area-3"
 import * as area4 from "./area-4"
+import * as area5 from "./area-5"
 import * as bars1 from "./bars-1"
 import * as bars2 from "./bars-2"
 import * as bars3 from "./bars-3"
@@ -45,6 +46,7 @@ export default [
   area2,
   area3,
   area4,
+  area5,
   bars1,
   bars2,
   bars3,
