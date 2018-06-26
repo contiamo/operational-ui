@@ -237,7 +237,6 @@ class Bars implements RendererClass<BarsRendererAccessors> {
       return
     }
     const duration = this.state.current.get("config").duration
-    const mainData = sortBy((d: Datum) => (this.xIsBaseline ? this.x(d) : this.y(d)))(this.data)
     let data = this.series.options.clipData
 
     // The curveStepAfter interpolation does not account for the width of the bars.
@@ -263,12 +262,25 @@ class Bars implements RendererClass<BarsRendererAccessors> {
 
   private clipPath(data: any[]): string {
     const barWidth = this.state.current.get("computed").axes.computedBars[this.series.key()].width
+    const offset = this.state.current.get("config").outerBarSpacing / 2
+    const clipPath = this.xIsBaseline ? this.xClipPath.bind(this) : this.yClipPath.bind(this)
+    return clipPath(barWidth, offset)(data)
+  }
+
+  private xClipPath(barWidth: number, offset: number) {
     return d3Area()
-      .x0(this.xIsBaseline ? (d: Datum) => this.x0(d) || this.xScale.range()[1] + barWidth : this.xScale.range()[1])
-      .x1((d: Datum) => this.x1(d) || this.xScale.range()[1] + barWidth)
-      .y0(this.xIsBaseline ? this.yScale.range()[1] : (d: Datum) => this.y0(d) || this.yScale.range()[0] + barWidth)
-      .y1((d: Datum) => this.y1(d) || this.yScale.range()[0] + barWidth)
-      .curve(curveStepAfter)(data)
+      .x((d: Datum) => (this.x0(d) || this.xScale.range()[1] + barWidth) - offset)
+      .y0(this.yScale.range()[1])
+      .y1(this.y1 as any)
+      .curve(curveStepAfter)
+  }
+
+  private yClipPath(barWidth: number, offset: number) {
+    return d3Area()
+      .x0(this.xScale.range()[1])
+      .x1(this.x1 as any)
+      .y((d: Datum) => (this.y0(d) || this.yScale.range()[0] + barWidth) - offset)
+      .curve(curveStepAfter)
   }
 }
 

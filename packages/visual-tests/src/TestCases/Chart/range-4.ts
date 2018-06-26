@@ -1,14 +1,6 @@
 import { Chart } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
 
-const LineRenderer = {
-  type: "line",
-  accessors: {
-    interpolate: () => "monotoneY",
-    closeGaps: () => true,
-  },
-}
-
 const BarsRenderer = {
   type: "bars",
 }
@@ -19,7 +11,7 @@ const TextRenderer = {
 
 const RangeRenderer = {
   type: "range",
-  renderAs: [BarsRenderer, LineRenderer, TextRenderer],
+  renderAs: [BarsRenderer, TextRenderer],
 }
 
 const createData = () => {
