@@ -2,6 +2,8 @@ This component lays out an opinionated application frame with side navigation, a
 
 ### Basic Layout
 
+This is an example of a basic layout. Overflowing side and main sections scroll independently.
+
 ```jsx
 const sidebar = (
   <Sidenav>
@@ -11,7 +13,12 @@ const sidebar = (
       <SidenavItem label="The Second Prize" icon="Settings" />
       <SidenavItem label="The Third Prize" icon="Settings" />
     </SidenavHeader>
-    <SidenavHeader label="Let It Snow">
+    <SidenavHeader label="Let It Snow" active>
+      <SidenavItem label="The First Prize" icon="Settings" />
+      <SidenavItem label="The Second Prize" icon="Settings" />
+      <SidenavItem label="The Third Prize" icon="Settings" />
+    </SidenavHeader>
+    <SidenavHeader label="Let It Snow" active>
       <SidenavItem label="The First Prize" icon="Settings" />
       <SidenavItem label="The Second Prize" icon="Settings" />
       <SidenavItem label="The Third Prize" icon="Settings" />

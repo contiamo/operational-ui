@@ -14,45 +14,62 @@ export interface Props {
   loading?: boolean
 }
 
+const Container = styled("div")({
+  overflow: "hidden",
+  height: "100%",
+  position: "relative",
+})
+
 const Content = styled("div")(
-  {
-    display: "grid",
-    overflow: "auto",
-  },
-  ({ theme }: { theme?: OperationalStyleConstants }) => ({
-    gridTemplateColumns: `${theme.sidebarWidth}px auto`,
-  }),
-)
-
-const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  display: "block",
-  overflow: "auto",
-  backgroundColor: theme.color.white,
-}))
-
-const Container = styled("div")(
   {
     position: "relative",
     display: "grid",
     width: "100%",
     height: "100%",
+    overflow: "hidden",
+    "& > *:nth-child(1)": {
+      gridColumnStart: "1",
+      gridColumnEnd: "span 2",
+      gridRowStart: "1",
+      gridRowEnd: "span 1",
+    },
+    "& > *:nth-child(2)": {
+      gridColumnStart: "1",
+      gridColumnEnd: "span 1",
+      gridRowStart: "2",
+      gridRowEnd: "span 1",
+    },
+    "& > *:nth-child(3)": {
+      gridColumnStart: "2",
+      gridColumnEnd: "span 1",
+      gridRowStart: "2",
+      gridRowEnd: "span 1",
+    },
   },
   ({ theme }: { theme?: OperationalStyleConstants }) => ({
-    gridTemplateRows: `${theme.titleHeight}px auto`,
+    gridTemplateRows: `${theme.titleHeight}px 1fr`,
+    gridTemplateColumns: `${theme.sidebarWidth}px 1fr`,
   }),
 )
 
-const Layout = (props: Props) => {
-  return (
-    <Container>
-      {props.loading && <Progress />}
+const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  overflow: "auto",
+  backgroundColor: theme.color.white,
+}))
+
+const Side = styled("div")({
+  overflow: "auto",
+})
+
+const Layout = (props: Props) => (
+  <Container>
+    {props.loading && <Progress />}
+    <Content>
       {props.header}
-      <Content>
-        {props.sidenav}
-        <Main>{props.main}</Main>
-      </Content>
-    </Container>
-  )
-}
+      <Side>{props.sidenav}</Side>
+      <Main>{props.main}</Main>
+    </Content>
+  </Container>
+)
 
 export default Layout
