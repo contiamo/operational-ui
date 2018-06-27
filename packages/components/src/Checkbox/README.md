@@ -5,7 +5,7 @@ class ComponentWithCheckbox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selected: ["1"]
+      selected: ["1"],
     }
   }
   render() {
@@ -16,7 +16,7 @@ class ComponentWithCheckbox extends React.Component {
         selected={this.state.selected}
         onChange={n => {
           this.setState(p => ({
-            selected: n
+            selected: n,
           }))
         }}
       />
@@ -24,13 +24,5 @@ class ComponentWithCheckbox extends React.Component {
   }
 }
 
-<ComponentWithCheckbox />
+;<ComponentWithCheckbox />
 ```
-
-## Props
-
-| Name     | Description                                                               | Type                            | Default    | Required |
-| :------- | :------------------------------------------------------------------------ | :------------------------------ | :--------- | :------- |
-| options  | All checkbox options                                                      | string[]                        |            | No       |
-| selected | Selected options                                                          | string[]                        |            | No       |
-| onChange | Change callback, passing a full list of the new current selected options. | (newSelected: string[]) => void | () => void | Yes      |
