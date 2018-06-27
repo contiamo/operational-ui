@@ -12,8 +12,9 @@ export interface Props {
 const CardItemTitle = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   color: theme.color.text.lightest,
   fontFamily: theme.font.family.main,
-  fontWeight: "bold",
+  fontWeight: 500,
   fontSize: theme.font.size.fineprint,
+  textTransform: "uppercase",
 }))
 
 const CardItemBody = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
