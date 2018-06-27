@@ -4,6 +4,7 @@ import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { Icon, IconName } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
+import CopyToClipboard from "react-copy-to-clipboard"
 
 export interface Props {
   className?: string
@@ -18,10 +19,6 @@ export interface Props {
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
   label?: string
-  /** Icon to display in an adjacent icon button */
-  icon?: string
-  /** Click handler on the icon */
-  onIconClick?: () => void
   inputRef?: (node: any) => void
   /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
   onChange?: (newVal: string) => void
@@ -37,6 +34,20 @@ export interface Props {
   /** Disabled input */
   disabled?: boolean
   onToggle?: () => void
+}
+
+interface PropsWithCopy extends Props {
+  copy: true
+  onIconClick?: never
+  icon?: never
+}
+
+interface PropsWithoutCopy extends Props {
+  copy?: false
+  /** Icon to display in an adjacent icon button */
+  icon?: IconName
+  /** Click handler on the icon */
+  onIconClick?: () => void
 }
 
 // Rendered height taking into account paddings, font-sizes and line-height
@@ -110,83 +121,116 @@ const HelpTooltip = styled(Tooltip)({
   width: "fit-content",
 })
 
-const Input: React.SFC<Props> = props => {
-  const forAttributeId = props.label && props.labelId
-  const commonInputProps = {
-    innerRef: props.inputRef,
-    name: props.name,
-    disabled: Boolean(props.disabled),
-    value: props.value || "",
-    isStandalone: !Boolean(props.label),
-    type: props.type,
-    onFocus: props.onFocus,
-    onBlur: props.onBlur,
-    placeholder: props.placeholder,
-    isError: Boolean(props.error),
-    onChange: (e: any) => {
-      props.onChange && props.onChange(e.target.value)
-    },
+export const initialState = {
+  showTooltip: false,
+}
+
+export type State = Readonly<typeof initialState>
+
+class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
+  readonly state = initialState
+  timeoutId: number = null
+
+  showTooltip = () => {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
+    this.setState(() => ({ showTooltip: true }))
+
+    this.timeoutId = window.setTimeout(() => {
+      this.setState(() => ({ showTooltip: false }))
+      this.timeoutId = null
+    }, 1000)
   }
 
-  const withIconButton = Boolean(props.icon && props.onIconClick)
+  getButtonElement = () => {
+    if (!this.props.icon && !this.props.copy) return null
 
-  const inputButtonElement = withIconButton && (
-    <InputButton
-      onClick={() => {
-        props.onIconClick()
-      }}
-    >
-      {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={16} /> : props.icon}
-    </InputButton>
-  )
-
-  if (props.label) {
-    return (
-      <Label id={props.id} htmlFor={forAttributeId} className={props.className} left>
-        <LabelText>{props.label}</LabelText>
-        <FormFieldControls>
-          {props.hint ? (
-            <FormFieldControl>
-              <Icon name="HelpCircle" size={14} />
-              <HelpTooltip right>{props.hint}</HelpTooltip>
-            </FormFieldControl>
-          ) : null}
-          {props.onToggle ? (
-            <FormFieldControl
-              onClick={() => {
-                props.onToggle()
-              }}
-            >
-              <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
-            </FormFieldControl>
-          ) : null}
-        </FormFieldControls>
-        <InputFieldContainer withLabel>
-          {inputButtonElement}
-          <InputField
-            {...commonInputProps}
-            id={forAttributeId}
-            autoComplete={props.autoComplete}
-            withIconButton={withIconButton}
-          />
-        </InputFieldContainer>
-        {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
-      </Label>
+    return this.props.copy ? (
+      <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
+        <InputButton>
+          {this.state.showTooltip && <Tooltip left>Copied!</Tooltip>}
+          <Icon name="Copy" size={16} />
+        </InputButton>
+      </CopyToClipboard>
+    ) : (
+      <InputButton onClick={this.props.onIconClick}>
+        {typeof this.props.icon === "string" ? <Icon name={this.props.icon} size={16} /> : this.props.icon}
+      </InputButton>
     )
   }
 
-  return (
-    <InputFieldContainer>
-      {inputButtonElement}
-      <InputField
-        {...commonInputProps}
-        id={props.id}
-        className={props.className}
-        autoComplete={props.autoComplete}
-        withIconButton={withIconButton}
-      />
-    </InputFieldContainer>
-  )
+  render() {
+    const props = this.props
+
+    const forAttributeId = props.label && props.labelId
+    const commonInputProps = {
+      innerRef: props.inputRef,
+      name: props.name,
+      disabled: Boolean(props.disabled),
+      value: props.value || "",
+      isStandalone: !Boolean(props.label),
+      type: props.type,
+      onFocus: props.onFocus,
+      onBlur: props.onBlur,
+      placeholder: props.placeholder,
+      isError: Boolean(props.error),
+      onChange: (e: any) => {
+        props.onChange && props.onChange(e.target.value)
+      },
+    }
+
+    const withIconButton = Boolean(props.icon && props.onIconClick) || Boolean(props.copy)
+    const inputButtonElement = this.getButtonElement()
+
+    if (props.label) {
+      return (
+        <Label id={props.id} htmlFor={forAttributeId} className={props.className} left>
+          <LabelText>{props.label}</LabelText>
+          <FormFieldControls>
+            {props.hint ? (
+              <FormFieldControl>
+                <Icon name="HelpCircle" size={14} />
+                <HelpTooltip right>{props.hint}</HelpTooltip>
+              </FormFieldControl>
+            ) : null}
+            {props.onToggle ? (
+              <FormFieldControl
+                onClick={() => {
+                  props.onToggle()
+                }}
+              >
+                <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
+              </FormFieldControl>
+            ) : null}
+          </FormFieldControls>
+          <InputFieldContainer withLabel>
+            {inputButtonElement}
+            <InputField
+              {...commonInputProps}
+              id={forAttributeId}
+              autoComplete={props.autoComplete}
+              withIconButton={withIconButton}
+            />
+          </InputFieldContainer>
+          {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
+        </Label>
+      )
+    }
+
+    return (
+      <InputFieldContainer>
+        {inputButtonElement}
+        <InputField
+          {...commonInputProps}
+          id={props.id}
+          className={props.className}
+          autoComplete={props.autoComplete}
+          withIconButton={withIconButton}
+        />
+      </InputFieldContainer>
+    )
+  }
 }
 
 export default Input

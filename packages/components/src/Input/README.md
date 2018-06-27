@@ -52,3 +52,11 @@ class StatefulInput extends React.Component {
   }}
 />
 ```
+
+### With `copy` option
+
+You can have a field with a "copy to clipboard" button with the `copy` prop.
+
+```jsx
+<Input value="go to my clipboard!" label="Something to save" copy />
+```
