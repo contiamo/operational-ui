@@ -1,10 +1,10 @@
 import { css } from "glamor"
-import { operational as theme } from "@operational/theme"
+import { deprecatedTheme } from "../utils/theme"
 
 const focusGroupStyle = {
   strokeWidth: "1.5px",
   "& line": {
-    stroke: theme.colors.gray,
+    stroke: deprecatedTheme.colors.gray,
     shapeRenderering: "crispEdges",
   },
   "& circle": {

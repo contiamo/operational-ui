@@ -1,5 +1,4 @@
 import { css } from "glamor"
-import { operational as theme } from "@operational/theme"
 import { seriesLegend } from "../shared/styles"
 
 const comparisonLegendStyle = {

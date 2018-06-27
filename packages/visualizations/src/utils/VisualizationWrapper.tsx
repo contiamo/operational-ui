@@ -1,7 +1,7 @@
 import * as React from "react"
-import { withTheme } from "glamorous"
 import { defaults, forEach } from "lodash/fp"
-import { Theme } from "@operational/theme"
+
+import { deprecatedTheme } from "./theme"
 
 export interface Props {
   style?: {}
@@ -12,11 +12,7 @@ export interface Props {
   config?: any
 }
 
-export interface PropsWithTheme extends Props {
-  theme: Theme
-}
-
-class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
+class VisualizationWrapper extends React.Component<Props, {}> {
   viz: any
   containerNode: HTMLElement
 
@@ -33,7 +29,6 @@ class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
   }
 
   componentDidMount() {
-    // Work with the theme here
     this.viz = new this.props.facade(this.containerNode)
     this.updateViz()
     this.viz.draw()
@@ -51,7 +46,7 @@ class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
         this.viz.accessors(key, accessors)
       },
     )(this.props.accessors)
-    this.viz.config(defaults({ palette: this.props.theme.colors.visualizationPalette })(this.props.config || {}))
+    this.viz.config(defaults({ palette: deprecatedTheme.colors.visualizationPalette })(this.props.config || {}))
   }
 
   componentWillUnmount() {
@@ -59,8 +54,4 @@ class VisualizationWrapperInternal extends React.Component<PropsWithTheme, {}> {
   }
 }
 
-const VisualizationWrapper = (props: PropsWithTheme) => <VisualizationWrapperInternal {...props} />
-
-const WrappedVisualizationWrapper = withTheme(VisualizationWrapper) as React.SFC<Props>
-
-export default WrappedVisualizationWrapper
+export default VisualizationWrapper
