@@ -21,7 +21,7 @@ Here is a simple usage example:
   <Page title="Settings Page">
     {Array(2)
       .fill("Hello, this is page content")
-      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+      .map((text, index) => <Card key={index}>{text}</Card>)}
   </Page>
 </div>
 ```
@@ -35,7 +35,7 @@ Here is a simple usage example:
   <Page title="Settings Page">
     {Array(50)
       .fill("Hello, this is page content")
-      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+      .map((text, index) => <Card key={index}>{text}</Card>)}
   </Page>
 </div>
 ```
@@ -79,7 +79,7 @@ const Tab = n => () => (
   <PageContent areas="side main">
     {Array(50)
       .fill("Hello, this is page content")
-      .map(({ text, index }) => <Card key={index}>{text}</Card>)}
+      .map((text, index) => <Card key={index}>{text}</Card>)}
   </PageContent>
 )
 ;<div style={{ height: 200 }}>
