@@ -1,7 +1,7 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
 import styled from "react-emotion"
-import marked from "marked"
+import * as marked from "marked"
 
 import Animation from "./Animation"
 import OperationalLogo from "./OperationalLogo"
@@ -10,9 +10,11 @@ import { OperationalUI, Button, Icon } from "../src"
 export interface Props {}
 
 export interface State {
-  isOpen: boolean
+  hash: string
   isPortalRendered: boolean
   rotation: number
+  animationSize: number
+  isClosing: boolean
 }
 
 const Container = styled("div")`
@@ -27,6 +29,10 @@ const Container = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.2s;
+  ${({ isClosing }: { isClosing: boolean }) => `
+    opacity: ${isClosing ? 0 : 1};
+  `};
 `
 
 const Content = styled("div")`
@@ -91,12 +97,45 @@ const operationalBannerContainerId = "operational-banner-container"
 
 class LogoAndBanner extends React.Component<Props, State> {
   state = {
-    isOpen: !window.location.hash,
+    hash: window.location.hash,
     isPortalRendered: false,
     rotation: 0,
+    animationSize: Math.max(window.innerWidth, window.innerHeight),
+    isClosing: false,
   }
 
   rotationInterval: number
+
+  handleResize = () => {
+    this.setState(prevState => ({
+      animationSize: Math.max(window.innerWidth, window.innerHeight) as number,
+    }))
+  }
+
+  handlePopState = () => {
+    this.setState(prevState => ({
+      hash: window.location.hash,
+    }))
+  }
+
+  redirect(newHash: string) {
+    history.pushState(null, null, `#${newHash}`)
+    if (newHash !== "") {
+      this.setState(prevState => ({
+        hash: newHash,
+        isClosing: true,
+      }))
+      setTimeout(() => {
+        this.setState(prevState => ({
+          isClosing: false,
+        }))
+      }, 200)
+      return
+    }
+    this.setState(prevState => ({
+      hash: newHash,
+    }))
+  }
 
   componentDidMount() {
     if (!document.querySelector(`#${operationalBannerContainerId}`)) {
@@ -113,6 +152,8 @@ class LogoAndBanner extends React.Component<Props, State> {
         }))
       }
     }
+    window.addEventListener("popstate", this.handlePopState)
+    window.addEventListener("resize", this.handleResize)
     this.rotationInterval = window.setInterval(() => {
       this.setState(prevState => ({
         rotation: 180 - prevState.rotation,
@@ -121,16 +162,20 @@ class LogoAndBanner extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize)
+    window.removeEventListener("popstate", this.handlePopState)
     window.clearInterval(this.rotationInterval)
   }
 
   render() {
+    const isOpen = this.state.hash === ""
     return (
       <OperationalUI>
-        {this.state.isOpen && this.state.isPortalRendered ? (
+        {(isOpen || this.state.isClosing) &&
+          this.state.isPortalRendered &&
           createPortal(
-            <Container>
-              <Animation size={Math.max(window.innerHeight, window.innerWidth)} />
+            <Container isClosing={this.state.isClosing}>
+              <Animation size={this.state.animationSize} />
               <Content>
                 <TitleBar>
                   <OperationalLogo size={110} rotation={this.state.rotation} />
@@ -139,10 +184,7 @@ class LogoAndBanner extends React.Component<Props, State> {
                     <div>
                       <Button
                         onClick={() => {
-                          window.location.hash = "docs-home"
-                          this.setState(prevState => ({
-                            isOpen: !prevState.isOpen,
-                          }))
+                          this.redirect("docs-home")
                         }}
                       >
                         Docs
@@ -162,14 +204,11 @@ It is predictable to use, and it lets you and your team breathe. Exhales, not si
               </Content>
             </Container>,
             document.querySelector(`#${operationalBannerContainerId}`),
-          )
-        ) : (
+          )}
+        {!isOpen && (
           <LogoType
             onClick={() => {
-              window.location.hash = ""
-              this.setState(prevState => ({
-                isOpen: true,
-              }))
+              this.redirect("")
             }}
           >
             <Icon name="OperationalUI" size={28} left />
