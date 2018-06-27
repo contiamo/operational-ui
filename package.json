@@ -19,6 +19,7 @@
     "build:website": "lerna run --scope @operational/website build && cp -r packages/website/dist .",
     "build:visual-test": "lerna run --scope @operational/visual-tests build && cp -r packages/visual-tests/dist/ ./dist/visual-tests",
     "build:components": "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist/docs",
+    "build:cname": "cp CNAME dist",
     "clean": "lerna clean",
     "test": "run-s \"test:* -- -- --maxWorkers=$JEST_MAX_WORKERS\"",
     "test:components": "cd packages/components && npm run test",
