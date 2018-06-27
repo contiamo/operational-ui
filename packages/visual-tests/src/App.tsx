@@ -15,6 +15,9 @@ import {
   SidenavHeader,
   SidenavItem,
   Small,
+  ContiamoLogo,
+  Page,
+  PageContent,
 } from "@operational/components"
 
 import { darken } from "@operational/utils"
@@ -100,7 +103,7 @@ class App extends React.Component<{}, State> {
     return (
       <OperationalUI withBaseStyles>
         <Layout
-          header={<HeaderBar logo={<div />} />}
+          header={<HeaderBar main={<h3>Visual Tests</h3>} logo={<ContiamoLogo />} />}
           sidenav={
             <Sidenav>
               {allTestCases.map((test, groupIndex) => (
@@ -132,54 +135,60 @@ class App extends React.Component<{}, State> {
             </Sidenav>
           }
           main={
-            <div style={{ height: "100%" }}>
-              <Card>
-                <CardHeader>
-                  Canvas
-                  <div>
-                    <a
-                      href={`https://github.com/contiamo/operational-ui/tree/master/packages/visual-tests/src/TestCases/${
-                        allTestCases[this.state.group].folder
-                      }/${allTestCases[this.state.group].children[this.state.test].slug}.ts`}
-                    >
-                      <Small>View code for this test</Small>
-                    </a>
-                    <Button
-                      condensed
-                      color={this.state.isLooping ? "white" : "info"}
-                      onClick={() => {
-                        if (!this.state.isLooping && this.state.isIdle) {
-                          this.loop()
-                        }
-                        this.setState(prevState => ({
-                          isLooping: !prevState.isLooping,
-                          isIdle: !prevState.isLooping ? false : prevState.isIdle,
-                        }))
-                      }}
-                    >
-                      {this.state.isLooping ? "Pause" : "Loop"}
-                    </Button>
-                  </div>
-                </CardHeader>
-                <Marathon
-                  test={test}
-                  onCompleted={() => {
-                    if (!this.state.isLooping && !this.state.isIdle) {
+            <Page
+              title="Canvas"
+              actions={
+                <>
+                  <Button
+                    icon="ExternalLink"
+                    condensed
+                    color="ghost"
+                    to={`https://github.com/contiamo/operational-ui/tree/master/packages/visual-tests/src/TestCases/${
+                      allTestCases[this.state.group].folder
+                    }/${allTestCases[this.state.group].children[this.state.test].slug}.ts`}
+                  >
+                    View Code
+                  </Button>
+                  <Button
+                    condensed
+                    color={this.state.isLooping ? "white" : "info"}
+                    onClick={() => {
+                      if (!this.state.isLooping && this.state.isIdle) {
+                        this.loop()
+                      }
                       this.setState(prevState => ({
-                        isIdle: true,
+                        isLooping: !prevState.isLooping,
+                        isIdle: !prevState.isLooping ? false : prevState.isIdle,
                       }))
-                      return
-                    }
-                    if (this.state.isLooping) {
-                      this.loop()
-                    }
-                  }}
-                  timeout={2000}
-                >
-                  {MarathonRenderer}
-                </Marathon>
-              </Card>
-            </div>
+                    }}
+                  >
+                    {this.state.isLooping ? "Pause" : "Loop"}
+                  </Button>
+                </>
+              }
+            >
+              <PageContent>
+                <Card>
+                  <Marathon
+                    test={test}
+                    onCompleted={() => {
+                      if (!this.state.isLooping && !this.state.isIdle) {
+                        this.setState(prevState => ({
+                          isIdle: true,
+                        }))
+                        return
+                      }
+                      if (this.state.isLooping) {
+                        this.loop()
+                      }
+                    }}
+                    timeout={2000}
+                  >
+                    {MarathonRenderer}
+                  </Marathon>
+                </Card>
+              </PageContent>
+            </Page>
           }
         />
       </OperationalUI>
