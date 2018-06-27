@@ -73,7 +73,7 @@ const Content = styled("div")(
   }),
 )
 
-const LabelText = styled("p")`
+const LabelText = styled("div")`
   position: relative;
   font-weight: 500;
   letter-spacing: 0.25;
@@ -116,7 +116,7 @@ const CloseButton = styled("div")(
   }),
 )
 
-const IconContainer = styled("p")`
+const IconContainer = styled("div")`
   display: inline-block;
   vertical-align: middle;
   ${({ theme }: { theme?: OperationalStyleConstants }) => `margin: 0 0 0 ${theme.space.small}px;`} width: 18px;
