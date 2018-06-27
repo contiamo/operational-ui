@@ -10,12 +10,7 @@ export interface Props {
 }
 
 const StyledPageContent = styled("div")(
-  (
-    props: {
-      children?: React.ReactNode
-      theme?: OperationalStyleConstants
-    } & Props,
-  ) => {
+  (props: { theme?: OperationalStyleConstants; areas?: Props["areas"]; isFill?: boolean }) => {
     const gridTemplateColumns = {
       main: "auto",
       "main side": "auto 280px",
@@ -28,7 +23,7 @@ const StyledPageContent = styled("div")(
       alignItems: "start",
       gridTemplateAreas: `"${props.areas}"`,
       gridGap: props.theme.space.content,
-      maxWidth: props.fill ? "none" : 1150,
+      maxWidth: props.isFill ? "none" : 1150,
       minWidth: 800,
       width: "100%",
       height: `calc(100% - ${props.theme.titleHeight}px)`,
@@ -37,6 +32,7 @@ const StyledPageContent = styled("div")(
   },
 )
 
-const PageContent: React.SFC<Props> = props => <StyledPageContent {...props} />
+// `fill` must be rename internally to avoid conflict with the native `fill` DOM attribute
+const PageContent: React.SFC<Props> = ({ fill, ...props }) => <StyledPageContent {...props} isFill={fill} />
 
 export default PageContent

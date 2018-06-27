@@ -56,7 +56,7 @@ const style = (Component: React.SFC<Props>) =>
     marginRight: left ? theme.space.small : 0,
   }))
 
-const Icon = withTheme((props: PropsWithTheme) => {
+const Icon = withTheme(({ left, right, ...props }: PropsWithTheme) => {
   const color: string = expandColor(props.theme, props.color) || "currentColor"
   const defaultSize = 32
 

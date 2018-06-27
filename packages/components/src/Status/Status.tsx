@@ -21,7 +21,7 @@ const getColorFromProps = ({ success, error, theme }: Props): string => {
   return theme.color.background.dark
 }
 
-const Status = styled("div")((props: Props) => ({
+export const Status = styled("div")((props: Props) => ({
   display: "inline-block",
   marginRight: props.theme.space.small,
   width: props.theme.space.small,
@@ -34,4 +34,4 @@ const Status = styled("div")((props: Props) => ({
   backgroundColor: getColorFromProps(props),
 }))
 
-export default (props: Props) => <Status {...props} />
+export default Status
