@@ -8,8 +8,8 @@ export interface PageAreaProps {
   children?: React.ReactNode
 }
 
-const Area = styled("div")(({ name }: PageAreaProps) => ({
+export const PageArea = styled("div")(({ name }: PageAreaProps) => ({
   gridArea: name,
 }))
 
-export default (props: PageAreaProps) => <Area {...props} />
+export default PageArea
