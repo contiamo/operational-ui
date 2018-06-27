@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "@operational/theme"
 
-const StyledCardColumns = styled("div")(
+export const CardColumns = styled("div")(
   ({ children, theme }: React.Props<{}> & { theme?: OperationalStyleConstants }) => ({
     display: "flex",
     flexWrap: "wrap",
@@ -12,7 +12,5 @@ const StyledCardColumns = styled("div")(
     },
   }),
 )
-
-const CardColumns: React.SFC = props => <StyledCardColumns {...props} />
 
 export default CardColumns
