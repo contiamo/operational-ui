@@ -54,7 +54,7 @@ const FailureMessage = styled("p")(({ theme }: { theme?: OperationalStyleConstan
 }))
 
 const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
-  <div>
+  <>
     <Container>
       {results.map((result, index) => {
         const content = result.isCompleted ? (
@@ -78,7 +78,7 @@ const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
       })}
     </Container>
     <Content innerRef={ref} />
-  </div>
+  </>
 )
 
 export default MarathonRendererComponent
