@@ -83,7 +83,7 @@ const Static = styled("div")`
 `
 
 const LogoType = styled("h1")`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   margin: 0px;
   cursor: pointer;
