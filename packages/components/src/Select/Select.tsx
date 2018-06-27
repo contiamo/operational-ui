@@ -212,6 +212,9 @@ class Select extends React.Component<Props, State> {
     }
 
     if (!Array.isArray(this.props.value)) {
+      this.setState(prevState => ({
+        open: false,
+      }))
       onChange(this.props.value === option.value ? null : option.value)
       return
     }
@@ -278,7 +281,9 @@ class Select extends React.Component<Props, State> {
                     (option.label || String(option.value)).match(RegExp(search)) && (
                       <SelectOption
                         key={String(option.value)}
-                        onClick={() => this.selectOption(option)}
+                        onClick={() => {
+                          this.selectOption(option)
+                        }}
                         selected={this.isOptionSelected(option)}
                       >
                         {option.label || String(option.value)}
