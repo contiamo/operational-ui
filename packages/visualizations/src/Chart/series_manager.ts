@@ -166,12 +166,7 @@ class ChartSeriesManager implements SeriesManager {
     // By default, stacks are vertical
     const stackAxis: "x" | "y" = (this.renderAs(stack)[0] as GroupedRendererOptions).stackAxis || "y"
     const baseAxis: "x" | "y" = stackAxis === "y" ? "x" : "y"
-
-    const accessors = this.state.current.get("accessors").series
-    const baseAttribute = accessors[`${baseAxis}Attribute`]
-    const stackAttribute = accessors[`${stackAxis}Attribute`]
-    const baseValue = (series: any) => get(baseAttribute(series))
-    const stackValue = (series: any) => get(stackAttribute(series))
+    const baseValue = (series: any) => (series.datumAccessors && series.datumAccessors[baseAxis]) || get(baseAxis)
 
     // Transform data into suitable structure for d3 stack
     const dataToStack = reduce((memo: any[], series: any) => {
@@ -205,8 +200,7 @@ class ChartSeriesManager implements SeriesManager {
       )(series)
       originalSeries.stacked = true
       originalSeries.stackIndex = index + 1
-      originalSeries.xAttribute = "x"
-      originalSeries.yAttribute = "y"
+      delete originalSeries.datumAccessors
     })(stackedData)
   }
 

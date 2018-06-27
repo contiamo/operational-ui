@@ -164,6 +164,7 @@ declare namespace fp {
     filter: any
     find: any
     findIndex: any
+    findKey: any
     flatten: any
     forEach: any
     get: any
@@ -205,6 +206,7 @@ declare namespace fp {
 }
 
 declare let fp: fp.Static
+
 declare module "lodash/fp" {
   export = fp
 }

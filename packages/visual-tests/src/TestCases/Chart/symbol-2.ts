@@ -18,9 +18,11 @@ const createData = () => {
           { x: new Date(2018, 2, 15), y: Math.floor(Math.random() * 100) },
           { x: new Date(2018, 2, 16), y: Math.floor(Math.random() * 100) },
         ],
-        xAttribute: "y",
-        yAttribute: "x",
         name: "Pageviews",
+        datumAccessors: {
+          x: (d: any) => d.y,
+          y: (d: any) => d.x,
+        },
         key: "series2",
         renderAs: [SymbolRenderer],
       },

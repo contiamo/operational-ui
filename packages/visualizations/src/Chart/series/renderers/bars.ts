@@ -1,4 +1,4 @@
-import { clone, compact, defaults, filter, get, isFinite, last, map, sortBy } from "lodash/fp"
+import { clone, compact, defaults, filter, findKey, get, isFinite, last, map, sortBy } from "lodash/fp"
 import Series from "../series"
 import * as styles from "./styles"
 import { withD3Element, setRectAttributes } from "../../../utils/d3_utils"
@@ -242,7 +242,10 @@ class Bars implements RendererClass<BarsRendererAccessors> {
     // The curveStepAfter interpolation does not account for the width of the bars.
     // A dummy point is added to the data to prevent the clip-path from cutting off the last point.
     const dummyPoint = clone(this.xIsBaseline ? last(data) : data[0])
-    delete dummyPoint[this.xIsBaseline ? this.series.xAttribute() : this.series.yAttribute()]
+    const baseKey = findKey((val: any) => val === (this.xIsBaseline ? this.series.x : this.series.y)(dummyPoint))(
+      dummyPoint,
+    )
+    delete dummyPoint[baseKey]
     this.xIsBaseline ? data.push(dummyPoint) : (data = [dummyPoint].concat(data))
 
     const clip = this.el.selectAll("clipPath path").data([data])

@@ -71,8 +71,6 @@ const defaultAccessors = () => {
       legendName: (d: { [key: string]: any }): string => d.name || d.key || "",
       renderAs: (d: { [key: string]: any }): RendererOptions[] => d.renderAs,
       axis: (d: { [key: string]: any }): AxisPosition => d.axis || "x1", // Only used for flags
-      xAttribute: (d: { [key: string]: any }): string => d.xAttribute || "x",
-      yAttribute: (d: { [key: string]: any }): string => d.yAttribute || "y",
       xAxis: (d: { [key: string]: any }): "x1" | "x2" => d.xAxis || "x1",
       yAxis: (d: { [key: string]: any }): "y1" | "y2" => d.yAxis || "y1",
     },
