@@ -5,16 +5,16 @@ exports[`Spinner Component Should render 1`] = `
   class="css-i5a8z9-spinner"
 >
   <div
-    class="css-10qb0ui"
+    class="css-9lnn08"
   />
   <div
-    class="css-10qb0ui"
+    class="css-9lnn08"
   />
   <div
-    class="css-10qb0ui"
+    class="css-9lnn08"
   />
   <div
-    class="css-10qb0ui"
+    class="css-9lnn08"
   />
 </div>
 `;
