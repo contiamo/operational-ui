@@ -22,7 +22,7 @@ const StyledPageContent = styled("div")(
       display: "grid",
       alignItems: "start",
       gridTemplateAreas: `"${props.areas}"`,
-      gridGap: props.theme.space.content,
+      gridGap: props.theme.space.element,
       maxWidth: props.isFill ? "none" : 1150,
       minWidth: 800,
       width: "100%",
