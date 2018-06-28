@@ -1,6 +1,5 @@
 import { Sunburst } from "@operational/visualizations"
 import { MarathonEnvironment } from "../../Marathon"
-import { operational } from "@operational/theme"
 
 const config = {
   sort: false,
@@ -131,7 +130,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 
   test("Set colors manually", () => {
-    const palette = operational.colors.visualizationPalette
+    const palette = ["#EFEFEF", "#3454D1", "#34D1BF", "#070707", "#D1345B"]
     viz.accessors("series", {
       color: (d): string => (d.value > 20000 ? palette[0] : palette[1]),
     })
@@ -144,7 +143,7 @@ export const marathon = ({ test, afterAll, container }: MarathonEnvironment): vo
   })
 
   test("Change color palette", () => {
-    viz.config({ palette: [operational.colors.warning, operational.colors.error] })
+    viz.config({ palette: ["#FF0000", "#00FF00"] })
     viz.draw()
   })
 }
