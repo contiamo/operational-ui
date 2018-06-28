@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { CardHeader, CardItem } from "../"
 
 export interface Props<T = {}> {

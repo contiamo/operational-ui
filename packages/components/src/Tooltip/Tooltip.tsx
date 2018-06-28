@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { readableTextColor } from "@operational/utils"
 import { Css } from "../types"
 
@@ -39,130 +39,120 @@ export interface State {
 
 type Position = "top" | "left" | "right" | "bottom"
 
-const Container = styled("div")(
-  ({
-    position,
-    theme,
-  }: {
-    position: Position
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }) => {
-    const backgroundColor = theme.deprecated.colors.black
-    return {
-      backgroundColor,
-      label: "tooltip",
-      ...theme.deprecated.typography.small,
-      lineHeight: 1.3,
+const Container = styled("div")(({ position, theme }: { position: Position; theme?: OperationalStyleConstants }) => {
+  const backgroundColor = theme.deprecated.colors.black
+  return {
+    backgroundColor,
+    label: "tooltip",
+    ...theme.deprecated.typography.small,
+    lineHeight: 1.3,
+    position: "absolute",
+    zIndex: theme.deprecated.baseZIndex + 101,
+    width: "fit-content",
+    minWidth: 80,
+    maxWidth: 360,
+    whiteSpace: "nowrap",
+    padding: `${theme.deprecated.spacing / 3}px ${(theme.deprecated.spacing * 2) / 3}px`,
+    borderRadius: 2,
+    boxShadow: theme.deprecated.shadows.popup,
+    ...(() => {
+      if (position === "top") {
+        return {
+          left: "50%",
+          transform: "translate3d(-50%, calc(-100% - 6px), 0)",
+        }
+      }
+
+      if (position === "bottom") {
+        return {
+          left: "50%",
+          top: "100%",
+          transform: "translate3d(-50%, 6px, 0)",
+        }
+      }
+
+      if (position === "left") {
+        return {
+          top: "50%",
+          left: -6,
+          transform: "translate3d(-100%, -50%, 0)",
+        }
+      }
+
+      if (position === "right") {
+        return {
+          top: "50%",
+          right: -6,
+          transform: "translate3d(100%, -50%, 0)",
+        }
+      }
+
+      return {}
+    })(),
+    color: readableTextColor(backgroundColor, ["black", "white"]),
+    // This pseudo-element extends the clickable area of the far-away tooltip.
+    "&::after": {
+      content: "''",
       position: "absolute",
-      zIndex: theme.deprecated.baseZIndex + 101,
-      width: "fit-content",
-      minWidth: 80,
-      maxWidth: 360,
-      whiteSpace: "nowrap",
-      padding: `${theme.deprecated.spacing / 3}px ${(theme.deprecated.spacing * 2) / 3}px`,
-      borderRadius: 2,
-      boxShadow: theme.deprecated.shadows.popup,
+      top: 0,
+      left: theme.deprecated.spacing * -2,
+      display: "block",
+      width: theme.deprecated.spacing * 2,
+      height: "100%",
+    },
+    // They say behind every great tooltip is a great caret.
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      zIndex: theme.deprecated.baseZIndex - 1,
+      width: 0,
+      height: 0,
       ...(() => {
         if (position === "top") {
           return {
-            left: "50%",
-            transform: "translate3d(-50%, calc(-100% - 6px), 0)",
+            bottom: -4,
+            left: `calc(50% - 6px)`,
+            borderLeft: "6px solid transparent",
+            borderRight: "6px solid transparent",
+            borderTop: `6px solid ${backgroundColor}`,
           }
         }
 
         if (position === "bottom") {
           return {
-            left: "50%",
-            top: "100%",
-            transform: "translate3d(-50%, 6px, 0)",
+            top: -4,
+            left: `calc(50% - 6px)`,
+            borderLeft: "6px solid transparent",
+            borderRight: "6px solid transparent",
+            borderBottom: `6px solid ${backgroundColor}`,
           }
         }
 
         if (position === "left") {
           return {
-            top: "50%",
-            left: -6,
-            transform: "translate3d(-100%, -50%, 0)",
+            right: -4,
+            top: `calc(50% - 6px)`,
+            borderTop: "6px solid transparent",
+            borderBottom: "6px solid transparent",
+            borderLeft: `6px solid ${backgroundColor}`,
           }
         }
 
         if (position === "right") {
           return {
-            top: "50%",
-            right: -6,
-            transform: "translate3d(100%, -50%, 0)",
+            left: -4,
+            top: `calc(50% - 6px)`,
+            borderTop: "6px solid transparent",
+            borderBottom: "6px solid transparent",
+            borderRight: `6px solid ${backgroundColor}`,
           }
         }
 
         return {}
       })(),
-      color: readableTextColor(backgroundColor, ["black", "white"]),
-      // This pseudo-element extends the clickable area of the far-away tooltip.
-      "&::after": {
-        content: "''",
-        position: "absolute",
-        top: 0,
-        left: theme.deprecated.spacing * -2,
-        display: "block",
-        width: theme.deprecated.spacing * 2,
-        height: "100%",
-      },
-      // They say behind every great tooltip is a great caret.
-      "&::before": {
-        content: "''",
-        position: "absolute",
-        zIndex: theme.deprecated.baseZIndex - 1,
-        width: 0,
-        height: 0,
-        ...(() => {
-          if (position === "top") {
-            return {
-              bottom: -4,
-              left: `calc(50% - 6px)`,
-              borderLeft: "6px solid transparent",
-              borderRight: "6px solid transparent",
-              borderTop: `6px solid ${backgroundColor}`,
-            }
-          }
-
-          if (position === "bottom") {
-            return {
-              top: -4,
-              left: `calc(50% - 6px)`,
-              borderLeft: "6px solid transparent",
-              borderRight: "6px solid transparent",
-              borderBottom: `6px solid ${backgroundColor}`,
-            }
-          }
-
-          if (position === "left") {
-            return {
-              right: -4,
-              top: `calc(50% - 6px)`,
-              borderTop: "6px solid transparent",
-              borderBottom: "6px solid transparent",
-              borderLeft: `6px solid ${backgroundColor}`,
-            }
-          }
-
-          if (position === "right") {
-            return {
-              left: -4,
-              top: `calc(50% - 6px)`,
-              borderTop: "6px solid transparent",
-              borderBottom: "6px solid transparent",
-              borderRight: `6px solid ${backgroundColor}`,
-            }
-          }
-
-          return {}
-        })(),
-      },
-    }
-  },
-)
+    },
+  }
+})
 
 class Tooltip extends React.Component<Props, State> {
   state = {

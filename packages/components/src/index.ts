@@ -1,4 +1,4 @@
-export { Theme, operational as operationalTheme } from "@operational/theme"
+export { OperationalStyleConstants } from "./utils/constants"
 export { default as Avatar } from "./Avatar/Avatar"
 export { default as AvatarGroup } from "./AvatarGroup/AvatarGroup"
 export { default as Breadcrumb } from "./Breadcrumb/Breadcrumb"

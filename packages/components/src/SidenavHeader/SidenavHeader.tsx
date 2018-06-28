@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { expandColor, fadeIn } from "@operational/utils"
 import { isModifiedEvent } from "../utils"
 import { Icon, IconName, ContextConsumer, Context } from "../"

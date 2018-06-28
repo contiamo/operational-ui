@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -9,13 +9,7 @@ export interface Props {
 }
 
 const Container = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     label: "Messages",
     position: "fixed",
     zIndex: theme.deprecated.baseZIndex + 500,

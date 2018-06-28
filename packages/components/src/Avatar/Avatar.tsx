@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { readableTextColor, getInitials, expandColor } from "@operational/utils"
 
 export interface Props {
@@ -66,7 +66,7 @@ const Picture = styled("div")(
     addBorder,
     size,
   }: {
-    theme?: OperationalStyleConstants & { deprecated: Theme }
+    theme?: OperationalStyleConstants
     color?: Props["color"]
     colorAssignment?: number
     photo?: Props["photo"]

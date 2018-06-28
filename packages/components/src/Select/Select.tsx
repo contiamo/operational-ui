@@ -5,7 +5,7 @@ import { Label, LabelText, inputFocus } from "../utils/mixins"
 import SelectOption from "./Select.Option"
 import SelectFilter from "./Select.Filter"
 import { readableTextColor, fadeIn, resetTransform, expandColor } from "@operational/utils"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 
 export type Value = number | string
 

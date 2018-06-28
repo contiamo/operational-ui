@@ -1,16 +1,17 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { fadeIn } from "@operational/utils"
 import { Card } from "../"
 import * as mixins from "../utils/mixins"
-import { inputDefaultWidth } from "../constants"
 
 const inputHeight: number = 33
 
 export interface ContainerProps {
   isExpanded: boolean
 }
+
+const inputDefaultWidth = 240
 
 export const Container = styled("div")(({ isExpanded, theme }: any) => ({
   label: "datepicker",
@@ -23,15 +24,7 @@ export const DatePickerCard = styled("div")(
     position: "absolute",
     left: 0,
   },
-  ({
-    theme,
-    isExpanded,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isExpanded: boolean
-  }) => ({
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
     backgroundColor: theme.deprecated.colors.white,
     display: isExpanded ? "block" : "none",
     boxShadow: theme.deprecated.shadows.popup,
@@ -47,13 +40,7 @@ export const DatePickerCard = styled("div")(
 )
 
 export const Toggle = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     position: "absolute",
     cursor: "pointer",
     top: 1,
@@ -81,13 +68,7 @@ export const Toggle = styled("div")(
 )
 
 export const MonthNav = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     marginBottom: theme.deprecated.spacing / 2,
     textAlign: "center",
     "& > *": {
@@ -136,9 +117,7 @@ export const Day = styled("div")(
     selected,
     isPlaceholder,
   }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
+    theme?: OperationalStyleConstants
     selected?: boolean
     isPlaceholder?: boolean
   }): {} => ({
@@ -153,15 +132,7 @@ export const Day = styled("div")(
 )
 
 export const Input = styled("input")(
-  ({
-    theme,
-    isExpanded,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isExpanded: boolean
-  }): {} => ({
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }): {} => ({
     ...theme.deprecated.typography.body,
     userSelect: "none",
     borderRadius: theme.deprecated.borderRadius,
@@ -184,13 +155,7 @@ export const Input = styled("input")(
 )
 
 export const ClearButton = styled("div")(
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
     width: inputHeight,
     height: inputHeight,
     cursor: "pointer",

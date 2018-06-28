@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { withTheme } from "emotion-theming"
 import { darken } from "@operational/utils"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"
 
@@ -22,9 +22,7 @@ export interface Props {
 }
 
 export interface PropsWithTheme extends Props {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+  theme?: OperationalStyleConstants
 }
 
 const Container = styled("div")({
@@ -92,9 +90,7 @@ const TabTitle = styled("li")(
     isActive,
     disabled,
   }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
+    theme?: OperationalStyleConstants
     color: string
     isActive: boolean
     disabled: boolean

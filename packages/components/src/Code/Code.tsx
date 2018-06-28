@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { css } from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import Highlight from "react-highlight"
 import styles from "./styles"
 

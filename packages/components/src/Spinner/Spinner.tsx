@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { expandColor } from "@operational/utils"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 
 export interface Props {
   id?: string

@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { lighten } from "@operational/utils"
 
 export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }): {} => ({

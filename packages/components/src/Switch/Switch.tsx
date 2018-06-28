@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -16,9 +16,7 @@ export interface Props {
 
 export interface StyleProps {
   on: boolean
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
+  theme?: OperationalStyleConstants
 }
 
 const width: number = 28
