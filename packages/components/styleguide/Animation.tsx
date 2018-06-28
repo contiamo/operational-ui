@@ -1,9 +1,8 @@
 import * as React from "react"
-import { Div } from "glamorous"
+import styled from "react-emotion"
 import { Theme } from "@operational/theme"
 
 export interface Props {
-  css?: {}
   size?: number
 }
 
@@ -13,7 +12,7 @@ export interface State {
 }
 
 // Number of squares in the animation grid
-const n: number = 10
+const n: number = 12
 
 // Return integer random between 0 and range - 1, boundaries included
 const integerRandom = (range: number): number => {
@@ -31,6 +30,26 @@ const bounce = (coord: number): number => {
   }
   return coord
 }
+
+const Container = styled("div")(({ size }: { size: number }) => ({
+  width: size,
+  height: size,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate3d(-50%, -50%, 0)",
+}))
+
+const Box = styled("div")(({ n, x, y }: { n: number; x: number; y: number }) => ({
+  position: "absolute",
+  transition: "all 0.5s ease-in-out",
+  top: `calc(${(x / (n - 1)) * 100}% + 4px)`,
+  left: `calc(${(y / (n - 1)) * 100}% + 4px)`,
+  borderRadius: 6,
+  width: `calc(${100 / (n - 1)}% - 8px)`,
+  height: `calc(${100 / (n - 1)}% - 8px)`,
+  backgroundColor: "rgba(255, 255, 255, 0.06)",
+}))
 
 class Animation extends React.Component<Props, State> {
   state = {
@@ -72,29 +91,11 @@ class Animation extends React.Component<Props, State> {
   render() {
     const size = this.props.size || 600
     return (
-      <Div
-        css={{
-          ...(this.props.css || {}),
-          width: size,
-          height: size,
-        }}
-      >
+      <Container size={size}>
         {this.state.coordinates.map((coord: { x: number; y: number }, index: number) => (
-          <Div
-            key={index}
-            css={{
-              position: "absolute",
-              transition: "all 0.5s ease-in-out",
-              top: `calc(${(coord.x / (n - 1)) * 100}% + 2px)`,
-              left: `calc(${(coord.y / (n - 1)) * 100}% + 2px)`,
-              borderRadius: 6,
-              width: `calc(${100 / (n - 1)}% - 4px)`,
-              height: `calc(${100 / (n - 1)}% - 4px)`,
-              backgroundColor: "rgba(255, 255, 255, 0.06)",
-            }}
-          />
+          <Box key={index} n={n} x={coord.x} y={coord.y} />
         ))}
-      </Div>
+      </Container>
     )
   }
 }

@@ -6,7 +6,7 @@ interface Props {
   rotation?: number
 }
 
-const Logo = (props: Props) => {
+const OperationalLogo = (props: Props) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -27,4 +27,4 @@ const Logo = (props: Props) => {
   )
 }
 
-export default Logo
+export default OperationalLogo

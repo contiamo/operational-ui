@@ -91,14 +91,14 @@ Accessors can take 2 forms: a function with single parameter 'd', or a constant 
 
 Data accessors are required if the nodes and journeys can not be accessed from the input data via the properties 'nodes' and 'journeys'.
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | nodes | Provides the attribute name for accessing nodes in the input data | string | d => d.nodes | Yes |
 | journeys | Provides the attribute name for accessing journeys in the input data | string | d => d.journeys | Yes |
 
 ## Node Accessors
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | color | Node fill color | string | `d => d.color || "#fff"` | Yes |
 | shape | Node shape | string | d => d.shape || "squareDiamond" | Yes |
@@ -110,7 +110,7 @@ Data accessors are required if the nodes and journeys can not be accessed from t
 
 ## Link Accessors
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | dash | Dash length of link. "<dashLength> <gapLength>". 0 is solid line | string | d => d.dash || "0" | Yes |
 | label | Label to display next to link. | string | `d => d.label || d.source.label() + " → " + d.target.label() || ""` | Yes |
@@ -123,7 +123,7 @@ Data accessors are required if the nodes and journeys can not be accessed from t
 
 ## Config
 
-| Name | Description | Type | Default | Required | 
+| Name | Description | Type | Default | Required |
 | :--- | :--- | :--- | :---| :--- |
 | borderColor | Color of border surrounding nodes and links. Should be the same color as the visualization background. | string | #fff | Yes |
 | duration | Speed at which transitions are animated | number | 1e3 | Yes |
@@ -145,3 +145,4 @@ Data accessors are required if the nodes and journeys can not be accessed from t
 | verticalNodeSpacing | Vertical distance between nodes, if height is set to Infinity | number | 100 | Yes |
 | visualizationName | Name of visualization | string | processflow | Yes |
 | width | Visualization width | number | Infinity | Yes |
+```

@@ -178,7 +178,7 @@ Variation in these property names needs to be defined in the series accessors.
 - series - an array of single series objects, as above, but without their own 'renderAs' properties
 - renderAs - an array with a single grouped renderer config object ([see below](#grouped-renderer-objects))
 
-### <a name="datum-accessors"></>Datum accessors
+### <a name="datum-accessors"></a>Datum accessors
 
 By default, series data is an array of objects of the form `{ x: ..., y: ... }`.
 
@@ -186,7 +186,7 @@ If the property names for the data to plot on the x and y axes are not `x` and `
 The default datumAccessors property on a series object is:
 `{ x: (d) => d.x, y: (d) => d.y }`
 
-### <a name="renderer-objects"></>Renderer objects
+### <a name="renderer-objects"></a>Renderer objects
 
 The 'renderAs' property of a series (or the returned value of the 'renderAs' series accessor) should be an array of renderer objects. The only property that each of these _must_ have is:
 
@@ -197,7 +197,7 @@ Additionally, each renderer object _may_ also have the following properties:
 - accessors - renderer-specific accessors ([see below](#renderer-accessors))
 - config - renderer-specific config ([see below](#renderer-config))
 
-### <a name="grouped-renderer-objects"></>Grouped renderer objects
+### <a name="grouped-renderer-objects"></a>Grouped renderer objects
 
 A grouped renderer object _must_ have the following properties:
 

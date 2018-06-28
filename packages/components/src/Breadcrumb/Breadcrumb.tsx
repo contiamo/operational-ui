@@ -19,17 +19,20 @@ const containerStyles = ({ theme }: WithTheme): CssStatic => ({
   "& svg": {
     marginLeft: 4,
   },
-  "a&": {
-    color: theme.deprecated.colors.linkText,
-    borderBottom: "1px solid currentColor",
-    "&:hover": {
-      color: darken(theme.deprecated.colors.linkText, 5),
-    },
-  },
 })
 
 const Container = styled("span")(containerStyles)
-const ContainerLink = styled("a")(containerStyles)
+
+const ContainerLink = styled("a")(containerStyles, ({ theme }: { theme: OperationalStyleConstants }) => ({
+  "&:link, &:visited": {
+    color: theme.color.primary,
+    borderBottom: "1px solid currentColor",
+    "&:hover": {
+      color: darken(theme.color.primary, 5),
+    },
+  },
+}))
+
 const Content = styled("span")(({ theme }: WithTheme): CssStatic => ({}))
 
 const Breadcrumb = (props: Props) => {

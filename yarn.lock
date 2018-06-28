@@ -197,45 +197,6 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@operational/blocks@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/@operational/blocks/-/blocks-0.1.2.tgz#876de4b023980474c6dd0beea72902aeafaa37e7"
-  dependencies:
-    "@operational/components" "^0.1.2"
-    "@operational/theme" "^0.1.2"
-    "@operational/utils" "^0.1.2"
-    glamor "^2.20.40"
-    glamorous "^4.6.0"
-    moment "^2.19.0"
-    react "^16.2.0"
-    react-color "^2.13.8"
-    react-dom "^16.2.0"
-
-"@operational/components@^0.1.2":
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/@operational/components/-/components-0.1.3.tgz#f7ac6a17f003f41120fbf02bb7e55205790c339b"
-  dependencies:
-    "@operational/theme" "^0.1.3"
-    "@operational/utils" "^0.1.3"
-    glamor "^2.20.40"
-    glamorous "^4.6.0"
-    moment "^2.19.0"
-    react "^16.2.0"
-    react-dom "^16.2.0"
-    react-feather "^1.0.7"
-    react-icons "^2.2.5"
-
-"@operational/theme@^0.1.2", "@operational/theme@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/@operational/theme/-/theme-0.1.3.tgz#f498a02a745a79359750aeb227b99bc96e2a1725"
-
-"@operational/utils@^0.1.2", "@operational/utils@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/@operational/utils/-/utils-0.1.3.tgz#6875bc2e15737f5961d6cc6d6bb15a893838fb64"
-  dependencies:
-    "@operational/theme" "^0.1.3"
-    tinycolor2 "^1.4.1"
-
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.npmjs.org/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -6288,7 +6249,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.0.1, lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.10"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -6416,13 +6377,9 @@ markdown-to-jsx@^6.6.3:
     prop-types "^15.5.10"
     unquote "^1.1.0"
 
-marked@^0.3.6:
-  version "0.3.19"
-  resolved "https://registry.npmjs.org/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
-
-material-colors@^1.2.1:
-  version "1.2.6"
-  resolved "https://registry.npmjs.org/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
+marked@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.4.0.tgz#9ad2c2a7a1791f10a852e0112f77b571dce10c66"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -7985,16 +7942,6 @@ react-codemirror2@^4.2.1:
   version "4.3.0"
   resolved "https://registry.npmjs.org/react-codemirror2/-/react-codemirror2-4.3.0.tgz#e79aedca4da60d22402d2cd74f2885a3e5c009fd"
 
-react-color@^2.13.8:
-  version "2.14.1"
-  resolved "https://registry.npmjs.org/react-color/-/react-color-2.14.1.tgz#db8ad4f45d81e74896fc2e1c99508927c6d084e0"
-  dependencies:
-    lodash "^4.0.1"
-    material-colors "^1.2.1"
-    prop-types "^15.5.10"
-    reactcss "^1.2.0"
-    tinycolor2 "^1.4.1"
-
 react-dev-utils@^5.0.0:
   version "5.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"
@@ -8064,7 +8011,7 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
-react-feather@^1.0.7, react-feather@^1.1.0:
+react-feather@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/react-feather/-/react-feather-1.1.0.tgz#f0aa692497de952237ca1f3b118ebcb5427152e1"
 
@@ -8173,12 +8120,6 @@ react@^16.2.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-reactcss@^1.2.0:
-  version "1.2.3"
-  resolved "https://registry.npmjs.org/reactcss/-/reactcss-1.2.3.tgz#c00013875e557b1cf0dfd9a368a1c3dab3b548dd"
-  dependencies:
-    lodash "^4.0.1"
 
 read-cmd-shim@^1.0.1:
   version "1.0.1"

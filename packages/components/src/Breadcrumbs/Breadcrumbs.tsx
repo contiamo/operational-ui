@@ -11,6 +11,9 @@ export interface Props {
 
 const Container = styled("div")({
   label: "breadcrumbs",
+  "& > *": {
+    display: "inline-block",
+  },
   "& a": {
     textDecoration: "none",
     color: "inherit",

@@ -1,19 +1,23 @@
 import * as React from "react"
-import glamorous from "glamorous"
+import styled from "react-emotion"
 import { Sunburst, VisualizationWrapper } from "@operational/visualizations"
 import { operational, Theme } from "@operational/theme"
 
 import {
   OperationalUI,
+  Layout,
   Button,
   Icon,
   Card,
   CardHeader,
-  Grid,
-  Sidebar,
-  SidebarHeader,
+  HeaderBar,
+  Sidenav,
+  SidenavHeader,
+  SidenavItem,
   Small,
-  SidebarItem,
+  ContiamoLogo,
+  Page,
+  PageContent,
 } from "@operational/components"
 
 import { darken } from "@operational/utils"
@@ -29,7 +33,7 @@ export interface State {
   isIdle: boolean
 }
 
-const TestToggle = glamorous.span(
+const TestToggle = styled("span")(
   ({ theme, active }: { theme: Theme; active: boolean }): {} => ({
     display: "inline-block",
     marginRight: 16,
@@ -98,96 +102,95 @@ class App extends React.Component<{}, State> {
     const test = allTestCases[this.state.group].children[this.state.test].marathon
     return (
       <OperationalUI withBaseStyles>
-        <React.Fragment>
-          <Grid type="IDE">
-            <Card>
-              <CardHeader>
-                Tests
-                <Button
-                  condensed
-                  color={this.state.isLooping ? "white" : "info"}
-                  css={{ marginRight: 0 }}
-                  onClick={() => {
-                    if (!this.state.isLooping && this.state.isIdle) {
-                      this.loop()
-                    }
-                    this.setState(prevState => ({
-                      isLooping: !prevState.isLooping,
-                      isIdle: !prevState.isLooping ? false : prevState.isIdle,
+        <Layout
+          header={<HeaderBar main={<h3>Visual Tests</h3>} logo={<ContiamoLogo />} />}
+          sidenav={
+            <Sidenav>
+              {allTestCases.map((test, groupIndex) => (
+                <SidenavHeader
+                  key={groupIndex}
+                  label={test.title}
+                  active={groupIndex === this.state.group}
+                  onToggle={() => {
+                    this.setState(() => ({
+                      group: groupIndex,
+                      test: 0,
                     }))
                   }}
                 >
-                  {this.state.isLooping ? "Pause" : "Loop"}
-                </Button>
-              </CardHeader>
-              <Sidebar
-                css={{
-                  margin: -operational.spacing,
-                  width: `calc(100% + ${2 * operational.spacing}px)`,
-                  boxShadow: "none",
-                  borderTop: "1px solid #f2f2f2",
-                }}
-              >
-                {allTestCases.map((test, groupIndex) => (
-                  <SidebarHeader
-                    key={groupIndex}
-                    label={test.title}
-                    open={groupIndex === this.state.group}
-                    onToggle={() => {
-                      this.setState(() => ({
-                        group: groupIndex,
-                        test: 0,
+                  {test.children.map((test, testIndex) => (
+                    <SidenavItem
+                      key={testIndex}
+                      active={groupIndex === this.state.group && testIndex === this.state.test}
+                      onClick={() => {
+                        this.setState(() => ({
+                          test: testIndex,
+                        }))
+                      }}
+                      label={test.title}
+                    />
+                  ))}
+                </SidenavHeader>
+              ))}
+            </Sidenav>
+          }
+          main={
+            <Page
+              title="Canvas"
+              actions={
+                <>
+                  <Button
+                    icon="ExternalLink"
+                    condensed
+                    color="ghost"
+                    to={`https://github.com/contiamo/operational-ui/tree/master/packages/visual-tests/src/TestCases/${
+                      allTestCases[this.state.group].folder
+                    }/${allTestCases[this.state.group].children[this.state.test].slug}.ts`}
+                  >
+                    View Code
+                  </Button>
+                  <Button
+                    condensed
+                    color={this.state.isLooping ? "white" : "info"}
+                    onClick={() => {
+                      if (!this.state.isLooping && this.state.isIdle) {
+                        this.loop()
+                      }
+                      this.setState(prevState => ({
+                        isLooping: !prevState.isLooping,
+                        isIdle: !prevState.isLooping ? false : prevState.isIdle,
                       }))
                     }}
                   >
-                    {test.children.map((test, testIndex) => (
-                      <SidebarItem
-                        key={testIndex}
-                        active={groupIndex === this.state.group && testIndex === this.state.test}
-                        onClick={() => {
-                          this.setState(() => ({
-                            test: testIndex,
-                          }))
-                        }}
-                      >
-                        {test.title}
-                      </SidebarItem>
-                    ))}
-                  </SidebarHeader>
-                ))}
-              </Sidebar>
-            </Card>
-            <Card>
-              <CardHeader>
-                Canvas
-                <a
-                  href={`https://github.com/contiamo/operational-ui/tree/master/packages/visual-tests/src/TestCases/${
-                    allTestCases[this.state.group].folder
-                  }/${allTestCases[this.state.group].children[this.state.test].slug}.ts`}
-                >
-                  <Small>View code for this test</Small>
-                </a>
-              </CardHeader>
-              <Marathon
-                test={test}
-                onCompleted={() => {
-                  if (!this.state.isLooping && !this.state.isIdle) {
-                    this.setState(prevState => ({
-                      isIdle: true,
-                    }))
-                    return
-                  }
-                  if (this.state.isLooping) {
-                    this.loop()
-                  }
-                }}
-                timeout={2000}
-              >
-                {MarathonRenderer}
-              </Marathon>
-            </Card>
-          </Grid>
-        </React.Fragment>
+                    {this.state.isLooping ? "Pause" : "Loop"}
+                  </Button>
+                </>
+              }
+            >
+              <PageContent>
+                <Card>
+                  <Marathon
+                    test={test}
+                    onCompleted={() => {
+                      if (!this.state.isLooping && !this.state.isIdle) {
+                        this.setState(prevState => ({
+                          isIdle: true,
+                        }))
+                        return
+                      }
+                      if (this.state.isLooping) {
+                        this.loop()
+                      }
+                    }}
+                    timeout={2000}
+                  >
+                    {MarathonRenderer}
+                  </Marathon>
+                </Card>
+              </PageContent>
+            </Page>
+          }
+        />
       </OperationalUI>
     )
   }
