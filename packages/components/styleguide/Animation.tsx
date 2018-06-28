@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../src/utils/constants"
 
 export interface Props {
   size?: number
