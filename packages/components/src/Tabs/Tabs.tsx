@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { withTheme } from "emotion-theming"
 import { darken } from "@operational/utils"
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"
 
@@ -125,7 +125,7 @@ const Tabs = (props: PropsWithTheme) => {
       index,
     }),
   )
-  const color = expandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary
+  const color = deprecatedExpandColor(props.theme.deprecated, props.activeColor) || props.theme.color.primary
 
   // Display only the active panel based off the children props
   const { children: panelContent, disabled }: TabProps = childrenProps.find(

@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { setBrightness } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { IconName } from "../"
@@ -103,7 +103,7 @@ const Bar = styled("div")(
     },
   },
   ({ theme, fill, color }: { theme?: OperationalStyleConstants; fill: number; color: string }): CssStatic => {
-    const backgroundColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+    const backgroundColor: string = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
       padding: `${theme.deprecated.spacing / 4}px ${theme.deprecated.spacing / 2}px`,
       backgroundColor: theme.deprecated.colors.lightGray,

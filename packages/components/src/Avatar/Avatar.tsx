@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
-import { readableTextColor, getInitials, expandColor } from "@operational/utils"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { readableTextColor, getInitials } from "@operational/utils"
 
 export interface Props {
   /** Name of the person */

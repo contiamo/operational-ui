@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { darken } from "@operational/utils"
 
 export interface Props {
@@ -12,7 +12,7 @@ export interface Props {
 }
 
 const Container = styled("div")(({ theme, color }: { theme?: OperationalStyleConstants; color?: string }) => {
-  const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.white
+  const backgroundColor = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.white
   return {
     label: "selectfilter",
     "& > input": {

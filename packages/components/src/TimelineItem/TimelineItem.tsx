@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactFeather from "react-feather"
 import styled from "react-emotion"
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -26,7 +26,7 @@ const StatusContainer = styled("div")(
   },
   ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): CssStatic => {
     return {
-      backgroundColor: expandColor(theme.deprecated, color) || theme.deprecated.colors.info,
+      backgroundColor: deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info,
     }
   },
 )

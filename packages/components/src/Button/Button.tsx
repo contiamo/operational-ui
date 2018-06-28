@@ -1,8 +1,8 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
-import { readableTextColor, darken, lighten, expandColor } from "@operational/utils"
+import { readableTextColor, darken, lighten } from "@operational/utils"
 
-import { OperationalStyleConstants } from "../utils/constants"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { isWhite, isModifiedEvent } from "../utils"
 import { Css } from "../types"
 import { ContextConsumer, Context, Icon, IconName } from "../"

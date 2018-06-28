@@ -1,10 +1,10 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { Sunburst, VisualizationWrapper } from "@operational/visualizations"
-import { operational, Theme } from "@operational/theme"
 
 import {
   OperationalUI,
+  OperationalStyleConstants,
   Layout,
   Button,
   Icon,
@@ -34,14 +34,14 @@ export interface State {
 }
 
 const TestToggle = styled("span")(
-  ({ theme, active }: { theme: Theme; active: boolean }): {} => ({
+  ({ theme, active }: { theme?: OperationalStyleConstants; active: boolean }): {} => ({
     display: "inline-block",
     marginRight: 16,
     padding: "2px 4px",
     cursor: "pointer",
     borderRadius: active ? 2 : 0,
-    color: active ? theme.colors.white : theme.colors.linkText,
-    backgroundColor: active ? theme.colors.linkText : theme.colors.white,
+    color: active ? theme.color.white : theme.color.primary,
+    backgroundColor: active ? theme.color.primary : theme.color.white,
     borderBottom: "1px solid currentColor",
   }),
 )

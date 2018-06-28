@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
-import { expandColor } from "@operational/utils"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon } from ".."
 
 type WithTheme = { theme?: OperationalStyleConstants }

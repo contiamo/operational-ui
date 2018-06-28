@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import * as mixins from "../utils/mixins"
 
 const Container = styled("div")(
@@ -20,7 +20,7 @@ const Container = styled("div")(
     onClick?: () => void
     theme?: OperationalStyleConstants
   }): {} => {
-    const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.white
+    const backgroundColor = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.white
     return {
       backgroundColor,
       label: "select",
