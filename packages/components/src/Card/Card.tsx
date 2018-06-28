@@ -23,7 +23,7 @@ export interface Props<T = {}> {
 }
 
 const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  marginBottom: theme.space.element,
+  marginBottom: 20,
   borderTop: `1px solid ${theme.color.separators.light}`,
   padding: 20,
   boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.16)",
