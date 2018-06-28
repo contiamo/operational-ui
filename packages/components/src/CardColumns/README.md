@@ -60,3 +60,28 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
   </Card>
 </div>
 ```
+
+### With content on the right
+
+```jsx
+<Card title="Playground">
+  <CardColumns>
+    <CardColumn title="Input">
+      <Textarea code value="hello-word" />
+    </CardColumn>
+    <CardColumn title="Schema">
+      <Code syntax="json">{`schema is not availble for this function`}</Code>
+    </CardColumn>
+  </CardColumns>
+  <CardColumns>
+    <CardColumn>
+      <Button color="primary">Send Request</Button>
+    </CardColumn>
+    <CardColumn contentRight>
+      <Button color="grey" icon="ExternalLink">
+        curl/code
+      </Button>
+    </CardColumn>
+  </CardColumns>
+</Card>
+```

@@ -5,17 +5,22 @@ import { OperationalStyleConstants } from "@operational/theme"
 export interface Props {
   /** Column title */
   title?: string
+  /** Align the content to the right */
+  contentRight?: boolean
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  label: "card-column",
-  minWidth: 280 / 2,
-  padding: theme.space.element / 2,
-  flex: "1 0",
-  " img": {
-    maxWidth: "100%",
-  },
-}))
+const Container = styled("div")(
+  ({ theme, contentRight }: { theme?: OperationalStyleConstants; contentRight?: Props["contentRight"] }) => ({
+    label: "card-column",
+    minWidth: 280 / 2,
+    padding: theme.space.element / 2,
+    flex: "1 0",
+    " img": {
+      maxWidth: "100%",
+    },
+    textAlign: contentRight ? "right" : null,
+  }),
+)
 
 const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontFamily: theme.font.family.main,
