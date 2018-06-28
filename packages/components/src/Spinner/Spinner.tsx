@@ -1,8 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { css } from "glamor"
+import styled, { keyframes } from "react-emotion"
 import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
-import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
@@ -10,7 +8,7 @@ export interface Props {
   color?: string
 }
 
-const spin = css.keyframes({
+const spin = keyframes({
   "0%": {
     transform: "scale(1)",
   },
@@ -38,7 +36,7 @@ const PulsingCube = styled("div")(
       deprecated: Theme
     }
     color?: string
-  }): CssStatic => {
+  }) => {
     const backgroundColor: string = expandColor(theme.deprecated, color) || "currentColor"
     return {
       backgroundColor,

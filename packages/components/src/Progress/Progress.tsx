@@ -1,10 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { css } from "glamor"
+import styled, { keyframes } from "react-emotion"
 import { OperationalStyleConstants, Theme } from "@operational/theme"
 import { lighten } from "@operational/utils"
-import deprecate from "../utils/deprecate"
-import { WithTheme, Css, CssStatic } from "../types"
+import { WithTheme } from "../types"
 import { Icon } from "../"
 
 export interface Props {
@@ -20,10 +18,6 @@ export interface Props {
 
   onClose?: () => void
 }
-
-const width = 120
-const height = 45
-const padding = 15
 
 const Container = styled("div")(
   {
@@ -41,13 +35,13 @@ const Container = styled("div")(
     theme?: OperationalStyleConstants & {
       deprecated: Theme
     }
-  }): CssStatic => ({
+  }) => ({
     zIndex: theme.deprecated.baseZIndex + 300,
     backgroundColor: "transparent",
   }),
 )
 
-const fillProgress = css.keyframes({
+const fillProgress = keyframes({
   from: {
     transform: "translate3d(-100%, 0, 0)",
   },
@@ -65,7 +59,7 @@ const Bar = styled("div")(
       deprecated: Theme
     }
     isError: boolean
-  }): CssStatic => ({
+  }) => ({
     width: "100%",
     height: 3,
     backgroundColor: theme.deprecated.colors.info,
@@ -79,47 +73,43 @@ const Bar = styled("div")(
   }),
 )
 
-const ErrorMessage = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    ...theme.deprecated.typography.body,
-    padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing / 2}px`,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    zIndex: theme.deprecated.baseZIndex + 301,
-    textAlign: "center",
-    backgroundColor: lighten(theme.deprecated.colors.error, 15),
-    color: theme.deprecated.colors.white,
-  }),
-)
+const ErrorMessage = styled("div")(({ theme }: WithTheme) => ({
+  ...theme.deprecated.typography.body,
+  padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing / 2}px`,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  position: "relative",
+  zIndex: theme.deprecated.baseZIndex + 301,
+  textAlign: "center",
+  backgroundColor: lighten(theme.deprecated.colors.error, 15),
+  color: theme.deprecated.colors.white,
+}))
 
-const Action = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    opacity: 0.7,
+const Action = styled("div")(({ theme }: WithTheme) => ({
+  opacity: 0.7,
+  display: "inline-block",
+  marginLeft: theme.deprecated.spacing,
+  userSelect: "none",
+  "& > *": {
     display: "inline-block",
-    marginLeft: theme.deprecated.spacing,
-    userSelect: "none",
-    "& > *": {
-      display: "inline-block",
-      verticalAlign: "middle",
-    },
-    "& svg": {
-      width: theme.deprecated.spacing,
-      height: theme.deprecated.spacing,
-      marginRight: theme.deprecated.spacing / 4,
-    },
-    // Temporary hack since feather icons for refresh and close
-    // have a mismatch in size.
-    ":first-of-type svg": {
-      width: (theme.deprecated.spacing * 3) / 4,
-      height: (theme.deprecated.spacing * 3) / 4,
-    },
-    ":hover": {
-      opacity: 1,
-    },
-  }),
-)
+    verticalAlign: "middle",
+  },
+  "& svg": {
+    width: theme.deprecated.spacing,
+    height: theme.deprecated.spacing,
+    marginRight: theme.deprecated.spacing / 4,
+  },
+  // Temporary hack since feather icons for refresh and close
+  // have a mismatch in size.
+  ":first-of-type svg": {
+    width: (theme.deprecated.spacing * 3) / 4,
+    height: (theme.deprecated.spacing * 3) / 4,
+  },
+  ":hover": {
+    opacity: 1,
+  },
+}))
 
 const Progress: React.SFC<Props> = props => (
   <Container id={props.id} className={props.className}>
