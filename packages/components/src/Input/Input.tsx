@@ -190,7 +190,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
           <FormFieldControls>
             {props.hint ? (
               <FormFieldControl>
-                <Icon name="HelpCircle" size={14} />
+                <Icon name="Question" size={14} />
                 <HelpTooltip right>{props.hint}</HelpTooltip>
               </FormFieldControl>
             ) : null}
@@ -200,7 +200,8 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
                   props.onToggle()
                 }}
               >
-                <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
+                {/** @todo: add Unlock to icon set and change here */}
+                <Icon name={props.disabled ? "Lock" : "Lock"} size={12} />
               </FormFieldControl>
             ) : null}
           </FormFieldControls>

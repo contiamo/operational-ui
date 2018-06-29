@@ -65,7 +65,7 @@ const IconContainer = styled("div")(
 const Message = (props: Props) => (
   <Container className={props.className} color={props.color}>
     <IconContainer onClick={props.onClose}>
-      <Icon name="X" />
+      <Icon name="No" />
     </IconContainer>
     {props.children}
   </Container>

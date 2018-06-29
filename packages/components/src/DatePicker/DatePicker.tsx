@@ -160,7 +160,7 @@ class DatePicker extends React.Component<Props, State> {
                 })
             }}
           >
-            <Icon name="X" size={14} />
+            <Icon name="No" size={14} />
           </Toggle>
         )}
         <Input
@@ -193,7 +193,8 @@ class DatePicker extends React.Component<Props, State> {
                 this.changeMonth(-1)
               }}
             >
-              <Icon name="ChevronLeft" size={14} />
+              {/** @todo change back to ChevronLeft */}
+              <Icon name="Document" size={14} />
             </IconContainer>
             <span>{`${months[month]}, ${year}`}</span>
             <IconContainer
@@ -202,7 +203,8 @@ class DatePicker extends React.Component<Props, State> {
                 this.changeMonth(+1)
               }}
             >
-              <Icon name="ChevronRight" size={14} />
+              {/** @todo change back to ChevronRight */}
+              <Icon name="Document" size={14} />
             </IconContainer>
           </MonthNav>
           <Month start={start} end={end} year={year} month={month} onChange={onChange} />

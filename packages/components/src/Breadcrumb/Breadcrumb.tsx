@@ -11,7 +11,7 @@ export interface Props {
   /** Navigation property à la react-router <Link/> */
   to?: string
   children?: React.ReactNode
-  icon?: IconName | React.ReactNode
+  icon?: IconName
 }
 
 const containerStyles = ({ theme }: WithTheme): CssStatic => ({
@@ -52,13 +52,7 @@ const Breadcrumb = (props: Props) => {
           }}
         >
           <Content>{props.children}</Content>
-          {props.icon ? (
-            props.icon === String(props.icon) ? (
-              <Icon name={reactFeatherIcon} size={12} />
-            ) : (
-              props.icon
-            )
-          ) : null}
+          {props.icon && <Icon name={props.icon} size={12} />}
         </ContainerComponent>
       )}
     </ContextConsumer>

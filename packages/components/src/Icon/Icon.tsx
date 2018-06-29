@@ -5,20 +5,15 @@ import { withTheme } from "emotion-theming"
 
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import BrandIcons, { BrandIconName } from "./Icon.Brand"
-import { ReactFeatherIconName } from "./Icon.ReactFeather"
+import * as CustomIcons from "./Icon.Custom"
 
-export type IconName = ReactFeatherIconName | BrandIconName
+export type IconName = BrandIconName | keyof typeof CustomIcons
 
-export interface Props {
-  /**
-   * Icon name. See https://feathericons.com (convert name to PascalCase) for feather icons.
-   * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
-   */
-  name: IconName
+export interface PropsWithoutName {
   className?: string
   /**
    * Size
-   * @default 32
+   * @default 18 for regular icons, 32 for brand icons
    */
   size?: number
 
@@ -45,22 +40,31 @@ export interface Props {
   right?: boolean
 }
 
+export interface Props extends PropsWithoutName {
+  /**
+   * Icon name. See https://feathericons.com (convert name to PascalCase) for feather icons.
+   * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
+   */
+  name: IconName
+}
+
 export interface PropsWithTheme extends Props {
   theme?: OperationalStyleConstants
 }
 
 const Icon = withTheme(({ left, right, ...props }: PropsWithTheme) => {
   const color: string = expandColor(props.theme, props.color) || "currentColor"
-  const defaultSize = 32
 
-  if (ReactFeather[props.name]) {
-    const Comp = ReactFeather[props.name]
-    return <Comp {...props} size={props.size || defaultSize} color={color} />
+  const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
+
+  if (TypedCustomIcons[props.name]) {
+    const Comp = TypedCustomIcons[props.name]
+    return <Comp {...props} size={props.size || 18} color={color} />
   }
 
   if (BrandIcons[props.name]) {
     const Comp = BrandIcons[props.name]
-    return <Comp {...props} size={props.size || defaultSize} color={color} />
+    return <Comp {...props} size={props.size || 32} color={color} />
   }
 
   return null

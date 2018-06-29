@@ -105,13 +105,13 @@ const Progress: React.SFC<Props> = props => (
         {props.error}
         {props.onRetry && (
           <Action onClick={props.onRetry}>
-            <Icon name="RefreshCw" />
+            <Icon name="Sync" />
             <span>Retry</span>
           </Action>
         )}
         {props.onClose && (
           <Action onClick={props.onClose}>
-            <Icon name="X" />
+            <Icon name="No" />
             <span>Dismiss</span>
           </Action>
         )}

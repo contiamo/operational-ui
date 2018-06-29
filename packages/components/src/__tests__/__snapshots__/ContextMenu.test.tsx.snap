@@ -5,34 +5,25 @@ exports[`ContextMenu Component Should render 1`] = `
   class="css-3223hv-contextmenu"
 >
   <svg
-    class="css-1jl4146"
-    fill="none"
+    fill="currentColor"
     height="16"
-    name="MoreHorizontal"
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    theme="[object Object]"
-    viewbox="0 0 24 24"
+    viewbox="0 0 360 360"
     width="16"
-    xmlns="http://www.w3.org/2000/svg"
   >
-    <circle
-      cx="12"
-      cy="12"
-      r="1"
-    />
-    <circle
-      cx="19"
-      cy="12"
-      r="1"
-    />
-    <circle
-      cx="5"
-      cy="12"
-      r="1"
-    />
+    <g>
+      <path
+        d="M80,60.187l200,0"
+      />
+      <path
+        d="M80,140.187l200,0"
+      />
+      <path
+        d="M80,300.187l120,0"
+      />
+      <path
+        d="M320,360.187l-280,0l0,-360l280,0l0,360Zm-120,-40l0,-40l-120,0l0,40l120,0Zm80,-80l0,-40l-200,0l0,40l200,0Zm0,-80l0,-40l-200,0l0,40l200,0Zm0,-80l0,-40l-200,0l0,40l200,0Z"
+      />
+    </g>
   </svg>
   <div
     class="css-1by8gdf"

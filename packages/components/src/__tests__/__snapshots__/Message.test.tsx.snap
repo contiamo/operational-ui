@@ -8,30 +8,13 @@ exports[`Message Component Should render 1`] = `
     class="css-1tqzvoy"
   >
     <svg
-      class="css-1jl4146"
-      fill="none"
-      height="32"
-      name="X"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      theme="[object Object]"
-      viewbox="0 0 24 24"
-      width="32"
-      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      height="18"
+      viewbox="0 0 360 360"
+      width="18"
     >
-      <line
-        x1="18"
-        x2="6"
-        y1="6"
-        y2="18"
-      />
-      <line
-        x1="6"
-        x2="18"
-        y1="6"
-        y2="18"
+      <path
+        d="M180,151.903l105.858,-105.858c9.428,9.428 18.856,18.856 28.284,28.285l-105.858,105.857l105.858,105.858l-28.284,28.285l-105.858,-105.858l-105.858,105.858l-28.284,-28.285l105.858,-105.858l-105.858,-105.857l28.284,-28.285l105.858,105.858Z"
       />
     </svg>
   </div>

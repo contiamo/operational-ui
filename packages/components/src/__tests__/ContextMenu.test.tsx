@@ -9,7 +9,7 @@ describe("ContextMenu Component", () => {
   it("Should render", () => {
     const renderedComponent = render(
       <ContextMenu>
-        <Icon name="MoreHorizontal" size={16} />
+        <Icon name="Document" size={16} />
         <ContextMenuItem onClick={() => alert("clicked")}>Menu 1</ContextMenuItem>
         <ContextMenuItem>Menu 2</ContextMenuItem>
         <ContextMenuItem>Menu 3</ContextMenuItem>

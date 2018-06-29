@@ -75,7 +75,7 @@ const Textarea = (props: Props) => {
       <FormFieldControls>
         {props.hint ? (
           <FormFieldControl>
-            <Icon name="HelpCircle" size={14} />
+            <Icon name="Question" size={14} />
             <HelpTooltip right>{props.hint}</HelpTooltip>
           </FormFieldControl>
         ) : null}
