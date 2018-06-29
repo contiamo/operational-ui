@@ -50,27 +50,24 @@ export interface PropsWithTheme extends Props {
   theme?: OperationalStyleConstants
 }
 
-const style = (Component: React.SFC<Props>) =>
-  styled(Component)(({ left, right, theme }: PropsWithTheme) => ({
-    marginLeft: right ? theme.space.small : 0,
-    marginRight: left ? theme.space.small : 0,
-  }))
-
 const Icon = withTheme(({ left, right, ...props }: PropsWithTheme) => {
   const color: string = expandColor(props.theme, props.color) || "currentColor"
   const defaultSize = 32
 
   if (ReactFeather[props.name]) {
-    const Comp = style(ReactFeather[props.name])
+    const Comp = ReactFeather[props.name]
     return <Comp {...props} size={props.size || defaultSize} color={color} />
   }
 
   if (BrandIcons[props.name]) {
-    const Comp = style(BrandIcons[props.name])
+    const Comp = BrandIcons[props.name]
     return <Comp {...props} size={props.size || defaultSize} color={color} />
   }
 
   return null
 })
 
-export default styled(Icon)()
+export default styled(Icon)(({ left, right, theme }: PropsWithTheme) => ({
+  marginLeft: right ? theme.space.small : 0,
+  marginRight: left ? theme.space.small : 0,
+}))
