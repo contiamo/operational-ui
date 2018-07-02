@@ -1,21 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Timeline Should render 1`] = `
-<ul
-  class="css-3bt8m9-timeline"
->
-  <li
-    class="css-hjo7dx-timelineitem"
-  >
-    <div
-      class="css-fwuidw"
-      color="info"
-    />
-    <div
-      class="css-tbrnde"
-    >
-      Test
-    </div>
-  </li>
-</ul>
+<div
+  class="css-ar73w8-Messages"
+/>
 `;
