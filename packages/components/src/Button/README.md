@@ -15,7 +15,7 @@ Using buttons is as simple as including the component with a text node as a chil
 </div>
 <div style={{ marginBottom: 10 }}>
   <Button color="success" icon="Open">Icon</Button>
-  <Button color="success" icon="Open">Icon</Button>
+  <Button color="success" icon="Labs">Icon</Button>
   <Button condensed icon="Open">Icon</Button>
   <Button loading>Loading</Button>
 </div>

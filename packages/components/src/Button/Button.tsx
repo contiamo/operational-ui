@@ -138,7 +138,7 @@ const Button = (props: Props) => {
           {props.children}
           {props.icon && (
             <IconContainer condensed={props.condensed}>
-              {typeof props.icon === "string" ? <Icon right name={props.icon as IconName} /> : props.icon}
+              {typeof props.icon === "string" ? <Icon right name={props.icon as IconName} size={18} /> : props.icon}
             </IconContainer>
           )}
           {props.loading && <ButtonSpinner containerColor={props.color} />}
