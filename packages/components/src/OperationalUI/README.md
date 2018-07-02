@@ -68,7 +68,7 @@ const ContextConsumer = require("./OperationalUI").Consumer
 class MessageHandler extends React.Component {
   render() {
     return (
-      <OperationalUI __log>
+      <OperationalUI __log key="abc">
         <ContextConsumer>
           {ctx => (
             <div>

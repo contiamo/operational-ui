@@ -4,6 +4,7 @@ import { ThemeProvider } from "emotion-theming"
 
 import constants, { OperationalStyleConstants } from "../utils/constants"
 import { darken } from "@operational/utils"
+import { MessageType } from "../types"
 
 import Messages from "../Messages/Messages"
 import Message from "../Message/Message"
@@ -26,8 +27,6 @@ export interface Props {
   hideMessageAfter?: number
 }
 
-type MessageType = "info" | "success" | "error"
-
 export interface State {
   messages: {
     message: {
@@ -37,6 +36,17 @@ export interface State {
     addedAt: number
   }[]
   now: number
+}
+
+export interface Context {
+  pushState: (url: string) => void
+  replaceState: (url: string) => void
+  pushMessage: (
+    message: {
+      body: string
+      type: MessageType
+    },
+  ) => void
 }
 
 const colorByMessageType = (type: MessageType): string => {
@@ -93,6 +103,9 @@ class OperationalUI extends React.Component<Props, State> {
   timer: number
 
   componentDidMount() {
+    if (this.props.__log) {
+      console.log("mounted")
+    }
     this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
     this.timer = window.setInterval(() => {
       this.setState(prevState => ({

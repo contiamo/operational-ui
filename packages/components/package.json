@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "npm run docs:start",
+    "start:standalone": "parcel scripts/dev-server/index.html --no-hmr",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
     "package": "rimraf lib && webpack --env package",
@@ -51,6 +52,7 @@
     "babel-plugin-emotion": "^9.0.0-3",
     "jest-emotion": "^9.2.2",
     "marked": "^0.4.0",
+    "parcel-bundler": "^1.9.4",
     "react-docgen-typescript": "^1.6.1",
     "react-styleguidist": "^7.0.14",
     "ts-loader": "^4.3.0",
