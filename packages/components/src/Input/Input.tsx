@@ -200,8 +200,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
                   props.onToggle()
                 }}
               >
-                {/** @todo: add Unlock to icon set and change here */}
-                <Icon name={props.disabled ? "Lock" : "Lock"} size={12} />
+                <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
               </FormFieldControl>
             ) : null}
           </FormFieldControls>

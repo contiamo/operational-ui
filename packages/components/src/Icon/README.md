@@ -31,43 +31,21 @@ Operational's SVG icon set packaged as a single component.
 ### The Icon Set
 
 ```jsx
-const icons = [
-  "Add",
-  "Admin",
-  "Bundle",
-  "Catalog",
-  "Copy",
-  "Database",
-  "Deploy",
-  "Document",
-  "Endpoint",
-  "Entity",
-  "Function",
-  "Funnel",
-  "Home",
-  "Jobs",
-  "Lock",
-  "No",
-  "Olap",
-  "Open",
-  "Project",
-  "Question",
-  "Remove",
-  "Schema",
-  "Search",
-  "SortAscending",
-  "SortDescending",
-  "User",
-  "Users",
-  "Yes",
-]
+// This import relies on files not exposed by the library, and is used for
+// presentation purposes only
+const CustomIcons = require("./Icon.Custom")
+
+const icons = Object.keys(CustomIcons)
 ;<div>
-  {icons.map(icon => (
-    <div style={{ display: "block", marginBottom: 10 }}>
+  <Table
+    columns={["Name", "Standalone", "In button"]}
+    rows={icons.sort().map(icon => [
+      icon,
+      <Icon name={icon} color="primary" />,
       <Button color="primary" icon={icon}>
-        {icon}
-      </Button>
-    </div>
-  ))}
+        Button Label
+      </Button>,
+    ])}
+  />
 </div>
 ```

@@ -93,8 +93,6 @@ const ContainerLink = styled("a")(containerStyles)
 const IconContainer = styled("div")(({ theme }: Css) => ({
   display: "flex",
   alignItems: "center",
-  /** @todo: remove once `left` and `right` props are working on custom icons */
-  marginLeft: theme.space.small,
 }))
 
 const ButtonSpinner = styled(Spinner)(

@@ -204,8 +204,7 @@ const SidenavHeader = (props: Props) => {
                   props.onToggle && props.onToggle(!props.active)
                 }}
               >
-                {/** @todo change back to ChevronUp and ChevronDown once icons are available */}
-                <Icon name={props.active ? "Yes" : "Yes"} />
+                <Icon name={props.active ? "ChevronUp" : "ChevronDown"} />
               </CloseButton>
             )}
             {isActive && <ItemsContainer>{props.children}</ItemsContainer>}
