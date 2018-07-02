@@ -2,10 +2,6 @@
 
 exports[`Progress Component Should initialize properly 1`] = `
 <div
-  class="css-1f8ra8u-progress"
->
-  <div
-    class="css-1x11kw8"
-  />
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;
