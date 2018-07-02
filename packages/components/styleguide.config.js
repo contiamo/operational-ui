@@ -11,7 +11,6 @@ module.exports = {
           return /\/[A-Z]\w*\.tsx$/.test(module)
         })
       },
-      ignore: "*OperationalUI.tsx",
     },
   ],
   resolver: require("react-docgen").resolver.findAllComponentDefinitions,

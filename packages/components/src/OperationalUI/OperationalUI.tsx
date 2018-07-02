@@ -18,7 +18,7 @@ export interface Props {
 
 const { Provider, Consumer } = React.createContext({})
 
-export const baseStylesheet = (theme: OperationalStyleConstants): string => `
+const baseStylesheet = (theme: OperationalStyleConstants): string => `
 * {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
