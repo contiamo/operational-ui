@@ -20,6 +20,15 @@ const Container = styled("div")({
   position: "relative",
 })
 
+const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  overflow: "auto",
+  backgroundColor: theme.color.white,
+}))
+
+const Side = styled("div")({
+  overflow: "auto",
+})
+
 const Content = styled("div")(
   {
     position: "relative",
@@ -33,13 +42,13 @@ const Content = styled("div")(
       gridRowStart: "1",
       gridRowEnd: "span 1",
     },
-    "& > *:nth-child(2)": {
+    [Side as any]: {
       gridColumnStart: "1",
       gridColumnEnd: "span 1",
       gridRowStart: "2",
       gridRowEnd: "span 1",
     },
-    "& > *:nth-child(3)": {
+    [Main as any]: {
       gridColumnStart: "2",
       gridColumnEnd: "span 1",
       gridRowStart: "2",
@@ -51,15 +60,6 @@ const Content = styled("div")(
     gridTemplateColumns: `${theme.sidebarWidth}px 1fr`,
   }),
 )
-
-const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  overflow: "auto",
-  backgroundColor: theme.color.white,
-}))
-
-const Side = styled("div")({
-  overflow: "auto",
-})
 
 const Layout = (props: Props) => (
   <Container>
