@@ -2,13 +2,6 @@
 
 exports[`Input Should initialize 1`] = `
 <div
-  class="css-1fh0ram"
->
-  <input
-    class="hi css-c8tup6-input"
-    name="bienvenue"
-    placeholder="hello"
-    value="How are you?"
-  />
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

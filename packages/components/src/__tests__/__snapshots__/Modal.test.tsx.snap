@@ -2,12 +2,6 @@
 
 exports[`Modal Component Should render 1`] = `
 <div
-  class="css-fmmjp4-modal"
->
-  <div
-    class="css-bovtwh"
-  >
-    i love you
-  </div>
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

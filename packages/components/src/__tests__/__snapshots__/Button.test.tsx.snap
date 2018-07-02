@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button Component Should initialize properly 1`] = `
-<button
-  class="css-1p16o1e-button"
->
-  hi
-</button>
+<div
+  class="css-ar73w8-Messages"
+/>
 `;

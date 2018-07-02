@@ -2,37 +2,6 @@
 
 exports[`ContextMenu Component Should render 1`] = `
 <div
-  class="css-3223hv-contextmenu"
->
-  <svg
-    class="css-1jl4146"
-    fill="currentColor"
-    height="16"
-    viewbox="0 0 360 360"
-    width="16"
-  >
-    <path
-      d="M320,340.187l-280,0l0,-320l280,0l0,320Zm-120,-59.999l0,-40l-120,0l0,40l120,0Zm80,-80l0,-40l-200,0l0,40l200,0Zm0,-80l0,-40l-200,0l0,40l200,0Z"
-    />
-  </svg>
-  <div
-    class="css-1by8gdf"
-  >
-    <div
-      class="css-15fb3br-contextmenuitem"
-    >
-      Menu 1
-    </div>
-    <div
-      class="css-4rbfm8-contextmenuitem"
-    >
-      Menu 2
-    </div>
-    <div
-      class="css-4rbfm8-contextmenuitem"
-    >
-      Menu 3
-    </div>
-  </div>
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

@@ -1,16 +1,18 @@
 Main provider for Operational UI. Should need to wrap all your application with this component.
 
 ### Classic example
+
 ```jsx static
 <OperationalUI withBaseStyles>
- <App />
+  <App />
 </OperationalUI>
 ```
 
 ### With personal theme example
+
 ```jsx static
 <OperationalUI theme={myTheme}>
- <App />
+  <App />
 </OperationalUI>
 ```
 
@@ -24,24 +26,26 @@ class RoutingComponent extends React.Component {
     super(props)
     // Set the initial path instate
     this.state = {
-      path: window.location.pathname
+      path: window.location.pathname,
     }
   }
 
   render() {
     return (
-      <OperationalUI pushState={newPath => {
-        /*
+      <OperationalUI
+        pushState={newPath => {
+          /*
          * This is a simple way to persist path changes in state.
          * Routing libraries like `react-router` do this automatically,
          * so if you have access to its `history` object, you can simply do
          * `<OperationalUI pushState={history.push} />`
          */
-        this.setState(() => ({
-          path: newPath
-        }))
-        window.history.pushState(null, null, newPath)
-      }}>
+          this.setState(() => ({
+            path: newPath,
+          }))
+          window.history.pushState(null, null, newPath)
+        }}
+      >
         <div>
           <p>{`The path is ${this.state.path}`}</p>
           <Button to="/abcd">Go to /abcd</Button>
@@ -51,5 +55,52 @@ class RoutingComponent extends React.Component {
   }
 }
 
-<RoutingComponent />
+;<RoutingComponent />
+```
+
+### Setting up Message Management
+
+You can use `OperationalUI`'s internal flash message management by simply using the `pushMessage` method provided in context, as follows:
+
+```jsx
+const ContextConsumer = require("./OperationalUI").Consumer
+
+class MessageHandler extends React.Component {
+  render() {
+    return (
+      <OperationalUI>
+        <ContextConsumer>
+          {ctx => (
+            <div>
+              <Button
+                color="primary"
+                onClick={() => {
+                  ctx.pushMessage({
+                    body: "Info message",
+                    type: "info",
+                  })
+                }}
+              >
+                Create an info message
+              </Button>
+              <Button
+                color="error"
+                onClick={() => {
+                  ctx.pushMessage({
+                    body: "Error message",
+                    type: "error",
+                  })
+                }}
+              >
+                Create an error message
+              </Button>
+            </div>
+          )}
+        </ContextConsumer>
+      </OperationalUI>
+    )
+  }
+}
+
+;<MessageHandler />
 ```
