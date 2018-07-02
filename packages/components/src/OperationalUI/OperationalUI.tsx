@@ -17,6 +17,7 @@ export interface Props {
   pushState?: (path: string) => void
   /** Custom replace state method expecting a single string */
   replaceState?: (path: string) => void
+  __log?: boolean
   /**
    * A time interval after which a non-error message should be automatically dismissed, measured in milliseconds.
    *
@@ -95,6 +96,7 @@ class OperationalUI extends React.Component<Props, State> {
     this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
     this.timer = window.setInterval(() => {
       this.setState(prevState => ({
+        messages: prevState.messages,
         now: new Date().getTime(),
       }))
     }, 1000)
@@ -105,6 +107,9 @@ class OperationalUI extends React.Component<Props, State> {
   }
 
   render() {
+    if (this.props.__log) {
+      console.log(this.state)
+    }
     const { withBaseStyles, pushState, replaceState, children } = this.props
     return (
       <ThemeProvider theme={constants}>

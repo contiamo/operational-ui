@@ -80,9 +80,6 @@ const Textarea = (props: Props) => {
           </FormFieldControl>
         ) : null}
       </FormFieldControls>
-      {/* The prop `css_` is used because the prop is used merely for some computation inside the
-        * glamorous component as opposed to as actual styles to be injected into the component.
-        */}
       <TextareaComp
         disabled={Boolean(props.disabled)}
         isCode={Boolean(props.code)}
