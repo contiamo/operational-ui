@@ -2,6 +2,7 @@
 
 exports[`Icon Component Renders an <svg> tag 1`] = `
 <svg
+  class="css-1jl4146"
   fill="currentColor"
   height="18"
   viewbox="0 0 360 360"
