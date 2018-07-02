@@ -1,48 +1,6 @@
 import { css } from "glamor"
-import { Theme } from "@operational/theme"
 
 import { darken } from "./color"
-
-export const baseStylesheet = (theme: Theme): string => `
-* {
-  box-sizing: border-box;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: ${theme.fontFamily};
-  font-size: 13px;
-  height: 100%;
-}
-
-body {
-  background-color: ${theme.colors.background};
-}
-
-a:link,
-a:visited {
-  color: ${theme.colors.info};
-  text-decoration: none;
-}
-
-a:hover: {
-  color: ${darken(theme.colors.info, 5)};
-}
-`
-
-export const injectStylesheet = (cssString: string): void => {
-  if (!document) {
-    return
-  }
-  const styleEl = document.createElement("style")
-  styleEl.innerHTML = cssString
-  document.head.appendChild(styleEl)
-}
 
 export const fadeIn = css.keyframes({
   from: {

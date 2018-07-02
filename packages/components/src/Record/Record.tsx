@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { Button } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 

@@ -1,12 +1,12 @@
 import React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import * as tinycolor from "tinycolor2"
 
 export interface Props {
   success?: boolean
   error?: boolean
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants
 }
 
 const getColorFromProps = ({ success, error, theme }: Props): string => {

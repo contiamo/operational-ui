@@ -2,9 +2,8 @@ import * as React from "react"
 import * as ReactFeather from "react-feather"
 import styled from "react-emotion"
 import { withTheme } from "emotion-theming"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { expandColor } from "@operational/utils"
 
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import BrandIcons, { BrandIconName } from "./Icon.Brand"
 import { ReactFeatherIconName } from "./Icon.ReactFeather"
 

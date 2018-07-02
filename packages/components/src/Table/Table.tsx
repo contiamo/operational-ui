@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 
 export interface Props {
   /** Table columns headings */
@@ -30,7 +30,7 @@ export interface Props {
 }
 
 interface CompProps {
-  theme?: OperationalStyleConstants & { deprecated: Theme }
+  theme?: OperationalStyleConstants
 }
 
 const Container = styled("table")(({ theme }: CompProps) => ({

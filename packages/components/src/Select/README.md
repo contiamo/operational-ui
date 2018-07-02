@@ -42,9 +42,7 @@ class ComponentWithSelect extends React.Component {
   }
 }
 
-;<OperationalUI withBaseStyles>
-  <ComponentWithSelect />
-</OperationalUI>
+;<ComponentWithSelect />
 ```
 
 ### Usage as multiselect
@@ -89,9 +87,7 @@ class ComponentWithSelect extends React.Component {
   }
 }
 
-;<OperationalUI withBaseStyles>
-  <ComponentWithSelect />
-</OperationalUI>
+;<ComponentWithSelect />
 ```
 
 ### Return Value

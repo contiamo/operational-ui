@@ -6,7 +6,7 @@ import Events from "../shared/event_catalog"
 import StateHandler from "../shared/state_handler"
 import EventEmitter from "../shared/event_bus"
 import { isEmpty, uniqueId } from "lodash/fp"
-import { operational } from "@operational/theme"
+import { deprecatedTheme } from "../utils/theme"
 
 import {
   Accessors,
@@ -38,7 +38,7 @@ const defaultConfig = (): PieChartConfig => {
     minLegendWidth: 50,
     minTotalFontSize: 11,
     outerBorderMargin: 1,
-    palette: operational.colors.visualizationPalette,
+    palette: deprecatedTheme.colors.visualizationPalette,
     showComponentFocus: false,
     uid: uniqueId("piechart"),
     visualizationName: "piechart",

@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { css } from "glamor"
 import { fadeIn } from "@operational/utils"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -38,15 +38,7 @@ const Container = styled("div")(
 )
 
 const MenuContainer = styled("div")(
-  ({
-    theme,
-    isExpanded,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isExpanded: boolean
-  }): {} => ({
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }): {} => ({
     position: "absolute",
     top: `calc(100% + ${theme.deprecated.spacing / 2}px)`,
     left: -theme.deprecated.spacing,

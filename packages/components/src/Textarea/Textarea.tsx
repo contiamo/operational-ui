@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 
 import { Label, LabelText, FormFieldControls, FormFieldControl, FormFieldError, inputFocus } from "../utils/mixins"
 import { Icon } from "../"
@@ -40,9 +40,7 @@ const TextareaComp = styled("textarea")(
     isError,
     disabled,
   }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
+    theme?: OperationalStyleConstants
     isCode: boolean
     isError: boolean
     disabled: boolean

@@ -1,5 +1,6 @@
 import { css } from "glamor"
-import { operational as theme } from "@operational/theme"
+
+import { deprecatedTheme } from "../utils/theme"
 import { seriesLegend } from "../shared/styles"
 
 const arcStyle = {
@@ -37,7 +38,7 @@ const breadcrumbItemStyle = {
   lineHeight: "18px",
   cursor: "pointer",
   margin: "5px 0",
-  ...theme.typography.small,
+  ...deprecatedTheme.typography.small,
   "&:first-child": {
     paddingLeft: "8px",
   },
@@ -92,7 +93,7 @@ const rootLabelStyle = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   "& .name": {
-    ...theme.typography.small,
+    ...deprecatedTheme.typography.small,
   },
 }
 

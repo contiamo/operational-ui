@@ -1,3 +1,5 @@
+import { operational } from "./constants/deprecatedTheme"
+
 /**
  * # Operational UI's styling constants.
  *
@@ -167,8 +169,36 @@ const constants = {
   borderRadius: 2,
   sidebarWidth: 256,
   titleHeight: 50,
+  deprecated: operational,
+}
+
+/*
+ * Expands a color expressed either as a custom hex value
+ * or a color key to pick from within the style constants object.
+*/
+export const expandColor = (
+  theme: OperationalStyleConstants,
+  color?: keyof OperationalStyleConstants["color"] | string,
+): string | null => {
+  if (!color) {
+    return null
+  }
+  const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)|currentColor/i
+  const isHex = hexRegEx.test(color)
+  if (isHex) {
+    return color
+  }
+
+  /**
+   * This function is typically used in checks.
+   * If falsy, it returns a fallback color, hence
+   * the empty string return for a falsy value.
+   */
+  return (theme.color as any)[color] || ""
 }
 
 export type OperationalStyleConstants = Readonly<typeof constants>
 
 export default constants
+
+export { expandColor as deprecatedExpandColor } from "./constants/deprecatedTheme"

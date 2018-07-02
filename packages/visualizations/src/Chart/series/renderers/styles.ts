@@ -1,5 +1,5 @@
 import { css } from "glamor"
-import { operational as theme } from "@operational/theme"
+import { deprecatedTheme } from "../../../utils/theme"
 
 const areaStyle = {
   "& path:hover": {
@@ -61,7 +61,7 @@ const symbolStyle = {
 const textStyle = {
   "& text": {
     fill: "#333",
-    fontFamily: theme.fontFamily,
+    fontFamily: deprecatedTheme.fontFamily,
     dominantBaseline: "middle",
   },
   "& text:hover": {

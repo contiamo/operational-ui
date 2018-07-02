@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { darken } from "@operational/utils"
 import { Icon } from "../"
 

@@ -1,10 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
-import { expandColor } from "@operational/utils"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon } from ".."
 
-type WithTheme = { theme?: OperationalStyleConstants & { deprecated: Theme } }
+type WithTheme = { theme?: OperationalStyleConstants }
 
 export interface LogoProps {
   /** Size, in pixels, that the logomark should be */

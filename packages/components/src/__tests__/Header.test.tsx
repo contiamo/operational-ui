@@ -1,6 +1,5 @@
 import * as React from "react"
 import { render } from "enzyme"
-import { operational as theme } from "@operational/theme"
 import wrapDefaultTheme from "../utils/wrap-default-theme"
 import { Header as ThemelessHeader } from "../index"
 

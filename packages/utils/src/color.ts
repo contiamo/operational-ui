@@ -1,5 +1,4 @@
 import * as colorCalculator from "tinycolor2"
-import { OperationalStyleConstants, Theme, constants } from "@operational/theme"
 
 const getBrightestColor = (colors: ColorFormats.HSLA[]): ColorFormats.HSLA =>
   colors.reduce((acc, curr) => {
@@ -13,7 +12,7 @@ export const readableTextColor = (backgroundColor: string, workingColors: string
   const backgroundHsl = colorCalculator(backgroundColor).toHsl()
   const workingColorHsls = workingColors.map(color => colorCalculator(color).toHsl())
   if (backgroundHsl.a < 0.5) {
-    return constants.color.white
+    return "#FFFFFF"
   }
   // For reasonably saturated colors on the bright side, still pick the lightest color.
   if (backgroundHsl.s > 0.4 && backgroundHsl.l < 0.75) {
@@ -47,28 +46,3 @@ export const transparentize = (color: string) => (percentage: number): string =>
   (({ r, g, b }) => {
     return `rgba(${r}, ${g}, ${b}, ${(255 * (100 - percentage)) / 100})`
   })(colorCalculator(color).toRgb())
-
-/*
- * Expands a color expressed either as a custom hex value
- * or a color key to pick from within the style constants object.
-*/
-export const expandColor = (
-  theme: OperationalStyleConstants & { deprecated?: Theme },
-  color?: keyof OperationalStyleConstants["color"] | string,
-): string | null => {
-  if (!color) {
-    return null
-  }
-  const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)|currentColor/i
-  const isHex = hexRegEx.test(color)
-  if (isHex) {
-    return color
-  }
-
-  /**
-   * This function is typically used in checks.
-   * If falsy, it returns a fallback color, hence
-   * the empty string return for a falsy value.
-   */
-  return (theme.color as any)[color] || ""
-}

@@ -1,11 +1,7 @@
-import { Theme, OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "./utils/constants"
 import { CSSProperties } from "glamorous"
 
-export type WithTheme = {
-  theme?: OperationalStyleConstants & {
-    deprecated: Theme
-  }
-}
+export type WithTheme = { theme?: OperationalStyleConstants }
 
 /** @todo Rethink this line with Emotion */
 

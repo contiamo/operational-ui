@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { setBrightness } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { IconName } from "../"
@@ -50,15 +50,7 @@ const Container = styled("div")(
     position: "relative",
     maxWidth: 300,
   },
-  ({
-    theme,
-    onClick,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    onClick: () => void
-  }): CssStatic => ({
+  ({ theme, onClick }: { theme?: OperationalStyleConstants; onClick: () => void }): CssStatic => ({
     padding: `${(theme.deprecated.spacing * 3) / 4}px 0`,
     ...(onClick
       ? {
@@ -83,13 +75,7 @@ const Label = styled("label")(
   {
     display: "block",
   },
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }) => ({
+  ({ theme }: { theme?: OperationalStyleConstants }) => ({
     marginBottom: theme.deprecated.spacing / 4,
     fontSize: theme.deprecated.typography.small.fontSize,
   }),
@@ -116,18 +102,8 @@ const Bar = styled("div")(
       pointerEvents: "none",
     },
   },
-  ({
-    theme,
-    fill,
-    color,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    fill: number
-    color: string
-  }): CssStatic => {
-    const backgroundColor: string = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+  ({ theme, fill, color }: { theme?: OperationalStyleConstants; fill: number; color: string }): CssStatic => {
+    const backgroundColor: string = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
       padding: `${theme.deprecated.spacing / 4}px ${theme.deprecated.spacing / 2}px`,
       backgroundColor: theme.deprecated.colors.lightGray,

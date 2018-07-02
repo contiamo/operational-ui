@@ -1,5 +1,5 @@
 import { css } from "glamor"
-import { operational as theme } from "@operational/theme"
+import { deprecatedTheme } from "../utils/theme"
 
 const legendStyle = {
   fontSize: "11px",
@@ -28,7 +28,7 @@ const seriesLegendStyle = {
   },
   "& div.name": {
     float: "left",
-    ...theme.typography.small,
+    ...deprecatedTheme.typography.small,
   },
 }
 
@@ -54,7 +54,7 @@ const componentFocusStyle = {
   position: "absolute",
   pointerEvents: "all",
   backgroundColor: "rgba(0, 74, 117, 0.05)",
-  borderRadius: theme.borderRadius,
+  borderRadius: deprecatedTheme.borderRadius,
   border: 0,
   padding: 0,
   cursor: "pointer",
@@ -80,7 +80,7 @@ const focusLegendStyle = {
   zIndex: 3000,
   maxWidth: "350px",
   backgroundColor: "#fff",
-  borderRadius: theme.borderRadius,
+  borderRadius: deprecatedTheme.borderRadius,
   "& ul": {
     listStyle: "none",
     fontSize: 12,

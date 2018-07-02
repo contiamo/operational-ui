@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as Icon from "react-feather"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { Css, CssStatic } from "../types"
 import Button from "../Button/Button"
 

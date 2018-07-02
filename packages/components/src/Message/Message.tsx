@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme, expandColor } from "@operational/theme"
+import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { readableTextColor, darken } from "@operational/utils"
 import { Icon } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
@@ -19,16 +19,8 @@ export interface Props {
 }
 
 const Container = styled("div")(
-  ({
-    theme,
-    color,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    color?: string
-  }): CssStatic => {
-    const backgroundColor = expandColor(theme.deprecated, color) || theme.deprecated.colors.info
+  ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): CssStatic => {
+    const backgroundColor = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info
     const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.black, "white"])
     return {
       backgroundColor,

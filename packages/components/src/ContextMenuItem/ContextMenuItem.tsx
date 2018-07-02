@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { darken } from "@operational/utils"
 import { WithTheme, Css, CssStatic } from "../types"
 
@@ -13,15 +13,7 @@ export interface Props {
 }
 
 const Container = styled("div")(
-  ({
-    theme,
-    clickable,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    clickable: boolean
-  }): any => ({
+  ({ theme, clickable }: { theme?: OperationalStyleConstants; clickable: boolean }): any => ({
     label: "contextmenuitem",
     backgroundColor: theme.deprecated.colors.white,
     minWidth: 160,

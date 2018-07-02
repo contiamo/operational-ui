@@ -1,5 +1,5 @@
 import { css } from "glamor"
-import { operational as theme } from "@operational/theme"
+import { deprecatedTheme } from "../../utils/theme"
 
 const dateFocusStyle = {
   "& li": {
@@ -42,8 +42,8 @@ const elementFocusStyle = {
 }
 
 const flagFocusStyle = {
-  fontFamily: theme.fontFamily,
-  color: theme.colors.text,
+  fontFamily: deprecatedTheme.fontFamily,
+  color: deprecatedTheme.colors.text,
   "& li.name": {
     fontWeight: "bold",
   },

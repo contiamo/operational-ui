@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { lighten } from "@operational/utils"
 import { WithTheme } from "../types"
 import { Icon } from "../"
@@ -29,13 +29,7 @@ const Container = styled("div")(
     left: 0,
     position: "absolute",
   },
-  ({
-    theme,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-  }) => ({
+  ({ theme }: { theme?: OperationalStyleConstants }) => ({
     zIndex: theme.deprecated.baseZIndex + 300,
     backgroundColor: "transparent",
   }),
@@ -51,15 +45,7 @@ const fillProgress = keyframes({
 })
 
 const Bar = styled("div")(
-  ({
-    theme,
-    isError,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    isError: boolean
-  }) => ({
+  ({ theme, isError }: { theme?: OperationalStyleConstants; isError: boolean }) => ({
     width: "100%",
     height: 3,
     backgroundColor: theme.deprecated.colors.info,

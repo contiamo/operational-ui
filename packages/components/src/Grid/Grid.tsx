@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -37,15 +37,7 @@ const getGridCSSProperties = (gridType: string): CssStatic => {
 }
 
 const Container = styled("div")(
-  ({
-    theme,
-    gridType,
-  }: {
-    theme?: OperationalStyleConstants & {
-      deprecated: Theme
-    }
-    gridType: string
-  }): {} => ({
+  ({ theme, gridType }: { theme?: OperationalStyleConstants; gridType: string }): {} => ({
     label: "Grid",
     width: "100%",
     height: "100%",

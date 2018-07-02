@@ -1,6 +1,6 @@
 import * as React from "react"
 import { months, daysInMonth, range, toDate, monthStartDay } from "./DatePicker.utils"
-import { OperationalStyleConstants, Theme } from "@operational/theme"
+import { OperationalStyleConstants } from "../utils/constants"
 import { Days, Day } from "./DatePicker.styles"
 
 export interface IDatePair {
