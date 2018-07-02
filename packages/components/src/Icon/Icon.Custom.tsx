@@ -3,13 +3,14 @@ import * as React from "react"
 export interface IconProps {
   color?: string
   size?: number
+  className?: string
 }
 
 export const Add: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M200,160.188l120,-0.001l0,40l-120,0l0,120l-40,0l0,-120l-120,0l0,-40l120,0l0,-120l40,0l0,120Z" />
     </svg>
   )
@@ -19,7 +20,7 @@ export const Admin: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M308.094,340.187l-256.188,0l0,-40.502c0.419,-48.498 25.542,-93.576 66.567,-119.444c17.813,14.445 39.568,21.689 61.334,21.731l-18.595,46.851l-50.826,3.241l39.214,32.497l-12.624,49.34l43.024,-27.253l43.024,27.253l-12.624,-49.34l39.214,-32.497l-50.826,-3.241l-18.595,-46.851c21.766,-0.042 43.521,-7.286 61.334,-21.731c41.023,25.87 66.144,70.947 66.567,119.444l0,40.502Zm-127.901,-138.215l-0.193,0l-0.193,0l0.193,-0.486l0.193,0.486Zm-0.202,-14.121c45.989,0 83.832,-37.843 83.832,-83.832c0,-45.989 -37.843,-83.832 -83.832,-83.832c-45.982,0 -83.822,37.832 -83.831,83.814c0.048,45.973 37.858,83.791 83.831,83.85Z" />
     </svg>
   )
@@ -29,7 +30,7 @@ export const Bundle: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M320,160.187l-20,0l0,160l-240,0l0,-160l-20,0l0,-100l280,0l0,100Zm-60,0.001l-160,0l0,120l160,0l0,-120Zm-40,60l-80,0l0,-40l80,0l0,40Z" />
     </svg>
   )
@@ -39,7 +40,7 @@ export const Catalog: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M20,60.188c0,0 129.492,-0.003 130,-0.001c19.813,0.085 29.778,10.314 30,30c0.003,0.268 0,220 0,220c0,0 -9.994,-29.902 -30,-30c-0.183,0 -130,0.001 -130,0.001l0,-220Zm340,-0.001c0,0 -129.492,-0.002 -130,0c-19.797,0.085 -29.775,10.074 -30,30c-0.003,0.268 0,220 0,220c0,0 10.302,-29.873 30,-30c0.183,-0.001 130,0 130,0l0,-220Zm-40,79.999l0,-40l-80,0l0,40l80,0Z" />
     </svg>
   )
@@ -49,7 +50,7 @@ export const ChevronDown: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M334.142,124.33l-154.142,154.142l-154.142,-154.142l28.284,-28.285l125.858,125.858l125.858,-125.858c9.428,9.428 18.856,18.857 28.284,28.285Z" />
     </svg>
   )
@@ -59,7 +60,7 @@ export const ChevronLeft: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M264.142,54.33l-125.858,125.858l125.858,125.857l-28.284,28.285l-154.142,-154.142l154.142,-154.143c9.428,9.428 18.856,18.857 28.284,28.285Z" />
     </svg>
   )
@@ -69,7 +70,7 @@ export const ChevronRight: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M278.284,180.187l-154.142,154.143l-28.284,-28.285l125.858,-125.858l-125.858,-125.857l28.284,-28.285c51.381,51.381 102.762,102.762 154.142,154.142Z" />
     </svg>
   )
@@ -79,7 +80,7 @@ export const ChevronUp: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M334.142,236.045l-28.284,28.285l-125.858,-125.858l-125.858,125.858l-28.284,-28.285l154.142,-154.142c51.381,51.381 102.761,102.762 154.142,154.142Z" />
     </svg>
   )
@@ -89,7 +90,7 @@ export const Copy: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M80,160.188l-20,-0.001l0,140l140,0l0,-19.999l40,0l0,60l-220,0l0,-220.001l60,0l0,40.001Zm240,99.999l-220,0l0,-220l220,0l0,220Zm-40,-180l-140,0l0,140.001l140,0l0,-140.001Z" />
     </svg>
   )
@@ -99,7 +100,7 @@ export const Database: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M59.308,307.571l0,-59.548c0,13.607 54.08,36.617 120.692,36.617c66.612,0 120.692,-23.281 120.692,-36.617l0,59.548c0,13.336 -54.08,36.616 -120.692,36.616c-66.611,0 -120.691,-23.009 -120.692,-36.616Zm0,-76.309l0,-59.548c0,13.606 54.08,36.616 120.692,36.616c66.612,0 120.692,-23.28 120.692,-36.616l0,59.548c0,13.336 -54.08,36.616 -120.692,36.616c-66.611,0 -120.691,-23.01 -120.692,-36.616Zm0,-78.179l0,-59.548c0,13.606 54.08,36.616 120.692,36.616c66.612,0 120.692,-23.28 120.692,-36.616l0,59.548c0,13.336 -54.08,36.616 -120.692,36.616c-66.611,0 -120.691,-23.01 -120.692,-36.616Zm120.692,-131.555c66.612,0 120.692,20.28 120.692,45.26c0,24.979 -54.08,45.259 -120.692,45.259c-66.612,0 -120.692,-20.28 -120.692,-45.259c0,-24.98 54.08,-45.26 120.692,-45.26Z" />
     </svg>
   )
@@ -109,7 +110,7 @@ export const Deploy: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M320,320.188l-280,0l0,-100.001l40,0l0,60.001l200,0l0,-60.001l40,0l0,100.001Zm-160,-191.716l-25.858,25.858l-28.284,-28.285l74.142,-74.142c24.714,24.714 49.428,49.428 74.142,74.142l-28.284,28.285l-25.858,-25.858l0,111.716l-40,0l0,-111.716Z" />
     </svg>
   )
@@ -119,7 +120,7 @@ export const Document: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M320,340.187l-280,0l0,-320l280,0l0,320Zm-120,-59.999l0,-40l-120,0l0,40l120,0Zm80,-80l0,-40l-200,0l0,40l200,0Zm0,-80l0,-40l-200,0l0,40l200,0Z" />
     </svg>
   )
@@ -129,7 +130,7 @@ export const Endpoint: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M180.582,0.188c55.578,0.265 110.039,27.414 143.639,72.331c33.388,44.634 44.535,105.228 28.167,159.582c-15.266,50.696 -54.189,93.897 -103.363,114.356c-53.792,22.381 -118.328,16.56 -167.379,-15.528c-49.682,-32.5 -81.646,-90.214 -81.646,-150.742c0,-58.807 30.6,-116.696 80.289,-149.845c29.175,-19.463 63.895,-29.986 99.129,-30.154c0.388,0 0.776,0 1.164,0Zm-1.038,40c-41.321,0.191 -82.101,19.559 -108.37,51.971c-27.861,34.376 -38.172,82.036 -26.099,125.512c11.299,40.691 42.002,75.513 81.27,91.857c41.195,17.146 90.356,13.101 128.341,-10.933c39.392,-24.925 65.163,-70.163 65.313,-117.952c0.125,-39.632 -17.403,-78.789 -47.157,-105.199c-25.166,-22.337 -58.47,-35.099 -92.386,-35.256c-0.304,0 -0.608,0 -0.912,0Zm0.779,40c25.076,0.119 49.792,9.953 68.003,27.008c15.204,14.239 25.833,33.305 29.824,53.765c7.5,38.449 -9.586,80.635 -43.257,102.807c-32.005,21.074 -76.407,21.694 -109.282,0.329c-23.813,-15.475 -40.551,-41.398 -44.596,-69.621c-2.899,-20.231 0.537,-41.329 9.794,-59.528c16.496,-32.43 51.865,-54.352 88.222,-54.756c0.431,-0.003 0.861,-0.005 1.292,-0.004Zm-0.53,40c-23.047,0.111 -45.305,14.67 -54.659,35.683c-7.489,16.822 -6.609,37.093 2.262,53.183c13.971,25.342 47.544,38.243 75.584,26.575c29.012,-12.072 45.665,-48.806 31.886,-79.758c-9.329,-20.956 -31.295,-35.57 -54.659,-35.683c-0.138,0 -0.276,0 -0.414,0Zm0.207,39.999c11.038,0 20,8.962 20,20c0,11.039 -8.962,20 -20,20c-11.038,0 -20,-8.961 -20,-20c0,-11.038 8.962,-20 20,-20Z" />
     </svg>
   )
@@ -139,7 +140,7 @@ export const Entity: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M320,300.187l-280,0l0,-240l85,0l0,0l20,0l0,0l70,0l0,0l20,0l0,0l85,0l0,240Zm-195,-20l0,-61l-65,0l0,61l65,0Zm20,-61l0,61l70,0l0,-61l-70,0Zm155,0l-65,0l0,61l65,0l0,-61Zm-240,-79l0,59l65,0l0,-59l-65,0Zm85,0l0,59l70,0l0,-59l-70,0Zm90,0l0,59l65,0l0,-59l-65,0Z" />
     </svg>
   )
@@ -149,7 +150,7 @@ export const Function: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M63.242,331.073l-58.242,0l38.145,-180.264l-32.608,0l8.818,-41.221l31.993,0l3.076,-14.355c5.058,-23.926 12.578,-40.4 22.558,-49.424c11.348,-13.398 33.223,-20.097 65.625,-20.097c3.692,0 7.007,0.102 9.947,0.307c2.939,0.205 7.007,0.513 12.202,0.923l-10.254,47.578c-3.145,-0.41 -8.545,-0.718 -16.201,-0.923c-7.656,-0.205 -13.364,1.504 -17.124,5.127c-3.76,3.623 -6.05,7.622 -6.87,11.997c-0.957,4.375 -2.325,10.664 -4.102,18.867l38.35,0l-8.819,41.221l-38.349,0l-38.145,180.264Zm123.227,-19l-20.606,0l-6.933,-9.473c-4.492,-5.729 -9.278,-14.258 -14.356,-25.586c-9.049,-20.247 -13.574,-40.169 -13.574,-59.765c0,-17.839 3.809,-35.547 11.426,-53.125c5.143,-11.98 12.663,-24.87 22.558,-38.672l20.996,0l-5.957,10.937c-8.203,15.039 -13.899,30.795 -17.089,47.266c-2.084,10.807 -3.125,22.591 -3.125,35.351c0,19.922 2.897,38.249 8.691,54.981c3.385,9.896 9.375,22.591 17.969,38.086Zm136.328,0l-20.606,0c8.594,-15.495 14.584,-28.19 17.969,-38.086c5.794,-16.732 8.692,-35.059 8.692,-54.981c0,-12.76 -1.042,-24.544 -3.125,-35.351c-3.191,-16.471 -8.887,-32.227 -17.09,-47.266l-5.957,-10.937l20.996,0c9.896,13.802 17.415,26.692 22.558,38.672c7.618,17.578 11.426,35.286 11.426,53.125c0,19.596 -4.525,39.518 -13.574,59.765c-5.078,11.328 -9.863,19.857 -14.356,25.586l-6.933,9.473Zm-97.559,-40.332l-33.789,0l36.328,-53.906l-34.765,-52.344l34.082,0l17.773,30.859l17.383,-30.859l33.105,0l-34.96,51.855l36.328,54.395l-34.668,0l-18.36,-31.934l-18.457,31.934Z" />
     </svg>
   )
@@ -159,7 +160,7 @@ export const Funnel: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M40,60.187l280,0l-120,120l0,100l-40,40l0,-140l-120,-120Z" />
     </svg>
   )
@@ -169,7 +170,7 @@ export const Home: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M179.959,50.187l-123.808,92.853l0,167.147l83.573,0l0,-86.661l80.552,0l0,86.661l83.573,0l0,-167.147l-123.89,-92.853Z" />
     </svg>
   )
@@ -179,7 +180,7 @@ export const Jobs: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M190.444,306.133l8.69,-8.69c3.807,-3.806 4.337,-9.854 1.25,-14.265l-8.439,-12.04c3.274,-5.653 5.796,-11.71 7.501,-18.016l14.453,-2.5c5.333,-0.893 9.285,-5.545 9.302,-10.953l0,-12.402c-0.017,-5.407 -3.969,-10.06 -9.302,-10.952l-14.453,-2.501c-1.705,-6.306 -4.227,-12.363 -7.501,-18.016l8.439,-11.877c3.087,-4.411 2.557,-10.459 -1.25,-14.266l-8.69,-8.689c-3.806,-3.807 -9.854,-4.337 -14.265,-1.25l-12.04,8.439c-5.652,-3.275 -11.709,-5.797 -18.016,-7.501l-2.5,-14.453c-0.892,-5.333 -5.545,-9.285 -10.953,-9.302l-12.452,0c-5.369,0.036 -9.986,3.949 -10.902,9.239l-2.501,14.453c-6.306,1.705 -12.363,4.227 -18.016,7.502l-11.877,-8.44c-4.411,-3.086 -10.459,-2.556 -14.265,1.251l-8.69,8.689c-3.775,3.832 -4.263,9.878 -1.15,14.265l8.439,12.04c-3.275,5.653 -5.797,11.71 -7.501,18.016l-14.453,2.501c-5.333,0.892 -9.285,5.545 -9.302,10.952l0,12.402c0.017,5.408 3.969,10.061 9.302,10.953l14.453,2.5c1.704,6.307 4.226,12.364 7.501,18.016l-8.439,11.878c-3.087,4.41 -2.557,10.459 1.25,14.265l8.69,8.689c3.806,3.807 9.854,4.337 14.265,1.25l12.04,-8.439c5.653,3.275 11.71,5.796 18.016,7.502l2.5,14.453c0.892,5.333 5.545,9.284 10.953,9.301l12.402,0c5.407,-0.017 10.06,-3.968 10.952,-9.301l2.501,-14.453c6.306,-1.705 12.363,-4.227 18.016,-7.502l11.79,8.339c4.387,3.113 10.433,2.626 14.265,-1.15l-0.013,0.063Zm-63.962,-39.521c-18.176,0 -33.132,-14.956 -33.132,-33.131c0,-18.176 14.956,-33.132 33.132,-33.132c18.175,0 33.131,14.956 33.131,33.132c0,0.012 0,0.025 0,0.037c-0.02,18.161 -14.97,33.094 -33.131,33.094Zm199.827,-183.536c-1.403,-5.189 -6.372,-8.659 -11.727,-8.189l-13.153,1.15c-4.585,-6.917 -10.512,-12.843 -17.428,-17.429l1.137,-13.165c0.48,-5.371 -3.005,-10.357 -8.214,-11.752l-11.852,-3.101c-5.247,-1.357 -10.76,1.301 -12.965,6.251l-5.589,11.79c-8.267,0.494 -16.348,2.659 -23.755,6.364l-10.827,-7.601c-4.41,-3.087 -10.459,-2.557 -14.265,1.25l-8.689,8.689c-3.807,3.806 -4.337,9.855 -1.251,14.265l7.689,10.828c-3.705,7.406 -5.87,15.488 -6.363,23.754l-12.103,5.701c-4.95,2.206 -7.608,7.719 -6.251,12.966l3.101,11.852c1.393,5.199 6.365,8.681 11.727,8.214l13.153,-1.15c4.585,6.916 10.512,12.843 17.428,17.428l-1.15,13.153c-0.394,5.347 3.124,10.257 8.314,11.602l11.852,3.101c5.247,1.357 10.76,-1.301 12.965,-6.251l5.589,-12.003c8.314,-0.437 16.453,-2.564 23.917,-6.251l10.828,7.689c4.41,3.087 10.459,2.557 14.265,-1.25l8.689,-8.69c3.807,-3.806 4.337,-9.854 1.25,-14.265l-7.601,-10.827c3.705,-7.407 5.87,-15.488 6.364,-23.755l12.002,-5.588c4.95,-2.206 7.608,-7.719 6.251,-12.965l-3.338,-11.815Zm-59.562,43.146c-4.343,4.301 -10.215,6.717 -16.328,6.717c-12.73,0 -23.205,-10.475 -23.205,-23.205c0,-12.73 10.475,-23.204 23.205,-23.204c12.728,0 23.203,10.473 23.205,23.201c0,6.192 -2.477,12.134 -6.877,16.491Z" />
     </svg>
   )
@@ -189,7 +190,7 @@ export const Lock: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M100.695,120.188c3.976,-29.098 24.601,-55.567 52.722,-65.472c8.693,-3.062 18.003,-4.558 27.102,-4.527c32.682,0.316 64.207,22.291 75.114,53.879c1.805,5.225 3.045,10.637 3.731,16.12l0.636,0l0,9.968l0.063,19.968l-0.063,0.001l0,30.062l40,0l0,140l-240,0l0,-140l40,0l0,-30.062l-0.063,-0.001l0.063,-19.968l0,-9.969l0.695,0Zm119.305,8.246c-0.34,-4.306 -1.081,-8.482 -2.591,-12.454c-5.943,-15.627 -22.503,-26.495 -39.225,-25.751c-20.107,0.893 -37.986,18.78 -38.183,39.697l-0.001,0.294l0,49.968l80,0l0,-51.754Z" />
     </svg>
   )
@@ -199,7 +200,7 @@ export const Unlock: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <g transform="translate(60.000000, 19.000000)">
         <path
           d="M200.041955,120 L160,120 L160,160.000158 L202,160.000158 L240,159.999287 L240,300 L0,300 L0,159.999287 L40,159.999287 L40,99.936981 L40,79.9678793 L40,69.9988285 C44.671,40.9016803 65.296,14.4325455 93.417,4.52749502 C102.11,1.46547943 111.42,-0.0305281923 120.519,0.000471965552 C153.201,0.316473575 184.726,22.2915855 195.633,53.8797464 C197.438,59.104773 198.678,64.5168006 199.364,69.9998285 L200,79.9678793 L200.063,99.935981 L200.041955,120 Z M160,78.2458705 C159.66,73.9398486 158.919,69.7638273 157.409,65.7918071 C151.466,50.1647275 134.906,39.2966721 118.184,40.0406759 C98.077,40.9336805 80.198,58.8207716 80.001,79.7378781 L80,160.000287 L160,160.000287 L160,78.2458705 Z"
@@ -214,7 +215,7 @@ export const No: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M180,151.903l105.858,-105.858c9.428,9.428 18.856,18.856 28.284,28.285l-105.858,105.857l105.858,105.858l-28.284,28.285l-105.858,-105.858l-105.858,105.858l-28.284,-28.285l105.858,-105.858l-105.858,-105.857l28.284,-28.285l105.858,105.858Z" />
     </svg>
   )
@@ -224,7 +225,7 @@ export const Olap: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M179.985,30.187l-126.227,71.723l125.987,71.603l126.227,-71.723l-125.987,-71.603Z" />
       <path d="M45.868,114.989l0,143.206l126.468,71.992l0,-143.445l-126.468,-71.753Z" />
       <path d="M314.102,114.989l-126.438,71.753l0,143.325l126.468,-71.992l-0.03,-143.086Z" />
@@ -236,7 +237,7 @@ export const Open: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M300,320.187l-260,0l0,-260l160,0l0,40l-120,0l0,180l180,0l0,-120l40,0l0,160Zm40,-200l-40,0l0,-31.715l-85.858,85.858l-28.284,-28.285l85.858,-85.858l-31.716,0l0,-40l100,0l0,100Z" />
     </svg>
   )
@@ -246,7 +247,7 @@ export const Project: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M40,300.187l280,0l0,-180l-180,0l-20,-40l-80,0l0,220Z" />
     </svg>
   )
@@ -256,7 +257,7 @@ export const Question: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M180.517,20.188c49.403,0.235 97.812,24.368 127.679,64.294c34.51,46.134 41.779,111.614 16.016,165.046c-21.564,44.725 -64.887,78.385 -113.94,87.794c-49.927,9.577 -104.031,-6.223 -140.987,-41.669c-43.238,-41.473 -60.706,-108.199 -40.872,-166.759c21.154,-62.459 83.332,-108.384 151.07,-108.706c0.345,0 0.689,0 1.034,0Zm-0.912,40c-42.701,0.202 -84.582,24.763 -105.31,63.18c-21.308,39.493 -18.17,90.837 8.892,127.691c22.11,30.112 58.669,49.002 96.428,49.128c50.825,0.169 99.906,-34.804 115.212,-85.04c9.113,-29.907 5.956,-63.434 -8.778,-91.137c-20.13,-37.848 -61.219,-63.342 -104.877,-63.817c-0.522,-0.004 -1.044,-0.006 -1.567,-0.005Zm0.395,159.999c13.798,0 25,11.203 25,25c0,13.798 -11.202,25 -25,25c-13.798,0 -25,-11.202 -25,-25c0,-13.797 11.202,-25 25,-25Zm-2.252,-125.996c21.028,0.307 41.652,12.203 49.05,33.006c6.87,19.32 1.875,42.161 -12.005,57.202c-5.64,6.112 -13.282,11.235 -14.449,18.92c-0.277,1.82 -0.352,3.666 -0.346,5.505l0.002,0.227l-39.999,0.273c-0.085,-12.419 2.843,-25.063 10.008,-35.17c4.741,-6.688 11.353,-11.875 16.557,-18.191c0.345,-0.419 0.663,-0.86 0.956,-1.316c3.607,-5.616 4.218,-14.794 -1.759,-18.312c-5.283,-3.11 -12.719,-3.043 -17.152,0.619c-4.809,3.972 -6.595,10.737 -7.919,16.922l-39.114,-8.371c3.921,-18.323 13.332,-36.044 29.75,-44.909c7.786,-4.204 16.679,-6.33 25.491,-6.408c0.465,-0.001 0.464,-0.001 0.929,0.003Z" />
     </svg>
   )
@@ -266,7 +267,7 @@ export const Remove: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M180.517,20.188c49.669,0.242 98.192,24.628 127.956,64.662c34.449,46.333 41.41,111.431 15.728,164.696c-21.715,45.039 -65.622,78.831 -114.93,87.962c-9.648,1.787 -19.459,2.68 -29.271,2.68c-50.638,0 -100.412,-25.423 -130.174,-66.993c-33.202,-46.377 -39.195,-110.969 -13.603,-163.239c16.321,-33.335 44.525,-60.611 78.379,-75.813c20.341,-9.134 42.633,-13.847 64.881,-13.955c0.345,0 0.689,0 1.034,0Zm-0.905,40c-54.765,0.266 -106.946,41.515 -117.533,97.647c-7.327,38.849 5.815,81.058 34.891,108.952c27.377,26.264 67.464,38.343 105.018,31.39c53.785,-9.959 97.644,-59.622 98.009,-117.212c0.206,-32.467 -13.36,-64.73 -36.967,-87.378c-21.838,-20.949 -51.802,-33.167 -82.249,-33.397c-0.39,-0.002 -0.779,-0.002 -1.169,-0.002Zm80.388,140l-160,0l0,-40l160,0l0,40Z" />
     </svg>
   )
@@ -276,7 +277,7 @@ export const Schema: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M300,220.187l40,0l0,120l-120,0l0,-39.999l-80,0l0,-40l80,0l0,-40.001l40,0l0,-120l-120,0l0,-40l160,0l0,160Zm-160,120l-120,0l0,-120l120,0l0,120Zm0,-200l-120,0l0,-120l120,0l0,120Z" />
     </svg>
   )
@@ -286,7 +287,7 @@ export const Search: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M209.467,237.939c-26.237,18.443 -59.93,26.18 -91.803,20.17c-48.297,-9.107 -89.185,-50.116 -96.446,-100.775c-6.34,-44.238 14.102,-91.39 52.008,-116.843c19.387,-13.017 42.525,-20.115 65.998,-20.301c0.388,-0.002 0.776,-0.003 1.164,-0.002c49.06,0.233 96.258,32.682 112.944,80.486c12.503,35.82 6.427,77.42 -15.614,108.948l100.566,100.565l-28.284,28.285l-100.533,-100.533Zm-69.739,-177.751c-35.643,0.172 -69.703,26.403 -77.791,62.405c-3.871,17.232 -1.888,35.738 5.73,51.8c14.764,31.129 50.791,50.813 86.278,44.587c35.839,-6.289 65.56,-39.047 66.048,-77.747c0.389,-30.889 -18.778,-61.066 -46.898,-73.895c-10.421,-4.755 -21.729,-7.161 -33.367,-7.15Z" />
     </svg>
   )
@@ -296,7 +297,7 @@ export const SortAscending: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M100,243.903l22.858,-22.858c9.428,9.428 18.856,18.856 28.284,28.285l-71.142,71.142l-71.142,-71.142l28.284,-28.285l22.858,22.858l0,-203.716l40,0.001l0,203.715Zm240,76.285l-160,0l0,-40l160,0l0,40Zm-40,-80.001l-120,0l0,-40l120,0l0,40Zm-40,-79.999l-80,0l0,-40l80,0l0,40Zm-40,-80l-40,0l0,-40l40,0l0,40Z" />
     </svg>
   )
@@ -306,7 +307,7 @@ export const SortDescending: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M60,116.472l-22.858,22.858l-28.284,-28.285l71.142,-71.142c23.714,23.714 47.428,47.428 71.142,71.142l-28.284,28.285l-22.858,-22.858l0,203.716l-40,0l0,-203.716Zm160,203.716l-40,0l0,-40l40,0l0,40Zm40,-80l-80,0l0,-40l80,0l0,40Zm40,-80l-120,0l0,-40l120,0l0,40Zm40,-80l-160,0l0,-40l160,0l0,40Z" />
     </svg>
   )
@@ -316,7 +317,7 @@ export const Sync: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M238.39,253.978l-30.925,-3.952l5.07,-39.677c26.915,3.439 53.829,6.878 80.744,10.318l21.053,79.394l-38.664,10.253l-7.716,-29.101c-26.99,23.907 -63.663,36.871 -100.208,33.376c-41.339,-3.954 -80.176,-28.895 -101.133,-65.002l34.595,-20.079c13.882,23.918 39.039,41.033 66.606,44.826c25.02,3.442 50.952,-4.352 70.578,-20.356Zm-140.098,-168.1c21.946,-17.455 49.337,-28.09 77.602,-29.036c1.644,-0.055 3.29,-0.075 4.936,-0.071c44.032,0.285 87.33,24.041 110.888,61.879c0.765,1.23 1.508,2.473 2.234,3.726l-34.601,20.068c-18.019,-31.068 -55.088,-49.688 -91.165,-44.872c-14.863,1.984 -29.125,7.869 -41.303,16.665l38.612,0.957l-0.991,39.987l-99.49,-2.466l-9.907,-95.463l39.786,-4.129l3.399,32.755Z" />
     </svg>
   )
@@ -326,7 +327,7 @@ export const User: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <g>
         <path d="M241.527,180.241c-35.73,28.975 -87.324,28.975 -123.054,0c-41.025,25.868 -66.148,70.946 -66.567,119.444l0,40.502l256.188,0l0,-40.502c-0.423,-48.497 -25.544,-93.574 -66.567,-119.444Z" />
         <path d="M179.991,187.851c45.989,0 83.832,-37.843 83.832,-83.832c0,-45.989 -37.843,-83.832 -83.832,-83.832c-45.982,0 -83.822,37.832 -83.831,83.814c0.048,45.973 37.858,83.791 83.831,83.85Z" />
@@ -339,7 +340,7 @@ export const Users: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <g>
         <path d="M136.883,185.31c-5.44,-9.135 -12.877,-16.922 -21.753,-22.775c-17.941,17.099 -46.526,17.099 -64.467,0c-19.739,13.115 -31.738,35.203 -31.998,58.9l0,22.628l86.462,0c1.934,-23.144 13.454,-44.457 31.756,-58.753Z" />
         <path d="M122.35,128.466c0,-21.639 -17.807,-39.446 -39.447,-39.446c-21.639,0 -39.446,17.807 -39.446,39.446c0,21.64 17.807,39.447 39.446,39.447c21.629,-0.03 39.417,-17.818 39.447,-39.447Z" />
@@ -356,7 +357,7 @@ export const Yes: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
-    <svg viewBox="0 0 360 360" fill={color} width={size} height={size}>
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M343.142,83.33l-214.142,214.142l-114.142,-114.142l28.284,-28.285l85.858,85.858l185.858,-185.858c9.428,9.428 18.856,18.857 28.284,28.285Z" />
     </svg>
   )
