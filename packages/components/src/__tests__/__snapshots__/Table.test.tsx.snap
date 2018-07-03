@@ -2,7 +2,7 @@
 
 exports[`Table Component Should render 1`] = `
 <table
-  class="css-s7lm2v"
+  class="css-39fsjl"
 >
   <thead>
     <tr
@@ -14,7 +14,7 @@ exports[`Table Component Should render 1`] = `
       class="css-szcvmb"
     >
       <td
-        class="css-if432c"
+        class="css-5t6k2w"
         colspan="0"
       >
         There are no records available
