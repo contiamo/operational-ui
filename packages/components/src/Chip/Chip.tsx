@@ -68,7 +68,7 @@ const Action = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }): {} => {
     return {
       borderLeft: `1px solid ${theme.color.ghost}`,
-      width: theme.space.content,
+      width: theme.space.element,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
