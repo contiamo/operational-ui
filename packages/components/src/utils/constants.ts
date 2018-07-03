@@ -113,7 +113,10 @@ const font = {
     regular: 400,
 
     /** 500 */
-    bold: 500,
+    medium: 500,
+
+    /** 600 */
+    bold: 600,
   },
 }
 

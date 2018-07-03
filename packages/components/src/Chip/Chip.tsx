@@ -32,7 +32,7 @@ const Container = styled("div")(
     return {
       backgroundColor: transparentize(expandColor(theme, color) || theme.color.primary)(0.1),
       fontSize: theme.font.size.small,
-      fontWeight: theme.font.weight.bold,
+      fontWeight: theme.font.weight.medium,
       label: "chip",
       position: "relative",
       height: theme.space.element,
