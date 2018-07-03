@@ -6,14 +6,14 @@ Tooltips give helpful hints about actions an end-user can perform. They are desi
 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
   <div style={{ position: "relative", border: "1px solid black", margin: 20, padding: 5, width: 80 }}>
     <p>I am a box full of mysteries.</p>
-    <Tooltip>I uncover them all.</Tooltip>
-    <Tooltip right>A short one!</Tooltip>
+    <Tooltip top>All is clearer with tooltips</Tooltip>
+    <Tooltip right>Even short ones</Tooltip>
   </div>
   <div style={{ position: "relative", border: "1px solid black", margin: 20, padding: 5, width: 80 }}>
     <p>I am a box full of mysteries.</p>
-    <Tooltip bottom>I can be at the bottom instead!</Tooltip>
-    <Tooltip left>I can be on left instead!</Tooltip>
-    <Tooltip right>I can be on right instead!</Tooltip>
+    <Tooltip bottom>Bottom-positioned tooltip</Tooltip>
+    <Tooltip left>Tooltip from the left</Tooltip>
+    <Tooltip right>Tooltip from the right</Tooltip>
   </div>
 </div>
 ```

@@ -42,7 +42,8 @@ const containerPositionStyles = (position: Position): {} => {
     case "top":
       return {
         left: "50%",
-        transform: "translate3d(-50%, calc(-100% - 6px), 0)",
+        top: -6,
+        transform: "translate3d(-50%, -100%, 0)",
       }
     case "bottom":
       return {
@@ -202,7 +203,7 @@ class Tooltip extends React.Component<Props, State> {
   }
 
   render() {
-    let position: Position = "top"
+    let position: Position = "right"
 
     if (this.props.left) {
       position = "left"
@@ -214,6 +215,10 @@ class Tooltip extends React.Component<Props, State> {
 
     if (this.props.bottom) {
       position = "bottom"
+    }
+
+    if (this.props.top) {
+      position = "top"
     }
 
     if (this.props.smart) {
