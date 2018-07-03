@@ -4,7 +4,7 @@ import { ThemeProvider } from "emotion-theming"
 
 import constants, { OperationalStyleConstants } from "../utils/constants"
 import { darken } from "@operational/utils"
-import { MessageType } from "../types"
+import { MessageType, Context } from "../types"
 
 import Messages from "../Messages/Messages"
 import Message from "../Message/Message"
@@ -36,17 +36,6 @@ export interface State {
   }[]
 }
 
-export interface Context {
-  pushState: (url: string) => void
-  replaceState: (url: string) => void
-  pushMessage: (
-    message: {
-      body: string
-      type: MessageType
-    },
-  ) => void
-}
-
 const colorByMessageType = (type: MessageType): string => {
   switch (type) {
     case "info":
@@ -58,7 +47,16 @@ const colorByMessageType = (type: MessageType): string => {
   }
 }
 
-const { Provider, Consumer } = React.createContext({})
+// Defining a default context value here, used below when instantiating
+// the context consumer and provider below in order for context to be
+// correctly detected throughout the application.
+const defaultContext: Context = {
+  pushState: undefined,
+  replaceState: undefined,
+  pushMessage: (message: { body: string; type: MessageType }) => {},
+}
+
+const { Provider, Consumer } = React.createContext(defaultContext)
 
 const baseStylesheet = (theme: OperationalStyleConstants): string => `
 * {
@@ -97,7 +95,7 @@ class OperationalUI extends React.Component<Props, State> {
     messages: [],
   }
 
-  timer: number
+  timer: number | null = null
 
   removeOutdatedMessages() {
     if (this.props.hideMessageAfter === 0) {
@@ -118,6 +116,9 @@ class OperationalUI extends React.Component<Props, State> {
 
   componentDidMount() {
     this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
+  }
+
+  startMessagesTimer() {
     this.timer = window.setInterval(() => {
       this.removeOutdatedMessages()
     }, 1000)
@@ -128,7 +129,7 @@ class OperationalUI extends React.Component<Props, State> {
   }
 
   render() {
-    const { withBaseStyles, pushState, replaceState, children } = this.props
+    const { pushState, replaceState, children } = this.props
     return (
       <ThemeProvider theme={constants}>
         <Provider
@@ -136,6 +137,9 @@ class OperationalUI extends React.Component<Props, State> {
             pushState,
             replaceState,
             pushMessage: (message: { body: string; type: MessageType }) => {
+              if (this.timer === null) {
+                this.startMessagesTimer()
+              }
               this.setState(prevState => ({
                 messages: [...prevState.messages, { message, addedAt: new Date().getTime() }],
               }))
@@ -144,15 +148,13 @@ class OperationalUI extends React.Component<Props, State> {
         >
           <>
             <Messages>
-              {this.state.messages.map(({ message, addedAt }, index) => (
+              {this.state.messages.map(({ message }, index) => (
                 <Message
                   key={index}
                   color={colorByMessageType(message.type)}
                   onClose={() => {
                     this.setState(prevState => ({
-                      messages: prevState.messages.filter(
-                        (message, filteredMessageIndex) => filteredMessageIndex !== index,
-                      ),
+                      messages: prevState.messages.filter((_, filteredMessageIndex) => filteredMessageIndex !== index),
                     }))
                   }}
                 >

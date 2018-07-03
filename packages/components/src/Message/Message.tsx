@@ -21,17 +21,14 @@ const Container = styled("div")(
     const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
       .setAlpha(0.9)
       .toString()
-    const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.black, "white"])
     return {
       backgroundColor,
-      color: textColor,
+      color: theme.color.white,
       overflow: "hidden",
-      padding: `${(theme.deprecated.spacing * 1) / 2}px ${theme.deprecated.spacing * 3.5}px ${theme.deprecated.spacing /
-        2}px ${theme.deprecated.spacing}px`,
-      paddingRight: theme.deprecated.spacing * 2.5,
-      // Icon space
-      borderRadius: 4,
-      minHeight: theme.deprecated.spacing * 2.5,
+      boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
+      padding: "8px 52px 8px 16px",
+      borderRadius: theme.borderRadius,
+      minHeight: 36,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
@@ -47,15 +44,13 @@ const IconContainer = styled("div")(
     top: 0,
     right: 0,
     cursor: "pointer",
-    width: theme.deprecated.spacing * 2.5,
-    height: theme.deprecated.spacing * 2.5,
-    padding: theme.deprecated.spacing * 0.5,
-    borderBottomLeftRadius: theme.deprecated.borderRadius,
-    borderTopRightRadius: theme.deprecated.borderRadius,
-    "& svg": {
-      width: "100%",
-      height: "100%",
-    },
+    width: 36,
+    height: 36,
+    borderBottomLeftRadius: theme.borderRadius,
+    borderTopRightRadius: theme.borderRadius,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     ":hover": {
       backgroundColor: "rgba(0, 0, 0, 0.1)",
     },
