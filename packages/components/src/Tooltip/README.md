@@ -7,10 +7,11 @@ Tooltips give helpful hints about actions an end-user can perform. They are desi
   <div style={{ position: "relative", border: "1px solid black", margin: 20, padding: 5, width: 80 }}>
     <p>I am a box full of mysteries.</p>
     <Tooltip>I uncover them all.</Tooltip>
+    <Tooltip right>A short one!</Tooltip>
   </div>
   <div style={{ position: "relative", border: "1px solid black", margin: 20, padding: 5, width: 80 }}>
     <p>I am a box full of mysteries.</p>
-    <Tooltip bottom>I can be on bottom instead!</Tooltip>
+    <Tooltip bottom>I can be at the bottom instead!</Tooltip>
     <Tooltip left>I can be on left instead!</Tooltip>
     <Tooltip right>I can be on right instead!</Tooltip>
   </div>

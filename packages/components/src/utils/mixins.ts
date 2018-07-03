@@ -32,6 +32,8 @@ export const FormFieldControls = styled("div")({
   right: 0,
 })
 
+const formFieldControlTooltipSelector = "& > :nth-child(2), & > :nth-child(3)"
+
 export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   position: "relative",
   verticalAlign: "middle",
@@ -41,18 +43,16 @@ export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalS
   "& svg": {
     opacity: 0.4,
     position: "relative",
-    top: -1,
   },
-  // :nth-child(2) refers to the tooltip
-  "& > :nth-child(2)": {
-    display: "none",
+  [formFieldControlTooltipSelector]: {
+    opacity: 0.01,
   },
   ":hover": {
     "& svg": {
       opacity: 1,
     },
-    "& > :nth-child(2)": {
-      display: "block",
+    [formFieldControlTooltipSelector]: {
+      opacity: 1,
     },
   },
 }))
