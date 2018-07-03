@@ -41,15 +41,13 @@ const containerStyles: Interpolation<{
   color?: string
   isActive: boolean
 }> = ({ theme, color, isActive }) => {
-  const stripColor: string = expandColor(theme, color) || theme.color.primary
   return {
     label: "sidenavheader",
     textDecoration: "none",
     width: "100%",
     position: "relative",
+    backgroundColor: isActive ? theme.color.background.lighter : theme.color.white,
     borderBottom: "1px solid",
-    borderLeft: "4px solid",
-    borderLeftColor: isActive ? stripColor : "transparent",
     borderBottomColor: theme.color.separators.default,
   }
 }
