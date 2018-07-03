@@ -1,9 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { transparentize } from "@operational/utils"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon, IconName } from "../"
 import { WithTheme, Css } from "../types"
+import * as colorCalculator from "tinycolor2"
 
 export interface Props {
   /** Id */
@@ -29,8 +29,11 @@ export interface Props {
 
 const Container = styled("div")(
   ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): {} => {
+    const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
+      .setAlpha(0.1)
+      .toString()
     return {
-      backgroundColor: transparentize(expandColor(theme, color) || theme.color.primary)(0.1),
+      backgroundColor,
       fontSize: theme.font.size.small,
       fontWeight: theme.font.weight.medium,
       label: "chip",
