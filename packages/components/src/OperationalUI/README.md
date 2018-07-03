@@ -18,7 +18,7 @@ Main provider for Operational UI. Should need to wrap all your application with 
 
 ### Setting up routing
 
-To set up routing that is automatically wired up to the `to` props of linking components such as `Button`, `Breadcrumb`,`SidenavHeader` and `SidenavItem`, you only need to supply a single prop on this one component:
+To set up routing that is automatically wired up to the `to` props of all nested linking components such as `Button`, `Breadcrumb`,`SidenavHeader` and `SidenavItem`, you only need to supply a single prop on this one component:
 
 ```jsx
 class RoutingComponent extends React.Component {
@@ -60,15 +60,15 @@ class RoutingComponent extends React.Component {
 
 ### Setting up Message Management
 
-You can use `OperationalUI`'s internal flash message management by simply using the `pushMessage` method provided in context, as follows:
+You can use `OperationalUI`'s internal flash message feature to automatically render and manage messages by simply using the `pushMessage` method provided in context, as shown in the code snippet below:
 
 ```jsx
-const ContextConsumer = require("./OperationalUI").Consumer
+const ContextConsumer = require("../").ContextConsumer
 
 class MessageHandler extends React.Component {
   render() {
     return (
-      <OperationalUI __log key="abc">
+      <OperationalUI>
         <ContextConsumer>
           {ctx => (
             <div>
@@ -82,6 +82,17 @@ class MessageHandler extends React.Component {
                 }}
               >
                 Create an info message
+              </Button>
+              <Button
+                color="success"
+                onClick={() => {
+                  ctx.pushMessage({
+                    body: "Success message",
+                    type: "success",
+                  })
+                }}
+              >
+                Create a success message
               </Button>
               <Button
                 color="error"
