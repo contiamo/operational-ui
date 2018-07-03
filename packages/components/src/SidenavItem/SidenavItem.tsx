@@ -33,7 +33,7 @@ const containerStyles: Interpolation<{
   userSelect: "none",
   fontSize: theme.font.size.body,
   color: isActive ? theme.color.primary : theme.color.text.lightest,
-  fontWeight: 400,
+  fontWeight: theme.font.weight.regular,
   // Specificity is piled up here to override default styles
   "a:link&, a:visited&": {
     textDecoration: "none",
@@ -57,12 +57,10 @@ const IconContainer = styled("span")({
   flex: `0 0 ${size}px`,
 })
 
-const Label = styled("span")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    display: "inline-block",
-    paddingLeft: theme.space.base,
-  }),
-)
+const Label = styled("span")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  display: "inline-block",
+  paddingLeft: theme.space.base,
+}))
 
 const SidenavItem = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container

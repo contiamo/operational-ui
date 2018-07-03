@@ -16,7 +16,7 @@ export interface Props {
 const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
-  fontWeight: 500,
+  fontWeight: theme.font.weight.medium,
   label: "cardheader",
   display: "flex",
   alignItems: "center",

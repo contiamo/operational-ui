@@ -94,27 +94,25 @@ const ItemsContainer = styled("div")({
   marginTop: -10,
 })
 
-const CloseButton = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    position: "absolute",
-    cursor: "pointer",
-    display: "none",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 24,
-    height: 24,
-    top: 16,
-    right: theme.space.content,
-    color: theme.color.primary,
-    ".op_sidenavheader:hover &": {
-      display: "flex",
-    },
-    "& svg": {
-      width: 16,
-      height: 16,
-    },
-  }),
-)
+const CloseButton = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  position: "absolute",
+  cursor: "pointer",
+  display: "none",
+  alignItems: "center",
+  justifyContent: "center",
+  width: 24,
+  height: 24,
+  top: 16,
+  right: theme.space.content,
+  color: theme.color.primary,
+  ".op_sidenavheader:hover &": {
+    display: "flex",
+  },
+  "& svg": {
+    width: 16,
+    height: 16,
+  },
+}))
 
 const IconContainer = styled("div")`
   display: inline-block;

@@ -39,51 +39,47 @@ export const DatePickerCard = styled("div")(
   }),
 )
 
-export const Toggle = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    position: "absolute",
-    cursor: "pointer",
-    top: 1,
-    right: 1,
-    borderTopRightRadius: theme.deprecated.borderRadius,
-    borderBottomRightRadius: theme.deprecated.borderRadius,
-    width: inputHeight - 2,
-    height: inputHeight - 2,
-    fontSize: 10,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: theme.deprecated.baseZIndex + 1000,
-    color: theme.deprecated.colors.inputBorder,
-    borderLeft: "1px solid",
-    borderColor: theme.deprecated.colors.inputBorder,
-    "& svg": {
-      position: "relative",
-      pointerEvents: "none",
-    },
-    ":hover": {
-      backgroundColor: theme.deprecated.colors.lighterBackground,
-    },
-  }),
-)
+export const Toggle = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  position: "absolute",
+  cursor: "pointer",
+  top: 1,
+  right: 1,
+  borderTopRightRadius: theme.deprecated.borderRadius,
+  borderBottomRightRadius: theme.deprecated.borderRadius,
+  width: inputHeight - 2,
+  height: inputHeight - 2,
+  fontSize: 10,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: theme.deprecated.baseZIndex + 1000,
+  color: theme.deprecated.colors.inputBorder,
+  borderLeft: "1px solid",
+  borderColor: theme.deprecated.colors.inputBorder,
+  "& svg": {
+    position: "relative",
+    pointerEvents: "none",
+  },
+  ":hover": {
+    backgroundColor: theme.deprecated.colors.lighterBackground,
+  },
+}))
 
-export const MonthNav = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    marginBottom: theme.deprecated.spacing / 2,
+export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  marginBottom: theme.deprecated.spacing / 2,
+  textAlign: "center",
+  "& > *": {
+    margin: `0 6px`,
+    verticalAlign: "middle",
+    display: "inline-block",
+  },
+  "& > span": {
+    ...theme.deprecated.typography.body,
+    userSelect: "none",
+    width: 120,
     textAlign: "center",
-    "& > *": {
-      margin: `0 6px`,
-      verticalAlign: "middle",
-      display: "inline-block",
-    },
-    "& > span": {
-      ...theme.deprecated.typography.body,
-      userSelect: "none",
-      width: 120,
-      textAlign: "center",
-    },
-  }),
-)
+  },
+}))
 
 export const IconContainer = styled("div")({
   backgroundColor: "#FFFFFF",
@@ -120,7 +116,7 @@ export const Day = styled("div")(
     theme?: OperationalStyleConstants
     selected?: boolean
     isPlaceholder?: boolean
-  }): {} => ({
+  }) => ({
     ...theme.deprecated.typography.body,
     backgroundColor: selected ? theme.deprecated.colors.info : "transparent",
     color: selected
@@ -132,7 +128,7 @@ export const Day = styled("div")(
 )
 
 export const Input = styled("input")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }): {} => ({
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
     ...theme.deprecated.typography.body,
     userSelect: "none",
     borderRadius: theme.deprecated.borderRadius,
@@ -154,25 +150,23 @@ export const Input = styled("input")(
   }),
 )
 
-export const ClearButton = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    width: inputHeight,
-    height: inputHeight,
-    cursor: "pointer",
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: 0,
-    right: -inputHeight + 1,
-    opacity: 0.3,
-    textAlign: "center",
-    zIndex: theme.deprecated.baseZIndex + 100,
-    "&:hover": {
-      opacity: 1,
-      "& svg": {
-        stroke: theme.deprecated.colors.warning,
-      },
+export const ClearButton = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  width: inputHeight,
+  height: inputHeight,
+  cursor: "pointer",
+  position: "absolute",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  bottom: 0,
+  right: -inputHeight + 1,
+  opacity: 0.3,
+  textAlign: "center",
+  zIndex: theme.deprecated.baseZIndex + 100,
+  "&:hover": {
+    opacity: 1,
+    "& svg": {
+      stroke: theme.deprecated.colors.warning,
     },
-  }),
-)
+  },
+}))
