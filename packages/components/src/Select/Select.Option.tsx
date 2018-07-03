@@ -68,7 +68,7 @@ const SelectOption = (props: Props) => (
     {props.children}
     {props.selected ? (
       <IconContainer>
-        <Icon name="Check" size={10} />
+        <Icon name="Yes" size={10} />
       </IconContainer>
     ) : null}
   </Container>

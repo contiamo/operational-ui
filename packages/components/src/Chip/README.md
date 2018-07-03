@@ -9,7 +9,7 @@ along with a symbol for the button that will be displayed if click behavior is d
   <Chip>Default color</Chip>
   <Chip
     color="basic"
-    icon="X"
+    icon="No"
     onIconClick={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
@@ -17,7 +17,7 @@ along with a symbol for the button that will be displayed if click behavior is d
   </Chip>
   <Chip
     color="success"
-    icon="X"
+    icon="No"
     onIconClick={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
@@ -25,7 +25,7 @@ along with a symbol for the button that will be displayed if click behavior is d
   </Chip>
   <Chip
     color="error"
-    icon="X"
+    icon="No"
     onIconClick={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >

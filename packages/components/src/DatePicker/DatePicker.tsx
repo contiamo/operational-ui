@@ -160,7 +160,7 @@ class DatePicker extends React.Component<Props, State> {
                 })
             }}
           >
-            <Icon name="X" size={14} />
+            <Icon name="No" size={14} />
           </Toggle>
         )}
         <Input

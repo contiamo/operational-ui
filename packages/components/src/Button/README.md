@@ -14,9 +14,9 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button condensed>Condensed</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
-  <Button color="success" icon="ExternalLink">Icon</Button>
+  <Button color="success" icon="Open">Icon</Button>
   <Button color="success" icon="Labs">Icon</Button>
-  <Button condensed icon="ExternalLink">Icon</Button>
+  <Button condensed icon="Open">Icon</Button>
   <Button loading>Loading</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
@@ -26,8 +26,8 @@ Using buttons is as simple as including the component with a text node as a chil
 </div>
 <div style={{ backgroundColor: "#1499ce", padding: 5 }}>
   <Button color="ghost">Ghost</Button>
-  <Button color="ghost" icon="ExternalLink">Ghost with icon</Button>
-  <Button color="ghost" icon="ExternalLink" condensed>Ghost condensed</Button>
+  <Button color="ghost" icon="Open">Ghost with icon</Button>
+  <Button color="ghost" icon="Open" condensed>Ghost condensed</Button>
 </div>
 ```
 

@@ -112,7 +112,13 @@ const Table: React.SFC<Props> = ({ rows, columns, onRowClick, rowActionName, __e
       <tbody>
         {rows.length ? (
           rows.map((row, i) => (
-            <Tr hover={Boolean(onRowClick)} key={i} onClick={() => onRowClick(row, i)}>
+            <Tr
+              hover={Boolean(onRowClick)}
+              key={i}
+              onClick={() => {
+                onRowClick && onRowClick(row, i)
+              }}
+            >
               {row.map((data, j) => <Td key={j}>{data}</Td>)}
               {rowActionName && <Action>{rowActionName}</Action>}
               {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
