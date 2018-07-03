@@ -18,9 +18,8 @@ export interface Props {
   pushState?: (path: string) => void
   /** Custom replace state method expecting a single string */
   replaceState?: (path: string) => void
-  __log?: boolean
   /**
-   * A time interval after which a non-error message should be automatically dismissed, measured in milliseconds.
+   * A time interval after which a non-error message is automatically cleared, measured in milliseconds. If the value set is `0`, no message will disappear.
    *
    * @default 10000 (10s)
    */
@@ -35,7 +34,6 @@ export interface State {
     }
     addedAt: number
   }[]
-  now: number
 }
 
 export interface Context {
@@ -52,11 +50,11 @@ export interface Context {
 const colorByMessageType = (type: MessageType): string => {
   switch (type) {
     case "info":
-      return "rgba(20, 153, 206, 0.9)"
+      return "primary"
     case "success":
-      return "rgba(13, 170, 31, 0.9)"
+      return "success"
     case "error":
-      return "rgba(154, 0, 0, 0.9)"
+      return "error"
   }
 }
 
@@ -97,21 +95,31 @@ a:hover: {
 class OperationalUI extends React.Component<Props, State> {
   state: State = {
     messages: [],
-    now: new Date().getTime(),
   }
 
   timer: number
 
-  componentDidMount() {
-    if (this.props.__log) {
-      console.log("mounted")
+  removeOutdatedMessages() {
+    if (this.props.hideMessageAfter === 0) {
+      return
     }
+    this.setState(prevState => {
+      const now = new Date().getTime()
+      const filteredMessages = prevState.messages.filter(
+        ({ message, addedAt }) => message.type === "error" || now - addedAt < (this.props.hideMessageAfter || 10000),
+      )
+      if (prevState.messages.length > filteredMessages.length) {
+        return {
+          messages: filteredMessages,
+        }
+      }
+    })
+  }
+
+  componentDidMount() {
     this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
     this.timer = window.setInterval(() => {
-      this.setState(prevState => ({
-        messages: prevState.messages,
-        now: new Date().getTime(),
-      }))
+      this.removeOutdatedMessages()
     }, 1000)
   }
 
@@ -120,9 +128,6 @@ class OperationalUI extends React.Component<Props, State> {
   }
 
   render() {
-    if (this.props.__log) {
-      console.log(this.state)
-    }
     const { withBaseStyles, pushState, replaceState, children } = this.props
     return (
       <ThemeProvider theme={constants}>
@@ -139,24 +144,21 @@ class OperationalUI extends React.Component<Props, State> {
         >
           <>
             <Messages>
-              {this.state.messages.map(
-                ({ message, addedAt }, index) =>
-                  this.state.now - addedAt < (this.props.hideMessageAfter || 10000) && (
-                    <Message
-                      key={index}
-                      color={colorByMessageType(message.type)}
-                      onClose={() => {
-                        this.setState(prevState => ({
-                          messages: prevState.messages.filter(
-                            (message, filteredMessageIndex) => filteredMessageIndex !== index,
-                          ),
-                        }))
-                      }}
-                    >
-                      {message.body}
-                    </Message>
-                  ),
-              )}
+              {this.state.messages.map(({ message, addedAt }, index) => (
+                <Message
+                  key={index}
+                  color={colorByMessageType(message.type)}
+                  onClose={() => {
+                    this.setState(prevState => ({
+                      messages: prevState.messages.filter(
+                        (message, filteredMessageIndex) => filteredMessageIndex !== index,
+                      ),
+                    }))
+                  }}
+                >
+                  {message.body}
+                </Message>
+              ))}
             </Messages>
             {children}
           </>

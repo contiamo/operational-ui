@@ -1,8 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { readableTextColor, darken } from "@operational/utils"
 import { Icon } from "../"
+import colorCalculator from "tinycolor2"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
@@ -17,10 +18,9 @@ export interface Props {
 
 const Container = styled("div")(
   ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): CssStatic => {
-    const backgroundColor =
-      (color && color.slice(0, 3) === "rgb" ? color : undefined) ||
-      deprecatedExpandColor(theme.deprecated, color) ||
-      theme.deprecated.colors.info
+    const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
+      .setAlpha(0.9)
+      .toString()
     const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.black, "white"])
     return {
       backgroundColor,
