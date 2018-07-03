@@ -108,6 +108,13 @@ const font = {
     /** 12px */
     fineprint: 12,
   },
+  weight: {
+    /** 400 */
+    regular: 400,
+
+    /** 500 */
+    bold: 500,
+  },
 }
 
 /**

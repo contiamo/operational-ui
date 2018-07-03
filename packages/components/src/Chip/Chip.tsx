@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor } from "@operational/utils"
+import { transparentize } from "@operational/utils"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon, IconName } from "../"
 import { WithTheme, Css } from "../types"
@@ -29,10 +29,10 @@ export interface Props {
 
 const Container = styled("div")(
   ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): {} => {
-    const backgroundColor = expandColor(theme, color) || theme.color.primary
     return {
-      backgroundColor,
+      backgroundColor: transparentize(expandColor(theme, color) || theme.color.primary)(0.1),
       fontSize: theme.font.size.small,
+      fontWeight: theme.font.weight.bold,
       label: "chip",
       position: "relative",
       height: theme.space.element,
@@ -43,7 +43,7 @@ const Container = styled("div")(
       borderRadius: 2,
       cursor: "pointer",
       overflow: "hidden",
-      color: readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white]),
+      color: theme.color.text.default,
       margin: `0px ${theme.space.small}px 0px 0px`,
     }
   },
