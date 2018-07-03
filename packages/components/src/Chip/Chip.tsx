@@ -3,7 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon, IconName } from "../"
 import { WithTheme, Css } from "../types"
-import * as colorCalculator from "tinycolor2"
+import colorCalculator from "tinycolor2"
 
 export interface Props {
   /** Id */
