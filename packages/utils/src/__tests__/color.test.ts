@@ -1,4 +1,4 @@
-import { readableTextColor, darken, lighten, transparentize, setBrightness } from "../index"
+import { readableTextColor, darken, lighten, setBrightness } from "../index"
 
 xdescribe("Color utils", () => {
   it("Should give me a readable text color against a presented background color", () => {
@@ -18,10 +18,6 @@ xdescribe("Color utils", () => {
 
   it("Should lighten a color by a percentage", () => {
     expect(lighten("#808080", 50)).toEqual("#ffffff")
-  })
-
-  it("Should transparentize a color by a percentage", () => {
-    expect(transparentize("red")(100)).toEqual("rgba(255, 0, 0, 0)")
   })
 
   it("Should set a color's value", () => {

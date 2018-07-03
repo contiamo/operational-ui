@@ -1,9 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor } from "@operational/utils"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon, IconName } from "../"
 import { WithTheme, Css } from "../types"
+import colorCalculator from "tinycolor2"
 
 export interface Props {
   /** Id */
@@ -29,10 +29,13 @@ export interface Props {
 
 const Container = styled("div")(
   ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): {} => {
-    const backgroundColor = expandColor(theme, color) || theme.color.primary
+    const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
+      .setAlpha(0.1)
+      .toString()
     return {
       backgroundColor,
       fontSize: theme.font.size.small,
+      fontWeight: theme.font.weight.medium,
       label: "chip",
       position: "relative",
       height: theme.space.element,
@@ -43,7 +46,7 @@ const Container = styled("div")(
       borderRadius: 2,
       cursor: "pointer",
       overflow: "hidden",
-      color: readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white]),
+      color: theme.color.text.default,
       margin: `0px ${theme.space.small}px 0px 0px`,
     }
   },
@@ -65,7 +68,7 @@ const Action = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }): {} => {
     return {
       borderLeft: `1px solid ${theme.color.ghost}`,
-      width: theme.space.content,
+      width: theme.space.element,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
