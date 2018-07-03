@@ -161,7 +161,7 @@ const Container = styled("div")(
       "&::before": {
         content: "''",
         position: "absolute",
-        zIndex: theme.deprecated.baseZIndex - 1,
+        zIndex: theme.zIndex.tooltip,
         width: 0,
         height: 0,
         ...pointerTrianglePositionStyles(position, backgroundColor),

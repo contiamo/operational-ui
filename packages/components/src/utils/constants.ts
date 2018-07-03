@@ -150,6 +150,7 @@ const zIndex = {
   default: 0,
   selectOptions: 300,
   formFieldError: 299,
+  tooltip: 400,
 }
 
 const constants = {
