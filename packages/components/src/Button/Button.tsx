@@ -1,10 +1,9 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
-import { readableTextColor, darken, lighten } from "@operational/utils"
+import { readableTextColor, darken } from "@operational/utils"
 
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { isWhite, isModifiedEvent } from "../utils"
-import { Css } from "../types"
 import { ContextConsumer, Context, Icon, IconName } from "../"
 import Spinner from "../Spinner/Spinner"
 
@@ -26,6 +25,8 @@ export interface Props {
   disabled?: boolean
   /** Condensed option */
   condensed?: boolean
+  /** Should the button fill its container? */
+  fill?: boolean
   children?: React.ReactNode
 }
 
@@ -50,7 +51,7 @@ const containerStyles: Interpolation<Props> = ({
   disabled,
   condensed,
   loading,
-  icon,
+  fill,
 }: PropsWithTheme) => {
   const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color)
   return {
@@ -71,6 +72,7 @@ const containerStyles: Interpolation<Props> = ({
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
     position: "relative",
+    width: fill ? "100%" : "initial",
     // Apply styles with increased specificity to override defaults
     "&, a:link&, a:visited&": {
       textDecoration: "none",
@@ -90,10 +92,10 @@ const containerStyles: Interpolation<Props> = ({
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const IconContainer = styled("div")(({ theme }: Css) => ({
+const IconContainer = styled("div")({
   display: "flex",
   alignItems: "center",
-}))
+})
 
 const ButtonSpinner = styled(Spinner)(
   ({ theme, containerColor }: { theme?: OperationalStyleConstants; containerColor: string }) => ({
@@ -111,10 +113,7 @@ const Button = (props: Props) => {
     <ContextConsumer>
       {(ctx: Context) => (
         <ContainerComponent
-          type={props.type}
-          id={props.id}
-          href={props.to}
-          className={props.className}
+          {...props}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             if (props.disabled) {
               ev.preventDefault()
@@ -128,16 +127,11 @@ const Button = (props: Props) => {
               ctx.pushState(props.to)
             }
           }}
-          color={props.color}
-          loading={props.loading}
-          disabled={props.disabled}
-          condensed={props.condensed}
-          icon={props.icon}
           title={props.loading && props.children === String(props.children) ? String(props.children) : undefined}
         >
           {props.children}
           {props.icon && (
-            <IconContainer condensed={props.condensed}>
+            <IconContainer>
               {typeof props.icon === "string" ? <Icon right name={props.icon as IconName} size={18} /> : props.icon}
             </IconContainer>
           )}

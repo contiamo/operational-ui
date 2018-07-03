@@ -11,27 +11,33 @@ export interface LogoProps {
 
   /** A color from the constants, or an arbitrary hex value */
   color?: keyof OperationalStyleConstants["color"] | string
+
+  /** Do we want it stacked vertically? */
+  stack?: boolean
 }
 
 const LogoContainer = styled("div")(
   {
-    display: "flex",
+    display: "inline-flex",
     alignItems: "center",
     height: "100%",
   },
-  ({ size }: LogoProps & WithTheme) => ({
+  ({ size, stack }: LogoProps & WithTheme) => ({
     width: size,
+    display: "flex",
+    flexDirection: stack ? "column" : "row",
   }),
 )
 
-const LogoType = styled("svg")(({ theme, color }: LogoProps & WithTheme) => ({
+const LogoType = styled("svg")(({ theme, stack, color }: LogoProps & WithTheme) => ({
   fill: expandColor(theme, color) || theme.color.white,
+  marginTop: stack ? theme.space.element : 0,
 }))
 
-const ContiamoLogo: React.SFC<LogoProps> = ({ size, color }) => (
-  <LogoContainer>
+const ContiamoLogo: React.SFC<LogoProps> = ({ size, color, stack }) => (
+  <LogoContainer stack={stack}>
     <Icon left name="Contiamo" size={size} color={color} />
-    <LogoType color={color} width={size * 3.5} viewBox="650 255 1800 215" fill="currentColor">
+    <LogoType stack={stack} color={color} width={size * 3.5} viewBox="650 255 1800 215" fill="currentColor">
       <title>Contiamo</title>
       <g transform="matrix(1.3333333,0,0,-1.3333333,0,737.64133)">
         <g transform="translate(783.6366,282.649)">
@@ -64,6 +70,7 @@ const ContiamoLogo: React.SFC<LogoProps> = ({ size, color }) => (
 ContiamoLogo.defaultProps = {
   size: 26,
   color: "white",
+  stack: false,
 }
 
 export default ContiamoLogo

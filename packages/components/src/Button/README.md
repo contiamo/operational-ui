@@ -36,7 +36,13 @@ Using buttons is as simple as including the component with a text node as a chil
 Using a `to` prop navigates automatically, and render proper anchor tags with hrefs. See `OperationalUI` docs for a one-time configuration you need to do to have pushstate navigation working out-of-the-box.
 
 ```jsx
-<Button color="info" to="/some-url">
-  Button One
+<Button to="/some-url">Button One</Button>
+```
+
+### Full-width Buttons
+
+```jsx
+<Button fill color="grey">
+  I want to lose weight
 </Button>
 ```
