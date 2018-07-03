@@ -8,8 +8,8 @@ exports[`Tabs Should render 1`] = `
     class="css-u71hb6"
   >
     <li
-      class="css-1v7kwch"
-      color="hsl(197, 82%, 44%)"
+      class="css-pks5d5"
+      color="#1499cc"
     />
   </ul>
   <div
