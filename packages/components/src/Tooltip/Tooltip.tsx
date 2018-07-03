@@ -122,9 +122,9 @@ const Container = styled("div")(
       label: "tooltip",
       color: theme.color.white,
       position: "absolute",
-      zIndex: theme.deprecated.baseZIndex + 101,
+      zIndex: theme.zIndex.tooltip,
       borderRadius: 2,
-      boxShadow: theme.deprecated.shadows.popup,
+      boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
       "& > p": {
         fontSize: 11,
         lineHeight: 1.3,
@@ -147,14 +147,14 @@ const Container = styled("div")(
             width: singleLineTextWidth === 0 ? 150 : Math.min(singleLineTextWidth + 4, 150),
           }),
       ...containerPositionStyles(position),
-      // This pseudo-element extends the clickable area of the far-away tooltip.
+      // This pseudo-element extends the clickable area of a tooltip extending enough to disappear as the mouse moves over to the caret.
       "&::after": {
         content: "''",
         position: "absolute",
         top: 0,
-        left: theme.deprecated.spacing * -2,
+        left: -32,
         display: "block",
-        width: theme.deprecated.spacing * 2,
+        width: -32,
         height: "100%",
       },
       // They say behind every great tooltip is a great caret.
