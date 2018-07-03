@@ -12,8 +12,6 @@ import Message from "../Message/Message"
 export interface Props {
   /** Children */
   children?: React.ReactNode
-  /** Use the base styles */
-  withBaseStyles?: boolean
   /** Custom push state method expecting a single string */
   pushState?: (path: string) => void
   /** Custom replace state method expecting a single string */
@@ -90,6 +88,9 @@ a:hover: {
 }
 `
 
+// Use this flag to prevent global styles injected multiple times
+let globalStylesInjected = false
+
 class OperationalUI extends React.Component<Props, State> {
   state: State = {
     messages: [],
@@ -115,7 +116,10 @@ class OperationalUI extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
+    if (!globalStylesInjected) {
+      injectGlobal(baseStylesheet(constants))
+      globalStylesInjected = true
+    }
   }
 
   startMessagesTimer() {
