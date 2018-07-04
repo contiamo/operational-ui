@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
 import { lighten } from "@operational/utils"
+import { OperationalStyleConstants } from "./constants"
+import TooltipContainer from "../Tooltip/Tooltip.Container"
 
 export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
@@ -32,8 +33,6 @@ export const FormFieldControls = styled("div")({
   right: 0,
 })
 
-const formFieldControlTooltipSelector = "& > :nth-child(2), & > :nth-child(3)"
-
 export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   position: "relative",
   verticalAlign: "middle",
@@ -44,14 +43,14 @@ export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalS
     opacity: 0.4,
     position: "relative",
   },
-  [formFieldControlTooltipSelector]: {
+  [TooltipContainer as any]: {
     opacity: 0.01,
   },
   ":hover": {
     "& svg": {
       opacity: 1,
     },
-    [formFieldControlTooltipSelector]: {
+    [TooltipContainer as any]: {
       opacity: 1,
     },
   },
