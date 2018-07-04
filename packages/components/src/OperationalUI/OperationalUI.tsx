@@ -40,12 +40,7 @@ export interface State {
 export interface Context {
   pushState?: (url: string) => void
   replaceState?: (url: string) => void
-  pushMessage: (
-    message: {
-      body: string
-      type: MessageType
-    },
-  ) => void
+  pushMessage: (message: Message) => void
 }
 
 const colorByMessageType = (type: MessageType): string => {
@@ -107,33 +102,31 @@ class OperationalUI extends React.Component<Props, State> {
     messages: [],
   }
 
-  // The interval responsible for periodically checking whether any messages need to be removed from state
+  /**
+   *  The interval responsible for periodically checking
+   *  whether any messages need to be removed from state
+   */
+
   messageTimerInterval: number | null = null
 
   removeOutdatedMessages() {
     if (this.props.hideMessageAfter === 0) {
       return
     }
-    this.setState(prevState => {
-      // Work out the new list of messages, filtering out the ones that are outdated
-      // ( outdated = not of type `error`, and has been around longer than `this.props.hideMessageAfter`, defaulting to 10s )
-      const now = new Date().getTime()
-      const filteredMessages = prevState.messages.filter(
-        ({ message, addedAt }) => message.type === "error" || now - addedAt < (this.props.hideMessageAfter || 10000),
-      )
+    const now = new Date().getTime()
+    const filteredMessages = this.state.messages.filter(
+      ({ message, addedAt }) => message.type === "error" || now - addedAt < (this.props.hideMessageAfter || 10000),
+    )
 
-      // If we're out of messages, clear the interval.
-      if (!filteredMessages.length) {
-        window.clearInterval(this.messageTimerInterval)
-        this.messageTimerInterval = null
-      }
-      // Only run a setState if any message(s) were removed. Otherwise, this method returns `undefined` and the component is not updated at all.
-      if (prevState.messages.length > filteredMessages.length) {
-        return {
-          messages: filteredMessages,
-        }
-      }
-    })
+    // If we're out of messages, clear the interval.
+    if (!filteredMessages.length) {
+      window.clearInterval(this.messageTimerInterval)
+      this.messageTimerInterval = null
+    }
+    // Only run a setState if any message(s) were removed.
+    if (this.state.messages.length > filteredMessages.length) {
+      this.setState(() => ({ messages: filteredMessages }))
+    }
   }
 
   componentDidMount() {
@@ -152,17 +145,14 @@ class OperationalUI extends React.Component<Props, State> {
           value={{
             pushState,
             replaceState,
-            pushMessage: (message: { body: string; type: MessageType }) => {
+            pushMessage: (message: Message) => {
               this.setState(prevState => ({
                 messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
               }))
 
               // If we don't yet have an interval, start one.
               if (!this.messageTimerInterval) {
-                this.messageTimerInterval = window.setInterval(() => {
-                  console.log("tick")
-                  this.removeOutdatedMessages()
-                }, 2000)
+                this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
               }
             },
           }}
@@ -173,11 +163,11 @@ class OperationalUI extends React.Component<Props, State> {
                 <MessageComponent
                   key={index}
                   color={colorByMessageType(message.type)}
-                  onClose={() => {
+                  onClose={() =>
                     this.setState(prevState => ({
                       messages: prevState.messages.filter((_, filteredMessageIndex) => filteredMessageIndex !== index),
                     }))
-                  }}
+                  }
                 >
                   {message.body}
                 </MessageComponent>
