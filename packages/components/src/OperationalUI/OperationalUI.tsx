@@ -120,43 +120,15 @@ class OperationalUI extends React.Component<Props, State> {
     })
   }
 
-  startMessagesTimer() {
-    if (this.messageTimerInterval !== null) {
-      return
-    }
-    // A broad interval of 2 seconds is chosen so messages created around the same time disappear at the same time, avoiding the disorienting effect of tiny time delays.
+  componentDidMount() {
+    this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
     this.messageTimerInterval = window.setInterval(() => {
       this.removeOutdatedMessages()
     }, 2000)
   }
 
-  stopMessagesTimer() {
-    window.clearInterval(this.messageTimerInterval)
-    // Clear the message interval instance in order to prevent multiple timers being accidentally created. Do not remove this assignment.
-    this.messageTimerInterval = null
-  }
-
-  componentDidMount() {
-    this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
-  }
-
   componentWillUnmount() {
     window.clearInterval(this.messageTimerInterval)
-  }
-
-  /*
-   * Stop and start the messages timer depending on whether it's needed or not.
-   * CAUTION: this logic may result in very rare edge cases with React's render loop if two messages are removed within the same frame, causing timers to occasionally not stop or restart.
-   * Since the consequences of this are not catastrophic for UX, we have decided to leave this optimization in place. Simply forgo the optimization and keep the timer going throughout the lifecycle of this component if more safety is desired. 
-   */
-  componentDidUpdate(_: Props, prevState: State) {
-    if (this.state.messages.length === 0 && prevState.messages.length > 0) {
-      this.stopMessagesTimer()
-      return
-    }
-    if (prevState.messages.length === 0 && this.state.messages.length > 0) {
-      this.startMessagesTimer()
-    }
   }
 
   render() {
