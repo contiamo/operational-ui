@@ -34,7 +34,7 @@
     "package:visual-tests": "lerna run --scope @operational/visual-tests package",
     "precommit": "lint-staged",
     "publish": "lerna publish",
-    "next": "./scripts/next.sh",
+    "next": "npm run publish -- --canary --npm-tag=next --skip-git --yes",
     "verify": "run-s lint prettify test",
     "ci": "export NODE_ENV=ci && npm run verify",
     "predeploy": "npm run build",

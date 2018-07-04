@@ -1,2 +1,0 @@
-git@github.com:contiamo/labs-ui.git
-git@github.com:contiamo/pantheon-ui.git
