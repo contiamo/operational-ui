@@ -46,7 +46,6 @@ const containerStyles: Interpolation<{
     textDecoration: "none",
     width: "100%",
     position: "relative",
-    backgroundColor: isActive ? theme.color.background.lighter : theme.color.white,
     borderBottom: "1px solid",
     borderBottomColor: theme.color.separators.default,
   }
