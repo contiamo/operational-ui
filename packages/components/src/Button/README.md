@@ -42,7 +42,7 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
 ### Full-width Buttons
 
 ```jsx
-<Button fill color="grey">
+<Button fullWidth color="grey">
   I want to lose weight
 </Button>
 ```

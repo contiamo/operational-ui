@@ -18,7 +18,7 @@ export interface Props {
   /** Color assigned to the avatar circle (hex or named color from `theme.color`) */
   color?: string
   /** Icon to display on right of button (optional) */
-  icon?: string | React.ReactNode
+  icon?: IconName
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
   loading?: boolean
   /** Disabled option */
@@ -26,7 +26,7 @@ export interface Props {
   /** Condensed option */
   condensed?: boolean
   /** Should the button fill its container? */
-  fill?: boolean
+  fullWidth?: boolean
   children?: React.ReactNode
 }
 
@@ -51,7 +51,7 @@ const containerStyles: Interpolation<Props> = ({
   disabled,
   condensed,
   loading,
-  fill,
+  fullWidth,
 }: PropsWithTheme) => {
   const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color)
   return {
@@ -72,7 +72,7 @@ const containerStyles: Interpolation<Props> = ({
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
     position: "relative",
-    width: fill ? "100%" : "initial",
+    width: fullWidth ? "100%" : "initial",
     // Apply styles with increased specificity to override defaults
     "&, a:link&, a:visited&": {
       textDecoration: "none",
@@ -130,11 +130,7 @@ const Button = (props: Props) => {
           title={props.loading && props.children === String(props.children) ? String(props.children) : undefined}
         >
           {props.children}
-          {props.icon && (
-            <IconContainer>
-              {typeof props.icon === "string" ? <Icon right name={props.icon as IconName} size={18} /> : props.icon}
-            </IconContainer>
-          )}
+          {props.icon && <Icon right name={props.icon} size={18} />}
           {props.loading && <ButtonSpinner containerColor={props.color} />}
         </ContainerComponent>
       )}
