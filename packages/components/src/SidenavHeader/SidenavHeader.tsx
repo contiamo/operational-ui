@@ -38,9 +38,7 @@ export interface Props {
 
 const containerStyles: Interpolation<{
   theme?: OperationalStyleConstants
-  color?: string
-  isActive: boolean
-}> = ({ theme, color, isActive }) => {
+}> = ({ theme }) => {
   return {
     label: "sidenavheader",
     textDecoration: "none",
@@ -163,8 +161,6 @@ const SidenavHeader = (props: Props) => {
           <ContainerComponent
             id={props.id}
             href={to}
-            color={props.color}
-            isActive={isActive}
             className={[props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
             onClick={(ev: React.SyntheticEvent<Node>) => {
               props.onClick && props.onClick()
